@@ -1,0 +1,43 @@
+((
+    .Workspace Configuration.txt
+
+    This source file is part of the SDGCornerstone open source project.
+    https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+
+    Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+
+    Soli Deo gloria.
+
+    Licensed under the Apache Licence, Version 2.0.
+    See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
+    ))
+
+[_Import https://github.com/SDGGiesbrecht/SDG_]
+
+Current Version: 1.0.0
+
+Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+Repository URL: https://github.com/SDGGiesbrecht/SDGCornerstone
+
+[_Begin Short Project Description_]
+SDGCornerstone forms the foundation of the SDG module family. It establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation).
+[_End_]
+
+[_Begin Quotation_]
+הִנְנִי יִסַּד בְּצִיּוֹן אָבֶן אֶבֶן בֹּחַן פִּנַּת יִקְרַת מוּסָד מוּסָד׃
+[_End_]
+
+[_Begin Quotation Translation_]
+Behold, I establish in Zion a stone, a tested stone, a precious cornerstone, a sure foundation.
+[_End_]
+
+[_Begin Citation_]
+⁧יהוה⁩/Yahova
+[_End_]
+
+[_Begin Feature List_]
+- None yet.
+[_End_]
+
+Skip Simulator: True
