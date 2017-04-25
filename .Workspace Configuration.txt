@@ -40,7 +40,9 @@ Quotation Chapter: Isaiah 28
 [_End_]
 
 [_Begin Feature List_]
-- Operators: `≠`, `¬`, `∧`, `∨`, etc.
+- Mathematics: exponents, roots, logarithms, trigonometry, etc.
+- Arbitrary‐precision arithmetic.
+- Customizable randomization.
 [_End_]
 
 Skip Simulator: True

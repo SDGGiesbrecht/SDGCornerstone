@@ -23,24 +23,6 @@
 /// - RecommendedOver: !
 prefix operator ¬
 
-extension Bool {
-
-    // MARK: - Logic Operatiors
-
-    // [_Define Documentation: SDGCornerstone.Bool.¬_]
-    /// Returns the logical inverse of the operand.
-    ///
-    /// - Parameters:
-    ///     - proposition: The proposition to invert.
-    ///
-    /// - MutatingVariant: ¬=
-    ///
-    /// - RecommendedOver: !
-    public static prefix func ¬ (proposition: Bool) -> Bool {
-        return !proposition
-    }
-}
-
 // [_Inherit Documentation: SDGCornerstone.Bool.¬=_]
 /// Modifies the operand by logical inversion.
 ///
@@ -49,20 +31,6 @@ extension Bool {
 ///
 /// - NonmutatingVariant: ¬
 postfix operator ¬=
-
-extension Bool {
-
-    // [_Define Documentation: SDGCornerstone.Bool.¬=_]
-    /// Modifies the operand by logical inversion.
-    ///
-    /// - Parameters:
-    ///     - proposition: The proposition to modify by inversion.
-    ///
-    /// - NonmutatingVariant: ¬
-    public static postfix func ¬= (proposition: inout Bool) {
-        proposition = ¬proposition
-    }
-}
 
 // [_Inherit Documentation: SDGCornerstone.Bool.∧_]
 /// Returns the logical conjunction of the two Boolean values.
@@ -78,7 +46,71 @@ extension Bool {
 /// - RecommendedOver: &&
 infix operator ∧: LogicalConjunctionPrecedence
 
-extension Bool {
+// [_Inherit Documentation: SDGCornerstone.Bool.∧=_]
+/// Modifies the left value by logical conjunction with the right.
+///
+/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` is `true`.
+///
+/// - Parameters:
+///     - lhs: The Boolean value to modify.
+///     - rhs: A closure that results in another Boolean value.
+///
+/// - NonmutatingVariant: ∧
+infix operator ∧=: AssignmentPrecedence
+
+// [_Inherit Documentation: SDGCornerstone.Bool.∨_]
+/// Returns the logical disjunction of the two Boolean values.
+///
+/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` evaluates to `false`.
+///
+/// - Parameters:
+///     - lhs: A Boolean value.
+///     - rhs: A closure that results in another Boolean value.
+///
+/// - MutatingVariant: ∨=
+///
+/// - RecommendedOver: ||
+infix operator ∨: LogicalDisjunctionPrecedence
+
+// [_Inherit Documentation: SDGCornerstone.Bool.∨=_]
+/// Modifies the left value by logical disjunction with the right.
+///
+/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` is `false`.
+///
+/// - Parameters:
+///     - lhs: The Boolean value to modify.
+///     - rhs: A closure that results in another Boolean value.
+///
+/// - NonmutatingVariant: ∨
+infix operator ∨=: AssignmentPrecedence
+
+extension Bool : Comparable {
+
+    // MARK: - Logical Operatiors
+
+    // [_Define Documentation: SDGCornerstone.Bool.¬_]
+    /// Returns the logical inverse of the operand.
+    ///
+    /// - Parameters:
+    ///     - proposition: The proposition to invert.
+    ///
+    /// - MutatingVariant: ¬=
+    ///
+    /// - RecommendedOver: !
+    public static prefix func ¬ (proposition: Bool) -> Bool {
+        return !proposition
+    }
+
+    // [_Define Documentation: SDGCornerstone.Bool.¬=_]
+    /// Modifies the operand by logical inversion.
+    ///
+    /// - Parameters:
+    ///     - proposition: The proposition to modify by inversion.
+    ///
+    /// - NonmutatingVariant: ¬
+    public static postfix func ¬= (proposition: inout Bool) {
+        proposition = ¬proposition
+    }
 
     // [_Define Documentation: SDGCornerstone.Bool.∧_]
     /// Returns the logical conjunction of the two Boolean values.
@@ -95,21 +127,6 @@ extension Bool {
     public static func ∧ (lhs: Bool, rhs: @autoclosure () throws -> Bool) rethrows -> Bool {
         return try lhs && rhs
     }
-}
-
-// [_Inherit Documentation: SDGCornerstone.Bool.∧=_]
-/// Modifies the left value by logical conjunction with the right.
-///
-/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` is `true`.
-///
-/// - Parameters:
-///     - lhs: The Boolean value to modify.
-///     - rhs: A closure that results in another Boolean value.
-///
-/// - NonmutatingVariant: ∧
-infix operator ∧=: AssignmentPrecedence
-
-extension Bool {
 
     // [_Define Documentation: SDGCornerstone.Bool.∧=_]
     /// Modifies the left value by logical conjunction with the right.
@@ -124,23 +141,6 @@ extension Bool {
     public static func ∧= (lhs: inout Bool, rhs: @autoclosure () throws -> Bool) rethrows {
         lhs = try lhs ∧ rhs
     }
-}
-
-// [_Inherit Documentation: SDGCornerstone.Bool.∨_]
-/// Returns the logical disjunction of the two Boolean values.
-///
-/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` evaluates to `false`.
-///
-/// - Parameters:
-///     - lhs: A Boolean value.
-///     - rhs: A closure that results in another Boolean value.
-///
-/// - MutatingVariant: ∨=
-///
-/// - RecommendedOver: ||
-infix operator ∨: LogicalDisjunctionPrecedence
-
-extension Bool {
 
     // [_Define Documentation: SDGCornerstone.Bool.∨_]
     /// Returns the logical disjunction of the two Boolean values.
@@ -157,21 +157,6 @@ extension Bool {
     public static func ∨ (lhs: Bool, rhs: @autoclosure () throws -> Bool) rethrows -> Bool {
         return try lhs || rhs
     }
-}
-
-// [_Inherit Documentation: SDGCornerstone.Bool.∨=_]
-/// Modifies the left value by logical disjunction with the right.
-///
-/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` is `false`.
-///
-/// - Parameters:
-///     - lhs: The Boolean value to modify.
-///     - rhs: A closure that results in another Boolean value.
-///
-/// - NonmutatingVariant: ∨
-infix operator ∨=: AssignmentPrecedence
-
-extension Bool {
 
     // [_Define Documentation: SDGCornerstone.Bool.∨=_]
     /// Modifies the left value by logical disjunction with the right.
@@ -185,5 +170,72 @@ extension Bool {
     /// - NonmutatingVariant: ∨
     public static func ∨= (lhs: inout Bool, rhs: @autoclosure () throws -> Bool) rethrows {
         lhs = try lhs ∨ rhs
+    }
+
+    // MARK: - Randomization
+
+    private static let randomizationBit: UInt64 = 1 << 48
+
+    // [_Example 1: Alternating Booleans_]
+    /// A value a `Randomizer` can return that will result in `false`.
+    ///
+    /// For example:
+    ///
+    /// ```swift
+    /// let alternating = CyclicalNumberGenerator([
+    ///     Bool.falseRandomizerValue,
+    ///     Bool.trueRandomizerValue
+    ///     ])
+    ///
+    /// // Booleans created using...
+    /// _ = Bool(fromRandomizer: alternating)
+    /// // ...now alternate between “false” and “true”.
+    /// ```
+    public static let falseRandomizerValue: UInt64 = 0
+
+    // [_Example 1: Alternating Booleans_]
+    /// A value a `Randomizer` can return that will result in `true`.
+    ///
+    /// For example:
+    ///
+    /// ```swift
+    /// let alternating = CyclicalNumberGenerator([
+    ///     Bool.falseRandomizerValue,
+    ///     Bool.trueRandomizerValue
+    ///     ])
+    ///
+    /// // Booleans created using...
+    /// _ = Bool(fromRandomizer: alternating)
+    /// // ...now alternate between “false” and “true”.
+    /// ```
+    public static let trueRandomizerValue: UInt64 = randomizationBit
+
+    /// Returns a random Boolean value.
+    public static func random() -> Bool {
+        return Bool(fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
+    }
+
+    /// Creates a random Boolean value derived from a particular randomizer.
+    ///
+    /// - Parameters:
+    ///     - randomizer: The randomizer.
+    public init(fromRandomizer randomizer: Randomizer) {
+        self = randomizer.randomNumber() & Bool.randomizationBit == Bool.randomizationBit
+    }
+
+    // MARK: - Comparable
+
+    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the left value is less than the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value.
+    ///     - rhs: Another value.
+    public static func < (lhs: Bool, rhs: Bool) -> Bool {
+        if lhs == false ∧ rhs == true {
+            return true
+        } else {
+            return false
+        }
     }
 }
