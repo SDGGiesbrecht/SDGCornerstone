@@ -16,5 +16,6 @@ import XCTest
 @testable import SDGCornerstoneTests
 
 XCTMain([
-    testCase(CachingTests.allTests)
+    testCase(CachingTests.allTests),
+    testCase(LogicTests.allTests)
 ])

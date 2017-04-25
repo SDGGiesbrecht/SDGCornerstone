@@ -14,4 +14,10 @@
 
 // [_Define Example: Read‐Me_]
 import SDGCornerstone
+
+func tryLogicOperators() {
+    if ¬((true ∧ false) ∨ true) ≠ true {
+        print("I’m confused...")
+    }
+}
 // [_End_]

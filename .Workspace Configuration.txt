@@ -40,7 +40,7 @@ Quotation Chapter: Isaiah 28
 [_End_]
 
 [_Begin Feature List_]
-- None yet.
+- Operators: `≠`, `¬`, `∧`, `∨`, etc.
 [_End_]
 
 Skip Simulator: True
