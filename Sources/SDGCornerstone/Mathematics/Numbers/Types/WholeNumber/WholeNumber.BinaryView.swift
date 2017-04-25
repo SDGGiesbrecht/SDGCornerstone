@@ -36,7 +36,7 @@ internal struct WholeNumberBinaryView {
         var extractionMask = insertionMask
         extractionMask.binary.reverse()
         let shiftDistance = WholeNumber.Digit(distance.bitDistance)
-        let extractionStart: WholeNumber.Digit = shiftDistance == 0 ? 0 : WholeNumber.Digit(UInt.BinaryView<WholeNumber.Digit>.count) − shiftDistance
+        let extractionStart: WholeNumber.Digit = shiftDistance == 0 ? 0 : WholeNumber.Digit(BinaryView<WholeNumber.Digit>.count) − shiftDistance
 
         let endIndex = wholeNumber.digitIndices.endIndex
         var carried: WholeNumber.Digit = 0

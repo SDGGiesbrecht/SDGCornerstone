@@ -30,7 +30,7 @@ class InternalTests : XCTestCase {
         index += 1
         XCTAssert(index == WholeNumber.BinaryView.IndexDistance(digitDistance: 0, bitDistance: 1))
 
-        index += WholeNumber.BinaryView.IndexDistance(digitDistance: 0, bitDistance: UInt.BinaryView<WholeNumber.Digit>.count − 1)
+        index += WholeNumber.BinaryView.IndexDistance(digitDistance: 0, bitDistance: BinaryView<WholeNumber.Digit>.count − 1)
         XCTAssert(index == WholeNumber.BinaryView.IndexDistance(digitDistance: 1, bitDistance: 0))
 
         index −= WholeNumber.BinaryView.IndexDistance(digitDistance: 0, bitDistance: 1)

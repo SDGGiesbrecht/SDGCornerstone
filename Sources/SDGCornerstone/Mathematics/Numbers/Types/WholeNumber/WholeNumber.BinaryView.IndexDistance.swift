@@ -28,7 +28,7 @@ extension WholeNumber.BinaryView {
         internal typealias DigitDistance = Array<WholeNumber.Digit>.IndexDistance
         internal var digitDistance: DigitDistance
 
-        internal typealias BitDistance = UInt.BinaryView<WholeNumber.Digit>.IndexDistance
+        internal typealias BitDistance = BinaryView<WholeNumber.Digit>.IndexDistance
         internal var bitDistance: BitDistance
 
         // MARK: - Addable
@@ -36,7 +36,7 @@ extension WholeNumber.BinaryView {
         internal static func += (lhs: inout IndexDistance, rhs: IndexDistance) {
             lhs.digitDistance += rhs.digitDistance
             lhs.bitDistance += rhs.bitDistance
-            let base = UInt.BinaryView<WholeNumber.Digit>.count
+            let base = BinaryView<WholeNumber.Digit>.count
             if lhs.bitDistance ≥ base {
                 lhs.digitDistance += 1
                 lhs.bitDistance −= base
@@ -64,7 +64,7 @@ extension WholeNumber.BinaryView {
         internal typealias IntegerLiteralType = UIntMax
 
         init(integerLiteral: IntegerLiteralType) {
-            let bitsPerDigit = UInt.BinaryView<WholeNumber.Digit>.count
+            let bitsPerDigit = BinaryView<WholeNumber.Digit>.count
 
             let digits = DigitDistance(BitDistance(integerLiteral).dividedAccordingToEuclid(by: bitsPerDigit))
             let bits = BitDistance(integerLiteral).mod(bitsPerDigit)

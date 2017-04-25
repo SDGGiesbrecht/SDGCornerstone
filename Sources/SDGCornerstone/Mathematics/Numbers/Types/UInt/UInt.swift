@@ -93,9 +93,9 @@ extension UIntFamily {
 
     // MARK: - Binary
 
-    internal var binary: UInt.BinaryView<Self> {
+    internal var binary: BinaryView<Self> {
         get {
-            return UInt.BinaryView(self)
+            return BinaryView(self)
         }
         set {
             self = newValue.uInt

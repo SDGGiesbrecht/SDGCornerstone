@@ -12,7 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension UInt {
+//extension UInt {
+// [_Workaround: SILOptimizer crashes on Linux if this is nested. (Swift 3.1.0)_]
 
     internal struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
 
@@ -73,4 +74,4 @@ extension UInt {
 
         internal typealias Indices = DefaultRandomAccessIndices<BinaryView>
     }
-}
+//}

@@ -21,7 +21,7 @@ extension WholeNumber.BinaryView {
         internal typealias DigitIndex = Array<WholeNumber.Digit>.Index
         internal var digit: DigitIndex
 
-        internal typealias BitIndex = UInt.BinaryView<WholeNumber.Digit>.Index
+        internal typealias BitIndex = BinaryView<WholeNumber.Digit>.Index
         internal var bit: BitIndex
 
         // MARK: - Comparable
@@ -45,7 +45,7 @@ extension WholeNumber.BinaryView {
             var bit = IntMax(lhs.bit)
             bit += rhs.bitDistance
 
-            let base = IntMax(UInt.BinaryView<WholeNumber.Digit>.count)
+            let base = IntMax(BinaryView<WholeNumber.Digit>.count)
             if bit ≥ base {
                 lhs.digit += 1
                 bit −= base
@@ -61,7 +61,7 @@ extension WholeNumber.BinaryView {
             var bitDistance = lhs.bit − rhs.bit
             var digitDistance = lhs.digit − rhs.digit
             if bitDistance.isNegative {
-                bitDistance += UInt.BinaryView<WholeNumber.Digit>.count
+                bitDistance += BinaryView<WholeNumber.Digit>.count
                 digitDistance −= 1
             }
             return IndexDistance(digitDistance: digitDistance, bitDistance: bitDistance)
