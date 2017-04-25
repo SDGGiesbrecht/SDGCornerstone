@@ -12,7 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension UInt {
+//extension UInt {
+// [_Workaround: Linux compiler cannot nest generic types in extensions. (Swift 3.1.0)_]
 
     internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
 
@@ -81,5 +82,4 @@ extension UInt {
 
         internal typealias Indices = DefaultRandomAccessIndices<HalvesView>
     }
-
-}
+//}

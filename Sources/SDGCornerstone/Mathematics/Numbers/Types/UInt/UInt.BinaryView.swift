@@ -13,7 +13,7 @@
  */
 
 //extension UInt {
-// [_Workaround: SILOptimizer crashes on Linux if this is nested. (Swift 3.1.0)_]
+// [_Workaround: Linux compiler cannot nest generic types in extensions. (Swift 3.1.0)_]
 
     internal struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
 

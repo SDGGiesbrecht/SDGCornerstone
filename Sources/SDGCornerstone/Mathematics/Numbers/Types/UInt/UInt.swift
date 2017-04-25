@@ -106,11 +106,11 @@ extension UIntFamily {
 
     // MARK: - Subdigits
 
-    private typealias Half = UInt.HalvesView<Self>.Element
-    private typealias HalfIndex = UInt.HalvesView<Self>.Index
-    internal var halves: UInt.HalvesView<Self> {
+    private typealias Half = HalvesView<Self>.Element
+    private typealias HalfIndex = HalvesView<Self>.Index
+    internal var halves: HalvesView<Self> {
         get {
-            return UInt.HalvesView(self)
+            return HalvesView(self)
         }
         set {
             self = newValue.uInt
@@ -155,7 +155,7 @@ extension UIntFamily {
         var product: Self = 0
         var carried: Self = 0
         func add(half: Half, at index: HalfIndex) {
-            let count = HalfIndex(UInt.HalvesView<Self>.count)
+            let count = HalfIndex(HalvesView<Self>.count)
             if index < count {
                 product.add(Self(half: half, at: index), carringIn: &carried)
             } else {
