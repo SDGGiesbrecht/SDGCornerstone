@@ -31,7 +31,7 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 
 ## Features
 
-- None yet.
+- Operators: `≠`, `¬`, `∧`, `∨`, etc.
 
 (For a list of related projecs, see [here](Documentation/Related%20Projects.md).) <!--Skip in Jazzy-->
 
@@ -62,6 +62,12 @@ import SDGCornerstone
 
 ```swift
 import SDGCornerstone
+
+func tryLogicOperators() {
+    if ¬((true ∧ false) ∨ true) ≠ true {
+        print("I’m confused...")
+    }
+}
 ```
 
 ## About
