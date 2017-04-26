@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Measurement Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/Measurement" class="dashAnchor"></a>
+    <a title="Measurement Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SDGCornerstone Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SDGGiesbrecht/SDGCornerstone"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SDGCornerstone Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Measurement Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../related-projects.html">Related Projects</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CyclicalNumberGenerator.html">CyclicalNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PseudorandomNumberGenerator.html">PseudorandomNumberGenerator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Equatable.html">Equatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FloatingPoint.html">FloatingPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_CebFTGSqPMP__GSqPMP___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu0_Rxs9Equatable_S0_rFTTxq__Txq___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu1_Rxs9Equatable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu2_Rxs9Equatable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu3_Rxs9Equatable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu4_Rxs9Equatable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccosuRxS_14RealArithmeticrFxGVS_5Anglex_">arccos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccotuRxS_14RealArithmeticrFxGVS_5Anglex_">arccot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccscuRxS_14RealArithmeticrFxGVS_5Anglex_">arccsc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arcsecuRxS_14RealArithmeticrFxGVS_5Anglex_">arcsec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arcsinuRxS_14RealArithmeticrFxGVS_5Anglex_">arcsin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arctanuRxS_14RealArithmeticrFxGVS_5Anglex_">arctan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6cachedurFzT2inRGSqx_FzT_x_x">cached(in:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cosuRxS_14RealArithmeticrFGVS_5Anglex_x">cos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cotuRxS_14RealArithmeticrFGVS_5Anglex_x">cot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cscuRxS_14RealArithmeticrFGVS_5Anglex_x">csc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone1euRxS_14RealArithmeticrFT_x">e()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone16findLocalMaximumu0_RxS_19OneDimensionalPoint_s10Comparablewx6Strides13SignedIntegerwx6VectorS_11IntegerTyperFT4nearx6withinGSqGVs20CountableClosedRangex__10inFunctionFxq__x">findLocalMaximum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone16findLocalMinimumu0_RxS_19OneDimensionalPoint_s10Comparablewx6Strides13SignedIntegerwx6VectorS_11IntegerTyperFT4nearx6withinGSqGVs20CountableClosedRangex__10inFunctionFxq__x">findLocalMinimum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3gcduRxS_11MeasurementrFTxx_x">gcd(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3lcmuRxS_11MeasurementrFTxx_x">lcm(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone2lnuRxS_14RealArithmeticrFxx">ln(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFxx">log(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFT6toBasex2ofx_x">log(toBase:of:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3secuRxS_14RealArithmeticrFGVS_5Anglex_x">sec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3sinuRxS_14RealArithmeticrFGVS_5Anglex_x">sin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3tanuRxS_14RealArithmeticrFGVS_5Anglex_x">tan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneoP1ouRxS_25NumericAdditiveArithmeticrFxGVS_21_PartialAbsoluteValuex_">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneop1ouRxS_25NumericAdditiveArithmeticrFGVS_21_PartialAbsoluteValuex_x">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoP3nbauRxS_14RealArithmeticrFxGVS_5Anglex_">°(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneX3BxauRxS_14RealArithmeticrFT_x">π()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneX3FxauRxS_14RealArithmeticrFT_x">τ()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoP3DvguRxS_14RealArithmeticrFxGVS_5Anglex_">′(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoP4DvgauRxS_14RealArithmeticrFxGVS_5Anglex_">′′(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu1_Rxs10Comparable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu2_Rxs10Comparable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu3_Rxs10Comparable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu4_Rxs10Comparable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu1_Rxs10Comparable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu2_Rxs10Comparable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu3_Rxs10Comparable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu4_Rxs10Comparable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≥(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Addable.html">Addable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Negatable.html">Negatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalVector.html">OneDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PointType.html">PointType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Randomizer.html">Randomizer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P14SDGCornerstone18RationalNumberType">RationalNumberType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/VectorType.html">VectorType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Angle.html">Angle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Measurement</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Measurement</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Addable.html">Addable</a></span><span class="p">,</span> <span class="kt">Comparable</span><span class="p">,</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="../Protocols/Negatable.html">Negatable</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A type that represents a measurement that can be expressed in various units.</p>
+
+<p>See <code><a href="../Structs/Angle.html">Angle</a></code> for an example.</p>
+
+<div class="aside aside-requires">
+    <p class="aside-title">Requires</p>
+    A <code>Measurement</code>’s units must be definable as ratios of one another. (For example, <code>Measurement</code> can describe angles as radians, degrees and gradians, but not temperature as Kelvins, Celsius and Fahrenheit.)
+
+</div>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code>init(rawValue: Scalar)</code></li>
+<li><code>var rawValue: Scalar { get set }</code></li>
+</ul>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Scalar%20Type"></a>
+                <a name="//apple_ref/swift/Section/Scalar Type" class="dashAnchor"></a>
+                <a href="#/Scalar%20Type">
+                  <h3 class="section-name">Scalar Type</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone11Measurement12RoundingRule"></a>
+                    <a name="//apple_ref/swift/Alias/RoundingRule" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone11Measurement12RoundingRule">RoundingRule</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A rule for rounding.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">RoundingRule</span> <span class="o">=</span> <span class="kt">FloatingPointRoundingRule</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone11Measurement6Scalar"></a>
+                    <a name="//apple_ref/swift/Alias/Scalar" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The numeric type used to express the value in any given unit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">associatedtype</span> <span class="kt">Scalar</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Internal%20Values"></a>
+                <a name="//apple_ref/swift/Section/Internal Values" class="dashAnchor"></a>
+                <a href="#/Internal%20Values">
+                  <h3 class="section-name">Internal Values</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11MeasurementcFT8rawValuewx6Scalar_x"></a>
+                    <a name="//apple_ref/swift/Method/init(rawValue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11MeasurementcFT8rawValuewx6Scalar_x">init(rawValue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a measurement from a raw value in undefined but consistent units.</p>
+
+<p>Used by <code>Measurement</code>’s default implementation of methods where various units make no difference (such as multiplication by a scalar).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="nv">rawValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vP14SDGCornerstone11Measurement8rawValuewx6Scalar"></a>
+                    <a name="//apple_ref/swift/Property/rawValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP14SDGCornerstone11Measurement8rawValuewx6Scalar">rawValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A raw value in undefined but consistent units.</p>
+
+<p>Used by <code>Measurement</code>’s default implementation of methods where various units make no difference (such as multiplication by a scalar).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">rawValue</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11MeasurementcFT_x"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11MeasurementcFT_x">init()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an empty (zero) measurement.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Creates an empty (zero) measurement.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Operations"></a>
+                <a name="//apple_ref/swift/Section/Operations" class="dashAnchor"></a>
+                <a href="#/Operations">
+                  <h3 class="section-name">Operations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone11MeasurementXoi3rcaFTxwx6Scalar_x"></a>
+                    <a name="//apple_ref/swift/Method/×(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone11MeasurementXoi3rcaFTxwx6Scalar_x">×(_:_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the result of multipling the measurement by the scalar.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>×=</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the result of multipling the measurement by the scalar.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>×=</p>
+
+</div>
+
+<p>Returns the result of multipling the measurement by the scalar.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>×=</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">×</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The measurement.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The scalar.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone11MeasurementXoi5e_IeaFTRxwx6Scalar_T_"></a>
+                    <a name="//apple_ref/swift/Method/×=(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone11MeasurementXoi5e_IeaFTRxwx6Scalar_T_">×=(_:_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Modifies the measurement by multiplication with a scalar.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>×</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Modifies the measurement by multiplication with a scalar.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>×</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">×</span><span class="o">=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The measurement to modify.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The scalar.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone11MeasurementXoi3odaFTxwx6Scalar_x"></a>
+                    <a name="//apple_ref/swift/Method/÷(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone11MeasurementXoi3odaFTxwx6Scalar_x">÷(_:_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the (rational) quotient of a measurement divided by a scalar.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>×</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the (rational) quotient of a measurement divided by a scalar.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>×</p>
+
+</div>
+
+<p>Returns the (rational) scalar quotient of the left divided by the right.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">÷</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The measurement.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The scalar.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone11MeasurementXoi3odaFTxx_wx6Scalar"></a>
+                    <a name="//apple_ref/swift/Method/÷(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone11MeasurementXoi3odaFTxx_wx6Scalar">÷(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the (rational) scalar quotient of the left divided by the right.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">÷</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dividend.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The divisor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone11MeasurementXoi5e_CgaFTRxwx6Scalar_T_"></a>
+                    <a name="//apple_ref/swift/Method/÷=(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone11MeasurementXoi5e_CgaFTRxwx6Scalar_T_">÷=(_:_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Modifies the left by dividing it by the right.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>÷</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Modifies the left by dividing it by the right.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>÷</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">÷</span><span class="o">=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The measurement to modify.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The scalar divisor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11Measurement24dividedAccordingToEuclidFT2byx_wx6Scalar"></a>
+                    <a name="//apple_ref/swift/Method/dividedAccordingToEuclid(by:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11Measurement24dividedAccordingToEuclidFT2byx_wx6Scalar">dividedAccordingToEuclid(by:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the integral quotient of <code>self</code> divided by <code>divisor</code>.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, <em>not</em> −1 remainder −2</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>divideAccordingToEuclid</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the integral quotient of <code>self</code> divided by <code>divisor</code>.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, <em>not</em> −1 remainder −2</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>divideAccordingToEuclid</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">dividedAccordingToEuclid</span><span class="p">(</span><span class="n">by</span> <span class="nv">divisor</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement6Scalar">Scalar</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>divisor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The divisor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11Measurement3modFxx"></a>
+                    <a name="//apple_ref/swift/Method/mod(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11Measurement3modFxx">mod(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the Euclidean remainder of <code>self</code> ÷ <code>divisor</code>.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, <em>not</em> −2</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formRemainder</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the Euclidean remainder of <code>self</code> ÷ <code>divisor</code>.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, <em>not</em> −2</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formRemainder</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">mod</span><span class="p">(</span><span class="n">_</span> <span class="nv">divisor</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>divisor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The divisor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11Measurement13formRemainderFT3modx_T_"></a>
+                    <a name="//apple_ref/swift/Method/formRemainder(mod:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11Measurement13formRemainderFT3modx_T_">formRemainder(mod:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets <code>self</code> to the Euclidean remainder of <code>self</code> ÷ <code>divisor</code>.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, <em>not</em> −2</p>
+
+</div>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>mod</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Sets <code>self</code> to the Euclidean remainder of <code>self</code> ÷ <code>divisor</code>.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, <em>not</em> −2</p>
+
+</div>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>mod</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">mutating</span> <span class="kd">func</span> <span class="nf">formRemainder</span><span class="p">(</span><span class="n">mod</span> <span class="nv">divisor</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>divisor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The divisor.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11Measurement11isDivisibleFT2byx_Sb"></a>
+                    <a name="//apple_ref/swift/Method/isDivisible(by:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11Measurement11isDivisibleFT2byx_Sb">isDivisible(by:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> is evenly divisible by <code>divisor</code>.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns <code>true</code> if <code>self</code> is evenly divisible by <code>divisor</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">isDivisible</span><span class="p">(</span><span class="n">by</span> <span class="nv">divisor</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone11Measurement3gcdFTxx_x"></a>
+                    <a name="//apple_ref/swift/Method/gcd(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone11Measurement3gcdFTxx_x">gcd(_:_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the greatest common divisor of <code>a</code> and <code>b</code>.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formGreatestCommonDivisor</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the greatest common divisor of <code>a</code> and <code>b</code>.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formGreatestCommonDivisor</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Another value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11Measurement25formGreatestCommonDivisorFT4withx_T_"></a>
+                    <a name="//apple_ref/swift/Method/formGreatestCommonDivisor(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11Measurement25formGreatestCommonDivisorFT4withx_T_">formGreatestCommonDivisor(with:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets <code>self</code> to the greatest common divisor of <code>self</code> and <code>other</code>.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>gcd</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Sets <code>self</code> to the greatest common divisor of <code>self</code> and <code>other</code>.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>gcd</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">mutating</span> <span class="kd">func</span> <span class="nf">formGreatestCommonDivisor</span><span class="p">(</span><span class="n">with</span> <span class="nv">other</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>other</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Another value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone11Measurement3lcmFTxx_x"></a>
+                    <a name="//apple_ref/swift/Method/lcm(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone11Measurement3lcmFTxx_x">lcm(_:_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the least common multiple of <code>a</code> and <code>b</code>.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formGreatestCommonDivisor</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the least common multiple of <code>a</code> and <code>b</code>.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formGreatestCommonDivisor</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">lcm</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Another value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11Measurement23formLeastCommonMultipleFT4withx_T_"></a>
+                    <a name="//apple_ref/swift/Method/formLeastCommonMultiple(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11Measurement23formLeastCommonMultipleFT4withx_T_">formLeastCommonMultiple(with:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets <code>self</code> to the least common multiple of <code>self</code> and <code>other</code>.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>lcm</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Sets <code>self</code> to the least common multiple of <code>self</code> and <code>other</code>.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>lcm</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">mutating</span> <span class="kd">func</span> <span class="nf">formLeastCommonMultiple</span><span class="p">(</span><span class="n">with</span> <span class="nv">other</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>other</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Another value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Rounding"></a>
+                <a name="//apple_ref/swift/Section/Rounding" class="dashAnchor"></a>
+                <a href="#/Rounding">
+                  <h3 class="section-name">Rounding</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11Measurement5roundFTOs25FloatingPointRoundingRule12toMultipleOfx_T_"></a>
+                    <a name="//apple_ref/swift/Method/round(_:toMultipleOf:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11Measurement5roundFTOs25FloatingPointRoundingRule12toMultipleOfx_T_">round(_:toMultipleOf:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rounds the value to a multiple of <code>factor</code> using the specified rounding rule.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>rounded</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rounds the value to a multiple of <code>factor</code> using the specified rounding rule.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>rounded</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">mutating</span> <span class="kd">func</span> <span class="nf">round</span><span class="p">(</span><span class="n">_</span> <span class="nv">rule</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement12RoundingRule">RoundingRule</a></span><span class="p">,</span> <span class="n">toMultipleOf</span> <span class="nv">factor</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rule</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The rounding rule follow.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>factor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The factor to round to a multiple of.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11Measurement7roundedFTOs25FloatingPointRoundingRule12toMultipleOfx_x"></a>
+                    <a name="//apple_ref/swift/Method/rounded(_:toMultipleOf:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11Measurement7roundedFTOs25FloatingPointRoundingRule12toMultipleOfx_x">rounded(_:toMultipleOf:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the value rounded to a multiple of <code>factor</code> using the specified rounding rule.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>round</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the value rounded to a multiple of <code>factor</code> using the specified rounding rule.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>round</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">rounded</span><span class="p">(</span><span class="n">_</span> <span class="nv">rule</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Measurement.html#/s:P14SDGCornerstone11Measurement12RoundingRule">RoundingRule</a></span><span class="p">,</span> <span class="n">toMultipleOf</span> <span class="nv">factor</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rule</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The rounding rule follow.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>factor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The factor to round to a multiple of.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Randomization"></a>
+                <a name="//apple_ref/swift/Section/Randomization" class="dashAnchor"></a>
+                <a href="#/Randomization">
+                  <h3 class="section-name">Randomization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11MeasurementcFT13randomInRangeGVs5Rangex__x"></a>
+                    <a name="//apple_ref/swift/Method/init(randomInRange:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11MeasurementcFT13randomInRangeGVs5Rangex__x">init(randomInRange:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a random value within a particular range.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>range</code> is not empty.</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Creates a random value within a particular range.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>range</code> is not empty.</p>
+
+</div>
+
+<p>Creates a random value within a particular range.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>range</code> is not empty.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="n">randomInRange</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The allowed range for the random value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11MeasurementcFT13randomInRangeGVs11ClosedRangex__x"></a>
+                    <a name="//apple_ref/swift/Method/init(randomInRange:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11MeasurementcFT13randomInRangeGVs11ClosedRangex__x">init(randomInRange:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a random value within a particular range.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>range</code> is not empty.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="n">randomInRange</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">ClosedRange</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The allowed range for the random value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11MeasurementcFT13randomInRangeGVs5Rangex_14fromRandomizerPS_10Randomizer__x"></a>
+                    <a name="//apple_ref/swift/Method/init(randomInRange:fromRandomizer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11MeasurementcFT13randomInRangeGVs5Rangex_14fromRandomizerPS_10Randomizer__x">init(randomInRange:fromRandomizer:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a random value within a particular range using the specified randomizer.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>range</code> is not empty.</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Creates a random value within a particular range using the specified randomizer.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>range</code> is not empty.</p>
+
+</div>
+
+<p>Creates a random value within a particular range using the specified randomizer.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>range</code> is not empty.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="n">randomInRange</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">fromRandomizer</span> <span class="nv">randomizer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Randomizer.html">Randomizer</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The allowed range for the random value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>randomizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The randomizer to use to generate the random value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone11MeasurementcFT13randomInRangeGVs11ClosedRangex_14fromRandomizerPS_10Randomizer__x"></a>
+                    <a name="//apple_ref/swift/Method/init(randomInRange:fromRandomizer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone11MeasurementcFT13randomInRangeGVs11ClosedRangex_14fromRandomizerPS_10Randomizer__x">init(randomInRange:fromRandomizer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a random value within a particular range using the specified randomizer.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>range</code> is not empty.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="n">randomInRange</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">ClosedRange</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">fromRandomizer</span> <span class="nv">randomizer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Randomizer.html">Randomizer</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The allowed range for the random value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>randomizer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The randomizer to use to generate the random value.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

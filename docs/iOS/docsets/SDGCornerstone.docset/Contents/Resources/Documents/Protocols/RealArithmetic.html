@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RealArithmetic Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/RealArithmetic" class="dashAnchor"></a>
+    <a title="RealArithmetic Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SDGCornerstone Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SDGGiesbrecht/SDGCornerstone"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SDGCornerstone Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        RealArithmetic Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../related-projects.html">Related Projects</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CyclicalNumberGenerator.html">CyclicalNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PseudorandomNumberGenerator.html">PseudorandomNumberGenerator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Equatable.html">Equatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FloatingPoint.html">FloatingPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_CebFTGSqPMP__GSqPMP___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu0_Rxs9Equatable_S0_rFTTxq__Txq___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu1_Rxs9Equatable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu2_Rxs9Equatable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu3_Rxs9Equatable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu4_Rxs9Equatable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccosuRxS_14RealArithmeticrFxGVS_5Anglex_">arccos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccotuRxS_14RealArithmeticrFxGVS_5Anglex_">arccot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccscuRxS_14RealArithmeticrFxGVS_5Anglex_">arccsc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arcsecuRxS_14RealArithmeticrFxGVS_5Anglex_">arcsec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arcsinuRxS_14RealArithmeticrFxGVS_5Anglex_">arcsin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arctanuRxS_14RealArithmeticrFxGVS_5Anglex_">arctan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6cachedurFzT2inRGSqx_FzT_x_x">cached(in:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cosuRxS_14RealArithmeticrFGVS_5Anglex_x">cos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cotuRxS_14RealArithmeticrFGVS_5Anglex_x">cot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cscuRxS_14RealArithmeticrFGVS_5Anglex_x">csc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone1euRxS_14RealArithmeticrFT_x">e()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone16findLocalMaximumu0_RxS_19OneDimensionalPoint_s10Comparablewx6Strides13SignedIntegerwx6VectorS_11IntegerTyperFT4nearx6withinGSqGVs20CountableClosedRangex__10inFunctionFxq__x">findLocalMaximum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone16findLocalMinimumu0_RxS_19OneDimensionalPoint_s10Comparablewx6Strides13SignedIntegerwx6VectorS_11IntegerTyperFT4nearx6withinGSqGVs20CountableClosedRangex__10inFunctionFxq__x">findLocalMinimum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3gcduRxS_11MeasurementrFTxx_x">gcd(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3lcmuRxS_11MeasurementrFTxx_x">lcm(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone2lnuRxS_14RealArithmeticrFxx">ln(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFxx">log(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFT6toBasex2ofx_x">log(toBase:of:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3secuRxS_14RealArithmeticrFGVS_5Anglex_x">sec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3sinuRxS_14RealArithmeticrFGVS_5Anglex_x">sin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3tanuRxS_14RealArithmeticrFGVS_5Anglex_x">tan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneoP1ouRxS_25NumericAdditiveArithmeticrFxGVS_21_PartialAbsoluteValuex_">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneop1ouRxS_25NumericAdditiveArithmeticrFGVS_21_PartialAbsoluteValuex_x">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoP3nbauRxS_14RealArithmeticrFxGVS_5Anglex_">°(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneX3BxauRxS_14RealArithmeticrFT_x">π()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneX3FxauRxS_14RealArithmeticrFT_x">τ()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoP3DvguRxS_14RealArithmeticrFxGVS_5Anglex_">′(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoP4DvgauRxS_14RealArithmeticrFxGVS_5Anglex_">′′(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu1_Rxs10Comparable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu2_Rxs10Comparable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu3_Rxs10Comparable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu4_Rxs10Comparable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu1_Rxs10Comparable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu2_Rxs10Comparable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu3_Rxs10Comparable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu4_Rxs10Comparable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≥(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Addable.html">Addable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Negatable.html">Negatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalVector.html">OneDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PointType.html">PointType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Randomizer.html">Randomizer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P14SDGCornerstone18RationalNumberType">RationalNumberType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/VectorType.html">VectorType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Angle.html">Angle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>RealArithmetic</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RealArithmetic</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A type that can be used for real arithmetic.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code><a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a></code></li>
+<li><code>static var π: Self { get }</code></li>
+<li><code>static var e: Self { get }</code></li>
+<li><code>mutating func formLogarithm(toBase base: Self)</code></li>
+<li><code>static func sin(_ angle: Angle&lt;Self&gt;) -&gt; Self</code></li>
+<li><code>static func arctan(_ tangent: Self) -&gt; Angle&lt;Self&gt;</code></li>
+</ul>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Constants"></a>
+                <a name="//apple_ref/swift/Section/Constants" class="dashAnchor"></a>
+                <a href="#/Constants">
+                  <h3 class="section-name">Constants</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvP14SDGCornerstone14RealArithmeticX3Bxax"></a>
+                    <a name="//apple_ref/swift/Variable/π" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvP14SDGCornerstone14RealArithmeticX3Bxax">π</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An instance of π.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>An instance of π.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">π</span><span class="p">:</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvP14SDGCornerstone14RealArithmeticX3Fxax"></a>
+                    <a name="//apple_ref/swift/Variable/τ" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvP14SDGCornerstone14RealArithmeticX3Fxax">τ</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An instance of τ.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>An instance of τ.</p>
+
+<p>τ in the same type.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is an alias for <code>Self.τ</code> to improve the legibility of code involving mathematical equations.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">τ</span><span class="p">:</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvP14SDGCornerstone14RealArithmetic1ex"></a>
+                    <a name="//apple_ref/swift/Variable/e" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvP14SDGCornerstone14RealArithmetic1ex">e</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An instance of <em>e</em>.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p><em>e</em> in the same type.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is an alias for <code>Self.e</code> to improve the legibility of code involving mathematical equations.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">e</span><span class="p">:</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Operations"></a>
+                <a name="//apple_ref/swift/Section/Operations" class="dashAnchor"></a>
+                <a href="#/Operations">
+                  <h3 class="section-name">Operations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone14RealArithmetic4rootFT8ofDegreex_x"></a>
+                    <a name="//apple_ref/swift/Method/root(ofDegree:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone14RealArithmetic4rootFT8ofDegreex_x">root(ofDegree:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the <code>degree</code>‐th root of <code>self</code>.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formRoot</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the <code>degree</code>‐th root of <code>self</code>.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formRoot</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">root</span><span class="p">(</span><span class="n">ofDegree</span> <span class="nv">degree</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>degree</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The degree of the root.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone14RealArithmetic8formRootFT8ofDegreex_T_"></a>
+                    <a name="//apple_ref/swift/Method/formRoot(ofDegree:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone14RealArithmetic8formRootFT8ofDegreex_T_">formRoot(ofDegree:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets <code>self</code> to its <code>degree</code>‐th root.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>root</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Sets <code>self</code> to its <code>degree</code>‐th root.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>root</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">mutating</span> <span class="kd">func</span> <span class="nf">formRoot</span><span class="p">(</span><span class="n">ofDegree</span> <span class="nv">degree</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>degree</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The degree of the root.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmeticXop3BJgFxx"></a>
+                    <a name="//apple_ref/swift/Method/√(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmeticXop3BJgFxx">√(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the sequare root of <code>operand</code>.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>√=</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the sequare root of <code>operand</code>.</p>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>√=</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="k">prefix</span> <span class="kd">func</span> <span class="o">√</span> <span class="p">(</span><span class="nv">operand</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The radicand.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmeticXoP5e_tboFRxT_"></a>
+                    <a name="//apple_ref/swift/Method/√=(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmeticXoP5e_tboFRxT_">√=(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets <code>operand</code> to its square root.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>√</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Sets <code>operand</code> to its square root.</p>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>√</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="k">postfix</span> <span class="kd">func</span> <span class="o">√</span><span class="o">=</span> <span class="p">(</span><span class="nv">operand</span><span class="p">:</span> <span class="k">inout</span> <span class="k">Self</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value to modify.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic3logFT6toBasex2ofx_x"></a>
+                    <a name="//apple_ref/swift/Method/log(toBase:of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic3logFT6toBasex2ofx_x">log(toBase:of:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the base <code>base</code> logarithm of <code>antilogarithm</code>.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>antilogarithm</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>base</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>base</code> ≠ 1</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formLogarithm</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the base <code>base</code> logarithm of <code>antilogarithm</code>.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>antilogarithm</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>base</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>base</code> ≠ 1</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formLogarithm</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="n">toBase</span> <span class="nv">base</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">of</span> <span class="nv">antilogarithm</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>base</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The base.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>antilogarithm</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The antilogarithm.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone14RealArithmetic13formLogarithmFT6toBasex_T_"></a>
+                    <a name="//apple_ref/swift/Method/formLogarithm(toBase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone14RealArithmetic13formLogarithmFT6toBasex_T_">formLogarithm(toBase:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets <code>self</code> to its base <code>base</code> logarithm.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>self</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>base</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>base</code> ≠ 1</p>
+
+</div>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>log</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Sets <code>self</code> to its base <code>base</code> logarithm.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>self</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>base</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>base</code> ≠ 1</p>
+
+</div>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>log</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">mutating</span> <span class="kd">func</span> <span class="nf">formLogarithm</span><span class="p">(</span><span class="n">toBase</span> <span class="nv">base</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>base</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The base.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic3logFxx"></a>
+                    <a name="//apple_ref/swift/Method/log(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic3logFxx">log(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the common logarithm of <code>antilogarithm</code>.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>antilogarithm</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formCommonLogarithm</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the common logarithm of <code>antilogarithm</code>.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>antilogarithm</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formCommonLogarithm</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="n">_</span> <span class="nv">antilogarithm</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>antilogarithm</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The antilogarithm.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone14RealArithmetic19formCommonLogarithmFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/formCommonLogarithm()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone14RealArithmetic19formCommonLogarithmFT_T_">formCommonLogarithm()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets <code>self</code> to its common logarithm.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>self</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>log</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Sets <code>self</code> to its common logarithm.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>self</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>log</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">mutating</span> <span class="kd">func</span> <span class="nf">formCommonLogarithm</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic2lnFxx"></a>
+                    <a name="//apple_ref/swift/Method/ln(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic2lnFxx">ln(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the natural logarithm of <code>antilogarithm</code>.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>antilogarithm</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formNaturalLogarithm</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the natural logarithm of <code>antilogarithm</code>.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>antilogarithm</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-mutating-variant">
+    <p class="aside-title">Mutating variant</p>
+    <p>formNaturalLogarithm</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">ln</span><span class="p">(</span><span class="n">_</span> <span class="nv">antilogarithm</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>antilogarithm</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The antilogarithm.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP14SDGCornerstone14RealArithmetic20formNaturalLogarithmFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/formNaturalLogarithm()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP14SDGCornerstone14RealArithmetic20formNaturalLogarithmFT_T_">formNaturalLogarithm()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets <code>self</code> to its natural logarithm.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>self</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>ln</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Sets <code>self</code> to its natural logarithm.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p><code>self</code> &gt; 0</p>
+
+</div>
+
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>ln</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">mutating</span> <span class="kd">func</span> <span class="nf">formNaturalLogarithm</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic3sinFGVS_5Anglex_x"></a>
+                    <a name="//apple_ref/swift/Method/sin(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic3sinFGVS_5Anglex_x">sin(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the sine of an angle.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the sine of an angle.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">sin</span><span class="p">(</span><span class="n">_</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic3cosFGVS_5Anglex_x"></a>
+                    <a name="//apple_ref/swift/Method/cos(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic3cosFGVS_5Anglex_x">cos(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the cosine of an angle.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the cosine of an angle.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">cos</span><span class="p">(</span><span class="n">_</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic3tanFGVS_5Anglex_x"></a>
+                    <a name="//apple_ref/swift/Method/tan(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic3tanFGVS_5Anglex_x">tan(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the tangent of an angle.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the tangent of an angle.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">tan</span><span class="p">(</span><span class="n">_</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic3cscFGVS_5Anglex_x"></a>
+                    <a name="//apple_ref/swift/Method/csc(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic3cscFGVS_5Anglex_x">csc(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the cosecant of an angle.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the cosecant of an angle.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">csc</span><span class="p">(</span><span class="n">_</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic3secFGVS_5Anglex_x"></a>
+                    <a name="//apple_ref/swift/Method/sec(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic3secFGVS_5Anglex_x">sec(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the secant of an angle.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the secant of an angle.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">sec</span><span class="p">(</span><span class="n">_</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic3cotFGVS_5Anglex_x"></a>
+                    <a name="//apple_ref/swift/Method/cot(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic3cotFGVS_5Anglex_x">cot(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the cotangent of an angle.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the cotangent of an angle.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">cot</span><span class="p">(</span><span class="n">_</span> <span class="nv">angle</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>angle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The angle.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic6arcsinFxGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Method/arcsin(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic6arcsinFxGVS_5Anglex_">arcsin(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the arcsine of a value.</p>
+
+<p>The returned angle will be between −90° and 90° inclusive.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p>−1 ≤ <code>sine</code> ≤ 1</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the arcsine of a value.</p>
+
+<p>The returned angle will be between −90° and 90° inclusive.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p>−1 ≤ <code>sine</code> ≤ 1</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">arcsin</span><span class="p">(</span><span class="n">_</span> <span class="nv">sine</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sine</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The sine.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic6arccosFxGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Method/arccos(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic6arccosFxGVS_5Anglex_">arccos(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the arccosine of a value.</p>
+
+<p>The returned angle will be between 0° and 180° inclusive.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p>−1 ≤ <code>sine</code> ≤ 1</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the arccosine of a value.</p>
+
+<p>The returned angle will be between 0° and 180° inclusive.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p>−1 ≤ <code>sine</code> ≤ 1</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">arccos</span><span class="p">(</span><span class="n">_</span> <span class="nv">cosine</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cosine</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The cosine.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic6arctanFxGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Method/arctan(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic6arctanFxGVS_5Anglex_">arctan(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the arctangent of a value.</p>
+
+<p>The returned angle will be between −90° and 90°.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the arctangent of a value.</p>
+
+<p>The returned angle will be between −90° and 90°.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">arctan</span><span class="p">(</span><span class="n">_</span> <span class="nv">tangent</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tangent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The tangent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic6arccscFxGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Method/arccsc(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic6arccscFxGVS_5Anglex_">arccsc(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the arccosecant of a value.</p>
+
+<p>The returned angle will be between −90° and 90° inclusive, but never 0°.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p>−1 ≥ <code>cosecant</code> ∨ <code>cosecant</code> ≤ 1</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the arccosecant of a value.</p>
+
+<p>The returned angle will be between −90° and 90° inclusive, but never 0°.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p>−1 ≥ <code>cosecant</code> ∨ <code>cosecant</code> ≤ 1</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">arccsc</span><span class="p">(</span><span class="n">_</span> <span class="nv">cosecant</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cosecant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The cosecant.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic6arcsecFxGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Method/arcsec(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic6arcsecFxGVS_5Anglex_">arcsec(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the arcsecant of a value.</p>
+
+<p>The returned angle will be between 0° and 180° inclusive, but never 90°.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p>−1≥ <code>secant</code> ∨ <code>secant</code> ≤ 1</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the arcsecant of a value.</p>
+
+<p>The returned angle will be between 0° and 180° inclusive, but never 90°.</p>
+
+<div class="aside aside-precondition">
+    <p class="aside-title">Precondition</p>
+    <p>−1≥ <code>secant</code> ∨ <code>secant</code> ≤ 1</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">arcsec</span><span class="p">(</span><span class="n">_</span> <span class="nv">secant</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The secant.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFP14SDGCornerstone14RealArithmetic6arccotFxGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Method/arccot(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFP14SDGCornerstone14RealArithmetic6arccotFxGVS_5Anglex_">arccot(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the arccotangent of a value.</p>
+
+<p>The returned angle will be between 0° and 180°.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Returns the arccotangent of a value.</p>
+
+<p>The returned angle will be between 0° and 180°.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">arccot</span><span class="p">(</span><span class="n">_</span> <span class="nv">cotangent</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cotangent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The cotangent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Angles"></a>
+                <a name="//apple_ref/swift/Section/Angles" class="dashAnchor"></a>
+                <a href="#/Angles">
+                  <h3 class="section-name">Angles</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_14RealArithmetic7radiansGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Property/radians" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_14RealArithmetic7radiansGVS_5Anglex_">radians</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an angle in radians.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">radians</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_14RealArithmetic3radGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Property/rad" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_14RealArithmetic3radGVS_5Anglex_">rad</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an angle in radians.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rad</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_14RealArithmetic9rotationsGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Property/rotations" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_14RealArithmetic9rotationsGVS_5Anglex_">rotations</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an angle in rotations.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rotations</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_14RealArithmetic7degreesGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Property/degrees" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_14RealArithmetic7degreesGVS_5Anglex_">degrees</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an angle in degrees.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">degrees</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_14RealArithmetic7minutesGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Property/minutes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_14RealArithmetic7minutesGVS_5Anglex_">minutes</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an angle in minutes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">minutes</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_14RealArithmetic7secondsGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Property/seconds" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_14RealArithmetic7secondsGVS_5Anglex_">seconds</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an angle in seconds.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">seconds</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_14RealArithmetic8gradiansGVS_5Anglex_"></a>
+                    <a name="//apple_ref/swift/Property/gradians" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_14RealArithmetic8gradiansGVS_5Anglex_">gradians</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an angle in gradians.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gradians</span><span class="p">:</span> <span class="kt"><a href="../Structs/Angle.html">Angle</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
