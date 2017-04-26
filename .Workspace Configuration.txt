@@ -14,7 +14,7 @@
 
 [_Import https://github.com/SDGGiesbrecht/SDG_]
 
-Current Version: 1.0.0
+Current Version: 0.1.0
 
 Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
 Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -36,7 +36,7 @@ Quotation Testament: Old
 Quotation Chapter: Isaiah 28
 
 [_Begin Citation_]
-⁧יהוה⁩/Yahova
+⁧יהוה⁩/Yehova
 [_End_]
 
 [_Begin Feature List_]
