@@ -143,8 +143,8 @@ extension PointType where Self.Vector == Self {
     }
 }
 
-extension PointType where Self : IntXFamily, Self.Vector == Self.Stride {
-    // MARK: - where Self : IntXFamily, Vector == Stride
+extension PointType where Self : IntXFamily {
+    // MARK: - where Self : IntXFamily
 
     // [_Inherit Documentation: SDGCornerstone.PointType.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
@@ -198,8 +198,8 @@ extension PointType where Self : Strideable {
     }
 }
 
-extension PointType where Self : UIntFamily, Self.Vector == Self.Stride {
-    // MARK: - where Self : UIntFamily, Vector == Stride
+extension PointType where Self : UIntFamily {
+    // MARK: - where Self : UIntFamily
 
     // [_Inherit Documentation: SDGCornerstone.PointType.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
