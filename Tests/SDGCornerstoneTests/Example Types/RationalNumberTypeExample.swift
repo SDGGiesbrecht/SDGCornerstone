@@ -46,19 +46,8 @@ struct RationalNumberTypeExample : RationalNumberType {
         value = Double(floatLiteral: floatLiteral)
     }
 
-    // ExpressibleByIntegerLiteral
-
-    init(integerLiteral: Double.IntegerLiteralType) {
-        value = Double(integerLiteral)
-    }
-
     // IntegralArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.IntegralArithmetic.init(int:)_]
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of `IntMax`.
     public init(_ int: IntMax) {
         value = Double(int)
     }
@@ -85,11 +74,6 @@ struct RationalNumberTypeExample : RationalNumberType {
 
     // WholeArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(uInt:)_]
-    /// Creates an instance equal to `uInt`.
-    ///
-    /// - Properties:
-    ///     - uInt: An instance of `UIntMax`.
     public init(_ uInt: UIntMax) {
         value = Double(uInt)
     }

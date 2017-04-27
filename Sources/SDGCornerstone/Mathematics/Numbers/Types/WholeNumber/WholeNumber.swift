@@ -22,7 +22,7 @@
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
-public struct WholeNumber : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, PointType, Strideable, Subtractable, WholeArithmetic, WholeNumberType {
+public struct WholeNumber : Addable, Comparable, Equatable, PointType, Strideable, Subtractable, WholeArithmetic, WholeNumberType {
 
     // MARK: - Properties
 
@@ -147,18 +147,6 @@ public struct WholeNumber : Addable, Comparable, Equatable, ExpressibleByInteger
     ///     - rhs: Another value to compare.
     public static func == (lhs: WholeNumber, rhs: WholeNumber) -> Bool {
         return lhs.digits.elementsEqual(rhs.digits)
-    }
-
-    // MARK: - ExpressibleByIntegerLiteral
-
-    // [_Define Documentation: SDGCornerstone.WholeNumber.IntegerLiteralType_]
-    /// The integer literal type.
-    public typealias IntegerLiteralType = UIntMax
-
-    // [_Define Documentation: SDGCornerstone.WholeNumber.init(integerLiteral:)_]
-    /// Creates an instance from an integer literal.
-    public init(integerLiteral value: IntegerLiteralType) {
-        self.init(value)
     }
 
     // MARK: - PointType

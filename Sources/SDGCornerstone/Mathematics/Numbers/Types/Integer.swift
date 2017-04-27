@@ -20,7 +20,7 @@
 /// let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
 /// let yobiMultiplier: WholeNumber = "0b 1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
 /// ```
-public struct Integer : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, IntegerType, IntegralArithmetic, Negatable, PointType, Subtractable, WholeArithmetic {
+public struct Integer : Addable, Comparable, Equatable, IntegerType, IntegralArithmetic, Negatable, PointType, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -136,18 +136,6 @@ public struct Integer : Addable, Comparable, Equatable, ExpressibleByIntegerLite
     ///     - rhs: Another value to compare.
     public static func == (lhs: Integer, rhs: Integer) -> Bool {
         return (lhs.isNegative, lhs.magnitude) == (rhs.isNegative, rhs.magnitude)
-    }
-
-    // MARK: - ExpressibleByIntegerLiteral
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.IntegerLiteralType_]
-    /// The integer literal type.
-    public typealias IntegerLiteralType = IntMax
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(integerLiteral:)_]
-    /// Creates an instance from an integer literal.
-    public init(integerLiteral: IntegerLiteralType) {
-        self.init(integerLiteral)
     }
 
     // MARK: - IntegralArithmetic

@@ -15,6 +15,7 @@
 import SDGCornerstone
 
 // [_Warning: These need to be updated._]
+/*
 
 // [_Define Example: WholeNumber Literals_]
 let million: WholeNumber = 1_000_000
@@ -33,3 +34,5 @@ let third: RationalNumber = 1 ÷ 3
 let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
 let half: RationalNumber = "0b 0.1"
 // [_End_]
+
+ */

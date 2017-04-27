@@ -20,7 +20,7 @@
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
 /// let half: RationalNumber = "0b 0.1"
 /// ```
-public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, IntegralArithmetic, Negatable, PointType, RationalArithmetic, RationalNumberType, Subtractable, WholeArithmetic {
+public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, IntegralArithmetic, Negatable, PointType, RationalArithmetic, RationalNumberType, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -159,18 +159,6 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
     /// Creates an instance from a float literal.
     public init(floatLiteral value: FloatLiteralType) {
         self.init(floatingPointLiteral: value)
-    }
-
-    // MARK: - ExpressibleByIntegerLiteral
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.IntegerLiteralType_]
-    /// The integer literal type.
-    public typealias IntegerLiteralType = IntMax
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(integerLiteral:)_]
-    /// Creates an instance from an integer literal.
-    public init(integerLiteral: IntegerLiteralType) {
-        self.init(integerLiteral)
     }
 
     // MARK: - IntegralArithmetic
