@@ -34,41 +34,41 @@ postfix operator ′
 postfix operator ′′
 
 /// An angle.
-public struct Angle<Value : RealArithmetic> : Measurement {
+public struct Angle<Scalar : RealArithmetic> : Measurement {
 
     // MARK: - Initialization
 
     /// Creates an angle in radians.
-    public init(radians: Value) {
+    public init(radians: Scalar) {
         self.inRadians = radians
     }
 
     /// Creates an angle in rotations.
-    public init(rotations: Value) {
+    public init(rotations: Scalar) {
         self.init()
         inRotations = rotations
     }
 
     /// Creates an angle in degrees.
-    public init(degrees: Value) {
+    public init(degrees: Scalar) {
         self.init()
         inDegrees = degrees
     }
 
     /// Creates an angle in minutes.
-    public init(minutes: Value) {
+    public init(minutes: Scalar) {
         self.init()
         inMinutes = minutes
     }
 
     /// Creates an angle in seconds.
-    public init(seconds: Value) {
+    public init(seconds: Scalar) {
         self.init()
         inSeconds = seconds
     }
 
     /// Creates an angle in gradians.
-    public init(gradians: Value) {
+    public init(gradians: Scalar) {
         self.init()
         inGradians = gradians
     }
@@ -76,13 +76,13 @@ public struct Angle<Value : RealArithmetic> : Measurement {
     // MARK: - Units
 
     /// The numeric value in radians.
-    public var inRadians: Value
+    public var inRadians: Scalar
 
-    private static var radiansPerRotation: Value {
-        return Value.τ
+    private static var radiansPerRotation: Scalar {
+        return Scalar.τ
     }
     /// The numeric value in rotations.
-    public var inRotations: Value {
+    public var inRotations: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerRotation
         }
@@ -91,11 +91,11 @@ public struct Angle<Value : RealArithmetic> : Measurement {
         }
     }
 
-    private static var radiansPerDegree: Value {
+    private static var radiansPerDegree: Scalar {
         return radiansPerRotation ÷ 360
     }
     /// The numeric value in degrees.
-    public var inDegrees: Value {
+    public var inDegrees: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerDegree
         }
@@ -104,11 +104,11 @@ public struct Angle<Value : RealArithmetic> : Measurement {
         }
     }
 
-    private static var radiansPerMinute: Value {
+    private static var radiansPerMinute: Scalar {
         return radiansPerDegree ÷ 60
     }
     /// The numeric value in minutes.
-    public var inMinutes: Value {
+    public var inMinutes: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerMinute
         }
@@ -117,11 +117,11 @@ public struct Angle<Value : RealArithmetic> : Measurement {
         }
     }
 
-    private static var radiansPerSecond: Value {
+    private static var radiansPerSecond: Scalar {
         return radiansPerMinute ÷ 60
     }
     /// The numeric value in seconds.
-    public var inSeconds: Value {
+    public var inSeconds: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerSecond
         }
@@ -130,11 +130,11 @@ public struct Angle<Value : RealArithmetic> : Measurement {
         }
     }
 
-    private static var radiansPerGradian: Value {
+    private static var radiansPerGradian: Scalar {
         return radiansPerRotation ÷ 400
     }
     /// The numeric value in gradians.
-    public var inGradians: Value {
+    public var inGradians: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerGradian
         }
@@ -144,10 +144,6 @@ public struct Angle<Value : RealArithmetic> : Measurement {
     }
 
     // MARK: - Measurement
-
-    // [_Inherit Documentation: SDGCornerstone.Measurement.Scalar_]
-    /// The numeric type used to express the value in any given unit.
-    public typealias Scalar = Value
 
     // [_Inherit Documentation: SDGCornerstone.Measurement.init(rawValue:)_]
     /// Creates a measurement from a raw value in undefined but consistent units.
