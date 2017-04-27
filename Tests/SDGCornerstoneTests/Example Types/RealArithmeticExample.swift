@@ -84,10 +84,6 @@ struct RealArithmeticExample : RealArithmetic {
         return RealArithmeticExample(Double.arctan(tangent.value).inRadians).rad
     }
 
-    // Strideable
-
-    typealias Stride = Vector
-
     // Subtractable
 
     static func −= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {

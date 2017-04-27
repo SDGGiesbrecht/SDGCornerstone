@@ -181,11 +181,6 @@ public struct WholeNumber : Addable, Comparable, Equatable, PointType, Strideabl
         return Integer(lhs) − Integer(rhs)
     }
 
-    // MARK: - Strideable
-
-    /// The stride type.
-    public typealias Stride = Vector
-
     // MARK: - Subtractable
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]

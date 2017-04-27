@@ -62,10 +62,6 @@ struct RationalNumberTypeExample : RationalNumberType {
         lhs.value ÷= rhs.value
     }
 
-    // Strideable
-
-    typealias Stride = Vector
-
     // Subtractable
 
     static func −= (lhs: inout RationalNumberTypeExample, rhs: RationalNumberTypeExample) {
