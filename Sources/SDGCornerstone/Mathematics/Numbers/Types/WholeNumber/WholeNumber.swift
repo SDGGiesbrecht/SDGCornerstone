@@ -22,7 +22,7 @@
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
-public struct WholeNumber : Addable, Comparable, Equatable, ExpressibleByExtendedGraphemeClusterLiteral, ExpressibleByIntegerLiteral, ExpressibleByStringLiteral, ExpressibleByUnicodeScalarLiteral, PointType, Strideable, Subtractable, WholeArithmetic, WholeNumberType {
+public struct WholeNumber : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, PointType, Strideable, Subtractable, WholeArithmetic, WholeNumberType {
 
     // MARK: - Properties
 
@@ -149,14 +149,6 @@ public struct WholeNumber : Addable, Comparable, Equatable, ExpressibleByExtende
         return lhs.digits.elementsEqual(rhs.digits)
     }
 
-    // MARK: - ExpressibleByExtendedGraphemeClusterLiteral
-
-    // [_Define Documentation: SDGCornerstone.WholeNumber.init(extendedGraphemeClusterLiteral:)_]
-    /// Creates an instance from an extended grapheme cluster literal.
-    public init(extendedGraphemeClusterLiteral value: StringLiteralType) { // [_Exempt from Code Coverage_] Apparently unreachable.
-        self.init(textLiteral: value)
-    }
-
     // MARK: - ExpressibleByIntegerLiteral
 
     // [_Define Documentation: SDGCornerstone.WholeNumber.IntegerLiteralType_]
@@ -167,93 +159,6 @@ public struct WholeNumber : Addable, Comparable, Equatable, ExpressibleByExtende
     /// Creates an instance from an integer literal.
     public init(integerLiteral value: IntegerLiteralType) {
         self.init(value)
-    }
-
-    // MARK: - ExpressibleByStringLiteral
-
-    private static let digits: [Set<UnicodeScalar>] = [
-        //    arb  pes  hi   bn   ta   my   km   th   lo
-        ["0", "٠", "۰", "०", "০", "௦", "၀", "០", "๐", "໐"],
-        ["1", "١", "۱", "१", "১", "௧", "၁", "១", "๑", "໑"],
-        ["2", "٢", "۲", "२", "২", "௨", "၂", "២", "๒", "໒"],
-        ["3", "٣", "۳", "३", "৩", "௩", "၃", "៣", "๓", "໓"],
-        ["4", "٤", "۴", "४", "৪", "௪", "၄", "៤", "๔", "໔"],
-        ["5", "٥", "۵", "५", "৫", "௫", "၅", "៥", "๕", "໕"],
-        ["6", "٦", "۶", "६", "৬", "௬", "၆", "៦", "๖", "໖"],
-        ["7", "٧", "۷", "७", "৭", "௭", "၇", "៧", "๗", "໗"],
-        ["8", "٨", "۸", "८", "৮", "௮", "၈", "៨", "๘", "໘"],
-        ["9", "٩", "۹", "९", "৯", "௯", "၉", "៩", "๙", "໙"],
-        ["A", "a"],
-        ["B", "b"],
-        ["C", "c"],
-        ["D", "d"],
-        ["E", "e"],
-        ["F", "f"]
-    ]
-    private static let thousandsSeparators: Set<UnicodeScalar> = [" ", "٬"]
-
-    internal static let digitMapping: [UnicodeScalar: WholeNumber] = {
-        var mapping: [UnicodeScalar: WholeNumber] = [:]
-        for value in digits.indices {
-            let characters = digits[value]
-            for character in characters {
-                mapping[character] = WholeNumber(UIntMax(value))
-            }
-        }
-        return mapping
-    }()
-
-    private init(_ representation: String, base: WholeNumber) {
-
-        self = 0
-        var position: WholeNumber = 0
-        for character in representation.decomposedStringWithCompatibilityMapping.unicodeScalars.reversed() {
-            if let digit = WholeNumber.digitMapping[character], digit < base {
-                self += (base ↑ position) × digit
-                position += 1 as WholeNumber
-            } else {
-                assert(WholeNumber.thousandsSeparators.contains(character), "\(character) is not a valid digit.")
-            }
-
-        }
-    }
-
-    internal static let prefixToBaseMapping: [String: WholeNumber] = [
-        "0b": 2,
-        "0o": 8,
-        "0x": 16
-    ]
-
-    internal init(textLiteral value: String) {
-
-        var numeric: WholeNumber?
-        for (prefix, base) in WholeNumber.prefixToBaseMapping {
-            if value.hasPrefix(prefix) {
-                let scalars = value.unicodeScalars
-                numeric = WholeNumber(String(scalars[scalars.index(scalars.startIndex, offsetBy: prefix.unicodeScalars.count) ..< scalars.endIndex]), base: base)
-                break
-            }
-        }
-
-        if let result = numeric {
-            self = result
-        } else {
-            self = WholeNumber(value, base: 10)
-        }
-    }
-
-    // [_Define Documentation: SDGCornerstone.WholeNumber.init(stringLiteral:)_]
-    /// Creates an instance from a string literal.
-    public init(stringLiteral value: StringLiteralType) {
-        self.init(textLiteral: value)
-    }
-
-    // MARK: - ExpressibleByUnicodeScalarLiteral
-
-    // [_Define Documentation: SDGCornerstone.WholeNumber.init(unicodeScalarLiteral:)_]
-    /// Creates an instance from a unicode scalar literal.
-    public init(unicodeScalarLiteral value: StringLiteralType) { // [_Exempt from Code Coverage_] Apparently unreachable.
-        self.init(textLiteral: value)
     }
 
     // MARK: - PointType

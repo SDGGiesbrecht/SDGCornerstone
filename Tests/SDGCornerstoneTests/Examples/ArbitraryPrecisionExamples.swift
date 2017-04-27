@@ -14,6 +14,8 @@
 
 import SDGCornerstone
 
+// [_Warning: These need to be updated._]
+
 // [_Define Example: WholeNumber Literals_]
 let million: WholeNumber = 1_000_000
 let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"

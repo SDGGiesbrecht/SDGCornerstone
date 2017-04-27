@@ -20,7 +20,7 @@
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
 /// let half: RationalNumber = "0b 0.1"
 /// ```
-public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByExtendedGraphemeClusterLiteral, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, ExpressibleByStringLiteral, ExpressibleByUnicodeScalarLiteral, IntegralArithmetic, Negatable, PointType, RationalArithmetic, RationalNumberType, Subtractable, WholeArithmetic {
+public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, IntegralArithmetic, Negatable, PointType, RationalArithmetic, RationalNumberType, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -141,14 +141,6 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByExte
         return (lhs.numerator, lhs.denominator) == (rhs.numerator, rhs.denominator)
     }
 
-    // MARK: - ExpressibleByExtendedGraphemeClusterLiteral
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(extendedGraphemeClusterLiteral:)_]
-    /// Creates an instance from an extended grapheme cluster literal.
-    public init(extendedGraphemeClusterLiteral value: StringLiteralType) {  // [_Exempt from Code Coverage_] Apparently unreachable.
-        self.init(textLiteral: value)
-    }
-
     // MARK: - ExpressibleByFloatLiteral
 
     /// The float literal type.
@@ -179,76 +171,6 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByExte
     /// Creates an instance from an integer literal.
     public init(integerLiteral: IntegerLiteralType) {
         self.init(integerLiteral)
-    }
-
-    // MARK: - ExpressibleByStringLiteral
-
-    private static let radixCharacters: Set<UnicodeScalar> = [",", ".", "٫"]
-
-    internal init(textLiteral value: String) {
-        let scalars = value.unicodeScalars
-
-        var radixLocation: String.UnicodeScalarView.Index?
-        for index in scalars.indices {
-            if RationalNumber.radixCharacters.contains(scalars[index]) {
-                radixLocation = index
-                break
-            }
-        }
-
-        var wholeString: String
-        var numeratorString: String
-        if let radix = radixLocation {
-            wholeString = String(scalars[scalars.startIndex ..< radix])
-            numeratorString = String(scalars[scalars.index(after: radix) ..< scalars.endIndex])
-        } else {
-            wholeString = value
-            numeratorString = ""
-        }
-
-        func flattenToZeroes(_ value: String) -> String {
-            return String(String.UnicodeScalarView(value.unicodeScalars.map({ WholeNumber.digitMapping[$0] ≠ nil ? "0" : $0 })))
-        }
-
-        let whole = Integer(textLiteral: wholeString)
-
-        var specialBaseNumerator: Integer?
-        var specialBaseDenominator: Integer?
-        for (prefix, _) in WholeNumber.prefixToBaseMapping {
-            if value.hasPrefix(prefix) {
-                specialBaseNumerator = Integer(textLiteral: prefix + numeratorString)
-                specialBaseDenominator = Integer(textLiteral: prefix + "1" + flattenToZeroes(numeratorString))
-                break
-            }
-        }
-
-        let numerator: Integer
-        let denominator: Integer
-        if let theNumerator = specialBaseNumerator,
-            let theDenominator = specialBaseDenominator {
-
-            numerator = theNumerator
-            denominator = theDenominator
-        } else {
-            numerator = Integer(textLiteral: numeratorString)
-            denominator = Integer(textLiteral: "1" + flattenToZeroes(numeratorString))
-        }
-
-        self = RationalNumber(whole) + RationalNumber(numerator: numerator, denominator: denominator)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(stringLiteral:)_]
-    /// Creates an instance from a string literal.
-    public init(stringLiteral value: StringLiteralType) {
-        self.init(textLiteral: value)
-    }
-
-    // MARK: - ExpressibleByUnicodeScalarLiteral
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(unicodeScalarLiteral:)_]
-    /// Creates an instance from a unicode scalar literal.
-    public init(unicodeScalarLiteral value: StringLiteralType) { // [_Exempt from Code Coverage_] Apparently unreachable.
-        self.init(textLiteral: value)
     }
 
     // MARK: - IntegralArithmetic
