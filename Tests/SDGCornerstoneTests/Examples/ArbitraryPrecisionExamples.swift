@@ -14,25 +14,20 @@
 
 import SDGCornerstone
 
-// [_Warning: These need to be updated._]
-/*
-
 // [_Define Example: WholeNumber Literals_]
 let million: WholeNumber = 1_000_000
 let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
-let yobiMultiplier: WholeNumber = "0b 1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
+let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
 // [_End_]
 
 // [_Define Example: Integer Literals_]
 let negativeMillion: Integer = −1_000_000
 let negativeDecillion: Integer = −"1 000 000 000 000 000 000 000 000 000 000 000"
-let negativeYobiMultiplier: Integer = −"0b 1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
+let negativeYobiMultiplier = −Integer(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
 // [_End_]
 
 // [_Define Example: RationalNumber Literals_]
 let third: RationalNumber = 1 ÷ 3
 let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
-let half: RationalNumber = "0b 0.1"
+let half = RationalNumber(binary: "0.1")
 // [_End_]
-
- */

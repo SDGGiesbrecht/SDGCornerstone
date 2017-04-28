@@ -21,6 +21,20 @@
 /// - `init(stringLiteral: String)`
 public protocol ExpressibleByTextLiterals : ExpressibleByStringLiteral {
 
+    // [_Define Documentation: SDGCornerstone.ExpressibleByTextLiterals.init(stringLiteral:)_]
     /// Creates an instance from a string literal.
+    ///
+    /// - Parameters:
+    ///     - stringLiteral: The string literal.
     init(stringLiteral: String)
+}
+
+extension ExpressibleByTextLiterals where Self : WholeArithmetic {
+    // MARK: - where Self : WholeArithmetic
+
+    // [_Inherit Documentation: SDGCornerstone.ExpressibleByTextLiterals.init(stringLiteral:)_]
+    /// Creates an instance from a string literal.
+    public init(stringLiteral: String) {
+        self.init(stringLiteral)
+    }
 }

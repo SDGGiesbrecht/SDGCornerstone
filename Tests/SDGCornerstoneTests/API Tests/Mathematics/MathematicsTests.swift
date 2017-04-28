@@ -103,7 +103,7 @@ class MathematicsTests : XCTestCase {
         runTests(RealArithmeticExample.self)
     }
 
-    func testArbitraryPrecision() {/* [_Warning: Temporarily disabled._]
+    func testArbitraryPrecision() {
         let undecillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000 000"
         let billion: WholeNumber = 1_000_000_000
         XCTAssert(billion ↑ 4 == undecillion)
@@ -115,19 +115,6 @@ class MathematicsTests : XCTestCase {
 
         let anotherValue: WholeNumber = "18 446 744 073 709 551 616"
         XCTAssert(anotherValue.dividedAccordingToEuclid(by: 1) == anotherValue)
-
-        func runStringLiteralTests<N : WholeArithmetic>(_ type: N.Type) where N : ExpressibleByStringLiteral {
-            let one: N = "1"
-            XCTAssert(one == 1)
-        }
-        runStringLiteralTests(WholeNumber.self)
-        runStringLiteralTests(Integer.self)
-        runStringLiteralTests(RationalNumber.self)
-
-        XCTAssert(RationalNumber(undecillion).numerator.magnitude == undecillion)
-
-        let rational: RationalNumber = "0b 0.000 1"
-        XCTAssert(rational == 1 ÷ 16)*/
     }
 
     func testComparable() {

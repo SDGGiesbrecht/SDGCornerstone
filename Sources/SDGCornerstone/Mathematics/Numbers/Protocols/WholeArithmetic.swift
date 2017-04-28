@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
 /// Returns the product of the left times the right.
 ///
@@ -93,7 +95,7 @@ infix operator ↑=: AssignmentPrecedence
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
 /// - `WholeNumberType`, `IntegerType`, `RationalNumberType` or `static func ↑= (lhs: inout Self, rhs: Self)`
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
-public protocol WholeArithmetic : ExpressibleByIntegerLiteral, NumericAdditiveArithmetic, OneDimensionalPoint, Strideable {
+public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByTextLiterals, NumericAdditiveArithmetic, OneDimensionalPoint, Strideable {
 
     // MARK: - Initialization
 
@@ -103,6 +105,16 @@ public protocol WholeArithmetic : ExpressibleByIntegerLiteral, NumericAdditiveAr
     /// - Properties:
     ///     - uInt: An instance of `UIntMax`.
     init(_ uInt: UIntMax)
+
+    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
+    ///
+    /// - Parameters:
+    ///     - representation: The string to interpret.
+    ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
+    ///     - radixCharacters: The set of characters that can mark the radix position.
+    ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
+    init(fromRepresentation representation: String, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>)
 
     // MARK: - Operations
 
@@ -342,6 +354,115 @@ extension WholeArithmetic {
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
     public init<U : UIntFamily>(_ uInt: U) {
         self.init(uInt.toUIntMax())
+    }
+
+    /// Creates an instance from a decimal representation.
+    ///
+    /// - Parameters:
+    ///     - decimal: The decimal representation.
+    public init(_ decimal: String) {
+        self.init(decimal, base: 10)
+    }
+
+    /// Creates an instance from a hexadecimal representation.
+    ///
+    /// - Parameters:
+    ///     - hexadecimal: The hexadecimal representation.
+    public init(hexadecimal: String) {
+        self.init(hexadecimal, base: 16)
+    }
+
+    /// Creates an instance from a octal representation.
+    ///
+    /// - Parameters:
+    ///     - octal: The octal representation.
+    public init(octal: String) {
+        self.init(octal, base: 8)
+    }
+
+    /// Creates an instance from a binary representation.
+    ///
+    /// - Parameters:
+    ///     - binary: The binary representation.
+    public init(binary: String) {
+        self.init(binary, base: 2)
+    }
+
+    /// Creates an instance by interpreting `representation` in a particular base.
+    ///
+    /// - Precondition: `2 ≤ base ≤ 16`, `base` ∈ Z
+    ///
+    /// - Parameters:
+    ///     - representation: The string to interpret.
+    ///     - base: The base of the number system.
+    public init(_ representation: String, base: Int) {
+        assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, "Base \(base) is not supported. The base must be an integer between 2 and 16 inclusive.")
+
+        let digits: [[UnicodeScalar]] = [
+            //    arb  pes  hi   bn   ta   my   km   th   lo
+            ["0", "٠", "۰", "०", "০", "௦", "၀", "០", "๐", "໐"],
+            ["1", "١", "۱", "१", "১", "௧", "၁", "១", "๑", "໑"],
+            ["2", "٢", "۲", "२", "২", "௨", "၂", "២", "๒", "໒"],
+            ["3", "٣", "۳", "३", "৩", "௩", "၃", "៣", "๓", "໓"],
+            ["4", "٤", "۴", "४", "৪", "௪", "၄", "៤", "๔", "໔"],
+            ["5", "٥", "۵", "५", "৫", "௫", "၅", "៥", "๕", "໕"],
+            ["6", "٦", "۶", "६", "৬", "௬", "၆", "៦", "๖", "໖"],
+            ["7", "٧", "۷", "७", "৭", "௭", "၇", "៧", "๗", "໗"],
+            ["8", "٨", "۸", "८", "৮", "௮", "၈", "៨", "๘", "໘"],
+            ["9", "٩", "۹", "९", "৯", "௯", "၉", "៩", "๙", "໙"],
+            ["A", "a"],
+            ["B", "b"],
+            ["C", "c"],
+            ["D", "d"],
+            ["E", "e"],
+            ["F", "f"]
+        ]
+
+        let selectedDigits = [[UnicodeScalar]](digits[0 ..< base])
+
+        self.init(fromRepresentation: representation, usingDigits: selectedDigits, radixCharacters: [",", ".", "٫"], formattingSeparators: [" ", "٬"])
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
+    ///
+    /// - Parameters:
+    ///     - representation: The string to interpret.
+    ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
+    ///     - radixCharacters: The set of characters that can mark the radix position.
+    public init(fromRepresentation representation: String, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+        self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+    }
+
+    fileprivate static func getBase(_ digits: [[UnicodeScalar]]) -> Self {
+        return Self(UInt(digits.count))
+    }
+
+    fileprivate static func getMapping(_ digits: [[UnicodeScalar]]) -> [UnicodeScalar: Self] {
+        var digitMapping: [UnicodeScalar: Self] = [:]
+        for index in digits.indices {
+            let characters = digits[index]
+
+            let value = Self(UInt(index))
+            for character in characters {
+                digitMapping[character] = value
+            }
+        }
+        return digitMapping
+    }
+
+    fileprivate init(whole representation: String, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) {
+
+        self = 0
+        var position: Self = 0
+        for character in representation.decomposedStringWithCompatibilityMapping.unicodeScalars.reversed() {
+            if let digit = digitMapping[character], digit < base {
+                self += (base ↑ position) × digit
+                position += 1
+            } else {
+                assert(formattingSeparators.contains(character), "\(character) is not a valid digit.")
+            }
+        }
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
@@ -926,6 +1047,52 @@ extension WholeArithmetic where Self : IntFamily {
 
 extension WholeArithmetic where Self : RationalArithmetic {
     // MARK: - where Self : RationalArithmetic
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
+    ///
+    /// - Parameters:
+    ///     - representation: The string to interpret.
+    ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
+    ///     - radixCharacters: The set of characters that can mark the radix position.
+    public init(fromRepresentation representation: String, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+        let base = Self.getBase(digits)
+        let digitMapping = Self.getMapping(digits)
+
+        let scalars = representation.decomposedStringWithCompatibilityMapping.unicodeScalars
+
+        var radixLocation: String.UnicodeScalarView.Index?
+        for index in scalars.indices {
+            if radixCharacters.contains(scalars[index]) {
+                radixLocation = index
+                break
+            }
+        }
+
+        var wholeString: String
+        var numeratorString: String
+        if let radix = radixLocation {
+            wholeString = String(scalars[scalars.startIndex ..< radix])
+            numeratorString = String(scalars[scalars.index(after: radix) ..< scalars.endIndex])
+        } else {
+            wholeString = representation
+            numeratorString = ""
+        }
+
+        func flattenToZeroes(_ value: String) -> String {
+            return String(String.UnicodeScalarView(value.unicodeScalars.map({ digitMapping[$0] ≠ nil ? "0" : $0 })))
+        }
+
+        func component(_ value: String) -> Self {
+            return Self(whole: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
+        }
+
+        let whole = component(wholeString)
+        let numerator = component(numeratorString)
+        let denominator = component("1" + flattenToZeroes(numeratorString))
+
+        self = whole + numerator ÷ denominator
+    }
 
     internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
 
