@@ -22,6 +22,7 @@
 /// - `Comparable`
 public protocol OneDimensionalPoint : Comparable, PointType, Strideable {
 
+    // [_Workaround: When it is possible to add the restriction Vector == Stride, Vector should no longer need to be specified by each conforming type. (Swift 3.1.0)_]
 }
 
 extension OneDimensionalPoint where Vector : IntegerType {
