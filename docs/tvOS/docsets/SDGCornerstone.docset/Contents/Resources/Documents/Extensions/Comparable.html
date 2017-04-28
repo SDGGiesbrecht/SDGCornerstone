@@ -60,6 +60,15 @@
                 <a href="../Extensions/Equatable.html">Equatable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByExtendedGraphemeClusterLiteral.html">ExpressibleByExtendedGraphemeClusterLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByIntegerLiteral.html">ExpressibleByIntegerLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByUnicodeScalarLiteral.html">ExpressibleByUnicodeScalarLiteral</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/FloatingPoint.html">FloatingPoint</a>
               </li>
               <li class="nav-group-task">
@@ -217,6 +226,9 @@
                 <a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
               </li>
               <li class="nav-group-task">
@@ -306,7 +318,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns <code>true</code> if the left value is ordered before or the same as the right value.</p>
-
 <div class="aside aside-recommended-over">
     <p class="aside-title">Recommended over</p>
     <p>&lt;=</p>
@@ -372,7 +383,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns <code>true</code> if the left value is ordered after or the same as the right value.</p>
-
 <div class="aside aside-recommended-over">
     <p class="aside-title">Recommended over</p>
     <p>&gt;=</p>
@@ -442,7 +452,6 @@
 <p>This is accomplished by changing <code>self</code> to match the value of <code>minimum</code> if and only if <code>self</code> does not already satisfy <code>self ≥ minimum</code>.</p>
 
 <p>For example:</p>
-
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">numberOfRolls</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">var</span> <span class="nv">highestRoll</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span> <span class="o">...</span> <span class="n">numberOfRolls</span> <span class="p">{</span>
@@ -453,7 +462,6 @@
 
 <span class="c1">// In this example, rollDie() represents a function that randomly returns an Int between 1 and 6 inclusive. In each iteration of the for loop, a new random number is generated, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.</span>
 </code></pre>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>max</p>
@@ -510,7 +518,6 @@
 <p>This is accomplished by changing <code>self</code> to match the value of <code>maximum</code> if and only if <code>self</code> does not already satisfy <code>self ≤ maximum</code>.</p>
 
 <p>For example:</p>
-
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">numberOfRolls</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">var</span> <span class="nv">lowestRoll</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span> <span class="o">...</span> <span class="n">numberOfRolls</span> <span class="p">{</span>
@@ -521,7 +528,6 @@
 
 <span class="c1">// In this example, rollDie() represents a function that randomly returns an Int between 1 and 6 inclusive. In each iteration of the for loop, a new random number is generated, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.</span>
 </code></pre>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>min</p>
@@ -585,7 +591,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns <code>true</code> if <code>lhs</code> is within the range described by <code>rhs</code>.</p>
-
 <pre class="highlight swift"><code><span class="k">if</span> <span class="mi">1</span> <span class="o">÷</span> <span class="mi">3</span> <span class="o">≈</span> <span class="mf">0.33333</span> <span class="o">±</span> <span class="mf">0.00001</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"It is accurate to at least four digits."</span><span class="p">)</span>
 <span class="p">}</span>
@@ -713,7 +718,7 @@
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -430,6 +430,7 @@ extension WholeArithmetic {
     ///     - representation: The string to interpret.
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
+    ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
     public init(fromRepresentation representation: String, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
         self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
     }
@@ -1055,6 +1056,7 @@ extension WholeArithmetic where Self : RationalArithmetic {
     ///     - representation: The string to interpret.
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
+    ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
     public init(fromRepresentation representation: String, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
         let base = Self.getBase(digits)
         let digitMapping = Self.getMapping(digits)

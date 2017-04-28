@@ -18,7 +18,7 @@
 /// ```swift
 /// let third: RationalNumber = 1 ÷ 3
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
-/// let half: RationalNumber = "0b 0.1"
+/// let half = RationalNumber(binary: "0.1")
 /// ```
 public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, IntegralArithmetic, Negatable, PointType, RationalArithmetic, RationalNumberType, Subtractable, WholeArithmetic {
 

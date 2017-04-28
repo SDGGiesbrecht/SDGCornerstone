@@ -60,6 +60,15 @@
                 <a href="../Extensions/Equatable.html">Equatable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByExtendedGraphemeClusterLiteral.html">ExpressibleByExtendedGraphemeClusterLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByIntegerLiteral.html">ExpressibleByIntegerLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByUnicodeScalarLiteral.html">ExpressibleByUnicodeScalarLiteral</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/FloatingPoint.html">FloatingPoint</a>
               </li>
               <li class="nav-group-task">
@@ -217,6 +226,9 @@
                 <a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
               </li>
               <li class="nav-group-task">
@@ -283,7 +295,6 @@
             <p>A type that represents a measurement that can be expressed in various units.</p>
 
 <p>See <code><a href="../Structs/Angle.html">Angle</a></code> for an example.</p>
-
 <div class="aside aside-requires">
     <p class="aside-title">Requires</p>
     A <code>Measurement</code>’s units must be definable as ratios of one another. (For example, <code>Measurement</code> can describe angles as radians, degrees and gradians, but not temperature as Kelvins, Celsius and Fahrenheit.)
@@ -505,7 +516,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the result of multipling the measurement by the scalar.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>×=</p>
@@ -516,15 +526,12 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Returns the result of multipling the measurement by the scalar.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>×=</p>
 
 </div>
-
 <p>Returns the result of multipling the measurement by the scalar.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>×=</p>
@@ -593,7 +600,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Modifies the measurement by multiplication with a scalar.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>×</p>
@@ -604,7 +610,6 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Modifies the measurement by multiplication with a scalar.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>×</p>
@@ -673,7 +678,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the (rational) quotient of a measurement divided by a scalar.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>×</p>
@@ -684,13 +688,11 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Returns the (rational) quotient of a measurement divided by a scalar.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>×</p>
 
 </div>
-
 <p>Returns the (rational) scalar quotient of the left divided by the right.</p>
 
                       </div>
@@ -815,7 +817,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Modifies the left by dividing it by the right.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>÷</p>
@@ -826,7 +827,6 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Modifies the left by dividing it by the right.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>÷</p>
@@ -895,13 +895,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the integral quotient of <code>self</code> divided by <code>divisor</code>.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, <em>not</em> −1 remainder −2</p>
 
 </div>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>divideAccordingToEuclid</p>
@@ -912,13 +910,11 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Returns the integral quotient of <code>self</code> divided by <code>divisor</code>.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, <em>not</em> −1 remainder −2</p>
 
 </div>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>divideAccordingToEuclid</p>
@@ -974,13 +970,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the Euclidean remainder of <code>self</code> ÷ <code>divisor</code>.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, <em>not</em> −2</p>
 
 </div>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>formRemainder</p>
@@ -991,13 +985,11 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Returns the Euclidean remainder of <code>self</code> ÷ <code>divisor</code>.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, <em>not</em> −2</p>
 
 </div>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>formRemainder</p>
@@ -1053,13 +1045,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Sets <code>self</code> to the Euclidean remainder of <code>self</code> ÷ <code>divisor</code>.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, <em>not</em> −2</p>
 
 </div>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>mod</p>
@@ -1070,13 +1060,11 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Sets <code>self</code> to the Euclidean remainder of <code>self</code> ÷ <code>divisor</code>.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, <em>not</em> −2</p>
 
 </div>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>mod</p>
@@ -1167,7 +1155,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the greatest common divisor of <code>a</code> and <code>b</code>.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>formGreatestCommonDivisor</p>
@@ -1178,7 +1165,6 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Returns the greatest common divisor of <code>a</code> and <code>b</code>.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>formGreatestCommonDivisor</p>
@@ -1247,7 +1233,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Sets <code>self</code> to the greatest common divisor of <code>self</code> and <code>other</code>.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>gcd</p>
@@ -1258,7 +1243,6 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Sets <code>self</code> to the greatest common divisor of <code>self</code> and <code>other</code>.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>gcd</p>
@@ -1314,7 +1298,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the least common multiple of <code>a</code> and <code>b</code>.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>formGreatestCommonDivisor</p>
@@ -1325,7 +1308,6 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Returns the least common multiple of <code>a</code> and <code>b</code>.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>formGreatestCommonDivisor</p>
@@ -1394,7 +1376,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Sets <code>self</code> to the least common multiple of <code>self</code> and <code>other</code>.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>lcm</p>
@@ -1405,7 +1386,6 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Sets <code>self</code> to the least common multiple of <code>self</code> and <code>other</code>.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>lcm</p>
@@ -1472,7 +1452,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Rounds the value to a multiple of <code>factor</code> using the specified rounding rule.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>rounded</p>
@@ -1483,7 +1462,6 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Rounds the value to a multiple of <code>factor</code> using the specified rounding rule.</p>
-
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
     <p>rounded</p>
@@ -1552,7 +1530,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the value rounded to a multiple of <code>factor</code> using the specified rounding rule.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>round</p>
@@ -1563,7 +1540,6 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Returns the value rounded to a multiple of <code>factor</code> using the specified rounding rule.</p>
-
 <div class="aside aside-mutating-variant">
     <p class="aside-title">Mutating variant</p>
     <p>round</p>
@@ -1643,7 +1619,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Creates a random value within a particular range.</p>
-
 <div class="aside aside-precondition">
     <p class="aside-title">Precondition</p>
     <p><code>range</code> is not empty.</p>
@@ -1654,15 +1629,12 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Creates a random value within a particular range.</p>
-
 <div class="aside aside-precondition">
     <p class="aside-title">Precondition</p>
     <p><code>range</code> is not empty.</p>
 
 </div>
-
 <p>Creates a random value within a particular range.</p>
-
 <div class="aside aside-precondition">
     <p class="aside-title">Precondition</p>
     <p><code>range</code> is not empty.</p>
@@ -1715,7 +1687,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Creates a random value within a particular range.</p>
-
 <div class="aside aside-precondition">
     <p class="aside-title">Precondition</p>
     <p><code>range</code> is not empty.</p>
@@ -1771,7 +1742,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Creates a random value within a particular range using the specified randomizer.</p>
-
 <div class="aside aside-precondition">
     <p class="aside-title">Precondition</p>
     <p><code>range</code> is not empty.</p>
@@ -1782,15 +1752,12 @@
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
                         <p>Creates a random value within a particular range using the specified randomizer.</p>
-
 <div class="aside aside-precondition">
     <p class="aside-title">Precondition</p>
     <p><code>range</code> is not empty.</p>
 
 </div>
-
 <p>Creates a random value within a particular range using the specified randomizer.</p>
-
 <div class="aside aside-precondition">
     <p class="aside-title">Precondition</p>
     <p><code>range</code> is not empty.</p>
@@ -1856,7 +1823,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Creates a random value within a particular range using the specified randomizer.</p>
-
 <div class="aside aside-precondition">
     <p class="aside-title">Precondition</p>
     <p><code>range</code> is not empty.</p>
@@ -1914,7 +1880,7 @@
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
