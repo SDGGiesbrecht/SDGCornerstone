@@ -11,3 +11,13 @@
  Licensed under the Apache Licence, Version 2.0.
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
+
+extension ExpressibleByExtendedGraphemeClusterLiteral where Self : ExpressibleByTextLiterals {
+    // MARK: - where Self : ExpressibleByTextLiterals
+
+    // [_Define Documentation: SDGCornerstone.ExpressibleByExtendedGraphemeClusterLiteral.init(extendedGraphemeClusterLiteral:)_]
+    /// Creates an instance from an extended grapheme cluster literal.
+    public init(extendedGraphemeClusterLiteral: String) {
+        self.init(stringLiteral: extendedGraphemeClusterLiteral)
+    }
+}
