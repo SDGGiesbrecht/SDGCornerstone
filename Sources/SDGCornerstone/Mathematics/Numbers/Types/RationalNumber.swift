@@ -143,9 +143,6 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
 
     // MARK: - ExpressibleByFloatLiteral
 
-    /// The float literal type.
-    public typealias FloatLiteralType = FloatMax
-
     internal init(floatingPointLiteral value: FloatMax) {
         var numerator = value
         var denominator: FloatMax = 1
@@ -157,7 +154,7 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
     }
 
     /// Creates an instance from a float literal.
-    public init(floatLiteral value: FloatLiteralType) {
+    public init(floatLiteral value: FloatMax) {
         self.init(floatingPointLiteral: value)
     }
 
