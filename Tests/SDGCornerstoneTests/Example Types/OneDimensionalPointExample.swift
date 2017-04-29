@@ -47,8 +47,4 @@ struct OneDimensionalPointExample : OneDimensionalPoint {
     static func − (lhs: OneDimensionalPointExample, rhs: OneDimensionalPointExample) -> Vector {
         return lhs.value − rhs.value
     }
-
-    // Strideable
-
-    typealias Stride = Vector
 }

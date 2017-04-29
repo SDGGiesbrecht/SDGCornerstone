@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Strideable where Self : OneDimensionalPoint, Self.Stride == Self.Vector {
-    // MARK: - where Self : OneDimensionalPoint, Stride == Vector
+extension Strideable where Self : OneDimensionalPoint {
+    // MARK: - where Self : OneDimensionalPoint
 
     /// Returns the value that follows `self` by a distance of `n`.
     ///
@@ -21,7 +21,7 @@ extension Strideable where Self : OneDimensionalPoint, Self.Stride == Self.Vecto
     ///     - n: The distance to advance.
     ///
     /// - Recommended: +
-    public func advanced(by n: Stride) -> Self {
+    public func advanced(by n: Vector) -> Self {
         return self + n
     }
 
@@ -31,7 +31,7 @@ extension Strideable where Self : OneDimensionalPoint, Self.Stride == Self.Vecto
     ///     - other: The value to which the distance should be measured.
     ///
     /// - Recommended: −
-    public func distance(to other: Self) -> Stride {
+    public func distance(to other: Self) -> Vector {
         return other − self
     }
 }

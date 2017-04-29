@@ -59,6 +59,15 @@
                 <a href="Extensions/Equatable.html">Equatable</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/ExpressibleByExtendedGraphemeClusterLiteral.html">ExpressibleByExtendedGraphemeClusterLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/ExpressibleByIntegerLiteral.html">ExpressibleByIntegerLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/ExpressibleByUnicodeScalarLiteral.html">ExpressibleByUnicodeScalarLiteral</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/FloatingPoint.html">FloatingPoint</a>
               </li>
               <li class="nav-group-task">
@@ -216,6 +225,9 @@
                 <a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
               </li>
               <li class="nav-group-task">
@@ -299,13 +311,11 @@
 <p>For every SDG class that conforms to <code>Randomizer</code>, two independent instances that have been initialized the same way will return the same sequence of values.</p>
 
 <p>For example, in a networked game, as long as each device initializes their instance of the <code>Randomizer</code> the same, each device can safely rely on its local instance to return the same values as are being returned on the other devices with no risk of the game states diverging.</p>
-
 <div class="aside aside-warning">
     <p class="aside-title">Warning</p>
     <p>The above guarantee of deterministic behaviour does not apply between differing module versions.</p>
 
 </div>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>Nothing in SDG relies on the above guarantee. If you make your own conforming class and do not need or want it to be deterministic, you can safely conform to <code>Randomizer</code> and use its interface anyway.</p>
@@ -338,6 +348,46 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:P14SDGCornerstone25ExpressibleByTextLiterals"></a>
+                    <a name="//apple_ref/swift/Protocol/ExpressibleByTextLiterals" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone25ExpressibleByTextLiterals">ExpressibleByTextLiterals</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that can be represented by a string literal.</p>
+
+<p><code>ExpressibleByTextLiterals</code> is intended to reduce boilerplate code when conforming to <code>ExpressibleByStringLiteral</code> by providing default implementations for the scalar and cluster literals.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code>init(stringLiteral: String)</code></li>
+</ul>
+
+                        <a href="Protocols/ExpressibleByTextLiterals.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ExpressibleByTextLiterals</span> <span class="p">:</span> <span class="kt">ExpressibleByStringLiteral</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:P14SDGCornerstone11Measurement"></a>
                     <a name="//apple_ref/swift/Protocol/Measurement" class="dashAnchor"></a>
                     <a class="token" href="#/s:P14SDGCornerstone11Measurement">Measurement</a>
@@ -351,7 +401,6 @@
                         <p>A type that represents a measurement that can be expressed in various units.</p>
 
 <p>See <code><a href="Structs/Angle.html">Angle</a></code> for an example.</p>
-
 <div class="aside aside-requires">
     <p class="aside-title">Requires</p>
     A <code>Measurement</code>’s units must be definable as ratios of one another. (For example, <code>Measurement</code> can describe angles as radians, degrees and gradians, but not temperature as Kelvins, Celsius and Fahrenheit.)
@@ -396,7 +445,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A <code>Comparable</code> type that can be used with <code>+(_:_:)</code> and <code>−(_:_:)</code> in conjunction with an associated <code>Vector</code> type.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     For multi‐dimensional points, see <code><a href="Protocols/PointType.html">PointType</a></code>.
@@ -480,7 +528,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A type that can be used with <code>+(_:_:)</code> and <code>−(_:_:)</code> in conjunction with an associated <code>Vector</code> type.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     Unlike <code>Strideable</code>, <code>PointType</code>s do not need to conform to <code>Comparable</code>, allowing conformance by two‐dimensional points, etc.
@@ -606,7 +653,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A value that can be added and subtracted.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     Unlike <code>SignedNumber</code>, <code>AdditiveArithmetic</code> types do not need to conform to <code>Comparable</code>, allowing conformance by two‐dimensional vectors, etc. For additional behaviour specific to one‐dimensional types, see     <code><a href="Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a></code>.
@@ -618,7 +664,7 @@
 <ul>
 <li><code>Equatable</code></li>
 <li><code>Subtractable</code></li>
-<li><code>ExpressibleByIntegerLiteral</code> or <code>static var additiveIdentity: Self { get }</code></li>
+<li><code><a href="Protocols/IntegralArithmetic.html">IntegralArithmetic</a></code>, <code>WholeNumberType</code>, <code>ExpressibleByIntegerLiteral</code> or <code>static var additiveIdentity: Self { get }</code></li>
 </ul>
 
                         <a href="Protocols/AdditiveArithmetic.html" class="slightly-smaller">See more</a>
@@ -729,7 +775,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A type that can be additively inverted.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     Unlike <code>SignedNumber</code>, <code>Negatable</code> types do not need to conform to <code>Comparable</code>, allowing conformance by two‐dimensional vectors, etc.
@@ -773,7 +818,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>A one‐dimensional value that can be added and subtracted.</p>
-
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     Unlike <code>WholeArithmetic</code>, <code>NumericAdditiveArithmetic</code> does not need a defined scale, allowing conformance by measurements that can use multiple units.
@@ -927,7 +971,7 @@
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

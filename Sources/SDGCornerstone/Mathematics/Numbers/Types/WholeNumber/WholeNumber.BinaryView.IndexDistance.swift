@@ -61,9 +61,7 @@ extension WholeNumber.BinaryView {
 
         // MARK: - ExpressibleByIntegerLiteral
 
-        internal typealias IntegerLiteralType = UIntMax
-
-        init(integerLiteral: IntegerLiteralType) {
+        init(integerLiteral: UIntMax) {
             let bitsPerDigit = BinaryView<WholeNumber.Digit>.count
 
             let digits = DigitDistance(BitDistance(integerLiteral).dividedAccordingToEuclid(by: bitsPerDigit))

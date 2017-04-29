@@ -66,9 +66,5 @@ extension WholeNumber.BinaryView {
             }
             return IndexDistance(digitDistance: digitDistance, bitDistance: bitDistance)
         }
-
-        // MARK: - Strideable
-
-        internal typealias Stride = Vector
     }
 }

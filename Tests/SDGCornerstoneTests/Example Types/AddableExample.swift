@@ -57,9 +57,7 @@ struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, Signed
 
     // ExpressibleByIntegerLiteral
 
-    typealias IntegerLiteralType = Int
-
-    init(integerLiteral: IntegerLiteralType) {
+    init(integerLiteral: Int) {
         self = AddableExampleWhereStrideableAndStrideIsSelf(integerLiteral)
     }
 
@@ -71,13 +69,11 @@ struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, Signed
 
     // Strideable
 
-    typealias Stride = AddableExampleWhereStrideableAndStrideIsSelf
-
-    func advanced(by n: Stride) -> AddableExampleWhereStrideableAndStrideIsSelf {
+    func advanced(by n: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf {
         return AddableExampleWhereStrideableAndStrideIsSelf(value.advanced(by: n.value))
     }
 
-    func distance(to other: AddableExampleWhereStrideableAndStrideIsSelf) -> Stride {
+    func distance(to other: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf {
         return AddableExampleWhereStrideableAndStrideIsSelf(value.distance(to: other.value))
     }
 }

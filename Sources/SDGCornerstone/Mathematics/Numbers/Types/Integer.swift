@@ -18,9 +18,9 @@
 /// ```swift
 /// let million: WholeNumber = 1_000_000
 /// let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
-/// let yobiMultiplier: WholeNumber = "0b 1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
+/// let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
 /// ```
-public struct Integer : Addable, Comparable, Equatable, ExpressibleByExtendedGraphemeClusterLiteral, ExpressibleByIntegerLiteral, ExpressibleByStringLiteral, ExpressibleByUnicodeScalarLiteral, IntegerType, IntegralArithmetic, Negatable, PointType, Subtractable, WholeArithmetic {
+public struct Integer : Addable, Comparable, Equatable, IntegerType, IntegralArithmetic, Negatable, PointType, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -136,46 +136,6 @@ public struct Integer : Addable, Comparable, Equatable, ExpressibleByExtendedGra
     ///     - rhs: Another value to compare.
     public static func == (lhs: Integer, rhs: Integer) -> Bool {
         return (lhs.isNegative, lhs.magnitude) == (rhs.isNegative, rhs.magnitude)
-    }
-
-    // MARK: - ExpressibleByExtendedGraphemeClusterLiteral
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(extendedGraphemeClusterLiteral:)_]
-    /// Creates an instance from an extended grapheme cluster literal.
-    public init(extendedGraphemeClusterLiteral value: StringLiteralType) { // [_Exempt from Code Coverage_] Apparently unreachable.
-        self.init(textLiteral: value)
-    }
-
-    // MARK: - ExpressibleByIntegerLiteral
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.IntegerLiteralType_]
-    /// The integer literal type.
-    public typealias IntegerLiteralType = IntMax
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(integerLiteral:)_]
-    /// Creates an instance from an integer literal.
-    public init(integerLiteral: IntegerLiteralType) {
-        self.init(integerLiteral)
-    }
-
-    // MARK: - ExpressibleByStringLiteral
-
-    internal init(textLiteral value: String) {
-        self.init(WholeNumber(textLiteral: value))
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(stringLiteral:)_]
-    /// Creates an instance from a string literal.
-    public init(stringLiteral value: StringLiteralType) {
-        self.init(textLiteral: value)
-    }
-
-    // MARK: - ExpressibleByUnicodeScalarLiteral
-
-    // [_Inherit Documentation: SDGCornerstone.WholeNumber.init(unicodeScalarLiteral:)_]
-    /// Creates an instance from a unicode scalar literal.
-    public init(unicodeScalarLiteral value: StringLiteralType) { // [_Exempt from Code Coverage_] Apparently unreachable.
-        self.init(textLiteral: value)
     }
 
     // MARK: - IntegralArithmetic

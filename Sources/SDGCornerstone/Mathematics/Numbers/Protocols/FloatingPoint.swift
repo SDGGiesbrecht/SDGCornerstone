@@ -13,14 +13,12 @@
  */
 
 extension FloatingPoint {
-    // Disambiguate FloatingPoint.rounded(_:) vs WholeArithmetic.rounded(_:)
     fileprivate func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
         return rounded(rule)
     }
 }
 extension FloatingPoint where Self : WholeArithmetic {
     // MARK: - where Self : WholeArithmetic
-
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
     /// Returns the value rounded to an integral value using the specified rounding rule.
     ///
