@@ -115,6 +115,9 @@ class MathematicsTests : XCTestCase {
 
         let anotherValue: WholeNumber = "18 446 744 073 709 551 616"
         XCTAssert(anotherValue.dividedAccordingToEuclid(by: 1) == anotherValue)
+
+        XCTAssert(RationalNumber(undecillion).numerator == Integer(undecillion))
+        XCTAssert(RationalNumber(50) == 50)
     }
 
     func testComparable() {
@@ -322,6 +325,8 @@ class MathematicsTests : XCTestCase {
             for _ in 1 ..< 100 {let random = N(randomInRange: 0 ..< 1)
                 XCTAssert((0 ..< 1).contains(random))
             }
+
+            XCTAssert(N(binary: "0.0001") == 1 ÷ 16)
         }
         runTests(Double.self)
         #if os(macOS) || os(Linux)

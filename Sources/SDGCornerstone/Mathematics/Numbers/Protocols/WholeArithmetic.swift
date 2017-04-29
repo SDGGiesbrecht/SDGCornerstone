@@ -1071,8 +1071,8 @@ extension WholeArithmetic where Self : RationalArithmetic {
             }
         }
 
-        var wholeString: String
-        var numeratorString: String
+        let wholeString: String
+        let numeratorString: String
         if let radix = radixLocation {
             wholeString = String(scalars[scalars.startIndex ..< radix])
             numeratorString = String(scalars[scalars.index(after: radix) ..< scalars.endIndex])
