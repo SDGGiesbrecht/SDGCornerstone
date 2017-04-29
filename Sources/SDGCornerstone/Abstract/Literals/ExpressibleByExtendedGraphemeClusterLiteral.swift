@@ -17,7 +17,7 @@ extension ExpressibleByExtendedGraphemeClusterLiteral where Self : ExpressibleBy
 
     // [_Define Documentation: SDGCornerstone.ExpressibleByExtendedGraphemeClusterLiteral.init(extendedGraphemeClusterLiteral:)_]
     /// Creates an instance from an extended grapheme cluster literal.
-    public init(extendedGraphemeClusterLiteral: String) {
+    public init(extendedGraphemeClusterLiteral: String) { // [_Exempt from Code Coverage_] (Apparently unreachable.)
         self.init(stringLiteral: extendedGraphemeClusterLiteral)
     }
 }

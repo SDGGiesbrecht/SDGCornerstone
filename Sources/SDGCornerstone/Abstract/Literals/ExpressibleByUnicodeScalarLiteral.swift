@@ -17,7 +17,7 @@ extension ExpressibleByUnicodeScalarLiteral where Self : ExpressibleByTextLitera
 
     // [_Define Documentation: SDGCornerstone.ExpressibleByUnicodeScalarLiteral.init(unicodeScalarLiteral:)_]
     /// Creates an instance from a Unicode scalar literal.
-    public init(unicodeScalarLiteral: String) {
+    public init(unicodeScalarLiteral: String) { // [_Exempt from Code Coverage_] (Apparently unreachable.)
         self.init(stringLiteral: unicodeScalarLiteral)
     }
 }

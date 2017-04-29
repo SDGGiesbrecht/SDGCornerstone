@@ -206,16 +206,6 @@ class MathematicsTests : XCTestCase {
             }
 
             XCTAssert(minusTwo < minusOne)
-
-            // Previous Bugs
-
-            var x: N = 0
-            x −= 1
-            XCTAssert(x == −1)
-            XCTAssert(x − 1 == −2)
-            x += 1
-            XCTAssert(x == 0)
-            XCTAssert(x + 1 == 1)
         }
         runTests(Int.self)
         runTests(Int64.self)
@@ -341,10 +331,6 @@ class MathematicsTests : XCTestCase {
         runTests(RationalNumber.self)
         runTests(RationalNumberTypeExample.self)
         runTests(RealArithmeticExample.self)
-
-        // Previous Bugs
-
-        _ = Double(1) ÷ Double(1)
     }
 
     func testRealArithmetic() {
@@ -429,29 +415,6 @@ class MathematicsTests : XCTestCase {
         runTests(minuend: SubtractableExampleWherePointTypeAndVectorIsSelf(3), subtrahend: SubtractableExampleWherePointTypeAndVectorIsSelf(2), difference: SubtractableExampleWherePointTypeAndVectorIsSelf(1))
         runTests(minuend: RationalNumberTypeExample(3), subtrahend: RationalNumberTypeExample(2), difference: RationalNumberTypeExample(1))
         runTests(minuend: RealArithmeticExample(3), subtrahend: RealArithmeticExample(2), difference: RealArithmeticExample(1))
-
-        // Previous Bugs
-
-        // “ambiguous use of operator”
-        let _: UInt = 3 − 2
-        let _: UInt64 = 3 − 2
-        let _: UInt32 = 3 − 2
-        let _: UInt16 = 3 − 2
-        let _: UInt8 = 3 − 2
-        let _: Int = 3 − 2
-        let _: Int64 = 3 − 2
-        let _: Int32 = 3 − 2
-        let _: Int16 = 3 − 2
-        let _: Int8 = 3 − 2
-        let _: Double = 3 − 2
-        #if os(macOS) || os(Linux)
-        let _: Float80 = 3 − 2
-        #endif
-        let _: Float = 3 − 2
-        let _: WholeNumber = 3 − 2
-        let _: Integer = 3 − 2
-        let _: RationalNumberTypeExample = RationalNumberTypeExample(3) − RationalNumberTypeExample(2)
-        let _: RealArithmeticExample = RealArithmeticExample(3) − RealArithmeticExample(2)
     }
 
     func testTuple() {
@@ -559,10 +522,12 @@ class MathematicsTests : XCTestCase {
             let uInt8: UInt8 = 94
             XCTAssert(N(uInt8) == 94)
 
-            // Previous Bugs
+            // [_Workaround: This should be “as N”, but that causes a segmentation fault. (Swift 3.1.0)_]
+            XCTAssert("1" as WholeNumber == 1)
 
-            let five: N = 10 − 5
-            XCTAssert(five == 5)
+            XCTAssert(N(hexadecimal: "7F") == 127)
+            XCTAssert(N(octal: "10") == 8)
+            XCTAssert(N(binary: "10000") == 16)
         }
         runTests(UInt.self)
         runTests(UInt64.self)
