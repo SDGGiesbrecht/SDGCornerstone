@@ -326,7 +326,7 @@ class MathematicsTests : XCTestCase {
                 XCTAssert((0 ..< 1).contains(random))
             }
 
-            XCTAssert(N(binary: "0.0001") == 1 ÷ 16)
+            XCTAssert(N(binary: "0.000 1") == 1 ÷ 16)
         }
         runTests(Double.self)
         #if os(macOS) || os(Linux)
@@ -533,6 +533,10 @@ class MathematicsTests : XCTestCase {
             XCTAssert(N(hexadecimal: "7F") == 127)
             XCTAssert(N(octal: "10") == 8)
             XCTAssert(N(binary: "10000") == 16)
+
+            if N.self ≠ Int8.self ∧ N.self ≠ UInt8.self {
+                XCTAssert(N("10 000") == 10_000)
+            }
         }
         runTests(UInt.self)
         runTests(UInt64.self)
