@@ -50,6 +50,7 @@ infix operator ∌: ComparisonPrecedence
 ///     - `static func ∋ (lhs: Element, rhs: Self) -> Bool`
 public protocol SetDefinition {
 
+    // [_Define Documentation: SDGCornerstone.SetDefinition.Element_]
     /// The element type.
     associatedtype Element
 
