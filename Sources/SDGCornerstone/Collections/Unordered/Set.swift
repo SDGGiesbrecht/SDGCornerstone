@@ -1,5 +1,5 @@
 /*
- ClosedRange.swift
+ Set.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,11 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension ClosedRange : SetDefinition {
+extension Set : SetDefinition {
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
-    /// The element type.
-    public typealias Element = Bound
+    // MARK: - SetDefinition
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∋_]
     /// Returns `true` if `lhs` contains `rhs`.
@@ -24,7 +22,7 @@ extension ClosedRange : SetDefinition {
     /// - Parameters:
     ///     - lhs: The set.
     ///     - rhs: The element to test.
-    public static func ∋ (lhs: ClosedRange, rhs: Element) -> Bool {
+    public static func ∋ (lhs: Set, rhs: Element) -> Bool {
         return lhs.contains(rhs)
     }
 }
