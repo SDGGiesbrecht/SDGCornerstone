@@ -19,7 +19,7 @@
 private func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, within bounds: CountableClosedRange<I>?, inFunction function: (I) -> O, isCloser: (O, O) -> Bool) -> I where I.Vector : IntegerType {
     var location = location
 
-    assert(bounds == nil ∨ bounds!.contains(location), "Location (\(location)) out of bounds (\(String(describing: bounds))).")
+    assert(bounds == nil ∨ bounds! ∋ location, "Location (\(location)) out of bounds (\(String(describing: bounds))).")
 
     while location ≠ bounds?.upperBound ∧ isCloser(function(location.successor()), function(location)) {
         location = location.successor()
@@ -41,12 +41,12 @@ private func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, with
 ///     - `location` is at a local minimum. For example:
 ///       ```swift
 ///       // This is undefined:
-///       _ = findLocalMaximum(near: 0) { (−10 ..< 10).contains($0) ? $0 ↑ 2 : −($0 ↑ 2) }
+///       _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..< 10 ? $0 ↑ 2 : −($0 ↑ 2) }
 ///       ```
 ///     - two or more adjascent inputs share the maximum output. For example:
 ///       ```swift
 ///       // This is undefined:
-///       _ = findLocalMaximum(near: 0) { (−10 ..< 10).contains($0) ? 1 : −(|$0|) }
+///       _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..< 10 ? 1 : −(|$0|) }
 ///       ```
 ///
 /// - Precondition: If `bounds ≠ nil`, a local maximum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:
@@ -99,12 +99,12 @@ public func findLocalMaximum<I : OneDimensionalPoint, O : Comparable>(near locat
 ///     - `location` is at a local maximum. For example:
 ///       ```swift
 ///       // This is undefined:
-///       _ = findLocalMinimum(near: 0) { (−10 ..< 10).contains($0) ? −($0 ↑ 2) : $0 ↑ 2 }
+///       _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..< 10 ? −($0 ↑ 2) : $0 ↑ 2 }
 ///       ```
 ///     - two or more adjascent inputs share the minimum output. For example:
 ///       ```swift
 ///       // This is undefined:
-///       _ = findLocalMinimum(near: 0) { (−10 ..< 10).contains($0) ? −1 : |$0| }
+///       _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..< 10 ? −1 : |$0| }
 ///       ```
 ///
 /// - Precondition: If `bounds ≠ nil`, a local minimum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:

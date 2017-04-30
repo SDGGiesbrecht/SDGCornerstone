@@ -470,7 +470,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - sine: The sine.
     public static func arcsin(_ sine: Self) -> Angle<Self> {
-        assert((−1 ... 1).contains(sine), "There is no arcsine angle for any number x, where |x| > 1. In this case, the number \(sine).")
+        assert(sine ∈ −1 ... 1, "There is no arcsine angle for any number x, where |x| > 1. In this case, the number \(sine).")
         return arctan(sine ÷ √(1 − sine ↑ 2))
     }
 
@@ -484,7 +484,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - cosine: The cosine.
     public static func arccos(_ cosine: Self) -> Angle<Self> {
-        assert((−1 ... 1).contains(cosine), "There is no arccosine angle for any number x, where |x| > 1. In this case, the number \(cosine).")
+        assert(cosine ∈ −1 ... 1, "There is no arccosine angle for any number x, where |x| > 1. In this case, the number \(cosine).")
         return (π ÷ 2).rad − arcsin(cosine)
     }
 
@@ -498,7 +498,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - cosecant: The cosecant.
     public static func arccsc(_ cosecant: Self) -> Angle<Self> {
-        assert(¬(−1 ... 1).contains(cosecant), "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(cosecant).")
+        assert(cosecant ∉ −1 ... 1, "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(cosecant).")
         return arcsin(1 ÷ cosecant)
     }
 
@@ -512,7 +512,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - secant: The secant.
     public static func arcsec(_ secant: Self) -> Angle<Self> {
-        assert(¬(−1 ... 1).contains(secant), "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(secant).")
+        assert(secant ∉ −1 ... 1, "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(secant).")
         return arccos(1 ÷ secant)
     }
 
@@ -903,7 +903,7 @@ extension RealArithmetic where Self : FloatFamily {
     ///     - angle: The angle.
     public static func sin(_ angle: Angle<Self>) -> Self {
 
-        if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
+        if angle ∉ additiveIdentity.rad ..< τ.rad {
             // Use periodic reference angle.
             return sin(angle.mod(τ.rad))
         } else if angle > π.rad {
@@ -963,7 +963,7 @@ extension RealArithmetic where Self : FloatFamily {
     ///     - angle: The angle.
     public static func cos(_ angle: Angle<Self>) -> Self {
 
-        if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
+        if angle ∉ additiveIdentity.rad ..< τ.rad {
             // Use periodic reference angle.
             return cos(angle.mod(τ.rad))
         } else if angle > π.rad {
