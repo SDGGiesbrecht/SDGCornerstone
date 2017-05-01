@@ -81,6 +81,13 @@ infix operator ∪: BinarySetOperationPrecedence
 ///     - rhs: Another set.
 infix operator ∪=: AssignmentPrecedence
 
+// [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′=_]
+/// Sets the operand to its absolute complement.
+///
+/// - Parameters:
+///     - operand: The set.
+postfix operator ′=
+
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
 /// Returns the relative complement of `rhs` in `lhs`.
 ///

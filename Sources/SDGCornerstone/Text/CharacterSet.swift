@@ -1,5 +1,5 @@
 /*
- Set.swift
+ CharacterSet.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,7 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Set : FiniteSet, MutableSet, SetDefinition {
+import Foundation
+
+extension CharacterSet : MutableSet, RepresentableUniverse, SetDefinition {
 
     // MARK: - SetDefinition
 
@@ -22,7 +24,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: The set.
     ///     - rhs: The element to test.
-    public static func ∋ (lhs: Set, rhs: Element) -> Bool {
+    public static func ∋ (lhs: CharacterSet, rhs: Element) -> Bool {
         return lhs.contains(rhs)
     }
 
@@ -34,7 +36,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
-    public static func ∩ (lhs: Set, rhs: Set) -> Set {
+    public static func ∩ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
         return lhs.union(rhs)
     }
 
@@ -44,7 +46,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
-    public static func ∩= (lhs: inout Set, rhs: Set) {
+    public static func ∩= (lhs: inout CharacterSet, rhs: CharacterSet) {
         lhs.formUnion(rhs)
     }
 
@@ -54,7 +56,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
-    public static func ∪ (lhs: Set, rhs: Set) -> Set {
+    public static func ∪ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
         return lhs.intersection(rhs)
     }
 
@@ -64,7 +66,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
-    public static func ∪= (lhs: inout Set, rhs: Set) {
+    public static func ∪= (lhs: inout CharacterSet, rhs: CharacterSet) {
         return lhs.formIntersection(rhs)
     }
 
@@ -74,7 +76,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
-    public static func ∖ (lhs: Set, rhs: Set) -> Set {
+    public static func ∖ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
         return lhs.subtracting(rhs)
     }
 
@@ -84,7 +86,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
-    public static func ∖= (lhs: inout Set, rhs: Set) {
+    public static func ∖= (lhs: inout CharacterSet, rhs: CharacterSet) {
         lhs.subtract(rhs)
     }
 
@@ -94,7 +96,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
-    public static func ∆ (lhs: Set, rhs: Set) -> Set {
+    public static func ∆ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
         return lhs.symmetricDifference(rhs)
     }
 
@@ -104,7 +106,29 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
-    public static func ∆= (lhs: inout Set, rhs: Set) {
+    public static func ∆= (lhs: inout CharacterSet, rhs: CharacterSet) {
         return lhs.formSymmetricDifference(rhs)
+    }
+
+    // MARK: - RepresentableUniverse
+
+    public static let universe = CharacterSet().inverted
+
+    // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′_]
+    /// Returns the absolute complement of the set.
+    ///
+    /// - Parameters:
+    ///     - operand: The set.
+    public static postfix func ′(operand: CharacterSet) -> CharacterSet {
+        return operand.inverted
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′=_]
+    /// Sets the operand to its absolute complement.
+    ///
+    /// - Parameters:
+    ///     - operand: The set.
+    public static postfix func ′=(operand: inout CharacterSet) {
+        operand.invert()
     }
 }
