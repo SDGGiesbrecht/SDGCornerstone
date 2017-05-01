@@ -44,11 +44,19 @@ infix operator ∋: ComparisonPrecedence
 ///     - rhs: The element to test.
 infix operator ∌: ComparisonPrecedence
 
+/// The precedence group for `∩`, `∪` and `∖`.
+precedencegroup BinarySetOperationPrecedence {
+    higherThan: ComparisonPrecedence
+}
+
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
-infix operator ∩: LogicalConjunctionPrecedence
+infix operator ∩: BinarySetOperationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
-infix operator ∪: LogicalDisjunctionPrecedence
+infix operator ∪: BinarySetOperationPrecedence
+
+// [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
+infix operator ∖: BinarySetOperationPrecedence
 
 /// A type that defines a set.
 ///
@@ -153,7 +161,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
-    public static func − <S : SetDefinition>(lhs: Self, rhs: S) -> Intersection<Self, AbsoluteComplement<S>> where S.Element == Self.Element {
+    public static func ∖ <S : SetDefinition>(lhs: Self, rhs: S) -> Intersection<Self, AbsoluteComplement<S>> where S.Element == Self.Element {
         return lhs ∩ rhs′
     }
 
