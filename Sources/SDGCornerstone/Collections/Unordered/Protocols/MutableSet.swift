@@ -49,7 +49,23 @@ public protocol MutableSet : SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
+    static func ∩ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element
+
+    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
+    /// Returns the intersection of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     static func ∩ (lhs: Self, rhs: Self) -> Self
+
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
+    /// Sets `lhs` to the intersection of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
+    static func ∩= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∩=_]
     /// Sets `lhs` to the intersection of the two sets.
@@ -65,7 +81,23 @@ public protocol MutableSet : SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
+    static func ∪ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element
+
+    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
+    /// Returns the union of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     static func ∪ (lhs: Self, rhs: Self) -> Self
+
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
+    /// Sets `lhs` to the union of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
+    static func ∪= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∪=_]
     /// Sets `lhs` to the union of the two sets.
@@ -81,7 +113,23 @@ public protocol MutableSet : SetDefinition {
     /// - Parameters:
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
+    static func ∖ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element
+
+    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
+    /// Returns the relative complement of `rhs` in `lhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set to subtract from.
+    ///     - rhs: The set to subtract.
     static func ∖ (lhs: Self, rhs: Self) -> Self
+
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
+    /// Subtracts `rhs` from `lhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set to subtract from.
+    ///     - rhs: The set to subtract.
+    static func ∖= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∖=_]
     /// Subtracts `rhs` from `lhs`.
@@ -142,7 +190,7 @@ extension MutableSet {
     ///     - rhs: Another set.
     public static func ∩= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
         var result = Self()
-        for element in rhs.map({ return S.toElement($0) }) where element ∈ lhs {
+        for element in rhs.elements where element ∈ lhs {
             result.insert(element)
         }
         lhs = result
@@ -179,7 +227,7 @@ extension MutableSet {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∪= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
-        for element in rhs.map({ S.toElement($0) }) {
+        for element in rhs.elements {
             lhs.insert(element)
         }
     }
@@ -215,7 +263,7 @@ extension MutableSet {
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
     public static func ∖= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
-        for element in rhs.map({ S.toElement($0) }) {
+        for element in rhs.elements {
             lhs.remove(element)
         }
     }

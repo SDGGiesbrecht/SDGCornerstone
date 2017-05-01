@@ -26,6 +26,48 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
         return lhs.contains(rhs)
     }
 
+    // MARK: - FiniteSet
+
+    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊆_]
+    /// Returns `true` if `lhs` is a subset of `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The possible subset to test.
+    ///     - rhs: The other set.
+    public static func ⊆ (lhs: Set, rhs: Set) -> Bool {
+        return lhs.isSubset(of: rhs)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊇_]
+    /// Returns `true` if `lhs` is a superset of `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The possible superset to test.
+    ///     - rhs: The other set.
+    public static func ⊇ (lhs: Set, rhs: Set) -> Bool {
+        return lhs.isSuperset(of: rhs)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊊_]
+    /// Returns `true` if `lhs` is a strict subset of `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The possible subset to test.
+    ///     - rhs: The other set.
+    public static func ⊊ (lhs: Set, rhs: Set) -> Bool {
+        return lhs.isStrictSubset(of: rhs)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊋_]
+    /// Returns `true` if `lhs` is a strict superset of `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The possible superset to test.
+    ///     - rhs: The other set.
+    public static func ⊋ (lhs: Set, rhs: Set) -> Bool {
+        return lhs.isStrictSuperset(of: rhs)
+    }
+
     // MARK: - MutableSet
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
