@@ -1,0 +1,50 @@
+/*
+ Union.swift
+
+ This source file is part of the SDGCornerstone open source project.
+ https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+
+ Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+
+ Soli Deo gloria.
+
+ Licensed under the Apache Licence, Version 2.0.
+ See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
+ */
+
+/// A union of two sets.
+public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
+
+    // MARK: - Initialization
+
+    /// Creates a union from two sets.
+    ///
+    /// - Parameters:
+    ///     - a: A set.
+    ///     - b: Another set.
+    public init(_ a: Base1, _ b: Base2) {
+        self.a = a
+        self.b = b
+    }
+
+    // MARK: - Properties
+
+    private var a: Base1
+    private var b: Base2
+
+    // MARK: - SetDefinition
+
+    // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
+    /// The element type.
+    public typealias Element = Base1.Element
+
+    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    /// Returns `true` if `lhs` contains `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set.
+    ///     - rhs: The element to test.
+    public static func ∋ (lhs: Union, rhs: Base1.Element) -> Bool {
+        return lhs.a ∋ rhs ∨ lhs.b ∋ rhs
+    }
+}

@@ -44,6 +44,12 @@ infix operator ∋: ComparisonPrecedence
 ///     - rhs: The element to test.
 infix operator ∌: ComparisonPrecedence
 
+// [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
+infix operator ∩: LogicalConjunctionPrecedence
+
+// [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
+infix operator ∪: LogicalDisjunctionPrecedence
+
 /// A type that defines a set.
 ///
 /// Conformance Requirements:
@@ -53,6 +59,8 @@ public protocol SetDefinition {
     // [_Define Documentation: SDGCornerstone.SetDefinition.Element_]
     /// The element type.
     associatedtype Element
+
+    // MARK: - Membership
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∈_]
     /// Returns `true` if `lhs` is an element of `rhs`.
@@ -117,5 +125,44 @@ extension SetDefinition {
     ///     - rhs: The element to test.
     public static func ∌ (lhs: Self, rhs: Element) -> Bool {
         return ¬(lhs ∋ rhs)
+    }
+
+    // [_Define Documentation: SDGCornerstone.SetDefinition.∩_]
+    /// Returns the intersection of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
+    public static func ∩ <S : SetDefinition>(lhs: Self, rhs: S) -> Intersection<Self, S> where S.Element == Self.Element {
+        return Intersection(lhs, rhs)
+    }
+
+    // [_Define Documentation: SDGCornerstone.SetDefinition.∪_]
+    /// Returns the union of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
+    public static func ∪ <S : SetDefinition>(lhs: Self, rhs: S) -> Union<Self, S> where S.Element == Self.Element {
+        return Union(lhs, rhs)
+    }
+
+    // [_Define Documentation: SDGCornerstone.SetDefinition_]
+    /// Returns the relative complement of `rhs` in `lhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set to subtract from.
+    ///     - rhs: The set to subtract.
+    public static func − <S : SetDefinition>(lhs: Self, rhs: S) -> Intersection<Self, AbsoluteComplement<S>> where S.Element == Self.Element {
+        return lhs ∩ rhs′
+    }
+
+    // [_Define Documentation: SDGCornerstone.SetDefinition.′_]
+    /// Returns the absolute complement of the set.
+    ///
+    /// - Parameters:
+    ///     - operand: The set.
+    public static postfix func ′(operand: Self) -> AbsoluteComplement<Self> {
+        return AbsoluteComplement(operand)
     }
 }

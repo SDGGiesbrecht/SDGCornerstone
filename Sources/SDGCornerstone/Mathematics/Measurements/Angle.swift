@@ -19,11 +19,10 @@
 ///     - value: The value in degrees.
 postfix operator °
 
-// [_Inherit Documentation: SDGCornerstone.Angle.′_]
-/// Returns an angle in minutes.
+/// Returns a measurement in minutes, the absolute complement of a set, etc. Behaviour depends on the type.
 ///
 /// - Parameters:
-///     - value: The value in minutes.
+///     - operand: The operand.
 postfix operator ′
 
 // [_Inherit Documentation: SDGCornerstone.Angle.′′_]
