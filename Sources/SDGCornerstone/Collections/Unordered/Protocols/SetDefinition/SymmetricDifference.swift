@@ -1,5 +1,5 @@
 /*
- Union.swift
+ SymmetricDifference.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,25 +12,23 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A union of two sets.
-public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
+/// A symmetric difference of two sets.
+public struct SymmetricDifference<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
 
     // MARK: - Initialization
 
-    /// Creates a union from two sets.
+    /// Creates a symmetric difference from two sets.
     ///
     /// - Parameters:
     ///     - a: A set.
     ///     - b: Another set.
     public init(_ a: Base1, _ b: Base2) {
-        self.a = a
-        self.b = b
+        definition = (a ∖ b) ∪ (b ∖ a)
     }
 
     // MARK: - Properties
 
-    private let a: Base1
-    private let b: Base2
+    private let definition: Union<RelativeComplement<Base1, Base2>, RelativeComplement<Base2, Base1>>
 
     // MARK: - SetDefinition
 
@@ -44,7 +42,7 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinitio
     /// - Parameters:
     ///     - lhs: The set.
     ///     - rhs: The element to test.
-    public static func ∋ (lhs: Union, rhs: Base1.Element) -> Bool {
-        return lhs.a ∋ rhs ∨ lhs.b ∋ rhs
+    public static func ∋ (lhs: SymmetricDifference, rhs: Base1.Element) -> Bool {
+        return lhs.definition ∋ rhs
     }
 }

@@ -27,7 +27,7 @@ public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition {
 
     // MARK: - Properties
 
-    private var base: Base
+    private let base: Base
 
     // MARK: - SetDefinition
 

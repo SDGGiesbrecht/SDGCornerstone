@@ -50,13 +50,36 @@ precedencegroup BinarySetOperationPrecedence {
 }
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
+/// Returns the intersection of the two sets.
+///
+/// - Parameters:
+///     - lhs: A set.
+///     - rhs: Another set.
 infix operator ∩: BinarySetOperationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
+/// Returns the union of the two sets.
+///
+/// - Parameters:
+///     - lhs: A set.
+///     - rhs: Another set.
 infix operator ∪: BinarySetOperationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
+/// Returns the relative complement of `rhs` in `lhs`.
+///
+/// - Parameters:
+///     - lhs: The set to subtract from.
+///     - rhs: The set to subtract.
 infix operator ∖: BinarySetOperationPrecedence
+
+// [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
+/// Returns the relative complement of `rhs` in `lhs`.
+///
+/// - Parameters:
+///     - lhs: The set to subtract from.
+///     - rhs: The set to subtract.
+infix operator ∆: BinarySetOperationPrecedence
 
 /// A type that defines a set.
 ///
@@ -155,14 +178,14 @@ extension SetDefinition {
         return Union(lhs, rhs)
     }
 
-    // [_Define Documentation: SDGCornerstone.SetDefinition_]
+    // [_Define Documentation: SDGCornerstone.SetDefinition.∖_]
     /// Returns the relative complement of `rhs` in `lhs`.
     ///
     /// - Parameters:
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
-    public static func ∖ <S : SetDefinition>(lhs: Self, rhs: S) -> Intersection<Self, AbsoluteComplement<S>> where S.Element == Self.Element {
-        return lhs ∩ rhs′
+    public static func ∖ <S : SetDefinition>(lhs: Self, rhs: S) -> RelativeComplement<Self, S> where S.Element == Self.Element {
+        return RelativeComplement(of: rhs, in: lhs)
     }
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.′_]
@@ -172,5 +195,15 @@ extension SetDefinition {
     ///     - operand: The set.
     public static postfix func ′(operand: Self) -> AbsoluteComplement<Self> {
         return AbsoluteComplement(operand)
+    }
+
+    // [_Define Documentation: SDGCornerstone.SetDefinition.∆_]
+    /// Returns the relative complement of `rhs` in `lhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set to subtract from.
+    ///     - rhs: The set to subtract.
+    public static func ∆ <S : SetDefinition>(lhs: Self, rhs: S) -> SymmetricDifference<Self, S> where S.Element == Self.Element {
+        return SymmetricDifference(lhs, rhs)
     }
 }

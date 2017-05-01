@@ -29,8 +29,8 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : SetDe
 
     // MARK: - Properties
 
-    private var a: Base1
-    private var b: Base2
+    private let a: Base1
+    private let b: Base2
 
     // MARK: - SetDefinition
 

@@ -1,5 +1,5 @@
 /*
- Union.swift
+ RelativeComplement.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,31 +12,29 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A union of two sets.
-public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
+/// A relative complement of one set in another.
+public struct RelativeComplement<Minuend : SetDefinition, Subtrahend : SetDefinition> : SetDefinition where Minuend.Element == Subtrahend.Element {
 
     // MARK: - Initialization
 
-    /// Creates a union from two sets.
+    /// Creates a relative complement from two sets.
     ///
     /// - Parameters:
     ///     - a: A set.
     ///     - b: Another set.
-    public init(_ a: Base1, _ b: Base2) {
-        self.a = a
-        self.b = b
+    public init(of subtrahend: Subtrahend, in minuend: Minuend) {
+        definition = minuend ∩ subtrahend′
     }
 
     // MARK: - Properties
 
-    private let a: Base1
-    private let b: Base2
+    private let definition: Intersection<Minuend, AbsoluteComplement<Subtrahend>>
 
     // MARK: - SetDefinition
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
     /// The element type.
-    public typealias Element = Base1.Element
+    public typealias Element = Minuend.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
     /// Returns `true` if `lhs` contains `rhs`.
@@ -44,7 +42,7 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinitio
     /// - Parameters:
     ///     - lhs: The set.
     ///     - rhs: The element to test.
-    public static func ∋ (lhs: Union, rhs: Base1.Element) -> Bool {
-        return lhs.a ∋ rhs ∨ lhs.b ∋ rhs
+    public static func ∋ (lhs: RelativeComplement, rhs: Minuend.Element) -> Bool {
+        return lhs.definition ∋ rhs
     }
 }
