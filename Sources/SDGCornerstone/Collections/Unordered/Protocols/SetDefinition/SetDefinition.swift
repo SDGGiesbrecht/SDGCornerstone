@@ -57,6 +57,14 @@ precedencegroup BinarySetOperationPrecedence {
 ///     - rhs: Another set.
 infix operator ∩: BinarySetOperationPrecedence
 
+// [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
+/// Sets `lhs` to the intersection of the two sets.
+///
+/// - Parameters:
+///     - lhs: A set.
+///     - rhs: Another set.
+infix operator ∩=: AssignmentPrecedence
+
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
 /// Returns the union of the two sets.
 ///
@@ -64,6 +72,14 @@ infix operator ∩: BinarySetOperationPrecedence
 ///     - lhs: A set.
 ///     - rhs: Another set.
 infix operator ∪: BinarySetOperationPrecedence
+
+// [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
+/// Sets `lhs` to the union of the two sets.
+///
+/// - Parameters:
+///     - lhs: A set.
+///     - rhs: Another set.
+infix operator ∪=: AssignmentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
 /// Returns the relative complement of `rhs` in `lhs`.
@@ -73,6 +89,14 @@ infix operator ∪: BinarySetOperationPrecedence
 ///     - rhs: The set to subtract.
 infix operator ∖: BinarySetOperationPrecedence
 
+// [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
+/// Subtracts `rhs` from `lhs`.
+///
+/// - Parameters:
+///     - lhs: The set to subtract from.
+///     - rhs: The set to subtract.
+infix operator ∖=: AssignmentPrecedence
+
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
 /// Returns the relative complement of `rhs` in `lhs`.
 ///
@@ -80,6 +104,14 @@ infix operator ∖: BinarySetOperationPrecedence
 ///     - lhs: The set to subtract from.
 ///     - rhs: The set to subtract.
 infix operator ∆: BinarySetOperationPrecedence
+
+// [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
+/// Sets `lhs` to the symmetric difference of the two sets.
+///
+/// - Parameters:
+///     - lhs: The set to subtract from.
+///     - rhs: The set to subtract.
+infix operator ∆=: AssignmentPrecedence
 
 /// A type that defines a set.
 ///
