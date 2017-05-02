@@ -44,6 +44,20 @@ extension Equatable {
     }
 }
 
+extension Equatable where Self : ComparableSet {
+    // MARK: - where Self : ComparableSet
+
+    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    /// Returns `true` if the two values are equal.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs ⊇ rhs ∧ lhs ⊆ rhs
+    }
+}
+
 extension Equatable where Self : Measurement {
     // MARK: - where Self : Measurement
 

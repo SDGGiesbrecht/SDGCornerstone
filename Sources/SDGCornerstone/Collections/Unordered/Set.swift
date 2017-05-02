@@ -12,23 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Set : FiniteSet, MutableSet, SetDefinition {
+extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
 
-    // MARK: - SetDefinition
+    // MARK: - ComparableSet
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
-    ///
-    /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: Set, rhs: Element) -> Bool {
-        return lhs.contains(rhs)
-    }
-
-    // MARK: - FiniteSet
-
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊆_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
     /// Returns `true` if `lhs` is a subset of `rhs`.
     ///
     /// - Parameters:
@@ -38,7 +26,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
         return lhs.isSubset(of: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊇_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
     /// Returns `true` if `lhs` is a superset of `rhs`.
     ///
     /// - Parameters:
@@ -48,7 +36,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
         return lhs.isSuperset(of: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊊_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
     /// Returns `true` if `lhs` is a strict subset of `rhs`.
     ///
     /// - Parameters:
@@ -58,7 +46,7 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
         return lhs.isStrictSubset(of: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊋_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
     /// Returns `true` if `lhs` is a strict superset of `rhs`.
     ///
     /// - Parameters:
@@ -148,5 +136,17 @@ extension Set : FiniteSet, MutableSet, SetDefinition {
     ///     - rhs: The set to subtract.
     public static func ∆= (lhs: inout Set, rhs: Set) {
         return lhs.formSymmetricDifference(rhs)
+    }
+
+    // MARK: - SetDefinition
+
+    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    /// Returns `true` if `lhs` contains `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set.
+    ///     - rhs: The element to test.
+    public static func ∋ (lhs: Set, rhs: Element) -> Bool {
+        return lhs.contains(rhs)
     }
 }

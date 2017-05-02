@@ -17,7 +17,7 @@
 /// Conformance Requirements:
 ///     - `SetDefinition`
 ///     - `static var universe: Self { get }`
-public protocol RepresentableUniverse : MutableSet {
+public protocol SetInRepresentableUniverse : MutableSet {
 
     // [_Define Documentation: SDGCornerstone.RepresentableUniverse.universe_]
     /// An instance containing all possible elements.
@@ -39,7 +39,7 @@ public protocol RepresentableUniverse : MutableSet {
     static postfix func ′=(operand: inout Self)
 }
 
-extension RepresentableUniverse {
+extension SetInRepresentableUniverse {
 
     // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′_]
     /// Returns the absolute complement of the set.

@@ -14,23 +14,11 @@
 
 import Foundation
 
-extension CharacterSet : MutableSet, RepresentableUniverse, SetDefinition {
+extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, SetDefinition {
 
-    // MARK: - SetDefinition
+    // MARK: - ComparableSet
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
-    ///
-    /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: CharacterSet, rhs: Element) -> Bool {
-        return lhs.contains(rhs)
-    }
-
-    // MARK: - FiniteSet
-
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊆_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
     /// Returns `true` if `lhs` is a subset of `rhs`.
     ///
     /// - Parameters:
@@ -40,7 +28,7 @@ extension CharacterSet : MutableSet, RepresentableUniverse, SetDefinition {
         return lhs.isSubset(of: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊇_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
     /// Returns `true` if `lhs` is a superset of `rhs`.
     ///
     /// - Parameters:
@@ -50,7 +38,7 @@ extension CharacterSet : MutableSet, RepresentableUniverse, SetDefinition {
         return lhs.isSuperset(of: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊊_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
     /// Returns `true` if `lhs` is a strict subset of `rhs`.
     ///
     /// - Parameters:
@@ -60,7 +48,7 @@ extension CharacterSet : MutableSet, RepresentableUniverse, SetDefinition {
         return lhs.isStrictSubset(of: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊋_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
     /// Returns `true` if `lhs` is a strict superset of `rhs`.
     ///
     /// - Parameters:
@@ -152,7 +140,19 @@ extension CharacterSet : MutableSet, RepresentableUniverse, SetDefinition {
         return lhs.formSymmetricDifference(rhs)
     }
 
-    // MARK: - RepresentableUniverse
+    // MARK: - SetDefinition
+
+    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    /// Returns `true` if `lhs` contains `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set.
+    ///     - rhs: The element to test.
+    public static func ∋ (lhs: CharacterSet, rhs: Element) -> Bool {
+        return lhs.contains(rhs)
+    }
+
+    // MARK: - SetInRepresentableUniverse
 
     public static let universe = CharacterSet().inverted
 
