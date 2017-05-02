@@ -78,21 +78,23 @@ public protocol FiniteSet : Collection, ComparableSet, SetDefinition {
     static func ⊋ <S : FiniteSet>(lhs: S, rhs: Self) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.==_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.==_]
-    /// Returns `true` if `lhs` is equal to `rhs`.
+    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
     static func == <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.≠_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.≠_]
-    /// Returns `true` if `lhs` is not equal to `rhs`.
+    // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+    /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
+    ///
+    /// - RecommendedOver: !=
     static func ≠ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.isDisjoint(with:)_]
