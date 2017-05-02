@@ -54,7 +54,13 @@
                 <a href="../Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/CharacterSet.html">CharacterSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Dictionary.html">Dictionary</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Equatable.html">Equatable</a>
@@ -76,6 +82,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Set.html">Set</a>
               </li>
             </ul>
           </li>
@@ -226,7 +235,16 @@
                 <a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ArrayFamily.html">ArrayFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ComparableSet.html">ComparableSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FiniteSet.html">FiniteSet</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
@@ -236,6 +254,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MutableSet.html">MutableSet</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Negatable.html">Negatable</a>
@@ -256,6 +277,9 @@
                 <a href="../Protocols/Randomizer.html">Randomizer</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/RangeFamily.html">RangeFamily</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a>
               </li>
               <li class="nav-group-task">
@@ -263,6 +287,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SetInRepresentableUniverse.html">SetInRepresentableUniverse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/VectorType.html">VectorType</a>
@@ -276,7 +303,21 @@
                 <a href="../Structs/Angle.html">Angle</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/IntensionalSet.html">IntensionalSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:E14SDGCornerstoneVs11ClosedRange7Element">Element</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a>
               </li>
             </ul>
           </li>
@@ -339,7 +380,6 @@
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -352,7 +392,75 @@
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/where%20Self%20:%20ComparableSet"></a>
+                <a name="//apple_ref/swift/Section/where Self : ComparableSet" class="dashAnchor"></a>
+                <a href="#/where%20Self%20:%20ComparableSet">
+                  <h3 class="section-name">where Self : ComparableSet</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFe14SDGCornerstoneRxS_13ComparableSetrPs9Equatableoi2eeFTxx_Sb"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFe14SDGCornerstoneRxS_13ComparableSetrPs9Equatableoi2eeFTxx_Sb">==(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if the two values are equal.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value to compare.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Another value to compare.</p>
                                 </div>
                               </td>
                             </tr>
@@ -410,7 +518,6 @@
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -423,7 +530,6 @@
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -439,7 +545,7 @@
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

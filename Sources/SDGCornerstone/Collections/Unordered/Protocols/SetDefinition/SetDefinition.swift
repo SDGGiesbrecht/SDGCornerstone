@@ -46,6 +46,7 @@ infix operator ∌: ComparisonPrecedence
 
 /// The precedence group for `∩`, `∪` and `∖`.
 precedencegroup BinarySetOperationPrecedence {
+    lowerThan: RangeFormationPrecedence
     higherThan: ComparisonPrecedence
 }
 
@@ -105,11 +106,11 @@ infix operator ∖: BinarySetOperationPrecedence
 infix operator ∖=: AssignmentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-/// Returns the relative complement of `rhs` in `lhs`.
+/// Returns the symmetric difference of `rhs` in `lhs`.
 ///
 /// - Parameters:
-///     - lhs: The set to subtract from.
-///     - rhs: The set to subtract.
+///     - lhs: A set.
+///     - rhs: Another set.
 infix operator ∆: BinarySetOperationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
@@ -237,12 +238,26 @@ extension SetDefinition {
     }
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `rhs` in `lhs`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆ <S : SetDefinition>(lhs: Self, rhs: S) -> SymmetricDifference<Self, S> where S.Element == Self.Element {
         return SymmetricDifference(lhs, rhs)
+    }
+}
+
+extension SetDefinition where Self : RangeFamily {
+    // MARK: - where Self : RangeFamily
+
+    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    /// Returns `true` if `lhs` contains `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set.
+    ///     - rhs: The element to test.
+    public static func ∋ (lhs: Self, rhs: Bound) -> Bool {
+        return lhs.contains(rhs)
     }
 }

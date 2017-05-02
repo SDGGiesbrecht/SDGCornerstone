@@ -65,7 +65,7 @@ infix operator ⊋: ComparisonPrecedence
 /// Conformance Requirements:
 ///     - `SetDefinition`
 ///     - `static func ⊆ (lhs: Self, rhs: Self) -> Bool`
-///     - `func isDisjoint(with other: Self) -> Bool`
+///     - `func overlaps(_ other: Self) -> Bool`
 public protocol ComparableSet : Equatable, SetDefinition {
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.⊆_]
@@ -115,6 +115,13 @@ public protocol ComparableSet : Equatable, SetDefinition {
     ///     - lhs: The possible superset to test.
     ///     - rhs: The other set.
     static func ⊋ (lhs: Self, rhs: Self) -> Bool
+
+    // [_Define Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    /// Returns `true` if the sets overlap.
+    ///
+    /// - Parameters:
+    ///     - other: The other set.
+    func overlaps(_ other: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
     /// Returns `true` if the sets are disjoint.
@@ -174,5 +181,45 @@ extension ComparableSet {
     ///     - rhs: The other set.
     public static func ⊋ (lhs: Self, rhs: Self) -> Bool {
         return lhs ⊇ rhs ∧ lhs ⊈ rhs
+    }
+
+    fileprivate func isDisjointAsComparableSet(with other: Self) -> Bool {
+        return ¬overlaps(other)
+    }
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
+    /// Returns `true` if the sets are disjoint.
+    ///
+    /// - Parameters:
+    ///     - other: Another set.
+    public func isDisjoint(with other: Self) -> Bool {
+        return isDisjointAsComparableSet(with: other)
+    }
+}
+
+extension ComparableSet where Self : RangeFamily {
+    // MARK: - where Self : RangeFamily
+
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
+    /// Returns `true` if `lhs` is a subset of `rhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The possible subset to test.
+    ///     - rhs: The other set.
+    public static func ⊆ (lhs: Self, rhs: Self) -> Bool {
+        return lhs.lowerBound ≥ rhs.lowerBound ∧ lhs.upperBound ≤ rhs.upperBound
+    }
+}
+
+extension ComparableSet where Self : SetAlgebra {
+    // MARK: - where Self : SetAlgebra
+
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
+    /// Returns `true` if the sets are disjoint.
+    ///
+    /// - Parameters:
+    ///     - other: Another set.
+    public func isDisjoint(with other: Self) -> Bool {
+        return isDisjointAsComparableSet(with: other)
+        // Disambiguate ComparableSet.isDisjoint(with:) vs SetAlgebra.isDisjoint(with:)
     }
 }

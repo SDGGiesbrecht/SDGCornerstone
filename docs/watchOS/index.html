@@ -53,7 +53,13 @@
                 <a href="Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/CharacterSet.html">CharacterSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Dictionary.html">Dictionary</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/Equatable.html">Equatable</a>
@@ -75,6 +81,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Set.html">Set</a>
               </li>
             </ul>
           </li>
@@ -225,7 +234,16 @@
                 <a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/ArrayFamily.html">ArrayFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ComparableSet.html">ComparableSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/FiniteSet.html">FiniteSet</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
@@ -235,6 +253,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/MutableSet.html">MutableSet</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Negatable.html">Negatable</a>
@@ -255,6 +276,9 @@
                 <a href="Protocols/Randomizer.html">Randomizer</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/RangeFamily.html">RangeFamily</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/RationalArithmetic.html">RationalArithmetic</a>
               </li>
               <li class="nav-group-task">
@@ -262,6 +286,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SetInRepresentableUniverse.html">SetInRepresentableUniverse</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/VectorType.html">VectorType</a>
@@ -275,7 +302,21 @@
                 <a href="Structs/Angle.html">Angle</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/IntensionalSet.html">IntensionalSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:E14SDGCornerstoneVs11ClosedRange7Element">Element</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a>
               </li>
             </ul>
           </li>
@@ -322,6 +363,7 @@
 <li>Mathematics: exponents, roots, logarithms, trigonometry, etc.</li>
 <li>Arbitrary‐precision arithmetic.</li>
 <li>Customizable randomization.</li>
+<li>Inter‐type set operations.</li>
 </ul>
 
 <h2 id='importing' class='heading'>Importing</h2>
@@ -345,14 +387,6 @@
 <h2 id='example-usage' class='heading'>Example Usage</h2>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SDGCornerstone</span>
 
-<span class="c1">// Logic</span>
-
-<span class="kd">func</span> <span class="nf">tryLogicOperators</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="o">¬</span><span class="p">((</span><span class="kc">true</span> <span class="o">∧</span> <span class="kc">false</span><span class="p">)</span> <span class="o">∨</span> <span class="kc">true</span><span class="p">)</span> <span class="o">≠</span> <span class="kc">true</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"I’m confused..."</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
 <span class="c1">// Mathematics</span>
 
 <span class="kd">func</span> <span class="nf">verifyPythagoreanTheorem</span><span class="p">()</span> <span class="p">{</span>
@@ -370,14 +404,7 @@
     <span class="nf">print</span><span class="p">(</span><span class="s">"The sine of </span><span class="se">\(</span><span class="n">θ</span><span class="o">.</span><span class="n">inRadians</span><span class="se">)</span><span class="s"> radians is </span><span class="se">\(</span><span class="n">sine</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">func</span> <span class="nf">analyzeParabola</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">parabola</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="k">in</span>
-        <span class="k">return</span> <span class="mi">2</span> <span class="o">×</span> <span class="n">x</span><span class="o">↑</span><span class="mi">2</span>   <span class="o">+</span>   <span class="mi">4</span> <span class="o">×</span> <span class="n">x</span>   <span class="o">−</span>   <span class="mi">1</span>
-    <span class="p">}</span>
-    <span class="k">let</span> <span class="nv">vertexX</span> <span class="o">=</span> <span class="nf">findLocalMinimum</span><span class="p">(</span><span class="nv">near</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">inFunction</span><span class="p">:</span> <span class="n">parabola</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"The vertex is at (</span><span class="se">\(</span> <span class="n">vertexX</span> <span class="se">)</span><span class="s">, </span><span class="se">\(</span> <span class="nf">parabola</span><span class="p">(</span><span class="n">vertexX</span><span class="p">)</span> <span class="se">)</span><span class="s">)."</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="k">let</span> <span class="nv">tenDuotrigintillion</span><span class="p">:</span> <span class="kt">WholeNumber</span> <span class="o">=</span> <span class="s">"10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"</span>
 
 <span class="c1">// Randomization</span>
 
@@ -391,6 +418,18 @@
         <span class="nf">print</span><span class="p">(</span><span class="s">"Snake eyes!"</span><span class="p">)</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"Not this time..."</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Sets</span>
+
+<span class="kd">func</span> <span class="nf">trySetOperations</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">square</span><span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">196</span><span class="p">]</span>
+    <span class="k">let</span> <span class="nv">twoDigits</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">..&lt;</span> <span class="mi">100</span>
+    <span class="k">let</span> <span class="nv">odd</span> <span class="o">=</span> <span class="kt">IntensionalSet</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">isOdd</span> <span class="p">})</span>
+
+    <span class="k">if</span> <span class="kt">Set</span><span class="p">([</span><span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">89</span><span class="p">])</span> <span class="o">⊆</span> <span class="p">(</span><span class="n">twoDigits</span> <span class="o">∩</span> <span class="n">odd</span><span class="p">)</span> <span class="o">∖</span> <span class="n">square</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"They’re all in there."</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
@@ -410,7 +449,7 @@
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -97,6 +97,14 @@ public protocol FiniteSet : Collection, ComparableSet, SetDefinition {
     /// - RecommendedOver: !=
     static func ≠ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
 
+    // [_Define Documentation: SDGCornerstone.FiniteSet.overlaps(_:)_]
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    /// Returns `true` if the sets overlap.
+    ///
+    /// - Parameters:
+    ///     - other: The other set.
+    func overlaps<S : SetDefinition>(_ other: S) -> Bool where S.Element == Self.Element
+
     // [_Define Documentation: SDGCornerstone.FiniteSet.isDisjoint(with:)_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
     /// Returns `true` if the sets are disjoint.
@@ -186,23 +194,37 @@ extension FiniteSet {
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.==_]
-    /// Returns `true` if `lhs` is equal to `rhs`.
+    /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
     public static func == <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
         return lhs ⊇ rhs ∧ lhs ⊆ rhs
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.≠_]
-    /// Returns `true` if `lhs` is not equal to `rhs`.
+    /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
+    ///
+    /// - RecommendedOver: !=
     public static func ≠ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
         return ¬(lhs == rhs)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    /// Returns `true` if the sets overlap.
+    ///
+    /// - Parameters:
+    ///     - other: The other set.
+    public func overlaps<S : SetDefinition>(_ other: S) -> Bool where S.Element == Self.Element {
+        for element in self.elements where element ∈ other {
+            return true
+        }
+        return false
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.isDisjoint(with:)_]
@@ -211,9 +233,6 @@ extension FiniteSet {
     /// - Parameters:
     ///     - other: Another set.
     public func isDisjoint<S : SetDefinition>(with other: S) -> Bool where S.Element == Self.Element {
-        for element in self.elements where element ∈ other {
-            return false
-        }
-        return true
+        return ¬overlaps(other)
     }
 }

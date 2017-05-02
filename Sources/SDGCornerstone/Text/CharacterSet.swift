@@ -58,6 +58,15 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return lhs.isStrictSuperset(of: rhs)
     }
 
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    /// Returns `true` if the sets overlap.
+    ///
+    /// - Parameters:
+    ///     - other: The other set.
+    public func overlaps(_ other: CharacterSet) -> Bool {
+        return ¬isDisjoint(with: other)
+    }
+
     // MARK: - MutableSet
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
@@ -121,11 +130,11 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `rhs` in `lhs`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
         return lhs.symmetricDifference(rhs)
     }

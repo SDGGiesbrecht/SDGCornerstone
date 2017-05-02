@@ -15,7 +15,7 @@
 /// A mutable set.
 ///
 /// Conformance Requirements:
-///   - `SetDefinition`
+///   - `ComparableSet`
 ///   - `init()`
 ///   - `@discardableResult mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element)`
 ///   - `@discardableResult mutating func remove(_ member: Element) -> Element?`
@@ -23,25 +23,39 @@
 ///     - `static func ∩= (lhs: inout Self, rhs: Self)`
 ///     - `static func ∪= (lhs: inout Self, rhs: Self)`
 ///     - `static func ∖= (lhs: inout Self, rhs: Self)`
-public protocol MutableSet : SetDefinition {
+public protocol MutableSet : ComparableSet, SetAlgebra {
 
     // [_Define SDGCornerstone.MutableSet.init()_]
     /// Creates an empty set.
     init()
 
     // [_Define SDGCornerstone.MutableSet.insert(_:)_]
-    /// Inserts `member` into `self`.
+    /// Inserts `member` into `self` if it is not already present.
     ///
     /// - Parameters:
     ///     - newMember: The element to insert.
-    @discardableResult mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element)
+    ///
+    /// - Returns: A tuple with two elements:
+    ///     - `inserted`: Whether or not the element was inserted.
+    ///     - `newMember`: The element in the set after the insertion attempt.
+    @discardableResult mutating func insert(_ newMember: Self.Element) -> (inserted: Bool, memberAfterInsert: Self.Element)
 
     // [_Define SDGCornerstone.MutableSet.remove(_:)_]
-    /// Removes `member` from `self`.
+    /// Removes `member` from `self` if it is present.
     ///
     /// - Parameters:
     ///     - member: The element to remove.
-    @discardableResult mutating func remove(_ member: Element) -> Element?
+    ///
+    /// - Returns: The element removed, or `nil` if there was nothing to remove.
+    @discardableResult mutating func remove(_ member: Self.Element) -> Self.Element?
+
+    /// Inserts the value into the set uncoditionally.
+    ///
+    /// - Parameters:
+    ///     - newMember: The value to insert.
+    ///
+    /// - Returns: The equal element previously in the set, if there was one.
+    @discardableResult mutating func update(with newMember: Element) -> Element?
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
     /// Returns the intersection of the two sets.
@@ -140,11 +154,11 @@ public protocol MutableSet : SetDefinition {
     static func ∖= (lhs: inout Self, rhs: Self)
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `rhs` in `lhs`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     static func ∆ (lhs: Self, rhs: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∆=_]
@@ -269,11 +283,11 @@ extension MutableSet {
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `rhs` in `lhs`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆ (lhs: Self, rhs: Self) -> Self {
         var result = lhs
         result ∆= rhs
@@ -298,11 +312,11 @@ extension MutableSet where Self : FiniteSet {
     // MARK: - where Self : FiniteSet
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `rhs` in `lhs`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element {
         var result = lhs
         result ∆= rhs

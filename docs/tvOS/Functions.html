@@ -53,7 +53,13 @@
                 <a href="Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/CharacterSet.html">CharacterSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Dictionary.html">Dictionary</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/Equatable.html">Equatable</a>
@@ -75,6 +81,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Set.html">Set</a>
               </li>
             </ul>
           </li>
@@ -225,7 +234,16 @@
                 <a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/ArrayFamily.html">ArrayFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ComparableSet.html">ComparableSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/FiniteSet.html">FiniteSet</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
@@ -235,6 +253,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/MutableSet.html">MutableSet</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Negatable.html">Negatable</a>
@@ -255,6 +276,9 @@
                 <a href="Protocols/Randomizer.html">Randomizer</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/RangeFamily.html">RangeFamily</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/RationalArithmetic.html">RationalArithmetic</a>
               </li>
               <li class="nav-group-task">
@@ -262,6 +286,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SetInRepresentableUniverse.html">SetInRepresentableUniverse</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/VectorType.html">VectorType</a>
@@ -275,7 +302,21 @@
                 <a href="Structs/Angle.html">Angle</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/IntensionalSet.html">IntensionalSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:E14SDGCornerstoneVs11ClosedRange7Element">Element</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a>
               </li>
             </ul>
           </li>
@@ -342,7 +383,6 @@
                               <td>
                                 <div>
                                   <p>The variable in which to cache the result. Declare it in the appropriate scope for the desired cache lifetime. The cache can be refreshed at any time by setting it to <code>nil</code>.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -355,7 +395,6 @@
                               <td>
                                 <div>
                                   <p>The computation to be evaluated.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -365,7 +404,6 @@
                       <div>
                         <h4>Return Value</h4>
                         <p>The result of <code>computation</code>.</p>
-
                       </div>
                     </section>
                   </div>
@@ -405,12 +443,12 @@
 <li><code>location</code> is at a local minimum. For example:
 <code>swift
 // This is undefined:
-_ = findLocalMaximum(near: 0) { (−10 ..&lt; 10).contains($0) ? $0 ↑ 2 : −($0 ↑ 2) }
+_ = findLocalMaximum(near: 0) { $0 ∈ −10 ..&lt; 10 ? $0 ↑ 2 : −($0 ↑ 2) }
 </code></li>
 <li>two or more adjascent inputs share the maximum output. For example:
 <code>swift
 // This is undefined:
-_ = findLocalMaximum(near: 0) { (−10 ..&lt; 10).contains($0) ? 1 : −(|$0|) }
+_ = findLocalMaximum(near: 0) { $0 ∈ −10 ..&lt; 10 ? 1 : −(|$0|) }
 </code></li>
 </ul>
 
@@ -445,8 +483,7 @@ _ = findLocalMaximum(near: 0) { (−10 ..&lt; 10).contains($0) ? 1 : −(|$0|) }
                               </td>
                               <td>
                                 <div>
-                                  <p>A location () where the slope approaches the searched‐for local maximum.</p>
-
+                                  <p>A location (<em>x</em>) where the slope approaches the searched‐for local maximum.</p>
                                 </div>
                               </td>
                             </tr>
@@ -458,8 +495,7 @@ _ = findLocalMaximum(near: 0) { (−10 ..&lt; 10).contains($0) ? 1 : −(|$0|) }
                               </td>
                               <td>
                                 <div>
-                                  <p>An optional domain (for ) to stay within.</p>
-
+                                  <p>An optional domain (for <em>x</em>) to stay within.</p>
                                 </div>
                               </td>
                             </tr>
@@ -472,7 +508,6 @@ _ = findLocalMaximum(near: 0) { (−10 ..&lt; 10).contains($0) ? 1 : −(|$0|) }
                               <td>
                                 <div>
                                   <p>The function to analyze.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -485,7 +520,6 @@ _ = findLocalMaximum(near: 0) { (−10 ..&lt; 10).contains($0) ? 1 : −(|$0|) }
                               <td>
                                 <div>
                                   <p>An input value.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -494,8 +528,7 @@ _ = findLocalMaximum(near: 0) { (−10 ..&lt; 10).contains($0) ? 1 : −(|$0|) }
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The input () that results in the local maximum ().</p>
-
+                        <p>The input (<em>x</em>) that results in the local maximum (<em>y</em>).</p>
                       </div>
                     </section>
                   </div>
@@ -547,12 +580,12 @@ _ = findLocalMaximum(near: 0) { (−10 ..&lt; 10).contains($0) ? 1 : −(|$0|) }
 <li><code>location</code> is at a local maximum. For example:
 <code>swift
 // This is undefined:
-_ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −($0 ↑ 2) : $0 ↑ 2 }
+_ = findLocalMinimum(near: 0) { $0 ∈ −10 ..&lt; 10 ? −($0 ↑ 2) : $0 ↑ 2 }
 </code></li>
 <li>two or more adjascent inputs share the minimum output. For example:
 <code>swift
 // This is undefined:
-_ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
+_ = findLocalMinimum(near: 0) { $0 ∈ −10 ..&lt; 10 ? −1 : |$0| }
 </code></li>
 </ul>
 
@@ -587,8 +620,7 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               </td>
                               <td>
                                 <div>
-                                  <p>A location () where the slope approaches the searched‐for local minimum.</p>
-
+                                  <p>A location (<em>x</em>) where the slope approaches the searched‐for local minimum.</p>
                                 </div>
                               </td>
                             </tr>
@@ -600,8 +632,7 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               </td>
                               <td>
                                 <div>
-                                  <p>An optional domain (for ) to stay within.</p>
-
+                                  <p>An optional domain (for <em>x</em>) to stay within.</p>
                                 </div>
                               </td>
                             </tr>
@@ -614,7 +645,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The function to analyze.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -627,7 +657,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>An input value.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -636,8 +665,7 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The input () that results in the local minimum ().</p>
-
+                        <p>The input (<em>x</em>) that results in the local minimum (<em>y</em>).</p>
                       </div>
                     </section>
                   </div>
@@ -695,7 +723,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -708,7 +735,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -771,7 +797,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -784,7 +809,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -836,7 +860,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -849,7 +872,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -901,7 +923,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -914,7 +935,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -966,7 +986,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -979,7 +998,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1031,7 +1049,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1044,7 +1061,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1096,7 +1112,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1109,7 +1124,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1161,7 +1175,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1174,7 +1187,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1226,7 +1238,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1239,7 +1250,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1291,7 +1301,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1304,7 +1313,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1356,7 +1364,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1369,7 +1376,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1421,7 +1427,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1434,7 +1439,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1486,7 +1490,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1499,7 +1502,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1551,7 +1553,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1564,7 +1565,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1616,7 +1616,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1629,7 +1628,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1681,7 +1679,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1694,7 +1691,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value to compare.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1752,7 +1748,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The value in degrees.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1799,7 +1794,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The value in minutes.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1846,7 +1840,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The value in seconds.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1909,7 +1902,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1922,7 +1914,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1974,7 +1965,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>A value.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1987,7 +1977,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>Another value.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2227,7 +2216,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The base.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2240,7 +2228,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The antilogarithm.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2297,7 +2284,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The antilogarithm.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2354,7 +2340,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The antilogarithm.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2401,7 +2386,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The angle.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2448,7 +2432,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The angle.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2495,7 +2478,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The angle.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2542,7 +2524,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The angle.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2589,7 +2570,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The angle.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2636,7 +2616,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The angle.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2690,7 +2669,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The sine.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2744,7 +2722,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The cosine.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2793,7 +2770,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The tangent.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2847,7 +2823,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The cosecant.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2901,7 +2876,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The secant.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2950,7 +2924,6 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
                               <td>
                                 <div>
                                   <p>The tangent.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -2966,7 +2939,7 @@ _ = findLocalMinimum(near: 0) { (−10 ..&lt; 10).contains($0) ? −1 : |$0| }
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -56,6 +56,15 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return lhs.isStrictSuperset(of: rhs)
     }
 
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    /// Returns `true` if the sets overlap.
+    ///
+    /// - Parameters:
+    ///     - other: The other set.
+    public func overlaps(_ other: Set) -> Bool {
+        return ¬isDisjoint(with: other)
+    }
+
     // MARK: - MutableSet
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
@@ -119,11 +128,11 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `rhs` in `lhs`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆ (lhs: Set, rhs: Set) -> Set {
         return lhs.symmetricDifference(rhs)
     }
