@@ -165,8 +165,8 @@ public protocol MutableSet : ComparableSet, SetAlgebra {
     /// Sets `lhs` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     static func ∆= (lhs: inout Self, rhs: Self)
 }
 

@@ -66,8 +66,15 @@ struct MutableSetExample : FiniteSet, MutableSet {
         return value.remove(member)
     }
 
-    @discardableResult mutating func update(with newMember: Element) -> Element? {
+    @discardableResult mutating func update(with newMember: Int) -> Int? {
         return value.update(with: newMember)
+    }
+
+    // SetAlgebra
+
+    // [_Workaround: A compiler bug prevents automatic disambiguation from working in this case. This should not be necessary. (Swift 3.1.0)_]
+    func contains(_ element: Int) -> Bool {
+        return value ∋ element
     }
 
     // SetDefinition

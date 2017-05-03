@@ -36,6 +36,7 @@ class CollectionTests : XCTestCase {
             XCTAssert(superset ⊋ subset)
             XCTAssert(subset ⊊ superset)
             XCTAssert(¬superset.isDisjoint(with: subset))
+            XCTAssert(superset ≠ subset)
         }
 
         runTests(superset: Set([1, 2, 3]), subset: Set([1, 2]))
@@ -115,6 +116,8 @@ class CollectionTests : XCTestCase {
         runTests(setA: MutableSetExample([1, 2, 3]), setB: Set<Int>([3, 4, 5]), inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
 
         XCTAssert(MutableSetExample() == Set<Int>())
+        XCTAssert(MutableSetExample([1, 2]) ⊊ Set([1, 2, 3]))
+        XCTAssert(Set([1, 2, 3]) ⊋ MutableSetExample([1, 2]))
     }
 
     func testMutableSet() {
@@ -125,20 +128,48 @@ class CollectionTests : XCTestCase {
             XCTAssert(inBoth ∈ setA ∩ setB)
             XCTAssert(inNeither ∉ setA ∩ setB)
 
+            var intersection = setA
+            intersection ∩= setB
+            XCTAssert(inAOnly ∉ intersection)
+            XCTAssert(inBOnly ∉ intersection)
+            XCTAssert(inBoth ∈ intersection)
+            XCTAssert(inNeither ∉ intersection)
+
             XCTAssert(inAOnly ∈ setA ∪ setB)
             XCTAssert(inBOnly ∈ setA ∪ setB)
             XCTAssert(inBoth ∈ setA ∪ setB)
             XCTAssert(inNeither ∉ setA ∪ setB)
+
+            var union = setA
+            union ∪= setB
+            XCTAssert(inAOnly ∈ union)
+            XCTAssert(inBOnly ∈ union)
+            XCTAssert(inBoth ∈ union)
+            XCTAssert(inNeither ∉ union)
 
             XCTAssert(inAOnly ∈ setA ∖ setB)
             XCTAssert(inBOnly ∉ setA ∖ setB)
             XCTAssert(inBoth ∉ setA ∖ setB)
             XCTAssert(inNeither ∉ setA ∖ setB)
 
+            var relativeComplement = setA
+            relativeComplement ∖= setB
+            XCTAssert(inAOnly ∈ relativeComplement)
+            XCTAssert(inBOnly ∉ relativeComplement)
+            XCTAssert(inBoth ∉ relativeComplement)
+            XCTAssert(inNeither ∉ relativeComplement)
+
             XCTAssert(inAOnly ∈ setA ∆ setB)
             XCTAssert(inBOnly ∈ setA ∆ setB)
             XCTAssert(inBoth ∉ setA ∆ setB)
             XCTAssert(inNeither ∉ setA ∆ setB)
+
+            var symmetricDifference = setA
+            symmetricDifference ∆= setB
+            XCTAssert(inAOnly ∈ symmetricDifference)
+            XCTAssert(inBOnly ∈ symmetricDifference)
+            XCTAssert(inBoth ∉ symmetricDifference)
+            XCTAssert(inNeither ∉ symmetricDifference)
 
             // SetAlgebra
 
@@ -147,7 +178,7 @@ class CollectionTests : XCTestCase {
             XCTAssert(inBoth ∈ setA.intersection(setB))
             XCTAssert(inNeither ∉ setA.intersection(setB))
 
-            var intersection = setA
+            intersection = setA
             intersection.formIntersection(setB)
             XCTAssert(inAOnly ∉ intersection)
             XCTAssert(inBOnly ∉ intersection)
@@ -159,7 +190,7 @@ class CollectionTests : XCTestCase {
             XCTAssert(inBoth ∈ setA.union(setB))
             XCTAssert(inNeither ∉ setA.union(setB))
 
-            var union = setA
+            union = setA
             union.formUnion(setB)
             XCTAssert(inAOnly ∈ union)
             XCTAssert(inBOnly ∈ union)
@@ -171,7 +202,7 @@ class CollectionTests : XCTestCase {
             XCTAssert(inBoth ∉ setA.symmetricDifference(setB))
             XCTAssert(inNeither ∉ setA.symmetricDifference(setB))
 
-            var symmetricDifference = setA
+            symmetricDifference = setA
             symmetricDifference.formSymmetricDifference(setB)
             XCTAssert(inAOnly ∈ symmetricDifference)
             XCTAssert(inBOnly ∈ symmetricDifference)
@@ -247,6 +278,20 @@ class CollectionTests : XCTestCase {
 
     }
 
+    func testSetInRepresentableUniverse() {
+        func runTests<S : SetInRepresentableUniverse>(set: S, member: S.Element) {
+
+            let inverse = set′
+            XCTAssert(member ∉ inverse)
+
+            var original = inverse
+            original′=
+            XCTAssert(member ∈ original)
+        }
+        runTests(set: CharacterSet.alphanumerics, member: "A")
+        runTests(set: SetInRepresentableUniverseExample([1, 2, 3]), member: 2)
+    }
+
     static var allTests: [(String, (CollectionTests) -> () throws -> Void)] {
         return [
             ("testArray", testArray),
@@ -254,7 +299,8 @@ class CollectionTests : XCTestCase {
             ("testDictionary", testDictionary),
             ("testMutableSet", testMutableSet),
             ("testRangeReplaceableCollection", testRangeReplaceableCollection),
-            ("testSetDefinition", testSetDefinition)
+            ("testSetDefinition", testSetDefinition),
+            ("testSetInRepresentableUniverse", testSetInRepresentableUniverse)
         ]
     }
 }

@@ -84,7 +84,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∩= (lhs: inout Set, rhs: Set) {
-        lhs.formIntersection(rhs)
+        lhs.formIntersectionAsSetAlgebra(rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
@@ -104,7 +104,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∪= (lhs: inout Set, rhs: Set) {
-        return lhs.formUnion(rhs)
+        return lhs.formUnionAsSetAlgebra(rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]

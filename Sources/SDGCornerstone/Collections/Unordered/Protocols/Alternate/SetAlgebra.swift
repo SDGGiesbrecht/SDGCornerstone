@@ -18,6 +18,14 @@ extension SetAlgebra {
         return union(other)
     }
 
+    internal mutating func formUnionAsSetAlgebra(_ other: Self) {
+        formUnion(other)
+    }
+
+    internal mutating func formIntersectionAsSetAlgebra(_ other: Self) {
+        formIntersection(other)
+    }
+
     internal func symmetricDifferenceAsSetAlgebra(_ other: Self) -> Self {
         return symmetricDifference(other)
     }
@@ -30,63 +38,84 @@ extension SetAlgebra {
 extension SetAlgebra where Self : MutableSet {
     // MARK: - where Self : MutableSet
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - other: Another set.
     public func intersection(_ other: Self) -> Self {
         return self ∩ other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
     /// Sets `lhs` to the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - other: Another set.
     public mutating func formIntersection(_ other: Self) {
         self ∩= other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - other: Another set.
     public func union(_ other: Self) -> Self {
         return self ∪ other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
     /// Sets `lhs` to the union of the two sets.
     ///
     /// - Parameters:
     ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - other: Another set.
     public mutating func formUnion(_ other: Self) {
         self ∪= other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
     /// Returns the symmetric difference of `rhs` in `lhs`.
     ///
     /// - Parameters:
     ///     - lhs: A set.
-    ///     - rhs: Another set.
+    ///     - other: Another set.
     public func symmetricDifference(_ other: Self) -> Self {
         return self ∆ other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
     /// Sets `lhs` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
     ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - other: The set to subtract.
     public mutating func formSymmetricDifference(_ other: Self) {
         self ∆= other
+    }
+}
+
+extension SetAlgebra where Self : SetDefinition {
+    // MARK: - where Self : SetDefinition
+
+    fileprivate func containsAsSetAlgebra(_ member: Self.Element) -> Bool { // [_Exempt from Code Coverage_] Apparently unreachable.
+        return self ∋ member
+    }
+    // [_Define Documentation: SDGCornerstone.SetAlgebra.contains(_:)_]
+    /// Returns `true` if `self` contains `member`.
+    ///
+    /// - Parameters:
+    ///     - member: The element to test.
+    public func contains(_ member: Self.Element) -> Bool { // [_Exempt from Code Coverage_] Apparently unreachable.
+        return containsAsSetAlgebra(member)
+    }
+}
+
+extension SetAlgebra where Self : SetDefinition, Self : Sequence, Self.Element == Self.Iterator.Element {
+    // MARK: - where Self : SetDefinition, Self : Sequence, Self.Element == Self.Iterator.Element
+
+    // [_Inherit Documentation: SDGCornerstone.SetAlgebra.contains(_:)_]
+    /// Returns `true` if `self` contains `member`.
+    ///
+    /// - Parameters:
+    ///     - member: The element to test.
+    public func contains(_ member: Self.Element) -> Bool { // [_Exempt from Code Coverage_] Apparently unreachable.
+        return containsAsSetAlgebra(member)
+        // Disambiguate SetAlgebra.contains(_:) vs Sequence.contains(_:)
     }
 }
