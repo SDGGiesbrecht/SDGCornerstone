@@ -117,6 +117,8 @@ public protocol FiniteSet : Collection, ComparableSet, SetDefinition {
 extension FiniteSet where Iterator.Element == Element {
     // MARK: - where Iterator.Element == Element
 
+    // [_Workaround: This can be refactored once this can be a protocol requirement. (Swift 3.1.0)_]
+
     /// :nodoc:
     public static func toElement(_ element: Self.Iterator.Element) -> Self.Element {
         return element

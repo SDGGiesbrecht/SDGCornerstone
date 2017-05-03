@@ -51,6 +51,7 @@ class MathematicsTests : XCTestCase {
             XCTAssert((_1 × 6)′′.inSeconds ≈ _1 × 6)
 
             XCTAssert((_1 × 200).gradians ≈ πValue.rad)
+            XCTAssert((_1 × 200).gon ≈ πValue.rad)
             XCTAssert((_1 × 6).gradians.inGradians ≈ _1 × 6)
 
             variable = _1.rad

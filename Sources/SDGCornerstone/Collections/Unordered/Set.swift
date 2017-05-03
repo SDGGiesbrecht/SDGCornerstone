@@ -74,7 +74,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∩ (lhs: Set, rhs: Set) -> Set {
-        return lhs.union(rhs)
+        return lhs.intersection(rhs)
     }
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∩=_]
@@ -84,7 +84,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∩= (lhs: inout Set, rhs: Set) {
-        lhs.formUnion(rhs)
+        lhs.formIntersection(rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
@@ -94,7 +94,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∪ (lhs: Set, rhs: Set) -> Set {
-        return lhs.intersection(rhs)
+        return lhs.unionAsSetAlgebra(rhs)
     }
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∪=_]
@@ -104,7 +104,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∪= (lhs: inout Set, rhs: Set) {
-        return lhs.formIntersection(rhs)
+        return lhs.formUnion(rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
@@ -134,7 +134,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∆ (lhs: Set, rhs: Set) -> Set {
-        return lhs.symmetricDifference(rhs)
+        return lhs.symmetricDifferenceAsSetAlgebra(rhs)
     }
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∆=_]

@@ -64,7 +64,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - other: The other set.
     public func overlaps(_ other: CharacterSet) -> Bool {
-        return ¬isDisjoint(with: other)
+        return ¬isDisjointAsSetAlgebra(with: other)
     }
 
     // MARK: - MutableSet
@@ -76,7 +76,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∩ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
-        return lhs.union(rhs)
+        return lhs.intersection(rhs)
     }
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∩=_]
@@ -86,7 +86,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∩= (lhs: inout CharacterSet, rhs: CharacterSet) {
-        lhs.formUnion(rhs)
+        lhs.formIntersection(rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
@@ -96,7 +96,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∪ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
-        return lhs.intersection(rhs)
+        return lhs.union(rhs)
     }
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∪=_]
@@ -106,7 +106,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∪= (lhs: inout CharacterSet, rhs: CharacterSet) {
-        return lhs.formIntersection(rhs)
+        return lhs.formUnion(rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]

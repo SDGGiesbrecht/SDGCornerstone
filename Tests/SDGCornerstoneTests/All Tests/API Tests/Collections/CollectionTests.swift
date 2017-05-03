@@ -32,6 +32,10 @@ class CollectionTests : XCTestCase {
         func runTests<S : ComparableSet>(superset: S, subset: S) {
             XCTAssert(superset ⊈ subset)
             XCTAssert(superset ⊇ subset)
+            XCTAssert(subset ⊉ superset)
+            XCTAssert(superset ⊋ subset)
+            XCTAssert(subset ⊊ superset)
+            XCTAssert(¬superset.isDisjoint(with: subset))
         }
 
         runTests(superset: Set([1, 2, 3]), subset: Set([1, 2]))
@@ -81,6 +85,116 @@ class CollectionTests : XCTestCase {
         ])
     }
 
+    func testFiniteSet() {
+        func runTests<M : MutableSet, F : FiniteSet>(setA: M, setB: F, inAOnly: M.Element, inBOnly: M.Element, inBoth: M.Element, inNeither: M.Element) where M.Element == F.Element {
+
+            XCTAssert(¬(setB.isDisjoint(with: setA)))
+
+            XCTAssert(inAOnly ∉ setA ∩ setB)
+            XCTAssert(inBOnly ∉ setA ∩ setB)
+            XCTAssert(inBoth ∈ setA ∩ setB)
+            XCTAssert(inNeither ∉ setA ∩ setB)
+
+            XCTAssert(inAOnly ∈ setA ∪ setB)
+            XCTAssert(inBOnly ∈ setA ∪ setB)
+            XCTAssert(inBoth ∈ setA ∪ setB)
+            XCTAssert(inNeither ∉ setA ∪ setB)
+
+            XCTAssert(inAOnly ∈ setA ∖ setB)
+            XCTAssert(inBOnly ∉ setA ∖ setB)
+            XCTAssert(inBoth ∉ setA ∖ setB)
+            XCTAssert(inNeither ∉ setA ∖ setB)
+
+            XCTAssert(inAOnly ∈ setA ∆ setB)
+            XCTAssert(inBOnly ∈ setA ∆ setB)
+            XCTAssert(inBoth ∉ setA ∆ setB)
+            XCTAssert(inNeither ∉ setA ∆ setB)
+        }
+
+        runTests(setA: CharacterSet.alphanumerics, setB: Set<UnicodeScalar>(["A", "B", "C", "."]), inAOnly: "D", inBOnly: ".", inBoth: "A", inNeither: " ")
+        runTests(setA: MutableSetExample([1, 2, 3]), setB: Set<Int>([3, 4, 5]), inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
+
+        XCTAssert(MutableSetExample() == Set<Int>())
+    }
+
+    func testMutableSet() {
+        func runTests<S : MutableSet>(setA: S, setB: S, inAOnly: S.Element, inBOnly: S.Element, inBoth: S.Element, inNeither: S.Element) {
+
+            XCTAssert(inAOnly ∉ setA ∩ setB)
+            XCTAssert(inBOnly ∉ setA ∩ setB)
+            XCTAssert(inBoth ∈ setA ∩ setB)
+            XCTAssert(inNeither ∉ setA ∩ setB)
+
+            XCTAssert(inAOnly ∈ setA ∪ setB)
+            XCTAssert(inBOnly ∈ setA ∪ setB)
+            XCTAssert(inBoth ∈ setA ∪ setB)
+            XCTAssert(inNeither ∉ setA ∪ setB)
+
+            XCTAssert(inAOnly ∈ setA ∖ setB)
+            XCTAssert(inBOnly ∉ setA ∖ setB)
+            XCTAssert(inBoth ∉ setA ∖ setB)
+            XCTAssert(inNeither ∉ setA ∖ setB)
+
+            XCTAssert(inAOnly ∈ setA ∆ setB)
+            XCTAssert(inBOnly ∈ setA ∆ setB)
+            XCTAssert(inBoth ∉ setA ∆ setB)
+            XCTAssert(inNeither ∉ setA ∆ setB)
+
+            // SetAlgebra
+
+            XCTAssert(inAOnly ∉ setA.intersection(setB))
+            XCTAssert(inBOnly ∉ setA.intersection(setB))
+            XCTAssert(inBoth ∈ setA.intersection(setB))
+            XCTAssert(inNeither ∉ setA.intersection(setB))
+
+            var intersection = setA
+            intersection.formIntersection(setB)
+            XCTAssert(inAOnly ∉ intersection)
+            XCTAssert(inBOnly ∉ intersection)
+            XCTAssert(inBoth ∈ intersection)
+            XCTAssert(inNeither ∉ intersection)
+
+            XCTAssert(inAOnly ∈ setA.union(setB))
+            XCTAssert(inBOnly ∈ setA.union(setB))
+            XCTAssert(inBoth ∈ setA.union(setB))
+            XCTAssert(inNeither ∉ setA.union(setB))
+
+            var union = setA
+            union.formUnion(setB)
+            XCTAssert(inAOnly ∈ union)
+            XCTAssert(inBOnly ∈ union)
+            XCTAssert(inBoth ∈ union)
+            XCTAssert(inNeither ∉ union)
+
+            XCTAssert(inAOnly ∈ setA.symmetricDifference(setB))
+            XCTAssert(inBOnly ∈ setA.symmetricDifference(setB))
+            XCTAssert(inBoth ∉ setA.symmetricDifference(setB))
+            XCTAssert(inNeither ∉ setA.symmetricDifference(setB))
+
+            var symmetricDifference = setA
+            symmetricDifference.formSymmetricDifference(setB)
+            XCTAssert(inAOnly ∈ symmetricDifference)
+            XCTAssert(inBOnly ∈ symmetricDifference)
+            XCTAssert(inBoth ∉ symmetricDifference)
+            XCTAssert(inNeither ∉ symmetricDifference)
+        }
+
+        runTests(setA: Set([1, 2, 3]), setB: [3, 4, 5], inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
+        runTests(setA: CharacterSet.alphanumerics, setB: CharacterSet(charactersIn: "ABC."), inAOnly: "D", inBOnly: ".", inBoth: "A", inNeither: " ")
+        runTests(setA: MutableSetExample([1, 2, 3]), setB: MutableSetExample([3, 4, 5]), inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
+
+        func runFiniteTests<M : MutableSet, F : FiniteSet>(setA: M, setB: F, inAOnly: M.Element, inBOnly: M.Element, inBoth: M.Element, inNeither: M.Element) where M : FiniteSet, M.Element == F.Element {
+
+            XCTAssert(setA ≠ setB)
+
+            XCTAssert(inAOnly ∈ setA ∆ setB)
+            XCTAssert(inBOnly ∈ setA ∆ setB)
+            XCTAssert(inBoth ∉ setA ∆ setB)
+            XCTAssert(inNeither ∉ setA ∆ setB)
+        }
+        runFiniteTests(setA: MutableSetExample([1, 2, 3]), setB: Set<Int>([3, 4, 5]), inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
+    }
+
     func testRangeReplaceableCollection() {
         func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C) where C.Iterator.Element : Equatable {
             var collection = start
@@ -95,18 +209,42 @@ class CollectionTests : XCTestCase {
     }
 
     func testSetDefinition() {
-        func runTests<S : SetDefinition>(set: S, member: S.Element) {
-            XCTAssert(member ∈ set)
+        func runTests<S : SetDefinition>(setA: S, setB: S, inAOnly: S.Element, inBOnly: S.Element, inBoth: S.Element, inNeither: S.Element) {
+            XCTAssert(inAOnly ∈ setA)
+            XCTAssert(inBOnly ∉ setA)
+            XCTAssert(inBoth ∈ setA)
+            XCTAssert(inNeither ∉ setA)
+
+            XCTAssert(inAOnly ∉ setA ∩ setB)
+            XCTAssert(inBOnly ∉ setA ∩ setB)
+            XCTAssert(inBoth ∈ setA ∩ setB)
+            XCTAssert(inNeither ∉ setA ∩ setB)
+
+            XCTAssert(inAOnly ∈ setA ∪ setB)
+            XCTAssert(inBOnly ∈ setA ∪ setB)
+            XCTAssert(inBoth ∈ setA ∪ setB)
+            XCTAssert(inNeither ∉ setA ∪ setB)
+
+            XCTAssert(inAOnly ∈ setA ∖ setB)
+            XCTAssert(inBOnly ∉ setA ∖ setB)
+            XCTAssert(inBoth ∉ setA ∖ setB)
+            XCTAssert(inNeither ∉ setA ∖ setB)
+
+            XCTAssert(inAOnly ∈ setA ∆ setB)
+            XCTAssert(inBOnly ∈ setA ∆ setB)
+            XCTAssert(inBoth ∉ setA ∆ setB)
+            XCTAssert(inNeither ∉ setA ∆ setB)
         }
 
-        runTests(set: Set([1, 2, 3]), member: 2)
-        runTests(set: IntensionalSet<Int>(where: { $0.isOdd }), member: 7)
-        runTests(set: CharacterSet.alphanumerics, member: "A")
-        runTests(set: 0 ..< 5, member: 1)
-        runTests(set: (0 ... 5) as ClosedRange, member: 1)
-        runTests(set: (0 ..< 5) as CountableRange, member: 1)
-        runTests(set: (0 ... 5) as CountableClosedRange, member: 1)
-        runTests(set: MutableSetExample([1, 2, 3]), member: 2)
+        runTests(setA: Set([1, 2, 3]), setB: [3, 4, 5], inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
+        runTests(setA: IntensionalSet<Int>(where: { $0.isOdd }), setB: IntensionalSet<Int>(where: { $0.isDivisible(by: 3) }), inAOnly: 1, inBOnly: 6, inBoth: 3, inNeither: 2)
+        runTests(setA: CharacterSet.alphanumerics, setB: CharacterSet(charactersIn: "ABC."), inAOnly: "D", inBOnly: ".", inBoth: "A", inNeither: " ")
+        runTests(setA: (0 ..< 5) as Range, setB: 3 ..< 8, inAOnly: 1, inBOnly: 7, inBoth: 3, inNeither: 10)
+        runTests(setA: (0 ... 5) as ClosedRange, setB: 3 ... 8, inAOnly: 1, inBOnly: 7, inBoth: 3, inNeither: 10)
+        runTests(setA: (0 ..< 5) as CountableRange, setB: 3 ..< 8, inAOnly: 1, inBOnly: 7, inBoth: 3, inNeither: 10)
+        runTests(setA: (0 ... 5) as CountableClosedRange, setB: 3 ... 8, inAOnly: 1, inBOnly: 7, inBoth: 3, inNeither: 10)
+        runTests(setA: MutableSetExample([1, 2, 3]), setB: MutableSetExample([3, 4, 5]), inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
+
     }
 
     static var allTests: [(String, (CollectionTests) -> () throws -> Void)] {
@@ -114,6 +252,7 @@ class CollectionTests : XCTestCase {
             ("testArray", testArray),
             ("testComparableSet", testComparableSet),
             ("testDictionary", testDictionary),
+            ("testMutableSet", testMutableSet),
             ("testRangeReplaceableCollection", testRangeReplaceableCollection),
             ("testSetDefinition", testSetDefinition)
         ]

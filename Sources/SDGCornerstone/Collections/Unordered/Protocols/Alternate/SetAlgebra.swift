@@ -12,6 +12,21 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+extension SetAlgebra {
+
+    internal func unionAsSetAlgebra(_ other: Self) -> Self {
+        return union(other)
+    }
+
+    internal func symmetricDifferenceAsSetAlgebra(_ other: Self) -> Self {
+        return symmetricDifference(other)
+    }
+
+    internal func isDisjointAsSetAlgebra(with other: Self) -> Bool {
+        return isDisjoint(with: other)
+    }
+}
+
 extension SetAlgebra where Self : MutableSet {
     // MARK: - where Self : MutableSet
 
