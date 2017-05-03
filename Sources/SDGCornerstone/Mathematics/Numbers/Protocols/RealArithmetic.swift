@@ -30,6 +30,26 @@ prefix operator √
 /// - NonmutatingVariant: √
 postfix operator √=
 
+// [_Inherit Documentation: SDGCornerstone.RealArithmetic.°_]
+/// Returns an angle in degrees.
+///
+/// - Parameters:
+///     - value: The value in degrees.
+postfix operator °
+
+/// Returns a measurement in minutes, the absolute complement of a set, etc. Behaviour depends on the type.
+///
+/// - Parameters:
+///     - operand: The operand.
+postfix operator ′
+
+// [_Inherit Documentation: SDGCornerstone.RealArithmetic.′′_]
+/// Returns an angle in seconds.
+///
+/// - Parameters:
+///     - value: The value in seconds.
+postfix operator ′′
+
 /// A type that can be used for real arithmetic.
 ///
 /// Conformance Requirements:
@@ -269,6 +289,8 @@ public protocol RealArithmetic : RationalArithmetic {
 }
 
 extension RealArithmetic {
+
+    // [_Workaround: These can be removed when global generic constants are available. (Swift 3.1.0)_]
 
     /// π in the same type.
     ///
@@ -534,11 +556,16 @@ extension RealArithmetic {
 
     // MARK: - Angles
 
+    // ••••••• ••••••• ••••••• ••••••• ••••••• ••••••• •••••••
+    // Symbol versions are more legible beside literals, but less legible beside variables. For this reason, both symbols and full names should remain available.
+    // ••••••• ••••••• ••••••• ••••••• ••••••• ••••••• •••••••
+
     // [_Define Documentation: SDGCornerstone.RealArithmetic.radians_]
     /// Returns an angle in radians.
     public var radians: Angle<Self> {
         return Angle(radians: self)
     }
+
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.radians_]
     /// Returns an angle in radians.
     public var rad: Angle<Self> {
@@ -557,10 +584,28 @@ extension RealArithmetic {
         return Angle(degrees: self)
     }
 
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.°_]
+    /// Returns an angle in degrees.
+    ///
+    /// - Parameters:
+    ///     - value: The value in degrees.
+    public static postfix func ° (value: Self) -> Angle<Self> {
+        return value.degrees
+    }
+
     // [_Define Documentation: SDGCornerstone.RealArithmetic.minutes_]
     /// Returns an angle in minutes.
     public var minutes: Angle<Self> {
         return Angle(minutes: self)
+    }
+
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.′_]
+    /// Returns an angle in minutes.
+    ///
+    /// - Parameters:
+    ///     - value: The value in minutes.
+    public static postfix func ′ (value: Self) -> Angle<Self> {
+        return value.minutes
     }
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.seconds_]
@@ -569,14 +614,31 @@ extension RealArithmetic {
         return Angle(seconds: self)
     }
 
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.′′_]
+    /// Returns an angle in seconds.
+    ///
+    /// - Parameters:
+    ///     - value: The value in seconds.
+    public static postfix func ′′ (value: Self) -> Angle<Self> {
+        return value.seconds
+    }
+
     // [_Define Documentation: SDGCornerstone.RealArithmetic.gradians_]
     /// Returns an angle in gradians.
     public var gradians: Angle<Self> {
         return Angle(gradians: self)
     }
+
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.gradians_]
+    /// Returns an angle in gradians.
+    public var gon: Angle<Self> {
+        return gradians
+    }
 }
 
 // MARK: - Real Arithmetic
+
+// [_Workaround: These should be switched to generic constants when they become available. (Swift 3.1.0)_]
 
 /// An instance of π in the desired return type.
 ///

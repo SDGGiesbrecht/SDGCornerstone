@@ -12,26 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Inherit Documentation: SDGCornerstone.Angle.°_]
-/// Returns an angle in degrees.
-///
-/// - Parameters:
-///     - value: The value in degrees.
-postfix operator °
-
-/// Returns a measurement in minutes, the absolute complement of a set, etc. Behaviour depends on the type.
-///
-/// - Parameters:
-///     - operand: The operand.
-postfix operator ′
-
-// [_Inherit Documentation: SDGCornerstone.Angle.′′_]
-/// Returns an angle in seconds.
-///
-/// - Parameters:
-///     - value: The value in seconds.
-postfix operator ′′
-
 /// An angle.
 public struct Angle<Scalar : RealArithmetic> : Measurement {
 
@@ -164,33 +144,4 @@ public struct Angle<Scalar : RealArithmetic> : Measurement {
             inRadians = newValue
         }
     }
-}
-
-// MARK: - Angles
-
-// [_Define Documentation: SDGCornerstone.Angle.°_]
-/// Returns an angle in degrees.
-///
-/// - Parameters:
-///     - value: The value in degrees.
-public postfix func ° <N : RealArithmetic>(value: N) -> Angle<N> {
-    return value.degrees
-}
-
-// [_Define Documentation: SDGCornerstone.Angle.′_]
-/// Returns an angle in minutes.
-///
-/// - Parameters:
-///     - value: The value in minutes.
-public postfix func ′ <N : RealArithmetic>(value: N) -> Angle<N> {
-    return value.minutes
-}
-
-// [_Define Documentation: SDGCornerstone.Angle.′′_]
-/// Returns an angle in seconds.
-///
-/// - Parameters:
-///     - value: The value in seconds.
-public postfix func ′′ <N : RealArithmetic>(value: N) -> Angle<N> {
-    return value.seconds
 }
