@@ -106,6 +106,9 @@ extension SetAlgebra where Self : SetDefinition {
     }
 }
 
+/*
+ // [_Workaround: This triggers a compiler bug. On Linux the build fails. On macOS the compiler cannot find it properly anyway. (Swift 3.1.0)_]
+
 extension SetAlgebra where Self : SetDefinition, Self : Sequence, Self.Element == Self.Iterator.Element {
     // MARK: - where Self : SetDefinition, Self : Sequence, Self.Element == Self.Iterator.Element
 
@@ -119,3 +122,4 @@ extension SetAlgebra where Self : SetDefinition, Self : Sequence, Self.Element =
         // Disambiguate SetAlgebra.contains(_:) vs Sequence.contains(_:)
     }
 }
+ */
