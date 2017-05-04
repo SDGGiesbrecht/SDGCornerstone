@@ -59,7 +59,7 @@ extension Data {
         // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
         /// The position following the last valid index.
         public var endIndex: IntMax {
-            return IntMax(data.endIndex)
+            return IntMax(data.endIndex) × BinaryView.bitsPerByte
         }
 
         // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
