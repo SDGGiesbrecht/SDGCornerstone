@@ -30,23 +30,20 @@ class CollectionTests : XCTestCase {
 
     func testComparableSet() {
         func runTests<S : ComparableSet>(superset: S, subset: S) {
-            XCTAssert(superset ⊈ subset)
             #if !os(Linux)
                 // [_Warning: These need to be solved on Linux._]
-            XCTAssert(superset ⊇ subset)
-            XCTAssert(subset ⊉ superset)
-            XCTAssert(superset ⊋ subset)
-            XCTAssert(subset ⊊ superset)
-            XCTAssert(¬superset.isDisjoint(with: subset))
-            XCTAssert(superset ≠ subset)
+            XCTAssert(superset ⊈ subset, "\(superset) ⊆ \(subset)")
+            XCTAssert(superset ⊇ subset, "\(superset) ⊉ \(subset)")
+            XCTAssert(subset ⊉ superset, "\(subset) ⊇ \(superset)")
+            XCTAssert(superset ⊋ subset, "\(superset) ⊋̸ \(subset)")
+            XCTAssert(subset ⊊ superset, "\(subset) ⊊̸ \(superset)")
+            XCTAssert(¬superset.isDisjoint(with: subset), "\(superset).isDisjoint(with: \(subset))")
+            XCTAssert(superset ≠ subset, "\(superset) = \(subset)")
             #endif
         }
 
         runTests(superset: Set([1, 2, 3]), subset: Set([1, 2]))
-        #if !os(Linux)
-            // [_Warning: This needs to be dealt with._]
         runTests(superset: CharacterSet.alphanumerics, subset: CharacterSet.capitalizedLetters)
-        #endif
         runTests(superset: 0 ..< 10, subset: 3 ..< 8)
         runTests(superset: (0 ... 10) as ClosedRange, subset: 3 ... 8)
         runTests(superset: (0 ..< 10) as CountableRange, subset: 3 ..< 8)
