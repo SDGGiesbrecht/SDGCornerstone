@@ -84,8 +84,8 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - other: The other set.
     public func overlaps(_ other: CharacterSet) -> Bool {
-        for (lhsPlane, rhsPlane) in zip(lhs.planes, rhs.planes) where ¬lhsPlane.isEmpty ∧ ¬rhsPlane.isEmpty {
-            for (lhsCharacter, rhsCharacter) in zip(lhsPlane.binary, rhsPlane.binary) where lhsCharacter ∧ rhsCharacter {
+        for (ownPlane, otherPlane) in zip(planes, other.planes) where ¬ownPlane.isEmpty ∧ ¬otherPlane.isEmpty {
+            for (ownCharacter, otherCharacter) in zip(ownPlane.binary, otherPlane.binary) where ownCharacter ∧ otherCharacter {
                 return true
             }
         }
@@ -96,7 +96,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///
     /// - Parameters:
     ///     - other: Another set.
-    public func isDisjoint(with other: Self) -> Bool {
+    public func isDisjoint(with other: CharacterSet) -> Bool {
         return isDisjointAsComparableSet(with: other)
     }
     #else
