@@ -93,7 +93,8 @@ extension UIntFamily {
 
     // MARK: - Binary
 
-    internal var binary: BinaryView<Self> {
+    /// The value of self represented in binary as a collection of bits.
+    public var binary: BinaryView<Self> {
         get {
             return BinaryView(self)
         }

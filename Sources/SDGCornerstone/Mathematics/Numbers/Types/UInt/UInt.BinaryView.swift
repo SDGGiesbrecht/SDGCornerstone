@@ -15,7 +15,8 @@
 //extension UInt {
 // [_Workaround: Linux compiler cannot nest generic types in extensions. (Swift 3.1.0)_]
 
-    internal struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
+    /// A view of the contents of a fixed‐length unsigned integer as a collection of bits.
+    public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
 
         // MARK: - Initialization
 
@@ -25,11 +26,15 @@
 
         // MARK: - Static Properties
 
-        private static var endIndex: Index {
+        // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+        /// The position following the last valid index.
+        public static var endIndex: Index {
             return Index(count)
         }
 
-        internal static var count: IndexDistance {
+        // [_Inherit Documentation: SDGCornerstone.Collection.count_]
+        /// The number of elements in the collection.
+        public static var count: IndexDistance {
             let bytes = MemoryLayout<UIntValue>.size
             assert(bytes == MemoryLayout<UIntValue>.stride, "\(UIntValue.self) has an incompatible memory layout.")
             return bytes × 8
@@ -41,24 +46,50 @@
 
         // MARK: - BidirectionalCollection
 
-        internal func index(before i: Index) -> Index {
+        // [_Inherit Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+        /// Returns the index immediately before the specified index.
+        ///
+        /// - Parameters:
+        ///     - i: The following index.
+        public func index(before i: Index) -> Index {
             return i − 1
         }
 
         // MARK: - Collection
 
-        internal typealias Element = Bool
-        internal typealias Index = UIntValue
-        internal typealias IndexDistance = Int
+        // [_Inherit Documentation: SDGCornerstone.Collection.Element_]
+        /// The type of the elements of the collection.
+        public typealias Element = Bool
+        // [_Inherit Documentation: SDGCornerstone.Collection.Index_]
+        /// The type of the indices of the collection.
+        public typealias Index = UIntValue
+        // [_Inherit Documentation: SDGCornerstone.Collection.IndexDistance_]
+        /// The type that represents the number of steps between a pair of indices.
+        public typealias IndexDistance = Int
 
-        internal let startIndex: Index = 0
-        internal let endIndex: Index = BinaryView.endIndex
+        // [_Inherit Documentation: SDGCornerstone.Collection.Indices_]
+        /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
+        public typealias Indices = DefaultRandomAccessIndices<BinaryView>
 
-        internal func index(after i: Index) -> Index {
+        // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+        /// The position of the first element in a non‐empty collection.
+        public let startIndex: Index = 0
+        // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+        /// The position following the last valid index.
+        public let endIndex: Index = BinaryView.endIndex
+
+        // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+        /// Returns the index immediately after the specified index.
+        ///
+        /// - Parameters:
+        ///     - i: The preceding index.
+        public func index(after i: Index) -> Index {
             return i + 1
         }
 
-        internal subscript(index: Index) -> Element {
+        // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+        /// Accesses the element at the specified position.
+        public subscript(index: Index) -> Element {
             get {
                 assert(index ∈ startIndex ..< endIndex, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
                 return (uInt & (1 << index)) >> index == 1
@@ -69,9 +100,5 @@
                 uInt = oldErased | ((newValue ? 1 : 0) << index)
             }
         }
-
-        // MARK: - RandomAccessCollection
-
-        internal typealias Indices = DefaultRandomAccessIndices<BinaryView>
     }
 //}

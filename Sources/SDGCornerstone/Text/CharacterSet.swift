@@ -16,6 +16,39 @@ import Foundation
 
 extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, SetDefinition {
 
+    // MARK: - Bitmap
+
+    #if os(Linux)
+    // [_Workaround: This should be unnecessary, but Linux cannot do isSubset yet. (Swift 3.1.0)_]
+    private var planes: [Data] {
+
+        var bitmap = bitmapRepresentation
+        let planeSize: Data.Index = 8192
+        var result: [Int: Data] = [:]
+
+        let nextPlane: Range<Data.Index> = 0 ..< planeSize
+        result[0] = bitmap.subdata(in: nextPlane)
+        bitmap.removeSubrange(nextPlane)
+
+        while ¬bitmap.isEmpty {
+            let index = Int(bitmap.removeFirst())
+            result[index] = bitmap.subdata(in: nextPlane)
+            bitmap.removeSubrange(nextPlane)
+        }
+
+        var array: [Data] = []
+        for index in 0 ..< 17 {
+            if let relevant = result[index] {
+                array.append(relevant)
+            } else {
+                array.append(Data())
+            }
+        }
+
+        return array
+    }
+    #endif
+
     // MARK: - ComparableSet
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
@@ -27,7 +60,16 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     public static func ⊆ (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
         #if os(Linux)
             // [_Workaround: This should be unnecessary, but Linux cannot do isSubset yet. (Swift 3.1.0)_]
-            return rhs.isSuperset(of: lhs)
+            for (lhsPlane, rhsPlane) in zip(lhs.planes, rhs.planes) where ¬lhsPlane.isEmpty {
+                if rhsPlane.isEmpty {
+                    return false
+                } else {
+                    for (lhsCharacter, rhsCharacter) in zip(lhsPlane.binary, rhsPlane.binary) where lhsCharacter ∧ ¬rhsCharacter {
+                        return false
+                    }
+                }
+            }
+            return true
         #else
             return lhs.isSubset(of: rhs)
         #endif
