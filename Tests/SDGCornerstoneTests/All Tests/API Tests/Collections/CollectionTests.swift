@@ -43,7 +43,10 @@ class CollectionTests : XCTestCase {
         }
 
         runTests(superset: Set([1, 2, 3]), subset: Set([1, 2]))
+        #if !os(Linux)
+            // [_Warning: This needs to be dealt with._]
         runTests(superset: CharacterSet.alphanumerics, subset: CharacterSet.capitalizedLetters)
+        #endif
         runTests(superset: 0 ..< 10, subset: 3 ..< 8)
         runTests(superset: (0 ... 10) as ClosedRange, subset: 3 ... 8)
         runTests(superset: (0 ..< 10) as CountableRange, subset: 3 ..< 8)
@@ -214,7 +217,10 @@ class CollectionTests : XCTestCase {
         }
 
         runTests(setA: Set([1, 2, 3]), setB: [3, 4, 5], inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
+        #if !os(Linux)
+            // [_Warning: This needs to be dealt with._]
         runTests(setA: CharacterSet.alphanumerics, setB: CharacterSet(charactersIn: "ABC."), inAOnly: "D", inBOnly: ".", inBoth: "A", inNeither: " ")
+        #endif
         runTests(setA: MutableSetExample([1, 2, 3]), setB: MutableSetExample([3, 4, 5]), inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
 
         func runFiniteTests<M : MutableSet, F : FiniteSet>(setA: M, setB: F, inAOnly: M.Element, inBOnly: M.Element, inBoth: M.Element, inNeither: M.Element) where M : FiniteSet, M.Element == F.Element {
