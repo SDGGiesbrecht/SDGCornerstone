@@ -21,12 +21,20 @@ class TextTests : XCTestCase {
 
     func testCharacterSet() {
         let A = CharacterSet(charactersIn: "A")
-        XCTAssert("A" ∈ A)
+        XCTAssert("A" ∈ A, "A ∉ \(A)")
+        XCTAssert("B" ∉ A, "B ∈ \(A)")
         let a = CharacterSet(charactersIn: "Aa")
-        XCTAssert(A ⊆ a)
+        XCTAssert(A ⊆ a, "\(A) ⊈ \(a)")
+        XCTAssert(a ⊈ A, "\(a) ⊆ \(A)")
 
-        XCTAssert(a ⊆ CharacterSet.alphanumerics)
-        XCTAssert(A ⊆ CharacterSet.uppercaseLetters)
+        XCTAssert(a ⊆ CharacterSet.alphanumerics, "\(a) ⊈ \(CharacterSet.alphanumerics)")
+        XCTAssert(CharacterSet.alphanumerics ⊈ a, "\(CharacterSet.alphanumerics) ⊆ \(a)")
+
+        XCTAssert(A ⊆ CharacterSet.uppercaseLetters, "\(A) ⊈ \(CharacterSet.uppercaseLetters)")
+        XCTAssert(CharacterSet.uppercaseLetters ⊈ A, "\(CharacterSet.uppercaseLetters) ⊆ \(A)")
+
+        XCTAssert(CharacterSet.uppercaseLetters ⊆ CharacterSet.alphanumerics, "\(CharacterSet.uppercaseLetters) ⊈ \(CharacterSet.alphanumerics)")
+        XCTAssert(CharacterSet.alphanumerics ⊈ CharacterSet.uppercaseLetters, "\(CharacterSet.alphanumerics) ⊆ \(CharacterSet.uppercaseLetters)")
     }
 
     static var allTests: [(String, (TextTests) -> () throws -> Void)] {
