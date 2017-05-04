@@ -151,8 +151,7 @@ class MathematicsTests : XCTestCase {
     }
 
     func testDouble() {
-        #if os(Linux)
-        #else
+        #if !os(Linux)
             XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
             XCTAssert(CGFloat("1") ≠ nil)
             XCTAssert(CGFloat("a") == nil)

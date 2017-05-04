@@ -13,8 +13,7 @@
  */
 
 import Foundation
-#if os(Linux)
-#else
+#if !os(Linux)
     import CoreGraphics
 #endif
 
@@ -60,8 +59,7 @@ extension Double : FloatFamily {
     public static let e: Double = 0x1.5BF0A8B145769p1
 }
 
-#if os(Linux) || LinuxDocs
-#else
+#if !(os(Linux) || LinuxDocs)
 
     extension CGFloat : FloatFamily {
 
