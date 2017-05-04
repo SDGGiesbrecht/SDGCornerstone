@@ -30,11 +30,11 @@ class CollectionTests : XCTestCase {
 
     func testComparableSet() {
         func runTests<S : ComparableSet>(superset: S, subset: S) {
-            #if !os(Linux)
-                // [_Warning: These need to be solved on Linux._]
             XCTAssert(superset ⊈ subset, "\(superset) ⊆ \(subset)")
             XCTAssert(superset ⊇ subset, "\(superset) ⊉ \(subset)")
             XCTAssert(subset ⊉ superset, "\(subset) ⊇ \(superset)")
+            #if !os(Linux)
+                // [_Warning: These need to be solved on Linux._]
             XCTAssert(superset ⊋ subset, "\(superset) ⊋̸ \(subset)")
             XCTAssert(subset ⊊ superset, "\(subset) ⊊̸ \(superset)")
             XCTAssert(¬superset.isDisjoint(with: subset), "\(superset).isDisjoint(with: \(subset))")
