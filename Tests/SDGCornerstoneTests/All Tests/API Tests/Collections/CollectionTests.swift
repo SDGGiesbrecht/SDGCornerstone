@@ -43,7 +43,7 @@ class CollectionTests : XCTestCase {
         }
 
         runTests(superset: Set([1, 2, 3]), subset: Set([1, 2]))
-        runTests(superset: CharacterSet.alphanumerics, subset: CharacterSet.capitalizedLetters)
+        runTests(superset: CharacterSet.alphanumerics, subset: CharacterSet.uppercaseLetters)
         runTests(superset: 0 ..< 10, subset: 3 ..< 8)
         runTests(superset: (0 ... 10) as ClosedRange, subset: 3 ... 8)
         runTests(superset: (0 ..< 10) as CountableRange, subset: 3 ..< 8)

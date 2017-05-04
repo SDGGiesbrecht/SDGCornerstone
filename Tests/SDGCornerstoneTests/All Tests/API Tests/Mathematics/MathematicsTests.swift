@@ -17,8 +17,6 @@ import XCTest
 
 import SDGCornerstone
 
-typealias Integer = SDGCornerstone.Integer
-
 class MathematicsTests : XCTestCase {
 
     func testAddable() {
