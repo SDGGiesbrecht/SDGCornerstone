@@ -183,6 +183,7 @@ extension ComparableSet {
         return lhs ⊇ rhs ∧ lhs ⊈ rhs
     }
 
+    // [_Workaround: This can be internal once CharacterSet no longer needs it for Linux workarounds. (Swift 3.1.0)_]
     internal func isDisjointAsComparableSet(with other: Self) -> Bool {
         return ¬overlaps(other)
     }

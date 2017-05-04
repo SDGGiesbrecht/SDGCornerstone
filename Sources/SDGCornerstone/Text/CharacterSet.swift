@@ -76,6 +76,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     }
 
     #if os(Linux)
+
     // [_Workaround: Linux shouldn’t need independent treatment, but its implementation is incomplete. (Swift 3.1.0)_]
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
@@ -100,6 +101,12 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     public func isDisjoint(with other: CharacterSet) -> Bool {
         return isDisjointAsComparableSet(with: other)
     }
+
+    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    public func == (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
+        return lhs.planes == rhs.planes
+    }
+
     #else
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
@@ -140,6 +147,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     public func overlaps(_ other: CharacterSet) -> Bool {
         return ¬isDisjointAsSetAlgebra(with: other)
     }
+
     #endif
 
     // MARK: - MutableSet
