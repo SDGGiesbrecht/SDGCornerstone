@@ -75,6 +75,9 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         #endif
     }
 
+    #if !os(Linux)
+    // [_Workaround: This should be possible on Linux too, but its implementation is incomplete. (Swift 3.1.0)_]
+
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
     /// Returns `true` if `lhs` is a superset of `rhs`.
     ///
@@ -85,9 +88,6 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return lhs.isSuperset(of: rhs)
     }
 
-    #if !os(Linux)
-    // [_Workaround: This should be possible on Linux too, but its implementation is incomplete. (Swift 3.1.0)_]
-
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
     /// Returns `true` if `lhs` is a strict subset of `rhs`.
     ///
@@ -97,7 +97,6 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     public static func ⊊ (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
         return lhs.isStrictSubset(of: rhs)
     }
-    #endif
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
     /// Returns `true` if `lhs` is a strict superset of `rhs`.
@@ -108,6 +107,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     public static func ⊋ (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
         return lhs.isStrictSuperset(of: rhs)
     }
+    #endif
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
     /// Returns `true` if the sets overlap.
