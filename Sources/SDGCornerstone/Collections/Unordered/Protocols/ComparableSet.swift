@@ -233,7 +233,7 @@ extension ComparableSet {
     ///
     /// - RecommendedOver: !=
     public static func ≠ (lhs: Self, rhs: Self) -> Bool {
-        return lhs.linuxSafeIsEqual(to: rhs)
+        return ¬lhs.linuxSafeIsEqual(to: rhs)
     }
 }
 
