@@ -89,6 +89,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
                 return true
             }
         }
+        return false
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
