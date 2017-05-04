@@ -126,91 +126,91 @@ class CollectionTests : XCTestCase {
     func testMutableSet() {
         func runTests<S : MutableSet>(setA: S, setB: S, inAOnly: S.Element, inBOnly: S.Element, inBoth: S.Element, inNeither: S.Element) {
 
-            XCTAssert(inAOnly ∉ setA ∩ setB)
-            XCTAssert(inBOnly ∉ setA ∩ setB)
-            XCTAssert(inBoth ∈ setA ∩ setB)
-            XCTAssert(inNeither ∉ setA ∩ setB)
+            XCTAssert(inAOnly ∉ setA ∩ setB, "\(inAOnly) ∈ \(setA) ∩ \(setB)")
+            XCTAssert(inBOnly ∉ setA ∩ setB, "\(inBOnly) ∈ \(setA) ∩ \(setB)")
+            XCTAssert(inBoth ∈ setA ∩ setB, "\(inBoth) ∉ \(setA) ∩ \(setB)")
+            XCTAssert(inNeither ∉ setA ∩ setB, "\(inNeither) ∈ \(setA) ∩ \(setB)")
 
             var intersection = setA
             intersection ∩= setB
-            XCTAssert(inAOnly ∉ intersection)
-            XCTAssert(inBOnly ∉ intersection)
-            XCTAssert(inBoth ∈ intersection)
-            XCTAssert(inNeither ∉ intersection)
+            XCTAssert(inAOnly ∉ intersection, "\(inAOnly) ∈ \(intersection)")
+            XCTAssert(inBOnly ∉ intersection, "\(inBOnly) ∈ \(intersection)")
+            XCTAssert(inBoth ∈ intersection, "\(inBoth) ∉ \(intersection)")
+            XCTAssert(inNeither ∉ intersection, "\(inNeither) ∈ \(intersection)")
 
-            XCTAssert(inAOnly ∈ setA ∪ setB)
-            XCTAssert(inBOnly ∈ setA ∪ setB)
-            XCTAssert(inBoth ∈ setA ∪ setB)
-            XCTAssert(inNeither ∉ setA ∪ setB)
+            XCTAssert(inAOnly ∈ setA ∪ setB, "\(inAOnly) ∉ \(setA) ∪ \(setB)")
+            XCTAssert(inBOnly ∈ setA ∪ setB, "\(inBOnly) ∉ \(setA) ∪ \(setB)")
+            XCTAssert(inBoth ∈ setA ∪ setB, "\(inBoth) ∉ \(setA) ∪ \(setB)")
+            XCTAssert(inNeither ∉ setA ∪ setB, "\(inNeither) ∈ \(setA) ∪ \(setB)")
 
             var union = setA
             union ∪= setB
-            XCTAssert(inAOnly ∈ union)
-            XCTAssert(inBOnly ∈ union)
-            XCTAssert(inBoth ∈ union)
-            XCTAssert(inNeither ∉ union)
+            XCTAssert(inAOnly ∈ union, "\(inAOnly) ∉ \(union)")
+            XCTAssert(inBOnly ∈ union, "\(inBOnly) ∉ \(union)")
+            XCTAssert(inBoth ∈ union, "\(inBoth) ∉ \(union)")
+            XCTAssert(inNeither ∉ union, "\(inNeither) ∈ \(union)")
 
-            XCTAssert(inAOnly ∈ setA ∖ setB)
-            XCTAssert(inBOnly ∉ setA ∖ setB)
-            XCTAssert(inBoth ∉ setA ∖ setB)
-            XCTAssert(inNeither ∉ setA ∖ setB)
+            XCTAssert(inAOnly ∈ setA ∖ setB, "\(inAOnly) ∉ \(setA) ∖ \(setB)")
+            XCTAssert(inBOnly ∉ setA ∖ setB, "\(inBOnly) ∈ \(setA) ∖ \(setB)")
+            XCTAssert(inBoth ∉ setA ∖ setB, "\(inBoth) ∈ \(setA) ∖ \(setB)")
+            XCTAssert(inNeither ∉ setA ∖ setB, "\(inNeither) ∈ \(setA) ∖ \(setB)")
 
             var relativeComplement = setA
             relativeComplement ∖= setB
-            XCTAssert(inAOnly ∈ relativeComplement)
-            XCTAssert(inBOnly ∉ relativeComplement)
-            XCTAssert(inBoth ∉ relativeComplement)
-            XCTAssert(inNeither ∉ relativeComplement)
+            XCTAssert(inAOnly ∈ relativeComplement, "\(inAOnly) ∉ \(relativeComplement)")
+            XCTAssert(inBOnly ∉ relativeComplement, "\(inBOnly) ∈ \(relativeComplement)")
+            XCTAssert(inBoth ∉ relativeComplement, "\(inBoth) ∈ \(relativeComplement)")
+            XCTAssert(inNeither ∉ relativeComplement, "\(inNeither) ∈ \(relativeComplement)")
 
-            XCTAssert(inAOnly ∈ setA ∆ setB)
-            XCTAssert(inBOnly ∈ setA ∆ setB)
-            XCTAssert(inBoth ∉ setA ∆ setB)
-            XCTAssert(inNeither ∉ setA ∆ setB)
+            XCTAssert(inAOnly ∈ setA ∆ setB, "\(inAOnly) ∉ \(setA) ∆ \(setB)")
+            XCTAssert(inBOnly ∈ setA ∆ setB, "\(inBOnly) ∉ \(setA) ∆ \(setB)")
+            XCTAssert(inBoth ∉ setA ∆ setB, "\(inBoth) ∈ \(setA) ∆ \(setB)")
+            XCTAssert(inNeither ∉ setA ∆ setB, "\(inNeither) ∈ \(setA) ∆ \(setB)")
 
             var symmetricDifference = setA
             symmetricDifference ∆= setB
-            XCTAssert(inAOnly ∈ symmetricDifference)
-            XCTAssert(inBOnly ∈ symmetricDifference)
-            XCTAssert(inBoth ∉ symmetricDifference)
-            XCTAssert(inNeither ∉ symmetricDifference)
+            XCTAssert(inAOnly ∈ symmetricDifference, "\(inAOnly) ∉ \(symmetricDifference)")
+            XCTAssert(inBOnly ∈ symmetricDifference, "\(inBOnly) ∉ \(symmetricDifference)")
+            XCTAssert(inBoth ∉ symmetricDifference, "\(inBoth) ∈ \(symmetricDifference)")
+            XCTAssert(inNeither ∉ symmetricDifference, "\(inNeither) ∈ \(symmetricDifference)")
 
             // SetAlgebra
 
-            XCTAssert(inAOnly ∉ setA.intersection(setB))
-            XCTAssert(inBOnly ∉ setA.intersection(setB))
-            XCTAssert(inBoth ∈ setA.intersection(setB))
-            XCTAssert(inNeither ∉ setA.intersection(setB))
+            XCTAssert(inAOnly ∉ setA.intersection(setB), "\(inAOnly) ∈ \(setA).intersection(\(setB))")
+            XCTAssert(inBOnly ∉ setA.intersection(setB), "\(inBOnly) ∈ \(setA).intersection(\(setB))")
+            XCTAssert(inBoth ∈ setA.intersection(setB), "\(inBoth) ∉ \(setA).intersection(\(setB))")
+            XCTAssert(inNeither ∉ setA.intersection(setB), "\(inNeither) ∈ \(setA).intersection(\(setB))")
 
             intersection = setA
             intersection.formIntersection(setB)
-            XCTAssert(inAOnly ∉ intersection)
-            XCTAssert(inBOnly ∉ intersection)
-            XCTAssert(inBoth ∈ intersection)
-            XCTAssert(inNeither ∉ intersection)
+            XCTAssert(inAOnly ∉ intersection, "\(inAOnly) ∈ \(intersection)")
+            XCTAssert(inBOnly ∉ intersection, "\(inBOnly) ∈ \(intersection)")
+            XCTAssert(inBoth ∈ intersection, "\(inBoth) ∉ \(intersection)")
+            XCTAssert(inNeither ∉ intersection, "\(inNeither) ∈ \(intersection)")
 
-            XCTAssert(inAOnly ∈ setA.union(setB))
-            XCTAssert(inBOnly ∈ setA.union(setB))
-            XCTAssert(inBoth ∈ setA.union(setB))
-            XCTAssert(inNeither ∉ setA.union(setB))
+            XCTAssert(inAOnly ∈ setA.union(setB), "\(inAOnly) ∉ \(setA).union(\(setB))")
+            XCTAssert(inBOnly ∈ setA.union(setB), "\(inBOnly) ∉ \(setA).union(\(setB))")
+            XCTAssert(inBoth ∈ setA.union(setB), "\(inBoth) ∉ \(setA).union(\(setB))")
+            XCTAssert(inNeither ∉ setA.union(setB), "\(inNeither) ∈ \(setA).union(\(setB))")
 
             union = setA
             union.formUnion(setB)
-            XCTAssert(inAOnly ∈ union)
-            XCTAssert(inBOnly ∈ union)
-            XCTAssert(inBoth ∈ union)
-            XCTAssert(inNeither ∉ union)
+            XCTAssert(inAOnly ∈ union, "\(inAOnly) ∉ \(union)")
+            XCTAssert(inBOnly ∈ union, "\(inBOnly) ∉ \(union)")
+            XCTAssert(inBoth ∈ union, "\(inBoth) ∉ \(union)")
+            XCTAssert(inNeither ∉ union, "\(inNeither) ∈ \(union)")
 
-            XCTAssert(inAOnly ∈ setA.symmetricDifference(setB))
-            XCTAssert(inBOnly ∈ setA.symmetricDifference(setB))
-            XCTAssert(inBoth ∉ setA.symmetricDifference(setB))
-            XCTAssert(inNeither ∉ setA.symmetricDifference(setB))
+            XCTAssert(inAOnly ∈ setA.symmetricDifference(setB), "\(inAOnly) ∉ \(setA).symmetricDifference(\(setB))")
+            XCTAssert(inBOnly ∈ setA.symmetricDifference(setB), "\(inBOnly) ∉ \(setA).symmetricDifference(\(setB))")
+            XCTAssert(inBoth ∉ setA.symmetricDifference(setB), "\(inBoth) ∈ \(setA).symmetricDifference(\(setB))")
+            XCTAssert(inNeither ∉ setA.symmetricDifference(setB), "\(inNeither) ∈ \(setA).symmetricDifference(\(setB))")
 
             symmetricDifference = setA
             symmetricDifference.formSymmetricDifference(setB)
-            XCTAssert(inAOnly ∈ symmetricDifference)
-            XCTAssert(inBOnly ∈ symmetricDifference)
-            XCTAssert(inBoth ∉ symmetricDifference)
-            XCTAssert(inNeither ∉ symmetricDifference)
+            XCTAssert(inAOnly ∈ symmetricDifference, "\(inAOnly) ∉ \(symmetricDifference)")
+            XCTAssert(inBOnly ∈ symmetricDifference, "\(inBOnly) ∉ \(symmetricDifference)")
+            XCTAssert(inBoth ∉ symmetricDifference, "\(inBoth) ∈ \(symmetricDifference)")
+            XCTAssert(inNeither ∉ symmetricDifference, "\(inNeither) ∈ \(symmetricDifference)")
         }
 
         runTests(setA: Set([1, 2, 3]), setB: [3, 4, 5], inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
