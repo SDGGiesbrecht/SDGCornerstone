@@ -183,7 +183,7 @@ extension ComparableSet {
         return lhs ⊇ rhs ∧ lhs ⊈ rhs
     }
 
-    fileprivate func isDisjointAsComparableSet(with other: Self) -> Bool {
+    internal func isDisjointAsComparableSet(with other: Self) -> Bool {
         return ¬overlaps(other)
     }
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
