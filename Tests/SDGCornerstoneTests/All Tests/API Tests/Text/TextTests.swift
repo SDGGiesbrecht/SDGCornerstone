@@ -20,8 +20,10 @@ import SDGCornerstone
 class TextTests : XCTestCase {
 
     func testCharacterSet() {
-        let a = CharacterSet(charactersIn: "Aa")
-        XCTAssert("A" ∈ a)
+        let A = CharacterSet(charactersIn: "Aa")
+        XCTAssert("A" ∈ A)
+        let a = CharacterSet(charactersIn: "a")
+        XCTAssert(a ⊆ A)
     }
 
     static var allTests: [(String, (TextTests) -> () throws -> Void)] {
