@@ -25,7 +25,12 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///     - lhs: The possible subset to test.
     ///     - rhs: The other set.
     public static func ⊆ (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
-        return lhs.isSubset(of: rhs)
+        #if os(Linux)
+            // [_Workaround: This should be unnecessary, but Linux cannot do isSubset(of:) yet. (Swift 3.1.0)_]
+            return rhs.isSuperset(of: lhs)
+        #else
+            return lhs.isSubset(of: rhs)
+        #endif
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]

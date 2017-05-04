@@ -30,9 +30,9 @@ class CollectionTests : XCTestCase {
 
     func testComparableSet() {
         func runTests<S : ComparableSet>(superset: S, subset: S) {
+            XCTAssert(superset ⊈ subset)
             #if !os(Linux)
                 // [_Warning: These need to be solved on Linux._]
-            XCTAssert(superset ⊈ subset)
             XCTAssert(superset ⊇ subset)
             XCTAssert(subset ⊉ superset)
             XCTAssert(superset ⊋ subset)
