@@ -19,8 +19,8 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     // MARK: - Bitmap
 
     #if os(Linux)
-    // [_Workaround: This should be unnecessary, but Linux cannot do isSubset yet. (Swift 3.1.0)_]
-    private var planes: [Data] {
+    // [_Workaround: This should be unnecessary, but Linux cannot yet do isSubset, ==, etc. (Swift 3.1.0)_]
+    internal var planes: [Data] {
 
         var bitmap = bitmapRepresentation
         let planeSize: Data.Index = 8192
@@ -102,12 +102,24 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return isDisjointAsComparableSet(with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
-    public func == (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
-        return lhs.planes == rhs.planes
-    }
-
     #else
+
+    // [_Inherit Documentation: SDGCornerstone.ComparableSet.linuxSafeIsEqual(to:)_]
+    /// Returns `true` if the sets are equal.
+    ///
+    /// Use this instead of `==` when it may operate on a CharacterSet at runtime on Linux.
+    ///
+    /// [_Workaround: This will be removed once CharacterSet can do == safely on Linux. (Swift 3.1.0)_]
+    ///
+    /// - Parameters:
+    ///     - other: Another set.
+    public func linuxSafeIsEqual(to other: CharacterSet) -> Bool {
+        #if os(Linux)
+            return self.planes == other.planes
+        #else
+            return self == other
+        #endif
+    }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
     /// Returns `true` if `lhs` is a superset of `rhs`.
