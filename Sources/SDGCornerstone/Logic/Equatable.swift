@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+// [_Workaround: Foundation should be unnecessary once CharacterSet can do == on Linux. (Swift 3.1.0)_]
+import Foundation
+
 // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
 /// Returns `true` if the two values are inequal.
 ///
@@ -40,7 +43,18 @@ extension Equatable {
     ///
     /// - RecommendedOver: !=
     public static func ≠ (lhs: Self, rhs: Self) -> Bool {
-        return lhs != rhs
+        #if os(Linux)
+            // [_Workaround: Linux shouldn’t need independent treatment once CharacterSet can do == safely. (Swift 3.1.0)_]
+            if let lhsCharacterSet = lhs as? CharacterSet, let rhsCharacterSet = rhs as? CharacterSet {
+                return lhsCharacterSet.planes ≠ rhsCharacterSet.planes
+            } else {
+                // func ≠
+                return lhs != rhs
+            }
+        #else
+            // func ≠
+            return lhs != rhs
+        #endif
     }
 }
 
