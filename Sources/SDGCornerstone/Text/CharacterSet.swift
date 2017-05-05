@@ -208,7 +208,8 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         let rhsPlanes = rhs.planes
 
         for index in lhsPlanes.indices {
-            lhsPlanes[index].formBitwiseAnd(with: rhsPlanes[index].bitwiseNot())
+            lhsPlanes[index].formBitwiseOr(with: rhsPlanes[index])
+    
         }
 
         lhs = CharacterSet(planes: lhsPlanes)
@@ -225,7 +226,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         let rhsPlanes = rhs.planes
 
         for index in lhsPlanes.indices {
-            lhsPlanes[index].formBitwiseOr(with: rhsPlanes[index])
+            lhsPlanes[index].formBitwiseAnd(with: rhsPlanes[index].bitwiseNot())
         }
 
         lhs = CharacterSet(planes: lhsPlanes)
