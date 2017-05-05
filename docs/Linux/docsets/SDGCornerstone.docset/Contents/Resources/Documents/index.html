@@ -363,6 +363,7 @@
 <li>Inter‐type set operations.</li>
 </ul>
 
+<p>(For a list of related projecs, see <a href="Documentation/Related%20Projects.md">here</a>.) &lt;!&ndash;Skip in Jazzy&ndash;&gt;</p>
 <h2 id='importing' class='heading'>Importing</h2>
 
 <p>SDGCornerstone is intended for use with the <a href="https://swift.org/package-manager/">Swift Package Manager</a>.</p>
@@ -390,13 +391,13 @@
     <span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="mf">3.0</span>
     <span class="k">let</span> <span class="nv">b</span> <span class="o">=</span> <span class="mf">4.0</span>
     <span class="k">let</span> <span class="nv">c</span> <span class="o">=</span> <span class="mf">5.0</span>
-    <span class="k">if</span> <span class="o">√</span><span class="p">(</span><span class="n">a</span><span class="o">↑</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">↑</span><span class="mi">2</span><span class="p">)</span> <span class="o">≠</span> <span class="n">c</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="err">√</span><span class="p">(</span><span class="n">a</span><span class="err">↑</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="err">↑</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span><span class="err"≯</span> <span class="n">c</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"Pythagoras was wrong! (Or maybe I just need to research floating point numbers...)"</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">func</span> <span class="nf">tryTrigonometry</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">θ</span> <span class="o">=</span> <span class="mf">90.0</span><span class="o">°</span>
+    <span class="k">let</span> <span class="nv">θ</span> <span class="o">=</span> <span class="mf">90.0</span><span class="err">°</span>
     <span class="k">let</span> <span class="nv">sine</span> <span class="o">=</span> <span class="nf">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"The sine of </span><span class="se">\(</span><span class="n">θ</span><span class="o">.</span><span class="n">inRadians</span><span class="se">)</span><span class="s"> radians is </span><span class="se">\(</span><span class="n">sine</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 <span class="p">}</span>
@@ -411,7 +412,7 @@
         <span class="k">return</span> <span class="kt">Int</span><span class="p">(</span><span class="nv">randomInRange</span><span class="p">:</span> <span class="mi">1</span> <span class="o">...</span> <span class="mi">6</span><span class="p">)</span>
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">∧</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="err">∧</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"Snake eyes!"</span><span class="p">)</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"Not this time..."</span><span class="p">)</span>
@@ -425,7 +426,7 @@
     <span class="k">let</span> <span class="nv">twoDigits</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">..&lt;</span> <span class="mi">100</span>
     <span class="k">let</span> <span class="nv">odd</span> <span class="o">=</span> <span class="kt">IntensionalSet</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">isOdd</span> <span class="p">})</span>
 
-    <span class="k">if</span> <span class="kt">Set</span><span class="p">([</span><span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">89</span><span class="p">])</span> <span class="o">⊆</span> <span class="p">(</span><span class="n">twoDigits</span> <span class="o">∩</span> <span class="n">odd</span><span class="p">)</span> <span class="o">∖</span> <span class="n">square</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="kt">Set</span><span class="p">([</span><span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">89</span><span class="p">])</span> <span class="err">⊆</span> <span class="p">(</span><span class="n">twoDigits</span> <span class="err">∩</span> <span class="n">odd</span><span class="p">)</span> <span class="err">∖</span> <span class="n">square</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"They’re all in there."</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>

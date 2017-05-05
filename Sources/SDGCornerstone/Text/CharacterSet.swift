@@ -208,9 +208,43 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         let rhsPlanes = rhs.planes
 
         for index in lhsPlanes.indices {
-            lhsPlanes[index].formBitwiseOr(with: rhsPlanes[index])
+            lhsPlanes[index].formBitwiseAnd(with: rhsPlanes[index].bitwiseNot())
         }
 
+        lhs = CharacterSet(planes: lhsPlanes)
+    }
+    
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
+    /// Subtracts `rhs` from `lhs`.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set to subtract from.
+    ///     - rhs: The set to subtract.
+    public static func ∖= (lhs: inout CharacterSet, rhs: CharacterSet) {
+        var lhsPlanes = lhs.planes
+        let rhsPlanes = rhs.planes
+    
+        for index in lhsPlanes.indices {
+            lhsPlanes[index].formBitwiseOr(with: rhsPlanes[index])
+        }
+    
+        lhs = CharacterSet(planes: lhsPlanes)
+    }
+    
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
+    /// Sets `lhs` to the symmetric difference of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: The set to subtract from.
+    ///     - rhs: The set to subtract.
+    public static func ∆= (lhs: inout CharacterSet, rhs: CharacterSet) {
+        var lhsPlanes = lhs.planes
+        let rhsPlanes = rhs.planes
+    
+        for index in lhsPlanes.indices {
+        lhsPlanes[index].formBitwiseExclusiveOr(with: rhsPlanes[index])
+        }
+    
         lhs = CharacterSet(planes: lhsPlanes)
     }
 
@@ -256,8 +290,6 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return lhs.formUnion(rhs)
     }
 
-    #endif
-
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
     /// Returns the relative complement of `rhs` in `lhs`.
     ///
@@ -297,6 +329,8 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     public static func ∆= (lhs: inout CharacterSet, rhs: CharacterSet) {
         return lhs.formSymmetricDifference(rhs)
     }
+    
+    #endif
 
     // MARK: - SetDefinition
 
