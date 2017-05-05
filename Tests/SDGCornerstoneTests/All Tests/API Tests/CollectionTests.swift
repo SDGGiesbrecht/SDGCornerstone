@@ -35,6 +35,7 @@ class CollectionTests : XCTestCase {
             XCTAssert(subset ⊉ superset, "\(subset) ⊇ \(superset)")
             XCTAssert(superset ⊋ subset, "\(superset) ⊋̸ \(subset)")
             XCTAssert(subset ⊊ superset, "\(subset) ⊊̸ \(superset)")
+            XCTAssert(¬superset.isDisjoint(with: subset), "\(superset).isDisjoint(with: \(subset))")
             XCTAssert(superset ≠ subset, "\(superset) = \(subset)")
         }
 
