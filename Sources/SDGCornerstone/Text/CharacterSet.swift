@@ -209,7 +209,6 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
         for index in lhsPlanes.indices {
             lhsPlanes[index].formBitwiseOr(with: rhsPlanes[index])
-    
         }
 
         lhs = CharacterSet(planes: lhsPlanes)
