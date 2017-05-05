@@ -92,12 +92,12 @@
         public subscript(index: Index) -> Element {
             get {
                 assert(index ∈ startIndex ..< endIndex, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
-                return (uInt & (1 << index)) >> index == 1
+                return uInt.bitwiseAnd(with: 1 << index) >> index == 1
             }
             set {
                 assert(index ∈ startIndex ..< endIndex, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
-                let oldErased = uInt & ~(1 << index)
-                uInt = oldErased | ((newValue ? 1 : 0) << index)
+                let oldErased = uInt.bitwiseAnd(with: (1 << index).bitwiseNot())
+                uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << index)
             }
         }
     }

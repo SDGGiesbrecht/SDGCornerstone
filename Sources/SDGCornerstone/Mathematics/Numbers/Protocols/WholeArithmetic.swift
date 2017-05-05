@@ -1221,7 +1221,7 @@ extension WholeArithmetic where Self : UIntFamily {
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isOdd_]
     /// Returns true if `self` is an odd integer.
     public var isOdd: Bool {
-        return self & 1 == 1
+        return self.bitwiseAnd(with: 1) == 1
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
