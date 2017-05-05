@@ -104,23 +104,6 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
     #else
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.linuxSafeIsEqual(to:)_]
-    /// Returns `true` if the sets are equal.
-    ///
-    /// Use this instead of `==` when it may operate on a CharacterSet at runtime on Linux.
-    ///
-    /// [_Workaround: This will be removed once CharacterSet can do == safely on Linux. (Swift 3.1.0)_]
-    ///
-    /// - Parameters:
-    ///     - other: Another set.
-    public func linuxSafeIsEqual(to other: CharacterSet) -> Bool {
-        #if os(Linux)
-            return self.planes == other.planes
-        #else
-            return self == other
-        #endif
-    }
-
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
     /// Returns `true` if `lhs` is a superset of `rhs`.
     ///
@@ -161,6 +144,23 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     }
 
     #endif
+
+    // MARK: - Equatable
+
+    // [_Workaround: This should be removed once CharacterSet can do == safely on Linux. (Swift 3.1.0)_]
+    /// Returns `true` if the sets are equal.
+    ///
+    /// Use this instead of `==` when it may operate on a CharacterSet at runtime on Linux.
+    ///
+    /// - Parameters:
+    ///     - other: Another set.
+    public func linuxSafeIsEqual(to other: CharacterSet) -> Bool {
+        #if os(Linux)
+            return self.planes == other.planes
+        #else
+            return self == other
+        #endif
+    }
 
     // MARK: - MutableSet
 
