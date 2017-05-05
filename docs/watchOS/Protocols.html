@@ -439,6 +439,7 @@
                         <p>A type that can be used with bitwise operations.</p>
 
 <p>Conformance Requirements:
+    - <code>static var allZeros: Self { get }</code>
     - <code>mutating func formBitwiseNot()</code>
     - <code>mutating func formBitwiseAnd(with other: Self)</code>
     - <code>mutating func formBitwiseOr(with other: Self)</code>
@@ -450,7 +451,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">BitwiseLogic</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">BitwiseLogic</span> <span class="p">:</span> <span class="kt">BitwiseOperations</span></code></pre>
 
                         </div>
                       </div>
