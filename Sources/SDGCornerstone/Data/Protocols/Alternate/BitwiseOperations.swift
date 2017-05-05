@@ -15,6 +15,9 @@
 extension BitwiseOperations where Self : BitwiseLogic {
     // MARK: - where Self : BitwiseLogic
 
+    // [_Define Documentation: SDGCornerstone.BitwiseOperations.allZeros_]
+    /// An instance with all its bits set to zero.
+
     /// Returns the bits not present in `x`.
     public static prefix func ~ (x: Self) -> Self {
         return x.bitwiseNot()

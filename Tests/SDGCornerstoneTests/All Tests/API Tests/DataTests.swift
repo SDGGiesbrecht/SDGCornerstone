@@ -27,6 +27,21 @@ class DataTests : XCTestCase {
         var toReverse = Data(bytes: [0b11110000, 0b00000000])
         toReverse.binary.reverse()
         XCTAssert(toReverse == Data(bytes: [0b000000000, 0b00001111]))
+
+        let alternating = Data(bytes: [0b01010101, 0b01010101])
+        let sorted = Data(bytes: [0b00000000, 0b11111111])
+
+        XCTAssert(alternating.bitwiseNot() == Data(bytes: [0b10101010, 0b10101010]))
+        XCTAssert(alternating.bitwiseAnd(with: sorted) == Data(bytes: [0b00000000, 0b01010101]))
+        XCTAssert(alternating.bitwiseOr(with: sorted) == Data(bytes: [0b01010101, 0b11111111]))
+        XCTAssert(alternating.bitwiseExclusiveOr(with: sorted) == Data(bytes: [0b01010101, 0b10101010]))
+
+        // BitwiseOperations
+
+        XCTAssert(~alternating == Data(bytes: [0b10101010, 0b10101010]))
+        XCTAssert(alternating & sorted == Data(bytes: [0b00000000, 0b01010101]))
+        XCTAssert(alternating | sorted == Data(bytes: [0b01010101, 0b11111111]))
+        XCTAssert(alternating ^ sorted == Data(bytes: [0b01010101, 0b10101010]))
     }
 
     static var allTests: [(String, (DataTests) -> () throws -> Void)] {

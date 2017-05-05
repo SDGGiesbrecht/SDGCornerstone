@@ -197,6 +197,23 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         lhs = CharacterSet(planes: lhsPlanes)
     }
 
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
+    /// Sets `lhs` to the union of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
+    public static func ∪= (lhs: inout CharacterSet, rhs: CharacterSet) {
+        var lhsPlanes = lhs.planes
+        let rhsPlanes = rhs.planes
+
+        for index in lhsPlanes.indices {
+            lhsPlanes[index].formBitwiseOr(with: rhsPlanes[index])
+        }
+
+        lhs = CharacterSet(planes: lhsPlanes)
+    }
+
     #else
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
@@ -219,8 +236,6 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         lhs.formIntersection(rhs)
     }
 
-    #endif
-
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
     /// Returns the union of the two sets.
     ///
@@ -240,6 +255,8 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     public static func ∪= (lhs: inout CharacterSet, rhs: CharacterSet) {
         return lhs.formUnion(rhs)
     }
+
+    #endif
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
     /// Returns the relative complement of `rhs` in `lhs`.

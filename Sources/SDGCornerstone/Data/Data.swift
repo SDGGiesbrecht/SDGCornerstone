@@ -14,7 +14,7 @@
 
 import Foundation
 
-extension Data {
+extension Data : BitwiseLogic {
 
     // MARK: - Properties
 
@@ -49,9 +49,7 @@ extension Data {
         for index in startIndex ..< end {
             self[index].formBitwiseAnd(with: other[index])
         }
-        for index in end ..< endIndex {
-            self[index] = 0
-        }
+        removeSubrange(end ..< endIndex)
     }
 
     // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseOr(with:)_]
@@ -81,4 +79,10 @@ extension Data {
         }
         append(contentsOf: other[end ..< other.endIndex])
     }
+
+    // MARK: - BitwiseOperations
+
+    // [_Inherit Documentation: SDGCornerstone.BitwiseOperations.allZeros_]
+    /// An instance with all its bits set to zero.
+    public static let allZeros = Data()
 }
