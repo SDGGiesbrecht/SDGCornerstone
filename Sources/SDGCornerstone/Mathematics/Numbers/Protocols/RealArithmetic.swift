@@ -30,6 +30,26 @@ prefix operator √
 /// - NonmutatingVariant: √
 postfix operator √=
 
+// [_Inherit Documentation: SDGCornerstone.RealArithmetic.°_]
+/// Returns an angle in degrees.
+///
+/// - Parameters:
+///     - value: The value in degrees.
+postfix operator °
+
+/// Returns a measurement in minutes, the absolute complement of a set, etc. Behaviour depends on the type.
+///
+/// - Parameters:
+///     - operand: The operand.
+postfix operator ′
+
+// [_Inherit Documentation: SDGCornerstone.RealArithmetic.′′_]
+/// Returns an angle in seconds.
+///
+/// - Parameters:
+///     - value: The value in seconds.
+postfix operator ′′
+
 /// A type that can be used for real arithmetic.
 ///
 /// Conformance Requirements:
@@ -270,6 +290,8 @@ public protocol RealArithmetic : RationalArithmetic {
 
 extension RealArithmetic {
 
+    // [_Workaround: These can be removed when global generic constants are available. (Swift 3.1.0)_]
+
     /// π in the same type.
     ///
     /// - Note: This is an alias for `Self.π` to improve the legibility of code involving mathematical equations.
@@ -470,7 +492,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - sine: The sine.
     public static func arcsin(_ sine: Self) -> Angle<Self> {
-        assert((−1 ... 1).contains(sine), "There is no arcsine angle for any number x, where |x| > 1. In this case, the number \(sine).")
+        assert(sine ∈ −1 ... 1, "There is no arcsine angle for any number x, where |x| > 1. In this case, the number \(sine).")
         return arctan(sine ÷ √(1 − sine ↑ 2))
     }
 
@@ -484,7 +506,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - cosine: The cosine.
     public static func arccos(_ cosine: Self) -> Angle<Self> {
-        assert((−1 ... 1).contains(cosine), "There is no arccosine angle for any number x, where |x| > 1. In this case, the number \(cosine).")
+        assert(cosine ∈ −1 ... 1, "There is no arccosine angle for any number x, where |x| > 1. In this case, the number \(cosine).")
         return (π ÷ 2).rad − arcsin(cosine)
     }
 
@@ -498,7 +520,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - cosecant: The cosecant.
     public static func arccsc(_ cosecant: Self) -> Angle<Self> {
-        assert(¬(−1 ... 1).contains(cosecant), "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(cosecant).")
+        assert(cosecant ∉ −1 ... 1, "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(cosecant).")
         return arcsin(1 ÷ cosecant)
     }
 
@@ -512,7 +534,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - secant: The secant.
     public static func arcsec(_ secant: Self) -> Angle<Self> {
-        assert(¬(−1 ... 1).contains(secant), "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(secant).")
+        assert(secant ∉ −1 ... 1, "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(secant).")
         return arccos(1 ÷ secant)
     }
 
@@ -534,11 +556,16 @@ extension RealArithmetic {
 
     // MARK: - Angles
 
+    // ••••••• ••••••• ••••••• ••••••• ••••••• ••••••• •••••••
+    // Symbol versions are more legible beside literals, but less legible beside variables. For this reason, both symbols and full names should remain available.
+    // ••••••• ••••••• ••••••• ••••••• ••••••• ••••••• •••••••
+
     // [_Define Documentation: SDGCornerstone.RealArithmetic.radians_]
     /// Returns an angle in radians.
     public var radians: Angle<Self> {
         return Angle(radians: self)
     }
+
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.radians_]
     /// Returns an angle in radians.
     public var rad: Angle<Self> {
@@ -557,10 +584,28 @@ extension RealArithmetic {
         return Angle(degrees: self)
     }
 
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.°_]
+    /// Returns an angle in degrees.
+    ///
+    /// - Parameters:
+    ///     - value: The value in degrees.
+    public static postfix func ° (value: Self) -> Angle<Self> {
+        return value.degrees
+    }
+
     // [_Define Documentation: SDGCornerstone.RealArithmetic.minutes_]
     /// Returns an angle in minutes.
     public var minutes: Angle<Self> {
         return Angle(minutes: self)
+    }
+
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.′_]
+    /// Returns an angle in minutes.
+    ///
+    /// - Parameters:
+    ///     - value: The value in minutes.
+    public static postfix func ′ (value: Self) -> Angle<Self> {
+        return value.minutes
     }
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.seconds_]
@@ -569,14 +614,31 @@ extension RealArithmetic {
         return Angle(seconds: self)
     }
 
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.′′_]
+    /// Returns an angle in seconds.
+    ///
+    /// - Parameters:
+    ///     - value: The value in seconds.
+    public static postfix func ′′ (value: Self) -> Angle<Self> {
+        return value.seconds
+    }
+
     // [_Define Documentation: SDGCornerstone.RealArithmetic.gradians_]
     /// Returns an angle in gradians.
     public var gradians: Angle<Self> {
         return Angle(gradians: self)
     }
+
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.gradians_]
+    /// Returns an angle in gradians.
+    public var gon: Angle<Self> {
+        return gradians
+    }
 }
 
 // MARK: - Real Arithmetic
+
+// [_Workaround: These should be switched to generic constants when they become available. (Swift 3.1.0)_]
 
 /// An instance of π in the desired return type.
 ///
@@ -903,7 +965,7 @@ extension RealArithmetic where Self : FloatFamily {
     ///     - angle: The angle.
     public static func sin(_ angle: Angle<Self>) -> Self {
 
-        if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
+        if angle ∉ additiveIdentity.rad ..< τ.rad {
             // Use periodic reference angle.
             return sin(angle.mod(τ.rad))
         } else if angle > π.rad {
@@ -963,7 +1025,7 @@ extension RealArithmetic where Self : FloatFamily {
     ///     - angle: The angle.
     public static func cos(_ angle: Angle<Self>) -> Self {
 
-        if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
+        if angle ∉ additiveIdentity.rad ..< τ.rad {
             // Use periodic reference angle.
             return cos(angle.mod(τ.rad))
         } else if angle > π.rad {

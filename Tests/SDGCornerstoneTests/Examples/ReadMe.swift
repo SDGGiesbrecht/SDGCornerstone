@@ -15,14 +15,6 @@
 // [_Define Example: Read‐Me_]
 import SDGCornerstone
 
-// Logic
-
-func tryLogicOperators() {
-    if ¬((true ∧ false) ∨ true) ≠ true {
-        print("I’m confused...")
-    }
-}
-
 // Mathematics
 
 func verifyPythagoreanTheorem() {
@@ -40,14 +32,7 @@ func tryTrigonometry() {
     print("The sine of \(θ.inRadians) radians is \(sine)")
 }
 
-func analyzeParabola() {
-    let parabola: (Int) -> Int = {
-        (x: Int) -> Int in
-        return 2 × x↑2   +   4 × x   −   1
-    }
-    let vertexX = findLocalMinimum(near: 0, inFunction: parabola)
-    print("The vertex is at (\( vertexX ), \( parabola(vertexX) )).")
-}
+let tenDuotrigintillion: WholeNumber = "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"
 
 // Randomization
 
@@ -61,6 +46,18 @@ func playWithDice() {
         print("Snake eyes!")
     } else {
         print("Not this time...")
+    }
+}
+
+// Sets
+
+func trySetOperations() {
+    let square: Set<Int> = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196]
+    let twoDigits = 10 ..< 100
+    let odd = IntensionalSet<Int>(where: { $0.isOdd })
+
+    if Set([23, 45, 67, 89]) ⊆ (twoDigits ∩ odd) ∖ square {
+        print("They’re all in there.")
     }
 }
 

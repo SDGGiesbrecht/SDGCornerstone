@@ -44,10 +44,10 @@ internal struct WholeNumberBinaryView {
             var digit = wholeNumber[index]
 
             let insertion = carried
-            carried = (digit & extractionMask) >> extractionStart
+            carried = digit.bitwiseAnd(with: extractionMask) >> extractionStart
 
             digit = digit << shiftDistance
-            digit = digit | insertion
+            digit = digit.bitwiseOr(with: insertion)
 
             wholeNumber[index] = digit
         }

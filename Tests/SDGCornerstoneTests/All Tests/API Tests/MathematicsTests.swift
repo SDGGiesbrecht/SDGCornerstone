@@ -17,8 +17,6 @@ import XCTest
 
 import SDGCornerstone
 
-typealias Integer = SDGCornerstone.Integer
-
 class MathematicsTests : XCTestCase {
 
     func testAddable() {
@@ -51,6 +49,7 @@ class MathematicsTests : XCTestCase {
             XCTAssert((_1 × 6)′′.inSeconds ≈ _1 × 6)
 
             XCTAssert((_1 × 200).gradians ≈ πValue.rad)
+            XCTAssert((_1 × 200).gon ≈ πValue.rad)
             XCTAssert((_1 × 6).gradians.inGradians ≈ _1 × 6)
 
             variable = _1.rad
@@ -90,9 +89,9 @@ class MathematicsTests : XCTestCase {
 
             for _ in 1 ..< 100 {
                 let random = Angle(randomInRange: N.additiveIdentity.rad ..< _1.rad)
-                XCTAssert((N.additiveIdentity.rad ..< _1.rad).contains(random))
+                XCTAssert(random ∈ N.additiveIdentity.rad ..< _1.rad)
                 let random2 = Angle(randomInRange: N.additiveIdentity.rad ... _1.rad)
-                XCTAssert((N.additiveIdentity.rad ... _1.rad).contains(random2))
+                XCTAssert(random2 ∈ N.additiveIdentity.rad ... _1.rad)
             }
         }
         runTests(Double.self)
@@ -150,8 +149,7 @@ class MathematicsTests : XCTestCase {
     }
 
     func testDouble() {
-        #if os(Linux)
-        #else
+        #if !os(Linux)
             XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
             XCTAssert(CGFloat("1") ≠ nil)
             XCTAssert(CGFloat("a") == nil)
@@ -203,9 +201,9 @@ class MathematicsTests : XCTestCase {
 
             for _ in 1 ... 100 {
                 let random = N(randomInRange: 3 ... 7)
-                XCTAssert((3 ... 7).contains(random), "\(random) ∉ 3–7")
+                XCTAssert(random ∈ 3 ... 7, "\(random) ∉ 3–7")
                 let negativeRandom = N(randomInRange: −10 ... −4)
-                XCTAssert((−10 ... −4).contains(negativeRandom), "\(negativeRandom) ∉ −10 to −4")
+                XCTAssert(negativeRandom ∈ −10 ... −4, "\(negativeRandom) ∉ −10 to −4")
             }
 
             XCTAssert(minusTwo < minusOne)
@@ -323,7 +321,7 @@ class MathematicsTests : XCTestCase {
             XCTAssert(variable == 3)
 
             for _ in 1 ..< 100 {let random = N(randomInRange: 0 ..< 1)
-                XCTAssert((0 ..< 1).contains(random))
+                XCTAssert(random ∈ 0 ..< 1)
             }
 
             XCTAssert(N(binary: "0.000 1") == 1 ÷ 16)
@@ -521,7 +519,7 @@ class MathematicsTests : XCTestCase {
             XCTAssert(one.rounded(.down) == one)
 
             for _ in 1 ... 100 {
-                XCTAssert((17 ... 28).contains(N(randomInRange: 17 ... 28)))
+                XCTAssert(N(randomInRange: 17 ... 28) ∈ 17 ... 28)
             }
 
             let uInt8: UInt8 = 94

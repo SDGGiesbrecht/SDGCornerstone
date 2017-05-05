@@ -110,12 +110,12 @@ public final class PseudorandomNumberGenerator : Randomizer {
 
         let result = state.0 &+ state.1
 
-        state.1 ^= state.0
+        state.1.formBitwiseExclusiveOr(with: state.0)
 
         func bits(of value: UInt64, rotatedLeft distance: UInt64) -> UInt64 {
-            return (value << distance) | (value >> (64 − distance))
+            return (value << distance).bitwiseOr(with: value >> (64 − distance))
         }
-        state.0 = bits(of: state.0, rotatedLeft: 55) ^ state.1 ^ (state.1 << 14)
+        state.0 = bits(of: state.0, rotatedLeft: 55).bitwiseExclusiveOr(with: state.1).bitwiseExclusiveOr(with: state.1 << 14)
         state.1 = bits(of: state.1, rotatedLeft: 36)
 
         return result

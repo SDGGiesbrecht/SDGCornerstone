@@ -43,7 +43,7 @@ public protocol Randomizer : class {
     /// - If the value returned by `randomNumber()` is in the allowed range, it will be returned unaltered.
     /// - If the value returned by `randomNumber()` is outside the allowed range, it will be mapped to a value in the allowed range.
     ///
-    /// If the `randomNumber()` returns every possible value of `UInt64` with equal probability, `randomNumber(inRange:)` will also return each of its possible values with equal probability. (Specifically, no modulo bias is introduced.)
+    /// If `randomNumber()` returns every possible value of `UInt64` with equal probability, `randomNumber(inRange:)` will also return each of its possible values with equal probability. (Specifically, no modulo bias is introduced.)
     ///
     /// - Precondition: `randomNumber()` must eventually return a value in `range` or less than `UInt64.max.rounded(.down, toMultipleOf: UInt64(range.count))`.
     ///
@@ -62,7 +62,7 @@ extension Randomizer {
     /// - If the value returned by `randomNumber()` is in the allowed range, it will be returned unaltered.
     /// - If the value returned by `randomNumber()` is outside the allowed range, it will be mapped to a value in the allowed range.
     ///
-    /// If the `randomNumber()` returns every possible value of `UInt64` with equal probability, `randomNumber(inRange:)` will also return each of its possible values with equal probability. (Specifically, no modulo bias is introduced.)
+    /// If `randomNumber()` returns every possible value of `UInt64` with equal probability, `randomNumber(inRange:)` will also return each of its possible values with equal probability. (Specifically, no modulo bias is introduced.)
     ///
     /// - Precondition: `randomNumber()` must eventually return a value in `range` or less than `UInt64.max.rounded(.down, toMultipleOf: UInt64(range.count))`.
     ///
@@ -72,7 +72,7 @@ extension Randomizer {
 
         var unboundedRandom = randomNumber()
 
-        if range.contains(unboundedRandom) {
+        if unboundedRandom ∈ range {
             // Valid, return as‐is.
             return unboundedRandom
 

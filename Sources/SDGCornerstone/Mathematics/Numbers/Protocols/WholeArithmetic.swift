@@ -461,7 +461,7 @@ extension WholeArithmetic {
                 self += (base ↑ position) × digit
                 position += 1
             } else {
-                assert(formattingSeparators.contains(character), "\(character) is not a valid digit.")
+                assert(character ∈ formattingSeparators, "\(character) is not a valid digit.")
             }
         }
     }
@@ -1064,11 +1064,9 @@ extension WholeArithmetic where Self : RationalArithmetic {
         let scalars = representation.decomposedStringWithCompatibilityMapping.unicodeScalars
 
         var radixLocation: String.UnicodeScalarView.Index?
-        for index in scalars.indices {
-            if radixCharacters.contains(scalars[index]) {
-                radixLocation = index
-                break
-            }
+        for index in scalars.indices where scalars[index] ∈ radixCharacters {
+            radixLocation = index
+            break
         }
 
         let wholeString: String
@@ -1223,7 +1221,7 @@ extension WholeArithmetic where Self : UIntFamily {
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isOdd_]
     /// Returns true if `self` is an odd integer.
     public var isOdd: Bool {
-        return self & 1 == 1
+        return self.bitwiseAnd(with: 1) == 1
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]

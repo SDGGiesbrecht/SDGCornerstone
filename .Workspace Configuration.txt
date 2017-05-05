@@ -43,6 +43,7 @@ Quotation Chapter: Isaiah 28
 - Mathematics: exponents, roots, logarithms, trigonometry, etc.
 - Arbitrary‐precision arithmetic.
 - Customizable randomization.
+- Inter‐type set operations.
 [_End_]
 
 Skip Simulator: True

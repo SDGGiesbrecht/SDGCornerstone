@@ -220,7 +220,7 @@ extension Bool : Comparable {
     /// - Parameters:
     ///     - randomizer: The randomizer.
     public init(fromRandomizer randomizer: Randomizer) {
-        self = randomizer.randomNumber() & Bool.randomizationBit == Bool.randomizationBit
+        self = randomizer.randomNumber().bitwiseAnd(with: Bool.randomizationBit) == Bool.randomizationBit
     }
 
     // MARK: - Comparable

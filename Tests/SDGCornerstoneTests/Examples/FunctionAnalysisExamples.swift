@@ -44,12 +44,12 @@ private func useFindLocalMinimum() {
 private func demonstrateUndefinedCasesForFindLocalMinimum() {
     // [_Define Example: findLocalMinimum Undefined 1_]
     // This is undefined:
-    _ = findLocalMinimum(near: 0) { (−10 ..< 10).contains($0) ? −($0 ↑ 2) : $0 ↑ 2 }
+    _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..< 10 ? −($0 ↑ 2) : $0 ↑ 2 }
     // [_End_]
 
     // [_Define Example: findLocalMinimum Undefined 2_]
     // This is undefined:
-    _ = findLocalMinimum(near: 0) { (−10 ..< 10).contains($0) ? −1 : |$0| }
+    _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..< 10 ? −1 : |$0| }
     // [_End_]
 }
 
@@ -63,12 +63,12 @@ private func demonstratePreconditionViolationForFindLocalMinimum() {
 private func demonstrateUndefinedCasesForFindLocalMaximum() {
     // [_Define Example: findLocalMaximum Undefined 1_]
     // This is undefined:
-    _ = findLocalMaximum(near: 0) { (−10 ..< 10).contains($0) ? $0 ↑ 2 : −($0 ↑ 2) }
+    _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..< 10 ? $0 ↑ 2 : −($0 ↑ 2) }
     // [_End_]
 
     // [_Define Example: findLocalMaximum Undefined 2_]
     // This is undefined:
-    _ = findLocalMaximum(near: 0) { (−10 ..< 10).contains($0) ? 1 : −(|$0|) }
+    _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..< 10 ? 1 : −(|$0|) }
     // [_End_]
 }
 

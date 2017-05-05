@@ -50,10 +50,19 @@
             <a href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Extensions/BitwiseOperations.html">BitwiseOperations</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/Bool.html">Bool</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/CharacterSet.html">CharacterSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Dictionary.html">Dictionary</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/Equatable.html">Equatable</a>
@@ -75,6 +84,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Set.html">Set</a>
               </li>
             </ul>
           </li>
@@ -169,19 +181,10 @@
                 <a href="Functions.html#/s:F14SDGCornerstoneop1ouRxS_25NumericAdditiveArithmeticrFGVS_21_PartialAbsoluteValuex_x">|(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F14SDGCornerstoneXoP3nbauRxS_14RealArithmeticrFxGVS_5Anglex_">°(_:)</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Functions.html#/s:F14SDGCornerstoneX3BxauRxS_14RealArithmeticrFT_x">π()</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F14SDGCornerstoneX3FxauRxS_14RealArithmeticrFT_x">τ()</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F14SDGCornerstoneXoP3DvguRxS_14RealArithmeticrFxGVS_5Anglex_">′(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F14SDGCornerstoneXoP4DvgauRxS_14RealArithmeticrFxGVS_5Anglex_">′′(_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F14SDGCornerstoneXoi3Fchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≤(_:_:)</a>
@@ -225,7 +228,19 @@
                 <a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/ArrayFamily.html">ArrayFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/BitwiseLogic.html">BitwiseLogic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ComparableSet.html">ComparableSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/FiniteSet.html">FiniteSet</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
@@ -235,6 +250,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/MutableSet.html">MutableSet</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Negatable.html">Negatable</a>
@@ -255,6 +273,9 @@
                 <a href="Protocols/Randomizer.html">Randomizer</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/RangeFamily.html">RangeFamily</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/RationalArithmetic.html">RationalArithmetic</a>
               </li>
               <li class="nav-group-task">
@@ -262,6 +283,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SetInRepresentableUniverse.html">SetInRepresentableUniverse</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/VectorType.html">VectorType</a>
@@ -275,7 +299,21 @@
                 <a href="Structs/Angle.html">Angle</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/IntensionalSet.html">IntensionalSet</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:E14SDGCornerstoneVs11ClosedRange7Element">Element</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a>
               </li>
             </ul>
           </li>
@@ -375,6 +413,45 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ExpressibleByTextLiterals</span> <span class="p">:</span> <span class="kt">ExpressibleByStringLiteral</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone12BitwiseLogic"></a>
+                    <a name="//apple_ref/swift/Protocol/BitwiseLogic" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone12BitwiseLogic">BitwiseLogic</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that can be used with bitwise operations.</p>
+
+<p>Conformance Requirements:
+    - <code>static var allZeros: Self { get }</code>
+    - <code>mutating func formBitwiseNot()</code>
+    - <code>mutating func formBitwiseAnd(with other: Self)</code>
+    - <code>mutating func formBitwiseOr(with other: Self)</code>
+    - <code>mutating func formBitwiseExclusiveOr(with other: Self)</code></p>
+
+                        <a href="Protocols/BitwiseLogic.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">BitwiseLogic</span> <span class="p">:</span> <span class="kt">BitwiseOperations</span></code></pre>
 
                         </div>
                       </div>
@@ -589,6 +666,228 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">VectorType</span> <span class="p">:</span> <span class="kt"><a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone11ArrayFamily"></a>
+                    <a name="//apple_ref/swift/Protocol/ArrayFamily" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone11ArrayFamily">ArrayFamily</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A member of the <code>Array</code> family: <code>Array</code>, <code>ArraySlice</code> or <code>ContiguousArray</code>.</p>
+
+                        <a href="Protocols/ArrayFamily.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ArrayFamily</span> <span class="p">:</span> <span class="kt">CustomDebugStringConvertible</span><span class="p">,</span> <span class="kt">CustomReflectable</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span><span class="p">,</span> <span class="kt">ExpressibleByArrayLiteral</span><span class="p">,</span> <span class="kt">MutableCollection</span><span class="p">,</span> <span class="kt">RangeReplaceableCollection</span><span class="p">,</span> <span class="kt">RandomAccessCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone11RangeFamily"></a>
+                    <a name="//apple_ref/swift/Protocol/RangeFamily" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone11RangeFamily">RangeFamily</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A member of the <code>Range</code> family: <code>Range</code>, <code>ClosedRange</code>, <code>CountableRange</code> or <code>CountableClosedRange</code>.</p>
+
+                        <a href="Protocols/RangeFamily.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RangeFamily</span> <span class="p">:</span> <span class="kt"><a href="Protocols/ComparableSet.html">ComparableSet</a></span><span class="p">,</span> <span class="kt">CustomDebugStringConvertible</span><span class="p">,</span> <span class="kt">CustomReflectable</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span><span class="p">,</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">SetDefinition</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone13ComparableSet"></a>
+                    <a name="//apple_ref/swift/Protocol/ComparableSet" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone13ComparableSet">ComparableSet</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A set that can be compared against other sets of the same type.</p>
+
+<p>Conformance Requirements:
+    - <code>SetDefinition</code>
+    - <code>static func ⊆ (lhs: Self, rhs: Self) -&gt; Bool</code>
+    - <code>func overlaps(_ other: Self) -&gt; Bool</code></p>
+
+                        <a href="Protocols/ComparableSet.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ComparableSet</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">SetDefinition</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone9FiniteSet"></a>
+                    <a name="//apple_ref/swift/Protocol/FiniteSet" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone9FiniteSet">FiniteSet</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A set small enough to reasonably iterate over.</p>
+
+<p>Conformance Requirements:
+    - <code>SetDefinition</code>
+    - <code>Collection</code>
+    - <code>Iterator.Element == Element</code></p>
+
+                        <a href="Protocols/FiniteSet.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">FiniteSet</span> <span class="p">:</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt"><a href="Protocols/ComparableSet.html">ComparableSet</a></span><span class="p">,</span> <span class="kt">SetDefinition</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone10MutableSet"></a>
+                    <a name="//apple_ref/swift/Protocol/MutableSet" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone10MutableSet">MutableSet</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A mutable set.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code><a href="Protocols/ComparableSet.html">ComparableSet</a></code></li>
+<li><code>init()</code></li>
+<li><code>@discardableResult mutating func insert(_ newMember: Element) -&gt; (inserted: Bool, memberAfterInsert: Element)</code></li>
+<li><code>@discardableResult mutating func remove(_ member: Element) -&gt; Element?</code></li>
+<li>Either <code><a href="Protocols/FiniteSet.html">FiniteSet</a></code> or all of the following:
+
+<ul>
+<li><code>static func ∩= (lhs: inout Self, rhs: Self)</code></li>
+<li><code>static func ∪= (lhs: inout Self, rhs: Self)</code></li>
+<li><code>static func ∖= (lhs: inout Self, rhs: Self)</code></li>
+</ul></li>
+</ul>
+
+                        <a href="Protocols/MutableSet.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">MutableSet</span> <span class="p">:</span> <span class="kt"><a href="Protocols/ComparableSet.html">ComparableSet</a></span><span class="p">,</span> <span class="kt">SetAlgebra</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P14SDGCornerstone26SetInRepresentableUniverse"></a>
+                    <a name="//apple_ref/swift/Protocol/SetInRepresentableUniverse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P14SDGCornerstone26SetInRepresentableUniverse">SetInRepresentableUniverse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A set small enough to reasonably iterate over.</p>
+
+<p>Conformance Requirements:
+    - <code>SetDefinition</code>
+    - <code>static var universe: Self { get }</code></p>
+
+                        <a href="Protocols/SetInRepresentableUniverse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">SetInRepresentableUniverse</span> <span class="p">:</span> <span class="kt"><a href="Protocols/MutableSet.html">MutableSet</a></span></code></pre>
 
                         </div>
                       </div>
@@ -971,7 +1270,7 @@
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -164,7 +164,7 @@ extension Comparable {
             range = rhs.0 ... rhs.1
         }
 
-        return range.contains(lhs)
+        return lhs ∈ range
     }
 }
 
