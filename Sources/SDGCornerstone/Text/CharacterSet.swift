@@ -20,8 +20,21 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
     #if os(Linux)
     // [_Workaround: This should be unnecessary, but Linux cannot yet do isSubset, ==, etc. (Swift 3.1.0)_]
-    internal var planes: [Data] {
+    init(planes: [Data]) {
+        var data = Data()
+        for index in planes.indices {
+            let plane = planes[index]
+            if ¬plane.isEmpty {
+                if index ≠ 0 {
+                    data.append(Data.Iterator.Element(index))
+                }
+                data.append(plane)
+            }
+        }
+        self.init(bitmapRepresentation: data)
+    }
 
+    internal var planes: [Data] {
         var bitmap = bitmapRepresentation
         let planeSize: Data.Index = 8192
         var result: [Int: Data] = [:]
@@ -164,6 +177,28 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
     // MARK: - MutableSet
 
+    #if os(Linux)
+    // [_Workaround: Linux shouldn’t need independent treatment, but its implementation is incomplete. (Swift 3.1.0)_]
+
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
+    /// Sets `lhs` to the intersection of the two sets.
+    ///
+    /// - Parameters:
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
+    public static func ∩= (lhs: inout CharacterSet, rhs: CharacterSet) {
+        var lhsPlanes = lhs.planes
+        let rhsPlanes = rhs.planes
+
+        for index in lhsPlanes.indices {
+            lhsPlanes[index].formBitwiseAnd(with: rhsPlanes[index])
+        }
+
+        lhs = CharacterSet(planes: lhsPlanes)
+    }
+
+    #else
+
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
     /// Returns the intersection of the two sets.
     ///
@@ -174,7 +209,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return lhs.intersection(rhs)
     }
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∩=_]
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
     /// Sets `lhs` to the intersection of the two sets.
     ///
     /// - Parameters:
@@ -183,6 +218,8 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     public static func ∩= (lhs: inout CharacterSet, rhs: CharacterSet) {
         lhs.formIntersection(rhs)
     }
+
+    #endif
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
     /// Returns the union of the two sets.
@@ -194,7 +231,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return lhs.union(rhs)
     }
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∪=_]
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
     /// Sets `lhs` to the union of the two sets.
     ///
     /// - Parameters:
@@ -214,7 +251,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return lhs.subtracting(rhs)
     }
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∖=_]
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
     /// Subtracts `rhs` from `lhs`.
     ///
     /// - Parameters:
@@ -234,7 +271,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return lhs.symmetricDifference(rhs)
     }
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∆=_]
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
     /// Sets `lhs` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
