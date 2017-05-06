@@ -84,6 +84,26 @@ class CollectionTests : XCTestCase {
             "c": 8,
             "d": 8
         ])
+
+        let numbersToLetters = [
+            1: "a",
+            2: "b",
+            3: "c"
+        ]
+        let lettersToNumbers = [
+            "a": 1,
+            "b": 2,
+            "c": 3
+        ]
+        XCTAssert(numbersToLetters.mapKeyValuePairs({($1, $0)}) == lettersToNumbers)
+        XCTAssert(numbersToLetters.mapKeys({$0 + 1}) == [2: "a", 3: "b", 4: "c"])
+        XCTAssert(lettersToNumbers.mapValues({$0 + 1}) == ["a": 2, "b": 3, "c": 4])
+
+        var variable: [Int: String] = numbersToLetters
+        variable.mutateValue(for: 1) { ($0 ?? "") + "..." }
+        XCTAssert(variable[1] == "a...")
+        variable.mutateValue(for: 4) { ($0 ?? "") + "..." }
+        XCTAssert(variable[4] == "...")
     }
 
     func testFiniteSet() {
