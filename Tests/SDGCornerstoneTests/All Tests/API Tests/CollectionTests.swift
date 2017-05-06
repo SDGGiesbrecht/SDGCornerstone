@@ -28,6 +28,13 @@ class CollectionTests : XCTestCase {
         XCTAssert(array == [1, 2, 3, 4, 5, 6])
     }
 
+    func testCollection() {
+        let collection = [1, 2, 3]
+        let match = collection.firstMatch(for: LiteralPattern([2, 3]))
+        XCTAssert(match?.range == 1 ..< 3)
+        XCTAssert(match?.contents.elementsEqual([2, 3]) == true)
+    }
+
     func testComparableSet() {
         func runTests<S : ComparableSet>(superset: S, subset: S) {
             XCTAssert(superset ⊈ subset, "\(superset) ⊆ \(subset)")
@@ -320,6 +327,7 @@ class CollectionTests : XCTestCase {
     static var allTests: [(String, (CollectionTests) -> () throws -> Void)] {
         return [
             ("testArray", testArray),
+            ("testCollection", testCollection),
             ("testComparableSet", testComparableSet),
             ("testDictionary", testDictionary),
             ("testMutableSet", testMutableSet),

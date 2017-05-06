@@ -14,6 +14,8 @@
 
 extension Collection {
 
+    // MARK: - Conformance
+
     // [_Define Documentation: SDGCornerstone.Collection.Element_]
     /// The type of the elements of the collection.
 
@@ -43,4 +45,24 @@ extension Collection {
     ///
     /// - Parameters:
     ///     - i: The preceding index.
+
+    // MARK: - Searching
+
+    /// Returns the range and contents of the first match for `pattern` in the specified subrange.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func firstMatch<P : Pattern>(for pattern: P, in searchRange: Range<Index>? = nil) -> (range: Range<Index>, contents: SubSequence)? where P.Element == Iterator.Element {
+        let bounds = searchRange ?? startIndex ..< endIndex
+
+        var i = bounds.lowerBound
+        while i ≠ bounds.upperBound {
+            if let range = pattern.match(in: self, at: i) {
+                return (range, self[range])
+            }
+            i = index(after: i)
+        }
+        return nil
+    }
 }
