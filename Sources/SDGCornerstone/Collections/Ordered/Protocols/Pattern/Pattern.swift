@@ -13,17 +13,28 @@
  */
 
 /// A pattern that can be searched for in collections with equatable elements.
-public protocol Pattern {
+///
+/// Required Overrides for Subclasses:
+///     - `func match<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element`
+open class Pattern<Element : Equatable> {
 
-    // [_Define Documentation: SDGCornerstone.Pattern.Element_]
-    /// The element type.
-    associatedtype Element : Equatable
+    // Pattern consumption behaviour.
+    public enum Consumption {
+        /// Prefers longer matches.
+        case greedy
+        /// Prefers shorter matches.
+        case lazy
+    }
 
     // [_Define Documentation: SDGCornerstone.Pattern.match(in:at:)_]
-    /// Returns the range of the match beginning at the specified index in the collection, or `nil` if there is no match.
+    /// Returns the ranges of possible matches beginning at the specified index in the collection.
+    ///
+    /// The ranges are sorted in order of preference. Ranges can be tried one after another down through the list in the event that some should be disqualified for some external reason, such as being part of a larger composite pattern.
     ///
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    func match<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element
+    func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
+        primitiveMethod()
+    }
 }

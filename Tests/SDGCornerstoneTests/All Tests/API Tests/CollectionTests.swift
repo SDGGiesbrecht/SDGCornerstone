@@ -29,10 +29,34 @@ class CollectionTests : XCTestCase {
     }
 
     func testCollection() {
-        let collection = [1, 2, 3]
-        let match = collection.firstMatch(for: LiteralPattern([2, 3]))
+        let collection = [1, 2, 3, 4, 5, 4, 5, 6]
+        let match = collection.firstMatch(for: [2, 3])
         XCTAssert(match?.range == 1 ..< 3)
         XCTAssert(match?.contents.elementsEqual([2, 3]) == true)
+        XCTAssert(collection.firstMatch(for: [−1, −2]) == nil)
+
+        let alternativeMatch = collection.firstMatch(for: Alternatives([
+            Literal([1, 3]),
+            Literal([2])
+            ]))
+        XCTAssert(alternativeMatch?.range == 1 ..< 2)
+
+        let repetitionMatch = collection.firstMatch(for: Repetition(of: [4, 5], count: 1 ..< Int.max))
+        XCTAssert(repetitionMatch?.range == 3 ..< 7, "Unexpected pattern match: \(String(describing: repetitionMatch?.range))")
+        let lazyRepetitionMatch = collection.firstMatch(for: Repetition(of: [4, 5], count: 1 ..< Int.max, consumption: .lazy))
+        XCTAssert(lazyRepetitionMatch?.range == 3 ..< 5, "Unexpected pattern match: \(String(describing: repetitionMatch?.range))")
+
+        let compositeMatch = collection.firstMatch(for: [Literal([1, 2]), Alternatives([3, −3]), Repetition(of: [4, 5], count: 1 ..< Int.max)])
+        XCTAssert(compositeMatch?.range == 0 ..< 7)
+
+        let dangerous = collection.firstMatch(for: [Repetition(of: [4, 5], count: 1 ..< Int.max), Literal([4, 5])])
+        XCTAssert(dangerous?.range == 3 ..< 7)
+
+        let alsoDangerous = collection.firstMatch(for: [Repetition(of: [4, 5], consumption: .lazy), Literal([6])])
+        XCTAssert(alsoDangerous?.range == 3 ..< 8)
+
+        let anotherTrap = collection.firstMatch(for: [Literal([1, 2]), Repetition(of: [−1, −2]), Literal([3, 4])])
+        XCTAssert(anotherTrap?.range == 0 ..< 4, "Unexpected pattern match: \(String(describing: anotherTrap?.range))")
     }
 
     func testComparableSet() {

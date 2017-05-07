@@ -1,5 +1,5 @@
 /*
- Alternatives.swift
+ CompositePattern.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,32 +12,30 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A pattern that matches against several alternative patterns.
-///
-/// The order of the alternatives is significant. If multiple alternatives match, preference will be given to one higher in the list.
-public final class Alternatives<Element : Equatable> : Pattern<Element> {
+/// A pattern that matches against several component patterns contiguously.
+public final class CompositePattern<Element : Equatable> : Pattern<Element>, ExpressibleByArrayLiteral {
 
     // MARK: - Initialization
 
-    /// Creates a set of alternative patterns.
+    /// Creates a repetition pattern from several component patterns.
     ///
     /// - Parameters:
-    ///     - alternatives: The alternative patterns.
-    public init(_ alternatives: [Pattern<Element>]) {
-        self.alternatives = alternatives
-    }
-
-    /// Creates a set of alternative elements.
-    ///
-    /// - Parameters:
-    ///     - elements: The alternative element.
-    public init(_ elements: [Element]) {
-        self.alternatives = elements.map() { Literal([$0]) }
+    ///     - components: The component patterns.
+    public  init(_ components: [Pattern<Element>]) {
+        self.components = components
     }
 
     // MARK: - Properties
 
-    private var alternatives: [Pattern<Element>]
+    private var components: [Pattern<Element>]
+
+    // MARK: - ExpressibleByArrayLiteral
+
+    // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
+    /// Creates an instance from an array literal.
+    public convenience init(arrayLiteral: Pattern<Element>...) {
+        self.init(arrayLiteral)
+    }
 
     // MARK: - Pattern
 
@@ -51,10 +49,17 @@ public final class Alternatives<Element : Equatable> : Pattern<Element> {
     ///     - location: The index at which to check for the beginning of a match.
     public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
 
-        var results: [Range<C.Index>] = []
-        for alternative in alternatives {
-            results.append(contentsOf: alternative.matches(in: collection, at: location))
+        var endIndices: [C.Index] = [location]
+        for component in components {
+            if endIndices.isEmpty {
+                // No matches
+                return []
+            } else {
+                // Continue
+                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
+            }
         }
-        return results
+
+        return endIndices.map() { location ..< $0 }
     }
 }

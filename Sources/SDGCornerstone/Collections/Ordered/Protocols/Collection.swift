@@ -45,24 +45,47 @@ extension Collection {
     ///
     /// - Parameters:
     ///     - i: The preceding index.
+}
 
-    // MARK: - Searching
+extension Collection where Iterator.Element : Equatable {
+    // MARK: - where Iterator.Element : Equatable
 
+    // [_Define Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
     /// Returns the range and contents of the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch<P : Pattern>(for pattern: P, in searchRange: Range<Index>? = nil) -> (range: Range<Index>, contents: SubSequence)? where P.Element == Iterator.Element {
+    public func firstMatch(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> (range: Range<Index>, contents: SubSequence)? {
         let bounds = searchRange ?? startIndex ..< endIndex
 
         var i = bounds.lowerBound
         while i ≠ bounds.upperBound {
-            if let range = pattern.match(in: self, at: i) {
+            if let range = pattern.matches(in: self, at: i).first {
                 return (range, self[range])
             }
             i = index(after: i)
         }
         return nil
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    /// Returns the range and contents of the first match for `pattern` in the specified subrange.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func firstMatch(for pattern: Literal<Iterator.Element>, in searchRange: Range<Index>? = nil) -> (range: Range<Index>, contents: SubSequence)? {
+        return firstMatch(for: pattern as Pattern<Iterator.Element>, in: searchRange)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    /// Returns the range and contents of the first match for `pattern` in the specified subrange.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func firstMatch(for pattern: CompositePattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> (range: Range<Index>, contents: SubSequence)? {
+        return firstMatch(for: pattern as Pattern<Iterator.Element>, in: searchRange)
     }
 }
