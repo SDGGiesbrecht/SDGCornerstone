@@ -91,11 +91,11 @@
         /// Accesses the element at the specified position.
         public subscript(index: Index) -> Element {
             get {
-                assert(index ∈ startIndex ..< endIndex, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
+                assert(index ∈ bounds, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
                 return uInt.bitwiseAnd(with: 1 << index) >> index == 1
             }
             set {
-                assert(index ∈ startIndex ..< endIndex, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
+                assert(index ∈ bounds, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
                 let oldErased = uInt.bitwiseAnd(with: (1 << index).bitwiseNot())
                 uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << index)
             }

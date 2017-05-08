@@ -16,9 +16,10 @@
 ///
 /// Required Overrides for Subclasses:
 ///     - `func match<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element`
+///     - `func reverse() -> Pattern<Element>`
 open class Pattern<Element : Equatable> {
 
-    // Pattern consumption behaviour.
+    /// Pattern consumption behaviour.
     public enum Consumption {
         /// Prefers longer matches.
         case greedy
@@ -34,7 +35,15 @@ open class Pattern<Element : Equatable> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
+    open func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
+        primitiveMethod()
+    }
+
+    // [_Define Documentation: SDGCornerstone.Pattern.reverse()_]
+    /// A pattern that checks for the reverse pattern.
+    ///
+    /// This is suitable for performing backward searches by applying it to the reversed collection.
+    open func reversed() -> Pattern<Element> {
         primitiveMethod()
     }
 }

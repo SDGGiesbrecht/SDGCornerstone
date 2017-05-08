@@ -57,4 +57,12 @@ public final class Alternatives<Element : Equatable> : Pattern<Element> {
         }
         return results
     }
+
+    // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
+    /// A pattern that checks for the reverse pattern.
+    ///
+    /// This is suitable for performing backward searches by applying it to the reversed collection.
+    public override func reversed() -> Pattern<Element> {
+        return Alternatives(alternatives.map({ $0.reversed() }))
+    }
 }

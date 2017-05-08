@@ -28,6 +28,7 @@ public final class Literal<Element : Equatable> : Pattern<Element>, ExpressibleB
         indexesAreInequal = { $0 as! C.Index ≠ $1 as! C.Index }
         indexAfter = { literal.index(after: $0 as! C.Index) }
         elementAt = { literal[$0 as! C.Index] }
+        reversedLiteral = { Literal<Element>(literal.reversed()) }
         // swiftlint:enable force_cast
     }
 
@@ -39,6 +40,7 @@ public final class Literal<Element : Equatable> : Pattern<Element>, ExpressibleB
     private var indexesAreInequal: (Index, Index) -> Bool
     private var indexAfter: (Index) -> Index
     private var elementAt: (Index) -> Element
+    private var reversedLiteral: () -> Literal<Element>
 
     // MARK: - ExpressibleByArrayLiteral
 
@@ -78,5 +80,13 @@ public final class Literal<Element : Equatable> : Pattern<Element>, ExpressibleB
         }
 
         return [location ..< collectionIndex]
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
+    /// A pattern that checks for the reverse pattern.
+    ///
+    /// This is suitable for performing backward searches by applying it to the reversed collection.
+    public override func reversed() -> Pattern<Element> {
+        return reversedLiteral()
     }
 }

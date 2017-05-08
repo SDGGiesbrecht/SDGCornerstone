@@ -45,24 +45,45 @@ extension Collection {
     ///
     /// - Parameters:
     ///     - i: The preceding index.
+
+    // MARK: - Indices
+
+    /// Returns the range for all of `self`.
+    public var bounds: Range<Index> {
+        return startIndex ..< endIndex
+    }
+
+    fileprivate var entirety: PatternMatch<Self> {
+        return PatternMatch(range: bounds, contents: self[bounds])
+    }
+
+    /// Returns the backward version of the specified range.
+    public func backward(_ range: Range<Self.Index>) -> Range<ReversedIndex<Self>> {
+        return ReversedIndex(range.upperBound) ..< ReversedIndex(range.lowerBound)
+    }
+
+    /// Returns the forward version of the specified range.
+    public func forward(_ range: Range<ReversedIndex<Self>>) ->  Range<Self.Index> {
+        return range.upperBound.base ..< range.lowerBound.base
+    }
 }
 
 extension Collection where Iterator.Element : Equatable {
     // MARK: - where Iterator.Element : Equatable
 
     // [_Define Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
-    /// Returns the range and contents of the first match for `pattern` in the specified subrange.
+    /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> (range: Range<Index>, contents: SubSequence)? {
-        let bounds = searchRange ?? startIndex ..< endIndex
+    public func firstMatch(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+        let searchArea = searchRange ?? bounds
 
-        var i = bounds.lowerBound
-        while i ≠ bounds.upperBound {
+        var i = searchArea.lowerBound
+        while i ≠ searchArea.upperBound {
             if let range = pattern.matches(in: self, at: i).first {
-                return (range, self[range])
+                return PatternMatch<Self>(range: range, contents: self[range])
             }
             i = index(after: i)
         }
@@ -70,22 +91,422 @@ extension Collection where Iterator.Element : Equatable {
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
-    /// Returns the range and contents of the first match for `pattern` in the specified subrange.
+    /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: Literal<Iterator.Element>, in searchRange: Range<Index>? = nil) -> (range: Range<Index>, contents: SubSequence)? {
+    public func firstMatch(for pattern: Literal<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return firstMatch(for: pattern as Pattern<Iterator.Element>, in: searchRange)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
-    /// Returns the range and contents of the first match for `pattern` in the specified subrange.
+    /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: CompositePattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> (range: Range<Index>, contents: SubSequence)? {
+    public func firstMatch(for pattern: CompositePattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return firstMatch(for: pattern as Pattern<Iterator.Element>, in: searchRange)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    /// Returns the first match for `pattern` in the specified subrange.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func firstMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+        return firstMatch(for: Literal(pattern), in: searchRange)
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    /// Returns a list of all matches for `pattern` in the specified subrange.
+    ///
+    /// This does not check for overlapping matches.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func matches(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+        let searchArea = searchRange ?? bounds
+
+        var accountedFor = searchArea.lowerBound
+        var results: [PatternMatch<Self>] = []
+        while let match = firstMatch(for: pattern, in: accountedFor ..< searchArea.upperBound) {
+            accountedFor = match.range.upperBound
+            results.append(match)
+        }
+        return results
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    /// Returns a list of all matches for `pattern` in the specified subrange.
+    ///
+    /// This does not check for overlapping matches.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func matches(for pattern: Literal<Iterator.Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+        return matches(for: pattern as Pattern<Iterator.Element>, in: searchRange)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    /// Returns a list of all matches for `pattern` in the specified subrange.
+    ///
+    /// This does not check for overlapping matches.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func matches(for pattern: CompositePattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+        return matches(for: pattern as Pattern<Iterator.Element>, in: searchRange)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    /// Returns a list of all matches for `pattern` in the specified subrange.
+    ///
+    /// This does not check for overlapping matches.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func matches<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] where C.Iterator.Element == Self.Iterator.Element {
+        return matches(for: Literal(pattern), in: searchRange)
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix(upTo pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+        guard let match = firstMatch(for: pattern) else {
+            return nil
+        }
+        let range = startIndex ..< match.range.lowerBound
+        return PatternMatch<Self>(range: range, contents: self[range])
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix(upTo pattern: Literal<Iterator.Element>) -> PatternMatch<Self>? {
+        return prefix(upTo: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix(upTo pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
+        return prefix(upTo: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix<C : Collection>(upTo pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+        return prefix(upTo: Literal(pattern))
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix(through pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+        guard let match = firstMatch(for: pattern) else {
+            return entirety
+        }
+        let range = startIndex ..< match.range.upperBound
+        return PatternMatch<Self>(range: range, contents: self[range])
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix(through pattern: Literal<Iterator.Element>) -> PatternMatch<Self>? {
+        return prefix(through: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix(through pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
+        return prefix(through: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix<C : Collection>(through pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+        return prefix(through: Literal(pattern))
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.suffix(fromBeginningOf:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix(fromBeginningOf pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+        guard let match = firstMatch(for: pattern) else {
+            return entirety
+        }
+        let range = startIndex ..< match.range.lowerBound
+        return PatternMatch<Self>(range: range, contents: self[range])
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromBeginningOf:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix(fromBeginningOf pattern: Literal<Iterator.Element>) -> PatternMatch<Self>? {
+        return suffix(fromBeginningOf: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromBeginningOf:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix(fromBeginningOf pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
+        return suffix(fromBeginningOf: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromBeginningOf:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix<C : Collection>(fromBeginningOf pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+        return suffix(fromBeginningOf: Literal(pattern))
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.suffix(fromEndOf:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix(fromEndOf pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+        guard let match = firstMatch(for: pattern) else {
+            return entirety
+        }
+        let range = startIndex ..< match.range.upperBound
+        return PatternMatch<Self>(range: range, contents: self[range])
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromEndOf:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix(fromEndOf pattern: Literal<Iterator.Element>) -> PatternMatch<Self>? {
+        return suffix(fromEndOf: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromEndOf:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix(fromEndOf pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
+        return suffix(fromEndOf: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromEndOf:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix<C : Collection>(fromEndOf pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+        return suffix(fromEndOf: Literal(pattern))
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    /// Returns the segments of `self` separated by instances of `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func components(separatedBy pattern: Pattern<Iterator.Element>) -> [PatternMatch<Self>] {
+
+        let separators = matches(for: pattern).map() { $0.range }
+
+        let startIndices = [startIndex] + separators.map({ $0.upperBound })
+        let endIndices = separators.map({ $0.lowerBound }) + [endIndex]
+
+        return zip(startIndices, endIndices).map({ $0 ..< $1 }).map({ PatternMatch<Self>(range: $0, contents: self[$0]) })
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    /// Returns the segments of `self` separated by instances of `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func components(separatedBy pattern: Literal<Iterator.Element>) -> [PatternMatch<Self>] {
+        return components(separatedBy: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    /// Returns the segments of `self` separated by instances of `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func components(separatedBy pattern: CompositePattern<Iterator.Element>) -> [PatternMatch<Self>] {
+        return components(separatedBy: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    /// Returns the segments of `self` separated by instances of `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func components<C : Collection>(separatedBy pattern: C) -> [PatternMatch<Self>] where C.Iterator.Element == Self.Iterator.Element {
+        return components(separatedBy: Literal(pattern))
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    /// Returns `true` if `self` contains an match for `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func contains(_ pattern: Pattern<Iterator.Element>) -> Bool {
+        return firstMatch(for: pattern) ≠ nil
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    /// Returns `true` if `self` contains an match for `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func contains(_ pattern: Literal<Iterator.Element>) -> Bool {
+        return contains(pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    /// Returns `true` if `self` contains an match for `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func contains(_ pattern: CompositePattern<Iterator.Element>) -> Bool {
+        return contains(pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    /// Returns `true` if `self` contains an match for `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func contains<C : Collection>(_ pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
+        return contains(Literal(pattern))
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasPrefix(_ pattern: Pattern<Iterator.Element>) -> Bool {
+        return pattern.matches(in: self, at: startIndex).isEmpty
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasPrefix(_ pattern: Literal<Iterator.Element>) -> Bool {
+        return hasPrefix(pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasPrefix(_ pattern: CompositePattern<Iterator.Element>) -> Bool {
+        return hasPrefix(pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasPrefix<C : Collection>(_ pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
+        return hasPrefix(Literal(pattern))
+    }
+
+    // [_Define Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasSuffix(_ pattern: Pattern<Iterator.Element>) -> Bool {
+        let backwards = reversed()
+        return pattern.reversed().matches(in: backwards, at: backwards.startIndex).isEmpty
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasSuffix(_ pattern: Literal<Iterator.Element>) -> Bool {
+        return hasSuffix(pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasSuffix(_ pattern: CompositePattern<Iterator.Element>) -> Bool {
+        return hasSuffix(pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
+        return hasSuffix(Literal(pattern))
+    }
+}
+
+extension Collection where Iterator.Element : Equatable, Indices.Iterator.Element == Index {
+    // MARK: - where Iterator.Element : Equatable, Indices.Iterator.Element == Index
+
+    // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    /// Returns the longest prefix subsequence shared with the other collection.
+    ///
+    /// - Parameters:
+    ///     - other: The other collection
+    public func commonPrefix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Iterator.Element == Self.Iterator.Element, C.Indices.Iterator.Element == C.Index {
+        var end: Index = startIndex
+        for (ownIndex, otherIndex) in zip(indices, other.indices) {
+            if self[ownIndex] == other[otherIndex] {
+                end = index(after: end)
+            } else {
+                break
+            }
+        }
+
+        let range = startIndex ..< end
+        return PatternMatch<Self>(range: range, contents: self[range])
     }
 }

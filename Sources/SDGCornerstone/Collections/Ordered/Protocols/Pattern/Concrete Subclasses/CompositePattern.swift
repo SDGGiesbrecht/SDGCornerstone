@@ -62,4 +62,12 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
 
         return endIndices.map() { location ..< $0 }
     }
+
+    // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
+    /// A pattern that checks for the reverse pattern.
+    ///
+    /// This is suitable for performing backward searches by applying it to the reversed collection.
+    public override func reversed() -> Pattern<Element> {
+        return CompositePattern(components.map({ $0.reversed() }).reversed())
+    }
 }

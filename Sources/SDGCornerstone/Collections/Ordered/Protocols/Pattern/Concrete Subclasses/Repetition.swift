@@ -116,4 +116,12 @@ public final class Repetition<Element : Equatable> : Pattern<Element> {
         // Finished (hit cap)
         return cleanUp()
     }
+
+    // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
+    /// A pattern that checks for the reverse pattern.
+    ///
+    /// This is suitable for performing backward searches by applying it to the reversed collection.
+    public override func reversed() -> Pattern<Element> {
+        return Repetition(of: pattern.reversed(), count: count, consumption: consumption)
+    }
 }
