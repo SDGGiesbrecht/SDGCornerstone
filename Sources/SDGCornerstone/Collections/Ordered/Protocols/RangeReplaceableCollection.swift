@@ -34,6 +34,35 @@ extension RangeReplaceableCollection {
     public mutating func truncate(at index: Index) {
         removeSubrange(index ..< endIndex)
     }
+
+    /// Fills the collection to a certain count.
+    ///
+    /// - Parameters:
+    ///     - count: The target count.
+    ///     - element: The element with which to fill the collection.
+    ///     - direction: The direction from which to fill the collection.
+    public mutating func fill(to count: IndexDistance, with element: Iterator.Element, from direction: FillDirection) {
+        while self.count < count {
+            switch direction {
+            case .start:
+                prepend(element)
+            case .end:
+                append(element)
+            }
+        }
+    }
+
+    /// Returns the collection filled to a certain count.
+    ///
+    /// - Parameters:
+    ///     - count: The target count.
+    ///     - element: The element with which to fill the collection.
+    ///     - direction: The direction from which to fill the collection.
+    public func filled(to count: IndexDistance, with element: Iterator.Element, from direction: FillDirection) -> Self {
+        var result = self
+        result.fill(to: count, with: element, from: direction)
+        return result
+    }
 }
 
 extension RangeReplaceableCollection where Iterator.Element : Equatable {
