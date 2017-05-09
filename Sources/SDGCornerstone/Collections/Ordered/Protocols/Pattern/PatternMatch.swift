@@ -1,5 +1,5 @@
 /*
- Match.swift
+ PatternMatch.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -15,11 +15,16 @@
 /// The result of a pattern search.
 public struct PatternMatch<Searched : Collection> {
 
-    // MARK: - Initiailzation
+    // MARK: - Initialization
 
-    internal init(range: Range<Searched.Index>, contents: Searched.SubSequence) {
+    /// Creates a description of a match.
+    ///
+    /// - Parameters:
+    ///     - range: The range of the match.
+    ///     - contents: The contents of the match.
+    public init(range: Range<Searched.Index>, in collection: Searched) {
         self.range = range
-        self.contents = contents
+        self.contents = collection[range]
     }
 
     // MARK: - Properties

@@ -13,7 +13,7 @@
  */
 
 /// A pattern that matches against repetitions of another pattern.
-public final class Repetition<Element : Equatable> : Pattern<Element> {
+public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
@@ -43,7 +43,7 @@ public final class Repetition<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(of pattern: Literal<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+    public convenience init(of pattern: LiteralPattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         self.init(ofAbstractPattern: pattern, count: count, consumption: consumption)
     }
 
@@ -122,6 +122,6 @@ public final class Repetition<Element : Equatable> : Pattern<Element> {
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     public override func reversed() -> Pattern<Element> {
-        return Repetition(of: pattern.reversed(), count: count, consumption: consumption)
+        return RepetitionPattern(of: pattern.reversed(), count: count, consumption: consumption)
     }
 }

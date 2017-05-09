@@ -35,27 +35,27 @@ class CollectionTests : XCTestCase {
         XCTAssert(match?.contents.elementsEqual([4, 5]) == true)
         XCTAssert(collection.lastMatch(for: [−1, −2]) == nil)
 
-        let alternativeMatch = collection.lastMatch(for: Alternatives([
-            Literal([1, 3]),
-            Literal([2])
+        let alternativeMatch = collection.lastMatch(for: AlternativePatterns([
+            LiteralPattern([1, 3]),
+            LiteralPattern([2])
             ]))
         XCTAssert(alternativeMatch?.range == 1 ..< 2)
 
-        let repetitionMatch = collection.lastMatch(for: Repetition(of: [4, 5], count: 1 ..< Int.max))
+        let repetitionMatch = collection.lastMatch(for: RepetitionPattern(of: [4, 5], count: 1 ..< Int.max))
         XCTAssert(repetitionMatch?.range == 3 ..< 7, "Unexpected pattern match: \(String(describing: repetitionMatch?.range))")
-        let lazyRepetitionMatch = collection.lastMatch(for: Repetition(of: [4, 5], count: 1 ..< Int.max, consumption: .lazy))
+        let lazyRepetitionMatch = collection.lastMatch(for: RepetitionPattern(of: [4, 5], count: 1 ..< Int.max, consumption: .lazy))
         XCTAssert(lazyRepetitionMatch?.range == 5 ..< 7, "Unexpected pattern match: \(String(describing: repetitionMatch?.range))")
 
-        let compositeMatch = collection.lastMatch(for: [Literal([1, 2]), Alternatives([3, −3]), Repetition(of: [4, 5], count: 1 ..< Int.max)])
+        let compositeMatch = collection.lastMatch(for: [LiteralPattern([1, 2]), AlternativePatterns([3, −3]), RepetitionPattern(of: [4, 5], count: 1 ..< Int.max)])
         XCTAssert(compositeMatch?.range == 0 ..< 7)
 
-        let dangerous = collection.lastMatch(for: [Repetition(of: [4, 5], count: 1 ..< Int.max), Literal([4, 5])])
+        let dangerous = collection.lastMatch(for: [RepetitionPattern(of: [4, 5], count: 1 ..< Int.max), LiteralPattern([4, 5])])
         XCTAssert(dangerous?.range == 3 ..< 7)
 
-        let alsoDangerous = collection.lastMatch(for: [Repetition(of: [4, 5], consumption: .lazy), Literal([6])])
+        let alsoDangerous = collection.lastMatch(for: [RepetitionPattern(of: [4, 5], consumption: .lazy), LiteralPattern([6])])
         XCTAssert(alsoDangerous?.range == 7 ..< 8, "Unexpected pattern match: \(String(describing: alsoDangerous?.range))")
 
-        let anotherTrap = collection.lastMatch(for: [Literal([1, 2]), Repetition(of: [−1, −2]), Literal([3, 4])])
+        let anotherTrap = collection.lastMatch(for: [LiteralPattern([1, 2]), RepetitionPattern(of: [−1, −2]), LiteralPattern([3, 4])])
         XCTAssert(anotherTrap?.range == 0 ..< 4, "Unexpected pattern match: \(String(describing: anotherTrap?.range))")
 
         let backwardsCollection1 = [0, 0, 0, 0, 0]
@@ -66,7 +66,7 @@ class CollectionTests : XCTestCase {
         XCTAssert(forwardsResult1?.range == 2 ..< 4, "Unexpected pattern match: \(String(describing: forwardsResult1?.range))")
 
         let backwardsCollection2 = [0, 0, 1]
-        let backwardsPattern2 = CompositePattern([Repetition(of: [0], count: 1 ..< Int.max, consumption: .lazy), Literal([1])])
+        let backwardsPattern2 = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
         let backwardsResult2 = backwardsCollection2.lastMatch(for: backwardsPattern2)
         XCTAssert(backwardsResult2?.range == 1 ..< 3, "Unexpected pattern match: \(String(describing: backwardsResult2?.range))")
         let forwardsResult2 = backwardsCollection2.matches(for: backwardsPattern2).last
@@ -80,28 +80,33 @@ class CollectionTests : XCTestCase {
         XCTAssert(match?.contents.elementsEqual([2, 3]) == true)
         XCTAssert(collection.firstMatch(for: [−1, −2]) == nil)
 
-        let alternativeMatch = collection.firstMatch(for: Alternatives([
-            Literal([1, 3]),
-            Literal([2])
+        let alternativeMatch = collection.firstMatch(for: AlternativePatterns([
+            LiteralPattern([1, 3]),
+            LiteralPattern([2])
             ]))
         XCTAssert(alternativeMatch?.range == 1 ..< 2)
 
-        let repetitionMatch = collection.firstMatch(for: Repetition(of: [4, 5], count: 1 ..< Int.max))
+        let repetitionMatch = collection.firstMatch(for: RepetitionPattern(of: [4, 5], count: 1 ..< Int.max))
         XCTAssert(repetitionMatch?.range == 3 ..< 7, "Unexpected pattern match: \(String(describing: repetitionMatch?.range))")
-        let lazyRepetitionMatch = collection.firstMatch(for: Repetition(of: [4, 5], count: 1 ..< Int.max, consumption: .lazy))
+        let lazyRepetitionMatch = collection.firstMatch(for: RepetitionPattern(of: [4, 5], count: 1 ..< Int.max, consumption: .lazy))
         XCTAssert(lazyRepetitionMatch?.range == 3 ..< 5, "Unexpected pattern match: \(String(describing: repetitionMatch?.range))")
 
-        let compositeMatch = collection.firstMatch(for: [Literal([1, 2]), Alternatives([3, −3]), Repetition(of: [4, 5], count: 1 ..< Int.max)])
+        let compositeMatch = collection.firstMatch(for: [LiteralPattern([1, 2]), AlternativePatterns([3, −3]), RepetitionPattern(of: [4, 5], count: 1 ..< Int.max)])
         XCTAssert(compositeMatch?.range == 0 ..< 7)
 
-        let dangerous = collection.firstMatch(for: [Repetition(of: [4, 5], count: 1 ..< Int.max), Literal([4, 5])])
+        let dangerous = collection.firstMatch(for: [RepetitionPattern(of: [4, 5], count: 1 ..< Int.max), LiteralPattern([4, 5])])
         XCTAssert(dangerous?.range == 3 ..< 7)
 
-        let alsoDangerous = collection.firstMatch(for: [Repetition(of: [4, 5], consumption: .lazy), Literal([6])])
+        let alsoDangerous = collection.firstMatch(for: [RepetitionPattern(of: [4, 5], consumption: .lazy), LiteralPattern([6])])
         XCTAssert(alsoDangerous?.range == 3 ..< 8)
 
-        let anotherTrap = collection.firstMatch(for: [Literal([1, 2]), Repetition(of: [−1, −2]), Literal([3, 4])])
+        let anotherTrap = collection.firstMatch(for: [LiteralPattern([1, 2]), RepetitionPattern(of: [−1, −2]), LiteralPattern([3, 4])])
         XCTAssert(anotherTrap?.range == 0 ..< 4, "Unexpected pattern match: \(String(describing: anotherTrap?.range))")
+
+        let equation = "2(3x − (y + 4)) = z"
+        let nestingLevel = equation.unicodeScalars.firstNestingLevel(startingWith: "(".unicodeScalars, endingWith: ")".unicodeScalars)!
+        XCTAssert(String(nestingLevel.container.contents) == "(3x − (y + 4))")
+        XCTAssert(String(nestingLevel.contents.contents) == "3x − (y + 4)")
     }
 
     func testComparableSet() {

@@ -15,7 +15,7 @@
 /// A pattern that matches against several alternative patterns.
 ///
 /// The order of the alternatives is significant. If multiple alternatives match, preference will be given to one higher in the list.
-public final class Alternatives<Element : Equatable> : Pattern<Element> {
+public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
@@ -32,7 +32,7 @@ public final class Alternatives<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - elements: The alternative element.
     public init(_ elements: [Element]) {
-        self.alternatives = elements.map() { Literal([$0]) }
+        self.alternatives = elements.map() { LiteralPattern([$0]) }
     }
 
     // MARK: - Properties
@@ -63,6 +63,6 @@ public final class Alternatives<Element : Equatable> : Pattern<Element> {
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     public override func reversed() -> Pattern<Element> {
-        return Alternatives(alternatives.map({ $0.reversed() }))
+        return AlternativePatterns(alternatives.map({ $0.reversed() }))
     }
 }

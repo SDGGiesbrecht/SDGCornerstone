@@ -14,6 +14,17 @@
 
 extension Dictionary {
 
+    // MARK: - Initialization
+
+    /// Creates a dictionary from key‐value pairs.
+    public init(_ keyValuePairs: [(Key, Value)]) {
+        self = [:]
+        for (key, value) in keyValuePairs {
+            assert(self[key] == nil, "Duplicate key: \(key)")
+            self[key] = value
+        }
+    }
+
     // MARK: - Mutation
 
     // [_Example 1: mutateValue(for:_:)_]

@@ -33,7 +33,7 @@ private func demonstrateBackwardsDifferences2() {
 
     // [_Define Example: lastMatch(for:in:) Backwards Differences 2_]
     let collection = [0, 0, 1]
-    let pattern = CompositePattern([Repetition(of: [0], count: 1 ..< Int.max, consumption: .lazy), Literal([1])])
+    let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
 
     print("Backwards: \(collection.lastMatch(for: pattern)!)")
     // Backwards: 1 ..< 3
@@ -42,5 +42,19 @@ private func demonstrateBackwardsDifferences2() {
     print("Forwards: \(collection.matches(for: pattern).last!)")
     // Forwards: 0 ..< 3
     // (Forwards, the lazy consumption keeps consuming zeros until the pattern can be completed with a one.)
+    // [_End_]
+}
+
+private func demonstrateNestingLevel() {
+
+    // [_Define Example: Nesting Level_]
+    let equation = "2(3x − (y + 4)) = z"
+    let nestingLevel = equation.unicodeScalars.firstNestingLevel(startingWith: "(".unicodeScalars, endingWith: ")".unicodeScalars)!
+
+    print(String(nestingLevel.container.contents))
+    // Prints “(3x − (y + 4))”
+
+    print(String(nestingLevel.contents.contents))
+    // Prints “3x − (y + 4)”
     // [_End_]
 }

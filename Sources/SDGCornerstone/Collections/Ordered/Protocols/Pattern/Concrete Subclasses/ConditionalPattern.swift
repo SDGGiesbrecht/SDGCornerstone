@@ -1,5 +1,5 @@
 /*
- Composite.swift
+ Conditional.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,30 +12,21 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A pattern that matches against several component patterns contiguously.
-public final class CompositePattern<Element : Equatable> : Pattern<Element>, ExpressibleByArrayLiteral {
+/// A pattern that matches based on a condition.
+public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    /// Creates a repetition pattern from several component patterns.
+    /// Creates an algorithmic pattern based on a condition.
     ///
     /// - Parameters:
-    ///     - components: The component patterns.
-    public  init(_ components: [Pattern<Element>]) {
-        self.components = components
+    ///     - condition: The condition an element must meet in order to match.
+    public init(condition: @escaping (Element) -> Bool) {
+        self.condition = condition
     }
-
     // MARK: - Properties
 
-    private var components: [Pattern<Element>]
-
-    // MARK: - ExpressibleByArrayLiteral
-
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
-    /// Creates an instance from an array literal.
-    public convenience init(arrayLiteral: Pattern<Element>...) {
-        self.init(arrayLiteral)
-    }
+    private var condition: (Element) -> Bool
 
     // MARK: - Pattern
 
@@ -49,18 +40,11 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
     ///     - location: The index at which to check for the beginning of a match.
     public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
 
-        var endIndices: [C.Index] = [location]
-        for component in components {
-            if endIndices.isEmpty {
-                // No matches
-                return []
-            } else {
-                // Continue
-                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
-            }
+        if condition(collection[location]) {
+            return [location ..< collection.index(after: location)]
+        } else {
+            return []
         }
-
-        return endIndices.map() { location ..< $0 }
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
@@ -68,6 +52,6 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     public override func reversed() -> Pattern<Element> {
-        return CompositePattern(components.map({ $0.reversed() }).reversed())
+        return self
     }
 }

@@ -13,7 +13,7 @@
  */
 
 /// A pattern that matches an exact subsequence.
-public final class Literal<Element : Equatable> : Pattern<Element>, ExpressibleByArrayLiteral {
+public final class LiteralPattern<Element : Equatable> : Pattern<Element>, ExpressibleByArrayLiteral {
 
     // MARK: - Initialization
 
@@ -28,7 +28,7 @@ public final class Literal<Element : Equatable> : Pattern<Element>, ExpressibleB
         indexesAreInequal = { $0 as! C.Index ≠ $1 as! C.Index }
         indexAfter = { literal.index(after: $0 as! C.Index) }
         elementAt = { literal[$0 as! C.Index] }
-        reversedLiteral = { Literal<Element>(literal.reversed()) }
+        reversedLiteral = { LiteralPattern<Element>(literal.reversed()) }
         // swiftlint:enable force_cast
     }
 
@@ -40,7 +40,7 @@ public final class Literal<Element : Equatable> : Pattern<Element>, ExpressibleB
     private var indexesAreInequal: (Index, Index) -> Bool
     private var indexAfter: (Index) -> Index
     private var elementAt: (Index) -> Element
-    private var reversedLiteral: () -> Literal<Element>
+    private var reversedLiteral: () -> LiteralPattern<Element>
 
     // MARK: - ExpressibleByArrayLiteral
 

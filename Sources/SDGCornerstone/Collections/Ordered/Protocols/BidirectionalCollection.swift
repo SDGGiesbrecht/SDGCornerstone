@@ -46,7 +46,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([Repetition(of: [0], count: 1 ..< Int.max, consumption: .lazy), Literal([1])])
+    /// let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
     ///
     /// print("Backwards: \(collection.lastMatch(for: pattern)!)")
     /// // Backwards: 1 ..< 3
@@ -66,8 +66,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
         guard let range = reversed().firstMatch(for: pattern.reversed(), in: backward(searchArea))?.range else {
             return nil
         }
-        let restored = forward(range)
-        return PatternMatch<Self>(range: restored, contents: self[restored])
+        return PatternMatch(range: forward(range), in: self)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
@@ -89,7 +88,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([Repetition(of: [0], count: 1 ..< Int.max, consumption: .lazy), Literal([1])])
+    /// let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
     ///
     /// print("Backwards: \(collection.lastMatch(for: pattern)!)")
     /// // Backwards: 1 ..< 3
@@ -103,7 +102,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func lastMatch(for pattern: Literal<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+    public func lastMatch(for pattern: LiteralPattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return lastMatch(for: pattern as Pattern<Iterator.Element>, in: searchRange)
     }
 
@@ -126,7 +125,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([Repetition(of: [0], count: 1 ..< Int.max, consumption: .lazy), Literal([1])])
+    /// let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
     ///
     /// print("Backwards: \(collection.lastMatch(for: pattern)!)")
     /// // Backwards: 1 ..< 3
@@ -163,7 +162,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([Repetition(of: [0], count: 1 ..< Int.max, consumption: .lazy), Literal([1])])
+    /// let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
     ///
     /// print("Backwards: \(collection.lastMatch(for: pattern)!)")
     /// // Backwards: 1 ..< 3
@@ -178,7 +177,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     public func lastMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
-        return lastMatch(for: Literal(pattern), in: searchRange)
+        return lastMatch(for: LiteralPattern(pattern), in: searchRange)
     }
 }
 
@@ -191,7 +190,6 @@ extension BidirectionalCollection where Iterator.Element : Equatable, Indices.It
     /// - Parameters:
     ///     - other: The other collection
     public func commonSuffix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Iterator.Element == Self.Iterator.Element, C.Indices.Iterator.Element == C.Index {
-        let range = forward(reversed().commonPrefix(with: other.reversed()).range)
-        return PatternMatch<Self>(range: range, contents: self[range])
+        return PatternMatch(range: forward(reversed().commonPrefix(with: other.reversed()).range), in: self)
     }
 }
