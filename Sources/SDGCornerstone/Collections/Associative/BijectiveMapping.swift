@@ -52,21 +52,28 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable>: Collection, Expressi
     // MARK: - Collection
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+    /// The position of the first element in a non‐empty collection.
     public var startIndex: Dictionary<X, Y>.Index {
         return xToY.startIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+    /// The position following the last valid index.
     public var endIndex: Dictionary<X, Y>.Index {
         return xToY.endIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+    /// Returns the index immediately after the specified index.
+    ///
+    /// - Parameters:
+    ///     - i: The preceding index.
     public func index(after i: Dictionary<X, Y>.Index) -> Dictionary<X, Y>.Index {
         return xToY.index(after: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+    /// Accesses the element at the specified position.
     public subscript(position: Dictionary<X, Y>.Index) -> (X, Y) {
         return xToY[position]
     }
@@ -74,6 +81,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable>: Collection, Expressi
     // MARK: - ExpressibleByDictionaryLiteral
 
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:)_]
+    /// Creates an instance from a dictionary literal.
     public init(dictionaryLiteral elements: (X, Y)...) {
         self.init(Dictionary(elements))
     }
