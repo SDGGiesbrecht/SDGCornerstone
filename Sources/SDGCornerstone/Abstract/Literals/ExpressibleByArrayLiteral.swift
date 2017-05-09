@@ -17,3 +17,14 @@ extension ExpressibleByArrayLiteral {
     // [_Define Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
     /// Creates an instance from an array literal.
 }
+
+extension ExpressibleByArrayLiteral where Self : RangeReplaceableCollection {
+    // MARK: - where Self : RangeReplaceableCollection
+
+    // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
+    /// Creates an instance from an array literal.
+    public init(arrayLiteral: Iterator.Element...) {
+        self.init()
+        append(contentsOf: arrayLiteral)
+    }
+}

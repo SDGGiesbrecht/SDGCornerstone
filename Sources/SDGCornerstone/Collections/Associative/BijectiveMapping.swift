@@ -13,7 +13,7 @@
  */
 
 /// A reversible one‐to‐one mapping.
-public struct BijectiveMapping<X : Hashable, Y : Hashable>: Collection, ExpressibleByDictionaryLiteral {
+public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, ExpressibleByDictionaryLiteral {
 
     // MARK: - Properties
 
