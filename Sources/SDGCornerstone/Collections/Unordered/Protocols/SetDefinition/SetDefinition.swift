@@ -124,7 +124,8 @@ infix operator ∆=: AssignmentPrecedence
 /// A type that defines a set.
 ///
 /// Conformance Requirements:
-///     - `static func ∋ (lhs: Element, rhs: Self) -> Bool`
+///
+/// - `static func ∋ (lhs: Element, rhs: Self) -> Bool`
 public protocol SetDefinition {
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.Element_]

@@ -73,6 +73,26 @@ class CollectionTests : XCTestCase {
         XCTAssert(forwardsResult2?.range == 0 ..< 3, "Unexpected pattern match: \(String(describing: forwardsResult2?.range))")
     }
 
+    func testBijectiveMapping() {
+        let mapping: BijectiveMapping = [1: "1", 2: "2", 3: "3"]
+
+        XCTAssert(mapping[mapping.bounds].count == 3)
+
+        for (x, y) in mapping {
+            XCTAssert(mapping[x] == y)
+            XCTAssert(mapping[y] == x)
+        }
+
+        for index in mapping.indices {
+            let (x, y) = mapping[index]
+
+            XCTAssert(mapping[x] == y)
+            XCTAssert(mapping[y] == x)
+        }
+
+        XCTAssert([1, 2, 3].bijectiveIndexMapping.count == 3)
+    }
+
     func testCollection() {
         let collection = [1, 2, 3, 4, 5, 4, 5, 6]
         let match = collection.firstMatch(for: [2, 3])
@@ -402,6 +422,7 @@ class CollectionTests : XCTestCase {
         return [
             ("testArray", testArray),
             ("testBidirectionalCollection", testBidirectionalCollection),
+            ("testBijectiveMapping", testBijectiveMapping),
             ("testCollection", testCollection),
             ("testComparableSet", testComparableSet),
             ("testDictionary", testDictionary),

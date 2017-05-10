@@ -12,6 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+extension RawRepresentable {
+
+    // [_Define Documentation: SDGCornerstone.RawRepresentable.RawValue_]
+    /// The raw value type.
+}
+
 extension RawRepresentable where RawValue : Equatable {
     // MARK: - where RawValue : Equatable
 

@@ -15,9 +15,10 @@
 /// A set small enough to reasonably iterate over.
 ///
 /// Conformance Requirements:
-///     - `SetDefinition`
-///     - `Collection`
-///     - `Iterator.Element == Element`
+///
+/// - `SetDefinition`
+/// - `Collection`
+/// - `Iterator.Element == Element`
 public protocol FiniteSet : Collection, ComparableSet, SetDefinition {
 
     /// :nodoc:

@@ -63,9 +63,10 @@ infix operator ⊋: ComparisonPrecedence
 /// A set that can be compared against other sets of the same type.
 ///
 /// Conformance Requirements:
-///     - `SetDefinition`
-///     - `static func ⊆ (lhs: Self, rhs: Self) -> Bool`
-///     - `func overlaps(_ other: Self) -> Bool`
+///
+/// - `SetDefinition`
+/// - `static func ⊆ (lhs: Self, rhs: Self) -> Bool`
+/// - `func overlaps(_ other: Self) -> Bool`
 public protocol ComparableSet : Equatable, SetDefinition {
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.⊆_]

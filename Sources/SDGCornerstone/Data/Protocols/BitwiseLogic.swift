@@ -15,11 +15,12 @@
 /// A type that can be used with bitwise operations.
 ///
 /// Conformance Requirements:
-///     - `static var allZeros: Self { get }`
-///     - `mutating func formBitwiseNot()`
-///     - `mutating func formBitwiseAnd(with other: Self)`
-///     - `mutating func formBitwiseOr(with other: Self)`
-///     - `mutating func formBitwiseExclusiveOr(with other: Self)`
+///
+/// - `static var allZeros: Self { get }`
+/// - `mutating func formBitwiseNot()`
+/// - `mutating func formBitwiseAnd(with other: Self)`
+/// - `mutating func formBitwiseOr(with other: Self)`
+/// - `mutating func formBitwiseExclusiveOr(with other: Self)`
 public protocol BitwiseLogic : BitwiseOperations {
 
     // [_Define Documentation: SDGCornerstone.BitwiseLogic.bitwiseNot()_]

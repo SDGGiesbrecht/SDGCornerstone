@@ -49,6 +49,16 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
         return yToX[y]
     }
 
+    /// Accesses the corresponding `Y` for a particular `X`.
+    public subscript(x: X) -> Y? {
+        return xToY[x]
+    }
+
+    /// Accesses the corresponding `X` for a particular `Y`.
+    public subscript(y: Y) -> X? {
+        return yToX[y]
+    }
+
     // MARK: - Collection
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]

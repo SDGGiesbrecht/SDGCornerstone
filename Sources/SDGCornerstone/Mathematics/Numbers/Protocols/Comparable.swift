@@ -189,3 +189,17 @@ extension Comparable where Self : Measurement {
         return lhs.rawValue < rhs.rawValue
     }
 }
+
+extension Comparable where Self : OrderedEnumeration {
+    // MARK: - where Self : OrderedEnumeration
+
+    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the left value is less than the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value.
+    ///     - rhs: Another value.
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
