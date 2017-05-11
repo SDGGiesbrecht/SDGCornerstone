@@ -33,7 +33,7 @@ class CollectionTests : XCTestCase {
         let match = collection.lastMatch(for: [4, 5])
         XCTAssert(match?.range == 5 ..< 7)
         XCTAssert(match?.contents.elementsEqual([4, 5]) == true)
-        XCTAssert(collection.lastMatch(for: [−1, −2]) == nil)
+        XCTAssert(collection.lastMatch(for: [ −1, −2]) == nil)
 
         let alternativeMatch = collection.lastMatch(for: AlternativePatterns([
             LiteralPattern([1, 3]),
@@ -55,7 +55,7 @@ class CollectionTests : XCTestCase {
         let alsoDangerous = collection.lastMatch(for: [RepetitionPattern([4, 5], consumption: .lazy), LiteralPattern([6])])
         XCTAssert(alsoDangerous?.range == 7 ..< 8, "Unexpected pattern match: \(String(describing: alsoDangerous?.range))")
 
-        let anotherTrap = collection.lastMatch(for: [LiteralPattern([1, 2]), RepetitionPattern([−1, −2]), LiteralPattern([3, 4])])
+        let anotherTrap = collection.lastMatch(for: [LiteralPattern([1, 2]), RepetitionPattern([ −1, −2]), LiteralPattern([3, 4])])
         XCTAssert(anotherTrap?.range == 0 ..< 4, "Unexpected pattern match: \(String(describing: anotherTrap?.range))")
 
         let backwardsCollection1 = [0, 0, 0, 0, 0]
@@ -107,7 +107,7 @@ class CollectionTests : XCTestCase {
         let match = collection.firstMatch(for: [2, 3])
         XCTAssert(match?.range == 1 ..< 3)
         XCTAssert(match?.contents.elementsEqual([2, 3]) == true)
-        XCTAssert(collection.firstMatch(for: [−1, −2]) == nil)
+        XCTAssert(collection.firstMatch(for: [ −1, −2]) == nil)
 
         let alternativeMatch = collection.firstMatch(for: AlternativePatterns([
             LiteralPattern([1, 3]),
@@ -129,7 +129,7 @@ class CollectionTests : XCTestCase {
         let alsoDangerous = collection.firstMatch(for: [RepetitionPattern([4, 5], consumption: .lazy), LiteralPattern([6])])
         XCTAssert(alsoDangerous?.range == 3 ..< 8)
 
-        let anotherTrap = collection.firstMatch(for: [LiteralPattern([1, 2]), RepetitionPattern([−1, −2]), LiteralPattern([3, 4])])
+        let anotherTrap = collection.firstMatch(for: [LiteralPattern([1, 2]), RepetitionPattern([ −1, −2]), LiteralPattern([3, 4])])
         XCTAssert(anotherTrap?.range == 0 ..< 4, "Unexpected pattern match: \(String(describing: anotherTrap?.range))")
 
         let equation = "2(3x − (y + 4)) = z"
