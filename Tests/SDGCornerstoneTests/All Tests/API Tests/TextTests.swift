@@ -40,12 +40,12 @@ class TextTests : XCTestCase {
     }
 
     func testUnicodeScalar() {
-        XCTAssert(("A" as UnicodeScalar).hexidecimalCode == "0041")
-        XCTAssert(("‐" as UnicodeScalar).hexidecimalCode == "2010")
+        XCTAssert(("A" as UnicodeScalar).hexadecimalCode == "0041", "A.hexadecimalCode → \(("A" as UnicodeScalar).hexadecimalCode) ≠ 0041")
+        XCTAssert(("‐" as UnicodeScalar).hexadecimalCode == "2010", "‐.hexadecimalCode → \(("−" as UnicodeScalar).hexadecimalCode) ≠ 2010")
 
         func verifyVisible(_ codePoint: Int) {
             if let scalar = UnicodeScalar(codePoint) {
-                XCTAssert(scalar.visibleRepresentation ≠ "")
+                XCTAssert(scalar.visibleRepresentation ≠ "", "\(scalar.hexadecimalCode).visibleRepresentation → [Empty String]")
             }
         }
         for codePoint in 0 ..< 0xFF {

@@ -16,8 +16,8 @@ import Foundation
 
 extension UnicodeScalar {
 
-    /// The hexidecimal code for the character.
-    public var hexidecimalCode: String {
+    /// The hexadecimal code for the character.
+    public var hexadecimalCode: String {
         var result = String(value, radix: 16, uppercase: true)
         result.unicodeScalars.fill(to: 4, with: "0", from: .start)
         return result
@@ -30,7 +30,7 @@ extension UnicodeScalar {
     /// - Visible characters remain unchanged.
     /// - Combining characters are applied to a dotted circle.
     /// - Invisible characters are represented by their acronyms from the [Unicode code charts](http://www.unicode.org/charts/) in brackets.
-    /// - Private use or unassigned code points are represented by their hexidecimal codes in brackets.
+    /// - Private use or unassigned code points are represented by their hexadecimal codes in brackets.
     public var visibleRepresentation: String {
 
         func control(acronym: String) -> String {
@@ -375,7 +375,7 @@ extension UnicodeScalar {
 
                 // Private Use (Co), Surrogate (Cs) & Unassigned (Cn)
             } else {
-                return control(acronym: hexidecimalCode)
+                return control(acronym: hexadecimalCode)
             }
         }
     }
