@@ -71,6 +71,12 @@ class CollectionTests : XCTestCase {
         XCTAssert(backwardsResult2?.range == 1 ..< 3, "Unexpected pattern match: \(String(describing: backwardsResult2?.range))")
         let forwardsResult2 = backwardsCollection2.matches(for: backwardsPattern2).last
         XCTAssert(forwardsResult2?.range == 0 ..< 3, "Unexpected pattern match: \(String(describing: forwardsResult2?.range))")
+
+        XCTAssert([5, 4, 3, 2, 1].commonSuffix(with: [3, 2, 1]).contents == [3, 2, 1])
+
+        XCTAssert([5, 4, 3, 2, 1].lastMatch(for: ConditionalPattern(condition: { $0.isEven }))?.range == 3 ..< 4)
+
+        XCTAssert([5, 4, 3, 2, 1].lastMatch(for: NotPattern([3, 2, 1]))?.range == 3 ..< 4)
     }
 
     func testBijectiveMapping() {
@@ -81,6 +87,9 @@ class CollectionTests : XCTestCase {
         for (x, y) in mapping {
             XCTAssert(mapping[x] == y)
             XCTAssert(mapping[y] == x)
+
+            XCTAssert(mapping.y(for: x) == y)
+            XCTAssert(mapping.x(for: y) == x)
         }
 
         for index in mapping.indices {
@@ -127,6 +136,50 @@ class CollectionTests : XCTestCase {
         let nestingLevel = equation.unicodeScalars.firstNestingLevel(startingWith: "(".unicodeScalars, endingWith: ")".unicodeScalars)!
         XCTAssert(String(nestingLevel.container.contents) == "(3x − (y + 4))")
         XCTAssert(String(nestingLevel.contents.contents) == "3x − (y + 4)")
+        XCTAssert(equation.unicodeScalars.firstNestingLevel(startingWith: "[".unicodeScalars, endingWith: "]".unicodeScalars) == nil)
+        XCTAssert(equation.unicodeScalars.firstNestingLevel(startingWith: "2".unicodeScalars, endingWith: "9".unicodeScalars) == nil)
+
+        XCTAssert([1, 2, 3, 4].prefix(upTo: AlternativePatterns([LiteralPattern([2, 3]), LiteralPattern([3, 4])]))?.range == 0 ..< 1)
+        XCTAssert([1, 2, 3, 4].prefix(upTo: [2, 3])?.range == 0 ..< 1)
+        XCTAssert([1, 2, 3, 4].prefix(upTo: [LiteralPattern([2]), LiteralPattern([3])])?.range == 0 ..< 1)
+        XCTAssert([1, 2, 3, 4].prefix(upTo: [8, 9])?.range == nil)
+
+        XCTAssert([1, 2, 3, 4].prefix(through: AlternativePatterns([LiteralPattern([2, 3]), LiteralPattern([3, 4])]))?.range == 0 ..< 3)
+        XCTAssert([1, 2, 3, 4].prefix(through: [2, 3])?.range == 0 ..< 3)
+        XCTAssert([1, 2, 3, 4].prefix(through: [LiteralPattern([2]), LiteralPattern([3])])?.range == 0 ..< 3)
+        XCTAssert([1, 2, 3, 4].prefix(through: [8, 9]) == nil)
+
+        XCTAssert([1, 2, 3, 4].suffix(from: AlternativePatterns([LiteralPattern([2, 3]), LiteralPattern([3, 4])]))?.range == 1 ..< 4)
+        XCTAssert([1, 2, 3, 4].suffix(from: [2, 3])?.range == 1 ..< 4)
+        XCTAssert([1, 2, 3, 4].suffix(from: [LiteralPattern([2]), LiteralPattern([3])])?.range == 1 ..< 4)
+        XCTAssert([1, 2, 3, 4].suffix(from: [8, 9]) == nil)
+
+        XCTAssert([1, 2, 3, 4].suffix(after: AlternativePatterns([LiteralPattern([2, 3]), LiteralPattern([3, 4])]))?.range == 3 ..< 4)
+        XCTAssert([1, 2, 3, 4].suffix(after: [2, 3])?.range == 3 ..< 4)
+        XCTAssert([1, 2, 3, 4].suffix(after: [LiteralPattern([2]), LiteralPattern([3])])?.range == 3 ..< 4)
+        XCTAssert([1, 2, 3, 4].suffix(after: [8, 9]) == nil)
+
+        XCTAssert([1, 2, 3, 4].components(separatedBy: [2, 3]).map({ Array($0.contents) }).joined().elementsEqual([1, 4]))
+        XCTAssert([1, 2, 3, 4].components(separatedBy: AlternativePatterns([LiteralPattern([2, 3]), LiteralPattern([3, 4])])).map({ Array($0.contents) }).joined().elementsEqual([1, 4]))
+        XCTAssert([1, 2, 3, 4].components(separatedBy: [LiteralPattern([2]), LiteralPattern([3])]).map({ Array($0.contents) }).joined().elementsEqual([1, 4]))
+
+        XCTAssert([1, 2, 3, 4].contains([2, 3]))
+        XCTAssert([1, 2, 3, 4].contains(AlternativePatterns([LiteralPattern([2, 3]), LiteralPattern([3, 4])])))
+        XCTAssert([1, 2, 3, 4].contains([LiteralPattern([2]), LiteralPattern([3])]))
+
+        XCTAssert([1, 2, 3, 4].hasPrefix([1, 2]))
+        XCTAssert([1, 2, 3, 4].hasPrefix(AlternativePatterns([LiteralPattern([1, 2]), LiteralPattern([3, 4])])))
+        XCTAssert([1, 2, 3, 4].hasPrefix([LiteralPattern([1]), LiteralPattern([2])]))
+
+        XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
+        XCTAssert([1, 2, 3, 4].hasSuffix(AlternativePatterns([LiteralPattern([3, 4]), LiteralPattern([5, 6])])))
+        XCTAssert([1, 2, 3, 4].hasSuffix([LiteralPattern([3]), LiteralPattern([4])]))
+
+        XCTAssert([5, 4, 3, 2, 1].commonPrefix(with: [5, 2, 1]).contents == [5])
+
+        XCTAssert([5, 4, 3, 2, 1].firstMatch(for: ConditionalPattern(condition: { $0.isEven }))?.range == 1 ..< 2)
+
+        XCTAssert([5, 4, 3, 2, 1].firstMatch(for: NotPattern([5, 4, 3]))?.range == 1 ..< 2)
     }
 
     func testComparableSet() {
@@ -362,7 +415,7 @@ class CollectionTests : XCTestCase {
         runTests(start: [1, 2, 3], appendix: [4, 5], result: [1, 2, 3, 4, 5])
         runTests(start: "123".unicodeScalars, appendix: "45".unicodeScalars, result: "12345".unicodeScalars)
         runTests(start: "123".characters, appendix: "45".characters, result: "12345".characters)
-        runTests(start: RangeReplaceableCollectionExample([1, 2, 3]), appendix: RangeReplaceableCollectionExample([4, 5]), result: RangeReplaceableCollectionExample([1, 2, 3, 4, 5]))
+        runTests(start: RangeReplaceableCollectionExample([1, 2, 3]), appendix: RangeReplaceableCollectionExample([4, 5]), result: [1, 2, 3, 4, 5])
     }
 
     func testSetDefinition() {

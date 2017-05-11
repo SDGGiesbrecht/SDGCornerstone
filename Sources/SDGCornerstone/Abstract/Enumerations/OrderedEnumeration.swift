@@ -53,7 +53,7 @@ extension OrderedEnumeration where RawValue.Vector : IntegerType {
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.cyclicSuccessor()_]
     /// Returns the next case, wrapping around to the first case if necessary.
-    func cyclicSuccessor() -> Self {
+    public func cyclicSuccessor() -> Self {
         if let next = successor() {
             return next
         } else {
@@ -66,7 +66,7 @@ extension OrderedEnumeration where RawValue.Vector : IntegerType {
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.cyclicPredecessor()_]
     /// Returns the previous case, wrapping around to the last case if necessary.
-    func cyclicPredecessor() -> Self {
+    public func cyclicPredecessor() -> Self {
         if let previous = predecessor() {
             return previous
         } else {

@@ -44,7 +44,7 @@ extension IterableEnumeration where RawValue.Vector : IntegerType {
     /// An array containing every case of the enumeration.
     public static var cases: [Self] {
         guard var instance = first else {
-            return []
+            return [] // [_Exempt from Code Coverage_] Unreachable due to the compiler disallowing raw values for empty enumerations.
         }
         var result: [Self] = [instance]
         while let next = instance.successorAsIterableEnumeration() {

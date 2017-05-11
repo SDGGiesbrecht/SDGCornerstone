@@ -41,11 +41,11 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     // MARK: - Look‐Up
 
     /// Returns the corresponding `Y` for a particular `X`.
-    public func yForX(x: X) -> Y? {
+    public func y(for x: X) -> Y? {
         return xToY[x]
     }
     /// Returns the corresponding `X` for a particular `Y`.
-    public func xForY(y: Y) -> X? {
+    public func x(for y: Y) -> X? {
         return yToX[y]
     }
 

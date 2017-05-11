@@ -14,7 +14,7 @@
 
 import SDGCornerstone
 
-struct RangeReplaceableCollectionExample : RangeReplaceableCollection {
+struct RangeReplaceableCollectionExample : ExpressibleByArrayLiteral, RangeReplaceableCollection {
 
     var value: [Int] = []
 

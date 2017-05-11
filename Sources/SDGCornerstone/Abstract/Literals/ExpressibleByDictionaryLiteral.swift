@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension ExpressibleByArrayLiteral {
+extension ExpressibleByDictionaryLiteral {
 
     // [_Define Documentation: SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:)_]
     /// Creates an instance from a dictionary literal.

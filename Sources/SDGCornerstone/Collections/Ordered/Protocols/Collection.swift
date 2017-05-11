@@ -53,10 +53,6 @@ extension Collection {
         return startIndex ..< endIndex
     }
 
-    fileprivate var entirety: PatternMatch<Self> {
-        return PatternMatch(range: bounds, in: self)
-    }
-
     /// Returns the backward version of the specified range.
     public func backward(_ range: Range<Self.Index>) -> Range<ReversedIndex<Self>> {
         return ReversedIndex(range.upperBound) ..< ReversedIndex(range.lowerBound)
@@ -222,7 +218,7 @@ extension Collection where Iterator.Element : Equatable {
     ///     - pattern: The pattern to search for.
     public func prefix(through pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
         guard let match = firstMatch(for: pattern) else {
-            return entirety
+            return nil
         }
         return PatternMatch(range: startIndex ..< match.range.upperBound, in: self)
     }
@@ -254,82 +250,82 @@ extension Collection where Iterator.Element : Equatable {
         return prefix(through: LiteralPattern(pattern))
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.suffix(fromBeginningOf:)_]
+    // [_Define Documentation: SDGCornerstone.Collection.suffix(from:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(fromBeginningOf pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+    public func suffix(from pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
         guard let match = firstMatch(for: pattern) else {
-            return entirety
+            return nil
         }
-        return PatternMatch(range: startIndex ..< match.range.lowerBound, in: self)
+        return PatternMatch(range: match.range.lowerBound ..< endIndex, in: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromBeginningOf:)_]
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(fromBeginningOf pattern: LiteralPattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return suffix(fromBeginningOf: pattern as Pattern<Iterator.Element>)
+    public func suffix(from pattern: LiteralPattern<Iterator.Element>) -> PatternMatch<Self>? {
+        return suffix(from: pattern as Pattern<Iterator.Element>)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromBeginningOf:)_]
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(fromBeginningOf pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return suffix(fromBeginningOf: pattern as Pattern<Iterator.Element>)
+    public func suffix(from pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
+        return suffix(from: pattern as Pattern<Iterator.Element>)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromBeginningOf:)_]
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix<C : Collection>(fromBeginningOf pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
-        return suffix(fromBeginningOf: LiteralPattern(pattern))
+    public func suffix<C : Collection>(from pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+        return suffix(from: LiteralPattern(pattern))
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.suffix(fromEndOf:)_]
+    // [_Define Documentation: SDGCornerstone.Collection.suffix(after:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(fromEndOf pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+    public func suffix(after pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
         guard let match = firstMatch(for: pattern) else {
-            return entirety
+            return nil
         }
-        return PatternMatch(range: startIndex ..< match.range.upperBound, in: self)
+        return PatternMatch(range: match.range.upperBound ..< endIndex, in: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromEndOf:)_]
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(fromEndOf pattern: LiteralPattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return suffix(fromEndOf: pattern as Pattern<Iterator.Element>)
+    public func suffix(after pattern: LiteralPattern<Iterator.Element>) -> PatternMatch<Self>? {
+        return suffix(after: pattern as Pattern<Iterator.Element>)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromEndOf:)_]
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(fromEndOf pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return suffix(fromEndOf: pattern as Pattern<Iterator.Element>)
+    public func suffix(after pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
+        return suffix(after: pattern as Pattern<Iterator.Element>)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(fromEndOf:)_]
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix<C : Collection>(fromEndOf pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
-        return suffix(fromEndOf: LiteralPattern(pattern))
+    public func suffix<C : Collection>(after pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+        return suffix(after: LiteralPattern(pattern))
     }
 
     // [_Define Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
@@ -416,7 +412,7 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     public func hasPrefix(_ pattern: Pattern<Iterator.Element>) -> Bool {
-        return pattern.matches(in: self, at: startIndex).isEmpty
+        return ¬pattern.matches(in: self, at: startIndex).isEmpty
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
@@ -453,7 +449,7 @@ extension Collection where Iterator.Element : Equatable {
     ///     - pattern: The pattern to try.
     public func hasSuffix(_ pattern: Pattern<Iterator.Element>) -> Bool {
         let backwards = reversed()
-        return pattern.reversed().matches(in: backwards, at: backwards.startIndex).isEmpty
+        return ¬pattern.reversed().matches(in: backwards, at: backwards.startIndex).isEmpty
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
