@@ -43,8 +43,8 @@ extension IterableEnumeration where RawValue.Vector : IntegerType {
     // [_Inherit Documentation: SDGCornerstone.IterableEnumeration.cases_]
     /// An array containing every case of the enumeration.
     public static var cases: [Self] {
-        guard var instance = first else {
-            return [] // [_Exempt from Code Coverage_] Unreachable due to the compiler disallowing raw values for empty enumerations.
+        guard var instance = first else { // [_Exempt from Code Coverage_] Unreachable due to the compiler disallowing raw values for empty enumerations.
+            return []
         }
         var result: [Self] = [instance]
         while let next = instance.successorAsIterableEnumeration() {

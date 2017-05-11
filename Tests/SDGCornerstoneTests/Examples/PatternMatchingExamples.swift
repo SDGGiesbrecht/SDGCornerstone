@@ -33,7 +33,7 @@ private func demonstrateBackwardsDifferences2() {
 
     // [_Define Example: lastMatch(for:in:) Backwards Differences 2_]
     let collection = [0, 0, 1]
-    let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
 
     print("Backwards: \(collection.lastMatch(for: pattern)!)")
     // Backwards: 1 ..< 3

@@ -26,6 +26,7 @@ class EnumerationTests : XCTestCase {
         XCTAssert(OrderedEnumerationExample.c.cyclicPredecessor() == OrderedEnumerationExample.b)
         XCTAssert(OrderedEnumerationExample.a.cyclicPredecessor() == OrderedEnumerationExample.c)
         XCTAssert(OrderedEnumerationExample.c.cyclicSuccessor() == OrderedEnumerationExample.a)
+        XCTAssert(OrderedEnumerationExample.a < OrderedEnumerationExample.b)
     }
 
     static var allTests: [(String, (EnumerationTests) -> () throws -> Void)] {

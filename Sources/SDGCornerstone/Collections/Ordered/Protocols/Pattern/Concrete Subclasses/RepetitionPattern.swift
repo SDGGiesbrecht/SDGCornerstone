@@ -17,7 +17,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    private init(ofAbstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+    private init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         assert(count == nil ∨ count!.lowerBound.isNonNegative, "Cannot check for a negative number of instances of a pattern. Requested count: \(count!).")
 
         self.pattern = pattern
@@ -32,8 +32,8 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(of pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
-        self.init(ofAbstractPattern: pattern, count: count, consumption: consumption)
+    public convenience init(_ pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+        self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
@@ -43,8 +43,8 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(of pattern: LiteralPattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
-        self.init(ofAbstractPattern: pattern, count: count, consumption: consumption)
+    public convenience init(_ pattern: LiteralPattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+        self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
@@ -54,8 +54,8 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(of pattern: CompositePattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
-        self.init(ofAbstractPattern: pattern, count: count, consumption: consumption)
+    public convenience init(_ pattern: CompositePattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+        self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
     // MARK: - Properties
@@ -122,6 +122,6 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     public override func reversed() -> Pattern<Element> {
-        return RepetitionPattern(of: pattern.reversed(), count: count, consumption: consumption)
+        return RepetitionPattern(pattern.reversed(), count: count, consumption: consumption)
     }
 }
