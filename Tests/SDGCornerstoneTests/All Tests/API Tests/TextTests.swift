@@ -42,7 +42,7 @@ class TextTests : XCTestCase {
     func testUnicodeScalar() {
         XCTAssert(("A" as UnicodeScalar).hexidecimalCode == "0041")
         XCTAssert(("‐" as UnicodeScalar).hexidecimalCode == "2010")
-        
+
         func verifyVisible(_ codePoint: Int) {
             if let scalar = UnicodeScalar(codePoint) {
                 XCTAssert(scalar.visibleRepresentation ≠ "")

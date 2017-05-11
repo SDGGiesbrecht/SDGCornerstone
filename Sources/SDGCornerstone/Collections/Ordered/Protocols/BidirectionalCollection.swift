@@ -46,7 +46,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
     ///
     /// print("Backwards: \(collection.lastMatch(for: pattern)!)")
     /// // Backwards: 1 ..< 3
@@ -88,7 +88,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
     ///
     /// print("Backwards: \(collection.lastMatch(for: pattern)!)")
     /// // Backwards: 1 ..< 3
@@ -125,7 +125,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
     ///
     /// print("Backwards: \(collection.lastMatch(for: pattern)!)")
     /// // Backwards: 1 ..< 3
@@ -162,7 +162,7 @@ extension BidirectionalCollection where Iterator.Element : Equatable {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern(of: [0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
     ///
     /// print("Backwards: \(collection.lastMatch(for: pattern)!)")
     /// // Backwards: 1 ..< 3
