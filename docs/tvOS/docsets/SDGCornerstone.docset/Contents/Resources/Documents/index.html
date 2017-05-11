@@ -399,7 +399,10 @@
 <li>Arbitrary‐precision arithmetic.</li>
 <li>Customizable randomization.</li>
 <li>Inter‐type set operations.</li>
+<li>Generic pattern matching.</li>
 </ul>
+
+<p>&hellip;and much more.</p>
 
 <h2 id='importing' class='heading'>Importing</h2>
 
@@ -465,6 +468,26 @@
 
     <span class="k">if</span> <span class="kt">Set</span><span class="p">([</span><span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">89</span><span class="p">])</span> <span class="o">⊆</span> <span class="p">(</span><span class="n">twoDigits</span> <span class="o">∩</span> <span class="n">odd</span><span class="p">)</span> <span class="o">∖</span> <span class="n">square</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"They’re all in there."</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Pattern Matching</span>
+
+<span class="kd">func</span> <span class="nf">tryPatternMatching</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">numbers</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="kt">CompositePattern</span><span class="p">([</span>
+        <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="c1">// 1</span>
+        <span class="kt">ConditionalPattern</span><span class="p">(</span><span class="nv">condition</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">isEven</span> <span class="p">}),</span> <span class="c1">// 2</span>
+        <span class="kt">AlternativePatterns</span><span class="p">([</span>
+            <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]),</span> <span class="c1">// (∅)</span>
+            <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="c1">// 3, 4</span>
+            <span class="p">]),</span>
+        <span class="kt">RepetitionPattern</span><span class="p">(</span><span class="kt">NotPattern</span><span class="p">(</span><span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))),</span> <span class="c1">// 5, 6, 7, 8, 9 (...)</span>
+        <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span> <span class="c1">// 10</span>
+        <span class="p">]))</span> <span class="p">{</span>
+
+        <span class="nf">print</span><span class="p">(</span><span class="s">"I found a match!"</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
