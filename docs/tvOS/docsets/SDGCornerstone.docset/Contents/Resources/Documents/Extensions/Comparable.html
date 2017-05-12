@@ -48,8 +48,19 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FillDirection.html">FillDirection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/BidirectionalCollection.html">BidirectionalCollection</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Extensions/BitwiseOperations.html">BitwiseOperations</a>
               </li>
@@ -60,6 +71,9 @@
                 <a href="../Extensions/CharacterSet.html">CharacterSet</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/Comparable.html">Comparable</a>
               </li>
               <li class="nav-group-task">
@@ -67,6 +81,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Equatable.html">Equatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByArrayLiteral.html">ExpressibleByArrayLiteral</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/ExpressibleByExtendedGraphemeClusterLiteral.html">ExpressibleByExtendedGraphemeClusterLiteral</a>
@@ -84,10 +101,16 @@
                 <a href="../Extensions/Optional.html">Optional</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/RangeReplaceableCollection.html">RangeReplaceableCollection</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/RawRepresentable.html">RawRepresentable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Set.html">Set</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UnicodeScalar.html">UnicodeScalar</a>
               </li>
             </ul>
           </li>
@@ -167,6 +190,9 @@
                 <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFT6toBasex2ofx_x">log(toBase:of:)</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone15primitiveMethodFSSOs5Never">primitiveMethod(_:)</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Functions.html#/s:F14SDGCornerstone3secuRxS_14RealArithmeticrFGVS_5Anglex_x">sec(_:)</a>
               </li>
               <li class="nav-group-task">
@@ -174,6 +200,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F14SDGCornerstone3tanuRxS_14RealArithmeticrFGVS_5Anglex_x">tan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone11unreachableFT8functionSS4fileSS4lineSi6columnSi_Os5Never">unreachable(function:file:line:column:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F14SDGCornerstoneoP1ouRxS_25NumericAdditiveArithmeticrFxGVS_21_PartialAbsoluteValuex_">|(_:)</a>
@@ -250,6 +279,9 @@
                 <a href="../Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/IterableEnumeration.html">IterableEnumeration</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Measurement.html">Measurement</a>
               </li>
               <li class="nav-group-task">
@@ -266,6 +298,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/OneDimensionalVector.html">OneDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OrderedEnumeration.html">OrderedEnumeration</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/PointType.html">PointType</a>
@@ -298,6 +333,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/Angle.html">Angle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BijectiveMapping.html">BijectiveMapping</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/IntensionalSet.html">IntensionalSet</a>
@@ -486,7 +524,11 @@
 <p>This is accomplished by changing <code>self</code> to match the value of <code>minimum</code> if and only if <code>self</code> does not already satisfy <code>self ≥ minimum</code>.</p>
 
 <p>For example:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">numberOfRolls</span> <span class="o">=</span> <span class="mi">5</span>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">Int</span><span class="p">(</span><span class="nv">randomInRange</span><span class="p">:</span> <span class="mi">1</span> <span class="o">...</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">numberOfRolls</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">var</span> <span class="nv">highestRoll</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span> <span class="o">...</span> <span class="n">numberOfRolls</span> <span class="p">{</span>
     <span class="n">highestRoll</span><span class="o">.</span><span class="nf">increase</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="nf">rollDie</span><span class="p">())</span>
@@ -494,7 +536,7 @@
 <span class="nf">print</span><span class="p">(</span><span class="s">"After rolling the die </span><span class="se">\(</span><span class="n">numberOfRolls</span><span class="se">)</span><span class="s"> time(s), the highest roll was </span><span class="se">\(</span><span class="n">highestRoll</span><span class="se">)</span><span class="s">."</span><span class="p">)</span>
 <span class="c1">// Prints, for example, “After rolling the die 5 time(s), the highest roll was 4.”</span>
 
-<span class="c1">// In this example, rollDie() represents a function that randomly returns an Int between 1 and 6 inclusive. In each iteration of the for loop, a new random number is generated, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.</span>
+<span class="c1">// In each iteration of the for loop, a new number is rolled, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.</span>
 </code></pre>
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
@@ -551,7 +593,11 @@
 <p>This is accomplished by changing <code>self</code> to match the value of <code>maximum</code> if and only if <code>self</code> does not already satisfy <code>self ≤ maximum</code>.</p>
 
 <p>For example:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">numberOfRolls</span> <span class="o">=</span> <span class="mi">5</span>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">Int</span><span class="p">(</span><span class="nv">randomInRange</span><span class="p">:</span> <span class="mi">1</span> <span class="o">...</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">numberOfRolls</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">var</span> <span class="nv">lowestRoll</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span> <span class="o">...</span> <span class="n">numberOfRolls</span> <span class="p">{</span>
     <span class="n">lowestRoll</span><span class="o">.</span><span class="nf">decrease</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="nf">rollDie</span><span class="p">())</span>
@@ -559,7 +605,7 @@
 <span class="nf">print</span><span class="p">(</span><span class="s">"After rolling the die </span><span class="se">\(</span><span class="n">numberOfRolls</span><span class="se">)</span><span class="s"> time(s), the lowest roll was </span><span class="se">\(</span><span class="n">lowestRoll</span><span class="se">)</span><span class="s">."</span><span class="p">)</span>
 <span class="c1">// Prints, for example, “After rolling the die 5 time(s), the lowest roll was 2.”</span>
 
-<span class="c1">// In this example, rollDie() represents a function that randomly returns an Int between 1 and 6 inclusive. In each iteration of the for loop, a new random number is generated, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.</span>
+<span class="c1">// In each iteration of the for loop, a new number is rolled, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.</span>
 </code></pre>
 <div class="aside aside-nonmutating-variant">
     <p class="aside-title">Nonmutating variant</p>
@@ -688,6 +734,75 @@
                     <a name="/s:ZFe14SDGCornerstoneRxS_11MeasurementrPs10Comparableoi1lFTxx_Sb"></a>
                     <a name="//apple_ref/swift/Method/&lt;(_:_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:ZFe14SDGCornerstoneRxS_11MeasurementrPs10Comparableoi1lFTxx_Sb">&lt;(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if the left value is less than the right.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Another value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/where%20Self%20:%20OrderedEnumeration"></a>
+                <a name="//apple_ref/swift/Section/where Self : OrderedEnumeration" class="dashAnchor"></a>
+                <a href="#/where%20Self%20:%20OrderedEnumeration">
+                  <h3 class="section-name">where Self : OrderedEnumeration</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFe14SDGCornerstoneRxS_18OrderedEnumerationrPs10Comparableoi1lFTxx_Sb"></a>
+                    <a name="//apple_ref/swift/Method/&lt;(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFe14SDGCornerstoneRxS_18OrderedEnumerationrPs10Comparableoi1lFTxx_Sb">&lt;(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">

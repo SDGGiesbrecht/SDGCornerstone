@@ -90,6 +90,10 @@ extension Comparable {
     /// For example:
     ///
     /// ```swift
+    /// func rollDie() -> Int {
+    ///     return Int(randomInRange: 1 ... 6)
+    /// }
+    ///
     /// let numberOfRolls = 5
     /// var highestRoll = 1
     /// for _ in 1 ... numberOfRolls {
@@ -98,7 +102,7 @@ extension Comparable {
     /// print("After rolling the die \(numberOfRolls) time(s), the highest roll was \(highestRoll).")
     /// // Prints, for example, “After rolling the die 5 time(s), the highest roll was 4.”
     ///
-    /// // In this example, rollDie() represents a function that randomly returns an Int between 1 and 6 inclusive. In each iteration of the for loop, a new random number is generated, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.
+    /// // In each iteration of the for loop, a new number is rolled, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.
     /// ```
     ///
     /// - Parameters:
@@ -120,6 +124,10 @@ extension Comparable {
     /// For example:
     ///
     /// ```swift
+    /// func rollDie() -> Int {
+    ///     return Int(randomInRange: 1 ... 6)
+    /// }
+    ///
     /// let numberOfRolls = 5
     /// var lowestRoll = 6
     /// for _ in 1 ... numberOfRolls {
@@ -128,7 +136,7 @@ extension Comparable {
     /// print("After rolling the die \(numberOfRolls) time(s), the lowest roll was \(lowestRoll).")
     /// // Prints, for example, “After rolling the die 5 time(s), the lowest roll was 2.”
     ///
-    /// // In this example, rollDie() represents a function that randomly returns an Int between 1 and 6 inclusive. In each iteration of the for loop, a new random number is generated, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.
+    /// // In each iteration of the for loop, a new number is rolled, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.
     /// ```
     ///
     /// - Parameters:
@@ -170,6 +178,20 @@ extension Comparable {
 
 extension Comparable where Self : Measurement {
     // MARK: - where Self : Measurement
+
+    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the left value is less than the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value.
+    ///     - rhs: Another value.
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
+
+extension Comparable where Self : OrderedEnumeration {
+    // MARK: - where Self : OrderedEnumeration
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
     /// Returns `true` if the left value is less than the right.

@@ -19,6 +19,7 @@ XCTMain([
     testCase(CachingTests.allTests),
     testCase(CollectionTests.allTests),
     testCase(DataTests.allTests),
+    testCase(EnumerationTests.allTests),
     testCase(LogicTests.allTests),
     testCase(MathematicsTests.allTests),
     testCase(RandomizationTests.allTests),

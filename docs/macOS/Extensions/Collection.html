@@ -1,0 +1,2618 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Collection Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Extension/Collection" class="dashAnchor"></a>
+    <a title="Collection Extension Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SDGCornerstone Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SDGGiesbrecht/SDGCornerstone"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SDGCornerstone Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Collection Extension Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../related-projects.html">Related Projects</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CyclicalNumberGenerator.html">CyclicalNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PseudorandomNumberGenerator.html">PseudorandomNumberGenerator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FillDirection.html">FillDirection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/BidirectionalCollection.html">BidirectionalCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/BitwiseOperations.html">BitwiseOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CharacterSet.html">CharacterSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Dictionary.html">Dictionary</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Equatable.html">Equatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByArrayLiteral.html">ExpressibleByArrayLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByExtendedGraphemeClusterLiteral.html">ExpressibleByExtendedGraphemeClusterLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByIntegerLiteral.html">ExpressibleByIntegerLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByUnicodeScalarLiteral.html">ExpressibleByUnicodeScalarLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FloatingPoint.html">FloatingPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RangeReplaceableCollection.html">RangeReplaceableCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Set.html">Set</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UnicodeScalar.html">UnicodeScalar</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_CebFTGSqPMP__GSqPMP___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu0_Rxs9Equatable_S0_rFTTxq__Txq___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu1_Rxs9Equatable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu2_Rxs9Equatable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu3_Rxs9Equatable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu4_Rxs9Equatable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccosuRxS_14RealArithmeticrFxGVS_5Anglex_">arccos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccotuRxS_14RealArithmeticrFxGVS_5Anglex_">arccot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccscuRxS_14RealArithmeticrFxGVS_5Anglex_">arccsc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arcsecuRxS_14RealArithmeticrFxGVS_5Anglex_">arcsec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arcsinuRxS_14RealArithmeticrFxGVS_5Anglex_">arcsin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arctanuRxS_14RealArithmeticrFxGVS_5Anglex_">arctan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6cachedurFzT2inRGSqx_FzT_x_x">cached(in:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cosuRxS_14RealArithmeticrFGVS_5Anglex_x">cos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cotuRxS_14RealArithmeticrFGVS_5Anglex_x">cot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cscuRxS_14RealArithmeticrFGVS_5Anglex_x">csc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone1euRxS_14RealArithmeticrFT_x">e()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone16findLocalMaximumu0_RxS_19OneDimensionalPoint_s10Comparablewx6Strides13SignedIntegerwx6VectorS_11IntegerTyperFT4nearx6withinGSqGVs20CountableClosedRangex__10inFunctionFxq__x">findLocalMaximum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone16findLocalMinimumu0_RxS_19OneDimensionalPoint_s10Comparablewx6Strides13SignedIntegerwx6VectorS_11IntegerTyperFT4nearx6withinGSqGVs20CountableClosedRangex__10inFunctionFxq__x">findLocalMinimum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3gcduRxS_11MeasurementrFTxx_x">gcd(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3lcmuRxS_11MeasurementrFTxx_x">lcm(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone2lnuRxS_14RealArithmeticrFxx">ln(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFxx">log(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFT6toBasex2ofx_x">log(toBase:of:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone15primitiveMethodFSSOs5Never">primitiveMethod(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3secuRxS_14RealArithmeticrFGVS_5Anglex_x">sec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3sinuRxS_14RealArithmeticrFGVS_5Anglex_x">sin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3tanuRxS_14RealArithmeticrFGVS_5Anglex_x">tan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone11unreachableFT8functionSS4fileSS4lineSi6columnSi_Os5Never">unreachable(function:file:line:column:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneoP1ouRxS_25NumericAdditiveArithmeticrFxGVS_21_PartialAbsoluteValuex_">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneop1ouRxS_25NumericAdditiveArithmeticrFGVS_21_PartialAbsoluteValuex_x">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneX3BxauRxS_14RealArithmeticrFT_x">π()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneX3FxauRxS_14RealArithmeticrFT_x">τ()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu1_Rxs10Comparable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu2_Rxs10Comparable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu3_Rxs10Comparable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu4_Rxs10Comparable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu1_Rxs10Comparable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu2_Rxs10Comparable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu3_Rxs10Comparable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu4_Rxs10Comparable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≥(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Addable.html">Addable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ArrayFamily.html">ArrayFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BitwiseLogic.html">BitwiseLogic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ComparableSet.html">ComparableSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FiniteSet.html">FiniteSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P14SDGCornerstone11IntegerType">IntegerType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IterableEnumeration.html">IterableEnumeration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MutableSet.html">MutableSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Negatable.html">Negatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalVector.html">OneDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OrderedEnumeration.html">OrderedEnumeration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PointType.html">PointType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Randomizer.html">Randomizer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RangeFamily.html">RangeFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P14SDGCornerstone18RationalNumberType">RationalNumberType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SetInRepresentableUniverse.html">SetInRepresentableUniverse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/VectorType.html">VectorType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Angle.html">Angle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BijectiveMapping.html">BijectiveMapping</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntensionalSet.html">IntensionalSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:E14SDGCornerstoneVs11ClosedRange7Element">Element</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Collection</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
+
+                </div>
+              </div>
+            
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Indices"></a>
+                <a name="//apple_ref/swift/Section/Indices" class="dashAnchor"></a>
+                <a href="#/Indices">
+                  <h3 class="section-name">Indices</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePs10Collection6boundsGVs5Rangewx5Index_"></a>
+                    <a name="//apple_ref/swift/Property/bounds" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePs10Collection6boundsGVs5Rangewx5Index_">bounds</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the range for all of <code>self</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">bounds</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE14SDGCornerstonePs10Collection8backwardFGVs5Rangewx5Index_GS1_GVs13ReversedIndexx__"></a>
+                    <a name="//apple_ref/swift/Method/backward(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE14SDGCornerstonePs10Collection8backwardFGVs5Rangewx5Index_GS1_GVs13ReversedIndexx__">backward(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the backward version of the specified range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">backward</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">.</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">ReversedIndex</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE14SDGCornerstonePs10Collection7forwardFGVs5RangeGVs13ReversedIndexx__GS1_wx5Index_"></a>
+                    <a name="//apple_ref/swift/Method/forward(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE14SDGCornerstonePs10Collection7forwardFGVs5RangeGVs13ReversedIndexx__GS1_wx5Index_">forward(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the forward version of the specified range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">forward</span><span class="p">(</span><span class="n">_</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">ReversedIndex</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span>  <span class="kt">Range</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">.</span><span class="kt">Index</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/where%20Iterator.Element%20:%20Equatable"></a>
+                <a name="//apple_ref/swift/Section/where Iterator.Element : Equatable" class="dashAnchor"></a>
+                <a href="#/where%20Iterator.Element%20:%20Equatable">
+                  <h3 class="section-name">where Iterator.Element : Equatable</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10firstMatchFT3forGCS_7PatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/firstMatch(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10firstMatchFT3forGCS_7PatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSqGVS_12PatternMatchx__">firstMatch(for:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the first match for <code>pattern</code> in the specified subrange.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">firstMatch</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchRange</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subrange to search. (Defaults to the entire collection.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10firstMatchFT3forGCS_14LiteralPatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/firstMatch(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10firstMatchFT3forGCS_14LiteralPatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSqGVS_12PatternMatchx__">firstMatch(for:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the first match for <code>pattern</code> in the specified subrange.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">firstMatch</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchRange</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subrange to search. (Defaults to the entire collection.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10firstMatchFT3forGCS_16CompositePatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/firstMatch(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10firstMatchFT3forGCS_16CompositePatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSqGVS_12PatternMatchx__">firstMatch(for:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the first match for <code>pattern</code> in the specified subrange.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">firstMatch</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchRange</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subrange to search. (Defaults to the entire collection.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10firstMatchuRd__S0_Wd__S1_S2__zWxS1_S2__rFT3forqd__2inGSqGVs5Rangewx5Index___GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/firstMatch(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10firstMatchuRd__S0_Wd__S1_S2__zWxS1_S2__rFT3forqd__2inGSqGVs5Rangewx5Index___GSqGVS_12PatternMatchx__">firstMatch(for:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the first match for <code>pattern</code> in the specified subrange.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">firstMatch</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchRange</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subrange to search. (Defaults to the entire collection.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7matchesFT3forGCS_7PatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSaGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/matches(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7matchesFT3forGCS_7PatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSaGVS_12PatternMatchx__">matches(for:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a list of all matches for <code>pattern</code> in the specified subrange.</p>
+
+<p>This does not check for overlapping matches.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">matches</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchRange</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subrange to search. (Defaults to the entire collection.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7matchesFT3forGCS_14LiteralPatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSaGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/matches(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7matchesFT3forGCS_14LiteralPatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSaGVS_12PatternMatchx__">matches(for:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a list of all matches for <code>pattern</code> in the specified subrange.</p>
+
+<p>This does not check for overlapping matches.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">matches</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchRange</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subrange to search. (Defaults to the entire collection.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7matchesFT3forGCS_16CompositePatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSaGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/matches(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7matchesFT3forGCS_16CompositePatternWxS1_S2___2inGSqGVs5Rangewx5Index___GSaGVS_12PatternMatchx__">matches(for:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a list of all matches for <code>pattern</code> in the specified subrange.</p>
+
+<p>This does not check for overlapping matches.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">matches</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchRange</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subrange to search. (Defaults to the entire collection.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7matchesuRd__S0_Wd__S1_S2__zWxS1_S2__rFT3forqd__2inGSqGVs5Rangewx5Index___GSaGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/matches(for:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7matchesuRd__S0_Wd__S1_S2__zWxS1_S2__rFT3forqd__2inGSqGVs5Rangewx5Index___GSaGVS_12PatternMatchx__">matches(for:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a list of all matches for <code>pattern</code> in the specified subrange.</p>
+
+<p>This does not check for overlapping matches.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">matches</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="k">for</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">]</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>searchRange</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subrange to search. (Defaults to the entire collection.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT4upToGCS_7PatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/prefix(upTo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT4upToGCS_7PatternWxS1_S2____GSqGVS_12PatternMatchx__">prefix(upTo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence of <code>self</code> up to the start of <code>pattern</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prefix</span><span class="p">(</span><span class="n">upTo</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT4upToGCS_14LiteralPatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/prefix(upTo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT4upToGCS_14LiteralPatternWxS1_S2____GSqGVS_12PatternMatchx__">prefix(upTo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence of <code>self</code> up to the start of <code>pattern</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prefix</span><span class="p">(</span><span class="n">upTo</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT4upToGCS_16CompositePatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/prefix(upTo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT4upToGCS_16CompositePatternWxS1_S2____GSqGVS_12PatternMatchx__">prefix(upTo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence of <code>self</code> up to the start of <code>pattern</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prefix</span><span class="p">(</span><span class="n">upTo</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixuRd__S0_Wd__S1_S2__zWxS1_S2__rFT4upToqd___GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/prefix(upTo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixuRd__S0_Wd__S1_S2__zWxS1_S2__rFT4upToqd___GSqGVS_12PatternMatchx__">prefix(upTo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence of <code>self</code> up to the start of <code>pattern</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="k">prefix</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">upTo</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT7throughGCS_7PatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/prefix(through:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT7throughGCS_7PatternWxS1_S2____GSqGVS_12PatternMatchx__">prefix(through:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence of <code>self</code> up to and including <code>pattern</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prefix</span><span class="p">(</span><span class="n">through</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT7throughGCS_14LiteralPatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/prefix(through:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT7throughGCS_14LiteralPatternWxS1_S2____GSqGVS_12PatternMatchx__">prefix(through:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence of <code>self</code> up to and including <code>pattern</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prefix</span><span class="p">(</span><span class="n">through</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT7throughGCS_16CompositePatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/prefix(through:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixFT7throughGCS_16CompositePatternWxS1_S2____GSqGVS_12PatternMatchx__">prefix(through:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence of <code>self</code> up to and including <code>pattern</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prefix</span><span class="p">(</span><span class="n">through</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixuRd__S0_Wd__S1_S2__zWxS1_S2__rFT7throughqd___GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/prefix(through:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6prefixuRd__S0_Wd__S1_S2__zWxS1_S2__rFT7throughqd___GSqGVS_12PatternMatchx__">prefix(through:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence of <code>self</code> up to and including <code>pattern</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="k">prefix</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">through</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT4fromGCS_7PatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/suffix(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT4fromGCS_7PatternWxS1_S2____GSqGVS_12PatternMatchx__">suffix(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence from the beginning <code>pattern</code> to the end of <code>self</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">suffix</span><span class="p">(</span><span class="n">from</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT4fromGCS_14LiteralPatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/suffix(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT4fromGCS_14LiteralPatternWxS1_S2____GSqGVS_12PatternMatchx__">suffix(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence from the beginning <code>pattern</code> to the end of <code>self</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">suffix</span><span class="p">(</span><span class="n">from</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT4fromGCS_16CompositePatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/suffix(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT4fromGCS_16CompositePatternWxS1_S2____GSqGVS_12PatternMatchx__">suffix(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence from the beginning <code>pattern</code> to the end of <code>self</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">suffix</span><span class="p">(</span><span class="n">from</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixuRd__S0_Wd__S1_S2__zWxS1_S2__rFT4fromqd___GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/suffix(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixuRd__S0_Wd__S1_S2__zWxS1_S2__rFT4fromqd___GSqGVS_12PatternMatchx__">suffix(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence from the beginning <code>pattern</code> to the end of <code>self</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">suffix</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">from</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT5afterGCS_7PatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/suffix(after:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT5afterGCS_7PatternWxS1_S2____GSqGVS_12PatternMatchx__">suffix(after:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence from the beginning <code>pattern</code> to the end of <code>self</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">suffix</span><span class="p">(</span><span class="n">after</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT5afterGCS_14LiteralPatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/suffix(after:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT5afterGCS_14LiteralPatternWxS1_S2____GSqGVS_12PatternMatchx__">suffix(after:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence from the beginning <code>pattern</code> to the end of <code>self</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">suffix</span><span class="p">(</span><span class="n">after</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT5afterGCS_16CompositePatternWxS1_S2____GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/suffix(after:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixFT5afterGCS_16CompositePatternWxS1_S2____GSqGVS_12PatternMatchx__">suffix(after:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence from the beginning <code>pattern</code> to the end of <code>self</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">suffix</span><span class="p">(</span><span class="n">after</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixuRd__S0_Wd__S1_S2__zWxS1_S2__rFT5afterqd___GSqGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/suffix(after:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_6suffixuRd__S0_Wd__S1_S2__zWxS1_S2__rFT5afterqd___GSqGVS_12PatternMatchx__">suffix(after:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the subsequence from the beginning <code>pattern</code> to the end of <code>self</code>, or <code>nil</code> if <code>pattern</code> does not occur.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">suffix</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">after</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10componentsFT11separatedByGCS_7PatternWxS1_S2____GSaGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/components(separatedBy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10componentsFT11separatedByGCS_7PatternWxS1_S2____GSaGVS_12PatternMatchx__">components(separatedBy:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the segments of <code>self</code> separated by instances of <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">components</span><span class="p">(</span><span class="n">separatedBy</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10componentsFT11separatedByGCS_14LiteralPatternWxS1_S2____GSaGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/components(separatedBy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10componentsFT11separatedByGCS_14LiteralPatternWxS1_S2____GSaGVS_12PatternMatchx__">components(separatedBy:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the segments of <code>self</code> separated by instances of <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">components</span><span class="p">(</span><span class="n">separatedBy</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10componentsFT11separatedByGCS_16CompositePatternWxS1_S2____GSaGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/components(separatedBy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10componentsFT11separatedByGCS_16CompositePatternWxS1_S2____GSaGVS_12PatternMatchx__">components(separatedBy:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the segments of <code>self</code> separated by instances of <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">components</span><span class="p">(</span><span class="n">separatedBy</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10componentsuRd__S0_Wd__S1_S2__zWxS1_S2__rFT11separatedByqd___GSaGVS_12PatternMatchx__"></a>
+                    <a name="//apple_ref/swift/Method/components(separatedBy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_10componentsuRd__S0_Wd__S1_S2__zWxS1_S2__rFT11separatedByqd___GSaGVS_12PatternMatchx__">components(separatedBy:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the segments of <code>self</code> separated by instances of <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">components</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">separatedBy</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">]</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_8containsFGCS_7PatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/contains(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_8containsFGCS_7PatternWxS1_S2___Sb">contains(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> contains an match for <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">contains</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_8containsFGCS_14LiteralPatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/contains(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_8containsFGCS_14LiteralPatternWxS1_S2___Sb">contains(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> contains an match for <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">contains</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_8containsFGCS_16CompositePatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/contains(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_8containsFGCS_16CompositePatternWxS1_S2___Sb">contains(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> contains an match for <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">contains</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_8containsuRd__S0_Wd__S1_S2__zWxS1_S2__rFqd__Sb"></a>
+                    <a name="//apple_ref/swift/Method/contains(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_8containsuRd__S0_Wd__S1_S2__zWxS1_S2__rFqd__Sb">contains(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> contains an match for <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">contains</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to search for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasPrefixFGCS_7PatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/hasPrefix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasPrefixFGCS_7PatternWxS1_S2___Sb">hasPrefix(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> begins with <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasPrefix</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to try.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasPrefixFGCS_14LiteralPatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/hasPrefix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasPrefixFGCS_14LiteralPatternWxS1_S2___Sb">hasPrefix(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> begins with <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasPrefix</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to try.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasPrefixFGCS_16CompositePatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/hasPrefix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasPrefixFGCS_16CompositePatternWxS1_S2___Sb">hasPrefix(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> begins with <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasPrefix</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to try.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasPrefixuRd__S0_Wd__S1_S2__zWxS1_S2__rFqd__Sb"></a>
+                    <a name="//apple_ref/swift/Method/hasPrefix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasPrefixuRd__S0_Wd__S1_S2__zWxS1_S2__rFqd__Sb">hasPrefix(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> begins with <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">hasPrefix</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to try.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasSuffixFGCS_7PatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/hasSuffix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasSuffixFGCS_7PatternWxS1_S2___Sb">hasSuffix(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> begins with <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasSuffix</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">Pattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to try.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasSuffixFGCS_14LiteralPatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/hasSuffix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasSuffixFGCS_14LiteralPatternWxS1_S2___Sb">hasSuffix(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> begins with <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasSuffix</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">LiteralPattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to try.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasSuffixFGCS_16CompositePatternWxS1_S2___Sb"></a>
+                    <a name="//apple_ref/swift/Method/hasSuffix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasSuffixFGCS_16CompositePatternWxS1_S2___Sb">hasSuffix(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> begins with <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasSuffix</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">CompositePattern</span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to try.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasSuffixuRd__S0_Wd__S1_S2__zWxS1_S2__rFqd__Sb"></a>
+                    <a name="//apple_ref/swift/Method/hasSuffix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_9hasSuffixuRd__S0_Wd__S1_S2__zWxS1_S2__rFqd__Sb">hasSuffix(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if <code>self</code> begins with <code>pattern</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">hasSuffix</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to try.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/where%20Iterator.Element%20:%20Equatable,%20Indices.Iterator.Element%20==%20Index"></a>
+                <a name="//apple_ref/swift/Section/where Iterator.Element : Equatable, Indices.Iterator.Element == Index" class="dashAnchor"></a>
+                <a href="#/where%20Iterator.Element%20:%20Equatable,%20Indices.Iterator.Element%20==%20Index">
+                  <h3 class="section-name">where Iterator.Element : Equatable, Indices.Iterator.Element == Index</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatableWx7IndicesPs8Sequence8IteratorS2__zwx5IndexrS0_12commonPrefixuRd__S0_Wd__S1_S2__zWxS1_S2__Wd__S4_S6_S2__zwd__S7_rFT4withqd___GVS_12PatternMatchx_"></a>
+                    <a name="//apple_ref/swift/Method/commonPrefix(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatableWx7IndicesPs8Sequence8IteratorS2__zwx5IndexrS0_12commonPrefixuRd__S0_Wd__S1_S2__zWxS1_S2__Wd__S4_S6_S2__zwd__S7_rFT4withqd___GVS_12PatternMatchx_">commonPrefix(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the longest prefix subsequence shared with the other collection.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">commonPrefix</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">with</span> <span class="nv">other</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">PatternMatch</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="p">,</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Indices</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Index</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>other</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The other collection</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/where%20Iterator.Element%20:%20Equatable,%20SubSequence.Iterator.Element%20==%20Iterator.Element"></a>
+                <a name="//apple_ref/swift/Section/where Iterator.Element : Equatable, SubSequence.Iterator.Element == Iterator.Element" class="dashAnchor"></a>
+                <a href="#/where%20Iterator.Element%20:%20Equatable,%20SubSequence.Iterator.Element%20==%20Iterator.Element">
+                  <h3 class="section-name">where Iterator.Element : Equatable, SubSequence.Iterator.Element == Iterator.Element</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatableWx11SubSequencePs8Sequence8IteratorS2__zWxS1_S2__rS0_17firstNestingLevelu0_Rd__S0_d_0_S0_Wd__S1_S2__zWxS1_S2__Wd_0_S1_S2__zWxS1_S2__rFT12startingWithqd__10endingWithqd_0_2inGSqGVs5Rangewx5Index___GSqGVS_12NestingLevelx__"></a>
+                    <a name="//apple_ref/swift/Method/firstNestingLevel(startingWith:endingWith:in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatableWx11SubSequencePs8Sequence8IteratorS2__zWxS1_S2__rS0_17firstNestingLevelu0_Rd__S0_d_0_S0_Wd__S1_S2__zWxS1_S2__Wd_0_S1_S2__zWxS1_S2__rFT12startingWithqd__10endingWithqd_0_2inGSqGVs5Rangewx5Index___GSqGVS_12NestingLevelx__">firstNestingLevel(startingWith:endingWith:in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the ranges and contents of the first nesting level found in the specified range.</p>
+
+<p>Use this to search for corresponding pairs of delimiters that may be nested. For example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">equation</span> <span class="o">=</span> <span class="s">"2(3x − (y + 4)) = z"</span>
+<span class="k">let</span> <span class="nv">nestingLevel</span> <span class="o">=</span> <span class="n">equation</span><span class="o">.</span><span class="n">unicodeScalars</span><span class="o">.</span><span class="nf">firstNestingLevel</span><span class="p">(</span><span class="nv">startingWith</span><span class="p">:</span> <span class="s">"("</span><span class="o">.</span><span class="n">unicodeScalars</span><span class="p">,</span> <span class="nv">endingWith</span><span class="p">:</span> <span class="s">")"</span><span class="o">.</span><span class="n">unicodeScalars</span><span class="p">)</span><span class="o">!</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">nestingLevel</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">contents</span><span class="p">))</span>
+<span class="c1">// Prints “(3x − (y + 4))”</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">nestingLevel</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">contents</span><span class="p">))</span>
+<span class="c1">// Prints “3x − (y + 4)”</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">firstNestingLevel</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">startingWith</span> <span class="nv">openingToken</span><span class="p">:</span> <span class="kt">C</span><span class="p">,</span> <span class="n">endingWith</span> <span class="nv">closingToken</span><span class="p">:</span> <span class="kt">D</span><span class="p">,</span> <span class="k">in</span> <span class="nv">searchRange</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Index</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NestingLevel</span><span class="o">&lt;</span><span class="k">Self</span><span class="o">&gt;</span><span class="p">?</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="p">,</span> <span class="kt">D</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/where%20Index%20:%20Hashable,%20Indices.Iterator.Element%20==%20Index"></a>
+                <a name="//apple_ref/swift/Section/where Index : Hashable, Indices.Iterator.Element == Index" class="dashAnchor"></a>
+                <a href="#/where%20Index%20:%20Hashable,%20Indices.Iterator.Element%20==%20Index">
+                  <h3 class="section-name">where Index : Hashable, Indices.Iterator.Element == Index</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ve14SDGCornerstoneRxs10Collectionwx5Indexs8HashableWx7IndicesPs8Sequence8Iterator7Element_zwxS1_rS0_12indexMappingGVs10DictionarywxS1_Wx8IteratorS6___"></a>
+                    <a name="//apple_ref/swift/Property/indexMapping" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ve14SDGCornerstoneRxs10Collectionwx5Indexs8HashableWx7IndicesPs8Sequence8Iterator7Element_zwxS1_rS0_12indexMappingGVs10DictionarywxS1_Wx8IteratorS6___">indexMapping</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the collection as a <code>Dictionary</code>, with the collection’s indices used as keys.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">indexMapping</span><span class="p">:</span> <span class="p">[</span><span class="kt">Index</span><span class="p">:</span> <span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/where%20Index%20:%20Hashable,%20Iterator.Element:%20Hashable,%20Indices.Iterator.Element%20==%20Index"></a>
+                <a name="//apple_ref/swift/Section/where Index : Hashable, Iterator.Element: Hashable, Indices.Iterator.Element == Index" class="dashAnchor"></a>
+                <a href="#/where%20Index%20:%20Hashable,%20Iterator.Element:%20Hashable,%20Indices.Iterator.Element%20==%20Index">
+                  <h3 class="section-name">where Index : Hashable, Iterator.Element: Hashable, Indices.Iterator.Element == Index</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ve14SDGCornerstoneRxs10Collectionwx5Indexs8HashableWx8Iterator7Element_S2_Wx7IndicesPs8Sequence8IteratorS4__zwxS1_rS0_21bijectiveIndexMappingGVS_16BijectiveMappingwxS1_WxS3_S4___"></a>
+                    <a name="//apple_ref/swift/Property/bijectiveIndexMapping" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ve14SDGCornerstoneRxs10Collectionwx5Indexs8HashableWx8Iterator7Element_S2_Wx7IndicesPs8Sequence8IteratorS4__zwxS1_rS0_21bijectiveIndexMappingGVS_16BijectiveMappingwxS1_WxS3_S4___">bijectiveIndexMapping</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the collection as a <code>BjectiveMapping</code> between the indices and values.</p>
+<div class="aside aside-requires">
+    <p class="aside-title">Requires</p>
+    No values are repeated.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">bijectiveIndexMapping</span><span class="p">:</span> <span class="kt"><a href="../Structs/BijectiveMapping.html">BijectiveMapping</a></span><span class="o">&lt;</span><span class="kt">Index</span><span class="p">,</span> <span class="kt">Iterator</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

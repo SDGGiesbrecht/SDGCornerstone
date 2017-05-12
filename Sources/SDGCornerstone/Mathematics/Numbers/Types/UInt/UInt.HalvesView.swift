@@ -66,12 +66,12 @@
 
         internal subscript(index: Index) -> Element {
             get {
-                assert(index ∈ startIndex ..< endIndex, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
+                assert(index ∈ bounds, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
                 let offset = index × elementSize
                 return uInt.bitwiseAnd(with: elementMask << offset) >> offset
             }
             set {
-                assert(index ∈ startIndex ..< endIndex, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
+                assert(index ∈ bounds, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
                 let offset = index × elementSize
                 let oldErased = uInt.bitwiseAnd(with: (elementMask << offset).bitwiseNot())
                 uInt = oldErased.bitwiseOr(with: newValue << offset)

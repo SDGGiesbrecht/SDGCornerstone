@@ -15,8 +15,9 @@
 /// A set small enough to reasonably iterate over.
 ///
 /// Conformance Requirements:
-///     - `SetDefinition`
-///     - `static var universe: Self { get }`
+///
+/// - `SetDefinition`
+/// - `static var universe: Self { get }`
 public protocol SetInRepresentableUniverse : MutableSet {
 
     // [_Define Documentation: SDGCornerstone.RepresentableUniverse.universe_]

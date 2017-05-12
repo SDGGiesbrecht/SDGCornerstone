@@ -44,6 +44,9 @@ Quotation Chapter: Isaiah 28
 - Arbitrary‐precision arithmetic.
 - Customizable randomization.
 - Inter‐type set operations.
+- Generic pattern matching.
+
+...and much more.
 [_End_]
 
 Skip Simulator: True

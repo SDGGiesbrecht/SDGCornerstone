@@ -35,6 +35,9 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 - Arbitrary‐precision arithmetic.
 - Customizable randomization.
 - Inter‐type set operations.
+- Generic pattern matching.
+
+...and much more.
 
 (For a list of related projecs, see [here](Documentation/Related%20Projects.md).) <!--Skip in Jazzy-->
 
@@ -109,6 +112,26 @@ func trySetOperations() {
 
     if Set([23, 45, 67, 89]) ⊆ (twoDigits ∩ odd) ∖ square {
         print("They’re all in there.")
+    }
+}
+
+// Pattern Matching
+
+func tryPatternMatching() {
+    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    if numbers.contains(CompositePattern([
+        LiteralPattern([1]), // 1
+        ConditionalPattern(condition: { $0.isEven }), // 2
+        AlternativePatterns([
+            LiteralPattern([30, 40]), // (∅)
+            LiteralPattern([3, 4]) // 3, 4
+            ]),
+        RepetitionPattern(NotPattern(LiteralPattern([5, 7]))), // 5, 6, 7, 8, 9 (...)
+        LiteralPattern([10]) // 10
+        ])) {
+
+        print("I found a match!")
     }
 }
 ```

@@ -14,13 +14,13 @@
 
 import SDGCornerstone
 
-private func demonstrateincrease() {
-
-    func rollDie() -> Int {
-        fatalError()
-    }
+private func demonstrateIncrease() {
 
     // [_Define Example: increase(to:)_]
+    func rollDie() -> Int {
+        return Int(randomInRange: 1 ... 6)
+    }
+
     let numberOfRolls = 5
     var highestRoll = 1
     for _ in 1 ... numberOfRolls {
@@ -29,17 +29,17 @@ private func demonstrateincrease() {
     print("After rolling the die \(numberOfRolls) time(s), the highest roll was \(highestRoll).")
     // Prints, for example, “After rolling the die 5 time(s), the highest roll was 4.”
 
-    // In this example, rollDie() represents a function that randomly returns an Int between 1 and 6 inclusive. In each iteration of the for loop, a new random number is generated, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.
+    // In each iteration of the for loop, a new number is rolled, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.
     // [_End_]
 }
 
 private func demonstrateDecrease() {
 
+    // [_Define Example: decrease(to:)_]
     func rollDie() -> Int {
-        fatalError()
+        return Int(randomInRange: 1 ... 6)
     }
 
-    // [_Define Example: decrease(to:)_]
     let numberOfRolls = 5
     var lowestRoll = 6
     for _ in 1 ... numberOfRolls {
@@ -48,7 +48,7 @@ private func demonstrateDecrease() {
     print("After rolling the die \(numberOfRolls) time(s), the lowest roll was \(lowestRoll).")
     // Prints, for example, “After rolling the die 5 time(s), the lowest roll was 2.”
 
-    // In this example, rollDie() represents a function that randomly returns an Int between 1 and 6 inclusive. In each iteration of the for loop, a new random number is generated, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.
+    // In each iteration of the for loop, a new number is rolled, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.
     // [_End_]
 }
 
