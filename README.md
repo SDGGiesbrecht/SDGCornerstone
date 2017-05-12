@@ -31,11 +31,11 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 
 ## Features
 
-- Mathematics: exponents, roots, logarithms, trigonometry, etc.
-- Arbitrary‐precision arithmetic.
-- Customizable randomization.
-- Inter‐type set operations.
 - Generic pattern matching.
+- Customizable randomization.
+- Arbitrary‐precision arithmetic.
+- Inter‐type set operations.
+- Mathematics: exponents, roots, logarithms, trigonometry, etc.
 
 ...and much more.
 
