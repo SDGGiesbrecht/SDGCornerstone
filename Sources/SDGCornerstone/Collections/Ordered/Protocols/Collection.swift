@@ -328,19 +328,21 @@ extension Collection where Iterator.Element : Equatable {
         return suffix(after: LiteralPattern(pattern))
     }
 
+    internal func ranges(separatedBy separators: [Range<Index>]) -> [Range<Index>] {
+        let startIndices = [startIndex] + separators.map({ $0.upperBound })
+        let endIndices = separators.map({ $0.lowerBound }) + [endIndex]
+
+        return zip(startIndices, endIndices).map({ $0 ..< $1 })
+    }
+
     // [_Define Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
     /// Returns the segments of `self` separated by instances of `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     public func components(separatedBy pattern: Pattern<Iterator.Element>) -> [PatternMatch<Self>] {
-
         let separators = matches(for: pattern).map() { $0.range }
-
-        let startIndices = [startIndex] + separators.map({ $0.upperBound })
-        let endIndices = separators.map({ $0.lowerBound }) + [endIndex]
-
-        return zip(startIndices, endIndices).map({ $0 ..< $1 }).map({ PatternMatch(range: $0, in: self) })
+        return ranges(separatedBy: separators).map({ PatternMatch(range: $0, in: self) })
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
@@ -505,7 +507,7 @@ extension Collection where Iterator.Element : Equatable, SubSequence.Iterator.El
     // MARK: - where Iterator.Element : Equatable, SubSequence.Iterator.Element == Iterator.Element
 
     // [_Example 1: Nesting Level_]
-    /// Returns the ranges and contents of the first nesting level found in the specified range.
+    /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
     ///
