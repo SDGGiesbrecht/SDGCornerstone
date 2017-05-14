@@ -1,5 +1,5 @@
 /*
- ExpressibleByDictionaryLiteral.swift
+ Hashable.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension ExpressibleByDictionaryLiteral {
+extension Hashable {
 
-    // [_Define Documentation: SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:)_]
-    /// Creates an instance from a dictionary literal.
+    // [_Define Documentation: SDGCornerstone.Hashable.hashValue_]
+    /// The hash value.
 }

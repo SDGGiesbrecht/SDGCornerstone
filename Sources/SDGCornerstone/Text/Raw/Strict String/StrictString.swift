@@ -74,6 +74,10 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // MARK: - BidirectionalCollection
 
     // [_Inherit Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+    /// Returns the index immediately before the specified index.
+    ///
+    /// - Parameters:
+    ///     - i: The following index.
     public func index(before i: String.UnicodeScalarView.Index) -> String.UnicodeScalarView.Index {
         return string.unicodeScalars.index(before: i)
     }
@@ -81,21 +85,28 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // MARK: - Collection
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+    /// The position of the first element in a non‐empty collection.
     public var startIndex: String.UnicodeScalarView.Index {
         return string.unicodeScalars.startIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+    /// The position following the last valid index.
     public var endIndex: String.UnicodeScalarView.Index {
         return string.unicodeScalars.endIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+    /// Returns the index immediately after the specified index.
+    ///
+    /// - Parameters:
+    ///     - i: The preceding index.
     public func index(after i: String.UnicodeScalarView.Index) -> String.UnicodeScalarView.Index {
         return string.unicodeScalars.index(after: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+    /// Accesses the element at the specified position.
     public subscript(position: String.UnicodeScalarView.Index) -> UnicodeScalar {
         return string.unicodeScalars[position]
     }
@@ -103,6 +114,11 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // MARK: - Equatable
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    /// Returns `true` if the two values are equal.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
     public static func == (lhs: StrictString, rhs: StrictString) -> Bool {
         return lhs.string.unicodeScalars.elementsEqual(rhs.string.unicodeScalars)
     }
@@ -110,6 +126,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // MARK: - ExpressibleByStringLiteral
 
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
+    /// Creates an instance from a string literal.
     public init(stringLiteral: String) {
         self.init(stringLiteral)
     }
@@ -117,6 +134,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // MARK: - Hashable
 
     // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    /// The hash value.
     public var hashValue: Int {
         return string.hashValue
     }
@@ -125,12 +143,14 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
 
     // Interface
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.init()_]
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
+    /// Creates a new, empty collection.
     public init() {
         self.init(unsafeString: String())
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.init(_:)_]
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
+    /// Creates a new instance of a collection containing the elements of a sequence.
     public init<S : Sequence>(_ elements: S) where S.Iterator.Element == Iterator.Element {
         self = StrictString.normalize(elements)
     }
@@ -160,12 +180,14 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.append(contentsOf:)_]
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+    /// Appends the contents of the sequence to the end of the collection.
     public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Iterator.Element == UnicodeScalar {
         self = StrictString.concatenateStrictStrings(self, StrictString.normalize(newElements))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.insert(contentsOf:at:)_]
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    /// Inserts the contents of the sequence to the specified index.
     public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.UnicodeScalarView.Index) where S.Iterator.Element == UnicodeScalar {
         replaceSubrange(i ..< i, with: newElements)
     }
@@ -184,6 +206,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // MARK: - TextOutputStream
 
     // [_Inherit Documentation: SDGCornerstone.TextOutputStream.write(_:)_]
+    /// Appends the given string to the stream.
     public mutating func write(_ string: String) {
         self.append(contentsOf: string.unicodeScalars)
     }
@@ -191,6 +214,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // MARK: - TextOutputStreamable
 
     // [_Inherit Documentation: SDGCornerstone.TextOutputStreamable.write(to:)_]
+    /// Writes a textual representation of this instance into the given output stream.
     public func write<Target>(to target: inout Target) where Target : TextOutputStream {
         target.write(string)
     }

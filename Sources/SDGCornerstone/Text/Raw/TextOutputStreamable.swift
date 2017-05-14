@@ -1,5 +1,5 @@
 /*
- ExpressibleByDictionaryLiteral.swift
+ TextOutputStreamable.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension ExpressibleByDictionaryLiteral {
+extension TextOutputStream {
 
-    // [_Define Documentation: SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:)_]
-    /// Creates an instance from a dictionary literal.
+    // [_Define Documentation: SDGCornerstone.TextOutputStreamable.write(to:)_]
+    /// Writes a textual representation of this instance into the given output stream.
 }

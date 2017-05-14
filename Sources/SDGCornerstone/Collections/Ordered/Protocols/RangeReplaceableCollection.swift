@@ -14,6 +14,18 @@
 
 extension RangeReplaceableCollection {
 
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
+    /// Creates a new, empty collection.
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
+    /// Creates a new instance of a collection containing the elements of a sequence.
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+    /// Appends the contents of the sequence to the end of the collection.
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    /// Inserts the contents of the sequence to the specified index.
+
     /// Returns a collection formed by appending an element to the end of the collection.
     ///
     /// - Parameters:
