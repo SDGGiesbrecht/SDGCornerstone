@@ -456,7 +456,8 @@ extension WholeArithmetic {
 
         self = 0
         var position: Self = 0
-        for character in representation.decomposedStringWithCompatibilityMapping.unicodeScalars.reversed() {
+        // [_Warning: This should use StrictString._]
+        for character in representation.decomposedStringWithCompatibilityMapping.scalars.reversed() {
             if let digit = digitMapping[character], digit < base {
                 self += (base ↑ position) × digit
                 position += 1
@@ -1061,7 +1062,8 @@ extension WholeArithmetic where Self : RationalArithmetic {
         let base = Self.getBase(digits)
         let digitMapping = Self.getMapping(digits)
 
-        let scalars = representation.decomposedStringWithCompatibilityMapping.unicodeScalars
+        // [_Warning: This should use StrictString._]
+        let scalars = representation.decomposedStringWithCompatibilityMapping.scalars
 
         var radixLocation: String.UnicodeScalarView.Index?
         for index in scalars.indices where scalars[index] ∈ radixCharacters {
@@ -1080,7 +1082,7 @@ extension WholeArithmetic where Self : RationalArithmetic {
         }
 
         func flattenToZeroes(_ value: String) -> String {
-            return String(String.UnicodeScalarView(value.unicodeScalars.map({ digitMapping[$0] ≠ nil ? "0" : $0 })))
+            return String(String.UnicodeScalarView(value.scalars.map({ digitMapping[$0] ≠ nil ? "0" : $0 })))
         }
 
         func component(_ value: String) -> Self {

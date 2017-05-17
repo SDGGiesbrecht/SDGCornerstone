@@ -19,7 +19,7 @@ extension UnicodeScalar {
     /// The hexadecimal code for the character.
     public var hexadecimalCode: String {
         var result = String(value, radix: 16, uppercase: true)
-        result.unicodeScalars.fill(to: 4, with: "0", from: .start)
+        result.scalars.fill(to: 4, with: "0", from: .start)
         return result
     }
 

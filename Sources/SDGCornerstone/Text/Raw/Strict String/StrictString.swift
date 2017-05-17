@@ -12,12 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 /// A string that maintains Unicode normalization form NFKD.
-public struct StrictString : BidirectionalCollection, Collection, Equatable, ExpressibleByStringLiteral, ExpressibleByTextLiterals, Hashable, RangeReplaceableCollection, TextOutputStream, TextOutputStreamable {
+public struct StrictString : BidirectionalCollection, Collection, Equatable, ExpressibleByStringLiteral, ExpressibleByTextLiterals, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Initialization
 
-    private init(unsafeString: String) {
+    internal init(unsafeString: String) {
         self.string = unsafeString
     }
 
@@ -36,9 +38,20 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
         self.string = StrictString.normalizeAsString(string)
     }
 
+    /// Creates a string from a `StrictString`.
+    public init(_ string: StrictString) {
+        self = string
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.StringFamily.init(clusters:)_]
+    /// Creates a string from a collection of clusters.
+    public init(_ clusters: ClusterView) {
+        self = clusters.string
+    }
+
     // MARK: - Properties
 
-    private var string: String
+    internal var string: String
 
     // MARK: - Normalization
 
@@ -61,7 +74,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
         case let strict as StrictString :
             return strict
         case let strictSlice as Slice<StrictString> :
-            return StrictString(unsafeString: String(strictSlice.base.string.unicodeScalars[strictSlice.startIndex ..< strictSlice.endIndex]))
+            return StrictString(unsafeString: String(strictSlice.base.string.scalars[strictSlice.startIndex ..< strictSlice.endIndex]))
 
         // Need normalization.
         case let nonStrictScalars as String.UnicodeScalarView :
@@ -79,7 +92,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     /// - Parameters:
     ///     - i: The following index.
     public func index(before i: String.UnicodeScalarView.Index) -> String.UnicodeScalarView.Index {
-        return string.unicodeScalars.index(before: i)
+        return string.scalars.index(before: i)
     }
 
     // MARK: - Collection
@@ -87,13 +100,13 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
     /// The position of the first element in a non‐empty collection.
     public var startIndex: String.UnicodeScalarView.Index {
-        return string.unicodeScalars.startIndex
+        return string.scalars.startIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
     public var endIndex: String.UnicodeScalarView.Index {
-        return string.unicodeScalars.endIndex
+        return string.scalars.endIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
@@ -102,13 +115,21 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     /// - Parameters:
     ///     - i: The preceding index.
     public func index(after i: String.UnicodeScalarView.Index) -> String.UnicodeScalarView.Index {
-        return string.unicodeScalars.index(after: i)
+        return string.scalars.index(after: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
     public subscript(position: String.UnicodeScalarView.Index) -> UnicodeScalar {
-        return string.unicodeScalars[position]
+        return string.scalars[position]
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return string
     }
 
     // MARK: - Equatable
@@ -120,7 +141,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
     public static func == (lhs: StrictString, rhs: StrictString) -> Bool {
-        return lhs.string.unicodeScalars.elementsEqual(rhs.string.unicodeScalars)
+        return lhs.string.scalars.elementsEqual(rhs.string.scalars)
     }
 
     // MARK: - ExpressibleByStringLiteral
@@ -140,8 +161,6 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     }
 
     // MARK: - RangeReplaceableCollection
-
-    // Interface
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
     /// Creates a new, empty collection.
@@ -164,10 +183,10 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
         } else {
 
             var firstString = first.string
-            let previousCharacter = firstString.characters.removeLast()
+            let previousCharacter = firstString.clusters.removeLast()
 
             var secondString = second.string
-            let nextCharacter = secondString.characters.removeFirst()
+            let nextCharacter = secondString.clusters.removeFirst()
 
             // Allow combining characters to re‐order accross the boundary.
             let nearbyCharacters = normalizeAsString(String(previousCharacter) + String(nextCharacter))
@@ -192,15 +211,40 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
         replaceSubrange(i ..< i, with: newElements)
     }
 
-    // [_Inherit Documenation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
+    /// Replaces the specified subrange of elements with the given collection.
     public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.UnicodeScalarView.Index>, with newElements: S) where S.Iterator.Element == UnicodeScalar {
 
-        let preceding = StrictString(unsafeString: String(string.unicodeScalars[string.unicodeScalars.startIndex ..< subrange.lowerBound]))
-        let succeeding = StrictString(unsafeString: String(string.unicodeScalars[subrange.lowerBound ..< string.unicodeScalars.endIndex]))
+        let preceding = StrictString(unsafeString: String(string.scalars[string.scalars.startIndex ..< subrange.lowerBound]))
+        let succeeding = StrictString(unsafeString: String(string.scalars[subrange.upperBound ..< string.scalars.endIndex]))
         let replacement = StrictString.normalize(newElements)
 
         let throughNew = StrictString.concatenateStrictStrings(preceding, replacement)
         self = StrictString.concatenateStrictStrings(throughNew, succeeding)
+    }
+
+    // MARK: - StringFamily
+
+    // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]
+    /// A view of a string’s contents as a collection of Unicode scalars.
+    public var scalars: StrictString {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.StringFamily.clusters_]
+    /// A view of a string’s contents as a collection of extended grapheme clusters.
+    public var clusters: ClusterView {
+        get {
+            return ClusterView(self)
+        }
+        set {
+            self = newValue.string
+        }
     }
 
     // MARK: - TextOutputStream
@@ -208,7 +252,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     // [_Inherit Documentation: SDGCornerstone.TextOutputStream.write(_:)_]
     /// Appends the given string to the stream.
     public mutating func write(_ string: String) {
-        self.append(contentsOf: string.unicodeScalars)
+        self.append(contentsOf: string.scalars)
     }
 
     // MARK: - TextOutputStreamable

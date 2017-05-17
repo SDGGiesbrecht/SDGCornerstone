@@ -49,6 +49,39 @@ class RegressionTests : XCTestCase {
         _ = Double(1) ÷ Double(1)
     }
 
+    func testMatchlessComponentSeperation() {
+        // Untracked
+
+        let glitch = StrictString("@version 8.0.0")
+        let components = glitch.components(separatedBy: ConditionalPattern(condition: { $0 ∈ ["#", "%"] as Set<UnicodeScalar> }))
+        XCTAssert(¬components.isEmpty, "Empty result of splitting collection at matches.")
+    }
+
+    func testMatchlessSearch() {
+        // Untracked
+
+        XCTAssert(StrictString("...").firstMatch(for: "_".scalars) == nil, "False positive.")
+    }
+
+    func testNestingLevelLocation() {
+        // Untracked
+
+        let nestString = StrictString("%{1~a~a^a|^}")
+        let open: StrictString = "{"
+        let close: StrictString = "}"
+        let start = nestString.index(nestString.startIndex, offsetBy: 1)
+        let end = nestString.index(nestString.startIndex, offsetBy: 12)
+        let nestRange = nestString.firstNestingLevel(startingWith: open, endingWith: close)?.container.range
+        XCTAssert(nestRange == start ..< end, "Incorrect range for nested group.")
+    }
+
+    func testReverseSearch() {
+        // Untracked
+
+        let glitch = StrictString("x{a^a}")
+        XCTAssert(glitch.lastMatch(for: "{".scalars)?.range == glitch.index(after: glitch.startIndex) ..< glitch.index(after: glitch.index(after: glitch.startIndex)), "Reverse searching failed.")
+    }
+
     func testSubtraction() {
         // Untracked
 
@@ -101,6 +134,9 @@ class RegressionTests : XCTestCase {
         return [
             ("testAddAndSetIsUnambiguous", testAddAndSetIsUnambiguous),
             ("testDivisionIsUnambiguous", testDivisionIsUnambiguous),
+            ("testMatchlessComponentSeperation", testMatchlessComponentSeperation),
+            ("testNestingLevelLocation", testNestingLevelLocation),
+            ("testReverseSearch", testReverseSearch),
             ("testSubtraction", testSubtraction),
             ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous)
         ]

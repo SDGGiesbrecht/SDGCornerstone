@@ -26,6 +26,9 @@ extension RangeReplaceableCollection {
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
 
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
+    /// Replaces the specified subrange of elements with the given collection.
+
     /// Returns a collection formed by appending an element to the end of the collection.
     ///
     /// - Parameters:
@@ -608,6 +611,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
 
         assert(unaltered.count == 1, "Mismatched counts for unaltered and replaced sections. \(unaltered.count) unaltered sections left over.")
         result.append(contentsOf: self[unaltered.removeFirst()])
+
+        self = result
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.mutateMatches(for:mutation:)_]

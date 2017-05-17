@@ -513,7 +513,7 @@ extension Collection where Iterator.Element : Equatable, SubSequence.Iterator.El
     ///
     /// ```swift
     /// let equation = "2(3x − (y + 4)) = z"
-    /// let nestingLevel = equation.unicodeScalars.firstNestingLevel(startingWith: "(".unicodeScalars, endingWith: ")".unicodeScalars)!
+    /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
     ///
     /// print(String(nestingLevel.container.contents))
     /// // Prints “(3x − (y + 4))”

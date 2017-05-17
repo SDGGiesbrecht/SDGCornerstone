@@ -1,5 +1,5 @@
 /*
- CustomStringConvertible.swift
+ ExtendedGraphemeCluster.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,8 +12,5 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension CustomStringConvertible {
-
-    // [_Define Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    /// A textual representation of the instance.
-}
+/// An [extended grapheme cluster](http://unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries).
+public typealias ExtendedGraphemeCluster = Swift.Character

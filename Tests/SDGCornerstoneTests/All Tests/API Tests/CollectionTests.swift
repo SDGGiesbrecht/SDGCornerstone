@@ -133,11 +133,11 @@ class CollectionTests : XCTestCase {
         XCTAssert(anotherTrap?.range == 0 ..< 4, "Unexpected pattern match: \(String(describing: anotherTrap?.range))")
 
         let equation = "2(3x − (y + 4)) = z"
-        let nestingLevel = equation.unicodeScalars.firstNestingLevel(startingWith: "(".unicodeScalars, endingWith: ")".unicodeScalars)!
+        let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
         XCTAssert(String(nestingLevel.container.contents) == "(3x − (y + 4))")
         XCTAssert(String(nestingLevel.contents.contents) == "3x − (y + 4)")
-        XCTAssert(equation.unicodeScalars.firstNestingLevel(startingWith: "[".unicodeScalars, endingWith: "]".unicodeScalars) == nil)
-        XCTAssert(equation.unicodeScalars.firstNestingLevel(startingWith: "2".unicodeScalars, endingWith: "9".unicodeScalars) == nil)
+        XCTAssert(equation.scalars.firstNestingLevel(startingWith: "[".scalars, endingWith: "]".scalars) == nil)
+        XCTAssert(equation.scalars.firstNestingLevel(startingWith: "2".scalars, endingWith: "9".scalars) == nil)
 
         XCTAssert([1, 2, 3, 4].prefix(upTo: AlternativePatterns([LiteralPattern([2, 3]), LiteralPattern([3, 4])]))?.range == 0 ..< 1)
         XCTAssert([1, 2, 3, 4].prefix(upTo: [2, 3])?.range == 0 ..< 1)
@@ -421,8 +421,8 @@ class CollectionTests : XCTestCase {
         }
 
         runTests(start: [1, 2, 3], appendix: [4, 5], result: [1, 2, 3, 4, 5])
-        runTests(start: "123".unicodeScalars, appendix: "45".unicodeScalars, result: "12345".unicodeScalars)
-        runTests(start: "123".characters, appendix: "45".characters, result: "12345".characters)
+        runTests(start: "123".scalars, appendix: "45".scalars, result: "12345".scalars)
+        runTests(start: "123".clusters, appendix: "45".clusters, result: "12345".clusters)
         runTests(start: RangeReplaceableCollectionExample([1, 2, 3]), appendix: RangeReplaceableCollectionExample([4, 5]), result: [1, 2, 3, 4, 5])
 
         let collection = [1, 2, 3, 4, 5]
@@ -493,7 +493,7 @@ class CollectionTests : XCTestCase {
             "5",
             "75",
             "876"
-            ].map() { $0.unicodeScalars }
+            ].map() { $0.scalars }
         let equalized = [
             "005",
             "075",
