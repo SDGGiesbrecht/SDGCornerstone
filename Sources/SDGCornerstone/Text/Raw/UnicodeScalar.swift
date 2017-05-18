@@ -16,6 +16,11 @@ import Foundation
 
 extension UnicodeScalar {
 
+    /// `true` if the scalar is decomposable in NFKD, otherwise `false`.
+    public var isDecomposableInNFKD: Bool {
+        return ¬StrictString(self).elementsEqual([self])
+    }
+
     /// The hexadecimal code for the character.
     public var hexadecimalCode: String {
         var result = String(value, radix: 16, uppercase: true)

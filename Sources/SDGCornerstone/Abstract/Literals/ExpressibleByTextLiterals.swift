@@ -38,6 +38,6 @@ extension ExpressibleByTextLiterals where Self : WholeArithmetic {
     /// - Parameters:
     ///     - stringLiteral: The string literal.
     public init(stringLiteral: String) {
-        self.init(stringLiteral)
+        self.init(StrictString(stringLiteral))
     }
 }
