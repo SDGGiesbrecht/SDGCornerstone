@@ -107,6 +107,8 @@ class TextTests : XCTestCase {
         XCTAssert(mutable == "ABCDEFABCDEF")
 
         XCTAssert(StrictString("A").description == "A")
+
+        XCTAssert(StrictString("A") < StrictString("B"))
     }
 
     func testString() {

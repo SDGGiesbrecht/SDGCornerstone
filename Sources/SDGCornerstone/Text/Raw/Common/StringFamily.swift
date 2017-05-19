@@ -13,7 +13,7 @@
  */
 
 /// `String` or `StrictString`
-public protocol StringFamily : /* Comparable, [_Warning: This should be possible._] */ CustomStringConvertible, Equatable, ExpressibleByTextLiterals, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
+public protocol StringFamily : Comparable, CustomStringConvertible, Equatable, ExpressibleByTextLiterals, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Associated Types
 

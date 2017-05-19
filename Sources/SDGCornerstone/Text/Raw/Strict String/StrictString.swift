@@ -15,7 +15,7 @@
 import Foundation
 
 /// A string that maintains Unicode normalization form NFKD.
-public struct StrictString : BidirectionalCollection, Collection, Equatable, ExpressibleByStringLiteral, ExpressibleByTextLiterals, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
+public struct StrictString : BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringLiteral, ExpressibleByTextLiterals, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Initialization
 
@@ -122,6 +122,19 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
     /// Accesses the element at the specified position.
     public subscript(position: String.UnicodeScalarView.Index) -> UnicodeScalar {
         return string.scalars[position]
+    }
+
+    // MARK: - Comparable
+
+    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the left value is less than the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value.
+    ///     - rhs: Another value.
+    public static func < (lhs: StrictString, rhs: StrictString) -> Bool {
+        // [_Workaround: This should eventually be tailored, but solutions for resource bundling and build scripts will be necessary to handle the DUCET._]
+        return lhs.string < rhs.string
     }
 
     // MARK: - CustomStringConvertible
