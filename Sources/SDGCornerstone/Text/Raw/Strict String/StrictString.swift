@@ -73,7 +73,7 @@ public struct StrictString : BidirectionalCollection, Collection, Equatable, Exp
         // Already normalized.
         case let strict as StrictString :
             return strict
-        case let strictSlice as Slice<StrictString> :
+        case let strictSlice as RangeReplaceableBidirectionalSlice<StrictString> :
             return StrictString(unsafeString: String(strictSlice.base.string.scalars[strictSlice.startIndex ..< strictSlice.endIndex]))
 
         // Need normalization.

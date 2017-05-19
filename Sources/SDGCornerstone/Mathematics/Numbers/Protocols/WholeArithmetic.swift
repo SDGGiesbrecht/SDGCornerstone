@@ -445,6 +445,8 @@ extension WholeArithmetic {
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
+    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
+    ///
     /// - Parameters:
     ///     - representation: The string to interpret.
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
@@ -1072,6 +1074,8 @@ extension WholeArithmetic where Self : RationalArithmetic {
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
+    ///
+    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
     ///
     /// - Parameters:
     ///     - representation: The string to interpret.

@@ -84,6 +84,29 @@ class TextTests : XCTestCase {
         decomposedCopy = decomposed2
         decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
         XCTAssert(decomposedCopy == "̀èe", "Problem with decomposition: \(decomposed2).replaceMatches(for: ́, with: ̀) → \(decomposedCopy) ≠ ̀èe")
+
+        let clusters = StrictString("0").clusters
+        XCTAssert(clusters.index(before: clusters.endIndex) == clusters.startIndex)
+
+        XCTAssert(StrictString.ClusterView("0".characters).elementsEqual(clusters))
+        let slice = clusters[clusters.startIndex ..< clusters.endIndex]
+        XCTAssert(StrictString.ClusterView(slice).elementsEqual(clusters))
+
+        XCTAssert(StrictString("A" as ExtendedGraphemeCluster) == "A")
+        XCTAssert("...\(StrictString("A"))..." == "...A...")
+
+        var mutable: StrictString = "0"
+        mutable.clusters.truncate(at: mutable.clusters.startIndex)
+        XCTAssert(mutable == "")
+
+        mutable = "ABC"
+        mutable.write("DEF")
+        XCTAssert(mutable == "ABCDEF")
+
+        mutable.write(to: &mutable)
+        XCTAssert(mutable == "ABCDEFABCDEF")
+
+        XCTAssert(StrictString("A").description == "A")
     }
 
     func testString() {

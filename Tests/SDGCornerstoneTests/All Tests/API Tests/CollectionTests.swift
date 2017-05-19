@@ -414,7 +414,7 @@ class CollectionTests : XCTestCase {
     }
 
     func testRangeReplaceableCollection() {
-        func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Iterator.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C)
+        func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Iterator.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
             where C.Iterator.Element : Equatable {
 
                 var collection = start
@@ -426,6 +426,8 @@ class CollectionTests : XCTestCase {
 
                 XCTAssert(start.prepending(contentsOf: appendix).elementsEqual(withAppendixPrepended))
                 XCTAssert(start.prepending(element).elementsEqual(withElementPrepended))
+
+                XCTAssert(start.truncated(at: truncatingIndex).elementsEqual(truncated))
         }
 
         runTests(start: [1, 2, 3],
@@ -434,28 +436,54 @@ class CollectionTests : XCTestCase {
                  element: 0,
                  withElementAppended: [1, 2, 3, 0],
                  withElementPrepended: [0, 1, 2, 3],
-                 withAppendixPrepended: [4, 5, 1, 2, 3])
+                 withAppendixPrepended: [4, 5, 1, 2, 3],
+                 truncatingIndex: 1,
+                 truncated: [1])
         runTests(start: "123".scalars,
                  appendix: "45".scalars,
                  result: "12345".scalars,
                  element: "0",
                  withElementAppended: "1230".scalars,
                  withElementPrepended: "0123".scalars,
-                 withAppendixPrepended: "45123".scalars)
+                 withAppendixPrepended: "45123".scalars,
+                 truncatingIndex: "123".scalars.index(after: "123".scalars.startIndex),
+                 truncated: "1".scalars)
         runTests(start: "123".clusters,
                  appendix: "45".clusters,
                  result: "12345".clusters,
                  element: "0",
                  withElementAppended: "1230".clusters,
                  withElementPrepended: "0123".clusters,
-                 withAppendixPrepended: "45123".clusters)
+                 withAppendixPrepended: "45123".clusters,
+                 truncatingIndex: "123".clusters.index(after: "123".clusters.startIndex),
+                 truncated: "1".clusters)
+        runTests(start: StrictString("123").scalars,
+                 appendix: StrictString("45").scalars,
+                 result: StrictString("12345").scalars,
+                 element: "0",
+                 withElementAppended: StrictString("1230").scalars,
+                 withElementPrepended: StrictString("0123").scalars,
+                 withAppendixPrepended: StrictString("45123").scalars,
+                 truncatingIndex: StrictString("123").scalars.index(after: StrictString("123").scalars.startIndex),
+                 truncated: StrictString("1").scalars)
+        runTests(start: StrictString("123").clusters,
+                 appendix: StrictString("45").clusters,
+                 result: StrictString("12345").clusters,
+                 element: "0",
+                 withElementAppended: StrictString("1230").clusters,
+                 withElementPrepended: StrictString("0123").clusters,
+                 withAppendixPrepended: StrictString("45123").clusters,
+                 truncatingIndex: StrictString("123").clusters.index(after: StrictString("123").clusters.startIndex),
+                 truncated: StrictString("1").clusters)
         runTests(start: RangeReplaceableCollectionExample([1, 2, 3]),
                  appendix: RangeReplaceableCollectionExample([4, 5]),
                  result: [1, 2, 3, 4, 5],
                  element: 0,
                  withElementAppended: [1, 2, 3, 0],
                  withElementPrepended: [0, 1, 2, 3],
-                 withAppendixPrepended: [4, 5, 1, 2, 3])
+                 withAppendixPrepended: [4, 5, 1, 2, 3],
+                 truncatingIndex: 1,
+                 truncated: [1])
 
         let collection = [1, 2, 3, 4, 5]
 
@@ -534,6 +562,33 @@ class CollectionTests : XCTestCase {
         XCTAssert(text.countsEqualized(byFillingWith: "0", from: .start).map({ String($0) }) == equalized)
         text.equalizeCounts(byFillingWith: "0", from: .start)
         XCTAssert(text.map({ String($0) }) == equalized)
+
+        XCTAssert(collection.truncated(before: [3, 4]) == [1, 2])
+        XCTAssert(collection.truncated(before: [LiteralPattern([3]), LiteralPattern([4])]) == [1, 2])
+        XCTAssert(collection.truncated(after: [3, 4]) == [1, 2, 3, 4])
+        XCTAssert(collection.truncated(after: [LiteralPattern([3]), LiteralPattern([4])]) == [1, 2, 3, 4])
+        XCTAssert(collection.dropping(upTo: [3, 4]) == [3, 4, 5])
+        XCTAssert(collection.dropping(upTo: [LiteralPattern([3]), LiteralPattern([4])]) == [3, 4, 5])
+        XCTAssert(collection.dropping(through: [3, 4]) == [5])
+        XCTAssert(collection.dropping(through: [LiteralPattern([3]), LiteralPattern([4])]) == [5])
+
+        XCTAssert(collection.replacingMatches(for: [3, 4], with: [0]) == [1, 2, 0, 5])
+        XCTAssert(collection.replacingMatches(for: [LiteralPattern([3]), LiteralPattern([4])], with: [0]) == [1, 2, 0, 5])
+
+        mutable = collection
+        mutable.replaceMatches(for: [LiteralPattern([3]), LiteralPattern([4])], with: [0])
+        XCTAssert(mutable == [1, 2, 0, 5])
+
+        XCTAssert(collection.mutatingMatches(for: [3, 4], mutation: { $0.contents.map({ $0 + 1 }) }) == [1, 2, 4, 5, 5])
+        XCTAssert(collection.mutatingMatches(for: [LiteralPattern([3]), LiteralPattern([4])], mutation: { $0.contents.map({ $0 + 1 }) }) == [1, 2, 4, 5, 5])
+
+        mutable = collection
+        mutable.mutateMatches(for: [3, 4], mutation: { $0.contents.map({ $0 + 1 }) })
+        XCTAssert(mutable == [1, 2, 4, 5, 5])
+
+        mutable = collection
+        mutable.mutateMatches(for: [LiteralPattern([3]), LiteralPattern([4])], mutation: { $0.contents.map({ $0 + 1 }) })
+        XCTAssert(mutable == [1, 2, 4, 5, 5])
     }
 
     func testSetDefinition() {
