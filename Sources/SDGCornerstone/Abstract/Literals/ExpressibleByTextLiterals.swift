@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
 
- Copyright ©2016–2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -38,6 +38,6 @@ extension ExpressibleByTextLiterals where Self : WholeArithmetic {
     /// - Parameters:
     ///     - stringLiteral: The string literal.
     public init(stringLiteral: String) {
-        self.init(stringLiteral)
+        self.init(StrictString(stringLiteral))
     }
 }

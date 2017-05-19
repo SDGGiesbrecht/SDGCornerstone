@@ -109,12 +109,14 @@ public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByText
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
+    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
+    ///
     /// - Parameters:
     ///     - representation: The string to interpret.
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    init(fromRepresentation representation: String, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>)
+    init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>)
 
     // MARK: - Operations
 
@@ -360,7 +362,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - decimal: The decimal representation.
-    public init(_ decimal: String) {
+    public init(_ decimal: StrictString) {
         self.init(decimal, base: 10)
     }
 
@@ -368,7 +370,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - hexadecimal: The hexadecimal representation.
-    public init(hexadecimal: String) {
+    public init(hexadecimal: StrictString) {
         self.init(hexadecimal, base: 16)
     }
 
@@ -376,7 +378,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - octal: The octal representation.
-    public init(octal: String) {
+    public init(octal: StrictString) {
         self.init(octal, base: 8)
     }
 
@@ -384,7 +386,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - binary: The binary representation.
-    public init(binary: String) {
+    public init(binary: StrictString) {
         self.init(binary, base: 2)
     }
 
@@ -395,7 +397,7 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - representation: The string to interpret.
     ///     - base: The base of the number system.
-    public init(_ representation: String, base: Int) {
+    public init(_ representation: StrictString, base: Int) {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, "Base \(base) is not supported. The base must be an integer between 2 and 16 inclusive.")
 
         let digits: [[UnicodeScalar]] = [
@@ -423,15 +425,36 @@ extension WholeArithmetic {
         self.init(fromRepresentation: representation, usingDigits: selectedDigits, radixCharacters: [",", ".", "٫"], formattingSeparators: [" ", "٬"])
     }
 
+    fileprivate static func assertNFKD(digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+
+        let assertNFKD = { () -> [UnicodeScalar] in
+            var scalars = digits.reduce([]) { $0 + $1 }
+            scalars += radixCharacters
+            scalars += formattingSeparators
+
+            var set: Set<UnicodeScalar> = []
+            for scalar in scalars where scalar.isDecomposableInNFKD {
+                set.insert(scalar)
+            }
+
+            return set.sorted()
+        }
+        assert(assertNFKD().isEmpty, "Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))")
+    }
+
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
+    ///
+    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
     ///
     /// - Parameters:
     ///     - representation: The string to interpret.
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    public init(fromRepresentation representation: String, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+    public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+        Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
+
         self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
     }
 
@@ -452,11 +475,11 @@ extension WholeArithmetic {
         return digitMapping
     }
 
-    fileprivate init(whole representation: String, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) {
+    fileprivate init(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) {
 
         self = 0
         var position: Self = 0
-        for character in representation.decomposedStringWithCompatibilityMapping.unicodeScalars.reversed() {
+        for character in representation.reversed() {
             if let digit = digitMapping[character], digit < base {
                 self += (base ↑ position) × digit
                 position += 1
@@ -1052,38 +1075,40 @@ extension WholeArithmetic where Self : RationalArithmetic {
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
+    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
+    ///
     /// - Parameters:
     ///     - representation: The string to interpret.
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    public init(fromRepresentation representation: String, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+    public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+        Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
+
         let base = Self.getBase(digits)
         let digitMapping = Self.getMapping(digits)
 
-        let scalars = representation.decomposedStringWithCompatibilityMapping.unicodeScalars
-
-        var radixLocation: String.UnicodeScalarView.Index?
-        for index in scalars.indices where scalars[index] ∈ radixCharacters {
+        var radixLocation: StrictString.Index?
+        for index in representation.indices where representation[index] ∈ radixCharacters {
             radixLocation = index
             break
         }
 
-        let wholeString: String
-        let numeratorString: String
+        let wholeString: StrictString
+        let numeratorString: StrictString
         if let radix = radixLocation {
-            wholeString = String(scalars[scalars.startIndex ..< radix])
-            numeratorString = String(scalars[scalars.index(after: radix) ..< scalars.endIndex])
+            wholeString = StrictString(representation[representation.startIndex ..< radix])
+            numeratorString = StrictString(representation[representation.index(after: radix) ..< representation.endIndex])
         } else {
             wholeString = representation
             numeratorString = ""
         }
 
-        func flattenToZeroes(_ value: String) -> String {
-            return String(String.UnicodeScalarView(value.unicodeScalars.map({ digitMapping[$0] ≠ nil ? "0" : $0 })))
+        func flattenToZeroes(_ value: StrictString) -> StrictString {
+            return StrictString(value.map({ digitMapping[$0] ≠ nil ? "0" : $0 }))
         }
 
-        func component(_ value: String) -> Self {
+        func component(_ value: StrictString) -> Self {
             return Self(whole: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
         }
 

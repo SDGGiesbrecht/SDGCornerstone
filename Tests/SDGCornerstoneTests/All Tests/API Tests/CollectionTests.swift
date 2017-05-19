@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
 
- Copyright ©2016–2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -133,11 +133,11 @@ class CollectionTests : XCTestCase {
         XCTAssert(anotherTrap?.range == 0 ..< 4, "Unexpected pattern match: \(String(describing: anotherTrap?.range))")
 
         let equation = "2(3x − (y + 4)) = z"
-        let nestingLevel = equation.unicodeScalars.firstNestingLevel(startingWith: "(".unicodeScalars, endingWith: ")".unicodeScalars)!
+        let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
         XCTAssert(String(nestingLevel.container.contents) == "(3x − (y + 4))")
         XCTAssert(String(nestingLevel.contents.contents) == "3x − (y + 4)")
-        XCTAssert(equation.unicodeScalars.firstNestingLevel(startingWith: "[".unicodeScalars, endingWith: "]".unicodeScalars) == nil)
-        XCTAssert(equation.unicodeScalars.firstNestingLevel(startingWith: "2".unicodeScalars, endingWith: "9".unicodeScalars) == nil)
+        XCTAssert(equation.scalars.firstNestingLevel(startingWith: "[".scalars, endingWith: "]".scalars) == nil)
+        XCTAssert(equation.scalars.firstNestingLevel(startingWith: "2".scalars, endingWith: "9".scalars) == nil)
 
         XCTAssert([1, 2, 3, 4].prefix(upTo: AlternativePatterns([LiteralPattern([2, 3]), LiteralPattern([3, 4])]))?.range == 0 ..< 1)
         XCTAssert([1, 2, 3, 4].prefix(upTo: [2, 3])?.range == 0 ..< 1)
@@ -245,7 +245,7 @@ class CollectionTests : XCTestCase {
             "b": 10,
             "c": 8,
             "d": 8
-        ])
+            ])
 
         let numbersToLetters = [
             1: "a",
@@ -356,43 +356,43 @@ class CollectionTests : XCTestCase {
             #if !os(Linux)
                 // [_Workaround: SetAlgebra will fail on Linux until CharacterSet is fixed. In the mean time there is no way to make them work. (Swift 3.1.0)_]
 
-            // SetAlgebra
+                // SetAlgebra
 
-            XCTAssert(inAOnly ∉ setA.intersection(setB), "\(inAOnly) ∈ \(setA).intersection(\(setB))")
-            XCTAssert(inBOnly ∉ setA.intersection(setB), "\(inBOnly) ∈ \(setA).intersection(\(setB))")
-            XCTAssert(inBoth ∈ setA.intersection(setB), "\(inBoth) ∉ \(setA).intersection(\(setB))")
-            XCTAssert(inNeither ∉ setA.intersection(setB), "\(inNeither) ∈ \(setA).intersection(\(setB))")
+                XCTAssert(inAOnly ∉ setA.intersection(setB), "\(inAOnly) ∈ \(setA).intersection(\(setB))")
+                XCTAssert(inBOnly ∉ setA.intersection(setB), "\(inBOnly) ∈ \(setA).intersection(\(setB))")
+                XCTAssert(inBoth ∈ setA.intersection(setB), "\(inBoth) ∉ \(setA).intersection(\(setB))")
+                XCTAssert(inNeither ∉ setA.intersection(setB), "\(inNeither) ∈ \(setA).intersection(\(setB))")
 
-            intersection = setA
-            intersection.formIntersection(setB)
-            XCTAssert(inAOnly ∉ intersection, "\(inAOnly) ∈ \(intersection)")
-            XCTAssert(inBOnly ∉ intersection, "\(inBOnly) ∈ \(intersection)")
-            XCTAssert(inBoth ∈ intersection, "\(inBoth) ∉ \(intersection)")
-            XCTAssert(inNeither ∉ intersection, "\(inNeither) ∈ \(intersection)")
+                intersection = setA
+                intersection.formIntersection(setB)
+                XCTAssert(inAOnly ∉ intersection, "\(inAOnly) ∈ \(intersection)")
+                XCTAssert(inBOnly ∉ intersection, "\(inBOnly) ∈ \(intersection)")
+                XCTAssert(inBoth ∈ intersection, "\(inBoth) ∉ \(intersection)")
+                XCTAssert(inNeither ∉ intersection, "\(inNeither) ∈ \(intersection)")
 
-            XCTAssert(inAOnly ∈ setA.union(setB), "\(inAOnly) ∉ \(setA).union(\(setB))")
-            XCTAssert(inBOnly ∈ setA.union(setB), "\(inBOnly) ∉ \(setA).union(\(setB))")
-            XCTAssert(inBoth ∈ setA.union(setB), "\(inBoth) ∉ \(setA).union(\(setB))")
-            XCTAssert(inNeither ∉ setA.union(setB), "\(inNeither) ∈ \(setA).union(\(setB))")
+                XCTAssert(inAOnly ∈ setA.union(setB), "\(inAOnly) ∉ \(setA).union(\(setB))")
+                XCTAssert(inBOnly ∈ setA.union(setB), "\(inBOnly) ∉ \(setA).union(\(setB))")
+                XCTAssert(inBoth ∈ setA.union(setB), "\(inBoth) ∉ \(setA).union(\(setB))")
+                XCTAssert(inNeither ∉ setA.union(setB), "\(inNeither) ∈ \(setA).union(\(setB))")
 
-            union = setA
-            union.formUnion(setB)
-            XCTAssert(inAOnly ∈ union, "\(inAOnly) ∉ \(union)")
-            XCTAssert(inBOnly ∈ union, "\(inBOnly) ∉ \(union)")
-            XCTAssert(inBoth ∈ union, "\(inBoth) ∉ \(union)")
-            XCTAssert(inNeither ∉ union, "\(inNeither) ∈ \(union)")
+                union = setA
+                union.formUnion(setB)
+                XCTAssert(inAOnly ∈ union, "\(inAOnly) ∉ \(union)")
+                XCTAssert(inBOnly ∈ union, "\(inBOnly) ∉ \(union)")
+                XCTAssert(inBoth ∈ union, "\(inBoth) ∉ \(union)")
+                XCTAssert(inNeither ∉ union, "\(inNeither) ∈ \(union)")
 
-            XCTAssert(inAOnly ∈ setA.symmetricDifference(setB), "\(inAOnly) ∉ \(setA).symmetricDifference(\(setB))")
-            XCTAssert(inBOnly ∈ setA.symmetricDifference(setB), "\(inBOnly) ∉ \(setA).symmetricDifference(\(setB))")
-            XCTAssert(inBoth ∉ setA.symmetricDifference(setB), "\(inBoth) ∈ \(setA).symmetricDifference(\(setB))")
-            XCTAssert(inNeither ∉ setA.symmetricDifference(setB), "\(inNeither) ∈ \(setA).symmetricDifference(\(setB))")
+                XCTAssert(inAOnly ∈ setA.symmetricDifference(setB), "\(inAOnly) ∉ \(setA).symmetricDifference(\(setB))")
+                XCTAssert(inBOnly ∈ setA.symmetricDifference(setB), "\(inBOnly) ∉ \(setA).symmetricDifference(\(setB))")
+                XCTAssert(inBoth ∉ setA.symmetricDifference(setB), "\(inBoth) ∈ \(setA).symmetricDifference(\(setB))")
+                XCTAssert(inNeither ∉ setA.symmetricDifference(setB), "\(inNeither) ∈ \(setA).symmetricDifference(\(setB))")
 
-            symmetricDifference = setA
-            symmetricDifference.formSymmetricDifference(setB)
-            XCTAssert(inAOnly ∈ symmetricDifference, "\(inAOnly) ∉ \(symmetricDifference)")
-            XCTAssert(inBOnly ∈ symmetricDifference, "\(inBOnly) ∉ \(symmetricDifference)")
-            XCTAssert(inBoth ∉ symmetricDifference, "\(inBoth) ∈ \(symmetricDifference)")
-            XCTAssert(inNeither ∉ symmetricDifference, "\(inNeither) ∈ \(symmetricDifference)")
+                symmetricDifference = setA
+                symmetricDifference.formSymmetricDifference(setB)
+                XCTAssert(inAOnly ∈ symmetricDifference, "\(inAOnly) ∉ \(symmetricDifference)")
+                XCTAssert(inBOnly ∈ symmetricDifference, "\(inBOnly) ∉ \(symmetricDifference)")
+                XCTAssert(inBoth ∉ symmetricDifference, "\(inBoth) ∈ \(symmetricDifference)")
+                XCTAssert(inNeither ∉ symmetricDifference, "\(inNeither) ∈ \(symmetricDifference)")
 
             #endif
         }
@@ -414,16 +414,76 @@ class CollectionTests : XCTestCase {
     }
 
     func testRangeReplaceableCollection() {
-        func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C) where C.Iterator.Element : Equatable {
-            var collection = start
-            collection += appendix
-            XCTAssert(collection.elementsEqual(result))
+        func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Iterator.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
+            where C.Iterator.Element : Equatable {
+
+                var collection = start
+                collection += appendix
+                XCTAssert(collection.elementsEqual(result))
+
+                XCTAssert(start.appending(contentsOf: appendix).elementsEqual(result))
+                XCTAssert(start.appending(element).elementsEqual(withElementAppended))
+
+                XCTAssert(start.prepending(contentsOf: appendix).elementsEqual(withAppendixPrepended))
+                XCTAssert(start.prepending(element).elementsEqual(withElementPrepended))
+
+                XCTAssert(start.truncated(at: truncatingIndex).elementsEqual(truncated))
         }
 
-        runTests(start: [1, 2, 3], appendix: [4, 5], result: [1, 2, 3, 4, 5])
-        runTests(start: "123".unicodeScalars, appendix: "45".unicodeScalars, result: "12345".unicodeScalars)
-        runTests(start: "123".characters, appendix: "45".characters, result: "12345".characters)
-        runTests(start: RangeReplaceableCollectionExample([1, 2, 3]), appendix: RangeReplaceableCollectionExample([4, 5]), result: [1, 2, 3, 4, 5])
+        runTests(start: [1, 2, 3],
+                 appendix: [4, 5],
+                 result: [1, 2, 3, 4, 5],
+                 element: 0,
+                 withElementAppended: [1, 2, 3, 0],
+                 withElementPrepended: [0, 1, 2, 3],
+                 withAppendixPrepended: [4, 5, 1, 2, 3],
+                 truncatingIndex: 1,
+                 truncated: [1])
+        runTests(start: "123".scalars,
+                 appendix: "45".scalars,
+                 result: "12345".scalars,
+                 element: "0",
+                 withElementAppended: "1230".scalars,
+                 withElementPrepended: "0123".scalars,
+                 withAppendixPrepended: "45123".scalars,
+                 truncatingIndex: "123".scalars.index(after: "123".scalars.startIndex),
+                 truncated: "1".scalars)
+        runTests(start: "123".clusters,
+                 appendix: "45".clusters,
+                 result: "12345".clusters,
+                 element: "0",
+                 withElementAppended: "1230".clusters,
+                 withElementPrepended: "0123".clusters,
+                 withAppendixPrepended: "45123".clusters,
+                 truncatingIndex: "123".clusters.index(after: "123".clusters.startIndex),
+                 truncated: "1".clusters)
+        runTests(start: StrictString("123").scalars,
+                 appendix: StrictString("45").scalars,
+                 result: StrictString("12345").scalars,
+                 element: "0",
+                 withElementAppended: StrictString("1230").scalars,
+                 withElementPrepended: StrictString("0123").scalars,
+                 withAppendixPrepended: StrictString("45123").scalars,
+                 truncatingIndex: StrictString("123").scalars.index(after: StrictString("123").scalars.startIndex),
+                 truncated: StrictString("1").scalars)
+        runTests(start: StrictString("123").clusters,
+                 appendix: StrictString("45").clusters,
+                 result: StrictString("12345").clusters,
+                 element: "0",
+                 withElementAppended: StrictString("1230").clusters,
+                 withElementPrepended: StrictString("0123").clusters,
+                 withAppendixPrepended: StrictString("45123").clusters,
+                 truncatingIndex: StrictString("123").clusters.index(after: StrictString("123").clusters.startIndex),
+                 truncated: StrictString("1").clusters)
+        runTests(start: RangeReplaceableCollectionExample([1, 2, 3]),
+                 appendix: RangeReplaceableCollectionExample([4, 5]),
+                 result: [1, 2, 3, 4, 5],
+                 element: 0,
+                 withElementAppended: [1, 2, 3, 0],
+                 withElementPrepended: [0, 1, 2, 3],
+                 withAppendixPrepended: [4, 5, 1, 2, 3],
+                 truncatingIndex: 1,
+                 truncated: [1])
 
         let collection = [1, 2, 3, 4, 5]
 
@@ -493,15 +553,42 @@ class CollectionTests : XCTestCase {
             "5",
             "75",
             "876"
-            ].map() { $0.unicodeScalars }
+            ].map() { $0.scalars }
         let equalized = [
             "005",
             "075",
             "876"
-            ]
+        ]
         XCTAssert(text.countsEqualized(byFillingWith: "0", from: .start).map({ String($0) }) == equalized)
         text.equalizeCounts(byFillingWith: "0", from: .start)
         XCTAssert(text.map({ String($0) }) == equalized)
+
+        XCTAssert(collection.truncated(before: [3, 4]) == [1, 2])
+        XCTAssert(collection.truncated(before: [LiteralPattern([3]), LiteralPattern([4])]) == [1, 2])
+        XCTAssert(collection.truncated(after: [3, 4]) == [1, 2, 3, 4])
+        XCTAssert(collection.truncated(after: [LiteralPattern([3]), LiteralPattern([4])]) == [1, 2, 3, 4])
+        XCTAssert(collection.dropping(upTo: [3, 4]) == [3, 4, 5])
+        XCTAssert(collection.dropping(upTo: [LiteralPattern([3]), LiteralPattern([4])]) == [3, 4, 5])
+        XCTAssert(collection.dropping(through: [3, 4]) == [5])
+        XCTAssert(collection.dropping(through: [LiteralPattern([3]), LiteralPattern([4])]) == [5])
+
+        XCTAssert(collection.replacingMatches(for: [3, 4], with: [0]) == [1, 2, 0, 5])
+        XCTAssert(collection.replacingMatches(for: [LiteralPattern([3]), LiteralPattern([4])], with: [0]) == [1, 2, 0, 5])
+
+        mutable = collection
+        mutable.replaceMatches(for: [LiteralPattern([3]), LiteralPattern([4])], with: [0])
+        XCTAssert(mutable == [1, 2, 0, 5])
+
+        XCTAssert(collection.mutatingMatches(for: [3, 4], mutation: { $0.contents.map({ $0 + 1 }) }) == [1, 2, 4, 5, 5])
+        XCTAssert(collection.mutatingMatches(for: [LiteralPattern([3]), LiteralPattern([4])], mutation: { $0.contents.map({ $0 + 1 }) }) == [1, 2, 4, 5, 5])
+
+        mutable = collection
+        mutable.mutateMatches(for: [3, 4], mutation: { $0.contents.map({ $0 + 1 }) })
+        XCTAssert(mutable == [1, 2, 4, 5, 5])
+
+        mutable = collection
+        mutable.mutateMatches(for: [LiteralPattern([3]), LiteralPattern([4])], mutation: { $0.contents.map({ $0 + 1 }) })
+        XCTAssert(mutable == [1, 2, 4, 5, 5])
     }
 
     func testSetDefinition() {

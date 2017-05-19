@@ -70,6 +70,9 @@
                 <a href="Extensions/CharacterSet.html">CharacterSet</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/ClosedRange.html">ClosedRange</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
@@ -98,6 +101,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Range.html">Range</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/RangeReplaceableCollection.html">RangeReplaceableCollection</a>
@@ -348,10 +354,7 @@
             <a href="Typealiases.html">Typealiases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:E14SDGCornerstoneVs11ClosedRange7Element">Element</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a>
+                <a href="Typealiases.html#/s:14SDGCornerstone23ExtendedGraphemeCluster">ExtendedGraphemeCluster</a>
               </li>
             </ul>
           </li>
@@ -380,7 +383,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Modifies the left value by logical disjunction with the right.</p>
+
+<p>This operator uses short‐circuit evaluation; <code>rhs</code> is only evaluated if <code>lhs</code> is <code>false</code>.</p>
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>∨</p>
+
+</div>
+
                         <a href="Extensions/Bool.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -411,7 +422,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns <code>true</code> if the two values are inequal.</p>
+<div class="aside aside-recommended-over">
+    <p class="aside-title">Recommended over</p>
+    <p>!=</p>
+
+</div>
+
                         <a href="Extensions/Equatable.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -419,68 +436,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:V10Foundation12CharacterSet"></a>
-                    <a name="//apple_ref/swift/Extension/CharacterSet" class="dashAnchor"></a>
-                    <a class="token" href="#/s:V10Foundation12CharacterSet">CharacterSet</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/CharacterSet.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">CharacterSet</span> <span class="p">:</span> <span class="kt">ReferenceConvertible</span><span class="p">,</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">SetAlgebra</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sc"></a>
-                    <a name="//apple_ref/swift/Extension/UnicodeScalar" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sc">UnicodeScalar</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/UnicodeScalar.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">UnicodeScalar</span> <span class="p">:</span> <span class="kt">ExpressibleByUnicodeScalarLiteral</span></code></pre>
 
                         </div>
                       </div>
@@ -504,7 +459,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Creates an instance from an array literal.</p>
+
                         <a href="Extensions/ExpressibleByArrayLiteral.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -659,7 +615,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>The raw value type.</p>
+
                         <a href="Extensions/RawRepresentable.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -728,7 +685,69 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt"><a href="Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">SetAlgebra</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">ExpressibleByArrayLiteral</span> <span class="k">where</span> <span class="kt"><a href="Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">SetAlgebra</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">ExpressibleByArrayLiteral</span> <span class="k">where</span> <span class="kt">Element</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:V10Foundation12CharacterSet"></a>
+                    <a name="//apple_ref/swift/Extension/CharacterSet" class="dashAnchor"></a>
+                    <a class="token" href="#/s:V10Foundation12CharacterSet">CharacterSet</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/CharacterSet.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">CharacterSet</span> <span class="p">:</span> <span class="kt">ReferenceConvertible</span><span class="p">,</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">SetAlgebra</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Sc"></a>
+                    <a name="//apple_ref/swift/Extension/UnicodeScalar" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Sc">UnicodeScalar</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/UnicodeScalar.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">UnicodeScalar</span> <span class="p">:</span> <span class="kt">ExpressibleByUnicodeScalarLiteral</span></code></pre>
 
                         </div>
                       </div>
@@ -752,7 +771,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns the index immediately before the specified index.</p>
+
                         <a href="Extensions/BidirectionalCollection.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -835,6 +855,64 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:Vs5Range"></a>
+                    <a name="//apple_ref/swift/Extension/Range" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Vs5Range">Range</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/Range.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Bound</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Bound</span> <span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Vs11ClosedRange"></a>
+                    <a name="//apple_ref/swift/Extension/ClosedRange" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Vs11ClosedRange">ClosedRange</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/ClosedRange.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">ClosedRange</span><span class="o">&lt;</span><span class="kt">Bound</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Bound</span> <span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:Ps17BitwiseOperations"></a>
                     <a name="//apple_ref/swift/Extension/BitwiseOperations" class="dashAnchor"></a>
                     <a class="token" href="#/s:Ps17BitwiseOperations">BitwiseOperations</a>
@@ -876,7 +954,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Returns <code>true</code> if <code>lhs</code> is within the range described by <code>rhs</code>.</p>
+<pre class="highlight swift"><code><span class="k">if</span> <span class="mi">1</span> <span class="o">÷</span> <span class="mi">3</span> <span class="o">≈</span> <span class="mf">0.33333</span> <span class="o">±</span> <span class="mf">0.00001</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"It is accurate to at least four digits."</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
                         <a href="Extensions/Comparable.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -927,7 +1010,7 @@
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

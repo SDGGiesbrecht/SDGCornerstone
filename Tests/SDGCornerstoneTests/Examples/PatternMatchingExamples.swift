@@ -49,7 +49,7 @@ private func demonstrateNestingLevel() {
 
     // [_Define Example: Nesting Level_]
     let equation = "2(3x − (y + 4)) = z"
-    let nestingLevel = equation.unicodeScalars.firstNestingLevel(startingWith: "(".unicodeScalars, endingWith: ")".unicodeScalars)!
+    let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
 
     print(String(nestingLevel.container.contents))
     // Prints “(3x − (y + 4))”

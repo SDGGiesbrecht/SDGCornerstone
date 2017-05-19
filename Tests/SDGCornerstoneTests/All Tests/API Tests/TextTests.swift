@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
 
- Copyright ©2016–2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -37,6 +37,99 @@ class TextTests : XCTestCase {
         XCTAssert(CharacterSet.alphanumerics ⊈ CharacterSet.uppercaseLetters, "\(CharacterSet.alphanumerics) ⊆ \(CharacterSet.uppercaseLetters)")
 
         XCTAssert(CharacterSet.whitespaces.linuxSafeIsEqual(to: CharacterSet.whitespaces))
+    }
+
+    func testStrictString() {
+
+        var string = StrictString("\u{BC}")
+        let appendix: UnicodeScalar = "\u{BD}"
+        string.append(appendix)
+        XCTAssert(String(string) == "1⁄41⁄2", "Normalization problem.")
+
+        let decomposed = StrictString("éé")
+        let decomposed2 = StrictString("́ée")
+        XCTAssert(decomposed.firstMatch(for: "e".scalars)?.range == decomposed.startIndex ..< decomposed.index(after: decomposed.startIndex), "Problem with decomposition.")
+        XCTAssert(decomposed2.firstMatch(for: "́".scalars)?.range == decomposed2.startIndex..<decomposed2.index(after: decomposed2.startIndex), "Problem with decomposition.")
+
+        let components = decomposed.components(separatedBy: "́".scalars).map({StrictString($0.contents)})
+        XCTAssert(components == [StrictString("e"), StrictString("e"), StrictString()], "Problem with decomposition.")
+        let separatedComponents = decomposed.components(separatedBy: "e".scalars).map({StrictString($0.contents)})
+        XCTAssert(separatedComponents == [StrictString(), StrictString("́"), StrictString("́")], "Problem with decomposition: \(separatedComponents) ≠ “”, “́”, & “́”")
+
+        XCTAssert(decomposed.hasPrefix("e".scalars), "Problem with decomposition.")
+        XCTAssert(decomposed.hasSuffix("́".scalars), "Problem with decomposition.")
+
+        XCTAssert(decomposed2.hasPrefix("́".scalars), "Problem with decomposition.")
+        XCTAssert(decomposed2.hasSuffix("e".scalars), "Problem with decomposition.")
+
+        let commonPrefix = StrictString(decomposed.commonPrefix(with: "ee".scalars).contents)
+        XCTAssert(commonPrefix == StrictString("e"), "Problem with decomposition: Common prefix between “éé” and “ee” is “\(commonPrefix)”.")
+        XCTAssert(StrictString(decomposed2.commonPrefix(with: "́́".scalars).contents) == StrictString("́"), "Problem with decomposition.")
+
+        XCTAssert(StrictString(decomposed.commonSuffix(with: "́́".scalars).contents) == StrictString("́"), "Problem with decomposition.")
+        XCTAssert(StrictString(decomposed2.commonSuffix(with: "ee".scalars).contents) == StrictString("e"), "Problem with decomposition.")
+
+        var decomposedCopy = decomposed
+        decomposedCopy.replaceMatches(for: "e".scalars, with: "a".scalars)
+        XCTAssert(decomposedCopy == "áá", "Problem with decomposition: \(decomposed).replaceMatches(for: e, with: a) → \(decomposedCopy) ≠ áá")
+
+        decomposedCopy = decomposed
+        decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
+        XCTAssert(decomposedCopy == "èè", "Problem with decomposition: \(decomposed).replaceMatches(for: ́, with: ̀) → \(decomposedCopy) ≠ èè")
+
+        decomposedCopy = decomposed2
+        decomposedCopy.replaceMatches(for: "e".scalars, with: "a".scalars)
+        XCTAssert(decomposedCopy == "́áa", "Problem with decomposition: \(decomposed2).replaceMatches(for: e, with: a) → \(decomposedCopy) ≠ ́áa")
+
+        decomposedCopy = decomposed2
+        decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
+        XCTAssert(decomposedCopy == "̀èe", "Problem with decomposition: \(decomposed2).replaceMatches(for: ́, with: ̀) → \(decomposedCopy) ≠ ̀èe")
+
+        let clusters = StrictString("0").clusters
+        XCTAssert(clusters.index(before: clusters.endIndex) == clusters.startIndex)
+
+        XCTAssert(StrictString.ClusterView("0".characters).elementsEqual(clusters))
+        let slice = clusters[clusters.startIndex ..< clusters.endIndex]
+        XCTAssert(StrictString.ClusterView(slice).elementsEqual(clusters))
+
+        XCTAssert(StrictString("A" as ExtendedGraphemeCluster) == "A")
+        XCTAssert("...\(StrictString("A"))..." == "...A...")
+
+        var mutable: StrictString = "0"
+        mutable.clusters.truncate(at: mutable.clusters.startIndex)
+        XCTAssert(mutable == "")
+
+        mutable = "ABC"
+        mutable.write("DEF")
+        XCTAssert(mutable == "ABCDEF")
+
+        mutable.write(to: &mutable)
+        XCTAssert(mutable == "ABCDEFABCDEF")
+
+        XCTAssert(StrictString("A").description == "A")
+
+        XCTAssert(StrictString("A") < StrictString("B"))
+    }
+
+    func testString() {
+        func runTests<S : StringFamily>(helloWorld: S) {
+
+            XCTAssert(S(helloWorld.scalars) == helloWorld)
+            XCTAssert(S(helloWorld.clusters) == helloWorld)
+
+            XCTAssert(helloWorld.scalars.first ≠ nil)
+
+            let set: Set<S> = [helloWorld]
+            XCTAssert(helloWorld ∈ set)
+
+            XCTAssert(S(S.ClusterView()).scalars.isEmpty)
+            XCTAssert(S(S.ScalarView()).clusters.isEmpty)
+        }
+
+        runTests(helloWorld: "Hello, world!")
+        runTests(helloWorld: StrictString("Hello, world!"))
+
+        XCTAssert(StrictString("Hello, world!") == "Hello, world!")
     }
 
     func testUnicodeScalar() {
@@ -95,10 +188,31 @@ class TextTests : XCTestCase {
         }
     }
 
+    func testUnicodeScalarView() {
+        func runTests<S : StringFamily>(helloWorld: S) where S.ScalarView.Iterator.Element == UnicodeScalar {
+
+            XCTAssert(helloWorld.scalars.contains("world".scalars))
+            XCTAssert(¬helloWorld.scalars.contains("xyz".scalars))
+
+            XCTAssert(helloWorld.scalars[helloWorld.scalars.startIndex] == "H")
+
+            for _ in helloWorld.scalars {}
+
+            var variable = helloWorld
+            variable.scalars.replaceSubrange(variable.scalars.index(after: variable.scalars.startIndex) ..< variable.scalars.index(before: variable.scalars.endIndex), with: "...".scalars)
+            XCTAssert(variable.scalars.elementsEqual("H...!".scalars))
+        }
+
+        runTests(helloWorld: "Hello, world!")
+        runTests(helloWorld: StrictString("Hello, world!"))
+    }
+
     static var allTests: [(String, (TextTests) -> () throws -> Void)] {
         return [
             ("testCharacterSet", testCharacterSet),
-            ("testUnicodeScalar", testUnicodeScalar)
+            ("testString", testString),
+            ("testUnicodeScalar", testUnicodeScalar),
+            ("testUnicodeScalarView", testUnicodeScalarView)
         ]
     }
 }

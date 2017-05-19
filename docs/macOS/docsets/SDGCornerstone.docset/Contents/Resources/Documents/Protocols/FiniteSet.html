@@ -71,6 +71,9 @@
                 <a href="../Extensions/CharacterSet.html">CharacterSet</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/ClosedRange.html">ClosedRange</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
@@ -99,6 +102,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Range.html">Range</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/RangeReplaceableCollection.html">RangeReplaceableCollection</a>
@@ -349,10 +355,7 @@
             <a href="../Typealiases.html">Typealiases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:E14SDGCornerstoneVs11ClosedRange7Element">Element</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a>
+                <a href="../Typealiases.html#/s:14SDGCornerstone23ExtendedGraphemeCluster">ExtendedGraphemeCluster</a>
               </li>
             </ul>
           </li>
@@ -410,7 +413,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊆</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊆</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -476,7 +479,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊈</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊈</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -542,7 +545,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊇</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊇</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -608,7 +611,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊉</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊉</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -674,7 +677,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊊</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊊</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -740,7 +743,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊋</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊋</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -806,7 +809,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -882,7 +885,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">≠</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">≠</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -948,7 +951,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">overlaps</span><span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">other</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">overlaps</span><span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SetDefinition</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">other</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -1002,7 +1005,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">isDisjoint</span><span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">with</span> <span class="nv">other</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="n">isDisjoint</span><span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">FiniteSet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">with</span> <span class="nv">other</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -1048,14 +1051,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The elements as a collection of instances of <code><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></code> instead of <code>Iterator.Element</code>.</p>
+                        <p>The elements as a collection of instances of <code>Element</code> instead of <code>Iterator.Element</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">elements</span><span class="p">:</span> <span class="kt">LazyMapCollection</span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Typealiases.html#/s:E14SDGCornerstoneVs5Range7Element">Element</a></span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">elements</span><span class="p">:</span> <span class="kt">LazyMapCollection</span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -1068,7 +1071,7 @@
         </section>
         <section id="footer">
           <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
