@@ -61,11 +61,13 @@ extension Localization where Self : RawRepresentable, Self.RawValue == String {
         let language = String(code.scalars.truncated(before: "\u{2D}".scalars))
         if let result = Self(exactly: language) {
             self = result
+            return
         }
         if let relevantCountries = SupportedLocalization.countries[language] {
             for country in relevantCountries {
                 if let result = Self(exactly: language + "\u{2D}" + country) {
                     self = result
+                    return
                 }
             }
         }
