@@ -1,0 +1,28 @@
+# .swiftlint.yml
+#
+# This source file is part of the SDGCornerstone open source project.
+# https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+#
+# Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+#
+# Soli Deo gloria.
+#
+# Licensed under the Apache Licence, Version 2.0.
+# See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
+
+excluded:
+  - .build
+  - Packages
+  - .Test Zone
+disabled_rules:
+  - colon
+  - cyclomatic_complexity
+  - empty_parentheses_with_trailing_closure
+  - file_length
+  - function_body_length
+  - function_parameter_count
+  - identifier_name
+  - large_tuple
+  - line_length
+  - type_body_length
+  - type_name
