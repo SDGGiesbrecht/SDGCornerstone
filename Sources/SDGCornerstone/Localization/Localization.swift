@@ -36,26 +36,24 @@ public protocol Localization {
     static var fallbackLocalization: Self { get }
 }
 
-extension Localization where Self : RawRepresentable, Self.RawValue == String {
-    // MARK: - where Self : RawRepresentable, Self.RawValue == String
+extension Localization {
 
-    // [_Inherit Documentation: SDGCornerstone.Localization.init(code:)_]
-    /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
-    ///
-    /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
-    public init?(exactly code: String) {
-        self.init(rawValue: code)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Localization.code_]
-    /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
-    public var code: String {
-        return rawValue
-    }
-
+    // [_Example 1: Localization Groups_]
     /// Creates a localization from the specified code, or as a fallback, creates a related localization that can be reasonably used as a replacement.
     ///
     /// For example, if a type supports British but not American English, it creates an instance of British English when either code is specified.
+    ///
+    /// The full list of currently supported groups of related localizations is as follows (taken directly from the source code):
+    ///
+    /// ```swift
+    /// "en": ["GB", "US", "CA", "AU", "ZA", "IE", "NL", "SG", "TT", "GY", "LR", "SL", "MY", "BB", "BS", "ZW", "IN", "BZ", "PG", "VC", "ZM", "GD", "AG", "VU", "JM", "KN", "LK", "PH", "LC", "NA", "BN", "SB", "NR", "FJ", "FM", "DM", "SC", "MU", "WS", "PW", "MW", "BW", "BI", "CM", "ET", "GM", "GH", "KE", "KI", "LS", "MT", "MH", "NG", "PK", "RW", "SS", "SD", "SZ", "TZ", "TO", "TV", "UG"],
+    /// "de": ["DE", "AT", "CH", "BE", "LI", "LU"],
+    /// "fr": ["FR", "CA", "BE", "CH", "BF", "SN", "LU", "MU", "GA", "CG", "MG", "CI", "BJ", "MC", "DJ", "CF", "ML", "NE", "TD", "TG", "RW", "BI", "KM", "VU", "SC", "CM", "CD", "GN", "GQ", "HT"],
+    /// "el": ["GR", "CY"],
+    /// "he": ["IL"]
+    /// ```
+    ///
+    /// Requests for additional groups are welcome and can be made by [opening a Github issue](https://github.com/SDGGiesbrecht/SDGCornerstone/issues).
     public init?(reasonableMatchFor code: String) {
 
         let language = String(code.scalars.truncated(before: "\u{2D}".scalars))
@@ -73,5 +71,23 @@ extension Localization where Self : RawRepresentable, Self.RawValue == String {
         }
 
         return nil
+    }
+}
+
+extension Localization where Self : RawRepresentable, Self.RawValue == String {
+    // MARK: - where Self : RawRepresentable, Self.RawValue == String
+
+    // [_Inherit Documentation: SDGCornerstone.Localization.init(code:)_]
+    /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
+    ///
+    /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
+    public init?(exactly code: String) {
+        self.init(rawValue: code)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Localization.code_]
+    /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
+    public var code: String {
+        return rawValue
     }
 }

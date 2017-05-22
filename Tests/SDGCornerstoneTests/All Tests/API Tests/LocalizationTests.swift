@@ -24,11 +24,39 @@ class LocalizationTests : XCTestCase {
         XCTAssert(LocalizationExample(exactly: "en\u{2D}") == nil)
         XCTAssert(LocalizationExample(reasonableMatchFor: "en\u{2D}US") == .englishUnitedKingdom, "en\u{2D}US → \(String(describing: LocalizationExample(reasonableMatchFor: "en\u{2D}US"))) ≠ en\u{2D}GB")
         XCTAssert(LocalizationExample(reasonableMatchFor: "fr\u{2D}FR") == .français, "fr\u{2D}FR → \(String(describing: LocalizationExample(reasonableMatchFor: "fr\u{2D}FR"))) ≠ fr")
+        XCTAssert(LocalizationExample(reasonableMatchFor: "el") == nil)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "zxx") == nil)
+    }
+
+    func testLocalizationSetting() {
+        let english = LocalizationSetting(orderOfPrecedence: ["en"])
+        XCTAssert(english.resolved() as LocalizationExample == .englishUnitedKingdom)
+
+        let unrecognized = LocalizationSetting(orderOfPrecedence: [["zxx"]])
+        XCTAssert(unrecognized.resolved() as LocalizationExample == .englishUnitedKingdom)
+    }
+
+    func testUserFacingText() {
+
+        let text = UserFacingText({ (localization: LocalizationExample, numbers: (Int, Int)) -> StrictString in
+
+            switch localization {
+            case .englishUnitedKingdom:
+                return StrictString("Numbers \(numbers.0) and \(numbers.1)")
+            case .français:
+                return StrictString("Numéros \(numbers.0) et \(numbers.1)")
+            }
+        })
+        XCTAssert(text.resolved(for: .englishUnitedKingdom, using: (0, 1)) == "Numbers 0 and 1")
+        XCTAssert(text.resolved(for: .français, using: (0, 1)) == "Numéros 0 et 1")
+        XCTAssert(¬text.resolved(using: (0, 1)).isEmpty)
     }
 
     static var allTests: [(String, (LocalizationTests) -> () throws -> Void)] {
         return [
-            ("testLocalization", testLocalization)
+            ("testLocalization", testLocalization),
+            ("testLocalizationSetting", testLocalizationSetting),
+            ("testUserFacingText", testUserFacingText)
         ]
     }
 }
