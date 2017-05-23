@@ -76,6 +76,8 @@ public class Shared<Value> {
 
     /// Cancels an observer. The observer will be no longer be notified when the value changes.
     ///
+    /// This method is only necessary when an observer needs to persist after cancelling observation. In most cases, cancellation is automated through ARC.
+    ///
     /// - Parameters:
     ///     - observer: The observer.
     public func cancel(observer: SharedValueObserver) {

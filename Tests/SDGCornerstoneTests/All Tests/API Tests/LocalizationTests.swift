@@ -29,11 +29,37 @@ class LocalizationTests : XCTestCase {
     }
 
     func testLocalizationSetting() {
-        let english = LocalizationSetting(orderOfPrecedence: ["en"])
+        let english = LocalizationSetting(orderOfPrecedence: ["en", "fr"])
         XCTAssert(english.resolved() as LocalizationExample == .englishUnitedKingdom)
 
         let unrecognized = LocalizationSetting(orderOfPrecedence: [["zxx"]])
         XCTAssert(unrecognized.resolved() as LocalizationExample == .englishUnitedKingdom)
+
+        english.do {
+            XCTAssert(LocalizationSetting.current.value == english)
+        }
+        let français = LocalizationSetting(orderOfPrecedence: ["fr"])
+        français.do {
+            XCTAssert(LocalizationSetting.current.value == français)
+        }
+
+        let multilingual = LocalizationSetting(orderOfPrecedence: [["en", "fr"]])
+        var englishUsed = false
+        var françaisUtilisé = false
+        multilingual.do {
+            for _ in 1 ... 100 {
+                if ¬englishUsed ∨ ¬françaisUtilisé {
+                    switch LocalizationSetting.current.value.resolved() as LocalizationExample {
+                    case .englishUnitedKingdom:
+                        englishUsed = true
+                    case .français:
+                        françaisUtilisé = true
+                    }
+                }
+            }
+        }
+        XCTAssert(englishUsed)
+        XCTAssert(françaisUtilisé)
     }
 
     func testUserFacingText() {
