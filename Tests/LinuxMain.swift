@@ -24,6 +24,7 @@ XCTMain([
     testCase(LocalizationTests.allTests),
     testCase(MathematicsTests.allTests),
     testCase(RandomizationTests.allTests),
+    testCase(ReferenceTests.allTests),
     testCase(TextTests.allTests),
 
     testCase(RegressionTests.allTests),
