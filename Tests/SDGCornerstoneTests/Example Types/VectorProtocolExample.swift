@@ -1,5 +1,5 @@
 /*
- VectorTypeExample.swift
+ VectorProtocolExample.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -14,7 +14,7 @@
 
 import SDGCornerstone
 
-struct VectorTypeExample : VectorType {
+struct VectorProtocolExample : VectorProtocol {
 
     var value: Double
 
@@ -24,37 +24,37 @@ struct VectorTypeExample : VectorType {
 
     // Addable
 
-    static func += (lhs: inout VectorTypeExample, rhs: VectorTypeExample) {
+    static func += (lhs: inout VectorProtocolExample, rhs: VectorProtocolExample) {
         lhs.value += rhs.value
     }
 
     // Equatable
 
-    static func == (lhs: VectorTypeExample, rhs: VectorTypeExample) -> Bool {
+    static func == (lhs: VectorProtocolExample, rhs: VectorProtocolExample) -> Bool {
         return lhs.value == rhs.value
     }
 
     // AdditiveArithmetic
 
-    static var additiveIdentity: VectorTypeExample {
-        return VectorTypeExample(0)
+    static var additiveIdentity: VectorProtocolExample {
+        return VectorProtocolExample(0)
     }
 
-    // VectorType
+    // VectorProtocol
 
     typealias Scalar = Double
 
-    static func ×= (lhs: inout VectorTypeExample, rhs: Scalar) {
+    static func ×= (lhs: inout VectorProtocolExample, rhs: Scalar) {
         lhs.value ×= rhs
     }
 
-    static func ÷= (lhs: inout VectorTypeExample, rhs: Scalar) {
+    static func ÷= (lhs: inout VectorProtocolExample, rhs: Scalar) {
         lhs.value ÷= rhs
     }
 
     // Subtractable
 
-    static func −= (lhs: inout VectorTypeExample, rhs: VectorTypeExample) {
+    static func −= (lhs: inout VectorProtocolExample, rhs: VectorProtocolExample) {
         lhs.value −= rhs.value
     }
 }

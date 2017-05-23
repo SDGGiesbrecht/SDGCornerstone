@@ -52,9 +52,9 @@ precedencegroup ExponentPrecedence {
 /// Returns the result of the left to the power of the right.
 ///
 /// - Precondition:
-///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-///   - If `Self` conforms to `RealNumberType`, either
+///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+///   - If `Self` conforms to `RealNumberProtocol`, either
 ///     - `lhs` must be positive, or
 ///     - `rhs` must be an integer.
 ///
@@ -71,9 +71,9 @@ infix operator ↑: ExponentPrecedence
 /// Modifies the left by exponentiation with the right.
 ///
 /// - Precondition:
-///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-///   - If `Self` conforms to `RealNumberType`, either
+///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+///   - If `Self` conforms to `RealNumberProtocol`, either
 ///     - `lhs` must be positive, or
 ///     - `rhs` must be an integer.
 ///
@@ -93,7 +93,7 @@ infix operator ↑=: AssignmentPrecedence
 /// - `init(_ uInt: UIntMax)`
 /// - `static func ×= (lhs: inout Self, rhs: Self)`
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
-/// - `WholeNumberType`, `IntegerType`, `RationalNumberType` or `static func ↑= (lhs: inout Self, rhs: Self)`
+/// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (lhs: inout Self, rhs: Self)`
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
 public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByTextLiterals, NumericAdditiveArithmetic, OneDimensionalPoint, Strideable {
 
@@ -234,9 +234,9 @@ public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByText
     /// Returns the result of the left to the power of the right.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-    ///   - If `Self` conforms to `RealNumberType`, either
+    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
     ///     - `lhs` must be positive, or
     ///     - `rhs` must be an integer.
     ///
@@ -253,9 +253,9 @@ public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByText
     /// Modifies the left by exponentiation with the right.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-    ///   - If `Self` conforms to `RealNumberType`, either
+    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
     ///     - `lhs` must be positive, or
     ///     - `rhs` must be an integer.
     ///
@@ -615,9 +615,9 @@ extension WholeArithmetic {
     /// Returns the result of the left to the power of the right.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-    ///   - If `Self` conforms to `RealNumberType`, either
+    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
     ///     - `lhs` must be positive, or
     ///     - `rhs` must be an integer.
     ///
@@ -863,9 +863,9 @@ extension WholeArithmetic where Self : FloatFamily {
     /// Modifies the left by exponentiation with the right.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-    ///   - If `Self` conforms to `RealNumberType`, either
+    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
     ///     - `lhs` must be positive, or
     ///     - `rhs` must be an integer.
     ///
@@ -939,16 +939,16 @@ extension WholeArithmetic where Self : FloatFamily {
     }
 }
 
-extension WholeArithmetic where Self : IntegerType {
-    // MARK: - where Self : IntegerType
+extension WholeArithmetic where Self : IntegerProtocol {
+    // MARK: - where Self : IntegerProtocol
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
     /// Modifies the left by exponentiation with the right.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-    ///   - If `Self` conforms to `RealNumberType`, either
+    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
     ///     - `lhs` must be positive, or
     ///     - `rhs` must be an integer.
     ///
@@ -984,7 +984,7 @@ extension WholeArithmetic where Self : IntegralArithmetic {
 
     fileprivate mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
 
-        assert(exponent.isNonNegative, "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmeticType instead.")
+        assert(exponent.isNonNegative, "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead.")
 
         raiseWholeNumberToThePowerOf(wholeNumber: exponent)
     }
@@ -1121,7 +1121,7 @@ extension WholeArithmetic where Self : RationalArithmetic {
 
     internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
 
-        assert(exponent.isIntegral, "The result of a non‐integer exponent may be outside the set of rational numbers. Use a type that conforms to RealArithmeticType instead.")
+        assert(exponent.isIntegral, "The result of a non‐integer exponent may be outside the set of rational numbers. Use a type that conforms to RealArithmetic instead.")
 
         if exponent.isNegative {
             self = 1 ÷ self ↑ −exponent
@@ -1131,16 +1131,16 @@ extension WholeArithmetic where Self : RationalArithmetic {
     }
 }
 
-extension WholeArithmetic where Self : RationalNumberType {
-    // MARK: - where Self : RationalNumberType
+extension WholeArithmetic where Self : RationalNumberProtocol {
+    // MARK: - where Self : RationalNumberProtocol
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
     /// Modifies the left by exponentiation with the right.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-    ///   - If `Self` conforms to `RealNumberType`, either
+    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
     ///     - `lhs` must be positive, or
     ///     - `rhs` must be an integer.
     ///
@@ -1261,16 +1261,16 @@ extension WholeArithmetic where Self : UIntFamily {
     }
 }
 
-extension WholeArithmetic where Self : WholeNumberType {
-    // MARK: - where Self : WholeNumberType
+extension WholeArithmetic where Self : WholeNumberProtocol {
+    // MARK: - where Self : WholeNumberProtocol
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
     /// Modifies the left by exponentiation with the right.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerType`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberType`, `rhs` must be an integer.
-    ///   - If `Self` conforms to `RealNumberType`, either
+    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
     ///     - `lhs` must be positive, or
     ///     - `rhs` must be an integer.
     ///

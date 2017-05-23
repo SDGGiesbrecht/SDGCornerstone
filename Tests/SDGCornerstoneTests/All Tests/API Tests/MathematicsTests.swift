@@ -271,8 +271,8 @@ class MathematicsTests : XCTestCase {
         runStrideableTests(start: OneDimensionalPointExample(0), end: OneDimensionalPointExample(1), vector: 1)
     }
 
-    func testPointType() {
-        func runTests<P : PointType>(start: P, distance: P.Vector, end: P) {
+    func testPointProtocol() {
+        func runTests<P : PointProtocol>(start: P, distance: P.Vector, end: P) {
             var variable = start
             variable += distance
             XCTAssert(variable == end)
@@ -288,8 +288,8 @@ class MathematicsTests : XCTestCase {
         runTests(start: 0 as WholeNumber, distance: 3, end: 3)
         runTests(start: 0 as Integer, distance: 3, end: 3)
         runTests(start: 0 as RationalNumber, distance: 3, end: 3)
-        runTests(start: PointTypeExample(0), distance: 3, end: PointTypeExample(3))
-        runTests(start: PointTypeExampleWhereVectorIsSelf(0), distance: PointTypeExampleWhereVectorIsSelf(3), end: PointTypeExampleWhereVectorIsSelf(3))
+        runTests(start: PointProtocolExample(0), distance: 3, end: PointProtocolExample(3))
+        runTests(start: PointProtocolExampleWhereVectorIsSelf(0), distance: PointProtocolExampleWhereVectorIsSelf(3), end: PointProtocolExampleWhereVectorIsSelf(3))
     }
 
     func testRationalArithmetic() {
@@ -332,7 +332,7 @@ class MathematicsTests : XCTestCase {
         #endif
         runTests(Float.self)
         runTests(RationalNumber.self)
-        runTests(RationalNumberTypeExample.self)
+        runTests(RationalNumberProtocolExample.self)
         runTests(RealArithmeticExample.self)
     }
 
@@ -415,8 +415,8 @@ class MathematicsTests : XCTestCase {
         runTests(minuend: 3 as Integer, subtrahend: 2, difference: 1)
         runTests(minuend: 3 as RationalNumber, subtrahend: 2, difference: 1)
         runTests(minuend: SubtractableExample(3), subtrahend: SubtractableExample(2), difference: SubtractableExample(1))
-        runTests(minuend: SubtractableExampleWherePointTypeAndVectorIsSelf(3), subtrahend: SubtractableExampleWherePointTypeAndVectorIsSelf(2), difference: SubtractableExampleWherePointTypeAndVectorIsSelf(1))
-        runTests(minuend: RationalNumberTypeExample(3), subtrahend: RationalNumberTypeExample(2), difference: RationalNumberTypeExample(1))
+        runTests(minuend: SubtractableExampleWherePointProtocolAndVectorIsSelf(3), subtrahend: SubtractableExampleWherePointProtocolAndVectorIsSelf(2), difference: SubtractableExampleWherePointProtocolAndVectorIsSelf(1))
+        runTests(minuend: RationalNumberProtocolExample(3), subtrahend: RationalNumberProtocolExample(2), difference: RationalNumberProtocolExample(1))
         runTests(minuend: RealArithmeticExample(3), subtrahend: RealArithmeticExample(2), difference: RealArithmeticExample(1))
     }
 
@@ -462,9 +462,9 @@ class MathematicsTests : XCTestCase {
         XCTAssertFalse((0, 0, 0, 0, 0, 1) ≥ (0, 0, 0, 0, 1, 1))
     }
 
-    func testVectorType() {
-        XCTAssert(3 × VectorTypeExample(2) == VectorTypeExample(6))
-        XCTAssert(VectorTypeExample(6) ÷ 3 == VectorTypeExample(2))
+    func testVectorProtocol() {
+        XCTAssert(3 × VectorProtocolExample(2) == VectorProtocolExample(6))
+        XCTAssert(VectorProtocolExample(6) ÷ 3 == VectorProtocolExample(2))
     }
 
     func testWholeArithmetic() {
@@ -564,12 +564,12 @@ class MathematicsTests : XCTestCase {
             ("testIntegralArithmetic", testIntegralArithmetic),
             ("testNegatable", testNegatable),
             ("testOneDimensionalPoint", testOneDimensionalPoint),
-            ("testPointType", testPointType),
+            ("testPointProtocol", testPointProtocol),
             ("testRationalArithmetic", testRationalArithmetic),
             ("testRealArithmetic", testRealArithmetic),
             ("testSubtractable", testSubtractable),
             ("testTuple", testTuple),
-            ("testVectorType", testVectorType),
+            ("testVectorProtocol", testVectorProtocol),
             ("testWholeArithmetic", testWholeArithmetic)
         ]
     }

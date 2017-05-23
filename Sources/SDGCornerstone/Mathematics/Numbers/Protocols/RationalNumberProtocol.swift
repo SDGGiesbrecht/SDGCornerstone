@@ -1,5 +1,5 @@
 /*
- WholeNumberType.swift
+ RationalNumberProtocol.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,11 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A type which *only ever* represents whole numbers.
+/// A type which *only ever* represents rational numbers.
 ///
 /// Conformance Requirements:
 ///
-/// - `WholeArithmetic`
-public protocol WholeNumberType : WholeArithmetic {
+/// - `RationalArithmetic`
+public protocol RationalNumberProtocol : RationalArithmetic {
 
 }

@@ -1,5 +1,5 @@
 /*
- VectorType.swift
+ VectorProtocol.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -19,13 +19,13 @@
 /// - `AdditiveArithmetic`
 /// - `static func ×= (lhs: inout Self, rhs: Scalar)`
 /// - `static func ÷= (lhs: inout Self, rhs: Scalar)`
-public protocol VectorType : AdditiveArithmetic {
+public protocol VectorProtocol : AdditiveArithmetic {
 
-    // [_Define Documentation: SDGCornerstone.VectorType.Scalar_]
+    // [_Define Documentation: SDGCornerstone.VectorProtocol.Scalar_]
     // The scalar type.
     associatedtype Scalar
 
-    // [_Define Documentation: SDGCornerstone.VectorType.×(_:scalar:)_]
+    // [_Define Documentation: SDGCornerstone.VectorProtocol.×(_:scalar:)_]
     /// Returns the product of the left times the right.
     ///
     /// - Parameters:
@@ -35,7 +35,7 @@ public protocol VectorType : AdditiveArithmetic {
     /// - MutatingVariant: ×=
     static func × (lhs: Self, rhs: Scalar) -> Self
 
-    // [_Define Documentation: SDGCornerstone.VectorType.×(scalar:_:)_]
+    // [_Define Documentation: SDGCornerstone.VectorProtocol.×(scalar:_:)_]
     /// Returns the product of the left times the right.
     ///
     /// - Parameters:
@@ -43,7 +43,7 @@ public protocol VectorType : AdditiveArithmetic {
     ///     - rhs: A value.
     static func × (lhs: Scalar, rhs: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.VectorType.×=_]
+    // [_Define Documentation: SDGCornerstone.VectorProtocol.×=_]
     /// Modifies the left by multiplication with the right.
     ///
     /// - Parameters:
@@ -53,7 +53,7 @@ public protocol VectorType : AdditiveArithmetic {
     /// - NonmutatingVariant: ×
     static func ×= (lhs: inout Self, rhs: Scalar)
 
-    // [_Define Documentation: SDGCornerstone.VectorType.÷_]
+    // [_Define Documentation: SDGCornerstone.VectorProtocol.÷_]
     /// Returns the quotient of the left divided by the right.
     ///
     /// - Parameters:
@@ -65,7 +65,7 @@ public protocol VectorType : AdditiveArithmetic {
     /// - RecommendedOver: /
     static func ÷ (lhs: Self, rhs: Scalar) -> Self
 
-    // [_Define Documentation: SDGCornerstone.VectorType.÷=_]
+    // [_Define Documentation: SDGCornerstone.VectorProtocol.÷=_]
     /// Modifies the left by dividing it by the right.
     ///
     /// - Parameters:
@@ -78,9 +78,9 @@ public protocol VectorType : AdditiveArithmetic {
     static func ÷= (lhs: inout Self, rhs: Scalar)
 }
 
-extension VectorType {
+extension VectorProtocol {
 
-    // [_Inherit Documentation: SDGCornerstone.VectorType.×(_:scalar:)_]
+    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×(_:scalar:)_]
     /// Returns the product of the left times the right.
     ///
     /// - Parameters:
@@ -94,7 +94,7 @@ extension VectorType {
         return result
     }
 
-    // [_Inherit Documentation: SDGCornerstone.VectorType.×(scalar:_:)_]
+    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×(scalar:_:)_]
     /// Returns the product of the left times the right.
     ///
     /// - Parameters:
@@ -104,7 +104,7 @@ extension VectorType {
         return rhs × lhs
     }
 
-    // [_Inherit Documentation: SDGCornerstone.VectorType.÷_]
+    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.÷_]
     /// Returns the quotient of the left divided by the right.
     ///
     /// - Parameters:

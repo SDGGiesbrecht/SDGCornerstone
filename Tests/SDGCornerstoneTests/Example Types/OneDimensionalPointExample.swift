@@ -36,7 +36,7 @@ struct OneDimensionalPointExample : OneDimensionalPoint {
         return lhs.value == rhs.value
     }
 
-    // PointType
+    // PointProtocol
 
     typealias Vector = Value.Stride
 

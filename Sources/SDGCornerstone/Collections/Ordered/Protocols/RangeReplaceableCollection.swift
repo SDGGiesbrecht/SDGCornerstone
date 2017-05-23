@@ -127,6 +127,33 @@ extension RangeReplaceableCollection {
     }
 }
 
+extension RangeReplaceableCollection where IndexDistance : WholeArithmetic, Indices.Iterator.Element == Index {
+    // MARK: - where IndexDistance : WholeArithmetic, Indices.Iterator.Element == Index
+
+    /// Shuffles the collection.
+    ///
+    /// - Parameters:
+    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    public mutating func shuffle(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) {
+        for i in indices {
+            let originalLocation = distance(from: startIndex, to: i)
+            let newLocation = IndexDistance(randomInRange: 0 ... originalLocation, fromRandomizer: randomizer)
+            let element = remove(at: index(startIndex, offsetBy: originalLocation))
+            insert(element, at: index(startIndex, offsetBy: newLocation))
+        }
+    }
+
+    /// Returns a shuffled collection.
+    ///
+    /// - Parameters:
+    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    public func shuffled(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Self {
+        var result = self
+        result.shuffle(usingRandomizer: randomizer)
+        return result
+    }
+}
+
 extension RangeReplaceableCollection where Iterator.Element : Equatable {
     // MARK: - where Iterator.Element : Equatable
 

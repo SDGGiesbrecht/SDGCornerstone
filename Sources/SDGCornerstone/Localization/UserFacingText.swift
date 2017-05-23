@@ -35,7 +35,7 @@ public struct UserFacingText<Localization : SDGCornerstone.Localization, Argumen
 
     /// Returns the resolved string for the current localization using the specified arguments.
     public func resolved(using arguments: Arguments) -> StrictString {
-        return localize(LocalizationSetting.current.resolved(), arguments)
+        return localize(LocalizationSetting.current.value.resolved(), arguments)
     }
 
     /// Returns the resolved string for the specified localization using the specified arguments.

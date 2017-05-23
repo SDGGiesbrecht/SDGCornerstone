@@ -18,16 +18,16 @@ public struct LocalizationSetting {
     // MARK: - Static Methods
 
     /// The current localization setting.
-    public static var current: LocalizationSetting {
-        // [_Warning: This should be shared so that changes propagate._]
+    public static let current: Shared<LocalizationSetting> = {
 
         // [_Warning: Enable manual in‐source override (e.g. for command line arguments and application preferences)._]
 
         // [_Warning: SDG preferences should be used at this point._]
 
         // [_Warning: System preferences should be used here._]
-        return LocalizationSetting(orderOfPrecedence: [] as [String])
-    }
+
+        return Shared(LocalizationSetting(orderOfPrecedence: [] as [String]))
+    }()
 
     // MARK: - Initialization
 
@@ -56,10 +56,7 @@ public struct LocalizationSetting {
     /// Returns the preferred localization out of those supported by the localization type `L`.
     public func resolved<L : Localization>() -> L {
         for group in orderOfPrecedence {
-
-            let shuffled = group // [_Warning: This should be shuffled._]
-
-            for localization in shuffled {
+            for localization in group.shuffled() {
                 if let result = L(reasonableMatchFor: localization) {
                     return result
                 }

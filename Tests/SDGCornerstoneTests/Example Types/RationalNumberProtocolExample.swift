@@ -1,5 +1,5 @@
 /*
- RationalNumberTypeExample.swift
+ RationalNumberProtocolExample.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -14,7 +14,7 @@
 
 import SDGCornerstone
 
-struct RationalNumberTypeExample : RationalNumberType {
+struct RationalNumberProtocolExample : RationalNumberProtocol {
 
     var value: Double
 
@@ -24,19 +24,19 @@ struct RationalNumberTypeExample : RationalNumberType {
 
     // Addable
 
-    static func += (lhs: inout RationalNumberTypeExample, rhs: RationalNumberTypeExample) {
+    static func += (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
         lhs.value += rhs.value
     }
 
     // Comparable
 
-    static func < (lhs: RationalNumberTypeExample, rhs: RationalNumberTypeExample) -> Bool {
+    static func < (lhs: RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) -> Bool {
         return lhs.value < rhs.value
     }
 
     // Equatable
 
-    static func == (lhs: RationalNumberTypeExample, rhs: RationalNumberTypeExample) -> Bool {
+    static func == (lhs: RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) -> Bool {
         return lhs.value == rhs.value
     }
 
@@ -52,19 +52,19 @@ struct RationalNumberTypeExample : RationalNumberType {
         value = Double(int)
     }
 
-    // PointType
+    // PointProtocol
 
-    typealias Vector = RationalNumberTypeExample
+    typealias Vector = RationalNumberProtocolExample
 
     // RationalArithmetic
 
-    static func ÷= (lhs: inout RationalNumberTypeExample, rhs: RationalNumberTypeExample) {
+    static func ÷= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
         lhs.value ÷= rhs.value
     }
 
     // Subtractable
 
-    static func −= (lhs: inout RationalNumberTypeExample, rhs: RationalNumberTypeExample) {
+    static func −= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
         lhs.value −= rhs.value
     }
 
@@ -74,15 +74,15 @@ struct RationalNumberTypeExample : RationalNumberType {
         value = Double(uInt)
     }
 
-    static func ×= (lhs: inout RationalNumberTypeExample, rhs: RationalNumberTypeExample) {
+    static func ×= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
         lhs.value ×= rhs.value
     }
 
-    mutating func divideAccordingToEuclid(by divisor: RationalNumberTypeExample) {
+    mutating func divideAccordingToEuclid(by divisor: RationalNumberProtocolExample) {
         value.divideAccordingToEuclid(by: divisor.value)
     }
 
-    init(randomInRange range: ClosedRange<RationalNumberTypeExample>, fromRandomizer randomizer: Randomizer) {
+    init(randomInRange range: ClosedRange<RationalNumberProtocolExample>, fromRandomizer randomizer: Randomizer) {
         value = Double(randomInRange: range.lowerBound.value ... range.upperBound.value, fromRandomizer: randomizer)
     }
 }

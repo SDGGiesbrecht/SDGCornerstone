@@ -15,7 +15,7 @@
 /// A type that represents a fixed‐length unsigned integer.
 ///
 /// This protocol exists so that extensions to it can provide shared functionality for `UInt`, `UInt64`, `UInt32`, `UInt16` and `UInt8`.
-public protocol UIntFamily : Addable, AdditiveArithmetic, BitwiseLogic, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, NumericAdditiveArithmetic, OneDimensionalPoint, PointType, Subtractable, UnsignedInteger, WholeArithmetic, WholeNumberType {
+public protocol UIntFamily : Addable, AdditiveArithmetic, BitwiseLogic, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, NumericAdditiveArithmetic, OneDimensionalPoint, PointProtocol, Subtractable, UnsignedInteger, WholeArithmetic, WholeNumberProtocol {
 
     /// Creates a value from an `Int`.
     init(_ value: Int)
@@ -29,9 +29,9 @@ public protocol UIntFamily : Addable, AdditiveArithmetic, BitwiseLogic, CustomPl
 
 extension UInt : UIntFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
@@ -53,27 +53,27 @@ extension UIntMax {
 
 extension UInt64 : UIntFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 
 extension UInt32 : UIntFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 
 extension UInt16 : UIntFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
@@ -81,9 +81,9 @@ extension UInt16 : UIntFamily {
 
 extension UInt8 : UIntFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 

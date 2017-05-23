@@ -108,8 +108,8 @@ extension Addable where Self : Measurement {
     }
 }
 
-extension Addable where Self : PointType, Self.Vector == Self {
-    // MARK: - where Self : PointType, Vector == Self
+extension Addable where Self : PointProtocol, Self.Vector == Self {
+    // MARK: - where Self : PointProtocol, Vector == Self
 
     // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+_]
     /// Returns the sum of the two values.
@@ -120,13 +120,13 @@ extension Addable where Self : PointType, Self.Vector == Self {
     ///
     /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Self) -> Self {
-        // Disambiguate Addable.+ vs PointType.+
+        // Disambiguate Addable.+ vs PointProtocol.+
         return addAsAddable(lhs, rhs)
     }
 }
 
-extension Addable where Self : PointType, Self : Strideable, Self.Vector == Self, Self.Stride == Self {
-    // MARK: - where Self : PointType, Self : Strideable, Vector == Self, Stride == Self
+extension Addable where Self : PointProtocol, Self : Strideable, Self.Vector == Self, Self.Stride == Self {
+    // MARK: - where Self : PointProtocol, Self : Strideable, Vector == Self, Stride == Self
 
     // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+_]
     /// Returns the sum of the two values.
@@ -137,7 +137,7 @@ extension Addable where Self : PointType, Self : Strideable, Self.Vector == Self
     ///
     /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Self) -> Self {
-        // Disambiguate Addable.+ vs PointType.+ vs Strideable.+
+        // Disambiguate Addable.+ vs PointProtocol.+ vs Strideable.+
         return addAsAddable(lhs, rhs)
     }
 }

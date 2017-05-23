@@ -551,6 +551,27 @@ extension Collection where Iterator.Element : Equatable, SubSequence.Iterator.El
     }
 }
 
+extension Collection where IndexDistance : WholeArithmetic {
+    // MARK: - where IndexDistance : WholeArithmetic
+
+    /// Returns a random index from the collection.
+    ///
+    /// - Parameters:
+    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    public func randomIndex(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Index {
+        let random = IndexDistance(randomInRange: 0 ... count − 1, fromRandomizer: randomizer)
+        return index(startIndex, offsetBy: random)
+    }
+
+    /// Returns a random element from the collection.
+    ///
+    /// - Parameters:
+    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    public func randomElement(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Iterator.Element {
+        return self[randomIndex(fromRandomizer: randomizer)]
+    }
+}
+
 extension Collection where Index : Hashable, Indices.Iterator.Element == Index {
     // MARK: - where Index : Hashable, Indices.Iterator.Element == Index
 

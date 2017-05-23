@@ -206,7 +206,7 @@ extension Subtractable where Self : IntFamily, Self.Vector == Self, Self.Stride 
     /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self {
         return lhs - rhs
-        // Disambiguate Subtractable(where IntFamily).− vs Subtractable(where PointType, Strideable, Stride == Self).−
+        // Disambiguate Subtractable(where IntFamily).− vs Subtractable(where PointProtocol, Strideable, Stride == Self).−
     }
 }
 
@@ -242,8 +242,8 @@ extension Subtractable where Self : Measurement {
     }
 }
 
-extension Subtractable where Self : PointType, Self.Vector == Self {
-    // MARK: - where Self : PointType, Vector == Self
+extension Subtractable where Self : PointProtocol, Self.Vector == Self {
+    // MARK: - where Self : PointProtocol, Vector == Self
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
     /// Returns the difference of the left minus the right.
@@ -256,13 +256,13 @@ extension Subtractable where Self : PointType, Self.Vector == Self {
     ///
     /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self { // [_Exempt from Code Coverage_] Apparently unreachable.
-        // Disambiguate Subtractable.− vs PointType.−
+        // Disambiguate Subtractable.− vs PointProtocol.−
         return subtractAsSubtractable(lhs, rhs)
     }
 }
 
-extension Subtractable where Self : PointType, Self : Strideable, Self.Vector == Self, Self.Stride == Self {
-    // MARK: - where Self : PointType, Self : Strideable, Vector == Self, Stride == Self
+extension Subtractable where Self : PointProtocol, Self : Strideable, Self.Vector == Self, Self.Stride == Self {
+    // MARK: - where Self : PointProtocol, Self : Strideable, Vector == Self, Stride == Self
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
     /// Returns the difference of the left minus the right.
@@ -275,7 +275,7 @@ extension Subtractable where Self : PointType, Self : Strideable, Self.Vector ==
     ///
     /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self {
-        // Disambiguate Subtractable(where PointType).− vs PointType(where Strideable).−
+        // Disambiguate Subtractable(where PointProtocol).− vs PointProtocol(where Strideable).−
         return subtractAsSubtractable(lhs, rhs)
     }
 }

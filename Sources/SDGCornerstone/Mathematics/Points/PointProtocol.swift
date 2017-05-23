@@ -1,5 +1,5 @@
 /*
- PointType.swift
+ PointProtocol.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -14,20 +14,20 @@
 
 /// A type that can be used with `+(_:_:)` and `−(_:_:)` in conjunction with an associated `Vector` type.
 ///
-/// - Note: Unlike `Strideable`, `PointType`s do not need to conform to `Comparable`, allowing conformance by two‐dimensional points, etc.
+/// - Note: Unlike `Strideable`, types conforming to `PointProtocol` do not need to conform to `Comparable`, allowing conformance by two‐dimensional points, etc.
 ///
 /// Conformance Requirements:
 ///
 /// - `Equatable`
 /// - `static func += (lhs: inout Self, rhs: Vector)`
 /// - `static func − (lhs: Self, rhs: Self) -> Vector`
-public protocol PointType : Equatable {
+public protocol PointProtocol : Equatable {
 
-    // [_Define Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Define Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     associatedtype Vector : Negatable
 
-    // [_Define Documentation: SDGCornerstone.PointType.+_]
+    // [_Define Documentation: SDGCornerstone.PointProtocol.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
     ///
     /// - Parameters:
@@ -37,7 +37,7 @@ public protocol PointType : Equatable {
     /// - MutatingVariant: +=
     static func + (lhs: Self, rhs: Vector) -> Self
 
-    // [_Define Documentation: SDGCornerstone.PointType.+=_]
+    // [_Define Documentation: SDGCornerstone.PointProtocol.+=_]
     /// Moves the point on the left by the vector on the right.
     ///
     /// - Parameters:
@@ -47,7 +47,7 @@ public protocol PointType : Equatable {
     /// - NonmutatingVariant: +
     static func += (lhs: inout Self, rhs: Vector)
 
-    // [_Define Documentation: SDGCornerstone.PointType.−(_:vector:)_]
+    // [_Define Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the inverse of the vector on the right.
     ///
     /// - Parameters:
@@ -58,7 +58,7 @@ public protocol PointType : Equatable {
     //static func − (lhs: Self, rhs: Vector) -> Self
     // [_Workaround: The above line is temporarily commented because it falsely triggers “ambiguous use of operator” errors. See testSubtractable. (Swift 3.1.0)_]
 
-    // [_Define Documentation: SDGCornerstone.PointType.−_]
+    // [_Define Documentation: SDGCornerstone.PointProtocol.−_]
     /// Returns the vector that leads from the point on the left to the point on the right.
     ///
     /// - Parameters:
@@ -66,7 +66,7 @@ public protocol PointType : Equatable {
     ///     - rhs: The startpoint.
     static func − (lhs: Self, rhs: Self) -> Vector
 
-    // [_Define Documentation: SDGCornerstone.PointType.−=_]
+    // [_Define Documentation: SDGCornerstone.PointProtocol.−=_]
     /// Moves the point on the left by the inverse of the vector on the right.
     ///
     /// - Parameters:
@@ -77,14 +77,14 @@ public protocol PointType : Equatable {
     static func −= (lhs: inout Self, rhs: Vector)
 }
 
-extension PointType {
+extension PointProtocol {
 
-    fileprivate static func addAsPointType(_ lhs: Self, _ rhs: Vector) -> Self {
+    fileprivate static func addAsPointProtocol(_ lhs: Self, _ rhs: Vector) -> Self {
         var result = lhs
         result += rhs
         return result
     }
-    // [_Inherit Documentation: SDGCornerstone.PointType.+_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
     ///
     /// - Parameters:
@@ -93,15 +93,15 @@ extension PointType {
     ///
     /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Vector) -> Self {
-        return addAsPointType(lhs, rhs)
+        return addAsPointProtocol(lhs, rhs)
     }
 
-    fileprivate static func subtractAsPointType(_ lhs: Self, _ rhs: Vector) -> Self {
+    fileprivate static func subtractAsPointProtocol(_ lhs: Self, _ rhs: Vector) -> Self {
         var result = lhs
         result −= rhs
         return result
     }
-    // [_Inherit Documentation: SDGCornerstone.PointType.−(_:vector:)_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the inverse of the vector on the right.
     ///
     /// - Parameters:
@@ -110,10 +110,10 @@ extension PointType {
     ///
     /// - MutatingVariant: −=
     public static func − (lhs: Self, rhs: Vector) -> Self {
-        return subtractAsPointType(lhs, rhs)
+        return subtractAsPointProtocol(lhs, rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.−=_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−=_]
     /// Moves the point on the left by the inverse of the vector on the right.
     ///
     /// - Parameters:
@@ -126,10 +126,10 @@ extension PointType {
     }
 }
 
-extension PointType where Self.Vector == Self {
+extension PointProtocol where Self.Vector == Self {
     // MARK: - Self.Vector == Self
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.−(_:vector:)_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the inverse of the vector on the right.
     ///
     /// - Parameters:
@@ -139,14 +139,14 @@ extension PointType where Self.Vector == Self {
     /// - MutatingVariant: −=
     public static func − (lhs: Self, rhs: Vector) -> Self { // [_Exempt from Code Coverage_] Apparently unreachable.
         // Disambiguate Self − Vector = Self vs Self − Self = Vector
-        return subtractAsPointType(lhs, rhs)
+        return subtractAsPointProtocol(lhs, rhs)
     }
 }
 
-extension PointType where Self : IntXFamily {
+extension PointProtocol where Self : IntXFamily {
     // MARK: - where Self : IntXFamily
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.+_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
     ///
     /// - Parameters:
@@ -158,7 +158,7 @@ extension PointType where Self : IntXFamily {
         return lhs.advanced(by: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.+=_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
     /// Moves the point on the left by the vector on the right.
     ///
     /// - Parameters:
@@ -170,7 +170,7 @@ extension PointType where Self : IntXFamily {
         lhs = lhs.advanced(by: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.−_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
     /// Returns the vector that leads from the point on the left to the point on the right.
     ///
     /// - Parameters:
@@ -181,10 +181,10 @@ extension PointType where Self : IntXFamily {
     }
 }
 
-extension PointType where Self : Strideable {
+extension PointProtocol where Self : Strideable {
     // MARK: - where Self : Strideable
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.+_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
     ///
     /// - Parameters:
@@ -193,15 +193,15 @@ extension PointType where Self : Strideable {
     ///
     /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Vector) -> Self {
-        // Disambiguate PointType.+ vs Strideable.+
-        return addAsPointType(lhs, rhs)
+        // Disambiguate PointProtocol.+ vs Strideable.+
+        return addAsPointProtocol(lhs, rhs)
     }
 }
 
-extension PointType where Self : UIntFamily {
+extension PointProtocol where Self : UIntFamily {
     // MARK: - where Self : UIntFamily
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.+_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
     ///
     /// - Parameters:
@@ -213,7 +213,7 @@ extension PointType where Self : UIntFamily {
         return lhs.advanced(by: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.+=_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
     /// Moves the point on the left by the vector on the right.
     ///
     /// - Parameters:
@@ -225,7 +225,7 @@ extension PointType where Self : UIntFamily {
         lhs = lhs.advanced(by: rhs)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.−_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
     /// Returns the vector that leads from the point on the left to the point on the right.
     ///
     /// - Parameters:

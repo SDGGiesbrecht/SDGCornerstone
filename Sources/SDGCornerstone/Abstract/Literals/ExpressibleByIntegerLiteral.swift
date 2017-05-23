@@ -13,7 +13,7 @@
  */
 
 extension ExpressibleByIntegerLiteral where Self : WholeArithmetic {
-    // MARK: - where Self : WholeNumberType
+    // MARK: - where Self : WholeNumberProtocol
 
     // [_Define Documentation: SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:)_]
     /// Creates an instance from an integer literal.

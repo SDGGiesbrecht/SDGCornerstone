@@ -52,7 +52,7 @@ struct RealArithmeticExample : RealArithmetic {
         value = Double(int)
     }
 
-    // PointType
+    // PointProtocol
 
     typealias Vector = RealArithmeticExample
 

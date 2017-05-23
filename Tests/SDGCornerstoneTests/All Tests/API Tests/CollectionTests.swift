@@ -415,7 +415,7 @@ class CollectionTests : XCTestCase {
 
     func testRangeReplaceableCollection() {
         func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Iterator.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
-            where C.Iterator.Element : Equatable {
+            where C.Iterator.Element : Equatable, C.IndexDistance : WholeArithmetic, C.Indices.Iterator.Element == C.Index {
 
                 var collection = start
                 collection += appendix
@@ -428,6 +428,33 @@ class CollectionTests : XCTestCase {
                 XCTAssert(start.prepending(element).elementsEqual(withElementPrepended))
 
                 XCTAssert(start.truncated(at: truncatingIndex).elementsEqual(truncated))
+
+                let forDrawing = start.appending(element)
+                var sameOccurred = false
+                var differentOccurred = false
+                for _ in 1 ... 100 {
+                    let random = forDrawing.randomElement()
+                    if random == element {
+                        sameOccurred = true
+                    } else {
+                        differentOccurred = true
+                    }
+                }
+                XCTAssert(sameOccurred)
+                XCTAssert(differentOccurred)
+
+                var last = start
+                var same = true
+                for _ in 1 ... 100 {
+                    if same == true {
+                        let next = last.shuffled()
+                        if ¬next.elementsEqual(last) {
+                            same = false
+                        }
+                        last = next
+                    }
+                }
+                XCTAssert(¬same)
         }
 
         runTests(start: [1, 2, 3],
