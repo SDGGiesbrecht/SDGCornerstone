@@ -29,7 +29,9 @@ class PersistenceTests : XCTestCase {
         let shared = UserDefaults.standard.sharedValue(forKey: testKey)
         XCTAssert(shared.value == nil, "Unexpected value: \(String(describing: shared.value))")
 
+        let bindingsCompleted = keyValueObservingExpectation(for: defaults, keyPath: testKey, expectedValue: true)
         defaults.set(true, forKey: testKey)
+        wait(for: [bindingsCompleted], timeout: 10)
         XCTAssert(defaults.bool(forKey: testKey) == true, "Bindings failed: \(defaults.bool(forKey: testKey)) ≠ true")
         XCTAssert(shared.value as? Bool == true, "Bindings failed: \(String(describing: shared.value as? Bool)) ≠ true")
 
