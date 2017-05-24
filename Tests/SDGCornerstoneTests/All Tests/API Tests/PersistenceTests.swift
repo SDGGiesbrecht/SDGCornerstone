@@ -30,8 +30,8 @@ class PersistenceTests : XCTestCase {
         XCTAssert(shared.value == nil, "Unexpected value: \(String(describing: shared.value))")
 
         defaults.set(true, forKey: testKey)
-        XCTAssert(defaults.bool(forKey: testKey) == true)
-        XCTAssert(shared.value as? Bool == true)
+        XCTAssert(defaults.bool(forKey: testKey) == true, "Bindings failed: \(defaults.bool(forKey: testKey)) ≠ true")
+        XCTAssert(shared.value as? Bool == true, "Bindings failed: \(String(describing: shared.value as? Bool)) ≠ true")
 
         defaults.set("A", forKey: testKey)
         XCTAssert(defaults.string(forKey: testKey) == "A")
@@ -41,6 +41,10 @@ class PersistenceTests : XCTestCase {
         shared.value = data
         XCTAssert(shared.value as? Data == data)
         XCTAssert(defaults.data(forKey: testKey) == data)
+
+        shared.value = nil
+        XCTAssert(shared.value == nil)
+        XCTAssert(defaults.object(forKey: testKey) == nil)
 
         defaults.removeObject(forKey: testKey)
     }

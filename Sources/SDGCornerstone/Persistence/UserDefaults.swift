@@ -33,7 +33,6 @@ extension UserDefaults {
                 } else {
                     return false
                 }
-
             } else {
                 // Only the right is nil.
                 return false
