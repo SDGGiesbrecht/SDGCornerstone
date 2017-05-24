@@ -71,6 +71,7 @@ extension UserDefaults {
         }
     }
 
+    #if !os(Linux)
     private class KVOObserver : NSObject {
         fileprivate static var observers: [UserDefaults: KVOObserver] = [:]
         fileprivate static func observer(forDefaults defaults: UserDefaults) -> KVOObserver {
@@ -94,9 +95,13 @@ extension UserDefaults {
             }
         }
     }
+    #endif
 
     private static var sharedValues: [UserDefaults: [String: Shared<Any?>]] = [:]
+    // [_Workaround: The warning below should be removed once Linux has a means of observing properties. (Swift 3.1.0)_]
     /// Returns the shared value for the specified key.
+    ///
+    /// - Warning: Modules that may be used on Linux should take note of keys accessed as shared values and never attempt to set those keys by any means other than through the shared value. On Linux, this will cause the shared value to fall out of sync with the value stored by `UserDefaults`, because Linux lacks the Objective‐C runtime and KVO necessary to observe changes made through other APIs.
     ///
     /// - Parameters:
     ///     - key: The key.
@@ -109,7 +114,9 @@ extension UserDefaults {
             shared.register(observer: ChangeObserver.observer(forDefaults: self), identifier: key)
             return shared
         }
-        addObserver(KVOObserver.observer(forDefaults: self), forKeyPath: key, options: [.new], context: nil)
+        #if !os(Linux)
+            addObserver(KVOObserver.observer(forDefaults: self), forKeyPath: key, options: [.new], context: nil)
+        #endif
 
         return result
     }
