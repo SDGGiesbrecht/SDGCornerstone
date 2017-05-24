@@ -121,6 +121,9 @@
               <li class="nav-group-task">
                 <a href="../Extensions/UnicodeScalar.html">UnicodeScalar</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UserDefaults.html">UserDefaults</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -610,6 +613,8 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Cancels an observer. The observer will be no longer be notified when the value changes.</p>
+
+<p>This method is only necessary when an observer needs to persist after cancelling observation. In most cases, cancellation is automated through ARC.</p>
 
                       </div>
                       <div class="declaration">

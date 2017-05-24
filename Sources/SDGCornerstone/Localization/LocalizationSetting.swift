@@ -140,6 +140,11 @@ public struct LocalizationSetting : Equatable {
     // MARK: - Equatable
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    /// Returns `true` if the two values are equal.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
     public static func == (lhs: LocalizationSetting, rhs: LocalizationSetting) -> Bool {
         return lhs.orderOfPrecedence.elementsEqual(rhs.orderOfPrecedence) { (leftGroup: [String], rightGroup: [String]) -> Bool in
             return Set(leftGroup) == Set(rightGroup)

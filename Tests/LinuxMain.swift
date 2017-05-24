@@ -23,6 +23,7 @@ XCTMain([
     testCase(LogicTests.allTests),
     testCase(LocalizationTests.allTests),
     testCase(MathematicsTests.allTests),
+    testCase(PersistenceTests.allTests),
     testCase(RandomizationTests.allTests),
     testCase(ReferenceTests.allTests),
     testCase(TextTests.allTests),
