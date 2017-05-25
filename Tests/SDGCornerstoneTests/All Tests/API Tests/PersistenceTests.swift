@@ -19,9 +19,13 @@ import SDGCornerstone
 
 class PersistenceTests : XCTestCase {
 
+    func testPreferenceSet() {
+
+    }
+
     static var allTests: [(String, (PersistenceTests) -> () throws -> Void)] {
         return [
-            // ("testUserDefaults", testUserDefaults)
+            ("testPreferenceSet", testPreferenceSet)
         ]
     }
 }
