@@ -43,10 +43,9 @@ class PersistenceTests : XCTestCase {
             XCTAssert(shared.value as? String == "A")
         #endif
 
-        let data = Data(bytes: [1, 2, 3])
-        shared.value = data
-        XCTAssert(shared.value as? Data == data, "Unexpected shared value: \(String(describing: shared.value)) ≠ \(data)")
-        XCTAssert(defaults.data(forKey: testKey) == data, "Unexpected value: \(String(describing: defaults.object(forKey: testKey))) ≠ \(data)")
+        shared.value = 10
+        XCTAssert(shared.value as? Int == 10, "Unexpected shared value: \(String(describing: shared.value)) ≠ 10")
+        XCTAssert(defaults.integer(forKey: testKey) == 10, "Unexpected value: \(String(describing: defaults.object(forKey: testKey))) ≠ 10")
 
         shared.value = nil
         XCTAssert(shared.value == nil, "Unexpected shared value: \(String(describing: shared.value)) ≠ nil")

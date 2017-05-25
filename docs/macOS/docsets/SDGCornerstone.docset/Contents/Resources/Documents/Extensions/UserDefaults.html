@@ -411,6 +411,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the shared value for the specified key.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>Modules that may be used on Linux should take note of keys accessed as shared values and never attempt to set those keys by any means other than through the shared value. On Linux, this will cause the shared value to fall out of sync with the value stored by <code>UserDefaults</code>, because Linux lacks the Objective‐C runtime and KVO necessary to observe changes made through other APIs.</p>
+
+</div>
 
                       </div>
                       <div class="declaration">
