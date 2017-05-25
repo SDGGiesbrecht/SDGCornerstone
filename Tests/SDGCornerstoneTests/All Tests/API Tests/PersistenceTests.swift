@@ -32,13 +32,13 @@ class PersistenceTests : XCTestCase {
         #if !os(Linux)
             // [_Workaround: These should be re‐enabled once Linux has a means of observing properties. (Swift 3.1.0)_]
 
-            let bindingsCompleted = keyValueObservingExpectation(for: defaults, keyPath: testKey, expectedValue: true)
             defaults.set(true, forKey: testKey)
-            wait(for: [bindingsCompleted], timeout: 120)
+            while defaults.object(forKey: testKey) == nil {} // Wait for bindings.
             XCTAssert(defaults.bool(forKey: testKey) == true, "Bindings failed: \(defaults.bool(forKey: testKey)) ≠ true")
             XCTAssert(shared.value as? Bool == true, "Bindings failed: \(String(describing: shared.value as? Bool)) ≠ true")
 
             defaults.set("A", forKey: testKey)
+            while defaults.bool(forKey: testKey) {} // Wait for bindings.
             XCTAssert(defaults.string(forKey: testKey) == "A")
             XCTAssert(shared.value as? String == "A")
         #endif
