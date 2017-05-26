@@ -38,7 +38,7 @@ public protocol FloatFamily : Addable, AdditiveArithmetic, BinaryFloatingPoint, 
     static var ln2: Self { get }
 }
 
-extension Double : FloatFamily {
+extension Double : FloatFamily, PropertyListValue {
 
     // MARK: - FloatFamily
 
@@ -61,7 +61,7 @@ extension Double : FloatFamily {
 
 #if !(os(Linux) || LinuxDocs)
 
-    extension CGFloat : FloatFamily {
+    extension CGFloat : FloatFamily, PropertyListValue {
 
         // MARK: - CustomDebugStringConvertible
 
@@ -127,7 +127,7 @@ extension Double : FloatFamily {
     }
 #endif
 
-extension Float : FloatFamily {
+extension Float : FloatFamily, PropertyListValue {
 
     // MARK: - FloatFamily
 

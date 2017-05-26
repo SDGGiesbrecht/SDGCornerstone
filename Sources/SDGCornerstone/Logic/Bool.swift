@@ -84,7 +84,7 @@ infix operator ∨: LogicalDisjunctionPrecedence
 /// - NonmutatingVariant: ∨
 infix operator ∨=: AssignmentPrecedence
 
-extension Bool : Comparable {
+extension Bool : Comparable, PropertyListValue {
 
     // MARK: - Logical Operatiors
 

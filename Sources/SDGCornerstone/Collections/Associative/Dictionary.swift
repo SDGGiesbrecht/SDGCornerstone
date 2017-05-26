@@ -12,7 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Dictionary {
+// [_Workaround: Should only conform to PropertyListValue when keys are `String` and values conform to `PropertyListValue`. Currently not constrainable. (Swift 3.1.0)_]
+extension Dictionary : PropertyListValue {
 
     // MARK: - Initialization
 

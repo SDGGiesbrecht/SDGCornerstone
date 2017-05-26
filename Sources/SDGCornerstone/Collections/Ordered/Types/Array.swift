@@ -17,7 +17,8 @@ public protocol ArrayFamily : CustomDebugStringConvertible, CustomReflectable, C
 
 }
 
-extension Array : ArrayFamily {}
+// [_Workaround: Should only conform to PropertyListValue when values conform to `PropertyListValue`. Currently not constrainable. (Swift 3.1.0)_]
+extension Array : ArrayFamily, PropertyListValue {}
 extension ArraySlice : ArrayFamily {}
 extension ContiguousArray : ArrayFamily {}
 

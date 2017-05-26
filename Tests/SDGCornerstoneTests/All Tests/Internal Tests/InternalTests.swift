@@ -24,6 +24,8 @@ class InternalTests : XCTestCase {
     }
 
     func testUserDefaults() {
+        // [_Warning: Needs rewriting._]
+        /*
         #if !os(Linux)
 
             let testKey = "SDGTestKey"
@@ -54,6 +56,7 @@ class InternalTests : XCTestCase {
             defaults.removeObject(forKey: testKey)
 
         #endif
+ */
     }
 
     func testWholeNumberBinaryView() {
