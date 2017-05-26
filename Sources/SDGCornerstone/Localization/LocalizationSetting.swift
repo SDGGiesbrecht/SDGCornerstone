@@ -67,7 +67,6 @@ public struct LocalizationSetting : Equatable {
         fileprivate static let defaultObserver = ChangeObserver()
         fileprivate func valueChanged(for identifier: String) {
 
-            // [_Warning: This is probably unnecessary now._]
             if readyToObserve { // Prevent circularity until resolveCurrentlocalization() has completed once and all component variables are initialized.
 
                 let new = LocalizationSetting.resolveCurrentLocalization()
