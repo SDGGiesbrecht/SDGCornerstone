@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/*
-
 import Foundation
 
 // [_Warning: Nothing here is thread safe. All of it could occur in a serial background queue?_]
@@ -72,7 +70,9 @@ open class Preferences : SharedValueObserver {
     /// Accesses the property list value for the specified key.
     public subscript(key: String) -> Shared<PropertyListValue?> {
         return cached(in: &values[key]) {
-            Shared(contents[key])
+            let shared = Shared(contents[key])
+            shared.register(observer: self, identifier: key, reportInitialState: false)
+            return shared
         }
     }
 
@@ -85,15 +85,7 @@ open class Preferences : SharedValueObserver {
 
         #else
 
-            guard let defaults = UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) else {
-                preconditionFailure("Failed to load user defaults for \(possibleDebugDomain).")
-            }
-            guard let result = defaults as? [String: PropertyListValue] else {
-                preconditionFailure("Defaults for \(possibleDebugDomain) are corrupt.")
-            }
-
-            return result
-
+            return UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) as? [String: PropertyListValue] ?? [:]
         #endif
     }
     private func load() -> [String: PropertyListValue] {
@@ -121,7 +113,7 @@ open class Preferences : SharedValueObserver {
         for key in Set(possibleChanges.keys) ∪ Set(contents.keys) where key ≠ ignoredKey {
             let possibleChange = possibleChanges[key]
 
-            if possibleChange ≠ contents[key] {
+            if possibleChange?.equatableRepresentation ≠ contents[key]?.equatableRepresentation {
                 contents[key] = possibleChange
                 changes.append((key, possibleChange))
             }
@@ -153,28 +145,15 @@ open class Preferences : SharedValueObserver {
         contents[identifier] = shared.value
         store()
     }
-}*/
+}
 
 /*
+
+ // [_Warning: Remove this once it is implemented._]
  /// A set of preferences.
  public class PreferenceSet: NSObject /* KVC */ {
 
  // MARK: - Entries
-
- /// Sets a preference.
- public final func setPreference(propertyListValue: PropertyListValue?, forKey key: String) {
- assertForeground()
-
- willChangeValueForKey(key)
- if let storageValue = propertyListValue {
- contents[key] = storageValue
- } else {
- contents.removeValueForKey(key)
- }
- let cocoa = contents.mapValues() { $0.cocoaValue }
- NSUserDefaults.standardUserDefaults().setPersistentDomain(cocoa, forName: domain)
- didChangeValueForKey(key)
- }
 
  /// Resets the entire preference set.
  public final func reset() {

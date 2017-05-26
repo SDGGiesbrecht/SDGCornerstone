@@ -49,29 +49,20 @@ public class Shared<Value> {
     ///
     /// - Parameters:
     ///     - observer: The observer.
+    ///     - identifier: An identifier for the shared value. If provided, it can be used later to differentiate between several values watched by the same observer.
+    ///     - reportInitialState: If `true`, the observer will receive its first notification immediately to report the initial state. If `false`, the observer will not be notified until the state actually changes.
     ///
     /// - SeeAlso: `valueChanged(for:)`
-    public func register(observer: SharedValueObserver) {
-        register(observer: observer, identifier: "")
-    }
-
-    /// Registers an observer. The observer will be notified when the value changes.
-    ///
-    /// The observer will receive its first such message immediately.
-    ///
-    /// - Parameters:
-    ///     - observer: The observer.
-    ///     - identifier: An identifier for the shared value. This can be used to differentiate between several values watched by the same observer.
-    ///
-    /// - SeeAlso: `valueChanged(for:)`
-    public func register(observer: SharedValueObserver, identifier: String) {
+    public func register(observer: SharedValueObserver, identifier: String = "", reportInitialState: Bool = true) {
 
         // Prevent duplicates.
         cancel(observer: observer)
 
         // Register and notify.
         observers.append((Weak(observer), identifier))
-        observer.valueChanged(for: identifier)
+        if reportInitialState {
+            observer.valueChanged(for: identifier)
+        }
     }
 
     /// Cancels an observer. The observer will be no longer be notified when the value changes.
