@@ -43,11 +43,13 @@ class PersistenceTests : XCTestCase {
         preferences[testKey].value = true
         #if os(Linux)
             let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
-            XCTAssertNoThrow({
+            do {
                 let data = try Data(contentsOf: url)
                 let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
                 XCTAssert(preferences[testKey] as? Bool == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
-            })
+            } catch let error {
+                XCTFail("An error occurred while verifying write test: \(error)")
+            }
         #else
             // [_Warning: This should use centralized functions._]
             var shell = Process()
@@ -67,10 +69,12 @@ class PersistenceTests : XCTestCase {
 
         let stringValue = "value"
         #if os(Linux)
-            XCTAssertNoThrow({
+            do {
                 let data = try PropertyListSerialization.data(fromPropertyList: [externalTestKey: stringValue], format: .xml, options: 0)
                 try data.write(to: url, options: [.atomic])
-            })
+            } catch let error {
+                XCTFail("An error occurred while setting up read test: \(error)")
+            }
         #else
             // [_Warning: This should use centralized functions._]
             shell = Process()
