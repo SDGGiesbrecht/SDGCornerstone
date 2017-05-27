@@ -90,8 +90,8 @@ class PersistenceTests : XCTestCase {
         XCTAssert(preferences[externalTestKey].value?.asString == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
 
         preferences.reset()
-        XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(preferences[testKey].value) ≠ nil")
-        XCTAssert(preferences[externalTestKey].value == nil, "Unexpected value: \(preferences[externalTestKey].value) ≠ nil")
+        XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")
+        XCTAssert(preferences[externalTestKey].value == nil, "Unexpected value: \(String(describing: preferences[externalTestKey].value)) ≠ nil")
     }
 
     func testPropertyList() {
