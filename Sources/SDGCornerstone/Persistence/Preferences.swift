@@ -99,7 +99,10 @@ open class Preferences : SharedValueObserver {
         #if os(Linux)
 
             do {
-                let url = FileManager.default.homeDirectoryForCurrentUser
+                // let url = FileManager.default.homeDirectoryForCurrentUser
+                // [_Workaround: The above has no implementation yet. (Swift 3.1.0)_]
+                let url = URL(fileURLWithPath: NSHomeDirectory())
+
                 let data = try Data(contentsOf: url.appendingPathComponent(".config/\(possibleDebugDomain)"))
                 return try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
             } catch {
