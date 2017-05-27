@@ -78,32 +78,22 @@ open class Preferences : SharedValueObserver {
 
     /// Resets all properties to nil.
     public func reset() {
-
-        #if os(Linux)
-
-            // [_Warning: No implementation yet._]
-
-        #else
-
-            UserDefaults.standard.setPersistentDomain([:], forName: possibleDebugDomain)
-
-        #endif
-
+        store([:])
         synchronize()
     }
 
     // MARK: - Storage
+
+    #if os(Linux)
+    private static let directory = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config")
+    #endif
 
     private static func load(for possibleDebugDomain: String) -> [String: PropertyListValue] {
 
         #if os(Linux)
 
             do {
-                // let url = FileManager.default.homeDirectoryForCurrentUser
-                // [_Workaround: The above has no implementation yet. (Swift 3.1.0)_]
-                let url = URL(fileURLWithPath: NSHomeDirectory())
-
-                let data = try Data(contentsOf: url.appendingPathComponent(".config/\(possibleDebugDomain)"))
+                let data = try Data(contentsOf: Preferences.directory.appendingPathComponent(possibleDebugDomain))
                 return try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
             } catch {
                 return [:]
@@ -121,17 +111,22 @@ open class Preferences : SharedValueObserver {
         return Preferences.load(for: possibleDebugDomain)
     }
 
-    private func store() {
+    private func store(_ preferences: [String: PropertyListValue]) {
 
         #if os(Linux)
 
-            // [_Warning: No implementation yet._]
+            if let data = try? PropertyListSerialization.data(fromPropertyList: preferences, format: .xml, options: 0) {
+                try? data.write(to: Preferences.directory.appendingPathComponent(possibleDebugDomain), options: [.atomic])
+            }
 
         #else
 
-            UserDefaults.standard.setPersistentDomain(contents, forName: possibleDebugDomain)
+            UserDefaults.standard.setPersistentDomain(preferences, forName: possibleDebugDomain)
 
         #endif
+    }
+    private func store() {
+        store(contents)
     }
 
     private func synchronize(ignoring ignoredKey: String? = nil) {
