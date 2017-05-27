@@ -46,7 +46,7 @@ class PersistenceTests : XCTestCase {
             do {
                 let data = try Data(contentsOf: url)
                 let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
-                XCTAssert(preferences[testKey].asBool == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
+                XCTAssert(preferences[testKey]?.asBool == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
             } catch let error {
                 XCTFail("An error occurred while verifying write test: \(error)")
             }
@@ -86,12 +86,12 @@ class PersistenceTests : XCTestCase {
 
         let causeSynchronization = "CauseSynchronization"
         preferences[testKey].value = causeSynchronization
-        XCTAssert(preferences[testKey].value?.asString == causeSynchronization)
+        XCTAssert(preferences[testKey].value?.asString == causeSynchronization, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ \(causeSynchronization)")
         XCTAssert(preferences[externalTestKey].value?.asString == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
 
         preferences.reset()
-        XCTAssert(preferences[testKey].value == nil)
-        XCTAssert(preferences[externalTestKey].value == nil)
+        XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(preferences[testKey].value) ≠ nil")
+        XCTAssert(preferences[externalTestKey].value == nil, "Unexpected value: \(preferences[externalTestKey].value) ≠ nil")
     }
 
     func testPropertyList() {
