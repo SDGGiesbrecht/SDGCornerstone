@@ -50,7 +50,7 @@ open class Preferences : SharedValueObserver {
         assert(Preferences.domains[domain] == nil, "Detected duplicate initialization of \(domain). Call preferences(forDomain:) instead.")
 
         self.domain = domain
-        let possibleDebugDomain = BuildConfiguration.current == .debug ? domain + ".debug" : domain
+        let possibleDebugDomain = BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Code Coverage_]
         self.possibleDebugDomain = possibleDebugDomain
 
         contents = Preferences.load(for: possibleDebugDomain)
