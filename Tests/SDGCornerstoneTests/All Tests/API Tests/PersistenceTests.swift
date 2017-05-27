@@ -45,7 +45,7 @@ class PersistenceTests : XCTestCase {
             let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
             do {
                 let data = try Data(contentsOf: url)
-                let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil).asDictionary ?? [:]
+                let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
                 XCTAssert(preferences[testKey].asBool == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
             } catch let error {
                 XCTFail("An error occurred while verifying write test: \(error)")
