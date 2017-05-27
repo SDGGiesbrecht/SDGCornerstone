@@ -241,6 +241,7 @@ extension Shared where Value == PropertyListValue? {
                             return nil
                         }
                     }
+                    return result
                 } else {
                     return nil
                 }
@@ -263,7 +264,7 @@ extension Shared where Value == PropertyListValue? {
         get {
             #if os(Linux)
 
-            if let result = value as? [String: PropertyListValue] {
+                if let result = value as? [String: PropertyListValue] {
                     return result
                 } else if let object = value as? NSDictionary {
                     var result: [String: PropertyListValue] = [:]
