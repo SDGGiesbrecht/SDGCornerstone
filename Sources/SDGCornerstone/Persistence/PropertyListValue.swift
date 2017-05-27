@@ -225,37 +225,32 @@ extension PropertyListValue {
     ///
     /// - Note: This is a temporary replacement for `value as? [String: PropertyListValue]` until it works reliably on Linux.
     public var asDictionary: [String: PropertyListValue]? {
-        #if os(Linux)
 
-            if let result = self as? [String: PropertyListValue] {
-                return result
-            } else if let object = self as? NSDictionary {
-                var result: [String: PropertyListValue] = [:]
-                for (identifier, entry) in object {
-                    let key: String
-                    if let string = identifier as? String {
-                        key = string
-                    } else if let nsString = identifier as? NSString {
-                        key = nsString.substring(with: NSRange(location: 0, length: nsString.length))
-                    } else {
-                        return nil
-                    }
+        // [_Workaround: Currently also necessary on macOS. (Swift 3.1.0)_]
 
-                    if let property = entry as? PropertyListValue {
-                        result[key] = property
-                    } else {
-                        return nil
-                    }
+        if let result = self as? [String: PropertyListValue] {
+            return result
+        } else if let object = self as? NSDictionary {
+            var result: [String: PropertyListValue] = [:]
+            for (identifier, entry) in object {
+                let key: String
+                if let string = identifier as? String {
+                    key = string
+                } else if let nsString = identifier as? NSString { // [_Exempt from Code Coverage_] Unreachable on macOS.
+                    key = nsString.substring(with: NSRange(location: 0, length: nsString.length))
+                } else { // [_Exempt from Code Coverage_] Theoretically unreachable.
+                    return nil
                 }
-                return result
-            } else {
-                return nil
+
+                if let property = entry as? PropertyListValue {
+                    result[key] = property
+                } else { // [_Exempt from Code Coverage_] Theoretically unreachable.
+                    return nil
+                }
             }
-
-        #else
-
-            return self as? [String: PropertyListValue]
-
-        #endif
+            return result
+        } else {
+            return nil
+        }
     }
 }
