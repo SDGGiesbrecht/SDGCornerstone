@@ -283,6 +283,7 @@ extension Shared where Value == PropertyListValue? {
                             return nil
                         }
                     }
+                    return result
                 } else {
                     return nil
                 }
