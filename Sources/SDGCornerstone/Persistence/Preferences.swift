@@ -82,7 +82,6 @@ open class Preferences : SharedValueObserver {
         #if os(Linux)
 
             // [_Warning: No implementation yet._]
-            fatalError()
 
         #else
 
@@ -99,8 +98,13 @@ open class Preferences : SharedValueObserver {
 
         #if os(Linux)
 
-            // [_Warning: No implementation yet._]
-            fatalError()
+            do {
+                let url = FileManager.default.homeDirectoryForCurrentUser
+                let data = try Data(contentsOf: url.appendingPathComponent(".config/\(possibleDebugDomain)"))
+                return try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
+            } catch {
+                return [:]
+            }
 
         #else
 
@@ -119,7 +123,6 @@ open class Preferences : SharedValueObserver {
         #if os(Linux)
 
             // [_Warning: No implementation yet._]
-            fatalError()
 
         #else
 
