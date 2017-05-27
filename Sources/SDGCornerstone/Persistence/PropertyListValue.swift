@@ -155,7 +155,7 @@ extension Shared where Value == PropertyListValue? {
                 if let result = value as? String {
                     return result
                 } else if let result = value as? NSString {
-                    return String(result)
+                    return result.substring(with: NSRange(location: 0, length: result.length))
                 } else {
                     return nil
                 }
@@ -272,7 +272,7 @@ extension Shared where Value == PropertyListValue? {
                         if let string = identifier as? String {
                             key = string
                         } else if let nsString = identifier as? NSString {
-                            key = String(nsString)
+                            key = nsString.substring(with: NSRange(location: 0, length: nsString.length))
                         } else {
                             return nil
                         }
