@@ -36,7 +36,27 @@ extension PropertyListValue {
     /// The equatable representation
     public var equatableRepresentation: EquatableRepresentation {
         guard let result = self as? EquatableRepresentation else {
-            preconditionFailure("\(self) is not a property list value.")
+            #if os(Linux)
+                // [_Workaround: Linux doesn’t bridge well on its own yet. (Swift 3.1.0)_]
+                if let boolean = self as? Bool {
+                    return NSNumber(value: boolean)
+                } else if let integer = self as? Int {
+                    return NSNumber(value: integer)
+                } else if let floatingPointNumber = self as? Double {
+                    return NSNumber(value: floatingPointNumber)
+                } else if let string = self as? String {
+                    return NSString(string: string)
+                } else if let date = self as? Date {
+                    return NSDate(timeInterval: 0, since: date)
+                } else if let data = self as? Data {
+                    return NSData(data: data)
+                } else if let array = self as? [Any] {
+                    return NSArray(array: array)
+                } else if let dictionary = self as? [String: Any] {
+                    return NSDictionary(dictionary: dictionary)
+                }
+            #endif
+            preconditionFailure("\(type(of: self)) is not a property list value.")
         }
         return result
     }
