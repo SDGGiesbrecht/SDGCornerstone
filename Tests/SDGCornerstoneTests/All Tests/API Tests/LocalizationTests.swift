@@ -47,14 +47,12 @@ class LocalizationTests : XCTestCase {
         var englishUsed = false
         var françaisUtilisé = false
         multilingual.do {
-            for _ in 1 ... 100 {
-                if ¬englishUsed ∨ ¬françaisUtilisé {
-                    switch LocalizationSetting.current.value.resolved() as LocalizationExample {
-                    case .englishUnitedKingdom:
-                        englishUsed = true
-                    case .français:
-                        françaisUtilisé = true
-                    }
+            for _ in 1 ... 100 where ¬englishUsed ∨ ¬françaisUtilisé {
+                switch LocalizationSetting.current.value.resolved() as LocalizationExample {
+                case .englishUnitedKingdom:
+                    englishUsed = true
+                case .français:
+                    françaisUtilisé = true
                 }
             }
         }

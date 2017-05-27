@@ -76,6 +76,25 @@ open class Preferences : SharedValueObserver {
         }
     }
 
+    /// Resets all properties to nil.
+    public func reset() {
+
+        #if os(Linux)
+
+            // [_Warning: No implementation yet._]
+            fatalError()
+
+        #else
+
+            UserDefaults.standard.setPersistentDomain([:], forName: possibleDebugDomain)
+
+        #endif
+
+        synchronize()
+    }
+
+    // MARK: - Storage
+
     private static func load(for possibleDebugDomain: String) -> [String: PropertyListValue] {
 
         #if os(Linux)
@@ -85,7 +104,10 @@ open class Preferences : SharedValueObserver {
 
         #else
 
-            return UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) as? [String: PropertyListValue] ?? [:]
+            let defaults = UserDefaults.standard
+            defaults.synchronize()
+            return defaults.persistentDomain(forName: possibleDebugDomain) as? [String: PropertyListValue] ?? [:]
+
         #endif
     }
     private func load() -> [String: PropertyListValue] {
@@ -146,31 +168,3 @@ open class Preferences : SharedValueObserver {
         store()
     }
 }
-
-/*
-
- // [_Warning: Remove this once it is implemented._]
- /// A set of preferences.
- public class PreferenceSet: NSObject /* KVC */ {
-
- // MARK: - Entries
-
- /// Resets the entire preference set.
- public final func reset() {
- let copy = contents
- for (key, _) in copy {
- willChangeValueForKey(key)
- }
- NSUserDefaults.standardUserDefaults().removePersistentDomainForName(domain)
- contents = loadContents()
- for (key, _) in copy {
- didChangeValueForKey(key)
- }
- }
-
- /// Subclass to create default preferences. Always call super.defaultValueForKey() at the end.
- public func defaultValueForKey(key: String) -> PropertyListValue? {
- return nil
- }
- }
- */

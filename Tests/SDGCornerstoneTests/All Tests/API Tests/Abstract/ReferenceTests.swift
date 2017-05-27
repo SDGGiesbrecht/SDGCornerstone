@@ -24,7 +24,7 @@ class ReferenceTests : XCTestCase {
         weak var weakShared = shared
         XCTAssert(shared?.value == 1)
 
-        var observer1: SharedValueObserverExample? = SharedValueObserverExample(shared! , normalizing: false)
+        var observer1: SharedValueObserverExample? = SharedValueObserverExample(shared!, normalizing: false)
         weak var weakObserver1 = observer1
         XCTAssert(observer1?.lastReportedValue == 1)
 
@@ -32,7 +32,7 @@ class ReferenceTests : XCTestCase {
         XCTAssert(shared?.value == 2)
         XCTAssert(observer1?.lastReportedValue == 2)
 
-        var observer2: SharedValueObserverExample? = SharedValueObserverExample(shared! , normalizing: true)
+        var observer2: SharedValueObserverExample? = SharedValueObserverExample(shared!, normalizing: true)
         weak var weakObserver2 = observer2
         XCTAssert(shared?.value == 0)
         XCTAssert(observer1?.lastReportedValue == 0)
@@ -65,7 +65,7 @@ class ReferenceTests : XCTestCase {
         shared = Shared(6)
         XCTAssert(shared?.value == 6)
 
-        observer1 = SharedValueObserverExample(shared! , normalizing: false)
+        observer1 = SharedValueObserverExample(shared!, normalizing: false)
         XCTAssert(shared?.value == 6)
         XCTAssert(observer1?.lastReportedValue == 6)
 

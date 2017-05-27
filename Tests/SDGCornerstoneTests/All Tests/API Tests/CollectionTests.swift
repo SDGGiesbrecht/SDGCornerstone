@@ -445,14 +445,12 @@ class CollectionTests : XCTestCase {
 
                 var last = start
                 var same = true
-                for _ in 1 ... 100 {
-                    if same == true {
-                        let next = last.shuffled()
-                        if ¬next.elementsEqual(last) {
-                            same = false
-                        }
-                        last = next
+                for _ in 1 ... 100 where same == true {
+                    let next = last.shuffled()
+                    if ¬next.elementsEqual(last) {
+                        same = false
                     }
+                    last = next
                 }
                 XCTAssert(¬same)
         }

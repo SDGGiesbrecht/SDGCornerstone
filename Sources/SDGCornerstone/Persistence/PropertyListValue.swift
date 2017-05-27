@@ -19,6 +19,14 @@ public protocol PropertyListValue {
 
 }
 
+// These are necessary for reliable as? casting.
+extension NSData : PropertyListValue {}
+extension NSString : PropertyListValue {}
+extension NSNumber : PropertyListValue {}
+extension NSDate : PropertyListValue {}
+extension NSArray : PropertyListValue {}
+extension NSDictionary : PropertyListValue {}
+
 extension PropertyListValue {
 
     /// A representation that can be tested for equality with any other property list value no matter the type.

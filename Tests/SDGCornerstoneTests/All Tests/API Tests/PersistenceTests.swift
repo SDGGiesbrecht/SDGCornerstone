@@ -22,6 +22,7 @@ class PersistenceTests : XCTestCase {
     func testPreferences() {
         let testKey = "SDGTestKey"
         let testDomain = "ca.solideogloria.SDGCornerstone.Tests"
+        let testDomainExternalName = testDomain + ".debug"
         let preferences = Preferences.preferences(forDomain: testDomain)
 
         preferences[testKey].value = nil
@@ -43,7 +44,7 @@ class PersistenceTests : XCTestCase {
         // [_Warning: This should use centralized functions._]
         var shell = Process()
         shell.launchPath = "/usr/bin/env"
-        shell.arguments = ["defaults", "read", testDomain + ".debug", testKey]
+        shell.arguments = ["defaults", "read", testDomainExternalName, testKey]
         let pipe = Pipe()
         shell.standardOutput = pipe
         shell.launch()
@@ -52,12 +53,23 @@ class PersistenceTests : XCTestCase {
         let output = String(data: data, encoding: String.Encoding.utf8)!
         XCTAssert(output == "1\n", "Failed to write preferences to disk: \(output) ≠ 1")
 
-        /*
+        let externalTestKey = "SDGExternalTestKey"
+        preferences[externalTestKey].value = nil
+
+        let stringValue = "value"
         shell = Process()
         shell.launchPath = "/usr/bin/env"
-        shell.arguments = ["defaults", "write", testDomain + ".debug", "SDGExternalTestKey", "-boolean", "YES"]
+        shell.arguments = ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue]
         shell.launch()
-        shell.waitUntilExit()*/
+        shell.waitUntilExit()
+        let causeSynchronization = "CauseSynchronization"
+        preferences[testKey].value = causeSynchronization
+        XCTAssert(preferences[testKey].value as? String == causeSynchronization)
+        XCTAssert(preferences[externalTestKey].value as? String == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
+
+        preferences.reset()
+        XCTAssert(preferences[testKey].value == nil)
+        XCTAssert(preferences[externalTestKey].value == nil)
     }
 
     func testPropertyList() {
