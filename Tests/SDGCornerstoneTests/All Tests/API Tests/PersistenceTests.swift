@@ -40,36 +40,44 @@ class PersistenceTests : XCTestCase {
         preferences[testKey].value = nil
         XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")
 
-        preferences[testKey].value = true
-        // [_Warning: This should use centralized functions._]
-        var shell = Process()
-        shell.launchPath = "/usr/bin/env"
-        shell.arguments = ["defaults", "read", testDomainExternalName, testKey]
-        let pipe = Pipe()
-        shell.standardOutput = pipe
-        shell.launch()
-        shell.waitUntilExit()
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output = String(data: data, encoding: String.Encoding.utf8)!
-        XCTAssert(output == "1\n", "Failed to write preferences to disk: \(output) ≠ 1")
+        #if os(Linux)
 
-        let externalTestKey = "SDGExternalTestKey"
-        preferences[externalTestKey].value = nil
+            // [_Warning: Linux needs corresponding tests._]
 
-        let stringValue = "value"
-        shell = Process()
-        shell.launchPath = "/usr/bin/env"
-        shell.arguments = ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue]
-        shell.launch()
-        shell.waitUntilExit()
-        let causeSynchronization = "CauseSynchronization"
-        preferences[testKey].value = causeSynchronization
-        XCTAssert(preferences[testKey].value as? String == causeSynchronization)
-        XCTAssert(preferences[externalTestKey].value as? String == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
+        #else
 
-        preferences.reset()
-        XCTAssert(preferences[testKey].value == nil)
-        XCTAssert(preferences[externalTestKey].value == nil)
+            preferences[testKey].value = true
+            // [_Warning: This should use centralized functions._]
+            var shell = Process()
+            shell.launchPath = "/usr/bin/env"
+            shell.arguments = ["defaults", "read", testDomainExternalName, testKey]
+            let pipe = Pipe()
+            shell.standardOutput = pipe
+            shell.launch()
+            shell.waitUntilExit()
+            let data = pipe.fileHandleForReading.readDataToEndOfFile()
+            let output = String(data: data, encoding: String.Encoding.utf8)!
+            XCTAssert(output == "1\n", "Failed to write preferences to disk: \(output) ≠ 1")
+
+            let externalTestKey = "SDGExternalTestKey"
+            preferences[externalTestKey].value = nil
+
+            let stringValue = "value"
+            shell = Process()
+            shell.launchPath = "/usr/bin/env"
+            shell.arguments = ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue]
+            shell.launch()
+            shell.waitUntilExit()
+            let causeSynchronization = "CauseSynchronization"
+            preferences[testKey].value = causeSynchronization
+            XCTAssert(preferences[testKey].value as? String == causeSynchronization)
+            XCTAssert(preferences[externalTestKey].value as? String == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
+
+            preferences.reset()
+            XCTAssert(preferences[testKey].value == nil)
+            XCTAssert(preferences[externalTestKey].value == nil)
+
+        #endif
     }
 
     func testPropertyList() {
