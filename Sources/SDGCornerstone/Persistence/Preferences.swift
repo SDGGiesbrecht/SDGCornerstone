@@ -93,7 +93,7 @@ open class Preferences : SharedValueObserver {
         #if os(Linux)
 
             do {
-                let data = try Data(contentsOf: Preferences.directory.appendingPathComponent(possibleDebugDomain))
+                let data = try Data(contentsOf: Preferences.directory.appendingPathComponent("\(possibleDebugDomain).plist"))
                 return try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
             } catch {
                 return [:]
@@ -116,7 +116,7 @@ open class Preferences : SharedValueObserver {
         #if os(Linux)
 
             if let data = try? PropertyListSerialization.data(fromPropertyList: preferences, format: .xml, options: 0) {
-                try? data.write(to: Preferences.directory.appendingPathComponent(possibleDebugDomain), options: [.atomic])
+                try? data.write(to: Preferences.directory.appendingPathComponent("\(possibleDebugDomain).plist"), options: [.atomic])
             }
 
         #else
