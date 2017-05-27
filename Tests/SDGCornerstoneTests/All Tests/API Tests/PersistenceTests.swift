@@ -46,7 +46,7 @@ class PersistenceTests : XCTestCase {
             do {
                 let data = try Data(contentsOf: url)
                 let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
-                XCTAssert(preferences[testKey] as? Bool == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
+                XCTAssert(preferences[testKey].value as? Bool == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
             } catch let error {
                 XCTFail("An error occurred while verifying write test: \(error)")
             }
