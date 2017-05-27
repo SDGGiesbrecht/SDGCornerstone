@@ -35,7 +35,7 @@ extension PropertyListValue {
     // [_Define Documentation: SDGCornerstone.PropertyListValue.equatableRepresentation_]
     /// The equatable representation
     public var equatableRepresentation: EquatableRepresentation {
-        guard let result = self as? EquatableRepresentation else {
+        guard let result = self as? EquatableRepresentation else { // [_Exempt from Code Coverage_]
             #if os(Linux)
                 // [_Workaround: Linux doesn’t bridge well on its own yet. (Swift 3.1.0)_]
                 if let boolean = self as? Bool {
