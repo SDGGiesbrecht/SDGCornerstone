@@ -14,16 +14,16 @@
 
 import Foundation
 
-/// A property list value. (`Data`, `String`, `Bool`, `IntFamily`, `FloatFamily` (except `Float80`), `Date`, `[PropertyListValue]` or [String: PropertyListValue])
+/// A property list value. (`Bool`, `IntFamily`, `FloatFamily`, `String` (except `Float80`), `Date`, `Data`, `[PropertyListValue]`, [String: PropertyListValue], or `UIntFamily`)
 public protocol PropertyListValue {
 
 }
 
 // These are necessary for reliable as? casting.
-extension NSData : PropertyListValue {}
-extension NSString : PropertyListValue {}
 extension NSNumber : PropertyListValue {}
+extension NSString : PropertyListValue {}
 extension NSDate : PropertyListValue {}
+extension NSData : PropertyListValue {}
 extension NSArray : PropertyListValue {}
 extension NSDictionary : PropertyListValue {}
 
@@ -59,5 +59,242 @@ extension PropertyListValue {
             preconditionFailure("\(type(of: self)) is not a property list value.")
         }
         return result
+    }
+}
+
+// [_Workaround: The following are temporary replacements for as?, because Linux doesn’t bridge well yet. (Swift 3.1.0)_]
+
+extension Shared where Value == PropertyListValue? {
+    // MARK: - where Value == PropertyListValue?
+
+    /// Accesses the property list value as a boolean value.
+    ///
+    /// - Note: This is a temporary replacement for `value as? Bool` until it works reliably on Linux.
+    public var asBool: Bool? {
+        get {
+            #if os(Linux)
+
+                if let result = value as? Bool {
+                    return result
+                } else if let result = value as? NSNumber {
+                    return result.boolValue
+                } else {
+                    return nil
+                }
+
+            #else
+
+                return value as? Bool
+
+            #endif
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    /// Accesses the property list value as an integer.
+    ///
+    /// - Note: This is a temporary replacement for `value as? Int` until it works reliably on Linux.
+    public var asInt: Int? {
+        get {
+            #if os(Linux)
+
+                if let result = value as? Int {
+                    return result
+                } else if let result = value as? NSNumber {
+                    return result.intValue
+                } else {
+                    return nil
+                }
+
+            #else
+
+                return value as? Int
+
+            #endif
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    /// Accesses the property list value as a floating point number.
+    ///
+    /// - Note: This is a temporary replacement for `value as? Double` until it works reliably on Linux.
+    public var asDouble: Double? {
+        get {
+            #if os(Linux)
+
+                if let result = value as? Double {
+                    return result
+                } else if let result = value as? NSNumber {
+                    return result.doubleValue
+                } else {
+                    return nil
+                }
+
+            #else
+
+                return value as? Double
+
+            #endif
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    /// Accesses the property list value as a string value.
+    ///
+    /// - Note: This is a temporary replacement for `value as? String` until it works reliably on Linux.
+    public var asString: String? {
+        get {
+            #if os(Linux)
+
+                if let result = value as? String {
+                    return result
+                } else if let result = value as? NSString {
+                    return String(result)
+                } else {
+                    return nil
+                }
+
+            #else
+
+                return value as? String
+
+            #endif
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    /// Accesses the property list value as a date value.
+    ///
+    /// - Note: This is a temporary replacement for `value as? Date` until it works reliably on Linux.
+    public var asDate: Date? {
+        get {
+            #if os(Linux)
+
+                if let result = value as? Date {
+                    return result
+                } else if let result = value as? NSDate {
+                    return Date(timeIntervalSinceReferenceDate: result.timeIntervalSinceReferenceDate)
+                } else {
+                    return nil
+                }
+
+            #else
+
+                return value as? Date
+
+            #endif
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    /// Accesses the property list value as a data value.
+    ///
+    /// - Note: This is a temporary replacement for `value as? Data` until it works reliably on Linux.
+    public var asData: Data? {
+        get {
+            #if os(Linux)
+
+                if let result = value as? Data {
+                    return result
+                } else if let result = value as? NSData {
+                    return result.subdata(with: NSRange(location: 0, length: result.length))
+                } else {
+                    return nil
+                }
+
+            #else
+
+                return value as? Data
+
+            #endif
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    /// Accesses the property list value as an array value.
+    ///
+    /// - Note: This is a temporary replacement for `value as? [PropertyListValue]` until it works reliably on Linux.
+    public var asArray: [PropertyListValue]? {
+        get {
+            #if os(Linux)
+
+                if let result = value as? [PropertyListValue] {
+                    return result
+                } else if let object = value as? NSArray {
+                    var result: [PropertyListValue] = []
+                    for entry in object {
+                        if let property = entry as? PropertyListValue {
+                            result.append(property)
+                        } else {
+                            return nil
+                        }
+                    }
+                } else {
+                    return nil
+                }
+
+            #else
+
+                return value as? [PropertyListValue]
+
+            #endif
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    /// Accesses the property list value as a dictionary value.
+    ///
+    /// - Note: This is a temporary replacement for `value as? [String: PropertyListValue]` until it works reliably on Linux.
+    public var asDictionary: [String: PropertyListValue]? {
+        get {
+            #if os(Linux)
+
+            if let result = value as? [String: PropertyListValue] {
+                    return result
+                } else if let object = value as? NSDictionary {
+                    var result: [String: PropertyListValue] = [:]
+                    for (identifier, entry) in object {
+                        let key: String
+                        if let string = identifier as? String {
+                            key = string
+                        } else if let nsString = identifier as? NSString {
+                            key = String(nsString)
+                        } else {
+                            return nil
+                        }
+
+                        if let property = entry as? PropertyListValue {
+                            result[key] = property
+                        } else {
+                            return nil
+                        }
+                    }
+                } else {
+                    return nil
+                }
+
+            #else
+
+                return value as? [String: PropertyListValue]
+
+            #endif
+        }
+        set {
+            value = newValue
+        }
     }
 }
