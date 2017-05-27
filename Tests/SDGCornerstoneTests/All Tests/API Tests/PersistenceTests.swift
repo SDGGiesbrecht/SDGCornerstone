@@ -40,13 +40,15 @@ class PersistenceTests : XCTestCase {
         preferences[testKey].value = nil
         XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")
 
+        preferences[testKey].value = true
         #if os(Linux)
-
-            // [_Warning: Linux needs corresponding tests._]
-
+            let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
+            XCTAssertNoThrow({
+                let data = try Data(contentsOf: url)
+                let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
+                XCTAssert(preferences[testKey] as? Bool == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
+            })
         #else
-
-            preferences[testKey].value = true
             // [_Warning: This should use centralized functions._]
             var shell = Process()
             shell.launchPath = "/usr/bin/env"
@@ -58,26 +60,34 @@ class PersistenceTests : XCTestCase {
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             let output = String(data: data, encoding: String.Encoding.utf8)!
             XCTAssert(output == "1\n", "Failed to write preferences to disk: \(output) ≠ 1")
+        #endif
 
-            let externalTestKey = "SDGExternalTestKey"
-            preferences[externalTestKey].value = nil
+        let externalTestKey = "SDGExternalTestKey"
+        preferences[externalTestKey].value = nil
 
-            let stringValue = "value"
+        let stringValue = "value"
+        #if os(Linux)
+            XCTAssertNoThrow({
+                let data = try PropertyListSerialization.data(fromPropertyList: [externalTestKey: stringValue], format: .xml, options: 0)
+                try data.write(to: url, options: [.atomic])
+            })
+        #else
+            // [_Warning: This should use centralized functions._]
             shell = Process()
             shell.launchPath = "/usr/bin/env"
             shell.arguments = ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue]
             shell.launch()
             shell.waitUntilExit()
-            let causeSynchronization = "CauseSynchronization"
-            preferences[testKey].value = causeSynchronization
-            XCTAssert(preferences[testKey].value as? String == causeSynchronization)
-            XCTAssert(preferences[externalTestKey].value as? String == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
-
-            preferences.reset()
-            XCTAssert(preferences[testKey].value == nil)
-            XCTAssert(preferences[externalTestKey].value == nil)
-
         #endif
+
+        let causeSynchronization = "CauseSynchronization"
+        preferences[testKey].value = causeSynchronization
+        XCTAssert(preferences[testKey].value as? String == causeSynchronization)
+        XCTAssert(preferences[externalTestKey].value as? String == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
+
+        preferences.reset()
+        XCTAssert(preferences[testKey].value == nil)
+        XCTAssert(preferences[externalTestKey].value == nil)
     }
 
     func testPropertyList() {
