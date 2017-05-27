@@ -21,7 +21,7 @@ public struct LocalizationSetting : Equatable {
         // [_Warning: This needs to actually look it up._]
         let preferences = Shared(LocalizationSetting(orderOfPrecedence: [] as [String]))
 
-        preferences.register(observer: ChangeObserver.defaultObserver)
+        preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
 
@@ -29,7 +29,7 @@ public struct LocalizationSetting : Equatable {
         // [_Warning: This needs to actually look it up._]
         let preferences = Shared<LocalizationSetting?>(nil)
 
-        preferences.register(observer: ChangeObserver.defaultObserver)
+        preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
 
@@ -37,42 +37,30 @@ public struct LocalizationSetting : Equatable {
         // [_Warning: This needs to actually look it up._]
         let preferences = Shared<LocalizationSetting?>(nil)
 
-        preferences.register(observer: ChangeObserver.defaultObserver)
+        preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
 
     private static let overrides: Shared<[LocalizationSetting]> = {
         let overrides: Shared<[LocalizationSetting]> = Shared([])
-        overrides.register(observer: ChangeObserver.defaultObserver)
+        overrides.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return overrides
     }()
 
     private static func resolveCurrentLocalization() -> LocalizationSetting {
-
-        // Force initialization to finish before observing begins.
-        let overrides = self.overrides.value.last
-        let applicationPreferences = self.applicationPreferences.value
-        let sdgPreferences = self.sdgPreferences.value
-        let systemPreferences = self.systemPreferences.value
-
-        // Resolve
-        return overrides
-            ?? applicationPreferences
-            ?? sdgPreferences
-            ?? systemPreferences
+        return overrides.value.last
+            ?? applicationPreferences.value
+            ?? sdgPreferences.value
+            ?? systemPreferences.value
     }
 
-    private static var readyToObserve = false
     private class ChangeObserver : SharedValueObserver {
         fileprivate static let defaultObserver = ChangeObserver()
         fileprivate func valueChanged(for identifier: String) {
 
-            if readyToObserve { // Prevent circularity until resolveCurrentlocalization() has completed once and all component variables are initialized.
-
-                let new = LocalizationSetting.resolveCurrentLocalization()
-                if current.value ≠ new {
-                    current.value = new
-                }
+            let new = LocalizationSetting.resolveCurrentLocalization()
+            if current.value ≠ new {
+                current.value = new
             }
         }
     }
@@ -82,11 +70,7 @@ public struct LocalizationSetting : Equatable {
     /// - Note: The value of the shared instance is intended to be read‐only.
     public static let current: Shared<LocalizationSetting> = {
         let result = Shared(resolveCurrentLocalization())
-
-        // Prevent circularity until current has been initialized.
-        result.register(observer: ChangeObserver())
-        readyToObserve = true
-
+        result.register(observer: ChangeObserver(), reportInitialState: false)
         return result
     }()
 
