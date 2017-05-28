@@ -228,7 +228,7 @@ extension PropertyListValue {
 
         // [_Workaround: Currently also necessary on macOS. (Swift 3.1.0)_]
 
-        if let result = self as? [String: PropertyListValue] {
+        if let result = self as? [String: PropertyListValue] { // [_Exempt from Code Coverage_] Bug in coverage detection.
             return result
         } else if let object = self as? NSDictionary {
             var result: [String: PropertyListValue] = [:]
@@ -240,7 +240,7 @@ extension PropertyListValue {
                     key = nsString.substring(with: NSRange(location: 0, length: nsString.length))
                 } else { // [_Exempt from Code Coverage_] Theoretically unreachable.
                     return nil
-                }
+                } // [_Exempt from Code Coverage_] Bug in coverage detection.
 
                 if let property = entry as? PropertyListValue {
                     result[key] = property
