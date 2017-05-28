@@ -228,7 +228,7 @@ extension PropertyListValue {
 
         // [_Workaround: Currently also necessary on macOS. (Swift 3.1.0)_]
 
-        if let result = self as? [String: PropertyListValue] { // [_Exempt from Code Coverage_] Bug in coverage detection.
+        if let result = self as? [String: PropertyListValue] {
             return result
         } else if let object = self as? NSDictionary {
             var result: [String: PropertyListValue] = [:]
