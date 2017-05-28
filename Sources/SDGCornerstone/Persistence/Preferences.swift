@@ -53,7 +53,7 @@ open class Preferences : SharedValueObserver {
         let possibleDebugDomain = BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Code Coverage_]
         self.possibleDebugDomain = possibleDebugDomain
 
-        contents = Preferences.load(for: possibleDebugDomain)
+        contents = Preferences.readFromDisk(for: possibleDebugDomain)
     }
 
     // MARK: - Properties
@@ -78,8 +78,8 @@ open class Preferences : SharedValueObserver {
 
     /// Resets all properties to nil.
     public func reset() {
-        store([:])
-        synchronize()
+        writeToDisk([:])
+        update(fromExternalState: [:])
     }
 
     // MARK: - Storage
@@ -88,7 +88,7 @@ open class Preferences : SharedValueObserver {
     private static let directory = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config")
     #endif
 
-    private static func load(for possibleDebugDomain: String) -> [String: PropertyListValue] {
+    private static func readFromDisk(for possibleDebugDomain: String) -> [String: PropertyListValue] {
 
         #if os(Linux)
 
@@ -101,17 +101,15 @@ open class Preferences : SharedValueObserver {
 
         #else
 
-            let defaults = UserDefaults.standard
-            defaults.synchronize()
-            return defaults.persistentDomain(forName: possibleDebugDomain) as? [String: PropertyListValue] ?? [:]
+            return UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) as? [String: PropertyListValue] ?? [:]
 
         #endif
     }
-    private func load() -> [String: PropertyListValue] {
-        return Preferences.load(for: possibleDebugDomain)
+    private func readFromDisk() -> [String: PropertyListValue] {
+        return Preferences.readFromDisk(for: possibleDebugDomain)
     }
 
-    private func store(_ preferences: [String: PropertyListValue]) {
+    private func writeToDisk(_ preferences: [String: PropertyListValue]) {
 
         #if os(Linux)
 
@@ -125,25 +123,18 @@ open class Preferences : SharedValueObserver {
 
         #endif
     }
-    private func store() {
-        store(contents)
-    }
 
-    private func synchronize(ignoring ignoredKey: String? = nil) {
-        let possibleChanges = load()
+    // MARK: - Merging Changes
 
-        var changes: [(key: String, value: PropertyListValue?)] = []
-        for key in Set(possibleChanges.keys) ∪ Set(contents.keys) where key ≠ ignoredKey {
-            let possibleChange = possibleChanges[key]
+    private func update(fromExternalState externalState: [String: PropertyListValue], ignoring ignoredKey: String? = nil) {
 
-            if possibleChange?.equatableRepresentation ≠ contents[key]?.equatableRepresentation {
-                contents[key] = possibleChange
-                changes.append((key, possibleChange))
+        for key in Set(externalState.keys) ∪ Set(contents.keys) where key ≠ ignoredKey {
+            let externalValue = externalState[key]
+
+            if externalValue?.equatableRepresentation ≠ contents[key]?.equatableRepresentation {
+                contents[key] = externalValue
+                self[key].value = externalValue
             }
-        }
-
-        for (key, value) in changes {
-            self[key].value = value
         }
     }
 
@@ -161,11 +152,14 @@ open class Preferences : SharedValueObserver {
             preconditionFailure("Received notification of a shared value changing from an untracked identifier: \(identifier).")
         }
 
-        // Prevent overwriting of external, untracked changes,
-        // but ignore the current key to prevent undoing this very change.
-        synchronize(ignoring: identifier)
+        if shared.value?.equatableRepresentation ≠ contents[identifier]?.equatableRepresentation {
 
-        contents[identifier] = shared.value
-        store()
+            // Prevent overwriting of external, untracked changes,
+            // but ignore the current key to prevent undoing this very change.
+            update(fromExternalState: readFromDisk(), ignoring: identifier)
+            contents[identifier] = shared.value
+
+            writeToDisk(contents)
+        }
     }
 }
