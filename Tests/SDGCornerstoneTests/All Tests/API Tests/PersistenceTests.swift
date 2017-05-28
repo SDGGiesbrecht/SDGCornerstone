@@ -145,13 +145,13 @@ class PersistenceTests : XCTestCase {
         let arrayTwo: [PropertyListValue] = [−4, −5, −6]
         value = arrayOne
         XCTAssert(value.asArray?.contains(where: { $0.equatableRepresentation == (−1).equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayOne)")
-        value = NSArray(objects: −4, −5, −6)
+        value = NSArray(array: arrayTwo)
         XCTAssert(value.asArray?.contains(where: { $0.equatableRepresentation == (−4).equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayTwo)")
 
         let dictionaryOne: [String: PropertyListValue] = ["1": 1, "2": 2, "3": 3]
         let dictionaryTwo: [String: PropertyListValue] = ["4": 4, "5": 5, "6": 6]
         value = dictionaryOne
-        //XCTAssert(value.asDictionary?["3"]?.asInt == 3, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryOne)")
+        XCTAssert(value.asDictionary?["3"]?.asInt == 3, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryOne)")
         value = NSDictionary(dictionary: dictionaryTwo)
         XCTAssert(value.asDictionary ≠ nil, "Failed cast: \(value) (\(type(of: value))) == nil")
         XCTAssert(value.asDictionary?["6"]?.asInt == 6, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryTwo)")

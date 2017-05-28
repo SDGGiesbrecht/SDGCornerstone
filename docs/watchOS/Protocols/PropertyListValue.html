@@ -398,7 +398,7 @@
 
                 </div>
               </div>
-            <p>A property list value. (<code>Data</code>, <code>String</code>, <code>Bool</code>, <code>IntFamily</code>, <code>FloatFamily</code> (except <code>Float80</code>), <code>Date</code>, <code>[PropertyListValue]</code> or [String: PropertyListValue])</p>
+            <p>A property list value. (<code>Bool</code>, <code>IntFamily</code>, <code>FloatFamily</code>, <code>String</code> (except <code>Float80</code>), <code>Date</code>, <code>Data</code>, <code>[PropertyListValue]</code>, [String: PropertyListValue], or <code>UIntFamily</code>)</p>
 
           </section>
           <section class="section task-group-section">
@@ -458,6 +458,290 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">equatableRepresentation</span><span class="p">:</span> <span class="kt"><a href="../Protocols/PropertyListValue.html#/s:E14SDGCornerstonePS_17PropertyListValue23EquatableRepresentation">EquatableRepresentation</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue6asBoolGSqSb_"></a>
+                    <a name="//apple_ref/swift/Property/asBool" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue6asBoolGSqSb_">asBool</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Accesses the property list value as a boolean value.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>value as? Bool</code> until it works reliably on Linux.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asBool</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue5asIntGSqSi_"></a>
+                    <a name="//apple_ref/swift/Property/asInt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue5asIntGSqSi_">asInt</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Accesses the property list value as an integer.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>value as? Int</code> until it works reliably on Linux.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asInt</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue8asDoubleGSqSd_"></a>
+                    <a name="//apple_ref/swift/Property/asDouble" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue8asDoubleGSqSd_">asDouble</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Accesses the property list value as a floating point number.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>value as? Double</code> until it works reliably on Linux.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asDouble</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue8asStringGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/asString" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue8asStringGSqSS_">asString</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Accesses the property list value as a string value.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>value as? String</code> until it works reliably on Linux.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asString</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue6asDateGSqV10Foundation4Date_"></a>
+                    <a name="//apple_ref/swift/Property/asDate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue6asDateGSqV10Foundation4Date_">asDate</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Accesses the property list value as a date value.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>value as? Date</code> until it works reliably on Linux.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asDate</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue6asDataGSqV10Foundation4Data_"></a>
+                    <a name="//apple_ref/swift/Property/asData" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue6asDataGSqV10Foundation4Data_">asData</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Accesses the property list value as a data value.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>value as? Data</code> until it works reliably on Linux.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asData</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue7asArrayGSqGSaPS0____"></a>
+                    <a name="//apple_ref/swift/Property/asArray" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue7asArrayGSqGSaPS0____">asArray</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Accesses the property list value as an array value.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>value as? [PropertyListValue]</code> until it works reliably on Linux.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asArray</span><span class="p">:</span> <span class="p">[</span><span class="kt">PropertyListValue</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue12asDictionaryGSqGVs10DictionarySSPS0____"></a>
+                    <a name="//apple_ref/swift/Property/asDictionary" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue12asDictionaryGSqGVs10DictionarySSPS0____">asDictionary</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Accesses the property list value as a dictionary value.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>value as? [String: PropertyListValue]</code> until it works reliably on Linux.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">asDictionary</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">PropertyListValue</span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
