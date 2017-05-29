@@ -126,7 +126,7 @@ extension PropertyListValue {
             for objectElement in object { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 guard let element = objectElement as? PropertyListValue else {
                     preconditionFailure("\(objectElement) (\(type(of: objectElement))) is not a property list value.")
-                }
+                } // [_Exempt from Code Coverage_] Unreachable on macOS.
                 result.append(element)
             } // [_Exempt from Code Coverage_] Unreachable on macOS.
             return result.normalized
