@@ -14,10 +14,6 @@
 
 import Foundation
 
-// [_Warning: Nothing here is thread safe. All of it could occur in a serial background queue?_]
-
-// [_Warning: Should auto‐update shared (non‐application) domains periodically._]
-
 /// A set of preferences for a particular domain.
 open class Preferences : SharedValueObserver {
 

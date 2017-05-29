@@ -66,191 +66,136 @@ extension PropertyListValue {
 
 extension PropertyListValue {
 
+    private var normalized: PropertyListValue {
+        if let result = self as? Bool {
+            return NSNumber(value: result)
+        } else if let result = self as? Int {
+            return NSNumber(value: result)
+        } else if let result = self as? UInt {
+            return NSNumber(value: result)
+        } else if let result = self as? Int64 {
+            return NSNumber(value: result)
+        } else if let result = self as? UInt64 {
+            return NSNumber(value: result)
+        } else if let result = self as? Int32 {
+            return NSNumber(value: result)
+        } else if let result = self as? UInt32 {
+            return NSNumber(value: result)
+        } else if let result = self as? Int16 {
+            return NSNumber(value: result)
+        } else if let result = self as? UInt16 {
+            return NSNumber(value: result)
+        } else if let result = self as? Int8 {
+            return NSNumber(value: result)
+        } else if let result = self as? UInt8 {
+            return NSNumber(value: result)
+        } else if let result = self as? Double {
+            return NSNumber(value: result)
+        } else if let result = self as? Float {
+            return NSNumber(value: result)
+        } else if let result = self as? NSString {
+            return result.substring(from: 0)
+        } else if let result = self as? NSDate {
+            return Date(timeIntervalSinceReferenceDate: result.timeIntervalSinceReferenceDate)
+        } else if let result = self as? NSData {
+            return result.subdata(with: NSRange(location: 0, length: result.length))
+        } else if let result = self as? [PropertyListValue] {
+            return result.map() { $0.normalized }
+        } else if let object = self as? NSArray { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            var result: [PropertyListValue] = []
+            for objectElement in object {
+                guard let element = objectElement as? PropertyListValue else {
+                    preconditionFailure("\(objectElement) (\(type(of: objectElement))) is not a property list value.")
+                }
+                result.append(element)
+            }
+            return result.normalized
+        } else if let result = self as? [String: PropertyListValue] {
+            return result.mapKeyValuePairs() { ($0, $1.normalized) }
+        } else if let object = self as? NSDictionary {
+            var result: [String: PropertyListValue] = [:]
+            for (objectKey, objectValue) in object {
+                guard let key = (objectKey as? PropertyListValue)?.asString else {
+                    preconditionFailure("\(objectKey) (\(type(of: objectKey))) is not a property list key.")
+                }
+                guard let value = objectValue as? PropertyListValue else {
+                    preconditionFailure("\(objectValue) (\(type(of: objectValue))) is not a property list value.")
+                }
+                result[key] = value
+            }
+            return result.normalized
+        } else {
+            return self // [_Exempt from Code Coverage_] Unreachable on macOS.
+        }
+    }
+
     /// Accesses the property list value as a boolean value.
     ///
     /// - Note: This is a temporary replacement for `value as? Bool` until it works reliably on Linux.
     public var asBool: Bool? {
-        #if os(Linux)
-
-            if let result = self as? Bool {
-                return result
-            } else if let result = self as? NSNumber {
-                return result.boolValue
-            } else {
-                return nil
-            }
-
-        #else
-
-            return self as? Bool
-
-        #endif
+        return self as? Bool ?? (normalized as? NSNumber)?.boolValue // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
 
     /// Accesses the property list value as an integer.
     ///
     /// - Note: This is a temporary replacement for `value as? Int` until it works reliably on Linux.
     public var asInt: Int? {
-        #if os(Linux)
-
-            if let result = self as? Int {
-                return result
-            } else if let result = self as? NSNumber {
-                return result.intValue
-            } else {
-                return nil
-            }
-
-        #else
-
-            return self as? Int
-
-        #endif
+        return self as? Int ?? (normalized as? NSNumber)?.intValue // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
 
     /// Accesses the property list value as a floating point number.
     ///
     /// - Note: This is a temporary replacement for `value as? Double` until it works reliably on Linux.
     public var asDouble: Double? {
-        #if os(Linux)
-
-            if let result = self as? Double {
-                return result
-            } else if let result = self as? NSNumber {
-                return result.doubleValue
-            } else {
-                return nil
-            }
-
-        #else
-
-            return self as? Double
-
-        #endif
+        return self as? Double ?? (normalized as? NSNumber)?.doubleValue // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
 
     /// Accesses the property list value as a string value.
     ///
     /// - Note: This is a temporary replacement for `value as? String` until it works reliably on Linux.
     public var asString: String? {
-        #if os(Linux)
-
-            if let result = self as? String {
-                return result
-            } else if let result = self as? NSString {
-                return result.substring(with: NSRange(location: 0, length: result.length))
-            } else {
-                return nil
-            }
-
-        #else
-
-            return self as? String
-
-        #endif
+        return self as? String ?? normalized as? String // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
 
     /// Accesses the property list value as a date value.
     ///
     /// - Note: This is a temporary replacement for `value as? Date` until it works reliably on Linux.
     public var asDate: Date? {
-        #if os(Linux)
-
-            if let result = self as? Date {
-                return result
-            } else if let result = self as? NSDate {
-                return Date(timeIntervalSinceReferenceDate: result.timeIntervalSinceReferenceDate)
-            } else {
-                return nil
-            }
-
-        #else
-
-            return self as? Date
-
-        #endif
+        return self as? Date ?? normalized as? Date // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
 
     /// Accesses the property list value as a data value.
     ///
     /// - Note: This is a temporary replacement for `value as? Data` until it works reliably on Linux.
     public var asData: Data? {
-        #if os(Linux)
+        return self as? Data ?? normalized as? Data // [_Exempt from Code Coverage_] Unreachable on macOS.
+    }
 
-            if let result = self as? Data {
-                return result
-            } else if let result = self as? NSData {
-                return result.subdata(with: NSRange(location: 0, length: result.length))
-            } else {
-                return nil
-            }
-
-        #else
-
-            return self as? Data
-
-        #endif
+    /// Accesses the property list value as an array value.
+    ///
+    /// - Note: This is a temporary replacement for `value as? [V]` until it works reliably on Linux.
+    public func asArray<V : PropertyListValue>(of type: V.Type) -> [V]? {
+        return self as? [V] ?? normalized as? [V] // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
 
     /// Accesses the property list value as an array value.
     ///
     /// - Note: This is a temporary replacement for `value as? [PropertyListValue]` until it works reliably on Linux.
     public var asArray: [PropertyListValue]? {
-        #if os(Linux)
+        return self as? [PropertyListValue] ?? normalized as? [PropertyListValue] // [_Exempt from Code Coverage_] Unreachable on macOS.
+    }
 
-            if let result = self as? [PropertyListValue] {
-                return result
-            } else if let object = self as? NSArray {
-                var result: [PropertyListValue] = []
-                for entry in object {
-                    if let property = entry as? PropertyListValue {
-                        result.append(property)
-                    } else {
-                        return nil
-                    }
-                }
-                return result
-            } else {
-                return nil
-            }
-
-        #else
-
-            return self as? [PropertyListValue]
-
-        #endif
+    /// Accesses the property list value as a dictionary value.
+    ///
+    /// - Note: This is a temporary replacement for `value as? [String: V]` until it works reliably on Linux.
+    public func asDictionary<V : PropertyListValue>(of type: V.Type) -> [String: V]? {
+        return self as? [String: V] ?? normalized as? [String: V] // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
 
     /// Accesses the property list value as a dictionary value.
     ///
     /// - Note: This is a temporary replacement for `value as? [String: PropertyListValue]` until it works reliably on Linux.
     public var asDictionary: [String: PropertyListValue]? {
-
-        // [_Workaround: Currently also necessary on macOS. (Swift 3.1.0)_]
-
-        if let result = self as? [String: PropertyListValue] {
-            return result
-        } else if let object = self as? NSDictionary {
-            var result: [String: PropertyListValue] = [:]
-            for (identifier, entry) in object {
-                let key: String
-                if let string = identifier as? String {
-                    key = string
-                } else if let nsString = identifier as? NSString { // [_Exempt from Code Coverage_] Unreachable on macOS.
-                    key = nsString.substring(with: NSRange(location: 0, length: nsString.length))
-                } else { // [_Exempt from Code Coverage_] Theoretically unreachable.
-                    return nil
-                } // [_Exempt from Code Coverage_] Bug in coverage detection.
-
-                if let property = entry as? PropertyListValue {
-                    result[key] = property
-                } else { // [_Exempt from Code Coverage_] Theoretically unreachable.
-                    return nil
-                }
-            }
-            return result
-        } else {
-            return nil
-        }
+        return self as? [String: PropertyListValue] ?? normalized as? [String: PropertyListValue]
     }
 }

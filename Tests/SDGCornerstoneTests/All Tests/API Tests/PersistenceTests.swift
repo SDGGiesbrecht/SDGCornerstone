@@ -42,7 +42,7 @@ class PersistenceTests : XCTestCase {
 
         preferences[testKey].value = true
         #if os(macOS)
-            // [_Warning: This should use centralized functions._]
+            // [_Workaround: This should use centralized functions._]
             var shell = Process()
             shell.launchPath = "/usr/bin/env"
             shell.arguments = ["defaults", "read", testDomainExternalName, testKey]
@@ -69,7 +69,7 @@ class PersistenceTests : XCTestCase {
 
         let stringValue = "value"
         #if os(macOS)
-            // [_Warning: This should use centralized functions._]
+            // [_Workaround: This should use centralized functions._]
             shell = Process()
             shell.launchPath = "/usr/bin/env"
             shell.arguments = ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue]
@@ -145,20 +145,37 @@ class PersistenceTests : XCTestCase {
         value = NSData(data: dataTwo)
         XCTAssert(value.asData == dataTwo, "Failed cast: \(value) (\(type(of: value))) ≠ \(dataTwo)")
 
-        let arrayOne: [PropertyListValue] = [−1, −2, −3]
-        let arrayTwo: [PropertyListValue] = [−4, −5, −6]
+        var arrayOne: [PropertyListValue] = [−1, −2, −3]
+        var arrayTwo: [PropertyListValue] = [−4, −5, −6]
         value = arrayOne
-        XCTAssert(value.asArray?.contains(where: { $0.equatableRepresentation == (−1).equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayOne)")
+        XCTAssert(value.asArray(of: Int.self)?.contains(−1) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayOne)")
         value = NSArray(array: arrayTwo)
-        XCTAssert(value.asArray?.contains(where: { $0.equatableRepresentation == (−4).equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayTwo)")
+        XCTAssert(value.asArray(of: Int.self)?.contains(−4) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayTwo)")
 
-        let dictionaryOne: [String: PropertyListValue] = ["1": 1, "2": 2, "3": 3]
-        let dictionaryTwo: [String: PropertyListValue] = ["4": 4, "5": 5, "6": 6]
+        var dictionaryOne: [String: PropertyListValue] = ["1": 1, "2": 2, "3": 3]
+        var dictionaryTwo: [String: PropertyListValue] = ["4": 4, "5": 5, "6": 6]
         value = dictionaryOne
-        XCTAssert(value.asDictionary?["3"]?.asInt == 3, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryOne)")
+        XCTAssert(value.asDictionary(of: Int.self)?["3"] == 3, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryOne)")
         value = NSDictionary(dictionary: dictionaryTwo)
         XCTAssert(value.asDictionary ≠ nil, "Failed cast: \(value) (\(type(of: value))) == nil")
-        XCTAssert(value.asDictionary?["6"]?.asInt == 6, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryTwo)")
+        XCTAssert(value.asDictionary(of: Int.self)?["6"] == 6, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryTwo)")
+        value = true
+        XCTAssert(value.asDictionary == nil, "Unexpected cast: \(value) (\(type(of: value))) ≠ nil")
+
+        arrayOne = [1, 2.0, "3"]
+        arrayTwo = [4, 5.0, "6"]
+        value = arrayOne
+        XCTAssert(value.asArray?.contains(where: { $0.equatableRepresentation == 1.equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayOne)")
+        value = NSArray(array: arrayTwo)
+        XCTAssert(value.asArray?.contains(where: { $0.equatableRepresentation == 4.equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayTwo)")
+
+        dictionaryOne = ["1": 1, "2": 2.0, "3": "3"]
+        dictionaryTwo = ["4": 4, "5": 5.0, "6": "6", "7": 7 as UInt, "8": 8 as Int64, "9": 9 as UInt64, "10": 10 as Int32, "11": 11 as UInt32, "12": 12 as Int16, "13": 13 as UInt16, "14": 14 as Int8, "15": 15 as UInt8, "16": 16.0 as Float, "17": NSDate(), "18": NSData(), "19": [NSString()], "20": [NSString(): NSString()], "21": NSArray(array: arrayTwo)]
+        value = dictionaryOne
+        XCTAssert(value.asDictionary?["3"]?.asString == "3", "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryOne)")
+        value = NSDictionary(dictionary: dictionaryTwo)
+        XCTAssert(value.asDictionary ≠ nil, "Failed cast: \(value) (\(type(of: value))) == nil")
+        XCTAssert(value.asDictionary?["6"]?.asString == "6", "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryTwo)")
         value = true
         XCTAssert(value.asDictionary == nil, "Unexpected cast: \(value) (\(type(of: value))) ≠ nil")
     }

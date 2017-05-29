@@ -133,7 +133,6 @@ public struct StrictString : BidirectionalCollection, Collection, Comparable, Eq
     ///     - lhs: A value.
     ///     - rhs: Another value.
     public static func < (lhs: StrictString, rhs: StrictString) -> Bool {
-        // [_Workaround: This should eventually be tailored, but solutions for resource bundling and build scripts will be necessary to handle the DUCET._]
         return lhs.string < rhs.string
     }
 

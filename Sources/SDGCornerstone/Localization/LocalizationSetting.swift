@@ -12,30 +12,48 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 /// A localization setting describing a list of preferred localizations and their order of precedence.
 public struct LocalizationSetting : Equatable {
 
-    // MARK: - Static Methods
+    // MARK: - Static Properties
 
-    private static let systemPreferences: Shared<LocalizationSetting> = {
+    private static let osSystemWidePreferences: Shared<PropertyListValue?> = {
+        #if os(Linux)
+
+            // [_Warning: This needs to actually look it up._]
+            let preferences = Shared<PropertyListValue?>(nil)
+
+            preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+            return preferences
+
+        #else
+
+            return Preferences.preferences(forDomain: UserDefaults.globalDomain)["AppleLanguages"]
+
+        #endif
+    }()
+
+    private static let sdgSystemWidePreferences: Shared<PropertyListValue?> = {
         // [_Warning: This needs to actually look it up._]
-        let preferences = Shared(LocalizationSetting(orderOfPrecedence: [] as [String]))
+        let preferences = Shared<PropertyListValue?>(nil)
 
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
 
-    private static let sdgPreferences: Shared<LocalizationSetting?> = {
+    private static let osApplicationPreferences: Shared<PropertyListValue?> = {
         // [_Warning: This needs to actually look it up._]
-        let preferences = Shared<LocalizationSetting?>(nil)
+        let preferences = Shared<PropertyListValue?>(nil)
 
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
 
-    private static let applicationPreferences: Shared<LocalizationSetting?> = {
+    private static let sdgApplicationPreferences: Shared<PropertyListValue?> = {
         // [_Warning: This needs to actually look it up._]
-        let preferences = Shared<LocalizationSetting?>(nil)
+        let preferences = Shared<PropertyListValue?>(nil)
 
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
@@ -49,9 +67,11 @@ public struct LocalizationSetting : Equatable {
 
     private static func resolveCurrentLocalization() -> LocalizationSetting {
         return overrides.value.last
-            ?? applicationPreferences.value
-            ?? sdgPreferences.value
-            ?? systemPreferences.value
+            ?? LocalizationSetting(sdgPreference: sdgApplicationPreferences.value)
+            ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
+            ?? LocalizationSetting(sdgPreference: sdgSystemWidePreferences.value)
+            ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
+            ?? LocalizationSetting(orderOfPrecedence: [] as [[String]])
     }
 
     private class ChangeObserver : SharedValueObserver {
@@ -90,6 +110,20 @@ public struct LocalizationSetting : Equatable {
     ///     - orderOfPrecedence: An array of localizations describing there order of precedence. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
     public init(orderOfPrecedence: [String]) {
         self.orderOfPrecedence = orderOfPrecedence.map() { [$0] }
+    }
+
+    private init?(osPreference preference: PropertyListValue?) {
+        guard let result = preference?.asArray(of: String.self) else {
+            return nil
+        }
+        self.init(orderOfPrecedence: result)
+    }
+
+    private init?(sdgPreference preference: PropertyListValue?) {
+        guard let result = preference?.asArray(of: [String].self) else {
+            return nil
+        }
+        self.init(orderOfPrecedence: result)
     }
 
     // MARK: - Properties
