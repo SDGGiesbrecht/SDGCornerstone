@@ -58,6 +58,15 @@ class LocalizationTests : TestCase {
         }
         XCTAssert(englishUsed)
         XCTAssert(françaisUtilisé)
+
+        LocalizationSetting.setApplicationPreferences(to: nil)
+
+        LocalizationSetting.setApplicationPreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
+        XCTAssert(LocalizationSetting.current.value.resolved() as LocalizationExample == .englishUnitedKingdom)
+        LocalizationSetting.setApplicationPreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
+        XCTAssert(LocalizationSetting.current.value.resolved() as LocalizationExample == .français)
+
+        LocalizationSetting.setApplicationPreferences(to: nil)
     }
 
     func testUserFacingText() {

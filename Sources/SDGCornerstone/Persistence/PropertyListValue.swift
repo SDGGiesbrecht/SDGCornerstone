@@ -123,12 +123,12 @@ extension PropertyListValue {
             return result.map() { $0.normalized }
         } else if let object = self as? NSArray { // [_Exempt from Code Coverage_] Unreachable on macOS.
             var result: [PropertyListValue] = []
-            for objectElement in object {
+            for objectElement in object { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 guard let element = objectElement as? PropertyListValue else {
                     preconditionFailure("\(objectElement) (\(type(of: objectElement))) is not a property list value.")
                 }
                 result.append(element)
-            }
+            } // [_Exempt from Code Coverage_] Unreachable on macOS.
             return result.normalized
         } else if let result = self as? [String: PropertyListValue] {
             return result.mapKeyValuePairs() { ($0, $1.normalized) }
@@ -144,8 +144,8 @@ extension PropertyListValue {
                 result[key] = value
             }
             return result.normalized
-        } else {
-            return self // [_Exempt from Code Coverage_] Unreachable on macOS.
+        } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            return self
         }
     }
 

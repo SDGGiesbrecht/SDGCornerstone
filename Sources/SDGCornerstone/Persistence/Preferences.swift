@@ -15,7 +15,11 @@
 import Foundation
 
 /// A set of preferences for a particular domain.
-open class Preferences : SharedValueObserver {
+open class Preferences {
+
+    // MARK: - Static Properties
+
+    internal static let sdgCornerstoneDomain = "ca.solideogloria.SDGCornerstone"
 
     // MARK: - Initialization
 
@@ -69,6 +73,9 @@ open class Preferences : SharedValueObserver {
         self.possibleDebugDomain = possibleDebugDomain
 
         contents = Preferences.readFromDisk(for: possibleDebugDomain)
+
+        observer = Observer()
+        observer.preferences = self
     }
 
     // MARK: - Properties
@@ -80,21 +87,13 @@ open class Preferences : SharedValueObserver {
 
     private var values: [String: Shared<PropertyListValue?>] = [:]
 
-    // MARK: - Usage
-
-    /// Accesses the property list value for the specified key.
-    public subscript(key: String) -> Shared<PropertyListValue?> {
-        return cached(in: &values[key]) {
-            let shared = Shared(contents[key])
-            shared.register(observer: self, identifier: key, reportInitialState: false)
-            return shared
+    private var observer: Observer
+    private class Observer : SharedValueObserver {
+        fileprivate init() {}
+        fileprivate weak var preferences: Preferences?
+        fileprivate func valueChanged(for identifier: String) {
+            preferences?.valueChanged(for: identifier)
         }
-    }
-
-    /// Resets all properties to nil.
-    public func reset() {
-        writeToDisk([:])
-        update(fromExternalState: [:])
     }
 
     // MARK: - Storage
@@ -154,16 +153,9 @@ open class Preferences : SharedValueObserver {
         }
     }
 
-    // MARK: - SharedValueObserver
+    // MARK: - Observing
 
-    // [_Inherit Documentation: SDGCornerstone.SharedValueObserver.valueChanged(for:)_]
-    /// Called when a value changes.
-    ///
-    /// - Parameters:
-    ///     - identifier: The identifier that was specified when the observer was registered. This can be used to differentiate between several values watched by the same observer.
-    ///
-    /// - SeeAlso: `register(observer:identifier)`
-    public func valueChanged(for identifier: String) {
+    private func valueChanged(for identifier: String) {
         guard let shared = values[identifier] else {
             preconditionFailure("Received notification of a shared value changing from an untracked identifier: \(identifier).")
         }
@@ -177,5 +169,22 @@ open class Preferences : SharedValueObserver {
 
             writeToDisk(contents)
         }
+    }
+
+    // MARK: - Usage
+
+    /// Accesses the property list value for the specified key.
+    public subscript(key: String) -> Shared<PropertyListValue?> {
+        return cached(in: &values[key]) {
+            let shared = Shared(contents[key])
+            shared.register(observer: observer, identifier: key, reportInitialState: false)
+            return shared
+        }
+    }
+
+    /// Resets all properties to nil.
+    public func reset() {
+        writeToDisk([:])
+        update(fromExternalState: [:])
     }
 }

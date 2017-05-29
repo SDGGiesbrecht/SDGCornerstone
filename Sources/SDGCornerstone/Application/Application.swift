@@ -38,4 +38,7 @@ internal struct Application {
     // MARK: - Properties
 
     internal let identifier: String
+    internal var domain: String {
+        return identifier
+    }
 }

@@ -19,6 +19,20 @@ import XCTest
 
 class InternalTests : TestCase {
 
+    func testLocalizationSetting() {
+        XCTAssert(LocalizationSetting.osSystemWidePreferences.value?.asArray(of: String.self) ≠ nil, "Failed to detect operating system localization setting.")
+
+        LocalizationSetting.internalUseSetSystemWidePreferences(to: nil)
+        LocalizationSetting.setApplicationPreferences(to: nil)
+
+        LocalizationSetting.internalUseSetSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
+        XCTAssert(LocalizationSetting.current.value.resolved() as LocalizationExample == .englishUnitedKingdom)
+        LocalizationSetting.internalUseSetSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
+        XCTAssert(LocalizationSetting.current.value.resolved() as LocalizationExample == .français)
+
+        LocalizationSetting.internalUseSetSystemWidePreferences(to: nil)
+    }
+
     func testUIntHalvesView() {
         XCTAssert((0 as UInt).halves.index(before: 1) == 0)
     }
@@ -41,6 +55,7 @@ class InternalTests : TestCase {
 
     static var allTests: [(String, (InternalTests) -> () throws -> Void)] {
         return [
+            ("testLocalizationSetting", testLocalizationSetting),
             ("testUIntHalvesView", testUIntHalvesView),
             ("testWholeNumberBinaryView", testWholeNumberBinaryView)
         ]

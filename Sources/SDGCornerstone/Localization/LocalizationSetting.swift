@@ -19,9 +19,13 @@ public struct LocalizationSetting : Equatable {
 
     // MARK: - Static Properties
 
+    private static let sdgDomainSuffix = ".Language"
+    #if !os(Linux)
     private static let osPreferenceKey = "AppleLanguages"
+    #endif
+    private static let sdgPreferenceKey = "SDGLanguages"
 
-    private static let osSystemWidePreferences: Shared<PropertyListValue?> = {
+    internal static let osSystemWidePreferences: Shared<PropertyListValue?> = {
         let preferences: Shared<PropertyListValue?>
         #if os(Linux)
 
@@ -39,9 +43,7 @@ public struct LocalizationSetting : Equatable {
     }()
 
     private static let sdgSystemWidePreferences: Shared<PropertyListValue?> = {
-        // [_Warning: This needs to actually look it up._]
-        let preferences = Shared<PropertyListValue?>(nil)
-
+        let preferences = Preferences.preferences(for: Preferences.sdgCornerstoneDomain + sdgDomainSuffix)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
@@ -64,9 +66,7 @@ public struct LocalizationSetting : Equatable {
     }()
 
     private static let sdgApplicationPreferences: Shared<PropertyListValue?> = {
-        // [_Warning: This needs to actually look it up._]
-        let preferences = Shared<PropertyListValue?>(nil)
-
+        let preferences = Preferences.preferences(for: Application.current.domain + sdgDomainSuffix)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
@@ -83,7 +83,7 @@ public struct LocalizationSetting : Equatable {
             ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
             ?? LocalizationSetting(sdgPreference: sdgSystemWidePreferences.value)
             ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
-            ?? LocalizationSetting(orderOfPrecedence: [] as [[String]])
+            ?? LocalizationSetting(orderOfPrecedence: [] as [[String]]) // [_Exempt from Code Coverage_]
     }
 
     private class ChangeObserver : SharedValueObserver {
@@ -105,6 +105,37 @@ public struct LocalizationSetting : Equatable {
         result.register(observer: ChangeObserver(), reportInitialState: false)
         return result
     }()
+
+    // MARK: - Static Methods
+
+    // For user available menus.
+
+    /// :nodoc:
+    public static func internalUseSetSystemWidePreferences(to setting: LocalizationSetting?) {
+        sdgSystemWidePreferences.value = setting?.orderOfPrecedence
+    }
+
+    /// Sets the application‐specific language preferences to the specified settings.
+    ///
+    /// This should only be used when the changes both:
+    ///   - need to be remembered the next time the application is launched, and
+    ///   - are at the direct request of the user.
+    ///
+    /// Otherwise, use `do(_:)` instead.
+    public static func setApplicationPreferences(to setting: LocalizationSetting?) {
+
+        sdgApplicationPreferences.value = setting?.orderOfPrecedence
+
+        if let preferences = setting {
+            var flattened: [String] = []
+            for group in preferences.orderOfPrecedence {
+                flattened.append(contentsOf: group.shuffled())
+            }
+            osApplicationPreferences.value = flattened
+        } else {
+            osApplicationPreferences.value = nil
+        }
+    }
 
     // MARK: - Initialization
 

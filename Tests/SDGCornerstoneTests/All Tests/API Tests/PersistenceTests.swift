@@ -21,7 +21,7 @@ class PersistenceTests : TestCase {
 
     func testPreferences() {
         let testKey = "SDGTestKey"
-        let testDomain = "ca.solideogloria.SDGCornerstone.Tests"
+        let testDomain = "ca.solideogloria.SDGCornerstone.Tests.Preferences"
         let testDomainExternalName = testDomain + ".debug"
         let preferences = Preferences.preferences(for: testDomain)
 
@@ -96,6 +96,12 @@ class PersistenceTests : TestCase {
         preferences.reset()
         XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")
         XCTAssert(preferences[externalTestKey].value == nil, "Unexpected value: \(String(describing: preferences[externalTestKey].value)) ≠ nil")
+
+        Preferences.applicationPreferences.reset()
+        XCTAssert(Preferences.applicationPreferences[testKey].value == nil, "Unexpected value: \(String(describing: Preferences.applicationPreferences[testKey].value)) ≠ nil")
+        Preferences.applicationPreferences[testKey].value = true
+        XCTAssert(Preferences.applicationPreferences[testKey].value?.asBool == true, "Unexpected value: \(String(describing: Preferences.applicationPreferences[testKey].value)) ≠ true")
+        Preferences.applicationPreferences.reset()
     }
 
     func testPropertyList() {
