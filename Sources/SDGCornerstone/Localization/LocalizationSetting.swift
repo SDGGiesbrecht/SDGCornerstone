@@ -19,20 +19,23 @@ public struct LocalizationSetting : Equatable {
 
     // MARK: - Static Properties
 
+    private static let osPreferenceKey = "AppleLanguages"
+
     private static let osSystemWidePreferences: Shared<PropertyListValue?> = {
+        let preferences: Shared<PropertyListValue?>
         #if os(Linux)
 
             // [_Warning: This needs to actually look it up._]
-            let preferences = Shared<PropertyListValue?>(nil)
-
-            preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-            return preferences
+            preferences = Shared<PropertyListValue?>(nil)
 
         #else
 
-            return Preferences.preferences(forDomain: UserDefaults.globalDomain)["AppleLanguages"]
+            preferences = Preferences.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
 
         #endif
+
+        preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+        return preferences
     }()
 
     private static let sdgSystemWidePreferences: Shared<PropertyListValue?> = {
@@ -44,8 +47,17 @@ public struct LocalizationSetting : Equatable {
     }()
 
     private static let osApplicationPreferences: Shared<PropertyListValue?> = {
-        // [_Warning: This needs to actually look it up._]
-        let preferences = Shared<PropertyListValue?>(nil)
+        let preferences: Shared<PropertyListValue?>
+        #if os(Linux)
+
+            // [_Warning: This needs to actually look it up._]
+            preferences = Shared<PropertyListValue?>(nil)
+
+        #else
+
+            preferences = Preferences.applicationPreferences[osPreferenceKey]
+
+        #endif
 
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences

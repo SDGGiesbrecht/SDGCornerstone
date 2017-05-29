@@ -15,7 +15,7 @@
 import XCTest
 import SDGCornerstone
 
-class LogicTests : XCTestCase {
+class LogicTests : TestCase {
 
     func testBool() {
         var variable = false

@@ -17,7 +17,7 @@ import XCTest
 
 import SDGCornerstone
 
-class MathematicsTests : XCTestCase {
+class MathematicsTests : TestCase {
 
     func testAddable() {
         func runTests<T : Addable>(addend: T, augend: T, sum: T) where T : Equatable {

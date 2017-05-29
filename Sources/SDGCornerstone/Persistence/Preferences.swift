@@ -21,13 +21,27 @@ open class Preferences : SharedValueObserver {
 
     private static var domains: [String: Preferences] = [:]
 
+    internal static var subclassForApplicationPreferencesInitializer: Preferences.Type?
+    /// The application preferences
+    public static let applicationPreferences: Preferences = {
+        guard let type = Preferences.subclassForApplicationPreferencesInitializer else {
+            preconditionFailureNotInitialized()
+        }
+        return Preferences.applicationPreferences(as: type)
+    }()
+
+    /// Returns subclassed preferences for the application domain.
+    public static func applicationPreferences<P : Preferences>(as subClass: P.Type) -> P {
+        return preferences(as: P.self, for: Application.current.identifier)
+    }
+
     /// Returns the preferences for a particular domain.
-    public static func preferences(forDomain domain: String) -> Preferences {
-        return preferences(Preferences.self, for: domain)
+    public static func preferences(for domain: String) -> Preferences {
+        return preferences(as: Preferences.self, for: domain)
     }
 
     /// Returns subclassed preferences for a particular domain.
-    public static func preferences<P : Preferences>(_ subClass: P.Type, for domain: String) -> P {
+    public static func preferences<P : Preferences>(as subClass: P.Type, for domain: String) -> P {
 
         let result = cached(in: &domains[domain]) {
             return P(domain: domain)
@@ -41,12 +55,17 @@ open class Preferences : SharedValueObserver {
 
     /// Creates preferences for a specified domain.
     ///
-    /// Subclasses may call this during initialization, but in all other circumstances, `preferences(forDomain:)` should be called to prevent duplication.
+    /// Subclasses may call this during initialization, but in all other circumstances, `preferences(for:)` should be called to prevent duplication.
     public required init(domain: String) {
-        assert(Preferences.domains[domain] == nil, "Detected duplicate initialization of \(domain). Call preferences(forDomain:) instead.")
+        assert(Preferences.domains[domain] == nil, "Detected duplicate initialization of \(domain). Call preferences(for:) instead.")
 
         self.domain = domain
-        let possibleDebugDomain = BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Code Coverage_]
+        let possibleDebugDomain: String
+        if domain == UserDefaults.globalDomain {
+            possibleDebugDomain = domain
+        } else {
+            possibleDebugDomain = BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Code Coverage_]
+        }
         self.possibleDebugDomain = possibleDebugDomain
 
         contents = Preferences.readFromDisk(for: possibleDebugDomain)
@@ -115,6 +134,7 @@ open class Preferences : SharedValueObserver {
 
         #else
 
+            assert(possibleDebugDomain ≠ UserDefaults.globalDomain, "Attempted to write preferences to the global domain. This domain is read‐only.")
             UserDefaults.standard.setPersistentDomain(preferences, forName: possibleDebugDomain)
 
         #endif

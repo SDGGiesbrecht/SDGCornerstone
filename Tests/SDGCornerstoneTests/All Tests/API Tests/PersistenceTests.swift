@@ -17,13 +17,13 @@ import Foundation
 
 import SDGCornerstone
 
-class PersistenceTests : XCTestCase {
+class PersistenceTests : TestCase {
 
     func testPreferences() {
         let testKey = "SDGTestKey"
         let testDomain = "ca.solideogloria.SDGCornerstone.Tests"
         let testDomainExternalName = testDomain + ".debug"
-        let preferences = Preferences.preferences(forDomain: testDomain)
+        let preferences = Preferences.preferences(for: testDomain)
 
         preferences[testKey].value = nil
         XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")

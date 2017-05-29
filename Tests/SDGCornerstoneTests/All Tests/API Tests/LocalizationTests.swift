@@ -16,7 +16,7 @@ import XCTest
 
 import SDGCornerstone
 
-class LocalizationTests : XCTestCase {
+class LocalizationTests : TestCase {
 
     func testLocalization() {
         XCTAssert(LocalizationExample(exactly: "fr")?.code == "fr")

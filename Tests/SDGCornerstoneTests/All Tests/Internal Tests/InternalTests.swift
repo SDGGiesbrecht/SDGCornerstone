@@ -17,7 +17,7 @@ import XCTest
 
 @testable import SDGCornerstone
 
-class InternalTests : XCTestCase {
+class InternalTests : TestCase {
 
     func testUIntHalvesView() {
         XCTAssert((0 as UInt).halves.index(before: 1) == 0)

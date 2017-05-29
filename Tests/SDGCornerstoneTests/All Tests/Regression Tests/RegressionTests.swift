@@ -17,7 +17,7 @@ import XCTest
 
 import SDGCornerstone
 
-class RegressionTests : XCTestCase {
+class RegressionTests : TestCase {
 
     func testAddAndSetIsUnambiguous() {
         // Untracked

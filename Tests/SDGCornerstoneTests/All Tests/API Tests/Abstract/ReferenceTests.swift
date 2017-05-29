@@ -17,7 +17,7 @@ import XCTest
 import Foundation
 import SDGCornerstone
 
-class ReferenceTests : XCTestCase {
+class ReferenceTests : TestCase {
 
     func testShared() {
         var shared: Shared<Int>? = Shared(1)

@@ -17,7 +17,7 @@ import Foundation
 
 import SDGCornerstone
 
-class CollectionTests : XCTestCase {
+class CollectionTests : TestCase {
 
     func testArray() {
         XCTAssert([] ≠ [1])
