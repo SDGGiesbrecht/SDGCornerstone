@@ -22,8 +22,11 @@ private var initialized = false
 /// - Parameters:
 ///     - applicationIdentifier: An identifier for the application. If the application has a main bundle, this should match its identifier.
 ///     - applicationPreferencesClass: A subclass of `Preferences` to use for the application preferences. Defaults to the `Preferences` class itself.
-public func initialize(applicationIdentifier: String, applicationPreferencesClass: Preferences.Type = Preferences.self) {
+///     - mode: The `Mode` SDGCornerstone should follow.
+public func initialize(mode: Mode, applicationIdentifier: String, applicationPreferencesClass: Preferences.Type = Preferences.self) {
+    assert(initialized == false, "Detected attempted to re‐initialize. SDGCornerstone is only designed to be initialized once.")
     initialized = true
+    Application.currentApplicationModeInitializer = mode
     Application.currentApplicationIdentifierInitializer = applicationIdentifier
     Preferences.subclassForApplicationPreferencesInitializer = applicationPreferencesClass
 }

@@ -87,7 +87,7 @@ class PersistenceTests : TestCase {
         let causeSynchronization = "CauseSynchronization"
         preferences[testKey].value = causeSynchronization
         XCTAssert(preferences[testKey].value?.asString == causeSynchronization, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ \(causeSynchronization)")
-        #if !os(iOS) && !os(tvOS)
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
             // iOS and tvOS could not externally write this to the disk in the first place (see #if statement above).
 
             XCTAssert(preferences[externalTestKey].value?.asString == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")

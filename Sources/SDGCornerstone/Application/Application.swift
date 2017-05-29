@@ -19,20 +19,23 @@ internal struct Application {
     // MARK: - Static Properties
 
     internal static var currentApplicationIdentifierInitializer: String?
+    internal static var currentApplicationModeInitializer: Mode?
     internal static let current: Application = {
-        guard let identifier = currentApplicationIdentifierInitializer else {
+        guard let identifier = currentApplicationIdentifierInitializer,
+            let mode = currentApplicationModeInitializer else {
             preconditionFailureNotInitialized()
         }
         if let main = Bundle.main.bundleIdentifier {
             assert(identifier == main, "The application identifier does not match the main bundle identifier: \(identifier) ≠ \(main)")
         }
-        return Application(identifier: identifier)
+        return Application(identifier: identifier, mode: mode)
     }()
 
     // MARK: - Initialization
 
-    private init(identifier: String) {
+    private init(identifier: String, mode: Mode) {
         self.identifier = identifier
+        self.mode = mode
     }
 
     // MARK: - Properties
@@ -41,4 +44,6 @@ internal struct Application {
     internal var domain: String {
         return identifier
     }
+
+    internal let mode: Mode
 }

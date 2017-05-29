@@ -52,7 +52,7 @@ public struct LocalizationSetting : Equatable {
         let preferences: Shared<PropertyListValue?>
         #if os(Linux)
 
-            // [_Warning: This needs to actually look it up._]
+            // This is does not exist on Linux anyway.
             preferences = Shared<PropertyListValue?>(nil)
 
         #else

@@ -24,7 +24,7 @@ class TestCase : XCTestCase {
     override func setUp() {
         if ¬TestCase.initialized {
             TestCase.initialized = true
-            SDGCornerstone.initialize(applicationIdentifier: "ca.solideogloria.SDGCornerstone.Tests")
+            SDGCornerstone.initialize(mode: .commandLineTool, applicationIdentifier: "ca.solideogloria.SDGCornerstone.Tests")
         }
         super.setUp()
     }
