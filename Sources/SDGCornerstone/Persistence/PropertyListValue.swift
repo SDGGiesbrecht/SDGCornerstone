@@ -42,7 +42,27 @@ extension PropertyListValue {
                     return NSNumber(value: boolean)
                 } else if let integer = self as? Int {
                     return NSNumber(value: integer)
+                } else if let integer = self as? UInt {
+                    return NSNumber(value: integer)
+                } else if let integer = self as? Int64 {
+                    return NSNumber(value: integer)
+                } else if let integer = self as? UInt64 {
+                    return NSNumber(value: integer)
+                } else if let integer = self as? Int32 {
+                    return NSNumber(value: integer)
+                } else if let integer = self as? UInt32 {
+                    return NSNumber(value: integer)
+                } else if let integer = self as? Int16 {
+                    return NSNumber(value: integer)
+                } else if let integer = self as? UInt16 {
+                    return NSNumber(value: integer)
+                } else if let integer = self as? Int8 {
+                    return NSNumber(value: integer)
+                } else if let integer = self as? UInt8 {
+                    return NSNumber(value: integer)
                 } else if let floatingPointNumber = self as? Double {
+                    return NSNumber(value: floatingPointNumber)
+                } else if let floatingPointNumber = self as? Float {
                     return NSNumber(value: floatingPointNumber)
                 } else if let string = self as? String {
                     return NSString(string: string)
