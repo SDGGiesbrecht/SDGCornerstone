@@ -192,6 +192,9 @@
                 <a href="Functions.html#/s:F14SDGCornerstone3gcduRxS_11MeasurementrFTxx_x">gcd(_:_:)</a>
               </li>
               <li class="nav-group-task">
+                <a href="Functions.html#/s:F14SDGCornerstone10initializeFT21applicationIdentifierSS27applicationPreferencesClassMCS_11Preferences_T_">initialize(applicationIdentifier:applicationPreferencesClass:)</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Functions.html#/s:F14SDGCornerstone3lcmuRxS_11MeasurementrFTxx_x">lcm(_:_:)</a>
               </li>
               <li class="nav-group-task">
@@ -395,6 +398,75 @@
 
           </section>
           <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:F14SDGCornerstone10initializeFT21applicationIdentifierSS27applicationPreferencesClassMCS_11Preferences_T_"></a>
+                    <a name="//apple_ref/swift/Function/initialize(applicationIdentifier:applicationPreferencesClass:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F14SDGCornerstone10initializeFT21applicationIdentifierSS27applicationPreferencesClassMCS_11Preferences_T_">initialize(applicationIdentifier:applicationPreferencesClass:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes SDGCornerstone. Call this before calling anything else from SDGCornerstone.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">initialize</span><span class="p">(</span><span class="nv">applicationIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">applicationPreferencesClass</span><span class="p">:</span> <span class="kt"><a href="Classes/Preferences.html">Preferences</a></span><span class="o">.</span><span class="k">Type</span> <span class="o">=</span> <span class="kt"><a href="Classes/Preferences.html">Preferences</a></span><span class="o">.</span><span class="k">self</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>applicationIdentifier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An identifier for the application. If the application has a main bundle, this should match its identifier.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>applicationPreferencesClass</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A subclass of <code>Preferences</code> to use for the application preferences. Defaults to the <code>Preferences</code> class itself.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <div class="task-group">
               <div class="task-name-container">
                 <a name="/Caching"></a>

@@ -193,6 +193,9 @@
                 <a href="../Functions.html#/s:F14SDGCornerstone3gcduRxS_11MeasurementrFTxx_x">gcd(_:_:)</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone10initializeFT21applicationIdentifierSS27applicationPreferencesClassMCS_11Preferences_T_">initialize(applicationIdentifier:applicationPreferencesClass:)</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Functions.html#/s:F14SDGCornerstone3lcmuRxS_11MeasurementrFTxx_x">lcm(_:_:)</a>
               </li>
               <li class="nav-group-task">
@@ -414,9 +417,63 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFC14SDGCornerstone11Preferences11preferencesFT9forDomainSS_S0_"></a>
-                    <a name="//apple_ref/swift/Method/preferences(forDomain:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFC14SDGCornerstone11Preferences11preferencesFT9forDomainSS_S0_">preferences(forDomain:)</a>
+                    <a name="/s:ZvC14SDGCornerstone11Preferences22applicationPreferencesS0_"></a>
+                    <a name="//apple_ref/swift/Variable/applicationPreferences" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC14SDGCornerstone11Preferences22applicationPreferencesS0_">applicationPreferences</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The application preferences</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">applicationPreferences</span><span class="p">:</span> <span class="kt">Preferences</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFC14SDGCornerstone11Preferences22applicationPreferencesuRxS0_rFT2asMx_x"></a>
+                    <a name="//apple_ref/swift/Method/applicationPreferences(as:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC14SDGCornerstone11Preferences22applicationPreferencesuRxS0_rFT2asMx_x">applicationPreferences(as:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns subclassed preferences for the application domain.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n"><a href="../Classes/Preferences.html#/s:ZvC14SDGCornerstone11Preferences22applicationPreferencesS0_">applicationPreferences</a></span><span class="o">&lt;</span><span class="kt">P</span> <span class="p">:</span> <span class="kt">Preferences</span><span class="o">&gt;</span><span class="p">(</span><span class="k">as</span> <span class="nv">subClass</span><span class="p">:</span> <span class="kt">P</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">P</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFC14SDGCornerstone11Preferences11preferencesFT3forSS_S0_"></a>
+                    <a name="//apple_ref/swift/Method/preferences(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC14SDGCornerstone11Preferences11preferencesFT3forSS_S0_">preferences(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -431,7 +488,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">preferences</span><span class="p">(</span><span class="n">forDomain</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Preferences</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">preferences</span><span class="p">(</span><span class="k">for</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Preferences</span></code></pre>
 
                         </div>
                       </div>
@@ -441,9 +498,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFC14SDGCornerstone11Preferences11preferencesuRxS0_rFTMx3forSS_x"></a>
-                    <a name="//apple_ref/swift/Method/preferences(_:for:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFC14SDGCornerstone11Preferences11preferencesuRxS0_rFTMx3forSS_x">preferences(_:for:)</a>
+                    <a name="/s:ZFC14SDGCornerstone11Preferences11preferencesuRxS0_rFT2asMx3forSS_x"></a>
+                    <a name="//apple_ref/swift/Method/preferences(as:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC14SDGCornerstone11Preferences11preferencesuRxS0_rFT2asMx3forSS_x">preferences(as:for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -458,7 +515,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">preferences</span><span class="o">&lt;</span><span class="kt">P</span> <span class="p">:</span> <span class="kt">Preferences</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">subClass</span><span class="p">:</span> <span class="kt">P</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span> <span class="k">for</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">P</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">preferences</span><span class="o">&lt;</span><span class="kt">P</span> <span class="p">:</span> <span class="kt">Preferences</span><span class="o">&gt;</span><span class="p">(</span><span class="k">as</span> <span class="nv">subClass</span><span class="p">:</span> <span class="kt">P</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span> <span class="k">for</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">P</span></code></pre>
 
                         </div>
                       </div>
@@ -480,7 +537,7 @@
                       <div class="abstract">
                         <p>Creates preferences for a specified domain.</p>
 
-<p>Subclasses may call this during initialization, but in all other circumstances, <code><a href="../Classes/Preferences.html#/s:ZFC14SDGCornerstone11Preferences11preferencesFT9forDomainSS_S0_">preferences(forDomain:)</a></code> should be called to prevent duplication.</p>
+<p>Subclasses may call this during initialization, but in all other circumstances, <code><a href="../Classes/Preferences.html#/s:ZFC14SDGCornerstone11Preferences11preferencesFT3forSS_S0_">preferences(for:)</a></code> should be called to prevent duplication.</p>
 
                       </div>
                       <div class="declaration">
