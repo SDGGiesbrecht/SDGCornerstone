@@ -127,9 +127,9 @@ extension PropertyListValue {
                 guard let element = objectElement as? PropertyListValue else {
                     preconditionFailure("\(objectElement) (\(type(of: objectElement))) is not a property list value.")
                 } // [_Exempt from Code Coverage_] Unreachable on macOS.
-                result.append(element)
+                result.append(element.normalized)
             } // [_Exempt from Code Coverage_] Unreachable on macOS.
-            return result.normalized
+            return result
         } else if let result = self as? [String: PropertyListValue] {
             return result.mapKeyValuePairs() { ($0, $1.normalized) }
         } else if let object = self as? NSDictionary {
@@ -141,9 +141,9 @@ extension PropertyListValue {
                 guard let value = objectValue as? PropertyListValue else {
                     preconditionFailure("\(objectValue) (\(type(of: objectValue))) is not a property list value.")
                 }
-                result[key] = value
+                result[key] = value.normalized
             }
-            return result.normalized
+            return result
         } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return self
         }
