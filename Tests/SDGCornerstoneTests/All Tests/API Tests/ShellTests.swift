@@ -51,7 +51,7 @@ class ShellTests : TestCase {
         } catch {
             XCTFail("Wrong error type.")
         }
-        wait(for: [threw], timeout: 0)
+        waitForExpectations(timeout: 0)
     }
 
     static var allTests: [(String, (ShellTests) -> () throws -> Void)] {

@@ -29,7 +29,7 @@ public struct LocalizationSetting : Equatable {
         let preferences: Shared<PropertyListValue?>
         #if os(Linux)
 
-            if let languages = ProcessInfo.processInfo.environment["Language"] {
+            if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
                 let entries = languages.components(separatedBy: ":")
                 let converted = entries.map() { $0.replacingOccurrences(of: "_", with: "\u{2D}") }
                 preferences = Shared<PropertyListValue?>(converted)

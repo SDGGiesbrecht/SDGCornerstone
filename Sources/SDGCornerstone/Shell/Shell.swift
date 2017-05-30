@@ -112,10 +112,10 @@
                 }
             }
             func readProgress() {
-                handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { (line: String) -> Void in
+                handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
                     print(line)
                 })
-                handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { (line: String) -> Void in
+                handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
                     FileHandle.standardError.write((line + newLine).data(using: .utf8)!)
                 })
             }
