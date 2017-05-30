@@ -21,37 +21,41 @@ class ShellTests : TestCase {
 
     func testShell() {
 
-        var command = ["ls"]
-        do {
-            try Shell.default.run(command: command)
-        } catch let error as Shell.Error {
-            XCTFail("Unexpected error: \(command) → \(error.description)")
-        } catch let error {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-        let message = "Hello, world!"
-        command = ["echo", message]
-        do {
-            let result = try Shell.default.run(command: command)
-            XCTAssert(result == message, "Unexpected output: \(command) → \(String(describing: result))")
-        } catch let error as Shell.Error {
-            XCTFail("Unexpected error: \(command) → \(error.description)")
-        } catch let error {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
+            var command = ["ls"]
+            do {
+                try Shell.default.run(command: command)
+            } catch let error as Shell.Error {
+                XCTFail("Unexpected error: \(command) → \(error.description)")
+            } catch let error {
+                XCTFail("Unexpected error: \(command) → \(error)")
+            }
 
-        let nonexistentCommand = "no‐such‐command"
-        let threw = expectation(description: "Error thrown for unidentified command.")
-        do {
-            try Shell.default.run(command: [nonexistentCommand])
-        } catch let error as Shell.Error {
-            XCTAssert(error.description == "/bin/sh: \(nonexistentCommand): command not found")
-            threw.fulfill()
-        } catch {
-            XCTFail("Wrong error type.")
-        }
-        waitForExpectations(timeout: 0)
+            let message = "Hello, world!"
+            command = ["echo", message]
+            do {
+                let result = try Shell.default.run(command: command)
+                XCTAssert(result == message, "Unexpected output: \(command) → \(String(describing: result))")
+            } catch let error as Shell.Error {
+                XCTFail("Unexpected error: \(command) → \(error.description)")
+            } catch let error {
+                XCTFail("Unexpected error: \(command) → \(error)")
+            }
+
+            let nonexistentCommand = "no‐such‐command"
+            let threw = expectation(description: "Error thrown for unidentified command.")
+            do {
+                try Shell.default.run(command: [nonexistentCommand])
+            } catch let error as Shell.Error {
+                XCTAssert(error.description.contains("not found"), "Unexpected error: \(command) → \(error.description)")
+                threw.fulfill()
+            } catch {
+                XCTFail("Wrong error type.")
+            }
+            waitForExpectations(timeout: 0)
+
+        #endif
     }
 
     static var allTests: [(String, (ShellTests) -> () throws -> Void)] {
