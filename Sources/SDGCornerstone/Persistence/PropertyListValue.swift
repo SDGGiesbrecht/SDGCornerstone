@@ -35,50 +35,52 @@ extension PropertyListValue {
     // [_Define Documentation: SDGCornerstone.PropertyListValue.equatableRepresentation_]
     /// The equatable representation
     public var equatableRepresentation: EquatableRepresentation {
-        guard let result = self as? EquatableRepresentation else { // [_Exempt from Code Coverage_]
-            #if os(Linux)
-                // [_Workaround: Linux doesn’t bridge well on its own yet. (Swift 3.1.0)_]
-                if let boolean = self as? Bool {
-                    return NSNumber(value: boolean)
-                } else if let integer = self as? Int {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? UInt {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? Int64 {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? UInt64 {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? Int32 {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? UInt32 {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? Int16 {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? UInt16 {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? Int8 {
-                    return NSNumber(value: integer)
-                } else if let integer = self as? UInt8 {
-                    return NSNumber(value: integer)
-                } else if let floatingPointNumber = self as? Double {
-                    return NSNumber(value: floatingPointNumber)
-                } else if let floatingPointNumber = self as? Float {
-                    return NSNumber(value: floatingPointNumber)
-                } else if let string = self as? String {
-                    return NSString(string: string)
-                } else if let date = self as? Date {
-                    return NSDate(timeInterval: 0, since: date)
-                } else if let data = self as? Data {
-                    return NSData(data: data)
-                } else if let array = self as? [Any] {
-                    return NSArray(array: array)
-                } else if let dictionary = self as? [String: Any] {
-                    return NSDictionary(dictionary: dictionary)
-                }
-            #endif
+        if let result = self as? EquatableRepresentation {
+            return result
+
+            // [_Workaround: Linux does not bridge well yet. (Swift 3.1.0)_]
+
+        } else if let boolean = self as? Bool {
+            return NSNumber(value: boolean)
+        } else if let integer = self as? Int {
+            return NSNumber(value: integer)
+        } else if let integer = self as? UInt {
+            return NSNumber(value: integer)
+        } else if let integer = self as? Int64 {
+            return NSNumber(value: integer)
+        } else if let integer = self as? UInt64 {
+            return NSNumber(value: integer)
+        } else if let integer = self as? Int32 {
+            return NSNumber(value: integer)
+        } else if let integer = self as? UInt32 {
+            return NSNumber(value: integer)
+        } else if let integer = self as? Int16 {
+            return NSNumber(value: integer)
+        } else if let integer = self as? UInt16 {
+            return NSNumber(value: integer)
+        } else if let integer = self as? Int8 {
+            return NSNumber(value: integer)
+        } else if let integer = self as? UInt8 {
+            return NSNumber(value: integer)
+        } else if let floatingPointNumber = self as? Double {
+            return NSNumber(value: floatingPointNumber)
+        } else if let floatingPointNumber = self as? Float {
+            return NSNumber(value: floatingPointNumber)
+        } else if let string = self as? String {
+            return NSString(string: string)
+        } else if let date = self as? Date {
+            return NSDate(timeInterval: 0, since: date)
+        } else if let data = self as? Data {
+            return NSData(data: data)
+        } else if let array = self as? [Any] {
+            return NSArray(array: array)
+        } else if let dictionary = self as? [String: Any] {
+            return NSDictionary(dictionary: dictionary)
+        } else if let dictionary = self as? [NSString: Any] {
+            return NSDictionary(dictionary: dictionary)
+        } else {
             preconditionFailure("\(type(of: self)) is not a property list value.")
         }
-        return result
     }
 }
 
@@ -86,109 +88,221 @@ extension PropertyListValue {
 
 extension PropertyListValue {
 
-    fileprivate var normalized: PropertyListValue {
-        if let result = self as? Bool {
-            return NSNumber(value: result)
-        } else if let result = self as? Int {
-            return NSNumber(value: result)
-        } else if let result = self as? UInt {
-            return NSNumber(value: result)
-        } else if let result = self as? Int64 {
-            return NSNumber(value: result)
-        } else if let result = self as? UInt64 {
-            return NSNumber(value: result)
-        } else if let result = self as? Int32 {
-            return NSNumber(value: result)
-        } else if let result = self as? UInt32 {
-            return NSNumber(value: result)
-        } else if let result = self as? Int16 {
-            return NSNumber(value: result)
-        } else if let result = self as? UInt16 {
-            return NSNumber(value: result)
-        } else if let result = self as? Int8 {
-            return NSNumber(value: result)
-        } else if let result = self as? UInt8 {
-            return NSNumber(value: result)
-        } else if let result = self as? Double {
-            return NSNumber(value: result)
-        } else if let result = self as? Float {
-            return NSNumber(value: result)
-        } else if let result = self as? NSString {
-            return result.substring(from: 0)
-        } else if let result = self as? NSDate {
-            return Date(timeIntervalSinceReferenceDate: result.timeIntervalSinceReferenceDate)
-        } else if let result = self as? NSData {
-            return result.subdata(with: NSRange(location: 0, length: result.length))
-        } else if let result = self as? [PropertyListValue] {
-            return result.map() { $0.normalized }
-        } else if let object = self as? NSArray { // [_Exempt from Code Coverage_] Unreachable on macOS.
-            var result: [PropertyListValue] = []
-            for objectElement in object { // [_Exempt from Code Coverage_] Unreachable on macOS.
-                guard let element = objectElement as? PropertyListValue else {
-                    preconditionFailure("\(objectElement) (\(type(of: objectElement))) is not a property list value.")
-                } // [_Exempt from Code Coverage_] Unreachable on macOS.
-                result.append(element.normalized)
-            } // [_Exempt from Code Coverage_] Unreachable on macOS.
+    /// Returns the property list value as the specified type if possible, or `nil`.
+    ///
+    /// - Note: This is a temporary replacement for `as? V` until it works reliably on all platforms.
+    public func `as`<V : PropertyListValue>(_ type: V.Type) -> V? {
+        if let result = self as? V {
             return result
-        } else if let result = self as? [String: PropertyListValue] {
-            return result.mapKeyValuePairs() { ($0, $1.normalized) }
-        } else if let object = self as? NSDictionary {
-            var result: [String: PropertyListValue] = [:]
-            for (objectKey, objectValue) in object {
-                guard let key = (objectKey as? PropertyListValue)?.asString else {
-                    preconditionFailure("\(objectKey) (\(type(of: objectKey))) is not a property list key.")
-                }
-                guard let value = objectValue as? PropertyListValue else {
-                    preconditionFailure("\(objectValue) (\(type(of: objectValue))) is not a property list value.")
-                }
-                result[key] = value.normalized
+        } else if V.self == Bool.self {
+            if let result = self as? NSNumber {
+                return result.boolValue as? V
+            } else {
+                return nil
             }
-            return result
-        } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
-            return self
+        } else if V.self == Int.self {
+            if let result = self as? NSNumber {
+                return result.intValue as? V
+            } else {
+                return nil
+            }
+        } else if V.self == UInt.self {
+            if let result = self as? NSNumber {
+                return result.uintValue as? V
+            } else {
+                return nil
+            }
+        } else if V.self == Int64.self {
+            if let result = self as? NSNumber {
+                return result.int64Value as? V
+            } else {
+                return nil
+            }
+        } else if V.self == UInt64.self {
+            if let result = self as? NSNumber {
+                return result.uint64Value as? V
+            } else {
+                return nil
+            }
+        } else if V.self == Int32.self {
+            if let result = self as? NSNumber {
+                return result.int32Value as? V
+            } else {
+                return nil
+            }
+        } else if V.self == UInt32.self {
+            if let result = self as? NSNumber {
+                return result.uint32Value as? V
+            } else {
+                return nil
+            }
+        } else if V.self == Int16.self {
+            if let result = self as? NSNumber {
+                return result.int16Value as? V
+            } else {
+                return nil
+            }
+        } else if V.self == UInt16.self {
+            if let result = self as? NSNumber {
+                return result.uint16Value as? V
+            } else {
+                return nil
+            }
+        } else if V.self == Int8.self {
+            if let result = self as? NSNumber {
+                return result.int8Value as? V
+            } else {
+                return nil
+            }
+        } else if V.self == UInt8.self {
+            if let result = self as? NSNumber {
+                return result.uint8Value as? V
+            } else {
+                return nil
+            }
+        } else if V.self == Double.self {
+            if let result = self as? NSNumber {
+                return result.doubleValue as? V
+            } else {
+                return nil
+            }
+        } else if V.self == Float.self {
+            if let result = self as? NSNumber {
+                return result.floatValue as? V
+            } else {
+                return nil
+            }
+        } else if V.self == NSNumber.self {
+            if let result = self as? Bool {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? Int {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? UInt {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? Int64 {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? UInt64 {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? Int32 {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? UInt32 {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? Int16 {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? UInt16 {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? Int8 {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? UInt8 {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? Double {
+                return NSNumber(value: result) as? V
+            } else if let result = self as? Float {
+                return NSNumber(value: result) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == String.self {
+            if let result = self as? NSString {
+                return result.substring(from: 0) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == NSString.self {
+            if let result = self as? NSString {
+                return NSString(string: result) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == Date.self {
+            if let result = self as? NSDate {
+                return Date(timeIntervalSinceReferenceDate: result.timeIntervalSinceReferenceDate) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == NSDate.self {
+            if let result = self as? Date {
+                return NSDate(timeInterval: 0, since: result) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == Data.self {
+            if let result = self as? NSData {
+                return result.subdata(with: NSRange(location: 0, length: result.length)) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == NSData.self {
+            if let result = self as? Data {
+                return NSData(data: result) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == [PropertyListValue].self {
+            if let result = self as? NSArray {
+                return result.map({ $0 }) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == NSArray.self {
+            if let result = self as? [PropertyListValue] {
+                return NSArray(array: result) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == [String: PropertyListValue].self {
+            if let result = self as? NSDictionary {
+                var dictionary: [String: PropertyListValue] = [:]
+                for (propertyListKey, propertyListValue) in result {
+                    if let key = (propertyListKey as? PropertyListValue)?.as(String.self),
+                        let value = propertyListValue as? PropertyListValue {
+                        dictionary[key] = value
+                    } else {
+                        return nil
+                    }
+                }
+                return dictionary as? V
+            } else if let result = self as? [NSString: PropertyListValue] {
+                var dictionary: [String: PropertyListValue] = [:]
+                for (key, value) in result {
+                    dictionary[key.substring(from: 0)] = value
+                }
+                return dictionary as? V
+            } else {
+                return nil
+            }
+        } else if V.self == NSDictionary.self {
+            if let result = self as? [String: PropertyListValue] {
+                return NSDictionary(dictionary: result) as? V
+            } else if let result = self as? [NSString: PropertyListValue] {
+                return NSDictionary(dictionary: result) as? V
+            } else {
+                return nil
+            }
+        } else if V.self == [NSString: PropertyListValue].self {
+            if let result = self as? NSDictionary {
+                var dictionary: [NSString: PropertyListValue] = [:]
+                for (propertyListKey, propertyListValue) in result {
+                    if let key = (propertyListKey as? PropertyListValue)?.as(NSString.self),
+                        let value = propertyListValue as? PropertyListValue {
+                        dictionary[key] = value
+                    } else {
+                        return nil
+                    }
+                }
+                return dictionary as? V
+            } else if let result = self as? [String: PropertyListValue] {
+                var dictionary: [NSString: PropertyListValue] = [:]
+                for (key, value) in result {
+                    dictionary[NSString(string: key)] = value
+                }
+                return dictionary as? V
+            } else {
+                return nil
+            }
+        } else {
+            return nil
         }
-    }
-
-    /// Accesses the property list value as a boolean value.
-    ///
-    /// - Note: This is a temporary replacement for `value as? Bool` until it works reliably on Linux.
-    public var asBool: Bool? {
-        return self as? Bool ?? (normalized as? NSNumber)?.boolValue // [_Exempt from Code Coverage_] Unreachable on macOS.
-    }
-
-    /// Accesses the property list value as an integer.
-    ///
-    /// - Note: This is a temporary replacement for `value as? Int` until it works reliably on Linux.
-    public var asInt: Int? {
-        return self as? Int ?? (normalized as? NSNumber)?.intValue // [_Exempt from Code Coverage_] Unreachable on macOS.
-    }
-
-    /// Accesses the property list value as a floating point number.
-    ///
-    /// - Note: This is a temporary replacement for `value as? Double` until it works reliably on Linux.
-    public var asDouble: Double? {
-        return self as? Double ?? (normalized as? NSNumber)?.doubleValue // [_Exempt from Code Coverage_] Unreachable on macOS.
-    }
-
-    /// Accesses the property list value as a string value.
-    ///
-    /// - Note: This is a temporary replacement for `value as? String` until it works reliably on Linux.
-    public var asString: String? {
-        return self as? String ?? normalized as? String // [_Exempt from Code Coverage_] Unreachable on macOS.
-    }
-
-    /// Accesses the property list value as a date value.
-    ///
-    /// - Note: This is a temporary replacement for `value as? Date` until it works reliably on Linux.
-    public var asDate: Date? {
-        return self as? Date ?? normalized as? Date // [_Exempt from Code Coverage_] Unreachable on macOS.
-    }
-
-    /// Accesses the property list value as a data value.
-    ///
-    /// - Note: This is a temporary replacement for `value as? Data` until it works reliably on Linux.
-    public var asData: Data? {
-        return self as? Data ?? normalized as? Data // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
 }
 
@@ -196,13 +310,15 @@ private struct WrongType : Error {}
 
 extension PropertyListValue {
 
-    /// Accesses the property list value as an array value.
+    /// Returns the property list value as an array of the specified type if possible, or `nil`.
     ///
-    /// - Note: This is a temporary replacement for `value as? [V]` until it works reliably on Linux.
+    /// - Note: This is a temporary replacement for `as? [V]` until it works reliably on all platforms.
     public func asArray<V : PropertyListValue>(of type: V.Type) -> [V]? {
-        if let array = asArray {
+        if let array = `as`([V].self) {
+            return array
+        } else if let array = `as`([PropertyListValue].self) {
             return try? array.map() { (element: PropertyListValue) -> V in
-                guard let result = element as? V ?? element.normalized as? V else {
+                guard let result = element.as(V.self) else {
                     throw WrongType()
                 }
                 return result
@@ -212,20 +328,15 @@ extension PropertyListValue {
         }
     }
 
-    /// Accesses the property list value as an array value.
+    /// Returns the property list value as a dictionary of the specified type if possible, or `nil`.
     ///
-    /// - Note: This is a temporary replacement for `value as? [PropertyListValue]` until it works reliably on Linux.
-    public var asArray: [PropertyListValue]? {
-        return self as? [PropertyListValue] ?? normalized as? [PropertyListValue] // [_Exempt from Code Coverage_] Unreachable on macOS.
-    }
-
-    /// Accesses the property list value as a dictionary value.
-    ///
-    /// - Note: This is a temporary replacement for `value as? [String: V]` until it works reliably on Linux.
+    /// - Note: This is a temporary replacement for `as? [V]` until it works reliably on all platforms.
     public func asDictionary<V : PropertyListValue>(of type: V.Type) -> [String: V]? {
-        if let dictionary = asDictionary {
+        if let dictionary = `as`([String: V].self) {
+            return dictionary
+        } else if let dictionary = `as`([String: PropertyListValue].self) {
             return try? dictionary.mapKeyValuePairs() { (key: String, value: PropertyListValue) -> (String, V) in
-                guard let result = value as? V ?? value.normalized as? V else {
+                guard let result = value.as(V.self) else {
                     throw WrongType()
                 }
                 return (key, result)
@@ -233,12 +344,5 @@ extension PropertyListValue {
         } else {
             return nil
         }
-    }
-
-    /// Accesses the property list value as a dictionary value.
-    ///
-    /// - Note: This is a temporary replacement for `value as? [String: PropertyListValue]` until it works reliably on Linux.
-    public var asDictionary: [String: PropertyListValue]? {
-        return self as? [String: PropertyListValue] ?? normalized as? [String: PropertyListValue]
     }
 }

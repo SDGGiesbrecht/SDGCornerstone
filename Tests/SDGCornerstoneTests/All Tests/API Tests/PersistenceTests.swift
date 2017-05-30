@@ -29,13 +29,13 @@ class PersistenceTests : TestCase {
         XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")
 
         preferences[testKey].value = true
-        XCTAssert(preferences[testKey].value?.asBool == true, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")
+        XCTAssert(preferences[testKey].value?.as(Bool.self) == true, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")
 
         preferences[testKey].value = 10
-        XCTAssert(preferences[testKey].value?.asInt == 10, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ 10")
+        XCTAssert(preferences[testKey].value?.as(Int.self) == 10, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ 10")
 
         preferences[testKey].value = "A"
-        XCTAssert(preferences[testKey].value?.asString == "A", "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ A")
+        XCTAssert(preferences[testKey].value?.as(String.self) == "A", "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ A")
 
         preferences[testKey].value = nil
         XCTAssert(preferences[testKey].value == nil, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ nil")
@@ -53,7 +53,7 @@ class PersistenceTests : TestCase {
             do {
                 let data = try Data(contentsOf: url)
                 let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
-                XCTAssert(preferences[testKey]?.asBool == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
+                XCTAssert(preferences[testKey]?.as(Bool.self) == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
             } catch let error {
                 XCTFail("An error occurred while verifying write test: \(error)")
             }
@@ -80,11 +80,11 @@ class PersistenceTests : TestCase {
 
         let causeSynchronization = "CauseSynchronization"
         preferences[testKey].value = causeSynchronization
-        XCTAssert(preferences[testKey].value?.asString == causeSynchronization, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ \(causeSynchronization)")
+        XCTAssert(preferences[testKey].value?.as(String.self) == causeSynchronization, "Unexpected value: \(String(describing: preferences[testKey].value)) ≠ \(causeSynchronization)")
         #if !(os(iOS) || os(watchOS) || os(tvOS))
             // iOS and tvOS could not externally write this to the disk in the first place (see #if statement above).
 
-            XCTAssert(preferences[externalTestKey].value?.asString == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
+            XCTAssert(preferences[externalTestKey].value?.as(String.self) == stringValue, "Failed to read preferences from disk: \(String(describing: preferences[externalTestKey].value)) ≠ \(stringValue)")
         #endif
 
         preferences.reset()
@@ -94,7 +94,7 @@ class PersistenceTests : TestCase {
         Preferences.applicationPreferences.reset()
         XCTAssert(Preferences.applicationPreferences[testKey].value == nil, "Unexpected value: \(String(describing: Preferences.applicationPreferences[testKey].value)) ≠ nil")
         Preferences.applicationPreferences[testKey].value = true
-        XCTAssert(Preferences.applicationPreferences[testKey].value?.asBool == true, "Unexpected value: \(String(describing: Preferences.applicationPreferences[testKey].value)) ≠ true")
+        XCTAssert(Preferences.applicationPreferences[testKey].value?.as(Bool.self) == true, "Unexpected value: \(String(describing: Preferences.applicationPreferences[testKey].value)) ≠ true")
         Preferences.applicationPreferences.reset()
     }
 
@@ -112,38 +112,38 @@ class PersistenceTests : TestCase {
         XCTAssert(["1": 1, "2": 2, "3": 3].equatableRepresentation == ["1": 1, "2": 2, "3": 3].equatableRepresentation)
 
         var value: PropertyListValue = false
-        XCTAssert(value.asBool == false, "Failed cast: \(value) (\(type(of: value))) ≠ false")
+        XCTAssert(value.as(Bool.self) == false, "Failed cast: \(value) (\(type(of: value))) ≠ false")
         value = NSNumber(value: true)
-        XCTAssert(value.asBool == true, "Failed cast: \(value) (\(type(of: value))) ≠ true")
+        XCTAssert(value.as(Bool.self) == true, "Failed cast: \(value) (\(type(of: value))) ≠ true")
 
         value = 2
-        XCTAssert(value.asInt == 2, "Failed cast: \(value) (\(type(of: value))) ≠ 2")
+        XCTAssert(value.as(Int.self) == 2, "Failed cast: \(value) (\(type(of: value))) ≠ 2")
         value = NSNumber(value: 3)
-        XCTAssert(value.asInt == 3, "Failed cast: \(value) (\(type(of: value))) ≠ 3")
+        XCTAssert(value.as(Int.self) == 3, "Failed cast: \(value) (\(type(of: value))) ≠ 3")
 
         value = 0.5
-        XCTAssert(value.asDouble == 0.5, "Failed cast: \(value) (\(type(of: value))) ≠ 0.5")
+        XCTAssert(value.as(Double.self) == 0.5, "Failed cast: \(value) (\(type(of: value))) ≠ 0.5")
         value = NSNumber(value: 0.25)
-        XCTAssert(value.asDouble == 0.25, "Failed cast: \(value) (\(type(of: value))) ≠ 0.25")
+        XCTAssert(value.as(Double.self) == 0.25, "Failed cast: \(value) (\(type(of: value))) ≠ 0.25")
 
         value = "A"
-        XCTAssert(value.asString == "A", "Failed cast: \(value) (\(type(of: value))) ≠ A")
+        XCTAssert(value.as(String.self) == "A", "Failed cast: \(value) (\(type(of: value))) ≠ A")
         value = NSString(string: "B")
-        XCTAssert(value.asString == "B", "Failed cast: \(value) (\(type(of: value))) ≠ B")
+        XCTAssert(value.as(String.self) == "B", "Failed cast: \(value) (\(type(of: value))) ≠ B")
 
         let dateOne = Date(timeIntervalSinceReferenceDate: 4)
         let dateTwo = Date(timeIntervalSinceReferenceDate: 5)
         value = dateOne
-        XCTAssert(value.asDate == dateOne, "Failed cast: \(value) (\(type(of: value))) ≠ \(dateOne)")
+        XCTAssert(value.as(Date.self) == dateOne, "Failed cast: \(value) (\(type(of: value))) ≠ \(dateOne)")
         value = NSDate(timeIntervalSinceReferenceDate: dateTwo.timeIntervalSinceReferenceDate)
-        XCTAssert(value.asDate == dateTwo, "Failed cast: \(value) (\(type(of: value))) ≠ \(dateTwo)")
+        XCTAssert(value.as(Date.self) == dateTwo, "Failed cast: \(value) (\(type(of: value))) ≠ \(dateTwo)")
 
         let dataOne = Data(bytes: [1, 2, 3])
         let dataTwo = Data(bytes: [4, 5, 6])
         value = dataOne
-        XCTAssert(value.asData == dataOne, "Failed cast: \(value) (\(type(of: value))) ≠ \(dataOne)")
+        XCTAssert(value.as(Data.self) == dataOne, "Failed cast: \(value) (\(type(of: value))) ≠ \(dataOne)")
         value = NSData(data: dataTwo)
-        XCTAssert(value.asData == dataTwo, "Failed cast: \(value) (\(type(of: value))) ≠ \(dataTwo)")
+        XCTAssert(value.as(Data.self) == dataTwo, "Failed cast: \(value) (\(type(of: value))) ≠ \(dataTwo)")
 
         var arrayOne: [PropertyListValue] = [−1, −2, −3]
         var arrayTwo: [PropertyListValue] = [−4, −5, −6]
@@ -157,27 +157,27 @@ class PersistenceTests : TestCase {
         value = dictionaryOne
         XCTAssert(value.asDictionary(of: Int.self)?["3"] == 3, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryOne)")
         value = NSDictionary(dictionary: dictionaryTwo)
-        XCTAssert(value.asDictionary ≠ nil, "Failed cast: \(value) (\(type(of: value))) == nil")
+        XCTAssert(value.as([String: PropertyListValue].self) ≠ nil, "Failed cast: \(value) (\(type(of: value))) == nil")
         XCTAssert(value.asDictionary(of: Int.self)?["6"] == 6, "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryTwo)")
         value = true
-        XCTAssert(value.asDictionary == nil, "Unexpected cast: \(value) (\(type(of: value))) ≠ nil")
+        XCTAssert(value.as([String: PropertyListValue].self) == nil, "Unexpected cast: \(value) (\(type(of: value))) ≠ nil")
 
         arrayOne = [1, 2.0, "3"]
         arrayTwo = [4, 5.0, "6"]
         value = arrayOne
-        XCTAssert(value.asArray?.contains(where: { $0.equatableRepresentation == 1.equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayOne)")
+        XCTAssert(value.as([PropertyListValue].self)?.contains(where: { $0.equatableRepresentation == 1.equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayOne)")
         value = NSArray(array: arrayTwo)
-        XCTAssert(value.asArray?.contains(where: { $0.equatableRepresentation == 4.equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayTwo)")
+        XCTAssert(value.as([PropertyListValue].self)?.contains(where: { $0.equatableRepresentation == 4.equatableRepresentation }) == true, "Failed cast: \(value) (\(type(of: value))) ≠ \(arrayTwo)")
 
         dictionaryOne = ["1": 1, "2": 2.0, "3": "3"]
         dictionaryTwo = ["4": 4, "5": 5.0, "6": "6", "7": 7 as UInt, "8": 8 as Int64, "9": 9 as UInt64, "10": 10 as Int32, "11": 11 as UInt32, "12": 12 as Int16, "13": 13 as UInt16, "14": 14 as Int8, "15": 15 as UInt8, "16": 16.0 as Float, "17": NSDate(), "18": NSData(), "19": [NSString()], "20": [NSString(): NSString()], "21": NSArray(array: arrayTwo)]
         value = dictionaryOne
-        XCTAssert(value.asDictionary?["3"]?.asString == "3", "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryOne)")
+        XCTAssert(value.as([String: PropertyListValue].self)?["3"]?.as(String.self) == "3", "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryOne)")
         value = NSDictionary(dictionary: dictionaryTwo)
-        XCTAssert(value.asDictionary ≠ nil, "Failed cast: \(value) (\(type(of: value))) == nil")
-        XCTAssert(value.asDictionary?["6"]?.asString == "6", "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryTwo)")
+        XCTAssert(value.as([String: PropertyListValue].self) ≠ nil, "Failed cast: \(value) (\(type(of: value))) == nil")
+        XCTAssert(value.as([String: PropertyListValue].self)?["6"]?.as(String.self) == "6", "Failed cast: \(value) (\(type(of: value))) ≠ \(dictionaryTwo)")
         value = true
-        XCTAssert(value.asDictionary == nil, "Unexpected cast: \(value) (\(type(of: value))) ≠ nil")
+        XCTAssert(value.as([String: PropertyListValue].self) == nil, "Unexpected cast: \(value) (\(type(of: value))) ≠ nil")
     }
 
     static var allTests: [(String, (PersistenceTests) -> () throws -> Void)] {
