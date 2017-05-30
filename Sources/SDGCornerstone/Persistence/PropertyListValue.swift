@@ -202,7 +202,7 @@ extension PropertyListValue {
     public func asArray<V : PropertyListValue>(of type: V.Type) -> [V]? {
         if let array = asArray {
             return try? array.map() { (element: PropertyListValue) -> V in
-                guard let result = element as? V else {
+                guard let result = element as? V ?? element.normalized as? V else {
                     throw WrongType()
                 }
                 return result
@@ -225,7 +225,7 @@ extension PropertyListValue {
     public func asDictionary<V : PropertyListValue>(of type: V.Type) -> [String: V]? {
         if let dictionary = asDictionary {
             return try? dictionary.mapKeyValuePairs() { (key: String, value: PropertyListValue) -> (String, V) in
-                guard let result = value as? V else {
+                guard let result = value as? V ?? value.normalized as? V else {
                     throw WrongType()
                 }
                 return (key, result)
