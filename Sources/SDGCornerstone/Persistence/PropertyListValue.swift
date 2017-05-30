@@ -86,7 +86,7 @@ extension PropertyListValue {
 
 extension PropertyListValue {
 
-    private var normalized: PropertyListValue {
+    fileprivate var normalized: PropertyListValue {
         if let result = self as? Bool {
             return NSNumber(value: result)
         } else if let result = self as? Int {
@@ -190,12 +190,26 @@ extension PropertyListValue {
     public var asData: Data? {
         return self as? Data ?? normalized as? Data // [_Exempt from Code Coverage_] Unreachable on macOS.
     }
+}
+
+private struct WrongType : Error {}
+
+extension PropertyListValue {
 
     /// Accesses the property list value as an array value.
     ///
     /// - Note: This is a temporary replacement for `value as? [V]` until it works reliably on Linux.
     public func asArray<V : PropertyListValue>(of type: V.Type) -> [V]? {
-        return self as? [V] ?? normalized as? [V] // [_Exempt from Code Coverage_] Unreachable on macOS.
+        if let array = asArray {
+            return try? array.map() { (element: PropertyListValue) -> V in
+                guard let result = element as? V else {
+                    throw WrongType()
+                }
+                return result
+            }
+        } else {
+            return nil
+        }
     }
 
     /// Accesses the property list value as an array value.
@@ -209,7 +223,16 @@ extension PropertyListValue {
     ///
     /// - Note: This is a temporary replacement for `value as? [String: V]` until it works reliably on Linux.
     public func asDictionary<V : PropertyListValue>(of type: V.Type) -> [String: V]? {
-        return self as? [String: V] ?? normalized as? [String: V] // [_Exempt from Code Coverage_] Unreachable on macOS.
+        if let dictionary = asDictionary {
+            return try? dictionary.mapKeyValuePairs() { (key: String, value: PropertyListValue) -> (String, V) in
+                guard let result = value as? V else {
+                    throw WrongType()
+                }
+                return (key, result)
+            }
+        } else {
+            return nil
+        }
     }
 
     /// Accesses the property list value as a dictionary value.
