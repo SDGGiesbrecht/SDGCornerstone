@@ -29,9 +29,13 @@ public struct LocalizationSetting : Equatable {
         let preferences: Shared<PropertyListValue?>
         #if os(Linux)
 
-            Process.
-            // [_Warning: This needs to actually look it up._]
-            preferences = Shared<PropertyListValue?>(nil)
+            if let languages = ProcessInfo.processInfo.environment["Language"] {
+                let entries = languages.components(separatedBy: ":")
+                let converted = entries.map() { $0.replacingOccurrences(of: "_", with: "\u{2D}") }
+                preferences = Shared<PropertyListValue?>(converted)
+            } else {
+                preferences = Shared<PropertyListValue?>(nil)
+            }
 
         #else
 
