@@ -40,43 +40,43 @@ extension PropertyListValue {
 
             // [_Workaround: Linux does not bridge well yet. (Swift 3.1.0)_]
 
-        } else if let boolean = self as? Bool {
+        } else if let boolean = self as? Bool { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: boolean)
-        } else if let integer = self as? Int {
+        } else if let integer = self as? Int { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? UInt {
+        } else if let integer = self as? UInt { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? Int64 {
+        } else if let integer = self as? Int64 { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? UInt64 {
+        } else if let integer = self as? UInt64 { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? Int32 {
+        } else if let integer = self as? Int32 { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? UInt32 {
+        } else if let integer = self as? UInt32 { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? Int16 {
+        } else if let integer = self as? Int16 { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? UInt16 {
+        } else if let integer = self as? UInt16 { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? Int8 {
+        } else if let integer = self as? Int8 { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let integer = self as? UInt8 {
+        } else if let integer = self as? UInt8 { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: integer)
-        } else if let floatingPointNumber = self as? Double {
+        } else if let floatingPointNumber = self as? Double { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: floatingPointNumber)
-        } else if let floatingPointNumber = self as? Float {
+        } else if let floatingPointNumber = self as? Float { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: floatingPointNumber)
-        } else if let string = self as? String {
+        } else if let string = self as? String { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSString(string: string)
-        } else if let date = self as? Date {
+        } else if let date = self as? Date { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSDate(timeInterval: 0, since: date)
-        } else if let data = self as? Data {
+        } else if let data = self as? Data { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSData(data: data)
-        } else if let array = self as? [Any] {
+        } else if let array = self as? [Any] { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSArray(array: array)
-        } else if let dictionary = self as? [String: Any] {
+        } else if let dictionary = self as? [String: Any] { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSDictionary(dictionary: dictionary)
-        } else if let dictionary = self as? [NSString: Any] {
+        } else if let dictionary = self as? [NSString: Any] { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSDictionary(dictionary: dictionary)
         } else {
             preconditionFailure("\(type(of: self)) is not a property list value.")
@@ -209,7 +209,7 @@ extension PropertyListValue {
                 return nil
             }
         } else if V.self == NSString.self {
-            if let result = self as? NSString {
+            if let result = self as? String {
                 return NSString(string: result) as? V
             } else {
                 return nil
