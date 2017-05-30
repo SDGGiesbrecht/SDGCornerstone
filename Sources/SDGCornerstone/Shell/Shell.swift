@@ -22,7 +22,7 @@
         // MARK: - Static Properties
 
         /// The default shell.
-        public static let `default` = Shell(launchPath: "/usr/bin/env")
+        public static let `default` = Shell(launchPath: "/bin/sh")
 
         // MARK: - Initialization
 
@@ -49,11 +49,11 @@
         /// - Returns: The output of the command.
         ///
         /// - Throws: A `Shell.Error` if the exit code indicates a failure.
-        public func run(command: [String], silently: Bool = false) throws -> String {
+        @discardableResult public func run(command: [String], silently: Bool = false) throws -> String {
 
             let silent: Bool
             switch Application.current.mode {
-            case .commandLineTool:
+            case .commandLineTool: // [_Exempt from Code Coverage_]
                 silent = silently
             case .guiApplication:
                 silent = true
@@ -67,13 +67,13 @@
                 }
             }).joined(separator: " ")
 
-            if ¬silent {
+            if ¬silent { // [_Exempt from Code Coverage_]
                 print("$ " + commandString)
             }
 
             let shell = Process()
             shell.launchPath = launchPath
-            shell.arguments = [commandString]
+            shell.arguments = ["\u{2D}c", commandString]
 
             let standardOutput = Pipe()
             shell.standardOutput = standardOutput
@@ -89,39 +89,48 @@
 
             let newLine = "\n"
             let newLineData = newLine.data(using: String.Encoding.utf8)!
-            func handleInput(pipe: Pipe, stream: inout Data, result: inout String) {
+            func handleInput(pipe: Pipe, stream: inout Data, result: inout String, report: (_ line: String) -> Void) {
                 stream.append(pipe.fileHandleForReading.availableData)
 
-                if ¬silent {
-                    while let lineEnd = stream.range(of: newLineData) {
-                        let line = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
-                        stream.removeSubrange(stream.startIndex ..< lineEnd.upperBound)
+                while let lineEnd = stream.range(of: newLineData) {
+                    let line = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
+                    stream.removeSubrange(stream.startIndex ..< lineEnd.upperBound)
 
-                        let string: String
-                        if let utf8 = String(data: line, encoding: String.Encoding.utf8) {
-                            string = utf8
-                        } else if let latin1 = String(data: line, encoding: String.Encoding.isoLatin1) {
-                            string = latin1
-                        } else {
-                            preconditionFailure("Cannot identify string encoding: \(line)")
-                        }
+                    let string: String
+                    if let utf8 = String(data: line, encoding: String.Encoding.utf8) {
+                        string = utf8
+                    } else if let latin1 = String(data: line, encoding: String.Encoding.isoLatin1) { // [_Exempt from Code Coverage_]
+                        string = latin1
+                    } else {
+                        preconditionFailure("Cannot identify string encoding: \(line)")
+                    }
 
-                        result.append(string + newLine)
-                        if ¬silent {
-                            print(string)
-                        }
+                    result.append(string + newLine)
+                    if ¬silent { // [_Exempt from Code Coverage_]
+                        report(string)
                     }
                 }
             }
             func readProgress() {
-                handleInput(pipe: standardOutput, stream: &outputStream, result: &output)
-                handleInput(pipe: standardError, stream: &errorStream, result: &error)
+                handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { (line: String) -> Void in
+                    print(line)
+                })
+                handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { (line: String) -> Void in
+                    FileHandle.standardError.write((line + newLine).data(using: .utf8)!)
+                })
             }
 
             while shell.isRunning {
                 readProgress()
             }
             readProgress()
+
+            if output.hasSuffix(newLine) {
+                output.unicodeScalars.removeLast()
+            }
+            if error.hasSuffix(newLine) {
+                error.unicodeScalars.removeLast()
+            }
 
             let exitCode = shell.terminationStatus
             if exitCode == 0 {

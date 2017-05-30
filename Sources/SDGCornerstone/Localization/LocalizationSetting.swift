@@ -29,6 +29,7 @@ public struct LocalizationSetting : Equatable {
         let preferences: Shared<PropertyListValue?>
         #if os(Linux)
 
+            Process.
             // [_Warning: This needs to actually look it up._]
             preferences = Shared<PropertyListValue?>(nil)
 

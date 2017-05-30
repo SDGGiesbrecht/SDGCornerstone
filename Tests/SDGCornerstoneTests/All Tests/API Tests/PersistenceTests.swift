@@ -42,17 +42,12 @@ class PersistenceTests : TestCase {
 
         preferences[testKey].value = true
         #if os(macOS)
-            // [_Workaround: This should use centralized functions._]
-            var shell = Process()
-            shell.launchPath = "/usr/bin/env"
-            shell.arguments = ["defaults", "read", testDomainExternalName, testKey]
-            let pipe = Pipe()
-            shell.standardOutput = pipe
-            shell.launch()
-            shell.waitUntilExit()
-            let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output = String(data: data, encoding: String.Encoding.utf8)!
-            XCTAssert(output == "1\n", "Failed to write preferences to disk: \(output) ≠ 1")
+            do {
+                let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey], silently: true)
+                XCTAssert(output == "1", "Failed to write preferences to disk: \(output) ≠ 1")
+            } catch let error {
+                XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
+            }
         #elseif os(Linux)
             let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
             do {
@@ -69,12 +64,11 @@ class PersistenceTests : TestCase {
 
         let stringValue = "value"
         #if os(macOS)
-            // [_Workaround: This should use centralized functions._]
-            shell = Process()
-            shell.launchPath = "/usr/bin/env"
-            shell.arguments = ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue]
-            shell.launch()
-            shell.waitUntilExit()
+            do {
+                try Shell.default.run(command: ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue], silently: true)
+            } catch let error {
+                XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
+            }
         #elseif os(Linux)
             do {
                 let data = try PropertyListSerialization.data(fromPropertyList: [externalTestKey: stringValue], format: .xml, options: 0)
