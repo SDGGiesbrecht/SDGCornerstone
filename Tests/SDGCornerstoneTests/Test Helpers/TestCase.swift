@@ -24,7 +24,8 @@ class TestCase : XCTestCase {
     override func setUp() {
         if ¬TestCase.initialized {
             TestCase.initialized = true
-            SDGCornerstone.initialize(mode: .guiApplication, applicationIdentifier: "ca.solideogloria.SDGCornerstone.Tests")
+            // [_Warning: Temporarily command line to solve localization detection._]
+            SDGCornerstone.initialize(mode: .commandLineTool, applicationIdentifier: "ca.solideogloria.SDGCornerstone.Tests")
         }
         super.setUp()
     }

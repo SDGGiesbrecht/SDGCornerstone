@@ -34,6 +34,7 @@ public struct LocalizationSetting : Equatable {
                 let converted = entries.map() { $0.replacingOccurrences(of: "_", with: "\u{2D}") }
                 preferences = Shared<PropertyListValue?>(converted)
             } else {
+                print(Shell.default.run(command: ["locale"]))
                 preferences = Shared<PropertyListValue?>(nil)
             }
 
