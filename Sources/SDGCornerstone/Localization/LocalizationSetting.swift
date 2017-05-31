@@ -29,12 +29,19 @@ public struct LocalizationSetting : Equatable {
         let preferences: Shared<PropertyListValue?>
         #if os(Linux)
 
+            func convert(locale: String) -> String {
+                return locale.replacingOccurrences(of: "_", with: "\u{2D}")
+            }
+
             if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
                 let entries = languages.components(separatedBy: ":")
-                let converted = entries.map() { $0.replacingOccurrences(of: "_", with: "\u{2D}") }
+                let converted = entries.map() { convert(locale: $0) }
                 preferences = Shared<PropertyListValue?>(converted)
+            } else if language = ProcessInfo.processInfo.environment["LANG"],
+                let locale = language.components(separatedBy: ".").first {
+                let converted = convert(locale: locale)
+                preferences = Shared<PropertyListValue?>([converted])
             } else {
-                print(try? Shell.default.run(command: ["locale"]))
                 preferences = Shared<PropertyListValue?>(nil)
             }
 
