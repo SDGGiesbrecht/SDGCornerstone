@@ -37,7 +37,7 @@ public struct LocalizationSetting : Equatable {
                 let entries = languages.components(separatedBy: ":")
                 let converted = entries.map() { convert(locale: $0) }
                 preferences = Shared<PropertyListValue?>(converted)
-            } else if language = ProcessInfo.processInfo.environment["LANG"],
+            } else if let language = ProcessInfo.processInfo.environment["LANG"],
                 let locale = language.components(separatedBy: ".").first {
                 let converted = convert(locale: locale)
                 preferences = Shared<PropertyListValue?>([converted])
