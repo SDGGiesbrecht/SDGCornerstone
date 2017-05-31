@@ -15,7 +15,7 @@
 import XCTest
 import SDGCornerstone
 
-class CachingTests : XCTestCase {
+class CachingTests : TestCase {
 
     func testCaching() {
 

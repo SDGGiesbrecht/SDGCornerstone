@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PropertyListValue Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/PropertyListValue" class="dashAnchor"></a>
+    <a title="PropertyListValue Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SDGCornerstone Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SDGGiesbrecht/SDGCornerstone"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SDGCornerstone Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        PropertyListValue Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../related-projects.html">Related Projects</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CyclicalNumberGenerator.html">CyclicalNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Preferences.html">Preferences</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PseudorandomNumberGenerator.html">PseudorandomNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Shared.html">Shared</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/BuildConfiguration.html">BuildConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FillDirection.html">FillDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Mode.html">Mode</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/BidirectionalCollection.html">BidirectionalCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/BitwiseOperations.html">BitwiseOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CharacterSet.html">CharacterSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ClosedRange.html">ClosedRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Dictionary.html">Dictionary</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Equatable.html">Equatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByArrayLiteral.html">ExpressibleByArrayLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByExtendedGraphemeClusterLiteral.html">ExpressibleByExtendedGraphemeClusterLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByIntegerLiteral.html">ExpressibleByIntegerLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByUnicodeScalarLiteral.html">ExpressibleByUnicodeScalarLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FloatingPoint.html">FloatingPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Range.html">Range</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RangeReplaceableCollection.html">RangeReplaceableCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Set.html">Set</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UnicodeScalar.html">UnicodeScalar</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_CebFTGSqPMP__GSqPMP___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu0_Rxs9Equatable_S0_rFTTxq__Txq___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu1_Rxs9Equatable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu2_Rxs9Equatable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu3_Rxs9Equatable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi5e_Cebu4_Rxs9Equatable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccosuRxS_14RealArithmeticrFxGVS_5Anglex_">arccos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccotuRxS_14RealArithmeticrFxGVS_5Anglex_">arccot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arccscuRxS_14RealArithmeticrFxGVS_5Anglex_">arccsc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arcsecuRxS_14RealArithmeticrFxGVS_5Anglex_">arcsec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arcsinuRxS_14RealArithmeticrFxGVS_5Anglex_">arcsin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6arctanuRxS_14RealArithmeticrFxGVS_5Anglex_">arctan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone6cachedurFzT2inRGSqx_FzT_x_x">cached(in:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cosuRxS_14RealArithmeticrFGVS_5Anglex_x">cos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cotuRxS_14RealArithmeticrFGVS_5Anglex_x">cot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3cscuRxS_14RealArithmeticrFGVS_5Anglex_x">csc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone1euRxS_14RealArithmeticrFT_x">e()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone16findLocalMaximumu0_RxS_19OneDimensionalPoint_s10Comparablewx6Strides13SignedIntegerwx6VectorS_15IntegerProtocolrFT4nearx6withinGSqGVs20CountableClosedRangex__10inFunctionFxq__x">findLocalMaximum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone16findLocalMinimumu0_RxS_19OneDimensionalPoint_s10Comparablewx6Strides13SignedIntegerwx6VectorS_15IntegerProtocolrFT4nearx6withinGSqGVs20CountableClosedRangex__10inFunctionFxq__x">findLocalMinimum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3gcduRxS_11MeasurementrFTxx_x">gcd(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone10initializeFT4modeOS_4Mode21applicationIdentifierSS27applicationPreferencesClassMCS_11Preferences_T_">initialize(mode:applicationIdentifier:applicationPreferencesClass:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3lcmuRxS_11MeasurementrFTxx_x">lcm(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone2lnuRxS_14RealArithmeticrFxx">ln(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFxx">log(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3loguRxS_14RealArithmeticrFT6toBasex2ofx_x">log(toBase:of:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone15primitiveMethodFSSOs5Never">primitiveMethod(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3secuRxS_14RealArithmeticrFGVS_5Anglex_x">sec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3sinuRxS_14RealArithmeticrFGVS_5Anglex_x">sin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone3tanuRxS_14RealArithmeticrFGVS_5Anglex_x">tan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstone11unreachableFT8functionSS4fileSS4lineSi6columnSi_Os5Never">unreachable(function:file:line:column:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneoP1ouRxS_25NumericAdditiveArithmeticrFxGVS_21_PartialAbsoluteValuex_">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneop1ouRxS_25NumericAdditiveArithmeticrFGVS_21_PartialAbsoluteValuex_x">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneX3BxauRxS_14RealArithmeticrFT_x">π()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneX3FxauRxS_14RealArithmeticrFT_x">τ()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu1_Rxs10Comparable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu2_Rxs10Comparable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu3_Rxs10Comparable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Fchu4_Rxs10Comparable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu0_Rxs10Comparable_S0_rFTTxq__Txq___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu1_Rxs10Comparable_S0_0_S0_rFTTxq_q0__Txq_q0___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu2_Rxs10Comparable_S0_0_S0_1_S0_rFTTxq_q0_q1__Txq_q0_q1___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu3_Rxs10Comparable_S0_0_S0_1_S0_2_S0_rFTTxq_q0_q1_q2__Txq_q0_q1_q2___Sb">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F14SDGCornerstoneXoi3Gchu4_Rxs10Comparable_S0_0_S0_1_S0_2_S0_3_S0_rFTTxq_q0_q1_q2_q3__Txq_q0_q1_q2_q3___Sb">≥(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Addable.html">Addable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ArrayFamily.html">ArrayFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BitwiseLogic.html">BitwiseLogic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ComparableSet.html">ComparableSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ExpressibleByTextLiterals.html">ExpressibleByTextLiterals</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FiniteSet.html">FiniteSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P14SDGCornerstone15IntegerProtocol">IntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IterableEnumeration.html">IterableEnumeration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Localization.html">Localization</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MutableSet.html">MutableSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Negatable.html">Negatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalVector.html">OneDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OrderedEnumeration.html">OrderedEnumeration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PointProtocol.html">PointProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PropertyListValue.html">PropertyListValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Randomizer.html">Randomizer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RangeFamily.html">RangeFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P14SDGCornerstone22RationalNumberProtocol">RationalNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SetInRepresentableUniverse.html">SetInRepresentableUniverse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SharedValueObserver.html">SharedValueObserver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/VectorProtocol.html">VectorProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Angle.html">Angle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BijectiveMapping.html">BijectiveMapping</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntensionalSet.html">IntensionalSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LocalizationSetting.html">LocalizationSetting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Shell.html">Shell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Shell/Error.html">– Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UserFacingText.html">UserFacingText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Weak.html">Weak</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SDGCornerstone23ExtendedGraphemeCluster">ExtendedGraphemeCluster</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PropertyListValue</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PropertyListValue</span></code></pre>
+
+                </div>
+              </div>
+            <p>A property list value. (<code>Bool</code>, <code>IntFamily</code>, <code>FloatFamily</code>, <code>String</code> (except <code>Float80</code>), <code>Date</code>, <code>Data</code>, <code>[PropertyListValue]</code>, [String: PropertyListValue], or <code>UIntFamily</code>)</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:E14SDGCornerstonePS_17PropertyListValue23EquatableRepresentation"></a>
+                    <a name="//apple_ref/swift/Alias/EquatableRepresentation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:E14SDGCornerstonePS_17PropertyListValue23EquatableRepresentation">EquatableRepresentation</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A representation that can be tested for equality with any other property list value no matter the type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">EquatableRepresentation</span> <span class="o">=</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vE14SDGCornerstonePS_17PropertyListValue23equatableRepresentationCSo8NSObject"></a>
+                    <a name="//apple_ref/swift/Property/equatableRepresentation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vE14SDGCornerstonePS_17PropertyListValue23equatableRepresentationCSo8NSObject">equatableRepresentation</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The equatable representation</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">equatableRepresentation</span><span class="p">:</span> <span class="kt"><a href="../Protocols/PropertyListValue.html#/s:E14SDGCornerstonePS_17PropertyListValue23EquatableRepresentation">EquatableRepresentation</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE14SDGCornerstonePS_17PropertyListValue2asuRd__S0_rFMqd__GSqqd___"></a>
+                    <a name="//apple_ref/swift/Method/as(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE14SDGCornerstonePS_17PropertyListValue2asuRd__S0_rFMqd__GSqqd___">as(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the property list value as the specified type if possible, or <code>nil</code>.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>as? V</code> until it works reliably on all platforms.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">`</span><span class="k">as</span><span class="n">`</span><span class="o">&lt;</span><span class="kt">V</span> <span class="p">:</span> <span class="kt">PropertyListValue</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">V</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">V</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE14SDGCornerstonePS_17PropertyListValue7asArrayuRd__S0_rFT2ofMqd___GSqGSaqd____"></a>
+                    <a name="//apple_ref/swift/Method/asArray(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE14SDGCornerstonePS_17PropertyListValue7asArrayuRd__S0_rFT2ofMqd___GSqGSaqd____">asArray(of:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the property list value as an array of the specified type if possible, or <code>nil</code>.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>as? [V]</code> until it works reliably on all platforms.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">asArray</span><span class="o">&lt;</span><span class="kt">V</span> <span class="p">:</span> <span class="kt">PropertyListValue</span><span class="o">&gt;</span><span class="p">(</span><span class="n">of</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">V</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">V</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE14SDGCornerstonePS_17PropertyListValue12asDictionaryuRd__S0_rFT2ofMqd___GSqGVs10DictionarySSqd____"></a>
+                    <a name="//apple_ref/swift/Method/asDictionary(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE14SDGCornerstonePS_17PropertyListValue12asDictionaryuRd__S0_rFT2ofMqd___GSqGVs10DictionarySSqd____">asDictionary(of:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the property list value as a dictionary of the specified type if possible, or <code>nil</code>.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This is a temporary replacement for <code>as? [V]</code> until it works reliably on all platforms.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">asDictionary</span><span class="o">&lt;</span><span class="kt">V</span> <span class="p">:</span> <span class="kt">PropertyListValue</span><span class="o">&gt;</span><span class="p">(</span><span class="n">of</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">V</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">V</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

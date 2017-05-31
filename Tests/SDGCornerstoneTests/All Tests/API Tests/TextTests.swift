@@ -17,7 +17,7 @@ import Foundation
 
 import SDGCornerstone
 
-class TextTests : XCTestCase {
+class TextTests : TestCase {
 
     func testCharacterSet() {
         let A = CharacterSet(charactersIn: "A")

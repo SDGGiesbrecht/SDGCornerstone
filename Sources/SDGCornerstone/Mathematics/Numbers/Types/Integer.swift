@@ -20,7 +20,7 @@
 /// let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
 /// let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
 /// ```
-public struct Integer : Addable, Comparable, Equatable, IntegerType, IntegralArithmetic, Negatable, PointType, Subtractable, WholeArithmetic {
+public struct Integer : Addable, Comparable, Equatable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -163,9 +163,9 @@ public struct Integer : Addable, Comparable, Equatable, IntegerType, IntegralAri
         operand.isNegative¬=
     }
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Integer
 

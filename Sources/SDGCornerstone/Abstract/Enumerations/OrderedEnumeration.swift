@@ -36,8 +36,8 @@ public protocol OrderedEnumeration : Comparable, IterableEnumeration {
     func cyclicPredecessor() -> Self
 }
 
-extension OrderedEnumeration where RawValue.Vector : IntegerType {
-    // MARK: - where RawValue.Vector : IntegerType
+extension OrderedEnumeration where RawValue.Vector : IntegerProtocol {
+    // MARK: - where RawValue.Vector : IntegerProtocol
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
     /// Returns the next case or `nil` if there are no later cases.

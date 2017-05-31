@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String : StringFamily {
+extension String : PropertyListValue, StringFamily {
 
     /// Creates a string from a `StrictString`.
     public init(_ string: StrictString) {

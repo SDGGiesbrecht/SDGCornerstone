@@ -14,7 +14,7 @@
 
 import Foundation
 
-extension Data : BitwiseLogic {
+extension Data : BitwiseLogic, PropertyListValue {
 
     // MARK: - Properties
 

@@ -17,7 +17,7 @@ import XCTest
 
 import SDGCornerstone
 
-class RandomizationTests : XCTestCase {
+class RandomizationTests : TestCase {
 
     func testBool() {
         var values: Set<Bool> = []

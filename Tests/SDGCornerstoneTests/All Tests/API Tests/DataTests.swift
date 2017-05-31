@@ -17,7 +17,7 @@ import Foundation
 
 import SDGCornerstone
 
-class DataTests : XCTestCase {
+class DataTests : TestCase {
 
     func testData() {
         let data = Data(bytes: [UInt8.max])

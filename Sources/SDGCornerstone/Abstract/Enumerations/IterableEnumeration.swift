@@ -16,7 +16,7 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `RawRepresentable where RawValue : OneDimensionalPoint, ExpressibleByIntegerLiteral, RawValue.Vector : IntegerType`
+/// - `RawRepresentable where RawValue : OneDimensionalPoint, ExpressibleByIntegerLiteral, RawValue.Vector : IntegerProtocol`
 /// - The raw values must be contiguous and begin at 0.
 public protocol IterableEnumeration : RawRepresentable {
 
@@ -29,8 +29,8 @@ public protocol IterableEnumeration : RawRepresentable {
     static var cases: [Self] { get }
 }
 
-extension IterableEnumeration where RawValue.Vector : IntegerType {
-    // MARK: - where RawValue.Vector : IntegerType
+extension IterableEnumeration where RawValue.Vector : IntegerProtocol {
+    // MARK: - where RawValue.Vector : IntegerProtocol
 
     internal static var first: Self? {
         return Self(rawValue: 0)

@@ -13,7 +13,7 @@
  */
 
 /// A member of the `Int` family: `Int`, `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntFamily : Addable, AdditiveArithmetic, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, IntegerType, IntegralArithmetic, MirrorPath, Negatable, NumericAdditiveArithmetic, OneDimensionalPoint, PointType, SignedInteger, Subtractable, WholeArithmetic {
+public protocol IntFamily : Addable, AdditiveArithmetic, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, IntegerProtocol, IntegralArithmetic, MirrorPath, Negatable, NumericAdditiveArithmetic, OneDimensionalPoint, PointProtocol, PropertyListValue, SignedInteger, Subtractable, WholeArithmetic {
 
 }
 
@@ -24,18 +24,18 @@ public protocol IntXFamily : IntFamily {
 
 extension Int : IntFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 
 extension Int64 : IntXFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
@@ -65,9 +65,9 @@ extension Int64 : IntXFamily {
 
 extension Int32 : IntXFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
@@ -75,9 +75,9 @@ extension Int32 : IntXFamily {
 
 extension Int16 : IntXFamily {
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
@@ -85,9 +85,9 @@ extension Int16 : IntXFamily {
 
 extension Int8 : IntXFamily {
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
     /// The vector type.
     public typealias Vector = Stride

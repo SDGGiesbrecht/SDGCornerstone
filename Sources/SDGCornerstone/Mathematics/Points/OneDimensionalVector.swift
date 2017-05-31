@@ -16,9 +16,9 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `VectorType`
+/// - `VectorProtocol`
 /// - `static func ÷ (lhs: Self, rhs: Self) -> Scalar`
-public protocol OneDimensionalVector : VectorType {
+public protocol OneDimensionalVector : VectorProtocol {
 
     // [_Define Documentation: SDGCornerstone.OneDimensionalVector.÷_]
     /// Returns the quotient of the left divided by the right.

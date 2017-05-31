@@ -36,7 +36,7 @@ extension WholeNumber.BinaryView {
             return (lhs.digit, lhs.bit) == (rhs.digit, rhs.bit)
         }
 
-        // MARK: - PointType
+        // MARK: - PointProtocol
 
         internal typealias Vector = WholeNumber.BinaryView.IndexDistance
 

@@ -40,7 +40,7 @@ postfix operator |
 ///
 /// - `AdditiveArithmetic`
 /// - `Comparable`
-/// - `Negatable`, `WholeNumberType` or `mutating func formAbsoluteValue()`
+/// - `Negatable`, `WholeNumberProtocol` or `mutating func formAbsoluteValue()`
 public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
 
     // MARK: - Classification
@@ -246,8 +246,8 @@ extension NumericAdditiveArithmetic where Self : Negatable {
     }
 }
 
-extension NumericAdditiveArithmetic where Self : WholeNumberType {
-    // MARK: - where Self : WholeNumberType
+extension NumericAdditiveArithmetic where Self : WholeNumberProtocol {
+    // MARK: - where Self : WholeNumberProtocol
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
     /// Returns `true` if `self` is negative.

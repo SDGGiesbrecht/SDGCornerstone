@@ -21,8 +21,12 @@ XCTMain([
     testCase(DataTests.allTests),
     testCase(EnumerationTests.allTests),
     testCase(LogicTests.allTests),
+    testCase(LocalizationTests.allTests),
     testCase(MathematicsTests.allTests),
+    testCase(PersistenceTests.allTests),
     testCase(RandomizationTests.allTests),
+    testCase(ReferenceTests.allTests),
+    testCase(ShellTests.allTests),
     testCase(TextTests.allTests),
 
     testCase(RegressionTests.allTests),

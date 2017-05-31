@@ -20,7 +20,7 @@
 ///
 /// - `Equatable`
 /// - `Subtractable`
-/// - `IntegralArithmetic`, `WholeNumberType`, `ExpressibleByIntegerLiteral` or `static var additiveIdentity: Self { get }`
+/// - `IntegralArithmetic`, `WholeNumberProtocol`, `ExpressibleByIntegerLiteral` or `static var additiveIdentity: Self { get }`
 public protocol AdditiveArithmetic : Equatable, Subtractable {
 
     // [_Define Documentation: SDGCornerstone.AdditiveArithmetic.additiveIdentity_]

@@ -24,7 +24,7 @@ import Foundation
 #endif
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
-public protocol FloatFamily : Addable, AdditiveArithmetic, BinaryFloatingPoint, CustomDebugStringConvertible, IntegralArithmetic, Hashable, LosslessStringConvertible, Negatable, NumericAdditiveArithmetic, OneDimensionalPoint, PointType, RationalArithmetic, RealNumberType, Subtractable, WholeArithmetic {
+public protocol FloatFamily : Addable, AdditiveArithmetic, BinaryFloatingPoint, CustomDebugStringConvertible, IntegralArithmetic, Hashable, LosslessStringConvertible, Negatable, NumericAdditiveArithmetic, OneDimensionalPoint, PointProtocol, RationalArithmetic, RealNumberProtocol, Subtractable, WholeArithmetic {
 
     // [_Define Documentation: SDGCornerstone.FloatFamily.init(_:)_]
     /// Creates a new value, rounded to the closest possible representation.
@@ -38,7 +38,7 @@ public protocol FloatFamily : Addable, AdditiveArithmetic, BinaryFloatingPoint, 
     static var ln2: Self { get }
 }
 
-extension Double : FloatFamily {
+extension Double : FloatFamily, PropertyListValue {
 
     // MARK: - FloatFamily
 
@@ -46,9 +46,9 @@ extension Double : FloatFamily {
     /// The value of ln2.
     public static let ln2: Double = 0x1.62E42FEFA39EFp-1
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
@@ -61,7 +61,7 @@ extension Double : FloatFamily {
 
 #if !(os(Linux) || LinuxDocs)
 
-    extension CGFloat : FloatFamily {
+    extension CGFloat : FloatFamily, PropertyListValue {
 
         // MARK: - CustomDebugStringConvertible
 
@@ -90,9 +90,9 @@ extension Double : FloatFamily {
             }
         }
 
-        // MARK: - PointType
+        // MARK: - PointProtocol
 
-        // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+        // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
         /// The type to be used as a vector.
         public typealias Vector = Stride
 
@@ -113,9 +113,9 @@ extension Double : FloatFamily {
         /// The value of ln2.
         public static let ln2: Float80 = 0x1.62E42FEFA39EF358p-1
 
-        // MARK: - PointType
+        // MARK: - PointProtocol
 
-        // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+        // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
         /// The type to be used as a vector.
         public typealias Vector = Stride
 
@@ -127,7 +127,7 @@ extension Double : FloatFamily {
     }
 #endif
 
-extension Float : FloatFamily {
+extension Float : FloatFamily, PropertyListValue {
 
     // MARK: - FloatFamily
 
@@ -135,9 +135,9 @@ extension Float : FloatFamily {
     /// The value of ln2.
     public static let ln2: Float = 0x1.62E430p-1
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Stride
 

@@ -17,7 +17,7 @@ import XCTest
 
 import SDGCornerstone
 
-class RegressionTests : XCTestCase {
+class RegressionTests : TestCase {
 
     func testAddAndSetIsUnambiguous() {
         // Untracked
@@ -126,7 +126,7 @@ class RegressionTests : XCTestCase {
         let _: Float = 3 − 2
         let _: WholeNumber = 3 − 2
         let _: Integer = 3 − 2
-        let _: RationalNumberTypeExample = RationalNumberTypeExample(3) − RationalNumberTypeExample(2)
+        let _: RationalNumberProtocolExample = RationalNumberProtocolExample(3) − RationalNumberProtocolExample(2)
         let _: RealArithmeticExample = RealArithmeticExample(3) − RealArithmeticExample(2)
     }
 

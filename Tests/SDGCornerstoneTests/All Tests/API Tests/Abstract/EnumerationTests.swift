@@ -15,7 +15,7 @@
 import XCTest
 import SDGCornerstone
 
-class EnumerationTests : XCTestCase {
+class EnumerationTests : TestCase {
 
     func testIterableEnumeration() {
         XCTAssert(IterableEnumerationExample.cases.count == 3)

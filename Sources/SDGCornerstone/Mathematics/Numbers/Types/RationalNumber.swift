@@ -20,7 +20,7 @@
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, IntegralArithmetic, Negatable, PointType, RationalArithmetic, RationalNumberType, Subtractable, WholeArithmetic {
+public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -182,9 +182,9 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
         operand.definition.numerator−=
     }
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = RationalNumber
 

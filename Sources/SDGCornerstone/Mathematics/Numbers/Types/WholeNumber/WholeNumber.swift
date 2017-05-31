@@ -22,7 +22,7 @@
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
-public struct WholeNumber : Addable, Comparable, Equatable, PointType, Strideable, Subtractable, WholeArithmetic, WholeNumberType {
+public struct WholeNumber : Addable, Comparable, Equatable, PointProtocol, Strideable, Subtractable, WholeArithmetic, WholeNumberProtocol {
 
     // MARK: - Properties
 
@@ -149,13 +149,13 @@ public struct WholeNumber : Addable, Comparable, Equatable, PointType, Strideabl
         return lhs.digits.elementsEqual(rhs.digits)
     }
 
-    // MARK: - PointType
+    // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.Vector_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
     public typealias Vector = Integer
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.+=_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
     /// Moves the point on the left by the vector on the right.
     ///
     /// - Parameters:
@@ -171,7 +171,7 @@ public struct WholeNumber : Addable, Comparable, Equatable, PointType, Strideabl
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointType.−_]
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
     /// Returns the vector that leads from the point on the left to the point on the right.
     ///
     /// - Parameters:

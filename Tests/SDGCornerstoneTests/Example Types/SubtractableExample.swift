@@ -41,7 +41,7 @@ struct SubtractableExample : Equatable, Subtractable {
     }
 }
 
-struct SubtractableExampleWherePointTypeAndVectorIsSelf : Negatable, PointType, Subtractable {
+struct SubtractableExampleWherePointProtocolAndVectorIsSelf : Negatable, PointProtocol, Subtractable {
 
     var value: Int
 
@@ -51,29 +51,29 @@ struct SubtractableExampleWherePointTypeAndVectorIsSelf : Negatable, PointType, 
 
     // AdditiveArithmetic
 
-    static let additiveIdentity = SubtractableExampleWherePointTypeAndVectorIsSelf(0)
+    static let additiveIdentity = SubtractableExampleWherePointProtocolAndVectorIsSelf(0)
 
     // Equatable
 
-    static func == (lhs: SubtractableExampleWherePointTypeAndVectorIsSelf, rhs: SubtractableExampleWherePointTypeAndVectorIsSelf) -> Bool {
+    static func == (lhs: SubtractableExampleWherePointProtocolAndVectorIsSelf, rhs: SubtractableExampleWherePointProtocolAndVectorIsSelf) -> Bool {
         return lhs.value == rhs.value
     }
 
-    // PointType
+    // PointProtocol
 
-    typealias Vector = SubtractableExampleWherePointTypeAndVectorIsSelf
+    typealias Vector = SubtractableExampleWherePointProtocolAndVectorIsSelf
 
-    static func += (lhs: inout SubtractableExampleWherePointTypeAndVectorIsSelf, rhs: Vector) {
+    static func += (lhs: inout SubtractableExampleWherePointProtocolAndVectorIsSelf, rhs: Vector) {
         lhs.value += rhs.value
     }
 
-    static func − (lhs: SubtractableExampleWherePointTypeAndVectorIsSelf, rhs: SubtractableExampleWherePointTypeAndVectorIsSelf) -> Vector {
-        return SubtractableExampleWherePointTypeAndVectorIsSelf(lhs.value − rhs.value)
+    static func − (lhs: SubtractableExampleWherePointProtocolAndVectorIsSelf, rhs: SubtractableExampleWherePointProtocolAndVectorIsSelf) -> Vector {
+        return SubtractableExampleWherePointProtocolAndVectorIsSelf(lhs.value − rhs.value)
     }
 
     // Subtractable
 
-    static func −= (lhs: inout SubtractableExampleWherePointTypeAndVectorIsSelf, rhs: SubtractableExampleWherePointTypeAndVectorIsSelf) {
+    static func −= (lhs: inout SubtractableExampleWherePointProtocolAndVectorIsSelf, rhs: SubtractableExampleWherePointProtocolAndVectorIsSelf) {
         lhs.value −= rhs.value
     }
 }
