@@ -240,7 +240,7 @@ extension PropertyListValue {
             }
         } else if V.self == [PropertyListValue].self { // [_Exempt from Code Coverage_] Unreachable on macOS.
             if let result = self as? NSArray { // [_Exempt from Code Coverage_] Unreachable on macOS.
-                return result.map({ $0 }) as? V
+                return result.map({ $0 }) as? V // [_Exempt from Code Coverage_] Unreachable on macOS.
             } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
@@ -266,7 +266,7 @@ extension PropertyListValue {
                 var dictionary: [String: PropertyListValue] = [:]
                 for (key, value) in result { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     dictionary[key.substring(from: 0)] = value
-                }
+                } // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return dictionary as? V
             } else {
                 return nil
@@ -289,13 +289,13 @@ extension PropertyListValue {
                     } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                         return nil
                     }
-                }
+                } // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return dictionary as? V
             } else if let result = self as? [String: PropertyListValue] { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 var dictionary: [NSString: PropertyListValue] = [:]
                 for (key, value) in result { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     dictionary[NSString(string: key)] = value
-                }
+                } // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return dictionary as? V
             } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
@@ -317,10 +317,10 @@ extension PropertyListValue {
         if let array = `as`([V].self) {
             return array
         } else if let array = `as`([PropertyListValue].self) { // [_Exempt from Code Coverage_] Unreachable on macOS.
-            return try? array.map() { (element: PropertyListValue) -> V in
+            return try? array.map() { (element: PropertyListValue) -> V in // [_Exempt from Code Coverage_] Unreachable on macOS.
                 guard let result = element.as(V.self) else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     throw WrongType()
-                }
+                } // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result
             }
         } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
@@ -335,10 +335,10 @@ extension PropertyListValue {
         if let dictionary = `as`([String: V].self) {
             return dictionary
         } else if let dictionary = `as`([String: PropertyListValue].self) { // [_Exempt from Code Coverage_] Unreachable on macOS.
-            return try? dictionary.mapKeyValuePairs() { (key: String, value: PropertyListValue) -> (String, V) in
+            return try? dictionary.mapKeyValuePairs() { (key: String, value: PropertyListValue) -> (String, V) in // [_Exempt from Code Coverage_] Unreachable on macOS.
                 guard let result = value.as(V.self) else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     throw WrongType()
-                }
+                } // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return (key, result)
             }
         } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
