@@ -94,160 +94,160 @@ extension PropertyListValue {
     public func `as`<V : PropertyListValue>(_ type: V.Type) -> V? {
         if let result = self as? V {
             return result
-        } else if V.self == Bool.self {
-            if let result = self as? NSNumber {
+        } else if V.self == Bool.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.boolValue as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Int.self {
-            if let result = self as? NSNumber {
+        } else if V.self == Int.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.intValue as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == UInt.self {
-            if let result = self as? NSNumber {
+        } else if V.self == UInt.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.uintValue as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Int64.self {
-            if let result = self as? NSNumber {
+        } else if V.self == Int64.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.int64Value as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == UInt64.self {
-            if let result = self as? NSNumber {
+        } else if V.self == UInt64.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.uint64Value as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Int32.self {
-            if let result = self as? NSNumber {
+        } else if V.self == Int32.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.int32Value as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == UInt32.self {
-            if let result = self as? NSNumber {
+        } else if V.self == UInt32.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.uint32Value as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Int16.self {
-            if let result = self as? NSNumber {
+        } else if V.self == Int16.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.int16Value as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == UInt16.self {
-            if let result = self as? NSNumber {
+        } else if V.self == UInt16.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.uint16Value as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Int8.self {
-            if let result = self as? NSNumber {
+        } else if V.self == Int8.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.int8Value as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == UInt8.self {
-            if let result = self as? NSNumber {
+        } else if V.self == UInt8.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.uint8Value as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Double.self {
-            if let result = self as? NSNumber {
+        } else if V.self == Double.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.doubleValue as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Float.self {
-            if let result = self as? NSNumber {
+        } else if V.self == Float.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSNumber { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.floatValue as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == NSNumber.self {
-            if let result = self as? Bool {
+        } else if V.self == NSNumber.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? Bool { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? Int {
+            } else if let result = self as? Int { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? UInt {
+            } else if let result = self as? UInt { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? Int64 {
+            } else if let result = self as? Int64 { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? UInt64 {
+            } else if let result = self as? UInt64 { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? Int32 {
+            } else if let result = self as? Int32 { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? UInt32 {
+            } else if let result = self as? UInt32 { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? Int16 {
+            } else if let result = self as? Int16 { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? UInt16 {
+            } else if let result = self as? UInt16 { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? Int8 {
+            } else if let result = self as? Int8 { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? UInt8 {
+            } else if let result = self as? UInt8 { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? Double {
+            } else if let result = self as? Double { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else if let result = self as? Float {
+            } else if let result = self as? Float { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSNumber(value: result) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == String.self {
-            if let result = self as? NSString {
+        } else if V.self == String.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSString { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.substring(from: 0) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == NSString.self {
-            if let result = self as? String {
+        } else if V.self == NSString.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? String { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSString(string: result) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Date.self {
-            if let result = self as? NSDate {
+        } else if V.self == Date.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSDate { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return Date(timeIntervalSinceReferenceDate: result.timeIntervalSinceReferenceDate) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == NSDate.self {
-            if let result = self as? Date {
+        } else if V.self == NSDate.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? Date { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSDate(timeInterval: 0, since: result) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == Data.self {
-            if let result = self as? NSData {
+        } else if V.self == Data.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSData { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.subdata(with: NSRange(location: 0, length: result.length)) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == NSData.self {
-            if let result = self as? Data {
+        } else if V.self == NSData.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? Data { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSData(data: result) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == [PropertyListValue].self {
-            if let result = self as? NSArray {
+        } else if V.self == [PropertyListValue].self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSArray { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return result.map({ $0 }) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else if V.self == NSArray.self {
-            if let result = self as? [PropertyListValue] {
+        } else if V.self == NSArray.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? [PropertyListValue] { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSArray(array: result) as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
         } else if V.self == [String: PropertyListValue].self {
@@ -257,50 +257,50 @@ extension PropertyListValue {
                     if let key = (propertyListKey as? PropertyListValue)?.as(String.self),
                         let value = propertyListValue as? PropertyListValue {
                         dictionary[key] = value
-                    } else {
+                    } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                         return nil
                     }
                 }
                 return dictionary as? V
-            } else if let result = self as? [NSString: PropertyListValue] {
+            } else if let result = self as? [NSString: PropertyListValue] { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 var dictionary: [String: PropertyListValue] = [:]
-                for (key, value) in result {
+                for (key, value) in result { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     dictionary[key.substring(from: 0)] = value
                 }
                 return dictionary as? V
             } else {
                 return nil
             }
-        } else if V.self == NSDictionary.self {
-            if let result = self as? [String: PropertyListValue] {
+        } else if V.self == NSDictionary.self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? [String: PropertyListValue] { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSDictionary(dictionary: result) as? V
-            } else if let result = self as? [NSString: PropertyListValue] {
+            } else if let result = self as? [NSString: PropertyListValue] { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return NSDictionary(dictionary: result) as? V
             } else {
                 return nil
             }
-        } else if V.self == [NSString: PropertyListValue].self {
-            if let result = self as? NSDictionary {
+        } else if V.self == [NSString: PropertyListValue].self { // [_Exempt from Code Coverage_] Unreachable on macOS.
+            if let result = self as? NSDictionary { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 var dictionary: [NSString: PropertyListValue] = [:]
-                for (propertyListKey, propertyListValue) in result {
+                for (propertyListKey, propertyListValue) in result { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     if let key = (propertyListKey as? PropertyListValue)?.as(NSString.self),
-                        let value = propertyListValue as? PropertyListValue {
+                        let value = propertyListValue as? PropertyListValue { // [_Exempt from Code Coverage_] Unreachable on macOS.
                         dictionary[key] = value
-                    } else {
+                    } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                         return nil
                     }
                 }
                 return dictionary as? V
-            } else if let result = self as? [String: PropertyListValue] {
+            } else if let result = self as? [String: PropertyListValue] { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 var dictionary: [NSString: PropertyListValue] = [:]
-                for (key, value) in result {
+                for (key, value) in result { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     dictionary[NSString(string: key)] = value
                 }
                 return dictionary as? V
-            } else {
+            } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                 return nil
             }
-        } else {
+        } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return nil
         }
     }
@@ -316,14 +316,14 @@ extension PropertyListValue {
     public func asArray<V : PropertyListValue>(of type: V.Type) -> [V]? {
         if let array = `as`([V].self) {
             return array
-        } else if let array = `as`([PropertyListValue].self) {
+        } else if let array = `as`([PropertyListValue].self) { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return try? array.map() { (element: PropertyListValue) -> V in
-                guard let result = element.as(V.self) else {
+                guard let result = element.as(V.self) else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     throw WrongType()
                 }
                 return result
             }
-        } else {
+        } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return nil
         }
     }
@@ -334,14 +334,14 @@ extension PropertyListValue {
     public func asDictionary<V : PropertyListValue>(of type: V.Type) -> [String: V]? {
         if let dictionary = `as`([String: V].self) {
             return dictionary
-        } else if let dictionary = `as`([String: PropertyListValue].self) {
+        } else if let dictionary = `as`([String: PropertyListValue].self) { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return try? dictionary.mapKeyValuePairs() { (key: String, value: PropertyListValue) -> (String, V) in
-                guard let result = value.as(V.self) else {
+                guard let result = value.as(V.self) else { // [_Exempt from Code Coverage_] Unreachable on macOS.
                     throw WrongType()
                 }
                 return (key, result)
             }
-        } else {
+        } else { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return nil
         }
     }
