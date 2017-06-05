@@ -59,6 +59,16 @@
                 silent = true
             }
 
+            // Formatting separation from other output.
+            if ¬silent { // [_Exempt from Code Coverage_]
+                print("")
+            }
+            defer {
+                if ¬silent { // [_Exempt from Code Coverage_]
+                    print("")
+                }
+            }
+
             let commandString = command.map({ (argument: String) -> String in
                 if argument.contains(" ") {
                     return "\u{22}" + argument + "\u{22}"
