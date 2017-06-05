@@ -1,5 +1,5 @@
 /*
- SupportedLocalization.swift
+ ContentLocalization.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal enum SupportedLocalization : String, Localization {
+internal enum ContentLocalization : String, Localization {
 
     // MARK: - Cases
 
@@ -40,5 +40,5 @@ internal enum SupportedLocalization : String, Localization {
 
     // MARK: - Localization
 
-    internal static let fallbackLocalization: SupportedLocalization = .עברית־ישראל
+    internal static let fallbackLocalization: ContentLocalization = .עברית־ישראל
 }

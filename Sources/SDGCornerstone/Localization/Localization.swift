@@ -61,7 +61,7 @@ extension Localization {
             self = result
             return
         }
-        if let relevantCountries = SupportedLocalization.countries[language] {
+        if let relevantCountries = ContentLocalization.countries[language] {
             for country in relevantCountries {
                 if let result = Self(exactly: language + "\u{2D}" + country) {
                     self = result
