@@ -30,6 +30,7 @@ internal enum ContentLocalization : String, Localization {
 
     internal static let countries = [
         // [_Define Example: Localization Groups_]
+        "es": ["ES", "MX", "CO", "AR", "VE", "PE", "CL", "EC", "CU", "DO", "GT", "HN", "SV", "NI", "BO", "CR", "UY", "PA", "PY", "GQ"],
         "en": ["GB", "US", "CA", "AU", "ZA", "IE", "NL", "SG", "TT", "GY", "LR", "SL", "MY", "BB", "BS", "ZW", "IN", "BZ", "PG", "VC", "ZM", "GD", "AG", "VU", "JM", "KN", "LK", "PH", "LC", "NA", "BN", "SB", "NR", "FJ", "FM", "DM", "SC", "MU", "WS", "PW", "MW", "BW", "BI", "CM", "ET", "GM", "GH", "KE", "KI", "LS", "MT", "MH", "NG", "PK", "RW", "SS", "SD", "SZ", "TZ", "TO", "TV", "UG"],
         "de": ["DE", "AT", "CH", "BE", "LI", "LU"],
         "fr": ["FR", "CA", "BE", "CH", "BF", "SN", "LU", "MU", "GA", "CG", "MG", "CI", "BJ", "MC", "DJ", "CF", "ML", "NE", "TD", "TG", "RW", "BI", "KM", "VU", "SC", "CM", "CD", "GN", "GQ", "HT"],
