@@ -19,7 +19,12 @@
 private func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, within bounds: CountableClosedRange<I>?, inFunction function: (I) -> O, isCloser: (O, O) -> Bool) -> I where I.Vector : IntegerProtocol {
     var location = location
 
-    assert(bounds == nil ∨ bounds! ∋ location, "Location (\(location)) out of bounds (\(String(describing: bounds))).")
+    assert(bounds == nil ∨ bounds! ∋ location, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        switch localization {
+        case .englishCanada:
+            return StrictString("Location out of bounds. \(location) ∉ \(String(describing: bounds))")
+        }
+    }))
 
     while location ≠ bounds?.upperBound ∧ isCloser(function(location.successor()), function(location)) {
         location = location.successor()

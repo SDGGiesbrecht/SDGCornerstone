@@ -112,7 +112,12 @@
                     } else if let latin1 = String(data: line, encoding: String.Encoding.isoLatin1) { // [_Exempt from Code Coverage_]
                         string = latin1
                     } else {
-                        preconditionFailure("Cannot identify string encoding: \(line)")
+                        preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                            switch localization {
+                            case .englishCanada:
+                                return StrictString("Cannot identify string encoding: \(line)")
+                            }
+                        }))
                     }
 
                     result.append(string + newLine)

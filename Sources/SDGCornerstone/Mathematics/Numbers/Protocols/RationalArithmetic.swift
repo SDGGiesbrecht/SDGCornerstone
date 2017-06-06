@@ -120,7 +120,12 @@ extension RationalArithmetic {
     ///     - randomizer: The randomizer to use to generate the random value.
     public init(randomInRange range: Range<Self>, fromRandomizer randomizer: Randomizer) {
 
-        assert(¬range.isEmpty, "Empty range.")
+        assert(¬range.isEmpty, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "Empty range."
+            }
+        }))
 
         var random = range.upperBound
 

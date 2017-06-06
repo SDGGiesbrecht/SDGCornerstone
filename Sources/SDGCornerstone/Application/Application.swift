@@ -23,10 +23,15 @@ internal struct Application {
     internal static let current: Application = {
         guard let identifier = currentApplicationIdentifierInitializer,
             let mode = currentApplicationModeInitializer else {
-            preconditionFailureNotInitialized()
+                preconditionFailureNotInitialized()
         }
         if let main = Bundle.main.bundleIdentifier {
-            assert(identifier == main, "The application identifier does not match the main bundle identifier: \(identifier) ≠ \(main)")
+            assert(identifier == main, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return StrictString("The application identifier does not match the main bundle identifier: \(identifier) ≠ \(main)")
+                }
+            }))
         }
         return Application(identifier: identifier, mode: mode)
     }()

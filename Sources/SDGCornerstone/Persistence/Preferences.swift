@@ -52,7 +52,12 @@ open class Preferences {
         }
 
         guard let subclassedResult = result as? P else {
-            preconditionFailure("Existing preferences are the wrong class: \(type(of: result))")
+            preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return StrictString("Existing preferences are the wrong class: \(type(of: result))")
+                }
+            }))
         }
         return subclassedResult
     }
@@ -61,7 +66,12 @@ open class Preferences {
     ///
     /// Subclasses may call this during initialization, but in all other circumstances, `preferences(for:)` should be called to prevent duplication.
     public required init(domain: String) {
-        assert(Preferences.domains[domain] == nil, "Detected duplicate initialization of \(domain). Call preferences(for:) instead.")
+        assert(Preferences.domains[domain] == nil, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Detected duplicate initialization of \(domain). Call preferences(for:) instead.")
+            }
+        }))
 
         self.domain = domain
         let possibleDebugDomain: String
@@ -133,7 +143,12 @@ open class Preferences {
 
         #else
 
-            assert(possibleDebugDomain ≠ UserDefaults.globalDomain, "Attempted to write preferences to the global domain. This domain is read‐only.")
+            assert(possibleDebugDomain ≠ UserDefaults.globalDomain, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return "Attempted to write preferences to the global domain. This domain is read‐only."
+                }
+            }))
             UserDefaults.standard.setPersistentDomain(preferences, forName: possibleDebugDomain)
 
         #endif
@@ -157,7 +172,7 @@ open class Preferences {
 
     private func valueChanged(for identifier: String) {
         guard let shared = values[identifier] else {
-            preconditionFailure("Received notification of a shared value changing from an untracked identifier: \(identifier).")
+            unreachable()
         }
 
         if shared.value?.equatableRepresentation ≠ contents[identifier]?.equatableRepresentation {

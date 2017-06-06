@@ -24,7 +24,12 @@ private var initialized = false
 ///     - applicationPreferencesClass: A subclass of `Preferences` to use for the application preferences. Defaults to the `Preferences` class itself.
 ///     - mode: The `Mode` SDGCornerstone should follow.
 public func initialize(mode: Mode, applicationIdentifier: String, applicationPreferencesClass: Preferences.Type = Preferences.self) {
-    assert(initialized == false, "Detected attempted to re‐initialize. SDGCornerstone is only designed to be initialized once.")
+    assert(initialized == false, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        switch localization {
+        case .englishCanada:
+            return StrictString("Detected attempted to re‐initialize. SDGCornerstone is only designed to be initialized once.")
+        }
+    }))
     initialized = true
     Application.currentApplicationModeInitializer = mode
     Application.currentApplicationIdentifierInitializer = applicationIdentifier
@@ -32,5 +37,10 @@ public func initialize(mode: Mode, applicationIdentifier: String, applicationPre
 }
 
 internal func preconditionFailureNotInitialized() -> Never {
-    preconditionFailure("SDGCornerstone has not been initialized. Did you forget to call SDGCornerstone.initialize(...)?")
+    preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        switch localization {
+        case .englishCanada:
+            return "SDGCornerstone has not been initialized. Did you forget to call SDGCornerstone.initialize(...)?"
+        }
+    }))
 }

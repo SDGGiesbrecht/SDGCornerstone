@@ -398,7 +398,12 @@ extension WholeArithmetic {
     ///     - representation: The string to interpret.
     ///     - base: The base of the number system.
     public init(_ representation: StrictString, base: Int) {
-        assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, "Base \(base) is not supported. The base must be an integer between 2 and 16 inclusive.")
+        assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Base \(base) is not supported. The base must be an integer between 2 and 16 inclusive.")
+            }
+        }))
 
         let digits: [[UnicodeScalar]] = [
             //    arb  pes  hi   bn   ta   my   km   th   lo
@@ -439,7 +444,12 @@ extension WholeArithmetic {
 
             return set.sorted()
         }
-        assert(assertNFKD().isEmpty, "Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))")
+        assert(assertNFKD().isEmpty, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))")
+            }
+        }))
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
@@ -484,7 +494,12 @@ extension WholeArithmetic {
                 self += (base ↑ position) × digit
                 position += 1
             } else {
-                assert(character ∈ formattingSeparators, "\(character) is not a valid digit.")
+                assert(character ∈ formattingSeparators, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                    switch localization {
+                    case .englishCanada:
+                        return StrictString("\(character) is not a valid digit.")
+                    }
+                }))
             }
         }
     }
@@ -734,7 +749,7 @@ extension WholeArithmetic {
                         self = floor + factor
                     }
                 default:
-                    assertionFailure("This line of code should be unreachable. All RoundingRule cases should already accounted for.")
+                    unreachable()
                 }
             }
         }
@@ -876,7 +891,12 @@ extension WholeArithmetic where Self : FloatFamily {
     /// - NonmutatingVariant: ↑
     public static func ↑= (lhs: inout Self, rhs: Self) {
 
-        assert(lhs.isNonNegative ∨ rhs.isIntegral, "The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead.")
+        assert(lhs.isNonNegative ∨ rhs.isIntegral, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead."
+            }
+        }))
 
         if rhs.isIntegral {
             lhs.raiseRationalNumberToThePowerOf(rationalNumber: rhs)
@@ -984,7 +1004,12 @@ extension WholeArithmetic where Self : IntegralArithmetic {
 
     fileprivate mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
 
-        assert(exponent.isNonNegative, "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead.")
+        assert(exponent.isNonNegative, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead."
+            }
+        }))
 
         raiseWholeNumberToThePowerOf(wholeNumber: exponent)
     }
@@ -1121,7 +1146,12 @@ extension WholeArithmetic where Self : RationalArithmetic {
 
     internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
 
-        assert(exponent.isIntegral, "The result of a non‐integer exponent may be outside the set of rational numbers. Use a type that conforms to RealArithmetic instead.")
+        assert(exponent.isIntegral, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "The result of a non‐integer exponent may be outside the set of rational numbers. Use a type that conforms to RealArithmetic instead."
+            }
+        }))
 
         if exponent.isNegative {
             self = 1 ÷ self ↑ −exponent
