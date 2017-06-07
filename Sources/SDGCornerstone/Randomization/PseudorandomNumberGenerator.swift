@@ -54,7 +54,12 @@ public final class PseudorandomNumberGenerator : Randomizer {
                 if linuxIsSeeded {
                     return _linuxState
                 } else {
-                    preconditionFailure("Failed to seed BSD random number generator.")
+                    preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                        switch localization {
+                        case .englishCanada:
+                            return "Failed to seed BSD random number generator."
+                        }
+                    }))
                 }
             }
             set {

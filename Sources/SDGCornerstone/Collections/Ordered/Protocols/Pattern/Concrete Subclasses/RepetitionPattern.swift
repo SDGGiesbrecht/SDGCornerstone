@@ -18,7 +18,12 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     // MARK: - Initialization
 
     private init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
-        assert(count == nil ∨ count!.lowerBound.isNonNegative, "Cannot check for a negative number of instances of a pattern. Requested count: \(count!).")
+        assert(count == nil ∨ count!.lowerBound.isNonNegative, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Cannot check for a negative number of instances of a pattern. Requested count: \(count!).")
+            }
+        }))
 
         self.pattern = pattern
         self.count = count ?? 0 ..< Int.max

@@ -308,7 +308,12 @@ extension Subtractable where Self : UIntFamily {
     ///
     /// - RecommendedOver: -=
     public static func −= (lhs: inout Self, rhs: Self) {
-        assert(lhs ≥ rhs, "\(lhs) − \(rhs) is impossible for \(Self.self).")
+        assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("\(lhs) − \(rhs) is impossible for \(Self.self).")
+            }
+        }))
 
         // func −=
         lhs -= rhs

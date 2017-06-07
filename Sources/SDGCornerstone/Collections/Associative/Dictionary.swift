@@ -21,7 +21,12 @@ extension Dictionary : PropertyListValue {
     public init(_ keyValuePairs: [(Key, Value)]) {
         self = [:]
         for (key, value) in keyValuePairs {
-            assert(self[key] == nil, "Duplicate key: \(key)")
+            assert(self[key] == nil, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return StrictString("Duplicate key: \(key)")
+                }
+            }))
             self[key] = value
         }
     }

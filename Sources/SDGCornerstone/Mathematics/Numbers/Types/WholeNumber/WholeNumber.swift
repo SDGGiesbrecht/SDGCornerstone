@@ -194,7 +194,12 @@ public struct WholeNumber : Addable, Comparable, Equatable, PointProtocol, Strid
     ///
     /// - RecommendedOver: -=
     public static func −= (lhs: inout WholeNumber, rhs: WholeNumber) {
-        assert(lhs ≥ rhs, "\(lhs) − \(rhs) is impossible for \(WholeNumber.self).")
+        assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("\(lhs) − \(rhs) is impossible for \(WholeNumber.self).")
+            }
+        }))
 
         var borrowing: Digit = 0
         for digitIndex in rhs.digits.indices {

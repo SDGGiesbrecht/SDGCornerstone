@@ -29,7 +29,7 @@ public struct UserFacingText<Localization : SDGCornerstone.Localization, Argumen
 
     // MARK: - Properties
 
-    private var localize: (Localization, Arguments) -> StrictString
+    fileprivate var localize: (Localization, Arguments) -> StrictString
 
     // MARK: - Output
 
@@ -41,5 +41,19 @@ public struct UserFacingText<Localization : SDGCornerstone.Localization, Argumen
     /// Returns the resolved string for the specified localization using the specified arguments.
     public func resolved(for localization: Localization, using arguments: Arguments) -> StrictString {
         return localize(localization, arguments)
+    }
+}
+
+extension UserFacingText where Arguments == Void {
+    // MARK: - where Arguments == Void
+
+    /// Returns the resolved string for the current localization.
+    public func resolved() -> StrictString {
+        return localize(LocalizationSetting.current.value.resolved(), ())
+    }
+
+    /// Returns the resolved string for the specified localization.
+    public func resolved(for localization: Localization) -> StrictString {
+        return localize(localization, ())
     }
 }

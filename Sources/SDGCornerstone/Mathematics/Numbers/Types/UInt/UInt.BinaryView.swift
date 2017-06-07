@@ -36,7 +36,6 @@
         /// The number of elements in the collection.
         public static var count: IndexDistance {
             let bytes = MemoryLayout<UIntValue>.size
-            assert(bytes == MemoryLayout<UIntValue>.stride, "\(UIntValue.self) has an incompatible memory layout.")
             return bytes × 8
         }
 
@@ -91,11 +90,11 @@
         /// Accesses the element at the specified position.
         public subscript(index: Index) -> Element {
             get {
-                assert(index ∈ bounds, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
+                assertIndexExists(index)
                 return uInt.bitwiseAnd(with: 1 << index) >> index == 1
             }
             set {
-                assert(index ∈ bounds, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
+                assertIndexExists(index)
                 let oldErased = uInt.bitwiseAnd(with: (1 << index).bitwiseNot())
                 uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << index)
             }

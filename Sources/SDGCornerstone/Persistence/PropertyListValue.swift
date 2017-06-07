@@ -79,7 +79,12 @@ extension PropertyListValue {
         } else if let dictionary = self as? [NSString: Any] { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSDictionary(dictionary: dictionary)
         } else {
-            preconditionFailure("\(type(of: self)) is not a property list value.")
+            preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return StrictString("\(type(of: self)) is not a property list value.")
+                }
+            }))
         }
     }
 }

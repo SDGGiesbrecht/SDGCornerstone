@@ -58,7 +58,12 @@ extension OrderedEnumeration where RawValue.Vector : IntegerProtocol {
             return next
         } else {
             guard let next = Self.first else {
-                preconditionFailure("\(Self.self) has no first case.")
+                preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                    switch localization {
+                    case .englishCanada:
+                        return StrictString("\(Self.self) has no first case.")
+                    }
+                }))
             }
             return next
         }
@@ -71,7 +76,12 @@ extension OrderedEnumeration where RawValue.Vector : IntegerProtocol {
             return previous
         } else {
             guard let previous = Self.cases.last else {
-                preconditionFailure("\(Self.self) has no last case.")
+                preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                    switch localization {
+                    case .englishCanada:
+                        return StrictString("\(Self.self) has no last case.")
+                    }
+                }))
             }
             return previous
         }

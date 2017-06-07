@@ -18,6 +18,10 @@ enum LocalizationExample : String, Localization {
     case englishUnitedKingdom = "en\u{2D}GB"
     case français = "fr"
 
+    case chineseTraditionalTaiwan = "cmn\u{2D}Hant\u{2D}TW"
+    case malaysianLatin = "zsm\u{2D}Latn"
+    case norwegian = "no"
+
     // Localization
 
     static let fallbackLocalization: LocalizationExample = .englishUnitedKingdom

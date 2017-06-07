@@ -25,7 +25,12 @@ public final class CyclicalNumberGenerator : Randomizer {
     /// - Parameters:
     ///     - sequence: The sequence.
     public init(_ sequence: [UIntMax]) {
-        assert(¬sequence.isEmpty, "Empty sequence.")
+        assert(¬sequence.isEmpty, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Empty sequence.")
+            }
+        }))
 
         self.sequence = sequence
         self.index = sequence.startIndex

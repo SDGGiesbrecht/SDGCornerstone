@@ -66,7 +66,13 @@ internal struct WholeNumberBinaryView {
     // MARK: - Sequences
 
     internal func indicesBackwards(from end: Index, to start: Index) -> UnfoldSequence<Index, Index> {
-        assert(start ≤ end, "Ascending range: \(end − 1)–\(start)")
+        assert(start ≤ end, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Ascending range: \(end − 1)–\(start)")
+            }
+        }))
+
         return sequence(state: end) { (index: inout Index) -> Index? in
             guard index ≠ self.startIndex else {
                 return nil
@@ -85,7 +91,12 @@ internal struct WholeNumberBinaryView {
     }
 
     internal func lastBitsBackwards(maximum distance: IndexDistance) -> LazyMapSequence<UnfoldSequence<Index, Index>, Bool> {
-        assert(distance ≥ 0, "Negative distance: \(distance)")
+        assert(distance ≥ 0, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Negative distance: \(distance)")
+            }
+        }))
 
         guard distance ≥ count else {
             return bitsBackwards()
@@ -109,7 +120,12 @@ internal struct WholeNumberBinaryView {
         for bitIndex in binary.indices.lazy.reversed() where binary[bitIndex] == true {
             return Index(digit: lastDigitIndex, bit: bitIndex) + 1
         }
-        preconditionFailure("\(wholeNumber) is not in normalized form.")
+        preconditionFailure(UserFacingText({ [wholeNumber = self.wholeNumber] (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("\(wholeNumber) is not in normalized form.")
+            }
+        }))
     }
     internal var count: IndexDistance {
         return endIndex − startIndex

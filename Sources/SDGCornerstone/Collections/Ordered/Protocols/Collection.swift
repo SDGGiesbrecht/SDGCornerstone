@@ -53,6 +53,15 @@ extension Collection {
         return startIndex ..< endIndex
     }
 
+    internal func assertIndexExists(_ index: Index) {
+        assert(index ∈ bounds, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "Index out of bounds."
+            }
+        }))
+    }
+
     /// Returns the backward version of the specified range.
     public func backward(_ range: Range<Self.Index>) -> Range<ReversedIndex<Self>> {
         return ReversedIndex(range.upperBound) ..< ReversedIndex(range.lowerBound)

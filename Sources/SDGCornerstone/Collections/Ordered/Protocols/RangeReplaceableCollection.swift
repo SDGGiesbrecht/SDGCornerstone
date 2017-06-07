@@ -636,7 +636,6 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
             result.append(contentsOf: replacements.removeFirst())
         }
 
-        assert(unaltered.count == 1, "Mismatched counts for unaltered and replaced sections. \(unaltered.count) unaltered sections left over.")
         result.append(contentsOf: self[unaltered.removeFirst()])
 
         self = result

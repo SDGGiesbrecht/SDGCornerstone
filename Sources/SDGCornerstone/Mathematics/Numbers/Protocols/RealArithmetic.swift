@@ -492,7 +492,12 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - sine: The sine.
     public static func arcsin(_ sine: Self) -> Angle<Self> {
-        assert(sine ∈ −1 ... 1, "There is no arcsine angle for any number x, where |x| > 1. In this case, the number \(sine).")
+        assert(sine ∈ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("There is no arcsine angle for any number x, where |x| > 1. In this case, the number \(sine).")
+            }
+        }))
         return arctan(sine ÷ √(1 − sine ↑ 2))
     }
 
@@ -506,7 +511,12 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - cosine: The cosine.
     public static func arccos(_ cosine: Self) -> Angle<Self> {
-        assert(cosine ∈ −1 ... 1, "There is no arccosine angle for any number x, where |x| > 1. In this case, the number \(cosine).")
+        assert(cosine ∈ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("There is no arccosine angle for any number x, where |x| > 1. In this case, the number \(cosine).")
+            }
+        }))
         return (π ÷ 2).rad − arcsin(cosine)
     }
 
@@ -520,7 +530,12 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - cosecant: The cosecant.
     public static func arccsc(_ cosecant: Self) -> Angle<Self> {
-        assert(cosecant ∉ −1 ... 1, "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(cosecant).")
+        assert(cosecant ∉ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(cosecant).")
+            }
+        }))
         return arcsin(1 ÷ cosecant)
     }
 
@@ -534,7 +549,12 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - secant: The secant.
     public static func arcsec(_ secant: Self) -> Angle<Self> {
-        assert(secant ∉ −1 ... 1, "There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(secant).")
+        assert(secant ∉ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(secant).")
+            }
+        }))
         return arccos(1 ÷ secant)
     }
 
@@ -866,9 +886,24 @@ extension RealArithmetic where Self : FloatFamily {
 
     private mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
 
-        assert(self > 0, "Logarithms of non‐positive numbers are undefined. (In this case, the logarithm of \(self).)")
-        assert(base > 0, "Logarithms in a non‐positive base are undefined. (In this case, the base \(base) logarithm.")
-        assert(base ≠ 1, "Logarithms in base 1 are undefined.")
+        assert(self > 0, UserFacingText({ [value = self] (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Logarithms of non‐positive numbers are undefined. (In this case, the logarithm of \(value).)")
+            }
+        }))
+        assert(base > 0, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("Logarithms in a non‐positive base are undefined. (In this case, the base \(base) logarithm.")
+            }
+        }))
+        assert(base ≠ 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "Logarithms in base 1 are undefined."
+            }
+        }))
 
         if self == 1 {
             self = 0 // x ↑ 0 = 1

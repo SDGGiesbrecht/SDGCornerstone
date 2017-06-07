@@ -32,7 +32,12 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
         var reverse = [Y: X]()
         for (x, y) in mapping {
-            assert(reverse[y] == nil, "This mapping is not bijective! Repeated value: \(y)")
+            assert(reverse[y] == nil, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return StrictString("This mapping is not bijective. Repeated value: \(y)")
+                }
+            }))
             reverse[y] = x
         }
         yToX = reverse

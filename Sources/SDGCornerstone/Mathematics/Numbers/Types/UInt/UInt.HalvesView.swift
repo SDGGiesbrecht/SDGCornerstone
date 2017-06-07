@@ -37,7 +37,6 @@
         private var elementSize: BinarySize {
             let totalSize = BinarySize(BinaryView<UIntValue>.count)
             let elementCount = BinarySize(count)
-            assert(totalSize.isDivisible(by: elementCount), "\(UIntValue.self) has an incompatible memory layout.")
             return totalSize.dividedAccordingToEuclid(by: elementCount)
         }
 
@@ -66,12 +65,12 @@
 
         internal subscript(index: Index) -> Element {
             get {
-                assert(index ∈ bounds, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
+                assertIndexExists(index)
                 let offset = index × elementSize
                 return uInt.bitwiseAnd(with: elementMask << offset) >> offset
             }
             set {
-                assert(index ∈ bounds, "Index out of bounds. \(index) ∈ \(startIndex)–\(endIndex − 1)")
+                assertIndexExists(index)
                 let offset = index × elementSize
                 let oldErased = uInt.bitwiseAnd(with: (elementMask << offset).bitwiseNot())
                 uInt = oldErased.bitwiseOr(with: newValue << offset)

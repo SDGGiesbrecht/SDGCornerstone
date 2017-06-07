@@ -59,6 +59,16 @@
                 silent = true
             }
 
+            // Formatting separation from other output.
+            if ¬silent { // [_Exempt from Code Coverage_]
+                print("")
+            }
+            defer {
+                if ¬silent { // [_Exempt from Code Coverage_]
+                    print("")
+                }
+            }
+
             let commandString = command.map({ (argument: String) -> String in
                 if argument.contains(" ") {
                     return "\u{22}" + argument + "\u{22}"
@@ -102,7 +112,12 @@
                     } else if let latin1 = String(data: line, encoding: String.Encoding.isoLatin1) { // [_Exempt from Code Coverage_]
                         string = latin1
                     } else {
-                        preconditionFailure("Cannot identify string encoding: \(line)")
+                        preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                            switch localization {
+                            case .englishCanada:
+                                return StrictString("Cannot identify string encoding: \(line)")
+                            }
+                        }))
                     }
 
                     result.append(string + newLine)
