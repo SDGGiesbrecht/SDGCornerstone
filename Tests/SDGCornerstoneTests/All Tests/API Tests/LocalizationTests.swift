@@ -26,6 +26,14 @@ class LocalizationTests : TestCase {
         XCTAssert(LocalizationExample(reasonableMatchFor: "fr\u{2D}FR") == .français, "fr\u{2D}FR → \(String(describing: LocalizationExample(reasonableMatchFor: "fr\u{2D}FR"))) ≠ fr")
         XCTAssert(LocalizationExample(reasonableMatchFor: "el") == nil)
         XCTAssert(LocalizationExample(reasonableMatchFor: "zxx") == nil)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "cmn\u{2D}Hant\u{2D}") == .chineseTraditionalTaiwan)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "cmn\u{2D}TW\u{2D}") == .chineseTraditionalTaiwan)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "zsm") == .malaysianLatin)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "zh") == .chineseTraditionalTaiwan)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "ar") == nil)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "arb") == nil)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "arb\u{2D}Arab") == nil)
+        XCTAssert(LocalizationExample(reasonableMatchFor: "nb") == .norwegian)
     }
 
     func testLocalizationSetting() {
@@ -53,6 +61,8 @@ class LocalizationTests : TestCase {
                     englishUsed = true
                 case .français:
                     françaisUtilisé = true
+                default:
+                    break
                 }
             }
         }
@@ -78,11 +88,27 @@ class LocalizationTests : TestCase {
                 return StrictString("Numbers \(numbers.0) and \(numbers.1)")
             case .français:
                 return StrictString("Numéros \(numbers.0) et \(numbers.1)")
+            default:
+                return StrictString("\(numbers.0), \(numbers.1)")
             }
         })
         XCTAssert(text.resolved(for: .englishUnitedKingdom, using: (0, 1)) == "Numbers 0 and 1")
         XCTAssert(text.resolved(for: .français, using: (0, 1)) == "Numéros 0 et 1")
         XCTAssert(¬text.resolved(using: (0, 1)).isEmpty)
+        
+        let simple = UserFacingText({ (localization: LocalizationExample, _: Void) -> StrictString in
+
+            switch localization {
+            case .englishUnitedKingdom:
+                return StrictString("Hello, world!")
+            case .français:
+                return StrictString("Bonjour, le monde !")
+            default:
+                return "..."
+            }
+        })
+        XCTAssert(simple.resolved(for: .français) == "Bonjour, le monde !")
+        XCTAssert(¬simple.resolved().isEmpty)
     }
 
     static var allTests: [(String, (LocalizationTests) -> () throws -> Void)] {
