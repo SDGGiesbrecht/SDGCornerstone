@@ -27,9 +27,9 @@ extension RunLoop {
     /// For example:
     ///
     /// ```swift
-    /// var driver: AnyObject?
+    /// var driver: RunLoop.Driver?
     /// background.start() {
-    ///     RunLoop.current.runForDriver() {driver = $0}
+    ///     RunLoop.current.runForDriver() { driver = $0 }
     /// }
     /// // The background run loop is now running.
     ///

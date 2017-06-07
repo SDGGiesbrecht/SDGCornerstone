@@ -39,8 +39,8 @@ public func executing(in queue: OperationQueue) -> Bool {
 /// Fails an assertion if the current execution is anywhere but the specified thread.
 public func assert(in queue: OperationQueue, function: StaticString = #function, file: StaticString = #file, line: UInt = #line) {
     assert(executing(in: queue), UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-        func resolveName(foregroundName: StrictString) -> StrictString {
-            return queue == foreground ? foregroundName : StrictString(queue.name ?? "\(queue)")
+        func resolveName(foregroundName: StrictString) -> StrictString { // [_Exempt from Code Coverage_]
+            return queue == foreground ? foregroundName : StrictString(queue.name ?? "\(queue)") // [_Exempt from Code Coverage_]
         }
         switch localization {
         case .englishCanada:
