@@ -25,12 +25,24 @@ extension RunLoop {
     /// Runs the run loop for the lifetime of the driver provided to `holdDriver`.
     ///
     /// For example:
-
+    ///
     /// ```swift
+    /// var driver: AnyObject?
+    /// background.start() {
+    ///     RunLoop.current.runForDriver() {driver = $0}
+    /// }
+    /// // The background run loop is now running.
+    ///
+    /// driver = nil
+    /// // The background run loop has now stopped.
     /// ```
     ///
     /// - Warning: Giving the run loop (or any of its timers, ports, etc.) a strong reference to the driver will create a retain cycle.
-    public func runForDriver(_ holdDriver: (_ driver: Driver) -> ()) {
+    ///
+    /// - Parameters:
+    ///     - holdDriver: A closer that takes ownershipe of the driver by creating a strong reference to it somewhere with the desired lifetime.
+    ///     - driver: The driver that runs the loop. As soon as ARC deallocates this driver, the run loop will stop.
+    public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void) {
         var driver: Driver? = Driver()
         weak var weakDriver = driver
         holdDriver(driver!)
@@ -41,12 +53,11 @@ extension RunLoop {
         }
     }
 
-    /** Runs the run loop for the lifetime of the parameter sent to `holdDriver`, and executes `cleanUp` when the run loop stops.
-
-     - SeeAlso: `runForDriver(holdDriver:)`
-     */
-    public func runForDriver(@noescape holdDriver holdDriver: (RunLoopDriver) -> (), @noescape withCleanUp cleanUp: () -> ()) {
-        runForDriver(holdDriver: holdDriver)
+    /// Runs the run loop for the lifetime of the driver provided to `holdDriver` and executes `cleanUp` when the run loop stops.
+    ///
+    /// - SeeAlso: `runForDriver(_:)`
+    public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void, withCleanUp cleanUp: () -> Void) {
+        runForDriver(holdDriver)
         cleanUp()
     }
 }

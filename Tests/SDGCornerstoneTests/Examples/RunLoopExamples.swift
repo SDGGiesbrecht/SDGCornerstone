@@ -18,13 +18,17 @@ import SDGCornerstone
 private func demonstrateRunLoopUsage() {
 
     // [_Define Example: Run Loop Usage_]
-    var driver: AnyObject?
+    var driver: RunLoop.Driver?
     background.start() {
-        RunLoop.current.runForDriver() {driver = $0}
+        RunLoop.current.runForDriver() { driver = $0 }
     }
     // The background run loop is now running.
 
     driver = nil
     // The background run loop has now stopped.
     // [_End_]
+
+    if driver == nil {
+        // Read from driver to silence warning.
+    }
 }

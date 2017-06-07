@@ -19,29 +19,56 @@ import SDGCornerstone
 
 class ConcurrencyTests : TestCase {
 
-    func testCharacterSet() {
-        let A = CharacterSet(charactersIn: "A")
-        XCTAssert("A" ∈ A, "A ∉ \(A)")
-        XCTAssert("B" ∉ A, "B ∈ \(A)")
-        let a = CharacterSet(charactersIn: "Aa")
-        XCTAssert(A ⊆ a, "\(A) ⊈ \(a)")
-        XCTAssert(a ⊈ A, "\(a) ⊆ \(A)")
+    func testConcurrency() {
+        let foregroundRan = expectation(description: "Foreground ran.")
+        let backgroundRan = expectation(description: "Background ran.")
+        let testQueueRan = expectation(description: "Test queue ran.")
 
-        XCTAssert(a ⊆ CharacterSet.alphanumerics, "\(a) ⊈ \(CharacterSet.alphanumerics)")
-        XCTAssert(CharacterSet.alphanumerics ⊈ a, "\(CharacterSet.alphanumerics) ⊆ \(a)")
+        foreground.finish {
+            foregroundRan.fulfill()
+            XCTAssert(executing(in: foreground))
+            if executing(in: foreground) {
+                assert(in: foreground)
+            }
+        }
+        background.finish {
+            backgroundRan.fulfill()
+            XCTAssert(executing(in: background))
+            if executing(in: background) {
+                assert(in: background)
+            }
+        }
+        OperationQueue(label: "Test Queue", serial: true).start {
+            testQueueRan.fulfill()
+            XCTAssert(OperationQueue.current?.isSerial == true)
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 
-        XCTAssert(A ⊆ CharacterSet.uppercaseLetters, "\(A) ⊈ \(CharacterSet.uppercaseLetters)")
-        XCTAssert(CharacterSet.uppercaseLetters ⊈ A, "\(CharacterSet.uppercaseLetters) ⊆ \(A)")
+    func testRunLoop() {
+        var driver: RunLoop.Driver?
 
-        XCTAssert(CharacterSet.uppercaseLetters ⊆ CharacterSet.alphanumerics, "\(CharacterSet.uppercaseLetters) ⊈ \(CharacterSet.alphanumerics)")
-        XCTAssert(CharacterSet.alphanumerics ⊈ CharacterSet.uppercaseLetters, "\(CharacterSet.alphanumerics) ⊆ \(CharacterSet.uppercaseLetters)")
+        let didRun = expectation(description: "Run loop ran.")
+        let didStop = expectation(description: "Run loop exited.")
 
-        XCTAssert(CharacterSet.whitespaces.linuxSafeIsEqual(to: CharacterSet.whitespaces))
+        background.start() {
+            Timer.scheduledTimer(timeInterval: 0, target: BlockOperation(block: {
+                didRun.fulfill()
+                driver = nil
+            }), selector: #selector(Operation.main), userInfo: nil, repeats: false)
+
+            RunLoop.current.runForDriver({ driver = $0 }, withCleanUp: {
+                didStop.fulfill()
+            })
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(driver == nil)
     }
 
     static var allTests: [(String, (ConcurrencyTests) -> () throws -> Void)] {
         return [
-            ("testCharacterSet", testCharacterSet)
+            ("testConcurrency", testConcurrency),
+            ("testRunLoop", testRunLoop)
         ]
     }
 }

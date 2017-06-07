@@ -48,16 +48,3 @@ public func assert(in queue: OperationQueue, function: StaticString = #function,
         }
     }), file: file, line: line)
 }
-
-/// Waits for the condition to evaluate to true before returning.
-///
-/// - Warning: Using this in the foreground of a GUI application will cause the application to become unresponsive.
-///
-/// - Parameters:
-///     - condition: A closure that checks for the awaited condition.
-///     - checkInterval: The interval to wait between checks. (Can be left out.)
-public func wait(until condition: @autoclosure () -> Bool, checkInterval: TimeInterval = 1) {
-    while ¬condition() {
-        Thread.sleep(forTimeInterval: checkInterval)
-    }
-}
