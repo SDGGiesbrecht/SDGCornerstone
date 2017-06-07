@@ -95,7 +95,7 @@ class LocalizationTests : TestCase {
         XCTAssert(text.resolved(for: .englishUnitedKingdom, using: (0, 1)) == "Numbers 0 and 1")
         XCTAssert(text.resolved(for: .français, using: (0, 1)) == "Numéros 0 et 1")
         XCTAssert(¬text.resolved(using: (0, 1)).isEmpty)
-        
+
         let simple = UserFacingText({ (localization: LocalizationExample, _: Void) -> StrictString in
 
             switch localization {
