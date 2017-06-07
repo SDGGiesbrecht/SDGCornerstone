@@ -23,17 +23,30 @@ public var foreground: OperationQueue {
 
 /// A general‐purpose background queue for use when execution order is unimportant.
 public let background: OperationQueue = {
-    return OperationQueue(label: UserFacingText({ (localization: APILocalization, _: Void) in
+    return OperationQueue(label: UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
         switch localization {
-        case .canadianEnglish:
+        case .englishCanada:
             return "Background"
         }
-    }), serial: false)
+    }).resolved(), serial: false)
 }()
 
 /// Returns `true` if current execution is occurring in specified queue, otherwise returns `false`.
 public func executing(in queue: OperationQueue) -> Bool {
     return OperationQueue.current == queue
+}
+
+/// Fails an assertion if the current execution is anywhere but the specified thread.
+public func assert(in queue: OperationQueue, function: StaticString = #function, file: StaticString = #file, line: UInt = #line) {
+    assert(executing(in: queue), UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        func resolveName(foregroundName: StrictString) -> StrictString {
+            return queue == foreground ? foregroundName : StrictString(queue.name ?? "\(queue)")
+        }
+        switch localization {
+        case .englishCanada:
+            return StrictString("\(function) was called from the wrong queue. Expected queue: \(resolveName(foregroundName: "Foreground"))")
+        }
+    }), file: file, line: line)
 }
 
 /// Waits for the condition to evaluate to true before returning.
