@@ -38,12 +38,15 @@ public protocol Localization {
 
 extension Localization {
 
-    // [_Example 1: Localization Groups_]
+    // [_Example 1: Macrolanguages_] [_Example 2: Localization Groups_]
     /// Creates a localization from the specified code, or as a fallback, creates a related localization that can be reasonably used as a replacement.
     ///
     /// For example, if a type supports British but not American English, it creates an instance of British English when either code is specified.
     ///
     /// The full list of currently supported groups of related localizations is as follows (taken directly from the source code):
+    ///
+    /// ```swift
+    /// ```
     ///
     /// ```swift
     /// "es": ["ES", "MX", "CO", "AR", "VE", "PE", "CL", "EC", "CU", "DO", "GT", "HN", "SV", "NI", "BO", "CR", "UY", "PA", "PY", "GQ"],
@@ -56,17 +59,109 @@ extension Localization {
     ///
     /// Requests for additional groups are welcome and can be made by [opening a Github issue](https://github.com/SDGGiesbrecht/SDGCornerstone/issues).
     public init?(reasonableMatchFor code: String) {
+        if let result = Self(reasonableMatchFor: code, skippingParents: false) {
+            self = result
+        } else {
+            return nil
+        }
+    }
 
-        let language = String(code.scalars.truncated(before: "\u{2D}".scalars))
-        if let result = Self(exactly: language) {
+    private init?(reasonableMatchFor code: String, skippingParents: Bool) {
+
+        if let result = Self(exactly: code) {
             self = result
             return
         }
-        if let relevantCountries = ContentLocalization.countries[language] {
-            for country in relevantCountries {
-                if let result = Self(exactly: language + "\u{2D}" + country) {
+
+        let originalTags = code.components(separatedBy: "\u{2D}")
+        var processingTags = originalTags
+
+        let language = processingTags.removeFirst()
+
+        var possibleScript: String?
+        if processingTags.first?.scalars.count == 4 {
+            possibleScript = processingTags.removeFirst()
+        }
+
+        var possibleCountry: String?
+        if processingTags.first ≠ nil {
+            possibleCountry = processingTags.removeFirst()
+        }
+
+        if let scripts = ContentLocalization.groups[language] {
+
+            if let script = possibleScript {
+                if possibleCountry ≠ nil {
+                    // language‐script‐country
+
+                    // Already covered by exact match.
+                } else {
+                    // language‐script
+
+                    if let countries = scripts.first(where: {$0.script == script})?.countries {
+                        for country in countries {
+                            if let result = Self(exactly: [language, script, country].joined(separator: "\u{2D}")) {
+                                self = result
+                                return
+                            }
+                        }
+                    }
+                }
+            } else {
+                if let country = possibleCountry {
+                    // language‐country
+
+                    for entry in scripts where entry.countries.contains(country) {
+                        if let result = Self(exactly: [language, entry.script, country].joined(separator: "\u{2D}")) {
+                            self = result
+                            return
+                        }
+                    }
+                } else {
+                    // language
+
+                    for entry in scripts {
+                        for country in entry.countries {
+                            if let result = Self(reasonableMatchFor: [language, entry.script].joined(separator: "\u{2D}"), skippingParents: true) {
+                                self = result
+                                return
+                            }
+                            if let result = Self(reasonableMatchFor: [language, country].joined(separator: "\u{2D}"), skippingParents: true) {
+                                self = result
+                                return
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if let members = ContentLocalization.macrolanguages[language] {
+            for member in members {
+                var alteredTags = originalTags
+                alteredTags[0] = member
+                if let result = Self(reasonableMatchFor: alteredTags.joined(separator: "\u{2D}"), skippingParents: true) {
                     self = result
                     return
+                }
+            }
+        }
+
+        if ¬skippingParents {
+            if language ≠ code {
+                let moreGeneral = originalTags.dropLast().joined(separator: "\u{2D}")
+                if let result = Self(reasonableMatchFor: moreGeneral, skippingParents: false) {
+                    self = result
+                    return
+                }
+            } else {
+                if let macrolanguage = ContentLocalization.macrolanguageMembership[language] {
+                    var alteredTags = originalTags
+                    alteredTags[0] = macrolanguage
+                    if let result = Self(reasonableMatchFor: alteredTags.joined(separator: "\u{2D}"), skippingParents: false) {
+                        self = result
+                        return
+                    }
                 }
             }
         }

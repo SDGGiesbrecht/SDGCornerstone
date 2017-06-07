@@ -47,8 +47,8 @@ public func unreachable(function: String = #function, file: StaticString = #file
     }), file: file, line: line)
 }
 
-private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String {
-    return String(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String { // [_Exempt from Code Coverage_]
+    return String(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
         switch localization {
         case .englishCanada:
             return StrictString("\(function) has not been implemented yet. (\(file), Line \(line))")
@@ -64,7 +64,7 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) {
+public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) { // [_Exempt from Code Coverage_]
     print(unimplementedMessage(function: function, file: file, line: line))
 }
 
