@@ -60,7 +60,7 @@ class ConcurrencyTests : TestCase {
                 // [_Workaround: Swift’s Xcode project generation targets 10.10. (Swift 3.1.0)_]
                 Timer.scheduledTimer(timeInterval: 0, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
             #else
-                Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { (_) -> Void in
+                _ = Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { (_) -> Void in
                     block()
                 }
             #endif
