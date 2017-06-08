@@ -52,10 +52,18 @@ class ConcurrencyTests : TestCase {
         let didStop = expectation(description: "Run loop exited.")
 
         background.start() {
-            Timer.scheduledTimer(timeInterval: 0, target: BlockOperation(block: {
+            let block = {
                 didRun.fulfill()
                 driver = nil
-            }), selector: #selector(Operation.main), userInfo: nil, repeats: false)
+            }
+            #if os(macOS)
+                // [_Workaround: Swift’s Xcode project generation targets 10.10. (Swift 3.1.0)_]
+                Timer.scheduledTimer(timeInterval: 0, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
+            #else
+                Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { (_) -> Void in
+                    block()
+                }
+            #endif
 
             RunLoop.current.runForDriver({ driver = $0 }, withCleanUp: {
                 didStop.fulfill()
