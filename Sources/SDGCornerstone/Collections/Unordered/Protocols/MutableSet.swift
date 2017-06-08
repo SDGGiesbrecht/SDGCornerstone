@@ -298,8 +298,8 @@ extension MutableSet {
     /// Sets `lhs` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆= (lhs: inout Self, rhs: Self) {
         var result = lhs
         result ∪= rhs
@@ -327,8 +327,8 @@ extension MutableSet where Self : FiniteSet {
     /// Sets `lhs` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
         var result = lhs
         result ∪= rhs

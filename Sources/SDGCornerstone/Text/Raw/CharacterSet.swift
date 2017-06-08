@@ -235,8 +235,8 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// Sets `lhs` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆= (lhs: inout CharacterSet, rhs: CharacterSet) {
         var lhsPlanes = lhs.planes
         let rhsPlanes = rhs.planes
@@ -324,8 +324,8 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// Sets `lhs` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆= (lhs: inout CharacterSet, rhs: CharacterSet) {
         return lhs.formSymmetricDifference(rhs)
     }

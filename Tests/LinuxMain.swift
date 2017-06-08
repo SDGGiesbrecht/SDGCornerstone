@@ -18,6 +18,7 @@ import XCTest
 XCTMain([
     testCase(CachingTests.allTests),
     testCase(CollectionTests.allTests),
+    testCase(ConcurrencyTests.allTests),
     testCase(DataTests.allTests),
     testCase(EnumerationTests.allTests),
     testCase(LogicTests.allTests),
