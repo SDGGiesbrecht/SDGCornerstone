@@ -31,6 +31,9 @@ public let background: OperationQueue = {
     }).resolved(), serial: false)
 }()
 
+#if !os(Linux) && !LinuxDocs
+    // [_Workaround: Linux cannot reliably get the current queue. (Swift 3.1.0)_]
+
 /// Returns `true` if current execution is occurring in specified queue, otherwise returns `false`.
 public func executing(in queue: OperationQueue) -> Bool {
     return OperationQueue.current == queue
@@ -48,3 +51,5 @@ public func assert(in queue: OperationQueue, function: StaticString = #function,
         }
     }), file: file, line: line)
 }
+
+#endif
