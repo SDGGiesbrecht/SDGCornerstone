@@ -117,8 +117,8 @@ infix operator ∆: BinarySetOperationPrecedence
 /// Sets `lhs` to the symmetric difference of the two sets.
 ///
 /// - Parameters:
-///     - lhs: The set to subtract from.
-///     - rhs: The set to subtract.
+///     - lhs: A set.
+///     - rhs: Another set.
 infix operator ∆=: AssignmentPrecedence
 
 /// A type that defines a set.

@@ -137,12 +137,12 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return lhs.symmetricDifferenceAsSetAlgebra(rhs)
     }
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∆=_]
+    // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
     /// Sets `lhs` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
+    ///     - lhs: A set.
+    ///     - rhs: Another set.
     public static func ∆= (lhs: inout Set, rhs: Set) {
         return lhs.formSymmetricDifference(rhs)
     }
