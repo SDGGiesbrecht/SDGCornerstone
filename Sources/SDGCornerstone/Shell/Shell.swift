@@ -106,6 +106,7 @@
                     let line = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
                     stream.removeSubrange(stream.startIndex ..< lineEnd.upperBound)
 
+                    // [_Warning: Re‐write this to use file API._]
                     let string: String
                     if let utf8 = String(data: line, encoding: String.Encoding.utf8) {
                         string = utf8

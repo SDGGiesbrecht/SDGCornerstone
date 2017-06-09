@@ -49,6 +49,7 @@ class PersistenceTests : TestCase {
                 XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
             }
         #elseif os(Linux)
+            // [_Warning: Re‐write this to use file API._]
             let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
             do {
                 let data = try Data(contentsOf: url)
@@ -70,6 +71,7 @@ class PersistenceTests : TestCase {
                 XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
             }
         #elseif os(Linux)
+            // [_Warning: Re‐write this to use file API._]
             do {
                 let data = try PropertyListSerialization.data(fromPropertyList: [externalTestKey: stringValue], format: .xml, options: 0)
                 try data.write(to: url, options: [.atomic])
