@@ -49,12 +49,15 @@ class PersistenceTests : TestCase {
                 XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
             }
         #elseif os(Linux)
-            // [_Warning: Re‐write this to use file API._]
-            let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
+            let url = URL(fileURLWithPath: NSHomeDirectory()).encodingAndAppending(pathComponent: ".config/\(testDomainExternalName).plist")
             do {
-                let data = try Data(contentsOf: url)
-                let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
-                XCTAssert(preferences[testKey]?.as(Bool.self) == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
+                let propertyList = try PropertyList(from: url)
+                switch propertyList {
+                case .dictionary(preferences):
+                    XCTAssert(preferences[testKey]?.as(Bool.self) == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
+                default:
+                    XCTFail("An error occurred while verifying write test: The property list file is not a dictionary.")
+                }
             } catch let error {
                 XCTFail("An error occurred while verifying write test: \(error)")
             }
@@ -71,10 +74,9 @@ class PersistenceTests : TestCase {
                 XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
             }
         #elseif os(Linux)
-            // [_Warning: Re‐write this to use file API._]
             do {
-                let data = try PropertyListSerialization.data(fromPropertyList: [externalTestKey: stringValue], format: .xml, options: 0)
-                try data.write(to: url, options: [.atomic])
+                let propertyList = PropertyList.dictionary([externalTestKey: stringValue])
+                try propertyList.save(at: url)
             } catch let error {
                 XCTFail("An error occurred while setting up read test: \(error)")
             }

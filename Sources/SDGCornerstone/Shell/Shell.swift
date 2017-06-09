@@ -106,19 +106,8 @@
                     let line = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
                     stream.removeSubrange(stream.startIndex ..< lineEnd.upperBound)
 
-                    // [_Warning: Re‐write this to use file API._]
-                    let string: String
-                    if let utf8 = String(data: line, encoding: String.Encoding.utf8) {
-                        string = utf8
-                    } else if let latin1 = String(data: line, encoding: String.Encoding.isoLatin1) { // [_Exempt from Code Coverage_]
-                        string = latin1
-                    } else {
-                        preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                            switch localization {
-                            case .englishCanada:
-                                return StrictString("Cannot identify string encoding: \(line)")
-                            }
-                        }))
+                    guard let string = try? String(file: line, origin: nil) else {
+                        unreachable()
                     }
 
                     result.append(string + newLine)

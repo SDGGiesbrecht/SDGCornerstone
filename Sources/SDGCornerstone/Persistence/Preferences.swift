@@ -115,10 +115,15 @@ open class Preferences {
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: PropertyListValue] {
 
         #if os(Linux)
-// [_Warning: Re‐write this to use file API._]
+
             do {
-                let data = try Data(contentsOf: Preferences.directory.appendingPathComponent("\(possibleDebugDomain).plist"))
-                return try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
+                let propertyList = try PropertyList(from: Preferences.directory.encodingAndAppending(pathComponent: "\(possibleDebugDomain).plist"))
+                switch propertyList {
+                case .dictionary(dictionary):
+                    return dictionary
+                default:
+                    return [:]
+                }
             } catch {
                 return [:]
             }
@@ -136,10 +141,9 @@ open class Preferences {
     private func writeToDisk(_ preferences: [String: PropertyListValue]) {
 
         #if os(Linux)
-// [_Warning: Re‐write this to use file API._]
-            if let data = try? PropertyListSerialization.data(fromPropertyList: preferences, format: .xml, options: 0) {
-                try? data.write(to: Preferences.directory.appendingPathComponent("\(possibleDebugDomain).plist"), options: [.atomic])
-            }
+
+            let propertyList = PropertyList.dictionary(preferences)
+            try? propertyList.save(at: Preferences.directory.encodingAndAppending(pathComponent: "\(possibleDebugDomain).plist"))
 
         #else
 
