@@ -19,6 +19,10 @@ import SDGCornerstone
 
 class PersistenceTests : TestCase {
 
+    func testFileConvertible() {
+
+    }
+
     func testPreferences() {
         let testKey = "SDGTestKey"
         let testDomain = "ca.solideogloria.SDGCornerstone.Tests.Preferences"
@@ -76,7 +80,7 @@ class PersistenceTests : TestCase {
         #elseif os(Linux)
             do {
                 let propertyList = PropertyList.dictionary([externalTestKey: stringValue])
-                try propertyList.save(at: url)
+                try propertyList.save(to: url)
             } catch let error {
                 XCTFail("An error occurred while setting up read test: \(error)")
             }
@@ -307,6 +311,7 @@ class PersistenceTests : TestCase {
 
     static var allTests: [(String, (PersistenceTests) -> () throws -> Void)] {
         return [
+            ("testFileConvertible", testFileConvertible),
             ("testPreferences", testPreferences),
             ("testPropertyList", testPropertyList)
         ]

@@ -17,10 +17,10 @@ import Foundation
 /// A property list.
 public enum PropertyList : FileConvertible {
 
-    // A dictionary.
+    /// A dictionary.
     case dictionary([String: PropertyListValue])
 
-    // An array.
+    /// An array.
     case array([PropertyListValue])
 
     // MARK: - FileConvertible
