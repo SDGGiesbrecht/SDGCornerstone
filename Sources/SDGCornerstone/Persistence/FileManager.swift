@@ -86,13 +86,14 @@ extension FileManager {
                 guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: volume, create: true) else {
                     unreachable()
                 }
+
+                // [_Warning: What does this actually do on each operating system?_]
+                print(result.absoluteString)
+
                 return result
 
             #endif
         }
-
-        // [_Warning: What does this actually do on each operating system?_]
-        print(zoneURL.absoluteString)
 
         return zoneURL.encodingAndAppending(pathComponents: FileManager.possibleDebugDomain(domain))
     }

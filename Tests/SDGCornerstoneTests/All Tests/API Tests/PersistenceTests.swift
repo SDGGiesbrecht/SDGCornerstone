@@ -345,6 +345,7 @@ class PersistenceTests : TestCase {
     static var allTests: [(String, (PersistenceTests) -> () throws -> Void)] {
         return [
             ("testFileConvertible", testFileConvertible),
+            ("testFileManager", testFileManager),
             ("testPreferences", testPreferences),
             ("testPropertyList", testPropertyList)
         ]
