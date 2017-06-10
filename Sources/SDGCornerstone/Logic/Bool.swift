@@ -172,6 +172,118 @@ extension Bool : Comparable, PropertyListValue {
         lhs = try lhs ∨ rhs
     }
 
+    // MARK: - Text Representations
+
+    /// Returns “✓” or “✗”.
+    public func checkOrX() -> StrictString {
+        switch self {
+        case true:
+            return "✓"
+        case false:
+            return "✗"
+        }
+    }
+
+    /// Returns “true” or “false”.
+    public func trueOrFalse(_ casing: EnglishCasing) -> StrictString {
+        switch self {
+        case true:
+            return casing.applySimpleAlgorithm(to: "true")
+        case false:
+            return casing.applySimpleAlgorithm(to: "false")
+        }
+    }
+
+    /// Returns “yes” or “no”.
+    public func yesOrNo(_ casing: EnglishCasing) -> StrictString {
+        switch self {
+        case true:
+            return casing.applySimpleAlgorithm(to: "yes")
+        case false:
+            return casing.applySimpleAlgorithm(to: "no")
+        }
+    }
+
+    /// Gibt „wahr“ oder „falsch“ zurück.
+    public func wahrOderFalsch(_ großschreibung: Casing) -> StrictString {
+        switch self {
+        case true:
+            return großschreibung.applySimpleAlgorithm(to: "wahr")
+        case false:
+            return großschreibung.applySimpleAlgorithm(to: "falsch")
+        }
+    }
+
+    /// Gibt „ja“ oder „nein“ zurück.
+    public func jaOderNein(_ großschreibung: Casing) -> StrictString {
+        switch self {
+        case true:
+            return großschreibung.applySimpleAlgorithm(to: "ja")
+        case false:
+            return großschreibung.applySimpleAlgorithm(to: "nein")
+        }
+    }
+
+    /// Retourne « vrai » ou « faux ».
+    public func vraiOuFaux(_ majuscules: Casing) -> StrictString {
+        switch self {
+        case true:
+            return majuscules.applySimpleAlgorithm(to: "vrai")
+        case false:
+            return majuscules.applySimpleAlgorithm(to: "faux")
+        }
+    }
+
+    /// Retourne « oui »  ou « non ».
+    public func ouiOuNon(_ majuscules: Casing) -> StrictString {
+        switch self {
+        case true:
+            return majuscules.applySimpleAlgorithm(to: "oui")
+        case false:
+            return majuscules.applySimpleAlgorithm(to: "non")
+        }
+    }
+
+    /// Επιστρέφει «αληθής» ή «ψευδής».
+    public func αληθήςΉΨευδής(_ κεφαλαία: Casing) -> StrictString {
+        switch self {
+        case true:
+            return κεφαλαία.applySimpleAlgorithm(to: "αληθής")
+        case false:
+            return κεφαλαία.applySimpleAlgorithm(to: "ψευδής")
+        }
+    }
+
+    /// Επιστρέφει «ναι» ή «όχι».
+    public func ναιΉΌχι(_ κεφαλαία: Casing) -> StrictString {
+        switch self {
+        case true:
+            return κεφαλαία.applySimpleAlgorithm(to: "ναι")
+        case false:
+            return κεφαλαία.applySimpleAlgorithm(to: "όχι")
+        }
+    }
+
+    /// מחזירה את ”חיובי“ או את ”שלילי“.
+    public func חיובי־או־שלילי() -> StrictString {
+        switch self {
+        case true:
+            return "חיובי"
+        case false:
+            return "שלילי"
+        }
+    }
+
+    /// מחזירה את ”כן“ או את ”לא“.
+    public func כן־או־לא() -> StrictString {
+        switch self {
+        case true:
+            return "כן"
+        case false:
+            return "לא"
+        }
+    }
+
     // MARK: - Randomization
 
     private static let randomizationBit: UInt64 = 1 << 48
