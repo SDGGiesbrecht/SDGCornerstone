@@ -90,7 +90,7 @@ class PersistenceTests : TestCase {
             do {
                 let propertyList = try PropertyList(from: url)
                 switch propertyList {
-                case .dictionary(preferences):
+                case .dictionary(let preferences):
                     XCTAssert(preferences[testKey]?.as(Bool.self) == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
                 default:
                     XCTFail("An error occurred while verifying write test: The property list file is not a dictionary.")
