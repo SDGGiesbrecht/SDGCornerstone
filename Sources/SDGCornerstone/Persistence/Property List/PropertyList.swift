@@ -15,13 +15,39 @@
 import Foundation
 
 /// A property list.
-public enum PropertyList : FileConvertible {
+public enum PropertyList : Equatable, FileConvertible {
+
+    // MARK: - Cases
 
     /// A dictionary.
     case dictionary([String: PropertyListValue])
 
     /// An array.
     case array([PropertyListValue])
+
+    // MARK: - Properties
+
+    /// The contents of the property list as a property list value.
+    public var value: PropertyListValue {
+        switch self {
+        case .dictionary(let result):
+            return result
+        case .array(let result):
+            return result
+        }
+    }
+
+    // MARK: - Equatable
+
+    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    /// Returns `true` if the two values are equal.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
+    public static func == (lhs: PropertyList, rhs: PropertyList) -> Bool {
+        return lhs.value.equatableRepresentation == rhs.value.equatableRepresentation
+    }
 
     // MARK: - FileConvertible
 

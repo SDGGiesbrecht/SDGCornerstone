@@ -44,9 +44,33 @@ class DataTests : TestCase {
         XCTAssert(alternating ^ sorted == Data(bytes: [0b01010101, 0b10101010]))
     }
 
+    func testDataStream() {
+        var inputStream = DataStream()
+        var outputStream = DataStream()
+
+        var forwards = Data()
+        for byte in (0x00 as Data.Iterator.Element) ... (0xFF as Data.Iterator.Element) {
+            forwards.append(byte)
+        }
+        let backwards = Data(forwards.reversed())
+
+        inputStream.append(unit: forwards)
+        inputStream.append(unit: backwards)
+
+        var results: [Data] = []
+        while ¬inputStream.buffer.isEmpty {
+            let transfer = inputStream.buffer.removeFirst()
+            outputStream.buffer.append(transfer)
+
+            results.append(contentsOf: outputStream.extractCompleteUnits())
+        }
+        XCTAssert(results == [forwards, backwards])
+    }
+
     static var allTests: [(String, (DataTests) -> () throws -> Void)] {
         return [
-            ("testData", testData)
+            ("testData", testData),
+            ("testDataStream", testDataStream)
         ]
     }
 }

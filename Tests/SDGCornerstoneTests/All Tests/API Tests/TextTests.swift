@@ -130,6 +130,21 @@ class TextTests : TestCase {
         runTests(helloWorld: StrictString("Hello, world!"))
 
         XCTAssert(StrictString("Hello, world!") == "Hello, world!")
+
+        let unicode = "שלום! 🇮🇱 Γεια σας! 🇬🇷"
+        let utf8 = try? String(file: unicode.data(using: .utf8)!, origin: nil)
+        XCTAssert(utf8 == unicode, "Unexpected string loaded: \(String(describing: utf8))")
+        let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
+        XCTAssert(utf16 == unicode, "Unexpected string loaded: \(String(describing: utf16))")
+        let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
+        XCTAssert(utf32 == unicode, "Unexpected string loaded: \(String(describing: utf32))")
+
+        #if false
+             // [_Workaround: macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16. (Swift 3.1.0)_]
+            let european = "¡¢£¤¥§©«¬®°±¶·»¿ÆÐ×Þßæð÷þ".data(using: .isoLatin1)! + Data([0xD8, 0x00, 0xD8, 0x00, 0x00, 0xD8, 0x00, 0xD8])
+            let latin1 = try? String(file: european, origin: nil)
+            XCTAssert(latin1?.data(using: .isoLatin1) == european, "Unexpected string loaded: \(String(describing: latin1))")
+        #endif
     }
 
     func testUnicodeScalar() {

@@ -37,6 +37,49 @@ extension FileManager {
         case temporary
     }
 
+    private static var locations: [FileManager: [RecommendedLocation: URL]] = [:]
+    private var locations: [RecommendedLocation: URL] {
+        get {
+            return FileManager.locations[self] ?? [:]
+        }
+        set {
+            FileManager.locations[self] = newValue
+        }
+    }
+    private func url(in location: RecommendedLocation, for domain: String) -> URL {
+        let zoneURL = cached(in: &locations[location]) {
+
+            let searchPath: FileManager.SearchPathDirectory
+            switch location {
+            case .applicationSupport:
+                searchPath = .applicationSupportDirectory
+            case .cache:
+                searchPath = .cachesDirectory
+            case .temporary:
+                searchPath = .itemReplacementDirectory
+            }
+
+            var volume: URL?
+            if location == .temporary {
+                guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
+                    unreachable()
+                }
+                volume = documents
+            }
+
+            guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: volume, create: true) else {
+                unreachable()
+            }
+
+            // [_Warning: What does this actually do on each operating system?_]
+            print(result.absoluteString)
+
+            return result
+        }
+
+        return zoneURL.encodingAndAppending(pathComponents: FileManager.possibleDebugDomain(domain))
+    }
+
     /// Returns a URL for the specified location and relative path in the application’s domain.
     ///
     /// - Parameters:
@@ -54,20 +97,24 @@ extension FileManager {
     ///     - domain: The domain.
     ///     - relativePath: The path.
     public func url(in location: RecommendedLocation, for domain: String, at relativePath: String) -> URL {
-        let searchPath: FileManager.SearchPathDirectory
-        switch location {
-        case .applicationSupport:
-            searchPath = .applicationSupportDirectory
-        case .cache:
-            searchPath = .cachesDirectory
-        case .temporary:
-            searchPath = .itemReplacementDirectory
-        }
+        return url(in: location, for: domain).encodingAndAppending(pathComponents: relativePath)
+    }
 
-        guard let zoneURL = try? url(for: searchPath, in: .userDomainMask, appropriateFor: nil, create: true) else {
-            unreachable()
-        }
+    /// Deletes everything in the specified location for the application domain.
+    ///
+    /// - Parameters:
+    ///     - location: The location.
+    public func delete(_ location: RecommendedLocation) {
+        delete(location, for: Application.current.domain)
+    }
 
-        return zoneURL.encodingAndAppending(pathComponents: FileManager.possibleDebugDomain(domain)).encodingAndAppending(pathComponents: relativePath)
+    /// Deletes everything in the specified location and domain.
+    ///
+    /// - Parameters:
+    ///     - location: The location.
+    ///     - domain: The domain.
+    public func delete(_ location: RecommendedLocation, for domain: String) {
+        let folder = url(in: location, for: domain)
+        try? removeItem(at: folder)
     }
 }

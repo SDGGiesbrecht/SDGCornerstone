@@ -131,10 +131,10 @@
             readProgress()
 
             if output.hasSuffix(newLine) {
-                output.unicodeScalars.removeLast()
+                output.scalars.removeLast()
             }
             if error.hasSuffix(newLine) {
-                error.unicodeScalars.removeLast()
+                error.scalars.removeLast()
             }
 
             let exitCode = shell.terminationStatus

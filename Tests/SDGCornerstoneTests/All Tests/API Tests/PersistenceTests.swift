@@ -20,7 +20,41 @@ import SDGCornerstone
 class PersistenceTests : TestCase {
 
     func testFileConvertible() {
+        func runTests<T : FileConvertible>(_ instance: T) where T : Equatable {
+            XCTAssert((try? T(file: instance.file, origin: nil)) == instance)
 
+            let url = FileManager.default.url(in: .temporary, at: "\(type(of: instance))")
+            defer {
+                FileManager.default.delete(.temporary)
+                if let shouldNotExist = try? T(from: url) {
+                    XCTFail("Failed to delete \(url)")
+                }
+            }
+
+            do {
+                try instance.save(to: url)
+                let reloaded = try T(from: url)
+                XCTAssert(reloaded == instance, "The loaded file does not match the saved file.")
+            } catch let error {
+                XCTFail("An error occured saving and loading: \(error)")
+            }
+        }
+        runTests(Data([0x10, 0x20, 0x30]))
+        runTests("Hello, world!")
+        runTests(StrictString("Hello, world!"))
+        runTests(PropertyList.dictionary(["Key": "Value"]))
+        runTests(PropertyList.array(["Element"]))
+
+        XCTAssert((try? PropertyList(file: Data(), origin: nil)) == nil)
+    }
+
+    func testFileManager() {
+        let path = "example/path"
+        XCTAssert(FileManager.default.url(in: .temporary, at: path) == FileManager.default.url(in: .temporary, at: path), "Differing temporary directories provided.")
+
+        XCTAssert(FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains("Application%20Support"))
+        XCTAssert(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Cache".scalars), LiteralPattern("cache".scalars)])) ≠ nil)
+        XCTAssert(FileManager.default.url(in: .temporary, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Temp".scalars), LiteralPattern("temp".scalars), LiteralPattern("tmp".scalars)])) ≠ nil)
     }
 
     func testPreferences() {
