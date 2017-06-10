@@ -19,6 +19,44 @@ import SDGCornerstone
 
 class PersistenceTests : TestCase {
 
+    func testFileConvertible() {
+        func runTests<T : FileConvertible>(_ instance: T) where T : Equatable {
+            XCTAssert((try? T(file: instance.file, origin: nil)) == instance)
+
+            let url = FileManager.default.url(in: .temporary, at: "\(type(of: instance))")
+            defer {
+                FileManager.default.delete(.temporary)
+                if let shouldNotExist = try? T(from: url) {
+                    XCTFail("Failed to delete \(url)")
+                }
+            }
+
+            do {
+                try instance.save(to: url)
+                let reloaded = try T(from: url)
+                XCTAssert(reloaded == instance, "The loaded file does not match the saved file.")
+            } catch let error {
+                XCTFail("An error occured saving and loading: \(error)")
+            }
+        }
+        runTests(Data([0x10, 0x20, 0x30]))
+        runTests("Hello, world!")
+        runTests(StrictString("Hello, world!"))
+        runTests(PropertyList.dictionary(["Key": "Value"]))
+        runTests(PropertyList.array(["Element"]))
+
+        XCTAssert((try? PropertyList(file: Data(), origin: nil)) == nil)
+    }
+
+    func testFileManager() {
+        let path = "example/path"
+        XCTAssert(FileManager.default.url(in: .temporary, at: path) == FileManager.default.url(in: .temporary, at: path), "Differing temporary directories provided.")
+
+        XCTAssert(FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains("Application%20Support"), "Unexpected support directory.")
+        XCTAssert(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Cache".scalars), LiteralPattern("cache".scalars)])) ≠ nil, "Unexpected cache directory.")
+        XCTAssert(FileManager.default.url(in: .temporary, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Temp".scalars), LiteralPattern("temp".scalars), LiteralPattern("tmp".scalars), LiteralPattern("Being%20Saved%20By".scalars)])) ≠ nil, "Unexpected temporary directory.")
+    }
+
     func testPreferences() {
         let testKey = "SDGTestKey"
         let testDomain = "ca.solideogloria.SDGCornerstone.Tests.Preferences"
@@ -42,18 +80,21 @@ class PersistenceTests : TestCase {
 
         preferences[testKey].value = true
         #if os(macOS)
-            do {
-                let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey], silently: true)
+            do {let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey], silently: true)
                 XCTAssert(output == "1", "Failed to write preferences to disk: \(output) ≠ 1")
             } catch let error {
                 XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
             }
         #elseif os(Linux)
-            let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
+            let url = URL(fileURLWithPath: NSHomeDirectory()).encodingAndAppending(pathComponents: ".config/\(testDomainExternalName).plist")
             do {
-                let data = try Data(contentsOf: url)
-                let preferences = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
-                XCTAssert(preferences[testKey]?.as(Bool.self) == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
+                let propertyList = try PropertyList(from: url)
+                switch propertyList {
+                case .dictionary(let preferences):
+                    XCTAssert(preferences[testKey]?.as(Bool.self) == true, "Failed to write preferences to disk: \(String(describing: preferences[testKey])) ≠ true")
+                default:
+                    XCTFail("An error occurred while verifying write test: The property list file is not a dictionary.")
+                }
             } catch let error {
                 XCTFail("An error occurred while verifying write test: \(error)")
             }
@@ -71,8 +112,8 @@ class PersistenceTests : TestCase {
             }
         #elseif os(Linux)
             do {
-                let data = try PropertyListSerialization.data(fromPropertyList: [externalTestKey: stringValue], format: .xml, options: 0)
-                try data.write(to: url, options: [.atomic])
+                let propertyList = PropertyList.dictionary([externalTestKey: stringValue])
+                try propertyList.save(to: url)
             } catch let error {
                 XCTFail("An error occurred while setting up read test: \(error)")
             }
@@ -303,6 +344,8 @@ class PersistenceTests : TestCase {
 
     static var allTests: [(String, (PersistenceTests) -> () throws -> Void)] {
         return [
+            ("testFileConvertible", testFileConvertible),
+            ("testFileManager", testFileManager),
             ("testPreferences", testPreferences),
             ("testPropertyList", testPropertyList)
         ]

@@ -36,7 +36,7 @@ open class Preferences {
 
     /// Returns subclassed preferences for the application domain.
     public static func applicationPreferences<P : Preferences>(as subClass: P.Type) -> P {
-        return preferences(as: P.self, for: Application.current.identifier)
+        return preferences(as: P.self, for: Application.current.domain)
     }
 
     /// Returns the preferences for a particular domain.
@@ -78,7 +78,7 @@ open class Preferences {
         if domain == UserDefaults.globalDomain {
             possibleDebugDomain = domain
         } else {
-            possibleDebugDomain = BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Code Coverage_]
+            possibleDebugDomain = FileManager.possibleDebugDomain(domain)
         }
         self.possibleDebugDomain = possibleDebugDomain
 
@@ -109,7 +109,7 @@ open class Preferences {
     // MARK: - Storage
 
     #if os(Linux)
-    private static let directory = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config")
+    private static let directory = URL(fileURLWithPath: NSHomeDirectory()).encodingAndAppending(pathComponents: ".config")
     #endif
 
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: PropertyListValue] {
@@ -117,8 +117,13 @@ open class Preferences {
         #if os(Linux)
 
             do {
-                let data = try Data(contentsOf: Preferences.directory.appendingPathComponent("\(possibleDebugDomain).plist"))
-                return try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: PropertyListValue] ?? [:]
+                let propertyList = try PropertyList(from: Preferences.directory.encodingAndAppending(pathComponents: "\(possibleDebugDomain).plist"))
+                switch propertyList {
+                case .dictionary(let dictionary):
+                    return dictionary
+                default:
+                    return [:]
+                }
             } catch {
                 return [:]
             }
@@ -137,9 +142,8 @@ open class Preferences {
 
         #if os(Linux)
 
-            if let data = try? PropertyListSerialization.data(fromPropertyList: preferences, format: .xml, options: 0) {
-                try? data.write(to: Preferences.directory.appendingPathComponent("\(possibleDebugDomain).plist"), options: [.atomic])
-            }
+            let propertyList = PropertyList.dictionary(preferences)
+            try? propertyList.save(to: Preferences.directory.encodingAndAppending(pathComponents: "\(possibleDebugDomain).plist"))
 
         #else
 
