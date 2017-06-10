@@ -31,16 +31,21 @@ extension String : FileConvertible, PropertyListValue, StringFamily {
     ///     - origin: A URL indicating where the data came from. In some cases this may be helpful in determining how to interpret the data, such as by checking the file extension. This parameter may be `nil` if the data did not come from a file on the disk.
     public init(file: Data, origin: URL?) throws {
 
-        // Let Foundation try...
-        if let url = origin {
-            var encoding: String.Encoding = .utf8
-            if let string = try? String(contentsOf: url, usedEncoding: &encoding) {
-                if string.data(using: encoding, allowLossyConversion: false) == file {
-                    // Only initialize from the underlying file if it matches the data provided.
-                    self = string
+        #if !os(Linux)
+            // [_Workaround: Linux cannot do this yet. (Swift 3.1.0)_]
+
+            // Let Foundation try...
+            if let url = origin {
+                var encoding: String.Encoding = .utf8
+                if let string = try? String(contentsOf: url, usedEncoding: &encoding) {
+                    if string.data(using: encoding, allowLossyConversion: false) == file {
+                        // Only initialize from the underlying file if it matches the data provided.
+                        self = string
+                    }
                 }
             }
-        }
+
+        #endif
 
         // Guess blindly...
 
