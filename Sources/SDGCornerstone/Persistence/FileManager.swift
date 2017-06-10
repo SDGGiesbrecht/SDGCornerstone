@@ -47,35 +47,54 @@ extension FileManager {
         }
     }
     private func url(in location: RecommendedLocation, for domain: String) -> URL {
-        let zoneURL = cached(in: &locations[location]) {
 
-            let searchPath: FileManager.SearchPathDirectory
+        let zoneURL: URL
+
+        #if os(Linux)
+
+            let path: String
             switch location {
             case .applicationSupport:
-                searchPath = .applicationSupportDirectory
+                path = NSHomeDirectory() + ".Application Support"
             case .cache:
-                searchPath = .cachesDirectory
+                path = "/var/cache"
             case .temporary:
-                searchPath = .itemReplacementDirectory
+                path = "/tmp"
             }
+            zoneURL = URL(fileURLWithPath: path)
 
-            var volume: URL?
-            if location == .temporary {
-                guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
+        #else
+
+            zoneURL = cached(in: &locations[location]) {
+
+                let searchPath: FileManager.SearchPathDirectory
+                switch location {
+                case .applicationSupport:
+                    searchPath = .applicationSupportDirectory
+                case .cache:
+                    searchPath = .cachesDirectory
+                case .temporary:
+                    searchPath = .itemReplacementDirectory
+                }
+
+                var volume: URL?
+                if location == .temporary {
+                    guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
+                        unreachable()
+                    }
+                    volume = documents
+                }
+
+                guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: volume, create: true) else {
                     unreachable()
                 }
-                volume = documents
+                return result
             }
 
-            guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: volume, create: true) else {
-                unreachable()
-            }
+        #endif
 
-            // [_Warning: What does this actually do on each operating system?_]
-            print(result.absoluteString)
-
-            return result
-        }
+        // [_Warning: What does this actually do on each operating system?_]
+        print(zoneURL.absoluteString)
 
         return zoneURL.encodingAndAppending(pathComponents: FileManager.possibleDebugDomain(domain))
     }
