@@ -86,7 +86,7 @@ class PersistenceTests : TestCase {
                 XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
             }
         #elseif os(Linux)
-            let url = URL(fileURLWithPath: NSHomeDirectory()).encodingAndAppending(pathComponent: ".config/\(testDomainExternalName).plist")
+            let url = URL(fileURLWithPath: NSHomeDirectory()).encodingAndAppending(pathComponents: ".config/\(testDomainExternalName).plist")
             do {
                 let propertyList = try PropertyList(from: url)
                 switch propertyList {

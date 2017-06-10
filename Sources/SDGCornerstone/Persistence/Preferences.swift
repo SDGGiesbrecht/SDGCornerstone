@@ -117,7 +117,7 @@ open class Preferences {
         #if os(Linux)
 
             do {
-                let propertyList = try PropertyList(from: Preferences.directory.encodingAndAppending(pathComponent: "\(possibleDebugDomain).plist"))
+                let propertyList = try PropertyList(from: Preferences.directory.encodingAndAppending(pathComponents: "\(possibleDebugDomain).plist"))
                 switch propertyList {
                 case .dictionary(let dictionary):
                     return dictionary
@@ -143,7 +143,7 @@ open class Preferences {
         #if os(Linux)
 
             let propertyList = PropertyList.dictionary(preferences)
-            try? propertyList.save(to: Preferences.directory.encodingAndAppending(pathComponent: "\(possibleDebugDomain).plist"))
+            try? propertyList.save(to: Preferences.directory.encodingAndAppending(pathComponents: "\(possibleDebugDomain).plist"))
 
         #else
 
