@@ -52,9 +52,9 @@ class PersistenceTests : TestCase {
         let path = "example/path"
         XCTAssert(FileManager.default.url(in: .temporary, at: path) == FileManager.default.url(in: .temporary, at: path), "Differing temporary directories provided.")
 
-        XCTAssert(FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains("Application%20Support"))
-        XCTAssert(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Cache".scalars), LiteralPattern("cache".scalars)])) ≠ nil)
-        XCTAssert(FileManager.default.url(in: .temporary, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Temp".scalars), LiteralPattern("temp".scalars), LiteralPattern("tmp".scalars)])) ≠ nil)
+        XCTAssert(FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains("Application%20Support"), "Unexpected support directory.")
+        XCTAssert(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Cache".scalars), LiteralPattern("cache".scalars)])) ≠ nil, "Unexpected cache directory.")
+        XCTAssert(FileManager.default.url(in: .temporary, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Temp".scalars), LiteralPattern("temp".scalars), LiteralPattern("tmp".scalars), LiteralPattern("Being%20Saved%20By".scalars)])) ≠ nil, "Unexpected temporary directory.")
     }
 
     func testPreferences() {
@@ -80,8 +80,7 @@ class PersistenceTests : TestCase {
 
         preferences[testKey].value = true
         #if os(macOS)
-            do {
-                let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey], silently: true)
+            do {let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey], silently: true)
                 XCTAssert(output == "1", "Failed to write preferences to disk: \(output) ≠ 1")
             } catch let error {
                 XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")

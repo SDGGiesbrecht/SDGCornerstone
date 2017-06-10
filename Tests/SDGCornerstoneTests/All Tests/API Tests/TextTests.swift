@@ -131,16 +131,20 @@ class TextTests : TestCase {
 
         XCTAssert(StrictString("Hello, world!") == "Hello, world!")
 
+        let simple = "1"
+        let simpleUTF8 = try? String(file: simple.data(using: .utf8)!, origin: nil)
+        XCTAssert(simpleUTF8 == simple, "Unexpected string loaded: \(String(describing: simpleUTF8))")
+
         let unicode = "שלום! 🇮🇱 Γεια σας! 🇬🇷"
         let utf8 = try? String(file: unicode.data(using: .utf8)!, origin: nil)
         XCTAssert(utf8 == unicode, "Unexpected string loaded: \(String(describing: utf8))")
         let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
         XCTAssert(utf16 == unicode, "Unexpected string loaded: \(String(describing: utf16))")
-        let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
-        XCTAssert(utf32 == unicode, "Unexpected string loaded: \(String(describing: utf32))")
-
         #if false
-             // [_Workaround: macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16. (Swift 3.1.0)_]
+            // [_Workaround: macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16. (Swift 3.1.0)_]
+            let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
+            XCTAssert(utf32 == unicode, "Unexpected string loaded: \(String(describing: utf32))")
+
             let european = "¡¢£¤¥§©«¬®°±¶·»¿ÆÐ×Þßæð÷þ".data(using: .isoLatin1)! + Data([0xD8, 0x00, 0xD8, 0x00, 0x00, 0xD8, 0x00, 0xD8])
             let latin1 = try? String(file: european, origin: nil)
             XCTAssert(latin1?.data(using: .isoLatin1) == european, "Unexpected string loaded: \(String(describing: latin1))")
