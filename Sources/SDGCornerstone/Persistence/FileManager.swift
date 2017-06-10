@@ -48,24 +48,22 @@ extension FileManager {
     }
     private func url(in location: RecommendedLocation, for domain: String) -> URL {
 
-        let zoneURL: URL
+        let zoneURL = cached(in: &locations[location]) {
 
-        #if os(Linux)
+            #if os(Linux)
 
-            let path: String
-            switch location {
-            case .applicationSupport:
-                path = NSHomeDirectory() + ".Application Support"
-            case .cache:
-                path = "/var/cache"
-            case .temporary:
-                path = "/tmp"
-            }
-            zoneURL = URL(fileURLWithPath: path)
+                let path: String
+                switch location {
+                case .applicationSupport:
+                    path = NSHomeDirectory() + ".Application Support"
+                case .cache:
+                    path = "/var/cache"
+                case .temporary:
+                    path = "/tmp"
+                }
+                return URL(fileURLWithPath: path)
 
-        #else
-
-            zoneURL = cached(in: &locations[location]) {
+            #else
 
                 let searchPath: FileManager.SearchPathDirectory
                 switch location {
@@ -89,9 +87,9 @@ extension FileManager {
                     unreachable()
                 }
                 return result
-            }
 
-        #endif
+            #endif
+        }
 
         // [_Warning: What does this actually do on each operating system?_]
         print(zoneURL.absoluteString)
