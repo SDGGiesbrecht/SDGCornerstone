@@ -22,7 +22,7 @@
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
-public struct WholeNumber : Addable, Comparable, Equatable, PointProtocol, Strideable, Subtractable, WholeArithmetic, WholeNumberProtocol {
+public struct WholeNumber : Addable, Comparable, Equatable, Hashable, PointProtocol, Strideable, Subtractable, WholeArithmetic, WholeNumberProtocol {
 
     // MARK: - Properties
 
@@ -147,6 +147,14 @@ public struct WholeNumber : Addable, Comparable, Equatable, PointProtocol, Strid
     ///     - rhs: Another value to compare.
     public static func == (lhs: WholeNumber, rhs: WholeNumber) -> Bool {
         return lhs.digits.elementsEqual(rhs.digits)
+    }
+
+    // MARK: - Hashable
+
+    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    /// The hash value.
+    public var hashValue: Int {
+        return digits.first?.hashValue ?? 0
     }
 
     // MARK: - PointProtocol

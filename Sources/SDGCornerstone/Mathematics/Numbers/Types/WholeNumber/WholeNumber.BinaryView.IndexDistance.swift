@@ -14,7 +14,7 @@
 
 extension WholeNumber.BinaryView {
 
-    internal struct IndexDistance : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, Negatable, SignedNumber, Subtractable {
+    internal struct IndexDistance : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, Hashable, Negatable, SignedNumber, Subtractable {
 
         // MARK: - Initialization
 
@@ -68,6 +68,14 @@ extension WholeNumber.BinaryView {
             let bits = BitDistance(integerLiteral).mod(bitsPerDigit)
 
             self = IndexDistance(digitDistance: digits, bitDistance: bits)
+        }
+
+        // MARK: - Hashable
+
+        // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+        /// The hash value.
+        public var hashValue: Int {
+            return bitDistance.hashValue
         }
 
         // MARK: - Negatable

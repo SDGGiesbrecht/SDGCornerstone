@@ -551,6 +551,19 @@ class MathematicsTests : TestCase {
         runTests(WholeNumber.self)
         runTests(Integer.self)
         runTests(RationalNumber.self)
+
+        XCTAssert((0 as UInt).inDigits() == "0", "Unexpected digits: \((0 as UInt).inDigits()) ≠ 0")
+        XCTAssert((1 as UInt).inDigits() == "1", "Unexpected digits: \((1 as UInt).inDigits()) ≠ 1")
+        XCTAssert((9 as UInt).inDigits() == "9", "Unexpected digits: \((9 as UInt).inDigits()) ≠ 9")
+        XCTAssert((10 as UInt).inDigits() == "10", "Unexpected digits: \((10 as UInt).inDigits()) ≠ 10")
+        XCTAssert((999 as UInt).inDigits() == "999", "Unexpected digits: \((999 as UInt).inDigits()) ≠ 999")
+        XCTAssert((1000 as UInt).inDigits() == "1000", "Unexpected digits: \((1000 as UInt).inDigits()) ≠ 1000")
+        XCTAssert((9999 as UInt).inDigits() == "9999", "Unexpected digits: \((9999 as UInt).inDigits()) ≠ 9999")
+        XCTAssert((10_000 as UInt).inDigits() == "10 000", "Unexpected digits: \((10_000 as UInt).inDigits()) ≠ 10 000")
+        XCTAssert((999_999 as UInt).inDigits() == "999 999", "Unexpected digits: \((999_999 as UInt).inDigits()) ≠ 999 999")
+        XCTAssert((1_000_000 as UInt).inDigits() == "1 000 000", "Unexpected digits: \((1_000_000 as UInt).inDigits()) ≠ 1 000 000")
+        XCTAssert((999_999_999 as UInt).inDigits() == "999 999 999", "Unexpected digits: \((999_999_999 as UInt).inDigits()) ≠ 999 999 999")
+        XCTAssert((1_000_000_000 as UInt).inDigits() == "1 000 000 000", "Unexpected digits: \((1_000_000_000 as UInt).inDigits()) ≠ 1 000 000 000")
     }
 
     static var allTests: [(String, (MathematicsTests) -> () throws -> Void)] {

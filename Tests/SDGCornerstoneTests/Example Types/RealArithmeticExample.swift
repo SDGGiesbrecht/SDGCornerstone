@@ -46,6 +46,12 @@ struct RealArithmeticExample : RealArithmetic {
         value = Double(floatLiteral: floatLiteral)
     }
 
+    // Hashable
+
+    var hashValue: Int {
+        return value.hashValue
+    }
+
     // IntegralArithmetic
 
     public init(_ int: IntMax) {

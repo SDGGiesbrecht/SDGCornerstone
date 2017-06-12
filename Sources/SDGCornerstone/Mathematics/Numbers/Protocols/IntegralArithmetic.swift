@@ -39,4 +39,12 @@ extension IntegralArithmetic {
     public init<I : IntFamily>(_ int: I) {
         self.init(int.toIntMax())
     }
+
+    internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+        var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
+        if self.isNegative {
+            digits.prepend("−")
+        }
+        return digits
+    }
 }

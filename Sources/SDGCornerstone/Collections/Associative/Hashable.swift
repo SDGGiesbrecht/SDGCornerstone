@@ -17,3 +17,13 @@ extension Hashable {
     // [_Define Documentation: SDGCornerstone.Hashable.hashValue_]
     /// The hash value.
 }
+
+extension Hashable where Self : Measurement {
+    // MARK: - where Self : Measurement
+
+    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    /// The hash value.
+    public var hashValue: Int {
+        return rawValue.hashValue
+    }
+}

@@ -40,6 +40,12 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
         return lhs.value == rhs.value
     }
 
+    // Hashable
+
+    var hashValue: Int {
+        return value.hashValue
+    }
+
     // ExpressibleByFloatLiteral
 
     init(floatLiteral: Double.FloatLiteralType) {

@@ -801,6 +801,43 @@ extension WholeArithmetic {
     public init(randomInRange range: ClosedRange<Self>) {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
+
+    internal func wholeDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+        let digitSet: [UnicodeScalar] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+        let radix = Self(UInt(digitSet.count))
+        var digitMapping: [Self: UnicodeScalar] = [:]
+        for value in digitSet.indices {
+            digitMapping[Self(UInt(value))] = digitSet[value]
+        }
+
+        var whole = (|self|).rounded(.towardZero)
+        var digits: [UnicodeScalar] = []
+        var position: Self = 0
+        while whole ≠ 0 {
+            if position.mod(3) == 0 ∧ position ≠ 0 {
+                digits.append(thousandsSeparator)
+            }
+
+            let positionValue = whole.mod(radix)
+            whole.divideAccordingToEuclid(by: radix)
+
+            guard let character = digitMapping[positionValue] else {
+                unreachable()
+            }
+            digits.append(character)
+
+            position += 1
+        }
+
+        if digits.isEmpty {
+            digits.append(digitSet[0])
+        } else if digits.count == 5 {
+            digits.remove(at: 3)
+        }
+
+        return StrictString(digits.reversed())
+    }
 }
 
 // MARK: - Whole Arithmetic

@@ -20,3 +20,14 @@
 public protocol IntegerProtocol : IntegralArithmetic {
 
 }
+
+extension IntegerProtocol {
+
+    /// Returns the number in digits.
+    ///
+    /// - Paramters:
+    ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
+    public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+        return integralDigits(thousandsSeparator: thousandsSeparator)
+    }
+}

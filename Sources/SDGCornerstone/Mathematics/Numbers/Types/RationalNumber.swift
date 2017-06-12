@@ -20,7 +20,7 @@
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, WholeArithmetic {
+public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -156,6 +156,14 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
     /// Creates an instance from a float literal.
     public init(floatLiteral value: FloatMax) {
         self.init(floatingPointLiteral: value)
+    }
+
+    // MARK: - Hashable
+
+    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    /// The hash value.
+    public var hashValue: Int {
+        return numerator.hashValue
     }
 
     // MARK: - IntegralArithmetic
