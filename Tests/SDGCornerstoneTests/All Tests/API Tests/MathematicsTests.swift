@@ -334,6 +334,22 @@ class MathematicsTests : TestCase {
         runTests(RationalNumber.self)
         runTests(RationalNumberProtocolExample.self)
         runTests(RealArithmeticExample.self)
+
+        let negativeNineteenOverTwo: RationalNumber = −19 ÷ 2
+        let six: RationalNumber = 6
+        let fiftyThousandOneOverTenThousand: RationalNumber = 50_001 ÷ 10_000
+
+        XCTAssert(negativeNineteenOverTwo.asSimpleFraction() == "−19⁄2", "\(negativeNineteenOverTwo.asSimpleFraction()) ≠ −19⁄2")
+        XCTAssert(six.asSimpleFraction() == "6", "\(six.asSimpleFraction()) ≠ 6")
+        XCTAssert(fiftyThousandOneOverTenThousand.asSimpleFraction() == "(50 001)⁄(10 000)", "\(fiftyThousandOneOverTenThousand.asSimpleFraction()) ≠ (50 001)⁄(10 000)")
+
+        XCTAssert(negativeNineteenOverTwo.asMixedFraction() == "−9 1⁄2", "\(negativeNineteenOverTwo.asMixedFraction()) ≠ −9 1⁄2")
+        XCTAssert(six.asMixedFraction() == "6", "\(six.asMixedFraction()) ≠ 6")
+        XCTAssert(fiftyThousandOneOverTenThousand.asMixedFraction() == "5 + 1⁄(10 000)", "\(fiftyThousandOneOverTenThousand.asMixedFraction()) ≠ 5 + 1⁄(10 000)")
+
+        XCTAssert(negativeNineteenOverTwo.asRatio() == "−19 ∶ 2", "\(negativeNineteenOverTwo.asRatio()) ≠ −19 ∶ 2")
+        XCTAssert(six.asRatio() == "6 ∶ 1", "\(six.asRatio()) ≠ 6 ∶ 1")
+        XCTAssert(fiftyThousandOneOverTenThousand.asRatio() == "50 001 ∶ 10 000", "\(fiftyThousandOneOverTenThousand.asRatio()) ≠ 50 001 ∶ 10 000")
     }
 
     func testRealArithmetic() {
@@ -552,18 +568,18 @@ class MathematicsTests : TestCase {
         runTests(Integer.self)
         runTests(RationalNumber.self)
 
-        XCTAssert((0 as UInt).inDigits() == "0", "Unexpected digits: \((0 as UInt).inDigits()) ≠ 0")
-        XCTAssert((1 as UInt).inDigits() == "1", "Unexpected digits: \((1 as UInt).inDigits()) ≠ 1")
-        XCTAssert((9 as UInt).inDigits() == "9", "Unexpected digits: \((9 as UInt).inDigits()) ≠ 9")
-        XCTAssert((10 as UInt).inDigits() == "10", "Unexpected digits: \((10 as UInt).inDigits()) ≠ 10")
-        XCTAssert((999 as UInt).inDigits() == "999", "Unexpected digits: \((999 as UInt).inDigits()) ≠ 999")
-        XCTAssert((1000 as UInt).inDigits() == "1000", "Unexpected digits: \((1000 as UInt).inDigits()) ≠ 1000")
-        XCTAssert((9999 as UInt).inDigits() == "9999", "Unexpected digits: \((9999 as UInt).inDigits()) ≠ 9999")
-        XCTAssert((10_000 as UInt).inDigits() == "10 000", "Unexpected digits: \((10_000 as UInt).inDigits()) ≠ 10 000")
-        XCTAssert((999_999 as UInt).inDigits() == "999 999", "Unexpected digits: \((999_999 as UInt).inDigits()) ≠ 999 999")
-        XCTAssert((1_000_000 as UInt).inDigits() == "1 000 000", "Unexpected digits: \((1_000_000 as UInt).inDigits()) ≠ 1 000 000")
-        XCTAssert((999_999_999 as UInt).inDigits() == "999 999 999", "Unexpected digits: \((999_999_999 as UInt).inDigits()) ≠ 999 999 999")
-        XCTAssert((1_000_000_000 as UInt).inDigits() == "1 000 000 000", "Unexpected digits: \((1_000_000_000 as UInt).inDigits()) ≠ 1 000 000 000")
+        XCTAssert((0 as UInt).inDigits() == "0", "\((0 as UInt).inDigits()) ≠ 0")
+        XCTAssert((1 as UInt).inDigits() == "1", "\((1 as UInt).inDigits()) ≠ 1")
+        XCTAssert((9 as UInt).inDigits() == "9", "\((9 as UInt).inDigits()) ≠ 9")
+        XCTAssert((10 as UInt).inDigits() == "10", "\((10 as UInt).inDigits()) ≠ 10")
+        XCTAssert((999 as UInt).inDigits() == "999", "\((999 as UInt).inDigits()) ≠ 999")
+        XCTAssert((1000 as UInt).inDigits() == "1000", "\((1000 as UInt).inDigits()) ≠ 1000")
+        XCTAssert((9999 as UInt).inDigits() == "9999", "\((9999 as UInt).inDigits()) ≠ 9999")
+        XCTAssert((10_000 as UInt).inDigits() == "10 000", "\((10_000 as UInt).inDigits()) ≠ 10 000")
+        XCTAssert((999_999 as UInt).inDigits() == "999 999", "\((999_999 as UInt).inDigits()) ≠ 999 999")
+        XCTAssert((1_000_000 as UInt).inDigits() == "1 000 000", "\((1_000_000 as UInt).inDigits()) ≠ 1 000 000")
+        XCTAssert((999_999_999 as UInt).inDigits() == "999 999 999", "\((999_999_999 as UInt).inDigits()) ≠ 999 999 999")
+        XCTAssert((1_000_000_000 as UInt).inDigits() == "1 000 000 000", "\((1_000_000_000 as UInt).inDigits()) ≠ 1 000 000 000")
     }
 
     static var allTests: [(String, (MathematicsTests) -> () throws -> Void)] {

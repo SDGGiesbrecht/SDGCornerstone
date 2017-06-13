@@ -215,6 +215,14 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
         lhs.definition = irregular
     }
 
+    // MARK: - RationalNumberProtocol
+
+    // [_Define Documentation: SDGCornerstone.RationalNumberProtocol.reducedSimpleFraction()_]
+    /// Returns the numerator and denominator of the number as a reduced simple fraction.
+    public func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer) {
+        return (numerator, denominator)
+    }
+
     // MARK: - Subtractable
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]

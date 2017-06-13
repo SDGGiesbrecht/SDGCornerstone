@@ -16,9 +16,9 @@ import SDGCornerstone
 
 struct RationalNumberProtocolExample : RationalNumberProtocol {
 
-    var value: Double
+    var value: RationalNumber
 
-    init(_ value: Double) {
+    init(_ value: RationalNumber) {
         self.value = value
     }
 
@@ -48,14 +48,14 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
 
     // ExpressibleByFloatLiteral
 
-    init(floatLiteral: Double.FloatLiteralType) {
-        value = Double(floatLiteral: floatLiteral)
+    init(floatLiteral: RationalNumber.FloatLiteralType) {
+        value = RationalNumber(floatLiteral: floatLiteral)
     }
 
     // IntegralArithmetic
 
     public init(_ int: IntMax) {
-        value = Double(int)
+        value = RationalNumber(int)
     }
 
     // PointProtocol
@@ -68,6 +68,12 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
         lhs.value ÷= rhs.value
     }
 
+    // RationalNumberProtocol
+
+    func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer) {
+        return value.reducedSimpleFraction()
+    }
+
     // Subtractable
 
     static func −= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
@@ -77,7 +83,7 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
     // WholeArithmetic
 
     public init(_ uInt: UIntMax) {
-        value = Double(uInt)
+        value = RationalNumber(uInt)
     }
 
     static func ×= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
@@ -89,6 +95,6 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
     }
 
     init(randomInRange range: ClosedRange<RationalNumberProtocolExample>, fromRandomizer randomizer: Randomizer) {
-        value = Double(randomInRange: range.lowerBound.value ... range.upperBound.value, fromRandomizer: randomizer)
+        value = RationalNumber(randomInRange: range.lowerBound.value ... range.upperBound.value, fromRandomizer: randomizer)
     }
 }
