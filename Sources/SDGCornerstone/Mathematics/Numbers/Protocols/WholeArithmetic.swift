@@ -802,14 +802,27 @@ extension WholeArithmetic {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
-    internal func wholeDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
-        let digitSet: [UnicodeScalar] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    internal var egyptianDigits: [UnicodeScalar] {
+        return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    }
 
-        let radix = Self(UInt(digitSet.count))
-        var digitMapping: [Self: UnicodeScalar] = [:]
-        for value in digitSet.indices {
-            digitMapping[Self(UInt(value))] = digitSet[value]
+    internal func radix(for digits: [UnicodeScalar]) -> Self {
+        return Self(UInt(digits.count))
+    }
+
+    internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
+        var result: [Self: UnicodeScalar] = [:]
+        for value in digits.indices {
+            result[Self(UInt(value))] = digits[value]
         }
+        return result
+    }
+
+    internal func wholeDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+        let digitSet = egyptianDigits
+
+        let radix = self.radix(for: digitSet)
+        let digitMapping = mapping(for: digitSet)
 
         var whole = (|self|).rounded(.towardZero)
         var digits: [UnicodeScalar] = []

@@ -350,6 +350,26 @@ class MathematicsTests : TestCase {
         XCTAssert(negativeNineteenOverTwo.asRatio() == "−19 ∶ 2", "\(negativeNineteenOverTwo.asRatio()) ≠ −19 ∶ 2")
         XCTAssert(six.asRatio() == "6 ∶ 1", "\(six.asRatio()) ≠ 6 ∶ 1")
         XCTAssert(fiftyThousandOneOverTenThousand.asRatio() == "50 001 ∶ 10 000", "\(fiftyThousandOneOverTenThousand.asRatio()) ≠ 50 001 ∶ 10 000")
+
+        XCTAssert((1 as RationalNumber).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "1", "\((1 as RationalNumber).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 1")
+        XCTAssert((1 as RationalNumber ÷ 10).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.1", "\((1 as RationalNumber ÷ 10).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.1")
+        XCTAssert((9 as RationalNumber ÷ 10).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.9", "\((9 as RationalNumber ÷ 10).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.9")
+        XCTAssert((1 as RationalNumber ÷ 100).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.01", "\((1 as RationalNumber ÷ 100).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.01")
+        XCTAssert((99 as RationalNumber ÷ 100).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.99", "\((99 as RationalNumber ÷ 100).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.99")
+        XCTAssert((1 as RationalNumber ÷ 1000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.001", "\((1 as RationalNumber ÷ 1000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.001")
+        XCTAssert((999 as RationalNumber ÷ 1000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999", "\((999 as RationalNumber ÷ 1000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999")
+        XCTAssert((1 as RationalNumber ÷ 10_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.000 1", "\((1 as RationalNumber ÷ 10_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.000 1")
+        XCTAssert((9999 as RationalNumber ÷ 10_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999 9", "\((9999 as RationalNumber ÷ 10_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999 9")
+        XCTAssert((1 as RationalNumber ÷ 100_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.000 01", "\((1 as RationalNumber ÷ 100_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.000 01")
+        XCTAssert((99_999 as RationalNumber ÷ 100_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999 99", "\((99_999 as RationalNumber ÷ 100_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999 99")
+        XCTAssert((1 as RationalNumber ÷ 1_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.000 001", "\((1 as RationalNumber ÷ 1_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.000 001")
+        XCTAssert((999_999 as RationalNumber ÷ 1_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999 999", "\((999_999 as RationalNumber ÷ 1_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999 999")
+        XCTAssert((1 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.000 000 1", "\((1 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.000 000 1")
+        XCTAssert((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999 999 9", "\((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999 999 9")
+
+        XCTAssert((1 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") == "0.000", "\((1 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) ≠ 0.000")
+        XCTAssert((999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") == "0.100", "\((999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) ≠ 0.100")
+        XCTAssert((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") == "1.000", "\((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) ≠ 1.000")
     }
 
     func testRealArithmetic() {
