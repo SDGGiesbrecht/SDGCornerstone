@@ -600,6 +600,32 @@ class MathematicsTests : TestCase {
         XCTAssert((1_000_000 as UInt).inDigits() == "1 000 000", "\((1_000_000 as UInt).inDigits()) ≠ 1 000 000")
         XCTAssert((999_999_999 as UInt).inDigits() == "999 999 999", "\((999_999_999 as UInt).inDigits()) ≠ 999 999 999")
         XCTAssert((1_000_000_000 as UInt).inDigits() == "1 000 000 000", "\((1_000_000_000 as UInt).inDigits()) ≠ 1 000 000 000")
+
+        XCTAssert(1111.inRomanNumerals() == "MCXI", "\(1111.inRomanNumerals()) ≠ MCXI")
+        XCTAssert(2222.inRomanNumerals() == "MMCCXXII", "\(2222.inRomanNumerals()) ≠ MMCCXXII")
+        XCTAssert(3333.inRomanNumerals() == "MMMCCCXXXIII", "\(3333.inRomanNumerals()) ≠ MMMCCCXXXIII")
+        XCTAssert(444.inRomanNumerals() == "CDXLIV", "\(444.inRomanNumerals()) ≠ CDXLIV")
+        XCTAssert(555.inRomanNumerals() == "DLV", "\(555.inRomanNumerals()) ≠ DLV")
+        XCTAssert(666.inRomanNumerals() == "DCLXVI", "\(666.inRomanNumerals()) ≠ DCLXVI")
+        XCTAssert(777.inRomanNumerals() == "DCCLXXVII", "\(777.inRomanNumerals()) ≠ DCCLXXVII")
+        XCTAssert(888.inRomanNumerals() == "DCCCLXXXVIII", "\(888.inRomanNumerals()) ≠ DCCCLXXXVIII")
+        XCTAssert(999.inRomanNumerals() == "CMXCIX", "\(999.inRomanNumerals()) ≠ CMXCIX")
+        XCTAssert(1000.inRomanNumerals(lowercase: true) == "m", "\(1000.inRomanNumerals(lowercase: true)) ≠ m")
+        XCTAssert((1 as Int8).inRomanNumerals() == "I", "\((1 as Int8).inRomanNumerals()) ≠ I")
+        XCTAssert((1 as UInt8).inRomanNumerals() == "I", "\((1 as UInt8).inRomanNumerals()) ≠ I")
+
+        XCTAssert(1111.στουςΕλληνικούςΑριθμούς() == "͵ΑΡΙΑʹ", "\(1111.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΑΡΙΑʹ")
+        XCTAssert(2222.στουςΕλληνικούςΑριθμούς() == "͵ΒΣΚΒʹ", "\(2222.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΒΣΚΒʹ")
+        XCTAssert(3333.στουςΕλληνικούςΑριθμούς() == "͵ΓΤΛΓʹ", "\(3333.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΓΤΛΓʹ")
+        XCTAssert(4444.στουςΕλληνικούςΑριθμούς() == "͵ΔΥΜΔʹ", "\(4444.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΔΥΜΔʹ")
+        XCTAssert(5555.στουςΕλληνικούςΑριθμούς() == "͵ΕΦΝΕʹ", "\(5555.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΕΦΝΕʹ")
+        XCTAssert(6666.στουςΕλληνικούςΑριθμούς() == "͵ϚΧΞϚʹ", "\(6666.στουςΕλληνικούςΑριθμούς()) ≠ ͵ϚΧΞϚʹ")
+        XCTAssert(7777.στουςΕλληνικούςΑριθμούς() == "͵ΖΨΟΖʹ", "\(7777.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΖΨΟΖʹ")
+        XCTAssert(8888.στουςΕλληνικούςΑριθμούς() == "͵ΗΩΠΗʹ", "\(8888.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΗΩΠΗʹ")
+        XCTAssert(9999.στουςΕλληνικούςΑριθμούς() == "͵ΘϠϞΘʹ", "\(9999.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΘϠϞΘʹ")
+        XCTAssert(2222.στουςΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false) == "βσκβ", "\(2222.στουςΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false)) ≠ βσκβ")
+        XCTAssert((1 as Int8).στουςΕλληνικούςΑριθμούς() == "Αʹ", "\((1 as Int8).στουςΕλληνικούςΑριθμούς()) ≠ Αʹ")
+        XCTAssert((1 as UInt8).στουςΕλληνικούςΑριθμούς() == "Αʹ", "\((1 as UInt8).στουςΕλληνικούςΑριθμούς()) ≠ Αʹ")
     }
 
     static var allTests: [(String, (MathematicsTests) -> () throws -> Void)] {

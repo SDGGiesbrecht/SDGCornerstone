@@ -851,6 +851,264 @@ extension WholeArithmetic {
 
         return StrictString(digits.reversed())
     }
+
+    internal func wholeRomanNumerals(lowercase: Bool) -> StrictString {
+        let warning = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "Roman numerals are only supported in the range I–MMMCMXCIX."
+            }
+        })
+        assert(0 < self
+            ∧ (self is Int8
+            ∨ self is UInt8
+                ∨ self < 4000), warning)
+
+        func format(_ string: StrictString) -> StrictString {
+            if lowercase {
+                return StrictString(String(string).lowercased())
+            } else {
+                return string
+            }
+        }
+
+        var number = self
+        var result: StrictString = ""
+
+        switch number.mod(10) {
+        case 0:
+            break
+        case 1:
+            result.prepend(contentsOf: format("I"))
+        case 2:
+            result.prepend(contentsOf: format("II"))
+        case 3:
+            result.prepend(contentsOf: format("III"))
+        case 4:
+            result.prepend(contentsOf: format("IV"))
+        case 5:
+            result.prepend(contentsOf: format("V"))
+        case 6:
+            result.prepend(contentsOf: format("VI"))
+        case 7:
+            result.prepend(contentsOf: format("VII"))
+        case 8:
+            result.prepend(contentsOf: format("VIII"))
+        case 9:
+            result.prepend(contentsOf: format("IX"))
+        default:
+            preconditionFailure(warning)
+        }
+        number.divideAccordingToEuclid(by: 10)
+
+        switch number.mod(10) {
+        case 0:
+            break
+        case 1:
+            result.prepend(contentsOf: format("X"))
+        case 2:
+            result.prepend(contentsOf: format("XX"))
+        case 3:
+            result.prepend(contentsOf: format("XXX"))
+        case 4:
+            result.prepend(contentsOf: format("XL"))
+        case 5:
+            result.prepend(contentsOf: format("L"))
+        case 6:
+            result.prepend(contentsOf: format("LX"))
+        case 7:
+            result.prepend(contentsOf: format("LXX"))
+        case 8:
+            result.prepend(contentsOf: format("LXXX"))
+        case 9:
+            result.prepend(contentsOf: format("XC"))
+        default:
+            preconditionFailure(warning)
+        }
+        number.divideAccordingToEuclid(by: 10)
+
+        switch number.mod(10) {
+        case 0:
+            break
+        case 1:
+            result.prepend(contentsOf: format("C"))
+        case 2:
+            result.prepend(contentsOf: format("CC"))
+        case 3:
+            result.prepend(contentsOf: format("CCC"))
+        case 4:
+            result.prepend(contentsOf: format("CD"))
+        case 5:
+            result.prepend(contentsOf: format("D"))
+        case 6:
+            result.prepend(contentsOf: format("DC"))
+        case 7:
+            result.prepend(contentsOf: format("DCC"))
+        case 8:
+            result.prepend(contentsOf: format("DCCC"))
+        case 9:
+            result.prepend(contentsOf: format("CM"))
+        default:
+            preconditionFailure(warning)
+        }
+        number.divideAccordingToEuclid(by: 10)
+
+        switch number.mod(10) {
+        case 0:
+            break
+        case 1:
+            result.prepend(contentsOf: format("M"))
+        case 2:
+            result.prepend(contentsOf: format("MM"))
+        case 3:
+            result.prepend(contentsOf: format("MMM"))
+        default:
+            preconditionFailure(warning)
+        }
+
+        return result
+    }
+
+    internal func φυσικοίΕλληνικοίΑριθμοί(μικράΓράμματα: Bool, κεραία: Bool) -> StrictString {
+        let προειδοποίηση = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "Greek numerals are only supported in the range Αʹ–͵ΘϠϞΘʹ."
+            }
+        })
+        assert(0 < self
+            ∧ (self is Int8
+                ∨ self is UInt8
+                ∨ self < 10_000), προειδοποίηση)
+
+        func μορφοποίηση(_ κείμενο: StrictString) -> StrictString {
+            if μικράΓράμματα {
+                return StrictString(String(κείμενο).lowercased())
+            } else {
+                return κείμενο
+            }
+        }
+
+        var αριθμός = self
+        var αποτέλεσμα: StrictString = ""
+
+        switch αριθμός.mod(10) {
+        case 0:
+            break
+        case 1:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Α"))
+        case 2:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Β"))
+        case 3:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Γ"))
+        case 4:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Δ"))
+        case 5:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ε"))
+        case 6:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ϛ"))
+        case 7:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ζ"))
+        case 8:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Η"))
+        case 9:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Θ"))
+        default:
+            preconditionFailure(προειδοποίηση)
+        }
+        αριθμός.divideAccordingToEuclid(by: 10)
+
+        switch αριθμός.mod(10) {
+        case 0:
+            break
+        case 1:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ι"))
+        case 2:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Κ"))
+        case 3:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Λ"))
+        case 4:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Μ"))
+        case 5:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ν"))
+        case 6:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ξ"))
+        case 7:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ο"))
+        case 8:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Π"))
+        case 9:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ϟ"))
+        default:
+            preconditionFailure(προειδοποίηση)
+        }
+        αριθμός.divideAccordingToEuclid(by: 10)
+
+        switch αριθμός.mod(10) {
+        case 0:
+            break
+        case 1:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ρ"))
+        case 2:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Σ"))
+        case 3:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Τ"))
+        case 4:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Υ"))
+        case 5:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Φ"))
+        case 6:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Χ"))
+        case 7:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ψ"))
+        case 8:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ω"))
+        case 9:
+            αποτέλεσμα.prepend(contentsOf: μορφοποίηση("Ϡ"))
+        default:
+            preconditionFailure(προειδοποίηση)
+        }
+        αριθμός.divideAccordingToEuclid(by: 10)
+
+        if κεραία ∧ ¬αποτέλεσμα.isEmpty {
+            αποτέλεσμα.append("ʹ")
+        }
+
+        var χιλιάδες: StrictString = ""
+
+        switch αριθμός.mod(10) {
+        case 0:
+            break
+        case 1:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Α"))
+        case 2:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Β"))
+        case 3:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Γ"))
+        case 4:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Δ"))
+        case 5:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Ε"))
+        case 6:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Ϛ"))
+        case 7:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Ζ"))
+        case 8:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Η"))
+        case 9:
+            χιλιάδες.prepend(contentsOf: μορφοποίηση("Θ"))
+        default:
+            preconditionFailure(προειδοποίηση)
+        }
+
+        if κεραία ∧ ¬χιλιάδες.isEmpty {
+            χιλιάδες.prepend("͵")
+        }
+
+        αποτέλεσμα.prepend(contentsOf: χιλιάδες)
+
+        return αποτέλεσμα
+    }
 }
 
 // MARK: - Whole Arithmetic

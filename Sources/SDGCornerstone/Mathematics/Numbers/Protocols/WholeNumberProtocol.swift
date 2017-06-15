@@ -25,9 +25,28 @@ extension WholeNumberProtocol {
 
     /// Returns the number in digits.
     ///
-    /// - Paramters:
+    /// - Parameters:
     ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
     public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         return wholeDigits(thousandsSeparator: thousandsSeparator)
+    }
+
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:)_]
+    /// Returns the number in roman numerals.
+    ///
+    /// - Precondition: The number must be in the range I–MMMCMXCIX.
+    ///
+    /// - Parameters:
+    ///     - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
+    public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
+        return wholeRomanNumerals(lowercase: lowercase)
+    }
+
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.στουςΕλληνικούςΑριθμούς(μικράΓράμματα:κεραία:)_]
+    /// Επιστρέφει τον αριθμό στους ελληνικούς αριθμούς.
+    ///
+    /// - Precondition: Ο αριθμός είναι σε Αʹ–͵ΘϠϞΘʹ.
+    public func στουςΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
+        return φυσικοίΕλληνικοίΑριθμοί(μικράΓράμματα: μικράΓράμματα, κεραία: κεραία)
     }
 }
