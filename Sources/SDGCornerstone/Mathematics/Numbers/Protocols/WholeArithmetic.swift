@@ -852,7 +852,7 @@ extension WholeArithmetic {
         return StrictString(digits.reversed())
     }
 
-    internal func wholeRomanNumerals(lowercase: Bool) -> StrictString {
+    internal func romanNumerals(lowercase: Bool) -> StrictString {
         let warning = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
@@ -861,7 +861,7 @@ extension WholeArithmetic {
         })
         assert(0 < self
             ∧ (self is Int8
-            ∨ self is UInt8
+                ∨ self is UInt8
                 ∨ self < 4000), warning)
 
         func format(_ string: StrictString) -> StrictString {
@@ -969,7 +969,7 @@ extension WholeArithmetic {
         return result
     }
 
-    internal func φυσικοίΕλληνικοίΑριθμοί(μικράΓράμματα: Bool, κεραία: Bool) -> StrictString {
+    internal func ελληνικοίΑριθμοί(μικράΓράμματα: Bool, κεραία: Bool) -> StrictString {
         let προειδοποίηση = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
@@ -1108,6 +1108,146 @@ extension WholeArithmetic {
         αποτέλεσμα.prepend(contentsOf: χιλιάδες)
 
         return αποτέλεσμα
+    }
+
+    internal func ספרות־עבריות(גרשיים: Bool) -> StrictString {
+        let אזהרה = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return "Hebrew numerals are only supported in the range א׳–ט׳תתקצ״ט."
+            }
+        })
+        assert(0 < self
+            ∧ (self is Int8
+                ∨ self is UInt8
+                ∨ self < 10_000), אזהרה)
+
+        var מספר = self
+        var תוצאה: StrictString = ""
+
+        switch מספר.mod(10) {
+        case 0:
+            break
+        case 1:
+            תוצאה.prepend("א")
+        case 2:
+            תוצאה.prepend("ב")
+        case 3:
+            תוצאה.prepend("ג")
+        case 4:
+            תוצאה.prepend("ד")
+        case 5:
+            תוצאה.prepend("ה")
+        case 6:
+            תוצאה.prepend("ו")
+        case 7:
+            תוצאה.prepend("ז")
+        case 8:
+            תוצאה.prepend("ח")
+        case 9:
+            תוצאה.prepend("ט")
+        default:
+            preconditionFailure(אזהרה)
+        }
+        מספר.divideAccordingToEuclid(by: 10)
+
+        switch מספר.mod(10) {
+        case 0:
+            break
+        case 1:
+            תוצאה.prepend("י")
+        case 2:
+            תוצאה.prepend("כ")
+        case 3:
+            תוצאה.prepend("ל")
+        case 4:
+            תוצאה.prepend("מ")
+        case 5:
+            תוצאה.prepend("נ")
+        case 6:
+            תוצאה.prepend("ס")
+        case 7:
+            תוצאה.prepend("ע")
+        case 8:
+            תוצאה.prepend("פ")
+        case 9:
+            תוצאה.prepend("צ")
+        default:
+            preconditionFailure(אזהרה)
+        }
+        מספר.divideAccordingToEuclid(by: 10)
+
+        switch מספר.mod(10) {
+        case 0:
+            break
+        case 1:
+            תוצאה.prepend("ק")
+        case 2:
+            תוצאה.prepend("ר")
+        case 3:
+            תוצאה.prepend("ש")
+        case 4:
+            תוצאה.prepend("ת")
+        case 5:
+            תוצאה.prepend(contentsOf: "תק" as StrictString)
+        case 6:
+            תוצאה.prepend(contentsOf: "תר" as StrictString)
+        case 7:
+            תוצאה.prepend(contentsOf: "תש" as StrictString)
+        case 8:
+            תוצאה.prepend(contentsOf: "תת" as StrictString)
+        case 9:
+            תוצאה.prepend(contentsOf: "תתק" as StrictString)
+        default:
+            preconditionFailure(אזהרה)
+        }
+        מספר.divideAccordingToEuclid(by: 10)
+
+        תוצאה.replaceMatches(for: "יה" as StrictString, with: "טו" as StrictString)
+            תוצאה.replaceMatches(for: "יו" as StrictString, with: "טז" as StrictString)
+
+        if גרשיים ∧ ¬תוצאה.isEmpty {
+            if תוצאה.count == 1 {
+                 תוצאה.append("׳")
+            } else {
+                תוצאה.insert("״", at: תוצאה.index(before: תוצאה.endIndex))
+            }
+        }
+
+        var אלפים: StrictString = ""
+
+        switch מספר.mod(10) {
+        case 0:
+            break
+        case 1:
+            אלפים.prepend("א")
+        case 2:
+            אלפים.prepend("ב")
+        case 3:
+            אלפים.prepend("ג")
+        case 4:
+            אלפים.prepend("ד")
+        case 5:
+            אלפים.prepend("ה")
+        case 6:
+            אלפים.prepend("ו")
+        case 7:
+            אלפים.prepend("ז")
+        case 8:
+            אלפים.prepend("ח")
+        case 9:
+            אלפים.prepend("ט")
+        default:
+            preconditionFailure(אזהרה)
+        }
+
+        if גרשיים ∧ ¬אלפים.isEmpty {
+            אלפים.append("׳")
+        }
+
+        תוצאה.prepend(contentsOf: אלפים)
+
+        return תוצאה
     }
 }
 

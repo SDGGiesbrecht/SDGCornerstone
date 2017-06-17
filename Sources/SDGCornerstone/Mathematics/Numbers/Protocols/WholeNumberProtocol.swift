@@ -39,7 +39,7 @@ extension WholeNumberProtocol {
     /// - Parameters:
     ///     - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
     public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
-        return wholeRomanNumerals(lowercase: lowercase)
+        return romanNumerals(lowercase: lowercase)
     }
 
     // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.στουςΕλληνικούςΑριθμούς(μικράΓράμματα:κεραία:)_]
@@ -47,6 +47,14 @@ extension WholeNumberProtocol {
     ///
     /// - Precondition: Ο αριθμός είναι σε Αʹ–͵ΘϠϞΘʹ.
     public func στουςΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
-        return φυσικοίΕλληνικοίΑριθμοί(μικράΓράμματα: μικράΓράμματα, κεραία: κεραία)
+        return ελληνικοίΑριθμοί(μικράΓράμματα: μικράΓράμματα, κεραία: κεραία)
+    }
+
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.בספרות־עבריות(גרשיים:)_]
+    /// מחזירה את המספר בספרות עבריות.
+    ///
+    /// - Precondition: המספר ב־א׳–ט׳תתקצ״ט.
+    public func בספרות־עבריות(גרשיים: Bool = true) -> StrictString {
+        return ספרות־עבריות(גרשיים: גרשיים)
     }
 }
