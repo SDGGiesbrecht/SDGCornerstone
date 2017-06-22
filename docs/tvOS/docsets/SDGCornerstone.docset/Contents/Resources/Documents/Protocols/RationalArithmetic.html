@@ -71,6 +71,12 @@
                 <a href="../Enums/BuildConfiguration.html">BuildConfiguration</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Casing.html">Casing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EnglishCasing.html">EnglishCasing</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/FillDirection.html">FillDirection</a>
               </li>
               <li class="nav-group-task">
@@ -128,6 +134,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/FloatingPoint.html">FloatingPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Hashable.html">Hashable</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Optional.html">Optional</a>
@@ -344,7 +353,7 @@
                 <a href="../Protocols/FiniteSet.html">FiniteSet</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:P14SDGCornerstone15IntegerProtocol">IntegerProtocol</a>
+                <a href="../Protocols/IntegerProtocol.html">IntegerProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
@@ -392,7 +401,7 @@
                 <a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:P14SDGCornerstone22RationalNumberProtocol">RationalNumberProtocol</a>
+                <a href="../Protocols/RationalNumberProtocol.html">RationalNumberProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/RealArithmetic.html">RealArithmetic</a>
@@ -754,6 +763,83 @@
                               <td>
                                 <div>
                                   <p>The randomizer to use to generate the random value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE14SDGCornerstonePS_18RationalArithmetic8inDigitsFT20maximumDecimalPlacesSi14radixCharacterSc18thousandsSeparatorSc_VS_12StrictString"></a>
+                    <a name="//apple_ref/swift/Method/inDigits(maximumDecimalPlaces:radixCharacter:thousandsSeparator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE14SDGCornerstonePS_18RationalArithmetic8inDigitsFT20maximumDecimalPlacesSi14radixCharacterSc18thousandsSeparatorSc_VS_12StrictString">inDigits(maximumDecimalPlaces:radixCharacter:thousandsSeparator:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the number in digits.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">inDigits</span><span class="p">(</span><span class="nv">maximumDecimalPlaces</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">radixCharacter</span><span class="p">:</span> <span class="kt">UnicodeScalar</span><span class="p">,</span> <span class="nv">thousandsSeparator</span><span class="p">:</span> <span class="kt">UnicodeScalar</span> <span class="o">=</span> <span class="s">" "</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">StrictString</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>maximumDecimalPlaces</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum number of decimal places.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>radixCharacter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The character to use to represent the radix.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>thousandsSeparator</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The thousands separator. (Space by default.)</p>
                                 </div>
                               </td>
                             </tr>

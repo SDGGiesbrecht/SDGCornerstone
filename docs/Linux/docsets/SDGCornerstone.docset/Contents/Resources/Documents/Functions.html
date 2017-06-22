@@ -70,6 +70,12 @@
                 <a href="Enums/BuildConfiguration.html">BuildConfiguration</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/Casing.html">Casing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/EnglishCasing.html">EnglishCasing</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/FillDirection.html">FillDirection</a>
               </li>
               <li class="nav-group-task">
@@ -127,6 +133,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/FloatingPoint.html">FloatingPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Hashable.html">Hashable</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/Optional.html">Optional</a>
@@ -337,7 +346,7 @@
                 <a href="Protocols/FiniteSet.html">FiniteSet</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols.html#/s:P14SDGCornerstone15IntegerProtocol">IntegerProtocol</a>
+                <a href="Protocols/IntegerProtocol.html">IntegerProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
@@ -385,7 +394,7 @@
                 <a href="Protocols/RationalArithmetic.html">RationalArithmetic</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols.html#/s:P14SDGCornerstone22RationalNumberProtocol">RationalNumberProtocol</a>
+                <a href="Protocols/RationalNumberProtocol.html">RationalNumberProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/RealArithmetic.html">RealArithmetic</a>
@@ -1355,7 +1364,7 @@ _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..&lt; 10 ? 1 : −(|$0|) }
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">findLocalMaximum</span><span class="o">&lt;</span><span class="kt">I</span> <span class="p">:</span> <span class="kt"><a href="Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a></span><span class="p">,</span> <span class="kt">O</span> <span class="p">:</span> <span class="kt">Comparable</span><span class="o">&gt;</span><span class="p">(</span><span class="n">near</span> <span class="nv">location</span><span class="p">:</span> <span class="kt">I</span><span class="p">,</span> <span class="n">within</span> <span class="nv">bounds</span><span class="p">:</span> <span class="kt">CountableClosedRange</span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">inFunction</span> <span class="nv">function</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">I</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">O</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">I</span> <span class="k">where</span> <span class="kt">I</span><span class="o">.</span><span class="kt">Vector</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:P14SDGCornerstone15IntegerProtocol">IntegerProtocol</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">findLocalMaximum</span><span class="o">&lt;</span><span class="kt">I</span> <span class="p">:</span> <span class="kt"><a href="Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a></span><span class="p">,</span> <span class="kt">O</span> <span class="p">:</span> <span class="kt">Comparable</span><span class="o">&gt;</span><span class="p">(</span><span class="n">near</span> <span class="nv">location</span><span class="p">:</span> <span class="kt">I</span><span class="p">,</span> <span class="n">within</span> <span class="nv">bounds</span><span class="p">:</span> <span class="kt">CountableClosedRange</span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">inFunction</span> <span class="nv">function</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">I</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">O</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">I</span> <span class="k">where</span> <span class="kt">I</span><span class="o">.</span><span class="kt">Vector</span> <span class="p">:</span> <span class="kt"><a href="Protocols/IntegerProtocol.html">IntegerProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1492,7 +1501,7 @@ _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..&lt; 10 ? −1 : |$0| }
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">findLocalMinimum</span><span class="o">&lt;</span><span class="kt">I</span> <span class="p">:</span> <span class="kt"><a href="Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a></span><span class="p">,</span> <span class="kt">O</span> <span class="p">:</span> <span class="kt">Comparable</span><span class="o">&gt;</span><span class="p">(</span><span class="n">near</span> <span class="nv">location</span><span class="p">:</span> <span class="kt">I</span><span class="p">,</span> <span class="n">within</span> <span class="nv">bounds</span><span class="p">:</span> <span class="kt">CountableClosedRange</span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">inFunction</span> <span class="nv">function</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">I</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">O</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">I</span> <span class="k">where</span> <span class="kt">I</span><span class="o">.</span><span class="kt">Vector</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:P14SDGCornerstone15IntegerProtocol">IntegerProtocol</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">findLocalMinimum</span><span class="o">&lt;</span><span class="kt">I</span> <span class="p">:</span> <span class="kt"><a href="Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a></span><span class="p">,</span> <span class="kt">O</span> <span class="p">:</span> <span class="kt">Comparable</span><span class="o">&gt;</span><span class="p">(</span><span class="n">near</span> <span class="nv">location</span><span class="p">:</span> <span class="kt">I</span><span class="p">,</span> <span class="n">within</span> <span class="nv">bounds</span><span class="p">:</span> <span class="kt">CountableClosedRange</span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">inFunction</span> <span class="nv">function</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">I</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">O</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">I</span> <span class="k">where</span> <span class="kt">I</span><span class="o">.</span><span class="kt">Vector</span> <span class="p">:</span> <span class="kt"><a href="Protocols/IntegerProtocol.html">IntegerProtocol</a></span></code></pre>
 
                         </div>
                       </div>
