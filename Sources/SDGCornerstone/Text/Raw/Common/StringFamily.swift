@@ -28,6 +28,10 @@ public protocol StringFamily : Comparable, CustomStringConvertible, Equatable, E
     // MARK: - Initialization
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(scalars:)_]
+    /// Creates an empty string.
+    init()
+
+    // [_Define Documentation: SDGCornerstone.StringFamily.init(scalars:)_]
     /// Creates a string from a collection of scalars.
     init(_ scalars: ScalarView)
 
@@ -44,4 +48,25 @@ public protocol StringFamily : Comparable, CustomStringConvertible, Equatable, E
     // [_Define Documentation: SDGCornerstone.StringFamily.clusters_]
     /// A view of a string’s contents as a collection of extended grapheme clusters.
     var clusters: ClusterView { get set }
+}
+
+extension StringFamily where ScalarView.Iterator.Element == UnicodeScalar /* [_Workaround: The where statement is redundant. Once the constraint can be added to the protocol, it should be removed here. (Swift 3.1.0)_] */ {
+    // MARK: - where ScalarView.Iterator.Element == UnicodeScalar
+
+    // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]
+    /// Creates a string from a collection of lines.
+    public init(_ lines: LineView<Self>) {
+        self = lines.base
+    }
+
+    // [_Define Documentation: SDGCornerstone.StringFamily.lines_]
+    /// A view of a string’s contents as a collection of lines.
+    public var lines: LineView<Self> {
+        get {
+            return LineView(self)
+        }
+        set {
+            self = newValue.base
+        }
+    }
 }

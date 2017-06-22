@@ -34,6 +34,8 @@ extension IntegerProtocol {
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:)_]
     /// Returns the number in roman numerals.
     ///
+    /// - Precondition: The number must be in the range I–MMMCMXCIX.
+    ///
     /// - Parameters:
     ///     - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
     public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
