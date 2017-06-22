@@ -77,7 +77,11 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - BidirectionalCollection
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.index(before:)_]
+    // [_Inherit Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+    /// Returns the index immediately before the specified index.
+    ///
+    /// - Parameters:
+    ///     - i: The following index.
     public func index(before i: Index) -> Index {
         return Index(i.value − 1)
     }
@@ -85,6 +89,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     // MARK: - Collection
 
     // [_Inherit Documentation: SDGCornerstone.Collection.Indices_]
+    /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultRandomAccessIndices<LineView>
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
@@ -98,11 +103,16 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+    /// Returns the index immediately after the specified index.
+    ///
+    /// - Parameters:
+    ///     - i: The preceding index.
     public func index(after i: Index) -> Index {
         return Index(i.value + 1)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+    /// Accesses the element at the specified position.
     public subscript(_ position: Index) -> Line<Base> {
         get {
             return lines[position.value]
