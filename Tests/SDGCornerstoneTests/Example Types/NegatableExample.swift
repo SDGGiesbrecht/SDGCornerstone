@@ -40,6 +40,12 @@ struct NegatableExample : Negatable {
         return lhs.value == rhs.value
     }
 
+    // Hashable
+
+    var hashValue: Int {
+        return value
+    }
+
     // Subtractable
 
     static func −= (lhs: inout NegatableExample, rhs: NegatableExample) {

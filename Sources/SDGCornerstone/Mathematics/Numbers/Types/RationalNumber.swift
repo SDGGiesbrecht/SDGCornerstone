@@ -20,7 +20,7 @@
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, WholeArithmetic {
+public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -158,6 +158,14 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
         self.init(floatingPointLiteral: value)
     }
 
+    // MARK: - Hashable
+
+    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    /// The hash value.
+    public var hashValue: Int {
+        return numerator.hashValue
+    }
+
     // MARK: - IntegralArithmetic
 
     // [_Inherit Documentation: SDGCornerstone.IntegralArithmetic.init(int:)_]
@@ -205,6 +213,14 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
         irregular.numerator ×= rhs.denominator
         irregular.denominator ×= rhs.numerator
         lhs.definition = irregular
+    }
+
+    // MARK: - RationalNumberProtocol
+
+    // [_Define Documentation: SDGCornerstone.RationalNumberProtocol.reducedSimpleFraction()_]
+    /// Returns the numerator and denominator of the number as a reduced simple fraction.
+    public func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer) {
+        return (numerator, denominator)
     }
 
     // MARK: - Subtractable

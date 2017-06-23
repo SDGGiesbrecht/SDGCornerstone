@@ -28,16 +28,22 @@ struct VectorProtocolExample : VectorProtocol {
         lhs.value += rhs.value
     }
 
+    // AdditiveArithmetic
+
+    static var additiveIdentity: VectorProtocolExample {
+        return VectorProtocolExample(0)
+    }
+
     // Equatable
 
     static func == (lhs: VectorProtocolExample, rhs: VectorProtocolExample) -> Bool {
         return lhs.value == rhs.value
     }
 
-    // AdditiveArithmetic
+    // Hashable
 
-    static var additiveIdentity: VectorProtocolExample {
-        return VectorProtocolExample(0)
+    var hashValue: Int {
+        return value.hashValue
     }
 
     // VectorProtocol

@@ -231,6 +231,10 @@ class MathematicsTests : TestCase {
         runStrideableTests(RealArithmeticExample.self)
     }
 
+    func testMeasurement() {
+        XCTAssert(0°.hashValue ≤ Int.max)
+    }
+
     func testNegatable() {
         func runTests<N : Negatable>(_ type: N.Type, value: N, inverse: N) {
             var variable = value
@@ -334,6 +338,42 @@ class MathematicsTests : TestCase {
         runTests(RationalNumber.self)
         runTests(RationalNumberProtocolExample.self)
         runTests(RealArithmeticExample.self)
+
+        let negativeNineteenOverTwo: RationalNumber = −19 ÷ 2
+        let six: RationalNumber = 6
+        let fiftyThousandOneOverTenThousand: RationalNumber = 50_001 ÷ 10_000
+
+        XCTAssert(negativeNineteenOverTwo.asSimpleFraction() == "−19⁄2", "\(negativeNineteenOverTwo.asSimpleFraction()) ≠ −19⁄2")
+        XCTAssert(six.asSimpleFraction() == "6", "\(six.asSimpleFraction()) ≠ 6")
+        XCTAssert(fiftyThousandOneOverTenThousand.asSimpleFraction() == "(50 001)⁄(10 000)", "\(fiftyThousandOneOverTenThousand.asSimpleFraction()) ≠ (50 001)⁄(10 000)")
+
+        XCTAssert(negativeNineteenOverTwo.asMixedFraction() == "−9 1⁄2", "\(negativeNineteenOverTwo.asMixedFraction()) ≠ −9 1⁄2")
+        XCTAssert(six.asMixedFraction() == "6", "\(six.asMixedFraction()) ≠ 6")
+        XCTAssert(fiftyThousandOneOverTenThousand.asMixedFraction() == "5 + 1⁄(10 000)", "\(fiftyThousandOneOverTenThousand.asMixedFraction()) ≠ 5 + 1⁄(10 000)")
+
+        XCTAssert(negativeNineteenOverTwo.asRatio() == "−19 ∶ 2", "\(negativeNineteenOverTwo.asRatio()) ≠ −19 ∶ 2")
+        XCTAssert(six.asRatio() == "6 ∶ 1", "\(six.asRatio()) ≠ 6 ∶ 1")
+        XCTAssert(fiftyThousandOneOverTenThousand.asRatio() == "50 001 ∶ 10 000", "\(fiftyThousandOneOverTenThousand.asRatio()) ≠ 50 001 ∶ 10 000")
+
+        XCTAssert((1 as RationalNumber).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "1", "\((1 as RationalNumber).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 1")
+        XCTAssert((1 as RationalNumber ÷ 10).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.1", "\((1 as RationalNumber ÷ 10).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.1")
+        XCTAssert((9 as RationalNumber ÷ 10).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.9", "\((9 as RationalNumber ÷ 10).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.9")
+        XCTAssert((1 as RationalNumber ÷ 100).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.01", "\((1 as RationalNumber ÷ 100).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.01")
+        XCTAssert((99 as RationalNumber ÷ 100).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.99", "\((99 as RationalNumber ÷ 100).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.99")
+        XCTAssert((1 as RationalNumber ÷ 1000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.001", "\((1 as RationalNumber ÷ 1000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.001")
+        XCTAssert((999 as RationalNumber ÷ 1000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999", "\((999 as RationalNumber ÷ 1000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999")
+        XCTAssert((1 as RationalNumber ÷ 10_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.000 1", "\((1 as RationalNumber ÷ 10_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.000 1")
+        XCTAssert((9999 as RationalNumber ÷ 10_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999 9", "\((9999 as RationalNumber ÷ 10_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999 9")
+        XCTAssert((1 as RationalNumber ÷ 100_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.000 01", "\((1 as RationalNumber ÷ 100_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.000 01")
+        XCTAssert((99_999 as RationalNumber ÷ 100_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999 99", "\((99_999 as RationalNumber ÷ 100_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999 99")
+        XCTAssert((1 as RationalNumber ÷ 1_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.000 001", "\((1 as RationalNumber ÷ 1_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.000 001")
+        XCTAssert((999_999 as RationalNumber ÷ 1_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999 999", "\((999_999 as RationalNumber ÷ 1_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999 999")
+        XCTAssert((1 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.000 000 1", "\((1 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.000 000 1")
+        XCTAssert((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".") == "0.999 999 9", "\((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 7, radixCharacter: ".")) ≠ 0.999 999 9")
+
+        XCTAssert((1 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") == "0.000", "\((1 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) ≠ 0.000")
+        XCTAssert((999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") == "0.100", "\((999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) ≠ 0.100")
+        XCTAssert((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") == "1.000", "\((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) ≠ 1.000")
     }
 
     func testRealArithmetic() {
@@ -551,6 +591,62 @@ class MathematicsTests : TestCase {
         runTests(WholeNumber.self)
         runTests(Integer.self)
         runTests(RationalNumber.self)
+
+        XCTAssert((0 as UInt).inDigits() == "0", "\((0 as UInt).inDigits()) ≠ 0")
+        XCTAssert((1 as UInt).inDigits() == "1", "\((1 as UInt).inDigits()) ≠ 1")
+        XCTAssert((9 as UInt).inDigits() == "9", "\((9 as UInt).inDigits()) ≠ 9")
+        XCTAssert((10 as UInt).inDigits() == "10", "\((10 as UInt).inDigits()) ≠ 10")
+        XCTAssert((999 as UInt).inDigits() == "999", "\((999 as UInt).inDigits()) ≠ 999")
+        XCTAssert((1000 as UInt).inDigits() == "1000", "\((1000 as UInt).inDigits()) ≠ 1000")
+        XCTAssert((9999 as UInt).inDigits() == "9999", "\((9999 as UInt).inDigits()) ≠ 9999")
+        XCTAssert((10_000 as UInt).inDigits() == "10 000", "\((10_000 as UInt).inDigits()) ≠ 10 000")
+        XCTAssert((999_999 as UInt).inDigits() == "999 999", "\((999_999 as UInt).inDigits()) ≠ 999 999")
+        XCTAssert((1_000_000 as UInt).inDigits() == "1 000 000", "\((1_000_000 as UInt).inDigits()) ≠ 1 000 000")
+        XCTAssert((999_999_999 as UInt).inDigits() == "999 999 999", "\((999_999_999 as UInt).inDigits()) ≠ 999 999 999")
+        XCTAssert((1_000_000_000 as UInt).inDigits() == "1 000 000 000", "\((1_000_000_000 as UInt).inDigits()) ≠ 1 000 000 000")
+
+        XCTAssert(1111.inRomanNumerals() == "MCXI", "\(1111.inRomanNumerals()) ≠ MCXI")
+        XCTAssert(2222.inRomanNumerals() == "MMCCXXII", "\(2222.inRomanNumerals()) ≠ MMCCXXII")
+        XCTAssert(3333.inRomanNumerals() == "MMMCCCXXXIII", "\(3333.inRomanNumerals()) ≠ MMMCCCXXXIII")
+        XCTAssert(444.inRomanNumerals() == "CDXLIV", "\(444.inRomanNumerals()) ≠ CDXLIV")
+        XCTAssert(555.inRomanNumerals() == "DLV", "\(555.inRomanNumerals()) ≠ DLV")
+        XCTAssert(666.inRomanNumerals() == "DCLXVI", "\(666.inRomanNumerals()) ≠ DCLXVI")
+        XCTAssert(777.inRomanNumerals() == "DCCLXXVII", "\(777.inRomanNumerals()) ≠ DCCLXXVII")
+        XCTAssert(888.inRomanNumerals() == "DCCCLXXXVIII", "\(888.inRomanNumerals()) ≠ DCCCLXXXVIII")
+        XCTAssert(999.inRomanNumerals() == "CMXCIX", "\(999.inRomanNumerals()) ≠ CMXCIX")
+        XCTAssert(1000.inRomanNumerals(lowercase: true) == "m", "\(1000.inRomanNumerals(lowercase: true)) ≠ m")
+        XCTAssert((1 as Int8).inRomanNumerals() == "I", "\((1 as Int8).inRomanNumerals()) ≠ I")
+        XCTAssert((1 as UInt8).inRomanNumerals() == "I", "\((1 as UInt8).inRomanNumerals()) ≠ I")
+
+        XCTAssert(1111.στουςΕλληνικούςΑριθμούς() == "͵ΑΡΙΑʹ", "\(1111.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΑΡΙΑʹ")
+        XCTAssert(2222.στουςΕλληνικούςΑριθμούς() == "͵ΒΣΚΒʹ", "\(2222.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΒΣΚΒʹ")
+        XCTAssert(3333.στουςΕλληνικούςΑριθμούς() == "͵ΓΤΛΓʹ", "\(3333.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΓΤΛΓʹ")
+        XCTAssert(4444.στουςΕλληνικούςΑριθμούς() == "͵ΔΥΜΔʹ", "\(4444.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΔΥΜΔʹ")
+        XCTAssert(5555.στουςΕλληνικούςΑριθμούς() == "͵ΕΦΝΕʹ", "\(5555.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΕΦΝΕʹ")
+        XCTAssert(6666.στουςΕλληνικούςΑριθμούς() == "͵ϚΧΞϚʹ", "\(6666.στουςΕλληνικούςΑριθμούς()) ≠ ͵ϚΧΞϚʹ")
+        XCTAssert(7777.στουςΕλληνικούςΑριθμούς() == "͵ΖΨΟΖʹ", "\(7777.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΖΨΟΖʹ")
+        XCTAssert(8888.στουςΕλληνικούςΑριθμούς() == "͵ΗΩΠΗʹ", "\(8888.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΗΩΠΗʹ")
+        XCTAssert(9999.στουςΕλληνικούςΑριθμούς() == "͵ΘϠϞΘʹ", "\(9999.στουςΕλληνικούςΑριθμούς()) ≠ ͵ΘϠϞΘʹ")
+        XCTAssert(2222.στουςΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false) == "βσκβ", "\(2222.στουςΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false)) ≠ βσκβ")
+        XCTAssert((1 as Int8).στουςΕλληνικούςΑριθμούς() == "Αʹ", "\((1 as Int8).στουςΕλληνικούςΑριθμούς()) ≠ Αʹ")
+        XCTAssert((1 as UInt8).στουςΕλληνικούςΑριθμούς() == "Αʹ", "\((1 as UInt8).στουςΕλληνικούςΑριθμούς()) ≠ Αʹ")
+        XCTAssert(10.στουςΕλληνικούςΑριθμούς() == "Ιʹ", "\(10.στουςΕλληνικούςΑριθμούς()) ≠ Ιʹ")
+
+        XCTAssert(1111.בספרות־עבריות() == "א׳קי״א", "\(1111.בספרות־עבריות()) ≠ א׳קי״א")
+        XCTAssert(2222.בספרות־עבריות() == "ב׳רכ״ב", "\(2222.בספרות־עבריות()) ≠ ב׳רכ״ב")
+        XCTAssert(3333.בספרות־עבריות() == "ג׳של״ג", "\(3333.בספרות־עבריות()) ≠ ג׳של״ג")
+        XCTAssert(4444.בספרות־עבריות() == "ד׳תמ״ד", "\(4444.בספרות־עבריות()) ≠ ד׳תמ״ד")
+        XCTAssert(5555.בספרות־עבריות() == "ה׳תקנ״ה", "\(5555.בספרות־עבריות()) ≠ ה׳תקנ״ה")
+        XCTAssert(6666.בספרות־עבריות() == "ו׳תרס״ו", "\(6666.בספרות־עבריות()) ≠ ו׳תרס״ו")
+        XCTAssert(7777.בספרות־עבריות() == "ז׳תשע״ז", "\(7777.בספרות־עבריות()) ≠ ז׳תשע״ז")
+        XCTAssert(8888.בספרות־עבריות() == "ח׳תתפ״ח", "\(8888.בספרות־עבריות()) ≠ ח׳תתפ״ח")
+        XCTAssert(9999.בספרות־עבריות() == "ט׳תתקצ״ט", "\(9999.בספרות־עבריות()) ≠ ט׳תתקצ״ט")
+        XCTAssert(2222.בספרות־עבריות(גרשיים: false) == "ברכב", "\(2222.בספרות־עבריות(גרשיים: false)) ≠ ברכב")
+        XCTAssert(15.בספרות־עבריות() == "ט״ו", "\(15.בספרות־עבריות()) ≠ ט״ו")
+        XCTAssert(16.בספרות־עבריות() == "ט״ז", "\(16.בספרות־עבריות()) ≠ ט״ז")
+        XCTAssert(10.בספרות־עבריות() == "י׳", "\(10.בספרות־עבריות()) ≠ י׳")
+        XCTAssert((1 as Int8).בספרות־עבריות() == "א׳", "\((1 as Int8).בספרות־עבריות()) ≠ א׳")
+        XCTAssert((1 as UInt8).בספרות־עבריות() == "א׳", "\((1 as UInt8).בספרות־עבריות()) ≠ א׳")
     }
 
     static var allTests: [(String, (MathematicsTests) -> () throws -> Void)] {
@@ -562,6 +658,7 @@ class MathematicsTests : TestCase {
             ("testDouble", testDouble),
             ("testFunctionAnalysis", testFunctionAnalysis),
             ("testIntegralArithmetic", testIntegralArithmetic),
+            ("testMeasurement", testMeasurement),
             ("testNegatable", testNegatable),
             ("testOneDimensionalPoint", testOneDimensionalPoint),
             ("testPointProtocol", testPointProtocol),

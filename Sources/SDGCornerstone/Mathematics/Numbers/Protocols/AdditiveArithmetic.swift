@@ -18,10 +18,10 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `Equatable`
+/// - `Hashable`
 /// - `Subtractable`
 /// - `IntegralArithmetic`, `WholeNumberProtocol`, `ExpressibleByIntegerLiteral` or `static var additiveIdentity: Self { get }`
-public protocol AdditiveArithmetic : Equatable, Subtractable {
+public protocol AdditiveArithmetic : Hashable, Subtractable {
 
     // [_Define Documentation: SDGCornerstone.AdditiveArithmetic.additiveIdentity_]
     /// The additive identity (origin).

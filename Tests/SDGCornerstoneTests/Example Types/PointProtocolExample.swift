@@ -59,6 +59,12 @@ struct PointProtocolExampleWhereVectorIsSelf : Negatable, PointProtocol {
         return lhs.value == rhs.value
     }
 
+    // Hashable
+
+    var hashValue: Int {
+        return value
+    }
+
     // PointProtocol
 
     typealias Vector = PointProtocolExampleWhereVectorIsSelf

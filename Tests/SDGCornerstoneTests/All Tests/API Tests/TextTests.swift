@@ -39,6 +39,41 @@ class TextTests : TestCase {
         XCTAssert(CharacterSet.whitespaces.linuxSafeIsEqual(to: CharacterSet.whitespaces))
     }
 
+    func testLineView() {
+        let fileLines = [
+            "Line 1",
+            "Line 2",
+            "Line 3"
+        ]
+        var file = fileLines.joined(separator: "\n")
+        XCTAssert(file.lines.map({ $0.line }) == fileLines, "\(file.lines.map({ $0.line })) ≠ \(fileLines)")
+
+        file = fileLines.joined(separator: "\u{D}\u{A}")
+        XCTAssert(file.lines.map({ $0.line }) == fileLines, "\(file.lines.map({ $0.line })) ≠ \(fileLines)")
+
+        file.lines.removeFirst()
+        XCTAssert(file.lines.map({ $0.line }) == Array(fileLines.dropFirst()), "\(file.lines.map({ $0.line })) ≠ \(Array(fileLines.dropFirst()))")
+
+        XCTAssert(file.lines.startIndex.hashValue ≤ Int.max)
+        var index = file.lines.startIndex
+        index += 1
+        XCTAssert(file.lines.index(after: file.lines.startIndex) == index)
+        XCTAssert(index − file.lines.startIndex == file.lines.distance(from: file.lines.startIndex, to: index))
+        XCTAssert(file.lines.index(before: index) == file.lines.startIndex)
+
+        file = fileLines.joined(separator: "\n")
+        file.lines[index] = Line(line: "Replaced", newline: "\u{2029}")
+        XCTAssert(file == "Line 1\nReplaced\u{2029}Line 3", "\(file) ≠ Line 1\nReplaced\u{2029}Line 3")
+
+        XCTAssert(String(LineView<String>()) == "", "\(String(LineView<String>())) ≠ ")
+        XCTAssert(String(LineView<String>([Line(line: "", newline: "\n")])) == "\n")
+        var lines = LineView<String>()
+        lines.append(contentsOf: [Line(line: "", newline: "\n")])
+        XCTAssert(String(lines) == "\n")
+        lines.insert(contentsOf: [Line(line: "", newline: "\n")], at: lines.startIndex)
+        XCTAssert(String(lines) == "\n\n")
+    }
+
     func testStrictString() {
 
         var string = StrictString("\u{BC}")
@@ -229,6 +264,8 @@ class TextTests : TestCase {
     static var allTests: [(String, (TextTests) -> () throws -> Void)] {
         return [
             ("testCharacterSet", testCharacterSet),
+            ("testLineView", testLineView),
+            ("testStrictString", testStrictString),
             ("testString", testString),
             ("testUnicodeScalar", testUnicodeScalar),
             ("testUnicodeScalarView", testUnicodeScalarView)

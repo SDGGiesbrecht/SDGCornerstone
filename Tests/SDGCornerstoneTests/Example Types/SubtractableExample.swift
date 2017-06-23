@@ -59,6 +59,12 @@ struct SubtractableExampleWherePointProtocolAndVectorIsSelf : Negatable, PointPr
         return lhs.value == rhs.value
     }
 
+    // Hashable
+
+    var hashValue: Int {
+        return value.hashValue
+    }
+
     // PointProtocol
 
     typealias Vector = SubtractableExampleWherePointProtocolAndVectorIsSelf

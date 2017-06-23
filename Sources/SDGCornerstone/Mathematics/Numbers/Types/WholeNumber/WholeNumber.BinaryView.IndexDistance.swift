@@ -14,11 +14,11 @@
 
 extension WholeNumber.BinaryView {
 
-    internal struct IndexDistance : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, Negatable, SignedNumber, Subtractable {
+    internal struct IndexDistance : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, Hashable, Negatable, SignedNumber, Subtractable {
 
         // MARK: - Initialization
 
-        init(digitDistance: DigitDistance, bitDistance: BitDistance) {
+        internal init(digitDistance: DigitDistance, bitDistance: BitDistance) {
             self.digitDistance = digitDistance
             self.bitDistance = bitDistance
         }
@@ -61,13 +61,19 @@ extension WholeNumber.BinaryView {
 
         // MARK: - ExpressibleByIntegerLiteral
 
-        init(integerLiteral: UIntMax) {
+        internal init(integerLiteral: UIntMax) {
             let bitsPerDigit = BinaryView<WholeNumber.Digit>.count
 
             let digits = DigitDistance(BitDistance(integerLiteral).dividedAccordingToEuclid(by: bitsPerDigit))
             let bits = BitDistance(integerLiteral).mod(bitsPerDigit)
 
             self = IndexDistance(digitDistance: digits, bitDistance: bits)
+        }
+
+        // MARK: - Hashable
+
+        internal var hashValue: Int {
+            return bitDistance.hashValue
         }
 
         // MARK: - Negatable
