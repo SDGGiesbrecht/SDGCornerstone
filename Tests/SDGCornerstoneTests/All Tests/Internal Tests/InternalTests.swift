@@ -51,6 +51,8 @@ class InternalTests : TestCase {
         XCTAssert(index.digitDistance == 0)
 
         XCTAssert(WholeNumber.BinaryView(0).endIndex == WholeNumber.BinaryView.Index(digit: 0, bit: 0))
+
+        XCTAssert(WholeNumber.BinaryView.IndexDistance(digitDistance: 0, bitDistance: 0).hashValue ≤ Int.max)
     }
 
     static var allTests: [(String, (InternalTests) -> () throws -> Void)] {

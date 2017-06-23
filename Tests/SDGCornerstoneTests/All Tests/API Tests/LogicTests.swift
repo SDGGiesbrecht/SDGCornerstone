@@ -46,6 +46,22 @@ class LogicTests : TestCase {
         variable = false
         variable ∨= true
         XCTAssert(variable == true)
+
+        for boolean in [true, false] {
+            XCTAssert(boolean.checkOrX() ≠ "")
+            XCTAssert(boolean.trueOrFalse(.sentenceMedial) ≠ "")
+            XCTAssert(boolean.yesOrNo(.sentenceMedial) ≠ "")
+            XCTAssert(boolean.wahrOderFalsch(.sentenceMedial) ≠ "")
+            XCTAssert(boolean.jaOderNein(.sentenceMedial) ≠ "")
+            XCTAssert(boolean.vraiOuFaux(.sentenceMedial) ≠ "")
+            XCTAssert(boolean.ouiOuNon(.sentenceMedial) ≠ "")
+            XCTAssert(boolean.αληθήςΉΨευδής(.sentenceMedial) ≠ "")
+            XCTAssert(boolean.ναιΉΌχι(.sentenceMedial) ≠ "")
+            XCTAssert(boolean.חיובי־או־שלילי() ≠ "")
+            XCTAssert(boolean.כן־או־לא() ≠ "")
+        }
+        XCTAssert(true.trueOrFalse(.titleInitial) == "True")
+        XCTAssert(false.ναιΉΌχι(.sentenceInitial) == "Όχι")
     }
 
     func testAny() {

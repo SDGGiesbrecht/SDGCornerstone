@@ -853,16 +853,13 @@ extension WholeArithmetic {
     }
 
     internal func romanNumerals(lowercase: Bool) -> StrictString {
-        let warning = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        let warning = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
             switch localization {
             case .englishCanada:
                 return "Roman numerals are only supported in the range I–MMMCMXCIX."
             }
         })
-        assert(0 < self
-            ∧ (self is Int8
-                ∨ self is UInt8
-                ∨ self < 4000), warning)
+        assert(0 < self ∧ (self is Int8 ∨ self is UInt8 ∨ self < 4000), warning)
 
         func format(_ string: StrictString) -> StrictString {
             if lowercase {
@@ -970,16 +967,13 @@ extension WholeArithmetic {
     }
 
     internal func ελληνικοίΑριθμοί(μικράΓράμματα: Bool, κεραία: Bool) -> StrictString {
-        let προειδοποίηση = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        let προειδοποίηση = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
             switch localization {
             case .englishCanada:
                 return "Greek numerals are only supported in the range Αʹ–͵ΘϠϞΘʹ."
             }
         })
-        assert(0 < self
-            ∧ (self is Int8
-                ∨ self is UInt8
-                ∨ self < 10_000), προειδοποίηση)
+        assert(0 < self ∧ (self is Int8 ∨ self is UInt8 ∨ self < 10_000), προειδοποίηση)
 
         func μορφοποίηση(_ κείμενο: StrictString) -> StrictString {
             if μικράΓράμματα {
@@ -1111,16 +1105,13 @@ extension WholeArithmetic {
     }
 
     internal func ספרות־עבריות(גרשיים: Bool) -> StrictString {
-        let אזהרה = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        let אזהרה = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
             switch localization {
             case .englishCanada:
                 return "Hebrew numerals are only supported in the range א׳–ט׳תתקצ״ט."
             }
         })
-        assert(0 < self
-            ∧ (self is Int8
-                ∨ self is UInt8
-                ∨ self < 10_000), אזהרה)
+        assert(0 < self ∧ (self is Int8 ∨ self is UInt8 ∨ self < 10_000), אזהרה)
 
         var מספר = self
         var תוצאה: StrictString = ""

@@ -18,7 +18,7 @@ extension WholeNumber.BinaryView {
 
         // MARK: - Initialization
 
-        init(digitDistance: DigitDistance, bitDistance: BitDistance) {
+        internal init(digitDistance: DigitDistance, bitDistance: BitDistance) {
             self.digitDistance = digitDistance
             self.bitDistance = bitDistance
         }
@@ -61,7 +61,7 @@ extension WholeNumber.BinaryView {
 
         // MARK: - ExpressibleByIntegerLiteral
 
-        init(integerLiteral: UIntMax) {
+        internal init(integerLiteral: UIntMax) {
             let bitsPerDigit = BinaryView<WholeNumber.Digit>.count
 
             let digits = DigitDistance(BitDistance(integerLiteral).dividedAccordingToEuclid(by: bitsPerDigit))
@@ -72,9 +72,7 @@ extension WholeNumber.BinaryView {
 
         // MARK: - Hashable
 
-        // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
-        /// The hash value.
-        public var hashValue: Int {
+        internal var hashValue: Int {
             return bitDistance.hashValue
         }
 

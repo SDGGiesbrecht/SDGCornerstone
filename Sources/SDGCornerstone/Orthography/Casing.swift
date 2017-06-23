@@ -32,7 +32,7 @@ public enum Casing {
         case .sentenceMedial:
             return string
         case .sentenceInitial:
-            let invalidUse = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            let invalidUse = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                 switch localization {
                 case .englishCanada:
                     return StrictString("Invalid use of Casing.applySimpleAlgorithm(to:). It cannot handle “\(string)”.")

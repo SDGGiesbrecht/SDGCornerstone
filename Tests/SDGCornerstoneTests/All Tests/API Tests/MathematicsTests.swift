@@ -231,6 +231,10 @@ class MathematicsTests : TestCase {
         runStrideableTests(RealArithmeticExample.self)
     }
 
+    func testMeasurement() {
+        XCTAssert(0°.hashValue ≤ Int.max)
+    }
+
     func testNegatable() {
         func runTests<N : Negatable>(_ type: N.Type, value: N, inverse: N) {
             var variable = value
@@ -626,6 +630,7 @@ class MathematicsTests : TestCase {
         XCTAssert(2222.στουςΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false) == "βσκβ", "\(2222.στουςΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false)) ≠ βσκβ")
         XCTAssert((1 as Int8).στουςΕλληνικούςΑριθμούς() == "Αʹ", "\((1 as Int8).στουςΕλληνικούςΑριθμούς()) ≠ Αʹ")
         XCTAssert((1 as UInt8).στουςΕλληνικούςΑριθμούς() == "Αʹ", "\((1 as UInt8).στουςΕλληνικούςΑριθμούς()) ≠ Αʹ")
+        XCTAssert(10.στουςΕλληνικούςΑριθμούς() == "Ιʹ", "\(10.στουςΕλληνικούςΑριθμούς()) ≠ Ιʹ")
 
         XCTAssert(1111.בספרות־עבריות() == "א׳קי״א", "\(1111.בספרות־עבריות()) ≠ א׳קי״א")
         XCTAssert(2222.בספרות־עבריות() == "ב׳רכ״ב", "\(2222.בספרות־עבריות()) ≠ ב׳רכ״ב")
@@ -639,6 +644,7 @@ class MathematicsTests : TestCase {
         XCTAssert(2222.בספרות־עבריות(גרשיים: false) == "ברכב", "\(2222.בספרות־עבריות(גרשיים: false)) ≠ ברכב")
         XCTAssert(15.בספרות־עבריות() == "ט״ו", "\(15.בספרות־עבריות()) ≠ ט״ו")
         XCTAssert(16.בספרות־עבריות() == "ט״ז", "\(16.בספרות־עבריות()) ≠ ט״ז")
+        XCTAssert(10.בספרות־עבריות() == "י׳", "\(10.בספרות־עבריות()) ≠ י׳")
         XCTAssert((1 as Int8).בספרות־עבריות() == "א׳", "\((1 as Int8).בספרות־עבריות()) ≠ א׳")
         XCTAssert((1 as UInt8).בספרות־עבריות() == "א׳", "\((1 as UInt8).בספרות־עבריות()) ≠ א׳")
     }
@@ -652,6 +658,7 @@ class MathematicsTests : TestCase {
             ("testDouble", testDouble),
             ("testFunctionAnalysis", testFunctionAnalysis),
             ("testIntegralArithmetic", testIntegralArithmetic),
+            ("testMeasurement", testMeasurement),
             ("testNegatable", testNegatable),
             ("testOneDimensionalPoint", testOneDimensionalPoint),
             ("testPointProtocol", testPointProtocol),
