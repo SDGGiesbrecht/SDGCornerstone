@@ -11,3 +11,86 @@
  Licensed under the Apache Licence, Version 2.0.
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
+
+/// A Hebrew month of a particular year.
+public struct HebrewMonthAndYear: Comparable, Equatable, OneDimensionalPoint, PointProtocol {
+
+    // MARK: - Properties
+
+    /// The month.
+    public private(set) var month: HebrewMonth
+    /// The year.
+    public private(set) var year: HebrewYear
+
+    // MARK: - Initialization
+
+    /// Creates a month in a year.
+    public init(month: HebrewMonth, year: HebrewYear) {
+        var month = month
+        month.correctForYear(leapYear: year.isLeapYear)
+        self.month = month
+        self.year = year
+    }
+
+    // MARK: - Comparable
+
+    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    public static func < (lhs: HebrewMonthAndYear, rhs: HebrewMonthAndYear) -> Bool {
+        return (lhs.year, lhs.month) < (rhs.year, rhs.month)
+    }
+
+    // MARK: - Equatable
+
+    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    public static func == (lhs: HebrewMonthAndYear, rhs: HebrewMonthAndYear) -> Bool {
+        return (lhs.year, lhs.month) == (rhs.year, rhs.month)
+    }
+
+    // MARK: - PointProtocol
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    /// The type to be used as a vector.
+    public typealias Vector = Int
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The starting point.
+    ///     - rhs: The vector to add.
+    ///
+    /// - MutatingVariant: +=
+    public static func += (lhs: inout HebrewMonthAndYear, rhs: Int) {
+        if rhs.isNegative {
+            for _ in 1 ... |rhs| {
+                lhs.month.decrementCyclically(leapYear: lhs.year.isLeapYear) { lhs.year −= 1 }
+            }
+        } else {
+            for _ in 1 ... rhs {
+                lhs.month.incrementCyclically(leapYear: lhs.year.isLeapYear) { lhs.year += 1 }
+            }
+        }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    /// Returns the vector that leads from the point on the left to the point on the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The endpoint.
+    ///     - rhs: The startpoint.
+    public static func − (lhs: HebrewMonthAndYear, rhs: HebrewMonthAndYear) -> Int {
+        var distance = 0
+        var point = lhs
+
+        while point ≠ rhs {
+            if point > rhs {
+                distance −= 1
+                point −= 1
+            } else {
+                distance += 1
+                distance += 1
+            }
+        }
+        return distance
+    }
+}
