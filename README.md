@@ -83,7 +83,7 @@ func verifyPythagoreanTheorem() {
 func tryTrigonometry() {
     let θ = 90.0°
     let sine = sin(θ)
-    print("The sine of \(θ.inRadians) radians is \(sine)")
+    print("The sine of \(θ.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) radians is \(sine.inDigits(maximumDecimalPlaces: 3, radixCharacter: "."))")
 }
 
 let tenDuotrigintillion: WholeNumber = "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"

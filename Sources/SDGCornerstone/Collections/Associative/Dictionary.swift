@@ -45,7 +45,7 @@ extension Dictionary : PropertyListValue {
     /// for _ in 1 ... 100 {
     ///     frequencies.mutateValue(for: rollDie()) { ($0 ?? 0) + 1 }
     /// }
-    /// print(frequencies.keys.sorted().map({ "\($0): \(frequencies[$0]!)" }).joined(separator: "\n"))
+    /// print(frequencies.keys.sorted().map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" }).joined(separator: "\n"))
     /// // Prints, for example:
     /// //
     /// // 1: 21

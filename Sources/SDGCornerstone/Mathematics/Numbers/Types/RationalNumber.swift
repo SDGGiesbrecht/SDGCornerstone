@@ -38,6 +38,17 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
         self.init(Integer(wholeNumber))
     }
 
+    /// Creates an instance from a floating point number.
+    public init(_ floatingPoint: FloatMax) {
+        var numerator = floatingPoint
+        var denominator: FloatMax = 1
+        while ¬numerator.isIntegral {
+            numerator ×= 2
+            denominator ×= 2
+        }
+        self.init(numerator: Integer(IntMax(numerator)), denominator: Integer(IntMax(denominator)))
+    }
+
     // MARK: - Properties
 
     private struct Definition {
@@ -139,23 +150,6 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
     ///     - rhs: Another value to compare.
     public static func == (lhs: RationalNumber, rhs: RationalNumber) -> Bool {
         return (lhs.numerator, lhs.denominator) == (rhs.numerator, rhs.denominator)
-    }
-
-    // MARK: - ExpressibleByFloatLiteral
-
-    internal init(floatingPointLiteral value: FloatMax) {
-        var numerator = value
-        var denominator: FloatMax = 1
-        while ¬numerator.isIntegral {
-            numerator ×= 2
-            denominator ×= 2
-        }
-        self.init(numerator: Integer(IntMax(numerator)), denominator: Integer(IntMax(denominator)))
-    }
-
-    /// Creates an instance from a float literal.
-    public init(floatLiteral value: FloatMax) {
-        self.init(floatingPointLiteral: value)
     }
 
     // MARK: - Hashable

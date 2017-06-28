@@ -42,7 +42,7 @@ public func unreachable(function: String = #function, file: StaticString = #file
     preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
         switch localization {
         case .englishCanada:
-            return StrictString("Something is being used in a way that violates preconditions. Line \(line) (column \(column)) of “\(function)” in “\(file)” ought to be unreachable.")
+            return StrictString("Something is being used in a way that violates preconditions. Line \(line.inDigits()) (column \(column.inDigits())) of “\(function)” in “\(file)” ought to be unreachable.")
         }
     }), file: file, line: line)
 }
@@ -51,7 +51,7 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
     return String(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
         switch localization {
         case .englishCanada:
-            return StrictString("\(function) has not been implemented yet. (\(file), Line \(line))")
+            return StrictString("\(function) has not been implemented yet. (\(file), Line \(line.inDigits()))")
         }
     }).resolved())
 }

@@ -14,7 +14,7 @@
 
 /// A type that represents a measurement that can be expressed in various units.
 ///
-/// See `Angle` for an example.
+/// See `Angle` and `CalendarInterval` for examples.
 ///
 /// - Requires: A `Measurement`’s units must be definable as ratios of one another. (For example, `Measurement` can describe angles as radians, degrees and gradians, but not temperature as Kelvins, Celsius and Fahrenheit.)
 ///

@@ -26,7 +26,7 @@ private func demonstrateIncrease() {
     for _ in 1 ... numberOfRolls {
         highestRoll.increase(to: rollDie())
     }
-    print("After rolling the die \(numberOfRolls) time(s), the highest roll was \(highestRoll).")
+    print("After rolling the die \(numberOfRolls.inDigits()) time(s), the highest roll was \(highestRoll.inDigits()).")
     // Prints, for example, “After rolling the die 5 time(s), the highest roll was 4.”
 
     // In each iteration of the for loop, a new number is rolled, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.
@@ -45,7 +45,7 @@ private func demonstrateDecrease() {
     for _ in 1 ... numberOfRolls {
         lowestRoll.decrease(to: rollDie())
     }
-    print("After rolling the die \(numberOfRolls) time(s), the lowest roll was \(lowestRoll).")
+    print("After rolling the die \(numberOfRolls.inDigits()) time(s), the lowest roll was \(lowestRoll.inDigits()).")
     // Prints, for example, “After rolling the die 5 time(s), the lowest roll was 2.”
 
     // In each iteration of the for loop, a new number is rolled, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.

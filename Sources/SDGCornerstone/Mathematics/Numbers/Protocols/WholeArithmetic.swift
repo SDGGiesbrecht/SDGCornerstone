@@ -401,7 +401,7 @@ extension WholeArithmetic {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
-                return StrictString("Base \(base) is not supported. The base must be an integer between 2 and 16 inclusive.")
+                return StrictString("Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive.")
             }
         }))
 

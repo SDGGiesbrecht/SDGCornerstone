@@ -24,3 +24,16 @@ extension ExpressibleByIntegerLiteral where Self : WholeArithmetic {
         self.init(integerLiteral)
     }
 }
+
+extension ExpressibleByIntegerLiteral where Self : RawRepresentableCalendarComponent {
+    // MARK: - where Self : RawRepresentableCalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:)_]
+    /// Creates an instance from an integer literal.
+    ///
+    /// - Parameters:
+    ///     - integerLiteral: The integer literal.
+    public init(integerLiteral: UIntMax) {
+        self.init(RawValue(integerLiteral))
+    }
+}

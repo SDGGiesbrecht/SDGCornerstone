@@ -311,7 +311,7 @@ extension Subtractable where Self : UIntFamily {
         assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
-                return StrictString("\(lhs) − \(rhs) is impossible for \(Self.self).")
+                return StrictString("\(lhs.inDigits()) − \(rhs.inDigits()) is impossible for \(Self.self).")
             }
         }))
 

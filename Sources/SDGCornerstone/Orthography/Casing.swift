@@ -35,7 +35,7 @@ public enum Casing {
             let invalidUse = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                 switch localization {
                 case .englishCanada:
-                    return StrictString("Invalid use of Casing.applySimpleAlgorithm(to:). It cannot handle “\(string)”.")
+                    return StrictString("Invalid use of \(#function). It cannot handle “\(string)”.")
                 }
             })
             assert(¬string.isEmpty, invalidUse)

@@ -143,6 +143,32 @@ extension PointProtocol where Self.Vector == Self {
     }
 }
 
+extension PointProtocol where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent {
+    // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    /// Moves the point on the left by the vector on the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The point to modify.
+    ///     - rhs: The vector to add.
+    ///
+    /// - NonmutatingVariant: +
+    public static func += (lhs: inout Self, rhs: Vector) {
+        lhs = Self(numberAlreadyElapsed: lhs.numberAlreadyElapsed + rhs)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    /// Returns the vector that leads from the point on the left to the point on the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The endpoint.
+    ///     - rhs: The startpoint.
+    public static func − (lhs: Self, rhs: Self) -> Vector {
+        return lhs.numberAlreadyElapsed − rhs.numberAlreadyElapsed
+    }
+}
+
 extension PointProtocol where Self : IntXFamily {
     // MARK: - where Self : IntXFamily
 
@@ -178,6 +204,32 @@ extension PointProtocol where Self : IntXFamily {
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Stride {
         return rhs.distance(to: lhs)
+    }
+}
+
+extension PointProtocol where Self : NumericCalendarComponent {
+    // MARK: - where Self : NumericCalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    /// Moves the point on the left by the vector on the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The point to modify.
+    ///     - rhs: The vector to add.
+    ///
+    /// - NonmutatingVariant: +
+    public static func += (lhs: inout Self, rhs: RawValue) {
+        lhs = Self(lhs.rawValue + rhs)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    /// Returns the vector that leads from the point on the left to the point on the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The endpoint.
+    ///     - rhs: The startpoint.
+    public static func − (lhs: Self, rhs: Self) -> RawValue {
+        return lhs.rawValue − rhs.rawValue
     }
 }
 

@@ -19,17 +19,43 @@
 /// - `IterableEnumeration`
 public protocol OrderedEnumeration : Comparable, IterableEnumeration {
 
+    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.increment()_]
+    /// Increments to the next case.
+    ///
+    /// - Precondition: There is a valid next case.
+    mutating func increment()
+
     // [_Define Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
     /// Returns the next case or `nil` if there are no later cases.
     func successor() -> Self?
+
+    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.decrement()_]
+    /// Decrements to the previous case.
+    ///
+    /// - Precondition: There is a valid previous case.
+    mutating func decrement()
 
     // [_Define Documentation: SDGCornerstone.OrderedEnumeration.predecessor()_]
     /// Returns the previous case or `nil` if there are no earlier cases.
     func predecessor() -> Self?
 
+    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.incrementCyclically()_]
+    /// Increments to the next case in the cycle.
+    ///
+    /// - Parameters:
+    ///     - wrap: A closure that will be executed if the incrementation wraps around to the beginnig of the sequence.
+    mutating func incrementCyclically(_ wrap: () -> Void)
+
     // [_Define Documentation: SDGCornerstone.OrderedEnumeration.cyclicSuccessor()_]
     /// Returns the next case, wrapping around to the first case if necessary.
     func cyclicSuccessor() -> Self
+
+    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.decrementCyclically()_]
+    /// Decrements to the previous case in the cycle.
+    ///
+    /// - Parameters:
+    ///     - wrap: A closure that will be executed if the decrementation wraps around to the end of the sequence.
+    mutating func decrementCyclically(_ wrap: () -> Void)
 
     // [_Define Documentation: SDGCornerstone.OrderedEnumeration.cyclicPredecessor()_]
     /// Returns the previous case, wrapping around to the last case if necessary.
@@ -39,51 +65,131 @@ public protocol OrderedEnumeration : Comparable, IterableEnumeration {
 extension OrderedEnumeration where RawValue.Vector : IntegerProtocol {
     // MARK: - where RawValue.Vector : IntegerProtocol
 
+    fileprivate mutating func incrementAsOrderedEnumeration() {
+        guard let result = successor() else {
+            preconditionFailure(UserFacingText({ [instance = self] (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return StrictString("\(instance) has no successor.")
+                }
+            }))
+        }
+        self = result
+    }
+    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.increment()_]
+    /// Increments to the next case.
+    ///
+    /// - Precondition: There is a valid next case.
+    public mutating func increment() {
+        incrementAsOrderedEnumeration()
+    }
+
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
     /// Returns the next case or `nil` if there are no later cases.
     public func successor() -> Self? {
         return successorAsIterableEnumeration()
     }
 
+    fileprivate mutating func decrementAsOrderedEnumeration() {
+        guard let result = predecessor() else {
+            preconditionFailure(UserFacingText({ [instance = self] (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return StrictString("\(instance) has no predecessor.")
+                }
+            }))
+        }
+        self = result
+    }
+    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.decrement()_]
+    /// Decrements to the previous case.
+    ///
+    /// - Precondition: There is a valid previous case.
+    public mutating func decrement() {
+        decrementAsOrderedEnumeration()
+    }
+
+    fileprivate func predecessorAsOrderedEnumeration() -> Self? {
+        return Self(rawValue: rawValue.predecessor())
+    }
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.predecessor()_]
     /// Returns the previous case or `nil` if there are no earlier cases.
     public func predecessor() -> Self? {
-        return Self(rawValue: rawValue.predecessor())
+        return predecessorAsOrderedEnumeration()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.incrementCyclically()_]
+    /// Increments to the next case in the cycle.
+    ///
+    /// - Parameters:
+    ///     - wrap: A closure that will be executed if the incrementation wraps around to the beginnig of the sequence.
+    public mutating func incrementCyclically(_ wrap: () -> Void = {}) {
+        if let next = successor() {
+            self = next
+        } else {
+            self = Self.first
+        }
     }
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.cyclicSuccessor()_]
     /// Returns the next case, wrapping around to the first case if necessary.
     public func cyclicSuccessor() -> Self {
-        if let next = successor() {
-            return next
+        var result = self
+        result.incrementCyclically()
+        return result
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.decrementCyclically()_]
+    /// Decrements to the previous case in the cycle.
+    ///
+    /// - Parameters:
+    ///     - wrap: A closure that will be executed if the decrementation wraps around to the end of the sequence.
+    public mutating func decrementCyclically(_ wrap: () -> Void = {}) {
+        if let previous = predecessor() {
+            self = previous
         } else {
-            guard let next = Self.first else {
-                preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                    switch localization {
-                    case .englishCanada:
-                        return StrictString("\(Self.self) has no first case.")
-                    }
-                }))
-            }
-            return next
+            self = Self.last
         }
     }
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.cyclicPredecessor()_]
     /// Returns the previous case, wrapping around to the last case if necessary.
     public func cyclicPredecessor() -> Self {
-        if let previous = predecessor() {
-            return previous
-        } else {
-            guard let previous = Self.cases.last else {
-                preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                    switch localization {
-                    case .englishCanada:
-                        return StrictString("\(Self.self) has no last case.")
-                    }
-                }))
-            }
-            return previous
-        }
+        var result = self
+        result.decrementCyclically()
+        return result
+    }
+}
+
+// Disambiguate OneDimensionalPoint vs OrderedEnumeration for calendar components.
+extension OrderedEnumeration where Self : OneDimensionalPoint, RawValue.Vector : IntegerProtocol, Self.Vector : IntegerProtocol {
+    // MARK: - where where Self : OneDimensionalPoint, RawValue.Vector : IntegerProtocol, Self.Vector : IntegerProtocol
+
+    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.increment()_]
+    /// Increments to the next case.
+    ///
+    /// - Precondition: There is a valid next case.
+    public mutating func increment() {
+        incrementAsOrderedEnumeration()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
+    /// Returns the next case or `nil` if there are no later cases.
+    public func successor() -> Self? {
+        return successorAsIterableEnumeration()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.decrement()_]
+    /// Decrements to the previous case.
+    ///
+    /// - Precondition: There is a valid previous case.
+    public mutating func decrement() {
+        decrementAsOrderedEnumeration()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.predecessor()_]
+    /// Returns the previous case or `nil` if there are no earlier cases.
+    public func predecessor() -> Self? {
+        return predecessorAsOrderedEnumeration()
     }
 }

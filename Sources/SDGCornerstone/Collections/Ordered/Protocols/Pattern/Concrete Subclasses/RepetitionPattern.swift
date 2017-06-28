@@ -21,7 +21,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         assert(count == nil ∨ count!.lowerBound.isNonNegative, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
-                return StrictString("Cannot check for a negative number of instances of a pattern. Requested count: \(count!).")
+                return StrictString("Cannot check for a negative number of instances of a pattern. Requested count: \(count?.inInequalityNotation({ $0.inDigits() }) ?? "Any").")
             }
         }))
 
