@@ -24,17 +24,17 @@
 /// let timespan = GregorianYear(1) − GregorianYear(−1)
 /// // 1 year
 /// ```
-public struct GregorianYear : ConsistentlyOrderedCalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Static Properties
 
-    // Leap Year Cycle
+    // Leap Year Cycles
 
     /// The number of years in a leap year cycle.
     public static let yearsPerLeapYearCycle = 400
 
     /// The number of months in a leap year cycle.
-    public static let monthsPerLeapYearCycle = GregorianYear.yearsPerLeapYearCycle × GregorianYear.numberOfMonths
+    public static let monthsPerLeapYearCycle = GregorianYear.yearsPerLeapYearCycle × GregorianYear.monthsPerYear
 
     /// The number of days in a leap year cycle.
     public static let daysPerLeapYearCycle: Int = {
@@ -50,7 +50,7 @@ public struct GregorianYear : ConsistentlyOrderedCalendarComponent, RawRepresent
     // Months
 
     /// The number of months in a year.
-    public static let numberOfMonths: Int = 12
+    public static let monthsPerYear: Int = GregorianMonth.cases.count
 
     // Days
 
@@ -71,21 +71,9 @@ public struct GregorianYear : ConsistentlyOrderedCalendarComponent, RawRepresent
         return days
     }()
 
-    // Time
-
-    /// The mean duration of a Gregorian year.
-    public static let meanDuration = Double(GregorianYear.daysPerLeapYearCycle).days ÷ Double(GregorianYear.yearsPerLeapYearCycle)
-
-    /// The maximum duration of a Gregorian year.
-    public static let maximumDuration = Double(GregorianYear.daysPerLeapYear).days
-    /// The minimum duration of a Gregorian year.
-    public static let minimumDuration = Double(GregorianYear.daysPerNormalYear).days
-
     // MARK: - Properties
 
     private var year: Int
-
-    // Year
 
     /// Returns `true` if the year is a leap year.
     public var isLeapYear: Bool {
@@ -106,15 +94,6 @@ public struct GregorianYear : ConsistentlyOrderedCalendarComponent, RawRepresent
         }
     }
 
-    // Months
-
-    /// The number of months in the year.
-    public var numberOfMonths: Int {
-        return GregorianYear.numberOfMonths
-    }
-
-    // Days
-
     /// The number of days in the year.
     public var numberOfDays: Int {
         if isLeapYear {
@@ -122,27 +101,6 @@ public struct GregorianYear : ConsistentlyOrderedCalendarComponent, RawRepresent
         } else {
             return GregorianYear.daysPerNormalYear
         }
-    }
-
-    // MARK: - iCalendar
-
-    /// A string representation in the iCalendar format.
-    ///
-    /// - Precondition: The year is in the range 1 BC–AD 9999.
-    public var iCalendarRepresentation: StrictString {
-        assert(−1 ≤ rawValue ∧ rawValue ≤ 9999, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-            switch localization {
-            case .englishCanada:
-                return StrictString("The year \(self.inEnglishDigits()) is out of range for the iCalendar format.")
-            }
-        }))
-        let value: Int
-        if rawValue == −1 {
-            value = 0
-        } else {
-            value = rawValue
-        }
-        return StrictString(String(format: "%04d", value))
     }
 
     // MARK: - Text Representations
@@ -184,6 +142,26 @@ public struct GregorianYear : ConsistentlyOrderedCalendarComponent, RawRepresent
         return inDigits(bcAbbreviation: "לפנה״ס")
     }
 
+    // MARK: - CalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    /// The mean duration.
+    public static var meanDuration: CalendarInterval<FloatMax> {
+        return FloatMax(GregorianYear.daysPerLeapYearCycle).days ÷ FloatMax(GregorianYear.yearsPerLeapYearCycle)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    /// The minimum duration.
+    public static var minimumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(GregorianYear.daysPerNormalYear).days
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    /// The maximum duration.
+    public static var maximumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(GregorianYear.daysPerLeapYear).days
+    }
+
     // MARK: - ConsistentlyOrderedCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
@@ -218,6 +196,26 @@ public struct GregorianYear : ConsistentlyOrderedCalendarComponent, RawRepresent
     /// The number of complete components already elapsed.
     public var ordinal: Int {
         return rawValue
+    }
+
+    // MARK: - ICalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
+    /// Returns a string representation in the iCalendar format.
+    public var iCalendarRepresentation: StrictString {
+        assert(−1 ≤ rawValue ∧ rawValue ≤ 9999, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            switch localization {
+            case .englishCanada:
+                return StrictString("The year \(self.inEnglishDigits()) is out of range for the iCalendar format.")
+            }
+        }))
+        let value: Int
+        if rawValue == −1 {
+            value = 0
+        } else {
+            value = rawValue
+        }
+        return value.inDigits().filled(to: 4, with: "0", from: .start)
     }
 
     // MARK: - PointProtocol

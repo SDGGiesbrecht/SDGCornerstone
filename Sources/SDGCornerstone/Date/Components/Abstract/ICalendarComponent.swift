@@ -1,5 +1,5 @@
 /*
- EnumerationCalendarComponent.swift
+ ICalendarComponent.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A calendar component defined by an enumeration.
-public protocol EnumerationCalendarComponent : CalendarComponent, OrderedEnumeration {
+/// A calendar component with an iCalendar representation.
+public protocol ICalendarComponent {
 
+    // [_Define Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
+    /// Returns a string representation in the iCalendar format.
+    var iCalendarRepresentation: StrictString { get }
 }

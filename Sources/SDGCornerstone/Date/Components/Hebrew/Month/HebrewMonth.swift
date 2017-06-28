@@ -50,7 +50,8 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent {
 
     // MARK: - Static Properties
 
-    // Days
+    /// The length of a Hebrew moon.
+    public static let lengthOfMoon: CalendarInterval<FloatMax> = (29 as FloatMax).days + (12 as FloatMax).hours + (793 as FloatMax).hebrewParts
 
     /// The maximum number of days in any month.
     public static let maximumNumberOfDays: Int = {
@@ -68,18 +69,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent {
         }
         return min
     }()
-
-    // Time
-
-    /// The length of a Hebrew moon.
-    public static let lengthOfMoon: CalendarInterval<FloatMax> = (29 as FloatMax).days + (12 as FloatMax).hours + (793 as FloatMax).hebrewParts
-    /// The average length of a Hebrew month.
-    public static let meanDuration = lengthOfMoon
-
-    /// The maximum length of a Hebrew month.
-    public static let maximumDuration = FloatMax(HebrewMonth.maximumNumberOfDays).days
-    /// The minimum length of a Hebrew month.
-    public static let minimumDuration = FloatMax(HebrewMonth.minimumNumberOfDays).days
 
     // MARK: - Properties
 
@@ -183,6 +172,11 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent {
         }
     }
 
+    /// Increments the month.
+    public mutating func increment(leapYear: Bool) {
+        self = successor(leapYear: leapYear)
+    }
+
     /// Returns the previous month.
     public func predecessor(leapYear: Bool) -> HebrewMonth {
 
@@ -206,16 +200,39 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent {
         }
     }
 
-    /// Returns the next month, wrapping if necessary. If wrapping occurs, `incrementCycle` will be executed.
-    public func cyclicSuccessor(leapYear: Bool, incrementCycle: () -> Void) -> HebrewMonth {
-        notImplementedYet()
-        return .tishrei
+    /// Decrements the month.
+    public mutating func decrement(leapYear: Bool) {
+        self = predecessor(leapYear: leapYear)
     }
 
-    /// Returns the previous month, wrapping if necessary. If wrapping occurs, `decrementCycle` will be executed.
-    public func cyclicPredecessor(leapYear: Bool, decrementCycle: () -> Void) -> HebrewMonth {
-        notImplementedYet()
-        return .tishrei
+    /// Returns the next month, wrapping if necessary. If wrapping occurs, `wrap` will be executed.
+    public func cyclicSuccessor(leapYear: Bool, _ wrap: () -> Void) -> HebrewMonth {
+        if self == .elul {
+            wrap()
+            return .tishrei
+        } else {
+            return successor(leapYear: leapYear)
+        }
+    }
+
+    /// Increments the month, wrapping if necessary. If wrapping occurs, `wrap` will be executed.
+    public mutating func incrementCyclically(leapYear: Bool, _ wrap: () -> Void) {
+        self = cyclicSuccessor(leapYear: leapYear, wrap)
+    }
+
+    /// Returns the previous month, wrapping if necessary. If wrapping occurs, `warp` will be executed.
+    public func cyclicPredecessor(leapYear: Bool, _ wrap: () -> Void) -> HebrewMonth {
+        if self == .tishrei {
+            wrap()
+            return .elul
+        } else {
+            return predecessor(leapYear: leapYear)
+        }
+    }
+
+    /// Decrements the month, wrapping if necessary. If wrapping occurs, `wrap` will be executed.
+    public mutating func decrementCyclically(leapYear: Bool, _ wrap: () -> Void) {
+        self = cyclicPredecessor(leapYear: leapYear, wrap)
     }
 
     // MARK: - Recurrence
@@ -231,6 +248,26 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent {
                 self = .adar
             }
         }
+    }
+
+    // MARK: - CalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    /// The mean duration.
+    public static var meanDuration: CalendarInterval<FloatMax> {
+        return lengthOfMoon
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    /// The minimum duration.
+    public static var minimumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(HebrewMonth.minimumNumberOfDays).days
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    /// The maximum duration.
+    public static var maximumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(HebrewMonth.maximumNumberOfDays).days
     }
 
     // MARK: - Parallel to ConsistentlyOrderedCalendarComponent

@@ -13,22 +13,31 @@
  */
 
 /// A second of the Gregorian minute.
-public struct GregorianSecond : CardinalCalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent {
+public struct GregorianSecond : CardinalCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent {
 
     // MARK: - Static Properties
 
     /// The number of seconds in a minute.
-    public static let secondsPerMinute = SDGCornerstone.secondsPerMinute
+    public static let secondsPerMinute = 60
 
     // MARK: - Properties
 
     private var second: Double
 
-    // MARK: - iCalendar
+    // MARK: - ConsistentDurationCalendarComponent
 
+    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    /// The duration.
+    public static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).seconds
+    }
+
+    // MARK: - ICalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
     /// Returns a string representation in the iCalendar format.
     public var iCalendarRepresentation: StrictString {
-        return StrictString(String(format: "%02d", Int(second.rounded(.towardZero))))
+        return Int(second.rounded(.towardZero)).inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - PointProtocol

@@ -13,7 +13,7 @@
  */
 
 /// A day of the Hebrew month.
-public struct HebrewDay : OrdinalCalendarComponent, RawRepresentableCalendarComponent {
+public struct HebrewDay : ConsistentDurationCalendarComponent, OrdinalCalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Properties
 
@@ -26,8 +26,16 @@ public struct HebrewDay : OrdinalCalendarComponent, RawRepresentableCalendarComp
         let daysInMonth = month.numberOfDays(yearLength: year.length, leapYear: year.isLeapYear)
         if self.day > daysInMonth {
             self.day −= daysInMonth
-            month = month.cyclicSuccessor(leapYear: year.isLeapYear, incrementCycle: { year += 1 })
+            month.incrementCyclically(leapYear: year.isLeapYear) { year += 1 }
         }
+    }
+
+    // MARK: - ConsistentDurationCalendarComponent
+
+    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    /// The duration.
+    public static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).days
     }
 
     // MARK: - PointProtocol

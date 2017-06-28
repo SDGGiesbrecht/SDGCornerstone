@@ -13,16 +13,24 @@
  */
 
 /// A part of the Hebrew hour.
-public struct HebrewPart : CardinalCalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent {
+public struct HebrewPart : CardinalCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent {
 
     // MARK: - Static Properties
 
     /// The number of parts in a Hebrew hour.
-    public static let partsPerHour = SDGCornerstone.hebrewPartsPerHour
+    public static let partsPerHour = 1080
 
     // MARK: - Properties
 
     private var part: Double
+
+    // MARK: - ConsistentDurationCalendarComponent
+
+    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    /// The duration.
+    public static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).hebrewParts
+    }
 
     // MARK: - PointProtocol
 

@@ -13,7 +13,7 @@
  */
 
 /// A day of the Gregorian week.
-public enum GregorianWeekday : Int, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent {
+public enum GregorianWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent {
 
     // MARK: - Cases
 
@@ -36,6 +36,14 @@ public enum GregorianWeekday : Int, ConsistentlyOrderedCalendarComponent, Enumer
 
     /// The number of days in a week.
     public static let daysPerWeek: Int = cases.count
+
+    // MARK: - ConsistentDurationCalendarComponent
+
+    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    /// The duration.
+    public static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).days
+    }
 
     // MARK: - PointProtocol
 

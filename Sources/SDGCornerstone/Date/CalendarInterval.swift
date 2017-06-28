@@ -14,15 +14,8 @@
 
 // MARK: - Definition
 
-private let hoursPerDay = HebrewHour.hoursPerDay
-
-internal let hebrewPartsPerHour = 1080
-
-internal let minutesPerHour = GregorianMinute.minutesPerHour
-internal let secondsPerMinute = 60
-
-private let hebrewPartsPerDay = hoursPerDay × hebrewPartsPerHour
-private let secondsPerDay = hoursPerDay × minutesPerHour × secondsPerMinute
+private let hebrewPartsPerDay = HebrewHour.hoursPerDay × HebrewPart.partsPerHour
+private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutesPerHour × GregorianSecond.secondsPerMinute
 
 private let unitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 
@@ -117,7 +110,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Measurement {
     }
 
     internal var unitsPerDay: Scalar {
-        return Scalar(SDGCornerstone.unitsPerDay)
+        return Scalar(GregorianSecond.secondsPerMinute)
     }
     /// The numeric value in days.
     public var inDays: Scalar {
@@ -130,7 +123,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Measurement {
     }
 
     private var unitsPerHour: Scalar {
-        return unitsPerDay ÷ Scalar(hoursPerDay)
+        return unitsPerDay ÷ Scalar(HebrewHour.hoursPerDay)
     }
     /// The numeric value in hours.
     public var inHours: Scalar {
@@ -143,7 +136,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Measurement {
     }
 
     private var unitsPerMinute: Scalar {
-        return unitsPerHour ÷ Scalar(minutesPerHour)
+        return unitsPerHour ÷ Scalar(GregorianMinute.minutesPerHour)
     }
     /// The numeric value in minutes.
     public var inMinutes: Scalar {
@@ -156,7 +149,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Measurement {
     }
 
     private var unitsPerHebrewPart: Scalar {
-        return unitsPerHour ÷ Scalar(hebrewPartsPerHour)
+        return unitsPerHour ÷ Scalar(HebrewPart.partsPerHour)
     }
     /// The numeric value in Hebrew parts.
     public var inHebrewParts: Scalar {
@@ -169,7 +162,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Measurement {
     }
 
     private var unitsPerSecond: Scalar {
-        return unitsPerMinute ÷ Scalar(secondsPerMinute)
+        return unitsPerMinute ÷ Scalar(GregorianSecond.secondsPerMinute)
     }
     /// The numeric value in seconds.
     public var inSeconds: Scalar {

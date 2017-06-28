@@ -13,7 +13,7 @@
  */
 
 /// An hour of the Hebrew day.
-public struct HebrewHour : CardinalCalendarComponent, RawRepresentableCalendarComponent {
+public struct HebrewHour : CardinalCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Static Properties
 
@@ -23,6 +23,14 @@ public struct HebrewHour : CardinalCalendarComponent, RawRepresentableCalendarCo
     // MARK: - Properties
 
     private var hour: Int
+
+    // MARK: - ConsistentDurationCalendarComponent
+
+    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    /// The duration.
+    public static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).hours
+    }
 
     // MARK: - PointProtocol
 

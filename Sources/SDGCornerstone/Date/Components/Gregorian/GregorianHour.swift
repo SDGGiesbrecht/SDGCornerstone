@@ -13,7 +13,7 @@
  */
 
 /// An hour of the Gregorian day.
-public struct GregorianHour : CardinalCalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianHour : CardinalCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Static Properties
 
@@ -24,11 +24,20 @@ public struct GregorianHour : CardinalCalendarComponent, RawRepresentableCalenda
 
     private var hour: Int
 
-    // MARK: - iCalendar
+    // MARK: - ConsistentDurationCalendarComponent
 
+    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    /// The duration.
+    public static var duration: CalendarInterval<FloatMax> {
+        return (1 as FloatMax).hours
+    }
+
+    // MARK: - ICalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
     /// Returns a string representation in the iCalendar format.
     public var iCalendarRepresentation: StrictString {
-        return StrictString(String(format: "%02d", rawValue))
+        return hour.inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - PointProtocol

@@ -17,6 +17,15 @@ public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarCo
 
     // MARK: - Static Properties
 
+    /// The number of months in a year.
+    public static func numberOfMonths(leapYear: Bool) -> Int {
+        if leapYear {
+            return 13
+        } else {
+            return 12
+        }
+    }
+
     /// The number of years in a leap year cycle.
     public static let yearsPerLeapYearCycle = 19
 
@@ -29,30 +38,9 @@ public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarCo
         return months
     }()
 
-    /// The number of months in a year.
-    public static func numberOfMonths(leapYear: Bool) -> Int {
-        if leapYear {
-            return 13
-        } else {
-            return 12
-        }
-    }
-
-    // Time
-
-    /// The average length of a Hebrew year.
-    public static let meanDuration = Double(monthsPerLeapYearCycle).hebrewMoons ÷ Double(HebrewYear.yearsPerLeapYearCycle)
-
-    /// The maximum length of a Hebrew year.
-    public static let maximumDuration = Double(HebrewYear.Length.maximumNumberOfDays).days
-    /// The minimum length of a Hebrew year.
-    public static let minimumDuration = Double(HebrewYear.Length.minimumNumberOfDays).days
-
     // MARK: - Properties
 
     private var year: Int
-
-    // Year
 
     /// Returns `true` if the year is a leap year.
     public var isLeapYear: Bool {
@@ -69,14 +57,10 @@ public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarCo
         return Length(numberOfDays: numberOfDays)
     }
 
-    // Months
-
     /// The number of months in the year.
     public var numberOfMonths: Int {
         return HebrewYear.numberOfMonths(leapYear: isLeapYear)
     }
-
-    // Days
 
     /// The number of days in the year.
     public var numberOfDays: Int {
@@ -87,6 +71,26 @@ public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarCo
         return Int(result)*/
         notImplementedYet()
         return 0
+    }
+
+    // MARK: - CalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    /// The mean duration.
+    public static var meanDuration: CalendarInterval<FloatMax> {
+        return FloatMax(monthsPerLeapYearCycle).hebrewMoons ÷ FloatMax(HebrewYear.yearsPerLeapYearCycle)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    /// The minimum duration.
+    public static var minimumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(HebrewYear.Length.minimumNumberOfDays).days
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    /// The maximum duration.
+    public static var maximumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(HebrewYear.Length.maximumNumberOfDays).days
     }
 
     // MARK: - PointProtocol

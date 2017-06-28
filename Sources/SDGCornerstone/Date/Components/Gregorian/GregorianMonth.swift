@@ -13,7 +13,7 @@
  */
 
 /// A month of the Gregorian year.
-public enum GregorianMonth : Int, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent {
+public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, EnumerationCalendarComponent {
 
     // MARK: - Cases
 
@@ -43,18 +43,6 @@ public enum GregorianMonth : Int, ConsistentlyOrderedCalendarComponent, Enumerat
     case december
 
     // MARK: - Static Properties
-
-    // Months
-
-    /// The mean duration of a Gregorian month.
-    public static let meanDuration = GregorianYear.meanDuration ÷ Double(GregorianYear.numberOfMonths)
-
-    /// The maximum duration of a Gregorian month.
-    public static let maximumDuration = Double(GregorianMonth.maximumNumberOfDays).days
-    /// The minimum duration of a Gregorian month.
-    public static let minimumDuration = Double(GregorianMonth.minimumNumberOfDays).days
-
-    // Days
 
     /// The maximum number of days in a Gregorian month.
     public static let maximumNumberOfDays: Int = {
@@ -116,11 +104,32 @@ public enum GregorianMonth : Int, ConsistentlyOrderedCalendarComponent, Enumerat
         }
     }
 
-    // MARK: - iCalendar
+    // MARK: - CalendarComponent
 
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    /// The mean duration.
+    public static var meanDuration: CalendarInterval<FloatMax> {
+        return GregorianYear.meanDuration ÷ FloatMax(GregorianYear.monthsPerYear)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    /// The minimum duration.
+    public static var minimumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(GregorianMonth.minimumNumberOfDays).days
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    /// The maximum duration.
+    public static var maximumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(GregorianMonth.maximumNumberOfDays).days
+    }
+
+    // MARK: - ICalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
     /// Returns a string representation in the iCalendar format.
     public var iCalendarRepresentation: StrictString {
-        return StrictString(String(format: "%02d", ordinal))
+        return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - PointProtocol
