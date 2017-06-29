@@ -44,7 +44,6 @@ internal struct HebrewWeekdayDate : DateDefinition {
 
     // MARK: - DateDefinition
 
-    internal static let uniqueTypeIdentifier = "SDGCornerstone.HebrewWeekdayDate"
     internal static let referenceDate: CalendarDate = referenceMoment
 
     internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>

@@ -30,7 +30,6 @@ internal struct RelativeDate : DateDefinition {
 
     // MARK: - DateDefinition
 
-    internal static let uniqueTypeIdentifier = "SDGCornerstone.RelativeDate"
     internal static let referenceDate: CalendarDate = CalendarDate.epoch
 
     internal let intervalSinceReferenceDate: CalendarInterval<FloatMax>

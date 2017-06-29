@@ -86,8 +86,6 @@ internal struct GregorianDate : DateDefinition {
 
     // MARK: - DateDefinition
 
-    internal static let uniqueTypeIdentifier = "SDGCornerstone.GregorianDate"
-
     internal static let referenceDate: CalendarDate = referenceMoment
 
     internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>

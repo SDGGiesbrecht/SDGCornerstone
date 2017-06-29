@@ -15,7 +15,7 @@
 import Foundation
 import SDGCornerstone
 
-// [_Define Example: Run Loop Usage_]
+// [_Define Example: DateDefinition_]
 extension CalendarDate {
 
     // This initializer creates a date using the number of days into the current millennium.
@@ -30,8 +30,6 @@ extension CalendarDate {
 }
 
 private struct DaysIntoMillennium : DateDefinition {
-
-    fileprivate static let uniqueTypeIdentifier = "MyModule.DaysIntoMillennium"
 
     // The reference date is January 1, 2001 at 00:00
     fileprivate static let referenceDate = CalendarDate(gregorianYear: 2001, month: .january, day: 1, hour: 0, minute: 0)

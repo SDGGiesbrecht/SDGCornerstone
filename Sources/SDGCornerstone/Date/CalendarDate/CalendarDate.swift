@@ -67,13 +67,13 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
             cache = Cache()
         }
         didSet {
-            cache.conversions[type(of: definition).uniqueTypeIdentifier] = definition
+            cache.conversions[ObjectIdentifier(type(of: definition))] = definition
         }
     }
 
     private class Cache {
         fileprivate init() {}
-        fileprivate var conversions: [String: DateDefinition] = [:]
+        fileprivate var conversions: [ObjectIdentifier: DateDefinition] = [:]
     }
     private var cache = Cache()
 
@@ -163,7 +163,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     /// - Returns: The converted definition.
     public func converted<D : DateDefinition>(to type: D.Type) -> D {
 
-        let cachedDefinition: DateDefinition = cached(in: &cache.conversions[D.uniqueTypeIdentifier]) {
+        let cachedDefinition: DateDefinition = cached(in: &cache.conversions[ObjectIdentifier(D.self)]) {
             return recomputeDefinition(as: D.self)
         }
 

@@ -29,7 +29,6 @@ internal struct FoundationDate : DateDefinition {
 
     // MARK: - DateDefinition
 
-    internal static let uniqueTypeIdentifier = "SDGCornerstone.FoundationDate"
     internal static let referenceDate = CalendarDate(gregorianYear: 2001, month: .january, day: 1, hour: 0, minute: 0, second: 0)
     internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
 

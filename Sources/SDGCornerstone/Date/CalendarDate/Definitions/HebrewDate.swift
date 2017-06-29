@@ -130,8 +130,6 @@ internal struct HebrewDate : DateDefinition {
 
     // MARK: - DateDefinition
 
-    internal static let uniqueTypeIdentifier = "SDGCornerstone.HebrewDate"
-
     internal static var referenceDate: CalendarDate {
         unreachable() // Would be a cyclical definition.
     }

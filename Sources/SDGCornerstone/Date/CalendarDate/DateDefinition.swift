@@ -16,25 +16,47 @@
 /// A type that provides a definition for a `CalendarDate`.
 ///
 /// ```swift
+/// extension CalendarDate {
+///
+///     // This initializer creates a date using the number of days into the current millennium.
+///     public init(daysIntoMillennium: FloatMax) {
+///         self.init(definition: DaysIntoMillennium(daysIntoMillennium))
+///     }
+///
+///     // This property is available to dates with any kind of definition.
+///     public var someMeasurement: FloatMax {
+///         return converted(to: DaysIntoMillennium.self).daysIntoMillennium
+///     }
+/// }
+///
+/// private struct DaysIntoMillennium : DateDefinition {
+///
+///     // The reference date is January 1, 2001 at 00:00
+///     fileprivate static let referenceDate = CalendarDate(gregorianYear: 2001, month: .january, day: 1, hour: 0, minute: 0)
+///
+///     fileprivate let daysIntoMillennium: FloatMax
+///     fileprivate let intervalSinceReferenceDate: CalendarInterval<FloatMax>
+///
+///     fileprivate init(_ daysIntoMillennium: FloatMax) {
+///         self.daysIntoMillennium = daysIntoMillennium
+///         intervalSinceReferenceDate = daysIntoMillennium.days
+///     }
+///
+///     fileprivate init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
+///         self.intervalSinceReferenceDate = intervalSinceReferenceDate
+///         daysIntoMillennium = intervalSinceReferenceDate.inDays
+///     }
+/// }
 /// ```
 ///
 /// Conformance Requirements:
 ///
-/// - `static var uniqueTypeIdentifier: String { get }`
 /// - `static var referenceDate: CalendarDate { get }`
 /// - `init(intervalSinceReferenceDate: CalendarInterval<FloatMax>)`
 /// - `var intervalSinceReferenceDate: CalendarInterval<FloatMax> { get }`
 public protocol DateDefinition {
 
     // MARK: - Static Properties
-
-    // [_Warning: Can this be removed?_]
-
-    // [_Define Documentation: SDGCornerstone.DateDefinition.uniqueTypeIdentifier_]
-    /// A unique identifier for differentiating definition types.
-    ///
-    /// This is used as a key to store and retreive cached conversions to this specific type of definition. If two or more types share the same identifier (including between super and subclasses), conversions may be repeated instead of cached.
-    static var uniqueTypeIdentifier: String { get }
 
     // [_Define Documentation: SDGCornerstone.DateDefinition.referenceDate_]
     /// The reference date for the type.
