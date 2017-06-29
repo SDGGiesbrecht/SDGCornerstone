@@ -16,13 +16,13 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `RawRepresentable where RawValue : OneDimensionalPoint, ExpressibleByIntegerLiteral, RawValue.Vector : IntegerProtocol`
+/// - `RawRepresentable where RawValue : FixedScaleOneDimensionalPoint, ExpressibleByIntegerLiteral, RawValue.Vector : IntegerProtocol`
 /// - The raw values must be contiguous and begin at 0.
 public protocol IterableEnumeration : RawRepresentable {
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]
     /// The raw value type.
-    associatedtype RawValue : OneDimensionalPoint, ExpressibleByIntegerLiteral
+    associatedtype RawValue : FixedScaleOneDimensionalPoint, ExpressibleByIntegerLiteral
 
     // [_Define Documentation: SDGCornerstone.IterableEnumeration.cases_]
     /// An array containing every case of the enumeration.

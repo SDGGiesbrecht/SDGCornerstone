@@ -16,13 +16,14 @@
 ///
 /// - Note: For multi‐dimensional points, see `PointProtocol`.
 ///
+/// - Note: This is distinct from `FixedScaleOneDimensionalPoint` so that types can still conform to `OneDimensionalPoint` even if they have vectors that cannot conform to `SignedNumber`.
+///
 /// Conformance Requirements:
 ///
 /// - `PointProtocol`
 /// - `Comparable`
-public protocol OneDimensionalPoint : Comparable, PointProtocol, Strideable {
+public protocol OneDimensionalPoint : Comparable, PointProtocol {
 
-    // [_Workaround: When it is possible to add the restriction Vector == Stride, Vector should no longer need to be specified by each conforming type. (Swift 3.1.0)_]
 }
 
 extension OneDimensionalPoint where Vector : IntegerProtocol {

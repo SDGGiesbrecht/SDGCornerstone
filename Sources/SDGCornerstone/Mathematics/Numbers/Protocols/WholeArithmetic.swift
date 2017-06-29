@@ -95,7 +95,7 @@ infix operator ↑=: AssignmentPrecedence
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
 /// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (lhs: inout Self, rhs: Self)`
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
-public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByTextLiterals, NumericAdditiveArithmetic, OneDimensionalPoint, Strideable {
+public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByTextLiterals, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, Strideable {
 
     // MARK: - Initialization
 

@@ -22,4 +22,8 @@ func demonstrateGregorianYear() {
     let timespan = GregorianYear(1) − GregorianYear(−1)
     // 1 year
     // [_End_]
+
+    if year == 1 ∧ timespan == 1 {
+        // Read from the variables to silence warnings.
+    }
 }

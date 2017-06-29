@@ -263,7 +263,7 @@ class MathematicsTests : TestCase {
         x.decrement()
         XCTAssert(x == 0)
 
-        func runStrideableTests<N : OneDimensionalPoint>(start: N, end: N, vector: N.Vector) where N : Strideable, N.Vector == N.Stride {
+        func runStrideableTests<N : FixedScaleOneDimensionalPoint>(start: N, end: N, vector: N.Vector) where N : Strideable, N.Vector == N.Stride {
             XCTAssert(start.advanced(by: vector) == end)
 
             XCTAssert(start.distance(to: end) == vector)

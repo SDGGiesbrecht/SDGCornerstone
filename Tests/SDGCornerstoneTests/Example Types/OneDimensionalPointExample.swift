@@ -14,7 +14,7 @@
 
 import SDGCornerstone
 
-struct OneDimensionalPointExample : OneDimensionalPoint {
+struct OneDimensionalPointExample : FixedScaleOneDimensionalPoint {
 
     typealias Value = Int64
 

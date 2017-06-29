@@ -14,7 +14,7 @@
 
 extension WholeNumber.BinaryView {
 
-    internal struct Index : Comparable, Equatable, OneDimensionalPoint {
+    internal struct Index : Comparable, Equatable, FixedScaleOneDimensionalPoint {
 
         // MARK: - Properties
 

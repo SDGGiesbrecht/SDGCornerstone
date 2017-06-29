@@ -64,6 +64,10 @@ struct RealArithmeticExample : RealArithmetic {
 
     // RationalArithmetic
 
+    init(_ floatingPoint: FloatMax) {
+        value = Double(floatingPoint)
+    }
+
     static func ÷= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
         lhs.value ÷= rhs.value
     }

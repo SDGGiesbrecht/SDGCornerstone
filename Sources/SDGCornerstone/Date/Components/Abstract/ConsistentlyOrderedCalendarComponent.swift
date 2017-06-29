@@ -13,7 +13,7 @@
  */
 
 /// A calendar component with a consistent order.
-public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, OneDimensionalPoint {
+public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedScaleOneDimensionalPoint {
 
     // [_Define Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
     /// Creates a component from the number of complete components already elapsed.

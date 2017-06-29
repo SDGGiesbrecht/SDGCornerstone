@@ -13,7 +13,7 @@
  */
 
 /// A Hebrew month of a particular year.
-public struct HebrewMonthAndYear: Comparable, Equatable, OneDimensionalPoint, PointProtocol {
+public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimensionalPoint, PointProtocol {
 
     // MARK: - Properties
 
@@ -35,6 +35,11 @@ public struct HebrewMonthAndYear: Comparable, Equatable, OneDimensionalPoint, Po
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the left value is less than the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value.
+    ///     - rhs: Another value.
     public static func < (lhs: HebrewMonthAndYear, rhs: HebrewMonthAndYear) -> Bool {
         return (lhs.year, lhs.month) < (rhs.year, rhs.month)
     }
@@ -42,6 +47,11 @@ public struct HebrewMonthAndYear: Comparable, Equatable, OneDimensionalPoint, Po
     // MARK: - Equatable
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    /// Returns `true` if the two values are equal.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
     public static func == (lhs: HebrewMonthAndYear, rhs: HebrewMonthAndYear) -> Bool {
         return (lhs.year, lhs.month) == (rhs.year, rhs.month)
     }
@@ -53,13 +63,13 @@ public struct HebrewMonthAndYear: Comparable, Equatable, OneDimensionalPoint, Po
     public typealias Vector = Int
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
+    /// Moves the point on the left by the vector on the right.
     ///
     /// - Parameters:
-    ///     - lhs: The starting point.
+    ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
     ///
-    /// - MutatingVariant: +=
+    /// - NonmutatingVariant: +
     public static func += (lhs: inout HebrewMonthAndYear, rhs: Int) {
         if rhs.isNegative {
             for _ in 1 ... |rhs| {

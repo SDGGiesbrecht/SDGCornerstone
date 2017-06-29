@@ -64,13 +64,10 @@ public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarCo
 
     /// The number of days in the year.
     public var numberOfDays: Int {
-        /*
-        let nextStart = HebrewDate.intervalFromReferenceDateToStartOfYear(self + 1)
-        let ownStart = HebrewDate.intervalFromReferenceDateToStartOfYear(self)
-        let result = (nextStart − ownStart).inHebrewDays
-        return Int(result)*/
-        notImplementedYet()
-        return 0
+        let nextStart = HebrewDate.intervalFromReferenceDate(toStartOf: self + 1)
+        let ownStart = HebrewDate.intervalFromReferenceDate(toStartOf: self)
+        let result = (nextStart − ownStart).inDays
+        return Int(result)
     }
 
     // MARK: - CalendarComponent

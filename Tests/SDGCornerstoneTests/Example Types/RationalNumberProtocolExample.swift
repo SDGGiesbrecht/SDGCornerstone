@@ -64,6 +64,10 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
 
     // RationalArithmetic
 
+    init(_ floatingPoint: FloatMax) {
+        value = RationalNumber(floatingPoint)
+    }
+
     static func ÷= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
         lhs.value ÷= rhs.value
     }

@@ -22,7 +22,7 @@ public struct GregorianSecond : CardinalCalendarComponent, ConsistentDurationCal
 
     // MARK: - Properties
 
-    private var second: Double
+    private var second: FloatMax
 
     // MARK: - ConsistentDurationCalendarComponent
 
@@ -44,7 +44,7 @@ public struct GregorianSecond : CardinalCalendarComponent, ConsistentDurationCal
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
-    public typealias Vector = Double
+    public typealias Vector = FloatMax
 
     // MARK: - RawRepresentableCalendarComponent
 
@@ -52,17 +52,17 @@ public struct GregorianSecond : CardinalCalendarComponent, ConsistentDurationCal
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    public init(unsafeRawValue: Double) {
+    public init(unsafeRawValue: FloatMax) {
         second = unsafeRawValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
     /// The valid range for raw values.
-    public static let validRange: Range<Double>? = 0 ..< Double(GregorianSecond.secondsPerMinute)
+    public static let validRange: Range<FloatMax>? = 0 ..< FloatMax(GregorianSecond.secondsPerMinute)
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
     /// The raw value.
-    public var rawValue: Double {
+    public var rawValue: FloatMax {
         return second
     }
 }
