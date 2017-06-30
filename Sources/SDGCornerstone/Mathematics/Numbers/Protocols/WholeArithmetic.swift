@@ -818,7 +818,7 @@ extension WholeArithmetic {
         return result
     }
 
-    internal func wholeDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+    internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         let digitSet = egyptianDigits
 
         let radix = self.radix(for: digitSet)
@@ -850,6 +850,129 @@ extension WholeArithmetic {
         }
 
         return StrictString(digits.reversed())
+    }
+
+    internal func generateAbbreviatedEnglishOrdinal() -> StrictString {
+        let digits = wholeDigits()
+        guard let last = digits.last else {
+            unreachable()
+        }
+        switch last {
+            // [_Workaround: These should be superscripted when possible._]
+        case "1":
+            return digits + "st"
+        case "2":
+            return digits + "nd"
+        case "3":
+            return digits + "rd"
+        default:
+            return digits + "th"
+        }
+    }
+
+    internal func verkürzteDeutscheOrdnungszahlErzeugen() -> StrictString {
+        return wholeDigits() + "."
+    }
+
+    internal func générerOrdinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> StrictString {
+        // [_Workaround: These should be superscripted when possible._]
+        let singulier: StrictString
+
+        if self == 1 {
+            switch genre {
+            case .masculin:
+                singulier = wholeDigits() + "er"
+            case .féminin:
+                singulier = wholeDigits() + "re"
+            }
+        } else {
+            singulier = wholeDigits() + "e"
+        }
+
+        switch nombre {
+        case .singular:
+            return singulier
+        case .plural:
+            return singulier + "s"
+        }
+    }
+
+    internal func παραγωγήΣυντομογραφίαςΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> StrictString {
+        // [_Workaround: These should be superscripted when possible._]
+        switch αριθμός {
+        case .singular:
+            switch γένος {
+            case .masculine:
+                switch πτώση {
+                case .ονομαστική:
+                    return wholeDigits() + "ος"
+                case .αιτιατική:
+                    return wholeDigits() + "ο"
+                case .γενική:
+                    return wholeDigits() + "ου"
+                case .κλητική:
+                    return wholeDigits() + "ε"
+                }
+            case .feminine:
+                switch πτώση {
+                case .ονομαστική:
+                    return wholeDigits() + "η"
+                case .αιτιατική:
+                    return wholeDigits() + "η"
+                case .γενική:
+                    return wholeDigits() + "ης"
+                case .κλητική:
+                    return wholeDigits() + "η"
+                }
+            case .neuter:
+                switch πτώση {
+                case .ονομαστική:
+                    return wholeDigits() + "ο"
+                case .αιτιατική:
+                    return wholeDigits() + "ο"
+                case .γενική:
+                    return wholeDigits() + "ου"
+                case .κλητική:
+                    return wholeDigits() + "ο"
+                }
+            }
+        case .plural:
+            switch γένος {
+            case .masculine:
+                switch πτώση {
+                case .ονομαστική:
+                    return wholeDigits() + "οι"
+                case .αιτιατική:
+                    return wholeDigits() + "ους"
+                case .γενική:
+                    return wholeDigits() + "ων"
+                case .κλητική:
+                    return wholeDigits() + "οι"
+                }
+            case .feminine:
+                switch πτώση {
+                case .ονομαστική:
+                    return wholeDigits() + "ες"
+                case .αιτιατική:
+                    return wholeDigits() + "ες"
+                case .γενική:
+                    return wholeDigits() + "ων"
+                case .κλητική:
+                    return wholeDigits() + "ες"
+                }
+            case .neuter:
+                switch πτώση {
+                case .ονομαστική:
+                    return wholeDigits() + "α"
+                case .αιτιατική:
+                    return wholeDigits() + "α"
+                case .γενική:
+                    return wholeDigits() + "ων"
+                case .κλητική:
+                    return wholeDigits() + "α"
+                }
+            }
+        }
     }
 
     internal func romanNumerals(lowercase: Bool) -> StrictString {

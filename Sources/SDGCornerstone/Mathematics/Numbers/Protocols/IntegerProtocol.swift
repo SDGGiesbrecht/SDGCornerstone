@@ -23,12 +23,37 @@ public protocol IntegerProtocol : IntegralArithmetic {
 
 extension IntegerProtocol {
 
+    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.inDigits(thousandsSeparator:)_]
     /// Returns the number in digits.
     ///
     /// - Parameters:
     ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
     public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         return integralDigits(thousandsSeparator: thousandsSeparator)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal()_]
+    /// Returns the ordinal in its abbreviated English form. (“1st”, “2nd”, “3rd”, etc.)
+    public func abbreviatedEnglishOrdinal() -> StrictString {
+        return generateAbbreviatedEnglishOrdinal()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.verkürzteDeutscheOrdnungszahl()_]
+    /// Gibt die Ordnungszahl in ihrer verkürtzen deutschen Form zurück. („1.“, „2.“, „3.“, usw.)
+    public func verkürzteDeutscheOrdnungszahl() -> StrictString {
+        return verkürzteDeutscheOrdnungszahlErzeugen()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.ordinalFrançaisAbrégé(genre:nombre:)_]
+    /// Retourne l’ordinal dans sa forme française abrégée. (« 1er », « 2e », « 3e », etc.)
+    public func ordinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> StrictString {
+        return générerOrdinalFrançaisAbrégé(genre: genre, nombre: nombre)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος:πτώση:αριθμός:)_]
+    /// Επιστρέφει την συντομογραφία ελληνικού τακτικού αριθμού.
+    public func συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> StrictString {
+        return παραγωγήΣυντομογραφίαςΕλληνικούΤακτικούΑριθμού(γένος: γένος, πτώση: πτώση, αριθμός: αριθμός)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:)_]

@@ -13,7 +13,7 @@
  */
 
 /// A day of a Gregorian month.
-public struct GregorianDay : ConsistentDurationCalendarComponent, ICalendarComponent, OrdinalCalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianDay : ConsistentDurationCalendarComponent, Day, ICalendarComponent, OrdinalCalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Properties
 

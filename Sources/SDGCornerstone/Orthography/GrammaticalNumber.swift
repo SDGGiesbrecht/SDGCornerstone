@@ -1,5 +1,5 @@
 /*
- Date.swift
+ GrammaticalNumber.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,12 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+/// A grammatical number used by languages that distinguish only between singular and plural.
+public enum GrammaticalNumber {
 
-extension Date : PropertyListValue {
+    /// Singular.
+    case singular
 
-    /// Creates a date from a calendar date.
-    public init(_ calendarDate: CalendarDate) {
-        self = calendarDate.converted(to: FoundationDate.self).date
-    }
+    /// Plural.
+    case plural
 }

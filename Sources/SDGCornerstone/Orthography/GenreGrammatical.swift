@@ -1,5 +1,5 @@
 /*
- Date.swift
+ GenreGrammatical.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,12 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+/// Un genre grammatical utilisé par les langues qui ne reconnaître que masculin et féminin.
+public enum GenreGrammatical {
 
-extension Date : PropertyListValue {
+    /// Masculin.
+    case masculin
 
-    /// Creates a date from a calendar date.
-    public init(_ calendarDate: CalendarDate) {
-        self = calendarDate.converted(to: FoundationDate.self).date
-    }
+    /// Féminin.
+    case féminin
 }

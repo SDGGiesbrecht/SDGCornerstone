@@ -174,65 +174,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         }
     }
 
-    // MARK: - Text Representations
-
-    // [_Warning: These need to be overhauled._]
-    /*
-    /// The Hebrew date formatted by the system.
-    public var systemFormattedFullHebrewDate: StrictString {
-        let gregorianFormatter = NSDateFormatter()
-        gregorianFormatter.dateStyle = NSDateFormatterStyle.FullStyle
-        let format = gregorianFormatter.dateFormat
-
-        let hebrewFormatter = NSDateFormatter()
-        hebrewFormatter.dateFormat = format
-        hebrewFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierHebrew)
-
-        func symbol(key: String) -> String {
-            return String(LocalizedString(table: "Date", key: key, bundle: SDGFoundationExtensionsBundle))
-        }
-        hebrewFormatter.monthSymbols = [
-            symbol("Tishrei"),
-            symbol("Cheshvan"),
-            symbol("Kislev"),
-            symbol("Tevet"),
-            symbol("Shevat"),
-            symbol("Adar I"),
-            symbol("Adar"),
-            symbol("Nisan"),
-            symbol("Iyar"),
-            symbol("Sivan"),
-            symbol("Tammuz"),
-            symbol("Av"),
-            symbol("Elul"),
-            symbol("Adar II"),
-        ]
-        return StrictString(hebrewFormatter.stringFromDate(NSDate(self + 6.hebrewHours)))
-    }
-
-    /// The Gregorian date formatted by the system.
-    public var systemFormattedFullGregorianDate: StrictString {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = NSDateFormatterStyle.FullStyle
-        formatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        return StrictString(formatter.stringFromDate(NSDate(self)))
-    }
-
-    /// The UTC time formatted by the system.
-    public var systemFormattedUTCTime: String {
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
-        formatter.timeZone = NSTimeZone.UTC()
-        return formatter.stringFromDate(NSDate(self))
-    }
-
-    /// The local time formatted by the system.
-    public var systemFormattedLocalTime: String {
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
-        return formatter.stringFromDate(NSDate(self))
-    }*/
-
     // MARK: - iCalendar
 
     /// Returns a string representation in the floating iCalendar format.

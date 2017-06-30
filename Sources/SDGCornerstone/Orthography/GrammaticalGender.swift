@@ -1,5 +1,5 @@
 /*
- Date.swift
+ GrammaticalGender.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,12 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+/// A grammatical gender used by languages that differentiate between masculine, feminine and neuter.
+public enum GrammaticalGender {
 
-extension Date : PropertyListValue {
+    /// Masculine.
+    case masculine
 
-    /// Creates a date from a calendar date.
-    public init(_ calendarDate: CalendarDate) {
-        self = calendarDate.converted(to: FoundationDate.self).date
-    }
+    /// Feminine.
+    case feminine
+
+    /// Neuter.
+    case neuter
 }
