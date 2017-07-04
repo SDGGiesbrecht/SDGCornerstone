@@ -32,6 +32,13 @@ public struct GregorianMinute : CardinalCalendarComponent, ConsistentDurationCal
         return (1 as FloatMax).minutes
     }
 
+    // MARK: - Text Representations
+
+    /// Returns the minite in digits with leading zeroes.
+    public func inDigits() -> StrictString {
+        return minute.inDigits().filled(to: 2, with: "0", from: .start)
+    }
+
     // MARK: - ICalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]

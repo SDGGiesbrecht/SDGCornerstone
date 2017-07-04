@@ -32,6 +32,13 @@ public struct GregorianHour : CardinalCalendarComponent, ConsistentDurationCalen
         return (1 as FloatMax).hours
     }
 
+    // MARK: - Text Representations
+
+    /// Returns the hour in digits.
+    public func inDigits() -> StrictString {
+        return hour.inDigits()
+    }
+
     // MARK: - ICalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]

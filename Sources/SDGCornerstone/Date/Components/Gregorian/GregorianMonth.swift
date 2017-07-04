@@ -104,6 +104,183 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
         }
     }
 
+    // MARK: - Text Representations
+
+    /// Returns the English name.
+    public func inEnglish() -> StrictString {
+        switch self {
+        case .january:
+            return "January"
+        case .february:
+            return "February"
+        case .march:
+            return "March"
+        case .april:
+            return "April"
+        case .may:
+            return "May"
+        case .june:
+            return "June"
+        case .july:
+            return "July"
+        case .august:
+            return "August"
+        case .september:
+            return "September"
+        case .october:
+            return "October"
+        case .november:
+            return "November"
+        case .december:
+            return "December"
+        }
+    }
+
+    /// Gibt den deutschen Namen zurück.
+    public func aufDeutsch() -> StrictString {
+        switch self {
+        case .january:
+            return "Januar"
+        case .february:
+            return "Februar"
+        case .march:
+            return "März"
+        case .april:
+            return "April"
+        case .may:
+            return "Mai"
+        case .june:
+            return "Juni"
+        case .july:
+            return "Juli"
+        case .august:
+            return "August"
+        case .september:
+            return "September"
+        case .october:
+            return "Oktober"
+        case .november:
+            return "November"
+        case .december:
+            return "Dezember"
+        }
+    }
+
+    /// Retourne le nom français.
+    public func enFrançais(_ majuscules: Casing) -> StrictString {
+        let nom: StrictString
+        switch self {
+        case .january:
+            nom = "janvier"
+        case .february:
+            nom = "février"
+        case .march:
+            nom = "mars"
+        case .april:
+            nom = "avril"
+        case .may:
+            nom = "mai"
+        case .june:
+            nom = "juin"
+        case .july:
+            nom = "juillet"
+        case .august:
+            nom = "août"
+        case .september:
+            nom = "septembre"
+        case .october:
+            nom = "octobre"
+        case .november:
+            nom = "novembre"
+        case .december:
+            nom = "décembre"
+        }
+        return majuscules.applySimpleAlgorithm(to: nom)
+    }
+
+    /// Επιστρέφει τον ελληνικό όνομα.
+    public func σταΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
+        let όνομα: StrictString
+
+        func απλό(όνομα: StrictString) -> StrictString {
+            switch πτώση {
+            case .ονομαστική:
+                return όνομα + "ος"
+            case .αιτιατική:
+                return όνομα.replacingMatches(for: "́" as StrictString, with: "" as StrictString) + "́ου"
+            case .γενική:
+                return όνομα + "ο"
+            case .κλητική:
+                return όνομα + "ε"
+            }
+        }
+
+        switch self {
+        case .january:
+            return απλό(όνομα: "Ιανουάρι")
+        case .february:
+            return απλό(όνομα: "Φεβρουάρι")
+        case .march:
+            return απλό(όνομα: "Μάρτι")
+        case .april:
+            return απλό(όνομα: "Απρίλι")
+        case .may:
+            if πτώση == .γενική {
+                return "Μαΐου"
+            } else {
+                return απλό(όνομα: "Μάι")
+            }
+        case .june:
+            return απλό(όνομα: "Ιούνι")
+        case .july:
+            return απλό(όνομα: "Ιούλι")
+        case .august:
+            if πτώση == .γενική {
+                return "Αυγούστου"
+            } else {
+                return απλό(όνομα: "Αύγουστ")
+            }
+        case .september:
+            return απλό(όνομα: "Σεπτέμβρι")
+        case .october:
+            return απλό(όνομα: "Οκτώβρι")
+        case .november:
+            return απλό(όνομα: "Νοέμβρι")
+        case .december:
+            return απλό(όνομα: "Δεκέμβρι")
+        }
+    }
+
+    /// מחזירה את השם העברי.
+    public func בעברית() -> StrictString {
+        switch self {
+        case .january:
+            return "ינואר"
+        case .february:
+            return "פברואר"
+        case .march:
+            return "מרץ"
+        case .april:
+            return "אפריל"
+        case .may:
+            return "מאי"
+        case .june:
+            return "יוני"
+        case .july:
+            return "יולי"
+        case .august:
+            return "אוגוסט"
+        case .september:
+            return "ספטמבר"
+        case .october:
+            return "אוקטובר"
+        case .november:
+            return "נובמבר"
+        case .december:
+            return "דצמבר"
+        }
+    }
+
     // MARK: - CalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]

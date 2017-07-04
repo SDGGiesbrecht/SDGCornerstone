@@ -32,6 +32,13 @@ public struct GregorianSecond : CardinalCalendarComponent, ConsistentDurationCal
         return (1 as FloatMax).seconds
     }
 
+    // MARK: - Text Representations
+
+    /// Returns the second in digits, floored and with leading zeroes.
+    public func inDigits() -> StrictString {
+        return Int(second.rounded(.down)).inDigits().filled(to: 2, with: "0", from: .start)
+    }
+
     // MARK: - ICalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
