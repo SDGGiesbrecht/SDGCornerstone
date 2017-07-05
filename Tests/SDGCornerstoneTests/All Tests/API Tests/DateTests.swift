@@ -32,12 +32,6 @@ class DateTests : TestCase {
         formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss +zzzz"
         XCTAssert(Date(CalendarDate(gregorianYear: 1991, month: .april, day: 18, hour: 0, minute: 0, second: 0)) == formatter.date(from: "1991‐04‐18 00:00:00 +0000"), "CalendarDate does not match Foundation.")
 
-        let anotherFormatter = DateFormatter()
-        anotherFormatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss +zzzz"
-        anotherFormatter.calendar = Calendar(identifier: Calendar.Identifier.hebrew)
-        XCTAssert(Date(CalendarDate(hebrewYear: 5751, month: .iyar, day: 4, hour: 0, part: 0)) == anotherFormatter.date(from: "5751‐08‐03 18:00:00 +0000"), "Sundown (SDG) to midnight (Foundation) offset out of sync.")
-        XCTAssert(Date(CalendarDate(hebrewYear: 5776, month: .tevet, day: 10, hour: 0, part: 0)) == anotherFormatter.date(from: "5776‐04‐09 18:00:00 +0000"), "Sundown (SDG) to midnight (Foundation) offset out of sync.")
-
         XCTAssert(CalendarDate(gregorianYear: 2015, month: .december, day: 23, hour: 0, minute: 0, second: 0).gregorianWeekday == .wednesday, "Weekday failure.")
         XCTAssert(CalendarDate(hebrewYear: 5776, month: .tevet, day: 11, hour: 0, part: 0).hebrewWeekday == .wednesday, "Weekday failure.")
 
