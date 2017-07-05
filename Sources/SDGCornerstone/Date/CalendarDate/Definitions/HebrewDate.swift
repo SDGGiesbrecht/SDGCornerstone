@@ -155,7 +155,12 @@ internal struct HebrewDate : DateDefinition {
         approxMonthsElapsed.decrease(to: HebrewYear.numberOfMonths(leapYear: year.isLeapYear) − 1)
         let guessMonth = HebrewMonth(numberAlreadyElapsed: approxMonthsElapsed, leapYear: year.isLeapYear)
         let month = findLocalMinimum(near: HebrewMonthAndYear(month: guessMonth, year: year), within: HebrewMonthAndYear(month: .tishrei, year: year) ... HebrewMonthAndYear(month: .elul, year: year), inFunction: { (month: HebrewMonthAndYear) -> CalendarInterval<FloatMax> in
-            return HebrewDate.intervalFromStartOfYear(toStartOf: month.month, leapYear: month.year.isLeapYear, yearLength: month.year.length)
+            let result = remainder − HebrewDate.intervalFromStartOfYear(toStartOf: month.month, leapYear: month.year.isLeapYear, yearLength: month.year.length)
+            if result.isNegative {
+                return |result| + HebrewYear.maximumDuration
+            } else {
+                return result
+            }
         }).month
         remainder −= HebrewDate.intervalFromStartOfYear(toStartOf: month, leapYear: year.isLeapYear, yearLength: year.length)
 
