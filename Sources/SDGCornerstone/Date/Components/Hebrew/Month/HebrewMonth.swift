@@ -13,7 +13,7 @@
  */
 
 /// A month of the Hebrew year.
-public enum HebrewMonth : Int, EnumerationCalendarComponent {
+public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Cases
 
@@ -374,6 +374,185 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent {
                 }
             }
             return rawValue + offset
+        }
+    }
+
+    // MARK: - Month
+
+    // [_Inherit Documentation: SDGCornerstone.Month.inEnglish()_]
+    /// Returns the English name.
+    public func inEnglish() -> StrictString {
+        switch self {
+        case .tishrei:
+            return "Tishrei"
+        case .cheshvan:
+            return "Cheshvan"
+        case .kislev:
+            return "Kislev"
+        case .tevet:
+            return "Tevet"
+        case .shevat:
+            return "Shevat"
+        case .adarI:
+            return "Adar " + 1.inRomanNumerals()
+        case .adar:
+            return "Adar"
+        case .adarII:
+            return "Adar " + 2.inRomanNumerals()
+        case .nisan:
+            return "Nisan"
+        case .iyar:
+            return "Iyar"
+        case .sivan:
+            return "Sivan"
+        case .tammuz:
+            return "Tammuz"
+        case .av:
+            return "Av"
+        case .elul:
+            return "Elul"
+        }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Month.aufDeutsch()_]
+    /// Gibt den deutschen Namen zurück.
+    public func aufDeutsch() -> StrictString {
+        switch self {
+        case .tishrei:
+            return "Tischri"
+        case .cheshvan:
+            return "Cheschwan"
+        case .kislev:
+            return "Kislew"
+        case .tevet:
+            return "Tevet"
+        case .shevat:
+            return "Schevat"
+        case .adarI:
+            return "Adar " + 1.inRomanNumerals()
+        case .adar:
+            return "Adar"
+        case .adarII:
+            return "Adar " + 2.inRomanNumerals()
+        case .nisan:
+            return "Nisan"
+        case .iyar:
+            return "Ijjar"
+        case .sivan:
+            return "Siwan"
+        case .tammuz:
+            return "Tammus"
+        case .av:
+            return "Aw"
+        case .elul:
+            return "Elul"
+        }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Month.enFrançais()_]
+    /// Retourne le nom français.
+    public func enFrançais(_ majuscules: Casing) -> StrictString {
+        let nom: StrictString
+        switch self {
+        case .tishrei:
+            nom = "tichri"
+        case .cheshvan:
+            nom = "hèchvane"
+        case .kislev:
+            nom = "kislev"
+        case .tevet:
+            nom = "téveth"
+        case .shevat:
+            nom = "chevat"
+        case .adarI:
+            nom = "adar " + 1.inRomanNumerals()
+        case .adar:
+            nom = "adar"
+        case .adarII:
+            nom = "adar " + 2.inRomanNumerals()
+        case .nisan:
+            nom = "nissane"
+        case .iyar:
+            nom = "iyar"
+        case .sivan:
+            nom = "sivane"
+        case .tammuz:
+            nom = "tamouz"
+        case .av:
+            nom = "av"
+        case .elul:
+            nom = "éloul"
+        }
+        return majuscules.applySimpleAlgorithm(to: nom)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Month.σεΕλληνικά()_]
+    /// Επιστρέφει τον ελληνικό όνομα.
+    public func σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
+        switch self {
+        case .tishrei:
+            return "Τισρί"
+        case .cheshvan:
+            return "Χεσβάν"
+        case .kislev:
+            return "Χισλεύ"
+        case .tevet:
+            return "Τεβέθ"
+        case .shevat:
+            return "Σεβάτ"
+        case .adarI:
+            return "Αδάρ " + 1.σεΕλληνικούςΑριθμούς()
+        case .adar:
+            return "Αδάρ"
+        case .adarII:
+            return "Αδάρ " + 2.σεΕλληνικούςΑριθμούς()
+        case .nisan:
+            return "Νισάν"
+        case .iyar:
+            return "Λυγιάρ"
+        case .sivan:
+            return "Σιβάν"
+        case .tammuz:
+            return "Θαμμούζ"
+        case .av:
+            return "Αβ"
+        case .elul:
+            return "Ελούλ"
+        }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Month.בעברית()_]
+    /// מחזירה את השם העברי.
+    public func בעברית() -> StrictString {
+        switch self {
+        case .tishrei:
+            return "תשרי"
+        case .cheshvan:
+            return "חשוון"
+        case .kislev:
+            return "כסלו"
+        case .tevet:
+            return "טבת"
+        case .shevat:
+            return "שבט"
+        case .adarI:
+            return "אדר " + 1.בספרות־עבריות()
+        case .adar:
+            return "אדר"
+        case .adarII:
+            return "אדר " + 2.בספרות־עבריות()
+        case .nisan:
+            return "ניסן"
+        case .iyar:
+            return "אייר"
+        case .sivan:
+            return "סיוון"
+        case .tammuz:
+            return "תמוז"
+        case .av:
+            return "אב"
+        case .elul:
+            return "אלול"
         }
     }
 

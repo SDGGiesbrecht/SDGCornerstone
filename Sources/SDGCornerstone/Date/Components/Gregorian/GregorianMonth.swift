@@ -13,7 +13,7 @@
  */
 
 /// A month of the Gregorian year.
-public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, EnumerationCalendarComponent {
+public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent {
 
     // MARK: - Cases
 
@@ -104,8 +104,37 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
         }
     }
 
-    // MARK: - Text Representations
+    // MARK: - CalendarComponent
 
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    /// The mean duration.
+    public static var meanDuration: CalendarInterval<FloatMax> {
+        return GregorianYear.meanDuration ÷ FloatMax(GregorianYear.monthsPerYear)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    /// The minimum duration.
+    public static var minimumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(GregorianMonth.minimumNumberOfDays).days
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    /// The maximum duration.
+    public static var maximumDuration: CalendarInterval<FloatMax> {
+        return FloatMax(GregorianMonth.maximumNumberOfDays).days
+    }
+
+    // MARK: - ISOCalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    /// Returns a string representation in the ISO format.
+    public func inISOFormat() -> StrictString {
+        return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
+    }
+
+    // MARK: - Month
+
+    // [_Inherit Documentation: SDGCornerstone.Month.inEnglish()_]
     /// Returns the English name.
     public func inEnglish() -> StrictString {
         switch self {
@@ -136,6 +165,7 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
         }
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Month.aufDeutsch()_]
     /// Gibt den deutschen Namen zurück.
     public func aufDeutsch() -> StrictString {
         switch self {
@@ -166,6 +196,7 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
         }
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Month.enFrançais()_]
     /// Retourne le nom français.
     public func enFrançais(_ majuscules: Casing) -> StrictString {
         let nom: StrictString
@@ -198,8 +229,9 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
         return majuscules.applySimpleAlgorithm(to: nom)
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Month.σεΕλληνικά()_]
     /// Επιστρέφει τον ελληνικό όνομα.
-    public func σταΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
+    public func σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
         let όνομα: StrictString
 
         func απλό(όνομα: StrictString) -> StrictString {
@@ -251,6 +283,7 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
         }
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Month.בעברית()_]
     /// מחזירה את השם העברי.
     public func בעברית() -> StrictString {
         switch self {
@@ -279,34 +312,6 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
         case .december:
             return "דצמבר"
         }
-    }
-
-    // MARK: - CalendarComponent
-
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
-    /// The mean duration.
-    public static var meanDuration: CalendarInterval<FloatMax> {
-        return GregorianYear.meanDuration ÷ FloatMax(GregorianYear.monthsPerYear)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
-    /// The minimum duration.
-    public static var minimumDuration: CalendarInterval<FloatMax> {
-        return FloatMax(GregorianMonth.minimumNumberOfDays).days
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
-    /// The maximum duration.
-    public static var maximumDuration: CalendarInterval<FloatMax> {
-        return FloatMax(GregorianMonth.maximumNumberOfDays).days
-    }
-
-    // MARK: - ICalendarComponent
-
-    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
-    /// Returns a string representation in the iCalendar format.
-    public var iCalendarRepresentation: StrictString {
-        return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - PointProtocol

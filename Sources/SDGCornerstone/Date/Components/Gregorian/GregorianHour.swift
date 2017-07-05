@@ -13,7 +13,7 @@
  */
 
 /// An hour of the Gregorian day.
-public struct GregorianHour : CardinalCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianHour : CardinalCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Static Properties
 
@@ -34,16 +34,37 @@ public struct GregorianHour : CardinalCalendarComponent, ConsistentDurationCalen
 
     // MARK: - Text Representations
 
-    /// Returns the hour in digits.
-    public func inDigits() -> StrictString {
+    /// Returns the hour in digits for twenty‐four–hour notation. (0–23)
+    public func inDigitsInTwentyFourHourFormat() -> StrictString {
         return hour.inDigits()
     }
 
-    // MARK: - ICalendarComponent
+    /// Returns the hour in digits for twelve‐hour notation. (1–12)
+    public func inDigitsInTwelveHourFormat() -> StrictString {
+        var result = hour
+        if result > 12 {
+            result −= 12
+        }
+        if result == 0 {
+            result = 12
+        }
+        return result.inDigits()
+    }
 
-    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
-    /// Returns a string representation in the iCalendar format.
-    public var iCalendarRepresentation: StrictString {
+    /// Returns “a.m.” or “p.m.”, corresponding to the hour.
+    public func amOrPM() -> StrictString {
+        if hour ≥ 12 {
+            return "p.m."
+        } else {
+            return "a.m."
+        }
+    }
+
+    // MARK: - ISOCalendarComponent
+
+    // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    /// Returns a string representation in the ISO format.
+    public func inISOFormat() -> StrictString {
         return hour.inDigits().filled(to: 2, with: "0", from: .start)
     }
 

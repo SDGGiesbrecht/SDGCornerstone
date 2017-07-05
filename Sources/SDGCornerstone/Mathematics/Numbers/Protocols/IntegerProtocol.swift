@@ -67,11 +67,11 @@ extension IntegerProtocol {
         return romanNumerals(lowercase: lowercase)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.στουςΕλληνικούςΑριθμούς(μικράΓράμματα:κεραία:)_]
+    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.σεΕλληνικούςΑριθμούς(μικράΓράμματα:κεραία:)_]
     /// Επιστρέφει τον αριθμό στους ελληνικούς αριθμούς.
     ///
     /// - Precondition: Ο αριθμός είναι σε Αʹ–͵ΘϠϞΘʹ.
-    public func στουςΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
+    public func σεΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
         return ελληνικοίΑριθμοί(μικράΓράμματα: μικράΓράμματα, κεραία: κεραία)
     }
 

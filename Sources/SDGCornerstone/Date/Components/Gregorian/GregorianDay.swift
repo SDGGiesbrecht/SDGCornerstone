@@ -13,7 +13,7 @@
  */
 
 /// A day of a Gregorian month.
-public struct GregorianDay : ConsistentDurationCalendarComponent, Day, ICalendarComponent, OrdinalCalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianDay : ConsistentDurationCalendarComponent, Day, ICalendarComponent, ISOCalendarComponent, OrdinalCalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Properties
 
@@ -42,12 +42,12 @@ public struct GregorianDay : ConsistentDurationCalendarComponent, Day, ICalendar
         return (1 as FloatMax).days
     }
 
-    // MARK: - ICalendarComponent
+    // MARK: - ISOCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
-    /// Returns a string representation in the iCalendar format.
-    public var iCalendarRepresentation: StrictString {
-        return day.inDigits().filled(to: 2, with: "0", from: .start)
+    // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    /// Returns a string representation in the ISO format.
+    public func inISOFormat() -> StrictString {
+        return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - PointProtocol

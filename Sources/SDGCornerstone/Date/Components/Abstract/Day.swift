@@ -44,7 +44,7 @@ extension Day {
     }
 
     /// Επιστρέφει την ημέρα στα ελληνικά ψηφία. («1», «2», «3», κ.λπ.)
-    public func σταΕλληνικάΨηφία() -> StrictString {
+    public func σεΕλληνικάΨηφία() -> StrictString {
         return ordinal.inDigits()
     }
 

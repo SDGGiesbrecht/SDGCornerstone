@@ -24,6 +24,13 @@ public struct HebrewPart : CardinalCalendarComponent, ConsistentDurationCalendar
 
     private var part: FloatMax
 
+    // MARK: - Text Representations
+
+    /// Returns the part in digits.
+    public func inDigits() -> StrictString {
+        return Int(part.rounded(.down)).inDigits()
+    }
+
     // MARK: - ConsistentDurationCalendarComponent
 
     // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]

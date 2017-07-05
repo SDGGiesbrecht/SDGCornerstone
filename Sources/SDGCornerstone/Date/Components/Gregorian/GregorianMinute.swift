@@ -13,7 +13,7 @@
  */
 
 /// A minute of the Gregorian hour.
-public struct GregorianMinute : CardinalCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianMinute : CardinalCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Static Properties
 
@@ -39,11 +39,11 @@ public struct GregorianMinute : CardinalCalendarComponent, ConsistentDurationCal
         return minute.inDigits().filled(to: 2, with: "0", from: .start)
     }
 
-    // MARK: - ICalendarComponent
+    // MARK: - ISOCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
-    /// Returns a string representation in the iCalendar format.
-    public var iCalendarRepresentation: StrictString {
+    // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    /// Returns a string representation in the ISO format.
+    public func inISOFormat() -> StrictString {
         return minute.inDigits().filled(to: 2, with: "0", from: .start)
     }
 

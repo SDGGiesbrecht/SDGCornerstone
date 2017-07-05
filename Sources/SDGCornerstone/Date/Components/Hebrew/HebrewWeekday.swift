@@ -13,7 +13,7 @@
  */
 
 /// A day of the Hebrew week.
-public enum HebrewWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent {
+public enum HebrewWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent, Weekday {
 
     // MARK: - Cases
 

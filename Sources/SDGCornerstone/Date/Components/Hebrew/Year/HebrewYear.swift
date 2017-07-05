@@ -13,7 +13,7 @@
  */
 
 /// A Hebrew year.
-public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarComponent {
+public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarComponent, Year {
 
     // MARK: - Static Properties
 
@@ -114,5 +114,41 @@ public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarCo
     /// The raw value.
     public var rawValue: Int {
         return year
+    }
+
+    // MARK: - Year
+
+    private func inDigits() -> StrictString {
+        return year.inDigits()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.inEnglishDigits()_]
+    /// Returns the year in English digits.
+    public func inEnglishDigits() -> StrictString {
+        return inDigits()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.inDeutschenZiffern()_]
+    /// Gibt das Jahr in deutschen Ziffern zurück.
+    public func inDeutschenZiffern() -> StrictString {
+        return inDigits()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.enChiffresFrançais()_]
+    /// Retourne l’an en chiffres français.
+    public func enChiffresFrançais() -> StrictString {
+        return inDigits()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.σεΕλληνικάΨηφία()_]
+    /// Επιστρέφει τον χρόνο στα ελληνικά ψηφία.
+    public func σεΕλληνικάΨηφία() -> StrictString {
+        return inDigits()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.בעברית־בספרות()_]
+    /// מחזירה את השנה בעברית ובספרות.
+    public func בעברית־בספרות() -> StrictString {
+        return inDigits()
     }
 }

@@ -13,9 +13,9 @@
  */
 
 /// A calendar component with an iCalendar representation.
-public protocol ICalendarComponent {
+public protocol ISOCalendarComponent {
 
-    // [_Define Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
-    /// Returns a string representation in the iCalendar format.
-    var iCalendarRepresentation: StrictString { get }
+    // [_Define Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    /// Returns a string representation in the ISO format.
+    func inISOFormat() -> StrictString
 }

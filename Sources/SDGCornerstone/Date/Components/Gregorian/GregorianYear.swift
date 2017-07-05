@@ -24,7 +24,7 @@
 /// let timespan = GregorianYear(1) − GregorianYear(−1)
 /// // 1 year
 /// ```
-public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, Year {
 
     // MARK: - Static Properties
 
@@ -103,45 +103,6 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
         }
     }
 
-    // MARK: - Text Representations
-
-    private func inDigits(bcAbbreviation: StrictString) -> StrictString {
-        var number = year
-        if number.isNegative {
-            number = |number|
-        }
-        var digits = number.inDigits()
-        if year.isNegative {
-            digits += (" " as StrictString) + bcAbbreviation
-        }
-        return digits
-    }
-
-    /// Returns the year in English digits.
-    public func inEnglishDigits() -> StrictString {
-        return inDigits(bcAbbreviation: "BC")
-    }
-
-    /// Gibt das Jahr in deutschen Ziffern zurück.
-    public func inDeutschenZiffern() -> StrictString {
-        return inDigits(bcAbbreviation: "v. Chr.")
-    }
-
-    /// Retourne l’an en chiffres français.
-    public func enChiffresFrançais() -> StrictString {
-        return inDigits(bcAbbreviation: "av. J.‐C.")
-    }
-
-    /// Επιστρέφει τον χρόνο στα ελληνικά ψηφία.
-    public func σταΕλληνικάΨηφία() -> StrictString {
-        return inDigits(bcAbbreviation: "π.Χ.")
-    }
-
-    /// מחזירה את השנה בעברית ובספרות.
-    public func בעברית־בספרות() -> StrictString {
-        return inDigits(bcAbbreviation: "לפנה״ס")
-    }
-
     // MARK: - CalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
@@ -198,24 +159,16 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
         return rawValue
     }
 
-    // MARK: - ICalendarComponent
+    // MARK: - ISOCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.iCalendarRepresentation_]
-    /// Returns a string representation in the iCalendar format.
-    public var iCalendarRepresentation: StrictString {
-        assert(−1 ≤ rawValue ∧ rawValue ≤ 9999, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-            switch localization {
-            case .englishCanada:
-                return StrictString("The year \(self.inEnglishDigits()) is out of range for the iCalendar format.")
-            }
-        }))
-        let value: Int
-        if rawValue == −1 {
-            value = 0
-        } else {
-            value = rawValue
+    // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    /// Returns a string representation in the ISO format.
+    public func inISOFormat() -> StrictString {
+        var digits = (|ordinal|).inDigits().filled(to: 4, with: "0", from: .start)
+        if ordinal.isNegative {
+            digits.prepend("−")
         }
-        return value.inDigits().filled(to: 4, with: "0", from: .start)
+        return digits
     }
 
     // MARK: - PointProtocol
@@ -292,5 +245,49 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
     /// The raw value.
     public var rawValue: Int {
         return year
+    }
+
+    // MARK: - Year
+
+    private func inDigits(bcAbbreviation: StrictString) -> StrictString {
+        var number = year
+        if number.isNegative {
+            number = |number|
+        }
+        var digits = number.inDigits()
+        if year.isNegative {
+            digits += (" " as StrictString) + bcAbbreviation
+        }
+        return digits
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.inEnglishDigits()_]
+    /// Returns the year in English digits.
+    public func inEnglishDigits() -> StrictString {
+        return inDigits(bcAbbreviation: "BC")
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.inDeutschenZiffern()_]
+    /// Gibt das Jahr in deutschen Ziffern zurück.
+    public func inDeutschenZiffern() -> StrictString {
+        return inDigits(bcAbbreviation: "v. Chr.")
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.enChiffresFrançais()_]
+    /// Retourne l’an en chiffres français.
+    public func enChiffresFrançais() -> StrictString {
+        return inDigits(bcAbbreviation: "av. J.‐C.")
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.σεΕλληνικάΨηφία()_]
+    /// Επιστρέφει τον χρόνο στα ελληνικά ψηφία.
+    public func σεΕλληνικάΨηφία() -> StrictString {
+        return inDigits(bcAbbreviation: "π.Χ.")
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Year.בעברית־בספרות()_]
+    /// מחזירה את השנה בעברית ובספרות.
+    public func בעברית־בספרות() -> StrictString {
+        return inDigits(bcAbbreviation: "לפנה״ס")
     }
 }

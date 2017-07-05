@@ -43,10 +43,36 @@ class RegressionTests : TestCase {
         runTests(RealArithmeticExample.self)
     }
 
+    func testCalendarEquatability() {
+        let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
+        XCTAssert(tishrei == HebrewMonthAndYear(month: .tishrei, year: 5759), "Equality problem.")
+        let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
+        XCTAssert(tevet == HebrewMonthAndYear(month: .tevet, year: 5759), "Equality problem.")
+        XCTAssert(tishrei ≠ tevet, "Equality problem!")
+    }
+
     func testDivisionIsUnambiguous() {
         // Untracked
 
         _ = Double(1) ÷ Double(1)
+    }
+
+    func testDivisionOfNegatives() {
+        // Untracked
+
+        let negativeThree = −3
+        XCTAssert(negativeThree.dividedAccordingToEuclid(by:  1) == −3, "Division problem: \(negativeThree.dividedAccordingToEuclid(by: 1)) ≠ −3")
+        let negativeEighteen = −18
+        XCTAssert(negativeEighteen.dividedAccordingToEuclid(by: 19) == −1, "Division problem: \(negativeEighteen.dividedAccordingToEuclid(by: 19)) ≠ −1")
+        let negativeOne: RationalNumber = −1
+        XCTAssert(negativeOne ÷ −1 == 1, "Division problem.")
+    }
+
+    func testFloor() {
+        // Untracked
+
+        let thirty = 30
+        XCTAssert(thirty == thirty.rounded(.down), "Flooring problem.")
     }
 
     func testMatchlessComponentSeperation() {
@@ -130,15 +156,27 @@ class RegressionTests : TestCase {
         let _: RealArithmeticExample = RealArithmeticExample(3) − RealArithmeticExample(2)
     }
 
+    func testWeekday() {
+        var date = CalendarDate(hebrewYear: 5758, month: .tishrei, day: 4)
+        for _ in 0 ..< 1000 {
+            date += (7 as CalendarDate.Vector.Scalar).weeks
+            XCTAssert(date.hebrewWeekday == .saturday, "Weekday problem.")
+        }
+    }
+
     static var allTests: [(String, (RegressionTests) -> () throws -> Void)] {
         return [
             ("testAddAndSetIsUnambiguous", testAddAndSetIsUnambiguous),
+            ("testCalendarEquatability", testCalendarEquatability),
             ("testDivisionIsUnambiguous", testDivisionIsUnambiguous),
+            ("testDivisionOfNegatives", testDivisionOfNegatives),
+            ("testFloor", testFloor),
             ("testMatchlessComponentSeperation", testMatchlessComponentSeperation),
             ("testNestingLevelLocation", testNestingLevelLocation),
             ("testReverseSearch", testReverseSearch),
             ("testSubtraction", testSubtraction),
-            ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous)
+            ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous),
+            ("testWeekday", testWeekday)
         ]
     }
 }

@@ -24,6 +24,13 @@ public struct HebrewHour : CardinalCalendarComponent, ConsistentDurationCalendar
 
     private var hour: Int
 
+    // MARK: - Text Representations
+
+    /// Returns the hour in digits.
+    public func inDigits() -> StrictString {
+        return hour.inDigits()
+    }
+
     // MARK: - ConsistentDurationCalendarComponent
 
     // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]

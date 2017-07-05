@@ -174,16 +174,188 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         }
     }
 
+    // MARK: - Text Representations
+
+    /// Returns the date in the ISO format.
+    public func dateInISOFormat() -> StrictString {
+        return gregorianYear.inISOFormat() + "‐" + gregorianMonth.inISOFormat() + "‐" + gregorianDay.inISOFormat()
+    }
+
+    private func dateInBritishEnglish<Y : Year, M : Month, D : Day, W : Weekday>(year: Y, month: M, day: D, weekday: W, withYear: Bool, withWeekday: Bool) -> StrictString {
+        var result = StrictString("\(day.inEnglishDigits()) \(month.inEnglish())")
+        if withYear {
+            result.append(contentsOf: StrictString(" \(year.inEnglishDigits())"))
+        }
+        if withWeekday {
+            result.prepend(contentsOf: StrictString("\(weekday.inEnglish()), "))
+        }
+        return result
+    }
+
+    private func dateInAmericanEnglish<Y : Year, M : Month, D : Day, W : Weekday>(year: Y, month: M, day: D, weekday: W, withYear: Bool, withWeekday: Bool) -> StrictString {
+        var result = StrictString("\(month.inEnglish()) \(day.inEnglishDigits())")
+        if withYear {
+            result.append(contentsOf: StrictString(", \(year.inEnglishDigits())"))
+        }
+        if withWeekday {
+            result.prepend(contentsOf: StrictString("\(weekday.inEnglish()), "))
+        }
+        return result
+    }
+
+    /// Returns the Hebrew date in British English.
+    public func hebrewDateInBritishEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
+        return dateInBritishEnglish(year: hebrewYear, month: hebrewMonth, day: hebrewDay, weekday: hebrewWeekday, withYear: withYear, withWeekday: withWeekday)
+    }
+
+    /// Returns the Hebrew date in American English.
+    public func hebrewDateInAmericanEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
+        return dateInAmericanEnglish(year: gregorianYear, month: gregorianMonth, day: gregorianDay, weekday: hebrewWeekday, withYear: withYear, withWeekday: withWeekday)
+    }
+
+    /// Returns the Gregorian date in British English.
+    public func gregorianDateInBritishEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
+        return dateInBritishEnglish(year: gregorianYear, month: gregorianMonth, day: gregorianDay, weekday: gregorianWeekday, withYear: withYear, withWeekday: withWeekday)
+    }
+
+    /// Returns the Gregorian date in American English.
+    public func gregorianDateInAmericanEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
+        return dateInAmericanEnglish(year: gregorianYear, month: gregorianMonth, day: gregorianDay, weekday: gregorianWeekday, withYear: withYear, withWeekday: withWeekday)
+    }
+
+    private func datumAufDeutsch<Y : Year, M : Month, D : Day, W : Weekday>(jahr: Y, monat: M, tag: D, wochentag: W, mitJahr: Bool, mitWochentag: Bool) -> StrictString {
+        var ergebnis = StrictString("\(tag.inDeutschenZiffern()) \(monat.aufDeutsch())")
+        if mitJahr {
+            ergebnis.append(contentsOf: StrictString(" \(jahr.inDeutschenZiffern())"))
+        }
+        if mitWochentag {
+            ergebnis.prepend(contentsOf: StrictString("\(wochentag.aufDeutsch()), "))
+        }
+        return ergebnis
+    }
+
+    /// Gibt das hebräische Datum auf Deutsch zurück.
+    public func hebräischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false) -> StrictString {
+        return datumAufDeutsch(jahr: hebrewYear, monat: hebrewMonth, tag: hebrewDay, wochentag: hebrewWeekday, mitJahr: mitJahr, mitWochentag: mitWochentag)
+    }
+
+    /// Gibt das gregorianische Datum auf Deutsch zurück.
+    public func gregorianischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false) -> StrictString {
+        return datumAufDeutsch(jahr: gregorianYear, monat: gregorianMonth, tag: gregorianDay, wochentag: gregorianWeekday, mitJahr: mitJahr, mitWochentag: mitWochentag)
+    }
+
+    private func dateEnFrançais<Y : Year, M : Month, D : Day, W : Weekday>(_ majuscules: Casing, an: Y, mois: M, jour: D, jourDeSemaine: W, avecAn: Bool, avecJourDeSemaine: Bool) -> StrictString {
+        var résultat = StrictString("le \(jour.enChiffresFrançais()) \(mois.enFrançais(.sentenceMedial))")
+        if avecAn {
+            résultat.append(contentsOf: StrictString(" \(an.enChiffresFrançais())"))
+        }
+        if avecJourDeSemaine {
+            résultat.prepend(contentsOf: StrictString("\(jourDeSemaine.enFrançais(.sentenceMedial)), \(résultat)"))
+        }
+        return majuscules.applySimpleAlgorithm(to: résultat)
+    }
+
+    /// Retourne la date hébraïque en français.
+    public func dateHébraïqueEnFrançais(_ majuscules: Casing, avecAn: Bool = true, avecJourDeSemaine: Bool = false) -> StrictString {
+        return dateEnFrançais(majuscules, an: hebrewYear, mois: hebrewMonth, jour: hebrewDay, jourDeSemaine: hebrewWeekday, avecAn: avecAn, avecJourDeSemaine: avecJourDeSemaine)
+    }
+
+    /// Retourne la date grégorienne en français.
+    public func dateGrégorienneEnFrançais(_ majuscules: Casing, avecAn: Bool = true, avecJourDeSemaine: Bool = false) -> StrictString {
+        return dateEnFrançais(majuscules, an: gregorianYear, mois: gregorianMonth, jour: gregorianDay, jourDeSemaine: gregorianWeekday, avecAn: avecAn, avecJourDeSemaine: avecJourDeSemaine)
+    }
+
+    private func ημερομηνίαΣεΕλληνικά<Y : Year, M : Month, D : Day, W : Weekday>(χρόνος: Y, μήνας: M, ημέρα: D, ημέραΤηςΕβδομάδας: W, μεΧρόνο: Bool, μεΗμέραΤηςΕβδομάδας: Bool) -> StrictString {
+        var αποτέλεσμα = StrictString("\(ημέρα.σεΕλληνικάΨηφία()) \(μήνας.σεΕλληνικά(.γενική))")
+        if μεΧρόνο {
+            αποτέλεσμα.append(contentsOf: StrictString(" \(χρόνος.σεΕλληνικάΨηφία())"))
+        }
+        if μεΗμέραΤηςΕβδομάδας {
+            αποτέλεσμα.prepend(contentsOf: StrictString("\(ημέραΤηςΕβδομάδας.σεΕλληνικά()), "))
+        }
+        return αποτέλεσμα
+    }
+
+    /// Επιστρέφει την εβραϊκή ημερομηνία στα ελληνικά.
+    public func εβραϊκήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
+        return ημερομηνίαΣεΕλληνικά(χρόνος: hebrewYear, μήνας: hebrewMonth, ημέρα: hebrewDay, ημέραΤηςΕβδομάδας: hebrewWeekday, μεΧρόνο: μεΧρόνο, μεΗμέραΤηςΕβδομάδας: μεΗμέραΤηςΕβδομάδας)
+    }
+
+    /// Επιστρέφει την Γρηγοριανή ημερομηνία στα ελληνικά.
+    public func γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
+        return ημερομηνίαΣεΕλληνικά(χρόνος: gregorianYear, μήνας: gregorianMonth, ημέρα: gregorianDay, ημέραΤηςΕβδομάδας: gregorianWeekday, μεΧρόνο: μεΧρόνο, μεΗμέραΤηςΕβδομάδας: μεΗμέραΤηςΕβδομάδας)
+    }
+
+    private func תאריך־בעברית<Y : Year, M : Month, D : Day, W : Weekday>(שנה: Y, חודש: M, יום: D, יום־שבוע: W, עם־שנה: Bool, עם־יום־שבוע: Bool) -> StrictString {
+        var תוצאה = StrictString("\(יום.בעברית־בספרות()) ב\(חודש.בעברית())")
+        if עם־שנה {
+            תוצאה.append(contentsOf: StrictString(" \(שנה.בעברית־בספרות())"))
+        }
+        if עם־יום־שבוע {
+            תוצאה.prepend(contentsOf: StrictString("\(יום־שבוע.בעברית()), "))
+        }
+        return תוצאה
+    }
+
+    /// מחזירה את התאריך העברי בעברית.
+    public func תאריך־עברי־בעברית(עם־שנה: Bool = true, עם־יום־שבוע: Bool = false) -> StrictString {
+        return תאריך־בעברית(שנה: hebrewYear, חודש: hebrewMonth, יום: hebrewDay, יום־שבוע: hebrewWeekday, עם־שנה: עם־שנה, עם־יום־שבוע: עם־יום־שבוע)
+    }
+
+    /// מחזירה את התאריך הגרגוריאני בעברית.
+    public func תאריך־גרגוריאני־בעברית(עם־שנה: Bool = true, עם־יום־שבוע: Bool = false) -> StrictString {
+        return תאריך־בעברית(שנה: gregorianYear, חודש: gregorianMonth, יום: gregorianDay, יום־שבוע: gregorianWeekday, עם־שנה: עם־שנה, עם־יום־שבוע: עם־יום־שבוע)
+    }
+
+    /// Returns the time in the ISO format.
+    public func timeInISOFormat(includeSeconds: Bool = false) -> StrictString {
+        var result: StrictString = gregorianHour.inISOFormat() + ":" as StrictString + gregorianMinute.inISOFormat()
+        if includeSeconds {
+            result += ":" as StrictString + gregorianSecond.inISOFormat()
+        }
+        return result
+    }
+
+    /// Returns the time in English in the twenty‐four–hour format.
+    public func twentyFourHourTimeInEnglish() -> StrictString {
+        return StrictString("\(gregorianHour.inDigitsInTwentyFourHourFormat()):\(gregorianMinute.inDigits())")
+    }
+
+    /// Returns the time in English in the twelve‐hour format.
+    public func twelveHourTimeInEnglish() -> StrictString {
+        return StrictString("\(gregorianHour.inDigitsInTwelveHourFormat()):\(gregorianMinute.inDigits()) \(gregorianHour.amOrPM())")
+    }
+
+    /// Gibt die Uhrzeit auf Deutsch zurück.
+    public func uhrzeitAufDeutsch() -> StrictString {
+        return StrictString("\(gregorianHour.inDigitsInTwentyFourHourFormat()).\(gregorianMinute.inDigits())")
+    }
+
+    /// Retourne l’heure en français.
+    public func heureEnFrançais() -> StrictString {
+        return StrictString("\(gregorianHour.inDigitsInTwentyFourHourFormat()) h \(gregorianMinute.inDigits())")
+    }
+
+    /// Επιστρέφει την ώρα στα ελληνικά.
+    public func ώραΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
+        return StrictString("\(gregorianHour.inDigitsInTwentyFourHourFormat()):\(gregorianMinute.inDigits())")
+    }
+
+    /// מחזירה את השעה בעברית.
+    public func שעה־בעברית() -> StrictString {
+        return StrictString("\(gregorianHour.inDigitsInTwentyFourHourFormat()):\(gregorianMinute.inDigits())")
+    }
+
     // MARK: - iCalendar
 
     /// Returns a string representation in the floating iCalendar format.
-    public var floatingiCalendarRepresentation: StrictString {
-        return gregorianYear.iCalendarRepresentation + gregorianMonth.iCalendarRepresentation + gregorianDay.iCalendarRepresentation + ("T" as StrictString) + gregorianHour.iCalendarRepresentation + gregorianMinute.iCalendarRepresentation + gregorianSecond.iCalendarRepresentation
+    public func floatingICalendarFormat() -> StrictString {
+        return gregorianYear.inICalendarFormat() + gregorianMonth.inICalendarFormat() + gregorianDay.inICalendarFormat() + ("T" as StrictString) + gregorianHour.inICalendarFormat() + gregorianMinute.inICalendarFormat() + gregorianSecond.inICalendarFormat()
     }
 
     /// Returns a string representation in UTC in the iCalendar format.
-    public var iCalendarRepresentation: StrictString {
-        return floatingiCalendarRepresentation + ("Z" as StrictString)
+    public func iCalendarFormat() -> StrictString {
+        return floatingICalendarFormat() + ("Z" as StrictString)
     }
 
     // MARK: - Comparable

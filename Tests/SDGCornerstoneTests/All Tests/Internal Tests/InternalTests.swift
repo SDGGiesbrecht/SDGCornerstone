@@ -19,6 +19,18 @@ import XCTest
 
 class InternalTests : TestCase {
 
+    func testHebrewYear() {
+        // Untracked
+
+        for year in HebrewYear(5700)..<5800 {
+
+            /* assert because XCTAssert doesn’t print because the exception on the next line triggers first. */
+            assert(HebrewDate.intervalFromReferenceDate(toStartOf: year) < HebrewDate.intervalFromReferenceDate(toStartOf: year + 1), "Years incorrectly share interval.")
+
+            _ = year.length // Throws exception if the year has an invalid length.
+        }
+    }
+
     func testLocalizationSetting() {
         XCTAssert(LocalizationSetting.osSystemWidePreferences.value?.asArray(of: String.self) ≠ nil, "Failed to detect operating system localization setting.")
 
@@ -57,6 +69,7 @@ class InternalTests : TestCase {
 
     static var allTests: [(String, (InternalTests) -> () throws -> Void)] {
         return [
+            ("testHebrewYear", testHebrewYear),
             ("testLocalizationSetting", testLocalizationSetting),
             ("testUIntHalvesView", testUIntHalvesView),
             ("testWholeNumberBinaryView", testWholeNumberBinaryView)

@@ -13,7 +13,7 @@
  */
 
 /// A day of the Gregorian week.
-public enum GregorianWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent {
+public enum GregorianWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent, Weekday {
 
     // MARK: - Cases
 
