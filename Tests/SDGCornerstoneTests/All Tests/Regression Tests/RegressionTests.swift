@@ -159,8 +159,8 @@ class RegressionTests : TestCase {
     func testWeekday() {
         var date = CalendarDate(hebrewYear: 5758, month: .tishrei, day: 4)
         for _ in 0 ..< 1000 {
-            date += (7 as CalendarDate.Vector.Scalar).weeks
-            XCTAssert(date.hebrewWeekday == .saturday, "Weekday problem.")
+            date += (1 as CalendarDate.Vector.Scalar).weeks
+            XCTAssert(date.hebrewWeekday == .sunday, "Weekday problem.")
         }
     }
 

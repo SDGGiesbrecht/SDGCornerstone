@@ -210,7 +210,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     /// Returns the Hebrew date in American English.
     public func hebrewDateInAmericanEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
-        return dateInAmericanEnglish(year: gregorianYear, month: gregorianMonth, day: gregorianDay, weekday: hebrewWeekday, withYear: withYear, withWeekday: withWeekday)
+        return dateInAmericanEnglish(year: hebrewYear, month: hebrewMonth, day: hebrewDay, weekday: hebrewWeekday, withYear: withYear, withWeekday: withWeekday)
     }
 
     /// Returns the Gregorian date in British English.
