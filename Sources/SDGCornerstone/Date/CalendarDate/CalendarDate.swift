@@ -397,7 +397,11 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     ///
     /// - NonmutatingVariant: +
     public static func += (lhs: inout CalendarDate, rhs: CalendarInterval<FloatMax>) {
-        lhs = CalendarDate(definition: RelativeDate(rhs, after: lhs))
+        if let relative = lhs.definition as? RelativeDate {
+            lhs = CalendarDate(definition: RelativeDate(relative.intervalSince + rhs, after: relative.baseDate))
+        } else {
+            lhs = CalendarDate(definition: RelativeDate(rhs, after: lhs))
+        }
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]

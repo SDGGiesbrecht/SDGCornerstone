@@ -25,8 +25,8 @@ internal struct RelativeDate : DateDefinition {
 
     // MARK: - Properties
 
-    private let baseDate: CalendarDate
-    private let intervalSince: CalendarInterval<FloatMax>
+    internal let baseDate: CalendarDate
+    internal let intervalSince: CalendarInterval<FloatMax>
 
     // MARK: - DateDefinition
 
