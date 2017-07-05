@@ -18,7 +18,7 @@ public protocol RawRepresentableCalendarComponent : ConsistentlyOrderedCalendarC
     // MARK: - Associated Type
 
     // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.RawValue_]
-    // The raw value type.
+    /// The raw value type.
     associatedtype RawValue : IntegralArithmetic
 
     // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:)_]

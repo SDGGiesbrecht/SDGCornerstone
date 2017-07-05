@@ -20,6 +20,9 @@ import XCTest
 class InternalTests : TestCase {
 
     func testHebrewYear() {
+        InternalTests.testHebrewYear()
+    }
+    static func testHebrewYear() {
         // Untracked
 
         for year in HebrewYear(5700)..<5800 {

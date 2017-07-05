@@ -16,9 +16,6 @@
 public protocol SmallestCalendarComponent : ExpressibleByFloatLiteral, NumericCalendarComponent {
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.RawValue_]
-    /// Creates an instance with an unchecked raw value.
-    ///
-    /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    // The raw value type.
+    /// The raw value type.
     associatedtype RawValue : RationalArithmetic
 }

@@ -21,7 +21,7 @@ class DateTests : TestCase {
 
     func testCalendarDate() {
         // Force these to take place first.
-        InternalTests().testHebrewYear()
+        InternalTests.testHebrewYear()
 
         XCTAssert(CalendarDate(hebrewYear: 5751, month: .iyar, day: 4, hour: 0, part: 0) == CalendarDate(gregorianYear: 1991, month: .april, day: 17, hour: 18, minute: 0, second: 0), "Date conversion failed.")
         XCTAssert(CalendarDate(hebrewYear: 5751, month: .iyar, day: 4, hour: 6, part: 0) == CalendarDate(gregorianYear: 1991, month: .april, day: 18, hour: 0, minute: 0, second: 0), "Date conversion failed.")
