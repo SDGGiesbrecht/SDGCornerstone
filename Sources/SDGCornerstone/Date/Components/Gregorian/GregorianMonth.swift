@@ -239,9 +239,9 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
             case .ονομαστική:
                 return όνομα + "ος"
             case .αιτιατική:
-                return όνομα.replacingMatches(for: "́" as StrictString, with: "" as StrictString) + "́ου"
-            case .γενική:
                 return όνομα + "ο"
+            case .γενική:
+                return όνομα.replacingMatches(for: "́" as StrictString, with: "" as StrictString) + "́ου"
             case .κλητική:
                 return όνομα + "ε"
             }

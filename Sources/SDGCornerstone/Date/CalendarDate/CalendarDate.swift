@@ -250,7 +250,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
             résultat.append(contentsOf: StrictString(" \(an.enChiffresFrançais())"))
         }
         if avecJourDeSemaine {
-            résultat.prepend(contentsOf: StrictString("\(jourDeSemaine.enFrançais(.sentenceMedial)), \(résultat)"))
+            résultat.prepend(contentsOf: StrictString("\(jourDeSemaine.enFrançais(.sentenceMedial)), "))
         }
         return majuscules.applySimpleAlgorithm(to: résultat)
     }

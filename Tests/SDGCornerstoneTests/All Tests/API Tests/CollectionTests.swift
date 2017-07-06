@@ -403,7 +403,7 @@ class CollectionTests : TestCase {
 
         func runFiniteTests<M : MutableSet, F : FiniteSet>(setA: M, setB: F, inAOnly: M.Element, inBOnly: M.Element, inBoth: M.Element, inNeither: M.Element) where M : FiniteSet, M.Element == F.Element {
 
-            XCTAssertNotEqual(setA, setB)
+            XCTAssert(setA ≠ setB)
 
             XCTAssert(inAOnly ∈ setA ∆ setB)
             XCTAssert(inBOnly ∈ setA ∆ setB)
