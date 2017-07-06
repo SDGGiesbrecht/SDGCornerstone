@@ -54,9 +54,15 @@ class DateTests : TestCase {
         XCTAssert(anotherDate.gregorianSecond == 0)
     }
 
+    func testGregorianSecond() {
+        let second: GregorianSecond = 0.0
+        XCTAssert(second == 0)
+    }
+
     static var allTests: [(String, (DateTests) -> () throws -> Void)] {
         return [
-            ("testCalendarDate", testCalendarDate)
+            ("testCalendarDate", testCalendarDate),
+            ("testGregorianSecond", testGregorianSecond)
         ]
     }
 }
