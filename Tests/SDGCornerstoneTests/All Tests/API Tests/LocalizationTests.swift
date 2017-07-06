@@ -19,36 +19,36 @@ import SDGCornerstone
 class LocalizationTests : TestCase {
 
     func testLocalization() {
-        XCTAssert(LocalizationExample(exactly: "fr")?.code == "fr")
-        XCTAssert(LocalizationExample(exactly: "en\u{2D}GB") == .englishUnitedKingdom)
-        XCTAssert(LocalizationExample(exactly: "en\u{2D}") == nil)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "en\u{2D}US") == .englishUnitedKingdom, "en\u{2D}US → \(String(describing: LocalizationExample(reasonableMatchFor: "en\u{2D}US"))) ≠ en\u{2D}GB")
-        XCTAssert(LocalizationExample(reasonableMatchFor: "fr\u{2D}FR") == .français, "fr\u{2D}FR → \(String(describing: LocalizationExample(reasonableMatchFor: "fr\u{2D}FR"))) ≠ fr")
-        XCTAssert(LocalizationExample(reasonableMatchFor: "el") == nil)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "zxx") == nil)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "cmn\u{2D}Hant\u{2D}") == .chineseTraditionalTaiwan)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "cmn\u{2D}TW\u{2D}") == .chineseTraditionalTaiwan)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "zsm") == .malaysianLatin)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "zh") == .chineseTraditionalTaiwan)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "ar") == nil)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "arb") == nil)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "arb\u{2D}Arab") == nil)
-        XCTAssert(LocalizationExample(reasonableMatchFor: "nb") == .norwegian)
+        XCTAssertEqual(LocalizationExample(exactly: "fr")?.code, "fr")
+        XCTAssertEqual(LocalizationExample(exactly: "en\u{2D}GB"), .englishUnitedKingdom)
+        XCTAssertNil(LocalizationExample(exactly: "en\u{2D}"))
+        XCTAssertEqual(LocalizationExample(reasonableMatchFor: "en\u{2D}US"), .englishUnitedKingdom)
+        XCTAssertEqual(LocalizationExample(reasonableMatchFor: "fr\u{2D}FR"), .français)
+        XCTAssertNil(LocalizationExample(reasonableMatchFor: "el"))
+        XCTAssertNil(LocalizationExample(reasonableMatchFor: "zxx"))
+        XCTAssertEqual(LocalizationExample(reasonableMatchFor: "cmn\u{2D}Hant\u{2D}"), .chineseTraditionalTaiwan)
+        XCTAssertEqual(LocalizationExample(reasonableMatchFor: "cmn\u{2D}TW\u{2D}"), .chineseTraditionalTaiwan)
+        XCTAssertEqual(LocalizationExample(reasonableMatchFor: "zsm"), .malaysianLatin)
+        XCTAssertEqual(LocalizationExample(reasonableMatchFor: "zh"), .chineseTraditionalTaiwan)
+        XCTAssertNil(LocalizationExample(reasonableMatchFor: "ar"))
+        XCTAssertNil(LocalizationExample(reasonableMatchFor: "arb"))
+        XCTAssertEqual(LocalizationExample(reasonableMatchFor: "arb\u{2D}Arab"), nil)
+        XCTAssertEqual(LocalizationExample(reasonableMatchFor: "nb"), .norwegian)
     }
 
     func testLocalizationSetting() {
         let english = LocalizationSetting(orderOfPrecedence: ["en", "fr"])
-        XCTAssert(english.resolved() as LocalizationExample == .englishUnitedKingdom)
+        XCTAssertEqual(english.resolved() as LocalizationExample, .englishUnitedKingdom)
 
         let unrecognized = LocalizationSetting(orderOfPrecedence: [["zxx"]])
-        XCTAssert(unrecognized.resolved() as LocalizationExample == .englishUnitedKingdom)
+        XCTAssertEqual(unrecognized.resolved() as LocalizationExample, .englishUnitedKingdom)
 
         english.do {
-            XCTAssert(LocalizationSetting.current.value == english)
+            XCTAssertEqual(LocalizationSetting.current.value, english)
         }
         let français = LocalizationSetting(orderOfPrecedence: ["fr"])
         français.do {
-            XCTAssert(LocalizationSetting.current.value == français)
+            XCTAssertEqual(LocalizationSetting.current.value, français)
         }
 
         let multilingual = LocalizationSetting(orderOfPrecedence: [["en", "fr"]])
@@ -72,9 +72,9 @@ class LocalizationTests : TestCase {
         LocalizationSetting.setApplicationPreferences(to: nil)
 
         LocalizationSetting.setApplicationPreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
-        XCTAssert(LocalizationSetting.current.value.resolved() as LocalizationExample == .englishUnitedKingdom)
+        XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .englishUnitedKingdom)
         LocalizationSetting.setApplicationPreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
-        XCTAssert(LocalizationSetting.current.value.resolved() as LocalizationExample == .français)
+        XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
 
         LocalizationSetting.setApplicationPreferences(to: nil)
     }
@@ -92,8 +92,8 @@ class LocalizationTests : TestCase {
                 return StrictString("\(numbers.0), \(numbers.1)")
             }
         })
-        XCTAssert(text.resolved(for: .englishUnitedKingdom, using: (0, 1)) == "Numbers 0 and 1")
-        XCTAssert(text.resolved(for: .français, using: (0, 1)) == "Numéros 0 et 1")
+        XCTAssertEqual(text.resolved(for: .englishUnitedKingdom, using: (0, 1)), "Numbers 0 and 1")
+        XCTAssertEqual(text.resolved(for: .français, using: (0, 1)), "Numéros 0 et 1")
         XCTAssert(¬text.resolved(using: (0, 1)).isEmpty)
 
         let simple = UserFacingText({ (localization: LocalizationExample, _: Void) -> StrictString in
@@ -107,7 +107,7 @@ class LocalizationTests : TestCase {
                 return "..."
             }
         })
-        XCTAssert(simple.resolved(for: .français) == "Bonjour, le monde !")
+        XCTAssertEqual(simple.resolved(for: .français), "Bonjour, le monde !")
         XCTAssert(¬simple.resolved().isEmpty)
     }
 

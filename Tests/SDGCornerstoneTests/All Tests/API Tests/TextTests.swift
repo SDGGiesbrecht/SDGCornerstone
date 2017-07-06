@@ -46,32 +46,32 @@ class TextTests : TestCase {
             "Line 3"
         ]
         var file = fileLines.joined(separator: "\n")
-        XCTAssert(file.lines.map({ $0.line }) == fileLines, "\(file.lines.map({ $0.line })) ≠ \(fileLines)")
+        XCTAssertEqual(file.lines.map({ $0.line }), fileLines)
 
         file = fileLines.joined(separator: "\u{D}\u{A}")
-        XCTAssert(file.lines.map({ $0.line }) == fileLines, "\(file.lines.map({ $0.line })) ≠ \(fileLines)")
+        XCTAssertEqual(file.lines.map({ $0.line }), fileLines)
 
         file.lines.removeFirst()
-        XCTAssert(file.lines.map({ $0.line }) == Array(fileLines.dropFirst()), "\(file.lines.map({ $0.line })) ≠ \(Array(fileLines.dropFirst()))")
+        XCTAssertEqual(file.lines.map({ $0.line }), Array(fileLines.dropFirst()))
 
         XCTAssert(file.lines.startIndex.hashValue ≤ Int.max)
         var index = file.lines.startIndex
         index += 1
-        XCTAssert(file.lines.index(after: file.lines.startIndex) == index)
-        XCTAssert(index − file.lines.startIndex == file.lines.distance(from: file.lines.startIndex, to: index))
-        XCTAssert(file.lines.index(before: index) == file.lines.startIndex)
+        XCTAssertEqual(file.lines.index(after: file.lines.startIndex), index)
+        XCTAssertEqual(index − file.lines.startIndex, file.lines.distance(from: file.lines.startIndex, to: index))
+        XCTAssertEqual(file.lines.index(before: index), file.lines.startIndex)
 
         file = fileLines.joined(separator: "\n")
         file.lines[index] = Line(line: "Replaced", newline: "\u{2029}")
-        XCTAssert(file == "Line 1\nReplaced\u{2029}Line 3", "\(file) ≠ Line 1\nReplaced\u{2029}Line 3")
+        XCTAssertEqual(file, "Line 1\nReplaced\u{2029}Line 3")
 
-        XCTAssert(String(LineView<String>()) == "", "\(String(LineView<String>())) ≠ ")
-        XCTAssert(String(LineView<String>([Line(line: "", newline: "\n")])) == "\n")
+        XCTAssertEqual(String(LineView<String>()), "")
+        XCTAssertEqual(String(LineView<String>([Line(line: "", newline: "\n")])), "\n")
         var lines = LineView<String>()
         lines.append(contentsOf: [Line(line: "", newline: "\n")])
-        XCTAssert(String(lines) == "\n")
+        XCTAssertEqual(String(lines), "\n")
         lines.insert(contentsOf: [Line(line: "", newline: "\n")], at: lines.startIndex)
-        XCTAssert(String(lines) == "\n\n")
+        XCTAssertEqual(String(lines), "\n\n")
     }
 
     func testStrictString() {
@@ -79,17 +79,17 @@ class TextTests : TestCase {
         var string = StrictString("\u{BC}")
         let appendix: UnicodeScalar = "\u{BD}"
         string.append(appendix)
-        XCTAssert(String(string) == "1⁄41⁄2", "Normalization problem.")
+        XCTAssertEqual(String(string), "1⁄41⁄2", "Normalization problem.")
 
         let decomposed = StrictString("éé")
         let decomposed2 = StrictString("́ée")
-        XCTAssert(decomposed.firstMatch(for: "e".scalars)?.range == decomposed.startIndex ..< decomposed.index(after: decomposed.startIndex), "Problem with decomposition.")
-        XCTAssert(decomposed2.firstMatch(for: "́".scalars)?.range == decomposed2.startIndex..<decomposed2.index(after: decomposed2.startIndex), "Problem with decomposition.")
+        XCTAssertEqual(decomposed.firstMatch(for: "e".scalars)?.range, decomposed.startIndex ..< decomposed.index(after: decomposed.startIndex))
+        XCTAssertEqual(decomposed2.firstMatch(for: "́".scalars)?.range, decomposed2.startIndex..<decomposed2.index(after: decomposed2.startIndex))
 
         let components = decomposed.components(separatedBy: "́".scalars).map({StrictString($0.contents)})
-        XCTAssert(components == [StrictString("e"), StrictString("e"), StrictString()], "Problem with decomposition.")
+        XCTAssertEqual(components, [StrictString("e"), StrictString("e"), StrictString()])
         let separatedComponents = decomposed.components(separatedBy: "e".scalars).map({StrictString($0.contents)})
-        XCTAssert(separatedComponents == [StrictString(), StrictString("́"), StrictString("́")], "Problem with decomposition: \(separatedComponents) ≠ “”, “́”, & “́”")
+        XCTAssertEqual(separatedComponents, [StrictString(), StrictString("́"), StrictString("́")])
 
         XCTAssert(decomposed.hasPrefix("e".scalars), "Problem with decomposition.")
         XCTAssert(decomposed.hasSuffix("́".scalars), "Problem with decomposition.")
@@ -98,50 +98,50 @@ class TextTests : TestCase {
         XCTAssert(decomposed2.hasSuffix("e".scalars), "Problem with decomposition.")
 
         let commonPrefix = StrictString(decomposed.commonPrefix(with: "ee".scalars).contents)
-        XCTAssert(commonPrefix == StrictString("e"), "Problem with decomposition: Common prefix between “éé” and “ee” is “\(commonPrefix)”.")
-        XCTAssert(StrictString(decomposed2.commonPrefix(with: "́́".scalars).contents) == StrictString("́"), "Problem with decomposition.")
+        XCTAssertEqual(commonPrefix, StrictString("e"))
+        XCTAssertEqual(StrictString(decomposed2.commonPrefix(with: "́́".scalars).contents), StrictString("́"))
 
-        XCTAssert(StrictString(decomposed.commonSuffix(with: "́́".scalars).contents) == StrictString("́"), "Problem with decomposition.")
-        XCTAssert(StrictString(decomposed2.commonSuffix(with: "ee".scalars).contents) == StrictString("e"), "Problem with decomposition.")
+        XCTAssertEqual(StrictString(decomposed.commonSuffix(with: "́́".scalars).contents), StrictString("́"))
+        XCTAssertEqual(StrictString(decomposed2.commonSuffix(with: "ee".scalars).contents), StrictString("e"))
 
         var decomposedCopy = decomposed
         decomposedCopy.replaceMatches(for: "e".scalars, with: "a".scalars)
-        XCTAssert(decomposedCopy == "áá", "Problem with decomposition: \(decomposed).replaceMatches(for: e, with: a) → \(decomposedCopy) ≠ áá")
+        XCTAssertEqual(decomposedCopy, "áá")
 
         decomposedCopy = decomposed
         decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
-        XCTAssert(decomposedCopy == "èè", "Problem with decomposition: \(decomposed).replaceMatches(for: ́, with: ̀) → \(decomposedCopy) ≠ èè")
+        XCTAssertEqual(decomposedCopy, "èè")
 
         decomposedCopy = decomposed2
         decomposedCopy.replaceMatches(for: "e".scalars, with: "a".scalars)
-        XCTAssert(decomposedCopy == "́áa", "Problem with decomposition: \(decomposed2).replaceMatches(for: e, with: a) → \(decomposedCopy) ≠ ́áa")
+        XCTAssertEqual(decomposedCopy, "́áa")
 
         decomposedCopy = decomposed2
         decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
-        XCTAssert(decomposedCopy == "̀èe", "Problem with decomposition: \(decomposed2).replaceMatches(for: ́, with: ̀) → \(decomposedCopy) ≠ ̀èe")
+        XCTAssertEqual(decomposedCopy, "̀èe")
 
         let clusters = StrictString("0").clusters
-        XCTAssert(clusters.index(before: clusters.endIndex) == clusters.startIndex)
+        XCTAssertEqual(clusters.index(before: clusters.endIndex), clusters.startIndex)
 
         XCTAssert(StrictString.ClusterView("0".characters).elementsEqual(clusters))
         let slice = clusters[clusters.startIndex ..< clusters.endIndex]
         XCTAssert(StrictString.ClusterView(slice).elementsEqual(clusters))
 
-        XCTAssert(StrictString("A" as ExtendedGraphemeCluster) == "A")
-        XCTAssert("...\(StrictString("A"))..." == "...A...")
+        XCTAssertEqual(StrictString("A" as ExtendedGraphemeCluster), "A")
+        XCTAssertEqual("...\(StrictString("A"))...", "...A...")
 
         var mutable: StrictString = "0"
         mutable.clusters.truncate(at: mutable.clusters.startIndex)
-        XCTAssert(mutable == "")
+        XCTAssertEqual(mutable, "")
 
         mutable = "ABC"
         mutable.write("DEF")
-        XCTAssert(mutable == "ABCDEF")
+        XCTAssertEqual(mutable, "ABCDEF")
 
         mutable.write(to: &mutable)
-        XCTAssert(mutable == "ABCDEFABCDEF")
+        XCTAssertEqual(mutable, "ABCDEFABCDEF")
 
-        XCTAssert(StrictString("A").description == "A")
+        XCTAssertEqual(StrictString("A").description, "A")
 
         XCTAssert(StrictString("A") < StrictString("B"))
     }
@@ -149,10 +149,10 @@ class TextTests : TestCase {
     func testString() {
         func runTests<S : StringFamily>(helloWorld: S) {
 
-            XCTAssert(S(helloWorld.scalars) == helloWorld)
-            XCTAssert(S(helloWorld.clusters) == helloWorld)
+            XCTAssertEqual(S(helloWorld.scalars), helloWorld)
+            XCTAssertEqual(S(helloWorld.clusters), helloWorld)
 
-            XCTAssert(helloWorld.scalars.first ≠ nil)
+            XCTAssertNotNil(helloWorld.scalars.first)
 
             let set: Set<S> = [helloWorld]
             XCTAssert(helloWorld ∈ set)
@@ -164,37 +164,37 @@ class TextTests : TestCase {
         runTests(helloWorld: "Hello, world!")
         runTests(helloWorld: StrictString("Hello, world!"))
 
-        XCTAssert(StrictString("Hello, world!") == "Hello, world!")
+        XCTAssertEqual(StrictString("Hello, world!"), "Hello, world!")
 
         let simple = "1"
         let simpleUTF8 = try? String(file: simple.data(using: .utf8)!, origin: nil)
-        XCTAssert(simpleUTF8 == simple, "Unexpected string loaded: \(String(describing: simpleUTF8))")
+        XCTAssertEqual(simpleUTF8, simple)
 
         let unicode = "שלום! 🇮🇱 Γεια σας! 🇬🇷"
         let utf8 = try? String(file: unicode.data(using: .utf8)!, origin: nil)
-        XCTAssert(utf8 == unicode, "Unexpected string loaded: \(String(describing: utf8))")
+        XCTAssertEqual(utf8, unicode)
         let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
-        XCTAssert(utf16 == unicode, "Unexpected string loaded: \(String(describing: utf16))")
+        XCTAssertEqual(utf16, unicode)
         #if false
             // [_Workaround: macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16. (Swift 3.1.0)_]
             let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
-            XCTAssert(utf32 == unicode, "Unexpected string loaded: \(String(describing: utf32))")
+            XCTAssertEqual(utf32, unicode)
 
             let european = "¡¢£¤¥§©«¬®°±¶·»¿ÆÐ×Þßæð÷þ".data(using: .isoLatin1)! + Data([0xD8, 0x00, 0xD8, 0x00, 0x00, 0xD8, 0x00, 0xD8])
             let latin1 = try? String(file: european, origin: nil)
-            XCTAssert(latin1?.data(using: .isoLatin1) == european, "Unexpected string loaded: \(String(describing: latin1))")
+            XCTAssertEqual(latin1?.data(using: .isoLatin1), european)
         #endif
     }
 
     func testUnicodeScalar() {
-        XCTAssert(("A" as UnicodeScalar).hexadecimalCode == "0041", "A.hexadecimalCode → \(("A" as UnicodeScalar).hexadecimalCode) ≠ 0041")
-        XCTAssert(("‐" as UnicodeScalar).hexadecimalCode == "2010", "‐.hexadecimalCode → \(("−" as UnicodeScalar).hexadecimalCode) ≠ 2010")
+        XCTAssertEqual(("A" as UnicodeScalar).hexadecimalCode, "0041")
+        XCTAssertEqual(("‐" as UnicodeScalar).hexadecimalCode, "2010")
 
         func verifyVisible(_ codePoint: Int) {
             if let scalar = UnicodeScalar(codePoint) {
                 #if !os(Linux)
                     // [_Workaround: A number of obscure compatibility characters end up empty on Linux. (Swift 3.1.0)_]
-                    XCTAssert(scalar.visibleRepresentation ≠ "", "\(scalar.hexadecimalCode).visibleRepresentation → [Empty String]")
+                    XCTAssertNotEqual(scalar.visibleRepresentation, "")
                 #endif
             }
         }
@@ -248,7 +248,7 @@ class TextTests : TestCase {
             XCTAssert(helloWorld.scalars.contains("world".scalars))
             XCTAssert(¬helloWorld.scalars.contains("xyz".scalars))
 
-            XCTAssert(helloWorld.scalars[helloWorld.scalars.startIndex] == "H")
+            XCTAssertEqual(helloWorld.scalars[helloWorld.scalars.startIndex], "H")
 
             for _ in helloWorld.scalars {}
 

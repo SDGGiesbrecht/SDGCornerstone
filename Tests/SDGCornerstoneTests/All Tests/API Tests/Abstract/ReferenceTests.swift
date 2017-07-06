@@ -22,70 +22,70 @@ class ReferenceTests : TestCase {
     func testShared() {
         var shared: Shared<Int>? = Shared(1)
         weak var weakShared = shared
-        XCTAssert(shared?.value == 1)
+        XCTAssertEqual(shared?.value, 1)
 
         var observer1: SharedValueObserverExample? = SharedValueObserverExample(shared!, normalizing: false)
         weak var weakObserver1 = observer1
-        XCTAssert(observer1?.lastReportedValue == 1)
+        XCTAssertEqual(observer1?.lastReportedValue, 1)
 
         shared?.value = 2
-        XCTAssert(shared?.value == 2)
-        XCTAssert(observer1?.lastReportedValue == 2)
+        XCTAssertEqual(shared?.value, 2)
+        XCTAssertEqual(observer1?.lastReportedValue, 2)
 
         var observer2: SharedValueObserverExample? = SharedValueObserverExample(shared!, normalizing: true)
         weak var weakObserver2 = observer2
-        XCTAssert(shared?.value == 0)
-        XCTAssert(observer1?.lastReportedValue == 0)
-        XCTAssert(observer2?.lastReportedValue == 0)
+        XCTAssertEqual(shared?.value, 0)
+        XCTAssertEqual(observer1?.lastReportedValue, 0)
+        XCTAssertEqual(observer2?.lastReportedValue, 0)
 
         shared?.value = 3
-        XCTAssert(shared?.value == 0)
-        XCTAssert(observer1?.lastReportedValue == 0)
-        XCTAssert(observer2?.lastReportedValue == 0)
+        XCTAssertEqual(shared?.value, 0)
+        XCTAssertEqual(observer1?.lastReportedValue, 0)
+        XCTAssertEqual(observer2?.lastReportedValue, 0)
 
         observer2 = nil
-        XCTAssert(shared?.value == 0)
-        XCTAssert(observer1?.lastReportedValue == 0)
-        XCTAssert(weakObserver2 == nil)
+        XCTAssertEqual(shared?.value, 0)
+        XCTAssertEqual(observer1?.lastReportedValue, 0)
+        XCTAssertNil(weakObserver2)
 
         shared?.value = 4
-        XCTAssert(shared?.value == 4)
-        XCTAssert(observer1?.lastReportedValue == 4)
+        XCTAssertEqual(shared?.value, 4)
+        XCTAssertEqual(observer1?.lastReportedValue, 4)
 
         observer1 = nil
-        XCTAssert(shared?.value == 4)
-        XCTAssert(weakObserver1 == nil)
+        XCTAssertEqual(shared?.value, 4)
+        XCTAssertNil(weakObserver1)
 
         shared?.value = 5
-        XCTAssert(shared?.value == 5)
+        XCTAssertEqual(shared?.value, 5)
 
         shared = nil
-        XCTAssert(weakShared == nil)
+        XCTAssertNil(weakShared)
 
         shared = Shared(6)
-        XCTAssert(shared?.value == 6)
+        XCTAssertEqual(shared?.value, 6)
 
         observer1 = SharedValueObserverExample(shared!, normalizing: false)
-        XCTAssert(shared?.value == 6)
-        XCTAssert(observer1?.lastReportedValue == 6)
+        XCTAssertEqual(shared?.value, 6)
+        XCTAssertEqual(observer1?.lastReportedValue, 6)
 
         shared?.cancel(observer: observer1!)
-        XCTAssert(shared?.value == 6)
-        XCTAssert(observer1?.lastReportedValue == 6)
+        XCTAssertEqual(shared?.value, 6)
+        XCTAssertEqual(observer1?.lastReportedValue, 6)
 
         shared?.value = 7
-        XCTAssert(shared?.value == 7)
-        XCTAssert(observer1?.lastReportedValue == 6)
+        XCTAssertEqual(shared?.value, 7)
+        XCTAssertEqual(observer1?.lastReportedValue, 6)
     }
 
     func testWeak() {
         var pointee: NSObject? = NSObject()
 
         let reference = Weak(pointee)
-        XCTAssert(reference.pointee ≠ nil)
+        XCTAssertNotNil(reference.pointee)
 
         pointee = nil
-        XCTAssert(reference.pointee == nil)
+        XCTAssertNil(reference.pointee)
     }
 
     static var allTests: [(String, (ReferenceTests) -> () throws -> Void)] {

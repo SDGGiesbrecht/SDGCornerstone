@@ -36,7 +36,7 @@ class ShellTests : TestCase {
             command = ["echo", message]
             do {
                 let result = try Shell.default.run(command: command)
-                XCTAssert(result == message, "Unexpected output: \(command) → \(String(describing: result))")
+                XCTAssertEqual(result, message)
             } catch let error as Shell.Error {
                 XCTFail("Unexpected error: \(command) → \(error.description)")
             } catch let error {

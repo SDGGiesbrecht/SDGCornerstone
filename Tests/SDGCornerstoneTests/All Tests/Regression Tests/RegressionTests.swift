@@ -25,11 +25,11 @@ class RegressionTests : TestCase {
         func runTests<N : IntegralArithmetic>(_ type: N.Type) {
             var x: N = 0
             x −= 1
-            XCTAssert(x == −1)
-            XCTAssert(x − 1 == −2)
+            XCTAssertEqual(x, −1)
+            XCTAssertEqual(x − 1, −2)
             x += 1
-            XCTAssert(x == 0)
-            XCTAssert(x + 1 == 1)
+            XCTAssertEqual(x, 0)
+            XCTAssertEqual(x + 1, 1)
         }
         runTests(Int.self)
         runTests(Int64.self)
@@ -45,10 +45,10 @@ class RegressionTests : TestCase {
 
     func testCalendarEquatability() {
         let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
-        XCTAssert(tishrei == HebrewMonthAndYear(month: .tishrei, year: 5759), "Equality problem.")
+        XCTAssertEqual(tishrei, HebrewMonthAndYear(month: .tishrei, year: 5759))
         let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
-        XCTAssert(tevet == HebrewMonthAndYear(month: .tevet, year: 5759), "Equality problem.")
-        XCTAssert(tishrei ≠ tevet, "Equality problem!")
+        XCTAssertEqual(tevet, HebrewMonthAndYear(month: .tevet, year: 5759))
+        XCTAssertNotEqual(tishrei, tevet)
     }
 
     func testDivisionIsUnambiguous() {
@@ -61,18 +61,18 @@ class RegressionTests : TestCase {
         // Untracked
 
         let negativeThree = −3
-        XCTAssert(negativeThree.dividedAccordingToEuclid(by:  1) == −3, "Division problem: \(negativeThree.dividedAccordingToEuclid(by: 1)) ≠ −3")
+        XCTAssertEqual(negativeThree.dividedAccordingToEuclid(by:  1), −3)
         let negativeEighteen = −18
-        XCTAssert(negativeEighteen.dividedAccordingToEuclid(by: 19) == −1, "Division problem: \(negativeEighteen.dividedAccordingToEuclid(by: 19)) ≠ −1")
+        XCTAssertEqual(negativeEighteen.dividedAccordingToEuclid(by: 19), −1)
         let negativeOne: RationalNumber = −1
-        XCTAssert(negativeOne ÷ −1 == 1, "Division problem.")
+        XCTAssertEqual(negativeOne ÷ −1, 1)
     }
 
     func testFloor() {
         // Untracked
 
         let thirty = 30
-        XCTAssert(thirty == thirty.rounded(.down), "Flooring problem.")
+        XCTAssertEqual(thirty, thirty.rounded(.down))
     }
 
     func testMatchlessComponentSeperation() {
@@ -86,7 +86,7 @@ class RegressionTests : TestCase {
     func testMatchlessSearch() {
         // Untracked
 
-        XCTAssert(StrictString("...").firstMatch(for: "_".scalars) == nil, "False positive.")
+        XCTAssertNil(StrictString("...").firstMatch(for: "_".scalars))
     }
 
     func testNestingLevelLocation() {
@@ -98,14 +98,14 @@ class RegressionTests : TestCase {
         let start = nestString.index(nestString.startIndex, offsetBy: 1)
         let end = nestString.index(nestString.startIndex, offsetBy: 12)
         let nestRange = nestString.firstNestingLevel(startingWith: open, endingWith: close)?.container.range
-        XCTAssert(nestRange == start ..< end, "Incorrect range for nested group.")
+        XCTAssertEqual(nestRange, start ..< end)
     }
 
     func testReverseSearch() {
         // Untracked
 
         let glitch = StrictString("x{a^a}")
-        XCTAssert(glitch.lastMatch(for: "{".scalars)?.range == glitch.index(after: glitch.startIndex) ..< glitch.index(after: glitch.index(after: glitch.startIndex)), "Reverse searching failed.")
+        XCTAssertEqual(glitch.lastMatch(for: "{".scalars)?.range, glitch.index(after: glitch.startIndex) ..< glitch.index(after: glitch.index(after: glitch.startIndex)))
     }
 
     func testSubtraction() {
@@ -113,7 +113,7 @@ class RegressionTests : TestCase {
 
         func runTests<N : WholeArithmetic>(_ type: N.Type) {
             let five: N = 10 − 5
-            XCTAssert(five == 5)
+            XCTAssertEqual(five, 5)
         }
         runTests(UInt.self)
         runTests(UInt64.self)
@@ -160,7 +160,7 @@ class RegressionTests : TestCase {
         var date = CalendarDate(hebrewYear: 5758, month: .tishrei, day: 4)
         for _ in 0 ..< 1000 {
             date += (1 as CalendarDate.Vector.Scalar).weeks
-            XCTAssert(date.hebrewWeekday == .sunday, "Weekday problem.")
+            XCTAssertEqual(date.hebrewWeekday, .sunday)
         }
     }
 

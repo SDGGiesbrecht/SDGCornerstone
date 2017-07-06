@@ -32,19 +32,19 @@ class CachingTests : TestCase {
         var cache: Bool?
         var parameterizedCache: [Bool: Bool] = [:]
 
-        XCTAssert(cached(in: &cache, compute) == true)
-        XCTAssert(callCount == 1)
-        XCTAssert(cached(in: &cache, compute) == true)
-        XCTAssert(callCount == 1)
+        XCTAssertEqual(cached(in: &cache, compute), true)
+        XCTAssertEqual(callCount, 1)
+        XCTAssertEqual(cached(in: &cache, compute), true)
+        XCTAssertEqual(callCount, 1)
 
         callCount = 0
 
-        XCTAssert(cached(in: &parameterizedCache[true], { compute(true) }) == true)
-        XCTAssert(cached(in: &parameterizedCache[false], { compute(false) }) == false)
-        XCTAssert(callCount == 2)
-        XCTAssert(cached(in: &parameterizedCache[true], { compute(true) }) == true)
-        XCTAssert(cached(in: &parameterizedCache[false], { compute(false) }) == false)
-        XCTAssert(callCount == 2)
+        XCTAssertEqual(cached(in: &parameterizedCache[true], { compute(true) }), true)
+        XCTAssertEqual(cached(in: &parameterizedCache[false], { compute(false) }), false)
+        XCTAssertEqual(callCount, 2)
+        XCTAssertEqual(cached(in: &parameterizedCache[true], { compute(true) }), true)
+        XCTAssertEqual(cached(in: &parameterizedCache[false], { compute(false) }), false)
+        XCTAssertEqual(callCount, 2)
     }
 
     static var allTests: [(String, (CachingTests) -> () throws -> Void)] {
