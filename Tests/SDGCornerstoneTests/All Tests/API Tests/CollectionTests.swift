@@ -415,7 +415,7 @@ class CollectionTests : TestCase {
     }
 
     func testRange() {
-        XCTAssertEqual((0 ..< 1).inInequalityNotation({ $0.inDigits() }), "0 ≤ x < 1")
+        XCTAssertEqual(((0 ..< 1) as Range).inInequalityNotation({ $0.inDigits() }), "0 ≤ x < 1")
         XCTAssertEqual(((0 ..< 1) as CountableRange).inInequalityNotation({ $0.inDigits() }), "0 ≤ x < 1")
 
         XCTAssertEqual(((0 ... 1) as ClosedRange).inInequalityNotation({ $0.inDigits() }), "0 ≤ x ≤ 1")
