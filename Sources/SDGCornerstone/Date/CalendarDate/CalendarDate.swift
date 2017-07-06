@@ -169,7 +169,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
         if let result = cachedDefinition as? D {
             return result
-        } else {
+        } else { // [_Exempt from Code Coverage_]
             return recomputeDefinition(as: D.self)
         }
     }
@@ -398,9 +398,9 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     /// - NonmutatingVariant: +
     public static func += (lhs: inout CalendarDate, rhs: CalendarInterval<FloatMax>) {
         if let relative = lhs.definition as? RelativeDate {
-            lhs = CalendarDate(definition: RelativeDate(relative.intervalSince + rhs, after: relative.baseDate))
+            lhs.definition = RelativeDate(relative.intervalSince + rhs, after: relative.baseDate)
         } else {
-            lhs = CalendarDate(definition: RelativeDate(rhs, after: lhs))
+            lhs.definition = RelativeDate(rhs, after: lhs)
         }
     }
 
