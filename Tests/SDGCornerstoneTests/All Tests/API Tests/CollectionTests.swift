@@ -413,6 +413,14 @@ class CollectionTests : TestCase {
         runFiniteTests(setA: MutableSetExample([1, 2, 3]), setB: Set<Int>([3, 4, 5]), inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
     }
 
+    func testRange() {
+        XCTAssert((0 ..< 1).inInequalityNotation({ $0.inDigits() }) == "0 ≤ x < 1")
+        XCTAssert(((0 ..< 1) as CountableRange).inInequalityNotation({ $0.inDigits() }) == "0 ≤ x < 1")
+
+        XCTAssert(((0 ... 1) as ClosedRange).inInequalityNotation({ $0.inDigits() }) == "0 ≤ x ≤ 1", "\((0 ... 1).inInequalityNotation({ $0.inDigits() })) ≠ 0 ≤ x ≤ 1")
+        XCTAssert(((0 ... 1) as CountableClosedRange).inInequalityNotation({ $0.inDigits() }) == "0 ≤ x ≤ 1", "\(((0 ... 1) as CountableClosedRange).inInequalityNotation({ $0.inDigits() })) ≠ 0 ≤ x ≤ 1")
+    }
+
     func testRangeReplaceableCollection() {
         func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Iterator.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
             where C.Iterator.Element : Equatable, C.IndexDistance : WholeArithmetic, C.Indices.Iterator.Element == C.Index {

@@ -98,7 +98,7 @@ extension CountableClosedRange : RangeFamily {
     // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
     /// `true` if the type has a closed upper bound.
     public static var hasClosedUpperBound: Bool {
-        return false
+        return true
     }
 }
 
