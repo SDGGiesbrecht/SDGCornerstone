@@ -19,6 +19,10 @@ import XCTest
 
 class InternalTests : TestCase {
 
+    func testGregorianWeekdayDate() {
+        XCTAssertEqual(CalendarDate(definition: GregorianWeekdayDate(week: 1, weekday: .tuesday, hour: 0, minute: 0, second: 0)), CalendarDate(gregorianYear: 2001, month: .january, day: 16))
+    }
+
     func testHebrewYear() {
         InternalTests.testHebrewYear()
     }
@@ -72,6 +76,7 @@ class InternalTests : TestCase {
 
     static var allTests: [(String, (InternalTests) -> () throws -> Void)] {
         return [
+            ("testGregorianWeekdayDate", testGregorianWeekdayDate),
             ("testHebrewYear", testHebrewYear),
             ("testLocalizationSetting", testLocalizationSetting),
             ("testUIntHalvesView", testUIntHalvesView),
