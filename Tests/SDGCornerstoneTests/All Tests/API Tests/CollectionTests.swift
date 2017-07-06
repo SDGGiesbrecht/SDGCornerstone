@@ -229,7 +229,7 @@ class CollectionTests : TestCase {
             4: "four",
             5: "five"
             ])
-        XCTAssertNotEqual(numbers, moreNumbers)
+        XCTAssert(numbers ≠ moreNumbers)
 
         let letters = [
             "a": 4,
