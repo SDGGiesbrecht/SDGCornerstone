@@ -127,6 +127,7 @@ extension OrderedEnumeration where RawValue.Vector : IntegerProtocol {
         if let next = successor() {
             self = next
         } else {
+            wrap()
             self = Self.first
         }
     }
@@ -148,6 +149,7 @@ extension OrderedEnumeration where RawValue.Vector : IntegerProtocol {
         if let previous = predecessor() {
             self = previous
         } else {
+            wrap()
             self = Self.last
         }
     }

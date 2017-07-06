@@ -27,6 +27,13 @@ class EnumerationTests : TestCase {
         XCTAssert(OrderedEnumerationExample.a.cyclicPredecessor() == OrderedEnumerationExample.c)
         XCTAssert(OrderedEnumerationExample.c.cyclicSuccessor() == OrderedEnumerationExample.a)
         XCTAssert(OrderedEnumerationExample.a < OrderedEnumerationExample.b)
+
+        var weekday = GregorianWeekday.tuesday
+        weekday.increment()
+        XCTAssert(weekday == .wednesday)
+        weekday.decrement()
+        XCTAssert(weekday == .tuesday)
+        XCTAssert(weekday.successor() == .wednesday)
     }
 
     static var allTests: [(String, (EnumerationTests) -> () throws -> Void)] {

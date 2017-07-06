@@ -32,8 +32,8 @@ public protocol IterableEnumeration : RawRepresentable {
 extension IterableEnumeration where RawValue.Vector : IntegerProtocol {
     // MARK: - where RawValue.Vector : IntegerProtocol
 
-    private static func noZeroCase() -> UserFacingText<APILocalization, Void> {
-        return UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+    private static func noZeroCase() -> UserFacingText<APILocalization, Void> { // [_Exempt from Code Coverage_]
+        return UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
             switch localization {
             case .englishCanada:
                 return StrictString("\(Self.self) has no case with a raw value 0.")
