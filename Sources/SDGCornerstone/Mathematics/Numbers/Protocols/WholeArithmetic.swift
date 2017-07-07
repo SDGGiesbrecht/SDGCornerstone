@@ -852,21 +852,20 @@ extension WholeArithmetic {
         return StrictString(digits.reversed())
     }
 
-    internal func generateAbbreviatedEnglishOrdinal() -> StrictString {
-        let digits = wholeDigits()
+    internal func generateAbbreviatedEnglishOrdinal() -> SemanticMarkup {
+        let digits = SemanticMarkup(wholeDigits())
         guard let last = digits.last else {
             unreachable()
         }
         switch last {
-            // [_Warning: These should be superscripted when possible._]
         case "1":
-            return digits + "st"
+            return digits + SemanticMarkup("st").superscripted()
         case "2":
-            return digits + "nd"
+            return digits + SemanticMarkup("nd").superscripted()
         case "3":
-            return digits + "rd"
+            return digits + SemanticMarkup("rd").superscripted()
         default:
-            return digits + "th"
+            return digits + SemanticMarkup("th").superscripted()
         }
     }
 
@@ -874,102 +873,84 @@ extension WholeArithmetic {
         return wholeDigits() + "."
     }
 
-    internal func générerOrdinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> StrictString {
-        // [_Warning: These should be superscripted when possible._]
-        let singulier: StrictString
+    internal func générerOrdinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
+        var singulier: StrictString
 
         if self == 1 {
             switch genre {
             case .masculin:
-                singulier = wholeDigits() + "er"
+                singulier = "er"
             case .féminin:
-                singulier = wholeDigits() + "re"
+                singulier = "re"
             }
         } else {
-            singulier = wholeDigits() + "e"
+            singulier = "e"
         }
 
         switch nombre {
         case .singular:
-            return singulier
+            break
         case .plural:
-            return singulier + "s"
+            singulier += "s"
         }
+
+        return SemanticMarkup(wholeDigits()) + SemanticMarkup(singulier).superscripted()
     }
 
-    internal func παραγωγήΣυντομογραφίαςΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> StrictString {
-        // [_Warning: These should be superscripted when possible._]
+    internal func παραγωγήΣυντομογραφίαςΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> SemanticMarkup {
         switch αριθμός {
         case .singular:
             switch γένος {
             case .masculine:
                 switch πτώση {
                 case .ονομαστική:
-                    return wholeDigits() + "ος"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ος").superscripted()
                 case .αιτιατική:
-                    return wholeDigits() + "ο"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ο").superscripted()
                 case .γενική:
-                    return wholeDigits() + "ου"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ου").superscripted()
                 case .κλητική:
-                    return wholeDigits() + "ε"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ε").superscripted()
                 }
             case .feminine:
                 switch πτώση {
-                case .ονομαστική:
-                    return wholeDigits() + "η"
-                case .αιτιατική:
-                    return wholeDigits() + "η"
+                case .ονομαστική, .αιτιατική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("η").superscripted()
                 case .γενική:
-                    return wholeDigits() + "ης"
-                case .κλητική:
-                    return wholeDigits() + "η"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ης").superscripted()
                 }
             case .neuter:
                 switch πτώση {
-                case .ονομαστική:
-                    return wholeDigits() + "ο"
-                case .αιτιατική:
-                    return wholeDigits() + "ο"
+                case .ονομαστική, .αιτιατική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ο").superscripted()
                 case .γενική:
-                    return wholeDigits() + "ου"
-                case .κλητική:
-                    return wholeDigits() + "ο"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ου").superscripted()
                 }
             }
         case .plural:
             switch γένος {
             case .masculine:
                 switch πτώση {
-                case .ονομαστική:
-                    return wholeDigits() + "οι"
+                case .ονομαστική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("οι").superscripted()
                 case .αιτιατική:
-                    return wholeDigits() + "ους"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ους").superscripted()
                 case .γενική:
-                    return wholeDigits() + "ων"
-                case .κλητική:
-                    return wholeDigits() + "οι"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ων").superscripted()
                 }
             case .feminine:
                 switch πτώση {
-                case .ονομαστική:
-                    return wholeDigits() + "ες"
-                case .αιτιατική:
-                    return wholeDigits() + "ες"
+                case .ονομαστική, .αιτιατική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ες").superscripted()
                 case .γενική:
-                    return wholeDigits() + "ων"
-                case .κλητική:
-                    return wholeDigits() + "ες"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ων").superscripted()
                 }
             case .neuter:
                 switch πτώση {
-                case .ονομαστική:
-                    return wholeDigits() + "α"
-                case .αιτιατική:
-                    return wholeDigits() + "α"
+                case .ονομαστική, .αιτιατική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("α").superscripted()
                 case .γενική:
-                    return wholeDigits() + "ων"
-                case .κλητική:
-                    return wholeDigits() + "α"
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ων").superscripted()
                 }
             }
         }

@@ -275,12 +275,12 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     private func dateEnFrançais<Y : Year, M : Month, D : Day, W : Weekday>(_ majuscules: Casing, an: Y, mois: M, jour: D, jourDeSemaine: W, avecAn: Bool, avecJourDeSemaine: Bool) -> SemanticMarkup {
-        var résultat = "le " + jour.enChiffresFrançais() + " " + mois.enFrançais(.sentenceMedial)
+        var résultat: SemanticMarkup = "le " + jour.enChiffresFrançais() + " " + SemanticMarkup(mois.enFrançais(.sentenceMedial))
         if avecAn {
-            résultat += " " + an.enChiffresFrançais()
+            résultat += " " + SemanticMarkup(an.enChiffresFrançais())
         }
         if avecJourDeSemaine {
-            résultat.prepend(jourDeSemaine.enFrançais(.sentenceMedial) + ", ")
+            résultat.prepend(SemanticMarkup(jourDeSemaine.enFrançais(.sentenceMedial)) + ", ")
         }
         return majuscules.applySimpleAlgorithm(to: résultat)
     }

@@ -46,4 +46,8 @@ public enum Casing {
             return text.prepending(contentsOf: replacement.scalars)
         }
     }
+
+    internal func applySimpleAlgorithm(to markup: SemanticMarkup) -> SemanticMarkup {
+        return SemanticMarkup(applySimpleAlgorithm(to: markup.source))
+    }
 }

@@ -40,7 +40,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     /// Creates a string from a `StaticString`.
     public init(_ string: StaticString) {
-        self.init(String(stirng))
+        self.init("\(string)")
     }
 
     /// Creates a string from a `StrictString`.
