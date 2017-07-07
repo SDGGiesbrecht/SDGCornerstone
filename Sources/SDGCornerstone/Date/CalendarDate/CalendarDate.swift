@@ -208,10 +208,14 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     /// Returns the date in the ISO format.
     public func dateInISOFormat() -> StrictString {
-        return gregorianYear.inISOFormat() + "‐" + gregorianMonth.inISOFormat() + "‐" + gregorianDay.inISOFormat()
+        notImplementedYet()
+        return ""/*
+        return gregorianYear.inISOFormat() + "‐" + gregorianMonth.inISOFormat() + "‐" + gregorianDay.inISOFormat()*/
     }
 
     private func dateInBritishEnglish<Y : Year, M : Month, D : Day, W : Weekday>(year: Y, month: M, day: D, weekday: W, withYear: Bool, withWeekday: Bool) -> StrictString {
+        notImplementedYet()
+        return ""/*
         var result = day.inEnglishDigits() + " " + month.inEnglish()
         if withYear {
             result += " " + year.inEnglishDigits()
@@ -219,10 +223,12 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         if withWeekday {
             result.prepend(weekday.inEnglish + " ")
         }
-        return result
+        return result*/
     }
 
     private func dateInAmericanEnglish<Y : Year, M : Month, D : Day, W : Weekday>(year: Y, month: M, day: D, weekday: W, withYear: Bool, withWeekday: Bool) -> StrictString {
+        notImplementedYet()
+        return ""/*
         var result = month.inEnglish() + " " + day.inEnglishDigits()
         if withYear {
             result += ", " + year.inEnglishDigits()
@@ -230,7 +236,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         if withWeekday {
             result.prepend(weekday.inEnglish() + ", ")
         }
-        return result
+        return result*/
     }
 
     /// Returns the Hebrew date in British English.
@@ -254,6 +260,8 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     private func datumAufDeutsch<Y : Year, M : Month, D : Day, W : Weekday>(jahr: Y, monat: M, tag: D, wochentag: W, mitJahr: Bool, mitWochentag: Bool) -> StrictString {
+        notImplementedYet()
+        return ""/*
         var ergebnis = tag.inDeutschenZiffern() + " " + monat.aufDeutsch()
         if mitJahr {
             ergebnis += " " + jahr.inDeutschenZiffern()
@@ -261,7 +269,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         if mitWochentag {
             ergebnis.prepend(wochentag.aufDeutsch() + ", ")
         }
-        return ergebnis
+        return ergebnis*/
     }
 
     /// Gibt das hebräische Datum auf Deutsch zurück.
@@ -275,6 +283,9 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     private func dateEnFrançais<Y : Year, M : Month, D : Day, W : Weekday>(_ majuscules: Casing, an: Y, mois: M, jour: D, jourDeSemaine: W, avecAn: Bool, avecJourDeSemaine: Bool) -> SemanticMarkup {
+        notImplementedYet()
+        return ""
+        /*
         var résultat: SemanticMarkup = "le " + jour.enChiffresFrançais() + " " + SemanticMarkup(mois.enFrançais(.sentenceMedial))
         if avecAn {
             résultat += " " + SemanticMarkup(an.enChiffresFrançais())
@@ -282,7 +293,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         if avecJourDeSemaine {
             résultat.prepend(SemanticMarkup(jourDeSemaine.enFrançais(.sentenceMedial)) + ", ")
         }
-        return majuscules.applySimpleAlgorithm(to: résultat)
+        return majuscules.applySimpleAlgorithm(to: résultat)*/
     }
 
     /// Retourne la date hébraïque en français.
@@ -296,6 +307,8 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     private func ημερομηνίαΣεΕλληνικά<Y : Year, M : Month, D : Day, W : Weekday>(χρόνος: Y, μήνας: M, ημέρα: D, ημέραΤηςΕβδομάδας: W, μεΧρόνο: Bool, μεΗμέραΤηςΕβδομάδας: Bool) -> StrictString {
+        notImplementedYet()
+        return ""/*
         var αποτέλεσμα = ημέρα.σεΕλληνικάΨηφία() + " " + μήνας.σεΕλληνικά(.γενική)
         if μεΧρόνο {
             αποτέλεσμα += " " + χρόνος.σεΕλληνικάΨηφία()
@@ -303,7 +316,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         if μεΗμέραΤηςΕβδομάδας {
             αποτέλεσμα.prepend(ημέραΤηςΕβδομάδας.σεΕλληνικά() + ", ")
         }
-        return αποτέλεσμα
+        return αποτέλεσμα*/
     }
 
     /// Επιστρέφει την εβραϊκή ημερομηνία στα ελληνικά.
@@ -317,6 +330,8 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     private func תאריך־בעברית<Y : Year, M : Month, D : Day, W : Weekday>(שנה: Y, חודש: M, יום: D, יום־שבוע: W, עם־שנה: Bool, עם־יום־שבוע: Bool) -> StrictString {
+        notImplementedYet()
+        return ""/*
         var תוצאה = יום.בעברית־בספרות() + " ב" + חודש.בעברית()
         if עם־שנה {
             תוצאה += " " + שנה.בעברית־בספרות()
@@ -324,7 +339,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         if עם־יום־שבוע {
             תוצאה.prepend(יום־שבוע.בעברית() + ", ")
         }
-        return תוצאה
+        return תוצאה*/
     }
 
     /// מחזירה את התאריך העברי בעברית.
@@ -339,53 +354,71 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     /// Returns the time in the ISO format.
     public func timeInISOFormat(includeSeconds: Bool = false) -> StrictString {
+        notImplementedYet()
+        return ""/*
         var result: StrictString = gregorianHour.inISOFormat() + ":" as StrictString + gregorianMinute.inISOFormat()
         if includeSeconds {
             result += ":" as StrictString + gregorianSecond.inISOFormat()
         }
-        return result
+        return result*/
     }
 
     /// Returns the time in English in the twenty‐four–hour format.
     public func twentyFourHourTimeInEnglish() -> StrictString {
-        return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()
+        notImplementedYet()
+        return ""/*
+        return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()*/
     }
 
     /// Returns the time in English in the twelve‐hour format.
     public func twelveHourTimeInEnglish() -> StrictString {
-        return gregorianHour.inDigitsInTwelveHourFormat() + ":" + gregorianMinute.inDigits() + " " + gregorianHour.amOrPM()
+        notImplementedYet()
+        return ""/*
+        return gregorianHour.inDigitsInTwelveHourFormat() + ":" + gregorianMinute.inDigits() + " " + gregorianHour.amOrPM()*/
     }
 
     /// Gibt die Uhrzeit auf Deutsch zurück.
     public func uhrzeitAufDeutsch() -> StrictString {
-        return gregorianHour.inDigitsInTwentyFourHourFormat() + "." + gregorianMinute.inDigits()
+        notImplementedYet()
+        return ""/*
+        return gregorianHour.inDigitsInTwentyFourHourFormat() + "." + gregorianMinute.inDigits()*/
     }
 
     /// Retourne l’heure en français.
     public func heureEnFrançais() -> StrictString {
-        return gregorianHour.inDigitsInTwentyFourHourFormat() + " h " + gregorianMinute.inDigits()
+        notImplementedYet()
+        return ""/*
+        return gregorianHour.inDigitsInTwentyFourHourFormat() + " h " + gregorianMinute.inDigits()*/
     }
 
     /// Επιστρέφει την ώρα στα ελληνικά.
     public func ώραΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
-        return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()
+        notImplementedYet()
+        return ""/*
+        return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()*/
     }
 
     /// מחזירה את השעה בעברית.
     public func שעה־בעברית() -> StrictString {
-        return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()
+        notImplementedYet()
+        return ""/*
+        return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()*/
     }
 
     // MARK: - iCalendar
 
     /// Returns a string representation in the floating iCalendar format.
     public func floatingICalendarFormat() -> StrictString {
-        return gregorianYear.inICalendarFormat() + gregorianMonth.inICalendarFormat() + gregorianDay.inICalendarFormat() + ("T" as StrictString) + gregorianHour.inICalendarFormat() + gregorianMinute.inICalendarFormat() + gregorianSecond.inICalendarFormat()
+        notImplementedYet()
+        return ""/*
+        return gregorianYear.inICalendarFormat() + gregorianMonth.inICalendarFormat() + gregorianDay.inICalendarFormat() + ("T" as StrictString) + gregorianHour.inICalendarFormat() + gregorianMinute.inICalendarFormat() + gregorianSecond.inICalendarFormat()*/
     }
 
     /// Returns a string representation in UTC in the iCalendar format.
     public func iCalendarFormat() -> StrictString {
-        return floatingICalendarFormat() + ("Z" as StrictString)
+        notImplementedYet()
+        return ""/*
+        return floatingICalendarFormat() + ("Z" as StrictString)*/
     }
 
     // MARK: - Comparable
