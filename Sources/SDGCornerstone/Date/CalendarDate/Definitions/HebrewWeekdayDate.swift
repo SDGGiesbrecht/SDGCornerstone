@@ -16,7 +16,7 @@ internal struct HebrewWeekdayDate : DateDefinition {
 
     // MARK: - Static Properties
 
-    internal static let referenceMoment = CalendarDate(hebrewYear: 5758, month: .tishrei, day: 4, hour: 0, part: 0)
+    internal static let referenceMoment = CalendarDate(hebrew: .tishrei, 4, 5758)
     private static let referenceWeekday: HebrewWeekday = .sunday
 
     // MARK: - Properties

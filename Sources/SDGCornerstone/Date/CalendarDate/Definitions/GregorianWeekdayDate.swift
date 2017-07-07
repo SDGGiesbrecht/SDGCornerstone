@@ -16,7 +16,7 @@ internal struct GregorianWeekdayDate : DateDefinition {
 
     // MARK: - Static Properties
 
-    internal static let referenceMoment = CalendarDate(gregorianYear: 2001, month: .january, day: 7, hour: 0, minute: 0, second: 0)
+    internal static let referenceMoment = CalendarDate(gregorian: .january, 7, 2001)
     private static let referenceWeekday: GregorianWeekday = .sunday
 
     // MARK: - Properties

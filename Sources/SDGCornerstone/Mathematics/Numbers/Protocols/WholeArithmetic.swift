@@ -858,7 +858,7 @@ extension WholeArithmetic {
             unreachable()
         }
         switch last {
-            // [_Workaround: These should be superscripted when possible._]
+            // [_Warning: These should be superscripted when possible._]
         case "1":
             return digits + "st"
         case "2":
@@ -875,7 +875,7 @@ extension WholeArithmetic {
     }
 
     internal func générerOrdinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> StrictString {
-        // [_Workaround: These should be superscripted when possible._]
+        // [_Warning: These should be superscripted when possible._]
         let singulier: StrictString
 
         if self == 1 {
@@ -898,7 +898,7 @@ extension WholeArithmetic {
     }
 
     internal func παραγωγήΣυντομογραφίαςΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> StrictString {
-        // [_Workaround: These should be superscripted when possible._]
+        // [_Warning: These should be superscripted when possible._]
         switch αριθμός {
         case .singular:
             switch γένος {

@@ -29,7 +29,7 @@ internal struct FoundationDate : DateDefinition {
 
     // MARK: - DateDefinition
 
-    internal static let referenceDate = CalendarDate(gregorianYear: 2001, month: .january, day: 1, hour: 0, minute: 0, second: 0)
+    internal static let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
     internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
 
     internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {

@@ -17,7 +17,7 @@ internal struct GregorianDate : DateDefinition {
     // MARK: - Reference Year
 
     private static let referenceYear: GregorianYear = 2001
-    internal static let referenceMoment = CalendarDate(hebrewYear: 5761, month: .tevet, day: 6, hour: 6, part: 0)
+    internal static let referenceMoment = CalendarDate(hebrew: .tevet, 6, 5761, at: 6)
 
     // MARK: - Root Calendar Functions
 

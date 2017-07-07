@@ -23,21 +23,21 @@ class DateTests : TestCase {
         // Force these to take place first.
         InternalTests.testHebrewYear()
 
-        XCTAssertEqual(CalendarDate(hebrewYear: 5751, month: .iyar, day: 4, hour: 0, part: 0), CalendarDate(gregorianYear: 1991, month: .april, day: 17, hour: 18, minute: 0, second: 0), "Date conversion failed.")
-        XCTAssertEqual(CalendarDate(hebrewYear: 5751, month: .iyar, day: 4, hour: 6, part: 0), CalendarDate(gregorianYear: 1991, month: .april, day: 18, hour: 0, minute: 0, second: 0), "Date conversion failed.")
+        XCTAssertEqual(CalendarDate(hebrew: .iyar, 4, 5751), CalendarDate(gregorian: .april, 17, 1991, at: 18), "Date conversion failed.")
+        XCTAssertEqual(CalendarDate(hebrew: .iyar, 4, 5751, at: 6), CalendarDate(gregorian: .april, 18, 1991), "Date conversion failed.")
 
-        XCTAssertEqual(CalendarDate(hebrewYear: 5776, month: .tevet, day: 10, hour: 3, part: 0), CalendarDate(gregorianYear: 2015, month: .december, day: 21, hour: 21, minute: 0, second: 0), "Date conversion failed.")
+        XCTAssertEqual(CalendarDate(hebrew: .tevet, 10, 5776, at: 3), CalendarDate(gregorian: .december, 21, 2015, at: 21), "Date conversion failed.")
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss +zzzz"
-        XCTAssertEqual(Date(CalendarDate(gregorianYear: 1991, month: .april, day: 18, hour: 0, minute: 0, second: 0)), formatter.date(from: "1991‐04‐18 00:00:00 +0000"), "CalendarDate does not match Foundation.")
+        XCTAssertEqual(Date(CalendarDate(gregorian: .april, 18, 1991)), formatter.date(from: "1991‐04‐18 00:00:00 +0000"), "CalendarDate does not match Foundation.")
 
-        XCTAssertEqual(CalendarDate(gregorianYear: 2015, month: .december, day: 23, hour: 0, minute: 0, second: 0).gregorianWeekday, .wednesday, "Weekday failure.")
-        XCTAssertEqual(CalendarDate(hebrewYear: 5776, month: .tevet, day: 11, hour: 0, part: 0).hebrewWeekday, .wednesday, "Weekday failure.")
+        XCTAssertEqual(CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday, .wednesday, "Weekday failure.")
+        XCTAssertEqual(CalendarDate(hebrew: .tevet, 11, 5776).hebrewWeekday, .wednesday, "Weekday failure.")
 
         XCTAssertNotEqual(GregorianMonth.january, GregorianMonth.december)
 
-        let referenceDate = CalendarDate(gregorianYear: 2001, month: .january, day: 1, hour: 0, minute: 0, second: 0)
+        let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
         XCTAssertEqual(referenceDate.gregorianMonth, .january)
         XCTAssertEqual(referenceDate.gregorianDay, 1)
         XCTAssertEqual(referenceDate.gregorianYear, 2001)
@@ -45,7 +45,7 @@ class DateTests : TestCase {
         XCTAssertEqual(referenceDate.gregorianMinute, 0)
         XCTAssertEqual(referenceDate.gregorianSecond, 0)
 
-        let anotherDate = CalendarDate(gregorianYear: 2015, month: .december, day: 31, hour: 0, minute: 0, second: 0)
+        let anotherDate = CalendarDate(gregorian: .december, 31, 2015)
         XCTAssertEqual(anotherDate.gregorianMonth, .december)
         XCTAssertEqual(anotherDate.gregorianDay, 31)
         XCTAssertEqual(anotherDate.gregorianYear, 2015)
@@ -53,10 +53,10 @@ class DateTests : TestCase {
         XCTAssertEqual(anotherDate.gregorianMinute, 0)
         XCTAssertEqual(anotherDate.gregorianSecond, 0)
 
-        XCTAssert(CalendarDate.hebrewNow() > CalendarDate(hebrewYear: 5777))
-        XCTAssert(CalendarDate.gregorianNow() > CalendarDate(gregorianYear: 2017))
+        XCTAssert(CalendarDate.hebrewNow() > CalendarDate(hebrew: .tishrei, 1, 5777))
+        XCTAssert(CalendarDate.gregorianNow() > CalendarDate(gregorian: .january, 1, 2017))
 
-        let yetAnotherDate = CalendarDate(gregorianYear: 2017, month: .july, day: 5, hour: 18, minute: 0, second: 0)
+        let yetAnotherDate = CalendarDate(gregorian: .july, 5, 2017, at: 18)
         XCTAssertEqual(yetAnotherDate.hebrewYear, 5777)
         XCTAssertEqual(yetAnotherDate.hebrewMonth, .tammuz)
         XCTAssertEqual(yetAnotherDate.hebrewDay, 12)
@@ -77,12 +77,12 @@ class DateTests : TestCase {
         XCTAssertEqual(yetAnotherDate.תאריך־עברי־בעברית(עם־יום־שבוע: true), "יום חמישי, 12 בתמוז 5777")
         XCTAssertEqual(yetAnotherDate.תאריך־גרגוריאני־בעברית(עם־יום־שבוע: true), "יום רביעי, 5 ביולי 2017")
 
-        let exception = CalendarDate(gregorianYear: 2017, month: .july, day: 1)
+        let exception = CalendarDate(gregorian: .july, 1, 2017)
         XCTAssertEqual(exception.dateGrégorienneEnFrançais(.sentenceMedial), "le 1er juillet 2017")
 
-        let time = CalendarDate(gregorianYear: 2017, month: .july, day: 6, hour: 2, minute: 5, second: 6)
-        let time2 = CalendarDate(gregorianYear: 2017, month: .july, day: 6, hour: 23, minute: 55, second: 58)
-        let time3 = CalendarDate(gregorianYear: 2017, month: .july, day: 6, hour: 0, minute: 0, second: 0)
+        let time = CalendarDate(gregorian: .july, 6, 2017, at: 2, 05, 06)
+        let time2 = CalendarDate(gregorian: .july, 6, 2017, at: 23, 55, 58)
+        let time3 = CalendarDate(gregorian: .july, 6, 2017, at: 0, 00, 00)
         XCTAssertEqual(time.timeInISOFormat(includeSeconds: true), "02:05:06")
         XCTAssertEqual(time2.timeInISOFormat(includeSeconds: true), "23:55:58")
         XCTAssertEqual(time3.timeInISOFormat(includeSeconds: true), "00:00:00")

@@ -44,15 +44,45 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         self.definition = definition
     }
 
+    // [_Define Documentation: SDGCornerstone.CalendarDate.init(hebrewYear:month:day:hour:part:)_]
     /// Creates a date using the Hebrew calendar.
+    ///
+    /// This initializer has two written forms whose effects are the same:
+    /// - `init(hebrewYear:month:day:hour:part:)` tends to be more legible when used with variables.
+    /// - `init(hebrew:_:_:at:_:)` tends to be more legible when used with literals.
     public init(hebrewYear year: HebrewYear, month: HebrewMonth = .tishrei, day: HebrewDay = 1, hour: HebrewHour = 0, part: HebrewPart = 0) {
         self.init(definition: HebrewDate(year: year, month: month, day: day, hour: hour, part: part))
     }
 
-    /// Creates a date using the Gregorian calendar.
+    // [_Inherit Documentation: SDGCornerstone.CalendarDate.init(hebrewYear:month:day:hour:part:)_]
+    /// Creates a date using the Hebrew calendar.
+    ///
+    /// This initializer has two written forms whose effects are the same:
+    /// - `init(hebrewYear:month:day:hour:part:)` tends to be more legible when used with variables.
+    /// - `init(hebrew:_:_:at:_:)` tends to be more legible when used with literals.
+    public init(hebrew month: HebrewMonth, _ day: HebrewDay, _ year: HebrewYear, at hour: HebrewHour = 0, part: HebrewPart = 0) {
+        self.init(hebrewYear: year, month: month, day: day, hour: hour, part: part)
+    }
+
+    // [_Define Documentation: SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:)_]
+    /// Creates a date using the Hebrew calendar.
+    ///
+    /// This initializer has two written forms whose effects are the same:
+    /// - `init(gregorianYear:month:day:hour:minute:second:)` tends to be more legible when used with variables.
+    /// - `init(gregorian:_:_:at:_:_:)` tends to be more legible when used with literals.
     public init(gregorianYear year: GregorianYear, month: GregorianMonth = .january, day: GregorianDay = 1, hour: GregorianHour = 0, minute: GregorianMinute = 0, second: GregorianSecond = 0) {
         let definition = GregorianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second)
         self.init(definition: definition)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:)_]
+    /// Creates a date using the Hebrew calendar.
+    ///
+    /// This initializer has two written forms whose effects are the same:
+    /// - `init(gregorianYear:month:day:hour:minute:second:)` tends to be more legible when used with variables.
+    /// - `init(gregorian:_:_:at:_:_:)` tends to be more legible when used with literals.
+    public init(gregorian month: GregorianMonth, _ day: GregorianDay, _ year: GregorianYear, at hour: GregorianHour = 0, _ minute: GregorianMinute = 0, _ second: GregorianSecond = 0) {
+        self.init(gregorianYear: year, month: month, day: day, hour: hour, minute: minute, second: second)
     }
 
     /// Creates a calendar date using an instance of `Date`.
