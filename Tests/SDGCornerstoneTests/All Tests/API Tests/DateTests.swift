@@ -78,7 +78,7 @@ class DateTests : TestCase {
         XCTAssertEqual(yetAnotherDate.תאריך־גרגוריאני־בעברית(עם־יום־שבוע: true), "יום רביעי, 5 ביולי 2017")
 
         let exception = CalendarDate(gregorian: .july, 1, 2017)
-        XCTAssertEqual(exception.dateGrégorienneEnFrançais(.sentenceMedial), "le 1er juillet 2017")
+        XCTAssertEqual(exception.dateGrégorienneEnFrançais(.sentenceMedial).rawTextApproximation(), "le 1er juillet 2017")
 
         let time = CalendarDate(gregorian: .july, 6, 2017, at: 2, 05, 06)
         let time2 = CalendarDate(gregorian: .july, 6, 2017, at: 23, 55, 58)

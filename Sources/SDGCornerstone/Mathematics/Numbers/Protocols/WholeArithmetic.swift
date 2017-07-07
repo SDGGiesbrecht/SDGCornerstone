@@ -1284,15 +1284,15 @@ extension WholeArithmetic {
         case 4:
             תוצאה.prepend("ת")
         case 5:
-            תוצאה.prepend(contentsOf: "תק" as StrictString)
+            תוצאה.prepend(contentsOf: "תק")
         case 6:
-            תוצאה.prepend(contentsOf: "תר" as StrictString)
+            תוצאה.prepend(contentsOf: "תר")
         case 7:
-            תוצאה.prepend(contentsOf: "תש" as StrictString)
+            תוצאה.prepend(contentsOf: "תש")
         case 8:
-            תוצאה.prepend(contentsOf: "תת" as StrictString)
+            תוצאה.prepend(contentsOf: "תת")
         case 9:
-            תוצאה.prepend(contentsOf: "תתק" as StrictString)
+            תוצאה.prepend(contentsOf: "תתק")
         default:
             preconditionFailure(אזהרה)
         }

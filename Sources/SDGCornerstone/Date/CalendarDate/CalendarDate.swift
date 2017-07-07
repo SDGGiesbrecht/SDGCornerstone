@@ -346,9 +346,9 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     /// Returns the time in the ISO format.
     public func timeInISOFormat(includeSeconds: Bool = false) -> StrictString {
-        var result: StrictString = gregorianHour.inISOFormat() + ":" as StrictString + gregorianMinute.inISOFormat()
+        var result = gregorianHour.inISOFormat() + ":" + gregorianMinute.inISOFormat()
         if includeSeconds {
-            result += ":" as StrictString + gregorianSecond.inISOFormat()
+            result += ":" + gregorianSecond.inISOFormat()
         }
         return result
     }

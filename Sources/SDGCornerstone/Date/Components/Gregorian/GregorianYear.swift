@@ -256,7 +256,7 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
         }
         var digits = number.inDigits()
         if year.isNegative {
-            digits += (" " as StrictString) + bcAbbreviation
+            digits += " " + bcAbbreviation
         }
         return digits
     }

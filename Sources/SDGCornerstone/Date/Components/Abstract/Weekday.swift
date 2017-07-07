@@ -139,17 +139,17 @@ extension Weekday where Vector : ExpressibleByIntegerLiteral {
         let יום: StrictString = "יום "
         switch ordinal {
         case 1:
-            return יום.appending(contentsOf: "ראשון" as StrictString)
+            return יום.appending(contentsOf: "ראשון")
         case 2:
-            return יום.appending(contentsOf: "שני" as StrictString)
+            return יום.appending(contentsOf: "שני")
         case 3:
-            return יום.appending(contentsOf: "שלישי" as StrictString)
+            return יום.appending(contentsOf: "שלישי")
         case 4:
-            return יום.appending(contentsOf: "רביעי" as StrictString)
+            return יום.appending(contentsOf: "רביעי")
         case 5:
-            return יום.appending(contentsOf: "חמישי" as StrictString)
+            return יום.appending(contentsOf: "חמישי")
         case 6:
-            return יום.appending(contentsOf: "ששי" as StrictString)
+            return יום.appending(contentsOf: "ששי")
         case 7:
             return "שבת"
         default:
