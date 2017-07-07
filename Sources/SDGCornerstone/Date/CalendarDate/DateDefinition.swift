@@ -32,7 +32,7 @@
 /// private struct DaysIntoMillennium : DateDefinition {
 ///
 ///     // The reference date is January 1, 2001 at 00:00
-///     fileprivate static let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
+///     fileprivate static let referenceDate = CalendarDate(gregorian: .january, 1, 2001, at: 0, 0, 0)
 ///
 ///     fileprivate let daysIntoMillennium: FloatMax
 ///     fileprivate let intervalSinceReferenceDate: CalendarInterval<FloatMax>
