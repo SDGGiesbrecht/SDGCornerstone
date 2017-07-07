@@ -35,11 +35,11 @@ extension Day {
     }
 
     /// Retourne le jour en chiffres français. (« 1er », « 2 », « 3 », etc.)
-    public func enChiffresFrançais() -> StrictString {
+    public func enChiffresFrançais() -> SemanticMarkup {
         if ordinal == 1 {
             return ordinal.ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
         } else {
-            return ordinal.inDigits()
+            return SemanticMarkup(ordinal.inDigits())
         }
     }
 

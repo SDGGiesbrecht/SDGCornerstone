@@ -15,7 +15,7 @@
 import Foundation
 
 /// A string that maintains Unicode normalization form NFKD.
-public struct StrictString : BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringLiteral, ExpressibleByTextLiterals, FileConvertible, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
+public struct StrictString : Addable, BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringLiteral, ExpressibleByTextLiterals, FileConvertible, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Initialization
 
@@ -36,6 +36,11 @@ public struct StrictString : BidirectionalCollection, Collection, Comparable, Eq
     /// Creates a string from a `String`.
     public init(_ string: String) {
         self.string = StrictString.normalizeAsString(string)
+    }
+
+    /// Creates a string from a `StaticString`.
+    public init(_ string: StaticString) {
+        self.init(String(stirng))
     }
 
     /// Creates a string from a `StrictString`.
@@ -82,6 +87,20 @@ public struct StrictString : BidirectionalCollection, Collection, Comparable, Eq
         default:
             return normalize(String.UnicodeScalarView(sequence))
         }
+    }
+
+    // MARK: - Addable
+
+    // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
+    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    ///
+    /// - Parameters:
+    ///     - lhs: The value to modify.
+    ///     - rhs: The value to add.
+    ///
+    /// - NonmutatingVariant: +
+    public static func += (lhs: inout StrictString, rhs: StrictString) {
+        lhs.append(contentsOf: rhs)
     }
 
     // MARK: - BidirectionalCollection

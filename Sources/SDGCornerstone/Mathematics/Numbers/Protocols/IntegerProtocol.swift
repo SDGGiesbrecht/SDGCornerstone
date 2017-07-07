@@ -34,7 +34,7 @@ extension IntegerProtocol {
 
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal()_]
     /// Returns the ordinal in its abbreviated English form. (“1st”, “2nd”, “3rd”, etc.)
-    public func abbreviatedEnglishOrdinal() -> StrictString {
+    public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
         return generateAbbreviatedEnglishOrdinal()
     }
 
@@ -46,13 +46,13 @@ extension IntegerProtocol {
 
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.ordinalFrançaisAbrégé(genre:nombre:)_]
     /// Retourne l’ordinal dans sa forme française abrégée. (« 1er », « 2e », « 3e », etc.)
-    public func ordinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> StrictString {
+    public func ordinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
         return générerOrdinalFrançaisAbrégé(genre: genre, nombre: nombre)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος:πτώση:αριθμός:)_]
     /// Επιστρέφει την συντομογραφία ελληνικού τακτικού αριθμού.
-    public func συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> StrictString {
+    public func συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> SemanticMarkup {
         return παραγωγήΣυντομογραφίαςΕλληνικούΤακτικούΑριθμού(γένος: γένος, πτώση: πτώση, αριθμός: αριθμός)
     }
 
