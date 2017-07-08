@@ -16,13 +16,7 @@ import SDGCornerstone
 
 struct RealArithmeticExample : RealArithmetic {
 
-    var value: Double
-
-    #if os(macOS) || os(Linux)
-        init(_ value: Double) {
-            self.value = value
-        }
-    #endif
+    var value: FloatMax
 
     // Addable
 
@@ -44,7 +38,7 @@ struct RealArithmeticExample : RealArithmetic {
 
     // ExpressibleByFloatLiteral
 
-    init(floatLiteral: Double.FloatLiteralType) {
+    init(floatLiteral: FloatMax.FloatLiteralType) {
         value = Double(floatLiteral: floatLiteral)
     }
 
@@ -67,7 +61,7 @@ struct RealArithmeticExample : RealArithmetic {
     // RationalArithmetic
 
     init(_ floatingPoint: FloatMax) {
-        value = Double(floatingPoint)
+        value = floatingPoint
     }
 
     static func ÷= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
@@ -105,7 +99,7 @@ struct RealArithmeticExample : RealArithmetic {
     // WholeArithmetic
 
     public init(_ uInt: UIntMax) {
-        value = Double(uInt)
+        value = FloatMax(uInt)
     }
 
     static func ×= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
@@ -121,6 +115,6 @@ struct RealArithmeticExample : RealArithmetic {
     }
 
     init(randomInRange range: ClosedRange<RealArithmeticExample>, fromRandomizer randomizer: Randomizer) {
-        value = Double(randomInRange: range.lowerBound.value ... range.upperBound.value, fromRandomizer: randomizer)
+        value = FloatMax(randomInRange: range.lowerBound.value ... range.upperBound.value, fromRandomizer: randomizer)
     }
 }

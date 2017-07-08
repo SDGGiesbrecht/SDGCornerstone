@@ -44,7 +44,7 @@ public struct GregorianSecond : CardinalCalendarComponent, ConsistentDurationCal
     // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
     /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
-        return Int(second.rounded(.towardZero)).inDigits().filled(to: 2, with: "0", from: .start)
+        return Int((second + 0.000_001).rounded(.down)).inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - PointProtocol

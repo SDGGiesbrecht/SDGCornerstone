@@ -30,7 +30,7 @@ class DateTests : TestCase {
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss +zzzz"
-        XCTAssertEqual(Date(CalendarDate(gregorian: .april, 18, 1991)), formatter.date(from: "1991‐04‐18 00:00:00 +0000"), "CalendarDate does not match Foundation.")
+        XCTAssert(Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate ≈ formatter.date(from: "1991‐04‐18 00:00:00 +0000")!.timeIntervalSinceReferenceDate, "CalendarDate does not match Foundation.")
 
         XCTAssertEqual(CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday, .wednesday, "Weekday failure.")
         XCTAssertEqual(CalendarDate(hebrew: .tevet, 11, 5776).hebrewWeekday, .wednesday, "Weekday failure.")
