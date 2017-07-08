@@ -312,7 +312,7 @@ class DateTests : TestCase {
         XCTAssertEqual(HebrewMonthAndYear(month: .elul, year: 5777).successor().month, .tishrei)
         XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5777).predecessor().month, .elul)
         XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5778) − HebrewMonthAndYear(month: .elul, year: 5777), 1)
-        XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5777) − HebrewMonthAndYear(month: .sivan, year: 5777), −2)
+        XCTAssertEqual(HebrewMonthAndYear(month: .nisan, year: 5777) − HebrewMonthAndYear(month: .sivan, year: 5777), −2)
     }
 
     func testHebrewPart() {
