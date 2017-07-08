@@ -681,7 +681,6 @@ class MathematicsTests : TestCase {
         XCTAssertEqual(2.ordinalFrançaisAbrégé(genre: .masculin, nombre: .plural).rawTextApproximation(), "2es")
         XCTAssertEqual(2.ordinalFrançaisAbrégé(genre: .féminin, nombre: .plural).rawTextApproximation(), "2es")
 
-
         XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .ονομαστική, αριθμός: .singular).rawTextApproximation(), "1ος")
         XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .αιτιατική, αριθμός: .singular).rawTextApproximation(), "1ο")
         XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .γενική, αριθμός: .singular).rawTextApproximation(), "1ου")

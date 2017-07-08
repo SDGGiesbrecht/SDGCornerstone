@@ -857,6 +857,12 @@ extension WholeArithmetic {
         guard let last = digits.last else {
             unreachable()
         }
+
+        if digits.count ≥ 2 ∧ digits[digits.index(before: digits.index(before: digits.endIndex))] == "1" {
+            // 11, 12, 13, etc.
+            return digits + SemanticMarkup("th").superscripted()
+        }
+
         switch last {
         case "1":
             return digits + SemanticMarkup("st").superscripted()
@@ -1299,11 +1305,11 @@ extension WholeArithmetic {
         מספר.divideAccordingToEuclid(by: 10)
 
         תוצאה.replaceMatches(for: "יה" as StrictString, with: "טו" as StrictString)
-            תוצאה.replaceMatches(for: "יו" as StrictString, with: "טז" as StrictString)
+        תוצאה.replaceMatches(for: "יו" as StrictString, with: "טז" as StrictString)
 
         if גרשיים ∧ ¬תוצאה.isEmpty {
             if תוצאה.count == 1 {
-                 תוצאה.append("׳")
+                תוצאה.append("׳")
             } else {
                 תוצאה.insert("״", at: תוצאה.index(before: תוצאה.endIndex))
             }
