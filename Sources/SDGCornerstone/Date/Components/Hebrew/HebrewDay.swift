@@ -23,6 +23,8 @@ public struct HebrewDay : ConsistentDurationCalendarComponent, Day, OrdinalCalen
 
     /// Corrects the day for the specified month and year, altering them if necessary. (If it doesn’t exist that year, Cheshvan 30 will be replaced by Kislev 1, etc.)
     public mutating func correct(forMonth month: inout HebrewMonth, year: inout HebrewYear) {
+        month.correctForYear(leapYear: year.isLeapYear)
+
         let daysInMonth = month.numberOfDays(yearLength: year.length, leapYear: year.isLeapYear)
         if day > daysInMonth {
             day −= daysInMonth
