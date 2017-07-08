@@ -13,7 +13,7 @@
  */
 
 /// A member of the `Int` family: `Int`, `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntFamily : Addable, AdditiveArithmetic, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, IntegerProtocol, IntegralArithmetic, MirrorPath, Negatable, NumericAdditiveArithmetic, OneDimensionalPoint, PointProtocol, PropertyListValue, SignedInteger, Subtractable, WholeArithmetic {
+public protocol IntFamily : Addable, AdditiveArithmetic, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, IntegerProtocol, IntegralArithmetic, MirrorPath, Negatable, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, PointProtocol, PropertyListValue, SignedInteger, Subtractable, WholeArithmetic {
 
 }
 

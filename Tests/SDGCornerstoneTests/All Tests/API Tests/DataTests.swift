@@ -21,27 +21,27 @@ class DataTests : TestCase {
 
     func testData() {
         let data = Data(bytes: [UInt8.max])
-        XCTAssert(data.binary.count == 8, "\(data).binary.count ≠ 8")
-        XCTAssert(data.binary.map({ $0 ? "1" : "0"}).joined() == "11111111", "\(data.binary.map({ $0 ? "1" : "0"}).joined()) ≠ 11111111")
+        XCTAssertEqual(data.binary.count, 8)
+        XCTAssertEqual(data.binary.map({ $0 ? "1" : "0"}).joined(), "11111111")
 
         var toReverse = Data(bytes: [0b11110000, 0b00000000])
         toReverse.binary.reverse()
-        XCTAssert(toReverse == Data(bytes: [0b000000000, 0b00001111]))
+        XCTAssertEqual(toReverse, Data(bytes: [0b000000000, 0b00001111]))
 
         let alternating = Data(bytes: [0b01010101, 0b01010101])
         let sorted = Data(bytes: [0b00000000, 0b11111111])
 
-        XCTAssert(alternating.bitwiseNot() == Data(bytes: [0b10101010, 0b10101010]))
-        XCTAssert(alternating.bitwiseAnd(with: sorted) == Data(bytes: [0b00000000, 0b01010101]))
-        XCTAssert(alternating.bitwiseOr(with: sorted) == Data(bytes: [0b01010101, 0b11111111]))
-        XCTAssert(alternating.bitwiseExclusiveOr(with: sorted) == Data(bytes: [0b01010101, 0b10101010]))
+        XCTAssertEqual(alternating.bitwiseNot(), Data(bytes: [0b10101010, 0b10101010]))
+        XCTAssertEqual(alternating.bitwiseAnd(with: sorted), Data(bytes: [0b00000000, 0b01010101]))
+        XCTAssertEqual(alternating.bitwiseOr(with: sorted), Data(bytes: [0b01010101, 0b11111111]))
+        XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data(bytes: [0b01010101, 0b10101010]))
 
         // BitwiseOperations
 
-        XCTAssert(~alternating == Data(bytes: [0b10101010, 0b10101010]))
-        XCTAssert(alternating & sorted == Data(bytes: [0b00000000, 0b01010101]))
-        XCTAssert(alternating | sorted == Data(bytes: [0b01010101, 0b11111111]))
-        XCTAssert(alternating ^ sorted == Data(bytes: [0b01010101, 0b10101010]))
+        XCTAssertEqual(~alternating, Data(bytes: [0b10101010, 0b10101010]))
+        XCTAssertEqual(alternating & sorted, Data(bytes: [0b00000000, 0b01010101]))
+        XCTAssertEqual(alternating | sorted, Data(bytes: [0b01010101, 0b11111111]))
+        XCTAssertEqual(alternating ^ sorted, Data(bytes: [0b01010101, 0b10101010]))
     }
 
     func testDataStream() {
@@ -64,7 +64,7 @@ class DataTests : TestCase {
 
             results.append(contentsOf: outputStream.extractCompleteUnits())
         }
-        XCTAssert(results == [forwards, backwards])
+        XCTAssertEqual(results, [forwards, backwards])
     }
 
     static var allTests: [(String, (DataTests) -> () throws -> Void)] {

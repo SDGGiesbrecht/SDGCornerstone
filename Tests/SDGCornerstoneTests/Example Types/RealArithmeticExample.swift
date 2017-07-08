@@ -16,11 +16,7 @@ import SDGCornerstone
 
 struct RealArithmeticExample : RealArithmetic {
 
-    var value: Double
-
-    init(_ value: Double) {
-        self.value = value
-    }
+    var value: FloatMax
 
     // Addable
 
@@ -42,8 +38,8 @@ struct RealArithmeticExample : RealArithmetic {
 
     // ExpressibleByFloatLiteral
 
-    init(floatLiteral: Double.FloatLiteralType) {
-        value = Double(floatLiteral: floatLiteral)
+    init(floatLiteral: FloatMax.FloatLiteralType) {
+        value = FloatMax(floatLiteral: floatLiteral)
     }
 
     // Hashable
@@ -55,7 +51,7 @@ struct RealArithmeticExample : RealArithmetic {
     // IntegralArithmetic
 
     public init(_ int: IntMax) {
-        value = Double(int)
+        value = FloatMax(int)
     }
 
     // PointProtocol
@@ -64,6 +60,10 @@ struct RealArithmeticExample : RealArithmetic {
 
     // RationalArithmetic
 
+    init(_ floatingPoint: FloatMax) {
+        value = floatingPoint
+    }
+
     static func ÷= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
         lhs.value ÷= rhs.value
     }
@@ -71,11 +71,11 @@ struct RealArithmeticExample : RealArithmetic {
     // RealArithmetic
 
     static var π: RealArithmeticExample {
-        return RealArithmeticExample(Double.π)
+        return RealArithmeticExample(FloatMax.π)
     }
 
     static var e: RealArithmeticExample {
-        return RealArithmeticExample(Double.e)
+        return RealArithmeticExample(FloatMax.e)
     }
 
     mutating func formLogarithm(toBase base: RealArithmeticExample) {
@@ -83,11 +83,11 @@ struct RealArithmeticExample : RealArithmetic {
     }
 
     static func sin(_ angle: Angle<RealArithmeticExample>) -> RealArithmeticExample {
-        return RealArithmeticExample(Double.sin(angle.inRadians.value.rad))
+        return RealArithmeticExample(FloatMax.sin(angle.inRadians.value.rad))
     }
 
     static func arctan(_ tangent: RealArithmeticExample) -> Angle<RealArithmeticExample> {
-        return RealArithmeticExample(Double.arctan(tangent.value).inRadians).rad
+        return RealArithmeticExample(FloatMax.arctan(tangent.value).inRadians).rad
     }
 
     // Subtractable
@@ -99,7 +99,7 @@ struct RealArithmeticExample : RealArithmetic {
     // WholeArithmetic
 
     public init(_ uInt: UIntMax) {
-        value = Double(uInt)
+        value = FloatMax(uInt)
     }
 
     static func ×= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
@@ -115,6 +115,6 @@ struct RealArithmeticExample : RealArithmetic {
     }
 
     init(randomInRange range: ClosedRange<RealArithmeticExample>, fromRandomizer randomizer: Randomizer) {
-        value = Double(randomInRange: range.lowerBound.value ... range.upperBound.value, fromRandomizer: randomizer)
+        value = FloatMax(randomInRange: range.lowerBound.value ... range.upperBound.value, fromRandomizer: randomizer)
     }
 }

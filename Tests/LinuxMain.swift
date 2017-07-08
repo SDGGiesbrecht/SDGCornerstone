@@ -20,6 +20,7 @@ XCTMain([
     testCase(CollectionTests.allTests),
     testCase(ConcurrencyTests.allTests),
     testCase(DataTests.allTests),
+    testCase(DateTests.allTests),
     testCase(EnumerationTests.allTests),
     testCase(LogicTests.allTests),
     testCase(LocalizationTests.allTests),

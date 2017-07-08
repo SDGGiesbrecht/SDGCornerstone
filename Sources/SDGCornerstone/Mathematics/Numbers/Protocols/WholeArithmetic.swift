@@ -95,7 +95,7 @@ infix operator ↑=: AssignmentPrecedence
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
 /// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (lhs: inout Self, rhs: Self)`
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
-public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByTextLiterals, NumericAdditiveArithmetic, OneDimensionalPoint, Strideable {
+public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByTextLiterals, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, Strideable {
 
     // MARK: - Initialization
 
@@ -401,7 +401,7 @@ extension WholeArithmetic {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
-                return StrictString("Base \(base) is not supported. The base must be an integer between 2 and 16 inclusive.")
+                return StrictString("Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive.")
             }
         }))
 
@@ -818,7 +818,7 @@ extension WholeArithmetic {
         return result
     }
 
-    internal func wholeDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+    internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         let digitSet = egyptianDigits
 
         let radix = self.radix(for: digitSet)
@@ -850,6 +850,116 @@ extension WholeArithmetic {
         }
 
         return StrictString(digits.reversed())
+    }
+
+    internal func generateAbbreviatedEnglishOrdinal() -> SemanticMarkup {
+        let digits = SemanticMarkup(wholeDigits())
+        guard let last = digits.last else {
+            unreachable()
+        }
+
+        if digits.count ≥ 2 ∧ digits[digits.index(before: digits.index(before: digits.endIndex))] == "1" {
+            // 11, 12, 13, etc.
+            return digits + SemanticMarkup("th").superscripted()
+        }
+
+        switch last {
+        case "1":
+            return digits + SemanticMarkup("st").superscripted()
+        case "2":
+            return digits + SemanticMarkup("nd").superscripted()
+        case "3":
+            return digits + SemanticMarkup("rd").superscripted()
+        default:
+            return digits + SemanticMarkup("th").superscripted()
+        }
+    }
+
+    internal func verkürzteDeutscheOrdnungszahlErzeugen() -> StrictString {
+        return wholeDigits() + "."
+    }
+
+    internal func générerOrdinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
+        var singulier: StrictString
+
+        if self == 1 {
+            switch genre {
+            case .masculin:
+                singulier = "er"
+            case .féminin:
+                singulier = "re"
+            }
+        } else {
+            singulier = "e"
+        }
+
+        switch nombre {
+        case .singular:
+            break
+        case .plural:
+            singulier += "s"
+        }
+
+        return SemanticMarkup(wholeDigits()) + SemanticMarkup(singulier).superscripted()
+    }
+
+    internal func παραγωγήΣυντομογραφίαςΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> SemanticMarkup {
+        switch αριθμός {
+        case .singular:
+            switch γένος {
+            case .masculine:
+                switch πτώση {
+                case .ονομαστική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ος").superscripted()
+                case .αιτιατική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ο").superscripted()
+                case .γενική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ου").superscripted()
+                case .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ε").superscripted()
+                }
+            case .feminine:
+                switch πτώση {
+                case .ονομαστική, .αιτιατική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("η").superscripted()
+                case .γενική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ης").superscripted()
+                }
+            case .neuter:
+                switch πτώση {
+                case .ονομαστική, .αιτιατική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ο").superscripted()
+                case .γενική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ου").superscripted()
+                }
+            }
+        case .plural:
+            switch γένος {
+            case .masculine:
+                switch πτώση {
+                case .ονομαστική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("οι").superscripted()
+                case .αιτιατική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ους").superscripted()
+                case .γενική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ων").superscripted()
+                }
+            case .feminine:
+                switch πτώση {
+                case .ονομαστική, .αιτιατική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ες").superscripted()
+                case .γενική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ων").superscripted()
+                }
+            case .neuter:
+                switch πτώση {
+                case .ονομαστική, .αιτιατική, .κλητική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("α").superscripted()
+                case .γενική:
+                    return SemanticMarkup(wholeDigits()) + SemanticMarkup("ων").superscripted()
+                }
+            }
+        }
     }
 
     internal func romanNumerals(lowercase: Bool) -> StrictString {
@@ -1180,26 +1290,26 @@ extension WholeArithmetic {
         case 4:
             תוצאה.prepend("ת")
         case 5:
-            תוצאה.prepend(contentsOf: "תק" as StrictString)
+            תוצאה.prepend(contentsOf: "תק")
         case 6:
-            תוצאה.prepend(contentsOf: "תר" as StrictString)
+            תוצאה.prepend(contentsOf: "תר")
         case 7:
-            תוצאה.prepend(contentsOf: "תש" as StrictString)
+            תוצאה.prepend(contentsOf: "תש")
         case 8:
-            תוצאה.prepend(contentsOf: "תת" as StrictString)
+            תוצאה.prepend(contentsOf: "תת")
         case 9:
-            תוצאה.prepend(contentsOf: "תתק" as StrictString)
+            תוצאה.prepend(contentsOf: "תתק")
         default:
             preconditionFailure(אזהרה)
         }
         מספר.divideAccordingToEuclid(by: 10)
 
         תוצאה.replaceMatches(for: "יה" as StrictString, with: "טו" as StrictString)
-            תוצאה.replaceMatches(for: "יו" as StrictString, with: "טז" as StrictString)
+        תוצאה.replaceMatches(for: "יו" as StrictString, with: "טז" as StrictString)
 
         if גרשיים ∧ ¬תוצאה.isEmpty {
             if תוצאה.count == 1 {
-                 תוצאה.append("׳")
+                תוצאה.append("׳")
             } else {
                 תוצאה.insert("״", at: תוצאה.index(before: תוצאה.endIndex))
             }

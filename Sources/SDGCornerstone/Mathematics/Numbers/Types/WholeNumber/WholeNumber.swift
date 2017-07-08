@@ -205,7 +205,7 @@ public struct WholeNumber : Addable, Comparable, Equatable, Hashable, PointProto
         assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
-                return StrictString("\(lhs) − \(rhs) is impossible for \(WholeNumber.self).")
+                return StrictString("\(lhs.inDigits()) − \(rhs.inDigits()) is impossible for \(WholeNumber.self).")
             }
         }))
 

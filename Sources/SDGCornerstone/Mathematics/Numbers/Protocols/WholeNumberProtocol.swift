@@ -23,12 +23,37 @@ public protocol WholeNumberProtocol : WholeArithmetic {
 
 extension WholeNumberProtocol {
 
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.inDigits(thousandsSeparator:)_]
     /// Returns the number in digits.
     ///
     /// - Parameters:
     ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
     public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         return wholeDigits(thousandsSeparator: thousandsSeparator)
+    }
+
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal()_]
+    /// Returns the ordinal in its abbreviated English form. (“1st”, “2nd”, “3rd”, etc.)
+    public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
+        return generateAbbreviatedEnglishOrdinal()
+    }
+
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.verkürzteDeutscheOrdnungszahl()_]
+    /// Gibt die Ordnungszahl in ihrer verkürtzen deutschen Form zurück. („1.“, „2.“, „3.“, usw.)
+    public func verkürzteDeutscheOrdnungszahl() -> StrictString {
+        return verkürzteDeutscheOrdnungszahlErzeugen()
+    }
+
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.ordinalFrançaisAbrégé(genre:nombre:)_]
+    /// Retourne l’ordinal dans sa forme française abrégée. (« 1er », « 2e », « 3e », etc.)
+    public func ordinalFrançaisAbrégé(genre: GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
+        return générerOrdinalFrançaisAbrégé(genre: genre, nombre: nombre)
+    }
+
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος:πτώση:αριθμός:)_]
+    /// Επιστρέφει την συντομογραφία ελληνικού τακτικού αριθμού.
+    public func συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: GrammaticalGender, πτώση: ΓραμματικήΠτώση, αριθμός: GrammaticalNumber) -> SemanticMarkup {
+        return παραγωγήΣυντομογραφίαςΕλληνικούΤακτικούΑριθμού(γένος: γένος, πτώση: πτώση, αριθμός: αριθμός)
     }
 
     // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:)_]
@@ -42,11 +67,11 @@ extension WholeNumberProtocol {
         return romanNumerals(lowercase: lowercase)
     }
 
-    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.στουςΕλληνικούςΑριθμούς(μικράΓράμματα:κεραία:)_]
+    // [_Define Documentation: SDGCornerstone.WholeNumberProtocol.σεΕλληνικούςΑριθμούς(μικράΓράμματα:κεραία:)_]
     /// Επιστρέφει τον αριθμό στους ελληνικούς αριθμούς.
     ///
     /// - Precondition: Ο αριθμός είναι σε Αʹ–͵ΘϠϞΘʹ.
-    public func στουςΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
+    public func σεΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
         return ελληνικοίΑριθμοί(μικράΓράμματα: μικράΓράμματα, κεραία: κεραία)
     }
 

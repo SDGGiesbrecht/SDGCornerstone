@@ -25,11 +25,11 @@ class LogicTests : TestCase {
         XCTAssert(true ≠ false)
         XCTAssert(false ≠ true)
 
-        XCTAssert(¬true == false)
-        XCTAssert(¬false == true)
+        XCTAssertEqual(¬true, false)
+        XCTAssertEqual(¬false, true)
         variable = false
         variable¬=
-        XCTAssert(variable == true)
+        XCTAssertEqual(variable, true)
 
         XCTAssert(true ∧ true)
         XCTAssertFalse(false ∧ false)
@@ -37,7 +37,7 @@ class LogicTests : TestCase {
         XCTAssertFalse(false ∧ true)
         variable = true
         variable ∧= false
-        XCTAssert(variable == false)
+        XCTAssertEqual(variable, false)
 
         XCTAssert(true ∨ true)
         XCTAssertFalse(false ∨ false)
@@ -45,23 +45,23 @@ class LogicTests : TestCase {
         XCTAssert(false ∨ true)
         variable = false
         variable ∨= true
-        XCTAssert(variable == true)
+        XCTAssertEqual(variable, true)
 
         for boolean in [true, false] {
-            XCTAssert(boolean.checkOrX() ≠ "")
-            XCTAssert(boolean.trueOrFalse(.sentenceMedial) ≠ "")
-            XCTAssert(boolean.yesOrNo(.sentenceMedial) ≠ "")
-            XCTAssert(boolean.wahrOderFalsch(.sentenceMedial) ≠ "")
-            XCTAssert(boolean.jaOderNein(.sentenceMedial) ≠ "")
-            XCTAssert(boolean.vraiOuFaux(.sentenceMedial) ≠ "")
-            XCTAssert(boolean.ouiOuNon(.sentenceMedial) ≠ "")
-            XCTAssert(boolean.αληθήςΉΨευδής(.sentenceMedial) ≠ "")
-            XCTAssert(boolean.ναιΉΌχι(.sentenceMedial) ≠ "")
-            XCTAssert(boolean.חיובי־או־שלילי() ≠ "")
-            XCTAssert(boolean.כן־או־לא() ≠ "")
+            XCTAssertNotEqual(boolean.checkOrX(), "")
+            XCTAssertNotEqual(boolean.trueOrFalse(.sentenceMedial), "")
+            XCTAssertNotEqual(boolean.yesOrNo(.sentenceMedial), "")
+            XCTAssertNotEqual(boolean.wahrOderFalsch(.sentenceMedial), "")
+            XCTAssertNotEqual(boolean.jaOderNein(.sentenceMedial), "")
+            XCTAssertNotEqual(boolean.vraiOuFaux(.sentenceMedial), "")
+            XCTAssertNotEqual(boolean.ouiOuNon(.sentenceMedial), "")
+            XCTAssertNotEqual(boolean.αληθήςΉΨευδής(.sentenceMedial), "")
+            XCTAssertNotEqual(boolean.ναιΉΌχι(.sentenceMedial), "")
+            XCTAssertNotEqual(boolean.חיובי־או־שלילי(), "")
+            XCTAssertNotEqual(boolean.כן־או־לא(), "")
         }
-        XCTAssert(true.trueOrFalse(.titleInitial) == "True")
-        XCTAssert(false.ναιΉΌχι(.sentenceInitial) == "Όχι")
+        XCTAssertEqual(true.trueOrFalse(.titleInitial), "True")
+        XCTAssertEqual(false.ναιΉΌχι(.sentenceInitial), "Όχι")
     }
 
     func testAny() {

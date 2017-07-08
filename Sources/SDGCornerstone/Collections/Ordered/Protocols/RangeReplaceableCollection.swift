@@ -23,11 +23,38 @@ extension RangeReplaceableCollection {
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
     /// Appends the contents of the sequence to the end of the collection.
 
+    private mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Iterator.Element == Self.Iterator.Element {
+        append(contentsOf: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+    /// Appends the contents of the sequence to the end of the collection.
+    public mutating func append(contentsOf newElements: Self) {
+        appendAsCollection(contentsOf: newElements)
+    }
+
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
 
+    private mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Iterator.Element == Self.Iterator.Element {
+        insert(contentsOf: newElements, at: i)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    /// Inserts the contents of the sequence to the specified index.
+    public mutating func insert(contentsOf newElements: Self, at i: Self.Index) {
+        insertAsCollection(contentsOf: newElements, at: i)
+    }
+
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
+
+    private mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Iterator.Element == Self.Iterator.Element {
+        replaceSubrange(subrange, with: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    /// Inserts the contents of the sequence to the specified index.
+    public mutating func replaceSubrange(_ subrange: Range<Self.Index>, with newElements: Self) {
+        replaceSubrangeAsCollection(subrange, with: newElements)
+    }
 
     /// Returns a collection formed by appending an element to the end of the collection.
     ///
@@ -39,6 +66,7 @@ extension RangeReplaceableCollection {
         return result
     }
 
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:)_]
     /// Returns a collection formed by appending the contents of another collection to the end of `self`.
     ///
     /// - Parameters:
@@ -49,6 +77,18 @@ extension RangeReplaceableCollection {
         return result
     }
 
+    private func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+        return appending(contentsOf: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:)_]
+    /// Returns a collection formed by appending the contents of another collection to the end of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to append to the collection
+    public func appending(contentsOf newElements: Self) -> Self {
+        return appendingAsCollection(contentsOf: newElements)
+    }
+
     /// Adds an element to the beginning of the collection.
     ///
     /// - Parameters:
@@ -57,12 +97,25 @@ extension RangeReplaceableCollection {
         insert(newElement, at: startIndex)
     }
 
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
     /// Adds the contents of another collection to the beginning of `self`.
     ///
     /// - Parameters:
     ///     - newElements: The elements to prepend to the collection
     public mutating func prepend<C : Collection>(contentsOf newElements: C) where C.Iterator.Element == Self.Iterator.Element {
         insert(contentsOf: newElements, at: startIndex)
+    }
+
+    private mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Iterator.Element == Self.Iterator.Element {
+        prepend(contentsOf: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
+    /// Adds the contents of another collection to the beginning of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to prepend to the collection
+    public mutating func prepend(contentsOf newElements: Self) {
+        prependAsCollection(contentsOf: newElements)
     }
 
     /// Returns a collection formed by prepending an element to the beginning of the collection.
@@ -75,6 +128,7 @@ extension RangeReplaceableCollection {
         return result
     }
 
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.prepending(contentsOf:)_]
     /// Returns a collection formed by prepending the contents of another collection to the beginning of `self`.
     ///
     /// - Parameters:
@@ -83,6 +137,18 @@ extension RangeReplaceableCollection {
         var result = self
         result.prepend(contentsOf: newElements)
         return result
+    }
+
+    private func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+        return prepending(contentsOf: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
+    /// Adds the contents of another collection to the beginning of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to prepend to the collection
+    public func prepending(contentsOf newElements: Self) -> Self {
+        return prependingAsCollection(contentsOf: newElements)
     }
 
     /// Truncates the `self` at `index`.

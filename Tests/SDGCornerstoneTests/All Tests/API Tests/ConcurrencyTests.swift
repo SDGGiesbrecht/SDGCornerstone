@@ -46,7 +46,7 @@ class ConcurrencyTests : TestCase {
         #endif
         OperationQueue(label: "Test Queue", serial: true).start {
             testQueueRan.fulfill()
-            #if !os(Linux) && !LinuxDocs
+            #if !os(Linux)
                 // [_Workaround: Linux cannot reliably get the current queue. (Swift 3.1.0)_]
                 XCTAssert(OperationQueue.current?.isSerial == true)
             #endif
@@ -79,7 +79,7 @@ class ConcurrencyTests : TestCase {
             })
         }
         waitForExpectations(timeout: 5, handler: nil)
-        XCTAssert(driver == nil)
+        XCTAssertNil(driver)
     }
 
     static var allTests: [(String, (ConcurrencyTests) -> () throws -> Void)] {

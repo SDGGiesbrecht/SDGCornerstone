@@ -24,38 +24,33 @@ public struct Angle<Scalar : RealArithmetic> : Measurement {
 
     /// Creates an angle in rotations.
     public init(rotations: Scalar) {
-        self.init()
         inRotations = rotations
     }
 
     /// Creates an angle in degrees.
     public init(degrees: Scalar) {
-        self.init()
         inDegrees = degrees
     }
 
     /// Creates an angle in minutes.
     public init(minutes: Scalar) {
-        self.init()
         inMinutes = minutes
     }
 
     /// Creates an angle in seconds.
     public init(seconds: Scalar) {
-        self.init()
         inSeconds = seconds
     }
 
     /// Creates an angle in gradians.
     public init(gradians: Scalar) {
-        self.init()
         inGradians = gradians
     }
 
     // MARK: - Units
 
     /// The numeric value in radians.
-    public var inRadians: Scalar
+    public var inRadians: Scalar = Scalar.additiveIdentity
 
     private static var radiansPerRotation: Scalar {
         return Scalar.τ

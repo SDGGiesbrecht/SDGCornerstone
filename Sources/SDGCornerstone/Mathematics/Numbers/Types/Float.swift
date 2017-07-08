@@ -24,7 +24,7 @@ import Foundation
 #endif
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
-public protocol FloatFamily : Addable, AdditiveArithmetic, BinaryFloatingPoint, CustomDebugStringConvertible, IntegralArithmetic, Hashable, LosslessStringConvertible, Negatable, NumericAdditiveArithmetic, OneDimensionalPoint, PointProtocol, RationalArithmetic, RealNumberProtocol, Subtractable, WholeArithmetic {
+public protocol FloatFamily : Addable, AdditiveArithmetic, BinaryFloatingPoint, CustomDebugStringConvertible, IntegralArithmetic, Hashable, LosslessStringConvertible, Negatable, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, PointProtocol, RationalArithmetic, RealNumberProtocol, Subtractable, WholeArithmetic {
 
     // [_Define Documentation: SDGCornerstone.FloatFamily.init(_:)_]
     /// Creates a new value, rounded to the closest possible representation.

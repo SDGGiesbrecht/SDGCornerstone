@@ -16,13 +16,13 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `RawRepresentable where RawValue : OneDimensionalPoint, ExpressibleByIntegerLiteral, RawValue.Vector : IntegerProtocol`
+/// - `RawRepresentable where RawValue : FixedScaleOneDimensionalPoint, ExpressibleByIntegerLiteral, RawValue.Vector : IntegerProtocol`
 /// - The raw values must be contiguous and begin at 0.
 public protocol IterableEnumeration : RawRepresentable {
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]
     /// The raw value type.
-    associatedtype RawValue : OneDimensionalPoint, ExpressibleByIntegerLiteral
+    associatedtype RawValue : FixedScaleOneDimensionalPoint, ExpressibleByIntegerLiteral
 
     // [_Define Documentation: SDGCornerstone.IterableEnumeration.cases_]
     /// An array containing every case of the enumeration.
@@ -32,8 +32,27 @@ public protocol IterableEnumeration : RawRepresentable {
 extension IterableEnumeration where RawValue.Vector : IntegerProtocol {
     // MARK: - where RawValue.Vector : IntegerProtocol
 
-    internal static var first: Self? {
-        return Self(rawValue: 0)
+    private static func noZeroCase() -> UserFacingText<APILocalization, Void> { // [_Exempt from Code Coverage_]
+        return UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+            switch localization {
+            case .englishCanada:
+                return StrictString("\(Self.self) has no case with a raw value 0.")
+            }
+        })
+    }
+
+    internal static var first: Self {
+        guard let result = Self(rawValue: 0) else {
+            preconditionFailure(noZeroCase())
+        }
+        return result
+    }
+
+    internal static var last: Self {
+        guard let result = Self.cases.last else {
+            preconditionFailure(noZeroCase())
+        }
+        return result
     }
 
     internal func successorAsIterableEnumeration() -> Self? {
@@ -43,9 +62,7 @@ extension IterableEnumeration where RawValue.Vector : IntegerProtocol {
     // [_Inherit Documentation: SDGCornerstone.IterableEnumeration.cases_]
     /// An array containing every case of the enumeration.
     public static var cases: [Self] {
-        guard var instance = first else { // [_Exempt from Code Coverage_] Unreachable due to the compiler disallowing raw values for empty enumerations.
-            return []
-        }
+        var instance = first
         var result: [Self] = [instance]
         while let next = instance.successorAsIterableEnumeration() {
             result.append(next)

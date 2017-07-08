@@ -16,4 +16,8 @@ import Foundation
 
 extension Date : PropertyListValue {
 
+    /// Creates a date from a calendar date.
+    public init(_ calendarDate: CalendarDate) {
+        self = calendarDate.converted(to: FoundationDate.self).date
+    }
 }

@@ -15,7 +15,7 @@
 extension LineView {
 
     /// A line view index.
-    public struct Index : Comparable, Equatable, Hashable, OneDimensionalPoint, PointProtocol {
+    public struct Index : Comparable, Equatable, Hashable, FixedScaleOneDimensionalPoint, PointProtocol {
 
         // MARK: - Initialization
 

@@ -24,7 +24,7 @@ class RandomizationTests : TestCase {
         for _ in 1 ..< 100 {
             values.insert(Bool.random())
         }
-        XCTAssert(values.count == 2)
+        XCTAssertEqual(values.count, 2)
     }
 
     func testRandomizer() {
@@ -52,9 +52,9 @@ class RandomizationTests : TestCase {
             }
 
             if R.self == PseudorandomNumberGenerator.self {
-                XCTAssert(uInt64sReturned.count == 6)
-                XCTAssert(int64sReturned.count == 7)
-                XCTAssert(positiveInt64sReturned.count == 6)
+                XCTAssertEqual(uInt64sReturned.count, 6)
+                XCTAssertEqual(int64sReturned.count, 7)
+                XCTAssertEqual(positiveInt64sReturned.count, 6)
             }
         }
         runTests(CyclicalNumberGenerator([0, 1, 6, 7, 11, 12, UInt64.max]))

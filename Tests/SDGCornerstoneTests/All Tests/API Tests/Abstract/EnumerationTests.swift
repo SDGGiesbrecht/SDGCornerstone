@@ -18,15 +18,22 @@ import SDGCornerstone
 class EnumerationTests : TestCase {
 
     func testIterableEnumeration() {
-        XCTAssert(IterableEnumerationExample.cases.count == 3)
+        XCTAssertEqual(IterableEnumerationExample.cases.count, 3)
     }
 
     func testOrderedEnumeration() {
-        XCTAssert(OrderedEnumerationExample.a.cyclicSuccessor() == OrderedEnumerationExample.b)
-        XCTAssert(OrderedEnumerationExample.c.cyclicPredecessor() == OrderedEnumerationExample.b)
-        XCTAssert(OrderedEnumerationExample.a.cyclicPredecessor() == OrderedEnumerationExample.c)
-        XCTAssert(OrderedEnumerationExample.c.cyclicSuccessor() == OrderedEnumerationExample.a)
+        XCTAssertEqual(OrderedEnumerationExample.a.cyclicSuccessor(), OrderedEnumerationExample.b)
+        XCTAssertEqual(OrderedEnumerationExample.c.cyclicPredecessor(), OrderedEnumerationExample.b)
+        XCTAssertEqual(OrderedEnumerationExample.a.cyclicPredecessor(), OrderedEnumerationExample.c)
+        XCTAssertEqual(OrderedEnumerationExample.c.cyclicSuccessor(), OrderedEnumerationExample.a)
         XCTAssert(OrderedEnumerationExample.a < OrderedEnumerationExample.b)
+
+        var weekday = GregorianWeekday.tuesday
+        weekday.increment()
+        XCTAssertEqual(weekday, .wednesday)
+        weekday.decrement()
+        XCTAssertEqual(weekday, .tuesday)
+        XCTAssertEqual(weekday.successor(), .wednesday)
     }
 
     static var allTests: [(String, (EnumerationTests) -> () throws -> Void)] {

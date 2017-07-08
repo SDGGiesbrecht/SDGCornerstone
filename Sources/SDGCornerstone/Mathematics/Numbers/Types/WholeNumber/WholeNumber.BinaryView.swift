@@ -123,7 +123,7 @@ internal struct WholeNumberBinaryView {
         preconditionFailure(UserFacingText({ [wholeNumber = self.wholeNumber] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
-                return StrictString("\(wholeNumber) is not in normalized form.")
+                return StrictString("\(wholeNumber.inDigits()) is not in normalized form.\n\(dump(wholeNumber))")
             }
         }))
     }
