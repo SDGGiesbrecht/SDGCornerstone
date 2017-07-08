@@ -23,6 +23,10 @@ class InternalTests : TestCase {
         XCTAssertEqual(CalendarDate(definition: GregorianWeekdayDate(week: 1, weekday: .tuesday, hour: 0, minute: 0, second: 0)), CalendarDate(gregorian: .january, 16, 2001))
     }
 
+    func testHebrewWeekdayDate() {
+        XCTAssertEqual(CalendarDate(definition: HebrewWeekdayDate(week: 1, weekday: .thursday, hour: 0, part: 0)), CalendarDate(hebrew: .tishrei, 15, 5758))
+    }
+
     func testHebrewYear() {
         InternalTests.testHebrewYear()
     }
@@ -36,6 +40,11 @@ class InternalTests : TestCase {
 
             _ = year.length // Throws exception if the year has an invalid length.
         }
+    }
+
+    func testRelativeDate() {
+        let date = CalendarDate.hebrewNow()
+        XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
     }
 
     func testLocalizationSetting() {
@@ -77,8 +86,10 @@ class InternalTests : TestCase {
     static var allTests: [(String, (InternalTests) -> () throws -> Void)] {
         return [
             ("testGregorianWeekdayDate", testGregorianWeekdayDate),
+            ("testHebrewWeekdayDate", testHebrewWeekdayDate),
             ("testHebrewYear", testHebrewYear),
             ("testLocalizationSetting", testLocalizationSetting),
+            ("testRelativeDate", testRelativeDate),
             ("testUIntHalvesView", testUIntHalvesView),
             ("testWholeNumberBinaryView", testWholeNumberBinaryView)
         ]

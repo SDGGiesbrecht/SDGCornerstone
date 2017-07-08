@@ -509,6 +509,15 @@ class CollectionTests : TestCase {
                  withAppendixPrepended: StrictString("45123").clusters,
                  truncatingIndex: StrictString("123").clusters.index(after: StrictString("123").clusters.startIndex),
                  truncated: StrictString("1").clusters)
+        runTests(start: SemanticMarkup("123"),
+                 appendix: SemanticMarkup("45"),
+                 result: SemanticMarkup("12345"),
+                 element: "0",
+                 withElementAppended: SemanticMarkup("1230"),
+                 withElementPrepended: SemanticMarkup("0123"),
+                 withAppendixPrepended: SemanticMarkup("45123"),
+                 truncatingIndex: SemanticMarkup("123").index(after: SemanticMarkup("123").startIndex),
+                 truncated: SemanticMarkup("1"))
         runTests(start: RangeReplaceableCollectionExample([1, 2, 3]),
                  appendix: RangeReplaceableCollectionExample([4, 5]),
                  result: [1, 2, 3, 4, 5],

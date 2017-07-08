@@ -229,10 +229,16 @@ class MathematicsTests : TestCase {
         runStrideableTests(Double.self)
         runStrideableTests(Float.self)
         runStrideableTests(RealArithmeticExample.self)
+
+        XCTAssertEqual(1.abbreviatedEnglishOrdinal().rawTextApproximation(), "1st")
+        XCTAssertEqual(2.verkürzteDeutscheOrdnungszahl(), "2.")
+        XCTAssertEqual(3.ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular).rawTextApproximation(), "3e")
+        XCTAssertEqual(4.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .ονομαστική, αριθμός: .singular).rawTextApproximation(), "4ος")
     }
 
     func testMeasurement() {
         XCTAssert(0°.hashValue ≤ Int.max)
+        XCTAssert(Angle<FloatMax>() == (0 as FloatMax).rad)
     }
 
     func testNegatable() {
@@ -647,6 +653,50 @@ class MathematicsTests : TestCase {
         XCTAssertEqual(10.בספרות־עבריות(), "י׳")
         XCTAssertEqual((1 as Int8).בספרות־עבריות(), "א׳")
         XCTAssertEqual((1 as UInt8).בספרות־עבריות(), "א׳")
+
+        XCTAssertEqual((1 as WholeNumber).abbreviatedEnglishOrdinal().rawTextApproximation(), "1st")
+        XCTAssertEqual((2 as WholeNumber).verkürzteDeutscheOrdnungszahl(), "2.")
+        XCTAssertEqual((3 as WholeNumber).ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular).rawTextApproximation(), "3e")
+        XCTAssertEqual((4 as WholeNumber).συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .ονομαστική, αριθμός: .singular).rawTextApproximation(), "4ος")
+
+        XCTAssertEqual(1.abbreviatedEnglishOrdinal().rawTextApproximation(), "1st")
+        XCTAssertEqual(2.abbreviatedEnglishOrdinal().rawTextApproximation(), "2nd")
+        XCTAssertEqual(3.abbreviatedEnglishOrdinal().rawTextApproximation(), "3rd")
+        XCTAssertEqual(4.abbreviatedEnglishOrdinal().rawTextApproximation(), "4th")
+        XCTAssertEqual(11.abbreviatedEnglishOrdinal().rawTextApproximation(), "11th")
+        XCTAssertEqual(12.abbreviatedEnglishOrdinal().rawTextApproximation(), "12th")
+        XCTAssertEqual(13.abbreviatedEnglishOrdinal().rawTextApproximation(), "13th")
+        XCTAssertEqual(14.abbreviatedEnglishOrdinal().rawTextApproximation(), "14th")
+        XCTAssertEqual(21.abbreviatedEnglishOrdinal().rawTextApproximation(), "21st")
+        XCTAssertEqual(22.abbreviatedEnglishOrdinal().rawTextApproximation(), "22nd")
+        XCTAssertEqual(23.abbreviatedEnglishOrdinal().rawTextApproximation(), "23rd")
+        XCTAssertEqual(24.abbreviatedEnglishOrdinal().rawTextApproximation(), "24th")
+
+        XCTAssertEqual(1.ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular).rawTextApproximation(), "1er")
+        XCTAssertEqual(1.ordinalFrançaisAbrégé(genre: .féminin, nombre: .singular).rawTextApproximation(), "1re")
+        XCTAssertEqual(1.ordinalFrançaisAbrégé(genre: .masculin, nombre: .plural).rawTextApproximation(), "1ers")
+        XCTAssertEqual(1.ordinalFrançaisAbrégé(genre: .féminin, nombre: .plural).rawTextApproximation(), "1res")
+        XCTAssertEqual(2.ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular).rawTextApproximation(), "2e")
+        XCTAssertEqual(2.ordinalFrançaisAbrégé(genre: .féminin, nombre: .singular).rawTextApproximation(), "2e")
+        XCTAssertEqual(2.ordinalFrançaisAbrégé(genre: .masculin, nombre: .plural).rawTextApproximation(), "2es")
+        XCTAssertEqual(2.ordinalFrançaisAbrégé(genre: .féminin, nombre: .plural).rawTextApproximation(), "2es")
+
+
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .ονομαστική, αριθμός: .singular).rawTextApproximation(), "1ος")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .αιτιατική, αριθμός: .singular).rawTextApproximation(), "1ο")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .γενική, αριθμός: .singular).rawTextApproximation(), "1ου")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .κλητική, αριθμός: .singular).rawTextApproximation(), "1ε")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .feminine, πτώση: .ονομαστική, αριθμός: .singular).rawTextApproximation(), "1η")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .feminine, πτώση: .γενική, αριθμός: .singular).rawTextApproximation(), "1ης")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .neuter, πτώση: .ονομαστική, αριθμός: .singular).rawTextApproximation(), "1ο")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .neuter, πτώση: .γενική, αριθμός: .singular).rawTextApproximation(), "1ου")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .ονομαστική, αριθμός: .plural).rawTextApproximation(), "1οι")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .αιτιατική, αριθμός: .plural).rawTextApproximation(), "1ους")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .masculine, πτώση: .γενική, αριθμός: .plural).rawTextApproximation(), "1ων")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .feminine, πτώση: .ονομαστική, αριθμός: .plural).rawTextApproximation(), "1ες")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .feminine, πτώση: .γενική, αριθμός: .plural).rawTextApproximation(), "1ων")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .neuter, πτώση: .ονομαστική, αριθμός: .plural).rawTextApproximation(), "1α")
+        XCTAssertEqual(1.συντομογραφίαΕλληνικούΤακτικούΑριθμού(γένος: .neuter, πτώση: .γενική, αριθμός: .plural).rawTextApproximation(), "1ων")
     }
 
     static var allTests: [(String, (MathematicsTests) -> () throws -> Void)] {

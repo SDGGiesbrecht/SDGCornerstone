@@ -98,7 +98,7 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
                 point −= 1
             } else {
                 distance += 1
-                distance += 1
+                point += 1
             }
         }
         return distance

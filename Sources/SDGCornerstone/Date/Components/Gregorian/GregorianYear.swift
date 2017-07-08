@@ -164,8 +164,9 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
     // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
     /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
-        var digits = (|ordinal|).inDigits().filled(to: 4, with: "0", from: .start)
-        if ordinal.isNegative {
+        let cardinal = self − GregorianYear(−1)
+        var digits = (|cardinal|).inDigits().filled(to: 4, with: "0", from: .start)
+        if cardinal.isNegative {
             digits.prepend("−")
         }
         return digits

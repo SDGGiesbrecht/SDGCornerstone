@@ -120,15 +120,227 @@ class DateTests : TestCase {
         XCTAssertEqual(time3.floatingICalendarFormat(), "20170706T000000")
     }
 
+    func testCalendarComponent() {
+        XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
+        XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
+
+        XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
+        XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
+
+        XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
+
+        XCTAssertEqual(GregorianDay(ordinal: 8), 8)
+
+        XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
+        XCTAssertEqual(GregorianMinute.duration, (1 as FloatMax).minutes)
+        XCTAssertEqual(GregorianSecond.duration, (1 as FloatMax).seconds)
+        XCTAssertEqual(GregorianWeekday.duration, (1 as FloatMax).days)
+        XCTAssertEqual(HebrewDay.duration, (1 as FloatMax).days)
+        XCTAssertEqual(HebrewHour.duration, (1 as FloatMax).hours)
+        XCTAssertEqual(HebrewPart.duration, (1 as FloatMax).hebrewParts)
+        XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
+
+        XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
+    }
+
+    func testCalendarInterval() {
+        XCTAssert((365.days × 400).inGregorianLeapYearCycles < 1)
+        XCTAssert(28.days.inHebrewMoons < 1)
+    }
+
+    func testGregorianDay() {
+        var day: GregorianDay = 29
+        var month: GregorianMonth = .february
+        day.correct(forMonth: &month, year: 2017)
+        XCTAssertEqual(day, 1)
+        XCTAssertEqual(month, .march)
+
+        day = 31
+        month = .november
+        day.correct(forMonth: &month, year: 2017)
+        XCTAssertEqual(day, 1)
+        XCTAssertEqual(month, .december)
+    }
+
+    func testGregorianMonth() {
+        let length = FloatMax(GregorianMonth.january.numberOfDays(leapYear: false)) × (1 as FloatMax).days
+        XCTAssert(length ≥ GregorianMonth.minimumDuration)
+        XCTAssert(length ≤ GregorianMonth.maximumDuration)
+
+        for month in GregorianMonth.january ... GregorianMonth.december {
+            XCTAssertNotEqual(month.inEnglish(), "")
+            XCTAssertNotEqual(month.aufDeutsch(), "")
+            XCTAssertNotEqual(month.enFrançais(.sentenceMedial), "")
+            XCTAssertNotEqual(month.σεΕλληνικά(.ονομαστική), "")
+            XCTAssertNotEqual(month.σεΕλληνικά(.αιτιατική), "")
+            XCTAssertNotEqual(month.σεΕλληνικά(.γενική), "")
+            XCTAssertNotEqual(month.σεΕλληνικά(.κλητική), "")
+            XCTAssertNotEqual(month.בעברית(), "")
+
+            if month == .january {
+                XCTAssertEqual(month.inEnglish(), "January")
+                XCTAssertEqual(month.aufDeutsch(), "Januar")
+                XCTAssertEqual(month.enFrançais(.sentenceMedial), "janvier")
+                XCTAssertEqual(month.enFrançais(.sentenceInitial), "Janvier")
+                XCTAssertEqual(month.σεΕλληνικά(.ονομαστική), "Ιανουάριος")
+                XCTAssertEqual(month.σεΕλληνικά(.αιτιατική), "Ιανουάριο")
+                XCTAssertEqual(month.σεΕλληνικά(.γενική), "Ιανουαρίου")
+                XCTAssertEqual(month.σεΕλληνικά(.κλητική), "Ιανουάριε")
+                XCTAssertEqual(month.בעברית(), "ינואר")
+            } else if month == .may {
+                XCTAssertEqual(month.σεΕλληνικά(.γενική), "Μαΐου")
+            } else if month == .august {
+                XCTAssertEqual(month.σεΕλληνικά(.γενική), "Αυγούστου")
+            }
+        }
+    }
+
     func testGregorianSecond() {
         let second: GregorianSecond = 0.0
         XCTAssertEqual(second, 0)
     }
 
+    func testGregorianYear() {
+        let length = FloatMax(GregorianYear(2017).numberOfDays) × (1 as FloatMax).days
+        XCTAssert(length ≥ GregorianYear.minimumDuration)
+        XCTAssert(length ≤ GregorianYear.maximumDuration)
+
+        XCTAssertEqual(GregorianYear(ordinal: 1), 1)
+        XCTAssertEqual(GregorianYear(2017).numberAlreadyElapsed, 2016)
+
+        XCTAssertEqual(GregorianYear(1).inISOFormat(), "0001")
+        XCTAssertEqual(GregorianYear(−1).inISOFormat(), "0000")
+        XCTAssertEqual(GregorianYear(−2).inISOFormat(), "−0001")
+
+        XCTAssertEqual(GregorianYear(−1) + 1, GregorianYear(1))
+        XCTAssertEqual(GregorianYear(1) − 1, GregorianYear(−1))
+        XCTAssertEqual(GregorianYear(−1) − GregorianYear(1), −1)
+
+        XCTAssertEqual(GregorianYear(−1000).inEnglishDigits(), "1000 BC")
+    }
+
+    func testHebrewDay() {
+        var day: HebrewDay = 30
+        var month: HebrewMonth = .adar
+        var year: HebrewYear = 5774
+        day.correct(forMonth: &month, year: &year)
+        XCTAssertEqual(day, 1)
+        XCTAssertEqual(month, .nisan)
+
+        day = 30
+        month = .elul
+        year = 5777
+        day.correct(forMonth: &month, year: &year)
+        XCTAssertEqual(day, 1)
+        XCTAssertEqual(month, .tishrei)
+        XCTAssertEqual(year, 5778)
+
+        XCTAssertEqual(HebrewMonth.nisan.numberAlreadyElapsed(leapYear: true), 7)
+        XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: false), 7)
+        XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: true), 8)
+    }
+
+    func testHebrewHour() {
+        XCTAssertEqual(HebrewHour(5).inDigits(), "5")
+    }
+
+    func testHebrewMonth() {
+        let length = FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false)) × (1 as FloatMax).days
+        XCTAssert(length ≥ HebrewMonth.minimumDuration)
+        XCTAssert(length ≤ HebrewMonth.maximumDuration)
+
+        var month: HebrewMonth = .adar
+        month.increment(leapYear: false)
+        XCTAssertEqual(month, .nisan)
+        month.decrement(leapYear: false)
+        XCTAssertEqual(month, .adar)
+
+        XCTAssertEqual(HebrewMonth.tishrei.cyclicPredecessor(leapYear: false, {}), .elul)
+
+        month = .adar
+        month.correctForYear(leapYear: true)
+        XCTAssertEqual(month, .adarII)
+
+        month = .adarII
+        month.correctForYear(leapYear: false)
+        XCTAssertEqual(month, .adar)
+
+        for month in sequence(first: HebrewMonth.tishrei, next: { $0.successor() }) {
+            XCTAssertNotEqual(month.inEnglish(), "")
+            XCTAssertNotEqual(month.aufDeutsch(), "")
+            XCTAssertNotEqual(month.enFrançais(.sentenceMedial), "")
+            XCTAssertNotEqual(month.σεΕλληνικά(.ονομαστική), "")
+            XCTAssertNotEqual(month.σεΕλληνικά(.αιτιατική), "")
+            XCTAssertNotEqual(month.σεΕλληνικά(.γενική), "")
+            XCTAssertNotEqual(month.σεΕλληνικά(.κλητική), "")
+            XCTAssertNotEqual(month.בעברית(), "")
+
+            if month == .tishrei {
+                XCTAssertEqual(month.inEnglish(), "Tishrei")
+                XCTAssertEqual(month.aufDeutsch(), "Tischri")
+                XCTAssertEqual(month.enFrançais(.sentenceMedial), "tichri")
+                XCTAssertEqual(month.enFrançais(.sentenceInitial), "Tichri")
+                XCTAssertEqual(month.σεΕλληνικά(.ονομαστική), "Τισρί")
+                XCTAssertEqual(month.בעברית(), "תשרי")
+            } else if month == .adarII {
+                XCTAssertEqual(month.inEnglish(), "Adar II")
+                XCTAssertEqual(month.aufDeutsch(), "Adar II")
+                XCTAssertEqual(month.enFrançais(.sentenceMedial), "adar II")
+                XCTAssertEqual(month.enFrançais(.sentenceInitial), "Adar II")
+                XCTAssertEqual(month.σεΕλληνικά(.ονομαστική), "Αδάρ Βʹ")
+                XCTAssertEqual(month.בעברית(), "אדר ב׳")
+            }
+        }
+
+        XCTAssertEqual(HebrewMonthAndYear(month: .elul, year: 5777).successor().month, .tishrei)
+        XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5777).predecessor().month, .elul)
+        XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5777) − HebrewMonthAndYear(month: .elul, year: 5777), 1)
+    }
+
+    func testHebrewPart() {
+        XCTAssertEqual(HebrewPart(102).inDigits(), "102")
+    }
+
+    func testHebrewYear() {
+        let length = FloatMax(HebrewYear(5777).numberOfDays) × (1 as FloatMax).days
+        XCTAssert(length ≥ HebrewYear.minimumDuration)
+        XCTAssert(length ≤ HebrewYear.maximumDuration)
+    }
+
+    func testWeekday() {
+        for weekday in GregorianWeekday.sunday ... GregorianWeekday.saturday {
+            XCTAssertNotEqual(weekday.inEnglish(), "")
+            XCTAssertNotEqual(weekday.aufDeutsch(), "")
+            XCTAssertNotEqual(weekday.enFrançais(.sentenceMedial), "")
+            XCTAssertNotEqual(weekday.σεΕλληνικά(), "")
+            XCTAssertNotEqual(weekday.בעברית(), "")
+
+            if weekday == .sunday {
+                XCTAssertEqual(weekday.inEnglish(), "Sunday")
+                XCTAssertEqual(weekday.aufDeutsch(), "Sonntag")
+                XCTAssertEqual(weekday.enFrançais(.sentenceMedial), "dimanche")
+                XCTAssertEqual(weekday.enFrançais(.sentenceInitial), "Dimanche")
+                XCTAssertEqual(weekday.σεΕλληνικά(), "Κυριακή")
+                XCTAssertEqual(weekday.בעברית(), "יום ראשון")
+            }
+        }
+    }
+
     static var allTests: [(String, (DateTests) -> () throws -> Void)] {
         return [
             ("testCalendarDate", testCalendarDate),
-            ("testGregorianSecond", testGregorianSecond)
+            ("testCalendarComponent", testCalendarComponent),
+            ("testCalendarInterval", testCalendarInterval),
+            ("testGregorianDay", testGregorianDay),
+            ("testGregorianDay", testGregorianDay),
+            ("testGregorianSecond", testGregorianSecond),
+            ("testGregorianYear", testGregorianYear),
+            ("testHebrewDay", testHebrewDay),
+            ("testHebrewHour", testHebrewHour),
+            ("testHebrewMonth", testHebrewMonth),
+            ("testHebrewPart", testHebrewPart),
+            ("testHebrewYear", testHebrewYear),
+            ("testWeekday", testWeekday)
         ]
     }
 }

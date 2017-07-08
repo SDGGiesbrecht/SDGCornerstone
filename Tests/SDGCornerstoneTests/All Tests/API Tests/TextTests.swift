@@ -74,6 +74,15 @@ class TextTests : TestCase {
         XCTAssertEqual(String(lines), "\n\n")
     }
 
+    func testSemanticMarkup() {
+        let markup: SemanticMarkup = "..."
+        XCTAssertEqual(markup.scalars, markup.source.scalars)
+        XCTAssertEqual(StrictString(markup.clusters), StrictString(markup.source.clusters))
+        XCTAssertEqual(StrictString(markup.lines), StrictString(markup.source.lines))
+
+        XCTAssertEqual(markup.subscripted().rawTextApproximation(), "...")
+    }
+
     func testStrictString() {
 
         var string = StrictString("\u{BC}")
@@ -144,6 +153,8 @@ class TextTests : TestCase {
         XCTAssertEqual(StrictString("A").description, "A")
 
         XCTAssert(StrictString("A") < StrictString("B"))
+
+        XCTAssertEqual(StrictString("..." as StaticString), "...")
     }
 
     func testString() {
@@ -265,6 +276,7 @@ class TextTests : TestCase {
         return [
             ("testCharacterSet", testCharacterSet),
             ("testLineView", testLineView),
+            ("testSemanticMarkup", testSemanticMarkup),
             ("testStrictString", testStrictString),
             ("testString", testString),
             ("testUnicodeScalar", testUnicodeScalar),
