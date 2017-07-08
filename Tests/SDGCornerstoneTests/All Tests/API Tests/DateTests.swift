@@ -141,6 +141,7 @@ class DateTests : TestCase {
         XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
 
         XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
+        XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
     }
 
     func testCalendarInterval() {
@@ -193,11 +194,24 @@ class DateTests : TestCase {
                 XCTAssertEqual(month.σεΕλληνικά(.γενική), "Αυγούστου")
             }
         }
+
+        XCTAssertNil(HebrewMonth.adarII.numberAlreadyElapsed(leapYear: false))
+        XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: false), 1)
+        XCTAssertNil(HebrewMonth.adarII.ordinal(leapYear: false))
+        XCTAssertEqual(HebrewMonth.adar.ordinal(leapYear: false), 6)
+        XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: false), 12)
+        XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: true), 1)
+        XCTAssertNil(HebrewMonth.adar.ordinal(leapYear: true))
+        XCTAssertEqual(HebrewMonth.adarI.ordinal(leapYear: true), 6)
+        XCTAssertEqual(HebrewMonth.adarII.ordinal(leapYear: true), 7)
+        XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: true), 13)
     }
 
     func testGregorianSecond() {
         let second: GregorianSecond = 0.0
         XCTAssertEqual(second, 0)
+
+        XCTAssertEqual(GregorianSecond(0).inDigits(), "00")
     }
 
     func testGregorianYear() {
@@ -217,6 +231,9 @@ class DateTests : TestCase {
         XCTAssertEqual(GregorianYear(−1) − GregorianYear(1), −1)
 
         XCTAssertEqual(GregorianYear(−1000).inEnglishDigits(), "1000 BC")
+
+        XCTAssertEqual(GregorianYear(numberAlreadyElapsed: 0), 1)
+        XCTAssertEqual(GregorianYear(2017).ordinal, 2017)
     }
 
     func testHebrewDay() {

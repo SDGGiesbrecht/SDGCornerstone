@@ -80,7 +80,19 @@ class TextTests : TestCase {
         XCTAssertEqual(StrictString(markup.clusters), StrictString(markup.source.clusters))
         XCTAssertEqual(StrictString(markup.lines), StrictString(markup.source.lines))
 
+        var mutable = markup
+        mutable.scalars  = markup.scalars
+        mutable.clusters = markup.clusters
+        mutable.lines = markup.lines
+        XCTAssertEqual(mutable.scalars, markup.scalars)
+        XCTAssertEqual(StrictString(mutable.clusters), StrictString(markup.clusters))
+        XCTAssertEqual(StrictString(mutable.lines), StrictString(markup.lines))
+
         XCTAssertEqual(markup.subscripted().rawTextApproximation(), "...")
+
+        XCTAssert(markup.hashValue ≤ Int.max)
+        XCTAssertEqual(SemanticMarkup("").source, "")
+        XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
     }
 
     func testStrictString() {
