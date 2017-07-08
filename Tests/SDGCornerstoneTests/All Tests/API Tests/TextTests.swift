@@ -93,6 +93,7 @@ class TextTests : TestCase {
         XCTAssert(markup.hashValue ≤ Int.max)
         XCTAssertEqual(SemanticMarkup("").source, "")
         XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
+        XCTAssertEqual(SemanticMarkup().source, "")
     }
 
     func testStrictString() {
