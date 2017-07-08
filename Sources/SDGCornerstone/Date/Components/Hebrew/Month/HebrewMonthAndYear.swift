@@ -94,10 +94,10 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
 
         while point ≠ rhs {
             if point > rhs {
-                distance −= 1
+                distance += 1
                 point −= 1
             } else {
-                distance += 1
+                distance −= 1
                 point += 1
             }
         }
