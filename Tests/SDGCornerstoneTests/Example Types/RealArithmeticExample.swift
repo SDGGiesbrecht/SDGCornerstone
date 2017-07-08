@@ -39,7 +39,7 @@ struct RealArithmeticExample : RealArithmetic {
     // ExpressibleByFloatLiteral
 
     init(floatLiteral: FloatMax.FloatLiteralType) {
-        value = Double(floatLiteral: floatLiteral)
+        value = FloatMax(floatLiteral: floatLiteral)
     }
 
     // Hashable
@@ -51,7 +51,7 @@ struct RealArithmeticExample : RealArithmetic {
     // IntegralArithmetic
 
     public init(_ int: IntMax) {
-        value = Double(int)
+        value = FloatMax(int)
     }
 
     // PointProtocol
@@ -71,11 +71,11 @@ struct RealArithmeticExample : RealArithmetic {
     // RealArithmetic
 
     static var π: RealArithmeticExample {
-        return RealArithmeticExample(Double.π)
+        return RealArithmeticExample(FloatMax.π)
     }
 
     static var e: RealArithmeticExample {
-        return RealArithmeticExample(Double.e)
+        return RealArithmeticExample(FloatMax.e)
     }
 
     mutating func formLogarithm(toBase base: RealArithmeticExample) {
@@ -83,11 +83,11 @@ struct RealArithmeticExample : RealArithmetic {
     }
 
     static func sin(_ angle: Angle<RealArithmeticExample>) -> RealArithmeticExample {
-        return RealArithmeticExample(Double.sin(angle.inRadians.value.rad))
+        return RealArithmeticExample(FloatMax.sin(angle.inRadians.value.rad))
     }
 
     static func arctan(_ tangent: RealArithmeticExample) -> Angle<RealArithmeticExample> {
-        return RealArithmeticExample(Double.arctan(tangent.value).inRadians).rad
+        return RealArithmeticExample(FloatMax.arctan(tangent.value).inRadians).rad
     }
 
     // Subtractable
