@@ -18,9 +18,11 @@ struct RealArithmeticExample : RealArithmetic {
 
     var value: Double
 
-    init(_ value: Double) {
-        self.value = value
-    }
+    #if os(macOS) || os(Linux)
+        init(_ value: Double) {
+            self.value = value
+        }
+    #endif
 
     // Addable
 
