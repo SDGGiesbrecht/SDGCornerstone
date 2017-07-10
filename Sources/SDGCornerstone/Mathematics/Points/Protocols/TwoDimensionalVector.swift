@@ -22,7 +22,7 @@ public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
     // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.Scalar_]
     /// The scalar type.
-    associatedtype Scalar : IntegralArithmetic
+    associatedtype Scalar : RationalArithmetic
 
     // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:)_]
     /// Creates a vector using the specified differences in *x* and *y*.

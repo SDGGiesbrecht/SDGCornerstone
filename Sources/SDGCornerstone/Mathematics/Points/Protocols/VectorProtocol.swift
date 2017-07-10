@@ -133,7 +133,8 @@ extension VectorProtocol where Self : TwoDimensionalVector {
     ///
     /// - NonmutatingVariant: ×
     public static func ×=(lhs: inout Self, rhs: Scalar) {
-        notImplementedYet()
+        lhs.Δx ×= rhs
+        lhs.Δy ×= rhs
     }
 
     // [_Inherit Documentation: SDGCornerstone.VectorProtocol.÷=_]
@@ -147,6 +148,7 @@ extension VectorProtocol where Self : TwoDimensionalVector {
     ///
     /// - RecommendedOver: /=
     public static func ÷=(lhs: inout Self, rhs: Scalar) {
-        notImplementedYet()
+        lhs.Δx ÷= rhs
+        lhs.Δy ÷= rhs
     }
 }
