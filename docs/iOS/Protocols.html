@@ -156,6 +156,9 @@
                 <a href="Extensions/CGFloat.html">CGFloat</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/CGVector.html">CGVector</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/CharacterSet.html">CharacterSet</a>
               </li>
               <li class="nav-group-task">
@@ -496,7 +499,7 @@
                 <a href="Protocols/FiniteSet.html">FiniteSet</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols.html#/s:P14SDGCornerstone29FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a>
+                <a href="Protocols.html#/FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/FloatFamily.html">FloatFamily</a>
@@ -599,6 +602,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Subtractable.html">Subtractable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TwoDimensionalPoint.html">TwoDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TwoDimensionalVector.html">TwoDimensionalVector</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/UIntFamily.html">UIntFamily</a>
@@ -1234,210 +1243,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:P14SDGCornerstone29FixedScaleOneDimensionalPoint"></a>
-                    <a name="//apple_ref/swift/Protocol/FixedScaleOneDimensionalPoint" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P14SDGCornerstone29FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A one dimensional point with a fixed scale.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">FixedScaleOneDimensionalPoint</span> <span class="p">:</span> <span class="kt"><a href="Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a></span><span class="p">,</span> <span class="kt">Strideable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:P14SDGCornerstone19OneDimensionalPoint"></a>
-                    <a name="//apple_ref/swift/Protocol/OneDimensionalPoint" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P14SDGCornerstone19OneDimensionalPoint">OneDimensionalPoint</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A <code>Comparable</code> type that can be used with <code>+(_:_:)</code> and <code>−(_:_:)</code> in conjunction with an associated <code><a href="Associated Types.html#/s:P14SDGCornerstone3Day6Vector">Vector</a></code> type.</p>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p>For multi‐dimensional points, see <code><a href="Protocols/PointProtocol.html">PointProtocol</a></code>.</p>
-
-</div>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p>This is distinct from <code><a href="Protocols.html#/s:P14SDGCornerstone29FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a></code> so that types can still conform to <code>OneDimensionalPoint</code> even if they have vectors that cannot conform to <code>SignedNumber</code>.</p>
-
-</div>
-
-<p>Conformance Requirements:</p>
-
-<ul>
-<li><code><a href="Protocols/PointProtocol.html">PointProtocol</a></code></li>
-<li><code>Comparable</code></li>
-</ul>
-
-                        <a href="Protocols/OneDimensionalPoint.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">OneDimensionalPoint</span> <span class="p">:</span> <span class="kt">Comparable</span><span class="p">,</span> <span class="kt"><a href="Protocols/PointProtocol.html">PointProtocol</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:P14SDGCornerstone20OneDimensionalVector"></a>
-                    <a name="//apple_ref/swift/Protocol/OneDimensionalVector" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P14SDGCornerstone20OneDimensionalVector">OneDimensionalVector</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A one‐dimensional value that can be used with ×(<em>:</em>) and ÷(<em>:</em>:) in conjunction with a scalar.</p>
-
-<p>Conformance Requirements:</p>
-
-<ul>
-<li><code><a href="Protocols/VectorProtocol.html">VectorProtocol</a></code></li>
-<li><code>static func ÷ (lhs: Self, rhs: Self) -&gt; Scalar</code></li>
-</ul>
-
-                        <a href="Protocols/OneDimensionalVector.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">OneDimensionalVector</span> <span class="p">:</span> <span class="kt"><a href="Protocols/VectorProtocol.html">VectorProtocol</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:P14SDGCornerstone13PointProtocol"></a>
-                    <a name="//apple_ref/swift/Protocol/PointProtocol" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P14SDGCornerstone13PointProtocol">PointProtocol</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A type that can be used with <code>+(_:_:)</code> and <code>−(_:_:)</code> in conjunction with an associated <code><a href="Associated Types.html#/s:P14SDGCornerstone3Day6Vector">Vector</a></code> type.</p>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    Unlike <code>Strideable</code>, types conforming to <code>PointProtocol</code> do not need to conform to <code>Comparable</code>, allowing conformance by two‐dimensional points, etc.
-
-</div>
-
-<p>Conformance Requirements:</p>
-
-<ul>
-<li><code>Equatable</code></li>
-<li><code>static func += (lhs: inout Self, rhs: Vector)</code></li>
-<li><code>static func − (lhs: Self, rhs: Self) -&gt; Vector</code></li>
-</ul>
-
-                        <a href="Protocols/PointProtocol.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PointProtocol</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:P14SDGCornerstone14VectorProtocol"></a>
-                    <a name="//apple_ref/swift/Protocol/VectorProtocol" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P14SDGCornerstone14VectorProtocol">VectorProtocol</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>An value that can be used with ×(<em>:</em>) and ÷(<em>:</em>:) in conjunction with a scalar.</p>
-
-<p>Conformance Requirements:</p>
-
-<ul>
-<li><code><a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a></code></li>
-<li><code>static func ×= (lhs: inout Self, rhs: Scalar)</code></li>
-<li><code>static func ÷= (lhs: inout Self, rhs: Scalar)</code></li>
-</ul>
-
-                        <a href="Protocols/VectorProtocol.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">VectorProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:P14SDGCornerstone17PropertyListValue"></a>
                     <a name="//apple_ref/swift/Protocol/PropertyListValue" class="dashAnchor"></a>
                     <a class="token" href="#/s:P14SDGCornerstone17PropertyListValue">PropertyListValue</a>
@@ -1814,7 +1619,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ConsistentlyOrderedCalendarComponent</span> <span class="p">:</span> <span class="kt"><a href="Protocols/CalendarComponent.html">CalendarComponent</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:P14SDGCornerstone29FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ConsistentlyOrderedCalendarComponent</span> <span class="p">:</span> <span class="kt"><a href="Protocols/CalendarComponent.html">CalendarComponent</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2740,6 +2545,232 @@
                       <div class="abstract">
                         <p>A member of the <code>Int</code> family with a fixed length: <code>Int64</code>, <code>Int32</code>, <code>Int16</code> or <code>Int8</code>.</p>
 
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Protocol/FixedScaleOneDimensionalPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/">FixedScaleOneDimensionalPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A one dimensional point with a fixed scale.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Protocol/OneDimensionalPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/">OneDimensionalPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code>Comparable</code> type that can be used with <code>+(_:_:)</code> and <code>−(_:_:)</code> in conjunction with an associated <code><a href="Associated Types.html#/s:P14SDGCornerstone3Day6Vector">Vector</a></code> type.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>For multi‐dimensional points, see <code><a href="Protocols/PointProtocol.html">PointProtocol</a></code>.</p>
+
+</div>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This is distinct from <code><a href="Protocols.html#/FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a></code> so that types can still conform to <code>OneDimensionalPoint</code> even if they have vectors that cannot conform to <code>SignedNumber</code>.</p>
+
+</div>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code><a href="Protocols/PointProtocol.html">PointProtocol</a></code></li>
+<li><code>Comparable</code></li>
+</ul>
+
+                        <a href="Protocols/OneDimensionalPoint.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Protocol/OneDimensionalVector" class="dashAnchor"></a>
+                    <a class="token" href="#/">OneDimensionalVector</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A one‐dimensional value that can be used with ×(<em>:</em>) and ÷(<em>:</em>:) in conjunction with a scalar.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code><a href="Protocols/VectorProtocol.html">VectorProtocol</a></code></li>
+<li><code>static func ÷ (lhs: Self, rhs: Self) -&gt; Scalar</code></li>
+</ul>
+
+                        <a href="Protocols/OneDimensionalVector.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Protocol/PointProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/">PointProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that can be used with <code>+(_:_:)</code> and <code>−(_:_:)</code> in conjunction with an associated <code><a href="Associated Types.html#/s:P14SDGCornerstone3Day6Vector">Vector</a></code> type.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    Unlike <code>Strideable</code>, types conforming to <code>PointProtocol</code> do not need to conform to <code>Comparable</code>, allowing conformance by two‐dimensional points, etc.
+
+</div>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code>Equatable</code></li>
+<li><code>static func += (lhs: inout Self, rhs: Vector)</code></li>
+<li><code>static func − (lhs: Self, rhs: Self) -&gt; Vector</code></li>
+</ul>
+
+                        <a href="Protocols/PointProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Protocol/TwoDimensionalPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/">TwoDimensionalPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A point in a two‐dimensional space.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code>var x: Vector.Scalar { get set }</code></li>
+<li><code>var y: Vector.Scalar { get set }</code></li>
+</ul>
+
+                        <a href="Protocols/TwoDimensionalPoint.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Protocol/TwoDimensionalVector" class="dashAnchor"></a>
+                    <a class="token" href="#/">TwoDimensionalVector</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A two‐dimensional vector.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code>var Δx : Scalar { get set }</code></li>
+<li><code>var Δy : Scalar { get set }</code></li>
+</ul>
+
+                        <a href="Protocols/TwoDimensionalVector.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Protocol/VectorProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/">VectorProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An value that can be used with ×(<em>:</em>) and ÷(<em>:</em>:) in conjunction with a scalar.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code><a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a></code></li>
+<li><code>static func ×= (lhs: inout Self, rhs: Scalar)</code></li>
+<li><code>static func ÷= (lhs: inout Self, rhs: Scalar)</code></li>
+</ul>
+
+                        <a href="Protocols/VectorProtocol.html" class="slightly-smaller">See more</a>
                       </div>
                     </section>
                   </div>

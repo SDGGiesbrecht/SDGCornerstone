@@ -157,6 +157,9 @@
                 <a href="../Extensions/CGFloat.html">CGFloat</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/CGVector.html">CGVector</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/CharacterSet.html">CharacterSet</a>
               </li>
               <li class="nav-group-task">
@@ -497,7 +500,7 @@
                 <a href="../Protocols/FiniteSet.html">FiniteSet</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols.html#/s:P14SDGCornerstone29FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a>
+                <a href="../Protocols.html#/FixedScaleOneDimensionalPoint">FixedScaleOneDimensionalPoint</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/FloatFamily.html">FloatFamily</a>
@@ -600,6 +603,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/Subtractable.html">Subtractable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TwoDimensionalPoint.html">TwoDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TwoDimensionalVector.html">TwoDimensionalVector</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/UIntFamily.html">UIntFamily</a>
@@ -780,12 +789,6 @@
         <section>
           <section class="section">
             <h1>VectorProtocol</h1>
-              <div class="declaration">
-                <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">VectorProtocol</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a></span></code></pre>
-
-                </div>
-              </div>
             <p>An value that can be used with ×(<em>:</em>) and ÷(<em>:</em>:) in conjunction with a scalar.</p>
 
 <p>Conformance Requirements:</p>
@@ -803,9 +806,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFP14SDGCornerstone14VectorProtocolXoi3rcaFTxwx6Scalar_x"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Method/×(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFP14SDGCornerstone14VectorProtocolXoi3rcaFTxwx6Scalar_x">×(_:_:)</a>
+                    <a class="token" href="#/">×(_:_:)</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -835,113 +838,19 @@
 <p>Returns the product of the left times the right.</p>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">×</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Scalar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>lhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A value.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A scalar coefficient.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFP14SDGCornerstone14VectorProtocolXoi3rcaFTwx6Scalarx_x"></a>
-                    <a name="//apple_ref/swift/Method/×(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFP14SDGCornerstone14VectorProtocolXoi3rcaFTwx6Scalarx_x">×(_:_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Returns the product of the left times the right.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">×</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Scalar</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>lhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A scalar coefficient.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A value.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:ZFP14SDGCornerstone14VectorProtocolXoi5e_IeaFTRxwx6Scalar_T_"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Method/×=(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFP14SDGCornerstone14VectorProtocolXoi5e_IeaFTRxwx6Scalar_T_">×=(_:_:)</a>
+                    <a class="token" href="#/">×=(_:_:)</a>
                     </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -956,44 +865,15 @@
 </div>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">×</span><span class="o">=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Scalar</span><span class="p">)</span></code></pre>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Modifies the left by multiplication with the right.</p>
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>×</p>
 
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>lhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The value to modify.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The scalar coefficient by which to multiply.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+</div>
+
                       </div>
                     </section>
                   </div>
@@ -1001,9 +881,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFP14SDGCornerstone14VectorProtocolXoi3odaFTxwx6Scalar_x"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Method/÷(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFP14SDGCornerstone14VectorProtocolXoi3odaFTxwx6Scalar_x">÷(_:_:)</a>
+                    <a class="token" href="#/">÷(_:_:)</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -1042,55 +922,19 @@
 </div>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">÷</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Scalar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>lhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The dividend.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The divisor.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFP14SDGCornerstone14VectorProtocolXoi5e_CgaFTRxwx6Scalar_T_"></a>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Method/÷=(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFP14SDGCornerstone14VectorProtocolXoi5e_CgaFTRxwx6Scalar_T_">÷=(_:_:)</a>
+                    <a class="token" href="#/">÷=(_:_:)</a>
                     </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -1110,44 +954,20 @@
 </div>
 
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">÷</span><span class="o">=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Scalar</span><span class="p">)</span></code></pre>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Modifies the left by dividing it by the right.</p>
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>÷</p>
 
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>lhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The value to modify.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rhs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The divisor.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+</div>
+<div class="aside aside-recommended-over">
+    <p class="aside-title">Recommended over</p>
+    <p>/=</p>
+
+</div>
+
                       </div>
                     </section>
                   </div>
