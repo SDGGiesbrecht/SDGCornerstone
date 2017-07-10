@@ -280,6 +280,25 @@ extension Subtractable where Self : PointProtocol, Self : Strideable, Self.Vecto
     }
 }
 
+extension Subtractable where Self : TwoDimensionalVector {
+    // MARK: - where Self : TwoDimensionalVector, Self.Scalar : Subtractable
+
+    // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+    /// Subtracts the right from the left.
+    ///
+    /// - Parameters:
+    ///     - lhs: The value to modify.
+    ///     - rhs: The value to subtract.
+    ///
+    /// - NonmutatingVariant: −
+    ///
+    /// - RecommendedOver: -=
+    public static func −= (lhs: inout Self, rhs: Self) {
+        lhs.Δx −= rhs.Δx
+        lhs.Δy −= rhs.Δy
+    }
+}
+
 extension Subtractable where Self : UIntFamily {
     // MARK: - where Self : UIntFamily
 

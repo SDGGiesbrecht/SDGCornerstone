@@ -158,3 +158,20 @@ extension Addable where Self : Strideable, Self.Stride == Self {
         return addAsAddable(lhs, rhs)
     }
 }
+
+extension Addable where Self : TwoDimensionalVector {
+    // MARK: - where Self : TwoDimensionalVector
+
+    // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
+    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    ///
+    /// - Parameters:
+    ///     - lhs: The value to modify.
+    ///     - rhs: The value to add.
+    ///
+    /// - NonmutatingVariant: +
+    public static func += (lhs: inout Self, rhs: Self) {
+        lhs.Δx += rhs.Δx
+        lhs.Δy += rhs.Δy
+    }
+}
