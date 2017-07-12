@@ -27,6 +27,14 @@ class GeometryTests : TestCase {
         #if !os(Linux)
             XCTAssertEqual(CGPoint(x: 1, y: 1) − CGVector(Δx : 1, Δy : 1), CGPoint(x: 0, y: 0))
             XCTAssertEqual(CGPoint(x: 0, y: 0) + CGVector(Δx : 1, Δy : 1), CGPoint(x: 1, y: 1))
+            XCTAssertEqual(CGPoint(x: 1, y: 1) − CGPoint(x: 0, y: 0), CGVector(Δx : 1, Δy : 1))
+
+            let point = CGPoint(x: 1.21, y: 1.21).rounded(.down, toMultipleOf: 0.2)
+            XCTAssert(point.x ≈ 1.2 as CGFloat)
+            XCTAssert(point.y ≈ 1.2 as CGFloat)
+            let anotherPoint = point.rounded(.down)
+            XCTAssert(anotherPoint.x ≈ 1)
+            XCTAssert(anotherPoint.y ≈ 1)
         #endif
     }
 
@@ -58,6 +66,27 @@ class GeometryTests : TestCase {
             XCTAssert(CGVector(direction: 180°, length: 1).Δy ≈ 0)
             XCTAssert(CGVector(direction: 270°, length: 1).Δx ≈ 0)
             XCTAssert(CGVector(direction: 270°, length: 1).Δy ≈ −1)
+
+            XCTAssert(CGVector(Δx : 1, Δy : 1).hashValue ≤ Int.max)
+
+            XCTAssertEqual(TwoDimensionalVectorExample(Δx : 0, Δy : 0), TwoDimensionalVectorExample.additiveIdentity)
+
+            var vector = CGVector(Δx : 1, Δy : 0)
+            vector.direction = 90°
+            XCTAssert(vector.Δx ≈ 0)
+            XCTAssert(vector.Δy ≈ 1)
+
+            vector.length = 2
+            XCTAssert(vector.Δx ≈ 0)
+            XCTAssert(vector.Δy ≈ 2)
+
+            vector ×= 2
+            XCTAssert(vector.Δx ≈ 0)
+            XCTAssert(vector.Δy ≈ 4)
+
+            vector ÷= 4
+            XCTAssert(vector.Δx ≈ 0)
+            XCTAssert(vector.Δy ≈ 1)
         #endif
     }
 
