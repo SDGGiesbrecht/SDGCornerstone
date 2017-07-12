@@ -13,57 +13,87 @@
  */
 
 // [_Define Example: Read‐Me_]
+import Foundation
 import SDGCornerstone
 
-// Mathematics
+// Localization
 
-func verifyPythagoreanTheorem() {
-    let a = 3.0
-    let b = 4.0
-    let c = 5.0
-    if √(a↑2 + b↑2) ≠ c {
-        print("Pythagoras was wrong! (Or maybe I just need to research floating point numbers...)")
+func sayHello() {
+
+    enum ApplicationLocalization : String, Localization {
+        case english = "en"
+        case français = "fr"
+        static let fallbackLocalization = ApplicationLocalization.english
+    }
+
+    let text = UserFacingText({ (localization: ApplicationLocalization, _: Void) -> StrictString in
+        switch localization {
+        case .english:
+            return "Hello, world!"
+        case .français:
+            return "Bonjour, le monde !"
+        }
+    })
+
+    print(text.resolved())
+}
+
+// Preferences
+
+func storeAndRetrieveUsersName() {
+    let preferences = Preferences.applicationPreferences
+
+    // Store
+    preferences["name"].value = "John Doe"
+
+    // Retrieve
+    if let usersName = preferences["name"].value?.as(String.self) {
+        print("Hello, \(usersName)!")
     }
 }
 
-func tryTrigonometry() {
-    let θ = 90.0°
-    let sine = sin(θ)
-    print("The sine of \(θ.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) radians is \(sine.inDigits(maximumDecimalPlaces: 3, radixCharacter: "."))")
-}
+// File System
 
-let tenDuotrigintillion: WholeNumber = "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"
+func saveAndLoadFile() {
+    let file = "content"
+    let url = FileManager.default.url(in: .applicationSupport, at: "folder/file.txt")
 
-// Randomization
+    do {
 
-func playWithDice() {
+        // Save
+        try file.save(to: url)
 
-    func rollDie() -> Int {
-        return Int(randomInRange: 1 ... 6)
-    }
+        // Load
+        _ = try String(from: url)
 
-    if rollDie() == 1 ∧ rollDie() == 1 {
-        print("Snake eyes!")
-    } else {
-        print("Not this time...")
+    } catch {
+        print("An unexpected error occurred.")
     }
 }
 
-// Sets
+// Shared Values
 
-func trySetOperations() {
-    let square: Set<Int> = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196]
-    let twoDigits = 10 ..< 100
-    let odd = IntensionalSet<Int>(where: { $0.isOdd })
+func shareValue() {
 
-    if Set([23, 45, 67, 89]) ⊆ (twoDigits ∩ odd) ∖ square {
-        print("They’re all in there.")
+    class Owner {
+        var property: Shared<String>
+        init(property: Shared<String>) {
+            self.property = property
+        }
     }
+
+    let originalOwner = Owner(property: Shared("original"))
+    let anotherOwner = Owner(property: originalOwner.property)
+
+    anotherOwner.property.value = "changed"
+
+    print(originalOwner.property.value)
+    // Prints “changed”.
 }
 
 // Pattern Matching
 
-func tryPatternMatching() {
+func searchForPattern() {
     let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     if numbers.contains(CompositePattern([
@@ -81,4 +111,31 @@ func tryPatternMatching() {
     }
 }
 
+// Randomization
+
+func playWithDice() {
+
+    func rollDie() -> Int {
+        return Int(randomInRange: 1 ... 6)
+    }
+
+    if rollDie() == 1 ∧ rollDie() == 1 {
+        print("Snake eyes!")
+    } else {
+        print("Not this time...")
+    }
+}
+
+// Arbitrary Precision Arithmetic
+
+let tenDuotrigintillion: WholeNumber = "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"
+
+#if os(macOS) || os(Linux)
+
+    // Shell Commands
+
+    func introduceShell() {
+        _ = try? Shell.default.run(command: ["echo", "Hello, world!"])
+    }
+#endif
 // [_End_]
