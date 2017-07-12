@@ -120,3 +120,35 @@ extension VectorProtocol {
         return result
     }
 }
+
+extension VectorProtocol where Self : TwoDimensionalVector {
+    // MARK: - where Self : TwoDimensionalVector
+
+    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×=_]
+    /// Modifies the left by multiplication with the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The value to modify.
+    ///     - rhs: The scalar coefficient by which to multiply.
+    ///
+    /// - NonmutatingVariant: ×
+    public static func ×=(lhs: inout Self, rhs: Scalar) {
+        lhs.Δx ×= rhs
+        lhs.Δy ×= rhs
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.÷=_]
+    /// Modifies the left by dividing it by the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The value to modify.
+    ///     - rhs: The divisor.
+    ///
+    /// - NonmutatingVariant: ÷
+    ///
+    /// - RecommendedOver: /=
+    public static func ÷=(lhs: inout Self, rhs: Scalar) {
+        lhs.Δx ÷= rhs
+        lhs.Δy ÷= rhs
+    }
+}

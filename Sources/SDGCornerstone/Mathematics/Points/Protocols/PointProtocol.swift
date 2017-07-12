@@ -250,6 +250,35 @@ extension PointProtocol where Self : Strideable {
     }
 }
 
+extension PointProtocol where Self : TwoDimensionalPoint {
+    // MARK: - where Self : TwoDimensionalPoint
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    /// Moves the point on the left by the vector on the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The point to modify.
+    ///     - rhs: The vector to add.
+    ///
+    /// - NonmutatingVariant: +
+    public static func += (lhs: inout Self, rhs: Vector) {
+        lhs.x += rhs.Δx
+        lhs.y += rhs.Δy
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    /// Returns the vector that leads from the point on the left to the point on the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: The endpoint.
+    ///     - rhs: The startpoint.
+    public static func − (lhs: Self, rhs: Self) -> Vector {
+        let Δx = lhs.x − rhs.x
+        let Δy = lhs.y − rhs.y
+        return Vector(Δx : Δx, Δy : Δy)
+    }
+}
+
 extension PointProtocol where Self : UIntFamily {
     // MARK: - where Self : UIntFamily
 

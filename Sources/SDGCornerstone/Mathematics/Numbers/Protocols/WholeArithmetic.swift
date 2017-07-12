@@ -695,7 +695,7 @@ extension WholeArithmetic {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:)_]
-    /// Rounds the value to a multiple of `factor` using the specified rounding rule.
+    /// Rounds the point’s co‐ordinates to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
@@ -756,7 +756,7 @@ extension WholeArithmetic {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:)_]
-    /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
+    /// Returns the point with its co‐ordinates rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
@@ -770,7 +770,7 @@ extension WholeArithmetic {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
-    /// Rounds the value to an integral value using the specified rounding rule.
+    /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
@@ -781,7 +781,7 @@ extension WholeArithmetic {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
-    /// Returns the value rounded to an integral value using the specified rounding rule.
+    /// Returns the point with its co‐ordinates rounded to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
@@ -1537,7 +1537,7 @@ extension WholeArithmetic where Self : IntegerProtocol {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
-    /// Rounds the value to an integral value using the specified rounding rule.
+    /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
@@ -1875,7 +1875,7 @@ extension WholeArithmetic where Self : WholeNumberProtocol {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
-    /// Rounds the value to an integral value using the specified rounding rule.
+    /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.

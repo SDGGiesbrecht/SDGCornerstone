@@ -27,3 +27,13 @@ extension Hashable where Self : Measurement {
         return rawValue.hashValue
     }
 }
+
+extension Hashable where Self : TwoDimensionalVector {
+    // MARK: - where Self : TwoDimensionalVector
+
+    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    /// The hash value.
+    public var hashValue: Int {
+        return Δx.hashValue ^ Δy.hashValue
+    }
+}
