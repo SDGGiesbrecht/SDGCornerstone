@@ -60,25 +60,25 @@
                 silent = true
             }
 
-            func redact(_ string: String) -> String {
+            func redact(_ string: String) -> String { // [_Exempt from Code Coverage_]
                 var result = string
-                let redacted = "[" + String(UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in
+                let redacted = "[" + String(UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                     switch localization {
-                    case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    case .englishUnitedKingdom, .englishUnitedStates, .englishCanada: // [_Exempt from Code Coverage_]
                         return "redacted"
-                    case .deutschDeutschland:
+                    case .deutschDeutschland: // [_Exempt from Code Coverage_]
                         return "geschwärzt"
-                    case .françaisFrance:
+                    case .françaisFrance: // [_Exempt from Code Coverage_]
                         return "caviardé"
-                    case .ελληνικάΕλλάδα:
+                    case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
                         return "λογοκριμμένο"
-                    case .עברית־ישראל:
+                    case .עברית־ישראל: // [_Exempt from Code Coverage_]
                         return "צונזר"
                     }
                 }).resolved()) + "]"
-                for sensitive in redactionList {
+                for sensitive in redactionList { // [_Exempt from Code Coverage_]
                     result = result.replacingOccurrences(of: sensitive, with: redacted)
-                }
+                } // [_Exempt from Code Coverage_]
                 return result
             }
 
