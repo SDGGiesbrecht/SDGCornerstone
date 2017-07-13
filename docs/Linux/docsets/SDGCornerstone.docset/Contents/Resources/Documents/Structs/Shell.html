@@ -906,9 +906,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FV14SDGCornerstone5Shell3runFzT7commandGSaSS_8silentlySb_SS"></a>
-                    <a name="//apple_ref/swift/Method/run(command:silently:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV14SDGCornerstone5Shell3runFzT7commandGSaSS_8silentlySb_SS">run(command:silently:)</a>
+                    <a name="/s:FV14SDGCornerstone5Shell3runFzT7commandGSaSS_8silentlySb9redactingGSaSS__SS"></a>
+                    <a name="//apple_ref/swift/Method/run(command:silently:redacting:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV14SDGCornerstone5Shell3runFzT7commandGSaSS_8silentlySb9redactingGSaSS__SS">run(command:silently:redacting:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -928,7 +928,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="nv">command</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">silently</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="nv">command</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">silently</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">redacting</span> <span class="nv">redactionList</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -957,6 +957,18 @@
                               <td>
                                 <div>
                                   <p>If <code>false</code> (the default), the command and its output will be printed to standard out. If <code>true</code>, nothing will be sent to standard out. This argument is ignored in GUI applications, where this method is always silent.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redactionList</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value.)</p>
                                 </div>
                               </td>
                             </tr>

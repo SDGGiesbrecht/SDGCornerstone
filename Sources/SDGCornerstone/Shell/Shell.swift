@@ -45,11 +45,12 @@
         /// - Parameters:
         ///     - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
         ///     - silently: If `false` (the default), the command and its output will be printed to standard out. If `true`, nothing will be sent to standard out. This argument is ignored in GUI applications, where this method is always silent.
+        ///     - redactionList: An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value.)
         ///
         /// - Returns: The output of the command.
         ///
         /// - Throws: A `Shell.Error` if the exit code indicates a failure.
-        @discardableResult public func run(command: [String], silently: Bool = false) throws -> String {
+        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = []) throws -> String {
 
             let silent: Bool
             switch Application.current.mode {
@@ -57,6 +58,28 @@
                 silent = silently
             case .guiApplication:
                 silent = true
+            }
+
+            func redact(_ string: String) -> String { // [_Exempt from Code Coverage_]
+                var result = string
+                let redacted = "[" + String(UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+                    switch localization {
+                    case .englishUnitedKingdom, .englishUnitedStates, .englishCanada: // [_Exempt from Code Coverage_]
+                        return "redacted"
+                    case .deutschDeutschland: // [_Exempt from Code Coverage_]
+                        return "geschwärzt"
+                    case .françaisFrance: // [_Exempt from Code Coverage_]
+                        return "caviardé"
+                    case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
+                        return "λογοκριμμένο"
+                    case .עברית־ישראל: // [_Exempt from Code Coverage_]
+                        return "צונזר"
+                    }
+                }).resolved()) + "]"
+                for sensitive in redactionList { // [_Exempt from Code Coverage_]
+                    result = result.replacingOccurrences(of: sensitive, with: redacted)
+                } // [_Exempt from Code Coverage_]
+                return result
             }
 
             // Formatting separation from other output.
@@ -78,7 +101,7 @@
             }).joined(separator: " ")
 
             if ¬silent { // [_Exempt from Code Coverage_]
-                print("$ " + commandString)
+                print(redact("$ " + commandString))
             }
 
             let shell = Process()
@@ -118,10 +141,10 @@
             }
             func readProgress() {
                 handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
-                    print(line)
+                    print(redact(line))
                 })
                 handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
-                    FileHandle.standardError.write((line + newLine).data(using: .utf8)!)
+                    FileHandle.standardError.write((redact(line) + newLine).data(using: .utf8)!)
                 })
             }
 
