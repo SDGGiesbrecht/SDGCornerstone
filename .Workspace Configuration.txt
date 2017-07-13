@@ -14,7 +14,7 @@
 
 [_Import https://github.com/SDGGiesbrecht/SDG_]
 
-Current Version: 0.1.2
+Current Version: 0.2.0
 
 Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
 Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -40,11 +40,14 @@ Quotation Chapter: Isaiah 28
 [_End_]
 
 [_Begin Feature List_]
+- Localization tools (compatible with the Swift Package Manager and Linux).
+- User preferences access (compatible with Linux).
+- Platform‐independent access to best‐practice file system locations.
+- Shared instances of value types.
 - Generic pattern matching.
 - Customizable randomization.
 - Arbitrary‐precision arithmetic.
-- Inter‐type set operations.
-- Mathematics: exponents, roots, logarithms, trigonometry, etc.
+- Simple API for running shell commands (desktop platforms only).
 
 ...and much more.
 [_End_]
