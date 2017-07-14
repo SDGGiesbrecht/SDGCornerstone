@@ -14,7 +14,7 @@
 
 [_Import https://github.com/SDGGiesbrecht/SDG_]
 
-Current Version: 0.2.0
+Current Version: 0.2.1
 
 Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
 Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone/macOS

@@ -176,7 +176,7 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
-    public typealias Vector = RawValue
+    public typealias Vector = Int
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
     /// Moves the point on the left by the vector on the right.
@@ -207,7 +207,7 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
     /// - Parameters:
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
-    public static func − (lhs: GregorianYear, rhs: GregorianYear) -> RawValue {
+    public static func − (lhs: GregorianYear, rhs: GregorianYear) -> Int {
         var result = lhs.rawValue − rhs.rawValue
 
         // Compensate for zero year.
@@ -228,7 +228,7 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    public init(unsafeRawValue: RawValue) {
+    public init(unsafeRawValue: Int) {
         assert(unsafeRawValue ≠ 0, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada:
