@@ -44,11 +44,27 @@ class RegressionTests : TestCase {
     }
 
     func testCalendarEquatability() {
+        // Untracked
+
         let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
         XCTAssertEqual(tishrei, HebrewMonthAndYear(month: .tishrei, year: 5759))
         let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
         XCTAssertEqual(tevet, HebrewMonthAndYear(month: .tevet, year: 5759))
         XCTAssertNotEqual(tishrei, tevet)
+    }
+
+    func testDelayedShellOutput() {
+        // Untracked
+
+        let longCommand = ["git", "ls-remote", "--tags", "https://github.com/realm/jazzy"]
+        do {
+            let output = try Shell.default.run(command: longCommand)
+            XCTAssert(output.contains("0.8.3"))
+        } catch let error as Shell.Error {
+            XCTFail("Unexpected error: \(longCommand) → \(error.description)")
+        } catch let error {
+            XCTFail("Unexpected error: \(longCommand) → \(error)")
+        }
     }
 
     func testDivisionIsUnambiguous() {
@@ -157,6 +173,8 @@ class RegressionTests : TestCase {
     }
 
     func testWeekday() {
+        // Untracked
+
         var date = CalendarDate(hebrew: .tishrei, 4, 5758)
         for _ in 0 ..< 1000 {
             date += (1 as CalendarDate.Vector.Scalar).weeks
@@ -168,6 +186,7 @@ class RegressionTests : TestCase {
         return [
             ("testAddAndSetIsUnambiguous", testAddAndSetIsUnambiguous),
             ("testCalendarEquatability", testCalendarEquatability),
+            ("testDelayedShellOutput", testDelayedShellOutput),
             ("testDivisionIsUnambiguous", testDivisionIsUnambiguous),
             ("testDivisionOfNegatives", testDivisionOfNegatives),
             ("testFloor", testFloor),

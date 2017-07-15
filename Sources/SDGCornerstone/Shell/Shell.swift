@@ -122,8 +122,9 @@
 
             let newLine = "\n"
             let newLineData = newLine.data(using: String.Encoding.utf8)!
-            func handleInput(pipe: Pipe, stream: inout Data, result: inout String, report: (_ line: String) -> Void) {
-                stream.append(pipe.fileHandleForReading.availableData)
+            func handleInput(pipe: Pipe, stream: inout Data, result: inout String, report: (_ line: String) -> Void) -> Bool  {
+                let newData = pipe.fileHandleForReading.availableData
+                stream.append(newData)
 
                 while let lineEnd = stream.range(of: newLineData) {
                     let line = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
@@ -138,20 +139,23 @@
                         report(string)
                     }
                 }
+
+                return ¬newData.isEmpty
             }
-            func readProgress() {
-                handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
+            @discardableResult func readProgress() -> Bool {
+                let output = handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
                     print(redact(line))
                 })
-                handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
+                let error = handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
                     FileHandle.standardError.write((redact(line) + newLine).data(using: .utf8)!)
                 })
+                return output ∨ error
             }
 
             while shell.isRunning {
                 readProgress()
             }
-            readProgress()
+            while readProgress() {}
 
             if output.hasSuffix(newLine) {
                 output.scalars.removeLast()
