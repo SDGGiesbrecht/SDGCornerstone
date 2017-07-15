@@ -122,7 +122,7 @@
 
             let newLine = "\n"
             let newLineData = newLine.data(using: String.Encoding.utf8)!
-            func handleInput(pipe: Pipe, stream: inout Data, result: inout String, report: (_ line: String) -> Void) -> Bool  {
+            func handleInput(pipe: Pipe, stream: inout Data, result: inout String, report: (_ line: String) -> Void) -> Bool {
                 let newData = pipe.fileHandleForReading.availableData
                 stream.append(newData)
 
