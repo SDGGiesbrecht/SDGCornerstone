@@ -56,15 +56,17 @@ class RegressionTests : TestCase {
     func testDelayedShellOutput() {
         // Untracked
 
-        let longCommand = ["git", "ls-remote", "--tags", "https://github.com/realm/jazzy"]
-        do {
-            let output = try Shell.default.run(command: longCommand)
-            XCTAssert(output.contains("0.8.3"))
-        } catch let error as Shell.Error {
-            XCTFail("Unexpected error: \(longCommand) → \(error.description)")
-        } catch let error {
-            XCTFail("Unexpected error: \(longCommand) → \(error)")
-        }
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
+            let longCommand = ["git", "ls-remote", "--tags", "https://github.com/realm/jazzy"]
+            do {
+                let output = try Shell.default.run(command: longCommand)
+                XCTAssert(output.contains("0.8.3"))
+            } catch let error as Shell.Error {
+                XCTFail("Unexpected error: \(longCommand) → \(error.description)")
+            } catch let error {
+                XCTFail("Unexpected error: \(longCommand) → \(error)")
+            }
+        #endif
     }
 
     func testDivisionIsUnambiguous() {
