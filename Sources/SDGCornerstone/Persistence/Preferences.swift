@@ -109,7 +109,7 @@ open class Preferences {
     // MARK: - Storage
 
     #if os(Linux)
-    private static let directory = URL(fileURLWithPath: NSHomeDirectory()).encodingAndAppending(pathComponents: ".config")
+    private static let directory = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponents(".config")
     #endif
 
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: PropertyListValue] {
@@ -117,7 +117,7 @@ open class Preferences {
         #if os(Linux)
 
             do {
-                let propertyList = try PropertyList(from: Preferences.directory.encodingAndAppending(pathComponents: "\(possibleDebugDomain).plist"))
+                let propertyList = try PropertyList(from: Preferences.directory.appendingPathComponents("\(possibleDebugDomain).plist"))
                 switch propertyList {
                 case .dictionary(let dictionary):
                     return dictionary
@@ -143,7 +143,7 @@ open class Preferences {
         #if os(Linux)
 
             let propertyList = PropertyList.dictionary(preferences)
-            try? propertyList.save(to: Preferences.directory.encodingAndAppending(pathComponents: "\(possibleDebugDomain).plist"))
+            try? propertyList.save(to: Preferences.directory.appendingPathComponents("\(possibleDebugDomain).plist"))
 
         #else
 
