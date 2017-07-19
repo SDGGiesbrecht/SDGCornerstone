@@ -136,7 +136,7 @@
 
                     result.append(string + newLine)
                     if ¬silent { // [_Exempt from Code Coverage_]
-                        report(string)
+                        report(redact(string))
                     }
                 }
 
@@ -144,10 +144,10 @@
             }
             @discardableResult func readProgress() -> Bool {
                 let output = handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
-                    print(redact(line))
+                    print(line)
                 })
                 let error = handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
-                    FileHandle.standardError.write((redact(line) + newLine).data(using: .utf8)!)
+                    FileHandle.standardError.write((line + newLine).data(using: .utf8)!)
                 })
                 return output ∨ error
             }
