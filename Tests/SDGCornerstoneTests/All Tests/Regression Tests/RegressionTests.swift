@@ -119,6 +119,15 @@ class RegressionTests : TestCase {
         XCTAssertEqual(nestRange, start ..< end)
     }
 
+    func testPercentEncodingIsNotDoubled() {
+        // Untracked
+
+        var url = FileManager.default.url(in: .temporary, at: "A Folder")
+        url.appendPathComponent("A File")
+        XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
+        XCTAssert(url.path.hasSuffix("A Folder/A File"))
+    }
+
     func testReverseSearch() {
         // Untracked
 
@@ -194,6 +203,7 @@ class RegressionTests : TestCase {
             ("testFloor", testFloor),
             ("testMatchlessComponentSeperation", testMatchlessComponentSeperation),
             ("testNestingLevelLocation", testNestingLevelLocation),
+            ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled),
             ("testReverseSearch", testReverseSearch),
             ("testSubtraction", testSubtraction),
             ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous),

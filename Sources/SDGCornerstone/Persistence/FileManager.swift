@@ -91,7 +91,7 @@ extension FileManager {
             #endif
         }
 
-        return zoneURL.encodingAndAppending(pathComponents: FileManager.possibleDebugDomain(domain))
+        return zoneURL.appendingPathComponent(FileManager.possibleDebugDomain(domain))
     }
 
     /// Returns a URL for the specified location and relative path in the application’s domain.
@@ -111,7 +111,7 @@ extension FileManager {
     ///     - domain: The domain.
     ///     - relativePath: The path.
     public func url(in location: RecommendedLocation, for domain: String, at relativePath: String) -> URL {
-        return url(in: location, for: domain).encodingAndAppending(pathComponents: relativePath)
+        return url(in: location, for: domain).appendingPathComponent(relativePath)
     }
 
     /// Deletes everything in the specified location for the application domain.
