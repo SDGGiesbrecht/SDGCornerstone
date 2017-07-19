@@ -122,6 +122,7 @@
 
             let newLine = "\n"
             let newLineData = newLine.data(using: String.Encoding.utf8)!
+
             func handleInput(pipe: Pipe, stream: inout Data, result: inout String, report: (_ line: String) -> Void) -> Bool {
                 let newData = pipe.fileHandleForReading.availableData
                 stream.append(newData)
@@ -142,20 +143,17 @@
 
                 return ¬newData.isEmpty
             }
-            @discardableResult func readProgress() -> Bool {
-                let output = handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
-                    print(line)
-                })
-                let error = handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { (line: String) -> Void in // [_Exempt from Code Coverage_]
-                    FileHandle.standardError.write((line + newLine).data(using: .utf8)!)
-                })
-                return output ∨ error
+
+            var completeErrorReceived = false
+            background.start {
+                while handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { FileHandle.standardError.write(($0 + newLine).data(using: .utf8)!) }) {} // [_Exempt from Code Coverage_]
+                completeErrorReceived = true
             }
 
-            while shell.isRunning {
-                readProgress()
-            }
-            while readProgress() {}
+            while handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { print($0) }) {} // [_Exempt from Code Coverage_]
+            while ¬completeErrorReceived {}
+
+            while shell.isRunning {}
 
             if output.hasSuffix(newLine) {
                 output.scalars.removeLast()
