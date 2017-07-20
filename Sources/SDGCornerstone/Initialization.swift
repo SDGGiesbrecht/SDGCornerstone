@@ -40,7 +40,7 @@ public func initialize(mode: Mode, applicationIdentifier: String, applicationPre
 
 internal func preconditionFailureNotInitialized() -> Never {
     // This cannot be localized the normal way because of circularity.
-    let message = APILocalization.cases.map({
+    let message = APILocalization.cases.map({ // [_Exempt from Code Coverage_]
         switch $0 {
         case .englishCanada:
             return "SDGCornerstone has not been initialized. Did you forget to call SDGCornerstone.initialize(...)?"
