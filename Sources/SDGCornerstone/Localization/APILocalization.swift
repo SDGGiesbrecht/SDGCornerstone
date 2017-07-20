@@ -18,6 +18,10 @@ internal enum APILocalization : String, Localization {
 
     case englishCanada = "en\u{2D}CA"
 
+    internal static let cases: [APILocalization] = [
+        .englishCanada
+    ]
+
     // MARK: - Localization
 
     internal static let fallbackLocalization: APILocalization = .englishCanada
