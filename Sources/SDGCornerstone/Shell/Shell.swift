@@ -151,9 +151,9 @@
             }
 
             while handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { print($0) }) {} // [_Exempt from Code Coverage_]
-            while ¬completeErrorReceived {}
+            while ¬completeErrorReceived {} // [_Exempt from Code Coverage_]
 
-            while shell.isRunning {}
+            while shell.isRunning {} // [_Exempt from Code Coverage_]
 
             if output.hasSuffix(newLine) {
                 output.scalars.removeLast()
