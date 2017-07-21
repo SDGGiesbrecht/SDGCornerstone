@@ -93,6 +93,14 @@ class RegressionTests : TestCase {
         XCTAssertEqual(thirty, thirty.rounded(.down))
     }
 
+    func testLastLineNotDropped() {
+        // Untracked
+
+        XCTAssertEqual("".lines.count, 1)
+        XCTAssertEqual("\n".lines.count, 2)
+        XCTAssertEqual("\n\n".lines.count, 3)
+    }
+
     func testMatchlessComponentSeperation() {
         // Untracked
 
