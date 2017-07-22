@@ -199,6 +199,15 @@ extension Localization {
 
         return nil
     }
+
+    /// An icon representing the localization suitable for buttons or links that switch languages.
+    ///
+    /// The icon consists of a flag and an abbreviation for the language endonym. (e.g. 🇬🇧EN, 🇺🇸EN, 🇬🇷ΕΛ)
+    ///
+    /// For localizations SDGCornerstone does not provide content in, this property is `nil`.
+    public var icon: StrictString? {
+        return ContentLocalization(reasonableMatchFor: code)?.definedIcon
+    }
 }
 
 extension Localization where Self : RawRepresentable, Self.RawValue == String {
