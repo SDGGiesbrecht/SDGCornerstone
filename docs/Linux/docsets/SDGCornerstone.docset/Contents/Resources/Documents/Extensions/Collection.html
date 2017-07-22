@@ -268,6 +268,12 @@
                 <a href="../Extensions/String.html">String</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/String/CharacterView.html">– CharacterView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String/UnicodeScalarView.html">– UnicodeScalarView</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/UIntMax.html">UIntMax</a>
               </li>
               <li class="nav-group-task">
@@ -2836,6 +2842,254 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7advanceFTRwx5Index4overGCS_7PatternWxS1_S2____Sb"></a>
+                    <a name="//apple_ref/swift/Method/advance(_:over:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7advanceFTRwx5Index4overGCS_7PatternWxS1_S2____Sb">advance(_:over:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Advances the index over the pattern.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">advance</span><span class="p">(</span><span class="n">_</span> <span class="nv">index</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Index</span><span class="p">,</span> <span class="n">over</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt"><a href="../Classes/Pattern.html">Pattern</a></span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt">Element</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index to advance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to advance over.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if the index was advanced over a match, <code>false</code> if there was no match.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7advanceFTRwx5Index4overGCS_14LiteralPatternWxS1_S2____Sb"></a>
+                    <a name="//apple_ref/swift/Method/advance(_:over:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7advanceFTRwx5Index4overGCS_14LiteralPatternWxS1_S2____Sb">advance(_:over:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Advances the index over the pattern.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">advance</span><span class="p">(</span><span class="n">_</span> <span class="nv">index</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Index</span><span class="p">,</span> <span class="n">over</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt"><a href="../Classes/LiteralPattern.html">LiteralPattern</a></span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt">Element</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index to advance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to advance over.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if the index was advanced over a match, <code>false</code> if there was no match.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7advanceFTRwx5Index4overGCS_16CompositePatternWxS1_S2____Sb"></a>
+                    <a name="//apple_ref/swift/Method/advance(_:over:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7advanceFTRwx5Index4overGCS_16CompositePatternWxS1_S2____Sb">advance(_:over:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Advances the index over the pattern.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">advance</span><span class="p">(</span><span class="n">_</span> <span class="nv">index</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Index</span><span class="p">,</span> <span class="n">over</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt"><a href="../Classes/CompositePattern.html">CompositePattern</a></span><span class="o">&lt;</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt">Element</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index to advance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to advance over.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if the index was advanced over a match, <code>false</code> if there was no match.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7advanceuRd__S0_Wd__S1_S2__zWxS1_S2__rFTRwx5Index4overqd___Sb"></a>
+                    <a name="//apple_ref/swift/Method/advance(_:over:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe14SDGCornerstoneRxs10CollectionWx8Iterator7Element_s9EquatablerS0_7advanceuRd__S0_Wd__S1_S2__zWxS1_S2__rFTRwx5Index4overqd___Sb">advance(_:over:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Advances the index over the pattern.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="n">advance</span><span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">index</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Index</span><span class="p">,</span> <span class="n">over</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt">Element</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index to advance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The pattern to advance over.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if the index was advanced over a match, <code>false</code> if there was no match.</p>
                       </div>
                     </section>
                   </div>
