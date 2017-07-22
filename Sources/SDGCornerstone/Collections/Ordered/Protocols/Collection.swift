@@ -489,6 +489,60 @@ extension Collection where Iterator.Element : Equatable {
     public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
         return hasSuffix(LiteralPattern(pattern))
     }
+
+    // [_Define Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance(_ index: inout Index, over pattern: Pattern<Iterator.Element>) -> Bool {
+        if let match = pattern.matches(in: self, at: index).first {
+            index = match.upperBound
+            return true
+        } else {
+            return false
+        }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance(_ index: inout Index, over pattern: LiteralPattern<Iterator.Element>) -> Bool {
+        return advance(&index, over: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance(_ index: inout Index, over pattern: CompositePattern<Iterator.Element>) -> Bool {
+        return advance(&index, over: pattern as Pattern<Iterator.Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance<C : Collection>(_ index: inout Index, over pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
+        return advance(&index, over
+            : LiteralPattern(pattern))
+    }
 }
 
 extension Collection where Iterator.Element : Equatable, Indices.Iterator.Element == Index {
