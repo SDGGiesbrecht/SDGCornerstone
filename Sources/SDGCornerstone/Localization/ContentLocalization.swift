@@ -85,6 +85,30 @@ internal enum ContentLocalization : String, Localization {
         return result
     }()
 
+    private var flag: StrictString {
+        let country = rawValue.components(separatedBy: "\u{2D}").last!
+        return StrictString(country.scalars.map({ UnicodeScalar($0.value + 0x1F1A5)! }))
+    }
+
+    private var abbreviation: StrictString {
+        switch self {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+            return "EN"
+        case .deutschDeutschland:
+            return "DE"
+        case .françaisFrance:
+            return "FR"
+        case .ελληνικάΕλλάδα:
+            return "ΕΛ"
+        case .עברית־ישראל:
+            return "עב"
+        }
+    }
+
+    internal var definedIcon: StrictString {
+        return flag + abbreviation
+    }
+
     // MARK: - Localization
 
     internal static let fallbackLocalization: ContentLocalization = .עברית־ישראל

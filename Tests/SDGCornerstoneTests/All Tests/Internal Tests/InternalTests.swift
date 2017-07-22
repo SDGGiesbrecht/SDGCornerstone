@@ -42,9 +42,20 @@ class InternalTests : TestCase {
         }
     }
 
-    func testRelativeDate() {
-        let date = CalendarDate.hebrewNow()
-        XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
+    func testLocalizationIcons() {
+        let localizations: [ContentLocalization] = [
+            .englishUnitedKingdom,
+            .englishUnitedStates,
+            .englishCanada,
+            .deutschDeutschland,
+            .françaisFrance,
+            .ελληνικάΕλλάδα,
+            .עברית־ישראל
+        ]
+
+        for localization in localizations {
+            XCTAssert(localization.icon ≠ nil)
+        }
     }
 
     func testLocalizationSetting() {
@@ -59,6 +70,11 @@ class InternalTests : TestCase {
         XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
 
         LocalizationSetting.internalUseSetSystemWidePreferences(to: nil)
+    }
+
+    func testRelativeDate() {
+        let date = CalendarDate.hebrewNow()
+        XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
     }
 
     func testUIntHalvesView() {
@@ -88,6 +104,7 @@ class InternalTests : TestCase {
             ("testGregorianWeekdayDate", testGregorianWeekdayDate),
             ("testHebrewWeekdayDate", testHebrewWeekdayDate),
             ("testHebrewYear", testHebrewYear),
+            ("testLocalizationIcons", testLocalizationIcons),
             ("testLocalizationSetting", testLocalizationSetting),
             ("testRelativeDate", testRelativeDate),
             ("testUIntHalvesView", testUIntHalvesView),
