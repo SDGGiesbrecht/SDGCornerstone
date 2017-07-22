@@ -540,8 +540,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @discardableResult public func advance<C : Collection>(_ index: inout Index, over pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
-        return advance(&index, over
-            : LiteralPattern(pattern))
+        return advance(&index, over: LiteralPattern(pattern))
     }
 }
 

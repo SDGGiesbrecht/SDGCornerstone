@@ -26,12 +26,14 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Parsing
 
-    private static func parseLines(from base: Base) -> [Line<Base>] {
-        let newlinePattern: Pattern<UnicodeScalar> = AlternativePatterns([
-            LiteralPattern("\u{D}\u{A}".scalars), // CR + LF
-            ConditionalPattern(condition: { $0 ∈ CharacterSet.newlines })
-            ])
+    internal static var newlinePattern: Pattern<UnicodeScalar> {
+        return AlternativePatterns([
+        LiteralPattern("\u{D}\u{A}".scalars), // CR + LF
+        ConditionalPattern(condition: { $0 ∈ CharacterSet.newlines })
+        ])
+    }
 
+    private static func parseLines(from base: Base) -> [Line<Base>] {
         let newlines = base.scalars.matches(for: newlinePattern).map() { $0.range }
         let lines = base.scalars.ranges(separatedBy: newlines)
         var result: [Line<Base>] = []
