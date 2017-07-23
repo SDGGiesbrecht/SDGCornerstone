@@ -36,30 +36,41 @@ extension String.UnicodeScalarView.Index {
 
     /// Returns the position in the given view of lines that corresponds exactly to this index.
     public func samePosition(in lines: LineView<String>) -> LineView<String>.Index? {
-        var result = lines.startIndex
-        for match in String(lines).scalars.matches(for: LineView<String>.newlinePattern) {
+        let scalars = String(lines).scalars
+        if self == scalars.startIndex {
+            return lines.startIndex
+        } else if self == scalars.endIndex {
+            return lines.endIndex
+        } else {
+            var result = lines.startIndex
+            for match in scalars.matches(for: LineView<String>.newlinePattern) {
 
-            if self == match.range.lowerBound {
-                return result
-            } else if self > match.range.upperBound {
-                result += 1
-            } else {
-                break
+                if self == match.range.upperBound {
+                    return result + 1
+                } else if self > match.range.upperBound {
+                    result += 1
+                } else {
+                    break
+                }
             }
+            return nil
         }
-        return nil
     }
 
     /// Returns the position of the line that contains this index.
     public func line(in lines: LineView<String>) -> LineView<String>.Index {
-        var result = lines.startIndex
-        for match in String(lines).scalars.matches(for: LineView<String>.newlinePattern) {
-            if self ≥ match.range.upperBound {
-                result += 1
-            } else {
-                break
+        if self == String(lines).scalars.endIndex {
+            return lines.endIndex
+        } else {
+            var result = lines.startIndex
+            for match in String(lines).scalars.matches(for: LineView<String>.newlinePattern) {
+                if self ≥ match.range.upperBound {
+                    result += 1
+                } else {
+                    break
+                }
             }
+            return result
         }
-        return result
     }
 }

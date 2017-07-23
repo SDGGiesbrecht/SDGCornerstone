@@ -31,18 +31,21 @@ extension LineView {
 
         /// Returns the position in the given view of scalars that corresponds exactly to this index.
         public func samePosition(in scalars: StrictString) -> StrictString.Index {
-            return scalars.matches(for: LineView<String>.newlinePattern)[value].range.lowerBound
+            return samePosition(in: String(StrictString(scalars)).scalars)
         }
 
         /// Returns the position in the given view of scalars that corresponds exactly to this index.
         public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
-            return scalars.matches(for: LineView<String>.newlinePattern)[value].range.lowerBound
+            if value == 0 {
+                return scalars.startIndex
+            } else {
+                return scalars.matches(for: LineView<String>.newlinePattern)[value − 1].range.upperBound
+            }
         }
 
         /// Returns the position in the given view of clusters that corresponds exactly to this index.
         public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
-            let string = StrictString(clusters)
-            return samePosition(in: string.scalars).cluster(in: string.clusters)
+            return samePosition(in: String(StrictString(clusters)).clusters)
         }
 
         /// Returns the position in the given view of clusters that corresponds exactly to this index.

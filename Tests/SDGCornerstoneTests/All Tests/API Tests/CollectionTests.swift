@@ -77,6 +77,13 @@ class CollectionTests : TestCase {
         XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: ConditionalPattern(condition: { $0.isEven }))?.range, 3 ..< 4)
 
         XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: NotPattern([3, 2, 1]))?.range, 3 ..< 4)
+
+        let advancingCollection = [1, 2, 1, 2, 3]
+        var index = advancingCollection.startIndex
+        XCTAssert(advancingCollection.advance(&index, over: [1, 2]))
+        XCTAssertEqual(index, 2)
+        XCTAssertFalse(advancingCollection.advance(&index, over: [LiteralPattern([2]), LiteralPattern([3])]))
+        XCTAssertEqual(index, 2)
     }
 
     func testBijectiveMapping() {

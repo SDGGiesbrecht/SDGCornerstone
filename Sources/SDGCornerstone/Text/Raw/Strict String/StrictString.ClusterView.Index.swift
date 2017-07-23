@@ -18,7 +18,7 @@ extension String.CharacterView.Index {
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
     public func samePosition(in scalars: StrictString) -> StrictString.Index {
-        return samePosition(in: String.ScalarView(scalars))
+        return samePosition(in: String(StrictString(scalars)).scalars)
     }
 
     /// Returns the position in the given view of lines that corresponds exactly to this index.

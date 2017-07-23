@@ -74,6 +74,22 @@ class TextTests : TestCase {
         XCTAssertEqual(String(lines), "\n\n")
     }
 
+    func testLineViewIndex() {
+        let strict: StrictString = "123\n456\n789"
+        let string = String(strict)
+
+        XCTAssertEqual(strict.lines.startIndex.samePosition(in: strict.scalars), strict.scalars.startIndex)
+        XCTAssertEqual(string.lines.startIndex.samePosition(in: string.scalars), string.scalars.startIndex)
+
+        let index = strict.lines.index(after: strict.lines.startIndex)
+        XCTAssertEqual(index.samePosition(in: strict.scalars), strict.scalars.index(strict.scalars.startIndex, offsetBy: 4))
+        let stringIndex = string.lines.index(after: string.lines.startIndex)
+        XCTAssertEqual(stringIndex.samePosition(in: string.scalars), string.scalars.index(string.scalars.startIndex, offsetBy: 4))
+
+        XCTAssertEqual(index.samePosition(in: strict.clusters), strict.clusters.index(strict.clusters.startIndex, offsetBy: 4))
+        XCTAssertEqual(stringIndex.samePosition(in: string.clusters), string.clusters.index(string.clusters.startIndex, offsetBy: 4))
+    }
+
     func testSemanticMarkup() {
         let markup: SemanticMarkup = "..."
         XCTAssertEqual(markup.scalars, markup.source.scalars)
@@ -210,6 +226,61 @@ class TextTests : TestCase {
         #endif
     }
 
+    func testStringClusterIndex() {
+        let strict = StrictString("français")
+        let string = String(strict)
+        let index = string.clusters.index(string.clusters.startIndex, offsetBy: 7)
+        XCTAssertEqual(index.samePosition(in: strict.scalars), strict.scalars.index(strict.scalars.startIndex, offsetBy: 8))
+        XCTAssertEqual(string.clusters.startIndex.samePosition(in: strict.lines), strict.lines.startIndex)
+        XCTAssertNil(index.samePosition(in: strict.lines))
+        XCTAssertEqual(index.line(in: strict.lines), strict.lines.startIndex)
+
+        XCTAssertEqual(index.samePosition(in: string.scalars), string.scalars.index(string.scalars.startIndex, offsetBy: 8))
+        XCTAssertEqual(string.clusters.startIndex.samePosition(in: string.lines), string.lines.startIndex)
+        XCTAssertNil(index.samePosition(in: string.lines))
+        XCTAssertEqual(index.line(in: string.lines), string.lines.startIndex)
+    }
+
+    func testStringScalarIndex() {
+        let strict = StrictString("français")
+        let string = String(strict)
+        let index = string.scalars.index(string.scalars.startIndex, offsetBy: 8)
+        let internalIndex = string.scalars.index(string.scalars.startIndex, offsetBy: 5)
+        XCTAssertEqual(index.samePosition(in: strict.clusters), strict.clusters.index(strict.clusters.startIndex, offsetBy: 7))
+        XCTAssertNil(internalIndex.samePosition(in: strict.clusters))
+        XCTAssertEqual(strict.scalars.startIndex.samePosition(in: strict.lines), strict.lines.startIndex)
+        XCTAssertEqual(strict.scalars.endIndex.samePosition(in: strict.lines), strict.lines.endIndex)
+        XCTAssertNil(internalIndex.samePosition(in: strict.lines))
+        XCTAssertEqual(internalIndex.cluster(in: strict.clusters), strict.clusters.index(strict.clusters.startIndex, offsetBy: 4))
+
+        let multiline = StrictString("123\n456\n789")
+        let secondLine = multiline.scalars.index(multiline.scalars.startIndex, offsetBy: 4)
+        XCTAssertEqual(secondLine.samePosition(in: multiline.lines), multiline.lines.index(after: multiline.lines.startIndex))
+        let middleOfSecondLine = multiline.scalars.index(multiline.scalars.startIndex, offsetBy: 6)
+        XCTAssertNil(middleOfSecondLine.samePosition(in: multiline.lines))
+        let thirdLine = multiline.scalars.index(multiline.scalars.startIndex, offsetBy: 8)
+        XCTAssertEqual(thirdLine.samePosition(in: multiline.lines), multiline.lines.index(multiline.lines.startIndex, offsetBy: 2))
+
+        XCTAssertEqual(multiline.scalars.startIndex.line(in: multiline.lines), multiline.lines.startIndex)
+        XCTAssertEqual(secondLine.line(in: multiline.lines), multiline.lines.index(after: multiline.lines.startIndex))
+        XCTAssertEqual(middleOfSecondLine.line(in: multiline.lines), multiline.lines.index(after: multiline.lines.startIndex))
+        XCTAssertEqual(thirdLine.line(in: multiline.lines), multiline.lines.index(multiline.lines.startIndex, offsetBy: 2))
+        XCTAssertEqual(multiline.scalars.endIndex.line(in: multiline.lines), multiline.lines.endIndex)
+
+        let multilineString = String(multiline)
+        XCTAssertEqual(secondLine.samePosition(in: multilineString.lines), multilineString.lines.index(after: multilineString.lines.startIndex))
+        XCTAssertNil(middleOfSecondLine.samePosition(in: multilineString.lines))
+        XCTAssertEqual(thirdLine.samePosition(in: multilineString.lines), multilineString.lines.index(multilineString.lines.startIndex, offsetBy: 2))
+
+        XCTAssertEqual(multilineString.scalars.startIndex.line(in: multilineString.lines), multilineString.lines.startIndex)
+        XCTAssertEqual(secondLine.line(in: multilineString.lines), multilineString.lines.index(after: multilineString.lines.startIndex))
+        XCTAssertEqual(middleOfSecondLine.line(in: multilineString.lines), multilineString.lines.index(after: multilineString.lines.startIndex))
+        XCTAssertEqual(thirdLine.line(in: multilineString.lines), multilineString.lines.index(multilineString.lines.startIndex, offsetBy: 2))
+        XCTAssertEqual(multilineString.scalars.endIndex.line(in: multilineString.lines), multilineString.lines.endIndex)
+
+        XCTAssertEqual(multilineString.scalars.endIndex.samePosition(in: multilineString.lines), multilineString.lines.endIndex)
+    }
+
     func testUnicodeScalar() {
         XCTAssertEqual(("A" as UnicodeScalar).hexadecimalCode, "0041")
         XCTAssertEqual(("‐" as UnicodeScalar).hexadecimalCode, "2010")
@@ -289,9 +360,12 @@ class TextTests : TestCase {
         return [
             ("testCharacterSet", testCharacterSet),
             ("testLineView", testLineView),
+            ("testLineViewIndex", testLineViewIndex),
             ("testSemanticMarkup", testSemanticMarkup),
             ("testStrictString", testStrictString),
             ("testString", testString),
+            ("testStringClusterIndex", testStringClusterIndex),
+            ("testStringScalarIndex", testStringScalarIndex),
             ("testUnicodeScalar", testUnicodeScalar),
             ("testUnicodeScalarView", testUnicodeScalarView)
         ]
