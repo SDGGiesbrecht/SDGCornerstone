@@ -42,14 +42,12 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
             let newline = Base(Base.ScalarView(base.scalars[newlines[index]]))
             result.append(Line(line: line, newline: newline))
         }
-        if newlines.last?.upperBound ≠ base.scalars.endIndex {
-            guard let last = lines.last else {
-                unreachable()
-            }
-            let line = Base(Base.ScalarView(base.scalars[last]))
-            let newline = Base()
-            result.append(Line(line: line, newline: newline))
-        }
+
+        let startOfLast = newlines.last?.upperBound ?? base.scalars.startIndex
+        let line = Base(Base.ScalarView(base.scalars[startOfLast ..< base.scalars.endIndex]))
+        let newline = Base()
+        result.append(Line(line: line, newline: newline))
+
         return result
     }
 
