@@ -27,6 +27,33 @@ extension LineView {
 
         internal var value: Int
 
+        // MARK: - Conversions
+
+        /// Returns the position in the given view of scalars that corresponds exactly to this index.
+        public func samePosition(in scalars: StrictString) -> StrictString.Index {
+            return samePosition(in: String(StrictString(scalars)).scalars)
+        }
+
+        /// Returns the position in the given view of scalars that corresponds exactly to this index.
+        public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
+            if value == 0 {
+                return scalars.startIndex
+            } else {
+                return scalars.matches(for: LineView<String>.newlinePattern)[value − 1].range.upperBound
+            }
+        }
+
+        /// Returns the position in the given view of clusters that corresponds exactly to this index.
+        public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
+            return samePosition(in: String(StrictString(clusters)).clusters)
+        }
+
+        /// Returns the position in the given view of clusters that corresponds exactly to this index.
+        public func samePosition(in clusters: String.ClusterView) -> String.ClusterView.Index {
+            let string = String(clusters)
+            return samePosition(in: string.scalars).cluster(in: string.clusters)
+        }
+
         // MARK: - Comparable
 
         // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
