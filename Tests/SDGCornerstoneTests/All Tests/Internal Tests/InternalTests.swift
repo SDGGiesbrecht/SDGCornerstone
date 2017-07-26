@@ -19,6 +19,18 @@ import XCTest
 
 class InternalTests : TestCase {
 
+    func testContentLocalization() {
+        for localization in ContentLocalization.cases {
+            XCTAssertNotNil(RecognizedLocalization(exactly: localization.code))
+
+            if let icon = localization.icon {
+                XCTAssertEqual(localization, ContentLocalization(icon: icon))
+            } else {
+                XCTFail("\(localization.code) has no icon.")
+            }
+        }
+    }
+
     func testGregorianWeekdayDate() {
         XCTAssertEqual(CalendarDate(definition: GregorianWeekdayDate(week: 1, weekday: .tuesday, hour: 0, minute: 0, second: 0)), CalendarDate(gregorian: .january, 16, 2001))
     }
@@ -42,22 +54,6 @@ class InternalTests : TestCase {
         }
     }
 
-    func testLocalizationIcons() {
-        let localizations: [ContentLocalization] = [
-            .englishUnitedKingdom,
-            .englishUnitedStates,
-            .englishCanada,
-            .deutschDeutschland,
-            .françaisFrance,
-            .ελληνικάΕλλάδα,
-            .עברית־ישראל
-        ]
-
-        for localization in localizations {
-            XCTAssert(localization.icon ≠ nil)
-        }
-    }
-
     func testLocalizationSetting() {
         XCTAssertNotNil(LocalizationSetting.osSystemWidePreferences.value?.asArray(of: String.self), "Failed to detect operating system localization setting.")
 
@@ -70,6 +66,48 @@ class InternalTests : TestCase {
         XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
 
         LocalizationSetting.internalUseSetSystemWidePreferences(to: nil)
+    }
+
+    func testRecognizedLocalization() {
+        for localization in RecognizedLocalization.cases {
+
+            // Make sure its group is defined.
+            let components = localization.code.components(separatedBy: "\u{2D}")
+
+            if let group = RecognizedLocalization.groups[components.first! ] {
+                XCTAssert(group.map({ $0.countries }).joined().contains(components.last!), "\(localization.code) is missing from its group.")
+            } else {
+                XCTFail("\(localization.code) has no group defined.")
+            }
+
+            let abbreviatedCode = localization.code.components(separatedBy: "\u{2D}").first!
+            XCTAssertNotNil(RecognizedLocalization(reasonableMatchFor: abbreviatedCode))
+
+            // Make sure it has an icon.
+            if let icon = localization.icon {
+                // Make sure it can be recreated from the icon.
+                XCTAssertEqual(localization, RecognizedLocalization(definedIcon: icon))
+            } else {
+                XCTFail("\(localization.code) has no icon.")
+            }
+        }
+
+        // Make sure each group member is defined.
+        for (languageCode, scripts) in RecognizedLocalization.groups {
+            for (scriptCode, countries) in scripts {
+                for country in countries {
+                    var orthography = languageCode
+                    if scripts.count ≠ 1 {
+                        orthography += "\u{2D}" + scriptCode
+                    }
+                    let code = orthography + "\u{2D}" + country
+
+                    if country ≠ "419" {
+                        XCTAssertNotNil(RecognizedLocalization(exactly: code), "\(code) is not defined.")
+                    }
+                }
+            }
+        }
     }
 
     func testRelativeDate() {
@@ -104,7 +142,6 @@ class InternalTests : TestCase {
             ("testGregorianWeekdayDate", testGregorianWeekdayDate),
             ("testHebrewWeekdayDate", testHebrewWeekdayDate),
             ("testHebrewYear", testHebrewYear),
-            ("testLocalizationIcons", testLocalizationIcons),
             ("testLocalizationSetting", testLocalizationSetting),
             ("testRelativeDate", testRelativeDate),
             ("testUIntHalvesView", testUIntHalvesView),
