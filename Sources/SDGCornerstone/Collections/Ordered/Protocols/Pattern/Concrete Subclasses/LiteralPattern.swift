@@ -22,25 +22,12 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Expre
     /// - Parameters:
     ///     - literal: The collection to match as a literal.
     public init<C : Collection>(_ literal: C) where C.Iterator.Element == Element {
-        startIndex = literal.startIndex
-        endIndex = literal.endIndex
-        // swiftlint:disable force_cast
-        indexesAreInequal = { $0 as! C.Index ≠ $1 as! C.Index }
-        indexAfter = { literal.index(after: $0 as! C.Index) }
-        elementAt = { literal[$0 as! C.Index] }
-        reversedLiteral = { LiteralPattern<Element>(literal.reversed()) }
-        // swiftlint:enable force_cast
+        self.literal = Array(literal)
     }
 
     // MARK: - Properties
 
-    private typealias Index = Any
-    private var startIndex: Index
-    private var endIndex: Index
-    private var indexesAreInequal: (Index, Index) -> Bool
-    private var indexAfter: (Index) -> Index
-    private var elementAt: (Index) -> Element
-    private var reversedLiteral: () -> LiteralPattern<Element>
+    private let literal: [Element]
 
     // MARK: - ExpressibleByArrayLiteral
 
@@ -62,20 +49,20 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Expre
     ///     - location: The index at which to check for the beginning of a match.
     public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
 
-        var checkingIndex = startIndex
+        var checkingIndex = literal.startIndex
         var collectionIndex = location
-        while indexesAreInequal(checkingIndex, endIndex) {
+        while checkingIndex ≠ literal.endIndex {
             guard collectionIndex ≠ collection.endIndex else {
                 // Ran out of space to check.
                 return []
             }
 
-            if elementAt(checkingIndex) ≠ collection[collectionIndex] {
+            if literal[checkingIndex] ≠ collection[collectionIndex] {
                 // Mis‐match.
                 return []
             }
 
-            checkingIndex = indexAfter(checkingIndex)
+            checkingIndex += 1
             collectionIndex = collection.index(after: collectionIndex)
         }
 
@@ -87,6 +74,6 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Expre
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     public override func reversed() -> Pattern<Element> {
-        return reversedLiteral()
+        return LiteralPattern(literal.reversed())
     }
 }
