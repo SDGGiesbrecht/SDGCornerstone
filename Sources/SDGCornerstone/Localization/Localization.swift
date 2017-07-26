@@ -57,7 +57,7 @@ extension Localization {
     ///     ("Hans", ["CN", "SG"]),
     ///     ("Hant", ["TW"])],
     /// "es": [("Latn", ["ES", "419", "MX", "CO", "AR", "VE", "PE", "CL", "EC", "CU", "DO", "GT", "HN", "SV", "NI", "BO", "CR", "UY", "PA", "PY", "GQ"])],
-    /// "en": [("Latn", ["GB", "US", "CA", "AU", "ZA", "IE", "NL", "SG", "TT", "GY", "LR", "SL", "MY", "BB", "BS", "ZW", "IN", "BZ", "PG", "VC", "ZM", "GD", "AG", "VU", "JM", "KN", "LK", "PH", "LC", "NA", "BN", "SB", "NR", "FJ", "FM", "DM", "SC", "MU", "WS", "PW", "MW", "BW", "BI", "CM", "ET", "GM", "GH", "KE", "KI", "LS", "MT", "MH", "NG", "PK", "RW", "SS", "SD", "SZ", "TZ", "TO", "TV", "UG"])],
+    /// "en": [("Latn", ["GB", "US", "CA", "AU", "ZA", "IE", "NZ", "SG", "TT", "GY", "LR", "SL", "MY", "BB", "BS", "ZW", "IN", "BZ", "PG", "VC", "ZM", "GD", "AG", "VU", "JM", "KN", "LK", "PH", "LC", "NA", "BN", "SB", "NR", "FJ", "FM", "DM", "SC", "MU", "WS", "PW", "MW", "BW", "BI", "CM", "ET", "GM", "GH", "KE", "KI", "LS", "MT", "MH", "NG", "PK", "RW", "SS", "SD", "SZ", "TZ", "TO", "TV", "UG"])],
     /// "arb": [("Arab", ["SA", "EG", "DZ", "SD", "MA", "IQ", "SY", "YE", "TN", "JO", "LY", "LB", "SO", "AE", "MR", "OM", "IL", "KW", "TD", "QA", "BH", "DJ", "KM"])],
     /// "pt": [("Latn", ["PT", "BR", "AO", "MZ", "ST", "TL", "CV", "GQ", "GW"])],
     /// "ru": [("Cyrl", ["RU", "BY", "KZ", "KG"])],
@@ -119,7 +119,7 @@ extension Localization {
             possibleCountry = processingTags.removeFirst()
         }
 
-        if let scripts = ContentLocalization.groups[language] {
+        if let scripts = RecognizedLocalization.groups[language] {
 
             if let script = possibleScript {
                 if possibleCountry ≠ nil { // [_Exempt from Code Coverage_]
@@ -167,7 +167,7 @@ extension Localization {
             }
         }
 
-        if let members = ContentLocalization.macrolanguages[language] {
+        if let members = RecognizedLocalization.macrolanguages[language] {
             for member in members {
                 var alteredTags = originalTags
                 alteredTags[0] = member
@@ -186,7 +186,7 @@ extension Localization {
                     return
                 }
             } else {
-                if let macrolanguage = ContentLocalization.macrolanguageMembership[language] {
+                if let macrolanguage = RecognizedLocalization.macrolanguageMembership[language] {
                     var alteredTags = originalTags
                     alteredTags[0] = macrolanguage
                     if let result = Self(reasonableMatchFor: alteredTags.joined(separator: "\u{2D}"), skippingParents: false) {
@@ -200,13 +200,24 @@ extension Localization {
         return nil
     }
 
+    /// Creates a localization from an icon.
+    ///
+    /// - SeeAlso: `icon`
+    public init?(icon: StrictString) {
+        if let recognized = RecognizedLocalization(definedIcon: icon) {
+            self.init(reasonableMatchFor: recognized.code)
+        } else {
+            return nil
+        }
+    }
+
     /// An icon representing the localization suitable for buttons or links that switch languages.
     ///
     /// The icon consists of a flag and an abbreviation for the language endonym. (e.g. 🇬🇧EN, 🇺🇸EN, 🇬🇷ΕΛ)
     ///
-    /// For localizations SDGCornerstone does not provide content in, this property is `nil`.
+    /// For localizations not directly supported by SDGCornerstone, this property may be `nil`.
     public var icon: StrictString? {
-        return ContentLocalization(reasonableMatchFor: code)?.definedIcon
+        return RecognizedLocalization(reasonableMatchFor: code)?.definedIcon
     }
 }
 

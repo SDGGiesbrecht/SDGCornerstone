@@ -36,6 +36,9 @@ class LocalizationTests : TestCase {
         XCTAssertEqual(LocalizationExample(reasonableMatchFor: "nb"), .norwegian)
 
         XCTAssertEqual(LocalizationExample.français.icon, "🇫🇷FR")
+
+        XCTAssertNil(LocalizationExample(icon: ""))
+        XCTAssertNil(LocalizationExample(icon: "xyz?"))
     }
 
     func testLocalizationSetting() {
