@@ -15,64 +15,52 @@
 import Foundation
 
 /// A view of a string’s contents as a collection of lines.
-public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection, RangeReplaceableCollection where Base.ScalarView.Iterator.Element == UnicodeScalar /* [_Workaround: The where statement is redundant. Once the constraint can be added to the protocol, it should be removed here. (Swift 3.1.0)_] */ {
+public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Iterator.Element == UnicodeScalar, Base.ScalarView.Index == String.UnicodeScalarView.Index, Base.ScalarView.SubSequence.Iterator.Element == Base.ScalarView.Iterator.Element /* [_Workaround: The where statement is redundant. Once the constraint can be added to the StringFamily protocol, it should be removed here. (Swift 3.1.0)_] */ {
 
     // MARK: - Initialization
 
     internal init(_ base: Base) {
         self.base = base
-        normalizedLines = LineView<Base>.parseLines(from: base)
+        startIndex = Index(start: base.scalars.startIndex)
     }
 
     // MARK: - Parsing
 
     internal static var newlinePattern: Pattern<UnicodeScalar> {
         return AlternativePatterns([
-        LiteralPattern("\u{D}\u{A}".scalars), // CR + LF
-        ConditionalPattern(condition: { $0 ∈ CharacterSet.newlines })
-        ])
-    }
-
-    private static func parseLines(from base: Base) -> [Line<Base>] {
-        let newlines = base.scalars.matches(for: newlinePattern).map() { $0.range }
-        let lines = base.scalars.ranges(separatedBy: newlines)
-        var result: [Line<Base>] = []
-        for index in newlines.indices {
-            let line = Base(Base.ScalarView(base.scalars[lines[index]]))
-            let newline = Base(Base.ScalarView(base.scalars[newlines[index]]))
-            result.append(Line(line: line, newline: newline))
-        }
-
-        let startOfLast = newlines.last?.upperBound ?? base.scalars.startIndex
-        let line = Base(Base.ScalarView(base.scalars[startOfLast ..< base.scalars.endIndex]))
-        let newline = Base()
-        result.append(Line(line: line, newline: newline))
-
-        return result
-    }
-
-    private static func assembleBase(from lines: [Line<Base>]) -> Base {
-        var result = Base()
-        for line in lines {
-            result.scalars.append(contentsOf: line.line.scalars)
-            result.scalars.append(contentsOf: line.newline.scalars)
-        }
-        return result
+            LiteralPattern("\u{D}\u{A}".scalars), // CR + LF
+            ConditionalPattern(condition: { $0 ∈ CharacterSet.newlines })
+            ])
     }
 
     // MARK: - Properties
 
     internal var base: Base
 
-    private var normalizedLines: [Line<Base>]
-    private var lines: [Line<Base>] {
-        get {
-            return normalizedLines
+    // MARK: - Conversions
+
+    internal func line(for scalar: String.UnicodeScalarView.Index) -> LineIndex {
+        if scalar == base.scalars.endIndex {
+            return endIndex
         }
-        set {
-            base = LineView<Base>.assembleBase(from: newValue)
-            normalizedLines = LineView<Base>.parseLines(from: base)
+        guard var previousNewline = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< scalar) else {
+            return startIndex
         }
+
+        var encounteredNewline: Range<String.UnicodeScalarView.Index>?
+        if let newline = LineView.newlinePattern.matches(in: base.scalars, at: previousNewline.range.lowerBound).first,
+            newline.contains(scalar) {
+            // Between CR and LF
+
+            guard let actualPreviousNewline = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< newline.lowerBound) else {
+                return startIndex
+            }
+
+            previousNewline = actualPreviousNewline
+            encounteredNewline = newline
+        }
+
+        return Index(start: previousNewline.range.upperBound, newline: encounteredNewline)
     }
 
     // MARK: - BidirectionalCollection
@@ -82,43 +70,72 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///
     /// - Parameters:
     ///     - i: The following index.
-    public func index(before i: Index) -> Index {
-        return Index(i.value − 1)
+    public func index(before i: LineIndex) -> LineIndex {
+
+        let newline: Range<String.UnicodeScalarView.Index>
+        if i == endIndex {
+            newline = base.scalars.endIndex ..< base.scalars.endIndex
+        } else {
+            guard let found = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< (i.start ?? base.scalars.endIndex))?.range else {
+                preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                    switch localization {
+                    case .englishCanada:
+                        return "No index precedes the start index."
+                    }
+                }))
+            }
+            newline = found
+        }
+
+        guard let previousNewline = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< newline.lowerBound)?.range else {
+            startIndex.cache.newline = newline
+            return startIndex
+        }
+        return LineIndex(start: previousNewline.upperBound, newline: newline)
     }
 
     // MARK: - Collection
 
     // [_Inherit Documentation: SDGCornerstone.Collection.Indices_]
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
-    public typealias Indices = DefaultRandomAccessIndices<LineView>
+    public typealias Indices = DefaultBidirectionalIndices<LineView>
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
     /// The position of the first element in a non‐empty collection.
-    public let startIndex = Index(0)
+    public let startIndex: LineIndex
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
-    public var endIndex: Index {
-        return Index(lines.endIndex)
-    }
+    public let endIndex: LineIndex = LineIndex.endIndex()
 
     // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
     /// Returns the index immediately after the specified index.
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    public func index(after i: Index) -> Index {
-        return Index(i.value + 1)
+    public func index(after i: LineIndex) -> LineIndex {
+        guard let newline = i.newline(in: base.scalars),
+            ¬newline.isEmpty else {
+                return LineIndex.endIndex()
+        }
+        return LineIndex(start: newline.upperBound)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
-    public subscript(_ position: Index) -> Line<Base> {
+    public subscript(_ position: LineIndex) -> Line<Base> {
         get {
-            return lines[position.value]
+            let newline = position.newline(in: base.scalars)!
+            let line = base.scalars[position.start! ..< newline.lowerBound]
+            return Line(line: line, newline: base.scalars[newline])
         }
         set {
-            lines[position.value] = newValue
+            let replacement = Base.ScalarView(newValue.line) + Base.ScalarView(newValue.newline)
+            if let replacementStart = position.start {
+                base.scalars.replaceSubrange(replacementStart ..< position.newline(in: base.scalars)!.upperBound, with: replacement)
+            } else {
+                base.scalars.append(contentsOf: replacement)
+            }
         }
     }
 
@@ -127,32 +144,19 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
     /// Creates a new, empty collection.
     public init() {
-        base = Base()
-        normalizedLines = LineView<Base>.parseLines(from: base)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
-    /// Creates a new instance of a collection containing the elements of a sequence.
-    public init<S : Sequence>(_ elements: S) where S.Iterator.Element == Line<Base> {
-        self.init()
-        lines = [Line<Base>](elements)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
-    /// Appends the contents of the sequence to the end of the collection.
-    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Iterator.Element == Line<Base> {
-        lines.append(contentsOf: [Line<Base>](newElements))
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
-    /// Inserts the contents of the sequence to the specified index.
-    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: Index) where S.Iterator.Element == Line<Base> {
-        lines.insert(contentsOf: [Line<Base>](newElements), at: i.value)
+        self.init(Base())
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
     public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Iterator.Element == Line<Base> {
-        lines.replaceSubrange(subrange.lowerBound.value ..< subrange.upperBound.value, with: [Line<Base>](newElements))
+        var replacement = Base()
+        for line in newElements {
+            replacement.scalars.append(contentsOf: line.line)
+            replacement.scalars.append(contentsOf: line.newline)
+        }
+        let replacementStart = subrange.lowerBound.start ?? base.scalars.endIndex
+        let replacementEnd = subrange.upperBound.start ?? base.scalars.endIndex
+        base.scalars.replaceSubrange(replacementStart ..< replacementEnd, with: replacement.scalars)
     }
 }

@@ -12,106 +12,96 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension LineView {
+/// A line view index.
+public struct LineIndex : Comparable, Equatable {
 
-    /// A line view index.
-    public struct Index : Comparable, Equatable, Hashable, FixedScaleOneDimensionalPoint, PointProtocol {
+    // MARK: - Initialization
 
-        // MARK: - Initialization
+    internal init(start: String.UnicodeScalarView.Index, newline: Range<String.UnicodeScalarView.Index>? = nil) {
+        self.start = start
+        cache.newline = newline
+    }
 
-        internal init(_ value: Int) {
-            self.value = value
+    private init() {
+        start = nil
+    }
+    internal static func endIndex() -> LineIndex {
+        return LineIndex()
+    }
+
+    // MARK: - Properties
+
+    internal class Cache {
+        fileprivate init() {}
+        internal var newline: Range<String.UnicodeScalarView.Index>?
+    }
+    internal var cache = Cache()
+
+    internal let start: String.UnicodeScalarView.Index? // nil indicates the end index
+
+    internal func newline<S : Collection>(in scalars: S) -> Range<String.UnicodeScalarView.Index>? where S.Iterator.Element == UnicodeScalar, S.Index == String.UnicodeScalarView.Index {
+        guard let startIndex = start else {
+            return nil
         }
-
-        // MARK: - Properties
-
-        internal var value: Int
-
-        // MARK: - Conversions
-
-        /// Returns the position in the given view of scalars that corresponds exactly to this index.
-        public func samePosition(in scalars: StrictString) -> StrictString.Index {
-            return samePosition(in: String(StrictString(scalars)).scalars)
+        return cached(in: &cache.newline) {
+            return scalars.firstMatch(for: LineView<String>.newlinePattern, in: startIndex ..< scalars.endIndex)?.range ?? scalars.endIndex ..< scalars.endIndex
         }
+    }
 
-        /// Returns the position in the given view of scalars that corresponds exactly to this index.
-        public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
-            if value == 0 {
-                return scalars.startIndex
+    // MARK: - Conversions
+
+    /// Returns the position in the given view of scalars that corresponds exactly to this index.
+    public func samePosition(in scalars: StrictString) -> StrictString.Index {
+        return start ?? scalars.endIndex
+    }
+
+    /// Returns the position in the given view of scalars that corresponds exactly to this index.
+    public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
+        return start ?? scalars.endIndex
+    }
+
+    /// Returns the position in the given view of clusters that corresponds exactly to this index.
+    public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
+        return samePosition(in: String(StrictString(clusters)).clusters)
+    }
+
+    /// Returns the position in the given view of clusters that corresponds exactly to this index.
+    public func samePosition(in clusters: String.ClusterView) -> String.ClusterView.Index {
+        let string = String(clusters)
+        return samePosition(in: string.scalars).cluster(in: string.clusters)
+    }
+
+    // MARK: - Comparable
+
+    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the left value is less than the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value.
+    ///     - rhs: Another value.
+    public static func < (lhs: LineIndex, rhs: LineIndex) -> Bool {
+        if let lhsStart = lhs.start {
+            if let rhsStart = rhs.start {
+                return lhsStart < rhsStart
             } else {
-                return scalars.matches(for: LineView<String>.newlinePattern)[value − 1].range.upperBound
+                // lhs is valid, but rhs is the end index.
+                return true
             }
+        } else {
+            // lhs is the end index.
+            return false
         }
+    }
 
-        /// Returns the position in the given view of clusters that corresponds exactly to this index.
-        public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
-            return samePosition(in: String(StrictString(clusters)).clusters)
-        }
+    // MARK: - Equatable
 
-        /// Returns the position in the given view of clusters that corresponds exactly to this index.
-        public func samePosition(in clusters: String.ClusterView) -> String.ClusterView.Index {
-            let string = String(clusters)
-            return samePosition(in: string.scalars).cluster(in: string.clusters)
-        }
-
-        // MARK: - Comparable
-
-        // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-        /// Returns `true` if the left value is less than the right.
-        ///
-        /// - Parameters:
-        ///     - lhs: A value.
-        ///     - rhs: Another value.
-        public static func < (lhs: Index, rhs: Index) -> Bool {
-            return lhs.value < rhs.value
-        }
-
-        // MARK: - Equatable
-
-        // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
-        /// Returns `true` if the two values are equal.
-        ///
-        /// - Parameters:
-        ///     - lhs: A value to compare.
-        ///     - rhs: Another value to compare.
-        public static func == (lhs: Index, rhs: Index) -> Bool {
-            return lhs.value == rhs.value
-        }
-
-        // MARK: - Hashable
-
-        // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
-        /// The hash value.
-        public var hashValue: Int {
-            return value
-        }
-
-        // MARK: - PointProtocol
-
-        // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-        /// The type to be used as a vector.
-        public typealias Vector = Int
-
-        // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-        /// Moves the point on the left by the vector on the right.
-        ///
-        /// - Parameters:
-        ///     - lhs: The point to modify.
-        ///     - rhs: The vector to add.
-        ///
-        /// - NonmutatingVariant: +
-        public static func += (lhs: inout Index, rhs: Int) {
-            lhs.value += rhs
-        }
-
-        // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-        /// Returns the vector that leads from the point on the left to the point on the right.
-        ///
-        /// - Parameters:
-        ///     - lhs: The endpoint.
-        ///     - rhs: The startpoint.
-        public static func − (lhs: Index, rhs: Index) -> Int {
-            return lhs.value − rhs.value
-        }
+    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    /// Returns `true` if the two values are equal.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value to compare.
+    ///     - rhs: Another value to compare.
+    public static func == (lhs: LineIndex, rhs: LineIndex) -> Bool {
+        return lhs.start == rhs.start
     }
 }

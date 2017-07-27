@@ -46,22 +46,21 @@ class TextTests : TestCase {
             "Line 3"
         ]
         var file = fileLines.joined(separator: "\n")
-        XCTAssertEqual(file.lines.map({ $0.line }), fileLines)
+        XCTAssertEqual(file.lines.map({ String($0.line) }), fileLines)
 
         file = fileLines.joined(separator: "\u{D}\u{A}")
-        XCTAssertEqual(file.lines.map({ $0.line }), fileLines)
+        XCTAssertEqual(file.lines.map({ String($0.line) }), fileLines)
 
         file.lines.removeFirst()
-        XCTAssertEqual(file.lines.map({ $0.line }), Array(fileLines.dropFirst()))
+        XCTAssertEqual(file.lines.map({ String($0.line) }), Array(fileLines.dropFirst()))
 
-        XCTAssert(file.lines.startIndex.hashValue ≤ Int.max)
         var index = file.lines.startIndex
-        index += 1
-        XCTAssertEqual(file.lines.index(after: file.lines.startIndex), index)
-        XCTAssertEqual(index − file.lines.startIndex, file.lines.distance(from: file.lines.startIndex, to: index))
+        index = file.lines.index(after: index)
+        XCTAssertEqual(file.lines.distance(from: file.lines.startIndex, to: index), 1)
         XCTAssertEqual(file.lines.index(before: index), file.lines.startIndex)
 
         file = fileLines.joined(separator: "\n")
+        index = file.lines.index(after: file.lines.startIndex)
         file.lines[index] = Line(line: "Replaced", newline: "\u{2029}")
         XCTAssertEqual(file, "Line 1\nReplaced\u{2029}Line 3")
 

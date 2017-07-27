@@ -12,11 +12,17 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A view of a string’s contents as a collection of lines.
+/// A line in a string.
 public struct Line<Base : StringFamily> {
 
     /// Creates a line.
     public init(line: Base, newline: Base) {
+        self.line = line.scalars[line.scalars.bounds]
+        self.newline = newline.scalars[newline.scalars.bounds]
+    }
+
+    /// Creates a line.
+    public init(line: Base.ScalarView.SubSequence, newline: Base.ScalarView.SubSequence) {
         self.line = line
         self.newline = newline
     }
@@ -24,7 +30,7 @@ public struct Line<Base : StringFamily> {
     // MARK: - Properties
 
     /// The contents of the line.
-    public var line: Base
-    /// The newline character(s).
-    public var newline: Base
+    public var line: Base.ScalarView.SubSequence
+    /// The trailing newline character(s).
+    public var newline: Base.ScalarView.SubSequence
 }
