@@ -71,6 +71,10 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Pattern
 
+    private func checkNext<C : Collection>(in collection: C, at locations: inout [C.Index])  where C.Iterator.Element == Element {
+        locations = Array(locations.map({ pattern.matches(in: collection, at: $0) }).joined().map({ $0.upperBound }))
+    }
+
     // [_Inherit Documentation: SDGCornerstone.Pattern.match(in:at:)_]
     /// Returns the ranges of possible matches beginning at the specified index in the collection.
     ///
@@ -82,9 +86,6 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
 
         var locations: [C.Index] = [location]
-        func checkNext() {
-            locations = Array(locations.map({ pattern.matches(in: collection, at: $0) }).joined().map({ $0.upperBound }))
-        }
 
         for _ in 0 ..< count.lowerBound {
             if locations.isEmpty {
@@ -92,7 +93,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
                 return []
             } else {
                 // Continue
-                checkNext()
+                checkNext(in: collection, at: &locations)
             }
         }
 
@@ -114,12 +115,47 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
             } else {
                 // Continue
                 valid.append(locations)
-                checkNext()
+                checkNext(in: collection, at: &locations)
             }
         }
 
         // Finished (hit cap)
         return cleanUp()
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
+    /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element {
+
+        switch consumption {
+        case .greedy:
+            return matches(in: collection, at: location).first
+        case .lazy:
+
+            var locations: [C.Index] = [location]
+
+            for _ in 0 ..< count.lowerBound {
+                if locations.isEmpty {
+                    // Finished (not a complete match yet)
+                    return nil
+                } else {
+                    // Continue
+                    checkNext(in: collection, at: &locations)
+                }
+            }
+
+            if let matchEnd = locations.first {
+                return location ..< matchEnd
+            } else {
+                return nil
+            }
+        }
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]

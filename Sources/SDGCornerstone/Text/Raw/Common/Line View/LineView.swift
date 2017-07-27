@@ -48,7 +48,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         }
 
         var encounteredNewline: Range<String.UnicodeScalarView.Index>?
-        if let newline = LineView.newlinePattern.matches(in: base.scalars, at: previousNewline.range.lowerBound).first,
+        if let newline = LineView.newlinePattern.primaryMatch(in: base.scalars, at: previousNewline.range.lowerBound),
             newline.contains(scalar) {
             // Between CR and LF
 

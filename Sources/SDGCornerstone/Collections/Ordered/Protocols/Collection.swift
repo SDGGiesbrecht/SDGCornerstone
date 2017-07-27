@@ -87,7 +87,7 @@ extension Collection where Iterator.Element : Equatable {
 
         var i = searchArea.lowerBound
         while i ≠ searchArea.upperBound {
-            if let range = pattern.matches(in: self, at: i).first {
+            if let range = pattern.primaryMatch(in: self, at: i) {
                 return PatternMatch(range: range, in: self)
             }
             i = index(after: i)
@@ -423,7 +423,7 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     public func hasPrefix(_ pattern: Pattern<Iterator.Element>) -> Bool {
-        return ¬pattern.matches(in: self, at: startIndex).isEmpty
+        return pattern.primaryMatch(in: self, at: startIndex) ≠ nil
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
@@ -460,7 +460,7 @@ extension Collection where Iterator.Element : Equatable {
     ///     - pattern: The pattern to try.
     public func hasSuffix(_ pattern: Pattern<Iterator.Element>) -> Bool {
         let backwards = reversed()
-        return ¬pattern.reversed().matches(in: backwards, at: backwards.startIndex).isEmpty
+        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
@@ -499,7 +499,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @discardableResult public func advance(_ index: inout Index, over pattern: Pattern<Iterator.Element>) -> Bool {
-        if let match = pattern.matches(in: self, at: index).first {
+        if let match = pattern.primaryMatch(in: self, at: index) {
             index = match.upperBound
             return true
         } else {

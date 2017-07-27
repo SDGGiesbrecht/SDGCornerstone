@@ -58,6 +58,23 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
         return results
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
+    /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element {
+        for alternative in alternatives {
+            if let match = alternative.primaryMatch(in: collection, at: location) {
+                return match
+            }
+        }
+        return nil
+    }
+
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
     /// A pattern that checks for the reverse pattern.
     ///
