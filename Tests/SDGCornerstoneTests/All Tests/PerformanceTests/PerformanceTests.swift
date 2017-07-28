@@ -28,8 +28,15 @@ class PerformanceTests : TestCase {
             text.append("Blah blah blah...\n")
         }
 
-        lock("Line Parsing", to: 0.447) {
+        lock("Line Parsing", to: 0.5) {
             _ = text.lines.map({ String($0.line) })
+        }
+
+        lock("Lazy Line Parsing", to: 0.4) {
+            for _ in 1 ... 10_000 {
+                _ = text.lines.first
+                _ = text.lines.last
+            }
         }
     }
 }
