@@ -21,6 +21,12 @@ extension String : FileConvertible, PropertyListValue, StringFamily {
         self = string.string
     }
 
+    // [_Define Documentation: SDGCornerstone.String.isMultiline_]
+    /// Whether or not the string contains multiple lines.
+    public var isMultiline: Bool {
+        return scalars.isMultiline
+    }
+
     // MARK: - FileConvertible
 
     // [_Inherit Documentation: SDGCornerstone.FileConvertible.init(file:origin:)_]

@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 extension Collection {
 
     // MARK: - Conformance
@@ -655,5 +657,15 @@ extension Collection where Index : Hashable, Iterator.Element : Hashable, Indice
     /// - Requires: No values are repeated.
     public var bijectiveIndexMapping: BijectiveMapping<Index, Iterator.Element> {
         return BijectiveMapping(indexMapping)
+    }
+}
+
+extension Collection where Iterator.Element == UnicodeScalar {
+    // MARK: - where Iterator.Element == UnicodeScalar
+
+    // [_Inherit Documentation: SDGCornerstone.String.isMultiline_]
+    /// Whether or not the string contains multiple lines.
+    public var isMultiline: Bool {
+        return contains(where: { $0 ∈ CharacterSet.newlines })
     }
 }
