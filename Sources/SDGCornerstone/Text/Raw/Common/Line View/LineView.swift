@@ -26,12 +26,13 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Parsing
 
-    internal static var newlinePattern: Pattern<UnicodeScalar> {
-        return AlternativePatterns([
-            LiteralPattern("\u{D}\u{A}".scalars), // CR + LF
-            ConditionalPattern(condition: { $0 ∈ CharacterSet.newlines })
-            ])
-    }
+    /* [_Workaround: This ought to be simpler, but the generics make it incredibly slow. Once there is a stable way to @specialize the patterns, this should be re‐tried, and the replacement functions at the bottom of this file removed. (Swift 3.1.0)_]
+     internal static var newlinePattern: Pattern<UnicodeScalar> {
+     return AlternativePatterns([
+     LiteralPattern("\u{D}\u{A}".scalars), // CR + LF
+     ConditionalPattern(condition: { $0 ∈ CharacterSet.newlines })
+     ])
+     }*/
 
     // MARK: - Properties
 
@@ -158,5 +159,101 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         let replacementStart = subrange.lowerBound.start ?? base.scalars.endIndex
         let replacementEnd = subrange.upperBound.start ?? base.scalars.endIndex
         base.scalars.replaceSubrange(replacementStart ..< replacementEnd, with: replacement.scalars)
+    }
+}
+
+// [_Workaround: See “Parsing” above. (Swift 3.1.0)_]
+
+extension LineView {
+
+    internal static var newlinePattern: NewlinePattern {
+        return NewlinePattern()
+    }
+}
+
+internal struct NewlinePattern {
+
+    fileprivate static let carriageReturn: UnicodeScalar = "\u{D}"
+    fileprivate static let lineFeed: UnicodeScalar = "\u{A}"
+
+    fileprivate init() {}
+
+    fileprivate func primaryMatch<S : UnicodeScalarView>(in collection: S, at location: String.UnicodeScalarView.Index) -> Range<String.UnicodeScalarView.Index>? where S.Iterator.Element == UnicodeScalar, S.Index == String.UnicodeScalarView.Index, S.SubSequence.Iterator.Element == S.Iterator.Element {
+        // Replacement for Pattern.primaryMatch(in:at:)
+
+        guard location ≠ collection.endIndex else {
+            return nil
+        }
+
+        let scalar = collection[location]
+        guard scalar ∈ CharacterSet.newlines else {
+            return nil
+        }
+
+        if scalar == NewlinePattern.carriageReturn,
+            location ≠ collection.endIndex,
+            collection[collection.index(after: location)] == NewlinePattern.lineFeed {
+            return location ..< collection.index(location, offsetBy: 2)
+        } else {
+            return location ..< collection.index(after: location)
+        }
+    }
+}
+
+extension UnicodeScalarView where Self.Iterator.Element == UnicodeScalar, Self.Index == String.UnicodeScalarView.Index {
+    // MARK: - where Self.Iterator.Element == UnicodeScalar, Self.Index == String.UnicodeScalarView.Index
+
+    internal func firstMatch(for pattern: NewlinePattern, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+        // Replacement for Collection.firstMatch(for:in:)
+
+        let searchRange = searchRange ?? bounds
+
+        var index = searchRange.lowerBound
+        while index ≠ searchRange.upperBound {
+            let nextIndex = self.index(after: index)
+
+            let scalar = self[index]
+            if scalar ∈ CharacterSet.newlines {
+                if scalar == NewlinePattern.carriageReturn,
+                    nextIndex ≠ endIndex,
+                    self[nextIndex] == NewlinePattern.lineFeed {
+                    return PatternMatch(range: index ..< self.index(after: nextIndex), in: self)
+                } else {
+                    return PatternMatch(range: index ..< nextIndex, in: self)
+                }
+            }
+
+            index = nextIndex
+        }
+        return nil
+    }
+
+    fileprivate func lastMatch(for pattern: NewlinePattern, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+        // Replacement for Collection.lastMatch(for:in:)
+
+        let searchRange = searchRange ?? bounds
+
+        guard ¬searchRange.isEmpty else {
+            return nil
+        }
+
+        var nextIndex = searchRange.upperBound
+        while nextIndex ≠ searchRange.lowerBound {
+            let index = self.index(before: nextIndex)
+
+            let scalar = self[index]
+            if scalar ∈ CharacterSet.newlines {
+                if scalar == NewlinePattern.lineFeed,
+                    index ≠ searchRange.lowerBound,
+                    self[self.index(before: index)] == NewlinePattern.carriageReturn {
+                    return PatternMatch(range: self.index(before: index) ..< nextIndex, in: self)
+                } else {
+                    return PatternMatch(range: index ..< nextIndex, in: self)
+                }
+            }
+
+            nextIndex = index
+        }
+        return nil
     }
 }
