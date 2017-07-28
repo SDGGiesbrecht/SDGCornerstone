@@ -28,4 +28,23 @@ class TestCase : XCTestCase {
         }
         super.setUp()
     }
+
+    func lock(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
+
+        let iterations = 10
+        let precision = duration ÷ 4
+
+        var results: [TimeInterval] = []
+        for _ in 1 ... iterations {
+            let start = Date.timeIntervalSinceReferenceDate
+            test()
+            let end = Date.timeIntervalSinceReferenceDate
+            results.append(end − start)
+        }
+        let sum = results.reduce(0) { $0 + $1 }
+        let mean = sum ÷ TimeInterval(iterations)
+
+        XCTAssert(duration − precision ≤ mean, "“\(testName)” took an average of only \(mean) seconds! It is good to see things getting faster, but the target duration should be now be reduced to make sure it stays this fast.", file: file, line: line)
+        XCTAssert(mean ≤ duration + precision, "“\(testName)” took an average of \(mean) seconds! That is too slow.", file: file, line: line)
+    }
 }
