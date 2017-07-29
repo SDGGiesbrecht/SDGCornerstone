@@ -14,31 +14,41 @@
 
 #if os(macOS)
 
-import XCTest
-import Foundation
+    import XCTest
+    import Foundation
 
-import SDGCornerstone
+    import SDGCornerstone
 
-class PerformanceTests : TestCase {
+    class PerformanceTests : TestCase {
 
-    func testLineParsing() {
+        func testLiteralScalarSearch() {
+            var text = "Blah blah blah..."
 
-        var text = ""
-        for _ in 1 ... 10_000 {
-            text.append("Blah blah blah...\n")
+            lock("Literal Scalar Search", to: 0.7) {
+                for _ in 1 ... 100_000 {
+                    _ = text.scalars.firstMatch(for: "blah".scalars)
+                }
+            }
         }
 
-        lock("Line Parsing", to: 0.5) {
-            _ = text.lines.map({ String($0.line) })
-        }
+        func testLineParsing() {
 
-        lock("Lazy Line Parsing", to: 0.4) {
+            var text = ""
             for _ in 1 ... 10_000 {
-                _ = text.lines.first
-                _ = text.lines.last
+                text.append("Blah blah blah...\n")
+            }
+
+            lock("Line Parsing", to: 0.5) {
+                _ = text.lines.map({ String($0.line) })
+            }
+
+            lock("Lazy Line Parsing", to: 0.4) {
+                for _ in 1 ... 10_000 {
+                    _ = text.lines.first
+                    _ = text.lines.last
+                }
             }
         }
     }
-}
 
 #endif
