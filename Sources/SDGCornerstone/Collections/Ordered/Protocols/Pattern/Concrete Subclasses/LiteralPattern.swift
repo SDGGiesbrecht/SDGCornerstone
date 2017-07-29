@@ -48,25 +48,41 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Expre
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
     public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
+        if let match = primaryMatch(in: collection, at: location) {
+            return [match]
+        } else {
+            return []
+        }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
+    /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element {
 
         var checkingIndex = literal.startIndex
         var collectionIndex = location
         while checkingIndex ≠ literal.endIndex {
             guard collectionIndex ≠ collection.endIndex else {
                 // Ran out of space to check.
-                return []
+                return nil
             }
 
             if literal[checkingIndex] ≠ collection[collectionIndex] {
                 // Mis‐match.
-                return []
+                return nil
             }
 
             checkingIndex += 1
             collectionIndex = collection.index(after: collectionIndex)
         }
 
-        return [location ..< collectionIndex]
+        return location ..< collectionIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
