@@ -240,9 +240,9 @@ extension Range where Bound == String.UnicodeScalarView.Index {
     // MARK: - where Bound == String.UnicodeScalarView.Index
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
-    public func sameRange(in clusters: String) -> Range<String.CharacterView.Index>? {
-        if let lower = lowerBound.samePosition(in: clusters),
-            let upper = upperBound.samePosition(in: clusters) {
+    public func sameRange(in clusters: String.CharacterView) -> Range<String.CharacterView.Index>? {
+        if let lower = lowerBound.samePosition(in: String(clusters)),
+            let upper = upperBound.samePosition(in: String(clusters)) {
             return lower ..< upper
         } else {
             return nil

@@ -30,6 +30,14 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.consumption = consumption
     }
 
+    private static func convert(_ range: CountableClosedRange<Int>?) -> CountableRange<Int>? {
+        if let result = range {
+            return result.lowerBound ..< result.upperBound + 1
+        } else {
+            return nil
+        }
+    }
+
     // [_Define Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
     /// Creates a repetition pattern from another pattern.
     ///
@@ -39,6 +47,17 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - consumption: The desired consumption behaviour.
     public convenience init(_ pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         self.init(abstractPattern: pattern, count: count, consumption: consumption)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    /// Creates a repetition pattern from another pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to repeat.
+    ///     - count: A range representing the allowed number of repetitions.
+    ///     - consumption: The desired consumption behaviour.
+    public convenience init(_ pattern: Pattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
+        self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
@@ -59,8 +78,52 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
+    public convenience init(_ pattern: LiteralPattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
+        self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    /// Creates a repetition pattern from another pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to repeat.
+    ///     - count: A range representing the allowed number of repetitions.
+    ///     - consumption: The desired consumption behaviour.
     public convenience init(_ pattern: CompositePattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         self.init(abstractPattern: pattern, count: count, consumption: consumption)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    /// Creates a repetition pattern from another pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to repeat.
+    ///     - count: A range representing the allowed number of repetitions.
+    ///     - consumption: The desired consumption behaviour.
+    public convenience init(_ pattern: CompositePattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
+        self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    /// Creates a repetition pattern from another pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to repeat.
+    ///     - count: A range representing the allowed number of repetitions.
+    ///     - consumption: The desired consumption behaviour.
+    public convenience init<C : Collection>(_ pattern: C, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) where C.Iterator.Element == Element {
+        self.init(abstractPattern: LiteralPattern(pattern), count: count, consumption: consumption)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    /// Creates a repetition pattern from another pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to repeat.
+    ///     - count: A range representing the allowed number of repetitions.
+    ///     - consumption: The desired consumption behaviour.
+    public convenience init<C : Collection>(_ pattern: C, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) where C.Iterator.Element == Element {
+        self.init(abstractPattern: LiteralPattern(pattern), count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
     // MARK: - Properties

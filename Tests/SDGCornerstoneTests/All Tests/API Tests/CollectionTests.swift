@@ -195,6 +195,12 @@ class CollectionTests : TestCase {
         XCTAssertEqual(compositeRepetition2?.range, 0 ..< 4)
         let compositeRepetition3 = [5, 4, 5, 4, 5].firstMatch(for: RepetitionPattern(CompositePattern([LiteralPattern([5]), LiteralPattern([4])]), count: 3 ..< 5, consumption: .greedy))
         XCTAssertNil(compositeRepetition3)
+
+        XCTAssertNil([1, 1].firstMatch(for: RepetitionPattern([1], count: 3 ... 3)))
+
+        var aCollection = [1, 2, 3]
+        aCollection.insert(contentsOf: [4, 5], at: aCollection.startIndex)
+        XCTAssert(aCollection == [4, 5, 1, 2, 3])
     }
 
     func testComparableSet() {
