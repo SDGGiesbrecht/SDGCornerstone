@@ -24,7 +24,7 @@
         func testLiteralScalarSearch() {
             var text = "Blah blah blah..."
 
-            lock("Literal Scalar Search", to: 0.7) {
+            lock("Literal Scalar Search", to: 0.8) {
                 for _ in 1 ... 100_000 {
                     _ = text.scalars.firstMatch(for: "blah".scalars)
                 }
@@ -38,7 +38,7 @@
                 text.append("Blah blah blah...\n")
             }
 
-            lock("Line Parsing", to: 0.5) {
+            lock("Line Parsing", to: 0.6) {
                 _ = text.lines.map({ String($0.line) })
             }
 

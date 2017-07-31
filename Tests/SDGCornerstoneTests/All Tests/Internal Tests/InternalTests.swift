@@ -54,6 +54,10 @@ class InternalTests : TestCase {
         }
     }
 
+    func testLineViewIndex() {
+        XCTAssertNil("ABC".lines.endIndex.newline(in: "ABC".scalars))
+    }
+
     func testLocalizationSetting() {
         XCTAssertNotNil(LocalizationSetting.osSystemWidePreferences.value?.asArray(of: String.self), "Failed to detect operating system localization setting.")
 
@@ -142,6 +146,7 @@ class InternalTests : TestCase {
             ("testGregorianWeekdayDate", testGregorianWeekdayDate),
             ("testHebrewWeekdayDate", testHebrewWeekdayDate),
             ("testHebrewYear", testHebrewYear),
+            ("testLineViewIndex", testLineViewIndex),
             ("testLocalizationSetting", testLocalizationSetting),
             ("testRelativeDate", testRelativeDate),
             ("testUIntHalvesView", testUIntHalvesView),

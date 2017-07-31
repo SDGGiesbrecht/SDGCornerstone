@@ -71,6 +71,10 @@ class TextTests : TestCase {
         XCTAssertEqual(String(lines), "\n")
         lines.insert(contentsOf: [Line(line: "", newline: "\n")], at: lines.startIndex)
         XCTAssertEqual(String(lines), "\n\n")
+
+        var abcdef = "ABC\n"
+        abcdef.lines[abcdef.lines.endIndex] = abcdef.lines.first!
+        XCTAssertEqual(abcdef, "ABC\nABC\n")
     }
 
     func testLineViewIndex() {
@@ -87,6 +91,13 @@ class TextTests : TestCase {
 
         XCTAssertEqual(index.samePosition(in: strict.clusters), strict.clusters.index(strict.clusters.startIndex, offsetBy: 4))
         XCTAssertEqual(stringIndex.samePosition(in: string.clusters), string.clusters.index(string.clusters.startIndex, offsetBy: 4))
+
+        let abc = "ABC"
+        XCTAssertEqual(abc.lines.index(after: abc.lines.startIndex), abc.lines.endIndex)
+
+        let tricky = "1\u{D}\u{A}2\u{D}\u{A}3"
+        XCTAssertEqual(tricky.scalars.index(tricky.scalars.startIndex, offsetBy: 2).line(in: tricky.lines), tricky.lines.startIndex)
+        XCTAssertEqual(tricky.scalars.index(tricky.scalars.startIndex, offsetBy: 5).line(in: tricky.lines), tricky.lines.index(after: tricky.lines.startIndex))
     }
 
     func testRange() {
@@ -125,6 +136,18 @@ class TextTests : TestCase {
         XCTAssertEqual(partialCluster.lines(in: strict.lines), strict.lines.startIndex ..< strict.lines.index(after: strict.lines.startIndex))
         XCTAssertEqual(partialCluster.clusters(in: string.clusters), string.clusters.startIndex ..< string.clusters.index(after: string.clusters.startIndex))
         XCTAssertEqual(partialCluster.clusters(in: strict.clusters), strict.clusters.startIndex ..< strict.clusters.index(after: strict.clusters.startIndex))
+
+        XCTAssertEqual(string.clusters.bounds.sameRange(in: string.lines), string.lines.bounds)
+        XCTAssertEqual(strict.clusters.bounds.sameRange(in: strict.lines), strict.lines.bounds)
+
+        XCTAssertEqual(string.clusters.bounds.lines(in: string.lines), string.lines.bounds)
+        XCTAssertEqual(strict.clusters.bounds.lines(in: strict.lines), strict.lines.bounds)
+
+        XCTAssertEqual(string.scalars.bounds.clusters(in: string.clusters), string.clusters.bounds)
+        XCTAssertEqual(strict.scalars.bounds.clusters(in: strict.clusters), strict.clusters.bounds)
+
+        XCTAssertEqual(string.scalars.bounds.lines(in: string.lines), string.lines.bounds)
+        XCTAssertEqual(strict.scalars.bounds.lines(in: strict.lines), strict.lines.bounds)
     }
 
     func testSemanticMarkup() {
@@ -264,6 +287,8 @@ class TextTests : TestCase {
             let latin1 = try? String(file: european, origin: nil)
             XCTAssertEqual(latin1?.data(using: .isoLatin1), european)
         #endif
+
+        XCTAssertNil("ABC".scalars.firstMatch(for: ConditionalPattern(condition: { $0 == "D" })))
     }
 
     func testStringClusterIndex() {
