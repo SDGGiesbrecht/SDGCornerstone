@@ -135,7 +135,13 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     // MARK: - Pattern
 
     private func checkNext<C : Collection>(in collection: C, at locations: inout [C.Index])  where C.Iterator.Element == Element {
-        locations = Array(locations.map({ pattern.matches(in: collection, at: $0) }).joined().map({ $0.upperBound }))
+        locations = Array(locations.map({ (location: C.Index) -> [Range<C.Index>] in
+            if location ≠ collection.endIndex {
+                return pattern.matches(in: collection, at: location)
+            } else {
+                return []
+            }
+        }).joined().map({ $0.upperBound }))
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.match(in:at:)_]

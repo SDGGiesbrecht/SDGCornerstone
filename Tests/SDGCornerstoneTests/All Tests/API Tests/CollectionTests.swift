@@ -201,6 +201,17 @@ class CollectionTests : TestCase {
         var aCollection = [1, 2, 3]
         aCollection.insert(contentsOf: [4, 5], at: aCollection.startIndex)
         XCTAssert(aCollection == [4, 5, 1, 2, 3])
+
+        let countableRange: CountableClosedRange<Int>? = nil
+        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range, [1, 1, 1].bounds)
+        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(LiteralPattern([1]), count: countableRange))?.range, [1, 1, 1].bounds)
+        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(CompositePattern([LiteralPattern([1])]), count: countableRange))?.range, [1, 1, 1].bounds)
+        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(ConditionalPattern(condition: { $0 == 1 }), count: countableRange))?.range, [1, 1, 1].bounds)
+
+        XCTAssertNil([1].firstMatch(for: RepetitionPattern([1], count: 2 ... 4, consumption: .lazy)))
+
+        XCTAssertEqual([1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern(LiteralPattern([1]), count: 0 ..< 15))?.range, [1, 1, 1].bounds)
+        XCTAssertNil([1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern(LiteralPattern([1]), count: 5 ..< 15, consumption: .lazy)))
     }
 
     func testComparableSet() {
