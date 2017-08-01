@@ -289,6 +289,17 @@ class TextTests : TestCase {
         #endif
 
         XCTAssertNil("ABC".scalars.firstMatch(for: ConditionalPattern(condition: { $0 == "D" })))
+
+        let blah = "Blah blah blah..."
+        XCTAssertNotNil(blah.scalars.firstMatch(for: "blah".scalars))
+
+        var moreBlah = ""
+        for _ in 1 ... 10 {
+            moreBlah.append("Blah blah blah...\n")
+        }
+        XCTAssertEqual(moreBlah.lines.map({ String($0.line) }).count, 11)
+        XCTAssertEqual(String(moreBlah.lines.first!.line), "Blah blah blah...")
+        XCTAssertEqual(String(moreBlah.lines.last!.line), "")
     }
 
     func testStringClusterIndex() {
