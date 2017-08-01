@@ -68,7 +68,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
     ///     - location: The index at which to check for the beginning of a match.
     public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
 
-        if base.matches(in: collection, at: location).isEmpty {
+        if base.primaryMatch(in: collection, at: location) == nil {
             return [location ..< collection.index(after: location)]
         } else {
             return []

@@ -22,4 +22,37 @@ extension String {
 
 extension String.UnicodeScalarView : UnicodeScalarView {
 
+    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    /// Returns the first match for `pattern` in the specified subrange.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func firstMatch(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<String.UnicodeScalarView>? {
+        let searchArea = searchRange ?? bounds
+
+        // [_Workaround: This is redundant, but solves performance until generics can be forcibly specialized. (Swift 3.1.0)_]
+
+        var i = searchArea.lowerBound
+        while i ≠ searchArea.upperBound {
+            if let range = pattern.primaryMatch(in: self, at: i) {
+                return PatternMatch(range: range, in: self)
+            }
+            i = index(after: i)
+        }
+        return nil
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    /// Returns the first match for `pattern` in the specified subrange.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func firstMatch(for pattern: String.UnicodeScalarView, in searchRange: Range<Index>? = nil) -> PatternMatch<String.UnicodeScalarView>? {
+
+        // [_Workaround: This is redundant, but solves performance until generics can be forcibly specialized. (Swift 3.1.0)_]
+
+        return firstMatch(for: LiteralPattern(pattern), in: searchRange)
+    }
 }

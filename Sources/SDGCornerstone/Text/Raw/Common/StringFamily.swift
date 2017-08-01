@@ -50,7 +50,7 @@ public protocol StringFamily : Addable, Comparable, CustomStringConvertible, Equ
     var clusters: ClusterView { get set }
 }
 
-extension StringFamily where ScalarView.Iterator.Element == UnicodeScalar /* [_Workaround: The where statement is redundant. Once the constraint can be added to the protocol, it should be removed here. (Swift 3.1.0)_] */ {
+extension StringFamily where ScalarView.Iterator.Element == UnicodeScalar, ScalarView.Index == String.UnicodeScalarView.Index, ScalarView.SubSequence.Iterator.Element == ScalarView.Iterator.Element /* [_Workaround: The where statement is redundant. Once the constraint can be added to the protocol, it should be removed here. (Swift 3.1.0)_] */ {
     // MARK: - where ScalarView.Iterator.Element == UnicodeScalar
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]
