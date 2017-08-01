@@ -181,12 +181,12 @@ internal struct NewlinePattern {
     fileprivate func primaryMatch<S : UnicodeScalarView>(in collection: S, at location: String.UnicodeScalarView.Index) -> Range<String.UnicodeScalarView.Index>? where S.Iterator.Element == UnicodeScalar, S.Index == String.UnicodeScalarView.Index, S.SubSequence.Iterator.Element == S.Iterator.Element {
         // Replacement for Pattern.primaryMatch(in:at:)
 
-        guard location ≠ collection.endIndex else { // [_Exempt from Code Coverage._] Internal, unused, and temporary.
+        guard location ≠ collection.endIndex else { // [_Exempt from Code Coverage_] Internal, unused, and temporary.
             return nil
         }
 
         let scalar = collection[location]
-        guard scalar ∈ CharacterSet.newlines else { // [_Exempt from Code Coverage._] Internal, unused, and temporary.
+        guard scalar ∈ CharacterSet.newlines else { // [_Exempt from Code Coverage_] Internal, unused, and temporary.
             return nil
         }
 
@@ -206,7 +206,7 @@ extension UnicodeScalarView where Self.Iterator.Element == UnicodeScalar, Self.I
     internal func firstMatch(for pattern: NewlinePattern, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         // Replacement for Collection.firstMatch(for:in:)
 
-        let searchRange = searchRange ?? bounds // [_Exempt from Code Coverage._] Internal, unused, and temporary.
+        let searchRange = searchRange ?? bounds // [_Exempt from Code Coverage_] Internal, unused, and temporary.
 
         var index = searchRange.lowerBound
         while index ≠ searchRange.upperBound {
@@ -231,7 +231,7 @@ extension UnicodeScalarView where Self.Iterator.Element == UnicodeScalar, Self.I
     fileprivate func lastMatch(for pattern: NewlinePattern, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         // Replacement for Collection.lastMatch(for:in:)
 
-        let searchRange = searchRange ?? bounds // [_Exempt from Code Coverage._] Internal, unused, and temporary.
+        let searchRange = searchRange ?? bounds // [_Exempt from Code Coverage_] Internal, unused, and temporary.
 
         guard ¬searchRange.isEmpty else {
             return nil
