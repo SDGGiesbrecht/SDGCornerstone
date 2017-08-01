@@ -42,7 +42,7 @@
                 _ = text.lines.map({ String($0.line) })
             }
 
-            lock("Lazy Line Parsing", to: 0.4) {
+            lock("Lazy Line Parsing", to: 0.5) {
                 for _ in 1 ... 10_000 {
                     _ = text.lines.first
                     _ = text.lines.last
