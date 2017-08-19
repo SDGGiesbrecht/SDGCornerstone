@@ -46,11 +46,12 @@
         ///     - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
         ///     - silently: If `false` (the default), the command and its output will be printed to standard out. If `true`, nothing will be sent to standard out. This argument is ignored in GUI applications, where this method is always silent.
         ///     - redactionList: An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value.)
+        ///     - alternatePrint: An optional closure to use instead of `print()` to send lines to standard output. This can be used to redirect or preprocess the text intended for standard output. (The closure will receive the redacted version and will never be executed if `silently` is `true`.)
         ///
         /// - Returns: The output of the command.
         ///
         /// - Throws: A `Shell.Error` if the exit code indicates a failure.
-        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = []) throws -> String {
+        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String {
 
             let silent: Bool
             switch Application.current.mode {
@@ -84,11 +85,11 @@
 
             // Formatting separation from other output.
             if ¬silent { // [_Exempt from Code Coverage_]
-                print("")
+                alternatePrint("")
             }
             defer {
                 if ¬silent { // [_Exempt from Code Coverage_]
-                    print("")
+                    alternatePrint("")
                 }
             }
 
@@ -101,7 +102,7 @@
             }).joined(separator: " ")
 
             if ¬silent { // [_Exempt from Code Coverage_]
-                print(redact("$ " + commandString))
+                alternatePrint(redact("$ " + commandString))
             }
 
             let shell = Process()
@@ -150,7 +151,7 @@
                 completeErrorReceived = true
             }
 
-            while handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { print($0) }) {} // [_Exempt from Code Coverage_]
+            while handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { alternatePrint($0) }) {} // [_Exempt from Code Coverage_]
             while ¬completeErrorReceived {} // [_Exempt from Code Coverage_]
 
             while shell.isRunning {} // [_Exempt from Code Coverage_]
