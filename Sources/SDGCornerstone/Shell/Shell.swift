@@ -51,7 +51,7 @@
         /// - Returns: The output of the command.
         ///
         /// - Throws: A `Shell.Error` if the exit code indicates a failure.
-        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String {
+        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String { // [_Exempt from Code Coverage_]
 
             let silent: Bool
             switch Application.current.mode {
