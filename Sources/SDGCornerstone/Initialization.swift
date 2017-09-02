@@ -57,46 +57,46 @@ private func warnAboutSecondLanguages() {
         if LocalizationSetting.current.value.resolved() as ContentLocalization ∉ Set<ContentLocalization>([
             .englishUnitedKingdom,
             .englishUnitedStates,
-            .englishCanada]) {
-            let warning = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in
+            .englishCanada]) { // [_Exempt from Code Coverage_]
+            let warning = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
-                case .deutschDeutschland:
+                case .deutschDeutschland: // [_Exempt from Code Coverage_]
                     return "Achtung: Das Deutsch von SDGCornerstone ist noch von keinem Muttersprachler geprüft worden. Falls Sie dabei helfen möchten, melden Sie sich unter:"
-                case .françaisFrance:
+                case .françaisFrance: // [_Exempt from Code Coverage_]
                     return "Attention : Le français de SDGCornerstone n’a pas été vérifié par un locuteur natif. Si vous voudriez nous aider, inscrivez‐vous par ici :"
-                case .ελληνικάΕλλάδα:
+                case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
                     return "Προειδοποίηση: Τα ελληνικά του SDGCornerstone δεν ελέγχεται από ενός φυσικού ομιλητή. Αν θέλετε να μας βοηθήσετε, εγγράψτε εδώ:"
-                case .עברית־ישראל:
+                case .עברית־ישראל: // [_Exempt from Code Coverage_]
                     /*א*/ return "זהירות: העברית של SDGCornerstone לא נבדקה אל יד של דובר שפת אם. אם אתה/את רוצה לעזור לנו, הירשם/הירשמי כאן:"
                 }
             })
-            let issueTitle = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in
+            let issueTitle = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
-                case .deutschDeutschland:
+                case .deutschDeutschland: // [_Exempt from Code Coverage_]
                     return "Deutsch prüfen"
-                case .françaisFrance:
+                case .françaisFrance: // [_Exempt from Code Coverage_]
                     return "Vérifier le français"
-                case .ελληνικάΕλλάδα:
+                case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
                     return "Έλεγχος των ελληνικών"
-                case .עברית־ישראל:
+                case .עברית־ישראל: // [_Exempt from Code Coverage_]
                     return "בדיקה של העברית"
                 }
             })
-            let issueBody = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in
+            let issueBody = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
-                case .deutschDeutschland:
+                case .deutschDeutschland: // [_Exempt from Code Coverage_]
                     return "Ich würde gern helfen. Bitte erklären Sie mir wie."
-                case .françaisFrance:
+                case .françaisFrance: // [_Exempt from Code Coverage_]
                     return "Je voudrais assister. S’il vous plaît, expliquez‐moi comment."
-                case .ελληνικάΕλλάδα:
+                case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
                     return "Θα ήθελα να βοηθήσω. Παρακαλώ, εξηγήστε πώς."
-                case .עברית־ישראל:
+                case .עברית־ישראל: // [_Exempt from Code Coverage_]
                     return "אני רוצה לעזור. נא הסבר איך."
                 }
             })
