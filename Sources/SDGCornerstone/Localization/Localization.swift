@@ -219,6 +219,20 @@ extension Localization {
     public var icon: StrictString? {
         return RecognizedLocalization(reasonableMatchFor: code)?.definedIcon
     }
+
+    /// Returns the code corresponding to the specified icon.
+    ///
+    /// Use this to convert abritrary, user‐provided codes, even when they are not directly supported by the application.
+    public static func code(for icon: StrictString) -> String? {
+        return RecognizedLocalization(icon: icon)?.code
+    }
+
+    /// Returns the icon corresponding to the specified code.
+    ///
+    /// Use this to convert abritrary, user‐provided icons, even when they are not directly supported by the application.
+    public static func icon(for code: String) -> StrictString? {
+        return RecognizedLocalization(reasonableMatchFor: code)?.icon
+    }
 }
 
 extension Localization where Self : RawRepresentable, Self.RawValue == String {
