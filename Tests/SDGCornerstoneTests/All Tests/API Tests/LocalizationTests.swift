@@ -39,6 +39,9 @@ class LocalizationTests : TestCase {
 
         XCTAssertNil(LocalizationExample(icon: ""))
         XCTAssertNil(LocalizationExample(icon: "xyz?"))
+
+        XCTAssertEqual(LocalizationExample.icon(for: "ca\u{2D}AD"), "🇦🇩CA")
+        XCTAssertEqual(LocalizationExample.code(for: "🇦🇩CA"), "ca\u{2D}AD")
     }
 
     func testLocalizationSetting() {
