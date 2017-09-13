@@ -146,8 +146,8 @@ extension FileManager {
         try createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
 
         let previous = currentDirectoryPath
-        changeCurrentDirectoryPath(directory.path)
-        defer { changeCurrentDirectoryPath(previous) }
+        _ = changeCurrentDirectoryPath(directory.path)
+        defer { _ = changeCurrentDirectoryPath(previous) }
 
         try closure()
     }
