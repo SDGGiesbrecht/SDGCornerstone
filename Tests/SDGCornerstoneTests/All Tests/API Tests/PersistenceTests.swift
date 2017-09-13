@@ -55,6 +55,28 @@ class PersistenceTests : TestCase {
         XCTAssert(FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains("Application%20Support"), "Unexpected support directory.")
         XCTAssertNotNil(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Cache".scalars), LiteralPattern("cache".scalars)])))
         XCTAssertNotNil(FileManager.default.url(in: .temporary, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Temp".scalars), LiteralPattern("temp".scalars), LiteralPattern("tmp".scalars), LiteralPattern("Being%20Saved%20By".scalars)])))
+
+        let directoryName = "Directory"
+        let directory = FileManager.default.url(in: .temporary, at: directoryName)
+        let file = directory.appendingPathComponent("File.txt")
+        do {
+            try FileManager.default.do(in: directory) {
+                // When the directory does not exist yet.
+                XCTAssertEqual(URL(fileURLWithPath: FileManager.default.currentDirectoryPath).lastPathComponent, directoryName)
+            }
+
+            let fileContents = "File"
+            try fileContents.save(to: file)
+
+            try FileManager.default.do(in: directory) {
+                // When the directory already exists.
+                XCTAssertEqual(URL(fileURLWithPath: FileManager.default.currentDirectoryPath).lastPathComponent, directoryName)
+            }
+
+            XCTAssertEqual(try? String(from: file), fileContents) // Directory not overwritten.
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
 
     func testPreferences() {
