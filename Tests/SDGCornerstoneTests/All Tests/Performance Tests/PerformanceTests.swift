@@ -21,16 +21,6 @@
 
     class PerformanceTests : TestCase {
 
-        func testLiteralScalarSearch() {
-            var text = "Blah blah blah..."
-
-            lock("Literal Scalar Search", to: 0.8) {
-                for _ in 1 ... 100_000 {
-                    _ = text.scalars.firstMatch(for: "blah".scalars)
-                }
-            }
-        }
-
         func testLineParsing() {
 
             var text = ""
@@ -46,6 +36,16 @@
                 for _ in 1 ... 10_000 {
                     _ = text.lines.first
                     _ = text.lines.last
+                }
+            }
+        }
+
+        func testLiteralScalarSearch() {
+            var text = "Blah blah blah..."
+
+            lock("Literal Scalar Search", to: 0.8) {
+                for _ in 1 ... 100_000 {
+                    _ = text.scalars.firstMatch(for: "blah".scalars)
                 }
             }
         }

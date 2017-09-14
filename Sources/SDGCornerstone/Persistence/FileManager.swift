@@ -131,4 +131,24 @@ extension FileManager {
         let folder = url(in: location, for: domain)
         try? removeItem(at: folder)
     }
+
+    // MARK: - Working Directory
+
+    /// Executes the closure in the specified directory.
+    ///
+    /// The directory will be automatically created if necessary.
+    ///
+    /// - Parameters:
+    ///     - directory: The directory in which to execute the closure.
+    ///     - closure: The closure.
+    public func `do`(in directory: URL, closure: () throws -> Void) throws {
+
+        try createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+
+        let previous = currentDirectoryPath
+        _ = changeCurrentDirectoryPath(directory.path)
+        defer { _ = changeCurrentDirectoryPath(previous) }
+
+        try closure()
+    }
 }
