@@ -24,6 +24,31 @@
         /// The default shell.
         public static let `default` = Shell(launchPath: "/bin/sh")
 
+        // MARK: - Static Functions
+
+        private static func argumentNeedsQuotationMarks(_ argument: String) -> Bool {
+            if argument.contains(" ") {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        private static func addQuotationMarks(_ argument: String) -> String {
+            return "\u{22}" + argument + "\u{22}"
+        }
+
+        /// Guarantees that an argument will be quoted exactly once when passed to `run(command:)`.
+        ///
+        /// Arguments which `Shell` already quotes automatically are not affected by this function, so as not to receive a duplicate set of quotation marks in the end.
+        public static func quote(_ argument: String) -> String {
+            if ¬Shell.argumentNeedsQuotationMarks(argument) {
+                return argument
+            } else {
+                return Shell.addQuotationMarks(argument)
+            }
+        }
+
         // MARK: - Initialization
 
         /// Creates a shell using the specified launch path.
@@ -94,8 +119,8 @@
             }
 
             let commandString = command.map({ (argument: String) -> String in
-                if argument.contains(" ") {
-                    return "\u{22}" + argument + "\u{22}"
+                if Shell.argumentNeedsQuotationMarks(argument) {
+                    return Shell.addQuotationMarks(argument)
                 } else {
                     return argument
                 }
