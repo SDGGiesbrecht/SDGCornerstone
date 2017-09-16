@@ -42,7 +42,7 @@
         ///
         /// Arguments which `Shell` already quotes automatically are not affected by this function, so as not to receive a duplicate set of quotation marks in the end.
         public static func quote(_ argument: String) -> String {
-            if ¬Shell.argumentNeedsQuotationMarks(argument) {
+            if Shell.argumentNeedsQuotationMarks(argument) {
                 return argument
             } else {
                 return Shell.addQuotationMarks(argument)

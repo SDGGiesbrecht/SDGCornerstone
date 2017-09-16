@@ -55,6 +55,27 @@ class ShellTests : TestCase {
             }
             waitForExpectations(timeout: 0)
 
+            let metacharacters = "(...)"
+            command = ["echo", Shell.quote(metacharacters)]
+            do {
+                let result = try Shell.default.run(command: command)
+                XCTAssertEqual(result, metacharacters)
+            } catch let error as Shell.Error {
+                XCTFail("Unexpected error: \(command) → \(error.description)")
+            } catch let error {
+                XCTFail("Unexpected error: \(command) → \(error)")
+            }
+
+            let automatic = "Hello, world!"
+            command = ["echo", Shell.quote(automatic)]
+            do {
+                let result = try Shell.default.run(command: command)
+                XCTAssert(¬result.contains("\u{22}"))
+            } catch let error as Shell.Error {
+                XCTFail("Unexpected error: \(command) → \(error.description)")
+            } catch let error {
+                XCTFail("Unexpected error: \(command) → \(error)")
+            }
         #endif
     }
 
