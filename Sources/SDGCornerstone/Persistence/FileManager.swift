@@ -132,6 +132,32 @@ extension FileManager {
         try? removeItem(at: folder)
     }
 
+    // Moving Files and Directories
+
+    /// Moves the item at the specified source to the specified destination, creating intermediate directories if necessary.
+    ///
+    /// - Parameters:
+    ///     - source: The URL of the source item.
+    ///     - destination: The destination URL.
+    public func move(_ source: URL, to destination: URL) throws {
+
+        try createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+
+        try moveItem(at: source, to: destination)
+    }
+
+    /// Copies the item at the specified source URL to the specified destination URL, creating intermediate directories if necessary.
+    ///
+    /// - Parameters:
+    ///     - source: The URL of the source item.
+    ///     - destination: The destination URL.
+    public func copy(_ source: URL, to destination: URL) throws {
+
+        try createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+
+        try copyItem(at: source, to: destination)
+    }
+
     // MARK: - Working Directory
 
     /// Executes the closure in the specified directory.
