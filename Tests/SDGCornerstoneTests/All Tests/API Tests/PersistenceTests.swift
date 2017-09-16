@@ -49,6 +49,8 @@ class PersistenceTests : TestCase {
     }
 
     func testFileManager() {
+        defer { FileManager.default.delete(.temporary) }
+
         let path = "example/path"
         XCTAssertEqual(FileManager.default.url(in: .temporary, at: path), FileManager.default.url(in: .temporary, at: path), "Differing temporary directories provided.")
 
@@ -74,6 +76,29 @@ class PersistenceTests : TestCase {
             }
 
             XCTAssertEqual(try? String(from: file), fileContents) // Directory not overwritten.
+        } catch let error {
+            XCTFail("\(error)")
+        }
+
+        do {
+            let sourceDirectory = FileManager.default.url(in: .temporary, at: "Source Directory")
+            let destinationDirectory = FileManager.default.url(in: .temporary, at: "/Intermediate Directory/Destination Directory")
+
+            let fileContents = "File"
+            let fileName = "File.txt"
+            try fileContents.save(to: sourceDirectory.appendingPathComponent(fileName))
+
+            try FileManager.default.move(sourceDirectory, to: destinationDirectory)
+            XCTAssertEqual(try? String(from: destinationDirectory.appendingPathComponent(fileName)), fileContents)
+            XCTAssertNil(try? String(from: sourceDirectory.appendingPathComponent(fileName)))
+
+            FileManager.default.delete(.temporary)
+            try fileContents.save(to: sourceDirectory.appendingPathComponent(fileName))
+
+            try FileManager.default.copy(sourceDirectory, to: destinationDirectory)
+            XCTAssertEqual(try? String(from: destinationDirectory.appendingPathComponent(fileName)), fileContents)
+            XCTAssertEqual(try? String(from: sourceDirectory.appendingPathComponent(fileName)), fileContents)
+
         } catch let error {
             XCTFail("\(error)")
         }
