@@ -46,6 +46,8 @@ class RegressionTests : TestCase {
     func testCachePermissions() {
         // Untracked
 
+        defer { FileManager.default.delete(.cache) }
+
         let file = "File"
         let url = FileManager.default.url(in: .cache, at: "File.txt")
 
