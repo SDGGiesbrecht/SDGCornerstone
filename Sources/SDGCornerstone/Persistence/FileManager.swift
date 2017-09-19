@@ -57,7 +57,7 @@ extension FileManager {
                 case .applicationSupport:
                     path = NSHomeDirectory() + ".Application Support"
                 case .cache:
-                    path = "/var/cache"
+                    path = NSHomeDirectory() + ".cache"
                 case .temporary:
                     path = "/tmp"
                 }
