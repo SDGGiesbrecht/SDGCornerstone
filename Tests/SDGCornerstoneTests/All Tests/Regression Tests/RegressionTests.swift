@@ -43,6 +43,22 @@ class RegressionTests : TestCase {
         runTests(RealArithmeticExample.self)
     }
 
+    func testCachePermissions() {
+        // Untracked
+
+        defer { FileManager.default.delete(.cache) }
+
+        let file = "File"
+        let url = FileManager.default.url(in: .cache, at: "File.txt")
+
+        do {
+            try file.save(to: url)
+            XCTAssertEqual(try? String(from: url), file)
+        } catch let error {
+            XCTFail("\(error)")
+        }
+    }
+
     func testCalendarEquatability() {
         // Untracked
 
@@ -204,6 +220,7 @@ class RegressionTests : TestCase {
     static var allTests: [(String, (RegressionTests) -> () throws -> Void)] {
         return [
             ("testAddAndSetIsUnambiguous", testAddAndSetIsUnambiguous),
+            ("testCachePermissions", testCachePermissions),
             ("testCalendarEquatability", testCalendarEquatability),
             ("testDelayedShellOutput", testDelayedShellOutput),
             ("testDivisionIsUnambiguous", testDivisionIsUnambiguous),
