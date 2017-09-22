@@ -1,4 +1,4 @@
-// swift-tools-version:3.1
+// swift-tools-version:4.0
 
 /*
  Package.swift
@@ -16,6 +16,16 @@
 
 import PackageDescription
 
+let library = "SDGCornerstone"
+let tests = library + "Tests"
+
 let package = Package(
-    name: "SDGCornerstone"
+    name: library,
+    products: [
+        .library(name: library, targets: [library])
+    ],
+    targets: [
+        .target(name: library, dependencies: []),
+        .testTarget(name: tests, dependencies: [.targetItem(name: library)])
+    ]
 )
