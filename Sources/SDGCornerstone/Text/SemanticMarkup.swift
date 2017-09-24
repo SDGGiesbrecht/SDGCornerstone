@@ -36,7 +36,7 @@ private let endSubscript: UnicodeScalar = "\u{107003}"
 /// private let beginSubscript: UnicodeScalar = "\u{107002}"
 /// private let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
-public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equatable, ExpressibleByTextLiterals, Hashable, RangeReplaceableCollection {
+public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection {
 
     // MARK: - Initialization
 

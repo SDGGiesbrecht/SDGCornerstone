@@ -34,10 +34,6 @@ extension StrictString {
             return StrictString(string).clusters
         }
 
-        private static func normalize(_ clusters: String.CharacterView) -> StrictString.ClusterView {
-            return normalize(String(clusters))
-        }
-
         private static func normalize<S : Sequence>(_ sequence: S) -> StrictString.ClusterView where S.Iterator.Element == ExtendedGraphemeCluster {
             switch sequence {
 
@@ -48,10 +44,10 @@ extension StrictString {
                 return StrictString(unsafeString: String(strictSlice.base.string.clusters[strictSlice.startIndex ..< strictSlice.endIndex])).clusters
 
             // Need normalization.
-            case let nonStrictClusters as String.CharacterView :
+            case let nonStrictClusters as String.ClusterView :
                 return normalize(nonStrictClusters)
             default:
-                return normalize(String.CharacterView(sequence))
+                return normalize(String.ClusterView(sequence))
             }
         }
 
@@ -62,7 +58,7 @@ extension StrictString {
         ///
         /// - Parameters:
         ///     - i: The following index.
-        public func index(before i: String.CharacterView.Index) -> String.CharacterView.Index {
+        public func index(before i: String.ClusterView.Index) -> String.ClusterView.Index {
             return string.string.clusters.index(before: i)
         }
 
@@ -70,13 +66,13 @@ extension StrictString {
 
         // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
         /// The position of the first element in a non‐empty collection.
-        public var startIndex: String.CharacterView.Index {
+        public var startIndex: String.ClusterView.Index {
             return string.string.clusters.startIndex
         }
 
         // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
         /// The position following the last valid index.
-        public var endIndex: String.CharacterView.Index {
+        public var endIndex: String.ClusterView.Index {
             return string.string.clusters.endIndex
         }
 
@@ -85,13 +81,13 @@ extension StrictString {
         ///
         /// - Parameters:
         ///     - i: The preceding index.
-        public func index(after i: String.CharacterView.Index) -> String.CharacterView.Index {
+        public func index(after i: String.ClusterView.Index) -> String.ClusterView.Index {
             return string.string.clusters.index(after: i)
         }
 
         // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
         /// Accesses the element at the specified position.
-        public subscript(position: String.CharacterView.Index) -> ExtendedGraphemeCluster {
+        public subscript(position: String.ClusterView.Index) -> ExtendedGraphemeCluster {
             return string.string.clusters[position]
         }
 
@@ -117,13 +113,13 @@ extension StrictString {
 
         // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
         /// Inserts the contents of the sequence to the specified index.
-        public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.CharacterView.Index) where S.Iterator.Element == ExtendedGraphemeCluster {
+        public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ClusterView.Index) where S.Iterator.Element == ExtendedGraphemeCluster {
             replaceSubrange(i ..< i, with: newElements)
         }
 
         // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
         /// Replaces the specified subrange of elements with the given collection.
-        public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.CharacterView.Index>, with newElements: S) where S.Iterator.Element == ExtendedGraphemeCluster {
+        public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ClusterView.Index>, with newElements: S) where S.Iterator.Element == ExtendedGraphemeCluster {
 
             let preceding = StrictString(ClusterView(self[startIndex ..< subrange.lowerBound]))
             let succeeding = StrictString(ClusterView(self[subrange.upperBound ..< endIndex]))

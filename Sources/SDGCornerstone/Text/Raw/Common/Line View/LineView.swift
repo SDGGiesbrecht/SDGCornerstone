@@ -15,7 +15,7 @@
 import Foundation
 
 /// A view of a string’s contents as a collection of lines.
-public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Iterator.Element == UnicodeScalar, Base.ScalarView.Index == String.UnicodeScalarView.Index, Base.ScalarView.SubSequence.Iterator.Element == Base.ScalarView.Iterator.Element /* [_Workaround: The where statement is redundant. Once the constraint can be added to the StringFamily protocol, it should be removed here. (Swift 3.1.0)_] */ {
+public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Index == String.UnicodeScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0)_] */ {
 
     // MARK: - Initialization
 
@@ -178,7 +178,7 @@ internal struct NewlinePattern {
 
     fileprivate init() {}
 
-    fileprivate func primaryMatch<S : UnicodeScalarView>(in collection: S, at location: String.UnicodeScalarView.Index) -> Range<String.UnicodeScalarView.Index>? where S.Iterator.Element == UnicodeScalar, S.Index == String.UnicodeScalarView.Index, S.SubSequence.Iterator.Element == S.Iterator.Element {
+    fileprivate func primaryMatch<S : UnicodeScalarView>(in collection: S, at location: String.UnicodeScalarView.Index) -> Range<String.UnicodeScalarView.Index>? where S.Index == String.UnicodeScalarView.Index {
         // Replacement for Pattern.primaryMatch(in:at:)
 
         guard location ≠ collection.endIndex else { // [_Exempt from Code Coverage_] Internal, unused, and temporary.
@@ -200,8 +200,8 @@ internal struct NewlinePattern {
     }
 }
 
-extension UnicodeScalarView where Self.Iterator.Element == UnicodeScalar, Self.Index == String.UnicodeScalarView.Index {
-    // MARK: - where Self.Iterator.Element == UnicodeScalar, Self.Index == String.UnicodeScalarView.Index
+extension UnicodeScalarView where Self.Index == String.UnicodeScalarView.Index {
+    // MARK: - where Self.Index == String.UnicodeScalarView.Index
 
     internal func firstMatch(for pattern: NewlinePattern, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         // Replacement for Collection.firstMatch(for:in:)

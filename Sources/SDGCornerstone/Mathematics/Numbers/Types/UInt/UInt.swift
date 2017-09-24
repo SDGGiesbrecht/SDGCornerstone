@@ -12,19 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+/// The member of the `UInt` family with the largest bit field.
+public typealias UIntMax = UInt64
+
 /// A type that represents a fixed‐length unsigned integer.
 ///
 /// This protocol exists so that extensions to it can provide shared functionality for `UInt`, `UInt64`, `UInt32`, `UInt16` and `UInt8`.
-public protocol UIntFamily : Addable, AdditiveArithmetic, BitwiseLogic, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, PointProtocol, PropertyListValue, Subtractable, UnsignedInteger, WholeArithmetic, WholeNumberProtocol {
+public protocol UIntFamily : BitField, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, FixedWidthInteger, PropertyListValue, UnsignedInteger, WholeNumberProtocol {
 
-    /// Creates a value from an `Int`.
-    init(_ value: Int)
-
-    /// Returns the bits of `lhs` shifted leftward by `rhs`.
-    static func << (lhs: Self, rhs: Self) -> Self
-
-    /// Returns the bits of `lhs` shifted rightward by `rhs`.
-    static func >> (lhs: Self, rhs: Self) -> Self
 }
 
 extension UInt : UIntFamily {
@@ -121,20 +116,20 @@ extension UIntFamily {
     // MARK: - Addition
 
     internal mutating func add(_ addend: Self, carringIn carrying: inout Self) {
-        let (simpleSum, overflowed) = Self.addWithOverflow(self, addend)
+        let (simpleSum, overflowed) = self.addingReportingOverflow(addend)
         self = simpleSum
         if overflowed {
-            carrying += 1
+            carrying += (1 as Self)
         }
     }
 
     // MARK: - Subtraction
 
     internal mutating func subtract(_ subtrahend: Self, borrowingIn borrowing: inout Self) {
-        let (simpleDifference, overflowed) = Self.subtractWithOverflow(self, subtrahend)
+        let (simpleDifference, overflowed) = self.subtractingReportingOverflow(subtrahend)
         self = simpleDifference
         if overflowed {
-            borrowing += 1
+            borrowing += (1 as Self)
         }
     }
 
@@ -172,79 +167,11 @@ extension UIntFamily {
                 add(half: halfResult.product, at: productIndex)
 
                 if halfResult.carried ≠ 0 {
-                    add(half: halfResult.carried, at: productIndex + 1)
+                    add(half: halfResult.carried, at: productIndex + (1 as Self))
                 }
             }
         }
 
         return (product: product, carried: carried)
-    }
-
-    // MARK: - BitwiseLogic
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseNot()_]
-    /// Returns the bits not present in `self`.
-    public func bitwiseNot() -> Self {
-        return ~self
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseNot()_]
-    /// Inverts the bits.
-    public mutating func formBitwiseNot() {
-        self = bitwiseNot()
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseAnd(with:)_]
-    /// Returns the bits present in both `self` and `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    public func bitwiseAnd(with other: Self) -> Self {
-        return self & other
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseAnd(with:)_]
-    /// Removes the bits not also present in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    public mutating func formBitwiseAnd(with other: Self) {
-        self = bitwiseAnd(with: other)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseOr(with:)_]
-    /// Returns the bits present in either `self` or `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    public func bitwiseOr(with other: Self) -> Self {
-        return self | other
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseOr(with:)_]
-    /// Inserts the bits present in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    public mutating func formBitwiseOr(with other: Self) {
-        self = bitwiseOr(with: other)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseExclusiveOr(with:)_]
-    /// Returns the bits present only in `self` or only in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    public func bitwiseExclusiveOr(with other: Self) -> Self {
-        return self ^ other
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseExclusiveOr(with:)_]
-    /// Inserts the bits present in `other` and removes the bits present in both.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    public mutating func formBitwiseExclusiveOr(with other: Self) {
-        self = bitwiseExclusiveOr(with: other)
     }
 }

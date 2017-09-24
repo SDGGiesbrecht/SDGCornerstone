@@ -39,7 +39,7 @@ public struct LineIndex : Comparable, Equatable {
 
     internal let start: String.UnicodeScalarView.Index? // nil indicates the end index
 
-    internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.UnicodeScalarView.Index>? where S.Iterator.Element == UnicodeScalar, S.Index == String.UnicodeScalarView.Index {
+    internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.UnicodeScalarView.Index>? where S.Index == String.UnicodeScalarView.Index {
         guard let startIndex = start else {
             return nil
         }

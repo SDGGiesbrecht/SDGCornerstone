@@ -126,24 +126,8 @@ extension PointProtocol {
     }
 }
 
-extension PointProtocol where Self.Vector == Self {
-    // MARK: - Self.Vector == Self
-
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the inverse of the vector on the right.
-    ///
-    /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to subtract.
-    ///
-    /// - MutatingVariant: −=
-    public static func − (lhs: Self, rhs: Vector) -> Self { // [_Exempt from Code Coverage_] Apparently unreachable.
-        // Disambiguate Self − Vector = Self vs Self − Self = Vector
-        return subtractAsPointProtocol(lhs, rhs)
-    }
-}
-
-extension PointProtocol where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent {
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self :*/ ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent {
     // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
@@ -155,7 +139,7 @@ extension PointProtocol where Self : ConsistentlyOrderedCalendarComponent, Self 
     ///
     /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
-        lhs = Self(numberAlreadyElapsed: lhs.numberAlreadyElapsed + rhs)
+        fatalError()//lhs = Self(numberAlreadyElapsed: lhs.numberAlreadyElapsed + rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
@@ -165,12 +149,13 @@ extension PointProtocol where Self : ConsistentlyOrderedCalendarComponent, Self 
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Vector {
-        return lhs.numberAlreadyElapsed − rhs.numberAlreadyElapsed
+        fatalError()//return lhs.numberAlreadyElapsed − rhs.numberAlreadyElapsed
     }
 }
 
-extension PointProtocol where Self : IntXFamily {
-    // MARK: - where Self : IntXFamily
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self : */IntFamily {
+    // MARK: - where Self : IntFamily
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
@@ -192,7 +177,7 @@ extension PointProtocol where Self : IntXFamily {
     ///     - rhs: The vector to add.
     ///
     /// - NonmutatingVariant: +
-    public static func += (lhs: inout Self, rhs: Stride) {
+    public static func += (lhs: inout Self, rhs: Vector) {
         lhs = lhs.advanced(by: rhs)
     }
 
@@ -202,12 +187,13 @@ extension PointProtocol where Self : IntXFamily {
     /// - Parameters:
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> Stride {
+    public static func − (lhs: Self, rhs: Self) -> Vector {
         return rhs.distance(to: lhs)
     }
 }
 
-extension PointProtocol where Self : NumericCalendarComponent {
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self : */ NumericCalendarComponent {
     // MARK: - where Self : NumericCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
@@ -218,8 +204,8 @@ extension PointProtocol where Self : NumericCalendarComponent {
     ///     - rhs: The vector to add.
     ///
     /// - NonmutatingVariant: +
-    public static func += (lhs: inout Self, rhs: RawValue) {
-        lhs = Self(lhs.rawValue + rhs)
+    public static func += (lhs: inout Self, rhs: Vector) {
+        fatalError()//lhs = Self(lhs.rawValue + rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
@@ -228,8 +214,8 @@ extension PointProtocol where Self : NumericCalendarComponent {
     /// - Parameters:
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> RawValue {
-        return lhs.rawValue − rhs.rawValue
+    public static func − (lhs: Self, rhs: Self) -> Vector {
+        fatalError()//return lhs.rawValue − rhs.rawValue
     }
 }
 
@@ -262,8 +248,7 @@ extension PointProtocol where Self : TwoDimensionalPoint {
     ///
     /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
-        lhs.x += rhs.Δx
-        lhs.y += rhs.Δy
+        fatalError()
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
@@ -273,13 +258,12 @@ extension PointProtocol where Self : TwoDimensionalPoint {
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Vector {
-        let Δx = lhs.x − rhs.x
-        let Δy = lhs.y − rhs.y
-        return Vector(Δx : Δx, Δy : Δy)
+        fatalError()
     }
 }
 
-extension PointProtocol where Self : UIntFamily {
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self : */UIntFamily {
     // MARK: - where Self : UIntFamily
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
@@ -302,7 +286,7 @@ extension PointProtocol where Self : UIntFamily {
     ///     - rhs: The vector to add.
     ///
     /// - NonmutatingVariant: +
-    public static func += (lhs: inout Self, rhs: Stride) {
+    public static func += (lhs: inout Self, rhs: Vector) {
         lhs = lhs.advanced(by: rhs)
     }
 

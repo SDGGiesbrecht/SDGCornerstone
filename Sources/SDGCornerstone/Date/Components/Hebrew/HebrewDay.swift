@@ -44,7 +44,7 @@ public struct HebrewDay : ConsistentDurationCalendarComponent, Day, OrdinalCalen
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
-    public typealias Vector = RawValue
+    public typealias Vector = Int
 
     // MARK: - RawRepresentableCalendarComponent
 
@@ -58,11 +58,11 @@ public struct HebrewDay : ConsistentDurationCalendarComponent, Day, OrdinalCalen
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
     /// The valid range for raw values.
-    public static let validRange: Range<Int>? = 1 ..< HebrewMonth.maximumNumberOfDays + 1
+    public static let validRange: Range<RawValue>? = 1 ..< HebrewMonth.maximumNumberOfDays + 1
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
     /// The raw value.
-    public var rawValue: Int {
+    public var rawValue: RawValue {
         return day
     }
 }

@@ -23,7 +23,7 @@ extension RangeReplaceableCollection {
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
     /// Appends the contents of the sequence to the end of the collection.
 
-    private mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Iterator.Element == Self.Iterator.Element {
+    private mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
         append(contentsOf: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
@@ -35,7 +35,7 @@ extension RangeReplaceableCollection {
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
 
-    private mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Iterator.Element == Self.Iterator.Element {
+    private mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
         insert(contentsOf: newElements, at: i)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
@@ -47,7 +47,7 @@ extension RangeReplaceableCollection {
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
 
-    private mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Iterator.Element == Self.Iterator.Element {
+    private mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
@@ -60,7 +60,7 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElement: The element to append to the collection
-    public func appending(_ newElement: Self.Iterator.Element) -> Self {
+    public func appending(_ newElement: Self.Element) -> Self {
         var result = self
         result.append(newElement)
         return result
@@ -71,13 +71,13 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElements: The elements to append to the collection
-    public func appending<C : Collection>(contentsOf newElements: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    public func appending<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         var result = self
         result.append(contentsOf: newElements)
         return result
     }
 
-    private func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    private func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         return appending(contentsOf: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:)_]
@@ -93,7 +93,7 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElement: The element to prepend to the collection
-    public mutating func prepend(_ newElement: Self.Iterator.Element) {
+    public mutating func prepend(_ newElement: Self.Element) {
         insert(newElement, at: startIndex)
     }
 
@@ -102,11 +102,11 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElements: The elements to prepend to the collection
-    public mutating func prepend<C : Collection>(contentsOf newElements: C) where C.Iterator.Element == Self.Iterator.Element {
+    public mutating func prepend<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
         insert(contentsOf: newElements, at: startIndex)
     }
 
-    private mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Iterator.Element == Self.Iterator.Element {
+    private mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
         prepend(contentsOf: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
@@ -122,7 +122,7 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElement: The element to prepend to the collection
-    public func prepending(_ newElement: Self.Iterator.Element) -> Self {
+    public func prepending(_ newElement: Self.Element) -> Self {
         var result = self
         result.prepend(newElement)
         return result
@@ -133,13 +133,13 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElements: The elements to prepend to the collection
-    public func prepending<C : Collection>(contentsOf newElements: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    public func prepending<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         var result = self
         result.prepend(contentsOf: newElements)
         return result
     }
 
-    private func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    private func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         return prepending(contentsOf: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
@@ -169,7 +169,7 @@ extension RangeReplaceableCollection {
     ///     - count: The target count.
     ///     - element: The element with which to fill the collection.
     ///     - direction: The direction from which to fill the collection.
-    public mutating func fill(to count: IndexDistance, with element: Iterator.Element, from direction: FillDirection) {
+    public mutating func fill(to count: IndexDistance, with element: Element, from direction: FillDirection) {
         while self.count < count {
             switch direction {
             case .start:
@@ -186,42 +186,15 @@ extension RangeReplaceableCollection {
     ///     - count: The target count.
     ///     - element: The element with which to fill the collection.
     ///     - direction: The direction from which to fill the collection.
-    public func filled(to count: IndexDistance, with element: Iterator.Element, from direction: FillDirection) -> Self {
+    public func filled(to count: IndexDistance, with element: Element, from direction: FillDirection) -> Self {
         var result = self
         result.fill(to: count, with: element, from: direction)
         return result
     }
 }
 
-extension RangeReplaceableCollection where IndexDistance : WholeArithmetic, Indices.Iterator.Element == Index {
-    // MARK: - where IndexDistance : WholeArithmetic, Indices.Iterator.Element == Index
-
-    /// Shuffles the collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    public mutating func shuffle(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) {
-        for i in indices {
-            let originalLocation = distance(from: startIndex, to: i)
-            let newLocation = IndexDistance(randomInRange: 0 ... originalLocation, fromRandomizer: randomizer)
-            let element = remove(at: index(startIndex, offsetBy: originalLocation))
-            insert(element, at: index(startIndex, offsetBy: newLocation))
-        }
-    }
-
-    /// Returns a shuffled collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    public func shuffled(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Self {
-        var result = self
-        result.shuffle(usingRandomizer: randomizer)
-        return result
-    }
-}
-
-extension RangeReplaceableCollection where Iterator.Element : Equatable {
-    // MARK: - where Iterator.Element : Equatable
+extension RangeReplaceableCollection where Element : Equatable {
+    // MARK: - where Element : Equatable
 
     // [_Define Documentation: SDGCornerstone.Collection.trucate(before:)_]
     /// Truncates `self` at the start of the first match for the specified pattern.
@@ -230,7 +203,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func truncate(before pattern: Pattern<Iterator.Element>) {
+    public mutating func truncate(before pattern: Pattern<Element>) {
         if let match = firstMatch(for: pattern) {
             removeSubrange(match.range.lowerBound ..< endIndex)
         }
@@ -243,8 +216,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func truncate(before pattern: LiteralPattern<Iterator.Element>) {
-        truncate(before: pattern as Pattern<Iterator.Element>)
+    public mutating func truncate(before pattern: LiteralPattern<Element>) {
+        truncate(before: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucate(before:)_]
@@ -254,8 +227,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func truncate(before pattern: CompositePattern<Iterator.Element>) {
-        truncate(before: pattern as Pattern<Iterator.Element>)
+    public mutating func truncate(before pattern: CompositePattern<Element>) {
+        truncate(before: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucate(after:)_]
@@ -265,7 +238,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func truncate<C : Collection>(before pattern: C) where C.Iterator.Element == Self.Iterator.Element {
+    public mutating func truncate<C : Collection>(before pattern: C) where C.Element == Self.Element {
         truncate(before: LiteralPattern(pattern))
     }
 
@@ -276,7 +249,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func truncated(before pattern: Pattern<Iterator.Element>) -> Self {
+    public func truncated(before pattern: Pattern<Element>) -> Self {
         var result = self
         result.truncate(before: pattern)
         return result
@@ -289,8 +262,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func truncated(before pattern: LiteralPattern<Iterator.Element>) -> Self {
-        return truncated(before: pattern as Pattern<Iterator.Element>)
+    public func truncated(before pattern: LiteralPattern<Element>) -> Self {
+        return truncated(before: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(before:)_]
@@ -300,8 +273,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func truncated(before pattern: CompositePattern<Iterator.Element>) -> Self {
-        return truncated(before: pattern as Pattern<Iterator.Element>)
+    public func truncated(before pattern: CompositePattern<Element>) -> Self {
+        return truncated(before: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
@@ -311,7 +284,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func truncated<C : Collection>(before pattern: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    public func truncated<C : Collection>(before pattern: C) -> Self where C.Element == Self.Element {
         return truncated(before: LiteralPattern(pattern))
     }
 
@@ -322,7 +295,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func truncate(after pattern: Pattern<Iterator.Element>) {
+    public mutating func truncate(after pattern: Pattern<Element>) {
         if let match = firstMatch(for: pattern) {
             removeSubrange(match.range.upperBound ..< endIndex)
         }
@@ -335,8 +308,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func truncate(after pattern: LiteralPattern<Iterator.Element>) {
-        truncate(after: pattern as Pattern<Iterator.Element>)
+    public mutating func truncate(after pattern: LiteralPattern<Element>) {
+        truncate(after: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucate(after:)_]
@@ -346,8 +319,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func truncate(after pattern: CompositePattern<Iterator.Element>) {
-        truncate(after: pattern as Pattern<Iterator.Element>)
+    public mutating func truncate(after pattern: CompositePattern<Element>) {
+        truncate(after: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucate(after:)_]
@@ -357,7 +330,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func truncate<C : Collection>(after pattern: C) where C.Iterator.Element == Self.Iterator.Element {
+    public mutating func truncate<C : Collection>(after pattern: C) where C.Element == Self.Element {
         truncate(after: LiteralPattern(pattern))
     }
 
@@ -368,7 +341,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func truncated(after pattern: Pattern<Iterator.Element>) -> Self {
+    public func truncated(after pattern: Pattern<Element>) -> Self {
         var result = self
         result.truncate(after: pattern)
         return result
@@ -381,8 +354,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func truncated(after pattern: LiteralPattern<Iterator.Element>) -> Self {
-        return truncated(after: pattern as Pattern<Iterator.Element>)
+    public func truncated(after pattern: LiteralPattern<Element>) -> Self {
+        return truncated(after: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
@@ -392,8 +365,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func truncated(after pattern: CompositePattern<Iterator.Element>) -> Self {
-        return truncated(after: pattern as Pattern<Iterator.Element>)
+    public func truncated(after pattern: CompositePattern<Element>) -> Self {
+        return truncated(after: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
@@ -403,7 +376,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func truncated<C : Collection>(after pattern: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    public func truncated<C : Collection>(after pattern: C) -> Self where C.Element == Self.Element {
         return truncated(after: LiteralPattern(pattern))
     }
 
@@ -414,7 +387,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func drop(upTo pattern: Pattern<Iterator.Element>) {
+    public mutating func drop(upTo pattern: Pattern<Element>) {
         if let match = firstMatch(for: pattern) {
             removeSubrange(startIndex ..< match.range.lowerBound)
         } else {
@@ -429,8 +402,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func drop(upTo pattern: LiteralPattern<Iterator.Element>) {
-        drop(upTo: pattern as Pattern<Iterator.Element>)
+    public mutating func drop(upTo pattern: LiteralPattern<Element>) {
+        drop(upTo: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.drop(upTo:)_]
@@ -440,8 +413,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func drop(upTo pattern: CompositePattern<Iterator.Element>) {
-        drop(upTo: pattern as Pattern<Iterator.Element>)
+    public mutating func drop(upTo pattern: CompositePattern<Element>) {
+        drop(upTo: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.drop(upTo:)_]
@@ -451,7 +424,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func drop<C : Collection>(upTo pattern: C) where C.Iterator.Element == Self.Iterator.Element {
+    public mutating func drop<C : Collection>(upTo pattern: C) where C.Element == Self.Element {
         drop(upTo: LiteralPattern(pattern))
     }
 
@@ -462,7 +435,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func dropping(upTo pattern: Pattern<Iterator.Element>) -> Self {
+    public func dropping(upTo pattern: Pattern<Element>) -> Self {
         var result = self
         result.drop(upTo: pattern)
         return result
@@ -475,8 +448,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func dropping(upTo pattern: LiteralPattern<Iterator.Element>) -> Self {
-        return dropping(upTo: pattern as Pattern<Iterator.Element>)
+    public func dropping(upTo pattern: LiteralPattern<Element>) -> Self {
+        return dropping(upTo: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
@@ -486,8 +459,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func dropping(upTo pattern: CompositePattern<Iterator.Element>) -> Self {
-        return dropping(upTo: pattern as Pattern<Iterator.Element>)
+    public func dropping(upTo pattern: CompositePattern<Element>) -> Self {
+        return dropping(upTo: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
@@ -497,7 +470,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func dropping<C : Collection>(upTo pattern: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    public func dropping<C : Collection>(upTo pattern: C) -> Self where C.Element == Self.Element {
         return dropping(upTo: LiteralPattern(pattern))
     }
 
@@ -508,7 +481,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func drop(through pattern: Pattern<Iterator.Element>) {
+    public mutating func drop(through pattern: Pattern<Element>) {
         if let match = firstMatch(for: pattern) {
             removeSubrange(startIndex ..< match.range.upperBound)
         } else {
@@ -523,8 +496,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func drop(through pattern: LiteralPattern<Iterator.Element>) {
-        drop(through: pattern as Pattern<Iterator.Element>)
+    public mutating func drop(through pattern: LiteralPattern<Element>) {
+        drop(through: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.drop(through:)_]
@@ -534,8 +507,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func drop(through pattern: CompositePattern<Iterator.Element>) {
-        drop(through: pattern as Pattern<Iterator.Element>)
+    public mutating func drop(through pattern: CompositePattern<Element>) {
+        drop(through: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.drop(through:)_]
@@ -545,7 +518,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public mutating func drop<C : Collection>(through pattern: C) where C.Iterator.Element == Self.Iterator.Element {
+    public mutating func drop<C : Collection>(through pattern: C) where C.Element == Self.Element {
         drop(through: LiteralPattern(pattern))
     }
 
@@ -556,7 +529,7 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func dropping(through pattern: Pattern<Iterator.Element>) -> Self {
+    public func dropping(through pattern: Pattern<Element>) -> Self {
         var result = self
         result.drop(through: pattern)
         return result
@@ -569,8 +542,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func dropping(through pattern: LiteralPattern<Iterator.Element>) -> Self {
-        return dropping(through: pattern as Pattern<Iterator.Element>)
+    public func dropping(through pattern: LiteralPattern<Element>) -> Self {
+        return dropping(through: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(through:)_]
@@ -580,8 +553,8 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func dropping(through pattern: CompositePattern<Iterator.Element>) -> Self {
-        return dropping(through: pattern as Pattern<Iterator.Element>)
+    public func dropping(through pattern: CompositePattern<Element>) -> Self {
+        return dropping(through: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(through:)_]
@@ -591,13 +564,13 @@ extension RangeReplaceableCollection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func dropping<C : Collection>(through pattern: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    public func dropping<C : Collection>(through pattern: C) -> Self where C.Element == Self.Element {
         return dropping(through: LiteralPattern(pattern))
     }
 }
 
-extension RangeReplaceableCollection where SubSequence : Collection, SubSequence.Iterator.Element == Iterator.Element, Iterator.Element : Equatable {
-    // MARK: - where SubSequence : Collection, SubSequence.Iterator.Element == Iterator.Element, Iterator.Element == Equatable
+extension RangeReplaceableCollection where Element : Equatable, SubSequence : Collection {
+    // MARK: - where Element == Equatable, SubSequence : Collection
 
     // [_Define Documentation: SDGCornerstone.Collection.replaceMatches(for:with:)_]
     /// Replaces each match for the pattern with the elements of the replacement.
@@ -605,7 +578,7 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public mutating func replaceMatches<C : Collection>(for pattern: Pattern<Iterator.Element>, with replacement: C) where C.Iterator.Element == Self.Iterator.Element {
+    public mutating func replaceMatches<C : Collection>(for pattern: Pattern<Element>, with replacement: C) where C.Element == Self.Element {
         mutateMatches(for: pattern, mutation: { (_) -> C in
             return replacement
         })
@@ -617,8 +590,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public mutating func replaceMatches<C : Collection>(for pattern: LiteralPattern<Iterator.Element>, with replacement: C) where C.Iterator.Element == Self.Iterator.Element {
-        replaceMatches(for: pattern as Pattern<Iterator.Element>, with: replacement)
+    public mutating func replaceMatches<C : Collection>(for pattern: LiteralPattern<Element>, with replacement: C) where C.Element == Self.Element {
+        replaceMatches(for: pattern as Pattern<Element>, with: replacement)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.replaceMatches(for:with:)_]
@@ -627,8 +600,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public mutating func replaceMatches<C : Collection>(for pattern: CompositePattern<Iterator.Element>, with replacement: C) where C.Iterator.Element == Self.Iterator.Element {
-        replaceMatches(for: pattern as Pattern<Iterator.Element>, with: replacement)
+    public mutating func replaceMatches<C : Collection>(for pattern: CompositePattern<Element>, with replacement: C) where C.Element == Self.Element {
+        replaceMatches(for: pattern as Pattern<Element>, with: replacement)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.replaceMatches(for:with:)_]
@@ -637,7 +610,7 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public mutating func replaceMatches<P : Collection, C : Collection>(for pattern: P, with replacement: C) where P.Iterator.Element == Self.Iterator.Element, C.Iterator.Element == Self.Iterator.Element {
+    public mutating func replaceMatches<P : Collection, C : Collection>(for pattern: P, with replacement: C) where P.Element == Self.Element, C.Element == Self.Element {
         replaceMatches(for: LiteralPattern(pattern), with: replacement)
     }
 
@@ -647,7 +620,7 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func replacingMatches<C : Collection>(for pattern: Pattern<Iterator.Element>, with replacement: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    public func replacingMatches<C : Collection>(for pattern: Pattern<Element>, with replacement: C) -> Self where C.Element == Self.Element {
         var result = self
         result.replaceMatches(for: pattern, with: replacement)
         return result
@@ -659,8 +632,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func replacingMatches<C : Collection>(for pattern: LiteralPattern<Iterator.Element>, with replacement: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
-        return replacingMatches(for: pattern as Pattern<Iterator.Element>, with: replacement)
+    public func replacingMatches<C : Collection>(for pattern: LiteralPattern<Element>, with replacement: C) -> Self where C.Element == Self.Element {
+        return replacingMatches(for: pattern as Pattern<Element>, with: replacement)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.replacingMatches(for:with:)_]
@@ -669,8 +642,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func replacingMatches<C : Collection>(for pattern: CompositePattern<Iterator.Element>, with replacement: C) -> Self where C.Iterator.Element == Self.Iterator.Element {
-        return replacingMatches(for: pattern as Pattern<Iterator.Element>, with: replacement)
+    public func replacingMatches<C : Collection>(for pattern: CompositePattern<Element>, with replacement: C) -> Self where C.Element == Self.Element {
+        return replacingMatches(for: pattern as Pattern<Element>, with: replacement)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.replacingMatches(for:with:)_]
@@ -679,7 +652,7 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func replacingMatches<P : Collection, C : Collection>(for pattern: P, with replacement: C) -> Self where P.Iterator.Element == Self.Iterator.Element, C.Iterator.Element == Self.Iterator.Element {
+    public func replacingMatches<P : Collection, C : Collection>(for pattern: P, with replacement: C) -> Self where P.Element == Self.Element, C.Element == Self.Element {
         return replacingMatches(for: LiteralPattern(pattern), with: replacement)
     }
 
@@ -689,7 +662,7 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
-    public mutating func mutateMatches<C : Collection>(for pattern: Pattern<Iterator.Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Iterator.Element == Self.Iterator.Element {
+    public mutating func mutateMatches<C : Collection>(for pattern: Pattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
 
         let hits = matches(for: pattern)
         var unaltered = ranges(separatedBy: hits.map({ $0.range }))
@@ -713,8 +686,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
-    public mutating func mutateMatches<C : Collection>(for pattern: LiteralPattern<Iterator.Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Iterator.Element == Self.Iterator.Element {
-        mutateMatches(for: pattern as Pattern<Iterator.Element>, mutation: mutation)
+    public mutating func mutateMatches<C : Collection>(for pattern: LiteralPattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
+        mutateMatches(for: pattern as Pattern<Element>, mutation: mutation)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.mutateMatches(for:mutation:)_]
@@ -723,8 +696,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
-    public mutating func mutateMatches<C : Collection>(for pattern: CompositePattern<Iterator.Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Iterator.Element == Self.Iterator.Element {
-        mutateMatches(for: pattern as Pattern<Iterator.Element>, mutation: mutation)
+    public mutating func mutateMatches<C : Collection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
+        mutateMatches(for: pattern as Pattern<Element>, mutation: mutation)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.mutateMatches(for:mutation:)_]
@@ -733,7 +706,7 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
-    public mutating func mutateMatches<P : Collection, C : Collection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P.Iterator.Element == Self.Iterator.Element, C.Iterator.Element == Self.Iterator.Element {
+    public mutating func mutateMatches<P : Collection, C : Collection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P.Element == Self.Element, C.Element == Self.Element {
         mutateMatches(for: LiteralPattern(pattern), mutation: mutation)
     }
 
@@ -743,7 +716,7 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func mutatingMatches<C : Collection>(for pattern: Pattern<Iterator.Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Iterator.Element == Self.Iterator.Element {
+    public func mutatingMatches<C : Collection>(for pattern: Pattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
         var result = self
         result.mutateMatches(for: pattern, mutation: mutation)
         return result
@@ -755,8 +728,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func mutatingMatches<C : Collection>(for pattern: LiteralPattern<Iterator.Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Iterator.Element == Self.Iterator.Element {
-        return mutatingMatches(for: pattern as Pattern<Iterator.Element>, mutation: mutation)
+    public func mutatingMatches<C : Collection>(for pattern: LiteralPattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
+        return mutatingMatches(for: pattern as Pattern<Element>, mutation: mutation)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.mutatingMatches(for:mutation:)_]
@@ -765,8 +738,8 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func mutatingMatches<C : Collection>(for pattern: CompositePattern<Iterator.Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Iterator.Element == Self.Iterator.Element {
-        return mutatingMatches(for: pattern as Pattern<Iterator.Element>, mutation: mutation)
+    public func mutatingMatches<C : Collection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
+        return mutatingMatches(for: pattern as Pattern<Element>, mutation: mutation)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.mutatingMatches(for:mutation:)_]
@@ -775,7 +748,34 @@ extension RangeReplaceableCollection where SubSequence : Collection, SubSequence
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func mutatingMatches<P : Collection, C : Collection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where P.Iterator.Element == Self.Iterator.Element, C.Iterator.Element == Self.Iterator.Element {
+    public func mutatingMatches<P : Collection, C : Collection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where P.Element == Self.Element, C.Element == Self.Element {
         return mutatingMatches(for: LiteralPattern(pattern), mutation: mutation)
+    }
+}
+
+extension RangeReplaceableCollection where IndexDistance : WholeArithmetic {
+    // MARK: - where IndexDistance : WholeArithmetic
+
+    /// Shuffles the collection.
+    ///
+    /// - Parameters:
+    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    public mutating func shuffle(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) {
+        for i in indices {
+            let originalLocation = distance(from: startIndex, to: i)
+            let newLocation = IndexDistance(randomInRange: 0 ... originalLocation, fromRandomizer: randomizer)
+            let element = remove(at: index(startIndex, offsetBy: originalLocation))
+            insert(element, at: index(startIndex, offsetBy: newLocation))
+        }
+    }
+
+    /// Returns a shuffled collection.
+    ///
+    /// - Parameters:
+    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    public func shuffled(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Self {
+        var result = self
+        result.shuffle(usingRandomizer: randomizer)
+        return result
     }
 }

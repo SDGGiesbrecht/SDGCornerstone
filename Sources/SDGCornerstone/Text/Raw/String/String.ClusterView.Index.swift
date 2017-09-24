@@ -16,13 +16,11 @@ extension String.CharacterView.Index {
 
     // MARK: - Conversions
 
-    /// Returns the position in the given view of lines that corresponds exactly to this index.
-    public func samePosition(in lines: LineView<String>) -> LineView<String>.Index? {
-        return samePosition(in: String(lines).scalars).samePosition(in: lines)
-    }
-
-    /// Returns the position of the line that contains this index.
-    public func line(in lines: LineView<String>) -> LineView<String>.Index {
-        return samePosition(in: String(lines).scalars).line(in: lines)
+    /// Returns the position in the given view of scalars that corresponds exactly to this index.
+    public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
+        guard let result = samePosition(in: scalars) as String.ScalarView.Index? else {
+            unreachable()
+        }
+        return result
     }
 }

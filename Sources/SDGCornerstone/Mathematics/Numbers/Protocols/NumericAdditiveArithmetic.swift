@@ -34,7 +34,7 @@ postfix operator |
 
 /// A one‐dimensional value that can be added and subtracted.
 ///
-/// - Note: Unlike `WholeArithmetic`, `NumericAdditiveArithmetic` does not need a defined scale, allowing conformance by measurements that can use multiple units.
+/// - Note: Unlike `WholeArithmetic` or `Swift.Numeric`, `NumericAdditiveArithmetic` does not need a defined scale, allowing conformance by measurements that can use multiple units.
 ///
 /// Conformance Requirements:
 ///
@@ -156,7 +156,7 @@ extension NumericAdditiveArithmetic where Self : FloatFamily {
     ///
     /// - MutatingVariant: formAbsoluteValue
     public var absoluteValue: Self {
-        return Self.abs(self)
+        return abs(self)
     }
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
@@ -164,7 +164,7 @@ extension NumericAdditiveArithmetic where Self : FloatFamily {
     ///
     /// - NonmutatingVariant: |
     public mutating func formAbsoluteValue() {
-        self = Self.abs(self)
+        self = abs(self)
     }
 }
 
@@ -176,7 +176,7 @@ extension NumericAdditiveArithmetic where Self : IntFamily {
     ///
     /// - MutatingVariant: formAbsoluteValue
     public var absoluteValue: Self {
-        return Swift.abs(self)
+        return abs(self)
     }
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
@@ -184,7 +184,7 @@ extension NumericAdditiveArithmetic where Self : IntFamily {
     ///
     /// - NonmutatingVariant: |
     public mutating func formAbsoluteValue() {
-        self = Swift.abs(self)
+        self = abs(self)
     }
 }
 

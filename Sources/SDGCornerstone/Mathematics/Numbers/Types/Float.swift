@@ -18,13 +18,15 @@ import Foundation
 #endif
 
 #if os(macOS) || os(Linux)
+    /// The member of the `Float` family with the largest bit field.
     public typealias FloatMax = Float80
 #else
+    /// The member of the `Float` family with the largest bit field.
     public typealias FloatMax = Double
 #endif
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
-public protocol FloatFamily : Addable, AdditiveArithmetic, BinaryFloatingPoint, CustomDebugStringConvertible, IntegralArithmetic, Hashable, LosslessStringConvertible, Negatable, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, PointProtocol, RationalArithmetic, RealNumberProtocol, Subtractable, WholeArithmetic {
+public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
 
     // [_Define Documentation: SDGCornerstone.FloatFamily.init(_:)_]
     /// Creates a new value, rounded to the closest possible representation.

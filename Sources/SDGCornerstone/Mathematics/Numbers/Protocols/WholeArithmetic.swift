@@ -95,7 +95,7 @@ infix operator ↑=: AssignmentPrecedence
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
 /// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (lhs: inout Self, rhs: Self)`
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
-public protocol WholeArithmetic : ExpressibleByIntegerLiteral, ExpressibleByTextLiterals, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, Strideable {
+public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, Numeric {
 
     // MARK: - Initialization
 
@@ -355,7 +355,7 @@ extension WholeArithmetic {
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
     public init<U : UIntFamily>(_ uInt: U) {
-        self.init(uInt.toUIntMax())
+        self.init(UIntMax(uInt))
     }
 
     /// Creates an instance from a decimal representation.
@@ -492,7 +492,7 @@ extension WholeArithmetic {
         for character in representation.reversed() {
             if let digit = digitMapping[character], digit < base {
                 self += (base ↑ position) × digit
-                position += 1
+                position += 1 as Self
             } else {
                 assert(character ∈ formattingSeparators, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                     switch localization {
@@ -597,7 +597,7 @@ extension WholeArithmetic {
         } else if other == 0 /* finished */ {
             // self = self
         } else {
-            self = gcd(other, mod(other))
+            self = Self.gcd(other, mod(other))
         }
     }
 
@@ -623,7 +623,7 @@ extension WholeArithmetic {
     ///
     /// - NonmutatingVariant: lcm
     public mutating func formLeastCommonMultiple(with other: Self) {
-        self ×= other.dividedAccordingToEuclid(by: gcd(self, other))
+        self ×= other.dividedAccordingToEuclid(by: Self.gcd(self, other))
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑_]
@@ -840,7 +840,7 @@ extension WholeArithmetic {
             }
             digits.append(character)
 
-            position += 1
+            position += 1 as Self
         }
 
         if digits.isEmpty {
@@ -1378,6 +1378,11 @@ public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.lcm(a, b)
 }
 
+extension FloatingPoint {
+    fileprivate func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
+        return rounded(rule)
+    }
+}
 extension WholeArithmetic where Self : FloatFamily {
     // MARK: - where Self : FloatFamily
 
@@ -1476,7 +1481,7 @@ extension WholeArithmetic where Self : FloatFamily {
 
                 e_r += numerator ÷ denominator
 
-                n += 1
+                n += 1 as Self
                 numerator ×= r
                 denominator ×= n
 
@@ -1487,6 +1492,17 @@ extension WholeArithmetic where Self : FloatFamily {
         } else {
             lhs = e ↑ (rhs × ln(lhs))
         }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
+    /// Returns the point with its co‐ordinates rounded to an integral value using the specified rounding rule.
+    ///
+    /// - Parameters:
+    ///     - rule: The rounding rule follow.
+    ///
+    /// - MutatingVariant: round
+    public func rounded(_ rule: RoundingRule) -> Self {
+        return roundedAsFloatingPoint(rule)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
@@ -1615,7 +1631,7 @@ extension WholeArithmetic where Self : IntFamily {
         self /= divisor
 
         if needsToWrapToPrevious {
-            self −= 1
+            self −= 1 as Self
         }
     }
 
@@ -1638,7 +1654,7 @@ extension WholeArithmetic where Self : IntFamily {
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
     public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
-        let value = Int64(randomInRange: range.lowerBound.toIntMax() ... range.upperBound.toIntMax(), fromRandomizer: randomizer)
+        let value = Int64(randomInRange: IntMax(range.lowerBound) ... IntMax(range.upperBound), fromRandomizer: randomizer)
         self.init(value)
     }
 }
@@ -1835,7 +1851,7 @@ extension WholeArithmetic where Self : UIntFamily {
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
     public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
-        let value = UIntMax(randomInRange: range.lowerBound.toUIntMax() ... range.upperBound.toUIntMax(), fromRandomizer: randomizer)
+        let value = UIntMax(randomInRange: UIntMax(range.lowerBound) ... UIntMax(range.upperBound), fromRandomizer: randomizer)
         self.init(value)
     }
 }

@@ -54,7 +54,7 @@ public struct GregorianDay : ConsistentDurationCalendarComponent, Day, ICalendar
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
-    public typealias Vector = RawValue
+    public typealias Vector = Int
 
     // MARK: - RawRepresentableCalendarComponent
 
@@ -68,7 +68,7 @@ public struct GregorianDay : ConsistentDurationCalendarComponent, Day, ICalendar
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
     /// The valid range for raw values.
-    public static let validRange: Range<Int>? = 1 ..< GregorianMonth.maximumNumberOfDays + 1
+    public static let validRange: Range<RawValue>? = 1 ..< GregorianMonth.maximumNumberOfDays + 1
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
     /// The raw value.

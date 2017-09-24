@@ -1,5 +1,5 @@
 /*
- StrictString.ClusterView.Index.swift
+ SignedNumeric.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,12 +12,16 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String.Index {
+extension SignedNumeric where Self : Negatable {
+    // MARK: - where Self : Negatable
 
-    // MARK: - Conversions
+    /// Returns the additive inverse of the specified value.
+    public static prefix func -(operand: Self) -> Self {
+        return −operand
+    }
 
-    /// Returns the position in the given view of scalars that corresponds exactly to this index.
-    public func samePosition(in scalars: StrictString) -> StrictString.Index {
-        return samePosition(in: String(StrictString(scalars)).scalars)
+    /// Replaces this value with its additive inverse.
+    public mutating func negate() {
+        self−=
     }
 }

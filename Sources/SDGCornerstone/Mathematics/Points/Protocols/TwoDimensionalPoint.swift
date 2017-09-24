@@ -16,21 +16,23 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `var x: Vector.Scalar { get set }`
-/// - `var y: Vector.Scalar { get set }`
-public protocol TwoDimensionalPoint : PointProtocol {
+/// - `var x: Scalar { get set }`
+/// - `var y: Scalar { get set }`
+public protocol TwoDimensionalPoint : PointProtocol
+/*where Vector : TwoDimensionalVector*/ {
+    // [_Workaround: The above line causes an abort trap. (Swift 4.0)_]
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.Vector_]
-    /// The vector type.
-    associatedtype Vector : TwoDimensionalVector
+    //typealias Scalar = Vector.Scalar
+    // [_Workaround: Related to the workaround at the top of the file. (Swift 4.0)_]
+    associatedtype Scalar
 
     // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.x_]
     /// The *x* co‐ordinate.
-    var x: Vector.Scalar { get set }
+    var x: Scalar { get set }
 
     // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.y_]
     /// The *y* co‐ordinate.
-    var y: Vector.Scalar { get set }
+    var y: Scalar { get set }
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
     /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
@@ -58,7 +60,7 @@ public protocol TwoDimensionalPoint : PointProtocol {
     ///     - factor: The factor to round to a multiple of.
     ///
     /// - NonmutatingVariant: rounded
-    mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Vector.Scalar)
+    mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:)_]
     /// Returns the point with its co‐ordinates rounded to a multiple of `factor` using the specified rounding rule.
@@ -68,10 +70,10 @@ public protocol TwoDimensionalPoint : PointProtocol {
     ///     - factor: The factor to round to a multiple of.
     ///
     /// - MutatingVariant: round
-    func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Vector.Scalar) -> Self
+    func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar) -> Self
 }
 
-extension TwoDimensionalPoint {
+extension TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar {
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
     /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
@@ -106,7 +108,7 @@ extension TwoDimensionalPoint {
     ///     - factor: The factor to round to a multiple of.
     ///
     /// - NonmutatingVariant: rounded
-    public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar) {
+    public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) {
         x.round(rule, toMultipleOf: factor)
         y.round(rule, toMultipleOf: factor)
     }
@@ -119,7 +121,7 @@ extension TwoDimensionalPoint {
     ///     - factor: The factor to round to a multiple of.
     ///
     /// - MutatingVariant: round
-    public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar) -> Self {
+    public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) -> Self {
         var result = self
         result.round(rule, toMultipleOf: factor)
         return result

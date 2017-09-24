@@ -22,7 +22,7 @@
 ///
 /// - `init(rawValue: Scalar)`
 /// - `var rawValue: Scalar { get set }`
-public protocol Measurement : Addable, Comparable, Equatable, Negatable, NumericAdditiveArithmetic {
+public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // MARK: - Scalar Type
 
@@ -180,7 +180,7 @@ public protocol Measurement : Addable, Comparable, Equatable, Negatable, Numeric
     // MARK: - Rounding
 
     /// A rule for rounding.
-    typealias RoundingRule = FloatingPointRoundingRule
+    typealias RoundingRule = WholeArithmetic.RoundingRule
 
     // [_Define Documentation: SDGCornerstone.Measurement.round(_:toMultipleOf:)_]
     /// Rounds the value to a multiple of `factor` using the specified rounding rule.

@@ -14,7 +14,7 @@
 
 // MARK: - Build Configuration
 
-/// A build configuration
+/// A build configuration.
 public enum BuildConfiguration {
 
     // MARK: - Initialization

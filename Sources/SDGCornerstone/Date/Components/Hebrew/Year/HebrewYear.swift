@@ -94,7 +94,7 @@ public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarCo
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
-    public typealias Vector = RawValue
+    public typealias Vector = Int
 
     // MARK: - RawRepresentableCalendarComponent
 
@@ -108,11 +108,11 @@ public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarCo
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
     /// The valid range for raw values.
-    public static let validRange: Range<Int>? = nil
+    public static let validRange: Range<RawValue>? = nil
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
     /// The raw value.
-    public var rawValue: Int {
+    public var rawValue: RawValue {
         return year
     }
 

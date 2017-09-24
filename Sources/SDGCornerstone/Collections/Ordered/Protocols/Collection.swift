@@ -75,8 +75,8 @@ extension Collection {
     }
 }
 
-extension Collection where Iterator.Element : Equatable {
-    // MARK: - where Iterator.Element : Equatable
+extension Collection where Element : Equatable {
+    // MARK: - where Element : Equatable
 
     // [_Define Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
     /// Returns the first match for `pattern` in the specified subrange.
@@ -84,7 +84,7 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+    public func firstMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         let searchArea = searchRange ?? bounds
 
         var i = searchArea.lowerBound
@@ -103,8 +103,8 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: LiteralPattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
-        return firstMatch(for: pattern as Pattern<Iterator.Element>, in: searchRange)
+    public func firstMatch(for pattern: LiteralPattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+        return firstMatch(for: pattern as Pattern<Element>, in: searchRange)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
@@ -113,8 +113,8 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: CompositePattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
-        return firstMatch(for: pattern as Pattern<Iterator.Element>, in: searchRange)
+    public func firstMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+        return firstMatch(for: pattern as Pattern<Element>, in: searchRange)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
@@ -123,7 +123,7 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+    public func firstMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Element == Self.Element {
         return firstMatch(for: LiteralPattern(pattern), in: searchRange)
     }
 
@@ -135,7 +135,7 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func matches(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+    public func matches(for pattern: Pattern<Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
         let searchArea = searchRange ?? bounds
 
         var accountedFor = searchArea.lowerBound
@@ -155,8 +155,8 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func matches(for pattern: LiteralPattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
-        return matches(for: pattern as Pattern<Iterator.Element>, in: searchRange)
+    public func matches(for pattern: LiteralPattern<Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+        return matches(for: pattern as Pattern<Element>, in: searchRange)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
@@ -167,8 +167,8 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func matches(for pattern: CompositePattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
-        return matches(for: pattern as Pattern<Iterator.Element>, in: searchRange)
+    public func matches(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+        return matches(for: pattern as Pattern<Element>, in: searchRange)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
@@ -179,7 +179,7 @@ extension Collection where Iterator.Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func matches<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] where C.Iterator.Element == Self.Iterator.Element {
+    public func matches<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] where C.Element == Self.Element {
         return matches(for: LiteralPattern(pattern), in: searchRange)
     }
 
@@ -188,7 +188,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix(upTo pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+    public func prefix(upTo pattern: Pattern<Element>) -> PatternMatch<Self>? {
         guard let match = firstMatch(for: pattern) else {
             return nil
         }
@@ -200,8 +200,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix(upTo pattern: LiteralPattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return prefix(upTo: pattern as Pattern<Iterator.Element>)
+    public func prefix(upTo pattern: LiteralPattern<Element>) -> PatternMatch<Self>? {
+        return prefix(upTo: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
@@ -209,8 +209,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix(upTo pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return prefix(upTo: pattern as Pattern<Iterator.Element>)
+    public func prefix(upTo pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+        return prefix(upTo: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
@@ -218,7 +218,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix<C : Collection>(upTo pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+    public func prefix<C : Collection>(upTo pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
         return prefix(upTo: LiteralPattern(pattern))
     }
 
@@ -227,7 +227,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix(through pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+    public func prefix(through pattern: Pattern<Element>) -> PatternMatch<Self>? {
         guard let match = firstMatch(for: pattern) else {
             return nil
         }
@@ -239,8 +239,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix(through pattern: LiteralPattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return prefix(through: pattern as Pattern<Iterator.Element>)
+    public func prefix(through pattern: LiteralPattern<Element>) -> PatternMatch<Self>? {
+        return prefix(through: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
@@ -248,8 +248,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix(through pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return prefix(through: pattern as Pattern<Iterator.Element>)
+    public func prefix(through pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+        return prefix(through: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
@@ -257,7 +257,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix<C : Collection>(through pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+    public func prefix<C : Collection>(through pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
         return prefix(through: LiteralPattern(pattern))
     }
 
@@ -266,7 +266,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(from pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+    public func suffix(from pattern: Pattern<Element>) -> PatternMatch<Self>? {
         guard let match = firstMatch(for: pattern) else {
             return nil
         }
@@ -278,8 +278,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(from pattern: LiteralPattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return suffix(from: pattern as Pattern<Iterator.Element>)
+    public func suffix(from pattern: LiteralPattern<Element>) -> PatternMatch<Self>? {
+        return suffix(from: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
@@ -287,8 +287,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(from pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return suffix(from: pattern as Pattern<Iterator.Element>)
+    public func suffix(from pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+        return suffix(from: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
@@ -296,7 +296,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix<C : Collection>(from pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+    public func suffix<C : Collection>(from pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
         return suffix(from: LiteralPattern(pattern))
     }
 
@@ -305,7 +305,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(after pattern: Pattern<Iterator.Element>) -> PatternMatch<Self>? {
+    public func suffix(after pattern: Pattern<Element>) -> PatternMatch<Self>? {
         guard let match = firstMatch(for: pattern) else {
             return nil
         }
@@ -317,8 +317,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(after pattern: LiteralPattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return suffix(after: pattern as Pattern<Iterator.Element>)
+    public func suffix(after pattern: LiteralPattern<Element>) -> PatternMatch<Self>? {
+        return suffix(after: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
@@ -326,8 +326,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(after pattern: CompositePattern<Iterator.Element>) -> PatternMatch<Self>? {
-        return suffix(after: pattern as Pattern<Iterator.Element>)
+    public func suffix(after pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+        return suffix(after: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
@@ -335,7 +335,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix<C : Collection>(after pattern: C) -> PatternMatch<Self>? where C.Iterator.Element == Self.Iterator.Element {
+    public func suffix<C : Collection>(after pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
         return suffix(after: LiteralPattern(pattern))
     }
 
@@ -351,7 +351,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func components(separatedBy pattern: Pattern<Iterator.Element>) -> [PatternMatch<Self>] {
+    public func components(separatedBy pattern: Pattern<Element>) -> [PatternMatch<Self>] {
         let separators = matches(for: pattern).map() { $0.range }
         return ranges(separatedBy: separators).map({ PatternMatch(range: $0, in: self) })
     }
@@ -361,8 +361,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func components(separatedBy pattern: LiteralPattern<Iterator.Element>) -> [PatternMatch<Self>] {
-        return components(separatedBy: pattern as Pattern<Iterator.Element>)
+    public func components(separatedBy pattern: LiteralPattern<Element>) -> [PatternMatch<Self>] {
+        return components(separatedBy: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
@@ -370,8 +370,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func components(separatedBy pattern: CompositePattern<Iterator.Element>) -> [PatternMatch<Self>] {
-        return components(separatedBy: pattern as Pattern<Iterator.Element>)
+    public func components(separatedBy pattern: CompositePattern<Element>) -> [PatternMatch<Self>] {
+        return components(separatedBy: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
@@ -379,7 +379,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func components<C : Collection>(separatedBy pattern: C) -> [PatternMatch<Self>] where C.Iterator.Element == Self.Iterator.Element {
+    public func components<C : Collection>(separatedBy pattern: C) -> [PatternMatch<Self>] where C.Element == Self.Element {
         return components(separatedBy: LiteralPattern(pattern))
     }
 
@@ -388,7 +388,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func contains(_ pattern: Pattern<Iterator.Element>) -> Bool {
+    public func contains(_ pattern: Pattern<Element>) -> Bool {
         return firstMatch(for: pattern) ≠ nil
     }
 
@@ -397,8 +397,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func contains(_ pattern: LiteralPattern<Iterator.Element>) -> Bool {
-        return contains(pattern as Pattern<Iterator.Element>)
+    public func contains(_ pattern: LiteralPattern<Element>) -> Bool {
+        return contains(pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
@@ -406,8 +406,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func contains(_ pattern: CompositePattern<Iterator.Element>) -> Bool {
-        return contains(pattern as Pattern<Iterator.Element>)
+    public func contains(_ pattern: CompositePattern<Element>) -> Bool {
+        return contains(pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
@@ -415,7 +415,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func contains<C : Collection>(_ pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
+    public func contains<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return contains(LiteralPattern(pattern))
     }
 
@@ -424,7 +424,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasPrefix(_ pattern: Pattern<Iterator.Element>) -> Bool {
+    public func hasPrefix(_ pattern: Pattern<Element>) -> Bool {
         return pattern.primaryMatch(in: self, at: startIndex) ≠ nil
     }
 
@@ -433,8 +433,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasPrefix(_ pattern: LiteralPattern<Iterator.Element>) -> Bool {
-        return hasPrefix(pattern as Pattern<Iterator.Element>)
+    public func hasPrefix(_ pattern: LiteralPattern<Element>) -> Bool {
+        return hasPrefix(pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
@@ -442,8 +442,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasPrefix(_ pattern: CompositePattern<Iterator.Element>) -> Bool {
-        return hasPrefix(pattern as Pattern<Iterator.Element>)
+    public func hasPrefix(_ pattern: CompositePattern<Element>) -> Bool {
+        return hasPrefix(pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
@@ -451,7 +451,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasPrefix<C : Collection>(_ pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
+    public func hasPrefix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return hasPrefix(LiteralPattern(pattern))
     }
 
@@ -460,7 +460,7 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasSuffix(_ pattern: Pattern<Iterator.Element>) -> Bool {
+    public func hasSuffix(_ pattern: Pattern<Element>) -> Bool {
         let backwards = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
@@ -470,8 +470,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasSuffix(_ pattern: LiteralPattern<Iterator.Element>) -> Bool {
-        return hasSuffix(pattern as Pattern<Iterator.Element>)
+    public func hasSuffix(_ pattern: LiteralPattern<Element>) -> Bool {
+        return hasSuffix(pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
@@ -479,8 +479,8 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasSuffix(_ pattern: CompositePattern<Iterator.Element>) -> Bool {
-        return hasSuffix(pattern as Pattern<Iterator.Element>)
+    public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
+        return hasSuffix(pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
@@ -488,73 +488,16 @@ extension Collection where Iterator.Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
+    public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return hasSuffix(LiteralPattern(pattern))
     }
-
-    // [_Define Documentation: SDGCornerstone.Collection.advance(_: over:)_]
-    /// Advances the index over the pattern.
-    ///
-    /// - Parameters:
-    ///     - index: The index to advance.
-    ///     - pattern: The pattern to advance over.
-    ///
-    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
-    @discardableResult public func advance(_ index: inout Index, over pattern: Pattern<Iterator.Element>) -> Bool {
-        if let match = pattern.primaryMatch(in: self, at: index) {
-            index = match.upperBound
-            return true
-        } else {
-            return false
-        }
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
-    /// Advances the index over the pattern.
-    ///
-    /// - Parameters:
-    ///     - index: The index to advance.
-    ///     - pattern: The pattern to advance over.
-    ///
-    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
-    @discardableResult public func advance(_ index: inout Index, over pattern: LiteralPattern<Iterator.Element>) -> Bool {
-        return advance(&index, over: pattern as Pattern<Iterator.Element>)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
-    /// Advances the index over the pattern.
-    ///
-    /// - Parameters:
-    ///     - index: The index to advance.
-    ///     - pattern: The pattern to advance over.
-    ///
-    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
-    @discardableResult public func advance(_ index: inout Index, over pattern: CompositePattern<Iterator.Element>) -> Bool {
-        return advance(&index, over: pattern as Pattern<Iterator.Element>)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
-    /// Advances the index over the pattern.
-    ///
-    /// - Parameters:
-    ///     - index: The index to advance.
-    ///     - pattern: The pattern to advance over.
-    ///
-    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
-    @discardableResult public func advance<C : Collection>(_ index: inout Index, over pattern: C) -> Bool where C.Iterator.Element == Self.Iterator.Element {
-        return advance(&index, over: LiteralPattern(pattern))
-    }
-}
-
-extension Collection where Iterator.Element : Equatable, Indices.Iterator.Element == Index {
-    // MARK: - where Iterator.Element : Equatable, Indices.Iterator.Element == Index
 
     // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
     ///     - other: The other collection
-    public func commonPrefix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Iterator.Element == Self.Iterator.Element, C.Indices.Iterator.Element == C.Index {
+    public func commonPrefix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         var end: Index = startIndex
         for (ownIndex, otherIndex) in zip(indices, other.indices) {
             if self[ownIndex] == other[otherIndex] {
@@ -565,10 +508,6 @@ extension Collection where Iterator.Element : Equatable, Indices.Iterator.Elemen
         }
         return PatternMatch(range: startIndex ..< end, in: self)
     }
-}
-
-extension Collection where Iterator.Element : Equatable, SubSequence.Iterator.Element == Iterator.Element {
-    // MARK: - where Iterator.Element : Equatable, SubSequence.Iterator.Element == Iterator.Element
 
     // [_Example 1: Nesting Level_]
     /// Returns the first nesting level found in the specified range.
@@ -585,7 +524,7 @@ extension Collection where Iterator.Element : Equatable, SubSequence.Iterator.El
     /// print(String(nestingLevel.contents.contents))
     /// // Prints “3x − (y + 4)”
     /// ```
-    public func firstNestingLevel<C : Collection, D : Collection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? where C.Iterator.Element == Iterator.Element, D.Iterator.Element == Iterator.Element {
+    public func firstNestingLevel<C : Collection, D : Collection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
         var searchArea = searchRange ?? bounds
 
         guard let start = firstMatch(for: LiteralPattern(openingToken), in: searchArea)?.range else {
@@ -613,6 +552,83 @@ extension Collection where Iterator.Element : Equatable, SubSequence.Iterator.El
         // No more hits, level never closed.
         return nil
     }
+
+    // [_Define Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance(_ index: inout Index, over pattern: Pattern<Element>) -> Bool {
+        if let match = pattern.primaryMatch(in: self, at: index) {
+            index = match.upperBound
+            return true
+        } else {
+            return false
+        }
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance(_ index: inout Index, over pattern: LiteralPattern<Element>) -> Bool {
+        return advance(&index, over: pattern as Pattern<Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance(_ index: inout Index, over pattern: CompositePattern<Element>) -> Bool {
+        return advance(&index, over: pattern as Pattern<Element>)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance<C : Collection>(_ index: inout Index, over pattern: C) -> Bool where C.Element == Self.Element {
+        return advance(&index, over: LiteralPattern(pattern))
+    }
+}
+
+extension Collection where Element : Hashable, Index : Hashable {
+    // MARK: - where Element: Hashable, Index : Hashable
+
+    /// Returns the collection as a `BjectiveMapping` between the indices and values.
+    ///
+    /// - Requires: No values are repeated.
+    public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
+        return BijectiveMapping(indexMapping)
+    }
+}
+
+extension Collection where Index : Hashable {
+    // MARK: - where Index : Hashable
+
+    /// Returns the collection as a `Dictionary`, with the collection’s indices used as keys.
+    public var indexMapping: [Index: Element] {
+        var mapping: [Index: Element] = [:]
+        for index in indices {
+            mapping[index] = self[index]
+        }
+        return mapping
+    }
 }
 
 extension Collection where IndexDistance : WholeArithmetic {
@@ -631,37 +647,13 @@ extension Collection where IndexDistance : WholeArithmetic {
     ///
     /// - Parameters:
     ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    public func randomElement(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Iterator.Element {
+    public func randomElement(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Element {
         return self[randomIndex(fromRandomizer: randomizer)]
     }
 }
 
-extension Collection where Index : Hashable, Indices.Iterator.Element == Index {
-    // MARK: - where Index : Hashable, Indices.Iterator.Element == Index
-
-    /// Returns the collection as a `Dictionary`, with the collection’s indices used as keys.
-    public var indexMapping: [Index: Iterator.Element] {
-        var mapping: [Index: Iterator.Element] = [:]
-        for index in indices {
-            mapping[index] = self[index]
-        }
-        return mapping
-    }
-}
-
-extension Collection where Index : Hashable, Iterator.Element : Hashable, Indices.Iterator.Element == Index {
-    // MARK: - where Index : Hashable, Iterator.Element: Hashable, Indices.Iterator.Element == Index
-
-    /// Returns the collection as a `BjectiveMapping` between the indices and values.
-    ///
-    /// - Requires: No values are repeated.
-    public var bijectiveIndexMapping: BijectiveMapping<Index, Iterator.Element> {
-        return BijectiveMapping(indexMapping)
-    }
-}
-
-extension Collection where Iterator.Element == UnicodeScalar {
-    // MARK: - where Iterator.Element == UnicodeScalar
+extension Collection where Element == UnicodeScalar {
+    // MARK: - where Element == UnicodeScalar
 
     // [_Inherit Documentation: SDGCornerstone.String.isMultiline_]
     /// Whether or not the string contains multiple lines.

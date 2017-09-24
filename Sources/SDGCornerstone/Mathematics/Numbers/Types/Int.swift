@@ -12,13 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+/// The member of the `Int` family with the largest bit field.
+public typealias IntMax = Int64
+
 /// A member of the `Int` family: `Int`, `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntFamily : Addable, AdditiveArithmetic, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, IntegerProtocol, IntegralArithmetic, MirrorPath, Negatable, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, PointProtocol, PropertyListValue, SignedInteger, Subtractable, WholeArithmetic {
-
-}
-
-/// A member of the `Int` family with a fixed length: `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntXFamily : IntFamily {
+public protocol IntFamily : CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol, MirrorPath, PropertyListValue, SignedInteger {
 
 }
 
@@ -31,7 +29,7 @@ extension Int : IntFamily {
     public typealias Vector = Stride
 }
 
-extension Int64 : IntXFamily {
+extension Int64 : IntFamily {
 
     // MARK: - PointProtocol
 
@@ -63,7 +61,7 @@ extension Int64 : IntXFamily {
 
 }
 
-extension Int32 : IntXFamily {
+extension Int32 : IntFamily {
 
     // MARK: - PointProtocol
 
@@ -73,7 +71,7 @@ extension Int32 : IntXFamily {
 
 }
 
-extension Int16 : IntXFamily {
+extension Int16 : IntFamily {
 
     // MARK: - PointProtocol
 
@@ -83,7 +81,7 @@ extension Int16 : IntXFamily {
 
 }
 
-extension Int8 : IntXFamily {
+extension Int8 : IntFamily {
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.

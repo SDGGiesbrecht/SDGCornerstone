@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// An enumeration whose cases can be iterated over.
+/// An enumeration whose cases have a defined order.
 ///
 /// Conformance Requirements:
 ///
@@ -62,8 +62,7 @@ public protocol OrderedEnumeration : Comparable, IterableEnumeration {
     func cyclicPredecessor() -> Self
 }
 
-extension OrderedEnumeration where RawValue.Vector : IntegerProtocol {
-    // MARK: - where RawValue.Vector : IntegerProtocol
+extension OrderedEnumeration {
 
     fileprivate mutating func incrementAsOrderedEnumeration() {
         guard let result = successor() else {
@@ -164,8 +163,8 @@ extension OrderedEnumeration where RawValue.Vector : IntegerProtocol {
 }
 
 // Disambiguate OneDimensionalPoint vs OrderedEnumeration for calendar components.
-extension OrderedEnumeration where Self : OneDimensionalPoint, RawValue.Vector : IntegerProtocol, Self.Vector : IntegerProtocol {
-    // MARK: - where where Self : OneDimensionalPoint, RawValue.Vector : IntegerProtocol, Self.Vector : IntegerProtocol
+extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol {
+    // MARK: - where where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.increment()_]
     /// Increments to the next case.

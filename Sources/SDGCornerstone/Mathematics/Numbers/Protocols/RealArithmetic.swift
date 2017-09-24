@@ -730,7 +730,7 @@ public func ln<N : RealArithmetic>(_ antilogarithm: N) -> N {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-public func sin<N : RealArithmetic>(_ angle: Angle<N>) -> N {
+public func sin<N>(_ angle: Angle<N>) -> N {
     return N.sin(angle)
 }
 
@@ -739,7 +739,7 @@ public func sin<N : RealArithmetic>(_ angle: Angle<N>) -> N {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-public func cos<N : RealArithmetic>(_ angle: Angle<N>) -> N {
+public func cos<N>(_ angle: Angle<N>) -> N {
     return N.cos(angle)
 }
 
@@ -748,7 +748,7 @@ public func cos<N : RealArithmetic>(_ angle: Angle<N>) -> N {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-public func tan<N : RealArithmetic>(_ angle: Angle<N>) -> N {
+public func tan<N>(_ angle: Angle<N>) -> N {
     return N.tan(angle)
 }
 
@@ -757,7 +757,7 @@ public func tan<N : RealArithmetic>(_ angle: Angle<N>) -> N {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-public func csc<N : RealArithmetic>(_ angle: Angle<N>) -> N {
+public func csc<N>(_ angle: Angle<N>) -> N {
     return N.csc(angle)
 }
 
@@ -766,7 +766,7 @@ public func csc<N : RealArithmetic>(_ angle: Angle<N>) -> N {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-public func sec<N : RealArithmetic>(_ angle: Angle<N>) -> N {
+public func sec<N>(_ angle: Angle<N>) -> N {
     return N.sec(angle)
 }
 
@@ -775,7 +775,7 @@ public func sec<N : RealArithmetic>(_ angle: Angle<N>) -> N {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-public func cot<N : RealArithmetic>(_ angle: Angle<N>) -> N {
+public func cot<N>(_ angle: Angle<N>) -> N {
     return N.cot(angle)
 }
 
@@ -938,7 +938,7 @@ extension RealArithmetic where Self : FloatFamily {
             //    b         x         x
 
             formNaturalLogarithm()
-            self ÷= ln(base)
+            self ÷= Self.ln(base)
         }
     }
 
@@ -982,7 +982,7 @@ extension RealArithmetic where Self : FloatFamily {
                     }
                     self += term
 
-                    n += 1
+                    n += 1 as Self
                     negative¬=
                     numerator ×= sMinusOne
 
@@ -1040,7 +1040,7 @@ extension RealArithmetic where Self : FloatFamily {
 
                     let multiplicationStep = {
                         numerator ×= angle.inRadians
-                        _2n_m_1 += 1
+                        _2n_m_1 += 1 as Self
                         denominator ×= _2n_m_1
                     }
                     multiplicationStep()
@@ -1100,7 +1100,7 @@ extension RealArithmetic where Self : FloatFamily {
 
                     let multiplicationStep = {
                         numerator ×= angle.inRadians
-                        _2n += 1
+                        _2n += 1 as Self
                         denominator ×= _2n
                     }
                     multiplicationStep()
@@ -1152,7 +1152,7 @@ extension RealArithmetic where Self : FloatFamily {
 
                 negative¬=
                 numerator ×= x_2
-                denominator += 2
+                denominator += 2 as Self
 
             } while result ≠ lastApproximate
 

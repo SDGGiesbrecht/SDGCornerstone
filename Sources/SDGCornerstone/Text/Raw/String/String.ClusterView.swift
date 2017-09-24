@@ -12,14 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String {
-
-    // [_Workaround: Compiler bugs prevent referencing this typealias. When this is fixed, all references to String.CharacterView should be switched to String.ClusterView. (Swift 3.1.0)_]
-
-    /// A view of a string's contents as a collection of extended grapheme clusters.
-    public typealias ClusterView = CharacterView
-}
-
-extension String.CharacterView : ExtendedGraphemeClusterView {
+extension String : ExtendedGraphemeClusterView {
 
 }

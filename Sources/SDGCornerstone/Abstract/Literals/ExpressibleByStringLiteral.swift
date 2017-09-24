@@ -16,4 +16,20 @@ extension ExpressibleByStringLiteral {
 
     // [_Define Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
     /// Creates an instance from a string literal.
+    ///
+    /// - Parameters:
+    ///     - stringLiteral: The string literal.
+}
+
+extension ExpressibleByStringLiteral where Self : WholeArithmetic {
+    // MARK: - where Self : WholeArithmetic
+
+    // [_Inherit Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
+    /// Creates an instance from a string literal.
+    ///
+    /// - Parameters:
+    ///     - stringLiteral: The string literal.
+    public init(stringLiteral: String) {
+        self.init(StrictString(stringLiteral))
+    }
 }

@@ -14,7 +14,7 @@
 
 import Foundation
 
-extension Data : BitwiseLogic, FileConvertible, PropertyListValue {
+extension Data : BitField, FileConvertible, PropertyListValue {
 
     // MARK: - Properties
 
@@ -97,10 +97,4 @@ extension Data : BitwiseLogic, FileConvertible, PropertyListValue {
     public var file: Data {
         return self
     }
-
-    // MARK: - BitwiseOperations
-
-    // [_Inherit Documentation: SDGCornerstone.BitwiseOperations.allZeros_]
-    /// An instance with all its bits set to zero.
-    public static let allZeros = Data()
 }

@@ -157,6 +157,17 @@ public struct WholeNumber : Addable, Comparable, Equatable, Hashable, PointProto
         return digits.first?.hashValue ?? 0
     }
 
+    // MARK: - Numeric
+
+    // [_Inherit Documentation: SDGCornerstone.Numeric.init(exactly:)_]
+    /// Creates a new instance from the given integer, if it can be represented exactly.
+    public init?<T>(exactly source: T) where T : BinaryInteger {
+        guard let whole = UIntMax(exactly: source) else {
+            return nil // Source could be a negative integer.
+        }
+        self.init(whole)
+    }
+
     // MARK: - PointProtocol
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
@@ -173,9 +184,9 @@ public struct WholeNumber : Addable, Comparable, Equatable, Hashable, PointProto
     /// - NonmutatingVariant: +
     public static func += (lhs: inout WholeNumber, rhs: Vector) {
         if rhs.isNegative {
-            lhs −= rhs.magnitude
+            lhs −= rhs.wholeMagnitude
         } else {
-            lhs += rhs.magnitude
+            lhs += rhs.wholeMagnitude
         }
     }
 

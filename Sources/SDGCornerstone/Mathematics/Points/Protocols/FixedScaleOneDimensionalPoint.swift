@@ -13,7 +13,7 @@
  */
 
 /// A one dimensional point with a fixed scale.
-public protocol FixedScaleOneDimensionalPoint : OneDimensionalPoint, Strideable {
+public protocol FixedScaleOneDimensionalPoint : OneDimensionalPoint, Strideable
+where Stride == Vector {
 
-    // [_Workaround: When it is possible to add the restriction Vector == Stride, Vector should no longer need to be specified by each conforming type. (Swift 3.1.0)_]
 }

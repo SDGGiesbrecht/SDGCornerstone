@@ -72,7 +72,7 @@ public struct GregorianHour : CardinalCalendarComponent, ConsistentDurationCalen
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.
-    public typealias Vector = RawValue
+    public typealias Vector = Int
 
     // MARK: - RawRepresentableCalendarComponent
 
@@ -86,11 +86,11 @@ public struct GregorianHour : CardinalCalendarComponent, ConsistentDurationCalen
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
     /// The valid range for raw values.
-    public static let validRange: Range<Int>? = 0 ..< GregorianHour.hoursPerDay
+    public static let validRange: Range<RawValue>? = 0 ..< GregorianHour.hoursPerDay
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
     /// The raw value.
-    public var rawValue: Int {
+    public var rawValue: RawValue {
         return hour
     }
 }

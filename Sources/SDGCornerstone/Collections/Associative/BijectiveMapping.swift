@@ -98,6 +98,6 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:)_]
     /// Creates an instance from a dictionary literal.
     public init(dictionaryLiteral elements: (X, Y)...) {
-        self.init(Dictionary(elements))
+        self.init(Dictionary(uniqueKeysWithValues: elements))
     }
 }

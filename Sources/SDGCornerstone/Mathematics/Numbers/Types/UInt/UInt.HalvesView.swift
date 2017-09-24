@@ -60,7 +60,7 @@
         internal let endIndex: Index = Index(HalvesView.count)
 
         internal func index(after i: Index) -> Index {
-            return i + 1
+            return i + (1 as Index)
         }
 
         internal subscript(index: Index) -> Element {

@@ -20,10 +20,6 @@
 /// - `var Δy : Scalar { get set }`
 public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.Scalar_]
-    /// The scalar type.
-    associatedtype Scalar : RationalArithmetic
-
     // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:)_]
     /// Creates a vector using the specified differences in *x* and *y*.
     init(Δx : Scalar, Δy : Scalar)

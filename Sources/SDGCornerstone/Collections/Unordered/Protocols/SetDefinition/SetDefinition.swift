@@ -205,7 +205,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
-    public static func ∩ <S : SetDefinition>(lhs: Self, rhs: S) -> Intersection<Self, S> where S.Element == Self.Element {
+    public static func ∩ <S : SetDefinition>(lhs: Self, rhs: S) -> Intersection<Self, S> {
         return Intersection(lhs, rhs)
     }
 
@@ -215,7 +215,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
-    public static func ∪ <S : SetDefinition>(lhs: Self, rhs: S) -> Union<Self, S> where S.Element == Self.Element {
+    public static func ∪ <S : SetDefinition>(lhs: Self, rhs: S) -> Union<Self, S> {
         return Union(lhs, rhs)
     }
 
@@ -225,7 +225,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
-    public static func ∖ <S : SetDefinition>(lhs: Self, rhs: S) -> RelativeComplement<Self, S> where S.Element == Self.Element {
+    public static func ∖ <S : SetDefinition>(lhs: Self, rhs: S) -> RelativeComplement<Self, S> {
         return RelativeComplement(of: rhs, in: lhs)
     }
 
@@ -244,7 +244,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - lhs: A set.
     ///     - rhs: Another set.
-    public static func ∆ <S : SetDefinition>(lhs: Self, rhs: S) -> SymmetricDifference<Self, S> where S.Element == Self.Element {
+    public static func ∆ <S : SetDefinition>(lhs: Self, rhs: S) -> SymmetricDifference<Self, S> {
         return SymmetricDifference(lhs, rhs)
     }
 }
