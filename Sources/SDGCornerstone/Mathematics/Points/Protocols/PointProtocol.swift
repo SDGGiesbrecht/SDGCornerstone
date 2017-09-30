@@ -139,7 +139,7 @@ extension /*PointProtocol where Self :*/ ConsistentlyOrderedCalendarComponent wh
     ///
     /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
-        fatalError()//lhs = Self(numberAlreadyElapsed: lhs.numberAlreadyElapsed + rhs)
+        lhs = Self(numberAlreadyElapsed: lhs.numberAlreadyElapsed + rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
@@ -149,7 +149,7 @@ extension /*PointProtocol where Self :*/ ConsistentlyOrderedCalendarComponent wh
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Vector {
-        fatalError()//return lhs.numberAlreadyElapsed − rhs.numberAlreadyElapsed
+        return lhs.numberAlreadyElapsed − rhs.numberAlreadyElapsed
     }
 }
 
@@ -205,7 +205,7 @@ extension /*PointProtocol where Self : */ NumericCalendarComponent {
     ///
     /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
-        fatalError()//lhs = Self(lhs.rawValue + rhs)
+        lhs = Self(lhs.rawValue + rhs)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
@@ -215,7 +215,7 @@ extension /*PointProtocol where Self : */ NumericCalendarComponent {
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Vector {
-        fatalError()//return lhs.rawValue − rhs.rawValue
+        return lhs.rawValue − rhs.rawValue
     }
 }
 
@@ -236,8 +236,9 @@ extension PointProtocol where Self : Strideable {
     }
 }
 
-extension PointProtocol where Self : TwoDimensionalPoint {
-    // MARK: - where Self : TwoDimensionalPoint
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar {
+    // MARK: - where Self : TwoDimensionalPoint, Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
     /// Moves the point on the left by the vector on the right.
@@ -248,7 +249,8 @@ extension PointProtocol where Self : TwoDimensionalPoint {
     ///
     /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
-        fatalError()
+        lhs.x += rhs.Δx
+        lhs.y += rhs.Δy
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
@@ -258,7 +260,9 @@ extension PointProtocol where Self : TwoDimensionalPoint {
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Vector {
-        fatalError()
+        let Δx = lhs.x − rhs.x
+        let Δy = lhs.y − rhs.y
+        return Vector(Δx : Δx, Δy : Δy)
     }
 }
 
@@ -297,6 +301,15 @@ extension /*PointProtocol where Self : */UIntFamily {
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Stride {
-        return rhs.distance(to: lhs)
+        // [_Workaround: The following causes an EXC_BAD_INSTRUCTION. (Swift 4.0)_]
+        //return rhs.distance(to: lhs)
+        return lhs.toStride() − rhs.toStride()
+    }
+}
+
+extension UIntFamily {
+    // [_Workaround: Should not be necessary but for the above workaround. (Swift 4.0)_]
+    fileprivate func toStride() -> Stride {
+        return (0 as Self).distance(to: self)
     }
 }

@@ -1583,6 +1583,15 @@ extension WholeArithmetic where Self : IntegralArithmetic {
 extension WholeArithmetic where Self : IntFamily {
     // MARK: - where Self : IntFamily
 
+    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(uIntFamily:)_]
+    /// Creates an instance equal to `uInt`.
+    ///
+    /// - Properties:
+    ///     - uInt: An instance of a type conforming to `UIntFamily`.
+    public init<U : UIntFamily>(_ uInt: U) {
+        self.init(asBinaryIntegerWithUInt: uInt)
+    }
+
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
     /// Returns the product of the left times the right.
     ///
@@ -1749,8 +1758,22 @@ extension WholeArithmetic where Self : RationalNumberProtocol {
     }
 }
 
+extension BinaryInteger {
+    fileprivate init<U : UIntFamily>(asBinaryIntegerWithUInt uInt: U) {
+        self.init(uInt)
+    }
+}
 extension WholeArithmetic where Self : UIntFamily {
     // MARK: - where Self : UIntFamily
+
+    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(uIntFamily:)_]
+    /// Creates an instance equal to `uInt`.
+    ///
+    /// - Properties:
+    ///     - uInt: An instance of a type conforming to `UIntFamily`.
+    public init<U : UIntFamily>(_ uInt: U) {
+        self.init(asBinaryIntegerWithUInt: uInt)
+    }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
     /// Returns the product of the left times the right.

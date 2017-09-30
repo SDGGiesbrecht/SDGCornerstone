@@ -43,7 +43,7 @@
         func testLiteralScalarSearch() {
             var text = "Blah blah blah..."
 
-            lock("Literal Scalar Search", to: 0.8) {
+            lock("Literal Scalar Search", to: 1.0) {
                 for _ in 1 ... 100_000 {
                     _ = text.scalars.firstMatch(for: "blah".scalars)
                 }

@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+/* // [_Workaround: This inexplicably causes an abort trap. (Swift 4.0)_]
 import SDGCornerstone
 
 func demonstrateAlternatingBooleans() {
@@ -25,4 +26,4 @@ func demonstrateAlternatingBooleans() {
     _ = Bool(fromRandomizer: alternating)
     // ...now alternate between “false” and “true”.
     // [_End_]
-}
+}*/

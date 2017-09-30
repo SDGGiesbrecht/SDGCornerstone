@@ -24,12 +24,13 @@ class RegressionTests : TestCase {
 
         func runTests<N : IntegralArithmetic>(_ type: N.Type) {
             var x: N = 0
-            x −= 1
+            let _1: N = 1
+            x −= _1
             XCTAssertEqual(x, −1)
-            XCTAssertEqual(x − 1, −2)
-            x += 1
+            XCTAssertEqual((x − _1) as N, −2)
+            x += _1
             XCTAssertEqual(x, 0)
-            XCTAssertEqual(x + 1, 1)
+            XCTAssertEqual(x + _1, 1)
         }
         runTests(Int.self)
         runTests(Int64.self)

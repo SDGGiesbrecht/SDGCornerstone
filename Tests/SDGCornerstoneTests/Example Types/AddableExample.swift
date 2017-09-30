@@ -35,7 +35,7 @@ struct AddableExample : Addable, Equatable {
     }
 }
 
-struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, SignedNumber, Strideable {
+struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, SignedNumeric, Strideable, Subtractable {
 
     var value: Int
 
@@ -61,10 +61,25 @@ struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, Signed
         self = AddableExampleWhereStrideableAndStrideIsSelf(integerLiteral)
     }
 
-    // SignedNumber
+    // SignedNumeric
 
-    static func - (lhs: AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf { // Swift.SignedNumber
-        return AddableExampleWhereStrideableAndStrideIsSelf(lhs.value − rhs.value)
+    internal init?<T>(exactly source: T) where T : BinaryInteger {
+        guard let integer = Int(exactly: source) else {
+            return nil
+        }
+        value = integer
+    }
+
+    internal var magnitude: Int.Magnitude {
+        return value.magnitude
+    }
+
+    internal static func *(lhs: AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf {
+        return AddableExampleWhereStrideableAndStrideIsSelf(lhs.value × rhs.value)
+    }
+
+    internal static func *=(lhs: inout AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) {
+        lhs.value ×= rhs.value
     }
 
     // Strideable
@@ -75,5 +90,11 @@ struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, Signed
 
     func distance(to other: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf {
         return AddableExampleWhereStrideableAndStrideIsSelf(value.distance(to: other.value))
+    }
+
+    // Subtractable
+
+    static func −= (lhs: inout AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) {
+        lhs.value −= rhs.value
     }
 }

@@ -35,13 +35,6 @@ class DataTests : TestCase {
         XCTAssertEqual(alternating.bitwiseAnd(with: sorted), Data(bytes: [0b00000000, 0b01010101]))
         XCTAssertEqual(alternating.bitwiseOr(with: sorted), Data(bytes: [0b01010101, 0b11111111]))
         XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data(bytes: [0b01010101, 0b10101010]))
-
-        // BitwiseOperations
-
-        XCTAssertEqual(~alternating, Data(bytes: [0b10101010, 0b10101010]))
-        XCTAssertEqual(alternating & sorted, Data(bytes: [0b00000000, 0b01010101]))
-        XCTAssertEqual(alternating | sorted, Data(bytes: [0b01010101, 0b11111111]))
-        XCTAssertEqual(alternating ^ sorted, Data(bytes: [0b01010101, 0b10101010]))
     }
 
     func testDataStream() {

@@ -48,3 +48,20 @@ extension IntegralArithmetic {
         return digits
     }
 }
+
+extension BinaryInteger {
+    fileprivate init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
+        self.init(int)
+    }
+}
+extension IntegralArithmetic where Self : IntFamily {
+
+    // [_Inherit Documentation: SDGCornerstone.IntegralArithmetic.init(intFamily:)_]
+    /// Creates an instance equal to `int`.
+    ///
+    /// - Properties:
+    ///     - int: An instance of a member of the `Int` family.
+    public init<I : IntFamily>(_ int: I) {
+        self.init(asBinaryIntegerWithInt: int)
+    }
+}

@@ -47,9 +47,11 @@ open class Preferences {
     /// Returns subclassed preferences for a particular domain.
     public static func preferences<P : Preferences>(as subClass: P.Type, for domain: String) -> P {
 
-        let result = cached(in: &domains[domain]) {
+        var domainsCopy = domains // Allow reading from original during closure.
+        let result = cached(in: &domainsCopy[domain]) {
             return P(domain: domain)
         }
+        domains = domainsCopy
 
         guard let subclassedResult = result as? P else {
             preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in

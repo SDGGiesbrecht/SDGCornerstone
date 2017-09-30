@@ -17,9 +17,6 @@ import SDGCornerstone
 func ≈ <T : Subtractable>(lhs: T, rhs: T) -> Bool where T : Comparable, T : ExpressibleByFloatLiteral {
     return lhs ≈ rhs ± 0.000_01
 }
-func ≈ <T : Subtractable>(lhs: Angle<T>, rhs: Angle<T>) -> Bool where T : Comparable, T : ExpressibleByIntegerLiteral {
-    return lhs.inRadians ≈ rhs.inRadians
-}
 
 func πLiteral<T>() -> T where T : ExpressibleByFloatLiteral {
     return 3.141_59
