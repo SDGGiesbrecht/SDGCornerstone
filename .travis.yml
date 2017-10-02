@@ -44,7 +44,7 @@ matrix:
       xcode_sdk: iphonesimulator
       script:
         - "swift package generate-xcodeproj"
-        - "xcodebuild test -scheme SDGCornerstone-Package -sdk iphonesimulator"
+        - "xcodebuild test -scheme SDGCornerstone-Package -destination 'platform=iOS Simulator,name=iPhone 8'"
     - os: osx
       env:
         - JOB="watchOS"
@@ -62,4 +62,4 @@ matrix:
       xcode_sdk: appletvsimulator
       script:
         - "swift package generate-xcodeproj --enable-code-coverage --output SDGCornerstone.xcodeproj"
-        - "xcodebuild test -scheme SDGCornerstone-Package -sdk appletvsimulator"
+        - "xcodebuild test -scheme SDGCornerstone-Package -destination 'platform=tvOS Simulator,name=Apple TV'"
