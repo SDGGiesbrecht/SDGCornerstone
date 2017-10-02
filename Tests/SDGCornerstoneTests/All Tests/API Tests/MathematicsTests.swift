@@ -189,11 +189,10 @@ class MathematicsTests : TestCase {
             XCTAssert(minusOne.isNegative)
 
             XCTAssertEqual(|minusOne|, one)
-            /* Swift.AbsoluteValuable */ XCTAssertEqual(abs(minusOne), one)
 
             XCTAssertEqual(−one, minusOne)
-            /* Swift.SignedNumber */ XCTAssertEqual(-one, minusOne)
-            /* Swift.SignedNumber */ XCTAssertEqual(one - minusOne, two)
+            /* Swift.SignedNumeric */ XCTAssertEqual(-one, minusOne)
+            /* Swift.SignedNumeric */ XCTAssertEqual(one - minusOne, two)
 
             XCTAssertEqual(three.dividedAccordingToEuclid(by: −two), −two)
             XCTAssertEqual((−three).dividedAccordingToEuclid(by: two), −two)

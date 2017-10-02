@@ -18,7 +18,7 @@
 ///
 /// - `SetDefinition`
 /// - `Collection`
-/// - `Iterator.Element == Element`
+/// - `Element == Element`
 public protocol FiniteSet : Collection, ComparableSet {
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.⊆_]

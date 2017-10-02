@@ -21,7 +21,7 @@ extension String.UnicodeScalarView : UnicodeScalarView {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<String.UnicodeScalarView>? {
+    public func firstMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<String.ScalarView>? {
         let searchArea = searchRange ?? bounds
 
         // [_Workaround: This is redundant, but solves performance until generics can be forcibly specialized. (Swift 3.1.0)_]
@@ -42,7 +42,7 @@ extension String.UnicodeScalarView : UnicodeScalarView {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: String.UnicodeScalarView, in searchRange: Range<Index>? = nil) -> PatternMatch<String.UnicodeScalarView>? {
+    public func firstMatch(for pattern: String.ScalarView, in searchRange: Range<Index>? = nil) -> PatternMatch<String.ScalarView>? {
 
         // [_Workaround: This is redundant, but solves performance until generics can be forcibly specialized. (Swift 3.1.0)_]
 

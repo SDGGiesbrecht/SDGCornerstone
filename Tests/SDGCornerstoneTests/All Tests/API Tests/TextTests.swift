@@ -413,7 +413,7 @@ class TextTests : TestCase {
         }
     }
 
-    func testUnicodeScalarView() {
+    func testScalarView() {
         func runTests<S : StringFamily>(helloWorld: S) {
 
             XCTAssert(helloWorld.scalars.contains("world".scalars))
@@ -444,7 +444,7 @@ class TextTests : TestCase {
             ("testStringClusterIndex", testStringClusterIndex),
             ("testStringScalarIndex", testStringScalarIndex),
             ("testUnicodeScalar", testUnicodeScalar),
-            ("testUnicodeScalarView", testUnicodeScalarView)
+            ("testScalarView", testScalarView)
         ]
     }
 }

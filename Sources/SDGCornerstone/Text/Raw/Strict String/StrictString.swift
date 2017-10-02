@@ -72,7 +72,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         return normalize(String(scalars))
     }
 
-    private static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Iterator.Element == UnicodeScalar {
+    private static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Element == UnicodeScalar {
         switch sequence {
 
         // Already normalized.
@@ -219,7 +219,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
     /// Creates a new instance of a collection containing the elements of a sequence.
-    public init<S : Sequence>(_ elements: S) where S.Iterator.Element == Iterator.Element {
+    public init<S : Sequence>(_ elements: S) where S.Element == Element {
         self = StrictString.normalize(elements)
     }
 
@@ -250,19 +250,19 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
     /// Appends the contents of the sequence to the end of the collection.
-    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Iterator.Element == UnicodeScalar {
+    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == UnicodeScalar {
         self = StrictString.concatenateStrictStrings(self, StrictString.normalize(newElements))
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
-    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Iterator.Element == UnicodeScalar {
+    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.UnicodeScalarView.Index) where S.Element == UnicodeScalar {
         replaceSubrange(i ..< i, with: newElements)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
-    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Iterator.Element == UnicodeScalar {
+    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.UnicodeScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
 
         let preceding = StrictString(unsafeString: String(string.scalars[string.scalars.startIndex ..< subrange.lowerBound]))
         let succeeding = StrictString(unsafeString: String(string.scalars[subrange.upperBound ..< string.scalars.endIndex]))

@@ -31,10 +31,10 @@ public struct DataStream {
 
     // MARK: - Units
 
-    private static let endMarker: Data.Iterator.Element = 0x17 // C0 End of Transmission Block
+    private static let endMarker: Data.Element = 0x17 // C0 End of Transmission Block
     private static let endData = Data([endMarker])
 
-    private static let escapeMarker: Data.Iterator.Element = 0x10 // C0 Data Link Escape
+    private static let escapeMarker: Data.Element = 0x10 // C0 Data Link Escape
     private static let escapeData = Data([escapeMarker])
 
     /// Appends a unit of data.

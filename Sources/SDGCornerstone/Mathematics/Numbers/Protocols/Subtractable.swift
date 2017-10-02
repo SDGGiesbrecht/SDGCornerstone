@@ -48,7 +48,7 @@ infix operator ±: AdditionPrecedence
 ///
 /// - Note: `Subtractable` is distinct from `Negatable` to allow whole number types to perform subtraction.
 ///
-/// - Note: Unlike `SignedNumber`, `Subtractable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
+/// - Note: Unlike `Numeric`, `Subtractable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
 ///
 /// Conformance Requirements:
 ///

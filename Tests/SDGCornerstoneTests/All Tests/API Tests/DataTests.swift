@@ -42,7 +42,7 @@ class DataTests : TestCase {
         var outputStream = DataStream()
 
         var forwards = Data()
-        for byte in (0x00 as Data.Iterator.Element) ... (0xFF as Data.Iterator.Element) {
+        for byte in (0x00 as Data.Element) ... (0xFF as Data.Element) {
             forwards.append(byte)
         }
         let backwards = Data(forwards.reversed())

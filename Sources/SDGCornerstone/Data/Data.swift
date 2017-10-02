@@ -28,9 +28,9 @@ extension Data : BitField, FileConvertible, PropertyListValue {
         }
     }
 
-    // MARK: - BitwiseLogic
+    // MARK: - BitField
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseNot()_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseNot()_]
     /// Inverts the bits.
     public mutating func formBitwiseNot() {
         for index in indices {
@@ -38,7 +38,7 @@ extension Data : BitField, FileConvertible, PropertyListValue {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseAnd(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseAnd(with:)_]
     /// Removes the bits not also present in `other`.
     ///
     /// - Parameters:
@@ -52,7 +52,7 @@ extension Data : BitField, FileConvertible, PropertyListValue {
         removeSubrange(end ..< endIndex)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseOr(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseOr(with:)_]
     /// Inserts the bits present in `other`.
     ///
     /// - Parameters:
@@ -66,7 +66,7 @@ extension Data : BitField, FileConvertible, PropertyListValue {
         append(contentsOf: other[end ..< other.endIndex])
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseExclusiveOr(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseExclusiveOr(with:)_]
     /// Inserts the bits present in `other` and removes the bits present in both.
     ///
     /// - Parameters:

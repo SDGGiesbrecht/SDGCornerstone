@@ -196,7 +196,7 @@ extension Range where Bound == String.ClusterView.Index {
     }
 }
 
-extension Range where Bound == String.ScalarView.Index {
+extension Range where Bound == String.UnicodeScalarView.Index {
     // MARK: - where Bound == String.ScalarView.Index
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.

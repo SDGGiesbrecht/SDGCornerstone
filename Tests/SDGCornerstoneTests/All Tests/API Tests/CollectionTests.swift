@@ -446,8 +446,8 @@ class CollectionTests : TestCase {
     }
 
     func testRangeReplaceableCollection() {
-        func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Iterator.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
-            where C.Iterator.Element : Equatable, C.IndexDistance : WholeArithmetic {
+        func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
+            where C.Element : Equatable, C.IndexDistance : WholeArithmetic {
 
                 var collection = start
                 collection += appendix

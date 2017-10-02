@@ -22,50 +22,50 @@
 /// - `mutating func formBitwiseExclusiveOr(with other: Self)`
 public protocol BitField {
 
-    // [_Define Documentation: SDGCornerstone.BitwiseLogic.bitwiseNot()_]
+    // [_Define Documentation: SDGCornerstone.BitField.bitwiseNot()_]
     /// Returns the bits not present in `self`.
     func bitwiseNot() -> Self
 
-    // [_Define Documentation: SDGCornerstone.BitwiseLogic.formBitwiseNot()_]
+    // [_Define Documentation: SDGCornerstone.BitField.formBitwiseNot()_]
     /// Inverts the bits.
     mutating func formBitwiseNot()
 
-    // [_Define Documentation: SDGCornerstone.BitwiseLogic.bitwiseAnd(with:)_]
+    // [_Define Documentation: SDGCornerstone.BitField.bitwiseAnd(with:)_]
     /// Returns the bits present in both `self` and `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     func bitwiseAnd(with other: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.BitwiseLogic.formBitwiseAnd(with:)_]
+    // [_Define Documentation: SDGCornerstone.BitField.formBitwiseAnd(with:)_]
     /// Removes the bits not also present in `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     mutating func formBitwiseAnd(with other: Self)
 
-    // [_Define Documentation: SDGCornerstone.BitwiseLogic.bitwiseOr(with:)_]
+    // [_Define Documentation: SDGCornerstone.BitField.bitwiseOr(with:)_]
     /// Returns the bits present in either `self` or `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     func bitwiseOr(with other: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.BitwiseLogic.formBitwiseOr(with:)_]
+    // [_Define Documentation: SDGCornerstone.BitField.formBitwiseOr(with:)_]
     /// Inserts the bits present in `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     mutating func formBitwiseOr(with other: Self)
 
-    // [_Define Documentation: SDGCornerstone.BitwiseLogic.bitwiseExclusiveOr(with:)_]
+    // [_Define Documentation: SDGCornerstone.BitField.bitwiseExclusiveOr(with:)_]
     /// Returns the bits present only in `self` or only in `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     func bitwiseExclusiveOr(with other: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.BitwiseLogic.formBitwiseExclusiveOr(with:)_]
+    // [_Define Documentation: SDGCornerstone.BitField.formBitwiseExclusiveOr(with:)_]
     /// Inserts the bits present in `other` and removes the bits present in both.
     ///
     /// - Parameters:
@@ -75,7 +75,7 @@ public protocol BitField {
 
 extension BitField {
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseNot()_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseNot()_]
     /// Returns the bits not present in `self`.
     public func bitwiseNot() -> Self {
         var result = self
@@ -83,7 +83,7 @@ extension BitField {
         return result
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseAnd(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseAnd(with:)_]
     /// Returns the bits present in both `self` and `other`.
     ///
     /// - Parameters:
@@ -94,7 +94,7 @@ extension BitField {
         return result
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseOr(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseOr(with:)_]
     /// Returns the bits present in either `self` or `other`.
     ///
     /// - Parameters:
@@ -105,7 +105,7 @@ extension BitField {
         return result
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseExclusiveOr(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseExclusiveOr(with:)_]
     /// Returns the bits present only in `self` or only in `other`.
     ///
     /// - Parameters:
@@ -120,19 +120,19 @@ extension BitField {
 extension BitField where Self : UIntFamily {
     // MARK: - where Self : UIntFamily
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseNot()_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseNot()_]
     /// Returns the bits not present in `self`.
     public func bitwiseNot() -> Self {
         return ~self
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseNot()_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseNot()_]
     /// Inverts the bits.
     public mutating func formBitwiseNot() {
         self = bitwiseNot()
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseAnd(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseAnd(with:)_]
     /// Returns the bits present in both `self` and `other`.
     ///
     /// - Parameters:
@@ -141,7 +141,7 @@ extension BitField where Self : UIntFamily {
         return self & other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseAnd(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseAnd(with:)_]
     /// Removes the bits not also present in `other`.
     ///
     /// - Parameters:
@@ -150,7 +150,7 @@ extension BitField where Self : UIntFamily {
         self = bitwiseAnd(with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseOr(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseOr(with:)_]
     /// Returns the bits present in either `self` or `other`.
     ///
     /// - Parameters:
@@ -159,7 +159,7 @@ extension BitField where Self : UIntFamily {
         return self | other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseOr(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseOr(with:)_]
     /// Inserts the bits present in `other`.
     ///
     /// - Parameters:
@@ -168,7 +168,7 @@ extension BitField where Self : UIntFamily {
         self = bitwiseOr(with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.bitwiseExclusiveOr(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseExclusiveOr(with:)_]
     /// Returns the bits present only in `self` or only in `other`.
     ///
     /// - Parameters:
@@ -177,7 +177,7 @@ extension BitField where Self : UIntFamily {
         return self ^ other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitwiseLogic.formBitwiseExclusiveOr(with:)_]
+    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseExclusiveOr(with:)_]
     /// Inserts the bits present in `other` and removes the bits present in both.
     ///
     /// - Parameters:

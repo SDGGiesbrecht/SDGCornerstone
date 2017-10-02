@@ -47,7 +47,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
+    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
         for component in components {

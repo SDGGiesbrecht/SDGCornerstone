@@ -40,7 +40,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Conversions
 
-    internal func line(for scalar: String.UnicodeScalarView.Index) -> LineIndex {
+    internal func line(for scalar: String.ScalarView.Index) -> LineIndex {
         if scalar == base.scalars.endIndex {
             return endIndex
         }
@@ -48,7 +48,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
             return startIndex
         }
 
-        var encounteredNewline: Range<String.UnicodeScalarView.Index>?
+        var encounteredNewline: Range<String.ScalarView.Index>?
         if let newline = LineView.newlinePattern.primaryMatch(in: base.scalars, at: previousNewline.range.lowerBound),
             newline.contains(scalar) {
             // Between CR and LF
@@ -73,7 +73,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///     - i: The following index.
     public func index(before i: LineIndex) -> LineIndex {
 
-        let newline: Range<String.UnicodeScalarView.Index>
+        let newline: Range<String.ScalarView.Index>
         if i == endIndex {
             newline = base.scalars.endIndex ..< base.scalars.endIndex
         } else {
@@ -150,7 +150,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
-    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Iterator.Element == Line<Base> {
+    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Element == Line<Base> {
         var replacement = Base()
         for line in newElements {
             replacement.scalars.append(contentsOf: line.line)
@@ -178,7 +178,7 @@ internal struct NewlinePattern {
 
     fileprivate init() {}
 
-    fileprivate func primaryMatch<S : UnicodeScalarView>(in collection: S, at location: String.UnicodeScalarView.Index) -> Range<String.UnicodeScalarView.Index>? where S.Index == String.UnicodeScalarView.Index {
+    fileprivate func primaryMatch<S : UnicodeScalarView>(in collection: S, at location: String.ScalarView.Index) -> Range<String.ScalarView.Index>? where S.Index == String.ScalarView.Index {
         // Replacement for Pattern.primaryMatch(in:at:)
 
         guard location ≠ collection.endIndex else { // [_Exempt from Code Coverage_] Internal, unused, and temporary.
@@ -200,8 +200,8 @@ internal struct NewlinePattern {
     }
 }
 
-extension UnicodeScalarView where Self.Index == String.UnicodeScalarView.Index {
-    // MARK: - where Self.Index == String.UnicodeScalarView.Index
+extension UnicodeScalarView where Self.Index == String.ScalarView.Index {
+    // MARK: - where Self.Index == String.ScalarView.Index
 
     internal func firstMatch(for pattern: NewlinePattern, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         // Replacement for Collection.firstMatch(for:in:)

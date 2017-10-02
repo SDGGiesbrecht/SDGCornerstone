@@ -111,7 +111,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init<C : Collection>(_ pattern: C, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) where C.Iterator.Element == Element {
+    public convenience init<C : Collection>(_ pattern: C, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) where C.Element == Element {
         self.init(abstractPattern: LiteralPattern(pattern), count: count, consumption: consumption)
     }
 
@@ -122,7 +122,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init<C : Collection>(_ pattern: C, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) where C.Iterator.Element == Element {
+    public convenience init<C : Collection>(_ pattern: C, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) where C.Element == Element {
         self.init(abstractPattern: LiteralPattern(pattern), count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
@@ -134,7 +134,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Pattern
 
-    private func checkNext<C : Collection>(in collection: C, at locations: inout [C.Index])  where C.Iterator.Element == Element {
+    private func checkNext<C : Collection>(in collection: C, at locations: inout [C.Index])  where C.Element == Element {
         locations = Array(locations.map({ (location: C.Index) -> [Range<C.Index>] in
             if location ≠ collection.endIndex {
                 return pattern.matches(in: collection, at: location)
@@ -152,7 +152,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
+    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var locations: [C.Index] = [location]
 
@@ -200,7 +200,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element {
+    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         switch consumption {
         case .greedy:
