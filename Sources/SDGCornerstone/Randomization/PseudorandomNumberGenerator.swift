@@ -41,7 +41,7 @@ public final class PseudorandomNumberGenerator : Randomizer {
         private static let linuxIsSeeded: Bool = {
             // “static let” in order to be run only once.
             let instantInt: Int = time(nil)
-            let instant: UInt32 = UInt32(truncatingBitPattern: instantInt)
+            let instant: UInt32 = UInt32(truncatingIfNeeded: instantInt)
 
             let storagePointer: UnsafeMutablePointer<Int8> = UnsafeMutablePointer(mutating: __linuxStateStorage)
 

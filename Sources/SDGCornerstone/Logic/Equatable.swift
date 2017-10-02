@@ -43,18 +43,7 @@ extension Equatable {
     ///
     /// - RecommendedOver: !=
     public static func ≠ (lhs: Self, rhs: Self) -> Bool {
-        #if os(Linux)
-            // [_Workaround: Linux shouldn’t need independent treatment once CharacterSet can do == safely. (Swift 3.1.0)_]
-            if let lhsCharacterSet = lhs as? CharacterSet, let rhsCharacterSet = rhs as? CharacterSet {
-                return lhsCharacterSet.planes ≠ rhsCharacterSet.planes
-            } else {
-                // func ≠
-                return lhs != rhs
-            }
-        #else
-            // func ≠
-            return lhs != rhs
-        #endif
+        return lhs != rhs
     }
 }
 

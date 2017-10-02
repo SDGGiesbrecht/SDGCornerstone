@@ -222,8 +222,7 @@ class CollectionTests : TestCase {
             XCTAssert(superset ⊋ subset, "\(superset) ⊋̸ \(subset)")
             XCTAssert(subset ⊊ superset, "\(subset) ⊊̸ \(superset)")
             XCTAssert(¬superset.isDisjoint(with: subset), "\(superset).isDisjoint(with: \(subset))")
-            // [_Workaround: Linux uses the wrong equality check in XCTAssertNotEqual. (Swift 3.1.0)_]
-            XCTAssert(superset ≠ subset)
+            XCTAssertNotEqual(superset, subset)
         }
 
         runTests(superset: Set([1, 2, 3]), subset: Set([1, 2]))
