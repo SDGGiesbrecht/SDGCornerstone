@@ -18,19 +18,15 @@
 ///
 /// - `RawRepresentable where RawValue : FixedScaleOneDimensionalPoint, ExpressibleByIntegerLiteral, RawValue.Vector : IntegerProtocol`
 /// - The raw values must be contiguous and begin at 0.
-public protocol IterableEnumeration : RawRepresentable {
-
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]
-    /// The raw value type.
-    associatedtype RawValue : FixedScaleOneDimensionalPoint, ExpressibleByIntegerLiteral
+public protocol IterableEnumeration : RawRepresentable
+where Self.RawValue : FixedScaleOneDimensionalPoint, Self.RawValue : ExpressibleByIntegerLiteral, Self.RawValue.Vector : IntegerProtocol {
 
     // [_Define Documentation: SDGCornerstone.IterableEnumeration.cases_]
     /// An array containing every case of the enumeration.
     static var cases: [Self] { get }
 }
 
-extension IterableEnumeration where RawValue.Vector : IntegerProtocol {
-    // MARK: - where RawValue.Vector : IntegerProtocol
+extension IterableEnumeration {
 
     private static func noZeroCase() -> UserFacingText<APILocalization, Void> { // [_Exempt from Code Coverage_]
         return UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]

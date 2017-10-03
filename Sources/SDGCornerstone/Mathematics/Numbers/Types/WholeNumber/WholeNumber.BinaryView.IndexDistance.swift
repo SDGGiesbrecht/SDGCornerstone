@@ -14,13 +14,22 @@
 
 extension WholeNumber.BinaryView {
 
-    internal struct IndexDistance : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, Hashable, Negatable, SignedNumber, Subtractable {
+    internal struct IndexDistance : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, Hashable, Negatable, SignedNumeric, Subtractable {
 
         // MARK: - Initialization
 
         internal init(digitDistance: DigitDistance, bitDistance: BitDistance) {
             self.digitDistance = digitDistance
             self.bitDistance = bitDistance
+        }
+
+        internal init(_ uInt: UIntMax) {
+            let bitsPerDigit = BinaryView<WholeNumber.Digit>.count
+
+            let digits = DigitDistance(BitDistance(uInt).dividedAccordingToEuclid(by: bitsPerDigit))
+            let bits = BitDistance(uInt).mod(bitsPerDigit)
+
+            self = IndexDistance(digitDistance: digits, bitDistance: bits)
         }
 
         // MARK: - Properties
@@ -62,12 +71,7 @@ extension WholeNumber.BinaryView {
         // MARK: - ExpressibleByIntegerLiteral
 
         internal init(integerLiteral: UIntMax) {
-            let bitsPerDigit = BinaryView<WholeNumber.Digit>.count
-
-            let digits = DigitDistance(BitDistance(integerLiteral).dividedAccordingToEuclid(by: bitsPerDigit))
-            let bits = BitDistance(integerLiteral).mod(bitsPerDigit)
-
-            self = IndexDistance(digitDistance: digits, bitDistance: bits)
+            self.init(integerLiteral)
         }
 
         // MARK: - Hashable
@@ -81,6 +85,29 @@ extension WholeNumber.BinaryView {
         internal static postfix func −= (operand: inout IndexDistance) {
             operand.digitDistance−=
             operand.bitDistance−=
+        }
+
+        // MARK: - SignedNumeric
+
+        internal init?<T>(exactly source: T) where T : BinaryInteger {
+            guard let whole = UIntMax(exactly: source) else {
+                return nil
+            }
+            self.init(whole)
+        }
+
+        internal var magnitude: IndexDistance {
+            return IndexDistance(digitDistance: |digitDistance|, bitDistance: |bitDistance|)
+        }
+
+        internal static func *(lhs: IndexDistance, rhs: IndexDistance) -> IndexDistance {
+            unreachable()
+            // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
+        }
+
+        internal static func *=(lhs: inout IndexDistance, rhs: IndexDistance) {
+            unreachable()
+            // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }
 
         // MARK: - Subtractable

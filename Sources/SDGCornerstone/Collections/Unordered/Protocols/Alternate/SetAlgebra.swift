@@ -109,8 +109,8 @@ extension SetAlgebra where Self : SetDefinition {
 /*
  // [_Workaround: This triggers a compiler bug. On Linux the build fails. On macOS the compiler cannot find it properly anyway. (Swift 3.1.0)_]
 
-extension SetAlgebra where Self : SetDefinition, Self : Sequence, Self.Element == Self.Iterator.Element {
-    // MARK: - where Self : SetDefinition, Self : Sequence, Self.Element == Self.Iterator.Element
+extension SetAlgebra where Self : SetDefinition, Self : Sequence, Self.Element == Self.Element {
+    // MARK: - where Self : SetDefinition, Self : Sequence, Self.Element == Self.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetAlgebra.contains(_:)_]
     /// Returns `true` if `self` contains `member`.

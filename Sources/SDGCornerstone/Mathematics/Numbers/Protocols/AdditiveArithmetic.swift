@@ -14,7 +14,7 @@
 
 /// A value that can be added and subtracted.
 ///
-/// - Note: Unlike `SignedNumber`, `AdditiveArithmetic` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc. For additional behaviour specific to one‐dimensional types, see 	`NumericAdditiveArithmetic`.
+/// - Note: Unlike `SignedNumeric`, `AdditiveArithmetic` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc. For additional behaviour specific to one‐dimensional types, see `NumericAdditiveArithmetic`.
 ///
 /// Conformance Requirements:
 ///

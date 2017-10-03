@@ -175,12 +175,12 @@ extension RationalArithmetic {
                     for index in decimalDigits.indices.reversed() {
                         var digit = decimalDigits[index]
                         defer { decimalDigits[index] = digit }
-                        digit += 1
+                        digit += 1 as Self
 
                         if digit == radix {
                             digit = 0
                             if index == 0 {
-                                result = (self + 1).integralDigits(thousandsSeparator: thousandsSeparator)
+                                result = (self + (1 as Self)).integralDigits(thousandsSeparator: thousandsSeparator)
                             }
                         } else {
                             break

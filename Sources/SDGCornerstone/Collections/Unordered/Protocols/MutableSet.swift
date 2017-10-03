@@ -204,7 +204,7 @@ extension MutableSet {
     ///     - rhs: Another set.
     public static func ∩= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
         var result = Self()
-        for element in rhs.elements where element ∈ lhs {
+        for element in rhs where element ∈ lhs {
             result.insert(element)
         }
         lhs = result
@@ -241,7 +241,7 @@ extension MutableSet {
     ///     - lhs: A set.
     ///     - rhs: Another set.
     public static func ∪= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
-        for element in rhs.elements {
+        for element in rhs {
             lhs.insert(element)
         }
     }
@@ -277,7 +277,7 @@ extension MutableSet {
     ///     - lhs: The set to subtract from.
     ///     - rhs: The set to subtract.
     public static func ∖= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
-        for element in rhs.elements {
+        for element in rhs {
             lhs.remove(element)
         }
     }

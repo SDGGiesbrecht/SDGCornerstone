@@ -48,7 +48,7 @@ infix operator ±: AdditionPrecedence
 ///
 /// - Note: `Subtractable` is distinct from `Negatable` to allow whole number types to perform subtraction.
 ///
-/// - Note: Unlike `SignedNumber`, `Subtractable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
+/// - Note: Unlike `Numeric`, `Subtractable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
 ///
 /// Conformance Requirements:
 ///
@@ -127,8 +127,8 @@ extension FloatFamily {
         lhs -= rhs
     }
 }
-extension Subtractable where Self : FloatFamily, Self.Vector == Self, Self.Stride == Self {
-    // MARK: - where Self : FloatFamily, Vector == Self, Stride == Self
+extension Subtractable where Self : FloatFamily, Self.Vector == Self {
+    // MARK: - where Self : FloatFamily, Vector == Self
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
     /// Returns the difference of the left minus the right.
@@ -159,7 +159,7 @@ extension Subtractable where Self : FloatFamily, Self.Vector == Self, Self.Strid
     }
 }
 
-extension Subtractable where Self : IntFamily /* Self.Stride ≠ Self */ {
+extension Subtractable where Self : IntFamily /* Self.Vector ≠ Self */ {
     // MARK: - where Self : IntFamily
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
@@ -191,8 +191,8 @@ extension Subtractable where Self : IntFamily /* Self.Stride ≠ Self */ {
     }
 }
 
-extension Subtractable where Self : IntFamily, Self.Vector == Self, Self.Stride == Self {
-    // MARK: - where Self : IntFamily, Vector == Self, Stride == Self
+extension Subtractable where Self : IntFamily, Self.Vector == Self {
+    // MARK: - where Self : IntFamily, Vector == Self
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
     /// Returns the difference of the left minus the right.
@@ -261,27 +261,8 @@ extension Subtractable where Self : PointProtocol, Self.Vector == Self {
     }
 }
 
-extension Subtractable where Self : PointProtocol, Self : Strideable, Self.Vector == Self, Self.Stride == Self {
-    // MARK: - where Self : PointProtocol, Self : Strideable, Vector == Self, Stride == Self
-
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
-    ///
-    /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
-    public static func − (lhs: Self, rhs: Self) -> Self {
-        // Disambiguate Subtractable(where PointProtocol).− vs PointProtocol(where Strideable).−
-        return subtractAsSubtractable(lhs, rhs)
-    }
-}
-
 extension Subtractable where Self : TwoDimensionalVector {
-    // MARK: - where Self : TwoDimensionalVector, Self.Scalar : Subtractable
+    // MARK: - where Self : TwoDimensionalVector
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
     /// Subtracts the right from the left.

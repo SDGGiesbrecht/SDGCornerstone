@@ -44,7 +44,7 @@ struct RangeReplaceableCollectionExample : ExpressibleByArrayLiteral, RangeRepla
 
     init() {}
 
-    mutating func replaceSubrange<C : Collection>(_ subrange: Range<Array<Int>.Index>, with newElements: C) where C.Iterator.Element == Int {
+    mutating func replaceSubrange<C : Collection>(_ subrange: Range<Array<Int>.Index>, with newElements: C) where C.Element == Int {
         value.replaceSubrange(subrange, with: newElements)
     }
 }

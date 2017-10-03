@@ -15,22 +15,6 @@
 // [_Workaround: Should only conform to PropertyListValue when keys are `String` and values conform to `PropertyListValue`. Currently not constrainable. (Swift 3.1.0)_]
 extension Dictionary : PropertyListValue {
 
-    // MARK: - Initialization
-
-    /// Creates a dictionary from key‐value pairs.
-    public init(_ keyValuePairs: [(Key, Value)]) {
-        self = [:]
-        for (key, value) in keyValuePairs {
-            assert(self[key] == nil, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                switch localization {
-                case .englishCanada:
-                    return StrictString("Duplicate key: \(key)")
-                }
-            }))
-            self[key] = value
-        }
-    }
-
     // MARK: - Mutation
 
     // [_Example 1: mutateValue(for:_:)_]
@@ -73,9 +57,7 @@ extension Dictionary : PropertyListValue {
     /// - Parameters:
     ///     - other: Another dictionary.
     public mutating func mergeByOverwriting(from other: [Key: Value]) {
-        for (key, value) in other {
-            self[key] = value
-        }
+        merge(other, uniquingKeysWith: { $1 })
     }
 
     /// Returns a dictionary formed by merging `other` into `self`, overwriting any duplicate keys.
@@ -88,39 +70,13 @@ extension Dictionary : PropertyListValue {
         return result
     }
 
-    /// Merges `other` into `self` by applying `combine` to each key pair.
-    ///
-    /// - Parameters:
-    ///     - other: Another dictionary.
-    ///     - combine: A closure that combines a pair of values.
-    ///     - ownValue: The value from `self`.
-    ///     - otherValue: The value from `other`.
-    public mutating func merge<T>(with other: [Key: T], combine: (_ ownValue: Value?, _ otherValue: T?) -> Value?) {
-        for key in Set(keys).union(other.keys) {
-            self[key] = combine(self[key], other[key])
-        }
-    }
-
-    /// Returns a dictionary formed by merging `other` into `self` by applying `combine` to each key pair.
-    ///
-    /// - Parameters:
-    ///     - other: Another dictionary.
-    ///     - combine: A closure that combines a pair of values.
-    ///     - ownValue: The value from `self`.
-    ///     - otherValue: The value from `other`.
-    public func merged<T>(with other: [Key: T], combine: (_ ownValue: Value?, _ otherValue: T?) -> Value?) -> [Key: Value] {
-        var result = self
-        result.merge(with: other, combine: combine)
-        return result
-    }
-
     // MARK: - Mapping
 
     /// Returns a dictionary formed by mapping the key‐value pairs according to `transform`.
     ///
     /// - Parameters:
     ///     - transform: A mapping closure.
-    public func mapKeyValuePairs<K, V>(_ transform: (Key, Value) throws -> (key: K, value: V)) rethrows -> [K: V] {
+    public func mapKeyValuePairs<K, V>(_ transform: (_ key: Key, _ value: Value) throws -> (key: K, value: V)) rethrows -> [K: V] {
         var result = [K: V]()
         for (key, value) in self {
             let mapped = try transform(key, value)
@@ -134,15 +90,7 @@ extension Dictionary : PropertyListValue {
     /// - Parameters:
     ///     - transform: A mapping closure.
     public func mapKeys<T>(_ transform: (Key) throws -> T) rethrows -> [T: Value] {
-        return try mapKeyValuePairs() { (try transform($0.0), $0.1) }
-    }
-
-    /// Returns a dictionary created by mapping the values accordning to `transform`.
-    ///
-    /// - Parameters:
-    ///     - transform: A mapping closure.
-    public func mapValues<T>(_ transform: (Value) throws -> T) rethrows -> [Key: T] {
-        return try mapKeyValuePairs() { ($0.0, try transform($0.1)) }
+        return try mapKeyValuePairs() { (try transform($0), $1) }
     }
 }
 

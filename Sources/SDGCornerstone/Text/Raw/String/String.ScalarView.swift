@@ -12,15 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String {
-
-    // [_Workaround: Compiler bugs prevent referencing this typealias. When this is fixed, all references to String.UnicodeScalarView should be switched to String.ScalarView. (Swift 3.1.0)_]
-
-    /// A view of a string's contents as a collection of Unicode scalars.
-    public typealias ScalarView = UnicodeScalarView
-}
-
 extension String.UnicodeScalarView : UnicodeScalarView {
+    // [_Workaround: The previous line should read “String.ScalarView” but a compiler bug prevents it. (Swift 4.0)_]
 
     // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
     /// Returns the first match for `pattern` in the specified subrange.
@@ -28,7 +21,7 @@ extension String.UnicodeScalarView : UnicodeScalarView {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: Pattern<Iterator.Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<String.UnicodeScalarView>? {
+    public func firstMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<String.ScalarView>? {
         let searchArea = searchRange ?? bounds
 
         // [_Workaround: This is redundant, but solves performance until generics can be forcibly specialized. (Swift 3.1.0)_]
@@ -49,7 +42,7 @@ extension String.UnicodeScalarView : UnicodeScalarView {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: String.UnicodeScalarView, in searchRange: Range<Index>? = nil) -> PatternMatch<String.UnicodeScalarView>? {
+    public func firstMatch(for pattern: String.ScalarView, in searchRange: Range<Index>? = nil) -> PatternMatch<String.ScalarView>? {
 
         // [_Workaround: This is redundant, but solves performance until generics can be forcibly specialized. (Swift 3.1.0)_]
 

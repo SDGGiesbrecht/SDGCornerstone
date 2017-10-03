@@ -13,11 +13,9 @@
  */
 
 /// A calendar compenent representing a day of the month.
-public protocol Day : ConsistentlyOrderedCalendarComponent {
+public protocol Day : ConsistentlyOrderedCalendarComponent
+where Vector : IntegerProtocol {
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-    /// The type to be used as a vector.
-    associatedtype Vector : IntegerProtocol
 }
 
 extension Day {

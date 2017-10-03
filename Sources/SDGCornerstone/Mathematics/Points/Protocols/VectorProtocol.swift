@@ -23,7 +23,7 @@ public protocol VectorProtocol : AdditiveArithmetic {
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.Scalar_]
     // The scalar type.
-    associatedtype Scalar
+    associatedtype Scalar : RationalArithmetic
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.×(_:scalar:)_]
     /// Returns the product of the left times the right.

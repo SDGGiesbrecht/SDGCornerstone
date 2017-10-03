@@ -51,17 +51,17 @@ public struct HebrewPart : CardinalCalendarComponent, ConsistentDurationCalendar
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    public init(unsafeRawValue: FloatMax) {
+    public init(unsafeRawValue: RawValue) {
         part = unsafeRawValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
     /// The valid range for raw values.
-    public static let validRange: Range<FloatMax>? = 0 ..< FloatMax(HebrewPart.partsPerHour)
+    public static let validRange: Range<RawValue>? = 0 ..< FloatMax(HebrewPart.partsPerHour)
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
     /// The raw value.
-    public var rawValue: FloatMax {
+    public var rawValue: RawValue {
         return part
     }
 }

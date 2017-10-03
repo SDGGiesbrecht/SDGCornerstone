@@ -21,7 +21,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Expre
     ///
     /// - Parameters:
     ///     - literal: The collection to match as a literal.
-    public init<C : Collection>(_ literal: C) where C.Iterator.Element == Element {
+    public init<C : Collection>(_ literal: C) where C.Element == Element {
         self.literal = Array(literal)
     }
 
@@ -47,7 +47,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Expre
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
+    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
         if let match = primaryMatch(in: collection, at: location) {
             return [match]
         } else {
@@ -63,7 +63,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Expre
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element {
+    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         var checkingIndex = literal.startIndex
         var collectionIndex = location

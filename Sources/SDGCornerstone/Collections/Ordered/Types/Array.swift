@@ -22,8 +22,8 @@ extension Array : ArrayFamily, PropertyListValue {}
 extension ArraySlice : ArrayFamily {}
 extension ContiguousArray : ArrayFamily {}
 
-extension ArrayFamily where Iterator.Element : Equatable {
-    // MARK: - where Iterator.Element : Equatable
+extension ArrayFamily where Element : Equatable {
+    // MARK: - where Element : Equatable
 
     // [_Workaround: This can be refactored once conditional conformance is available. (Swift 3.1.0)_]
 
@@ -40,17 +40,17 @@ extension ArrayFamily where Iterator.Element : Equatable {
     }
 }
 
-extension ArrayFamily where Iterator.Element : RangeReplaceableCollection {
-    // MARK: - where Iterator.Element : RangeReplaceableCollection
+extension ArrayFamily where Element : RangeReplaceableCollection {
+    // MARK: - where Element : RangeReplaceableCollection
 
     /// Fills the collections in the array so that all of them have the same count.
     ///
     /// - Parameters:
     ///     - element: The element with which to fill the collections.
     ///     - direction: The direction from which to fill the collections.
-    public mutating func equalizeCounts(byFillingWith element: Iterator.Element.Iterator.Element, from direction: FillDirection) {
+    public mutating func equalizeCounts(byFillingWith element: Element.Element, from direction: FillDirection) {
         let count = reduce(0) { Swift.max($0, $1.count) }
-        let mapped = map() { (collection: Iterator.Element) -> Iterator.Element in
+        let mapped = map() { (collection: Element) -> Element in
             var mutable = collection
             mutable.fill(to: count, with: element, from: direction)
             return mutable
@@ -63,7 +63,7 @@ extension ArrayFamily where Iterator.Element : RangeReplaceableCollection {
     /// - Parameters:
     ///     - element: The element with which to fill the collections.
     ///     - direction: The direction from which to fill the collections.
-    public func countsEqualized(byFillingWith element: Iterator.Element.Iterator.Element, from direction: FillDirection) -> Self {
+    public func countsEqualized(byFillingWith element: Element.Element, from direction: FillDirection) -> Self {
         var result = self
         result.equalizeCounts(byFillingWith: element, from: direction)
         return result

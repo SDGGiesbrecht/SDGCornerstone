@@ -13,19 +13,9 @@
  */
 
 /// A calendar component with an iCalendar representation.
-public protocol ICalendarComponent {
+public protocol ISOCalendarComponent {
 
-    // [_Define Documentation: SDGCornerstone.ICalendarCompenent.inICalendarFormat()_]
-    /// Returns a string representation in the iCalendar format.
-    func inICalendarFormat() -> StrictString
-}
-
-extension ICalendarComponent where Self : ISOCalendarComponent {
-    // MARK: - where Self : ISOCalendarComponent
-
-    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.inICalendarFormat()_]
-    /// Returns a string representation in the iCalendar format.
-    public func inICalendarFormat() -> StrictString {
-        return inISOFormat()
-    }
+    // [_Define Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    /// Returns a string representation in the ISO format.
+    func inISOFormat() -> StrictString
 }

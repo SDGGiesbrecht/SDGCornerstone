@@ -126,24 +126,8 @@ extension PointProtocol {
     }
 }
 
-extension PointProtocol where Self.Vector == Self {
-    // MARK: - Self.Vector == Self
-
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the inverse of the vector on the right.
-    ///
-    /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to subtract.
-    ///
-    /// - MutatingVariant: −=
-    public static func − (lhs: Self, rhs: Vector) -> Self { // [_Exempt from Code Coverage_] Apparently unreachable.
-        // Disambiguate Self − Vector = Self vs Self − Self = Vector
-        return subtractAsPointProtocol(lhs, rhs)
-    }
-}
-
-extension PointProtocol where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent {
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self :*/ ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent {
     // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
@@ -169,8 +153,9 @@ extension PointProtocol where Self : ConsistentlyOrderedCalendarComponent, Self 
     }
 }
 
-extension PointProtocol where Self : IntXFamily {
-    // MARK: - where Self : IntXFamily
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self : */IntFamily {
+    // MARK: - where Self : IntFamily
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
     /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
@@ -192,7 +177,7 @@ extension PointProtocol where Self : IntXFamily {
     ///     - rhs: The vector to add.
     ///
     /// - NonmutatingVariant: +
-    public static func += (lhs: inout Self, rhs: Stride) {
+    public static func += (lhs: inout Self, rhs: Vector) {
         lhs = lhs.advanced(by: rhs)
     }
 
@@ -202,12 +187,13 @@ extension PointProtocol where Self : IntXFamily {
     /// - Parameters:
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> Stride {
+    public static func − (lhs: Self, rhs: Self) -> Vector {
         return rhs.distance(to: lhs)
     }
 }
 
-extension PointProtocol where Self : NumericCalendarComponent {
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self : */ NumericCalendarComponent {
     // MARK: - where Self : NumericCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
@@ -218,7 +204,7 @@ extension PointProtocol where Self : NumericCalendarComponent {
     ///     - rhs: The vector to add.
     ///
     /// - NonmutatingVariant: +
-    public static func += (lhs: inout Self, rhs: RawValue) {
+    public static func += (lhs: inout Self, rhs: Vector) {
         lhs = Self(lhs.rawValue + rhs)
     }
 
@@ -228,7 +214,7 @@ extension PointProtocol where Self : NumericCalendarComponent {
     /// - Parameters:
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> RawValue {
+    public static func − (lhs: Self, rhs: Self) -> Vector {
         return lhs.rawValue − rhs.rawValue
     }
 }
@@ -250,8 +236,9 @@ extension PointProtocol where Self : Strideable {
     }
 }
 
-extension PointProtocol where Self : TwoDimensionalPoint {
-    // MARK: - where Self : TwoDimensionalPoint
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar {
+    // MARK: - where Self : TwoDimensionalPoint, Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
     /// Moves the point on the left by the vector on the right.
@@ -279,7 +266,8 @@ extension PointProtocol where Self : TwoDimensionalPoint {
     }
 }
 
-extension PointProtocol where Self : UIntFamily {
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0)_]
+extension /*PointProtocol where Self : */UIntFamily {
     // MARK: - where Self : UIntFamily
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
@@ -302,7 +290,7 @@ extension PointProtocol where Self : UIntFamily {
     ///     - rhs: The vector to add.
     ///
     /// - NonmutatingVariant: +
-    public static func += (lhs: inout Self, rhs: Stride) {
+    public static func += (lhs: inout Self, rhs: Vector) {
         lhs = lhs.advanced(by: rhs)
     }
 
@@ -313,6 +301,15 @@ extension PointProtocol where Self : UIntFamily {
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Stride {
-        return rhs.distance(to: lhs)
+        // [_Workaround: The following causes an EXC_BAD_INSTRUCTION. (Swift 4.0)_]
+        //return rhs.distance(to: lhs)
+        return lhs.toStride() − rhs.toStride()
+    }
+}
+
+extension UIntFamily {
+    // [_Workaround: Should not be necessary but for the above workaround. (Swift 4.0)_]
+    fileprivate func toStride() -> Stride {
+        return (0 as Self).distance(to: self)
     }
 }

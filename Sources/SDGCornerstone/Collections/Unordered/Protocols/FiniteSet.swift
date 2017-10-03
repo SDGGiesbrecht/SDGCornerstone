@@ -18,11 +18,8 @@
 ///
 /// - `SetDefinition`
 /// - `Collection`
-/// - `Iterator.Element == Element`
-public protocol FiniteSet : Collection, ComparableSet, SetDefinition {
-
-    /// :nodoc:
-    static func toElement(_ iteratorElement: Self.Iterator.Element) -> Self.Element
+/// - `Element == Element`
+public protocol FiniteSet : Collection, ComparableSet {
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.⊆_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
@@ -115,23 +112,7 @@ public protocol FiniteSet : Collection, ComparableSet, SetDefinition {
     func isDisjoint<S : FiniteSet>(with other: S) -> Bool where S.Element == Self.Element
 }
 
-extension FiniteSet where Iterator.Element == Element {
-    // MARK: - where Iterator.Element == Element
-
-    // [_Workaround: This can be refactored once this can be a protocol requirement. (Swift 3.1.0)_]
-
-    /// :nodoc:
-    public static func toElement(_ element: Self.Iterator.Element) -> Self.Element {
-        return element
-    }
-}
-
 extension FiniteSet {
-
-    /// The elements as a collection of instances of `Element` instead of `Iterator.Element`.
-    public var elements: LazyMapCollection<Self, Self.Element> {
-        return self.lazy.map({ Self.toElement($0) })
-    }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊆_]
     /// Returns `true` if `lhs` is a subset of `rhs`.
@@ -140,7 +121,7 @@ extension FiniteSet {
     ///     - lhs: The possible subset to test.
     ///     - rhs: The other set.
     public static func ⊆ <S : SetDefinition>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
-        for element in lhs.elements where element ∉ rhs {
+        for element in lhs where element ∉ rhs {
             return false
         }
         return true
@@ -224,7 +205,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - other: The other set.
     public func overlaps<S : SetDefinition>(_ other: S) -> Bool where S.Element == Self.Element {
-        for element in self.elements where element ∈ other {
+        for element in self where element ∈ other {
             return true
         }
         return false

@@ -13,7 +13,8 @@
  */
 
 /// A view of a string’s contents as a collection of Unicode scalar values.
-public protocol UnicodeScalarView : BidirectionalCollection, RangeReplaceableCollection {
+public protocol UnicodeScalarView : BidirectionalCollection, RangeReplaceableCollection
+where Element == Unicode.Scalar/*, Index == String.ScalarView.Index*/ {
+    // [_Workaround: The above line triggers an abort trap. (Swift 4.0)_]
 
-    // [_Workaround: Iterator.Element should be constrained to UnicodeScalar, but this is not yet possible. (Swift 3.1.0)_]
 }

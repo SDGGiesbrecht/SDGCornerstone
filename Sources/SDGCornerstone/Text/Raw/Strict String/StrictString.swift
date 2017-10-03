@@ -15,7 +15,7 @@
 import Foundation
 
 /// A string that maintains Unicode normalization form NFKD.
-public struct StrictString : Addable, BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringLiteral, ExpressibleByTextLiterals, FileConvertible, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
+public struct StrictString : Addable, BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Initialization
 
@@ -24,12 +24,12 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     }
 
     /// Creates a string from a scalar.
-    public init(_ scalar: UnicodeScalar) {
+    public init(_ scalar: Unicode.Scalar) {
         self.init(String(scalar))
     }
 
     /// Creates a string from an extended grapheme cluster.
-    public init(_ cluster: Character) {
+    public init(_ cluster: ExtendedGraphemeCluster) {
         self.init(String(cluster))
     }
 
@@ -68,11 +68,11 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         return StrictString(unsafeString: normalizeAsString(string))
     }
 
-    private static func normalize(_ scalars: String.UnicodeScalarView) -> StrictString {
+    private static func normalize(_ scalars: String.ScalarView) -> StrictString {
         return normalize(String(scalars))
     }
 
-    private static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Iterator.Element == UnicodeScalar {
+    private static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Element == UnicodeScalar {
         switch sequence {
 
         // Already normalized.
@@ -82,10 +82,10 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
             return StrictString(unsafeString: String(strictSlice.base.string.scalars[strictSlice.startIndex ..< strictSlice.endIndex]))
 
         // Need normalization.
-        case let nonStrictScalars as String.UnicodeScalarView :
+        case let nonStrictScalars as String.ScalarView :
             return normalize(nonStrictScalars)
         default:
-            return normalize(String.UnicodeScalarView(sequence))
+            return normalize(String.ScalarView(sequence))
         }
     }
 
@@ -110,7 +110,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - i: The following index.
-    public func index(before i: String.UnicodeScalarView.Index) -> String.UnicodeScalarView.Index {
+    public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(before: i)
     }
 
@@ -118,13 +118,13 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
     /// The position of the first element in a non‐empty collection.
-    public var startIndex: String.UnicodeScalarView.Index {
+    public var startIndex: String.ScalarView.Index {
         return string.scalars.startIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
-    public var endIndex: String.UnicodeScalarView.Index {
+    public var endIndex: String.ScalarView.Index {
         return string.scalars.endIndex
     }
 
@@ -133,13 +133,13 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    public func index(after i: String.UnicodeScalarView.Index) -> String.UnicodeScalarView.Index {
+    public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(after: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
-    public subscript(position: String.UnicodeScalarView.Index) -> UnicodeScalar {
+    public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
         return string.scalars[position]
     }
 
@@ -219,7 +219,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
     /// Creates a new instance of a collection containing the elements of a sequence.
-    public init<S : Sequence>(_ elements: S) where S.Iterator.Element == Iterator.Element {
+    public init<S : Sequence>(_ elements: S) where S.Element == Element {
         self = StrictString.normalize(elements)
     }
 
@@ -232,16 +232,16 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         } else {
 
             var firstString = first.string
-            let previousCharacter = firstString.clusters.removeLast()
+            let previousCluster = firstString.clusters.removeLast()
 
             var secondString = second.string
-            let nextCharacter = secondString.clusters.removeFirst()
+            let nextCluster = secondString.clusters.removeFirst()
 
             // Allow combining characters to re‐order accross the boundary.
-            let nearbyCharacters = normalizeAsString(String(previousCharacter) + String(nextCharacter))
+            let nearbyClusters = normalizeAsString(String(previousCluster) + String(nextCluster))
 
             var result = firstString
-            result.append(nearbyCharacters)
+            result.append(nearbyClusters)
             result.append(secondString)
 
             return StrictString(unsafeString: result)
@@ -250,19 +250,19 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
     /// Appends the contents of the sequence to the end of the collection.
-    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Iterator.Element == UnicodeScalar {
+    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == UnicodeScalar {
         self = StrictString.concatenateStrictStrings(self, StrictString.normalize(newElements))
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
-    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.UnicodeScalarView.Index) where S.Iterator.Element == UnicodeScalar {
+    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.UnicodeScalarView.Index) where S.Element == UnicodeScalar {
         replaceSubrange(i ..< i, with: newElements)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
-    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.UnicodeScalarView.Index>, with newElements: S) where S.Iterator.Element == UnicodeScalar {
+    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.UnicodeScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
 
         let preceding = StrictString(unsafeString: String(string.scalars[string.scalars.startIndex ..< subrange.lowerBound]))
         let succeeding = StrictString(unsafeString: String(string.scalars[subrange.upperBound ..< string.scalars.endIndex]))

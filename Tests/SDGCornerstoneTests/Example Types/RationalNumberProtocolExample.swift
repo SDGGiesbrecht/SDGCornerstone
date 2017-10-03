@@ -54,8 +54,17 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
 
     // IntegralArithmetic
 
-    public init(_ int: IntMax) {
+    init(_ int: SDGCornerstone.IntMax) {
         value = RationalNumber(int)
+    }
+
+    // Numeric
+
+    init?<T>(exactly source: T) where T : BinaryInteger {
+        guard let result = RationalNumber(exactly: source) else {
+            return nil
+        }
+        value = result
     }
 
     // PointProtocol
@@ -86,7 +95,7 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
 
     // WholeArithmetic
 
-    public init(_ uInt: UIntMax) {
+    public init(_ uInt: SDGCornerstone.UIntMax) {
         value = RationalNumber(uInt)
     }
 

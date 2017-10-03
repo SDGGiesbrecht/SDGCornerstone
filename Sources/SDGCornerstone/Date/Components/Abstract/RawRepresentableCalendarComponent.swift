@@ -13,13 +13,14 @@
  */
 
 /// A calendar component defined by a raw value.
-public protocol RawRepresentableCalendarComponent : ConsistentlyOrderedCalendarComponent, ExpressibleByIntegerLiteral {
+public protocol RawRepresentableCalendarComponent : ConsistentlyOrderedCalendarComponent, ExpressibleByIntegerLiteral
+where Vector : IntegralArithmetic {
 
     // MARK: - Associated Type
 
     // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.RawValue_]
     /// The raw value type.
-    associatedtype RawValue : IntegralArithmetic
+    typealias  RawValue = Vector
 
     // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:)_]
     /// Creates an instance with an unchecked raw value.

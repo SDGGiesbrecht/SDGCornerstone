@@ -17,7 +17,7 @@ public struct LineIndex : Comparable, Equatable {
 
     // MARK: - Initialization
 
-    internal init(start: String.UnicodeScalarView.Index, newline: Range<String.UnicodeScalarView.Index>? = nil) {
+    internal init(start: String.ScalarView.Index, newline: Range<String.ScalarView.Index>? = nil) {
         self.start = start
         cache.newline = newline
     }
@@ -33,13 +33,13 @@ public struct LineIndex : Comparable, Equatable {
 
     internal class Cache {
         fileprivate init() {}
-        internal var newline: Range<String.UnicodeScalarView.Index>?
+        internal var newline: Range<String.ScalarView.Index>?
     }
     internal var cache = Cache()
 
-    internal let start: String.UnicodeScalarView.Index? // nil indicates the end index
+    internal let start: String.ScalarView.Index? // nil indicates the end index
 
-    internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.UnicodeScalarView.Index>? where S.Iterator.Element == UnicodeScalar, S.Index == String.UnicodeScalarView.Index {
+    internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? where S.Index == String.ScalarView.Index {
         guard let startIndex = start else {
             return nil
         }

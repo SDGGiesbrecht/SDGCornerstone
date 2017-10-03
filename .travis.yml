@@ -23,56 +23,43 @@ matrix:
     - os: osx
       env:
         - JOB="macOS"
-      osx_image: xcode8.3
+      osx_image: xcode9
       script:
-        - "bash ./Refresh\\ Workspace\\ \\(macOS\\).command"
-        - "bash ./Validate\\ Changes\\ \\(macOS\\).command"
+        - "swift package generate-xcodeproj"
+        - "swift test"
+        - "xcodebuild test -scheme SDGCornerstone-Package -sdk macosx"
     - os: linux
       dist: trusty
       env:
         - JOB="Linux"
-        - SWIFT_VERSION=3.1.1
+        - SWIFT_VERSION=4.0
       script:
         - "eval \"$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)\""
-        - "bash ./Refresh\\ Workspace\\ \\(macOS\\).command"
-        - "bash ./Validate\\ Changes\\ \\(macOS\\).command"
+        - "swift test"
     - os: osx
       env:
         - JOB="iOS"
-      osx_image: xcode8.3
+      osx_image: xcode9
       language: objective-c
       xcode_sdk: iphonesimulator
       script:
-        - "bash ./Refresh\\ Workspace\\ \\(macOS\\).command"
-        - "bash ./Validate\\ Changes\\ \\(macOS\\).command"
+        - "swift package generate-xcodeproj"
+        - "xcodebuild test -scheme SDGCornerstone-Package -destination 'platform=iOS Simulator,name=iPhone 8'"
     - os: osx
       env:
         - JOB="watchOS"
-      osx_image: xcode8.3
+      osx_image: xcode9
       language: objective-c
       xcode_sdk: watchsimulator
       script:
-        - "bash ./Refresh\\ Workspace\\ \\(macOS\\).command"
-        - "bash ./Validate\\ Changes\\ \\(macOS\\).command"
+        - "swift package generate-xcodeproj"
+        - "xcodebuild build -scheme SDGCornerstone-Package -sdk watchos"
     - os: osx
       env:
         - JOB="tvOS"
-      osx_image: xcode8.3
+      osx_image: xcode9
       language: objective-c
       xcode_sdk: appletvsimulator
       script:
-        - "bash ./Refresh\\ Workspace\\ \\(macOS\\).command"
-        - "bash ./Validate\\ Changes\\ \\(macOS\\).command"
-    - os: osx
-      env:
-        - JOB="Misc."
-      osx_image: xcode8.3
-      script:
-        - "brew update"
-        - "brew outdated swiftlint || brew upgrade swiftlint"
-        - "bash ./Refresh\\ Workspace\\ \\(macOS\\).command"
-        - "bash ./Validate\\ Changes\\ \\(macOS\\).command"
-
-cache:
-  directories:
-  - $HOME/.Workspace
+        - "swift package generate-xcodeproj --enable-code-coverage --output SDGCornerstone.xcodeproj"
+        - "xcodebuild test -scheme SDGCornerstone-Package -destination 'platform=tvOS Simulator,name=Apple TV'"

@@ -23,7 +23,7 @@ extension ExpressibleByArrayLiteral where Self : RangeReplaceableCollection {
 
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
     /// Creates an instance from an array literal.
-    public init(arrayLiteral: Iterator.Element...) {
+    public init(arrayLiteral: Element...) {
         self.init()
         append(contentsOf: arrayLiteral)
     }

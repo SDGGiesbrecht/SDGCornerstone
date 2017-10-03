@@ -15,31 +15,10 @@
 /// A calendar compenent representing a day of the week.
 public protocol Weekday : ConsistentlyOrderedCalendarComponent {
 
-    // [_Define Documentation: SDGCornerstone.Weekday.inEnglish()_]
-    /// Returns the English name.
-    func inEnglish() -> StrictString
-
-    // [_Define Documentation: SDGCornerstone.Weekday.aufDeutsch()_]
-    /// Gibt den deutschen Namen zurück.
-    func aufDeutsch() -> StrictString
-
-    // [_Define Documentation: SDGCornerstone.Weekday.enFrançais()_]
-    /// Retourne le nom français.
-    func enFrançais(_ majuscules: Casing) -> StrictString
-
-    // [_Define Documentation: SDGCornerstone.Weekday.σεΕλληνικά()_]
-    /// Επιστρέφει τον ελληνικό όνομα.
-    func σεΕλληνικά() -> StrictString
-
-    // [_Define Documentation: SDGCornerstone.Weekday.בעברית()_]
-    /// מחזירה את השם העברי.
-    func בעברית() -> StrictString
 }
 
-extension Weekday where Vector : ExpressibleByIntegerLiteral {
-    // MARK: - where Vector : ExpressibleByIntegerLiteral
+extension Weekday {
 
-    // [_Inherit Documentation: SDGCornerstone.Weekday.inEnglish()_]
     /// Returns the English name.
     public func inEnglish() -> StrictString {
         switch ordinal {
@@ -62,7 +41,6 @@ extension Weekday where Vector : ExpressibleByIntegerLiteral {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Weekday.aufDeutsch()_]
     /// Gibt den deutschen Namen zurück.
     public func aufDeutsch() -> StrictString {
         switch ordinal {
@@ -85,7 +63,6 @@ extension Weekday where Vector : ExpressibleByIntegerLiteral {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Weekday.enFrançais()_]
     /// Retourne le nom français.
     public func enFrançais(_ majuscules: Casing) -> StrictString {
         let jour: StrictString
@@ -110,7 +87,6 @@ extension Weekday where Vector : ExpressibleByIntegerLiteral {
         return majuscules.applySimpleAlgorithm(to: jour)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Weekday.σεΕλληνικά()_]
     /// Επιστρέφει τον ελληνικό όνομα.
     public func σεΕλληνικά() -> StrictString {
         switch ordinal {
@@ -133,7 +109,6 @@ extension Weekday where Vector : ExpressibleByIntegerLiteral {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Weekday.בעברית()_]
     /// מחזירה את השם העברי.
     public func בעברית() -> StrictString {
         let יום: StrictString = "יום "

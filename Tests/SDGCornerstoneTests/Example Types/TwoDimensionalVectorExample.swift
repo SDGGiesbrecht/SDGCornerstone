@@ -15,39 +15,44 @@
 import SDGCornerstone
 
 #if !os(Linux)
-import CoreGraphics
+    import CoreGraphics
 
-struct TwoDimensionalVectorExample : TwoDimensionalVector {
-    var vector: CGVector
+    struct TwoDimensionalVectorExample : TwoDimensionalVector {
 
-    // AdditiveArithmetic
+        var vector: CGVector
 
-    static let additiveIdentity = TwoDimensionalVectorExample(vector: CGVector(Δx : 0, Δy : 0))
+        // AdditiveArithmetic
 
-    // Equatable
+        static let additiveIdentity = TwoDimensionalVectorExample(vector: CGVector(Δx : 0, Δy : 0))
 
-    static func == (lhs: TwoDimensionalVectorExample, rhs: TwoDimensionalVectorExample) -> Bool {
-        return lhs.vector == rhs.vector
+        // Equatable
+
+        static func == (lhs: TwoDimensionalVectorExample, rhs: TwoDimensionalVectorExample) -> Bool {
+            return lhs.vector == rhs.vector
+        }
+
+        // VectorProtocol
+
+        typealias Scalar = CGVector.Scalar
+
+        // TwoDimensionalVector
+
+        var Δx : CGFloat {
+            get {
+                return vector.Δx
+            }
+            set {
+                vector.Δx = newValue
+            }
+        }
+
+        var Δy : CGFloat {
+            get {
+                return vector.Δy
+            }
+            set {
+                vector.Δy = newValue
+            }
+        }
     }
-
-    // TwoDimensionalVector
-
-    var Δx : CGFloat {
-        get {
-            return vector.Δx
-        }
-        set {
-            vector.Δx = newValue
-        }
-    }
-
-    var Δy : CGFloat {
-        get {
-            return vector.Δy
-        }
-        set {
-            vector.Δy = newValue
-        }
-    }
-}
 #endif

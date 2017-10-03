@@ -55,8 +55,7 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
         }
     }
 
-    /// The magnitude.
-    public private(set) var magnitude: WholeNumber {
+    internal private(set) var wholeMagnitude: WholeNumber {
         get {
             return definition.magnitude
         }
@@ -64,6 +63,7 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
             definition.magnitude = newValue
         }
     }
+
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
     /// Returns `true` if `self` is negative.
     public private(set) var isNegative: Bool {
@@ -89,15 +89,15 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
 
         if lhs.isNegative == rhs.isNegative {
             // Moving away from zero.
-            lhs.magnitude += rhs.magnitude
+            lhs.wholeMagnitude += rhs.wholeMagnitude
         } else {
             // Approaching zero...
-            if lhs.magnitude ≥ rhs.magnitude {
+            if lhs.wholeMagnitude ≥ rhs.wholeMagnitude {
                 // ...but stopping short of crossing it.
-                lhs.magnitude −= rhs.magnitude
+                lhs.wholeMagnitude −= rhs.wholeMagnitude
             } else {
                 // ...and crossing it.
-                lhs.magnitude = rhs.magnitude − lhs.magnitude
+                lhs.wholeMagnitude = rhs.wholeMagnitude − lhs.wholeMagnitude
                 lhs.isNegative¬=
             }
         }
@@ -110,7 +110,7 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
         if lhs.isNegative {
             if rhs.isNegative {
                 // − vs −
-                return lhs.magnitude > rhs.magnitude
+                return lhs.wholeMagnitude > rhs.wholeMagnitude
             } else {
                 // − vs +/0
                 return true
@@ -121,7 +121,7 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
                 return false
             } else {
                 // +/0 vs +/0
-                return lhs.magnitude < rhs.magnitude
+                return lhs.wholeMagnitude < rhs.wholeMagnitude
             }
         }
     }
@@ -135,7 +135,7 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
     public static func == (lhs: Integer, rhs: Integer) -> Bool {
-        return (lhs.isNegative, lhs.magnitude) == (rhs.isNegative, rhs.magnitude)
+        return (lhs.isNegative, lhs.wholeMagnitude) == (rhs.isNegative, rhs.wholeMagnitude)
     }
 
     // MARK: - Hashable
@@ -143,7 +143,7 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
     // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
     /// The hash value.
     public var hashValue: Int {
-        return magnitude.hashValue
+        return wholeMagnitude.hashValue
     }
 
     // MARK: - IntegralArithmetic
@@ -154,7 +154,7 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
     /// - Properties:
     ///     - int: An instance of `IntMax`.
     public init(_ int: IntMax) {
-        magnitude = WholeNumber(UIntMax(|int|))
+        wholeMagnitude = WholeNumber(UIntMax(|int|))
         isNegative = int.isNegative
     }
 
@@ -169,6 +169,22 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
     /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout Integer) {
         operand.isNegative¬=
+    }
+
+    // MARK: - Numeric
+
+    // [_Inherit Documentation: SDGCornerstone.Numeric.init(exactly:)_]
+    /// Creates a new instance from the given integer, if it can be represented exactly.
+    public init?<T>(exactly source: T) where T : BinaryInteger {
+        if let whole = WholeNumber(exactly: source) {
+            self.init(whole)
+            return
+        } else if let integer = IntMax(exactly: source) {
+            self.init(integer)
+            return
+        } else {
+            unreachable()
+        }
     }
 
     // MARK: - PointProtocol
@@ -215,7 +231,7 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
     ///
     /// - RecommendedOver: *=
     public static func ×= (lhs: inout Integer, rhs: Integer) {
-        lhs.magnitude ×= rhs.magnitude
+        lhs.wholeMagnitude ×= rhs.wholeMagnitude
         if lhs.isNegative == rhs.isNegative {
             lhs.isNegative = false
         } else {
@@ -236,10 +252,10 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
 
         let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
-        let needsToWrapToPrevious = negative ∧ ¬magnitude.isDivisible(by: divisor.magnitude)
+        let needsToWrapToPrevious = negative ∧ ¬wholeMagnitude.isDivisible(by: divisor.wholeMagnitude)
         // Wrap to previous if negative (ignoring when exactly even)
 
-        magnitude.divideAccordingToEuclid(by: divisor.magnitude)
+        wholeMagnitude.divideAccordingToEuclid(by: divisor.wholeMagnitude)
         isNegative = negative
 
         if needsToWrapToPrevious {
@@ -256,12 +272,12 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
     public init(randomInRange range: ClosedRange<Integer>, fromRandomizer randomizer: Randomizer) {
 
         if range.lowerBound.isWhole {
-            let wholeRange: ClosedRange<WholeNumber> = range.lowerBound.magnitude ... range.upperBound.magnitude
+            let wholeRange: ClosedRange<WholeNumber> = range.lowerBound.wholeMagnitude ... range.upperBound.wholeMagnitude
             let whole = WholeNumber(randomInRange: wholeRange, fromRandomizer: randomizer)
             self = Integer(whole)
         } else {
             let span = range.upperBound − range.lowerBound
-            let wholeRange: ClosedRange<WholeNumber> = 0 ... span.magnitude
+            let wholeRange: ClosedRange<WholeNumber> = 0 ... span.wholeMagnitude
             let whole = WholeNumber(randomInRange: wholeRange, fromRandomizer: randomizer)
             self = range.lowerBound + Integer(whole)
         }

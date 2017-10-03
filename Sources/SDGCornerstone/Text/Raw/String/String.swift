@@ -14,17 +14,13 @@
 
 import Foundation
 
-extension String : FileConvertible, PropertyListValue, StringFamily {
+extension String : PropertyListValue, StringFamily {
+
+    // MARK: - Initialization
 
     /// Creates a string from a `StrictString`.
     public init(_ string: StrictString) {
         self = string.string
-    }
-
-    // [_Define Documentation: SDGCornerstone.String.isMultiline_]
-    /// Whether or not the string contains multiple lines.
-    public var isMultiline: Bool {
-        return scalars.isMultiline
     }
 
     // MARK: - FileConvertible
@@ -79,11 +75,15 @@ extension String : FileConvertible, PropertyListValue, StringFamily {
 
     // MARK: - StringFamily
 
-    // [_Workaround: Compiler bugs prevent referencing the typealiases. When this is fixed, these properties should be typed as ScalarView and ClusterView. (Swift 3.1.0)_]
+    /// A view of a string's contents as a collection of Unicode scalars.
+    public typealias ScalarView = String.UnicodeScalarView
+
+    /// A view of a string's contents as a collection of extended grapheme clusters.
+    public typealias ClusterView = String
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]
     /// A view of a string’s contents as a collection of Unicode scalars.
-    public var scalars: UnicodeScalarView {
+    public var scalars: ScalarView {
         get {
             return unicodeScalars
         }
@@ -94,12 +94,12 @@ extension String : FileConvertible, PropertyListValue, StringFamily {
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.clusters_]
     /// A view of a string’s contents as a collection of extended grapheme clusters.
-    public var clusters: CharacterView {
+    public var clusters: ClusterView {
         get {
-            return characters
+            return self
         }
         set {
-            characters = newValue
+            self = newValue
         }
     }
 }

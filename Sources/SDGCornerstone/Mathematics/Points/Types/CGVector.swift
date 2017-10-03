@@ -15,7 +15,7 @@
 #if !os(Linux) && !LinuxDocs
     import CoreGraphics
 
-    extension CGVector : AdditiveArithmetic, TwoDimensionalVector {
+    extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
 
         // MARK: - AdditiveArithmetic
 
@@ -25,15 +25,19 @@
 
         // MARK: - TwoDimensionalVector
 
+        // [_Inherit Documentation: SDGCornerstone.VectorProtocol.Scalar_]
+        // The scalar type.
+        public typealias Scalar = CGFloat
+
         // [_Inherit Documentation: SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:)_]
         /// The difference in *y*.
-        public init(Δx : CGFloat, Δy : CGFloat) {
+        public init(Δx : Scalar, Δy : Scalar) {
             self = CGVector(dx: Δx, dy: Δy)
         }
 
         // [_Inherit Documentation: SDGCornerstone.TwoDimensionalVector.Δx_]
         /// The difference in *x*.
-        public var Δx : CGFloat {
+        public var Δx : Scalar {
             get {
                 return dx
             }
@@ -44,7 +48,7 @@
 
         // [_Inherit Documentation: SDGCornerstone.TwoDimensionalVector.Δy_]
         /// The difference in *y*.
-        public var Δy : CGFloat {
+        public var Δy : Scalar {
             get {
                 return dy
             }

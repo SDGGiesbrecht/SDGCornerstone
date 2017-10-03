@@ -13,9 +13,7 @@
  */
 
 /// The smallest component of a particular calendar.
-public protocol SmallestCalendarComponent : ExpressibleByFloatLiteral, NumericCalendarComponent {
+public protocol SmallestCalendarComponent : ExpressibleByFloatLiteral, NumericCalendarComponent
+where RawValue : RationalArithmetic {
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.RawValue_]
-    /// The raw value type.
-    associatedtype RawValue : RationalArithmetic
 }

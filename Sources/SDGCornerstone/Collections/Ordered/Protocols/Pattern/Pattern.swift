@@ -15,7 +15,7 @@
 /// A pattern that can be searched for in collections with equatable elements.
 ///
 /// Required Overrides for Subclasses:
-///     - `func match<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element`
+///     - `func match<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element`
 ///     - `func reverse() -> Pattern<Element>`
 open class Pattern<Element : Equatable> {
 
@@ -35,7 +35,7 @@ open class Pattern<Element : Equatable> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    open func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Iterator.Element == Element {
+    open func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
         primitiveMethod()
     }
 
@@ -47,7 +47,7 @@ open class Pattern<Element : Equatable> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    open func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Iterator.Element == Element {
+    open func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         return matches(in: collection, at: location).first
     }
 

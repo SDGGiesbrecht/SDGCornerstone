@@ -222,8 +222,7 @@ class CollectionTests : TestCase {
             XCTAssert(superset ⊋ subset, "\(superset) ⊋̸ \(subset)")
             XCTAssert(subset ⊊ superset, "\(subset) ⊊̸ \(superset)")
             XCTAssert(¬superset.isDisjoint(with: subset), "\(superset).isDisjoint(with: \(subset))")
-            // [_Workaround: Linux uses the wrong equality check in XCTAssertNotEqual. (Swift 3.1.0)_]
-            XCTAssert(superset ≠ subset)
+            XCTAssertNotEqual(superset, subset)
         }
 
         runTests(superset: Set([1, 2, 3]), subset: Set([1, 2]))
@@ -265,7 +264,7 @@ class CollectionTests : TestCase {
             "c": 5,
             "d": 8
         ]
-        XCTAssertEqual(letters.merged(with: moreLetters, combine: { ($0 ?? 0) + ($1 ?? 0) }), [
+        XCTAssertEqual(letters.merging(moreLetters, uniquingKeysWith: { $0 + $1 }), [
             "a": 4,
             "b": 10,
             "c": 8,
@@ -447,8 +446,8 @@ class CollectionTests : TestCase {
     }
 
     func testRangeReplaceableCollection() {
-        func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Iterator.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
-            where C.Iterator.Element : Equatable, C.IndexDistance : WholeArithmetic, C.Indices.Iterator.Element == C.Index {
+        func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
+            where C.Element : Equatable, C.IndexDistance : WholeArithmetic {
 
                 var collection = start
                 collection += appendix

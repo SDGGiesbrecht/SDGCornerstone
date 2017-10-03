@@ -19,7 +19,7 @@
 /// - `WholeArithmetic`
 /// - `Negatable`
 /// - `init(_ int: IntMax)`
-public protocol IntegralArithmetic : AbsoluteValuable /* requires negatability */, Negatable, SignedNumber, WholeArithmetic {
+public protocol IntegralArithmetic : Negatable, SignedNumeric, WholeArithmetic {
 
     // [_Define Documentation: SDGCornerstone.IntegralArithmetic.init(int:)_]
     /// Creates an instance equal to `int`.
@@ -37,7 +37,7 @@ extension IntegralArithmetic {
     /// - Properties:
     ///     - int: An instance of a member of the `Int` family.
     public init<I : IntFamily>(_ int: I) {
-        self.init(int.toIntMax())
+        self.init(IntMax(int))
     }
 
     internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
@@ -46,5 +46,22 @@ extension IntegralArithmetic {
             digits.prepend("−")
         }
         return digits
+    }
+}
+
+extension BinaryInteger {
+    fileprivate init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
+        self.init(int)
+    }
+}
+extension IntegralArithmetic where Self : IntFamily {
+
+    // [_Inherit Documentation: SDGCornerstone.IntegralArithmetic.init(intFamily:)_]
+    /// Creates an instance equal to `int`.
+    ///
+    /// - Properties:
+    ///     - int: An instance of a member of the `Int` family.
+    public init<I : IntFamily>(_ int: I) {
+        self.init(asBinaryIntegerWithInt: int)
     }
 }

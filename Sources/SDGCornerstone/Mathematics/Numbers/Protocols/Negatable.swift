@@ -26,7 +26,7 @@ postfix operator −=
 
 /// A type that can be additively inverted.
 ///
-/// - Note: Unlike `SignedNumber`, `Negatable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
+/// - Note: Unlike `SignedNumeric`, `Negatable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
 ///
 /// Conformance Requirements:
 ///

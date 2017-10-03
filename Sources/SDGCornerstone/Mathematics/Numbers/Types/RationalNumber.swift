@@ -70,7 +70,7 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
                 unsafeDefinition.denominator−=
             }
 
-            let divisor = gcd(unsafeDefinition.numerator, unsafeDefinition.denominator)
+            let divisor = SDGCornerstone.gcd(unsafeDefinition.numerator, unsafeDefinition.denominator)
 
             unsafeDefinition.numerator = unsafeDefinition.numerator.dividedAccordingToEuclid(by: divisor)
             unsafeDefinition.denominator = unsafeDefinition.denominator.dividedAccordingToEuclid(by: divisor)
@@ -182,6 +182,17 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
     /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout RationalNumber) {
         operand.definition.numerator−=
+    }
+
+    // MARK: - Numeric
+
+    // [_Inherit Documentation: SDGCornerstone.Numeric.init(exactly:)_]
+    /// Creates a new instance from the given integer, if it can be represented exactly.
+    public init?<T>(exactly source: T) where T : BinaryInteger {
+        guard let integer = Integer(exactly: source) else {
+            unreachable()
+        }
+        self.init(integer)
     }
 
     // MARK: - PointProtocol

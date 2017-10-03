@@ -14,7 +14,7 @@
 
 import Foundation
 
-/// A property list value. (`Bool`, `IntFamily`, `FloatFamily`, `String` (except `Float80`), `Date`, `Data`, `[PropertyListValue]`, [String: PropertyListValue], or `UIntFamily`)
+/// A property list value. (`Bool`, `IntFamily`, `FloatFamily` (except `Float80`), `String`, `Date`, `Data`, `[PropertyListValue]`, `[String: PropertyListValue]`, or `UIntFamily`)
 public protocol PropertyListValue {
 
 }

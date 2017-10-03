@@ -41,15 +41,15 @@ class MathematicsTests : TestCase {
             XCTAssertEqual((_1 × τ()).rad.inRotations, _1)
 
             let πValue: N = πLiteral()
-            XCTAssert((_1 × 180)° ≈ πValue.rad)
+            XCTAssert((_1 × 180)°.rawValue ≈ πValue.rad.rawValue)
             XCTAssert((_1 × 6)°.inDegrees ≈ _1 × 6)
             XCTAssertEqual((_1 × 60)′, _1°)
             XCTAssert((_1 × 6)′.inMinutes ≈ _1 × 6)
             XCTAssertEqual((_1 × 60)′′, _1′)
             XCTAssert((_1 × 6)′′.inSeconds ≈ _1 × 6)
 
-            XCTAssert((_1 × 200).gradians ≈ πValue.rad)
-            XCTAssert((_1 × 200).gon ≈ πValue.rad)
+            XCTAssert((_1 × 200).gradians.rawValue ≈ πValue.rad.rawValue)
+            XCTAssert((_1 × 200).gon.rawValue ≈ πValue.rad.rawValue)
             XCTAssert((_1 × 6).gradians.inGradians ≈ _1 × 6)
 
             variable = _1.rad
@@ -76,9 +76,9 @@ class MathematicsTests : TestCase {
             XCTAssert((_1 × 2).rad.isDivisible(by: _1.rad))
             let _1_5 = gcd((_1 × 1.5).rad, (_1 × 3).rad)
             let _1_5b = gcd((_1 × 3).rad, (_1 × 1.5).rad)
-            XCTAssert(_1_5 ≈ (_1 × 1.5).rad)
+            XCTAssert(_1_5.rawValue ≈ (_1 × 1.5).rad.rawValue)
             XCTAssertEqual(_1_5, _1_5b)
-            XCTAssert(lcm((_1 × 1.5).rad, (_1 × 0.5).rad) ≈ (_1 × 1.5).rad)
+            XCTAssert(lcm((_1 × 1.5).rad, (_1 × 0.5).rad).rawValue ≈ (_1 × 1.5).rad.rawValue)
 
             XCTAssertEqual(_1.rad.rounded(.down, toMultipleOf: _1.rad × 2), _1.rad × 0)
 
@@ -189,11 +189,10 @@ class MathematicsTests : TestCase {
             XCTAssert(minusOne.isNegative)
 
             XCTAssertEqual(|minusOne|, one)
-            /* Swift.AbsoluteValuable */ XCTAssertEqual(abs(minusOne), one)
 
             XCTAssertEqual(−one, minusOne)
-            /* Swift.SignedNumber */ XCTAssertEqual(-one, minusOne)
-            /* Swift.SignedNumber */ XCTAssertEqual(one - minusOne, two)
+            /* Swift.SignedNumeric */ XCTAssertEqual(-one, minusOne)
+            /* Swift.SignedNumeric */ XCTAssertEqual(one - minusOne, two)
 
             XCTAssertEqual(three.dividedAccordingToEuclid(by: −two), −two)
             XCTAssertEqual((−three).dividedAccordingToEuclid(by: two), −two)
@@ -219,7 +218,7 @@ class MathematicsTests : TestCase {
         runTests(RationalNumber.self)
         runTests(RealArithmeticExample.self)
 
-        func runStrideableTests<N : IntegralArithmetic>(_ type: N.Type) where N : Strideable, N.Stride == N {
+        func runStrideableTests<N : IntegralArithmetic>(_ type: N.Type) where N.Stride == N {
             let _1: N = 1
             XCTAssertEqual(_1.advanced(by: 1), _1 + 1)
 
@@ -269,7 +268,7 @@ class MathematicsTests : TestCase {
         x.decrement()
         XCTAssertEqual(x, 0)
 
-        func runStrideableTests<N : FixedScaleOneDimensionalPoint>(start: N, end: N, vector: N.Vector) where N : Strideable, N.Vector == N.Stride {
+        func runStrideableTests<N : FixedScaleOneDimensionalPoint>(start: N, end: N, vector: N.Vector) {
             XCTAssertEqual(start.advanced(by: vector), end)
 
             XCTAssertEqual(start.distance(to: end), vector)
@@ -423,14 +422,14 @@ class MathematicsTests : TestCase {
             XCTAssert(sec(_1.rad × 2) ≈ −2.403_00 as N)
             XCTAssert(cot(_1.rad × 3) ≈ −7.015_26 as N)
 
-            XCTAssert(arcsin(_1 ÷ 6) ≈ (0.167_44 as N).rad)
-            XCTAssert(arccos(_1 ÷ 7) ≈ (1.427_44 as N).rad)
-            XCTAssert(arctan(_1 ÷ 2) ≈ (0.463_64 as N).rad)
-            XCTAssert(arctan(_1 × 2) ≈ (1.107_14 as N).rad)
-            XCTAssert(arccsc(_1 × 3) ≈ (0.339_83 as N).rad)
-            XCTAssert(arcsec(_1 × 4) ≈ (1.318_11 as N).rad)
-            XCTAssert(arccot(_1 × 5) ≈ (0.197_39 as N).rad)
-            XCTAssert(arccot(_1 × −2) ≈ (2.677_94 as N).rad)
+            XCTAssert(arcsin(_1 ÷ 6).rawValue ≈ (0.167_44 as N).rad.rawValue)
+            XCTAssert(arccos(_1 ÷ 7).rawValue ≈ (1.427_44 as N).rad.rawValue)
+            XCTAssert(arctan(_1 ÷ 2).rawValue ≈ (0.463_64 as N).rad.rawValue)
+            XCTAssert(arctan(_1 × 2).rawValue ≈ (1.107_14 as N).rad.rawValue)
+            XCTAssert(arccsc(_1 × 3).rawValue ≈ (0.339_83 as N).rad.rawValue)
+            XCTAssert(arcsec(_1 × 4).rawValue ≈ (1.318_11 as N).rad.rawValue)
+            XCTAssert(arccot(_1 × 5).rawValue ≈ (0.197_39 as N).rad.rawValue)
+            XCTAssert(arccot(_1 × −2).rawValue ≈ (2.677_94 as N).rad.rawValue)
         }
         runTests(Double.self)
         #if os(macOS) || os(Linux)

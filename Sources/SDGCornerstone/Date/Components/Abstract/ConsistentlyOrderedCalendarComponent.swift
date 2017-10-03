@@ -42,8 +42,8 @@ public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedS
     var ordinal: Vector { get }
 }
 
-extension ConsistentlyOrderedCalendarComponent where Self : CardinalCalendarComponent, Self.Vector == Self.RawValue {
-    // MARK: - where Self : CardinalCalendarComponent, Self.Vector == Self.RawValue
+extension ConsistentlyOrderedCalendarComponent where Self : CardinalCalendarComponent {
+    // MARK: - where Self : CardinalCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
     /// Creates a component from the number of complete components already elapsed.
@@ -76,12 +76,12 @@ extension ConsistentlyOrderedCalendarComponent where Self : CardinalCalendarComp
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal_]
     /// The ordinal.
     public var ordinal: RawValue {
-        return rawValue + 1
+        return rawValue + (1 as Vector)
     }
 }
 
-extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.RawValue.Vector : ExpressibleByIntegerLiteral {
-    // MARK: - where Self : OrdinalCalendarComponent, Self.RawValue.Vector : ExpressibleByIntegerLiteral
+extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent {
+    // MARK: - where Self : EnumerationCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
     /// Creates a component from the number of complete components already elapsed.
@@ -126,8 +126,8 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
     }
 }
 
-extension ConsistentlyOrderedCalendarComponent where Self : OrdinalCalendarComponent, Self.Vector == Self.RawValue {
-    // MARK: - where Self : OrdinalCalendarComponent, Self.Vector == Self.RawValue
+extension ConsistentlyOrderedCalendarComponent where Self : OrdinalCalendarComponent {
+    // MARK: - where Self : OrdinalCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
     /// Creates a component from the number of complete components already elapsed.
@@ -137,7 +137,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : OrdinalCalendarCompo
     /// - Parameters:
     ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
     public init(numberAlreadyElapsed: Vector) {
-        self.init(numberAlreadyElapsed + 1)
+        self.init(numberAlreadyElapsed + (1 as Vector))
     }
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(ordinal:)_]

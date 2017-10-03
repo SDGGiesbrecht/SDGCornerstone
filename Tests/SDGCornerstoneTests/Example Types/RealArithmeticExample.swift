@@ -50,8 +50,17 @@ struct RealArithmeticExample : RealArithmetic {
 
     // IntegralArithmetic
 
-    public init(_ int: IntMax) {
+    public init(_ int: SDGCornerstone.IntMax) {
         value = FloatMax(int)
+    }
+
+    // Numeric
+
+    init?<T>(exactly source: T) where T : BinaryInteger {
+        guard let result = FloatMax(exactly: source) else {
+            return nil
+        }
+        value = result
     }
 
     // PointProtocol
@@ -98,7 +107,7 @@ struct RealArithmeticExample : RealArithmetic {
 
     // WholeArithmetic
 
-    public init(_ uInt: UIntMax) {
+    public init(_ uInt: SDGCornerstone.UIntMax) {
         value = FloatMax(uInt)
     }
 

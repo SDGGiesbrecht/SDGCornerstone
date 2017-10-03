@@ -83,7 +83,7 @@
         /// - Parameters:
         ///     - i: The preceding index.
         public func index(after i: Index) -> Index {
-            return i + 1
+            return i + (1 as Index)
         }
 
         // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
@@ -95,7 +95,7 @@
             }
             set {
                 assertIndexExists(index)
-                let oldErased = uInt.bitwiseAnd(with: (1 << index).bitwiseNot())
+                let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << index).bitwiseNot())
                 uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << index)
             }
         }

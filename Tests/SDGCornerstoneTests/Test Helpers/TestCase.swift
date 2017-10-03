@@ -44,7 +44,7 @@ class TestCase : XCTestCase {
         let mean = sum ÷ TimeInterval(iterations)
 
         if mean > duration {
-            XCTFail("“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds.", file: file, line: line)
+            XCTFail("“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds).", file: file, line: line)
         } else {
             print("• “\(testName)” took an average of \(mean) seconds.")
         }

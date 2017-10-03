@@ -36,7 +36,7 @@ private let endSubscript: UnicodeScalar = "\u{107003}"
 /// private let beginSubscript: UnicodeScalar = "\u{107002}"
 /// private let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
-public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equatable, ExpressibleByTextLiterals, Hashable, RangeReplaceableCollection {
+public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection {
 
     // MARK: - Initialization
 
@@ -138,7 +138,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equ
     ///
     /// - Parameters:
     ///     - i: The following index.
-    public func index(before i: String.UnicodeScalarView.Index) -> String.UnicodeScalarView.Index {
+    public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(before: i)
     }
 
@@ -146,13 +146,13 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equ
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
     /// The position of the first element in a non‐empty collection.
-    public var startIndex: String.UnicodeScalarView.Index {
+    public var startIndex: String.ScalarView.Index {
         return source.startIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
-    public var endIndex: String.UnicodeScalarView.Index {
+    public var endIndex: String.ScalarView.Index {
         return source.endIndex
     }
 
@@ -161,13 +161,13 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equ
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    public func index(after i: String.UnicodeScalarView.Index) -> String.UnicodeScalarView.Index {
+    public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(after: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
-    public subscript(position: String.UnicodeScalarView.Index) -> UnicodeScalar {
+    public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
         return source[position]
     }
 
@@ -183,9 +183,9 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equ
         return lhs.source == rhs.source
     }
 
-    // MARK: - ExpressibleByTextLiterals
+    // MARK: - ExpressibleByStringLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByTextLiterals.init(stringLiteral:)_]
+    // [_Inherit Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
     /// Creates an instance from a string literal.
     ///
     /// - Parameters:
@@ -212,25 +212,25 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equ
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
     /// Creates a new instance of a collection containing the elements of a sequence.
-    public init<S : Sequence>(_ elements: S) where S.Iterator.Element == Iterator.Element {
+    public init<S : Sequence>(_ elements: S) where S.Element == Element {
         source = StrictString(elements)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
     /// Appends the contents of the sequence to the end of the collection.
-    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Iterator.Element == UnicodeScalar {
+    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == UnicodeScalar {
         source.append(contentsOf: newElements)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
-    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.UnicodeScalarView.Index) where S.Iterator.Element == UnicodeScalar {
+    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == UnicodeScalar {
         source.insert(contentsOf: newElements, at: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
-    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.UnicodeScalarView.Index>, with newElements: S) where S.Iterator.Element == UnicodeScalar {
+    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
         source.replaceSubrange(subrange, with: newElements)
     }
 }

@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// `String` or `StrictString`
-public protocol StringFamily : Addable, Comparable, CustomStringConvertible, Equatable, ExpressibleByTextLiterals, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
+/// A `String` or `StrictString`.
+public protocol StringFamily : Addable, Comparable, ExpressibleByStringLiteral, FileConvertible, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Associated Types
 
@@ -37,7 +37,8 @@ public protocol StringFamily : Addable, Comparable, CustomStringConvertible, Equ
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(clusters:)_]
     /// Creates a string from a collection of clusters.
-    init(_ clusters: ClusterView)
+    //init(_ clusters: ClusterView)
+    // [_Workaround: A compiler bug would make this unconformable for String. (Swift 4.0)_]
 
     // MARK: - Properties
 
@@ -50,8 +51,8 @@ public protocol StringFamily : Addable, Comparable, CustomStringConvertible, Equ
     var clusters: ClusterView { get set }
 }
 
-extension StringFamily where ScalarView.Iterator.Element == UnicodeScalar, ScalarView.Index == String.UnicodeScalarView.Index, ScalarView.SubSequence.Iterator.Element == ScalarView.Iterator.Element /* [_Workaround: The where statement is redundant. Once the constraint can be added to the protocol, it should be removed here. (Swift 3.1.0)_] */ {
-    // MARK: - where ScalarView.Iterator.Element == UnicodeScalar
+extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0)_] */ {
+    // MARK: - where ScalarView.Index == String.ScalarView.Index
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]
     /// Creates a string from a collection of lines.
@@ -68,5 +69,11 @@ extension StringFamily where ScalarView.Iterator.Element == UnicodeScalar, Scala
         set {
             self = newValue.base
         }
+    }
+
+    // [_Define Documentation: SDGCornerstone.String.isMultiline_]
+    /// Whether or not the string contains multiple lines.
+    public var isMultiline: Bool {
+        return scalars.isMultiline
     }
 }
