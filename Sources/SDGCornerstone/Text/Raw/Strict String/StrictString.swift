@@ -179,6 +179,9 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
     /// Creates an instance from a string literal.
+    ///
+    /// - Parameters:
+    ///     - stringLiteral: The string literal.
     public init(stringLiteral: String) {
         self.init(stringLiteral)
     }
