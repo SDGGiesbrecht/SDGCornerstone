@@ -74,11 +74,13 @@ struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, Signed
         return value.magnitude
     }
 
-    internal static func *(lhs: AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf {
+    // func ×
+    internal static func * (lhs: AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf {
         return AddableExampleWhereStrideableAndStrideIsSelf(lhs.value × rhs.value)
     }
 
-    internal static func *=(lhs: inout AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) {
+    // func ×=
+    internal static func *= (lhs: inout AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) {
         lhs.value ×= rhs.value
     }
 

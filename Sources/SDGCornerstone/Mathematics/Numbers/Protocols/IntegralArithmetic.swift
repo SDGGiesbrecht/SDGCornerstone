@@ -55,6 +55,7 @@ extension BinaryInteger {
     }
 }
 extension IntegralArithmetic where Self : IntFamily {
+    // MARK: - where Self : IntFamily
 
     // [_Inherit Documentation: SDGCornerstone.IntegralArithmetic.init(intFamily:)_]
     /// Creates an instance equal to `int`.

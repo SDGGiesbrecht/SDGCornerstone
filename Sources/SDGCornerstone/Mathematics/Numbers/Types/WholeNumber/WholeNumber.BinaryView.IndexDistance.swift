@@ -100,12 +100,14 @@ extension WholeNumber.BinaryView {
             return IndexDistance(digitDistance: |digitDistance|, bitDistance: |bitDistance|)
         }
 
-        internal static func *(lhs: IndexDistance, rhs: IndexDistance) -> IndexDistance {
+        // func ×
+        internal static func * (lhs: IndexDistance, rhs: IndexDistance) -> IndexDistance {
             unreachable()
             // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }
 
-        internal static func *=(lhs: inout IndexDistance, rhs: IndexDistance) {
+        // func ×=
+        internal static func *= (lhs: inout IndexDistance, rhs: IndexDistance) {
             unreachable()
             // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }

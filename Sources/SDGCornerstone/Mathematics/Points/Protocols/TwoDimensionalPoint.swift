@@ -74,6 +74,7 @@ public protocol TwoDimensionalPoint : PointProtocol
 }
 
 extension TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar {
+    // MARK: - where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
     /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
