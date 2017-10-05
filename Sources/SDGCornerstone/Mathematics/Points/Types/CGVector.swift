@@ -26,13 +26,7 @@
         // MARK: - TwoDimensionalVector
 
         // [_Inherit Documentation: SDGCornerstone.VectorProtocol.Scalar_]
-        /// Returns the product of the left times the right.
-        ///
-        /// - Parameters:
-        ///     - lhs: A value.
-        ///     - rhs: A scalar coefficient.
-        ///
-        /// - MutatingVariant: ×=
+        /// The scalar type.
         // The scalar type.
         public typealias Scalar = CGFloat
 
