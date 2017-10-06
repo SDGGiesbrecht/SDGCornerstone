@@ -193,6 +193,9 @@ class MathematicsTests : TestCase {
             XCTAssertEqual(−one, minusOne)
             /* Swift.SignedNumeric */ XCTAssertEqual(-one, minusOne)
             /* Swift.SignedNumeric */ XCTAssertEqual(one - minusOne, two)
+            var mutable = one
+            mutable.negate()
+            XCTAssertEqual(mutable, minusOne)
 
             XCTAssertEqual(three.dividedAccordingToEuclid(by: −two), −two)
             XCTAssertEqual((−three).dividedAccordingToEuclid(by: two), −two)
@@ -463,6 +466,15 @@ class MathematicsTests : TestCase {
         runTests(minuend: SubtractableExampleWherePointProtocolAndVectorIsSelf(3), subtrahend: SubtractableExampleWherePointProtocolAndVectorIsSelf(2), difference: SubtractableExampleWherePointProtocolAndVectorIsSelf(1))
         runTests(minuend: RationalNumberProtocolExample(3), subtrahend: RationalNumberProtocolExample(2), difference: RationalNumberProtocolExample(1))
         runTests(minuend: RealArithmeticExample(3), subtrahend: RealArithmeticExample(2), difference: RealArithmeticExample(1))
+
+        func runNumericTests<T: Subtractable>(minuend: T, subtrahend: T) where T : Numeric {
+            XCTAssertEqual(/* Swift.Numeric */ minuend - subtrahend, minuend − subtrahend)
+            var mutable = minuend
+            /* Swift.Numeric */ mutable -= subtrahend
+            XCTAssertEqual(mutable, minuend − subtrahend)
+        }
+        runNumericTests(minuend: 3 as WholeNumber, subtrahend: 2)
+        runNumericTests(minuend: 3 as Integer, subtrahend: 2)
     }
 
     func testTuple() {
@@ -580,6 +592,13 @@ class MathematicsTests : TestCase {
             if N.self ≠ Int8.self ∧ N.self ≠ UInt8.self {
                 XCTAssertEqual(N("10 000"), 10_000)
             }
+
+            XCTAssertEqual(one.magnitude, (|one|).magnitude)
+
+            XCTAssertEqual(/* Swift.Numeric */ three * two, three × two)
+            var mutable = three
+            /* Swift.Numeric */ mutable *= two
+            XCTAssertEqual(mutable, three × two)
         }
         runTests(UInt.self)
         runTests(UInt64.self)
