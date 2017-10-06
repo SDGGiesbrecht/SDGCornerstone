@@ -41,7 +41,7 @@ infix operator ÷=: AssignmentPrecedence
 /// Conformance Requirements:
 ///
 /// - `IntegralArithmetic`
-/// - `ExpressibleByFloatLiteral`
+/// - `init(_ floatingPoint: FloatMax)`
 /// - `static func ÷= (lhs: inout Self, rhs: Self)`
 public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmetic {
 
