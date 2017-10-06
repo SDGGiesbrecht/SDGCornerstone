@@ -20,10 +20,10 @@
 /// - `var y: Scalar { get set }`
 public protocol TwoDimensionalPoint : PointProtocol
 /*where Vector : TwoDimensionalVector*/ {
-    // [_Workaround: The above line causes an abort trap. (Swift 4.0)_]
+    // [_Workaround: The above line causes an abort trap. (Swift ?)_]
 
     //typealias Scalar = Vector.Scalar
-    // [_Workaround: Related to the workaround at the top of the file. (Swift 4.0)_]
+    // [_Workaround: Related to the workaround at the top of the file. (Swift ?)_]
     associatedtype Scalar
 
     // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.x_]

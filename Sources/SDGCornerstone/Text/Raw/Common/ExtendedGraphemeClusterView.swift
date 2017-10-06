@@ -15,6 +15,6 @@
 /// A view of a string’s contents as a collection of extended grapheme clusters.
 public protocol ExtendedGraphemeClusterView : BidirectionalCollection, RangeReplaceableCollection
 where Element == ExtendedGraphemeCluster/*, Index == String.Index*/ {
-    // [_Workaround: The above line triggers an abort trap. (Swift 4.0)_]
+    // [_Workaround: The above line triggers an abort trap. (Swift ?)_]
 
 }

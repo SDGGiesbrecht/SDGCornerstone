@@ -252,7 +252,7 @@ class TextTests : TestCase {
 
             XCTAssertEqual(S(helloWorld.scalars), helloWorld)
             //XCTAssertEqual(S(helloWorld.clusters), helloWorld)
-            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift 4.0)_]
+            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift ?)_]
 
             XCTAssertNotNil(helloWorld.scalars.first)
 
@@ -260,7 +260,7 @@ class TextTests : TestCase {
             XCTAssert(helloWorld ∈ set)
 
             //XCTAssert(S(S.ClusterView()).scalars.isEmpty)
-            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift 4.0)_]
+            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift ?)_]
             XCTAssert(S(S.ScalarView()).clusters.isEmpty)
         }
 

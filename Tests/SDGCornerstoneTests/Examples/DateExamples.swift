@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/* // [_Workaround: This inexplicably causes an abort trap. (Swift 4.0)_]
+/* // [_Workaround: This inexplicably causes an abort trap. (Swift ?)_]
 import Foundation
 import SDGCornerstone
 
