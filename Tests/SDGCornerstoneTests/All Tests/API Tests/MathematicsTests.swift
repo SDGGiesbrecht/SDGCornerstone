@@ -467,7 +467,7 @@ class MathematicsTests : TestCase {
         runTests(minuend: RationalNumberProtocolExample(3), subtrahend: RationalNumberProtocolExample(2), difference: RationalNumberProtocolExample(1))
         runTests(minuend: RealArithmeticExample(3), subtrahend: RealArithmeticExample(2), difference: RealArithmeticExample(1))
 
-        func runNumericTests<T: Subtractable>(minuend: T, subtrahend: T) where T : Numeric {
+        func runNumericTests<T : Subtractable>(minuend: T, subtrahend: T) where T : Numeric {
             XCTAssertEqual(/* Swift.Numeric */ minuend - subtrahend, minuend − subtrahend)
             var mutable = minuend
             /* Swift.Numeric */ mutable -= subtrahend
