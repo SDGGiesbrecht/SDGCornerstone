@@ -245,6 +245,9 @@ class TextTests : TestCase {
 
         XCTAssert("\n".isMultiline)
         XCTAssert(¬"...".isMultiline)
+
+        XCTAssertEqual(StrictString(StrictString.ClusterView()), "")
+        XCTAssert(StrictString.ClusterView("..." as String).elementsEqual(("..." as StrictString).clusters))
     }
 
     func testString() {
