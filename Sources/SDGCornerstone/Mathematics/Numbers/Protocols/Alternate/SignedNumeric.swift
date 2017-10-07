@@ -16,7 +16,7 @@ extension SignedNumeric where Self : Negatable {
     // MARK: - where Self : Negatable
 
     /// Returns the additive inverse of the specified value.
-    public static prefix func -(operand: Self) -> Self {
+    public static prefix func - (operand: Self) -> Self {
         return −operand
     }
 

@@ -89,8 +89,9 @@ infix operator ↑=: AssignmentPrecedence
 /// Conformance Requirements:
 ///
 /// - `NumericAdditiveArithmetic`
-/// - `OneDimensionalPoint`
+/// - `FixedScaleOneDimensionalPoint`
 /// - `init(_ uInt: UIntMax)`
+/// - `init?<T>(exactly source: T) where T : BinaryInteger`
 /// - `static func ×= (lhs: inout Self, rhs: Self)`
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
 /// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (lhs: inout Self, rhs: Self)`

@@ -26,6 +26,7 @@
         // MARK: - TwoDimensionalVector
 
         // [_Inherit Documentation: SDGCornerstone.VectorProtocol.Scalar_]
+        /// The scalar type.
         // The scalar type.
         public typealias Scalar = CGFloat
 

@@ -13,7 +13,7 @@
  */
 
 extension String.UnicodeScalarView : UnicodeScalarView {
-    // [_Workaround: The previous line should read “String.ScalarView” but a compiler bug prevents it. (Swift 4.0)_]
+    // [_Workaround: The previous line should read “String.ScalarView” but a compiler bug prevents it. (Swift ?)_]
 
     // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
     /// Returns the first match for `pattern` in the specified subrange.

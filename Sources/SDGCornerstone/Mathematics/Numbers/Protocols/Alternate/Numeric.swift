@@ -31,12 +31,12 @@ extension Numeric where Self : Subtractable {
     // MARK: - where Self : Subtractable
 
     /// Subtracts one value from another and produces their difference.
-    public static func -(lhs: Self, rhs: Self) -> Self {
+    public static func - (lhs: Self, rhs: Self) -> Self {
         return lhs − rhs
     }
 
     /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
-    public static func -=(lhs: inout Self, rhs: Self) {
+    public static func -= (lhs: inout Self, rhs: Self) {
         lhs −= rhs
     }
 }
@@ -45,12 +45,12 @@ extension Numeric where Self : Subtractable, Self : Strideable, Self.Stride == S
     // MARK: - where Self : Subtractable, Self : Strideable, Self.Stride == Self
 
     /// Subtracts one value from another and produces their difference.
-    public static func -(lhs: Self, rhs: Self) -> Self {
+    public static func - (lhs: Self, rhs: Self) -> Self {
         return lhs − rhs
     }
 
     /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
-    public static func -=(lhs: inout Self, rhs: Self) {
+    public static func -= (lhs: inout Self, rhs: Self) {
         lhs −= rhs
     }
 }
@@ -59,12 +59,12 @@ extension Numeric where Self : WholeArithmetic {
     // MARK: - where Self : WholeArithmetic
 
     /// Multiplies two values and produces their product.
-    public static func *(lhs: Self, rhs: Self) -> Self {
+    public static func * (lhs: Self, rhs: Self) -> Self {
         return lhs × rhs
     }
 
     /// Multiplies two values and stores the result in the left‐hand‐side variable.
-    public static func *=(lhs: inout Self, rhs: Self) {
+    public static func *= (lhs: inout Self, rhs: Self) {
         lhs ×= rhs
     }
 }

@@ -22,7 +22,7 @@
 public protocol VectorProtocol : AdditiveArithmetic {
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.Scalar_]
-    // The scalar type.
+    /// The scalar type.
     associatedtype Scalar : RationalArithmetic
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.×(_:scalar:)_]
