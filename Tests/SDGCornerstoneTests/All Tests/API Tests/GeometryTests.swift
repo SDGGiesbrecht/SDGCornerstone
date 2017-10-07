@@ -23,7 +23,7 @@ import SDGCornerstone
 
 class GeometryTests : TestCase {
 
-    func testPoint() {/* [_Workaround: See CGPoint.swift. (Swift 4.0)_]
+    func testPoint() {
         #if !os(Linux)
             XCTAssertEqual(CGPoint(x: 1, y: 1) − CGVector(Δx : 1, Δy : 1), CGPoint(x: 0, y: 0))
             XCTAssertEqual(CGPoint(x: 0, y: 0) + CGVector(Δx : 1, Δy : 1), CGPoint(x: 1, y: 1))
@@ -35,7 +35,7 @@ class GeometryTests : TestCase {
             let anotherPoint = point.rounded(.down)
             XCTAssert(anotherPoint.x ≈ 1)
             XCTAssert(anotherPoint.y ≈ 1)
-        #endif*/
+        #endif
     }
 
     func testVector() {
