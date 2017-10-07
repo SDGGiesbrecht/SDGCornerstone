@@ -213,9 +213,6 @@
                 <a href="Extensions/Float80.html">Float80</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/FloatingPoint.html">FloatingPoint</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Extensions/Hashable.html">Hashable</a>
               </li>
               <li class="nav-group-task">
@@ -2190,7 +2187,7 @@
 
 <ul>
 <li><code><a href="Protocols/IntegralArithmetic.html">IntegralArithmetic</a></code></li>
-<li><code>ExpressibleByFloatLiteral</code></li>
+<li><code>init(_ floatingPoint: FloatMax)</code></li>
 <li><code>static func ÷= (lhs: inout Self, rhs: Self)</code></li>
 </ul>
 
@@ -2398,8 +2395,9 @@
 
 <ul>
 <li><code><a href="Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a></code></li>
-<li><code><a href="Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a></code></li>
+<li><code><a href="Protocols.html#/s:14SDGCornerstone29FixedScaleOneDimensionalPointP">FixedScaleOneDimensionalPoint</a></code></li>
 <li><code>init(_ uInt: UIntMax)</code></li>
+<li><code>init?&lt;T&gt;(exactly source: T) where T : BinaryInteger</code></li>
 <li><code>static func ×= (lhs: inout Self, rhs: Self)</code></li>
 <li><code>mutating func divideAccordingToEuclid(by divisor: Self)</code></li>
 <li><code><a href="Protocols/WholeNumberProtocol.html">WholeNumberProtocol</a></code>, <code><a href="Protocols/IntegerProtocol.html">IntegerProtocol</a></code>, <code><a href="Protocols/RationalNumberProtocol.html">RationalNumberProtocol</a></code> or <code>static func ↑= (lhs: inout Self, rhs: Self)</code></li>
