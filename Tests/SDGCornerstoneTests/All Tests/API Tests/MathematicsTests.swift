@@ -117,6 +117,16 @@ class MathematicsTests : TestCase {
 
         XCTAssertEqual(RationalNumber(undecillion).numerator, Integer(undecillion))
         XCTAssertEqual(RationalNumber(50), 50)
+
+        XCTAssertNotNil(WholeNumber(exactly: SDGCornerstone.UIntMax.max))
+        XCTAssertNotNil(WholeNumber(exactly: SDGCornerstone.IntMax.max))
+        XCTAssertNil(WholeNumber(exactly: SDGCornerstone.IntMax.min))
+        XCTAssertNotNil(Integer(exactly: SDGCornerstone.UIntMax.max))
+        XCTAssertNotNil(Integer(exactly: SDGCornerstone.IntMax.max))
+        XCTAssertNotNil(Integer(exactly: SDGCornerstone.IntMax.min))
+        XCTAssertNotNil(RationalNumber(exactly: SDGCornerstone.UIntMax.max))
+        XCTAssertNotNil(RationalNumber(exactly: SDGCornerstone.IntMax.max))
+        XCTAssertNotNil(RationalNumber(exactly: SDGCornerstone.IntMax.min))
     }
 
     func testComparable() {

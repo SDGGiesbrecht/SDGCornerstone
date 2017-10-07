@@ -154,7 +154,13 @@ public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtoco
     /// - Properties:
     ///     - int: An instance of `IntMax`.
     public init(_ int: IntMax) {
-        wholeMagnitude = WholeNumber(UIntMax(|int|))
+        let magnitude: UIntMax
+        if int == IntMax.min { // |int| would overflow.
+            magnitude = UIntMax(|(int + 1)|) + 1
+        } else {
+            magnitude = UIntMax(|int|)
+        }
+        wholeMagnitude = WholeNumber(magnitude)
         isNegative = int.isNegative
     }
 
