@@ -191,25 +191,6 @@ extension Subtractable where Self : IntFamily /* Self.Vector ≠ Self */ {
     }
 }
 
-extension Subtractable where Self : IntFamily, Self.Vector == Self {
-    // MARK: - where Self : IntFamily, Vector == Self
-
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
-    ///
-    /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
-    public static func − (lhs: Self, rhs: Self) -> Self {
-        return lhs - rhs
-        // Disambiguate Subtractable(where IntFamily).− vs Subtractable(where PointProtocol, Strideable, Stride == Self).−
-    }
-}
-
 extension Subtractable where Self : Measurement {
     // MARK: - where Self : Measurement
 
