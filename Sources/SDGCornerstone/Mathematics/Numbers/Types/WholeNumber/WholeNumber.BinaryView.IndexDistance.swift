@@ -26,7 +26,7 @@ extension WholeNumber.BinaryView {
         internal init(_ uInt: UIntMax) {
             let bitsPerDigit = BinaryView<WholeNumber.Digit>.count
 
-            let digits = DigitDistance(BitDistance(uInt).dividedAccordingToEuclid(by: bitsPerDigit))
+            let digits = DigitDistance(BitDistance(uInt.dividedAccordingToEuclid(by: UIntMax(bitsPerDigit))))
             let bits = BitDistance(uInt).mod(bitsPerDigit)
 
             self = IndexDistance(digitDistance: digits, bitDistance: bits)
@@ -90,14 +90,13 @@ extension WholeNumber.BinaryView {
         // MARK: - SignedNumeric
 
         internal init?<T>(exactly source: T) where T : BinaryInteger {
-            guard let whole = UIntMax(exactly: source) else {
-                return nil
-            }
-            self.init(whole)
+            unreachable()
+            // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }
 
         internal var magnitude: IndexDistance {
-            return IndexDistance(digitDistance: |digitDistance|, bitDistance: |bitDistance|)
+            unreachable()
+            // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }
 
         // func ×
