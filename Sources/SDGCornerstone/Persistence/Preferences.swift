@@ -56,7 +56,7 @@ open class Preferences {
         guard let subclassedResult = result as? P else {
             preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada:
+                case .englishCanada: // [_Exempt from Code Coverage_]
                     return StrictString("Existing preferences are the wrong class: \(type(of: result))")
                 }
             }))
@@ -70,7 +70,7 @@ open class Preferences {
     public required init(domain: String) {
         assert(Preferences.domains[domain] == nil, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Detected duplicate initialization of \(domain). Call preferences(for:) instead.")
             }
         }))
@@ -151,7 +151,7 @@ open class Preferences {
 
             assert(possibleDebugDomain ≠ UserDefaults.globalDomain, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada:
+                case .englishCanada: // [_Exempt from Code Coverage_]
                     return "Attempted to write preferences to the global domain. This domain is read‐only."
                 }
             }))

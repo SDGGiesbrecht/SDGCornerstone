@@ -291,7 +291,7 @@ extension Subtractable where Self : UIntFamily {
     public static func −= (lhs: inout Self, rhs: Self) {
         assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("\(lhs.inDigits()) − \(rhs.inDigits()) is impossible for \(Self.self).")
             }
         }))

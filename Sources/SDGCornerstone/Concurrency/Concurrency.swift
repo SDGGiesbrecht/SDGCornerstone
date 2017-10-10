@@ -46,7 +46,7 @@ public func assert(in queue: OperationQueue, function: StaticString = #function,
             return queue == foreground ? foregroundName : StrictString(queue.name ?? "\(queue)") // [_Exempt from Code Coverage_]
         }
         switch localization {
-        case .englishCanada:
+        case .englishCanada: // [_Exempt from Code Coverage_]
             return StrictString("\(function) was called from the wrong queue. Expected queue: \(resolveName(foregroundName: "Foreground"))")
         }
     }), file: file, line: line)

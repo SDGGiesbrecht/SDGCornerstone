@@ -401,7 +401,7 @@ extension WholeArithmetic {
     public init(_ representation: StrictString, base: Int) {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive.")
             }
         }))
@@ -447,7 +447,7 @@ extension WholeArithmetic {
         }
         assert(assertNFKD().isEmpty, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))")
             }
         }))
@@ -497,7 +497,7 @@ extension WholeArithmetic {
             } else {
                 assert(character ∈ formattingSeparators, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                     switch localization {
-                    case .englishCanada:
+                    case .englishCanada: // [_Exempt from Code Coverage_]
                         return StrictString("\(character) is not a valid digit.")
                     }
                 }))
@@ -966,7 +966,7 @@ extension WholeArithmetic {
     internal func romanNumerals(lowercase: Bool) -> StrictString {
         let warning = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "Roman numerals are only supported in the range I–MMMCMXCIX."
             }
         })
@@ -1080,7 +1080,7 @@ extension WholeArithmetic {
     internal func ελληνικοίΑριθμοί(μικράΓράμματα: Bool, κεραία: Bool) -> StrictString {
         let προειδοποίηση = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "Greek numerals are only supported in the range Αʹ–͵ΘϠϞΘʹ."
             }
         })
@@ -1218,7 +1218,7 @@ extension WholeArithmetic {
     internal func ספרות־עבריות(גרשיים: Bool) -> StrictString {
         let אזהרה = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "Hebrew numerals are only supported in the range א׳–ט׳תתקצ״ט."
             }
         })
@@ -1448,7 +1448,7 @@ extension WholeArithmetic where Self : FloatFamily {
 
         assert(lhs.isNonNegative ∨ rhs.isIntegral, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead."
             }
         }))
@@ -1572,7 +1572,7 @@ extension WholeArithmetic where Self : IntegralArithmetic {
 
         assert(exponent.isNonNegative, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead."
             }
         }))
@@ -1723,7 +1723,7 @@ extension WholeArithmetic where Self : RationalArithmetic {
 
         assert(exponent.isIntegral, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "The result of a non‐integer exponent may be outside the set of rational numbers. Use a type that conforms to RealArithmetic instead."
             }
         }))

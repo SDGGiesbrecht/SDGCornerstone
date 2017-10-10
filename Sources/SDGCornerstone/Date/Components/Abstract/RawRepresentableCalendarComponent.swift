@@ -46,7 +46,7 @@ extension RawRepresentableCalendarComponent {
         if let range = Self.validRange {
             assert(value ∈ range, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada:
+                case .englishCanada: // [_Exempt from Code Coverage_]
                     return StrictString("Invalid raw value “\(value)” for \(Self.self).")
                 }
             }))

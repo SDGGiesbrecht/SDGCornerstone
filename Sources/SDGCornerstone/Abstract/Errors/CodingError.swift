@@ -23,7 +23,7 @@
 public func primitiveMethod(_ method: String = #function, file: StaticString = #file, line: UInt = #line) -> Never {
     preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
         switch localization {
-        case .englishCanada:
+        case .englishCanada: // [_Exempt from Code Coverage_]
             return StrictString("The primitive method “\(method)” has not been overridden.")
         }
     }), file: file, line: line)
@@ -50,7 +50,7 @@ public func unreachable(function: String = #function, file: StaticString = #file
 private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String { // [_Exempt from Code Coverage_]
     return String(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
         switch localization {
-        case .englishCanada:
+        case .englishCanada: // [_Exempt from Code Coverage_]
             return StrictString("\(function) has not been implemented yet. (\(file), Line \(line.inDigits()))")
         }
     }).resolved())

@@ -494,7 +494,7 @@ extension RealArithmetic {
     public static func arcsin(_ sine: Self) -> Angle<Self> {
         assert(sine ∈ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("There is no arcsine angle for any number x, where |x| > 1. In this case, the number \(sine.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
             }
         }))
@@ -513,7 +513,7 @@ extension RealArithmetic {
     public static func arccos(_ cosine: Self) -> Angle<Self> {
         assert(cosine ∈ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("There is no arccosine angle for any number x, where |x| > 1. In this case, the number \(cosine.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
             }
         }))
@@ -532,7 +532,7 @@ extension RealArithmetic {
     public static func arccsc(_ cosecant: Self) -> Angle<Self> {
         assert(cosecant ∉ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(cosecant.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
             }
         }))
@@ -551,7 +551,7 @@ extension RealArithmetic {
     public static func arcsec(_ secant: Self) -> Angle<Self> {
         assert(secant ∉ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(secant.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
             }
         }))
@@ -888,19 +888,19 @@ extension RealArithmetic where Self : FloatFamily {
 
         assert(self > 0, UserFacingText({ [value = self] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Logarithms of non‐positive numbers are undefined. (In this case, the logarithm of \(value.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).)")
             }
         }))
         assert(base > 0, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Logarithms in a non‐positive base are undefined. (In this case, the base \(base.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) logarithm.")
             }
         }))
         assert(base ≠ 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "Logarithms in base 1 are undefined."
             }
         }))

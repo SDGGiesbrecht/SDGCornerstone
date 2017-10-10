@@ -81,7 +81,7 @@ extension PropertyListValue {
         } else {
             preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada:
+                case .englishCanada: // [_Exempt from Code Coverage_]
                     return StrictString("\(type(of: self)) is not a property list value.")
                 }
             }))

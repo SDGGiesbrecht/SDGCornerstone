@@ -31,7 +31,7 @@ extension IterableEnumeration {
     private static func noZeroCase() -> UserFacingText<APILocalization, Void> { // [_Exempt from Code Coverage_]
         return UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("\(Self.self) has no case with a raw value 0.")
             }
         })

@@ -94,7 +94,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
         guard let result = Self(rawValue: numberAlreadyElapsed) else {
             preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada:
+                case .englishCanada: // [_Exempt from Code Coverage_]
                     return StrictString("Invalid raw value “\(numberAlreadyElapsed)” for \(Self.self).")
                 }
             }))
