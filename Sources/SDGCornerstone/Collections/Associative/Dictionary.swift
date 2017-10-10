@@ -97,7 +97,7 @@ extension Dictionary : PropertyListValue {
 extension Dictionary where Value : Equatable {
     // MARK: - where Value : Equatable
 
-    // [_Workaround: This can be refactored once conditional conformance is available. (Swift 3.1.0)_]
+    // [_Workaround: This can be refactored once conditional conformance is available. (Swift 4.0.0)_]
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
     /// Returns `true` if the two values are inequal.
