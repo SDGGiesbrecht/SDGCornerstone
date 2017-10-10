@@ -20,36 +20,27 @@ import SDGCornerstone
 class ConcurrencyTests : TestCase {
 
     func testConcurrency() {
-        #if !os(Linux) && !LinuxDocs
-            // [_Workaround: Linux cannot reliably get the current queue. (Swift 3.1.0)_]
-            let foregroundRan = expectation(description: "Foreground ran.")
-            let backgroundRan = expectation(description: "Background ran.")
-        #endif
+        let foregroundRan = expectation(description: "Foreground ran.")
+        let backgroundRan = expectation(description: "Background ran.")
         let testQueueRan = expectation(description: "Test queue ran.")
 
-        #if !os(Linux) && !LinuxDocs
-            // [_Workaround: Linux cannot reliably get the current queue. (Swift 3.1.0)_]
-            foreground.finish {
-                foregroundRan.fulfill()
-                XCTAssert(executing(in: foreground))
-                if executing(in: foreground) {
-                    assert(in: foreground)
-                }
+        foreground.finish {
+            foregroundRan.fulfill()
+            XCTAssert(executing(in: foreground))
+            if executing(in: foreground) {
+                assert(in: foreground)
             }
-            background.finish {
-                backgroundRan.fulfill()
-                XCTAssert(executing(in: background))
-                if executing(in: background) {
-                    assert(in: background)
-                }
+        }
+        background.finish {
+            backgroundRan.fulfill()
+            XCTAssert(executing(in: background))
+            if executing(in: background) {
+                assert(in: background)
             }
-        #endif
+        }
         OperationQueue(label: "Test Queue", serial: true).start {
             testQueueRan.fulfill()
-            #if !os(Linux)
-                // [_Workaround: Linux cannot reliably get the current queue. (Swift 3.1.0)_]
-                XCTAssert(OperationQueue.current?.isSerial == true)
-            #endif
+            XCTAssert(OperationQueue.current?.isSerial == true)
         }
         waitForExpectations(timeout: 5, handler: nil)
     }
