@@ -152,7 +152,7 @@ extension /*PointProtocol where Self : */ ConsistentlyOrderedCalendarComponent w
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */IntFamily {
     // MARK: - where Self : IntFamily
 
@@ -191,7 +191,7 @@ extension /*PointProtocol where Self : */IntFamily {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */ NumericCalendarComponent {
     // MARK: - where Self : NumericCalendarComponent
 
@@ -235,7 +235,7 @@ extension PointProtocol where Self : Strideable {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar {
     // MARK: - where Self : TwoDimensionalPoint, Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
 
@@ -265,7 +265,7 @@ extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector :
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */UIntFamily {
     // MARK: - where Self : UIntFamily
 
