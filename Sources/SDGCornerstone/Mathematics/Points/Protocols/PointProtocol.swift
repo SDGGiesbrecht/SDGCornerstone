@@ -125,7 +125,7 @@ extension PointProtocol {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */ ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent {
     // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent
 
