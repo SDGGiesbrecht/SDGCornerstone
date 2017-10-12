@@ -51,7 +51,7 @@
         /// - Parameters:
         ///     - i: The following index.
         public func index(before i: Index) -> Index {
-            return i − 1
+            return i − (1 as Index)
         }
 
         // MARK: - Collection

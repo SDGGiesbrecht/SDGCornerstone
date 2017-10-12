@@ -661,7 +661,7 @@ extension WholeArithmetic {
             self ↑= (exponent.dividedAccordingToEuclid(by: 2))
         } else /* rhs.isOdd */ {
             // p = b × b ↑ (e − 1)
-            self ×= (self ↑ (exponent − 1))
+            self ×= (self ↑ (exponent − (1 as Self)))
         }
     }
 

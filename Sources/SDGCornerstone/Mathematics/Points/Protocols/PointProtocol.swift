@@ -55,8 +55,7 @@ public protocol PointProtocol : Equatable {
     ///     - rhs: The vector to subtract.
     ///
     /// - MutatingVariant: −=
-    //static func − (lhs: Self, rhs: Vector) -> Self
-    // [_Workaround: The above line is temporarily commented because it falsely triggers “ambiguous use of operator” errors. See testSubtractable. (Swift 3.1.0)_]
+    static func − (lhs: Self, rhs: Vector) -> Self
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.−_]
     /// Returns the vector that leads from the point on the left to the point on the right.

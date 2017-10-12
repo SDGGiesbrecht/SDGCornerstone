@@ -971,7 +971,7 @@ extension RealArithmetic where Self : FloatFamily {
                 var lastApproximate = self
                 var n: Self = 1
                 var negative = false
-                let sMinusOne: Self = s − 1
+                let sMinusOne: Self = s − (1 as Self)
                 var numerator: Self = sMinusOne
                 repeat {
                     lastApproximate = self
@@ -1128,7 +1128,7 @@ extension RealArithmetic where Self : FloatFamily {
             return (π ÷ 2).rad − arctan(1 ÷ tangent)
         } else if tangent > 2 − √3 {
             let r3: Self = √3
-            return (π ÷ 6).rad + arctan((r3 × tangent − 1) ÷ (r3 + tangent))
+            return (π ÷ 6).rad + arctan((r3 × tangent − (1 as Self)) ÷ (r3 + tangent))
         } else {
 
             //   ∞         n + 1     2n − 1
