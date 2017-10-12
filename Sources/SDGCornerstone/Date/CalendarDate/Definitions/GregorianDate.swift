@@ -119,18 +119,13 @@ internal struct GregorianDate : DateDefinition {
         }
         remainder −= GregorianDate.intervalFromStartOfYear(toStartOf: month, leapYear: year.isLeapYear)
 
-        func initialize<C : ConsistentlyOrderedCalendarComponent>(_ type: C.Type, numberAlreadyElapsed: C.Vector) -> C {
-            // [_Workaround: The compiler cannot find this initializer in the following lines without this function. (Swift 3.1.0)_]
-            return C(numberAlreadyElapsed: numberAlreadyElapsed)
-        }
-
-        let day = initialize(GregorianDay.self, numberAlreadyElapsed: Int(remainder.inDays.rounded(.down)))
+        let day = GregorianDay(numberAlreadyElapsed: Int(remainder.inDays.rounded(.down)))
         remainder = remainder.mod((1 as FloatMax).days)
 
-        let hour = initialize(GregorianHour.self, numberAlreadyElapsed: Int(remainder.inHours.rounded(.down)))
+        let hour = GregorianHour(numberAlreadyElapsed: Int(remainder.inHours.rounded(.down)))
         remainder = remainder.mod((1 as FloatMax).hours)
 
-        let minute = initialize(GregorianMinute.self, numberAlreadyElapsed: Int(remainder.inMinutes.rounded(.down)))
+        let minute = GregorianMinute(numberAlreadyElapsed: Int(remainder.inMinutes.rounded(.down)))
         remainder = remainder.mod((1 as FloatMax).minutes)
 
         let second = GregorianSecond(numberAlreadyElapsed: remainder.inSeconds)
