@@ -377,9 +377,6 @@ class CollectionTests : TestCase {
             XCTAssert(inBoth ∉ symmetricDifference, "\(inBoth) ∈ \(symmetricDifference)")
             XCTAssert(inNeither ∉ symmetricDifference, "\(inNeither) ∈ \(symmetricDifference)")
 
-            #if !os(Linux)
-                // [_Workaround: SetAlgebra will fail on Linux until CharacterSet is fixed. In the mean time there is no way to make them work. (Swift 3.1.0)_]
-
                 // SetAlgebra
 
                 XCTAssert(inAOnly ∉ setA.intersection(setB), "\(inAOnly) ∈ \(setA).intersection(\(setB))")
@@ -417,8 +414,6 @@ class CollectionTests : TestCase {
                 XCTAssert(inBOnly ∈ symmetricDifference, "\(inBOnly) ∉ \(symmetricDifference)")
                 XCTAssert(inBoth ∉ symmetricDifference, "\(inBoth) ∈ \(symmetricDifference)")
                 XCTAssert(inNeither ∉ symmetricDifference, "\(inNeither) ∈ \(symmetricDifference)")
-
-            #endif
         }
 
         runTests(setA: Set([1, 2, 3]), setB: [3, 4, 5], inAOnly: 1, inBOnly: 4, inBoth: 3, inNeither: 0)
