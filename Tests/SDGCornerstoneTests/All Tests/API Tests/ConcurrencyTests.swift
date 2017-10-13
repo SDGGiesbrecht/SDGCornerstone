@@ -57,7 +57,7 @@ class ConcurrencyTests : TestCase {
                 driver = nil
             }
             #if os(macOS)
-                // [_Workaround: Swift’s Xcode project generation targets 10.10. (Swift 3.1.0)_]
+                // [_Workaround: Swift’s Xcode project generation targets 10.10. (Swift 4.0.0)_]
                 Timer.scheduledTimer(timeInterval: 0, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
             #else
                 _ = Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { (_) -> Void in
