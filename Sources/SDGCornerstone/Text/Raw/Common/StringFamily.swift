@@ -38,7 +38,7 @@ public protocol StringFamily : Addable, Comparable, ExpressibleByStringLiteral, 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(clusters:)_]
     /// Creates a string from a collection of clusters.
     //init(_ clusters: ClusterView)
-    // [_Workaround: A compiler bug would make this unconformable for String. (Swift ?)_]
+    // [_Workaround: A compiler bug would make this unconformable for String. (Swift 4.0.0)_]
 
     // MARK: - Properties
 
