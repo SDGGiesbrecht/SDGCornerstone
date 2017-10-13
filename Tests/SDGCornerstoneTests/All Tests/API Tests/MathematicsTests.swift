@@ -592,8 +592,7 @@ class MathematicsTests : TestCase {
             let uInt8: UInt8 = 94
             XCTAssertEqual(N(uInt8), 94)
 
-            // [_Workaround: This should be “as N”, but that causes a segmentation fault. (Swift 3.1.0)_]
-            XCTAssertEqual("1" as WholeNumber, 1)
+            XCTAssertEqual("1" as N, 1)
 
             XCTAssertEqual(N(hexadecimal: "7F"), 127)
             XCTAssertEqual(N(octal: "10"), 8)
