@@ -69,7 +69,7 @@ public struct WholeNumber : Addable, Comparable, Equatable, Hashable, PointProto
         }
     }
 
-    // [_Workaround: Subtypes in extensions have visibility problems. (Swift 3.1.0)_]
+    // [_Workaround: Subtypes in extensions have visibility problems. (Swift 4.0.0)_]
     internal typealias BinaryView = WholeNumberBinaryView
 
     private var binary: BinaryView {
@@ -215,7 +215,7 @@ public struct WholeNumber : Addable, Comparable, Equatable, Hashable, PointProto
     public static func −= (lhs: inout WholeNumber, rhs: WholeNumber) {
         assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("\(lhs.inDigits()) − \(rhs.inDigits()) is impossible for \(WholeNumber.self).")
             }
         }))

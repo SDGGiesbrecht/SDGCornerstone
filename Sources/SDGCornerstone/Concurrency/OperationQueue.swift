@@ -47,9 +47,6 @@ extension OperationQueue {
         addOperation(BlockOperation(block: task))
     }
 
-    #if !os(Linux) && !LinuxDocs
-    // [_Workaround: Linux cannot reliably get the current queue. (Swift 3.1.0)_]
-
     /// Causes the queue to start *and finish* executing the specified task before returning.
     ///
     /// - Note: This is safe for a thread to call on itself.
@@ -60,6 +57,4 @@ extension OperationQueue {
             addOperations([BlockOperation(block: task)], waitUntilFinished: true)
         }
     }
-
-    #endif
 }

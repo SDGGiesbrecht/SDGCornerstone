@@ -231,7 +231,7 @@ public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComp
     public init(unsafeRawValue: Int) {
         assert(unsafeRawValue ≠ 0, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "0 is not a valid Gregorian year."
             }
         }))

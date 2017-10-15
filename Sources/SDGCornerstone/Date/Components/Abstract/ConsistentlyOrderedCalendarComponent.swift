@@ -64,7 +64,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : CardinalCalendarComp
     /// - Parameters:
     ///     - ordinal: The ordinal.
     public init(ordinal: RawValue) {
-        self.init(ordinal − 1)
+        self.init(ordinal − (1 as Vector))
     }
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
@@ -94,7 +94,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
         guard let result = Self(rawValue: numberAlreadyElapsed) else {
             preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada:
+                case .englishCanada: // [_Exempt from Code Coverage_]
                     return StrictString("Invalid raw value “\(numberAlreadyElapsed)” for \(Self.self).")
                 }
             }))
@@ -154,7 +154,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : OrdinalCalendarCompo
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
     /// The number of complete components already elapsed.
     public var numberAlreadyElapsed: Vector {
-        return rawValue − 1
+        return rawValue − (1 as Vector)
     }
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal_]

@@ -12,9 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: Foundation should be unnecessary once CharacterSet can do == on Linux. (Swift 3.1.0)_]
-import Foundation
-
 // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
 /// Returns `true` if the two values are inequal.
 ///

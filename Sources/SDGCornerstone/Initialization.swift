@@ -27,7 +27,7 @@ public func initialize(mode: Mode, applicationIdentifier: String, applicationPre
 
     assert(initialized == false, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
         switch localization {
-        case .englishCanada:
+        case .englishCanada: // [_Exempt from Code Coverage_]
             return StrictString("Detected attempted to re‐initialize. SDGCornerstone is only designed to be initialized once.")
         }
     }))
@@ -44,7 +44,7 @@ internal func preconditionFailureNotInitialized() -> Never {
     // This cannot be localized the normal way because of circularity.
     let message = APILocalization.cases.map({ // [_Exempt from Code Coverage_]
         switch $0 {
-        case .englishCanada:
+        case .englishCanada: // [_Exempt from Code Coverage_]
             return "SDGCornerstone has not been initialized. Did you forget to call SDGCornerstone.initialize(...)?"
         }
     }).joined(separator: "\n\n")

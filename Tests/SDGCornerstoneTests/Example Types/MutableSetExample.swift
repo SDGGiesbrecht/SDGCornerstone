@@ -72,7 +72,7 @@ struct MutableSetExample : FiniteSet, MutableSet {
 
     // SetAlgebra
 
-    // [_Workaround: A compiler bug prevents automatic disambiguation from working in this case. This should not be necessary. (Swift 3.1.0)_]
+    // [_Workaround: A compiler bug prevents automatic disambiguation from working in this case. This should not be necessary. (Swift 4.0.0)_]
     func contains(_ element: Int) -> Bool {
         return value ∋ element
     }

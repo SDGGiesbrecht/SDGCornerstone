@@ -155,12 +155,7 @@ extension FileManager {
 
         try createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
 
-        #if os(Linux)
-            // [_Workaround: Linux implementation in Foundation does not exist yet. (Swift 3.1.1)_]
-            try Shell.default.run(command: ["cp", "\u{2D}a", Shell.quote(source.path), Shell.quote(destination.path)], silently: true)
-        #else
-            try copyItem(at: source, to: destination)
-        #endif
+        try copyItem(at: source, to: destination)
     }
 
     // MARK: - Working Directory

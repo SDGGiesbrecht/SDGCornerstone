@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: Subtypes in extensions have visibility problems. (Swift 3.1.0)_]
+// [_Workaround: Subtypes in extensions have visibility problems. (Swift 4.0.0)_]
 internal struct WholeNumberBinaryView {
     // Cannot conform to Collection, because no SignedInteger is large enough to serve as IndexDistance
 
@@ -68,7 +68,7 @@ internal struct WholeNumberBinaryView {
     internal func indicesBackwards(from end: Index, to start: Index) -> UnfoldSequence<Index, Index> {
         assert(start ≤ end, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Ascending range: \(end − 1)–\(start)")
             }
         }))
@@ -93,7 +93,7 @@ internal struct WholeNumberBinaryView {
     internal func lastBitsBackwards(maximum distance: IndexDistance) -> LazyMapSequence<UnfoldSequence<Index, Index>, Bool> {
         assert(distance ≥ 0, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Negative distance: \(distance)")
             }
         }))
@@ -122,7 +122,7 @@ internal struct WholeNumberBinaryView {
         }
         preconditionFailure(UserFacingText({ [wholeNumber = self.wholeNumber] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("\(wholeNumber.inDigits()) is not in normalized form.\n\(dump(wholeNumber))")
             }
         }))

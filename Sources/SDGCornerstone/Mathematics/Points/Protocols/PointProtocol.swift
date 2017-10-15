@@ -55,8 +55,7 @@ public protocol PointProtocol : Equatable {
     ///     - rhs: The vector to subtract.
     ///
     /// - MutatingVariant: −=
-    //static func − (lhs: Self, rhs: Vector) -> Self
-    // [_Workaround: The above line is temporarily commented because it falsely triggers “ambiguous use of operator” errors. See testSubtractable. (Swift 3.1.0)_]
+    static func − (lhs: Self, rhs: Vector) -> Self
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.−_]
     /// Returns the vector that leads from the point on the left to the point on the right.
@@ -126,7 +125,7 @@ extension PointProtocol {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */ ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent {
     // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent
 
@@ -153,7 +152,7 @@ extension /*PointProtocol where Self : */ ConsistentlyOrderedCalendarComponent w
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */IntFamily {
     // MARK: - where Self : IntFamily
 
@@ -192,7 +191,7 @@ extension /*PointProtocol where Self : */IntFamily {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */ NumericCalendarComponent {
     // MARK: - where Self : NumericCalendarComponent
 
@@ -236,7 +235,7 @@ extension PointProtocol where Self : Strideable {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar {
     // MARK: - where Self : TwoDimensionalPoint, Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
 
@@ -266,7 +265,7 @@ extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector :
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift ?)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
 extension /*PointProtocol where Self : */UIntFamily {
     // MARK: - where Self : UIntFamily
 

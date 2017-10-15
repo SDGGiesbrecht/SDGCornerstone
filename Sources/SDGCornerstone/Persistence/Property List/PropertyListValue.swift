@@ -38,7 +38,7 @@ extension PropertyListValue {
         if let result = self as? EquatableRepresentation {
             return result
 
-            // [_Workaround: Linux does not bridge well yet. (Swift 3.1.0)_]
+            // [_Workaround: Linux does not bridge well yet. (Swift 4.0.0)_]
 
         } else if let boolean = self as? Bool { // [_Exempt from Code Coverage_] Unreachable on macOS.
             return NSNumber(value: boolean)
@@ -81,7 +81,7 @@ extension PropertyListValue {
         } else {
             preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada:
+                case .englishCanada: // [_Exempt from Code Coverage_]
                     return StrictString("\(type(of: self)) is not a property list value.")
                 }
             }))
@@ -89,7 +89,7 @@ extension PropertyListValue {
     }
 }
 
-// [_Workaround: The following are temporary replacements for as?, because Linux doesn’t bridge well yet. (Swift 3.1.0)_]
+// [_Workaround: The following are temporary replacements for as?, because Linux doesn’t bridge well yet. (Swift 4.0.0)_]
 
 extension PropertyListValue {
 

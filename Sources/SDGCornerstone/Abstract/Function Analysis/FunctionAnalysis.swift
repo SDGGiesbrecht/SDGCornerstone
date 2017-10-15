@@ -21,7 +21,7 @@ private func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, with
 
     assert(bounds == nil ∨ bounds! ∋ location, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
         switch localization {
-        case .englishCanada:
+        case .englishCanada: // [_Exempt from Code Coverage_]
             return StrictString("Location out of bounds. \(location) ∉ \(String(describing: bounds))")
         }
     }))

@@ -290,7 +290,7 @@ public protocol RealArithmetic : RationalArithmetic {
 
 extension RealArithmetic {
 
-    // [_Workaround: These can be removed when global generic constants are available. (Swift 3.1.0)_]
+    // [_Workaround: These can be removed when global generic constants are available. (Swift 4.0.0)_]
 
     /// π in the same type.
     ///
@@ -494,7 +494,7 @@ extension RealArithmetic {
     public static func arcsin(_ sine: Self) -> Angle<Self> {
         assert(sine ∈ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("There is no arcsine angle for any number x, where |x| > 1. In this case, the number \(sine.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
             }
         }))
@@ -513,7 +513,7 @@ extension RealArithmetic {
     public static func arccos(_ cosine: Self) -> Angle<Self> {
         assert(cosine ∈ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("There is no arccosine angle for any number x, where |x| > 1. In this case, the number \(cosine.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
             }
         }))
@@ -532,7 +532,7 @@ extension RealArithmetic {
     public static func arccsc(_ cosecant: Self) -> Angle<Self> {
         assert(cosecant ∉ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(cosecant.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
             }
         }))
@@ -551,7 +551,7 @@ extension RealArithmetic {
     public static func arcsec(_ secant: Self) -> Angle<Self> {
         assert(secant ∉ −1 ... 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("There is no arccosecant angle for any number x, where |x| < 1. In this case, the number \(secant.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
             }
         }))
@@ -658,7 +658,7 @@ extension RealArithmetic {
 
 // MARK: - Real Arithmetic
 
-// [_Workaround: These should be switched to generic constants when they become available. (Swift 3.1.0)_]
+// [_Workaround: These should be switched to generic constants when they become available. (Swift 4.0.0)_]
 
 /// An instance of π in the desired return type.
 ///
@@ -888,19 +888,19 @@ extension RealArithmetic where Self : FloatFamily {
 
         assert(self > 0, UserFacingText({ [value = self] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Logarithms of non‐positive numbers are undefined. (In this case, the logarithm of \(value.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).)")
             }
         }))
         assert(base > 0, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return StrictString("Logarithms in a non‐positive base are undefined. (In this case, the base \(base.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) logarithm.")
             }
         }))
         assert(base ≠ 1, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada:
+            case .englishCanada: // [_Exempt from Code Coverage_]
                 return "Logarithms in base 1 are undefined."
             }
         }))
@@ -971,7 +971,7 @@ extension RealArithmetic where Self : FloatFamily {
                 var lastApproximate = self
                 var n: Self = 1
                 var negative = false
-                let sMinusOne: Self = s − 1
+                let sMinusOne: Self = s − (1 as Self)
                 var numerator: Self = sMinusOne
                 repeat {
                     lastApproximate = self
@@ -1128,7 +1128,7 @@ extension RealArithmetic where Self : FloatFamily {
             return (π ÷ 2).rad − arctan(1 ÷ tangent)
         } else if tangent > 2 − √3 {
             let r3: Self = √3
-            return (π ÷ 6).rad + arctan((r3 × tangent − 1) ÷ (r3 + tangent))
+            return (π ÷ 6).rad + arctan((r3 × tangent − (1 as Self)) ÷ (r3 + tangent))
         } else {
 
             //   ∞         n + 1     2n − 1

@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: Should only conform to PropertyListValue when keys are `String` and values conform to `PropertyListValue`. Currently not constrainable. (Swift 3.1.0)_]
+// [_Workaround: Should only conform to PropertyListValue when keys are `String` and values conform to `PropertyListValue`. Currently not constrainable. (Swift 4.0.0)_]
 extension Dictionary : PropertyListValue {
 
     // MARK: - Mutation
@@ -97,7 +97,7 @@ extension Dictionary : PropertyListValue {
 extension Dictionary where Value : Equatable {
     // MARK: - where Value : Equatable
 
-    // [_Workaround: This can be refactored once conditional conformance is available. (Swift 3.1.0)_]
+    // [_Workaround: This can be refactored once conditional conformance is available. (Swift 4.0.0)_]
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
     /// Returns `true` if the two values are inequal.

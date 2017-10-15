@@ -15,7 +15,7 @@
 import Foundation
 
 /// A view of a string’s contents as a collection of lines.
-public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Index == String.UnicodeScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift ?)_] */ {
+public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Index == String.UnicodeScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.0)_] */ {
 
     // MARK: - Initialization
 
@@ -80,7 +80,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
             guard let found = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< (i.start ?? base.scalars.endIndex))?.range else {
                 preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                     switch localization {
-                    case .englishCanada:
+                    case .englishCanada: // [_Exempt from Code Coverage_]
                         return "No index precedes the start index."
                     }
                 }))

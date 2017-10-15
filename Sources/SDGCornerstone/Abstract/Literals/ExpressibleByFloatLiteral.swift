@@ -25,7 +25,7 @@ extension ExpressibleByFloatLiteral where Self : RationalArithmetic {
     }
 }
 
-// [_Workaround: The next line causes a segmentation fault. (Swift ?)_]
+// [_Workaround: The next line causes a segmentation fault. (Swift 4.0.0)_]
 extension /*ExpressibleByFloatLiteral where Self : */ SmallestCalendarComponent {
     // MARK: - where Self : SmallestCalendarComponent
 
