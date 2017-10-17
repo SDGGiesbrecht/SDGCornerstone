@@ -107,7 +107,7 @@ extension Negatable where Self : FloatFamily {
     ///
     /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout Self) {
-        operand = -operand
+        operand.negate()
     }
 }
 
@@ -135,7 +135,7 @@ extension Negatable where Self : IntFamily {
     ///
     /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout Self) {
-        operand = -operand
+        operand.negate()
     }
 }
 
