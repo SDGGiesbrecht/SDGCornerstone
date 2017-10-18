@@ -70,7 +70,7 @@
         /// - Parameters:
         ///     - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
         ///     - silently: If `false` (the default), the command and its output will be printed to standard out. If `true`, nothing will be sent to standard out. This argument is ignored in GUI applications, where this method is always silent.
-        ///     - redactionList: An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value.)
+        ///     - redactionList: An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value or thrown error.)
         ///     - alternatePrint: An optional closure to use instead of `print()` to send lines to standard output. This can be used to redirect or preprocess the text intended for standard output. (The closure will receive the redacted version and will never be executed if `silently` is `true`.)
         ///
         /// - Returns: The output of the command.
