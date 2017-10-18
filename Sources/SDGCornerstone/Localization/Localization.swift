@@ -119,7 +119,7 @@ extension Localization {
             possibleCountry = processingTags.removeFirst()
         }
 
-        if let scripts = RecognizedLocalization.groups[language] {
+        if let scripts = ContentLocalization.groups[language] {
 
             if let script = possibleScript {
                 if possibleCountry ≠ nil { // [_Exempt from Code Coverage_]
@@ -167,7 +167,7 @@ extension Localization {
             }
         }
 
-        if let members = RecognizedLocalization.macrolanguages[language] {
+        if let members = ContentLocalization.macrolanguages[language] {
             for member in members {
                 var alteredTags = originalTags
                 alteredTags[0] = member
@@ -186,7 +186,7 @@ extension Localization {
                     return
                 }
             } else {
-                if let macrolanguage = RecognizedLocalization.macrolanguageMembership[language] {
+                if let macrolanguage = ContentLocalization.macrolanguageMembership[language] {
                     var alteredTags = originalTags
                     alteredTags[0] = macrolanguage
                     if let result = Self(reasonableMatchFor: alteredTags.joined(separator: "\u{2D}"), skippingParents: false) {
@@ -204,7 +204,7 @@ extension Localization {
     ///
     /// - SeeAlso: `icon`
     public init?(icon: StrictString) {
-        if let recognized = RecognizedLocalization(definedIcon: icon) {
+        if let recognized = ContentLocalization(definedIcon: icon) {
             self.init(reasonableMatchFor: recognized.code)
         } else {
             return nil
@@ -217,21 +217,21 @@ extension Localization {
     ///
     /// For localizations not directly supported by SDGCornerstone, this property may be `nil`.
     public var icon: StrictString? {
-        return RecognizedLocalization(reasonableMatchFor: code)?.definedIcon
+        return ContentLocalization(reasonableMatchFor: code)?.definedIcon
     }
 
     /// Returns the code corresponding to the specified icon.
     ///
     /// Use this to convert abritrary, user‐provided codes, even when they are not directly supported by the application.
     public static func code(for icon: StrictString) -> String? {
-        return RecognizedLocalization(icon: icon)?.code
+        return ContentLocalization(icon: icon)?.code
     }
 
     /// Returns the icon corresponding to the specified code.
     ///
     /// Use this to convert abritrary, user‐provided icons, even when they are not directly supported by the application.
     public static func icon(for code: String) -> StrictString? {
-        return RecognizedLocalization(reasonableMatchFor: code)?.icon
+        return ContentLocalization(reasonableMatchFor: code)?.icon
     }
 }
 

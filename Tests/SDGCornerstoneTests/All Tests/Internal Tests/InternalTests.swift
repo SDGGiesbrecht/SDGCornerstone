@@ -21,12 +21,42 @@ class InternalTests : TestCase {
 
     func testContentLocalization() {
         for localization in ContentLocalization.cases {
-            XCTAssertNotNil(RecognizedLocalization(exactly: localization.code))
 
+            // Make sure its group is defined.
+            let components = localization.code.components(separatedBy: "\u{2D}")
+
+            if let group = ContentLocalization.groups[components.first! ] {
+                XCTAssert(group.map({ $0.countries }).joined().contains(components.last!), "\(localization.code) is missing from its group.")
+            } else {
+                XCTFail("\(localization.code) has no group defined.")
+            }
+
+            let abbreviatedCode = localization.code.components(separatedBy: "\u{2D}").first!
+            XCTAssertNotNil(ContentLocalization(reasonableMatchFor: abbreviatedCode))
+
+            // Make sure it has an icon.
             if let icon = localization.icon {
-                XCTAssertEqual(localization, ContentLocalization(icon: icon))
+                // Make sure it can be recreated from the icon.
+                XCTAssertEqual(localization, ContentLocalization(definedIcon: icon))
             } else {
                 XCTFail("\(localization.code) has no icon.")
+            }
+        }
+
+        // Make sure each group member is defined.
+        for (languageCode, scripts) in ContentLocalization.groups {
+            for (scriptCode, countries) in scripts {
+                for country in countries {
+                    var orthography = languageCode
+                    if scripts.count ≠ 1 {
+                        orthography += "\u{2D}" + scriptCode
+                    }
+                    let code = orthography + "\u{2D}" + country
+
+                    if country ≠ "419" {
+                        XCTAssertNotNil(ContentLocalization(exactly: code), "\(code) is not defined.")
+                    }
+                }
             }
         }
     }
@@ -54,6 +84,18 @@ class InternalTests : TestCase {
         }
     }
 
+    func testInterfaceLocalization() {
+        for localization in InterfaceLocalization.cases {
+            XCTAssertNotNil(ContentLocalization(exactly: localization.code))
+
+            if let icon = localization.icon {
+                XCTAssertEqual(localization, InterfaceLocalization(icon: icon))
+            } else {
+                XCTFail("\(localization.code) has no icon.")
+            }
+        }
+    }
+
     func testLineViewIndex() {
         XCTAssertNil("ABC".lines.endIndex.newline(in: "ABC".scalars))
     }
@@ -70,48 +112,6 @@ class InternalTests : TestCase {
         XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
 
         LocalizationSetting.internalUseSetSystemWidePreferences(to: nil)
-    }
-
-    func testRecognizedLocalization() {
-        for localization in RecognizedLocalization.cases {
-
-            // Make sure its group is defined.
-            let components = localization.code.components(separatedBy: "\u{2D}")
-
-            if let group = RecognizedLocalization.groups[components.first! ] {
-                XCTAssert(group.map({ $0.countries }).joined().contains(components.last!), "\(localization.code) is missing from its group.")
-            } else {
-                XCTFail("\(localization.code) has no group defined.")
-            }
-
-            let abbreviatedCode = localization.code.components(separatedBy: "\u{2D}").first!
-            XCTAssertNotNil(RecognizedLocalization(reasonableMatchFor: abbreviatedCode))
-
-            // Make sure it has an icon.
-            if let icon = localization.icon {
-                // Make sure it can be recreated from the icon.
-                XCTAssertEqual(localization, RecognizedLocalization(definedIcon: icon))
-            } else {
-                XCTFail("\(localization.code) has no icon.")
-            }
-        }
-
-        // Make sure each group member is defined.
-        for (languageCode, scripts) in RecognizedLocalization.groups {
-            for (scriptCode, countries) in scripts {
-                for country in countries {
-                    var orthography = languageCode
-                    if scripts.count ≠ 1 {
-                        orthography += "\u{2D}" + scriptCode
-                    }
-                    let code = orthography + "\u{2D}" + country
-
-                    if country ≠ "419" {
-                        XCTAssertNotNil(RecognizedLocalization(exactly: code), "\(code) is not defined.")
-                    }
-                }
-            }
-        }
     }
 
     func testRelativeDate() {
@@ -143,9 +143,11 @@ class InternalTests : TestCase {
 
     static var allTests: [(String, (InternalTests) -> () throws -> Void)] {
         return [
+            ("testContentLocalization", testContentLocalization),
             ("testGregorianWeekdayDate", testGregorianWeekdayDate),
             ("testHebrewWeekdayDate", testHebrewWeekdayDate),
             ("testHebrewYear", testHebrewYear),
+            ("testInterfaceLocalization", testInterfaceLocalization),
             ("testLineViewIndex", testLineViewIndex),
             ("testLocalizationSetting", testLocalizationSetting),
             ("testRelativeDate", testRelativeDate),
