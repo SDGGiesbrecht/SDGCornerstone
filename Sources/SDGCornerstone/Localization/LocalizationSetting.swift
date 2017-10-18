@@ -122,10 +122,12 @@ public struct LocalizationSetting : Equatable {
     // MARK: - Static Methods
 
     // For user available menus.
-
     /// :nodoc:
-    public static func internalUseSetSystemWidePreferences(to setting: LocalizationSetting?) {
+    public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
         sdgSystemWidePreferences.value = setting?.orderOfPrecedence
+    }
+    internal static func setSystemWidePreferences(to setting: LocalizationSetting?) {
+        _setSystemWidePreferences(to: setting)
     }
 
     /// Sets the application‐specific language preferences to the specified settings.

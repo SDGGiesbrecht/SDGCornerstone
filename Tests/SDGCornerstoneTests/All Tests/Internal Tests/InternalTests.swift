@@ -103,15 +103,15 @@ class InternalTests : TestCase {
     func testLocalizationSetting() {
         XCTAssertNotNil(LocalizationSetting.osSystemWidePreferences.value?.asArray(of: String.self), "Failed to detect operating system localization setting.")
 
-        LocalizationSetting.internalUseSetSystemWidePreferences(to: nil)
+        LocalizationSetting.setSystemWidePreferences(to: nil)
         LocalizationSetting.setApplicationPreferences(to: nil)
 
-        LocalizationSetting.internalUseSetSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
+        LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
         XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .englishUnitedKingdom)
-        LocalizationSetting.internalUseSetSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
+        LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
         XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
 
-        LocalizationSetting.internalUseSetSystemWidePreferences(to: nil)
+        LocalizationSetting.setSystemWidePreferences(to: nil)
     }
 
     func testRelativeDate() {
