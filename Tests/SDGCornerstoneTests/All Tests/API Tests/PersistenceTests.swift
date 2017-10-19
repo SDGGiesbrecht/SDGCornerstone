@@ -19,6 +19,10 @@ import SDGCornerstone
 
 class PersistenceTests : TestCase {
 
+    func testCodable() {
+        XCTAssertRecodes(0.5 as Float80, equivalentFormats: ["[\u{22}0.5\u{22}]"])
+    }
+
     func testFileConvertible() {
         func runTests<T : FileConvertible>(_ instance: T) where T : Equatable {
             XCTAssertEqual((try? T(file: instance.file, origin: nil)), instance)
@@ -391,6 +395,7 @@ class PersistenceTests : TestCase {
 
     static var allTests: [(String, (PersistenceTests) -> () throws -> Void)] {
         return [
+            ("testCodable", testCodable),
             ("testFileConvertible", testFileConvertible),
             ("testFileManager", testFileManager),
             ("testPreferences", testPreferences),

@@ -107,7 +107,7 @@ extension Double : FloatFamily, PropertyListValue {
 #endif
 
 #if os(macOS) || os(Linux)
-    extension Float80 : FloatFamily {
+    extension Float80 : CodableViaLosslessStringConvertible, FloatFamily {
 
         // MARK: - FloatFamily
 
