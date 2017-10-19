@@ -88,7 +88,7 @@
 
             func redact(_ string: String) -> String { // [_Exempt from Code Coverage_]
                 var result = string
-                let redacted = "[" + String(UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+                let redacted = "[" + String(UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                     switch localization {
                     case .englishUnitedKingdom, .englishUnitedStates, .englishCanada: // [_Exempt from Code Coverage_]
                         return "redacted"

@@ -54,11 +54,11 @@ internal func preconditionFailureNotInitialized() -> Never {
 
 private func warnAboutSecondLanguages() {
     if BuildConfiguration.current == .debug {
-        if LocalizationSetting.current.value.resolved() as ContentLocalization ∉ Set<ContentLocalization>([
+        if LocalizationSetting.current.value.resolved() as InterfaceLocalization ∉ Set<InterfaceLocalization>([
             .englishUnitedKingdom,
             .englishUnitedStates,
             .englishCanada]) { // [_Exempt from Code Coverage_]
-            let warning = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+            let warning = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
@@ -72,7 +72,7 @@ private func warnAboutSecondLanguages() {
                     /*א*/ return "זהירות: העברית של SDGCornerstone לא נבדקה אל יד של דובר שפת אם. אם אתה/את רוצה לעזור לנו, הירשם/הירשמי כאן:"
                 }
             })
-            let issueTitle = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+            let issueTitle = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
@@ -86,7 +86,7 @@ private func warnAboutSecondLanguages() {
                     return "בדיקה של העברית"
                 }
             })
-            let issueBody = UserFacingText({ (localization: ContentLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+            let issueBody = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
