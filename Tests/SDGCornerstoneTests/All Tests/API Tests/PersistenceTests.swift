@@ -25,8 +25,19 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes("−12 345" as Integer, equivalentFormats: ["[\u{22}−12 345\u{22}]"])
         XCTAssertRecodes("àbçđę..." as StrictString, equivalentFormats: ["[\u{22}àbçđę...\u{22}]", "[\u{22}\u{E0}b\u{E7}đ\u{119}\u{2026}\u{22}]"])
         XCTAssertRecodes("−12 345,678 9" as RationalNumber, equivalentFormats: ["[[\u{22}−123 443 211\u{22},\u{22}10 000\u{22}]]"])
+
         XCTAssertRecodes(Double.π.radians, equivalentFormats: ["[3.141592653589793]"])
         XCTAssertRecodes(7.days, equivalentFormats: ["[[1814400,259200]]"])
+
+        XCTAssertRecodes(GregorianYear(1234), equivalentFormats: ["[1234]"])
+        XCTAssertRecodes(GregorianDay(12), equivalentFormats: ["[12]"])
+        XCTAssertRecodes(GregorianHour(12), equivalentFormats: ["[12]"])
+        XCTAssertRecodes(GregorianMinute(12), equivalentFormats: ["[12]"])
+        XCTAssertRecodes(GregorianSecond(12), equivalentFormats: ["[\u{22}12\u{22}]"])
+        XCTAssertRecodes(HebrewYear(1234), equivalentFormats: ["[1234]"])
+        XCTAssertRecodes(HebrewDay(12), equivalentFormats: ["[12]"])
+        XCTAssertRecodes(HebrewHour(12), equivalentFormats: ["[12]"])
+        XCTAssertRecodes(HebrewPart(124), equivalentFormats: ["[\u{22}124\u{22}]"])
     }
 
     func testFileConvertible() {

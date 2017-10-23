@@ -24,7 +24,7 @@
 /// let timespan = GregorianYear(1) − GregorianYear(−1)
 /// // 1 year
 /// ```
-public struct GregorianYear : CalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, Year {
+public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, Year {
 
     // MARK: - Static Properties
 

@@ -13,7 +13,7 @@
  */
 
 /// A part of the Hebrew hour.
-public struct HebrewPart : CardinalCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent {
+public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent {
 
     // MARK: - Static Properties
 

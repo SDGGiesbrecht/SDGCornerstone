@@ -13,7 +13,7 @@
  */
 
 /// A day of the Hebrew month.
-public struct HebrewDay : ConsistentDurationCalendarComponent, Day, OrdinalCalendarComponent, RawRepresentableCalendarComponent {
+public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, Day, OrdinalCalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Properties
 

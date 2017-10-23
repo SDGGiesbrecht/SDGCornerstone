@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+/// An error that occurs while parsing a number from a string.
 public enum WholeArithmeticParseError : Error {
+
+    /// A character is present which is not a valid digit.
     case invalidDigit(UnicodeScalar)
 }
