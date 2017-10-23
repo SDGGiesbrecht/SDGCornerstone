@@ -16,6 +16,6 @@
 ///
 /// Conformance Requirements:
 ///     - `Measurement`
-public protocol EncodableViaMeasurement : Codable, Measurement {
+public protocol EncodableViaMeasurement : Measurement {
 
 }

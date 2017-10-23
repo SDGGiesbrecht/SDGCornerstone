@@ -26,6 +26,7 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes("àbçđę..." as StrictString, equivalentFormats: ["[\u{22}àbçđę...\u{22}]", "[\u{22}\u{E0}b\u{E7}đ\u{119}\u{2026}\u{22}]"])
         XCTAssertRecodes("−12 345,678 9" as RationalNumber, equivalentFormats: ["[[\u{22}−123 443 211\u{22},\u{22}10 000\u{22}]]"])
         XCTAssertRecodes(Double.π.radians, equivalentFormats: ["[3.141592653589793]"])
+        XCTAssertRecodes(7.days, equivalentFormats: ["[[1814400,259200]]"])
     }
 
     func testFileConvertible() {

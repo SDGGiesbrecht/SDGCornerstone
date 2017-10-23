@@ -16,6 +16,6 @@
 ///
 /// Conformance Requirements:
 ///     - `CustomStringConvertible`
-public protocol EncodableViaCustomStringConvertible : Codable, CustomStringConvertible {
+public protocol EncodableViaCustomStringConvertible : Encodable, CustomStringConvertible {
 
 }

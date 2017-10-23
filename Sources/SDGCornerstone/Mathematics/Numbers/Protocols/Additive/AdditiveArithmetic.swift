@@ -21,7 +21,7 @@
 /// - `Hashable`
 /// - `Subtractable`
 /// - `IntegralArithmetic`, `WholeNumberProtocol`, `ExpressibleByIntegerLiteral` or `static var additiveIdentity: Self { get }`
-public protocol AdditiveArithmetic : Hashable, Subtractable {
+public protocol AdditiveArithmetic : Codable, Hashable, Subtractable {
 
     // [_Define Documentation: SDGCornerstone.AdditiveArithmetic.additiveIdentity_]
     /// The additive identity (origin).

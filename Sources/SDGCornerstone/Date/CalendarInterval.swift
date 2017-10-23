@@ -22,7 +22,7 @@ private let unitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 /// A time interval.
 ///
 /// The units are all defined as fractions or multiples of days. This makes them convenient for calendaring, but not for physics. (Seconds are not SI seconds and leap seconds do not exist.)
-public struct CalendarInterval<Scalar : RationalArithmetic> : Measurement {
+public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, Measurement {
 
     // MARK: - Initialization
 
@@ -109,8 +109,8 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Measurement {
         }
     }
 
-    internal var unitsPerDay: Scalar {
-        return Scalar(GregorianSecond.secondsPerMinute)
+    private var unitsPerDay: Scalar {
+        return Scalar(SDGCornerstone.unitsPerDay)
     }
     /// The numeric value in days.
     public var inDays: Scalar {
@@ -172,6 +172,33 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Measurement {
         set {
             inUnits = newValue × unitsPerSecond
         }
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let units = try container.decode(Scalar.self)
+        let unitsPerDay = try container.decode(Int.self)
+        self = CalendarInterval(days: units ÷ Scalar(unitsPerDay))
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(inUnits)
+        try container.encode(unitsPerDay)
     }
 
     // MARK: - Measurement
