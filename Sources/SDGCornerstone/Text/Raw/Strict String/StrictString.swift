@@ -15,7 +15,7 @@
 import Foundation
 
 /// A string that maintains Unicode normalization form NFKD.
-public struct StrictString : Addable, BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
+public struct StrictString : Addable, BidirectionalCollection, CodableViaLosslessStringConvertible, Collection, Comparable, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Initialization
 

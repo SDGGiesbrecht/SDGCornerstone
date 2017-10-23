@@ -1667,8 +1667,6 @@ extension WholeArithmetic where Self : IntegralArithmetic {
 
         raiseWholeNumberToThePowerOf(wholeNumber: exponent)
     }
-
-
 }
 
 extension WholeArithmetic where Self : IntFamily {

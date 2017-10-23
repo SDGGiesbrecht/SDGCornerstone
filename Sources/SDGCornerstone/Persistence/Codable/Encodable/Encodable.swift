@@ -49,6 +49,6 @@ extension Encodable where Self : EncodableViaIntegerProtocol {
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
-        try encode(to: encoder, via: String(inDigits())) // [_Warning: Use StrictString directly._]
+        try encode(to: encoder, via: inDigits())
     }
 }

@@ -41,7 +41,7 @@ extension Decodable {
     }
 
     /// Creates a new instance by decoding a proxy string from the given decoder.
-    public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) throws -> Self?) throws where Other : StringFamily, Other : Decodable /* [_Warning: Eventually redundant._] */ {
+    public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) throws -> Self?) throws where Other : StringFamily {
         try self.init(from: decoder, via: type, convert: convert, debugErrorDescription: { (invalidString: Other) -> StrictString in
             let description = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
@@ -76,6 +76,6 @@ extension Decodable where Self : DecodableViaWholeArithmetic {
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: String.self /* [_Warning: Use StrictString directly._] */, convert: { try Self(possibleDecimal: StrictString($0)) })
+        try self.init(from: decoder, via: StrictString.self, convert: { try Self(possibleDecimal: $0) })
     }
 }
