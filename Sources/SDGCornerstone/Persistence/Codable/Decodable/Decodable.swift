@@ -67,6 +67,19 @@ extension Decodable where Self : DecodableViaLosslessStringConvertible {
     }
 }
 
+extension Decodable where Self : DecodableViaMeasurement {
+    // MARK: - where Self : DecodableViaMeasurement
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        try self.init(from: decoder, via: Scalar.self, convert: { Self(rawValue: $0) }, debugErrorDescription: { _ in unreachable() })
+    }
+}
+
 extension Decodable where Self : DecodableViaWholeArithmetic {
     // MARK: - where Self : DecodableViaWholeArithmetic
 
