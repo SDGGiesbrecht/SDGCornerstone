@@ -525,6 +525,8 @@ extension WholeArithmetic {
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
+    ///
+    /// - Throws: `WholeArithmeticParseError`
     public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
@@ -1775,6 +1777,8 @@ extension WholeArithmetic where Self : RationalArithmetic {
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
+    ///
+    /// - Throws: `WholeArithmeticParseError`
     public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
