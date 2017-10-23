@@ -16,6 +16,6 @@
 ///
 /// Conformance Requirements:
 ///     - `IntegerProtocol`
-public protocol EncodableViaIntegerProtocol : Codable, IntegerProtocol {
+public protocol EncodableViaIntegerProtocol : IntegerProtocol {
 
 }

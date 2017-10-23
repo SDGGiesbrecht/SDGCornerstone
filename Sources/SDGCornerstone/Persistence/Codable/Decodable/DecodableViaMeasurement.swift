@@ -1,5 +1,5 @@
 /*
- DecodableViaWholeArithmetic.swift
+ DecodableViaMeasurement.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,10 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A type that conforms to `Decodable` through its `WholeArithmetic` interface.
+/// A type that conforms to `Decodable` through its `Measurement` interface.
 ///
 /// Conformance Requirements:
-///     - `WholeArithmetic`
-public protocol DecodableViaWholeArithmetic : WholeArithmetic {
+///     - `Measurement`
+public protocol DecodableViaMeasurement : Decodable, Measurement {
 
 }

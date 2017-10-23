@@ -16,6 +16,6 @@
 ///
 /// Conformance Requirements:
 ///     - `WholeNumberProtocol`
-public protocol EncodableViaWholeNumberProtocol : Codable, WholeNumberProtocol {
+public protocol EncodableViaWholeNumberProtocol : WholeNumberProtocol {
 
 }
