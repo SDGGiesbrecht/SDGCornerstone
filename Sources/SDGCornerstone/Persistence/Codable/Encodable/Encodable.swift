@@ -19,6 +19,12 @@ extension Encodable {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
+
+    /// Encodes this value by encoding a proxy type into the given encoder.
+    public func encode<Other>(to encoder: Encoder, via other: Other) throws where Other : Encodable {
+        var container = encoder.singleValueContainer()
+        try container.encode(other)
+    }
 }
 
 extension Encodable where Self : EncodableViaCustomStringConvertible {
@@ -30,8 +36,19 @@ extension Encodable where Self : EncodableViaCustomStringConvertible {
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
-        let string = description
-        var container = encoder.singleValueContainer()
-        try container.encode(string)
+        try encode(to: encoder, via: description)
+    }
+}
+
+extension Encodable where Self : EncodableViaIntegerProtocol {
+    // MARK: - where Self : EncodableViaIntegerProtocol
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        try encode(to: encoder, via: String(inDigits())) // [_Warning: Use StrictString directly._]
     }
 }

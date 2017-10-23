@@ -117,7 +117,9 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>)
+    ///
+    /// - Throws: `WholeArithmeticParseError`
+    init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws
 
     // MARK: - Operations
 
@@ -359,12 +361,30 @@ extension WholeArithmetic {
         self.init(UIntMax(uInt))
     }
 
+    private init(forceParsing parse: () throws -> Self) {
+        do {
+            self = try parse()
+        } catch let error as WholeArithmeticParseError {
+            switch error {
+            case .invalidDigit(let scalar):
+                preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                    switch localization {
+                    case .englishCanada: // [_Exempt from Code Coverage_]
+                        return StrictString("\(scalar) is not a valid digit.")
+                    }
+                }))
+            }
+        } catch {
+            unreachable()
+        }
+    }
+
     /// Creates an instance from a decimal representation.
     ///
     /// - Parameters:
     ///     - decimal: The decimal representation.
     public init(_ decimal: StrictString) {
-        self.init(decimal, base: 10)
+        self.init(forceParsing: { try Self(possibleDecimal: decimal) })
     }
 
     /// Creates an instance from a hexadecimal representation.
@@ -372,7 +392,7 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - hexadecimal: The hexadecimal representation.
     public init(hexadecimal: StrictString) {
-        self.init(hexadecimal, base: 16)
+        self.init(forceParsing: { try Self(possibleHexadecimal: hexadecimal) })
     }
 
     /// Creates an instance from a octal representation.
@@ -380,7 +400,7 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - octal: The octal representation.
     public init(octal: StrictString) {
-        self.init(octal, base: 8)
+        self.init(forceParsing: { try Self(possibleOctal: octal) })
     }
 
     /// Creates an instance from a binary representation.
@@ -388,7 +408,47 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - binary: The binary representation.
     public init(binary: StrictString) {
-        self.init(binary, base: 2)
+        self.init(forceParsing: { try Self(possibleBinary: binary) })
+    }
+
+    /// Creates an instance from a decimal representation.
+    ///
+    /// - Parameters:
+    ///     - decimal: The decimal representation.
+    ///
+    /// - Throws: `WholeArithmeticParseError`
+    public init(possibleDecimal decimal: StrictString) throws {
+        try self.init(decimal, base: 10)
+    }
+
+    /// Creates an instance from a hexadecimal representation.
+    ///
+    /// - Parameters:
+    ///     - hexadecimal: The hexadecimal representation.
+    ///
+    /// - Throws: `WholeArithmeticParseError`
+    public init(possibleHexadecimal hexadecimal: StrictString) throws {
+        try self.init(hexadecimal, base: 16)
+    }
+
+    /// Creates an instance from a octal representation.
+    ///
+    /// - Parameters:
+    ///     - octal: The octal representation.
+    ///
+    /// - Throws: `WholeArithmeticParseError`
+    public init(possibleOctal octal: StrictString) throws {
+        try self.init(octal, base: 8)
+    }
+
+    /// Creates an instance from a binary representation.
+    ///
+    /// - Parameters:
+    ///     - binary: The binary representation.
+    ///
+    /// - Throws: `WholeArithmeticParseError`
+    public init(possibleBinary binary: StrictString) throws {
+        try self.init(binary, base: 2)
     }
 
     /// Creates an instance by interpreting `representation` in a particular base.
@@ -398,7 +458,9 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - representation: The string to interpret.
     ///     - base: The base of the number system.
-    public init(_ representation: StrictString, base: Int) {
+    ///
+    /// - Throws: `WholeArithmeticParseError`
+    public init(_ representation: StrictString, base: Int) throws {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada: // [_Exempt from Code Coverage_]
@@ -428,7 +490,7 @@ extension WholeArithmetic {
 
         let selectedDigits = [[UnicodeScalar]](digits[0 ..< base])
 
-        self.init(fromRepresentation: representation, usingDigits: selectedDigits, radixCharacters: [",", ".", "٫"], formattingSeparators: [" ", "٬"])
+        try self.init(fromRepresentation: representation, usingDigits: selectedDigits, radixCharacters: [",", ".", "٫"], formattingSeparators: [" ", "٬"])
     }
 
     fileprivate static func assertNFKD(digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
@@ -463,10 +525,10 @@ extension WholeArithmetic {
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+    public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
-        self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+        try self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
     }
 
     fileprivate static func getBase(_ digits: [[UnicodeScalar]]) -> Self {
@@ -486,7 +548,7 @@ extension WholeArithmetic {
         return digitMapping
     }
 
-    fileprivate init(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) {
+    fileprivate init(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
 
         self = 0
         var position: Self = 0
@@ -495,12 +557,9 @@ extension WholeArithmetic {
                 self += (base ↑ position) × digit
                 position += 1 as Self
             } else {
-                assert(character ∈ formattingSeparators, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                    switch localization {
-                    case .englishCanada: // [_Exempt from Code Coverage_]
-                        return StrictString("\(character) is not a valid digit.")
-                    }
-                }))
+                if character ∉ formattingSeparators {
+                    throw WholeArithmeticParseError.invalidDigit(character)
+                }
             }
         }
     }
@@ -1568,6 +1627,35 @@ extension WholeArithmetic where Self : IntegerProtocol {
 extension WholeArithmetic where Self : IntegralArithmetic {
     // MARK: - where Self : IntegralArithmetic
 
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
+    ///
+    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
+    ///
+    /// - Parameters:
+    ///     - representation: The string to interpret.
+    ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
+    ///     - radixCharacters: The set of characters that can mark the radix position.
+    ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
+    ///
+    /// - Throws: `WholeArithmeticParseError`
+    public init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
+        var representation = representation
+
+        Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
+
+        let negative = representation.scalars.first == "−"
+        if negative {
+            representation.scalars.removeFirst()
+        }
+
+        try self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+
+        if negative {
+            self−=
+        }
+    }
+
     fileprivate mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
 
         assert(exponent.isNonNegative, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
@@ -1579,6 +1667,8 @@ extension WholeArithmetic where Self : IntegralArithmetic {
 
         raiseWholeNumberToThePowerOf(wholeNumber: exponent)
     }
+
+
 }
 
 extension WholeArithmetic where Self : IntFamily {
@@ -1682,7 +1772,7 @@ extension WholeArithmetic where Self : RationalArithmetic {
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+    public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
         let base = Self.getBase(digits)
@@ -1708,13 +1798,13 @@ extension WholeArithmetic where Self : RationalArithmetic {
             return StrictString(value.map({ digitMapping[$0] ≠ nil ? "0" : $0 }))
         }
 
-        func component(_ value: StrictString) -> Self {
-            return Self(whole: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
+        func component(_ value: StrictString) throws -> Self {
+            return try Self(whole: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
         }
 
-        let whole = component(wholeString)
-        let numerator = component(numeratorString)
-        let denominator = component("1" + flattenToZeroes(numeratorString))
+        let whole = try component(wholeString)
+        let numerator = try component(numeratorString)
+        let denominator = try component("1" + flattenToZeroes(numeratorString))
 
         self = whole + numerator ÷ denominator
     }
