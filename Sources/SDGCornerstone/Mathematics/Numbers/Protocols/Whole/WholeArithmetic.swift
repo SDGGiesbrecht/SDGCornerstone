@@ -1640,16 +1640,21 @@ extension WholeArithmetic where Self : IntegralArithmetic {
     ///
     /// - Throws: `WholeArithmeticParseError`
     public init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
-        var representation = representation
 
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
+
+        try self.init(integer: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+    }
+
+    fileprivate init(integer representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
+        var representation = representation
 
         let negative = representation.scalars.first == "−"
         if negative {
             representation.scalars.removeFirst()
         }
 
-        try self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+        try self.init(whole: representation, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
 
         if negative {
             self−=
@@ -1797,7 +1802,7 @@ extension WholeArithmetic where Self : RationalArithmetic {
         }
 
         func component(_ value: StrictString) throws -> Self {
-            return try Self(whole: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
+            return try Self(integer: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
         }
 
         let whole = try component(wholeString)

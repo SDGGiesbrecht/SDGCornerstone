@@ -23,6 +23,7 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(0.5 as Float80, equivalentFormats: ["[\u{22}0.5\u{22}]"])
         XCTAssertRecodes("−12 345" as Integer, equivalentFormats: ["[\u{22}−12 345\u{22}]"])
         XCTAssertRecodes("àbçđę..." as StrictString, equivalentFormats: ["[\u{22}àbçđę...\u{22}]", "[\u{22}\u{E0}b\u{E7}đ\u{119}\u{2026}\u{22}]"])
+        XCTAssertRecodes("−12 345,678 9" as RationalNumber, equivalentFormats: ["[[\u{22}−123 443 211\u{22},\u{22}10 000\u{22}]]"])
     }
 
     func testFileConvertible() {
