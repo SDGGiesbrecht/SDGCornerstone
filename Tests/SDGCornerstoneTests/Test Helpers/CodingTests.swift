@@ -36,3 +36,13 @@ internal func XCTAssertRecodes<T>(_ instance: T, equivalentFormats: [String] = [
         XCTFail("\(error)", file: file, line: line)
     }
 }
+
+internal func XCTAssertThrows<T>(whileDecoding encoded: String, as type: T.Type, file: StaticString = #file, line: UInt = #line) where T : Decodable {
+    let decoder = JSONDecoder()
+    do {
+        let decoded = try decoder.decode([T].self, from: encoded.file)
+        XCTFail("No error thrown. Decoded value: \(decoded)", file: file, line: line)
+    } catch {
+        // Expected.
+    }
+}

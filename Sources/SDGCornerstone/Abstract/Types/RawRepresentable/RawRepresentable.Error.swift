@@ -23,7 +23,7 @@ public enum RawRepresentableError<RawValue> : Error {
         case .invalidRawValue(let value, let type):
             return UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada: // [_Exempt from Code Coverage_]
+                case .englishCanada:
                     return StrictString("Invalid raw value “\(value)” for \(type).")
                 }
             })

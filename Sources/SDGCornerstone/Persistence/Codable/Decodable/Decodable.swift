@@ -87,7 +87,9 @@ extension Decodable where Self : DecodableViaMeasurement {
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: Scalar.self, convert: { Self(rawValue: $0) }, debugErrorDescription: { _ in unreachable() })
+        try self.init(from: decoder, via: Scalar.self, convert: { Self(rawValue: $0) }, debugErrorDescription: { _ in
+            unreachable()
+        })
     }
 }
 

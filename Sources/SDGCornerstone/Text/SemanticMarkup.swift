@@ -179,7 +179,9 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: StrictString.self, convert: { SemanticMarkup($0) }, debugErrorDescription: { _ in unreachable() })
+        try self.init(from: decoder, via: StrictString.self, convert: { SemanticMarkup($0) }, debugErrorDescription: { _ in
+            unreachable()
+        })
     }
 
     // MARK: - Encodable
