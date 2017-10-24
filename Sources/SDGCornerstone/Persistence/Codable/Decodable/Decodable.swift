@@ -54,6 +54,17 @@ extension Decodable {
     }
 }
 
+extension Decodable where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent, Self.RawValue == Self.Vector {
+    // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent, Self.RawValue == Self.Vector
+
+    internal init(usingOrdinalFrom decoder: Decoder) throws {
+        // For GregorianMonth, GregorianWeekday & HebrewWeekday
+        try self.init(from: decoder, via: Vector.self, convert: { Self(rawValue: $0 − (1 as Vector)) }, debugErrorDescription: { (invalidRawValue: Vector) -> StrictString in
+            return RawRepresentableError.invalidRawValue(invalidRawValue, Self.self).debugDescription.resolved()
+        })
+    }
+}
+
 extension Decodable where Self : DecodableViaLosslessStringConvertible {
     // MARK: - where Self : DecodableViaLosslessStringConvertible
 

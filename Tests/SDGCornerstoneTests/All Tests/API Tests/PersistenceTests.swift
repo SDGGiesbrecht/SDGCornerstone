@@ -30,12 +30,15 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(7.days, equivalentFormats: ["[[1814400,259200]]"])
 
         XCTAssertRecodes(GregorianYear(1234), equivalentFormats: ["[1234]"])
+        XCTAssertRecodes(GregorianMonth.january, equivalentFormats: ["[1]"])
         XCTAssertRecodes(GregorianDay(12), equivalentFormats: ["[12]"])
+        XCTAssertRecodes(GregorianWeekday.sunday, equivalentFormats: ["[1]"])
         XCTAssertRecodes(GregorianHour(12), equivalentFormats: ["[12]"])
         XCTAssertRecodes(GregorianMinute(12), equivalentFormats: ["[12]"])
         XCTAssertRecodes(GregorianSecond(12), equivalentFormats: ["[\u{22}12\u{22}]"])
         XCTAssertRecodes(HebrewYear(1234), equivalentFormats: ["[1234]"])
         XCTAssertRecodes(HebrewDay(12), equivalentFormats: ["[12]"])
+        XCTAssertRecodes(HebrewWeekday.sunday, equivalentFormats: ["[1]"])
         XCTAssertRecodes(HebrewHour(12), equivalentFormats: ["[12]"])
         XCTAssertRecodes(HebrewPart(124), equivalentFormats: ["[\u{22}124\u{22}]"])
     }

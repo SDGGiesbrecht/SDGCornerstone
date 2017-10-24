@@ -13,7 +13,7 @@
  */
 
 /// A month of the Gregorian year.
-public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent {
+public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent {
 
     // MARK: - Cases
 
@@ -122,6 +122,28 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
     /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianMonth.maximumNumberOfDays).days
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        try self.init(usingOrdinalFrom: decoder)
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        try encodeUsingOrdinal(to: encoder)
     }
 
     // MARK: - ISOCalendarComponent

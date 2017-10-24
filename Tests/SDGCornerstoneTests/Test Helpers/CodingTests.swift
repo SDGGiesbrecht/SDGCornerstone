@@ -25,12 +25,12 @@ internal func XCTAssertRecodes<T>(_ instance: T, equivalentFormats: [String] = [
         let encoded = try coder.encode([instance])
         print("\(instance) → \(try String(file: encoded, origin: nil))")
         let decoded = try decoder.decode([T].self, from: encoded)
-        XCTAssertEqual(decoded[0], instance, "Recoding produced a different value.")
+        XCTAssertEqual(decoded[0], instance, "Recoding produced a different value.", file: file, line: line)
 
         for format in equivalentFormats {
-            let file = format.file
-            let decoded = try decoder.decode([T].self, from: file)
-            XCTAssertEqual(decoded[0], instance, "Format not equivalent: \(format)")
+            let data = format.file
+            let decoded = try decoder.decode([T].self, from: data)
+            XCTAssertEqual(decoded[0], instance, "Format not equivalent: \(format)", file: file, line: line)
         }
     } catch let error {
         XCTFail("\(error)", file: file, line: line)

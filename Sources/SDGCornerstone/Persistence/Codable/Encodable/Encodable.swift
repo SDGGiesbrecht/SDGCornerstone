@@ -27,6 +27,15 @@ extension Encodable {
     }
 }
 
+extension Encodable where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent {
+    // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent
+
+    internal func encodeUsingOrdinal(to encoder: Encoder) throws {
+        // For GregorianMonth, GregorianWeekday & HebrewWeekday
+        try encode(to: encoder, via: ordinal)
+    }
+}
+
 extension Encodable where Self : EncodableViaCustomStringConvertible {
     // MARK: - where Self : EncodableViaCustomStringConvertible
 

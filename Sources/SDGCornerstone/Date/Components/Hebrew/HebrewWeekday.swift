@@ -13,7 +13,7 @@
  */
 
 /// A day of the Hebrew week.
-public enum HebrewWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent, Weekday {
+public enum HebrewWeekday : Int, Codable, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent, Weekday {
 
     // MARK: - Cases
 
@@ -43,6 +43,28 @@ public enum HebrewWeekday : Int, ConsistentDurationCalendarComponent, Consistent
     /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).days
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        try self.init(usingOrdinalFrom: decoder)
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        try encodeUsingOrdinal(to: encoder)
     }
 
     // MARK: - PointProtocol
