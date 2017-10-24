@@ -133,6 +133,12 @@
                 <a href="Enums/PropertyList/ReadError.html">– ReadError</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/RawRepresentableError.html">RawRepresentableError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/WholeArithmeticParseError.html">WholeArithmeticParseError</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/_CE_93_CF_81_CE_B1_CE_BC_CE_BC_CE_B1_CF_84_CE_B9_CE_BA_CE_B7_CC_81_CE_A0_CF_84_CF_89_CC_81_CF_83_CE_B7.html">ΓραμματικήΠτώση</a>
               </li>
             </ul>
@@ -180,10 +186,16 @@
                 <a href="Extensions/Date.html">Date</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/Decodable.html">Decodable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/Dictionary.html">Dictionary</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Encodable.html">Encodable</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/Equatable.html">Equatable</a>
@@ -383,7 +395,7 @@
                 <a href="Functions.html#/s:14SDGCornerstone3gcdxx_xtAA11MeasurementRzlF">gcd(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions/gcd_28_5F_3A_5F_3A_29.html">gcd(_:_:)</a>
+                <a href="Functions.html#/s:14SDGCornerstone3gcdxx_xtAA15WholeArithmeticRzlF">gcd(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:14SDGCornerstone10initializeyAA4ModeO4mode_SS21applicationIdentifierAA11PreferencesCm0eG5ClasstF">initialize(mode:applicationIdentifier:applicationPreferencesClass:)</a>
@@ -496,6 +508,21 @@
                 <a href="Protocols.html#/s:14SDGCornerstone25CardinalCalendarComponentP">CardinalCalendarComponent</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone25CodableViaIntegerProtocolP">CodableViaIntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone35CodableViaLosslessStringConvertibleP">CodableViaLosslessStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone21CodableViaMeasurementP">CodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone43CodableViaRawRepresentableCalendarComponentP">CodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone29CodableViaWholeNumberProtocolP">CodableViaWholeNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/ComparableSet.html">ComparableSet</a>
               </li>
               <li class="nav-group-task">
@@ -509,6 +536,33 @@
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/Day.html">Day</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone37DecodableViaLosslessStringConvertibleP">DecodableViaLosslessStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone23DecodableViaMeasurementP">DecodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone45DecodableViaRawRepresentableCalendarComponentP">DecodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone27DecodableViaWholeArithmeticP">DecodableViaWholeArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone35EncodableViaCustomStringConvertibleP">EncodableViaCustomStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone27EncodableViaIntegerProtocolP">EncodableViaIntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone23EncodableViaMeasurementP">EncodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone45EncodableViaRawRepresentableCalendarComponentP">EncodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:14SDGCornerstone31EncodableViaWholeNumberProtocolP">EncodableViaWholeNumberProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols.html#/s:14SDGCornerstone28EnumerationCalendarComponentP">EnumerationCalendarComponent</a>
@@ -1301,6 +1355,7 @@
     <span class="c1">// The reference date is January 1, 2001 at 00:00</span>
     <span class="n">fileprivate</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">referenceDate</span> <span class="o">=</span> <span class="kt">CalendarDate</span><span class="p">(</span><span class="nv">gregorian</span><span class="p">:</span> <span class="o">.</span><span class="n">january</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
+    <span class="n">fileprivate</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">identifier</span><span class="p">:</span> <span class="kt">StrictString</span> <span class="o">=</span> <span class="s">"MyModule.DaysIntoMillenium"</span>
     <span class="n">fileprivate</span> <span class="k">let</span> <span class="nv">daysIntoMillennium</span><span class="p">:</span> <span class="kt">FloatMax</span>
     <span class="n">fileprivate</span> <span class="k">let</span> <span class="nv">intervalSinceReferenceDate</span><span class="p">:</span> <span class="kt">CalendarInterval</span><span class="o">&lt;</span><span class="kt">FloatMax</span><span class="o">&gt;</span>
 
@@ -1313,8 +1368,22 @@
         <span class="k">self</span><span class="o">.</span><span class="n">intervalSinceReferenceDate</span> <span class="o">=</span> <span class="n">intervalSinceReferenceDate</span>
         <span class="n">daysIntoMillennium</span> <span class="o">=</span> <span class="n">intervalSinceReferenceDate</span><span class="o">.</span><span class="n">inDays</span>
     <span class="p">}</span>
+
+    <span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+        <span class="c1">// Only the definition (i.e. daysIntoMillennium) needs to be encoded.</span>
+        <span class="c1">// Derived information (i.e. intervalSinceRefrenceDate) can be recomputed.</span>
+        <span class="k">try</span> <span class="nf">encode</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">encoder</span><span class="p">,</span> <span class="nv">via</span><span class="p">:</span> <span class="n">daysIntoMillennium</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">fileprivate</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">decoder</span><span class="p">,</span> <span class="nv">via</span><span class="p">:</span> <span class="kt">FloatMax</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">convert</span><span class="p">:</span> <span class="p">{</span> <span class="kt">DaysIntoMillennium</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">},</span> <span class="nv">debugErrorDescription</span><span class="p">:</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="nf">unreachable</span><span class="p">()</span> <span class="p">})</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    If you intend to encode and decode a custom definition type, you must register the type with <code><a href="Structs/CalendarDate.html#/s:14SDGCornerstone12CalendarDateV8registeryAA0C10Definition_pXpFZ">CalendarDate.register(_:)</a></code> before performing any decoding operations.
+
+</div>
 
 <p>Conformance Requirements:</p>
 
@@ -1330,7 +1399,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DateDefinition</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DateDefinition</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
 
                         </div>
                       </div>
@@ -1362,7 +1431,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CalendarComponent</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CalendarComponent</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
 
                         </div>
                       </div>
@@ -1991,85 +2060,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">AdditiveArithmetic</span> <span class="p">:</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt"><a href="Protocols/Subtractable.html">Subtractable</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14SDGCornerstone15IntegerProtocolP"></a>
-                    <a name="//apple_ref/swift/Protocol/IntegerProtocol" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SDGCornerstone15IntegerProtocolP">IntegerProtocol</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A type which <em>only ever</em> represents integers.</p>
-
-<p>Conformance Requirements:</p>
-
-<ul>
-<li><code><a href="Protocols/IntegralArithmetic.html">IntegralArithmetic</a></code></li>
-</ul>
-
-                        <a href="Protocols/IntegerProtocol.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">IntegerProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/IntegralArithmetic.html">IntegralArithmetic</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14SDGCornerstone18IntegralArithmeticP"></a>
-                    <a name="//apple_ref/swift/Protocol/IntegralArithmetic" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SDGCornerstone18IntegralArithmeticP">IntegralArithmetic</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A type that can be used for integral arithmetic.</p>
-
-<p>Conformance Requirements:</p>
-
-<ul>
-<li><code><a href="Protocols/WholeArithmetic.html">WholeArithmetic</a></code></li>
-<li><code><a href="Protocols/Negatable.html">Negatable</a></code></li>
-<li><code>init(_ int: IntMax)</code></li>
-</ul>
-
-                        <a href="Protocols/IntegralArithmetic.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">IntegralArithmetic</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Negatable.html">Negatable</a></span><span class="p">,</span> <span class="kt">SignedNumeric</span><span class="p">,</span> <span class="kt"><a href="Protocols/WholeArithmetic.html">WholeArithmetic</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">AdditiveArithmetic</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt"><a href="Protocols/Subtractable.html">Subtractable</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2158,6 +2149,133 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">NumericAdditiveArithmetic</span> <span class="p">:</span> <span class="kt"><a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a></span><span class="p">,</span> <span class="kt">Comparable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12SubtractableP"></a>
+                    <a name="//apple_ref/swift/Protocol/Subtractable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12SubtractableP">Subtractable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that can do scalar subtraction.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p><code>Subtractable</code> is distinct from <code><a href="Protocols/Negatable.html">Negatable</a></code> to allow whole number types to perform subtraction.</p>
+
+</div>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Unlike <code>Numeric</code>, <code>Subtractable</code> types do not need to conform to <code>Comparable</code>, allowing conformance by two‐dimensional vectors, etc.</p>
+
+</div>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code><a href="Protocols/Addable.html">Addable</a></code></li>
+<li><code>static func −= (lhs: inout Self, rhs: Self)</code></li>
+</ul>
+
+                        <a href="Protocols/Subtractable.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Subtractable</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Addable.html">Addable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone15IntegerProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/IntegerProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone15IntegerProtocolP">IntegerProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type which <em>only ever</em> represents integers.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code><a href="Protocols/IntegralArithmetic.html">IntegralArithmetic</a></code></li>
+</ul>
+
+                        <a href="Protocols/IntegerProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">IntegerProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/IntegralArithmetic.html">IntegralArithmetic</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone18IntegralArithmeticP"></a>
+                    <a name="//apple_ref/swift/Protocol/IntegralArithmetic" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone18IntegralArithmeticP">IntegralArithmetic</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that can be used for integral arithmetic.</p>
+
+<p>Conformance Requirements:</p>
+
+<ul>
+<li><code><a href="Protocols/WholeArithmetic.html">WholeArithmetic</a></code></li>
+<li><code><a href="Protocols/Negatable.html">Negatable</a></code></li>
+<li><code>init(_ int: IntMax)</code></li>
+</ul>
+
+                        <a href="Protocols/IntegralArithmetic.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">IntegralArithmetic</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Negatable.html">Negatable</a></span><span class="p">,</span> <span class="kt">SignedNumeric</span><span class="p">,</span> <span class="kt"><a href="Protocols/WholeArithmetic.html">WholeArithmetic</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2317,55 +2435,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RealNumberProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RealArithmetic.html">RealArithmetic</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14SDGCornerstone12SubtractableP"></a>
-                    <a name="//apple_ref/swift/Protocol/Subtractable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SDGCornerstone12SubtractableP">Subtractable</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A type that can do scalar subtraction.</p>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p><code>Subtractable</code> is distinct from <code><a href="Protocols/Negatable.html">Negatable</a></code> to allow whole number types to perform subtraction.</p>
-
-</div>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p>Unlike <code>Numeric</code>, <code>Subtractable</code> types do not need to conform to <code>Comparable</code>, allowing conformance by two‐dimensional vectors, etc.</p>
-
-</div>
-
-<p>Conformance Requirements:</p>
-
-<ul>
-<li><code><a href="Protocols/Addable.html">Addable</a></code></li>
-<li><code>static func −= (lhs: inout Self, rhs: Self)</code></li>
-</ul>
-
-                        <a href="Protocols/Subtractable.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Subtractable</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Addable.html">Addable</a></span></code></pre>
 
                         </div>
                       </div>
@@ -2712,7 +2781,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PointProtocol</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">PointProtocol</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2832,6 +2901,482 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">VectorProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone25CodableViaIntegerProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/CodableViaIntegerProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone25CodableViaIntegerProtocolP">CodableViaIntegerProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Codable</code> through its <code><a href="Protocols/IntegerProtocol.html">IntegerProtocol</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/IntegerProtocol.html">IntegerProtocol</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CodableViaIntegerProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone27DecodableViaWholeArithmeticP">DecodableViaWholeArithmetic</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone27EncodableViaIntegerProtocolP">EncodableViaIntegerProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone35CodableViaLosslessStringConvertibleP"></a>
+                    <a name="//apple_ref/swift/Protocol/CodableViaLosslessStringConvertible" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone35CodableViaLosslessStringConvertibleP">CodableViaLosslessStringConvertible</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Codable</code> through its <code>LosslessStringConvertible</code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code>LosslessStringConvertible</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CodableViaLosslessStringConvertible</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone37DecodableViaLosslessStringConvertibleP">DecodableViaLosslessStringConvertible</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone35EncodableViaCustomStringConvertibleP">EncodableViaCustomStringConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone21CodableViaMeasurementP"></a>
+                    <a name="//apple_ref/swift/Protocol/CodableViaMeasurement" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone21CodableViaMeasurementP">CodableViaMeasurement</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Codable</code> through its <code><a href="Protocols/Measurement.html">Measurement</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/Measurement.html">Measurement</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CodableViaMeasurement</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone23DecodableViaMeasurementP">DecodableViaMeasurement</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone23EncodableViaMeasurementP">EncodableViaMeasurement</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone43CodableViaRawRepresentableCalendarComponentP"></a>
+                    <a name="//apple_ref/swift/Protocol/CodableViaRawRepresentableCalendarComponent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone43CodableViaRawRepresentableCalendarComponentP">CodableViaRawRepresentableCalendarComponent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Codable</code> through its <code><a href="Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CodableViaRawRepresentableCalendarComponent</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone45DecodableViaRawRepresentableCalendarComponentP">DecodableViaRawRepresentableCalendarComponent</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone45EncodableViaRawRepresentableCalendarComponentP">EncodableViaRawRepresentableCalendarComponent</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone29CodableViaWholeNumberProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/CodableViaWholeNumberProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone29CodableViaWholeNumberProtocolP">CodableViaWholeNumberProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Codable</code> through its <code><a href="Protocols/WholeNumberProtocol.html">WholeNumberProtocol</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/WholeNumberProtocol.html">WholeNumberProtocol</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CodableViaWholeNumberProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone27DecodableViaWholeArithmeticP">DecodableViaWholeArithmetic</a></span><span class="p">,</span> <span class="kt"><a href="Protocols.html#/s:14SDGCornerstone31EncodableViaWholeNumberProtocolP">EncodableViaWholeNumberProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone37DecodableViaLosslessStringConvertibleP"></a>
+                    <a name="//apple_ref/swift/Protocol/DecodableViaLosslessStringConvertible" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone37DecodableViaLosslessStringConvertibleP">DecodableViaLosslessStringConvertible</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Decodable</code> through its <code>LosslessStringConvertible</code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code>LosslessStringConvertible</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DecodableViaLosslessStringConvertible</span> <span class="p">:</span> <span class="kt">Decodable</span><span class="p">,</span> <span class="kt">LosslessStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone23DecodableViaMeasurementP"></a>
+                    <a name="//apple_ref/swift/Protocol/DecodableViaMeasurement" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone23DecodableViaMeasurementP">DecodableViaMeasurement</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Decodable</code> through its <code><a href="Protocols/Measurement.html">Measurement</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/Measurement.html">Measurement</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DecodableViaMeasurement</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Measurement.html">Measurement</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone45DecodableViaRawRepresentableCalendarComponentP"></a>
+                    <a name="//apple_ref/swift/Protocol/DecodableViaRawRepresentableCalendarComponent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone45DecodableViaRawRepresentableCalendarComponentP">DecodableViaRawRepresentableCalendarComponent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Decodable</code> through its <code><a href="Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DecodableViaRawRepresentableCalendarComponent</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone27DecodableViaWholeArithmeticP"></a>
+                    <a name="//apple_ref/swift/Protocol/DecodableViaWholeArithmetic" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone27DecodableViaWholeArithmeticP">DecodableViaWholeArithmetic</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Decodable</code> through its <code><a href="Protocols/WholeArithmetic.html">WholeArithmetic</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/WholeArithmetic.html">WholeArithmetic</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DecodableViaWholeArithmetic</span> <span class="p">:</span> <span class="kt"><a href="Protocols/WholeArithmetic.html">WholeArithmetic</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone35EncodableViaCustomStringConvertibleP"></a>
+                    <a name="//apple_ref/swift/Protocol/EncodableViaCustomStringConvertible" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone35EncodableViaCustomStringConvertibleP">EncodableViaCustomStringConvertible</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Encodable</code> through its <code>CustomStringConvertible</code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code>CustomStringConvertible</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">EncodableViaCustomStringConvertible</span> <span class="p">:</span> <span class="kt">Encodable</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone27EncodableViaIntegerProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/EncodableViaIntegerProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone27EncodableViaIntegerProtocolP">EncodableViaIntegerProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Encodable</code> through its <code><a href="Protocols/IntegerProtocol.html">IntegerProtocol</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/IntegerProtocol.html">IntegerProtocol</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">EncodableViaIntegerProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/IntegerProtocol.html">IntegerProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone23EncodableViaMeasurementP"></a>
+                    <a name="//apple_ref/swift/Protocol/EncodableViaMeasurement" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone23EncodableViaMeasurementP">EncodableViaMeasurement</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Encodable</code> through its <code><a href="Protocols/Measurement.html">Measurement</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/Measurement.html">Measurement</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">EncodableViaMeasurement</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Measurement.html">Measurement</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone45EncodableViaRawRepresentableCalendarComponentP"></a>
+                    <a name="//apple_ref/swift/Protocol/EncodableViaRawRepresentableCalendarComponent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone45EncodableViaRawRepresentableCalendarComponentP">EncodableViaRawRepresentableCalendarComponent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Encodable</code> through its <code><a href="Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">EncodableViaRawRepresentableCalendarComponent</span> <span class="p">:</span> <span class="kt"><a href="Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone31EncodableViaWholeNumberProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/EncodableViaWholeNumberProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone31EncodableViaWholeNumberProtocolP">EncodableViaWholeNumberProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that conforms to <code>Encodable</code> through its <code><a href="Protocols/WholeNumberProtocol.html">WholeNumberProtocol</a></code> interface.</p>
+
+<p>Conformance Requirements:
+    - <code><a href="Protocols/WholeNumberProtocol.html">WholeNumberProtocol</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">EncodableViaWholeNumberProtocol</span> <span class="p">:</span> <span class="kt"><a href="Protocols/WholeNumberProtocol.html">WholeNumberProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -3020,7 +3565,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StringFamily</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Addable.html">Addable</a></span><span class="p">,</span> <span class="kt">Comparable</span><span class="p">,</span> <span class="kt">ExpressibleByStringLiteral</span><span class="p">,</span> <span class="kt"><a href="Protocols/FileConvertible.html">FileConvertible</a></span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">LosslessStringConvertible</span><span class="p">,</span> <span class="kt">TextOutputStream</span><span class="p">,</span> <span class="kt">TextOutputStreamable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">StringFamily</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Addable.html">Addable</a></span><span class="p">,</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Comparable</span><span class="p">,</span> <span class="kt">ExpressibleByStringLiteral</span><span class="p">,</span> <span class="kt"><a href="Protocols/FileConvertible.html">FileConvertible</a></span><span class="p">,</span> <span class="kt">Hashable</span><span class="p">,</span> <span class="kt">LosslessStringConvertible</span><span class="p">,</span> <span class="kt">TextOutputStream</span><span class="p">,</span> <span class="kt">TextOutputStreamable</span></code></pre>
 
                         </div>
                       </div>

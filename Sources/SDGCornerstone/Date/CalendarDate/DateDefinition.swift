@@ -36,6 +36,7 @@ import Foundation
 ///     // The reference date is January 1, 2001 at 00:00
 ///     fileprivate static let referenceDate = CalendarDate(gregorian: .january, 1, 2001, at: 0, 0, 0)
 ///
+///     fileprivate static let identifier: StrictString = "MyModule.DaysIntoMillenium"
 ///     fileprivate let daysIntoMillennium: FloatMax
 ///     fileprivate let intervalSinceReferenceDate: CalendarInterval<FloatMax>
 ///
@@ -47,6 +48,15 @@ import Foundation
 ///     fileprivate init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
 ///         self.intervalSinceReferenceDate = intervalSinceReferenceDate
 ///         daysIntoMillennium = intervalSinceReferenceDate.inDays
+///     }
+///
+///     fileprivate func encode(to encoder: Encoder) throws {
+///         // Only the definition (i.e. daysIntoMillennium) needs to be encoded.
+///         // Derived information (i.e. intervalSinceRefrenceDate) can be recomputed.
+///         try encode(to: encoder, via: daysIntoMillennium)
+///     }
+///     fileprivate init(from decoder: Decoder) throws {
+///         try self.init(from: decoder, via: FloatMax.self, convert: { DaysIntoMillennium($0) }, debugErrorDescription: { _ in unreachable() })
 ///     }
 /// }
 /// ```
