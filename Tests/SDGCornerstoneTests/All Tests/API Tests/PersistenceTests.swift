@@ -46,6 +46,8 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(HebrewWeekday.sunday, equivalentFormats: ["[1]"])
         XCTAssertRecodes(HebrewHour(12), equivalentFormats: ["[12]"])
         XCTAssertRecodes(HebrewPart(124), equivalentFormats: ["[\u{22}124\u{22}]"])
+
+        XCTAssertRecodes(HebrewMonthAndYear(month: .tishrei, year: 2345), equivalentFormats: ["[[\u{22}1\u{22},2345]]"])
     }
 
     func testFileConvertible() {
