@@ -16,6 +16,6 @@
 ///
 /// Conformance Requirements:
 ///     - `RawRepresentableCalendarComponent`
-public protocol DecodableViaRawRepresentableCalendarComponent : Decodable /* [_Warning: Eventually redundant._] */, RawRepresentableCalendarComponent {
+public protocol DecodableViaRawRepresentableCalendarComponent : RawRepresentableCalendarComponent {
 
 }
