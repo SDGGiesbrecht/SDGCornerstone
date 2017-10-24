@@ -17,7 +17,7 @@
 private let hebrewPartsPerDay = HebrewHour.hoursPerDay × HebrewPart.partsPerHour
 private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutesPerHour × GregorianSecond.secondsPerMinute
 
-private let unitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
+private let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 
 /// A time interval.
 ///
@@ -110,7 +110,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, Measureme
     }
 
     private var unitsPerDay: Scalar {
-        return Scalar(SDGCornerstone.unitsPerDay)
+        return Scalar(integralUnitsPerDay)
     }
     /// The numeric value in days.
     public var inDays: Scalar {
@@ -198,7 +198,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, Measureme
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(inUnits)
-        try container.encode(unitsPerDay)
+        try container.encode(integralUnitsPerDay)
     }
 
     // MARK: - Measurement

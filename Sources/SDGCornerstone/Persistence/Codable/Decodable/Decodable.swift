@@ -100,9 +100,9 @@ extension Decodable where Self : DecodableViaRawRepresentableCalendarComponent {
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
-            try self.init(from: decoder, via: RawValue.self, convert: { try Self(possibleRawValue: $0) }, debugErrorDescription: { (invalidRawValue: RawValue) -> StrictString in
-                return RawRepresentableError.invalidRawValue(invalidRawValue, Self.self).debugDescription.resolved()
-            })
+        try self.init(from: decoder, via: RawValue.self, convert: { try Self(possibleRawValue: $0) }, debugErrorDescription: { (invalidRawValue: RawValue) -> StrictString in
+            return RawRepresentableError.invalidRawValue(invalidRawValue, Self.self).debugDescription.resolved()
+        })
     }
 }
 

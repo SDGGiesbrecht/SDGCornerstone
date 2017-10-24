@@ -86,6 +86,7 @@ internal struct GregorianDate : DateDefinition {
 
     // MARK: - DateDefinition
 
+    internal static let identifier: StrictString = "gregoriano"
     internal static let referenceDate: CalendarDate = referenceMoment
 
     internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
@@ -136,5 +137,40 @@ internal struct GregorianDate : DateDefinition {
         self.hour = hour
         self.minute = minute
         self.second = second
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let year = try container.decode(GregorianYear.self)
+        let month = try container.decode(GregorianMonth.self)
+        let day = try container.decode(GregorianDay.self)
+        let hour = try container.decode(GregorianHour.self)
+        let minute = try container.decode(GregorianMinute.self)
+        let second = try container.decode(GregorianSecond.self)
+        self = GregorianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second)
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(year)
+        try container.encode(month)
+        try container.encode(day)
+        try container.encode(hour)
+        try container.encode(minute)
+        try container.encode(second)
     }
 }

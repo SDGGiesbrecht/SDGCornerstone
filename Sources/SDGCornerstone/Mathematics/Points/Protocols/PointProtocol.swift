@@ -21,7 +21,7 @@
 /// - `Equatable`
 /// - `static func += (lhs: inout Self, rhs: Vector)`
 /// - `static func − (lhs: Self, rhs: Self) -> Vector`
-public protocol PointProtocol : Equatable {
+public protocol PointProtocol : Codable, Equatable {
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.Vector_]
     /// The type to be used as a vector.

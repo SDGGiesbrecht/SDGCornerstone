@@ -48,6 +48,22 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(HebrewPart(124), equivalentFormats: ["[\u{22}124\u{22}]"])
 
         XCTAssertRecodes(HebrewMonthAndYear(month: .tishrei, year: 2345), equivalentFormats: ["[[\u{22}1\u{22},2345]]"])
+
+        let hebrew = CalendarDate(hebrew: HebrewMonth.tishrei, 23, 3456, at: 7, part: 890)
+        XCTAssertRecodes(hebrew, equivalentFormats: ["[[\u{22}עברי\u{22},\u{22}[[3456,\u{5C}\u{22}1\u{5C}\u{22},23,7,\u{5C}\u{22}890.0\u{5C}\u{22}]]\u{22},[\u{22}\u{2D}217935793900.0\u{22},259200]]]"])
+        XCTAssertRecodes(CalendarDate(gregorian: .january, 23, 3456, at: 7, 8, 9), equivalentFormats: ["[[\u{22}gregoriano\u{22},\u{22}[[3456,1,23,7,8,\u{5C}\u{22}9.0\u{5C}\u{22}]]\u{22},[\u{22}138059393067.0\u{22},259200]]]"])
+        XCTAssertRecodes(hebrew + (12345 as FloatMax).days, equivalentFormats: ["[[\u{22}Δ\u{22},\u{22}[[[\u{5C}\u{22}3199824000.0\u{5C}\u{22},259200],[\u{5C}\u{22}עברי\u{5C}\u{22},\u{5C}\u{22}[[3456,\u{5C}\u{5C}\u{5C}\u{22}1\u{5C}\u{5C}\u{5C}\u{22},23,7,\u{5C}\u{5C}\u{5C}\u{22}890.0\u{5C}\u{5C}\u{5C}\u{22}]]\u{5C}\u{22},[\u{5C}\u{22}\u{2D}217935793900.0\u{5C}\u{22},259200]]]]\u{22},[\u{22}\u{2D}214735969900.0\u{22},259200]]]"])
+
+        // Unregistered definitions.
+        let unregistered = CalendarDate(daysIntoMillennium: 12345)
+        let unregisteredCoded = "[[\u{22}MyModule.DaysIntoMillenium\u{22},\u{22}[\u{5C}\u{22}12345.0\u{5C}\u{22}]\u{22},[\u{22}3507559200.0\u{22},259200]]]"
+        XCTAssertRecodes(unregistered, equivalentFormats: [unregisteredCoded])
+        do {
+            let recoded = try JSONDecoder().decode(CalendarDate.self, from: try JSONEncoder().encode(unregistered))
+            XCTAssertRecodes(recoded, equivalentFormats: [unregisteredCoded])
+        } catch let error {
+            XCTFail(error.localizedDescription)
+        }
     }
 
     func testFileConvertible() {

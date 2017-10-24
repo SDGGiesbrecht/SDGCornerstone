@@ -1,5 +1,5 @@
 /*
- RelativeDate.swift
+ UnknownDate.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -12,34 +12,35 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal struct RelativeDate : DateDefinition {
+import Foundation
+
+internal struct UnknownDate : DateDefinition {
 
     // MARK: - Initialization
 
-    internal init(_ interval: CalendarInterval<FloatMax>, after date: CalendarDate) {
-        baseDate = date
-        intervalSince = interval
-
-        intervalSinceReferenceDate = (date − RelativeDate.referenceDate) + interval
+    internal init(encodingIdentifier: StrictString, encodedDefinition: StrictString, lastCalculatedInstant: CalendarInterval<FloatMax>) {
+        self.encodingIdentifier = encodingIdentifier
+        self.encodedDefinition = encodedDefinition
+        self.lastCalculatedInstant = lastCalculatedInstant
     }
 
     // MARK: - Properties
 
-    internal let baseDate: CalendarDate
-    internal let intervalSince: CalendarInterval<FloatMax>
+    internal let encodingIdentifier: StrictString
+    internal let encodedDefinition: StrictString
+    internal let lastCalculatedInstant: CalendarInterval<FloatMax>
 
     // MARK: - DateDefinition
 
-    internal static let identifier: StrictString = "Δ"
+    internal static let identifier: StrictString = "?"
     internal static let referenceDate: CalendarDate = CalendarDate.epoch
 
-    internal let intervalSinceReferenceDate: CalendarInterval<FloatMax>
+    internal var intervalSinceReferenceDate: CalendarInterval<FloatMax> {
+        return lastCalculatedInstant
+    }
 
     internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
-        self.intervalSinceReferenceDate = intervalSinceReferenceDate
-
-        self.baseDate = RelativeDate.referenceDate
-        self.intervalSince = intervalSinceReferenceDate
+        unreachable() // This definition is never converted to.
     }
 
     // MARK: - Decodable
@@ -50,10 +51,7 @@ internal struct RelativeDate : DateDefinition {
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let interval = try container.decode(CalendarInterval<FloatMax>.self)
-        let baseDate = try container.decode(CalendarDate.self)
-        self = RelativeDate(interval, after: baseDate)
+        unreachable() // This definition is never encoded.
     }
 
     // MARK: - Encodable
@@ -64,8 +62,6 @@ internal struct RelativeDate : DateDefinition {
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        try container.encode(intervalSince)
-        try container.encode(baseDate)
+        unreachable() // This definition is never encoded.
     }
 }

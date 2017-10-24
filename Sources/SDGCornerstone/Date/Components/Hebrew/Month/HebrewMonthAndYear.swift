@@ -13,7 +13,7 @@
  */
 
 /// A Hebrew month of a particular year.
-public struct HebrewMonthAndYear : Codable /* [_Warning: Eventually redundant._] */, Comparable, Equatable, FixedScaleOneDimensionalPoint, PointProtocol {
+public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimensionalPoint, PointProtocol {
 
     // MARK: - Properties
 
