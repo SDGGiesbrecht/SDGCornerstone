@@ -364,7 +364,7 @@ extension WholeArithmetic {
     private init(forceParsing parse: () throws -> Self) {
         do {
             self = try parse()
-        } catch let error as WholeArithmeticParseError {
+        } catch let error as WholeArithmeticParseError { // [_Exempt from Code Coverage_]
             switch error {
             case .invalidDigit(let scalar):
                 preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in

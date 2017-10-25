@@ -24,7 +24,7 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(SemanticMarkup("àbçđę...").superscripted(), equivalentFormats: ["[\u{22}\u{107000}àbçđę...\u{107001}\u{22}]", "[\u{22}\u{107000}\u{E0}b\u{E7}đ\u{119}\u{2026}\u{107001}\u{22}]"])
 
         XCTAssertRecodes(0.5 as Float80, equivalentFormats: ["[\u{22}0.5\u{22}]"])
-        XCTAssertRecodes("12 345" as Integer, equivalentFormats: ["[\u{22}12 345\u{22}]"])
+        XCTAssertRecodes("12 345" as WholeNumber, equivalentFormats: ["[\u{22}12 345\u{22}]"])
         XCTAssertRecodes("−12 345" as Integer, equivalentFormats: ["[\u{22}−12 345\u{22}]"])
         XCTAssertRecodes("−12 345,678 9" as RationalNumber, equivalentFormats: ["[[\u{22}−123 443 211\u{22},\u{22}10 000\u{22}]]"])
 
@@ -73,7 +73,8 @@ class PersistenceTests : TestCase {
 
         // Expected failures.
         XCTAssertThrows(whileDecoding: "[600]", as: GregorianHour.self) // Invalid raw value.
-        XCTAssertThrows(whileDecoding: "[\u{22}12c45\u{22}]", as: WholeNumber.self) // Invalid raw value.
+        XCTAssertThrows(whileDecoding: "[120]", as: GregorianMonth.self) // Invalid raw value.
+        XCTAssertThrows(whileDecoding: "[\u{22}12c45\u{22}]", as: WholeNumber.self) // Invalid string.
         XCTAssertThrows(whileDecoding: "[[\u{22}gregoriano\u{22},\u{22}[]\u{22},[\u{22}138059393067.0\u{22},259200]]]", as: CalendarDate.self) // Empty container array.
     }
 

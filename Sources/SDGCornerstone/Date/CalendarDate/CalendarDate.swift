@@ -421,6 +421,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     internal static var knownDateDefinitions: [StrictString: DateDefinition.Type] = [
         HebrewDate.identifier: HebrewDate.self,
         GregorianDate.identifier: GregorianDate.self,
+        FoundationDate.identifier: FoundationDate.self,
         RelativeDate.identifier: RelativeDate.self
     ]
 
