@@ -17,13 +17,8 @@ import Foundation
     import CoreGraphics
 #endif
 
-#if os(macOS) || os(Linux)
-    /// The member of the `Float` family with the largest bit field.
-    public typealias FloatMax = Float80
-#else
-    /// The member of the `Float` family with the largest bit field.
-    public typealias FloatMax = Double
-#endif
+/// The member of the `Float` family with the largest bit field.
+public typealias FloatMax = Float80
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
 public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
@@ -106,28 +101,26 @@ extension Double : FloatFamily, PropertyListValue {
     }
 #endif
 
-#if os(macOS) || os(Linux)
-    extension Float80 : CodableViaLosslessStringConvertible, FloatFamily {
+extension Float80 : CodableViaLosslessStringConvertible, FloatFamily {
 
-        // MARK: - FloatFamily
+    // MARK: - FloatFamily
 
-        // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
-        /// The value of ln2.
-        public static let ln2: Float80 = 0x1.62E42FEFA39EF358p-1
+    // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
+    /// The value of ln2.
+    public static let ln2: Float80 = 0x1.62E42FEFA39EF358p-1
 
-        // MARK: - PointProtocol
+    // MARK: - PointProtocol
 
-        // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-        /// The type to be used as a vector.
-        public typealias Vector = Stride
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    /// The type to be used as a vector.
+    public typealias Vector = Stride
 
-        // MARK: - RealArithmetic
+    // MARK: - RealArithmetic
 
-        // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
-        /// An instance of *e*.
-        public static let e: Float80 = 0x1.5BF0A8B145769535p1
-    }
-#endif
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
+    /// An instance of *e*.
+    public static let e: Float80 = 0x1.5BF0A8B145769535p1
+}
 
 extension Float : FloatFamily, PropertyListValue {
 

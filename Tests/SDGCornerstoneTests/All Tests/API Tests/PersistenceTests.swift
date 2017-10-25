@@ -28,7 +28,7 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes("−12 345" as Integer, equivalentFormats: ["[\u{22}−12 345\u{22}]"])
         XCTAssertRecodes("−12 345,678 9" as RationalNumber, equivalentFormats: ["[[\u{22}−123 443 211\u{22},\u{22}10 000\u{22}]]"])
 
-        XCTAssertRecodes(Double.π.radians, equivalentFormats: ["[3.141592653589793]"])
+        XCTAssertRecodes(0.5.radians, equivalentFormats: ["[3.141592653589793]"])
         XCTAssertRecodes(7.days, equivalentFormats: ["[[1814400,259200]]"])
 
         XCTAssertRecodes(GregorianYear(1234), equivalentFormats: ["[1234]"])
