@@ -59,6 +59,6 @@ internal struct FoundationDate : DateDefinition {
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
-        try encode(to: encoder, via: [date])
+        try encode(to: encoder, via: date)
     }
 }

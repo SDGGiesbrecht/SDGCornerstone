@@ -54,7 +54,7 @@ class PersistenceTests : TestCase {
         let hebrew = CalendarDate(hebrew: HebrewMonth.tishrei, 23, 3456, at: 7, part: 890)
         XCTAssertRecodes(hebrew, equivalentFormats: ["[[\u{22}עברי\u{22},\u{22}[[3456,\u{5C}\u{22}1\u{5C}\u{22},23,7,\u{5C}\u{22}890.0\u{5C}\u{22}]]\u{22},[\u{22}\u{2D}217935793900.0\u{22},259200]]]"])
         XCTAssertRecodes(CalendarDate(gregorian: .january, 23, 3456, at: 7, 8, 9), equivalentFormats: ["[[\u{22}gregoriano\u{22},\u{22}[[3456,1,23,7,8,\u{5C}\u{22}9.0\u{5C}\u{22}]]\u{22},[\u{22}138059393067.0\u{22},259200]]]"])
-        XCTAssertRecodes(CalendarDate(Date(timeIntervalSinceReferenceDate: 123456789)), equivalentFormats: ["[[\u{22}Foundation\u{22},\u{22}[[123456789]]\u{22},[\u{22}678105567.0\u{22},259200]]]"])
+        XCTAssertRecodes(CalendarDate(Date(timeIntervalSinceReferenceDate: 123456789)), equivalentFormats: ["[[\u{22}Foundation\u{22},\u{22}[123456789]\u{22},[\u{22}678105567.0\u{22},259200]]]"])
         XCTAssertRecodes(hebrew + (12345 as FloatMax).days, equivalentFormats: ["[[\u{22}Δ\u{22},\u{22}[[[\u{5C}\u{22}3199824000.0\u{5C}\u{22},259200],[\u{5C}\u{22}עברי\u{5C}\u{22},\u{5C}\u{22}[[3456,\u{5C}\u{5C}\u{5C}\u{22}1\u{5C}\u{5C}\u{5C}\u{22},23,7,\u{5C}\u{5C}\u{5C}\u{22}890.0\u{5C}\u{5C}\u{5C}\u{22}]]\u{5C}\u{22},[\u{5C}\u{22}\u{2D}217935793900.0\u{5C}\u{22},259200]]]]\u{22},[\u{22}\u{2D}214735969900.0\u{22},259200]]]"])
 
         // Unregistered definitions.
