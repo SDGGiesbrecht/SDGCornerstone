@@ -17,7 +17,7 @@ import Foundation
     import CoreGraphics
 #endif
 
-#if os(watchOS)
+#if os(iOS) || os(watchOS) || os(tvOS)
     /// The member of the `Float` family with the largest bit field.
     public typealias FloatMax = Double
 #else
@@ -106,7 +106,7 @@ extension Double : FloatFamily, PropertyListValue {
     }
 #endif
 
-#if !os(watchOS)
+#if !(os(iOS) || os(watchOS) || os(tvOS))
 extension Float80 : CodableViaLosslessStringConvertible, FloatFamily {
 
     // MARK: - FloatFamily

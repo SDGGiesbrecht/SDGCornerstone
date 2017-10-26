@@ -198,7 +198,9 @@ class RegressionTests : TestCase {
         let _: Int16 = 3 − 2
         let _: Int8 = 3 − 2
         let _: Double = 3 − 2
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
         let _: Float80 = 3 − 2
+        #endif
         let _: Float = 3 − 2
         let _: WholeNumber = 3 − 2
         let _: Integer = 3 − 2
