@@ -17,8 +17,13 @@ import Foundation
     import CoreGraphics
 #endif
 
-/// The member of the `Float` family with the largest bit field.
-public typealias FloatMax = Float80
+#if os(watchOS)
+    /// The member of the `Float` family with the largest bit field.
+    public typealias FloatMax = Double
+#else
+    /// The member of the `Float` family with the largest bit field.
+    public typealias FloatMax = Float80
+#endif
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
 public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
@@ -101,6 +106,7 @@ extension Double : FloatFamily, PropertyListValue {
     }
 #endif
 
+#if !os(watchOS)
 extension Float80 : CodableViaLosslessStringConvertible, FloatFamily {
 
     // MARK: - FloatFamily
@@ -121,6 +127,7 @@ extension Float80 : CodableViaLosslessStringConvertible, FloatFamily {
     /// An instance of *e*.
     public static let e: Float80 = 0x1.5BF0A8B145769535p1
 }
+#endif
 
 extension Float : FloatFamily, PropertyListValue {
 
