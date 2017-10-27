@@ -107,7 +107,34 @@ extension Double : FloatFamily, PropertyListValue {
 #endif
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-extension Float80 : CodableViaLosslessStringConvertible, FloatFamily {
+extension Float80 : Codable, FloatFamily {
+
+    // MARK: - Decodable
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        try self.init(from: decoder, via: Double.self, convert: { Float80($0) }, debugErrorDescription: { _ in
+            unreachable()
+        })
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
+        try encode(to: encoder, via: Double.init(self))
+    }
 
     // MARK: - FloatFamily
 

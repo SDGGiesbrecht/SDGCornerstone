@@ -24,7 +24,7 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(SemanticMarkup("àbçđę...").superscripted(), equivalentFormats: ["[\u{22}\u{107000}àbçđę...\u{107001}\u{22}]", "[\u{22}\u{107000}\u{E0}b\u{E7}đ\u{119}\u{2026}\u{107001}\u{22}]"])
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        XCTAssertRecodes(0.5 as Float80, equivalentFormats: ["[\u{22}0.5\u{22}]"])
+        XCTAssertRecodes(0.5 as Float80, equivalentFormats: ["[0.5]"])
         #endif
         XCTAssertRecodes("12 345" as WholeNumber, equivalentFormats: ["[\u{22}12 345\u{22}]"])
         XCTAssertRecodes("−12 345" as Integer, equivalentFormats: ["[\u{22}−12 345\u{22}]"])
@@ -39,7 +39,7 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(GregorianWeekday.sunday, equivalentFormats: ["[1]"])
         XCTAssertRecodes(GregorianHour(12), equivalentFormats: ["[12]"])
         XCTAssertRecodes(GregorianMinute(12), equivalentFormats: ["[12]"])
-        XCTAssertRecodes(GregorianSecond(12), equivalentFormats: ["[\u{22}12\u{22}]"])
+        XCTAssertRecodes(GregorianSecond(12), equivalentFormats: ["[12]"])
         XCTAssertRecodes(HebrewYear(1234), equivalentFormats: ["[1234]"])
         XCTAssertRecodes(HebrewMonth.tishrei, equivalentFormats: ["[\u{22}1\u{22}]"])
         XCTAssertRecodes(HebrewMonth.adar, equivalentFormats: ["[\u{22}6\u{22}]"])
@@ -49,19 +49,19 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(HebrewDay(12), equivalentFormats: ["[12]"])
         XCTAssertRecodes(HebrewWeekday.sunday, equivalentFormats: ["[1]"])
         XCTAssertRecodes(HebrewHour(12), equivalentFormats: ["[12]"])
-        XCTAssertRecodes(HebrewPart(124), equivalentFormats: ["[\u{22}124\u{22}]"])
+        XCTAssertRecodes(HebrewPart(124), equivalentFormats: ["[124]"])
 
         XCTAssertRecodes(HebrewMonthAndYear(month: .tishrei, year: 2345), equivalentFormats: ["[[\u{22}1\u{22},2345]]"])
 
         let hebrew = CalendarDate(hebrew: HebrewMonth.tishrei, 23, 3456, at: 7, part: 890)
-        XCTAssertRecodes(hebrew, equivalentFormats: ["[[\u{22}עברי\u{22},\u{22}[[3456,\u{5C}\u{22}1\u{5C}\u{22},23,7,\u{5C}\u{22}890.0\u{5C}\u{22}]]\u{22},[\u{22}\u{2D}217935793900.0\u{22},259200]]]"])
-        XCTAssertRecodes(CalendarDate(gregorian: .january, 23, 3456, at: 7, 8, 9), equivalentFormats: ["[[\u{22}gregoriano\u{22},\u{22}[[3456,1,23,7,8,\u{5C}\u{22}9.0\u{5C}\u{22}]]\u{22},[\u{22}138059393067.0\u{22},259200]]]"])
-        XCTAssertRecodes(CalendarDate(Date(timeIntervalSinceReferenceDate: 123456789)), equivalentFormats: ["[[\u{22}Foundation\u{22},\u{22}[123456789]\u{22},[\u{22}678105567.0\u{22},259200]]]"])
-        XCTAssertRecodes(hebrew + (12345 as FloatMax).days, equivalentFormats: ["[[\u{22}Δ\u{22},\u{22}[[[\u{5C}\u{22}3199824000.0\u{5C}\u{22},259200],[\u{5C}\u{22}עברי\u{5C}\u{22},\u{5C}\u{22}[[3456,\u{5C}\u{5C}\u{5C}\u{22}1\u{5C}\u{5C}\u{5C}\u{22},23,7,\u{5C}\u{5C}\u{5C}\u{22}890.0\u{5C}\u{5C}\u{5C}\u{22}]]\u{5C}\u{22},[\u{5C}\u{22}\u{2D}217935793900.0\u{5C}\u{22},259200]]]]\u{22},[\u{22}\u{2D}214735969900.0\u{22},259200]]]"])
+        XCTAssertRecodes(hebrew, equivalentFormats: ["[[\u{22}עברי\u{22},\u{22}[[3456,\u{5C}\u{22}1\u{5C}\u{22},23,7,890.0]]\u{22},[217935793900.0,259200]]]"])
+        XCTAssertRecodes(CalendarDate(gregorian: .january, 23, 3456, at: 7, 8, 9), equivalentFormats: ["[[\u{22}gregoriano\u{22},\u{22}[[3456,1,23,7,8,9.0]]\u{22},[138059393067.0,259200]]]"])
+        XCTAssertRecodes(CalendarDate(Date(timeIntervalSinceReferenceDate: 123456789)), equivalentFormats: ["[[\u{22}Foundation\u{22},\u{22}[123456789]\u{22},[678105567.0,259200]]]"])
+        XCTAssertRecodes(hebrew + (12345 as FloatMax).days, equivalentFormats: ["[[\u{22}Δ\u{22},\u{22}[[[3199824000.0,259200],[\u{5C}\u{22}עברי\u{5C}\u{22},\u{5C}\u{22}[[3456,\u{5C}\u{5C}\u{5C}\u{22}1\u{5C}\u{5C}\u{5C}\u{22},23,7,890.0]]\u{5C}\u{22},[217935793900.0,259200]]]]\u{22},[214735969900.0,259200]]]"])
 
         // Unregistered definitions.
         let unregistered = CalendarDate(daysIntoMillennium: 12345)
-        let unregisteredCoded = "[[\u{22}MyModule.DaysIntoMillenium\u{22},\u{22}[\u{5C}\u{22}12345.0\u{5C}\u{22}]\u{22},[\u{22}3507559200.0\u{22},259200]]]"
+        let unregisteredCoded = "[[\u{22}MyModule.DaysIntoMillenium\u{22},\u{22}[12345.0]\u{22},[3507559200.0,259200]]]"
         XCTAssertRecodes(unregistered, equivalentFormats: [unregisteredCoded])
         do {
             let recoded = try JSONDecoder().decode(CalendarDate.self, from: try JSONEncoder().encode(unregistered))
@@ -77,7 +77,7 @@ class PersistenceTests : TestCase {
         XCTAssertThrows(whileDecoding: "[600]", as: GregorianHour.self) // Invalid raw value.
         XCTAssertThrows(whileDecoding: "[120]", as: GregorianMonth.self) // Invalid raw value.
         XCTAssertThrows(whileDecoding: "[\u{22}12c45\u{22}]", as: WholeNumber.self) // Invalid string.
-        XCTAssertThrows(whileDecoding: "[[\u{22}gregoriano\u{22},\u{22}[]\u{22},[\u{22}138059393067.0\u{22},259200]]]", as: CalendarDate.self) // Empty container array.
+        XCTAssertThrows(whileDecoding: "[[\u{22}gregoriano\u{22},\u{22}[]\u{22},[138059393067.0,259200]]]", as: CalendarDate.self) // Empty container array.
     }
 
     func testFileConvertible() {
