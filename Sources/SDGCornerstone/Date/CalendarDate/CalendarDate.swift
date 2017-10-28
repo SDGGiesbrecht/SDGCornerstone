@@ -416,6 +416,59 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         return lhs.intervalSinceEpoch < rhs.intervalSinceEpoch
     }
 
+    // MARK: - Decodable
+
+    internal static var knownDateDefinitions: [StrictString: DateDefinition.Type] = [
+        HebrewDate.identifier: HebrewDate.self,
+        GregorianDate.identifier: GregorianDate.self,
+        FoundationDate.identifier: FoundationDate.self,
+        RelativeDate.identifier: RelativeDate.self
+    ]
+
+    /// Registers a definition type so that its instances can be decoded.
+    public static func register(_ type: DateDefinition.Type) {
+        knownDateDefinitions[type.identifier] = type
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let encodingIdentifier = try container.decode(StrictString.self)
+        let encodedDefinition = try container.decode(StrictString.self)
+        let lastCalculatedInstant = try container.decode(CalendarInterval<FloatMax>.self)
+
+        if let definitionType = CalendarDate.knownDateDefinitions[encodingIdentifier] {
+            self.init(definition: try definitionType.init(decoding: encodedDefinition, codingPath: container.codingPath))
+        } else {
+            self.init(definition: UnknownDate(encodingIdentifier: encodingIdentifier, encodedDefinition: encodedDefinition, lastCalculatedInstant: lastCalculatedInstant))
+        }
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        if let unknown = definition as? UnknownDate {
+            try container.encode(unknown.encodingIdentifier)
+            try container.encode(unknown.encodedDefinition)
+            try container.encode(unknown.lastCalculatedInstant)
+        } else {
+            let encodedDefinition = try definition.encode()
+            try container.encode(type(of: definition).identifier)
+            try container.encode(encodedDefinition)
+            try container.encode(intervalSinceEpoch)
+        }
+    }
+
     // MARK: - Equatable
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.==_]

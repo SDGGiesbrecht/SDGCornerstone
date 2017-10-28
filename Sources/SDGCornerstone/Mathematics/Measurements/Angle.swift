@@ -13,7 +13,7 @@
  */
 
 /// An angle.
-public struct Angle<Scalar : RealArithmetic> : Measurement {
+public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
 
     // MARK: - Initialization
 

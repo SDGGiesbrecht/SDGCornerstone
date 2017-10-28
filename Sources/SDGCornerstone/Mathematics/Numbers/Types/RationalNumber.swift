@@ -20,7 +20,7 @@
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 000 1"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, WholeArithmetic {
+public struct RationalNumber : Addable, Codable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
@@ -138,6 +138,33 @@ public struct RationalNumber : Addable, Comparable, Equatable, ExpressibleByFloa
         //
         //     ad   <?     bc  , b ≠ 0, d ≠ 0
         return lhs.numerator × rhs.denominator < rhs.numerator × lhs.denominator
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let numerator = try container.decode(Integer.self)
+        let denominator = try container.decode(Integer.self)
+        self.init(numerator: numerator, denominator: denominator)
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(numerator)
+        try container.encode(denominator)
     }
 
     // MARK: - Equatable

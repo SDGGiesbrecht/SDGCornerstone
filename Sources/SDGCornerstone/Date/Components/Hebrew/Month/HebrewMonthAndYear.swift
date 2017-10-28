@@ -44,6 +44,33 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
         return (lhs.year, lhs.month) < (rhs.year, rhs.month)
     }
 
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let month = try container.decode(HebrewMonth.self)
+        let year = try container.decode(HebrewYear.self)
+        self = HebrewMonthAndYear(month: month, year: year)
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(month)
+        try container.encode(year)
+    }
+
     // MARK: - Equatable
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.==_]

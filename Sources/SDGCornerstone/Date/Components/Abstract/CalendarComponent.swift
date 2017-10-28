@@ -13,7 +13,7 @@
  */
 
 /// A component of a particular calendar.
-public protocol CalendarComponent {
+public protocol CalendarComponent : Codable {
 
     // [_Define Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
     /// The mean duration.

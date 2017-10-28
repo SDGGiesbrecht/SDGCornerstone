@@ -95,7 +95,7 @@ class MathematicsTests : TestCase {
             }
         }
         runTests(Double.self)
-        #if os(macOS) || os(Linux)
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
         runTests(Float80.self)
         #endif
         runTests(Float.self)
@@ -266,7 +266,7 @@ class MathematicsTests : TestCase {
         runTests(Int16.self, value: 1, inverse: −1)
         runTests(Int8.self, value: 1, inverse: −1)
         runTests(Double.self, value: 1, inverse: −1)
-        #if os(macOS) || os(Linux)
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
         runTests(Float80.self, value: 1, inverse: −1)
         #endif
         runTests(Float.self, value: 1, inverse: −1)
@@ -349,7 +349,7 @@ class MathematicsTests : TestCase {
             XCTAssertEqual(N(binary: "0.000 1"), 1 ÷ 16)
         }
         runTests(Double.self)
-        #if os(macOS) || os(Linux)
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
         runTests(Float80.self)
         #endif
         runTests(Float.self)
@@ -445,7 +445,7 @@ class MathematicsTests : TestCase {
             XCTAssert(arccot(_1 × −2).rawValue ≈ (2.677_94 as N).rad.rawValue)
         }
         runTests(Double.self)
-        #if os(macOS) || os(Linux)
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
         runTests(Float80.self)
         #endif
         runTests(Float.self)

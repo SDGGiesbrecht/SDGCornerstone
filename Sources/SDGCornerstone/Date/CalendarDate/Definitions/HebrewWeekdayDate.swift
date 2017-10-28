@@ -44,6 +44,7 @@ internal struct HebrewWeekdayDate : DateDefinition {
 
     // MARK: - DateDefinition
 
+    internal static let identifier: StrictString = "שבוע עברי"
     internal static let referenceDate: CalendarDate = referenceMoment
 
     internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
@@ -58,5 +59,27 @@ internal struct HebrewWeekdayDate : DateDefinition {
         let week = Int(intervalSinceReferenceDate.inWeeks.rounded(.down))
         self.week = week
         weekday = HebrewWeekday(numberAlreadyElapsed: Int((intervalSinceReferenceDate − FloatMax(week).weeks).inDays.rounded(.down)))
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    internal init(from decoder: Decoder) throws {
+        unreachable() // This definition is only ever transiently created to determine the weekday of another date.
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    internal func encode(to encoder: Encoder) throws {
+        unreachable() // This definition is only ever transiently created to determine the weekday of another date.
     }
 }

@@ -19,14 +19,6 @@ internal struct GregorianWeekdayDate : DateDefinition {
     internal static let referenceMoment = CalendarDate(gregorian: .january, 7, 2001)
     private static let referenceWeekday: GregorianWeekday = .sunday
 
-    // MARK: - Properties
-
-    private let week: Int
-    internal let weekday: GregorianWeekday
-    private let hour: GregorianHour
-    private let minute: GregorianMinute
-    private let second: GregorianSecond
-
     // MARK: - Initialization
 
     internal init(week: Int, weekday: GregorianWeekday, hour: GregorianHour, minute: GregorianMinute, second: GregorianSecond) {
@@ -45,8 +37,17 @@ internal struct GregorianWeekdayDate : DateDefinition {
         intervalSinceReferenceDate = interval
     }
 
+    // MARK: - Properties
+
+    private let week: Int
+    internal let weekday: GregorianWeekday
+    private let hour: GregorianHour
+    private let minute: GregorianMinute
+    private let second: GregorianSecond
+
     // MARK: - DateDefinition
 
+    internal static let identifier: StrictString = "settimana gregoriana"
     internal static let referenceDate: CalendarDate = referenceMoment
 
     internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
@@ -62,5 +63,27 @@ internal struct GregorianWeekdayDate : DateDefinition {
         let week = Int(intervalSinceReferenceDate.inWeeks.rounded(.down))
         self.week = week
         weekday = GregorianWeekday(numberAlreadyElapsed: Int((intervalSinceReferenceDate − FloatMax(week).weeks).inDays.rounded(.down)))
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        unreachable() // This definition is only ever transiently created to determine the weekday of another date.
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        unreachable() // This definition is only ever transiently created to determine the weekday of another date.
     }
 }

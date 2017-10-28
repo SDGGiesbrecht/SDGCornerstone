@@ -13,7 +13,7 @@
  */
 
 /// An hour of the Gregorian day.
-public struct GregorianHour : CardinalCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent {
 
     // MARK: - Static Properties
 

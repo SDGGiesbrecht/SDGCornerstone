@@ -13,7 +13,7 @@
  */
 
 /// A Hebrew year.
-public struct HebrewYear : CardinalCalendarComponent, RawRepresentableCalendarComponent, Year {
+public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, RawRepresentableCalendarComponent, Year {
 
     // MARK: - Static Properties
 

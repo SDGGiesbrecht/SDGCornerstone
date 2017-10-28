@@ -43,13 +43,20 @@ extension RawRepresentableCalendarComponent {
 
     /// Creates an instance from a raw value.
     public init(_ value: RawValue) {
-        if let range = Self.validRange {
-            assert(value ∈ range, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                switch localization {
-                case .englishCanada: // [_Exempt from Code Coverage_]
-                    return StrictString("Invalid raw value “\(value)” for \(Self.self).")
-                }
-            }))
+        do {
+            self = try Self(possibleRawValue: value)
+        } catch let error as RawRepresentableError<RawValue> {
+            preconditionFailure(error.debugDescription)
+        } catch {
+            unreachable()
+        }
+    }
+
+    /// Creates an instance from a raw value.
+    public init(possibleRawValue value: RawValue) throws {
+        if let range = Self.validRange,
+            value ∉ range {
+            throw RawRepresentableError.invalidRawValue(value, Self.self)
         }
         self.init(unsafeRawValue: value)
     }

@@ -130,6 +130,7 @@ internal struct HebrewDate : DateDefinition {
 
     // MARK: - DateDefinition
 
+    internal static let identifier: StrictString = "עברי"
     internal static var referenceDate: CalendarDate {
         unreachable() // Would be a cyclical definition.
     }
@@ -177,5 +178,38 @@ internal struct HebrewDate : DateDefinition {
         self.day = day
         self.hour = hour
         self.part = part
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let year = try container.decode(HebrewYear.self)
+        let month = try container.decode(HebrewMonth.self)
+        let day = try container.decode(HebrewDay.self)
+        let hour = try container.decode(HebrewHour.self)
+        let part = try container.decode(HebrewPart.self)
+        self = HebrewDate(year: year, month: month, day: day, hour: hour, part: part)
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(year)
+        try container.encode(month)
+        try container.encode(day)
+        try container.encode(hour)
+        try container.encode(part)
     }
 }

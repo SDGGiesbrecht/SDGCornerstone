@@ -22,7 +22,7 @@
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
-public struct WholeNumber : Addable, Comparable, Equatable, Hashable, PointProtocol, Strideable, Subtractable, WholeArithmetic, WholeNumberProtocol {
+public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, Equatable, Hashable, PointProtocol, Strideable, Subtractable, WholeArithmetic, WholeNumberProtocol {
 
     // MARK: - Properties
 

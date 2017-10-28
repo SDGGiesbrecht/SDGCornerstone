@@ -36,7 +36,7 @@ private let endSubscript: UnicodeScalar = "\u{107003}"
 /// private let beginSubscript: UnicodeScalar = "\u{107002}"
 /// private let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
-public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection {
+public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection {
 
     // MARK: - Initialization
 
@@ -169,6 +169,30 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equ
     /// Accesses the element at the specified position.
     public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
         return source[position]
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        try self.init(from: decoder, via: StrictString.self, convert: { SemanticMarkup($0) }, debugErrorDescription: { _ in
+            unreachable()
+        })
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        try encode(to: encoder, via: source)
     }
 
     // MARK: - Equatable

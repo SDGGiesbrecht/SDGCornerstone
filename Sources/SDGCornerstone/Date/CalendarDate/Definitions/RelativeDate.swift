@@ -30,6 +30,7 @@ internal struct RelativeDate : DateDefinition {
 
     // MARK: - DateDefinition
 
+    internal static let identifier: StrictString = "Δ"
     internal static let referenceDate: CalendarDate = CalendarDate.epoch
 
     internal let intervalSinceReferenceDate: CalendarInterval<FloatMax>
@@ -39,5 +40,32 @@ internal struct RelativeDate : DateDefinition {
 
         self.baseDate = RelativeDate.referenceDate
         self.intervalSince = intervalSinceReferenceDate
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let interval = try container.decode(CalendarInterval<FloatMax>.self)
+        let baseDate = try container.decode(CalendarDate.self)
+        self = RelativeDate(interval, after: baseDate)
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(intervalSince)
+        try container.encode(baseDate)
     }
 }

@@ -20,7 +20,7 @@
 /// let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
 /// let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
 /// ```
-public struct Integer : Addable, Comparable, Equatable, Hashable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, Subtractable, WholeArithmetic {
+public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatable, Hashable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, Subtractable, WholeArithmetic {
 
     // MARK: - Initialization
 
