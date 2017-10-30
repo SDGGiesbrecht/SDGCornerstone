@@ -46,12 +46,12 @@ private func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, with
 ///     - `location` is at a local minimum. For example:
 ///       ```swift
 ///       // This is undefined:
-///       _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..< 10 ? $0 ↑ 2 : −($0 ↑ 2) }
+///       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? $0 ↑ 2 : −($0 ↑ 2) }
 ///       ```
 ///     - two or more adjascent inputs share the maximum output. For example:
 ///       ```swift
 ///       // This is undefined:
-///       _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..< 10 ? 1 : −(|$0|) }
+///       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? 1 : −(|$0|) }
 ///       ```
 ///
 /// - Precondition: If `bounds ≠ nil`, a local maximum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:
@@ -96,20 +96,19 @@ public func findLocalMaximum<I : OneDimensionalPoint, O : Comparable>(near locat
 /// // 12 → 24
 /// // No longer decreasing, so stop. 1 was the local minimum.
 ///
-/// print(approximateSquareRootOf120)
-/// // Prints “11”
+/// XCTAssertEqual(approximateSquareRootOf120, 11)
 /// ```
 ///
 /// - Warning: Behaviour is undefined when:
 ///     - `location` is at a local maximum. For example:
 ///       ```swift
 ///       // This is undefined:
-///       _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..< 10 ? −($0 ↑ 2) : $0 ↑ 2 }
+///       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −($0 ↑ 2) : $0 ↑ 2 }
 ///       ```
 ///     - two or more adjascent inputs share the minimum output. For example:
 ///       ```swift
 ///       // This is undefined:
-///       _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..< 10 ? −1 : |$0| }
+///       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −1 : |$0| }
 ///       ```
 ///
 /// - Precondition: If `bounds ≠ nil`, a local minimum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:

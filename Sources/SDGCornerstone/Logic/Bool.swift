@@ -299,9 +299,13 @@ extension Bool : Comparable, PropertyListValue {
     ///     Bool.trueRandomizerValue
     ///     ])
     ///
-    /// // Booleans created using...
-    /// _ = Bool(fromRandomizer: alternating)
-    /// // ...now alternate between “false” and “true”.
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// // ...
     /// ```
     public static let falseRandomizerValue: UInt64 = 0
 
@@ -316,9 +320,13 @@ extension Bool : Comparable, PropertyListValue {
     ///     Bool.trueRandomizerValue
     ///     ])
     ///
-    /// // Booleans created using...
-    /// _ = Bool(fromRandomizer: alternating)
-    /// // ...now alternate between “false” and “true”.
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// // ...
     /// ```
     public static let trueRandomizerValue: UInt64 = randomizationBit
 

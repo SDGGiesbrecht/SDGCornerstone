@@ -1,5 +1,5 @@
 /*
- RunLoopExamples.swift
+ RunLoopExampleTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/macOS
@@ -24,7 +24,7 @@ class RunLoopExampleTests : TestCase {
         // [_Define Example: Run Loop Usage_]
         var driver: RunLoop.Driver?
         background.start() {
-            RunLoop.current.runForDriver({ driver = $0 })
+            RunLoop.current.runForDriver() { driver = $0 }
         }
         // The background run loop is now running.
 

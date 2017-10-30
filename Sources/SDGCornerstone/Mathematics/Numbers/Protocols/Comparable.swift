@@ -36,9 +36,7 @@ infix operator ≥: ComparisonPrecedence
 /// Returns `true` if `lhs` is within the range described by `rhs`.
 ///
 /// ```swift
-/// if 1 ÷ 3 ≈ 0.33333 ± 0.00001 {
-///     print("It is accurate to at least four digits.")
-/// }
+/// XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
 /// ```
 ///
 /// - Parameters:
@@ -156,9 +154,7 @@ extension Comparable {
     /// Returns `true` if `lhs` is within the range described by `rhs`.
     ///
     /// ```swift
-    /// if 1 ÷ 3 ≈ 0.33333 ± 0.00001 {
-    ///     print("It is accurate to at least four digits.")
-    /// }
+    /// XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
     /// ```
     ///
     /// - Parameters:

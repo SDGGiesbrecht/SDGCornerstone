@@ -18,11 +18,12 @@
 /// Initialize with a negative integer to get a BC year. The provided mathematical functions automatically accomodate for the lack of a zero year. For example:
 ///
 /// ```swift
-/// let year = GregorianYear(1) − 1
-/// // 1 BC
+/// let adOne = GregorianYear(1)
+/// let oneBC = GregorianYear(−1)
+/// let oneYear = Int(1)
 ///
-/// let timespan = GregorianYear(1) − GregorianYear(−1)
-/// // 1 year
+/// XCTAssertEqual(adOne − oneYear, oneBC)
+/// XCTAssertEqual(adOne − oneBC, oneYear)
 /// ```
 public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, Year {
 

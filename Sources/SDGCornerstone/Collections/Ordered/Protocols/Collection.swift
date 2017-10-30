@@ -518,11 +518,8 @@ extension Collection where Element : Equatable {
     /// let equation = "2(3x − (y + 4)) = z"
     /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
     ///
-    /// print(String(nestingLevel.container.contents))
-    /// // Prints “(3x − (y + 4))”
-    ///
-    /// print(String(nestingLevel.contents.contents))
-    /// // Prints “3x − (y + 4)”
+    /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
+    /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
     public func firstNestingLevel<C : Collection, D : Collection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
         var searchArea = searchRange ?? bounds
