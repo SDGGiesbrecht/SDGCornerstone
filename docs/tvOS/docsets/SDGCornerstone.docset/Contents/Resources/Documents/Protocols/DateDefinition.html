@@ -883,36 +883,36 @@
     <span class="p">}</span>
 
     <span class="c1">// This property is available to dates with any kind of definition.</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">someMeasurement</span><span class="p">:</span> <span class="kt">FloatMax</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">daysIntoMillennium</span><span class="p">:</span> <span class="kt">FloatMax</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nf">converted</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="kt">DaysIntoMillennium</span><span class="o">.</span><span class="k">self</span><span class="p">)</span><span class="o">.</span><span class="n">daysIntoMillennium</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">internal</span> <span class="kd">struct</span> <span class="kt">DaysIntoMillennium</span> <span class="p">:</span> <span class="kt">DateDefinition</span> <span class="p">{</span>
+<span class="kd">private</span> <span class="kd">struct</span> <span class="kt">DaysIntoMillennium</span> <span class="p">:</span> <span class="kt">DateDefinition</span> <span class="p">{</span>
 
     <span class="c1">// The reference date is January 1, 2001 at 00:00</span>
-    <span class="kd">internal</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">referenceDate</span> <span class="o">=</span> <span class="kt">CalendarDate</span><span class="p">(</span><span class="nv">gregorian</span><span class="p">:</span> <span class="o">.</span><span class="n">january</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">fileprivate</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">referenceDate</span> <span class="o">=</span> <span class="kt">CalendarDate</span><span class="p">(</span><span class="nv">gregorian</span><span class="p">:</span> <span class="o">.</span><span class="n">january</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="kd">internal</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">identifier</span><span class="p">:</span> <span class="kt">StrictString</span> <span class="o">=</span> <span class="s">"MyModule.DaysIntoMillenium"</span>
+    <span class="n">fileprivate</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">identifier</span><span class="p">:</span> <span class="kt">StrictString</span> <span class="o">=</span> <span class="s">"MyModule.DaysIntoMillenium"</span>
     <span class="n">fileprivate</span> <span class="k">let</span> <span class="nv">daysIntoMillennium</span><span class="p">:</span> <span class="kt">FloatMax</span>
-    <span class="kd">internal</span> <span class="k">let</span> <span class="nv">intervalSinceReferenceDate</span><span class="p">:</span> <span class="kt">CalendarInterval</span><span class="o">&lt;</span><span class="kt">FloatMax</span><span class="o">&gt;</span>
+    <span class="n">fileprivate</span> <span class="k">let</span> <span class="nv">intervalSinceReferenceDate</span><span class="p">:</span> <span class="kt">CalendarInterval</span><span class="o">&lt;</span><span class="kt">FloatMax</span><span class="o">&gt;</span>
 
     <span class="n">fileprivate</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">daysIntoMillennium</span><span class="p">:</span> <span class="kt">FloatMax</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">self</span><span class="o">.</span><span class="n">daysIntoMillennium</span> <span class="o">=</span> <span class="n">daysIntoMillennium</span>
         <span class="n">intervalSinceReferenceDate</span> <span class="o">=</span> <span class="n">daysIntoMillennium</span><span class="o">.</span><span class="n">days</span>
     <span class="p">}</span>
 
-    <span class="kd">internal</span> <span class="nf">init</span><span class="p">(</span><span class="nv">intervalSinceReferenceDate</span><span class="p">:</span> <span class="kt">CalendarInterval</span><span class="o">&lt;</span><span class="kt">FloatMax</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fileprivate</span> <span class="nf">init</span><span class="p">(</span><span class="nv">intervalSinceReferenceDate</span><span class="p">:</span> <span class="kt">CalendarInterval</span><span class="o">&lt;</span><span class="kt">FloatMax</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">self</span><span class="o">.</span><span class="n">intervalSinceReferenceDate</span> <span class="o">=</span> <span class="n">intervalSinceReferenceDate</span>
         <span class="n">daysIntoMillennium</span> <span class="o">=</span> <span class="n">intervalSinceReferenceDate</span><span class="o">.</span><span class="n">inDays</span>
     <span class="p">}</span>
 
-    <span class="kd">internal</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+    <span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
         <span class="c1">// Only the definition (i.e. daysIntoMillennium) needs to be encoded.</span>
         <span class="c1">// Derived information (i.e. intervalSinceRefrenceDate) can be recomputed.</span>
         <span class="k">try</span> <span class="nf">encode</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">encoder</span><span class="p">,</span> <span class="nv">via</span><span class="p">:</span> <span class="n">daysIntoMillennium</span><span class="p">)</span>
     <span class="p">}</span>
-    <span class="kd">internal</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+    <span class="n">fileprivate</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
         <span class="k">try</span> <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">decoder</span><span class="p">,</span> <span class="nv">via</span><span class="p">:</span> <span class="kt">FloatMax</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">convert</span><span class="p">:</span> <span class="p">{</span> <span class="kt">DaysIntoMillennium</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">},</span> <span class="nv">debugErrorDescription</span><span class="p">:</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
             <span class="nf">unreachable</span><span class="p">()</span>
         <span class="p">})</span>

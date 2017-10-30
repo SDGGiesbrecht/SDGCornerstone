@@ -1667,12 +1667,12 @@
 <li><code>location</code> is at a local minimum. For example:
 <code>swift
 // This is undefined:
-_ = findLocalMaximum(near: 0) { $0 ∈ −10 ..&lt; 10 ? $0 ↑ 2 : −($0 ↑ 2) }
+let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? $0 ↑ 2 : −($0 ↑ 2) }
 </code></li>
 <li>two or more adjascent inputs share the maximum output. For example:
 <code>swift
 // This is undefined:
-_ = findLocalMaximum(near: 0) { $0 ∈ −10 ..&lt; 10 ? 1 : −(|$0|) }
+let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? 1 : −(|$0|) }
 </code></li>
 </ul>
 
@@ -1793,8 +1793,7 @@ _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..&lt; 10 ? 1 : −(|$0|) }
 <span class="c1">// 12 → 24</span>
 <span class="c1">// No longer decreasing, so stop. 1 was the local minimum.</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="n">approximateSquareRootOf120</span><span class="p">)</span>
-<span class="c1">// Prints “11”</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">approximateSquareRootOf120</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 </code></pre>
 <div class="aside aside-warning">
     <p class="aside-title">Warning</p>
@@ -1804,12 +1803,12 @@ _ = findLocalMaximum(near: 0) { $0 ∈ −10 ..&lt; 10 ? 1 : −(|$0|) }
 <li><code>location</code> is at a local maximum. For example:
 <code>swift
 // This is undefined:
-_ = findLocalMinimum(near: 0) { $0 ∈ −10 ..&lt; 10 ? −($0 ↑ 2) : $0 ↑ 2 }
+let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −($0 ↑ 2) : $0 ↑ 2 }
 </code></li>
 <li>two or more adjascent inputs share the minimum output. For example:
 <code>swift
 // This is undefined:
-_ = findLocalMinimum(near: 0) { $0 ∈ −10 ..&lt; 10 ? −1 : |$0| }
+let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −1 : |$0| }
 </code></li>
 </ul>
 
@@ -3242,7 +3241,7 @@ _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..&lt; 10 ? −1 : |$0| }
                         <p>Returns the absolute value (in conjuction with postfix <code>|(_:)</code>).</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="o">−</span><span class="mi">1</span>
 <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
-<span class="c1">// y == 1</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre>
 
                         <a href="Functions/_7C_28_5F_3A_29.html" class="slightly-smaller">See more</a>
@@ -3274,7 +3273,7 @@ _ = findLocalMinimum(near: 0) { $0 ∈ −10 ..&lt; 10 ? −1 : |$0| }
                         <p>Returns the absolute value (in conjuction with prefix <code>|(_:)</code>).</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="o">−</span><span class="mi">1</span>
 <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
-<span class="c1">// y == 1</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre>
 
                         <a href="Functions/_7C_28_5F_3A_29.html" class="slightly-smaller">See more</a>

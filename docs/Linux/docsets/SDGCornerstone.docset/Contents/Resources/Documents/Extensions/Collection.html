@@ -2984,11 +2984,8 @@
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">equation</span> <span class="o">=</span> <span class="s">"2(3x − (y + 4)) = z"</span>
 <span class="k">let</span> <span class="nv">nestingLevel</span> <span class="o">=</span> <span class="n">equation</span><span class="o">.</span><span class="n">scalars</span><span class="o">.</span><span class="nf">firstNestingLevel</span><span class="p">(</span><span class="nv">startingWith</span><span class="p">:</span> <span class="s">"("</span><span class="o">.</span><span class="n">scalars</span><span class="p">,</span> <span class="nv">endingWith</span><span class="p">:</span> <span class="s">")"</span><span class="o">.</span><span class="n">scalars</span><span class="p">)</span><span class="o">!</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">nestingLevel</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">contents</span><span class="p">))</span>
-<span class="c1">// Prints “(3x − (y + 4))”</span>
-
-<span class="nf">print</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">nestingLevel</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">contents</span><span class="p">))</span>
-<span class="c1">// Prints “3x − (y + 4)”</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">nestingLevel</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">contents</span><span class="p">),</span> <span class="s">"(3x − (y + 4))"</span><span class="p">)</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">nestingLevel</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">contents</span><span class="p">),</span> <span class="s">"3x − (y + 4)"</span><span class="p">)</span>
 </code></pre>
 
                       </div>

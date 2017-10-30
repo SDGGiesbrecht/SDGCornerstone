@@ -929,130 +929,111 @@
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SDGCornerstone</span>
 </code></pre>
 <h2 id='example-usage' class='heading'>Example Usage</h2>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Foundation</span>
-<span class="kd">import</span> <span class="kt">SDGCornerstone</span>
+<pre class="highlight swift"><code><span class="c1">// ••••••• Localization •••••••</span>
 
-<span class="c1">// Localization</span>
-
-<span class="kd">func</span> <span class="nf">sayHello</span><span class="p">()</span> <span class="p">{</span>
-
-    <span class="kd">enum</span> <span class="kt">ApplicationLocalization</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Localization</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="n">english</span> <span class="o">=</span> <span class="s">"en"</span>
-        <span class="k">case</span> <span class="n">franç</span><span class="n">ais</span> <span class="o">=</span> <span class="s">"fr"</span>
-        <span class="kd">static</span> <span class="k">let</span> <span class="nv">fallbackLocalization</span> <span class="o">=</span> <span class="kt">ApplicationLocalization</span><span class="o">.</span><span class="n">english</span>
-    <span class="p">}</span>
-
-    <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="kt">UserFacingText</span><span class="p">({</span> <span class="p">(</span><span class="nv">localization</span><span class="p">:</span> <span class="kt">ApplicationLocalization</span><span class="p">,</span> <span class="nv">_</span><span class="p">:</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">StrictString</span> <span class="k">in</span>
-        <span class="k">switch</span> <span class="n">localization</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="o">.</span><span class="nv">english</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s">"Hello, world!"</span>
-        <span class="k">case</span> <span class="o">.</span><span class="n">franç</span><span class="nv">ais</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s">"Bonjour, le monde !"</span>
-        <span class="p">}</span>
-    <span class="p">})</span>
-
-    <span class="nf">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="nf">resolved</span><span class="p">())</span>
+<span class="kd">enum</span> <span class="kt">ApplicationLocalization</span> <span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="kt">Localization</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">english</span> <span class="o">=</span> <span class="s">"en"</span>
+    <span class="k">case</span> <span class="n">franç</span><span class="n">ais</span> <span class="o">=</span> <span class="s">"fr"</span>
+    <span class="kd">static</span> <span class="k">let</span> <span class="nv">fallbackLocalization</span> <span class="o">=</span> <span class="kt">ApplicationLocalization</span><span class="o">.</span><span class="n">english</span>
 <span class="p">}</span>
 
-<span class="c1">// Preferences</span>
-
-<span class="kd">func</span> <span class="nf">storeAndRetrieveUsersName</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">preferences</span> <span class="o">=</span> <span class="kt">Preferences</span><span class="o">.</span><span class="n">applicationPreferences</span>
-
-    <span class="c1">// Store</span>
-    <span class="n">preferences</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">"John Doe"</span>
-
-    <span class="c1">// Retrieve</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nv">usersName</span> <span class="o">=</span> <span class="n">preferences</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">?</span><span class="o">.</span><span class="nf">as</span><span class="p">(</span><span class="kt">String</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"Hello, </span><span class="se">\(</span><span class="n">usersName</span><span class="se">)</span><span class="s">!"</span><span class="p">)</span>
+<span class="c1">// Define</span>
+<span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="kt">UserFacingText</span><span class="o">&lt;</span><span class="kt">ApplicationLocalization</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span><span class="p">({</span> <span class="p">(</span><span class="n">localization</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">localization</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nv">english</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Hello, world!"</span>
+    <span class="k">case</span> <span class="o">.</span><span class="n">franç</span><span class="nv">ais</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"Bonjour, le monde !"</span>
     <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// Use</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="nf">resolved</span><span class="p">(),</span>
+               <span class="s">"Hello, world!"</span><span class="p">)</span>
+
+<span class="c1">// ••••••• Preferences •••••••</span>
+
+<span class="k">let</span> <span class="nv">preferences</span> <span class="o">=</span> <span class="kt">Preferences</span><span class="o">.</span><span class="n">applicationPreferences</span>
+
+<span class="c1">// Save</span>
+<span class="n">preferences</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">"John Doe"</span>
+<span class="c1">// Load</span>
+<span class="k">let</span> <span class="nv">loaded</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="n">preferences</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">?</span><span class="o">.</span><span class="nf">as</span><span class="p">(</span><span class="kt">String</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">loaded</span><span class="p">,</span>
+               <span class="s">"John Doe"</span><span class="p">)</span>
+
+<span class="c1">// ••••••• File System •••••••</span>
+
+<span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">FileManager</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="o">.</span><span class="n">applicationSupport</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="s">"folder/file.txt"</span><span class="p">)</span>
+<span class="k">do</span> <span class="p">{</span>
+    <span class="c1">// Save</span>
+    <span class="k">try</span> <span class="s">"Contents"</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+    <span class="c1">// Load</span>
+    <span class="k">let</span> <span class="nv">loaded</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">String</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+
+    <span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">loaded</span><span class="p">,</span>
+                   <span class="s">"Contents"</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
+    <span class="kt">XCTFail</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">// File System</span>
+<span class="c1">// ••••••• Shared Values •••••••</span>
 
-<span class="kd">func</span> <span class="nf">saveAndLoadFile</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="s">"content"</span>
-    <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">FileManager</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="o">.</span><span class="n">applicationSupport</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="s">"folder/file.txt"</span><span class="p">)</span>
-
-    <span class="k">do</span> <span class="p">{</span>
-
-        <span class="c1">// Save</span>
-        <span class="k">try</span> <span class="n">file</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
-
-        <span class="c1">// Load</span>
-        <span class="n">_</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">String</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
-
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"An unexpected error occurred."</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// Shared Values</span>
-
-<span class="kd">func</span> <span class="nf">shareValue</span><span class="p">()</span> <span class="p">{</span>
-
-    <span class="kd">class</span> <span class="kt">Owner</span> <span class="p">{</span>
-        <span class="k">var</span> <span class="nv">property</span><span class="p">:</span> <span class="kt">Shared</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span>
-        <span class="nf">init</span><span class="p">(</span><span class="nv">property</span><span class="p">:</span> <span class="kt">Shared</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">self</span><span class="o">.</span><span class="n">property</span> <span class="o">=</span> <span class="n">property</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">let</span> <span class="nv">originalOwner</span> <span class="o">=</span> <span class="kt">Owner</span><span class="p">(</span><span class="nv">property</span><span class="p">:</span> <span class="kt">Shared</span><span class="p">(</span><span class="s">"original"</span><span class="p">))</span>
-    <span class="k">let</span> <span class="nv">anotherOwner</span> <span class="o">=</span> <span class="kt">Owner</span><span class="p">(</span><span class="nv">property</span><span class="p">:</span> <span class="n">originalOwner</span><span class="o">.</span><span class="n">property</span><span class="p">)</span>
-
-    <span class="n">anotherOwner</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">"changed"</span>
-
-    <span class="nf">print</span><span class="p">(</span><span class="n">originalOwner</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-    <span class="c1">// Prints “changed”.</span>
-<span class="p">}</span>
-
-<span class="c1">// Pattern Matching</span>
-
-<span class="kd">func</span> <span class="nf">searchForPattern</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="n">numbers</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="kt">CompositePattern</span><span class="p">([</span>
-        <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="c1">// 1</span>
-        <span class="kt">ConditionalPattern</span><span class="p">(</span><span class="nv">condition</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">isEven</span> <span class="p">}),</span> <span class="c1">// 2</span>
-        <span class="kt">AlternativePatterns</span><span class="p">([</span>
-            <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]),</span> <span class="c1">// (∅)</span>
-            <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="c1">// 3, 4</span>
-            <span class="p">]),</span>
-        <span class="kt">RepetitionPattern</span><span class="p">(</span><span class="kt">NotPattern</span><span class="p">(</span><span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))),</span> <span class="c1">// 5, 6, 7, 8, 9 (...)</span>
-        <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span> <span class="c1">// 10</span>
-        <span class="p">]))</span> <span class="p">{</span>
-
-        <span class="nf">print</span><span class="p">(</span><span class="s">"I found a match!"</span><span class="p">)</span>
+<span class="kd">class</span> <span class="kt">Owner</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">property</span><span class="p">:</span> <span class="kt">Shared</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">property</span><span class="p">:</span> <span class="kt">Shared</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">property</span> <span class="o">=</span> <span class="n">property</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// Randomization</span>
+<span class="k">let</span> <span class="nv">originalOwner</span> <span class="o">=</span> <span class="kt">Owner</span><span class="p">(</span><span class="nv">property</span><span class="p">:</span> <span class="kt">Shared</span><span class="p">(</span><span class="s">"original"</span><span class="p">))</span>
+<span class="k">let</span> <span class="nv">anotherOwner</span> <span class="o">=</span> <span class="kt">Owner</span><span class="p">(</span><span class="nv">property</span><span class="p">:</span> <span class="n">originalOwner</span><span class="o">.</span><span class="n">property</span><span class="p">)</span>
 
-<span class="kd">func</span> <span class="nf">playWithDice</span><span class="p">()</span> <span class="p">{</span>
+<span class="n">anotherOwner</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">"changed"</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">originalOwner</span><span class="o">.</span><span class="n">property</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+               <span class="s">"changed"</span><span class="p">)</span>
 
-    <span class="kd">func</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kt">Int</span><span class="p">(</span><span class="nv">randomInRange</span><span class="p">:</span> <span class="mi">1</span> <span class="o">...</span> <span class="mi">6</span><span class="p">)</span>
-    <span class="p">}</span>
+<span class="c1">// ••••••• Pattern Matching •••••••</span>
 
-    <span class="k">if</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">∧</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"Snake eyes!"</span><span class="p">)</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"Not this time..."</span><span class="p">)</span>
-    <span class="p">}</span>
+<span class="k">let</span> <span class="nv">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">pattern</span> <span class="o">=</span> <span class="kt">CompositePattern</span><span class="p">([</span>
+    <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="c1">// 1</span>
+    <span class="kt">ConditionalPattern</span><span class="p">(</span><span class="nv">condition</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">isEven</span> <span class="p">}),</span> <span class="c1">// 2</span>
+    <span class="kt">AlternativePatterns</span><span class="p">([</span>
+        <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]),</span> <span class="c1">// (∅)</span>
+        <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="c1">// 3, 4</span>
+        <span class="p">]),</span>
+    <span class="kt">RepetitionPattern</span><span class="p">(</span><span class="kt">NotPattern</span><span class="p">(</span><span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))),</span> <span class="c1">// 5, 6, 7, 8, 9 (...)</span>
+    <span class="kt">LiteralPattern</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span> <span class="c1">// 10</span>
+    <span class="p">])</span>
+
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">numbers</span><span class="o">.</span><span class="nf">firstMatch</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">pattern</span><span class="p">)?</span><span class="o">.</span><span class="n">range</span><span class="p">,</span>
+               <span class="n">numbers</span><span class="o">.</span><span class="n">startIndex</span> <span class="o">..&lt;</span> <span class="n">numbers</span><span class="o">.</span><span class="n">endIndex</span><span class="p">)</span>
+
+<span class="c1">// ••••••• Randomization •••••••</span>
+
+<span class="kd">func</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">Int</span><span class="p">(</span><span class="nv">randomInRange</span><span class="p">:</span> <span class="mi">1</span> <span class="o">...</span> <span class="mi">6</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">// Arbitrary Precision Arithmetic</span>
+<span class="k">if</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">∧</span> <span class="nf">rollDie</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Snake eyes!"</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Not this time..."</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// ••••••• Arbitrary Precision Arithmetic •••••••</span>
 
 <span class="k">let</span> <span class="nv">tenDuotrigintillion</span><span class="p">:</span> <span class="kt">WholeNumber</span> <span class="o">=</span> <span class="s">"10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"</span>
+<span class="kt">XCTAssert</span><span class="p">(</span><span class="n">tenDuotrigintillion</span><span class="o">.</span><span class="nf">isDivisible</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="cp">#if os(macOS) || os(Linux)</span>
 
-    <span class="c1">// Shell Commands</span>
+    <span class="c1">// ••••••• Shell Commands •••••••</span>
 
-    <span class="kd">func</span> <span class="nf">introduceShell</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">_</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">Shell</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">run</span><span class="p">(</span><span class="nv">command</span><span class="p">:</span> <span class="p">[</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"Hello, world!"</span><span class="p">])</span>
-    <span class="p">}</span>
+    <span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="k">try</span><span class="p">?</span> <span class="kt">Shell</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">run</span><span class="p">(</span><span class="nv">command</span><span class="p">:</span> <span class="p">[</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"Hello, world!"</span><span class="p">]),</span>
+                   <span class="s">"Hello, world!"</span><span class="p">)</span>
 <span class="cp">#endif</span>
 </code></pre>
 <h2 id='about' class='heading'>About</h2>

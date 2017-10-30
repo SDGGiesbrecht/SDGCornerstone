@@ -877,11 +877,12 @@
             <p>A Gregorian year.</p>
 
 <p>Initialize with a negative integer to get a BC year. The provided mathematical functions automatically accomodate for the lack of a zero year. For example:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">year</span> <span class="o">=</span> <span class="kt">GregorianYear</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">−</span> <span class="mi">1</span>
-<span class="c1">// 1 BC</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">adOne</span> <span class="o">=</span> <span class="kt">GregorianYear</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">oneBC</span> <span class="o">=</span> <span class="kt">GregorianYear</span><span class="p">(</span><span class="o">−</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">oneYear</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="nv">timespan</span> <span class="o">=</span> <span class="kt">GregorianYear</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">−</span> <span class="kt">GregorianYear</span><span class="p">(</span><span class="o">−</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1">// 1 year</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">adOne</span> <span class="o">−</span> <span class="n">oneYear</span><span class="p">,</span> <span class="n">oneBC</span><span class="p">)</span>
+<span class="kt">XCTAssertEqual</span><span class="p">(</span><span class="n">adOne</span> <span class="o">−</span> <span class="n">oneBC</span><span class="p">,</span> <span class="n">oneYear</span><span class="p">)</span>
 </code></pre>
 
           </section>
