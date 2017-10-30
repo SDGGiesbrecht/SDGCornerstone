@@ -350,7 +350,7 @@ class DateTests : TestCase {
             ("testCalendarComponent", testCalendarComponent),
             ("testCalendarInterval", testCalendarInterval),
             ("testGregorianDay", testGregorianDay),
-            ("testGregorianDay", testGregorianDay),
+            ("testGregorianMonth", testGregorianMonth),
             ("testGregorianSecond", testGregorianSecond),
             ("testGregorianYear", testGregorianYear),
             ("testHebrewDay", testHebrewDay),

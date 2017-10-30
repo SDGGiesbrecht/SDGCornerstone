@@ -713,7 +713,9 @@ class CollectionTests : TestCase {
             ("testCollection", testCollection),
             ("testComparableSet", testComparableSet),
             ("testDictionary", testDictionary),
+            ("testFiniteSet", testFiniteSet),
             ("testMutableSet", testMutableSet),
+            ("testRange", testRange),
             ("testRangeReplaceableCollection", testRangeReplaceableCollection),
             ("testSetDefinition", testSetDefinition),
             ("testSetInRepresentableUniverse", testSetInRepresentableUniverse)

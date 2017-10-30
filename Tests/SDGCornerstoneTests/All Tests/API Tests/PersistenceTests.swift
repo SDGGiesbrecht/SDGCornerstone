@@ -60,18 +60,7 @@ class PersistenceTests : TestCase {
         XCTAssertRecodes(hebrew + (12345 as FloatMax).days, equivalentFormats: ["[[\u{22}Δ\u{22},\u{22}[[[3199824000.0,259200],[\u{5C}\u{22}עברי\u{5C}\u{22},\u{5C}\u{22}[[3456,\u{5C}\u{5C}\u{5C}\u{22}1\u{5C}\u{5C}\u{5C}\u{22},23,7,890.0]]\u{5C}\u{22},[217935793900.0,259200]]]]\u{22},[214735969900.0,259200]]]"])
 
         // Unregistered definitions.
-        let unregistered = CalendarDate(daysIntoMillennium: 12345)
-        let unregisteredCoded = "[[\u{22}MyModule.DaysIntoMillenium\u{22},\u{22}[12345.0]\u{22},[3507559200.0,259200]]]"
-        XCTAssertRecodes(unregistered, equivalentFormats: [unregisteredCoded])
-        do {
-            let recoded = try JSONDecoder().decode(CalendarDate.self, from: try JSONEncoder().encode(unregistered))
-            XCTAssertRecodes(recoded, equivalentFormats: [unregisteredCoded])
-        } catch let error {
-            XCTFail(error.localizedDescription)
-        }
-        // Once registered...
-        CalendarDate.register(DaysIntoMillennium.self)
-        XCTAssertRecodes(unregistered, equivalentFormats: [unregisteredCoded])
+        DateExampleTests.testCustomDate()
 
         // Expected failures.
         XCTAssertThrows(whileDecoding: "[600]", as: GregorianHour.self) // Invalid raw value.
