@@ -61,6 +61,11 @@ extension URL : Comparable {
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the left value is less than the right.
+    ///
+    /// - Parameters:
+    ///     - lhs: A value.
+    ///     - rhs: Another value.
     public static func < (lhs: URL, rhs: URL) -> Bool {
         return lhs.absoluteString < rhs.absoluteString
     }
