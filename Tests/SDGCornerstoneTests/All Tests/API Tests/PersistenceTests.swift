@@ -439,13 +439,30 @@ class PersistenceTests : TestCase {
         XCTAssertNil(value.as(NSDictionary.self))
     }
 
+    func testURL() {
+        let root = URL(fileURLWithPath: "/")
+        let users = URL(fileURLWithPath: "/Users")
+        let johnDoe = URL(fileURLWithPath: "/Users/John Doe")
+
+        XCTAssert(root < users)
+        XCTAssert(users.is(in: root))
+        XCTAssert(root.is(in: root))
+        XCTAssert(users.is(in: users))
+        XCTAssert(johnDoe.is(in: users))
+
+        XCTAssertEqual(users.path(relativeTo: root), "Users")
+        XCTAssertEqual(users.path(relativeTo: johnDoe), "/Users")
+        XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
+    }
+
     static var allTests: [(String, (PersistenceTests) -> () throws -> Void)] {
         return [
             ("testCodable", testCodable),
             ("testFileConvertible", testFileConvertible),
             ("testFileManager", testFileManager),
             ("testPreferences", testPreferences),
-            ("testPropertyList", testPropertyList)
+            ("testPropertyList", testPropertyList),
+            ("testURL", testURL)
         ]
     }
 }
