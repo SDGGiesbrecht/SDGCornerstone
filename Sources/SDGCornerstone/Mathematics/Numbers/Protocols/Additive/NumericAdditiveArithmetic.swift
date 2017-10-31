@@ -18,7 +18,7 @@
 /// ```swift
 /// let x = −1
 /// let y = |x|
-/// // y == 1
+/// XCTAssertEqual(y, 1)
 /// ```
 prefix operator |
 
@@ -28,7 +28,7 @@ prefix operator |
 /// ```swift
 /// let x = −1
 /// let y = |x|
-/// // y == 1
+/// XCTAssertEqual(y, 1)
 /// ```
 postfix operator |
 
@@ -129,7 +129,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 /// ```swift
 /// let x = −1
 /// let y = |x|
-/// // y == 1
+/// XCTAssertEqual(y, 1)
 /// ```
 public prefix func | <Value>(operand: _PartialAbsoluteValue<Value>) -> Value {
     return operand.contents
@@ -142,7 +142,7 @@ public prefix func | <Value>(operand: _PartialAbsoluteValue<Value>) -> Value {
 /// ```swift
 /// let x = −1
 /// let y = |x|
-/// // y == 1
+/// XCTAssertEqual(y, 1)
 /// ```
 public postfix func | <Value>(operand: Value) -> _PartialAbsoluteValue<Value> {
     return _PartialAbsoluteValue(contents: operand.absoluteValue)

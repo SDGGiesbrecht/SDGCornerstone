@@ -16,6 +16,18 @@ import XCTest
 @testable import SDGCornerstoneTests
 
 XCTMain([
+    testCase(AbsoluteValueExampleTests.allTests),
+    testCase(ArbitraryPrecisionExampleTests.allTests),
+    testCase(BoolExampleTests.allTests),
+    testCase(CalendarExampleTests.allTests),
+    testCase(ComparableExampleTests.allTests),
+    testCase(DateExampleTests.allTests),
+    testCase(DictionaryExampleTests.allTests),
+    testCase(FunctionAnalysisExampleTests.allTests),
+    testCase(PatternMatchingExampleTests.allTests),
+    testCase(ReadMeExampleTests.allTests),
+    testCase(RunLoopExampleTests.allTests),
+
     testCase(CachingTests.allTests),
     testCase(CollectionTests.allTests),
     testCase(ConcurrencyTests.allTests),

@@ -26,36 +26,36 @@ import Foundation
 ///     }
 ///
 ///     // This property is available to dates with any kind of definition.
-///     public var someMeasurement: FloatMax {
+///     public var daysIntoMillennium: FloatMax {
 ///         return converted(to: DaysIntoMillennium.self).daysIntoMillennium
 ///     }
 /// }
 ///
-/// internal struct DaysIntoMillennium : DateDefinition {
+/// private struct DaysIntoMillennium : DateDefinition {
 ///
 ///     // The reference date is January 1, 2001 at 00:00
-///     internal static let referenceDate = CalendarDate(gregorian: .january, 1, 2001, at: 0, 0, 0)
+///     fileprivate static let referenceDate = CalendarDate(gregorian: .january, 1, 2001, at: 0, 0, 0)
 ///
-///     internal static let identifier: StrictString = "MyModule.DaysIntoMillenium"
+///     fileprivate static let identifier: StrictString = "MyModule.DaysIntoMillenium"
 ///     fileprivate let daysIntoMillennium: FloatMax
-///     internal let intervalSinceReferenceDate: CalendarInterval<FloatMax>
+///     fileprivate let intervalSinceReferenceDate: CalendarInterval<FloatMax>
 ///
 ///     fileprivate init(_ daysIntoMillennium: FloatMax) {
 ///         self.daysIntoMillennium = daysIntoMillennium
 ///         intervalSinceReferenceDate = daysIntoMillennium.days
 ///     }
 ///
-///     internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
+///     fileprivate init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
 ///         self.intervalSinceReferenceDate = intervalSinceReferenceDate
 ///         daysIntoMillennium = intervalSinceReferenceDate.inDays
 ///     }
 ///
-///     internal func encode(to encoder: Encoder) throws {
+///     fileprivate func encode(to encoder: Encoder) throws {
 ///         // Only the definition (i.e. daysIntoMillennium) needs to be encoded.
 ///         // Derived information (i.e. intervalSinceRefrenceDate) can be recomputed.
 ///         try encode(to: encoder, via: daysIntoMillennium)
 ///     }
-///     internal init(from decoder: Decoder) throws {
+///     fileprivate init(from decoder: Decoder) throws {
 ///         try self.init(from: decoder, via: FloatMax.self, convert: { DaysIntoMillennium($0) }, debugErrorDescription: { _ in
 ///             unreachable()
 ///         })
