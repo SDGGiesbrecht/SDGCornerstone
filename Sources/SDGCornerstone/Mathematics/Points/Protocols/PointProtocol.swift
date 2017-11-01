@@ -125,7 +125,7 @@ extension PointProtocol {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.2)_]
 extension /*PointProtocol where Self : */ ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent {
     // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent
 
@@ -152,7 +152,7 @@ extension /*PointProtocol where Self : */ ConsistentlyOrderedCalendarComponent w
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.2)_]
 extension /*PointProtocol where Self : */IntFamily {
     // MARK: - where Self : IntFamily
 
@@ -191,7 +191,7 @@ extension /*PointProtocol where Self : */IntFamily {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.2)_]
 extension /*PointProtocol where Self : */ NumericCalendarComponent {
     // MARK: - where Self : NumericCalendarComponent
 
@@ -235,7 +235,7 @@ extension PointProtocol where Self : Strideable {
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.2)_]
 extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar {
     // MARK: - where Self : TwoDimensionalPoint, Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
 
@@ -265,7 +265,7 @@ extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector :
     }
 }
 
-// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.0)_]
+// [_Workaround: The next line causes an abort trap compile failure. (Swift 4.0.2)_]
 extension /*PointProtocol where Self : */UIntFamily {
     // MARK: - where Self : UIntFamily
 
@@ -300,14 +300,14 @@ extension /*PointProtocol where Self : */UIntFamily {
     ///     - lhs: The endpoint.
     ///     - rhs: The startpoint.
     public static func − (lhs: Self, rhs: Self) -> Stride {
-        // [_Workaround: The following causes an EXC_BAD_INSTRUCTION. (Swift ?)_]
+        // [_Workaround: The following causes an EXC_BAD_INSTRUCTION. (Swift 4.0.2)_]
         //return rhs.distance(to: lhs)
         return lhs.toStride() − rhs.toStride()
     }
 }
 
 extension UIntFamily {
-    // [_Workaround: Should not be necessary but for the above workaround. (Swift ?)_]
+    // [_Workaround: Should not be necessary but for the above workaround. (Swift 4.0.2)_]
     fileprivate func toStride() -> Stride {
         return (0 as Self).distance(to: self)
     }
