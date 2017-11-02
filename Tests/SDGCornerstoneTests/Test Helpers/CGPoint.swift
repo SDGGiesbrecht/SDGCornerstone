@@ -18,7 +18,7 @@ import SDGCornerstone
     import CoreGraphics
 
     struct CGPoint : TwoDimensionalPoint {
-        // [_Workaround: Temporary stand‐in for the real CGPoint. See CGPoint.swift. (Swift 4.0)_]
+        // [_Workaround: Temporary stand‐in for the real CGPoint. See CGPoint.swift. (Swift 4.0.2)_]
 
         typealias Vector = CGVector
 

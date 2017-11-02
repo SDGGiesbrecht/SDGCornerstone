@@ -69,7 +69,7 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
         }
     }
 
-    // [_Workaround: Subtypes in extensions have visibility problems. (Swift 4.0.0)_]
+    // [_Workaround: Subtypes in extensions have visibility problems. (Swift 4.0.2)_]
     internal typealias BinaryView = WholeNumberBinaryView
 
     private var binary: BinaryView {
