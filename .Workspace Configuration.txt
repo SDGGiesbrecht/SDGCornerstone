@@ -20,6 +20,10 @@ Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
 Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
 Repository URL: https://github.com/SDGGiesbrecht/SDGCornerstone
 
+[_Begin Localizations_]
+🇨🇦EN
+[_End_]
+
 [_Begin Short Project Description_]
 SDGCornerstone forms the foundation of the SDG module family. It establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation).
 [_End_]
