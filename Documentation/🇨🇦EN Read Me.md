@@ -14,4 +14,4 @@
 
 [🇨🇦EN](🇨🇦EN%20Read%20Me.md) <!--Skip in Jazzy-->
 
-APIs:  [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone)
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone)
