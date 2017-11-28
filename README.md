@@ -21,7 +21,8 @@
  !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
  -->
 
-APIs: [macOS](https://sdggiesbrecht.github.io/SDGCornerstone/macOS) • [Linux](https://sdggiesbrecht.github.io/SDGCornerstone/Linux) • [iOS](https://sdggiesbrecht.github.io/SDGCornerstone/iOS) • [watchOS](https://sdggiesbrecht.github.io/SDGCornerstone/watchOS) • [tvOS](https://sdggiesbrecht.github.io/SDGCornerstone/tvOS)
+[🇨🇦EN](Documentation/🇨🇦EN%20Read%20Me.md) <!--Skip in Jazzy-->
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone)
 
 # SDGCornerstone
 
