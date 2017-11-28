@@ -10,69 +10,75 @@
 # Licensed under the Apache Licence, Version 2.0.
 # See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
 
-# !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
-# This file is managed by Workspace.
-# Manual changes will not persist.
-# For more information, see:
-# https://github.com/SDGGiesbrecht/Workspace/blob/master/Documentation/Continuous Integration.md
-# !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
-
 language: generic
 matrix:
   include:
     - os: osx
       env:
-        - JOB="macOS"
-      osx_image: xcode9
+        - JOB="macOS + Swift Package Manager"
+      osx_image: xcode9.1
       script:
-        - "bash ./Refresh\\ \\(macOS\\).command"
-        - "bash ./Validate\\ \\(macOS\\).command"
+        - "bash \"./Refresh (macOS).command\""
+        - "bash \"./Validate (macOS).command\" •job macos‐swift‐package‐manager"
+    - os: osx
+      env:
+        - JOB="macOS + Xcode"
+      osx_image: xcode9.1
+      script:
+        - "bash \"./Refresh (macOS).command\""
+        - "bash \"./Validate (macOS).command\" •job macos‐xcode"
     - os: linux
-      dist: trusty
       env:
         - JOB="Linux"
-        - SWIFT_VERSION=4.0
+      dist: trusty
       script:
+        - "export SWIFT_VERSION=4.0"
         - "eval \"$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)\""
-        - "bash ./Refresh\\ \\(macOS\\).command"
-        - "bash ./Validate\\ \\(macOS\\).command"
+        - "bash \"./Refresh (macOS).command\""
+        - "bash \"./Validate (macOS).command\" •job linux"
     - os: osx
       env:
         - JOB="iOS"
-      osx_image: xcode9
+      osx_image: xcode9.1
       language: objective-c
       xcode_sdk: iphonesimulator
       script:
-        - "bash ./Refresh\\ \\(macOS\\).command"
-        - "bash ./Validate\\ \\(macOS\\).command"
+        - "bash \"./Refresh (macOS).command\""
+        - "bash \"./Validate (macOS).command\" •job ios"
     - os: osx
       env:
         - JOB="watchOS"
-      osx_image: xcode9
-      language: objective-c
-      xcode_sdk: watchsimulator
+      osx_image: xcode9.1
       script:
-        - "bash ./Refresh\\ \\(macOS\\).command"
-        - "bash ./Validate\\ \\(macOS\\).command"
+        - "bash \"./Refresh (macOS).command\""
+        - "bash \"./Validate (macOS).command\" •job watchos"
     - os: osx
       env:
         - JOB="tvOS"
-      osx_image: xcode9
+      osx_image: xcode9.1
       language: objective-c
       xcode_sdk: appletvsimulator
       script:
-        - "bash ./Refresh\\ \\(macOS\\).command"
-        - "bash ./Validate\\ \\(macOS\\).command"
+        - "bash \"./Refresh (macOS).command\""
+        - "bash \"./Validate (macOS).command\" •job tvos"
+    - os: linux
+      env:
+        - JOB="Miscellaneous"
+      dist: trusty
+      script:
+        - "export SWIFT_VERSION=4.0"
+        - "eval \"$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)\""
+        - "bash \"./Refresh (macOS).command\""
+        - "bash \"./Validate (macOS).command\" •job miscellaneous"
     - os: osx
       env:
-        - JOB="Misc."
-      osx_image: xcode9
+        - JOB="Documentation"
+      osx_image: xcode9.1
       script:
-        - "brew update"
-        - "brew outdated swiftlint || brew upgrade swiftlint"
-        - "bash ./Refresh\\ \\(macOS\\).command"
-        - "bash ./Validate\\ \\(macOS\\).command"
+        - "bash \"./Refresh (macOS).command\""
+        - "bash \"./Validate (macOS).command\" •job documentation"
 
 cache:
   directories:
-  - $HOME/.Workspace
+  - $HOME/Library/Caches/ca.solideogloria.Workspace
+  - $HOME/.cache/ca.solideogloria.Workspace
