@@ -2,7 +2,7 @@
     .Workspace Configuration.txt
 
     This source file is part of the SDGCornerstone open source project.
-    https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+    https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
 
     Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
@@ -16,8 +16,8 @@
 
 Current Version: 0.7.1
 
-Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
-Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
+Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone
 Repository URL: https://github.com/SDGGiesbrecht/SDGCornerstone
 
 [_Begin Localizations_]
