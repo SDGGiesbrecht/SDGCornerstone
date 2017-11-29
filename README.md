@@ -12,16 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  -->
 
-<!--
- !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
- This file is managed by Workspace.
- Manual changes will not persist.
- For more information, see:
- https://github.com/SDGGiesbrecht/Workspace/blob/master/Documentation/Read‐Me.md
- !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
- -->
-
 [🇨🇦EN](Documentation/🇨🇦EN%20Read%20Me.md) <!--Skip in Jazzy-->
+
+macOS • Linux • iOS • watchOS • tvOS
+
 APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone)
 
 # SDGCornerstone
@@ -43,7 +37,7 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 
 ...and much more.
 
-(For a list of related projecs, see [here](Documentation/Related%20Projects.md).) <!--Skip in Jazzy-->
+(For a list of related projects, see [here](Documentation/🇨🇦EN%20Related%20Projects.md).) <!--Skip in Jazzy-->
 
 ## Importing
 
