@@ -42,3 +42,19 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 ## Importing
 
 `SDGCornerstone` is intended for use with the [Swift Package Manager](https://swift.org/package-manager/).
+
+Simply add `SDGCornerstone` as a dependency in `Package.swift`:
+
+```swift
+let package = Package(
+    name: "MyPackage",
+    dependencies: [
+        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", .upToNextMinor(from: Version(0, 7, 1))),
+    ],
+    targets: [
+        .target(name: "MyTarget", dependencies: [
+            .productItem(name: "SDGCornerstone", package: "SDGCornerstone"),
+        ])
+    ]
+)
+```

@@ -47,11 +47,14 @@ Simply add SDGCornerstone as a dependency in `Package.swift`:
 
 ```swift
 let package = Package(
-    ...
+    name: "MyPackage",
     dependencies: [
-        ...
-        .Package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", versions: "0.7.1" ..< "0.8.0"),
-        ...
+        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", .upToNextMinor(from: Version(0, 7, 1))),
+    ],
+    targets: [
+        .target(name: "MyTarget", dependencies: [
+            .productItem(name: "SDGCornerstone", package: "SDGCornerstone"),
+        ])
     ]
 )
 ```
