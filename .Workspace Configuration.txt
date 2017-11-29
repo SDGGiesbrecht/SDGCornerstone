@@ -25,6 +25,7 @@ Repository URL: https://github.com/SDGGiesbrecht/SDGCornerstone
 [_End_]
 
 [_Begin Short Project Description_]
+[_🇨🇦EN_]
 SDGCornerstone forms the foundation of the SDG module family. It establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation).
 [_End_]
 
@@ -33,17 +34,20 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 [_End_]
 
 [_Begin Quotation Translation_]
+[_🇨🇦EN_]
 Behold, I establish in Zion a stone, a tested stone, a precious cornerstone, a sure foundation.
 [_End_]
 
-Quotation Testament: Old
+Quotation Testament: תנ״ך
 Quotation Chapter: Isaiah 28
 
 [_Begin Citation_]
+[_🇨🇦EN_]
 ⁧יהוה⁩/Yehova
 [_End_]
 
 [_Begin Feature List_]
+[_🇨🇦EN_]
 - Localization tools (compatible with the Swift Package Manager and Linux).
 - User preferences access (compatible with Linux).
 - Platform‐independent access to best‐practice file system locations.
