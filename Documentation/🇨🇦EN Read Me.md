@@ -58,3 +58,9 @@ let package = Package(
     ]
 )
 ```
+
+`SDGCornerstone` can then be imported in source files:
+
+```swift
+import SDGCornerstone
+```
