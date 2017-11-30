@@ -22,7 +22,7 @@ class ReadMeExampleTests : TestCase {
     func testReadMe() {
 
         LocalizationSetting(orderOfPrecedence: ["en"]).do {
-            // [_Define Example: Read‐Me_]
+            // [_Define Example: Read‐Me 🇨🇦EN_]
             // ••••••• Localization •••••••
 
             enum ApplicationLocalization : String, Localization {
