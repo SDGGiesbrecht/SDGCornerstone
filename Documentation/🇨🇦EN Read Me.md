@@ -67,6 +67,7 @@ import SDGCornerstone
 
 ## Example Usage
 
+```swift
 // ••••••• Localization •••••••
 
 enum ApplicationLocalization : String, Localization {
@@ -173,3 +174,4 @@ XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
     XCTAssertEqual(try? Shell.default.run(command: ["echo", "Hello, world!"]),
                    "Hello, world!")
 #endif
+```
