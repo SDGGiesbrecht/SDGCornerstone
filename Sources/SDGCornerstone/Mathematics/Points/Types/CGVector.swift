@@ -12,7 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(Linux) && !LinuxDocs
+#if !os(Linux)
+    // MARK: - #if !os(Linux)
+
     import CoreGraphics
 
     extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {

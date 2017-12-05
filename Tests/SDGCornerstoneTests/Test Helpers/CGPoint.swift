@@ -14,7 +14,9 @@
 
 import SDGCornerstone
 
-#if !os(Linux) && !LinuxDocs
+#if !os(Linux)
+    // MARK: - #if !os(Linux)
+
     import CoreGraphics
 
     struct CGPoint : TwoDimensionalPoint {

@@ -18,9 +18,13 @@ import Foundation
 #endif
 
 #if os(iOS) || os(watchOS) || os(tvOS)
+    // MARK: - #if os(iOS) || os(watchOS) || os(tvOS)
+
     /// The member of the `Float` family with the largest bit field.
     public typealias FloatMax = Double
 #else
+    // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+
     /// The member of the `Float` family with the largest bit field.
     public typealias FloatMax = Float80
 #endif
@@ -61,7 +65,8 @@ extension Double : FloatFamily, PropertyListValue {
     public static let e: Double = 0x1.5BF0A8B145769p1
 }
 
-#if !(os(Linux) || LinuxDocs)
+#if !os(Linux)
+    // MARK: - #if !os(Linux)
 
     extension CGFloat : FloatFamily, PropertyListValue {
 
@@ -107,6 +112,8 @@ extension Double : FloatFamily, PropertyListValue {
 #endif
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
+// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+
 extension Float80 : Codable, FloatFamily {
 
     // MARK: - Decodable
