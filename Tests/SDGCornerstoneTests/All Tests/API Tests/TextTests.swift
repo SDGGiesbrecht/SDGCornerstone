@@ -248,6 +248,9 @@ class TextTests : TestCase {
 
         XCTAssertEqual(StrictString(StrictString.ClusterView()), "")
         XCTAssert(StrictString.ClusterView("..." as String).elementsEqual(("..." as StrictString).clusters))
+
+        XCTAssertEqual((["A", "B", "C"] as [StrictString]).joined(), "ABC")
+        XCTAssertEqual(([] as [StrictString]).joined(), "")
     }
 
     func testString() {

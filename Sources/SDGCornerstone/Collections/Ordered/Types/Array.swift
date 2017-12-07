@@ -69,3 +69,21 @@ extension ArrayFamily where Element : RangeReplaceableCollection {
         return result
     }
 }
+
+extension Array where Element : StringFamily {
+    // MARK: - where Element : StringFamily
+
+    /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
+    ///
+    /// - Parameters:
+    ///     - separator: A sequence to insert between each of this sequence’s elements.
+    func joined(separator: Element = "") -> Element {
+        guard var result = self.first else {
+            return ""
+        }
+        for line in self.dropFirst() {
+            result += separator + line
+        }
+        return result
+    }
+}
