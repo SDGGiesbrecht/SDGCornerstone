@@ -2,7 +2,7 @@
  ReadMeExampleTests.swift
 
  This source file is part of the SDGCornerstone open source project.
- https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+ https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
 
  Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
@@ -22,7 +22,7 @@ class ReadMeExampleTests : TestCase {
     func testReadMe() {
 
         LocalizationSetting(orderOfPrecedence: ["en"]).do {
-            // [_Define Example: Read‐Me_]
+            // [_Define Example: Read‐Me 🇨🇦EN_]
             // ••••••• Localization •••••••
 
             enum ApplicationLocalization : String, Localization {

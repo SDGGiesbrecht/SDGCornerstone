@@ -2,7 +2,7 @@
  README.md
 
  This source file is part of the SDGCornerstone open source project.
- https://sdggiesbrecht.github.io/SDGCornerstone/macOS
+ https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
 
  Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
@@ -12,16 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  -->
 
-<!--
- !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
- This file is managed by Workspace.
- Manual changes will not persist.
- For more information, see:
- https://github.com/SDGGiesbrecht/Workspace/blob/master/Documentation/Read‐Me.md
- !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
- -->
+[🇨🇦EN](Documentation/🇨🇦EN%20Read%20Me.md) <!--Skip in Jazzy-->
 
-APIs: [macOS](https://sdggiesbrecht.github.io/SDGCornerstone/macOS) • [Linux](https://sdggiesbrecht.github.io/SDGCornerstone/Linux) • [iOS](https://sdggiesbrecht.github.io/SDGCornerstone/iOS) • [watchOS](https://sdggiesbrecht.github.io/SDGCornerstone/watchOS) • [tvOS](https://sdggiesbrecht.github.io/SDGCornerstone/tvOS)
+macOS • Linux • iOS • watchOS • tvOS
+
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone)
 
 # SDGCornerstone
 
@@ -42,26 +37,29 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 
 ...and much more.
 
-(For a list of related projecs, see [here](Documentation/Related%20Projects.md).) <!--Skip in Jazzy-->
+(For a list of related projects, see [here](Documentation/🇨🇦EN%20Related%20Projects.md).) <!--Skip in Jazzy-->
 
 ## Importing
 
-SDGCornerstone is intended for use with the [Swift Package Manager](https://swift.org/package-manager/).
+`SDGCornerstone` is intended for use with the [Swift Package Manager](https://swift.org/package-manager/).
 
-Simply add SDGCornerstone as a dependency in `Package.swift`:
+Simply add `SDGCornerstone` as a dependency in `Package.swift`:
 
 ```swift
 let package = Package(
-    ...
+    name: "MyPackage",
     dependencies: [
-        ...
-        .Package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", versions: "0.7.1" ..< "0.8.0"),
-        ...
+        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", .upToNextMinor(from: Version(0, 7, 1))),
+    ],
+    targets: [
+        .target(name: "MyTarget", dependencies: [
+            .productItem(name: "SDGCornerstone", package: "SDGCornerstone"),
+        ])
     ]
 )
 ```
 
-SDGCornerstone can then be imported in source files:
+`SDGCornerstone` can then be imported in source files:
 
 ```swift
 import SDGCornerstone
