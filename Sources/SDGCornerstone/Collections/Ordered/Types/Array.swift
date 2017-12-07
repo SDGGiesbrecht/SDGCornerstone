@@ -77,7 +77,7 @@ extension Array where Element : StringFamily {
     ///
     /// - Parameters:
     ///     - separator: A sequence to insert between each of this sequence’s elements.
-    func joined(separator: Element = "") -> Element {
+    public func joined(separator: Element = "") -> Element {
         guard var result = self.first else {
             return ""
         }
