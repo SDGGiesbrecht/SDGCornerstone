@@ -72,12 +72,13 @@
         ///     - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
         ///     - silently: If `false` (the default), the command and its output will be printed to standard out. If `true`, nothing will be sent to standard out. This argument is ignored in GUI applications, where this method is always silent.
         ///     - redactionList: An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value or thrown error.)
+        ///     - autoquote: Whether or not to automatically quote arguments. Defaults to `true`.
         ///     - alternatePrint: An optional closure to use instead of `print()` to send lines to standard output. This can be used to redirect or preprocess the text intended for standard output. (The closure will receive the redacted version and will never be executed if `silently` is `true`.)
         ///
         /// - Returns: The output of the command.
         ///
         /// - Throws: A `Shell.Error` if the exit code indicates a failure.
-        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String { // [_Exempt from Code Coverage_]
+        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], autoquote: Bool = true, alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String { // [_Exempt from Code Coverage_]
 
             let silent: Bool
             switch Application.current.mode {
@@ -120,7 +121,7 @@
             }
 
             let commandString = command.map({ (argument: String) -> String in
-                if Shell.argumentNeedsQuotationMarks(argument) {
+                if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
                     return Shell.addQuotationMarks(argument)
                 } else {
                     return argument
