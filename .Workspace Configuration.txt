@@ -14,7 +14,7 @@
 
 [_Import https://github.com/SDGGiesbrecht/SDG_]
 
-Current Version: 0.7.2
+Current Version: 0.7.3
 
 Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
 Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone
