@@ -1037,9 +1037,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SDGCornerstone5ShellV3runSSSaySSG7command_Sb8silentlyAE9redactingySSc14alternatePrinttKF"></a>
-                    <a name="//apple_ref/swift/Method/run(command:silently:redacting:alternatePrint:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SDGCornerstone5ShellV3runSSSaySSG7command_Sb8silentlyAE9redactingySSc14alternatePrinttKF">run(command:silently:redacting:alternatePrint:)</a>
+                    <a name="/s:14SDGCornerstone5ShellV3runSSSaySSG7command_Sb8silentlyAE9redactingSb9autoquoteySSc14alternatePrinttKF"></a>
+                    <a name="//apple_ref/swift/Method/run(command:silently:redacting:autoquote:alternatePrint:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone5ShellV3runSSSaySSG7command_Sb8silentlyAE9redactingSb9autoquoteySSc14alternatePrinttKF">run(command:silently:redacting:autoquote:alternatePrint:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1059,7 +1059,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="nv">command</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">silently</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">redacting</span> <span class="nv">redactionList</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">alternatePrint</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">})</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="nv">command</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">silently</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">redacting</span> <span class="nv">redactionList</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">autoquote</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">alternatePrint</span><span class="p">:</span> <span class="p">(</span><span class="n">_</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span> <span class="p">})</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -1100,6 +1100,18 @@
                               <td>
                                 <div>
                                   <p>An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value or thrown error.)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>autoquote</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether or not to automatically quote arguments. Defaults to <code>true</code>.</p>
                                 </div>
                               </td>
                             </tr>
