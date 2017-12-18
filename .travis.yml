@@ -96,7 +96,7 @@ matrix:
 stages:
   - test
   - name: deploy
-    if: branch = master AND type != pull_request
+    if: branch = master and (not type = pull_request)
 
 cache:
   directories:
