@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>⊆(_:_:) Static Method Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Method/⊆(_:_:)" class="dashAnchor"></a>
+    <a title="⊆(_:_:) Static Method Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html">SDGCornerstone Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SDGGiesbrecht/SDGCornerstone"><img src="../../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html">SDGCornerstone Reference</a>
+        <img id="carat" src="../../img/carat.png" />
+        ⊆(_:_:) Static Method Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../en-read-me.html">🇨🇦EN Read Me</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../en-related-projects.html">🇨🇦EN Related Projects</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Classes/AlternativePatterns.html">AlternativePatterns</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/CompositePattern.html">CompositePattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/ConditionalPattern.html">ConditionalPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/CyclicalNumberGenerator.html">CyclicalNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/LiteralPattern.html">LiteralPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/NotPattern.html">NotPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Pattern.html">Pattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Pattern/Consumption.html">– Consumption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Preferences.html">Preferences</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/PseudorandomNumberGenerator.html">PseudorandomNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/RepetitionPattern.html">RepetitionPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/Shared.html">Shared</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Global Variables.html#/s:14SDGCornerstone10backgroundSo14OperationQueueCv">background</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Global Variables.html#/s:14SDGCornerstone10foregroundSo14OperationQueueCv">foreground</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Enums/BuildConfiguration.html">BuildConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Casing.html">Casing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/EnglishCasing.html">EnglishCasing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/FillDirection.html">FillDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/GenreGrammatical.html">GenreGrammatical</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/GrammaticalGender.html">GrammaticalGender</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/GrammaticalNumber.html">GrammaticalNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/GregorianMonth.html">GregorianMonth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/GregorianWeekday.html">GregorianWeekday</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/HebrewMonth.html">HebrewMonth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/HebrewWeekday.html">HebrewWeekday</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/Mode.html">Mode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/PropertyList.html">PropertyList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/PropertyList/ReadError.html">– ReadError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/RawRepresentableError.html">RawRepresentableError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/WholeArithmeticParseError.html">WholeArithmeticParseError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/_CE_93_CF_81_CE_B1_CE_BC_CE_BC_CE_B1_CF_84_CE_B9_CE_BA_CE_B7_CC_81_CE_A0_CF_84_CF_89_CC_81_CF_83_CE_B7.html">ΓραμματικήΠτώση</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/BidirectionalCollection.html">BidirectionalCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/CGFloat.html">CGFloat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/CGVector.html">CGVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/CharacterSet.html">CharacterSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/ClosedRange.html">ClosedRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/CountableClosedRange.html">CountableClosedRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/CountableRange.html">CountableRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Data/BinaryView.html">– BinaryView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Date.html">Date</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Decodable.html">Decodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Dictionary.html">Dictionary</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Encodable.html">Encodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Equatable.html">Equatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/ExpressibleByArrayLiteral.html">ExpressibleByArrayLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/ExpressibleByFloatLiteral.html">ExpressibleByFloatLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/ExpressibleByIntegerLiteral.html">ExpressibleByIntegerLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/ExpressibleByStringLiteral.html">ExpressibleByStringLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/FileManager.html">FileManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/FileManager/RecommendedLocation.html">– RecommendedLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Float.html">Float</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Float80.html">Float80</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Hashable.html">Hashable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Int16.html">Int16</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Int32.html">Int32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Int64.html">Int64</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Int8.html">Int8</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Numeric.html">Numeric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/OperationQueue.html">OperationQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Range.html">Range</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/RangeReplaceableCollection.html">RangeReplaceableCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/RunLoop.html">RunLoop</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/RunLoop.html#/s:So7RunLoopC14SDGCornerstoneE6DriverC">– Driver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Set.html">Set</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/SetAlgebra.html">SetAlgebra</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/SignedNumeric.html">SignedNumeric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/Strideable.html">Strideable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/String/Index.html">– Index</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/String/UnicodeScalarView.html">– UnicodeScalarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/String/UnicodeScalarView.html">– UnicodeScalarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/String_2F_2A.html">String/*</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/String/*/ClusterView_2A_2F.html">– ClusterView*/</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/UInt32.html">UInt32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/UInt64.html">UInt64</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/UInt8.html">UInt8</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/UIntMax.html">UIntMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/URL.html">URL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/UnicodeScalar.html">UnicodeScalar</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone005e_CeboiSbypXpSg_ACtF">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6arccosAA5AngleVyxGxAA14RealArithmeticRzlF">arccos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6arccotAA5AngleVyxGxAA14RealArithmeticRzlF">arccot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6arccscAA5AngleVyxGxAA14RealArithmeticRzlF">arccsc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6arcsecAA5AngleVyxGxAA14RealArithmeticRzlF">arcsec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6arcsinAA5AngleVyxGxAA14RealArithmeticRzlF">arcsin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6arctanAA5AngleVyxGxAA14RealArithmeticRzlF">arctan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6assertySbyXK_AA14UserFacingTextVyxytGyXKs12StaticStringV4fileSu4linetAA12LocalizationRzlF">assert(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6assertySo14OperationQueueC2in_s12StaticStringV8functionAG4fileSu4linetF">assert(in:function:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone16assertionFailureyAA14UserFacingTextVyxytGyXK_s12StaticStringV4fileSu4linetAA12LocalizationRzlF">assertionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone6cachedxxSgz2in_xyKctKlF">cached(in:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3cosxAA5AngleVyxGAA14RealArithmeticRzlF">cos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3cotxAA5AngleVyxGAA14RealArithmeticRzlF">cot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3cscxAA5AngleVyxGAA14RealArithmeticRzlF">csc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone1exyAA14RealArithmeticRzlF">e()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone9executingSbSo14OperationQueueC2in_tF">executing(in:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone10fatalErrors5NeverOAA14UserFacingTextVyxytGyXK_s12StaticStringV4fileSu4linetAA12LocalizationRzlF">fatalError(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone16findLocalMaximumxx4near_s20CountableClosedRangeVyxGSg6withinq_xc10inFunctiontAA19OneDimensionalPointRzs11_StrideableRzs10ComparableR_s13SignedInteger6StridesAKPRpzAA0R8Protocol6VectorAA0nT0PRpzr0_lF">findLocalMaximum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone16findLocalMinimumxx4near_s20CountableClosedRangeVyxGSg6withinq_xc10inFunctiontAA19OneDimensionalPointRzs11_StrideableRzs10ComparableR_s13SignedInteger6StridesAKPRpzAA0R8Protocol6VectorAA0nT0PRpzr0_lF">findLocalMinimum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3gcdxx_xtAA11MeasurementRzlF">gcd(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3gcdxx_xtAA15WholeArithmeticRzlF">gcd(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone10initializeyAA4ModeO4mode_SS21applicationIdentifierAA11PreferencesCm0eG5ClasstF">initialize(mode:applicationIdentifier:applicationPreferencesClass:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3lcmxx_xtAA11MeasurementRzlF">lcm(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3lcmxx_xtAA15WholeArithmeticRzlF">lcm(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone2lnxxAA14RealArithmeticRzlF">ln(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3logxxAA14RealArithmeticRzlF">log(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3logxx6toBase_x2oftAA14RealArithmeticRzlF">log(toBase:of:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone17notImplementedYetys12StaticStringV8function_AD4fileSu4linetF">notImplementedYet(function:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone32notImplementedYetAndCannotReturns5NeverOs12StaticStringV8function_AF4fileSu4linetF">notImplementedYetAndCannotReturn(function:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone12preconditionySbyXK_AA14UserFacingTextVyxytGyXKs12StaticStringV4fileSu4linetAA12LocalizationRzlF">precondition(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone19preconditionFailures5NeverOAA14UserFacingTextVyxytGyXK_s12StaticStringV4fileSu4linetAA12LocalizationRzlF">preconditionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone15primitiveMethods5NeverOSS_s12StaticStringV4fileSu4linetF">primitiveMethod(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3secxAA5AngleVyxGAA14RealArithmeticRzlF">sec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3sinxAA5AngleVyxGAA14RealArithmeticRzlF">sin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone3tanxAA5AngleVyxGAA14RealArithmeticRzlF">tan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone11unreachables5NeverOSS8function_s12StaticStringV4fileSu4lineSu6columntF">unreachable(function:file:line:column:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_7C_28_5F_3A_29.html">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_7C_28_5F_3A_29.html">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone003BxaxyAA14RealArithmeticRzlF">π()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions.html#/s:14SDGCornerstone003FxaxyAA14RealArithmeticRzlF">τ()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Protocols/Addable.html">Addable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/ArrayFamily.html">ArrayFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/BitField.html">BitField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/CalendarComponent.html">CalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone25CardinalCalendarComponentP">CardinalCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone25CodableViaIntegerProtocolP">CodableViaIntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone35CodableViaLosslessStringConvertibleP">CodableViaLosslessStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone21CodableViaMeasurementP">CodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone43CodableViaRawRepresentableCalendarComponentP">CodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone29CodableViaWholeNumberProtocolP">CodableViaWholeNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/ComparableSet.html">ComparableSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/ConsistentDurationCalendarComponent.html">ConsistentDurationCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/ConsistentlyOrderedCalendarComponent.html">ConsistentlyOrderedCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/DateDefinition.html">DateDefinition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Day.html">Day</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone37DecodableViaLosslessStringConvertibleP">DecodableViaLosslessStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone23DecodableViaMeasurementP">DecodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone45DecodableViaRawRepresentableCalendarComponentP">DecodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone27DecodableViaWholeArithmeticP">DecodableViaWholeArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone35EncodableViaCustomStringConvertibleP">EncodableViaCustomStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone27EncodableViaIntegerProtocolP">EncodableViaIntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone23EncodableViaMeasurementP">EncodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone45EncodableViaRawRepresentableCalendarComponentP">EncodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone31EncodableViaWholeNumberProtocolP">EncodableViaWholeNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone28EnumerationCalendarComponentP">EnumerationCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone27ExtendedGraphemeClusterViewP">ExtendedGraphemeClusterView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/FileConvertible.html">FileConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/FiniteSet.html">FiniteSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone29FixedScaleOneDimensionalPointP">FixedScaleOneDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/FloatFamily.html">FloatFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/ICalendarComponent.html">ICalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/ISOCalendarComponent.html">ISOCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/InputLocalization.html">InputLocalization</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/IntFamily.html">IntFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/IntegerProtocol.html">IntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/IterableEnumeration.html">IterableEnumeration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Localization.html">Localization</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Month.html">Month</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/MutableSet.html">MutableSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Negatable.html">Negatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/NumericCalendarComponent.html">NumericCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/OneDimensionalVector.html">OneDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/OrderedEnumeration.html">OrderedEnumeration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone24OrdinalCalendarComponentP">OrdinalCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/PointProtocol.html">PointProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/PropertyListValue.html">PropertyListValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Randomizer.html">Randomizer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/RangeFamily.html">RangeFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/RationalArithmetic.html">RationalArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/RationalNumberProtocol.html">RationalNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone18RealNumberProtocolP">RealNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/SetDefinition.html">SetDefinition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/SetInRepresentableUniverse.html">SetInRepresentableUniverse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/SharedValueObserver.html">SharedValueObserver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/SmallestCalendarComponent.html">SmallestCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/StringFamily.html">StringFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Subtractable.html">Subtractable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/TwoDimensionalPoint.html">TwoDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/TwoDimensionalVector.html">TwoDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/UIntFamily.html">UIntFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols.html#/s:14SDGCornerstone17UnicodeScalarViewP">UnicodeScalarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/VectorProtocol.html">VectorProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Weekday.html">Weekday</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/WholeArithmetic.html">WholeArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/WholeNumberProtocol.html">WholeNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Protocols/Year.html">Year</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/AbsoluteComplement.html">AbsoluteComplement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Angle.html">Angle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/BijectiveMapping.html">BijectiveMapping</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/BinaryView.html">BinaryView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CalendarDate.html">CalendarDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CalendarInterval.html">CalendarInterval</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DataStream.html">DataStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/GregorianDay.html">GregorianDay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/GregorianHour.html">GregorianHour</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/GregorianMinute.html">GregorianMinute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/GregorianSecond.html">GregorianSecond</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/GregorianYear.html">GregorianYear</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/HebrewDay.html">HebrewDay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/HebrewHour.html">HebrewHour</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/HebrewMonthAndYear.html">HebrewMonthAndYear</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/HebrewPart.html">HebrewPart</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/HebrewYear.html">HebrewYear</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/HebrewYear/Length.html">– Length</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Integer.html">Integer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/IntensionalSet.html">IntensionalSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Intersection.html">Intersection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Line.html">Line</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/LineIndex.html">LineIndex</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/LineView.html">LineView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/LocalizationSetting.html">LocalizationSetting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/NestingLevel.html">NestingLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/PatternMatch.html">PatternMatch</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RationalNumber.html">RationalNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RelativeComplement.html">RelativeComplement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticMarkup.html">SemanticMarkup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Shell.html">Shell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Shell/Error.html">– Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/StrictString.html">StrictString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/StrictString/ClusterView.html">– ClusterView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SymmetricDifference.html">SymmetricDifference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Union.html">Union</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/UserFacingText.html">UserFacingText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Weak.html">Weak</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/WholeNumber.html">WholeNumber</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:14SDGCornerstone23ExtendedGraphemeClustera">ExtendedGraphemeCluster</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:14SDGCornerstone8FloatMaxa">FloatMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:14SDGCornerstone6IntMaxa">IntMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:14SDGCornerstone13HebrewWeekdayO8RawValuea">RawValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:14SDGCornerstone16GregorianWeekdayO8RawValuea">RawValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:14SDGCornerstone7UIntMaxa">UIntMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:SC7CGPointV14SDGCornerstoneE6Vectora">Vector</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>⊆(_:_:)</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊆</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt"><a href="../../Protocols/SetDefinition.html">SetDefinition</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
+
+                </div>
+              </div>
+            <p>Returns <code>true</code> if <code>lhs</code> is a subset of <code>rhs</code>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone9FiniteSetP003EdhoiSbx_qd__tAA0C10DefinitionRd__7ElementQyd__AFRtzlFZ1SL_qd__mfp"></a>
+                    <a name="//apple_ref/swift/Parameter/S" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone9FiniteSetP003EdhoiSbx_qd__tAA0C10DefinitionRd__7ElementQyd__AFRtzlFZ1SL_qd__mfp">S</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="o">⊆</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt"><a href="../../Protocols/SetDefinition.html">SetDefinition</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Element</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

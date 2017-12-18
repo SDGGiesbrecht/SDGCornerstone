@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CalendarDate Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/CalendarDate" class="dashAnchor"></a>
+    <a title="CalendarDate Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SDGCornerstone Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SDGGiesbrecht/SDGCornerstone"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SDGCornerstone Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        CalendarDate Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../en-read-me.html">🇨🇦EN Read Me</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../en-related-projects.html">🇨🇦EN Related Projects</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AlternativePatterns.html">AlternativePatterns</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CompositePattern.html">CompositePattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ConditionalPattern.html">ConditionalPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CyclicalNumberGenerator.html">CyclicalNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LiteralPattern.html">LiteralPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NotPattern.html">NotPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Pattern.html">Pattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Pattern/Consumption.html">– Consumption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Preferences.html">Preferences</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PseudorandomNumberGenerator.html">PseudorandomNumberGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RepetitionPattern.html">RepetitionPattern</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Shared.html">Shared</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14SDGCornerstone10backgroundSo14OperationQueueCv">background</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:14SDGCornerstone10foregroundSo14OperationQueueCv">foreground</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/BuildConfiguration.html">BuildConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Casing.html">Casing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/EnglishCasing.html">EnglishCasing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FillDirection.html">FillDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GenreGrammatical.html">GenreGrammatical</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GrammaticalGender.html">GrammaticalGender</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GrammaticalNumber.html">GrammaticalNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GregorianMonth.html">GregorianMonth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GregorianWeekday.html">GregorianWeekday</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/HebrewMonth.html">HebrewMonth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/HebrewWeekday.html">HebrewWeekday</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Mode.html">Mode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PropertyList.html">PropertyList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PropertyList/ReadError.html">– ReadError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RawRepresentableError.html">RawRepresentableError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/WholeArithmeticParseError.html">WholeArithmeticParseError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/_CE_93_CF_81_CE_B1_CE_BC_CE_BC_CE_B1_CF_84_CE_B9_CE_BA_CE_B7_CC_81_CE_A0_CF_84_CF_89_CC_81_CF_83_CE_B7.html">ΓραμματικήΠτώση</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/BidirectionalCollection.html">BidirectionalCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CGFloat.html">CGFloat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CGVector.html">CGVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CharacterSet.html">CharacterSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ClosedRange.html">ClosedRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Comparable.html">Comparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CountableClosedRange.html">CountableClosedRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CountableRange.html">CountableRange</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Data/BinaryView.html">– BinaryView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Date.html">Date</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Decodable.html">Decodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Dictionary.html">Dictionary</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Encodable.html">Encodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Equatable.html">Equatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByArrayLiteral.html">ExpressibleByArrayLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByFloatLiteral.html">ExpressibleByFloatLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByIntegerLiteral.html">ExpressibleByIntegerLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/ExpressibleByStringLiteral.html">ExpressibleByStringLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FileManager.html">FileManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FileManager/RecommendedLocation.html">– RecommendedLocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Float.html">Float</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Float80.html">Float80</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Hashable.html">Hashable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int16.html">Int16</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int32.html">Int32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int64.html">Int64</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int8.html">Int8</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Numeric.html">Numeric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/OperationQueue.html">OperationQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Range.html">Range</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RangeReplaceableCollection.html">RangeReplaceableCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RawRepresentable.html">RawRepresentable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RunLoop.html">RunLoop</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/RunLoop.html#/s:So7RunLoopC14SDGCornerstoneE6DriverC">– Driver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Set.html">Set</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/SetAlgebra.html">SetAlgebra</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/SignedNumeric.html">SignedNumeric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Strideable.html">Strideable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String/Index.html">– Index</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String/UnicodeScalarView.html">– UnicodeScalarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String/UnicodeScalarView.html">– UnicodeScalarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String_2F_2A.html">String/*</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String/*/ClusterView_2A_2F.html">– ClusterView*/</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt32.html">UInt32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt64.html">UInt64</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt8.html">UInt8</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIntMax.html">UIntMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UnicodeScalar.html">UnicodeScalar</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_3D_CC_B8_28_5F_3A_5F_3A_29.html">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone005e_CeboiSbypXpSg_ACtF">≠(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6arccosAA5AngleVyxGxAA14RealArithmeticRzlF">arccos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6arccotAA5AngleVyxGxAA14RealArithmeticRzlF">arccot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6arccscAA5AngleVyxGxAA14RealArithmeticRzlF">arccsc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6arcsecAA5AngleVyxGxAA14RealArithmeticRzlF">arcsec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6arcsinAA5AngleVyxGxAA14RealArithmeticRzlF">arcsin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6arctanAA5AngleVyxGxAA14RealArithmeticRzlF">arctan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6assertySbyXK_AA14UserFacingTextVyxytGyXKs12StaticStringV4fileSu4linetAA12LocalizationRzlF">assert(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6assertySo14OperationQueueC2in_s12StaticStringV8functionAG4fileSu4linetF">assert(in:function:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone16assertionFailureyAA14UserFacingTextVyxytGyXK_s12StaticStringV4fileSu4linetAA12LocalizationRzlF">assertionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone6cachedxxSgz2in_xyKctKlF">cached(in:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3cosxAA5AngleVyxGAA14RealArithmeticRzlF">cos(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3cotxAA5AngleVyxGAA14RealArithmeticRzlF">cot(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3cscxAA5AngleVyxGAA14RealArithmeticRzlF">csc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone1exyAA14RealArithmeticRzlF">e()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone9executingSbSo14OperationQueueC2in_tF">executing(in:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone10fatalErrors5NeverOAA14UserFacingTextVyxytGyXK_s12StaticStringV4fileSu4linetAA12LocalizationRzlF">fatalError(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone16findLocalMaximumxx4near_s20CountableClosedRangeVyxGSg6withinq_xc10inFunctiontAA19OneDimensionalPointRzs11_StrideableRzs10ComparableR_s13SignedInteger6StridesAKPRpzAA0R8Protocol6VectorAA0nT0PRpzr0_lF">findLocalMaximum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone16findLocalMinimumxx4near_s20CountableClosedRangeVyxGSg6withinq_xc10inFunctiontAA19OneDimensionalPointRzs11_StrideableRzs10ComparableR_s13SignedInteger6StridesAKPRpzAA0R8Protocol6VectorAA0nT0PRpzr0_lF">findLocalMinimum(near:within:inFunction:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3gcdxx_xtAA11MeasurementRzlF">gcd(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3gcdxx_xtAA15WholeArithmeticRzlF">gcd(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone10initializeyAA4ModeO4mode_SS21applicationIdentifierAA11PreferencesCm0eG5ClasstF">initialize(mode:applicationIdentifier:applicationPreferencesClass:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3lcmxx_xtAA11MeasurementRzlF">lcm(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3lcmxx_xtAA15WholeArithmeticRzlF">lcm(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone2lnxxAA14RealArithmeticRzlF">ln(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3logxxAA14RealArithmeticRzlF">log(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3logxx6toBase_x2oftAA14RealArithmeticRzlF">log(toBase:of:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone17notImplementedYetys12StaticStringV8function_AD4fileSu4linetF">notImplementedYet(function:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone32notImplementedYetAndCannotReturns5NeverOs12StaticStringV8function_AF4fileSu4linetF">notImplementedYetAndCannotReturn(function:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone12preconditionySbyXK_AA14UserFacingTextVyxytGyXKs12StaticStringV4fileSu4linetAA12LocalizationRzlF">precondition(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone19preconditionFailures5NeverOAA14UserFacingTextVyxytGyXK_s12StaticStringV4fileSu4linetAA12LocalizationRzlF">preconditionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone15primitiveMethods5NeverOSS_s12StaticStringV4fileSu4linetF">primitiveMethod(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3secxAA5AngleVyxGAA14RealArithmeticRzlF">sec(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3sinxAA5AngleVyxGAA14RealArithmeticRzlF">sin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone3tanxAA5AngleVyxGAA14RealArithmeticRzlF">tan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone11unreachables5NeverOSS8function_s12StaticStringV4fileSu4lineSu6columntF">unreachable(function:file:line:column:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_7C_28_5F_3A_29.html">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_7C_28_5F_3A_29.html">|(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone003BxaxyAA14RealArithmeticRzlF">π()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:14SDGCornerstone003FxaxyAA14RealArithmeticRzlF">τ()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A4_28_5F_3A_5F_3A_29.html">≤(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/_E2_89_A5_28_5F_3A_5F_3A_29.html">≥(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Addable.html">Addable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/AdditiveArithmetic.html">AdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ArrayFamily.html">ArrayFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/BitField.html">BitField</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/CalendarComponent.html">CalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone25CardinalCalendarComponentP">CardinalCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone25CodableViaIntegerProtocolP">CodableViaIntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone35CodableViaLosslessStringConvertibleP">CodableViaLosslessStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone21CodableViaMeasurementP">CodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone43CodableViaRawRepresentableCalendarComponentP">CodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone29CodableViaWholeNumberProtocolP">CodableViaWholeNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ComparableSet.html">ComparableSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ConsistentDurationCalendarComponent.html">ConsistentDurationCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ConsistentlyOrderedCalendarComponent.html">ConsistentlyOrderedCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DateDefinition.html">DateDefinition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Day.html">Day</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone37DecodableViaLosslessStringConvertibleP">DecodableViaLosslessStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone23DecodableViaMeasurementP">DecodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone45DecodableViaRawRepresentableCalendarComponentP">DecodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone27DecodableViaWholeArithmeticP">DecodableViaWholeArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone35EncodableViaCustomStringConvertibleP">EncodableViaCustomStringConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone27EncodableViaIntegerProtocolP">EncodableViaIntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone23EncodableViaMeasurementP">EncodableViaMeasurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone45EncodableViaRawRepresentableCalendarComponentP">EncodableViaRawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone31EncodableViaWholeNumberProtocolP">EncodableViaWholeNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone28EnumerationCalendarComponentP">EnumerationCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone27ExtendedGraphemeClusterViewP">ExtendedGraphemeClusterView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FileConvertible.html">FileConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FiniteSet.html">FiniteSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone29FixedScaleOneDimensionalPointP">FixedScaleOneDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FloatFamily.html">FloatFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ICalendarComponent.html">ICalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ISOCalendarComponent.html">ISOCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/InputLocalization.html">InputLocalization</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IntFamily.html">IntFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IntegerProtocol.html">IntegerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IntegralArithmetic.html">IntegralArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/IterableEnumeration.html">IterableEnumeration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Localization.html">Localization</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Measurement.html">Measurement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Month.html">Month</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MutableSet.html">MutableSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Negatable.html">Negatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NumericAdditiveArithmetic.html">NumericAdditiveArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NumericCalendarComponent.html">NumericCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OneDimensionalVector.html">OneDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/OrderedEnumeration.html">OrderedEnumeration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone24OrdinalCalendarComponentP">OrdinalCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PointProtocol.html">PointProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PropertyListValue.html">PropertyListValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Randomizer.html">Randomizer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RangeFamily.html">RangeFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RationalArithmetic.html">RationalArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RationalNumberProtocol.html">RationalNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RawRepresentableCalendarComponent.html">RawRepresentableCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/RealArithmetic.html">RealArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone18RealNumberProtocolP">RealNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SetDefinition.html">SetDefinition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SetInRepresentableUniverse.html">SetInRepresentableUniverse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SharedValueObserver.html">SharedValueObserver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SmallestCalendarComponent.html">SmallestCalendarComponent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/StringFamily.html">StringFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Subtractable.html">Subtractable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TwoDimensionalPoint.html">TwoDimensionalPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TwoDimensionalVector.html">TwoDimensionalVector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/UIntFamily.html">UIntFamily</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:14SDGCornerstone17UnicodeScalarViewP">UnicodeScalarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/VectorProtocol.html">VectorProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Weekday.html">Weekday</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/WholeArithmetic.html">WholeArithmetic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/WholeNumberProtocol.html">WholeNumberProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Year.html">Year</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AbsoluteComplement.html">AbsoluteComplement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Angle.html">Angle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BijectiveMapping.html">BijectiveMapping</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BinaryView.html">BinaryView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CalendarDate.html">CalendarDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CalendarInterval.html">CalendarInterval</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DataStream.html">DataStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GregorianDay.html">GregorianDay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GregorianHour.html">GregorianHour</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GregorianMinute.html">GregorianMinute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GregorianSecond.html">GregorianSecond</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GregorianYear.html">GregorianYear</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HebrewDay.html">HebrewDay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HebrewHour.html">HebrewHour</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HebrewMonthAndYear.html">HebrewMonthAndYear</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HebrewPart.html">HebrewPart</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HebrewYear.html">HebrewYear</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HebrewYear/Length.html">– Length</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Integer.html">Integer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntensionalSet.html">IntensionalSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Intersection.html">Intersection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Line.html">Line</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineIndex.html">LineIndex</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineView.html">LineView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LocalizationSetting.html">LocalizationSetting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NestingLevel.html">NestingLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NilLiteral.html">NilLiteral</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PatternMatch.html">PatternMatch</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RationalNumber.html">RationalNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RelativeComplement.html">RelativeComplement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SemanticMarkup.html">SemanticMarkup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Shell.html">Shell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Shell/Error.html">– Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StrictString.html">StrictString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StrictString/ClusterView.html">– ClusterView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SymmetricDifference.html">SymmetricDifference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Union.html">Union</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UserFacingText.html">UserFacingText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Weak.html">Weak</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WholeNumber.html">WholeNumber</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SDGCornerstone23ExtendedGraphemeClustera">ExtendedGraphemeCluster</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SDGCornerstone8FloatMaxa">FloatMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SDGCornerstone6IntMaxa">IntMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SDGCornerstone13HebrewWeekdayO8RawValuea">RawValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SDGCornerstone16GregorianWeekdayO8RawValuea">RawValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SDGCornerstone7UIntMaxa">UIntMax</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:SC7CGPointV14SDGCornerstoneE6Vectora">Vector</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>CalendarDate</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CalendarDate</span> <span class="p">:</span> <span class="kt">Comparable</span><span class="p">,</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="../Protocols/OneDimensionalPoint.html">OneDimensionalPoint</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/PointProtocol.html">PointProtocol</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A date on a particular calendar.</p>
+
+<p>The <code>CalendarDate</code> structure will remain accurate to its initial definition even if calendar or time zone rules change in the future, such as a change in the Daylight Savings start or end times. (This is in contrast to <code>Date</code>, which simply defines itself by a number of seconds since an epoch. If any rules were changed in the future, converting it back to a calendar‐based representation would result in a different date and time.)</p>
+
+<p>To get the current time, use a static function such as <code>hebrewNow()</code> or <code>gregorianNow()</code>. Each returns a date representing the current time, but is defined according to a different calendar.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Static%20Functions"></a>
+                <a name="//apple_ref/swift/Section/Static Functions" class="dashAnchor"></a>
+                <a href="#/Static%20Functions">
+                  <h3 class="section-name">Static Functions</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV9hebrewNowACyFZ"></a>
+                    <a name="//apple_ref/swift/Method/hebrewNow()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV9hebrewNowACyFZ">hebrewNow()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the current date on the Hebrew calendar.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">hebrewNow</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CalendarDate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV12gregorianNowACyFZ"></a>
+                    <a name="//apple_ref/swift/Method/gregorianNow()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV12gregorianNowACyFZ">gregorianNow()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the current date on the Gregorian calendar.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">gregorianNow</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CalendarDate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateVAcA0C10Definition_p10definition_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(definition:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateVAcA0C10Definition_p10definition_tcfc">init(definition:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates an instance with the provided definition.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">definition</span><span class="p">:</span> <span class="kt"><a href="../Protocols/DateDefinition.html">DateDefinition</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateVAcA10HebrewYearV06hebrewE0_AA0D5MonthO5monthAA0D3DayV3dayAA0D4HourV4hourAA0D4PartV4parttcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(hebrewYear:month:day:hour:part:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateVAcA10HebrewYearV06hebrewE0_AA0D5MonthO5monthAA0D3DayV3dayAA0D4HourV4hourAA0D4PartV4parttcfc">init(hebrewYear:month:day:hour:part:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a date using the Hebrew calendar.</p>
+
+<p>This initializer has two written forms whose effects are the same:</p>
+
+<ul>
+<li><code>init(hebrewYear:month:day:hour:part:)</code> tends to be more legible when used with variables.</li>
+<li><code>init(hebrew:_:_:at:_:)</code> tends to be more legible when used with literals.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Structs/CalendarDate.html#/s:14SDGCornerstone12CalendarDateV10hebrewYearAA06HebrewE0Vv">hebrewYear</a></span> <span class="nv">year</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewYear.html">HebrewYear</a></span><span class="p">,</span> <span class="nv">month</span><span class="p">:</span> <span class="kt"><a href="../Enums/HebrewMonth.html">HebrewMonth</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">tishrei</span><span class="p">,</span> <span class="nv">day</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewDay.html">HebrewDay</a></span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">hour</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewHour.html">HebrewHour</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">part</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewPart.html">HebrewPart</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateVAcA11HebrewMonthO6hebrew_AA0D3DayVAA0D4YearVAA0D4HourV2atAA0D4PartV4parttcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(hebrew:_:_:at:part:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateVAcA11HebrewMonthO6hebrew_AA0D3DayVAA0D4YearVAA0D4HourV2atAA0D4PartV4parttcfc">init(hebrew:_:_:at:part:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a date using the Hebrew calendar.</p>
+
+<p>This initializer has two written forms whose effects are the same:</p>
+
+<ul>
+<li><code><a href="../Structs/CalendarDate.html#/s:14SDGCornerstone12CalendarDateVAcA10HebrewYearV06hebrewE0_AA0D5MonthO5monthAA0D3DayV3dayAA0D4HourV4hourAA0D4PartV4parttcfc">init(hebrewYear:month:day:hour:part:)</a></code> tends to be more legible when used with variables.</li>
+<li><code>init(hebrew:_:_:at:_:)</code> tends to be more legible when used with literals.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">hebrew</span> <span class="nv">month</span><span class="p">:</span> <span class="kt"><a href="../Enums/HebrewMonth.html">HebrewMonth</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">day</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewDay.html">HebrewDay</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">year</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewYear.html">HebrewYear</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">hour</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewHour.html">HebrewHour</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">part</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewPart.html">HebrewPart</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateVAcA13GregorianYearV09gregorianE0_AA0D5MonthO5monthAA0D3DayV3dayAA0D4HourV4hourAA0D6MinuteV6minuteAA0D6SecondV6secondtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(gregorianYear:month:day:hour:minute:second:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateVAcA13GregorianYearV09gregorianE0_AA0D5MonthO5monthAA0D3DayV3dayAA0D4HourV4hourAA0D6MinuteV6minuteAA0D6SecondV6secondtcfc">init(gregorianYear:month:day:hour:minute:second:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a date using the Hebrew calendar.</p>
+
+<p>This initializer has two written forms whose effects are the same:</p>
+
+<ul>
+<li><code>init(gregorianYear:month:day:hour:minute:second:)</code> tends to be more legible when used with variables.</li>
+<li><code><a href="../Structs/CalendarDate.html#/s:14SDGCornerstone12CalendarDateVAcA14GregorianMonthO9gregorian_AA0D3DayVAA0D4YearVAA0D4HourV2atAA0D6MinuteVAA0D6SecondVtcfc">init(gregorian:_:_:at:_:_:)</a></code> tends to be more legible when used with literals.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Structs/CalendarDate.html#/s:14SDGCornerstone12CalendarDateV13gregorianYearAA09GregorianE0Vv">gregorianYear</a></span> <span class="nv">year</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianYear.html">GregorianYear</a></span><span class="p">,</span> <span class="nv">month</span><span class="p">:</span> <span class="kt"><a href="../Enums/GregorianMonth.html">GregorianMonth</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">january</span><span class="p">,</span> <span class="nv">day</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianDay.html">GregorianDay</a></span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">hour</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianHour.html">GregorianHour</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">minute</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianMinute.html">GregorianMinute</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">second</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianSecond.html">GregorianSecond</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateVAcA14GregorianMonthO9gregorian_AA0D3DayVAA0D4YearVAA0D4HourV2atAA0D6MinuteVAA0D6SecondVtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(gregorian:_:_:at:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateVAcA14GregorianMonthO9gregorian_AA0D3DayVAA0D4YearVAA0D4HourV2atAA0D6MinuteVAA0D6SecondVtcfc">init(gregorian:_:_:at:_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a date using the Hebrew calendar.</p>
+
+<p>This initializer has two written forms whose effects are the same:</p>
+
+<ul>
+<li><code><a href="../Structs/CalendarDate.html#/s:14SDGCornerstone12CalendarDateVAcA13GregorianYearV09gregorianE0_AA0D5MonthO5monthAA0D3DayV3dayAA0D4HourV4hourAA0D6MinuteV6minuteAA0D6SecondV6secondtcfc">init(gregorianYear:month:day:hour:minute:second:)</a></code> tends to be more legible when used with variables.</li>
+<li><code>init(gregorian:_:_:at:_:_:)</code> tends to be more legible when used with literals.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">gregorian</span> <span class="nv">month</span><span class="p">:</span> <span class="kt"><a href="../Enums/GregorianMonth.html">GregorianMonth</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">day</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianDay.html">GregorianDay</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">year</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianYear.html">GregorianYear</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">hour</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianHour.html">GregorianHour</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_</span> <span class="nv">minute</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianMinute.html">GregorianMinute</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_</span> <span class="nv">second</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianSecond.html">GregorianSecond</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateVAC10Foundation0C0Vcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateVAC10Foundation0C0Vcfc">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a calendar date using an instance of <code>Date</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">date</span><span class="p">:</span> <span class="kt">Date</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <a href="#/Properties">
+                  <h3 class="section-name">Properties</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV10hebrewYearAA06HebrewE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/hebrewYear" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV10hebrewYearAA06HebrewE0Vv">hebrewYear</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Hebrew year.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hebrewYear</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewYear.html">HebrewYear</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV11hebrewMonthAA06HebrewE0Ov"></a>
+                    <a name="//apple_ref/swift/Property/hebrewMonth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV11hebrewMonthAA06HebrewE0Ov">hebrewMonth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Hebrew month.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hebrewMonth</span><span class="p">:</span> <span class="kt"><a href="../Enums/HebrewMonth.html">HebrewMonth</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV13hebrewWeekdayAA06HebrewE0Ov"></a>
+                    <a name="//apple_ref/swift/Property/hebrewWeekday" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV13hebrewWeekdayAA06HebrewE0Ov">hebrewWeekday</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Hebrew weekday.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hebrewWeekday</span><span class="p">:</span> <span class="kt"><a href="../Enums/HebrewWeekday.html">HebrewWeekday</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV9hebrewDayAA06HebrewE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/hebrewDay" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV9hebrewDayAA06HebrewE0Vv">hebrewDay</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Hebrew day.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hebrewDay</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewDay.html">HebrewDay</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV10hebrewHourAA06HebrewE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/hebrewHour" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV10hebrewHourAA06HebrewE0Vv">hebrewHour</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Hebrew hour.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hebrewHour</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewHour.html">HebrewHour</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV10hebrewPartAA06HebrewE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/hebrewPart" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV10hebrewPartAA06HebrewE0Vv">hebrewPart</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Hebrew part.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hebrewPart</span><span class="p">:</span> <span class="kt"><a href="../Structs/HebrewPart.html">HebrewPart</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV13gregorianYearAA09GregorianE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/gregorianYear" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV13gregorianYearAA09GregorianE0Vv">gregorianYear</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Gregorian year.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gregorianYear</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianYear.html">GregorianYear</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV14gregorianMonthAA09GregorianE0Ov"></a>
+                    <a name="//apple_ref/swift/Property/gregorianMonth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV14gregorianMonthAA09GregorianE0Ov">gregorianMonth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Gregorian month.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gregorianMonth</span><span class="p">:</span> <span class="kt"><a href="../Enums/GregorianMonth.html">GregorianMonth</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV16gregorianWeekdayAA09GregorianE0Ov"></a>
+                    <a name="//apple_ref/swift/Property/gregorianWeekday" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV16gregorianWeekdayAA09GregorianE0Ov">gregorianWeekday</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Gregorian weekday.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gregorianWeekday</span><span class="p">:</span> <span class="kt"><a href="../Enums/GregorianWeekday.html">GregorianWeekday</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV12gregorianDayAA09GregorianE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/gregorianDay" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV12gregorianDayAA09GregorianE0Vv">gregorianDay</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Gregorian day.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gregorianDay</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianDay.html">GregorianDay</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV13gregorianHourAA09GregorianE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/gregorianHour" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV13gregorianHourAA09GregorianE0Vv">gregorianHour</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Gregorian hour.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gregorianHour</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianHour.html">GregorianHour</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV15gregorianMinuteAA09GregorianE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/gregorianMinute" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV15gregorianMinuteAA09GregorianE0Vv">gregorianMinute</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Gregorian minute.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gregorianMinute</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianMinute.html">GregorianMinute</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV15gregorianSecondAA09GregorianE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/gregorianSecond" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV15gregorianSecondAA09GregorianE0Vv">gregorianSecond</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The Gregorian second.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gregorianSecond</span><span class="p">:</span> <span class="kt"><a href="../Structs/GregorianSecond.html">GregorianSecond</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Conversions"></a>
+                <a name="//apple_ref/swift/Section/Conversions" class="dashAnchor"></a>
+                <a href="#/Conversions">
+                  <h3 class="section-name">Conversions</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV9convertedxxm2to_tAA0C10DefinitionRzlF"></a>
+                    <a name="//apple_ref/swift/Method/converted(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV9convertedxxm2to_tAA0C10DefinitionRzlF">converted(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a conversion of the definition to a specific <code><a href="../Protocols/DateDefinition.html">DateDefinition</a></code> type.</p>
+
+<p>This method is preferred to manual conversions, as the returned conversions are automatically cached.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">converted</span><span class="o">&lt;</span><span class="kt">D</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DateDefinition.html">DateDefinition</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">to</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">D</span><span class="o">.</span><span class="k">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">D</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type to convert to.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The converted definition.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Text%20Representations"></a>
+                <a name="//apple_ref/swift/Section/Text Representations" class="dashAnchor"></a>
+                <a href="#/Text%20Representations">
+                  <h3 class="section-name">Text Representations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV15dateInISOFormatAA12StrictStringVyF"></a>
+                    <a name="//apple_ref/swift/Method/dateInISOFormat()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV15dateInISOFormatAA12StrictStringVyF">dateInISOFormat()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the date in the ISO format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">dateInISOFormat</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV06hebrewC16InBritishEnglishAA12StrictStringVSb8withYear_Sb0J7WeekdaytF"></a>
+                    <a name="//apple_ref/swift/Method/hebrewDateInBritishEnglish(withYear:withWeekday:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV06hebrewC16InBritishEnglishAA12StrictStringVSb8withYear_Sb0J7WeekdaytF">hebrewDateInBritishEnglish(withYear:withWeekday:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the Hebrew date in British English.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hebrewDateInBritishEnglish</span><span class="p">(</span><span class="nv">withYear</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">withWeekday</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV06hebrewC17InAmericanEnglishAA12StrictStringVSb8withYear_Sb0J7WeekdaytF"></a>
+                    <a name="//apple_ref/swift/Method/hebrewDateInAmericanEnglish(withYear:withWeekday:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV06hebrewC17InAmericanEnglishAA12StrictStringVSb8withYear_Sb0J7WeekdaytF">hebrewDateInAmericanEnglish(withYear:withWeekday:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the Hebrew date in American English.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hebrewDateInAmericanEnglish</span><span class="p">(</span><span class="nv">withYear</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">withWeekday</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV09gregorianC16InBritishEnglishAA12StrictStringVSb8withYear_Sb0J7WeekdaytF"></a>
+                    <a name="//apple_ref/swift/Method/gregorianDateInBritishEnglish(withYear:withWeekday:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV09gregorianC16InBritishEnglishAA12StrictStringVSb8withYear_Sb0J7WeekdaytF">gregorianDateInBritishEnglish(withYear:withWeekday:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the Gregorian date in British English.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">gregorianDateInBritishEnglish</span><span class="p">(</span><span class="nv">withYear</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">withWeekday</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV09gregorianC17InAmericanEnglishAA12StrictStringVSb8withYear_Sb0J7WeekdaytF"></a>
+                    <a name="//apple_ref/swift/Method/gregorianDateInAmericanEnglish(withYear:withWeekday:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV09gregorianC17InAmericanEnglishAA12StrictStringVSb8withYear_Sb0J7WeekdaytF">gregorianDateInAmericanEnglish(withYear:withWeekday:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the Gregorian date in American English.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">gregorianDateInAmericanEnglish</span><span class="p">(</span><span class="nv">withYear</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">withWeekday</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0030hebraischesDatumAufDeutsch_bkoAA12StrictStringVSb7mitJahr_Sb0F9WochentagtF"></a>
+                    <a name="//apple_ref/swift/Method/hebräischesDatumAufDeutsch(mitJahr:mitWochentag:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0030hebraischesDatumAufDeutsch_bkoAA12StrictStringVSb7mitJahr_Sb0F9WochentagtF">hebräischesDatumAufDeutsch(mitJahr:mitWochentag:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gibt das hebräische Datum auf Deutsch zurück.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">hebrä</span><span class="nf">ischesDatumAufDeutsch</span><span class="p">(</span><span class="nv">mitJahr</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">mitWochentag</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV30gregorianischesDatumAufDeutschAA12StrictStringVSb7mitJahr_Sb0J9WochentagtF"></a>
+                    <a name="//apple_ref/swift/Method/gregorianischesDatumAufDeutsch(mitJahr:mitWochentag:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV30gregorianischesDatumAufDeutschAA12StrictStringVSb7mitJahr_Sb0J9WochentagtF">gregorianischesDatumAufDeutsch(mitJahr:mitWochentag:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gibt das gregorianische Datum auf Deutsch zurück.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">gregorianischesDatumAufDeutsch</span><span class="p">(</span><span class="nv">mitJahr</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">mitWochentag</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0032dateHebraiqueEnFrancais_ztmJmqGaAA14SemanticMarkupVAA6CasingO_Sb6avecAnSb0G13JourDeSemainetF"></a>
+                    <a name="//apple_ref/swift/Method/dateHébraïqueEnFrançais(_:avecAn:avecJourDeSemaine:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0032dateHebraiqueEnFrancais_ztmJmqGaAA14SemanticMarkupVAA6CasingO_Sb6avecAnSb0G13JourDeSemainetF">dateHébraïqueEnFrançais(_:avecAn:avecJourDeSemaine:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retourne la date hébraïque en français.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">dateHé</span><span class="n">braï</span><span class="n">queEnFranç</span><span class="nf">ais</span><span class="p">(</span><span class="n">_</span> <span class="nv">majuscules</span><span class="p">:</span> <span class="kt"><a href="../Enums/Casing.html">Casing</a></span><span class="p">,</span> <span class="nv">avecAn</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">avecJourDeSemaine</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/SemanticMarkup.html">SemanticMarkup</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0032dateGregorienneEnFrancais_nvnBCfAA14SemanticMarkupVAA6CasingO_Sb6avecAnSb0G13JourDeSemainetF"></a>
+                    <a name="//apple_ref/swift/Method/dateGrégorienneEnFrançais(_:avecAn:avecJourDeSemaine:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0032dateGregorienneEnFrancais_nvnBCfAA14SemanticMarkupVAA6CasingO_Sb6avecAnSb0G13JourDeSemainetF">dateGrégorienneEnFrançais(_:avecAn:avecJourDeSemaine:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retourne la date grégorienne en français.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">dateGré</span><span class="n">gorienneEnFranç</span><span class="nf">ais</span><span class="p">(</span><span class="n">_</span> <span class="nv">majuscules</span><span class="p">:</span> <span class="kt"><a href="../Enums/Casing.html">Casing</a></span><span class="p">,</span> <span class="nv">avecAn</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">avecJourDeSemaine</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/SemanticMarkup.html">SemanticMarkup</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0042lsaaazBCekaJfBeeccJafdxdfygginuapbCajJbycjAA12StrictStringVSb0014lsaFEakbBaikcm_Sb0032lsaaHFbgaAexdcbguccbFaCeciHcFaxjtF"></a>
+                    <a name="//apple_ref/swift/Method/εβραϊκήΗμερομηνίαΣεΕλληνικά(μεΧρόνο:μεΗμέραΤηςΕβδομάδας:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0042lsaaazBCekaJfBeeccJafdxdfygginuapbCajJbycjAA12StrictStringVSb0014lsaFEakbBaikcm_Sb0032lsaaHFbgaAexdcbguccbFaCeciHcFaxjtF">εβραϊκήΗμερομηνίαΣεΕλληνικά(μεΧρόνο:μεΗμέραΤηςΕβδομάδας:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Επιστρέφει την εβραϊκή ημερομηνία στα ελληνικά.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">εβραϊ</span><span class="n">κή</span><span class="kt">Ημερομηνί</span><span class="n">αΣεΕλληνικά</span><span class="p">(</span><span class="n">μεΧρό</span><span class="nv">νο</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">μεΗμέ</span><span class="n">ραΤηςΕβδομά</span><span class="nv">δας</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0043lsaaaFAdiaHewedcmaBadtcdfyggvtaobuhjBbiEcdiAA12StrictStringVSb0014lsaFEakbBaikcm_Sb0032lsaaHFbgaAexdcbguccbFaCeciHcFaxjtF"></a>
+                    <a name="//apple_ref/swift/Method/γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο:μεΗμέραΤηςΕβδομάδας:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0043lsaaaFAdiaHewedcmaBadtcdfyggvtaobuhjBbiEcdiAA12StrictStringVSb0014lsaFEakbBaikcm_Sb0032lsaaHFbgaAexdcbguccbFaCeciHcFaxjtF">γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο:μεΗμέραΤηςΕβδομάδας:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Επιστρέφει την Γρηγοριανή ημερομηνία στα ελληνικά.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">γρηγοριανή</span><span class="kt">Ημερομηνί</span><span class="n">αΣεΕλληνικά</span><span class="p">(</span><span class="n">μεΧρό</span><span class="nv">νο</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">μεΗμέ</span><span class="n">ραΤηςΕβδομά</span><span class="nv">δας</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0023mdbaGcfbaFccddDgeDeffspAA12StrictStringVSb0011mdbIbzanhIb_Sb0017mdbaBdocuAadEbiIetF"></a>
+                    <a name="//apple_ref/swift/Method/תאריך־עברי־בעברית(עם־שנה:עם־יום־שבוע:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0023mdbaGcfbaFccddDgeDeffspAA12StrictStringVSb0011mdbIbzanhIb_Sb0017mdbaBdocuAadEbiIetF">תאריך־עברי־בעברית(עם־שנה:עם־יום־שבוע:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>מחזירה את התאריך העברי בעברית.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">תאריך</span><span class="n">־</span><span class="n">עברי</span><span class="n">־</span><span class="nf">בעברית</span><span class="p">(</span><span class="n">עם</span><span class="n">־</span><span class="nv">שנה</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">עם</span><span class="n">־</span><span class="n">יום</span><span class="n">־</span><span class="nv">שבוע</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0030mdbaGcbgadaBaAbebddAhJaIfecixuAA12StrictStringVSb0011mdbIbzanhIb_Sb0017mdbaBdocuAadEbiIetF"></a>
+                    <a name="//apple_ref/swift/Method/תאריך־גרגוריאני־בעברית(עם־שנה:עם־יום־שבוע:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0030mdbaGcbgadaBaAbebddAhJaIfecixuAA12StrictStringVSb0011mdbIbzanhIb_Sb0017mdbaBdocuAadEbiIetF">תאריך־גרגוריאני־בעברית(עם־שנה:עם־יום־שבוע:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>מחזירה את התאריך הגרגוריאני בעברית.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">תאריך</span><span class="n">־</span><span class="n">גרגוריאני</span><span class="n">־</span><span class="nf">בעברית</span><span class="p">(</span><span class="n">עם</span><span class="n">־</span><span class="nv">שנה</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">עם</span><span class="n">־</span><span class="n">יום</span><span class="n">־</span><span class="nv">שבוע</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV15timeInISOFormatAA12StrictStringVSb14includeSeconds_tF"></a>
+                    <a name="//apple_ref/swift/Method/timeInISOFormat(includeSeconds:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV15timeInISOFormatAA12StrictStringVSb14includeSeconds_tF">timeInISOFormat(includeSeconds:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the time in the ISO format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">timeInISOFormat</span><span class="p">(</span><span class="nv">includeSeconds</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV27twentyFourHourTimeInEnglishAA12StrictStringVyF"></a>
+                    <a name="//apple_ref/swift/Method/twentyFourHourTimeInEnglish()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV27twentyFourHourTimeInEnglishAA12StrictStringVyF">twentyFourHourTimeInEnglish()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the time in English in the twenty‐four–hour format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">twentyFourHourTimeInEnglish</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV23twelveHourTimeInEnglishAA12StrictStringVyF"></a>
+                    <a name="//apple_ref/swift/Method/twelveHourTimeInEnglish()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV23twelveHourTimeInEnglishAA12StrictStringVyF">twelveHourTimeInEnglish()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the time in English in the twelve‐hour format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">twelveHourTimeInEnglish</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV17uhrzeitAufDeutschAA12StrictStringVyF"></a>
+                    <a name="//apple_ref/swift/Method/uhrzeitAufDeutsch()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV17uhrzeitAufDeutschAA12StrictStringVyF">uhrzeitAufDeutsch()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gibt die Uhrzeit auf Deutsch zurück.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">uhrzeitAufDeutsch</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0019heureEnFrancais_AEiAA12StrictStringVyF"></a>
+                    <a name="//apple_ref/swift/Method/heureEnFrançais()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0019heureEnFrancais_AEiAA12StrictStringVyF">heureEnFrançais()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retourne l’heure en français.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">heureEnFranç</span><span class="nf">ais</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0025lsaaHFbybvdcAarskiaBaCcIgAA12StrictStringVSb0014lsaFEakbBaikcm_Sb0032lsaaHFbgaAexdcbguccbFaCeciHcFaxjtF"></a>
+                    <a name="//apple_ref/swift/Method/ώραΣεΕλληνικά(μεΧρόνο:μεΗμέραΤηςΕβδομάδας:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0025lsaaHFbybvdcAarskiaBaCcIgAA12StrictStringVSb0014lsaFEakbBaikcm_Sb0032lsaaHFbgaAexdcbguccbFaCeciHcFaxjtF">ώραΣεΕλληνικά(μεΧρόνο:μεΗμέραΤηςΕβδομάδας:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Επιστρέφει την ώρα στα ελληνικά.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">ώ</span><span class="n">ραΣεΕλληνικά</span><span class="p">(</span><span class="n">μεΧρό</span><span class="nv">νο</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">μεΗμέ</span><span class="n">ραΤηςΕβδομά</span><span class="nv">δας</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV0016mdbCbajCaDcdDccsAA12StrictStringVyF"></a>
+                    <a name="//apple_ref/swift/Method/שעה־בעברית()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV0016mdbCbajCaDcdDccsAA12StrictStringVyF">שעה־בעברית()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>מחזירה את השעה בעברית.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">שעה</span><span class="n">־</span><span class="nf">בעברית</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/iCalendar"></a>
+                <a name="//apple_ref/swift/Section/iCalendar" class="dashAnchor"></a>
+                <a href="#/iCalendar">
+                  <h3 class="section-name">iCalendar</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV23floatingICalendarFormatAA12StrictStringVyF"></a>
+                    <a name="//apple_ref/swift/Method/floatingICalendarFormat()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV23floatingICalendarFormatAA12StrictStringVyF">floatingICalendarFormat()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a string representation in the floating iCalendar format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">floatingICalendarFormat</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV01iB6FormatAA12StrictStringVyF"></a>
+                    <a name="//apple_ref/swift/Method/iCalendarFormat()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV01iB6FormatAA12StrictStringVyF">iCalendarFormat()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a string representation in UTC in the iCalendar format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">iCalendarFormat</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/StrictString.html">StrictString</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Comparable"></a>
+                <a name="//apple_ref/swift/Section/Comparable" class="dashAnchor"></a>
+                <a href="#/Comparable">
+                  <h3 class="section-name">Comparable</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV1loiSbAC_ACtFZ"></a>
+                    <a name="//apple_ref/swift/Method/&lt;(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV1loiSbAC_ACtFZ">&lt;(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if the left value is less than the right.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">&lt;</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">CalendarDate</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">CalendarDate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Another value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Decodable"></a>
+                <a name="//apple_ref/swift/Section/Decodable" class="dashAnchor"></a>
+                <a href="#/Decodable">
+                  <h3 class="section-name">Decodable</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV8registeryAA0C10Definition_pXpFZ"></a>
+                    <a name="//apple_ref/swift/Method/register(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV8registeryAA0C10Definition_pXpFZ">register(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Registers a definition type so that its instances can be decoded.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">register</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Protocols/DateDefinition.html">DateDefinition</a></span><span class="o">.</span><span class="k">Type</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateVACs7Decoder_p4from_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateVACs7Decoder_p4from_tKcfc">init(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new instance by decoding from the given decoder.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>decoder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The decoder to read data from.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Encodable"></a>
+                <a name="//apple_ref/swift/Section/Encodable" class="dashAnchor"></a>
+                <a href="#/Encodable">
+                  <h3 class="section-name">Encodable</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV6encodeys7Encoder_p2to_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV6encodeys7Encoder_p2to_tKF">encode(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Encodes this value into the given encoder.</p>
+
+                        <a href="../Structs/CalendarDate/encode_28to_3A_29.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>encoder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The encoder to write data to.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Equatable"></a>
+                <a name="//apple_ref/swift/Section/Equatable" class="dashAnchor"></a>
+                <a href="#/Equatable">
+                  <h3 class="section-name">Equatable</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV2eeoiSbAC_ACtFZ"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV2eeoiSbAC_ACtFZ">==(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if the two values are equal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">CalendarDate</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">CalendarDate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value to compare.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Another value to compare.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/PointProtocol"></a>
+                <a name="//apple_ref/swift/Section/PointProtocol" class="dashAnchor"></a>
+                <a href="#/PointProtocol">
+                  <h3 class="section-name">PointProtocol</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV2peoiyACz_AA0B8IntervalVys7Float80VGtFZ"></a>
+                    <a name="//apple_ref/swift/Method/+=(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV2peoiyACz_AA0B8IntervalVys7Float80VGtFZ">+=(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Moves the point on the left by the vector on the right.</p>
+<div class="aside aside-nonmutating-variant">
+    <p class="aside-title">Nonmutating variant</p>
+    <p>+</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">+=</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">CalendarDate</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../Structs/CalendarInterval.html">CalendarInterval</a></span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:14SDGCornerstone8FloatMaxa">FloatMax</a></span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The point to modify.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The vector to add.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SDGCornerstone12CalendarDateV003tJgoiAA0B8IntervalVys7Float80VGAC_ACtFZ"></a>
+                    <a name="//apple_ref/swift/Method/−(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SDGCornerstone12CalendarDateV003tJgoiAA0B8IntervalVys7Float80VGAC_ACtFZ">−(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the vector that leads from the point on the left to the point on the right.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">−</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">CalendarDate</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">CalendarDate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/CalendarInterval.html">CalendarInterval</a></span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:14SDGCornerstone8FloatMaxa">FloatMax</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The endpoint.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The startpoint.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright ©2017 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
