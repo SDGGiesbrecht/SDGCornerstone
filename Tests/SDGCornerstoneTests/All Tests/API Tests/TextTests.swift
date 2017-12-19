@@ -258,7 +258,7 @@ class TextTests : TestCase {
 
             XCTAssertEqual(S(helloWorld.scalars), helloWorld)
             //XCTAssertEqual(S(helloWorld.clusters), helloWorld)
-            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift 4.0.2)_]
+            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift 4.0.3)_]
 
             XCTAssertNotNil(helloWorld.scalars.first)
 
@@ -266,7 +266,7 @@ class TextTests : TestCase {
             XCTAssert(helloWorld ∈ set)
 
             //XCTAssert(S(S.ClusterView()).scalars.isEmpty)
-            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift 4.0.2)_]
+            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift 4.0.3)_]
             XCTAssert(S(S.ScalarView()).clusters.isEmpty)
         }
 
@@ -285,7 +285,7 @@ class TextTests : TestCase {
         let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
         XCTAssertEqual(utf16, unicode)
         #if false
-            // [_Workaround: macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16. (Swift 4.0.2)_]
+            // [_Workaround: macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16. (Swift 4.0.3)_]
             let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
             XCTAssertEqual(utf32, unicode)
 
@@ -370,7 +370,7 @@ class TextTests : TestCase {
         func verifyVisible(_ codePoint: Int) {
             if let scalar = UnicodeScalar(codePoint) {
                 #if !os(Linux)
-                    // [_Workaround: A number of obscure compatibility characters end up empty on Linux. (Swift 4.0.2)_]
+                    // [_Workaround: A number of obscure compatibility characters end up empty on Linux. (Swift 4.0.3)_]
                     XCTAssertNotEqual(scalar.visibleRepresentation, "")
                 #endif
             }

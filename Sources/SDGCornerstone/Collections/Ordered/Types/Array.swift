@@ -17,7 +17,7 @@ public protocol ArrayFamily : CustomDebugStringConvertible, CustomReflectable, C
 
 }
 
-// [_Workaround: Should only conform to PropertyListValue when values conform to `PropertyListValue`. Currently not constrainable. (Swift 4.0.2)_]
+// [_Workaround: Should only conform to PropertyListValue when values conform to `PropertyListValue`. Currently not constrainable. (Swift 4.0.3)_]
 extension Array : ArrayFamily, PropertyListValue {}
 extension ArraySlice : ArrayFamily {}
 extension ContiguousArray : ArrayFamily {}
@@ -25,7 +25,7 @@ extension ContiguousArray : ArrayFamily {}
 extension ArrayFamily where Element : Equatable {
     // MARK: - where Element : Equatable
 
-    // [_Workaround: This can be refactored once conditional conformance is available. (Swift 4.0.2)_]
+    // [_Workaround: This can be refactored once conditional conformance is available. (Swift 4.0.3)_]
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
     /// Returns `true` if the two values are inequal.
