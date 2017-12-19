@@ -38,7 +38,7 @@ public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByString
     // [_Define Documentation: SDGCornerstone.StringFamily.init(clusters:)_]
     /// Creates a string from a collection of clusters.
     //init(_ clusters: ClusterView)
-    // [_Workaround: A compiler bug would make this unconformable for String. (Swift 4.0.2)_]
+    // [_Workaround: A compiler bug would make this unconformable for String. (Swift 4.0.3)_]
 
     // MARK: - Properties
 
@@ -51,7 +51,7 @@ public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByString
     var clusters: ClusterView { get set }
 }
 
-extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift Swift 4.0.2)_] */ {
+extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift Swift 4.0.3)_] */ {
     // MARK: - where ScalarView.Index == String.ScalarView.Index
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]
