@@ -60,25 +60,6 @@ Quotation Chapter: Isaiah 28
 ...and much more.
 [_End_]
 
-([_Workaround: This should be centralized._])
-[_Begin Read‐Me About Section_]
-[_🇨🇦EN_]
-The [_Project_] project is maintained by Jeremy David Giesbrecht.
-
-If [_Project_] saves you money, consider giving some of it as a [donation](https://paypal.me/JeremyGiesbrecht).
-
-If [_Project_] saves you time, consider devoting some of it to [contributing]([_Repository URL_]) back to the project.
-
-> [Ἄξιος γὰρ ὁ ἐργάτης τοῦ μισθοῦ αὐτοῦ ἐστι.<br>For the worker is worthy of his wages.](https://www.biblegateway.com/passage/?search=Luke+10&version=SBLGNT;NIV)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;―‎ישוע/Yeshuʼa
-[_End_]
-
-([_Workaround: This should be centralized._])
-[_Begin Related Projects_]
-https://github.com/SDGGiesbrecht/Workspace
-https://github.com/SDGGiesbrecht/SDGCommandLine
-https://github.com/SDGGiesbrecht/SDGCornerstone
-[_End_]
-
 Encrypted Travis Deployment Key: gzx7ARrCgcNJiDtT/FALmdVgEYO5p7ZxlUuzOgwUTe9whOKD18POfAkgtRgYHLT7BMeN6+l9d26FJYfeH9Gvr6M4GVLqFpxKeW/DbcGABiJKok+qXkCXjbW+7ImqqarMyhXLyTZA5CdTAVTMLc9CnpqQJZphih2mbQZf06Jg3ZzCLRcsWmfvoehEgGTkt/xWNomYKZSuXOJZqNAMz847Tdx3rnOz8D41m1y+Y1xEOCdEnxtIg3JYQDs2OGjq0VT61qRaNm3fDf/f/VUK77q6vLUhCAXmdm19Qw5vSRt4u8G6pTuFdHxlRy9NrIHXzFj7IeomvtJzmAgxo+f+zRTgBcwbOpwHy3H2B1DILGwpWxQxsKelSjGJM8mEvs6cdXjTuvuLC4vwrkQyauDFlA2O/O3vZJFGyw6hJT2crVAO6tU2r71I36MgtI7ut8FCuHFVINg9suUY2MxzF1E6sJ3v7Q9btz2HTFpiO/2/v3kSsbt/jJUCv2/dak3TrIlmispW+8Pba/xmQmlPj6MW+LdaWDV6fkexpi7+QyLfPTCAbfPuXx9ePIoWGmrSqe0nDsZIiPC+uPUXVYlj25I84YA+QI3eb2eTVWO/nhw/461184rU6Tv5g2SBj0FIkaDTHe21U8vskKvRTDjwuQ1/uQLl34SoVHPcM+XRl6sb3CNA+Zs=
 
 Skip Simulator: True
