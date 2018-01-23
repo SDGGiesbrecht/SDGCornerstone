@@ -114,22 +114,22 @@ extension Range where Bound == LineIndex {
     // MARK: - where Bound == LineIndex
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
-    public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index>? {
+    public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index> {
         return lowerBound.samePosition(in: scalars) ..< upperBound.samePosition(in: scalars)
     }
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
-    public func sameRange(in scalars: String.ScalarView) -> Range<String.ScalarView.Index>? {
+    public func sameRange(in scalars: String.ScalarView) -> Range<String.ScalarView.Index> {
         return lowerBound.samePosition(in: scalars) ..< upperBound.samePosition(in: scalars)
     }
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
-    public func sameRange(in clusters: StrictString.ClusterView) -> Range<StrictString.ClusterView.Index>? {
+    public func sameRange(in clusters: StrictString.ClusterView) -> Range<StrictString.ClusterView.Index> {
         return lowerBound.samePosition(in: clusters) ..< upperBound.samePosition(in: clusters)
     }
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
-    public func sameRange(in clusters: String.ClusterView) -> Range<String.ClusterView.Index>? {
+    public func sameRange(in clusters: String.ClusterView) -> Range<String.ClusterView.Index> {
         return lowerBound.samePosition(in: clusters) ..< upperBound.samePosition(in: clusters)
     }
 }
@@ -138,7 +138,7 @@ extension Range where Bound == StrictString.ClusterView.Index {
     // MARK: - where Bound == StrictString.ClusterView.Index
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
-    public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index>? {
+    public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index> {
         return lowerBound.samePosition(in: scalars) ..< upperBound.samePosition(in: scalars)
     }
 }
@@ -191,7 +191,7 @@ extension Range where Bound == String.ClusterView.Index {
     // MARK: - where Bound == String.ClusterView.Index
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
-    public func sameRange(in scalars: String.ScalarView) -> Range<String.ScalarView.Index>? {
+    public func sameRange(in scalars: String.ScalarView) -> Range<String.ScalarView.Index> {
         return lowerBound.samePosition(in: scalars) ..< upperBound.samePosition(in: scalars)
     }
 }
