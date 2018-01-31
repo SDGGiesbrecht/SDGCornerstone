@@ -127,6 +127,16 @@ extension Collection where Element : Equatable {
         return firstMatch(for: LiteralPattern(pattern), in: searchRange)
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    /// Returns the first match for `pattern` in the specified subrange.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func firstMatch(for pattern: Self, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+        return firstMatch(for: LiteralPattern(pattern), in: searchRange)
+    }
+
     // [_Define Documentation: SDGCornerstone.Collection.matches(for:in:)_]
     /// Returns a list of all matches for `pattern` in the specified subrange.
     ///
@@ -183,6 +193,18 @@ extension Collection where Element : Equatable {
         return matches(for: LiteralPattern(pattern), in: searchRange)
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    /// Returns a list of all matches for `pattern` in the specified subrange.
+    ///
+    /// This does not check for overlapping matches.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
+    public func matches(for pattern: Self, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+        return matches(for: LiteralPattern(pattern), in: searchRange)
+    }
+
     // [_Define Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
     ///
@@ -219,6 +241,15 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     public func prefix<C : Collection>(upTo pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
+        return prefix(upTo: LiteralPattern(pattern))
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix(upTo pattern: Self) -> PatternMatch<Self>? {
         return prefix(upTo: LiteralPattern(pattern))
     }
 
@@ -261,6 +292,15 @@ extension Collection where Element : Equatable {
         return prefix(through: LiteralPattern(pattern))
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func prefix(through pattern: Self) -> PatternMatch<Self>? {
+        return prefix(through: LiteralPattern(pattern))
+    }
+
     // [_Define Documentation: SDGCornerstone.Collection.suffix(from:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
@@ -300,6 +340,15 @@ extension Collection where Element : Equatable {
         return suffix(from: LiteralPattern(pattern))
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix(from pattern: Self) -> PatternMatch<Self>? {
+        return suffix(from: LiteralPattern(pattern))
+    }
+
     // [_Define Documentation: SDGCornerstone.Collection.suffix(after:)_]
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
@@ -336,6 +385,15 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     public func suffix<C : Collection>(after pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
+        return suffix(after: LiteralPattern(pattern))
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
+    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func suffix(after pattern: Self) -> PatternMatch<Self>? {
         return suffix(after: LiteralPattern(pattern))
     }
 
@@ -383,6 +441,15 @@ extension Collection where Element : Equatable {
         return components(separatedBy: LiteralPattern(pattern))
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    /// Returns the segments of `self` separated by instances of `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func components(separatedBy pattern: Self) -> [PatternMatch<Self>] {
+        return components(separatedBy: LiteralPattern(pattern))
+    }
+
     // [_Define Documentation: SDGCornerstone.Collection.contains(pattern:)_]
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
@@ -419,6 +486,15 @@ extension Collection where Element : Equatable {
         return contains(LiteralPattern(pattern))
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    /// Returns `true` if `self` contains an match for `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    public func contains(_ pattern: Self) -> Bool {
+        return contains(LiteralPattern(pattern))
+    }
+
     // [_Define Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
     /// Returns `true` if `self` begins with `pattern`.
     ///
@@ -452,6 +528,15 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     public func hasPrefix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
+        return hasPrefix(LiteralPattern(pattern))
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    public func hasPrefix(_ pattern: Self) -> Bool {
         return hasPrefix(LiteralPattern(pattern))
     }
 
@@ -492,12 +577,16 @@ extension Collection where Element : Equatable {
         return hasSuffix(LiteralPattern(pattern))
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
-    /// Returns the longest prefix subsequence shared with the other collection.
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
-    ///     - other: The other collection
-    public func commonPrefix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+    ///     - pattern: The pattern to try.
+    public func hasSuffix(_ pattern: Self) -> Bool {
+        return hasSuffix(LiteralPattern(pattern))
+    }
+
+    private func _commonPrefix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         var end: Index = startIndex
         for (ownIndex, otherIndex) in zip(indices, other.indices) {
             if self[ownIndex] == other[otherIndex] {
@@ -508,20 +597,25 @@ extension Collection where Element : Equatable {
         }
         return PatternMatch(range: startIndex ..< end, in: self)
     }
+    // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    /// Returns the longest prefix subsequence shared with the other collection.
+    ///
+    /// - Parameters:
+    ///     - other: The other collection
+    public func commonPrefix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+        return _commonPrefix(with: other)
+    }
 
-    // [_Example 1: Nesting Level_]
-    /// Returns the first nesting level found in the specified range.
+    // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    /// Returns the longest prefix subsequence shared with the other collection.
     ///
-    /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
-    ///
-    /// ```swift
-    /// let equation = "2(3x − (y + 4)) = z"
-    /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
-    ///
-    /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
-    /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
-    /// ```
-    public func firstNestingLevel<C : Collection, D : Collection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
+    /// - Parameters:
+    ///     - other: The other collection
+    public func commonPrefix(with other: Self) -> PatternMatch<Self> {
+        return _commonPrefix(with: other)
+    }
+
+    private func _firstNestingLevel<C : Collection, D : Collection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
         var searchArea = searchRange ?? bounds
 
         guard let start = firstMatch(for: LiteralPattern(openingToken), in: searchArea)?.range else {
@@ -548,6 +642,50 @@ extension Collection where Element : Equatable {
 
         // No more hits, level never closed.
         return nil
+    }
+    // [_Define Documentation: SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:)_]
+    // [_Example 1: Nesting Level_]
+    /// Returns the first nesting level found in the specified range.
+    ///
+    /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
+    ///
+    /// ```swift
+    /// let equation = "2(3x − (y + 4)) = z"
+    /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
+    ///
+    /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
+    /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
+    /// ```
+    public func firstNestingLevel<C : Collection, D : Collection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
+        return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: searchRange)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:)_]
+    /// Returns the first nesting level found in the specified range.
+    ///
+    /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
+    ///
+    /// ```swift
+    /// let equation = "2(3x − (y + 4)) = z"
+    /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
+    ///
+    /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
+    /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
+    /// ```
+    // [_Example 1: Nesting Level_]
+    /// Returns the first nesting level found in the specified range.
+    ///
+    /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
+    ///
+    /// ```swift
+    /// let equation = "2(3x − (y + 4)) = z"
+    /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
+    ///
+    /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
+    /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
+    /// ```
+    public func firstNestingLevel(startingWith openingToken: Self, endingWith closingToken: Self, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? {
+        return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: searchRange)
     }
 
     // [_Define Documentation: SDGCornerstone.Collection.advance(_: over:)_]
@@ -600,6 +738,18 @@ extension Collection where Element : Equatable {
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @discardableResult public func advance<C : Collection>(_ index: inout Index, over pattern: C) -> Bool where C.Element == Self.Element {
+        return advance(&index, over: LiteralPattern(pattern))
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    /// Advances the index over the pattern.
+    ///
+    /// - Parameters:
+    ///     - index: The index to advance.
+    ///     - pattern: The pattern to advance over.
+    ///
+    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
+    @discardableResult public func advance(_ index: inout Index, over pattern: Self) -> Bool {
         return advance(&index, over: LiteralPattern(pattern))
     }
 }
