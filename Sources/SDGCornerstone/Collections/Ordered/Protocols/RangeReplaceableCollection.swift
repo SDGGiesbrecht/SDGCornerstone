@@ -824,7 +824,7 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
-    public mutating func mutateMatches(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> Self) {
+    public mutating func mutateMatches<C : Collection>(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
         mutateMatches(for: LiteralPattern(pattern), mutation: mutation)
     }
 
@@ -876,7 +876,7 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    public func mutatingMatches(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> Self) -> Self {
+    public func mutatingMatches<C : Collection>(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
         return mutatingMatches(for: LiteralPattern(pattern), mutation: mutation)
     }
 }

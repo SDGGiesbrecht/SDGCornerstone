@@ -23,7 +23,7 @@ class InternalTests : TestCase {
         for localization in ContentLocalization.cases {
 
             // Make sure its group is defined.
-            let components = localization.code.components(separatedBy: "\u{2D}")
+            let components: [String] = localization.code.components(separatedBy: "\u{2D}")
 
             if let group = ContentLocalization.groups[components.first! ] {
                 XCTAssert(group.map({ $0.countries }).joined().contains(components.last!), "\(localization.code) is missing from its group.")
@@ -31,7 +31,7 @@ class InternalTests : TestCase {
                 XCTFail("\(localization.code) has no group defined.")
             }
 
-            let abbreviatedCode = localization.code.components(separatedBy: "\u{2D}").first!
+            let abbreviatedCode = (localization.code.components(separatedBy: "\u{2D}") as [String]).first!
             XCTAssertNotNil(ContentLocalization(reasonableMatchFor: abbreviatedCode))
 
             // Make sure it has an icon.

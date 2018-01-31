@@ -251,6 +251,38 @@ class TextTests : TestCase {
 
         XCTAssert((["A", "B", "C"] as [StrictString]).joined().elementsEqual("ABC" as StrictString))
         XCTAssert(([] as [StrictString]).joined().elementsEqual("" as StrictString))
+
+        // Ensure literal type can be inferred:
+        let patternSampleSpace: StrictString = "ABCDEF"
+        var mutableSampleSpace: StrictString = patternSampleSpace
+        XCTAssertNotNil(patternSampleSpace.firstMatch(for: "AB"))
+        XCTAssertEqual(patternSampleSpace.matches(for: "AB").count, 1)
+        XCTAssertEqual(patternSampleSpace.prefix(upTo: "CD")?.contents.count, 2)
+        XCTAssertEqual(patternSampleSpace.prefix(through: "CD")?.contents.count, 4)
+        XCTAssertEqual(patternSampleSpace.suffix(from: "CD")?.contents.count, 4)
+        XCTAssertEqual(patternSampleSpace.suffix(after: "CD")?.contents.count, 2)
+        XCTAssertEqual(patternSampleSpace.components(separatedBy: "CD").count, 2)
+        XCTAssert(patternSampleSpace.contains("CD"))
+        XCTAssert(patternSampleSpace.hasPrefix("AB"))
+        XCTAssert(patternSampleSpace.hasSuffix("EF"))
+        XCTAssertEqual(patternSampleSpace.commonPrefix(with: "ABX").contents.count, 2)
+        XCTAssertEqual(patternSampleSpace.firstNestingLevel(startingWith: "AB", endingWith: "DE")?.contents.contents.count, 1)
+        var index = patternSampleSpace.startIndex
+        XCTAssert(patternSampleSpace.advance(&index, over: "AB"))
+        XCTAssertNotNil(patternSampleSpace.lastMatch(for: "AB"))
+        XCTAssertEqual(patternSampleSpace.commonSuffix(with: "XEF").contents.count, 2)
+        mutableSampleSpace.truncate(before: "EF")
+        XCTAssertEqual(patternSampleSpace.truncated(before: "CD"), "AB")
+        mutableSampleSpace.truncate(after: "BC")
+        XCTAssertEqual(patternSampleSpace.truncated(after: "CD"), "ABCD")
+        mutableSampleSpace.drop(upTo: "BC")
+        XCTAssertEqual(patternSampleSpace.dropping(upTo: "CD"), "CDEF")
+        mutableSampleSpace.drop(through: "BC")
+        XCTAssertEqual(patternSampleSpace.dropping(through: "CD"), "EF")
+        mutableSampleSpace.replaceMatches(for: "EF", with: "...")
+        XCTAssertEqual(patternSampleSpace.replacingMatches(for: "EF", with: "..."), "ABCD...")
+        mutableSampleSpace.mutateMatches(for: "EF") { $0.contents }
+        XCTAssertEqual(patternSampleSpace.mutatingMatches(for: "EF", mutation: { $0.contents }), "ABCDEF")
     }
 
     func testString() {
