@@ -212,6 +212,16 @@ class CollectionTests : TestCase {
 
         XCTAssertEqual([1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern(LiteralPattern([1]), count: 0 ..< 15))?.range, [1, 1, 1].bounds)
         XCTAssertNil([1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern(LiteralPattern([1]), count: 5 ..< 15, consumption: .lazy)))
+
+        XCTAssertEqual("ABCDE".scalars.matches(for: ["A", "B", "C"]).count, 1)
+        XCTAssertEqual("ABCDE".scalars.prefix(upTo: ["B", "C"])?.contents.count, 1)
+        XCTAssertEqual("ABCDE".scalars.prefix(through: ["B", "C"])?.contents.count, 3)
+        XCTAssertEqual("ABCDE".scalars.suffix(from: ["B", "C"])?.contents.count, 4)
+        XCTAssertEqual("ABCDE".scalars.suffix(after: ["B", "C"])?.contents.count, 2)
+        XCTAssertEqual("ABCDE".scalars.firstNestingLevel(startingWith: ["B", "C"], endingWith: ["E"])?.contents.contents.count, 1)
+        let scalars = "ABCDE".scalars
+        var mobileIndex = scalars.startIndex
+        XCTAssert(scalars.advance(&mobileIndex, over: ["A", "B"]))
     }
 
     func testComparableSet() {
@@ -650,6 +660,21 @@ class CollectionTests : TestCase {
         mutable = collection
         mutable.mutateMatches(for: [LiteralPattern([3]), LiteralPattern([4])], mutation: { $0.contents.map({ $0 + 1 }) })
         XCTAssertEqual(mutable, [1, 2, 4, 5, 5])
+
+        let scalars = "ABCDE".scalars
+        var mutableScalars = scalars
+        mutableScalars.truncate(before: ["E"])
+        XCTAssert(scalars.truncated(before: ["E"]).elementsEqual("ABCD".scalars))
+        mutableScalars.truncate(after: ["C"])
+        XCTAssert(scalars.truncated(after: ["C"]).elementsEqual("ABC".scalars))
+        mutableScalars.drop(upTo: ["B"])
+        XCTAssert(scalars.dropping(upTo: ["B"]).elementsEqual("BCDE".scalars))
+        mutableScalars.drop(through: ["B"])
+        XCTAssert(scalars.dropping(through: ["B"]).elementsEqual("CDE".scalars))
+        XCTAssert(scalars.replacingMatches(for: ["B", "C"], with: "x".scalars).elementsEqual("AxDE".scalars))
+        mutableScalars.mutateMatches(for: ["C"]) { _ in "".scalars }
+        XCTAssert(mutableScalars.elementsEqual([]))
+        XCTAssert(scalars.mutatingMatches(for: ["B", "C"], mutation: { _ in return "x".scalars }).elementsEqual("AxDE".scalars))
     }
 
     func testSetDefinition() {
