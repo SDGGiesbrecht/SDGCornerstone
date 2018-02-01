@@ -526,7 +526,7 @@ internal enum ContentLocalization : String, Localization {
 
     private static let flagOffset: UInt32 = 0x1F1A5
     private var flag: StrictString {
-        let country = rawValue.components(separatedBy: "\u{2D}").last!
+        let country = (rawValue.components(separatedBy: "\u{2D}") as [String]).last!
         return StrictString(country.scalars.map({ UnicodeScalar($0.value + ContentLocalization.flagOffset)! }))
     }
 

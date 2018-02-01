@@ -104,7 +104,7 @@ extension Localization {
             return
         }
 
-        let originalTags = code.components(separatedBy: "\u{2D}")
+        let originalTags: [String] = code.components(separatedBy: "\u{2D}")
         var processingTags = originalTags
 
         let language = processingTags.removeFirst()
