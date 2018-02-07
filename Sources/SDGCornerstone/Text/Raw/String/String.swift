@@ -70,10 +70,10 @@ extension String : PropertyListValue, StringFamily {
 
     // MARK: - StringFamily
 
-    /// A view of a string's contents as a collection of Unicode scalars.
+    /// A view of a string’s contents as a collection of Unicode scalars.
     public typealias ScalarView = String.UnicodeScalarView
 
-    /// A view of a string's contents as a collection of extended grapheme clusters.
+    /// A view of a string’s contents as a collection of extended grapheme clusters.
     public typealias ClusterView = String
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]
