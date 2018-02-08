@@ -122,7 +122,7 @@ extension Localization {
         if let scripts = ContentLocalization.groups[language] {
 
             if let script = possibleScript {
-                if possibleCountry ≠ nil { // [_Exempt from Code Coverage_]
+                if possibleCountry ≠ nil { // [_Exempt from Test Coverage_]
                     // language‐script‐country
 
                     // Already covered by exact match.

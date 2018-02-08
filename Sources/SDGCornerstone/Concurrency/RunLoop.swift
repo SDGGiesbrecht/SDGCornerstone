@@ -28,8 +28,8 @@ extension RunLoop {
     ///
     /// ```swift
     /// var driver: RunLoop.Driver?
-    /// background.start() {
-    ///     RunLoop.current.runForDriver() { driver = $0 }
+    /// background.start {
+    ///     RunLoop.current.runForDriver { driver = $0 }
     /// }
     /// // The background run loop is now running.
     ///

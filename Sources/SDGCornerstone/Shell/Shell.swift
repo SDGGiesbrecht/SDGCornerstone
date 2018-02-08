@@ -78,44 +78,44 @@
         /// - Returns: The output of the command.
         ///
         /// - Throws: A `Shell.Error` if the exit code indicates a failure.
-        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], autoquote: Bool = true, alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String { // [_Exempt from Code Coverage_]
+        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], autoquote: Bool = true, alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String { // [_Exempt from Test Coverage_]
 
             let silent: Bool
             switch Application.current.mode {
-            case .commandLineTool: // [_Exempt from Code Coverage_]
+            case .commandLineTool: // [_Exempt from Test Coverage_]
                 silent = silently
             case .guiApplication:
                 silent = true
             }
 
-            func redact(_ string: String) -> String { // [_Exempt from Code Coverage_]
+            func redact(_ string: String) -> String { // [_Exempt from Test Coverage_]
                 var result = string
-                let redacted = "[" + String(UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+                let redacted = "[" + String(UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
                     switch localization {
-                    case .englishUnitedKingdom, .englishUnitedStates, .englishCanada: // [_Exempt from Code Coverage_]
+                    case .englishUnitedKingdom, .englishUnitedStates, .englishCanada: // [_Exempt from Test Coverage_]
                         return "redacted"
-                    case .deutschDeutschland: // [_Exempt from Code Coverage_]
+                    case .deutschDeutschland: // [_Exempt from Test Coverage_]
                         return "geschwärzt"
-                    case .françaisFrance: // [_Exempt from Code Coverage_]
+                    case .françaisFrance: // [_Exempt from Test Coverage_]
                         return "caviardé"
-                    case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
+                    case .ελληνικάΕλλάδα: // [_Exempt from Test Coverage_]
                         return "λογοκριμμένο"
-                    case .עברית־ישראל: // [_Exempt from Code Coverage_]
+                    case .עברית־ישראל: // [_Exempt from Test Coverage_]
                         return "צונזר"
                     }
                 }).resolved()) + "]"
-                for sensitive in redactionList { // [_Exempt from Code Coverage_]
+                for sensitive in redactionList { // [_Exempt from Test Coverage_]
                     result = result.replacingOccurrences(of: sensitive, with: redacted)
-                } // [_Exempt from Code Coverage_]
+                } // [_Exempt from Test Coverage_]
                 return result
             }
 
             // Formatting separation from other output.
-            if ¬silent { // [_Exempt from Code Coverage_]
+            if ¬silent { // [_Exempt from Test Coverage_]
                 alternatePrint("")
             }
             defer {
-                if ¬silent { // [_Exempt from Code Coverage_]
+                if ¬silent { // [_Exempt from Test Coverage_]
                     alternatePrint("")
                 }
             }
@@ -128,7 +128,7 @@
                 }
             }).joined(separator: " ")
 
-            if ¬silent { // [_Exempt from Code Coverage_]
+            if ¬silent { // [_Exempt from Test Coverage_]
                 alternatePrint(redact("$ " + commandString))
             }
 
@@ -164,7 +164,7 @@
                     }
 
                     result.append(string + newLine)
-                    if ¬silent { // [_Exempt from Code Coverage_]
+                    if ¬silent { // [_Exempt from Test Coverage_]
                         report(redact(string))
                     }
                 }
@@ -174,14 +174,14 @@
 
             var completeErrorReceived = false
             background.start {
-                while handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { FileHandle.standardError.write(($0 + newLine).data(using: .utf8)!) }) {} // [_Exempt from Code Coverage_]
+                while handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { FileHandle.standardError.write(($0 + newLine).data(using: .utf8)!) }) {} // [_Exempt from Test Coverage_]
                 completeErrorReceived = true
             }
 
-            while handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { alternatePrint($0) }) {} // [_Exempt from Code Coverage_]
-            while ¬completeErrorReceived {} // [_Exempt from Code Coverage_]
+            while handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { alternatePrint($0) }) {} // [_Exempt from Test Coverage_]
+            while ¬completeErrorReceived {} // [_Exempt from Test Coverage_]
 
-            while shell.isRunning {} // [_Exempt from Code Coverage_]
+            while shell.isRunning {} // [_Exempt from Test Coverage_]
 
             if output.hasSuffix(newLine) {
                 output.scalars.removeLast()

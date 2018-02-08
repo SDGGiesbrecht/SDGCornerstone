@@ -50,9 +50,9 @@ extension String : PropertyListValue, StringFamily {
             self = string
         } else if let string = String(data: file, encoding: .utf16) {
             self = string
-        } else if let string = String(data: file, encoding: .utf32) { // [_Exempt from Code Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+        } else if let string = String(data: file, encoding: .utf32) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
             self = string
-        } else if let string = String(data: file, encoding: .isoLatin1) { // [_Exempt from Code Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+        } else if let string = String(data: file, encoding: .isoLatin1) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
             self = string
         } else {
             unreachable()
@@ -70,10 +70,10 @@ extension String : PropertyListValue, StringFamily {
 
     // MARK: - StringFamily
 
-    /// A view of a string's contents as a collection of Unicode scalars.
+    /// A view of a string’s contents as a collection of Unicode scalars.
     public typealias ScalarView = String.UnicodeScalarView
 
-    /// A view of a string's contents as a collection of extended grapheme clusters.
+    /// A view of a string’s contents as a collection of extended grapheme clusters.
     public typealias ClusterView = String
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]

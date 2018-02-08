@@ -34,7 +34,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
         for (x, y) in mapping {
             assert(reverse[y] == nil, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
-                case .englishCanada: // [_Exempt from Code Coverage_]
+                case .englishCanada: // [_Exempt from Test Coverage_]
                     return StrictString("This mapping is not bijective. Repeated value: \(y)")
                 }
             }))

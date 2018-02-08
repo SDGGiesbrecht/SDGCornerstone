@@ -236,7 +236,7 @@ extension Subtractable where Self : PointProtocol, Self.Vector == Self {
     /// - MutatingVariant: −=
     ///
     /// - RecommendedOver: -
-    public static func − (lhs: Self, rhs: Self) -> Self { // [_Exempt from Code Coverage_] Apparently unreachable.
+    public static func − (lhs: Self, rhs: Self) -> Self { // [_Exempt from Test Coverage_] Apparently unreachable.
         // Disambiguate Subtractable.− vs PointProtocol.−
         return subtractAsSubtractable(lhs, rhs)
     }
@@ -291,7 +291,7 @@ extension Subtractable where Self : UIntFamily {
     public static func −= (lhs: inout Self, rhs: Self) {
         assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada: // [_Exempt from Code Coverage_]
+            case .englishCanada: // [_Exempt from Test Coverage_]
                 return StrictString("\(lhs.inDigits()) − \(rhs.inDigits()) is impossible for \(Self.self).")
             }
         }))

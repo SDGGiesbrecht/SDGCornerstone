@@ -58,7 +58,7 @@ extension Collection {
     internal func assertIndexExists(_ index: Index) {
         assert(index ∈ bounds, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada: // [_Exempt from Code Coverage_]
+            case .englishCanada: // [_Exempt from Test Coverage_]
                 return "Index out of bounds."
             }
         }))
@@ -70,7 +70,7 @@ extension Collection {
     }
 
     /// Returns the forward version of the specified range.
-    public func forward(_ range: Range<ReversedIndex<Self>>) ->  Range<Self.Index> {
+    public func forward(_ range: Range<ReversedIndex<Self>>) -> Range<Self.Index> {
         return range.upperBound.base ..< range.lowerBound.base
     }
 }
@@ -410,7 +410,7 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     public func components(separatedBy pattern: Pattern<Element>) -> [PatternMatch<Self>] {
-        let separators = matches(for: pattern).map() { $0.range }
+        let separators = matches(for: pattern).map { $0.range }
         return ranges(separatedBy: separators).map({ PatternMatch(range: $0, in: self) })
     }
 

@@ -35,7 +35,7 @@ public struct LocalizationSetting : Equatable {
 
             if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
                 let entries = languages.components(separatedBy: ":")
-                let converted = entries.map() { convert(locale: $0) }
+                let converted = entries.map { convert(locale: $0) }
                 preferences = Shared<PropertyListValue?>(converted)
             } else if let language = ProcessInfo.processInfo.environment["LANG"],
                 let locale = language.components(separatedBy: ".").first {
@@ -96,7 +96,7 @@ public struct LocalizationSetting : Equatable {
             ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
             ?? LocalizationSetting(sdgPreference: sdgSystemWidePreferences.value)
             ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
-            ?? LocalizationSetting(orderOfPrecedence: [] as [[String]]) // [_Exempt from Code Coverage_]
+            ?? LocalizationSetting(orderOfPrecedence: [] as [[String]]) // [_Exempt from Test Coverage_]
     }
 
     private class ChangeObserver : SharedValueObserver {
@@ -167,7 +167,7 @@ public struct LocalizationSetting : Equatable {
     /// - Parameters:
     ///     - orderOfPrecedence: An array of localizations describing there order of precedence. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
     public init(orderOfPrecedence: [String]) {
-        self.orderOfPrecedence = orderOfPrecedence.map() { [$0] }
+        self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
     }
 
     private init?(osPreference preference: PropertyListValue?) {

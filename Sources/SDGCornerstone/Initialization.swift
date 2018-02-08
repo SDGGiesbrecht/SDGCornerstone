@@ -27,7 +27,7 @@ public func initialize(mode: Mode, applicationIdentifier: String, applicationPre
 
     assert(initialized == false, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
         switch localization {
-        case .englishCanada: // [_Exempt from Code Coverage_]
+        case .englishCanada: // [_Exempt from Test Coverage_]
             return StrictString("Detected attempted to re‐initialize. SDGCornerstone is only designed to be initialized once.")
         }
     }))
@@ -42,9 +42,9 @@ public func initialize(mode: Mode, applicationIdentifier: String, applicationPre
 
 internal func preconditionFailureNotInitialized() -> Never {
     // This cannot be localized the normal way because of circularity.
-    let message = APILocalization.cases.map({ // [_Exempt from Code Coverage_]
+    let message = APILocalization.cases.map({ // [_Exempt from Test Coverage_]
         switch $0 {
-        case .englishCanada: // [_Exempt from Code Coverage_]
+        case .englishCanada: // [_Exempt from Test Coverage_]
             return "SDGCornerstone has not been initialized. Did you forget to call SDGCornerstone.initialize(...)?"
         }
     }).joined(separator: "\n\n")
@@ -57,46 +57,46 @@ private func warnAboutSecondLanguages() {
         if LocalizationSetting.current.value.resolved() as InterfaceLocalization ∉ Set<InterfaceLocalization>([
             .englishUnitedKingdom,
             .englishUnitedStates,
-            .englishCanada]) { // [_Exempt from Code Coverage_]
-            let warning = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+            .englishCanada]) { // [_Exempt from Test Coverage_]
+            let warning = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
-                case .deutschDeutschland: // [_Exempt from Code Coverage_]
+                case .deutschDeutschland: // [_Exempt from Test Coverage_]
                     return "Achtung: Das Deutsch von SDGCornerstone ist noch von keinem Muttersprachler geprüft worden. Falls Sie dabei helfen möchten, melden Sie sich unter:"
-                case .françaisFrance: // [_Exempt from Code Coverage_]
+                case .françaisFrance: // [_Exempt from Test Coverage_]
                     return "Attention : Le français de SDGCornerstone n’a pas été vérifié par un locuteur natif. Si vous voudriez nous aider, inscrivez‐vous par ici :"
-                case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
+                case .ελληνικάΕλλάδα: // [_Exempt from Test Coverage_]
                     return "Προειδοποίηση: Τα ελληνικά του SDGCornerstone δεν ελέγχεται από ενός φυσικού ομιλητή. Αν θέλετε να μας βοηθήσετε, εγγράψτε εδώ:"
-                case .עברית־ישראל: // [_Exempt from Code Coverage_]
+                case .עברית־ישראל: // [_Exempt from Test Coverage_]
                     /*א*/ return "זהירות: העברית של SDGCornerstone לא נבדקה אל יד של דובר שפת אם. אם אתה/את רוצה לעזור לנו, הירשם/הירשמי כאן:"
                 }
             })
-            let issueTitle = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+            let issueTitle = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
-                case .deutschDeutschland: // [_Exempt from Code Coverage_]
+                case .deutschDeutschland: // [_Exempt from Test Coverage_]
                     return "Deutsch prüfen"
-                case .françaisFrance: // [_Exempt from Code Coverage_]
+                case .françaisFrance: // [_Exempt from Test Coverage_]
                     return "Vérifier le français"
-                case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
+                case .ελληνικάΕλλάδα: // [_Exempt from Test Coverage_]
                     return "Έλεγχος των ελληνικών"
-                case .עברית־ישראל: // [_Exempt from Code Coverage_]
+                case .עברית־ישראל: // [_Exempt from Test Coverage_]
                     return "בדיקה של העברית"
                 }
             })
-            let issueBody = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+            let issueBody = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
                 switch localization {
                 case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                     unreachable()
-                case .deutschDeutschland: // [_Exempt from Code Coverage_]
+                case .deutschDeutschland: // [_Exempt from Test Coverage_]
                     return "Ich würde gern helfen. Bitte erklären Sie mir wie."
-                case .françaisFrance: // [_Exempt from Code Coverage_]
+                case .françaisFrance: // [_Exempt from Test Coverage_]
                     return "Je voudrais assister. S’il vous plaît, expliquez‐moi comment."
-                case .ελληνικάΕλλάδα: // [_Exempt from Code Coverage_]
+                case .ελληνικάΕλλάδα: // [_Exempt from Test Coverage_]
                     return "Θα ήθελα να βοηθήσω. Παρακαλώ, εξηγήστε πώς."
-                case .עברית־ישראל: // [_Exempt from Code Coverage_]
+                case .עברית־ישראל: // [_Exempt from Test Coverage_]
                     return "אני רוצה לעזור. נא הסבר איך."
                 }
             })

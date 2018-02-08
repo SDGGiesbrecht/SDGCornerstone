@@ -20,8 +20,8 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     private init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         assert(count == nil ∨ count!.lowerBound.isNonNegative, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada: // [_Exempt from Code Coverage_]
-                return StrictString("Cannot check for a negative number of instances of a pattern. Requested count: \(count?.inInequalityNotation({ $0.inDigits() }) ?? "Any").") // [_Exempt from Code Coverage_]
+            case .englishCanada: // [_Exempt from Test Coverage_]
+                return StrictString("Cannot check for a negative number of instances of a pattern. Requested count: \(count?.inInequalityNotation({ $0.inDigits() }) ?? "Any").") // [_Exempt from Test Coverage_]
             }
         }))
 
@@ -174,7 +174,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
             case .lazy:
                 break
             }
-            return valid.joined().map() { location ..< $0 }
+            return valid.joined().map { location ..< $0 }
         }
 
         for _ in count {

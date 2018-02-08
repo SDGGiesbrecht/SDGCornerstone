@@ -232,7 +232,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
     public init(unsafeRawValue: Int) {
         assert(unsafeRawValue ≠ 0, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada: // [_Exempt from Code Coverage_]
+            case .englishCanada: // [_Exempt from Test Coverage_]
                 return "0 is not a valid Gregorian year."
             }
         }))

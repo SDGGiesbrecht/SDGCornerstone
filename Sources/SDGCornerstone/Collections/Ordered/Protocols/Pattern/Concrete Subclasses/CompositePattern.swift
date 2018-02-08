@@ -60,7 +60,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
             }
         }
 
-        return endIndices.map() { location ..< $0 }
+        return endIndices.map { location ..< $0 }
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]

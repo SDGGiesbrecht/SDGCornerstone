@@ -80,7 +80,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
             guard let found = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< (i.start ?? base.scalars.endIndex))?.range else {
                 preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                     switch localization {
-                    case .englishCanada: // [_Exempt from Code Coverage_]
+                    case .englishCanada: // [_Exempt from Test Coverage_]
                         return "No index precedes the start index."
                     }
                 }))
@@ -181,12 +181,12 @@ internal struct NewlinePattern {
     fileprivate func primaryMatch<S : UnicodeScalarView>(in collection: S, at location: String.ScalarView.Index) -> Range<String.ScalarView.Index>? where S.Index == String.ScalarView.Index {
         // Replacement for Pattern.primaryMatch(in:at:)
 
-        guard location ≠ collection.endIndex else { // [_Exempt from Code Coverage_] Internal, unused, and temporary.
+        guard location ≠ collection.endIndex else { // [_Exempt from Test Coverage_] Internal, unused, and temporary.
             return nil
         }
 
         let scalar = collection[location]
-        guard scalar ∈ CharacterSet.newlines else { // [_Exempt from Code Coverage_] Internal, unused, and temporary.
+        guard scalar ∈ CharacterSet.newlines else { // [_Exempt from Test Coverage_] Internal, unused, and temporary.
             return nil
         }
 
@@ -206,7 +206,7 @@ extension UnicodeScalarView where Self.Index == String.ScalarView.Index {
     internal func firstMatch(for pattern: NewlinePattern, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         // Replacement for Collection.firstMatch(for:in:)
 
-        let searchRange = searchRange ?? bounds // [_Exempt from Code Coverage_] Internal, unused, and temporary.
+        let searchRange = searchRange ?? bounds // [_Exempt from Test Coverage_] Internal, unused, and temporary.
 
         var index = searchRange.lowerBound
         while index ≠ searchRange.upperBound {
@@ -231,7 +231,7 @@ extension UnicodeScalarView where Self.Index == String.ScalarView.Index {
     fileprivate func lastMatch(for pattern: NewlinePattern, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         // Replacement for Collection.lastMatch(for:in:)
 
-        let searchRange = searchRange ?? bounds // [_Exempt from Code Coverage_] Internal, unused, and temporary.
+        let searchRange = searchRange ?? bounds // [_Exempt from Test Coverage_] Internal, unused, and temporary.
 
         guard ¬searchRange.isEmpty else {
             return nil

@@ -93,7 +93,7 @@ extension SetAlgebra where Self : MutableSet {
 extension SetAlgebra where Self : SetDefinition {
     // MARK: - where Self : SetDefinition
 
-    fileprivate func containsAsSetAlgebra(_ member: Self.Element) -> Bool { // [_Exempt from Code Coverage_] Apparently unreachable.
+    fileprivate func containsAsSetAlgebra(_ member: Self.Element) -> Bool { // [_Exempt from Test Coverage_] Apparently unreachable.
         return self ∋ member
     }
     // [_Define Documentation: SDGCornerstone.SetAlgebra.contains(_:)_]
@@ -101,7 +101,7 @@ extension SetAlgebra where Self : SetDefinition {
     ///
     /// - Parameters:
     ///     - member: The element to test.
-    public func contains(_ member: Self.Element) -> Bool { // [_Exempt from Code Coverage_] Apparently unreachable.
+    public func contains(_ member: Self.Element) -> Bool { // [_Exempt from Test Coverage_] Apparently unreachable.
         return containsAsSetAlgebra(member)
     }
 }
