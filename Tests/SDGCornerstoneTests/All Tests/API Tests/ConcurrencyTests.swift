@@ -51,7 +51,7 @@ class ConcurrencyTests : TestCase {
         let didRun = expectation(description: "Run loop ran.")
         let didStop = expectation(description: "Run loop exited.")
 
-        background.start() {
+        background.start {
             let block = {
                 didRun.fulfill()
                 driver = nil

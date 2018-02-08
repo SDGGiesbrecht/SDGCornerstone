@@ -50,7 +50,7 @@ extension ArrayFamily where Element : RangeReplaceableCollection {
     ///     - direction: The direction from which to fill the collections.
     public mutating func equalizeCounts(byFillingWith element: Element.Element, from direction: FillDirection) {
         let count = reduce(0) { Swift.max($0, $1.count) }
-        let mapped = map() { (collection: Element) -> Element in
+        let mapped = map { (collection: Element) -> Element in
             var mutable = collection
             mutable.fill(to: count, with: element, from: direction)
             return mutable

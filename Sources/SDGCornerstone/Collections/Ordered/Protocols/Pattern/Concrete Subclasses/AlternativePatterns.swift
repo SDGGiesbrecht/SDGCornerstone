@@ -32,7 +32,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - elements: The alternative element.
     public init(_ elements: [Element]) {
-        self.alternatives = elements.map() { LiteralPattern([$0]) }
+        self.alternatives = elements.map { LiteralPattern([$0]) }
     }
 
     // MARK: - Properties

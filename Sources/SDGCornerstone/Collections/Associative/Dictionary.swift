@@ -90,7 +90,7 @@ extension Dictionary : PropertyListValue {
     /// - Parameters:
     ///     - transform: A mapping closure.
     public func mapKeys<T>(_ transform: (Key) throws -> T) rethrows -> [T: Value] {
-        return try mapKeyValuePairs() { (try transform($0), $1) }
+        return try mapKeyValuePairs { (try transform($0), $1) }
     }
 }
 

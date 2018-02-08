@@ -322,7 +322,7 @@ extension PropertyListValue {
         if let array = `as`([V].self) {
             return array
         } else if let array = `as`([PropertyListValue].self) { // [_Exempt from Test Coverage_] Unreachable on macOS.
-            return try? array.map() { (element: PropertyListValue) -> V in // [_Exempt from Test Coverage_] Unreachable on macOS.
+            return try? array.map { (element: PropertyListValue) -> V in // [_Exempt from Test Coverage_] Unreachable on macOS.
                 guard let result = element.as(V.self) else { // [_Exempt from Test Coverage_] Unreachable on macOS.
                     throw WrongType()
                 } // [_Exempt from Test Coverage_] Unreachable on macOS.
@@ -340,7 +340,7 @@ extension PropertyListValue {
         if let dictionary = `as`([String: V].self) {
             return dictionary
         } else if let dictionary = `as`([String: PropertyListValue].self) { // [_Exempt from Test Coverage_] Unreachable on macOS.
-            return try? dictionary.mapKeyValuePairs() { (key: String, value: PropertyListValue) -> (String, V) in // [_Exempt from Test Coverage_] Unreachable on macOS.
+            return try? dictionary.mapKeyValuePairs { (key: String, value: PropertyListValue) -> (String, V) in // [_Exempt from Test Coverage_] Unreachable on macOS.
                 guard let result = value.as(V.self) else { // [_Exempt from Test Coverage_] Unreachable on macOS.
                     throw WrongType()
                 } // [_Exempt from Test Coverage_] Unreachable on macOS.

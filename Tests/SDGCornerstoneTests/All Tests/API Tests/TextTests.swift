@@ -155,7 +155,7 @@ class TextTests : TestCase {
         XCTAssertEqual(StrictString(markup.lines), StrictString(markup.source.lines))
 
         var mutable = markup
-        mutable.scalars  = markup.scalars
+        mutable.scalars = markup.scalars
         mutable.clusters = markup.clusters
         mutable.lines = markup.lines
         XCTAssertEqual(mutable.scalars, markup.scalars)

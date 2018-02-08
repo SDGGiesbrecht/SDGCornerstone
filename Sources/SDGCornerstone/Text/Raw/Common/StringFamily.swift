@@ -51,7 +51,7 @@ public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByString
     var clusters: ClusterView { get set }
 }
 
-extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift Swift 4.0.3)_] */ {
+extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.3)_] */ {
     // MARK: - where ScalarView.Index == String.ScalarView.Index
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]

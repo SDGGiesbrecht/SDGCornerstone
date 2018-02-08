@@ -624,7 +624,7 @@ class CollectionTests : TestCase {
             "5",
             "75",
             "876"
-            ].map() { $0.scalars }
+            ].map { $0.scalars }
         let equalized = [
             "005",
             "075",

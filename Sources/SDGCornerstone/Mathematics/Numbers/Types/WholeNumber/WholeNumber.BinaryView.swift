@@ -83,7 +83,7 @@ internal struct WholeNumberBinaryView {
     }
 
     internal func bitsBackwards(from end: Index, to start: Index) -> LazyMapSequence<UnfoldSequence<Index, Index>, Bool> {
-        return indicesBackwards(from: end, to: start).lazy.map() { self[$0] }
+        return indicesBackwards(from: end, to: start).lazy.map { self[$0] }
     }
 
     internal func bitsBackwards() -> LazyMapSequence<UnfoldSequence<Index, Index>, Bool> {

@@ -174,7 +174,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
             case .lazy:
                 break
             }
-            return valid.joined().map() { location ..< $0 }
+            return valid.joined().map { location ..< $0 }
         }
 
         for _ in count {
