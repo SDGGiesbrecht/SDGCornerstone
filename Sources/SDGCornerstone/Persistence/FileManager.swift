@@ -19,7 +19,7 @@ extension FileManager {
     // MARK: - Domains
 
     internal static func possibleDebugDomain(_ domain: String) -> String {
-        return BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Code Coverage_]
+        return BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Test Coverage_]
     }
 
     // MARK: - Recommended File Locations

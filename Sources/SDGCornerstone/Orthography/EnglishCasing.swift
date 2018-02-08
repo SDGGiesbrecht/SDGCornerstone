@@ -38,9 +38,9 @@ public enum EnglishCasing {
     case titleInitial
 
     internal func applySimpleAlgorithm(to string: StrictString) -> StrictString {
-        let invalidUse = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+        let invalidUse = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
             switch localization {
-            case .englishCanada: // [_Exempt from Code Coverage_]
+            case .englishCanada: // [_Exempt from Test Coverage_]
                 return StrictString("Invalid use of \(#function). It cannot handle “\(string)”.")
             }
         })

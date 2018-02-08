@@ -23,7 +23,7 @@
 public func primitiveMethod(_ method: String = #function, file: StaticString = #file, line: UInt = #line) -> Never {
     preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
         switch localization {
-        case .englishCanada: // [_Exempt from Code Coverage_]
+        case .englishCanada: // [_Exempt from Test Coverage_]
             return StrictString("The primitive method “\(method)” has not been overridden.")
         }
     }), file: file, line: line)
@@ -47,10 +47,10 @@ public func unreachable(function: String = #function, file: StaticString = #file
     }), file: file, line: line)
 }
 
-private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String { // [_Exempt from Code Coverage_]
-    return String(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String { // [_Exempt from Test Coverage_]
+    return String(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
         switch localization {
-        case .englishCanada: // [_Exempt from Code Coverage_]
+        case .englishCanada: // [_Exempt from Test Coverage_]
             return StrictString("\(function) has not been implemented yet. (\(file), Line \(line.inDigits()))")
         }
     }).resolved())
@@ -64,7 +64,7 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) { // [_Exempt from Code Coverage_]
+public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) { // [_Exempt from Test Coverage_]
     print(unimplementedMessage(function: function, file: file, line: line))
 }
 

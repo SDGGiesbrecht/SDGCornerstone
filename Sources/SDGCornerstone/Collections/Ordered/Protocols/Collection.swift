@@ -58,7 +58,7 @@ extension Collection {
     internal func assertIndexExists(_ index: Index) {
         assert(index ∈ bounds, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
-            case .englishCanada: // [_Exempt from Code Coverage_]
+            case .englishCanada: // [_Exempt from Test Coverage_]
                 return "Index out of bounds."
             }
         }))

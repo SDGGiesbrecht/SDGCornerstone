@@ -96,7 +96,7 @@ public struct LocalizationSetting : Equatable {
             ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
             ?? LocalizationSetting(sdgPreference: sdgSystemWidePreferences.value)
             ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
-            ?? LocalizationSetting(orderOfPrecedence: [] as [[String]]) // [_Exempt from Code Coverage_]
+            ?? LocalizationSetting(orderOfPrecedence: [] as [[String]]) // [_Exempt from Test Coverage_]
     }
 
     private class ChangeObserver : SharedValueObserver {

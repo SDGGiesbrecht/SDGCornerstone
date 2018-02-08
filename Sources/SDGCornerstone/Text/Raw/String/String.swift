@@ -50,9 +50,9 @@ extension String : PropertyListValue, StringFamily {
             self = string
         } else if let string = String(data: file, encoding: .utf16) {
             self = string
-        } else if let string = String(data: file, encoding: .utf32) { // [_Exempt from Code Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+        } else if let string = String(data: file, encoding: .utf32) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
             self = string
-        } else if let string = String(data: file, encoding: .isoLatin1) { // [_Exempt from Code Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+        } else if let string = String(data: file, encoding: .isoLatin1) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
             self = string
         } else {
             unreachable()

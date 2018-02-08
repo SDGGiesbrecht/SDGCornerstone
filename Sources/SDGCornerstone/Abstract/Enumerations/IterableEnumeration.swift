@@ -28,10 +28,10 @@ where Self.RawValue : FixedScaleOneDimensionalPoint, Self.RawValue : Expressible
 
 extension IterableEnumeration {
 
-    private static func noZeroCase() -> UserFacingText<APILocalization, Void> { // [_Exempt from Code Coverage_]
-        return UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Code Coverage_]
+    private static func noZeroCase() -> UserFacingText<APILocalization, Void> { // [_Exempt from Test Coverage_]
+        return UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
             switch localization {
-            case .englishCanada: // [_Exempt from Code Coverage_]
+            case .englishCanada: // [_Exempt from Test Coverage_]
                 return StrictString("\(Self.self) has no case with a raw value 0.")
             }
         })
