@@ -17,16 +17,16 @@
 /// Conformance Requirements:
 ///
 /// - `VectorProtocol`
-/// - `static func ÷ (lhs: Self, rhs: Self) -> Scalar`
+/// - `static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar`
 public protocol OneDimensionalVector : VectorProtocol {
 
     // [_Define Documentation: SDGCornerstone.OneDimensionalVector.÷_]
-    /// Returns the quotient of the left divided by the right.
+    /// Returns the quotient of the precedng value divided by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The dividend.
-    ///     - rhs: The divisor.
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
     ///
     /// - MutatingVariant: ×
-    static func ÷ (lhs: Self, rhs: Self) -> Scalar
+    static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
 }

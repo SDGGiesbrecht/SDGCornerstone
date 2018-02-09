@@ -20,9 +20,9 @@
 ///   - `@discardableResult mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element)`
 ///   - `@discardableResult mutating func remove(_ member: Element) -> Element?`
 ///   - Either `FiniteSet` or all of the following:
-///     - `static func ∩= (lhs: inout Self, rhs: Self)`
-///     - `static func ∪= (lhs: inout Self, rhs: Self)`
-///     - `static func ∖= (lhs: inout Self, rhs: Self)`
+///     - `static func ∩= (precedingValue: inout Self, followingValue: Self)`
+///     - `static func ∪= (precedingValue: inout Self, followingValue: Self)`
+///     - `static func ∖= (precedingValue: inout Self, followingValue: Self)`
 public protocol MutableSet : ComparableSet, SetAlgebra {
 
     // [_Define SDGCornerstone.MutableSet.init()_]
@@ -61,113 +61,113 @@ public protocol MutableSet : ComparableSet, SetAlgebra {
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∩ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∩ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∩ (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∩ (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
-    /// Sets `lhs` to the intersection of the two sets.
+    /// Sets `precedingValue` to the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∩= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∩= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∩=_]
-    /// Sets `lhs` to the intersection of the two sets.
+    /// Sets `precedingValue` to the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∩= (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∩= (precedingValue: inout Self, followingValue: Self)
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∪ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∪ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∪ (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∪ (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
-    /// Sets `lhs` to the union of the two sets.
+    /// Sets `precedingValue` to the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∪= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∪= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∪=_]
-    /// Sets `lhs` to the union of the two sets.
+    /// Sets `precedingValue` to the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∪= (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∪= (precedingValue: inout Self, followingValue: Self)
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the relative complement of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    static func ∖ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    static func ∖ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the relative complement of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    static func ∖ (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    static func ∖ (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
-    /// Subtracts `rhs` from `lhs`.
+    /// Subtracts `followingValue` from `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    static func ∖= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    static func ∖= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∖=_]
-    /// Subtracts `rhs` from `lhs`.
+    /// Subtracts `followingValue` from `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    static func ∖= (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    static func ∖= (precedingValue: inout Self, followingValue: Self)
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the symmetric difference of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∆ (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∆ (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.MutableSet.∆=_]
-    /// Sets `lhs` to the symmetric difference of the two sets.
+    /// Sets `precedingValue` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    static func ∆= (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    static func ∆= (precedingValue: inout Self, followingValue: Self)
 }
 
 extension MutableSet {
@@ -176,11 +176,11 @@ extension MutableSet {
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∩ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element {
-        var result = lhs
-        result ∩= rhs
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∩ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+        var result = precedingValue
+        result ∩= followingValue
         return result
     }
 
@@ -188,37 +188,37 @@ extension MutableSet {
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∩ (lhs: Self, rhs: Self) -> Self {
-        var result = lhs
-        result ∩= rhs
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∩ (precedingValue: Self, followingValue: Self) -> Self {
+        var result = precedingValue
+        result ∩= followingValue
         return result
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
-    /// Sets `lhs` to the intersection of the two sets.
+    /// Sets `precedingValue` to the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∩= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∩= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         var result = Self()
-        for element in rhs where element ∈ lhs {
+        for element in followingValue where element ∈ precedingValue {
             result.insert(element)
         }
-        lhs = result
+        precedingValue = result
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∪ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element {
-        var result = lhs
-        result ∪= rhs
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∪ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+        var result = precedingValue
+        result ∪= followingValue
         return result
     }
 
@@ -226,85 +226,85 @@ extension MutableSet {
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∪ (lhs: Self, rhs: Self) -> Self {
-        var result = lhs
-        result ∪= rhs
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∪ (precedingValue: Self, followingValue: Self) -> Self {
+        var result = precedingValue
+        result ∪= followingValue
         return result
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
-    /// Sets `lhs` to the union of the two sets.
+    /// Sets `precedingValue` to the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∪= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
-        for element in rhs {
-            lhs.insert(element)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∪= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+        for element in followingValue {
+            precedingValue.insert(element)
         }
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the relative complement of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    public static func ∖ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element {
-        var result = lhs
-        result ∖= rhs
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    public static func ∖ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+        var result = precedingValue
+        result ∖= followingValue
         return result
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the relative complement of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    public static func ∖ (lhs: Self, rhs: Self) -> Self {
-        var result = lhs
-        result ∖= rhs
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    public static func ∖ (precedingValue: Self, followingValue: Self) -> Self {
+        var result = precedingValue
+        result ∖= followingValue
         return result
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
-    /// Subtracts `rhs` from `lhs`.
+    /// Subtracts `followingValue` from `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    public static func ∖= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
-        for element in rhs {
-            lhs.remove(element)
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    public static func ∖= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+        for element in followingValue {
+            precedingValue.remove(element)
         }
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the symmetric difference of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∆ (lhs: Self, rhs: Self) -> Self {
-        var result = lhs
-        result ∆= rhs
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∆ (precedingValue: Self, followingValue: Self) -> Self {
+        var result = precedingValue
+        result ∆= followingValue
         return result
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
-    /// Sets `lhs` to the symmetric difference of the two sets.
+    /// Sets `precedingValue` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∆= (lhs: inout Self, rhs: Self) {
-        var result = lhs
-        result ∪= rhs
-        result ∖= lhs ∩ rhs
-        lhs = result
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∆= (precedingValue: inout Self, followingValue: Self) {
+        var result = precedingValue
+        result ∪= followingValue
+        result ∖= precedingValue ∩ followingValue
+        precedingValue = result
     }
 }
 
@@ -312,27 +312,27 @@ extension MutableSet where Self : FiniteSet {
     // MARK: - where Self : FiniteSet
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the symmetric difference of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∆ <S : FiniteSet>(lhs: Self, rhs: S) -> Self where S.Element == Self.Element {
-        var result = lhs
-        result ∆= rhs
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∆ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+        var result = precedingValue
+        result ∆= followingValue
         return result
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
-    /// Sets `lhs` to the symmetric difference of the two sets.
+    /// Sets `precedingValue` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∆= <S : FiniteSet>(lhs: inout Self, rhs: S) where S.Element == Self.Element {
-        var result = lhs
-        result ∪= rhs
-        result ∖= lhs ∩ rhs
-        lhs = result
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∆= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+        var result = precedingValue
+        result ∪= followingValue
+        result ∖= precedingValue ∩ followingValue
+        precedingValue = result
     }
 }

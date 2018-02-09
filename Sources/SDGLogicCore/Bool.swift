@@ -37,61 +37,61 @@ extension Bool : Comparable {
     // [_Define Documentation: SDGCornerstone.Bool.∧_]
     /// Returns the logical conjunction of the two Boolean values.
     ///
-    /// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` evaluates to `true`.
+    /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `true`.
     ///
     /// - Parameters:
-    ///     - lhs: A Boolean value.
-    ///     - rhs: A closure that results in another Boolean value.
-    @_inlineable public static func ∧ (lhs: Bool, rhs: @autoclosure () throws -> Bool) rethrows -> Bool {
-        return try lhs && rhs
+    ///     - precedingValue: A Boolean value.
+    ///     - followingValue: A closure that results in another Boolean value.
+    @_inlineable public static func ∧ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
+        return try precedingValue && followingValue
     }
 
     // [_Define Documentation: SDGCornerstone.Bool.∧=_]
-    /// Modifies the left value by logical conjunction with the right.
+    /// Modifies the preceding operand by logical conjunction with the following operand.
     ///
-    /// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` is `true`.
+    /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `true`.
     ///
     /// - Parameters:
-    ///     - lhs: The Boolean value to modify.
-    ///     - rhs: A closure that results in another Boolean value.
-    @_inlineable public static func ∧= (lhs: inout Bool, rhs: @autoclosure () throws -> Bool) rethrows {
-        lhs = try lhs ∧ rhs
+    ///     - precedingValue: The Boolean value to modify.
+    ///     - followingValue: A closure that results in another Boolean value.
+    @_inlineable public static func ∧= (precedingValue: inout Bool, followingValue: @autoclosure () throws -> Bool) rethrows {
+        precedingValue = try precedingValue ∧ followingValue
     }
 
     // [_Define Documentation: SDGCornerstone.Bool.∨_]
     /// Returns the logical disjunction of the two Boolean values.
     ///
-    /// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` evaluates to `false`.
+    /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `false`.
     ///
     /// - Parameters:
-    ///     - lhs: A Boolean value.
-    ///     - rhs: A closure that results in another Boolean value.
-    @_inlineable public static func ∨ (lhs: Bool, rhs: @autoclosure () throws -> Bool) rethrows -> Bool {
-        return try lhs || rhs
+    ///     - precedingValue: A Boolean value.
+    ///     - followingValue: A closure that results in another Boolean value.
+    @_inlineable public static func ∨ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
+        return try precedingValue || followingValue
     }
 
     // [_Define Documentation: SDGCornerstone.Bool.∨=_]
-    /// Modifies the left value by logical disjunction with the right.
+    /// Modifies the preceding operand by logical disjunction with the following operand.
     ///
-    /// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` is `false`.
+    /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `false`.
     ///
     /// - Parameters:
-    ///     - lhs: The Boolean value to modify.
-    ///     - rhs: A closure that results in another Boolean value.
-    @_inlineable public static func ∨= (lhs: inout Bool, rhs: @autoclosure () throws -> Bool) rethrows {
-        lhs = try lhs ∨ rhs
+    ///     - precedingValue: The Boolean value to modify.
+    ///     - followingValue: A closure that results in another Boolean value.
+    @_inlineable public static func ∨= (precedingValue: inout Bool, followingValue: @autoclosure () throws -> Bool) rethrows {
+        precedingValue = try precedingValue ∨ followingValue
     }
 
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    @_inlineable public static func < (lhs: Bool, rhs: Bool) -> Bool {
-        if lhs == false ∧ rhs == true {
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    @_inlineable public static func < (precedingValue: Bool, followingValue: Bool) -> Bool {
+        if precedingValue == false ∧ followingValue == true {
             return true
         } else {
             return false

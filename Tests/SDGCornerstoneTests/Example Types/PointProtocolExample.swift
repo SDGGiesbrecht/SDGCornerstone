@@ -24,20 +24,20 @@ struct PointProtocolExample : PointProtocol {
 
     // Equatable
 
-    static func == (lhs: PointProtocolExample, rhs: PointProtocolExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: PointProtocolExample, followingValue: PointProtocolExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // PointProtocol
 
     typealias Vector = Int
 
-    static func += (lhs: inout PointProtocolExample, rhs: Vector) {
-        lhs.value += rhs
+    static func += (precedingValue: inout PointProtocolExample, followingValue: Vector) {
+        precedingValue.value += followingValue
     }
 
-    static func − (lhs: PointProtocolExample, rhs: PointProtocolExample) -> Vector {
-        return lhs.value − rhs.value
+    static func − (precedingValue: PointProtocolExample, followingValue: PointProtocolExample) -> Vector {
+        return precedingValue.value − followingValue.value
     }
 }
 
@@ -55,8 +55,8 @@ struct PointProtocolExampleWhereVectorIsSelf : Negatable, PointProtocol {
 
     // Equatable
 
-    static func == (lhs: PointProtocolExampleWhereVectorIsSelf, rhs: PointProtocolExampleWhereVectorIsSelf) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: PointProtocolExampleWhereVectorIsSelf, followingValue: PointProtocolExampleWhereVectorIsSelf) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // Hashable
@@ -69,11 +69,11 @@ struct PointProtocolExampleWhereVectorIsSelf : Negatable, PointProtocol {
 
     typealias Vector = PointProtocolExampleWhereVectorIsSelf
 
-    static func += (lhs: inout PointProtocolExampleWhereVectorIsSelf, rhs: Vector) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout PointProtocolExampleWhereVectorIsSelf, followingValue: Vector) {
+        precedingValue.value += followingValue.value
     }
 
-    static func − (lhs: PointProtocolExampleWhereVectorIsSelf, rhs: PointProtocolExampleWhereVectorIsSelf) -> Vector {
-        return PointProtocolExampleWhereVectorIsSelf(lhs.value − rhs.value)
+    static func − (precedingValue: PointProtocolExampleWhereVectorIsSelf, followingValue: PointProtocolExampleWhereVectorIsSelf) -> Vector {
+        return PointProtocolExampleWhereVectorIsSelf(precedingValue.value − followingValue.value)
     }
 }

@@ -27,8 +27,8 @@ import SDGCornerstone
 
         // Equatable
 
-        static func == (lhs: TwoDimensionalVectorExample, rhs: TwoDimensionalVectorExample) -> Bool {
-            return lhs.vector == rhs.vector
+        static func == (precedingValue: TwoDimensionalVectorExample, followingValue: TwoDimensionalVectorExample) -> Bool {
+            return precedingValue.vector == followingValue.vector
         }
 
         // VectorProtocol

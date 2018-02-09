@@ -36,12 +36,12 @@ public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition {
     public typealias Element = Base.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
+    /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: AbsoluteComplement, rhs: Base.Element) -> Bool {
-        return lhs.base ∌ rhs
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element) -> Bool {
+        return precedingValue.base ∌ followingValue
     }
 }

@@ -41,12 +41,12 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinitio
     public typealias Element = Base1.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
+    /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: Union, rhs: Base1.Element) -> Bool {
-        return lhs.a ∋ rhs ∨ lhs.b ∋ rhs
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    public static func ∋ (precedingValue: Union, followingValue: Base1.Element) -> Bool {
+        return precedingValue.a ∋ followingValue ∨ precedingValue.b ∋ followingValue
     }
 }

@@ -24,8 +24,8 @@ struct NegatableExample : Negatable {
 
     // Addable
 
-    static func += (lhs: inout NegatableExample, rhs: NegatableExample) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout NegatableExample, followingValue: NegatableExample) {
+        precedingValue.value += followingValue.value
     }
 
     // AdditiveArithmetic
@@ -36,8 +36,8 @@ struct NegatableExample : Negatable {
 
     // Equatable
 
-    static func == (lhs: NegatableExample, rhs: NegatableExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: NegatableExample, followingValue: NegatableExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // Hashable
@@ -48,7 +48,7 @@ struct NegatableExample : Negatable {
 
     // Subtractable
 
-    static func −= (lhs: inout NegatableExample, rhs: NegatableExample) {
-        lhs.value −= rhs.value
+    static func −= (precedingValue: inout NegatableExample, followingValue: NegatableExample) {
+        precedingValue.value −= followingValue.value
     }
 }

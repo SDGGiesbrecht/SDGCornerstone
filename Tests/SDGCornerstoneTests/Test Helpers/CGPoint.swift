@@ -27,8 +27,8 @@ import SDGCornerstone
         var x: CGFloat
         var y: CGFloat
 
-        static func == (lhs: CGPoint, rhs: CGPoint) -> Bool {
-            return (lhs.x, lhs.y) == (rhs.x, rhs.y)
+        static func == (precedingValue: CGPoint, followingValue: CGPoint) -> Bool {
+            return (precedingValue.x, precedingValue.y) == (followingValue.x, followingValue.y)
         }
     }
 #endif

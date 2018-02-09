@@ -24,8 +24,8 @@ struct VectorProtocolExample : VectorProtocol {
 
     // Addable
 
-    static func += (lhs: inout VectorProtocolExample, rhs: VectorProtocolExample) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout VectorProtocolExample, followingValue: VectorProtocolExample) {
+        precedingValue.value += followingValue.value
     }
 
     // AdditiveArithmetic
@@ -36,8 +36,8 @@ struct VectorProtocolExample : VectorProtocol {
 
     // Equatable
 
-    static func == (lhs: VectorProtocolExample, rhs: VectorProtocolExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: VectorProtocolExample, followingValue: VectorProtocolExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // Hashable
@@ -50,17 +50,17 @@ struct VectorProtocolExample : VectorProtocol {
 
     typealias Scalar = Double
 
-    static func ×= (lhs: inout VectorProtocolExample, rhs: Scalar) {
-        lhs.value ×= rhs
+    static func ×= (precedingValue: inout VectorProtocolExample, followingValue: Scalar) {
+        precedingValue.value ×= followingValue
     }
 
-    static func ÷= (lhs: inout VectorProtocolExample, rhs: Scalar) {
-        lhs.value ÷= rhs
+    static func ÷= (precedingValue: inout VectorProtocolExample, followingValue: Scalar) {
+        precedingValue.value ÷= followingValue
     }
 
     // Subtractable
 
-    static func −= (lhs: inout VectorProtocolExample, rhs: VectorProtocolExample) {
-        lhs.value −= rhs.value
+    static func −= (precedingValue: inout VectorProtocolExample, followingValue: VectorProtocolExample) {
+        precedingValue.value −= followingValue.value
     }
 }

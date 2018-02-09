@@ -15,51 +15,51 @@
 import SDGLogicCore
 
 // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
-/// Returns `true` if `lhs` is a subset of `rhs`.
+/// Returns `true` if `precedingValue` is a subset of `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The possible subset to test.
-///     - rhs: The other set.
+///     - precedingValue: The possible subset to test.
+///     - followingValue: The other set.
 infix operator ⊆: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
-/// Returns `true` if `lhs` is a subset of `rhs`.
+/// Returns `true` if `precedingValue` is a subset of `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The possible subset to test.
-///     - rhs: The other set.
+///     - precedingValue: The possible subset to test.
+///     - followingValue: The other set.
 infix operator ⊈: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
-/// Returns `true` if `lhs` is a superset of `rhs`.
+/// Returns `true` if `precedingValue` is a superset of `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The possible superset to test.
-///     - rhs: The other set.
+///     - precedingValue: The possible superset to test.
+///     - followingValue: The other set.
 infix operator ⊇: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
-/// Returns `true` if `lhs` is a superset of `rhs`.
+/// Returns `true` if `precedingValue` is a superset of `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The possible superset to test.
-///     - rhs: The other set.
+///     - precedingValue: The possible superset to test.
+///     - followingValue: The other set.
 infix operator ⊉: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
-/// Returns `true` if `lhs` is a strict subset of `rhs`.
+/// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The possible subset to test.
-///     - rhs: The other set.
+///     - precedingValue: The possible subset to test.
+///     - followingValue: The other set.
 infix operator ⊊: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
-/// Returns `true` if `lhs` is a strict superset of `rhs`.
+/// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The possible superset to test.
-///     - rhs: The other set.
+///     - precedingValue: The possible superset to test.
+///     - followingValue: The other set.
 infix operator ⊋: ComparisonPrecedence
 
 /// A set that can be compared against other sets of the same type.
@@ -67,57 +67,57 @@ infix operator ⊋: ComparisonPrecedence
 /// Conformance Requirements:
 ///
 /// - `SetDefinition`
-/// - `static func ⊆ (lhs: Self, rhs: Self) -> Bool`
+/// - `static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool`
 /// - `func overlaps(_ other: Self) -> Bool`
 public protocol ComparableSet : Equatable, SetDefinition {
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.⊆_]
-    /// Returns `true` if `lhs` is a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    static func ⊆ (lhs: Self, rhs: Self) -> Bool
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.⊈_]
-    /// Returns `true` if `lhs` is not a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    static func ⊈ (lhs: Self, rhs: Self) -> Bool
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    static func ⊈ (precedingValue: Self, followingValue: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.⊇_]
-    /// Returns `true` if `lhs` is a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    static func ⊇ (lhs: Self, rhs: Self) -> Bool
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.⊉_]
-    /// Returns `true` if `lhs` is not a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    static func ⊉ (lhs: Self, rhs: Self) -> Bool
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    static func ⊉ (precedingValue: Self, followingValue: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.⊊_]
-    /// Returns `true` if `lhs` is a strict subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    static func ⊊ (lhs: Self, rhs: Self) -> Bool
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.⊋_]
-    /// Returns `true` if `lhs` is a strict superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    static func ⊋ (lhs: Self, rhs: Self) -> Bool
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
     /// Returns `true` if the sets overlap.
@@ -137,53 +137,53 @@ public protocol ComparableSet : Equatable, SetDefinition {
 extension ComparableSet {
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊈_]
-    /// Returns `true` if `lhs` is not a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    public static func ⊈ (lhs: Self, rhs: Self) -> Bool {
-        return ¬(lhs ⊆ rhs)
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    public static func ⊈ (precedingValue: Self, followingValue: Self) -> Bool {
+        return ¬(precedingValue ⊆ followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
-    /// Returns `true` if `lhs` is a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    public static func ⊇ (lhs: Self, rhs: Self) -> Bool {
-        return rhs ⊆ lhs
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    public static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool {
+        return followingValue ⊆ precedingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊉_]
-    /// Returns `true` if `lhs` is not a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    public static func ⊉ (lhs: Self, rhs: Self) -> Bool {
-        return ¬(lhs ⊇ rhs)
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    public static func ⊉ (precedingValue: Self, followingValue: Self) -> Bool {
+        return ¬(precedingValue ⊇ followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
-    /// Returns `true` if `lhs` is a strict subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    public static func ⊊ (lhs: Self, rhs: Self) -> Bool {
-        return lhs ⊆ rhs ∧ lhs ⊉ rhs
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    public static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
-    /// Returns `true` if `lhs` is a strict superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    public static func ⊋ (lhs: Self, rhs: Self) -> Bool {
-        return lhs ⊇ rhs ∧ lhs ⊈ rhs
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    public static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
     }
 
     fileprivate func isDisjointAsComparableSet(with other: Self) -> Bool {
@@ -203,13 +203,13 @@ extension ComparableSet where Self : RangeFamily {
     // MARK: - where Self : RangeFamily
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
-    /// Returns `true` if `lhs` is a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    public static func ⊆ (lhs: Self, rhs: Self) -> Bool {
-        return lhs.lowerBound ≥ rhs.lowerBound ∧ lhs.upperBound ≤ rhs.upperBound
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    public static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue.lowerBound ≥ followingValue.lowerBound ∧ precedingValue.upperBound ≤ followingValue.upperBound
     }
 }
 

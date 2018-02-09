@@ -92,13 +92,13 @@ public struct StrictString : Addable, BidirectionalCollection, CodableViaLossles
     // MARK: - Addable
 
     // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
-    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
-    public static func += (lhs: inout StrictString, rhs: StrictString) {
-        lhs.append(contentsOf: rhs)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
+    public static func += (precedingValue: inout StrictString, followingValue: StrictString) {
+        precedingValue.append(contentsOf: followingValue)
     }
 
     // MARK: - BidirectionalCollection
@@ -144,13 +144,13 @@ public struct StrictString : Addable, BidirectionalCollection, CodableViaLossles
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func < (lhs: StrictString, rhs: StrictString) -> Bool {
-        return lhs.string < rhs.string
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func < (precedingValue: StrictString, followingValue: StrictString) -> Bool {
+        return precedingValue.string < followingValue.string
     }
 
     // MARK: - CustomStringConvertible
@@ -167,10 +167,10 @@ public struct StrictString : Addable, BidirectionalCollection, CodableViaLossles
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: StrictString, rhs: StrictString) -> Bool {
-        return lhs.string.scalars.elementsEqual(rhs.string.scalars)
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: StrictString, followingValue: StrictString) -> Bool {
+        return precedingValue.string.scalars.elementsEqual(followingValue.string.scalars)
     }
 
     // MARK: - ExpressibleByStringLiteral

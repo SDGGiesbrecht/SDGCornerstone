@@ -16,8 +16,8 @@
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
 infix operator ≠: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Bool.¬_]
@@ -37,39 +37,39 @@ postfix operator ¬=
 // [_Inherit Documentation: SDGCornerstone.Bool.∧_]
 /// Returns the logical conjunction of the two Boolean values.
 ///
-/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` evaluates to `true`.
+/// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `true`.
 ///
 /// - Parameters:
-///     - lhs: A Boolean value.
-///     - rhs: A closure that results in another Boolean value.
+///     - precedingValue: A Boolean value.
+///     - followingValue: A closure that results in another Boolean value.
 infix operator ∧: LogicalConjunctionPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Bool.∧=_]
-/// Modifies the left value by logical conjunction with the right.
+/// Modifies the preceding operand by logical conjunction with the following operand.
 ///
-/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` is `true`.
+/// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `true`.
 ///
 /// - Parameters:
-///     - lhs: The Boolean value to modify.
-///     - rhs: A closure that results in another Boolean value.
+///     - precedingValue: The Boolean value to modify.
+///     - followingValue: A closure that results in another Boolean value.
 infix operator ∧=: AssignmentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Bool.∨_]
 /// Returns the logical disjunction of the two Boolean values.
 ///
-/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` evaluates to `false`.
+/// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `false`.
 ///
 /// - Parameters:
-///     - lhs: A Boolean value.
-///     - rhs: A closure that results in another Boolean value.
+///     - precedingValue: A Boolean value.
+///     - followingValue: A closure that results in another Boolean value.
 infix operator ∨: LogicalDisjunctionPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Bool.∨=_]
-/// Modifies the left value by logical disjunction with the right.
+/// Modifies the preceding operand by logical disjunction with the following operand.
 ///
-/// This operator uses short‐circuit evaluation; `rhs` is only evaluated if `lhs` is `false`.
+/// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `false`.
 ///
 /// - Parameters:
-///     - lhs: The Boolean value to modify.
-///     - rhs: A closure that results in another Boolean value.
+///     - precedingValue: The Boolean value to modify.
+///     - followingValue: A closure that results in another Boolean value.
 infix operator ∨=: AssignmentPrecedence

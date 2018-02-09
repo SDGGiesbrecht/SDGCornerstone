@@ -56,41 +56,41 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// Returns the result of multipling the measurement by the scalar.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement.
-    ///     - rhs: The scalar.
-    static func × (lhs: Self, rhs: Scalar) -> Self
+    ///     - precedingValue: The measurement.
+    ///     - followingValue: The scalar.
+    static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.×=_]
     /// Modifies the measurement by multiplication with a scalar.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement to modify.
-    ///     - rhs: The scalar.
-    static func ×= (lhs: inout Self, rhs: Scalar)
+    ///     - precedingValue: The measurement to modify.
+    ///     - followingValue: The scalar.
+    static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
     // [_Define Documentation: SDGCornerstone.Measurement.÷(_:scalar:)_]
     /// Returns the (rational) quotient of a measurement divided by a scalar.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement.
-    ///     - rhs: The scalar.
-    static func ÷ (lhs: Self, rhs: Scalar) -> Self
+    ///     - precedingValue: The measurement.
+    ///     - followingValue: The scalar.
+    static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.÷_]
-    /// Returns the (rational) scalar quotient of the left divided by the right.
+    /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The dividend.
-    ///     - rhs: The divisor.
-    static func ÷ (lhs: Self, rhs: Self) -> Scalar
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
+    static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
 
     // [_Define Documentation: SDGCornerstone.Measurement.÷=_]
-    /// Modifies the left by dividing it by the right.
+    /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement to modify.
-    ///     - rhs: The scalar divisor.
-    static func ÷= (lhs: inout Self, rhs: Scalar)
+    ///     - precedingValue: The measurement to modify.
+    ///     - followingValue: The scalar divisor.
+    static func ÷= (precedingValue: inout Self, followingValue: Scalar)
 
     // A MEAUSUREMENT IS NOT AN INTEGER WITHOUT AN ARBITRARY SELECTION OF A UNIT, SO *EUCLIDEAN* DIVISON BY A SCALAR IS MEANINGLESS
 
@@ -129,8 +129,8 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     static func gcd(_ a: Self, _ b: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.formGreatestCommonDivisor(with:)_]
@@ -144,8 +144,8 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     static func lcm(_ a: Self, _ b: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.formLeastCommonMultiple(with:)_]
@@ -229,11 +229,11 @@ extension Measurement {
     /// Returns the result of multipling the measurement by the scalar.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement.
-    ///     - rhs: The scalar.
-    public static func × (lhs: Self, rhs: Scalar) -> Self {
-        var result = lhs
-        result ×= rhs
+    ///     - precedingValue: The measurement.
+    ///     - followingValue: The scalar.
+    public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
+        var result = precedingValue
+        result ×= followingValue
         return result
     }
 
@@ -241,52 +241,52 @@ extension Measurement {
     /// Returns the result of multipling the measurement by the scalar.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement.
-    ///     - rhs: The scalar.
-    public static func × (lhs: Scalar, rhs: Self) -> Self {
-        return rhs × lhs
+    ///     - precedingValue: The measurement.
+    ///     - followingValue: The scalar.
+    public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
+        return followingValue × precedingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.Measurement.×=_]
     /// Modifies the measurement by multiplication with a scalar.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement to modify.
-    ///     - rhs: The scalar.
-    public static func ×= (lhs: inout Self, rhs: Scalar) {
-        lhs.rawValue ×= rhs
+    ///     - precedingValue: The measurement to modify.
+    ///     - followingValue: The scalar.
+    public static func ×= (precedingValue: inout Self, followingValue: Scalar) {
+        precedingValue.rawValue ×= followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.Measurement.÷(_:scalar:)_]
     /// Returns the (rational) quotient of a measurement divided by a scalar.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement.
-    ///     - rhs: The scalar.
-    public static func ÷ (lhs: Self, rhs: Scalar) -> Self {
-        var result = lhs
-        result ÷= rhs
+    ///     - precedingValue: The measurement.
+    ///     - followingValue: The scalar.
+    public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
+        var result = precedingValue
+        result ÷= followingValue
         return result
     }
 
     // [_Inherit Documentation: SDGCornerstone.Measurement.÷_]
-    /// Returns the (rational) scalar quotient of the left divided by the right.
+    /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The dividend.
-    ///     - rhs: The divisor.
-    public static func ÷ (lhs: Self, rhs: Self) -> Scalar {
-        return lhs.rawValue ÷ rhs.rawValue
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
+    public static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar {
+        return precedingValue.rawValue ÷ followingValue.rawValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.Measurement.÷=_]
-    /// Modifies the left by dividing it by the right.
+    /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The measurement to modify.
-    ///     - rhs: The scalar divisor.
-    public static func ÷= (lhs: inout Self, rhs: Scalar) {
-        lhs.rawValue ÷= rhs
+    ///     - precedingValue: The measurement to modify.
+    ///     - followingValue: The scalar divisor.
+    public static func ÷= (precedingValue: inout Self, followingValue: Scalar) {
+        precedingValue.rawValue ÷= followingValue
     }
 
     // A MEAUSUREMENT IS NOT AN INTEGER WITHOUT AN ARBITRARY SELECTION OF A UNIT, SO *EUCLIDEAN* DIVISON BY A SCALAR IS MEANINGLESS
@@ -336,8 +336,8 @@ extension Measurement {
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     public static func gcd(_ a: Self, _ b: Self) -> Self {
         var result = a
         result.formGreatestCommonDivisor(with: b)
@@ -357,8 +357,8 @@ extension Measurement {
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     public static func lcm(_ a: Self, _ b: Self) -> Self {
         var result = a
         result.formLeastCommonMultiple(with: b)
@@ -451,8 +451,8 @@ extension Measurement {
 /// Returns the greatest common divisor of `a` and `b`.
 ///
 /// - Parameters:
-///     - lhs: A value.
-///     - rhs: Another value.
+///     - precedingValue: A value.
+///     - followingValue: Another value.
 public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.gcd(a, b)
 }
@@ -461,8 +461,8 @@ public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
 /// Returns the least common multiple of `a` and `b`.
 ///
 /// - Parameters:
-///     - lhs: A value.
-///     - rhs: Another value.
+///     - precedingValue: A value.
+///     - followingValue: Another value.
 public func lcm<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.lcm(a, b)
 }

@@ -21,9 +21,9 @@ extension Optional where Wrapped : Equatable {
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    @_inlineable public static func ≠ (lhs: Optional, rhs: Optional) -> Bool {
-        return lhs != rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    @_inlineable public static func ≠ (precedingValue: Optional, followingValue: Optional) -> Bool {
+        return precedingValue != followingValue
     }
 }

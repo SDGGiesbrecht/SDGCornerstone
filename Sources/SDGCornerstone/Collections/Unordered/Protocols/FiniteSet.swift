@@ -25,75 +25,75 @@ public protocol FiniteSet : Collection, ComparableSet {
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.⊆_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
-    /// Returns `true` if `lhs` is a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    static func ⊆ <S : SetDefinition>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    static func ⊆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.⊈_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊈_]
-    /// Returns `true` if `lhs` is not a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    static func ⊈ <S : SetDefinition>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    static func ⊈ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.⊇_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
-    /// Returns `true` if `lhs` is a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    static func ⊇ <S : SetDefinition>(lhs: S, rhs: Self) -> Bool where S.Element == Self.Element
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    static func ⊇ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.⊉_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊉_]
-    /// Returns `true` if `lhs` is not a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    static func ⊉ <S : SetDefinition>(lhs: S, rhs: Self) -> Bool where S.Element == Self.Element
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    static func ⊉ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.⊊_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
-    /// Returns `true` if `lhs` is a strict subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    static func ⊊ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    static func ⊊ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.⊋_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
-    /// Returns `true` if `lhs` is a strict superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    static func ⊋ <S : FiniteSet>(lhs: S, rhs: Self) -> Bool where S.Element == Self.Element
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    static func ⊋ <S : FiniteSet>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.==_]
     // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    static func == <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    static func == <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.≠_]
     // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    static func ≠ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    static func ≠ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.overlaps(_:)_]
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
@@ -115,86 +115,86 @@ public protocol FiniteSet : Collection, ComparableSet {
 extension FiniteSet {
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊆_]
-    /// Returns `true` if `lhs` is a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    public static func ⊆ <S : SetDefinition>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
-        for element in lhs where element ∉ rhs {
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    public static func ⊆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+        for element in precedingValue where element ∉ followingValue {
             return false
         }
         return true
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊈_]
-    /// Returns `true` if `lhs` is not a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    public static func ⊈ <S : SetDefinition>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
-        return ¬(lhs ⊆ rhs)
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    public static func ⊈ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+        return ¬(precedingValue ⊆ followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊇_]
-    /// Returns `true` if `lhs` is a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    public static func ⊇ <S : SetDefinition>(lhs: S, rhs: Self) -> Bool where S.Element == Self.Element {
-        return rhs ⊆ lhs
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    public static func ⊇ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
+        return followingValue ⊆ precedingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊉_]
-    /// Returns `true` if `lhs` is not a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    public static func ⊉ <S : SetDefinition>(lhs: S, rhs: Self) -> Bool where S.Element == Self.Element {
-        return ¬(lhs ⊇ rhs)
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    public static func ⊉ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
+        return ¬(precedingValue ⊇ followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊊_]
-    /// Returns `true` if `lhs` is a strict subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    public static func ⊊ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
-        return lhs ⊆ rhs ∧ lhs ⊉ rhs
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    public static func ⊊ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+        return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊋_]
-    /// Returns `true` if `lhs` is a strict superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    public static func ⊋ <S : FiniteSet>(lhs: S, rhs: Self) -> Bool where S.Element == Self.Element {
-        return lhs ⊇ rhs ∧ lhs ⊈ rhs
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    public static func ⊋ <S : FiniteSet>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
+        return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.==_]
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
-        return lhs ⊇ rhs ∧ lhs ⊆ rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+        return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.FiniteSet.≠_]
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func ≠ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
-        return ¬(lhs == rhs)
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func ≠ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+        return ¬(precedingValue == followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]

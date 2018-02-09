@@ -17,8 +17,8 @@
 /// Conformance Requirements:
 ///
 /// - `AdditiveArithmetic`
-/// - `static func ×= (lhs: inout Self, rhs: Scalar)`
-/// - `static func ÷= (lhs: inout Self, rhs: Scalar)`
+/// - `static func ×= (precedingValue: inout Self, followingValue: Scalar)`
+/// - `static func ÷= (precedingValue: inout Self, followingValue: Scalar)`
 public protocol VectorProtocol : AdditiveArithmetic {
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.Scalar_]
@@ -26,91 +26,91 @@ public protocol VectorProtocol : AdditiveArithmetic {
     associatedtype Scalar : RationalArithmetic
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.×(_:scalar:)_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: A scalar coefficient.
+    ///     - precedingValue: A value.
+    ///     - followingValue: A scalar coefficient.
     ///
     /// - MutatingVariant: ×=
-    static func × (lhs: Self, rhs: Scalar) -> Self
+    static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.×(scalar:_:)_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A scalar coefficient.
-    ///     - rhs: A value.
-    static func × (lhs: Scalar, rhs: Self) -> Self
+    ///     - precedingValue: A scalar coefficient.
+    ///     - followingValue: A value.
+    static func × (precedingValue: Scalar, followingValue: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The scalar coefficient by which to multiply.
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The scalar coefficient by which to multiply.
     ///
     /// - NonmutatingVariant: ×
-    static func ×= (lhs: inout Self, rhs: Scalar)
+    static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.÷_]
-    /// Returns the quotient of the left divided by the right.
+    /// Returns the quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The dividend.
-    ///     - rhs: The divisor.
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
     ///
     /// - MutatingVariant: ×
-    static func ÷ (lhs: Self, rhs: Scalar) -> Self
+    static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.÷=_]
-    /// Modifies the left by dividing it by the right.
+    /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The divisor.
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The divisor.
     ///
     /// - NonmutatingVariant: ÷
-    static func ÷= (lhs: inout Self, rhs: Scalar)
+    static func ÷= (precedingValue: inout Self, followingValue: Scalar)
 }
 
 extension VectorProtocol {
 
     // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×(_:scalar:)_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: A scalar coefficient.
+    ///     - precedingValue: A value.
+    ///     - followingValue: A scalar coefficient.
     ///
     /// - MutatingVariant: ×=
-    public static func × (lhs: Self, rhs: Scalar) -> Self {
-        var result = lhs
-        result ×= rhs
+    public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
+        var result = precedingValue
+        result ×= followingValue
         return result
     }
 
     // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×(scalar:_:)_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A scalar coefficient.
-    ///     - rhs: A value.
-    public static func × (lhs: Scalar, rhs: Self) -> Self {
-        return rhs × lhs
+    ///     - precedingValue: A scalar coefficient.
+    ///     - followingValue: A value.
+    public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
+        return followingValue × precedingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.VectorProtocol.÷_]
-    /// Returns the quotient of the left divided by the right.
+    /// Returns the quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The dividend.
-    ///     - rhs: The divisor.
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
     ///
     /// - MutatingVariant: ×
-    public static func ÷ (lhs: Self, rhs: Scalar) -> Self {
-        var result = lhs
-        result ÷= rhs
+    public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
+        var result = precedingValue
+        result ÷= followingValue
         return result
     }
 }
@@ -119,28 +119,28 @@ extension VectorProtocol where Self : TwoDimensionalVector {
     // MARK: - where Self : TwoDimensionalVector
 
     // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The scalar coefficient by which to multiply.
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The scalar coefficient by which to multiply.
     ///
     /// - NonmutatingVariant: ×
-    public static func ×=(lhs: inout Self, rhs: Scalar) {
-        lhs.Δx ×= rhs
-        lhs.Δy ×= rhs
+    public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
+        precedingValue.Δx ×= followingValue
+        precedingValue.Δy ×= followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.VectorProtocol.÷=_]
-    /// Modifies the left by dividing it by the right.
+    /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The divisor.
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The divisor.
     ///
     /// - NonmutatingVariant: ÷
-    public static func ÷=(lhs: inout Self, rhs: Scalar) {
-        lhs.Δx ÷= rhs
-        lhs.Δy ÷= rhs
+    public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
+        precedingValue.Δx ÷= followingValue
+        precedingValue.Δy ÷= followingValue
     }
 }

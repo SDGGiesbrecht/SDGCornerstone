@@ -42,30 +42,30 @@ extension WholeNumber.BinaryView {
 
         // MARK: - Addable
 
-        internal static func += (lhs: inout IndexDistance, rhs: IndexDistance) {
-            lhs.digitDistance += rhs.digitDistance
-            lhs.bitDistance += rhs.bitDistance
+        internal static func += (precedingValue: inout IndexDistance, followingValue: IndexDistance) {
+            precedingValue.digitDistance += followingValue.digitDistance
+            precedingValue.bitDistance += followingValue.bitDistance
             let base = BinaryView<WholeNumber.Digit>.count
-            if lhs.bitDistance ≥ base {
-                lhs.digitDistance += 1
-                lhs.bitDistance −= base
+            if precedingValue.bitDistance ≥ base {
+                precedingValue.digitDistance += 1
+                precedingValue.bitDistance −= base
             }
-            if lhs.bitDistance < 0 {
-                lhs.digitDistance −= 1
-                lhs.bitDistance += base
+            if precedingValue.bitDistance < 0 {
+                precedingValue.digitDistance −= 1
+                precedingValue.bitDistance += base
             }
         }
 
         // MARK: - Comparable
 
-        internal static func < (lhs: IndexDistance, rhs: IndexDistance) -> Bool {
-            return (lhs.digitDistance, lhs.bitDistance) < (rhs.digitDistance, rhs.bitDistance)
+        internal static func < (precedingValue: IndexDistance, followingValue: IndexDistance) -> Bool {
+            return (precedingValue.digitDistance, precedingValue.bitDistance) < (followingValue.digitDistance, followingValue.bitDistance)
         }
 
         // MARK: - Equatable
 
-        internal static func == (lhs: IndexDistance, rhs: IndexDistance) -> Bool {
-            return (lhs.digitDistance, lhs.bitDistance) == (rhs.digitDistance, rhs.bitDistance)
+        internal static func == (precedingValue: IndexDistance, followingValue: IndexDistance) -> Bool {
+            return (precedingValue.digitDistance, precedingValue.bitDistance) == (followingValue.digitDistance, followingValue.bitDistance)
         }
 
         // MARK: - ExpressibleByIntegerLiteral
@@ -100,21 +100,21 @@ extension WholeNumber.BinaryView {
         }
 
         // func ×
-        internal static func * (lhs: IndexDistance, rhs: IndexDistance) -> IndexDistance {
+        internal static func * (precedingValue: IndexDistance, followingValue: IndexDistance) -> IndexDistance {
             unreachable()
             // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }
 
         // func ×=
-        internal static func *= (lhs: inout IndexDistance, rhs: IndexDistance) {
+        internal static func *= (precedingValue: inout IndexDistance, followingValue: IndexDistance) {
             unreachable()
             // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }
 
         // MARK: - Subtractable
 
-        internal static func −= (lhs: inout IndexDistance, rhs: IndexDistance) {
-            lhs += −rhs
+        internal static func −= (precedingValue: inout IndexDistance, followingValue: IndexDistance) {
+            precedingValue += −followingValue
         }
     }
 }

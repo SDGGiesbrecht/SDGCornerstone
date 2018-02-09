@@ -407,13 +407,13 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func < (lhs: CalendarDate, rhs: CalendarDate) -> Bool {
-        return lhs.intervalSinceEpoch < rhs.intervalSinceEpoch
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func < (precedingValue: CalendarDate, followingValue: CalendarDate) -> Bool {
+        return precedingValue.intervalSinceEpoch < followingValue.intervalSinceEpoch
     }
 
     // MARK: - Decodable
@@ -475,10 +475,10 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: CalendarDate, rhs: CalendarDate) -> Bool {
-        return lhs.intervalSinceEpoch == rhs.intervalSinceEpoch
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: CalendarDate, followingValue: CalendarDate) -> Bool {
+        return precedingValue.intervalSinceEpoch == followingValue.intervalSinceEpoch
     }
 
     // MARK: - PointProtocol
@@ -488,26 +488,26 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     public typealias Vector = CalendarInterval<FloatMax>
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout CalendarDate, rhs: CalendarInterval<FloatMax>) {
-        if let relative = lhs.definition as? RelativeDate {
-            lhs.definition = RelativeDate(relative.intervalSince + rhs, after: relative.baseDate)
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout CalendarDate, followingValue: CalendarInterval<FloatMax>) {
+        if let relative = precedingValue.definition as? RelativeDate {
+            precedingValue.definition = RelativeDate(relative.intervalSince + followingValue, after: relative.baseDate)
         } else {
-            lhs.definition = RelativeDate(rhs, after: lhs)
+            precedingValue.definition = RelativeDate(followingValue, after: precedingValue)
         }
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: CalendarDate, rhs: CalendarDate) -> CalendarInterval<FloatMax> {
-        return lhs.intervalSinceEpoch − rhs.intervalSinceEpoch
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: CalendarDate, followingValue: CalendarDate) -> CalendarInterval<FloatMax> {
+        return precedingValue.intervalSinceEpoch − followingValue.intervalSinceEpoch
     }
 }

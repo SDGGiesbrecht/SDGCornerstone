@@ -21,10 +21,10 @@ extension Array where Element : Equatable {
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    @_inlineable public static func ≠ (lhs: Array, rhs: Array) -> Bool {
-        return lhs != rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    @_inlineable public static func ≠ (precedingValue: Array, followingValue: Array) -> Bool {
+        return precedingValue != followingValue
     }
 }
 
@@ -35,10 +35,10 @@ extension ArraySlice where Element : Equatable {
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    @_inlineable public static func ≠ (lhs: ArraySlice, rhs: ArraySlice) -> Bool {
-        return lhs != rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    @_inlineable public static func ≠ (precedingValue: ArraySlice, followingValue: ArraySlice) -> Bool {
+        return precedingValue != followingValue
     }
 }
 
@@ -49,9 +49,9 @@ extension ContiguousArray where Element : Equatable {
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    @_inlineable public static func ≠ (lhs: ContiguousArray, rhs: ContiguousArray) -> Bool {
-        return lhs != rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    @_inlineable public static func ≠ (precedingValue: ContiguousArray, followingValue: ContiguousArray) -> Bool {
+        return precedingValue != followingValue
     }
 }

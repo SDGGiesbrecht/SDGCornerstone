@@ -182,40 +182,40 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
     public typealias Vector = Int
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout GregorianYear, rhs: Int) {
-        var result = lhs.rawValue + rhs
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout GregorianYear, followingValue: Int) {
+        var result = precedingValue.rawValue + followingValue
 
         // Compensate for zero year.
 
-        if lhs.year > 0 ∧ result ≤ 0 {
+        if precedingValue.year > 0 ∧ result ≤ 0 {
             // Crossed zero downwards
             result −= 1
-        } else if lhs.year < 0 ∧ result ≥ 0 {
+        } else if precedingValue.year < 0 ∧ result ≥ 0 {
             // Crossed zero upwards
             result += 1
         }
-        lhs = GregorianYear(result)
+        precedingValue = GregorianYear(result)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: GregorianYear, rhs: GregorianYear) -> Int {
-        var result = lhs.rawValue − rhs.rawValue
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: GregorianYear, followingValue: GregorianYear) -> Int {
+        var result = precedingValue.rawValue − followingValue.rawValue
 
         // Compensate for zero year.
-        if lhs.year > 0 ∧ rhs.year < 0 {
+        if precedingValue.year > 0 ∧ followingValue.year < 0 {
             // Positive distance crossing zero.
             result −= 1
-        } else if lhs.year < 0 ∧ rhs.year > 0 {
+        } else if precedingValue.year < 0 ∧ followingValue.year > 0 {
             // Negative distance crossing zero.
             result += 1
         }

@@ -21,9 +21,9 @@ extension Dictionary where Value : Equatable {
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    @_inlineable public static func ≠ (lhs: Dictionary, rhs: Dictionary) -> Bool {
-        return lhs != rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    @_inlineable public static func ≠ (precedingValue: Dictionary, followingValue: Dictionary) -> Bool {
+        return precedingValue != followingValue
     }
 }

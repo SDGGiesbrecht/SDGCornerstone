@@ -43,10 +43,10 @@ public enum PropertyList : Equatable, FileConvertible {
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: PropertyList, rhs: PropertyList) -> Bool {
-        return lhs.value.equatableRepresentation == rhs.value.equatableRepresentation
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: PropertyList, followingValue: PropertyList) -> Bool {
+        return precedingValue.value.equatableRepresentation == followingValue.value.equatableRepresentation
     }
 
     // MARK: - FileConvertible

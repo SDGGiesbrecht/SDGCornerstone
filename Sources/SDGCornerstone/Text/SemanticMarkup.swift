@@ -120,13 +120,13 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     // MARK: - Addable
 
     // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
-    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
-    public static func += (lhs: inout SemanticMarkup, rhs: SemanticMarkup) {
-        lhs.source += rhs.source
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
+    public static func += (precedingValue: inout SemanticMarkup, followingValue: SemanticMarkup) {
+        precedingValue.source += followingValue.source
     }
 
     // MARK: - BidirectionalCollection
@@ -199,10 +199,10 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: SemanticMarkup, rhs: SemanticMarkup) -> Bool {
-        return lhs.source == rhs.source
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: SemanticMarkup, followingValue: SemanticMarkup) -> Bool {
+        return precedingValue.source == followingValue.source
     }
 
     // MARK: - ExpressibleByStringLiteral

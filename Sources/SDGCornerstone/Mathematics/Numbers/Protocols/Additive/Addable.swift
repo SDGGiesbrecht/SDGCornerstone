@@ -18,56 +18,56 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `static func += (lhs: inout Self, rhs: Self)`
+/// - `static func += (precedingValue: inout Self, followingValue: Self)`
 public protocol Addable {
 
     // [_Define Documentation: SDGCornerstone.Addable.+_]
     /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to add.
-    static func + (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to add.
+    static func + (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Addable.+=_]
-    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
-    static func += (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
+    static func += (precedingValue: inout Self, followingValue: Self)
 }
 
 extension Addable {
 
-    fileprivate static func addAsAddable(_ lhs: Self, _ rhs: Self) -> Self {
-        var result = lhs
-        result += rhs
+    fileprivate static func addAsAddable(_ precedingValue: Self, _ followingValue: Self) -> Self {
+        var result = precedingValue
+        result += followingValue
         return result
     }
     // [_Inherit Documentation: SDGCornerstone.Addable.+_]
     /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to add.
-    public static func + (lhs: Self, rhs: Self) -> Self {
-        return addAsAddable(lhs, rhs)
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to add.
+    public static func + (precedingValue: Self, followingValue: Self) -> Self {
+        return addAsAddable(precedingValue, followingValue)
     }
 
     // [_Define Documentation: SDGCornerstone.Addable(Summation).+_]
     /// Returns the sum of the two values.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
 
     // [_Define Documentation: SDGCornerstone.Addable(Summation).+=_]
-    /// Adds the right value to the left.
+    /// Adds the following value to the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
 }
 
 extension Addable where Self : Measurement {
@@ -77,20 +77,20 @@ extension Addable where Self : Measurement {
     /// Returns the sum of the two values.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func + (lhs: Self, rhs: Self) -> Self {
-        return Self(rawValue: lhs.rawValue + rhs.rawValue)
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func + (precedingValue: Self, followingValue: Self) -> Self {
+        return Self(rawValue: precedingValue.rawValue + followingValue.rawValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+=_]
-    /// Adds the right value to the left.
+    /// Adds the following value to the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
-    public static func += (lhs: inout Self, rhs: Self) {
-        lhs.rawValue += rhs.rawValue
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
+    public static func += (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.rawValue += followingValue.rawValue
     }
 }
 
@@ -101,11 +101,11 @@ extension Addable where Self : PointProtocol, Self.Vector == Self {
     /// Returns the sum of the two values.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func + (lhs: Self, rhs: Self) -> Self {
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func + (precedingValue: Self, followingValue: Self) -> Self {
         // Disambiguate Addable.+ vs PointProtocol.+
-        return addAsAddable(lhs, rhs)
+        return addAsAddable(precedingValue, followingValue)
     }
 }
 
@@ -116,11 +116,11 @@ extension Addable where Self : PointProtocol, Self : Strideable, Self.Vector == 
     /// Returns the sum of the two values.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func + (lhs: Self, rhs: Self) -> Self {
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func + (precedingValue: Self, followingValue: Self) -> Self {
         // Disambiguate Addable.+ vs PointProtocol.+ vs Strideable.+
-        return addAsAddable(lhs, rhs)
+        return addAsAddable(precedingValue, followingValue)
     }
 }
 
@@ -131,11 +131,11 @@ extension Addable where Self : Strideable, Self.Stride == Self {
     /// Returns the sum of the two values.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func + (lhs: Self, rhs: Self) -> Self {
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func + (precedingValue: Self, followingValue: Self) -> Self {
         // Disambiguate Addable.+ vs Strideable.+
-        return addAsAddable(lhs, rhs)
+        return addAsAddable(precedingValue, followingValue)
     }
 }
 
@@ -143,13 +143,13 @@ extension Addable where Self : TwoDimensionalVector {
     // MARK: - where Self : TwoDimensionalVector
 
     // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
-    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
-    public static func += (lhs: inout Self, rhs: Self) {
-        lhs.Δx += rhs.Δx
-        lhs.Δy += rhs.Δy
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
+    public static func += (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.Δx += followingValue.Δx
+        precedingValue.Δy += followingValue.Δy
     }
 }

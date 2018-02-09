@@ -19,43 +19,43 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     // MARK: - ComparableSet
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
-    /// Returns `true` if `lhs` is a subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    public static func ⊆ (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
-        return lhs.isSubset(of: rhs)
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    public static func ⊆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+        return precedingValue.isSubset(of: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
-    /// Returns `true` if `lhs` is a superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    public static func ⊇ (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
-        return lhs.isSuperset(of: rhs)
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    public static func ⊇ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+        return precedingValue.isSuperset(of: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
-    /// Returns `true` if `lhs` is a strict subset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible subset to test.
-    ///     - rhs: The other set.
-    public static func ⊊ (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
-        return lhs.isStrictSubset(of: rhs)
+    ///     - precedingValue: The possible subset to test.
+    ///     - followingValue: The other set.
+    public static func ⊊ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+        return precedingValue.isStrictSubset(of: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
-    /// Returns `true` if `lhs` is a strict superset of `rhs`.
+    /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The possible superset to test.
-    ///     - rhs: The other set.
-    public static func ⊋ (lhs: CharacterSet, rhs: CharacterSet) -> Bool {
-        return lhs.isStrictSuperset(of: rhs)
+    ///     - precedingValue: The possible superset to test.
+    ///     - followingValue: The other set.
+    public static func ⊋ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+        return precedingValue.isStrictSuperset(of: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
@@ -73,92 +73,92 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∩ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
-        return lhs.intersection(rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+        return precedingValue.intersection(followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
-    /// Sets `lhs` to the intersection of the two sets.
+    /// Sets `precedingValue` to the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∩= (lhs: inout CharacterSet, rhs: CharacterSet) {
-        lhs.formIntersection(rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∩= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+        precedingValue.formIntersection(followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∪ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
-        return lhs.union(rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+        return precedingValue.union(followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
-    /// Sets `lhs` to the union of the two sets.
+    /// Sets `precedingValue` to the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∪= (lhs: inout CharacterSet, rhs: CharacterSet) {
-        return lhs.formUnion(rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∪= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+        return precedingValue.formUnion(followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the relative complement of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    public static func ∖ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
-        return lhs.subtracting(rhs)
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    public static func ∖ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+        return precedingValue.subtracting(followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
-    /// Subtracts `rhs` from `lhs`.
+    /// Subtracts `followingValue` from `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    public static func ∖= (lhs: inout CharacterSet, rhs: CharacterSet) {
-        lhs.subtract(rhs)
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    public static func ∖= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+        precedingValue.subtract(followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the symmetric difference of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∆ (lhs: CharacterSet, rhs: CharacterSet) -> CharacterSet {
-        return lhs.symmetricDifference(rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+        return precedingValue.symmetricDifference(followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
-    /// Sets `lhs` to the symmetric difference of the two sets.
+    /// Sets `precedingValue` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∆= (lhs: inout CharacterSet, rhs: CharacterSet) {
-        return lhs.formSymmetricDifference(rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∆= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+        return precedingValue.formSymmetricDifference(followingValue)
     }
 
     // MARK: - SetDefinition
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
+    /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: CharacterSet, rhs: Element) -> Bool {
-        return lhs.contains(rhs)
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    public static func ∋ (precedingValue: CharacterSet, followingValue: Element) -> Bool {
+        return precedingValue.contains(followingValue)
     }
 
     // MARK: - SetInRepresentableUniverse

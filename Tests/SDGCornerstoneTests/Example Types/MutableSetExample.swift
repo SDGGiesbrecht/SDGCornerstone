@@ -46,8 +46,8 @@ struct MutableSetExample : FiniteSet, MutableSet {
 
     // ComparableSet
 
-    static func ⊆ (lhs: MutableSetExample, rhs: MutableSetExample) -> Bool {
-        return lhs.value ⊆ rhs.value
+    static func ⊆ (precedingValue: MutableSetExample, followingValue: MutableSetExample) -> Bool {
+        return precedingValue.value ⊆ followingValue.value
     }
 
     func overlaps(_ other: MutableSetExample) -> Bool {
@@ -81,7 +81,7 @@ struct MutableSetExample : FiniteSet, MutableSet {
 
     typealias Element = Int
 
-    static func ∋ (lhs: MutableSetExample, rhs: Int) -> Bool {
-        return lhs.value ∋ rhs
+    static func ∋ (precedingValue: MutableSetExample, followingValue: Int) -> Bool {
+        return precedingValue.value ∋ followingValue
     }
 }

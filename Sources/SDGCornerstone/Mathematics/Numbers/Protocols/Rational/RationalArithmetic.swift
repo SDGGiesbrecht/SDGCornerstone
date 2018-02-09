@@ -15,19 +15,19 @@
 import SDGLogicCore
 
 // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
-/// Returns the (rational) quotient of the left divided by the right.
+/// Returns the (rational) quotient of the preceding value divided by the following value.
 ///
 /// - Parameters:
-///     - lhs: The dividend.
-///     - rhs: The divisor.
+///     - precedingValue: The dividend.
+///     - followingValue: The divisor.
 infix operator ÷: MultiplicationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷=_]
-/// Modifies the left by dividing it by the right.
+/// Modifies the preceding value by dividing it by the following value.
 ///
 /// - Parameters:
-///     - lhs: The value to modify.
-///     - rhs: The divisor.
+///     - precedingValue: The value to modify.
+///     - followingValue: The divisor.
 infix operator ÷=: AssignmentPrecedence
 
 /// A type that can be used for rational arithmetic.
@@ -36,7 +36,7 @@ infix operator ÷=: AssignmentPrecedence
 ///
 /// - `IntegralArithmetic`
 /// - `init(_ floatingPoint: FloatMax)`
-/// - `static func ÷= (lhs: inout Self, rhs: Self)`
+/// - `static func ÷= (precedingValue: inout Self, followingValue: Self)`
 public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmetic {
 
     // [_Define Documentation: SDGCornerstone.IntegralArithmetic.init(floatingPoint:)_]
@@ -47,20 +47,20 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     init(_ floatingPoint: FloatMax)
 
     // [_Define Documentation: SDGCornerstone.RationalArithmetic.÷_]
-    /// Returns the (rational) quotient of the left divided by the right.
+    /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The dividend.
-    ///     - rhs: The divisor.
-    static func ÷ (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
+    static func ÷ (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.RationalArithmetic.÷=_]
-    /// Modifies the left by dividing it by the right.
+    /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The divisor.
-    static func ÷= (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The divisor.
+    static func ÷= (precedingValue: inout Self, followingValue: Self)
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
     /// Creates a random value within a particular range.
@@ -81,14 +81,14 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
 extension RationalArithmetic {
 
     // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
-    /// Returns the (rational) quotient of the left divided by the right.
+    /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The dividend.
-    ///     - rhs: The divisor.
-    public static func ÷ (lhs: Self, rhs: Self) -> Self {
-        var result = lhs
-        result ÷= rhs
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
+    public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
+        var result = precedingValue
+        result ÷= followingValue
         return result
     }
 
@@ -233,22 +233,22 @@ extension RationalArithmetic where Self : FloatFamily {
     // MARK: - where Self : FloatFamily
 
     // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
-    /// Returns the (rational) quotient of the left divided by the right.
+    /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The dividend.
-    ///     - rhs: The divisor.
-    public static func ÷ (lhs: Self, rhs: Self) -> Self {
-        return lhs / rhs
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
+    public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
+        return precedingValue / followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷=_]
-    /// Modifies the left by dividing it by the right.
+    /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The divisor.
-    public static func ÷= (lhs: inout Self, rhs: Self) {
-        lhs /= rhs
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The divisor.
+    public static func ÷= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue /= followingValue
     }
 }

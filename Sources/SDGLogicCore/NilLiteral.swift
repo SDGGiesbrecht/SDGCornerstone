@@ -29,10 +29,10 @@ public struct NilLiteral : ExpressibleByNilLiteral {
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    @_inlineable public static func ≠ <T>(lhs: T?, rhs: NilLiteral) -> Bool {
-        return lhs != nil
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    @_inlineable public static func ≠ <T>(precedingValue: T?, followingValue: NilLiteral) -> Bool {
+        return precedingValue != nil
         // Allows “x ≠ nil” even when x is not Equatable.
     }
 }

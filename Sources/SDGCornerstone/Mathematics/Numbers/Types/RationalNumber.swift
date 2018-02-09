@@ -90,12 +90,12 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     // MARK: - Addable
 
     // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
-    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
-    public static func += (lhs: inout RationalNumber, rhs: RationalNumber) {
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
+    public static func += (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
 
         // _a_  +  _c_, b ≠ 0, d ≠ 0
         //  b       d
@@ -106,25 +106,25 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
         // _ad__+__bc_, b ≠ 0, d ≠ 0
         //      bd
 
-        var irregular = lhs.definition
+        var irregular = precedingValue.definition
 
-        irregular.numerator ×= rhs.denominator
-        irregular.numerator += rhs.numerator × lhs.denominator
+        irregular.numerator ×= followingValue.denominator
+        irregular.numerator += followingValue.numerator × precedingValue.denominator
 
-        irregular.denominator ×= rhs.denominator
+        irregular.denominator ×= followingValue.denominator
 
-        lhs.definition = irregular
+        precedingValue.definition = irregular
     }
 
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func < (lhs: RationalNumber, rhs: RationalNumber) -> Bool {
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func < (precedingValue: RationalNumber, followingValue: RationalNumber) -> Bool {
         //    _a_   <?     _c_ , b ≠ 0, d ≠ 0
         //     b            d
         //
@@ -135,7 +135,7 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
         //     bd          bd
         //
         //     ad   <?     bc  , b ≠ 0, d ≠ 0
-        return lhs.numerator × rhs.denominator < rhs.numerator × lhs.denominator
+        return precedingValue.numerator × followingValue.denominator < followingValue.numerator × precedingValue.denominator
     }
 
     // MARK: - Decodable
@@ -171,10 +171,10 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: RationalNumber, rhs: RationalNumber) -> Bool {
-        return (lhs.numerator, lhs.denominator) == (rhs.numerator, rhs.denominator)
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: RationalNumber, followingValue: RationalNumber) -> Bool {
+        return (precedingValue.numerator, precedingValue.denominator) == (followingValue.numerator, followingValue.denominator)
     }
 
     // MARK: - Hashable
@@ -227,16 +227,16 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     // MARK: - RationalArithmetic
 
     // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷=_]
-    /// Modifies the left by dividing it by the right.
+    /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The divisor.
-    public static func ÷= (lhs: inout RationalNumber, rhs: RationalNumber) {
-        var irregular = lhs.definition
-        irregular.numerator ×= rhs.denominator
-        irregular.denominator ×= rhs.numerator
-        lhs.definition = irregular
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The divisor.
+    public static func ÷= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
+        var irregular = precedingValue.definition
+        irregular.numerator ×= followingValue.denominator
+        irregular.denominator ×= followingValue.numerator
+        precedingValue.definition = irregular
     }
 
     // MARK: - RationalNumberProtocol
@@ -250,13 +250,13 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     // MARK: - Subtractable
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    public static func −= (lhs: inout RationalNumber, rhs: RationalNumber) {
-        lhs += −rhs
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    public static func −= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
+        precedingValue += −followingValue
     }
 
     // MARK: - WholeArithmetic
@@ -271,16 +271,16 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The coefficient by which to multiply.
-    public static func ×= (lhs: inout RationalNumber, rhs: RationalNumber) {
-        var irregular = lhs.definition
-        irregular.numerator ×= rhs.numerator
-        irregular.denominator ×= rhs.denominator
-        lhs.definition = irregular
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The coefficient by which to multiply.
+    public static func ×= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
+        var irregular = precedingValue.definition
+        irregular.numerator ×= followingValue.numerator
+        irregular.denominator ×= followingValue.denominator
+        precedingValue.definition = irregular
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]

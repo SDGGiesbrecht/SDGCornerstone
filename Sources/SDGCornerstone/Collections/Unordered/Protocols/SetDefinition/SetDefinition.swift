@@ -13,35 +13,35 @@
  */
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∈_]
-/// Returns `true` if `lhs` is an element of `rhs`.
+/// Returns `true` if `precedingValue` is an element of `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The element to test.
-///     - rhs: The set.
+///     - precedingValue: The element to test.
+///     - followingValue: The set.
 infix operator ∈: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∉_]
-/// Returns `true` if `lhs` is not an element of `rhs`.
+/// Returns `true` if `precedingValue` is not an element of `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The element to test.
-///     - rhs: The set.
+///     - precedingValue: The element to test.
+///     - followingValue: The set.
 infix operator ∉: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-/// Returns `true` if `lhs` contains `rhs`.
+/// Returns `true` if `precedingValue` contains `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The set.
-///     - rhs: The element to test.
+///     - precedingValue: The set.
+///     - followingValue: The element to test.
 infix operator ∋: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∌_]
-/// Returns `true` if `lhs` does not contain `rhs`.
+/// Returns `true` if `precedingValue` does not contain `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The set.
-///     - rhs: The element to test.
+///     - precedingValue: The set.
+///     - followingValue: The element to test.
 infix operator ∌: ComparisonPrecedence
 
 /// The precedence group for `∩`, `∪` and `∖`.
@@ -54,32 +54,32 @@ precedencegroup BinarySetOperationPrecedence {
 /// Returns the intersection of the two sets.
 ///
 /// - Parameters:
-///     - lhs: A set.
-///     - rhs: Another set.
+///     - precedingValue: A set.
+///     - followingValue: Another set.
 infix operator ∩: BinarySetOperationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
-/// Sets `lhs` to the intersection of the two sets.
+/// Sets `precedingValue` to the intersection of the two sets.
 ///
 /// - Parameters:
-///     - lhs: A set.
-///     - rhs: Another set.
+///     - precedingValue: A set.
+///     - followingValue: Another set.
 infix operator ∩=: AssignmentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
 /// Returns the union of the two sets.
 ///
 /// - Parameters:
-///     - lhs: A set.
-///     - rhs: Another set.
+///     - precedingValue: A set.
+///     - followingValue: Another set.
 infix operator ∪: BinarySetOperationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
-/// Sets `lhs` to the union of the two sets.
+/// Sets `precedingValue` to the union of the two sets.
 ///
 /// - Parameters:
-///     - lhs: A set.
-///     - rhs: Another set.
+///     - precedingValue: A set.
+///     - followingValue: Another set.
 infix operator ∪=: AssignmentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′=_]
@@ -90,42 +90,42 @@ infix operator ∪=: AssignmentPrecedence
 postfix operator ′=
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
-/// Returns the relative complement of `rhs` in `lhs`.
+/// Returns the relative complement of `followingValue` in `precedingValue`.
 ///
 /// - Parameters:
-///     - lhs: The set to subtract from.
-///     - rhs: The set to subtract.
+///     - precedingValue: The set to subtract from.
+///     - followingValue: The set to subtract.
 infix operator ∖: BinarySetOperationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
-/// Subtracts `rhs` from `lhs`.
+/// Subtracts `followingValue` from `precedingValue`.
 ///
 /// - Parameters:
-///     - lhs: The set to subtract from.
-///     - rhs: The set to subtract.
+///     - precedingValue: The set to subtract from.
+///     - followingValue: The set to subtract.
 infix operator ∖=: AssignmentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
-/// Returns the symmetric difference of `rhs` in `lhs`.
+/// Returns the symmetric difference of `followingValue` in `precedingValue`.
 ///
 /// - Parameters:
-///     - lhs: A set.
-///     - rhs: Another set.
+///     - precedingValue: A set.
+///     - followingValue: Another set.
 infix operator ∆: BinarySetOperationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
-/// Sets `lhs` to the symmetric difference of the two sets.
+/// Sets `precedingValue` to the symmetric difference of the two sets.
 ///
 /// - Parameters:
-///     - lhs: A set.
-///     - rhs: Another set.
+///     - precedingValue: A set.
+///     - followingValue: Another set.
 infix operator ∆=: AssignmentPrecedence
 
 /// A type that defines a set.
 ///
 /// Conformance Requirements:
 ///
-/// - `static func ∋ (lhs: Element, rhs: Self) -> Bool`
+/// - `static func ∋ (precedingValue: Element, followingValue: Self) -> Bool`
 public protocol SetDefinition {
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.Element_]
@@ -135,98 +135,98 @@ public protocol SetDefinition {
     // MARK: - Membership
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∈_]
-    /// Returns `true` if `lhs` is an element of `rhs`.
+    /// Returns `true` if `precedingValue` is an element of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The element to test.
-    ///     - rhs: The set.
-    static func ∈ (lhs: Element, rhs: Self) -> Bool
+    ///     - precedingValue: The element to test.
+    ///     - followingValue: The set.
+    static func ∈ (precedingValue: Element, followingValue: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∉_]
-    /// Returns `true` if `lhs` is not an element of `rhs`.
+    /// Returns `true` if `precedingValue` is not an element of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The element to test.
-    ///     - rhs: The set.
-    static func ∉ (lhs: Element, rhs: Self) -> Bool
+    ///     - precedingValue: The element to test.
+    ///     - followingValue: The set.
+    static func ∉ (precedingValue: Element, followingValue: Self) -> Bool
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
+    /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    static func ∋ (lhs: Self, rhs: Element) -> Bool
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    static func ∋ (precedingValue: Self, followingValue: Element) -> Bool
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∌_]
-    /// Returns `true` if `lhs` does not contain `rhs`.
+    /// Returns `true` if `precedingValue` does not contain `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    static func ∌ (lhs: Self, rhs: Element) -> Bool
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    static func ∌ (precedingValue: Self, followingValue: Element) -> Bool
 }
 
 extension SetDefinition {
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∈_]
-    /// Returns `true` if `lhs` is an element of `rhs`.
+    /// Returns `true` if `precedingValue` is an element of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The element to test.
-    ///     - rhs: The set.
-    public static func ∈ (lhs: Element, rhs: Self) -> Bool {
-        return rhs ∋ lhs
+    ///     - precedingValue: The element to test.
+    ///     - followingValue: The set.
+    public static func ∈ (precedingValue: Element, followingValue: Self) -> Bool {
+        return followingValue ∋ precedingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∉_]
-    /// Returns `true` if `lhs` is not an element of `rhs`.
+    /// Returns `true` if `precedingValue` is not an element of `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The element to test.
-    ///     - rhs: The set.
-    public static func ∉ (lhs: Element, rhs: Self) -> Bool {
-        return ¬(lhs ∈ rhs)
+    ///     - precedingValue: The element to test.
+    ///     - followingValue: The set.
+    public static func ∉ (precedingValue: Element, followingValue: Self) -> Bool {
+        return ¬(precedingValue ∈ followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∌_]
-    /// Returns `true` if `lhs` does not contain `rhs`.
+    /// Returns `true` if `precedingValue` does not contain `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∌ (lhs: Self, rhs: Element) -> Bool {
-        return ¬(lhs ∋ rhs)
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    public static func ∌ (precedingValue: Self, followingValue: Element) -> Bool {
+        return ¬(precedingValue ∋ followingValue)
     }
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∩_]
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∩ <S : SetDefinition>(lhs: Self, rhs: S) -> Intersection<Self, S> {
-        return Intersection(lhs, rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∩ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Intersection<Self, S> {
+        return Intersection(precedingValue, followingValue)
     }
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∪_]
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∪ <S : SetDefinition>(lhs: Self, rhs: S) -> Union<Self, S> {
-        return Union(lhs, rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∪ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Self, S> {
+        return Union(precedingValue, followingValue)
     }
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∖_]
-    /// Returns the relative complement of `rhs` in `lhs`.
+    /// Returns the relative complement of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
-    ///     - rhs: The set to subtract.
-    public static func ∖ <S : SetDefinition>(lhs: Self, rhs: S) -> RelativeComplement<Self, S> {
-        return RelativeComplement(of: rhs, in: lhs)
+    ///     - precedingValue: The set to subtract from.
+    ///     - followingValue: The set to subtract.
+    public static func ∖ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> RelativeComplement<Self, S> {
+        return RelativeComplement(of: followingValue, in: precedingValue)
     }
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.′_]
@@ -239,13 +239,13 @@ extension SetDefinition {
     }
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.∆_]
-    /// Returns the symmetric difference of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
-    ///     - rhs: Another set.
-    public static func ∆ <S : SetDefinition>(lhs: Self, rhs: S) -> SymmetricDifference<Self, S> {
-        return SymmetricDifference(lhs, rhs)
+    ///     - precedingValue: A set.
+    ///     - followingValue: Another set.
+    public static func ∆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> SymmetricDifference<Self, S> {
+        return SymmetricDifference(precedingValue, followingValue)
     }
 }
 
@@ -253,12 +253,12 @@ extension SetDefinition where Self : RangeFamily {
     // MARK: - where Self : RangeFamily
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
+    /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: Self, rhs: Bound) -> Bool {
-        return lhs.contains(rhs)
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    public static func ∋ (precedingValue: Self, followingValue: Bound) -> Bool {
+        return precedingValue.contains(followingValue)
     }
 }

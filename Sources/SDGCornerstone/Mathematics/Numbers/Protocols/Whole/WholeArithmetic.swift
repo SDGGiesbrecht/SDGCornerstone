@@ -17,59 +17,59 @@ import Foundation
 import SDGLogicCore
 
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
-/// Returns the product of the left times the right.
+/// Returns the product of the preceding value times the following value.
 ///
 /// - Parameters:
-///     - lhs: A value.
-///     - rhs: Another value.
+///     - precedingValue: A value.
+///     - followingValue: Another value.
 infix operator ×: MultiplicationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
-/// Modifies the left by multiplication with the right.
+/// Modifies the preceding value by multiplication with the following value.
 ///
 /// - Parameters:
-///     - lhs: The value to modify.
-///     - rhs: The coefficient by which to multiply.
+///     - precedingValue: The value to modify.
+///     - followingValue: The coefficient by which to multiply.
 infix operator ×=: AssignmentPrecedence
 
 /// A precedence group for exponent operators. (e.g. ↑)
 ///
 /// Precedence: before `MultiplicationPrecedence`
 ///
-/// Associativity: right
+/// Associativity: The last to appear is executed first.
 precedencegroup ExponentPrecedence {
     associativity: right
     higherThan: MultiplicationPrecedence
 }
 
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑_]
-/// Returns the result of the left to the power of the right.
+/// Returns the result of the preceding value to the power of the following value.
 ///
 /// - Precondition:
-///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
 ///   - If `Self` conforms to `RealNumberProtocol`, either
-///     - `lhs` must be positive, or
-///     - `rhs` must be an integer.
+///     - `precedingValue` must be positive, or
+///     - `followingValue` must be an integer.
 ///
 /// - Parameters:
-///     - lhs: The base.
-///     - rhs: The exponent.
+///     - precedingValue: The base.
+///     - followingValue: The exponent.
 infix operator ↑: ExponentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
-/// Modifies the left by exponentiation with the right.
+/// Modifies the preceding value by exponentiation with the following value.
 ///
 /// - Precondition:
-///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
 ///   - If `Self` conforms to `RealNumberProtocol`, either
-///     - `lhs` must be positive, or
-///     - `rhs` must be an integer.
+///     - `precedingValue` must be positive, or
+///     - `followingValue` must be an integer.
 ///
 /// - Parameters:
-///     - lhs: The value to modify.
-///     - rhs: The exponent.
+///     - precedingValue: The value to modify.
+///     - followingValue: The exponent.
 infix operator ↑=: AssignmentPrecedence
 
 /// A type that can be used for whole‐number arithmetic.
@@ -80,9 +80,9 @@ infix operator ↑=: AssignmentPrecedence
 /// - `FixedScaleOneDimensionalPoint`
 /// - `init(_ uInt: UIntMax)`
 /// - `init?<T>(exactly source: T) where T : BinaryInteger`
-/// - `static func ×= (lhs: inout Self, rhs: Self)`
+/// - `static func ×= (precedingValue: inout Self, followingValue: Self)`
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
-/// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (lhs: inout Self, rhs: Self)`
+/// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (precedingValue: inout Self, followingValue: Self)`
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
 public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveArithmetic, FixedScaleOneDimensionalPoint, Numeric {
 
@@ -112,20 +112,20 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     // MARK: - Operations
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.×_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    static func × (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    static func × (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The coefficient by which to multiply.
-    static func ×= (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The coefficient by which to multiply.
+    static func ×= (precedingValue: inout Self, followingValue: Self)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
     /// Sets `self` to the integral quotient of `self` divided by `divisor`.
@@ -171,8 +171,8 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     static func gcd(_ a: Self, _ b: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:)_]
@@ -186,8 +186,8 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     static func lcm(_ a: Self, _ b: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:)_]
@@ -198,34 +198,34 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     mutating func formLeastCommonMultiple(with other: Self)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.↑_]
-    /// Returns the result of the left to the power of the right.
+    /// Returns the result of the preceding value to the power of the following value.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
     ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `lhs` must be positive, or
-    ///     - `rhs` must be an integer.
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
     ///
     /// - Parameters:
-    ///     - lhs: The base.
-    ///     - rhs: The exponent.
-    static func ↑ (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: The base.
+    ///     - followingValue: The exponent.
+    static func ↑ (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.↑=_]
-    /// Modifies the left by exponentiation with the right.
+    /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
     ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `lhs` must be positive, or
-    ///     - `rhs` must be an integer.
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The exponent.
-    static func ↑= (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The exponent.
+    static func ↑= (precedingValue: inout Self, followingValue: Self)
 
     // MARK: - Classification
 
@@ -517,14 +517,14 @@ extension WholeArithmetic {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func × (lhs: Self, rhs: Self) -> Self {
-        var result = lhs
-        result ×= rhs
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func × (precedingValue: Self, followingValue: Self) -> Self {
+        var result = precedingValue
+        result ×= followingValue
         return result
     }
 
@@ -575,8 +575,8 @@ extension WholeArithmetic {
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     public static func gcd(_ a: Self, _ b: Self) -> Self {
         var result = a
         result.formGreatestCommonDivisor(with: b)
@@ -603,8 +603,8 @@ extension WholeArithmetic {
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     public static func lcm(_ a: Self, _ b: Self) -> Self {
         var result = a
         result.formLeastCommonMultiple(with: b)
@@ -621,21 +621,21 @@ extension WholeArithmetic {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑_]
-    /// Returns the result of the left to the power of the right.
+    /// Returns the result of the preceding value to the power of the following value.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
     ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `lhs` must be positive, or
-    ///     - `rhs` must be an integer.
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
     ///
     /// - Parameters:
-    ///     - lhs: The base.
-    ///     - rhs: The exponent.
-    public static func ↑ (lhs: Self, rhs: Self) -> Self {
-        var result = lhs
-        result ↑= rhs
+    ///     - precedingValue: The base.
+    ///     - followingValue: The exponent.
+    public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+        var result = precedingValue
+        result ↑= followingValue
         return result
     }
 
@@ -648,7 +648,7 @@ extension WholeArithmetic {
             // p = (b ↑ 2) ↑ (e ÷ 2)
             self ×= self
             self ↑= (exponent.dividedAccordingToEuclid(by: 2))
-        } else /* rhs.isOdd */ {
+        } else /* followingValue.isOdd */ {
             // p = b × b ↑ (e − 1)
             self ×= (self ↑ (exponent − (1 as Self)))
         }
@@ -1348,8 +1348,8 @@ extension WholeArithmetic {
 /// Returns the greatest common divisor of `a` and `b`.
 ///
 /// - Parameters:
-///     - lhs: A value.
-///     - rhs: Another value.
+///     - precedingValue: A value.
+///     - followingValue: Another value.
 public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.gcd(a, b)
 }
@@ -1358,8 +1358,8 @@ public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
 /// Returns the least common multiple of `a` and `b`.
 ///
 /// - Parameters:
-///     - lhs: A value.
-///     - rhs: Another value.
+///     - precedingValue: A value.
+///     - followingValue: Another value.
 public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.lcm(a, b)
 }
@@ -1373,23 +1373,23 @@ extension WholeArithmetic where Self : FloatFamily {
     // MARK: - where Self : FloatFamily
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func × (lhs: Self, rhs: Self) -> Self {
-        return lhs * rhs
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func × (precedingValue: Self, followingValue: Self) -> Self {
+        return precedingValue * followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The coefficient by which to multiply.
-    public static func ×= (lhs: inout Self, rhs: Self) {
-        lhs *= rhs
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The coefficient by which to multiply.
+    public static func ×= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue *= followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
@@ -1405,39 +1405,39 @@ extension WholeArithmetic where Self : FloatFamily {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
-    /// Modifies the left by exponentiation with the right.
+    /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
     ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `lhs` must be positive, or
-    ///     - `rhs` must be an integer.
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The exponent.
-    public static func ↑= (lhs: inout Self, rhs: Self) {
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The exponent.
+    public static func ↑= (precedingValue: inout Self, followingValue: Self) {
 
-        assert(lhs.isNonNegative ∨ rhs.isIntegral, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        assert(precedingValue.isNonNegative ∨ followingValue.isIntegral, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
                 return "The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead."
             }
         }))
 
-        if rhs.isIntegral {
-            lhs.raiseRationalNumberToThePowerOf(rationalNumber: rhs)
-        } else if rhs.isNegative /* but not an integer */ {
-            lhs = 1 ÷ lhs ↑ −rhs
-        } else if lhs == e /* (natural) exponential function */ {
+        if followingValue.isIntegral {
+            precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
+        } else if followingValue.isNegative /* but not an integer */ {
+            precedingValue = 1 ÷ precedingValue ↑ −followingValue
+        } else if precedingValue == e /* (natural) exponential function */ {
 
             // if x = e ↑ (w + r)
             // then x = e ↑ w × e ↑ r
-            let w: Self = rhs.rounded(.toNearestOrAwayFromZero)
-            let r: Self = rhs − w
+            let w: Self = followingValue.rounded(.toNearestOrAwayFromZero)
+            let r: Self = followingValue − w
 
-            lhs.raiseRationalNumberToThePowerOf(rationalNumber: w)
+            precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: w)
 
             // The Taylor series around 0 will converge for any real r:
             //
@@ -1461,10 +1461,10 @@ extension WholeArithmetic where Self : FloatFamily {
 
             } while e_r ≠ lastApproximate
 
-            lhs ×= e_r
+            precedingValue ×= e_r
 
         } else {
-            lhs = e ↑ (rhs × ln(lhs))
+            precedingValue = e ↑ (followingValue × ln(precedingValue))
         }
     }
 
@@ -1502,20 +1502,20 @@ extension WholeArithmetic where Self : IntegerProtocol {
     // MARK: - where Self : IntegerProtocol
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
-    /// Modifies the left by exponentiation with the right.
+    /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
     ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `lhs` must be positive, or
-    ///     - `rhs` must be an integer.
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The exponent.
-    public static func ↑= (lhs: inout Self, rhs: Self) {
-        lhs.raiseIntegerToThePowerOf(integer: rhs)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The exponent.
+    public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.raiseIntegerToThePowerOf(integer: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isIntegral_]
@@ -1599,23 +1599,23 @@ extension WholeArithmetic where Self : IntFamily {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func × (lhs: Self, rhs: Self) -> Self {
-        return lhs * rhs
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func × (precedingValue: Self, followingValue: Self) -> Self {
+        return precedingValue * followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The coefficient by which to multiply.
-    public static func ×= (lhs: inout Self, rhs: Self) {
-        lhs *= rhs
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The coefficient by which to multiply.
+    public static func ×= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue *= followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
@@ -1737,20 +1737,20 @@ extension WholeArithmetic where Self : RationalNumberProtocol {
     // MARK: - where Self : RationalNumberProtocol
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
-    /// Modifies the left by exponentiation with the right.
+    /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
     ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `lhs` must be positive, or
-    ///     - `rhs` must be an integer.
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The exponent.
-    public static func ↑= (lhs: inout Self, rhs: Self) {
-        lhs.raiseRationalNumberToThePowerOf(rationalNumber: rhs)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The exponent.
+    public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
     }
 }
 
@@ -1772,23 +1772,23 @@ extension WholeArithmetic where Self : UIntFamily {
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func × (lhs: Self, rhs: Self) -> Self {
-        return lhs * rhs
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func × (precedingValue: Self, followingValue: Self) -> Self {
+        return precedingValue * followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The coefficient by which to multiply.
-    public static func ×= (lhs: inout Self, rhs: Self) {
-        lhs *= rhs
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The coefficient by which to multiply.
+    public static func ×= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue *= followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:)_]
@@ -1863,20 +1863,20 @@ extension WholeArithmetic where Self : WholeNumberProtocol {
     // MARK: - where Self : WholeNumberProtocol
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
-    /// Modifies the left by exponentiation with the right.
+    /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `rhs` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `rhs` must be an integer.
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
     ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `lhs` must be positive, or
-    ///     - `rhs` must be an integer.
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The exponent.
-    public static func ↑= (lhs: inout Self, rhs: Self) {
-        lhs.raiseWholeNumberToThePowerOf(wholeNumber: rhs)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The exponent.
+    public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isWhole_]

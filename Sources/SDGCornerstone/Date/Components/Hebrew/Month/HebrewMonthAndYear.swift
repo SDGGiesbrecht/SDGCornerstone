@@ -37,13 +37,13 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func < (lhs: HebrewMonthAndYear, rhs: HebrewMonthAndYear) -> Bool {
-        return (lhs.year, lhs.month) < (rhs.year, rhs.month)
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func < (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Bool {
+        return (precedingValue.year, precedingValue.month) < (followingValue.year, followingValue.month)
     }
 
     // MARK: - Decodable
@@ -79,10 +79,10 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: HebrewMonthAndYear, rhs: HebrewMonthAndYear) -> Bool {
-        return (lhs.year, lhs.month) == (rhs.year, rhs.month)
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Bool {
+        return (precedingValue.year, precedingValue.month) == (followingValue.year, followingValue.month)
     }
 
     // MARK: - PointProtocol
@@ -92,35 +92,35 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     public typealias Vector = Int
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout HebrewMonthAndYear, rhs: Int) {
-        if rhs.isNegative {
-            for _ in 1 ... |rhs| {
-                lhs.month.decrementCyclically(leapYear: lhs.year.isLeapYear) { lhs.year −= 1 }
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout HebrewMonthAndYear, followingValue: Int) {
+        if followingValue.isNegative {
+            for _ in 1 ... |followingValue| {
+                precedingValue.month.decrementCyclically(leapYear: precedingValue.year.isLeapYear) { precedingValue.year −= 1 }
             }
         } else {
-            for _ in 1 ... rhs {
-                lhs.month.incrementCyclically(leapYear: lhs.year.isLeapYear) { lhs.year += 1 }
+            for _ in 1 ... followingValue {
+                precedingValue.month.incrementCyclically(leapYear: precedingValue.year.isLeapYear) { precedingValue.year += 1 }
             }
         }
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: HebrewMonthAndYear, rhs: HebrewMonthAndYear) -> Int {
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Int {
         var distance = 0
-        var point = lhs
+        var point = precedingValue
 
-        while point ≠ rhs {
-            if point > rhs {
+        while point ≠ followingValue {
+            if point > followingValue {
                 distance += 1
                 point −= 1
             } else {

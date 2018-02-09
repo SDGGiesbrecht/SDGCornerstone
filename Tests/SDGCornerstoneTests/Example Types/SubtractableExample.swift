@@ -24,20 +24,20 @@ struct SubtractableExample : Equatable, Subtractable {
 
     // Addable
 
-    static func += (lhs: inout SubtractableExample, rhs: SubtractableExample) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout SubtractableExample, followingValue: SubtractableExample) {
+        precedingValue.value += followingValue.value
     }
 
     // Equatable
 
-    static func == (lhs: SubtractableExample, rhs: SubtractableExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: SubtractableExample, followingValue: SubtractableExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // Subtractable
 
-    static func −= (lhs: inout SubtractableExample, rhs: SubtractableExample) {
-        lhs.value −= rhs.value
+    static func −= (precedingValue: inout SubtractableExample, followingValue: SubtractableExample) {
+        precedingValue.value −= followingValue.value
     }
 }
 
@@ -55,8 +55,8 @@ struct SubtractableExampleWherePointProtocolAndVectorIsSelf : Negatable, PointPr
 
     // Equatable
 
-    static func == (lhs: SubtractableExampleWherePointProtocolAndVectorIsSelf, rhs: SubtractableExampleWherePointProtocolAndVectorIsSelf) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: SubtractableExampleWherePointProtocolAndVectorIsSelf, followingValue: SubtractableExampleWherePointProtocolAndVectorIsSelf) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // Hashable
@@ -69,17 +69,17 @@ struct SubtractableExampleWherePointProtocolAndVectorIsSelf : Negatable, PointPr
 
     typealias Vector = SubtractableExampleWherePointProtocolAndVectorIsSelf
 
-    static func += (lhs: inout SubtractableExampleWherePointProtocolAndVectorIsSelf, rhs: Vector) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout SubtractableExampleWherePointProtocolAndVectorIsSelf, followingValue: Vector) {
+        precedingValue.value += followingValue.value
     }
 
-    static func − (lhs: SubtractableExampleWherePointProtocolAndVectorIsSelf, rhs: SubtractableExampleWherePointProtocolAndVectorIsSelf) -> Vector {
-        return SubtractableExampleWherePointProtocolAndVectorIsSelf(lhs.value − rhs.value)
+    static func − (precedingValue: SubtractableExampleWherePointProtocolAndVectorIsSelf, followingValue: SubtractableExampleWherePointProtocolAndVectorIsSelf) -> Vector {
+        return SubtractableExampleWherePointProtocolAndVectorIsSelf(precedingValue.value − followingValue.value)
     }
 
     // Subtractable
 
-    static func −= (lhs: inout SubtractableExampleWherePointProtocolAndVectorIsSelf, rhs: SubtractableExampleWherePointProtocolAndVectorIsSelf) {
-        lhs.value −= rhs.value
+    static func −= (precedingValue: inout SubtractableExampleWherePointProtocolAndVectorIsSelf, followingValue: SubtractableExampleWherePointProtocolAndVectorIsSelf) {
+        precedingValue.value −= followingValue.value
     }
 }

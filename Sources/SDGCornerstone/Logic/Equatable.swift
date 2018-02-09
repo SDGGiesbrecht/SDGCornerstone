@@ -21,10 +21,10 @@ extension Equatable where Self : ComparableSet {
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs ⊇ rhs ∧ lhs ⊆ rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
     }
 }
 
@@ -35,9 +35,9 @@ extension Equatable where Self : Measurement {
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.rawValue == rhs.rawValue
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue.rawValue == followingValue.rawValue
     }
 }

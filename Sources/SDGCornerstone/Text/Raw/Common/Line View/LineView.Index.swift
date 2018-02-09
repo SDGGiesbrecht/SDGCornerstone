@@ -74,21 +74,21 @@ public struct LineIndex : Comparable, Equatable {
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func < (lhs: LineIndex, rhs: LineIndex) -> Bool {
-        if let lhsStart = lhs.start {
-            if let rhsStart = rhs.start {
-                return lhsStart < rhsStart
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func < (precedingValue: LineIndex, followingValue: LineIndex) -> Bool {
+        if let precedingValueStart = precedingValue.start {
+            if let followingValueStart = followingValue.start {
+                return precedingValueStart < followingValueStart
             } else {
-                // lhs is valid, but rhs is the end index.
+                // precedingValue is valid, but followingValue is the end index.
                 return true
             }
         } else {
-            // lhs is the end index.
+            // precedingValue is the end index.
             return false
         }
     }
@@ -99,9 +99,9 @@ public struct LineIndex : Comparable, Equatable {
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: LineIndex, rhs: LineIndex) -> Bool {
-        return lhs.start == rhs.start
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: LineIndex, followingValue: LineIndex) -> Bool {
+        return precedingValue.start == followingValue.start
     }
 }

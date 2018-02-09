@@ -221,10 +221,10 @@ public struct LocalizationSetting : Equatable {
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: LocalizationSetting, rhs: LocalizationSetting) -> Bool {
-        return lhs.orderOfPrecedence.elementsEqual(rhs.orderOfPrecedence) { (leftGroup: [String], rightGroup: [String]) -> Bool in
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting) -> Bool {
+        return precedingValue.orderOfPrecedence.elementsEqual(followingValue.orderOfPrecedence) { (leftGroup: [String], rightGroup: [String]) -> Bool in
             return Set(leftGroup) == Set(rightGroup)
         }
     }

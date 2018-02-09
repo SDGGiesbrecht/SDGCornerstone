@@ -14,8 +14,8 @@
 
 import SDGCornerstone
 
-func ≈ <T : Subtractable>(lhs: T, rhs: T) -> Bool where T : Comparable, T : ExpressibleByFloatLiteral {
-    return lhs ≈ rhs ± 0.000_01
+func ≈ <T : Subtractable>(precedingValue: T, followingValue: T) -> Bool where T : Comparable, T : ExpressibleByFloatLiteral {
+    return precedingValue ≈ followingValue ± 0.000_01
 }
 
 func πLiteral<T>() -> T where T : ExpressibleByFloatLiteral {

@@ -24,14 +24,14 @@ struct AddableExample : Addable, Equatable {
 
     // Addable
 
-    static func += (lhs: inout AddableExample, rhs: AddableExample) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout AddableExample, followingValue: AddableExample) {
+        precedingValue.value += followingValue.value
     }
 
     // Equatable
 
-    static func == (lhs: AddableExample, rhs: AddableExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: AddableExample, followingValue: AddableExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 }
 
@@ -45,14 +45,14 @@ struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, Signed
 
     // Addable
 
-    static func += (lhs: inout AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout AddableExampleWhereStrideableAndStrideIsSelf, followingValue: AddableExampleWhereStrideableAndStrideIsSelf) {
+        precedingValue.value += followingValue.value
     }
 
     // Equatable
 
-    static func == (lhs: AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: AddableExampleWhereStrideableAndStrideIsSelf, followingValue: AddableExampleWhereStrideableAndStrideIsSelf) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // ExpressibleByIntegerLiteral
@@ -75,13 +75,13 @@ struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, Signed
     }
 
     // func ×
-    internal static func * (lhs: AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf {
-        return AddableExampleWhereStrideableAndStrideIsSelf(lhs.value × rhs.value)
+    internal static func * (precedingValue: AddableExampleWhereStrideableAndStrideIsSelf, followingValue: AddableExampleWhereStrideableAndStrideIsSelf) -> AddableExampleWhereStrideableAndStrideIsSelf {
+        return AddableExampleWhereStrideableAndStrideIsSelf(precedingValue.value × followingValue.value)
     }
 
     // func ×=
-    internal static func *= (lhs: inout AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) {
-        lhs.value ×= rhs.value
+    internal static func *= (precedingValue: inout AddableExampleWhereStrideableAndStrideIsSelf, followingValue: AddableExampleWhereStrideableAndStrideIsSelf) {
+        precedingValue.value ×= followingValue.value
     }
 
     // Strideable
@@ -96,7 +96,7 @@ struct AddableExampleWhereStrideableAndStrideIsSelf : Addable, Equatable, Signed
 
     // Subtractable
 
-    static func −= (lhs: inout AddableExampleWhereStrideableAndStrideIsSelf, rhs: AddableExampleWhereStrideableAndStrideIsSelf) {
-        lhs.value −= rhs.value
+    static func −= (precedingValue: inout AddableExampleWhereStrideableAndStrideIsSelf, followingValue: AddableExampleWhereStrideableAndStrideIsSelf) {
+        precedingValue.value −= followingValue.value
     }
 }

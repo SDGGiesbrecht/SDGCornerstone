@@ -19,8 +19,8 @@
 /// Conformance Requirements:
 ///
 /// - `Equatable`
-/// - `static func += (lhs: inout Self, rhs: Vector)`
-/// - `static func − (lhs: Self, rhs: Self) -> Vector`
+/// - `static func += (precedingValue: inout Self, followingValue: Vector)`
+/// - `static func − (precedingValue: Self, followingValue: Self) -> Vector`
 public protocol PointProtocol : Codable, Equatable {
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.Vector_]
@@ -28,98 +28,98 @@ public protocol PointProtocol : Codable, Equatable {
     associatedtype Vector : Negatable
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.+_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
+    /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to add.
+    ///     - precedingValue: The starting point.
+    ///     - followingValue: The vector to add.
     ///
     /// - MutatingVariant: +=
-    static func + (lhs: Self, rhs: Vector) -> Self
+    static func + (precedingValue: Self, followingValue: Vector) -> Self
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    static func += (lhs: inout Self, rhs: Vector)
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    static func += (precedingValue: inout Self, followingValue: Vector)
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the inverse of the vector on the right.
+    /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to subtract.
+    ///     - precedingValue: The starting point.
+    ///     - followingValue: The vector to subtract.
     ///
     /// - MutatingVariant: −=
-    static func − (lhs: Self, rhs: Vector) -> Self
+    static func − (precedingValue: Self, followingValue: Vector) -> Self
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    static func − (lhs: Self, rhs: Self) -> Vector
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    static func − (precedingValue: Self, followingValue: Self) -> Vector
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.−=_]
-    /// Moves the point on the left by the inverse of the vector on the right.
+    /// Moves the preceding point by the inverse of the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to subtract.
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to subtract.
     ///
     /// - NonmutatingVariant: −
-    static func −= (lhs: inout Self, rhs: Vector)
+    static func −= (precedingValue: inout Self, followingValue: Vector)
 }
 
 extension PointProtocol {
 
-    fileprivate static func addAsPointProtocol(_ lhs: Self, _ rhs: Vector) -> Self {
-        var result = lhs
-        result += rhs
+    fileprivate static func addAsPointProtocol(_ precedingValue: Self, _ followingValue: Vector) -> Self {
+        var result = precedingValue
+        result += followingValue
         return result
     }
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
+    /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to add.
+    ///     - precedingValue: The starting point.
+    ///     - followingValue: The vector to add.
     ///
     /// - MutatingVariant: +=
-    public static func + (lhs: Self, rhs: Vector) -> Self {
-        return addAsPointProtocol(lhs, rhs)
+    public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+        return addAsPointProtocol(precedingValue, followingValue)
     }
 
-    fileprivate static func subtractAsPointProtocol(_ lhs: Self, _ rhs: Vector) -> Self {
-        var result = lhs
-        result −= rhs
+    fileprivate static func subtractAsPointProtocol(_ precedingValue: Self, _ followingValue: Vector) -> Self {
+        var result = precedingValue
+        result −= followingValue
         return result
     }
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the inverse of the vector on the right.
+    /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to subtract.
+    ///     - precedingValue: The starting point.
+    ///     - followingValue: The vector to subtract.
     ///
     /// - MutatingVariant: −=
-    public static func − (lhs: Self, rhs: Vector) -> Self {
-        return subtractAsPointProtocol(lhs, rhs)
+    public static func − (precedingValue: Self, followingValue: Vector) -> Self {
+        return subtractAsPointProtocol(precedingValue, followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−=_]
-    /// Moves the point on the left by the inverse of the vector on the right.
+    /// Moves the preceding point by the inverse of the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to subtract.
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to subtract.
     ///
     /// - NonmutatingVariant: −
-    public static func −= (lhs: inout Self, rhs: Vector) {
-        lhs += −rhs
+    public static func −= (precedingValue: inout Self, followingValue: Vector) {
+        precedingValue += −followingValue
     }
 }
 
@@ -128,23 +128,23 @@ extension /*PointProtocol where Self : */ ConsistentlyOrderedCalendarComponent w
     // MARK: - where Self : ConsistentlyOrderedCalendarComponent, Self : EnumerationCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout Self, rhs: Vector) {
-        lhs = Self(numberAlreadyElapsed: lhs.numberAlreadyElapsed + rhs)
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout Self, followingValue: Vector) {
+        precedingValue = Self(numberAlreadyElapsed: precedingValue.numberAlreadyElapsed + followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> Vector {
-        return lhs.numberAlreadyElapsed − rhs.numberAlreadyElapsed
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+        return precedingValue.numberAlreadyElapsed − followingValue.numberAlreadyElapsed
     }
 }
 
@@ -153,35 +153,35 @@ extension /*PointProtocol where Self : */IntFamily {
     // MARK: - where Self : IntFamily
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
+    /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to add.
+    ///     - precedingValue: The starting point.
+    ///     - followingValue: The vector to add.
     ///
     /// - MutatingVariant: +=
-    public static func + (lhs: Self, rhs: Stride) -> Self {
-        return lhs.advanced(by: rhs)
+    public static func + (precedingValue: Self, followingValue: Stride) -> Self {
+        return precedingValue.advanced(by: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout Self, rhs: Vector) {
-        lhs = lhs.advanced(by: rhs)
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout Self, followingValue: Vector) {
+        precedingValue = precedingValue.advanced(by: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> Vector {
-        return rhs.distance(to: lhs)
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+        return followingValue.distance(to: precedingValue)
     }
 }
 
@@ -190,23 +190,23 @@ extension /*PointProtocol where Self : */ NumericCalendarComponent {
     // MARK: - where Self : NumericCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout Self, rhs: Vector) {
-        lhs = Self(lhs.rawValue + rhs)
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout Self, followingValue: Vector) {
+        precedingValue = Self(precedingValue.rawValue + followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> Vector {
-        return lhs.rawValue − rhs.rawValue
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+        return precedingValue.rawValue − followingValue.rawValue
     }
 }
 
@@ -214,16 +214,16 @@ extension PointProtocol where Self : Strideable {
     // MARK: - where Self : Strideable
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
+    /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to add.
+    ///     - precedingValue: The starting point.
+    ///     - followingValue: The vector to add.
     ///
     /// - MutatingVariant: +=
-    public static func + (lhs: Self, rhs: Vector) -> Self {
+    public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         // Disambiguate PointProtocol.+ vs Strideable.+
-        return addAsPointProtocol(lhs, rhs)
+        return addAsPointProtocol(precedingValue, followingValue)
     }
 }
 
@@ -232,25 +232,25 @@ extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector :
     // MARK: - where Self : TwoDimensionalPoint, Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout Self, rhs: Vector) {
-        lhs.x += rhs.Δx
-        lhs.y += rhs.Δy
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout Self, followingValue: Vector) {
+        precedingValue.x += followingValue.Δx
+        precedingValue.y += followingValue.Δy
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> Vector {
-        let Δx = lhs.x − rhs.x
-        let Δy = lhs.y − rhs.y
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+        let Δx = precedingValue.x − followingValue.x
+        let Δy = precedingValue.y − followingValue.y
         return Vector(Δx : Δx, Δy : Δy)
     }
 }
@@ -260,37 +260,37 @@ extension /*PointProtocol where Self : */UIntFamily {
     // MARK: - where Self : UIntFamily
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
-    /// Returns the point arrived at by starting at the point on the left and moving according to the vector on the right.
+    /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The starting point.
-    ///     - rhs: The vector to add.
+    ///     - precedingValue: The starting point.
+    ///     - followingValue: The vector to add.
     ///
     /// - MutatingVariant: +=
-    public static func + (lhs: Self, rhs: Stride) -> Self {
-        return lhs.advanced(by: rhs)
+    public static func + (precedingValue: Self, followingValue: Stride) -> Self {
+        return precedingValue.advanced(by: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout Self, rhs: Vector) {
-        lhs = lhs.advanced(by: rhs)
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout Self, followingValue: Vector) {
+        precedingValue = precedingValue.advanced(by: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: Self, rhs: Self) -> Stride {
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: Self, followingValue: Self) -> Stride {
         // [_Workaround: The following causes an EXC_BAD_INSTRUCTION. (Swift 4.0.3)_]
-        //return rhs.distance(to: lhs)
-        return lhs.toStride() − rhs.toStride()
+        //return followingValue.distance(to: precedingValue)
+        return precedingValue.toStride() − followingValue.toStride()
     }
 }
 

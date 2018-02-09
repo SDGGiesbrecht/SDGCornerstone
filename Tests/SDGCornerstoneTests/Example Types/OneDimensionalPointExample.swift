@@ -26,25 +26,25 @@ struct OneDimensionalPointExample : FixedScaleOneDimensionalPoint {
 
     // Comparable
 
-    static func < (lhs: OneDimensionalPointExample, rhs: OneDimensionalPointExample) -> Bool {
-        return lhs.value < rhs.value
+    static func < (precedingValue: OneDimensionalPointExample, followingValue: OneDimensionalPointExample) -> Bool {
+        return precedingValue.value < followingValue.value
     }
 
     // Equatable
 
-    static func == (lhs: OneDimensionalPointExample, rhs: OneDimensionalPointExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: OneDimensionalPointExample, followingValue: OneDimensionalPointExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // PointProtocol
 
     typealias Vector = Value.Stride
 
-    static func += (lhs: inout OneDimensionalPointExample, rhs: Vector) {
-        lhs.value += rhs
+    static func += (precedingValue: inout OneDimensionalPointExample, followingValue: Vector) {
+        precedingValue.value += followingValue
     }
 
-    static func − (lhs: OneDimensionalPointExample, rhs: OneDimensionalPointExample) -> Vector {
-        return lhs.value − rhs.value
+    static func − (precedingValue: OneDimensionalPointExample, followingValue: OneDimensionalPointExample) -> Vector {
+        return precedingValue.value − followingValue.value
     }
 }

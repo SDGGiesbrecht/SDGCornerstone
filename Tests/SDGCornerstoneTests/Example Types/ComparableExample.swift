@@ -17,13 +17,13 @@ struct ComparableExample : Comparable {
 
     // Comparable
 
-    static func < (lhs: ComparableExample, rhs: ComparableExample) -> Bool {
-        return lhs.value < rhs.value
+    static func < (precedingValue: ComparableExample, followingValue: ComparableExample) -> Bool {
+        return precedingValue.value < followingValue.value
     }
 
     // Equatable
 
-    static func == (lhs: ComparableExample, rhs: ComparableExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: ComparableExample, followingValue: ComparableExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 }

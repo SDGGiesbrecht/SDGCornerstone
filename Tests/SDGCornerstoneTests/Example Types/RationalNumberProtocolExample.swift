@@ -24,20 +24,20 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
 
     // Addable
 
-    static func += (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout RationalNumberProtocolExample, followingValue: RationalNumberProtocolExample) {
+        precedingValue.value += followingValue.value
     }
 
     // Comparable
 
-    static func < (lhs: RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) -> Bool {
-        return lhs.value < rhs.value
+    static func < (precedingValue: RationalNumberProtocolExample, followingValue: RationalNumberProtocolExample) -> Bool {
+        return precedingValue.value < followingValue.value
     }
 
     // Equatable
 
-    static func == (lhs: RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: RationalNumberProtocolExample, followingValue: RationalNumberProtocolExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // Hashable
@@ -77,8 +77,8 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
         value = RationalNumber(floatingPoint)
     }
 
-    static func ÷= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
-        lhs.value ÷= rhs.value
+    static func ÷= (precedingValue: inout RationalNumberProtocolExample, followingValue: RationalNumberProtocolExample) {
+        precedingValue.value ÷= followingValue.value
     }
 
     // RationalNumberProtocol
@@ -89,8 +89,8 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
 
     // Subtractable
 
-    static func −= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
-        lhs.value −= rhs.value
+    static func −= (precedingValue: inout RationalNumberProtocolExample, followingValue: RationalNumberProtocolExample) {
+        precedingValue.value −= followingValue.value
     }
 
     // WholeArithmetic
@@ -99,8 +99,8 @@ struct RationalNumberProtocolExample : RationalNumberProtocol {
         value = RationalNumber(uInt)
     }
 
-    static func ×= (lhs: inout RationalNumberProtocolExample, rhs: RationalNumberProtocolExample) {
-        lhs.value ×= rhs.value
+    static func ×= (precedingValue: inout RationalNumberProtocolExample, followingValue: RationalNumberProtocolExample) {
+        precedingValue.value ×= followingValue.value
     }
 
     mutating func divideAccordingToEuclid(by divisor: RationalNumberProtocolExample) {

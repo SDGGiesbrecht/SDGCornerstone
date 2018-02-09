@@ -25,18 +25,18 @@ struct SetInRepresentableUniverseExample : MutableSet, SetInRepresentableUnivers
 
     // ComparableSet
 
-    static func ⊆ (lhs: SetInRepresentableUniverseExample, rhs: SetInRepresentableUniverseExample) -> Bool {
-        if lhs.isInverse {
-            if rhs.isInverse {
-                return rhs.set ⊆ lhs.set
+    static func ⊆ (precedingValue: SetInRepresentableUniverseExample, followingValue: SetInRepresentableUniverseExample) -> Bool {
+        if precedingValue.isInverse {
+            if followingValue.isInverse {
+                return followingValue.set ⊆ precedingValue.set
             } else {
                 return false
             }
         } else {
-            if rhs.isInverse {
+            if followingValue.isInverse {
                 return false
             } else {
-                return lhs.set ⊆ rhs.set
+                return precedingValue.set ⊆ followingValue.set
             }
         }
     }
@@ -95,51 +95,51 @@ struct SetInRepresentableUniverseExample : MutableSet, SetInRepresentableUnivers
         }
     }
 
-    static func ∩= (lhs: inout SetInRepresentableUniverseExample, rhs: SetInRepresentableUniverseExample) {
-        if lhs.isInverse {
-            if rhs.isInverse {
-                lhs.set ∪= rhs.set
+    static func ∩= (precedingValue: inout SetInRepresentableUniverseExample, followingValue: SetInRepresentableUniverseExample) {
+        if precedingValue.isInverse {
+            if followingValue.isInverse {
+                precedingValue.set ∪= followingValue.set
             } else {
-                lhs.set = rhs.set ∖ lhs.set
+                precedingValue.set = followingValue.set ∖ precedingValue.set
             }
         } else {
-            if rhs.isInverse {
-                lhs.set ∖= lhs.set
+            if followingValue.isInverse {
+                precedingValue.set ∖= precedingValue.set
             } else {
-                lhs.set ∩= rhs.set
+                precedingValue.set ∩= followingValue.set
             }
         }
     }
 
-    static func ∪= (lhs: inout SetInRepresentableUniverseExample, rhs: SetInRepresentableUniverseExample) {
-        if lhs.isInverse {
-            if rhs.isInverse {
-                lhs.set ∩= rhs.set
+    static func ∪= (precedingValue: inout SetInRepresentableUniverseExample, followingValue: SetInRepresentableUniverseExample) {
+        if precedingValue.isInverse {
+            if followingValue.isInverse {
+                precedingValue.set ∩= followingValue.set
             } else {
-                lhs.set ∖= lhs.set
+                precedingValue.set ∖= precedingValue.set
             }
         } else {
-            if rhs.isInverse {
-                lhs.set = rhs.set ∖ lhs.set
+            if followingValue.isInverse {
+                precedingValue.set = followingValue.set ∖ precedingValue.set
             } else {
-                lhs.set ∪= rhs.set
+                precedingValue.set ∪= followingValue.set
             }
         }
     }
 
-    static func ∖= (lhs: inout SetInRepresentableUniverseExample, rhs: SetInRepresentableUniverseExample) {
-        if lhs.isInverse {
-            if rhs.isInverse {
-                lhs.set = rhs.set ∖ lhs.set
-                lhs.isInverse¬=
+    static func ∖= (precedingValue: inout SetInRepresentableUniverseExample, followingValue: SetInRepresentableUniverseExample) {
+        if precedingValue.isInverse {
+            if followingValue.isInverse {
+                precedingValue.set = followingValue.set ∖ precedingValue.set
+                precedingValue.isInverse¬=
             } else {
-                lhs.set ∪= rhs.set
+                precedingValue.set ∪= followingValue.set
             }
         } else {
-            if rhs.isInverse {
-                lhs.set ∩= rhs.set
+            if followingValue.isInverse {
+                precedingValue.set ∩= followingValue.set
             } else {
-                lhs.set ∖= rhs.set
+                precedingValue.set ∖= followingValue.set
             }
         }
     }
@@ -148,11 +148,11 @@ struct SetInRepresentableUniverseExample : MutableSet, SetInRepresentableUnivers
 
     typealias Element = Int
 
-    static func ∋ (lhs: SetInRepresentableUniverseExample, rhs: Int) -> Bool {
-        if lhs.isInverse {
-            return lhs.set′ ∋ rhs
+    static func ∋ (precedingValue: SetInRepresentableUniverseExample, followingValue: Int) -> Bool {
+        if precedingValue.isInverse {
+            return precedingValue.set′ ∋ followingValue
         } else {
-            return lhs.set ∋ rhs
+            return precedingValue.set ∋ followingValue
         }
     }
 

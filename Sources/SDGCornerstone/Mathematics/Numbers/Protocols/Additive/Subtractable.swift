@@ -13,27 +13,27 @@
  */
 
 // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-/// Returns the difference of the left minus the right.
+/// Returns the difference of the preceding value minus the following value.
 ///
 /// - Parameters:
-///     - lhs: The starting value.
-///     - rhs: The value to subtract.
+///     - precedingValue: The starting value.
+///     - followingValue: The value to subtract.
 infix operator −: AdditionPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-/// Subtracts the right from the left.
+/// Subtracts the following value from the preceding value.
 ///
 /// - Parameters:
-///     - lhs: The value to modify.
-///     - rhs: The value to subtract.
+///     - precedingValue: The value to modify.
+///     - followingValue: The value to subtract.
 infix operator −=: AssignmentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Subtractable.±_]
-/// Returns a tuple containing the sum and difference of `lhs` and `rhs`.
+/// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
 ///
 /// - Parameters:
-///     - lhs: The augend/minuend.
-///     - rhs: The addend/subtrahend.
+///     - precedingValue: The augend/minuend.
+///     - followingValue: The addend/subtrahend.
 infix operator ±: AdditionPrecedence
 
 /// A type that can do scalar subtraction.
@@ -45,89 +45,89 @@ infix operator ±: AdditionPrecedence
 /// Conformance Requirements:
 ///
 /// - `Addable`
-/// - `static func −= (lhs: inout Self, rhs: Self)`
+/// - `static func −= (precedingValue: inout Self, followingValue: Self)`
 public protocol Subtractable : Addable {
 
     // [_Define Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
+    /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    static func − (lhs: Self, rhs: Self) -> Self
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to subtract.
+    static func − (precedingValue: Self, followingValue: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    static func −= (lhs: inout Self, rhs: Self)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    static func −= (precedingValue: inout Self, followingValue: Self)
 
     // [_Define Documentation: SDGCornerstone.Subtractable.±_]
-    /// Returns a tuple containing the sum and difference of `lhs` and `rhs`.
+    /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The augend/minuend.
-    ///     - rhs: The addend/subtrahend.
-    static func ± (lhs: Self, rhs: Self) -> (sum: Self, difference: Self)
+    ///     - precedingValue: The augend/minuend.
+    ///     - followingValue: The addend/subtrahend.
+    static func ± (precedingValue: Self, followingValue: Self) -> (sum: Self, difference: Self)
 }
 
 extension Subtractable {
 
-    fileprivate static func subtractAsSubtractable(_ lhs: Self, _ rhs: Self) -> Self {
-        var result = lhs
-        result −= rhs
+    fileprivate static func subtractAsSubtractable(_ precedingValue: Self, _ followingValue: Self) -> Self {
+        var result = precedingValue
+        result −= followingValue
         return result
     }
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
+    /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    public static func − (lhs: Self, rhs: Self) -> Self {
-        return subtractAsSubtractable(lhs, rhs)
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to subtract.
+    public static func − (precedingValue: Self, followingValue: Self) -> Self {
+        return subtractAsSubtractable(precedingValue, followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.±_]
-    /// Returns a tuple containing the sum and difference of `lhs` and `rhs`.
+    /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The augend/minuend.
-    ///     - rhs: The addend/subtrahend.
-    public static func ± (lhs: Self, rhs: Self) -> (sum: Self, difference: Self) {
-        return (lhs + rhs, lhs − rhs)
+    ///     - precedingValue: The augend/minuend.
+    ///     - followingValue: The addend/subtrahend.
+    public static func ± (precedingValue: Self, followingValue: Self) -> (sum: Self, difference: Self) {
+        return (precedingValue + followingValue, precedingValue − followingValue)
     }
 }
 
 extension FloatFamily {
     // Disambiguate FloatingPoint.−= vs Strideable.−=
-    fileprivate static func subtractAndAssignAsFloatingPoint(_ lhs: inout Self, _ rhs: Self) {
-        lhs -= rhs
+    fileprivate static func subtractAndAssignAsFloatingPoint(_ precedingValue: inout Self, _ followingValue: Self) {
+        precedingValue -= followingValue
     }
 }
 extension Subtractable where Self : FloatFamily, Self.Vector == Self {
     // MARK: - where Self : FloatFamily, Vector == Self
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
+    /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    public static func − (lhs: Self, rhs: Self) -> Self {
-        return lhs - rhs
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to subtract.
+    public static func − (precedingValue: Self, followingValue: Self) -> Self {
+        return precedingValue - followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    public static func −= (lhs: inout Self, rhs: Self) {
-        subtractAndAssignAsFloatingPoint(&lhs, rhs)
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    public static func −= (precedingValue: inout Self, followingValue: Self) {
+        subtractAndAssignAsFloatingPoint(&precedingValue, followingValue)
     }
 }
 
@@ -135,23 +135,23 @@ extension Subtractable where Self : IntFamily /* Self.Vector ≠ Self */ {
     // MARK: - where Self : IntFamily
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
+    /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    public static func − (lhs: Self, rhs: Self) -> Self {
-        return lhs - rhs
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to subtract.
+    public static func − (precedingValue: Self, followingValue: Self) -> Self {
+        return precedingValue - followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    public static func −= (lhs: inout Self, rhs: Self) {
-        lhs -= rhs
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    public static func −= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue -= followingValue
     }
 }
 
@@ -159,23 +159,23 @@ extension Subtractable where Self : Measurement {
     // MARK: - where Self : Measurement
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
+    /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    public static func − (lhs: Self, rhs: Self) -> Self {
-        return Self(rawValue: lhs.rawValue − rhs.rawValue)
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to subtract.
+    public static func − (precedingValue: Self, followingValue: Self) -> Self {
+        return Self(rawValue: precedingValue.rawValue − followingValue.rawValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    public static func −= (lhs: inout Self, rhs: Self) {
-        lhs.rawValue −= rhs.rawValue
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    public static func −= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.rawValue −= followingValue.rawValue
     }
 }
 
@@ -183,14 +183,14 @@ extension Subtractable where Self : PointProtocol, Self.Vector == Self {
     // MARK: - where Self : PointProtocol, Vector == Self
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
+    /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    public static func − (lhs: Self, rhs: Self) -> Self { // [_Exempt from Test Coverage_] Apparently unreachable.
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to subtract.
+    public static func − (precedingValue: Self, followingValue: Self) -> Self { // [_Exempt from Test Coverage_] Apparently unreachable.
         // Disambiguate Subtractable.− vs PointProtocol.−
-        return subtractAsSubtractable(lhs, rhs)
+        return subtractAsSubtractable(precedingValue, followingValue)
     }
 }
 
@@ -198,14 +198,14 @@ extension Subtractable where Self : TwoDimensionalVector {
     // MARK: - where Self : TwoDimensionalVector
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    public static func −= (lhs: inout Self, rhs: Self) {
-        lhs.Δx −= rhs.Δx
-        lhs.Δy −= rhs.Δy
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    public static func −= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.Δx −= followingValue.Δx
+        precedingValue.Δy −= followingValue.Δy
     }
 }
 
@@ -213,30 +213,30 @@ extension Subtractable where Self : UIntFamily {
     // MARK: - where Self : UIntFamily
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
-    /// Returns the difference of the left minus the right.
+    /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The starting value.
-    ///     - rhs: The value to subtract.
-    public static func − (lhs: Self, rhs: Self) -> Self {
-        return lhs - rhs
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to subtract.
+    public static func − (precedingValue: Self, followingValue: Self) -> Self {
+        return precedingValue - followingValue
     }
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    public static func −= (lhs: inout Self, rhs: Self) {
-        assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    public static func −= (precedingValue: inout Self, followingValue: Self) {
+        assert(precedingValue ≥ followingValue, UserFacingText({ [precedingValue] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString("\(lhs.inDigits()) − \(rhs.inDigits()) is impossible for \(Self.self).")
+                return StrictString("\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(Self.self).")
             }
         }))
 
         // func −=
-        lhs -= rhs
+        precedingValue -= followingValue
     }
 }

@@ -33,12 +33,12 @@ public struct IntensionalSet<Member> : SetDefinition {
     public typealias Element = Member
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
+    /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: IntensionalSet, rhs: Element) -> Bool {
-        return lhs.condition(rhs)
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    public static func ∋ (precedingValue: IntensionalSet, followingValue: Element) -> Bool {
+        return precedingValue.condition(followingValue)
     }
 }

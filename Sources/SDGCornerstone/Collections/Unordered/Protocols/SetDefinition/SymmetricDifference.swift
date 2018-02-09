@@ -37,12 +37,12 @@ public struct SymmetricDifference<Base1 : SetDefinition, Base2 : SetDefinition> 
     public typealias Element = Base1.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
+    /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: SymmetricDifference, rhs: Base1.Element) -> Bool {
-        return lhs.definition ∋ rhs
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    public static func ∋ (precedingValue: SymmetricDifference, followingValue: Base1.Element) -> Bool {
+        return precedingValue.definition ∋ followingValue
     }
 }

@@ -46,7 +46,7 @@ extension SetAlgebra where Self : MutableSet {
         return self ∩ other
     }
 
-    /// Sets `lhs` to the intersection of the two sets.
+    /// Sets `precedingValue` to the intersection of the two sets.
     ///
     /// - Parameters:
     ///     - other: Another set.
@@ -62,28 +62,28 @@ extension SetAlgebra where Self : MutableSet {
         return self ∪ other
     }
 
-    /// Sets `lhs` to the union of the two sets.
+    /// Sets `precedingValue` to the union of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
+    ///     - precedingValue: A set.
     ///     - other: Another set.
     public mutating func formUnion(_ other: Self) {
         self ∪= other
     }
 
-    /// Returns the symmetric difference of `rhs` in `lhs`.
+    /// Returns the symmetric difference of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: A set.
+    ///     - precedingValue: A set.
     ///     - other: Another set.
     public func symmetricDifference(_ other: Self) -> Self {
         return self ∆ other
     }
 
-    /// Sets `lhs` to the symmetric difference of the two sets.
+    /// Sets `precedingValue` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
-    ///     - lhs: The set to subtract from.
+    ///     - precedingValue: The set to subtract from.
     ///     - other: The set to subtract.
     public mutating func formSymmetricDifference(_ other: Self) {
         self ∆= other

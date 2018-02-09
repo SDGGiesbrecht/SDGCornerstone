@@ -86,18 +86,18 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     // MARK: - Addable
 
     // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
-    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
-    public static func += (lhs: inout WholeNumber, rhs: WholeNumber) {
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
+    public static func += (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
 
         var carrying: Digit = 0
-        for digitIndex in rhs.digits.indices {
+        for digitIndex in followingValue.digits.indices {
 
-            var augend = lhs[digitIndex]
-            let addend = rhs[digitIndex]
+            var augend = precedingValue[digitIndex]
+            let addend = followingValue[digitIndex]
 
             let carried = carrying
             carrying = 0
@@ -105,29 +105,29 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
             augend.add(addend, carringIn: &carrying)
             augend.add(carried, carringIn: &carrying)
 
-            lhs[digitIndex] = augend
+            precedingValue[digitIndex] = augend
         }
 
-        lhs[rhs.digits.endIndex] += carrying
+        precedingValue[followingValue.digits.endIndex] += carrying
     }
 
     // MARK: - Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func < (lhs: WholeNumber, rhs: WholeNumber) -> Bool {
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func < (precedingValue: WholeNumber, followingValue: WholeNumber) -> Bool {
 
-        if lhs.digits.count ≠ rhs.digits.count {
-            return lhs.digits.count < rhs.digits.count
+        if precedingValue.digits.count ≠ followingValue.digits.count {
+            return precedingValue.digits.count < followingValue.digits.count
         }
 
-        for digitIndex in lhs.digits.indices.lazy.reversed() {
-            let left = lhs.digits[digitIndex]
-            let right = rhs.digits[digitIndex]
+        for digitIndex in precedingValue.digits.indices.lazy.reversed() {
+            let left = precedingValue.digits[digitIndex]
+            let right = followingValue.digits[digitIndex]
 
             if left ≠ right {
                 return left < right
@@ -143,10 +143,10 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: WholeNumber, rhs: WholeNumber) -> Bool {
-        return lhs.digits.elementsEqual(rhs.digits)
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: WholeNumber, followingValue: WholeNumber) -> Bool {
+        return precedingValue.digits.elementsEqual(followingValue.digits)
     }
 
     // MARK: - Hashable
@@ -175,50 +175,50 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     public typealias Vector = Integer
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
-    /// Moves the point on the left by the vector on the right.
+    /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
-    ///     - lhs: The point to modify.
-    ///     - rhs: The vector to add.
-    public static func += (lhs: inout WholeNumber, rhs: Vector) {
-        if rhs.isNegative {
-            lhs −= rhs.wholeMagnitude
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    public static func += (precedingValue: inout WholeNumber, followingValue: Vector) {
+        if followingValue.isNegative {
+            precedingValue −= followingValue.wholeMagnitude
         } else {
-            lhs += rhs.wholeMagnitude
+            precedingValue += followingValue.wholeMagnitude
         }
     }
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
-    /// Returns the vector that leads from the point on the left to the point on the right.
+    /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
-    ///     - lhs: The endpoint.
-    ///     - rhs: The startpoint.
-    public static func − (lhs: WholeNumber, rhs: WholeNumber) -> Vector {
-        return Integer(lhs) − Integer(rhs)
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    public static func − (precedingValue: WholeNumber, followingValue: WholeNumber) -> Vector {
+        return Integer(precedingValue) − Integer(followingValue)
     }
 
     // MARK: - Subtractable
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    public static func −= (lhs: inout WholeNumber, rhs: WholeNumber) {
-        assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    public static func −= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
+        assert(precedingValue ≥ followingValue, UserFacingText({ [precedingValue] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString("\(lhs.inDigits()) − \(rhs.inDigits()) is impossible for \(WholeNumber.self).")
+                return StrictString("\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(WholeNumber.self).")
             }
         }))
 
         var borrowing: Digit = 0
-        for digitIndex in rhs.digits.indices {
+        for digitIndex in followingValue.digits.indices {
 
-            var minuend = lhs[digitIndex]
-            let subtrahend = rhs[digitIndex]
+            var minuend = precedingValue[digitIndex]
+            let subtrahend = followingValue[digitIndex]
 
             let borrowed = borrowing
             borrowing = 0
@@ -226,10 +226,10 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
             minuend.subtract(subtrahend, borrowingIn: &borrowing)
             minuend.subtract(borrowed, borrowingIn: &borrowing)
 
-            lhs[digitIndex] = minuend
+            precedingValue[digitIndex] = minuend
         }
 
-        lhs[rhs.digits.endIndex] −= borrowing
+        precedingValue[followingValue.digits.endIndex] −= borrowing
     }
 
     // MARK: - WholeArithmetic
@@ -244,24 +244,24 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
-    /// Returns the product of the left times the right.
+    /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func × (lhs: WholeNumber, rhs: WholeNumber) -> WholeNumber {
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func × (precedingValue: WholeNumber, followingValue: WholeNumber) -> WholeNumber {
 
         var product: WholeNumber = 0
 
-        for rhsIndex in rhs.digits.indices {
-            for lhsIndex in lhs.digits.indices {
+        for followingValueIndex in followingValue.digits.indices {
+            for precedingValueIndex in precedingValue.digits.indices {
 
-                let lhsDigit = lhs.digits[lhsIndex]
-                let rhsDigit = rhs.digits[rhsIndex]
+                let precedingValueDigit = precedingValue.digits[precedingValueIndex]
+                let followingValueDigit = followingValue.digits[followingValueIndex]
 
-                let digitResult = Digit.multiply(lhsDigit, with: rhsDigit)
+                let digitResult = Digit.multiply(precedingValueDigit, with: followingValueDigit)
 
-                let productIndex = lhsIndex + rhsIndex
+                let productIndex = precedingValueIndex + followingValueIndex
                 var addend: WholeNumber = 0
                 addend[productIndex] = digitResult.product
                 addend[productIndex + 1] = digitResult.carried
@@ -274,13 +274,13 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The coefficient by which to multiply.
-    public static func ×= (lhs: inout WholeNumber, rhs: WholeNumber) {
-        lhs = lhs × rhs
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The coefficient by which to multiply.
+    public static func ×= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
+        precedingValue = precedingValue × followingValue
     }
 
     internal func quotientAndRemainder(for divisor: WholeNumber) -> (quotient: WholeNumber, remainder: WholeNumber) {

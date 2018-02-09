@@ -18,16 +18,16 @@ extension Equatable {
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
 
     // [_Define Documentation: SDGCornerstone.Equatable.≠_]
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    @_inlineable public static func ≠ (lhs: Self, rhs: Self) -> Bool {
-        return lhs != rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    @_inlineable public static func ≠ (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue != followingValue
     }
 }

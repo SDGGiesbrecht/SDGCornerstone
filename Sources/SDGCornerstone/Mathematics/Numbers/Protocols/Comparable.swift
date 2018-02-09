@@ -13,31 +13,31 @@
  */
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
-/// Returns `true` if the left value is ordered before or the same as the right value.
+/// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
 infix operator ≤: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
-/// Returns `true` if the left value is ordered after or the same as the right value.
+/// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
 infix operator ≥: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≈_]
-/// Returns `true` if `lhs` is within the range described by `rhs`.
+/// Returns `true` if `precedingValue` is within the range described by `followingValue`.
 ///
 /// ```swift
 /// XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
 /// ```
 ///
 /// - Parameters:
-///     - lhs: The value to test.
-///     - rhs: The bounds of the range.
+///     - precedingValue: The value to test.
+///     - followingValue: The bounds of the range.
 infix operator ≈: ComparisonPrecedence
 
 extension Comparable {
@@ -45,30 +45,30 @@ extension Comparable {
     // MARK: - Comparison
 
     // [_Define Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
 
     // [_Define Documentation: SDGCornerstone.Comparable.≤_]
-    /// Returns `true` if the left value is ordered before or the same as the right value.
+    /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func ≤ (lhs: Self, rhs: Self) -> Bool {
-        return lhs <= rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func ≤ (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue <= followingValue
     }
 
     // [_Define Documentation: SDGCornerstone.Comparable.≥_]
-    /// Returns `true` if the left value is ordered after or the same as the right value.
+    /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func ≥ (lhs: Self, rhs: Self) -> Bool {
-        return lhs >= rhs
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func ≥ (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue >= followingValue
     }
 
     // [_Define Documentation: SDGCornerstone.Comparable.≥=_]
@@ -139,24 +139,24 @@ extension Comparable {
 
     // [_Define Documentation: SDGCornerstone.Comparable.≈_]
     // [_Example 1: ≈_]
-    /// Returns `true` if `lhs` is within the range described by `rhs`.
+    /// Returns `true` if `precedingValue` is within the range described by `followingValue`.
     ///
     /// ```swift
     /// XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
     /// ```
     ///
     /// - Parameters:
-    ///     - lhs: The value to test.
-    ///     - rhs: The bounds of the range.
-    public static func ≈ (lhs: Self, rhs: (Self, Self)) -> Bool {
+    ///     - precedingValue: The value to test.
+    ///     - followingValue: The bounds of the range.
+    public static func ≈ (precedingValue: Self, followingValue: (Self, Self)) -> Bool {
         let range: ClosedRange<Self>
-        if rhs.0 ≥ rhs.1 {
-            range = rhs.1 ... rhs.0
+        if followingValue.0 ≥ followingValue.1 {
+            range = followingValue.1 ... followingValue.0
         } else {
-            range = rhs.0 ... rhs.1
+            range = followingValue.0 ... followingValue.1
         }
 
-        return lhs ∈ range
+        return precedingValue ∈ range
     }
 }
 
@@ -164,13 +164,13 @@ extension Comparable where Self : Measurement {
     // MARK: - where Self : Measurement
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func < (lhs: Self, rhs: Self) -> Bool {
-        return lhs.rawValue < rhs.rawValue
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func < (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue.rawValue < followingValue.rawValue
     }
 }
 
@@ -178,12 +178,12 @@ extension Comparable where Self : OrderedEnumeration {
     // MARK: - where Self : OrderedEnumeration
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
-    /// Returns `true` if the left value is less than the right.
+    /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
-    ///     - lhs: A value.
-    ///     - rhs: Another value.
-    public static func < (lhs: Self, rhs: Self) -> Bool {
-        return lhs.rawValue < rhs.rawValue
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    public static func < (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue.rawValue < followingValue.rawValue
     }
 }

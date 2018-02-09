@@ -80,25 +80,25 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     // MARK: - Addable
 
     // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
-    /// Adds or concatenates the right value to the left, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
+    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to add.
-    public static func += (lhs: inout Integer, rhs: Integer) {
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to add.
+    public static func += (precedingValue: inout Integer, followingValue: Integer) {
 
-        if lhs.isNegative == rhs.isNegative {
+        if precedingValue.isNegative == followingValue.isNegative {
             // Moving away from zero.
-            lhs.wholeMagnitude += rhs.wholeMagnitude
+            precedingValue.wholeMagnitude += followingValue.wholeMagnitude
         } else {
             // Approaching zero...
-            if lhs.wholeMagnitude ≥ rhs.wholeMagnitude {
+            if precedingValue.wholeMagnitude ≥ followingValue.wholeMagnitude {
                 // ...but stopping short of crossing it.
-                lhs.wholeMagnitude −= rhs.wholeMagnitude
+                precedingValue.wholeMagnitude −= followingValue.wholeMagnitude
             } else {
                 // ...and crossing it.
-                lhs.wholeMagnitude = rhs.wholeMagnitude − lhs.wholeMagnitude
-                lhs.isNegative¬=
+                precedingValue.wholeMagnitude = followingValue.wholeMagnitude − precedingValue.wholeMagnitude
+                precedingValue.isNegative¬=
             }
         }
     }
@@ -106,22 +106,22 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     // MARK: - Comparable
 
     // [_Inherit Documentition: SDGCornerstone.Comparable.<_]
-    public static func < (lhs: Integer, rhs: Integer) -> Bool {
-        if lhs.isNegative {
-            if rhs.isNegative {
+    public static func < (precedingValue: Integer, followingValue: Integer) -> Bool {
+        if precedingValue.isNegative {
+            if followingValue.isNegative {
                 // − vs −
-                return lhs.wholeMagnitude > rhs.wholeMagnitude
+                return precedingValue.wholeMagnitude > followingValue.wholeMagnitude
             } else {
                 // − vs +/0
                 return true
             }
         } else {
-            if rhs.isNegative {
+            if followingValue.isNegative {
                 // +/0 vs −
                 return false
             } else {
                 // +/0 vs +/0
-                return lhs.wholeMagnitude < rhs.wholeMagnitude
+                return precedingValue.wholeMagnitude < followingValue.wholeMagnitude
             }
         }
     }
@@ -132,10 +132,10 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    public static func == (lhs: Integer, rhs: Integer) -> Bool {
-        return (lhs.isNegative, lhs.wholeMagnitude) == (rhs.isNegative, rhs.wholeMagnitude)
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    public static func == (precedingValue: Integer, followingValue: Integer) -> Bool {
+        return (precedingValue.isNegative, precedingValue.wholeMagnitude) == (followingValue.isNegative, followingValue.wholeMagnitude)
     }
 
     // MARK: - Hashable
@@ -200,13 +200,13 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     // MARK: - Subtractable
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
-    /// Subtracts the right from the left.
+    /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The value to subtract.
-    public static func −= (lhs: inout Integer, rhs: Integer) {
-        lhs += −rhs
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The value to subtract.
+    public static func −= (precedingValue: inout Integer, followingValue: Integer) {
+        precedingValue += −followingValue
     }
 
     // MARK: - WholeArithmetic
@@ -221,17 +221,17 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
-    /// Modifies the left by multiplication with the right.
+    /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
-    ///     - lhs: The value to modify.
-    ///     - rhs: The coefficient by which to multiply.
-    public static func ×= (lhs: inout Integer, rhs: Integer) {
-        lhs.wholeMagnitude ×= rhs.wholeMagnitude
-        if lhs.isNegative == rhs.isNegative {
-            lhs.isNegative = false
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The coefficient by which to multiply.
+    public static func ×= (precedingValue: inout Integer, followingValue: Integer) {
+        precedingValue.wholeMagnitude ×= followingValue.wholeMagnitude
+        if precedingValue.isNegative == followingValue.isNegative {
+            precedingValue.isNegative = false
         } else {
-            lhs.isNegative = true
+            precedingValue.isNegative = true
         }
     }
 

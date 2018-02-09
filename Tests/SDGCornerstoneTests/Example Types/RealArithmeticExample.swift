@@ -20,20 +20,20 @@ struct RealArithmeticExample : RealArithmetic {
 
     // Addable
 
-    static func += (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
-        lhs.value += rhs.value
+    static func += (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
+        precedingValue.value += followingValue.value
     }
 
     // Comparable
 
-    static func < (lhs: RealArithmeticExample, rhs: RealArithmeticExample) -> Bool {
-        return lhs.value < rhs.value
+    static func < (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample) -> Bool {
+        return precedingValue.value < followingValue.value
     }
 
     // Equatable
 
-    static func == (lhs: RealArithmeticExample, rhs: RealArithmeticExample) -> Bool {
-        return lhs.value == rhs.value
+    static func == (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample) -> Bool {
+        return precedingValue.value == followingValue.value
     }
 
     // ExpressibleByFloatLiteral
@@ -73,8 +73,8 @@ struct RealArithmeticExample : RealArithmetic {
         value = floatingPoint
     }
 
-    static func ÷= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
-        lhs.value ÷= rhs.value
+    static func ÷= (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
+        precedingValue.value ÷= followingValue.value
     }
 
     // RealArithmetic
@@ -101,8 +101,8 @@ struct RealArithmeticExample : RealArithmetic {
 
     // Subtractable
 
-    static func −= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
-        lhs.value −= rhs.value
+    static func −= (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
+        precedingValue.value −= followingValue.value
     }
 
     // WholeArithmetic
@@ -111,16 +111,16 @@ struct RealArithmeticExample : RealArithmetic {
         value = FloatMax(uInt)
     }
 
-    static func ×= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
-        lhs.value ×= rhs.value
+    static func ×= (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
+        precedingValue.value ×= followingValue.value
     }
 
     mutating func divideAccordingToEuclid(by divisor: RealArithmeticExample) {
         value.divideAccordingToEuclid(by: divisor.value)
     }
 
-    static func ↑= (lhs: inout RealArithmeticExample, rhs: RealArithmeticExample) {
-        lhs.value ↑= rhs.value
+    static func ↑= (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
+        precedingValue.value ↑= followingValue.value
     }
 
     init(randomInRange range: ClosedRange<RealArithmeticExample>, fromRandomizer randomizer: Randomizer) {

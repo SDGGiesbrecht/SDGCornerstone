@@ -37,12 +37,12 @@ public struct RelativeComplement<Minuend : SetDefinition, Subtrahend : SetDefini
     public typealias Element = Minuend.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
-    /// Returns `true` if `lhs` contains `rhs`.
+    /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
-    ///     - lhs: The set.
-    ///     - rhs: The element to test.
-    public static func ∋ (lhs: RelativeComplement, rhs: Minuend.Element) -> Bool {
-        return lhs.definition ∋ rhs
+    ///     - precedingValue: The set.
+    ///     - followingValue: The element to test.
+    public static func ∋ (precedingValue: RelativeComplement, followingValue: Minuend.Element) -> Bool {
+        return precedingValue.definition ∋ followingValue
     }
 }

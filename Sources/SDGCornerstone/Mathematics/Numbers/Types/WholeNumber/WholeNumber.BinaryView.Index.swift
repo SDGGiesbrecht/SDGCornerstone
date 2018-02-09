@@ -26,40 +26,40 @@ extension WholeNumber.BinaryView {
 
         // MARK: - Comparable
 
-        internal static func < (lhs: Index, rhs: Index) -> Bool {
-            return (lhs.digit, lhs.bit) < (rhs.digit, rhs.bit)
+        internal static func < (precedingValue: Index, followingValue: Index) -> Bool {
+            return (precedingValue.digit, precedingValue.bit) < (followingValue.digit, followingValue.bit)
         }
 
         // MARK: - Equatable
 
-        internal static func == (lhs: Index, rhs: Index) -> Bool {
-            return (lhs.digit, lhs.bit) == (rhs.digit, rhs.bit)
+        internal static func == (precedingValue: Index, followingValue: Index) -> Bool {
+            return (precedingValue.digit, precedingValue.bit) == (followingValue.digit, followingValue.bit)
         }
 
         // MARK: - PointProtocol
 
         internal typealias Vector = WholeNumber.BinaryView.IndexDistance
 
-        internal static func += (lhs: inout Index, rhs: Vector) {
-            lhs.digit += rhs.digitDistance
-            var bit = IntMax(lhs.bit)
-            bit += rhs.bitDistance
+        internal static func += (precedingValue: inout Index, followingValue: Vector) {
+            precedingValue.digit += followingValue.digitDistance
+            var bit = IntMax(precedingValue.bit)
+            bit += followingValue.bitDistance
 
             let base = IntMax(BinaryView<WholeNumber.Digit>.count)
             if bit ≥ base {
-                lhs.digit += 1
+                precedingValue.digit += 1
                 bit −= base
             }
             if bit < 0 {
-                lhs.digit −= 1
+                precedingValue.digit −= 1
                 bit += base
             }
-            lhs.bit = BitIndex(bit)
+            precedingValue.bit = BitIndex(bit)
         }
 
-        internal static func − (lhs: Index, rhs: Index) -> Vector {
-            var bitDistance: WholeNumber.BinaryView.IndexDistance.BitDistance = lhs.bit − rhs.bit
-            var digitDistance = lhs.digit − rhs.digit
+        internal static func − (precedingValue: Index, followingValue: Index) -> Vector {
+            var bitDistance: WholeNumber.BinaryView.IndexDistance.BitDistance = precedingValue.bit − followingValue.bit
+            var digitDistance = precedingValue.digit − followingValue.digit
             if bitDistance.isNegative {
                 bitDistance += BinaryView<WholeNumber.Digit>.count
                 digitDistance −= 1

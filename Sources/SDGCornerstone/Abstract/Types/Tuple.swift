@@ -13,101 +13,101 @@
  */
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
-/// Returns `true` if the left value is ordered before or the same as the right value.
+/// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≤ <A : Comparable, B : Comparable>(lhs: (A, B), rhs: (A, B)) -> Bool {
-    return lhs <= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≤ <A : Comparable, B : Comparable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
+    return precedingValue <= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
-/// Returns `true` if the left value is ordered before or the same as the right value.
+/// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≤ <A : Comparable, B : Comparable, C : Comparable>(lhs: (A, B, C), rhs: (A, B, C)) -> Bool {
-    return lhs <= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≤ <A : Comparable, B : Comparable, C : Comparable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
+    return precedingValue <= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
-/// Returns `true` if the left value is ordered before or the same as the right value.
+/// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(lhs: (A, B, C, D), rhs: (A, B, C, D)) -> Bool {
-    return lhs <= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
+    return precedingValue <= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
-/// Returns `true` if the left value is ordered before or the same as the right value.
+/// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(lhs: (A, B, C, D, E), rhs: (A, B, C, D, E)) -> Bool {
-    return lhs <= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
+    return precedingValue <= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
-/// Returns `true` if the left value is ordered before or the same as the right value.
+/// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(lhs: (A, B, C, D, E, F), rhs: (A, B, C, D, E, F)) -> Bool {
-    return lhs <= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
+    return precedingValue <= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
-/// Returns `true` if the left value is ordered after or the same as the right value.
+/// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≥ <A : Comparable, B : Comparable>(lhs: (A, B), rhs: (A, B)) -> Bool {
-    return lhs >= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≥ <A : Comparable, B : Comparable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
+    return precedingValue >= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
-/// Returns `true` if the left value is ordered after or the same as the right value.
+/// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≥ <A : Comparable, B : Comparable, C : Comparable>(lhs: (A, B, C), rhs: (A, B, C)) -> Bool {
-    return lhs >= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≥ <A : Comparable, B : Comparable, C : Comparable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
+    return precedingValue >= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
-/// Returns `true` if the left value is ordered after or the same as the right value.
+/// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(lhs: (A, B, C, D), rhs: (A, B, C, D)) -> Bool {
-    return lhs >= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
+    return precedingValue >= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
-/// Returns `true` if the left value is ordered after or the same as the right value.
+/// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(lhs: (A, B, C, D, E), rhs: (A, B, C, D, E)) -> Bool {
-    return lhs >= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
+    return precedingValue >= followingValue
 }
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
-/// Returns `true` if the left value is ordered after or the same as the right value.
+/// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
-///     - lhs: A value to compare.
-///     - rhs: Another value to compare.
-public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(lhs: (A, B, C, D, E, F), rhs: (A, B, C, D, E, F)) -> Bool {
-    return lhs >= rhs
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
+public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
+    return precedingValue >= followingValue
 }
