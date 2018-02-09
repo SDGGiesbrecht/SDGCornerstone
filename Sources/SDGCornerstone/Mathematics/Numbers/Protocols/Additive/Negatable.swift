@@ -13,15 +13,9 @@
  */
 
 /// Performs additive inversion.
-///
-/// - MutatingVariant: −=
-///
-/// - RecommendedOver: -
 prefix operator −
 
 /// Modifies the operand by additive inversion.
-///
-/// - NonmutatingVariant: −
 postfix operator −=
 
 /// A type that can be additively inverted.
@@ -38,10 +32,6 @@ public protocol Negatable : AdditiveArithmetic {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     static prefix func − (operand: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Negatable.−=_]
@@ -49,8 +39,6 @@ public protocol Negatable : AdditiveArithmetic {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    ///
-    /// - NonmutatingVariant: −
     static postfix func −= (operand: inout Self)
 }
 
@@ -61,10 +49,6 @@ extension Negatable {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static prefix func − (operand: Self) -> Self {
         var result = operand
         result−=
@@ -76,8 +60,6 @@ extension Negatable {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    ///
-    /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout Self) {
         operand = additiveIdentity − operand
     }
@@ -91,10 +73,6 @@ extension Negatable where Self : FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static prefix func − (operand: Self) -> Self {
         return -operand
     }
@@ -104,8 +82,6 @@ extension Negatable where Self : FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    ///
-    /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout Self) {
         operand.negate()
     }
@@ -119,10 +95,6 @@ extension Negatable where Self : IntFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static prefix func − (operand: Self) -> Self {
         return -operand
     }
@@ -132,8 +104,6 @@ extension Negatable where Self : IntFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    ///
-    /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout Self) {
         operand.negate()
     }
@@ -147,10 +117,6 @@ extension Negatable where Self : Measurement {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static prefix func − (operand: Self) -> Self {
         return Self(rawValue: −operand.rawValue)
     }
@@ -160,8 +126,6 @@ extension Negatable where Self : Measurement {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    ///
-    /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout Self) {
         operand.rawValue−=
     }

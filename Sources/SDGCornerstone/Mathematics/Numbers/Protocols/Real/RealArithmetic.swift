@@ -12,13 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 // [_Inherit Documentation: SDGCornerstone.RealArithmetic.√_]
 /// Returns the sequare root of `operand`.
 ///
 /// - Parameters:
 ///     - operand: The radicand.
-///
-/// - MutatingVariant: √=
 prefix operator √
 
 // [_Inherit Documentation: SDGCornerstone.RealArithmetic.√=_]
@@ -26,8 +26,6 @@ prefix operator √
 ///
 /// - Parameters:
 ///     - operand: The value to modify.
-///
-/// - NonmutatingVariant: √
 postfix operator √=
 
 // [_Inherit Documentation: SDGCornerstone.RealArithmetic.°_]
@@ -83,8 +81,6 @@ public protocol RealArithmetic : RationalArithmetic {
     ///
     /// - Parameters:
     ///     - degree: The degree of the root.
-    ///
-    /// - MutatingVariant: formRoot
     func root(ofDegree degree: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.formRoot(ofDegree:)_]
@@ -92,8 +88,6 @@ public protocol RealArithmetic : RationalArithmetic {
     ///
     /// - Parameters:
     ///     - degree: The degree of the root.
-    ///
-    /// - NonmutatingVariant: root
     mutating func formRoot(ofDegree degree: Self)
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.√_]
@@ -101,8 +95,6 @@ public protocol RealArithmetic : RationalArithmetic {
     ///
     /// - Parameters:
     ///     - operand: The radicand.
-    ///
-    /// - MutatingVariant: √=
     static prefix func √ (operand: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.√=_]
@@ -110,8 +102,6 @@ public protocol RealArithmetic : RationalArithmetic {
     ///
     /// - Parameters:
     ///     - operand: The value to modify.
-    ///
-    /// - NonmutatingVariant: √
     static postfix func √= (operand: inout Self)
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.log(toBase:of:)_]
@@ -126,8 +116,6 @@ public protocol RealArithmetic : RationalArithmetic {
     /// - Parameters:
     ///     - base: The base.
     ///     - antilogarithm: The antilogarithm.
-    ///
-    /// - MutatingVariant: formLogarithm
     static func log(toBase base: Self, of antilogarithm: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.formLogarithm(toBase:)_]
@@ -141,8 +129,6 @@ public protocol RealArithmetic : RationalArithmetic {
     ///
     /// - Parameters:
     ///     - base: The base.
-    ///
-    /// - NonmutatingVariant: log
     mutating func formLogarithm(toBase base: Self)
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.log(_:)_]
@@ -152,16 +138,12 @@ public protocol RealArithmetic : RationalArithmetic {
     ///
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
-    ///
-    /// - MutatingVariant: formCommonLogarithm
     static func log(_ antilogarithm: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.formCommonLogarithm()_]
     /// Sets `self` to its common logarithm.
     ///
     /// - Precondition: `self` > 0
-    ///
-    /// - NonmutatingVariant: log
     mutating func formCommonLogarithm()
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.ln(_:)_]
@@ -171,16 +153,12 @@ public protocol RealArithmetic : RationalArithmetic {
     ///
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
-    ///
-    /// - MutatingVariant: formNaturalLogarithm
     static func ln(_ antilogarithm: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.formNaturalLogarithm()_]
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
-    ///
-    /// - NonmutatingVariant: ln
     mutating func formNaturalLogarithm()
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.sin(_:)_]
@@ -324,8 +302,6 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - degree: The degree of the root.
-    ///
-    /// - MutatingVariant: formRoot
     public func root(ofDegree degree: Self) -> Self {
         var result = self
         result.formRoot(ofDegree: degree)
@@ -337,8 +313,6 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - degree: The degree of the root.
-    ///
-    /// - NonmutatingVariant: root
     public mutating func formRoot(ofDegree degree: Self) {
         self ↑= (1 ÷ degree)
     }
@@ -348,8 +322,6 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - operand: The radicand.
-    ///
-    /// - MutatingVariant: √=
     public static prefix func √ (operand: Self) -> Self {
         var result = operand
         result√=
@@ -361,8 +333,6 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - operand: The value to modify.
-    ///
-    /// - NonmutatingVariant: √
     public static postfix func √= (operand: inout Self) {
         operand.formRoot(ofDegree: 2)
     }
@@ -379,8 +349,6 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - base: The base.
     ///     - antilogarithm: The antilogarithm.
-    ///
-    /// - MutatingVariant: formLogarithm
     public static func log(toBase base: Self, of antilogarithm: Self) -> Self {
         var result = antilogarithm
         result.formLogarithm(toBase: base)
@@ -394,8 +362,6 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
-    ///
-    /// - MutatingVariant: formCommonLogarithm
     public static func log(_ antilogarithm: Self) -> Self {
         var result = antilogarithm
         result.formCommonLogarithm()
@@ -406,8 +372,6 @@ extension RealArithmetic {
     /// Sets `self` to its common logarithm.
     ///
     /// - Precondition: `self` > 0
-    ///
-    /// - NonmutatingVariant: log
     public mutating func formCommonLogarithm() {
         formLogarithm(toBase: 10)
     }
@@ -419,8 +383,6 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
-    ///
-    /// - MutatingVariant: formNaturalLogarithm
     public static func ln(_ antilogarithm: Self) -> Self {
         var result = antilogarithm
         result.formNaturalLogarithm()
@@ -431,8 +393,6 @@ extension RealArithmetic {
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
-    ///
-    /// - NonmutatingVariant: ln
     public mutating func formNaturalLogarithm() {
         formLogarithm(toBase: e)
     }
@@ -693,8 +653,6 @@ public func e<N : RealArithmetic>() -> N {
 /// - Parameters:
 ///     - base: The base.
 ///     - antilogarithm: The antilogarithm.
-///
-/// - MutatingVariant: formLogarithm
 public func log<N : RealArithmetic>(toBase base: N, of antilogarithm: N) -> N {
     return N.log(toBase: base, of: antilogarithm)
 }
@@ -706,8 +664,6 @@ public func log<N : RealArithmetic>(toBase base: N, of antilogarithm: N) -> N {
 ///
 /// - Parameters:
 ///     - antilogarithm: The antilogarithm.
-///
-/// - MutatingVariant: formCommonLogarithm
 public func log<N : RealArithmetic>(_ antilogarithm: N) -> N {
     return N.log(antilogarithm)
 }
@@ -719,8 +675,6 @@ public func log<N : RealArithmetic>(_ antilogarithm: N) -> N {
 ///
 /// - Parameters:
 ///     - antilogarithm: The antilogarithm.
-///
-/// - MutatingVariant: formNaturalLogarithm
 public func ln<N : RealArithmetic>(_ antilogarithm: N) -> N {
     return N.ln(antilogarithm)
 }
@@ -867,8 +821,6 @@ extension RealArithmetic where Self : FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The radicand.
-    ///
-    /// - MutatingVariant: √=
     public static prefix func √ (operand: Self) -> Self {
         return operand.squareRoot()
     }
@@ -878,8 +830,6 @@ extension RealArithmetic where Self : FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify.
-    ///
-    /// - NonmutatingVariant: √
     public static postfix func √= (operand: inout Self) {
         operand = operand.squareRoot()
     }
@@ -928,8 +878,6 @@ extension RealArithmetic where Self : FloatFamily {
     ///
     /// - Parameters:
     ///     - base: The base.
-    ///
-    /// - NonmutatingVariant: log
     public mutating func formLogarithm(toBase base: Self) {
 
         if ¬tryConvenientLogarithms(toBase: base) {
@@ -946,8 +894,6 @@ extension RealArithmetic where Self : FloatFamily {
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
-    ///
-    /// - NonmutatingVariant: ln
     public mutating func formNaturalLogarithm() {
 
         if ¬tryConvenientLogarithms(toBase: e) {

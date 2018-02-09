@@ -493,8 +493,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout CalendarDate, rhs: CalendarInterval<FloatMax>) {
         if let relative = lhs.definition as? RelativeDate {
             lhs.definition = RelativeDate(relative.intervalSince + rhs, after: relative.baseDate)

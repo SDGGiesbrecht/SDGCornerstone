@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 /// A set small enough to reasonably iterate over.
 ///
 /// Conformance Requirements:
@@ -91,8 +93,6 @@ public protocol FiniteSet : Collection, ComparableSet {
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    ///
-    /// - RecommendedOver: !=
     static func ≠ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element
 
     // [_Define Documentation: SDGCornerstone.FiniteSet.overlaps(_:)_]
@@ -193,8 +193,6 @@ extension FiniteSet {
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    ///
-    /// - RecommendedOver: !=
     public static func ≠ <S : FiniteSet>(lhs: Self, rhs: S) -> Bool where S.Element == Self.Element {
         return ¬(lhs == rhs)
     }

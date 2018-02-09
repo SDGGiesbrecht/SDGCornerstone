@@ -16,16 +16,36 @@
 
 import PackageDescription
 
-let library = "SDGCornerstone"
-let tests = library + "Tests"
+extension Array where Element == Target {
+    static func target(name: String, dependencies: [Target.Dependency] = [], tests: Bool) -> [Target] {
+        var group: [Target] = [
+            .target(name: name, dependencies: dependencies)
+        ]
+        if tests {
+            group += [.testTarget(name: name + "Tests", dependencies: [.targetItem(name: name)])]
+        }
+        return group
+    }
+}
 
 let package = Package(
-    name: library,
+    name: "SDGCornerstone",
     products: [
-        .library(name: library, targets: [library])
+        .library(name: "SDGCornerstone", targets: [
+            "SDGCornerstone",
+
+            "SDGLogic", "SDGLogicCore"
+            ])
     ],
-    targets: [
-        .target(name: library, dependencies: []),
-        .testTarget(name: tests, dependencies: [.targetItem(name: library)])
-    ]
+    targets: Array(([
+        .target(name: "SDGCornerstone", dependencies: [
+            "SDGLogic"
+        ], tests: true),
+
+        .target(name: "SDGLogic", dependencies: [
+            "SDGLogicCore"
+            ], tests: true),
+
+        .target(name: "SDGLogicCore", tests: false)
+    ] as [[Target]]).joined())
 )

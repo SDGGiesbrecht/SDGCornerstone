@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGLogicCore
+
 extension Collection {
 
     // MARK: - Conformance

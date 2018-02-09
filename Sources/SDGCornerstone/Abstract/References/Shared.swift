@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 /// A reference to a shared value.
 public class Shared<Value> {
 

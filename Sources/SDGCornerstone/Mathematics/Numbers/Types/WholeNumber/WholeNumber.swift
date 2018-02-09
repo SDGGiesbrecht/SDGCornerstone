@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 // [_Example 1: WholeNumber Literals_]
 /// An arbitrary‐precision whole number.
 ///
@@ -89,8 +91,6 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout WholeNumber, rhs: WholeNumber) {
 
         var carrying: Digit = 0
@@ -180,8 +180,6 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout WholeNumber, rhs: Vector) {
         if rhs.isNegative {
             lhs −= rhs.wholeMagnitude
@@ -208,10 +206,6 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     public static func −= (lhs: inout WholeNumber, rhs: WholeNumber) {
         assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {
@@ -255,10 +249,6 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: ×=
-    ///
-    /// - RecommendedOver: *
     public static func × (lhs: WholeNumber, rhs: WholeNumber) -> WholeNumber {
 
         var product: WholeNumber = 0
@@ -289,10 +279,6 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
-    ///
-    /// - RecommendedOver: *=
     public static func ×= (lhs: inout WholeNumber, rhs: WholeNumber) {
         lhs = lhs × rhs
     }
@@ -337,8 +323,6 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - NonmutatingVariant: dividedAccordingToEuclid
     public mutating func divideAccordingToEuclid(by divisor: WholeNumber) {
         self = quotientAndRemainder(for: divisor).quotient
     }
@@ -350,8 +334,6 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - NonmutatingVariant: mod
     public mutating func formRemainder(mod divisor: WholeNumber) {
         self = quotientAndRemainder(for: divisor).remainder
     }

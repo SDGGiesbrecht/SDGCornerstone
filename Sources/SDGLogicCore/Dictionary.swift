@@ -1,10 +1,10 @@
 /*
- Optional.swift
+ Dictionary.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
 
- Copyright ©2016–2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Optional where Wrapped : Equatable {
-    // MARK: - where Wrapped : Equatable
+// [_Workaround: Automatically handled by Equatable in Swift 4.1 (Swift 4.0.3)_]
+
+extension Dictionary where Value : Equatable {
+    // MARK: - where Value : Equatable
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
     /// Returns `true` if the two values are inequal.
@@ -21,9 +23,7 @@ extension Optional where Wrapped : Equatable {
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    ///
-    /// - RecommendedOver: !=
-    public static func ≠ (lhs: Optional, rhs: Optional) -> Bool {
+    @_inlineable public static func ≠ (lhs: Dictionary, rhs: Dictionary) -> Bool {
         return lhs != rhs
     }
 }

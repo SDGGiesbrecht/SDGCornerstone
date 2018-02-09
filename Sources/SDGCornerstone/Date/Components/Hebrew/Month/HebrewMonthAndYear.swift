@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 /// A Hebrew month of a particular year.
 public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimensionalPoint, PointProtocol {
 
@@ -95,8 +97,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout HebrewMonthAndYear, rhs: Int) {
         if rhs.isNegative {
             for _ in 1 ... |rhs| {

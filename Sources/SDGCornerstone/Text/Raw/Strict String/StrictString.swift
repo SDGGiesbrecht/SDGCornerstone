@@ -97,8 +97,6 @@ public struct StrictString : Addable, BidirectionalCollection, CodableViaLossles
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout StrictString, rhs: StrictString) {
         lhs.append(contentsOf: rhs)
     }

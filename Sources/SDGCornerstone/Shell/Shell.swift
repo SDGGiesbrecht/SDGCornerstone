@@ -17,6 +17,8 @@
 
     import Foundation
 
+    import SDGLogicCore
+
     /// A command line shell.
     public struct Shell {
 

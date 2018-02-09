@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGLogicCore
+
 extension RunLoop {
 
     // MARK: - Running the Loop

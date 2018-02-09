@@ -28,7 +28,5 @@ public protocol OneDimensionalVector : VectorProtocol {
     ///     - rhs: The divisor.
     ///
     /// - MutatingVariant: ×
-    ///
-    /// - RecommendedOver: /
     static func ÷ (lhs: Self, rhs: Self) -> Scalar
 }

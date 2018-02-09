@@ -58,8 +58,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Parameters:
     ///     - lhs: The measurement.
     ///     - rhs: The scalar.
-    ///
-    /// - MutatingVariant: ×=
     static func × (lhs: Self, rhs: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.×=_]
@@ -68,8 +66,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Parameters:
     ///     - lhs: The measurement to modify.
     ///     - rhs: The scalar.
-    ///
-    /// - NonmutatingVariant: ×
     static func ×= (lhs: inout Self, rhs: Scalar)
 
     // [_Define Documentation: SDGCornerstone.Measurement.÷(_:scalar:)_]
@@ -78,8 +74,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Parameters:
     ///     - lhs: The measurement.
     ///     - rhs: The scalar.
-    ///
-    /// - MutatingVariant: ×
     static func ÷ (lhs: Self, rhs: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.÷_]
@@ -96,8 +90,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Parameters:
     ///     - lhs: The measurement to modify.
     ///     - rhs: The scalar divisor.
-    ///
-    /// - NonmutatingVariant: ÷
     static func ÷= (lhs: inout Self, rhs: Scalar)
 
     // A MEAUSUREMENT IS NOT AN INTEGER WITHOUT AN ARBITRARY SELECTION OF A UNIT, SO *EUCLIDEAN* DIVISON BY A SCALAR IS MEANINGLESS
@@ -109,8 +101,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - MutatingVariant: divideAccordingToEuclid
     func dividedAccordingToEuclid(by divisor: Self) -> Scalar
 
     // [_Define Documentation: SDGCornerstone.Measurement.mod(_:)_]
@@ -120,8 +110,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - MutatingVariant: formRemainder
     func mod(_ divisor: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.formRemainder(mod:)_]
@@ -131,8 +119,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - NonmutatingVariant: mod
     mutating func formRemainder(mod divisor: Self)
 
     // [_Define Documentation: SDGCornerstone.Measurement.isDivisible(by:)_]
@@ -145,8 +131,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: formGreatestCommonDivisor
     static func gcd(_ a: Self, _ b: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.formGreatestCommonDivisor(with:)_]
@@ -154,8 +138,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    ///
-    /// - NonmutatingVariant: gcd
     mutating func formGreatestCommonDivisor(with other: Self)
 
     // [_Define Documentation: SDGCornerstone.Measurement.lcm(_:_:)_]
@@ -164,8 +146,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: formGreatestCommonDivisor
     static func lcm(_ a: Self, _ b: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Measurement.formLeastCommonMultiple(with:)_]
@@ -173,8 +153,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    ///
-    /// - NonmutatingVariant: lcm
     mutating func formLeastCommonMultiple(with other: Self)
 
     // MARK: - Rounding
@@ -188,8 +166,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - NonmutatingVariant: rounded
     mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self)
 
     // [_Define Documentation: SDGCornerstone.Measurement.rounded(_:toMultipleOf:)_]
@@ -198,8 +174,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - MutatingVariant: round
     func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
 
     // MARK: - Randomization
@@ -257,8 +231,6 @@ extension Measurement {
     /// - Parameters:
     ///     - lhs: The measurement.
     ///     - rhs: The scalar.
-    ///
-    /// - MutatingVariant: ×=
     public static func × (lhs: Self, rhs: Scalar) -> Self {
         var result = lhs
         result ×= rhs
@@ -271,8 +243,6 @@ extension Measurement {
     /// - Parameters:
     ///     - lhs: The measurement.
     ///     - rhs: The scalar.
-    ///
-    /// - MutatingVariant: ×=
     public static func × (lhs: Scalar, rhs: Self) -> Self {
         return rhs × lhs
     }
@@ -283,8 +253,6 @@ extension Measurement {
     /// - Parameters:
     ///     - lhs: The measurement to modify.
     ///     - rhs: The scalar.
-    ///
-    /// - NonmutatingVariant: ×
     public static func ×= (lhs: inout Self, rhs: Scalar) {
         lhs.rawValue ×= rhs
     }
@@ -295,8 +263,6 @@ extension Measurement {
     /// - Parameters:
     ///     - lhs: The measurement.
     ///     - rhs: The scalar.
-    ///
-    /// - MutatingVariant: ×
     public static func ÷ (lhs: Self, rhs: Scalar) -> Self {
         var result = lhs
         result ÷= rhs
@@ -319,8 +285,6 @@ extension Measurement {
     /// - Parameters:
     ///     - lhs: The measurement to modify.
     ///     - rhs: The scalar divisor.
-    ///
-    /// - NonmutatingVariant: ÷
     public static func ÷= (lhs: inout Self, rhs: Scalar) {
         lhs.rawValue ÷= rhs
     }
@@ -334,8 +298,6 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - MutatingVariant: divideAccordingToEuclid
     public func dividedAccordingToEuclid(by divisor: Self) -> Scalar {
         return rawValue.dividedAccordingToEuclid(by: divisor.rawValue)
     }
@@ -347,8 +309,6 @@ extension Measurement {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - MutatingVariant: formRemainder
     public func mod(_ divisor: Self) -> Self {
         var result = self
         result.formRemainder(mod: divisor)
@@ -362,8 +322,6 @@ extension Measurement {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - NonmutatingVariant: mod
     public mutating func formRemainder(mod divisor: Self) {
         rawValue.formRemainder(mod: divisor.rawValue)
     }
@@ -380,8 +338,6 @@ extension Measurement {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: formGreatestCommonDivisor
     public static func gcd(_ a: Self, _ b: Self) -> Self {
         var result = a
         result.formGreatestCommonDivisor(with: b)
@@ -393,8 +349,6 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    ///
-    /// - NonmutatingVariant: gcd
     public mutating func formGreatestCommonDivisor(with other: Self) {
         rawValue.formGreatestCommonDivisor(with: other.rawValue)
     }
@@ -405,8 +359,6 @@ extension Measurement {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: formGreatestCommonDivisor
     public static func lcm(_ a: Self, _ b: Self) -> Self {
         var result = a
         result.formLeastCommonMultiple(with: b)
@@ -418,8 +370,6 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    ///
-    /// - NonmutatingVariant: lcm
     public mutating func formLeastCommonMultiple(with other: Self) {
         rawValue.formLeastCommonMultiple(with: other.rawValue)
     }
@@ -430,8 +380,6 @@ extension Measurement {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - NonmutatingVariant: rounded
     public mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self) {
         rawValue.round(rule, toMultipleOf: factor.rawValue)
     }
@@ -442,8 +390,6 @@ extension Measurement {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - MutatingVariant: round
     public func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self {
         var result = self
         result.round(rule, toMultipleOf: factor)
@@ -507,8 +453,6 @@ extension Measurement {
 /// - Parameters:
 ///     - lhs: A value.
 ///     - rhs: Another value.
-///
-/// - MutatingVariant: formGreatestCommonDivisor
 public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.gcd(a, b)
 }
@@ -519,8 +463,6 @@ public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
 /// - Parameters:
 ///     - lhs: A value.
 ///     - rhs: Another value.
-///
-/// - MutatingVariant: formGreatestCommonDivisor
 public func lcm<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.lcm(a, b)
 }

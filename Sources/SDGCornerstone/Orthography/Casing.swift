@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 /// A casing position used by languages that have distinct letter cases (but which use the same casing for titles as for sentences).
 ///
 /// - SeeAlso: `EnglishCasing`

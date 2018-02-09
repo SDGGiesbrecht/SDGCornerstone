@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 /// A pattern that matches against repetitions of another pattern.
 public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 

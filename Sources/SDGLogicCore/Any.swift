@@ -20,8 +20,6 @@
 /// - Parameters:
 ///     - lhs: A value to compare.
 ///     - rhs: Another value to compare.
-///
-/// - RecommendedOver: !=
-public func ≠ (lhs: Any.Type?, rhs: Any.Type?) -> Bool {
+@_inlineable public func ≠ (lhs: Any.Type?, rhs: Any.Type?) -> Bool {
     return lhs != rhs
 }

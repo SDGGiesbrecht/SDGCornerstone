@@ -12,32 +12,22 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogicCore
+extension Equatable {
 
-extension Equatable where Self : ComparableSet {
-    // MARK: - where Self : ComparableSet
-
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // [_Define Documentation: SDGCornerstone.Equatable.==_]
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs ⊇ rhs ∧ lhs ⊆ rhs
-    }
-}
 
-extension Equatable where Self : Measurement {
-    // MARK: - where Self : Measurement
-
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
-    /// Returns `true` if the two values are equal.
+    // [_Define Documentation: SDGCornerstone.Equatable.≠_]
+    /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.rawValue == rhs.rawValue
+    @_inlineable public static func ≠ (lhs: Self, rhs: Self) -> Bool {
+        return lhs != rhs
     }
 }

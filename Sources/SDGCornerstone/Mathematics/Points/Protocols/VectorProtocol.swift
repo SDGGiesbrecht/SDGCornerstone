@@ -61,8 +61,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     ///     - rhs: The divisor.
     ///
     /// - MutatingVariant: ×
-    ///
-    /// - RecommendedOver: /
     static func ÷ (lhs: Self, rhs: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.÷=_]
@@ -73,8 +71,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     ///     - rhs: The divisor.
     ///
     /// - NonmutatingVariant: ÷
-    ///
-    /// - RecommendedOver: /=
     static func ÷= (lhs: inout Self, rhs: Scalar)
 }
 
@@ -112,8 +108,6 @@ extension VectorProtocol {
     ///     - rhs: The divisor.
     ///
     /// - MutatingVariant: ×
-    ///
-    /// - RecommendedOver: /
     public static func ÷ (lhs: Self, rhs: Scalar) -> Self {
         var result = lhs
         result ÷= rhs
@@ -145,8 +139,6 @@ extension VectorProtocol where Self : TwoDimensionalVector {
     ///     - rhs: The divisor.
     ///
     /// - NonmutatingVariant: ÷
-    ///
-    /// - RecommendedOver: /=
     public static func ÷=(lhs: inout Self, rhs: Scalar) {
         lhs.Δx ÷= rhs
         lhs.Δy ÷= rhs

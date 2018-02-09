@@ -12,16 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
 /// Returns the (rational) quotient of the left divided by the right.
 ///
 /// - Parameters:
 ///     - lhs: The dividend.
 ///     - rhs: The divisor.
-///
-/// - MutatingVariant: ×
-///
-/// - RecommendedOver: /
 infix operator ÷: MultiplicationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷=_]
@@ -30,10 +28,6 @@ infix operator ÷: MultiplicationPrecedence
 /// - Parameters:
 ///     - lhs: The value to modify.
 ///     - rhs: The divisor.
-///
-/// - NonmutatingVariant: ÷
-///
-/// - RecommendedOver: /=
 infix operator ÷=: AssignmentPrecedence
 
 /// A type that can be used for rational arithmetic.
@@ -58,10 +52,6 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     /// - Parameters:
     ///     - lhs: The dividend.
     ///     - rhs: The divisor.
-    ///
-    /// - MutatingVariant: ×
-    ///
-    /// - RecommendedOver: /
     static func ÷ (lhs: Self, rhs: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.RationalArithmetic.÷=_]
@@ -70,10 +60,6 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The divisor.
-    ///
-    /// - NonmutatingVariant: ÷
-    ///
-    /// - RecommendedOver: /=
     static func ÷= (lhs: inout Self, rhs: Self)
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
@@ -100,10 +86,6 @@ extension RationalArithmetic {
     /// - Parameters:
     ///     - lhs: The dividend.
     ///     - rhs: The divisor.
-    ///
-    /// - MutatingVariant: ×
-    ///
-    /// - RecommendedOver: /
     public static func ÷ (lhs: Self, rhs: Self) -> Self {
         var result = lhs
         result ÷= rhs
@@ -256,10 +238,6 @@ extension RationalArithmetic where Self : FloatFamily {
     /// - Parameters:
     ///     - lhs: The dividend.
     ///     - rhs: The divisor.
-    ///
-    /// - MutatingVariant: ×
-    ///
-    /// - RecommendedOver: /
     public static func ÷ (lhs: Self, rhs: Self) -> Self {
         return lhs / rhs
     }
@@ -270,10 +248,6 @@ extension RationalArithmetic where Self : FloatFamily {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The divisor.
-    ///
-    /// - NonmutatingVariant: ÷
-    ///
-    /// - RecommendedOver: /=
     public static func ÷= (lhs: inout Self, rhs: Self) {
         lhs /= rhs
     }

@@ -65,14 +65,10 @@ public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
 
     // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
     /// The absolute value.
-    ///
-    /// - MutatingVariant: formAbsoluteValue
     var absoluteValue: Self { get }
 
     // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
     /// Sets `self` to its absolute value.
-    ///
-    /// - NonmutatingVariant: |
     mutating func formAbsoluteValue()
 }
 
@@ -104,8 +100,6 @@ extension NumericAdditiveArithmetic {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
     /// The absolute value.
-    ///
-    /// - MutatingVariant: formAbsoluteValue
     public var absoluteValue: Self {
         var result = self
         result.formAbsoluteValue()
@@ -153,16 +147,12 @@ extension NumericAdditiveArithmetic where Self : FloatFamily {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
     /// The absolute value.
-    ///
-    /// - MutatingVariant: formAbsoluteValue
     public var absoluteValue: Self {
         return abs(self)
     }
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
     /// Sets `self` to its absolute value.
-    ///
-    /// - NonmutatingVariant: |
     public mutating func formAbsoluteValue() {
         self = abs(self)
     }
@@ -173,16 +163,12 @@ extension NumericAdditiveArithmetic where Self : IntFamily {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
     /// The absolute value.
-    ///
-    /// - MutatingVariant: formAbsoluteValue
     public var absoluteValue: Self {
         return abs(self)
     }
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
     /// Sets `self` to its absolute value.
-    ///
-    /// - NonmutatingVariant: |
     public mutating func formAbsoluteValue() {
         self = abs(self)
     }
@@ -217,16 +203,12 @@ extension NumericAdditiveArithmetic where Self : Measurement {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
     /// The absolute value.
-    ///
-    /// - MutatingVariant: formAbsoluteValue
     public var absoluteValue: Self {
         return Self(rawValue: rawValue.absoluteValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
     /// Sets `self` to its absolute value.
-    ///
-    /// - NonmutatingVariant: |
     public mutating func formAbsoluteValue() {
         rawValue.formAbsoluteValue()
     }
@@ -237,8 +219,6 @@ extension NumericAdditiveArithmetic where Self : Negatable {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
     /// Sets `self` to its absolute value.
-    ///
-    /// - NonmutatingVariant: |
     public mutating func formAbsoluteValue() {
         if self < Self.additiveIdentity {
             self−=
@@ -263,8 +243,6 @@ extension NumericAdditiveArithmetic where Self : WholeNumberProtocol {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
     /// Sets `self` to its absolute value.
-    ///
-    /// - NonmutatingVariant: |
     public mutating func formAbsoluteValue() {
         // self = self
     }

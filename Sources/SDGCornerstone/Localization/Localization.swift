@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 /// An enumeration that describes the set of localizations available for a particular usage.
 ///
 /// Conformance Requirements:

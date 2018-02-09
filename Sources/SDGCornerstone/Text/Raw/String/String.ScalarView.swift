@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 extension String.UnicodeScalarView : UnicodeScalarView {
     // [_Workaround: The previous line should read “String.ScalarView” but a compiler bug prevents it. (Swift 4.0.3)_]
 

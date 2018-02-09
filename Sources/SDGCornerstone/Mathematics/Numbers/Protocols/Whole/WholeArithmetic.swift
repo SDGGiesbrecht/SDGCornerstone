@@ -14,16 +14,14 @@
 
 import Foundation
 
+import SDGLogicCore
+
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
 /// Returns the product of the left times the right.
 ///
 /// - Parameters:
 ///     - lhs: A value.
 ///     - rhs: Another value.
-///
-/// - MutatingVariant: ×=
-///
-/// - RecommendedOver: *
 infix operator ×: MultiplicationPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
@@ -32,10 +30,6 @@ infix operator ×: MultiplicationPrecedence
 /// - Parameters:
 ///     - lhs: The value to modify.
 ///     - rhs: The coefficient by which to multiply.
-///
-/// - NonmutatingVariant: ×
-///
-/// - RecommendedOver: *=
 infix operator ×=: AssignmentPrecedence
 
 /// A precedence group for exponent operators. (e.g. ↑)
@@ -61,10 +55,6 @@ precedencegroup ExponentPrecedence {
 /// - Parameters:
 ///     - lhs: The base.
 ///     - rhs: The exponent.
-///
-/// - MutatingVariant: ↑=
-///
-/// - RecommendedOver: pow
 infix operator ↑: ExponentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
@@ -80,8 +70,6 @@ infix operator ↑: ExponentPrecedence
 /// - Parameters:
 ///     - lhs: The value to modify.
 ///     - rhs: The exponent.
-///
-/// - NonmutatingVariant: ↑
 infix operator ↑=: AssignmentPrecedence
 
 /// A type that can be used for whole‐number arithmetic.
@@ -129,10 +117,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: ×=
-    ///
-    /// - RecommendedOver: *
     static func × (lhs: Self, rhs: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.×=_]
@@ -141,10 +125,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
-    ///
-    /// - RecommendedOver: *=
     static func ×= (lhs: inout Self, rhs: Self)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
@@ -154,8 +134,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - NonmutatingVariant: dividedAccordingToEuclid
     mutating func divideAccordingToEuclid(by divisor: Self)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:)_]
@@ -165,8 +143,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - MutatingVariant: divideAccordingToEuclid
     func dividedAccordingToEuclid(by divisor: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.mod(_:)_]
@@ -176,8 +152,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - MutatingVariant: formRemainder
     func mod(_ divisor: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.formRemainder(mod:)_]
@@ -187,8 +161,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - NonmutatingVariant: mod
     mutating func formRemainder(mod divisor: Self)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.isDivisible(by:)_]
@@ -201,8 +173,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: formGreatestCommonDivisor
     static func gcd(_ a: Self, _ b: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:)_]
@@ -210,8 +180,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///
     /// - Parameters:
     ///     - other: Another value.
-    ///
-    /// - NonmutatingVariant: gcd
     mutating func formGreatestCommonDivisor(with other: Self)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.lcm(_:_:)_]
@@ -220,8 +188,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: formGreatestCommonDivisor
     static func lcm(_ a: Self, _ b: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:)_]
@@ -229,8 +195,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///
     /// - Parameters:
     ///     - other: Another value.
-    ///
-    /// - NonmutatingVariant: lcm
     mutating func formLeastCommonMultiple(with other: Self)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.↑_]
@@ -246,10 +210,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// - Parameters:
     ///     - lhs: The base.
     ///     - rhs: The exponent.
-    ///
-    /// - MutatingVariant: ↑=
-    ///
-    /// - RecommendedOver: pow
     static func ↑ (lhs: Self, rhs: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.↑=_]
@@ -265,8 +225,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The exponent.
-    ///
-    /// - NonmutatingVariant: ↑
     static func ↑= (lhs: inout Self, rhs: Self)
 
     // MARK: - Classification
@@ -301,8 +259,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    ///
-    /// - NonmutatingVariant: rounded
     mutating func round(_ rule: RoundingRule)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
@@ -310,8 +266,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    ///
-    /// - MutatingVariant: round
     func rounded(_ rule: RoundingRule) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:)_]
@@ -320,8 +274,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - NonmutatingVariant: rounded
     mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:)_]
@@ -330,8 +282,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, NumericAdditiveAri
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - MutatingVariant: round
     func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
@@ -572,10 +522,6 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: ×=
-    ///
-    /// - RecommendedOver: *
     public static func × (lhs: Self, rhs: Self) -> Self {
         var result = lhs
         result ×= rhs
@@ -589,8 +535,6 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - MutatingVariant: divideAccordingToEuclid
     public func dividedAccordingToEuclid(by divisor: Self) -> Self {
         var result = self
         result.divideAccordingToEuclid(by: divisor)
@@ -604,8 +548,6 @@ extension WholeArithmetic {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - MutatingVariant: formRemainder
     public func mod(_ divisor: Self) -> Self {
         var result = self
         result.formRemainder(mod: divisor)
@@ -619,8 +561,6 @@ extension WholeArithmetic {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - NonmutatingVariant: mod
     public mutating func formRemainder(mod divisor: Self) {
         self −= dividedAccordingToEuclid(by: divisor) × divisor
     }
@@ -637,8 +577,6 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: formGreatestCommonDivisor
     public static func gcd(_ a: Self, _ b: Self) -> Self {
         var result = a
         result.formGreatestCommonDivisor(with: b)
@@ -650,8 +588,6 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    ///
-    /// - NonmutatingVariant: gcd
     public mutating func formGreatestCommonDivisor(with other: Self) {
         if self.isNegative ∨ other.isNegative {
             self.formAbsoluteValue()
@@ -669,8 +605,6 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: formGreatestCommonDivisor
     public static func lcm(_ a: Self, _ b: Self) -> Self {
         var result = a
         result.formLeastCommonMultiple(with: b)
@@ -682,8 +616,6 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    ///
-    /// - NonmutatingVariant: lcm
     public mutating func formLeastCommonMultiple(with other: Self) {
         self ×= other.dividedAccordingToEuclid(by: Self.gcd(self, other))
     }
@@ -701,10 +633,6 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - lhs: The base.
     ///     - rhs: The exponent.
-    ///
-    /// - MutatingVariant: ↑=
-    ///
-    /// - RecommendedOver: pow
     public static func ↑ (lhs: Self, rhs: Self) -> Self {
         var result = lhs
         result ↑= rhs
@@ -1422,8 +1350,6 @@ extension WholeArithmetic {
 /// - Parameters:
 ///     - lhs: A value.
 ///     - rhs: Another value.
-///
-/// - MutatingVariant: formGreatestCommonDivisor
 public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.gcd(a, b)
 }
@@ -1434,8 +1360,6 @@ public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
 /// - Parameters:
 ///     - lhs: A value.
 ///     - rhs: Another value.
-///
-/// - MutatingVariant: formGreatestCommonDivisor
 public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.lcm(a, b)
 }
@@ -1454,10 +1378,6 @@ extension WholeArithmetic where Self : FloatFamily {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: ×=
-    ///
-    /// - RecommendedOver: *
     public static func × (lhs: Self, rhs: Self) -> Self {
         return lhs * rhs
     }
@@ -1468,10 +1388,6 @@ extension WholeArithmetic where Self : FloatFamily {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
-    ///
-    /// - RecommendedOver: *=
     public static func ×= (lhs: inout Self, rhs: Self) {
         lhs *= rhs
     }
@@ -1483,8 +1399,6 @@ extension WholeArithmetic where Self : FloatFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - NonmutatingVariant: dividedAccordingToEuclid
     public mutating func divideAccordingToEuclid(by divisor: Self) {
         self ÷= divisor
         self.round(.down)
@@ -1503,8 +1417,6 @@ extension WholeArithmetic where Self : FloatFamily {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The exponent.
-    ///
-    /// - NonmutatingVariant: ↑
     public static func ↑= (lhs: inout Self, rhs: Self) {
 
         assert(lhs.isNonNegative ∨ rhs.isIntegral, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
@@ -1602,8 +1514,6 @@ extension WholeArithmetic where Self : IntegerProtocol {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The exponent.
-    ///
-    /// - NonmutatingVariant: ↑
     public static func ↑= (lhs: inout Self, rhs: Self) {
         lhs.raiseIntegerToThePowerOf(integer: rhs)
     }
@@ -1694,10 +1604,6 @@ extension WholeArithmetic where Self : IntFamily {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: ×=
-    ///
-    /// - RecommendedOver: *
     public static func × (lhs: Self, rhs: Self) -> Self {
         return lhs * rhs
     }
@@ -1708,10 +1614,6 @@ extension WholeArithmetic where Self : IntFamily {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
-    ///
-    /// - RecommendedOver: *=
     public static func ×= (lhs: inout Self, rhs: Self) {
         lhs *= rhs
     }
@@ -1723,8 +1625,6 @@ extension WholeArithmetic where Self : IntFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - NonmutatingVariant: dividedAccordingToEuclid
     public mutating func divideAccordingToEuclid(by divisor: Self) {
 
         let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
@@ -1849,8 +1749,6 @@ extension WholeArithmetic where Self : RationalNumberProtocol {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The exponent.
-    ///
-    /// - NonmutatingVariant: ↑
     public static func ↑= (lhs: inout Self, rhs: Self) {
         lhs.raiseRationalNumberToThePowerOf(rationalNumber: rhs)
     }
@@ -1879,10 +1777,6 @@ extension WholeArithmetic where Self : UIntFamily {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: ×=
-    ///
-    /// - RecommendedOver: *
     public static func × (lhs: Self, rhs: Self) -> Self {
         return lhs * rhs
     }
@@ -1893,10 +1787,6 @@ extension WholeArithmetic where Self : UIntFamily {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
-    ///
-    /// - RecommendedOver: *=
     public static func ×= (lhs: inout Self, rhs: Self) {
         lhs *= rhs
     }
@@ -1908,8 +1798,6 @@ extension WholeArithmetic where Self : UIntFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - MutatingVariant: divideAccordingToEuclid
     public func dividedAccordingToEuclid(by divisor: Self) -> Self {
         return self / divisor
     }
@@ -1921,8 +1809,6 @@ extension WholeArithmetic where Self : UIntFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - NonmutatingVariant: dividedAccordingToEuclid
     public mutating func divideAccordingToEuclid(by divisor: Self) {
         self /= divisor
     }
@@ -1934,8 +1820,6 @@ extension WholeArithmetic where Self : UIntFamily {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - MutatingVariant: formRemainder
     public func mod(_ divisor: Self) -> Self {
         return self % divisor
     }
@@ -1947,8 +1831,6 @@ extension WholeArithmetic where Self : UIntFamily {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    ///
-    /// - NonmutatingVariant: mod
     public mutating func formRemainder(mod divisor: Self) {
         self %= divisor
     }
@@ -1993,8 +1875,6 @@ extension WholeArithmetic where Self : WholeNumberProtocol {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The exponent.
-    ///
-    /// - NonmutatingVariant: ↑
     public static func ↑= (lhs: inout Self, rhs: Self) {
         lhs.raiseWholeNumberToThePowerOf(wholeNumber: rhs)
     }

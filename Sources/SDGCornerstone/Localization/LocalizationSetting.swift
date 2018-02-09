@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGLogicCore
+
 /// A localization setting describing a list of preferred localizations and their order of precedence.
 public struct LocalizationSetting : Equatable {
 

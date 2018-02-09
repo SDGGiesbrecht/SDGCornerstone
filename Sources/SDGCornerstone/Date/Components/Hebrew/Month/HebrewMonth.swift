@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 /// A month of the Hebrew year.
 public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 

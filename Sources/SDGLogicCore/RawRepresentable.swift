@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+// [_Workaround: Automatically handled by Equatable in Swift 4.1 (Swift 4.0.3)_]
+
 extension RawRepresentable {
 
     // [_Define Documentation: SDGCornerstone.RawRepresentable.RawValue_]
@@ -27,9 +29,7 @@ extension RawRepresentable where RawValue : Equatable {
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    ///
-    /// - RecommendedOver: !=
-    public static func ≠ (lhs: Self, rhs: Self) -> Bool {
+    @_inlineable public static func ≠ (lhs: Self, rhs: Self) -> Bool {
         return lhs != rhs
     }
 }
@@ -43,9 +43,7 @@ extension RawRepresentable where Self : Equatable, RawValue : Equatable {
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    ///
-    /// - RecommendedOver: !=
-    public static func ≠ (lhs: Self, rhs: Self) -> Bool {
+    @_inlineable public static func ≠ (lhs: Self, rhs: Self) -> Bool {
         return lhs != rhs
     }
 }

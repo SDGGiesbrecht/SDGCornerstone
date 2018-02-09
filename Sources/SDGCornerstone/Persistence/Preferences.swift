@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGLogicCore
+
 /// A set of preferences for a particular domain.
 open class Preferences {
 

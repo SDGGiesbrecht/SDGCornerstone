@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 // [_Example 1: Gregorian Year_]
 /// A Gregorian year.
 ///
@@ -185,8 +187,6 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout GregorianYear, rhs: Int) {
         var result = lhs.rawValue + rhs
 

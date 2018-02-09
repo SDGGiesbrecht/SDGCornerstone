@@ -95,8 +95,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout RationalNumber, rhs: RationalNumber) {
 
         // _a_  +  _c_, b ≠ 0, d ≠ 0
@@ -205,8 +203,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    ///
-    /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout RationalNumber) {
         operand.definition.numerator−=
     }
@@ -236,10 +232,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The divisor.
-    ///
-    /// - NonmutatingVariant: ÷
-    ///
-    /// - RecommendedOver: /=
     public static func ÷= (lhs: inout RationalNumber, rhs: RationalNumber) {
         var irregular = lhs.definition
         irregular.numerator ×= rhs.denominator
@@ -263,10 +255,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     public static func −= (lhs: inout RationalNumber, rhs: RationalNumber) {
         lhs += −rhs
     }
@@ -288,10 +276,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
-    ///
-    /// - RecommendedOver: *=
     public static func ×= (lhs: inout RationalNumber, rhs: RationalNumber) {
         var irregular = lhs.definition
         irregular.numerator ×= rhs.numerator
@@ -306,8 +290,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - NonmutatingVariant: dividedAccordingToEuclid
     public mutating func divideAccordingToEuclid(by divisor: RationalNumber) {
         let rational = self ÷ divisor
         let euclidean = rational.numerator.dividedAccordingToEuclid(by: rational.denominator)

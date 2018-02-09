@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 // [_Example 1: WholeNumber Literals_]
 /// An arbitrary‐precision integer.
 ///
@@ -83,8 +85,6 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout Integer, rhs: Integer) {
 
         if lhs.isNegative == rhs.isNegative {
@@ -171,8 +171,6 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    ///
-    /// - NonmutatingVariant: −
     public static postfix func −= (operand: inout Integer) {
         operand.isNegative¬=
     }
@@ -207,10 +205,6 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     public static func −= (lhs: inout Integer, rhs: Integer) {
         lhs += −rhs
     }
@@ -232,10 +226,6 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
-    ///
-    /// - RecommendedOver: *=
     public static func ×= (lhs: inout Integer, rhs: Integer) {
         lhs.wholeMagnitude ×= rhs.wholeMagnitude
         if lhs.isNegative == rhs.isNegative {
@@ -252,8 +242,6 @@ public struct Integer : Addable, CodableViaIntegerProtocol, Comparable, Equatabl
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    ///
-    /// - NonmutatingVariant: dividedAccordingToEuclid
     public mutating func divideAccordingToEuclid(by divisor: Integer) {
 
         let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)

@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogicCore
+
 // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
 /// Returns `true` if `lhs` is a subset of `rhs`.
 ///

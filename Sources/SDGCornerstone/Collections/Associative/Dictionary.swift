@@ -93,21 +93,3 @@ extension Dictionary : PropertyListValue {
         return try mapKeyValuePairs { (try transform($0), $1) }
     }
 }
-
-extension Dictionary where Value : Equatable {
-    // MARK: - where Value : Equatable
-
-    // [_Workaround: This can be refactored once conditional conformance is available. (Swift 4.0.3)_]
-
-    // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
-    /// Returns `true` if the two values are inequal.
-    ///
-    /// - Parameters:
-    ///     - lhs: A value to compare.
-    ///     - rhs: Another value to compare.
-    ///
-    /// - RecommendedOver: !=
-    public static func ≠(lhs: Dictionary, rhs: Dictionary) -> Bool {
-        return lhs != rhs
-    }
-}

@@ -19,8 +19,6 @@ extension Strideable where Self : OneDimensionalPoint {
     ///
     /// - Parameters:
     ///     - n: The distance to advance.
-    ///
-    /// - Recommended: +
     public func advanced(by n: Vector) -> Self {
         return self + n
     }
@@ -29,8 +27,6 @@ extension Strideable where Self : OneDimensionalPoint {
     ///
     /// - Parameters:
     ///     - other: The value to which the distance should be measured.
-    ///
-    /// - Recommended: −
     public func distance(to other: Self) -> Vector {
         return other − self
     }

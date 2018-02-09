@@ -125,8 +125,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout SemanticMarkup, rhs: SemanticMarkup) {
         lhs.source += rhs.source
     }

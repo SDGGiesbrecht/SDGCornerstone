@@ -43,8 +43,6 @@ public protocol PointProtocol : Codable, Equatable {
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     static func += (lhs: inout Self, rhs: Vector)
 
     // [_Define Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
@@ -135,8 +133,6 @@ extension /*PointProtocol where Self : */ ConsistentlyOrderedCalendarComponent w
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
         lhs = Self(numberAlreadyElapsed: lhs.numberAlreadyElapsed + rhs)
     }
@@ -174,8 +170,6 @@ extension /*PointProtocol where Self : */IntFamily {
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
         lhs = lhs.advanced(by: rhs)
     }
@@ -201,8 +195,6 @@ extension /*PointProtocol where Self : */ NumericCalendarComponent {
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
         lhs = Self(lhs.rawValue + rhs)
     }
@@ -245,8 +237,6 @@ extension /*PointProtocol where Self : */TwoDimensionalPoint where Self.Vector :
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
         lhs.x += rhs.Δx
         lhs.y += rhs.Δy
@@ -287,8 +277,6 @@ extension /*PointProtocol where Self : */UIntFamily {
     /// - Parameters:
     ///     - lhs: The point to modify.
     ///     - rhs: The vector to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Vector) {
         lhs = lhs.advanced(by: rhs)
     }

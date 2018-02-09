@@ -18,10 +18,6 @@
 /// - Parameters:
 ///     - lhs: The starting value.
 ///     - rhs: The value to subtract.
-///
-/// - MutatingVariant: −=
-///
-/// - RecommendedOver: -
 infix operator −: AdditionPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
@@ -30,10 +26,6 @@ infix operator −: AdditionPrecedence
 /// - Parameters:
 ///     - lhs: The value to modify.
 ///     - rhs: The value to subtract.
-///
-/// - NonmutatingVariant: −
-///
-/// - RecommendedOver: -=
 infix operator −=: AssignmentPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Subtractable.±_]
@@ -62,10 +54,6 @@ public protocol Subtractable : Addable {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     static func − (lhs: Self, rhs: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Subtractable.−=_]
@@ -74,10 +62,6 @@ public protocol Subtractable : Addable {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     static func −= (lhs: inout Self, rhs: Self)
 
     // [_Define Documentation: SDGCornerstone.Subtractable.±_]
@@ -102,10 +86,6 @@ extension Subtractable {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self {
         return subtractAsSubtractable(lhs, rhs)
     }
@@ -136,10 +116,6 @@ extension Subtractable where Self : FloatFamily, Self.Vector == Self {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self {
         return lhs - rhs
     }
@@ -150,10 +126,6 @@ extension Subtractable where Self : FloatFamily, Self.Vector == Self {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     public static func −= (lhs: inout Self, rhs: Self) {
         subtractAndAssignAsFloatingPoint(&lhs, rhs)
     }
@@ -168,10 +140,6 @@ extension Subtractable where Self : IntFamily /* Self.Vector ≠ Self */ {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self {
         return lhs - rhs
     }
@@ -182,10 +150,6 @@ extension Subtractable where Self : IntFamily /* Self.Vector ≠ Self */ {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     public static func −= (lhs: inout Self, rhs: Self) {
         lhs -= rhs
     }
@@ -200,10 +164,6 @@ extension Subtractable where Self : Measurement {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self {
         return Self(rawValue: lhs.rawValue − rhs.rawValue)
     }
@@ -214,10 +174,6 @@ extension Subtractable where Self : Measurement {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     public static func −= (lhs: inout Self, rhs: Self) {
         lhs.rawValue −= rhs.rawValue
     }
@@ -232,10 +188,6 @@ extension Subtractable where Self : PointProtocol, Self.Vector == Self {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self { // [_Exempt from Test Coverage_] Apparently unreachable.
         // Disambiguate Subtractable.− vs PointProtocol.−
         return subtractAsSubtractable(lhs, rhs)
@@ -251,10 +203,6 @@ extension Subtractable where Self : TwoDimensionalVector {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     public static func −= (lhs: inout Self, rhs: Self) {
         lhs.Δx −= rhs.Δx
         lhs.Δy −= rhs.Δy
@@ -270,10 +218,6 @@ extension Subtractable where Self : UIntFamily {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to subtract.
-    ///
-    /// - MutatingVariant: −=
-    ///
-    /// - RecommendedOver: -
     public static func − (lhs: Self, rhs: Self) -> Self {
         return lhs - rhs
     }
@@ -284,10 +228,6 @@ extension Subtractable where Self : UIntFamily {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to subtract.
-    ///
-    /// - NonmutatingVariant: −
-    ///
-    /// - RecommendedOver: -=
     public static func −= (lhs: inout Self, rhs: Self) {
         assert(lhs ≥ rhs, UserFacingText({ [lhs] (localization: APILocalization, _: Void) -> StrictString in
             switch localization {

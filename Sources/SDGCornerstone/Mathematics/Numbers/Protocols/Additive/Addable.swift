@@ -27,8 +27,6 @@ public protocol Addable {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to add.
-    ///
-    /// - MutatingVariant: +=
     static func + (lhs: Self, rhs: Self) -> Self
 
     // [_Define Documentation: SDGCornerstone.Addable.+=_]
@@ -37,8 +35,6 @@ public protocol Addable {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
     static func += (lhs: inout Self, rhs: Self)
 }
 
@@ -55,8 +51,6 @@ extension Addable {
     /// - Parameters:
     ///     - lhs: The starting value.
     ///     - rhs: The value to add.
-    ///
-    /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Self) -> Self {
         return addAsAddable(lhs, rhs)
     }
@@ -67,8 +61,6 @@ extension Addable {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: +=
 
     // [_Define Documentation: SDGCornerstone.Addable(Summation).+=_]
     /// Adds the right value to the left.
@@ -76,8 +68,6 @@ extension Addable {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
 }
 
 extension Addable where Self : Measurement {
@@ -89,8 +79,6 @@ extension Addable where Self : Measurement {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Self) -> Self {
         return Self(rawValue: lhs.rawValue + rhs.rawValue)
     }
@@ -101,8 +89,6 @@ extension Addable where Self : Measurement {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Self) {
         lhs.rawValue += rhs.rawValue
     }
@@ -117,8 +103,6 @@ extension Addable where Self : PointProtocol, Self.Vector == Self {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Self) -> Self {
         // Disambiguate Addable.+ vs PointProtocol.+
         return addAsAddable(lhs, rhs)
@@ -134,8 +118,6 @@ extension Addable where Self : PointProtocol, Self : Strideable, Self.Vector == 
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Self) -> Self {
         // Disambiguate Addable.+ vs PointProtocol.+ vs Strideable.+
         return addAsAddable(lhs, rhs)
@@ -151,8 +133,6 @@ extension Addable where Self : Strideable, Self.Stride == Self {
     /// - Parameters:
     ///     - lhs: A value.
     ///     - rhs: Another value.
-    ///
-    /// - MutatingVariant: +=
     public static func + (lhs: Self, rhs: Self) -> Self {
         // Disambiguate Addable.+ vs Strideable.+
         return addAsAddable(lhs, rhs)
@@ -168,8 +148,6 @@ extension Addable where Self : TwoDimensionalVector {
     /// - Parameters:
     ///     - lhs: The value to modify.
     ///     - rhs: The value to add.
-    ///
-    /// - NonmutatingVariant: +
     public static func += (lhs: inout Self, rhs: Self) {
         lhs.Δx += rhs.Δx
         lhs.Δy += rhs.Δy

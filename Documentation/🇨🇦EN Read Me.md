@@ -16,7 +16,7 @@
 
 macOS • Linux • iOS • watchOS • tvOS
 
-APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone)
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGLogic) • [SDGLogicCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGLogicCore)
 
 # SDGCornerstone
 
@@ -54,6 +54,8 @@ let package = Package(
     targets: [
         .target(name: "MyTarget", dependencies: [
             .productItem(name: "SDGCornerstone", package: "SDGCornerstone"),
+            .productItem(name: "SDGLogic", package: "SDGCornerstone"),
+            .productItem(name: "SDGLogicCore", package: "SDGCornerstone"),
         ])
     ]
 )
@@ -63,6 +65,8 @@ let package = Package(
 
 ```swift
 import SDGCornerstone
+import SDGLogic
+import SDGLogicCore
 ```
 
 ## Example Usage

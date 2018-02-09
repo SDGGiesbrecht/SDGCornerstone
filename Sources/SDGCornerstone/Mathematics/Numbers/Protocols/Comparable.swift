@@ -18,8 +18,6 @@
 /// - Parameters:
 ///     - lhs: A value to compare.
 ///     - rhs: Another value to compare.
-///
-/// - RecommendedOver: <=
 infix operator ≤: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
@@ -28,8 +26,6 @@ infix operator ≤: ComparisonPrecedence
 /// - Parameters:
 ///     - lhs: A value to compare.
 ///     - rhs: Another value to compare.
-///
-/// - RecommendedOver: >=
 infix operator ≥: ComparisonPrecedence
 
 // [_Inherit Documentation: SDGCornerstone.Comparable.≈_]
@@ -61,8 +57,6 @@ extension Comparable {
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    ///
-    /// - RecommendedOver: <=
     public static func ≤ (lhs: Self, rhs: Self) -> Bool {
         return lhs <= rhs
     }
@@ -73,8 +67,6 @@ extension Comparable {
     /// - Parameters:
     ///     - lhs: A value to compare.
     ///     - rhs: Another value to compare.
-    ///
-    /// - RecommendedOver: >=
     public static func ≥ (lhs: Self, rhs: Self) -> Bool {
         return lhs >= rhs
     }
@@ -105,8 +97,6 @@ extension Comparable {
     ///
     /// - Parameters:
     ///     - minimum: The desired minimum for the value.
-    ///
-    /// - NonmutatingVariant: max
     public mutating func increase(to minimum: Self) {
         if self < minimum {
             self = minimum
@@ -139,8 +129,6 @@ extension Comparable {
     ///
     /// - Parameters:
     ///     - maximum: The desired maximum for the value.
-    ///
-    /// - NonmutatingVariant: min
     public mutating func decrease(to maximum: Self) {
         if self > maximum {
             self = maximum
