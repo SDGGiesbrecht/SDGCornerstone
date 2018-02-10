@@ -46,5 +46,7 @@ XCTMain([
 
     testCase(RegressionTests.allTests),
 
-    testCase(InternalTests.allTests)
+    testCase(InternalTests.allTests),
+
+    testCase(SDGLogicTests.allTests)
 ])

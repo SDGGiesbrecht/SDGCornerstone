@@ -16,18 +16,9 @@ import XCTest
 import Foundation
 
 import SDGCornerstone
+import SDGXCTestUtilities
 
-class TestCase : XCTestCase {
-
-    static var initialized = false
-
-    override func setUp() {
-        if ¬TestCase.initialized {
-            TestCase.initialized = true
-            SDGCornerstone.initialize(mode: .guiApplication, applicationIdentifier: "ca.solideogloria.SDGCornerstone.Tests")
-        }
-        super.setUp()
-    }
+class TestCase : SDGXCTestUtilities.TestCase {
 
     func lock(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
 

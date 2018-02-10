@@ -16,36 +16,56 @@
 
 import PackageDescription
 
-extension Array where Element == Target {
-    static func target(name: String, dependencies: [Target.Dependency] = [], tests: Bool) -> [Target] {
-        var group: [Target] = [
-            .target(name: name, dependencies: dependencies)
-        ]
-        if tests {
-            group += [.testTarget(name: name + "Tests", dependencies: [.targetItem(name: name)])]
-        }
-        return group
-    }
-}
-
 let package = Package(
     name: "SDGCornerstone",
     products: [
-        .library(name: "SDGCornerstone", targets: [
-            "SDGCornerstone",
+        // The entire package.
 
-            "SDGLogic", "SDGLogicCore"
-            ])
+        .library(name: "SDGCornerstone", targets: ["SDGCornerstone"]),
+        .library(name: "SDGCornerstoneTestUtlities", targets: ["SDGCornerstoneTestUtilities"]),
+
+        // Individual component modules.
+
+        .library(name: "SDGLogic", targets: ["SDGLogic"]),
+        .library(name: "SDGLogicTestUtilities", targets: ["SDGLogicTestUtilities"]),
+
+        .library(name: "SDGTesting", targets: ["SDGTesting"]),
+
+        // Core subsets.
+
+        .library(name: "SDGLogicCore", targets: ["SDGLogicCore"])
     ],
-    targets: Array(([
+    targets: [
+        // The entire package.
+
         .target(name: "SDGCornerstone", dependencies: [
             "SDGLogic"
-        ], tests: true),
+        ]),
+        .target(name: "SDGCornerstoneTestUtilities", dependencies: [
+            "SDGLogicTestUtilities",
+
+            "SDGCornerstone",
+            "SDGTesting"
+            ]),
+        .target(name: "SDGXCTestUtilities", dependencies: ["SDGTesting", "SDGCornerstone" /* [_Warning: Do not need the whole thing._] */]),
+
+        // Individual component modules.
 
         .target(name: "SDGLogic", dependencies: [
             "SDGLogicCore"
-            ], tests: true),
+        ]),
+        .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),
 
-        .target(name: "SDGLogicCore", tests: false)
-    ] as [[Target]]).joined())
+        .target(name: "SDGTesting", dependencies: []),
+
+        // Core subsets.
+
+        .target(name: "SDGLogicCore"),
+
+        // Internal tests.
+
+        .testTarget(name: "SDGCornerstoneTests", dependencies: ["SDGCornerstoneTestUtilities", "SDGXCTestUtilities"]),
+
+        .testTarget(name: "SDGLogicTests", dependencies: ["SDGLogicTestUtilities", "SDGXCTestUtilities"])
+    ]
 )

@@ -16,7 +16,7 @@
 
 macOS • Linux • iOS • watchOS • tvOS
 
-APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicCore)
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting) • [SDGLogicCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicCore)
 
 # SDGCornerstone
 
@@ -54,7 +54,10 @@ let package = Package(
     targets: [
         .target(name: "MyTarget", dependencies: [
             .productItem(name: "SDGCornerstone", package: "SDGCornerstone"),
+            .productItem(name: "SDGCornerstoneTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGLogic", package: "SDGCornerstone"),
+            .productItem(name: "SDGLogicTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGTesting", package: "SDGCornerstone"),
             .productItem(name: "SDGLogicCore", package: "SDGCornerstone"),
         ])
     ]
@@ -65,7 +68,10 @@ let package = Package(
 
 ```swift
 import SDGCornerstone
+import SDGCornerstoneTestUtilities
 import SDGLogic
+import SDGLogicTestUtilities
+import SDGTesting
 import SDGLogicCore
 ```
 

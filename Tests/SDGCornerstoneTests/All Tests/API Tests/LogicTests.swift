@@ -18,35 +18,6 @@ import SDGCornerstone
 class LogicTests : TestCase {
 
     func testBool() {
-        var variable = false
-
-        XCTAssertFalse(true ≠ true)
-        XCTAssertFalse(false ≠ false)
-        XCTAssert(true ≠ false)
-        XCTAssert(false ≠ true)
-
-        XCTAssertEqual(¬true, false)
-        XCTAssertEqual(¬false, true)
-        variable = false
-        variable¬=
-        XCTAssertEqual(variable, true)
-
-        XCTAssert(true ∧ true)
-        XCTAssertFalse(false ∧ false)
-        XCTAssertFalse(true ∧ false)
-        XCTAssertFalse(false ∧ true)
-        variable = true
-        variable ∧= false
-        XCTAssertEqual(variable, false)
-
-        XCTAssert(true ∨ true)
-        XCTAssertFalse(false ∨ false)
-        XCTAssert(true ∨ false)
-        XCTAssert(false ∨ true)
-        variable = false
-        variable ∨= true
-        XCTAssertEqual(variable, true)
-
         for boolean in [true, false] {
             XCTAssertNotEqual(boolean.checkOrX(), "")
             XCTAssertNotEqual(boolean.trueOrFalse(.sentenceMedial), "")
@@ -64,72 +35,9 @@ class LogicTests : TestCase {
         XCTAssertEqual(false.ναιΉΌχι(.sentenceInitial), "Όχι")
     }
 
-    func testAny() {
-        XCTAssertFalse(Bool.self ≠ Bool.self)
-        XCTAssert(Bool.self ≠ Int.self)
-    }
-
-    func testOptional() {
-        let a: Bool? = true
-        let b: Bool? = nil
-
-        XCTAssertFalse(a ≠ a)
-        XCTAssert(a ≠ b)
-        XCTAssert(a ≠ false)
-        XCTAssertFalse(b ≠ b)
-
-        XCTAssertFalse(b ≠ nil)
-        XCTAssert(a ≠ nil)
-
-        let c: TypeExample? = TypeExample()
-        let d: TypeExample? = nil
-
-        XCTAssert(c ≠ nil)
-        XCTAssertFalse(d ≠ nil)
-    }
-
-    func testTuple() {
-        XCTAssertFalse((true, true) ≠ (true, true))
-        XCTAssert((true, true) ≠ (true, false))
-
-        XCTAssertFalse((true, true, true) ≠ (true, true, true))
-        XCTAssert((true, true, true) ≠ (true, true, false))
-
-        XCTAssertFalse((true, true, true, true) ≠ (true, true, true, true))
-        XCTAssert((true, true, true, true) ≠ (true, true, true, false))
-
-        XCTAssertFalse((true, true, true, true, true) ≠ (true, true, true, true, true))
-        XCTAssert((true, true, true, true, true) ≠ (true, true, true, true, false))
-
-        XCTAssertFalse((true, true, true, true, true, true) ≠ (true, true, true, true, true, true))
-        XCTAssert((true, true, true, true, true, true) ≠ (true, true, true, true, true, false))
-    }
-
-    func testRawRepresentable() {
-        let rawTrue = RawRepresentableExample(rawValue: true)
-        let rawFalse = RawRepresentableExample(rawValue: false)
-
-        XCTAssertFalse(rawTrue ≠ rawTrue)
-        XCTAssertFalse(rawFalse ≠ rawFalse)
-        XCTAssert(rawTrue ≠ rawFalse)
-        XCTAssert(rawFalse ≠ rawTrue)
-
-        let equatableTrue = EquatableRawRepresentableExample(rawValue: true)
-        let equatableFalse = EquatableRawRepresentableExample(rawValue: false)
-
-        XCTAssertFalse(equatableTrue ≠ equatableTrue)
-        XCTAssertFalse(equatableFalse ≠ equatableFalse)
-        XCTAssert(equatableTrue ≠ equatableFalse)
-        XCTAssert(equatableFalse ≠ equatableTrue)
-    }
-
     static var allTests: [(String, (LogicTests) -> () throws -> Void)] {
         return [
-            ("testBool", testBool),
-            ("testAny", testAny),
-            ("testOptional", testOptional),
-            ("testTuple", testTuple),
-            ("testRawRepresentable", testRawRepresentable)
+            ("testBool", testBool)
         ]
     }
 }

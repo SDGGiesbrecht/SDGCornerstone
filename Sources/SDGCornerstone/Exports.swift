@@ -13,3 +13,14 @@
  */
 
 @_exported import SDGLogic
+
+// [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
+
+// SDGLogicCore
+infix operator ≠: ComparisonPrecedence
+prefix operator ¬
+postfix operator ¬=
+infix operator ∧: LogicalConjunctionPrecedence
+infix operator ∧=: AssignmentPrecedence
+infix operator ∨: LogicalDisjunctionPrecedence
+infix operator ∨=: AssignmentPrecedence
