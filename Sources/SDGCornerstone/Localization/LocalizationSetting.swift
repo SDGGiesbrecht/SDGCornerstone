@@ -14,6 +14,7 @@
 
 import Foundation
 
+import SDGProcessProperties
 import SDGLogicCore
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
@@ -81,7 +82,7 @@ public struct LocalizationSetting : Equatable {
     }()
 
     private static let sdgApplicationPreferences: Shared<PropertyListValue?> = {
-        let preferences = Preferences.preferences(for: Application.current.domain + sdgDomainSuffix)[sdgPreferenceKey]
+        let preferences = Preferences.preferences(for: ProcessInfo.domain + sdgDomainSuffix)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()

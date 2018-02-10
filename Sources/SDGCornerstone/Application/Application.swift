@@ -18,37 +18,21 @@ internal struct Application {
 
     // MARK: - Static Properties
 
-    internal static var currentApplicationIdentifierInitializer: String?
     internal static var currentApplicationModeInitializer: Mode?
     internal static let current: Application = {
-        guard let identifier = currentApplicationIdentifierInitializer,
-            let mode = currentApplicationModeInitializer else {
+        guard let mode = currentApplicationModeInitializer else {
                 preconditionFailureNotInitialized()
         }
-        if let main = Bundle.main.bundleIdentifier {
-            assert(identifier == main, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                switch localization {
-                case .englishCanada:
-                    return StrictString("The application identifier does not match the main bundle identifier: \(identifier) ≠ \(main)")
-                }
-            }))
-        }
-        return Application(identifier: identifier, mode: mode)
+        return Application(mode: mode)
     }()
 
     // MARK: - Initialization
 
-    private init(identifier: String, mode: Mode) {
-        self.identifier = identifier
+    private init(mode: Mode) {
         self.mode = mode
     }
 
     // MARK: - Properties
-
-    internal let identifier: String
-    internal var domain: String {
-        return identifier
-    }
 
     internal let mode: Mode
 }

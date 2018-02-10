@@ -14,6 +14,7 @@
 
 import Foundation
 
+import SDGProcessProperties
 import SDGLogicCore
 
 /// A set of preferences for a particular domain.
@@ -38,7 +39,7 @@ open class Preferences {
 
     /// Returns subclassed preferences for the application domain.
     public static func applicationPreferences<P : Preferences>(as subClass: P.Type) -> P {
-        return preferences(as: P.self, for: Application.current.domain)
+        return preferences(as: P.self, for: ProcessInfo.domain)
     }
 
     /// Returns the preferences for a particular domain.

@@ -20,6 +20,17 @@ import SDGXCTestUtilities
 
 class TestCase : SDGXCTestUtilities.TestCase {
 
+    static var initialized = false
+    open override func setUp() {
+
+        super.setUp()
+
+        if ¬TestCase.initialized {
+            TestCase.initialized = true
+            SDGCornerstone.initialize(mode: .guiApplication)
+        }
+    }
+
     func lock(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
 
         let iterations = 10

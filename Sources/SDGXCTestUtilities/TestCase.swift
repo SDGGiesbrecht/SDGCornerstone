@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGCornerstone // [_Warning: Do not need the whole thing._]
-
+import SDGProcessProperties
+import SDGLogicCore
 import SDGTesting
 
 /// A test case which simplifies testing for targets which link against the `SDGCornerstone` package.
@@ -26,7 +26,7 @@ open class TestCase : XCTestCase {
     open override func setUp() {
         if ¬TestCase.initialized {
             TestCase.initialized = true
-            SDGCornerstone.initialize(mode: .guiApplication, applicationIdentifier: "ca.solideogloria.SDGCornerstone.SharedTestingDomain")
+            ProcessInfo.applicationIdentifier = "ca.solideogloria.SDGCornerstone.SharedTestingDomain"
         }
 
         testAssertionMethod = XCTAssert

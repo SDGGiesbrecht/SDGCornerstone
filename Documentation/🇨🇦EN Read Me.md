@@ -16,7 +16,7 @@
 
 macOS • Linux • iOS • watchOS • tvOS
 
-APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting) • [SDGLogicCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicCore)
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting) • [SDGLogicCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicCore) • [SDGProcessProperties](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGProcessProperties)
 
 # SDGCornerstone
 
@@ -59,6 +59,7 @@ let package = Package(
             .productItem(name: "SDGLogicTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGTesting", package: "SDGCornerstone"),
             .productItem(name: "SDGLogicCore", package: "SDGCornerstone"),
+            .productItem(name: "SDGProcessProperties", package: "SDGCornerstone"),
         ])
     ]
 )
@@ -73,6 +74,7 @@ import SDGLogic
 import SDGLogicTestUtilities
 import SDGTesting
 import SDGLogicCore
+import SDGProcessProperties
 ```
 
 ## Example Usage

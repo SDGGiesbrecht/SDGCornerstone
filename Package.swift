@@ -33,7 +33,11 @@ let package = Package(
 
         // Core subsets.
 
-        .library(name: "SDGLogicCore", targets: ["SDGLogicCore"])
+        .library(name: "SDGLogicCore", targets: ["SDGLogicCore"]),
+
+        // Process properties.
+
+        .library(name: "SDGProcessProperties", targets: ["SDGProcessProperties"])
     ],
     targets: [
         // The entire package.
@@ -47,7 +51,11 @@ let package = Package(
             "SDGCornerstone",
             "SDGTesting"
             ]),
-        .target(name: "SDGXCTestUtilities", dependencies: ["SDGTesting", "SDGCornerstone" /* [_Warning: Do not need the whole thing._] */]),
+        .target(name: "SDGXCTestUtilities", dependencies: [
+            "SDGTesting",
+            "SDGLogic",
+            "SDGProcessProperties"
+            ]),
 
         // Individual component modules.
 
@@ -61,6 +69,10 @@ let package = Package(
         // Core subsets.
 
         .target(name: "SDGLogicCore"),
+
+        // Process properties.
+
+        .target(name: "SDGProcessProperties"),
 
         // Internal tests.
 
