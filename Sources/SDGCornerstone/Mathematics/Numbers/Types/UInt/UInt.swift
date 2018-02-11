@@ -13,26 +13,16 @@
  */
 
 import SDGLogicCore
-
-/// The member of the `UInt` family with the largest bit field.
-public typealias UIntMax = UInt64
+import SDGMathematicsCore
 
 /// A type that represents a fixed‐length unsigned integer.
 ///
 /// This protocol exists so that extensions to it can provide shared functionality for `UInt`, `UInt64`, `UInt32`, `UInt16` and `UInt8`.
-public protocol UIntFamily : BitField, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, FixedWidthInteger, PropertyListValue, UnsignedInteger, WholeNumberProtocol
-where Vector : IntFamily {
+public protocol UIntFamily : PropertyListValue, UIntFamilyCore, WholeNumberProtocol where Vector : IntFamily {
 
 }
 
-extension UInt : UIntFamily {
-
-    // MARK: - PointProtocol
-
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-    /// The type to be used as a vector.
-    public typealias Vector = Stride
-}
+extension UInt : UIntFamily {}
 
 extension UIntMax {
 
@@ -49,43 +39,10 @@ extension UIntMax {
     }
 }
 
-extension UInt64 : UIntFamily {
-
-    // MARK: - PointProtocol
-
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-    /// The type to be used as a vector.
-    public typealias Vector = Stride
-}
-
-extension UInt32 : UIntFamily {
-
-    // MARK: - PointProtocol
-
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-    /// The type to be used as a vector.
-    public typealias Vector = Stride
-}
-
-extension UInt16 : UIntFamily {
-
-    // MARK: - PointProtocol
-
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-    /// The type to be used as a vector.
-    public typealias Vector = Stride
-
-}
-
-extension UInt8 : UIntFamily {
-
-    // MARK: - PointProtocol
-
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-    /// The type to be used as a vector.
-    public typealias Vector = Stride
-
-}
+extension UInt64 : UIntFamily {}
+extension UInt32 : UIntFamily {}
+extension UInt16 : UIntFamily {}
+extension UInt8 : UIntFamily {}
 
 extension UIntFamily {
 

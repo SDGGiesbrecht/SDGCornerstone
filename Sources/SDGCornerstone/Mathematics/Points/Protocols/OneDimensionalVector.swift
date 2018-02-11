@@ -26,7 +26,5 @@ public protocol OneDimensionalVector : VectorProtocol {
     /// - Parameters:
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
-    ///
-    /// - MutatingVariant: ×
     static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
 }

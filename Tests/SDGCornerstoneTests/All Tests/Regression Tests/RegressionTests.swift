@@ -203,7 +203,7 @@ class RegressionTests : TestCase {
         #endif
         let _: Float = 3 − 2
         let _: WholeNumber = 3 − 2
-        let _: Integer = 3 − 2
+        let _: Integer = 3 as Integer − 2
         let _: RationalNumberProtocolExample = RationalNumberProtocolExample(3) − RationalNumberProtocolExample(2)
         let _: RealArithmeticExample = RealArithmeticExample(3) − RealArithmeticExample(2)
     }

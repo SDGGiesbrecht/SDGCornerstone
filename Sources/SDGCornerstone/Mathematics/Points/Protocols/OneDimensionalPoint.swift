@@ -12,19 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A `Comparable` type that can be used with `+(_:_:)` and `−(_:_:)` in conjunction with an associated `Vector` type.
-///
-/// - Note: For multi‐dimensional points, see `PointProtocol`.
-///
-/// - Note: This is distinct from `FixedScaleOneDimensionalPoint` so that types can still conform to `OneDimensionalPoint` even if they have vectors that cannot conform to `Numeric`.
-///
-/// Conformance Requirements:
-///
-/// - `PointProtocol`
-/// - `Comparable`
-public protocol OneDimensionalPoint : Comparable, PointProtocol {
-
-}
+import SDGMathematicsCore
 
 extension OneDimensionalPoint where Vector : IntegerProtocol {
     // MARK: - where Vector : IntegerProtocol

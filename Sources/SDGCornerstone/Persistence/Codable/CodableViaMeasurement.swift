@@ -11,11 +11,3 @@
  Licensed under the Apache Licence, Version 2.0.
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
-
-/// A type that conforms to `Codable` through its `Measurement` interface.
-///
-/// Conformance Requirements:
-///     - `Measurement`
-public protocol CodableViaMeasurement : DecodableViaMeasurement, EncodableViaMeasurement {
-
-}

@@ -14,13 +14,15 @@
 
 import Foundation
 
+import SDGMathematicsCore
+
 /// A type which *only ever* represents rational numbers.
 ///
 /// Conformance Requirements:
 ///
 /// - `RationalArithmetic`
 /// - `func reduced() -> (numerator: Integer, denominator: Integer)`
-public protocol RationalNumberProtocol : RationalArithmetic {
+public protocol RationalNumberProtocol : RationalArithmetic, RationalNumberProtocolCore {
 
     // [_Define Documentation: SDGCornerstone.RationalNumberProtocol.Integer_]
     /// The type to use for the numerator and denominator.

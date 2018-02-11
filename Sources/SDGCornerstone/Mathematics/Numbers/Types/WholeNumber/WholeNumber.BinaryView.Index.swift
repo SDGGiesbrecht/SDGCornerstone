@@ -58,12 +58,16 @@ extension WholeNumber.BinaryView {
         }
 
         internal static func − (precedingValue: Index, followingValue: Index) -> Vector {
-            var bitDistance: WholeNumber.BinaryView.IndexDistance.BitDistance = precedingValue.bit − followingValue.bit
             var digitDistance = precedingValue.digit − followingValue.digit
-            if bitDistance.isNegative {
-                bitDistance += BinaryView<WholeNumber.Digit>.count
+
+            let bitDistance: WholeNumber.BinaryView.IndexDistance.BitDistance
+            if precedingValue.bit < followingValue.bit { // Would be negative (invalid for whole number type).
+                bitDistance = BinaryView<WholeNumber.Digit>.count − (followingValue.bit − precedingValue.bit)
                 digitDistance −= 1
+            } else {
+                bitDistance = precedingValue.bit − followingValue.bit
             }
+
             return IndexDistance(digitDistance: digitDistance, bitDistance: bitDistance)
         }
     }

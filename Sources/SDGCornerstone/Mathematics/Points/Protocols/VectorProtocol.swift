@@ -31,8 +31,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: A scalar coefficient.
-    ///
-    /// - MutatingVariant: ×=
     static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.×(scalar:_:)_]
@@ -49,8 +47,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The scalar coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
     static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.÷_]
@@ -59,8 +55,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     /// - Parameters:
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
-    ///
-    /// - MutatingVariant: ×
     static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
     // [_Define Documentation: SDGCornerstone.VectorProtocol.÷=_]
@@ -69,8 +63,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The divisor.
-    ///
-    /// - NonmutatingVariant: ÷
     static func ÷= (precedingValue: inout Self, followingValue: Scalar)
 }
 
@@ -82,8 +74,6 @@ extension VectorProtocol {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: A scalar coefficient.
-    ///
-    /// - MutatingVariant: ×=
     public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
         var result = precedingValue
         result ×= followingValue
@@ -106,8 +96,6 @@ extension VectorProtocol {
     /// - Parameters:
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
-    ///
-    /// - MutatingVariant: ×
     public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
         var result = precedingValue
         result ÷= followingValue
@@ -124,8 +112,6 @@ extension VectorProtocol where Self : TwoDimensionalVector {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The scalar coefficient by which to multiply.
-    ///
-    /// - NonmutatingVariant: ×
     public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ×= followingValue
         precedingValue.Δy ×= followingValue
@@ -137,8 +123,6 @@ extension VectorProtocol where Self : TwoDimensionalVector {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The divisor.
-    ///
-    /// - NonmutatingVariant: ÷
     public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ÷= followingValue
         precedingValue.Δy ÷= followingValue

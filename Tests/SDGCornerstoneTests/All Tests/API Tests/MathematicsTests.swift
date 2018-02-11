@@ -88,6 +88,7 @@ class MathematicsTests : TestCase {
             XCTAssert(Angle<N>.additiveIdentity.isNonNegative)
 
             for _ in 1 ..< 100 {
+
                 let random = Angle(randomInRange: N.additiveIdentity.rad ..< _1.rad)
                 XCTAssert(random ∈ N.additiveIdentity.rad ..< _1.rad)
                 let random2 = Angle(randomInRange: N.additiveIdentity.rad ... _1.rad)

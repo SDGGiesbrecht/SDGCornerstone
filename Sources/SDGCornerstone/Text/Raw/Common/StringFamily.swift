@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematicsCore
+
 /// A `String` or `StrictString`.
 public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByStringLiteral, FileConvertible, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
 

@@ -26,14 +26,23 @@ let package = Package(
 
         // Individual component modules.
 
+        .library(name: "SDGControlFlow", targets: ["SDGControlFlow"]),
+
         .library(name: "SDGLogic", targets: ["SDGLogic"]),
         .library(name: "SDGLogicTestUtilities", targets: ["SDGLogicTestUtilities"]),
+
+        .library(name: "SDGBinaryData", targets: ["SDGBinaryData"]),
+        .library(name: "SDGBinaryDataTestUtilities", targets: ["SDGBinaryDataTestUtilities"]),
+
+        .library(name: "SDGMathematics", targets: ["SDGMathematics"]),
+        .library(name: "SDGMathematicsTestUtilities", targets: ["SDGMathematicsTestUtilities"]),
 
         .library(name: "SDGTesting", targets: ["SDGTesting"]),
 
         // Core subsets.
 
         .library(name: "SDGLogicCore", targets: ["SDGLogicCore"]),
+        .library(name: "SDGMathematicsCore", targets: ["SDGMathematicsCore"]),
 
         // Process properties.
 
@@ -43,10 +52,16 @@ let package = Package(
         // The entire package.
 
         .target(name: "SDGCornerstone", dependencies: [
-            "SDGLogic"
+            "SDGControlFlow",
+            "SDGLogic",
+            "SDGBinaryData",
+            "SDGMathematics",
+            "SDGProcessProperties",
         ]),
         .target(name: "SDGCornerstoneTestUtilities", dependencies: [
             "SDGLogicTestUtilities",
+            "SDGBinaryDataTestUtilities",
+            "SDGMathematicsTestUtilities",
 
             "SDGCornerstone",
             "SDGTesting"
@@ -59,25 +74,59 @@ let package = Package(
 
         // Individual component modules.
 
-        .target(name: "SDGLogic", dependencies: [
-            "SDGLogicCore"
-        ]),
+        .target(name: "SDGControlFlow", dependencies: []),
+
+        .target(name: "SDGLogic", dependencies: ["SDGLogicCore"]),
         .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),
+
+        .target(name: "SDGBinaryData", dependencies: ["SDGBinaryDataCore"]),
+        .target(name: "SDGBinaryDataTestUtilities", dependencies: ["SDGBinaryData", "SDGTesting"]),
+
+        .target(name: "SDGMathematics", dependencies: ["SDGMathematicsCore"]),
+        .target(name: "SDGMathematicsTestUtilities", dependencies: [
+            "SDGMathematics", "SDGTesting",
+            "SDGLogicTestUtilities"
+            ]),
+
+        .target(name: "SDGProcessProperties"),
 
         .target(name: "SDGTesting", dependencies: []),
 
         // Core subsets.
 
         .target(name: "SDGLogicCore"),
-
-        // Process properties.
-
-        .target(name: "SDGProcessProperties"),
+        .target(name: "SDGBinaryDataCore", dependencies: [
+            "SDGControlFlow"
+            ]),
+        .target(name: "SDGMathematicsCore", dependencies: [
+            "SDGControlFlow",
+            "SDGLogicCore",
+            "SDGBinaryDataCore"
+            ]),
 
         // Internal tests.
 
-        .testTarget(name: "SDGCornerstoneTests", dependencies: ["SDGCornerstoneTestUtilities", "SDGXCTestUtilities"]),
+        .testTarget(name: "SDGCornerstoneTests", dependencies: [
+            "SDGCornerstoneTestUtilities", "SDGXCTestUtilities"
+            ]),
 
-        .testTarget(name: "SDGLogicTests", dependencies: ["SDGLogicTestUtilities", "SDGXCTestUtilities"])
+        .testTarget(name: "SDGProcessPropertiesTests", dependencies: [
+            "SDGProcessProperties", "SDGXCTestUtilities",
+            "SDGLogic"
+            ]),
+        .testTarget(name: "SDGControlFlowTests", dependencies: [
+            "SDGControlFlow", "SDGXCTestUtilities"
+            ]),
+        .testTarget(name: "SDGLogicTests", dependencies: [
+            "SDGLogicTestUtilities", "SDGXCTestUtilities",
+            "SDGMathematicsTestUtilities"
+            ]),
+        .testTarget(name: "SDGBinaryDataTests", dependencies: [
+            "SDGBinaryDataTestUtilities", "SDGXCTestUtilities"
+            ]),
+        .testTarget(name: "SDGMathematicsTests", dependencies: [
+            "SDGMathematicsTestUtilities", "SDGXCTestUtilities",
+            "SDGBinaryDataTestUtilities"
+            ])
     ]
 )

@@ -13,6 +13,7 @@
  */
 
 import SDGLogicCore
+import SDGMathematicsCore
 
 extension Equatable where Self : ComparableSet {
     // MARK: - where Self : ComparableSet
@@ -25,19 +26,5 @@ extension Equatable where Self : ComparableSet {
     ///     - followingValue: Another value to compare.
     public static func == (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
-    }
-}
-
-extension Equatable where Self : Measurement {
-    // MARK: - where Self : Measurement
-
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
-    public static func == (precedingValue: Self, followingValue: Self) -> Bool {
-        return precedingValue.rawValue == followingValue.rawValue
     }
 }

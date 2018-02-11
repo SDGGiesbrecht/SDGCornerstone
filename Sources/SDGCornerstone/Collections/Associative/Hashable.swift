@@ -12,20 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematicsCore
+
 extension Hashable {
 
     // [_Define Documentation: SDGCornerstone.Hashable.hashValue_]
     /// The hash value.
-}
-
-extension Hashable where Self : Measurement {
-    // MARK: - where Self : Measurement
-
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
-    /// The hash value.
-    public var hashValue: Int {
-        return rawValue.hashValue
-    }
 }
 
 extension Hashable where Self : TwoDimensionalVector {

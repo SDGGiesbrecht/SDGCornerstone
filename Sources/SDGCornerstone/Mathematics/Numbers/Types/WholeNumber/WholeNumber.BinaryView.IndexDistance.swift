@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematicsCore
+
 extension WholeNumber.BinaryView {
 
     internal struct IndexDistance : Addable, Comparable, Equatable, ExpressibleByIntegerLiteral, Hashable, Negatable, SignedNumeric, Subtractable {

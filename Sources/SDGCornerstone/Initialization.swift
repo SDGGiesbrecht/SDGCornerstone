@@ -35,8 +35,6 @@ public func initialize(mode: Mode, applicationPreferencesClass: Preferences.Type
 
     Application.currentApplicationModeInitializer = mode
     Preferences.subclassForApplicationPreferencesInitializer = applicationPreferencesClass
-
-    warnAboutSecondLanguages()
 }
 
 internal func preconditionFailureNotInitialized() -> Never {
@@ -49,64 +47,4 @@ internal func preconditionFailureNotInitialized() -> Never {
     }).joined(separator: "\n\n")
 
     preconditionFailure("\n\n" + message + "\n\n")
-}
-
-private func warnAboutSecondLanguages() {
-    if BuildConfiguration.current == .debug {
-        if LocalizationSetting.current.value.resolved() as InterfaceLocalization ∉ Set<InterfaceLocalization>([
-            .englishUnitedKingdom,
-            .englishUnitedStates,
-            .englishCanada]) { // [_Exempt from Test Coverage_]
-            let warning = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
-                switch localization {
-                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                    unreachable()
-                case .deutschDeutschland: // [_Exempt from Test Coverage_]
-                    return "Achtung: Das Deutsch von SDGCornerstone ist noch von keinem Muttersprachler geprüft worden. Falls Sie dabei helfen möchten, melden Sie sich unter:"
-                case .françaisFrance: // [_Exempt from Test Coverage_]
-                    return "Attention : Le français de SDGCornerstone n’a pas été vérifié par un locuteur natif. Si vous voudriez nous aider, inscrivez‐vous par ici :"
-                case .ελληνικάΕλλάδα: // [_Exempt from Test Coverage_]
-                    return "Προειδοποίηση: Τα ελληνικά του SDGCornerstone δεν ελέγχεται από ενός φυσικού ομιλητή. Αν θέλετε να μας βοηθήσετε, εγγράψτε εδώ:"
-                case .עברית־ישראל: // [_Exempt from Test Coverage_]
-                    /*א*/ return "זהירות: העברית של SDGCornerstone לא נבדקה אל יד של דובר שפת אם. אם אתה/את רוצה לעזור לנו, הירשם/הירשמי כאן:"
-                }
-            })
-            let issueTitle = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
-                switch localization {
-                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                    unreachable()
-                case .deutschDeutschland: // [_Exempt from Test Coverage_]
-                    return "Deutsch prüfen"
-                case .françaisFrance: // [_Exempt from Test Coverage_]
-                    return "Vérifier le français"
-                case .ελληνικάΕλλάδα: // [_Exempt from Test Coverage_]
-                    return "Έλεγχος των ελληνικών"
-                case .עברית־ישראל: // [_Exempt from Test Coverage_]
-                    return "בדיקה של העברית"
-                }
-            })
-            let issueBody = UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
-                switch localization {
-                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                    unreachable()
-                case .deutschDeutschland: // [_Exempt from Test Coverage_]
-                    return "Ich würde gern helfen. Bitte erklären Sie mir wie."
-                case .françaisFrance: // [_Exempt from Test Coverage_]
-                    return "Je voudrais assister. S’il vous plaît, expliquez‐moi comment."
-                case .ελληνικάΕλλάδα: // [_Exempt from Test Coverage_]
-                    return "Θα ήθελα να βοηθήσω. Παρακαλώ, εξηγήστε πώς."
-                case .עברית־ישראל: // [_Exempt from Test Coverage_]
-                    return "אני רוצה לעזור. נא הסבר איך."
-                }
-            })
-            var message: StrictString = "⚠ "
-            message += warning.resolved()
-            message += "\n"
-            message += "https://github.com/SDGGiesbrecht/SDGCornerstone/issues/new?title="
-            message += StrictString(String(issueTitle.resolved()).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
-            message += "&body="
-            message += StrictString(String(issueBody.resolved()).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
-            print(message)
-        }
-    }
 }

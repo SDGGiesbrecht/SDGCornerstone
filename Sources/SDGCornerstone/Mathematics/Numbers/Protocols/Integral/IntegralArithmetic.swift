@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematicsCore
+
 /// A type that can be used for integral arithmetic.
 ///
 /// Conformance Requirements:
@@ -19,26 +21,10 @@
 /// - `WholeArithmetic`
 /// - `Negatable`
 /// - `init(_ int: IntMax)`
-public protocol IntegralArithmetic : Negatable, SignedNumeric, WholeArithmetic {
-
-    // [_Define Documentation: SDGCornerstone.IntegralArithmetic.init(int:)_]
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of `IntMax`.
-    init(_ int: IntMax)
+public protocol IntegralArithmetic : IntegralArithmeticCore, WholeArithmetic {
 }
 
 extension IntegralArithmetic {
-
-    // [_Define Documentation: SDGCornerstone.IntegralArithmetic.init(intFamily:)_]
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of a member of the `Int` family.
-    public init<I : IntFamily>(_ int: I) {
-        self.init(IntMax(int))
-    }
 
     internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
         var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
@@ -46,23 +32,5 @@ extension IntegralArithmetic {
             digits.prepend("−")
         }
         return digits
-    }
-}
-
-extension BinaryInteger {
-    fileprivate init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
-        self.init(int)
-    }
-}
-extension IntegralArithmetic where Self : IntFamily {
-    // MARK: - where Self : IntFamily
-
-    // [_Inherit Documentation: SDGCornerstone.IntegralArithmetic.init(intFamily:)_]
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of a member of the `Int` family.
-    public init<I : IntFamily>(_ int: I) {
-        self.init(asBinaryIntegerWithInt: int)
     }
 }

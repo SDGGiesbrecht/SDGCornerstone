@@ -13,22 +13,7 @@
  */
 
 import SDGLogicCore
-
-// [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
-/// Returns the (rational) quotient of the preceding value divided by the following value.
-///
-/// - Parameters:
-///     - precedingValue: The dividend.
-///     - followingValue: The divisor.
-infix operator ÷: MultiplicationPrecedence
-
-// [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷=_]
-/// Modifies the preceding value by dividing it by the following value.
-///
-/// - Parameters:
-///     - precedingValue: The value to modify.
-///     - followingValue: The divisor.
-infix operator ÷=: AssignmentPrecedence
+import SDGMathematicsCore
 
 /// A type that can be used for rational arithmetic.
 ///
@@ -37,30 +22,7 @@ infix operator ÷=: AssignmentPrecedence
 /// - `IntegralArithmetic`
 /// - `init(_ floatingPoint: FloatMax)`
 /// - `static func ÷= (precedingValue: inout Self, followingValue: Self)`
-public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmetic {
-
-    // [_Define Documentation: SDGCornerstone.IntegralArithmetic.init(floatingPoint:)_]
-    /// Creates an instance as close as possible to `floatingPoint`.
-    ///
-    /// - Properties:
-    ///     - floatingPoint: An instance of `FloatMax`.
-    init(_ floatingPoint: FloatMax)
-
-    // [_Define Documentation: SDGCornerstone.RationalArithmetic.÷_]
-    /// Returns the (rational) quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
-    static func ÷ (precedingValue: Self, followingValue: Self) -> Self
-
-    // [_Define Documentation: SDGCornerstone.RationalArithmetic.÷=_]
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
-    static func ÷= (precedingValue: inout Self, followingValue: Self)
+public protocol RationalArithmetic : IntegralArithmetic, RationalArithmeticCore {
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
     /// Creates a random value within a particular range.
@@ -79,18 +41,6 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
 }
 
 extension RationalArithmetic {
-
-    // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
-    /// Returns the (rational) quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
-    public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
-        var result = precedingValue
-        result ÷= followingValue
-        return result
-    }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
     /// Creates a random value within a particular range.
@@ -226,29 +176,5 @@ extension RationalArithmetic {
     /// Returns a calendar interval in seconds.
     public var seconds: CalendarInterval<Self> {
         return CalendarInterval(seconds: self)
-    }
-}
-
-extension RationalArithmetic where Self : FloatFamily {
-    // MARK: - where Self : FloatFamily
-
-    // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
-    /// Returns the (rational) quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
-    public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue / followingValue
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷=_]
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
-    public static func ÷= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue /= followingValue
     }
 }

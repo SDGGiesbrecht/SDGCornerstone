@@ -13,6 +13,7 @@
  */
 
 import SDGLogicCore
+import SDGMathematicsCore
 
 // [_Example 1: Gregorian Year_]
 /// A Gregorian year.

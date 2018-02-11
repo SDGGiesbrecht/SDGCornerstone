@@ -12,11 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematicsCore
+
 /// A type which *only ever* represents real numbers.
 ///
 /// Conformance Requirements:
 ///
 /// - `RealArithmetic`
-public protocol RealNumberProtocol : RealArithmetic {
+public protocol RealNumberProtocol : RealArithmetic, RealNumberProtocolCore {
 
 }

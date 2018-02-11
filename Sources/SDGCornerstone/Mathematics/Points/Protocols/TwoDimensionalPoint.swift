@@ -39,8 +39,6 @@ public protocol TwoDimensionalPoint : PointProtocol
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    ///
-    /// - NonmutatingVariant: rounded
     mutating func round(_ rule: WholeArithmetic.RoundingRule)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
@@ -48,8 +46,6 @@ public protocol TwoDimensionalPoint : PointProtocol
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    ///
-    /// - MutatingVariant: round
     func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:)_]
@@ -58,8 +54,6 @@ public protocol TwoDimensionalPoint : PointProtocol
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - NonmutatingVariant: rounded
     mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar)
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:)_]
@@ -68,8 +62,6 @@ public protocol TwoDimensionalPoint : PointProtocol
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - MutatingVariant: round
     func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar) -> Self
 }
 
@@ -77,24 +69,20 @@ extension TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vec
     // MARK: - where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
-    /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
+    /// Rounds the value to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    ///
-    /// - NonmutatingVariant: rounded
     public mutating func round(_ rule: WholeArithmetic.RoundingRule) {
         x.round(rule)
         y.round(rule)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
-    /// Returns the point with its co‐ordinates rounded to an integral value using the specified rounding rule.
+    /// Returns the value rounded to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    ///
-    /// - MutatingVariant: round
     public func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self {
         var result = self
         result.round(rule)
@@ -102,26 +90,22 @@ extension TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vec
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:)_]
-    /// Rounds the point’s co‐ordinates to a multiple of `factor` using the specified rounding rule.
+    /// Rounds the value to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - NonmutatingVariant: rounded
     public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) {
         x.round(rule, toMultipleOf: factor)
         y.round(rule, toMultipleOf: factor)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:)_]
-    /// Returns the point with its co‐ordinates rounded to a multiple of `factor` using the specified rounding rule.
+    /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    ///
-    /// - MutatingVariant: round
     public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) -> Self {
         var result = self
         result.round(rule, toMultipleOf: factor)

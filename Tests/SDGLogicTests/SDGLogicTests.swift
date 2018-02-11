@@ -15,62 +15,65 @@
 import SDGLogic
 
 import SDGLogicTestUtilities
+import SDGMathematicsTestUtilities
 import SDGXCTestUtilities
 
 class SDGLogicTests : TestCase {
 
     func testAny() {
-        XCTAssert(Bool.self ≠ Int.self, "“\(Bool.self)” ≠ “\(Int.self)” → “\(false)”")
+        test(operator: (≠, "≠"), on: (Bool.self, Int.self), returns: true)
     }
 
     func testBool() {
-        var variable = true
-
         testEquatableConformance(differingInstances: (true, false))
-        // [_Warning: Should test Comparable conformance too._]
+        testComparableConformance(less: false, greater: true)
 
-        variable = true
-        variable¬=
-        XCTAssertFalse(variable, "“\(true)”¬= → “\(true)”")
-
-        variable = true
-        variable ∧= true
-        XCTAssert(variable, "“\(true)” ∧= “\(true)” → “\(false)”")
-
-        variable = true
-        variable ∨= true
-        XCTAssert(variable, "“\(true)” ∨= “\(true)” → “\(false)”")
+        test(prefixOperator: (¬, "¬"), on: true, returns: false)
+        test(postfixAssignmentOperator: (¬=, "¬="), with: false, resultsIn: true)
+        test(operator: (∧, "∧"), on: true, true, returns: true)
+        test(assignmentOperator: (∧=, "∧="), with: true, false, resultsIn: false)
+        test(operator: (∨, "∨"), on: true, false, returns: true)
+        test(assignmentOperator: (∨=, "∨="), with: false, false, resultsIn: false)
     }
 
     func testEquatable() {
-        XCTAssertFalse(true ≠ true, "“\(true)” ≠ “\(true)” → “\(true)”")
+        test(operator: (≠, "≠"), on: (true, true), returns: false)
 
-        XCTAssertFalse((true, true) ≠ (true, true), "“\((true, true))” ≠ “\((true, true))” → “\(true)”")
-        XCTAssertFalse((true, true, true) ≠ (true, true, true), "“\((true, true, true))” ≠ “\((true, true, true))” → “\(true)”")
-        XCTAssertFalse((true, true, true, true) ≠ (true, true, true, true), "“\((true, true, true, true))” ≠ “\((true, true, true, true))” → “\(true)”")
-        XCTAssertFalse((true, true, true, true, true) ≠ (true, true, true, true, true), "“\((true, true, true, true, true))” ≠ “\((true, true, true, true, true))” → “\(true)”")
-        XCTAssertFalse((true, true, true, true, true, true) ≠ (true, true, true, true, true, true), "“\((true, true, true, true, true, true))” ≠ “\((true, true, true, true, true, true))” → “\(true)”")
+        test(operator: (≠, "≠"), on: ((true, true), (true, true)), returns: false)
+        test(operator: (≠, "≠"), on: ((true, true, true), (true, true, true)), returns: false)
+        test(operator: (≠, "≠"), on: ((true, true, true, true), (true, true, true, true)), returns: false)
+        test(operator: (≠, "≠"), on: ((true, true, true, true, true), (true, true, true, true, true)), returns: false)
+        test(operator: (≠, "≠"), on: ((true, true, true, true, true, true), (true, true, true, true, true, true)), returns: false)
 
-        XCTAssertFalse([true] ≠ [true], "“\([true])” ≠ “\([true])” → “\(true)”")
-        XCTAssertFalse(ArraySlice([true]) ≠ ArraySlice([true]), "“\(ArraySlice([true]))” ≠ “\(ArraySlice([true]))” → “\(true)”")
-        XCTAssertFalse(ContiguousArray([true]) ≠ ContiguousArray([true]), "“\(ContiguousArray([true]))” ≠ “\(ContiguousArray([true]))” → “\(true)”")
+        test(operator: (≠, "≠"), on: ([true], [true]), returns: false)
+        test(operator: (≠, "≠"), on: (ArraySlice([true]), ArraySlice([true])), returns: false)
+        test(operator: (≠, "≠"), on: (ContiguousArray([true]), ContiguousArray([true])), returns: false)
 
-        XCTAssertFalse([true: true] ≠ [true: true], "“\([true: true])” ≠ “\([true:true])” → “\(true)”")
+        test(operator: (≠, "≠"), on: ([true: true], [true: true]), returns: false)
 
         enum Enumeration: Int {
             case one = 1
         }
-        XCTAssertFalse(Enumeration.one ≠ Enumeration.one, "“\(Enumeration.one)” ≠ “\(Enumeration.one)” → “\(true)”")
+        test(operator: (≠, "≠"), on: (Enumeration.one, .one), returns: false)
 
         struct Structure: RawRepresentable {
             var rawValue: Int = 1
         }
-        XCTAssertFalse(Structure() ≠ Structure(), "“\(Structure())” ≠ “\(Structure())” → “\(true)”")
+        test(operator: (≠, "≠"), on: (Structure(), Structure()), returns: false)
     }
 
     func testOptional() {
         let optional: Bool? = true
-        XCTAssert(optional ≠ nil, "“\(String(describing: optional))” ≠ nil → “\(false)”")
+        test(operator: (≠, "≠"), on: (optional, nil), returns: true)
+        if optional ≠ nil {
+            // Ensures syntax works.
+        }
+
+        struct Thing {} // Not equatable.
+        let thing: Thing? = Thing()
+        if thing ≠ nil {
+            // Ensures syntax works.
+        }
     }
 
     static var allTests: [(String, (SDGLogicTests) -> () throws -> Void)] {

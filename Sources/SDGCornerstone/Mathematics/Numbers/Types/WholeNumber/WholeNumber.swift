@@ -13,6 +13,7 @@
  */
 
 import SDGLogicCore
+import SDGMathematicsCore
 
 // [_Example 1: WholeNumber Literals_]
 /// An arbitrary‐precision whole number.

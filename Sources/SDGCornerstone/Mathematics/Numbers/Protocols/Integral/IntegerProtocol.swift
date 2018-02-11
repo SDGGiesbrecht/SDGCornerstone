@@ -12,12 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematicsCore
+
 /// A type which *only ever* represents integers.
 ///
 /// Conformance Requirements:
 ///
 /// - `IntegralArithmetic`
-public protocol IntegerProtocol : IntegralArithmetic {
+public protocol IntegerProtocol : IntegerProtocolCore, IntegralArithmetic {
 
 }
 
