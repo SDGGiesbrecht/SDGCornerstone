@@ -21,7 +21,7 @@ public struct NilLiteral : ExpressibleByNilLiteral {
     ///
     /// - Parameters:
     ///     - nilLiteral: Void.
-    @_inlineable public init(nilLiteral: Void) {}
+    @_transparent public init(nilLiteral: Void) {}
 
     // MARK: - Equality
 
@@ -31,7 +31,7 @@ public struct NilLiteral : ExpressibleByNilLiteral {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func ≠ <T>(precedingValue: T?, followingValue: NilLiteral) -> Bool {
+    @_transparent public static func ≠ <T>(precedingValue: T?, followingValue: NilLiteral) -> Bool {
         return precedingValue != nil
         // Allows “x ≠ nil” even when x is not Equatable.
     }

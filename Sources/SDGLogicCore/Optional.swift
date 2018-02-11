@@ -23,7 +23,7 @@ extension Optional where Wrapped : Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func ≠ (precedingValue: Optional, followingValue: Optional) -> Bool {
+    @_transparent public static func ≠ (precedingValue: Optional, followingValue: Optional) -> Bool {
         return precedingValue != followingValue
     }
 }

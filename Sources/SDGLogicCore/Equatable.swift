@@ -27,7 +27,7 @@ extension Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func ≠ (precedingValue: Self, followingValue: Self) -> Bool {
+    @_transparent public static func ≠ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue != followingValue
     }
 }
