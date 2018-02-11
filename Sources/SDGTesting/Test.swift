@@ -13,10 +13,10 @@
  */
 
 /// The assertion method used by `test(_:_:_:_:)`
-public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, _ file: StaticString, _ line: UInt) -> () = Swift.assert
+public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, _ file: StaticString, _ line: UInt) -> () = Swift.precondition
 
 /// Tests an expression, verifying that it is true.
-@_inlineable public func test(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) -> () {
+@_transparent public func test(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) -> () {
 
     testAssertionMethod(expression, message, file, line)
 }

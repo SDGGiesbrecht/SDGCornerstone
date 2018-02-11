@@ -15,7 +15,7 @@
 import SDGTesting
 
 /// Tests a type’s conformance to equatable.
-@_inlineable public func testEquatableConformance<T>(differingInstances: (T, T), file: StaticString = #file, line: UInt = #line) where T : Equatable {
+@_transparent public func testEquatableConformance<T>(differingInstances: (T, T), file: StaticString = #file, line: UInt = #line) where T : Equatable {
     // [_Warning: These messages should be localized._]
     test(differingInstances.0 == differingInstances.0, "“\(differingInstances.0)” == “\(differingInstances.0)” → “\(false)”", file: file, line: line)
     test(¬(differingInstances.0 == differingInstances.1), "“\(differingInstances.0)” == “\(differingInstances.1)” → “\(true)”", file: file, line: line)
