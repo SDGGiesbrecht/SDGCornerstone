@@ -52,5 +52,6 @@ XCTMain([
     testCase(SDGLogicTests.allTests),
     testCase(SDGBinaryDataTests.allTests),
     testCase(SDGMathematicsTests.allTests),
+    testCase(SDGPersistenceTests.allTests),
     testCase(SDGProcessPropertiesTests.allTests)
 ])

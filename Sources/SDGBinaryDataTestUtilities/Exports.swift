@@ -13,3 +13,4 @@
  */
 
 @_exported import SDGBinaryData
+@_exported import SDGTesting

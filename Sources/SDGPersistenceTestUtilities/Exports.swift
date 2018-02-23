@@ -12,4 +12,5 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import Foundation // ProcessInfo
+@_exported import SDGPersistence
+@_exported import SDGTesting

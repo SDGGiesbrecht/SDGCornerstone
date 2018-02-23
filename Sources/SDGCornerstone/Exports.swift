@@ -16,6 +16,7 @@
 @_exported import SDGLogic
 @_exported import SDGBinaryData
 @_exported import SDGMathematics
+@_exported import SDGPersistence
 @_exported import SDGProcessProperties
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]

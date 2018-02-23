@@ -18,6 +18,7 @@
 @_exported import SDGLogicTestUtilities
 @_exported import SDGBinaryDataTestUtilities
 @_exported import SDGMathematicsTestUtilities
+@_exported import SDGPersistenceTestUtilities
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

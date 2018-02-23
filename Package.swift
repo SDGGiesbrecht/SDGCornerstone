@@ -37,6 +37,9 @@ let package = Package(
         .library(name: "SDGMathematics", targets: ["SDGMathematics"]),
         .library(name: "SDGMathematicsTestUtilities", targets: ["SDGMathematicsTestUtilities"]),
 
+        .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
+        .library(name: "SDGPersistenceTestUtilities", targets: ["SDGPersistenceTestUtilities"]),
+
         .library(name: "SDGTesting", targets: ["SDGTesting"]),
 
         // Core subsets.
@@ -56,12 +59,14 @@ let package = Package(
             "SDGLogic",
             "SDGBinaryData",
             "SDGMathematics",
-            "SDGProcessProperties",
-        ]),
+            "SDGPersistence",
+            "SDGProcessProperties"
+            ]),
         .target(name: "SDGCornerstoneTestUtilities", dependencies: [
             "SDGLogicTestUtilities",
             "SDGBinaryDataTestUtilities",
             "SDGMathematicsTestUtilities",
+            "SDGPersistenceTestUtilities",
 
             "SDGCornerstone",
             "SDGTesting"
@@ -88,6 +93,9 @@ let package = Package(
             "SDGLogicTestUtilities"
             ]),
 
+        .target(name: "SDGPersistence"),
+        .target(name: "SDGPersistenceTestUtilities", dependencies: ["SDGPersistence", "SDGTesting"]),
+
         .target(name: "SDGProcessProperties"),
 
         .target(name: "SDGTesting", dependencies: []),
@@ -110,10 +118,6 @@ let package = Package(
             "SDGCornerstoneTestUtilities", "SDGXCTestUtilities"
             ]),
 
-        .testTarget(name: "SDGProcessPropertiesTests", dependencies: [
-            "SDGProcessProperties", "SDGXCTestUtilities",
-            "SDGLogic"
-            ]),
         .testTarget(name: "SDGControlFlowTests", dependencies: [
             "SDGControlFlow", "SDGXCTestUtilities"
             ]),
@@ -127,6 +131,13 @@ let package = Package(
         .testTarget(name: "SDGMathematicsTests", dependencies: [
             "SDGMathematicsTestUtilities", "SDGXCTestUtilities",
             "SDGBinaryDataTestUtilities"
+            ]),
+        .testTarget(name: "SDGPersistenceTests", dependencies: [
+            "SDGPersistence", "SDGXCTestUtilities",
+            ]),
+        .testTarget(name: "SDGProcessPropertiesTests", dependencies: [
+            "SDGProcessProperties", "SDGXCTestUtilities",
+            "SDGLogic"
             ])
     ]
 )
