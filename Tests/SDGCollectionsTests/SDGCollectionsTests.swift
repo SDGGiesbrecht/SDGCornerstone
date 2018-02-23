@@ -1,5 +1,5 @@
 /*
- SDGPersistenceTests.swift
+ SDGCollectionsTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,15 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGPersistenceTestUtilities
+import SDGCollectionsTestUtilities
 import SDGXCTestUtilities
 
-class SDGPersistenceTests : TestCase {
+class SDGCollectionsTests : TestCase {
 
     func testExample() {
     }
 
-    static var allTests: [(String, (SDGPersistenceTests) -> () throws -> Void)] {
+    static var allTests: [(String, (SDGCollectionsTests) -> () throws -> Void)] {
         return [
             ("testExample", testExample)
         ]

@@ -12,11 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogic
-
 import SDGLogicTestUtilities
-import SDGMathematicsTestUtilities
 import SDGXCTestUtilities
+
+import SDGMathematicsTestUtilities
 
 class SDGLogicTests : TestCase {
 

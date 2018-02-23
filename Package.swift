@@ -37,6 +37,9 @@ let package = Package(
         .library(name: "SDGMathematics", targets: ["SDGMathematics"]),
         .library(name: "SDGMathematicsTestUtilities", targets: ["SDGMathematicsTestUtilities"]),
 
+        .library(name: "SDGCollections", targets: ["SDGCollections"]),
+        .library(name: "SDGCollectionsTestUtilities", targets: ["SDGCollectionsTestUtilities"]),
+
         .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
         .library(name: "SDGPersistenceTestUtilities", targets: ["SDGPersistenceTestUtilities"]),
 
@@ -46,6 +49,7 @@ let package = Package(
 
         .library(name: "SDGLogicCore", targets: ["SDGLogicCore"]),
         .library(name: "SDGMathematicsCore", targets: ["SDGMathematicsCore"]),
+        .library(name: "SDGCollectionsCore", targets: ["SDGCollectionsCore"]),
 
         // Process properties.
 
@@ -59,6 +63,7 @@ let package = Package(
             "SDGLogic",
             "SDGBinaryData",
             "SDGMathematics",
+            "SDGCollections",
             "SDGPersistence",
             "SDGProcessProperties"
             ]),
@@ -66,6 +71,7 @@ let package = Package(
             "SDGLogicTestUtilities",
             "SDGBinaryDataTestUtilities",
             "SDGMathematicsTestUtilities",
+            "SDGCollectionsTestUtilities",
             "SDGPersistenceTestUtilities",
 
             "SDGCornerstone",
@@ -93,6 +99,9 @@ let package = Package(
             "SDGLogicTestUtilities"
             ]),
 
+        .target(name: "SDGCollections", dependencies: ["SDGCollectionsCore"]),
+        .target(name: "SDGCollectionsTestUtilities", dependencies: ["SDGCollections", "SDGTesting"]),
+
         .target(name: "SDGPersistence"),
         .target(name: "SDGPersistenceTestUtilities", dependencies: ["SDGPersistence", "SDGTesting"]),
 
@@ -111,6 +120,7 @@ let package = Package(
             "SDGLogicCore",
             "SDGBinaryDataCore"
             ]),
+        .target(name: "SDGCollectionsCore"),
 
         // Internal tests.
 
@@ -131,6 +141,9 @@ let package = Package(
         .testTarget(name: "SDGMathematicsTests", dependencies: [
             "SDGMathematicsTestUtilities", "SDGXCTestUtilities",
             "SDGBinaryDataTestUtilities"
+            ]),
+        .testTarget(name: "SDGCollectionsTests", dependencies: [
+            "SDGCollectionsTestUtilities", "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGPersistenceTests", dependencies: [
             "SDGPersistence", "SDGXCTestUtilities",

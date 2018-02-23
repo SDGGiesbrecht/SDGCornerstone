@@ -16,7 +16,7 @@
 
 macOS • Linux • iOS • watchOS • tvOS
 
-APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGControlFlow](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGControlFlow) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGBinaryData](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryData) • [SDGBinaryDataTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryDataTestUtilities) • [SDGMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematics) • [SDGMathematicsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsTestUtilities) • [SDGPersistence](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistence) • [SDGPersistenceTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistenceTestUtilities) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting) • [SDGLogicCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicCore) • [SDGMathematicsCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsCore) • [SDGProcessProperties](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGProcessProperties)
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGControlFlow](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGControlFlow) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGBinaryData](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryData) • [SDGBinaryDataTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryDataTestUtilities) • [SDGMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematics) • [SDGMathematicsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsTestUtilities) • [SDGCollections](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollections) • [SDGCollectionsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollectionsTestUtilities) • [SDGPersistence](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistence) • [SDGPersistenceTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistenceTestUtilities) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting) • [SDGLogicCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicCore) • [SDGMathematicsCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsCore) • [SDGCollectionsCore](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollectionsCore) • [SDGProcessProperties](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGProcessProperties)
 
 # SDGCornerstone
 
@@ -62,11 +62,14 @@ let package = Package(
             .productItem(name: "SDGBinaryDataTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGMathematics", package: "SDGCornerstone"),
             .productItem(name: "SDGMathematicsTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGCollections", package: "SDGCornerstone"),
+            .productItem(name: "SDGCollectionsTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGPersistence", package: "SDGCornerstone"),
             .productItem(name: "SDGPersistenceTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGTesting", package: "SDGCornerstone"),
             .productItem(name: "SDGLogicCore", package: "SDGCornerstone"),
             .productItem(name: "SDGMathematicsCore", package: "SDGCornerstone"),
+            .productItem(name: "SDGCollectionsCore", package: "SDGCornerstone"),
             .productItem(name: "SDGProcessProperties", package: "SDGCornerstone"),
         ])
     ]
@@ -85,11 +88,14 @@ import SDGBinaryData
 import SDGBinaryDataTestUtilities
 import SDGMathematics
 import SDGMathematicsTestUtilities
+import SDGCollections
+import SDGCollectionsTestUtilities
 import SDGPersistence
 import SDGPersistenceTestUtilities
 import SDGTesting
 import SDGLogicCore
 import SDGMathematicsCore
+import SDGCollectionsCore
 import SDGProcessProperties
 ```
 

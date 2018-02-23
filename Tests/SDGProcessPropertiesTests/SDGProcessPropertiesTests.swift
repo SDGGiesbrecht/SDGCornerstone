@@ -14,9 +14,10 @@
 
 import SDGProcessProperties
 
-import SDGLogic
 import SDGTesting
 import SDGXCTestUtilities
+
+import SDGLogic
 
 class SDGProcessPropertiesTests : TestCase {
 

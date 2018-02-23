@@ -1,5 +1,5 @@
 /*
- SDGPersistenceTests.swift
+ Exports.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -11,18 +11,3 @@
  Licensed under the Apache Licence, Version 2.0.
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
-
-import SDGPersistenceTestUtilities
-import SDGXCTestUtilities
-
-class SDGPersistenceTests : TestCase {
-
-    func testExample() {
-    }
-
-    static var allTests: [(String, (SDGPersistenceTests) -> () throws -> Void)] {
-        return [
-            ("testExample", testExample)
-        ]
-    }
-}
