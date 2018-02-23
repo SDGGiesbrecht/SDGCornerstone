@@ -142,9 +142,7 @@ extension FloatFamilyCore {
         operand = operand.squareRoot()
     }
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public mutating func _tryConvenientLogarithms(toBase base: Self) -> Bool {
+    @_inlineable @_versioned internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
 
         // [_Warning: Can this can be localized? Otherwise switch to “logxR−”._]
         assert(self > 0, /*UserFacingText({ [value = self] (localization: APILocalization, _: Void) -> StrictString in
@@ -193,7 +191,7 @@ extension FloatFamilyCore {
     ///     - base: The base.
     @_inlineable public mutating func formLogarithm(toBase base: Self) {
 
-        if ¬_tryConvenientLogarithms(toBase: base) {
+        if ¬tryConvenientLogarithms(toBase: base) {
 
             // log (a) = log (a) ÷ log (b)
             //    b         x         x
@@ -209,7 +207,7 @@ extension FloatFamilyCore {
     /// - Precondition: `self` > 0
      @_inlineable public mutating func formNaturalLogarithm() {
 
-        if ¬_tryConvenientLogarithms(toBase: e) {
+        if ¬tryConvenientLogarithms(toBase: e) {
 
             if self == 2 {
                 self = Self.ln2
@@ -499,7 +497,7 @@ extension FloatFamilyCore {
         })*/)
 
         if followingValue.isIntegral {
-            precedingValue._raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
+            precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
         } else if followingValue.isNegative /* but not an integer */ {
             precedingValue = 1 ÷ precedingValue ↑ −followingValue
         } else if precedingValue == e /* (natural) exponential function */ {
@@ -509,7 +507,7 @@ extension FloatFamilyCore {
             let w: Self = followingValue.rounded(.toNearestOrAwayFromZero)
             let r: Self = followingValue − w
 
-            precedingValue._raiseRationalNumberToThePowerOf(rationalNumber: w)
+            precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: w)
 
             // The Taylor series around 0 will converge for any real r:
             //
@@ -546,14 +544,12 @@ extension FloatFamilyCore {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     @_transparent public func rounded(_ rule: RoundingRule) -> Self {
-        return _roundedAsFloatingPoint(rule)
+        return roundedAsFloatingPoint(rule)
     }
 }
 
 extension FloatingPoint {
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_transparent public func _roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
+    @_transparent @_versioned internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
         return rounded(rule)
     }
 }

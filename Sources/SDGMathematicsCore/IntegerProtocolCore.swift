@@ -37,7 +37,7 @@ extension IntegerProtocolCore {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
     @_transparent public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue._raiseIntegerToThePowerOf(integer: followingValue)
+        precedingValue.raiseIntegerToThePowerOf(integer: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isIntegral_]

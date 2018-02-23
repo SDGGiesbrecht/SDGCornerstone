@@ -17,8 +17,8 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // MARK: - Properties
 
-    private let xToY: [X: Y]
-    private let yToX: [Y: X]
+    @_versioned internal let xToY: [X: Y]
+    @_versioned internal let yToX: [Y: X]
 
     // MARK: - Initialization
 
@@ -26,18 +26,19 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     ///
     /// - Parameters:
     ///     - mapping: The mapping.
-    public init(_ mapping: [X: Y]) {
+    @_inlineable public init(_ mapping: [X: Y]) {
 
         xToY = mapping
 
         var reverse = [Y: X]()
         for (x, y) in mapping {
-            assert(reverse[y] == nil, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            // [_Warning: Can this be localized?_]
+            assert(reverse[y] == nil, /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
                 switch localization {
                 case .englishCanada: // [_Exempt from Test Coverage_]
-                    return StrictString("This mapping is not bijective. Repeated value: \(y)")
+                    return StrictString(*/"This mapping is not bijective. Repeated value: \(y)"/*)
                 }
-            }))
+            })*/)
             reverse[y] = x
         }
         yToX = reverse
@@ -46,21 +47,21 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     // MARK: - Look‐Up
 
     /// Returns the corresponding `Y` for a particular `X`.
-    public func y(for x: X) -> Y? {
+    @_inlineable public func y(for x: X) -> Y? {
         return xToY[x]
     }
     /// Returns the corresponding `X` for a particular `Y`.
-    public func x(for y: Y) -> X? {
+    @_inlineable public func x(for y: Y) -> X? {
         return yToX[y]
     }
 
     /// Accesses the corresponding `Y` for a particular `X`.
-    public subscript(x: X) -> Y? {
+    @_inlineable public subscript(x: X) -> Y? {
         return xToY[x]
     }
 
     /// Accesses the corresponding `X` for a particular `Y`.
-    public subscript(y: Y) -> X? {
+    @_inlineable public subscript(y: Y) -> X? {
         return yToX[y]
     }
 
@@ -68,13 +69,13 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
     /// The position of the first element in a non‐empty collection.
-    public var startIndex: Dictionary<X, Y>.Index {
+    @_inlineable public var startIndex: Dictionary<X, Y>.Index {
         return xToY.startIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
-    public var endIndex: Dictionary<X, Y>.Index {
+    @_inlineable public var endIndex: Dictionary<X, Y>.Index {
         return xToY.endIndex
     }
 
@@ -83,13 +84,13 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    public func index(after i: Dictionary<X, Y>.Index) -> Dictionary<X, Y>.Index {
+    @_inlineable public func index(after i: Dictionary<X, Y>.Index) -> Dictionary<X, Y>.Index {
         return xToY.index(after: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
-    public subscript(position: Dictionary<X, Y>.Index) -> (X, Y) {
+    @_inlineable public subscript(position: Dictionary<X, Y>.Index) -> (X, Y) {
         return xToY[position]
     }
 
@@ -97,7 +98,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:)_]
     /// Creates an instance from a dictionary literal.
-    public init(dictionaryLiteral elements: (X, Y)...) {
+    @_inlineable public init(dictionaryLiteral elements: (X, Y)...) {
         self.init(Dictionary(uniqueKeysWithValues: elements))
     }
 }

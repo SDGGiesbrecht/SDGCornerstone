@@ -52,78 +52,68 @@ public struct Angle<Scalar : RealArithmeticCore> : CodableViaMeasurement {
     /// The numeric value in radians.
     public var inRadians: Scalar = Scalar.additiveIdentity
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public static var _radiansPerRotation: Scalar {
+    @_inlineable @_versioned internal static var radiansPerRotation: Scalar {
         return Scalar.τ
     }
     /// The numeric value in rotations.
     @_inlineable public var inRotations: Scalar {
         get {
-            return inRadians ÷ Angle._radiansPerRotation
+            return inRadians ÷ Angle.radiansPerRotation
         }
         set {
-            inRadians = newValue × Angle._radiansPerRotation
+            inRadians = newValue × Angle.radiansPerRotation
         }
     }
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public static var _radiansPerDegree: Scalar {
-        return _radiansPerRotation ÷ 360
+    @_inlineable @_versioned internal static var radiansPerDegree: Scalar {
+        return radiansPerRotation ÷ 360
     }
     /// The numeric value in degrees.
     @_inlineable public var inDegrees: Scalar {
         get {
-            return inRadians ÷ Angle._radiansPerDegree
+            return inRadians ÷ Angle.radiansPerDegree
         }
         set {
-            inRadians = newValue × Angle._radiansPerDegree
+            inRadians = newValue × Angle.radiansPerDegree
         }
     }
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public static var _radiansPerMinute: Scalar {
-        return _radiansPerDegree ÷ 60
+    @_inlineable @_versioned internal static var radiansPerMinute: Scalar {
+        return radiansPerDegree ÷ 60
     }
     /// The numeric value in minutes.
     @_inlineable public var inMinutes: Scalar {
         get {
-            return inRadians ÷ Angle._radiansPerMinute
+            return inRadians ÷ Angle.radiansPerMinute
         }
         set {
-            inRadians = newValue × Angle._radiansPerMinute
+            inRadians = newValue × Angle.radiansPerMinute
         }
     }
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public static var _radiansPerSecond: Scalar {
-        return _radiansPerMinute ÷ 60
+    @_inlineable @_versioned internal static var radiansPerSecond: Scalar {
+        return radiansPerMinute ÷ 60
     }
     /// The numeric value in seconds.
     @_inlineable public var inSeconds: Scalar {
         get {
-            return inRadians ÷ Angle._radiansPerSecond
+            return inRadians ÷ Angle.radiansPerSecond
         }
         set {
-            inRadians = newValue × Angle._radiansPerSecond
+            inRadians = newValue × Angle.radiansPerSecond
         }
     }
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public static var _radiansPerGradian: Scalar {
-        return _radiansPerRotation ÷ 400
+    @_inlineable @_versioned internal static var radiansPerGradian: Scalar {
+        return radiansPerRotation ÷ 400
     }
     /// The numeric value in gradians.
     @_inlineable public var inGradians: Scalar {
         get {
-            return inRadians ÷ Angle._radiansPerGradian
+            return inRadians ÷ Angle.radiansPerGradian
         }
         set {
-            inRadians = newValue × Angle._radiansPerGradian
+            inRadians = newValue × Angle.radiansPerGradian
         }
     }
 

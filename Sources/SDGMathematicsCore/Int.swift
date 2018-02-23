@@ -34,7 +34,7 @@ extension IntFamilyCore {
     /// - Properties:
     ///     - int: An instance of a member of the `Int` family.
     @_transparent public init<I : IntFamilyCore>(_ int: I) {
-        self.init(_asBinaryIntegerWithInt: int)
+        self.init(asBinaryIntegerWithInt: int)
     }
 
     // MARK: - Negatable
@@ -101,7 +101,7 @@ extension IntFamilyCore {
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
     @_transparent public init<U : UIntFamilyCore>(_ uInt: U) {
-        self.init(_asBinaryIntegerWithUInt: uInt)
+        self.init(asBinaryIntegerWithUInt: uInt)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
@@ -195,9 +195,7 @@ extension IntXFamilyCore {
 }
 
 extension BinaryInteger {
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_transparent public init<I : IntFamilyCore>(_asBinaryIntegerWithInt int: I) {
+    @_transparent @_versioned internal init<I : IntFamilyCore>(asBinaryIntegerWithInt int: I) {
         self.init(int)
     }
 }

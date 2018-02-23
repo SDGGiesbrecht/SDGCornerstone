@@ -59,9 +59,7 @@ extension RationalArithmeticCore {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public mutating func _raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
+    @_inlineable @_versioned internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
 
         // [_Warning: Can this can be localized? Otherwise switch to “◊(Q ↑ Z′ ∉ Q)”._]
         assert(exponent.isIntegral, /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
@@ -74,7 +72,7 @@ extension RationalArithmeticCore {
         if exponent.isNegative {
             self = 1 ÷ self ↑ −exponent
         } else /* exponent.isNonNegative */ {
-            _raiseIntegerToThePowerOf(integer: exponent)
+            raiseIntegerToThePowerOf(integer: exponent)
         }
     }
 }

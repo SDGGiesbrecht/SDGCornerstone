@@ -37,7 +37,7 @@ extension WholeNumberProtocolCore {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
     @_transparent public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue._raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
+        precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isWhole_]

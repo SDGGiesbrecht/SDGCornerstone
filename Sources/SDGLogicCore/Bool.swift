@@ -90,7 +90,7 @@ extension Bool : Comparable {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func < (precedingValue: Bool, followingValue: Bool) -> Bool {
+    public static func < (precedingValue: Bool, followingValue: Bool) -> Bool {
         if precedingValue == false ∧ followingValue == true {
             return true
         } else {

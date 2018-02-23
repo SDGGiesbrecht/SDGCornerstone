@@ -37,6 +37,6 @@ extension RationalNumberProtocolCore {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
     @_inlineable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue._raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
+        precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
     }
 }

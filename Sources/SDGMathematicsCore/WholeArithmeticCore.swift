@@ -338,9 +338,7 @@ extension WholeArithmeticCore {
         return nonmutatingVariant(of: ↑=, on: precedingValue, with: followingValue)
     }
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public mutating func _raiseWholeNumberToThePowerOf(wholeNumber exponent: Self) {
+    @_inlineable @_versioned internal mutating func raiseWholeNumberToThePowerOf(wholeNumber exponent: Self) {
         if exponent == 0 {
             self = 1
         } else if exponent == 1 {

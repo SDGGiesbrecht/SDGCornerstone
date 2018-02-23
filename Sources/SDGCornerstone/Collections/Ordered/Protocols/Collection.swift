@@ -15,6 +15,7 @@
 import Foundation
 
 import SDGLogicCore
+import SDGCollectionsCore
 
 extension Collection {
 

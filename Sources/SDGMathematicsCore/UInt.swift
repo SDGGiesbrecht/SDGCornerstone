@@ -89,7 +89,7 @@ extension UIntFamilyCore {
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
     @_transparent public init<U : UIntFamilyCore>(_ uInt: U) {
-        self.init(_asBinaryIntegerWithUInt: uInt)
+        self.init(asBinaryIntegerWithUInt: uInt)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
@@ -170,9 +170,7 @@ extension UIntFamilyCore {
 }
 
 extension BinaryInteger {
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_transparent public init<U : UIntFamilyCore>(_asBinaryIntegerWithUInt uInt: U) {
+    @_transparent @_versioned internal init<U : UIntFamilyCore>(asBinaryIntegerWithUInt uInt: U) {
         self.init(uInt)
     }
 }

@@ -40,9 +40,7 @@ extension IntegralArithmeticCore {
         self.init(IntMax(int))
     }
 
-    // [_Workaround: This can be reduced to @abiPublic if SE‐0193 is implemented. (Swift 4.0.3)_]
-    /// :nodoc:
-    @_inlineable public mutating func _raiseIntegerToThePowerOf(integer exponent: Self) {
+    @_inlineable @_versioned internal mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
 
         // [_Warning: Can this can be localized? Otherwise switch to “◊(Z ↑ Z− ∉ Z)”._]
         assert(exponent.isNonNegative, /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
@@ -52,6 +50,6 @@ extension IntegralArithmeticCore {
             }
         })*/)
 
-        _raiseWholeNumberToThePowerOf(wholeNumber: exponent)
+        raiseWholeNumberToThePowerOf(wholeNumber: exponent)
     }
 }
