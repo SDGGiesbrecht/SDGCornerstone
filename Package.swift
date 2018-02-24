@@ -120,7 +120,9 @@ let package = Package(
             "SDGLogicCore",
             "SDGBinaryDataCore"
             ]),
-        .target(name: "SDGCollectionsCore"),
+        .target(name: "SDGCollectionsCore", dependencies: [
+            "SDGControlFlow"
+            ]),
 
         // Internal tests.
 

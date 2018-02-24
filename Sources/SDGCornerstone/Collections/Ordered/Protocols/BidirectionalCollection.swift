@@ -12,15 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension BidirectionalCollection {
-
-    // [_Define Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
-    /// Returns the index immediately before the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The following index.
-}
-
 extension BidirectionalCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 

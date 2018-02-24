@@ -1,5 +1,5 @@
 /*
- Hashable.swift
+ BidirectionalCollection.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,14 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematicsCore
+extension BidirectionalCollection {
 
-extension Hashable where Self : TwoDimensionalVector {
-    // MARK: - where Self : TwoDimensionalVector
-
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
-    /// The hash value.
-    public var hashValue: Int {
-        return Δx.hashValue ^ Δy.hashValue
-    }
+    // [_Define Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+    /// Returns the index immediately before the specified index.
+    ///
+    /// - Parameters:
+    ///     - i: The following index.
 }

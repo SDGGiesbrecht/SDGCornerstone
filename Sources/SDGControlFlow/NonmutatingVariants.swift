@@ -94,6 +94,33 @@
     return copy
 }
 
+// [_Example 1: Nonmutating Variant_]
+/// Implements a nonmutating function based on its mutating counterpart.
+///
+/// ```swift
+/// extension Array where Element : Comparable {
+///     func sorted() -> Array {
+///         return nonmutatingVariant(of: Array.sort, on: self)
+///     }
+///     func appending(_ appendix: Array) -> Array {
+///         return nonmutatingVariant(of: Array.append, on: self, with: appendix)
+///     }
+///     static func + (a: Array, b: Array) -> Array {
+///         return nonmutatingVariant(of: +=, on: a, with: b)
+///     }
+/// }
+/// ```
+///
+/// - Parameters:
+///     - mutation: The mutating counterpart.
+///     - self: The instance.
+///     - argument: An argument to pass to the mutating counterpart.
+@_transparent public func nonmutatingVariant<T, A, B, C>(of mutation: (inout T) -> (A, B, C) -> Void, on `self`: T, with arguments: (A, B, C)) -> T {
+    var copy = `self`
+    mutation(&copy)(arguments.0, arguments.1, arguments.2)
+    return copy
+}
+
 // MARK: - Operators
 
 // [_Example 1: Nonmutating Variant_]

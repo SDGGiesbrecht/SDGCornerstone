@@ -13,6 +13,7 @@
  */
 
 import SDGMathematicsCore
+import SDGCollectionsCore
 
 /// A member of the `Array` family: `Array`, `ArraySlice` or `ContiguousArray`.
 public protocol ArrayFamily : CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible, ExpressibleByArrayLiteral, MutableCollection, RangeReplaceableCollection, RandomAccessCollection {

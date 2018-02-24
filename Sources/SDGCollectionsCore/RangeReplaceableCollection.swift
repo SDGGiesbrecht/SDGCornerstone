@@ -1,0 +1,184 @@
+/*
+ RangeReplaceableCollection.swift
+
+ This source file is part of the SDGCornerstone open source project.
+ https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
+
+ Copyright ©2017–2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+
+ Soli Deo gloria.
+
+ Licensed under the Apache Licence, Version 2.0.
+ See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
+ */
+
+import SDGControlFlow
+
+extension RangeReplaceableCollection {
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
+    /// Creates a new, empty collection.
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
+    /// Creates a new instance of a collection containing the elements of a sequence.
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+    /// Appends the contents of the sequence to the end of the collection.
+
+    @_transparent @_versioned internal mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
+        append(contentsOf: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+    /// Appends the contents of the sequence to the end of the collection.
+    @_transparent public mutating func append(contentsOf newElements: Self) {
+        appendAsCollection(contentsOf: newElements)
+    }
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    /// Inserts the contents of the sequence to the specified index.
+
+    @_transparent @_versioned internal mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
+        insert(contentsOf: newElements, at: i)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    /// Inserts the contents of the sequence to the specified index.
+    @_transparent public mutating func insert(contentsOf newElements: Self, at i: Self.Index) {
+        insertAsCollection(contentsOf: newElements, at: i)
+    }
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
+    /// Replaces the specified subrange of elements with the given collection.
+
+    @_transparent @_versioned internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
+        replaceSubrange(subrange, with: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    /// Inserts the contents of the sequence to the specified index.
+    @_transparent public mutating func replaceSubrange(_ subrange: Range<Self.Index>, with newElements: Self) {
+        replaceSubrangeAsCollection(subrange, with: newElements)
+    }
+
+    /// Returns a collection formed by appending an element to the end of the collection.
+    ///
+    /// - Parameters:
+    ///     - newElement: The element to append to the collection
+    @_inlineable public func appending(_ newElement: Self.Element) -> Self {
+        return nonmutatingVariant(of: Self.append, on: self, with: newElement)
+    }
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:)_]
+    /// Returns a collection formed by appending the contents of another collection to the end of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to append to the collection
+    @_inlineable public func appending<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
+        return nonmutatingVariant(of: Self.append, on: self, with: newElements)
+    }
+
+    @_transparent @_versioned internal func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
+        return appending(contentsOf: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:)_]
+    /// Returns a collection formed by appending the contents of another collection to the end of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to append to the collection
+    @_transparent public func appending(contentsOf newElements: Self) -> Self {
+        return appendingAsCollection(contentsOf: newElements)
+    }
+
+    /// Adds an element to the beginning of the collection.
+    ///
+    /// - Parameters:
+    ///     - newElement: The element to prepend to the collection
+    @_inlineable public mutating func prepend(_ newElement: Self.Element) {
+        insert(newElement, at: startIndex)
+    }
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
+    /// Adds the contents of another collection to the beginning of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to prepend to the collection
+    @_inlineable public mutating func prepend<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
+        insert(contentsOf: newElements, at: startIndex)
+    }
+
+    @_transparent @_versioned internal mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
+        prepend(contentsOf: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
+    /// Adds the contents of another collection to the beginning of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to prepend to the collection
+    @_transparent public mutating func prepend(contentsOf newElements: Self) {
+        prependAsCollection(contentsOf: newElements)
+    }
+
+    /// Returns a collection formed by prepending an element to the beginning of the collection.
+    ///
+    /// - Parameters:
+    ///     - newElement: The element to prepend to the collection
+    @_inlineable public func prepending(_ newElement: Self.Element) -> Self {
+        return nonmutatingVariant(of: Self.prepend, on: self, with: newElement)
+    }
+
+    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.prepending(contentsOf:)_]
+    /// Returns a collection formed by prepending the contents of another collection to the beginning of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to prepend to the collection
+    @_inlineable public func prepending<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
+        return nonmutatingVariant(of: Self.prepend, on: self, with: newElements)
+    }
+
+    @_transparent @_versioned internal func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
+        return prepending(contentsOf: newElements)
+    }
+    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
+    /// Adds the contents of another collection to the beginning of `self`.
+    ///
+    /// - Parameters:
+    ///     - newElements: The elements to prepend to the collection
+    @_transparent public func prepending(contentsOf newElements: Self) -> Self {
+        return prependingAsCollection(contentsOf: newElements)
+    }
+
+    /// Truncates the `self` at `index`.
+    @_inlineable public mutating func truncate(at index: Index) {
+        removeSubrange(index ..< endIndex)
+    }
+
+    /// Returns a collection formed by truncating `self` at `index`.
+    @_inlineable public func truncated(at index: Index) -> Self {
+        return nonmutatingVariant(of: Self.truncate, on: self, with: index)
+    }
+
+    /// Fills the collection to a certain count.
+    ///
+    /// - Parameters:
+    ///     - count: The target count.
+    ///     - element: The element with which to fill the collection.
+    ///     - direction: The direction from which to fill the collection.
+    @_inlineable public mutating func fill(to count: IndexDistance, with element: Element, from direction: FillDirection) {
+        while self.count < count {
+            switch direction {
+            case .start:
+                prepend(element)
+            case .end:
+                append(element)
+            }
+        }
+    }
+
+    /// Returns the collection filled to a certain count.
+    ///
+    /// - Parameters:
+    ///     - count: The target count.
+    ///     - element: The element with which to fill the collection.
+    ///     - direction: The direction from which to fill the collection.
+    @_inlineable public func filled(to count: IndexDistance, with element: Element, from direction: FillDirection) -> Self {
+        return nonmutatingVariant(of: Self.fill, on: self, with: (count, element, direction))
+    }
+}
