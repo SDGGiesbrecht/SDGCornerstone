@@ -57,16 +57,6 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: LiteralPattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
-        return firstMatch(for: pattern as Pattern<Element>, in: searchRange)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
-    /// Returns the first match for `pattern` in the specified subrange.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     public func firstMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return firstMatch(for: pattern as Pattern<Element>, in: searchRange)
     }
@@ -109,18 +99,6 @@ extension Collection where Element : Equatable {
             results.append(match)
         }
         return results
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
-    /// Returns a list of all matches for `pattern` in the specified subrange.
-    ///
-    /// This does not check for overlapping matches.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func matches(for pattern: LiteralPattern<Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
-        return matches(for: pattern as Pattern<Element>, in: searchRange)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
@@ -176,15 +154,6 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func prefix(upTo pattern: LiteralPattern<Element>) -> PatternMatch<Self>? {
-        return prefix(upTo: pattern as Pattern<Element>)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
-    /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
     public func prefix(upTo pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
         return prefix(upTo: pattern as Pattern<Element>)
     }
@@ -217,15 +186,6 @@ extension Collection where Element : Equatable {
             return nil
         }
         return PatternMatch(range: startIndex ..< match.range.upperBound, in: self)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
-    /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    public func prefix(through pattern: LiteralPattern<Element>) -> PatternMatch<Self>? {
-        return prefix(through: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
@@ -272,15 +232,6 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func suffix(from pattern: LiteralPattern<Element>) -> PatternMatch<Self>? {
-        return suffix(from: pattern as Pattern<Element>)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
-    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
     public func suffix(from pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
         return suffix(from: pattern as Pattern<Element>)
     }
@@ -313,15 +264,6 @@ extension Collection where Element : Equatable {
             return nil
         }
         return PatternMatch(range: match.range.upperBound ..< endIndex, in: self)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
-    /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    public func suffix(after pattern: LiteralPattern<Element>) -> PatternMatch<Self>? {
-        return suffix(after: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
@@ -373,15 +315,6 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    public func components(separatedBy pattern: LiteralPattern<Element>) -> [PatternMatch<Self>] {
-        return components(separatedBy: pattern as Pattern<Element>)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
-    /// Returns the segments of `self` separated by instances of `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
     public func components(separatedBy pattern: CompositePattern<Element>) -> [PatternMatch<Self>] {
         return components(separatedBy: pattern as Pattern<Element>)
     }
@@ -411,15 +344,6 @@ extension Collection where Element : Equatable {
     ///     - pattern: The pattern to search for.
     public func contains(_ pattern: Pattern<Element>) -> Bool {
         return firstMatch(for: pattern) ≠ nil
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
-    /// Returns `true` if `self` contains an match for `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    public func contains(_ pattern: LiteralPattern<Element>) -> Bool {
-        return contains(pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
@@ -463,15 +387,6 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    public func hasPrefix(_ pattern: LiteralPattern<Element>) -> Bool {
-        return hasPrefix(pattern as Pattern<Element>)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
     public func hasPrefix(_ pattern: CompositePattern<Element>) -> Bool {
         return hasPrefix(pattern as Pattern<Element>)
     }
@@ -502,15 +417,6 @@ extension Collection where Element : Equatable {
     public func hasSuffix(_ pattern: Pattern<Element>) -> Bool {
         let backwards = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    public func hasSuffix(_ pattern: LiteralPattern<Element>) -> Bool {
-        return hasSuffix(pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
@@ -657,18 +563,6 @@ extension Collection where Element : Equatable {
         } else {
             return false
         }
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
-    /// Advances the index over the pattern.
-    ///
-    /// - Parameters:
-    ///     - index: The index to advance.
-    ///     - pattern: The pattern to advance over.
-    ///
-    /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
-    @discardableResult public func advance(_ index: inout Index, over pattern: LiteralPattern<Element>) -> Bool {
-        return advance(&index, over: pattern as Pattern<Element>)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]

@@ -85,39 +85,6 @@ extension BidirectionalCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func lastMatch(for pattern: LiteralPattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
-        return lastMatch(for: pattern as Pattern<Element>, in: searchRange)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
-    /// Returns the last match for `pattern` in the specified subrange.
-    ///
-    /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
-    ///
-    /// ```swift
-    /// let collection = [0, 0, 0, 0, 0]
-    /// let pattern = [0, 0]
-    ///
-    /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 3 ..< 5)
-    ///
-    /// XCTAssertEqual(collection.matches(for: pattern).last?.range, 2 ..< 4)
-    /// // (Here the matches are 0 ..< 2 and 2 ..< 4; the final zero is incomplete.)
-    /// ```
-    ///
-    /// ```swift
-    /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
-    ///
-    /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
-    /// // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
-    ///
-    /// XCTAssertEqual(collection.matches(for: pattern).last?.range, 0 ..< 3)
-    /// // (Forwards, the lazy consumption keeps consuming zeros until the pattern can be completed with a one.)
-    /// ```
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     public func lastMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return lastMatch(for: pattern as Pattern<Element>, in: searchRange)
     }
