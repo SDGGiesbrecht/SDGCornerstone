@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGControlFlow
+
 extension ProcessInfo {
 
     private static var _applicationIdentifier: String?
@@ -23,8 +25,12 @@ extension ProcessInfo {
     public static var applicationIdentifier: String {
         get {
             guard let result = _applicationIdentifier ?? Bundle.main.bundleIdentifier else {
-                preconditionFailure("“ProcessInfo.applicationIdentifier” has not been set yet.")
-                // [_Warning: This should be localized._]
+                _preconditionFailure({ (localization: _APILocalization) -> String in
+                    switch localization {
+                    case .englishCanada:
+                        return "“ProcessInfo.applicationIdentifier” has not been set yet. (Import SDGCornerstone or SDGProcessProperties.)"
+                    }
+                })
             }
             return result
         }

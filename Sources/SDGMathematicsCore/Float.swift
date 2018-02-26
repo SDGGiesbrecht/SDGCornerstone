@@ -12,19 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/*
- Float.swift
-
- This source file is part of the SDGCornerstone open source project.
- https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
-
- Copyright ©2016–2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
-
- Soli Deo gloria.
-
- Licensed under the Apache Licence, Version 2.0.
- See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
- */
+import SDGControlFlow
 
 import Foundation
 #if !os(Linux)
@@ -144,27 +132,24 @@ extension FloatFamilyCore {
 
     @_inlineable @_versioned internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
 
-        // [_Warning: Can this can be localized? Otherwise switch to “logxR−”._]
-        assert(self > 0, /*UserFacingText({ [value = self] (localization: APILocalization, _: Void) -> StrictString in
+        _assert(self > 0, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString(*/"Logarithms of non‐positive numbers are undefined."/* (In this case, the logarithm of \(value.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).)")
+                return "Logarithms of non‐positive numbers are undefined. (\(self))"
             }
-        })*/)
-        // [_Warning: Can this can be localized? Otherwise switch to “logR−x”._]
-        assert(base > 0, /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        })
+        _assert(base > 0, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString(*/"Logarithms in a non‐positive base are undefined."/* (In this case, the base \(base.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")) logarithm.")
+                return "Logarithms in a non‐positive base are undefined. (\(base))"
             }
-        })*/)
-        // [_Warning: Can this can be localized? Otherwise switch to “log1x”._]
-        assert(base ≠ 1, /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        })
+        _assert(base ≠ 1, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return */"Logarithms in base 1 are undefined."/*
+                return "Logarithms in base 1 are undefined."
             }
-        })*/)
+        })
 
         if self == 1 {
             self = 0 // x ↑ 0 = 1
@@ -488,13 +473,12 @@ extension FloatFamilyCore {
     ///     - followingValue: The exponent.
     @_inlineable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
 
-        // [_Warning: Can this can be localized? Otherwise switch to “◊(R− ↑ Z′ ∉ R)”._]
-        assert(precedingValue.isNonNegative ∨ followingValue.isIntegral, /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        _assert(precedingValue.isNonNegative ∨ followingValue.isIntegral, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return */"The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead."/*
+                return "The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead. (\(precedingValue) ↑ \(followingValue))"
             }
-        })*/)
+        })
 
         if followingValue.isIntegral {
             precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)

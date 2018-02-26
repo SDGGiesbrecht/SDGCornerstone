@@ -105,7 +105,7 @@ let package = Package(
         .target(name: "SDGPersistence"),
         .target(name: "SDGPersistenceTestUtilities", dependencies: ["SDGPersistence", "SDGTesting"]),
 
-        .target(name: "SDGProcessProperties"),
+        .target(name: "SDGProcessProperties", dependencies: ["SDGControlFlow"]),
 
         .target(name: "SDGTesting", dependencies: []),
 

@@ -312,10 +312,7 @@ extension RealArithmeticCore {
     ///     - base: The base.
     ///     - antilogarithm: The antilogarithm.
     @_inlineable public static func log(toBase base: Self, of antilogarithm: Self) -> Self {
-        // [_Warning: Can this use nonmutatingVariant?_]
-        var result = antilogarithm
-        result.formLogarithm(toBase: base)
-        return result
+        return nonmutatingVariant(of: Self.formLogarithm, on: antilogarithm, with: base)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.log(_:)_]
@@ -326,10 +323,7 @@ extension RealArithmeticCore {
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
     @_inlineable public static func log(_ antilogarithm: Self) -> Self {
-        // [_Warning: Can this use nonmutatingVariant?_]
-        var result = antilogarithm
-        result.formCommonLogarithm()
-        return result
+        return nonmutatingVariant(of: Self.formCommonLogarithm, on: antilogarithm)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.formCommonLogarithm()_]
@@ -348,10 +342,7 @@ extension RealArithmeticCore {
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
     @_inlineable public static func ln(_ antilogarithm: Self) -> Self {
-        // [_Warning: Can this use nonmutatingVariant?_]
-        var result = antilogarithm
-        result.formNaturalLogarithm()
-        return result
+        return nonmutatingVariant(of: Self.formNaturalLogarithm, on: antilogarithm)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.formNaturalLogarithm()_]
@@ -417,13 +408,12 @@ extension RealArithmeticCore {
     /// - Parameters:
     ///     - sine: The sine.
     @_inlineable public static func arcsin(_ sine: Self) -> Angle<Self> {
-        // [_Warning: Can this can be localized? Otherwise switch to “arcsin(x); |x| > 1”._]
-        assert((−1 ... 1).contains(sine), /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        _assert((−1 ... 1).contains(sine), { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString(*/"There is no arcsine angle for any number x, where |x| > 1."/* In this case, the number \(sine.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
+                return "There is no arcsine angle for any number x, where |x| > 1. (\(sine))"
             }
-        })*/)
+        })
         return arctan(sine ÷ √(1 − sine ↑ 2))
     }
 
@@ -437,13 +427,12 @@ extension RealArithmeticCore {
     /// - Parameters:
     ///     - cosine: The cosine.
     @_inlineable public static func arccos(_ cosine: Self) -> Angle<Self> {
-        // [_Warning: Can this can be localized? Otherwise switch to “arccos(x); |x| > 1”._]
-        assert((−1 ... 1).contains(cosine), /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        _assert((−1 ... 1).contains(cosine), { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString(*/"There is no arccosine angle for any number x, where |x| > 1."/* In this case, the number \(cosine.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
+                return "There is no arccosine angle for any number x, where |x| > 1. (\(cosine))"
             }
-        })*/)
+        })
         return (π ÷ 2).rad − arcsin(cosine)
     }
 
@@ -457,13 +446,12 @@ extension RealArithmeticCore {
     /// - Parameters:
     ///     - cosecant: The cosecant.
     @_inlineable public static func arccsc(_ cosecant: Self) -> Angle<Self> {
-        // [_Warning: Can this can be localized? Otherwise switch to “arccsc(x); |x| < 1”._]
-        assert(¬(−1 ... 1).contains(cosecant), /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        _assert(¬(−1 ... 1).contains(cosecant), { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString(*/"There is no arccosecant angle for any number x, where |x| < 1."/* In this case, the number \(cosecant.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
+                return "There is no arccosecant angle for any number x, where |x| < 1. (\(cosecant))"
             }
-        })*/)
+        })
         return arcsin(1 ÷ cosecant)
     }
 
@@ -477,13 +465,12 @@ extension RealArithmeticCore {
     /// - Parameters:
     ///     - secant: The secant.
     @_inlineable public static func arcsec(_ secant: Self) -> Angle<Self> {
-        // [_Warning: Can this can be localized? Otherwise switch to “arcsec(x); |x| < 1”._]
-        assert(¬(−1 ... 1).contains(secant), /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        _assert(¬(−1 ... 1).contains(secant), { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString(*/"There is no arccosecant angle for any number x, where |x| < 1."/* In this case, the number \(secant.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".")).")
+                return "There is no arccosecant angle for any number x, where |x| < 1. (\(secant))"
             }
-        })*/)
+        })
         return arccos(1 ÷ secant)
     }
 

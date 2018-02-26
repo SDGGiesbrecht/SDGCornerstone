@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A type that can be used for integral arithmetic.
 ///
 /// Conformance Requirements:
@@ -42,13 +44,12 @@ extension IntegralArithmeticCore {
 
     @_inlineable @_versioned internal mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
 
-        // [_Warning: Can this can be localized? Otherwise switch to “◊(Z ↑ Z− ∉ Z)”._]
-        assert(exponent.isNonNegative, /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        _assert(exponent.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return */"The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead."/*
+                return "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead. (\(exponent))"
             }
-        })*/)
+        })
 
         raiseWholeNumberToThePowerOf(wholeNumber: exponent)
     }

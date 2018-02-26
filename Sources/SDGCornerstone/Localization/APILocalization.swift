@@ -12,17 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal enum APILocalization : String, Localization {
+import SDGControlFlow
 
-    // MARK: - Cases
-
-    case englishCanada = "en\u{2D}CA"
-
-    internal static let cases: [APILocalization] = [
-        .englishCanada
-    ]
-
-    // MARK: - Localization
-
-    internal static let fallbackLocalization: APILocalization = .englishCanada
-}
+internal typealias APILocalization = SDGControlFlow._APILocalization
+extension APILocalization : Localization {}

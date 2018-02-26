@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A reversible one‐to‐one mapping.
 public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, ExpressibleByDictionaryLiteral {
 
@@ -32,13 +34,12 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
         var reverse = [Y: X]()
         for (x, y) in mapping {
-            // [_Warning: Can this be localized?_]
-            assert(reverse[y] == nil, /*UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            _assert(reverse[y] == nil, { (localization: _APILocalization) -> String in
                 switch localization {
                 case .englishCanada: // [_Exempt from Test Coverage_]
-                    return StrictString(*/"This mapping is not bijective. Repeated value: \(y)"/*)
+                    return "This mapping is not bijective; it is multivalued. (\(y) ⇄ {\(reverse[y]!), \(x)})"
                 }
-            })*/)
+            })
             reverse[y] = x
         }
         yToX = reverse
