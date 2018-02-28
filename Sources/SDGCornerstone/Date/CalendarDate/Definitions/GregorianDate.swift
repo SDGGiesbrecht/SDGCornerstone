@@ -111,7 +111,7 @@ internal struct GregorianDate : DateDefinition {
         var approxMonthsElapsed = Int(remainder ÷ GregorianMonth.meanDuration)
         approxMonthsElapsed.decrease(to: GregorianYear.monthsPerYear − 1)
         let guessMonth = GregorianMonth(numberAlreadyElapsed: approxMonthsElapsed)
-        let month = findLocalMinimum(near: guessMonth, within: GregorianMonth.first...GregorianMonth.last) { (month: GregorianMonth) -> CalendarInterval<FloatMax> in
+        let month = findLocalMinimum(near: guessMonth, within: GregorianMonth.cases.first! ... GregorianMonth.cases.last!) { (month: GregorianMonth) -> CalendarInterval<FloatMax> in
             let interval = remainder − GregorianDate.intervalFromStartOfYear(toStartOf: month, leapYear: year.isLeapYear)
 
             if interval.isNonNegative {

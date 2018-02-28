@@ -80,8 +80,8 @@ extension ConsistentlyOrderedCalendarComponent where Self : CardinalCalendarComp
     }
 }
 
-extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent {
-    // MARK: - where Self : EnumerationCalendarComponent
+extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.Vector == Self.RawValue {
+    // MARK: - where Self : EnumerationCalendarComponent, Self.Vector == Self.RawValue
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
     /// Creates a component from the number of complete components already elapsed.

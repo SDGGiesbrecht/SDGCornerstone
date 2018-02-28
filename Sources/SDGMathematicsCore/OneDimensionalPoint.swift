@@ -26,6 +26,34 @@ public protocol OneDimensionalPoint : Comparable, PointProtocol {
 
 }
 
+extension OneDimensionalPoint where Vector : IntegerProtocolCore {
+    // MARK: - where Vector : IntegerProtocolCore
+
+    // [_Define Documentation: SDGCornerstone.OneDimensionalPoint.increment()_]
+    /// Advances to the next value.
+    @_inlineable public mutating func increment() {
+        self += 1
+    }
+
+    // [_Define Documentation: SDGCornerstone.OneDimensionalPoint.decrement()_]
+    /// Retreats to the previous value.
+    @_inlineable public mutating func decrement() {
+        self −= 1
+    }
+
+    // [_Define Documentation: SDGCornerstone.OneDimensionalPoint.successor()_]
+    /// Returns the value which comes immediately after.
+    @_inlineable public func successor() -> Self {
+        return self + 1
+    }
+
+    // [_Define Documentation: SDGCornerstone.OneDimensionalPoint.predecessor()_]
+    /// Returns the value which comes immediately before.
+    @_inlineable public func predecessor() -> Self {
+        return self − 1
+    }
+}
+
 extension OneDimensionalPoint where Self : Strideable {
 
     /// Returns the value that follows `self` by a distance of `n`.
