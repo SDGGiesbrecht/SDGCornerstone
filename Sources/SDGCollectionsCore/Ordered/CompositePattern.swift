@@ -21,19 +21,19 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
     ///
     /// - Parameters:
     ///     - components: The component patterns.
-    public  init(_ components: [Pattern<Element>]) {
+    @_inlineable public  init(_ components: [Pattern<Element>]) {
         self.components = components
     }
 
     // MARK: - Properties
 
-    private var components: [Pattern<Element>]
+    @_versioned internal var components: [Pattern<Element>]
 
     // MARK: - ExpressibleByArrayLiteral
 
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
     /// Creates an instance from an array literal.
-    public convenience init(arrayLiteral: Pattern<Element>...) {
+    @_inlineable public convenience init(arrayLiteral: Pattern<Element>...) {
         self.init(arrayLiteral)
     }
 
@@ -47,7 +47,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @_inlineable public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
         for component in components {
@@ -67,7 +67,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    public override func reversed() -> Pattern<Element> {
+    @_inlineable public override func reversed() -> Pattern<Element> {
         return CompositePattern(components.map({ $0.reversed() }).reversed())
     }
 }

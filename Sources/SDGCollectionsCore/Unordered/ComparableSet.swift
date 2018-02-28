@@ -12,56 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogicCore
-
-// [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
-/// Returns `true` if `precedingValue` is a subset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible subset to test.
-///     - followingValue: The other set.
-infix operator ⊆: ComparisonPrecedence
-
-// [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
-/// Returns `true` if `precedingValue` is a subset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible subset to test.
-///     - followingValue: The other set.
-infix operator ⊈: ComparisonPrecedence
-
-// [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
-/// Returns `true` if `precedingValue` is a superset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible superset to test.
-///     - followingValue: The other set.
-infix operator ⊇: ComparisonPrecedence
-
-// [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
-/// Returns `true` if `precedingValue` is a superset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible superset to test.
-///     - followingValue: The other set.
-infix operator ⊉: ComparisonPrecedence
-
-// [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
-/// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible subset to test.
-///     - followingValue: The other set.
-infix operator ⊊: ComparisonPrecedence
-
-// [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
-/// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible superset to test.
-///     - followingValue: The other set.
-infix operator ⊋: ComparisonPrecedence
-
 /// A set that can be compared against other sets of the same type.
 ///
 /// Conformance Requirements:
@@ -142,7 +92,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    public static func ⊈ (precedingValue: Self, followingValue: Self) -> Bool {
+    @_inlineable public static func ⊈ (precedingValue: Self, followingValue: Self) -> Bool {
         return ¬(precedingValue ⊆ followingValue)
     }
 
@@ -152,7 +102,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    public static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool {
+    @_inlineable public static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool {
         return followingValue ⊆ precedingValue
     }
 
@@ -162,7 +112,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    public static func ⊉ (precedingValue: Self, followingValue: Self) -> Bool {
+    @_inlineable public static func ⊉ (precedingValue: Self, followingValue: Self) -> Bool {
         return ¬(precedingValue ⊇ followingValue)
     }
 
@@ -172,7 +122,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    public static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool {
+    @_inlineable public static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
     }
 
@@ -182,11 +132,11 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    public static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool {
+    @_inlineable public static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
     }
 
-    fileprivate func isDisjointAsComparableSet(with other: Self) -> Bool {
+    @_inlineable @_versioned internal func isDisjointAsComparableSet(with other: Self) -> Bool {
         return ¬overlaps(other)
     }
     // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
@@ -194,22 +144,8 @@ extension ComparableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    public func isDisjoint(with other: Self) -> Bool {
+    @_transparent public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
-    }
-}
-
-extension ComparableSet where Self : RangeFamily {
-    // MARK: - where Self : RangeFamily
-
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
-    /// Returns `true` if `precedingValue` is a subset of `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The possible subset to test.
-    ///     - followingValue: The other set.
-    public static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool {
-        return precedingValue.lowerBound ≥ followingValue.lowerBound ∧ precedingValue.upperBound ≤ followingValue.upperBound
     }
 }
 
@@ -221,7 +157,7 @@ extension ComparableSet where Self : SetAlgebra {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    public func isDisjoint(with other: Self) -> Bool {
+    @_transparent public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
         // Disambiguate ComparableSet.isDisjoint(with:) vs SetAlgebra.isDisjoint(with:)
     }

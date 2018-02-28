@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A pattern that can be searched for in collections with equatable elements.
 ///
 /// Required Overrides for Subclasses:
@@ -35,8 +37,8 @@ open class Pattern<Element : Equatable> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    open func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
-        primitiveMethod()
+    @_inlineable open func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+        _primitiveMethod()
     }
 
     // [_Define Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
@@ -47,7 +49,7 @@ open class Pattern<Element : Equatable> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    open func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @_inlineable open func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         return matches(in: collection, at: location).first
     }
 
@@ -55,7 +57,7 @@ open class Pattern<Element : Equatable> {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    open func reversed() -> Pattern<Element> {
-        primitiveMethod()
+    @_inlineable open func reversed() -> Pattern<Element> {
+        _primitiveMethod()
     }
 }

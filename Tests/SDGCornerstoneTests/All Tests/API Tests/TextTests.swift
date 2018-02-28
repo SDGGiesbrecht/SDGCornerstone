@@ -326,7 +326,7 @@ class TextTests : TestCase {
             XCTAssertEqual(latin1?.data(using: .isoLatin1), european)
         #endif
 
-        XCTAssertNil("ABC".scalars.firstMatch(for: ConditionalPattern(condition: { $0 == "D" })))
+        XCTAssertNil("ABC".scalars.firstMatch(for: ConditionalPattern({ $0 == "D" })))
 
         let blah = "Blah blah blah..."
         XCTAssertNotNil(blah.scalars.firstMatch(for: "blah".scalars))

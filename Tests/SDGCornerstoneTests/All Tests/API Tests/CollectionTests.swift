@@ -74,7 +74,7 @@ class CollectionTests : TestCase {
 
         XCTAssertEqual([5, 4, 3, 2, 1].commonSuffix(with: [3, 2, 1]).contents, [3, 2, 1])
 
-        XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: ConditionalPattern(condition: { $0.isEven }))?.range, 3 ..< 4)
+        XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: ConditionalPattern({ $0.isEven }))?.range, 3 ..< 4)
 
         XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: NotPattern([3, 2, 1]))?.range, 3 ..< 4)
 
@@ -184,7 +184,7 @@ class CollectionTests : TestCase {
 
         XCTAssertEqual([5, 4, 3, 2, 1].commonPrefix(with: [5, 2, 1]).contents, [5])
 
-        XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: ConditionalPattern(condition: { $0.isEven }))?.range, 1 ..< 2)
+        XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: ConditionalPattern({ $0.isEven }))?.range, 1 ..< 2)
 
         XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: NotPattern([5, 4, 3]))?.range, 1 ..< 2)
         XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: NotPattern(CompositePattern([LiteralPattern([5]), LiteralPattern([4]), LiteralPattern([3])])))?.range, 1 ..< 2)
@@ -206,7 +206,7 @@ class CollectionTests : TestCase {
         XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range, [1, 1, 1].bounds)
         XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(LiteralPattern([1]), count: countableRange))?.range, [1, 1, 1].bounds)
         XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(CompositePattern([LiteralPattern([1])]), count: countableRange))?.range, [1, 1, 1].bounds)
-        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(ConditionalPattern(condition: { $0 == 1 }), count: countableRange))?.range, [1, 1, 1].bounds)
+        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(ConditionalPattern({ $0 == 1 }), count: countableRange))?.range, [1, 1, 1].bounds)
 
         XCTAssertNil([1].firstMatch(for: RepetitionPattern([1], count: 2 ... 4, consumption: .lazy)))
 

@@ -436,7 +436,7 @@ extension WholeArithmeticCore {
                         self = floor + factor
                     }
                 default:
-                    preconditionFailure() // unreachable() is higher‐level.
+                    _unreachable()
                 }
             }
         }

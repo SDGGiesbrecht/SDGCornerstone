@@ -12,8 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import SDGLogicCore // Equatable
-@_exported import SDGBinaryDataCore // BitField
+@_exported import SDGLogicCore // Equatable (≠)
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

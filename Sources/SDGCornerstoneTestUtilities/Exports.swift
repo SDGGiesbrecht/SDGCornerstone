@@ -58,3 +58,28 @@ postfix operator √=
 postfix operator °
 postfix operator ′
 postfix operator ′′
+
+// SDGCollectionsCore
+infix operator ∈: ComparisonPrecedence
+infix operator ∉: ComparisonPrecedence
+infix operator ∋: ComparisonPrecedence
+infix operator ∌: ComparisonPrecedence
+precedencegroup BinarySetOperationPrecedence {
+    lowerThan: RangeFormationPrecedence
+    higherThan: ComparisonPrecedence
+}
+infix operator ∩: BinarySetOperationPrecedence
+infix operator ∩=: AssignmentPrecedence
+infix operator ∪: BinarySetOperationPrecedence
+infix operator ∪=: AssignmentPrecedence
+postfix operator ′=
+infix operator ∖: BinarySetOperationPrecedence
+infix operator ∖=: AssignmentPrecedence
+infix operator ∆: BinarySetOperationPrecedence
+infix operator ∆=: AssignmentPrecedence
+infix operator ⊆: ComparisonPrecedence
+infix operator ⊈: ComparisonPrecedence
+infix operator ⊇: ComparisonPrecedence
+infix operator ⊉: ComparisonPrecedence
+infix operator ⊊: ComparisonPrecedence
+infix operator ⊋: ComparisonPrecedence

@@ -1,5 +1,5 @@
 /*
- AlternativePatterns.swift
+ LiteralPattern.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,32 +12,32 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A pattern that matches against several alternative patterns.
-///
-/// The order of the alternatives is significant. If multiple alternatives match, preference will be given to one higher in the list.
-public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
+import SDGLogicCore
+
+/// A pattern that matches an exact subsequence.
+public final class LiteralPattern<Element : Equatable> : Pattern<Element>, ExpressibleByArrayLiteral {
 
     // MARK: - Initialization
 
-    /// Creates a set of alternative patterns.
+    /// Creates a literal pattern from a collection.
     ///
     /// - Parameters:
-    ///     - alternatives: The alternative patterns.
-    public init(_ alternatives: [Pattern<Element>]) {
-        self.alternatives = alternatives
-    }
-
-    /// Creates a set of alternative elements.
-    ///
-    /// - Parameters:
-    ///     - elements: The alternative element.
-    public init(_ elements: [Element]) {
-        self.alternatives = elements.map { LiteralPattern([$0]) }
+    ///     - literal: The collection to match as a literal.
+    @_inlineable public init<C : Collection>(_ literal: C) where C.Element == Element {
+        self.literal = Array(literal)
     }
 
     // MARK: - Properties
 
-    private var alternatives: [Pattern<Element>]
+    @_versioned internal let literal: [Element]
+
+    // MARK: - ExpressibleByArrayLiteral
+
+    // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
+    /// Creates an instance from an array literal.
+    @_inlineable public convenience init(arrayLiteral: Element...) {
+        self.init(arrayLiteral)
+    }
 
     // MARK: - Pattern
 
@@ -49,13 +49,12 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
-
-        var results: [Range<C.Index>] = []
-        for alternative in alternatives {
-            results.append(contentsOf: alternative.matches(in: collection, at: location))
+    @_inlineable public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+        if let match = primaryMatch(in: collection, at: location) {
+            return [match]
+        } else {
+            return []
         }
-        return results
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
@@ -66,20 +65,15 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-        for alternative in alternatives {
-            if let match = alternative.primaryMatch(in: collection, at: location) {
-                return match
-            }
-        }
-        return nil
+    @_inlineable public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+        return literal.primaryMatch(in: collection, at: location)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    public override func reversed() -> Pattern<Element> {
-        return AlternativePatterns(alternatives.map({ $0.reversed() }))
+    @_inlineable public override func reversed() -> Pattern<Element> {
+        return LiteralPattern(literal.reversed())
     }
 }

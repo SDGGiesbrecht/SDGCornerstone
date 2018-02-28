@@ -1,5 +1,5 @@
 /*
- Intersection.swift
+ Union.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -14,25 +14,25 @@
 
 import SDGLogicCore
 
-/// An intersection of two sets.
-public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
+/// A union of two sets.
+public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
 
     // MARK: - Initialization
 
-    /// Creates an intersection from two sets.
+    /// Creates a union from two sets.
     ///
     /// - Parameters:
     ///     - a: A set.
     ///     - b: Another set.
-    public init(_ a: Base1, _ b: Base2) {
+    @_inlineable public init(_ a: Base1, _ b: Base2) {
         self.a = a
         self.b = b
     }
 
     // MARK: - Properties
 
-    private let a: Base1
-    private let b: Base2
+    @_versioned internal let a: Base1
+    @_versioned internal let b: Base2
 
     // MARK: - SetDefinition
 
@@ -46,7 +46,7 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : SetDe
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    public static func ∋ (precedingValue: Intersection, followingValue: Base1.Element) -> Bool {
-        return precedingValue.a ∋ followingValue ∧ precedingValue.b ∋ followingValue
+    @_inlineable public static func ∋ (precedingValue: Union, followingValue: Base1.Element) -> Bool {
+        return precedingValue.a ∋ followingValue ∨ precedingValue.b ∋ followingValue
     }
 }

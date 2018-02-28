@@ -12,27 +12,28 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogicCore
+import SDGControlFlow
+import SDGMathematicsCore
 
 /// A pattern that matches against repetitions of another pattern.
 public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    private init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
-        assert(count == nil ∨ count!.lowerBound.isNonNegative, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+    @_inlineable @_versioned internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+        _assert(count == nil ∨ count!.lowerBound.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString("Cannot check for a negative number of instances of a pattern. Requested count: \(count?.inInequalityNotation({ $0.inDigits() }) ?? "Any").") // [_Exempt from Test Coverage_]
+                return "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))" // [_Exempt from Test Coverage_]
             }
-        }))
+        })
 
         self.pattern = pattern
         self.count = count ?? 0 ..< Int.max
         self.consumption = consumption
     }
 
-    private static func convert(_ range: CountableClosedRange<Int>?) -> CountableRange<Int>? {
+    @_versioned internal static func convert(_ range: CountableClosedRange<Int>?) -> CountableRange<Int>? {
         if let result = range {
             return result.lowerBound ..< result.upperBound + 1
         } else {
@@ -47,7 +48,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(_ pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+    @_inlineable public convenience init(_ pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
@@ -58,7 +59,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(_ pattern: Pattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
+    @_inlineable public convenience init(_ pattern: Pattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
         self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
@@ -69,7 +70,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(_ pattern: LiteralPattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+    @_inlineable public convenience init(_ pattern: LiteralPattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
@@ -80,7 +81,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(_ pattern: LiteralPattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
+    @_inlineable public convenience init(_ pattern: LiteralPattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
         self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
@@ -91,7 +92,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(_ pattern: CompositePattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
+    @_inlineable public convenience init(_ pattern: CompositePattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
@@ -102,7 +103,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(_ pattern: CompositePattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
+    @_inlineable public convenience init(_ pattern: CompositePattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
         self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
@@ -113,7 +114,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init<C : Collection>(_ pattern: C, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) where C.Element == Element {
+    @_inlineable public convenience init<C : Collection>(_ pattern: C, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) where C.Element == Element {
         self.init(abstractPattern: LiteralPattern(pattern), count: count, consumption: consumption)
     }
 
@@ -124,19 +125,19 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init<C : Collection>(_ pattern: C, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) where C.Element == Element {
+    @_inlineable public convenience init<C : Collection>(_ pattern: C, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) where C.Element == Element {
         self.init(abstractPattern: LiteralPattern(pattern), count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
     // MARK: - Properties
 
-    private var pattern: Pattern<Element>
-    private var count: CountableRange<Int>
-    private var consumption: Consumption
+    @_versioned internal var pattern: Pattern<Element>
+    @_versioned internal var count: CountableRange<Int>
+    @_versioned internal var consumption: Consumption
 
     // MARK: - Pattern
 
-    private func checkNext<C : Collection>(in collection: C, at locations: inout [C.Index])  where C.Element == Element {
+    @_inlineable @_versioned internal func checkNext<C : Collection>(in collection: C, at locations: inout [C.Index])  where C.Element == Element {
         locations = Array(locations.map({ (location: C.Index) -> [Range<C.Index>] in
             if location ≠ collection.endIndex {
                 return pattern.matches(in: collection, at: location)
@@ -154,7 +155,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @_inlineable public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var locations: [C.Index] = [location]
 
@@ -202,7 +203,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @_inlineable public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         switch consumption {
         case .greedy:
@@ -233,7 +234,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    public override func reversed() -> Pattern<Element> {
+    @_inlineable public override func reversed() -> Pattern<Element> {
         return RepetitionPattern(pattern.reversed(), count: count, consumption: consumption)
     }
 }

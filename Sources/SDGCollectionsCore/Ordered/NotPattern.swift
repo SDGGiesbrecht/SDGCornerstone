@@ -17,7 +17,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    private init(abstractBasePattern base: Pattern<Element>) {
+    @_inlineable @_versioned internal init(abstractBasePattern base: Pattern<Element>) {
         self.base = base
     }
 
@@ -26,7 +26,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
     ///
     /// - Parameters:
     ///     - pattern: The underlying pattern to negate.
-    public convenience init(_ pattern: Pattern<Element>) {
+    @_inlineable public convenience init(_ pattern: Pattern<Element>) {
         self.init(abstractBasePattern: pattern)
     }
 
@@ -37,7 +37,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(_ pattern: LiteralPattern<Element>) {
+    @_inlineable public convenience init(_ pattern: LiteralPattern<Element>) {
         self.init(abstractBasePattern: pattern)
     }
 
@@ -48,13 +48,13 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    public convenience init(_ pattern: CompositePattern<Element>) {
+    @_inlineable public convenience init(_ pattern: CompositePattern<Element>) {
         self.init(abstractBasePattern: pattern)
     }
 
     // MARK: - Properties
 
-    private var base: Pattern<Element>
+    @_versioned internal var base: Pattern<Element>
 
     // MARK: - Pattern
 
@@ -66,7 +66,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @_inlineable public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         if base.primaryMatch(in: collection, at: location) == nil {
             return [location ..< collection.index(after: location)]
@@ -79,7 +79,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    public override func reversed() -> Pattern<Element> {
+    @_inlineable public override func reversed() -> Pattern<Element> {
         return NotPattern(base.reversed())
     }
 }

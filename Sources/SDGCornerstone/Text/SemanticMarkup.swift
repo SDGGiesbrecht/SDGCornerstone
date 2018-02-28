@@ -116,7 +116,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     ///
     /// - Warning: The removal of markup may break the intended meaning of a string. For example, “32 = 9” no longer means “three squared equals nine”.
     public func rawTextApproximation() -> StrictString {
-        return source.replacingMatches(for: ConditionalPattern(condition: { $0 ∈ reservedRange }), with: [])
+        return source.replacingMatches(for: ConditionalPattern({ $0 ∈ reservedRange }), with: [])
     }
 
     // MARK: - Addable

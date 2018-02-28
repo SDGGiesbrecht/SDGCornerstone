@@ -1,5 +1,5 @@
 /*
- AbsoluteComplement.swift
+ SymmetricDifference.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,28 +12,29 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// An absolute complement of a set.
-public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition {
+/// A symmetric difference of two sets.
+public struct SymmetricDifference<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
 
     // MARK: - Initialization
 
-    /// Creates an absolute complement from a set.
+    /// Creates a symmetric difference from two sets.
     ///
     /// - Parameters:
-    ///     - set: A set.
-    public init(_ base: Base) {
-        self.base = base
+    ///     - a: A set.
+    ///     - b: Another set.
+    @_inlineable public init(_ a: Base1, _ b: Base2) {
+        definition = (a ∖ b) ∪ (b ∖ a)
     }
 
     // MARK: - Properties
 
-    private let base: Base
+    @_versioned internal let definition: Union<RelativeComplement<Base1, Base2>, RelativeComplement<Base2, Base1>>
 
     // MARK: - SetDefinition
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
     /// The element type.
-    public typealias Element = Base.Element
+    public typealias Element = Base1.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
     /// Returns `true` if `precedingValue` contains `followingValue`.
@@ -41,7 +42,7 @@ public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element) -> Bool {
-        return precedingValue.base ∌ followingValue
+    @_inlineable public static func ∋ (precedingValue: SymmetricDifference, followingValue: Base1.Element) -> Bool {
+        return precedingValue.definition ∋ followingValue
     }
 }

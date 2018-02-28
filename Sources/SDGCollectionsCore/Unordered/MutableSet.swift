@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A mutable set.
 ///
 /// Conformance Requirements:
@@ -178,10 +180,8 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∩ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
-        var result = precedingValue
-        result ∩= followingValue
-        return result
+    @_inlineable public static func ∩ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+        return nonmutatingVariant(of: ∩=, on: precedingValue, with: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
@@ -190,10 +190,8 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∩ (precedingValue: Self, followingValue: Self) -> Self {
-        var result = precedingValue
-        result ∩= followingValue
-        return result
+    @_inlineable public static func ∩ (precedingValue: Self, followingValue: Self) -> Self {
+        return nonmutatingVariant(of: ∩=, on: precedingValue, with: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
@@ -202,7 +200,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∩= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+    @_inlineable public static func ∩= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         var result = Self()
         for element in followingValue where element ∈ precedingValue {
             result.insert(element)
@@ -216,10 +214,8 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∪ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
-        var result = precedingValue
-        result ∪= followingValue
-        return result
+    @_inlineable public static func ∪ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+        return nonmutatingVariant(of: ∪=, on: precedingValue, with: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
@@ -228,10 +224,8 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∪ (precedingValue: Self, followingValue: Self) -> Self {
-        var result = precedingValue
-        result ∪= followingValue
-        return result
+    @_inlineable public static func ∪ (precedingValue: Self, followingValue: Self) -> Self {
+        return nonmutatingVariant(of: ∪=, on: precedingValue, with: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
@@ -240,7 +234,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∪= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+    @_inlineable public static func ∪= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         for element in followingValue {
             precedingValue.insert(element)
         }
@@ -252,10 +246,8 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    public static func ∖ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
-        var result = precedingValue
-        result ∖= followingValue
-        return result
+    @_inlineable public static func ∖ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+        return nonmutatingVariant(of: ∖=, on: precedingValue, with: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
@@ -264,10 +256,8 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    public static func ∖ (precedingValue: Self, followingValue: Self) -> Self {
-        var result = precedingValue
-        result ∖= followingValue
-        return result
+    @_inlineable public static func ∖ (precedingValue: Self, followingValue: Self) -> Self {
+        return nonmutatingVariant(of: ∖=, on: precedingValue, with: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
@@ -276,7 +266,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    public static func ∖= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+    @_inlineable public static func ∖= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         for element in followingValue {
             precedingValue.remove(element)
         }
@@ -288,10 +278,8 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∆ (precedingValue: Self, followingValue: Self) -> Self {
-        var result = precedingValue
-        result ∆= followingValue
-        return result
+    @_inlineable public static func ∆ (precedingValue: Self, followingValue: Self) -> Self {
+        return nonmutatingVariant(of: ∆=, on: precedingValue, with: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
@@ -300,11 +288,64 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∆= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func ∆= (precedingValue: inout Self, followingValue: Self) {
         var result = precedingValue
         result ∪= followingValue
         result ∖= precedingValue ∩ followingValue
         precedingValue = result
+    }
+
+    // MARK: - SetAlgebra
+
+    /// Returns the intersection of the two sets.
+    ///
+    /// - Parameters:
+    ///     - other: Another set.
+    @_transparent public func intersection(_ other: Self) -> Self {
+        return self ∩ other
+    }
+
+    /// Sets `precedingValue` to the intersection of the two sets.
+    ///
+    /// - Parameters:
+    ///     - other: Another set.
+    @_transparent public mutating func formIntersection(_ other: Self) {
+        self ∩= other
+    }
+
+    /// Returns the union of the two sets.
+    ///
+    /// - Parameters:
+    ///     - other: Another set.
+    @_transparent public func union(_ other: Self) -> Self {
+        return self ∪ other
+    }
+
+    /// Sets `precedingValue` to the union of the two sets.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: A set.
+    ///     - other: Another set.
+    @_transparent public mutating func formUnion(_ other: Self) {
+        self ∪= other
+    }
+
+    /// Returns the symmetric difference of `followingValue` in `precedingValue`.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: A set.
+    ///     - other: Another set.
+    @_transparent public func symmetricDifference(_ other: Self) -> Self {
+        return self ∆ other
+    }
+
+    /// Sets `precedingValue` to the symmetric difference of the two sets.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The set to subtract from.
+    ///     - other: The set to subtract.
+    @_transparent public mutating func formSymmetricDifference(_ other: Self) {
+        self ∆= other
     }
 }
 
@@ -317,10 +358,8 @@ extension MutableSet where Self : FiniteSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∆ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
-        var result = precedingValue
-        result ∆= followingValue
-        return result
+    @_inlineable public static func ∆ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+        return nonmutatingVariant(of: ∆=, on: precedingValue, with: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
@@ -329,7 +368,7 @@ extension MutableSet where Self : FiniteSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∆= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+    @_inlineable public static func ∆= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         var result = precedingValue
         result ∪= followingValue
         result ∖= precedingValue ∩ followingValue

@@ -21,12 +21,12 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     ///
     /// - Parameters:
     ///     - condition: The condition an element must meet in order to match.
-    public init(condition: @escaping (Element) -> Bool) {
+    @_inlineable public init(_ condition: @escaping (Element) -> Bool) {
         self.condition = condition
     }
     // MARK: - Properties
 
-    private var condition: (Element) -> Bool
+    @_versioned internal var condition: (Element) -> Bool
 
     // MARK: - Pattern
 
@@ -38,7 +38,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @_inlineable public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         if condition(collection[location]) {
             return [location ..< collection.index(after: location)]
@@ -51,7 +51,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    public override func reversed() -> Pattern<Element> {
+    @_inlineable public override func reversed() -> Pattern<Element> {
         return self
     }
 }

@@ -122,7 +122,7 @@ class RegressionTests : TestCase {
         // Untracked
 
         let glitch = StrictString("@version 8.0.0")
-        let components = glitch.components(separatedBy: ConditionalPattern(condition: { $0 ∈ ["#", "%"] as Set<UnicodeScalar> }))
+        let components = glitch.components(separatedBy: ConditionalPattern({ $0 ∈ ["#", "%"] as Set<UnicodeScalar> }))
         XCTAssert(¬components.isEmpty, "Empty result of splitting collection at matches.")
     }
 

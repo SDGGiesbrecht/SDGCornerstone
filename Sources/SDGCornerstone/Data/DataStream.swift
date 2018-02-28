@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGCollectionsCore
+
 /// A data stream.
 ///
 /// Data streams are used to combine several distinct units of data into a single stream and separate the stream back into distinct units later, such as after transfering the stream over a network connection.

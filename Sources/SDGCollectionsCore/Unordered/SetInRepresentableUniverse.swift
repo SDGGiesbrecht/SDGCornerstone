@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A set small enough to reasonably iterate over.
 ///
 /// Conformance Requirements:
@@ -47,10 +49,8 @@ extension SetInRepresentableUniverse {
     ///
     /// - Parameters:
     ///     - operand: The set.
-    public static postfix func ′(operand: Self) -> Self {
-        var result = operand
-        result′=
-        return result
+    @_inlineable public static postfix func ′(operand: Self) -> Self {
+        return nonmutatingVariant(of: ′=, on: operand)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′=_]
@@ -58,7 +58,7 @@ extension SetInRepresentableUniverse {
     ///
     /// - Parameters:
     ///     - operand: The set.
-    public static postfix func ′=(operand: inout Self) {
+    @_inlineable public static postfix func ′=(operand: inout Self) {
         operand = universe ∖ operand
     }
 }

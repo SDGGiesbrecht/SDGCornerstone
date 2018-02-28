@@ -1,5 +1,5 @@
 /*
- SymmetricDifference.swift
+ RelativeComplement.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,29 +12,29 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A symmetric difference of two sets.
-public struct SymmetricDifference<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
+/// A relative complement of one set in another.
+public struct RelativeComplement<Minuend : SetDefinition, Subtrahend : SetDefinition> : SetDefinition where Minuend.Element == Subtrahend.Element {
 
     // MARK: - Initialization
 
-    /// Creates a symmetric difference from two sets.
+    /// Creates a relative complement from two sets.
     ///
     /// - Parameters:
     ///     - a: A set.
     ///     - b: Another set.
-    public init(_ a: Base1, _ b: Base2) {
-        definition = (a ∖ b) ∪ (b ∖ a)
+    @_inlineable public init(of subtrahend: Subtrahend, in minuend: Minuend) {
+        definition = minuend ∩ subtrahend′
     }
 
     // MARK: - Properties
 
-    private let definition: Union<RelativeComplement<Base1, Base2>, RelativeComplement<Base2, Base1>>
+    @_versioned internal let definition: Intersection<Minuend, AbsoluteComplement<Subtrahend>>
 
     // MARK: - SetDefinition
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
     /// The element type.
-    public typealias Element = Base1.Element
+    public typealias Element = Minuend.Element
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
     /// Returns `true` if `precedingValue` contains `followingValue`.
@@ -42,7 +42,7 @@ public struct SymmetricDifference<Base1 : SetDefinition, Base2 : SetDefinition> 
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    public static func ∋ (precedingValue: SymmetricDifference, followingValue: Base1.Element) -> Bool {
+    @_inlineable public static func ∋ (precedingValue: RelativeComplement, followingValue: Minuend.Element) -> Bool {
         return precedingValue.definition ∋ followingValue
     }
 }

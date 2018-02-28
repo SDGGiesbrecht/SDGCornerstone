@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 // MARK: - Coding Errors
 
 /// Throws a precondition failure indicating that the primitive method in which it is called has not been overridden.
@@ -22,10 +24,7 @@
 ///     - line: The line number. (Provided by default.)
 public func primitiveMethod(_ method: String = #function, file: StaticString = #file, line: UInt = #line) -> Never {
     preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-        switch localization {
-        case .englishCanada: // [_Exempt from Test Coverage_]
-            return StrictString("The primitive method “\(method)” has not been overridden.")
-        }
+        return StrictString(_primitiveMethodMessage(for: method)(localization))
     }), file: file, line: line)
 }
 
@@ -40,10 +39,7 @@ public func primitiveMethod(_ method: String = #function, file: StaticString = #
 ///     - column: The column number. (Provided by default.)
 public func unreachable(function: String = #function, file: StaticString = #file, line: UInt = #line, column: UInt = #column) -> Never {
     preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-        switch localization {
-        case .englishCanada:
-            return StrictString("Something is being used in a way that violates preconditions. Line \(line.inDigits()) (column \(column.inDigits())) of “\(function)” in “\(file)” ought to be unreachable.")
-        }
+        return StrictString(_unreachableMessage(function: function, file: file, line: line, column: column)(localization))
     }), file: file, line: line)
 }
 

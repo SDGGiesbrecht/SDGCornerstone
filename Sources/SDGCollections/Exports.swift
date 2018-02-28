@@ -13,3 +13,66 @@
  */
 
 @_exported import SDGCollectionsCore
+
+// [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
+
+// SDGLogicCore
+infix operator ≠: ComparisonPrecedence
+prefix operator ¬
+postfix operator ¬=
+infix operator ∧: LogicalConjunctionPrecedence
+infix operator ∧=: AssignmentPrecedence
+infix operator ∨: LogicalDisjunctionPrecedence
+infix operator ∨=: AssignmentPrecedence
+
+// SDGMathematicsCore
+infix operator ≤: ComparisonPrecedence
+infix operator ≥: ComparisonPrecedence
+infix operator ≈: ComparisonPrecedence
+infix operator −: AdditionPrecedence
+prefix operator −
+infix operator −=: AssignmentPrecedence
+postfix operator −=
+infix operator ±: AdditionPrecedence
+prefix operator |
+postfix operator |
+infix operator ×: MultiplicationPrecedence
+infix operator ×=: AssignmentPrecedence
+infix operator ÷: MultiplicationPrecedence
+infix operator ÷=: AssignmentPrecedence
+precedencegroup ExponentPrecedence {
+    associativity: right
+    higherThan: MultiplicationPrecedence
+}
+infix operator ↑: ExponentPrecedence
+infix operator ↑=: AssignmentPrecedence
+prefix operator √
+postfix operator √=
+postfix operator °
+postfix operator ′
+postfix operator ′′
+
+// SDGCollectionsCore
+infix operator ∈: ComparisonPrecedence
+infix operator ∉: ComparisonPrecedence
+infix operator ∋: ComparisonPrecedence
+infix operator ∌: ComparisonPrecedence
+precedencegroup BinarySetOperationPrecedence {
+    lowerThan: RangeFormationPrecedence
+    higherThan: ComparisonPrecedence
+}
+infix operator ∩: BinarySetOperationPrecedence
+infix operator ∩=: AssignmentPrecedence
+infix operator ∪: BinarySetOperationPrecedence
+infix operator ∪=: AssignmentPrecedence
+postfix operator ′=
+infix operator ∖: BinarySetOperationPrecedence
+infix operator ∖=: AssignmentPrecedence
+infix operator ∆: BinarySetOperationPrecedence
+infix operator ∆=: AssignmentPrecedence
+infix operator ⊆: ComparisonPrecedence
+infix operator ⊈: ComparisonPrecedence
+infix operator ⊇: ComparisonPrecedence
+infix operator ⊉: ComparisonPrecedence
+infix operator ⊊: ComparisonPrecedence
+infix operator ⊋: ComparisonPrecedence

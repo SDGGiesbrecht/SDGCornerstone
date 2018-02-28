@@ -172,7 +172,7 @@ XCTAssertEqual(originalOwner.property.value,
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let pattern = CompositePattern([
     LiteralPattern([1]), // 1
-    ConditionalPattern(condition: { $0.isEven }), // 2
+    ConditionalPattern({ $0.isEven }), // 2
     AlternativePatterns([
         LiteralPattern([30, 40]), // (∅)
         LiteralPattern([3, 4]) // 3, 4

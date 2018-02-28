@@ -12,48 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematicsCore
-import SDGCollectionsCore
-
-/// A member of the `Array` family: `Array`, `ArraySlice` or `ContiguousArray`.
-public protocol ArrayFamily : CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible, ExpressibleByArrayLiteral, MutableCollection, RangeReplaceableCollection, RandomAccessCollection {
-
-}
-
 // [_Workaround: Should only conform to PropertyListValue when values conform to `PropertyListValue`. Currently not constrainable. (Swift 4.0.3)_]
-extension Array : ArrayFamily, PropertyListValue {}
-extension ArraySlice : ArrayFamily {}
-extension ContiguousArray : ArrayFamily {}
-
-extension ArrayFamily where Element : RangeReplaceableCollection {
-    // MARK: - where Element : RangeReplaceableCollection
-
-    /// Fills the collections in the array so that all of them have the same count.
-    ///
-    /// - Parameters:
-    ///     - element: The element with which to fill the collections.
-    ///     - direction: The direction from which to fill the collections.
-    public mutating func equalizeCounts(byFillingWith element: Element.Element, from direction: FillDirection) {
-        let count = reduce(0) { Swift.max($0, $1.count) }
-        let mapped = map { (collection: Element) -> Element in
-            var mutable = collection
-            mutable.fill(to: count, with: element, from: direction)
-            return mutable
-        }
-        self = Self(mapped)
-    }
-
-    /// Returns the same array of collections, but with the shorter ones filled so that all of them have the same count.
-    ///
-    /// - Parameters:
-    ///     - element: The element with which to fill the collections.
-    ///     - direction: The direction from which to fill the collections.
-    public func countsEqualized(byFillingWith element: Element.Element, from direction: FillDirection) -> Self {
-        var result = self
-        result.equalizeCounts(byFillingWith: element, from: direction)
-        return result
-    }
-}
+extension Array : PropertyListValue {}
 
 extension Array where Element : StringFamily {
     // MARK: - where Element : StringFamily

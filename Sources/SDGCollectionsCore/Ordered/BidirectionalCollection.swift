@@ -12,6 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+extension BidirectionalCollection {
+
+    // [_Define Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+    /// Returns the index immediately before the specified index.
+    ///
+    /// - Parameters:
+    ///     - i: The following index.
+}
+
 extension BidirectionalCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 
@@ -47,7 +56,7 @@ extension BidirectionalCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func lastMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+    @_inlineable public func lastMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         let searchArea = searchRange ?? bounds
 
         guard let range = reversed().firstMatch(for: pattern.reversed(), in: backward(searchArea))?.range else {
@@ -85,10 +94,18 @@ extension BidirectionalCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func lastMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+    @_transparent public func lastMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return lastMatch(for: pattern as Pattern<Element>, in: searchRange)
     }
 
+    @_inlineable @_versioned internal func _lastMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Element == Self.Element {
+        let searchArea = searchRange ?? bounds
+
+        guard let range = reversed().firstMatch(for: pattern.reversed(), in: backward(searchArea))?.range else {
+            return nil
+        }
+        return PatternMatch(range: forward(range), in: self)
+    }
     // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
     /// Returns the last match for `pattern` in the specified subrange.
     ///
@@ -118,8 +135,8 @@ extension BidirectionalCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func lastMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Element == Self.Element {
-        return lastMatch(for: LiteralPattern(pattern), in: searchRange)
+    @_transparent public func lastMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Element == Self.Element {
+        return _lastMatch(for: pattern, in: searchRange)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
@@ -151,11 +168,11 @@ extension BidirectionalCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func lastMatch(for pattern: Self, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
-        return lastMatch(for: LiteralPattern(pattern), in: searchRange)
+    @_transparent public func lastMatch(for pattern: Self, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+        return _lastMatch(for: pattern, in: searchRange)
     }
 
-    private func _commonSuffix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+    @_inlineable @_versioned internal func _commonSuffix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return PatternMatch(range: forward(reversed().commonPrefix(with: other.reversed()).range), in: self)
     }
     // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
@@ -163,7 +180,7 @@ extension BidirectionalCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - other: The other collection
-    public func commonSuffix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+    @_transparent public func commonSuffix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return _commonSuffix(with: other)
     }
 
@@ -172,7 +189,7 @@ extension BidirectionalCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - other: The other collection
-    public func commonSuffix(with other: Self) -> PatternMatch<Self> {
+    @_transparent public func commonSuffix(with other: Self) -> PatternMatch<Self> {
         return _commonSuffix(with: other)
     }
 }

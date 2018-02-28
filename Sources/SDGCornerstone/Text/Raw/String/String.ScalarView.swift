@@ -23,7 +23,7 @@ extension String.UnicodeScalarView : UnicodeScalarView {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    public func firstMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<String.ScalarView>? {
+    public func firstMatch(for pattern: SDGCollectionsCore.Pattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<String.ScalarView>? {
         let searchArea = searchRange ?? bounds
 
         // [_Workaround: This is redundant, but solves performance until generics can be forcibly specialized. (Swift 4.0.3)_]
