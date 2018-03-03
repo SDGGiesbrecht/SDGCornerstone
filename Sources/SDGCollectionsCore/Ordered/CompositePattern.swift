@@ -63,11 +63,35 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
         return endIndices.map { location ..< $0 }
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
+    /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    @_inlineable public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+
+        var endIndices: [C.Index] = [location]
+        for component in components {
+            if endIndices.isEmpty {
+                // No matches
+                return nil
+            } else {
+                // Continue
+                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
+            }
+        }
+
+        return endIndices.first.map { location ..< $0 }
+    }
+
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> Pattern<Element> {
+    @_inlineable public override func reversed() -> CompositePattern<Element> {
         return CompositePattern(components.map({ $0.reversed() }).reversed())
     }
 }

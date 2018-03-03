@@ -1,5 +1,5 @@
 /*
- StrictString.ScalarView.Index.swift
+ StringScalarViewIndex.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,22 +12,32 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension String.UnicodeScalarView.Index {
+import SDGControlFlow
+
+extension String.ScalarView.Index {
 
     // MARK: - Conversions
 
-    /// Returns the position in the given view of clusters that corresponds exactly to this index.
-    public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index? {
-        return samePosition(in: String(StrictString(clusters)))
-    }
-
     /// Returns the position of the cluster that contains this index.
-    public func cluster(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
-        return cluster(in: String(StrictString(clusters)).clusters)
+    public func cluster(in clusters: String.ClusterView) -> String.ClusterView.Index {
+        let string = String(clusters)
+
+        var copy = self
+        var position = samePosition(in: string)
+
+        while position == nil {
+            copy = string.unicodeScalars.index(before: copy)
+            position = copy.samePosition(in: string)
+        }
+
+        guard let result = copy.samePosition(in: string) else {
+            _unreachable()
+        }
+        return result
     }
 
     /// Returns the position in the given view of lines that corresponds exactly to this index.
-    public func samePosition(in lines: LineView<StrictString>) -> LineView<StrictString>.Index? {
+    public func samePosition(in lines: LineView<String>) -> LineView<String>.Index? {
         let line = self.line(in: lines)
         guard let start = line.start else {
             // End index
@@ -41,7 +51,7 @@ extension String.UnicodeScalarView.Index {
     }
 
     /// Returns the position of the line that contains this index.
-    public func line(in lines: LineView<StrictString>) -> LineView<StrictString>.Index {
+    public func line(in lines: LineView<String>) -> LineView<String>.Index {
         return lines.line(for: self)
     }
 }

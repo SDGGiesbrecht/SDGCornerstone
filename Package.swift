@@ -40,6 +40,9 @@ let package = Package(
         .library(name: "SDGCollections", targets: ["SDGCollections"]),
         .library(name: "SDGCollectionsTestUtilities", targets: ["SDGCollectionsTestUtilities"]),
 
+        .library(name: "SDGText", targets: ["SDGText"]),
+        .library(name: "SDGTextTestUtilities", targets: ["SDGTextTestUtilities"]),
+
         .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
         .library(name: "SDGPersistenceTestUtilities", targets: ["SDGPersistenceTestUtilities"]),
 
@@ -50,6 +53,7 @@ let package = Package(
         .library(name: "SDGLogicCore", targets: ["SDGLogicCore"]),
         .library(name: "SDGMathematicsCore", targets: ["SDGMathematicsCore"]),
         .library(name: "SDGCollectionsCore", targets: ["SDGCollectionsCore"]),
+        .library(name: "SDGTextCore", targets: ["SDGTextCore"]),
 
         // Process properties.
 
@@ -64,6 +68,7 @@ let package = Package(
             "SDGBinaryData",
             "SDGMathematics",
             "SDGCollections",
+            "SDGText",
             "SDGPersistence",
             "SDGProcessProperties"
             ]),
@@ -72,6 +77,7 @@ let package = Package(
             "SDGBinaryDataTestUtilities",
             "SDGMathematicsTestUtilities",
             "SDGCollectionsTestUtilities",
+            "SDGTextTestUtilities",
             "SDGPersistenceTestUtilities",
 
             "SDGCornerstone",
@@ -102,12 +108,17 @@ let package = Package(
         .target(name: "SDGCollections", dependencies: ["SDGCollectionsCore"]),
         .target(name: "SDGCollectionsTestUtilities", dependencies: ["SDGCollections", "SDGTesting"]),
 
+        .target(name: "SDGText", dependencies: ["SDGTextCore"]),
+        .target(name: "SDGTextTestUtilities", dependencies: ["SDGText", "SDGTesting"]),
+
         .target(name: "SDGPersistence"),
         .target(name: "SDGPersistenceTestUtilities", dependencies: ["SDGPersistence", "SDGTesting"]),
 
         .target(name: "SDGProcessProperties", dependencies: ["SDGControlFlow"]),
 
-        .target(name: "SDGTesting", dependencies: []),
+        .target(name: "SDGTesting", dependencies: [
+            "SDGMathematicsCore",
+            ]),
 
         // Core subsets.
 
@@ -124,6 +135,9 @@ let package = Package(
             "SDGControlFlow",
             "SDGLogicCore",
             "SDGMathematicsCore"
+            ]),
+        .target(name: "SDGTextCore", dependencies: [
+            "SDGCollectionsCore"
             ]),
 
         // Internal tests.
@@ -149,12 +163,21 @@ let package = Package(
         .testTarget(name: "SDGCollectionsTests", dependencies: [
             "SDGCollectionsTestUtilities", "SDGXCTestUtilities"
             ]),
+        .testTarget(name: "SDGTextTests", dependencies: [
+            "SDGTextTestUtilities", "SDGXCTestUtilities"
+            ]),
         .testTarget(name: "SDGPersistenceTests", dependencies: [
             "SDGPersistence", "SDGXCTestUtilities",
             ]),
         .testTarget(name: "SDGProcessPropertiesTests", dependencies: [
             "SDGProcessProperties", "SDGXCTestUtilities",
             "SDGLogic"
+            ]),
+
+        .target(name: "performance‐tests", dependencies: [
+            "SDGTesting",
+
+            "SDGTextCore"
             ])
     ]
 )

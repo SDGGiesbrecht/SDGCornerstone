@@ -234,7 +234,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> Pattern<Element> {
+    @_inlineable public override func reversed() -> RepetitionPattern<Element> {
         return RepetitionPattern(pattern.reversed(), count: count, consumption: consumption)
     }
 }

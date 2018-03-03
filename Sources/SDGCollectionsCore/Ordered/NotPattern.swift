@@ -75,11 +75,28 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
         }
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
+    /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    @_inlineable public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+
+        if base.primaryMatch(in: collection, at: location) == nil {
+            return location ..< collection.index(after: location)
+        } else {
+            return nil
+        }
+    }
+
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> Pattern<Element> {
+    @_inlineable public override func reversed() -> NotPattern<Element> {
         return NotPattern(base.reversed())
     }
 }

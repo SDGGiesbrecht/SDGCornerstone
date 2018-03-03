@@ -172,6 +172,50 @@ extension BidirectionalCollection where Element : Equatable {
         return _lastMatch(for: pattern, in: searchRange)
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @_inlineable public func hasSuffix(_ pattern: Pattern<Element>) -> Bool {
+        // This is faster than on a non‐bidirectional collection,
+        // because “reversed()” returns a ReversedCollection, which is lazy,
+        // instead of reallocating into an Array.
+        let backwards = reversed()
+        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @_transparent public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
+        return hasSuffix(pattern as Pattern<Element>)
+    }
+
+    @_inlineable @_versioned internal func _hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
+        let backwards = reversed()
+        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+    }
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @_transparent public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
+        return _hasSuffix(pattern)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    /// Returns `true` if `self` begins with `pattern`.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @_transparent public func hasSuffix(_ pattern: Self) -> Bool {
+        return _hasSuffix(pattern)
+    }
+
     @_inlineable @_versioned internal func _commonSuffix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return PatternMatch(range: forward(reversed().commonPrefix(with: other.reversed()).range), in: self)
     }

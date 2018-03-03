@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension TextOutputStream {
+extension TextOutputStreamable {
 
     // [_Define Documentation: SDGCornerstone.TextOutputStreamable.write(to:)_]
     /// Writes a textual representation of this instance into the given output stream.

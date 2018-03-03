@@ -12,15 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import SDGCornerstone
-@_exported import SDGTesting
-
-@_exported import SDGLogicTestUtilities
-@_exported import SDGBinaryDataTestUtilities
-@_exported import SDGMathematicsTestUtilities
-@_exported import SDGCollectionsTestUtilities
-@_exported import SDGTextTestUtilities
-@_exported import SDGPersistenceTestUtilities
+@_exported import SDGTextCore
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

@@ -13,16 +13,16 @@
  */
 
 /// A line in a string.
-public struct Line<Base : StringFamily> {
+public struct Line<Base : StringFamilyCore> {
 
     /// Creates a line.
-    public init(line: Base, newline: Base) {
+    @_inlineable public init(line: Base, newline: Base) {
         self.line = line.scalars[line.scalars.bounds]
         self.newline = newline.scalars[newline.scalars.bounds]
     }
 
     /// Creates a line.
-    public init(line: Base.ScalarView.SubSequence, newline: Base.ScalarView.SubSequence) {
+    @_inlineable public init(line: Base.ScalarView.SubSequence, newline: Base.ScalarView.SubSequence) {
         self.line = line
         self.newline = newline
     }

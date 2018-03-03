@@ -1,5 +1,5 @@
 /*
- LineView.Index.swift
+ LineViewIndex.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,12 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A line view index.
 public struct LineIndex : Comparable, Equatable {
 
     // MARK: - Initialization
 
-    internal init(start: String.ScalarView.Index, newline: Range<String.ScalarView.Index>? = nil) {
+    @_versioned internal init(start: String.ScalarView.Index, newline: Range<String.ScalarView.Index>? = nil) {
         self.start = start
         cache.newline = newline
     }
@@ -25,26 +27,28 @@ public struct LineIndex : Comparable, Equatable {
     private init() {
         start = nil
     }
-    internal static func endIndex() -> LineIndex {
+    @_versioned internal static func endIndex() -> LineIndex {
         return LineIndex()
     }
 
     // MARK: - Properties
 
-    internal class Cache {
+    @_versioned internal class Cache {
         fileprivate init() {}
-        internal var newline: Range<String.ScalarView.Index>?
+        @_versioned internal var newline: Range<String.ScalarView.Index>?
     }
-    internal var cache = Cache()
+    @_versioned internal var cache = Cache()
 
-    internal let start: String.ScalarView.Index? // nil indicates the end index
+    @_versioned internal let start: String.ScalarView.Index? // nil indicates the end index
 
-    internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? where S.Index == String.ScalarView.Index {
+    @_specialize(exported: true, where S == StrictString.ScalarView)
+    @_specialize(exported: true, where S == String.ScalarView)
+    @_inlineable @_versioned internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? where S.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See LineView. (Swift 4.0.3)_] */ {
         guard let startIndex = start else {
             return nil
         }
         return cached(in: &cache.newline) {
-            return scalars.firstMatch(for: LineView<String>.newlinePattern, in: startIndex ..< scalars.endIndex)?.range ?? scalars.endIndex ..< scalars.endIndex
+            return scalars.firstMatch(for: CharacterSet.newlinePattern, in: startIndex ..< scalars.endIndex)?.range ?? scalars.endIndex ..< scalars.endIndex
         }
     }
 

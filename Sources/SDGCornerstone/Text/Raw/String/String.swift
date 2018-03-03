@@ -16,13 +16,6 @@ import Foundation
 
 extension String : PropertyListValue, StringFamily {
 
-    // MARK: - Initialization
-
-    /// Creates a string from a `StrictString`.
-    public init(_ string: StrictString) {
-        self = string.string
-    }
-
     // MARK: - FileConvertible
 
     // [_Inherit Documentation: SDGCornerstone.FileConvertible.init(file:origin:)_]
@@ -66,35 +59,5 @@ extension String : PropertyListValue, StringFamily {
             unreachable()
         }
         return result
-    }
-
-    // MARK: - StringFamily
-
-    /// A view of a string’s contents as a collection of Unicode scalars.
-    public typealias ScalarView = String.UnicodeScalarView
-
-    /// A view of a string’s contents as a collection of extended grapheme clusters.
-    public typealias ClusterView = String
-
-    // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]
-    /// A view of a string’s contents as a collection of Unicode scalars.
-    public var scalars: ScalarView {
-        get {
-            return unicodeScalars
-        }
-        set {
-            unicodeScalars = newValue
-        }
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.StringFamily.clusters_]
-    /// A view of a string’s contents as a collection of extended grapheme clusters.
-    public var clusters: ClusterView {
-        get {
-            return self
-        }
-        set {
-            self = newValue
-        }
     }
 }

@@ -49,13 +49,3 @@ extension Collection where IndexDistance : WholeArithmetic {
         return self[randomIndex(fromRandomizer: randomizer)]
     }
 }
-
-extension Collection where Element == UnicodeScalar {
-    // MARK: - where Element == UnicodeScalar
-
-    // [_Inherit Documentation: SDGCornerstone.String.isMultiline_]
-    /// Whether or not the string contains multiple lines.
-    public var isMultiline: Bool {
-        return contains(where: { $0 ∈ CharacterSet.newlines })
-    }
-}

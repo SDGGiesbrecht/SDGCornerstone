@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematicsCore
+import SDGControlFlow
 
 // MARK: - Encoding
 
@@ -92,9 +92,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     /// Returns a string formed by superscripting the instance.
     public func superscripted() -> SemanticMarkup {
-        var result = self
-        result.superscript()
-        return result
+        return nonmutatingVariant(of: SemanticMarkup.superscript, on: self)
     }
 
     /// Subscripts the string.
@@ -105,9 +103,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     /// Returns a string formed by subscripting the instance.
     public func subscripted() -> SemanticMarkup {
-        var result = self
-        result.subscript()
-        return result
+        return nonmutatingVariant(of: SemanticMarkup.subscript, on: self)
     }
 
     // MARK: - Output
@@ -179,9 +175,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: StrictString.self, convert: { SemanticMarkup($0) }, debugErrorDescription: { _ in
-            unreachable()
-        })
+        self.init(try StrictString(from: decoder))
     }
 
     // MARK: - Encodable
@@ -192,7 +186,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
-        try encode(to: encoder, via: source)
+        try source.encode(to: encoder)
     }
 
     // MARK: - Equatable
@@ -236,25 +230,25 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
     /// Creates a new instance of a collection containing the elements of a sequence.
-    public init<S : Sequence>(_ elements: S) where S.Element == Element {
+    @_inlineable public init<S : Sequence>(_ elements: S) where S.Element == Element {
         source = StrictString(elements)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
     /// Appends the contents of the sequence to the end of the collection.
-    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == UnicodeScalar {
+    @_inlineable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == UnicodeScalar {
         source.append(contentsOf: newElements)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
-    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == UnicodeScalar {
+    @_inlineable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == UnicodeScalar {
         source.insert(contentsOf: newElements, at: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
-    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
+    @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
         source.replaceSubrange(subrange, with: newElements)
     }
 }

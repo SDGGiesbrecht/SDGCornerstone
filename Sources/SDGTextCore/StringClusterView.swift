@@ -1,5 +1,5 @@
 /*
- Range.swift
+ StringClusterView.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,10 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension RangeFamily {
+extension String : ExtendedGraphemeClusterView {
 
-    /// Returns the range in inequality notation. (eg. “1 ≤ x ≤ 10”)
-    public func inInequalityNotation(_ describe: (_ bound: Bound) -> StrictString) -> StrictString {
-        return StrictString("\(describe(lowerBound)) ≤ x \(Self.hasClosedUpperBound ? "≤" : "<") \(describe(upperBound))")
-    }
 }

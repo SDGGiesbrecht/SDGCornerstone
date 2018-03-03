@@ -15,6 +15,7 @@
 import Foundation
 import XCTest
 
+@testable import SDGTextCore
 @testable import SDGCornerstone
 
 class InternalTests : TestCase {

@@ -1,5 +1,5 @@
 /*
- Range.swift
+ Collection.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,10 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension RangeFamily {
+extension Collection where Element == UnicodeScalar {
+    // MARK: - where Element == UnicodeScalar
 
-    /// Returns the range in inequality notation. (eg. “1 ≤ x ≤ 10”)
-    public func inInequalityNotation(_ describe: (_ bound: Bound) -> StrictString) -> StrictString {
-        return StrictString("\(describe(lowerBound)) ≤ x \(Self.hasClosedUpperBound ? "≤" : "<") \(describe(upperBound))")
+    // [_Inherit Documentation: SDGCornerstone.String.isMultiline_]
+    /// Whether or not the string contains multiple lines.
+    @_inlineable public var isMultiline: Bool {
+        return contains(where: { $0 ∈ CharacterSet.newlines })
     }
 }

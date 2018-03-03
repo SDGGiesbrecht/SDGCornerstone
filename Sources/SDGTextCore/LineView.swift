@@ -12,50 +12,38 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-
-import SDGLogicCore
+import SDGControlFlow
 
 /// A view of a string’s contents as a collection of lines.
-public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Index == String.UnicodeScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.3)_] */ {
+public struct LineView<Base : StringFamilyCore> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Index == String.UnicodeScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.3)_] */ {
 
     // MARK: - Initialization
 
-    internal init(_ base: Base) {
+    @_inlineable @_versioned internal init(_ base: Base) {
         self.base = base
         startIndex = Index(start: base.scalars.startIndex)
     }
 
-    // MARK: - Parsing
-
-    /* [_Workaround: This ought to be simpler, but the generics make it incredibly slow. Once there is a stable way to @specialize the patterns, this should be re‐tried, and the replacement functions at the bottom of this file removed. (Swift 4.0.3)_]
-     internal static var newlinePattern: Pattern<UnicodeScalar> {
-     return AlternativePatterns([
-     LiteralPattern("\u{D}\u{A}".scalars), // CR + LF
-     ConditionalPattern(condition: { $0 ∈ CharacterSet.newlines })
-     ])
-     }*/
-
     // MARK: - Properties
 
-    internal var base: Base
+    @_versioned internal var base: Base
 
     // MARK: - Conversions
 
-    internal func line(for scalar: String.ScalarView.Index) -> LineIndex {
+    @_inlineable @_versioned internal func line(for scalar: String.ScalarView.Index) -> LineIndex {
         if scalar == base.scalars.endIndex {
             return endIndex
         }
-        guard var previousNewline = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< scalar) else {
+        guard var previousNewline = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< scalar) else {
             return startIndex
         }
 
         var encounteredNewline: Range<String.ScalarView.Index>?
-        if let newline = LineView.newlinePattern.primaryMatch(in: base.scalars, at: previousNewline.range.lowerBound),
+        if let newline = CharacterSet.newlinePattern.primaryMatch(in: base.scalars, at: previousNewline.range.lowerBound),
             newline.contains(scalar) {
             // Between CR and LF
 
-            guard let actualPreviousNewline = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< newline.lowerBound) else {
+            guard let actualPreviousNewline = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< newline.lowerBound) else {
                 return startIndex
             }
 
@@ -73,24 +61,24 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///
     /// - Parameters:
     ///     - i: The following index.
-    public func index(before i: LineIndex) -> LineIndex {
+    @_inlineable public func index(before i: LineIndex) -> LineIndex {
 
         let newline: Range<String.ScalarView.Index>
         if i == endIndex {
             newline = base.scalars.endIndex ..< base.scalars.endIndex
         } else {
-            guard let found = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< (i.start ?? base.scalars.endIndex))?.range else {
-                preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+            guard let found = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< (i.start ?? base.scalars.endIndex))?.range else {
+                _preconditionFailure({ (localization: _APILocalization) -> String in
                     switch localization {
                     case .englishCanada: // [_Exempt from Test Coverage_]
                         return "No index precedes the start index."
                     }
-                }))
+                })
             }
             newline = found
         }
 
-        guard let previousNewline = base.scalars.lastMatch(for: LineView.newlinePattern, in: base.scalars.startIndex ..< newline.lowerBound)?.range else {
+        guard let previousNewline = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< newline.lowerBound)?.range else {
             startIndex.cache.newline = newline
             return startIndex
         }
@@ -116,7 +104,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    public func index(after i: LineIndex) -> LineIndex {
+    @_inlineable public func index(after i: LineIndex) -> LineIndex {
         guard let newline = i.newline(in: base.scalars),
             ¬newline.isEmpty else {
                 return LineIndex.endIndex()
@@ -126,7 +114,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
-    public subscript(_ position: LineIndex) -> Line<Base> {
+    @_inlineable public subscript(_ position: LineIndex) -> Line<Base> {
         get {
             let newline = position.newline(in: base.scalars)!
             let line = base.scalars[position.start! ..< newline.lowerBound]
@@ -146,13 +134,13 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
     /// Creates a new, empty collection.
-    public init() {
+    @_inlineable public init() {
         self.init(Base())
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
-    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Element == Line<Base> {
+    @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Element == Line<Base> {
         var replacement = Base()
         for line in newElements {
             replacement.scalars.append(contentsOf: line.line)
@@ -164,6 +152,8 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     }
 }
 
+// [_Warning: Is this necessary?_]
+/*
 // [_Workaround: See “Parsing” above. (Swift 4.0.3)_]
 
 extension LineView {
@@ -259,3 +249,4 @@ extension UnicodeScalarView where Self.Index == String.ScalarView.Index {
         return nil
     }
 }
+*/

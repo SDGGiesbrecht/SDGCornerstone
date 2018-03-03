@@ -14,8 +14,15 @@
 
 // MARK: - General
 
+private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString, line: UInt) -> Void {
+    if expression() {} else {
+        // Release optimization removes assert and strips precondition’s message.
+        fatalError(message(), file: file, line: line)
+    }
+}
+
 /// The assertion method used by `test(_:_:_:_:)`
-public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, _ file: StaticString, _ line: UInt) -> Void = Swift.precondition
+public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, _ file: StaticString, _ line: UInt) -> Void = defaultTestAssertionMethod
 
 /// Tests an expression, verifying that it is true.
 @_transparent public func test(_ expression: @autoclosure () throws -> Bool, _ message: @autoclosure () throws -> String, file: StaticString = #file, line: UInt = #line) {

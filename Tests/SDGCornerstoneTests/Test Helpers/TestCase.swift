@@ -30,25 +30,4 @@ class TestCase : SDGXCTestUtilities.TestCase {
             SDGCornerstone.initialize(mode: .guiApplication)
         }
     }
-
-    func lock(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
-
-        let iterations = 10
-
-        var results: [TimeInterval] = []
-        for _ in 1 ... iterations {
-            let start = Date.timeIntervalSinceReferenceDate
-            test()
-            let end = Date.timeIntervalSinceReferenceDate
-            results.append(end − start)
-        }
-        let sum = results.reduce(0) { $0 + $1 }
-        let mean = sum ÷ TimeInterval(iterations)
-
-        if mean > duration {
-            XCTFail("“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds).", file: file, line: line)
-        } else {
-            print("• “\(testName)” took an average of \(mean) seconds.")
-        }
-    }
 }

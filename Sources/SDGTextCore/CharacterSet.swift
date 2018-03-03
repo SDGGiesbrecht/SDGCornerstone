@@ -12,9 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-
 extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, SetDefinition {
+
+    /// A pattern representing any newline variant.
+    public static let newlinePattern = NewlinePattern.newline
 
     // MARK: - ComparableSet
 
@@ -24,7 +25,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    public static func ⊆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+    @_transparent public static func ⊆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
         return precedingValue.isSubset(of: followingValue)
     }
 
@@ -34,7 +35,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    public static func ⊇ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+    @_transparent public static func ⊇ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
         return precedingValue.isSuperset(of: followingValue)
     }
 
@@ -44,7 +45,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    public static func ⊊ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+    @_transparent public static func ⊊ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
         return precedingValue.isStrictSubset(of: followingValue)
     }
 
@@ -54,7 +55,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    public static func ⊋ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+    @_transparent public static func ⊋ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
         return precedingValue.isStrictSuperset(of: followingValue)
     }
 
@@ -63,7 +64,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///
     /// - Parameters:
     ///     - other: The other set.
-    public func overlaps(_ other: CharacterSet) -> Bool {
+    @_inlineable public func overlaps(_ other: CharacterSet) -> Bool {
         return ¬isDisjointAsSetAlgebra(with: other)
     }
 
@@ -75,7 +76,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    /*@_transparent [_Workaround: @_transparent here triggers linker errors. (Swift 4.0.3)_] */ public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.intersection(followingValue)
     }
 
@@ -85,7 +86,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∩= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+    @_transparent public static func ∩= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
         precedingValue.formIntersection(followingValue)
     }
 
@@ -95,7 +96,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    /*@_transparent [_Workaround: @_transparent here triggers linker errors. (Swift 4.0.3)_] */ public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.union(followingValue)
     }
 
@@ -105,7 +106,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∪= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+    @_transparent public static func ∪= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
         return precedingValue.formUnion(followingValue)
     }
 
@@ -115,7 +116,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    public static func ∖ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    @_transparent public static func ∖ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.subtracting(followingValue)
     }
 
@@ -125,7 +126,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    public static func ∖= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+    @_transparent public static func ∖= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
         precedingValue.subtract(followingValue)
     }
 
@@ -135,7 +136,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    @_transparent public static func ∆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.symmetricDifference(followingValue)
     }
 
@@ -145,7 +146,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    public static func ∆= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+    @_transparent public static func ∆= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
         return precedingValue.formSymmetricDifference(followingValue)
     }
 
@@ -157,7 +158,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    public static func ∋ (precedingValue: CharacterSet, followingValue: Element) -> Bool {
+    @_transparent public static func ∋ (precedingValue: CharacterSet, followingValue: Element) -> Bool {
         return precedingValue.contains(followingValue)
     }
 
@@ -170,7 +171,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///
     /// - Parameters:
     ///     - operand: The set.
-    public static postfix func ′(operand: CharacterSet) -> CharacterSet {
+    @_transparent public static postfix func ′(operand: CharacterSet) -> CharacterSet {
         return operand.inverted
     }
 
@@ -179,7 +180,14 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///
     /// - Parameters:
     ///     - operand: The set.
-    public static postfix func ′=(operand: inout CharacterSet) {
+    @_transparent public static postfix func ′=(operand: inout CharacterSet) {
         operand.invert()
+    }
+}
+
+extension SetAlgebra {
+
+    @_transparent @_versioned internal func isDisjointAsSetAlgebra(with other: Self) -> Bool {
+        return isDisjoint(with: other)
     }
 }
