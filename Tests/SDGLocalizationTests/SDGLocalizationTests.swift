@@ -1,5 +1,5 @@
 /*
- Exports.swift
+ SDGLocalizationTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,6 +12,17 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import Foundation // FileManager, URL, etc.
+import SDGLocalizationTestUtilities
+import SDGXCTestUtilities
 
-@_exported import SDGLogicCore // NilLiteral
+class SDGLocalizationTests : TestCase {
+
+    func testExample() {
+    }
+
+    static var allTests: [(String, (SDGLocalizationTests) -> () throws -> Void)] {
+        return [
+            ("testExample", testExample)
+        ]
+    }
+}

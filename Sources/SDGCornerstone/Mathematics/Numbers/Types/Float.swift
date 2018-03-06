@@ -19,26 +19,11 @@ public protocol FloatFamily : FloatFamilyCore, RealNumberProtocol {
 
 }
 
-extension Double : FloatFamily, PropertyListValue {
-
-}
-
+extension Double : FloatFamily {}
 #if !os(Linux)
-    // MARK: - #if !os(Linux)
-
-    extension CGFloat : FloatFamily, PropertyListValue {
-
-    }
+    extension CGFloat : FloatFamily {}
 #endif
-
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-    // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
-
-    extension Float80 : FloatFamily {
-
-    }
+    extension Float80 : FloatFamily {}
 #endif
-
-extension Float : FloatFamily, PropertyListValue {
-
-}
+extension Float : FloatFamily {}

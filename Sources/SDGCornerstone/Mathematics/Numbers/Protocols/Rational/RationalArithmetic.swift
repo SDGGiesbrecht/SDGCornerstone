@@ -15,6 +15,8 @@
 import SDGLogicCore
 import SDGMathematicsCore
 
+import SDGCornerstoneLocalizations
+
 /// A type that can be used for rational arithmetic.
 ///
 /// Conformance Requirements:

@@ -167,6 +167,32 @@ extension UIntFamilyCore {
     @_inlineable public var isOdd: Bool {
         return self.bitwiseAnd(with: 1) == 1
     }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    @_inlineable public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
+        let value = UIntMax(randomInRange: UIntMax(range.lowerBound) ... UIntMax(range.upperBound), fromRandomizer: randomizer)
+        self.init(value)
+    }
+}
+
+extension UIntMax {
+
+    // MARK: - WholeArithmetic
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    public init(randomInRange range: ClosedRange<UIntMax>, fromRandomizer randomizer: Randomizer) {
+        self = randomizer.randomNumber(inRange: range)
+    }
 }
 
 extension BinaryInteger {

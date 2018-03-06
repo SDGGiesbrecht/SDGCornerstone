@@ -18,6 +18,7 @@
     import Foundation
 
     import SDGLogicCore
+    import SDGCornerstoneLocalizations
 
     /// A command line shell.
     public struct Shell {

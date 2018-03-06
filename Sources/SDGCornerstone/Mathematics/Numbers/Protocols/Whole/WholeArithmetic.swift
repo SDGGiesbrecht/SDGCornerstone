@@ -16,6 +16,7 @@ import Foundation
 
 import SDGLogicCore
 import SDGMathematicsCore
+import SDGCornerstoneLocalizations
 
 /// A type that can be used for whole‐number arithmetic.
 ///
@@ -46,21 +47,6 @@ public protocol WholeArithmetic : ExpressibleByStringLiteral, WholeArithmeticCor
     ///
     /// - Throws: `WholeArithmeticParseError`
     init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws
-
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    init(randomInRange range: ClosedRange<Self>)
-
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)
 }
 
 extension WholeArithmetic {
@@ -268,17 +254,6 @@ extension WholeArithmetic {
                 }
             }
         }
-    }
-
-
-
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    public init(randomInRange range: ClosedRange<Self>) {
-        self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
     internal var egyptianDigits: [UnicodeScalar] {
@@ -831,28 +806,6 @@ extension WholeArithmetic {
     }
 }
 
-extension WholeArithmetic where Self : FloatFamily {
-    // MARK: - where Self : FloatFamily
-
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
-
-        // 0 ..< UInt64.max
-        let random: UInt64 = randomizer.randomNumber()
-
-        // 0 ..< 1
-        let converted = Self(random) ÷ Self(UInt64.max)
-
-        // lowerBound ..< upperBound
-        self = range.lowerBound + ((range.upperBound − range.lowerBound) × converted)
-    }
-}
-
 extension WholeArithmetic where Self : IntegralArithmetic {
     // MARK: - where Self : IntegralArithmetic
 
@@ -888,21 +841,6 @@ extension WholeArithmetic where Self : IntegralArithmetic {
         if negative {
             self−=
         }
-    }
-}
-
-extension WholeArithmetic where Self : IntFamily {
-    // MARK: - where Self : IntFamily
-
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
-        let value = Int64(randomInRange: IntMax(range.lowerBound) ... IntMax(range.upperBound), fromRandomizer: randomizer)
-        self.init(value)
     }
 }
 
@@ -956,20 +894,5 @@ extension WholeArithmetic where Self : RationalArithmetic {
         let denominator = try component("1" + flattenToZeroes(numeratorString))
 
         self = whole + numerator ÷ denominator
-    }
-}
-
-extension WholeArithmetic where Self : UIntFamily {
-    // MARK: - where Self : UIntFamily
-
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
-        let value = UIntMax(randomInRange: UIntMax(range.lowerBound) ... UIntMax(range.upperBound), fromRandomizer: randomizer)
-        self.init(value)
     }
 }

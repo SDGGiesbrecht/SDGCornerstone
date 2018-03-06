@@ -157,6 +157,17 @@ extension IntFamilyCore {
     @_inlineable public var isOdd: Bool {
         return self & 1 == 1
     }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    @_inlineable public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
+        let value = IntMax(randomInRange: IntMax(range.lowerBound) ... IntMax(range.upperBound), fromRandomizer: randomizer)
+        self.init(value)
+    }
 }
 
 extension IntXFamilyCore {
@@ -191,6 +202,31 @@ extension IntXFamilyCore {
     ///     - followingValue: The startpoint.
     @_transparent public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return followingValue.distance(to: precedingValue)
+    }
+}
+
+extension IntMax {
+
+    // MARK: - WholeArithmetic
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    @_inlineable public init(randomInRange range: ClosedRange<Int64>, fromRandomizer randomizer: Randomizer) {
+
+        if range.lowerBound.isWhole {
+            let unsignedRange: ClosedRange<UInt64> = UInt64(range.lowerBound) ... UInt64(range.upperBound)
+            let unsigned = UInt64(randomInRange: unsignedRange, fromRandomizer: randomizer)
+            self = Int64(unsigned)
+        } else {
+            let span = range.upperBound − range.lowerBound
+            let unsignedRange: ClosedRange<UInt64> = 0 ... UInt64(span)
+            let unsigned = UInt64(randomInRange: unsignedRange, fromRandomizer: randomizer)
+            self = range.lowerBound + Int64(unsigned)
+        }
     }
 }
 

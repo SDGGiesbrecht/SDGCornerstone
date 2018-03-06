@@ -13,6 +13,7 @@
  */
 
 import SDGLogicCore
+import SDGCornerstoneLocalizations
 
 // [_Workaround: Subtypes in extensions have visibility problems. (Swift 4.0.3)_]
 internal struct WholeNumberBinaryView {

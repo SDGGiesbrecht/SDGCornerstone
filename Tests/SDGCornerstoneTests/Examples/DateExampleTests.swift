@@ -56,9 +56,7 @@ private struct DaysIntoMillennium : DateDefinition {
         try encode(to: encoder, via: daysIntoMillennium)
     }
     fileprivate init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: FloatMax.self, convert: { DaysIntoMillennium($0) }, debugErrorDescription: { _ in
-            unreachable()
-        })
+        try self.init(from: decoder, via: FloatMax.self, convert: { DaysIntoMillennium($0) })
     }
 }
 // [_End_]

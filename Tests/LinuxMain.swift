@@ -13,6 +13,15 @@
  */
 
 import XCTest
+@testable import SDGControlFlowTests
+@testable import SDGProcessPropertiesTests
+@testable import SDGLogicTests
+@testable import SDGBinaryDataTests
+@testable import SDGMathematicsTests
+@testable import SDGCollectionsTests
+@testable import SDGTextTests
+@testable import SDGPersistenceTests
+@testable import SDGLocalizationTests
 @testable import SDGCornerstoneTests
 
 XCTMain([
@@ -28,7 +37,6 @@ XCTMain([
     testCase(ReadMeExampleTests.allTests),
     testCase(RunLoopExampleTests.allTests),
 
-    testCase(CachingTests.allTests),
     testCase(CollectionTests.allTests),
     testCase(ConcurrencyTests.allTests),
     testCase(DataTests.allTests),
@@ -55,5 +63,6 @@ XCTMain([
     testCase(SDGCollectionsTests.allTests),
     testCase(SDGTextTests.allTests),
     testCase(SDGPersistenceTests.allTests),
+    testCase(SDGLocalizationTests.allTests),
     testCase(SDGProcessPropertiesTests.allTests)
 ])

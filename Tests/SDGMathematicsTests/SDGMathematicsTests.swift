@@ -32,7 +32,9 @@ class SDGMathematicsTests : TestCase {
     func testFloat() {
         testRealArithmeticCoreConformance(of: Double.self)
         testRealArithmeticCoreConformance(of: FloatMax.self)
-        testRealArithmeticCoreConformance(of: CGFloat.self)
+	#if !os(Linux)
+            testRealArithmeticCoreConformance(of: CGFloat.self)
+        #endif
         testRealArithmeticCoreConformance(of: Float80.self)
         testRealArithmeticCoreConformance(of: Float.self)
     }

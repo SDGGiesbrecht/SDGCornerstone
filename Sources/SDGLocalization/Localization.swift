@@ -99,7 +99,7 @@ extension Localization {
         }
     }
 
-    private init?(reasonableMatchFor code: String, skippingParents: Bool) {
+    internal init?(reasonableMatchFor code: String, skippingParents: Bool) {
 
         if let result = Self(exactly: code) {
             self = result

@@ -12,45 +12,34 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCornerstoneLocalizations
+
 extension Decodable {
 
-    // [_Define Documentation: SDGCornerstone.Decodable.init(from:)_]
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
-
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:via:convert:)_]
     /// Creates a new instance by decoding a proxy type from the given decoder.
-    public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) throws -> Self?, debugErrorDescription: (Other) -> StrictString) throws where Other : Decodable {
+    public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) throws -> Self?) throws where Other : Decodable {
         let container = try decoder.singleValueContainer()
         let other = try container.decode(Other.self)
 
-        func generateError(underlyingError: Error?, description: StrictString) -> DecodingError {
-            let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: String(description), underlyingError: underlyingError)
+        func generateError(underlyingError: Error?) -> DecodingError {
+            let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: String(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+                switch localization {
+                case .englishCanada:
+                    return StrictString("Invalid “\(Other.self)” representation of “\(Self.self)”: \(other)")
+                }
+            }).resolved()), underlyingError: underlyingError)
             return DecodingError.typeMismatch(Self.self, context)
         }
 
         do {
             guard let decoded = try convert(other) else {
-                throw generateError(underlyingError: nil, description: debugErrorDescription(other))
+                throw generateError(underlyingError: nil)
             }
             self = decoded
         } catch let error {
-            throw generateError(underlyingError: error, description: debugErrorDescription(other))
+            throw generateError(underlyingError: error)
         }
-    }
-
-    /// Creates a new instance by decoding a proxy string from the given decoder.
-    public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) throws -> Self?) throws where Other : StringFamily {
-        try self.init(from: decoder, via: type, convert: convert, debugErrorDescription: { (invalidString: Other) -> StrictString in
-            let description = UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                switch localization {
-                case .englishCanada:
-                    return StrictString("Invalid string representation: \(invalidString)")
-                }
-            })
-            return description.resolved()
-        })
     }
 }
 
@@ -59,9 +48,7 @@ extension Decodable where Self : ConsistentlyOrderedCalendarComponent, Self : En
 
     internal init(usingOrdinalFrom decoder: Decoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
-        try self.init(from: decoder, via: Vector.self, convert: { Self(rawValue: $0 − (1 as Vector)) }, debugErrorDescription: { (invalidRawValue: Vector) -> StrictString in
-            return RawRepresentableError.invalidRawValue(invalidRawValue, Self.self).debugDescription.resolved()
-        })
+        try self.init(from: decoder, via: Vector.self, convert: { Self(rawValue: $0 − (1 as Vector)) })
     }
 }
 
@@ -87,9 +74,7 @@ extension Decodable where Self : DecodableViaRawRepresentableCalendarComponent {
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: RawValue.self, convert: { try Self(possibleRawValue: $0) }, debugErrorDescription: { (invalidRawValue: RawValue) -> StrictString in
-            return RawRepresentableError.invalidRawValue(invalidRawValue, Self.self).debugDescription.resolved()
-        })
+        try self.init(from: decoder, via: RawValue.self, convert: { try Self(possibleRawValue: $0) })
     }
 }
 

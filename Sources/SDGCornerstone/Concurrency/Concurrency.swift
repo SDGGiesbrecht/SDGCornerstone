@@ -13,6 +13,7 @@
  */
 
 import Foundation
+import SDGCornerstoneLocalizations
 
 // MARK: - Concurrency
 

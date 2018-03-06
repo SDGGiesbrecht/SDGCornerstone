@@ -14,7 +14,7 @@
 
 import Foundation
 
-extension String : PropertyListValue, StringFamily {
+extension String : StringFamily {
 
     // MARK: - FileConvertible
 

@@ -13,6 +13,7 @@
  */
 
 import Foundation
+import SDGCornerstoneLocalizations
 
 // [_Example 1: DateDefinition_]
 /// A type that provides a definition for a `CalendarDate`.
@@ -56,9 +57,7 @@ import Foundation
 ///         try encode(to: encoder, via: daysIntoMillennium)
 ///     }
 ///     fileprivate init(from decoder: Decoder) throws {
-///         try self.init(from: decoder, via: FloatMax.self, convert: { DaysIntoMillennium($0) }, debugErrorDescription: { _ in
-///             unreachable()
-///         })
+///         try self.init(from: decoder, via: FloatMax.self, convert: { DaysIntoMillennium($0) })
 ///     }
 /// }
 /// ```

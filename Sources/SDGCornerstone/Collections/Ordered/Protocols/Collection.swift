@@ -17,6 +17,8 @@ import Foundation
 import SDGLogicCore
 import SDGCollectionsCore
 
+import SDGCornerstoneLocalizations
+
 extension Collection {
 
     internal func assertIndexExists(_ index: Index) {
@@ -26,26 +28,5 @@ extension Collection {
                 return "Index out of bounds."
             }
         }))
-    }
-}
-
-extension Collection where IndexDistance : WholeArithmetic {
-    // MARK: - where IndexDistance : WholeArithmetic
-
-    /// Returns a random index from the collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    public func randomIndex(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Index {
-        let random = IndexDistance(randomInRange: 0 ... count − 1, fromRandomizer: randomizer)
-        return index(startIndex, offsetBy: random)
-    }
-
-    /// Returns a random element from the collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    public func randomElement(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Element {
-        return self[randomIndex(fromRandomizer: randomizer)]
     }
 }

@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCornerstoneLocalizations
+
 /// An error that occurs while converting from a raw value.
 public enum RawRepresentableError<RawValue> : Error {
 

@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGLogicCore
+
 /// A “random” number generator that returns numbers in a pre‐determined cycle.
 public final class CyclicalNumberGenerator : Randomizer {
 
@@ -25,12 +28,12 @@ public final class CyclicalNumberGenerator : Randomizer {
     /// - Parameters:
     ///     - sequence: The sequence.
     public init(_ sequence: [UIntMax]) {
-        assert(¬sequence.isEmpty, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        _assert(¬sequence.isEmpty, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
-                return StrictString("Empty sequence.")
+                return "Empty sequence."
             }
-        }))
+        })
 
         self.sequence = sequence
         self.index = sequence.startIndex

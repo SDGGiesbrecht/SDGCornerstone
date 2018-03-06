@@ -64,7 +64,7 @@ public protocol OrderedEnumeration : Comparable, IterableEnumeration {
     func cyclicPredecessor() -> Self
 }
 
-extension OrderedEnumeration {
+extension OrderedEnumeration where RawValue == Int {
 
     @_inlineable @_versioned internal mutating func _increment() {
         guard let result = successor() else {
@@ -164,7 +164,7 @@ extension OrderedEnumeration {
 }
 
 // Disambiguate OneDimensionalPoint vs OrderedEnumeration for calendar components.
-extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocolCore {
+extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocolCore, RawValue == Int {
     // MARK: - where where Self : OneDimensionalPoint, Self.Vector : IntegerProtocolCore
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.increment()_]

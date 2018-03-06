@@ -12,9 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: Should only conform to PropertyListValue when values conform to `PropertyListValue`. Currently not constrainable. (Swift 4.0.3)_]
-extension Array : PropertyListValue {}
-
 extension Array where Element : StringFamily {
     // MARK: - where Element : StringFamily
 

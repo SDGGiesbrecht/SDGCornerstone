@@ -14,6 +14,7 @@
 
 #if os(Linux)
     import Glibc
+    import SDGControlFlow
 #else
     import Foundation
 #endif
@@ -54,12 +55,7 @@ public final class PseudorandomNumberGenerator : Randomizer {
                 if linuxIsSeeded {
                     return _linuxState
                 } else {
-                    preconditionFailure(UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
-                        switch localization {
-                        case .englishCanada:
-                            return "Failed to seed BSD random number generator."
-                        }
-                    }))
+                    _unreachable()
                 }
             }
             set {
@@ -67,6 +63,7 @@ public final class PseudorandomNumberGenerator : Randomizer {
             }
         }
     #endif
+
     /// Returns a new, randomly generated seed.
     public static func generateSeed() -> Seed {
         func systemSpecificRandom() -> UInt32 {

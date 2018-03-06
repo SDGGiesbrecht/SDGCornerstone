@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCornerstoneLocalizations
+
 /// A calendar component with a consistent order.
 public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedScaleOneDimensionalPoint {
 
@@ -80,8 +82,8 @@ extension ConsistentlyOrderedCalendarComponent where Self : CardinalCalendarComp
     }
 }
 
-extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.Vector == Self.RawValue {
-    // MARK: - where Self : EnumerationCalendarComponent, Self.Vector == Self.RawValue
+extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.RawValue == Int {
+    // MARK: - where Self : EnumerationCalendarComponent
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
     /// Creates a component from the number of complete components already elapsed.

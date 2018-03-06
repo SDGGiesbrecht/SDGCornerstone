@@ -18,26 +18,11 @@ import SDGMathematicsCore
 /// A type that represents a fixed‐length unsigned integer.
 ///
 /// This protocol exists so that extensions to it can provide shared functionality for `UInt`, `UInt64`, `UInt32`, `UInt16` and `UInt8`.
-public protocol UIntFamily : PropertyListValue, UIntFamilyCore, WholeNumberProtocol where Vector : IntFamily {
+public protocol UIntFamily : UIntFamilyCore, WholeNumberProtocol where Vector : IntFamily {
 
 }
 
 extension UInt : UIntFamily {}
-
-extension UIntMax {
-
-    // MARK: - WholeArithmetic
-
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<UIntMax>, fromRandomizer randomizer: Randomizer) {
-        self = randomizer.randomNumber(inRange: range)
-    }
-}
 
 extension UInt64 : UIntFamily {}
 extension UInt32 : UIntFamily {}

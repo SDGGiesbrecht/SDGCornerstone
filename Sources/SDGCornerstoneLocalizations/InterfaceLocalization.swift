@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal enum InterfaceLocalization : String, Localization {
+public enum InterfaceLocalization : String, InputLocalization {
 
     // MARK: - Cases
 
@@ -28,7 +28,7 @@ internal enum InterfaceLocalization : String, Localization {
 
     case עברית־ישראל = "he\u{2D}IL"
 
-    internal static let cases: [InterfaceLocalization] = [
+    public static let cases: [InterfaceLocalization] = [
 
         .englishUnitedKingdom,
         .englishUnitedStates,
@@ -45,5 +45,5 @@ internal enum InterfaceLocalization : String, Localization {
 
     // MARK: - Localization
 
-    internal static let fallbackLocalization: InterfaceLocalization = .עברית־ישראל
+    public static let fallbackLocalization: InterfaceLocalization = .עברית־ישראל
 }

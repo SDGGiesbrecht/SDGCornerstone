@@ -21,6 +21,7 @@
 @_exported import SDGCollectionsTestUtilities
 @_exported import SDGTextTestUtilities
 @_exported import SDGPersistenceTestUtilities
+@_exported import SDGLocalizationTestUtilities
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

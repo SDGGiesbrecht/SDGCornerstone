@@ -12,6 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#if !os(Linux)
+    @_exported import CoreGraphics // CGFloat
+#endif
+
 @_exported import SDGLogicCore // Equatable (≠)
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]

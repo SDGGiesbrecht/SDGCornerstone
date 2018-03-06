@@ -13,6 +13,7 @@
  */
 
 import SDGLogicCore
+import SDGCornerstoneLocalizations
 
 /// A month of the Hebrew year.
 public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {

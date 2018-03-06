@@ -15,6 +15,8 @@
 import SDGLogicCore
 import SDGMathematicsCore
 
+import SDGCornerstoneLocalizations
+
 // [_Example 1: WholeNumber Literals_]
 /// An arbitrary‐precision whole number.
 ///

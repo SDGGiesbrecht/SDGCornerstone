@@ -13,6 +13,7 @@
  */
 
 import SDGLogicCore
+import SDGCornerstoneLocalizations
 
 /// A casing position used by the English language.
 ///

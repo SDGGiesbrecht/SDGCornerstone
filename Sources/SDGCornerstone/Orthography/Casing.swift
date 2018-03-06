@@ -13,6 +13,7 @@
  */
 
 import SDGLogicCore
+import SDGCornerstoneLocalizations
 
 /// A casing position used by languages that have distinct letter cases (but which use the same casing for titles as for sentences).
 ///

@@ -15,9 +15,6 @@
 import SDGControlFlow
 
 import Foundation
-#if !os(Linux)
-    import CoreGraphics
-#endif
 
 #if os(iOS) || os(watchOS) || os(tvOS)
     // MARK: - #if os(iOS) || os(watchOS) || os(tvOS)
@@ -529,6 +526,24 @@ extension FloatFamilyCore {
     ///     - rule: The rounding rule follow.
     @_transparent public func rounded(_ rule: RoundingRule) -> Self {
         return roundedAsFloatingPoint(rule)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    @_transparent public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
+
+        // 0 ..< UInt64.max
+        let random: UInt64 = randomizer.randomNumber()
+
+        // 0 ..< 1
+        let converted = Self(random) ÷ Self(UInt64.max)
+
+        // lowerBound ..< upperBound
+        self = range.lowerBound + ((range.upperBound − range.lowerBound) × converted)
     }
 }
 

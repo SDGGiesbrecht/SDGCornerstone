@@ -33,7 +33,7 @@ public protocol Randomizer : class {
     /// Returns a random value.
     ///
     /// - SeeAlso: `randomNumber(inRange:)`
-    func randomNumber() -> UIntMax
+    func randomNumber() -> SDGMathematicsCore.UIntMax
 
     // [_Define Documentation: SDGCornerstone.Randomizer.randomNumber(inRange:)_]
     /// Returns a random value within the specified range.
@@ -68,11 +68,11 @@ extension Randomizer {
     ///
     /// - Parameters:
     ///     - range: The range of acceptable values for the random number.
-    public func randomNumber(inRange range: ClosedRange<UIntMax>) -> UIntMax {
+    @_inlineable public func randomNumber(inRange range: ClosedRange<UIntMax>) -> UIntMax {
 
         var unboundedRandom = randomNumber()
 
-        if unboundedRandom ∈ range {
+        if range.contains(unboundedRandom) {
             // Valid, return as‐is.
             return unboundedRandom
 

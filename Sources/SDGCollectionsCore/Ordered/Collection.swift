@@ -610,7 +610,6 @@ extension Collection where Element : Equatable {
         searchArea = start.upperBound ..< searchArea.upperBound
 
         var level = 1
-        // [_Warning: Can this be done without patterns?_]
         while let hit = firstMatch(for: AlternativePatterns([
             LiteralPattern(openingToken),
             LiteralPattern(closingToken)
@@ -758,5 +757,26 @@ extension Collection where Element : Hashable, Index : Hashable {
     /// - Requires: No values are repeated.
     @_transparent public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
         return BijectiveMapping(indexMapping)
+    }
+}
+
+extension Collection where IndexDistance : WholeArithmeticCore {
+    // MARK: - where IndexDistance : WholeArithmetic
+
+    /// Returns a random index from the collection.
+    ///
+    /// - Parameters:
+    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    @_inlineable public func randomIndex(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Index {
+        let random = IndexDistance(randomInRange: 0 ... count − 1, fromRandomizer: randomizer)
+        return index(startIndex, offsetBy: random)
+    }
+
+    /// Returns a random element from the collection.
+    ///
+    /// - Parameters:
+    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    @_inlineable public func randomElement(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Element {
+        return self[randomIndex(fromRandomizer: randomizer)]
     }
 }

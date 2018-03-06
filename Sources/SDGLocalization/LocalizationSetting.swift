@@ -12,13 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-
-import SDGProcessProperties
-import SDGLogicCore
+import SDGPersistence
+import SDGMathematicsCore
+import SDGCollectionsCore
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
-public struct LocalizationSetting : Equatable {
+public struct LocalizationSetting : Codable, Equatable {
 
     // MARK: - Static Properties
 
@@ -28,29 +27,31 @@ public struct LocalizationSetting : Equatable {
     #endif
     private static let sdgPreferenceKey = "SDGLanguages"
 
-    internal static let osSystemWidePreferences: Shared<PropertyListValue?> = {
-        let preferences: Shared<PropertyListValue?>
+    internal static let osSystemWidePreferences: Shared<Preference> = {
+        let preferences: Shared<Preference>
         #if os(Linux)
+
+            preferences = Shared(Preference._new())
 
             func convert(locale: String) -> String {
                 return locale.replacingOccurrences(of: "_", with: "\u{2D}")
             }
 
             if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
-                let entries = languages.components(separatedBy: ":")
-                let converted = entries.map { convert(locale: $0) }
-                preferences = Shared<PropertyListValue?>(converted)
+                let entryMatches: [PatternMatch<String>] = languages.components(separatedBy: ":")
+                let converted = entryMatches.map { convert(locale: String($0.contents)) }
+                preferences.value.set(to: converted)
             } else if let language = ProcessInfo.processInfo.environment["LANG"],
-                let locale = language.components(separatedBy: ".").first {
-                let converted = convert(locale: locale)
-                preferences = Shared<PropertyListValue?>([converted])
+                let locale: PatternMatch<String> = language.prefix(upTo: ".") {
+                let converted = convert(locale: String(locale.contents))
+                preferences.value.set(to: [converted])
             } else {
-                preferences = Shared<PropertyListValue?>(nil)
+                preferences.value.set(to: nil)
             }
 
         #else
 
-            preferences = Preferences.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
+            preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
 
         #endif
 
@@ -58,22 +59,22 @@ public struct LocalizationSetting : Equatable {
         return preferences
     }()
 
-    private static let sdgSystemWidePreferences: Shared<PropertyListValue?> = {
-        let preferences = Preferences.preferences(for: Preferences.sdgCornerstoneDomain + sdgDomainSuffix)[sdgPreferenceKey]
+    private static let sdgSystemWidePreferences: Shared<Preference> = {
+        let preferences = PreferenceSet.preferences(for: PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
 
-    private static let osApplicationPreferences: Shared<PropertyListValue?> = {
-        let preferences: Shared<PropertyListValue?>
+    private static let osApplicationPreferences: Shared<Preference> = {
+        let preferences: Shared<Preference>
         #if os(Linux)
 
             // This is does not exist on Linux anyway.
-            preferences = Shared<PropertyListValue?>(nil)
+            preferences = Shared(Preference._new())
 
         #else
 
-            preferences = Preferences.applicationPreferences[osPreferenceKey]
+            preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
 
         #endif
 
@@ -81,8 +82,8 @@ public struct LocalizationSetting : Equatable {
         return preferences
     }()
 
-    private static let sdgApplicationPreferences: Shared<PropertyListValue?> = {
-        let preferences = Preferences.preferences(for: ProcessInfo.domain + sdgDomainSuffix)[sdgPreferenceKey]
+    private static let sdgApplicationPreferences: Shared<Preference> = {
+        let preferences = PreferenceSet.preferences(for: ProcessInfo.domain + sdgDomainSuffix)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
@@ -95,9 +96,9 @@ public struct LocalizationSetting : Equatable {
 
     private static func resolveCurrentLocalization() -> LocalizationSetting {
         return overrides.value.last
-            ?? LocalizationSetting(sdgPreference: sdgApplicationPreferences.value)
+            ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
             ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
-            ?? LocalizationSetting(sdgPreference: sdgSystemWidePreferences.value)
+            ?? sdgSystemWidePreferences.value.as(LocalizationSetting.self)
             ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
             ?? LocalizationSetting(orderOfPrecedence: [] as [[String]]) // [_Exempt from Test Coverage_]
     }
@@ -127,7 +128,7 @@ public struct LocalizationSetting : Equatable {
     // For user available menus.
     /// :nodoc:
     public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
-        sdgSystemWidePreferences.value = setting?.orderOfPrecedence
+        sdgSystemWidePreferences.value.set(to: setting)
     }
     internal static func setSystemWidePreferences(to setting: LocalizationSetting?) {
         _setSystemWidePreferences(to: setting)
@@ -142,16 +143,16 @@ public struct LocalizationSetting : Equatable {
     /// Otherwise, use `do(_:)` instead.
     public static func setApplicationPreferences(to setting: LocalizationSetting?) {
 
-        sdgApplicationPreferences.value = setting?.orderOfPrecedence
+        sdgApplicationPreferences.value.set(to: setting)
 
         if let preferences = setting {
             var flattened: [String] = []
             for group in preferences.orderOfPrecedence {
                 flattened.append(contentsOf: group.shuffled())
             }
-            osApplicationPreferences.value = flattened
+            osApplicationPreferences.value.set(to: flattened)
         } else {
-            osApplicationPreferences.value = nil
+            osApplicationPreferences.value.set(to: nil)
         }
     }
 
@@ -173,15 +174,8 @@ public struct LocalizationSetting : Equatable {
         self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
     }
 
-    private init?(osPreference preference: PropertyListValue?) {
-        guard let result = preference?.asArray(of: String.self) else {
-            return nil
-        }
-        self.init(orderOfPrecedence: result)
-    }
-
-    private init?(sdgPreference preference: PropertyListValue?) {
-        guard let result = preference?.asArray(of: [String].self) else {
+    private init?(osPreference preference: Preference) {
+        guard let result = preference.as([String].self) else {
             return nil
         }
         self.init(orderOfPrecedence: result)
@@ -189,7 +183,7 @@ public struct LocalizationSetting : Equatable {
 
     // MARK: - Properties
 
-    private let orderOfPrecedence: [[String]]
+    @_versioned internal let orderOfPrecedence: [[String]]
 
     // MARK: - Usage
 
@@ -205,7 +199,7 @@ public struct LocalizationSetting : Equatable {
     }
 
     /// Returns the preferred localization out of those supported by the type `L`.
-    public func resolved<L : Localization>() -> L {
+    @_inlineable public func resolved<L : Localization>() -> L {
         for group in orderOfPrecedence {
             for localization in group.shuffled() {
                 if let result = L(reasonableMatchFor: localization) {
@@ -214,6 +208,28 @@ public struct LocalizationSetting : Equatable {
             }
         }
         return L.fallbackLocalization
+    }
+
+    // MARK: - Decodable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        try self.init(from: decoder, via: [[String]].self, convert: { LocalizationSetting(orderOfPrecedence: $0) })
+    }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        try encode(to: encoder, via: orderOfPrecedence)
     }
 
     // MARK: - Equatable

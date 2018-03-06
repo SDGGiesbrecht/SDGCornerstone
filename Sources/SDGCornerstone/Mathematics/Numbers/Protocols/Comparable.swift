@@ -14,7 +14,7 @@
 
 import SDGMathematicsCore
 
-extension Comparable where Self : OrderedEnumeration {
+extension Comparable where Self : OrderedEnumeration, Self.RawValue == Int {
     // MARK: - where Self : OrderedEnumeration
 
     // [_Inherit Documentation: SDGCornerstone.Comparable.<_]

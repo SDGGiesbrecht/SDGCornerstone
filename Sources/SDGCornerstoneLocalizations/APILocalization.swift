@@ -14,5 +14,5 @@
 
 import SDGControlFlow
 
-internal typealias APILocalization = SDGControlFlow._APILocalization
-extension APILocalization : Localization {}
+public typealias APILocalization = SDGControlFlow._APILocalization
+extension _APILocalization : Localization {}

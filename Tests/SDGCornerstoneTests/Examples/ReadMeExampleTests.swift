@@ -47,12 +47,12 @@ class ReadMeExampleTests : TestCase {
 
             // ••••••• Preferences •••••••
 
-            let preferences = Preferences.applicationPreferences
+            let preferences = PreferenceSet.applicationPreferences
 
             // Save
-            preferences["name"].value = "John Doe"
+            preferences["name"].value.set(to: "John Doe")
             // Load
-            let loaded: String? = preferences["name"].value?.as(String.self)
+            let loaded: String? = preferences["name"].value.as(String.self)
 
             XCTAssertEqual(loaded,
                            "John Doe")

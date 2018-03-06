@@ -12,8 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-
+import SDGControlFlow
 import SDGProcessProperties
 
 extension FileManager {
@@ -53,6 +52,7 @@ extension FileManager {
         let zoneURL = cached(in: &locations[location]) {
 
             #if os(Linux)
+                // [_Workaround: Foundation may do this itself eventually. (Swift 4.0.3)_]
 
                 let path: String
                 switch location {
@@ -80,13 +80,13 @@ extension FileManager {
                 var volume: URL?
                 if location == .temporary {
                     guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
-                        unreachable()
+                        _unreachable()
                     }
                     volume = documents
                 }
 
                 guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: volume, create: true) else {
-                    unreachable()
+                    _unreachable()
                 }
                 return result
 

@@ -12,15 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import SDGControlFlow
-@_exported import SDGProcessProperties
-@_exported import SDGLogic
-@_exported import SDGBinaryData
-@_exported import SDGMathematics
-@_exported import SDGCollections
-@_exported import SDGText
-@_exported import SDGPersistence
-@_exported import SDGLocalization
+@_exported import SDGControlFlow // Shared
+@_exported import SDGTextCore // StrictString
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

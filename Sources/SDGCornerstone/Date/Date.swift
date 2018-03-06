@@ -14,7 +14,7 @@
 
 import Foundation
 
-extension Date : PropertyListValue {
+extension Date {
 
     /// Creates a date from a calendar date.
     public init(_ calendarDate: CalendarDate) {

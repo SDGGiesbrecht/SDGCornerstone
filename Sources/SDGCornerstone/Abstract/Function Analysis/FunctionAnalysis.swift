@@ -13,6 +13,7 @@
  */
 
 import SDGLogicCore
+import SDGCornerstoneLocalizations
 
 // MARK: - Function Analysis
 

@@ -16,7 +16,10 @@ import Foundation
 import XCTest
 
 @testable import SDGTextCore
+@testable import SDGLocalization
 @testable import SDGCornerstone
+
+import SDGCornerstoneLocalizations
 
 class InternalTests : TestCase {
 
@@ -102,7 +105,7 @@ class InternalTests : TestCase {
     }
 
     func testLocalizationSetting() {
-        XCTAssertNotNil(LocalizationSetting.osSystemWidePreferences.value?.asArray(of: String.self), "Failed to detect operating system localization setting.")
+        XCTAssertNotNil(LocalizationSetting.osSystemWidePreferences.value.as([String].self), "Failed to detect operating system localization setting.")
 
         LocalizationSetting.setSystemWidePreferences(to: nil)
         LocalizationSetting.setApplicationPreferences(to: nil)

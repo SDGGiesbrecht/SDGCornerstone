@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogicCore
-
 /// A reference to a shared value.
 public class Shared<Value> {
 
@@ -77,7 +75,9 @@ public class Shared<Value> {
         for index in observers.indices.reversed() {
             let (existingObserver, _) = observers[index]
 
-            if existingObserver.pointee == nil ∨ existingObserver.pointee === observer {
+            if existingObserver.pointee == nil {
+                observers.remove(at: index)
+            } else if existingObserver.pointee === observer {
                 observers.remove(at: index)
             }
         }
