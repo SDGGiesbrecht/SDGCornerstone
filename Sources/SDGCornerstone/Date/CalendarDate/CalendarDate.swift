@@ -14,7 +14,7 @@
 
 import Foundation
 
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A date on a particular calendar.
 ///

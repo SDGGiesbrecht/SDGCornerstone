@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import SDGCollectionsCore
+@_exported import SDGMathematics // ′
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 
@@ -25,7 +25,7 @@ infix operator ∧=: AssignmentPrecedence
 infix operator ∨: LogicalDisjunctionPrecedence
 infix operator ∨=: AssignmentPrecedence
 
-// SDGMathematicsCore
+// SDGMathematics
 infix operator ≤: ComparisonPrecedence
 infix operator ≥: ComparisonPrecedence
 infix operator ≈: ComparisonPrecedence
@@ -51,28 +51,3 @@ postfix operator √=
 postfix operator °
 postfix operator ′
 postfix operator ′′
-
-// SDGCollectionsCore
-infix operator ∈: ComparisonPrecedence
-infix operator ∉: ComparisonPrecedence
-infix operator ∋: ComparisonPrecedence
-infix operator ∌: ComparisonPrecedence
-precedencegroup BinarySetOperationPrecedence {
-    lowerThan: RangeFormationPrecedence
-    higherThan: ComparisonPrecedence
-}
-infix operator ∩: BinarySetOperationPrecedence
-infix operator ∩=: AssignmentPrecedence
-infix operator ∪: BinarySetOperationPrecedence
-infix operator ∪=: AssignmentPrecedence
-postfix operator ′=
-infix operator ∖: BinarySetOperationPrecedence
-infix operator ∖=: AssignmentPrecedence
-infix operator ∆: BinarySetOperationPrecedence
-infix operator ∆=: AssignmentPrecedence
-infix operator ⊆: ComparisonPrecedence
-infix operator ⊈: ComparisonPrecedence
-infix operator ⊇: ComparisonPrecedence
-infix operator ⊉: ComparisonPrecedence
-infix operator ⊊: ComparisonPrecedence
-infix operator ⊋: ComparisonPrecedence

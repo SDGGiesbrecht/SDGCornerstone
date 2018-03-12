@@ -13,7 +13,7 @@
  */
 
 @_exported import SDGControlFlow // Shared
-@_exported import SDGTextCore // StrictString
+@_exported import SDGText // StrictString
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 
@@ -26,7 +26,7 @@ infix operator ∧=: AssignmentPrecedence
 infix operator ∨: LogicalDisjunctionPrecedence
 infix operator ∨=: AssignmentPrecedence
 
-// SDGMathematicsCore
+// SDGMathematics
 infix operator ≤: ComparisonPrecedence
 infix operator ≥: ComparisonPrecedence
 infix operator ≈: ComparisonPrecedence
@@ -53,7 +53,7 @@ postfix operator °
 postfix operator ′
 postfix operator ′′
 
-// SDGCollectionsCore
+// SDGCollections
 infix operator ∈: ComparisonPrecedence
 infix operator ∉: ComparisonPrecedence
 infix operator ∋: ComparisonPrecedence

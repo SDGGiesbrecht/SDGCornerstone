@@ -16,7 +16,6 @@
 @_exported import SDGTesting
 
 @_exported import SDGLogicTestUtilities
-@_exported import SDGBinaryDataTestUtilities
 @_exported import SDGMathematicsTestUtilities
 @_exported import SDGRandomizationTestUtilities
 @_exported import SDGCollectionsTestUtilities
@@ -35,7 +34,7 @@ infix operator ∧=: AssignmentPrecedence
 infix operator ∨: LogicalDisjunctionPrecedence
 infix operator ∨=: AssignmentPrecedence
 
-// SDGMathematicsCore
+// SDGMathematics
 infix operator ≤: ComparisonPrecedence
 infix operator ≥: ComparisonPrecedence
 infix operator ≈: ComparisonPrecedence
@@ -62,7 +61,7 @@ postfix operator °
 postfix operator ′
 postfix operator ′′
 
-// SDGCollectionsCore
+// SDGCollections
 infix operator ∈: ComparisonPrecedence
 infix operator ∉: ComparisonPrecedence
 infix operator ∋: ComparisonPrecedence

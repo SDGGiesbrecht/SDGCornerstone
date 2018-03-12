@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A member of the `Int` family: `Int`, `Int64`, `Int32`, `Int16` or `Int8`.
 public protocol IntFamily : IntFamilyCore, IntegerProtocol {

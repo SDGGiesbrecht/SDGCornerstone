@@ -13,7 +13,7 @@
  */
 
 import SDGControlFlow
-import SDGCollectionsCore
+import SDGCollections
 
 /// A set of preferences for a particular domain.
 public final class PreferenceSet {

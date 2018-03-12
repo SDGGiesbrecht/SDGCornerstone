@@ -15,7 +15,7 @@
 import Foundation
 
 import SDGLogic
-import SDGMathematicsCore
+import SDGMathematics
 import SDGCornerstoneLocalizations
 
 /// A type that can be used for whole‐number arithmetic.

@@ -13,7 +13,7 @@
  */
 
 import SDGLogic
-import SDGMathematicsCore
+import SDGMathematics
 import SDGCornerstoneLocalizations
 
 // [_Example 1: Gregorian Year_]

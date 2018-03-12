@@ -15,7 +15,7 @@
 import Foundation
 import XCTest
 
-@testable import SDGTextCore
+@testable import SDGText
 @testable import SDGLocalization
 @testable import SDGCornerstone
 

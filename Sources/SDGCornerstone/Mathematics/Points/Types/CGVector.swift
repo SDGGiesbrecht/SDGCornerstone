@@ -17,7 +17,7 @@
 
     import CoreGraphics
 
-    import SDGMathematicsCore
+    import SDGMathematics
 
     extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
 

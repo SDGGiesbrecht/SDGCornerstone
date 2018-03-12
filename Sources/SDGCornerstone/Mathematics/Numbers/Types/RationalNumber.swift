@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematicsCore
+import SDGMathematics
 
 // [_Example 1: RationalNumber Literals_]
 /// An arbitrary‐precision rational number.

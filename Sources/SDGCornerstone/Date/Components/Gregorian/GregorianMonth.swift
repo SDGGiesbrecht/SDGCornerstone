@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGCollectionsCore
+import SDGCollections
 
 /// A month of the Gregorian year.
 public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent {

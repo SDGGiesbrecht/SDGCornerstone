@@ -13,7 +13,7 @@
  */
 
 import SDGLogic
-import SDGMathematicsCore
+import SDGMathematics
 
 extension Equatable where Self : ComparableSet {
     // MARK: - where Self : ComparableSet

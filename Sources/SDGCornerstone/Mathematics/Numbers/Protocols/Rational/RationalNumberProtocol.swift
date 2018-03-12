@@ -14,7 +14,7 @@
 
 import Foundation
 
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A type which *only ever* represents rational numbers.
 ///

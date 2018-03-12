@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A type that can be used for integral arithmetic.
 ///

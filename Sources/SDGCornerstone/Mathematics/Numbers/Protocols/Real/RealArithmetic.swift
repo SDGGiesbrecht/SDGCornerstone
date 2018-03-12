@@ -13,7 +13,7 @@
  */
 
 import SDGLogic
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A type that can be used for real arithmetic.
 ///

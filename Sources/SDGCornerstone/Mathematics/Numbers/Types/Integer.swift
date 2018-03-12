@@ -14,7 +14,7 @@
 
 import SDGControlFlow
 import SDGLogic
-import SDGMathematicsCore
+import SDGMathematics
 
 // [_Example 1: WholeNumber Literals_]
 /// An arbitrary‐precision integer.

@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematicsCore
+import SDGMathematics
 
 // [_Workaround: This can be restored in Swift 4.1 (Swift 4.1)_]
 /*

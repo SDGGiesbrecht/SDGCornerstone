@@ -14,7 +14,7 @@
 
 import SDGTesting
 
-import SDGTextCore
+import SDGText
 
 func testLineParsing() {
     var text = ""

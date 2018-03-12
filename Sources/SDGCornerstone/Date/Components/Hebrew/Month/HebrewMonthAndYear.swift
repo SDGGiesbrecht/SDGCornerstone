@@ -13,7 +13,7 @@
  */
 
 import SDGLogic
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A Hebrew month of a particular year.
 public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimensionalPoint, PointProtocol {

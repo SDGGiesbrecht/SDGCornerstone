@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
 public protocol FloatFamily : FloatFamilyCore, RealNumberProtocol {

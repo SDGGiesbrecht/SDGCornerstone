@@ -13,7 +13,7 @@
  */
 
 import SDGLogic
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A type that represents a fixed‐length unsigned integer.
 ///

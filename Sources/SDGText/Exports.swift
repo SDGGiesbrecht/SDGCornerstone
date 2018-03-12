@@ -12,7 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import SDGTextCore
+@_exported import Foundation // CharacterSet
+@_exported import SDGCollections // Collection, etc. for String, SetDefinition, etc. for CharacterSet
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 
@@ -25,7 +26,7 @@ infix operator ∧=: AssignmentPrecedence
 infix operator ∨: LogicalDisjunctionPrecedence
 infix operator ∨=: AssignmentPrecedence
 
-// SDGMathematicsCore
+// SDGMathematics
 infix operator ≤: ComparisonPrecedence
 infix operator ≥: ComparisonPrecedence
 infix operator ≈: ComparisonPrecedence
@@ -52,7 +53,7 @@ postfix operator °
 postfix operator ′
 postfix operator ′′
 
-// SDGCollectionsCore
+// SDGCollections
 infix operator ∈: ComparisonPrecedence
 infix operator ∉: ComparisonPrecedence
 infix operator ∋: ComparisonPrecedence

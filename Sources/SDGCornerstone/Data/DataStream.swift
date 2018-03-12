@@ -14,7 +14,7 @@
 
 import Foundation
 
-import SDGCollectionsCore
+import SDGCollections
 
 /// A data stream.
 ///

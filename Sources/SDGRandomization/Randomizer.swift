@@ -33,7 +33,7 @@ public protocol Randomizer : class {
     /// Returns a random value.
     ///
     /// - SeeAlso: `randomNumber(inRange:)`
-    func randomNumber() -> SDGMathematicsCore.UIntMax
+    func randomNumber() -> SDGMathematics.UIntMax
 
     // [_Define Documentation: SDGCornerstone.Randomizer.randomNumber(inRange:)_]
     /// Returns a random value within the specified range.

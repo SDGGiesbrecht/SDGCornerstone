@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import SDGMathematicsCore // UIntMax
+@_exported import SDGMathematics // UIntMax
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 
@@ -25,7 +25,7 @@ infix operator ∧=: AssignmentPrecedence
 infix operator ∨: LogicalDisjunctionPrecedence
 infix operator ∨=: AssignmentPrecedence
 
-// SDGMathematicsCore
+// SDGMathematics
 infix operator ≤: ComparisonPrecedence
 infix operator ≥: ComparisonPrecedence
 infix operator ≈: ComparisonPrecedence

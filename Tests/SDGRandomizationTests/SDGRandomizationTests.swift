@@ -15,8 +15,6 @@
 import SDGRandomizationTestUtilities
 import SDGXCTestUtilities
 
-import SDGBinaryDataTestUtilities
-
 class SDGRandomizationTests : TestCase {
 
     func testExample() {
@@ -24,7 +22,7 @@ class SDGRandomizationTests : TestCase {
 
     static var allTests: [(String, (SDGRandomizationTests) -> () throws -> Void)] {
         return [
-            ("testExample", testComparable)
+            ("testExample", testExample)
         ]
     }
 }

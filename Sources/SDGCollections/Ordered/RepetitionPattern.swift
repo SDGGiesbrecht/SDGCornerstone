@@ -13,7 +13,7 @@
  */
 
 import SDGControlFlow
-import SDGMathematicsCore
+import SDGMathematics
 
 /// A pattern that matches against repetitions of another pattern.
 public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {

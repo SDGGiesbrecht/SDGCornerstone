@@ -33,7 +33,7 @@ infix operator ∧=: AssignmentPrecedence
 infix operator ∨: LogicalDisjunctionPrecedence
 infix operator ∨=: AssignmentPrecedence
 
-// SDGMathematicsCore
+// SDGMathematics
 infix operator ≤: ComparisonPrecedence
 infix operator ≥: ComparisonPrecedence
 infix operator ≈: ComparisonPrecedence
@@ -60,7 +60,7 @@ postfix operator °
 postfix operator ′
 postfix operator ′′
 
-// SDGCollectionsCore
+// SDGCollections
 infix operator ∈: ComparisonPrecedence
 infix operator ∉: ComparisonPrecedence
 infix operator ∋: ComparisonPrecedence
