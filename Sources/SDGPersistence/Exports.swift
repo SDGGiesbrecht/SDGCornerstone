@@ -12,6 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import Foundation // FileManager, URL, etc.
+@_exported import Foundation // FileManager, URL, ProcessInfo, etc.
 
 @_exported import SDGLogicCore // NilLiteral

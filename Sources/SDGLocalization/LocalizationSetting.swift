@@ -30,7 +30,7 @@ public struct LocalizationSetting : Codable, Equatable {
         let preferences: Shared<Preference>
         #if os(Linux)
 
-            preferences = Shared(Preference._new())
+            preferences = Shared(Preference.mock())
 
             func convert(locale: String) -> String {
                 return locale.replacingOccurrences(of: "_", with: "\u{2D}")
@@ -69,7 +69,7 @@ public struct LocalizationSetting : Codable, Equatable {
         #if os(Linux)
 
             // This is does not exist on Linux anyway.
-            preferences = Shared(Preference._new())
+            preferences = Shared(Preference.mock())
 
         #else
 
@@ -82,7 +82,10 @@ public struct LocalizationSetting : Codable, Equatable {
     }()
 
     private static let sdgApplicationPreferences: Shared<Preference> = {
-        let preferences = PreferenceSet.preferences(for: ProcessInfo.domain + sdgDomainSuffix)[sdgPreferenceKey]
+        guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
+            return Shared(Preference.mock())
+        }
+        let preferences = PreferenceSet.preferences(for: applicationDomain + sdgDomainSuffix)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()

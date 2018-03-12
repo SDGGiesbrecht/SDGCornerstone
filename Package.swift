@@ -26,8 +26,6 @@ let package = Package(
 
         // Individual component modules.
 
-        .library(name: "SDGProcessProperties", targets: ["SDGProcessProperties"]),
-
         .library(name: "SDGControlFlow", targets: ["SDGControlFlow"]),
 
         .library(name: "SDGLogic", targets: ["SDGLogic"]),
@@ -76,7 +74,6 @@ let package = Package(
             "SDGPersistence",
             "SDGRandomization",
             "SDGLocalization",
-            "SDGProcessProperties",
 
             "SDGCornerstoneLocalizations" // [_Warning: Temporary._]
             ]),
@@ -96,14 +93,12 @@ let package = Package(
         .target(name: "SDGXCTestUtilities", dependencies: [
             "SDGTesting",
             "SDGLogic",
-            "SDGProcessProperties"
+            "SDGPersistence"
             ]),
 
         // Individual component modules.
 
         .target(name: "SDGControlFlow"),
-
-        .target(name: "SDGProcessProperties", dependencies: ["SDGControlFlow"]),
 
         .target(name: "SDGLogic", dependencies: ["SDGLogicCore"]),
         .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),
@@ -126,8 +121,7 @@ let package = Package(
         .target(name: "SDGPersistence", dependencies: [
             "SDGControlFlow",
             "SDGLogicCore",
-            "SDGCollectionsCore",
-            "SDGProcessProperties"
+            "SDGCollectionsCore"
             ]),
         .target(name: "SDGPersistenceTestUtilities", dependencies: ["SDGPersistence", "SDGTesting"]),
 
@@ -214,10 +208,6 @@ let package = Package(
             ]),
         .testTarget(name: "SDGLocalizationTests", dependencies: [
             "SDGLocalizationTestUtilities", "SDGXCTestUtilities",
-            ]),
-        .testTarget(name: "SDGProcessPropertiesTests", dependencies: [
-            "SDGProcessProperties", "SDGXCTestUtilities",
-            "SDGLogic"
             ]),
 
         .target(name: "performance‐tests", dependencies: [

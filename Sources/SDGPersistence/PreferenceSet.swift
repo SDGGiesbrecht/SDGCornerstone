@@ -14,7 +14,6 @@
 
 import SDGControlFlow
 import SDGCollectionsCore
-import SDGProcessProperties
 
 /// A set of preferences for a particular domain.
 public final class PreferenceSet {
@@ -30,7 +29,7 @@ public final class PreferenceSet {
 
     /// The application preferences.
     public static let applicationPreferences: PreferenceSet = {
-        return preferences(for: ProcessInfo.domain)
+        return preferences(for: ProcessInfo.applicationDomain)
     }()
 
     /// Returns the preferences for a particular domain.

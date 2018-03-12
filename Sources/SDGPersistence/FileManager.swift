@@ -13,7 +13,6 @@
  */
 
 import SDGControlFlow
-import SDGProcessProperties
 
 extension FileManager {
 
@@ -103,7 +102,7 @@ extension FileManager {
     ///     - domain: The domain.
     ///     - relativePath: The path.
     public func url(in location: RecommendedLocation, at relativePath: String) -> URL {
-        return url(in: location, for: ProcessInfo.domain, at: relativePath)
+        return url(in: location, for: ProcessInfo.applicationDomain, at: relativePath)
     }
 
     /// Returns a URL for the specified location, domain and relative path.
@@ -121,7 +120,7 @@ extension FileManager {
     /// - Parameters:
     ///     - location: The location.
     public func delete(_ location: RecommendedLocation) {
-        delete(location, for: ProcessInfo.domain)
+        delete(location, for: ProcessInfo.applicationDomain)
     }
 
     /// Deletes everything in the specified location and domain.

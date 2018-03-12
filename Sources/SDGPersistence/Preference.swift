@@ -14,18 +14,19 @@
 
 import SDGControlFlow
 import SDGLogicCore
-import SDGProcessProperties
 
 public struct Preference : CustomStringConvertible, Equatable {
 
     // MARK: - Initialization
 
-    #if os(Linux)
-        /// :nodoc:
-        public static func _new() -> Preference {
-            return Preference(propertyListObject: nil)
-        }
-    #endif
+    /// Returns an empty mock preference.
+    ///
+    /// The returned instance can be used with any API which expects a `Preference` type, but it does not belong to a `PreferenceSet` and will never be saved to the disk.
+    ///
+    /// (Real preferences are obtained from `PreferenceSet.subscript(key:)`.)
+    public static func mock() -> Preference {
+        return Preference(propertyListObject: nil)
+    }
 
     internal init(propertyListObject: NSObject?) {
         self.propertyListObject = propertyListObject

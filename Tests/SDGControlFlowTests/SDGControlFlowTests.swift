@@ -21,6 +21,12 @@ import SDGXCTestUtilities
 
 class SDGControlFlowTests : TestCase {
 
+    func testBuildConfiguration() {
+        if _isDebugAssertConfiguration() {
+            test(variable: (BuildConfiguration.current, "BuildConfiguration.current"), is: .debug)
+        }
+    }
+
     func testCaching() {
 
         var callCount = 0
@@ -67,6 +73,7 @@ class SDGControlFlowTests : TestCase {
 
     static var allTests: [(String, (SDGControlFlowTests) -> () throws -> Void)] {
         return [
+            ("testBuildConfiguration", testBuildConfiguration),
             ("testCaching", testCaching),
             ("testNonmutatingVariants", testNonmutatingVariants)
         ]

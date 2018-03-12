@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGProcessProperties
 import SDGLogicCore
+import SDGPersistence
 import SDGTesting
 
 /// A test case which simplifies testing for targets which link against the `SDGCornerstone` package.

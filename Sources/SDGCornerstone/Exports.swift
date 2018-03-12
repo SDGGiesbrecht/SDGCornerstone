@@ -13,7 +13,6 @@
  */
 
 @_exported import SDGControlFlow
-@_exported import SDGProcessProperties
 @_exported import SDGLogic
 @_exported import SDGBinaryData
 @_exported import SDGMathematics
