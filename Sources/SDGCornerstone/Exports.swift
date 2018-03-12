@@ -17,6 +17,7 @@
 @_exported import SDGLogic
 @_exported import SDGBinaryData
 @_exported import SDGMathematics
+@_exported import SDGRandomization
 @_exported import SDGCollections
 @_exported import SDGText
 @_exported import SDGPersistence

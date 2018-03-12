@@ -30,7 +30,7 @@ import SDGCornerstoneLocalizations
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
 /// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (precedingValue: inout Self, followingValue: Self)`
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
-public protocol WholeArithmetic : ExpressibleByStringLiteral, WholeArithmeticCore {
+public protocol WholeArithmetic : ExpressibleByStringLiteral, RandomizableNumber {
 
     // MARK: - Initialization
 

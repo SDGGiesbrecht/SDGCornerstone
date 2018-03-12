@@ -25,7 +25,6 @@ import SDGControlFlow
 /// - `static func ×= (precedingValue: inout Self, followingValue: Self)`
 /// - `mutating func divideAccordingToEuclid(by divisor: Self)`
 /// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (precedingValue: inout Self, followingValue: Self)`
-/// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
 public protocol WholeArithmeticCore : FixedScaleOneDimensionalPoint, Numeric, NumericAdditiveArithmetic {
 
     // MARK: - Initialization
@@ -215,21 +214,6 @@ public protocol WholeArithmeticCore : FixedScaleOneDimensionalPoint, Numeric, Nu
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
     func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
-
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    init(randomInRange range: ClosedRange<Self>)
-
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)
 }
 
 extension WholeArithmeticCore {
@@ -484,15 +468,6 @@ extension WholeArithmeticCore {
     ///     - rule: The rounding rule follow.
     @_inlineable public func rounded(_ rule: RoundingRule) -> Self {
         return nonmutatingVariant(of: Self.round, on: self, with: rule)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    @_inlineable public init(randomInRange range: ClosedRange<Self>) {
-        self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
     // MARK: - Numeric

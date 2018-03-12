@@ -48,6 +48,9 @@ let package = Package(
         .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
         .library(name: "SDGPersistenceTestUtilities", targets: ["SDGPersistenceTestUtilities"]),
 
+        .library(name: "SDGRandomization", targets: ["SDGRandomization"]),
+        .library(name: "SDGRandomizationTestUtilities", targets: ["SDGRandomizationTestUtilities"]),
+
         .library(name: "SDGLocalization", targets: ["SDGLocalization"]),
         .library(name: "SDGLocalizationTestUtilities", targets: ["SDGLocalizationTestUtilities"]),
 
@@ -71,6 +74,7 @@ let package = Package(
             "SDGCollections",
             "SDGText",
             "SDGPersistence",
+            "SDGRandomization",
             "SDGLocalization",
             "SDGProcessProperties",
 
@@ -83,6 +87,7 @@ let package = Package(
             "SDGCollectionsTestUtilities",
             "SDGTextTestUtilities",
             "SDGPersistenceTestUtilities",
+            "SDGRandomizationTestUtilities",
             "SDGLocalizationTestUtilities",
 
             "SDGCornerstone",
@@ -122,17 +127,24 @@ let package = Package(
             "SDGControlFlow",
             "SDGLogicCore",
             "SDGCollectionsCore",
-            "SDGTextCore",
             "SDGProcessProperties"
             ]),
         .target(name: "SDGPersistenceTestUtilities", dependencies: ["SDGPersistence", "SDGTesting"]),
 
+        .target(name: "SDGRandomization", dependencies: [
+            "SDGControlFlow",
+            "SDGMathematicsCore"
+            ]),
+        .target(name: "SDGRandomizationTestUtilities", dependencies: [
+            "SDGRandomization", "SDGTesting"
+            ]),
+
         .target(name: "SDGLocalization", dependencies: [
             "SDGControlFlow",
             "SDGLogicCore",
-            "SDGMathematicsCore",
             "SDGTextCore",
-            "SDGPersistence"
+            "SDGPersistence",
+            "SDGRandomization"
             ]),
         .target(name: "SDGLocalizationTestUtilities", dependencies: ["SDGLocalization", "SDGTesting"]),
 
@@ -157,6 +169,7 @@ let package = Package(
             "SDGMathematicsCore"
             ]),
         .target(name: "SDGTextCore", dependencies: [
+            "SDGControlFlow",
             "SDGCollectionsCore"
             ]),
 
@@ -195,6 +208,9 @@ let package = Package(
             ]),
         .testTarget(name: "SDGPersistenceTests", dependencies: [
             "SDGPersistenceTestUtilities", "SDGXCTestUtilities",
+            ]),
+        .testTarget(name: "SDGRandomizationTests", dependencies: [
+            "SDGRandomizationTestUtilities", "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGLocalizationTests", dependencies: [
             "SDGLocalizationTestUtilities", "SDGXCTestUtilities",

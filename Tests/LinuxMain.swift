@@ -18,6 +18,7 @@ import XCTest
 @testable import SDGLogicTests
 @testable import SDGBinaryDataTests
 @testable import SDGMathematicsTests
+@testable import SDGRandomizationTests
 @testable import SDGCollectionsTests
 @testable import SDGTextTests
 @testable import SDGPersistenceTests
@@ -60,6 +61,7 @@ XCTMain([
     testCase(SDGLogicTests.allTests),
     testCase(SDGBinaryDataTests.allTests),
     testCase(SDGMathematicsTests.allTests),
+    testCase(SDGRandomizationTests.allTests),
     testCase(SDGCollectionsTests.allTests),
     testCase(SDGTextTests.allTests),
     testCase(SDGPersistenceTests.allTests),

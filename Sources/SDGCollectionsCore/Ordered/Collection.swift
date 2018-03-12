@@ -759,24 +759,3 @@ extension Collection where Element : Hashable, Index : Hashable {
         return BijectiveMapping(indexMapping)
     }
 }
-
-extension Collection where IndexDistance : WholeArithmeticCore {
-    // MARK: - where IndexDistance : WholeArithmetic
-
-    /// Returns a random index from the collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @_inlineable public func randomIndex(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Index {
-        let random = IndexDistance(randomInRange: 0 ... count − 1, fromRandomizer: randomizer)
-        return index(startIndex, offsetBy: random)
-    }
-
-    /// Returns a random element from the collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @_inlineable public func randomElement(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Element {
-        return self[randomIndex(fromRandomizer: randomizer)]
-    }
-}

@@ -13,8 +13,7 @@
  */
 
 import SDGPersistence
-import SDGMathematicsCore
-import SDGCollectionsCore
+import SDGRandomization
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
 public struct LocalizationSetting : Codable, Equatable {

@@ -785,28 +785,3 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
         return copy
     }
 }
-
-extension RangeReplaceableCollection where IndexDistance : WholeArithmeticCore {
-    // MARK: - where IndexDistance : WholeArithmetic
-
-    /// Shuffles the collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @_inlineable public mutating func shuffle(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) {
-        for i in indices {
-            let originalLocation = distance(from: startIndex, to: i)
-            let newLocation = IndexDistance(randomInRange: 0 ... originalLocation, fromRandomizer: randomizer)
-            let element = remove(at: index(startIndex, offsetBy: originalLocation))
-            insert(element, at: index(startIndex, offsetBy: newLocation))
-        }
-    }
-
-    /// Returns a shuffled collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @_inlineable public func shuffled(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Self {
-        return nonmutatingVariant(of: Self.shuffle, on: self, with: (randomizer))
-    }
-}
