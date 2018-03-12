@@ -16,11 +16,11 @@
     @_exported import CoreGraphics // CGFloat
 #endif
 
-@_exported import SDGLogicCore // Equatable (≠)
+@_exported import SDGLogic // Equatable (≠)
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 
-// SDGLogicCore
+// SDGLogic
 infix operator ≠: ComparisonPrecedence
 prefix operator ¬
 postfix operator ¬=

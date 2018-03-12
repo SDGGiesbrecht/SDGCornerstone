@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogicCore
+import SDGLogic
 
 /// A pattern that matches an exact subsequence.
 public final class LiteralPattern<Element : Equatable> : Pattern<Element>, ExpressibleByArrayLiteral {

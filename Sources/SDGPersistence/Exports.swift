@@ -14,4 +14,4 @@
 
 @_exported import Foundation // FileManager, URL, ProcessInfo, etc.
 
-@_exported import SDGLogicCore // NilLiteral
+@_exported import SDGLogic // NilLiteral

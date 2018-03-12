@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogicCore
+import SDGLogic
 import SDGCornerstoneLocalizations
 
 // [_Workaround: Subtypes in extensions have visibility problems. (Swift 4.0.3)_]

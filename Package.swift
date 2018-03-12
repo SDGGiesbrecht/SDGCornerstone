@@ -56,7 +56,6 @@ let package = Package(
 
         // Core subsets.
 
-        .library(name: "SDGLogicCore", targets: ["SDGLogicCore"]),
         .library(name: "SDGMathematicsCore", targets: ["SDGMathematicsCore"]),
         .library(name: "SDGCollectionsCore", targets: ["SDGCollectionsCore"]),
         .library(name: "SDGTextCore", targets: ["SDGTextCore"])
@@ -100,7 +99,7 @@ let package = Package(
 
         .target(name: "SDGControlFlow"),
 
-        .target(name: "SDGLogic", dependencies: ["SDGLogicCore"]),
+        .target(name: "SDGLogic", dependencies: []),
         .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),
 
         .target(name: "SDGBinaryData", dependencies: ["SDGBinaryDataCore"]),
@@ -120,7 +119,7 @@ let package = Package(
 
         .target(name: "SDGPersistence", dependencies: [
             "SDGControlFlow",
-            "SDGLogicCore",
+            "SDGLogic",
             "SDGCollectionsCore"
             ]),
         .target(name: "SDGPersistenceTestUtilities", dependencies: ["SDGPersistence", "SDGTesting"]),
@@ -135,7 +134,7 @@ let package = Package(
 
         .target(name: "SDGLocalization", dependencies: [
             "SDGControlFlow",
-            "SDGLogicCore",
+            "SDGLogic",
             "SDGTextCore",
             "SDGPersistence",
             "SDGRandomization"
@@ -148,18 +147,17 @@ let package = Package(
 
         // Core subsets.
 
-        .target(name: "SDGLogicCore"),
         .target(name: "SDGBinaryDataCore", dependencies: [
             "SDGControlFlow"
             ]),
         .target(name: "SDGMathematicsCore", dependencies: [
             "SDGControlFlow",
-            "SDGLogicCore",
+            "SDGLogic",
             "SDGBinaryDataCore"
             ]),
         .target(name: "SDGCollectionsCore", dependencies: [
             "SDGControlFlow",
-            "SDGLogicCore",
+            "SDGLogic",
             "SDGMathematicsCore"
             ]),
         .target(name: "SDGTextCore", dependencies: [

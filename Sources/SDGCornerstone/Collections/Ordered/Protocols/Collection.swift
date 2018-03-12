@@ -14,7 +14,7 @@
 
 import Foundation
 
-import SDGLogicCore
+import SDGLogic
 import SDGCollectionsCore
 
 import SDGCornerstoneLocalizations

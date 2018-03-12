@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogicCore
+import SDGLogic
 
 /// An enumeration that describes the set of localizations available for a particular usage.
 ///

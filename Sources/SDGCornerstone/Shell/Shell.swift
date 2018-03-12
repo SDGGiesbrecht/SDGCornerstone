@@ -17,7 +17,7 @@
 
     import Foundation
 
-    import SDGLogicCore
+    import SDGLogic
     import SDGCornerstoneLocalizations
 
     /// A command line shell.

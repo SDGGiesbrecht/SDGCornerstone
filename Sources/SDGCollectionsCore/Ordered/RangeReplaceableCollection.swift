@@ -13,7 +13,7 @@
  */
 
 import SDGControlFlow
-import SDGLogicCore
+import SDGLogic
 
 extension RangeReplaceableCollection {
 

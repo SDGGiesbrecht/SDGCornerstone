@@ -13,7 +13,7 @@
  */
 
 import SDGControlFlow
-import SDGLogicCore
+import SDGLogic
 
 public struct Preference : CustomStringConvertible, Equatable {
 

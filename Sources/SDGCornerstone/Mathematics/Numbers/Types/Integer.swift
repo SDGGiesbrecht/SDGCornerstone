@@ -13,7 +13,7 @@
  */
 
 import SDGControlFlow
-import SDGLogicCore
+import SDGLogic
 import SDGMathematicsCore
 
 // [_Example 1: WholeNumber Literals_]
