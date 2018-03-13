@@ -13,7 +13,8 @@
  */
 
 @_exported import SDGControlFlow // Shared
-@_exported import SDGText // StrictString
+@_exported import SDGMathematics // WholeAritmetic (for TextConvertibleNumber)
+@_exported import SDGText // StrictString, SemanticMarkup, etc.
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

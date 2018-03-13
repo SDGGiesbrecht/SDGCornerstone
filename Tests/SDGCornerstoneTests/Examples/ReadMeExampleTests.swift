@@ -17,6 +17,8 @@ import XCTest
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class ReadMeExampleTests : TestCase {
 
     func testReadMe() {
@@ -32,7 +34,7 @@ class ReadMeExampleTests : TestCase {
             }
 
             // Define
-            let text = UserFacingText<ApplicationLocalization, Void>({ (localization, _) in
+            let text = UserFacingText<ApplicationLocalization>({ localization in
                 switch localization {
                 case .english:
                     return "Hello, world!"

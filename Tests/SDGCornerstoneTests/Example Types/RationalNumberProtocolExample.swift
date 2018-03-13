@@ -14,7 +14,7 @@
 
 import SDGCornerstone
 
-struct RationalNumberProtocolExample : RationalNumberProtocol {
+struct RationalNumberProtocolExample : RandomizableNumber, RationalNumberProtocol, TextConvertibleNumber {
 
     var value: RationalNumber
 

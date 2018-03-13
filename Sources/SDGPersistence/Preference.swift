@@ -52,7 +52,6 @@ public struct Preference : CustomStringConvertible, Equatable {
         private func cast(_ instance: Any) -> NSObject {
             return Preference.cast(instance)
         }
-        /// :nodoc:
         internal static func cast(_ instance: Any) -> NSObject {
             if let object = instance as? NSObject {
                 return object

@@ -15,6 +15,8 @@
 import XCTest
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class LogicTests : TestCase {
 
     func testBool() {
@@ -22,17 +24,8 @@ class LogicTests : TestCase {
             XCTAssertNotEqual(boolean.checkOrX(), "")
             XCTAssertNotEqual(boolean.trueOrFalse(.sentenceMedial), "")
             XCTAssertNotEqual(boolean.yesOrNo(.sentenceMedial), "")
-            XCTAssertNotEqual(boolean.wahrOderFalsch(.sentenceMedial), "")
-            XCTAssertNotEqual(boolean.jaOderNein(.sentenceMedial), "")
-            XCTAssertNotEqual(boolean.vraiOuFaux(.sentenceMedial), "")
-            XCTAssertNotEqual(boolean.ouiOuNon(.sentenceMedial), "")
-            XCTAssertNotEqual(boolean.αληθήςΉΨευδής(.sentenceMedial), "")
-            XCTAssertNotEqual(boolean.ναιΉΌχι(.sentenceMedial), "")
-            XCTAssertNotEqual(boolean.חיובי־או־שלילי(), "")
-            XCTAssertNotEqual(boolean.כן־או־לא(), "")
         }
         XCTAssertEqual(true.trueOrFalse(.titleInitial), "True")
-        XCTAssertEqual(false.ναιΉΌχι(.sentenceInitial), "Όχι")
     }
 
     static var allTests: [(String, (LogicTests) -> () throws -> Void)] {

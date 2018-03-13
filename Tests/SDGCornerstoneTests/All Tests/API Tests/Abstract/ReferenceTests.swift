@@ -17,6 +17,8 @@ import XCTest
 import Foundation
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class ReferenceTests : TestCase {
 
     func testShared() {

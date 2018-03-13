@@ -13,7 +13,7 @@
  */
 
 /// A line in a string.
-public struct Line<Base : StringFamilyCore> {
+public struct Line<Base : StringFamily> {
 
     /// Creates a line.
     @_inlineable public init(line: Base, newline: Base) {

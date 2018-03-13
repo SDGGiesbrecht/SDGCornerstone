@@ -17,6 +17,8 @@ import Foundation
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class DateTests : TestCase {
 
     func testCalendarDate() {
@@ -68,17 +70,6 @@ class DateTests : TestCase {
         XCTAssertEqual(yetAnotherDate.gregorianDateInBritishEnglish(withWeekday: true), "Wednesday, 5 July 2017")
         XCTAssertEqual(yetAnotherDate.hebrewDateInAmericanEnglish(withWeekday: true), "Thursday, Tammuz 12, 5777")
         XCTAssertEqual(yetAnotherDate.gregorianDateInAmericanEnglish(withWeekday: true), "Wednesday, July 5, 2017")
-        XCTAssertEqual(yetAnotherDate.hebräischesDatumAufDeutsch(mitWochentag: true), "Donnerstag, 12. Tammus 5777")
-        XCTAssertEqual(yetAnotherDate.gregorianischesDatumAufDeutsch(mitWochentag: true), "Mittwoch, 5. Juli 2017")
-        XCTAssertEqual(yetAnotherDate.dateHébraïqueEnFrançais(.sentenceMedial, avecJourDeSemaine: true), "jeudi, le 12 tamouz 5777")
-        XCTAssertEqual(yetAnotherDate.dateGrégorienneEnFrançais(.sentenceMedial, avecJourDeSemaine: true), "mercredi, le 5 juillet 2017")
-        XCTAssertEqual(yetAnotherDate.εβραϊκήΗμερομηνίαΣεΕλληνικά(μεΗμέραΤηςΕβδομάδας: true), "Πέμπτη, 12 Θαμμούζ 5777")
-        XCTAssertEqual(yetAnotherDate.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΗμέραΤηςΕβδομάδας: true), "Τετάρτη, 5 Ιουλίου 2017")
-        XCTAssertEqual(yetAnotherDate.תאריך־עברי־בעברית(עם־יום־שבוע: true), "יום חמישי, 12 בתמוז 5777")
-        XCTAssertEqual(yetAnotherDate.תאריך־גרגוריאני־בעברית(עם־יום־שבוע: true), "יום רביעי, 5 ביולי 2017")
-
-        let exception = CalendarDate(gregorian: .july, 1, 2017)
-        XCTAssertEqual(exception.dateGrégorienneEnFrançais(.sentenceMedial).rawTextApproximation(), "le 1er juillet 2017")
 
         let time = CalendarDate(gregorian: .july, 6, 2017, at: 2, 05, 06)
         let time2 = CalendarDate(gregorian: .july, 6, 2017, at: 23, 55, 58)
@@ -94,22 +85,6 @@ class DateTests : TestCase {
         XCTAssertEqual(time.twelveHourTimeInEnglish(), "2:05 a.m.")
         XCTAssertEqual(time2.twelveHourTimeInEnglish(), "11:55 p.m.")
         XCTAssertEqual(time3.twelveHourTimeInEnglish(), "12:00 a.m.")
-
-        XCTAssertEqual(time.uhrzeitAufDeutsch(), "2.05")
-        XCTAssertEqual(time2.uhrzeitAufDeutsch(), "23.55")
-        XCTAssertEqual(time3.uhrzeitAufDeutsch(), "0.00")
-
-        XCTAssertEqual(time.heureEnFrançais(), "2 h 05")
-        XCTAssertEqual(time2.heureEnFrançais(), "23 h 55")
-        XCTAssertEqual(time3.heureEnFrançais(), "0 h 00")
-
-        XCTAssertEqual(time.ώραΣεΕλληνικά(), "2:05")
-        XCTAssertEqual(time2.ώραΣεΕλληνικά(), "23:55")
-        XCTAssertEqual(time3.ώραΣεΕλληνικά(), "0:00")
-
-        XCTAssertEqual(time.שעה־בעברית(), "2:05")
-        XCTAssertEqual(time2.שעה־בעברית(), "23:55")
-        XCTAssertEqual(time3.שעה־בעברית(), "0:00")
 
         XCTAssertEqual(time.iCalendarFormat(), "20170706T020506Z")
         XCTAssertEqual(time2.iCalendarFormat(), "20170706T235558Z")
@@ -170,28 +145,9 @@ class DateTests : TestCase {
 
         for month in GregorianMonth.january ... GregorianMonth.december {
             XCTAssertNotEqual(month.inEnglish(), "")
-            XCTAssertNotEqual(month.aufDeutsch(), "")
-            XCTAssertNotEqual(month.enFrançais(.sentenceMedial), "")
-            XCTAssertNotEqual(month.σεΕλληνικά(.ονομαστική), "")
-            XCTAssertNotEqual(month.σεΕλληνικά(.αιτιατική), "")
-            XCTAssertNotEqual(month.σεΕλληνικά(.γενική), "")
-            XCTAssertNotEqual(month.σεΕλληνικά(.κλητική), "")
-            XCTAssertNotEqual(month.בעברית(), "")
 
             if month == .january {
                 XCTAssertEqual(month.inEnglish(), "January")
-                XCTAssertEqual(month.aufDeutsch(), "Januar")
-                XCTAssertEqual(month.enFrançais(.sentenceMedial), "janvier")
-                XCTAssertEqual(month.enFrançais(.sentenceInitial), "Janvier")
-                XCTAssertEqual(month.σεΕλληνικά(.ονομαστική), "Ιανουάριος")
-                XCTAssertEqual(month.σεΕλληνικά(.αιτιατική), "Ιανουάριο")
-                XCTAssertEqual(month.σεΕλληνικά(.γενική), "Ιανουαρίου")
-                XCTAssertEqual(month.σεΕλληνικά(.κλητική), "Ιανουάριε")
-                XCTAssertEqual(month.בעברית(), "ינואר")
-            } else if month == .may {
-                XCTAssertEqual(month.σεΕλληνικά(.γενική), "Μαΐου")
-            } else if month == .august {
-                XCTAssertEqual(month.σεΕλληνικά(.γενική), "Αυγούστου")
             }
         }
 
@@ -284,28 +240,11 @@ class DateTests : TestCase {
 
         for month in sequence(first: HebrewMonth.tishrei, next: { $0.successor() }) {
             XCTAssertNotEqual(month.inEnglish(), "")
-            XCTAssertNotEqual(month.aufDeutsch(), "")
-            XCTAssertNotEqual(month.enFrançais(.sentenceMedial), "")
-            XCTAssertNotEqual(month.σεΕλληνικά(.ονομαστική), "")
-            XCTAssertNotEqual(month.σεΕλληνικά(.αιτιατική), "")
-            XCTAssertNotEqual(month.σεΕλληνικά(.γενική), "")
-            XCTAssertNotEqual(month.σεΕλληνικά(.κλητική), "")
-            XCTAssertNotEqual(month.בעברית(), "")
 
             if month == .tishrei {
                 XCTAssertEqual(month.inEnglish(), "Tishrei")
-                XCTAssertEqual(month.aufDeutsch(), "Tischri")
-                XCTAssertEqual(month.enFrançais(.sentenceMedial), "tichri")
-                XCTAssertEqual(month.enFrançais(.sentenceInitial), "Tichri")
-                XCTAssertEqual(month.σεΕλληνικά(.ονομαστική), "Τισρί")
-                XCTAssertEqual(month.בעברית(), "תשרי")
             } else if month == .adarII {
                 XCTAssertEqual(month.inEnglish(), "Adar II")
-                XCTAssertEqual(month.aufDeutsch(), "Adar II")
-                XCTAssertEqual(month.enFrançais(.sentenceMedial), "adar II")
-                XCTAssertEqual(month.enFrançais(.sentenceInitial), "Adar II")
-                XCTAssertEqual(month.σεΕλληνικά(.ονομαστική), "Αδάρ Βʹ")
-                XCTAssertEqual(month.בעברית(), "אדר ב׳")
             }
         }
 
@@ -328,18 +267,9 @@ class DateTests : TestCase {
     func testWeekday() {
         for weekday in GregorianWeekday.sunday ... GregorianWeekday.saturday {
             XCTAssertNotEqual(weekday.inEnglish(), "")
-            XCTAssertNotEqual(weekday.aufDeutsch(), "")
-            XCTAssertNotEqual(weekday.enFrançais(.sentenceMedial), "")
-            XCTAssertNotEqual(weekday.σεΕλληνικά(), "")
-            XCTAssertNotEqual(weekday.בעברית(), "")
 
             if weekday == .sunday {
                 XCTAssertEqual(weekday.inEnglish(), "Sunday")
-                XCTAssertEqual(weekday.aufDeutsch(), "Sonntag")
-                XCTAssertEqual(weekday.enFrançais(.sentenceMedial), "dimanche")
-                XCTAssertEqual(weekday.enFrançais(.sentenceInitial), "Dimanche")
-                XCTAssertEqual(weekday.σεΕλληνικά(), "Κυριακή")
-                XCTAssertEqual(weekday.בעברית(), "יום ראשון")
             }
         }
     }

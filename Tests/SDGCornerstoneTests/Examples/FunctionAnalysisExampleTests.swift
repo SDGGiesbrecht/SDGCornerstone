@@ -16,6 +16,8 @@ import XCTest
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class FunctionAnalysisExampleTests : TestCase {
 
     func testFindLocalMinimum() {

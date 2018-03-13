@@ -15,7 +15,7 @@
 import SDGControlFlow
 
 /// A view of a string’s contents as a collection of lines.
-public struct LineView<Base : StringFamilyCore> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Index == String.UnicodeScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.3)_] */ {
+public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection where Base.ScalarView.Index == String.UnicodeScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.3)_] */ {
 
     // MARK: - Initialization
 

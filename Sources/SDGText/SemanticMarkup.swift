@@ -38,7 +38,7 @@ private let endSubscript: UnicodeScalar = "\u{107003}"
 /// private let beginSubscript: UnicodeScalar = "\u{107002}"
 /// private let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
-public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection {
+public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection {
 
     // MARK: - Initialization
 
@@ -136,6 +136,26 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Equ
     ///     - i: The following index.
     public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(before: i)
+    }
+
+    // MARK: - Codable
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        try self.init(from: decoder, via: StrictString.self, convert: { SemanticMarkup($0) })
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        try encode(to: encoder, via: source)
     }
 
     // MARK: - Collection

@@ -41,7 +41,7 @@ class SDGMathematicsTests : TestCase {
     func testBitField() {
         testBitFieldConformance(start: 0b0101_0110 as BitFieldExample, not: 0b1010_1001, other: 0b1101_0010, and: 0b0101_0010, or: 0b1101_0110, exclusiveOr: 0b1000_0100)
     }
-    
+
     func testComparable() {
         test(operator: (≤, "≤"), on: (0, 1), returns: true)
         test(operator: (≤, "≤"), on: (0, 0), returns: true)
@@ -53,32 +53,32 @@ class SDGMathematicsTests : TestCase {
     }
 
     func testFloat() {
-        testRealArithmeticCoreConformance(of: Double.self)
-        testRealArithmeticCoreConformance(of: FloatMax.self)
+        testRealArithmeticConformance(of: Double.self)
+        testRealArithmeticConformance(of: FloatMax.self)
 	#if !os(Linux)
-            testRealArithmeticCoreConformance(of: CGFloat.self)
+            testRealArithmeticConformance(of: CGFloat.self)
         #endif
-        testRealArithmeticCoreConformance(of: Float80.self)
-        testRealArithmeticCoreConformance(of: Float.self)
+        testRealArithmeticConformance(of: Float80.self)
+        testRealArithmeticConformance(of: Float.self)
     }
 
     func testInt() {
-        testIntegralArithmeticCoreConformance(of: Int.self)
-        testIntegralArithmeticCoreConformance(of: IntMax.self)
-        testIntegralArithmeticCoreConformance(of: Int64.self)
-        testIntegralArithmeticCoreConformance(of: Int32.self)
-        testIntegralArithmeticCoreConformance(of: Int16.self)
-        testIntegralArithmeticCoreConformance(of: Int8.self)
+        testIntegralArithmeticConformance(of: Int.self)
+        testIntegralArithmeticConformance(of: IntMax.self)
+        testIntegralArithmeticConformance(of: Int64.self)
+        testIntegralArithmeticConformance(of: Int32.self)
+        testIntegralArithmeticConformance(of: Int16.self)
+        testIntegralArithmeticConformance(of: Int8.self)
     }
 
     func testUInt() {
-        testWholeArithmeticCoreConformance(of: UInt.self, includingNegatives: false)
-        testWholeArithmeticCoreConformance(of: UIntMax.self, includingNegatives: false)
-        testWholeArithmeticCoreConformance(of: UInt64.self, includingNegatives: false)
-        testWholeArithmeticCoreConformance(of: UInt32.self, includingNegatives: false)
-        testWholeArithmeticCoreConformance(of: UInt16.self, includingNegatives: false)
-        testWholeArithmeticCoreConformance(of: UInt8.self, includingNegatives: false)
-        
+        testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
+        testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
+        testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
+        testWholeArithmeticConformance(of: UInt32.self, includingNegatives: false)
+        testWholeArithmeticConformance(of: UInt16.self, includingNegatives: false)
+        testWholeArithmeticConformance(of: UInt8.self, includingNegatives: false)
+
         testBitFieldConformance(start: 0b0101_0110 as UInt8, not: 0b1010_1001, other: 0b1101_0010, and: 0b0101_0010, or: 0b1101_0110, exclusiveOr: 0b1000_0100)
     }
 

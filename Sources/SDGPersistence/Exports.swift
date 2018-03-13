@@ -15,3 +15,4 @@
 @_exported import Foundation // FileManager, URL, ProcessInfo, etc.
 
 @_exported import SDGLogic // NilLiteral
+@_exported import SDGText // StrictString

@@ -147,6 +147,18 @@ extension ComparableSet {
     @_transparent public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
     }
+
+    // MARK: - Equatable
+
+    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    /// Returns `true` if the two values are equal.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: A value to compare.
+    ///     - followingValue: Another value to compare.
+    @_inlineable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
+    }
 }
 
 extension ComparableSet where Self : SetAlgebra {

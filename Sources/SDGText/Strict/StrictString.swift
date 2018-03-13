@@ -13,7 +13,7 @@
  */
 
 /// A string that maintains Unicode normalization form NFKD.
-public struct StrictString : Addable, BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, StringFamilyCore, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
+public struct StrictString : Addable, BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Initialization
 
@@ -108,6 +108,26 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///     - i: The following index.
     public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(before: i)
+    }
+
+    // MARK: - Codable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    public func encode(to encoder: Encoder) throws {
+        try encode(to: encoder, via: description)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    public init(from decoder: Decoder) throws {
+        try self.init(from: decoder, via: String.self, convert: { StrictString($0) })
     }
 
     // MARK: - Collection

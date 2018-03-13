@@ -13,7 +13,7 @@
  */
 
 /// An angle.
-public struct Angle<Scalar : RealArithmeticCore> : CodableViaMeasurement {
+public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
 
     // MARK: - Initialization
 
@@ -141,7 +141,7 @@ public struct Angle<Scalar : RealArithmeticCore> : CodableViaMeasurement {
     }
 }
 
-extension RealArithmeticCore {
+extension RealArithmetic {
 
     // ••••••• ••••••• ••••••• ••••••• ••••••• ••••••• •••••••
     // Symbol versions are more legible beside literals, but less legible beside variables. For this reason, both symbols and full names should remain available.

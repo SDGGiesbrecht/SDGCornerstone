@@ -73,7 +73,7 @@
         ///
         /// - Parameters:
         ///     - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
-        ///     - silently: If `false` (the default), the command and its output will be printed to standard out. If `true`, nothing will be sent to standard out. This argument is ignored in GUI applications, where this method is always silent.
+        ///     - silently: If `false` (the default), the command and its output will be printed to standard out. If `true`, nothing will be sent to standard out.
         ///     - redactionList: An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value or thrown error.)
         ///     - autoquote: Whether or not to automatically quote arguments. Defaults to `true`.
         ///     - alternatePrint: An optional closure to use instead of `print()` to send lines to standard output. This can be used to redirect or preprocess the text intended for standard output. (The closure will receive the redacted version and will never be executed if `silently` is `true`.)
@@ -83,28 +83,12 @@
         /// - Throws: A `Shell.Error` if the exit code indicates a failure.
         @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], autoquote: Bool = true, alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String { // [_Exempt from Test Coverage_]
 
-            let silent: Bool
-            switch Application.current.mode {
-            case .commandLineTool: // [_Exempt from Test Coverage_]
-                silent = silently
-            case .guiApplication:
-                silent = true
-            }
-
             func redact(_ string: String) -> String { // [_Exempt from Test Coverage_]
                 var result = string
-                let redacted = "[" + String(UserFacingText({ (localization: InterfaceLocalization, _: Void) -> StrictString in // [_Exempt from Test Coverage_]
+                let redacted = "[" + String(UserFacingText({ (localization: InterfaceLocalization) in // [_Exempt from Test Coverage_]
                     switch localization {
                     case .englishUnitedKingdom, .englishUnitedStates, .englishCanada: // [_Exempt from Test Coverage_]
                         return "redacted"
-                    case .deutschDeutschland: // [_Exempt from Test Coverage_]
-                        return "geschwärzt"
-                    case .françaisFrance: // [_Exempt from Test Coverage_]
-                        return "caviardé"
-                    case .ελληνικάΕλλάδα: // [_Exempt from Test Coverage_]
-                        return "λογοκριμμένο"
-                    case .עברית־ישראל: // [_Exempt from Test Coverage_]
-                        return "צונזר"
                     }
                 }).resolved()) + "]"
                 for sensitive in redactionList { // [_Exempt from Test Coverage_]
@@ -114,11 +98,11 @@
             }
 
             // Formatting separation from other output.
-            if ¬silent { // [_Exempt from Test Coverage_]
+            if ¬silently { // [_Exempt from Test Coverage_]
                 alternatePrint("")
             }
             defer {
-                if ¬silent { // [_Exempt from Test Coverage_]
+                if ¬silently { // [_Exempt from Test Coverage_]
                     alternatePrint("")
                 }
             }
@@ -131,7 +115,7 @@
                 }
             }).joined(separator: " ")
 
-            if ¬silent { // [_Exempt from Test Coverage_]
+            if ¬silently { // [_Exempt from Test Coverage_]
                 alternatePrint(redact("$ " + commandString))
             }
 
@@ -167,7 +151,7 @@
                     }
 
                     result.append(string + newLine)
-                    if ¬silent { // [_Exempt from Test Coverage_]
+                    if ¬silently { // [_Exempt from Test Coverage_]
                         report(redact(string))
                     }
                 }

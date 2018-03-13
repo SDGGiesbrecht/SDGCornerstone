@@ -29,7 +29,7 @@ import Foundation
 #endif
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
-public protocol FloatFamilyCore : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocolCore {
+public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
 
     // [_Define Documentation: SDGCornerstone.FloatFamily.init(_:)_]
     /// Creates a new value, rounded to the closest possible representation.
@@ -43,7 +43,7 @@ public protocol FloatFamilyCore : BinaryFloatingPoint, CustomDebugStringConverti
     static var ln2: Self { get }
 }
 
-extension FloatFamilyCore {
+extension FloatFamily {
 
     // MARK: - Negatable
 
@@ -535,7 +535,7 @@ extension FloatingPoint {
     }
 }
 
-extension Double : FloatFamilyCore {
+extension Double : FloatFamily {
 
     // MARK: - FloatFamily
 
@@ -559,7 +559,7 @@ extension Double : FloatFamilyCore {
 #if !os(Linux)
     // MARK: - #if !os(Linux)
 
-    extension CGFloat : FloatFamilyCore {
+    extension CGFloat : FloatFamily {
 
         // MARK: - CustomDebugStringConvertible
 
@@ -605,7 +605,7 @@ extension Double : FloatFamilyCore {
 #if !(os(iOS) || os(watchOS) || os(tvOS))
     // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-    extension Float80 : Codable, FloatFamilyCore {
+    extension Float80 : Codable, FloatFamily {
 
         // MARK: - Decodable
 
@@ -650,7 +650,7 @@ extension Double : FloatFamilyCore {
     }
 #endif
 
-extension Float : FloatFamilyCore {
+extension Float : FloatFamily {
 
     // MARK: - FloatFamily
 

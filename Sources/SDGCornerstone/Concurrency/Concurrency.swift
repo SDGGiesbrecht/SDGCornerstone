@@ -24,7 +24,7 @@ public var foreground: OperationQueue {
 
 /// A general‐purpose background queue for use when execution order is unimportant.
 public let background: OperationQueue = {
-    return OperationQueue(label: UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+    return OperationQueue(label: UserFacingText({ (localization: APILocalization) in
         switch localization {
         case .englishCanada:
             return "Background"
@@ -39,7 +39,7 @@ public func executing(in queue: OperationQueue) -> Bool {
 
 /// Fails an assertion if the current execution is anywhere but the specified thread.
 public func assert(in queue: OperationQueue, function: StaticString = #function, file: StaticString = #file, line: UInt = #line) {
-    assert(executing(in: queue), UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+    assert(executing(in: queue), UserFacingText({ (localization: APILocalization) in
         func resolveName(foregroundName: StrictString) -> StrictString { // [_Exempt from Test Coverage_]
             return queue == foreground ? foregroundName : StrictString(queue.name ?? "\(queue)") // [_Exempt from Test Coverage_]
         }

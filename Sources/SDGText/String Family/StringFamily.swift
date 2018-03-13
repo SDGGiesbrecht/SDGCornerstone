@@ -13,7 +13,7 @@
  */
 
 /// A `String` or `StrictString`.
-public protocol StringFamilyCore : Addable, Comparable, ExpressibleByStringLiteral, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
+public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByStringLiteral, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Associated Types
 
@@ -51,7 +51,7 @@ public protocol StringFamilyCore : Addable, Comparable, ExpressibleByStringLiter
     var clusters: ClusterView { get set }
 }
 
-extension StringFamilyCore where Self.ScalarView.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.3)_] */ {
+extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.3)_] */ {
     // [_Warning: Can the above abort trap be dealt with?_]
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]

@@ -16,7 +16,7 @@
 
 macOS • Linux • iOS • watchOS • tvOS
 
-APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGControlFlow](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGControlFlow) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematics) • [SDGMathematicsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsTestUtilities) • [SDGCollections](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollections) • [SDGCollectionsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollectionsTestUtilities) • [SDGBinaryData](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryData) • [SDGText](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGText) • [SDGTextTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTextTestUtilities) • [SDGPersistence](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistence) • [SDGPersistenceTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistenceTestUtilities) • [SDGRandomization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomization) • [SDGRandomizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomizationTestUtilities) • [SDGLocalization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalization) • [SDGLocalizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalizationTestUtilities) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting)
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGControlFlow](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGControlFlow) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematics) • [SDGMathematicsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsTestUtilities) • [SDGCollections](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollections) • [SDGCollectionsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollectionsTestUtilities) • [SDGBinaryData](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryData) • [SDGText](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGText) • [SDGTextTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTextTestUtilities) • [SDGPersistence](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistence) • [SDGPersistenceTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistenceTestUtilities) • [SDGRandomization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomization) • [SDGRandomizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomizationTestUtilities) • [SDGLocalization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalization) • [SDGLocalizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalizationTestUtilities) • [SDGCalendar](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCalendar) • [SDGCalendarTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCalendarTestUtilities) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting)
 
 # SDGCornerstone
 
@@ -71,6 +71,8 @@ let package = Package(
             .productItem(name: "SDGRandomizationTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGLocalization", package: "SDGCornerstone"),
             .productItem(name: "SDGLocalizationTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGCalendar", package: "SDGCornerstone"),
+            .productItem(name: "SDGCalendarTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGTesting", package: "SDGCornerstone"),
         ])
     ]
@@ -98,6 +100,8 @@ import SDGRandomization
 import SDGRandomizationTestUtilities
 import SDGLocalization
 import SDGLocalizationTestUtilities
+import SDGCalendar
+import SDGCalendarTestUtilities
 import SDGTesting
 ```
 
@@ -113,7 +117,7 @@ enum ApplicationLocalization : String, Localization {
 }
 
 // Define
-let text = UserFacingText<ApplicationLocalization, Void>({ (localization, _) in
+let text = UserFacingText<ApplicationLocalization>({ localization in
     switch localization {
     case .english:
         return "Hello, world!"

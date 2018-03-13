@@ -33,7 +33,7 @@ public protocol Localization {
     /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     var code: String { get }
 
-    // [_Define Documentation: SDGCornerstone.Localization.developmentLocalization_]
+    // [_Define Documentation: SDGCornerstone.Localization.fallbackLocalization_]
     /// The localization to use whenever none of the localizations requested by the user are available.
     static var fallbackLocalization: Self { get }
 }
@@ -61,6 +61,7 @@ extension Localization {
     /// "es": [("Latn", ["ES", "419", "MX", "CO", "AR", "VE", "PE", "CL", "EC", "CU", "DO", "GT", "HN", "SV", "NI", "BO", "CR", "UY", "PA", "PY", "GQ"])],
     /// "en": [("Latn", ["GB", "US", "CA", "AU", "ZA", "IE", "NZ", "SG", "TT", "GY", "LR", "SL", "MY", "BB", "BS", "ZW", "IN", "BZ", "PG", "VC", "ZM", "GD", "AG", "VU", "JM", "KN", "LK", "PH", "LC", "NA", "BN", "SB", "NR", "FJ", "FM", "DM", "SC", "MU", "WS", "PW", "MW", "BW", "BI", "CM", "ET", "GM", "GH", "KE", "KI", "LS", "MT", "MH", "NG", "PK", "RW", "SS", "SD", "SZ", "TZ", "TO", "TV", "UG"])],
     /// "arb": [("Arab", ["SA", "EG", "DZ", "SD", "MA", "IQ", "SY", "YE", "TN", "JO", "LY", "LB", "SO", "AE", "MR", "OM", "IL", "KW", "TD", "QA", "BH", "DJ", "KM"])],
+    /// "hi" : [("Deva", ["IN"])],
     /// "pt": [("Latn", ["PT", "BR", "AO", "MZ", "ST", "TL", "CV", "GQ", "GW"])],
     /// "ru": [("Cyrl", ["RU", "BY", "KZ", "KG"])],
     /// "ja": [("Jpan", ["JP"])],

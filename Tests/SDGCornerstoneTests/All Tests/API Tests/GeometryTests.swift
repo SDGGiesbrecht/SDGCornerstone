@@ -21,6 +21,8 @@ import Foundation
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class GeometryTests : TestCase {
 
     func testPoint() {

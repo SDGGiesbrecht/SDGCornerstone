@@ -16,15 +16,15 @@
 public typealias IntMax = Int64
 
 /// A member of the `Int` family: `Int`, `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntFamilyCore : CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocolCore, MirrorPath, SignedInteger {
+public protocol IntFamily : CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol, MirrorPath, SignedInteger {
 
 }
 /// A numbered member of the `Int` family: `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntXFamilyCore : IntFamilyCore {
+public protocol IntXFamily : IntFamily {
 
 }
 
-extension IntFamilyCore {
+extension IntFamily {
 
     // MARK: - IntegralArithmetic
 
@@ -33,7 +33,7 @@ extension IntFamilyCore {
     ///
     /// - Properties:
     ///     - int: An instance of a member of the `Int` family.
-    @_transparent public init<I : IntFamilyCore>(_ int: I) {
+    @_transparent public init<I : IntFamily>(_ int: I) {
         self.init(asBinaryIntegerWithInt: int)
     }
 
@@ -100,7 +100,7 @@ extension IntFamilyCore {
     ///
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
-    @_transparent public init<U : UIntFamilyCore>(_ uInt: U) {
+    @_transparent public init<U : UIntFamily>(_ uInt: U) {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
@@ -159,7 +159,7 @@ extension IntFamilyCore {
     }
 }
 
-extension IntXFamilyCore {
+extension IntXFamily {
 
     // MARK: - PointProtocol
 
@@ -195,12 +195,12 @@ extension IntXFamilyCore {
 }
 
 extension BinaryInteger {
-    @_transparent @_versioned internal init<I : IntFamilyCore>(asBinaryIntegerWithInt int: I) {
+    @_transparent @_versioned internal init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
         self.init(int)
     }
 }
 
-extension Int : IntFamilyCore {
+extension Int : IntFamily {
 
     // MARK: - PointProtocol
 
@@ -220,7 +220,7 @@ extension Int : IntFamilyCore {
         return precedingValue - followingValue
     }
 }
-extension Int64 : IntXFamilyCore {
+extension Int64 : IntXFamily {
 
     // MARK: - PointProtocol
 
@@ -228,7 +228,7 @@ extension Int64 : IntXFamilyCore {
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
-extension Int32 : IntXFamilyCore {
+extension Int32 : IntXFamily {
 
     // MARK: - PointProtocol
 
@@ -236,7 +236,7 @@ extension Int32 : IntXFamilyCore {
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
-extension Int16 : IntXFamilyCore {
+extension Int16 : IntXFamily {
 
     // MARK: - PointProtocol
 
@@ -244,7 +244,7 @@ extension Int16 : IntXFamilyCore {
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
-extension Int8 : IntXFamilyCore {
+extension Int8 : IntXFamily {
 
     // MARK: - PointProtocol
 

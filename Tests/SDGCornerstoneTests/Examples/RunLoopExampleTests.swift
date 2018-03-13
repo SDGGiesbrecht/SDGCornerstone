@@ -17,6 +17,8 @@ import XCTest
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class RunLoopExampleTests : TestCase {
 
     func testRunLoopUsage() {

@@ -13,6 +13,7 @@
  */
 
 import SDGMathematics
+import SDGRandomization
 
 // [_Example 1: RationalNumber Literals_]
 /// An arbitrary‐precision rational number.
@@ -22,7 +23,7 @@ import SDGMathematics
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 001"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber : Addable, Codable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, WholeArithmetic {
+public struct RationalNumber : Addable, Codable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RandomizableNumber, RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic {
 
     // MARK: - Initialization
 

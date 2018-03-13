@@ -15,6 +15,8 @@
 import XCTest
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class EnumerationTests : TestCase {
 
     func testIterableEnumeration() {

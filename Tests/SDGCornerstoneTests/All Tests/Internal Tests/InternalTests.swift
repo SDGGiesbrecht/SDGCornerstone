@@ -17,9 +17,12 @@ import XCTest
 
 @testable import SDGText
 @testable import SDGLocalization
+@testable import SDGCalendar
 @testable import SDGCornerstone
 
 import SDGCornerstoneLocalizations
+
+import SDGXCTestUtilities
 
 class InternalTests : TestCase {
 

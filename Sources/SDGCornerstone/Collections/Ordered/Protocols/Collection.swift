@@ -22,7 +22,7 @@ import SDGCornerstoneLocalizations
 extension Collection {
 
     internal func assertIndexExists(_ index: Index) {
-        assert(index ∈ bounds, UserFacingText({ (localization: APILocalization, _: Void) -> StrictString in
+        assert(index ∈ bounds, UserFacingText({ (localization: APILocalization) in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
                 return "Index out of bounds."

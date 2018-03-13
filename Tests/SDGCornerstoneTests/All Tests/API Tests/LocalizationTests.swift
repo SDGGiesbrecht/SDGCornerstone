@@ -16,6 +16,8 @@ import XCTest
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class LocalizationTests : TestCase {
 
     func testLocalization() {
@@ -87,9 +89,9 @@ class LocalizationTests : TestCase {
         LocalizationSetting.setApplicationPreferences(to: nil)
     }
 
-    func testUserFacingText() {
+    func testUserFacingDynamicText() {
 
-        let text = UserFacingText({ (localization: LocalizationExample, numbers: (Int, Int)) -> StrictString in
+        let text = UserFacingDynamicText({ (localization: LocalizationExample, numbers: (Int, Int)) -> StrictString in
 
             switch localization {
             case .englishUnitedKingdom:
@@ -104,7 +106,7 @@ class LocalizationTests : TestCase {
         XCTAssertEqual(text.resolved(for: .français, using: (0, 1)), "Numéros 0 et 1")
         XCTAssert(¬text.resolved(using: (0, 1)).isEmpty)
 
-        let simple = UserFacingText({ (localization: LocalizationExample, _: Void) -> StrictString in
+        let simple = UserFacingText({ (localization: LocalizationExample) -> StrictString in
 
             switch localization {
             case .englishUnitedKingdom:
@@ -123,7 +125,7 @@ class LocalizationTests : TestCase {
         return [
             ("testLocalization", testLocalization),
             ("testLocalizationSetting", testLocalizationSetting),
-            ("testUserFacingText", testUserFacingText)
+            ("testUserFacingDynamicText", testUserFacingDynamicText)
         ]
     }
 }

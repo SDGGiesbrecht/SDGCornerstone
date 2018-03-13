@@ -161,11 +161,40 @@ extension OrderedEnumeration where RawValue == Int {
     @_inlineable public func cyclicPredecessor() -> Self {
         return nonmutatingVariant(of: Self.decrementCyclically, on: self, with: {})
     }
+
+    // MARK: - Comparable
+
+    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the preceding value is less than the following value.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    @_inlineable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue.rawValue < followingValue.rawValue
+    }
+}
+
+// Disambiguate Strideable vs OrderedEnumeration for calendar components.
+extension OrderedEnumeration where Self : Strideable, Self.RawValue == Int {
+    // MARK: - where Self : Strideable, Self.RawValue == Int
+
+    // MARK: - Comparable
+
+    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    /// Returns `true` if the preceding value is less than the following value.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
+    @_inlineable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
+        return precedingValue.rawValue < followingValue.rawValue
+    }
 }
 
 // Disambiguate OneDimensionalPoint vs OrderedEnumeration for calendar components.
-extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocolCore, RawValue == Int {
-    // MARK: - where where Self : OneDimensionalPoint, Self.Vector : IntegerProtocolCore
+extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol, RawValue == Int {
+    // MARK: - where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.increment()_]
     /// Increments to the next case.

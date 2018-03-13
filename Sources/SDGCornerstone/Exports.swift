@@ -21,6 +21,7 @@
 @_exported import SDGText
 @_exported import SDGPersistence
 @_exported import SDGLocalization
+@_exported import SDGCalendar
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

@@ -17,6 +17,8 @@ import Foundation
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class TextTests : TestCase {
 
     func testCharacterSet() {

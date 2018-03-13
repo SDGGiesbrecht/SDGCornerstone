@@ -17,6 +17,8 @@ import Foundation
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class ShellTests : TestCase {
 
     func testShell() {

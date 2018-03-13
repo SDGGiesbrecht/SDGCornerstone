@@ -22,6 +22,7 @@ import XCTest
 @testable import SDGPersistenceTests
 @testable import SDGRandomizationTests
 @testable import SDGLocalizationTests
+@testable import SDGDatesTests
 @testable import SDGCornerstoneTests
 
 XCTMain([
@@ -64,5 +65,6 @@ XCTMain([
     testCase(SDGTextTests.allTests),
     testCase(SDGPersistenceTests.allTests),
     testCase(SDGRandomizationTests.allTests),
-    testCase(SDGLocalizationTests.allTests)
+    testCase(SDGLocalizationTests.allTests),
+    testCase(SDGDatesTests.allTests)
 ])

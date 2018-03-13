@@ -17,6 +17,8 @@ import Foundation
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class DataTests : TestCase {
 
     func testData() {

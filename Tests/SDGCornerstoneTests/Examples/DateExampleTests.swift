@@ -17,6 +17,8 @@ import XCTest
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 // [_Define Example: DateDefinition_]
 extension CalendarDate {
 

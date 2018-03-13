@@ -17,6 +17,8 @@ import XCTest
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class RegressionTests : TestCase {
 
     func testAddAndSetIsUnambiguous() {

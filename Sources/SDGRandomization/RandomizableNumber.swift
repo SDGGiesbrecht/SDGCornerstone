@@ -12,12 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A number that can be randomized.
 ///
 /// Conformance Requirements:
 ///
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
-public protocol RandomizableNumber : WholeArithmeticCore {
+public protocol RandomizableNumber : WholeArithmetic {
 
     // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
     /// Creates a random value within a particular range.
@@ -44,5 +46,42 @@ extension RandomizableNumber {
     ///     - range: The allowed range for the random value.
     @_inlineable public init(randomInRange range: ClosedRange<Self>) {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
+    }
+}
+
+extension RandomizableNumber where Self : RationalArithmetic {
+    // MARK : - where Self : RationalArithmetic
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    @_inlineable public init(randomInRange range: Range<Self>) {
+        self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    @_inlineable public init(randomInRange range: Range<Self>, fromRandomizer randomizer: Randomizer) {
+
+        _assert(¬range.isEmpty, { (localization: _APILocalization) in
+            switch localization {
+            case .englishCanada: // [_Exempt from Test Coverage_]
+                return "Empty range."
+            }
+        })
+
+        var random = range.upperBound
+
+        while random == range.upperBound {
+            random = Self(randomInRange: range.lowerBound ... range.upperBound, fromRandomizer: randomizer)
+        }
+
+        self = random
     }
 }

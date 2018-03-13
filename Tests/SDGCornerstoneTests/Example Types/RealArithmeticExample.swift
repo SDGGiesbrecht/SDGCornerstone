@@ -14,7 +14,7 @@
 
 import SDGCornerstone
 
-struct RealArithmeticExample : RealArithmetic {
+struct RealArithmeticExample : RandomizableNumber, RealArithmetic, TextConvertibleNumber {
 
     var value: FloatMax
 

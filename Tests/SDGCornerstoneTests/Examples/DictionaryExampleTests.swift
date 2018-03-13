@@ -16,6 +16,8 @@ import XCTest
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class DictionaryExampleTests : TestCase {
 
     func testMutate() {

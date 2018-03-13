@@ -51,6 +51,9 @@ let package = Package(
         .library(name: "SDGLocalization", targets: ["SDGLocalization"]),
         .library(name: "SDGLocalizationTestUtilities", targets: ["SDGLocalizationTestUtilities"]),
 
+        .library(name: "SDGCalendar", targets: ["SDGCalendar"]),
+        .library(name: "SDGCalendarTestUtilities", targets: ["SDGCalendarTestUtilities"]),
+
         .library(name: "SDGTesting", targets: ["SDGTesting"]),
     ],
     targets: [
@@ -66,6 +69,7 @@ let package = Package(
             "SDGPersistence",
             "SDGRandomization",
             "SDGLocalization",
+            "SDGCalendar",
 
             "SDGCornerstoneLocalizations" // [_Warning: Temporary._]
             ]),
@@ -77,6 +81,7 @@ let package = Package(
             "SDGPersistenceTestUtilities",
             "SDGRandomizationTestUtilities",
             "SDGLocalizationTestUtilities",
+            "SDGCalendarTestUtilities",
 
             "SDGCornerstone",
             "SDGTesting"
@@ -137,11 +142,20 @@ let package = Package(
         .target(name: "SDGLocalization", dependencies: [
             "SDGControlFlow",
             "SDGLogic",
+            "SDGMathematics",
             "SDGText",
             "SDGPersistence",
             "SDGRandomization"
             ]),
         .target(name: "SDGLocalizationTestUtilities", dependencies: ["SDGLocalization", "SDGTesting"]),
+
+        .target(name: "SDGCalendar", dependencies: [
+            "SDGMathematics",
+            "SDGText",
+            "SDGLocalization",
+            "SDGCornerstoneLocalizations"
+            ]),
+        .target(name: "SDGCalendarTestUtilities", dependencies: ["SDGCalendar", "SDGTesting"]),
 
         .target(name: "SDGTesting", dependencies: [
             "SDGMathematics",
@@ -187,6 +201,9 @@ let package = Package(
             ]),
         .testTarget(name: "SDGLocalizationTests", dependencies: [
             "SDGLocalizationTestUtilities", "SDGXCTestUtilities",
+            ]),
+        .testTarget(name: "SDGCalendarTests", dependencies: [
+            "SDGCalendarTestUtilities", "SDGXCTestUtilities",
             ]),
 
         .target(name: "performance‐tests", dependencies: [

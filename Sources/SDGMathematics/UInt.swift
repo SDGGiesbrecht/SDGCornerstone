@@ -21,11 +21,11 @@ public typealias UIntMax = UInt64
 /// A type that represents a fixed‐length unsigned integer.
 ///
 /// This protocol exists so that extensions to it can provide shared functionality for `UInt`, `UInt64`, `UInt32`, `UInt16` and `UInt8`.
-public protocol UIntFamilyCore : BitField, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, FixedWidthInteger, UnsignedInteger, WholeNumberProtocolCore {
+public protocol UIntFamily : BitField, CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, FixedWidthInteger, UnsignedInteger, WholeNumberProtocol {
 
 }
 
-extension UIntFamilyCore {
+extension UIntFamily {
 
     // MARK: - BitField
 
@@ -156,7 +156,7 @@ extension UIntFamilyCore {
     ///
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
-    @_transparent public init<U : UIntFamilyCore>(_ uInt: U) {
+    @_transparent public init<U : UIntFamily>(_ uInt: U) {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
@@ -238,12 +238,12 @@ extension UIntFamilyCore {
 }
 
 extension BinaryInteger {
-    @_transparent @_versioned internal init<U : UIntFamilyCore>(asBinaryIntegerWithUInt uInt: U) {
+    @_transparent @_versioned internal init<U : UIntFamily>(asBinaryIntegerWithUInt uInt: U) {
         self.init(uInt)
     }
 }
 
-extension UInt : UIntFamilyCore {
+extension UInt : UIntFamily {
 
     // MARK: - PointProtocol
 
@@ -251,7 +251,7 @@ extension UInt : UIntFamilyCore {
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
-extension UInt64 : UIntFamilyCore {
+extension UInt64 : UIntFamily {
 
     // MARK: - PointProtocol
 
@@ -259,7 +259,7 @@ extension UInt64 : UIntFamilyCore {
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
-extension UInt32 : UIntFamilyCore {
+extension UInt32 : UIntFamily {
 
     // MARK: - PointProtocol
 
@@ -267,7 +267,7 @@ extension UInt32 : UIntFamilyCore {
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
-extension UInt16 : UIntFamilyCore {
+extension UInt16 : UIntFamily {
 
     // MARK: - PointProtocol
 
@@ -275,7 +275,7 @@ extension UInt16 : UIntFamilyCore {
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
-extension UInt8 : UIntFamilyCore {
+extension UInt8 : UIntFamily {
 
     // MARK: - PointProtocol
 

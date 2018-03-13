@@ -26,8 +26,8 @@ public protocol OneDimensionalPoint : Comparable, PointProtocol {
 
 }
 
-extension OneDimensionalPoint where Vector : IntegerProtocolCore {
-    // MARK: - where Vector : IntegerProtocolCore
+extension OneDimensionalPoint where Vector : IntegerProtocol {
+    // MARK: - where Vector : IntegerProtocol
 
     // [_Define Documentation: SDGCornerstone.OneDimensionalPoint.increment()_]
     /// Advances to the next value.

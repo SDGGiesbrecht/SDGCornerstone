@@ -182,6 +182,15 @@ extension RangeReplaceableCollection {
     @_inlineable public func filled(to count: IndexDistance, with element: Element, from direction: FillDirection) -> Self {
         return nonmutatingVariant(of: Self.fill, on: self, with: (count, element, direction))
     }
+
+    // MARK: ExpressibleByArrayLiteral
+
+    // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
+    /// Creates an instance from an array literal.
+    @_inlineable public init(arrayLiteral: Element...) {
+        self.init()
+        append(contentsOf: arrayLiteral)
+    }
 }
 
 extension RangeReplaceableCollection where Element : Equatable {

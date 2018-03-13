@@ -15,20 +15,6 @@
 import SDGLogic
 import SDGMathematics
 
-/// A type that represents a fixed‐length unsigned integer.
-///
-/// This protocol exists so that extensions to it can provide shared functionality for `UInt`, `UInt64`, `UInt32`, `UInt16` and `UInt8`.
-public protocol UIntFamily : UIntFamilyCore, WholeNumberProtocol where Vector : IntFamily {
-
-}
-
-extension UInt : UIntFamily {}
-
-extension UInt64 : UIntFamily {}
-extension UInt32 : UIntFamily {}
-extension UInt16 : UIntFamily {}
-extension UInt8 : UIntFamily {}
-
 extension UIntFamily {
 
     // MARK: - Binary

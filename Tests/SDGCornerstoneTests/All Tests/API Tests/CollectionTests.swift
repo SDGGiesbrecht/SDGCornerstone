@@ -17,6 +17,8 @@ import Foundation
 
 import SDGCornerstone
 
+import SDGXCTestUtilities
+
 class CollectionTests : TestCase {
 
     func testArray() {
@@ -452,7 +454,7 @@ class CollectionTests : TestCase {
 
     func testRangeReplaceableCollection() {
         func runTests<C : RangeReplaceableCollection>(start: C, appendix: C, result: C, element: C.Element, withElementAppended: C, withElementPrepended: C, withAppendixPrepended: C, truncatingIndex: C.Index, truncated: C)
-            where C.Element : Equatable, C.IndexDistance : WholeArithmetic {
+            where C.Element : Equatable, C.IndexDistance : RandomizableNumber {
 
                 var collection = start
                 collection += appendix

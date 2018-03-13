@@ -27,7 +27,7 @@ import SDGCornerstoneLocalizations
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
-public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, Equatable, Hashable, PointProtocol, Strideable, Subtractable, WholeArithmetic, WholeNumberProtocol {
+public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable, PointProtocol, RandomizableNumber, Strideable, Subtractable, TextConvertibleNumber, WholeArithmetic, WholeNumberProtocol {
 
     // MARK: - Properties
 
@@ -210,7 +210,7 @@ public struct WholeNumber : Addable, CodableViaWholeNumberProtocol, Comparable, 
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
     public static func −= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
-        assert(precedingValue ≥ followingValue, UserFacingText({ [precedingValue] (localization: APILocalization, _: Void) -> StrictString in
+        assert(precedingValue ≥ followingValue, UserFacingText({ [precedingValue] (localization: APILocalization) in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
                 return StrictString("\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(WholeNumber.self).")

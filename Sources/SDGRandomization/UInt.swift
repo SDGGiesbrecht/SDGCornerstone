@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension UIntFamilyCore {
+extension UIntFamily {
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
     /// Creates a random value within a particular range using the specified randomizer.
