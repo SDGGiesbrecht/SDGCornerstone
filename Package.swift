@@ -57,6 +57,12 @@ let package = Package(
         .library(name: "SDGCalendar", targets: ["SDGCalendar"]),
         .library(name: "SDGCalendarTestUtilities", targets: ["SDGCalendarTestUtilities"]),
 
+        .library(name: "SDGPrecisionMathematics", targets: ["SDGPrecisionMathematics"]),
+
+        .library(name: "SDGConcurrency", targets: ["SDGConcurrency"]),
+
+        .library(name: "SDGExternalProcess", targets: ["SDGExternalProcess"]),
+
         .library(name: "SDGTesting", targets: ["SDGTesting"]),
     ],
     targets: [
@@ -74,8 +80,9 @@ let package = Package(
             "SDGLocalization",
             "SDGGeometry",
             "SDGCalendar",
-
-            "SDGCornerstoneLocalizations" // [_Warning: Temporary._]
+            "SDGPrecisionMathematics",
+            "SDGConcurrency",
+            "SDGExternalProcess",
             ]),
         .target(name: "SDGCornerstoneTestUtilities", dependencies: [
             "SDGLogicTestUtilities",
@@ -167,6 +174,16 @@ let package = Package(
             ]),
         .target(name: "SDGCalendarTestUtilities", dependencies: ["SDGCalendar", "SDGTesting"]),
 
+        .target(name: "SDGPrecisionMathematics", dependencies: [
+            "SDGMathematics"
+            ]),
+
+        .target(name: "SDGConcurrency", dependencies: [
+            "SDGLogic"
+            ]),
+
+        .target(name: "SDGExternalProcess", dependencies: []),
+
         .target(name: "SDGTesting", dependencies: [
             "SDGMathematics",
             ]),
@@ -217,6 +234,15 @@ let package = Package(
             ]),
         .testTarget(name: "SDGCalendarTests", dependencies: [
             "SDGCalendarTestUtilities", "SDGXCTestUtilities",
+            ]),
+        .testTarget(name: "SDGPrecisionMathematicsTests", dependencies: [
+            "SDGPrecisionMathematics", "SDGXCTestUtilities",
+            ]),
+        .testTarget(name: "SDGConcurrencyTests", dependencies: [
+            "SDGConcurrency", "SDGXCTestUtilities",
+            ]),
+        .testTarget(name: "SDGExternalProcessTests", dependencies: [
+            "SDGExternalProcess", "SDGXCTestUtilities",
             ]),
 
         .target(name: "performance‐tests", dependencies: [

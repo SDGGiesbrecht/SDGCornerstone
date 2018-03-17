@@ -21,39 +21,13 @@ import SDGXCTestUtilities
 
 class ConcurrencyTests : TestCase {
 
-    func testConcurrency() {
-        let foregroundRan = expectation(description: "Foreground ran.")
-        let backgroundRan = expectation(description: "Background ran.")
-        let testQueueRan = expectation(description: "Test queue ran.")
-
-        foreground.finish {
-            foregroundRan.fulfill()
-            XCTAssert(executing(in: foreground))
-            if executing(in: foreground) {
-                assert(in: foreground)
-            }
-        }
-        background.finish {
-            backgroundRan.fulfill()
-            XCTAssert(executing(in: background))
-            if executing(in: background) {
-                assert(in: background)
-            }
-        }
-        OperationQueue(label: "Test Queue", serial: true).start {
-            testQueueRan.fulfill()
-            XCTAssert(OperationQueue.current?.isSerial == true)
-        }
-        waitForExpectations(timeout: 5, handler: nil)
-    }
-
     func testRunLoop() {
         var driver: RunLoop.Driver?
 
         let didRun = expectation(description: "Run loop ran.")
         let didStop = expectation(description: "Run loop exited.")
 
-        background.start {
+        DispatchQueue.global(qos: .userInitiated).async {
             let block = {
                 didRun.fulfill()
                 driver = nil
@@ -77,7 +51,6 @@ class ConcurrencyTests : TestCase {
 
     static var allTests: [(String, (ConcurrencyTests) -> () throws -> Void)] {
         return [
-            ("testConcurrency", testConcurrency),
             ("testRunLoop", testRunLoop)
         ]
     }

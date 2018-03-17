@@ -25,7 +25,7 @@ class RunLoopExampleTests : TestCase {
 
         // [_Define Example: Run Loop Usage_]
         var driver: RunLoop.Driver?
-        background.start {
+        DispatchQueue.global(qos: .userInitiated).async {
             RunLoop.current.runForDriver { driver = $0 }
         }
         // The background run loop is now running.

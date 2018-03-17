@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-
 import SDGLogic
 
 extension RunLoop {
@@ -30,7 +28,7 @@ extension RunLoop {
     ///
     /// ```swift
     /// var driver: RunLoop.Driver?
-    /// background.start {
+    /// DispatchQueue.global(qos: .userInitiated).async {
     ///     RunLoop.current.runForDriver { driver = $0 }
     /// }
     /// // The background run loop is now running.

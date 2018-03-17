@@ -24,6 +24,9 @@ import XCTest
 @testable import SDGLocalizationTests
 @testable import SDGGeometryTests
 @testable import SDGDatesTests
+@testable import SDGPrecisionMathematicsTests
+@testable import SDGConcurrencyTests
+@testable import SDGExternalProcessTests
 @testable import SDGCornerstoneTests
 
 XCTMain([
@@ -67,5 +70,8 @@ XCTMain([
     testCase(SDGPersistenceTests.allTests),
     testCase(SDGRandomizationTests.allTests),
     testCase(SDGLocalizationTests.allTests),
-    testCase(SDGDatesTests.allTests)
+    testCase(SDGDatesTests.allTests),
+    testCase(SDGPrecisionMathematicsTests.allTests),
+    testCase(SDGConcurrencyTests.allTests),
+    testCase(SDGExternalProcessTests.allTests)
 ])

@@ -13,7 +13,6 @@
  */
 
 import SDGLogic
-import SDGBinaryData
 
 /// The member of the `UInt` family with the largest bit field.
 public typealias UIntMax = UInt64

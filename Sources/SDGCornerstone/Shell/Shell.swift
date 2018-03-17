@@ -19,6 +19,7 @@
 
     import SDGLogic
     import SDGCornerstoneLocalizations
+    import SDGConcurrency
 
     /// A command line shell.
     public struct Shell {
@@ -160,7 +161,7 @@
             }
 
             var completeErrorReceived = false
-            background.start {
+            DispatchQueue.global(qos: .userInitiated).async {
                 while handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { FileHandle.standardError.write(($0 + newLine).data(using: .utf8)!) }) {} // [_Exempt from Test Coverage_]
                 completeErrorReceived = true
             }
