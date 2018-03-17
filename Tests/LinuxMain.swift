@@ -22,6 +22,7 @@ import XCTest
 @testable import SDGPersistenceTests
 @testable import SDGRandomizationTests
 @testable import SDGLocalizationTests
+@testable import SDGGeometryTests
 @testable import SDGDatesTests
 @testable import SDGCornerstoneTests
 

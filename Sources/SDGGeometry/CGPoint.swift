@@ -17,8 +17,7 @@
 
     import CoreGraphics
 
-    extension CGPoint /* : TwoDimensionalPoint */ {
-        // [_Workaround: Because of a nebulous compiler or CoreCraphics bug, this single conformance causes a cascade of abort traps when other modules attempt to link against seemingly unrelated symbols from SDGCornerstone. (Swift 4.0.3)_]
+    extension CGPoint : TwoDimensionalPoint {
 
         // MARK: - PointProtocol
 

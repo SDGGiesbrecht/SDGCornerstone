@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A point in a two‐dimensional space.
 ///
 /// Conformance Requirements:
@@ -19,8 +21,7 @@
 /// - `var x: Scalar { get set }`
 /// - `var y: Scalar { get set }`
 public protocol TwoDimensionalPoint : PointProtocol
-/*where Vector : TwoDimensionalVector*/ {
-    // [_Workaround: The above line causes an abort trap. (Swift 4.0.3)_]
+where Vector : TwoDimensionalVector, Vector.Scalar == Scalar {
 
     //typealias Scalar = Vector.Scalar
     // [_Workaround: Related to the workaround at the top of the file. (Swift 4.0.3)_]
@@ -65,15 +66,14 @@ public protocol TwoDimensionalPoint : PointProtocol
     func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar) -> Self
 }
 
-extension TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar {
-    // MARK: - where Self.Vector : TwoDimensionalVector, Self.Vector.Scalar == Self.Scalar
+extension TwoDimensionalPoint {
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
     /// Rounds the value to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    public mutating func round(_ rule: WholeArithmetic.RoundingRule) {
+    @_inlineable public mutating func round(_ rule: WholeArithmetic.RoundingRule) {
         x.round(rule)
         y.round(rule)
     }
@@ -83,10 +83,8 @@ extension TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vec
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    public func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self {
-        var result = self
-        result.round(rule)
-        return result
+    @_inlineable public func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self {
+        return nonmutatingVariant(of: Self.round, on: self, with: rule)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:)_]
@@ -95,7 +93,7 @@ extension TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vec
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) {
+    @_inlineable public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) {
         x.round(rule, toMultipleOf: factor)
         y.round(rule, toMultipleOf: factor)
     }
@@ -106,9 +104,32 @@ extension TwoDimensionalPoint where Self.Vector : TwoDimensionalVector, Self.Vec
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) -> Self {
-        var result = self
-        result.round(rule, toMultipleOf: factor)
-        return result
+    @_inlineable public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) -> Self {
+        return nonmutatingVariant(of: Self.round, on: self, with: (rule, factor))
+    }
+
+    // MARK: - PointProtocol
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    /// Moves the preceding point by the following vector.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The point to modify.
+    ///     - followingValue: The vector to add.
+    @_inlineable public static func += (precedingValue: inout Self, followingValue: Vector) {
+        precedingValue.x += followingValue.Δx
+        precedingValue.y += followingValue.Δy
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    /// Returns the vector that leads from the preceding point to the following point.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The endpoint.
+    ///     - followingValue: The startpoint.
+    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+        let Δx = precedingValue.x − followingValue.x
+        let Δy = precedingValue.y − followingValue.y
+        return Self.Vector(Δx : Δx, Δy : Δy)
     }
 }

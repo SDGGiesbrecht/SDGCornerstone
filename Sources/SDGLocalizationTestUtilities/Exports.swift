@@ -13,6 +13,7 @@
  */
 
 @_exported import SDGLocalization
+@_exported import SDGTesting
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

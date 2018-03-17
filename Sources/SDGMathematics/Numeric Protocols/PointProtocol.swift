@@ -131,6 +131,21 @@ extension PointProtocol where Self.Vector == Self {
     }
 }
 
+extension PointProtocol where Self : Strideable {
+    // MARK: - where Self : Strideable
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
+    /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The starting point.
+    ///     - followingValue: The vector to add.
+    @_inlineable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+        // Disambiguate PointProtocol vs Strideable
+        return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
+    }
+}
+
 extension PointProtocol where Self : Strideable, Self.Stride == Self.Vector {
     // MARK: - where Self : Strideable, Self.Stride == Self.Vector
 

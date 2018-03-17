@@ -12,18 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import SDGCornerstone
+@_exported import SDGGeometry
 @_exported import SDGTesting
-
-@_exported import SDGLogicTestUtilities
-@_exported import SDGMathematicsTestUtilities
-@_exported import SDGRandomizationTestUtilities
-@_exported import SDGCollectionsTestUtilities
-@_exported import SDGTextTestUtilities
-@_exported import SDGPersistenceTestUtilities
-@_exported import SDGLocalizationTestUtilities
-@_exported import SDGGeometryTestUtilities
-@_exported import SDGCalendarTestUtilities
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 
@@ -62,28 +52,3 @@ postfix operator √=
 postfix operator °
 postfix operator ′
 postfix operator ′′
-
-// SDGCollections
-infix operator ∈: ComparisonPrecedence
-infix operator ∉: ComparisonPrecedence
-infix operator ∋: ComparisonPrecedence
-infix operator ∌: ComparisonPrecedence
-precedencegroup BinarySetOperationPrecedence {
-    lowerThan: RangeFormationPrecedence
-    higherThan: ComparisonPrecedence
-}
-infix operator ∩: BinarySetOperationPrecedence
-infix operator ∩=: AssignmentPrecedence
-infix operator ∪: BinarySetOperationPrecedence
-infix operator ∪=: AssignmentPrecedence
-postfix operator ′=
-infix operator ∖: BinarySetOperationPrecedence
-infix operator ∖=: AssignmentPrecedence
-infix operator ∆: BinarySetOperationPrecedence
-infix operator ∆=: AssignmentPrecedence
-infix operator ⊆: ComparisonPrecedence
-infix operator ⊈: ComparisonPrecedence
-infix operator ⊇: ComparisonPrecedence
-infix operator ⊉: ComparisonPrecedence
-infix operator ⊊: ComparisonPrecedence
-infix operator ⊋: ComparisonPrecedence

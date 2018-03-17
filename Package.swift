@@ -51,6 +51,9 @@ let package = Package(
         .library(name: "SDGLocalization", targets: ["SDGLocalization"]),
         .library(name: "SDGLocalizationTestUtilities", targets: ["SDGLocalizationTestUtilities"]),
 
+        .library(name: "SDGGeometry", targets: ["SDGGeometry"]),
+        .library(name: "SDGGeometryTestUtilities", targets: ["SDGGeometryTestUtilities"]),
+
         .library(name: "SDGCalendar", targets: ["SDGCalendar"]),
         .library(name: "SDGCalendarTestUtilities", targets: ["SDGCalendarTestUtilities"]),
 
@@ -69,6 +72,7 @@ let package = Package(
             "SDGPersistence",
             "SDGRandomization",
             "SDGLocalization",
+            "SDGGeometry",
             "SDGCalendar",
 
             "SDGCornerstoneLocalizations" // [_Warning: Temporary._]
@@ -81,6 +85,7 @@ let package = Package(
             "SDGPersistenceTestUtilities",
             "SDGRandomizationTestUtilities",
             "SDGLocalizationTestUtilities",
+            "SDGGeometryTestUtilities",
             "SDGCalendarTestUtilities",
 
             "SDGCornerstone",
@@ -149,6 +154,11 @@ let package = Package(
             ]),
         .target(name: "SDGLocalizationTestUtilities", dependencies: ["SDGLocalization", "SDGTesting"]),
 
+        .target(name: "SDGGeometry", dependencies: [
+            "SDGMathematics"
+            ]),
+        .target(name: "SDGGeometryTestUtilities", dependencies: ["SDGGeometry", "SDGTesting"]),
+
         .target(name: "SDGCalendar", dependencies: [
             "SDGMathematics",
             "SDGText",
@@ -201,6 +211,9 @@ let package = Package(
             ]),
         .testTarget(name: "SDGLocalizationTests", dependencies: [
             "SDGLocalizationTestUtilities", "SDGXCTestUtilities",
+            ]),
+        .testTarget(name: "SDGGeometryTests", dependencies: [
+            "SDGGeometryTestUtilities", "SDGXCTestUtilities",
             ]),
         .testTarget(name: "SDGCalendarTests", dependencies: [
             "SDGCalendarTestUtilities", "SDGXCTestUtilities",
