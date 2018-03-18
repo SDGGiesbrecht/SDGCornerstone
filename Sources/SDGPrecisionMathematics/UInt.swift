@@ -12,22 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogic
-import SDGMathematics
-
 extension UIntFamily {
-
-    // MARK: - Binary
-
-    /// The value of self represented in binary as a collection of bits.
-    public var binary: BinaryView<Self> {
-        get {
-            return BinaryView(self)
-        }
-        set {
-            self = newValue.uInt
-        }
-    }
 
     // MARK: - Extensions for WholeNumber
 

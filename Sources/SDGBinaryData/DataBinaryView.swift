@@ -1,5 +1,5 @@
 /*
- Data.BinaryView.swift
+ DataBinaryView.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -11,8 +11,6 @@
  Licensed under the Apache Licence, Version 2.0.
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
-
-import Foundation
 
 extension Data {
 
@@ -36,8 +34,8 @@ extension Data {
             return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
         }
 
-        private func bitIndex(_ index: IntMax) -> SDGCornerstone.BinaryView<UInt8>.Index {
-            return SDGCornerstone.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
+        private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
+            return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
         }
 
         // MARK: - BidirectionalCollection

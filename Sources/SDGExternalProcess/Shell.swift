@@ -19,7 +19,6 @@
 
     import SDGLogic
     import SDGCornerstoneLocalizations
-    import SDGConcurrency
 
     /// A command line shell.
     public struct Shell {

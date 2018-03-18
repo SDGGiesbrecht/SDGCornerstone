@@ -12,10 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-
-import SDGCollections
-
 /// A data stream.
 ///
 /// Data streams are used to combine several distinct units of data into a single stream and separate the stream back into distinct units later, such as after transfering the stream over a network connection.

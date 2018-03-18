@@ -12,10 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGControlFlow
-import SDGLogic
-import SDGMathematics
-
 // [_Example 1: WholeNumber Literals_]
 /// An arbitrary‐precision integer.
 ///
@@ -181,7 +177,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // [_Inherit Documentation: SDGCornerstone.Numeric.init(exactly:)_]
     /// Creates a new instance from the given integer, if it can be represented exactly.
-    public init?<T>(exactly source: T) where T : BinaryInteger {
+    @_inlineable public init?<T>(exactly source: T) where T : BinaryInteger {
         if let whole = WholeNumber(exactly: source) {
             self.init(whole)
             return

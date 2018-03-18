@@ -12,9 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogic
-import SDGMathematics
-
 import SDGCornerstoneLocalizations
 
 // [_Example 1: WholeNumber Literals_]
@@ -164,7 +161,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // [_Inherit Documentation: SDGCornerstone.Numeric.init(exactly:)_]
     /// Creates a new instance from the given integer, if it can be represented exactly.
-    public init?<T>(exactly source: T) where T : BinaryInteger {
+    @_inlineable public init?<T>(exactly source: T) where T : BinaryInteger {
         guard let whole = UIntMax(exactly: source) else {
             return nil // Source could be a negative integer.
         }

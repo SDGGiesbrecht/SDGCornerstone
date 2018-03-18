@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGBinaryData
+import SDGCornerstoneLocalizations
+
 internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
 
     // MARK: - Initialization
@@ -58,6 +61,15 @@ internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Co
 
     internal func index(after i: Index) -> Index {
         return i + (1 as Index)
+    }
+
+    internal func assertIndexExists(_ index: Index) {
+        assert(index ∈ bounds, UserFacingText({ (localization: APILocalization) in
+            switch localization {
+            case .englishCanada: // [_Exempt from Test Coverage_]
+                return "Index out of bounds."
+            }
+        }))
     }
 
     internal subscript(index: Index) -> Element {

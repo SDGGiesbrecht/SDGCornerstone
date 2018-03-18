@@ -16,9 +16,10 @@ import Foundation
 import XCTest
 
 @testable import SDGText
+@testable import SDGBinaryData
 @testable import SDGLocalization
 @testable import SDGCalendar
-@testable import SDGCornerstone
+@testable import SDGPrecisionMathematics
 
 import SDGCornerstoneLocalizations
 

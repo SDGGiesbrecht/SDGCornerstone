@@ -1,5 +1,5 @@
 /*
- WholeNumber.BinaryView.swift
+ WholeNumberBinaryView.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogic
+import SDGBinaryData
 import SDGCornerstoneLocalizations
 
 // [_Workaround: Subtypes in extensions have visibility problems. (Swift 4.0.3)_]

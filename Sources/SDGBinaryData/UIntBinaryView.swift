@@ -1,5 +1,5 @@
 /*
- BinaryView.swift
+ UIntBinaryView.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,12 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A view of the contents of a fixed‐length unsigned integer as a collection of bits.
 public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
 
     // MARK: - Initialization
 
-    internal init(_ uInt: UIntValue) {
+    @_inlineable @_versioned internal init(_ uInt: UIntValue) {
         self.uInt = uInt
     }
 
@@ -25,20 +27,20 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
-    public static var endIndex: Index {
+    @_inlineable public static var endIndex: Index {
         return Index(count)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.count_]
     /// The number of elements in the collection.
-    public static var count: IndexDistance {
+    @_inlineable public static var count: IndexDistance {
         let bytes = MemoryLayout<UIntValue>.size
         return bytes × 8
     }
 
     // MARK: - Properties
 
-    internal var uInt: UIntValue
+    @_versioned internal var uInt: UIntValue
 
     // MARK: - BidirectionalCollection
 
@@ -47,7 +49,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     ///
     /// - Parameters:
     ///     - i: The following index.
-    public func index(before i: Index) -> Index {
+    @_inlineable public func index(before i: Index) -> Index {
         return i − (1 as Index)
     }
 
@@ -79,13 +81,22 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    public func index(after i: Index) -> Index {
+    @_inlineable public func index(after i: Index) -> Index {
         return i + (1 as Index)
+    }
+
+    @_transparent @_versioned internal func assertIndexExists(_ index: Index) {
+        _assert(index ∈ bounds, { (localization: _APILocalization) in
+            switch localization {
+            case .englishCanada: // [_Exempt from Test Coverage_]
+                return "Index out of bounds."
+            }
+        })
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
-    public subscript(index: Index) -> Element {
+    @_inlineable public subscript(index: Index) -> Element {
         get {
             assertIndexExists(index)
             return uInt.bitwiseAnd(with: 1 << index) >> index == 1

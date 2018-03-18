@@ -12,9 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematics
-import SDGRandomization
-
 // [_Example 1: RationalNumber Literals_]
 /// An arbitrary‐precision rational number.
 ///
@@ -73,7 +70,7 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
                 unsafeDefinition.denominator−=
             }
 
-            let divisor = SDGCornerstone.gcd(unsafeDefinition.numerator, unsafeDefinition.denominator)
+            let divisor = SDGPrecisionMathematics.gcd(unsafeDefinition.numerator, unsafeDefinition.denominator)
 
             unsafeDefinition.numerator = unsafeDefinition.numerator.dividedAccordingToEuclid(by: divisor)
             unsafeDefinition.denominator = unsafeDefinition.denominator.dividedAccordingToEuclid(by: divisor)
@@ -214,7 +211,7 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // [_Inherit Documentation: SDGCornerstone.Numeric.init(exactly:)_]
     /// Creates a new instance from the given integer, if it can be represented exactly.
-    public init?<T>(exactly source: T) where T : BinaryInteger {
+    @_inlineable public init?<T>(exactly source: T) where T : BinaryInteger {
         guard let integer = Integer(exactly: source) else {
             unreachable()
         }

@@ -13,6 +13,8 @@
  */
 
 @_exported import SDGMathematics
+@_exported import SDGRandomization // RandomizableNumber
+@_exported import SDGLocalization // TextConvertibleNumber
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

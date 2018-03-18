@@ -127,7 +127,11 @@ let package = Package(
             ]),
         .target(name: "SDGCollectionsTestUtilities", dependencies: ["SDGCollections", "SDGTesting"]),
 
-        .target(name: "SDGBinaryData", dependencies: []),
+        .target(name: "SDGBinaryData", dependencies: [
+            "SDGControlFlow",
+            "SDGMathematics",
+            "SDGCollections"
+            ]),
 
         .target(name: "SDGText", dependencies: [
             "SDGControlFlow",
@@ -175,14 +179,21 @@ let package = Package(
         .target(name: "SDGCalendarTestUtilities", dependencies: ["SDGCalendar", "SDGTesting"]),
 
         .target(name: "SDGPrecisionMathematics", dependencies: [
-            "SDGMathematics"
+            "SDGMathematics",
+            "SDGRandomization",
+            "SDGBinaryData",
+            "SDGLocalization",
+            "SDGCornerstoneLocalizations"
             ]),
 
         .target(name: "SDGConcurrency", dependencies: [
             "SDGLogic"
             ]),
 
-        .target(name: "SDGExternalProcess", dependencies: []),
+        .target(name: "SDGExternalProcess", dependencies: [
+            "SDGLogic",
+            "SDGCornerstoneLocalizations"
+            ]),
 
         .target(name: "SDGTesting", dependencies: [
             "SDGMathematics",
