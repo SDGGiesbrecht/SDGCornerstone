@@ -87,7 +87,7 @@ class PersistenceTests : TestCase {
                 try instance.save(to: url)
                 let reloaded = try T(from: url)
                 XCTAssertEqual(reloaded, instance, "The loaded file does not match the saved file.")
-            } catch let error {
+            } catch {
                 XCTFail("An error occured saving and loading: \(error)")
             }
         }
@@ -124,7 +124,7 @@ class PersistenceTests : TestCase {
             }
 
             XCTAssertEqual(try? String(from: file), fileContents) // Directory not overwritten.
-        } catch let error {
+        } catch {
             XCTFail("\(error)")
         }
 
@@ -147,7 +147,7 @@ class PersistenceTests : TestCase {
             XCTAssertEqual(try? String(from: destinationDirectory.appendingPathComponent(fileName)), fileContents)
             XCTAssertEqual(try? String(from: sourceDirectory.appendingPathComponent(fileName)), fileContents)
 
-        } catch let error {
+        } catch {
             XCTFail("\(error)")
         }
     }
@@ -175,10 +175,10 @@ class PersistenceTests : TestCase {
 
         preferences[testKey].value.set(to: true)
         #if os(macOS)
-            do {let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey], silently: true)
+            do {let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey])
                 XCTAssertEqual(output, "1", "Failed to write preferences to disk.")
-            } catch let error {
-                XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
+            } catch {
+                XCTFail("Unexpected error: \(error)")
             }
         #elseif os(Linux)
             let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
@@ -190,7 +190,7 @@ class PersistenceTests : TestCase {
                     return
                 }
                 XCTAssertEqual(preferences[testKey] as? Bool, true, "Failed to write preferences to disk.")
-            } catch let error {
+            } catch {
                 XCTFail("An error occurred while verifying write test: \(error)")
             }
         #endif
@@ -201,15 +201,15 @@ class PersistenceTests : TestCase {
         let stringValue = "value"
         #if os(macOS)
             do {
-                try Shell.default.run(command: ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue], silently: true)
-            } catch let error {
-                XCTFail("Unexpected error: \((error as? Shell.Error)?.description ?? "\(error)")")
+                try Shell.default.run(command: ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue])
+            } catch {
+                XCTFail("Unexpected error: \(error)")
             }
         #elseif os(Linux)
             do {
                 let data = try PropertyListSerialization.data(fromPropertyList: [externalTestKey: stringValue], format: .xml, options: 0)
                 try data.save(to: url)
-            } catch let error {
+            } catch {
                 XCTFail("An error occurred while setting up read test: \(error)")
             }
         #endif

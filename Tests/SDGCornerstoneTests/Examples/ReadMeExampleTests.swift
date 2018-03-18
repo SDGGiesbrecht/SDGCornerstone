@@ -70,7 +70,7 @@ class ReadMeExampleTests : TestCase {
 
                 XCTAssertEqual(loaded,
                                "Contents")
-            } catch let error {
+            } catch {
                 XCTFail(error.localizedDescription)
             }
 

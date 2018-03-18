@@ -32,7 +32,7 @@ internal func XCTAssertRecodes<T>(_ instance: T, equivalentFormats: [String] = [
             let decoded = try decoder.decode([T].self, from: data)
             XCTAssertEqual(decoded[0], instance, "Format not equivalent: \(format)", file: file, line: line)
         }
-    } catch let error {
+    } catch {
         XCTFail("\(error)", file: file, line: line)
     }
 }

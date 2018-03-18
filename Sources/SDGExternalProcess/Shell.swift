@@ -21,12 +21,12 @@
     import SDGCornerstoneLocalizations
 
     /// A command line shell.
-    public struct Shell {
+    public class Shell {
 
         // MARK: - Static Properties
 
         /// The default shell.
-        public static let `default` = Shell(launchPath: "/bin/sh")
+        public static let `default` = Shell(at: URL(fileURLWithPath: "/bin/sh"))
 
         // MARK: - Static Functions
 
@@ -55,17 +55,17 @@
 
         // MARK: - Initialization
 
-        /// Creates a shell using the specified launch path.
+        /// Creates an instance with the
         ///
         /// - Parameters:
-        ///     - launchPath: The launch path.
-        public init(launchPath: String) {
-            self.launchPath = launchPath
+        ///     - executable: The location of the executable file.
+        public init(at executable: URL) {
+            process = ExternalProcess(at: executable)
         }
 
         // MARK: - Properties
 
-        private let launchPath: String
+        private let process: ExternalProcess
 
         // MARK: - Usage
 
@@ -73,39 +73,14 @@
         ///
         /// - Parameters:
         ///     - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
-        ///     - silently: If `false` (the default), the command and its output will be printed to standard out. If `true`, nothing will be sent to standard out.
-        ///     - redactionList: An optional list of sensitive strings to redact from the printed output. (Redaction is not applied to the return value or thrown error.)
         ///     - autoquote: Whether or not to automatically quote arguments. Defaults to `true`.
-        ///     - alternatePrint: An optional closure to use instead of `print()` to send lines to standard output. This can be used to redirect or preprocess the text intended for standard output. (The closure will receive the redacted version and will never be executed if `silently` is `true`.)
+        ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
+        ///     - line: The line of output.
         ///
         /// - Returns: The output of the command.
         ///
-        /// - Throws: A `Shell.Error` if the exit code indicates a failure.
-        @discardableResult public func run(command: [String], silently: Bool = false, redacting redactionList: [String] = [], autoquote: Bool = true, alternatePrint: (_ line: String) -> Void = { print($0) }) throws -> String { // [_Exempt from Test Coverage_]
-
-            func redact(_ string: String) -> String { // [_Exempt from Test Coverage_]
-                var result = string
-                let redacted = "[" + String(UserFacingText({ (localization: InterfaceLocalization) in // [_Exempt from Test Coverage_]
-                    switch localization {
-                    case .englishUnitedKingdom, .englishUnitedStates, .englishCanada: // [_Exempt from Test Coverage_]
-                        return "redacted"
-                    }
-                }).resolved()) + "]"
-                for sensitive in redactionList { // [_Exempt from Test Coverage_]
-                    result = result.replacingOccurrences(of: sensitive, with: redacted)
-                } // [_Exempt from Test Coverage_]
-                return result
-            }
-
-            // Formatting separation from other output.
-            if ¬silently { // [_Exempt from Test Coverage_]
-                alternatePrint("")
-            }
-            defer {
-                if ¬silently { // [_Exempt from Test Coverage_]
-                    alternatePrint("")
-                }
-            }
+        /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
+        @discardableResult public func run(command: [String], autoquote: Bool = true, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // [_Exempt from Test Coverage_]
 
             let commandString = command.map({ (argument: String) -> String in
                 if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
@@ -115,73 +90,10 @@
                 }
             }).joined(separator: " ")
 
-            if ¬silently { // [_Exempt from Test Coverage_]
-                alternatePrint(redact("$ " + commandString))
-            }
+            reportProgress("$ " + commandString)
 
-            let shell = Process()
-            shell.launchPath = launchPath
-            shell.arguments = ["\u{2D}c", commandString]
-
-            let standardOutput = Pipe()
-            shell.standardOutput = standardOutput
-            let standardError = Pipe()
-            shell.standardError = standardError
-
-            shell.launch()
-
-            var output = String()
-            var outputStream = Data()
-            var error = String()
-            var errorStream = Data()
-
-            let newLine = "\n"
-            let newLineData = newLine.data(using: String.Encoding.utf8)!
-
-            func handleInput(pipe: Pipe, stream: inout Data, result: inout String, report: (_ line: String) -> Void) -> Bool {
-                let newData = pipe.fileHandleForReading.availableData
-                stream.append(newData)
-
-                while let lineEnd = stream.range(of: newLineData) {
-                    let line = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
-                    stream.removeSubrange(stream.startIndex ..< lineEnd.upperBound)
-
-                    guard let string = try? String(file: line, origin: nil) else {
-                        unreachable()
-                    }
-
-                    result.append(string + newLine)
-                    if ¬silently { // [_Exempt from Test Coverage_]
-                        report(redact(string))
-                    }
-                }
-
-                return ¬newData.isEmpty
-            }
-
-            var completeErrorReceived = false
-            DispatchQueue.global(qos: .userInitiated).async {
-                while handleInput(pipe: standardError, stream: &errorStream, result: &error, report: { FileHandle.standardError.write(($0 + newLine).data(using: .utf8)!) }) {} // [_Exempt from Test Coverage_]
-                completeErrorReceived = true
-            }
-
-            while handleInput(pipe: standardOutput, stream: &outputStream, result: &output, report: { alternatePrint($0) }) {} // [_Exempt from Test Coverage_]
-            while ¬completeErrorReceived {} // [_Exempt from Test Coverage_]
-
-            while shell.isRunning {} // [_Exempt from Test Coverage_]
-
-            if output.hasSuffix(newLine) {
-                output.scalars.removeLast()
-            }
-            if error.hasSuffix(newLine) {
-                error.scalars.removeLast()
-            }
-
-            let exitCode = shell.terminationStatus
-            if exitCode == 0 {
-                return output
-            } else {
-                throw Error(code: Int(exitCode), description: error, output: output)
+            return try process.run(["\u{2D}c", commandString]) {
+                reportProgress($0)
             }
         }
     }

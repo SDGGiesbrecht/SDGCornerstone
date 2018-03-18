@@ -28,9 +28,7 @@ class ShellTests : TestCase {
             var command = ["ls"]
             do {
                 try Shell.default.run(command: command)
-            } catch let error as Shell.Error {
-                XCTFail("Unexpected error: \(command) → \(error.description)")
-            } catch let error {
+            } catch {
                 XCTFail("Unexpected error: \(command) → \(error)")
             }
 
@@ -39,9 +37,7 @@ class ShellTests : TestCase {
             do {
                 let result = try Shell.default.run(command: command)
                 XCTAssertEqual(result, message)
-            } catch let error as Shell.Error {
-                XCTFail("Unexpected error: \(command) → \(error.description)")
-            } catch let error {
+            } catch {
                 XCTFail("Unexpected error: \(command) → \(error)")
             }
 
@@ -49,8 +45,8 @@ class ShellTests : TestCase {
             let threw = expectation(description: "Error thrown for unidentified command.")
             do {
                 try Shell.default.run(command: [nonexistentCommand])
-            } catch let error as Shell.Error {
-                XCTAssert(error.description.contains("not found"), "Unexpected error: \(command) → \(error.description)")
+            } catch let error as ExternalProcess.Error {
+                XCTAssert(error.output.contains("not found"), "Unexpected error: \(command) → \(error)")
                 threw.fulfill()
             } catch {
                 XCTFail("Wrong error type.")
@@ -62,9 +58,7 @@ class ShellTests : TestCase {
             do {
                 let result = try Shell.default.run(command: command)
                 XCTAssertEqual(result, metacharacters)
-            } catch let error as Shell.Error {
-                XCTFail("Unexpected error: \(command) → \(error.description)")
-            } catch let error {
+            } catch {
                 XCTFail("Unexpected error: \(command) → \(error)")
             }
 
@@ -73,9 +67,7 @@ class ShellTests : TestCase {
             do {
                 let result = try Shell.default.run(command: command)
                 XCTAssert(¬result.contains("\u{22}"))
-            } catch let error as Shell.Error {
-                XCTFail("Unexpected error: \(command) → \(error.description)")
-            } catch let error {
+            } catch {
                 XCTFail("Unexpected error: \(command) → \(error)")
             }
         #endif

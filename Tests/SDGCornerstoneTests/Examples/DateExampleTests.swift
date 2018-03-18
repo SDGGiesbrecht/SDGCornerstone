@@ -78,7 +78,7 @@ class DateExampleTests : TestCase {
         do {
             let recoded = try JSONDecoder().decode(CalendarDate.self, from: try JSONEncoder().encode(unregistered))
             XCTAssertRecodes(recoded, equivalentFormats: [unregisteredCoded])
-        } catch let error {
+        } catch {
             XCTFail(error.localizedDescription)
         }
         // Once registered...

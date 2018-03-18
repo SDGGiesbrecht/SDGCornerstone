@@ -163,7 +163,7 @@ do {
 
     XCTAssertEqual(loaded,
                    "Contents")
-} catch let error {
+} catch {
     XCTFail(error.localizedDescription)
 }
 

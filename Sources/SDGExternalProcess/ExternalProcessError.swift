@@ -1,5 +1,5 @@
 /*
- ShellError.swift
+ ExternalProcessError.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -15,16 +15,15 @@
 #if !(os(iOS) || os(watchOS) || os(tvOS))
     // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-    extension Shell {
+    extension ExternalProcess {
 
         /// A shell error.
         public struct Error : Swift.Error {
 
             // MARK: - Initialization
 
-            internal init(code: Int, description: String, output: String) {
+            internal init(code: Int, output: String) {
                 self.code = code
-                self.description = description
                 self.output = output
             }
 
@@ -33,10 +32,7 @@
             /// The exit code.
             public let code: Int
 
-            /// The output received by standard error.
-            public let description: String
-
-            /// The output received by standard out.
+            /// The output received.
             public let output: String
         }
     }

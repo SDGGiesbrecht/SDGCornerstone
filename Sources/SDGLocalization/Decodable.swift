@@ -35,7 +35,7 @@ extension Decodable {
                 throw generateError(underlyingError: nil)
             }
             self = decoded
-        } catch let error {
+        } catch {
             throw generateError(underlyingError: error)
         }
     }

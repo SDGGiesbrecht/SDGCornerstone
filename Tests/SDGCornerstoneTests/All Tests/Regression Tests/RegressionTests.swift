@@ -57,7 +57,7 @@ class RegressionTests : TestCase {
         do {
             try file.save(to: url)
             XCTAssertEqual(try? String(from: url), file)
-        } catch let error {
+        } catch {
             XCTFail("\(error)")
         }
     }
@@ -80,9 +80,7 @@ class RegressionTests : TestCase {
             do {
                 let output = try Shell.default.run(command: longCommand)
                 XCTAssert(output.contains("0.8.3"))
-            } catch let error as Shell.Error {
-                XCTFail("Unexpected error: \(longCommand) → \(error.description)")
-            } catch let error {
+            } catch {
                 XCTFail("Unexpected error: \(longCommand) → \(error)")
             }
         #endif
