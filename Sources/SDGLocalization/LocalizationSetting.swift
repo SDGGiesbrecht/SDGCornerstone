@@ -16,6 +16,7 @@ import Foundation
 
 import SDGControlFlow
 import SDGLogic
+import SDGText
 import SDGPersistence
 import SDGRandomization
 
