@@ -94,7 +94,7 @@ extension BidirectionalCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func lastMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+    @_inlineable public func lastMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return lastMatch(for: pattern as Pattern<Element>, in: searchRange)
     }
 
@@ -135,7 +135,7 @@ extension BidirectionalCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func lastMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Element == Self.Element {
+    @_inlineable public func lastMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Element == Self.Element {
         return _lastMatch(for: pattern, in: searchRange)
     }
 
@@ -168,7 +168,7 @@ extension BidirectionalCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func lastMatch(for pattern: Self, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+    @_inlineable public func lastMatch(for pattern: Self, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return _lastMatch(for: pattern, in: searchRange)
     }
 
@@ -190,7 +190,7 @@ extension BidirectionalCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
+    @_inlineable public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
         return hasSuffix(pattern as Pattern<Element>)
     }
 
@@ -203,7 +203,7 @@ extension BidirectionalCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
+    @_inlineable public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return _hasSuffix(pattern)
     }
 
@@ -212,7 +212,7 @@ extension BidirectionalCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasSuffix(_ pattern: Self) -> Bool {
+    @_inlineable public func hasSuffix(_ pattern: Self) -> Bool {
         return _hasSuffix(pattern)
     }
 
@@ -224,7 +224,7 @@ extension BidirectionalCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - other: The other collection
-    @_transparent public func commonSuffix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+    @_inlineable public func commonSuffix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return _commonSuffix(with: other)
     }
 
@@ -233,7 +233,7 @@ extension BidirectionalCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - other: The other collection
-    @_transparent public func commonSuffix(with other: Self) -> PatternMatch<Self> {
+    @_inlineable public func commonSuffix(with other: Self) -> PatternMatch<Self> {
         return _commonSuffix(with: other)
     }
 }

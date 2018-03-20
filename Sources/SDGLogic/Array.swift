@@ -23,7 +23,7 @@ extension Array where Element : Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_transparent public static func ≠ (precedingValue: Array, followingValue: Array) -> Bool {
+    @_inlineable public static func ≠ (precedingValue: Array, followingValue: Array) -> Bool {
         return precedingValue != followingValue
     }
 }
@@ -37,7 +37,7 @@ extension ArraySlice where Element : Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_transparent public static func ≠ (precedingValue: ArraySlice, followingValue: ArraySlice) -> Bool {
+    @_inlineable public static func ≠ (precedingValue: ArraySlice, followingValue: ArraySlice) -> Bool {
         return precedingValue != followingValue
     }
 }
@@ -51,7 +51,7 @@ extension ContiguousArray where Element : Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_transparent public static func ≠ (precedingValue: ContiguousArray, followingValue: ContiguousArray) -> Bool {
+    @_inlineable public static func ≠ (precedingValue: ContiguousArray, followingValue: ContiguousArray) -> Bool {
         return precedingValue != followingValue
     }
 }

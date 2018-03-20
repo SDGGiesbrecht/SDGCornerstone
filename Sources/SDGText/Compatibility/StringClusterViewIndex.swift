@@ -19,7 +19,7 @@ extension String/*.ClusterView*/.Index {
     // MARK: - Conversions
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
-    public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
+    @_inlineable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
         guard let result = samePosition(in: scalars) as String.ScalarView.Index? else {
             _unreachable()
         }

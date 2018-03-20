@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to RationalArithmetic.
-@_transparent public func testRationalArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RationalArithmetic {
+@_inlineable public func testRationalArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RationalArithmetic {
 
     testIntegralArithmeticConformance(of: T.self, file: file, line: line)
 

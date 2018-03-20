@@ -26,36 +26,36 @@ extension RangeReplaceableCollection {
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
     /// Appends the contents of the sequence to the end of the collection.
 
-    @_transparent @_versioned internal mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
+    @_inlineable @_versioned internal mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
         append(contentsOf: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
     /// Appends the contents of the sequence to the end of the collection.
-    @_transparent public mutating func append(contentsOf newElements: Self) {
+    @_inlineable public mutating func append(contentsOf newElements: Self) {
         appendAsCollection(contentsOf: newElements)
     }
 
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
 
-    @_transparent @_versioned internal mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
+    @_inlineable @_versioned internal mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
         insert(contentsOf: newElements, at: i)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
-    @_transparent public mutating func insert(contentsOf newElements: Self, at i: Self.Index) {
+    @_inlineable public mutating func insert(contentsOf newElements: Self, at i: Self.Index) {
         insertAsCollection(contentsOf: newElements, at: i)
     }
 
     // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
 
-    @_transparent @_versioned internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
+    @_inlineable @_versioned internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
     /// Inserts the contents of the sequence to the specified index.
-    @_transparent public mutating func replaceSubrange(_ subrange: Range<Self.Index>, with newElements: Self) {
+    @_inlineable public mutating func replaceSubrange(_ subrange: Range<Self.Index>, with newElements: Self) {
         replaceSubrangeAsCollection(subrange, with: newElements)
     }
 
@@ -76,7 +76,7 @@ extension RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.append, on: self, with: newElements)
     }
 
-    @_transparent @_versioned internal func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
+    @_inlineable @_versioned internal func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         return appending(contentsOf: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:)_]
@@ -84,7 +84,7 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElements: The elements to append to the collection
-    @_transparent public func appending(contentsOf newElements: Self) -> Self {
+    @_inlineable public func appending(contentsOf newElements: Self) -> Self {
         return appendingAsCollection(contentsOf: newElements)
     }
 
@@ -105,7 +105,7 @@ extension RangeReplaceableCollection {
         insert(contentsOf: newElements, at: startIndex)
     }
 
-    @_transparent @_versioned internal mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
+    @_inlineable @_versioned internal mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
         prepend(contentsOf: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
@@ -113,7 +113,7 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElements: The elements to prepend to the collection
-    @_transparent public mutating func prepend(contentsOf newElements: Self) {
+    @_inlineable public mutating func prepend(contentsOf newElements: Self) {
         prependAsCollection(contentsOf: newElements)
     }
 
@@ -134,7 +134,7 @@ extension RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.prepend, on: self, with: newElements)
     }
 
-    @_transparent @_versioned internal func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
+    @_inlineable @_versioned internal func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         return prepending(contentsOf: newElements)
     }
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
@@ -142,7 +142,7 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - newElements: The elements to prepend to the collection
-    @_transparent public func prepending(contentsOf newElements: Self) -> Self {
+    @_inlineable public func prepending(contentsOf newElements: Self) -> Self {
         return prependingAsCollection(contentsOf: newElements)
     }
 
@@ -216,7 +216,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func truncate(before pattern: CompositePattern<Element>) {
+    @_inlineable public mutating func truncate(before pattern: CompositePattern<Element>) {
         truncate(before: pattern as Pattern<Element>)
     }
 
@@ -232,7 +232,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func truncate<C : Collection>(before pattern: C) where C.Element == Self.Element {
+    @_inlineable public mutating func truncate<C : Collection>(before pattern: C) where C.Element == Self.Element {
         _truncate(before: pattern)
     }
 
@@ -243,7 +243,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func truncate(before pattern: Self) {
+    @_inlineable public mutating func truncate(before pattern: Self) {
         _truncate(before: pattern)
     }
 
@@ -311,7 +311,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func truncate(after pattern: CompositePattern<Element>) {
+    @_inlineable public mutating func truncate(after pattern: CompositePattern<Element>) {
         truncate(after: pattern as Pattern<Element>)
     }
 
@@ -327,7 +327,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func truncate<C : Collection>(after pattern: C) where C.Element == Self.Element {
+    @_inlineable public mutating func truncate<C : Collection>(after pattern: C) where C.Element == Self.Element {
         _truncate(after: pattern)
     }
 
@@ -338,7 +338,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func truncate(after pattern: Self) {
+    @_inlineable public mutating func truncate(after pattern: Self) {
         _truncate(after: pattern)
     }
 
@@ -408,7 +408,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func drop(upTo pattern: CompositePattern<Element>) {
+    @_inlineable public mutating func drop(upTo pattern: CompositePattern<Element>) {
         drop(upTo: pattern as Pattern<Element>)
     }
 
@@ -426,7 +426,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func drop<C : Collection>(upTo pattern: C) where C.Element == Self.Element {
+    @_inlineable public mutating func drop<C : Collection>(upTo pattern: C) where C.Element == Self.Element {
         _drop(upTo: pattern)
     }
 
@@ -437,7 +437,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func drop(upTo pattern: Self) {
+    @_inlineable public mutating func drop(upTo pattern: Self) {
         _drop(upTo: pattern)
     }
 
@@ -507,7 +507,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func drop(through pattern: CompositePattern<Element>) {
+    @_inlineable public mutating func drop(through pattern: CompositePattern<Element>) {
         drop(through: pattern as Pattern<Element>)
     }
 
@@ -525,7 +525,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func drop<C : Collection>(through pattern: C) where C.Element == Self.Element {
+    @_inlineable public mutating func drop<C : Collection>(through pattern: C) where C.Element == Self.Element {
         _drop(through: pattern)
     }
 
@@ -536,7 +536,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public mutating func drop(through pattern: Self) {
+    @_inlineable public mutating func drop(through pattern: Self) {
         _drop(through: pattern)
     }
 
@@ -606,7 +606,7 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    @_transparent public mutating func replaceMatches<C : Collection>(for pattern: CompositePattern<Element>, with replacement: C) where C.Element == Self.Element {
+    @_inlineable public mutating func replaceMatches<C : Collection>(for pattern: CompositePattern<Element>, with replacement: C) where C.Element == Self.Element {
         replaceMatches(for: pattern as Pattern<Element>, with: replacement)
     }
 
@@ -621,7 +621,7 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    @_transparent public mutating func replaceMatches<P : Collection, C : Collection>(for pattern: P, with replacement: C) where P.Element == Self.Element, C.Element == Self.Element {
+    @_inlineable public mutating func replaceMatches<P : Collection, C : Collection>(for pattern: P, with replacement: C) where P.Element == Self.Element, C.Element == Self.Element {
         _replaceMatches(for: pattern, with: replacement)
     }
 
@@ -631,7 +631,7 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
-    @_transparent public mutating func replaceMatches(for pattern: Self, with replacement: Self) {
+    @_inlineable public mutating func replaceMatches(for pattern: Self, with replacement: Self) {
         _replaceMatches(for: pattern, with: replacement)
     }
 
@@ -705,7 +705,7 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
-    @_transparent public mutating func mutateMatches<C : Collection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
+    @_inlineable public mutating func mutateMatches<C : Collection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
         mutateMatches(for: pattern as Pattern<Element>, mutation: mutation)
     }
 
@@ -732,7 +732,7 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
-    @_transparent public mutating func mutateMatches<P : Collection, C : Collection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P.Element == Self.Element, C.Element == Self.Element {
+    @_inlineable public mutating func mutateMatches<P : Collection, C : Collection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P.Element == Self.Element, C.Element == Self.Element {
         _mutateMatches(for: pattern, mutation: mutation)
     }
 
@@ -742,7 +742,7 @@ extension RangeReplaceableCollection where Element : Equatable, SubSequence : Co
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
-    @_transparent public mutating func mutateMatches<C : Collection>(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
+    @_inlineable public mutating func mutateMatches<C : Collection>(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
         _mutateMatches(for: pattern, mutation: mutation)
     }
 

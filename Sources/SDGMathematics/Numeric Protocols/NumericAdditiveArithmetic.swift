@@ -92,7 +92,7 @@ extension NumericAdditiveArithmetic {
 /// :nodoc:
 public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     /// :nodoc:
-    @_transparent public init(contents: Wrapped) {
+    @_inlineable public init(contents: Wrapped) {
         self.contents = contents
     }
     /// :nodoc:
@@ -108,7 +108,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 /// let y = |x|
 /// XCTAssertEqual(y, 1)
 /// ```
-@_transparent public prefix func | <Value>(operand: _PartialAbsoluteValue<Value>) -> Value {
+@_inlineable public prefix func | <Value>(operand: _PartialAbsoluteValue<Value>) -> Value {
     return operand.contents
 }
 
@@ -121,7 +121,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 /// let y = |x|
 /// XCTAssertEqual(y, 1)
 /// ```
-@_transparent public postfix func | <Value>(operand: Value) -> _PartialAbsoluteValue<Value> {
+@_inlineable public postfix func | <Value>(operand: Value) -> _PartialAbsoluteValue<Value> {
     return _PartialAbsoluteValue(contents: operand.absoluteValue)
 }
 
@@ -141,7 +141,7 @@ extension NumericAdditiveArithmetic where Self : Numeric {
     // MARK: - where Self : Numeric
 
     /// The magnitude of this value.
-    @_transparent public var magnitude: Self {
+    @_inlineable public var magnitude: Self {
         return |self|
     }
 }

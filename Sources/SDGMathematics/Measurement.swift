@@ -203,7 +203,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The measurement.
     ///     - followingValue: The scalar.
-    @_transparent public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
+    @_inlineable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
         return followingValue × precedingValue
     }
 
@@ -497,7 +497,7 @@ extension Measurement {
 /// - Parameters:
 ///     - precedingValue: A value.
 ///     - followingValue: Another value.
-@_transparent public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
+@_inlineable public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.gcd(a, b)
 }
 
@@ -507,7 +507,7 @@ extension Measurement {
 /// - Parameters:
 ///     - precedingValue: A value.
 ///     - followingValue: Another value.
-@_transparent public func lcm<M : Measurement>(_ a: M, _ b: M) -> M {
+@_inlineable public func lcm<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.lcm(a, b)
 }
 

@@ -15,7 +15,7 @@
 import SDGTesting
 
 /// Tests a type’s conformance to Subtractable.
-@_transparent public func testSubtractableConformance<T>(minuend: T, subtrahend: T, difference: T, file: StaticString = #file, line: UInt = #line) where T : Subtractable, T : Equatable {
+@_inlineable public func testSubtractableConformance<T>(minuend: T, subtrahend: T, difference: T, file: StaticString = #file, line: UInt = #line) where T : Subtractable, T : Equatable {
 
     testAddableConformance(augend: difference, addend: subtrahend, sum: minuend, file: file, line: line)
 

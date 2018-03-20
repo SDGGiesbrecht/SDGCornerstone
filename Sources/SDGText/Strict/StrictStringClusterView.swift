@@ -20,7 +20,7 @@ extension StrictString {
 
         // MARK: - Initialization
 
-        internal init(_ string: StrictString) {
+        @_inlineable @_versioned internal init(_ string: StrictString) {
             self.string = string
         }
 
@@ -30,7 +30,7 @@ extension StrictString {
 
         // MARK: - Normalization
 
-        @_versioned internal static func normalize(_ string: String) -> StrictString.ClusterView {
+        @_inlineable @_versioned internal static func normalize(_ string: String) -> StrictString.ClusterView {
             return StrictString(string).clusters
         }
 
@@ -58,7 +58,7 @@ extension StrictString {
         ///
         /// - Parameters:
         ///     - i: The following index.
-        public func index(before i: String.ClusterView.Index) -> String.ClusterView.Index {
+        @_inlineable public func index(before i: String.ClusterView.Index) -> String.ClusterView.Index {
             return string.string.clusters.index(before: i)
         }
 
@@ -66,13 +66,13 @@ extension StrictString {
 
         // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
         /// The position of the first element in a non‐empty collection.
-        public var startIndex: String.ClusterView.Index {
+        @_inlineable public var startIndex: String.ClusterView.Index {
             return string.string.clusters.startIndex
         }
 
         // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
         /// The position following the last valid index.
-        public var endIndex: String.ClusterView.Index {
+        @_inlineable public var endIndex: String.ClusterView.Index {
             return string.string.clusters.endIndex
         }
 
@@ -81,13 +81,13 @@ extension StrictString {
         ///
         /// - Parameters:
         ///     - i: The preceding index.
-        public func index(after i: String.ClusterView.Index) -> String.ClusterView.Index {
+        @_inlineable public func index(after i: String.ClusterView.Index) -> String.ClusterView.Index {
             return string.string.clusters.index(after: i)
         }
 
         // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
         /// Accesses the element at the specified position.
-        public subscript(position: String.ClusterView.Index) -> ExtendedGraphemeCluster {
+        @_inlineable public subscript(position: String.ClusterView.Index) -> ExtendedGraphemeCluster {
             return string.string.clusters[position]
         }
 
@@ -95,7 +95,7 @@ extension StrictString {
 
         // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
         /// Creates a new, empty collection.
-        public init() {
+        @_inlineable public init() {
             string = StrictString()
         }
 

@@ -86,7 +86,7 @@ extension VectorProtocol {
     /// - Parameters:
     ///     - precedingValue: A scalar coefficient.
     ///     - followingValue: A value.
-    @_transparent public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
+    @_inlineable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
         return followingValue × precedingValue
     }
 

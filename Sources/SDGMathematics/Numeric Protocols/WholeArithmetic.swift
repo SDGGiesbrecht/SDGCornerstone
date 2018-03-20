@@ -482,7 +482,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - integerLiteral: The integer literal.
-    @_transparent public init(integerLiteral: UIntMax) {
+    @_inlineable public init(integerLiteral: UIntMax) {
         self.init(integerLiteral)
     }
 
@@ -492,12 +492,12 @@ extension WholeArithmetic {
     /// Creates a new instance from the given integer, if it can be represented exactly.
 
     /// Multiplies two values and produces their product.
-    @_transparent public static func * (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func * (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue × followingValue
     }
 
     /// Multiplies two values and stores the result in the left‐hand‐side variable.
-    @_transparent public static func *= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func *= (precedingValue: inout Self, followingValue: Self) {
         precedingValue ×= followingValue
     }
 }
@@ -510,7 +510,7 @@ extension WholeArithmetic {
 /// - Parameters:
 ///     - precedingValue: A value.
 ///     - followingValue: Another value.
-@_transparent public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
+@_inlineable public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.gcd(a, b)
 }
 
@@ -520,6 +520,6 @@ extension WholeArithmetic {
 /// - Parameters:
 ///     - precedingValue: A value.
 ///     - followingValue: Another value.
-@_transparent public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
+@_inlineable public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.lcm(a, b)
 }

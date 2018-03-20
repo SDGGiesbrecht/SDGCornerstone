@@ -15,7 +15,7 @@
 /// Tests a type’s conformance to OneDimensionalPoint.
 ///
 /// - Precondition: `departure` is expected to be less than `destination`.
-@_transparent public func testOneDimensionalPointConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : OneDimensionalPoint {
+@_inlineable public func testOneDimensionalPointConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : OneDimensionalPoint {
     testComparableConformance(less: departure, greater: destination, file: file, line: line)
     testPointProtocolConformance(departure: departure, vector: vector, destination: destination, file: file, line: line)
 }

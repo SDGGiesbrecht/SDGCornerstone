@@ -18,7 +18,7 @@ public struct Weak<Pointee : AnyObject> {
     // MARK: - Initialization
 
     /// Creates a reference to a class instance.
-    public init(_ pointee: Pointee?) {
+    @_inlineable public init(_ pointee: Pointee?) {
         self.pointee = pointee
     }
 

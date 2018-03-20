@@ -39,7 +39,7 @@ extension OrdinalCalendarComponent {
     ///
     /// - Parameters:
     ///     - ordinal: The ordinal.
-    @_transparent public init(ordinal: Vector) {
+    @_inlineable public init(ordinal: Vector) {
         self.init(ordinal)
     }
 
@@ -51,7 +51,7 @@ extension OrdinalCalendarComponent {
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal_]
     /// The ordinal.
-    @_transparent public var ordinal: Vector {
+    @_inlineable public var ordinal: Vector {
         return rawValue
     }
 }

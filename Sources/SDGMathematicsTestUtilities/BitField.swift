@@ -15,7 +15,7 @@
 import SDGTesting
 
 /// Tests a type’s conformance to BitField.
-@_transparent public func testBitFieldConformance<F>(start: F, not: F, other: F, and: F, or: F, exclusiveOr: F, file: StaticString = #file, line: UInt = #line) where F : BitField {
+@_inlineable public func testBitFieldConformance<F>(start: F, not: F, other: F, and: F, or: F, exclusiveOr: F, file: StaticString = #file, line: UInt = #line) where F : BitField {
     test(method: (F.bitwiseNot, "bitwiseNot"), of: start, returns: not, file: file, line: line)
     test(mutatingMethod: (F.formBitwiseNot, "formBitwiseNot"), of: start, resultsIn: not, file: file, line: line)
     test(method: (F.bitwiseAnd, "bitwiseAnd"), of: start, with: other, returns: and, file: file, line: line)

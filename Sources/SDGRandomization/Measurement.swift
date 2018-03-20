@@ -22,7 +22,7 @@ extension Measurement where Scalar : RandomizableNumber {
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    public init(randomInRange range: Range<Self>) {
+    @_inlineable public init(randomInRange range: Range<Self>) {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
@@ -33,7 +33,7 @@ extension Measurement where Scalar : RandomizableNumber {
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    public init(randomInRange range: ClosedRange<Self>) {
+    @_inlineable public init(randomInRange range: ClosedRange<Self>) {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
@@ -45,7 +45,7 @@ extension Measurement where Scalar : RandomizableNumber {
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: Range<Self>, fromRandomizer randomizer: Randomizer) {
+    @_inlineable public init(randomInRange range: Range<Self>, fromRandomizer randomizer: Randomizer) {
         let scalar = Scalar(randomInRange: range.lowerBound.rawValue ..< range.upperBound.rawValue, fromRandomizer: randomizer)
         self.init(rawValue: scalar)
     }
@@ -58,7 +58,7 @@ extension Measurement where Scalar : RandomizableNumber {
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
+    @_inlineable public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
         let scalar = Scalar(randomInRange: range.lowerBound.rawValue ... range.upperBound.rawValue, fromRandomizer: randomizer)
         self.init(rawValue: scalar)
     }

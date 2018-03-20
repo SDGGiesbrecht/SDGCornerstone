@@ -36,13 +36,13 @@ extension IntegerProtocol {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
-    @_transparent public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.raiseIntegerToThePowerOf(integer: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isIntegral_]
     /// Returns `true` if `self` is an integer.
-    @_transparent public var isIntegral: Bool {
+    @_inlineable public var isIntegral: Bool {
         return true
     }
 
@@ -51,7 +51,7 @@ extension IntegerProtocol {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_transparent public mutating func round(_ rule: RoundingRule) {
+    @_inlineable public mutating func round(_ rule: RoundingRule) {
         // self = self
     }
 }

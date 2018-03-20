@@ -61,7 +61,7 @@ extension Bool {
     public static let trueRandomizerValue: UInt64 = randomizationBit
 
     /// Returns a random Boolean value.
-    public static func random() -> Bool {
+    @_inlineable public static func random() -> Bool {
         return Bool(fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 

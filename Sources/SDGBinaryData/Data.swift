@@ -17,7 +17,7 @@ extension Data : BitField {
     // MARK: - Properties
 
     /// The data represented as a collection of bits.
-    public var binary: BinaryView {
+    @_inlineable public var binary: BinaryView {
         get {
             return BinaryView(self)
         }
@@ -30,7 +30,7 @@ extension Data : BitField {
 
     // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseNot()_]
     /// Inverts the bits.
-    public mutating func formBitwiseNot() {
+    @_inlineable public mutating func formBitwiseNot() {
         for index in indices {
             self[index].formBitwiseNot()
         }
@@ -41,7 +41,7 @@ extension Data : BitField {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    public mutating func formBitwiseAnd(with other: Data) {
+    @_inlineable public mutating func formBitwiseAnd(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {
@@ -55,7 +55,7 @@ extension Data : BitField {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    public mutating func formBitwiseOr(with other: Data) {
+    @_inlineable public mutating func formBitwiseOr(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {
@@ -69,7 +69,7 @@ extension Data : BitField {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    public mutating func formBitwiseExclusiveOr(with other: Data) {
+    @_inlineable public mutating func formBitwiseExclusiveOr(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {

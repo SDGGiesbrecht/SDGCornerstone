@@ -19,22 +19,22 @@ extension Data {
 
         // MARK: - Initialization
 
-        internal init(_ data: Data) {
+        @_inlineable @_versioned internal init(_ data: Data) {
             self.data = data
         }
 
         // MARK: - Properties
 
-        private static let bitsPerByte: IntMax = 8
-        internal var data: Data
+        @_versioned internal static let bitsPerByte: IntMax = 8
+        @_versioned internal var data: Data
 
         // MARK: - Conversions
 
-        private func byteIndex(_ index: IntMax) -> Data.Index {
+        @_inlineable @_versioned internal func byteIndex(_ index: IntMax) -> Data.Index {
             return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
         }
 
-        private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
+        @_inlineable @_versioned internal func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
             return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
         }
 
@@ -45,7 +45,7 @@ extension Data {
         ///
         /// - Parameters:
         ///     - i: The following index.
-        public func index(before i: IntMax) -> IntMax {
+        @_inlineable public func index(before i: IntMax) -> IntMax {
             return i − 1
         }
 
@@ -56,7 +56,7 @@ extension Data {
         public var startIndex: IntMax = 0
         // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
         /// The position following the last valid index.
-        public var endIndex: IntMax {
+        @_inlineable public var endIndex: IntMax {
             return IntMax(data.endIndex) × BinaryView.bitsPerByte
         }
 
@@ -65,13 +65,13 @@ extension Data {
         ///
         /// - Parameters:
         ///     - i: The preceding index.
-        public func index(after i: IntMax) -> IntMax {
+        @_inlineable public func index(after i: IntMax) -> IntMax {
             return i + 1
         }
 
         // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
         /// Accesses the element at the specified position.
-        public subscript(position: IntMax) -> Bool {
+        @_inlineable public subscript(position: IntMax) -> Bool {
             get {
                 return data[byteIndex(position)].binary[bitIndex(position)]
             }

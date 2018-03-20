@@ -33,7 +33,7 @@ extension AdditiveArithmetic where Self : ExpressibleByIntegerLiteral {
 
     // [_Inherit Documentation: SDGCornerstone.AdditiveArithmetic.additiveIdentity_]
     /// The additive identity (origin).
-    @_transparent public static var additiveIdentity: Self {
+    @_inlineable public static var additiveIdentity: Self {
         return 0
     }
 }

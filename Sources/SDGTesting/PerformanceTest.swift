@@ -26,7 +26,7 @@ import SDGMathematics
 ///     - file: The file name where the call occurs. Provided.
 ///     - line: The line number where the call occurs. Provided.
 ///     - test: The closure to test.
-@_transparent public func limit(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
+@_inlineable public func limit(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
 
     let iterations = 10
 

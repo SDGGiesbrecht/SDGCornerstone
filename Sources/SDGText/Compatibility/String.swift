@@ -17,7 +17,7 @@ extension String : StringFamily {
     // MARK: - Initialization
 
     /// Creates a string from a `StrictString`.
-    public init(_ string: StrictString) {
+    @_inlineable public init(_ string: StrictString) {
         self = string.string
     }
 
@@ -31,7 +31,7 @@ extension String : StringFamily {
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]
     /// A view of a string’s contents as a collection of Unicode scalars.
-    @_transparent public var scalars: ScalarView {
+    @_inlineable public var scalars: ScalarView {
         get {
             return unicodeScalars
         }
@@ -42,7 +42,7 @@ extension String : StringFamily {
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.clusters_]
     /// A view of a string’s contents as a collection of extended grapheme clusters.
-    @_transparent public var clusters: ClusterView {
+    @_inlineable public var clusters: ClusterView {
         get {
             return self
         }

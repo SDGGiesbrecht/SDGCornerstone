@@ -56,13 +56,13 @@ extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /*
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]
     /// Creates a string from a collection of lines.
-    public init(_ lines: LineView<Self>) {
+    @_inlineable public init(_ lines: LineView<Self>) {
         self = lines.base
     }
 
     // [_Define Documentation: SDGCornerstone.StringFamily.lines_]
     /// A view of a string’s contents as a collection of lines.
-    public var lines: LineView<Self> {
+    @_inlineable public var lines: LineView<Self> {
         get {
             return LineView(self)
         }
@@ -73,7 +73,7 @@ extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /*
 
     // [_Define Documentation: SDGCornerstone.String.isMultiline_]
     /// Whether or not the string contains multiple lines.
-    public var isMultiline: Bool {
+    @_inlineable public var isMultiline: Bool {
         return scalars.isMultiline
     }
 }

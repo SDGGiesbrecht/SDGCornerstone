@@ -17,42 +17,42 @@ extension RationalArithmetic {
     // MARK: - Calendar Intervals
 
     /// Returns a calendar interval in Gregorian leap year cycles.
-    @_transparent public var gregorianLeapYearCycles: CalendarInterval<Self> {
+    @_inlineable public var gregorianLeapYearCycles: CalendarInterval<Self> {
         return CalendarInterval(gregorianLeapYearCycles: self)
     }
 
     /// Returns a calendar interval in Hebrew moons.
-    @_transparent public var hebrewMoons: CalendarInterval<Self> {
+    @_inlineable public var hebrewMoons: CalendarInterval<Self> {
         return CalendarInterval(hebrewMoons: self)
     }
 
     /// Returns a calendar interval in weeks.
-    @_transparent public var weeks: CalendarInterval<Self> {
+    @_inlineable public var weeks: CalendarInterval<Self> {
         return CalendarInterval(weeks: self)
     }
 
     /// Returns a calendar interval in days.
-    @_transparent public var days: CalendarInterval<Self> {
+    @_inlineable public var days: CalendarInterval<Self> {
         return CalendarInterval(days: self)
     }
 
     /// Returns a calendar interval in hours.
-    @_transparent public var hours: CalendarInterval<Self> {
+    @_inlineable public var hours: CalendarInterval<Self> {
         return CalendarInterval(hours: self)
     }
 
     /// Returns a calendar interval in minutes.
-    @_transparent public var minutes: CalendarInterval<Self> {
+    @_inlineable public var minutes: CalendarInterval<Self> {
         return CalendarInterval(minutes: self)
     }
 
     /// Returns a calendar interval in Hebrew parts.
-    @_transparent public var hebrewParts: CalendarInterval<Self> {
+    @_inlineable public var hebrewParts: CalendarInterval<Self> {
         return CalendarInterval(hebrewParts: self)
     }
 
     /// Returns a calendar interval in seconds.
-    @_transparent public var seconds: CalendarInterval<Self> {
+    @_inlineable public var seconds: CalendarInterval<Self> {
         return CalendarInterval(seconds: self)
     }
 }

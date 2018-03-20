@@ -24,26 +24,26 @@ public struct Preference : CustomStringConvertible, Equatable {
     /// The returned instance can be used with any API which expects a `Preference` type, but it does not belong to a `PreferenceSet` and will never be saved to the disk.
     ///
     /// (Real preferences are obtained from `PreferenceSet.subscript(key:)`.)
-    public static func mock() -> Preference {
+    @_inlineable public static func mock() -> Preference {
         return Preference(propertyListObject: nil)
     }
 
-    internal init(propertyListObject: NSObject?) {
+    @_inlineable @_versioned internal init(propertyListObject: NSObject?) {
         self.propertyListObject = propertyListObject
     }
 
     // MARK: - Properties
 
-    internal var propertyListObject: NSObject? {
+    @_versioned internal var propertyListObject: NSObject? {
         didSet {
             cache = Cache()
         }
     }
-    private class Cache {
+    @_versioned internal class Cache {
         fileprivate init() {}
-        fileprivate var types: [ObjectIdentifier : Any?] = [:]
+        @_versioned internal var types: [ObjectIdentifier : Any?] = [:]
     }
-    private var cache: Cache = Cache()
+    @_versioned internal var cache: Cache = Cache()
 
     // MARK: - Usage
 
@@ -99,7 +99,7 @@ public struct Preference : CustomStringConvertible, Equatable {
         }
     #endif
 
-    public mutating func set<T>(to value: T?) where T : Encodable {
+    @_inlineable public mutating func set<T>(to value: T?) where T : Encodable {
 
         guard let theValue = value else {
             // Setting to nil
@@ -128,11 +128,11 @@ public struct Preference : CustomStringConvertible, Equatable {
         }
     }
 
-    public mutating func set(to value: NilLiteral) {
+    @_inlineable public mutating func set(to value: NilLiteral) {
         propertyListObject = nil
     }
 
-    public func `as`<T>(_ type: T.Type) -> T? where T : Decodable {
+    @_inlineable public func `as`<T>(_ type: T.Type) -> T? where T : Decodable {
         guard let object = propertyListObject else {
             // Value is nil.
             return nil
@@ -164,7 +164,7 @@ public struct Preference : CustomStringConvertible, Equatable {
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
-    public var description: String {
+    @_inlineable public var description: String {
         return String(describing: propertyListObject)
     }
 
@@ -176,7 +176,7 @@ public struct Preference : CustomStringConvertible, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    public static func ==(precedingValue: Preference, followingValue: Preference) -> Bool {
+    @_inlineable public static func ==(precedingValue: Preference, followingValue: Preference) -> Bool {
         return precedingValue.propertyListObject == followingValue.propertyListObject
     }
 }

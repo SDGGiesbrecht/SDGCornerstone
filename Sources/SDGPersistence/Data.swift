@@ -22,13 +22,13 @@ extension Data : FileConvertible {
     /// - Parameters:
     ///     - file: The data.
     ///     - origin: A URL indicating where the data came from. In some cases this may be helpful in determining how to interpret the data, such as by checking the file extension. This parameter may be `nil` if the data did not come from a file on the disk.
-    public init(file: Data, origin: URL?) throws {
+    @_inlineable public init(file: Data, origin: URL?) throws {
         self = file
     }
 
     // [_Inherit Documentation: SDGCornerstone.FileConvertible.file_]
     /// A binary representation that can be written as a file.
-    public var file: Data {
+    @_inlineable public var file: Data {
         return self
     }
 }

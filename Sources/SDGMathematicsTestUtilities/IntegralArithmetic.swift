@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to IntegralArithmetic.
-@_transparent public func testIntegralArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : IntegralArithmetic {
+@_inlineable public func testIntegralArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : IntegralArithmetic {
 
     testNegatableConformance(minuend: 61, subtrahend: 23, difference: 38, file: file, line: line)
     testWholeArithmeticConformance(of: T.self, includingNegatives: true, file: file, line: line)

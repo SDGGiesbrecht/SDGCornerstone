@@ -52,7 +52,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    @_transparent public static prefix func − (operand: Self) -> Self {
+    @_inlineable public static prefix func − (operand: Self) -> Self {
         return -operand
     }
 
@@ -61,7 +61,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    @_transparent public static postfix func −= (operand: inout Self) {
+    @_inlineable public static postfix func −= (operand: inout Self) {
         operand.negate()
     }
 
@@ -69,7 +69,7 @@ extension FloatFamily {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
     /// The absolute value.
-    @_transparent public var absoluteValue: Self {
+    @_inlineable public var absoluteValue: Self {
         return abs(self)
     }
 
@@ -87,7 +87,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
-    @_transparent public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue / followingValue
     }
 
@@ -97,7 +97,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The divisor.
-    @_transparent public static func ÷= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func ÷= (precedingValue: inout Self, followingValue: Self) {
         precedingValue /= followingValue
     }
 
@@ -105,7 +105,7 @@ extension FloatFamily {
 
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.π_]
     /// An instance of π.
-    @_transparent public static var π: Self {
+    @_inlineable public static var π: Self {
         return pi
     }
 
@@ -114,7 +114,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The radicand.
-    @_transparent public static prefix func √ (operand: Self) -> Self {
+    @_inlineable public static prefix func √ (operand: Self) -> Self {
         return operand.squareRoot()
     }
 
@@ -123,7 +123,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify.
-    @_transparent public static postfix func √= (operand: inout Self) {
+    @_inlineable public static postfix func √= (operand: inout Self) {
         operand = operand.squareRoot()
     }
 
@@ -407,7 +407,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_transparent public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue - followingValue
     }
 
@@ -417,7 +417,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
-    @_transparent public static func −= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue -= followingValue
     }
 
@@ -429,7 +429,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_transparent public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue
     }
 
@@ -439,7 +439,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
-    @_transparent public static func ×= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue
     }
 
@@ -524,13 +524,13 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_transparent public func rounded(_ rule: RoundingRule) -> Self {
+    @_inlineable public func rounded(_ rule: RoundingRule) -> Self {
         return roundedAsFloatingPoint(rule)
     }
 }
 
 extension FloatingPoint {
-    @_transparent @_versioned internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
+    @_inlineable @_versioned internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
         return rounded(rule)
     }
 }
@@ -564,7 +564,7 @@ extension Double : FloatFamily {
         // MARK: - CustomDebugStringConvertible
 
         /// A textual representation of this instance, suitable for debugging.
-        public var debugDescription: String {
+        @_inlineable public var debugDescription: String {
             return NativeType(self).debugDescription
         }
 
@@ -580,7 +580,7 @@ extension Double : FloatFamily {
         ///
         /// - Parameters:
         ///     - description: The string representation.
-        public init?(_ description: String) {
+        @_inlineable public init?(_ description: String) {
             if let result = NativeType(description) {
                 self = CGFloat(result)
             } else {
@@ -614,7 +614,7 @@ extension Double : FloatFamily {
         ///
         /// - Parameters:
         ///     - decoder: The decoder to read data from.
-        public init(from decoder: Decoder) throws {
+        @_inlineable public init(from decoder: Decoder) throws {
             self.init(try Double(from: decoder))
         }
 
@@ -625,7 +625,7 @@ extension Double : FloatFamily {
         ///
         /// - Parameters:
         ///     - encoder: The encoder to write data to.
-        public func encode(to encoder: Encoder) throws {
+        @_inlineable public func encode(to encoder: Encoder) throws {
             // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
             try Double(self).encode(to: encoder)
         }

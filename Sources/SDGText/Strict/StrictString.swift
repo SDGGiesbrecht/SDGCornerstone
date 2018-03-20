@@ -17,38 +17,38 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Initialization
 
-    @_versioned internal init(unsafeString: String) {
+    @_inlineable @_versioned internal init(unsafeString: String) {
         self.string = unsafeString
     }
 
     /// Creates a string from a scalar.
-    public init(_ scalar: Unicode.Scalar) {
+    @_inlineable public init(_ scalar: Unicode.Scalar) {
         self.init(String(scalar))
     }
 
     /// Creates a string from an extended grapheme cluster.
-    public init(_ cluster: ExtendedGraphemeCluster) {
+    @_inlineable public init(_ cluster: ExtendedGraphemeCluster) {
         self.init(String(cluster))
     }
 
     /// Creates a string from a `String`.
-    public init(_ string: String) {
+    @_inlineable public init(_ string: String) {
         self.string = StrictString.normalizeAsString(string)
     }
 
     /// Creates a string from a `StaticString`.
-    public init(_ string: StaticString) {
+    @_inlineable public init(_ string: StaticString) {
         self.init("\(string)")
     }
 
     /// Creates a string from a `StrictString`.
-    @_transparent public init(_ string: StrictString) {
+    @_inlineable public init(_ string: StrictString) {
         self = string
     }
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.init(clusters:)_]
     /// Creates a string from a collection of clusters.
-    public init(_ clusters: ClusterView) {
+    @_inlineable public init(_ clusters: ClusterView) {
         self = clusters.string
     }
 
@@ -58,15 +58,15 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Normalization
 
-    private static func normalizeAsString(_ string: String) -> String {
+    @_inlineable @_versioned internal static func normalizeAsString(_ string: String) -> String {
         return string.decomposedStringWithCompatibilityMapping
     }
 
-    private static func normalize(_ string: String) -> StrictString {
+    @_inlineable @_versioned internal static func normalize(_ string: String) -> StrictString {
         return StrictString(unsafeString: normalizeAsString(string))
     }
 
-    @_versioned internal static func normalize(_ scalars: String.ScalarView) -> StrictString {
+    @_inlineable @_versioned internal static func normalize(_ scalars: String.ScalarView) -> StrictString {
         return normalize(String(scalars))
     }
 
@@ -95,7 +95,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to add.
-    @_transparent public static func += (precedingValue: inout StrictString, followingValue: StrictString) {
+    @_inlineable public static func += (precedingValue: inout StrictString, followingValue: StrictString) {
         precedingValue.append(contentsOf: followingValue)
     }
 
@@ -106,7 +106,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - i: The following index.
-    public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
+    @_inlineable public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(before: i)
     }
 
@@ -117,7 +117,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    public func encode(to encoder: Encoder) throws {
+    @_inlineable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: description)
     }
 
@@ -126,7 +126,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    public init(from decoder: Decoder) throws {
+    @_inlineable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: String.self, convert: { StrictString($0) })
     }
 
@@ -134,13 +134,13 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
     /// The position of the first element in a non‐empty collection.
-    public var startIndex: String.ScalarView.Index {
+    @_inlineable public var startIndex: String.ScalarView.Index {
         return string.scalars.startIndex
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
-    public var endIndex: String.ScalarView.Index {
+    @_inlineable public var endIndex: String.ScalarView.Index {
         return string.scalars.endIndex
     }
 
@@ -149,13 +149,13 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
+    @_inlineable public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(after: i)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
-    public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
+    @_inlineable public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
         return string.scalars[position]
     }
 
@@ -167,7 +167,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    public static func < (precedingValue: StrictString, followingValue: StrictString) -> Bool {
+    @_inlineable public static func < (precedingValue: StrictString, followingValue: StrictString) -> Bool {
         return precedingValue.string < followingValue.string
     }
 
@@ -175,7 +175,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
-    public var description: String {
+    @_inlineable public var description: String {
         return string
     }
 
@@ -187,7 +187,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    public static func == (precedingValue: StrictString, followingValue: StrictString) -> Bool {
+    @_inlineable public static func == (precedingValue: StrictString, followingValue: StrictString) -> Bool {
         return precedingValue.string.scalars.elementsEqual(followingValue.string.scalars)
     }
 
@@ -198,7 +198,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - stringLiteral: The string literal.
-    @_transparent public init(stringLiteral: String) {
+    @_inlineable public init(stringLiteral: String) {
         self.init(stringLiteral)
     }
 
@@ -214,7 +214,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
     /// Creates a new, empty collection.
-    public init() {
+    @_inlineable public init() {
         self.init(unsafeString: String())
     }
 
@@ -224,7 +224,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         self = StrictString.normalize(elements)
     }
 
-    @_versioned internal static func concatenateStrictStrings(_ first: StrictString, _ second: StrictString) -> StrictString {
+    @_inlineable @_versioned internal static func concatenateStrictStrings(_ first: StrictString, _ second: StrictString) -> StrictString {
 
         if first.isEmpty {
             return second
@@ -277,7 +277,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]
     /// A view of a string’s contents as a collection of Unicode scalars.
-    @_transparent public var scalars: StrictString {
+    @_inlineable public var scalars: StrictString {
         get {
             return self
         }
@@ -288,7 +288,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.clusters_]
     /// A view of a string’s contents as a collection of extended grapheme clusters.
-    public var clusters: ClusterView {
+    @_inlineable public var clusters: ClusterView {
         get {
             return ClusterView(self)
         }
@@ -301,7 +301,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // [_Inherit Documentation: SDGCornerstone.TextOutputStream.write(_:)_]
     /// Appends the given string to the stream.
-    public mutating func write(_ string: String) {
+    @_inlineable public mutating func write(_ string: String) {
         self.append(contentsOf: string.scalars)
     }
 

@@ -26,7 +26,7 @@ public class Shared<Value> {
 
     /// The value.
     public var value: Value {
-        didSet {
+        @_inlineable didSet {
             for index in observers.indices.reversed() {
                 let (possibleObserver, identifier) = observers[index]
 
@@ -39,7 +39,7 @@ public class Shared<Value> {
         }
     }
 
-    private var observers: [(observer: Weak<AnyObject>, identifier: String)] = []
+    @_versioned internal var observers: [(observer: Weak<AnyObject>, identifier: String)] = []
 
     // MARK: - Observing
 
@@ -53,7 +53,7 @@ public class Shared<Value> {
     ///     - reportInitialState: If `true`, the observer will receive its first notification immediately to report the initial state. If `false`, the observer will not be notified until the state actually changes.
     ///
     /// - SeeAlso: `valueChanged(for:)`
-    public func register(observer: SharedValueObserver, identifier: String = "", reportInitialState: Bool = true) {
+    @_inlineable public func register(observer: SharedValueObserver, identifier: String = "", reportInitialState: Bool = true) {
 
         // Prevent duplicates.
         cancel(observer: observer)
@@ -71,7 +71,7 @@ public class Shared<Value> {
     ///
     /// - Parameters:
     ///     - observer: The observer.
-    public func cancel(observer: SharedValueObserver) {
+    @_inlineable public func cancel(observer: SharedValueObserver) {
         for index in observers.indices.reversed() {
             let (existingObserver, _) = observers[index]
 

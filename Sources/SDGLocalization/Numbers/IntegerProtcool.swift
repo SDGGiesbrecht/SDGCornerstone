@@ -19,13 +19,13 @@ extension IntegerProtocol {
     ///
     /// - Parameters:
     ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
-    @_transparent public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+    @_inlineable public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         return integralDigits(thousandsSeparator: thousandsSeparator)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal()_]
     /// Returns the ordinal in its abbreviated English form. (“1st”, “2nd”, “3rd”, etc.)
-    @_transparent public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
+    @_inlineable public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
         return generateAbbreviatedEnglishOrdinal()
     }
 
@@ -34,7 +34,7 @@ extension IntegerProtocol {
     ///
     /// - Parameters:
     ///     - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
-    @_transparent public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
+    @_inlineable public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
         return romanNumerals(lowercase: lowercase)
     }
 }

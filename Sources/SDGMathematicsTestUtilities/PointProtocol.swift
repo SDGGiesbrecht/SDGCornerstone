@@ -17,7 +17,7 @@ import SDGLogicTestUtilities
 /// Tests a type’s conformance to PointProtocol.
 ///
 /// - Precondition: `departure` and `destination` are expected to be inequal.
-@_transparent public func testPointProtocolConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : PointProtocol {
+@_inlineable public func testPointProtocolConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : PointProtocol {
 
     testEquatableConformance(differingInstances: (departure, destination), file: file, line: line)
     // [_Warning: Test Codable?_]

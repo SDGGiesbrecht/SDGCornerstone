@@ -149,25 +149,25 @@ extension RealArithmetic {
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.radians_]
     /// Returns an angle in radians.
-    @_transparent public var radians: Angle<Self> {
+    @_inlineable public var radians: Angle<Self> {
         return Angle(radians: self)
     }
 
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.radians_]
     /// Returns an angle in radians.
-    @_transparent public var rad: Angle<Self> {
+    @_inlineable public var rad: Angle<Self> {
         return radians
     }
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.rotations_]
     /// Returns an angle in rotations.
-    @_transparent public var rotations: Angle<Self> {
+    @_inlineable public var rotations: Angle<Self> {
         return Angle(rotations: self)
     }
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.degrees_]
     /// Returns an angle in degrees.
-    @_transparent public var degrees: Angle<Self> {
+    @_inlineable public var degrees: Angle<Self> {
         return Angle(degrees: self)
     }
 
@@ -176,13 +176,13 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - value: The value in degrees.
-    @_transparent public static postfix func ° (value: Self) -> Angle<Self> {
+    @_inlineable public static postfix func ° (value: Self) -> Angle<Self> {
         return value.degrees
     }
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.minutes_]
     /// Returns an angle in minutes.
-    @_transparent public var minutes: Angle<Self> {
+    @_inlineable public var minutes: Angle<Self> {
         return Angle(minutes: self)
     }
 
@@ -191,13 +191,13 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - value: The value in minutes.
-    @_transparent public static postfix func ′ (value: Self) -> Angle<Self> {
+    @_inlineable public static postfix func ′ (value: Self) -> Angle<Self> {
         return value.minutes
     }
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.seconds_]
     /// Returns an angle in seconds.
-    @_transparent public var seconds: Angle<Self> {
+    @_inlineable public var seconds: Angle<Self> {
         return Angle(seconds: self)
     }
 
@@ -206,19 +206,19 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - value: The value in seconds.
-    @_transparent public static postfix func ′′ (value: Self) -> Angle<Self> {
+    @_inlineable public static postfix func ′′ (value: Self) -> Angle<Self> {
         return value.seconds
     }
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.gradians_]
     /// Returns an angle in gradians.
-    @_transparent public var gradians: Angle<Self> {
+    @_inlineable public var gradians: Angle<Self> {
         return Angle(gradians: self)
     }
 
     // [_Define Documentation: SDGCornerstone.RealArithmetic.gradians_]
     /// Returns an angle in gradians.
-    @_transparent public var gon: Angle<Self> {
+    @_inlineable public var gon: Angle<Self> {
         return gradians
     }
 }

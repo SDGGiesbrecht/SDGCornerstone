@@ -20,6 +20,6 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_transparent public func ≠ (precedingValue: Any.Type?, followingValue: Any.Type?) -> Bool {
+@_inlineable public func ≠ (precedingValue: Any.Type?, followingValue: Any.Type?) -> Bool {
     return precedingValue != followingValue
 }

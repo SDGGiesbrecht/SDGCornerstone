@@ -301,7 +301,7 @@ extension MutableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_transparent public func intersection(_ other: Self) -> Self {
+    @_inlineable public func intersection(_ other: Self) -> Self {
         return self ∩ other
     }
 
@@ -309,7 +309,7 @@ extension MutableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_transparent public mutating func formIntersection(_ other: Self) {
+    @_inlineable public mutating func formIntersection(_ other: Self) {
         self ∩= other
     }
 
@@ -317,7 +317,7 @@ extension MutableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_transparent public func union(_ other: Self) -> Self {
+    @_inlineable public func union(_ other: Self) -> Self {
         return self ∪ other
     }
 
@@ -326,7 +326,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - other: Another set.
-    @_transparent public mutating func formUnion(_ other: Self) {
+    @_inlineable public mutating func formUnion(_ other: Self) {
         self ∪= other
     }
 
@@ -335,7 +335,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - other: Another set.
-    @_transparent public func symmetricDifference(_ other: Self) -> Self {
+    @_inlineable public func symmetricDifference(_ other: Self) -> Self {
         return self ∆ other
     }
 
@@ -344,7 +344,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - other: The set to subtract.
-    @_transparent public mutating func formSymmetricDifference(_ other: Self) {
+    @_inlineable public mutating func formSymmetricDifference(_ other: Self) {
         self ∆= other
     }
 }

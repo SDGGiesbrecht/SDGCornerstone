@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to Comparable.
-@_transparent public func testComparableConformance<T>(less: T, greater: T, file: StaticString = #file, line: UInt = #line) where T : Comparable {
+@_inlineable public func testComparableConformance<T>(less: T, greater: T, file: StaticString = #file, line: UInt = #line) where T : Comparable {
     test(operator: (<, "<"), on: (less, greater), returns: true, file: file, line: line)
     test(operator: (<, "<"), on: (greater, less), returns: false, file: file, line: line)
     test(operator: (<, "<"), on: (less, less), returns: false, file: file, line: line)

@@ -187,7 +187,7 @@ internal struct HebrewDate : DateDefinition {
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let year = try container.decode(HebrewYear.self)
         let month = try container.decode(HebrewMonth.self)
@@ -204,7 +204,7 @@ internal struct HebrewDate : DateDefinition {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(year)
         try container.encode(month)

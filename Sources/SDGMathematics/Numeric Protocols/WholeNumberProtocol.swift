@@ -36,19 +36,19 @@ extension WholeNumberProtocol {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
-    @_transparent public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isWhole_]
     /// Returns `true` if `self` is a whole number.
-    @_transparent public var isWhole: Bool {
+    @_inlineable public var isWhole: Bool {
         return true
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isIntegral_]
     /// Returns `true` if `self` is an integer.
-    @_transparent public var isIntegral: Bool {
+    @_inlineable public var isIntegral: Bool {
         return true
     }
 
@@ -57,7 +57,7 @@ extension WholeNumberProtocol {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_transparent public mutating func round(_ rule: RoundingRule) {
+    @_inlineable public mutating func round(_ rule: RoundingRule) {
         // self = self
     }
 
@@ -65,19 +65,19 @@ extension WholeNumberProtocol {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
     /// Returns `true` if `self` is negative.
-    @_transparent public var isNegative: Bool {
+    @_inlineable public var isNegative: Bool {
         return false
     }
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonNegative_]
     /// Returns `true` if `self` is positive or zero.
-    @_transparent public var isNonNegative: Bool {
+    @_inlineable public var isNonNegative: Bool {
         return true
     }
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
     /// Sets `self` to its absolute value.
-    @_transparent public mutating func formAbsoluteValue() {
+    @_inlineable public mutating func formAbsoluteValue() {
         // self = self
     }
 }

@@ -144,7 +144,7 @@ extension ComparableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_transparent public func isDisjoint(with other: Self) -> Bool {
+    @_inlineable public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
     }
 
@@ -169,7 +169,7 @@ extension ComparableSet where Self : SetAlgebra {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_transparent public func isDisjoint(with other: Self) -> Bool {
+    @_inlineable public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
         // Disambiguate ComparableSet.isDisjoint(with:) vs SetAlgebra.isDisjoint(with:)
     }

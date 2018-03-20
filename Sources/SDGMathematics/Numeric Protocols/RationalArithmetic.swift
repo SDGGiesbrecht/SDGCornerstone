@@ -82,7 +82,7 @@ extension RationalArithmetic {
     ///
     /// - Parameters:
     ///     - floatLiteral: The floating point literal.
-    @_transparent public init(floatLiteral: FloatMax) {
+    @_inlineable public init(floatLiteral: FloatMax) {
         self.init(floatLiteral)
     }
 }

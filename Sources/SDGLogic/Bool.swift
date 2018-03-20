@@ -21,7 +21,7 @@ extension Bool : Comparable {
     ///
     /// - Parameters:
     ///     - proposition: The proposition to invert.
-    @_transparent public static prefix func ¬ (proposition: Bool) -> Bool {
+    @_inlineable public static prefix func ¬ (proposition: Bool) -> Bool {
         return !proposition
     }
 
@@ -42,7 +42,7 @@ extension Bool : Comparable {
     /// - Parameters:
     ///     - precedingValue: A Boolean value.
     ///     - followingValue: A closure that results in another Boolean value.
-    @_transparent public static func ∧ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
+    @_inlineable public static func ∧ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
         return try precedingValue && followingValue
     }
 
@@ -66,7 +66,7 @@ extension Bool : Comparable {
     /// - Parameters:
     ///     - precedingValue: A Boolean value.
     ///     - followingValue: A closure that results in another Boolean value.
-    @_transparent public static func ∨ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
+    @_inlineable public static func ∨ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
         return try precedingValue || followingValue
     }
 
@@ -90,7 +90,7 @@ extension Bool : Comparable {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    public static func < (precedingValue: Bool, followingValue: Bool) -> Bool {
+    @_inlineable public static func < (precedingValue: Bool, followingValue: Bool) -> Bool {
         if precedingValue == false ∧ followingValue == true {
             return true
         } else {

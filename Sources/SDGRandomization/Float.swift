@@ -20,7 +20,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    @_transparent public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
+    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
 
         // 0 ..< UInt64.max
         let random: UInt64 = randomizer.randomNumber()

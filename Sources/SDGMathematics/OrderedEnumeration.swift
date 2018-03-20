@@ -81,7 +81,7 @@ extension OrderedEnumeration where RawValue == Int {
     /// Increments to the next case.
     ///
     /// - Precondition: There is a valid next case.
-    @_transparent public mutating func increment() {
+    @_inlineable public mutating func increment() {
         _increment()
     }
 
@@ -90,7 +90,7 @@ extension OrderedEnumeration where RawValue == Int {
     }
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
     /// Returns the next case or `nil` if there are no later cases.
-    @_transparent public func successor() -> Self? {
+    @_inlineable public func successor() -> Self? {
         return _successor()
     }
 
@@ -109,7 +109,7 @@ extension OrderedEnumeration where RawValue == Int {
     /// Decrements to the previous case.
     ///
     /// - Precondition: There is a valid previous case.
-    @_transparent public mutating func decrement() {
+    @_inlineable public mutating func decrement() {
         _decrement()
     }
 
@@ -118,7 +118,7 @@ extension OrderedEnumeration where RawValue == Int {
     }
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.predecessor()_]
     /// Returns the previous case or `nil` if there are no earlier cases.
-    @_transparent public func predecessor() -> Self? {
+    @_inlineable public func predecessor() -> Self? {
         return _predecessor()
     }
 
@@ -200,13 +200,13 @@ extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : Int
     /// Increments to the next case.
     ///
     /// - Precondition: There is a valid next case.
-    @_transparent public mutating func increment() {
+    @_inlineable public mutating func increment() {
         _increment()
     }
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
     /// Returns the next case or `nil` if there are no later cases.
-    @_transparent public func successor() -> Self? {
+    @_inlineable public func successor() -> Self? {
         return _successor()
     }
 
@@ -214,13 +214,13 @@ extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : Int
     /// Decrements to the previous case.
     ///
     /// - Precondition: There is a valid previous case.
-    @_transparent public mutating func decrement() {
+    @_inlineable public mutating func decrement() {
         _decrement()
     }
 
     // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.predecessor()_]
     /// Returns the previous case or `nil` if there are no earlier cases.
-    @_transparent public func predecessor() -> Self? {
+    @_inlineable public func predecessor() -> Self? {
         return _predecessor()
     }
 }

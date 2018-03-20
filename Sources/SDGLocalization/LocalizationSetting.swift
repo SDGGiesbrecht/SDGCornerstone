@@ -164,7 +164,7 @@ public struct LocalizationSetting : Codable, Equatable {
     ///
     /// - Parameters:
     ///     - orderOfPrecedence: An array of precedence groups. The outer array represents the order of precedence. Each inner array represents a group of localizations with equal precedence. Within a specific group, localizations will be mixed and matched at random. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
-    public init(orderOfPrecedence: [[String]]) {
+    @_inlineable public init(orderOfPrecedence: [[String]]) {
         self.orderOfPrecedence = orderOfPrecedence
     }
 
@@ -172,7 +172,7 @@ public struct LocalizationSetting : Codable, Equatable {
     ///
     /// - Parameters:
     ///     - orderOfPrecedence: An array of localizations describing there order of precedence. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
-    public init(orderOfPrecedence: [String]) {
+    @_inlineable public init(orderOfPrecedence: [String]) {
         self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
     }
 
@@ -219,7 +219,7 @@ public struct LocalizationSetting : Codable, Equatable {
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    public init(from decoder: Decoder) throws {
+    @_inlineable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: [[String]].self, convert: { LocalizationSetting(orderOfPrecedence: $0) })
     }
 
@@ -230,7 +230,7 @@ public struct LocalizationSetting : Codable, Equatable {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    public func encode(to encoder: Encoder) throws {
+    @_inlineable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: orderOfPrecedence)
     }
 
@@ -242,7 +242,7 @@ public struct LocalizationSetting : Codable, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting) -> Bool {
+    @_inlineable public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting) -> Bool {
         return precedingValue.orderOfPrecedence.elementsEqual(followingValue.orderOfPrecedence) { (leftGroup: [String], rightGroup: [String]) -> Bool in
             return Set(leftGroup) == Set(rightGroup)
         }

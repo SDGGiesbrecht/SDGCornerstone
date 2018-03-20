@@ -49,7 +49,7 @@ internal struct RelativeDate : DateDefinition {
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let interval = try container.decode(CalendarInterval<FloatMax>.self)
         let baseDate = try container.decode(CalendarDate.self)
@@ -63,7 +63,7 @@ internal struct RelativeDate : DateDefinition {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(intervalSince)
         try container.encode(baseDate)

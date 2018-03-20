@@ -20,7 +20,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     private static let carriageReturn: Unicode.Scalar = "\u{D}"
     private static let lineFeed: Unicode.Scalar = "\u{A}"
     internal static let newline = NewlinePattern(carriageReturnLineFeed: (carriageReturn, lineFeed))
-    private static let reverseNewline = NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
+    @_versioned internal static let reverseNewline = NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
 
     // MARK: - Initialization
 
@@ -87,7 +87,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    public override func reversed() -> NewlinePattern {
+    @_inlineable public override func reversed() -> NewlinePattern {
         return NewlinePattern.reverseNewline
     }
 }

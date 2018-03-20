@@ -79,7 +79,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
 
     // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
     /// The number of complete components already elapsed.
-    @_transparent public var numberAlreadyElapsed: RawValue {
+    @_inlineable public var numberAlreadyElapsed: RawValue {
         return rawValue
     }
 
@@ -116,14 +116,14 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
 
     // MARK: - Decodable
 
-    internal init(usingOrdinalFrom decoder: Decoder) throws {
+    @_inlineable @_versioned internal init(usingOrdinalFrom decoder: Decoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
         try self.init(from: decoder, via: Vector.self, convert: { Self(rawValue: $0 − (1 as Vector)) })
     }
 
     // MARK: - Encodable
 
-    internal func encodeUsingOrdinal(to encoder: Encoder) throws {
+    @_inlineable @_versioned internal func encodeUsingOrdinal(to encoder: Encoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
         try encode(to: encoder, via: ordinal)
     }

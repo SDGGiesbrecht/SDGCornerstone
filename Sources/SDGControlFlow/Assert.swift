@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_transparent @_versioned internal func list(_ localizations: (_APILocalization) -> String) -> String {
+@_versioned internal func list(_ localizations: (_APILocalization) -> String) -> String {
     var included: Set<String> = []
     let result = _APILocalization.cases.map(localizations).filter { (message) in
         if included.contains(message) {
@@ -54,7 +54,7 @@ public func _unreachable(function: String = #function, file: StaticString = #fil
 }
 
 /// :nodoc:
-@_transparent public func _assert(_ condition: @autoclosure () -> Bool, _ message: (_APILocalization) -> String, file: StaticString = #file, line: UInt = #line) {
+@_inlineable public func _assert(_ condition: @autoclosure () -> Bool, _ message: (_APILocalization) -> String, file: StaticString = #file, line: UInt = #line) {
     Swift.assert(condition, list(message), file: file, line: line)
 }
 

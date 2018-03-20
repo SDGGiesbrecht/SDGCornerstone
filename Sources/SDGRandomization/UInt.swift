@@ -20,7 +20,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    @_inlineable public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
+    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
         let value = UIntMax(randomInRange: UIntMax(range.lowerBound) ... UIntMax(range.upperBound), fromRandomizer: randomizer)
         self.init(value)
     }

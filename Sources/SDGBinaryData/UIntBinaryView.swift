@@ -85,7 +85,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
         return i + (1 as Index)
     }
 
-    @_transparent @_versioned internal func assertIndexExists(_ index: Index) {
+    @_inlineable @_versioned internal func assertIndexExists(_ index: Index) {
         _assert(index ∈ bounds, { (localization: _APILocalization) in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]

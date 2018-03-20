@@ -32,7 +32,7 @@ public enum Casing {
     /// Takes a string in the sentence medial case and transforms it to the expected case.
     ///
     /// - Warning: This method is only intended for use with compile‐time constants to reduce repetition in source code. Only the very simplest strings are supported. Passing a string which contains anything besides lowercase letters and combining marks will cause a precondition failure.
-    @_transparent public func apply(to compileTimeString: StaticString) -> StrictString {
+    @_inlineable public func apply(to compileTimeString: StaticString) -> StrictString {
         var string = StrictString(compileTimeString)
         assert(¬string.contains(where: { $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters }), UserFacingText({ (localization: _APILocalization) in // [_Exempt from Test Coverage_]
             switch localization {

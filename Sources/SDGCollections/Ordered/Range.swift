@@ -69,7 +69,7 @@ extension RangeFamily {
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_transparent public static func ∋ (precedingValue: Self, followingValue: Bound) -> Bool {
+    @_inlineable public static func ∋ (precedingValue: Self, followingValue: Bound) -> Bool {
         return precedingValue.contains(followingValue)
     }
 }
@@ -80,7 +80,7 @@ extension Range : RangeFamily {
 
     // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
     /// `true` if the type has a closed upper bound.
-    @_transparent public static var hasClosedUpperBound: Bool {
+    @_inlineable public static var hasClosedUpperBound: Bool {
         return false
     }
 
@@ -97,7 +97,7 @@ extension ClosedRange : RangeFamily {
 
     // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
     /// `true` if the type has a closed upper bound.
-    @_transparent public static var hasClosedUpperBound: Bool {
+    @_inlineable public static var hasClosedUpperBound: Bool {
         return true
     }
 
@@ -114,7 +114,7 @@ extension CountableRange : RangeFamily {
 
     // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
     /// `true` if the type has a closed upper bound.
-    @_transparent public static var hasClosedUpperBound: Bool {
+    @_inlineable public static var hasClosedUpperBound: Bool {
         return false
     }
 }
@@ -125,7 +125,7 @@ extension CountableClosedRange : RangeFamily {
 
     // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
     /// `true` if the type has a closed upper bound.
-    @_transparent public static var hasClosedUpperBound: Bool {
+    @_inlineable public static var hasClosedUpperBound: Bool {
         return true
     }
 }

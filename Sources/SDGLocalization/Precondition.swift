@@ -102,7 +102,7 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacingText<
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-@_transparent public func assert<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) {
+@_inlineable public func assert<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) {
     Swift.assert(condition, String(message().resolved()), file: file, line: line)
 }
 
@@ -112,7 +112,7 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacingText<
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-@_transparent public func assertionFailure<L>(_ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) {
+@_inlineable public func assertionFailure<L>(_ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) {
     Swift.assertionFailure(String(message().resolved()), file: file, line: line)
 }
 

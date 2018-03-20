@@ -29,7 +29,7 @@ extension RawRepresentable where RawValue : Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_transparent public static func ≠ (precedingValue: Self, followingValue: Self) -> Bool {
+    @_inlineable public static func ≠ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue != followingValue
     }
 }
@@ -43,7 +43,7 @@ extension RawRepresentable where Self : Equatable, RawValue : Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_transparent public static func ≠ (precedingValue: Self, followingValue: Self) -> Bool {
+    @_inlineable public static func ≠ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue != followingValue
     }
 }

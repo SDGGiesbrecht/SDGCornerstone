@@ -68,7 +68,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The element to test.
     ///     - followingValue: The set.
-    @_transparent public static func ∈ (precedingValue: Element, followingValue: Self) -> Bool {
+    @_inlineable public static func ∈ (precedingValue: Element, followingValue: Self) -> Bool {
         return followingValue ∋ precedingValue
     }
 
@@ -98,7 +98,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_transparent public static func ∩ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Intersection<Self, S> {
+    @_inlineable public static func ∩ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Intersection<Self, S> {
         return Intersection(precedingValue, followingValue)
     }
 
@@ -108,7 +108,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_transparent public static func ∪ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Self, S> {
+    @_inlineable public static func ∪ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Self, S> {
         return Union(precedingValue, followingValue)
     }
 
@@ -118,7 +118,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_transparent public static func ∖ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> RelativeComplement<Self, S> {
+    @_inlineable public static func ∖ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> RelativeComplement<Self, S> {
         return RelativeComplement(of: followingValue, in: precedingValue)
     }
 
@@ -127,7 +127,7 @@ extension SetDefinition {
     ///
     /// - Parameters:
     ///     - operand: The set.
-    @_transparent public static postfix func ′(operand: Self) -> AbsoluteComplement<Self> {
+    @_inlineable public static postfix func ′(operand: Self) -> AbsoluteComplement<Self> {
         return AbsoluteComplement(operand)
     }
 
@@ -137,7 +137,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_transparent public static func ∆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> SymmetricDifference<Self, S> {
+    @_inlineable public static func ∆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> SymmetricDifference<Self, S> {
         return SymmetricDifference(precedingValue, followingValue)
     }
 }
@@ -150,7 +150,7 @@ extension SetDefinition where Self : SetAlgebra {
     ///
     /// - Parameters:
     ///     - member: The element to test.
-    @_transparent public func contains(_ member: Self.Element) -> Bool {
+    @_inlineable public func contains(_ member: Self.Element) -> Bool {
         return self ∋ member
     }
 }

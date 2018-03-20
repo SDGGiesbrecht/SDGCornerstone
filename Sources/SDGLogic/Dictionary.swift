@@ -23,7 +23,7 @@ extension Dictionary where Value : Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_transparent public static func ≠ (precedingValue: Dictionary, followingValue: Dictionary) -> Bool {
+    @_inlineable public static func ≠ (precedingValue: Dictionary, followingValue: Dictionary) -> Bool {
         return precedingValue != followingValue
     }
 }

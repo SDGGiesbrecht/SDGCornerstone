@@ -20,7 +20,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    @_inlineable public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
+    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
         let value = IntMax(randomInRange: IntMax(range.lowerBound) ... IntMax(range.upperBound), fromRandomizer: randomizer)
         self.init(value)
     }
@@ -36,7 +36,7 @@ extension IntMax {
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    @_inlineable public init(randomInRange range: ClosedRange<Int64>, fromRandomizer randomizer: Randomizer) {
+    public init(randomInRange range: ClosedRange<Int64>, fromRandomizer randomizer: Randomizer) {
 
         if range.lowerBound.isWhole {
             let unsignedRange: ClosedRange<UInt64> = UInt64(range.lowerBound) ... UInt64(range.upperBound)

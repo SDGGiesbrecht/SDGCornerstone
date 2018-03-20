@@ -33,7 +33,7 @@ extension IntFamily {
     ///
     /// - Properties:
     ///     - int: An instance of a member of the `Int` family.
-    @_transparent public init<I : IntFamily>(_ int: I) {
+    @_inlineable public init<I : IntFamily>(_ int: I) {
         self.init(asBinaryIntegerWithInt: int)
     }
 
@@ -44,7 +44,7 @@ extension IntFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    @_transparent public static prefix func − (operand: Self) -> Self {
+    @_inlineable public static prefix func − (operand: Self) -> Self {
         return -operand
     }
 
@@ -53,7 +53,7 @@ extension IntFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    @_transparent public static postfix func −= (operand: inout Self) {
+    @_inlineable public static postfix func −= (operand: inout Self) {
         operand.negate()
     }
 
@@ -61,7 +61,7 @@ extension IntFamily {
 
     // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
     /// The absolute value.
-    @_transparent public var absoluteValue: Self {
+    @_inlineable public var absoluteValue: Self {
         return abs(self)
     }
 
@@ -79,7 +79,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_transparent public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue - followingValue
     }
 
@@ -89,7 +89,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
-    @_transparent public static func −= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue -= followingValue
     }
 
@@ -100,7 +100,7 @@ extension IntFamily {
     ///
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
-    @_transparent public init<U : UIntFamily>(_ uInt: U) {
+    @_inlineable public init<U : UIntFamily>(_ uInt: U) {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
@@ -110,7 +110,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_transparent public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue
     }
 
@@ -120,7 +120,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
-    @_transparent public static func ×= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue
     }
 
@@ -169,7 +169,7 @@ extension IntXFamily {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to add.
-    @_transparent public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+    @_inlineable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         return precedingValue.advanced(by: followingValue)
     }
 
@@ -189,13 +189,13 @@ extension IntXFamily {
     /// - Parameters:
     ///     - precedingValue: The endpoint.
     ///     - followingValue: The startpoint.
-    @_transparent public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return followingValue.distance(to: precedingValue)
     }
 }
 
 extension BinaryInteger {
-    @_transparent @_versioned internal init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
+    @_inlineable @_versioned internal init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
         self.init(int)
     }
 }
@@ -216,7 +216,7 @@ extension Int : IntFamily {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_transparent public static func − (precedingValue: Int, followingValue: Int) -> Int {
+    @_inlineable public static func − (precedingValue: Int, followingValue: Int) -> Int {
         return precedingValue - followingValue
     }
 }

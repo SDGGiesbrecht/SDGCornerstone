@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to AdditiveArithmetic.
-@_transparent public func testAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : AdditiveArithmetic {
+@_inlineable public func testAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : AdditiveArithmetic {
 
     // [_Warning: Test Codable?_]
     // [_Warning: Test Hashable?_]

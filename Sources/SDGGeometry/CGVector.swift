@@ -42,7 +42,7 @@
 
         // [_Inherit Documentation: SDGCornerstone.TwoDimensionalVector.Δx_]
         /// The difference in *x*.
-        public var Δx : Scalar {
+        @_inlineable public var Δx : Scalar {
             get {
                 return dx
             }
@@ -53,7 +53,7 @@
 
         // [_Inherit Documentation: SDGCornerstone.TwoDimensionalVector.Δy_]
         /// The difference in *y*.
-        public var Δy : Scalar {
+        @_inlineable public var Δy : Scalar {
             get {
                 return dy
             }

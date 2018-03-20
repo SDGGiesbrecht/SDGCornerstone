@@ -43,7 +43,7 @@ internal struct FoundationDate : DateDefinition {
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: Date.self, convert: { FoundationDate($0) })
     }
 
@@ -54,7 +54,7 @@ internal struct FoundationDate : DateDefinition {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: date)
     }
 }

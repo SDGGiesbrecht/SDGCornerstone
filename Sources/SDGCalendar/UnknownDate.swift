@@ -48,7 +48,7 @@ internal struct UnknownDate : DateDefinition {
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         unreachable() // This definition is never encoded.
     }
 
@@ -59,7 +59,7 @@ internal struct UnknownDate : DateDefinition {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         unreachable() // This definition is never encoded.
     }
 }

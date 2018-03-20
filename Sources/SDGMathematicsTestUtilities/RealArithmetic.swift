@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to RealArithmetic.
-@_transparent public func testRealArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RealArithmetic {
+@_inlineable public func testRealArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RealArithmetic {
 
     testRationalArithmeticConformance(of: T.self, file: file, line: line)
 

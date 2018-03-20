@@ -245,13 +245,13 @@ extension Localization where Self : RawRepresentable, Self.RawValue == String {
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     ///
     /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
-    public init?(exactly code: String) {
+    @_inlineable public init?(exactly code: String) {
         self.init(rawValue: code)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Localization.code_]
     /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
-    public var code: String {
+    @_inlineable public var code: String {
         return rawValue
     }
 }

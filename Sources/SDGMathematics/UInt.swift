@@ -30,7 +30,7 @@ extension UIntFamily {
 
     // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseNot()_]
     /// Returns the bits not present in `self`.
-    @_transparent public func bitwiseNot() -> Self {
+    @_inlineable public func bitwiseNot() -> Self {
         return ~self
     }
 
@@ -45,7 +45,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_transparent public func bitwiseAnd(with other: Self) -> Self {
+    @_inlineable public func bitwiseAnd(with other: Self) -> Self {
         return self & other
     }
 
@@ -63,7 +63,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_transparent public func bitwiseOr(with other: Self) -> Self {
+    @_inlineable public func bitwiseOr(with other: Self) -> Self {
         return self | other
     }
 
@@ -81,7 +81,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_transparent public func bitwiseExclusiveOr(with other: Self) -> Self {
+    @_inlineable public func bitwiseExclusiveOr(with other: Self) -> Self {
         return self ^ other
     }
 
@@ -102,7 +102,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to add.
-    @_transparent public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+    @_inlineable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         return precedingValue.advanced(by: followingValue)
     }
 
@@ -122,7 +122,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The endpoint.
     ///     - followingValue: The startpoint.
-    @_transparent public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return followingValue.distance(to: precedingValue)
     }
 
@@ -134,7 +134,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_transparent public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue - followingValue
     }
 
@@ -144,7 +144,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
-    @_transparent public static func −= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue -= followingValue
     }
 
@@ -155,7 +155,7 @@ extension UIntFamily {
     ///
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
-    @_transparent public init<U : UIntFamily>(_ uInt: U) {
+    @_inlineable public init<U : UIntFamily>(_ uInt: U) {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
@@ -165,7 +165,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_transparent public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue
     }
 
@@ -175,7 +175,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
-    @_transparent public static func ×= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue
     }
 
@@ -186,7 +186,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    @_transparent public func dividedAccordingToEuclid(by divisor: Self) -> Self {
+    @_inlineable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
         return self / divisor
     }
 
@@ -197,7 +197,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    @_transparent public mutating func divideAccordingToEuclid(by divisor: Self) {
+    @_inlineable public mutating func divideAccordingToEuclid(by divisor: Self) {
         self /= divisor
     }
 
@@ -208,7 +208,7 @@ extension UIntFamily {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    @_transparent public func mod(_ divisor: Self) -> Self {
+    @_inlineable public func mod(_ divisor: Self) -> Self {
         return self % divisor
     }
 
@@ -219,7 +219,7 @@ extension UIntFamily {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    @_transparent public mutating func formRemainder(mod divisor: Self) {
+    @_inlineable public mutating func formRemainder(mod divisor: Self) {
         self %= divisor
     }
 
@@ -237,7 +237,7 @@ extension UIntFamily {
 }
 
 extension BinaryInteger {
-    @_transparent @_versioned internal init<U : UIntFamily>(asBinaryIntegerWithUInt uInt: U) {
+    @_inlineable @_versioned internal init<U : UIntFamily>(asBinaryIntegerWithUInt uInt: U) {
         self.init(uInt)
     }
 }

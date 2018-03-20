@@ -117,7 +117,7 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func firstMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+    @_inlineable public func firstMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return firstMatch(for: pattern as Pattern<Element>, in: searchRange)
     }
 
@@ -139,7 +139,7 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func firstMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Element == Self.Element {
+    @_inlineable public func firstMatch<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? where C.Element == Self.Element {
         return _firstMatch(for: pattern, in: searchRange)
     }
 
@@ -149,7 +149,7 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func firstMatch(for pattern: Self, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
+    @_inlineable public func firstMatch(for pattern: Self, in searchRange: Range<Index>? = nil) -> PatternMatch<Self>? {
         return _firstMatch(for: pattern, in: searchRange)
     }
 
@@ -181,7 +181,7 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func matches(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+    @_inlineable public func matches(for pattern: CompositePattern<Element>, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
         return matches(for: pattern as Pattern<Element>, in: searchRange)
     }
 
@@ -204,7 +204,7 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func matches<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] where C.Element == Self.Element {
+    @_inlineable public func matches<C : Collection>(for pattern: C, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] where C.Element == Self.Element {
         return _matches(for: pattern, in: searchRange)
     }
 
@@ -216,7 +216,7 @@ extension Collection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_transparent public func matches(for pattern: Self, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
+    @_inlineable public func matches(for pattern: Self, in searchRange: Range<Index>? = nil) -> [PatternMatch<Self>] {
         return _matches(for: pattern, in: searchRange)
     }
 
@@ -237,7 +237,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func prefix(upTo pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+    @_inlineable public func prefix(upTo pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
         return prefix(upTo: pattern as Pattern<Element>)
     }
 
@@ -252,7 +252,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func prefix<C : Collection>(upTo pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
+    @_inlineable public func prefix<C : Collection>(upTo pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
         return _prefix(upTo: pattern)
     }
 
@@ -261,7 +261,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func prefix(upTo pattern: Self) -> PatternMatch<Self>? {
+    @_inlineable public func prefix(upTo pattern: Self) -> PatternMatch<Self>? {
         return _prefix(upTo: pattern)
     }
 
@@ -282,7 +282,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func prefix(through pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+    @_inlineable public func prefix(through pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
         return prefix(through: pattern as Pattern<Element>)
     }
 
@@ -297,7 +297,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func prefix<C : Collection>(through pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
+    @_inlineable public func prefix<C : Collection>(through pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
         return _prefix(through: pattern)
     }
 
@@ -306,7 +306,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func prefix(through pattern: Self) -> PatternMatch<Self>? {
+    @_inlineable public func prefix(through pattern: Self) -> PatternMatch<Self>? {
         return _prefix(through: pattern)
     }
 
@@ -327,7 +327,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func suffix(from pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+    @_inlineable public func suffix(from pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
         return suffix(from: pattern as Pattern<Element>)
     }
 
@@ -342,7 +342,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func suffix<C : Collection>(from pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
+    @_inlineable public func suffix<C : Collection>(from pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
         return _suffix(from: pattern)
     }
 
@@ -351,7 +351,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func suffix(from pattern: Self) -> PatternMatch<Self>? {
+    @_inlineable public func suffix(from pattern: Self) -> PatternMatch<Self>? {
         return _suffix(from: pattern)
     }
 
@@ -372,7 +372,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func suffix(after pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+    @_inlineable public func suffix(after pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
         return suffix(after: pattern as Pattern<Element>)
     }
 
@@ -387,7 +387,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func suffix<C : Collection>(after pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
+    @_inlineable public func suffix<C : Collection>(after pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element {
         return _suffix(after: pattern)
     }
 
@@ -396,7 +396,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func suffix(after pattern: Self) -> PatternMatch<Self>? {
+    @_inlineable public func suffix(after pattern: Self) -> PatternMatch<Self>? {
         return _suffix(after: pattern)
     }
 
@@ -427,7 +427,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func components(separatedBy pattern: CompositePattern<Element>) -> [PatternMatch<Self>] {
+    @_inlineable public func components(separatedBy pattern: CompositePattern<Element>) -> [PatternMatch<Self>] {
         return components(separatedBy: pattern as Pattern<Element>)
     }
 
@@ -440,7 +440,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func components<C : Collection>(separatedBy pattern: C) -> [PatternMatch<Self>] where C.Element == Self.Element {
+    @_inlineable public func components<C : Collection>(separatedBy pattern: C) -> [PatternMatch<Self>] where C.Element == Self.Element {
         return _components(separatedBy: pattern)
     }
 
@@ -449,7 +449,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func components(separatedBy pattern: Self) -> [PatternMatch<Self>] {
+    @_inlineable public func components(separatedBy pattern: Self) -> [PatternMatch<Self>] {
         return _components(separatedBy: pattern)
     }
 
@@ -467,7 +467,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func contains(_ pattern: CompositePattern<Element>) -> Bool {
+    @_inlineable public func contains(_ pattern: CompositePattern<Element>) -> Bool {
         return contains(pattern as Pattern<Element>)
     }
 
@@ -479,7 +479,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func contains<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
+    @_inlineable public func contains<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return _contains(pattern)
     }
 
@@ -488,7 +488,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_transparent public func contains(_ pattern: Self) -> Bool {
+    @_inlineable public func contains(_ pattern: Self) -> Bool {
         return _contains(pattern)
     }
 
@@ -506,7 +506,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasPrefix(_ pattern: CompositePattern<Element>) -> Bool {
+    @_inlineable public func hasPrefix(_ pattern: CompositePattern<Element>) -> Bool {
         return hasPrefix(pattern as Pattern<Element>)
     }
 
@@ -518,7 +518,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasPrefix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
+    @_inlineable public func hasPrefix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return _hasPrefix(pattern)
     }
 
@@ -527,7 +527,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasPrefix(_ pattern: Self) -> Bool {
+    @_inlineable public func hasPrefix(_ pattern: Self) -> Bool {
         return _hasPrefix(pattern)
     }
 
@@ -546,7 +546,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
+    @_inlineable public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
         return hasSuffix(pattern as Pattern<Element>)
     }
 
@@ -559,7 +559,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
+    @_inlineable public func hasSuffix<C : Collection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return _hasSuffix(pattern)
     }
 
@@ -568,7 +568,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_transparent public func hasSuffix(_ pattern: Self) -> Bool {
+    @_inlineable public func hasSuffix(_ pattern: Self) -> Bool {
         return _hasSuffix(pattern)
     }
 
@@ -588,7 +588,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - other: The other collection
-    @_transparent public func commonPrefix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+    @_inlineable public func commonPrefix<C : Collection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return _commonPrefix(with: other)
     }
 
@@ -597,7 +597,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - other: The other collection
-    @_transparent public func commonPrefix(with other: Self) -> PatternMatch<Self> {
+    @_inlineable public func commonPrefix(with other: Self) -> PatternMatch<Self> {
         return _commonPrefix(with: other)
     }
 
@@ -642,7 +642,7 @@ extension Collection where Element : Equatable {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    @_transparent public func firstNestingLevel<C : Collection, D : Collection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
+    @_inlineable public func firstNestingLevel<C : Collection, D : Collection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
         return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: searchRange)
     }
 
@@ -670,7 +670,7 @@ extension Collection where Element : Equatable {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    @_transparent public func firstNestingLevel(startingWith openingToken: Self, endingWith closingToken: Self, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? {
+    @_inlineable public func firstNestingLevel(startingWith openingToken: Self, endingWith closingToken: Self, in searchRange: Range<Index>? = nil) -> NestingLevel<Self>? {
         return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: searchRange)
     }
 
@@ -699,7 +699,7 @@ extension Collection where Element : Equatable {
     ///     - pattern: The pattern to advance over.
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
-    @_transparent @discardableResult public func advance(_ index: inout Index, over pattern: CompositePattern<Element>) -> Bool {
+    @_inlineable @discardableResult public func advance(_ index: inout Index, over pattern: CompositePattern<Element>) -> Bool {
         return advance(&index, over: pattern as Pattern<Element>)
     }
 
@@ -719,7 +719,7 @@ extension Collection where Element : Equatable {
     ///     - pattern: The pattern to advance over.
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
-    @_transparent @discardableResult public func advance<C : Collection>(_ index: inout Index, over pattern: C) -> Bool where C.Element == Self.Element {
+    @_inlineable @discardableResult public func advance<C : Collection>(_ index: inout Index, over pattern: C) -> Bool where C.Element == Self.Element {
         return _advance(&index, over: pattern)
     }
 
@@ -731,7 +731,7 @@ extension Collection where Element : Equatable {
     ///     - pattern: The pattern to advance over.
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
-    @_transparent @discardableResult public func advance(_ index: inout Index, over pattern: Self) -> Bool {
+    @_inlineable @discardableResult public func advance(_ index: inout Index, over pattern: Self) -> Bool {
         return _advance(&index, over: pattern)
     }
 }
@@ -755,7 +755,7 @@ extension Collection where Element : Hashable, Index : Hashable {
     /// Returns the collection as a `BjectiveMapping` between the indices and values.
     ///
     /// - Requires: No values are repeated.
-    @_transparent public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
+    @_inlineable public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
         return BijectiveMapping(indexMapping)
     }
 }

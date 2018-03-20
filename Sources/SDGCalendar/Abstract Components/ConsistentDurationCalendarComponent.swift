@@ -26,19 +26,19 @@ extension ConsistentDurationCalendarComponent {
 
     // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
     /// The mean duration.
-    @_transparent public static var meanDuration: CalendarInterval<FloatMax> {
+    @_inlineable public static var meanDuration: CalendarInterval<FloatMax> {
         return duration
     }
 
     // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
     /// The minimum duration.
-    @_transparent public static var minimumDuration: CalendarInterval<FloatMax> {
+    @_inlineable public static var minimumDuration: CalendarInterval<FloatMax> {
         return duration
     }
 
     // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
     /// The maximum duration.
-    @_transparent public static var maximumDuration: CalendarInterval<FloatMax> {
+    @_inlineable public static var maximumDuration: CalendarInterval<FloatMax> {
         return duration
     }
 }
