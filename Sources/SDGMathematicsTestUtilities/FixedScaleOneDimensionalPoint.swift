@@ -16,6 +16,5 @@
 ///
 /// - Precondition: `departure` is expected to be less than `destination`.
 @_inlineable public func testFixedScaleOneDimensionalPointConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : OneDimensionalPoint {
-    // [_Warning: Test Strideable?_]
     testOneDimensionalPointConformance(departure: departure, vector: vector, destination: destination, file: file, line: line)
 }

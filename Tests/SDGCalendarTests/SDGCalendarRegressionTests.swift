@@ -1,0 +1,46 @@
+/*
+ SDGCalendarRegressionTests.swift
+
+ This source file is part of the SDGCornerstone open source project.
+ https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
+
+ Copyright ©2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+
+ Soli Deo gloria.
+
+ Licensed under the Apache Licence, Version 2.0.
+ See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
+ */
+
+import SDGCalendar
+import SDGXCTestUtilities
+
+class SDGCalendarRegressionTests : TestCase {
+
+    func testCalendarEquatability() {
+        // Untracked
+
+        let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
+        XCTAssertEqual(tishrei, HebrewMonthAndYear(month: .tishrei, year: 5759))
+        let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
+        XCTAssertEqual(tevet, HebrewMonthAndYear(month: .tevet, year: 5759))
+        XCTAssertNotEqual(tishrei, tevet)
+    }
+
+    func testWeekday() {
+        // Untracked
+
+        var date = CalendarDate(hebrew: .tishrei, 4, 5758)
+        for _ in 0 ..< 1000 {
+            date += (1 as CalendarDate.Vector.Scalar).weeks
+            XCTAssertEqual(date.hebrewWeekday, .sunday)
+        }
+    }
+
+    static var allTests: [(String, (SDGCalendarRegressionTests) -> () throws -> Void)] {
+        return [
+            ("testCalendarEquatability", testCalendarEquatability),
+            ("testWeekday", testWeekday)
+        ]
+    }
+}

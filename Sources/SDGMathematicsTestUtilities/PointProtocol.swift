@@ -13,6 +13,7 @@
  */
 
 import SDGLogicTestUtilities
+import SDGPersistenceTestUtilities
 
 /// Tests a type’s conformance to PointProtocol.
 ///
@@ -20,7 +21,7 @@ import SDGLogicTestUtilities
 @_inlineable public func testPointProtocolConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : PointProtocol {
 
     testEquatableConformance(differingInstances: (departure, destination), file: file, line: line)
-    // [_Warning: Test Codable?_]
+    testCodableConformance(of: departure, uniqueTestName: "PointProtocol")
 
     test(operator: (+, "+"), on: (departure, vector), returns: destination, file: file, line: line)
     test(assignmentOperator: (+=, "+="), with: (departure, vector), resultsIn: destination, file: file, line: line)

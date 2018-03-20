@@ -14,3 +14,5 @@
 
 @_exported import SDGPersistence
 @_exported import SDGTesting
+
+@_exported import struct SDGText.StrictString

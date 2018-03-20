@@ -35,14 +35,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     ///     - followingValue: A scalar coefficient.
     static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
-    // [_Define Documentation: SDGCornerstone.VectorProtocol.×(scalar:_:)_]
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A scalar coefficient.
-    ///     - followingValue: A value.
-    static func × (precedingValue: Scalar, followingValue: Self) -> Self
-
     // [_Define Documentation: SDGCornerstone.VectorProtocol.×=_]
     /// Modifies the preceding value by multiplication with the following value.
     ///
@@ -80,7 +72,7 @@ extension VectorProtocol {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×(scalar:_:)_]
+    // [_Define Documentation: SDGCornerstone.VectorProtocol.×(scalar:_:)_]
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:

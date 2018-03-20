@@ -14,3 +14,4 @@
 
 testLineParsing()
 testLiteralScalarSearch()
+testRationalNumberLiterals()

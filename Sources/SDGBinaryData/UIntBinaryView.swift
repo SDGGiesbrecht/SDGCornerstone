@@ -15,6 +15,8 @@
 import SDGControlFlow
 import SDGCollections
 
+// [_Workaround: Commented specializations, “//@_specialize” in this file cause compiler crashes on Linux. (Swift 4.0.3)_]
+
 /// A view of the contents of a fixed‐length unsigned integer as a collection of bits.
 public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
 
@@ -50,6 +52,11 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     ///
     /// - Parameters:
     ///     - i: The following index.
+    //@_specialize(exported: true, where UIntValue == UInt)
+    //@_specialize(exported: true, where UIntValue == UInt64)
+    @_specialize(exported: true, where UIntValue == UInt32)
+    @_specialize(exported: true, where UIntValue == UInt16)
+    @_specialize(exported: true, where UIntValue == UInt8)
     @_inlineable public func index(before i: Index) -> Index {
         return i − (1 as Index)
     }
@@ -82,6 +89,11 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     ///
     /// - Parameters:
     ///     - i: The preceding index.
+    //@_specialize(exported: true, where UIntValue == UInt)
+    //@_specialize(exported: true, where UIntValue == UInt64)
+    @_specialize(exported: true, where UIntValue == UInt32)
+    @_specialize(exported: true, where UIntValue == UInt16)
+    @_specialize(exported: true, where UIntValue == UInt8)
     @_inlineable public func index(after i: Index) -> Index {
         return i + (1 as Index)
     }
@@ -98,10 +110,20 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
     @_inlineable public subscript(index: Index) -> Element {
+        //@_specialize(exported: true, where UIntValue == UInt)
+        //@_specialize(exported: true, where UIntValue == UInt64)
+        @_specialize(exported: true, where UIntValue == UInt32)
+        @_specialize(exported: true, where UIntValue == UInt16)
+        @_specialize(exported: true, where UIntValue == UInt8)
         get {
             assertIndexExists(index)
             return uInt.bitwiseAnd(with: 1 << index) >> index == 1
         }
+        //@_specialize(exported: true, where UIntValue == UInt)
+        //@_specialize(exported: true, where UIntValue == UInt64)
+        @_specialize(exported: true, where UIntValue == UInt32)
+        @_specialize(exported: true, where UIntValue == UInt16)
+        @_specialize(exported: true, where UIntValue == UInt8)
         set {
             assertIndexExists(index)
             let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << index).bitwiseNot())

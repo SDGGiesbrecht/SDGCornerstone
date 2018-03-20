@@ -22,4 +22,6 @@
 
     test(operator: (÷, "÷"), on: (55 as T, 11), returns: 5, file: file, line: line)
     test(assignmentOperator: (÷=, "÷="), with: (76 as T, 4), resultsIn: 19, file: file, line: line)
+
+    test(operator: (↑, "↑"), on: (0.5 as T, −2), returns: 4, file: file, line: line)
 }

@@ -12,13 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollectionsTestUtilities
+import SDGPersistenceTestUtilities
+
 /// Tests a type’s conformance to AdditiveArithmetic.
 @_inlineable public func testAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : AdditiveArithmetic {
-
-    // [_Warning: Test Codable?_]
-    // [_Warning: Test Hashable?_]
-
+    testHashableConformance(differingInstances: (augend, sum), file: file, line: line)
     testSubtractableConformance(minuend: sum, subtrahend: addend, difference: augend, file: file, line: line)
+    testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)
 
     test(operator: (+, "+"), on: (sum, T.additiveIdentity), returns: sum, file: file, line: line)
 }

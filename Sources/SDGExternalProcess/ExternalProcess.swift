@@ -42,6 +42,7 @@
         ///
         /// - Parameters:
         ///     - arguments: The arguments.
+        ///     - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
         ///     - environment: Optional. A different environment to use instead of that of the current process.
         ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
         ///     - line: The line of output.
@@ -49,13 +50,16 @@
         /// - Returns: The entire output.
         ///
         /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-        @discardableResult public func run(_ arguments: [String], in environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String {
+        @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // [_Exempt from Test Coverage_]
 
             let process = Process()
             process.launchPath = executable.path
             process.arguments = arguments
             if environment ≠ nil {
                 process.environment = environment
+            }
+            if let location = workingDirectory {
+                process.currentDirectoryPath = location.path
             }
 
             let pipe = Pipe()

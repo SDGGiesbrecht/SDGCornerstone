@@ -23,55 +23,53 @@ import XCTest
 @testable import SDGRandomizationTests
 @testable import SDGLocalizationTests
 @testable import SDGGeometryTests
-@testable import SDGDatesTests
+@testable import SDGCalendarTests
 @testable import SDGPrecisionMathematicsTests
 @testable import SDGConcurrencyTests
 @testable import SDGExternalProcessTests
-@testable import SDGCornerstoneTests
+@testable import DocumentationExampleTests
 
 XCTMain([
-    testCase(AbsoluteValueExampleTests.allTests),
-    testCase(ArbitraryPrecisionExampleTests.allTests),
-    testCase(BoolExampleTests.allTests),
-    testCase(CalendarExampleTests.allTests),
-    testCase(ComparableExampleTests.allTests),
-    testCase(DateExampleTests.allTests),
-    testCase(DictionaryExampleTests.allTests),
-    testCase(FunctionAnalysisExampleTests.allTests),
-    testCase(PatternMatchingExampleTests.allTests),
+
+    testCase(SDGControlFlowAPITests.allTests),
+
+    testCase(SDGLogicAPITests.allTests),
+
+    testCase(SDGMathematicsAPITests.allTests),
+    testCase(SDGMathematicsRegressionTests.allTests),
+
+    testCase(SDGCollectionsAPITests.allTests),
+
+    testCase(SDGBinaryDataAPITests.allTests),
+
+    testCase(SDGTextAPITests.allTests),
+    testCase(SDGTextInternalTests.allTests),
+    testCase(SDGTextRegressionTests.allTests),
+
+    testCase(SDGPersistenceAPITests.allTests),
+    testCase(SDGPersistenceRegressionTests.allTests),
+
+    testCase(SDGRandomizationAPITests.allTests),
+
+    testCase(SDGLocalizationAPITests.allTests),
+    testCase(SDGLocalizationInternalTests.allTests),
+
+    testCase(SDGGeometryAPITests.allTests),
+
+    testCase(SDGCalendarAPITests.allTests),
+    testCase(SDGCalendarInternalTests.allTests),
+    testCase(SDGCalendarRegressionTests.allTests),
+
+    testCase(SDGPrecisionMathematicsAPITests.allTests),
+    testCase(SDGPrecisionMathematicsInternalTests.allTests),
+
+    testCase(SDGConcurrencyAPITests.allTests),
+
+    testCase(SDGExternalProcessAPITests.allTests),
+    testCase(SDGExternalProcessRegressionTests.allTests),
+
     testCase(ReadMeExampleTests.allTests),
-    testCase(RunLoopExampleTests.allTests),
-
-    testCase(CollectionTests.allTests),
-    testCase(ConcurrencyTests.allTests),
-    testCase(DataTests.allTests),
-    testCase(DateTests.allTests),
-    testCase(EnumerationTests.allTests),
-    testCase(GeometryTests.allTests),
-    testCase(LogicTests.allTests),
-    testCase(LocalizationTests.allTests),
-    testCase(MathematicsTests.allTests),
-    testCase(PersistenceTests.allTests),
-    testCase(RandomizationTests.allTests),
-    testCase(ReferenceTests.allTests),
-    testCase(ShellTests.allTests),
-    testCase(TextTests.allTests),
-
-    testCase(RegressionTests.allTests),
-
-    testCase(InternalTests.allTests),
-
-    testCase(SDGControlFlowTests.allTests),
-    testCase(SDGLogicTests.allTests),
-    testCase(SDGMathematicsTests.allTests),
-    testCase(SDGCollectionsTests.allTests),
-    testCase(SDGBinaryDataTests.allTests),
-    testCase(SDGTextTests.allTests),
-    testCase(SDGPersistenceTests.allTests),
-    testCase(SDGRandomizationTests.allTests),
-    testCase(SDGLocalizationTests.allTests),
-    testCase(SDGDatesTests.allTests),
-    testCase(SDGPrecisionMathematicsTests.allTests),
-    testCase(SDGConcurrencyTests.allTests),
-    testCase(SDGExternalProcessTests.allTests)
+    testCase(MiscellaneousExampleTests.allTests),
+    testCase(DateExampleTests.allTests),
+    testCase(FunctionAnalysisExampleTests.allTests)
 ])

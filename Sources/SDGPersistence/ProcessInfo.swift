@@ -27,7 +27,7 @@ extension ProcessInfo {
             guard let result = possibleApplicationIdentifier else {
                 _preconditionFailure({ (localization: _APILocalization) -> String in
                     switch localization {
-                    case .englishCanada:
+                    case .englishCanada: // [_Exempt from Test Coverage_]
                         return "“ProcessInfo.applicationIdentifier” has not been set yet. (Import SDGCornerstone or SDGPersistence.)"
                     }
                 })
@@ -46,7 +46,7 @@ extension ProcessInfo {
     /// Framework authors can read from this version of the propery when it should not matter if the client application has neglected to specify an identifier.
     public static var possibleApplicationIdentifier: String? {
         get {
-            return _applicationIdentifier ?? Bundle.main.bundleIdentifier
+            return _applicationIdentifier ?? Bundle.main.bundleIdentifier // [_Exempt from Test Coverage_] The right side of “??” is unreachable from tests.
         }
     }
 

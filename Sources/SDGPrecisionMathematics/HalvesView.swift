@@ -48,6 +48,11 @@ internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Co
 
     // MARK: - BidirectionalCollection
 
+    @_specialize(exported: true, where UIntValue == UInt)
+    @_specialize(exported: true, where UIntValue == UInt64)
+    @_specialize(exported: true, where UIntValue == UInt32)
+    @_specialize(exported: true, where UIntValue == UInt16)
+    @_specialize(exported: true, where UIntValue == UInt8)
     internal func index(before i: Index) -> Index {
         return i − (1 as Index)
     }
@@ -61,6 +66,11 @@ internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Co
     internal let startIndex: Index = 0
     internal let endIndex: Index = Index(HalvesView.count)
 
+    @_specialize(exported: true, where UIntValue == UInt)
+    @_specialize(exported: true, where UIntValue == UInt64)
+    @_specialize(exported: true, where UIntValue == UInt32)
+    @_specialize(exported: true, where UIntValue == UInt16)
+    @_specialize(exported: true, where UIntValue == UInt8)
     internal func index(after i: Index) -> Index {
         return i + (1 as Index)
     }
@@ -75,11 +85,21 @@ internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Co
     }
 
     internal subscript(index: Index) -> Element {
+        @_specialize(exported: true, where UIntValue == UInt)
+        @_specialize(exported: true, where UIntValue == UInt64)
+        @_specialize(exported: true, where UIntValue == UInt32)
+        @_specialize(exported: true, where UIntValue == UInt16)
+        @_specialize(exported: true, where UIntValue == UInt8)
         get {
             assertIndexExists(index)
             let offset = index × elementSize
             return uInt.bitwiseAnd(with: elementMask << offset) >> offset
         }
+        @_specialize(exported: true, where UIntValue == UInt)
+        @_specialize(exported: true, where UIntValue == UInt64)
+        @_specialize(exported: true, where UIntValue == UInt32)
+        @_specialize(exported: true, where UIntValue == UInt16)
+        @_specialize(exported: true, where UIntValue == UInt8)
         set {
             assertIndexExists(index)
             let offset = index × elementSize

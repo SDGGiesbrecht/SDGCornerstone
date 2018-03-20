@@ -13,3 +13,4 @@
  */
 
 public typealias APILocalization = _APILocalization
+extension APILocalization : InputLocalization {}

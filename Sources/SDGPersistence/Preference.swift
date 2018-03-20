@@ -120,11 +120,11 @@ public struct Preference : CustomStringConvertible, Equatable {
                 let object = arrayObject.firstObject! as! NSObject
             #endif
             propertyListObject = object
-        } catch {
-            if BuildConfiguration.current == .debug {
+        } catch { // [_Exempt from Test Coverage_]
+            if BuildConfiguration.current == .debug { // [_Exempt from Test Coverage_]
                 // This indicates a precondition violation during coding, but it is not worth stopping execution.
                 print(error)
-            }
+            } // [_Exempt from Test Coverage_]
             propertyListObject = nil
         }
     }

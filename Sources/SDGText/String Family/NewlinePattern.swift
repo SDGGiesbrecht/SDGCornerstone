@@ -52,10 +52,12 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
         }
         var result = [location ..< collection.index(after: location)]
 
-        if scalar == carriageReturn,
-            location ≠ collection.endIndex,
-            collection[collection.index(after: location)] == lineFeed {
-            result.prepend(location ..< collection.index(location, offsetBy: 2))
+        if scalar == carriageReturn {
+            let nextIndex = collection.index(after: location)
+            if nextIndex ≠ collection.endIndex,
+                collection[nextIndex] == lineFeed {
+                result.prepend(location ..< collection.index(location, offsetBy: 2))
+            }
         }
         return result
     }
@@ -75,10 +77,12 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
             return nil
         }
 
-        if scalar == carriageReturn,
-            location ≠ collection.endIndex,
-            collection[collection.index(after: location)] == lineFeed {
-            return location ..< collection.index(location, offsetBy: 2)
+        if scalar == carriageReturn {
+            let nextIndex = collection.index(after: location)
+            if nextIndex ≠ collection.endIndex,
+                collection[nextIndex] == lineFeed {
+                return location ..< collection.index(location, offsetBy: 2)
+            }
         }
         return location ..< collection.index(after: location)
     }

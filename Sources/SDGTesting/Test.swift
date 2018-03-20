@@ -14,8 +14,8 @@
 
 // MARK: - General
 
-private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString, line: UInt) -> Void {
-    if expression() {} else {
+private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString, line: UInt) -> Void { // [_Exempt from Test Coverage_]
+    if expression() {} else { // [_Exempt from Test Coverage_]
         // Release optimization removes assert and strips precondition’s message.
         fatalError(message(), file: file, line: line)
     }
@@ -30,14 +30,14 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     testAssertionMethod({
         do {
             return try expression()
-        } catch {
+        } catch { // [_Exempt from Test Coverage_]
             testAssertionMethod(false, "\(error)", file, line) // Fails with the error message.
             return true // No need to fail twice.
         }
-    }(), {
-        do {
+    }(), { // [_Exempt from Test Coverage_]
+        do { // [_Exempt from Test Coverage_]
             return try message()
-        } catch {
+        } catch { // [_Exempt from Test Coverage_]
             return "\(error)" // Message resolution failed. Use the error description.
         }
     }(), file, line)
@@ -54,8 +54,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 @_inlineable public func test<T, R>(method: (method: (T) -> () throws -> R, name: String), of instance: T, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
         let result = try method.method(instance)()
-        test(result == expectedResult,
-             "\(instance).\(method.name)() → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(instance).\(method.name)() → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -66,8 +65,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 @_inlineable public func test<T, A, R>(method: (method: (T) -> (A) throws -> R, name: String), of instance: T, with argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
         let result = try method.method(instance)(argument)
-        test(result == expectedResult,
-             "\(instance).\(method.name)(\(argument)) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(instance).\(method.name)(\(argument)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -78,8 +76,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 @_inlineable public func test<T, A, B, R>(method: (method: (T) -> (A, B) throws -> R, name: String), of instance: T, with arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
         let result = try method.method(instance)(arguments.0, arguments.1)
-        test(result == expectedResult,
-             "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -91,8 +88,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     do {
         var copy = instance
         try method.method(&copy)()
-        test(copy == expectedResult,
-             "\(instance).\(method.name)() → \(copy) ≠ \(expectedResult)",
+        test(copy == expectedResult, "\(instance).\(method.name)() → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -104,8 +100,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     do {
         var copy = instance
         try method.method(&copy)(argument)
-        test(copy == expectedResult,
-             "\(instance).\(method.name)(\(argument)) → \(copy) ≠ \(expectedResult)",
+        test(copy == expectedResult, "\(instance).\(method.name)(\(argument)) → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -117,8 +112,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     do {
         var copy = instance
         try method.method(&copy)(arguments.0, arguments.1)
-        test(copy == expectedResult,
-             "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(copy) ≠ \(expectedResult)",
+        test(copy == expectedResult, "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -129,10 +123,9 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 
 /// Tests a function, verifying that it returns the expected result.
 @_inlineable public func test<A, R>(function: (function: (A) throws -> R, name: String), on argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
-    do {
+    do { // [_Exempt from Test Coverage_]
         let result = try function.function(argument)
-        test(result == expectedResult,
-             "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -143,8 +136,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 @_inlineable public func test<A, B, R>(function: (function: (A, B) throws -> R, name: String), on arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
         let result = try function.function(arguments.0, arguments.1)
-        test(result == expectedResult,
-             "\(function.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(function.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -157,8 +149,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 @_inlineable public func test<P, F, R>(operator: (function: (P, F) throws -> R, name: String), on operands: (precedingValue: P, followingValue: F), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
         let result = try `operator`.function(operands.precedingValue, operands.followingValue)
-        test(result == expectedResult,
-             "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -170,8 +161,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     do {
         // [_Workaround: Automatically covered by conditional conformance in Swift 4.1. (Swift 4.0.3)_]
         let result = try `operator`.function(operands.precedingValue, operands.followingValue)
-        test(result == expectedResult,
-             "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -182,8 +172,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 @_inlineable public func test<P, F, R>(operator: (function: (P, @autoclosure () throws -> F) throws -> R, name: String), on precedingValue: P, _ followingValue: @autoclosure () throws -> F, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
         let result = try `operator`.function(precedingValue, followingValue)
-        test(result == expectedResult,
-             "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -195,8 +184,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     do {
         var copy = operands.precedingValue
         try `operator`.function(&copy, operands.followingValue)
-        test(copy == expectedResult,
-             "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(copy) ≠ \(expectedResult)",
+        test(copy == expectedResult, "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -208,8 +196,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     do {
         var copy = precedingValue
         try `operator`.function(&copy, followingValue)
-        test(copy == expectedResult,
-             "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(copy) ≠ \(expectedResult)",
+        test(copy == expectedResult, "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -220,8 +207,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 @_inlineable public func test<O, R>(prefixOperator operator: (function: (O) throws -> R, name: String), on operand: O, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
         let result = try `operator`.function(operand)
-        test(result == expectedResult,
-             "\(`operator`.name)\(operand) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(`operator`.name)\(operand) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -230,10 +216,9 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 
 /// Tests a postfix operator, verifying that it returns the expected result.
 @_inlineable public func test<O, R>(postfixOperator operator: (function: (O) throws -> R, name: String), on operand: O, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
-    do {
+    do { // [_Exempt from Test Coverage_]
         let result = try `operator`.function(operand)
-        test(result == expectedResult,
-             "\(operand)\(`operator`.name) → \(result) ≠ \(expectedResult)",
+        test(result == expectedResult, "\(operand)\(`operator`.name) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -245,8 +230,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     do {
         var copy = operand
         try `operator`.function(&copy)
-        test(copy == expectedResult,
-             "\(operand)\(`operator`.name) → \(copy) ≠ \(expectedResult)",
+        test(copy == expectedResult, "\(operand)\(`operator`.name) → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
         fail("\(error)", file: file, line: line)
@@ -258,8 +242,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests a property of an instance, verifying that it contains the expected value.
 @_inlineable public func test<T, P>(property: (accessor: (T) -> P, name: String), of instance: T, is expectedValue: P, file: StaticString = #file, line: UInt = #line) where P : Equatable {
     let contents = property.accessor(instance)
-    test(contents == expectedValue,
-         "\(instance).\(property.name) → \(contents) ≠ \(expectedValue)",
+    test(contents == expectedValue, "\(instance).\(property.name) → \(contents) ≠ \(expectedValue)",
         file: file, line: line)
 }
 
@@ -267,7 +250,6 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 
 /// Tests a variable, verifying that it contains the expected value.
 @_inlineable public func test<V>(variable: (contents: V, name: String), is expectedValue: V, file: StaticString = #file, line: UInt = #line) where V : Equatable {
-    test(variable.contents == expectedValue,
-         "\(variable.name) → \(variable.contents) ≠ \(expectedValue)",
+    test(variable.contents == expectedValue, "\(variable.name) → \(variable.contents) ≠ \(expectedValue)",
         file: file, line: line)
 }

@@ -16,7 +16,7 @@
 
 macOS • Linux • iOS • watchOS • tvOS
 
-APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGControlFlow](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGControlFlow) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematics) • [SDGMathematicsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsTestUtilities) • [SDGCollections](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollections) • [SDGCollectionsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollectionsTestUtilities) • [SDGBinaryData](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryData) • [SDGText](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGText) • [SDGTextTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTextTestUtilities) • [SDGPersistence](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistence) • [SDGPersistenceTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistenceTestUtilities) • [SDGRandomization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomization) • [SDGRandomizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomizationTestUtilities) • [SDGLocalization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalization) • [SDGLocalizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalizationTestUtilities) • [SDGGeometry](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGGeometry) • [SDGGeometryTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGGeometryTestUtilities) • [SDGCalendar](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCalendar) • [SDGCalendarTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCalendarTestUtilities) • [SDGPrecisionMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPrecisionMathematics) • [SDGConcurrency](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGConcurrency) • [SDGExternalProcess](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGExternalProcess) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting)
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGControlFlow](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGControlFlow) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematics) • [SDGMathematicsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsTestUtilities) • [SDGCollections](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollections) • [SDGCollectionsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollectionsTestUtilities) • [SDGBinaryData](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryData) • [SDGText](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGText) • [SDGPersistence](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistence) • [SDGPersistenceTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistenceTestUtilities) • [SDGRandomization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomization) • [SDGRandomizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomizationTestUtilities) • [SDGLocalization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalization) • [SDGLocalizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalizationTestUtilities) • [SDGGeometry](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGGeometry) • [SDGCalendar](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCalendar) • [SDGPrecisionMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPrecisionMathematics) • [SDGConcurrency](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGConcurrency) • [SDGExternalProcess](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGExternalProcess) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting)
 
 # SDGCornerstone
 
@@ -64,7 +64,6 @@ let package = Package(
             .productItem(name: "SDGCollectionsTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGBinaryData", package: "SDGCornerstone"),
             .productItem(name: "SDGText", package: "SDGCornerstone"),
-            .productItem(name: "SDGTextTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGPersistence", package: "SDGCornerstone"),
             .productItem(name: "SDGPersistenceTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGRandomization", package: "SDGCornerstone"),
@@ -72,9 +71,7 @@ let package = Package(
             .productItem(name: "SDGLocalization", package: "SDGCornerstone"),
             .productItem(name: "SDGLocalizationTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGGeometry", package: "SDGCornerstone"),
-            .productItem(name: "SDGGeometryTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGCalendar", package: "SDGCornerstone"),
-            .productItem(name: "SDGCalendarTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGPrecisionMathematics", package: "SDGCornerstone"),
             .productItem(name: "SDGConcurrency", package: "SDGCornerstone"),
             .productItem(name: "SDGExternalProcess", package: "SDGCornerstone"),
@@ -98,7 +95,6 @@ import SDGCollections
 import SDGCollectionsTestUtilities
 import SDGBinaryData
 import SDGText
-import SDGTextTestUtilities
 import SDGPersistence
 import SDGPersistenceTestUtilities
 import SDGRandomization
@@ -106,9 +102,7 @@ import SDGRandomizationTestUtilities
 import SDGLocalization
 import SDGLocalizationTestUtilities
 import SDGGeometry
-import SDGGeometryTestUtilities
 import SDGCalendar
-import SDGCalendarTestUtilities
 import SDGPrecisionMathematics
 import SDGConcurrency
 import SDGExternalProcess

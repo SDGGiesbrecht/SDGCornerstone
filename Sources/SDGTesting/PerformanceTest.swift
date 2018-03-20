@@ -15,6 +15,8 @@
 import Foundation
 
 import SDGMathematics
+import SDGLocalization
+import SDGCornerstoneLocalizations
 
 /// Tests that a closure executes within a specified amount of time.
 ///
@@ -43,9 +45,18 @@ import SDGMathematics
     let mean = sum ÷ TimeInterval(iterations)
 
     if mean > duration {
-        // [_Warning: Localize this._]
-        fail("“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds).", file: file, line: line)
+        fail(String(UserFacingText({ (localization: APILocalization) in
+            switch localization {
+            case .englishCanada: // [_Exempt from Test Coverage_]
+                return StrictString("“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds).")
+            }
+        }).resolved()), file: file, line: line)
     } else {
-        print("• “\(testName)” took an average of \(mean) seconds.")
+        print(UserFacingText({ (localization: APILocalization) in
+            switch localization {
+            case .englishCanada:
+                return StrictString("• “\(testName)” took an average of \(mean) seconds.")
+            }
+        }).resolved())
     }
 }

@@ -49,7 +49,7 @@ extension RawRepresentableCalendarComponent {
         guard let result = Self(possibleRawValue: value) else {
             preconditionFailure(UserFacingText({ (localization: APILocalization) in
                 switch localization {
-                case .englishCanada:
+                case .englishCanada: // [_Exempt from Test Coverage_]
                     return StrictString("Raw value invalid for “\(Self.self)”: \(value)")
                 }
             }))

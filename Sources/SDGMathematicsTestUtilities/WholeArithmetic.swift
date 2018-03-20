@@ -17,12 +17,17 @@
 
     testFixedScaleOneDimensionalPointConformance(departure: 58 as T, vector: 21, destination: 79, file: file, line: line)
     testNumericAdditiveArithmeticConformance(augend: 25 as T, addend: 9, sum: 34, includingNegatives: includingNegatives, file: file, line: line)
+    // Numeric
+    test(property: ({ $0.magnitude }, "magnitude"), of: 5 as T, is: 5, file: file, line: line)
 
     let converted = T(UIntMax(64))
     test(converted == 64, "\(T.self)(UIntMax(64)) → \(converted) ≠ 64", file: file, line: line)
 
     test(operator: (×, "×"), on: (42 as T, 3), returns: 126, file: file, line: line)
     test(assignmentOperator: (×=, "×="), with: (4 as T, 4), resultsIn: 16, file: file, line: line)
+    // Numeric
+    test(operator: (*, "*"), on: (42 as T, 3), returns: 126, file: file, line: line)
+    test(assignmentOperator: (*=, "*="), with: (4 as T, 4), resultsIn: 16, file: file, line: line)
 
     test(method: (T.dividedAccordingToEuclid, "dividedAccordingToEuclid"), of: 5 as T, with: 3, returns: 1, file: file, line: line)
     test(mutatingMethod: (T.divideAccordingToEuclid, "divideAccordingToEuclid"), of: 72 as T, with: 25, resultsIn: 2, file: file, line: line)
@@ -70,4 +75,15 @@
 
     test(mutatingMethod: (T.round, "round"), of: 52 as T, with: (.toNearestOrAwayFromZero, 39), resultsIn: 39, file: file, line: line)
     test(method: (T.rounded, "rounded"), of: 99 as T, with: (.toNearestOrAwayFromZero, 10), returns: 100, file: file, line: line)
+    test(method: (T.rounded, "rounded"), of: 91 as T, with: (.up, 10), returns: 100, file: file, line: line)
+    test(method: (T.rounded, "rounded"), of: 99 as T, with: (.towardZero, 10), returns: 90, file: file, line: line)
+    test(method: (T.rounded, "rounded"), of: 91 as T, with: (.awayFromZero, 10), returns: 100, file: file, line: line)
+    test(method: (T.rounded, "rounded"), of: 95 as T, with: (.toNearestOrAwayFromZero, 10), returns: 100, file: file, line: line)
+    test(method: (T.rounded, "rounded"), of: 95 as T, with: (.toNearestOrEven, 10), returns: 100, file: file, line: line)
+    if includingNegatives {
+        test(method: (T.rounded, "rounded"), of: 0 − 99 as T, with: (.towardZero, 10), returns: 0 − 90, file: file, line: line)
+        test(method: (T.rounded, "rounded"), of: 0 − 91 as T, with: (.awayFromZero, 10), returns: 0 − 100, file: file, line: line)
+        test(method: (T.rounded, "rounded"), of: 0 − 95 as T, with: (.toNearestOrAwayFromZero, 10), returns: 0 − 100, file: file, line: line)
+        test(method: (T.rounded, "rounded"), of: 0 − 95 as T, with: (.toNearestOrEven, 10), returns: 0 − 100, file: file, line: line)
+    }
 }

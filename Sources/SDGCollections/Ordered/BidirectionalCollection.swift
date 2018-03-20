@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 extension BidirectionalCollection {
 
     // [_Define Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
@@ -235,5 +237,25 @@ extension BidirectionalCollection where Element : Equatable {
     ///     - other: The other collection
     @_inlineable public func commonSuffix(with other: Self) -> PatternMatch<Self> {
         return _commonSuffix(with: other)
+    }
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.difference(from:)_]
+    /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
+    ///
+    /// - Parameters:
+    ///     - other: The other collection. (The starting point.)
+    @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element, C.SubSequence : Collection {
+
+        let suffixStart = commonSuffix(with: other).range.lowerBound
+        let suffixLength = Int(distance(from: suffixStart, to: endIndex))
+        let otherSuffixStart = other.index(other.endIndex, offsetBy: C.IndexDistance(−suffixLength))
+
+        var difference: [Change<C.Index, Index>] = prefix(upTo: suffixStart)._difference(from: other.prefix(upTo: otherSuffixStart))
+
+        if suffixLength ≠ 0 {
+            difference.append(.keep(otherSuffixStart ..< other.endIndex))
+        }
+
+        return difference
     }
 }

@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGLogic
 import SDGMathematics
 
 extension Collection {
@@ -732,6 +734,122 @@ extension Collection where Element : Equatable {
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @_inlineable @discardableResult public func advance(_ index: inout Index, over pattern: Self) -> Bool {
         return _advance(&index, over: pattern)
+    }
+
+    @_inlineable @_versioned internal func longestCommonSubsequenceTable<C>(with other: C, indexCache: inout [Int: Index], otherIndexCache: inout [Int: C.Index]) -> [[Int]] where C : Collection, C.Element == Self.Element {
+        let row = [Int](repeating: 0, count: Int(other.count) + 1)
+        var table = [[Int]](repeating: row, count: Int(count) + 1)
+        if ¬isEmpty ∧ ¬other.isEmpty {
+            for prefixLength in 1 ... Int(count) {
+                for otherPrefixLength in 1 ... Int(other.count) {
+                    let lastIndexDistance = prefixLength − 1
+                    let otherLastIndexDistance = otherPrefixLength − 1
+                    let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: IndexDistance(lastIndexDistance)) }
+                    let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: C.IndexDistance(otherLastIndexDistance)) }
+                    if self[lastIndex] == other[otherLastIndex] {
+                        table[prefixLength][otherPrefixLength] = table[prefixLength − 1][otherPrefixLength − 1] + 1
+                    } else {
+                        table[prefixLength][otherPrefixLength] = Swift.max(table[prefixLength][otherPrefixLength − 1], table[prefixLength − 1][otherPrefixLength])
+                    }
+                }
+            }
+        }
+        return table
+    }
+
+    @_inlineable @_versioned internal func traceDifference<C>(_ table: [[Int]], other: C, prefixLength: Int, otherPrefixLength: Int, differenceUnderConstruction: inout [IndividualChange<Index, C.Index>], indexCache: inout [Int: Index], otherIndexCache: inout [Int: C.Index]) where C : Collection, C.Element == Self.Element {
+
+        // The “? :” prevents springing bounds. Such indices will not be queried anyway.
+        let lastIndexDistance = prefixLength == 0 ? 0 : prefixLength − 1
+        let otherLastIndexDistance = otherPrefixLength == 0 ? 0 : otherPrefixLength − 1
+
+        let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: IndexDistance(lastIndexDistance)) } // [_Exempt from Test Coverage_] Already present.
+        let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: C.IndexDistance(otherLastIndexDistance)) } // [_Exempt from Test Coverage_] Already present.
+        if prefixLength > 0 ∧ otherPrefixLength > 0 ∧ self[lastIndex] == other[otherLastIndex] {
+            traceDifference(table, other: other, prefixLength: prefixLength − 1, otherPrefixLength: otherPrefixLength − 1, differenceUnderConstruction: &differenceUnderConstruction, indexCache: &indexCache, otherIndexCache: &otherIndexCache)
+            differenceUnderConstruction.append(.keep(lastIndex))
+        } else if otherPrefixLength > 0 ∧ (prefixLength == 0 ∨ table[prefixLength][(otherPrefixLength − 1) as Int] ≥ table[(prefixLength − 1) as Int][otherPrefixLength]) {
+            traceDifference(table, other: other, prefixLength: prefixLength, otherPrefixLength: otherPrefixLength − 1, differenceUnderConstruction: &differenceUnderConstruction, indexCache: &indexCache, otherIndexCache: &otherIndexCache)
+            differenceUnderConstruction.append(.insert(otherLastIndex))
+        } else if prefixLength > 0 ∧ (otherPrefixLength == 0 ∨ table[prefixLength][(otherPrefixLength − 1) as Int] < table[(prefixLength − 1) as Int][otherPrefixLength]) {
+            traceDifference(table, other: other, prefixLength: prefixLength − 1, otherPrefixLength: otherPrefixLength, differenceUnderConstruction: &differenceUnderConstruction, indexCache: &indexCache, otherIndexCache: &otherIndexCache)
+            differenceUnderConstruction.append(.remove(lastIndex))
+        }
+    }
+
+    @_inlineable @_versioned internal func changes<C>(toMake other: C) -> [Change<Index, C.Index>] where C : Collection, C.Element == Self.Element {
+        var indexCache: [Int: Index] = [:]
+        var otherIndexCache: [Int: C.Index] = [:]
+        let table = longestCommonSubsequenceTable(with: other, indexCache: &indexCache, otherIndexCache: &otherIndexCache)
+        var differenceUnderConstruction: [IndividualChange<Index, C.Index>] = []
+        traceDifference(table, other: other, prefixLength: table.count − 1, otherPrefixLength: table.first!.count − 1, differenceUnderConstruction: &differenceUnderConstruction, indexCache: &indexCache, otherIndexCache: &otherIndexCache)
+
+        var changeGroups: [Change<Index, C.Index>] = []
+        changes: for individualChange in differenceUnderConstruction {
+            if let last = changeGroups.last {
+                switch last {
+                case .keep(let range):
+                    switch individualChange {
+                    case .keep(let index):
+                        changeGroups.removeLast()
+                        changeGroups.append(.keep(range.lowerBound ..< self.index(after: index)))
+                        continue changes
+                    default:
+                        break
+                    }
+                case .remove(let range):
+                    switch individualChange {
+                    case .remove(let index):
+                        changeGroups.removeLast()
+                        changeGroups.append(.remove(range.lowerBound ..< self.index(after: index)))
+                        continue changes
+                    default:
+                        break
+                    }
+                case .insert(let range):
+                    switch individualChange {
+                    case .insert(let index):
+                        changeGroups.removeLast()
+                        changeGroups.append(.insert(range.lowerBound ..< other.index(after: index)))
+                        continue changes
+                    default:
+                        break
+                    }
+                }
+            }
+            switch individualChange {
+            case .keep(let index):
+                changeGroups.append(.keep(index ..< self.index(after: index)))
+            case .remove(let index):
+                changeGroups.append(.remove(index ..< self.index(after: index)))
+            case .insert(let index):
+                changeGroups.append(.insert(index ..< other.index(after: index)))
+            }
+        }
+        return changeGroups
+    }
+
+    @_inlineable @_versioned internal func _difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element, SubSequence : Collection, C.SubSequence : Collection {
+        let prefixEnd = commonPrefix(with: other).range.upperBound
+        let prefixLength = Int(distance(from: startIndex, to: prefixEnd))
+        let otherPrefixEnd = other.index(other.startIndex, offsetBy: C.IndexDistance(prefixLength))
+
+        var difference: [Change<C.Index, Index>] = []
+        if prefixLength ≠ 0 {
+            difference.append(.keep(other.startIndex ..< otherPrefixEnd))
+        }
+
+        difference.append(contentsOf: other.suffix(from: otherPrefixEnd).changes(toMake: self.suffix(from: prefixEnd)))
+
+        return difference
+    }
+    // [_Define Documentation: SDGCornerstone.Collection.difference(from:)_]
+    /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
+    ///
+    /// - Parameters:
+    ///     - other: The other collection. (The starting point.)
+    @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element, SubSequence : Collection, C.SubSequence : Collection {
+        return _difference(from: other)
     }
 }
 

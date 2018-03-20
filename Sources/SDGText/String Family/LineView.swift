@@ -61,6 +61,8 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///
     /// - Parameters:
     ///     - i: The following index.
+    @_specialize(exported: true, where Base == StrictString)
+    @_specialize(exported: true, where Base == String)
     @_inlineable public func index(before i: LineIndex) -> LineIndex {
 
         let newline: Range<String.ScalarView.Index>
@@ -104,6 +106,8 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///
     /// - Parameters:
     ///     - i: The preceding index.
+    @_specialize(exported: true, where Base == StrictString)
+    @_specialize(exported: true, where Base == String)
     @_inlineable public func index(after i: LineIndex) -> LineIndex {
         guard let newline = i.newline(in: base.scalars),
             ¬newline.isEmpty else {
@@ -115,11 +119,15 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
     @_inlineable public subscript(_ position: LineIndex) -> Line<Base> {
+        @_specialize(exported: true, where Base == StrictString)
+        @_specialize(exported: true, where Base == String)
         get {
             let newline = position.newline(in: base.scalars)!
             let line = base.scalars[position.start! ..< newline.lowerBound]
             return Line(line: line, newline: base.scalars[newline])
         }
+        @_specialize(exported: true, where Base == StrictString)
+        @_specialize(exported: true, where Base == String)
         set {
             let replacement = Base.ScalarView(newValue.line) + Base.ScalarView(newValue.newline)
             if let replacementStart = position.start {
@@ -134,12 +142,16 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
     /// Creates a new, empty collection.
+    @_specialize(exported: true, where Base == StrictString)
+    @_specialize(exported: true, where Base == String)
     @_inlineable public init() {
         self.init(Base())
     }
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
     /// Replaces the specified subrange of elements with the given collection.
+    @_specialize(exported: true, kind: partial, where Base == StrictString)
+    @_specialize(exported: true, kind: partial, where Base == String)
     @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Element == Line<Base> {
         var replacement = Base()
         for line in newElements {

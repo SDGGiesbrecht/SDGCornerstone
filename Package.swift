@@ -40,7 +40,6 @@ let package = Package(
         .library(name: "SDGBinaryData", targets: ["SDGBinaryData"]),
 
         .library(name: "SDGText", targets: ["SDGText"]),
-        .library(name: "SDGTextTestUtilities", targets: ["SDGTextTestUtilities"]),
 
         .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
         .library(name: "SDGPersistenceTestUtilities", targets: ["SDGPersistenceTestUtilities"]),
@@ -52,10 +51,8 @@ let package = Package(
         .library(name: "SDGLocalizationTestUtilities", targets: ["SDGLocalizationTestUtilities"]),
 
         .library(name: "SDGGeometry", targets: ["SDGGeometry"]),
-        .library(name: "SDGGeometryTestUtilities", targets: ["SDGGeometryTestUtilities"]),
 
         .library(name: "SDGCalendar", targets: ["SDGCalendar"]),
-        .library(name: "SDGCalendarTestUtilities", targets: ["SDGCalendarTestUtilities"]),
 
         .library(name: "SDGPrecisionMathematics", targets: ["SDGPrecisionMathematics"]),
 
@@ -88,12 +85,9 @@ let package = Package(
             "SDGLogicTestUtilities",
             "SDGMathematicsTestUtilities",
             "SDGCollectionsTestUtilities",
-            "SDGTextTestUtilities",
             "SDGPersistenceTestUtilities",
             "SDGRandomizationTestUtilities",
             "SDGLocalizationTestUtilities",
-            "SDGGeometryTestUtilities",
-            "SDGCalendarTestUtilities",
 
             "SDGCornerstone",
             "SDGTesting"
@@ -117,7 +111,9 @@ let package = Package(
             ]),
         .target(name: "SDGMathematicsTestUtilities", dependencies: [
             "SDGMathematics", "SDGTesting",
-            "SDGLogicTestUtilities"
+            "SDGLogicTestUtilities",
+            "SDGCollectionsTestUtilities",
+            "SDGPersistenceTestUtilities"
             ]),
 
         .target(name: "SDGCollections", dependencies: [
@@ -125,7 +121,10 @@ let package = Package(
             "SDGLogic",
             "SDGMathematics"
             ]),
-        .target(name: "SDGCollectionsTestUtilities", dependencies: ["SDGCollections", "SDGTesting"]),
+        .target(name: "SDGCollectionsTestUtilities", dependencies: [
+            "SDGCollections", "SDGTesting",
+            "SDGLogicTestUtilities"
+            ]),
 
         .target(name: "SDGBinaryData", dependencies: [
             "SDGControlFlow",
@@ -139,7 +138,6 @@ let package = Package(
             "SDGMathematics",
             "SDGCollections"
             ]),
-        .target(name: "SDGTextTestUtilities", dependencies: ["SDGText", "SDGTesting"]),
 
         .target(name: "SDGPersistence", dependencies: [
             "SDGControlFlow",
@@ -147,7 +145,16 @@ let package = Package(
             "SDGCollections",
             "SDGText"
             ]),
-        .target(name: "SDGPersistenceTestUtilities", dependencies: ["SDGPersistence", "SDGTesting"]),
+        .target(name: "SDGPersistenceTestUtilities", dependencies: [
+            "SDGPersistence", "SDGTesting",
+            "SDGControlFlow",
+            "SDGLogic",
+            "SDGText",
+            "SDGCollections",
+            "SDGLocalization",
+            "SDGCalendar",
+            "SDGCornerstoneLocalizations"
+            ]),
 
         .target(name: "SDGRandomization", dependencies: [
             "SDGControlFlow",
@@ -167,13 +174,15 @@ let package = Package(
             "SDGPersistence",
             "SDGRandomization"
             ]),
-        .target(name: "SDGLocalizationTestUtilities", dependencies: ["SDGLocalization", "SDGTesting"]),
+        .target(name: "SDGLocalizationTestUtilities", dependencies: [
+            "SDGLocalization", "SDGTesting",
+            "SDGPersistenceTestUtilities"
+            ]),
 
         .target(name: "SDGGeometry", dependencies: [
             "SDGControlFlow",
             "SDGMathematics"
             ]),
-        .target(name: "SDGGeometryTestUtilities", dependencies: ["SDGGeometry", "SDGTesting"]),
 
         .target(name: "SDGCalendar", dependencies: [
             "SDGControlFlow",
@@ -184,7 +193,6 @@ let package = Package(
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
             ]),
-        .target(name: "SDGCalendarTestUtilities", dependencies: ["SDGCalendar", "SDGTesting"]),
 
         .target(name: "SDGPrecisionMathematics", dependencies: [
             "SDGLogic",
@@ -208,6 +216,8 @@ let package = Package(
 
         .target(name: "SDGTesting", dependencies: [
             "SDGMathematics",
+            "SDGLocalization",
+            "SDGCornerstoneLocalizations"
             ]),
 
         // Internal utilities.
@@ -219,10 +229,6 @@ let package = Package(
 
         // Internal tests.
 
-        .testTarget(name: "SDGCornerstoneTests", dependencies: [
-            "SDGCornerstoneTestUtilities", "SDGXCTestUtilities"
-            ]),
-
         .testTarget(name: "SDGControlFlowTests", dependencies: [
             "SDGControlFlow", "SDGXCTestUtilities"
             ]),
@@ -231,47 +237,74 @@ let package = Package(
             "SDGMathematicsTestUtilities"
             ]),
         .testTarget(name: "SDGBinaryDataTests", dependencies: [
-            "SDGBinaryData", "SDGXCTestUtilities"
+            "SDGBinaryData", "SDGXCTestUtilities",
+            "SDGMathematicsTestUtilities"
             ]),
         .testTarget(name: "SDGMathematicsTests", dependencies: [
             "SDGMathematicsTestUtilities", "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGCollectionsTests", dependencies: [
-            "SDGCollectionsTestUtilities", "SDGXCTestUtilities"
+            "SDGCollectionsTestUtilities", "SDGXCTestUtilities",
+            "SDGMathematics"
             ]),
         .testTarget(name: "SDGTextTests", dependencies: [
-            "SDGTextTestUtilities", "SDGXCTestUtilities"
+            "SDGText", "SDGXCTestUtilities",
+            "SDGMathematicsTestUtilities",
+            "SDGCollectionsTestUtilities",
+            "SDGPersistenceTestUtilities"
             ]),
         .testTarget(name: "SDGPersistenceTests", dependencies: [
             "SDGPersistenceTestUtilities", "SDGXCTestUtilities",
+            "SDGCollections",
+            "SDGText",
+            "SDGCornerstoneLocalizations",
+            "SDGExternalProcess",
+            "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGRandomizationTests", dependencies: [
-            "SDGRandomizationTestUtilities", "SDGXCTestUtilities"
+            "SDGRandomizationTestUtilities", "SDGXCTestUtilities",
+            "SDGLogic",
+            "SDGMathematics"
             ]),
         .testTarget(name: "SDGLocalizationTests", dependencies: [
             "SDGLocalizationTestUtilities", "SDGXCTestUtilities",
+            "SDGLogic",
+            "SDGPrecisionMathematics",
+            "SDGCornerstoneLocalizations"
             ]),
         .testTarget(name: "SDGGeometryTests", dependencies: [
-            "SDGGeometryTestUtilities", "SDGXCTestUtilities",
+            "SDGGeometry", "SDGXCTestUtilities",
+            "SDGMathematicsTestUtilities"
             ]),
         .testTarget(name: "SDGCalendarTests", dependencies: [
-            "SDGCalendarTestUtilities", "SDGXCTestUtilities",
+            "SDGCalendar", "SDGXCTestUtilities",
+            "SDGMathematicsTestUtilities",
+            "SDGPersistenceTestUtilities"
             ]),
         .testTarget(name: "SDGPrecisionMathematicsTests", dependencies: [
             "SDGPrecisionMathematics", "SDGXCTestUtilities",
+            "SDGBinaryData",
+            "SDGMathematicsTestUtilities",
+            "SDGPersistenceTestUtilities"
             ]),
         .testTarget(name: "SDGConcurrencyTests", dependencies: [
             "SDGConcurrency", "SDGXCTestUtilities",
             ]),
         .testTarget(name: "SDGExternalProcessTests", dependencies: [
             "SDGExternalProcess", "SDGXCTestUtilities",
+            "SDGLogic"
             ]),
+        .testTarget(name: "DocumentationExampleTests", dependencies: [
+            "SDGCornerstone", "SDGXCTestUtilities",
+            "SDGPersistenceTestUtilities"
+        ]),
 
         // To run these tests, uncomment the following and run the executable in the release configuration.
         /*.target(name: "performance‐tests", dependencies: [
             "SDGTesting",
 
-            "SDGText"
+            "SDGText",
+            "SDGPrecisionMathematics"
             ])*/
     ]
 )

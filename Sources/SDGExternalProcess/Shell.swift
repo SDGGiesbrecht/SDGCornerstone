@@ -70,6 +70,8 @@
         ///
         /// - Parameters:
         ///     - command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.
+        ///     - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
+        ///     - environment: Optional. A different environment to use instead of that of the current process.
         ///     - autoquote: Whether or not to automatically quote arguments. Defaults to `true`.
         ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
         ///     - line: The line of output.
@@ -77,7 +79,7 @@
         /// - Returns: The output of the command.
         ///
         /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-        @discardableResult public func run(command: [String], autoquote: Bool = true, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // [_Exempt from Test Coverage_]
+        @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // [_Exempt from Test Coverage_]
 
             let commandString = command.map({ (argument: String) -> String in
                 if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
@@ -89,7 +91,7 @@
 
             reportProgress("$ " + commandString)
 
-            return try process.run(["\u{2D}c", commandString]) {
+            return try process.run(["\u{2D}c", commandString], in: workingDirectory, with: environment) {
                 reportProgress($0)
             }
         }

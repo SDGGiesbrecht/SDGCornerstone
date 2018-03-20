@@ -14,3 +14,5 @@
 
 @_exported import enum SDGControlFlow._APILocalization
 @_exported import SDGLocalization // Localization
+
+func aFunctionToTriggerTestCoverage() {} // [_Exempt from Test Coverage_]

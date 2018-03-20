@@ -52,7 +52,6 @@ public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByString
 }
 
 extension StringFamily where Self.ScalarView.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See UnicodeScalarView.swift. (Swift 4.0.3)_] */ {
-    // [_Warning: Can the above abort trap be dealt with?_]
 
     // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]
     /// Creates a string from a collection of lines.

@@ -125,7 +125,7 @@ extension WholeArithmetic {
         case 9:
             result.prepend(contentsOf: format("IX"))
         default:
-            return wholeDigits()
+            unreachable()
         }
         number.divideAccordingToEuclid(by: 10)
 
@@ -151,7 +151,7 @@ extension WholeArithmetic {
         case 9:
             result.prepend(contentsOf: format("XC"))
         default:
-            return wholeDigits()
+            unreachable()
         }
         number.divideAccordingToEuclid(by: 10)
 
@@ -177,11 +177,11 @@ extension WholeArithmetic {
         case 9:
             result.prepend(contentsOf: format("CM"))
         default:
-            return wholeDigits()
+            unreachable()
         }
         number.divideAccordingToEuclid(by: 10)
 
-        switch number.mod(10) {
+        switch number {
         case 0:
             break
         case 1:
