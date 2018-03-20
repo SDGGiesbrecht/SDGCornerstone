@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGRandomization
 import SDGCornerstoneLocalizations
 
 // [_Example 1: WholeNumber Literals_]

@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLocalization
+
 /// A calendar compenent representing a day of the week.
 public protocol Weekday : ConsistentlyOrderedCalendarComponent {
 

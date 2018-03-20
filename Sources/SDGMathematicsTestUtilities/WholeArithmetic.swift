@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGTesting
-
 /// Tests a type’s conformance to WholeArithmetic.
 @_inlineable public func testWholeArithmeticConformance<T>(of type: T.Type, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : WholeArithmetic {
 

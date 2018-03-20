@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 extension IntegralArithmetic {
 
     @_inlineable @_versioned internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {

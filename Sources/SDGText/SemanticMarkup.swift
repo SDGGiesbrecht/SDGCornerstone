@@ -33,10 +33,10 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 /// ```swift
 /// private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
 ///
-/// private let beginSuperscript: UnicodeScalar = "\u{107000}"
-/// private let endSuperscript: UnicodeScalar = "\u{107001}"
-/// private let beginSubscript: UnicodeScalar = "\u{107002}"
-/// private let endSubscript: UnicodeScalar = "\u{107003}"
+/// @_versioned internal let beginSuperscript: UnicodeScalar = "\u{107000}"
+/// @_versioned internal let endSuperscript: UnicodeScalar = "\u{107001}"
+/// @_versioned internal let beginSubscript: UnicodeScalar = "\u{107002}"
+/// @_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
 public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection {
 

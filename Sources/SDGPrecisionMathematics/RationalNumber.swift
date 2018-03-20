@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGRandomization
+import SDGLocalization
+
 // [_Example 1: RationalNumber Literals_]
 /// An arbitrary‐precision rational number.
 ///

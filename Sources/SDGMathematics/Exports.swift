@@ -12,19 +12,5 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(Linux)
-    @_exported import CoreGraphics // CGFloat
-#endif
-
-@_exported import SDGLogic // Equatable (≠)
-
-// [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
-
-// SDGLogic
+@_exported import SDGLogic // ≠
 infix operator ≠: ComparisonPrecedence
-prefix operator ¬
-postfix operator ¬=
-infix operator ∧: LogicalConjunctionPrecedence
-infix operator ∧=: AssignmentPrecedence
-infix operator ∨: LogicalDisjunctionPrecedence
-infix operator ∨=: AssignmentPrecedence

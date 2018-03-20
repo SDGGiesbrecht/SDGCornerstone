@@ -12,6 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+import SDGRandomization
+import SDGLocalization
+
 // [_Example 1: WholeNumber Literals_]
 /// An arbitrary‐precision integer.
 ///

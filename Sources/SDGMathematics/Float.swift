@@ -12,9 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGControlFlow
+#if !os(Linux)
+    import CoreGraphics
+#endif
 
-import Foundation
+import SDGControlFlow
 
 #if os(iOS) || os(watchOS) || os(tvOS)
     // MARK: - #if os(iOS) || os(watchOS) || os(tvOS)

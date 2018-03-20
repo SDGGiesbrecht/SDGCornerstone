@@ -12,12 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
 #if os(Linux)
     import Glibc
-    import SDGControlFlow
-#else
-    import Foundation
 #endif
+
+import SDGMathematics
 
 /// A pseudorandom number generator.
 ///

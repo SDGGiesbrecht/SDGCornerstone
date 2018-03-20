@@ -13,19 +13,11 @@
  */
 
 @_exported import SDGMathematics
-@_exported import SDGRandomization // RandomizableNumber
-@_exported import SDGLocalization // TextConvertibleNumber
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 
 // SDGLogic
 infix operator ≠: ComparisonPrecedence
-prefix operator ¬
-postfix operator ¬=
-infix operator ∧: LogicalConjunctionPrecedence
-infix operator ∧=: AssignmentPrecedence
-infix operator ∨: LogicalDisjunctionPrecedence
-infix operator ∨=: AssignmentPrecedence
 
 // SDGMathematics
 infix operator ≤: ComparisonPrecedence

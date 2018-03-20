@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollections
+
 extension RangeFamily {
 
     /// Returns the range in inequality notation. (eg. “1 ≤ x ≤ 10”)

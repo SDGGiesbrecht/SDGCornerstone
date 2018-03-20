@@ -13,6 +13,8 @@
  */
 
 import SDGBinaryData
+import SDGCollections
+import SDGLocalization
 import SDGCornerstoneLocalizations
 
 internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {

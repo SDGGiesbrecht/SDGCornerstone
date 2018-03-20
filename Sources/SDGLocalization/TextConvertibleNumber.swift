@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGPersistence
+import SDGControlFlow
+import SDGLogic
+import SDGMathematics
+import SDGCollections
 
 /// A number that can be converted to and from localized text representations.
 public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithmetic {

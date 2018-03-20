@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 extension IntegerProtocol {
 
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.inDigits(thousandsSeparator:)_]

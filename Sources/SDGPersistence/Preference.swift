@@ -12,8 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGControlFlow
-import SDGLogic
 
 public struct Preference : CustomStringConvertible, Equatable {
 
@@ -28,7 +29,7 @@ public struct Preference : CustomStringConvertible, Equatable {
         return Preference(propertyListObject: nil)
     }
 
-    @_inlineable @_versioned internal init(propertyListObject: NSObject?) {
+    @_versioned internal init(propertyListObject: NSObject?) {
         self.propertyListObject = propertyListObject
     }
 
@@ -99,7 +100,7 @@ public struct Preference : CustomStringConvertible, Equatable {
         }
     #endif
 
-    @_inlineable public mutating func set<T>(to value: T?) where T : Encodable {
+    public mutating func set<T>(to value: T?) where T : Encodable {
 
         guard let theValue = value else {
             // Setting to nil

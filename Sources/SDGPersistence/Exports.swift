@@ -12,7 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import Foundation // FileManager, URL, ProcessInfo, etc.
+@_exported import struct Foundation.Data
+@_exported import class Foundation.FileManager
+@_exported import class Foundation.ProcessInfo
+@_exported import struct Foundation.URL
 
-@_exported import SDGLogic // NilLiteral
-@_exported import SDGText // StrictString
+@_exported import class SDGControlFlow.Shared
+
+@_exported import struct SDGLogic.NilLiteral

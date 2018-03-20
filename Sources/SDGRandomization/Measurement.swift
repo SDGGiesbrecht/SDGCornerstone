@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 // [_Workaround: In Swift 4.1, this can be just “extension Measurement {” (Swift 4.1)_]
 extension Measurement where Scalar : RandomizableNumber {
 

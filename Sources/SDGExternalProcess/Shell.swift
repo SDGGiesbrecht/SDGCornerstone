@@ -15,10 +15,7 @@
 #if !(os(iOS) || os(watchOS) || os(tvOS))
     // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-    import Foundation
-
     import SDGLogic
-    import SDGCornerstoneLocalizations
 
     /// A command line shell.
     public class Shell {

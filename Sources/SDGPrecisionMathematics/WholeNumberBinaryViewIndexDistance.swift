@@ -13,6 +13,7 @@
  */
 
 import SDGBinaryData
+import SDGLocalization
 
 extension WholeNumber.BinaryView {
 

@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGLogic
 
 /// A “random” number generator that returns numbers in a pre‐determined cycle.
 public final class CyclicalNumberGenerator : Randomizer {

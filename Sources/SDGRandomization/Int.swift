@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 extension IntFamily {
 
     // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
@@ -26,7 +28,7 @@ extension IntFamily {
     }
 }
 
-extension IntMax {
+extension SDGMathematics.IntMax {
 
     // MARK: - RandomizableNumber
 

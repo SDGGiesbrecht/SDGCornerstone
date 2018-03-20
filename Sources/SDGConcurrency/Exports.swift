@@ -12,4 +12,4 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import Foundation // RunLoop
+@_exported import class Foundation.RunLoop

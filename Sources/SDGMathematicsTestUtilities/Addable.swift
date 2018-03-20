@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGTesting
-
 /// Tests a type’s conformance to Addable.
 @_inlineable public func testAddableConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : Addable, T : Equatable {
     test(operator: (+, "+"), on: (augend, addend), returns: sum, file: file, line: line)

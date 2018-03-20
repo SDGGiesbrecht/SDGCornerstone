@@ -12,5 +12,5 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import SDGControlFlow // APILocalization
+@_exported import enum SDGControlFlow._APILocalization
 @_exported import SDGLocalization // Localization

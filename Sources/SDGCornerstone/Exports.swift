@@ -14,18 +14,18 @@
 
 @_exported import SDGControlFlow
 @_exported import SDGLogic
-@_exported import SDGBinaryData
 @_exported import SDGMathematics
-@_exported import SDGRandomization
 @_exported import SDGCollections
+@_exported import SDGBinaryData
 @_exported import SDGText
 @_exported import SDGPersistence
+@_exported import SDGRandomization
 @_exported import SDGLocalization
 @_exported import SDGGeometry
+@_exported import SDGCalendar
 @_exported import SDGPrecisionMathematics
 @_exported import SDGConcurrency
 @_exported import SDGExternalProcess
-@_exported import SDGCalendar
 
 // [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
 

@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGMathematics
 
 /// Tests that a closure executes within a specified amount of time.

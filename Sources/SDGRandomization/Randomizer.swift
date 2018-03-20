@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 /// A class that generates random numbers.
 ///
 /// The definition of “random” is up to the particular conforming class. For example, instead of actual random numbers, a class could return a cyclical pattern or a single repeating value. This makes it easy to swap one class out for another, such as for testing or for distinct game modes.

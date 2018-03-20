@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGTesting
-
 /// Tests a type’s conformance to BitField.
 @_inlineable public func testBitFieldConformance<F>(start: F, not: F, other: F, and: F, or: F, exclusiveOr: F, file: StaticString = #file, line: UInt = #line) where F : BitField {
     test(method: (F.bitwiseNot, "bitwiseNot"), of: start, returns: not, file: file, line: line)

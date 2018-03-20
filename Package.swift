@@ -135,6 +135,8 @@ let package = Package(
 
         .target(name: "SDGText", dependencies: [
             "SDGControlFlow",
+            "SDGLogic",
+            "SDGMathematics",
             "SDGCollections"
             ]),
         .target(name: "SDGTextTestUtilities", dependencies: ["SDGText", "SDGTesting"]),
@@ -149,6 +151,7 @@ let package = Package(
 
         .target(name: "SDGRandomization", dependencies: [
             "SDGControlFlow",
+            "SDGLogic",
             "SDGMathematics"
             ]),
         .target(name: "SDGRandomizationTestUtilities", dependencies: [
@@ -159,6 +162,7 @@ let package = Package(
             "SDGControlFlow",
             "SDGLogic",
             "SDGMathematics",
+            "SDGCollections",
             "SDGText",
             "SDGPersistence",
             "SDGRandomization"
@@ -166,12 +170,16 @@ let package = Package(
         .target(name: "SDGLocalizationTestUtilities", dependencies: ["SDGLocalization", "SDGTesting"]),
 
         .target(name: "SDGGeometry", dependencies: [
+            "SDGControlFlow",
             "SDGMathematics"
             ]),
         .target(name: "SDGGeometryTestUtilities", dependencies: ["SDGGeometry", "SDGTesting"]),
 
         .target(name: "SDGCalendar", dependencies: [
+            "SDGControlFlow",
+            "SDGLogic",
             "SDGMathematics",
+            "SDGCollections",
             "SDGText",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
@@ -179,9 +187,11 @@ let package = Package(
         .target(name: "SDGCalendarTestUtilities", dependencies: ["SDGCalendar", "SDGTesting"]),
 
         .target(name: "SDGPrecisionMathematics", dependencies: [
+            "SDGLogic",
             "SDGMathematics",
-            "SDGRandomization",
+            "SDGCollections",
             "SDGBinaryData",
+            "SDGRandomization",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
             ]),
@@ -192,7 +202,8 @@ let package = Package(
 
         .target(name: "SDGExternalProcess", dependencies: [
             "SDGLogic",
-            "SDGCornerstoneLocalizations"
+            "SDGPersistence",
+            "SDGLocalization"
             ]),
 
         .target(name: "SDGTesting", dependencies: [

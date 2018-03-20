@@ -12,7 +12,5 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import Foundation // Data
-
+@_exported import struct Foundation.Data
 @_exported import SDGMathematics // BitField
-@_exported import SDGCollections // Collection extensions

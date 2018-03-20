@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGCollections
 
 /// A view of the contents of a fixed‐length unsigned integer as a collection of bits.
 public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {

@@ -17,6 +17,8 @@
 
     import Foundation
 
+    import SDGLogic
+    import SDGPersistence
     import SDGLocalization
 
     public final class ExternalProcess {

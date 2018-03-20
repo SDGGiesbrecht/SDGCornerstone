@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGText
-
 extension URL : Comparable {
 
     /// Returns `true` if the URL is in the location described by the specified URL.
