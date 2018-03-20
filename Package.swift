@@ -267,10 +267,11 @@ let package = Package(
             "SDGExternalProcess", "SDGXCTestUtilities",
             ]),
 
-        .target(name: "performance‐tests", dependencies: [
+        // To run these tests, uncomment the following and run the executable in the release configuration.
+        /*.target(name: "performance‐tests", dependencies: [
             "SDGTesting",
 
             "SDGText"
-            ])
+            ])*/
     ]
 )

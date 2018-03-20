@@ -17,6 +17,7 @@ import Foundation
     import Glibc
 #endif
 
+import SDGControlFlow
 import SDGMathematics
 
 /// A pseudorandom number generator.
