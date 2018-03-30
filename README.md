@@ -16,7 +16,7 @@
 
 macOS • Linux • iOS • watchOS • tvOS
 
-APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone)
+APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGControlFlow](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGControlFlow) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLogicTestUtilities) • [SDGMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematics) • [SDGMathematicsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGMathematicsTestUtilities) • [SDGCollections](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollections) • [SDGCollectionsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCollectionsTestUtilities) • [SDGBinaryData](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGBinaryData) • [SDGText](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGText) • [SDGPersistence](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistence) • [SDGPersistenceTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPersistenceTestUtilities) • [SDGRandomization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomization) • [SDGRandomizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGRandomizationTestUtilities) • [SDGLocalization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalization) • [SDGLocalizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGLocalizationTestUtilities) • [SDGGeometry](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGGeometry) • [SDGCalendar](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGCalendar) • [SDGPrecisionMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGPrecisionMathematics) • [SDGConcurrency](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGConcurrency) • [SDGExternalProcess](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGExternalProcess) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone/SDGTesting)
 
 # SDGCornerstone
 
@@ -54,6 +54,28 @@ let package = Package(
     targets: [
         .target(name: "MyTarget", dependencies: [
             .productItem(name: "SDGCornerstone", package: "SDGCornerstone"),
+            .productItem(name: "SDGCornerstoneTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGControlFlow", package: "SDGCornerstone"),
+            .productItem(name: "SDGLogic", package: "SDGCornerstone"),
+            .productItem(name: "SDGLogicTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGMathematics", package: "SDGCornerstone"),
+            .productItem(name: "SDGMathematicsTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGCollections", package: "SDGCornerstone"),
+            .productItem(name: "SDGCollectionsTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGBinaryData", package: "SDGCornerstone"),
+            .productItem(name: "SDGText", package: "SDGCornerstone"),
+            .productItem(name: "SDGPersistence", package: "SDGCornerstone"),
+            .productItem(name: "SDGPersistenceTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGRandomization", package: "SDGCornerstone"),
+            .productItem(name: "SDGRandomizationTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGLocalization", package: "SDGCornerstone"),
+            .productItem(name: "SDGLocalizationTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGGeometry", package: "SDGCornerstone"),
+            .productItem(name: "SDGCalendar", package: "SDGCornerstone"),
+            .productItem(name: "SDGPrecisionMathematics", package: "SDGCornerstone"),
+            .productItem(name: "SDGConcurrency", package: "SDGCornerstone"),
+            .productItem(name: "SDGExternalProcess", package: "SDGCornerstone"),
+            .productItem(name: "SDGTesting", package: "SDGCornerstone"),
         ])
     ]
 )
@@ -63,6 +85,28 @@ let package = Package(
 
 ```swift
 import SDGCornerstone
+import SDGCornerstoneTestUtilities
+import SDGControlFlow
+import SDGLogic
+import SDGLogicTestUtilities
+import SDGMathematics
+import SDGMathematicsTestUtilities
+import SDGCollections
+import SDGCollectionsTestUtilities
+import SDGBinaryData
+import SDGText
+import SDGPersistence
+import SDGPersistenceTestUtilities
+import SDGRandomization
+import SDGRandomizationTestUtilities
+import SDGLocalization
+import SDGLocalizationTestUtilities
+import SDGGeometry
+import SDGCalendar
+import SDGPrecisionMathematics
+import SDGConcurrency
+import SDGExternalProcess
+import SDGTesting
 ```
 
 ## Example Usage
@@ -77,7 +121,7 @@ enum ApplicationLocalization : String, Localization {
 }
 
 // Define
-let text = UserFacingText<ApplicationLocalization, Void>({ (localization, _) in
+let text = UserFacingText<ApplicationLocalization>({ localization in
     switch localization {
     case .english:
         return "Hello, world!"
@@ -92,12 +136,12 @@ XCTAssertEqual(text.resolved(),
 
 // ••••••• Preferences •••••••
 
-let preferences = Preferences.applicationPreferences
+let preferences = PreferenceSet.applicationPreferences
 
 // Save
-preferences["name"].value = "John Doe"
+preferences["name"].value.set(to: "John Doe")
 // Load
-let loaded: String? = preferences["name"].value?.as(String.self)
+let loaded: String? = preferences["name"].value.as(String.self)
 
 XCTAssertEqual(loaded,
                "John Doe")
@@ -113,7 +157,7 @@ do {
 
     XCTAssertEqual(loaded,
                    "Contents")
-} catch let error {
+} catch {
     XCTFail(error.localizedDescription)
 }
 
@@ -138,7 +182,7 @@ XCTAssertEqual(originalOwner.property.value,
 let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let pattern = CompositePattern([
     LiteralPattern([1]), // 1
-    ConditionalPattern(condition: { $0.isEven }), // 2
+    ConditionalPattern({ $0.isEven }), // 2
     AlternativePatterns([
         LiteralPattern([30, 40]), // (∅)
         LiteralPattern([3, 4]) // 3, 4
