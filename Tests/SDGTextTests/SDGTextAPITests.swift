@@ -169,7 +169,7 @@ class SDGTextAPITests : TestCase {
     func testSemanticMarkup() {
         testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
         testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
-        testCodableConformance(of: SemanticMarkup("àbçđę...").superscripted(), uniqueTestName: "àbçđę...")
+        testCodableConformance(of: SemanticMarkup("àbçđę...").superscripted(), uniqueTestName: "Unicode")
 
         let markup: SemanticMarkup = "..."
         XCTAssertEqual(markup.scalars, markup.source.scalars)
@@ -195,8 +195,8 @@ class SDGTextAPITests : TestCase {
     func testStrictString() {
         testBidirectionalCollectionConformance(of: StrictString("ABC"))
         testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
-        testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "àbçđę...")
-        testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "àbçđę...")
+        testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+        testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
 
         var string = StrictString("\u{BC}")
         let appendix: UnicodeScalar = "\u{BD}"
