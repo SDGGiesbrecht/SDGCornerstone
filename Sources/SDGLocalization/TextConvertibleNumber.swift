@@ -382,6 +382,7 @@ extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
 }
 
 extension CodableViaTextConvertibleNumber where Self : WholeNumberProtocol {
+    // MARK: - where Self : WholeNumberProtocol
 
     // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
     /// Encodes this value into the given encoder.

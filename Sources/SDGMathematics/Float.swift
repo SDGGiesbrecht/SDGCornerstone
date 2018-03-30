@@ -401,7 +401,7 @@ extension FloatFamily {
         }
     }
 
-    // MARK - Subtractable
+    // MARK: - Subtractable
 
     // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
     /// Returns the difference of the preceding value minus the following value.

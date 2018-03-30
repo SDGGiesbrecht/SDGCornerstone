@@ -29,6 +29,7 @@ public protocol IterableEnumeration : RawRepresentable {
 }
 
 extension IterableEnumeration where RawValue == Int {
+    // MARK: - where RawValue == Int
 
     // [_Inherit Documentation: SDGCornerstone.IterableEnumeration.cases_]
     /// An array containing every case of the enumeration.

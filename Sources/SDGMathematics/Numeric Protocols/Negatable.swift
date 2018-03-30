@@ -60,6 +60,7 @@ extension Negatable {
 }
 
 extension Negatable where Self : SignedNumeric {
+    // MARK: - where Self : SignedNumeric
 
     /// Returns the additive inverse of the specified value.
     @_inlineable public static prefix func - (operand: Self) -> Self {

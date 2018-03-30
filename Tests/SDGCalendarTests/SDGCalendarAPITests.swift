@@ -127,10 +127,10 @@ class SDGCalendarAPITests : TestCase {
         testCodableConformance(of: hebrew + (12345 as FloatMax).days, uniqueTestName: "Relative")
         // For unregistered definitions, see DocumentationExampleTests.DateExampleTests.
 
-        struct Mock : Encodable {
+        struct Mock : Encodable { // swiftlint:disable:this nesting
             let key = "gregoriano"
             let container = "[]"
-            let other = [138059393067,259200]
+            let other = [138059393067, 259200]
             func encode(to encoder: Encoder) throws {
                 var container = encoder.unkeyedContainer()
                 try container.encode(key)

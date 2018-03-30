@@ -60,7 +60,7 @@ let package = Package(
 
         .library(name: "SDGExternalProcess", targets: ["SDGExternalProcess"]),
 
-        .library(name: "SDGTesting", targets: ["SDGTesting"]),
+        .library(name: "SDGTesting", targets: ["SDGTesting"])
     ],
     targets: [
         // The entire package.
@@ -79,7 +79,7 @@ let package = Package(
             "SDGCalendar",
             "SDGPrecisionMathematics",
             "SDGConcurrency",
-            "SDGExternalProcess",
+            "SDGExternalProcess"
             ]),
         .target(name: "SDGCornerstoneTestUtilities", dependencies: [
             "SDGLogicTestUtilities",
@@ -288,7 +288,7 @@ let package = Package(
             "SDGPersistenceTestUtilities"
             ]),
         .testTarget(name: "SDGConcurrencyTests", dependencies: [
-            "SDGConcurrency", "SDGXCTestUtilities",
+            "SDGConcurrency", "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGExternalProcessTests", dependencies: [
             "SDGExternalProcess", "SDGXCTestUtilities",
@@ -297,7 +297,7 @@ let package = Package(
         .testTarget(name: "DocumentationExampleTests", dependencies: [
             "SDGCornerstone", "SDGXCTestUtilities",
             "SDGPersistenceTestUtilities"
-        ]),
+        ])
 
         // To run these tests, uncomment the following and run the executable in the release configuration.
         /*.target(name: "performance‐tests", dependencies: [

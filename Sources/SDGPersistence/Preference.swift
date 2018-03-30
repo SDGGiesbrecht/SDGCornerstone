@@ -42,7 +42,7 @@ public struct Preference : CustomStringConvertible, Equatable {
     }
     @_versioned internal class Cache {
         fileprivate init() {}
-        @_versioned internal var types: [ObjectIdentifier : Any?] = [:]
+        @_versioned internal var types: [ObjectIdentifier: Any?] = [:]
     }
     @_versioned internal var cache: Cache = Cache()
 
@@ -112,12 +112,12 @@ public struct Preference : CustomStringConvertible, Equatable {
             #if os(Linux)
                 // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.0.3)_]
                 let encodedArray = try JSONEncoder().encode([theValue])
-                let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray
+                let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray // swiftlint:disable:this force_cast
                 let object = cast(arrayObject.firstObject!)
             #else
                 let encodedArray = try PropertyListEncoder().encode([theValue])
-                let arrayObject = try PropertyListSerialization.propertyList(from: encodedArray, options: [], format: nil) as! NSArray
-                let object = arrayObject.firstObject! as! NSObject
+                let arrayObject = try PropertyListSerialization.propertyList(from: encodedArray, options: [], format: nil) as! NSArray // swiftlint:disable:this force_cast
+                let object = arrayObject.firstObject! as! NSObject // swiftlint:disable:this force_cast
             #endif
             propertyListObject = object
         } catch { // [_Exempt from Test Coverage_]
@@ -158,7 +158,7 @@ public struct Preference : CustomStringConvertible, Equatable {
                 return nil
             }
         }
-        return converted as! T?
+        return converted as! T? // swiftlint:disable:this force_cast
     }
 
     // MARK: - CustomStringConvertible
@@ -177,7 +177,7 @@ public struct Preference : CustomStringConvertible, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func ==(precedingValue: Preference, followingValue: Preference) -> Bool {
+    @_inlineable public static func == (precedingValue: Preference, followingValue: Preference) -> Bool {
         return precedingValue.propertyListObject == followingValue.propertyListObject
     }
 }

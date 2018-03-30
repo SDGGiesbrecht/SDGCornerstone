@@ -307,7 +307,7 @@ class SDGCollectionsAPITests : TestCase {
     func testCompositePattern() {
         testPattern(CompositePattern([
             LiteralPattern([1, 2]),
-            LiteralPattern([3]),
+            LiteralPattern([3])
             ]), match: [1, 2, 3])
     }
 
@@ -374,7 +374,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(variable[4], "...")
     }
 
-    struct FiniteSetExample: FiniteSet {
+    struct FiniteSetExample : FiniteSet {
         typealias Element = Int
         var set: Set<Int>
         init(_ set: Set<Int>) {
@@ -408,7 +408,7 @@ class SDGCollectionsAPITests : TestCase {
         testPattern(LiteralPattern([1, 2, 3]), match: [1, 2, 3])
     }
 
-    struct MutableSetExample: MutableSet {
+    struct MutableSetExample : MutableSet {
         typealias Element = Int
         var set: Set<Int>
         init(_ set: Set<Int>) {
@@ -445,7 +445,7 @@ class SDGCollectionsAPITests : TestCase {
             precedingValue.set ∖= followingValue.set
         }
     }
-    struct MutableFiniteSetExample: FiniteSet, MutableSet {
+    struct MutableFiniteSetExample : FiniteSet, MutableSet {
         typealias Element = Int
         var set: Set<Int>
         init(_ set: Set<Int>) {

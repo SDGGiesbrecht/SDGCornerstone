@@ -25,9 +25,8 @@
 
     test(operator: (×, "×"), on: (42 as T, 3), returns: 126, file: file, line: line)
     test(assignmentOperator: (×=, "×="), with: (4 as T, 4), resultsIn: 16, file: file, line: line)
-    // Numeric
-    test(operator: (*, "*"), on: (42 as T, 3), returns: 126, file: file, line: line)
-    test(assignmentOperator: (*=, "*="), with: (4 as T, 4), resultsIn: 16, file: file, line: line)
+    test(operator: (*, "*"), on: (42 as T, 3), returns: 126, file: file, line: line) // Numeric
+    test(assignmentOperator: (*=, "*="), with: (4 as T, 4), resultsIn: 16, file: file, line: line) // Numeric
 
     test(method: (T.dividedAccordingToEuclid, "dividedAccordingToEuclid"), of: 5 as T, with: 3, returns: 1, file: file, line: line)
     test(mutatingMethod: (T.divideAccordingToEuclid, "divideAccordingToEuclid"), of: 72 as T, with: 25, resultsIn: 2, file: file, line: line)

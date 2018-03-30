@@ -16,6 +16,8 @@ import SDGControlFlow
 
 // [_Define Example: Nonmutating Variant_]
 extension Array where Element : Comparable {
+    // MARK: - where Element : Comparable
+
     func sorted() -> Array {
         return nonmutatingVariant(of: Array.sort, on: self)
     }

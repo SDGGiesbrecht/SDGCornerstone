@@ -116,7 +116,7 @@ public final class PreferenceSet {
 
         #else
 
-            objects = (UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) ?? [:]) as! [String: NSObject]
+            objects = (UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) ?? [:]) as! [String: NSObject] // swiftlint:disable:this force_cast
 
         #endif
 

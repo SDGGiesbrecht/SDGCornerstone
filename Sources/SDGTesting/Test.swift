@@ -14,7 +14,7 @@
 
 // MARK: - General
 
-private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString, line: UInt) -> Void { // [_Exempt from Test Coverage_]
+private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString, line: UInt) { // [_Exempt from Test Coverage_]
     if expression() {} else { // [_Exempt from Test Coverage_]
         // Release optimization removes assert and strips precondition’s message.
         fatalError(message(), file: file, line: line)

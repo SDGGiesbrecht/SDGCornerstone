@@ -85,7 +85,7 @@ class SDGPrecisionMathematicsAPITests : TestCase {
         XCTAssertEqual((1 as WholeNumber).abbreviatedEnglishOrdinal().rawTextApproximation(), "1st")
 
         XCTAssertEqual(WholeNumber(randomInRange: 1 ... 1), 1)
-        let multipleDigits = WholeNumber(UIntMax.max).successor()
+        let multipleDigits = WholeNumber(UIntMax.max).successor() ↑ 2
         let range = 0 ... multipleDigits.successor()
         XCTAssert(range.contains(WholeNumber(randomInRange: range)))
     }

@@ -113,6 +113,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
 }
 
 extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.RawValue == Self.Vector {
+    // MARK: - where Self : EnumerationCalendarComponent, Self.RawValue == Self.Vector
 
     // MARK: - Decodable
 

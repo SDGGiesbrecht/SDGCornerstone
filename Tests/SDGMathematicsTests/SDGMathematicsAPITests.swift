@@ -31,16 +31,16 @@ class SDGMathematicsAPITests : TestCase {
         static func += (precedingValue: inout AddableStrideableExample, followingValue: AddableStrideableExample) {
             precedingValue.value += followingValue.value
         }
-        static func -= (precedingValue: inout AddableStrideableExample, followingValue: AddableStrideableExample) {
+        static func -= (precedingValue: inout AddableStrideableExample, followingValue: AddableStrideableExample) { // Numeric
             precedingValue.value −= followingValue.value
         }
-        static func - (precedingValue: AddableStrideableExample, followingValue: AddableStrideableExample) -> AddableStrideableExample {
+        static func - (precedingValue: AddableStrideableExample, followingValue: AddableStrideableExample) -> AddableStrideableExample { // Numeric
             return AddableStrideableExample(precedingValue.value − followingValue.value)
         }
-        static func *= (precedingValue: inout AddableStrideableExample, followingValue: AddableStrideableExample) {
+        static func *= (precedingValue: inout AddableStrideableExample, followingValue: AddableStrideableExample) { // Numeric
             precedingValue.value ×= followingValue.value
         }
-        static func * (precedingValue: AddableStrideableExample, followingValue: AddableStrideableExample) -> AddableStrideableExample {
+        static func * (precedingValue: AddableStrideableExample, followingValue: AddableStrideableExample) -> AddableStrideableExample { // Numeric
             return AddableStrideableExample(precedingValue.value × followingValue.value)
         }
         var magnitude: UInt {
@@ -104,7 +104,7 @@ class SDGMathematicsAPITests : TestCase {
         mutating func formBitwiseExclusiveOr(with other: BitFieldExample) {
             field.formBitwiseExclusiveOr(with: other.field)
         }
-        static func ==(lhs: BitFieldExample, rhs: BitFieldExample) -> Bool {
+        static func == (lhs: BitFieldExample, rhs: BitFieldExample) -> Bool {
             return lhs.field == rhs.field
         }
     }
@@ -143,7 +143,9 @@ class SDGMathematicsAPITests : TestCase {
 	    #if !os(Linux)
             testRealArithmeticConformance(of: CGFloat.self)
         #endif
-        testRealArithmeticConformance(of: Float80.self)
+        #if !os(iOS) && !os(watchOS) && !os(tvOS)
+            testRealArithmeticConformance(of: Float80.self)
+        #endif
         testRealArithmeticConformance(of: Float.self)
 
         #if !os(Linux)
@@ -304,10 +306,10 @@ class SDGMathematicsAPITests : TestCase {
             }
             self.init(double)
         }
-        static func +=(precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
+        static func += (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
             precedingValue.value += followingValue.value
         }
-        static func −=(precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
+        static func −= (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
             precedingValue.value −= followingValue.value
         }
         static func ×= (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
@@ -322,9 +324,11 @@ class SDGMathematicsAPITests : TestCase {
         init(_ int: SDGMathematics.IntMax) {
             value = Double(int)
         }
+        #if !os(iOS) && !os(watchOS) && !os(tvOS)
         init(_ floatingPoint: FloatMax) {
             value = Double(floatingPoint)
         }
+        #endif
         static func ÷= (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
             precedingValue.value ÷= followingValue.value
         }
@@ -409,10 +413,10 @@ class SDGMathematicsAPITests : TestCase {
         func advanced(by n: SubtractableStrideableExample) -> SubtractableStrideableExample {
             return SubtractableStrideableExample(value.advanced(by: n.value))
         }
-        static func *= (precedingValue: inout SubtractableStrideableExample, followingValue: SubtractableStrideableExample) {
+        static func *= (precedingValue: inout SubtractableStrideableExample, followingValue: SubtractableStrideableExample) { // Numeric
             precedingValue.value ×= followingValue.value
         }
-        static func * (precedingValue: SubtractableStrideableExample, followingValue: SubtractableStrideableExample) -> SubtractableStrideableExample {
+        static func * (precedingValue: SubtractableStrideableExample, followingValue: SubtractableStrideableExample) -> SubtractableStrideableExample { // Numeric
             return SubtractableStrideableExample(precedingValue.value × followingValue.value)
         }
         var magnitude: UInt {
@@ -434,9 +438,9 @@ class SDGMathematicsAPITests : TestCase {
         x -= SubtractableNumericExample(8)
         XCTAssertEqual(x, SubtractableNumericExample(−1))
 
-        XCTAssertEqual(SubtractableStrideableExample(6) - SubtractableStrideableExample(5), SubtractableStrideableExample(1))
+        XCTAssertEqual(SubtractableStrideableExample(6) - SubtractableStrideableExample(5), SubtractableStrideableExample(1)) // Numeric
         var y = SubtractableStrideableExample(7)
-        y -= SubtractableStrideableExample(8)
+        y -= SubtractableStrideableExample(8)  // Numeric
         XCTAssertEqual(y, SubtractableStrideableExample(−1))
     }
 

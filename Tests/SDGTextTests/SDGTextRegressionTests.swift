@@ -65,7 +65,7 @@ class SDGTextRegressionTests : TestCase {
             ("testMatchlessComponentSeperation", testMatchlessComponentSeperation),
             ("testMatchlessSearch", testMatchlessSearch),
             ("testNestingLevelLocation", testNestingLevelLocation),
-            ("testReverseSearch", testReverseSearch),
+            ("testReverseSearch", testReverseSearch)
         ]
     }
 }

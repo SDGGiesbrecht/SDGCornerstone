@@ -39,7 +39,6 @@ extension FloatFamily {
     }
 }
 
-
 extension Double : RandomizableNumber {}
 #if !os(Linux)
     // MARK: - #if !os(Linux)

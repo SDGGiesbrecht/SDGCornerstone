@@ -78,12 +78,12 @@ extension Subtractable where Self : Numeric {
     // MARK: - where Self : Numeric
 
     /// Subtracts one value from another and produces their difference.
-    @_inlineable public static func - (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func - (precedingValue: Self, followingValue: Self) -> Self { // Numeric
         return precedingValue − followingValue
     }
 
     /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
-    @_inlineable public static func -= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func -= (precedingValue: inout Self, followingValue: Self) { // Numeric
         precedingValue −= followingValue
     }
 }
@@ -92,12 +92,12 @@ extension Subtractable where Self : Strideable, Self.Stride == Self {
     // MARK: - where Self : Strideable, Self.Stride == Self
 
     /// Subtracts one value from another and produces their difference.
-    @_inlineable public static func - (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func - (precedingValue: Self, followingValue: Self) -> Self { // Numeric
         return precedingValue − followingValue
     }
 
     /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
-    @_inlineable public static func -= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func -= (precedingValue: inout Self, followingValue: Self) { // Numeric
         precedingValue −= followingValue
     }
 }

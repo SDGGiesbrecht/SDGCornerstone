@@ -18,5 +18,5 @@
     testCollectionConformance(of: collection, file: file, line: line)
 
     let second = collection.index(after: collection.startIndex)
-    test(method: (T.index(before:), "index(before: "), of: collection, with: second, returns: collection.startIndex, file: file, line: line)
+    test(method: (T.index(before: ), "index(before: "), of: collection, with: second, returns: collection.startIndex, file: file, line: line)
 }

@@ -492,12 +492,12 @@ extension WholeArithmetic {
     /// Creates a new instance from the given integer, if it can be represented exactly.
 
     /// Multiplies two values and produces their product.
-    @_inlineable public static func * (precedingValue: Self, followingValue: Self) -> Self {
+    @_inlineable public static func * (precedingValue: Self, followingValue: Self) -> Self { // Numeric
         return precedingValue × followingValue
     }
 
     /// Multiplies two values and stores the result in the left‐hand‐side variable.
-    @_inlineable public static func *= (precedingValue: inout Self, followingValue: Self) {
+    @_inlineable public static func *= (precedingValue: inout Self, followingValue: Self) { // Numeric
         precedingValue ×= followingValue
     }
 }

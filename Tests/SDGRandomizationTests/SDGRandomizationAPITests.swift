@@ -119,7 +119,7 @@ class SDGRandomizationAPITests : TestCase {
             ("testMeasurement", testMeasurement),
             ("testPseudorandomNumberGenerator", testPseudorandomNumberGenerator),
             ("testRangeReplaceableCollection", testRangeReplaceableCollection),
-            ("testUInt", testUInt),
+            ("testUInt", testUInt)
         ]
     }
 }

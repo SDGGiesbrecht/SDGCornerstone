@@ -223,7 +223,7 @@ class SDGPersistenceAPITests : TestCase {
             ("testLosslessStringConvertible", testLosslessStringConvertible),
             ("testPreferences", testPreferences),
             ("testSpecification", testSpecification),
-            ("testURL", testURL),
+            ("testURL", testURL)
         ]
     }
 }

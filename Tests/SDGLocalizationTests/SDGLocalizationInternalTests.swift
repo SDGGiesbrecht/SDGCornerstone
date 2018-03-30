@@ -93,7 +93,7 @@ class SDGLocalizationInternalTests : TestCase {
         return [
             ("testContentLocalization", testContentLocalization),
             ("testInterfaceLocalization", testInterfaceLocalization),
-            ("testLocalizationSetting", testLocalizationSetting),
+            ("testLocalizationSetting", testLocalizationSetting)
         ]
     }
 }

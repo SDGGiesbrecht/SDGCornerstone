@@ -50,12 +50,12 @@ class SDGLogicAPITests : TestCase {
 
         test(operator: (≠, "≠"), on: ([true: true], [true: true]), returns: false)
 
-        enum Enumeration: Int {
+        enum Enumeration : Int { // swiftlint:disable:this nesting
             case one = 1
         }
         test(operator: (≠, "≠"), on: (Enumeration.one, .one), returns: false)
 
-        struct Structure: RawRepresentable {
+        struct Structure : RawRepresentable { // swiftlint:disable:this nesting
             var rawValue: Int = 1
         }
         test(operator: (≠, "≠"), on: (Structure(), Structure()), returns: false)
@@ -68,7 +68,7 @@ class SDGLogicAPITests : TestCase {
             // Ensures syntax works.
         }
 
-        struct Thing {} // Not equatable.
+        struct Thing {} // Not equatable. // swiftlint:disable:this nesting
         let thing: Thing? = Thing()
         if thing ≠ nil {
             // Ensures syntax works.

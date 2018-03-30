@@ -65,6 +65,7 @@ public protocol OrderedEnumeration : Comparable, IterableEnumeration {
 }
 
 extension OrderedEnumeration where RawValue == Int {
+    // MARK: - where RawValue == Int
 
     @_inlineable @_versioned internal mutating func _increment() {
         guard let result = successor() else {

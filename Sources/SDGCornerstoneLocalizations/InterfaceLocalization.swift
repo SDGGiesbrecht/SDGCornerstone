@@ -24,7 +24,7 @@ public enum InterfaceLocalization : String, InputLocalization {
 
         .englishUnitedKingdom,
         .englishUnitedStates,
-        .englishCanada,
+        .englishCanada
     ]
 
     // MARK: - Localization

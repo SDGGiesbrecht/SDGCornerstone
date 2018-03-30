@@ -19,6 +19,8 @@
 ///
 /// ```swift
 /// extension Array where Element : Comparable {
+///     // MARK: - where Element : Comparable
+///
 ///     func sorted() -> Array {
 ///         return nonmutatingVariant(of: Array.sort, on: self)
 ///     }
@@ -45,6 +47,8 @@
 ///
 /// ```swift
 /// extension Array where Element : Comparable {
+///     // MARK: - where Element : Comparable
+///
 ///     func sorted() -> Array {
 ///         return nonmutatingVariant(of: Array.sort, on: self)
 ///     }
@@ -72,6 +76,8 @@
 ///
 /// ```swift
 /// extension Array where Element : Comparable {
+///     // MARK: - where Element : Comparable
+///
 ///     func sorted() -> Array {
 ///         return nonmutatingVariant(of: Array.sort, on: self)
 ///     }
@@ -99,6 +105,8 @@
 ///
 /// ```swift
 /// extension Array where Element : Comparable {
+///     // MARK: - where Element : Comparable
+///
 ///     func sorted() -> Array {
 ///         return nonmutatingVariant(of: Array.sort, on: self)
 ///     }
@@ -128,6 +136,8 @@
 ///
 /// ```swift
 /// extension Array where Element : Comparable {
+///     // MARK: - where Element : Comparable
+///
 ///     func sorted() -> Array {
 ///         return nonmutatingVariant(of: Array.sort, on: self)
 ///     }
@@ -155,6 +165,8 @@
 ///
 /// ```swift
 /// extension Array where Element : Comparable {
+///     // MARK: - where Element : Comparable
+///
 ///     func sorted() -> Array {
 ///         return nonmutatingVariant(of: Array.sort, on: self)
 ///     }

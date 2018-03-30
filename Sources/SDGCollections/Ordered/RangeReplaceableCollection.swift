@@ -182,7 +182,7 @@ extension RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.fill, on: self, with: (count, element, direction))
     }
 
-    // MARK: ExpressibleByArrayLiteral
+    // MARK: - ExpressibleByArrayLiteral
 
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
     /// Creates an instance from an array literal.
@@ -254,7 +254,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(before pattern: Pattern<Element>) -> Self {
-        return nonmutatingVariant(of: Self.truncate(before:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(before:)_]
@@ -265,7 +265,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(before pattern: CompositePattern<Element>) -> Self {
-        return nonmutatingVariant(of: Self.truncate(before:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
@@ -276,7 +276,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated<C : Collection>(before pattern: C) -> Self where C.Element == Self.Element {
-        return nonmutatingVariant(of: Self.truncate(before:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
@@ -287,7 +287,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(before pattern: Self) -> Self {
-        return nonmutatingVariant(of: Self.truncate(before:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
     }
 
     // [_Define Documentation: SDGCornerstone.Collection.trucate(after:)_]
@@ -349,7 +349,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: Pattern<Element>) -> Self {
-        return nonmutatingVariant(of: Self.truncate(after:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
@@ -360,7 +360,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: CompositePattern<Element>) -> Self {
-        return nonmutatingVariant(of: Self.truncate(after:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
@@ -371,7 +371,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated<C : Collection>(after pattern: C) -> Self where C.Element == Self.Element {
-        return nonmutatingVariant(of: Self.truncate(after:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
@@ -382,7 +382,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: Self) -> Self {
-        return nonmutatingVariant(of: Self.truncate(after:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
     }
 
     // [_Define Documentation: SDGCornerstone.Collection.drop(upTo:)_]
@@ -448,7 +448,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(upTo pattern: Pattern<Element>) -> Self {
-        return nonmutatingVariant(of: Self.drop(upTo:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
@@ -459,7 +459,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(upTo pattern: CompositePattern<Element>) -> Self {
-        return nonmutatingVariant(of: Self.drop(upTo:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
@@ -470,7 +470,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping<C : Collection>(upTo pattern: C) -> Self where C.Element == Self.Element {
-        return nonmutatingVariant(of: Self.drop(upTo:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
@@ -481,7 +481,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(upTo pattern: Self) -> Self {
-        return nonmutatingVariant(of: Self.drop(upTo:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
     }
 
     // [_Define Documentation: SDGCornerstone.Collection.drop(through:)_]
@@ -547,7 +547,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(through pattern: Pattern<Element>) -> Self {
-        return nonmutatingVariant(of: Self.drop(through:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(through:)_]
@@ -558,7 +558,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(through pattern: CompositePattern<Element>) -> Self {
-        return nonmutatingVariant(of: Self.drop(through:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(through:)_]
@@ -569,7 +569,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping<C : Collection>(through pattern: C) -> Self where C.Element == Self.Element {
-        return nonmutatingVariant(of: Self.drop(through:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.dropping(through:)_]
@@ -580,7 +580,7 @@ extension RangeReplaceableCollection where Element : Equatable {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(through pattern: Self) -> Self {
-        return nonmutatingVariant(of: Self.drop(through:), on: self, with: pattern)
+        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
     }
 }
 

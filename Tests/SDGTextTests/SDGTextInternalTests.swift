@@ -23,7 +23,7 @@ class SDGTextInternalTests : TestCase {
 
     static var allTests: [(String, (SDGTextInternalTests) -> () throws -> Void)] {
         return [
-            ("testLineViewIndex", testLineViewIndex),
+            ("testLineViewIndex", testLineViewIndex)
         ]
     }
 }
