@@ -16,58 +16,49 @@ matrix:
     - os: osx
       env:
         - JOB="macOS + Swift Package Manager"
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       script:
-        - "bash \"./Refresh (macOS).command\""
-        - "bash \"./Validate (macOS).command\" •job macos‐swift‐package‐manager"
+        - "swift test"
     - os: osx
       env:
         - JOB="macOS + Xcode"
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       script:
-        - "bash \"./Refresh (macOS).command\""
-        - "bash \"./Validate (macOS).command\" •job macos‐xcode"
+        - "swift package generate-xcodeproj"
+        - "xcodebuild test -sdk macosx -scheme SDGCornerstone-Package"
     - os: linux
       env:
         - JOB="Linux"
       dist: trusty
       script:
-        - "export SWIFT_VERSION=4.0.3"
+        - "export SWIFT_VERSION=4.1"
         - "eval \"$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)\""
-        - "bash \"./Refresh (macOS).command\""
-        - "bash \"./Validate (macOS).command\" •job linux"
+        - "swift test"
     - os: osx
       env:
         - JOB="iOS"
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       language: objective-c
       xcode_sdk: iphonesimulator
       script:
-        - "bash \"./Refresh (macOS).command\""
-        - "bash \"./Validate (macOS).command\" •job ios"
+        - "swift package generate-xcodeproj"
+        - "xcodebuild test -destination "name=iPhone 8" -scheme SDGCornerstone-Package"
     - os: osx
       env:
         - JOB="watchOS"
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       script:
-        - "bash \"./Refresh (macOS).command\""
-        - "bash \"./Validate (macOS).command\" •job watchos"
+        - "swift package generate-xcodeproj"
+        - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package"
     - os: osx
       env:
         - JOB="tvOS"
-      osx_image: xcode9.2
+      osx_image: xcode9.3
       language: objective-c
       xcode_sdk: appletvsimulator
       script:
-        - "bash \"./Refresh (macOS).command\""
-        - "bash \"./Validate (macOS).command\" •job tvos"
-    - os: osx
-      env:
-        - JOB="Miscellaneous"
-      osx_image: xcode9.2
-      script:
-        - "bash \"./Refresh (macOS).command\""
-        - "bash \"./Validate (macOS).command\" •job miscellaneous"
+        - "swift package generate-xcodeproj"
+        - "xcodebuild test -destination "name=Apple TV 4K" -scheme SDGCornerstone-Package"
 
 cache:
   directories:
