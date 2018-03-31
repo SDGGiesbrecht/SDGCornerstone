@@ -14,15 +14,14 @@
 
 import SDGMathematics
 
-extension Collection where IndexDistance : RandomizableNumber {
-    // MARK: - where IndexDistance : RandomizableNumber
+extension Collection {
 
     /// Returns a random index from the collection.
     ///
     /// - Parameters:
     ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
     @_inlineable public func randomIndex(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Index {
-        let random = IndexDistance(randomInRange: 0 ... count − 1, fromRandomizer: randomizer)
+        let random = Int(randomInRange: 0 ... count − 1, fromRandomizer: randomizer)
         return index(startIndex, offsetBy: random)
     }
 

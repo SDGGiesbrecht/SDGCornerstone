@@ -13,17 +13,21 @@
  */
 
 #if !os(Linux)
-    // MARK: - #if !os(Linux)
+// MARK: - #if !os(Linux)
 
-    import CoreGraphics
+import CoreGraphics
 
-    extension CGPoint : TwoDimensionalPoint {
+extension CGPoint : TwoDimensionalPoint {
 
-        // MARK: - PointProtocol
+    // MARK: - PointProtocol
 
-        // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-        /// The type to be used as a vector.
-        public typealias Vector = CGVector
-    }
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    /// The type to be used as a vector.
+    public typealias Vector = CGVector
+
+    // MARK: - TwoDimensionalPoint
+
+    public typealias Scalar = Vector.Scalar
+}
 
 #endif

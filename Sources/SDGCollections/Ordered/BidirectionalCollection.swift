@@ -244,11 +244,11 @@ extension BidirectionalCollection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
-    @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element, C.SubSequence : Collection {
+    @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element {
 
         let suffixStart = commonSuffix(with: other).range.lowerBound
-        let suffixLength = Int(distance(from: suffixStart, to: endIndex))
-        let otherSuffixStart = other.index(other.endIndex, offsetBy: C.IndexDistance(−suffixLength))
+        let suffixLength = distance(from: suffixStart, to: endIndex)
+        let otherSuffixStart = other.index(other.endIndex, offsetBy: −suffixLength)
 
         var difference: [Change<C.Index, Index>] = prefix(upTo: suffixStart)._difference(from: other.prefix(upTo: otherSuffixStart))
 
