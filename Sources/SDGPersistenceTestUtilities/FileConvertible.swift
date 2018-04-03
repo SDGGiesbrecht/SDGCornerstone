@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGCollections
 import SDGCalendar
 
@@ -30,10 +32,13 @@ import SDGCalendar
     var specifications: Set<Data> = []
     do {
         for specificationURL in try FileManager.default.contentsOfDirectory(at: specificationsDirectory, includingPropertiesForKeys: nil, options: []) {
-            let specification = try Data(from: specificationURL)
-            specifications.insert(specification)
-            let decoded = try T(file: specification, origin: specificationURL)
-            test(decoded == instance, "\(instance) ≠ \(decoded) (\(specificationURL)", file: file, line: line)
+            try autoreleasepool {
+
+                let specification = try Data(from: specificationURL)
+                specifications.insert(specification)
+                let decoded = try T(file: specification, origin: specificationURL)
+                test(decoded == instance, "\(instance) ≠ \(decoded) (\(specificationURL)", file: file, line: line)
+            }
         }
 
         let encoded = instance.file

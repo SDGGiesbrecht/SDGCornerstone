@@ -36,10 +36,12 @@ import SDGCornerstoneLocalizations
 
     var results: [TimeInterval] = []
     for _ in 1 ... iterations {
-        let start = Date.timeIntervalSinceReferenceDate
-        test()
-        let end = Date.timeIntervalSinceReferenceDate
-        results.append(end − start)
+        autoreleasepool {
+            let start = Date.timeIntervalSinceReferenceDate
+            test()
+            let end = Date.timeIntervalSinceReferenceDate
+            results.append(end − start)
+        }
     }
     let sum = results.reduce(0) { $0 + $1 }
     let mean = sum ÷ TimeInterval(iterations)
