@@ -21,11 +21,12 @@
     import SDGPersistence
     import SDGLocalization
 
+    /// An external process.
     public final class ExternalProcess {
 
         // MARK: - Initialization
 
-        /// Creates an instance with the
+        /// Creates an instance with the executable at the specified location.
         ///
         /// - Parameters:
         ///     - executable: The location of the executable file.
