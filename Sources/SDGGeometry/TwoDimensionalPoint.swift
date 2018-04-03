@@ -25,6 +25,8 @@ where Vector : TwoDimensionalVector, Vector.Scalar == Scalar {
 
     //typealias Scalar = Vector.Scalar
     // [_Workaround: Related to the workaround at the top of the file. (Swift 4.0.3)_]
+    // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.Scalar_]
+    /// The scalar type.
     associatedtype Scalar
 
     // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.x_]

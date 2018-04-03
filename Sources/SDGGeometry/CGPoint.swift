@@ -27,6 +27,8 @@ extension CGPoint : TwoDimensionalPoint {
 
     // MARK: - TwoDimensionalPoint
 
+    // [_Inherit Documentation: SDGCornerstone.TwoDimensionalPoint.Scalar_]
+    /// The scalar type.
     public typealias Scalar = Vector.Scalar
 }
 
