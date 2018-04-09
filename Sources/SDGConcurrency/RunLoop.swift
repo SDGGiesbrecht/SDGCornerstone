@@ -53,7 +53,9 @@ extension RunLoop {
         driver = nil
 
         while weakDriver ≠ nil {
-            run(until: Date(timeIntervalSinceNow: 1))
+            autoreleasepool {
+                run(until: Date(timeIntervalSinceNow: 1))
+            }
         }
     }
 

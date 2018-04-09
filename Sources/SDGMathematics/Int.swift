@@ -16,7 +16,7 @@
 public typealias IntMax = Int64
 
 /// A member of the `Int` family: `Int`, `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntFamily : CustomPlaygroundQuickLookable, CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol, MirrorPath, SignedInteger {
+public protocol IntFamily : CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol, MirrorPath, SignedInteger {
 
 }
 /// A numbered member of the `Int` family: `Int64`, `Int32`, `Int16` or `Int8`.

@@ -79,7 +79,5 @@ fail
 test
 [_End_]
 
-([_Workaround: Xcode and Jazzy are too slow for CI with this many modules. (workspace version 0.5.1)_])
-Prohibit Compiler Warnings: False
-Enforce Test Coverage: False
-Generate Documentation: False
+([_Workaround: Until Workspace is updated. 0.5.1)_])
+Manage Continuous Integration: False

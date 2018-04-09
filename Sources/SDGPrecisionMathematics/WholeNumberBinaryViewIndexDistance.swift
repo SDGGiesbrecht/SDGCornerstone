@@ -21,7 +21,7 @@ extension WholeNumber.BinaryView {
 
         // MARK: - Initialization
 
-        internal init(digitDistance: DigitDistance, bitDistance: BitDistance) {
+        internal init(digitDistance: Int, bitDistance: Int) {
             self.digitDistance = digitDistance
             self.bitDistance = bitDistance
         }
@@ -29,19 +29,16 @@ extension WholeNumber.BinaryView {
         internal init(_ uInt: UIntMax) {
             let bitsPerDigit = BinaryView<WholeNumber.Digit>.count
 
-            let digits = DigitDistance(BitDistance(uInt.dividedAccordingToEuclid(by: UIntMax(bitsPerDigit))))
-            let bits = BitDistance(uInt).mod(bitsPerDigit)
+            let digits = Int(uInt.dividedAccordingToEuclid(by: UIntMax(bitsPerDigit)))
+            let bits = Int(uInt.mod(UIntMax(bitsPerDigit)))
 
             self = IndexDistance(digitDistance: digits, bitDistance: bits)
         }
 
         // MARK: - Properties
 
-        internal typealias DigitDistance = Array<WholeNumber.Digit>.IndexDistance
-        internal var digitDistance: DigitDistance
-
-        internal typealias BitDistance = BinaryView<WholeNumber.Digit>.IndexDistance
-        internal var bitDistance: BitDistance
+        internal var digitDistance: Int
+        internal var bitDistance: Int
 
         // MARK: - Addable
 

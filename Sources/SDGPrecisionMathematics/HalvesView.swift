@@ -27,7 +27,7 @@ internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Co
 
     // MARK: - Static Properties
 
-    internal static var count: IndexDistance {
+    internal static var count: Int {
         return 2
     }
 
@@ -61,7 +61,6 @@ internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Co
 
     internal typealias Element = UIntValue
     internal typealias Index = UIntValue
-    internal typealias IndexDistance = Int
 
     internal let startIndex: Index = 0
     internal let endIndex: Index = Index(HalvesView.count)

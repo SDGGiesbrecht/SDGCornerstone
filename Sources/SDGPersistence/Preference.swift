@@ -16,6 +16,9 @@ import Foundation
 
 import SDGControlFlow
 
+/// A persistent user preference which can hold any codable value.
+///
+/// `Preference` instances are obtained from `PreferenceSet.subscript(key:)`.
 public struct Preference : CustomStringConvertible, Equatable {
 
     // MARK: - Initialization
@@ -100,6 +103,11 @@ public struct Preference : CustomStringConvertible, Equatable {
         }
     #endif
 
+    // [_Define Documentation: SDGCornerstone.Preference.set(to:)_]
+    /// Sets the preference to a particular value.
+    ///
+    /// - Parameters:
+    ///     - value: The new preference value, either an instance of a `Codable` type or `nil`.
     public mutating func set<T>(to value: T?) where T : Encodable {
 
         guard let theValue = value else {
@@ -129,10 +137,18 @@ public struct Preference : CustomStringConvertible, Equatable {
         }
     }
 
+    // [_Inherit Documentation: SDGCornerstone.Preference.set(to:)_]
+    /// Sets the preference to a particular value.
+    ///
+    /// - Parameters:
+    ///     - value: The new preference value, either an instance of a `Codable` type or `nil`.
     @_inlineable public mutating func set(to value: NilLiteral) {
         propertyListObject = nil
     }
 
+    /// Returns the preference cast to a particular type.
+    ///
+    /// The result will be `nil` if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
     @_inlineable public func `as`<T>(_ type: T.Type) -> T? where T : Decodable {
         guard let object = propertyListObject else {
             // Value is nil.

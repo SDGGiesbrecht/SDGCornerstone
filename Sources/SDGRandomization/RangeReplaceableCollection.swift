@@ -14,8 +14,7 @@
 
 import SDGControlFlow
 
-extension RangeReplaceableCollection where IndexDistance : RandomizableNumber {
-    // MARK: - where IndexDistance : RandomizableNumber
+extension RangeReplaceableCollection {
 
     /// Shuffles the collection.
     ///
@@ -24,7 +23,7 @@ extension RangeReplaceableCollection where IndexDistance : RandomizableNumber {
     @_inlineable public mutating func shuffle(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) {
         for i in indices {
             let originalLocation = distance(from: startIndex, to: i)
-            let newLocation = IndexDistance(randomInRange: 0 ... originalLocation, fromRandomizer: randomizer)
+            let newLocation = Int(randomInRange: 0 ... originalLocation, fromRandomizer: randomizer)
             let element = remove(at: index(startIndex, offsetBy: originalLocation))
             insert(element, at: index(startIndex, offsetBy: newLocation))
         }

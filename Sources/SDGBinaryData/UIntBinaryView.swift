@@ -36,7 +36,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // [_Inherit Documentation: SDGCornerstone.Collection.count_]
     /// The number of elements in the collection.
-    @_inlineable public static var count: IndexDistance {
+    @_inlineable public static var count: Int {
         let bytes = MemoryLayout<UIntValue>.size
         return bytes × 8
     }
@@ -69,9 +69,6 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     // [_Inherit Documentation: SDGCornerstone.Collection.Index_]
     /// The type of the indices of the collection.
     public typealias Index = UIntValue
-    // [_Inherit Documentation: SDGCornerstone.Collection.IndexDistance_]
-    /// The type that represents the number of steps between a pair of indices.
-    public typealias IndexDistance = Int
 
     // [_Inherit Documentation: SDGCornerstone.Collection.Indices_]
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
