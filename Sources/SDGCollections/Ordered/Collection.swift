@@ -26,9 +26,6 @@ extension Collection {
     // [_Define Documentation: SDGCornerstone.Collection.Index_]
     /// The type of the indices of the collection.
 
-    // [_Define Documentation: SDGCornerstone.Collection.IndexDistance_]
-    /// The type that represents the number of steps between a pair of indices.
-
     // [_Define Documentation: SDGCornerstone.Collection.Indices_]
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
 
@@ -744,8 +741,8 @@ extension Collection where Element : Equatable {
                 for otherPrefixLength in 1 ... Int(other.count) {
                     let lastIndexDistance = prefixLength − 1
                     let otherLastIndexDistance = otherPrefixLength − 1
-                    let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: IndexDistance(lastIndexDistance)) }
-                    let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: C.IndexDistance(otherLastIndexDistance)) }
+                    let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: lastIndexDistance) }
+                    let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: otherLastIndexDistance) }
                     if self[lastIndex] == other[otherLastIndex] {
                         table[prefixLength][otherPrefixLength] = table[prefixLength − 1][otherPrefixLength − 1] + 1
                     } else {
@@ -763,8 +760,8 @@ extension Collection where Element : Equatable {
         let lastIndexDistance = prefixLength == 0 ? 0 : prefixLength − 1
         let otherLastIndexDistance = otherPrefixLength == 0 ? 0 : otherPrefixLength − 1
 
-        let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: IndexDistance(lastIndexDistance)) } // [_Exempt from Test Coverage_] Already present.
-        let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: C.IndexDistance(otherLastIndexDistance)) } // [_Exempt from Test Coverage_] Already present.
+        let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: lastIndexDistance) } // [_Exempt from Test Coverage_] Already present.
+        let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: otherLastIndexDistance) } // [_Exempt from Test Coverage_] Already present.
         if prefixLength > 0 ∧ otherPrefixLength > 0 ∧ self[lastIndex] == other[otherLastIndex] {
             traceDifference(table, other: other, prefixLength: prefixLength − 1, otherPrefixLength: otherPrefixLength − 1, differenceUnderConstruction: &differenceUnderConstruction, indexCache: &indexCache, otherIndexCache: &otherIndexCache)
             differenceUnderConstruction.append(.keep(lastIndex))
@@ -829,10 +826,10 @@ extension Collection where Element : Equatable {
         return changeGroups
     }
 
-    @_inlineable @_versioned internal func _difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element, SubSequence : Collection, C.SubSequence : Collection {
+    @_inlineable @_versioned internal func _difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element {
         let prefixEnd = commonPrefix(with: other).range.upperBound
-        let prefixLength = Int(distance(from: startIndex, to: prefixEnd))
-        let otherPrefixEnd = other.index(other.startIndex, offsetBy: C.IndexDistance(prefixLength))
+        let prefixLength = distance(from: startIndex, to: prefixEnd)
+        let otherPrefixEnd = other.index(other.startIndex, offsetBy: prefixLength)
 
         var difference: [Change<C.Index, Index>] = []
         if prefixLength ≠ 0 {
@@ -848,7 +845,7 @@ extension Collection where Element : Equatable {
     ///
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
-    @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element, SubSequence : Collection, C.SubSequence : Collection {
+    @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : Collection, C.Element == Self.Element {
         return _difference(from: other)
     }
 }

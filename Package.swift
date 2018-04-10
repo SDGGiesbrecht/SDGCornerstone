@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.1
 
 /*
  Package.swift
@@ -205,16 +205,19 @@ let package = Package(
             ]),
 
         .target(name: "SDGConcurrency", dependencies: [
+            "SDGControlFlow",
             "SDGLogic"
             ]),
 
         .target(name: "SDGExternalProcess", dependencies: [
+            "SDGControlFlow",
             "SDGLogic",
             "SDGPersistence",
             "SDGLocalization"
             ]),
 
         .target(name: "SDGTesting", dependencies: [
+            "SDGControlFlow",
             "SDGMathematics",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"

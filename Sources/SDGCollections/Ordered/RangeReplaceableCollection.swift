@@ -161,7 +161,7 @@ extension RangeReplaceableCollection {
     ///     - count: The target count.
     ///     - element: The element with which to fill the collection.
     ///     - direction: The direction from which to fill the collection.
-    @_inlineable public mutating func fill(to count: IndexDistance, with element: Element, from direction: FillDirection) {
+    @_inlineable public mutating func fill(to count: Int, with element: Element, from direction: FillDirection) {
         while self.count < count {
             switch direction {
             case .start:
@@ -178,7 +178,7 @@ extension RangeReplaceableCollection {
     ///     - count: The target count.
     ///     - element: The element with which to fill the collection.
     ///     - direction: The direction from which to fill the collection.
-    @_inlineable public func filled(to count: IndexDistance, with element: Element, from direction: FillDirection) -> Self {
+    @_inlineable public func filled(to count: Int, with element: Element, from direction: FillDirection) -> Self {
         return nonmutatingVariant(of: Self.fill, on: self, with: (count, element, direction))
     }
 

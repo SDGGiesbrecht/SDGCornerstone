@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#if canImport(XCTest)
+
 import SDGLogic
 import SDGPersistence
 import SDGTesting
@@ -34,3 +36,5 @@ open class TestCase : XCTestCase {
         super.setUp()
     }
 }
+
+#endif

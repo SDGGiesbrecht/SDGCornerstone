@@ -13,6 +13,7 @@
  */
 
 import Foundation
+import SDGControlFlow
 import SDGCollections
 import SDGLocalization
 import SDGCalendar
@@ -33,20 +34,23 @@ import SDGCornerstoneLocalizations
     var specifications: Set<String> = []
     do {
         for specificationURL in try FileManager.default.contentsOfDirectory(at: specificationsDirectory, includingPropertiesForKeys: nil, options: []) where specificationURL.pathExtension == "txt" {
-            let specification = try String(from: specificationURL)
-            specifications.insert(specification)
-            let data = specification.file
-            let array = try JSONDecoder().decode([T].self, from: data)
-            guard let decoded = array.first else {
-                fail(String(UserFacingText({ (localization: APILocalization) in
-                    switch localization {
-                    case .englishCanada: // [_Exempt from Test Coverage_]
-                        return StrictString("Empty array decoded from “\(specificationURL)”.")
-                    }
-                }).resolved()), file: file, line: line)
-                continue
+            try autoreleasepool {
+
+                let specification = try String(from: specificationURL)
+                specifications.insert(specification)
+                let data = specification.file
+                let array = try JSONDecoder().decode([T].self, from: data)
+                guard let decoded = array.first else {
+                    fail(String(UserFacingText({ (localization: APILocalization) in
+                        switch localization {
+                        case .englishCanada: // [_Exempt from Test Coverage_]
+                            return StrictString("Empty array decoded from “\(specificationURL)”.")
+                        }
+                    }).resolved()), file: file, line: line)
+                    return // from autorelease pool and move to next specification.
+                }
+                test(decoded == instance, "\(instance) ≠ \(decoded) (\(specificationURL)", file: file, line: line)
             }
-            test(decoded == instance, "\(instance) ≠ \(decoded) (\(specificationURL)", file: file, line: line)
         }
 
         let encoder = JSONEncoder()

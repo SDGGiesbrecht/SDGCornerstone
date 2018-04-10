@@ -40,7 +40,7 @@ extension StrictString {
             // Already normalized.
             case let strict as StrictString.ClusterView :
                 return strict
-            case let strictSlice as RangeReplaceableBidirectionalSlice<StrictString.ClusterView> :
+            case let strictSlice as Slice<StrictString.ClusterView> :
                 return StrictString(unsafeString: String(strictSlice.base.string.clusters[strictSlice.startIndex ..< strictSlice.endIndex])).clusters
 
             // Need normalization.

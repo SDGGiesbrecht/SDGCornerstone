@@ -17,15 +17,17 @@
 
     import Foundation
 
+    import SDGControlFlow
     import SDGLogic
     import SDGPersistence
     import SDGLocalization
 
+    /// An external process.
     public final class ExternalProcess {
 
         // MARK: - Initialization
 
-        /// Creates an instance with the
+        /// Creates an instance with the executable at the specified location.
         ///
         /// - Parameters:
         ///     - executable: The location of the executable file.
@@ -79,7 +81,13 @@
                 return new.isEmpty ? nil : new
             }
 
-            while let newData = read() {
+            var end = false
+            while ¬end {
+                autoreleasepool {
+                    guard let newData = read() else {
+                        end = true
+                        return
+                    }
                     stream.append(newData)
 
                     while let lineEnd = stream.range(of: newLineData) {
@@ -93,6 +101,7 @@
                         output.append(line + newLine)
                         reportProgress(line)
                     }
+                }
             }
 
             while process.isRunning {} // [_Exempt from Test Coverage_]
