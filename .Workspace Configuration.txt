@@ -17,7 +17,7 @@
 Current Version: 0.8.0
 
 Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
-Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
+Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone
 Repository URL: https://github.com/SDGGiesbrecht/SDGCornerstone
 
 [_Begin Localizations_]
