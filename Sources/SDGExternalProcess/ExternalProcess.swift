@@ -17,6 +17,7 @@
 
     import Foundation
 
+    import SDGControlFlow
     import SDGLogic
     import SDGPersistence
     import SDGLocalization
