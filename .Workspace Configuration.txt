@@ -14,7 +14,7 @@
 
 [_Import https://github.com/SDGGiesbrecht/SDG_]
 
-Current Version: 0.7.3
+Current Version: 0.8.0
 
 Project Website: https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
 Documentation URL: https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -58,6 +58,8 @@ Quotation Chapter: Isaiah 28
 - Simple API for running shell commands (desktop platforms only).
 
 ...and much more.
+
+Use the entire package together by importing the `SDGCornerstone` product, or pick and choose pieces by importing the various component products.
 [_End_]
 
 Original Documentation Copyright Year: 2017
