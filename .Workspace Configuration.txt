@@ -80,6 +80,3 @@ fail
 [_Begin Test Coverage Exemption Tokens for the Same Line_]
 test
 [_End_]
-
-([_Workaround: Until Workspace is updated. 0.5.1)_])
-Manage Continuous Integration: False
