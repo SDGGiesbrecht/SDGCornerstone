@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Data : BitField {
+extension Data {
 
     // MARK: - Properties
 
@@ -24,57 +24,5 @@ extension Data : BitField {
         set {
             self = newValue.data
         }
-    }
-
-    // MARK: - BitField
-
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseNot()_]
-    /// Inverts the bits.
-    @_inlineable public mutating func formBitwiseNot() {
-        for index in indices {
-            self[index].formBitwiseNot()
-        }
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseAnd(with:)_]
-    /// Removes the bits not also present in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseAnd(with other: Data) {
-        let end = Swift.min(endIndex, other.endIndex)
-
-        for index in startIndex ..< end {
-            self[index].formBitwiseAnd(with: other[index])
-        }
-        removeSubrange(end ..< endIndex)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseOr(with:)_]
-    /// Inserts the bits present in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseOr(with other: Data) {
-        let end = Swift.min(endIndex, other.endIndex)
-
-        for index in startIndex ..< end {
-            self[index].formBitwiseOr(with: other[index])
-        }
-        append(contentsOf: other[end ..< other.endIndex])
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseExclusiveOr(with:)_]
-    /// Inserts the bits present in `other` and removes the bits present in both.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseExclusiveOr(with other: Data) {
-        let end = Swift.min(endIndex, other.endIndex)
-
-        for index in startIndex ..< end {
-            self[index].formBitwiseExclusiveOr(with: other[index])
-        }
-        append(contentsOf: other[end ..< other.endIndex])
     }
 }
