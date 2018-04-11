@@ -13,4 +13,3 @@
  */
 
 @_exported import SDGLogic // ≠
-infix operator ≠: ComparisonPrecedence

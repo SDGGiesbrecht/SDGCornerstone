@@ -12,9 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGCalendar
+import SDGMathematics
 import SDGMathematicsTestUtilities
 import SDGPersistenceTestUtilities
+import SDGCalendar
 import SDGXCTestUtilities
 
 class SDGCalendarAPITests : TestCase {

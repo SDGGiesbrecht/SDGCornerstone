@@ -12,11 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
 import SDGBinaryData
 @testable import SDGPrecisionMathematics
-
 import SDGXCTestUtilities
-import SDGPrecisionMathematics
 
 class SDGPrecisionMathematicsInternalTests : TestCase {
 

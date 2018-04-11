@@ -13,6 +13,7 @@
  */
 
 import SDGLogic
+import SDGMathematics
 import SDGPrecisionMathematics
 
 import SDGLocalizationTestUtilities
