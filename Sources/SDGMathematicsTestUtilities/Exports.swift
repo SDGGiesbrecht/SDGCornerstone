@@ -14,35 +14,3 @@
 
 @_exported import SDGMathematics
 @_exported import SDGTesting
-
-// [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
-
-// SDGLogic
-infix operator ≠: ComparisonPrecedence
-
-// SDGMathematics
-infix operator ≤: ComparisonPrecedence
-infix operator ≥: ComparisonPrecedence
-infix operator ≈: ComparisonPrecedence
-infix operator −: AdditionPrecedence
-prefix operator −
-infix operator −=: AssignmentPrecedence
-postfix operator −=
-infix operator ±: AdditionPrecedence
-prefix operator |
-postfix operator |
-infix operator ×: MultiplicationPrecedence
-infix operator ×=: AssignmentPrecedence
-infix operator ÷: MultiplicationPrecedence
-infix operator ÷=: AssignmentPrecedence
-precedencegroup ExponentPrecedence {
-    associativity: right
-    higherThan: MultiplicationPrecedence
-}
-infix operator ↑: ExponentPrecedence
-infix operator ↑=: AssignmentPrecedence
-prefix operator √
-postfix operator √=
-postfix operator °
-postfix operator ′
-postfix operator ′′

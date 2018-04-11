@@ -12,8 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGGeometry
+import SDGMathematics
 import SDGMathematicsTestUtilities
+import SDGGeometry
 import SDGXCTestUtilities
 
 class SDGGeometryAPITests : TestCase {

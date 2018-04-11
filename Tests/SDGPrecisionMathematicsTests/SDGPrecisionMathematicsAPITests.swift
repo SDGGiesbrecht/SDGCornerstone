@@ -12,17 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGXCTestUtilities
-import SDGPrecisionMathematics
-
+import SDGMathematics
 import SDGMathematicsTestUtilities
 import SDGPersistenceTestUtilities
-// [_Workaround: Works around operator clash. (Swift 4.0.3)_]
-precedencegroup ExponentPrecedence {
-    associativity: right
-    higherThan: MultiplicationPrecedence
-}
-infix operator ↑: ExponentPrecedence
+import SDGPrecisionMathematics
+import SDGXCTestUtilities
 
 class SDGPrecisionMathematicsAPITests : TestCase {
 

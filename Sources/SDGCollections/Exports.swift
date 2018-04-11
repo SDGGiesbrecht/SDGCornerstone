@@ -13,7 +13,4 @@
  */
 
 @_exported import SDGLogic // ≠
-infix operator ≠: ComparisonPrecedence
-
-// SDGMathematics
-postfix operator ′
+@_exported import SDGMathematics // ′
