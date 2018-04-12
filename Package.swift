@@ -304,7 +304,7 @@ let package = Package(
 
         // To run these tests, uncomment the following and run the executable in the release configuration.
         /*.target(name: "performance‐tests", dependencies: [
-            "SDGTesting",
+            "SDGTesting", "SDGPersistence",
 
             "SDGText",
             "SDGPrecisionMathematics"

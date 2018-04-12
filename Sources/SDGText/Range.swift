@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Range where Bound == LineIndex {
-    // MARK: - where Bound == LineIndex
+extension Range where Bound == LineViewIndex {
+    // MARK: - where Bound == LineViewIndex
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
     @_inlineable public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index> {

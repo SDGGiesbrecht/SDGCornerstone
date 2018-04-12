@@ -12,6 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGPersistence
+
+ProcessInfo.applicationIdentifier = "ca.solideogloria.SDGCornerstone.Tests"
+
 testLineParsing()
 testLiteralScalarSearch()
 testRationalNumberLiterals()

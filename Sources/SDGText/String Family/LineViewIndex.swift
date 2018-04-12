@@ -15,7 +15,7 @@
 import SDGControlFlow
 
 /// A line view index.
-public struct LineIndex : Comparable, Equatable {
+public struct LineViewIndex : Comparable, Equatable {
 
     // MARK: - Initialization
 
@@ -27,8 +27,8 @@ public struct LineIndex : Comparable, Equatable {
     private init() {
         start = nil
     }
-    @_versioned internal static func endIndex() -> LineIndex {
-        return LineIndex()
+    @_versioned internal static func endIndex() -> LineViewIndex {
+        return LineViewIndex()
     }
 
     // MARK: - Properties
@@ -83,7 +83,7 @@ public struct LineIndex : Comparable, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func < (precedingValue: LineIndex, followingValue: LineIndex) -> Bool {
+    @_inlineable public static func < (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
         if let precedingValueStart = precedingValue.start {
             if let followingValueStart = followingValue.start {
                 return precedingValueStart < followingValueStart
@@ -105,7 +105,7 @@ public struct LineIndex : Comparable, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: LineIndex, followingValue: LineIndex) -> Bool {
+    @_inlineable public static func == (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
         return precedingValue.start == followingValue.start
     }
 }
