@@ -21,6 +21,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     private static let carriageReturn: Unicode.Scalar = "\u{D}"
     private static let lineFeed: Unicode.Scalar = "\u{A}"
+    @_versioned internal static let newlineCharacters = CharacterSet.newlines
     internal static let newline = NewlinePattern(carriageReturnLineFeed: (carriageReturn, lineFeed))
     @_versioned internal static let reverseNewline = NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
 
@@ -49,7 +50,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     @_inlineable public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
-        guard scalar ∈ CharacterSet.newlines else {
+        guard scalar ∈ NewlinePattern.newlineCharacters else {
             return []
         }
         var result = [location ..< collection.index(after: location)]
@@ -75,7 +76,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     @_inlineable public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
-        guard scalar ∈ CharacterSet.newlines else {
+        guard scalar ∈ NewlinePattern.newlineCharacters else {
             return nil
         }
 
