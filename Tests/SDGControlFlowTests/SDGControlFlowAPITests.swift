@@ -84,7 +84,7 @@ class SDGControlFlowAPITests : TestCase {
     }
 
     enum IterableEnumerationExample : Int, IterableEnumeration {
-        typealias RawValue = Int
+        typealias RawValue = Int // swiftlint:disable:this nesting
         case a
         case b
         case c

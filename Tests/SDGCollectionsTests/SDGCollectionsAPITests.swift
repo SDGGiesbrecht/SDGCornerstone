@@ -287,7 +287,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     struct ComparableSetExample : ComparableSet {
-        typealias Element = Int
+        typealias Element = Int // swiftlint:disable:this nesting
         var set: Set<Int>
         init(_ set: Set<Int>) {
             self.set = set
@@ -377,7 +377,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     struct FiniteSetExample : FiniteSet {
-        typealias Element = Int
+        typealias Element = Int // swiftlint:disable:this nesting
         var set: Set<Int>
         init(_ set: Set<Int>) {
             self.set = set
@@ -411,7 +411,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     struct MutableSetExample : MutableSet {
-        typealias Element = Int
+        typealias Element = Int // swiftlint:disable:this nesting
         var set: Set<Int>
         init(_ set: Set<Int>) {
             self.set = set
@@ -448,7 +448,7 @@ class SDGCollectionsAPITests : TestCase {
         }
     }
     struct MutableFiniteSetExample : FiniteSet, MutableSet {
-        typealias Element = Int
+        typealias Element = Int // swiftlint:disable:this nesting
         var set: Set<Int>
         init(_ set: Set<Int>) {
             self.set = set
@@ -686,7 +686,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     struct SetInRepresentableUniverseExample : SetInRepresentableUniverse {
-        typealias Element = Int
+        typealias Element = Int // swiftlint:disable:this nesting
         var set: Set<Int>
         init(_ set: Set<Int>) {
             self.set = set
