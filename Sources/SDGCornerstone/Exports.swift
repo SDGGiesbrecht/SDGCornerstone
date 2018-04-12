@@ -27,7 +27,7 @@
 @_exported import SDGConcurrency
 @_exported import SDGExternalProcess
 
-// [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.0.3)_]
+// [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.1)_]
 
 // SDGLogic
 infix operator ≠: ComparisonPrecedence
