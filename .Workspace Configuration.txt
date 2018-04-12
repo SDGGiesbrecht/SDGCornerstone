@@ -81,5 +81,9 @@ fail
 test
 [_End_]
 
-([_Workaround: Until Workspace is updated. 0.5.1)_])
-Manage Continuous Integration: False
+([_Workaround: Build log exceeds Travis CI’s limit. (workspace version 0.6.0)_])
+Prohibit Compiler Warnings: False
+
+([_Workaround: Jazzy’s redundant building is way too slow. (workspace version 0.6.0)])
+Generate Documentation: False
+Enforce Documentation Coverage: False
