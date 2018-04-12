@@ -30,7 +30,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Conversions
 
-    @_inlineable @_versioned internal func line(for scalar: String.ScalarView.Index) -> LineIndex {
+    @_inlineable @_versioned internal func line(for scalar: String.ScalarView.Index) -> LineViewIndex {
         if scalar == base.scalars.endIndex {
             return endIndex
         }
@@ -63,7 +63,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///     - i: The following index.
     @_specialize(exported: true, where Base == StrictString)
     @_specialize(exported: true, where Base == String)
-    @_inlineable public func index(before i: LineIndex) -> LineIndex {
+    @_inlineable public func index(before i: LineViewIndex) -> LineViewIndex {
 
         let newline: Range<String.ScalarView.Index>
         if i == endIndex {
@@ -84,7 +84,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
             startIndex.cache.newline = newline
             return startIndex
         }
-        return LineIndex(start: previousNewline.upperBound, newline: newline)
+        return LineViewIndex(start: previousNewline.upperBound, newline: newline)
     }
 
     // MARK: - Collection
@@ -95,11 +95,11 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
     /// The position of the first element in a non‐empty collection.
-    public let startIndex: LineIndex
+    public let startIndex: LineViewIndex
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
-    public let endIndex: LineIndex = LineIndex.endIndex()
+    public let endIndex: LineViewIndex = LineViewIndex.endIndex()
 
     // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
     /// Returns the index immediately after the specified index.
@@ -108,17 +108,17 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///     - i: The preceding index.
     @_specialize(exported: true, where Base == StrictString)
     @_specialize(exported: true, where Base == String)
-    @_inlineable public func index(after i: LineIndex) -> LineIndex {
+    @_inlineable public func index(after i: LineViewIndex) -> LineViewIndex {
         guard let newline = i.newline(in: base.scalars),
             ¬newline.isEmpty else {
-                return LineIndex.endIndex()
+                return LineViewIndex.endIndex()
         }
-        return LineIndex(start: newline.upperBound)
+        return LineViewIndex(start: newline.upperBound)
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
     /// Accesses the element at the specified position.
-    @_inlineable public subscript(_ position: LineIndex) -> Line<Base> {
+    @_inlineable public subscript(_ position: LineViewIndex) -> Line<Base> {
         @_specialize(exported: true, where Base == StrictString)
         @_specialize(exported: true, where Base == String)
         get {

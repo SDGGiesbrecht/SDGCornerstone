@@ -22,11 +22,11 @@ func testLineParsing() {
         text.append("Blah blah blah...\n")
     }
 
-    limit("Line Parsing", to: 0.3) {
+    limit("Line Parsing", to: 0.2) {
         _ = text.lines.map({ String($0.line) })
     }
 
-    limit("Lazy Line Parsing", to: 0.2) {
+    limit("Lazy Line Parsing", to: 0.1) {
         for _ in 1 ... 10_000 {
             _ = text.lines.first
             _ = text.lines.last
