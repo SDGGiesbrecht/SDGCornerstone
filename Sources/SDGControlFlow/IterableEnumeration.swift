@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: This will probably be obsolete when SE-0194 is implemented. (Swift 4.0.3)_]
+// [_Workaround: This will probably be obsolete when SE-0194 is implemented. (Swift 4.1)_]
 
 /// An enumeration whose cases can be iterated over.
 ///
@@ -21,7 +21,7 @@
 /// - `RawRepresentable where RawValue == Int
 /// - The raw values must be contiguous and begin at 0.
 public protocol IterableEnumeration : RawRepresentable {
-    // [_Workaround: This should be constrained to “where RawValue == Int”, but that triggers abort traps when Linux tries to link against it. (Swift 4.0.3)_]
+    // [_Workaround: This should be constrained to “where RawValue == Int”, but that triggers abort traps when Linux tries to link against it. (Swift 4.1)_]
 
     // [_Define Documentation: SDGCornerstone.IterableEnumeration.cases_]
     /// An array containing every case of the enumeration.
