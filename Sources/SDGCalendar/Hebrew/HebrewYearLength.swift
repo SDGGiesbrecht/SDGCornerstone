@@ -66,6 +66,6 @@ extension HebrewYear {
 
         // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]
         /// The raw value type.
-        public typealias RawValue = Int
+        public typealias RawValue = Int // swiftlint:disable:this nesting
     }
 }
