@@ -68,12 +68,6 @@ Encrypted Travis Deployment Key: gzx7ARrCgcNJiDtT/FALmdVgEYO5p7ZxlUuzOgwUTe9whOK
 Skip Simulator: True
 
 ([_Workaround: Until handled directly by Workspace (workspace version 0.5.1)_])
-[_Begin Ignore File Types_]
-txt
-testspec
-[_End_]
-
-([_Workaround: Until handled directly by Workspace (workspace version 0.5.1)_])
 [_Begin Test Coverage Exemption Tokens for the Previous Line_]
 fail
 [_End_]
