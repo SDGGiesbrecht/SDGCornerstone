@@ -13,6 +13,7 @@
  */
 
 #if !canImport(Darwin)
+// MARK: - #if !canImport(Darwin)
 
 /// Allows code which autoreleases on Darwin to compile on Linux without the need for operating system checks.
 ///
