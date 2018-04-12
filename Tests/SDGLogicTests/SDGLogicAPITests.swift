@@ -55,11 +55,6 @@ class SDGLogicAPITests : TestCase {
             case one = 1
         }
         test(operator: (≠, "≠"), on: (Enumeration.one, .one), returns: false)
-
-        struct Structure : RawRepresentable { // swiftlint:disable:this nesting
-            var rawValue: Int = 1
-        }
-        test(operator: (≠, "≠"), on: (Structure(), Structure()), returns: false)
     }
 
     func testOptional() {
