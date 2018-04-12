@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: These are probably automatic in Swift 4.1 (Swift 4.0.3)_]
-
 // [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
