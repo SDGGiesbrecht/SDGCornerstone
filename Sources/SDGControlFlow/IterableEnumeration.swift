@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: This will probably be obsolete when SE-0194 is implemented. (Swift 4.0.3)_]
+// [_Workaround: This will probably be obsolete when SE-0194 is implemented. (Swift 4.1)_]
 
 /// An enumeration whose cases can be iterated over.
 ///
