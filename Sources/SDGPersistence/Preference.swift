@@ -52,7 +52,7 @@ public struct Preference : CustomStringConvertible, Equatable {
     // MARK: - Usage
 
     #if os(Linux)
-        // [_Workaround: Linux has casting issues. (Swift 4.0.3)_]
+        // [_Workaround: Linux has casting issues. (Swift 4.1)_]
         private func cast(_ instance: Any) -> NSObject {
             return Preference.cast(instance)
         }
