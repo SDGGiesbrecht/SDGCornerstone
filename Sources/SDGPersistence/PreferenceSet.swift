@@ -93,7 +93,7 @@ public final class PreferenceSet {
     // MARK: - Storage
 
     #if os(Linux)
-    // [_Workaround: Foundation may handle preferences itself eventually. (Swift 4.0.3)_]
+    // [_Workaround: Foundation may handle preferences itself eventually. (Swift 4.1)_]
     private static let directory = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config")
     #endif
 
