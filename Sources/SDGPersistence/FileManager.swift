@@ -53,7 +53,7 @@ extension FileManager {
         let zoneURL = cached(in: &locations[location]) {
 
             #if os(Linux)
-                // [_Workaround: Foundation may do this itself eventually. (Swift 4.0.3)_]
+                // [_Workaround: Foundation may do this itself eventually. (Swift 4.1)_]
 
                 let path: String
                 switch location {
