@@ -75,7 +75,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    /*@_inlineable [_Workaround: @_inlineable here triggers linker errors. (Swift 4.0.3)_] */ public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    @_inlineable public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.intersection(followingValue)
     }
 
@@ -95,7 +95,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    /*@_inlineable [_Workaround: @_inlineable here triggers linker errors. (Swift 4.0.3)_] */ public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    @_inlineable public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.union(followingValue)
     }
 

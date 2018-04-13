@@ -159,7 +159,6 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests an infix operator, verifying that it returns the expected result.
 @_inlineable public func test<P, F, R, S>(operator: (function: (P, F) throws -> (R, S), name: String), on operands: (precedingValue: P, followingValue: F), returns expectedResult: (R, S), file: StaticString = #file, line: UInt = #line) where R : Equatable, S : Equatable {
     do {
-        // [_Workaround: Automatically covered by conditional conformance in Swift 4.1. (Swift 4.0.3)_]
         let result = try `operator`.function(operands.precedingValue, operands.followingValue)
         test(result == expectedResult, "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
             file: file, line: line)

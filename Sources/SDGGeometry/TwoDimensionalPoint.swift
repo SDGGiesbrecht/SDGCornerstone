@@ -21,13 +21,11 @@ import SDGControlFlow
 /// - `var x: Scalar { get set }`
 /// - `var y: Scalar { get set }`
 public protocol TwoDimensionalPoint : PointProtocol
-where Vector : TwoDimensionalVector, Vector.Scalar == Scalar {
+where Vector : TwoDimensionalVector {
 
-    //typealias Scalar = Vector.Scalar
-    // [_Workaround: Related to the workaround at the top of the file. (Swift 4.0.3)_]
     // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.Scalar_]
     /// The scalar type.
-    associatedtype Scalar
+    typealias Scalar = Vector.Scalar
 
     // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.x_]
     /// The *x* co‐ordinate.
