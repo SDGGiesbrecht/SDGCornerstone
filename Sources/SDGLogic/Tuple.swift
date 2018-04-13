@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: Automatically handled by Equatable in Swift 4.1 (Swift 4.0.3)_]
-
 // MARK: - Tuple
 
 // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
