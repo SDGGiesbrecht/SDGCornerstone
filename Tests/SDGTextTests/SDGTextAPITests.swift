@@ -325,16 +325,14 @@ class SDGTextAPITests : TestCase {
         func runTests<S : StringFamily>(helloWorld: S) {
 
             XCTAssertEqual(S(helloWorld.scalars), helloWorld)
-            //XCTAssertEqual(S(helloWorld.clusters), helloWorld)
-            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift 4.0.3)_]
+            XCTAssertEqual(S(helloWorld.clusters), helloWorld)
 
             XCTAssertNotNil(helloWorld.scalars.first)
 
             let set: Set<S> = [helloWorld]
             XCTAssert(helloWorld ∈ set)
 
-            //XCTAssert(S(S.ClusterView()).scalars.isEmpty)
-            // [_Workaround: The above initializer is temporarily disabled from the protocol because of an abort trap. (Swift 4.0.3)_]
+            XCTAssert(S(S.ClusterView()).scalars.isEmpty)
             XCTAssert(S(S.ScalarView()).clusters.isEmpty)
         }
 
