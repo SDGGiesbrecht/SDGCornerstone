@@ -22,7 +22,8 @@ let package = Package(
         // The entire package.
 
         .library(name: "SDGCornerstone", targets: ["SDGCornerstone"]),
-        .library(name: "SDGCornerstoneTestUtlities", targets: ["SDGCornerstoneTestUtilities"]),
+        .library(name: "SDGCornerstoneTestUtilities", targets: ["SDGCornerstoneTestUtilities"]),
+        .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
 
         // Individual component modules.
 
