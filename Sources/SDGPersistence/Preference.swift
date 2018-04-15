@@ -52,7 +52,7 @@ public struct Preference : CustomStringConvertible, Equatable {
     // MARK: - Usage
 
     #if os(Linux)
-        // [_Workaround: Linux has casting issues. (Swift 4.0.3)_]
+        // [_Workaround: Linux has casting issues. (Swift 4.1)_]
         private func cast(_ instance: Any) -> NSObject {
             return Preference.cast(instance)
         }
@@ -118,7 +118,7 @@ public struct Preference : CustomStringConvertible, Equatable {
 
         do {
             #if os(Linux)
-                // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.0.3)_]
+                // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1)_]
                 let encodedArray = try JSONEncoder().encode([theValue])
                 let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray // swiftlint:disable:this force_cast
                 let object = cast(arrayObject.firstObject!)
@@ -159,7 +159,7 @@ public struct Preference : CustomStringConvertible, Equatable {
 
             do {
                 #if os(Linux)
-                // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.0.3)_]
+                // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1)_]
                     let encodedArray = try JSONSerialization.data(withJSONObject: NSArray(object: object), options: [])
                     let decodedArray = try JSONDecoder().decode([T].self, from: encodedArray)
                 #else
