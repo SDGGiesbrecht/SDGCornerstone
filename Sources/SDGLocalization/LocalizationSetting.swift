@@ -26,36 +26,36 @@ public struct LocalizationSetting : Codable, Equatable {
     // MARK: - Static Properties
 
     private static let sdgDomainSuffix = ".Language"
-    #if !os(Linux)
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private static let osPreferenceKey = "AppleLanguages"
     #endif
     private static let sdgPreferenceKey = "SDGLanguages"
 
     internal static let osSystemWidePreferences: Shared<Preference> = {
         let preferences: Shared<Preference>
-        #if os(Linux)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
-            preferences = Shared(Preference.mock())
+        preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
 
-            func convert(locale: String) -> String {
-                return locale.replacingOccurrences(of: "_", with: "\u{2D}")
-            }
+        #elseif os(Linux)
 
-            if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
-                let entryMatches: [PatternMatch<String>] = languages.components(separatedBy: ":")
-                let converted = entryMatches.map { convert(locale: String($0.contents)) }
-                preferences.value.set(to: converted)
-            } else if let language = ProcessInfo.processInfo.environment["LANG"],
-                let locale: PatternMatch<String> = language.prefix(upTo: ".") {
-                let converted = convert(locale: String(locale.contents))
-                preferences.value.set(to: [converted])
-            } else {
-                preferences.value.set(to: nil)
-            }
+        preferences = Shared(Preference.mock())
 
-        #else
+        func convert(locale: String) -> String {
+            return locale.replacingOccurrences(of: "_", with: "\u{2D}")
+        }
 
-            preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
+        if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
+            let entryMatches: [PatternMatch<String>] = languages.components(separatedBy: ":")
+            let converted = entryMatches.map { convert(locale: String($0.contents)) }
+            preferences.value.set(to: converted)
+        } else if let language = ProcessInfo.processInfo.environment["LANG"],
+            let locale: PatternMatch<String> = language.prefix(upTo: ".") {
+            let converted = convert(locale: String(locale.contents))
+            preferences.value.set(to: [converted])
+        } else {
+            preferences.value.set(to: nil)
+        }
 
         #endif
 
@@ -71,14 +71,14 @@ public struct LocalizationSetting : Codable, Equatable {
 
     private static let osApplicationPreferences: Shared<Preference> = {
         let preferences: Shared<Preference>
-        #if os(Linux)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
-            // This is does not exist on Linux anyway.
-            preferences = Shared(Preference.mock())
+        preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
 
-        #else
+        #elseif os(Linux)
 
-            preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
+        // This is does not exist on Linux anyway.
+        preferences = Shared(Preference.mock())
 
         #endif
 

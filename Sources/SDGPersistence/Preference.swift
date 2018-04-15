@@ -51,56 +51,56 @@ public struct Preference : CustomStringConvertible, Equatable {
 
     // MARK: - Usage
 
-    #if os(Linux)
-        // [_Workaround: Linux has casting issues. (Swift 4.1)_]
-        private func cast(_ instance: Any) -> NSObject {
-            return Preference.cast(instance)
+    #if !canImport(ObjectiveC)
+    // [_Workaround: Linux has casting issues. (Swift 4.1)_]
+    private func cast(_ instance: Any) -> NSObject {
+        return Preference.cast(instance)
+    }
+    internal static func cast(_ instance: Any) -> NSObject {
+        if let object = instance as? NSObject {
+            return object
+        } else if let dictionary = instance as? [String: Any] {
+            return NSDictionary(dictionary: dictionary.mapValues({ cast($0) }))
+        } else if let array = instance as? [Any] {
+            return NSArray(array: array.map({ cast($0) }))
+        } else if let boolean = instance as? Bool {
+            return NSNumber(value: boolean)
+        } else if let integer = instance as? Int {
+            return NSNumber(value: integer)
+        } else if let floatingPoint = instance as? Double {
+            return NSNumber(value: floatingPoint)
+        } else if let string = instance as? String {
+            return NSString(string: string)
+        } else if let date = instance as? Date {
+            return NSDate(timeInterval: 0, since: date)
+        } else if let data = instance as? Data {
+            return NSData(data: data)
+        } else if let integer = instance as? UInt {
+            return NSNumber(value: integer)
+        } else if let integer = instance as? Int64 {
+            return NSNumber(value: integer)
+        } else if let integer = instance as? UInt64 {
+            return NSNumber(value: integer)
+        } else if let integer = instance as? Int32 {
+            return NSNumber(value: integer)
+        } else if let integer = instance as? UInt32 {
+            return NSNumber(value: integer)
+        } else if let floatingPoint = instance as? Float {
+            return NSNumber(value: floatingPoint)
+        } else if let integer = instance as? Int16 {
+            return NSNumber(value: integer)
+        } else if let integer = instance as? UInt16 {
+            return NSNumber(value: integer)
+        } else if let integer = instance as? Int8 {
+            return NSNumber(value: integer)
+        } else if let integer = instance as? UInt8 {
+            return NSNumber(value: integer)
+        } else if let dictionary = instance as? [NSString: Any] {
+            return NSDictionary(dictionary: dictionary.mapValues({ cast($0) }))
+        } else {
+            _unreachable()
         }
-        internal static func cast(_ instance: Any) -> NSObject {
-            if let object = instance as? NSObject {
-                return object
-            } else if let dictionary = instance as? [String: Any] {
-                return NSDictionary(dictionary: dictionary.mapValues({ cast($0) }))
-            } else if let array = instance as? [Any] {
-                return NSArray(array: array.map({ cast($0) }))
-            } else if let boolean = instance as? Bool {
-                return NSNumber(value: boolean)
-            } else if let integer = instance as? Int {
-                return NSNumber(value: integer)
-            } else if let floatingPoint = instance as? Double {
-                return NSNumber(value: floatingPoint)
-            } else if let string = instance as? String {
-                return NSString(string: string)
-            } else if let date = instance as? Date {
-                return NSDate(timeInterval: 0, since: date)
-            } else if let data = instance as? Data {
-                return NSData(data: data)
-            } else if let integer = instance as? UInt {
-                return NSNumber(value: integer)
-            } else if let integer = instance as? Int64 {
-                return NSNumber(value: integer)
-            } else if let integer = instance as? UInt64 {
-                return NSNumber(value: integer)
-            } else if let integer = instance as? Int32 {
-                return NSNumber(value: integer)
-            } else if let integer = instance as? UInt32 {
-                return NSNumber(value: integer)
-            } else if let floatingPoint = instance as? Float {
-                return NSNumber(value: floatingPoint)
-            } else if let integer = instance as? Int16 {
-                return NSNumber(value: integer)
-            } else if let integer = instance as? UInt16 {
-                return NSNumber(value: integer)
-            } else if let integer = instance as? Int8 {
-                return NSNumber(value: integer)
-            } else if let integer = instance as? UInt8 {
-                return NSNumber(value: integer)
-            } else if let dictionary = instance as? [NSString: Any] {
-                return NSDictionary(dictionary: dictionary.mapValues({ cast($0) }))
-            } else {
-                _unreachable()
-            }
-        }
+    }
     #endif
 
     // [_Define Documentation: SDGCornerstone.Preference.set(to:)_]
@@ -118,14 +118,14 @@ public struct Preference : CustomStringConvertible, Equatable {
 
         do {
             #if os(Linux)
-                // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1)_]
-                let encodedArray = try JSONEncoder().encode([theValue])
-                let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray // swiftlint:disable:this force_cast
-                let object = cast(arrayObject.firstObject!)
+            // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1)_]
+            let encodedArray = try JSONEncoder().encode([theValue])
+            let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray // swiftlint:disable:this force_cast
+            let object = cast(arrayObject.firstObject!)
             #else
-                let encodedArray = try PropertyListEncoder().encode([theValue])
-                let arrayObject = try PropertyListSerialization.propertyList(from: encodedArray, options: [], format: nil) as! NSArray // swiftlint:disable:this force_cast
-                let object = arrayObject.firstObject! as! NSObject // swiftlint:disable:this force_cast
+            let encodedArray = try PropertyListEncoder().encode([theValue])
+            let arrayObject = try PropertyListSerialization.propertyList(from: encodedArray, options: [], format: nil) as! NSArray // swiftlint:disable:this force_cast
+            let object = arrayObject.firstObject! as! NSObject // swiftlint:disable:this force_cast
             #endif
             propertyListObject = object
         } catch { // [_Exempt from Test Coverage_]
@@ -160,11 +160,11 @@ public struct Preference : CustomStringConvertible, Equatable {
             do {
                 #if os(Linux)
                 // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1)_]
-                    let encodedArray = try JSONSerialization.data(withJSONObject: NSArray(object: object), options: [])
-                    let decodedArray = try JSONDecoder().decode([T].self, from: encodedArray)
+                let encodedArray = try JSONSerialization.data(withJSONObject: NSArray(object: object), options: [])
+                let decodedArray = try JSONDecoder().decode([T].self, from: encodedArray)
                 #else
-                    let encodedArray = try PropertyListSerialization.data(fromPropertyList: NSArray(object: object), format: .binary, options: 0)
-                    let decodedArray = try PropertyListDecoder().decode([T].self, from: encodedArray)
+                let encodedArray = try PropertyListSerialization.data(fromPropertyList: NSArray(object: object), format: .binary, options: 0)
+                let decodedArray = try PropertyListDecoder().decode([T].self, from: encodedArray)
                 #endif
                 return decodedArray[0]
             } catch {

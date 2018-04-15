@@ -13,8 +13,8 @@
  */
 
 import Foundation
-#if os(Linux)
-    import Glibc
+#if canImport(Glibc)
+import Glibc
 #endif
 
 import SDGControlFlow
@@ -37,46 +37,46 @@ public final class PseudorandomNumberGenerator : Randomizer {
         return PseudorandomNumberGenerator(seed: generateSeed())
     }()
 
-    #if os(Linux)
-        private static var _linuxState: random_data = random_data()
-        private static var __linuxStateStorage: [Int8] = Array(repeating: 0, count: 256) /* Must be static to persist under memory management. */
-        private static let linuxIsSeeded: Bool = {
-            // “static let” in order to be run only once.
-            let instantInt: Int = time(nil)
-            let instant: UInt32 = UInt32(truncatingIfNeeded: instantInt)
+    #if canImport(Glibc)
+    private static var _linuxState: random_data = random_data()
+    private static var __linuxStateStorage: [Int8] = Array(repeating: 0, count: 256) /* Must be static to persist under memory management. */
+    private static let linuxIsSeeded: Bool = {
+        // “static let” in order to be run only once.
+        let instantInt: Int = time(nil)
+        let instant: UInt32 = UInt32(truncatingIfNeeded: instantInt)
 
-            let storagePointer: UnsafeMutablePointer<Int8> = UnsafeMutablePointer(mutating: __linuxStateStorage)
+        let storagePointer: UnsafeMutablePointer<Int8> = UnsafeMutablePointer(mutating: __linuxStateStorage)
 
-            _ = initstate_r(instant, storagePointer, __linuxStateStorage.count, &_linuxState)
+        _ = initstate_r(instant, storagePointer, __linuxStateStorage.count, &_linuxState)
 
-            return true
-        }()
-        private static var linuxState: random_data {
-            get {
-                if linuxIsSeeded {
-                    return _linuxState
-                } else {
-                    _unreachable()
-                }
-            }
-            set {
-                _linuxState = newValue
+        return true
+    }()
+    private static var linuxState: random_data {
+        get {
+            if linuxIsSeeded {
+                return _linuxState
+            } else {
+                _unreachable()
             }
         }
+        set {
+            _linuxState = newValue
+        }
+    }
     #endif
 
     /// Returns a new, randomly generated seed.
     public static func generateSeed() -> Seed {
         func systemSpecificRandom() -> UInt32 {
-            #if os(Linux)
+            #if canImport(Glibc)
 
-                var result: Int32 = 0
-                _ = random_r(&linuxState, &result) /* 0 ≤ x < 2 ↑ 31 */
-                return UInt32(bitPattern: result)
+            var result: Int32 = 0
+            _ = random_r(&linuxState, &result) /* 0 ≤ x < 2 ↑ 31 */
+            return UInt32(bitPattern: result)
 
             #else
 
-                return arc4random()
+            return arc4random()
 
             #endif
         }

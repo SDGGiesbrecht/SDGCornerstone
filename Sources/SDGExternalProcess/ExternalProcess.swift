@@ -13,110 +13,110 @@
  */
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-    // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-    import Foundation
+import Foundation
 
-    import SDGControlFlow
-    import SDGLogic
-    import SDGPersistence
-    import SDGLocalization
+import SDGControlFlow
+import SDGLogic
+import SDGPersistence
+import SDGLocalization
 
-    /// An external process.
-    public final class ExternalProcess {
+/// An external process.
+public final class ExternalProcess {
 
-        // MARK: - Initialization
+    // MARK: - Initialization
 
-        /// Creates an instance with the executable at the specified location.
-        ///
-        /// - Parameters:
-        ///     - executable: The location of the executable file.
-        public init(at executable: URL) {
-            self.executable = executable
+    /// Creates an instance with the executable at the specified location.
+    ///
+    /// - Parameters:
+    ///     - executable: The location of the executable file.
+    public init(at executable: URL) {
+        self.executable = executable
+    }
+
+    // MARK: - Properties
+
+    /// The location of the executable file.
+    public let executable: URL
+
+    /// Runs the executable with the specified arguments and returns the output.
+    ///
+    /// - Parameters:
+    ///     - arguments: The arguments.
+    ///     - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
+    ///     - environment: Optional. A different environment to use instead of that of the current process.
+    ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
+    ///     - line: The line of output.
+    ///
+    /// - Returns: The entire output.
+    ///
+    /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
+    @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // [_Exempt from Test Coverage_]
+
+        let process = Process()
+        process.launchPath = executable.path
+        process.arguments = arguments
+        if environment ≠ nil {
+            process.environment = environment
+        }
+        if let location = workingDirectory {
+            process.currentDirectoryPath = location.path
         }
 
-        // MARK: - Properties
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        process.standardError = pipe
 
-        /// The location of the executable file.
-        public let executable: URL
+        process.launch()
 
-        /// Runs the executable with the specified arguments and returns the output.
-        ///
-        /// - Parameters:
-        ///     - arguments: The arguments.
-        ///     - workingDirectory: Optional. A different working directory to run inside of than that of the current process.
-        ///     - environment: Optional. A different environment to use instead of that of the current process.
-        ///     - reportProgress: Optional. A closure to execute for each line of output as it is received.
-        ///     - line: The line of output.
-        ///
-        /// - Returns: The entire output.
-        ///
-        /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-        @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // [_Exempt from Test Coverage_]
+        var output = String()
+        var stream = Data()
 
-            let process = Process()
-            process.launchPath = executable.path
-            process.arguments = arguments
-            if environment ≠ nil {
-                process.environment = environment
-            }
-            if let location = workingDirectory {
-                process.currentDirectoryPath = location.path
-            }
+        let newLine = "\n"
+        let newLineData = newLine.data(using: String.Encoding.utf8)!
 
-            let pipe = Pipe()
-            process.standardOutput = pipe
-            process.standardError = pipe
+        func read() -> Data? {
+            let new = pipe.fileHandleForReading.availableData
+            return new.isEmpty ? nil : new
+        }
 
-            process.launch()
+        var end = false
+        while ¬end {
+            autoreleasepool {
+                guard let newData = read() else {
+                    end = true
+                    return
+                }
+                stream.append(newData)
 
-            var output = String()
-            var stream = Data()
+                while let lineEnd = stream.range(of: newLineData) {
+                    let lineData = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
+                    stream.removeSubrange(stream.startIndex ..< lineEnd.upperBound)
 
-            let newLine = "\n"
-            let newLineData = newLine.data(using: String.Encoding.utf8)!
-
-            func read() -> Data? {
-                let new = pipe.fileHandleForReading.availableData
-                return new.isEmpty ? nil : new
-            }
-
-            var end = false
-            while ¬end {
-                autoreleasepool {
-                    guard let newData = read() else {
-                        end = true
-                        return
+                    guard let line = try? String(file: lineData, origin: nil) else {
+                        unreachable()
                     }
-                    stream.append(newData)
 
-                    while let lineEnd = stream.range(of: newLineData) {
-                        let lineData = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
-                        stream.removeSubrange(stream.startIndex ..< lineEnd.upperBound)
-
-                        guard let line = try? String(file: lineData, origin: nil) else {
-                            unreachable()
-                        }
-
-                        output.append(line + newLine)
-                        reportProgress(line)
-                    }
+                    output.append(line + newLine)
+                    reportProgress(line)
                 }
             }
+        }
 
-            while process.isRunning {} // [_Exempt from Test Coverage_]
+        while process.isRunning {} // [_Exempt from Test Coverage_]
 
-            if output.hasSuffix(newLine) {
-                output.scalars.removeLast()
-            }
+        if output.hasSuffix(newLine) {
+            output.scalars.removeLast()
+        }
 
-            let exitCode = process.terminationStatus
-            if exitCode == 0 {
-                return output
-            } else {
-                throw Error(code: Int(exitCode), output: output)
-            }
+        let exitCode = process.terminationStatus
+        if exitCode == 0 {
+            return output
+        } else {
+            throw Error(code: Int(exitCode), output: output)
         }
     }
+}
 
 #endif

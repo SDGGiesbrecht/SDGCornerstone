@@ -32,12 +32,12 @@ class SDGConcurrencyAPITests : TestCase {
                 driver = nil
             }
             #if os(macOS)
-                // [_Workaround: Swift’s Xcode project generation targets 10.10. (Swift 4.1)_]
-                Timer.scheduledTimer(timeInterval: 0, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
+            // [_Workaround: Swift’s Xcode project generation targets 10.10. (Swift 4.1)_]
+            Timer.scheduledTimer(timeInterval: 0, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
             #else
-                _ = Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { (_) -> Void in
-                    block()
-                }
+            _ = Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { (_) -> Void in
+                block()
+            }
             #endif
 
             RunLoop.current.runForDriver({ driver = $0 }, withCleanUp: {

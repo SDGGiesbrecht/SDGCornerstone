@@ -158,7 +158,7 @@ do {
     try "Contents".save(to: url)
     // Load
     let loaded = try String(from: url)
-
+  
     XCTAssertEqual(loaded,
                    "Contents")
 } catch {
@@ -215,12 +215,12 @@ if rollDie() == 1 ∧ rollDie() == 1 {
 let tenDuotrigintillion: WholeNumber = "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"
 XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
 
-#if os(macOS) || os(Linux)
+#if !(os(iOS) || os(watchOS) || os(tvOS))
 
-    // ••••••• Shell Commands •••••••
+// ••••••• Shell Commands •••••••
 
-    XCTAssertEqual(try? Shell.default.run(command: ["echo", "Hello, world!"]),
-                   "Hello, world!")
+XCTAssertEqual(try? Shell.default.run(command: ["echo", "Hello, world!"]),
+               "Hello, world!")
 #endif
 ```
 

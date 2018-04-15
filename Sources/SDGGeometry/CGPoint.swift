@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(Linux)
-// MARK: - #if !os(Linux)
+#if canImport(CoreGraphics)
+// MARK: - #if canImport(CoreGraphics)
 
 import CoreGraphics
 
