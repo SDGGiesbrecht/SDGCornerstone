@@ -43,7 +43,7 @@ public struct LineViewIndex : Comparable, Equatable {
 
     @_specialize(exported: true, where S == StrictString.ScalarView)
     @_specialize(exported: true, where S == String.ScalarView)
-    @_inlineable @_versioned internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? where S.Index == String.ScalarView.Index /* [_Workaround: This where statement works around an abort trap. See LineView. (Swift 4.0.3)_] */ {
+    @_inlineable @_versioned internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? {
         guard let startIndex = start else {
             return nil
         }
