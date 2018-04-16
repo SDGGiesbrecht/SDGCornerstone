@@ -12,17 +12,18 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(Linux)
-    import CoreGraphics
+#if canImport(CoreGraphics)
+import CoreGraphics
 #endif
 
 extension Double : TextConvertibleNumber {}
-#if !os(Linux)
-    // MARK: - #if !os(Linux)
-    extension CGFloat : TextConvertibleNumber {}
+#if canImport(CoreGraphics)
+// MARK: - #if canImport(CoreGraphics)
+extension CGFloat : TextConvertibleNumber {}
 #endif
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-    // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
-    extension Float80 : TextConvertibleNumber {}
+// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+// [_Workaround: Probably available in Swift 4.2 (Swift 4.1)_]
+extension Float80 : TextConvertibleNumber {}
 #endif
 extension Float : TextConvertibleNumber {}

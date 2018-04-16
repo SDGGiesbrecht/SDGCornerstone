@@ -53,43 +53,43 @@ extension FileManager {
         let zoneURL = cached(in: &locations[location]) {
 
             #if os(Linux)
-                // [_Workaround: Foundation may do this itself eventually. (Swift 4.1)_]
+            // [_Workaround: Foundation may do this itself eventually. (Swift 4.1)_]
 
-                let path: String
-                switch location {
-                case .applicationSupport:
-                    path = NSHomeDirectory() + "/.Application Support"
-                case .cache:
-                    path = NSHomeDirectory() + "/.cache"
-                case .temporary:
-                    path = "/tmp"
-                }
-                return URL(fileURLWithPath: path)
+            let path: String
+            switch location {
+            case .applicationSupport:
+                path = NSHomeDirectory() + "/.Application Support"
+            case .cache:
+                path = NSHomeDirectory() + "/.cache"
+            case .temporary:
+                path = "/tmp"
+            }
+            return URL(fileURLWithPath: path)
 
             #else
 
-                let searchPath: FileManager.SearchPathDirectory
-                switch location {
-                case .applicationSupport:
-                    searchPath = .applicationSupportDirectory
-                case .cache:
-                    searchPath = .cachesDirectory
-                case .temporary:
-                    searchPath = .itemReplacementDirectory
-                }
+            let searchPath: FileManager.SearchPathDirectory
+            switch location {
+            case .applicationSupport:
+                searchPath = .applicationSupportDirectory
+            case .cache:
+                searchPath = .cachesDirectory
+            case .temporary:
+                searchPath = .itemReplacementDirectory
+            }
 
-                var volume: URL?
-                if location == .temporary {
-                    guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
-                        _unreachable()
-                    }
-                    volume = documents
-                }
-
-                guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: volume, create: true) else {
+            var volume: URL?
+            if location == .temporary {
+                guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
                     _unreachable()
                 }
-                return result
+                volume = documents
+            }
+
+            guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: volume, create: true) else {
+                _unreachable()
+            }
+            return result
 
             #endif
         }

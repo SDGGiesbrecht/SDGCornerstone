@@ -12,22 +12,23 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(Linux)
-    import CoreGraphics
+#if canImport(CoreGraphics)
+import CoreGraphics
 #endif
 
 import SDGControlFlow
 
 #if os(iOS) || os(watchOS) || os(tvOS)
-    // MARK: - #if os(iOS) || os(watchOS) || os(tvOS)
+// MARK: - #if os(iOS) || os(watchOS) || os(tvOS)
+// [_Workaround: Probably available in Swift 4.2 (Swift 4.1)_]
 
-    /// The member of the `Float` family with the largest bit field.
-    public typealias FloatMax = Double
+/// The member of the `Float` family with the largest bit field.
+public typealias FloatMax = Double
 #else
-    // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-    /// The member of the `Float` family with the largest bit field.
-    public typealias FloatMax = Float80
+/// The member of the `Float` family with the largest bit field.
+public typealias FloatMax = Float80
 #endif
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
@@ -189,7 +190,7 @@ extension FloatFamily {
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
-     @_inlineable public mutating func formNaturalLogarithm() {
+    @_inlineable public mutating func formNaturalLogarithm() {
 
         if ¬tryConvenientLogarithms(toBase: e) {
 
@@ -558,98 +559,99 @@ extension Double : FloatFamily {
     public static let e: Double = 0x1.5BF0A8B145769p1
 }
 
-#if !os(Linux)
-    // MARK: - #if !os(Linux)
+#if canImport(CoreGraphics)
+// MARK: - #if canImport(CoreGraphics)
 
-    extension CGFloat : FloatFamily {
+extension CGFloat : FloatFamily {
 
-        // MARK: - CustomDebugStringConvertible
+    // MARK: - CustomDebugStringConvertible
 
-        /// A textual representation of this instance, suitable for debugging.
-        @_inlineable public var debugDescription: String {
-            return NativeType(self).debugDescription
-        }
-
-        // MARK: - FloatFamily
-
-        // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
-        /// The value of ln2.
-        public static let ln2: CGFloat = CGFloat(Double.ln2)
-
-        // MARK: - LosslessStringConvertible
-
-        /// Instantiates an instance of the conforming type from a string representation.
-        ///
-        /// - Parameters:
-        ///     - description: The string representation.
-        @_inlineable public init?(_ description: String) {
-            if let result = NativeType(description) {
-                self = CGFloat(result)
-            } else {
-                return nil
-            }
-        }
-
-        // MARK: - PointProtocol
-
-        // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-        /// The type to be used as a vector.
-        public typealias Vector = Stride
-
-        // MARK: - RealArithmetic
-
-        // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
-        /// An instance of *e*.
-        public static let e: CGFloat = CGFloat(Double.e)
+    /// A textual representation of this instance, suitable for debugging.
+    @_inlineable public var debugDescription: String {
+        return NativeType(self).debugDescription
     }
+
+    // MARK: - FloatFamily
+
+    // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
+    /// The value of ln2.
+    public static let ln2: CGFloat = CGFloat(Double.ln2)
+
+    // MARK: - LosslessStringConvertible
+
+    /// Instantiates an instance of the conforming type from a string representation.
+    ///
+    /// - Parameters:
+    ///     - description: The string representation.
+    @_inlineable public init?(_ description: String) {
+        if let result = NativeType(description) {
+            self = CGFloat(result)
+        } else {
+            return nil
+        }
+    }
+
+    // MARK: - PointProtocol
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    /// The type to be used as a vector.
+    public typealias Vector = Stride
+
+    // MARK: - RealArithmetic
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
+    /// An instance of *e*.
+    public static let e: CGFloat = CGFloat(Double.e)
+}
 #endif
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-    // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+// [_Workaround: Probably available in Swift 4.2 (Swift 4.1)_]
 
-    extension Float80 : Codable, FloatFamily {
+extension Float80 : Codable, FloatFamily {
 
-        // MARK: - Decodable
+    // MARK: - Decodable
 
-        // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
-        /// Creates a new instance by decoding from the given decoder.
-        ///
-        /// - Parameters:
-        ///     - decoder: The decoder to read data from.
-        @_inlineable public init(from decoder: Decoder) throws {
-            self.init(try Double(from: decoder))
-        }
-
-        // MARK: - Encodable
-
-        // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
-        /// Encodes this value into the given encoder.
-        ///
-        /// - Parameters:
-        ///     - encoder: The encoder to write data to.
-        @_inlineable public func encode(to encoder: Encoder) throws {
-            // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
-            try Double(self).encode(to: encoder)
-        }
-
-        // MARK: - FloatFamily
-
-        // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
-        /// The value of ln2.
-        public static let ln2: Float80 = 0x1.62E42FEFA39EF358p-1
-
-        // MARK: - PointProtocol
-
-        // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
-        /// The type to be used as a vector.
-        public typealias Vector = Stride
-
-        // MARK: - RealArithmetic
-
-        // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
-        /// An instance of *e*.
-        public static let e: Float80 = 0x1.5BF0A8B145769535p1
+    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// - Parameters:
+    ///     - decoder: The decoder to read data from.
+    @_inlineable public init(from decoder: Decoder) throws {
+        self.init(try Double(from: decoder))
     }
+
+    // MARK: - Encodable
+
+    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    /// Encodes this value into the given encoder.
+    ///
+    /// - Parameters:
+    ///     - encoder: The encoder to write data to.
+    @_inlineable public func encode(to encoder: Encoder) throws {
+        // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
+        try Double(self).encode(to: encoder)
+    }
+
+    // MARK: - FloatFamily
+
+    // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
+    /// The value of ln2.
+    public static let ln2: Float80 = 0x1.62E42FEFA39EF358p-1
+
+    // MARK: - PointProtocol
+
+    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    /// The type to be used as a vector.
+    public typealias Vector = Stride
+
+    // MARK: - RealArithmetic
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
+    /// An instance of *e*.
+    public static let e: Float80 = 0x1.5BF0A8B145769535p1
+}
 #endif
 
 extension Float : FloatFamily {
