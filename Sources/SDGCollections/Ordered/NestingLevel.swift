@@ -15,7 +15,7 @@
 /// The result of a search for a nesting level.
 ///
 /// - SeeAlso: `firstNestingLevel(startingWith:endingWith:in:)
-public struct NestingLevel<Searched : Collection> {
+public struct NestingLevel<Searched : SearchableCollection> {
 
     // MARK: - Initialization
 

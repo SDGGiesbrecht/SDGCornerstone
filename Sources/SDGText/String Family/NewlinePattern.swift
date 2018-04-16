@@ -47,7 +47,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
+    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
         guard scalar ∈ NewlinePattern.newlineCharacters else {
@@ -73,7 +73,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
+    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
         guard scalar ∈ NewlinePattern.newlineCharacters else {

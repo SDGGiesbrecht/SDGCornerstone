@@ -13,7 +13,7 @@
  */
 
 /// The result of a pattern search.
-public struct PatternMatch<Searched : Collection> {
+public struct PatternMatch<Searched : SearchableCollection> {
 
     // MARK: - Initialization
 

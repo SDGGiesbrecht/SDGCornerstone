@@ -21,6 +21,10 @@ extension Array : ArrayFamily {}
 extension ArraySlice : ArrayFamily {}
 extension ContiguousArray : ArrayFamily {}
 
+extension Array : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
+extension ArraySlice : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
+extension ContiguousArray : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
+
 extension ArrayFamily where Element : RangeReplaceableCollection {
     // MARK: - where Element : RangeReplaceableCollection
 
