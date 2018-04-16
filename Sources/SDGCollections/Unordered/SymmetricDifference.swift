@@ -28,7 +28,7 @@ public struct SymmetricDifference<Base1 : SetDefinition, Base2 : SetDefinition> 
 
     // MARK: - Properties
 
-    @_versioned internal let definition: Union<RelativeComplement<Base1, Base2>, RelativeComplement<Base2, Base1>>
+    @_versioned internal let definition: Union<Intersection<Base1, AbsoluteComplement<Base2>>, Intersection<Base2, AbsoluteComplement<Base1>>>
 
     // MARK: - SetDefinition
 

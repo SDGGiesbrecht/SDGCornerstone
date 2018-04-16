@@ -118,8 +118,8 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> RelativeComplement<Self, S> {
-        return RelativeComplement(of: followingValue, in: precedingValue)
+    @_inlineable public static func ∖ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Intersection<Self, AbsoluteComplement<S>> {
+        return precedingValue ∩ followingValue′
     }
 
     // [_Define Documentation: SDGCornerstone.SetDefinition.′_]
