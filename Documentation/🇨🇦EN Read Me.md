@@ -158,7 +158,7 @@ do {
     try "Contents".save(to: url)
     // Load
     let loaded = try String(from: url)
-  
+
     XCTAssertEqual(loaded,
                    "Contents")
 } catch {
