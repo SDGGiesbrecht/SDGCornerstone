@@ -13,7 +13,7 @@
  */
 
 /// A weak reference to a class instance.
-public struct Weak<Pointee : AnyObject> {
+public struct Weak<Pointee : AnyObject> : TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -26,4 +26,12 @@ public struct Weak<Pointee : AnyObject> {
 
     /// The pointee.
     public weak var pointee: Pointee?
+
+    // MARK: - TransparentWrapper
+
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    @_inlineable public var wrappedInstance: Pointee? {
+        return pointee
+    }
 }

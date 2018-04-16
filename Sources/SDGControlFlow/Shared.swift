@@ -13,7 +13,7 @@
  */
 
 /// A reference to a shared value.
-public class Shared<Value> : CustomStringConvertible {
+public class Shared<Value> : TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -83,10 +83,11 @@ public class Shared<Value> : CustomStringConvertible {
         }
     }
 
-    // MARK: - CustomStringConvertible
+    // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    public var description: String {
-        return String(describing: value)
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    @_inlineable public var wrappedInstance: Value {
+        return value
     }
 }
