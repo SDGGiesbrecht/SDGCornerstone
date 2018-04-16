@@ -13,7 +13,13 @@
  */
 
 /// An bidirectional ordered collection which can be searched for elements, subsequences and patterns.
-public protocol SearchableBidirectionalCollection : BidirectionalCollection, SearchableCollection {
+///
+/// Conformance Requirements:
+///     - `BidirectionalCollection`
+///     - `SearchableCollection`
+///     - `SubSequence : SearchableBidirectionalCollection`
+public protocol SearchableBidirectionalCollection : BidirectionalCollection, SearchableCollection
+where SubSequence : SearchableBidirectionalCollection {
 
     // [_Define Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
     // [_Example 1: lastMatch(for:in:) Backwards Differences 1_] [_Example 2: lastMatch(for:in:) Backwards Differences 2_]

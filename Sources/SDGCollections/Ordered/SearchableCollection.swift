@@ -17,6 +17,11 @@ import SDGLogic
 import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
+///
+/// Conformance Requirements:
+///     - `Collection`
+///     - `Element : Equatable`
+///     - `SubSequence : SearchableCollection`
 public protocol SearchableCollection : Collection
 where Element : Equatable, SubSequence : SearchableCollection {
 
@@ -1171,6 +1176,7 @@ extension SearchableCollection {
 }
 
 extension SearchableCollection where Self : RangeReplaceableCollection {
+    // MARK: - where Self : RangeReplaceableCollection
 
     // [_Define Documentation: SDGCornerstone.Collection.trucate(before:)_]
     /// Truncates `self` at the start of the first match for the specified pattern.

@@ -12,5 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension Slice : SearchableCollection where Base : SearchableCollection {}
-extension Slice : SearchableBidirectionalCollection where Base : SearchableBidirectionalCollection {}
+extension Slice : SearchableCollection where Base : SearchableCollection {
+    // MARK: - where Base : SearchableCollection
+}
+extension Slice : SearchableBidirectionalCollection where Base : SearchableBidirectionalCollection {
+    // MARK: - where Base : SearchableBidirectionalCollection
+}

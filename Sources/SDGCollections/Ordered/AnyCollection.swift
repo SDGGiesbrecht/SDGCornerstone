@@ -12,5 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension AnyCollection : SearchableCollection where Element : Equatable {}
-extension AnyBidirectionalCollection : SearchableBidirectionalCollection where Element : Equatable {}
+extension AnyCollection : SearchableCollection where Element : Equatable {
+    // MARK: - where Element : Equatable
+}
+extension AnyBidirectionalCollection : SearchableBidirectionalCollection where Element : Equatable {
+    // MARK: - where Element : Equatable
+}
