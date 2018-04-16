@@ -13,7 +13,7 @@
  */
 
 /// An intersection of two sets.
-public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
+public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : CustomStringConvertible, SetDefinition where Base1.Element == Base2.Element {
 
     // MARK: - Initialization
 
@@ -46,5 +46,12 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : SetDe
     ///     - followingValue: The element to test.
     @_inlineable public static func ∋ (precedingValue: Intersection, followingValue: Base1.Element) -> Bool {
         return precedingValue.a ∋ followingValue ∧ precedingValue.b ∋ followingValue
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    @_inlineable public var description: String {
+        return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
     }
 }

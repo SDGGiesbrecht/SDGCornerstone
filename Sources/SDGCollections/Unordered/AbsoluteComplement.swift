@@ -13,7 +13,7 @@
  */
 
 /// An absolute complement of a set.
-public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition, CustomStringConvertible {
+public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible, SetDefinition {
 
     // MARK: - Initialization
 
