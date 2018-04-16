@@ -18,3 +18,6 @@ extension AnyCollection : SearchableCollection where Element : Equatable {
 extension AnyBidirectionalCollection : SearchableBidirectionalCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
+extension AnyRandomAccessCollection : SearchableBidirectionalCollection where Element : Equatable {
+    // MARK: - where Element : Equatable
+}
