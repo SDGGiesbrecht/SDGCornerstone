@@ -141,18 +141,19 @@ class SDGMathematicsAPITests : TestCase {
     func testFloat() {
         testRealArithmeticConformance(of: Double.self)
         testRealArithmeticConformance(of: FloatMax.self)
-	    #if !os(Linux)
-            testRealArithmeticConformance(of: CGFloat.self)
+        #if canImport(CoreGraphics)
+        testRealArithmeticConformance(of: CGFloat.self)
         #endif
-        #if !os(iOS) && !os(watchOS) && !os(tvOS)
-            testRealArithmeticConformance(of: Float80.self)
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
+        // [_Workaround: Probably available in Swift 4.2 (Swift 4.1)_]
+        testRealArithmeticConformance(of: Float80.self)
         #endif
         testRealArithmeticConformance(of: Float.self)
 
         #if !os(Linux)
-            XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
-            XCTAssertNotNil(CGFloat("1"))
-            XCTAssertNil(CGFloat("a"))
+        XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
+        XCTAssertNotNil(CGFloat("1"))
+        XCTAssertNil(CGFloat("a"))
         #endif
 
         test(method: (Double.rounded, "rounded"), of: 5.1, returns: 5)

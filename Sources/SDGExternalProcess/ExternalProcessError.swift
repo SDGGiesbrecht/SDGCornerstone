@@ -13,28 +13,28 @@
  */
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-    // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-    extension ExternalProcess {
+extension ExternalProcess {
 
-        /// A shell error.
-        public struct Error : Swift.Error {
+    /// A shell error.
+    public struct Error : Swift.Error {
 
-            // MARK: - Initialization
+        // MARK: - Initialization
 
-            internal init(code: Int, output: String) {
-                self.code = code
-                self.output = output
-            }
-
-            // MARK: - Properties
-
-            /// The exit code.
-            public let code: Int
-
-            /// The output received.
-            public let output: String
+        internal init(code: Int, output: String) {
+            self.code = code
+            self.output = output
         }
+
+        // MARK: - Properties
+
+        /// The exit code.
+        public let code: Int
+
+        /// The output received.
+        public let output: String
     }
+}
 
 #endif

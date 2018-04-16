@@ -23,58 +23,58 @@ class SDGExternalProcessAPITests : TestCase {
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-            var command = ["ls"]
-            do {
-                try Shell.default.run(command: command)
-            } catch {
-                XCTFail("Unexpected error: \(command) → \(error)")
-            }
+        var command = ["ls"]
+        do {
+            try Shell.default.run(command: command)
+        } catch {
+            XCTFail("Unexpected error: \(command) → \(error)")
+        }
 
-            command = ["pwd"]
-            do {
-                try Shell.default.run(command: command, in: URL(fileURLWithPath: "/"), with: [:])
-            } catch {
-                XCTFail("Unexpected error: \(command) → \(error)")
-            }
+        command = ["pwd"]
+        do {
+            try Shell.default.run(command: command, in: URL(fileURLWithPath: "/"), with: [:])
+        } catch {
+            XCTFail("Unexpected error: \(command) → \(error)")
+        }
 
-            let message = "Hello, world!"
-            command = ["echo", message]
-            do {
-                let result = try Shell.default.run(command: command)
-                XCTAssertEqual(result, message)
-            } catch {
-                XCTFail("Unexpected error: \(command) → \(error)")
-            }
+        let message = "Hello, world!"
+        command = ["echo", message]
+        do {
+            let result = try Shell.default.run(command: command)
+            XCTAssertEqual(result, message)
+        } catch {
+            XCTFail("Unexpected error: \(command) → \(error)")
+        }
 
-            let nonexistentCommand = "no‐such‐command"
-            let threw = expectation(description: "Error thrown for unidentified command.")
-            do {
-                try Shell.default.run(command: [nonexistentCommand])
-            } catch let error as ExternalProcess.Error {
-                XCTAssert(error.output.contains("not found"), "Unexpected error: \(command) → \(error)")
-                threw.fulfill()
-            } catch {
-                XCTFail("Wrong error type.")
-            }
-            waitForExpectations(timeout: 0)
+        let nonexistentCommand = "no‐such‐command"
+        let threw = expectation(description: "Error thrown for unidentified command.")
+        do {
+            try Shell.default.run(command: [nonexistentCommand])
+        } catch let error as ExternalProcess.Error {
+            XCTAssert(error.output.contains("not found"), "Unexpected error: \(command) → \(error)")
+            threw.fulfill()
+        } catch {
+            XCTFail("Wrong error type.")
+        }
+        waitForExpectations(timeout: 0)
 
-            let metacharacters = "(...)"
-            command = ["echo", Shell.quote(metacharacters)]
-            do {
-                let result = try Shell.default.run(command: command)
-                XCTAssertEqual(result, metacharacters)
-            } catch {
-                XCTFail("Unexpected error: \(command) → \(error)")
-            }
+        let metacharacters = "(...)"
+        command = ["echo", Shell.quote(metacharacters)]
+        do {
+            let result = try Shell.default.run(command: command)
+            XCTAssertEqual(result, metacharacters)
+        } catch {
+            XCTFail("Unexpected error: \(command) → \(error)")
+        }
 
-            let automatic = "Hello, world!"
-            command = ["echo", Shell.quote(automatic)]
-            do {
-                let result = try Shell.default.run(command: command)
-                XCTAssert(¬result.contains("\u{22}"))
-            } catch {
-                XCTFail("Unexpected error: \(command) → \(error)")
-            }
+        let automatic = "Hello, world!"
+        command = ["echo", Shell.quote(automatic)]
+        do {
+            let result = try Shell.default.run(command: command)
+            XCTAssert(¬result.contains("\u{22}"))
+        } catch {
+            XCTFail("Unexpected error: \(command) → \(error)")
+        }
         #endif
     }
 

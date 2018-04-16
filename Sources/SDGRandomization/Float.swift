@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(Linux)
-    import CoreGraphics
+#if canImport(CoreGraphics)
+import CoreGraphics
 #endif
 
 import SDGMathematics
@@ -40,12 +40,13 @@ extension FloatFamily {
 }
 
 extension Double : RandomizableNumber {}
-#if !os(Linux)
-    // MARK: - #if !os(Linux)
-    extension CGFloat : RandomizableNumber {}
+#if canImport(CoreGraphics)
+// MARK: - #if canImport(CoreGraphics)
+extension CGFloat : RandomizableNumber {}
 #endif
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-    // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
-    extension Float80 : RandomizableNumber {}
+// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
+// [_Workaround: Probably available in Swift 4.2 (Swift 4.1)_]
+extension Float80 : RandomizableNumber {}
 #endif
 extension Float : RandomizableNumber {}

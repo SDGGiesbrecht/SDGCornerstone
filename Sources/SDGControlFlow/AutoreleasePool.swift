@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !canImport(Darwin)
-// MARK: - #if !canImport(Darwin)
+#if canImport(ObjectiveC)
+@_exported import func ObjectiveC.autoreleasepool
+#else
+// MARK: - #if !canImport(ObjectiveC)
 
 /// Allows code which autoreleases on Darwin to compile on Linux without the need for operating system checks.
 ///
