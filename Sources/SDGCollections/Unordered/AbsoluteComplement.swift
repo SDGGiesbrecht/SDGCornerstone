@@ -13,7 +13,7 @@
  */
 
 /// An absolute complement of a set.
-public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition {
+public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition, CustomStringConvertible {
 
     // MARK: - Initialization
 
@@ -43,5 +43,12 @@ public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition {
     ///     - followingValue: The element to test.
     @_inlineable public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element) -> Bool {
         return precedingValue.base ∌ followingValue
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    @_inlineable public var description: String {
+        return "(" + String(describing: base) + ")′"
     }
 }
