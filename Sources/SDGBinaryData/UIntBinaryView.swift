@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGCollections
 
 /// A view of the contents of a fixed‐length unsigned integer as a collection of bits.
-public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
+public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, CustomStringConvertible, MutableCollection, RandomAccessCollection {
 
     // MARK: - Initialization
 
@@ -124,5 +124,15 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
             let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << index).bitwiseNot())
             uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << index)
         }
+    }
+    
+    // MARK: - CustomStringConvertible
+    
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        let bits = self.map { bit in
+            return bit ? "1" : "0"
+        }
+        return bits.joined()
     }
 }

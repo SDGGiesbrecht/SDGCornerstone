@@ -12,10 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 extension Data {
 
     /// A view of the contents of `Data` as a collection of bits.
-    public struct BinaryView : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
+    public struct BinaryView : BidirectionalCollection, Collection, CustomStringConvertible, MutableCollection, RandomAccessCollection {
 
         // MARK: - Initialization
 
@@ -51,9 +53,12 @@ extension Data {
 
         // MARK: - Collection
 
+        @_versioned internal static let startIndex: IntMax = 0
         // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
         /// The position of the first element in a non‐empty collection.
-        public var startIndex: IntMax = 0
+        public var startIndex: IntMax {
+            return Data.BinaryView.startIndex
+        }
         // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
         /// The position following the last valid index.
         @_inlineable public var endIndex: IntMax {
@@ -78,6 +83,14 @@ extension Data {
             set {
                 data[byteIndex(position)].binary[bitIndex(position)] = newValue
             }
+        }
+        
+        // MARK: - CustomStringConvertible
+        
+        // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+        public var description: String {
+            let bytes = data.map { $0.binary.description }
+            return bytes.joined(separator: " ")
         }
     }
 }
