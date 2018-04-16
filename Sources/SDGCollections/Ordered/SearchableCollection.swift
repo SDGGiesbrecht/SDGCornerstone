@@ -210,25 +210,6 @@ where Element : Equatable, SubSequence : SearchableCollection {
     ///     - pattern: The pattern to try.
     func hasPrefix(_ pattern: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    func hasSuffix(_ pattern: Pattern<Element>) -> Bool
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    func hasSuffix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    func hasSuffix(_ pattern: Self) -> Bool
-
     // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
@@ -236,7 +217,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     ///     - other: The other collection
     func commonPrefix<C : SearchableCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element
     // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
-    /// Returns the longest suffix subsequence shared with the other collection.
+    /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
     ///     - other: The other collection
@@ -853,60 +834,6 @@ extension SearchableCollection {
         return _hasPrefix(pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix(_ pattern: Pattern<Element>) -> Bool {
-        let backwards = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
-        return hasSuffix(pattern as Pattern<Element>)
-    }
-
-    @_inlineable @_versioned internal func _hasSuffix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
-        let backwards = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
-    }
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
-        return _hasSuffix(pattern)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix(_ pattern: Self) -> Bool {
-        return _hasSuffix(pattern)
-    }
-
-    @_inlineable @_versioned internal func _hasSuffix<C : SearchableBidirectionalCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
-        let backwards = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
-    }
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
-    /// Returns `true` if `self` begins with `pattern`.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix<C : SearchableBidirectionalCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
-        return _hasSuffix(pattern)
-    }
-
     @_inlineable @_versioned internal func _commonPrefix<C : SearchableCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         var end: Index = startIndex
         for (ownIndex, otherIndex) in zip(indices, other.indices) {
@@ -928,7 +855,7 @@ extension SearchableCollection {
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
-    /// Returns the longest suffix subsequence shared with the other collection.
+    /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
     ///     - other: The other collection
@@ -1240,53 +1167,6 @@ extension SearchableCollection {
     ///     - other: The other collection. (The starting point.)
     @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element {
         return _difference(from: other)
-    }
-}
-
-extension SearchableCollection where Self : BidirectionalCollection {
-    // MARK: - where Self : BidirectionalCollection
-
-    // [_Warning: Move these._]
-
-    @_inlineable @_versioned internal func _commonSuffix<C : SearchableCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
-        return PatternMatch(range: forward(reversed().commonPrefix(with: other.reversed()).range), in: self)
-    }
-    // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
-    /// Returns the longest suffix subsequence shared with the other collection.
-    ///
-    /// - Parameters:
-    ///     - other: The other collection
-    @_inlineable public func commonSuffix<C : SearchableCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
-        return _commonSuffix(with: other)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
-    /// Returns the longest suffix subsequence shared with the other collection.
-    ///
-    /// - Parameters:
-    ///     - other: The other collection
-    @_inlineable public func commonSuffix(with other: Self) -> PatternMatch<Self> {
-        return _commonSuffix(with: other)
-    }
-
-    // [_Inherit Documentation: SDGCornerstone.Collection.difference(from:)_]
-    /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
-    ///
-    /// - Parameters:
-    ///     - other: The other collection. (The starting point.)
-    @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element {
-
-        let suffixStart = commonSuffix(with: other).range.lowerBound
-        let suffixLength = distance(from: suffixStart, to: endIndex)
-        let otherSuffixStart = other.index(other.endIndex, offsetBy: −suffixLength)
-
-        var difference: [Change<C.Index, Index>] = prefix(upTo: suffixStart)._difference(from: other.prefix(upTo: otherSuffixStart))
-
-        if suffixLength ≠ 0 {
-            difference.append(.keep(otherSuffixStart ..< other.endIndex))
-        }
-
-        return difference
     }
 }
 
