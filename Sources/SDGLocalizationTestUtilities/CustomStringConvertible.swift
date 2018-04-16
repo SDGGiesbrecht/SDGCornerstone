@@ -35,7 +35,7 @@ import SDGPersistenceTestUtilities
             print(localization.code, to: &report)
         }
         LocalizationSetting(orderOfPrecedence: [localization.code]).do {
-            print(instance.description, to: &report)
+            print(String(describing: instance), to: &report)
         }
         print("", to: &report)
     }

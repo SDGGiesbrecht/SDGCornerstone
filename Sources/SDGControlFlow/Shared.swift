@@ -13,7 +13,7 @@
  */
 
 /// A reference to a shared value.
-public class Shared<Value> {
+public class Shared<Value> : CustomStringConvertible {
 
     // MARK: - Initialization
 
@@ -81,5 +81,12 @@ public class Shared<Value> {
                 observers.remove(at: index)
             }
         }
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(describing: value)
     }
 }

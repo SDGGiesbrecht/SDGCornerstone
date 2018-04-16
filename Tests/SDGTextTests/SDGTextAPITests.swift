@@ -265,7 +265,7 @@ class SDGTextAPITests : TestCase {
         mutable.write(to: &mutable)
         XCTAssertEqual(mutable, "ABCDEFABCDEF")
 
-        XCTAssertEqual(StrictString("A").description, "A")
+        XCTAssertEqual(String(describing: StrictString("A")), "A")
 
         XCTAssert(StrictString("A") < StrictString("B"))
 
