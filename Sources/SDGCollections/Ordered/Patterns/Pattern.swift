@@ -42,7 +42,7 @@ open class Pattern<Element : Equatable> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable open func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @_inlineable open func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
         _primitiveMethod()
     }
 
@@ -54,7 +54,7 @@ open class Pattern<Element : Equatable> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable open func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @_inlineable open func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         return matches(in: collection, at: location).first
     }
 

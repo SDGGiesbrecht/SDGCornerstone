@@ -1,5 +1,5 @@
 /*
- ConditionalPattern.swift
+ AlternativePatterns.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,21 +12,32 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A pattern that matches based on a condition.
-public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
+/// A pattern that matches against several alternative patterns.
+///
+/// The order of the alternatives is significant. If multiple alternatives match, preference will be given to one higher in the list.
+public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    /// Creates an algorithmic pattern based on a condition.
+    /// Creates a set of alternative patterns.
     ///
     /// - Parameters:
-    ///     - condition: The condition an element must meet in order to match.
-    @_inlineable public init(_ condition: @escaping (Element) -> Bool) {
-        self.condition = condition
+    ///     - alternatives: The alternative patterns.
+    @_inlineable public init(_ alternatives: [Pattern<Element>]) {
+        self.alternatives = alternatives
     }
+
+    /// Creates a set of alternative elements.
+    ///
+    /// - Parameters:
+    ///     - elements: The alternative element.
+    @_inlineable public init(_ elements: [Element]) {
+        self.alternatives = elements.map { LiteralPattern([$0]) }
+    }
+
     // MARK: - Properties
 
-    @_versioned internal var condition: (Element) -> Bool
+    @_versioned internal var alternatives: [Pattern<Element>]
 
     // MARK: - Pattern
 
@@ -38,13 +49,13 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
-        if condition(collection[location]) {
-            return [location ..< collection.index(after: location)]
-        } else {
-            return []
+        var results: [Range<C.Index>] = []
+        for alternative in alternatives {
+            results.append(contentsOf: alternative.matches(in: collection, at: location))
         }
+        return results
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
@@ -55,20 +66,20 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : Collection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-
-        if condition(collection[location]) {
-            return location ..< collection.index(after: location)
-        } else {
-            return nil
+    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+        for alternative in alternatives {
+            if let match = alternative.primaryMatch(in: collection, at: location) {
+                return match
+            }
         }
+        return nil
     }
 
     // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> ConditionalPattern<Element> {
-        return self
+    @_inlineable public override func reversed() -> AlternativePatterns<Element> {
+        return AlternativePatterns(alternatives.map({ $0.reversed() }))
     }
 }
