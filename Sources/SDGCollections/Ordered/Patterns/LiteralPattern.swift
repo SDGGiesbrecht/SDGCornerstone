@@ -13,7 +13,7 @@
  */
 
 /// A pattern that matches an exact subsequence.
-public final class LiteralPattern<Element : Equatable> : Pattern<Element>, ExpressibleByArrayLiteral {
+public final class LiteralPattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible, ExpressibleByArrayLiteral {
 
     // MARK: - Initialization
 
@@ -73,5 +73,12 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Expre
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     @_inlineable public override func reversed() -> LiteralPattern<Element> {
         return LiteralPattern(literal.reversed())
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    @_inlineable public var description: String {
+        return String(describing: literal)
     }
 }
