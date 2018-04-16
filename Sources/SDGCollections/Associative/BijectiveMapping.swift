@@ -15,7 +15,7 @@
 import SDGControlFlow
 
 /// A reversible one‐to‐one mapping.
-public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, ExpressibleByDictionaryLiteral {
+public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, ExpressibleByDictionaryLiteral, TransparentWrapper {
 
     // MARK: - Properties
 
@@ -101,5 +101,13 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     /// Creates an instance from a dictionary literal.
     @_inlineable public init(dictionaryLiteral elements: (X, Y)...) {
         self.init(Dictionary(uniqueKeysWithValues: elements))
+    }
+
+    // MARK: - TransparentWrapper
+
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    @_inlineable public var wrappedInstance: [X: Y] {
+        return xToY
     }
 }
