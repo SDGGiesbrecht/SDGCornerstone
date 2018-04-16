@@ -84,9 +84,9 @@ extension Data {
                 data[byteIndex(position)].binary[bitIndex(position)] = newValue
             }
         }
-        
+
         // MARK: - CustomStringConvertible
-        
+
         // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
         public var description: String {
             let bytes = data.map { $0.binary.description }
