@@ -13,7 +13,7 @@
  */
 
 /// A pattern that matches if the underlying pattern does not.
-public final class NotPattern<Element : Equatable> : Pattern<Element> {
+public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible {
 
     // MARK: - Initialization
 
@@ -98,5 +98,12 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     @_inlineable public override func reversed() -> NotPattern<Element> {
         return NotPattern(base.reversed())
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    @_inlineable public var description: String {
+        return "¬(" + String(describing: base) + ")"
     }
 }
