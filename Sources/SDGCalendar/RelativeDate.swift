@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal struct RelativeDate : DateDefinition {
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
+internal struct RelativeDate : CustomReflectable, DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -27,6 +30,33 @@ internal struct RelativeDate : DateDefinition {
 
     internal let baseDate: CalendarDate
     internal let intervalSince: CalendarInterval<FloatMax>
+
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "baseDate"
+                }
+            }).resolved()) : baseDate,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "intervalSince"
+                }
+            }).resolved()) : intervalSince
+            ], displayStyle: .struct)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return "(" + String(describing: baseDate) + ") + " + String(describing: intervalSince)
+    }
 
     // MARK: - DateDefinition
 
