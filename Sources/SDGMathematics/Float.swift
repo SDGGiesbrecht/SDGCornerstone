@@ -370,7 +370,9 @@ extension FloatFamily {
             return (π ÷ 2).rad − arctan(1 ÷ tangent)
         } else if tangent > 2 − √3 {
             let r3: Self = √3
-            return (π ÷ 6).rad + arctan((r3 × tangent − (1 as Self)) ÷ (r3 + tangent))
+            let numerator: Self = r3 × tangent − (1 as Self)
+            let referenceTangent: Self = numerator ÷ (r3 + tangent)
+            return (π ÷ 6).rad + arctan(referenceTangent)
         } else {
 
             //   ∞         n + 1     2n − 1
