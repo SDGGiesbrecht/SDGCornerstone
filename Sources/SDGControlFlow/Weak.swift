@@ -31,7 +31,7 @@ public struct Weak<Pointee : AnyObject> : TransparentWrapper {
 
     // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
     /// The wrapped instance.
-    @_inlineable public var wrappedInstance: Pointee? {
-        return pointee
+    @_inlineable public var wrappedInstance: Any {
+        return pointee as Any
     }
 }

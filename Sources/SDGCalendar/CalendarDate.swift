@@ -21,7 +21,7 @@ import SDGControlFlow
 /// The `CalendarDate` structure will remain accurate to its initial definition even if calendar or time zone rules change in the future, such as a change in the Daylight Savings start or end times. (This is in contrast to `Date`, which simply defines itself by a number of seconds since an epoch. If any rules were changed in the future, converting it back to a calendar‐based representation would result in a different date and time.)
 ///
 /// To get the current time, use a static function such as `hebrewNow()` or `gregorianNow()`. Each returns a date representing the current time, but is defined according to a different calendar.
-public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointProtocol {
+public struct CalendarDate : Comparable, Equatable, CustomReflectable, OneDimensionalPoint, PointProtocol, TransparentWrapper {
 
     // MARK: - Static Properties
 
@@ -312,6 +312,15 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         return precedingValue.intervalSinceEpoch < followingValue.intervalSinceEpoch
     }
 
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            "definition" : definition
+            ], displayStyle: .struct)
+    }
+
     // MARK: - Decodable
 
     internal static var knownDateDefinitions: [StrictString: DateDefinition.Type] = [
@@ -405,5 +414,13 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     ///     - followingValue: The startpoint.
     public static func − (precedingValue: CalendarDate, followingValue: CalendarDate) -> CalendarInterval<FloatMax> {
         return precedingValue.intervalSinceEpoch − followingValue.intervalSinceEpoch
+    }
+
+    // MARK: - TransparentWrapper
+
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    public var wrappedInstance: Any {
+        return definition
     }
 }

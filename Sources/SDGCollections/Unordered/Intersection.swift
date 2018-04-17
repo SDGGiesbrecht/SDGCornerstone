@@ -34,6 +34,13 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : Custo
     @_versioned internal let a: Base1
     @_versioned internal let b: Base2
 
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    @_inlineable public var description: String {
+        return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
+    }
+
     // MARK: - SetDefinition
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
@@ -48,12 +55,5 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : Custo
     ///     - followingValue: The element to test.
     @_inlineable public static func ∋ (precedingValue: Intersection, followingValue: Base1.Element) -> Bool {
         return precedingValue.a ∋ followingValue ∧ precedingValue.b ∋ followingValue
-    }
-
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    @_inlineable public var description: String {
-        return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
     }
 }

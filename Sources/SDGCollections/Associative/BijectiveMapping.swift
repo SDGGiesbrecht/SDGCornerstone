@@ -107,7 +107,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
     /// The wrapped instance.
-    @_inlineable public var wrappedInstance: [X: Y] {
+    @_inlineable public var wrappedInstance: Any {
         return xToY
     }
 }

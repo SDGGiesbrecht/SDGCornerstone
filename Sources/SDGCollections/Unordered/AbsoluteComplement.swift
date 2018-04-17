@@ -31,6 +31,13 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
 
     @_versioned internal let base: Base
 
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    @_inlineable public var description: String {
+        return "(" + String(describing: base) + ")′"
+    }
+
     // MARK: - SetDefinition
 
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
@@ -45,12 +52,5 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
     ///     - followingValue: The element to test.
     @_inlineable public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element) -> Bool {
         return precedingValue.base ∌ followingValue
-    }
-
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    @_inlineable public var description: String {
-        return "(" + String(describing: base) + ")′"
     }
 }

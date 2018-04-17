@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
 // MARK: - Definition
 
 private let hebrewPartsPerDay = HebrewHour.hoursPerDay × HebrewPart.partsPerHour
@@ -22,7 +25,7 @@ private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutes
 /// A time interval.
 ///
 /// The units are all defined as fractions or multiples of days. This makes them convenient for calendaring, but not for physics. (Seconds are not SI seconds and leap seconds do not exist.)
-public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathematics.Measurement {
+public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathematics.Measurement, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -172,6 +175,23 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         set {
             inUnits = newValue × unitsPerSecond
         }
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: _InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: 12, radixCharacter: ".")
+                if self == (1 as Scalar).days {
+                    return number + " day"
+                } else {
+                    return number + " days"
+                }
+            }
+        }).resolved())
     }
 
     // MARK: - Decodable

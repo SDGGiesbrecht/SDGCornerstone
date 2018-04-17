@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal struct GregorianDate : DateDefinition {
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
+internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -172,5 +175,19 @@ internal struct GregorianDate : DateDefinition {
         try container.encode(hour)
         try container.encode(minute)
         try container.encode(second)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom:
+                return CalendarDate(definition: self).gregorianDateInBritishEnglish()
+            case .englishUnitedStates, .englishCanada:
+                return CalendarDate(definition: self).gregorianDateInAmericanEnglish()
+            }
+        }).resolved())
     }
 }
