@@ -185,7 +185,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         return String(UserFacingText({ (localization: _InterfaceLocalization) in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                let number = self.inDays.inDigits(maximumDecimalPlaces: 12, radixCharacter: ".")
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ".")
                 if self == (1 as Scalar).days {
                     return number + " day"
                 } else {
