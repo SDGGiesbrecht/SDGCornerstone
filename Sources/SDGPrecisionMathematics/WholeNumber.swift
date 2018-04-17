@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGLogic
 import SDGRandomization
 import SDGCornerstoneLocalizations
@@ -26,7 +27,7 @@ import SDGCornerstoneLocalizations
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
-public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable, PointProtocol, RandomizableNumber, Strideable, Subtractable, TextConvertibleNumber, WholeArithmetic, WholeNumberProtocol {
+public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable, CustomReflectable, Equatable, Hashable, PointProtocol, RandomizableNumber, Strideable, Subtractable, TextConvertibleNumber, TextualPlaygroundDisplay, WholeArithmetic, WholeNumberProtocol {
 
     // MARK: - Properties
 
@@ -134,6 +135,32 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         }
 
         return false // Equal
+    }
+
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "digits"
+                }
+            }).resolved()) : digits,
+            ], displayStyle: .struct)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inDigits()
+            }
+        }).resolved())
     }
 
     // MARK: - Equatable
