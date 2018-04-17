@@ -12,9 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGLogic
 import SDGRandomization
 import SDGLocalization
+import SDGCornerstoneLocalizations
 
 // [_Example 1: WholeNumber Literals_]
 /// An arbitrary‐precision integer.
@@ -24,7 +26,7 @@ import SDGLocalization
 /// let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
 /// let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
 /// ```
-public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, RandomizableNumber, Subtractable, TextConvertibleNumber, WholeArithmetic {
+public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, CustomReflectable, Equatable, Hashable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, RandomizableNumber, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -126,6 +128,38 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
                 return precedingValue.wholeMagnitude < followingValue.wholeMagnitude
             }
         }
+    }
+
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "magnitude"
+                }
+            }).resolved()) : unsafeDefinition.magnitude,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "isNegative"
+                }
+            }).resolved()) : unsafeDefinition.isNegative
+            ], displayStyle: .struct)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inDigits()
+            }
+        }).resolved())
     }
 
     // MARK: - Equatable
