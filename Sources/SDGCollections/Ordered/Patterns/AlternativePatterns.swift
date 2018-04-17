@@ -12,10 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A pattern that matches against several alternative patterns.
 ///
 /// The order of the alternatives is significant. If multiple alternatives match, preference will be given to one higher in the list.
-public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, CustomStringConvertible {
+public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, CustomStringConvertible, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 

@@ -557,6 +557,12 @@ extension Double : FloatFamily {
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
     /// An instance of *e*.
     public static let e: Double = 0x1.5BF0A8B145769p1
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    @_inlineable public var floatingPointApproximation: FloatMax {
+        return FloatMax(self)
+    }
 }
 
 #if canImport(CoreGraphics)
@@ -602,6 +608,12 @@ extension CGFloat : FloatFamily {
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
     /// An instance of *e*.
     public static let e: CGFloat = CGFloat(Double.e)
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    @_inlineable public var floatingPointApproximation: FloatMax {
+        return FloatMax(NativeType(self))
+    }
 }
 #endif
 
@@ -651,6 +663,12 @@ extension Float80 : Codable, FloatFamily {
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
     /// An instance of *e*.
     public static let e: Float80 = 0x1.5BF0A8B145769535p1
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    @_inlineable public var floatingPointApproximation: FloatMax {
+        return FloatMax(self)
+    }
 }
 #endif
 
@@ -673,4 +691,10 @@ extension Float : FloatFamily {
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
     /// An instance of *e*.
     public static let e: Float = 0x1.5BF0A9p1
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    @_inlineable public var floatingPointApproximation: FloatMax {
+        return FloatMax(self)
+    }
 }

@@ -17,7 +17,7 @@ import SDGControlFlow
 extension Data {
 
     /// A view of the contents of `Data` as a collection of bits.
-    public struct BinaryView : BidirectionalCollection, Collection, CustomStringConvertible, MutableCollection, RandomAccessCollection {
+    public struct BinaryView : BidirectionalCollection, Collection, CustomStringConvertible, MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay {
 
         // MARK: - Initialization
 

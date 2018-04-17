@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// An intersection of two sets.
-public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : CustomStringConvertible, SetDefinition where Base1.Element == Base2.Element {
+public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : CustomStringConvertible, SetDefinition, TextualPlaygroundDisplay where Base1.Element == Base2.Element {
 
     // MARK: - Initialization
 

@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A pattern that matches if the underlying pattern does not.
-public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible {
+public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
