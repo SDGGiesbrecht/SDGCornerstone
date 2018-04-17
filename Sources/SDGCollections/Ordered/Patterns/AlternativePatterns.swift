@@ -88,6 +88,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
     // MARK: - CustomStringConvertible
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
     @_inlineable public var description: String {
         let entries = alternatives.map { "(" + String(describing: $0) + ")" }
         return entries.joined(separator: " ∨ ")

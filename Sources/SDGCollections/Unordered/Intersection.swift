@@ -37,6 +37,7 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : Custo
     // MARK: - CustomStringConvertible
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
     @_inlineable public var description: String {
         return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
     }

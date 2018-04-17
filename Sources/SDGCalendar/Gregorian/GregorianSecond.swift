@@ -45,6 +45,7 @@ public struct GregorianSecond : CardinalCalendarComponent, CodableViaRawRepresen
     // MARK: - CustomStringConvertible
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacingText({ (localization: InterfaceLocalization) in
             switch localization {

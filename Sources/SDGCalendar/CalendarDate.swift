@@ -316,6 +316,7 @@ public struct CalendarDate : Comparable, Equatable, CustomReflectable, OneDimens
     // MARK: - CustomReflectable
 
     // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
             String(UserFacingText({ (localization: APILocalization) in

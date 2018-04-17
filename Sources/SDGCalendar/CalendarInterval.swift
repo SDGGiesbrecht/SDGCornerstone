@@ -180,6 +180,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
     // MARK: - CustomStringConvertible
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacingText({ (localization: _InterfaceLocalization) in
             switch localization {

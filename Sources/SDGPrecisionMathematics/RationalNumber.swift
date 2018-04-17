@@ -146,6 +146,7 @@ public struct RationalNumber : Addable, Codable, Comparable, CustomReflectable, 
     // MARK: - CustomReflectable
 
     // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
             String(UserFacingText({ (localization: APILocalization) in
@@ -166,6 +167,7 @@ public struct RationalNumber : Addable, Codable, Comparable, CustomReflectable, 
     // MARK: - CustomStringConvertible
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacingText({ (localization: InterfaceLocalization) in
             switch localization {

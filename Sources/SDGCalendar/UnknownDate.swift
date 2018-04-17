@@ -34,6 +34,7 @@ internal struct UnknownDate : CustomReflectable, DateDefinition {
     // MARK: - CustomReflectable
 
     // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
             String(UserFacingText({ (localization: APILocalization) in

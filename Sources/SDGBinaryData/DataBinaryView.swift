@@ -88,6 +88,7 @@ extension Data {
         // MARK: - CustomStringConvertible
 
         // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+        /// A textual representation of the instance.
         public var description: String {
             let bytes = data.map { String(describing: $0.binary) }
             return bytes.joined(separator: " ")
