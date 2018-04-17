@@ -15,7 +15,7 @@
 import SDGControlFlow
 import SDGCornerstoneLocalizations
 
-internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
+internal struct GregorianDate : CustomReflectable, DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -86,6 +86,65 @@ internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
     internal let hour: GregorianHour
     internal let minute: GregorianMinute
     internal let second: GregorianSecond
+
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "year"
+                }
+            }).resolved()) : year,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "month"
+                }
+            }).resolved()) : month,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "day"
+                }
+            }).resolved()) : day,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "hour"
+                }
+            }).resolved()) : hour,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "minute"
+                }
+            }).resolved()) : minute,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "second"
+                }
+            }).resolved()) : second,
+            ], displayStyle: .struct)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            let date = CalendarDate(definition: self)
+            switch localization {
+            case .englishUnitedKingdom:
+                return date.gregorianDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish()
+            case .englishUnitedStates, .englishCanada:
+                return date.gregorianDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
+            }
+        }).resolved())
+    }
 
     // MARK: - DateDefinition
 
@@ -175,19 +234,5 @@ internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
         try container.encode(hour)
         try container.encode(minute)
         try container.encode(second)
-    }
-
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    public var description: String {
-        return String(UserFacingText({ (localization: InterfaceLocalization) in
-            switch localization {
-            case .englishUnitedKingdom:
-                return CalendarDate(definition: self).gregorianDateInBritishEnglish()
-            case .englishUnitedStates, .englishCanada:
-                return CalendarDate(definition: self).gregorianDateInAmericanEnglish()
-            }
-        }).resolved())
     }
 }
