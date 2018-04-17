@@ -35,20 +35,6 @@ public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresent
         return (1 as FloatMax).hours
     }
 
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    public var description: String {
-        return String(UserFacingText({ (localization: InterfaceLocalization) in
-            switch localization {
-            case .englishUnitedKingdom:
-                return self.inDigitsInTwentyFourHourFormat()
-            case .englishUnitedStates, .englishCanada:
-                return self.inDigitsInTwelveHourFormat() + " " + self.amOrPM()
-            }
-        }).resolved())
-    }
-
     // MARK: - Text Representations
 
     /// Returns the hour in digits for twenty‐four–hour notation. (0–23)
@@ -75,6 +61,20 @@ public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresent
         } else {
             return "a.m."
         }
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom:
+                return self.inDigitsInTwentyFourHourFormat()
+            case .englishUnitedStates, .englishCanada:
+                return self.inDigitsInTwelveHourFormat() + " " + self.amOrPM()
+            }
+        }).resolved())
     }
 
     // MARK: - ISOCalendarComponent

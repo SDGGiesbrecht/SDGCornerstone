@@ -12,8 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
 /// A minute of the Gregorian hour.
-public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, TextualPlaygroundDisplay {
 
     // MARK: - Static Properties
 
@@ -37,6 +40,18 @@ public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresen
     /// Returns the minite in digits with leading zeroes.
     public func inDigits() -> StrictString {
         return minute.inDigits().filled(to: 2, with: "0", from: .start)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inDigits()
+            }
+        }).resolved())
     }
 
     // MARK: - ISOCalendarComponent
