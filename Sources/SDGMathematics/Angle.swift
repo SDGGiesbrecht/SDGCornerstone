@@ -12,22 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-
-#if canImport(CoreGraphics)
-import CoreGraphics
-#endif
-
-#if canImport(AppKit)
-import AppKit
-#elseif canImport(UIKit)
-import UIKit
-#endif
-
-import SDGControlFlow
-
 /// An angle.
-public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement, CustomPlaygroundDisplayConvertible {
+public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
 
     // MARK: - Initialization
 
@@ -152,25 +138,6 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement, CustomPlay
         set {
             inRadians = newValue
         }
-    }
-
-    // MARK: - CustomPlaygroundDisplayConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
-    @_inlineable public var playgroundDescription: Any {
-        #if canImport(CoreGraphics) && (canImport(AppKit) || canImport(UIKit))
-        let arrow = BézierPath()
-        let centre = CGPoint(x: 0, y: 0)
-        arrow.move(to: centre)
-        let radius: CGFloat = 50
-        let start = CGPoint(x: radius, y: 0)
-        arrow.line(to: start)
-        arrow.appendArc(withCenter: centre, radius: radius, startAngle: 0, endAngle: CGFloat(self.inDegrees.floatingPointApproximation), clockwise: self.isNegative)
-
-        return arrow
-        #else
-        return String(describing: self)
-        #endif
     }
 }
 
