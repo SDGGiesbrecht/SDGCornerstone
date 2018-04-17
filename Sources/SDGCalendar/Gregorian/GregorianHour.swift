@@ -12,8 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
 /// An hour of the Gregorian day.
-public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, TextualPlaygroundDisplay {
 
     // MARK: - Static Properties
 
@@ -30,6 +33,20 @@ public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresent
     /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).hours
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom:
+                return self.inDigitsInTwentyFourHourFormat()
+            case .englishUnitedStates, .englishCanada:
+                return self.inDigitsInTwelveHourFormat() + " " + self.amOrPM()
+            }
+        }).resolved())
     }
 
     // MARK: - Text Representations
