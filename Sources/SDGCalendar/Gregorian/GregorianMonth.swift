@@ -13,9 +13,10 @@
  */
 
 import SDGControlFlow
+import SDGCornerstoneLocalizations
 
 /// A month of the Gregorian year.
-public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent {
+public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent, TextualPlaygroundDisplay {
 
     // MARK: - Cases
 
@@ -124,6 +125,18 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
     /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianMonth.maximumNumberOfDays).days
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inEnglish()
+            }
+        }).resolved())
     }
 
     // MARK: - Decodable
