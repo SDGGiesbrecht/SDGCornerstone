@@ -159,17 +159,13 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement, CustomPlay
     // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
     @_inlineable public var playgroundDescription: Any {
         #if canImport(CoreGraphics) && (canImport(AppKit) || canImport(UIKit))
-        let arrow = BezierPath()
-        arrow.move(to: CGPoint(x: 0, y: 0))
-        arrow.line(to: CGPoint(x: 0, y: 70))
-        arrow.line(to: CGPoint(x: 10, y: 60))
-        arrow.line(to: CGPoint(x: 0, y: 70))
-        arrow.line(to: CGPoint(x: −10, y: 60))
-        arrow.line(to: CGPoint(x: 0, y: 70))
-
-        let approximation = CGFloat((self − 90°).inRadians.floatingPointApproximation)
-        let rotation = AffineTransform(rotationByRadians: approximation)
-        arrow.transform(using: rotation)
+        let arrow = BézierPath()
+        let centre = CGPoint(x: 0, y: 0)
+        arrow.move(to: centre)
+        let radius: CGFloat = 50
+        let start = CGPoint(x: radius, y: 0)
+        arrow.line(to: start)
+        arrow.appendArc(withCenter: centre, radius: radius, startAngle: 0, endAngle: CGFloat(self.inDegrees.floatingPointApproximation), clockwise: self.isNegative)
 
         return arrow
         #else

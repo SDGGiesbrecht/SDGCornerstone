@@ -7,8 +7,8 @@ import UIKit
 
 #if canImport(AppKit)
 // `NSBezierPath` or `UIBezierPath`.
-public typealias BezierPath = NSBezierPath
+public typealias BézierPath = NSBezierPath
 #elseif canImport(UIKit)
 // `NSBezierPath` or `UIBezierPath`.
-public typealias BezierPath = UIBezierPath
+public typealias BézierPath = UIBezierPath
 #endif
