@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGRandomization
 import SDGLocalization
+import SDGCornerstoneLocalizations
 
 // [_Example 1: RationalNumber Literals_]
 /// An arbitrary‐precision rational number.
@@ -23,7 +25,7 @@ import SDGLocalization
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 001"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber : Addable, Codable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RandomizableNumber, RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic {
+public struct RationalNumber : Addable, Codable, Comparable, CustomReflectable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RandomizableNumber, RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -139,6 +141,38 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
         //
         //     ad   <?     bc  , b ≠ 0, d ≠ 0
         return precedingValue.numerator × followingValue.denominator < followingValue.numerator × precedingValue.denominator
+    }
+
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "numerator"
+                }
+            }).resolved()) : numerator,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "denominator"
+                }
+            }).resolved()) : denominator
+            ], displayStyle: .struct)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.asSimpleFraction()
+            }
+        }).resolved())
     }
 
     // MARK: - Decodable
