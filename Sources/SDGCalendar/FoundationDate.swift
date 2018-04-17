@@ -14,7 +14,10 @@
 
 import Foundation
 
-internal struct FoundationDate : DateDefinition {
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
+internal struct FoundationDate : CustomReflectable, DateDefinition, TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -26,6 +29,20 @@ internal struct FoundationDate : DateDefinition {
     // MARK: - Properties
 
     internal let date: Date
+
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "date"
+                }
+            }).resolved()) : date
+            ], displayStyle: .struct)
+    }
 
     // MARK: - DateDefinition
 
@@ -58,5 +75,13 @@ internal struct FoundationDate : DateDefinition {
     ///     - encoder: The encoder to write data to.
     internal func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: date)
+    }
+
+    // MARK: - TransparentWrapper
+
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    public var wrappedInstance: Any {
+        return date
     }
 }

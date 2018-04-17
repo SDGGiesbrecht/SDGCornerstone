@@ -15,6 +15,7 @@
 import Foundation
 
 import SDGControlFlow
+import SDGCornerstoneLocalizations
 
 /// A date on a particular calendar.
 ///
@@ -317,7 +318,12 @@ public struct CalendarDate : Comparable, Equatable, CustomReflectable, OneDimens
     // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
     public var customMirror: Mirror {
         return Mirror(self, children: [
-            "definition" : definition
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "definition"
+                }
+            }).resolved()) : definition
             ], displayStyle: .struct)
     }
 
