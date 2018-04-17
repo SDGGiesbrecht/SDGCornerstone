@@ -12,9 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGLocalization
+import SDGCornerstoneLocalizations
 
-internal struct HebrewDate : DateDefinition {
+internal struct HebrewDate : CustomReflectable, DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -129,6 +131,59 @@ internal struct HebrewDate : DateDefinition {
     internal let day: HebrewDay
     internal let hour: HebrewHour
     internal let part: HebrewPart
+
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "year"
+                }
+            }).resolved()) : year,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "month"
+                }
+            }).resolved()) : month,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "day"
+                }
+            }).resolved()) : day,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "hour"
+                }
+            }).resolved()) : hour,
+            String(UserFacingText({ (localization: APILocalization) in
+                switch localization {
+                case .englishCanada:
+                    return "part"
+                }
+            }).resolved()) : part,
+            ], displayStyle: .struct)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            let date = CalendarDate(definition: self)
+            switch localization {
+            case .englishUnitedKingdom:
+                return date.hebrewDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish()
+            case .englishUnitedStates, .englishCanada:
+                return date.hebrewDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
+            }
+        }).resolved())
+    }
 
     // MARK: - DateDefinition
 
