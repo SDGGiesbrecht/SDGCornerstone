@@ -12,10 +12,28 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
 /// A calendar compenent representing a year.
-public protocol Year {
+public protocol Year : TextualPlaygroundDisplay {
 
     // [_Define Documentation: SDGCornerstone.Year.inEnglishDigits()_]
     /// Returns the year in English digits.
     func inEnglishDigits() -> StrictString
+}
+
+extension Year {
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inEnglishDigits()
+            }
+        }).resolved())
+    }
 }
