@@ -12,10 +12,28 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
 /// A calendar compenent representing a month of the year.
-public protocol Month {
+public protocol Month : TextualPlaygroundDisplay {
 
     // [_Define Documentation: SDGCornerstone.Month.inEnglish()_]
     /// Returns the English name.
     func inEnglish() -> StrictString
+}
+
+extension Month {
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    public var description: String {
+        return String(UserFacingText({ (localization: InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inEnglish()
+            }
+        }).resolved())
+    }
 }

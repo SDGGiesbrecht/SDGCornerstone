@@ -127,18 +127,6 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         return FloatMax(GregorianMonth.maximumNumberOfDays).days
     }
 
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    public var description: String {
-        return String(UserFacingText({ (localization: InterfaceLocalization) in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                return self.inEnglish()
-            }
-        }).resolved())
-    }
-
     // MARK: - Decodable
 
     // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
