@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematics
-
 internal enum ContentLocalization : String, Localization {
 
     // MARK: - Cases
@@ -531,20 +529,18 @@ internal enum ContentLocalization : String, Localization {
         return result
     }()
 
-    private static let flagOffset: UInt32 = 0x1F1A5
-    private var flag: StrictString {
-        let country = (rawValue.components(separatedBy: "\u{2D}") as [String]).last!
-        return StrictString(country.scalars.map({ UnicodeScalar($0.value + ContentLocalization.flagOffset)! }))
+    internal var language: Language {
+        return Language(rawValue: rawValue.truncated(before: "\u{2D}"))!
     }
-
-    private static func code(for flag: StrictString) -> String {
-        return String(String.ScalarView(flag.scalars.map({
-            if $0.value > flagOffset {
-                return UnicodeScalar($0.value − flagOffset)!
-            } else {
-                return UnicodeScalar(0)
-            }
-        })))
+    internal var script: Script? {
+        let components = rawValue.components(separatedBy: "\u{2D}")
+        guard components.count == 3 else {
+            return nil
+        }
+        return Script(rawValue: String(components[1].contents))
+    }
+    internal var state: State {
+        return State(rawValue: (rawValue.components(separatedBy: "\u{2D}") as [String]).last!)!
     }
 
     private static let codeToAbbreviation: [String: StrictString] = [
@@ -606,7 +602,7 @@ internal enum ContentLocalization : String, Localization {
     }
 
     internal var definedIcon: StrictString {
-        return flag + abbreviation
+        return state.flag + abbreviation
     }
 
     internal init?(definedIcon: StrictString) {
@@ -619,12 +615,26 @@ internal enum ContentLocalization : String, Localization {
         flag.append(abbreviation.removeFirst())
         flag.append(abbreviation.removeFirst())
 
-        let country = ContentLocalization.code(for: flag)
-        guard let language = ContentLocalization.abbreviationToCode[abbreviation] else {
+        guard let state = State(flag: flag),
+            let language = ContentLocalization.abbreviationToCode[abbreviation] else {
             return nil
         }
 
-        self.init(exactly: language + "\u{2D}" + country)
+        self.init(exactly: language + "\u{2D}" + state.rawValue)
+    }
+
+    internal func localizedIsolatedName() -> StrictString {
+        return UserFacingText({ (localization: _InterfaceLocalization) in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                var result: StrictString = self.language.localizedIsolatedName() + " ("
+                if let script = self.script {
+                    result += script.localizedIsolatedName() + StrictString(", ")
+                }
+                result += self.state.localizedIsolatedName() + StrictString(")")
+                return result
+            }
+        }).resolved()
     }
 
     // MARK: - Localization
