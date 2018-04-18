@@ -41,7 +41,7 @@ extension Angle : CustomPlaygroundDisplayConvertible {
         let radius: CGFloat = 50
         let start: CGPoint = CGPoint(x: radius, y: 0)
         arrow.line(to: start)
-        arrow.appendArc(withCenter: centre, radius: radius, startAngle: 0, endAngle: floatAngle.inDegrees, clockwise: floatAngle.isNegative)
+        arrow.appendArc(withCentre: centre, radius: radius, startAngle: 0, endAngle: floatAngle.inDegrees, clockwise: floatAngle.isNegative)
         let end: CGPoint = centre + CGVector(direction: floatAngle, length: radius)
 
         let flip: Angle<CGFloat>

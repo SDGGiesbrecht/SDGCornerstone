@@ -27,3 +27,29 @@ public typealias BézierPath = NSBezierPath
 // `NSBezierPath` or `UIBezierPath`.
 public typealias BézierPath = UIBezierPath
 #endif
+
+#if canImport(AppKit)
+extension BézierPath {
+    /// Appends an arc of a circle to the receiver’s path.
+    @_inlineable public func appendArc(withCentre centre: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) {
+        return appendArc(withCenter: centre, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
+    }
+}
+#elseif canImport(UIKit)
+extension BézierPath {
+    /// Appends an arc of a circle to the receiver’s path.
+    @_inlineable public func appendArc(withCentre centre: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) {
+        return addArc(withCenter: centre, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
+    }
+}
+#endif
+
+#if canImport(UIKit)
+extension BézierPath {
+
+    /// Appends a straight line to the receiver’s path.
+    @_inlineable public func line(to point: CGPoint) {
+        addLine(to: point)
+    }
+}
+#endif
