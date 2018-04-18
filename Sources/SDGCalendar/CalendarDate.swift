@@ -319,7 +319,7 @@ public struct CalendarDate : Comparable, Equatable, CustomReflectable, OneDimens
     /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "definition"

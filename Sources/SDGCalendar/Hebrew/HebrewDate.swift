@@ -138,31 +138,31 @@ internal struct HebrewDate : CustomReflectable, DateDefinition, TextualPlaygroun
     /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "year"
                 }
             }).resolved()) : year,
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "month"
                 }
             }).resolved()) : month,
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "day"
                 }
             }).resolved()) : day,
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "hour"
                 }
             }).resolved()) : hour,
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "part"
@@ -176,7 +176,7 @@ internal struct HebrewDate : CustomReflectable, DateDefinition, TextualPlaygroun
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacingText({ (localization: InterfaceLocalization) in
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
             let date = CalendarDate(definition: self)
             switch localization {
             case .englishUnitedKingdom:

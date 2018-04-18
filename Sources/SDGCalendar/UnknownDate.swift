@@ -37,19 +37,19 @@ internal struct UnknownDate : CustomReflectable, DateDefinition {
     /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "encodingIdentifier"
                 }
             }).resolved()) : encodingIdentifier,
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "encodedDefinition"
                 }
             }).resolved()) : lastCalculatedInstant,
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "lastCalculatedInstant"

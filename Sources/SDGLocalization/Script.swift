@@ -18,7 +18,7 @@ internal enum Script : String {
     }
 
     internal func localizedIsolatedName() -> StrictString {
-        return UserFacingText({ (localization: _InterfaceLocalization) in
+        return UserFacing<StrictString, _InterfaceLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 return self.isolatedEnglishName()

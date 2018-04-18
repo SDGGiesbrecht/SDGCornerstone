@@ -14,47 +14,47 @@
 
 import SDGControlFlow
 
-/// User‐facing, localized text.
+/// A user‐facing, localized element.
 ///
-/// - SeeAlso: UserFacingDynamicText
-public struct UserFacingText<Localization : SDGLocalization.Localization> : TextualPlaygroundDisplay {
+/// - SeeAlso: UserFacingDynamic
+public struct UserFacing<Element, Localization : SDGLocalization.Localization> : TransparentWrapper {
 
     // MARK: - Initialization
 
-    /// Creates user‐facing text from a closure that resolves the text for a specified localization.
+    /// Creates a user‐facing element from a closure that resolves the element for a specified localization.
     ///
     /// - Parameters:
-    ///     - localize: A closure that resolves the text based on a requested localization.
+    ///     - localize: A closure that resolves the element based on a requested localization.
     ///     - localization: The requested localization.
-    ///     - arguments: One or more (as a tuple) arguments necessary for the correct resolution of the string.
-    @_inlineable public init(_ localize: @escaping (_ localization: Localization) -> StrictString) {
-        self.dynamic = UserFacingDynamicText<Localization, Void>({ (localization, _) in
+    ///     - arguments: One or more (as a tuple) arguments necessary for the correct resolution of the element.
+    @_inlineable public init(_ localize: @escaping (_ localization: Localization) -> Element) {
+        self.dynamic = UserFacingDynamic<Element, Localization, Void>({ (localization, _) in
             return localize(localization)
         })
     }
 
     // MARK: - Properties
 
-    /// The same instance typed as `UserFacingDynamicText`.
-    public let dynamic: UserFacingDynamicText<Localization, Void>
+    /// The same instance typed as `UserFacingDynamic<Element, Localization, Void>`.
+    public let dynamic: UserFacingDynamic<Element, Localization, Void>
 
     // MARK: - Output
 
-    /// Returns the resolved string for the current localization using the specified arguments.
-    @_inlineable public func resolved() -> StrictString {
+    /// Returns the resolved element for the current localization.
+    @_inlineable public func resolved() -> Element {
         return dynamic.resolved(using: ())
     }
 
-    /// Returns the resolved string for the specified localization using the specified arguments.
-    @_inlineable public func resolved(for localization: Localization) -> StrictString {
+    /// Returns the resolved element for the specified localization.
+    @_inlineable public func resolved(for localization: Localization) -> Element {
         return dynamic.resolved(for: localization, using: ())
     }
 
-    // MARK: - CustomStringConvertible
+    // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    /// A textual representation of the instance.
-    public var description: String {
-        return String(resolved())
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    @_inlineable public var wrappedInstance: Any {
+        return resolved()
     }
 }

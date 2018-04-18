@@ -53,7 +53,7 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacingText({ (localization: InterfaceLocalization) in
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom:
                 return self.month.inEnglish() + " " + self.year.inEnglishDigits()

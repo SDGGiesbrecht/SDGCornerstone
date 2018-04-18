@@ -47,7 +47,7 @@ public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentable
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacingText({ (localization: InterfaceLocalization) in
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 return self.inDigits()

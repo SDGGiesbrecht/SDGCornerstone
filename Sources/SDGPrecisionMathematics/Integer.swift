@@ -136,13 +136,13 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Cu
     /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "magnitude"
                 }
             }).resolved()) : unsafeDefinition.magnitude,
-            String(UserFacingText({ (localization: APILocalization) in
+            String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "isNegative"
@@ -156,7 +156,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Cu
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacingText({ (localization: InterfaceLocalization) in
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 return self.inDigits()
