@@ -12,10 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// User‐facing, localized text.
 ///
 /// - SeeAlso: UserFacingDynamicText
-public struct UserFacingText<Localization : SDGLocalization.Localization> {
+public struct UserFacingText<Localization : SDGLocalization.Localization> : TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -46,5 +48,13 @@ public struct UserFacingText<Localization : SDGLocalization.Localization> {
     /// Returns the resolved string for the specified localization using the specified arguments.
     @_inlineable public func resolved(for localization: Localization) -> StrictString {
         return dynamic.resolved(for: localization, using: ())
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(resolved())
     }
 }
