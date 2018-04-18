@@ -151,8 +151,8 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
         var modified = "<span style=\u{22}"
 
-        modified += "font-family: &#x22;" + font.fontName + "&#x22;;"
-        modified += "font-size: \(font.pointSize)pt;"
+        modified += "font\u{2D}family: &#x22;" + font.fontName + "&#x22;;"
+        modified += "font\u{2D}size: \(font.pointSize)pt;"
 
         modified += "\u{22}>"
         modified += String(html())

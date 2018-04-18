@@ -125,8 +125,7 @@ extension WholeNumber {
             for bitIndex in binary.indices.lazy.reversed() where binary[bitIndex] == true {
                 return Index(digit: lastDigitIndex, bit: bitIndex) + 1
             }
-            preconditionFailure(UserFacing<StrictString,
-                                APILocalization>({ [wholeNumber = self.wholeNumber] localization in
+            preconditionFailure(UserFacing<StrictString, APILocalization>({ [wholeNumber = self.wholeNumber] localization in
                 switch localization {
                 case .englishCanada: // [_Exempt from Test Coverage_]
                     return StrictString("\(wholeNumber.inDigits()) is not in normalized form.\n\(dump(wholeNumber))")

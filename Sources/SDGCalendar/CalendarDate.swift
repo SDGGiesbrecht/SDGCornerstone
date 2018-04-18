@@ -324,7 +324,7 @@ public struct CalendarDate : Comparable, Equatable, CustomReflectable, OneDimens
                 case .englishCanada:
                     return "definition"
                 }
-            }).resolved()) : definition
+            }).resolved()): definition
             ], displayStyle: .struct)
     }
 

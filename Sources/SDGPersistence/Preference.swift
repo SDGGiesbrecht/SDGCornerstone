@@ -183,7 +183,7 @@ public struct Preference : CustomReflectable, Equatable, TransparentWrapper {
     /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
-            "propertyListObject" : propertyListObject as Any,
+            "propertyListObject": propertyListObject as Any
             ], displayStyle: .struct)
     }
 

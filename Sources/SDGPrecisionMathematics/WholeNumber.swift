@@ -148,7 +148,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
                 case .englishCanada:
                     return "digits"
                 }
-            }).resolved()) : digits,
+            }).resolved()): digits
             ], displayStyle: .struct)
     }
 

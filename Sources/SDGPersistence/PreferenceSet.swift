@@ -214,8 +214,8 @@ public final class PreferenceSet : CustomReflectable {
     /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
-            "domain" : possibleDebugDomain,
-            "contents" : values,
+            "domain": possibleDebugDomain,
+            "contents": values
             ], displayStyle: .class)
     }
 }

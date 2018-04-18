@@ -42,13 +42,13 @@ internal struct RelativeDate : CustomReflectable, DateDefinition, TextualPlaygro
                 case .englishCanada:
                     return "baseDate"
                 }
-            }).resolved()) : baseDate,
+            }).resolved()): baseDate,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "intervalSince"
                 }
-            }).resolved()) : intervalSince
+            }).resolved()): intervalSince
             ], displayStyle: .struct)
     }
 

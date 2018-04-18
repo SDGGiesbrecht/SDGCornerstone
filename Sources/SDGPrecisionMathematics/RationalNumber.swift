@@ -154,13 +154,13 @@ public struct RationalNumber : Addable, Codable, Comparable, CustomReflectable, 
                 case .englishCanada:
                     return "numerator"
                 }
-            }).resolved()) : numerator,
+            }).resolved()): numerator,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "denominator"
                 }
-            }).resolved()) : denominator
+            }).resolved()): denominator
             ], displayStyle: .struct)
     }
 

@@ -141,13 +141,13 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Cu
                 case .englishCanada:
                     return "magnitude"
                 }
-            }).resolved()) : unsafeDefinition.magnitude,
+            }).resolved()): unsafeDefinition.magnitude,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "isNegative"
                 }
-            }).resolved()) : unsafeDefinition.isNegative
+            }).resolved()): unsafeDefinition.isNegative
             ], displayStyle: .struct)
     }
 

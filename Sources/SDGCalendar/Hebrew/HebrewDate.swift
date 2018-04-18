@@ -143,31 +143,31 @@ internal struct HebrewDate : CustomReflectable, DateDefinition, TextualPlaygroun
                 case .englishCanada:
                     return "year"
                 }
-            }).resolved()) : year,
+            }).resolved()): year,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "month"
                 }
-            }).resolved()) : month,
+            }).resolved()): month,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "day"
                 }
-            }).resolved()) : day,
+            }).resolved()): day,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "hour"
                 }
-            }).resolved()) : hour,
+            }).resolved()): hour,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "part"
                 }
-            }).resolved()) : part,
+            }).resolved()): part
             ], displayStyle: .struct)
     }
 

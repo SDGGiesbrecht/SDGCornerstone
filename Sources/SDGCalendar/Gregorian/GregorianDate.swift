@@ -98,37 +98,37 @@ internal struct GregorianDate : CustomReflectable, DateDefinition, TextualPlaygr
                 case .englishCanada:
                     return "year"
                 }
-            }).resolved()) : year,
+            }).resolved()): year,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "month"
                 }
-            }).resolved()) : month,
+            }).resolved()): month,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "day"
                 }
-            }).resolved()) : day,
+            }).resolved()): day,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "hour"
                 }
-            }).resolved()) : hour,
+            }).resolved()): hour,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "minute"
                 }
-            }).resolved()) : minute,
+            }).resolved()): minute,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "second"
                 }
-            }).resolved()) : second,
+            }).resolved()): second
             ], displayStyle: .struct)
     }
 

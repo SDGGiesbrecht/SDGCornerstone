@@ -41,7 +41,7 @@ internal struct FoundationDate : CustomReflectable, DateDefinition, TransparentW
                 case .englishCanada:
                     return "date"
                 }
-            }).resolved()) : date
+            }).resolved()): date
             ], displayStyle: .struct)
     }
 

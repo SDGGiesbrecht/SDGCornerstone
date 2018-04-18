@@ -144,7 +144,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     /// The custom mirror for this instance.
     public var customMirror: Mirror {
         return Mirror(self, children: [
-            "base" : base,
+            "base": base
             ], displayStyle: .struct)
     }
 

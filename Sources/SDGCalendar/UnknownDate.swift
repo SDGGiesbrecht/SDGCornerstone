@@ -42,19 +42,19 @@ internal struct UnknownDate : CustomReflectable, DateDefinition {
                 case .englishCanada:
                     return "encodingIdentifier"
                 }
-            }).resolved()) : encodingIdentifier,
+            }).resolved()): encodingIdentifier,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "encodedDefinition"
                 }
-            }).resolved()) : lastCalculatedInstant,
+            }).resolved()): lastCalculatedInstant,
             String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "lastCalculatedInstant"
                 }
-            }).resolved()) : encodedDefinition
+            }).resolved()): encodedDefinition
             ], displayStyle: .struct)
     }
 
