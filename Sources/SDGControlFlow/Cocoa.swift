@@ -25,3 +25,11 @@ public typealias BézierPath = NSBezierPath
 // `NSBezierPath` or `UIBezierPath`.
 public typealias BézierPath = UIBezierPath
 #endif
+
+#if canImport(AppKit)
+// `NSFont` or `UIFont`.
+public typealias Font = NSFont
+#elseif canImport(UIKit)
+// `NSFont` or `UIFont`.
+public typealias Font = UIFont
+#endif

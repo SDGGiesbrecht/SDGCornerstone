@@ -147,9 +147,18 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     }
 
     /// Returns the rich text representation.
-    public func richText() -> NSAttributedString {
-        // [_Warning: Needs to handle base attributes._]
-        let data = String(html()).data(using: .utf8)!
+    public func richText(font: Font) -> NSAttributedString {
+
+        var modified = "<span style=\u{22}"
+
+        modified += "font-family: &#x22;" + font.fontName + "&#x22;;"
+        modified += "font-size: \(font.pointSize)pt;"
+
+        modified += "\u{22}>"
+        modified += String(html())
+        modified += "</span>"
+
+        let data = modified.data(using: .utf8)!
         do {
             return try NSAttributedString(data: data, options: [
                 NSAttributedString.DocumentReadingOptionKey.characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue),
@@ -244,7 +253,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
     /// Returns the custom playground description for this instance.
     @_inlineable public var playgroundDescription: Any {
-        return richText()
+        return richText(font: Font.systemFont(ofSize: Font.systemFontSize))
     }
 
     // MARK: - CustomStringConvertible
