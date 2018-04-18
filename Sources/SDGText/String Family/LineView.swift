@@ -15,7 +15,7 @@
 import SDGControlFlow
 
 /// A view of a string’s contents as a collection of lines.
-public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection {
+public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, CustomReflectable, MutableCollection, RangeReplaceableCollection, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -138,6 +138,16 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         }
     }
 
+    // MARK: - CustomReflectable
+
+    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    /// The custom mirror for this instance.
+    public var customMirror: Mirror {
+        return Mirror(self, children: [
+            "base" : base,
+            ], displayStyle: .struct)
+    }
+
     // MARK: - RangeReplaceableCollection
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
@@ -161,5 +171,13 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         let replacementStart = subrange.lowerBound.start ?? base.scalars.endIndex
         let replacementEnd = subrange.upperBound.start ?? base.scalars.endIndex
         base.scalars.replaceSubrange(replacementStart ..< replacementEnd, with: replacement.scalars)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    @_inlineable public var description: String {
+        return String(describing: base)
     }
 }
