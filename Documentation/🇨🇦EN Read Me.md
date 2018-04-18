@@ -125,7 +125,7 @@ enum ApplicationLocalization : String, Localization {
 }
 
 // Define
-let text = UserFacingText<ApplicationLocalization>({ localization in
+let text = UserFacing<StrictString, ApplicationLocalization>({ localization in
     switch localization {
     case .english:
         return "Hello, world!"
