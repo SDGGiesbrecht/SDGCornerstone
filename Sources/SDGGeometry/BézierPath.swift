@@ -1,5 +1,5 @@
 /*
- Cocoa.swift
+ BézierPath.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -26,14 +26,4 @@ public typealias BézierPath = NSBezierPath
 // MARK: - #if canImport(UIKit)
 // `NSBezierPath` or `UIBezierPath`.
 public typealias BézierPath = UIBezierPath
-#endif
-
-#if canImport(AppKit)
-// MARK: - #if canImport(AppKit)
-// `NSFont` or `UIFont`.
-public typealias Font = NSFont
-#elseif canImport(UIKit)
-// MARK: - #if canImport(UIKit)
-// `NSFont` or `UIFont`.
-public typealias Font = UIFont
 #endif
