@@ -117,13 +117,33 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     /// Returns the HTML representation.
     public func html() -> StrictString {
-        // [_Warning: Needs to comment source._]
-        var html = source
-        html.replaceMatches(for: [beginSuperscript], with: "<sup>".scalars)
-        html.replaceMatches(for: [endSuperscript], with: "</sup>".scalars)
-        html.replaceMatches(for: [beginSubscript], with: "<sub>".scalars)
-        html.replaceMatches(for: [endSubscript], with: "</sub>".scalars)
-        return html
+        var html: String = ""
+        for scalar in source {
+            switch scalar {
+
+            // Escape
+            case "&":
+                html += "&#x26;"
+            case "<":
+                html += "&#x3C;"
+            case ">":
+                html += "&#x3E;"
+
+            // Markup
+            case beginSuperscript:
+                html += "<sup>"
+            case endSuperscript:
+                html += "</sup>"
+            case beginSubscript:
+                html += "<sub>"
+            case endSubscript:
+                html += "</sub>"
+
+            default:
+                html.scalars.append(scalar)
+            }
+        }
+        return StrictString(html)
     }
 
     /// Returns the rich text representation.
