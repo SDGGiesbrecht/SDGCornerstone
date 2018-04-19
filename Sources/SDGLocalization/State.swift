@@ -511,7 +511,7 @@ internal enum State : String {
         case .niger:
             return "Niger"
         case .togo:
-            return "togo"
+            return "Togo"
         case .burundi:
             return "Burundi"
         case .vanuatu:
