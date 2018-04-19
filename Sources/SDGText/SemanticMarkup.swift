@@ -146,6 +146,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
         return StrictString(html)
     }
 
+    #if canImport(AppKit) || canImport(UIKit)
     /// Returns the rich text representation.
     public func richText(font: Font) -> NSAttributedString {
 
@@ -168,6 +169,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
             preconditionFailure(error.localizedDescription)
         }
     }
+    #endif
 
     /// Returns a raw text approximation by removing all markup.
     ///
@@ -253,7 +255,11 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
     /// Returns the custom playground description for this instance.
     @_inlineable public var playgroundDescription: Any {
-        return richText(font: Font.systemFont(ofSize: Font.systemFontSize))
+        #if canImport(AppKit) || canImport(UIKit)
+            return richText(font: Font.systemFont(ofSize: Font.systemFontSize))
+        #else
+            return rawTextApproximation()
+        #endif
     }
 
     // MARK: - CustomStringConvertible
