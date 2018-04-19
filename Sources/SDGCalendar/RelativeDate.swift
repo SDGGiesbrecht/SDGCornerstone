@@ -15,7 +15,7 @@
 import SDGControlFlow
 import SDGCornerstoneLocalizations
 
-internal struct RelativeDate : CustomReflectable, DateDefinition, TextualPlaygroundDisplay {
+internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -30,27 +30,6 @@ internal struct RelativeDate : CustomReflectable, DateDefinition, TextualPlaygro
 
     internal let baseDate: CalendarDate
     internal let intervalSince: CalendarInterval<FloatMax>
-
-    // MARK: - CustomReflectable
-
-    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
-    /// The custom mirror for this instance.
-    public var customMirror: Mirror {
-        return Mirror(self, children: [
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "baseDate"
-                }
-            }).resolved()): baseDate,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "intervalSince"
-                }
-            }).resolved()): intervalSince
-            ], displayStyle: .struct)
-    }
 
     // MARK: - CustomStringConvertible
 

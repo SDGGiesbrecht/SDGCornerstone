@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGLocalization
 import SDGCornerstoneLocalizations
 
-internal struct HebrewDate : CustomReflectable, DateDefinition, TextualPlaygroundDisplay {
+internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -131,45 +131,6 @@ internal struct HebrewDate : CustomReflectable, DateDefinition, TextualPlaygroun
     internal let day: HebrewDay
     internal let hour: HebrewHour
     internal let part: HebrewPart
-
-    // MARK: - CustomReflectable
-
-    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
-    /// The custom mirror for this instance.
-    public var customMirror: Mirror {
-        return Mirror(self, children: [
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "year"
-                }
-            }).resolved()): year,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "month"
-                }
-            }).resolved()): month,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "day"
-                }
-            }).resolved()): day,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "hour"
-                }
-            }).resolved()): hour,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "part"
-                }
-            }).resolved()): part
-            ], displayStyle: .struct)
-    }
 
     // MARK: - CustomStringConvertible
 

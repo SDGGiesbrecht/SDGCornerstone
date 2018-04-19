@@ -15,7 +15,7 @@
 import SDGControlFlow
 import SDGCornerstoneLocalizations
 
-internal struct GregorianDate : CustomReflectable, DateDefinition, TextualPlaygroundDisplay {
+internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -86,51 +86,6 @@ internal struct GregorianDate : CustomReflectable, DateDefinition, TextualPlaygr
     internal let hour: GregorianHour
     internal let minute: GregorianMinute
     internal let second: GregorianSecond
-
-    // MARK: - CustomReflectable
-
-    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
-    /// The custom mirror for this instance.
-    public var customMirror: Mirror {
-        return Mirror(self, children: [
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "year"
-                }
-            }).resolved()): year,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "month"
-                }
-            }).resolved()): month,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "day"
-                }
-            }).resolved()): day,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "hour"
-                }
-            }).resolved()): hour,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "minute"
-                }
-            }).resolved()): minute,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "second"
-                }
-            }).resolved()): second
-            ], displayStyle: .struct)
-    }
 
     // MARK: - CustomStringConvertible
 

@@ -18,7 +18,7 @@ import SDGControlFlow
 import SDGCollections
 
 /// A set of preferences for a particular domain.
-public final class PreferenceSet : CustomReflectable {
+public final class PreferenceSet {
 
     // MARK: - Static Properties
 
@@ -206,16 +206,5 @@ public final class PreferenceSet : CustomReflectable {
     public func reset() {
         writeToDisk([:])
         update(fromExternalState: [:])
-    }
-
-    // MARK: - CustomReflectable
-
-    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
-    /// The custom mirror for this instance.
-    public var customMirror: Mirror {
-        return Mirror(self, children: [
-            "domain": possibleDebugDomain,
-            "contents": values
-            ], displayStyle: .class)
     }
 }

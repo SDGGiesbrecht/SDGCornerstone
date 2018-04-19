@@ -19,7 +19,7 @@ import SDGControlFlow
 /// A persistent user preference which can hold any codable value.
 ///
 /// `Preference` instances are obtained from `PreferenceSet.subscript(key:)`.
-public struct Preference : CustomReflectable, Equatable, TransparentWrapper {
+public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -175,16 +175,6 @@ public struct Preference : CustomReflectable, Equatable, TransparentWrapper {
             }
         }
         return converted as! T? // swiftlint:disable:this force_cast
-    }
-
-    // MARK: - CustomReflectable
-
-    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
-    /// The custom mirror for this instance.
-    public var customMirror: Mirror {
-        return Mirror(self, children: [
-            "propertyListObject": propertyListObject as Any
-            ], displayStyle: .struct)
     }
 
     // MARK: - Equatable

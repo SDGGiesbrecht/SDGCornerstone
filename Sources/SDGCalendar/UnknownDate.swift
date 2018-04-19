@@ -15,7 +15,7 @@
 import SDGLocalization
 import SDGCornerstoneLocalizations
 
-internal struct UnknownDate : CustomReflectable, DateDefinition {
+internal struct UnknownDate : DateDefinition {
 
     // MARK: - Initialization
 
@@ -30,33 +30,6 @@ internal struct UnknownDate : CustomReflectable, DateDefinition {
     internal let encodingIdentifier: StrictString
     internal let encodedDefinition: StrictString
     internal let lastCalculatedInstant: CalendarInterval<FloatMax>
-
-    // MARK: - CustomReflectable
-
-    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
-    /// The custom mirror for this instance.
-    public var customMirror: Mirror {
-        return Mirror(self, children: [
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "encodingIdentifier"
-                }
-            }).resolved()): encodingIdentifier,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "encodedDefinition"
-                }
-            }).resolved()): lastCalculatedInstant,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "lastCalculatedInstant"
-                }
-            }).resolved()): encodedDefinition
-            ], displayStyle: .struct)
-    }
 
     // MARK: - DateDefinition
 

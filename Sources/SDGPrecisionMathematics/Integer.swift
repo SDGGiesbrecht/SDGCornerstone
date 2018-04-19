@@ -26,7 +26,7 @@ import SDGCornerstoneLocalizations
 /// let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
 /// let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
 /// ```
-public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, CustomReflectable, Equatable, Hashable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, RandomizableNumber, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
+public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, RandomizableNumber, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -128,27 +128,6 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Cu
                 return precedingValue.wholeMagnitude < followingValue.wholeMagnitude
             }
         }
-    }
-
-    // MARK: - CustomReflectable
-
-    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
-    /// The custom mirror for this instance.
-    public var customMirror: Mirror {
-        return Mirror(self, children: [
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "magnitude"
-                }
-            }).resolved()): unsafeDefinition.magnitude,
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "isNegative"
-                }
-            }).resolved()): unsafeDefinition.isNegative
-            ], displayStyle: .struct)
     }
 
     // MARK: - CustomStringConvertible

@@ -17,7 +17,7 @@ import Foundation
 import SDGControlFlow
 import SDGCornerstoneLocalizations
 
-internal struct FoundationDate : CustomReflectable, DateDefinition, TransparentWrapper {
+internal struct FoundationDate : DateDefinition, TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -29,21 +29,6 @@ internal struct FoundationDate : CustomReflectable, DateDefinition, TransparentW
     // MARK: - Properties
 
     internal let date: Date
-
-    // MARK: - CustomReflectable
-
-    // [_Inherit Documentation: SDGCornerstone.CustomReflectable.customMirror_]
-    /// The custom mirror for this instance.
-    public var customMirror: Mirror {
-        return Mirror(self, children: [
-            String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "date"
-                }
-            }).resolved()): date
-            ], displayStyle: .struct)
-    }
 
     // MARK: - DateDefinition
 

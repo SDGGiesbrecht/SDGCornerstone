@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension CustomDebugStringConvertible {
+extension CustomReflectable {
 
     // [_Define Documentation: SDGCornerstone.CustomReflectable.customMirror_]
     /// The custom mirror for this instance.
