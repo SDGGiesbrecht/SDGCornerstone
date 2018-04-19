@@ -42,4 +42,8 @@ import SDGPersistenceTestUtilities
 
     let specification = testSpecificationDirectory(file).appendingPathComponent("CustomStringConvertible").appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName) + ".txt")
     SDGPersistenceTestUtilities.compare(report, against: specification, overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing, file: file, line: line)
+
+    if let playround = instance as? CustomPlaygroundDisplayConvertible {
+        _ = playround.playgroundDescription
+    }
 }
