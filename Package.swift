@@ -251,7 +251,9 @@ let package = Package(
             ]),
         .testTarget(name: "SDGCollectionsTests", dependencies: [
             "SDGCollectionsTestUtilities", "SDGXCTestUtilities",
-            "SDGMathematics"
+            "SDGMathematics",
+            "SDGCornerstoneLocalizations",
+            "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGTextTests", dependencies: [
             "SDGText", "SDGXCTestUtilities",
