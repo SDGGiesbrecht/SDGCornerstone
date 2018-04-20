@@ -236,6 +236,8 @@ class SDGLocalizationAPITests : TestCase {
         XCTAssertEqual(22.abbreviatedEnglishOrdinal().rawTextApproximation(), "22nd")
         XCTAssertEqual(23.abbreviatedEnglishOrdinal().rawTextApproximation(), "23rd")
         XCTAssertEqual(24.abbreviatedEnglishOrdinal().rawTextApproximation(), "24th")
+
+        testCustomStringConvertibleConformance(of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"), localizations: _InterfaceLocalization.self, uniqueTestName: "Invalid Digit", overwriteSpecificationInsteadOfFailing: false)
     }
 
     static var allTests: [(String, (SDGLocalizationAPITests) -> () throws -> Void)] {
