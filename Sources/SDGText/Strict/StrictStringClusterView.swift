@@ -12,11 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 extension StrictString {
 
     // [_Inherit Documentation: SDGCornerstone.StringFamily.ClusterView_]
     /// A view of a string’s contents as a collection of extended grapheme clusters.
-    public struct ClusterView : BidirectionalCollection, Collection, ExtendedGraphemeClusterView, RangeReplaceableCollection {
+    public struct ClusterView : BidirectionalCollection, Collection, ExtendedGraphemeClusterView, RangeReplaceableCollection, TransparentWrapper {
 
         // MARK: - Initialization
 
@@ -126,6 +128,14 @@ extension StrictString {
             let replacement = StrictString(ClusterView.normalize(newElements))
 
             self = (preceding + replacement + succeeding).clusters
+        }
+
+        // MARK: - TransparentWrapper
+
+        // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+        /// The wrapped instance.
+        public var wrappedInstance: Any {
+            return string
         }
     }
 }

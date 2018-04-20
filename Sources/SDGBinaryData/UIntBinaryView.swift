@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGCollections
 
 /// A view of the contents of a fixed‐length unsigned integer as a collection of bits.
-public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
+public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, CustomStringConvertible, MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -25,6 +25,12 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     }
 
     // MARK: - Static Properties
+
+    // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+    /// The position of the first element in a non‐empty collection.
+    @_inlineable public static var startIndex: Index {
+        return 0
+    }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
@@ -74,10 +80,14 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
     /// The position of the first element in a non‐empty collection.
-    public let startIndex: Index = 0
+    @_inlineable public var startIndex: Index {
+        return BinaryView.startIndex
+    }
     // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
     /// The position following the last valid index.
-    public let endIndex: Index = BinaryView.endIndex
+    @_inlineable public var endIndex: Index {
+        return BinaryView.endIndex
+    }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
     /// Returns the index immediately after the specified index.
@@ -124,5 +134,16 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
             let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << index).bitwiseNot())
             uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << index)
         }
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        let bits = self.map { bit in
+            return bit ? "1" : "0"
+        }
+        return bits.joined()
     }
 }

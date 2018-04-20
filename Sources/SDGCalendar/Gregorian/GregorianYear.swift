@@ -231,7 +231,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
     public init(unsafeRawValue: Int) {
-        assert(unsafeRawValue ≠ 0, UserFacingText({ (localization: APILocalization) in
+        assert(unsafeRawValue ≠ 0, UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
                 return "0 is not a valid Gregorian year."

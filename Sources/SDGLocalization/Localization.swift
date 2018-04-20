@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGLogic
 
 /// An enumeration that describes the set of localizations available for a particular usage.
@@ -21,7 +22,7 @@ import SDGLogic
 ///     - `init?(code: String)`, and
 ///     - `var code: String { get }`
 ///   - `static var developmentLocalization: Self { get }`
-public protocol Localization {
+public protocol Localization : TextualPlaygroundDisplay {
 
     // [_Define Documentation: SDGCornerstone.Localization.init(code:)_]
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
@@ -235,6 +236,17 @@ extension Localization {
     /// Use this to convert abritrary, user‐provided icons, even when they are not directly supported by the application.
     public static func icon(for code: String) -> StrictString? {
         return ContentLocalization(reasonableMatchFor: code)?.icon
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        guard let contentLocalization = ContentLocalization(exactly: code) else {
+            return code
+        }
+        return String(contentLocalization.localizedIsolatedName())
     }
 }
 

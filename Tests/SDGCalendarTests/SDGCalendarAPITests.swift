@@ -13,9 +13,12 @@
  */
 
 import SDGMathematics
+import SDGCalendar
+import SDGCornerstoneLocalizations
+
 import SDGMathematicsTestUtilities
 import SDGPersistenceTestUtilities
-import SDGCalendar
+import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
 class SDGCalendarAPITests : TestCase {
@@ -140,6 +143,23 @@ class SDGCalendarAPITests : TestCase {
             }
         }
         testDecoding(CalendarDate.self, failsFor: Mock()) // Empty container array.
+
+        for n in 1 ... 12 {
+            let date = CalendarDate(gregorian: GregorianMonth(ordinal: n), GregorianDay(n), 2000 + n, at: GregorianHour(n), GregorianMinute(n), GregorianSecond(FloatMax(n)))
+            testCustomStringConvertibleConformance(of: date, localizations: InterfaceLocalization.self, uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")", overwriteSpecificationInsteadOfFailing: false)
+        }
+        let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
+        testCustomStringConvertibleConformance(of: bc, localizations: InterfaceLocalization.self, uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")", overwriteSpecificationInsteadOfFailing: false)
+        for n in 1 ... 12 {
+            let date = CalendarDate(hebrew: HebrewMonth(ordinal: n, leapYear: false), HebrewDay(n), 5700 + n, at: HebrewHour(n), part: HebrewPart(FloatMax(n)))
+            testCustomStringConvertibleConformance(of: date, localizations: InterfaceLocalization.self, uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")", overwriteSpecificationInsteadOfFailing: false)
+        }
+        for n in 21 ... 22 {
+            let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
+            testCustomStringConvertibleConformance(of: adar, localizations: InterfaceLocalization.self, uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")", overwriteSpecificationInsteadOfFailing: false)
+        }
+        let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
+        testCustomStringConvertibleConformance(of: relative, localizations: InterfaceLocalization.self, uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testCalendarInterval() {

@@ -15,10 +15,11 @@
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
+import SDGControlFlow
 import SDGLogic
 
 /// A command line shell.
-public class Shell {
+public class Shell : TransparentWrapper {
 
     // MARK: - Static Properties
 
@@ -94,6 +95,14 @@ public class Shell {
         return try process.run(["\u{2D}c", commandString], in: workingDirectory, with: environment) {
             reportProgress($0)
         }
+    }
+
+    // MARK: - TransparentWrapper
+
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    public var wrappedInstance: Any {
+        return process
     }
 }
 

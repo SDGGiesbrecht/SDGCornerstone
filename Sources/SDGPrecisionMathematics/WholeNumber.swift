@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGLogic
 import SDGRandomization
 import SDGCornerstoneLocalizations
@@ -26,7 +27,7 @@ import SDGCornerstoneLocalizations
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
-public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable, PointProtocol, RandomizableNumber, Strideable, Subtractable, TextConvertibleNumber, WholeArithmetic, WholeNumberProtocol {
+public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable, PointProtocol, RandomizableNumber, Strideable, Subtractable, TextConvertibleNumber, TextualPlaygroundDisplay, WholeArithmetic, WholeNumberProtocol {
 
     // MARK: - Properties
 
@@ -136,6 +137,19 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         return false // Equal
     }
 
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inDigits()
+            }
+        }).resolved())
+    }
+
     // MARK: - Equatable
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
@@ -206,7 +220,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
     public static func −= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
-        assert(precedingValue ≥ followingValue, UserFacingText({ [precedingValue] (localization: APILocalization) in
+        assert(precedingValue ≥ followingValue, UserFacing<StrictString, APILocalization>({ [precedingValue] localization in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
                 return StrictString("\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(WholeNumber.self).")

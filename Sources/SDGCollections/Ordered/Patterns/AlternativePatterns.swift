@@ -12,10 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A pattern that matches against several alternative patterns.
 ///
 /// The order of the alternatives is significant. If multiple alternatives match, preference will be given to one higher in the list.
-public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
+public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, CustomStringConvertible, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -81,5 +83,14 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element> {
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     @_inlineable public override func reversed() -> AlternativePatterns<Element> {
         return AlternativePatterns(alternatives.map({ $0.reversed() }))
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    @_inlineable public var description: String {
+        let entries = alternatives.map { "(" + String(describing: $0) + ")" }
+        return entries.joined(separator: " ∨ ")
     }
 }

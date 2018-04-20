@@ -35,7 +35,8 @@ extension FloatFamily {
         let converted = Self(random) ÷ Self(UInt64.max)
 
         // lowerBound ..< upperBound
-        self = range.lowerBound + ((range.upperBound − range.lowerBound) × converted)
+        let rangeSize: Self = range.upperBound − range.lowerBound
+        self = range.lowerBound + (rangeSize × converted)
     }
 }
 

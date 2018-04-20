@@ -48,14 +48,14 @@ import SDGCornerstoneLocalizations
     let mean = sum ÷ TimeInterval(iterations)
 
     if mean > duration {
-        fail(String(UserFacingText({ (localization: APILocalization) in
+        fail(String(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
                 return StrictString("“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds).")
             }
         }).resolved()), file: file, line: line)
     } else {
-        print(UserFacingText({ (localization: APILocalization) in
+        print(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
             case .englishCanada:
                 return StrictString("• “\(testName)” took an average of \(mean) seconds.")

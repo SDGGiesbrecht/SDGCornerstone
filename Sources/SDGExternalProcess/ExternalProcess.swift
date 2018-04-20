@@ -23,7 +23,7 @@ import SDGPersistence
 import SDGLocalization
 
 /// An external process.
-public final class ExternalProcess {
+public final class ExternalProcess : TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -116,6 +116,14 @@ public final class ExternalProcess {
         } else {
             throw Error(code: Int(exitCode), output: output)
         }
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return executable.path
     }
 }
 

@@ -242,14 +242,18 @@ let package = Package(
             ]),
         .testTarget(name: "SDGBinaryDataTests", dependencies: [
             "SDGBinaryData", "SDGXCTestUtilities",
-            "SDGMathematicsTestUtilities"
+            "SDGCornerstoneLocalizations",
+            "SDGMathematicsTestUtilities",
+            "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGMathematicsTests", dependencies: [
             "SDGMathematicsTestUtilities", "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGCollectionsTests", dependencies: [
             "SDGCollectionsTestUtilities", "SDGXCTestUtilities",
-            "SDGMathematics"
+            "SDGMathematics",
+            "SDGCornerstoneLocalizations",
+            "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGTextTests", dependencies: [
             "SDGText", "SDGXCTestUtilities",
@@ -282,14 +286,18 @@ let package = Package(
             ]),
         .testTarget(name: "SDGCalendarTests", dependencies: [
             "SDGCalendar", "SDGXCTestUtilities",
+            "SDGCornerstoneLocalizations",
             "SDGMathematicsTestUtilities",
-            "SDGPersistenceTestUtilities"
+            "SDGPersistenceTestUtilities",
+            "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGPrecisionMathematicsTests", dependencies: [
             "SDGPrecisionMathematics", "SDGXCTestUtilities",
             "SDGBinaryData",
+            "SDGCornerstoneLocalizations",
             "SDGMathematicsTestUtilities",
-            "SDGPersistenceTestUtilities"
+            "SDGPersistenceTestUtilities",
+            "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGConcurrencyTests", dependencies: [
             "SDGConcurrency", "SDGXCTestUtilities"

@@ -12,10 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGLogic
+import SDGCornerstoneLocalizations
 
 /// A Hebrew month of a particular year.
-public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimensionalPoint, PointProtocol {
+public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimensionalPoint, PointProtocol, TextualPlaygroundDisplay {
 
     // MARK: - Properties
 
@@ -44,6 +46,21 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     ///     - followingValue: Another value.
     public static func < (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Bool {
         return (precedingValue.year, precedingValue.month) < (followingValue.year, followingValue.month)
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+            switch localization {
+            case .englishUnitedKingdom:
+                return self.month.inEnglish() + " " + self.year.inEnglishDigits()
+            case .englishUnitedStates, .englishCanada:
+                return self.month.inEnglish() + ", " + self.year.inEnglishDigits()
+            }
+        }).resolved())
     }
 
     // MARK: - Decodable

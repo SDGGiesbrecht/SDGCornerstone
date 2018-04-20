@@ -12,10 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGLocalization
+import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the week.
-public protocol Weekday : ConsistentlyOrderedCalendarComponent {
+public protocol Weekday : ConsistentlyOrderedCalendarComponent, TextualPlaygroundDisplay {
 
 }
 
@@ -41,5 +43,18 @@ extension Weekday {
         default:
             unreachable()
         }
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inEnglish()
+            }
+        }).resolved())
     }
 }

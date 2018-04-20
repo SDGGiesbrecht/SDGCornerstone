@@ -13,9 +13,10 @@
  */
 
 import SDGControlFlow
+import SDGCornerstoneLocalizations
 
 /// A month of the Gregorian year.
-public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent {
+public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent, TextualPlaygroundDisplay {
 
     // MARK: - Cases
 

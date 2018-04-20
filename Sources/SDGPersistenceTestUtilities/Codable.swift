@@ -41,7 +41,7 @@ import SDGCornerstoneLocalizations
                 let data = specification.file
                 let array = try JSONDecoder().decode([T].self, from: data)
                 guard let decoded = array.first else {
-                    fail(String(UserFacingText({ (localization: APILocalization) in
+                    fail(String(UserFacing<StrictString, APILocalization>({ localization in
                         switch localization {
                         case .englishCanada: // [_Exempt from Test Coverage_]
                             return StrictString("Empty array decoded from “\(specificationURL)”.")
@@ -85,7 +85,7 @@ import SDGCornerstoneLocalizations
     do {
         let encoded = try JSONEncoder().encode([invalidMock])
         let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
-        fail(String(UserFacingText({ (localization: APILocalization) in
+        fail(String(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
                 return StrictString("No error thrown. Decoded: \(decoded)")

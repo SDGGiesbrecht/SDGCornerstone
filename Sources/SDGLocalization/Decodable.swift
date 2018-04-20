@@ -23,7 +23,7 @@ extension Decodable {
         let other = try container.decode(Other.self)
 
         func generateError(underlyingError: Error?) -> DecodingError {
-            let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: String(UserFacingText({ (localization: _APILocalization) in
+            let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: String(UserFacing<StrictString, _APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return StrictString("Invalid “\(Other.self)” representation of “\(Self.self)”: \(other)")

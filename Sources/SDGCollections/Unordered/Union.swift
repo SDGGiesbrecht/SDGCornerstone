@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A union of two sets.
-public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinition where Base1.Element == Base2.Element {
+public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : CustomStringConvertible, SetDefinition, TextualPlaygroundDisplay where Base1.Element == Base2.Element {
 
     // MARK: - Initialization
 
@@ -31,6 +33,14 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : SetDefinitio
 
     @_versioned internal let a: Base1
     @_versioned internal let b: Base2
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    @_inlineable public var description: String {
+        return "(" + String(describing: a) + ") ∪ (" + String(describing: b) + ")"
+    }
 
     // MARK: - SetDefinition
 

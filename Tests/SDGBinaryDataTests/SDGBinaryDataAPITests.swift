@@ -13,10 +13,12 @@
  */
 
 import SDGBinaryData
+import SDGCornerstoneLocalizations
 
 import SDGXCTestUtilities
 
 import SDGMathematicsTestUtilities
+import SDGLocalizationTestUtilities
 
 class SDGBinaryDataAPITests : TestCase {
 
@@ -38,6 +40,10 @@ class SDGBinaryDataAPITests : TestCase {
         XCTAssertEqual(alternating.bitwiseAnd(with: sorted), Data(bytes: [0b00000000, 0b01010101]))
         XCTAssertEqual(alternating.bitwiseOr(with: sorted), Data(bytes: [0b01010101, 0b11111111]))
         XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data(bytes: [0b01010101, 0b10101010]))
+
+        var forDescription = Data([0, 0])
+        forDescription.binary[11] = true
+        testCustomStringConvertibleConformance(of: forDescription.binary, localizations: InterfaceLocalization.self, uniqueTestName: "10th", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testDataStream() {
@@ -63,10 +69,17 @@ class SDGBinaryDataAPITests : TestCase {
         XCTAssertEqual(results, [forwards, backwards])
     }
 
+    func testUInt() {
+        var forDescription: UInt8 = 0
+        forDescription.binary[0] = true
+        testCustomStringConvertibleConformance(of: forDescription.binary, localizations: InterfaceLocalization.self, uniqueTestName: "1st", overwriteSpecificationInsteadOfFailing: false)
+    }
+
     static var allTests: [(String, (SDGBinaryDataAPITests) -> () throws -> Void)] {
         return [
             ("testData", testData),
-            ("testDataStream", testDataStream)
+            ("testDataStream", testDataStream),
+            ("testUInt", testUInt)
         ]
     }
 }

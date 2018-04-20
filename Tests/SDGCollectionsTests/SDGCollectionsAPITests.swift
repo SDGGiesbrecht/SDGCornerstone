@@ -14,18 +14,27 @@
 
 import SDGLogic
 import SDGCollections
+import SDGCornerstoneLocalizations
+
 import SDGCollectionsTestUtilities
+import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
 import SDGMathematics
 
 class SDGCollectionsAPITests : TestCase {
 
+    func testAbsoluteComplement() {
+        testCustomStringConvertibleConformance(of: (1 ... 10)′, localizations: InterfaceLocalization.self, uniqueTestName: "(0–10)′", overwriteSpecificationInsteadOfFailing: false)
+    }
+
     func testAlternativePatterns() {
-        testPattern(AlternativePatterns([
+        let pattern = AlternativePatterns([
             LiteralPattern([1, 2, 3]),
             LiteralPattern([3, 2, 1])
-            ]), match: [1, 2, 3])
+            ])
+        testPattern(pattern, match: [1, 2, 3])
+        testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "123 ∨ 321", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testArray() {
@@ -307,10 +316,12 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testCompositePattern() {
-        testPattern(CompositePattern([
+        let pattern = CompositePattern([
             LiteralPattern([1, 2]),
             LiteralPattern([3])
-            ]), match: [1, 2, 3])
+            ])
+        testPattern(pattern, match: [1, 2, 3])
+        testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "12 + 3", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testConditionalPattern() {
@@ -406,8 +417,14 @@ class SDGCollectionsAPITests : TestCase {
         testSetDefinitionConformance(of: IntensionalSet<Int>(where: { $0 < 100 }), member: 1, nonmember: 101)
     }
 
+    func testIntersection() {
+        testCustomStringConvertibleConformance(of: (1 ... 10) ∩ (5 ... 15), localizations: InterfaceLocalization.self, uniqueTestName: "1–10 ∩ 5–15", overwriteSpecificationInsteadOfFailing: false)
+    }
+
     func testLiteralPattern() {
-        testPattern(LiteralPattern([1, 2, 3]), match: [1, 2, 3])
+        let pattern = LiteralPattern([1, 2, 3])
+        testPattern(pattern, match: [1, 2, 3])
+        testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "123", overwriteSpecificationInsteadOfFailing: false)
     }
 
     struct MutableSetExample : MutableSet {
@@ -500,8 +517,11 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testNotPattern() {
-        testPattern(NotPattern(LiteralPattern([1])), match: [2])
+        let pattern = NotPattern(LiteralPattern([1]))
+        testPattern(pattern, match: [2])
         XCTAssert(NotPattern(LiteralPattern([1])).matches(in: [1], at: 0).isEmpty)
+
+        testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "¬1", overwriteSpecificationInsteadOfFailing: false)
     }
 
     class CustomPattern : SDGCollections.Pattern<Int> {
@@ -731,8 +751,13 @@ class SDGCollectionsAPITests : TestCase {
         testSetDefinitionConformance(of: IntensionalSet(where: { $0.isEven }) ∆ (1 ... 100), member: 1, nonmember: 2)
     }
 
+    func testUnion() {
+        testCustomStringConvertibleConformance(of: 1...3 ∪ 7...9, localizations: InterfaceLocalization.self, uniqueTestName: "1–3 ∪ 7–9", overwriteSpecificationInsteadOfFailing: false)
+    }
+
     static var allTests: [(String, (SDGCollectionsAPITests) -> () throws -> Void)] {
         return [
+            ("testAbsoluteComplement", testAbsoluteComplement),
             ("testAlternativePatterns", testAlternativePatterns),
             ("testArray", testArray),
             ("testBidirectionalCollection", testBidirectionalCollection),
@@ -744,6 +769,7 @@ class SDGCollectionsAPITests : TestCase {
             ("testDictionary", testDictionary),
             ("testFiniteSet", testFiniteSet),
             ("testIntensionalSet", testIntensionalSet),
+            ("testIntersection", testIntersection),
             ("testLiteralPattern", testLiteralPattern),
             ("testMutableSet", testMutableSet),
             ("testNotPattern", testNotPattern),
@@ -752,7 +778,8 @@ class SDGCollectionsAPITests : TestCase {
             ("testRangeReplaceableCollection", testRangeReplaceableCollection),
             ("testRepetitionPattern", testRepetitionPattern),
             ("testSet", testSet),
-            ("testSymmetricDifference", testSymmetricDifference)
+            ("testSymmetricDifference", testSymmetricDifference),
+            ("testUnion", testUnion)
         ]
     }
 }

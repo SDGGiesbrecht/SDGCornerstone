@@ -285,6 +285,7 @@ class SDGMathematicsAPITests : TestCase {
     }
 
     struct RealArithmeticExample : RealArithmetic {
+
         var value: Double
         init(_ value: Double) {
             self.value = value
@@ -344,6 +345,9 @@ class SDGMathematicsAPITests : TestCase {
         }
         static func arctan(_ tangent: RealArithmeticExample) -> Angle<RealArithmeticExample> {
             return RealArithmeticExample(SDGMathematics.arctan(tangent.value).inRadians).radians
+        }
+        var floatingPointApproximation: FloatMax {
+            return FloatMax(value)
         }
     }
     func testRealArithmetic() {
