@@ -36,6 +36,5 @@ public enum TextConvertibleNumberParseError : PresentableError {
                 }
             }).resolved()
         }
-
     }
 }

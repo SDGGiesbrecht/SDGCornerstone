@@ -12,13 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLocalization
+
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
 extension ExternalProcess {
 
     /// A shell error.
-    public struct Error : Swift.Error {
+    public struct Error : PresentableError {
 
         // MARK: - Initialization
 
@@ -34,6 +36,14 @@ extension ExternalProcess {
 
         /// The output received.
         public let output: String
+
+        // MARK: - PresentableError
+
+        // [_Inherit Documentation: SDGCornerstone.PresentableError.presentableDescription()_]
+        /// Returns a localized description of the error.
+        public func presentableDescription() -> StrictString {
+            return StrictString(output)
+        }
     }
 }
 
