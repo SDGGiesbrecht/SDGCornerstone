@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal enum ContentLocalization : String, Localization {
+internal enum ContentLocalization : String, InputLocalization {
 
     // MARK: - Cases
 

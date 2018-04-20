@@ -25,3 +25,13 @@ public protocol InputLocalization : Localization {
     /// An array containing every case of the enumeration.
     static var cases: [Self] { get }
 }
+
+extension InputLocalization {
+
+    /// Returns the equivalent set of codes.
+    ///
+    /// Use this to compare two `Localization` types with set comparison operations such as `⊆`.
+    public static func codeSet() -> Set<String> {
+        return Set(cases.map({ $0.code }))
+    }
+}
