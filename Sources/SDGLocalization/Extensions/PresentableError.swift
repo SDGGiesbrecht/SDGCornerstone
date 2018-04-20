@@ -12,11 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 /// An error suitable to present to users.
 ///
 /// Conformance Requirements
 ///     - `var localizedDescription: String`
-public protocol PresentableError : CustomStringConvertible, Error {
+public protocol PresentableError : CustomStringConvertible, LocalizedError {
 
     // [_Define Documentation: SDGCornerstone.PresentableError.presentableDescription()_]
     /// Returns a localized description of the error.
@@ -36,7 +38,7 @@ extension PresentableError {
     // MARK: - Error
 
     // The localized description for this error.
-    public var localizedDescription: String {
+    public var errorDescription: String? {
         return String(presentableDescription())
     }
 }
