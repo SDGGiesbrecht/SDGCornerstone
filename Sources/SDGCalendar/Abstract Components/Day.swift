@@ -12,8 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
 /// A calendar compenent representing a day of the month.
-public protocol Day : ConsistentlyOrderedCalendarComponent
+public protocol Day : ConsistentlyOrderedCalendarComponent, TextualPlaygroundDisplay
 where Vector : IntegerProtocol {
 
 }
@@ -25,5 +28,18 @@ extension Day {
     /// Returns the day in English digits. (“1”, “2”, “3”, etc.)
     @_inlineable public func inEnglishDigits() -> StrictString {
         return ordinal.inDigits()
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inEnglishDigits()
+            }
+        }).resolved())
     }
 }

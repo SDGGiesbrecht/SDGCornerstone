@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGControlFlow
 
 // MARK: - Encoding
@@ -38,13 +40,18 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 /// @_versioned internal let beginSubscript: UnicodeScalar = "\u{107002}"
 /// @_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
-public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection {
+public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
     /// Creates semantic markup from raw text.
     @_inlineable public init(_ rawText: StrictString) {
         source = rawText
+    }
+
+    /// Creates semantic markup from raw text.
+    @_inlineable public init(_ rawText: String) {
+        source = StrictString(rawText)
     }
 
     // MARK: - Properties
@@ -107,6 +114,64 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     }
 
     // MARK: - Output
+
+    /// Returns the HTML representation.
+    public func html() -> StrictString {
+        var html: String = ""
+        for scalar in source {
+            switch scalar {
+
+            // Escape
+            case "&":
+                html += "&#x26;"
+            case "<":
+                html += "&#x3C;"
+            case ">":
+                html += "&#x3E;"
+
+            // Markup
+            case beginSuperscript:
+                html += "<sup>"
+            case endSuperscript:
+                html += "</sup>"
+            case beginSubscript:
+                html += "<sub>"
+            case endSubscript:
+                html += "</sub>"
+
+            default:
+                html.scalars.append(scalar)
+            }
+        }
+        return StrictString(html)
+    }
+
+    #if canImport(AppKit) || canImport(UIKit)
+    // MARK: - #if canImport(AppKit) || canImport(UIKit)
+
+    /// Returns the rich text representation.
+    public func richText(font: Font) -> NSAttributedString {
+
+        var modified = "<span style=\u{22}"
+
+        modified += "font\u{2D}family: &#x22;" + font.fontName + "&#x22;;"
+        modified += "font\u{2D}size: \(font.pointSize)pt;"
+
+        modified += "\u{22}>"
+        modified += String(html())
+        modified += "</span>"
+
+        let data = modified.data(using: .utf8)!
+        do {
+            return try NSAttributedString(data: data, options: [
+                NSAttributedString.DocumentReadingOptionKey.characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue),
+            NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
+            ], documentAttributes: nil)
+        } catch {
+            preconditionFailure(error.localizedDescription)
+        }
+    }
+    #endif
 
     /// Returns a raw text approximation by removing all markup.
     ///
@@ -185,6 +250,26 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     /// Accesses the element at the specified position.
     @_inlineable public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
         return source[position]
+    }
+
+    // MARK: - CustomPlaygroundDisplayConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
+    /// Returns the custom playground description for this instance.
+    @_inlineable public var playgroundDescription: Any {
+        #if canImport(AppKit) || canImport(UIKit)
+            return richText(font: Font.systemFont(ofSize: Font.systemSize))
+        #else
+            return rawTextApproximation()
+        #endif
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    @_inlineable public var description: String {
+        return String(rawTextApproximation())
     }
 
     // MARK: - Equatable

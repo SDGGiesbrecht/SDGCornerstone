@@ -12,9 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGLocalization
+import SDGCornerstoneLocalizations
 
-internal struct HebrewDate : DateDefinition {
+internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -129,6 +131,22 @@ internal struct HebrewDate : DateDefinition {
     internal let day: HebrewDay
     internal let hour: HebrewHour
     internal let part: HebrewPart
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+            let date = CalendarDate(definition: self)
+            switch localization {
+            case .englishUnitedKingdom:
+                return date.hebrewDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish()
+            case .englishUnitedStates, .englishCanada:
+                return date.hebrewDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
+            }
+        }).resolved())
+    }
 
     // MARK: - DateDefinition
 

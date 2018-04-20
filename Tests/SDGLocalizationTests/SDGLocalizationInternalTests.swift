@@ -43,6 +43,8 @@ class SDGLocalizationInternalTests : TestCase {
             } else {
                 XCTFail("\(localization.code) has no icon.")
             }
+
+            testCustomStringConvertibleConformance(of: localization, localizations: InterfaceLocalization.self, uniqueTestName: localization.icon!, overwriteSpecificationInsteadOfFailing: false)
         }
 
         // Make sure each group member is defined.

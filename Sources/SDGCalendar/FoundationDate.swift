@@ -14,7 +14,10 @@
 
 import Foundation
 
-internal struct FoundationDate : DateDefinition {
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
+internal struct FoundationDate : DateDefinition, TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -58,5 +61,13 @@ internal struct FoundationDate : DateDefinition {
     ///     - encoder: The encoder to write data to.
     internal func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: date)
+    }
+
+    // MARK: - TransparentWrapper
+
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    public var wrappedInstance: Any {
+        return date
     }
 }

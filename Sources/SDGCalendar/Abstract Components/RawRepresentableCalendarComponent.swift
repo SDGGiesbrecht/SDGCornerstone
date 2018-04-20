@@ -47,7 +47,7 @@ extension RawRepresentableCalendarComponent {
     /// Creates an instance from a raw value.
     @_inlineable public init(_ value: RawValue) {
         guard let result = Self(possibleRawValue: value) else {
-            preconditionFailure(UserFacingText({ (localization: APILocalization) in
+            preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada: // [_Exempt from Test Coverage_]
                     return StrictString("Raw value invalid for “\(Self.self)”: \(value)")

@@ -21,7 +21,7 @@ import SDGControlFlow
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
 public func primitiveMethod(_ method: String = #function, file: StaticString = #file, line: UInt = #line) -> Never {
-    preconditionFailure(UserFacingText({ (localization: _APILocalization) in
+    preconditionFailure(UserFacing<StrictString, _APILocalization>({ localization in
         return StrictString(_primitiveMethodMessage(for: method)(localization))
     }), file: file, line: line)
 }
@@ -36,13 +36,13 @@ public func primitiveMethod(_ method: String = #function, file: StaticString = #
 ///     - line: The line number. (Provided by default.)
 ///     - column: The column number. (Provided by default.)
 public func unreachable(function: String = #function, file: StaticString = #file, line: UInt = #line, column: UInt = #column) -> Never {
-    preconditionFailure(UserFacingText({ (localization: _APILocalization) in
+    preconditionFailure(UserFacing<StrictString, _APILocalization>({ localization in
         return StrictString(_unreachableMessage(function: function, file: file, line: line, column: column)(localization))
     }), file: file, line: line)
 }
 
 private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String { // [_Exempt from Test Coverage_]
-    return String(UserFacingText({ (localization: _APILocalization) in // [_Exempt from Test Coverage_]
+    return String(UserFacing<StrictString, _APILocalization>({ localization in // [_Exempt from Test Coverage_]
         switch localization {
         case .englishCanada: // [_Exempt from Test Coverage_]
             return StrictString("\(function) has not been implemented yet. (\(file), Line \(line))")
@@ -81,7 +81,7 @@ public func notImplementedYetAndCannotReturn(function: StaticString = #function,
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func precondition<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) {
+public func precondition<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) {
     Swift.precondition(condition, String(message().resolved()), file: file, line: line)
 }
 
@@ -91,7 +91,7 @@ public func precondition<L>(_ condition: @autoclosure () -> Bool, _ message: @au
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) -> Never {
+public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) -> Never {
     Swift.preconditionFailure(String(message().resolved()), file: file, line: line)
 }
 
@@ -102,7 +102,7 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacingText<
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-@_inlineable public func assert<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) {
+@_inlineable public func assert<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) {
     Swift.assert(condition, String(message().resolved()), file: file, line: line)
 }
 
@@ -112,7 +112,7 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacingText<
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-@_inlineable public func assertionFailure<L>(_ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) {
+@_inlineable public func assertionFailure<L>(_ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) {
     Swift.assertionFailure(String(message().resolved()), file: file, line: line)
 }
 
@@ -122,6 +122,6 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacingText<
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func fatalError<L>(_ message: @autoclosure () -> UserFacingText<L>, file: StaticString = #file, line: UInt = #line) -> Never {
+public func fatalError<L>(_ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) -> Never {
     Swift.fatalError(String(message().resolved()), file: file, line: line)
 }

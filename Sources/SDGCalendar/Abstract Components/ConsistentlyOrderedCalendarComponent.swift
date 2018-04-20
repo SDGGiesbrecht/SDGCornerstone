@@ -56,7 +56,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
     ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
     @_inlineable public init(numberAlreadyElapsed: RawValue) {
         guard let result = Self(rawValue: numberAlreadyElapsed) else {
-            preconditionFailure(UserFacingText({ (localization: APILocalization) in
+            preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada: // [_Exempt from Test Coverage_]
                     return StrictString("Invalid raw value “\(numberAlreadyElapsed)” for \(Self.self).")

@@ -19,7 +19,7 @@ import SDGControlFlow
 /// A persistent user preference which can hold any codable value.
 ///
 /// `Preference` instances are obtained from `PreferenceSet.subscript(key:)`.
-public struct Preference : CustomStringConvertible, Equatable {
+public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -177,14 +177,6 @@ public struct Preference : CustomStringConvertible, Equatable {
         return converted as! T? // swiftlint:disable:this force_cast
     }
 
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    /// A textual representation of the instance.
-    @_inlineable public var description: String {
-        return String(describing: propertyListObject)
-    }
-
     // MARK: - Equatable
 
     // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
@@ -195,5 +187,13 @@ public struct Preference : CustomStringConvertible, Equatable {
     ///     - followingValue: Another value to compare.
     @_inlineable public static func == (precedingValue: Preference, followingValue: Preference) -> Bool {
         return precedingValue.propertyListObject == followingValue.propertyListObject
+    }
+
+    // MARK: - TransparentWrapper
+
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    @_inlineable public var wrappedInstance: Any {
+        return propertyListObject as Any
     }
 }

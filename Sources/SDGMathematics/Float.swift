@@ -370,7 +370,9 @@ extension FloatFamily {
             return (π ÷ 2).rad − arctan(1 ÷ tangent)
         } else if tangent > 2 − √3 {
             let r3: Self = √3
-            return (π ÷ 6).rad + arctan((r3 × tangent − (1 as Self)) ÷ (r3 + tangent))
+            let numerator: Self = r3 × tangent − (1 as Self)
+            let referenceTangent: Self = numerator ÷ (r3 + tangent)
+            return (π ÷ 6).rad + arctan(referenceTangent)
         } else {
 
             //   ∞         n + 1     2n − 1
@@ -557,6 +559,12 @@ extension Double : FloatFamily {
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
     /// An instance of *e*.
     public static let e: Double = 0x1.5BF0A8B145769p1
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    @_inlineable public var floatingPointApproximation: FloatMax {
+        return FloatMax(self)
+    }
 }
 
 #if canImport(CoreGraphics)
@@ -602,6 +610,12 @@ extension CGFloat : FloatFamily {
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
     /// An instance of *e*.
     public static let e: CGFloat = CGFloat(Double.e)
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    @_inlineable public var floatingPointApproximation: FloatMax {
+        return FloatMax(NativeType(self))
+    }
 }
 #endif
 
@@ -651,6 +665,12 @@ extension Float80 : Codable, FloatFamily {
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
     /// An instance of *e*.
     public static let e: Float80 = 0x1.5BF0A8B145769535p1
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    @_inlineable public var floatingPointApproximation: FloatMax {
+        return FloatMax(self)
+    }
 }
 #endif
 
@@ -673,4 +693,10 @@ extension Float : FloatFamily {
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
     /// An instance of *e*.
     public static let e: Float = 0x1.5BF0A9p1
+
+    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    @_inlineable public var floatingPointApproximation: FloatMax {
+        return FloatMax(self)
+    }
 }

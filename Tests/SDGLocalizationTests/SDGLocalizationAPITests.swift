@@ -156,7 +156,7 @@ class SDGLocalizationAPITests : TestCase {
 
     func testUserFacingDynamicText() {
 
-        let text = UserFacingDynamicText({ (localization: LocalizationExample, numbers: (Int, Int)) -> StrictString in
+        let text = UserFacingDynamic<StrictString, LocalizationExample, (Int, Int)>({ localization, numbers in
 
             switch localization {
             case .englishUnitedKingdom:
@@ -173,7 +173,7 @@ class SDGLocalizationAPITests : TestCase {
         let simplified = text.static(using: (1, 2))
         XCTAssertEqual(simplified.resolved(for: .englishUnitedKingdom), "Numbers 1 and 2")
 
-        let simple = UserFacingText({ (localization: LocalizationExample) -> StrictString in
+        let simple = UserFacing<StrictString, LocalizationExample>({ localization in
 
             switch localization {
             case .englishUnitedKingdom:

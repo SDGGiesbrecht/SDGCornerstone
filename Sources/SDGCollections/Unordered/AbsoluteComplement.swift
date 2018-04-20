@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// An absolute complement of a set.
-public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition {
+public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible, SetDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -28,6 +30,14 @@ public struct AbsoluteComplement<Base : SetDefinition> : SetDefinition {
     // MARK: - Properties
 
     @_versioned internal let base: Base
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    @_inlineable public var description: String {
+        return "(" + String(describing: base) + ")′"
+    }
 
     // MARK: - SetDefinition
 

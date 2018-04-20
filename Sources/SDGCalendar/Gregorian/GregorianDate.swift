@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal struct GregorianDate : DateDefinition {
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
+internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -83,6 +86,22 @@ internal struct GregorianDate : DateDefinition {
     internal let hour: GregorianHour
     internal let minute: GregorianMinute
     internal let second: GregorianSecond
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+            let date = CalendarDate(definition: self)
+            switch localization {
+            case .englishUnitedKingdom:
+                return date.gregorianDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish()
+            case .englishUnitedStates, .englishCanada:
+                return date.gregorianDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
+            }
+        }).resolved())
+    }
 
     // MARK: - DateDefinition
 

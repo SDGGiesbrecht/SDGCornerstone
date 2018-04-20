@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A pattern that matches if the underlying pattern does not.
-public final class NotPattern<Element : Equatable> : Pattern<Element> {
+public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -98,5 +100,13 @@ public final class NotPattern<Element : Equatable> : Pattern<Element> {
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     @_inlineable public override func reversed() -> NotPattern<Element> {
         return NotPattern(base.reversed())
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    @_inlineable public var description: String {
+        return "¬(" + String(describing: base) + ")"
     }
 }

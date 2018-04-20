@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A pattern that matches against several component patterns contiguously.
-public final class CompositePattern<Element : Equatable> : Pattern<Element>, ExpressibleByArrayLiteral {
+public final class CompositePattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible, ExpressibleByArrayLiteral, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -93,5 +95,14 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Exp
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     @_inlineable public override func reversed() -> CompositePattern<Element> {
         return CompositePattern(components.map({ $0.reversed() }).reversed())
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    @_inlineable public var description: String {
+        let entries = components.map { "(" + String(describing: $0) + ")" }
+        return entries.joined(separator: " + ")
     }
 }

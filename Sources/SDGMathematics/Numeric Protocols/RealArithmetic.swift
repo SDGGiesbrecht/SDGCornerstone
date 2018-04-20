@@ -24,6 +24,7 @@ import SDGControlFlow
 /// - `mutating func formLogarithm(toBase base: Self)`
 /// - `static func sin(_ angle: Angle<Self>) -> Self`
 /// - `static func arctan(_ tangent: Self) -> Angle<Self>`
+/// - `var floatingPointApproximation: FloatMax { get }`
 public protocol RealArithmetic : RationalArithmetic {
 
     // MARK: - Constants
@@ -230,6 +231,12 @@ public protocol RealArithmetic : RationalArithmetic {
     /// - Parameters:
     ///     - cotangent: The cotangent.
     static func arccot(_ cotangent: Self) -> Angle<Self>
+
+    // MARK: - Conversions
+
+    // [_Define Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    /// A floating point approximation.
+    var floatingPointApproximation: FloatMax { get }
 }
 
 extension RealArithmetic {

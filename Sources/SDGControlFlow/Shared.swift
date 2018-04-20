@@ -13,7 +13,7 @@
  */
 
 /// A reference to a shared value.
-public class Shared<Value> {
+public class Shared<Value> : TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -81,5 +81,13 @@ public class Shared<Value> {
                 observers.remove(at: index)
             }
         }
+    }
+
+    // MARK: - TransparentWrapper
+
+    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    /// The wrapped instance.
+    @_inlineable public var wrappedInstance: Any {
+        return value
     }
 }

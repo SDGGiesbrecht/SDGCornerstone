@@ -12,8 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+import SDGCornerstoneLocalizations
+
 /// An hour of the Hebrew day.
-public struct HebrewHour : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent {
+public struct HebrewHour : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, TextualPlaygroundDisplay {
 
     // MARK: - Static Properties
 
@@ -37,6 +40,19 @@ public struct HebrewHour : CardinalCalendarComponent, CodableViaRawRepresentable
     /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).hours
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return self.inDigits()
+            }
+        }).resolved())
     }
 
     // MARK: - PointProtocol

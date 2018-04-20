@@ -117,7 +117,7 @@ extension DateDefinition {
     @_inlineable public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
         guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {
 
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath, debugDescription: String(UserFacingText({ (localization: APILocalization) in
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath, debugDescription: String(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
                     return "Empty container array."

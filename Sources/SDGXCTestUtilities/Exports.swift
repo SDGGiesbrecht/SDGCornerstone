@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if canImport(XCTest)
+#if canImport(XCTest) && (!(os(iOS) || os(watchOS) || os(tvOS)) || targetEnvironment(simulator)) // XCTest does not contain bitcode.
 @_exported import XCTest
 #endif
+
+func aFunctionToTriggerTestCoverage() {} // [_Exempt from Test Coverage_]

@@ -89,7 +89,7 @@ import SDGCornerstoneLocalizations
             }
         } // [_Exempt from Test Coverage_]
 
-        fail(String(UserFacingText({ (localization: APILocalization) in
+        fail(String(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
             case .englishCanada: // [_Exempt from Test Coverage_]
                 return StrictString("String does not match specification.\n\(specification.path)\n\n\(report)\n")
