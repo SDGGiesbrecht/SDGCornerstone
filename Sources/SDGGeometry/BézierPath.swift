@@ -28,28 +28,25 @@ public typealias BézierPath = NSBezierPath
 public typealias BézierPath = UIBezierPath
 #endif
 
-#if canImport(AppKit)
-extension BézierPath {
-    /// Appends an arc of a circle to the receiver’s path.
-    @_inlineable public func appendArc(withCentre centre: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) {
-        return appendArc(withCenter: centre, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
-    }
-}
-#elseif canImport(UIKit)
-extension BézierPath {
-    /// Appends an arc of a circle to the receiver’s path.
-    @_inlineable public func appendArc(withCentre centre: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) {
-        return addArc(withCenter: centre, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
-    }
-}
-#endif
-
-#if canImport(UIKit)
+#if canImport(AppKit) || canImport(UIKit)
+// MARK: - #if canImport(AppKit) || canImport(UIKit)
 extension BézierPath {
 
+    #if canImport(UIKit)
+    // MARK: - #if canImport(UIKit)
     /// Appends a straight line to the receiver’s path.
     @_inlineable public func line(to point: CGPoint) {
         addLine(to: point)
+    }
+    #endif
+
+    /// Appends an arc of a circle to the receiver’s path.
+    @_inlineable public func appendArc(withCentre centre: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) {
+        #if canImport(AppKit)
+        return appendArc(withCenter: centre, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
+        #elseif canImport(UIKit)
+        return addArc(withCenter: centre, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
+        #endif
     }
 }
 #endif

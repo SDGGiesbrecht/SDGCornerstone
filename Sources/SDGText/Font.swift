@@ -27,3 +27,19 @@ public typealias Font = NSFont
 // `NSFont` or `UIFont`.
 public typealias Font = UIFont
 #endif
+
+#if canImport(AppKit) || canImport(UIKit)
+// MARK: - #if canImport(AppKit) || canImport(UIKit)
+
+extension Font {
+
+    /// Returns the size of the standard system font.
+    public class var systemSize: CGFloat {
+        #if os(tvOS)
+            return 29 // From https://developer.apple.com/tvos/human-interface-guidelines/visual-design/typography.
+        #else
+            return systemFontSize
+        #endif
+    }
+}
+#endif
