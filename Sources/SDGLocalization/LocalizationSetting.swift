@@ -153,7 +153,7 @@ public struct LocalizationSetting : Codable, Equatable {
     ///
     /// Otherwise, use `do(_:)` instead.
     public static func setApplicationPreferences(to setting: LocalizationSetting?) {
-        let _ = ProcessInfo.applicationIdentifier // Make sure this was set and it is not just a silent mock preference.
+        _ = ProcessInfo.applicationIdentifier // Make sure this was set and it is not just a silent mock preference.
 
         sdgApplicationPreferences.value.set(to: setting)
 
