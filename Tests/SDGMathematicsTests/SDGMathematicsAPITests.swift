@@ -359,6 +359,11 @@ class SDGMathematicsAPITests : TestCase {
         XCTAssert(cos(RealArithmeticExample(401).radians).value ≈ 0.432_21)
     }
 
+    func testSequence() {
+        XCTAssertEqual(∑[1, 2, 3, 4], 10)
+        XCTAssertEqual(∏[1, 2, 3, 4], 24)
+    }
+
     struct SubtractableNumericExample : Numeric, Subtractable {
         var value: Int
         init(_ value: Int) {
@@ -549,6 +554,7 @@ class SDGMathematicsAPITests : TestCase {
             ("testOrderedEnumeration", testOrderedEnumeration),
             ("testPointProtocol", testPointProtocol),
             ("testRealArithmetic", testRealArithmetic),
+            ("testSequence", testSequence),
             ("testSubtractable", testSubtractable),
             ("testTuple", testTuple),
             ("testUInt", testUInt),

@@ -49,10 +49,12 @@ postfix operator −=
 infix operator ±: AdditionPrecedence
 prefix operator |
 postfix operator |
+prefix operator ∑
 infix operator ×: MultiplicationPrecedence
 infix operator ×=: AssignmentPrecedence
 infix operator ÷: MultiplicationPrecedence
 infix operator ÷=: AssignmentPrecedence
+prefix operator ∏
 precedencegroup ExponentPrecedence {
     associativity: right
     higherThan: MultiplicationPrecedence

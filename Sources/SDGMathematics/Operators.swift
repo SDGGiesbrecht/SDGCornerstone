@@ -90,6 +90,10 @@ prefix operator |
 /// ```
 postfix operator |
 
+// [_Inherit Documentation: SDGCornerstone.Sequence.∑_]
+/// Returns the sum of all values in the sequence.
+prefix operator ∑
+
 // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
 /// Returns the product of the preceding value times the following value.
 ///
@@ -121,6 +125,10 @@ infix operator ÷: MultiplicationPrecedence
 ///     - precedingValue: The value to modify.
 ///     - followingValue: The divisor.
 infix operator ÷=: AssignmentPrecedence
+
+// [_Inherit Documentation: SDGCornerstone.Sequence.∏_]
+/// Returns the product of all values in the sequence.
+prefix operator ∏
 
 /// A precedence group for exponent operators. (e.g. ↑)
 ///
