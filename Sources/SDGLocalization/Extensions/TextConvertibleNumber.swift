@@ -238,7 +238,7 @@ extension TextConvertibleNumber {
                 position += 1 as Self
             } else {
                 if character ∉ formattingSeparators {
-                    throw TextConvertibleNumberParseError.invalidDigit(character)
+                    throw TextConvertibleNumberParseError.invalidDigit(character, entireString: representation)
                 }
             }
         }
