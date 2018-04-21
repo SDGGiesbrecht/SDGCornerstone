@@ -68,9 +68,9 @@ public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresent
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
-            case .englishUnitedKingdom:
+            case .englishUnitedKingdom, .deutschDeutschland:
                 return self.inDigitsInTwentyFourHourFormat()
             case .englishUnitedStates, .englishCanada:
                 return self.inDigitsInTwelveHourFormat() + " " + self.amOrPM()
