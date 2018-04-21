@@ -281,7 +281,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     private func dateEnFrançais<Y : Year, M : Month, D : Day, W : Weekday>(_ majuscules: Casing, an: Y, mois: M, jour: D, jourDeSemaine: W, avecAn: Bool, avecJourDeSemaine: Bool) -> SemanticMarkup {
-        var résultat: SemanticMarkup = avecJourDeSemaine ? "le" : SemanticMarkup(majuscules.apply(to: "le"))
+        var résultat: SemanticMarkup = avecJourDeSemaine ? "le" : SemanticMarkup(majuscules.apply(to: "le")) // [_Exempt from Test Coverage_] Unused so far.
         résultat += " " + jour.enChiffresFrançais()
         résultat += " " + SemanticMarkup(mois._enFrançais(.sentenceMedial))
 
