@@ -13,9 +13,10 @@
  */
 
 import SDGControlFlow
+import SDGText
 import SDGCornerstoneLocalizations
 
-internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
+internal struct GregorianDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -86,22 +87,6 @@ internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
     internal let hour: GregorianHour
     internal let minute: GregorianMinute
     internal let second: GregorianSecond
-
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    /// A textual representation of the instance.
-    public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
-            let date = CalendarDate(definition: self)
-            switch localization {
-            case .englishUnitedKingdom:
-                return date.gregorianDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish()
-            case .englishUnitedStates, .englishCanada:
-                return date.gregorianDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
-            }
-        }).resolved())
-    }
 
     // MARK: - DateDefinition
 
@@ -191,5 +176,33 @@ internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
         try container.encode(hour)
         try container.encode(minute)
         try container.encode(second)
+    }
+
+    // MARK: - MarkupPlaygroundDisplay
+
+    // [_Inherit Documentation: SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup()_]
+    /// The markup representation of the instance.
+    public func playgroundDescriptionMarkup() -> SemanticMarkup {
+        return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
+            let date = CalendarDate(definition: self)
+            switch localization {
+            case .englishUnitedKingdom:
+                return SemanticMarkup(date.gregorianDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish())
+            case .englishUnitedStates, .englishCanada:
+                return SemanticMarkup(date.gregorianDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish())
+            case .deutschDeutschland:
+                return SemanticMarkup(date.gregorianischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch())
+            case .françaisFrance:
+                return date.dateGrégorienneEnFrançais(.sentenceMedial) + " à " + date.heureEnFrançais()
+            case .ελληνικάΕλλάδα:
+                if self.hour == 1 {
+                    return SemanticMarkup(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά() + " στη " + date.ώραΣεΕλληνικά())
+                } else {
+                    return SemanticMarkup(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά() + " στις " + date.ώραΣεΕλληνικά())
+                }
+            case .עברית־ישראל:
+                return SemanticMarkup(date.תאריך־גרגוריאני־בעברית() + " ב־" + date.שעה־בעברית())
+            }
+        }).resolved()
     }
 }

@@ -21,6 +21,18 @@ public protocol Month : TextualPlaygroundDisplay {
     // [_Define Documentation: SDGCornerstone.Month.inEnglish()_]
     /// Returns the English name.
     func inEnglish() -> StrictString
+
+    /// :nodoc:
+    func _aufDeutsch() -> StrictString
+
+    /// :nodoc:
+    func _enFrançais(_ majuscules: Casing) -> StrictString
+
+    /// :nodoc:
+    func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString
+
+    /// :nodoc:  /// מחזירה את השם העברי.
+    func _בעברית() -> StrictString
 }
 
 extension Month {
@@ -30,10 +42,18 @@ extension Month {
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 return self.inEnglish()
+            case .deutschDeutschland:
+                return self._aufDeutsch()
+            case .françaisFrance:
+                return self._enFrançais(.sentenceMedial)
+            case .ελληνικάΕλλάδα:
+                return self._σεΕλληνικά(.ονομαστική)
+            case .עברית־ישראל:
+                return self._בעברית()
             }
         }).resolved())
     }

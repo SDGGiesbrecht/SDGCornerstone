@@ -21,6 +21,18 @@ public protocol Year : TextualPlaygroundDisplay {
     // [_Define Documentation: SDGCornerstone.Year.inEnglishDigits()_]
     /// Returns the year in English digits.
     func inEnglishDigits() -> StrictString
+
+    /// :nodoc:
+    func _inDeutschenZiffern() -> StrictString
+
+    /// :nodoc:
+    func _enChiffresFrançais() -> StrictString
+
+    /// :nodoc:
+    func _σεΕλληνικάΨηφία() -> StrictString
+
+    /// :nodoc:
+    func _בעברית־בספרות() -> StrictString
 }
 
 extension Year {
@@ -30,10 +42,18 @@ extension Year {
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 return self.inEnglishDigits()
+            case .deutschDeutschland:
+                return self._inDeutschenZiffern()
+            case .françaisFrance:
+                return self._enChiffresFrançais()
+            case .ελληνικάΕλλάδα:
+                return self._σεΕλληνικάΨηφία()
+            case .עברית־ישראל:
+                return self._בעברית־בספרות()
             }
         }).resolved())
     }

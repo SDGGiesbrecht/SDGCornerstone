@@ -34,7 +34,7 @@ class SDGPrecisionMathematicsAPITests : TestCase {
         XCTAssertEqual(Integer(randomInRange: −1 ... −1), −1)
 
         let negativeMillion: SDGPrecisionMathematics.Integer = −1000000
-        testCustomStringConvertibleConformance(of: negativeMillion, localizations: InterfaceLocalization.self, uniqueTestName: negativeMillion.inDigits(), overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: negativeMillion, localizations: FormatLocalization.self, uniqueTestName: negativeMillion.inDigits(), overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testRationalNumber() {
@@ -62,9 +62,9 @@ class SDGPrecisionMathematicsAPITests : TestCase {
         XCTAssertEqual(RationalNumber(randomInRange: 1 ... 1), 1)
 
         let simple = (−19 as RationalNumber ÷ 2)
-        testCustomStringConvertibleConformance(of: simple, localizations: InterfaceLocalization.self, uniqueTestName: simple.asSimpleFraction(), overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: simple, localizations: FormatLocalization.self, uniqueTestName: simple.asSimpleFraction(), overwriteSpecificationInsteadOfFailing: false)
         let complex = (50_001 as RationalNumber ÷ 10_000)
-        testCustomStringConvertibleConformance(of: complex, localizations: InterfaceLocalization.self, uniqueTestName: complex.asSimpleFraction(), overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: complex, localizations: FormatLocalization.self, uniqueTestName: complex.asSimpleFraction(), overwriteSpecificationInsteadOfFailing: false)
     }
 
     let undecillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000 000"
@@ -95,8 +95,8 @@ class SDGPrecisionMathematicsAPITests : TestCase {
         XCTAssert(range.contains(WholeNumber(randomInRange: range)))
 
         let thousand: WholeNumber = 1000
-        testCustomStringConvertibleConformance(of: thousand, localizations: InterfaceLocalization.self, uniqueTestName: thousand.inDigits(), overwriteSpecificationInsteadOfFailing: false)
-        testCustomStringConvertibleConformance(of: billion, localizations: InterfaceLocalization.self, uniqueTestName: billion.inDigits(), overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: thousand, localizations: FormatLocalization.self, uniqueTestName: thousand.inDigits(), overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: billion, localizations: FormatLocalization.self, uniqueTestName: billion.inDigits(), overwriteSpecificationInsteadOfFailing: false)
     }
 
     static var allTests: [(String, (SDGPrecisionMathematicsAPITests) -> () throws -> Void)] {

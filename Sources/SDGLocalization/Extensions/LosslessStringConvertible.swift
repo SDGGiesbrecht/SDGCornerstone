@@ -15,7 +15,8 @@
 /// A type that conforms to `Codable` through its `LosslessStringConvertible` interface.
 ///
 /// Conformance Requirements:
-///     - `LosslessStringConvertible`
+///
+/// - `LosslessStringConvertible`
 public protocol CodableViaLosslessStringConvertible : Codable, LosslessStringConvertible {
 
 }

@@ -14,7 +14,9 @@
 
 import SDGLogic
 import SDGMathematics
+import SDGCollections
 import SDGPrecisionMathematics
+import SDGCornerstoneLocalizations
 
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
@@ -76,6 +78,11 @@ class SDGLocalizationAPITests : TestCase {
 
         XCTAssertEqual(LocalizationExample.icon(for: "ca\u{2D}AD"), "🇦🇩CA")
         XCTAssertEqual(LocalizationExample.code(for: "🇦🇩CA"), "ca\u{2D}AD")
+    }
+
+    func testLocalizationRelationships() {
+        XCTAssert(FormatLocalization.codeSet() ⊇ InterfaceLocalization.codeSet(), "Formats should support at least every localization the user interface elements do.")
+        XCTAssert(InterfaceLocalization.codeSet() ⊇ APILocalization.codeSet(), "The user interface elements should support at least every localization the Swift API does.")
     }
 
     func testLocalizationSetting() {
@@ -244,6 +251,7 @@ class SDGLocalizationAPITests : TestCase {
         return [
             ("testBool", testBool),
             ("testLocalization", testLocalization),
+            ("testLocalizationRelationships", testLocalizationRelationships),
             ("testLocalizationSetting", testLocalizationSetting),
             ("testRange", testRange),
             ("testRationalArithmetic", testRationalArithmetic),

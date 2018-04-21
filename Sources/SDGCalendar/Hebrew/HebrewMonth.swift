@@ -467,6 +467,142 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         }
     }
 
+    /// :nodoc:
+    public func _aufDeutsch() -> StrictString {
+        switch self {
+        case .tishrei:
+            return "Tischri"
+        case .cheshvan:
+            return "Cheschwan"
+        case .kislev:
+            return "Kislew"
+        case .tevet:
+            return "Tevet"
+        case .shevat:
+            return "Schevat"
+        case .adarI:
+            return "Adar " + 1.inRomanNumerals()
+        case .adar:
+            return "Adar"
+        case .adarII:
+            return "Adar " + 2.inRomanNumerals()
+        case .nisan:
+            return "Nisan"
+        case .iyar:
+            return "Ijjar"
+        case .sivan:
+            return "Siwan"
+        case .tammuz:
+            return "Tammus"
+        case .av:
+            return "Aw"
+        case .elul:
+            return "Elul"
+        }
+    }
+
+    /// :nodoc:
+    public func _enFrançais(_ majuscules: Casing) -> StrictString {
+        switch self {
+        case .tishrei:
+            return majuscules.apply(to: "tichri")
+        case .cheshvan:
+            return majuscules.apply(to: "hèchvane")
+        case .kislev:
+            return majuscules.apply(to: "kislev")
+        case .tevet:
+            return majuscules.apply(to: "téveth")
+        case .shevat:
+            return majuscules.apply(to: "chevat")
+        case .adarI:
+            return majuscules.apply(to: "adar") + " " + 1.inRomanNumerals()
+        case .adar:
+            return majuscules.apply(to: "adar")
+        case .adarII:
+            return majuscules.apply(to: "adar") + " " + 2.inRomanNumerals()
+        case .nisan:
+            return majuscules.apply(to: "nissane")
+        case .iyar:
+            return majuscules.apply(to: "iyar")
+        case .sivan:
+            return majuscules.apply(to: "sivane")
+        case .tammuz:
+            return majuscules.apply(to: "tamouz")
+        case .av:
+            return majuscules.apply(to: "av")
+        case .elul:
+            return majuscules.apply(to: "éloul")
+        }
+    }
+
+    /// :nodoc:
+    public func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString {
+        switch self {
+        case .tishrei:
+            return "Τισρί"
+        case .cheshvan:
+            return "Χεσβάν"
+        case .kislev:
+            return "Χισλεύ"
+        case .tevet:
+            return "Τεβέθ"
+        case .shevat:
+            return "Σεβάτ"
+        case .adarI:
+            return "Αδάρ " + 1._σεΕλληνικούςΑριθμούς()
+        case .adar:
+            return "Αδάρ"
+        case .adarII:
+            return "Αδάρ " + 2._σεΕλληνικούςΑριθμούς()
+        case .nisan:
+            return "Νισάν"
+        case .iyar:
+            return "Λυγιάρ"
+        case .sivan:
+            return "Σιβάν"
+        case .tammuz:
+            return "Θαμμούζ"
+        case .av:
+            return "Αβ"
+        case .elul:
+            return "Ελούλ"
+        }
+    }
+
+    /// :nodoc:
+    public func _בעברית() -> StrictString {
+        switch self {
+        case .tishrei:
+            return "תשרי"
+        case .cheshvan:
+            return "חשוון"
+        case .kislev:
+            return "כסלו"
+        case .tevet:
+            return "טבת"
+        case .shevat:
+            return "שבט"
+        case .adarI:
+            return "אדר " + 1._בספרות־עבריות()
+        case .adar:
+            return "אדר"
+        case .adarII:
+            return "אדר " + 2._בספרות־עבריות()
+        case .nisan:
+            return "ניסן"
+        case .iyar:
+            return "אייר"
+        case .sivan:
+            return "סיוון"
+        case .tammuz:
+            return "תמוז"
+        case .av:
+            return "אב"
+        case .elul:
+            return "אלול"
+        }
+    }
+
     // MARK: - RawRepresentable
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]

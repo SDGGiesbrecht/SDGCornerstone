@@ -182,7 +182,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ".")
@@ -190,6 +190,36 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
                     return number + " day"
                 } else {
                     return number + " days"
+                }
+            case .deutschDeutschland:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ",")
+                if self == (1 as Scalar).days {
+                    return number + " Tag"
+                } else {
+                    return number + " Tage"
+                }
+            case .françaisFrance:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ",")
+                if self == (1 as Scalar).days {
+                    return number + " jour"
+                } else {
+                    return number + " jours"
+                }
+            case .ελληνικάΕλλάδα:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ",")
+                if self == (1 as Scalar).days {
+                    return number + " ημέρα"
+                } else {
+                    return number + " ημέρες"
+                }
+            case .עברית־ישראל:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ",")
+                if self == (1 as Scalar).days {
+                    return "יום אחד"
+                } else if self == (2 as Scalar).days {
+                    return "יומיים"
+                } else {
+                    return number + " יומים"
                 }
             }
         }).resolved())
