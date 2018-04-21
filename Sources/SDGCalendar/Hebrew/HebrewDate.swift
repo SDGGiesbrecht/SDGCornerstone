@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGText
 import SDGLocalization
 import SDGCornerstoneLocalizations
 
@@ -132,12 +133,10 @@ internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
     internal let hour: HebrewHour
     internal let part: HebrewPart
 
-    // MARK: - CustomStringConvertible
+    // MARK: - Description
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    /// A textual representation of the instance.
-    public var description: String {
-        return String(UserFacing<SemanticMarkup, FormatLocalization>({ localization in
+    public func localizedDescription() -> SemanticMarkup {
+        return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             let date = CalendarDate(definition: self)
             switch localization {
             case .englishUnitedKingdom:
@@ -157,7 +156,23 @@ internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
             case .עברית־ישראל:
                 return SemanticMarkup(date.תאריך־עברי־בעברית() + " ב־" + date.שעה־בעברית())
             }
-        }).resolved().rawTextApproximation())
+        }).resolved()
+    }
+
+    // MARK: - CustomPlaygroundDisplayConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
+    /// Returns the custom playground description for this instance.
+    @_inlineable public var playgroundDescription: Any {
+        return localizedDescription().richText(font: Font.systemFont(ofSize: Font.systemFontSize))
+    }
+
+    // MARK: - CustomStringConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    /// A textual representation of the instance.
+    public var description: String {
+        return String(localizedDescription().rawTextApproximation())
     }
 
     // MARK: - DateDefinition
