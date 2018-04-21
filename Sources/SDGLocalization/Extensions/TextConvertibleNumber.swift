@@ -350,8 +350,9 @@ extension TextConvertibleNumber where Self : RationalArithmetic {
 /// A type that conforms to `Codable` through its `TextConvertibleNumber` interface.
 ///
 /// Conformance Requirements:
-///     - `TextConvertibleNumber`
-///     - `WholeNumberProtocol` or `IntegerProtocol`
+///
+/// - `TextConvertibleNumber`
+/// - `WholeNumberProtocol` or `IntegerProtocol`
 public protocol CodableViaTextConvertibleNumber : TextConvertibleNumber {
 
 }

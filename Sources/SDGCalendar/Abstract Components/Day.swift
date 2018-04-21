@@ -17,7 +17,7 @@ import SDGText
 import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the month.
-public protocol Day : ConsistentlyOrderedCalendarComponent, TextualPlaygroundDisplay
+public protocol Day : ConsistentlyOrderedCalendarComponent, MarkupPlaygroundDisplay
 where Vector : IntegerProtocol {
 
 }
@@ -51,7 +51,11 @@ extension Day {
         return ordinal.inDigits()
     }
 
-    public func localizedDescription() -> SemanticMarkup {
+    // MARK: - MarkupPlaygroundDisplay
+
+    // [_Inherit Documentation: SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup()_]
+    /// The markup representation of the instance.
+    @_inlineable public func playgroundDescriptionMarkup() -> SemanticMarkup {
         return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
@@ -66,21 +70,5 @@ extension Day {
                 return SemanticMarkup(self.בעברית־בספרות())
             }
         }).resolved()
-    }
-
-    // MARK: - CustomPlaygroundDisplayConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
-    /// Returns the custom playground description for this instance.
-    @_inlineable public var playgroundDescription: Any {
-        return localizedDescription().richText(font: Font.systemFont(ofSize: Font.systemFontSize))
-    }
-
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    /// A textual representation of the instance.
-    public var description: String {
-        return String(localizedDescription().rawTextApproximation())
     }
 }

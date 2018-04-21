@@ -17,7 +17,7 @@ import SDGText
 import SDGLocalization
 import SDGCornerstoneLocalizations
 
-internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
+internal struct HebrewDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - Reference Year
 
@@ -133,48 +133,6 @@ internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
     internal let hour: HebrewHour
     internal let part: HebrewPart
 
-    // MARK: - Description
-
-    public func localizedDescription() -> SemanticMarkup {
-        return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
-            let date = CalendarDate(definition: self)
-            switch localization {
-            case .englishUnitedKingdom:
-                return SemanticMarkup(date.hebrewDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish())
-            case .englishUnitedStates, .englishCanada:
-                return SemanticMarkup(date.hebrewDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish())
-            case .deutschDeutschland:
-                return SemanticMarkup(date.hebräischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch())
-            case .françaisFrance:
-                return date.dateHébraïqueEnFrançais(.sentenceMedial) + " à " + date.heureEnFrançais()
-            case .ελληνικάΕλλάδα:
-                if self.hour == 1 {
-                    return SemanticMarkup(date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στη " + date.ώραΣεΕλληνικά())
-                } else {
-                    return SemanticMarkup(date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στις " + date.ώραΣεΕλληνικά())
-                }
-            case .עברית־ישראל:
-                return SemanticMarkup(date.תאריך־עברי־בעברית() + " ב־" + date.שעה־בעברית())
-            }
-        }).resolved()
-    }
-
-    // MARK: - CustomPlaygroundDisplayConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
-    /// Returns the custom playground description for this instance.
-    @_inlineable public var playgroundDescription: Any {
-        return localizedDescription().richText(font: Font.systemFont(ofSize: Font.systemFontSize))
-    }
-
-    // MARK: - CustomStringConvertible
-
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    /// A textual representation of the instance.
-    public var description: String {
-        return String(localizedDescription().rawTextApproximation())
-    }
-
     // MARK: - DateDefinition
 
     internal static let identifier: StrictString = "עברי"
@@ -258,5 +216,33 @@ internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
         try container.encode(day)
         try container.encode(hour)
         try container.encode(part)
+    }
+
+    // MARK: - MarkupPlaygroundDisplay
+
+    // [_Inherit Documentation: SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup()_]
+    /// The markup representation of the instance.
+    public func playgroundDescriptionMarkup() -> SemanticMarkup {
+        return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
+            let date = CalendarDate(definition: self)
+            switch localization {
+            case .englishUnitedKingdom:
+                return SemanticMarkup(date.hebrewDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish())
+            case .englishUnitedStates, .englishCanada:
+                return SemanticMarkup(date.hebrewDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish())
+            case .deutschDeutschland:
+                return SemanticMarkup(date.hebräischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch())
+            case .françaisFrance:
+                return date.dateHébraïqueEnFrançais(.sentenceMedial) + " à " + date.heureEnFrançais()
+            case .ελληνικάΕλλάδα:
+                if self.hour == 1 {
+                    return SemanticMarkup(date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στη " + date.ώραΣεΕλληνικά())
+                } else {
+                    return SemanticMarkup(date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στις " + date.ώραΣεΕλληνικά())
+                }
+            case .עברית־ישראל:
+                return SemanticMarkup(date.תאריך־עברי־בעברית() + " ב־" + date.שעה־בעברית())
+            }
+        }).resolved()
     }
 }
