@@ -53,12 +53,14 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom:
                 return self.month.inEnglish() + " " + self.year.inEnglishDigits()
             case .englishUnitedStates, .englishCanada:
                 return self.month.inEnglish() + ", " + self.year.inEnglishDigits()
+            case .deutschDeutschland:
+                return self.month._aufDeutsch() + " " + self.year._inDeutschenZiffern()
             }
         }).resolved())
     }
