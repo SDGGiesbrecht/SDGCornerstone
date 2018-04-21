@@ -137,27 +137,27 @@ internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
+        return String(UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             let date = CalendarDate(definition: self)
             switch localization {
             case .englishUnitedKingdom:
-                return date.hebrewDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish()
+                return SemanticMarkup(date.hebrewDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish())
             case .englishUnitedStates, .englishCanada:
-                return date.hebrewDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
+                return SemanticMarkup(date.hebrewDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish())
             case .deutschDeutschland:
-                return date.hebräischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch()
+                return SemanticMarkup(date.hebräischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch())
             case .françaisFrance:
                 return date.dateHébraïqueEnFrançais(.sentenceMedial) + " à " + date.heureEnFrançais()
             case .ελληνικάΕλλάδα:
                 if self.hour == 1 {
-                    return date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στη " + date.ώραΣεΕλληνικά()
+                    return SemanticMarkup(date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στη " + date.ώραΣεΕλληνικά())
                 } else {
-                    return date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στις " + date.ώραΣεΕλληνικά()
+                    return SemanticMarkup(date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στις " + date.ώραΣεΕλληνικά())
                 }
             case .עברית־ישראל:
-                return date.תאריך־עברי־בעברית() + " ב־" + date.שעה־בעברית()
+                return SemanticMarkup(date.תאריך־עברי־בעברית() + " ב־" + date.שעה־בעברית())
             }
-        }).resolved())
+        }).resolved().rawTextApproximation())
     }
 
     // MARK: - DateDefinition
