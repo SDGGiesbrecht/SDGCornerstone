@@ -31,11 +31,11 @@ extension IntegerProtocol {
         return generateAbbreviatedEnglishOrdinal()
     }
 
-    @_versioned internal func verkürzteDeutscheOrdnungszahl() -> StrictString {
+    @_inlineable @_versioned internal func verkürzteDeutscheOrdnungszahl() -> StrictString {
         return verkürzteDeutscheOrdnungszahlErzeugen()
     }
     /// :nodoc:
-    public func _verkürzteDeutscheOrdnungszahl() -> StrictString {
+    @_inlineable public func _verkürzteDeutscheOrdnungszahl() -> StrictString {
         // For SDGCalendar.
         return verkürzteDeutscheOrdnungszahl()
     }

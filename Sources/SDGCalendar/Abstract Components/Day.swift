@@ -30,7 +30,7 @@ extension Day {
         return ordinal.inDigits()
     }
 
-    @_versioned internal func inDeutschenZiffern() -> StrictString {
+    @_inlineable @_versioned internal func inDeutschenZiffern() -> StrictString {
         return ordinal._verkürzteDeutscheOrdnungszahl()
     }
 

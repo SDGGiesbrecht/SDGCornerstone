@@ -45,15 +45,38 @@ extension Weekday {
         }
     }
 
+    @_inlineable @_versioned internal func aufDeutsch() -> StrictString {
+        switch ordinal {
+        case 1:
+            return "Sonntag"
+        case 2:
+            return "Montag"
+        case 3:
+            return "Dienstag"
+        case 4:
+            return "Mittwoch"
+        case 5:
+            return "Donnerstag"
+        case 6:
+            return "Freitag"
+        case 7:
+            return "Samstag"
+        default:
+            unreachable()
+        }
+    }
+
     // MARK: - CustomStringConvertible
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 return self.inEnglish()
+            case .deutschDeutschland:
+                return self.aufDeutsch()
             }
         }).resolved())
     }
