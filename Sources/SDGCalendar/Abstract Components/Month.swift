@@ -21,6 +21,9 @@ public protocol Month : TextualPlaygroundDisplay {
     // [_Define Documentation: SDGCornerstone.Month.inEnglish()_]
     /// Returns the English name.
     func inEnglish() -> StrictString
+
+    /// :nodoc:
+    func _aufDeutsch() -> StrictString
 }
 
 extension Month {
@@ -30,10 +33,12 @@ extension Month {
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 return self.inEnglish()
+            case .deutschDeutschland:
+                return self._aufDeutsch()
             }
         }).resolved())
     }

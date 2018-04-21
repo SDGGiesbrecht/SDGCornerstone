@@ -467,6 +467,40 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         }
     }
 
+    /// :nodoc:
+    public func _aufDeutsch() -> StrictString {
+        switch self {
+        case .tishrei:
+            return "Tischri"
+        case .cheshvan:
+            return "Cheschwan"
+        case .kislev:
+            return "Kislew"
+        case .tevet:
+            return "Tevet"
+        case .shevat:
+            return "Schevat"
+        case .adarI:
+            return "Adar " + 1.inRomanNumerals()
+        case .adar:
+            return "Adar"
+        case .adarII:
+            return "Adar " + 2.inRomanNumerals()
+        case .nisan:
+            return "Nisan"
+        case .iyar:
+            return "Ijjar"
+        case .sivan:
+            return "Siwan"
+        case .tammuz:
+            return "Tammus"
+        case .av:
+            return "Aw"
+        case .elul:
+            return "Elul"
+        }
+    }
+
     // MARK: - RawRepresentable
 
     // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]

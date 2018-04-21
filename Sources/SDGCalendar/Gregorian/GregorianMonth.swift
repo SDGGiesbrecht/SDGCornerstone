@@ -190,6 +190,36 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         }
     }
 
+    /// :nodoc:
+    public func _aufDeutsch() -> StrictString {
+        switch self {
+        case .january:
+            return "Januar"
+        case .february:
+            return "Februar"
+        case .march:
+            return "März"
+        case .april:
+            return "April"
+        case .may:
+            return "Mai"
+        case .june:
+            return "Juni"
+        case .july:
+            return "Juli"
+        case .august:
+            return "August"
+        case .september:
+            return "September"
+        case .october:
+            return "Oktober"
+        case .november:
+            return "November"
+        case .december:
+            return "Dezember"
+        }
+    }
+
     // MARK: - PointProtocol
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
