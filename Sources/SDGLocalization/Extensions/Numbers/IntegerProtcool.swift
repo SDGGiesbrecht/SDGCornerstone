@@ -31,13 +31,15 @@ extension IntegerProtocol {
         return generateAbbreviatedEnglishOrdinal()
     }
 
-    @_inlineable @_versioned internal func verkürzteDeutscheOrdnungszahl() -> StrictString {
-        return verkürzteDeutscheOrdnungszahlErzeugen()
-    }
     /// :nodoc:
     @_inlineable public func _verkürzteDeutscheOrdnungszahl() -> StrictString {
-        // For SDGCalendar.
-        return verkürzteDeutscheOrdnungszahl()
+        // Public for SDGCalendar.
+        return verkürzteDeutscheOrdnungszahlErzeugen()
+    }
+
+    /// :nodoc:
+    @_inlineable public func _ordinalFrançaisAbrégé(genre: _GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
+        return générerOrdinalFrançaisAbrégé(genre: genre, nombre: nombre)
     }
 
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:)_]
@@ -47,5 +49,17 @@ extension IntegerProtocol {
     ///     - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
     @_inlineable public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
         return romanNumerals(lowercase: lowercase)
+    }
+
+    /// :nodoc:
+    @_inlineable public func _σεΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
+        // Public for SDGCalendar
+        return ελληνικοίΑριθμοί(μικράΓράμματα: μικράΓράμματα, κεραία: κεραία)
+    }
+
+    /// :nodoc:
+    @_inlineable public func _בספרות־עבריות(גרשיים: Bool = true) -> StrictString {
+        // Public for SDGCalendar
+        return ספרות־עבריות(גרשיים: גרשיים)
     }
 }

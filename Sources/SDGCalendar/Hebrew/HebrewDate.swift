@@ -146,6 +146,16 @@ internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
                 return date.hebrewDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
             case .deutschDeutschland:
                 return date.hebräischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch()
+            case .françaisFrance:
+                return date.dateHébraïqueEnFrançais(.sentenceMedial) + " à " + date.heureEnFrançais()
+            case .ελληνικάΕλλάδα:
+                if self.hour == 1 {
+                    return date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στη " + date.ώραΣεΕλληνικά()
+                } else {
+                    return date.εβραϊκήΗμερομηνίαΣεΕλληνικά() + " στις " + date.ώραΣεΕλληνικά()
+                }
+            case .עברית־ישראל:
+                return date.תאריך־עברי־בעברית() + " ב־" + date.שעה־בעברית()
             }
         }).resolved())
     }

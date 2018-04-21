@@ -61,6 +61,12 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
                 return self.month.inEnglish() + ", " + self.year.inEnglishDigits()
             case .deutschDeutschland:
                 return self.month._aufDeutsch() + " " + self.year._inDeutschenZiffern()
+            case .françaisFrance:
+                return self.month._enFrançais(.sentenceMedial) + " " + self.year._enChiffresFrançais()
+            case .ελληνικάΕλλάδα:
+                return self.month._σεΕλληνικά(.ονομαστική) + " " + self.year._σεΕλληνικάΨηφία()
+            case .עברית־ישראל:
+                return self.month._בעברית() + " " + self.year._בעברית־בספרות()
             }
         }).resolved())
     }

@@ -70,7 +70,7 @@ public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresent
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
-            case .englishUnitedKingdom, .deutschDeutschland:
+            case .englishUnitedKingdom, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
                 return self.inDigitsInTwentyFourHourFormat()
             case .englishUnitedStates, .englishCanada:
                 return self.inDigitsInTwelveHourFormat() + " " + self.amOrPM()

@@ -22,16 +22,28 @@ public enum _FormatLocalization : String, InputLocalization {
 
     case deutschDeutschland = "de\u{2D}DE"
 
+    case françaisFrance = "fr\u{2D}FR"
+
+    case ελληνικάΕλλάδα = "el\u{2D}GR"
+
+    case עברית־ישראל = "he\u{2D}IL"
+
     public static let cases: [_FormatLocalization] = [
 
         .englishUnitedKingdom,
         .englishUnitedStates,
         .englishCanada,
 
-        .deutschDeutschland
+        .deutschDeutschland,
+
+        .françaisFrance,
+
+        .ελληνικάΕλλάδα,
+
+        .עברית־ישראל
     ]
 
     // MARK: - Localization
 
-    public static let fallbackLocalization: _FormatLocalization = .englishCanada
+    public static let fallbackLocalization: _FormatLocalization = .עברית־ישראל
 }

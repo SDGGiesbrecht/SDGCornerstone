@@ -23,9 +23,9 @@ extension Angle : CustomStringConvertible {
     public var description: String {
         return String(UserFacing<StrictString, _FormatLocalization>({ localization in
             switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .עברית־ישראל:
                 return self.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") + " rad"
-            case .deutschDeutschland:
+            case .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα:
                 return self.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ",") + " rad"
             }
         }).resolved())

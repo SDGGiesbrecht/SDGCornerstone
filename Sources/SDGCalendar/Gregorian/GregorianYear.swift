@@ -274,4 +274,19 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
     public func _inDeutschenZiffern() -> StrictString {
         return inDigits(bcAbbreviation: "v. Chr.")
     }
+
+    /// :nodoc:
+    public func _enChiffresFrançais() -> StrictString {
+        return inDigits(bcAbbreviation: "av. J.‐C.")
+    }
+
+    /// :nodoc:
+    public func _σεΕλληνικάΨηφία() -> StrictString {
+        return inDigits(bcAbbreviation: "π.Χ.")
+    }
+
+    /// :nodoc:
+    public func _בעברית־בספרות() -> StrictString {
+        return inDigits(bcAbbreviation: "לפנה״ס")
+    }
 }

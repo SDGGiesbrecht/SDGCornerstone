@@ -150,7 +150,7 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland:
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
                 return self.asSimpleFraction()
             }
         }).resolved())

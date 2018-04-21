@@ -24,6 +24,15 @@ public protocol Year : TextualPlaygroundDisplay {
 
     /// :nodoc:
     func _inDeutschenZiffern() -> StrictString
+
+    /// :nodoc:
+    func _enChiffresFrançais() -> StrictString
+
+    /// :nodoc:
+    func _σεΕλληνικάΨηφία() -> StrictString
+
+    /// :nodoc:
+    func _בעברית־בספרות() -> StrictString
 }
 
 extension Year {
@@ -39,6 +48,12 @@ extension Year {
                 return self.inEnglishDigits()
             case .deutschDeutschland:
                 return self._inDeutschenZiffern()
+            case .françaisFrance:
+                return self._enChiffresFrançais()
+            case .ελληνικάΕλλάδα:
+                return self._σεΕλληνικάΨηφία()
+            case .עברית־ישראל:
+                return self._בעברית־בספרות()
             }
         }).resolved())
     }

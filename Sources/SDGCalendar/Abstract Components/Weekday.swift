@@ -66,6 +66,70 @@ extension Weekday {
         }
     }
 
+    @_inlineable @_versioned internal func enFrançais(_ majuscules: Casing) -> StrictString {
+        switch ordinal {
+        case 1:
+            return majuscules.apply(to: "dimanche")
+        case 2:
+            return majuscules.apply(to: "lundi")
+        case 3:
+            return majuscules.apply(to: "mardi")
+        case 4:
+            return majuscules.apply(to: "mercredi")
+        case 5:
+            return majuscules.apply(to: "jeudi")
+        case 6:
+            return majuscules.apply(to: "vendredi")
+        case 7:
+            return majuscules.apply(to: "samedi")
+        default:
+            unreachable()
+        }
+    }
+
+    @_inlineable @_versioned internal func σεΕλληνικά() -> StrictString {
+        switch ordinal {
+        case 1:
+            return "Κυριακή"
+        case 2:
+            return "Δευτέρα"
+        case 3:
+            return "Τρίτη"
+        case 4:
+            return "Τετάρτη"
+        case 5:
+            return "Πέμπτη"
+        case 6:
+            return "Παρασκευή"
+        case 7:
+            return "Σάββατο"
+        default:
+            unreachable()
+        }
+    }
+
+    @_inlineable @_versioned internal func בעברית() -> StrictString {
+        let יום: StrictString = "יום "
+        switch ordinal {
+        case 1:
+            return יום.appending(contentsOf: "ראשון")
+        case 2:
+            return יום.appending(contentsOf: "שני")
+        case 3:
+            return יום.appending(contentsOf: "שלישי")
+        case 4:
+            return יום.appending(contentsOf: "רביעי")
+        case 5:
+            return יום.appending(contentsOf: "חמישי")
+        case 6:
+            return יום.appending(contentsOf: "ששי")
+        case 7:
+            return "שבת"
+        default:
+            unreachable()
+        }
+    }
+
     // MARK: - CustomStringConvertible
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
@@ -77,6 +141,12 @@ extension Weekday {
                 return self.inEnglish()
             case .deutschDeutschland:
                 return self.aufDeutsch()
+            case .françaisFrance:
+                return self.enFrançais(.sentenceMedial)
+            case .ελληνικάΕλλάδα:
+                return self.σεΕλληνικά()
+            case .עברית־ישראל:
+                return self.בעברית()
             }
         }).resolved())
     }

@@ -101,6 +101,16 @@ internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
                 return date.gregorianDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
             case .deutschDeutschland:
                 return date.gregorianischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch()
+            case .françaisFrance:
+                return date.dateGrégorienneEnFrançais(.sentenceMedial) + " à " + date.heureEnFrançais()
+            case .ελληνικάΕλλάδα:
+                if self.hour == 1 {
+                    return date.γρηγοριανήΗμερομηνίαΣεΕλληνικά() + " στη " + date.ώραΣεΕλληνικά()
+                } else {
+                    return date.γρηγοριανήΗμερομηνίαΣεΕλληνικά() + " στις " + date.ώραΣεΕλληνικά()
+                }
+            case .עברית־ישראל:
+                return date.תאריך־גרגוריאני־בעברית() + " ב־" + date.שעה־בעברית()
             }
         }).resolved())
     }

@@ -198,6 +198,29 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
                 } else {
                     return number + " Tage"
                 }
+            case .françaisFrance:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ",")
+                if self == (1 as Scalar).days {
+                    return number + " jour"
+                } else {
+                    return number + " jours"
+                }
+            case .ελληνικάΕλλάδα:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ",")
+                if self == (1 as Scalar).days {
+                    return number + " ημέρα"
+                } else {
+                    return number + " ημέρες"
+                }
+            case .עברית־ישראל:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ",")
+                if self == (1 as Scalar).days {
+                    return "יום אחד"
+                } else if self == (2 as Scalar).days {
+                    return "יומיים"
+                } else {
+                    return number + " יומים"
+                }
             }
         }).resolved())
     }

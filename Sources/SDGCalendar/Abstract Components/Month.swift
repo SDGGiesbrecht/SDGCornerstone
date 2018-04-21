@@ -24,6 +24,15 @@ public protocol Month : TextualPlaygroundDisplay {
 
     /// :nodoc:
     func _aufDeutsch() -> StrictString
+
+    /// :nodoc:
+    func _enFrançais(_ majuscules: Casing) -> StrictString
+
+    /// :nodoc:
+    func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString
+
+    /// :nodoc:  /// מחזירה את השם העברי.
+    func _בעברית() -> StrictString
 }
 
 extension Month {
@@ -39,6 +48,12 @@ extension Month {
                 return self.inEnglish()
             case .deutschDeutschland:
                 return self._aufDeutsch()
+            case .françaisFrance:
+                return self._enFrançais(.sentenceMedial)
+            case .ελληνικάΕλλάδα:
+                return self._σεΕλληνικά(.ονομαστική)
+            case .עברית־ישראל:
+                return self._בעברית()
             }
         }).resolved())
     }

@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGText
 import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the month.
@@ -34,18 +35,52 @@ extension Day {
         return ordinal._verkürzteDeutscheOrdnungszahl()
     }
 
+    @_inlineable @_versioned internal func enChiffresFrançais() -> SemanticMarkup {
+        if ordinal == 1 {
+            return ordinal._ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
+        } else {
+            return SemanticMarkup(ordinal.inDigits())
+        }
+    }
+
+    @_inlineable @_versioned internal func σεΕλληνικάΨηφία() -> StrictString {
+        return ordinal.inDigits()
+    }
+
+    @_inlineable @_versioned internal func בעברית־בספרות() -> StrictString {
+        return ordinal.inDigits()
+    }
+
+    public func localizedDescription() -> SemanticMarkup {
+        return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                return SemanticMarkup(self.inEnglishDigits())
+            case .deutschDeutschland:
+                return SemanticMarkup(self.inDeutschenZiffern())
+            case .françaisFrance:
+                return self.enChiffresFrançais()
+            case .ελληνικάΕλλάδα:
+                return SemanticMarkup(self.σεΕλληνικάΨηφία())
+            case .עברית־ישראל:
+                return SemanticMarkup(self.בעברית־בספרות())
+            }
+        }).resolved()
+    }
+
+    // MARK: - CustomPlaygroundDisplayConvertible
+
+    // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
+    /// Returns the custom playground description for this instance.
+    @_inlineable public var playgroundDescription: Any {
+        return localizedDescription().richText(font: Font.systemFont(ofSize: Font.systemFontSize))
+    }
+
     // MARK: - CustomStringConvertible
 
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                return self.inEnglishDigits()
-            case .deutschDeutschland:
-                return self.inDeutschenZiffern()
-            }
-        }).resolved())
+        return String(localizedDescription().rawTextApproximation())
     }
 }
