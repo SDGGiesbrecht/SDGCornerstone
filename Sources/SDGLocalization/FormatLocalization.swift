@@ -20,11 +20,15 @@ public enum _FormatLocalization : String, InputLocalization {
     case englishUnitedStates = "en\u{2D}US"
     case englishCanada = "en\u{2D}CA"
 
+    case deutschDeutschland = "de\u{2D}DE"
+
     public static let cases: [_FormatLocalization] = [
 
         .englishUnitedKingdom,
         .englishUnitedStates,
-        .englishCanada
+        .englishCanada,
+
+        .deutschDeutschland
     ]
 
     // MARK: - Localization

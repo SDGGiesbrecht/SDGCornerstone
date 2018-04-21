@@ -31,6 +31,15 @@ extension IntegerProtocol {
         return generateAbbreviatedEnglishOrdinal()
     }
 
+    @_versioned internal func verkürzteDeutscheOrdnungszahl() -> StrictString {
+        return verkürzteDeutscheOrdnungszahlErzeugen()
+    }
+    /// :nodoc:
+    public func _verkürzteDeutscheOrdnungszahl() -> StrictString {
+        // For SDGCalendar.
+        return verkürzteDeutscheOrdnungszahl()
+    }
+
     // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:)_]
     /// Returns the number in roman numerals.
     ///

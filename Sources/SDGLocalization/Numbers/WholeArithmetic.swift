@@ -90,6 +90,10 @@ extension WholeArithmetic {
         }
     }
 
+    @_inlineable @_versioned func verkürzteDeutscheOrdnungszahlErzeugen() -> StrictString {
+        return wholeDigits() + "."
+    }
+
     @_inlineable @_versioned internal func romanNumerals(lowercase: Bool) -> StrictString {
 
         func format(_ string: StrictString) -> StrictString {
