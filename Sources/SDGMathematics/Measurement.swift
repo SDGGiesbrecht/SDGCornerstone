@@ -516,7 +516,8 @@ extension Measurement {
 /// Coding occurs via the `rawValue` property. If its scale changes, the provided implementation will not be backwards compatible.
 ///
 /// Conformance Requirements:
-///     - `Measurement`
+///
+/// - `Measurement`
 public protocol CodableViaMeasurement : Measurement {
 
 }

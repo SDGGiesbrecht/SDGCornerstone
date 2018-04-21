@@ -13,6 +13,7 @@
  */
 
 import SDGLogic
+import SDGCollections
 @testable import SDGLocalization
 import SDGCornerstoneLocalizations
 
@@ -45,6 +46,8 @@ class SDGLocalizationInternalTests : TestCase {
             }
 
             testCustomStringConvertibleConformance(of: localization, localizations: InterfaceLocalization.self, uniqueTestName: localization.icon!, overwriteSpecificationInsteadOfFailing: false)
+
+            XCTAssert(ContentLocalization.codeSet() ⊇ InterfaceLocalization.codeSet(), "Content should support at least every localization the interface elements do.")
         }
 
         // Make sure each group member is defined.

@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal enum ContentLocalization : String, Localization {
+internal enum ContentLocalization : String, InputLocalization {
 
     // MARK: - Cases
 
@@ -624,9 +624,9 @@ internal enum ContentLocalization : String, Localization {
     }
 
     internal func localizedIsolatedName() -> StrictString {
-        return UserFacing<StrictString, _InterfaceLocalization>({ localization in
+        return UserFacing<StrictString, _FormatLocalization>({ localization in
             switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
                 var result: StrictString = self.language.localizedIsolatedName() + " ("
                 if let script = self.script {
                     result += script.localizedIsolatedName() + StrictString(", ")

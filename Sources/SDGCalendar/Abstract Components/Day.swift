@@ -13,10 +13,11 @@
  */
 
 import SDGControlFlow
+import SDGText
 import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the month.
-public protocol Day : ConsistentlyOrderedCalendarComponent, TextualPlaygroundDisplay
+public protocol Day : ConsistentlyOrderedCalendarComponent, MarkupPlaygroundDisplay
 where Vector : IntegerProtocol {
 
 }
@@ -30,16 +31,44 @@ extension Day {
         return ordinal.inDigits()
     }
 
-    // MARK: - CustomStringConvertible
+    @_inlineable @_versioned internal func inDeutschenZiffern() -> StrictString {
+        return ordinal._verkürzteDeutscheOrdnungszahl()
+    }
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
-    /// A textual representation of the instance.
-    public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+    @_inlineable @_versioned internal func enChiffresFrançais() -> SemanticMarkup {
+        if ordinal == 1 {
+            return ordinal._ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
+        } else {
+            return SemanticMarkup(ordinal.inDigits())
+        }
+    }
+
+    @_inlineable @_versioned internal func σεΕλληνικάΨηφία() -> StrictString {
+        return ordinal.inDigits()
+    }
+
+    @_inlineable @_versioned internal func בעברית־בספרות() -> StrictString {
+        return ordinal.inDigits()
+    }
+
+    // MARK: - MarkupPlaygroundDisplay
+
+    // [_Inherit Documentation: SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup()_]
+    /// The markup representation of the instance.
+    @_inlineable public func playgroundDescriptionMarkup() -> SemanticMarkup {
+        return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                return self.inEnglishDigits()
+                return SemanticMarkup(self.inEnglishDigits())
+            case .deutschDeutschland:
+                return SemanticMarkup(self.inDeutschenZiffern())
+            case .françaisFrance:
+                return self.enChiffresFrançais()
+            case .ελληνικάΕλλάδα:
+                return SemanticMarkup(self.σεΕλληνικάΨηφία())
+            case .עברית־ישראל:
+                return SemanticMarkup(self.בעברית־בספרות())
             }
-        }).resolved())
+        }).resolved()
     }
 }

@@ -190,6 +190,149 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         }
     }
 
+    /// :nodoc:
+    public func _aufDeutsch() -> StrictString {
+        switch self {
+        case .january:
+            return "Januar"
+        case .february:
+            return "Februar"
+        case .march:
+            return "März"
+        case .april:
+            return "April"
+        case .may:
+            return "Mai"
+        case .june:
+            return "Juni"
+        case .july:
+            return "Juli"
+        case .august:
+            return "August"
+        case .september:
+            return "September"
+        case .october:
+            return "Oktober"
+        case .november:
+            return "November"
+        case .december:
+            return "Dezember"
+        }
+    }
+
+    /// :nodoc:
+    public func _enFrançais(_ majuscules: Casing) -> StrictString {
+        switch self {
+        case .january:
+            return majuscules.apply(to: "janvier")
+        case .february:
+            return majuscules.apply(to: "février")
+        case .march:
+            return majuscules.apply(to: "mars")
+        case .april:
+            return majuscules.apply(to: "avril")
+        case .may:
+            return majuscules.apply(to: "mai")
+        case .june:
+            return majuscules.apply(to: "juin")
+        case .july:
+            return majuscules.apply(to: "juillet")
+        case .august:
+            return majuscules.apply(to: "août")
+        case .september:
+            return majuscules.apply(to: "septembre")
+        case .october:
+            return majuscules.apply(to: "octobre")
+        case .november:
+            return majuscules.apply(to: "novembre")
+        case .december:
+            return majuscules.apply(to: "décembre")
+        }
+    }
+
+    /// :nodoc:
+    public func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString {
+        let όνομα: StrictString
+
+        func απλό(όνομα: StrictString) -> StrictString {
+            switch πτώση {
+            case .ονομαστική:
+                return όνομα + "ος"
+            case .αιτιατική:
+                return όνομα + "ο"
+            case .γενική:
+                return όνομα.replacingMatches(for: "́" as StrictString, with: "" as StrictString) + "́ου"
+            case .κλητική:
+                return όνομα + "ε"
+            }
+        }
+
+        switch self {
+        case .january:
+            return απλό(όνομα: "Ιανουάρι")
+        case .february:
+            return απλό(όνομα: "Φεβρουάρι")
+        case .march:
+            return απλό(όνομα: "Μάρτι")
+        case .april:
+            return απλό(όνομα: "Απρίλι")
+        case .may:
+            if πτώση == .γενική {
+                return "Μαΐου"
+            } else { // [_Exempt from Test Coverage_] Unused so far.
+                return απλό(όνομα: "Μάι")
+            }
+        case .june:
+            return απλό(όνομα: "Ιούνι")
+        case .july:
+            return απλό(όνομα: "Ιούλι")
+        case .august:
+            if πτώση == .γενική {
+                return "Αυγούστου"
+            } else { // [_Exempt from Test Coverage_] Unused so far.
+                return απλό(όνομα: "Αύγουστ")
+            }
+        case .september:
+            return απλό(όνομα: "Σεπτέμβρι")
+        case .october:
+            return απλό(όνομα: "Οκτώβρι")
+        case .november:
+            return απλό(όνομα: "Νοέμβρι")
+        case .december:
+            return απλό(όνομα: "Δεκέμβρι")
+        }
+    }
+
+    /// :nodoc:
+    public func _בעברית() -> StrictString {
+        switch self {
+        case .january:
+            return "ינואר"
+        case .february:
+            return "פברואר"
+        case .march:
+            return "מרץ"
+        case .april:
+            return "אפריל"
+        case .may:
+            return "מאי"
+        case .june:
+            return "יוני"
+        case .july:
+            return "יולי"
+        case .august:
+            return "אוגוסט"
+        case .september:
+            return "ספטמבר"
+        case .october:
+            return "אוקטובר"
+        case .november:
+            return "נובמבר"
+        case .december:
+            return "דצמבר"
+        }
+    }
+
     // MARK: - PointProtocol
 
     // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
