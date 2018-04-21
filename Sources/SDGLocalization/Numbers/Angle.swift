@@ -21,10 +21,12 @@ extension Angle : CustomStringConvertible {
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, _InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, _FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 return self.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") + " rad"
+            case .deutschDeutschland:
+                return self.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ",") + " rad"
             }
         }).resolved())
     }

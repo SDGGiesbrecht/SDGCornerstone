@@ -624,9 +624,9 @@ internal enum ContentLocalization : String, InputLocalization {
     }
 
     internal func localizedIsolatedName() -> StrictString {
-        return UserFacing<StrictString, _InterfaceLocalization>({ localization in
+        return UserFacing<StrictString, _FormatLocalization>({ localization in
             switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland:
                 var result: StrictString = self.language.localizedIsolatedName() + " ("
                 if let script = self.script {
                     result += script.localizedIsolatedName() + StrictString(", ")
