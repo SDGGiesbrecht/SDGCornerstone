@@ -81,6 +81,7 @@ class SDGLocalizationAPITests : TestCase {
     }
 
     func testLocalizationRelationships() {
+        XCTAssert(FormatLocalization.codeSet() ⊇ InterfaceLocalization.codeSet(), "Formats should support at least every localization the user interface elements do.")
         XCTAssert(InterfaceLocalization.codeSet() ⊇ APILocalization.codeSet(), "The user interface elements should support at least every localization the Swift API does.")
     }
 
