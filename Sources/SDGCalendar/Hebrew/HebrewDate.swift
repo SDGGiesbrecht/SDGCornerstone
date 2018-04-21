@@ -137,13 +137,15 @@ internal struct HebrewDate : DateDefinition, TextualPlaygroundDisplay {
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             let date = CalendarDate(definition: self)
             switch localization {
             case .englishUnitedKingdom:
                 return date.hebrewDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish()
             case .englishUnitedStates, .englishCanada:
                 return date.hebrewDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
+            case .deutschDeutschland:
+                return date.hebräischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch()
             }
         }).resolved())
     }

@@ -261,6 +261,25 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         return dateInAmericanEnglish(year: gregorianYear, month: gregorianMonth, day: gregorianDay, weekday: gregorianWeekday, withYear: withYear, withWeekday: withWeekday)
     }
 
+    private func datumAufDeutsch<Y : Year, M : Month, D : Day, W : Weekday>(jahr: Y, monat: M, tag: D, wochentag: W, mitJahr: Bool, mitWochentag: Bool) -> StrictString {
+        var ergebnis = tag.inDeutschenZiffern() + " " + monat._aufDeutsch()
+        if mitJahr {
+            ergebnis += " " + jahr._inDeutschenZiffern()
+        }
+        if mitWochentag {
+            ergebnis.prepend(contentsOf: wochentag.aufDeutsch() + ", ")
+        }
+        return ergebnis
+    }
+
+    internal func hebräischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false) -> StrictString {
+        return datumAufDeutsch(jahr: hebrewYear, monat: hebrewMonth, tag: hebrewDay, wochentag: hebrewWeekday, mitJahr: mitJahr, mitWochentag: mitWochentag)
+    }
+
+    internal func gregorianischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false) -> StrictString {
+        return datumAufDeutsch(jahr: gregorianYear, monat: gregorianMonth, tag: gregorianDay, wochentag: gregorianWeekday, mitJahr: mitJahr, mitWochentag: mitWochentag)
+    }
+
     /// Returns the time in the ISO format.
     public func timeInISOFormat(includeSeconds: Bool = false) -> StrictString {
         var result = gregorianHour.inISOFormat() + ":" + gregorianMinute.inISOFormat()
@@ -280,6 +299,10 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         var result = gregorianHour.inDigitsInTwelveHourFormat() + ":" + gregorianMinute.inDigits()
         result += " " + gregorianHour.amOrPM()
         return result
+    }
+
+    internal func uhrzeitAufDeutsch() -> StrictString {
+        return gregorianHour.inDigitsInTwentyFourHourFormat() + "." + gregorianMinute.inDigits()
     }
 
     // MARK: - iCalendar

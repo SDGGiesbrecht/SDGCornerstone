@@ -92,13 +92,15 @@ internal struct GregorianDate : DateDefinition, TextualPlaygroundDisplay {
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             let date = CalendarDate(definition: self)
             switch localization {
             case .englishUnitedKingdom:
                 return date.gregorianDateInBritishEnglish() + " at " + date.twentyFourHourTimeInEnglish()
             case .englishUnitedStates, .englishCanada:
                 return date.gregorianDateInAmericanEnglish() + " at " + date.twelveHourTimeInEnglish()
+            case .deutschDeutschland:
+                return date.gregorianischesDatumAufDeutsch() + " um " + date.uhrzeitAufDeutsch()
             }
         }).resolved())
     }
