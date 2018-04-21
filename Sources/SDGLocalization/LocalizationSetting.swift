@@ -70,6 +70,10 @@ public struct LocalizationSetting : Codable, Equatable {
     }()
 
     private static let osApplicationPreferences: Shared<Preference> = {
+        guard ProcessInfo.possibleApplicationIdentifier ≠ nil else {
+            return Shared(Preference.mock())
+        }
+
         let preferences: Shared<Preference>
         #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
@@ -149,6 +153,7 @@ public struct LocalizationSetting : Codable, Equatable {
     ///
     /// Otherwise, use `do(_:)` instead.
     public static func setApplicationPreferences(to setting: LocalizationSetting?) {
+        _ = ProcessInfo.applicationIdentifier // Make sure this was set and it is not just a silent mock preference.
 
         sdgApplicationPreferences.value.set(to: setting)
 

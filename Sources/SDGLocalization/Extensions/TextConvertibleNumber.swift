@@ -33,7 +33,7 @@ public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithme
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws
 }
 
@@ -94,7 +94,7 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - decimal: The decimal representation.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(possibleDecimal decimal: StrictString) throws {
         try self.init(decimal, base: 10)
     }
@@ -104,7 +104,7 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - hexadecimal: The hexadecimal representation.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(possibleHexadecimal hexadecimal: StrictString) throws {
         try self.init(hexadecimal, base: 16)
     }
@@ -114,7 +114,7 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - octal: The octal representation.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(possibleOctal octal: StrictString) throws {
         try self.init(octal, base: 8)
     }
@@ -124,7 +124,7 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - binary: The binary representation.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(possibleBinary binary: StrictString) throws {
         try self.init(binary, base: 2)
     }
@@ -137,7 +137,7 @@ extension TextConvertibleNumber {
     ///     - representation: The string to interpret.
     ///     - base: The base of the number system.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(_ representation: StrictString, base: Int) throws {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacing<StrictString, _APILocalization>({ localization in
             switch localization {
@@ -204,7 +204,7 @@ extension TextConvertibleNumber {
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
@@ -238,7 +238,7 @@ extension TextConvertibleNumber {
                 position += 1 as Self
             } else {
                 if character ∉ formattingSeparators {
-                    throw TextConvertibleNumberParseError.invalidDigit(character)
+                    throw TextConvertibleNumberParseError.invalidDigit(character, entireString: representation)
                 }
             }
         }
@@ -270,7 +270,7 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
 
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
@@ -308,7 +308,7 @@ extension TextConvertibleNumber where Self : RationalArithmetic {
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
     ///
-    /// - Throws: `WholeArithmeticParseError`
+    /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
