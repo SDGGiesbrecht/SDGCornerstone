@@ -127,4 +127,9 @@ public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentable
     public func inEnglishDigits() -> StrictString {
         return inDigits()
     }
+
+    /// :nodoc:
+    public func _inDeutschenZiffern() -> StrictString {
+        return inDigits()
+    }
 }

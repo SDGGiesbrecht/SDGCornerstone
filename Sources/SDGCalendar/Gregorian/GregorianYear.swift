@@ -269,4 +269,9 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
     public func inEnglishDigits() -> StrictString {
         return inDigits(bcAbbreviation: "BC")
     }
+
+    /// :nodoc:
+    public func _inDeutschenZiffern() -> StrictString {
+        return inDigits(bcAbbreviation: "v. Chr.")
+    }
 }
