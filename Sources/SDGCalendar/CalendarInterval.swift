@@ -182,7 +182,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
     // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
     /// A textual representation of the instance.
     public var description: String {
-        return String(UserFacing<StrictString, InterfaceLocalization>({ localization in
+        return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
                 let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ".")
@@ -190,6 +190,13 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
                     return number + " day"
                 } else {
                     return number + " days"
+                }
+            case .deutschDeutschland:
+                let number = self.inDays.inDigits(maximumDecimalPlaces: integralUnitsPerDay.inDigits().count + 1, radixCharacter: ",")
+                if self == (1 as Scalar).days {
+                    return number + " Tag"
+                } else {
+                    return number + " Tage"
                 }
             }
         }).resolved())
