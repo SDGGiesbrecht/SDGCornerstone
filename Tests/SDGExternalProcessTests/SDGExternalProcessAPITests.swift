@@ -20,6 +20,8 @@ import SDGXCTestUtilities
 class SDGExternalProcessAPITests : TestCase {
 
     func testExternalProcess() {
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
+
         XCTAssertNil(ExternalProcess(searching: [
             "no/such/file",
             "tmp", // Directory
@@ -35,6 +37,8 @@ class SDGExternalProcessAPITests : TestCase {
             "tmp", // Directory
             ".file" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: "swift", validate: { _ in false }), "Failed to reject the executable according to custom validation.")
+
+        #endif
     }
 
     func testShell() {
