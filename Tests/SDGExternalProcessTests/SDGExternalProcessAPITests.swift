@@ -19,6 +19,28 @@ import SDGXCTestUtilities
 
 class SDGExternalProcessAPITests : TestCase {
 
+    func testExternalProcess() {
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
+
+        XCTAssertNil(ExternalProcess(searching: [
+            "no/such/file",
+            "tmp", // Directory
+            ".file" // Not executable
+            ].map({ URL(fileURLWithPath: $0) }), commandName: nil, validate: { (_: ExternalProcess) in true }), "Failed to reject non‐executables.")
+        XCTAssertEqual(ExternalProcess(searching: [
+            "no/such/file",
+            "tmp", // Directory
+            ".file" // Not executable
+            ].map({ URL(fileURLWithPath: $0) }), commandName: "swift", validate: { _ in true })?.executable.lastPathComponent, "swift", "Failed to find with “which”.")
+        XCTAssertNil(ExternalProcess(searching: [
+            "no/such/file",
+            "tmp", // Directory
+            ".file" // Not executable
+            ].map({ URL(fileURLWithPath: $0) }), commandName: "swift", validate: { _ in false }), "Failed to reject the executable according to custom validation.")
+
+        #endif
+    }
+
     func testShell() {
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
@@ -80,6 +102,7 @@ class SDGExternalProcessAPITests : TestCase {
 
     static var allTests: [(String, (SDGExternalProcessAPITests) -> () throws -> Void)] {
         return [
+            ("testExternalProcess", testExternalProcess),
             ("testShell", testShell)
         ]
     }
