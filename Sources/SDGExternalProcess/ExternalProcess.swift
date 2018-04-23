@@ -35,6 +35,52 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         self.executable = executable
     }
 
+    /// Creates an instance by searching the system for the exectutable.
+    ///
+    /// - Parameters:
+    ///     - locations: A list of locations to search. They will be tried in order.
+    ///     - commandName: A name to try with the default shell’s `which` command. This will be tried after the provided search list.
+    ///     - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
+    ///     - process: An executable to validate. Its existence and executability have already been verified.
+    @_inlineable public convenience init?<S>(searching locations: S, commandName: String?, validate: (_ process: ExternalProcess) -> Bool) where S : Sequence, S.Element == URL {
+
+        func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
+            var isDirectory: ObjCBool = false
+            if ¬FileManager.default.fileExists(atPath: location.path, isDirectory: &isDirectory) {
+                return false
+            }
+            if isDirectory.boolValue {
+                return false
+            }
+            if ¬FileManager.default.isExecutableFile(atPath: location.path) {
+                return false
+            }
+            let possible = ExternalProcess(at: location)
+            if ¬validate(possible) {
+                return false
+            }
+            return true
+        }
+
+        for location in locations {
+            if checkLocation(location, validate: validate) {
+                self.init(at: location)
+                return
+            }
+        }
+
+        if let name = commandName,
+            let path = try? Shell.default.run(command: ["which", name]) {
+            let location = URL(fileURLWithPath: path)
+            if checkLocation(location, validate: validate) {
+                self.init(at: location)
+                return
+            }
+        }
+
+        return nil
+    }
+
     // MARK: - Properties
 
     /// The location of the executable file.
