@@ -27,7 +27,7 @@ import XCTest
 @testable import SDGPrecisionMathematicsTests
 @testable import SDGConcurrencyTests
 @testable import SDGExternalProcessTests
-@testable import DocumentationExampleTests
+@testable import SDGCornerstoneDocumentationExampleTests
 
 XCTMain([
 
