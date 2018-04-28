@@ -307,7 +307,7 @@ let package = Package(
             "SDGExternalProcess", "SDGXCTestUtilities",
             "SDGLogic"
             ]),
-        .testTarget(name: "DocumentationExampleTests", dependencies: [
+        .testTarget(name: "SDGCornerstoneDocumentationExampleTests", dependencies: [
             "SDGCornerstone", "SDGXCTestUtilities",
             "SDGPersistenceTestUtilities"
         ])
