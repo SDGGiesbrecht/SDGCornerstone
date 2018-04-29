@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
 
- Copyright ©2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017–2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -13,40 +13,63 @@
  */
 
 import XCTest
+@testable import SDGControlFlowTests
+@testable import SDGLogicTests
+@testable import SDGMathematicsTests
+@testable import SDGBinaryDataTests
+@testable import SDGCollectionsTests
+@testable import SDGTextTests
+@testable import SDGPersistenceTests
+@testable import SDGRandomizationTests
+@testable import SDGLocalizationTests
+@testable import SDGGeometryTests
+@testable import SDGCalendarTests
+@testable import SDGPrecisionMathematicsTests
+@testable import SDGConcurrencyTests
+@testable import SDGExternalProcessTests
+@testable import SDGCornerstoneDocumentationExampleTests
 
-import SDGCornerstoneDocumentationExampleTests
-import SDGBinaryDataTests
-import SDGCalendarTests
-import SDGCollectionsTests
-import SDGConcurrencyTests
-import SDGControlFlowTests
-import SDGExternalProcessTests
-import SDGGeometryTests
-import SDGLocalizationTests
-import SDGLogicTests
-import SDGMathematicsTests
-import SDGPersistenceTests
-import SDGPrecisionMathematicsTests
-import SDGRandomizationTests
-import SDGTextTests
-import SDGXCTestUtilities
+XCTMain([
 
-var tests = [XCTestCaseEntry]()
-tests += SDGCornerstoneDocumentationExampleTests.__allTests()
-tests += SDGBinaryDataTests.__allTests()
-tests += SDGCalendarTests.__allTests()
-tests += SDGCollectionsTests.__allTests()
-tests += SDGConcurrencyTests.__allTests()
-tests += SDGControlFlowTests.__allTests()
-tests += SDGExternalProcessTests.__allTests()
-tests += SDGGeometryTests.__allTests()
-tests += SDGLocalizationTests.__allTests()
-tests += SDGLogicTests.__allTests()
-tests += SDGMathematicsTests.__allTests()
-tests += SDGPersistenceTests.__allTests()
-tests += SDGPrecisionMathematicsTests.__allTests()
-tests += SDGRandomizationTests.__allTests()
-tests += SDGTextTests.__allTests()
-tests += SDGXCTestUtilities.__allTests()
+    testCase(SDGControlFlowAPITests.allTests),
 
-XCTMain(tests)
+    testCase(SDGLogicAPITests.allTests),
+
+    testCase(SDGMathematicsAPITests.allTests),
+    testCase(SDGMathematicsRegressionTests.allTests),
+
+    testCase(SDGCollectionsAPITests.allTests),
+
+    testCase(SDGBinaryDataAPITests.allTests),
+
+    testCase(SDGTextAPITests.allTests),
+    testCase(SDGTextInternalTests.allTests),
+    testCase(SDGTextRegressionTests.allTests),
+
+    testCase(SDGPersistenceAPITests.allTests),
+    testCase(SDGPersistenceRegressionTests.allTests),
+
+    testCase(SDGRandomizationAPITests.allTests),
+
+    testCase(SDGLocalizationAPITests.allTests),
+    testCase(SDGLocalizationInternalTests.allTests),
+
+    testCase(SDGGeometryAPITests.allTests),
+
+    testCase(SDGCalendarAPITests.allTests),
+    testCase(SDGCalendarInternalTests.allTests),
+    testCase(SDGCalendarRegressionTests.allTests),
+
+    testCase(SDGPrecisionMathematicsAPITests.allTests),
+    testCase(SDGPrecisionMathematicsInternalTests.allTests),
+
+    testCase(SDGConcurrencyAPITests.allTests),
+
+    testCase(SDGExternalProcessAPITests.allTests),
+    testCase(SDGExternalProcessRegressionTests.allTests),
+
+    testCase(ReadMeExampleTests.allTests),
+    testCase(MiscellaneousExampleTests.allTests),
+    testCase(DateExampleTests.allTests),
+    testCase(FunctionAnalysisExampleTests.allTests)
+])
