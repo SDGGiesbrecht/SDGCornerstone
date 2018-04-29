@@ -35,6 +35,9 @@ open class TestCase : XCTestCase {
 
         super.setUp()
     }
+
+    /// :nodoc:
+    public func testLinuxMainGenerationCompatibility() {}
 }
 
 #endif
