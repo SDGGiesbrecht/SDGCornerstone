@@ -83,6 +83,11 @@ class SDGPersistenceAPITests : TestCase {
         } catch {
             XCTFail("\(error)")
         }
+
+        do {
+            let thisFile = URL(fileURLWithPath: #file)
+            XCTAssert(try FileManager.default.deepFileEnumeration(in: thisFile.deletingLastPathComponent().deletingLastPathComponent()).contains(thisFile), "Failed to enumerate files.")
+        }
     }
 
     struct LosslessStirngConvertibleExample : CodableViaLosslessStringConvertible, Equatable {
