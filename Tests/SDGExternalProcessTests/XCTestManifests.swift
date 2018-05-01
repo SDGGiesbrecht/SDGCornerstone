@@ -18,22 +18,23 @@ extension SDGExternalProcessAPITests {
     static let __allTests = [
         ("testExternalProcess", testExternalProcess),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testShell", testShell),
+        ("testShell", testShell)
     ]
 }
 
 extension SDGExternalProcessRegressionTests {
     static let __allTests = [
         ("testDelayedShellOutput", testDelayedShellOutput),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
+        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGExternalProcessAPITests.__allTests),
-        testCase(SDGExternalProcessRegressionTests.__allTests),
+        testCase(SDGExternalProcessRegressionTests.__allTests)
     ]
 }
 #endif

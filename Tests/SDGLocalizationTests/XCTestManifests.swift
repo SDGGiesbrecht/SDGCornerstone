@@ -26,7 +26,7 @@ extension SDGLocalizationAPITests {
         ("testRange", testRange),
         ("testRationalArithmetic", testRationalArithmetic),
         ("testUserFacingDynamicText", testUserFacingDynamicText),
-        ("testWholeArithmetic", testWholeArithmetic),
+        ("testWholeArithmetic", testWholeArithmetic)
     ]
 }
 
@@ -35,15 +35,16 @@ extension SDGLocalizationInternalTests {
         ("testContentLocalization", testContentLocalization),
         ("testInterfaceLocalization", testInterfaceLocalization),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testLocalizationSetting", testLocalizationSetting),
+        ("testLocalizationSetting", testLocalizationSetting)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGLocalizationAPITests.__allTests),
-        testCase(SDGLocalizationInternalTests.__allTests),
+        testCase(SDGLocalizationInternalTests.__allTests)
     ]
 }
 #endif

@@ -17,14 +17,15 @@ import XCTest
 extension SDGConcurrencyAPITests {
     static let __allTests = [
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testRunLoop", testRunLoop),
+        ("testRunLoop", testRunLoop)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(SDGConcurrencyAPITests.__allTests),
+        testCase(SDGConcurrencyAPITests.__allTests)
     ]
 }
 #endif

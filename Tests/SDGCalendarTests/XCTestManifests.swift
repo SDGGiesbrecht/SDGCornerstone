@@ -34,7 +34,7 @@ extension SDGCalendarAPITests {
         ("testHebrewWeekday", testHebrewWeekday),
         ("testHebrewYear", testHebrewYear),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testWeekday", testWeekday),
+        ("testWeekday", testWeekday)
     ]
 }
 
@@ -44,7 +44,7 @@ extension SDGCalendarInternalTests {
         ("testHebrewWeekdayDate", testHebrewWeekdayDate),
         ("testHebrewYear", testHebrewYear),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testRelativeDate", testRelativeDate),
+        ("testRelativeDate", testRelativeDate)
     ]
 }
 
@@ -52,16 +52,17 @@ extension SDGCalendarRegressionTests {
     static let __allTests = [
         ("testCalendarEquatability", testCalendarEquatability),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testWeekday", testWeekday),
+        ("testWeekday", testWeekday)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGCalendarAPITests.__allTests),
         testCase(SDGCalendarInternalTests.__allTests),
-        testCase(SDGCalendarRegressionTests.__allTests),
+        testCase(SDGCalendarRegressionTests.__allTests)
     ]
 }
 #endif

@@ -19,7 +19,7 @@ extension SDGPrecisionMathematicsAPITests {
         ("testInteger", testInteger),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testRationalNumber", testRationalNumber),
-        ("testWholeNumber", testWholeNumber),
+        ("testWholeNumber", testWholeNumber)
     ]
 }
 
@@ -27,15 +27,16 @@ extension SDGPrecisionMathematicsInternalTests {
     static let __allTests = [
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testUIntHalvesView", testUIntHalvesView),
-        ("testWholeNumberBinaryView", testWholeNumberBinaryView),
+        ("testWholeNumberBinaryView", testWholeNumberBinaryView)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGPrecisionMathematicsAPITests.__allTests),
-        testCase(SDGPrecisionMathematicsInternalTests.__allTests),
+        testCase(SDGPrecisionMathematicsInternalTests.__allTests)
     ]
 }
 #endif

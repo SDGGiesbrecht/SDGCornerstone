@@ -40,14 +40,15 @@ extension SDGCollectionsAPITests {
         ("testSet", testSet),
         ("testSetInRepresentableUniverse", testSetInRepresentableUniverse),
         ("testSymmetricDifference", testSymmetricDifference),
-        ("testUnion", testUnion),
+        ("testUnion", testUnion)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(SDGCollectionsAPITests.__allTests),
+        testCase(SDGCollectionsAPITests.__allTests)
     ]
 }
 #endif

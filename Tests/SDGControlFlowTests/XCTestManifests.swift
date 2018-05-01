@@ -24,14 +24,15 @@ extension SDGControlFlowAPITests {
         ("testNonmutatingVariants", testNonmutatingVariants),
         ("testPerformanceTest", testPerformanceTest),
         ("testShared", testShared),
-        ("testWeak", testWeak),
+        ("testWeak", testWeak)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(SDGControlFlowAPITests.__allTests),
+        testCase(SDGControlFlowAPITests.__allTests)
     ]
 }
 #endif
