@@ -98,12 +98,4 @@ class SDGPrecisionMathematicsAPITests : TestCase {
         testCustomStringConvertibleConformance(of: thousand, localizations: FormatLocalization.self, uniqueTestName: thousand.inDigits(), overwriteSpecificationInsteadOfFailing: false)
         testCustomStringConvertibleConformance(of: billion, localizations: FormatLocalization.self, uniqueTestName: billion.inDigits(), overwriteSpecificationInsteadOfFailing: false)
     }
-
-    static var allTests: [(String, (SDGPrecisionMathematicsAPITests) -> () throws -> Void)] {
-        return [
-            ("testInteger", testInteger),
-            ("testRationalNumber", testRationalNumber),
-            ("testWholeNumber", testWholeNumber)
-        ]
-    }
 }

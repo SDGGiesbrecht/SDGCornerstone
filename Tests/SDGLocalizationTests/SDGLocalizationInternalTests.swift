@@ -93,12 +93,4 @@ class SDGLocalizationInternalTests : TestCase {
 
         LocalizationSetting.setSystemWidePreferences(to: nil)
     }
-
-    static var allTests: [(String, (SDGLocalizationInternalTests) -> () throws -> Void)] {
-        return [
-            ("testContentLocalization", testContentLocalization),
-            ("testInterfaceLocalization", testInterfaceLocalization),
-            ("testLocalizationSetting", testLocalizationSetting)
-        ]
-    }
 }

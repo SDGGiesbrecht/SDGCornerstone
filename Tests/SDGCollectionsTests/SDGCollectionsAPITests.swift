@@ -754,32 +754,4 @@ class SDGCollectionsAPITests : TestCase {
     func testUnion() {
         testCustomStringConvertibleConformance(of: 1...3 ∪ 7...9, localizations: InterfaceLocalization.self, uniqueTestName: "1–3 ∪ 7–9", overwriteSpecificationInsteadOfFailing: false)
     }
-
-    static var allTests: [(String, (SDGCollectionsAPITests) -> () throws -> Void)] {
-        return [
-            ("testAbsoluteComplement", testAbsoluteComplement),
-            ("testAlternativePatterns", testAlternativePatterns),
-            ("testArray", testArray),
-            ("testBidirectionalCollection", testBidirectionalCollection),
-            ("testBijectiveMapping", testBijectiveMapping),
-            ("testCollection", testCollection),
-            ("testComparableSet", testComparableSet),
-            ("testCompositePattern", testCompositePattern),
-            ("testConditionalPattern", testConditionalPattern),
-            ("testDictionary", testDictionary),
-            ("testFiniteSet", testFiniteSet),
-            ("testIntensionalSet", testIntensionalSet),
-            ("testIntersection", testIntersection),
-            ("testLiteralPattern", testLiteralPattern),
-            ("testMutableSet", testMutableSet),
-            ("testNotPattern", testNotPattern),
-            ("testPatternClassCluster", testPatternClassCluster),
-            ("testRange", testRange),
-            ("testRangeReplaceableCollection", testRangeReplaceableCollection),
-            ("testRepetitionPattern", testRepetitionPattern),
-            ("testSet", testSet),
-            ("testSymmetricDifference", testSymmetricDifference),
-            ("testUnion", testUnion)
-        ]
-    }
 }

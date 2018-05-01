@@ -231,10 +231,4 @@ class MiscellaneousExampleTests : TestCase {
         XCTAssertEqual(1000 ↑ 11, decillion)
         XCTAssertEqual(WholeNumber(binary: "1 0000000000") ↑ 8, yobiMultiplier)
     }
-
-    static var allTests: [(String, (MiscellaneousExampleTests) -> () throws -> Void)] {
-        return [
-            ("testAbsoluteValue", testAbsoluteValue)
-        ]
-    }
 }

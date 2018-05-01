@@ -74,12 +74,4 @@ class SDGBinaryDataAPITests : TestCase {
         forDescription.binary[0] = true
         testCustomStringConvertibleConformance(of: forDescription.binary, localizations: InterfaceLocalization.self, uniqueTestName: "1st", overwriteSpecificationInsteadOfFailing: false)
     }
-
-    static var allTests: [(String, (SDGBinaryDataAPITests) -> () throws -> Void)] {
-        return [
-            ("testData", testData),
-            ("testDataStream", testDataStream),
-            ("testUInt", testUInt)
-        ]
-    }
 }

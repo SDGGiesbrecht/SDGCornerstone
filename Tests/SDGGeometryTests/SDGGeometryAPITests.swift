@@ -103,11 +103,4 @@ class SDGGeometryAPITests : TestCase {
         XCTAssert(vector.Δy ≈ 1)
         #endif
     }
-
-    static var allTests: [(String, (SDGGeometryAPITests) -> () throws -> Void)] {
-        return [
-            ("testPoint", testPoint),
-            ("testVector", testVector)
-        ]
-    }
 }

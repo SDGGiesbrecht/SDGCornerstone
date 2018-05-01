@@ -20,10 +20,4 @@ class SDGTextInternalTests : TestCase {
     func testLineViewIndex() {
         XCTAssertNil("ABC".lines.endIndex.newline(in: "ABC".scalars))
     }
-
-    static var allTests: [(String, (SDGTextInternalTests) -> () throws -> Void)] {
-        return [
-            ("testLineViewIndex", testLineViewIndex)
-        ]
-    }
 }

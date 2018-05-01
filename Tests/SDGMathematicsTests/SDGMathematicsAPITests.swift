@@ -540,25 +540,4 @@ class SDGMathematicsAPITests : TestCase {
         testVectorProtocolConformance(augend: VectorProtocolExample(1), addend: VectorProtocolExample(2), sum: VectorProtocolExample(3), multiplicand: VectorProtocolExample(4), multiplier: 5, product: VectorProtocolExample(20))
         XCTAssertEqual(5 × VectorProtocolExample(4), VectorProtocolExample(20))
     }
-
-    static var allTests: [(String, (SDGMathematicsAPITests) -> () throws -> Void)] {
-        return [
-            ("testAddable", testAddable),
-            ("testAngle", testAngle),
-            ("testBitField", testBitField),
-            ("testComparable", testComparable),
-            ("testFloat", testFloat),
-            ("testFunctionAnalysis", testFunctionAnalysis),
-            ("testInt", testInt),
-            ("testOneDimensionalPoint", testOneDimensionalPoint),
-            ("testOrderedEnumeration", testOrderedEnumeration),
-            ("testPointProtocol", testPointProtocol),
-            ("testRealArithmetic", testRealArithmetic),
-            ("testSequence", testSequence),
-            ("testSubtractable", testSubtractable),
-            ("testTuple", testTuple),
-            ("testUInt", testUInt),
-            ("testVectorProtocol", testVectorProtocol)
-        ]
-    }
 }

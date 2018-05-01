@@ -30,10 +30,4 @@ class SDGExternalProcessRegressionTests : TestCase {
         }
         #endif
     }
-
-    static var allTests: [(String, (SDGExternalProcessRegressionTests) -> () throws -> Void)] {
-        return [
-            ("testDelayedShellOutput", testDelayedShellOutput)
-        ]
-    }
 }

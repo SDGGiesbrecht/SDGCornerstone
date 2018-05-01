@@ -102,15 +102,4 @@ class SDGMathematicsRegressionTests : TestCase {
         #endif
         let _: Float = 3 − 2
     }
-
-    static var allTests: [(String, (SDGMathematicsRegressionTests) -> () throws -> Void)] {
-        return [
-            ("testAddAndSetIsUnambiguous", testAddAndSetIsUnambiguous),
-            ("testDivisionIsUnambiguous", testDivisionIsUnambiguous),
-            ("testDivisionOfNegatives", testDivisionOfNegatives),
-            ("testFloor", testFloor),
-            ("testSubtraction", testSubtraction),
-            ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous)
-        ]
-    }
 }

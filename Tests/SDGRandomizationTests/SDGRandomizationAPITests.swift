@@ -108,18 +108,4 @@ class SDGRandomizationAPITests : TestCase {
     func testUInt() {
         testRandomizableNumberConformance(of: UInt.self)
     }
-
-    static var allTests: [(String, (SDGRandomizationAPITests) -> () throws -> Void)] {
-        return [
-            ("testBool", testBool),
-            ("testCollection", testCollection),
-            ("testCyclicalNumberGenerator", testCyclicalNumberGenerator),
-            ("testDouble", testDouble),
-            ("testInt", testInt),
-            ("testMeasurement", testMeasurement),
-            ("testPseudorandomNumberGenerator", testPseudorandomNumberGenerator),
-            ("testRangeReplaceableCollection", testRangeReplaceableCollection),
-            ("testUInt", testUInt)
-        ]
-    }
 }
