@@ -45,13 +45,4 @@ class SDGCalendarInternalTests : TestCase {
         let date = CalendarDate.hebrewNow()
         XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
     }
-
-    static var allTests: [(String, (SDGCalendarInternalTests) -> () throws -> Void)] {
-        return [
-            ("testGregorianWeekdayDate", testGregorianWeekdayDate),
-            ("testHebrewWeekdayDate", testHebrewWeekdayDate),
-            ("testHebrewYear", testHebrewYear),
-            ("testRelativeDate", testRelativeDate)
-        ]
-    }
 }

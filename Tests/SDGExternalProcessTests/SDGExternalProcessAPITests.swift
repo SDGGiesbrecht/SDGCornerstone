@@ -99,11 +99,4 @@ class SDGExternalProcessAPITests : TestCase {
         }
         #endif
     }
-
-    static var allTests: [(String, (SDGExternalProcessAPITests) -> () throws -> Void)] {
-        return [
-            ("testExternalProcess", testExternalProcess),
-            ("testShell", testShell)
-        ]
-    }
 }

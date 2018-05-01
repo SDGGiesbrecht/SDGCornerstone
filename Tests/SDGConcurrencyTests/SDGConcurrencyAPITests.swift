@@ -47,10 +47,4 @@ class SDGConcurrencyAPITests : TestCase {
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertNil(driver)
     }
-
-    static var allTests: [(String, (SDGConcurrencyAPITests) -> () throws -> Void)] {
-        return [
-            ("testRunLoop", testRunLoop)
-        ]
-    }
 }

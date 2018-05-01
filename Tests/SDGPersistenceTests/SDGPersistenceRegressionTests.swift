@@ -41,11 +41,4 @@ class SDGPersistenceRegressionTests : TestCase {
         XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
         XCTAssert(url.path.hasSuffix("A Folder/A File"))
     }
-
-    static var allTests: [(String, (SDGPersistenceRegressionTests) -> () throws -> Void)] {
-        return [
-            ("testCachePermissions", testCachePermissions),
-            ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled)
-        ]
-    }
 }

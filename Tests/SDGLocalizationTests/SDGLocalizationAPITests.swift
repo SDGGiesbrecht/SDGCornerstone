@@ -246,17 +246,4 @@ class SDGLocalizationAPITests : TestCase {
 
         testCustomStringConvertibleConformance(of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"), localizations: _InterfaceLocalization.self, uniqueTestName: "Invalid Digit", overwriteSpecificationInsteadOfFailing: false)
     }
-
-    static var allTests: [(String, (SDGLocalizationAPITests) -> () throws -> Void)] {
-        return [
-            ("testBool", testBool),
-            ("testLocalization", testLocalization),
-            ("testLocalizationRelationships", testLocalizationRelationships),
-            ("testLocalizationSetting", testLocalizationSetting),
-            ("testRange", testRange),
-            ("testRationalArithmetic", testRationalArithmetic),
-            ("testUserFacingDynamicText", testUserFacingDynamicText),
-            ("testWholeArithmetic", testWholeArithmetic)
-        ]
-    }
 }

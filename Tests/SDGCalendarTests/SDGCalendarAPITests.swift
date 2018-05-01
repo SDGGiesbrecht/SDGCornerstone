@@ -362,27 +362,4 @@ class SDGCalendarAPITests : TestCase {
             }
         }
     }
-
-    static var allTests: [(String, (SDGCalendarAPITests) -> () throws -> Void)] {
-        return [
-            ("testCalendarComponent", testCalendarComponent),
-            ("testCalendarDate", testCalendarDate),
-            ("testCalendarInterval", testCalendarInterval),
-            ("testGregorianDay", testGregorianDay),
-            ("testGregorianHour", testGregorianHour),
-            ("testGregorianMinute", testGregorianMinute),
-            ("testGregorianMonth", testGregorianMonth),
-            ("testGregorianSecond", testGregorianSecond),
-            ("testGregorianWeekday", testGregorianWeekday),
-            ("testGregorianYear", testGregorianYear),
-            ("testHebrewDay", testHebrewDay),
-            ("testHebrewHour", testHebrewHour),
-            ("testHebrewMonth", testHebrewMonth),
-            ("testHebrewMonthAndYear", testHebrewMonthAndYear),
-            ("testHebrewPart", testHebrewPart),
-            ("testHebrewWeekday", testHebrewWeekday),
-            ("testHebrewYear", testHebrewYear),
-            ("testWeekday", testWeekday)
-        ]
-    }
 }

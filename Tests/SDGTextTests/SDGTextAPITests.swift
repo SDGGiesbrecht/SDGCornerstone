@@ -489,22 +489,4 @@ class SDGTextAPITests : TestCase {
             verifyVisible(codePoint)
         }
     }
-
-    static var allTests: [(String, (SDGTextAPITests) -> () throws -> Void)] {
-        return [
-            ("testCharacterSet", testCharacterSet),
-            ("testLineView", testLineView),
-            ("testLineViewIndex", testLineViewIndex),
-            ("testRange", testRange),
-            ("testScalarView", testScalarView),
-            ("testSemanticMarkup", testSemanticMarkup),
-            ("testStrictString", testStrictString),
-            ("testStrictStringClusterView", testStrictStringClusterView),
-            ("testString", testString),
-            ("testStringClusterIndex", testStringClusterIndex),
-            ("testStringScalarIndex", testStringScalarIndex),
-            ("testStringScalarView", testStringScalarView),
-            ("testUnicodeScalar", testUnicodeScalar)
-        ]
-    }
 }

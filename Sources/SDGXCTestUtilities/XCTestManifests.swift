@@ -1,5 +1,5 @@
 /*
- SDGTextInternalTests.swift
+ XCTestManifests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
@@ -12,12 +12,19 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@testable import SDGText
-import SDGXCTestUtilities
+import XCTest
 
-class SDGTextInternalTests : TestCase {
-
-    func testLineViewIndex() {
-        XCTAssertNil("ABC".lines.endIndex.newline(in: "ABC".scalars))
-    }
+extension TestCase {
+    static let __allTests = [
+        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
+    ]
 }
+
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
+public func __allTests() -> [XCTestCaseEntry] {
+    return [
+        testCase(TestCase.__allTests)
+    ]
+}
+#endif

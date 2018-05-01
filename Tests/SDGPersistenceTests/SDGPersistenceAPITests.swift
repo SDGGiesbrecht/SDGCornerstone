@@ -215,15 +215,4 @@ class SDGPersistenceAPITests : TestCase {
         XCTAssertEqual(users.path(relativeTo: johnDoe), "/Users")
         XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
     }
-
-    static var allTests: [(String, (SDGPersistenceAPITests) -> () throws -> Void)] {
-        return [
-            ("testFileConvertible", testFileConvertible),
-            ("testFileManager", testFileManager),
-            ("testLosslessStringConvertible", testLosslessStringConvertible),
-            ("testPreferences", testPreferences),
-            ("testSpecification", testSpecification),
-            ("testURL", testURL)
-        ]
-    }
 }

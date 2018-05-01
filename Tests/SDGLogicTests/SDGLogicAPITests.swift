@@ -70,13 +70,4 @@ class SDGLogicAPITests : TestCase {
             // Ensures syntax works.
         }
     }
-
-    static var allTests: [(String, (SDGLogicAPITests) -> () throws -> Void)] {
-        return [
-            ("testAny", testAny),
-            ("testBool", testBool),
-            ("testEquatable", testEquatable),
-            ("testOptional", testOptional)
-        ]
-    }
 }

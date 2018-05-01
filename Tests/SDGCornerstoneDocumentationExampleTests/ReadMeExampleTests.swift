@@ -130,10 +130,4 @@ class ReadMeExampleTests : TestCase {
             // [_End_]
         }
     }
-
-    static var allTests: [(String, (ReadMeExampleTests) -> () throws -> Void)] {
-        return [
-            ("testReadMe", testReadMe)
-        ]
-    }
 }

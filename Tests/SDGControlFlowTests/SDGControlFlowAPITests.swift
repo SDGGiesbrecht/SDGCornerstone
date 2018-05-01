@@ -217,17 +217,4 @@ class SDGControlFlowAPITests : TestCase {
         pointee = nil
         XCTAssertNil(reference.pointee)
     }
-
-    static var allTests: [(String, (SDGControlFlowAPITests) -> () throws -> Void)] {
-        return [
-            ("testBuildConfiguration", testBuildConfiguration),
-            ("testCaching", testCaching),
-            ("testCodable", testCodable),
-            ("testIterableEnumeration", testIterableEnumeration),
-            ("testNonmutatingVariants", testNonmutatingVariants),
-            ("testPerformanceTest", testPerformanceTest),
-            ("testShared", testShared),
-            ("testWeak", testWeak)
-        ]
-    }
 }

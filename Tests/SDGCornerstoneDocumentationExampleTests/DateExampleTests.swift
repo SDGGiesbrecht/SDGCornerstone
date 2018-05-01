@@ -82,10 +82,4 @@ class DateExampleTests : TestCase {
         CalendarDate.register(DaysIntoMillennium.self)
         testCodableConformance(of: unregistered, uniqueTestName: testName)
     }
-
-    static var allTests: [(String, (DateExampleTests) -> () throws -> Void)] {
-        return [
-            ("testCustomDate", testCustomDate)
-        ]
-    }
 }

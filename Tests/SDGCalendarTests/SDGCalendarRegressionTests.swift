@@ -36,11 +36,4 @@ class SDGCalendarRegressionTests : TestCase {
             XCTAssertEqual(date.hebrewWeekday, .sunday)
         }
     }
-
-    static var allTests: [(String, (SDGCalendarRegressionTests) -> () throws -> Void)] {
-        return [
-            ("testCalendarEquatability", testCalendarEquatability),
-            ("testWeekday", testWeekday)
-        ]
-    }
 }

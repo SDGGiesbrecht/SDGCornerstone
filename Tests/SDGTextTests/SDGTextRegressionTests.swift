@@ -58,14 +58,4 @@ class SDGTextRegressionTests : TestCase {
         let glitch = StrictString("x{a^a}")
         XCTAssertEqual(glitch.lastMatch(for: "{".scalars)?.range, glitch.index(after: glitch.startIndex) ..< glitch.index(after: glitch.index(after: glitch.startIndex)))
     }
-
-    static var allTests: [(String, (SDGTextRegressionTests) -> () throws -> Void)] {
-        return [
-            ("testLastLineNotDropped", testLastLineNotDropped),
-            ("testMatchlessComponentSeperation", testMatchlessComponentSeperation),
-            ("testMatchlessSearch", testMatchlessSearch),
-            ("testNestingLevelLocation", testNestingLevelLocation),
-            ("testReverseSearch", testReverseSearch)
-        ]
-    }
 }

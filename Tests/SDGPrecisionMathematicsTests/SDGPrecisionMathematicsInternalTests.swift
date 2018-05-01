@@ -40,11 +40,4 @@ class SDGPrecisionMathematicsInternalTests : TestCase {
 
         XCTAssert(WholeNumber.BinaryView.IndexDistance(digitDistance: 0, bitDistance: 0).hashValue ≤ Int.max)
     }
-
-    static var allTests: [(String, (SDGPrecisionMathematicsInternalTests) -> () throws -> Void)] {
-        return [
-            ("testUIntHalvesView", testUIntHalvesView),
-            ("testWholeNumberBinaryView", testWholeNumberBinaryView)
-        ]
-    }
 }

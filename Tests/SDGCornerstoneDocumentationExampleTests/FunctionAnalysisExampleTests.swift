@@ -92,14 +92,4 @@ class FunctionAnalysisExampleTests : TestCase {
 
         XCTAssert(minimum ∈ −10 ... 10)
     }
-
-    static var allTests: [(String, (FunctionAnalysisExampleTests) -> () throws -> Void)] {
-        return [
-            ("testFindLocalMinimum", testFindLocalMinimum),
-            ("testUndefinedCaseOneForFindLocalMaximum", testUndefinedCaseOneForFindLocalMaximum),
-            ("testUndefinedCaseOneForFindLocalMinimum", testUndefinedCaseOneForFindLocalMinimum),
-            ("testUndefinedCaseTwoForFindLocalMaximum", testUndefinedCaseTwoForFindLocalMaximum),
-            ("testUndefinedCaseTwoForFindLocalMinimum", testUndefinedCaseTwoForFindLocalMinimum)
-        ]
-    }
 }
