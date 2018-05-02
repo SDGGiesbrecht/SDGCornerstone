@@ -47,6 +47,5 @@ tests += SDGPersistenceTests.__allTests()
 tests += SDGPrecisionMathematicsTests.__allTests()
 tests += SDGRandomizationTests.__allTests()
 tests += SDGTextTests.__allTests()
-tests += SDGXCTestUtilities.__allTests()
 
 XCTMain(tests)
