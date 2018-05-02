@@ -51,7 +51,7 @@ Simply add `SDGCornerstone` as a dependency in `Package.swift`:
 let package = Package(
     name: "MyPackage",
     dependencies: [
-        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", .upToNextMinor(from: Version(0, 9, 2))),
+        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", .upToNextMinor(from: Version(0, 9, 3))),
     ],
     targets: [
         .target(name: "MyTarget", dependencies: [
