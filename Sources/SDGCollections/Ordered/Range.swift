@@ -76,6 +76,18 @@ extension RangeFamily {
     }
 }
 
+extension RangeFamily where Bound : Hashable {
+    // MARK: - where Bound : Hashable
+
+    // MARK: - Hashable
+
+    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    /// The hash value.
+    @_inlineable public var hashValue: Int {
+        return lowerBound.hashValue ^ upperBound.hashValue
+    }
+}
+
 extension Range : RangeFamily {
 
     // MARK: - RangeFamily
@@ -91,6 +103,9 @@ extension Range : RangeFamily {
     // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
     /// The element type.
     public typealias Element = Bound
+}
+extension Range : Hashable where Bound : Hashable {
+    // MARK: - where Bound : Hashable
 }
 
 extension ClosedRange : RangeFamily {
@@ -109,6 +124,9 @@ extension ClosedRange : RangeFamily {
     /// The element type.
     public typealias Element = Bound
 }
+extension ClosedRange : Hashable where Bound : Hashable {
+    // MARK: - where Bound : Hashable
+}
 
 extension CountableRange : RangeFamily {
 
@@ -120,6 +138,9 @@ extension CountableRange : RangeFamily {
         return false
     }
 }
+extension CountableRange : Hashable where Bound : Hashable {
+    // MARK: - where Bound : Hashable
+}
 
 extension CountableClosedRange : RangeFamily {
 
@@ -130,4 +151,7 @@ extension CountableClosedRange : RangeFamily {
     @_inlineable public static var hasClosedUpperBound: Bool {
         return true
     }
+}
+extension CountableClosedRange : Hashable where Bound : Hashable {
+    // MARK: - where Bound : Hashable
 }

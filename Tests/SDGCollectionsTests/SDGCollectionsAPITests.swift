@@ -538,6 +538,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testRange() {
+        testHashableConformance(differingInstances: (0 ..< 1, 1 ..< 2))
         testComparableSetConformance(of: 1 ..< 10 as Range, member: 1, nonmember: 10, superset: 1 ..< 20, overlapping: 5 ..< 15, disjoint: 11 ..< 20)
         testComparableSetConformance(of: 1 ... 10 as ClosedRange, member: 1, nonmember: 11, superset: 1 ... 20, overlapping: 5 ... 15, disjoint: 11 ... 20)
         testComparableSetConformance(of: 1 ..< 10 as CountableRange, member: 1, nonmember: 10, superset: 1 ..< 20, overlapping: 5 ..< 15, disjoint: 11 ..< 20)
