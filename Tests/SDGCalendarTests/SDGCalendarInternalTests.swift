@@ -23,10 +23,10 @@ class SDGCalendarInternalTests : TestCase {
     func testDate() {
         let date = CalendarDate(gregorian: .august, 28, 8232)
         let datesDirectory = testSpecificationDirectory().appendingPathComponent("Date Formats")
-        compare(String(date.gregorianischesDatumAufDeutsch(mitJahr: true, mitWochentag: true)), against: datesDirectory.appendingPathComponent("Deutsch"), overwriteSpecificationInsteadOfFailing: false)
-        compare(String(date.dateGrégorienneEnFrançais(.sentenceMedial, avecAn: true, avecJourDeSemaine: true).html()), against: datesDirectory.appendingPathComponent("Français"), overwriteSpecificationInsteadOfFailing: false)
-        compare(String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)), against: datesDirectory.appendingPathComponent("Ελληνικά"), overwriteSpecificationInsteadOfFailing: false)
-        compare(String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)), against: datesDirectory.appendingPathComponent("עברית"), overwriteSpecificationInsteadOfFailing: false)
+        compare(String(date.gregorianischesDatumAufDeutsch(mitJahr: true, mitWochentag: true)), against: datesDirectory.appendingPathComponent("Deutsch.txt"), overwriteSpecificationInsteadOfFailing: false)
+        compare(String(date.dateGrégorienneEnFrançais(.sentenceMedial, avecAn: true, avecJourDeSemaine: true).html()), against: datesDirectory.appendingPathComponent("Français.txt"), overwriteSpecificationInsteadOfFailing: false)
+        compare(String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)), against: datesDirectory.appendingPathComponent("Ελληνικά.txt"), overwriteSpecificationInsteadOfFailing: false)
+        compare(String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)), against: datesDirectory.appendingPathComponent("עברית.txt"), overwriteSpecificationInsteadOfFailing: false)
     }
     
     func testGregorianMonth() {
@@ -36,7 +36,7 @@ class SDGCalendarInternalTests : TestCase {
                 print(month._σεΕλληνικά(πτώση), to: &list)
             }
         }
-        compare(list, against: testSpecificationDirectory().appendingPathComponent("Ελληνικά"), overwriteSpecificationInsteadOfFailing: false)
+        compare(list, against: testSpecificationDirectory().appendingPathComponent("Ελληνικά.txt"), overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testGregorianWeekdayDate() {
