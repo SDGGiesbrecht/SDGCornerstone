@@ -19,7 +19,7 @@ import SDGPersistenceTestUtilities
 import SDGXCTestUtilities
 
 class SDGCalendarInternalTests : TestCase {
-    
+
     func testDate() {
         let date = CalendarDate(gregorian: .august, 28, 8232)
         let datesDirectory = testSpecificationDirectory().appendingPathComponent("Date Formats")
@@ -28,7 +28,7 @@ class SDGCalendarInternalTests : TestCase {
         compare(String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)), against: datesDirectory.appendingPathComponent("Ελληνικά.txt"), overwriteSpecificationInsteadOfFailing: false)
         compare(String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)), against: datesDirectory.appendingPathComponent("עברית.txt"), overwriteSpecificationInsteadOfFailing: false)
     }
-    
+
     func testGregorianMonth() {
         var list = ""
         for month in GregorianMonth.january ... GregorianMonth.december {
