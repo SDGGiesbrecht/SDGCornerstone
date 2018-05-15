@@ -164,6 +164,8 @@ class SDGCalendarAPITests : TestCase {
 
     func testCalendarInterval() {
         testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
+        testCustomStringConvertibleConformance(of: 1.days, localizations: FormatLocalization.self, uniqueTestName: "1 Day", overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: 2.days, localizations: FormatLocalization.self, uniqueTestName: "2 Days", overwriteSpecificationInsteadOfFailing: false)
 
         XCTAssert((365.days × 400).inGregorianLeapYearCycles < 1)
         XCTAssert(28.days.inHebrewMoons < 1)
@@ -171,6 +173,7 @@ class SDGCalendarAPITests : TestCase {
 
     func testGregorianDay() {
         testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
+        testCustomStringConvertibleConformance(of: GregorianDay(4), localizations: FormatLocalization.self, uniqueTestName: "4", overwriteSpecificationInsteadOfFailing: false)
 
         var day: GregorianDay = 29
         var month: GregorianMonth = .february
@@ -188,15 +191,18 @@ class SDGCalendarAPITests : TestCase {
     func testGregorianHour() {
         testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
         testDecoding(GregorianHour.self, failsFor: 600) // Invalid raw value.
+        testCustomStringConvertibleConformance(of: GregorianHour(6), localizations: FormatLocalization.self, uniqueTestName: "6", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testGregorianMinute() {
         testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
+        testCustomStringConvertibleConformance(of: GregorianMinute(14), localizations: FormatLocalization.self, uniqueTestName: "14", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testGregorianMonth() {
         testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
         testDecoding(GregorianMonth.self, failsFor: 120) // Invalid raw value.
+        testCustomStringConvertibleConformance(of: GregorianMonth.august, localizations: FormatLocalization.self, uniqueTestName: "August", overwriteSpecificationInsteadOfFailing: false)
 
         let length = FloatMax(GregorianMonth.january.numberOfDays(leapYear: false)) × (1 as FloatMax).days
         XCTAssert(length ≥ GregorianMonth.minimumDuration)
@@ -224,6 +230,7 @@ class SDGCalendarAPITests : TestCase {
 
     func testGregorianSecond() {
         testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
+        testCustomStringConvertibleConformance(of: GregorianSecond(12), localizations: FormatLocalization.self, uniqueTestName: "12", overwriteSpecificationInsteadOfFailing: false)
 
         let second: GregorianSecond = 0.0
         XCTAssertEqual(second, 0)
@@ -233,10 +240,12 @@ class SDGCalendarAPITests : TestCase {
 
     func testGregorianWeekday() {
         testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
+        testCustomStringConvertibleConformance(of: GregorianWeekday.friday, localizations: FormatLocalization.self, uniqueTestName: "Friday", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testGregorianYear() {
         testCodableConformance(of: GregorianYear(1234), uniqueTestName: "1234")
+        testCustomStringConvertibleConformance(of: GregorianYear(1870), localizations: FormatLocalization.self, uniqueTestName: "1870", overwriteSpecificationInsteadOfFailing: false)
 
         let length = FloatMax(GregorianYear(2017).numberOfDays) × (1 as FloatMax).days
         XCTAssert(length ≥ GregorianYear.minimumDuration)
