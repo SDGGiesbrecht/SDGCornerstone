@@ -54,6 +54,14 @@ extension FileConvertible {
     ///
     /// - Throws: Any error encountered by `Data(contentsOfURL:options:)` or `init(file:origin:)`.
     public init(from url: URL) throws {
-        try self.init(file: try Data(contentsOf: url, options: [.mappedIfSafe]), origin: url)
+        let data: Data
+        if let read = try? Data(contentsOf: url, options: [.mappedIfSafe]) {
+            data = read
+        } else if let read = try? Data(contentsOf: URL(fileURLWithPath: url.path.decomposedStringWithCanonicalMapping), options: [.mappedIfSafe]) { // [_Exempt from Test Coverage_] Only steps in if the file system has bugs.
+            data = read
+        } else {
+            data = try Data(contentsOf: URL(fileURLWithPath: url.path.precomposedStringWithCanonicalMapping), options: [.mappedIfSafe])
+        }
+        try self.init(file: data, origin: url)
     }
 }
