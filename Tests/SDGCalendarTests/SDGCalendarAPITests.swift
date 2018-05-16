@@ -160,6 +160,8 @@ class SDGCalendarAPITests : TestCase {
         }
         let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
         testCustomStringConvertibleConformance(of: relative, localizations: FormatLocalization.self, uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")", overwriteSpecificationInsteadOfFailing: false)
+        
+        _ = "\(CalendarDate(Date()))"
     }
 
     func testCalendarInterval() {
@@ -240,7 +242,9 @@ class SDGCalendarAPITests : TestCase {
 
     func testGregorianWeekday() {
         testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
-        testCustomStringConvertibleConformance(of: GregorianWeekday.friday, localizations: FormatLocalization.self, uniqueTestName: "Friday", overwriteSpecificationInsteadOfFailing: false)
+        for ordinal in 1 ... 7 {
+            testCustomStringConvertibleConformance(of: GregorianWeekday(ordinal: ordinal), localizations: FormatLocalization.self, uniqueTestName: ordinal.inDigits(), overwriteSpecificationInsteadOfFailing: false)
+        }
     }
 
     func testGregorianYear() {
@@ -293,6 +297,7 @@ class SDGCalendarAPITests : TestCase {
 
     func testHebrewHour() {
         testCodableConformance(of: HebrewHour(12), uniqueTestName: "12")
+        testCustomStringConvertibleConformance(of: HebrewHour(3), localizations: FormatLocalization.self, uniqueTestName: "3", overwriteSpecificationInsteadOfFailing: false)
 
         XCTAssertEqual(HebrewHour(5).inDigits(), "5")
     }
@@ -303,6 +308,12 @@ class SDGCalendarAPITests : TestCase {
         testCodableConformance(of: HebrewMonth.adarI, uniqueTestName: "Adar I")
         testCodableConformance(of: HebrewMonth.adarII, uniqueTestName: "Adar II")
         testCodableConformance(of: HebrewMonth.elul, uniqueTestName: "Elul")
+        for ordinal in 1 ... 12 {
+            let month = HebrewMonth(ordinal: ordinal, leapYear: false)
+            testCustomStringConvertibleConformance(of: month, localizations: FormatLocalization.self, uniqueTestName: ordinal.inDigits(), overwriteSpecificationInsteadOfFailing: false)
+        }
+        testCustomStringConvertibleConformance(of: HebrewMonth.adarI, localizations: FormatLocalization.self, uniqueTestName: "Adar I", overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: HebrewMonth.adarII, localizations: FormatLocalization.self, uniqueTestName: "Adar II", overwriteSpecificationInsteadOfFailing: false)
 
         let length = FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false)) × (1 as FloatMax).days
         XCTAssert(length ≥ HebrewMonth.minimumDuration)
@@ -342,10 +353,12 @@ class SDGCalendarAPITests : TestCase {
 
     func testHebrewMonthAndYear() {
         testCodableConformance(of: HebrewMonthAndYear(month: .tishrei, year: 2345), uniqueTestName: "Tishrei, 2345")
+        testCustomStringConvertibleConformance(of: HebrewMonthAndYear(month: .nisan, year: 4460), localizations: FormatLocalization.self, uniqueTestName: "Nisan, 4460", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testHebrewPart() {
         testCodableConformance(of: HebrewPart(124), uniqueTestName: "124")
+        testCustomStringConvertibleConformance(of: HebrewPart(82), localizations: FormatLocalization.self, uniqueTestName: "82", overwriteSpecificationInsteadOfFailing: false)
 
         XCTAssertEqual(HebrewPart(102).inDigits(), "102")
     }

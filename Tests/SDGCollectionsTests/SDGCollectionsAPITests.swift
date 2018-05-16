@@ -131,6 +131,8 @@ class SDGCollectionsAPITests : TestCase {
 
         XCTAssertEqual([1, 2, 3].bijectiveIndexMapping.count, 3)
         XCTAssertEqual([1, 2, 3].bijectiveIndexMapping.count, 3)
+        
+        _ = mapping.wrappedInstance
     }
 
     func testCollection() {

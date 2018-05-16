@@ -202,9 +202,8 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
         if let result = cachedDefinition as? D {
             return result
-        } else {
-            // [_Exempt from Test Coverage_]
-            return recomputeDefinition(as: D.self)
+        } else { // [_Exempt from Test Coverage_]
+            return recomputeDefinition(as: D.self) // [_Exempt from Test Coverage_]
         }
     }
 
