@@ -64,7 +64,7 @@ import SDGCornerstoneLocalizations
             return // Passing
         }
         // [_Exempt from Test Coverage_] Not testable (would require failing a test).
-        
+
         if overwriteSpecificationInsteadOfFailing {
             do {
                 try StrictString(string).save(to: specification) // Enforce a normalized specification.

@@ -199,7 +199,7 @@ class SDGLocalizationAPITests : TestCase {
         })
         XCTAssertEqual(simple.resolved(for: .français), "Bonjour, le monde !")
         XCTAssert(¬simple.resolved().isEmpty)
-        
+
         _ = simplified.wrappedInstance
     }
 

@@ -28,7 +28,7 @@ class SDGTextAPITests : TestCase {
     func testCharacterSet() {
         testSetInRepresentableUniverseConformance(of: CharacterSet.self, a: "a", b: "e", c: "i")
     }
-    
+
     func testFont() {
         _ = Font.systemSize
     }
@@ -201,7 +201,7 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(SemanticMarkup("").source, "")
         XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
         XCTAssertEqual(SemanticMarkup().source, "")
-        
+
         let html = SemanticMarkup("&<>").subscripted().html()
         compare(String(html), against: testSpecificationDirectory().appendingPathComponent("SemanticMarkup/HTML/Escapes.txt"), overwriteSpecificationInsteadOfFailing: false)
         _ = markup.playgroundDescription
