@@ -24,20 +24,19 @@ class SDGExternalProcessAPITests : TestCase {
 
         XCTAssertNil(ExternalProcess(searching: [
             "no/such/file",
-            "tmp", // Directory
+            "/tmp", // Directory
             ".file" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: nil, validate: { (_: ExternalProcess) in true }), "Failed to reject non‐executables.")
         XCTAssertEqual(ExternalProcess(searching: [
             "no/such/file",
-            "tmp", // Directory
+            "/tmp", // Directory
             ".file" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: "swift", validate: { _ in true })?.executable.lastPathComponent, "swift", "Failed to find with “which”.")
         XCTAssertNil(ExternalProcess(searching: [
             "no/such/file",
-            "tmp", // Directory
+            "/tmp", // Directory
             ".file" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: "swift", validate: { _ in false }), "Failed to reject the executable according to custom validation.")
-
         #endif
     }
 
@@ -97,6 +96,8 @@ class SDGExternalProcessAPITests : TestCase {
         } catch {
             XCTFail("Unexpected error: \(command) → \(error)")
         }
+
+        _ = "\(Shell.default)"
         #endif
     }
 }

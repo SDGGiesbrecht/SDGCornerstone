@@ -160,7 +160,7 @@ class SDGCalendarAPITests : TestCase {
         }
         let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
         testCustomStringConvertibleConformance(of: relative, localizations: FormatLocalization.self, uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")", overwriteSpecificationInsteadOfFailing: false)
-        
+
         _ = "\(CalendarDate(Date()))"
     }
 

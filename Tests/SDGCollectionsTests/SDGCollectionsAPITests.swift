@@ -131,7 +131,7 @@ class SDGCollectionsAPITests : TestCase {
 
         XCTAssertEqual([1, 2, 3].bijectiveIndexMapping.count, 3)
         XCTAssertEqual([1, 2, 3].bijectiveIndexMapping.count, 3)
-        
+
         _ = mapping.wrappedInstance
     }
 
@@ -295,6 +295,11 @@ class SDGCollectionsAPITests : TestCase {
 
         let set = AnyCollection(Set(endString))
         _ = set.difference(from: startString)
+
+        XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 ≠ "." }))))
+        XCTAssertNil("...".scalars.lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
+        XCTAssertNil("...".scalars.firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
+        XCTAssertNil("...".scalars.matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])).isEmpty)
     }
 
     struct ComparableSetExample : ComparableSet {

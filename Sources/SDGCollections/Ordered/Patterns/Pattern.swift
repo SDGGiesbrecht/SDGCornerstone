@@ -30,7 +30,7 @@ open class Pattern<Element : Equatable> {
     }
 
     /// This initializer does nothing. It only exists so that subclasses have an available parent initializer they can forward to in order to satisfy the compiler.
-    @_inlineable public init() {
+    @_inlineable public init() { // [_Exemt from Test Coverage._]
 
     }
 
