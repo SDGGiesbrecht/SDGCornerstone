@@ -16,14 +16,15 @@ import XCTest
 
 extension TestCase {
     static let __allTests = [
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
+        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(TestCase.__allTests),
+        testCase(TestCase.__allTests)
     ]
 }
 #endif

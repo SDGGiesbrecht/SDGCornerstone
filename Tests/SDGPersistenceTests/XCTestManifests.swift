@@ -22,7 +22,7 @@ extension SDGPersistenceAPITests {
         ("testLosslessStringConvertible", testLosslessStringConvertible),
         ("testPreferences", testPreferences),
         ("testSpecification", testSpecification),
-        ("testURL", testURL),
+        ("testURL", testURL)
     ]
 }
 
@@ -30,15 +30,16 @@ extension SDGPersistenceRegressionTests {
     static let __allTests = [
         ("testCachePermissions", testCachePermissions),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled),
+        ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGPersistenceAPITests.__allTests),
-        testCase(SDGPersistenceRegressionTests.__allTests),
+        testCase(SDGPersistenceRegressionTests.__allTests)
     ]
 }
 #endif

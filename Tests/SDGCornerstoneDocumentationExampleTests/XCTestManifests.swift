@@ -17,7 +17,7 @@ import XCTest
 extension DateExampleTests {
     static let __allTests = [
         ("testCustomDate", testCustomDate),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
+        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
     ]
 }
 
@@ -28,7 +28,7 @@ extension FunctionAnalysisExampleTests {
         ("testUndefinedCaseOneForFindLocalMaximum", testUndefinedCaseOneForFindLocalMaximum),
         ("testUndefinedCaseOneForFindLocalMinimum", testUndefinedCaseOneForFindLocalMinimum),
         ("testUndefinedCaseTwoForFindLocalMaximum", testUndefinedCaseTwoForFindLocalMaximum),
-        ("testUndefinedCaseTwoForFindLocalMinimum", testUndefinedCaseTwoForFindLocalMinimum),
+        ("testUndefinedCaseTwoForFindLocalMinimum", testUndefinedCaseTwoForFindLocalMinimum)
     ]
 }
 
@@ -48,24 +48,25 @@ extension MiscellaneousExampleTests {
         ("testNestingLevel", testNestingLevel),
         ("testRationalNumberLiterals", testRationalNumberLiterals),
         ("testRunLoopUsage", testRunLoopUsage),
-        ("testWholeNumberLiterals", testWholeNumberLiterals),
+        ("testWholeNumberLiterals", testWholeNumberLiterals)
     ]
 }
 
 extension ReadMeExampleTests {
     static let __allTests = [
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testReadMe", testReadMe),
+        ("testReadMe", testReadMe)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(DateExampleTests.__allTests),
         testCase(FunctionAnalysisExampleTests.__allTests),
         testCase(MiscellaneousExampleTests.__allTests),
-        testCase(ReadMeExampleTests.__allTests),
+        testCase(ReadMeExampleTests.__allTests)
     ]
 }
 #endif

@@ -20,14 +20,15 @@ extension SDGLogicAPITests {
         ("testBool", testBool),
         ("testEquatable", testEquatable),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testOptional", testOptional),
+        ("testOptional", testOptional)
     ]
 }
 
-#if !os(macOS)
+#if !canImport(ObjectiveC)
+// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(SDGLogicAPITests.__allTests),
+        testCase(SDGLogicAPITests.__allTests)
     ]
 }
 #endif
