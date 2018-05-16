@@ -106,12 +106,13 @@ class SDGLocalizationInternalTests : TestCase {
         }
         compare(list, against: testSpecificationDirectory().appendingPathComponent("Ordinals.txt"), overwriteSpecificationInsteadOfFailing: false)
         var numerals = ""
-        for number in [111, 222, 333, 444, 555, 666, 777, 888, 999, 1000] {
+        for number in [1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999] {
             print(number.inDigits(), to: &numerals)
-            print(number._σεΕλληνικούςΑριθμούς())
-            print(number._σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false))
-            print(number._בספרות־עבריות())
-            print(number.ספרות־עבריות(גרשיים: false))
+            print(number._σεΕλληνικούςΑριθμούς(), to: &numerals)
+            print(number._σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false), to: &numerals)
+            print(number._בספרות־עבריות(), to: &numerals)
+            print(number.ספרות־עבריות(גרשיים: false), to: &numerals)
         }
+        compare(numerals, against: testSpecificationDirectory().appendingPathComponent("Numerals.txt"), overwriteSpecificationInsteadOfFailing: false)
     }
 }

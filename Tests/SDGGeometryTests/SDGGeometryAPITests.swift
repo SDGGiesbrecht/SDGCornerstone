@@ -21,6 +21,7 @@ class SDGGeometryAPITests : TestCase {
 
     func testAngle() {
         _ = 0°.playgroundDescription
+        _ = (−90)°.playgroundDescription
     }
 
     func testPoint() {

@@ -63,7 +63,6 @@ import SDGCornerstoneLocalizations
         if string == specificationString {
             return // Passing
         }
-        
         // [_Exempt from Test Coverage_] Not testable (would require failing a test).
         
         if overwriteSpecificationInsteadOfFailing {

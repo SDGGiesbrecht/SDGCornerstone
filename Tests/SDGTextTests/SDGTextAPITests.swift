@@ -17,9 +17,11 @@ import SDGCollections
 import SDGText
 import SDGXCTestUtilities
 
+import SDGCornerstoneLocalizations
 import SDGMathematicsTestUtilities
 import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities
+import SDGLocalizationTestUtilities
 
 class SDGTextAPITests : TestCase {
 
@@ -33,6 +35,8 @@ class SDGTextAPITests : TestCase {
 
     func testLineView() {
         testBidirectionalCollectionConformance(of: "A\nB\nC".lines)
+        testCustomStringConvertibleConformance(of: "A\nB\nC".lines, localizations: APILocalization.self, uniqueTestName: "ABC", overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: "ABC\nDEF".lines.first!, localizations: APILocalization.self, uniqueTestName: "ABC", overwriteSpecificationInsteadOfFailing: false)
 
         let fileLines = [
             "Line 1",
@@ -176,6 +180,7 @@ class SDGTextAPITests : TestCase {
         testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
         testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
         testCodableConformance(of: SemanticMarkup("àbçđę...").superscripted(), uniqueTestName: "Unicode")
+        testCustomStringConvertibleConformance(of: SemanticMarkup("ABC").superscripted(), localizations: APILocalizations.self, uniqueTestName: "ABC", overwriteSpecificationInsteadOfFailing: false)
 
         let markup: SemanticMarkup = "..."
         XCTAssertEqual(markup.scalars, markup.source.scalars)
@@ -196,6 +201,10 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(SemanticMarkup("").source, "")
         XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
         XCTAssertEqual(SemanticMarkup().source, "")
+        
+        let html = SemanticMarkup("&<>").subscripted().html()
+        compare(String(html), against: testSpecificationDirectory().appendingPathComponent("SemanticMarkup/HTML/Escapes.txt"), overwriteSpecificationInsteadOfFailing: false)
+        _ = markup.playgroundDescription
     }
 
     func testStrictString() {
@@ -203,6 +212,7 @@ class SDGTextAPITests : TestCase {
         testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
         testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
         testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+        testCustomStringConvertibleConformance(of: StrictString("ABC"), localizations: APILocalization.self, uniqueTestName: "ABC", overwriteSpecificationInsteadOfFailing: false)
 
         var string = StrictString("\u{BC}")
         let appendix: UnicodeScalar = "\u{BD}"
