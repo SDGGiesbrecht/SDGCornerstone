@@ -46,7 +46,7 @@ extension String : FileConvertible {
         } else if let string = String(data: file, encoding: .utf32) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
             self = string
         } else if let string = String(data: file, encoding: .isoLatin1) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
-            self = string
+            self = string // [_Exempt from Test Coverage_]
         } else {
             _unreachable()
         }

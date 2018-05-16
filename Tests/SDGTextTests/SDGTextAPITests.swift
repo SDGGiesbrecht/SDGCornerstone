@@ -26,6 +26,10 @@ class SDGTextAPITests : TestCase {
     func testCharacterSet() {
         testSetInRepresentableUniverseConformance(of: CharacterSet.self, a: "a", b: "e", c: "i")
     }
+    
+    func testFont() {
+        _ = Font.systemSize
+    }
 
     func testLineView() {
         testBidirectionalCollectionConformance(of: "A\nB\nC".lines)

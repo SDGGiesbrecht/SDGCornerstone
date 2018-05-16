@@ -56,4 +56,6 @@
     test(function: (arccsc, "arccsc"), on: 1 × 3, returns: (0.339_83 as T).rad, file: file, line: line)
     test(function: (arccot, "arccot"), on: 1 × 5, returns: (0.197_39 as T).rad, file: file, line: line)
     test(function: (arccot, "arccot"), on: −2, returns: (2.677_94 as T).rad, file: file, line: line)
+    
+    _ = (7 as T).floatingPointApproximation
 }

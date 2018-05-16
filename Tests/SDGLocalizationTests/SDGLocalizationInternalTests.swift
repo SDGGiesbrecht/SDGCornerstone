@@ -100,10 +100,18 @@ class SDGLocalizationInternalTests : TestCase {
         for number in 1 ... 2 {
             for genre in [.masculin, .féminin] as [_GenreGrammatical] {
                 for nombre in [.singular, .plural] as [GrammaticalNumber] {
-                    print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre), to: &list)
+                    print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
                 }
             }
         }
         compare(list, against: testSpecificationDirectory().appendingPathComponent("Ordinals.txt"), overwriteSpecificationInsteadOfFailing: false)
+        var numerals = ""
+        for number in [111, 222, 333, 444, 555, 666, 777, 888, 999, 1000] {
+            print(number.inDigits(), to: &numerals)
+            print(number._σεΕλληνικούςΑριθμούς())
+            print(number._σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false))
+            print(number._בספרות־עבריות())
+            print(number.ספרות־עבריות(גרשיים: false))
+        }
     }
 }

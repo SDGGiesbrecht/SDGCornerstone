@@ -208,8 +208,8 @@ extension FileManager {
 
         var result: [URL] = []
         for object in enumerator {
-            guard let url = object as? URL else { // [_Exempt from Test Coverage_] It is unknown why something other than a URL would be returned.
-                throw FileManager.unknownFileReadingError
+            guard let url = object as? URL else {
+                throw FileManager.unknownFileReadingError // [_Exempt from Test Coverage_] It is unknown why something other than a URL would be returned.
             }
 
             let isDirectory: Bool
@@ -226,8 +226,8 @@ extension FileManager {
             }
         }
 
-        if let error = failureReason { // [_Exempt from Test Coverage_] It is unknown what circumstances would actually cause an error.
-            throw error
+        if let error = failureReason {
+            throw error // [_Exempt from Test Coverage_] It is unknown what circumstances would actually cause an error.
         }
 
         return result

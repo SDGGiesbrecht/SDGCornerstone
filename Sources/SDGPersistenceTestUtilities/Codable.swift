@@ -64,7 +64,8 @@ import SDGCornerstoneLocalizations
         test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
 
         let newSpecification = try String(file: encoded, origin: nil)
-        if newSpecification ∉ specifications { // [_Exempt from Test Coverage_]
+        if newSpecification ∉ specifications {
+            // [_Exempt from Test Coverage_]
             let now = CalendarDate.gregorianNow()
             try newSpecification.save(to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt"))
         }
@@ -86,8 +87,8 @@ import SDGCornerstoneLocalizations
         let encoded = try JSONEncoder().encode([invalidMock])
         let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
         fail(String(UserFacing<StrictString, APILocalization>({ localization in
-            switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            switch localization { // [_Exempt from Test Coverage_]
+            case .englishCanada:
                 return StrictString("No error thrown. Decoded: \(decoded)")
             }
         }).resolved()), file: file, line: line)

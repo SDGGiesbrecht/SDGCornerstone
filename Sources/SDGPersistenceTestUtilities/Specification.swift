@@ -62,36 +62,38 @@ import SDGCornerstoneLocalizations
         }
         if string == specificationString {
             return // Passing
-        } // [_Exempt from Test Coverage_]
-
-        if overwriteSpecificationInsteadOfFailing { // [_Exempt from Test Coverage_]
-            do { // [_Exempt from Test Coverage_]
+        }
+        
+        // [_Exempt from Test Coverage_] Not testable (would require failing a test).
+        
+        if overwriteSpecificationInsteadOfFailing {
+            do {
                 try StrictString(string).save(to: specification) // Enforce a normalized specification.
             } catch {
                 fail("\(error)", file: file, line: line)
-            } // [_Exempt from Test Coverage_]
+            }
             return
-        } // [_Exempt from Test Coverage_]
+        }
 
-        let stringLines = string.lines.map({ String($0.line) }) // [_Exempt from Test Coverage_]
-        let specificationLines = specificationString.lines.map({ String($0.line) }) // [_Exempt from Test Coverage_]
+        let stringLines = string.lines.map({ String($0.line) })
+        let specificationLines = specificationString.lines.map({ String($0.line) })
         let differences = stringLines.difference(from: specificationLines)
 
         var report = ""
-        for difference in differences { // [_Exempt from Test Coverage_]
+        for difference in differences {
             switch difference {
-            case .keep: // [_Exempt from Test Coverage_]
+            case .keep:
                 print("  [...]", to: &report)
-            case .remove(let range): // [_Exempt from Test Coverage_]
-                print(specificationLines[range].map({ "− " + $0 }).joined(separator: "\n"), to: &report) // [_Exempt from Test Coverage_]
-            case .insert(let range): // [_Exempt from Test Coverage_]
-                print(stringLines[range].map({ "+ " + $0 }).joined(separator: "\n"), to: &report) // [_Exempt from Test Coverage_]
+            case .remove(let range):
+                print(specificationLines[range].map({ "− " + $0 }).joined(separator: "\n"), to: &report)
+            case .insert(let range):
+                print(stringLines[range].map({ "+ " + $0 }).joined(separator: "\n"), to: &report)
             }
-        } // [_Exempt from Test Coverage_]
+        }
 
         fail(String(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            case .englishCanada:
                 return StrictString("String does not match specification.\n\(specification.path)\n\n\(report)\n")
             }
         }).resolved()), file: file, line: line)

@@ -25,6 +25,7 @@ class SDGLocalizationAPITests : TestCase {
 
     func testAngle() {
         testCustomStringConvertibleConformance(of: 90°, localizations: FormatLocalization.self, uniqueTestName: "90°", overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: −90°, localizations: FormatLocalization.self, uniqueTestName: "−90°", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testBool() {
@@ -48,6 +49,7 @@ class SDGLocalizationAPITests : TestCase {
     }
     func testCustomStringConvertible() {
         testCustomStringConvertibleConformance(of: "...", localizations: IconlessLocalizationExample.self, uniqueTestName: "No Icon", overwriteSpecificationInsteadOfFailing: false)
+        XCTAssert(IconlessLocalizationExample.none.description == "zxx")
     }
 
     enum LocalizationExample : String, Localization {
@@ -197,6 +199,8 @@ class SDGLocalizationAPITests : TestCase {
         })
         XCTAssertEqual(simple.resolved(for: .français), "Bonjour, le monde !")
         XCTAssert(¬simple.resolved().isEmpty)
+        
+        _ = simplified.wrappedInstance
     }
 
     func testWholeArithmetic() {
@@ -249,5 +253,6 @@ class SDGLocalizationAPITests : TestCase {
         XCTAssertEqual(24.abbreviatedEnglishOrdinal().rawTextApproximation(), "24th")
 
         testCustomStringConvertibleConformance(of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"), localizations: _InterfaceLocalization.self, uniqueTestName: "Invalid Digit", overwriteSpecificationInsteadOfFailing: false)
+        _ = TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc").errorDescription
     }
 }
