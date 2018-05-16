@@ -23,20 +23,31 @@ class SDGExternalProcessAPITests : TestCase {
         #if !(os(iOS) || os(watchOS) || os(tvOS))
 
         XCTAssertNil(ExternalProcess(searching: [
-            "no/such/file",
+            "/no/such/file",
             "/tmp", // Directory
-            ".file" // Not executable
+            "/.file" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: nil, validate: { (_: ExternalProcess) in true }), "Failed to reject non‐executables.")
         XCTAssertEqual(ExternalProcess(searching: [
-            "no/such/file",
+            "/no/such/file",
             "/tmp", // Directory
-            ".file" // Not executable
+            "/.file" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: "swift", validate: { _ in true })?.executable.lastPathComponent, "swift", "Failed to find with “which”.")
         XCTAssertNil(ExternalProcess(searching: [
-            "no/such/file",
+            "/no/such/file",
             "/tmp", // Directory
-            ".file" // Not executable
+            "/.file" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: "swift", validate: { _ in false }), "Failed to reject the executable according to custom validation.")
+        #endif
+    }
+
+    func testExternalProcessError() {
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
+        do {
+            try ExternalProcess(at: URL(fileURLWithPath: "/no/such/process")).run([])
+            XCTFail("Process should have thrown an error.")
+        } catch {
+            _ = String(describing: error)
+        }
         #endif
     }
 

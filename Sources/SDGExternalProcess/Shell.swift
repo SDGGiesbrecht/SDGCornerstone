@@ -88,7 +88,7 @@ public class Shell : TransparentWrapper {
             } else {
                 return argument
             }
-        }).joined(separator: " ")
+        }).joined(separator: " ") // [_Exempt from Test Coverage_] False result in Xcode 9.3.
 
         reportProgress("$ " + commandString)
 

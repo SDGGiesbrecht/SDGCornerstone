@@ -17,6 +17,7 @@ import SDGCollections
 @testable import SDGLocalization
 import SDGCornerstoneLocalizations
 
+import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
@@ -92,5 +93,17 @@ class SDGLocalizationInternalTests : TestCase {
         XCTAssertEqual(LocalizationSetting.current.value.resolved() as SDGLocalizationAPITests.LocalizationExample, .français)
 
         LocalizationSetting.setSystemWidePreferences(to: nil)
+    }
+
+    func testWholeNumber() {
+        var list = ""
+        for number in 1 ... 2 {
+            for genre in [.masculin, .féminin] as [_GenreGrammatical] {
+                for nombre in [.singular, .plural] as [GrammaticalNumber] {
+                    print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre), to: &list)
+                }
+            }
+        }
+        compare(list, against: testSpecificationDirectory().appendingPathComponent("Ordinals.txt"), overwriteSpecificationInsteadOfFailing: false)
     }
 }

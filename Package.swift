@@ -279,7 +279,8 @@ let package = Package(
             "SDGLogic",
             "SDGCollections",
             "SDGPrecisionMathematics",
-            "SDGCornerstoneLocalizations"
+            "SDGCornerstoneLocalizations",
+            "SDGPersistenceTestUtilities"
             ]),
         .testTarget(name: "SDGGeometryTests", dependencies: [
             "SDGGeometry", "SDGXCTestUtilities",

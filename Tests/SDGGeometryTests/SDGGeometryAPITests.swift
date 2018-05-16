@@ -19,6 +19,10 @@ import SDGXCTestUtilities
 
 class SDGGeometryAPITests : TestCase {
 
+    func testAngle() {
+        _ = 0°.playgroundDescription
+    }
+
     func testPoint() {
         #if canImport(CoreGraphics)
         XCTAssertEqual(CGPoint(x: 1, y: 1) − CGVector(Δx : 1, Δy : 1), CGPoint(x: 0, y: 0))

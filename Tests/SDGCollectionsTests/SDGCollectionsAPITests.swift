@@ -297,9 +297,9 @@ class SDGCollectionsAPITests : TestCase {
         _ = set.difference(from: startString)
 
         XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 ≠ "." }))))
-        XCTAssertNil("...".scalars.lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
-        XCTAssertNil("...".scalars.firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
-        XCTAssertNil("...".scalars.matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])).isEmpty)
+        XCTAssertNil("...".scalars.lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds))
+        XCTAssertNil("...".scalars.firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds))
+        XCTAssertNil("...".scalars.matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds).isEmpty)
     }
 
     struct ComparableSetExample : ComparableSet {

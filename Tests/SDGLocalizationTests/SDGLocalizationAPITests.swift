@@ -23,6 +23,10 @@ import SDGXCTestUtilities
 
 class SDGLocalizationAPITests : TestCase {
 
+    func testAngle() {
+        testCustomStringConvertibleConformance(of: 90°, localizations: FormatLocalization.self, uniqueTestName: "90°", overwriteSpecificationInsteadOfFailing: false)
+    }
+
     func testBool() {
         for boolean in [true, false] {
             XCTAssertNotEqual(boolean.checkOrX(), "")
