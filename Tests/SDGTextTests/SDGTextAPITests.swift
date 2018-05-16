@@ -180,7 +180,7 @@ class SDGTextAPITests : TestCase {
         testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
         testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
         testCodableConformance(of: SemanticMarkup("àbçđę...").superscripted(), uniqueTestName: "Unicode")
-        testCustomStringConvertibleConformance(of: SemanticMarkup("ABC").superscripted(), localizations: APILocalizations.self, uniqueTestName: "ABC", overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: SemanticMarkup("ABC").superscripted(), localizations: APILocalization.self, uniqueTestName: "ABC", overwriteSpecificationInsteadOfFailing: false)
 
         let markup: SemanticMarkup = "..."
         XCTAssertEqual(markup.scalars, markup.source.scalars)
