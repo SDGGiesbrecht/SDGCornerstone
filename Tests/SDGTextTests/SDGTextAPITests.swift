@@ -30,7 +30,9 @@ class SDGTextAPITests : TestCase {
     }
 
     func testFont() {
+        #if canImport(AppKit) || canImport(UIKit)
         _ = Font.systemSize
+        #endif
     }
 
     func testLineView() {
