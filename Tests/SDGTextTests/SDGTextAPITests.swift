@@ -213,6 +213,7 @@ class SDGTextAPITests : TestCase {
         testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
         testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
         testCustomStringConvertibleConformance(of: StrictString("ABC"), localizations: APILocalization.self, uniqueTestName: "ABC", overwriteSpecificationInsteadOfFailing: false)
+        testCustomStringConvertibleConformance(of: StrictString("ABC").clusters, localizations: APILocalization.self, uniqueTestName: "ABC", overwriteSpecificationInsteadOfFailing: false)
 
         var string = StrictString("\u{BC}")
         let appendix: UnicodeScalar = "\u{BD}"
