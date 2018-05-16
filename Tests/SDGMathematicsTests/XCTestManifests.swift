@@ -32,7 +32,7 @@ extension SDGMathematicsAPITests {
         ("testSubtractable", testSubtractable),
         ("testTuple", testTuple),
         ("testUInt", testUInt),
-        ("testVectorProtocol", testVectorProtocol)
+        ("testVectorProtocol", testVectorProtocol),
     ]
 }
 
@@ -44,16 +44,15 @@ extension SDGMathematicsRegressionTests {
         ("testFloor", testFloor),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testSubtraction", testSubtraction),
-        ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous)
+        ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous),
     ]
 }
 
-#if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
+#if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGMathematicsAPITests.__allTests),
-        testCase(SDGMathematicsRegressionTests.__allTests)
+        testCase(SDGMathematicsRegressionTests.__allTests),
     ]
 }
 #endif

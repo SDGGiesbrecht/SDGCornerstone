@@ -25,15 +25,14 @@ extension SDGRandomizationAPITests {
         ("testMeasurement", testMeasurement),
         ("testPseudorandomNumberGenerator", testPseudorandomNumberGenerator),
         ("testRangeReplaceableCollection", testRangeReplaceableCollection),
-        ("testUInt", testUInt)
+        ("testUInt", testUInt),
     ]
 }
 
-#if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
+#if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(SDGRandomizationAPITests.__allTests)
+        testCase(SDGRandomizationAPITests.__allTests),
     ]
 }
 #endif

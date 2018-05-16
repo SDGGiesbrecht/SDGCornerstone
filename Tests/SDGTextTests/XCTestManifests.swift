@@ -17,6 +17,7 @@ import XCTest
 extension SDGTextAPITests {
     static let __allTests = [
         ("testCharacterSet", testCharacterSet),
+        ("testFont", testFont),
         ("testLineView", testLineView),
         ("testLineViewIndex", testLineViewIndex),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
@@ -30,14 +31,14 @@ extension SDGTextAPITests {
         ("testStringClusterIndex", testStringClusterIndex),
         ("testStringScalarIndex", testStringScalarIndex),
         ("testStringScalarView", testStringScalarView),
-        ("testUnicodeScalar", testUnicodeScalar)
+        ("testUnicodeScalar", testUnicodeScalar),
     ]
 }
 
 extension SDGTextInternalTests {
     static let __allTests = [
         ("testLineViewIndex", testLineViewIndex),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
+        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
     ]
 }
 
@@ -48,17 +49,16 @@ extension SDGTextRegressionTests {
         ("testMatchlessComponentSeperation", testMatchlessComponentSeperation),
         ("testMatchlessSearch", testMatchlessSearch),
         ("testNestingLevelLocation", testNestingLevelLocation),
-        ("testReverseSearch", testReverseSearch)
+        ("testReverseSearch", testReverseSearch),
     ]
 }
 
-#if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
+#if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGTextAPITests.__allTests),
         testCase(SDGTextInternalTests.__allTests),
-        testCase(SDGTextRegressionTests.__allTests)
+        testCase(SDGTextRegressionTests.__allTests),
     ]
 }
 #endif

@@ -16,6 +16,7 @@ import XCTest
 
 extension SDGLocalizationAPITests {
     static let __allTests = [
+        ("testAngle", testAngle),
         ("testBool", testBool),
         ("testCasing", testCasing),
         ("testCustomStringConvertible", testCustomStringConvertible),
@@ -26,7 +27,7 @@ extension SDGLocalizationAPITests {
         ("testRange", testRange),
         ("testRationalArithmetic", testRationalArithmetic),
         ("testUserFacingDynamicText", testUserFacingDynamicText),
-        ("testWholeArithmetic", testWholeArithmetic)
+        ("testWholeArithmetic", testWholeArithmetic),
     ]
 }
 
@@ -35,16 +36,16 @@ extension SDGLocalizationInternalTests {
         ("testContentLocalization", testContentLocalization),
         ("testInterfaceLocalization", testInterfaceLocalization),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testLocalizationSetting", testLocalizationSetting)
+        ("testLocalizationSetting", testLocalizationSetting),
+        ("testWholeNumber", testWholeNumber),
     ]
 }
 
-#if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
+#if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGLocalizationAPITests.__allTests),
-        testCase(SDGLocalizationInternalTests.__allTests)
+        testCase(SDGLocalizationInternalTests.__allTests),
     ]
 }
 #endif

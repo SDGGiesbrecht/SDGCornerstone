@@ -16,17 +16,17 @@ import XCTest
 
 extension SDGGeometryAPITests {
     static let __allTests = [
+        ("testAngle", testAngle),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testPoint", testPoint),
-        ("testVector", testVector)
+        ("testVector", testVector),
     ]
 }
 
-#if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
+#if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(SDGGeometryAPITests.__allTests)
+        testCase(SDGGeometryAPITests.__allTests),
     ]
 }
 #endif

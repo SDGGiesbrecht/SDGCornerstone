@@ -14,28 +14,16 @@
 
 import XCTest
 
-extension SDGPrecisionMathematicsAPITests {
-    static let __allTests = [
-        ("testInteger", testInteger),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testRationalNumber", testRationalNumber),
-        ("testWholeNumber", testWholeNumber),
-    ]
-}
-
-extension SDGPrecisionMathematicsInternalTests {
+extension TestCase {
     static let __allTests = [
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testUIntHalvesView", testUIntHalvesView),
-        ("testWholeNumberBinaryView", testWholeNumberBinaryView),
     ]
 }
 
 #if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(SDGPrecisionMathematicsAPITests.__allTests),
-        testCase(SDGPrecisionMathematicsInternalTests.__allTests),
+        testCase(TestCase.__allTests),
     ]
 }
 #endif
