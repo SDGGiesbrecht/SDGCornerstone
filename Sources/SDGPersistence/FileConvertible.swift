@@ -57,7 +57,8 @@ extension FileConvertible {
         let data: Data
         if let read = try? Data(contentsOf: url, options: [.mappedIfSafe]) {
             data = read
-        } else if let read = try? Data(contentsOf: URL(fileURLWithPath: url.path.decomposedStringWithCanonicalMapping), options: [.mappedIfSafe]) { // [_Exempt from Test Coverage_] Only steps in if the file system has bugs.
+        } else if let read = try? Data(contentsOf: URL(fileURLWithPath: url.path.decomposedStringWithCanonicalMapping), options: [.mappedIfSafe]) { // [_Exempt from Test Coverage_]
+            // [_Exempt from Test Coverage_] Only steps in if the file system has bugs.
             data = read
         } else {
             data = try Data(contentsOf: URL(fileURLWithPath: url.path.precomposedStringWithCanonicalMapping), options: [.mappedIfSafe])
