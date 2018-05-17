@@ -46,7 +46,7 @@ class SDGGeometryAPITests : TestCase {
         static func == (precedingValue: TwoDimensionalVectorExample, followingValue: TwoDimensionalVectorExample) -> Bool {
             return precedingValue.vector == followingValue.vector
         }
-        typealias Scalar = CGVector.Scalar // swiftlint:disable:this nesting
+        typealias Scalar = CGVector.Scalar
         var Δx : CGFloat {
             get { return vector.Δx }
             set { vector.Δx = newValue }

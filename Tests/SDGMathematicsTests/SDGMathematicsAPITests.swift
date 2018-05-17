@@ -195,7 +195,7 @@ class SDGMathematicsAPITests : TestCase {
     }
 
     enum OrderedEnumerationExample : Int, OrderedEnumeration {
-        typealias RawValue = Int // swiftlint:disable:this nesting
+        typealias RawValue = Int
         case a
         case b
         case c
@@ -221,7 +221,7 @@ class SDGMathematicsAPITests : TestCase {
     }
 
     struct PointProtocolVectorSelfExample : Negatable, PointProtocol {
-        typealias Vector = PointProtocolVectorSelfExample // swiftlint:disable:this nesting
+        typealias Vector = PointProtocolVectorSelfExample
         var value: Int
         init(_ value: Int) {
             self.value = value
@@ -251,7 +251,7 @@ class SDGMathematicsAPITests : TestCase {
         func advanced(by n: Int32) -> PointProtocolStrideableExample {
             return PointProtocolStrideableExample(value.advanced(by: Int(n)))
         }
-        typealias Vector = Int64 // swiftlint:disable:this nesting
+        typealias Vector = Int64
         static func += (precedingValue: inout PointProtocolStrideableExample, followingValue: Int64) {
             precedingValue.value += Int(followingValue)
         }
@@ -270,7 +270,7 @@ class SDGMathematicsAPITests : TestCase {
         func advanced(by n: Int) -> PointProtocolStrideableVectorStrideExample {
             return PointProtocolStrideableVectorStrideExample(value.advanced(by: n))
         }
-        typealias Vector = Int // swiftlint:disable:this nesting
+        typealias Vector = Int
         static func += (precedingValue: inout PointProtocolStrideableVectorStrideExample, followingValue: Int) {
             precedingValue.value += followingValue
         }
@@ -299,7 +299,7 @@ class SDGMathematicsAPITests : TestCase {
         static func < (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample) -> Bool {
             return precedingValue.value < followingValue.value
         }
-        typealias Vector = RealArithmeticExample // swiftlint:disable:this nesting
+        typealias Vector = RealArithmeticExample
         init(_ uInt: SDGMathematics.UIntMax) {
             value = Double(uInt)
         }
@@ -417,7 +417,7 @@ class SDGMathematicsAPITests : TestCase {
         static func −= (precedingValue: inout SubtractableStrideableExample, followingValue: SubtractableStrideableExample) {
             precedingValue.value −= followingValue.value
         }
-        typealias Stride = SubtractableStrideableExample // swiftlint:disable:this nesting
+        typealias Stride = SubtractableStrideableExample
         func distance(to other: SubtractableStrideableExample) -> SubtractableStrideableExample {
             return SubtractableStrideableExample(value.distance(to: other.value))
         }
@@ -525,7 +525,7 @@ class SDGMathematicsAPITests : TestCase {
         var hashValue: Int {
             return value.hashValue
         }
-        typealias Scalar = Double // swiftlint:disable:this nesting
+        typealias Scalar = Double
         static func ×= (precedingValue: inout VectorProtocolExample, followingValue: Scalar) {
             precedingValue.value ×= followingValue
         }

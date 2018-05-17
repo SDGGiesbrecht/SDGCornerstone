@@ -112,7 +112,7 @@ extension WholeNumber {
 
         // MARK: - Collection
 
-        internal typealias Element = Bool // swiftlint:disable:this nesting
+        internal typealias Element = Bool
 
         internal let startIndex = Index(digit: 0, bit: 0)
         internal var endIndex: Index {
