@@ -33,6 +33,7 @@ open class TestCase : XCTestCase {
         }
 
         testAssertionMethod = XCTAssert
+        Thread.current.qualityOfService = .utility // The default of .userInteractive is absurd.
 
         super.setUp()
     }
