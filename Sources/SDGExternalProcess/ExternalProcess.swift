@@ -114,6 +114,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         process.standardOutput = pipe
         process.standardError = pipe
 
+        process.qualityOfService = Thread.current.qualityOfService
         process.launch()
 
         var output = String()
