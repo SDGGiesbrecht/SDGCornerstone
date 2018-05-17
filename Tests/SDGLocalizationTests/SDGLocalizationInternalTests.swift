@@ -17,6 +17,7 @@ import SDGCollections
 @testable import SDGLocalization
 import SDGCornerstoneLocalizations
 
+import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
@@ -92,5 +93,27 @@ class SDGLocalizationInternalTests : TestCase {
         XCTAssertEqual(LocalizationSetting.current.value.resolved() as SDGLocalizationAPITests.LocalizationExample, .français)
 
         LocalizationSetting.setSystemWidePreferences(to: nil)
+    }
+
+    func testWholeNumber() {
+        var list = ""
+        for number in 1 ... 2 {
+            for genre in [.masculin, .féminin] as [_GenreGrammatical] {
+                for nombre in [.singular, .plural] as [GrammaticalNumber] {
+                    print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
+                }
+            }
+        }
+        compare(list, against: testSpecificationDirectory().appendingPathComponent("Ordinals.txt"), overwriteSpecificationInsteadOfFailing: false)
+        var numerals = ""
+        for number in [1000, 1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999, 10_000] {
+            print(number.inDigits(), to: &numerals)
+            print(number._σεΕλληνικούςΑριθμούς(), to: &numerals)
+            print(number._σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false), to: &numerals)
+            print(number._בספרות־עבריות(), to: &numerals)
+            print(number.ספרות־עבריות(גרשיים: false), to: &numerals)
+            print("", to: &numerals)
+        }
+        compare(numerals, against: testSpecificationDirectory().appendingPathComponent("Numerals.txt"), overwriteSpecificationInsteadOfFailing: false)
     }
 }

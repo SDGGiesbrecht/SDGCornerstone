@@ -16,6 +16,7 @@ import XCTest
 
 extension SDGLocalizationAPITests {
     static let __allTests = [
+        ("testAngle", testAngle),
         ("testBool", testBool),
         ("testCasing", testCasing),
         ("testCustomStringConvertible", testCustomStringConvertible),
@@ -35,7 +36,8 @@ extension SDGLocalizationInternalTests {
         ("testContentLocalization", testContentLocalization),
         ("testInterfaceLocalization", testInterfaceLocalization),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
-        ("testLocalizationSetting", testLocalizationSetting)
+        ("testLocalizationSetting", testLocalizationSetting),
+        ("testWholeNumber", testWholeNumber)
     ]
 }
 

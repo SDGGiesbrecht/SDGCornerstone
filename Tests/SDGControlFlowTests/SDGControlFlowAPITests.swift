@@ -206,6 +206,8 @@ class SDGControlFlowAPITests : TestCase {
         shared?.value = 7
         XCTAssertEqual(shared?.value, 7)
         XCTAssertEqual(observer1?.lastReportedValue, 6)
+
+        _ = String(reflecting: Shared(1))
     }
 
     func testWeak() {
@@ -216,5 +218,7 @@ class SDGControlFlowAPITests : TestCase {
 
         pointee = nil
         XCTAssertNil(reference.pointee)
+
+        _ = reference.wrappedInstance
     }
 }

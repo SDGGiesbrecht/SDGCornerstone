@@ -63,7 +63,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         }
 
         for location in locations {
-            if checkLocation(location, validate: validate) {
+            if checkLocation(location, validate: validate) { // [_Exempt from Test Coverage_] False coverage result in Xcode 9.3.
                 self.init(at: location)
                 return
             }
@@ -71,7 +71,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
 
         if let name = commandName,
             let path = try? Shell.default.run(command: ["which", name]) {
-            let location = URL(fileURLWithPath: path)
+            let location = URL(fileURLWithPath: path) // [_Exempt from Test Coverage_] False coverage result in Xcode 9.3.
             if checkLocation(location, validate: validate) {
                 self.init(at: location)
                 return

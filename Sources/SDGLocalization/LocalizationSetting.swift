@@ -71,7 +71,7 @@ public struct LocalizationSetting : Codable, Equatable {
 
     private static let osApplicationPreferences: Shared<Preference> = {
         guard ProcessInfo.possibleApplicationIdentifier ≠ nil else {
-            return Shared(Preference.mock())
+            return Shared(Preference.mock()) // [_Exempt from Test Coverage_]
         }
 
         let preferences: Shared<Preference>
@@ -92,7 +92,7 @@ public struct LocalizationSetting : Codable, Equatable {
 
     private static let sdgApplicationPreferences: Shared<Preference> = {
         guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
-            return Shared(Preference.mock())
+            return Shared(Preference.mock()) // [_Exempt from Test Coverage_]
         }
         let preferences = PreferenceSet.preferences(for: applicationDomain + sdgDomainSuffix)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)

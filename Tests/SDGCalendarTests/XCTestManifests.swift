@@ -40,6 +40,8 @@ extension SDGCalendarAPITests {
 
 extension SDGCalendarInternalTests {
     static let __allTests = [
+        ("testDate", testDate),
+        ("testGregorianMonth", testGregorianMonth),
         ("testGregorianWeekdayDate", testGregorianWeekdayDate),
         ("testHebrewWeekdayDate", testHebrewWeekdayDate),
         ("testHebrewYear", testHebrewYear),

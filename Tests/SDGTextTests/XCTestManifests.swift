@@ -17,6 +17,7 @@ import XCTest
 extension SDGTextAPITests {
     static let __allTests = [
         ("testCharacterSet", testCharacterSet),
+        ("testFont", testFont),
         ("testLineView", testLineView),
         ("testLineViewIndex", testLineViewIndex),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),

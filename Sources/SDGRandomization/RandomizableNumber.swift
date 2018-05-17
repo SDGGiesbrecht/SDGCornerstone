@@ -64,8 +64,8 @@ extension RandomizableNumber where Self : RationalArithmetic {
     @_inlineable public init(randomInRange range: Range<Self>, fromRandomizer randomizer: Randomizer) {
 
         _assert(¬range.isEmpty, { (localization: _APILocalization) in
-            switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            switch localization { // [_Exempt from Test Coverage_]
+            case .englishCanada:
                 return "Empty range."
             }
         })

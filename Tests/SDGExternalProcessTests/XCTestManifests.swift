@@ -17,6 +17,7 @@ import XCTest
 extension SDGExternalProcessAPITests {
     static let __allTests = [
         ("testExternalProcess", testExternalProcess),
+        ("testExternalProcessError", testExternalProcessError),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testShell", testShell)
     ]

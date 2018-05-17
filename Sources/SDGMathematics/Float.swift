@@ -133,20 +133,20 @@ extension FloatFamily {
     @_inlineable @_versioned internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
 
         _assert(self > 0, { (localization: _APILocalization) -> String in
-            switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            switch localization { // [_Exempt from Test Coverage_]
+            case .englishCanada:
                 return "Logarithms of non‐positive numbers are undefined. (\(self))"
             }
         })
         _assert(base > 0, { (localization: _APILocalization) -> String in
-            switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            switch localization { // [_Exempt from Test Coverage_]
+            case .englishCanada:
                 return "Logarithms in a non‐positive base are undefined. (\(base))"
             }
         })
         _assert(base ≠ 1, { (localization: _APILocalization) -> String in
-            switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            switch localization { // [_Exempt from Test Coverage_]
+            case .englishCanada:
                 return "Logarithms in base 1 are undefined."
             }
         })
@@ -476,8 +476,8 @@ extension FloatFamily {
     @_inlineable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
 
         _assert(precedingValue.isNonNegative ∨ followingValue.isIntegral, { (localization: _APILocalization) -> String in
-            switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            switch localization { // [_Exempt from Test Coverage_]
+            case .englishCanada:
                 return "The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead. (\(precedingValue) ↑ \(followingValue))"
             }
         })

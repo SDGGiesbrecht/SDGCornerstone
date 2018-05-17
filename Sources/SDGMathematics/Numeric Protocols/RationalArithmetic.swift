@@ -62,8 +62,8 @@ extension RationalArithmetic {
     @_inlineable @_versioned internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
 
         _assert(exponent.isIntegral, { (localization: _APILocalization) -> String in
-            switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            switch localization { // [_Exempt from Test Coverage_]
+            case .englishCanada:
                 return "The result of a non‐integer exponent may be outside the set of rational numbers. Use a type that conforms to RealArithmetic instead. (\(exponent))"
             }
         })

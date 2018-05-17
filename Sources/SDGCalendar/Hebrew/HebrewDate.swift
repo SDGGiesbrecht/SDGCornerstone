@@ -167,7 +167,7 @@ internal struct HebrewDate : DateDefinition, MarkupPlaygroundDisplay {
             } else {
                 return result
             }
-        }).month
+        }).month // [_Exempt from Test Coverage_] False positive.
         remainder −= HebrewDate.intervalFromStartOfYear(toStartOf: month, leapYear: year.isLeapYear, yearLength: year.length)
 
         let day = HebrewDay(numberAlreadyElapsed: Int(remainder.inDays.rounded(.down)))
