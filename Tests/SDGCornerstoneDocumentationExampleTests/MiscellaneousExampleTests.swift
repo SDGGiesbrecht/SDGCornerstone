@@ -161,7 +161,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testIntegerLiterals() {
 
-        typealias Integer = SDGPrecisionMathematics.Integer // swiftlint:disable:this nesting
+        typealias Integer = SDGPrecisionMathematics.Integer
 
         // [_Define Example: Integer Literals_]
         let negativeMillion: Integer = −1_000_000

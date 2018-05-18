@@ -20,10 +20,10 @@ extension WholeNumber.BinaryView {
 
         // MARK: - Properties
 
-        internal typealias DigitIndex = Array<WholeNumber.Digit>.Index // swiftlint:disable:this nesting
+        internal typealias DigitIndex = Array<WholeNumber.Digit>.Index
         internal var digit: DigitIndex
 
-        internal typealias BitIndex = BinaryView<WholeNumber.Digit>.Index // swiftlint:disable:this nesting
+        internal typealias BitIndex = BinaryView<WholeNumber.Digit>.Index
         internal var bit: BitIndex
 
         // MARK: - Comparable
@@ -40,7 +40,7 @@ extension WholeNumber.BinaryView {
 
         // MARK: - PointProtocol
 
-        internal typealias Vector = WholeNumber.BinaryView.IndexDistance // swiftlint:disable:this nesting
+        internal typealias Vector = WholeNumber.BinaryView.IndexDistance
 
         internal static func += (precedingValue: inout Index, followingValue: Vector) {
             precedingValue.digit += followingValue.digitDistance

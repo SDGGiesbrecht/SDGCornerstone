@@ -120,12 +120,12 @@ public struct Preference : Equatable, TransparentWrapper {
             #if os(Linux)
             // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1)_]
             let encodedArray = try JSONEncoder().encode([theValue])
-            let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray // swiftlint:disable:this force_cast
+            let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray
             let object = cast(arrayObject.firstObject!)
             #else
             let encodedArray = try PropertyListEncoder().encode([theValue])
-            let arrayObject = try PropertyListSerialization.propertyList(from: encodedArray, options: [], format: nil) as! NSArray // swiftlint:disable:this force_cast
-            let object = arrayObject.firstObject! as! NSObject // swiftlint:disable:this force_cast
+            let arrayObject = try PropertyListSerialization.propertyList(from: encodedArray, options: [], format: nil) as! NSArray
+            let object = arrayObject.firstObject! as! NSObject
             #endif
             propertyListObject = object
         } catch { // [_Exempt from Test Coverage_]
@@ -174,7 +174,7 @@ public struct Preference : Equatable, TransparentWrapper {
                 return nil
             }
         }
-        return converted as! T? // swiftlint:disable:this force_cast
+        return converted as! T?
     }
 
     // MARK: - Equatable

@@ -34,6 +34,10 @@ open class TestCase : XCTestCase {
 
         testAssertionMethod = XCTAssert
 
+        #if !os(Linux) // [_Workaround: Linux does not have this property. (Swift 4.1)_]
+        Thread.current.qualityOfService = .utility // The default of .userInteractive is absurd.
+        #endif
+
         super.setUp()
     }
 
