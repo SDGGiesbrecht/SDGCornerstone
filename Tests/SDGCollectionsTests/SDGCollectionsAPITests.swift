@@ -333,7 +333,7 @@ class SDGCollectionsAPITests : TestCase {
 
     func testConditionalPattern() {
         testPattern(ConditionalPattern({ $0 < 10 }), match: [0])
-        XCTAssert(ConditionalPattern({ $0 < 10 }).matches(in: [11], at: 0).isEmpty)
+        XCTAssert(ConditionalPattern({ $0 < 10 }).matches(in: [11], at: 0, limitedTo: 1).isEmpty)
     }
 
     func testDictionary() {
@@ -526,15 +526,15 @@ class SDGCollectionsAPITests : TestCase {
     func testNotPattern() {
         let pattern = NotPattern(LiteralPattern([1]))
         testPattern(pattern, match: [2])
-        XCTAssert(NotPattern(LiteralPattern([1])).matches(in: [1], at: 0).isEmpty)
+        XCTAssert(NotPattern(LiteralPattern([1])).matches(in: [1], at: 0, limitedTo: 1).isEmpty)
 
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "¬1", overwriteSpecificationInsteadOfFailing: false)
     }
 
     class CustomPattern : SDGCollections.Pattern<Int> {
         let pattern = LiteralPattern([1])
-        override func matches<C>(in collection: C, at location: C.Index) -> [Range<C.Index>] where Int == C.Element, C : SearchableCollection {
-            return pattern.matches(in: collection, at: location)
+        override func matches<C>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> [Range<C.Index>] where Int == C.Element, C : SearchableCollection {
+            return pattern.matches(in: collection, at: location, limitedTo: upperBound)
         }
         override func reversed() -> CustomPattern {
             return self

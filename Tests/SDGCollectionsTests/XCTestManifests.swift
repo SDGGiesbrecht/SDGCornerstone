@@ -44,11 +44,18 @@ extension SDGCollectionsAPITests {
     ]
 }
 
+extension SDGCollectionsRegressionTests {
+    static let __allTests = [
+        ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch)
+    ]
+}
+
 #if !canImport(ObjectiveC)
 // MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(SDGCollectionsAPITests.__allTests)
+        testCase(SDGCollectionsAPITests.__allTests),
+        testCase(SDGCollectionsRegressionTests.__allTests)
     ]
 }
 #endif

@@ -307,12 +307,12 @@ where Element : Equatable, SubSequence : SearchableCollection {
 
 extension SearchableCollection {
 
-    @_inlineable @_versioned internal func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @_inlineable @_versioned internal func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         var checkingIndex = self.startIndex
         var collectionIndex = location
         while checkingIndex ≠ self.endIndex {
-            guard collectionIndex ≠ collection.endIndex else {
+            guard collectionIndex ≠ upperBound else {
                 // Ran out of space to check.
                 return nil
             }
@@ -338,7 +338,7 @@ extension SearchableCollection {
     @_inlineable public func firstMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>) -> PatternMatch<Self>? {
         var i = searchRange.lowerBound
         while i ≠ searchRange.upperBound {
-            if let range = pattern.primaryMatch(in: self, at: i) {
+            if let range = pattern.primaryMatch(in: self, at: i, limitedTo: searchRange.upperBound) {
                 return PatternMatch(range: range, in: self)
             }
             i = index(after: i)
@@ -359,7 +359,7 @@ extension SearchableCollection {
     @_inlineable @_versioned internal func _firstMatch<C : SearchableCollection>(for pattern: C, in searchRange: Range<Index>) -> PatternMatch<Self>? where C.Element == Self.Element {
         var i = searchRange.lowerBound
         while i ≠ searchRange.upperBound {
-            if let range = pattern.primaryMatch(in: self, at: i) {
+            if let range = pattern.primaryMatch(in: self, at: i, limitedTo: searchRange.upperBound) {
                 return PatternMatch(range: range, in: self)
             }
             i = index(after: i)
@@ -807,7 +807,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     @_inlineable public func hasPrefix(_ pattern: Pattern<Element>) -> Bool {
-        return pattern.primaryMatch(in: self, at: startIndex) ≠ nil
+        return pattern.primaryMatch(in: self, at: startIndex, limitedTo: endIndex) ≠ nil
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
@@ -820,7 +820,7 @@ extension SearchableCollection {
     }
 
     @_inlineable @_versioned internal func _hasPrefix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
-        return pattern.primaryMatch(in: self, at: startIndex) ≠ nil
+        return pattern.primaryMatch(in: self, at: startIndex, limitedTo: endIndex) ≠ nil
     }
     // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
     /// Returns `true` if `self` begins with `pattern`.
@@ -1007,7 +1007,7 @@ extension SearchableCollection {
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @_inlineable @discardableResult public func advance(_ index: inout Index, over pattern: Pattern<Element>) -> Bool {
-        if let match = pattern.primaryMatch(in: self, at: index) {
+        if let match = pattern.primaryMatch(in: self, at: index, limitedTo: endIndex) {
             index = match.upperBound
             return true
         } else {
@@ -1028,7 +1028,7 @@ extension SearchableCollection {
     }
 
     @_inlineable @_versioned internal func _advance<C : SearchableCollection>(_ index: inout Index, over pattern: C) -> Bool where C.Element == Self.Element {
-        if let match = pattern.primaryMatch(in: self, at: index) {
+        if let match = pattern.primaryMatch(in: self, at: index, limitedTo: endIndex) {
             index = match.upperBound
             return true
         } else {

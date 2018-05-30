@@ -465,7 +465,7 @@ extension SearchableBidirectionalCollection {
     ///     - pattern: The pattern to try.
     @_inlineable public func hasSuffix(_ pattern: Pattern<Element>) -> Bool {
         let backwards = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
     }
 
     // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
@@ -484,12 +484,12 @@ extension SearchableBidirectionalCollection {
     ///     - pattern: The pattern to try.
     @_inlineable public func hasSuffix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         let backwards = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
     }
 
     @_inlineable @_versioned internal func _hasSuffix<C : SearchableBidirectionalCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         let backwards = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
     }
     // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
     /// Returns `true` if `self` begins with `pattern`.
