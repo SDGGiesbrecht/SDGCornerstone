@@ -272,18 +272,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
         return String(rawTextApproximation())
     }
 
-    // MARK: - Equatable
-
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: SemanticMarkup, followingValue: SemanticMarkup) -> Bool {
-        return precedingValue.source == followingValue.source
-    }
-
     // MARK: - ExpressibleByStringLiteral
 
     // [_Inherit Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
@@ -293,14 +281,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     ///     - stringLiteral: The string literal.
     @_inlineable public init(stringLiteral: String) {
         self.init(StrictString(stringLiteral))
-    }
-
-    // MARK: - Hashable
-
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
-    /// The hash value.
-    public var hashValue: Int {
-        return source.hashValue
     }
 
     // MARK: - RangeReplaceableCollection

@@ -32,12 +32,6 @@ extension WholeNumber.BinaryView {
             return (precedingValue.digit, precedingValue.bit) < (followingValue.digit, followingValue.bit)
         }
 
-        // MARK: - Equatable
-
-        internal static func == (precedingValue: Index, followingValue: Index) -> Bool {
-            return (precedingValue.digit, precedingValue.bit) == (followingValue.digit, followingValue.bit)
-        }
-
         // MARK: - PointProtocol
 
         internal typealias Vector = WholeNumber.BinaryView.IndexDistance

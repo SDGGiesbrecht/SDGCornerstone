@@ -62,22 +62,10 @@ extension WholeNumber.BinaryView {
             return (precedingValue.digitDistance, precedingValue.bitDistance) < (followingValue.digitDistance, followingValue.bitDistance)
         }
 
-        // MARK: - Equatable
-
-        internal static func == (precedingValue: IndexDistance, followingValue: IndexDistance) -> Bool {
-            return (precedingValue.digitDistance, precedingValue.bitDistance) == (followingValue.digitDistance, followingValue.bitDistance)
-        }
-
         // MARK: - ExpressibleByIntegerLiteral
 
         internal init(integerLiteral: UIntMax) {
             self.init(integerLiteral)
-        }
-
-        // MARK: - Hashable
-
-        internal var hashValue: Int {
-            return bitDistance.hashValue
         }
 
         // MARK: - Negatable

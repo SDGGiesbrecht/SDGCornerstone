@@ -204,14 +204,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         self.init(stringLiteral)
     }
 
-    // MARK: - Hashable
-
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
-    /// The hash value.
-    public var hashValue: Int {
-        return string.hashValue
-    }
-
     // MARK: - RangeReplaceableCollection
 
     // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
