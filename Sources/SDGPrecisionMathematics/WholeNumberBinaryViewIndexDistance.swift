@@ -62,12 +62,6 @@ extension WholeNumber.BinaryView {
             return (precedingValue.digitDistance, precedingValue.bitDistance) < (followingValue.digitDistance, followingValue.bitDistance)
         }
 
-        // MARK: - Equatable
-
-        internal static func == (precedingValue: IndexDistance, followingValue: IndexDistance) -> Bool {
-            return (precedingValue.digitDistance, precedingValue.bitDistance) == (followingValue.digitDistance, followingValue.bitDistance)
-        }
-
         // MARK: - ExpressibleByIntegerLiteral
 
         internal init(integerLiteral: UIntMax) {
