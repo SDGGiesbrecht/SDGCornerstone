@@ -68,12 +68,6 @@ extension WholeNumber.BinaryView {
             self.init(integerLiteral)
         }
 
-        // MARK: - Hashable
-
-        internal var hashValue: Int {
-            return bitDistance.hashValue
-        }
-
         // MARK: - Negatable
 
         internal static postfix func −= (operand: inout IndexDistance) {
