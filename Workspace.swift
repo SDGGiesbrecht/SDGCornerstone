@@ -15,9 +15,9 @@ configuration.documentation.localizations = ["🇨🇦EN"]
 configuration.documentation.readMe.shortProjectDescription["🇨🇦EN"] = "SDGCornerstone forms the foundation of the SDG module family. It establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation)."
 
 configuration.documentation.readMe.quotation = Quotation(original: "הִנְנִי יִסַּד בְּצִיּוֹן אָבֶן אֶבֶן בֹּחַן פִּנַּת יִקְרַת מוּסָד מוּסָד׃")
-configuration.documentation.readMe.quotation.translation["🇨🇦EN"] = "Behold, I establish in Zion a stone, a tested stone, a precious cornerstone, a sure foundation."
-configuration.documentation.readMe.quotation.link["🇨🇦EN"] = URL(string: "https://www.biblegateway.com/passage/?search=Isaiah+28&version=WLC;NIV")!
-configuration.documentation.readMe.quotation.citation["🇨🇦EN"] = "⁧יהוה⁩/Yehova"
+configuration.documentation.readMe.quotation?.translation["🇨🇦EN"] = "Behold, I establish in Zion a stone, a tested stone, a precious cornerstone, a sure foundation."
+configuration.documentation.readMe.quotation?.link["🇨🇦EN"] = URL(string: "https://www.biblegateway.com/passage/?search=Isaiah+28&version=WLC;NIV")!
+configuration.documentation.readMe.quotation?.citation["🇨🇦EN"] = "⁧יהוה⁩/Yehova"
 
 configuration.documentation.readMe.featureList["🇨🇦EN"] = [
     "\u{2D} Localization tools (compatible with the Swift Package Manager and Linux).",
