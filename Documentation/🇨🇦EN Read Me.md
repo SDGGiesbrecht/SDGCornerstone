@@ -43,9 +43,9 @@ Use the entire package together by importing the `SDGCornerstone` product, or pi
 
 ## Importing
 
-`SDGCornerstone` is intended for use with the [Swift Package Manager](https://swift.org/package-manager/).
+SDGCornerstone provides libraries for use with the [Swift Package Manager](https://swift.org/package-manager/).
 
-Simply add `SDGCornerstone` as a dependency in `Package.swift`:
+Simply add SDGCornerstone as a dependency in `Package.swift` and specify which of the libraries to use:
 
 ```swift
 let package = Package(
@@ -84,7 +84,7 @@ let package = Package(
 )
 ```
 
-`SDGCornerstone` can then be imported in source files:
+The libraries’ modules can then be imported in source files:
 
 ```swift
 import SDGCornerstone
