@@ -145,7 +145,7 @@ class SDGMathematicsAPITests : TestCase {
         testRealArithmeticConformance(of: CGFloat.self)
         #endif
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        // [_Workaround: Probably available in Swift 4.2 (Swift 4.1)_]
+        // [_Workaround: Probably available in Swift 4.2 (Swift 4.1.2)_]
         testRealArithmeticConformance(of: Float80.self)
         #endif
         testRealArithmeticConformance(of: Float.self)
