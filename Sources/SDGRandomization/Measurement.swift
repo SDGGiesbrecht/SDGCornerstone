@@ -14,7 +14,7 @@
 
 import SDGMathematics
 
-// [_Workaround: In Swift 4.1, this can be just “extension Measurement {” (Swift 4.1)_]
+// [_Workaround: In Swift 4.1, this can be just “extension Measurement {” (Swift 4.1.2)_]
 extension Measurement where Scalar : RandomizableNumber {
     // MARK: - where Scalar : RandomizableNumber
 

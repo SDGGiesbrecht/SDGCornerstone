@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_exported import struct Foundation.Data // [_Workaround: The export works around a compiler bug. (Swift 4.1)_]
+@_exported import struct Foundation.Data // [_Workaround: The export works around a compiler bug. (Swift 4.1.2)_]
 
 extension Data : BitField {
 
