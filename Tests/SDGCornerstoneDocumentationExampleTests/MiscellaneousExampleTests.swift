@@ -216,7 +216,7 @@ class MiscellaneousExampleTests : TestCase {
         // The background run loop has now stopped.
         // [_End_]
 
-        XCTAssertNil(driver)
+        _ = driver
     }
 
     func testWholeNumberLiterals() {
