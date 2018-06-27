@@ -42,7 +42,7 @@ matrix:
       xcode_sdk: iphonesimulator
       script:
         - "swift package generate-xcodeproj"
-        - "xcodebuild test -destination \"name=iPhone 8"\ -scheme SDGCornerstone-Package"
+        - "xcodebuild test -destination \"name=iPhone 8\" -scheme SDGCornerstone-Package"
     - os: osx
       env:
         - JOB="watchOS"
