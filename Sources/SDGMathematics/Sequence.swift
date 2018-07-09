@@ -69,7 +69,6 @@ extension Sequence where Element : WholeArithmetic {
     }
 }
 
-
 extension Sequence where Element : RationalArithmetic {
 
     /// Returns the arithmetic mean.
