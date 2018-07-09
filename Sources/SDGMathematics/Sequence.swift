@@ -98,10 +98,10 @@ extension Sequence where Element : RationalArithmetic {
 
         let halfway = count / 2
         if count.isOdd {
-            return sorted[sorted.index(sorted.startIndex, offsetBy: halfway + 1)]
+            return sorted[sorted.index(sorted.startIndex, offsetBy: halfway)]
         } else {
-            let lower = sorted.index(sorted.startIndex, offsetBy: halfway)
-            let upper = sorted.index(after: lower)
+            let upper = sorted.index(sorted.startIndex, offsetBy: halfway)
+            let lower = sorted.index(before: upper)
             return [sorted[lower], sorted[upper]].mean()
         }
     }

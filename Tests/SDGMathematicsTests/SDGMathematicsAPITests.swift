@@ -367,12 +367,12 @@ class SDGMathematicsAPITests : TestCase {
         XCTAssertEqual(([0, 0, 0, 0, 50] as [Double]).mean(), 10)
         XCTAssertNil(([] as [Double]).mean())
 
-        XCTAssertEqual(([0] as [Double]).mean(), 0)
-        XCTAssertEqual(([−1, 0, 1] as [Double]).mean(), 0)
-        XCTAssertEqual(([−1, 1, 0] as [Double]).mean(), 0)
-        XCTAssertEqual(([1, 2, 3, 4] as [Double]).mean(), 2.5)
-        XCTAssertEqual(([1, 4, 3, 2] as [Double]).mean(), 2.5)
-        XCTAssertNil(([] as [Double]).mean())
+        XCTAssertEqual(([0] as [Double]).median(), 0)
+        XCTAssertEqual(([−1, 0, 1] as [Double]).median(), 0)
+        XCTAssertEqual(([−1, 1, 0] as [Double]).median(), 0)
+        XCTAssertEqual(([1, 2, 3, 4] as [Double]).median(), 2.5)
+        XCTAssertEqual(([1, 4, 3, 2] as [Double]).median(), 2.5)
+        XCTAssertNil(([] as [Double]).median())
 
         XCTAssertEqual("ABCABA".statisticalModes(), ["A"])
         XCTAssertEqual("ABCABAB".statisticalModes().sorted(), ["A", "B"])
