@@ -17,7 +17,7 @@ import WorkspaceConfiguration
 let configuration = WorkspaceConfiguration()
 configuration.applySDGDefaults()
 
-configuration.documentation.currentVersion = Version(0, 10, 0)
+configuration.documentation.currentVersion = Version(0, 10, 1)
 
 configuration.documentation.projectWebsite = URL(string: "https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone")!
 configuration.documentation.documentationURL = URL(string: "https://sdggiesbrecht.github.io/SDGCornerstone")!
