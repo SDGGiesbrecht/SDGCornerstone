@@ -13,6 +13,7 @@
  */
 
 extension Sequence where Element : Hashable {
+    // MARK: - where Element : Hashable
 
     /// Returns the statistical modes.
     ///
@@ -70,6 +71,7 @@ extension Sequence where Element : WholeArithmetic {
 }
 
 extension Sequence where Element : RationalArithmetic {
+    // MARK: - where Element : RationalArithmetic
 
     /// Returns the arithmetic mean.
     ///
@@ -95,7 +97,7 @@ extension Sequence where Element : RationalArithmetic {
         let count = sorted.count
         if count == 0 { return nil }
 
-        let halfway = count / 2
+        let halfway = count.dividedAccordingToEuclid(by: 2)
         if count.isOdd {
             return sorted[sorted.index(sorted.startIndex, offsetBy: halfway)]
         } else {
