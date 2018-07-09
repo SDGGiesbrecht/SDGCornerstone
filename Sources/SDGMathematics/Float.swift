@@ -113,7 +113,7 @@ extension FloatFamily {
     }
 
     // [_Inherit Documentation: SDGCornerstone.RealArithmetic.√_]
-    /// Returns the sequare root of `operand`.
+    /// Returns the square root of `operand`.
     ///
     /// - Parameters:
     ///     - operand: The radicand.
