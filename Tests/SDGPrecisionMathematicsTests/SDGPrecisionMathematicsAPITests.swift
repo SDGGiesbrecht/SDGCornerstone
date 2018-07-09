@@ -23,6 +23,23 @@ import SDGXCTestUtilities
 
 class SDGPrecisionMathematicsAPITests : TestCase {
 
+    func testCollection() {
+        XCTAssertEqual(([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as [RationalNumber]).mean(), 5)
+        XCTAssertEqual(([0, 0, 0, 0, 50] as [RationalNumber]).mean(), 10)
+        XCTAssertNil(([] as [RationalNumber]).mean())
+
+        XCTAssertEqual(([0] as [RationalNumber]).mean(), 0)
+        XCTAssertEqual(([−1, 0, 1] as [RationalNumber]).mean(), 0)
+        XCTAssertEqual(([−1, 1, 0] as [RationalNumber]).mean(), 0)
+        XCTAssertEqual(([1, 2, 3, 4] as [RationalNumber]).mean(), 2.5)
+        XCTAssertEqual(([1, 4, 3, 2] as [RationalNumber]).mean(), 2.5)
+        XCTAssertNil(([] as [RationalNumber]).mean())
+
+        XCTAssertEqual("ABCABA".statisticalModes(), ["A"])
+        XCTAssertEqual("ABCABAB".statisticalModes().sorted(), ["A", "B"])
+        XCTAssertEqual("".statisticalModes(), [])
+    }
+
     func testInteger() {
         testIntegralArithmeticConformance(of: Integer.self)
 
