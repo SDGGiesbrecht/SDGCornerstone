@@ -44,7 +44,7 @@ extension Comparable {
     }
 
     // @documentation(SDGCornerstone.Comparable.≥=)
-    // [_Example 1: increase(to:)_]
+    // #example(1, increase(to:))
     /// Increases the value of `self` so that falls at or above `minimum`.
     ///
     /// This is accomplished by changing `self` to match the value of `minimum` if and only if `self` does not already satisfy `self ≥ minimum`.
@@ -76,7 +76,7 @@ extension Comparable {
     }
 
     // @documentation(SDGCornerstone.Comparable.≤=)
-    // [_Example 1: decrease(to:)_]
+    // #example(1, decrease(to:))
     /// Decreases the value of `self` so that falls at or below `maximum`.
     ///
     /// This is accomplished by changing `self` to match the value of `maximum` if and only if `self` does not already satisfy `self ≤ maximum`.
@@ -110,7 +110,7 @@ extension Comparable {
     // MARK: - Approximation
 
     // @documentation(SDGCornerstone.Comparable.≈)
-    // [_Example 1: ≈_]
+    // #example(1, ≈)
     /// Returns `true` if `precedingValue` is within the range described by `followingValue`.
     ///
     /// ```swift

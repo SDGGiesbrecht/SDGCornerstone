@@ -16,7 +16,7 @@ import Foundation
 
 import SDGCornerstoneLocalizations
 
-// [_Example 1: DateDefinition_]
+// #example(1, DateDefinition)
 /// A type that provides a definition for a `CalendarDate`.
 ///
 /// ```swift

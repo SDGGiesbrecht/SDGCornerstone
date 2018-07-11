@@ -99,7 +99,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 }
 
 // @documentation(SDGCornerstone.NumericAdditiveArithmetic.|x)
-// [_Example 1: Absolute Value_]
+// #example(1, Absolute Value)
 /// Returns the absolute value (in conjuction with postfix `|(_:)`).
 ///
 /// ```swift
@@ -112,7 +112,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 }
 
 // @documentation(SDGCornerstone.NumericAdditiveArithmetic.x|)
-// [_Example 1: Absolute Value_]
+// #example(1, Absolute Value)
 /// Returns the absolute value (in conjuction with prefix `|(_:)`).
 ///
 /// ```swift

@@ -17,7 +17,7 @@ import SDGRandomization
 import SDGLocalization
 import SDGCornerstoneLocalizations
 
-// [_Example 1: RationalNumber Literals_]
+// #example(1, RationalNumber Literals)
 /// An arbitrary‐precision rational number.
 ///
 /// ```swift

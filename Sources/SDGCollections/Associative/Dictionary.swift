@@ -18,7 +18,7 @@ extension Dictionary {
 
     // MARK: - Mutation
 
-    // [_Example 1: mutateValue(for:_:)_]
+    // #example(1, mutateValue(for:_:))
     /// Mutates the value for the specified key.
     ///
     /// ```swift

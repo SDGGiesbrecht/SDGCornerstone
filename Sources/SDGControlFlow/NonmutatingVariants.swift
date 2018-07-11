@@ -14,7 +14,7 @@
 
 // MARK: - Methods
 
-// [_Example 1: Nonmutating Variant_]
+// #example(1, Nonmutating Variant)
 /// Implements a nonmutating function based on its mutating counterpart.
 ///
 /// ```swift
@@ -42,7 +42,7 @@
     return copy
 }
 
-// [_Example 1: Nonmutating Variant_]
+// #example(1, Nonmutating Variant)
 /// Implements a nonmutating function based on its mutating counterpart.
 ///
 /// ```swift
@@ -71,7 +71,7 @@
     return copy
 }
 
-// [_Example 1: Nonmutating Variant_]
+// #example(1, Nonmutating Variant)
 /// Implements a nonmutating function based on its mutating counterpart.
 ///
 /// ```swift
@@ -100,7 +100,7 @@
     return copy
 }
 
-// [_Example 1: Nonmutating Variant_]
+// #example(1, Nonmutating Variant)
 /// Implements a nonmutating function based on its mutating counterpart.
 ///
 /// ```swift
@@ -131,7 +131,7 @@
 
 // MARK: - Operators
 
-// [_Example 1: Nonmutating Variant_]
+// #example(1, Nonmutating Variant)
 /// Implements a nonmutating function based on its mutating counterpart.
 ///
 /// ```swift
@@ -160,7 +160,7 @@
     return copy
 }
 
-// [_Example 1: Nonmutating Variant_]
+// #example(1, Nonmutating Variant)
 /// Implements a nonmutating function based on its mutating counterpart.
 ///
 /// ```swift

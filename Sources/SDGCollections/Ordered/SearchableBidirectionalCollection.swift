@@ -23,7 +23,7 @@ public protocol SearchableBidirectionalCollection : BidirectionalCollection, Sea
 where SubSequence : SearchableBidirectionalCollection {
 
     // @documentation(SDGCornerstone.Collection.lastMatch(for:in:))
-    // [_Example 1: lastMatch(for:in:) Backwards Differences 1_] [_Example 2: lastMatch(for:in:) Backwards Differences 2_]
+    // #example(1, lastMatch(for:in:) Backwards Differences 1) #example(2, lastMatch(for:in:) Backwards Differences 2)
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -185,7 +185,7 @@ extension SearchableBidirectionalCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    // [_Example 1: lastMatch(for:in:) Backwards Differences 1_] [_Example 2: lastMatch(for:in:) Backwards Differences 2_]
+    // #example(1, lastMatch(for:in:) Backwards Differences 1) #example(2, lastMatch(for:in:) Backwards Differences 2)
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -327,7 +327,7 @@ extension SearchableBidirectionalCollection {
     }
 
     // @documentation(SDGCornerstone.Collection.lastMatch(for:in:))
-    // [_Example 1: lastMatch(for:in:) Backwards Differences 1_] [_Example 2: lastMatch(for:in:) Backwards Differences 2_]
+    // #example(1, lastMatch(for:in:) Backwards Differences 1) #example(2, lastMatch(for:in:) Backwards Differences 2)
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:

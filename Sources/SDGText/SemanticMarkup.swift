@@ -27,7 +27,7 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 @_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"
 // [_End_]
 
-// [_Example 1: Markup Encoding_]
+// #example(1, Markup Encoding)
 /// Text with additional semantic markup.
 ///
 /// Semantic markup assigns control functions to several private use scalars.
