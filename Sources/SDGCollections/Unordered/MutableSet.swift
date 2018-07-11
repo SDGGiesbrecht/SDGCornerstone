@@ -27,11 +27,11 @@ import SDGControlFlow
 ///     - `static func ∖= (precedingValue: inout Self, followingValue: Self)`
 public protocol MutableSet : ComparableSet, SetAlgebra {
 
-    // [_Define SDGCornerstone.MutableSet.init()_]
+    // @documentation(SDGCornerstone.MutableSet.init())
     /// Creates an empty set.
     init()
 
-    // [_Define SDGCornerstone.MutableSet.insert(_:)_]
+    // @documentation(SDGCornerstone.MutableSet.insert(_:))
     /// Inserts `member` into `self` if it is not already present.
     ///
     /// - Parameters:
@@ -42,7 +42,7 @@ public protocol MutableSet : ComparableSet, SetAlgebra {
     ///     - `newMember`: The element in the set after the insertion attempt.
     @discardableResult mutating func insert(_ newMember: Self.Element) -> (inserted: Bool, memberAfterInsert: Self.Element)
 
-    // [_Define SDGCornerstone.MutableSet.remove(_:)_]
+    // @documentation(SDGCornerstone.MutableSet.remove(_:))
     /// Removes `member` from `self` if it is present.
     ///
     /// - Parameters:
