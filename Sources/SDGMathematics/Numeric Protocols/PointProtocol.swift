@@ -25,11 +25,11 @@ import SDGControlFlow
 /// - `static func − (precedingValue: Self, followingValue: Self) -> Vector`
 public protocol PointProtocol : Codable, Equatable {
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // @documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     associatedtype Vector : Negatable
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.+_]
+    // @documentation(SDGCornerstone.PointProtocol.+)
     /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
@@ -37,7 +37,7 @@ public protocol PointProtocol : Codable, Equatable {
     ///     - followingValue: The vector to add.
     static func + (precedingValue: Self, followingValue: Vector) -> Self
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.+=_]
+    // @documentation(SDGCornerstone.PointProtocol.+=)
     /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
@@ -45,7 +45,7 @@ public protocol PointProtocol : Codable, Equatable {
     ///     - followingValue: The vector to add.
     static func += (precedingValue: inout Self, followingValue: Vector)
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
+    // @documentation(SDGCornerstone.PointProtocol.−(_:vector:))
     /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
     ///
     /// - Parameters:
@@ -53,7 +53,7 @@ public protocol PointProtocol : Codable, Equatable {
     ///     - followingValue: The vector to subtract.
     static func − (precedingValue: Self, followingValue: Vector) -> Self
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.−_]
+    // @documentation(SDGCornerstone.PointProtocol.−)
     /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
@@ -61,7 +61,7 @@ public protocol PointProtocol : Codable, Equatable {
     ///     - followingValue: The startpoint.
     static func − (precedingValue: Self, followingValue: Self) -> Vector
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.−=_]
+    // @documentation(SDGCornerstone.PointProtocol.−=)
     /// Moves the preceding point by the inverse of the following vector.
     ///
     /// - Parameters:

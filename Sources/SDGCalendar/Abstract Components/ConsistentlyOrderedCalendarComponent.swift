@@ -17,7 +17,7 @@ import SDGCornerstoneLocalizations
 /// A calendar component with a consistent order.
 public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedScaleOneDimensionalPoint {
 
-    // [_Define Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
+    // @documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
     /// Creates a component from the number of complete components already elapsed.
     ///
     /// - Precondition: The number must be valid for the particular compenent.
@@ -26,7 +26,7 @@ public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedS
     ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
     init(numberAlreadyElapsed: Vector)
 
-    // [_Define Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(ordinal:)_]
+    // @documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(ordinal:))
     /// Creates a component from an ordinal.
     ///
     /// - Precondition: The ordinal must be valid for the particular compenent.
@@ -35,11 +35,11 @@ public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedS
     ///     - ordinal: The ordinal.
     init(ordinal: Vector)
 
-    // [_Define Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
+    // @documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
     var numberAlreadyElapsed: Vector { get }
 
-    // [_Define Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal_]
+    // @documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal)
     /// The ordinal.
     var ordinal: Vector { get }
 }

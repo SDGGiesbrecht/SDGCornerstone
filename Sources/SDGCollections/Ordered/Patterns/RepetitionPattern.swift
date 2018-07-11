@@ -41,7 +41,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         }
     }
 
-    // [_Define Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // @documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:

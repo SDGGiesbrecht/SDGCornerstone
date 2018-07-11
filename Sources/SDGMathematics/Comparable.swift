@@ -16,14 +16,14 @@ extension Comparable {
 
     // MARK: - Comparison
 
-    // [_Define Documentation: SDGCornerstone.Comparable.<_]
+    // @documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≤_]
+    // @documentation(SDGCornerstone.Comparable.≤)
     /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
     ///
     /// - Parameters:
@@ -33,7 +33,7 @@ extension Comparable {
         return precedingValue <= followingValue
     }
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≥_]
+    // @documentation(SDGCornerstone.Comparable.≥)
     /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
     ///
     /// - Parameters:
@@ -43,7 +43,7 @@ extension Comparable {
         return precedingValue >= followingValue
     }
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≥=_]
+    // @documentation(SDGCornerstone.Comparable.≥=)
     // [_Example 1: increase(to:)_]
     /// Increases the value of `self` so that falls at or above `minimum`.
     ///
@@ -75,7 +75,7 @@ extension Comparable {
         }
     }
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≤=_]
+    // @documentation(SDGCornerstone.Comparable.≤=)
     // [_Example 1: decrease(to:)_]
     /// Decreases the value of `self` so that falls at or below `maximum`.
     ///
@@ -109,7 +109,7 @@ extension Comparable {
 
     // MARK: - Approximation
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≈_]
+    // @documentation(SDGCornerstone.Comparable.≈)
     // [_Example 1: ≈_]
     /// Returns `true` if `precedingValue` is within the range described by `followingValue`.
     ///

@@ -15,7 +15,7 @@
 /// A wrapper which should be transparent when logging or displaying in a playground.
 public protocol TransparentWrapper : CustomDebugStringConvertible, CustomPlaygroundDisplayConvertible, CustomStringConvertible {
 
-    // [_Define Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    // @documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
     var wrappedInstance: Any { get }
 }

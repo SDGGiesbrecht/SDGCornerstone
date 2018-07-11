@@ -23,7 +23,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
         self.base = base
     }
 
-    // [_Define Documentation: SDGCornerstone.Not.init(_:)_]
+    // @documentation(SDGCornerstone.Not.init(_:))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:

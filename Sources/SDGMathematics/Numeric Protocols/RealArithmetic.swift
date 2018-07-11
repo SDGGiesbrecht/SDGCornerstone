@@ -29,49 +29,49 @@ public protocol RealArithmetic : RationalArithmetic {
 
     // MARK: - Constants
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.π_]
+    // @documentation(SDGCornerstone.RealArithmetic.π)
     /// An instance of π.
     static var π: Self { get }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.τ_]
+    // @documentation(SDGCornerstone.RealArithmetic.τ)
     /// An instance of τ.
     static var τ: Self { get }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.e_]
+    // @documentation(SDGCornerstone.RealArithmetic.e)
     /// An instance of *e*.
     static var e: Self { get }
 
     // MARK: - Operations
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.root(ofDegree:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.root(ofDegree:))
     /// Returns the `degree`‐th root of `self`.
     ///
     /// - Parameters:
     ///     - degree: The degree of the root.
     func root(ofDegree degree: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.formRoot(ofDegree:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.formRoot(ofDegree:))
     /// Sets `self` to its `degree`‐th root.
     ///
     /// - Parameters:
     ///     - degree: The degree of the root.
     mutating func formRoot(ofDegree degree: Self)
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.√_]
+    // @documentation(SDGCornerstone.RealArithmetic.√)
     /// Returns the square root of `operand`.
     ///
     /// - Parameters:
     ///     - operand: The radicand.
     static prefix func √ (operand: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.√=_]
+    // @documentation(SDGCornerstone.RealArithmetic.√=)
     /// Sets `operand` to its square root.
     ///
     /// - Parameters:
     ///     - operand: The value to modify.
     static postfix func √= (operand: inout Self)
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.log(toBase:of:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.log(toBase:of:))
     /// Returns the base `base` logarithm of `antilogarithm`.
     ///
     /// - Precondition: `antilogarithm` > 0
@@ -85,7 +85,7 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - antilogarithm: The antilogarithm.
     static func log(toBase base: Self, of antilogarithm: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.formLogarithm(toBase:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.formLogarithm(toBase:))
     /// Sets `self` to its base `base` logarithm.
     ///
     /// - Precondition: `self` > 0
@@ -98,7 +98,7 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - base: The base.
     mutating func formLogarithm(toBase base: Self)
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.log(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.log(_:))
     /// Returns the common logarithm of `antilogarithm`.
     ///
     /// - Precondition: `antilogarithm` > 0
@@ -107,13 +107,13 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - antilogarithm: The antilogarithm.
     static func log(_ antilogarithm: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.formCommonLogarithm()_]
+    // @documentation(SDGCornerstone.RealArithmetic.formCommonLogarithm())
     /// Sets `self` to its common logarithm.
     ///
     /// - Precondition: `self` > 0
     mutating func formCommonLogarithm()
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.ln(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.ln(_:))
     /// Returns the natural logarithm of `antilogarithm`.
     ///
     /// - Precondition: `antilogarithm` > 0
@@ -122,55 +122,55 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - antilogarithm: The antilogarithm.
     static func ln(_ antilogarithm: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.formNaturalLogarithm()_]
+    // @documentation(SDGCornerstone.RealArithmetic.formNaturalLogarithm())
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
     mutating func formNaturalLogarithm()
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.sin(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.sin(_:))
     /// Returns the sine of an angle.
     ///
     /// - Parameters:
     ///     - angle: The angle.
     static func sin(_ angle: Angle<Self>) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.cos(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.cos(_:))
     /// Returns the cosine of an angle.
     ///
     /// - Parameters:
     ///     - angle: The angle.
     static func cos(_ angle: Angle<Self>) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.tan(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.tan(_:))
     /// Returns the tangent of an angle.
     ///
     /// - Parameters:
     ///     - angle: The angle.
     static func tan(_ angle: Angle<Self>) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.csc(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.csc(_:))
     /// Returns the cosecant of an angle.
     ///
     /// - Parameters:
     ///     - angle: The angle.
     static func csc(_ angle: Angle<Self>) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.sec(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.sec(_:))
     /// Returns the secant of an angle.
     ///
     /// - Parameters:
     ///     - angle: The angle.
     static func sec(_ angle: Angle<Self>) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.cot(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.cot(_:))
     /// Returns the cotangent of an angle.
     ///
     /// - Parameters:
     ///     - angle: The angle.
     static func cot(_ angle: Angle<Self>) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.arcsin(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
     /// Returns the arcsine of a value.
     ///
     /// The returned angle will be between −90° and 90° inclusive.
@@ -181,7 +181,7 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - sine: The sine.
     static func arcsin(_ sine: Self) -> Angle<Self>
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.arccos(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.arccos(_:))
     /// Returns the arccosine of a value.
     ///
     /// The returned angle will be between 0° and 180° inclusive.
@@ -192,7 +192,7 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - cosine: The cosine.
     static func arccos(_ cosine: Self) -> Angle<Self>
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.arctan(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.arctan(_:))
     /// Returns the arctangent of a value.
     ///
     /// The returned angle will be between −90° and 90°.
@@ -201,7 +201,7 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - tangent: The tangent.
     static func arctan(_ tangent: Self) -> Angle<Self>
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.arccsc(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.arccsc(_:))
     /// Returns the arccosecant of a value.
     ///
     /// The returned angle will be between −90° and 90° inclusive, but never 0°.
@@ -212,7 +212,7 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - cosecant: The cosecant.
     static func arccsc(_ cosecant: Self) -> Angle<Self>
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.arcsec(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.arcsec(_:))
     /// Returns the arcsecant of a value.
     ///
     /// The returned angle will be between 0° and 180° inclusive, but never 90°.
@@ -223,7 +223,7 @@ public protocol RealArithmetic : RationalArithmetic {
     ///     - secant: The secant.
     static func arcsec(_ secant: Self) -> Angle<Self>
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.arccot(_:)_]
+    // @documentation(SDGCornerstone.RealArithmetic.arccot(_:))
     /// Returns the arccotangent of a value.
     ///
     /// The returned angle will be between 0° and 180°.
@@ -234,7 +234,7 @@ public protocol RealArithmetic : RationalArithmetic {
 
     // MARK: - Conversions
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    // @documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
     var floatingPointApproximation: FloatMax { get }
 }

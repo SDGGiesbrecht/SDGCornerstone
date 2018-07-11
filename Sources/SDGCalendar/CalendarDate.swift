@@ -47,7 +47,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         self.definition = definition
     }
 
-    // [_Define Documentation: SDGCornerstone.CalendarDate.init(hebrewYear:month:day:hour:part:)_]
+    // @documentation(SDGCornerstone.CalendarDate.init(hebrewYear:month:day:hour:part:))
     /// Creates a date using the Hebrew calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
@@ -67,7 +67,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         self.init(hebrewYear: year, month: month, day: day, hour: hour, part: part)
     }
 
-    // [_Define Documentation: SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:)_]
+    // @documentation(SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:))
     /// Creates a date using the Hebrew calendar.
     ///
     /// This initializer has two written forms whose effects are the same:

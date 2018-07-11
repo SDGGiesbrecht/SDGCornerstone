@@ -20,7 +20,7 @@
 /// - `var file: Data { get }`
 public protocol FileConvertible {
 
-    // [_Define Documentation: SDGCornerstone.FileConvertible.init(file:origin:)_]
+    // @documentation(SDGCornerstone.FileConvertible.init(file:origin:))
     /// Creates an instance using raw data from a file on the disk.
     ///
     /// - Parameters:
@@ -28,7 +28,7 @@ public protocol FileConvertible {
     ///     - origin: A URL indicating where the data came from. In some cases this may be helpful in determining how to interpret the data, such as by checking the file extension. This parameter may be `nil` if the data did not come from a file on the disk.
     init(file: Data, origin: URL?) throws
 
-    // [_Define Documentation: SDGCornerstone.FileConvertible.file_]
+    // @documentation(SDGCornerstone.FileConvertible.file)
     /// A binary representation that can be written as a file.
     var file: Data { get }
 }

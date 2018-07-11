@@ -22,11 +22,11 @@ import SDGControlFlow
 /// - `static var universe: Self { get }`
 public protocol SetInRepresentableUniverse : MutableSet {
 
-    // [_Define Documentation: SDGCornerstone.RepresentableUniverse.universe_]
+    // @documentation(SDGCornerstone.RepresentableUniverse.universe)
     /// An instance containing all possible elements.
     static var universe: Self { get }
 
-    // [_Define Documentation: SDGCornerstone.RepresentableUniverse.′_]
+    // @documentation(SDGCornerstone.RepresentableUniverse.′)
     // #documentation(SDGCornerstone.SetDefinition.′)
     /// Returns the absolute complement of the set.
     ///
@@ -34,7 +34,7 @@ public protocol SetInRepresentableUniverse : MutableSet {
     ///     - operand: The set.
     static postfix func ′(operand: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RepresentableUniverse.′=_]
+    // @documentation(SDGCornerstone.RepresentableUniverse.′=)
     /// Sets the operand to its absolute complement.
     ///
     /// - Parameters:

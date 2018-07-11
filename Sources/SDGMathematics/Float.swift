@@ -34,14 +34,14 @@ public typealias FloatMax = Float80
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
 public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
 
-    // [_Define Documentation: SDGCornerstone.FloatFamily.init(_:)_]
+    // @documentation(SDGCornerstone.FloatFamily.init(_:))
     /// Creates a new value, rounded to the closest possible representation.
     ///
     /// - Parameters:
     ///     - value: The number to convert to a floating‐point value.
     init(_ value: Exponent)
 
-    // [_Define Documentation: SDGCornerstone.FloatFamily.ln2_]
+    // @documentation(SDGCornerstone.FloatFamily.ln2)
     /// The value of ln2.
     static var ln2: Self { get }
 }

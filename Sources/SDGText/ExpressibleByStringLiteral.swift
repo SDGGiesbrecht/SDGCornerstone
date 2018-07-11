@@ -14,7 +14,7 @@
 
 extension ExpressibleByStringLiteral {
 
-    // [_Define Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
+    // @documentation(SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:))
     /// Creates an instance from a string literal.
     ///
     /// - Parameters:

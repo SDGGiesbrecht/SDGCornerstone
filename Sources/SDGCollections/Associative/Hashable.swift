@@ -14,6 +14,6 @@
 
 extension Hashable {
 
-    // [_Define Documentation: SDGCornerstone.Hashable.hashValue_]
+    // @documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
 }

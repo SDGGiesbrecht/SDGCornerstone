@@ -16,28 +16,28 @@ extension Collection {
 
     // MARK: - Conformance
 
-    // [_Define Documentation: SDGCornerstone.Collection.Element_]
+    // @documentation(SDGCornerstone.Collection.Element)
     /// The type of the elements of the collection.
 
-    // [_Define Documentation: SDGCornerstone.Collection.Index_]
+    // @documentation(SDGCornerstone.Collection.Index)
     /// The type of the indices of the collection.
 
-    // [_Define Documentation: SDGCornerstone.Collection.Indices_]
+    // @documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
 
-    // [_Define Documentation: SDGCornerstone.Collection.startIndex_]
+    // @documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
 
-    // [_Define Documentation: SDGCornerstone.Collection.endIndex_]
+    // @documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
 
-    // [_Define Documentation: SDGCornerstone.Collection.subscript(position:)_]
+    // @documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
 
-    // [_Define Documentation: SDGCornerstone.Collection.count_]
+    // @documentation(SDGCornerstone.Collection.count)
     /// The number of elements in the collection.
 
-    // [_Define Documentation: SDGCornerstone.Collection.index(after:)_]
+    // @documentation(SDGCornerstone.Collection.index(after:))
     /// Returns the index immediately after the specified index.
     ///
     /// - Parameters:

@@ -22,7 +22,7 @@ public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithme
 
     // MARK: - Initialization
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).

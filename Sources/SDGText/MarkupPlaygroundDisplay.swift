@@ -21,7 +21,7 @@ import SDGControlFlow
 /// - `func playgroundDescriptionMarkup() -> SemanticMarkup`
 public protocol MarkupPlaygroundDisplay : TextualPlaygroundDisplay {
 
-    // [_Define Documentation: SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup()_]
+    // @documentation(SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup())
     /// The markup representation of the instance.
     func playgroundDescriptionMarkup() -> SemanticMarkup
 }

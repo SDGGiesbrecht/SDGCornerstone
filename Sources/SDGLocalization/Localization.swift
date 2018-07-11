@@ -24,17 +24,17 @@ import SDGLogic
 ///   - `static var developmentLocalization: Self { get }`
 public protocol Localization : TextualPlaygroundDisplay {
 
-    // [_Define Documentation: SDGCornerstone.Localization.init(code:)_]
+    // @documentation(SDGCornerstone.Localization.init(code:))
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     ///
     /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
     init?(exactly code: String)
 
-    // [_Define Documentation: SDGCornerstone.Localization.code_]
+    // @documentation(SDGCornerstone.Localization.code)
     /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     var code: String { get }
 
-    // [_Define Documentation: SDGCornerstone.Localization.fallbackLocalization_]
+    // @documentation(SDGCornerstone.Localization.fallbackLocalization)
     /// The localization to use whenever none of the localizations requested by the user are available.
     static var fallbackLocalization: Self { get }
 }

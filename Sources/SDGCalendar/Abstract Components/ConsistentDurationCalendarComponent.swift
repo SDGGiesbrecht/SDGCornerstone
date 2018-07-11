@@ -15,7 +15,7 @@
 /// A calendar component with a consisent duration.
 public protocol ConsistentDurationCalendarComponent {
 
-    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
     /// The duration.
     static var duration: CalendarInterval<FloatMax> { get }
 }

@@ -21,45 +21,45 @@ import SDGControlFlow
 /// - `IterableEnumeration`
 public protocol OrderedEnumeration : Comparable, IterableEnumeration {
 
-    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.increment()_]
+    // @documentation(SDGCornerstone.OrderedEnumeration.increment())
     /// Increments to the next case.
     ///
     /// - Precondition: There is a valid next case.
     mutating func increment()
 
-    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
+    // @documentation(SDGCornerstone.OrderedEnumeration.successor())
     /// Returns the next case or `nil` if there are no later cases.
     func successor() -> Self?
 
-    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.decrement()_]
+    // @documentation(SDGCornerstone.OrderedEnumeration.decrement())
     /// Decrements to the previous case.
     ///
     /// - Precondition: There is a valid previous case.
     mutating func decrement()
 
-    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.predecessor()_]
+    // @documentation(SDGCornerstone.OrderedEnumeration.predecessor())
     /// Returns the previous case or `nil` if there are no earlier cases.
     func predecessor() -> Self?
 
-    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.incrementCyclically()_]
+    // @documentation(SDGCornerstone.OrderedEnumeration.incrementCyclically())
     /// Increments to the next case in the cycle.
     ///
     /// - Parameters:
     ///     - wrap: A closure that will be executed if the incrementation wraps around to the beginnig of the sequence.
     mutating func incrementCyclically(_ wrap: () -> Void)
 
-    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.cyclicSuccessor()_]
+    // @documentation(SDGCornerstone.OrderedEnumeration.cyclicSuccessor())
     /// Returns the next case, wrapping around to the first case if necessary.
     func cyclicSuccessor() -> Self
 
-    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.decrementCyclically()_]
+    // @documentation(SDGCornerstone.OrderedEnumeration.decrementCyclically())
     /// Decrements to the previous case in the cycle.
     ///
     /// - Parameters:
     ///     - wrap: A closure that will be executed if the decrementation wraps around to the end of the sequence.
     mutating func decrementCyclically(_ wrap: () -> Void)
 
-    // [_Define Documentation: SDGCornerstone.OrderedEnumeration.cyclicPredecessor()_]
+    // @documentation(SDGCornerstone.OrderedEnumeration.cyclicPredecessor())
     /// Returns the previous case, wrapping around to the last case if necessary.
     func cyclicPredecessor() -> Self
 }

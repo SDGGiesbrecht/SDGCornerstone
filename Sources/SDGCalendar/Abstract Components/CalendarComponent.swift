@@ -15,15 +15,15 @@
 /// A component of a particular calendar.
 public protocol CalendarComponent : Codable {
 
-    // [_Define Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    // @documentation(SDGCornerstone.CalendarComponent.meanDuration)
     /// The mean duration.
     static var meanDuration: CalendarInterval<FloatMax> { get }
 
-    // [_Define Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    // @documentation(SDGCornerstone.CalendarComponent.minimumDuration)
     /// The minimum duration.
     static var minimumDuration: CalendarInterval<FloatMax> { get }
 
-    // [_Define Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    // @documentation(SDGCornerstone.CalendarComponent.maximumDuration)
     /// The maximum duration.
     static var maximumDuration: CalendarInterval<FloatMax> { get }
 }

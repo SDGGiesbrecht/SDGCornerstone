@@ -17,26 +17,26 @@ import SDGMathematics
 /// A member of the `Range` family: `Range`, `ClosedRange`, `CountableRange` or `CountableClosedRange`.
 public protocol RangeFamily : ComparableSet, CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible {
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.Bound_]
+    // @documentation(SDGCornerstone.RangeFamily.Bound)
     /// The bound type.
     associatedtype Bound : Comparable
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.lowerBound_]
+    // @documentation(SDGCornerstone.RangeFamily.lowerBound)
     /// The lower bound.
     var lowerBound: Bound { get }
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.upperBound_]
+    // @documentation(SDGCornerstone.RangeFamily.upperBound)
     /// The upper bound.
     var upperBound: Bound { get }
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.contains(_:)._]
+    // @documentation(SDGCornerstone.RangeFamily.contains(_:).)
     /// Returns `true` if `element` is within the range.
     ///
     /// - Parameters:
     ///     - element: The element.
     func contains(_ element: Bound) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.overlaps(_:)._]
+    // @documentation(SDGCornerstone.RangeFamily.overlaps(_:).)
     // #documentation(SDGCornerstone.ComparableSet.overlaps(_:))
     /// Returns `true` if the sets overlap.
     ///
@@ -44,7 +44,7 @@ public protocol RangeFamily : ComparableSet, CustomDebugStringConvertible, Custo
     ///     - other: The other set.
     func overlaps(_ other: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
+    // @documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
     static var hasClosedUpperBound: Bool { get }
 }

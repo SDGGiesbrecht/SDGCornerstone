@@ -29,7 +29,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
     // MARK: - Initialization
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(uInt:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
     /// Creates an instance equal to `uInt`.
     ///
     /// - Properties:
@@ -47,7 +47,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: The value to subtract.
     static func − (precedingValue: Self, followingValue: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.×_]
+    // @documentation(SDGCornerstone.WholeArithmetic.×)
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -55,7 +55,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: Another value.
     static func × (precedingValue: Self, followingValue: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.×=_]
+    // @documentation(SDGCornerstone.WholeArithmetic.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -63,7 +63,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: The coefficient by which to multiply.
     static func ×= (precedingValue: inout Self, followingValue: Self)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
     /// Sets `self` to the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -72,7 +72,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - divisor: The divisor.
     mutating func divideAccordingToEuclid(by divisor: Self)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:))
     /// Returns the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -81,7 +81,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - divisor: The divisor.
     func dividedAccordingToEuclid(by divisor: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.mod(_:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.mod(_:))
     /// Returns the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -90,7 +90,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     func mod(_ divisor: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.formRemainder(mod:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.formRemainder(mod:))
     /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -99,11 +99,11 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     mutating func formRemainder(mod divisor: Self)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.isDivisible(by:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
     func isDivisible(by divisor: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.gcd(_:_:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.gcd(_:_:))
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
@@ -111,14 +111,14 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: Another value.
     static func gcd(_ a: Self, _ b: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:))
     /// Sets `self` to the greatest common divisor of `self` and `other`.
     ///
     /// - Parameters:
     ///     - other: Another value.
     mutating func formGreatestCommonDivisor(with other: Self)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.lcm(_:_:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.lcm(_:_:))
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
@@ -126,14 +126,14 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: Another value.
     static func lcm(_ a: Self, _ b: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:))
     /// Sets `self` to the least common multiple of `self` and `other`.
     ///
     /// - Parameters:
     ///     - other: Another value.
     mutating func formLeastCommonMultiple(with other: Self)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.↑_]
+    // @documentation(SDGCornerstone.WholeArithmetic.↑)
     /// Returns the result of the preceding value to the power of the following value.
     ///
     /// - Precondition:
@@ -148,7 +148,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: The exponent.
     static func ↑ (precedingValue: Self, followingValue: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.↑=_]
+    // @documentation(SDGCornerstone.WholeArithmetic.↑=)
     /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
@@ -165,23 +165,23 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
     // MARK: - Classification
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.isNatural_]
+    // @documentation(SDGCornerstone.WholeArithmetic.isNatural)
     /// Returns `true` if `self` is a natural number.
     var isNatural: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.isWhole_]
+    // @documentation(SDGCornerstone.WholeArithmetic.isWhole)
     /// Returns `true` if `self` is a whole number.
     var isWhole: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.isIntegral_]
+    // @documentation(SDGCornerstone.WholeArithmetic.isIntegral)
     /// Returns `true` if `self` is an integer.
     var isIntegral: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.isEven_]
+    // @documentation(SDGCornerstone.WholeArithmetic.isEven)
     /// Returns true if `self` is an even integer.
     var isEven: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.isOdd_]
+    // @documentation(SDGCornerstone.WholeArithmetic.isOdd)
     /// Returns true if `self` is an odd integer.
     var isOdd: Bool { get }
 
@@ -190,21 +190,21 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     /// A rule for rounding.
     typealias RoundingRule = FloatingPointRoundingRule
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.round(_:))
     /// Rounds the value to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     mutating func round(_ rule: RoundingRule)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
     /// Returns the value rounded to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     func rounded(_ rule: RoundingRule) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:))
     /// Rounds the value to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -212,7 +212,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - factor: The factor to round to a multiple of.
     mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:))
     /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -223,7 +223,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
 extension WholeArithmetic {
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(uIntFamily:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(uIntFamily:))
     /// Creates an instance equal to `uInt`.
     ///
     /// - Properties:
@@ -477,7 +477,7 @@ extension WholeArithmetic {
 
     // MARK: - ExpressibleByIntegerLiteral
 
-    // [_Define Documentation: SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:)_]
+    // @documentation(SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:))
     /// Creates an instance from an integer literal.
     ///
     /// - Parameters:
@@ -488,7 +488,7 @@ extension WholeArithmetic {
 
     // MARK: - Numeric
 
-    // [_Define Documentation: SDGCornerstone.Numeric.init(exactly:)_]
+    // @documentation(SDGCornerstone.Numeric.init(exactly:))
     /// Creates a new instance from the given integer, if it can be represented exactly.
 
     /// Multiplies two values and produces their product.

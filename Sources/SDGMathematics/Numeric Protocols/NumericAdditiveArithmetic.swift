@@ -27,29 +27,29 @@ public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
 
     // MARK: - Classification
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.isPositive_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
     /// Returns `true` if `self` is positive.
     var isPositive: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
     var isNegative: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonNegative_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
     var isNonNegative: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonPositive_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
     /// Returns `true` if `self` is negative or zero.
     var isNonPositive: Bool { get }
 
     // MARK: - Operations
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     var absoluteValue: Self { get }
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     mutating func formAbsoluteValue()
 }
@@ -98,7 +98,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     public var contents: Wrapped
 }
 
-// [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.|x_]
+// @documentation(SDGCornerstone.NumericAdditiveArithmetic.|x)
 // [_Example 1: Absolute Value_]
 /// Returns the absolute value (in conjuction with postfix `|(_:)`).
 ///
@@ -111,7 +111,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     return operand.contents
 }
 
-// [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.x|_]
+// @documentation(SDGCornerstone.NumericAdditiveArithmetic.x|)
 // [_Example 1: Absolute Value_]
 /// Returns the absolute value (in conjuction with prefix `|(_:)`).
 ///

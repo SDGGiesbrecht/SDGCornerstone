@@ -23,33 +23,33 @@ import SDGControlFlow
 public protocol TwoDimensionalPoint : PointProtocol
 where Vector : TwoDimensionalVector {
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.Scalar_]
+    // @documentation(SDGCornerstone.TwoDimensionalPoint.Scalar)
     /// The scalar type.
     typealias Scalar = Vector.Scalar
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.x_]
+    // @documentation(SDGCornerstone.TwoDimensionalPoint.x)
     /// The *x* co‐ordinate.
     var x: Scalar { get set }
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalPoint.y_]
+    // @documentation(SDGCornerstone.TwoDimensionalPoint.y)
     /// The *y* co‐ordinate.
     var y: Scalar { get set }
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.round(_:))
     /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     mutating func round(_ rule: WholeArithmetic.RoundingRule)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
     /// Returns the point with its co‐ordinates rounded to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:))
     /// Rounds the point’s co‐ordinates to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -57,7 +57,7 @@ where Vector : TwoDimensionalVector {
     ///     - factor: The factor to round to a multiple of.
     mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar)
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:))
     /// Returns the point with its co‐ordinates rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:

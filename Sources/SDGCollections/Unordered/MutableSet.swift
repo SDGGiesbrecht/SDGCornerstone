@@ -83,7 +83,7 @@ public protocol MutableSet : ComparableSet, SetAlgebra {
     ///     - followingValue: Another set.
     static func ∩= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∩=_]
+    // @documentation(SDGCornerstone.MutableSet.∩=)
     /// Sets `precedingValue` to the intersection of the two sets.
     ///
     /// - Parameters:
@@ -115,7 +115,7 @@ public protocol MutableSet : ComparableSet, SetAlgebra {
     ///     - followingValue: Another set.
     static func ∪= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∪=_]
+    // @documentation(SDGCornerstone.MutableSet.∪=)
     /// Sets `precedingValue` to the union of the two sets.
     ///
     /// - Parameters:
@@ -147,7 +147,7 @@ public protocol MutableSet : ComparableSet, SetAlgebra {
     ///     - followingValue: The set to subtract.
     static func ∖= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∖=_]
+    // @documentation(SDGCornerstone.MutableSet.∖=)
     /// Subtracts `followingValue` from `precedingValue`.
     ///
     /// - Parameters:
@@ -163,7 +163,7 @@ public protocol MutableSet : ComparableSet, SetAlgebra {
     ///     - followingValue: Another set.
     static func ∆ (precedingValue: Self, followingValue: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∆=_]
+    // @documentation(SDGCornerstone.MutableSet.∆=)
     /// Sets `precedingValue` to the symmetric difference of the two sets.
     ///
     /// - Parameters:

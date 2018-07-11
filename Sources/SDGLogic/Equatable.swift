@@ -14,14 +14,14 @@
 
 extension Equatable {
 
-    // [_Define Documentation: SDGCornerstone.Equatable.==_]
+    // @documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
 
-    // [_Define Documentation: SDGCornerstone.Equatable.≠_]
+    // @documentation(SDGCornerstone.Equatable.≠)
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:

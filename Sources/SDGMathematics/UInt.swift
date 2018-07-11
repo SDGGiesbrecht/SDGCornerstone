@@ -148,7 +148,7 @@ extension UIntFamily {
 
     // MARK: - WholeArithmetic
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(uIntFamily:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(uIntFamily:))
     /// Creates an instance equal to `uInt`.
     ///
     /// - Properties:

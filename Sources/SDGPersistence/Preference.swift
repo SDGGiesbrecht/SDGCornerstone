@@ -103,7 +103,7 @@ public struct Preference : Equatable, TransparentWrapper {
     }
     #endif
 
-    // [_Define Documentation: SDGCornerstone.Preference.set(to:)_]
+    // @documentation(SDGCornerstone.Preference.set(to:))
     /// Sets the preference to a particular value.
     ///
     /// - Parameters:

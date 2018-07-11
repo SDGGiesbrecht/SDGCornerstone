@@ -20,22 +20,22 @@
 /// - `var Δy : Scalar { get set }`
 public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:)_]
+    // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// Creates a vector using the specified differences in *x* and *y*.
     init(Δx : Scalar, Δy : Scalar)
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.Δx_]
+    // @documentation(SDGCornerstone.TwoDimensionalVector.Δx)
     /// The difference in *x*.
     var Δx : Scalar { get set }
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.Δy_]
+    // @documentation(SDGCornerstone.TwoDimensionalVector.Δy)
     /// The difference in *y*.
     var Δy : Scalar { get set }
 }
 
 extension TwoDimensionalVector {
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:)_]
+    // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// The difference in *y*.
     @_inlineable public init(Δx : Scalar, Δy : Scalar) {
         self = Self.additiveIdentity

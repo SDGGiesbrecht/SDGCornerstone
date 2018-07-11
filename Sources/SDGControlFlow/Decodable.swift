@@ -14,13 +14,13 @@
 
 extension Decodable {
 
-    // [_Define Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // @documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
 
-    // [_Define Documentation: SDGCornerstone.Decodable.init(from:via:convert:)_]
+    // @documentation(SDGCornerstone.Decodable.init(from:via:convert:))
     /// Creates a new instance by decoding a proxy type from the given decoder.
     @_inlineable public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) -> Self) throws where Other : Decodable {
         let container = try decoder.singleValueContainer()

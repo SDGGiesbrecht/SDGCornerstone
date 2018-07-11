@@ -259,7 +259,7 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - RationalNumberProtocol
 
-    // [_Define Documentation: SDGCornerstone.RationalNumberProtocol.reducedSimpleFraction()_]
+    // @documentation(SDGCornerstone.RationalNumberProtocol.reducedSimpleFraction())
     /// Returns the numerator and denominator of the number as a reduced simple fraction.
     public func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer) {
         return (numerator, denominator)

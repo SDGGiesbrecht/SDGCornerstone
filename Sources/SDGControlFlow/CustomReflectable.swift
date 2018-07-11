@@ -14,6 +14,6 @@
 
 extension CustomReflectable {
 
-    // [_Define Documentation: SDGCornerstone.CustomReflectable.customMirror_]
+    // @documentation(SDGCornerstone.CustomReflectable.customMirror)
     /// The custom mirror for this instance.
 }

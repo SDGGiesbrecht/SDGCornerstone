@@ -147,7 +147,7 @@ extension RealArithmetic {
     // Symbol versions are more legible beside literals, but less legible beside variables. For this reason, both symbols and full names should remain available.
     // ••••••• ••••••• ••••••• ••••••• ••••••• ••••••• •••••••
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.radians_]
+    // @documentation(SDGCornerstone.RealArithmetic.radians)
     /// Returns an angle in radians.
     @_inlineable public var radians: Angle<Self> {
         return Angle(radians: self)
@@ -159,19 +159,19 @@ extension RealArithmetic {
         return radians
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.rotations_]
+    // @documentation(SDGCornerstone.RealArithmetic.rotations)
     /// Returns an angle in rotations.
     @_inlineable public var rotations: Angle<Self> {
         return Angle(rotations: self)
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.degrees_]
+    // @documentation(SDGCornerstone.RealArithmetic.degrees)
     /// Returns an angle in degrees.
     @_inlineable public var degrees: Angle<Self> {
         return Angle(degrees: self)
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.°_]
+    // @documentation(SDGCornerstone.RealArithmetic.°)
     /// Returns an angle in degrees.
     ///
     /// - Parameters:
@@ -180,13 +180,13 @@ extension RealArithmetic {
         return value.degrees
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.minutes_]
+    // @documentation(SDGCornerstone.RealArithmetic.minutes)
     /// Returns an angle in minutes.
     @_inlineable public var minutes: Angle<Self> {
         return Angle(minutes: self)
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.′_]
+    // @documentation(SDGCornerstone.RealArithmetic.′)
     /// Returns an angle in minutes.
     ///
     /// - Parameters:
@@ -195,13 +195,13 @@ extension RealArithmetic {
         return value.minutes
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.seconds_]
+    // @documentation(SDGCornerstone.RealArithmetic.seconds)
     /// Returns an angle in seconds.
     @_inlineable public var seconds: Angle<Self> {
         return Angle(seconds: self)
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.′′_]
+    // @documentation(SDGCornerstone.RealArithmetic.′′)
     /// Returns an angle in seconds.
     ///
     /// - Parameters:
@@ -210,13 +210,13 @@ extension RealArithmetic {
         return value.seconds
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.gradians_]
+    // @documentation(SDGCornerstone.RealArithmetic.gradians)
     /// Returns an angle in gradians.
     @_inlineable public var gradians: Angle<Self> {
         return Angle(gradians: self)
     }
 
-    // [_Define Documentation: SDGCornerstone.RealArithmetic.gradians_]
+    // @documentation(SDGCornerstone.RealArithmetic.gradians)
     /// Returns an angle in gradians.
     @_inlineable public var gon: Angle<Self> {
         return gradians

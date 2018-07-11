@@ -22,7 +22,7 @@
 public protocol SearchableBidirectionalCollection : BidirectionalCollection, SearchableCollection
 where SubSequence : SearchableBidirectionalCollection {
 
-    // [_Define Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // @documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     // [_Example 1: lastMatch(for:in:) Backwards Differences 1_] [_Example 2: lastMatch(for:in:) Backwards Differences 2_]
     /// Returns the last match for `pattern` in the specified subrange.
     ///
@@ -114,7 +114,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     func lastMatch(for pattern: Self, in searchRange: Range<Index>) -> PatternMatch<Self>?
 
-    // [_Define Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    // @documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -133,7 +133,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///     - pattern: The pattern to try.
     func hasSuffix(_ pattern: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    // @documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest suffix subsequence shared with the other collection.
     ///
     /// - Parameters:
@@ -326,7 +326,7 @@ extension SearchableBidirectionalCollection {
         return _lastMatch(for: pattern, in: searchRange)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // @documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     // [_Example 1: lastMatch(for:in:) Backwards Differences 1_] [_Example 2: lastMatch(for:in:) Backwards Differences 2_]
     /// Returns the last match for `pattern` in the specified subrange.
     ///

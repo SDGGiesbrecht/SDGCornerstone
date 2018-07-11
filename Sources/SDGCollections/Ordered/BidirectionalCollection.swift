@@ -16,7 +16,7 @@ import SDGMathematics
 
 extension BidirectionalCollection {
 
-    // [_Define Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+    // @documentation(SDGCornerstone.BidirectionalCollection.index(before:))
     /// Returns the index immediately before the specified index.
     ///
     /// - Parameters:

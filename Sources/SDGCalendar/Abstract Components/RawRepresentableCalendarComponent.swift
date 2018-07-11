@@ -21,21 +21,21 @@ where Vector : IntegralArithmetic {
 
     // MARK: - Associated Type
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.RawValue_]
+    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.RawValue)
     /// The raw value type.
     typealias  RawValue = Vector
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:)_]
+    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
     init(unsafeRawValue: RawValue)
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
+    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
     /// The valid range for raw values.
     static var validRange: Range<RawValue>? { get }
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
+    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
     /// The raw value.
     var rawValue: RawValue { get }
 }

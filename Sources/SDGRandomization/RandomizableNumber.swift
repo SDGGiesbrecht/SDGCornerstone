@@ -22,7 +22,7 @@ import SDGMathematics
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
 public protocol RandomizableNumber : WholeArithmetic {
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
@@ -33,7 +33,7 @@ public protocol RandomizableNumber : WholeArithmetic {
 
 extension RandomizableNumber {
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:))
     /// Creates a random value within a particular range.
     ///
     /// - Parameters:

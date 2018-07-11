@@ -23,7 +23,7 @@
 public protocol IterableEnumeration : RawRepresentable {
     // [_Workaround: This should be constrained to “where RawValue == Int”, but that triggers abort traps when Linux tries to link against it. (Swift 4.1.2)_]
 
-    // [_Define Documentation: SDGCornerstone.IterableEnumeration.cases_]
+    // @documentation(SDGCornerstone.IterableEnumeration.cases)
     /// An array containing every case of the enumeration.
     static var cases: [Self] { get }
 }

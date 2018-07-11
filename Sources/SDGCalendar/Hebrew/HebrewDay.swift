@@ -34,7 +34,7 @@ public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, Consisten
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
     /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).days

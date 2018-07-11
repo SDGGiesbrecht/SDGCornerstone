@@ -18,7 +18,7 @@ import SDGCornerstoneLocalizations
 /// A calendar compenent representing a month of the year.
 public protocol Month : TextualPlaygroundDisplay {
 
-    // [_Define Documentation: SDGCornerstone.Month.inEnglish()_]
+    // @documentation(SDGCornerstone.Month.inEnglish())
     /// Returns the English name.
     func inEnglish() -> StrictString
 

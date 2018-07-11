@@ -24,50 +24,50 @@ import SDGControlFlow
 /// - `mutating func formBitwiseExclusiveOr(with other: Self)`
 public protocol BitField : Equatable {
 
-    // [_Define Documentation: SDGCornerstone.BitField.bitwiseNot()_]
+    // @documentation(SDGCornerstone.BitField.bitwiseNot())
     /// Returns the bits not present in `self`.
     func bitwiseNot() -> Self
 
-    // [_Define Documentation: SDGCornerstone.BitField.formBitwiseNot()_]
+    // @documentation(SDGCornerstone.BitField.formBitwiseNot())
     /// Inverts the bits.
     mutating func formBitwiseNot()
 
-    // [_Define Documentation: SDGCornerstone.BitField.bitwiseAnd(with:)_]
+    // @documentation(SDGCornerstone.BitField.bitwiseAnd(with:))
     /// Returns the bits present in both `self` and `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     func bitwiseAnd(with other: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.BitField.formBitwiseAnd(with:)_]
+    // @documentation(SDGCornerstone.BitField.formBitwiseAnd(with:))
     /// Removes the bits not also present in `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     mutating func formBitwiseAnd(with other: Self)
 
-    // [_Define Documentation: SDGCornerstone.BitField.bitwiseOr(with:)_]
+    // @documentation(SDGCornerstone.BitField.bitwiseOr(with:))
     /// Returns the bits present in either `self` or `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     func bitwiseOr(with other: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.BitField.formBitwiseOr(with:)_]
+    // @documentation(SDGCornerstone.BitField.formBitwiseOr(with:))
     /// Inserts the bits present in `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     mutating func formBitwiseOr(with other: Self)
 
-    // [_Define Documentation: SDGCornerstone.BitField.bitwiseExclusiveOr(with:)_]
+    // @documentation(SDGCornerstone.BitField.bitwiseExclusiveOr(with:))
     /// Returns the bits present only in `self` or only in `other`.
     ///
     /// - Parameters:
     ///     - other: The other bits.
     func bitwiseExclusiveOr(with other: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.BitField.formBitwiseExclusiveOr(with:)_]
+    // @documentation(SDGCornerstone.BitField.formBitwiseExclusiveOr(with:))
     /// Inserts the bits present in `other` and removes the bits present in both.
     ///
     /// - Parameters:
