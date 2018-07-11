@@ -25,7 +25,7 @@ class MiscellaneousExampleTests : TestCase {
         let x = −1
         let y = |x|
         XCTAssertEqual(y, 1)
-        // [_End_]
+        // @endExample
     }
 
     func testAlternatingBooleans() {
@@ -42,14 +42,14 @@ class MiscellaneousExampleTests : TestCase {
         XCTAssertEqual(Bool(fromRandomizer: alternating), false)
         XCTAssertEqual(Bool(fromRandomizer: alternating), true)
         // ...
-        // [_End_]
+        // @endExample
     }
 
     func testApproximation() {
 
         // [_Define Example: ≈_]
         XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
-        // [_End_]
+        // @endExample
     }
 
     func testBackwardsSearchDifferences1() {
@@ -62,7 +62,7 @@ class MiscellaneousExampleTests : TestCase {
 
         XCTAssertEqual(collection.matches(for: pattern).last?.range, 2 ..< 4)
         // (Here the matches are 0 ..< 2 and 2 ..< 4; the final zero is incomplete.)
-        // [_End_]
+        // @endExample
     }
 
     func testBackwardsSearchDifferences2() {
@@ -76,7 +76,7 @@ class MiscellaneousExampleTests : TestCase {
 
         XCTAssertEqual(collection.matches(for: pattern).last?.range, 0 ..< 3)
         // (Forwards, the lazy consumption keeps consuming zeros until the pattern can be completed with a one.)
-        // [_End_]
+        // @endExample
     }
 
     func testDecreasing() {
@@ -95,7 +95,7 @@ class MiscellaneousExampleTests : TestCase {
         // Prints, for example, “After rolling the die 5 time(s), the lowest roll was 2.”
 
         // In each iteration of the for loop, a new number is rolled, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.
-        // [_End_]
+        // @endExample
 
         XCTAssert(lowestRoll ∈ 1 ... 6)
     }
@@ -122,7 +122,7 @@ class MiscellaneousExampleTests : TestCase {
         // 6: 10
 
         // In this example, the die is rolled 100 times, and each time the tally for the outcome is incremented. After the for loop, the dictionary contains the frequencies (values) for each outcome (keys).
-        // [_End_]
+        // @endExample
 
         XCTAssert(frequencies.count ≤ 6)
     }
@@ -135,7 +135,7 @@ class MiscellaneousExampleTests : TestCase {
 
         XCTAssertEqual(adOne − oneYear, oneBC)
         XCTAssertEqual(adOne − oneBC, oneYear)
-        // [_End_]
+        // @endExample
     }
 
     func testIncreasing() {
@@ -154,7 +154,7 @@ class MiscellaneousExampleTests : TestCase {
         // Prints, for example, “After rolling the die 5 time(s), the highest roll was 4.”
 
         // In each iteration of the for loop, a new number is rolled, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.
-        // [_End_]
+        // @endExample
 
         XCTAssert(highestRoll ∈ 1 ... 6)
     }
@@ -167,7 +167,7 @@ class MiscellaneousExampleTests : TestCase {
         let negativeMillion: Integer = −1_000_000
         let negativeDecillion: Integer = "−1 000 000 000 000 000 000 000 000 000 000 000"
         let negativeYobiMultiplier = Integer(binary: "−1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
-        // [_End_]
+        // @endExample
 
         XCTAssertEqual(−(1000 ↑ 2), negativeMillion)
         XCTAssertEqual(−(1000 ↑ 11), negativeDecillion)
@@ -182,7 +182,7 @@ class MiscellaneousExampleTests : TestCase {
 
         XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
         XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
-        // [_End_]
+        // @endExample
     }
 
     func testRationalNumberLiterals() {
@@ -195,7 +195,7 @@ class MiscellaneousExampleTests : TestCase {
             let third: RationalNumber = 1 ÷ 3
             let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 001"
             let half = RationalNumber(binary: "0.1")
-            // [_End_]
+            // @endExample
 
             _ = third
             _ = decillionth
@@ -214,7 +214,7 @@ class MiscellaneousExampleTests : TestCase {
 
         driver = nil
         // The background run loop has now stopped.
-        // [_End_]
+        // @endExample
 
         _ = driver
     }
@@ -225,7 +225,7 @@ class MiscellaneousExampleTests : TestCase {
         let million: WholeNumber = 1_000_000
         let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
         let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
-        // [_End_]
+        // @endExample
 
         XCTAssertEqual(1000 ↑ 2, million)
         XCTAssertEqual(1000 ↑ 11, decillion)

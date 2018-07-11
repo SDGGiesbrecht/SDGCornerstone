@@ -25,7 +25,7 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 @_versioned internal let endSuperscript: UnicodeScalar = "\u{107001}"
 @_versioned internal let beginSubscript: UnicodeScalar = "\u{107002}"
 @_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"
-// [_End_]
+// @endExample
 
 // #example(1, Markup Encoding)
 /// Text with additional semantic markup.

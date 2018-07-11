@@ -58,7 +58,7 @@ private struct DaysIntoMillennium : DateDefinition {
         try self.init(from: decoder, via: FloatMax.self, convert: { DaysIntoMillennium($0) })
     }
 }
-// [_End_]
+// @endExample
 
 class DateExampleTests : TestCase {
 

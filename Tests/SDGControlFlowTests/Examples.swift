@@ -28,4 +28,4 @@ extension Array where Element : Comparable {
         return nonmutatingVariant(of: +=, on: a, with: b)
     }
 }
-// [_End_]
+// @endExample

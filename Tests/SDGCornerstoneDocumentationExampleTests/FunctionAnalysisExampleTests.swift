@@ -40,28 +40,28 @@ class FunctionAnalysisExampleTests : TestCase {
         // No longer decreasing, so stop. 1 was the local minimum.
 
         XCTAssertEqual(approximateSquareRootOf120, 11)
-        // [_End_]
+        // @endExample
     }
 
     func doNotTestPreconditionViolationForFindLocalMinimum() {
         // [_Define Example: findLocalMinimum Precondition Violation_]
         // Never do this:
         _ = findLocalMinimum(near: 0, inFunction: {$0})
-        // [_End_]
+        // @endExample
     }
 
     func doNotTestPreconditionViolationForFindLocalMaximum() {
         // [_Define Example: findLocalMaximum Precondition Violation_]
         // Never do this:
         _ = findLocalMaximum(near: 0, inFunction: {$0})
-        // [_End_]
+        // @endExample
     }
 
     func testUndefinedCaseOneForFindLocalMaximum() {
         // [_Define Example: findLocalMaximum Undefined 1_]
         // This is undefined:
         let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? $0 ↑ 2 : −($0 ↑ 2) }
-        // [_End_]
+        // @endExample
 
         XCTAssert(maximum ∈ Set([−10, 10]))
     }
@@ -70,7 +70,7 @@ class FunctionAnalysisExampleTests : TestCase {
         // [_Define Example: findLocalMinimum Undefined 1_]
         // This is undefined:
         let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −($0 ↑ 2) : $0 ↑ 2 }
-        // [_End_]
+        // @endExample
 
         XCTAssert(minimum ∈ Set([−10, 10]))
     }
@@ -79,7 +79,7 @@ class FunctionAnalysisExampleTests : TestCase {
         // [_Define Example: findLocalMaximum Undefined 2_]
         // This is undefined:
         let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? 1 : −(|$0|) }
-        // [_End_]
+        // @endExample
 
         XCTAssert(maximum ∈ −10 ... 10)
     }
@@ -88,7 +88,7 @@ class FunctionAnalysisExampleTests : TestCase {
         // [_Define Example: findLocalMinimum Undefined 2_]
         // This is undefined:
         let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −1 : |$0| }
-        // [_End_]
+        // @endExample
 
         XCTAssert(minimum ∈ −10 ... 10)
     }
