@@ -44,7 +44,7 @@ extension Comparable {
     }
 
     // @documentation(SDGCornerstone.Comparable.≥=)
-    // #example(1, increase(to:))
+    // #example(1, increase)
     /// Increases the value of `self` so that falls at or above `minimum`.
     ///
     /// This is accomplished by changing `self` to match the value of `minimum` if and only if `self` does not already satisfy `self ≥ minimum`.
@@ -76,7 +76,7 @@ extension Comparable {
     }
 
     // @documentation(SDGCornerstone.Comparable.≤=)
-    // #example(1, decrease(to:))
+    // #example(1, decrease)
     /// Decreases the value of `self` so that falls at or below `maximum`.
     ///
     /// This is accomplished by changing `self` to match the value of `maximum` if and only if `self` does not already satisfy `self ≤ maximum`.

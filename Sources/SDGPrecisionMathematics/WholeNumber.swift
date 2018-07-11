@@ -17,7 +17,7 @@ import SDGLogic
 import SDGRandomization
 import SDGCornerstoneLocalizations
 
-// #example(1, WholeNumber Literals)
+// #example(1, wholeNumberLiterals)
 /// An arbitrary‐precision whole number.
 ///
 /// ```swift

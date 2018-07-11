@@ -16,7 +16,7 @@ import SDGCornerstone
 import SDGXCTestUtilities
 import SDGPersistenceTestUtilities
 
-// @example(DateDefinition)
+// @example(dateDefinition)
 extension CalendarDate {
 
     // This initializer creates a date using the number of days into the current millennium.

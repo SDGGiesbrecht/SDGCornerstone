@@ -41,7 +41,7 @@ public protocol Localization : TextualPlaygroundDisplay {
 
 extension Localization {
 
-    // #example(1, Macrolanguages) #example(2, Localization Groups)
+    // #example(1, macrolanguages) #example(2, localizationGroups)
     /// Creates a localization from the specified code, or as a fallback, creates a related localization that can be reasonably used as a replacement.
     ///
     /// For example, if a type supports British but not American English, it creates an instance of British English when either code is specified.

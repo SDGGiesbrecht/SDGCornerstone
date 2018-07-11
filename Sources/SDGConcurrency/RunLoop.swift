@@ -26,7 +26,7 @@ extension RunLoop {
         @_versioned internal init() {}
     }
 
-    // #example(1, Run Loop Usage)
+    // #example(1, runLoopUsage)
     /// Runs the run loop for the lifetime of the driver provided to `holdDriver`.
     ///
     /// For example:

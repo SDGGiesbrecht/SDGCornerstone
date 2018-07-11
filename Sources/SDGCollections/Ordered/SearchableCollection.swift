@@ -230,7 +230,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     func commonPrefix(with other: Self) -> PatternMatch<Self>
 
     // @documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:))
-    // #example(1, Nesting Level)
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -255,7 +255,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    // #example(1, Nesting Level)
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -909,7 +909,7 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    // #example(1, Nesting Level)
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -937,7 +937,7 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    // #example(1, Nesting Level)
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -954,7 +954,7 @@ extension SearchableCollection {
     }
 
     // @documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
-    // #example(1, Nesting Level)
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the entire collection.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -982,7 +982,7 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    // #example(1, Nesting Level)
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:

@@ -18,7 +18,7 @@ extension Bool {
 
     private static let randomizationBit: UInt64 = 1 << 48
 
-    // #example(1, Alternating Booleans)
+    // #example(1, alternatingBooleans)
     /// A value a `Randomizer` can return that will result in `false`.
     ///
     /// For example:
@@ -39,7 +39,7 @@ extension Bool {
     /// ```
     public static let falseRandomizerValue: UInt64 = 0
 
-    // #example(1, Alternating Booleans)
+    // #example(1, alternatingBooleans)
     /// A value a `Randomizer` can return that will result in `true`.
     ///
     /// For example:

@@ -15,7 +15,7 @@
 import SDGLogic
 import SDGCornerstoneLocalizations
 
-// #example(1, Gregorian Year)
+// #example(1, gregorianYear)
 /// A Gregorian year.
 ///
 /// Initialize with a negative integer to get a BC year. The provided mathematical functions automatically accomodate for the lack of a zero year. For example:

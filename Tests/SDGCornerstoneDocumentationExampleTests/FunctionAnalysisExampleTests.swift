@@ -44,21 +44,21 @@ class FunctionAnalysisExampleTests : TestCase {
     }
 
     func doNotTestPreconditionViolationForFindLocalMinimum() {
-        // @example(findLocalMinimum Precondition Violation)
+        // @example(findLocalMinimumPreconditionViolation)
         // Never do this:
         _ = findLocalMinimum(near: 0, inFunction: {$0})
         // @endExample
     }
 
     func doNotTestPreconditionViolationForFindLocalMaximum() {
-        // @example(findLocalMaximum Precondition Violation)
+        // @example(findLocalMaximumPreconditionViolation)
         // Never do this:
         _ = findLocalMaximum(near: 0, inFunction: {$0})
         // @endExample
     }
 
     func testUndefinedCaseOneForFindLocalMaximum() {
-        // @example(findLocalMaximum Undefined 1)
+        // @example(findLocalMaximumUndefined1)
         // This is undefined:
         let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? $0 ↑ 2 : −($0 ↑ 2) }
         // @endExample
@@ -67,7 +67,7 @@ class FunctionAnalysisExampleTests : TestCase {
     }
 
     func testUndefinedCaseOneForFindLocalMinimum() {
-        // @example(findLocalMinimum Undefined 1)
+        // @example(findLocalMinimumUndefined1)
         // This is undefined:
         let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −($0 ↑ 2) : $0 ↑ 2 }
         // @endExample
@@ -76,7 +76,7 @@ class FunctionAnalysisExampleTests : TestCase {
     }
 
     func testUndefinedCaseTwoForFindLocalMaximum() {
-        // @example(findLocalMaximum Undefined 2)
+        // @example(findLocalMaximumUndefined2)
         // This is undefined:
         let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? 1 : −(|$0|) }
         // @endExample
@@ -85,7 +85,7 @@ class FunctionAnalysisExampleTests : TestCase {
     }
 
     func testUndefinedCaseTwoForFindLocalMinimum() {
-        // @example(findLocalMinimum Undefined 2)
+        // @example(findLocalMinimumUndefined2)
         // This is undefined:
         let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −1 : |$0| }
         // @endExample

@@ -18,7 +18,7 @@ import SDGControlFlow
 
 // MARK: - Encoding
 
-// @example(Markup Encoding)
+// @example(markupEncoding)
 private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
 
 @_versioned internal let beginSuperscript: UnicodeScalar = "\u{107000}"
@@ -27,7 +27,7 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 @_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"
 // @endExample
 
-// #example(1, Markup Encoding)
+// #example(1, markupEncoding)
 /// Text with additional semantic markup.
 ///
 /// Semantic markup assigns control functions to several private use scalars.
