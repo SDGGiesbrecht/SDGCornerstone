@@ -18,7 +18,7 @@ import SDGXCTestUtilities
 class FunctionAnalysisExampleTests : TestCase {
 
     func testFindLocalMinimum() {
-        // [_Define Example: findLocalMinimum_]
+        // @example(findLocalMinimum)
         let approximateSquareRootOf120 = findLocalMinimum(near: 10) { (guess: Int) -> Int in
 
             // Find the square of the guess.
@@ -44,21 +44,21 @@ class FunctionAnalysisExampleTests : TestCase {
     }
 
     func doNotTestPreconditionViolationForFindLocalMinimum() {
-        // [_Define Example: findLocalMinimum Precondition Violation_]
+        // @example(findLocalMinimum Precondition Violation)
         // Never do this:
         _ = findLocalMinimum(near: 0, inFunction: {$0})
         // @endExample
     }
 
     func doNotTestPreconditionViolationForFindLocalMaximum() {
-        // [_Define Example: findLocalMaximum Precondition Violation_]
+        // @example(findLocalMaximum Precondition Violation)
         // Never do this:
         _ = findLocalMaximum(near: 0, inFunction: {$0})
         // @endExample
     }
 
     func testUndefinedCaseOneForFindLocalMaximum() {
-        // [_Define Example: findLocalMaximum Undefined 1_]
+        // @example(findLocalMaximum Undefined 1)
         // This is undefined:
         let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? $0 ↑ 2 : −($0 ↑ 2) }
         // @endExample
@@ -67,7 +67,7 @@ class FunctionAnalysisExampleTests : TestCase {
     }
 
     func testUndefinedCaseOneForFindLocalMinimum() {
-        // [_Define Example: findLocalMinimum Undefined 1_]
+        // @example(findLocalMinimum Undefined 1)
         // This is undefined:
         let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −($0 ↑ 2) : $0 ↑ 2 }
         // @endExample
@@ -76,7 +76,7 @@ class FunctionAnalysisExampleTests : TestCase {
     }
 
     func testUndefinedCaseTwoForFindLocalMaximum() {
-        // [_Define Example: findLocalMaximum Undefined 2_]
+        // @example(findLocalMaximum Undefined 2)
         // This is undefined:
         let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? 1 : −(|$0|) }
         // @endExample
@@ -85,7 +85,7 @@ class FunctionAnalysisExampleTests : TestCase {
     }
 
     func testUndefinedCaseTwoForFindLocalMinimum() {
-        // [_Define Example: findLocalMinimum Undefined 2_]
+        // @example(findLocalMinimum Undefined 2)
         // This is undefined:
         let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −1 : |$0| }
         // @endExample

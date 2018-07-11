@@ -21,7 +21,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testAbsoluteValue() {
 
-        // [_Define Example: Absolute Value_]
+        // @example(Absolute Value)
         let x = −1
         let y = |x|
         XCTAssertEqual(y, 1)
@@ -29,7 +29,7 @@ class MiscellaneousExampleTests : TestCase {
     }
 
     func testAlternatingBooleans() {
-        // [_Define Example: Alternating Booleans_]
+        // @example(Alternating Booleans)
         let alternating = CyclicalNumberGenerator([
             Bool.falseRandomizerValue,
             Bool.trueRandomizerValue
@@ -47,14 +47,14 @@ class MiscellaneousExampleTests : TestCase {
 
     func testApproximation() {
 
-        // [_Define Example: ≈_]
+        // @example(≈)
         XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
         // @endExample
     }
 
     func testBackwardsSearchDifferences1() {
 
-        // [_Define Example: lastMatch(for:in:) Backwards Differences 1_]
+        // @example(lastMatch(for:in:) Backwards Differences 1)
         let collection = [0, 0, 0, 0, 0]
         let pattern = [0, 0]
 
@@ -67,7 +67,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testBackwardsSearchDifferences2() {
 
-        // [_Define Example: lastMatch(for:in:) Backwards Differences 2_]
+        // @example(lastMatch(for:in:) Backwards Differences 2)
         let collection = [0, 0, 1]
         let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
 
@@ -81,7 +81,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testDecreasing() {
 
-        // [_Define Example: decrease(to:)_]
+        // @example(decrease(to:))
         func rollDie() -> Int {
             return Int(randomInRange: 1 ... 6)
         }
@@ -102,7 +102,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testDictionaryMutation() {
 
-        // [_Define Example: mutateValue(for:_:)_]
+        // @example(mutateValue(for:_:))
         func rollDie() -> Int {
             return Int(randomInRange: 1 ... 6)
         }
@@ -128,7 +128,7 @@ class MiscellaneousExampleTests : TestCase {
     }
 
     func testGregorianYear() {
-        // [_Define Example: Gregorian Year_]
+        // @example(Gregorian Year)
         let adOne = GregorianYear(1)
         let oneBC = GregorianYear(−1)
         let oneYear = Int(1)
@@ -140,7 +140,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testIncreasing() {
 
-        // [_Define Example: increase(to:)_]
+        // @example(increase(to:))
         func rollDie() -> Int {
             return Int(randomInRange: 1 ... 6)
         }
@@ -163,7 +163,7 @@ class MiscellaneousExampleTests : TestCase {
 
         typealias Integer = SDGPrecisionMathematics.Integer
 
-        // [_Define Example: Integer Literals_]
+        // @example(Integer Literals)
         let negativeMillion: Integer = −1_000_000
         let negativeDecillion: Integer = "−1 000 000 000 000 000 000 000 000 000 000 000"
         let negativeYobiMultiplier = Integer(binary: "−1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
@@ -176,7 +176,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testNestingLevel() {
 
-        // [_Define Example: Nesting Level_]
+        // @example(Nesting Level)
         let equation = "2(3x − (y + 4)) = z"
         let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
 
@@ -191,7 +191,7 @@ class MiscellaneousExampleTests : TestCase {
             // This is 60 times slower in the debug configuration compared to the optimized release.
             // It is not worth bogging down tests.
 
-            // [_Define Example: RationalNumber Literals_]
+            // @example(RationalNumber Literals)
             let third: RationalNumber = 1 ÷ 3
             let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 001"
             let half = RationalNumber(binary: "0.1")
@@ -205,7 +205,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testRunLoopUsage() {
 
-        // [_Define Example: Run Loop Usage_]
+        // @example(Run Loop Usage)
         var driver: RunLoop.Driver?
         DispatchQueue.global(qos: .userInitiated).async {
             RunLoop.current.runForDriver { driver = $0 }
@@ -221,7 +221,7 @@ class MiscellaneousExampleTests : TestCase {
 
     func testWholeNumberLiterals() {
 
-        // [_Define Example: WholeNumber Literals_]
+        // @example(WholeNumber Literals)
         let million: WholeNumber = 1_000_000
         let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
         let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")

@@ -481,7 +481,7 @@ internal enum ContentLocalization : String, InputLocalization {
     ]
 
     internal static let groups: [String: [(script: String, countries: [String])]] = [
-        // [_Define Example: Localization Groups_]
+        // @example(Localization Groups)
         "cmn": [
             ("Hans", ["CN", "SG"]),
             ("Hant", ["TW"])],

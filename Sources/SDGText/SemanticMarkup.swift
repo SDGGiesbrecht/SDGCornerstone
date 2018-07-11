@@ -18,7 +18,7 @@ import SDGControlFlow
 
 // MARK: - Encoding
 
-// [_Define Example: Markup Encoding_]
+// @example(Markup Encoding)
 private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
 
 @_versioned internal let beginSuperscript: UnicodeScalar = "\u{107000}"

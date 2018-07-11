@@ -14,7 +14,7 @@
 
 import SDGControlFlow
 
-// [_Define Example: Nonmutating Variant_]
+// @example(Nonmutating Variant)
 extension Array where Element : Comparable {
     // MARK: - where Element : Comparable
 
