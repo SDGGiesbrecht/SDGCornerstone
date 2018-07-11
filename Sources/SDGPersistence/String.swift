@@ -43,10 +43,10 @@ extension String : FileConvertible {
             self = string
         } else if let string = String(data: file, encoding: .utf16) {
             self = string
-        } else if let string = String(data: file, encoding: .utf32) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+        } else if let string = String(data: file, encoding: .utf32) { // @exempt(from: tests) macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
             self = string
-        } else if let string = String(data: file, encoding: .isoLatin1) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
-            self = string // [_Exempt from Test Coverage_]
+        } else if let string = String(data: file, encoding: .isoLatin1) { // @exempt(from: tests) macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+            self = string // @exempt(from: tests)
         } else {
             _unreachable()
         }

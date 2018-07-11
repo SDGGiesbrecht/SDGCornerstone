@@ -27,7 +27,7 @@ extension FileManager {
     // MARK: - Domains
 
     internal static func possibleDebugDomain(_ domain: String) -> String {
-        return BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Test Coverage_]
+        return BuildConfiguration.current == .debug ? domain + ".debug" : domain // @exempt(from: tests)
     }
 
     // MARK: - Recommended File Locations
@@ -199,17 +199,17 @@ extension FileManager {
     public func deepFileEnumeration(in directory: URL) throws -> [URL] {
 
         var failureReason: Error? // Thrown after enumeration stops. (See below.)
-        guard let enumerator = FileManager.default.enumerator(at: directory, includingPropertiesForKeys: [.isDirectoryKey], options: [], errorHandler: { (_, error: Error) -> Bool in // [_Exempt from Test Coverage_] It is unknown what circumstances would actually cause an error.
+        guard let enumerator = FileManager.default.enumerator(at: directory, includingPropertiesForKeys: [.isDirectoryKey], options: [], errorHandler: { (_, error: Error) -> Bool in // @exempt(from: tests) It is unknown what circumstances would actually cause an error.
             failureReason = error
             return false // Stop.
-        }) else { // [_Exempt from Test Coverage_] It is unknown what circumstances would actually result in a `nil` enumerator being returned.
+        }) else { // @exempt(from: tests) It is unknown what circumstances would actually result in a `nil` enumerator being returned.
             throw FileManager.unknownFileReadingError
         }
 
         var result: [URL] = []
         for object in enumerator {
             guard let url = object as? URL else {
-                throw FileManager.unknownFileReadingError // [_Exempt from Test Coverage_] It is unknown why something other than a URL would be returned.
+                throw FileManager.unknownFileReadingError // @exempt(from: tests) It is unknown why something other than a URL would be returned.
             }
 
             let isDirectory: Bool
@@ -227,7 +227,7 @@ extension FileManager {
         }
 
         if let error = failureReason {
-            throw error // [_Exempt from Test Coverage_] It is unknown what circumstances would actually cause an error.
+            throw error // @exempt(from: tests) It is unknown what circumstances would actually cause an error.
         }
 
         return result

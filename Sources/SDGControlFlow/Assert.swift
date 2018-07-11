@@ -12,12 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_versioned internal func list(_ localizations: (_APILocalization) -> String) -> String { // [_Exempt from Test Coverage_]
+@_versioned internal func list(_ localizations: (_APILocalization) -> String) -> String { // @exempt(from: tests)
     var included: Set<String> = []
-    let result = _APILocalization.cases.map(localizations).filter { (message) in // [_Exempt from Test Coverage_]
-        if included.contains(message) { // [_Exempt from Test Coverage_]
+    let result = _APILocalization.cases.map(localizations).filter { (message) in // @exempt(from: tests)
+        if included.contains(message) { // @exempt(from: tests)
             return false
-        } else { // [_Exempt from Test Coverage_]
+        } else { // @exempt(from: tests)
             included.insert(message)
             return true
         }
@@ -27,9 +27,9 @@
 
 /// :nodoc:
 public func _primitiveMethodMessage(for method: String) -> (_APILocalization) -> String {
-    return { (localization: _APILocalization) -> String in // [_Exempt from Test Coverage_]
+    return { (localization: _APILocalization) -> String in // @exempt(from: tests)
         switch localization {
-        case .englishCanada: // [_Exempt from Test Coverage_]
+        case .englishCanada: // @exempt(from: tests)
             return "The primitive method “\(method)” has not been overridden."
         }
     }
@@ -41,7 +41,7 @@ public func _primitiveMethod(_ method: String = #function, file: StaticString = 
 
 /// :nodoc:
 public func _unreachableMessage(function: String, file: StaticString, line: UInt, column: UInt) -> (_APILocalization) -> String {
-    return { (localization: _APILocalization) -> String in // [_Exempt from Test Coverage_]
+    return { (localization: _APILocalization) -> String in // @exempt(from: tests)
         switch localization {
         case .englishCanada:
             return "Something is being used in a way that violates preconditions. Line \(line) (column \(column)) of “\(function)” in “\(file)” ought to be unreachable."

@@ -21,9 +21,9 @@ extension String/*.ClusterView*/.Index {
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
     @_inlineable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
         guard let result = samePosition(in: scalars) as String.ScalarView.Index? else {
-            _preconditionFailure({ (localization: _APILocalization) -> String in // [_Exempt from Test Coverage_]
+            _preconditionFailure({ (localization: _APILocalization) -> String in // @exempt(from: tests)
                 switch localization {
-                case .englishCanada: // [_Exempt from Test Coverage_]
+                case .englishCanada: // @exempt(from: tests)
                     return "Not a cluster boundary: \(self)"
                 }
             })

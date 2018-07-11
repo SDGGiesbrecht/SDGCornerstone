@@ -279,7 +279,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         case .may:
             if πτώση == .γενική {
                 return "Μαΐου"
-            } else { // [_Exempt from Test Coverage_] Unused so far.
+            } else { // @exempt(from: tests) Unused so far.
                 return απλό(όνομα: "Μάι")
             }
         case .june:
@@ -289,7 +289,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         case .august:
             if πτώση == .γενική {
                 return "Αυγούστου"
-            } else { // [_Exempt from Test Coverage_] Unused so far.
+            } else { // @exempt(from: tests) Unused so far.
                 return απλό(όνομα: "Αύγουστ")
             }
         case .september:

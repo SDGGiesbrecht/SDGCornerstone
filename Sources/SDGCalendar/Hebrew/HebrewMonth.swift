@@ -328,7 +328,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
             guard let result = HebrewMonth(rawValue: ordinal + offset) else {
                 preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                     switch localization {
-                    case .englishCanada: // [_Exempt from Test Coverage_]
+                    case .englishCanada: // @exempt(from: tests)
                         return StrictString("Invalid month ordinal: \(ordinal.inDigits())")
                     }
                 }))

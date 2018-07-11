@@ -14,4 +14,4 @@
 
 @_exported import struct Foundation.URL
 
-func aFunctionToTriggerTestCoverage() {} // [_Exempt from Test Coverage_]
+func aFunctionToTriggerTestCoverage() {} // @exempt(from: tests)

@@ -71,7 +71,7 @@ extension OrderedEnumeration where RawValue == Int {
         guard let result = successor() else {
             _preconditionFailure({ [instance = self] (localization: _APILocalization) -> String in
                 switch localization {
-                case .englishCanada: // [_Exempt from Test Coverage_]
+                case .englishCanada: // @exempt(from: tests)
                     return "“\(instance)” has no successor."
                 }
             })
@@ -99,7 +99,7 @@ extension OrderedEnumeration where RawValue == Int {
         guard let result = predecessor() else {
             _preconditionFailure({ [instance = self] (localization: _APILocalization) -> String in
                 switch localization {
-                case .englishCanada: // [_Exempt from Test Coverage_]
+                case .englishCanada: // @exempt(from: tests)
                     return "“\(instance)” has no predecessor."
                 }
             })

@@ -51,7 +51,7 @@ public final class PreferenceSet {
     /// Subclasses may call this during initialization, but in all other circumstances, `preferences(for:)` should be called to prevent duplication.
     public required init(domain: String) {
         _assert(PreferenceSet.domains[domain] == nil, { (localization: _APILocalization) -> String in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "Detected duplicate initialization of \(domain). Call preferences(for:) instead."
             }
@@ -60,7 +60,7 @@ public final class PreferenceSet {
         self.domain = domain
         let possibleDebugDomain: String
         if domain == UserDefaults.globalDomain {
-            possibleDebugDomain = domain // [_Exempt from Test Coverage_] False coverage result in Xcode 9.3
+            possibleDebugDomain = domain // @exempt(from: tests) False coverage result in Xcode 9.3
         } else {
             possibleDebugDomain = FileManager.possibleDebugDomain(domain)
         }
@@ -147,7 +147,7 @@ public final class PreferenceSet {
         #else
 
             _assert(possibleDebugDomain ≠ UserDefaults.globalDomain, { (localization: _APILocalization) -> String in
-                switch localization { // [_Exempt from Test Coverage_]
+                switch localization { // @exempt(from: tests)
                 case .englishCanada:
                     return "Attempted to write preferences to the global domain. This domain is read‐only."
                 }

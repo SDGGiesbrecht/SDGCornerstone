@@ -128,11 +128,11 @@ public struct Preference : Equatable, TransparentWrapper {
             let object = arrayObject.firstObject! as! NSObject
             #endif
             propertyListObject = object
-        } catch { // [_Exempt from Test Coverage_]
-            if BuildConfiguration.current == .debug { // [_Exempt from Test Coverage_]
+        } catch { // @exempt(from: tests)
+            if BuildConfiguration.current == .debug { // @exempt(from: tests)
                 // This indicates a precondition violation during coding, but it is not worth stopping execution.
                 print(error)
-            } // [_Exempt from Test Coverage_]
+            } // @exempt(from: tests)
             propertyListObject = nil
         }
     }

@@ -14,8 +14,8 @@
 
 // MARK: - General
 
-private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString, line: UInt) { // [_Exempt from Test Coverage_]
-    if expression() {} else { // [_Exempt from Test Coverage_]
+private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, file: StaticString, line: UInt) { // @exempt(from: tests)
+    if expression() {} else { // @exempt(from: tests)
         // Release optimization removes assert and strips precondition’s message.
         fatalError(message(), file: file, line: line)
     }
@@ -30,14 +30,14 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     testAssertionMethod({
         do {
             return try expression()
-        } catch { // [_Exempt from Test Coverage_]
+        } catch { // @exempt(from: tests)
             testAssertionMethod(false, "\(error)", file, line) // Fails with the error message.
             return true // No need to fail twice.
         }
-    }(), { // [_Exempt from Test Coverage_]
-        do { // [_Exempt from Test Coverage_]
+    }(), { // @exempt(from: tests)
+        do { // @exempt(from: tests)
             return try message()
-        } catch { // [_Exempt from Test Coverage_]
+        } catch { // @exempt(from: tests)
             return "\(error)" // Message resolution failed. Use the error description.
         }
     }(), file, line)
@@ -123,7 +123,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 
 /// Tests a function, verifying that it returns the expected result.
 @_inlineable public func test<A, R>(function: (function: (A) throws -> R, name: String), on argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
-    do { // [_Exempt from Test Coverage_]
+    do { // @exempt(from: tests)
         let result = try function.function(argument)
         test(result == expectedResult, "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
@@ -215,7 +215,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 
 /// Tests a postfix operator, verifying that it returns the expected result.
 @_inlineable public func test<O, R>(postfixOperator operator: (function: (O) throws -> R, name: String), on operand: O, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
-    do { // [_Exempt from Test Coverage_]
+    do { // @exempt(from: tests)
         let result = try `operator`.function(operand)
         test(result == expectedResult, "\(operand)\(`operator`.name) → \(result) ≠ \(expectedResult)",
             file: file, line: line)

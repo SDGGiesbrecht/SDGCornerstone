@@ -35,9 +35,9 @@ extension IterableEnumeration where RawValue == Int {
     /// An array containing every case of the enumeration.
     @_inlineable public static var cases: [Self] {
         guard var instance = Self(rawValue: 0) else {
-            _preconditionFailure({ (localization: _APILocalization) -> String in // [_Exempt from Test Coverage_]
+            _preconditionFailure({ (localization: _APILocalization) -> String in // @exempt(from: tests)
                 switch localization {
-                case .englishCanada: // [_Exempt from Test Coverage_]
+                case .englishCanada: // @exempt(from: tests)
                     return "“\(Self.self)” has no case with a raw value of 0."
                 }
             })

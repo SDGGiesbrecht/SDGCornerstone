@@ -1086,8 +1086,8 @@ extension SearchableCollection {
         let lastIndexDistance = prefixLength == 0 ? 0 : prefixLength − 1
         let otherLastIndexDistance = otherPrefixLength == 0 ? 0 : otherPrefixLength − 1
 
-        let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: lastIndexDistance) } // [_Exempt from Test Coverage_] Already present.
-        let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: otherLastIndexDistance) } // [_Exempt from Test Coverage_] Already present.
+        let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: lastIndexDistance) } // @exempt(from: tests) Already present.
+        let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: otherLastIndexDistance) } // @exempt(from: tests) Already present.
         if prefixLength > 0 ∧ otherPrefixLength > 0 ∧ self[lastIndex] == other[otherLastIndex] {
             traceDifference(table, other: other, prefixLength: prefixLength − 1, otherPrefixLength: otherPrefixLength − 1, differenceUnderConstruction: &differenceUnderConstruction, indexCache: &indexCache, otherIndexCache: &otherIndexCache)
             differenceUnderConstruction.append(.keep(lastIndex))

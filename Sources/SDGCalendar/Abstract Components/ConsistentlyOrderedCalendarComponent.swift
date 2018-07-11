@@ -58,7 +58,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
         guard let result = Self(rawValue: numberAlreadyElapsed) else {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
-                case .englishCanada: // [_Exempt from Test Coverage_]
+                case .englishCanada: // @exempt(from: tests)
                     return StrictString("Invalid raw value “\(numberAlreadyElapsed)” for \(Self.self).")
                 }
             }))

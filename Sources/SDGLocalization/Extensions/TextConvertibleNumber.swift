@@ -43,12 +43,12 @@ extension TextConvertibleNumber {
         do {
             self = try parse()
         } catch let error as TextConvertibleNumberParseError {
-            // [_Exempt from Test Coverage_]
+            // @exempt(from: tests)
             switch error {
             case .invalidDigit(let scalar):
                 preconditionFailure(UserFacing<StrictString, _APILocalization>({ localization in
                     switch localization {
-                    case .englishCanada: // [_Exempt from Test Coverage_]
+                    case .englishCanada: // @exempt(from: tests)
                         return StrictString("\(scalar) is not a valid digit.")
                     }
                 }))
@@ -141,7 +141,7 @@ extension TextConvertibleNumber {
     /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(_ representation: StrictString, base: Int) throws {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacing<StrictString, _APILocalization>({ localization in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return StrictString("Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive.")
             }
@@ -187,7 +187,7 @@ extension TextConvertibleNumber {
             return set.sorted()
         }
         assert(assertNFKD().isEmpty, UserFacing<StrictString, _APILocalization>({ localization in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return StrictString("Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))")
             }

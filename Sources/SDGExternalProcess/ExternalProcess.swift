@@ -63,7 +63,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         }
 
         for location in locations {
-            if checkLocation(location, validate: validate) { // [_Exempt from Test Coverage_] False coverage result in Xcode 9.3.
+            if checkLocation(location, validate: validate) { // @exempt(from: tests) False coverage result in Xcode 9.3.
                 self.init(at: location)
                 return
             }
@@ -71,7 +71,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
 
         if let name = commandName,
             let path = try? Shell.default.run(command: ["which", name]) {
-            let location = URL(fileURLWithPath: path) // [_Exempt from Test Coverage_] False coverage result in Xcode 9.3.
+            let location = URL(fileURLWithPath: path) // @exempt(from: tests) False coverage result in Xcode 9.3.
             if checkLocation(location, validate: validate) {
                 self.init(at: location)
                 return
@@ -98,7 +98,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     /// - Returns: The entire output.
     ///
     /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-    @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // [_Exempt from Test Coverage_]
+    @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // @exempt(from: tests)
 
         let process = Process()
         process.launchPath = executable.path
@@ -153,7 +153,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
             }
         }
 
-        while process.isRunning {} // [_Exempt from Test Coverage_]
+        while process.isRunning {} // @exempt(from: tests)
 
         if output.hasSuffix(newLine) {
             output.scalars.removeLast()

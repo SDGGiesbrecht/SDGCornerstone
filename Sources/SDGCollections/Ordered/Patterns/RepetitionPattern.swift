@@ -20,11 +20,11 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    @_inlineable @_versioned internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // [_Exempt from Test Coverage_] False positive in Xcode 9.3.
+    @_inlineable @_versioned internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // @exempt(from: tests) False positive in Xcode 9.3.
         _assert(count == nil ∨ count!.lowerBound.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
-                return "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))" // [_Exempt from Test Coverage_]
+            case .englishCanada: // @exempt(from: tests)
+                return "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))" // @exempt(from: tests)
             }
         })
 

@@ -35,7 +35,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
         var reverse = [Y: X]()
         for (x, y) in mapping {
             _assert(reverse[y] == nil, { (localization: _APILocalization) -> String in
-                switch localization { // [_Exempt from Test Coverage_]
+                switch localization { // @exempt(from: tests)
                 case .englishCanada:
                     return "This mapping is not bijective; it is multivalued. (\(y) ⇄ {\(reverse[y]!), \(x)})"
                 }

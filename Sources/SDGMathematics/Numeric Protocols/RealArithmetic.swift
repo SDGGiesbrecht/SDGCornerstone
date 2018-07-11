@@ -416,7 +416,7 @@ extension RealArithmetic {
     ///     - sine: The sine.
     @_inlineable public static func arcsin(_ sine: Self) -> Angle<Self> {
         _assert((−1 ... 1).contains(sine), { (localization: _APILocalization) -> String in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "There is no arcsine angle for any number x, where |x| > 1. (\(sine))"
             }
@@ -435,7 +435,7 @@ extension RealArithmetic {
     ///     - cosine: The cosine.
     @_inlineable public static func arccos(_ cosine: Self) -> Angle<Self> {
         _assert((−1 ... 1).contains(cosine), { (localization: _APILocalization) -> String in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "There is no arccosine angle for any number x, where |x| > 1. (\(cosine))"
             }
@@ -454,7 +454,7 @@ extension RealArithmetic {
     ///     - cosecant: The cosecant.
     @_inlineable public static func arccsc(_ cosecant: Self) -> Angle<Self> {
         _assert(¬(−1 ... 1).contains(cosecant), { (localization: _APILocalization) -> String in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "There is no arccosecant angle for any number x, where |x| < 1. (\(cosecant))"
             }
@@ -473,7 +473,7 @@ extension RealArithmetic {
     ///     - secant: The secant.
     @_inlineable public static func arcsec(_ secant: Self) -> Angle<Self> {
         _assert(¬(−1 ... 1).contains(secant), { (localization: _APILocalization) -> String in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "There is no arccosecant angle for any number x, where |x| < 1. (\(secant))"
             }

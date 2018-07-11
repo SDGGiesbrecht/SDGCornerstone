@@ -72,7 +72,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
             guard let found = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< (i.start ?? base.scalars.endIndex))?.range else {
                 _preconditionFailure({ (localization: _APILocalization) -> String in
                     switch localization {
-                    case .englishCanada: // [_Exempt from Test Coverage_]
+                    case .englishCanada: // @exempt(from: tests)
                         return "No index precedes the start index."
                     }
                 })

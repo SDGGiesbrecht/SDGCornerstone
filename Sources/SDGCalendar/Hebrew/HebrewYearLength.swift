@@ -55,7 +55,7 @@ extension HebrewYear {
             default:
                 preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                     switch localization {
-                    case .englishCanada: // [_Exempt from Test Coverage_]
+                    case .englishCanada: // @exempt(from: tests)
                         return StrictString("\(numberOfDays.inDigits()) is an invalid number of days for a Hebrew year.")
                     }
                 }))

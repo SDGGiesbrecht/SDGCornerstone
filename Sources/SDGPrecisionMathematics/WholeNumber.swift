@@ -221,7 +221,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
     ///     - followingValue: The value to subtract.
     public static func −= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
         assert(precedingValue ≥ followingValue, UserFacing<StrictString, APILocalization>({ [precedingValue] localization in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return StrictString("\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(WholeNumber.self).")
             }
@@ -367,11 +367,11 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
                 let maximum = rangeSize[digitIndex]
                 let digit = Digit(randomInRange: 0 ... maximum, fromRandomizer: randomizer)
                 if digit ≠ maximum {
-                    atLimit = false // [_Exempt from Test Coverage_]
+                    atLimit = false // @exempt(from: tests)
                 }
                 offset[digitIndex] = digit
             } else {
-                // [_Exempt from Test Coverage_]
+                // @exempt(from: tests)
                 offset[digitIndex] = Digit(randomInRange: 0 ... Digit.max, fromRandomizer: randomizer)
             }
         }

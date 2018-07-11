@@ -30,7 +30,7 @@ open class Pattern<Element : Equatable> {
     }
 
     /// This initializer does nothing. It only exists so that subclasses have an available parent initializer they can forward to in order to satisfy the compiler.
-    @_inlineable public init() { // [_Exempt from Test Coverage_] False result with Xcode 9.3.
+    @_inlineable public init() { // @exempt(from: tests) False result with Xcode 9.3.
 
     }
 

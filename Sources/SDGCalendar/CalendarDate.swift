@@ -202,8 +202,8 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
         if let result = cachedDefinition as? D {
             return result
-        } else { // [_Exempt from Test Coverage_]
-            return recomputeDefinition(as: D.self) // [_Exempt from Test Coverage_]
+        } else { // @exempt(from: tests)
+            return recomputeDefinition(as: D.self) // @exempt(from: tests)
         }
     }
 
@@ -281,7 +281,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     private func dateEnFrançais<Y : Year, M : Month, D : Day, W : Weekday>(_ majuscules: Casing, an: Y, mois: M, jour: D, jourDeSemaine: W, avecAn: Bool, avecJourDeSemaine: Bool) -> SemanticMarkup {
-        var résultat: SemanticMarkup = avecJourDeSemaine ? "le" : SemanticMarkup(majuscules.apply(to: "le")) // [_Exempt from Test Coverage_] Unused so far.
+        var résultat: SemanticMarkup = avecJourDeSemaine ? "le" : SemanticMarkup(majuscules.apply(to: "le")) // @exempt(from: tests) Unused so far.
         résultat += " " + jour.enChiffresFrançais()
         résultat += " " + SemanticMarkup(mois._enFrançais(.sentenceMedial))
 

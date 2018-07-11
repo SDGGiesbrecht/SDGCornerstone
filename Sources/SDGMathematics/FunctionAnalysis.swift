@@ -22,7 +22,7 @@ import SDGControlFlow
     var location = location
 
     _assert(bounds == nil ∨ bounds!.contains(location), { (localization: _APILocalization) -> String in
-        switch localization { // [_Exempt from Test Coverage_]
+        switch localization { // @exempt(from: tests)
         case .englishCanada:
             return "Location out of bounds. \(location) ∉ \(String(describing: bounds))"
         }

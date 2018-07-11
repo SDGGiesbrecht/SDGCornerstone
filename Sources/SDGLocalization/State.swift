@@ -232,7 +232,7 @@ internal enum State : String {
             } else {
                 return UnicodeScalar(0)
             }
-        })))) // [_Exempt from Test Coverage_] Meaningless region.
+        })))) // @exempt(from: tests) Meaningless region.
     }
 
     func isolatedEnglishName() -> StrictString {

@@ -76,7 +76,7 @@ internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Co
 
     internal func assertIndexExists(_ index: Index) {
         assert(index ∈ bounds, UserFacing<StrictString, APILocalization>({ localization in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "Index out of bounds."
             }

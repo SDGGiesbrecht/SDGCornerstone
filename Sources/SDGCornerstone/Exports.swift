@@ -92,4 +92,4 @@ infix operator ⊉: ComparisonPrecedence
 infix operator ⊊: ComparisonPrecedence
 infix operator ⊋: ComparisonPrecedence
 
-func aFunctionToTriggerTestCoverage() {} // [_Exempt from Test Coverage_]
+func aFunctionToTriggerTestCoverage() {} // @exempt(from: tests)
