@@ -13,7 +13,7 @@
  */
 
 #if canImport(Glibc)
-// [_Workaround: See move method below. (Swift 4.1.2)_]
+// #workaround(See move method below. (Swift 4.1.2))
 import Glibc
 #endif
 
@@ -59,7 +59,7 @@ extension FileManager {
         let zoneURL = cached(in: &locations[location]) {
 
             #if os(Linux)
-            // [_Workaround: Foundation may do this itself eventually. (Swift 4.1.2)_]
+            // #workaround(Foundation may do this itself eventually. (Swift 4.1.2))
 
             let path: String
             switch location {
@@ -153,7 +153,7 @@ extension FileManager {
         try createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
 
         #if canImport(Glibc)
-        // [_Workaround: Until Linux’ Foundation implements cross‐device moves. (Swift 4.1.2)_]
+        // #workaround(Until Linux’ Foundation implements cross‐device moves. (Swift 4.1.2))
         // See https://github.com/apple/swift-corelibs-foundation/blob/6c54c84c9e8f8e39b7556e5eb68f837cdb8824dc/Foundation/FileManager.swift#L559
 
         if ¬fileExists(atPath: destination.path) {
@@ -214,7 +214,7 @@ extension FileManager {
 
             let isDirectory: Bool
             #if os(Linux)
-            // [_Workaround: Linux has no implementation for resourcesValues (Swift 4.2)_]
+            // #workaround(Linux has no implementation for resourcesValues (Swift 4.2))
             var objCBool: ObjCBool = false
             isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool) ∧ objCBool.boolValue
             #else

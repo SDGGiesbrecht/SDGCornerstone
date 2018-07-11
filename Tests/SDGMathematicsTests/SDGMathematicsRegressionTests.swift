@@ -97,7 +97,7 @@ class SDGMathematicsRegressionTests : TestCase {
         let _: Int8 = 3 − 2
         let _: Double = 3 − 2
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        // [_Workaround: Probably available in Swift 4.2 (Swift 4.1.2)_]
+        // #workaround(Probably available in Swift 4.2 (Swift 4.1.2))
         let _: Float80 = 3 − 2
         #endif
         let _: Float = 3 − 2

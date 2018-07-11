@@ -87,7 +87,7 @@ extension NumericAdditiveArithmetic {
     }
 }
 
-// [_Workaround: This should be made debug‐only once conditional compiling is available. (Swift 4.1.2)_]
+// #workaround(This should be made debug‐only once conditional compiling is available. (Swift 4.1.2))
 /// :nodoc:
 public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     /// :nodoc:

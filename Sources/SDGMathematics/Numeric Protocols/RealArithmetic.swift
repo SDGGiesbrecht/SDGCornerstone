@@ -241,7 +241,7 @@ public protocol RealArithmetic : RationalArithmetic {
 
 extension RealArithmetic {
 
-    // [_Workaround: These can be removed when global generic constants are available. (Swift 4.1.2)_]
+    // #workaround(These can be removed when global generic constants are available. (Swift 4.1.2))
 
     /// π in the same type.
     ///
@@ -500,7 +500,7 @@ extension RealArithmetic {
 
 // MARK: - Real Arithmetic
 
-// [_Workaround: These should be switched to generic constants when they become available. (Swift 4.1.2)_]
+// #workaround(These should be switched to generic constants when they become available. (Swift 4.1.2))
 
 /// An instance of π in the desired return type.
 ///

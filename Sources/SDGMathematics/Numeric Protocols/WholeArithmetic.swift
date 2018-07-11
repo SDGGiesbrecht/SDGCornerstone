@@ -38,7 +38,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
     // MARK: - Operations
 
-    // [_Workaround: Duplicates Subtractable, but works around disambiguation bugs. (Swift 4.1.2)_]
+    // #workaround(Duplicates Subtractable, but works around disambiguation bugs. (Swift 4.1.2))
     // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///

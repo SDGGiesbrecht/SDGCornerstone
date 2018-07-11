@@ -52,7 +52,7 @@ public struct Preference : Equatable, TransparentWrapper {
     // MARK: - Usage
 
     #if !canImport(ObjectiveC)
-    // [_Workaround: Linux has casting issues. (Swift 4.1.2)_]
+    // #workaround(Linux has casting issues. (Swift 4.1.2))
     private func cast(_ instance: Any) -> NSObject {
         return Preference.cast(instance)
     }
@@ -118,7 +118,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
         do {
             #if os(Linux)
-            // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1.2)_]
+            // #workaround(Until Linux has PropertyListEncoder. (Swift 4.1.2))
             let encodedArray = try JSONEncoder().encode([theValue])
             let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray
             let object = cast(arrayObject.firstObject!)
@@ -159,7 +159,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
             do {
                 #if os(Linux)
-                // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1.2)_]
+                // #workaround(Until Linux has PropertyListEncoder. (Swift 4.1.2))
                 let encodedArray = try JSONSerialization.data(withJSONObject: NSArray(object: object), options: [])
                 let decodedArray = try JSONDecoder().decode([T].self, from: encodedArray)
                 #else
