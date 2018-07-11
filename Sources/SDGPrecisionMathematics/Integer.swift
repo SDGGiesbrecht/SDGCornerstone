@@ -109,7 +109,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Comparable
 
-    // [_Inherit Documentition: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     public static func < (precedingValue: Integer, followingValue: Integer) -> Bool {
         if precedingValue.isNegative {
             if followingValue.isNegative {
