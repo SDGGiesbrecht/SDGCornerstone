@@ -110,6 +110,11 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
     // MARK: - Comparable
 
     // #documentation(SDGCornerstone.Comparable.<)
+    /// Returns `true` if the preceding value is less than the following value.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     public static func < (precedingValue: Integer, followingValue: Integer) -> Bool {
         if precedingValue.isNegative {
             if followingValue.isNegative {
