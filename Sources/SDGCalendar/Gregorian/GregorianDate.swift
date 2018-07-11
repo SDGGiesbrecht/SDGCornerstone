@@ -145,7 +145,7 @@ internal struct GregorianDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - Decodable
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -163,7 +163,7 @@ internal struct GregorianDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -180,7 +180,7 @@ internal struct GregorianDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - MarkupPlaygroundDisplay
 
-    // [_Inherit Documentation: SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup()_]
+    // #documentation(SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup())
     /// The markup representation of the instance.
     public func playgroundDescriptionMarkup() -> SemanticMarkup {
         return UserFacing<SemanticMarkup, FormatLocalization>({ localization in

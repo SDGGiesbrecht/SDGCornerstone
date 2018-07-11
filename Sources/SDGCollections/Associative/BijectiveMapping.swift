@@ -68,19 +68,19 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // MARK: - Collection
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+    // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
     @_inlineable public var startIndex: Dictionary<X, Y>.Index {
         return xToY.startIndex
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+    // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
     @_inlineable public var endIndex: Dictionary<X, Y>.Index {
         return xToY.endIndex
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+    // #documentation(SDGCornerstone.Collection.index(after:))
     /// Returns the index immediately after the specified index.
     ///
     /// - Parameters:
@@ -89,7 +89,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
         return xToY.index(after: i)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+    // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
     @_inlineable public subscript(position: Dictionary<X, Y>.Index) -> (X, Y) {
         return xToY[position]
@@ -97,7 +97,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // MARK: - ExpressibleByDictionaryLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:)_]
+    // #documentation(SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:))
     /// Creates an instance from a dictionary literal.
     @_inlineable public init(dictionaryLiteral elements: (X, Y)...) {
         self.init(Dictionary(uniqueKeysWithValues: elements))
@@ -105,7 +105,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
     @_inlineable public var wrappedInstance: Any {
         return xToY

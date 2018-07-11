@@ -23,24 +23,24 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
 
     // MARK: - AdditiveArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.AdditiveArithmetic.additiveIdentity_]
+    // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
     /// The additive identity (origin).
     public static let additiveIdentity = zero
 
     // MARK: - TwoDimensionalVector
 
-    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.Scalar_]
+    // #documentation(SDGCornerstone.VectorProtocol.Scalar)
     /// The scalar type.
     // The scalar type.
     public typealias Scalar = CGFloat
 
-    // [_Inherit Documentation: SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:)_]
+    // #documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// The difference in *y*.
     public init(Δx : Scalar, Δy : Scalar) {
         self = CGVector(dx: Δx, dy: Δy)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.TwoDimensionalVector.Δx_]
+    // #documentation(SDGCornerstone.TwoDimensionalVector.Δx)
     /// The difference in *x*.
     @_inlineable public var Δx : Scalar {
         get {
@@ -51,7 +51,7 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.TwoDimensionalVector.Δy_]
+    // #documentation(SDGCornerstone.TwoDimensionalVector.Δy)
     /// The difference in *y*.
     @_inlineable public var Δy : Scalar {
         get {

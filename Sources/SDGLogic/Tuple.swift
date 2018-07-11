@@ -14,7 +14,7 @@
 
 // MARK: - Tuple
 
-// [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+// #documentation(SDGCornerstone.Equatable.≠)
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
@@ -24,7 +24,7 @@
     return precedingValue != followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+// #documentation(SDGCornerstone.Equatable.≠)
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
@@ -34,7 +34,7 @@
     return precedingValue != followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+// #documentation(SDGCornerstone.Equatable.≠)
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
@@ -44,7 +44,7 @@
     return precedingValue != followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+// #documentation(SDGCornerstone.Equatable.≠)
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
@@ -54,7 +54,7 @@
     return precedingValue != followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+// #documentation(SDGCornerstone.Equatable.≠)
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:

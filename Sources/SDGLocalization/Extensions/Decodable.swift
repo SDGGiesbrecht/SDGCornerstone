@@ -16,7 +16,7 @@ import SDGControlFlow
 
 extension Decodable {
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:via:convert:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:via:convert:))
     /// Creates a new instance by decoding a proxy type from the given decoder.
     @_inlineable public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) throws -> Self?) throws where Other : Decodable {
         let container = try decoder.singleValueContainer()

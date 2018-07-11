@@ -68,7 +68,7 @@ extension RawRepresentableCalendarComponent {
 
     // MARK: - ExpressibleByIntegerLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:)_]
+    // #documentation(SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:))
     /// Creates an instance from an integer literal.
     ///
     /// - Parameters:
@@ -89,7 +89,7 @@ public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCa
 
 extension CodableViaRawRepresentableCalendarComponent {
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -98,7 +98,7 @@ extension CodableViaRawRepresentableCalendarComponent {
         try encode(to: encoder, via: rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:

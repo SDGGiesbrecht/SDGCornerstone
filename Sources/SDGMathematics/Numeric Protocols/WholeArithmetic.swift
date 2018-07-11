@@ -39,7 +39,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     // MARK: - Operations
 
     // [_Workaround: Duplicates Subtractable, but works around disambiguation bugs. (Swift 4.1.2)_]
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+    // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -232,7 +232,7 @@ extension WholeArithmetic {
         self.init(UIntMax(uInt))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×)
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -242,7 +242,7 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:))
     /// Returns the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -253,7 +253,7 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: Self.divideAccordingToEuclid, on: self, with: divisor)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.mod(_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.mod(_:))
     /// Returns the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -264,7 +264,7 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: Self.formRemainder, on: self, with: divisor)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.formRemainder(mod:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.formRemainder(mod:))
     /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -275,13 +275,13 @@ extension WholeArithmetic {
         self −= dividedAccordingToEuclid(by: divisor) × divisor
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isDivisible(by:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
     @_inlineable public func isDivisible(by divisor: Self) -> Bool {
         return mod(divisor) == 0
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.gcd(_:_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.gcd(_:_:))
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
@@ -291,7 +291,7 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: Self.formGreatestCommonDivisor, on: a, with: b)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:))
     /// Sets `self` to the greatest common divisor of `self` and `other`.
     ///
     /// - Parameters:
@@ -307,7 +307,7 @@ extension WholeArithmetic {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.lcm(_:_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.lcm(_:_:))
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
@@ -317,7 +317,7 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: Self.formLeastCommonMultiple, on: a, with: b)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:))
     /// Sets `self` to the least common multiple of `self` and `other`.
     ///
     /// - Parameters:
@@ -326,7 +326,7 @@ extension WholeArithmetic {
         self ×= other.dividedAccordingToEuclid(by: Self.gcd(self, other))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑_]
+    // #documentation(SDGCornerstone.WholeArithmetic.↑)
     /// Returns the result of the preceding value to the power of the following value.
     ///
     /// - Precondition:
@@ -358,37 +358,37 @@ extension WholeArithmetic {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isNatural_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isNatural)
     /// Returns `true` if `self` is a natural number.
     @_inlineable public var isNatural: Bool {
         return isWhole ∧ self ≠ 0
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isWhole_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isWhole)
     /// Returns `true` if `self` is a whole number.
     @_inlineable public var isWhole: Bool {
         return isIntegral ∧ isNonNegative
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isIntegral_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isIntegral)
     /// Returns `true` if `self` is an integer.
     @_inlineable public var isIntegral: Bool {
         return isDivisible(by: 1)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isEven_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isEven)
     /// Returns true if `self` is an even integer.
     @_inlineable public var isEven: Bool {
         return isDivisible(by: 2)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isOdd_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
     /// Returns true if `self` is an odd integer.
     @_inlineable public var isOdd: Bool {
         return isIntegral ∧ ¬isEven
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:))
     /// Rounds the value to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -447,7 +447,7 @@ extension WholeArithmetic {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:))
     /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -457,7 +457,7 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: Self.round, on: self, with: (rule, factor))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.round(_:))
     /// Rounds the value to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
@@ -466,7 +466,7 @@ extension WholeArithmetic {
         round(rule, toMultipleOf: 1)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
     /// Returns the value rounded to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
@@ -504,7 +504,7 @@ extension WholeArithmetic {
 
 // MARK: - Whole Arithmetic
 
-// [_Inherit Documentation: SDGCornerstone.WholeArithmetic.gcd(_:_:)_]
+// #documentation(SDGCornerstone.WholeArithmetic.gcd(_:_:))
 /// Returns the greatest common divisor of `a` and `b`.
 ///
 /// - Parameters:
@@ -514,7 +514,7 @@ extension WholeArithmetic {
     return N.gcd(a, b)
 }
 
-// [_Inherit Documentation: SDGCornerstone.WholeArithmetic.lcm(_:_:)_]
+// #documentation(SDGCornerstone.WholeArithmetic.lcm(_:_:))
 /// Returns the least common multiple of `a` and `b`.
 ///
 /// - Parameters:

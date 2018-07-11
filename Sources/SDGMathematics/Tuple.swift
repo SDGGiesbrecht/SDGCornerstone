@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
+// #documentation(SDGCornerstone.Comparable.≤)
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
@@ -22,7 +22,7 @@
     return precedingValue <= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
+// #documentation(SDGCornerstone.Comparable.≤)
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
@@ -32,7 +32,7 @@
     return precedingValue <= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
+// #documentation(SDGCornerstone.Comparable.≤)
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
@@ -42,7 +42,7 @@
     return precedingValue <= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
+// #documentation(SDGCornerstone.Comparable.≤)
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
@@ -52,7 +52,7 @@
     return precedingValue <= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
+// #documentation(SDGCornerstone.Comparable.≤)
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
@@ -62,7 +62,7 @@
     return precedingValue <= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
+// #documentation(SDGCornerstone.Comparable.≥)
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
@@ -72,7 +72,7 @@
     return precedingValue >= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
+// #documentation(SDGCornerstone.Comparable.≥)
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
@@ -82,7 +82,7 @@
     return precedingValue >= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
+// #documentation(SDGCornerstone.Comparable.≥)
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
@@ -92,7 +92,7 @@
     return precedingValue >= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
+// #documentation(SDGCornerstone.Comparable.≥)
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
@@ -102,7 +102,7 @@
     return precedingValue >= followingValue
 }
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
+// #documentation(SDGCornerstone.Comparable.≥)
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:

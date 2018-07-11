@@ -103,7 +103,7 @@ public final class PseudorandomNumberGenerator : Randomizer {
 
     // MARK: - Randomizer
 
-    // [_Inherit Documentation: SDGCornerstone.Randomizer.randomNumber()_]
+    // #documentation(SDGCornerstone.Randomizer.randomNumber())
     /// Returns a random value.
     ///
     /// - SeeAlso: `randomNumber(inRange:)`

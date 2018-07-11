@@ -47,7 +47,7 @@ public enum HebrewWeekday : Int, Codable, ConsistentDurationCalendarComponent, C
 
     // MARK: - Decodable
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -58,7 +58,7 @@ public enum HebrewWeekday : Int, Codable, ConsistentDurationCalendarComponent, C
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -69,13 +69,13 @@ public enum HebrewWeekday : Int, Codable, ConsistentDurationCalendarComponent, C
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = RawValue
 
     // MARK: - RawRepresentable
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]
+    // #documentation(SDGCornerstone.RawRepresentable.RawValue)
     /// The raw value type.
     public typealias RawValue = Int
 }

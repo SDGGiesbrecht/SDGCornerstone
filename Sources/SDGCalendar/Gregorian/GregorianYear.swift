@@ -109,19 +109,19 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
 
     // MARK: - CalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
     /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianYear.daysPerLeapYearCycle).days ÷ FloatMax(GregorianYear.yearsPerLeapYearCycle)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
     /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianYear.daysPerNormalYear).days
     }
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
     /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianYear.daysPerLeapYear).days
@@ -129,7 +129,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
 
     // MARK: - ConsistentlyOrderedCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
     /// Creates a component from the number of complete components already elapsed.
     ///
     /// - Precondition: The number must be valid for the particular compenent.
@@ -140,7 +140,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
         self = (1 as GregorianYear) + numberAlreadyElapsed
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
     /// Creates a component from the number of complete components already elapsed.
     ///
     /// - Precondition: The number must be valid for the particular compenent.
@@ -151,13 +151,13 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
         self.init(ordinal)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
     public var numberAlreadyElapsed: Int {
         return self − (1 as GregorianYear)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
     public var ordinal: Int {
         return rawValue
@@ -165,7 +165,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
 
     // MARK: - ISOCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    // #documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
     /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
         let cardinal = self − GregorianYear(−1)
@@ -178,11 +178,11 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Int
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    // #documentation(SDGCornerstone.PointProtocol.+=)
     /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
@@ -203,7 +203,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
         precedingValue = GregorianYear(result)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    // #documentation(SDGCornerstone.PointProtocol.−)
     /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
@@ -226,7 +226,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:)_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
@@ -240,11 +240,11 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
         year = unsafeRawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
     /// The valid range for raw values.
     public static let validRange: Range<Int>? = nil
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
     /// The raw value.
     public var rawValue: Int {
         return year
@@ -264,7 +264,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
         return digits
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Year.inEnglishDigits()_]
+    // #documentation(SDGCornerstone.Year.inEnglishDigits())
     /// Returns the year in English digits.
     public func inEnglishDigits() -> StrictString {
         return inDigits(bcAbbreviation: "BC")

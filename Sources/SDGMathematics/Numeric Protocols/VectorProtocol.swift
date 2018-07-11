@@ -62,7 +62,7 @@ public protocol VectorProtocol : AdditiveArithmetic {
 
 extension VectorProtocol {
 
-    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×(_:scalar:)_]
+    // #documentation(SDGCornerstone.VectorProtocol.×(_:scalar:))
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -82,7 +82,7 @@ extension VectorProtocol {
         return followingValue × precedingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.÷_]
+    // #documentation(SDGCornerstone.VectorProtocol.÷)
     /// Returns the quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:

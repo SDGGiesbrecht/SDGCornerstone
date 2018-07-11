@@ -56,31 +56,31 @@ public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
 
 extension NumericAdditiveArithmetic {
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isPositive_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
     /// Returns `true` if `self` is positive.
     @_inlineable public var isPositive: Bool {
         return self > Self.additiveIdentity
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
     @_inlineable public var isNegative: Bool {
         return self < Self.additiveIdentity
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
     @_inlineable public var isNonNegative: Bool {
         return self ≥ Self.additiveIdentity
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonPositive_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
     /// Returns `true` if `self` is negative or zero.
     @_inlineable public var isNonPositive: Bool {
         return self ≤ Self.additiveIdentity
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     @_inlineable public var absoluteValue: Self {
         return nonmutatingVariant(of: Self.formAbsoluteValue, on: self)
@@ -127,7 +127,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 extension NumericAdditiveArithmetic where Self : Negatable {
     // MARK: - where Self : Negatable
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     @_inlineable public mutating func formAbsoluteValue() {
         if self < Self.additiveIdentity {

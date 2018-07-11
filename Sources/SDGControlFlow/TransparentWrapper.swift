@@ -24,7 +24,7 @@ extension TransparentWrapper {
 
     // MARK: - CustomDebugStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomDebugStringConvertible.debugDescription_]
+    // #documentation(SDGCornerstone.CustomDebugStringConvertible.debugDescription)
     /// A textual representation of this instance, suitable for debugging.
     @_inlineable public var debugDescription: String {
         return String(reflecting: wrappedInstance)
@@ -32,7 +32,7 @@ extension TransparentWrapper {
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
+    // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
     /// Returns the custom playground description for this instance.
     @_inlineable public var playgroundDescription: Any {
         return wrappedInstance
@@ -40,7 +40,7 @@ extension TransparentWrapper {
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     @_inlineable public var description: String {
         return String(describing: wrappedInstance)

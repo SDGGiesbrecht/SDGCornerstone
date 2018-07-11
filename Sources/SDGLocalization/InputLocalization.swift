@@ -21,7 +21,7 @@
 ///   - `static var cases: [Self] { get }`
 public protocol InputLocalization : Localization {
 
-    // [_Inherit Documentation: SDGCornerstone.IterableEnumeration.cases_]
+    // #documentation(SDGCornerstone.IterableEnumeration.cases)
     /// An array containing every case of the enumeration.
     static var cases: [Self] { get }
 }

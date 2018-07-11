@@ -78,7 +78,7 @@ extension OrderedEnumeration where RawValue == Int {
         }
         self = result
     }
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.increment()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.increment())
     /// Increments to the next case.
     ///
     /// - Precondition: There is a valid next case.
@@ -89,7 +89,7 @@ extension OrderedEnumeration where RawValue == Int {
     @_inlineable @_versioned internal func _successor() -> Self? {
         return Self(rawValue: rawValue.successor())
     }
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.successor())
     /// Returns the next case or `nil` if there are no later cases.
     @_inlineable public func successor() -> Self? {
         return _successor()
@@ -106,7 +106,7 @@ extension OrderedEnumeration where RawValue == Int {
         }
         self = result
     }
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.decrement()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.decrement())
     /// Decrements to the previous case.
     ///
     /// - Precondition: There is a valid previous case.
@@ -117,13 +117,13 @@ extension OrderedEnumeration where RawValue == Int {
     @_inlineable @_versioned internal func _predecessor() -> Self? {
         return Self(rawValue: rawValue.predecessor())
     }
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.predecessor()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.predecessor())
     /// Returns the previous case or `nil` if there are no earlier cases.
     @_inlineable public func predecessor() -> Self? {
         return _predecessor()
     }
 
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.incrementCyclically()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.incrementCyclically())
     /// Increments to the next case in the cycle.
     ///
     /// - Parameters:
@@ -137,13 +137,13 @@ extension OrderedEnumeration where RawValue == Int {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.cyclicSuccessor()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.cyclicSuccessor())
     /// Returns the next case, wrapping around to the first case if necessary.
     @_inlineable public func cyclicSuccessor() -> Self {
         return nonmutatingVariant(of: Self.incrementCyclically, on: self, with: {})
     }
 
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.decrementCyclically()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.decrementCyclically())
     /// Decrements to the previous case in the cycle.
     ///
     /// - Parameters:
@@ -157,7 +157,7 @@ extension OrderedEnumeration where RawValue == Int {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.cyclicPredecessor()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.cyclicPredecessor())
     /// Returns the previous case, wrapping around to the last case if necessary.
     @_inlineable public func cyclicPredecessor() -> Self {
         return nonmutatingVariant(of: Self.decrementCyclically, on: self, with: {})
@@ -165,7 +165,7 @@ extension OrderedEnumeration where RawValue == Int {
 
     // MARK: - Comparable
 
-    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
@@ -182,7 +182,7 @@ extension OrderedEnumeration where Self : Strideable, Self.RawValue == Int {
 
     // MARK: - Comparable
 
-    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
@@ -197,7 +197,7 @@ extension OrderedEnumeration where Self : Strideable, Self.RawValue == Int {
 extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol, RawValue == Int {
     // MARK: - where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.increment()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.increment())
     /// Increments to the next case.
     ///
     /// - Precondition: There is a valid next case.
@@ -205,13 +205,13 @@ extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : Int
         _increment()
     }
 
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.successor()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.successor())
     /// Returns the next case or `nil` if there are no later cases.
     @_inlineable public func successor() -> Self? {
         return _successor()
     }
 
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.decrement()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.decrement())
     /// Decrements to the previous case.
     ///
     /// - Precondition: There is a valid previous case.
@@ -219,7 +219,7 @@ extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : Int
         _decrement()
     }
 
-    // [_Inherit Documentation: SDGCornerstone.OrderedEnumeration.predecessor()_]
+    // #documentation(SDGCornerstone.OrderedEnumeration.predecessor())
     /// Returns the previous case or `nil` if there are no earlier cases.
     @_inlineable public func predecessor() -> Self? {
         return _predecessor()

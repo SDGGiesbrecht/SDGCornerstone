@@ -56,7 +56,7 @@ public protocol Randomizer : class {
 
 extension Randomizer {
 
-    // [_Inherit Documentation: SDGCornerstone.Randomizer.randomNumber(inRange:)_]
+    // #documentation(SDGCornerstone.Randomizer.randomNumber(inRange:))
     /// Returns a random value within the specified range.
     ///
     /// The following information applies to the default implementation:

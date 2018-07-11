@@ -38,7 +38,7 @@ public struct Line<Base : StringFamily> : TextualPlaygroundDisplay {
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     @_inlineable public var description: String {
         return String(describing: Base(Base.ScalarView(line))) + newline.map({ $0.visibleRepresentation }).joined()

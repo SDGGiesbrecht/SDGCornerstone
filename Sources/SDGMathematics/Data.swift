@@ -18,7 +18,7 @@ extension Data : BitField {
 
     // MARK: - BitField
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseNot()_]
+    // #documentation(SDGCornerstone.BitField.formBitwiseNot())
     /// Inverts the bits.
     @_inlineable public mutating func formBitwiseNot() {
         for index in indices {
@@ -26,7 +26,7 @@ extension Data : BitField {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseAnd(with:)_]
+    // #documentation(SDGCornerstone.BitField.formBitwiseAnd(with:))
     /// Removes the bits not also present in `other`.
     ///
     /// - Parameters:
@@ -40,7 +40,7 @@ extension Data : BitField {
         removeSubrange(end ..< endIndex)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseOr(with:)_]
+    // #documentation(SDGCornerstone.BitField.formBitwiseOr(with:))
     /// Inserts the bits present in `other`.
     ///
     /// - Parameters:
@@ -54,7 +54,7 @@ extension Data : BitField {
         append(contentsOf: other[end ..< other.endIndex])
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseExclusiveOr(with:)_]
+    // #documentation(SDGCornerstone.BitField.formBitwiseExclusiveOr(with:))
     /// Inserts the bits present in `other` and removes the bits present in both.
     ///
     /// - Parameters:

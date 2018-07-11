@@ -250,7 +250,7 @@ extension RealArithmetic {
         return Self.π
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.τ_]
+    // #documentation(SDGCornerstone.RealArithmetic.τ)
     /// An instance of τ.
     @_inlineable public static var τ: Self {
         return 2 × π
@@ -270,7 +270,7 @@ extension RealArithmetic {
         return Self.e
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.root(ofDegree:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.root(ofDegree:))
     /// Returns the `degree`‐th root of `self`.
     ///
     /// - Parameters:
@@ -279,7 +279,7 @@ extension RealArithmetic {
         return nonmutatingVariant(of: Self.formRoot, on: self, with: degree)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.formRoot(ofDegree:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.formRoot(ofDegree:))
     /// Sets `self` to its `degree`‐th root.
     ///
     /// - Parameters:
@@ -288,7 +288,7 @@ extension RealArithmetic {
         self ↑= (1 ÷ degree)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.√_]
+    // #documentation(SDGCornerstone.RealArithmetic.√)
     /// Returns the square root of `operand`.
     ///
     /// - Parameters:
@@ -297,7 +297,7 @@ extension RealArithmetic {
         return nonmutatingVariant(of: √=, on: operand)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.√=_]
+    // #documentation(SDGCornerstone.RealArithmetic.√=)
     /// Sets `operand` to its square root.
     ///
     /// - Parameters:
@@ -306,7 +306,7 @@ extension RealArithmetic {
         operand.formRoot(ofDegree: 2)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.log(toBase:of:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.log(toBase:of:))
     /// Returns the base `base` logarithm of `antilogarithm`.
     ///
     /// - Precondition: `antilogarithm` > 0
@@ -322,7 +322,7 @@ extension RealArithmetic {
         return nonmutatingVariant(of: Self.formLogarithm, on: antilogarithm, with: base)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.log(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.log(_:))
     /// Returns the common logarithm of `antilogarithm`.
     ///
     /// - Precondition: `antilogarithm` > 0
@@ -333,7 +333,7 @@ extension RealArithmetic {
         return nonmutatingVariant(of: Self.formCommonLogarithm, on: antilogarithm)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.formCommonLogarithm()_]
+    // #documentation(SDGCornerstone.RealArithmetic.formCommonLogarithm())
     /// Sets `self` to its common logarithm.
     ///
     /// - Precondition: `self` > 0
@@ -341,7 +341,7 @@ extension RealArithmetic {
         formLogarithm(toBase: 10)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.ln(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.ln(_:))
     /// Returns the natural logarithm of `antilogarithm`.
     ///
     /// - Precondition: `antilogarithm` > 0
@@ -352,7 +352,7 @@ extension RealArithmetic {
         return nonmutatingVariant(of: Self.formNaturalLogarithm, on: antilogarithm)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.formNaturalLogarithm()_]
+    // #documentation(SDGCornerstone.RealArithmetic.formNaturalLogarithm())
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
@@ -360,7 +360,7 @@ extension RealArithmetic {
         formLogarithm(toBase: e)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.cos(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.cos(_:))
     /// Returns the cosine of an angle.
     ///
     /// - Parameters:
@@ -369,7 +369,7 @@ extension RealArithmetic {
         return sin(angle + (π ÷ 2).rad)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.tan(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.tan(_:))
     /// Returns the tangent of an angle.
     ///
     /// - Parameters:
@@ -378,7 +378,7 @@ extension RealArithmetic {
         return sin(angle) ÷ cos(angle)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.csc(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.csc(_:))
     /// Returns the cosecant of an angle.
     ///
     /// - Parameters:
@@ -387,7 +387,7 @@ extension RealArithmetic {
         return 1 ÷ sin(angle)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.sec(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.sec(_:))
     /// Returns the secant of an angle.
     ///
     /// - Parameters:
@@ -396,7 +396,7 @@ extension RealArithmetic {
         return 1 ÷ cos(angle)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.cot(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.cot(_:))
     /// Returns the cotangent of an angle.
     ///
     /// - Parameters:
@@ -405,7 +405,7 @@ extension RealArithmetic {
         return 1 ÷ tan(angle)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.arcsin(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
     /// Returns the arcsine of a value.
     ///
     /// The returned angle will be between −90° and 90° inclusive.
@@ -424,7 +424,7 @@ extension RealArithmetic {
         return arctan(sine ÷ √(1 − sine ↑ 2))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.arccos(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.arccos(_:))
     /// Returns the arccosine of a value.
     ///
     /// The returned angle will be between 0° and 180° inclusive.
@@ -443,7 +443,7 @@ extension RealArithmetic {
         return (π ÷ 2).rad − arcsin(cosine)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.arccsc(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.arccsc(_:))
     /// Returns the arccosecant of a value.
     ///
     /// The returned angle will be between −90° and 90° inclusive, but never 0°.
@@ -462,7 +462,7 @@ extension RealArithmetic {
         return arcsin(1 ÷ cosecant)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.arcsec(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.arcsec(_:))
     /// Returns the arcsecant of a value.
     ///
     /// The returned angle will be between 0° and 180° inclusive, but never 90°.
@@ -481,7 +481,7 @@ extension RealArithmetic {
         return arccos(1 ÷ secant)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.arccot(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.arccot(_:))
     /// Returns the arccotangent of a value.
     ///
     /// The returned angle will be between 0° and 180°.
@@ -523,7 +523,7 @@ extension RealArithmetic {
     return N.e
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.log(toBase:of:)_]
+// #documentation(SDGCornerstone.RealArithmetic.log(toBase:of:))
 /// Returns the base `base` logarithm of `antilogarithm`.
 ///
 /// - Precondition: `antilogarithm` > 0
@@ -539,7 +539,7 @@ extension RealArithmetic {
     return N.log(toBase: base, of: antilogarithm)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.log(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.log(_:))
 /// Returns the common logarithm of `antilogarithm`.
 ///
 /// - Precondition: `antilogarithm` > 0
@@ -550,7 +550,7 @@ extension RealArithmetic {
     return N.log(antilogarithm)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.ln(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.ln(_:))
 /// Returns the natural logarithm of `antilogarithm`.
 ///
 /// - Precondition: `antilogarithm` > 0
@@ -561,7 +561,7 @@ extension RealArithmetic {
     return N.ln(antilogarithm)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.sin(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.sin(_:))
 /// Returns the sine of an angle.
 ///
 /// - Parameters:
@@ -570,7 +570,7 @@ extension RealArithmetic {
     return N.sin(angle)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.cos(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.cos(_:))
 /// Returns the cosine of an angle.
 ///
 /// - Parameters:
@@ -579,7 +579,7 @@ extension RealArithmetic {
     return N.cos(angle)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.tan(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.tan(_:))
 /// Returns the tangent of an angle.
 ///
 /// - Parameters:
@@ -588,7 +588,7 @@ extension RealArithmetic {
     return N.tan(angle)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.csc(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.csc(_:))
 /// Returns the cosecant of an angle.
 ///
 /// - Parameters:
@@ -597,7 +597,7 @@ extension RealArithmetic {
     return N.csc(angle)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.sec(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.sec(_:))
 /// Returns the secant of an angle.
 ///
 /// - Parameters:
@@ -606,7 +606,7 @@ extension RealArithmetic {
     return N.sec(angle)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.cot(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.cot(_:))
 /// Returns the cotangent of an angle.
 ///
 /// - Parameters:
@@ -615,7 +615,7 @@ extension RealArithmetic {
     return N.cot(angle)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.arcsin(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
 /// Returns the arcsine of a value.
 ///
 /// The returned angle will be between −90° and 90° inclusive.
@@ -628,7 +628,7 @@ extension RealArithmetic {
     return N.arcsin(sine)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.arccos(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.arccos(_:))
 /// Returns the arccosine of a value.
 ///
 /// The returned angle will be between 0° and 180° inclusive.
@@ -641,7 +641,7 @@ extension RealArithmetic {
     return N.arccos(cosine)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.arctan(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
 /// Returns the arctangent of a value.
 ///
 /// The returned angle will be between −90° and 90°.
@@ -652,7 +652,7 @@ extension RealArithmetic {
     return N.arctan(tangent)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.arccsc(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.arccsc(_:))
 /// Returns the arccosecant of a value.
 ///
 /// The returned angle will be between −90° and 90° inclusive, but never 0°.
@@ -665,7 +665,7 @@ extension RealArithmetic {
     return N.arccsc(cosecant)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.arcsec(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.arcsec(_:))
 /// Returns the arcsecant of a value.
 ///
 /// The returned angle will be between 0° and 180° inclusive, but never 90°.
@@ -678,7 +678,7 @@ extension RealArithmetic {
     return N.arcsec(secant)
 }
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.arctan(_:)_]
+// #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
 /// Returns the arctangent of a value.
 ///
 /// The returned angle will be between −90° and 90°.

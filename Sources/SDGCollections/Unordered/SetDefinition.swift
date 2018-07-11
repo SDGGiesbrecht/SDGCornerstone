@@ -62,7 +62,7 @@ public protocol SetDefinition {
 
 extension SetDefinition {
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∈_]
+    // #documentation(SDGCornerstone.SetDefinition.∈)
     /// Returns `true` if `precedingValue` is an element of `followingValue`.
     ///
     /// - Parameters:
@@ -72,7 +72,7 @@ extension SetDefinition {
         return followingValue ∋ precedingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∉_]
+    // #documentation(SDGCornerstone.SetDefinition.∉)
     /// Returns `true` if `precedingValue` is not an element of `followingValue`.
     ///
     /// - Parameters:
@@ -82,7 +82,7 @@ extension SetDefinition {
         return ¬(precedingValue ∈ followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∌_]
+    // #documentation(SDGCornerstone.SetDefinition.∌)
     /// Returns `true` if `precedingValue` does not contain `followingValue`.
     ///
     /// - Parameters:

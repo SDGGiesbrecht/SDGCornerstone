@@ -18,7 +18,7 @@ extension StrictString : FileConvertible {
 
     // MARK: - FileConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.FileConvertible.init(file:origin:)_]
+    // #documentation(SDGCornerstone.FileConvertible.init(file:origin:))
     /// Creates an instance using raw data from a file on the disk.
     ///
     /// - Parameters:
@@ -28,7 +28,7 @@ extension StrictString : FileConvertible {
         self.init(try String(file: file, origin: origin))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FileConvertible.file_]
+    // #documentation(SDGCornerstone.FileConvertible.file)
     /// A binary representation that can be written as a file.
     @_inlineable public var file: Data {
         return String(self).file

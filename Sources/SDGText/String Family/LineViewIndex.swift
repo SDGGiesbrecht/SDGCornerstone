@@ -77,7 +77,7 @@ public struct LineViewIndex : Comparable, Equatable {
 
     // MARK: - Comparable
 
-    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
@@ -99,7 +99,7 @@ public struct LineViewIndex : Comparable, Equatable {
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:

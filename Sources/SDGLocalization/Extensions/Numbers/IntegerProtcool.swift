@@ -16,7 +16,7 @@ import SDGMathematics
 
 extension IntegerProtocol {
 
-    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.inDigits(thousandsSeparator:)_]
+    // #documentation(SDGCornerstone.WholeNumberProtocol.inDigits(thousandsSeparator:))
     /// Returns the number in digits.
     ///
     /// - Parameters:
@@ -25,7 +25,7 @@ extension IntegerProtocol {
         return integralDigits(thousandsSeparator: thousandsSeparator)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal()_]
+    // #documentation(SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal())
     /// Returns the ordinal in its abbreviated English form. (“1st”, “2nd”, “3rd”, etc.)
     @_inlineable public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
         return generateAbbreviatedEnglishOrdinal()
@@ -42,7 +42,7 @@ extension IntegerProtocol {
         return générerOrdinalFrançaisAbrégé(genre: genre, nombre: nombre)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:)_]
+    // #documentation(SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:))
     /// Returns the number in roman numerals.
     ///
     /// - Parameters:

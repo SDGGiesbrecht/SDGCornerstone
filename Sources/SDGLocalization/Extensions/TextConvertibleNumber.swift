@@ -194,7 +194,7 @@ extension TextConvertibleNumber {
         }))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
@@ -247,7 +247,7 @@ extension TextConvertibleNumber {
 
     // MARK: - ExpressibleByStringLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
+    // #documentation(SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:))
     /// Creates an instance from a string literal.
     ///
     /// - Parameters:
@@ -260,7 +260,7 @@ extension TextConvertibleNumber {
 extension TextConvertibleNumber where Self : IntegralArithmetic {
     // MARK: - where Self : IntegralArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
@@ -298,7 +298,7 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
 extension TextConvertibleNumber where Self : RationalArithmetic {
     // MARK: - where Self : RationalArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
@@ -360,7 +360,7 @@ public protocol CodableViaTextConvertibleNumber : TextConvertibleNumber {
 
 extension CodableViaTextConvertibleNumber {
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -373,7 +373,7 @@ extension CodableViaTextConvertibleNumber {
 extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
     // MARK: - where Self : IntegerProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -386,7 +386,7 @@ extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
 extension CodableViaTextConvertibleNumber where Self : WholeNumberProtocol {
     // MARK: - where Self : WholeNumberProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:

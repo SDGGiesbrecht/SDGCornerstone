@@ -64,7 +64,7 @@ extension HebrewYear {
 
         // MARK: - RawRepresentable
 
-        // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]
+        // #documentation(SDGCornerstone.RawRepresentable.RawValue)
         /// The raw value type.
         public typealias RawValue = Int
     }

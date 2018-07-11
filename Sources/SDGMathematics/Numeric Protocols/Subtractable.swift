@@ -53,7 +53,7 @@ public protocol Subtractable : Addable {
 
 extension Subtractable {
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+    // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -63,7 +63,7 @@ extension Subtractable {
         return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.±_]
+    // #documentation(SDGCornerstone.Subtractable.±)
     /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
     ///
     /// - Parameters:

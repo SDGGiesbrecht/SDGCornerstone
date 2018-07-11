@@ -28,7 +28,7 @@ extension IntFamily {
 
     // MARK: - IntegralArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.IntegralArithmetic.init(intFamily:)_]
+    // #documentation(SDGCornerstone.IntegralArithmetic.init(intFamily:))
     /// Creates an instance equal to `int`.
     ///
     /// - Properties:
@@ -39,7 +39,7 @@ extension IntFamily {
 
     // MARK: - Negatable
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−_]
+    // #documentation(SDGCornerstone.Negatable.−)
     /// Returns the additive inverse of the operand.
     ///
     /// - Parameters:
@@ -48,7 +48,7 @@ extension IntFamily {
         return -operand
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−=_]
+    // #documentation(SDGCornerstone.Negatable.−=)
     /// Sets the operand to its additive inverse.
     ///
     /// - Parameters:
@@ -59,13 +59,13 @@ extension IntFamily {
 
     // MARK: - NumericAdditiveArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     @_inlineable public var absoluteValue: Self {
         return abs(self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     @_inlineable public mutating func formAbsoluteValue() {
         self = abs(self)
@@ -73,7 +73,7 @@ extension IntFamily {
 
     // MARK: - Subtractable
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+    // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -83,7 +83,7 @@ extension IntFamily {
         return precedingValue - followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+    // #documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -104,7 +104,7 @@ extension IntFamily {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×)
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -114,7 +114,7 @@ extension IntFamily {
         return precedingValue * followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -124,7 +124,7 @@ extension IntFamily {
         precedingValue *= followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
     /// Sets `self` to the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -146,13 +146,13 @@ extension IntFamily {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isEven_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isEven)
     /// Returns true if `self` is an even integer.
     @_inlineable public var isEven: Bool {
         return ¬isOdd
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isOdd_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
     /// Returns true if `self` is an odd integer.
     @_inlineable public var isOdd: Bool {
         return self & 1 == 1
@@ -163,7 +163,7 @@ extension IntXFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
+    // #documentation(SDGCornerstone.PointProtocol.+)
     /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
@@ -173,7 +173,7 @@ extension IntXFamily {
         return precedingValue.advanced(by: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    // #documentation(SDGCornerstone.PointProtocol.+=)
     /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
@@ -183,7 +183,7 @@ extension IntXFamily {
         precedingValue = precedingValue.advanced(by: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    // #documentation(SDGCornerstone.PointProtocol.−)
     /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
@@ -204,13 +204,13 @@ extension Int : IntFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
     // MARK: - Subtractible
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+    // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -224,7 +224,7 @@ extension Int64 : IntXFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
@@ -232,7 +232,7 @@ extension Int32 : IntXFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
@@ -240,7 +240,7 @@ extension Int16 : IntXFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
@@ -248,7 +248,7 @@ extension Int8 : IntXFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }

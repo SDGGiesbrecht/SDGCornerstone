@@ -31,7 +31,7 @@ public protocol IterableEnumeration : RawRepresentable {
 extension IterableEnumeration where RawValue == Int {
     // MARK: - where RawValue == Int
 
-    // [_Inherit Documentation: SDGCornerstone.IterableEnumeration.cases_]
+    // #documentation(SDGCornerstone.IterableEnumeration.cases)
     /// An array containing every case of the enumeration.
     @_inlineable public static var cases: [Self] {
         guard var instance = Self(rawValue: 0) else {

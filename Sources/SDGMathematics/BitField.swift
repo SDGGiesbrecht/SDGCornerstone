@@ -77,13 +77,13 @@ public protocol BitField : Equatable {
 
 extension BitField {
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseNot()_]
+    // #documentation(SDGCornerstone.BitField.bitwiseNot())
     /// Returns the bits not present in `self`.
     @_inlineable public func bitwiseNot() -> Self {
         return nonmutatingVariant(of: Self.formBitwiseNot, on: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseAnd(with:)_]
+    // #documentation(SDGCornerstone.BitField.bitwiseAnd(with:))
     /// Returns the bits present in both `self` and `other`.
     ///
     /// - Parameters:
@@ -92,7 +92,7 @@ extension BitField {
         return nonmutatingVariant(of: Self.formBitwiseAnd, on: self, with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseOr(with:)_]
+    // #documentation(SDGCornerstone.BitField.bitwiseOr(with:))
     /// Returns the bits present in either `self` or `other`.
     ///
     /// - Parameters:
@@ -101,7 +101,7 @@ extension BitField {
         return nonmutatingVariant(of: Self.formBitwiseOr, on: self, with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseExclusiveOr(with:)_]
+    // #documentation(SDGCornerstone.BitField.bitwiseExclusiveOr(with:))
     /// Returns the bits present only in `self` or only in `other`.
     ///
     /// - Parameters:

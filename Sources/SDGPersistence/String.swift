@@ -18,7 +18,7 @@ extension String : FileConvertible {
 
     // MARK: - FileConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.FileConvertible.init(file:origin:)_]
+    // #documentation(SDGCornerstone.FileConvertible.init(file:origin:))
     /// Creates an instance using raw data from a file on the disk.
     ///
     /// - Parameters:
@@ -52,7 +52,7 @@ extension String : FileConvertible {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FileConvertible.file_]
+    // #documentation(SDGCornerstone.FileConvertible.file)
     /// A binary representation that can be written as a file.
     public var file: Data {
         guard let result = data(using: .utf8) else {

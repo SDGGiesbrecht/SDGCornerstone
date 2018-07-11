@@ -240,7 +240,7 @@ extension Localization {
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         guard let contentLocalization = ContentLocalization(exactly: code) else {
@@ -253,7 +253,7 @@ extension Localization {
 extension Localization where Self : RawRepresentable, Self.RawValue == String {
     // MARK: - where Self : RawRepresentable, Self.RawValue == String
 
-    // [_Inherit Documentation: SDGCornerstone.Localization.init(code:)_]
+    // #documentation(SDGCornerstone.Localization.init(code:))
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     ///
     /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
@@ -261,7 +261,7 @@ extension Localization where Self : RawRepresentable, Self.RawValue == String {
         self.init(rawValue: code)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Localization.code_]
+    // #documentation(SDGCornerstone.Localization.code)
     /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     @_inlineable public var code: String {
         return rawValue

@@ -48,7 +48,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         self = string
     }
 
-    // [_Inherit Documentation: SDGCornerstone.StringFamily.init(clusters:)_]
+    // #documentation(SDGCornerstone.StringFamily.init(clusters:))
     /// Creates a string from a collection of clusters.
     @_inlineable public init(_ clusters: ClusterView) {
         self = clusters.string
@@ -91,7 +91,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Addable
 
-    // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
+    // #documentation(SDGCornerstone.Addable.+=)
     /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
@@ -103,7 +103,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - BidirectionalCollection
 
-    // [_Inherit Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+    // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
     /// Returns the index immediately before the specified index.
     ///
     /// - Parameters:
@@ -114,7 +114,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Codable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -123,7 +123,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         try encode(to: encoder, via: description)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -134,19 +134,19 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Collection
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+    // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
     @_inlineable public var startIndex: String.ScalarView.Index {
         return string.scalars.startIndex
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+    // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
     @_inlineable public var endIndex: String.ScalarView.Index {
         return string.scalars.endIndex
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+    // #documentation(SDGCornerstone.Collection.index(after:))
     /// Returns the index immediately after the specified index.
     ///
     /// - Parameters:
@@ -155,7 +155,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         return string.scalars.index(after: i)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+    // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
     @_inlineable public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
         return string.scalars[position]
@@ -163,7 +163,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Comparable
 
-    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
@@ -175,7 +175,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     @_inlineable public var description: String {
         return string
@@ -183,7 +183,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -195,7 +195,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - ExpressibleByStringLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
+    // #documentation(SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:))
     /// Creates an instance from a string literal.
     ///
     /// - Parameters:
@@ -206,7 +206,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Hashable
 
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
     public var hashValue: Int {
         return string.hashValue
@@ -214,13 +214,13 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - RangeReplaceableCollection
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
     /// Creates a new, empty collection.
     @_inlineable public init() {
         self.init(unsafeString: String())
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.init(_:))
     /// Creates a new instance of a collection containing the elements of a sequence.
     @_inlineable public init<S : Sequence>(_ elements: S) where S.Element == Element {
         self = StrictString.normalize(elements)
@@ -251,19 +251,19 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
     /// Appends the contents of the sequence to the end of the collection.
     @_inlineable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == UnicodeScalar {
         self = StrictString.concatenateStrictStrings(self, StrictString.normalize(newElements))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
     @_inlineable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == UnicodeScalar {
         replaceSubrange(i ..< i, with: newElements)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
     @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
 
@@ -277,7 +277,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - StringFamily
 
-    // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]
+    // #documentation(SDGCornerstone.StringFamily.scalars)
     /// A view of a string’s contents as a collection of Unicode scalars.
     @_inlineable public var scalars: StrictString {
         get {
@@ -288,7 +288,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.StringFamily.clusters_]
+    // #documentation(SDGCornerstone.StringFamily.clusters)
     /// A view of a string’s contents as a collection of extended grapheme clusters.
     @_inlineable public var clusters: ClusterView {
         get {
@@ -301,7 +301,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - TextOutputStream
 
-    // [_Inherit Documentation: SDGCornerstone.TextOutputStream.write(_:)_]
+    // #documentation(SDGCornerstone.TextOutputStream.write(_:))
     /// Appends the given string to the stream.
     @_inlineable public mutating func write(_ string: String) {
         self.append(contentsOf: string.scalars)
@@ -309,7 +309,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - TextOutputStreamable
 
-    // [_Inherit Documentation: SDGCornerstone.TextOutputStreamable.write(to:)_]
+    // #documentation(SDGCornerstone.TextOutputStreamable.write(to:))
     /// Writes a textual representation of this instance into the given output stream.
     @_inlineable public func write<Target>(to target: inout Target) where Target : TextOutputStream {
         target.write(string)

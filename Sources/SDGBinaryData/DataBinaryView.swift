@@ -42,7 +42,7 @@ extension Data {
 
         // MARK: - BidirectionalCollection
 
-        // [_Inherit Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+        // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
         /// Returns the index immediately before the specified index.
         ///
         /// - Parameters:
@@ -54,18 +54,18 @@ extension Data {
         // MARK: - Collection
 
         @_versioned internal static let startIndex: IntMax = 0
-        // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+        // #documentation(SDGCornerstone.Collection.startIndex)
         /// The position of the first element in a non‐empty collection.
         public var startIndex: IntMax {
             return Data.BinaryView.startIndex
         }
-        // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+        // #documentation(SDGCornerstone.Collection.endIndex)
         /// The position following the last valid index.
         @_inlineable public var endIndex: IntMax {
             return IntMax(data.endIndex) × BinaryView.bitsPerByte
         }
 
-        // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+        // #documentation(SDGCornerstone.Collection.index(after:))
         /// Returns the index immediately after the specified index.
         ///
         /// - Parameters:
@@ -74,7 +74,7 @@ extension Data {
             return i + 1
         }
 
-        // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+        // #documentation(SDGCornerstone.Collection.subscript(position:))
         /// Accesses the element at the specified position.
         @_inlineable public subscript(position: IntMax) -> Bool {
             get {
@@ -87,7 +87,7 @@ extension Data {
 
         // MARK: - CustomStringConvertible
 
-        // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+        // #documentation(SDGCornerstone.CustomStringConvertible.description)
         /// A textual representation of the instance.
         public var description: String {
             let bytes = data.map { String(describing: $0.binary) }

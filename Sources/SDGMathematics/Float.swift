@@ -50,7 +50,7 @@ extension FloatFamily {
 
     // MARK: - Negatable
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−_]
+    // #documentation(SDGCornerstone.Negatable.−)
     /// Returns the additive inverse of the operand.
     ///
     /// - Parameters:
@@ -59,7 +59,7 @@ extension FloatFamily {
         return -operand
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−=_]
+    // #documentation(SDGCornerstone.Negatable.−=)
     /// Sets the operand to its additive inverse.
     ///
     /// - Parameters:
@@ -70,13 +70,13 @@ extension FloatFamily {
 
     // MARK: - NumericAdditiveArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     @_inlineable public var absoluteValue: Self {
         return abs(self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     @_inlineable public mutating func formAbsoluteValue() {
         self = abs(self)
@@ -84,7 +84,7 @@ extension FloatFamily {
 
     // MARK: - RationalArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
+    // #documentation(SDGCornerstone.RationalArithmetic.÷)
     /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -94,7 +94,7 @@ extension FloatFamily {
         return precedingValue / followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷=_]
+    // #documentation(SDGCornerstone.RationalArithmetic.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
@@ -106,13 +106,13 @@ extension FloatFamily {
 
     // MARK: - RealArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.π_]
+    // #documentation(SDGCornerstone.RealArithmetic.π)
     /// An instance of π.
     @_inlineable public static var π: Self {
         return pi
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.√_]
+    // #documentation(SDGCornerstone.RealArithmetic.√)
     /// Returns the square root of `operand`.
     ///
     /// - Parameters:
@@ -121,7 +121,7 @@ extension FloatFamily {
         return operand.squareRoot()
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.√=_]
+    // #documentation(SDGCornerstone.RealArithmetic.√=)
     /// Sets `operand` to its square root.
     ///
     /// - Parameters:
@@ -163,7 +163,7 @@ extension FloatFamily {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.formLogarithm(toBase:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.formLogarithm(toBase:))
     /// Sets `self` to its base `base` logarithm.
     ///
     /// - Precondition: `self` > 0
@@ -186,7 +186,7 @@ extension FloatFamily {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.formNaturalLogarithm()_]
+    // #documentation(SDGCornerstone.RealArithmetic.formNaturalLogarithm())
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
@@ -235,7 +235,7 @@ extension FloatFamily {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.sin(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.sin(_:))
     /// Returns the sine of an angle.
     ///
     /// - Parameters:
@@ -295,7 +295,7 @@ extension FloatFamily {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.cos(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.cos(_:))
     /// Returns the cosine of an angle.
     ///
     /// - Parameters:
@@ -355,7 +355,7 @@ extension FloatFamily {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.arctan(_:)_]
+    // #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
     /// Returns the arctangent of a value.
     ///
     /// The returned angle will be between −90° and 90°.
@@ -406,7 +406,7 @@ extension FloatFamily {
 
     // MARK: - Subtractable
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+    // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -416,7 +416,7 @@ extension FloatFamily {
         return precedingValue - followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+    // #documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -428,7 +428,7 @@ extension FloatFamily {
 
     // MARK: - WholeArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×)
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -438,7 +438,7 @@ extension FloatFamily {
         return precedingValue * followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -448,7 +448,7 @@ extension FloatFamily {
         precedingValue *= followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
     /// Sets `self` to the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -460,7 +460,7 @@ extension FloatFamily {
         self.round(.down)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.↑=)
     /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
@@ -524,7 +524,7 @@ extension FloatFamily {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.rounded(_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
     /// Returns the value rounded to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
@@ -544,23 +544,23 @@ extension Double : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
+    // #documentation(SDGCornerstone.FloatFamily.ln2)
     /// The value of ln2.
     public static let ln2: Double = 0x1.62E42FEFA39EFp-1
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
     // MARK: - RealArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
+    // #documentation(SDGCornerstone.RealArithmetic.e)
     /// An instance of *e*.
     public static let e: Double = 0x1.5BF0A8B145769p1
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
     @_inlineable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
@@ -581,7 +581,7 @@ extension CGFloat : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
+    // #documentation(SDGCornerstone.FloatFamily.ln2)
     /// The value of ln2.
     public static let ln2: CGFloat = CGFloat(Double.ln2)
 
@@ -601,17 +601,17 @@ extension CGFloat : FloatFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
     // MARK: - RealArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
+    // #documentation(SDGCornerstone.RealArithmetic.e)
     /// An instance of *e*.
     public static let e: CGFloat = CGFloat(Double.e)
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
     @_inlineable public var floatingPointApproximation: FloatMax {
         return FloatMax(NativeType(self))
@@ -627,7 +627,7 @@ extension Float80 : Codable, FloatFamily {
 
     // MARK: - Decodable
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -638,7 +638,7 @@ extension Float80 : Codable, FloatFamily {
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -650,23 +650,23 @@ extension Float80 : Codable, FloatFamily {
 
     // MARK: - FloatFamily
 
-    // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
+    // #documentation(SDGCornerstone.FloatFamily.ln2)
     /// The value of ln2.
     public static let ln2: Float80 = 0x1.62E42FEFA39EF358p-1
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
     // MARK: - RealArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
+    // #documentation(SDGCornerstone.RealArithmetic.e)
     /// An instance of *e*.
     public static let e: Float80 = 0x1.5BF0A8B145769535p1
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
     @_inlineable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
@@ -678,23 +678,23 @@ extension Float : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // [_Inherit Documentation: SDGCornerstone.FloatFamily.ln2_]
+    // #documentation(SDGCornerstone.FloatFamily.ln2)
     /// The value of ln2.
     public static let ln2: Float = 0x1.62E430p-1
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 
     // MARK: - RealArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.e_]
+    // #documentation(SDGCornerstone.RealArithmetic.e)
     /// An instance of *e*.
     public static let e: Float = 0x1.5BF0A9p1
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.floatingPointApproximation_]
+    // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
     @_inlineable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)

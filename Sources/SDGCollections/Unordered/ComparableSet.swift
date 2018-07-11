@@ -86,7 +86,7 @@ public protocol ComparableSet : Equatable, SetDefinition {
 
 extension ComparableSet {
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊈_]
+    // #documentation(SDGCornerstone.ComparableSet.⊈)
     /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
     ///
     /// - Parameters:
@@ -96,7 +96,7 @@ extension ComparableSet {
         return ¬(precedingValue ⊆ followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
+    // #documentation(SDGCornerstone.ComparableSet.⊇)
     /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
@@ -106,7 +106,7 @@ extension ComparableSet {
         return followingValue ⊆ precedingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊉_]
+    // #documentation(SDGCornerstone.ComparableSet.⊉)
     /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
     ///
     /// - Parameters:
@@ -116,7 +116,7 @@ extension ComparableSet {
         return ¬(precedingValue ⊇ followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
+    // #documentation(SDGCornerstone.ComparableSet.⊊)
     /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
@@ -126,7 +126,7 @@ extension ComparableSet {
         return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
+    // #documentation(SDGCornerstone.ComparableSet.⊋)
     /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
@@ -139,7 +139,7 @@ extension ComparableSet {
     @_inlineable @_versioned internal func isDisjointAsComparableSet(with other: Self) -> Bool {
         return ¬overlaps(other)
     }
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
+    // #documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))
     /// Returns `true` if the sets are disjoint.
     ///
     /// - Parameters:
@@ -150,7 +150,7 @@ extension ComparableSet {
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -164,7 +164,7 @@ extension ComparableSet {
 extension ComparableSet where Self : SetAlgebra {
     // MARK: - where Self : SetAlgebra
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
+    // #documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))
     /// Returns `true` if the sets are disjoint.
     ///
     /// - Parameters:

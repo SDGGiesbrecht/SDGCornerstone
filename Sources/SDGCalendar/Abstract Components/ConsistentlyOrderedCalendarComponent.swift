@@ -47,7 +47,7 @@ public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedS
 extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.RawValue == Int {
     // MARK: - where Self : EnumerationCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
     /// Creates a component from the number of complete components already elapsed.
     ///
     /// - Precondition: The number must be valid for the particular compenent.
@@ -66,7 +66,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
         self = result
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(ordinal:)_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(ordinal:))
     /// Creates a component from an ordinal.
     ///
     /// - Precondition: The ordinal must be valid for the particular compenent.
@@ -77,13 +77,13 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
         self.init(numberAlreadyElapsed: ordinal − 1)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
     @_inlineable public var numberAlreadyElapsed: RawValue {
         return rawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal)
     /// The ordinal.
     @_inlineable public var ordinal: RawValue {
         return rawValue + 1
@@ -91,7 +91,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    // #documentation(SDGCornerstone.PointProtocol.+=)
     /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
@@ -101,7 +101,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
         precedingValue = Self(numberAlreadyElapsed: precedingValue.numberAlreadyElapsed + followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    // #documentation(SDGCornerstone.PointProtocol.−)
     /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:

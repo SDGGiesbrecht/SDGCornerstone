@@ -22,7 +22,7 @@ extension SmallestCalendarComponent {
 
     // MARK: - ExpressibleByFloatLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByFloatLiteral.init(floatLiteral:)_]
+    // #documentation(SDGCornerstone.ExpressibleByFloatLiteral.init(floatLiteral:))
     /// Creates an instance from a floating‐point literal.
     ///
     /// - Parameters:

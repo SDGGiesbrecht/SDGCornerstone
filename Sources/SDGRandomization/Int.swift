@@ -16,7 +16,7 @@ import SDGMathematics
 
 extension IntFamily {
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
@@ -32,7 +32,7 @@ extension SDGMathematics.IntMax {
 
     // MARK: - RandomizableNumber
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:

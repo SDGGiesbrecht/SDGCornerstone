@@ -52,7 +52,7 @@ public struct UserFacing<Element, Localization : SDGLocalization.Localization> :
 
     // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
     @_inlineable public var wrappedInstance: Any {
         return resolved()

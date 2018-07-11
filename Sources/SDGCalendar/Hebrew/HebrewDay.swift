@@ -42,13 +42,13 @@ public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, Consisten
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Int
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:)_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
@@ -56,11 +56,11 @@ public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, Consisten
         day = unsafeRawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
     /// The valid range for raw values.
     public static let validRange: Range<RawValue>? = 1 ..< HebrewMonth.maximumNumberOfDays + 1
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
     /// The raw value.
     public var rawValue: RawValue {
         return day

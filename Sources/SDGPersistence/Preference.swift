@@ -137,7 +137,7 @@ public struct Preference : Equatable, TransparentWrapper {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Preference.set(to:)_]
+    // #documentation(SDGCornerstone.Preference.set(to:))
     /// Sets the preference to a particular value.
     ///
     /// - Parameters:
@@ -179,7 +179,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -191,7 +191,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
     @_inlineable public var wrappedInstance: Any {
         return propertyListObject as Any

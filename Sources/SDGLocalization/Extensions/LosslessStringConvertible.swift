@@ -23,7 +23,7 @@ public protocol CodableViaLosslessStringConvertible : Codable, LosslessStringCon
 
 extension CodableViaLosslessStringConvertible {
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -32,7 +32,7 @@ extension CodableViaLosslessStringConvertible {
         try encode(to: encoder, via: description)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:

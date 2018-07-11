@@ -42,7 +42,7 @@ public protocol Addable {
 
 extension Addable {
 
-    // [_Inherit Documentation: SDGCornerstone.Addable.+_]
+    // #documentation(SDGCornerstone.Addable.+)
     /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
@@ -70,7 +70,7 @@ extension Addable {
 extension Addable where Self : Strideable, Self.Stride == Self {
     // MARK: - where Self : Strideable, Stride == Self
 
-    // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+_]
+    // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.
     ///
     /// - Parameters:

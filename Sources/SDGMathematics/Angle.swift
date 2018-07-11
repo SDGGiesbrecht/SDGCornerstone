@@ -119,7 +119,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
 
     // MARK: - Measurement
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.init(rawValue:)_]
+    // #documentation(SDGCornerstone.Measurement.init(rawValue:))
     /// Creates a measurement from a raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -127,7 +127,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         inRadians = rawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.rawValue_]
+    // #documentation(SDGCornerstone.Measurement.rawValue)
     /// A raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -153,7 +153,7 @@ extension RealArithmetic {
         return Angle(radians: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RealArithmetic.radians_]
+    // #documentation(SDGCornerstone.RealArithmetic.radians)
     /// Returns an angle in radians.
     @_inlineable public var rad: Angle<Self> {
         return radians

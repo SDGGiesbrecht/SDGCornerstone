@@ -31,7 +31,7 @@ public protocol AdditiveArithmetic : Codable, Hashable, Subtractable {
 extension AdditiveArithmetic where Self : ExpressibleByIntegerLiteral {
     // MARK: - where Self : ExpressibleByIntegerLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.AdditiveArithmetic.additiveIdentity_]
+    // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
     /// The additive identity (origin).
     @_inlineable public static var additiveIdentity: Self {
         return 0

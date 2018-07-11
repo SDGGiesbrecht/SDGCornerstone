@@ -49,7 +49,7 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
 
 extension RationalArithmetic {
 
-    // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
+    // #documentation(SDGCornerstone.RationalArithmetic.÷)
     /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:

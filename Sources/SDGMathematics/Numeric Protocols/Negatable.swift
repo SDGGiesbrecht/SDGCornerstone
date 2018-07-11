@@ -40,7 +40,7 @@ public protocol Negatable : AdditiveArithmetic {
 
 extension Negatable {
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−_]
+    // #documentation(SDGCornerstone.Negatable.−)
     /// Returns the additive inverse of the operand.
     ///
     /// - Parameters:
@@ -49,7 +49,7 @@ extension Negatable {
         return nonmutatingVariant(of: −=, on: operand)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−=_]
+    // #documentation(SDGCornerstone.Negatable.−=)
     /// Sets the operand to its additive inverse.
     ///
     /// - Parameters:

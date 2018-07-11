@@ -31,7 +31,7 @@ public protocol RationalNumberProtocol : RationalArithmetic {
 
 extension RationalNumberProtocol {
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.↑=)
     /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:

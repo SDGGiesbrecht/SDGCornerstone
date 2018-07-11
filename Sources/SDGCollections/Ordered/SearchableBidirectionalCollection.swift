@@ -53,7 +53,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search.
     func lastMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>) -> PatternMatch<Self>?
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -83,7 +83,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     func lastMatch<C : SearchableCollection>(for pattern: C, in searchRange: Range<Index>) -> PatternMatch<Self>? where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -120,13 +120,13 @@ where SubSequence : SearchableBidirectionalCollection {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     func hasSuffix(_ pattern: Pattern<Element>) -> Bool
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
     func hasSuffix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -139,14 +139,14 @@ where SubSequence : SearchableBidirectionalCollection {
     /// - Parameters:
     ///     - other: The other collection
     func commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
     ///     - other: The other collection
     func commonSuffix(with other: Self) -> PatternMatch<Self>
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.difference(from:)_]
+    // #documentation(SDGCornerstone.Collection.difference(from:))
     /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
     ///
     /// - Parameters:
@@ -156,7 +156,7 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -221,7 +221,7 @@ extension SearchableBidirectionalCollection {
         return PatternMatch(range: forward(range), in: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -260,7 +260,7 @@ extension SearchableBidirectionalCollection {
         }
         return PatternMatch(range: forward(range), in: self)
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -293,7 +293,7 @@ extension SearchableBidirectionalCollection {
         return _lastMatch(for: pattern, in: searchRange)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -360,7 +360,7 @@ extension SearchableBidirectionalCollection {
         return lastMatch(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -392,7 +392,7 @@ extension SearchableBidirectionalCollection {
     @_inlineable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
         return lastMatch(for: pattern, in: bounds)
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -425,7 +425,7 @@ extension SearchableBidirectionalCollection {
         return lastMatch(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.lastMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
@@ -458,7 +458,7 @@ extension SearchableBidirectionalCollection {
         return lastMatch(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -468,7 +468,7 @@ extension SearchableBidirectionalCollection {
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -477,7 +477,7 @@ extension SearchableBidirectionalCollection {
         return hasSuffix(pattern as Pattern<Element>)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -491,7 +491,7 @@ extension SearchableBidirectionalCollection {
         let backwards = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -500,7 +500,7 @@ extension SearchableBidirectionalCollection {
         return _hasSuffix(pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasSuffix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -512,7 +512,7 @@ extension SearchableBidirectionalCollection {
     @_inlineable @_versioned internal func _commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return PatternMatch(range: forward(reversed().commonPrefix(with: other.reversed()).range), in: self)
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
@@ -521,7 +521,7 @@ extension SearchableBidirectionalCollection {
         return _commonSuffix(with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
@@ -530,7 +530,7 @@ extension SearchableBidirectionalCollection {
         return _commonSuffix(with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.difference(from:)_]
+    // #documentation(SDGCornerstone.Collection.difference(from:))
     /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
     ///
     /// - Parameters:

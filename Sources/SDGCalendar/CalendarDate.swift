@@ -57,7 +57,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         self.init(definition: HebrewDate(year: year, month: month, day: day, hour: hour, part: part))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarDate.init(hebrewYear:month:day:hour:part:)_]
+    // #documentation(SDGCornerstone.CalendarDate.init(hebrewYear:month:day:hour:part:))
     /// Creates a date using the Hebrew calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
@@ -78,7 +78,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         self.init(definition: definition)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:)_]
+    // #documentation(SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:))
     /// Creates a date using the Hebrew calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
@@ -398,7 +398,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - Comparable
 
-    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
@@ -422,7 +422,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         knownDateDefinitions[type.identifier] = type
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -442,7 +442,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -463,7 +463,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -475,11 +475,11 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = CalendarInterval<FloatMax>
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    // #documentation(SDGCornerstone.PointProtocol.+=)
     /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
@@ -493,7 +493,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    // #documentation(SDGCornerstone.PointProtocol.−)
     /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
@@ -505,7 +505,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
     public var wrappedInstance: Any {
         return definition

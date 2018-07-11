@@ -53,7 +53,7 @@ extension Day {
 
     // MARK: - MarkupPlaygroundDisplay
 
-    // [_Inherit Documentation: SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup()_]
+    // #documentation(SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup())
     /// The markup representation of the instance.
     @_inlineable public func playgroundDescriptionMarkup() -> SemanticMarkup {
         return UserFacing<SemanticMarkup, FormatLocalization>({ localization in

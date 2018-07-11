@@ -179,7 +179,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
@@ -227,7 +227,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Decodable
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -241,7 +241,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -254,7 +254,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Measurement
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.init(rawValue:)_]
+    // #documentation(SDGCornerstone.Measurement.init(rawValue:))
     /// Creates a measurement from a raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -262,7 +262,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         inUnits = rawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.rawValue_]
+    // #documentation(SDGCornerstone.Measurement.rawValue)
     /// A raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).

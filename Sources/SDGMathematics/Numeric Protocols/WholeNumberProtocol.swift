@@ -23,7 +23,7 @@ public protocol WholeNumberProtocol : WholeArithmetic {
 
 extension WholeNumberProtocol {
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.↑=)
     /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
@@ -40,19 +40,19 @@ extension WholeNumberProtocol {
         precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isWhole_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isWhole)
     /// Returns `true` if `self` is a whole number.
     @_inlineable public var isWhole: Bool {
         return true
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isIntegral_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isIntegral)
     /// Returns `true` if `self` is an integer.
     @_inlineable public var isIntegral: Bool {
         return true
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.round(_:))
     /// Rounds the value to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
@@ -63,19 +63,19 @@ extension WholeNumberProtocol {
 
     // MARK: - NumericAdditiveArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
     @_inlineable public var isNegative: Bool {
         return false
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
     @_inlineable public var isNonNegative: Bool {
         return true
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     @_inlineable public mutating func formAbsoluteValue() {
         // self = self

@@ -14,7 +14,7 @@
 
 // MARK: - Any
 
-// [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+// #documentation(SDGCornerstone.Equatable.≠)
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:

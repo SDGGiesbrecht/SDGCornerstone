@@ -27,7 +27,7 @@ public protocol SetInRepresentableUniverse : MutableSet {
     static var universe: Self { get }
 
     // [_Define Documentation: SDGCornerstone.RepresentableUniverse.′_]
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.′_]
+    // #documentation(SDGCornerstone.SetDefinition.′)
     /// Returns the absolute complement of the set.
     ///
     /// - Parameters:
@@ -44,7 +44,7 @@ public protocol SetInRepresentableUniverse : MutableSet {
 
 extension SetInRepresentableUniverse {
 
-    // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′_]
+    // #documentation(SDGCornerstone.RepresentableUniverse.′)
     /// Returns the absolute complement of the set.
     ///
     /// - Parameters:
@@ -53,7 +53,7 @@ extension SetInRepresentableUniverse {
         return nonmutatingVariant(of: ′=, on: operand)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′=_]
+    // #documentation(SDGCornerstone.RepresentableUniverse.′=)
     /// Sets the operand to its absolute complement.
     ///
     /// - Parameters:

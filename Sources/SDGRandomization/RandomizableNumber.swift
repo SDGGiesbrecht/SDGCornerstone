@@ -46,7 +46,7 @@ extension RandomizableNumber {
 extension RandomizableNumber where Self : RationalArithmetic {
     // MARK: - where Self : RationalArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:))
     /// Creates a random value within a particular range.
     ///
     /// - Parameters:
@@ -55,7 +55,7 @@ extension RandomizableNumber where Self : RationalArithmetic {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
