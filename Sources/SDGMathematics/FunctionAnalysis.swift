@@ -72,7 +72,7 @@ import SDGControlFlow
     return findLocalExtreme(near: location, within: bounds, inFunction: function, isCloser: { $0 ≥ $1 })
 }
 
-// #example(1, findLocalMinimum) #example(2, findLocalMinimumUndefined1) #example(3, findLocalMinimum Undefined2) #example(4, findLocalMinimumPreconditionViolation)
+// #example(1, findLocalMinimum) #example(2, findLocalMinimumUndefined1) #example(3, findLocalMinimumUndefined2) #example(4, findLocalMinimumPreconditionViolation)
 /// Returns the input (*x*) corresponding to the local minimum output (*y*) near `location`.
 ///
 /// This function automates a guess‐and‐check strategy and is useful for inverting otherwise one‐way functions. For example, finding the approximate square root of 120 can be done using only simpler arithmetic like this:
