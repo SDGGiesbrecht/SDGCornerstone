@@ -23,7 +23,7 @@ extension CGFloat : TextConvertibleNumber {}
 #endif
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
-// #workaround(Probably available in Swift 4.2 (Swift 4.1.2))
+// #workaround(Swift 4.1.2, Probably available in Swift 4.2)
 extension Float80 : TextConvertibleNumber {}
 #endif
 extension Float : TextConvertibleNumber {}

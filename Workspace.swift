@@ -56,6 +56,6 @@ configuration.documentation.api.encryptedTravisCIDeploymentKey = "gzx7ARrCgcNJiD
 configuration.applySDGOverrides()
 configuration.validateSDGStandards()
 
-// [_Workaround: Jazzy’s redundant building is way too slow. (workspace version 0.8.1)_]
+// #workaround(workspace version 0.10.2, Jazzy’s redundant building is way too slow.)
 configuration.documentation.api.generate = false
 configuration.documentation.api.enforceCoverage = false

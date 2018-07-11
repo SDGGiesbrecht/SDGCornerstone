@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(This should be adjusted to align with SE-0194 when it is implemented. (Swift 4.1.2))
+// #workaround(Swift 4.1.2, This should be adjusted to align with SE-0194 when it is implemented.)
 
 /// An enumeration that describes the set of localizations available for a particular input usage.
 ///
