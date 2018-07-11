@@ -20,7 +20,7 @@ class ReadMeExampleTests : TestCase {
     func testReadMe() {
 
         LocalizationSetting(orderOfPrecedence: ["en"]).do {
-            // [_Define Example: Read‐Me 🇨🇦EN_]
+            // @example(readMe🇨🇦EN)
             // ••••••• Localization •••••••
 
             enum ApplicationLocalization : String, Localization {
@@ -127,7 +127,7 @@ class ReadMeExampleTests : TestCase {
             XCTAssertEqual(try? Shell.default.run(command: ["echo", "Hello, world!"]),
                            "Hello, world!")
             #endif
-            // [_End_]
+            // @endExample
         }
     }
 }
