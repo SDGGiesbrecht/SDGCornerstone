@@ -368,7 +368,7 @@ class SDGTextAPITests : TestCase {
         let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
         XCTAssertEqual(utf16, unicode)
         #if false
-        // [_Workaround: macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16. (Swift 4.1.2)_]
+        // #workaround(Swift 4.1.2, macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16.)
         let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
         XCTAssertEqual(utf32, unicode)
 
@@ -458,7 +458,7 @@ class SDGTextAPITests : TestCase {
         func verifyVisible(_ codePoint: Int) {
             if let scalar = UnicodeScalar(codePoint) {
                 #if !os(Linux)
-                // [_Workaround: A number of obscure compatibility characters end up empty on Linux. (Swift 4.1.2)_]
+                // #workaround(Swift 4.1.2, A number of obscure compatibility characters end up empty on Linux.)
                 XCTAssertNotEqual(scalar.visibleRepresentation, "")
                 #endif
             }

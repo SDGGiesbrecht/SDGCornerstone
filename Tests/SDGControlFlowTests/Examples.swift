@@ -14,7 +14,7 @@
 
 import SDGControlFlow
 
-// [_Define Example: Nonmutating Variant_]
+// @example(nonmutatingVariant)
 extension Array where Element : Comparable {
     // MARK: - where Element : Comparable
 
@@ -28,4 +28,4 @@ extension Array where Element : Comparable {
         return nonmutatingVariant(of: +=, on: a, with: b)
     }
 }
-// [_End_]
+// @endExample

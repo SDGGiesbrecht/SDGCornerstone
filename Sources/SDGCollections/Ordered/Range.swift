@@ -17,34 +17,34 @@ import SDGMathematics
 /// A member of the `Range` family: `Range`, `ClosedRange`, `CountableRange` or `CountableClosedRange`.
 public protocol RangeFamily : ComparableSet, CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible {
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.Bound_]
+    // @documentation(SDGCornerstone.RangeFamily.Bound)
     /// The bound type.
     associatedtype Bound : Comparable
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.lowerBound_]
+    // @documentation(SDGCornerstone.RangeFamily.lowerBound)
     /// The lower bound.
     var lowerBound: Bound { get }
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.upperBound_]
+    // @documentation(SDGCornerstone.RangeFamily.upperBound)
     /// The upper bound.
     var upperBound: Bound { get }
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.contains(_:)._]
+    // @documentation(SDGCornerstone.RangeFamily.contains(_:).)
     /// Returns `true` if `element` is within the range.
     ///
     /// - Parameters:
     ///     - element: The element.
     func contains(_ element: Bound) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.overlaps(_:)._]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    // @documentation(SDGCornerstone.RangeFamily.overlaps(_:).)
+    // #documentation(SDGCornerstone.ComparableSet.overlaps(_:))
     /// Returns `true` if the sets overlap.
     ///
     /// - Parameters:
     ///     - other: The other set.
     func overlaps(_ other: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
+    // @documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
     static var hasClosedUpperBound: Bool { get }
 }
@@ -53,7 +53,7 @@ extension RangeFamily {
 
     // MARK: - ComparableSet
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
+    // #documentation(SDGCornerstone.ComparableSet.⊆)
     /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
@@ -65,7 +65,7 @@ extension RangeFamily {
 
     // MARK: - SetDefinition
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    // #documentation(SDGCornerstone.SetDefinition.∋)
     /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
@@ -81,7 +81,7 @@ extension RangeFamily where Bound : Hashable {
 
     // MARK: - Hashable
 
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
     @_inlineable public var hashValue: Int {
         return lowerBound.hashValue ^ upperBound.hashValue
@@ -92,7 +92,7 @@ extension Range : RangeFamily {
 
     // MARK: - RangeFamily
 
-    // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
+    // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
     @_inlineable public static var hasClosedUpperBound: Bool {
         return false
@@ -100,7 +100,7 @@ extension Range : RangeFamily {
 
     // MARK: - SetDefinition
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
+    // #documentation(SDGCornerstone.SetDefinition.Element)
     /// The element type.
     public typealias Element = Bound
 }
@@ -112,7 +112,7 @@ extension ClosedRange : RangeFamily {
 
     // MARK: - RangeFamily
 
-    // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
+    // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
     @_inlineable public static var hasClosedUpperBound: Bool {
         return true
@@ -120,7 +120,7 @@ extension ClosedRange : RangeFamily {
 
     // MARK: - SetDefinition
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
+    // #documentation(SDGCornerstone.SetDefinition.Element)
     /// The element type.
     public typealias Element = Bound
 }
@@ -132,7 +132,7 @@ extension CountableRange : RangeFamily {
 
     // MARK: - RangeFamily
 
-    // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
+    // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
     @_inlineable public static var hasClosedUpperBound: Bool {
         return false
@@ -146,7 +146,7 @@ extension CountableClosedRange : RangeFamily {
 
     // MARK: - RangeFamily
 
-    // [_Inherit Documentation: SDGCornerstone.RangeFamily.hasClosedUpperBound_]
+    // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
     @_inlineable public static var hasClosedUpperBound: Bool {
         return true

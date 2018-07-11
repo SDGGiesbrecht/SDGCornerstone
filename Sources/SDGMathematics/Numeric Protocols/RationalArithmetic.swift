@@ -23,14 +23,14 @@ import SDGControlFlow
 /// - `static func ÷= (precedingValue: inout Self, followingValue: Self)`
 public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmetic {
 
-    // [_Define Documentation: SDGCornerstone.IntegralArithmetic.init(floatingPoint:)_]
+    // @documentation(SDGCornerstone.IntegralArithmetic.init(floatingPoint:))
     /// Creates an instance as close as possible to `floatingPoint`.
     ///
     /// - Properties:
     ///     - floatingPoint: An instance of `FloatMax`.
     init(_ floatingPoint: FloatMax)
 
-    // [_Define Documentation: SDGCornerstone.RationalArithmetic.÷_]
+    // @documentation(SDGCornerstone.RationalArithmetic.÷)
     /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -38,7 +38,7 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     ///     - followingValue: The divisor.
     static func ÷ (precedingValue: Self, followingValue: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.RationalArithmetic.÷=_]
+    // @documentation(SDGCornerstone.RationalArithmetic.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
@@ -49,7 +49,7 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
 
 extension RationalArithmetic {
 
-    // [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
+    // #documentation(SDGCornerstone.RationalArithmetic.÷)
     /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -62,7 +62,7 @@ extension RationalArithmetic {
     @_inlineable @_versioned internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
 
         _assert(exponent.isIntegral, { (localization: _APILocalization) -> String in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "The result of a non‐integer exponent may be outside the set of rational numbers. Use a type that conforms to RealArithmetic instead. (\(exponent))"
             }
@@ -77,7 +77,7 @@ extension RationalArithmetic {
 
     // MARK: - ExpressibleByFloatLiteral
 
-    // [_Define Documentation: SDGCornerstone.ExpressibleByFloatLiteral.init(floatLiteral:)_]
+    // @documentation(SDGCornerstone.ExpressibleByFloatLiteral.init(floatLiteral:))
     /// Creates an instance from a floating‐point literal.
     ///
     /// - Parameters:

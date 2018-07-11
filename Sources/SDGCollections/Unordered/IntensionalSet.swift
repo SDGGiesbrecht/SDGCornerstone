@@ -28,11 +28,11 @@ public struct IntensionalSet<Member> : SetDefinition {
 
     // MARK: - SetDefinition
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
+    // #documentation(SDGCornerstone.SetDefinition.Element)
     /// The element type.
     public typealias Element = Member
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    // #documentation(SDGCornerstone.SetDefinition.∋)
     /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:

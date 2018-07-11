@@ -18,7 +18,7 @@ extension String : FileConvertible {
 
     // MARK: - FileConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.FileConvertible.init(file:origin:)_]
+    // #documentation(SDGCornerstone.FileConvertible.init(file:origin:))
     /// Creates an instance using raw data from a file on the disk.
     ///
     /// - Parameters:
@@ -43,16 +43,16 @@ extension String : FileConvertible {
             self = string
         } else if let string = String(data: file, encoding: .utf16) {
             self = string
-        } else if let string = String(data: file, encoding: .utf32) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+        } else if let string = String(data: file, encoding: .utf32) { // @exempt(from: tests) macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
             self = string
-        } else if let string = String(data: file, encoding: .isoLatin1) { // [_Exempt from Test Coverage_] macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
-            self = string // [_Exempt from Test Coverage_]
+        } else if let string = String(data: file, encoding: .isoLatin1) { // @exempt(from: tests) macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+            self = string // @exempt(from: tests)
         } else {
             _unreachable()
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FileConvertible.file_]
+    // #documentation(SDGCornerstone.FileConvertible.file)
     /// A binary representation that can be written as a file.
     public var file: Data {
         guard let result = data(using: .utf8) else {

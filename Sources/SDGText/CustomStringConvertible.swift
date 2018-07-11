@@ -14,6 +14,6 @@
 
 extension CustomStringConvertible {
 
-    // [_Define Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // @documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
 }

@@ -14,6 +14,6 @@
 
 extension CustomDebugStringConvertible {
 
-    // [_Define Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
+    // @documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
     /// Returns the custom playground description for this instance.
 }

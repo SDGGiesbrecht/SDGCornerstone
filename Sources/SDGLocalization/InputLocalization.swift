@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Workaround: This should be adjusted to align with SE-0194 when it is implemented. (Swift 4.1.2)_]
+// #workaround(Swift 4.1.2, This should be adjusted to align with SE-0194 when it is implemented.)
 
 /// An enumeration that describes the set of localizations available for a particular input usage.
 ///
@@ -21,7 +21,7 @@
 ///   - `static var cases: [Self] { get }`
 public protocol InputLocalization : Localization {
 
-    // [_Inherit Documentation: SDGCornerstone.IterableEnumeration.cases_]
+    // #documentation(SDGCornerstone.IterableEnumeration.cases)
     /// An array containing every case of the enumeration.
     static var cases: [Self] { get }
 }

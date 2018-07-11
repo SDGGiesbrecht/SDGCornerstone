@@ -27,7 +27,7 @@
 @_exported import SDGConcurrency
 @_exported import SDGExternalProcess
 
-// [_Workaround: Compensate because @_export drops operator definitions. (Swift 4.1.2)_]
+// #workaround(Swift 4.1.2, Compensate because @_export drops operator definitions.)
 
 // SDGLogic
 infix operator ≠: ComparisonPrecedence
@@ -92,4 +92,4 @@ infix operator ⊉: ComparisonPrecedence
 infix operator ⊊: ComparisonPrecedence
 infix operator ⊋: ComparisonPrecedence
 
-func aFunctionToTriggerTestCoverage() {} // [_Exempt from Test Coverage_]
+func aFunctionToTriggerTestCoverage() {} // @exempt(from: tests)

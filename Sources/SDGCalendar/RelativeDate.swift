@@ -33,7 +33,7 @@ internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         return "(" + String(describing: baseDate) + ") + " + String(describing: intervalSince)
@@ -55,7 +55,7 @@ internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Decodable
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -69,7 +69,7 @@ internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:

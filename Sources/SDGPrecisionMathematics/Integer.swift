@@ -18,7 +18,7 @@ import SDGRandomization
 import SDGLocalization
 import SDGCornerstoneLocalizations
 
-// [_Example 1: WholeNumber Literals_]
+// #example(1, wholeNumberLiterals)
 /// An arbitrary‐precision integer.
 ///
 /// ```swift
@@ -70,7 +70,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
     public private(set) var isNegative: Bool {
         get {
@@ -83,7 +83,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Addable
 
-    // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
+    // #documentation(SDGCornerstone.Addable.+=)
     /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
@@ -109,7 +109,12 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Comparable
 
-    // [_Inherit Documentition: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
+    /// Returns `true` if the preceding value is less than the following value.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: A value.
+    ///     - followingValue: Another value.
     public static func < (precedingValue: Integer, followingValue: Integer) -> Bool {
         if precedingValue.isNegative {
             if followingValue.isNegative {
@@ -132,7 +137,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
@@ -145,7 +150,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -157,7 +162,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Hashable
 
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
     public var hashValue: Int {
         return wholeMagnitude.hashValue
@@ -165,7 +170,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - IntegralArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.IntegralArithmetic.init(int:)_]
+    // #documentation(SDGCornerstone.IntegralArithmetic.init(int:))
     /// Creates an instance equal to `int`.
     ///
     /// - Properties:
@@ -183,7 +188,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Negatable
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−=_]
+    // #documentation(SDGCornerstone.Negatable.−=)
     /// Sets the operand to its additive inverse.
     ///
     /// - Parameters:
@@ -194,7 +199,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Numeric
 
-    // [_Inherit Documentation: SDGCornerstone.Numeric.init(exactly:)_]
+    // #documentation(SDGCornerstone.Numeric.init(exactly:))
     /// Creates a new instance from the given integer, if it can be represented exactly.
     @_inlineable public init?<T>(exactly source: T) where T : BinaryInteger {
         if let whole = WholeNumber(exactly: source) {
@@ -210,13 +215,13 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Integer
 
     // MARK: - Subtractable
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+    // #documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -228,7 +233,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - WholeArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(uInt:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
     /// Creates an instance equal to `uInt`.
     ///
     /// - Properties:
@@ -237,7 +242,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         self.init(WholeNumber(uInt))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -252,7 +257,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
     /// Sets `self` to the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -274,7 +279,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:

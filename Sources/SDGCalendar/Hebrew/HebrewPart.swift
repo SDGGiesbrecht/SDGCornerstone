@@ -36,7 +36,7 @@ public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentable
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
     /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).hebrewParts
@@ -44,7 +44,7 @@ public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentable
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
@@ -57,13 +57,13 @@ public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentable
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = FloatMax
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:)_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
@@ -71,11 +71,11 @@ public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentable
         part = unsafeRawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
     /// The valid range for raw values.
     public static let validRange: Range<RawValue>? = 0 ..< FloatMax(HebrewPart.partsPerHour)
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
     /// The raw value.
     public var rawValue: RawValue {
         return part

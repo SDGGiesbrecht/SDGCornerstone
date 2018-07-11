@@ -50,7 +50,7 @@ import SDGCornerstoneLocalizations
     if mean > duration {
         fail(String(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
+            case .englishCanada: // @exempt(from: tests)
                 return StrictString("“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds).")
             }
         }).resolved()), file: file, line: line)

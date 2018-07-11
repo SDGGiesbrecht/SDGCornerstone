@@ -14,6 +14,6 @@
 
 extension ExpressibleByArrayLiteral {
 
-    // [_Define Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
+    // @documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))
     /// Creates an instance from an array literal.
 }

@@ -16,7 +16,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
 
     // MARK: - ComparableSet
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
+    // #documentation(SDGCornerstone.ComparableSet.⊆)
     /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
@@ -26,7 +26,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.isSubset(of: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
+    // #documentation(SDGCornerstone.ComparableSet.⊇)
     /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
@@ -36,7 +36,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.isSuperset(of: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
+    // #documentation(SDGCornerstone.ComparableSet.⊊)
     /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
@@ -46,7 +46,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.isStrictSubset(of: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
+    // #documentation(SDGCornerstone.ComparableSet.⊋)
     /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
@@ -56,7 +56,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.isStrictSuperset(of: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    // #documentation(SDGCornerstone.ComparableSet.overlaps(_:))
     /// Returns `true` if the sets overlap.
     ///
     /// - Parameters:
@@ -67,7 +67,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
 
     // MARK: - MutableSet
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
+    // #documentation(SDGCornerstone.SetDefinition.∩)
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
@@ -77,7 +77,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.intersection(followingValue)
     }
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∩=_]
+    // @documentation(SDGCornerstone.MutableSet.∩=)
     /// Sets `precedingValue` to the intersection of the two sets.
     ///
     /// - Parameters:
@@ -87,7 +87,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         precedingValue.formIntersectionAsSetAlgebra(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
+    // #documentation(SDGCornerstone.SetDefinition.∪)
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
@@ -97,7 +97,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.unionAsSetAlgebra(followingValue)
     }
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∪=_]
+    // @documentation(SDGCornerstone.MutableSet.∪=)
     /// Sets `precedingValue` to the union of the two sets.
     ///
     /// - Parameters:
@@ -107,7 +107,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.formUnionAsSetAlgebra(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
+    // #documentation(SDGCornerstone.SetDefinition.∖)
     /// Returns the relative complement of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
@@ -117,7 +117,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.subtracting(followingValue)
     }
 
-    // [_Define Documentation: SDGCornerstone.MutableSet.∖=_]
+    // @documentation(SDGCornerstone.MutableSet.∖=)
     /// Subtracts `followingValue` from `precedingValue`.
     ///
     /// - Parameters:
@@ -127,7 +127,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         precedingValue.subtract(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
+    // #documentation(SDGCornerstone.SetDefinition.∆)
     /// Returns the symmetric difference of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
@@ -137,7 +137,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
         return precedingValue.symmetricDifferenceAsSetAlgebra(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
+    // #documentation(SDGCornerstone.MutableSet.∆=)
     /// Sets `precedingValue` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
@@ -149,7 +149,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
 
     // MARK: - SetDefinition
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    // #documentation(SDGCornerstone.SetDefinition.∋)
     /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:

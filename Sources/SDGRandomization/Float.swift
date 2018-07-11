@@ -20,7 +20,7 @@ import SDGMathematics
 
 extension FloatFamily {
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
@@ -47,7 +47,7 @@ extension CGFloat : RandomizableNumber {}
 #endif
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 // MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
-// [_Workaround: Probably available in Swift 4.2 (Swift 4.1.2)_]
+// #workaround(Swift 4.1.2, Probably available in Swift 4.2.)
 extension Float80 : RandomizableNumber {}
 #endif
 extension Float : RandomizableNumber {}

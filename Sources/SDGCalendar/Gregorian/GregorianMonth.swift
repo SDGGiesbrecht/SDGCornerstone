@@ -109,19 +109,19 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - CalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
     /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return GregorianYear.meanDuration ÷ FloatMax(GregorianYear.monthsPerYear)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
     /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianMonth.minimumNumberOfDays).days
     }
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
     /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianMonth.maximumNumberOfDays).days
@@ -129,7 +129,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - Decodable
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -140,7 +140,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -151,7 +151,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - ISOCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    // #documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
     /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
         return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
@@ -159,7 +159,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - Month
 
-    // [_Inherit Documentation: SDGCornerstone.Month.inEnglish()_]
+    // #documentation(SDGCornerstone.Month.inEnglish())
     /// Returns the English name.
     public func inEnglish() -> StrictString {
         switch self {
@@ -279,7 +279,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         case .may:
             if πτώση == .γενική {
                 return "Μαΐου"
-            } else { // [_Exempt from Test Coverage_] Unused so far.
+            } else { // @exempt(from: tests) Unused so far.
                 return απλό(όνομα: "Μάι")
             }
         case .june:
@@ -289,7 +289,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         case .august:
             if πτώση == .γενική {
                 return "Αυγούστου"
-            } else { // [_Exempt from Test Coverage_] Unused so far.
+            } else { // @exempt(from: tests) Unused so far.
                 return απλό(όνομα: "Αύγουστ")
             }
         case .september:
@@ -335,13 +335,13 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = RawValue
 
     // MARK: - RawRepresentable
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]
+    // #documentation(SDGCornerstone.RawRepresentable.RawValue)
     /// The raw value type.
     public typealias RawValue = Int
 }

@@ -20,11 +20,11 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    @_inlineable @_versioned internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // [_Exempt from Test Coverage_] False positive in Xcode 9.3.
+    @_inlineable @_versioned internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // @exempt(from: tests) False positive in Xcode 9.3.
         _assert(count == nil ∨ count!.lowerBound.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization {
-            case .englishCanada: // [_Exempt from Test Coverage_]
-                return "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))" // [_Exempt from Test Coverage_]
+            case .englishCanada: // @exempt(from: tests)
+                return "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))" // @exempt(from: tests)
             }
         })
 
@@ -41,7 +41,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         }
     }
 
-    // [_Define Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // @documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -52,7 +52,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -63,7 +63,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -74,7 +74,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -85,7 +85,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -96,7 +96,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.init(abstractPattern: pattern, count: count, consumption: consumption)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -107,7 +107,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -118,7 +118,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.init(abstractPattern: LiteralPattern(pattern), count: count, consumption: consumption)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Repetition.init(of:count:consumption)_]
+    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -147,7 +147,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         }).joined().map({ $0.upperBound }))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Pattern.match(in:at:)_]
+    // #documentation(SDGCornerstone.Pattern.match(in:at:))
     /// Returns the ranges of possible matches beginning at the specified index in the collection.
     ///
     /// The ranges are sorted in order of preference. Ranges can be tried one after another down through the list in the event that some should be disqualified for some external reason, such as being part of a larger composite pattern.
@@ -195,7 +195,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         return cleanUp()
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Pattern.primaryMatch(in:at:)_]
+    // #documentation(SDGCornerstone.Pattern.primaryMatch(in:at:))
     /// Returns the primary match beginning at the specified index in the collection.
     ///
     /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
@@ -230,7 +230,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Pattern.reverse()_]
+    // #documentation(SDGCornerstone.Pattern.reverse())
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.

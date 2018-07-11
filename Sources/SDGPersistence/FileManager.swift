@@ -13,7 +13,7 @@
  */
 
 #if canImport(Glibc)
-// [_Workaround: See move method below. (Swift 4.1.2)_]
+// #workaround(Swift 4.1.2, See move method below.)
 import Glibc
 #endif
 
@@ -27,7 +27,7 @@ extension FileManager {
     // MARK: - Domains
 
     internal static func possibleDebugDomain(_ domain: String) -> String {
-        return BuildConfiguration.current == .debug ? domain + ".debug" : domain // [_Exempt from Test Coverage_]
+        return BuildConfiguration.current == .debug ? domain + ".debug" : domain // @exempt(from: tests)
     }
 
     // MARK: - Recommended File Locations
@@ -59,7 +59,7 @@ extension FileManager {
         let zoneURL = cached(in: &locations[location]) {
 
             #if os(Linux)
-            // [_Workaround: Foundation may do this itself eventually. (Swift 4.1.2)_]
+            // #workaround(Swift 4.1.2, Foundation may do this itself eventually.)
 
             let path: String
             switch location {
@@ -153,7 +153,7 @@ extension FileManager {
         try createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
 
         #if canImport(Glibc)
-        // [_Workaround: Until Linux’ Foundation implements cross‐device moves. (Swift 4.1.2)_]
+        // #workaround(Swift 4.1.2, Until Linux’ Foundation implements cross‐device moves.)
         // See https://github.com/apple/swift-corelibs-foundation/blob/6c54c84c9e8f8e39b7556e5eb68f837cdb8824dc/Foundation/FileManager.swift#L559
 
         if ¬fileExists(atPath: destination.path) {
@@ -199,22 +199,22 @@ extension FileManager {
     public func deepFileEnumeration(in directory: URL) throws -> [URL] {
 
         var failureReason: Error? // Thrown after enumeration stops. (See below.)
-        guard let enumerator = FileManager.default.enumerator(at: directory, includingPropertiesForKeys: [.isDirectoryKey], options: [], errorHandler: { (_, error: Error) -> Bool in // [_Exempt from Test Coverage_] It is unknown what circumstances would actually cause an error.
+        guard let enumerator = FileManager.default.enumerator(at: directory, includingPropertiesForKeys: [.isDirectoryKey], options: [], errorHandler: { (_, error: Error) -> Bool in // @exempt(from: tests) It is unknown what circumstances would actually cause an error.
             failureReason = error
             return false // Stop.
-        }) else { // [_Exempt from Test Coverage_] It is unknown what circumstances would actually result in a `nil` enumerator being returned.
+        }) else { // @exempt(from: tests) It is unknown what circumstances would actually result in a `nil` enumerator being returned.
             throw FileManager.unknownFileReadingError
         }
 
         var result: [URL] = []
         for object in enumerator {
             guard let url = object as? URL else {
-                throw FileManager.unknownFileReadingError // [_Exempt from Test Coverage_] It is unknown why something other than a URL would be returned.
+                throw FileManager.unknownFileReadingError // @exempt(from: tests) It is unknown why something other than a URL would be returned.
             }
 
             let isDirectory: Bool
             #if os(Linux)
-            // [_Workaround: Linux has no implementation for resourcesValues (Swift 4.2)_]
+            // #workaround(Swift 4.1.2, Linux has no implementation for resourcesValues.)
             var objCBool: ObjCBool = false
             isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool) ∧ objCBool.boolValue
             #else
@@ -227,7 +227,7 @@ extension FileManager {
         }
 
         if let error = failureReason {
-            throw error // [_Exempt from Test Coverage_] It is unknown what circumstances would actually cause an error.
+            throw error // @exempt(from: tests) It is unknown what circumstances would actually cause an error.
         }
 
         return result

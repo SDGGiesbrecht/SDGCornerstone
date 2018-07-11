@@ -22,7 +22,7 @@ public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithme
 
     // MARK: - Initialization
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
@@ -43,12 +43,12 @@ extension TextConvertibleNumber {
         do {
             self = try parse()
         } catch let error as TextConvertibleNumberParseError {
-            // [_Exempt from Test Coverage_]
+            // @exempt(from: tests)
             switch error {
             case .invalidDigit(let scalar):
                 preconditionFailure(UserFacing<StrictString, _APILocalization>({ localization in
                     switch localization {
-                    case .englishCanada: // [_Exempt from Test Coverage_]
+                    case .englishCanada: // @exempt(from: tests)
                         return StrictString("\(scalar) is not a valid digit.")
                     }
                 }))
@@ -141,7 +141,7 @@ extension TextConvertibleNumber {
     /// - Throws: `TextConvertibleNumberParseError`
     @_inlineable public init(_ representation: StrictString, base: Int) throws {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacing<StrictString, _APILocalization>({ localization in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return StrictString("Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive.")
             }
@@ -187,14 +187,14 @@ extension TextConvertibleNumber {
             return set.sorted()
         }
         assert(assertNFKD().isEmpty, UserFacing<StrictString, _APILocalization>({ localization in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return StrictString("Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))")
             }
         }))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
@@ -247,7 +247,7 @@ extension TextConvertibleNumber {
 
     // MARK: - ExpressibleByStringLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:)_]
+    // #documentation(SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:))
     /// Creates an instance from a string literal.
     ///
     /// - Parameters:
@@ -260,7 +260,7 @@ extension TextConvertibleNumber {
 extension TextConvertibleNumber where Self : IntegralArithmetic {
     // MARK: - where Self : IntegralArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
@@ -298,7 +298,7 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
 extension TextConvertibleNumber where Self : RationalArithmetic {
     // MARK: - where Self : RationalArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
@@ -360,7 +360,7 @@ public protocol CodableViaTextConvertibleNumber : TextConvertibleNumber {
 
 extension CodableViaTextConvertibleNumber {
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -373,7 +373,7 @@ extension CodableViaTextConvertibleNumber {
 extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
     // MARK: - where Self : IntegerProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -386,7 +386,7 @@ extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
 extension CodableViaTextConvertibleNumber where Self : WholeNumberProtocol {
     // MARK: - where Self : WholeNumberProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:

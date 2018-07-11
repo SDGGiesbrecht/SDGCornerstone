@@ -49,7 +49,7 @@ import SDGCalendar
 
         let newSpecification = encoded
         if newSpecification ∉ specifications {
-            // [_Exempt from Test Coverage_]
+            // @exempt(from: tests)
             let now = CalendarDate.gregorianNow()
             try newSpecification.save(to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).testspec"))
         }

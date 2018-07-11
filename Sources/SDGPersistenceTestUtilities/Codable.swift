@@ -43,7 +43,7 @@ import SDGCornerstoneLocalizations
                 guard let decoded = array.first else {
                     fail(String(UserFacing<StrictString, APILocalization>({ localization in
                         switch localization {
-                        case .englishCanada: // [_Exempt from Test Coverage_]
+                        case .englishCanada: // @exempt(from: tests)
                             return StrictString("Empty array decoded from “\(specificationURL)”.")
                         }
                     }).resolved()), file: file, line: line)
@@ -55,7 +55,7 @@ import SDGCornerstoneLocalizations
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted]
-        if #available(OSX 10.13, iOS 11, watchOS 4, tvOS 11, *) { // [_Exempt from Test Coverage_]
+        if #available(OSX 10.13, iOS 11, watchOS 4, tvOS 11, *) { // @exempt(from: tests)
             encoder.outputFormatting.insert(.sortedKeys)
         }
         let encoded = try encoder.encode([instance])
@@ -65,7 +65,7 @@ import SDGCornerstoneLocalizations
 
         let newSpecification = try String(file: encoded, origin: nil)
         if newSpecification ∉ specifications {
-            // [_Exempt from Test Coverage_]
+            // @exempt(from: tests)
             let now = CalendarDate.gregorianNow()
             try newSpecification.save(to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt"))
         }
@@ -87,7 +87,7 @@ import SDGCornerstoneLocalizations
         let encoded = try JSONEncoder().encode([invalidMock])
         let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
         fail(String(UserFacing<StrictString, APILocalization>({ localization in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return StrictString("No error thrown. Decoded: \(decoded)")
             }

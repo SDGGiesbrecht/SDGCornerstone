@@ -16,7 +16,7 @@ import Foundation
 
 import SDGCornerstoneLocalizations
 
-// [_Example 1: DateDefinition_]
+// #example(1, dateDefinition)
 /// A type that provides a definition for a `CalendarDate`.
 ///
 /// ```swift
@@ -74,23 +74,23 @@ public protocol DateDefinition : Codable {
 
     // MARK: - Static Properties
 
-    // [_Define Documentation: SDGCornerstone.DateDefinition.identifier_]
+    // @documentation(SDGCornerstone.DateDefinition.identifier)
     /// A string that uniquely identifies the type for encoding and decoding.
     static var identifier: StrictString { get }
 
-    // [_Define Documentation: SDGCornerstone.DateDefinition.referenceDate_]
+    // @documentation(SDGCornerstone.DateDefinition.referenceDate)
     /// The reference date for the type.
     static var referenceDate: CalendarDate { get }
 
     // MARK: - Initialization
 
-    // [_Define Documentation: SDGCornerstone.DateDefinition.init(intervalSinceReferenceDate:)_]
+    // @documentation(SDGCornerstone.DateDefinition.init(intervalSinceReferenceDate:))
     /// Creates a date from an interval since the reference date.
     init(intervalSinceReferenceDate: CalendarInterval<FloatMax>)
 
     // MARK: - Properties
 
-    // [_Define Documentation: SDGCornerstone.DateDefinition.intervalSinceReferenceDate_]
+    // @documentation(SDGCornerstone.DateDefinition.intervalSinceReferenceDate)
     /// The interval since the reference date.
     var intervalSinceReferenceDate: CalendarInterval<FloatMax> { get }
 

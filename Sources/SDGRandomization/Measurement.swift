@@ -14,11 +14,11 @@
 
 import SDGMathematics
 
-// [_Workaround: In Swift 4.1, this can be just “extension Measurement {” (Swift 4.1.2)_]
+// #workaround(Swift 4.1.2, In Swift 4.1, this can be just “extension Measurement {”.)
 extension Measurement where Scalar : RandomizableNumber {
     // MARK: - where Scalar : RandomizableNumber
 
-    // [_Define Documentation: SDGCornerstone.Measurement.init(randomInRange:)_]
+    // @documentation(SDGCornerstone.Measurement.init(randomInRange:))
     /// Creates a random value within a particular range.
     ///
     /// - Precondition: `range` is not empty.
@@ -29,7 +29,7 @@ extension Measurement where Scalar : RandomizableNumber {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.init(randomInRange:)_]
+    // #documentation(SDGCornerstone.Measurement.init(randomInRange:))
     /// Creates a random value within a particular range.
     ///
     /// - Precondition: `range` is not empty.
@@ -40,7 +40,7 @@ extension Measurement where Scalar : RandomizableNumber {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
-    // [_Define Documentation: SDGCornerstone.Measurement.init(randomInRange:fromRandomizer:)_]
+    // @documentation(SDGCornerstone.Measurement.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Precondition: `range` is not empty.
@@ -53,7 +53,7 @@ extension Measurement where Scalar : RandomizableNumber {
         self.init(rawValue: scalar)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.init(randomInRange:fromRandomizer:)_]
+    // #documentation(SDGCornerstone.Measurement.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Precondition: `range` is not empty.

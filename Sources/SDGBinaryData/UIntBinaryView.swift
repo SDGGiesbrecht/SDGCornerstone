@@ -26,19 +26,19 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - Static Properties
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+    // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
     @_inlineable public static var startIndex: Index {
         return 0
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+    // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
     @_inlineable public static var endIndex: Index {
         return Index(count)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.count_]
+    // #documentation(SDGCornerstone.Collection.count)
     /// The number of elements in the collection.
     @_inlineable public static var count: Int {
         let bytes = MemoryLayout<UIntValue>.size
@@ -51,7 +51,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - BidirectionalCollection
 
-    // [_Inherit Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+    // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
     /// Returns the index immediately before the specified index.
     ///
     /// - Parameters:
@@ -67,29 +67,29 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - Collection
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.Element_]
+    // #documentation(SDGCornerstone.Collection.Element)
     /// The type of the elements of the collection.
     public typealias Element = Bool
-    // [_Inherit Documentation: SDGCornerstone.Collection.Index_]
+    // #documentation(SDGCornerstone.Collection.Index)
     /// The type of the indices of the collection.
     public typealias Index = UIntValue
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.Indices_]
+    // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultRandomAccessIndices<BinaryView>
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+    // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
     @_inlineable public var startIndex: Index {
         return BinaryView.startIndex
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+    // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
     @_inlineable public var endIndex: Index {
         return BinaryView.endIndex
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+    // #documentation(SDGCornerstone.Collection.index(after:))
     /// Returns the index immediately after the specified index.
     ///
     /// - Parameters:
@@ -105,14 +105,14 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     @_inlineable @_versioned internal func assertIndexExists(_ index: Index) {
         _assert(index ∈ bounds, { (localization: _APILocalization) in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "Index out of bounds."
             }
         })
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+    // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
     @_inlineable public subscript(index: Index) -> Element {
         @_specialize(exported: true, where UIntValue == UInt)
@@ -138,7 +138,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         let bits = self.map { bit in

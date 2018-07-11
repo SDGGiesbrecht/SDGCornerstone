@@ -25,11 +25,11 @@ import SDGControlFlow
 /// - `static func − (precedingValue: Self, followingValue: Self) -> Vector`
 public protocol PointProtocol : Codable, Equatable {
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // @documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     associatedtype Vector : Negatable
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.+_]
+    // @documentation(SDGCornerstone.PointProtocol.+)
     /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
@@ -37,7 +37,7 @@ public protocol PointProtocol : Codable, Equatable {
     ///     - followingValue: The vector to add.
     static func + (precedingValue: Self, followingValue: Vector) -> Self
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.+=_]
+    // @documentation(SDGCornerstone.PointProtocol.+=)
     /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
@@ -45,7 +45,7 @@ public protocol PointProtocol : Codable, Equatable {
     ///     - followingValue: The vector to add.
     static func += (precedingValue: inout Self, followingValue: Vector)
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
+    // @documentation(SDGCornerstone.PointProtocol.−(_:vector:))
     /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
     ///
     /// - Parameters:
@@ -53,7 +53,7 @@ public protocol PointProtocol : Codable, Equatable {
     ///     - followingValue: The vector to subtract.
     static func − (precedingValue: Self, followingValue: Vector) -> Self
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.−_]
+    // @documentation(SDGCornerstone.PointProtocol.−)
     /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
@@ -61,7 +61,7 @@ public protocol PointProtocol : Codable, Equatable {
     ///     - followingValue: The startpoint.
     static func − (precedingValue: Self, followingValue: Self) -> Vector
 
-    // [_Define Documentation: SDGCornerstone.PointProtocol.−=_]
+    // @documentation(SDGCornerstone.PointProtocol.−=)
     /// Moves the preceding point by the inverse of the following vector.
     ///
     /// - Parameters:
@@ -72,7 +72,7 @@ public protocol PointProtocol : Codable, Equatable {
 
 extension PointProtocol {
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
+    // #documentation(SDGCornerstone.PointProtocol.+)
     /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
@@ -82,7 +82,7 @@ extension PointProtocol {
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
+    // #documentation(SDGCornerstone.PointProtocol.−(_:vector:))
     /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
     ///
     /// - Parameters:
@@ -92,7 +92,7 @@ extension PointProtocol {
         return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−=_]
+    // #documentation(SDGCornerstone.PointProtocol.−=)
     /// Moves the preceding point by the inverse of the following vector.
     ///
     /// - Parameters:
@@ -108,7 +108,7 @@ extension PointProtocol where Self.Vector == Self {
 
     // This also covers all clashes with Addable and Subtractable, since Vector is must conform to them via Negatable.
 
-    // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+_]
+    // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.
     ///
     /// - Parameters:
@@ -119,7 +119,7 @@ extension PointProtocol where Self.Vector == Self {
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−(_:vector:)_]
+    // #documentation(SDGCornerstone.PointProtocol.−(_:vector:))
     /// Returns the point arrived at by starting at the preceding point and moving according to the inverse of the following vector.
     ///
     /// - Parameters:
@@ -134,7 +134,7 @@ extension PointProtocol where Self.Vector == Self {
 extension PointProtocol where Self : Strideable {
     // MARK: - where Self : Strideable
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
+    // #documentation(SDGCornerstone.PointProtocol.+)
     /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
@@ -149,7 +149,7 @@ extension PointProtocol where Self : Strideable {
 extension PointProtocol where Self : Strideable, Self.Stride == Self.Vector {
     // MARK: - where Self : Strideable, Self.Stride == Self.Vector
 
-    // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+_]
+    // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.
     ///
     /// - Parameters:
@@ -164,7 +164,7 @@ extension PointProtocol where Self : Strideable, Self.Stride == Self.Vector {
 extension PointProtocol where Self.Vector == Self, Self : Strideable, Self.Stride == Self.Vector {
     // MARK: - where Self.Vector == Self, Self : Strideable, Self.Stride == Self.Vector
 
-    // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+_]
+    // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.
     ///
     /// - Parameters:

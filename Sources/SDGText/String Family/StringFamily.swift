@@ -17,48 +17,48 @@ public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByString
 
     // MARK: - Associated Types
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.ScalarView_]
+    // @documentation(SDGCornerstone.StringFamily.ScalarView)
     /// A view of a string’s contents as a collection of Unicode scalars.
     associatedtype ScalarView : UnicodeScalarView
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.ClusterView_]
+    // @documentation(SDGCornerstone.StringFamily.ClusterView)
     /// A view of a string’s contents as a collection of extended grapheme clusters.
     associatedtype ClusterView : ExtendedGraphemeClusterView
 
     // MARK: - Initialization
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.init(scalars:)_]
+    // @documentation(SDGCornerstone.StringFamily.init(scalars:))
     /// Creates an empty string.
     init()
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.init(scalars:)_]
+    // @documentation(SDGCornerstone.StringFamily.init(scalars:))
     /// Creates a string from a collection of scalars.
     init(_ scalars: ScalarView)
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.init(clusters:)_]
+    // @documentation(SDGCornerstone.StringFamily.init(clusters:))
     /// Creates a string from a collection of clusters.
     init(_ clusters: ClusterView)
 
     // MARK: - Properties
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.scalars_]
+    // @documentation(SDGCornerstone.StringFamily.scalars)
     /// A view of a string’s contents as a collection of Unicode scalars.
     var scalars: ScalarView { get set }
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.clusters_]
+    // @documentation(SDGCornerstone.StringFamily.clusters)
     /// A view of a string’s contents as a collection of extended grapheme clusters.
     var clusters: ClusterView { get set }
 }
 
 extension StringFamily {
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.init(lines:)_]
+    // @documentation(SDGCornerstone.StringFamily.init(lines:))
     /// Creates a string from a collection of lines.
     @_inlineable public init(_ lines: LineView<Self>) {
         self = lines.base
     }
 
-    // [_Define Documentation: SDGCornerstone.StringFamily.lines_]
+    // @documentation(SDGCornerstone.StringFamily.lines)
     /// A view of a string’s contents as a collection of lines.
     @_inlineable public var lines: LineView<Self> {
         get {
@@ -69,7 +69,7 @@ extension StringFamily {
         }
     }
 
-    // [_Define Documentation: SDGCornerstone.String.isMultiline_]
+    // @documentation(SDGCornerstone.String.isMultiline)
     /// Whether or not the string contains multiple lines.
     @_inlineable public var isMultiline: Bool {
         return scalars.isMultiline

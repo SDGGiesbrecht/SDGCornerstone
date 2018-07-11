@@ -16,7 +16,7 @@ import SDGControlFlow
 
 extension StrictString {
 
-    // [_Inherit Documentation: SDGCornerstone.StringFamily.ClusterView_]
+    // #documentation(SDGCornerstone.StringFamily.ClusterView)
     /// A view of a string’s contents as a collection of extended grapheme clusters.
     public struct ClusterView : BidirectionalCollection, Collection, ExtendedGraphemeClusterView, RangeReplaceableCollection, TransparentWrapper {
 
@@ -55,7 +55,7 @@ extension StrictString {
 
         // MARK: - BidirectionalCollection
 
-        // [_Inherit Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+        // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
         /// Returns the index immediately before the specified index.
         ///
         /// - Parameters:
@@ -66,19 +66,19 @@ extension StrictString {
 
         // MARK: - Collection
 
-        // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+        // #documentation(SDGCornerstone.Collection.startIndex)
         /// The position of the first element in a non‐empty collection.
         @_inlineable public var startIndex: String.ClusterView.Index {
             return string.string.clusters.startIndex
         }
 
-        // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+        // #documentation(SDGCornerstone.Collection.endIndex)
         /// The position following the last valid index.
         @_inlineable public var endIndex: String.ClusterView.Index {
             return string.string.clusters.endIndex
         }
 
-        // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+        // #documentation(SDGCornerstone.Collection.index(after:))
         /// Returns the index immediately after the specified index.
         ///
         /// - Parameters:
@@ -87,7 +87,7 @@ extension StrictString {
             return string.string.clusters.index(after: i)
         }
 
-        // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+        // #documentation(SDGCornerstone.Collection.subscript(position:))
         /// Accesses the element at the specified position.
         @_inlineable public subscript(position: String.ClusterView.Index) -> ExtendedGraphemeCluster {
             return string.string.clusters[position]
@@ -95,31 +95,31 @@ extension StrictString {
 
         // MARK: - RangeReplaceableCollection
 
-        // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
+        // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
         /// Creates a new, empty collection.
         @_inlineable public init() {
             string = StrictString()
         }
 
-        // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
+        // #documentation(SDGCornerstone.RangeReplaceableCollection.init(_:))
         /// Creates a new instance of a collection containing the elements of a sequence.
         @_inlineable public init<S : Sequence>(_ elements: S) where S.Element == Element {
             self = ClusterView.normalize(elements)
         }
 
-        // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+        // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
         /// Appends the contents of the sequence to the end of the collection.
         @_inlineable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == ExtendedGraphemeCluster {
             self = (StrictString(self) + StrictString(ClusterView.normalize(newElements))).clusters
         }
 
-        // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+        // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
         /// Inserts the contents of the sequence to the specified index.
         @_inlineable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ClusterView.Index) where S.Element == ExtendedGraphemeCluster {
             replaceSubrange(i ..< i, with: newElements)
         }
 
-        // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
+        // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
         /// Replaces the specified subrange of elements with the given collection.
         @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ClusterView.Index>, with newElements: S) where S.Element == ExtendedGraphemeCluster {
 
@@ -132,7 +132,7 @@ extension StrictString {
 
         // MARK: - TransparentWrapper
 
-        // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+        // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
         /// The wrapped instance.
         public var wrappedInstance: Any {
             return string

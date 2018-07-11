@@ -25,7 +25,7 @@ public struct NilLiteral : ExpressibleByNilLiteral {
 
     // MARK: - Equality
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+    // #documentation(SDGCornerstone.Equatable.≠)
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:

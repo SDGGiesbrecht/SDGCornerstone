@@ -256,19 +256,19 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - CalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.meanDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
     /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return lengthOfMoon
     }
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.minimumDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
     /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(HebrewMonth.minimumNumberOfDays).days
     }
 
-    // [_Inherit Documentation: SDGCornerstone.CalendarComponent.maximumDuration_]
+    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
     /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(HebrewMonth.maximumNumberOfDays).days
@@ -276,7 +276,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Parallel to ConsistentlyOrderedCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
     /// Creates a component from the number of complete components already elapsed.
     ///
     /// - Precondition: The number must be valid for the particular compenent.
@@ -287,7 +287,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         self.init(ordinal: numberAlreadyElapsed + 1, leapYear: leapYear)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
     /// Creates a component from the number of complete components already elapsed.
     ///
     /// - Precondition: The number must be valid for the particular compenent.
@@ -328,7 +328,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
             guard let result = HebrewMonth(rawValue: ordinal + offset) else {
                 preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                     switch localization {
-                    case .englishCanada: // [_Exempt from Test Coverage_]
+                    case .englishCanada: // @exempt(from: tests)
                         return StrictString("Invalid month ordinal: \(ordinal.inDigits())")
                     }
                 }))
@@ -337,7 +337,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
     public func numberAlreadyElapsed(leapYear: Bool) -> Int? {
         guard let theOrdinal = ordinal(leapYear: leapYear) else {
@@ -346,7 +346,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         return theOrdinal − 1
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
     public func ordinal(leapYear: Bool) -> Int? {
         var offset = 1
@@ -383,7 +383,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Decodable
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -412,7 +412,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -432,7 +432,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Month
 
-    // [_Inherit Documentation: SDGCornerstone.Month.inEnglish()_]
+    // #documentation(SDGCornerstone.Month.inEnglish())
     /// Returns the English name.
     public func inEnglish() -> StrictString {
         switch self {
@@ -605,7 +605,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - RawRepresentable
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentable.RawValue_]
+    // #documentation(SDGCornerstone.RawRepresentable.RawValue)
     /// The raw value type.
     public typealias RawValue = Int
 }

@@ -18,7 +18,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
     // MARK: - ComparableSet
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
+    // #documentation(SDGCornerstone.ComparableSet.⊆)
     /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
@@ -28,7 +28,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.isSubset(of: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
+    // #documentation(SDGCornerstone.ComparableSet.⊇)
     /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
@@ -38,7 +38,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.isSuperset(of: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
+    // #documentation(SDGCornerstone.ComparableSet.⊊)
     /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
@@ -48,7 +48,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.isStrictSubset(of: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
+    // #documentation(SDGCornerstone.ComparableSet.⊋)
     /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
@@ -58,7 +58,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.isStrictSuperset(of: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    // #documentation(SDGCornerstone.ComparableSet.overlaps(_:))
     /// Returns `true` if the sets overlap.
     ///
     /// - Parameters:
@@ -69,7 +69,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
     // MARK: - MutableSet
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∩_]
+    // #documentation(SDGCornerstone.SetDefinition.∩)
     /// Returns the intersection of the two sets.
     ///
     /// - Parameters:
@@ -79,7 +79,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.intersection(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.MutableSet.∩=_]
+    // #documentation(SDGCornerstone.MutableSet.∩=)
     /// Sets `precedingValue` to the intersection of the two sets.
     ///
     /// - Parameters:
@@ -89,7 +89,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         precedingValue.formIntersection(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∪_]
+    // #documentation(SDGCornerstone.SetDefinition.∪)
     /// Returns the union of the two sets.
     ///
     /// - Parameters:
@@ -99,7 +99,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.union(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.MutableSet.∪=_]
+    // #documentation(SDGCornerstone.MutableSet.∪=)
     /// Sets `precedingValue` to the union of the two sets.
     ///
     /// - Parameters:
@@ -109,7 +109,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.formUnion(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∖_]
+    // #documentation(SDGCornerstone.SetDefinition.∖)
     /// Returns the relative complement of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
@@ -119,7 +119,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.subtracting(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.MutableSet.∖=_]
+    // #documentation(SDGCornerstone.MutableSet.∖=)
     /// Subtracts `followingValue` from `precedingValue`.
     ///
     /// - Parameters:
@@ -129,7 +129,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         precedingValue.subtract(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∆_]
+    // #documentation(SDGCornerstone.SetDefinition.∆)
     /// Returns the symmetric difference of `followingValue` in `precedingValue`.
     ///
     /// - Parameters:
@@ -139,7 +139,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return precedingValue.symmetricDifference(followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.MutableSet.∆=_]
+    // #documentation(SDGCornerstone.MutableSet.∆=)
     /// Sets `precedingValue` to the symmetric difference of the two sets.
     ///
     /// - Parameters:
@@ -151,7 +151,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
     // MARK: - SetDefinition
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    // #documentation(SDGCornerstone.SetDefinition.∋)
     /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
@@ -165,7 +165,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
     public static let universe = CharacterSet().inverted
 
-    // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′_]
+    // #documentation(SDGCornerstone.RepresentableUniverse.′)
     /// Returns the absolute complement of the set.
     ///
     /// - Parameters:
@@ -174,7 +174,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
         return operand.inverted
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RepresentableUniverse.′=_]
+    // #documentation(SDGCornerstone.RepresentableUniverse.′=)
     /// Sets the operand to its absolute complement.
     ///
     /// - Parameters:

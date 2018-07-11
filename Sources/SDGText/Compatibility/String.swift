@@ -29,7 +29,7 @@ extension String : StringFamily {
     /// A view of a string’s contents as a collection of extended grapheme clusters.
     public typealias ClusterView = String
 
-    // [_Inherit Documentation: SDGCornerstone.StringFamily.scalars_]
+    // #documentation(SDGCornerstone.StringFamily.scalars)
     /// A view of a string’s contents as a collection of Unicode scalars.
     @_inlineable public var scalars: ScalarView {
         get {
@@ -40,7 +40,7 @@ extension String : StringFamily {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.StringFamily.clusters_]
+    // #documentation(SDGCornerstone.StringFamily.clusters)
     /// A view of a string’s contents as a collection of extended grapheme clusters.
     @_inlineable public var clusters: ClusterView {
         get {

@@ -26,21 +26,21 @@ import SDGMathematics
 public protocol SearchableCollection : Collection
 where Element : Equatable, SubSequence : SearchableCollection {
 
-    // [_Define Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    // @documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search.
     func firstMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>) -> PatternMatch<Self>?
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search.
     func firstMatch<C : SearchableCollection>(for pattern: C, in searchRange: Range<Index>) -> PatternMatch<Self>? where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
@@ -48,7 +48,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     ///     - searchRange: A subrange to search.
     func firstMatch(for pattern: Self, in searchRange: Range<Index>) -> PatternMatch<Self>?
 
-    // [_Define Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    // @documentation(SDGCornerstone.Collection.matches(for:in:))
     /// Returns a list of all matches for `pattern` in the specified subrange.
     ///
     /// This does not check for overlapping matches.
@@ -57,7 +57,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search.
     func matches(for pattern: Pattern<Element>, in searchRange: Range<Index>) -> [PatternMatch<Self>]
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:in:))
     /// Returns a list of all matches for `pattern` in the specified subrange.
     ///
     /// This does not check for overlapping matches.
@@ -66,7 +66,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search.
     func matches<C : SearchableCollection>(for pattern: C, in searchRange: Range<Index>) -> [PatternMatch<Self>] where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:in:))
     /// Returns a list of all matches for `pattern` in the specified subrange.
     ///
     /// This does not check for overlapping matches.
@@ -76,76 +76,76 @@ where Element : Equatable, SubSequence : SearchableCollection {
     ///     - searchRange: A subrange to search.
     func matches(for pattern: Self, in searchRange: Range<Index>) -> [PatternMatch<Self>]
 
-    // [_Define Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    // @documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func prefix(upTo pattern: Pattern<Element>) -> PatternMatch<Self>?
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func prefix<C : SearchableCollection>(upTo pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func prefix(upTo pattern: Self) -> PatternMatch<Self>?
 
-    // [_Define Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    // @documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func prefix(through pattern: Pattern<Element>) -> PatternMatch<Self>?
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func prefix<C : SearchableCollection>(through pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func prefix(through pattern: Self) -> PatternMatch<Self>?
 
-    // [_Define Documentation: SDGCornerstone.Collection.suffix(from:)_]
+    // @documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func suffix(from pattern: Pattern<Element>) -> PatternMatch<Self>?
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func suffix<C : SearchableCollection>(from pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func suffix(from pattern: Self) -> PatternMatch<Self>?
 
-    // [_Define Documentation: SDGCornerstone.Collection.suffix(after:)_]
+    // @documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func suffix(after pattern: Pattern<Element>) -> PatternMatch<Self>?
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func suffix<C : SearchableCollection>(after pattern: C) -> PatternMatch<Self>? where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -159,78 +159,78 @@ where Element : Equatable, SubSequence : SearchableCollection {
     /// - Precondition: The provided ranges must be sorted and not overlap.
     func ranges(separatedBy separators: [Range<Index>]) -> [Range<Index>]
 
-    // [_Define Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    // @documentation(SDGCornerstone.Collection.components(separatedBy:))
     /// Returns the segments of `self` separated by instances of `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func components(separatedBy pattern: Pattern<Element>) -> [PatternMatch<Self>]
-    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    // #documentation(SDGCornerstone.Collection.components(separatedBy:))
     /// Returns the segments of `self` separated by instances of `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func components<C : SearchableCollection>(separatedBy pattern: C) -> [PatternMatch<Self>] where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    // #documentation(SDGCornerstone.Collection.components(separatedBy:))
     /// Returns the segments of `self` separated by instances of `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func components(separatedBy pattern: Self) -> [PatternMatch<Self>]
 
-    // [_Define Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    // @documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func contains(_ pattern: Pattern<Element>) -> Bool
-    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    // #documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func contains<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    // #documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     func contains(_ pattern: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    // @documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
     func hasPrefix(_ pattern: Pattern<Element>) -> Bool
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
     func hasPrefix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
     func hasPrefix(_ pattern: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    // @documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
     ///     - other: The other collection
     func commonPrefix<C : SearchableCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
     ///     - other: The other collection
     func commonPrefix(with other: Self) -> PatternMatch<Self>
 
-    // [_Define Documentation: SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:)_]
-    // [_Example 1: Nesting Level_]
+    // @documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:))
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -243,7 +243,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
     func firstNestingLevel<C : SearchableCollection, D : SearchableCollection>(startingWith openingToken: C, endingWith closingToken: D, in searchRange: Range<Index>) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:))
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -255,7 +255,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    // [_Example 1: Nesting Level_]
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -269,7 +269,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     /// ```
     func firstNestingLevel(startingWith openingToken: Self, endingWith closingToken: Self, in searchRange: Range<Index>) -> NestingLevel<Self>?
 
-    // [_Define Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    // @documentation(SDGCornerstone.Collection.advance(_: over:))
     /// Advances the index over the pattern.
     ///
     /// - Parameters:
@@ -278,7 +278,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @discardableResult func advance(_ index: inout Index, over pattern: Pattern<Element>) -> Bool
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    // #documentation(SDGCornerstone.Collection.advance(_: over:))
     /// Advances the index over the pattern.
     ///
     /// - Parameters:
@@ -287,7 +287,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @discardableResult func advance<C : SearchableCollection>(_ index: inout Index, over pattern: C) -> Bool where C.Element == Self.Element
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    // #documentation(SDGCornerstone.Collection.advance(_: over:))
     /// Advances the index over the pattern.
     ///
     /// - Parameters:
@@ -297,7 +297,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @discardableResult func advance(_ index: inout Index, over pattern: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.Collection.difference(from:)_]
+    // @documentation(SDGCornerstone.Collection.difference(from:))
     /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
     ///
     /// - Parameters:
@@ -329,7 +329,7 @@ extension SearchableCollection {
         return location ..< collectionIndex
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
@@ -346,7 +346,7 @@ extension SearchableCollection {
         return nil
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
@@ -366,7 +366,7 @@ extension SearchableCollection {
         }
         return nil
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
@@ -376,7 +376,7 @@ extension SearchableCollection {
         return _firstMatch(for: pattern, in: searchRange)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
     /// - Parameters:
@@ -386,7 +386,7 @@ extension SearchableCollection {
         return _firstMatch(for: pattern, in: searchRange)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.firstMatch(for:)_]
+    // @documentation(SDGCornerstone.Collection.firstMatch(for:))
     /// Returns the first match for `pattern` in the entire collection.
     ///
     /// - Parameters:
@@ -395,7 +395,7 @@ extension SearchableCollection {
         return firstMatch(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:))
     /// Returns the first match for `pattern` in the entire collection.
     ///
     /// - Parameters:
@@ -404,7 +404,7 @@ extension SearchableCollection {
         return firstMatch(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:))
     /// Returns the first match for `pattern` in the entire collection.
     ///
     /// - Parameters:
@@ -413,7 +413,7 @@ extension SearchableCollection {
         return firstMatch(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstMatch(for:)_]
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:))
     /// Returns the first match for `pattern` in the entire collection.
     ///
     /// - Parameters:
@@ -422,7 +422,7 @@ extension SearchableCollection {
         return firstMatch(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:in:))
     /// Returns a list of all matches for `pattern` in the specified subrange.
     ///
     /// This does not check for overlapping matches.
@@ -440,7 +440,7 @@ extension SearchableCollection {
         return results
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:in:))
     /// Returns a list of all matches for `pattern` in the specified subrange.
     ///
     /// This does not check for overlapping matches.
@@ -461,7 +461,7 @@ extension SearchableCollection {
         }
         return results
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:in:))
     /// Returns a list of all matches for `pattern` in the specified subrange.
     ///
     /// This does not check for overlapping matches.
@@ -473,7 +473,7 @@ extension SearchableCollection {
         return _matches(for: pattern, in: searchRange)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:in:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:in:))
     /// Returns a list of all matches for `pattern` in the specified subrange.
     ///
     /// This does not check for overlapping matches.
@@ -485,7 +485,7 @@ extension SearchableCollection {
         return _matches(for: pattern, in: searchRange)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.matches(for:)_]
+    // @documentation(SDGCornerstone.Collection.matches(for:))
     /// Returns a list of all matches for `pattern` in the entire collection.
     ///
     /// This does not check for overlapping matches.
@@ -496,7 +496,7 @@ extension SearchableCollection {
         return matches(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:))
     /// Returns a list of all matches for `pattern` in the entire collection.
     ///
     /// This does not check for overlapping matches.
@@ -507,7 +507,7 @@ extension SearchableCollection {
         return matches(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:))
     /// Returns a list of all matches for `pattern` in the entire collection.
     ///
     /// This does not check for overlapping matches.
@@ -518,7 +518,7 @@ extension SearchableCollection {
         return matches(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.matches(for:)_]
+    // #documentation(SDGCornerstone.Collection.matches(for:))
     /// Returns a list of all matches for `pattern` in the entire collection.
     ///
     /// This does not check for overlapping matches.
@@ -529,7 +529,7 @@ extension SearchableCollection {
         return matches(for: pattern, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -541,7 +541,7 @@ extension SearchableCollection {
         return PatternMatch(range: startIndex ..< match.range.lowerBound, in: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -556,7 +556,7 @@ extension SearchableCollection {
         }
         return PatternMatch(range: startIndex ..< match.range.lowerBound, in: self)
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -565,7 +565,7 @@ extension SearchableCollection {
         return _prefix(upTo: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -574,7 +574,7 @@ extension SearchableCollection {
         return _prefix(upTo: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -586,7 +586,7 @@ extension SearchableCollection {
         return PatternMatch(range: startIndex ..< match.range.upperBound, in: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -601,7 +601,7 @@ extension SearchableCollection {
         }
         return PatternMatch(range: startIndex ..< match.range.upperBound, in: self)
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -610,7 +610,7 @@ extension SearchableCollection {
         return _prefix(through: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.prefix(through:)_]
+    // #documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -619,7 +619,7 @@ extension SearchableCollection {
         return _prefix(through: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -631,7 +631,7 @@ extension SearchableCollection {
         return PatternMatch(range: match.range.lowerBound ..< endIndex, in: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -646,7 +646,7 @@ extension SearchableCollection {
         }
         return PatternMatch(range: match.range.lowerBound ..< endIndex, in: self)
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -655,7 +655,7 @@ extension SearchableCollection {
         return _suffix(from: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(from:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -664,7 +664,7 @@ extension SearchableCollection {
         return _suffix(from: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -676,7 +676,7 @@ extension SearchableCollection {
         return PatternMatch(range: match.range.upperBound ..< endIndex, in: self)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -691,7 +691,7 @@ extension SearchableCollection {
         }
         return PatternMatch(range: match.range.upperBound ..< endIndex, in: self)
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -700,7 +700,7 @@ extension SearchableCollection {
         return _suffix(after: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.suffix(after:)_]
+    // #documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
     ///
     /// - Parameters:
@@ -721,7 +721,7 @@ extension SearchableCollection {
         return zip(startIndices, endIndices).map({ $0 ..< $1 })
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    // #documentation(SDGCornerstone.Collection.components(separatedBy:))
     /// Returns the segments of `self` separated by instances of `pattern`.
     ///
     /// - Parameters:
@@ -731,7 +731,7 @@ extension SearchableCollection {
         return ranges(separatedBy: separators).map({ PatternMatch(range: $0, in: self) })
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    // #documentation(SDGCornerstone.Collection.components(separatedBy:))
     /// Returns the segments of `self` separated by instances of `pattern`.
     ///
     /// - Parameters:
@@ -744,7 +744,7 @@ extension SearchableCollection {
         let separators = matches(for: pattern).map { $0.range }
         return ranges(separatedBy: separators).map({ PatternMatch(range: $0, in: self) })
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    // #documentation(SDGCornerstone.Collection.components(separatedBy:))
     /// Returns the segments of `self` separated by instances of `pattern`.
     ///
     /// - Parameters:
@@ -753,7 +753,7 @@ extension SearchableCollection {
         return _components(separatedBy: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.components(separatedBy:)_]
+    // #documentation(SDGCornerstone.Collection.components(separatedBy:))
     /// Returns the segments of `self` separated by instances of `pattern`.
     ///
     /// - Parameters:
@@ -762,7 +762,7 @@ extension SearchableCollection {
         return _components(separatedBy: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    // #documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
     /// - Parameters:
@@ -771,7 +771,7 @@ extension SearchableCollection {
         return firstMatch(for: pattern) ≠ nil
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    // #documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
     /// - Parameters:
@@ -783,7 +783,7 @@ extension SearchableCollection {
     @_inlineable @_versioned internal func _contains<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return firstMatch(for: pattern) ≠ nil
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    // #documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
     /// - Parameters:
@@ -792,7 +792,7 @@ extension SearchableCollection {
         return _contains(pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.contains(pattern:)_]
+    // #documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
     ///
     /// - Parameters:
@@ -801,7 +801,7 @@ extension SearchableCollection {
         return _contains(pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -810,7 +810,7 @@ extension SearchableCollection {
         return pattern.primaryMatch(in: self, at: startIndex, limitedTo: endIndex) ≠ nil
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -822,7 +822,7 @@ extension SearchableCollection {
     @_inlineable @_versioned internal func _hasPrefix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
         return pattern.primaryMatch(in: self, at: startIndex, limitedTo: endIndex) ≠ nil
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -831,7 +831,7 @@ extension SearchableCollection {
         return _hasPrefix(pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.hasPrefix(_:)_]
+    // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
     /// - Parameters:
@@ -851,7 +851,7 @@ extension SearchableCollection {
         }
         return PatternMatch(range: startIndex ..< end, in: self)
     }
-    // [_Define Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    // @documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
@@ -860,7 +860,7 @@ extension SearchableCollection {
         return _commonPrefix(with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.commonPrefix(with:)_]
+    // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
     /// - Parameters:
@@ -897,7 +897,7 @@ extension SearchableCollection {
         // No more hits, level never closed.
         return nil
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:))
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -909,7 +909,7 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    // [_Example 1: Nesting Level_]
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -925,7 +925,7 @@ extension SearchableCollection {
         return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: searchRange)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:)_]
+    // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:in:))
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -937,7 +937,7 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    // [_Example 1: Nesting Level_]
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -953,8 +953,8 @@ extension SearchableCollection {
         return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: searchRange)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:)_]
-    // [_Example 1: Nesting Level_]
+    // @documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the entire collection.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -970,7 +970,7 @@ extension SearchableCollection {
         return firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: bounds)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:)_]
+    // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
     /// Returns the first nesting level found in the entire collection.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -982,7 +982,7 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
-    // [_Example 1: Nesting Level_]
+    // #example(1, nestingLevel)
     /// Returns the first nesting level found in the specified range.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
@@ -998,7 +998,7 @@ extension SearchableCollection {
         return firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: bounds)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    // @documentation(SDGCornerstone.Collection.advance(_: over:))
     /// Advances the index over the pattern.
     ///
     /// - Parameters:
@@ -1015,7 +1015,7 @@ extension SearchableCollection {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    // #documentation(SDGCornerstone.Collection.advance(_: over:))
     /// Advances the index over the pattern.
     ///
     /// - Parameters:
@@ -1035,7 +1035,7 @@ extension SearchableCollection {
             return false
         }
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    // #documentation(SDGCornerstone.Collection.advance(_: over:))
     /// Advances the index over the pattern.
     ///
     /// - Parameters:
@@ -1047,7 +1047,7 @@ extension SearchableCollection {
         return _advance(&index, over: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.advance(_: over:)_]
+    // #documentation(SDGCornerstone.Collection.advance(_: over:))
     /// Advances the index over the pattern.
     ///
     /// - Parameters:
@@ -1086,8 +1086,8 @@ extension SearchableCollection {
         let lastIndexDistance = prefixLength == 0 ? 0 : prefixLength − 1
         let otherLastIndexDistance = otherPrefixLength == 0 ? 0 : otherPrefixLength − 1
 
-        let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: lastIndexDistance) } // [_Exempt from Test Coverage_] Already present.
-        let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: otherLastIndexDistance) } // [_Exempt from Test Coverage_] Already present.
+        let lastIndex = cached(in: &indexCache[lastIndexDistance]) { self.index(startIndex, offsetBy: lastIndexDistance) } // @exempt(from: tests) Already present.
+        let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) { other.index(other.startIndex, offsetBy: otherLastIndexDistance) } // @exempt(from: tests) Already present.
         if prefixLength > 0 ∧ otherPrefixLength > 0 ∧ self[lastIndex] == other[otherLastIndex] {
             traceDifference(table, other: other, prefixLength: prefixLength − 1, otherPrefixLength: otherPrefixLength − 1, differenceUnderConstruction: &differenceUnderConstruction, indexCache: &indexCache, otherIndexCache: &otherIndexCache)
             differenceUnderConstruction.append(.keep(lastIndex))
@@ -1166,7 +1166,7 @@ extension SearchableCollection {
 
         return difference
     }
-    // [_Define Documentation: SDGCornerstone.Collection.difference(from:)_]
+    // @documentation(SDGCornerstone.Collection.difference(from:))
     /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
     ///
     /// - Parameters:
@@ -1179,7 +1179,7 @@ extension SearchableCollection {
 extension SearchableCollection where Self : RangeReplaceableCollection {
     // MARK: - where Self : RangeReplaceableCollection
 
-    // [_Define Documentation: SDGCornerstone.Collection.trucate(before:)_]
+    // @documentation(SDGCornerstone.Collection.trucate(before:))
     /// Truncates `self` at the start of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1192,7 +1192,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucate(before:)_]
+    // #documentation(SDGCornerstone.Collection.trucate(before:))
     /// Truncates `self` at the start of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1208,7 +1208,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
             removeSubrange(match.range.lowerBound ..< endIndex)
         }
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucate(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1219,7 +1219,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _truncate(before: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucate(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1230,7 +1230,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _truncate(before: pattern)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.trucated(before:)_]
+    // @documentation(SDGCornerstone.Collection.trucated(before:))
     /// Returns a collection formed by truncating `self` at the start of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1241,7 +1241,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucated(before:)_]
+    // #documentation(SDGCornerstone.Collection.trucated(before:))
     /// Returns a collection formed by truncating `self` at the start of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1252,7 +1252,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1263,7 +1263,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1274,7 +1274,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.trucate(after:)_]
+    // @documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1287,7 +1287,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucate(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1303,7 +1303,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
             removeSubrange(match.range.upperBound ..< endIndex)
         }
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucate(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1314,7 +1314,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _truncate(after: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucate(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1325,7 +1325,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _truncate(after: pattern)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.trucated(after:)_]
+    // @documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1336,7 +1336,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1347,7 +1347,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1358,7 +1358,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.trucated(after:)_]
+    // #documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will remain unchanged.
@@ -1369,7 +1369,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.drop(upTo:)_]
+    // @documentation(SDGCornerstone.Collection.drop(upTo:))
     /// Drops elements from the beginning of the collection to the start of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1384,7 +1384,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.drop(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.drop(upTo:))
     /// Drops elements from the beginning of the collection to the start of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1402,7 +1402,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
             self = Self()
         }
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.drop(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.drop(upTo:))
     /// Drops elements from the beginning of the collection to the start of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1413,7 +1413,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _drop(upTo: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.drop(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.drop(upTo:))
     /// Drops elements from the beginning of the collection to the start of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1424,7 +1424,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _drop(upTo: pattern)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
+    // @documentation(SDGCornerstone.Collection.dropping(upTo:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the start of the first match for the pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1435,7 +1435,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.dropping(upTo:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the start of the first match for the pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1446,7 +1446,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.dropping(upTo:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the start of the first match for the pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1457,7 +1457,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.dropping(upTo:)_]
+    // #documentation(SDGCornerstone.Collection.dropping(upTo:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the start of the first match for the pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1468,7 +1468,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.drop(through:)_]
+    // @documentation(SDGCornerstone.Collection.drop(through:))
     /// Drops elements from the beginning of the collection to the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1483,7 +1483,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.drop(through:)_]
+    // #documentation(SDGCornerstone.Collection.drop(through:))
     /// Drops elements from the beginning of the collection to the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1501,7 +1501,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
             self = Self()
         }
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.drop(through:)_]
+    // #documentation(SDGCornerstone.Collection.drop(through:))
     /// Drops elements from the beginning of the collection to the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1512,7 +1512,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _drop(through: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.drop(through:)_]
+    // #documentation(SDGCornerstone.Collection.drop(through:))
     /// Drops elements from the beginning of the collection to the end of the first match for the specified pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1523,7 +1523,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _drop(through: pattern)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.dropping(through:)_]
+    // @documentation(SDGCornerstone.Collection.dropping(through:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the end of the first match for the pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1534,7 +1534,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.dropping(through:)_]
+    // #documentation(SDGCornerstone.Collection.dropping(through:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the end of the first match for the pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1545,7 +1545,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.dropping(through:)_]
+    // #documentation(SDGCornerstone.Collection.dropping(through:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the end of the first match for the pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1556,7 +1556,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.dropping(through:)_]
+    // #documentation(SDGCornerstone.Collection.dropping(through:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the end of the first match for the pattern.
     ///
     /// If the pattern does not occur, the collection will empty itself.
@@ -1567,7 +1567,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.replaceMatches(for:with:)_]
+    // @documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
     /// Replaces each match for the pattern with the elements of the replacement.
     ///
     /// - Parameters:
@@ -1579,7 +1579,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         })
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.replaceMatches(for:with:)_]
+    // #documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
     /// Replaces each match for the pattern with the elements of the replacement.
     ///
     /// - Parameters:
@@ -1594,7 +1594,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
             return replacement
         })
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.replaceMatches(for:with:)_]
+    // #documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
     /// Replaces each match for the pattern with the elements of the replacement.
     ///
     /// - Parameters:
@@ -1604,7 +1604,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _replaceMatches(for: pattern, with: replacement)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.replaceMatches(for:with:)_]
+    // #documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
     /// Replaces each match for the pattern with the elements of the replacement.
     ///
     /// - Parameters:
@@ -1614,7 +1614,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _replaceMatches(for: pattern, with: replacement)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.replacingMatches(for:with:)_]
+    // @documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
     /// Returns a collection formed by replacing each match for the pattern with the elements of the replacement.
     ///
     /// - Parameters:
@@ -1624,7 +1624,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.replacingMatches(for:with:)_]
+    // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
     /// Returns a collection formed by replacing each match for the pattern with the elements of the replacement.
     ///
     /// - Parameters:
@@ -1634,7 +1634,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.replacingMatches(for:with:)_]
+    // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
     /// Returns a collection formed by replacing each match for the pattern with the elements of the replacement.
     ///
     /// - Parameters:
@@ -1644,7 +1644,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.replacingMatches(for:with:)_]
+    // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
     /// Returns a collection formed by replacing each match for the pattern with the elements of the replacement.
     ///
     /// - Parameters:
@@ -1654,7 +1654,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.mutateMatches(for:mutation:)_]
+    // @documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))
     /// Mutates each match for the pattern according to a closure.
     ///
     /// - Parameters:
@@ -1678,7 +1678,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         self = result
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.mutateMatches(for:mutation:)_]
+    // #documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))
     /// Mutates each match for the pattern according to a closure.
     ///
     /// - Parameters:
@@ -1705,7 +1705,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
 
         self = result
     }
-    // [_Inherit Documentation: SDGCornerstone.Collection.mutateMatches(for:mutation:)_]
+    // #documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))
     /// Mutates each match for the pattern according to a closure.
     ///
     /// - Parameters:
@@ -1715,7 +1715,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _mutateMatches(for: pattern, mutation: mutation)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.mutateMatches(for:mutation:)_]
+    // #documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))
     /// Mutates each match for the pattern according to a closure.
     ///
     /// - Parameters:
@@ -1725,7 +1725,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _mutateMatches(for: pattern, mutation: mutation)
     }
 
-    // [_Define Documentation: SDGCornerstone.Collection.mutatingMatches(for:mutation:)_]
+    // @documentation(SDGCornerstone.Collection.mutatingMatches(for:mutation:))
     /// Returns a collection formed by mutating each match for the pattern according to a closure.
     ///
     /// - Parameters:
@@ -1737,7 +1737,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return copy
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.mutatingMatches(for:mutation:)_]
+    // #documentation(SDGCornerstone.Collection.mutatingMatches(for:mutation:))
     /// Returns a collection formed by mutating each match for the pattern according to a closure.
     ///
     /// - Parameters:
@@ -1749,7 +1749,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return copy
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.mutatingMatches(for:mutation:)_]
+    // #documentation(SDGCornerstone.Collection.mutatingMatches(for:mutation:))
     /// Returns a collection formed by mutating each match for the pattern according to a closure.
     ///
     /// - Parameters:
@@ -1761,7 +1761,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         return copy
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.mutatingMatches(for:mutation:)_]
+    // #documentation(SDGCornerstone.Collection.mutatingMatches(for:mutation:))
     /// Returns a collection formed by mutating each match for the pattern according to a closure.
     ///
     /// - Parameters:

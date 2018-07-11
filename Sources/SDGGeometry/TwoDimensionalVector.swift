@@ -20,22 +20,22 @@
 /// - `var Δy : Scalar { get set }`
 public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:)_]
+    // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// Creates a vector using the specified differences in *x* and *y*.
     init(Δx : Scalar, Δy : Scalar)
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.Δx_]
+    // @documentation(SDGCornerstone.TwoDimensionalVector.Δx)
     /// The difference in *x*.
     var Δx : Scalar { get set }
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.Δy_]
+    // @documentation(SDGCornerstone.TwoDimensionalVector.Δy)
     /// The difference in *y*.
     var Δy : Scalar { get set }
 }
 
 extension TwoDimensionalVector {
 
-    // [_Define Documentation: SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:)_]
+    // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// The difference in *y*.
     @_inlineable public init(Δx : Scalar, Δy : Scalar) {
         self = Self.additiveIdentity
@@ -99,7 +99,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - Addable
 
-    // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
+    // #documentation(SDGCornerstone.Addable.+=)
     /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
@@ -112,7 +112,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - Subtractable
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+    // #documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -125,7 +125,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - Hashable
 
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
     @_inlineable public var hashValue: Int {
         return Δx.hashValue ^ Δy.hashValue
@@ -133,7 +133,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - VectorProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.×=_]
+    // #documentation(SDGCornerstone.VectorProtocol.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -144,7 +144,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
         precedingValue.Δy ×= followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.VectorProtocol.÷=_]
+    // #documentation(SDGCornerstone.VectorProtocol.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:

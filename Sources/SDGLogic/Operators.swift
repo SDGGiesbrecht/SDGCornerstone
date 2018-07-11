@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+// #documentation(SDGCornerstone.Equatable.≠)
 /// Returns `true` if the two values are inequal.
 ///
 /// - Parameters:
@@ -20,21 +20,21 @@
 ///     - followingValue: Another value to compare.
 infix operator ≠: ComparisonPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.Bool.¬_]
+// #documentation(SDGCornerstone.Bool.¬)
 /// Returns the logical inverse of the operand.
 ///
 /// - Parameters:
 ///     - proposition: The proposition to invert.
 prefix operator ¬
 
-// [_Inherit Documentation: SDGCornerstone.Bool.¬=_]
+// #documentation(SDGCornerstone.Bool.¬=)
 /// Modifies the operand by logical inversion.
 ///
 /// - Parameters:
 ///     - proposition: The proposition to modify by inversion.
 postfix operator ¬=
 
-// [_Inherit Documentation: SDGCornerstone.Bool.∧_]
+// #documentation(SDGCornerstone.Bool.∧)
 /// Returns the logical conjunction of the two Boolean values.
 ///
 /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `true`.
@@ -44,7 +44,7 @@ postfix operator ¬=
 ///     - followingValue: A closure that results in another Boolean value.
 infix operator ∧: LogicalConjunctionPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.Bool.∧=_]
+// #documentation(SDGCornerstone.Bool.∧=)
 /// Modifies the preceding operand by logical conjunction with the following operand.
 ///
 /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `true`.
@@ -54,7 +54,7 @@ infix operator ∧: LogicalConjunctionPrecedence
 ///     - followingValue: A closure that results in another Boolean value.
 infix operator ∧=: AssignmentPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.Bool.∨_]
+// #documentation(SDGCornerstone.Bool.∨)
 /// Returns the logical disjunction of the two Boolean values.
 ///
 /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `false`.
@@ -64,7 +64,7 @@ infix operator ∧=: AssignmentPrecedence
 ///     - followingValue: A closure that results in another Boolean value.
 infix operator ∨: LogicalDisjunctionPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.Bool.∨=_]
+// #documentation(SDGCornerstone.Bool.∨=)
 /// Modifies the preceding operand by logical disjunction with the following operand.
 ///
 /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `false`.

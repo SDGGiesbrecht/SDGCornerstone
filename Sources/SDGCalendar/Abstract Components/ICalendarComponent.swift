@@ -15,7 +15,7 @@
 /// A calendar component with an iCalendar representation.
 public protocol ICalendarComponent {
 
-    // [_Define Documentation: SDGCornerstone.ICalendarCompenent.inICalendarFormat()_]
+    // @documentation(SDGCornerstone.ICalendarCompenent.inICalendarFormat())
     /// Returns a string representation in the iCalendar format.
     func inICalendarFormat() -> StrictString
 }
@@ -23,7 +23,7 @@ public protocol ICalendarComponent {
 extension ICalendarComponent where Self : ISOCalendarComponent {
     // MARK: - where Self : ISOCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ICalendarCompenent.inICalendarFormat()_]
+    // #documentation(SDGCornerstone.ICalendarCompenent.inICalendarFormat())
     /// Returns a string representation in the iCalendar format.
     @_inlineable public func inICalendarFormat() -> StrictString {
         return inISOFormat()

@@ -16,43 +16,43 @@ import SDGControlFlow
 
 extension RangeReplaceableCollection {
 
-    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
+    // @documentation(SDGCornerstone.RangeReplaceableCollection.init())
     /// Creates a new, empty collection.
 
-    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.init(_:)_]
+    // @documentation(SDGCornerstone.RangeReplaceableCollection.init(_:))
     /// Creates a new instance of a collection containing the elements of a sequence.
 
-    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+    // @documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
     /// Appends the contents of the sequence to the end of the collection.
 
     @_inlineable @_versioned internal mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
         append(contentsOf: newElements)
     }
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.append(contentsOf:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
     /// Appends the contents of the sequence to the end of the collection.
     @_inlineable public mutating func append(contentsOf newElements: Self) {
         appendAsCollection(contentsOf: newElements)
     }
 
-    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    // @documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
 
     @_inlineable @_versioned internal mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
         insert(contentsOf: newElements, at: i)
     }
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
     @_inlineable public mutating func insert(contentsOf newElements: Self, at i: Self.Index) {
         insertAsCollection(contentsOf: newElements, at: i)
     }
 
-    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
+    // @documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
 
     @_inlineable @_versioned internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
     }
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
     @_inlineable public mutating func replaceSubrange(_ subrange: Range<Self.Index>, with newElements: Self) {
         replaceSubrangeAsCollection(subrange, with: newElements)
@@ -66,7 +66,7 @@ extension RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.append, on: self, with: newElement)
     }
 
-    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:)_]
+    // @documentation(SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:))
     /// Returns a collection formed by appending the contents of another collection to the end of `self`.
     ///
     /// - Parameters:
@@ -78,7 +78,7 @@ extension RangeReplaceableCollection {
     @_inlineable @_versioned internal func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         return appending(contentsOf: newElements)
     }
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:))
     /// Returns a collection formed by appending the contents of another collection to the end of `self`.
     ///
     /// - Parameters:
@@ -95,7 +95,7 @@ extension RangeReplaceableCollection {
         insert(newElement, at: startIndex)
     }
 
-    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
+    // @documentation(SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:))
     /// Adds the contents of another collection to the beginning of `self`.
     ///
     /// - Parameters:
@@ -107,7 +107,7 @@ extension RangeReplaceableCollection {
     @_inlineable @_versioned internal mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
         prepend(contentsOf: newElements)
     }
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:))
     /// Adds the contents of another collection to the beginning of `self`.
     ///
     /// - Parameters:
@@ -124,7 +124,7 @@ extension RangeReplaceableCollection {
         return nonmutatingVariant(of: Self.prepend, on: self, with: newElement)
     }
 
-    // [_Define Documentation: SDGCornerstone.RangeReplaceableCollection.prepending(contentsOf:)_]
+    // @documentation(SDGCornerstone.RangeReplaceableCollection.prepending(contentsOf:))
     /// Returns a collection formed by prepending the contents of another collection to the beginning of `self`.
     ///
     /// - Parameters:
@@ -136,7 +136,7 @@ extension RangeReplaceableCollection {
     @_inlineable @_versioned internal func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         return prepending(contentsOf: newElements)
     }
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:))
     /// Adds the contents of another collection to the beginning of `self`.
     ///
     /// - Parameters:
@@ -184,7 +184,7 @@ extension RangeReplaceableCollection {
 
     // MARK: - ExpressibleByArrayLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:)_]
+    // #documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))
     /// Creates an instance from an array literal.
     @_inlineable public init(arrayLiteral: Element...) {
         self.init()

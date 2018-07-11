@@ -14,6 +14,6 @@
 
 extension RawRepresentable {
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentable.RawValue_]
+    // @documentation(SDGCornerstone.RawRepresentable.RawValue)
     /// The raw value type.
 }

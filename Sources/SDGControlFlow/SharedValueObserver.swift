@@ -15,7 +15,7 @@
 /// An observer of a shared value.
 public protocol SharedValueObserver : AnyObject {
 
-    // [_Define Documentation: SDGCornerstone.SharedValueObserver.valueChanged(for:)_]
+    // @documentation(SDGCornerstone.SharedValueObserver.valueChanged(for:))
     /// Called when a value changes.
     ///
     /// - Parameters:

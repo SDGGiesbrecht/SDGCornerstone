@@ -45,7 +45,7 @@ extension Sequence where Element : Hashable {
 extension Sequence where Element : AdditiveArithmetic {
     // MARK: - where Element : AdditiveArithmetic
 
-    // [_Define Documentation: SDGCornerstone.Sequence.∑_]
+    // @documentation(SDGCornerstone.Sequence.∑)
     /// Returns the sum of all values in the sequence.
     @_inlineable public static prefix func ∑ (sequence: Self) -> Element {
         var sum = Element.additiveIdentity
@@ -59,7 +59,7 @@ extension Sequence where Element : AdditiveArithmetic {
 extension Sequence where Element : WholeArithmetic {
     // MARK: - where Element : WholeArithmetic
 
-    // [_Define Documentation: SDGCornerstone.Sequence.∏_]
+    // @documentation(SDGCornerstone.Sequence.∏)
     /// Returns the product of all values in the sequence.
     @_inlineable public static prefix func ∏ (sequence: Self) -> Element {
         var product: Element = 1

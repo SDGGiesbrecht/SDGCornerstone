@@ -21,21 +21,21 @@ where Vector : IntegralArithmetic {
 
     // MARK: - Associated Type
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.RawValue_]
+    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.RawValue)
     /// The raw value type.
     typealias  RawValue = Vector
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:)_]
+    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
     init(unsafeRawValue: RawValue)
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
+    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
     /// The valid range for raw values.
     static var validRange: Range<RawValue>? { get }
 
-    // [_Define Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
+    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
     /// The raw value.
     var rawValue: RawValue { get }
 }
@@ -49,7 +49,7 @@ extension RawRepresentableCalendarComponent {
         guard let result = Self(possibleRawValue: value) else {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
-                case .englishCanada: // [_Exempt from Test Coverage_]
+                case .englishCanada: // @exempt(from: tests)
                     return StrictString("Raw value invalid for “\(Self.self)”: \(value)")
                 }
             }))
@@ -68,7 +68,7 @@ extension RawRepresentableCalendarComponent {
 
     // MARK: - ExpressibleByIntegerLiteral
 
-    // [_Inherit Documentation: SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:)_]
+    // #documentation(SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:))
     /// Creates an instance from an integer literal.
     ///
     /// - Parameters:
@@ -89,7 +89,7 @@ public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCa
 
 extension CodableViaRawRepresentableCalendarComponent {
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -98,7 +98,7 @@ extension CodableViaRawRepresentableCalendarComponent {
         try encode(to: encoder, via: rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:

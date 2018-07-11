@@ -28,19 +28,19 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // MARK: - Scalar Type
 
-    // [_Define Documentation: SDGCornerstone.Measurement.Scalar_]
+    // @documentation(SDGCornerstone.Measurement.Scalar)
     /// The numeric type used to express the value in any given unit.
     associatedtype Scalar : RationalArithmetic
 
     // MARK: - Internal Values
 
-    // [_Define Documentation: SDGCornerstone.Measurement.init(rawValue:)_]
+    // @documentation(SDGCornerstone.Measurement.init(rawValue:))
     /// Creates a measurement from a raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
     init(rawValue: Scalar)
 
-    // [_Define Documentation: SDGCornerstone.Measurement.rawValue_]
+    // @documentation(SDGCornerstone.Measurement.rawValue)
     /// A raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -48,13 +48,13 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // MARK: - Initialization
 
-    // [_Define Documentation: SDGCornerstone.Measurement.init()_]
+    // @documentation(SDGCornerstone.Measurement.init())
     /// Creates an empty (zero) measurement.
     init()
 
     // MARK: - Operations
 
-    // [_Define Documentation: SDGCornerstone.Measurement.×_]
+    // @documentation(SDGCornerstone.Measurement.×)
     /// Returns the result of multipling the measurement by the scalar.
     ///
     /// - Parameters:
@@ -62,7 +62,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: The scalar.
     static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
-    // [_Define Documentation: SDGCornerstone.Measurement.×=_]
+    // @documentation(SDGCornerstone.Measurement.×=)
     /// Modifies the measurement by multiplication with a scalar.
     ///
     /// - Parameters:
@@ -70,7 +70,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: The scalar.
     static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
-    // [_Define Documentation: SDGCornerstone.Measurement.÷(_:scalar:)_]
+    // @documentation(SDGCornerstone.Measurement.÷(_:scalar:))
     /// Returns the (rational) quotient of a measurement divided by a scalar.
     ///
     /// - Parameters:
@@ -78,7 +78,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: The scalar.
     static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
-    // [_Define Documentation: SDGCornerstone.Measurement.÷_]
+    // @documentation(SDGCornerstone.Measurement.÷)
     /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -86,7 +86,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: The divisor.
     static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
 
-    // [_Define Documentation: SDGCornerstone.Measurement.÷=_]
+    // @documentation(SDGCornerstone.Measurement.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
@@ -96,7 +96,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // A MEAUSUREMENT IS NOT AN INTEGER WITHOUT AN ARBITRARY SELECTION OF A UNIT, SO *EUCLIDEAN* DIVISON BY A SCALAR IS MEANINGLESS
 
-    // [_Define Documentation: SDGCornerstone.Measurement.dividedAccordingToEuclid(by:)_]
+    // @documentation(SDGCornerstone.Measurement.dividedAccordingToEuclid(by:))
     /// Returns the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -105,7 +105,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - divisor: The divisor.
     func dividedAccordingToEuclid(by divisor: Self) -> Scalar
 
-    // [_Define Documentation: SDGCornerstone.Measurement.mod(_:)_]
+    // @documentation(SDGCornerstone.Measurement.mod(_:))
     /// Returns the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -114,7 +114,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     func mod(_ divisor: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.Measurement.formRemainder(mod:)_]
+    // @documentation(SDGCornerstone.Measurement.formRemainder(mod:))
     /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -123,11 +123,11 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     mutating func formRemainder(mod divisor: Self)
 
-    // [_Define Documentation: SDGCornerstone.Measurement.isDivisible(by:)_]
+    // @documentation(SDGCornerstone.Measurement.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
     func isDivisible(by divisor: Self) -> Bool
 
-    // [_Define Documentation: SDGCornerstone.Measurement.gcd(_:_:)_]
+    // @documentation(SDGCornerstone.Measurement.gcd(_:_:))
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
@@ -135,14 +135,14 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: Another value.
     static func gcd(_ a: Self, _ b: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.Measurement.formGreatestCommonDivisor(with:)_]
+    // @documentation(SDGCornerstone.Measurement.formGreatestCommonDivisor(with:))
     /// Sets `self` to the greatest common divisor of `self` and `other`.
     ///
     /// - Parameters:
     ///     - other: Another value.
     mutating func formGreatestCommonDivisor(with other: Self)
 
-    // [_Define Documentation: SDGCornerstone.Measurement.lcm(_:_:)_]
+    // @documentation(SDGCornerstone.Measurement.lcm(_:_:))
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
@@ -150,7 +150,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: Another value.
     static func lcm(_ a: Self, _ b: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.Measurement.formLeastCommonMultiple(with:)_]
+    // @documentation(SDGCornerstone.Measurement.formLeastCommonMultiple(with:))
     /// Sets `self` to the least common multiple of `self` and `other`.
     ///
     /// - Parameters:
@@ -162,7 +162,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// A rule for rounding.
     typealias RoundingRule = WholeArithmetic.RoundingRule
 
-    // [_Define Documentation: SDGCornerstone.Measurement.round(_:toMultipleOf:)_]
+    // @documentation(SDGCornerstone.Measurement.round(_:toMultipleOf:))
     /// Rounds the value to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -170,7 +170,7 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - factor: The factor to round to a multiple of.
     mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self)
 
-    // [_Define Documentation: SDGCornerstone.Measurement.rounded(_:toMultipleOf:)_]
+    // @documentation(SDGCornerstone.Measurement.rounded(_:toMultipleOf:))
     /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -181,13 +181,13 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
 extension Measurement {
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.init()_]
+    // #documentation(SDGCornerstone.Measurement.init())
     /// Creates an empty (zero) measurement.
     @_inlineable public init() {
         self.init(rawValue: 0)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.×_]
+    // #documentation(SDGCornerstone.Measurement.×)
     /// Returns the result of multipling the measurement by the scalar.
     ///
     /// - Parameters:
@@ -197,7 +197,7 @@ extension Measurement {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.×_]
+    // #documentation(SDGCornerstone.Measurement.×)
     /// Returns the result of multipling the measurement by the scalar.
     ///
     /// - Parameters:
@@ -207,7 +207,7 @@ extension Measurement {
         return followingValue × precedingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.×=_]
+    // #documentation(SDGCornerstone.Measurement.×=)
     /// Modifies the measurement by multiplication with a scalar.
     ///
     /// - Parameters:
@@ -217,7 +217,7 @@ extension Measurement {
         precedingValue.rawValue ×= followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.÷(_:scalar:)_]
+    // #documentation(SDGCornerstone.Measurement.÷(_:scalar:))
     /// Returns the (rational) quotient of a measurement divided by a scalar.
     ///
     /// - Parameters:
@@ -227,7 +227,7 @@ extension Measurement {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.÷_]
+    // #documentation(SDGCornerstone.Measurement.÷)
     /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -237,7 +237,7 @@ extension Measurement {
         return precedingValue.rawValue ÷ followingValue.rawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.÷=_]
+    // #documentation(SDGCornerstone.Measurement.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
@@ -249,7 +249,7 @@ extension Measurement {
 
     // A MEAUSUREMENT IS NOT AN INTEGER WITHOUT AN ARBITRARY SELECTION OF A UNIT, SO *EUCLIDEAN* DIVISON BY A SCALAR IS MEANINGLESS
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.dividedAccordingToEuclid(by:)_]
+    // #documentation(SDGCornerstone.Measurement.dividedAccordingToEuclid(by:))
     /// Returns the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -260,7 +260,7 @@ extension Measurement {
         return rawValue.dividedAccordingToEuclid(by: divisor.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.mod(_:)_]
+    // #documentation(SDGCornerstone.Measurement.mod(_:))
     /// Returns the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -271,7 +271,7 @@ extension Measurement {
         return nonmutatingVariant(of: Self.formRemainder, on: self, with: divisor)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.formRemainder(mod:)_]
+    // #documentation(SDGCornerstone.Measurement.formRemainder(mod:))
     /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -282,13 +282,13 @@ extension Measurement {
         rawValue.formRemainder(mod: divisor.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.isDivisible(by:)_]
+    // #documentation(SDGCornerstone.Measurement.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
     @_inlineable public func isDivisible(by divisor: Self) -> Bool {
         return rawValue.isDivisible(by: divisor.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.gcd(_:_:)_]
+    // #documentation(SDGCornerstone.Measurement.gcd(_:_:))
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
@@ -298,7 +298,7 @@ extension Measurement {
         return nonmutatingVariant(of: Self.formGreatestCommonDivisor, on: a, with: b)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.formGreatestCommonDivisor(with:)_]
+    // #documentation(SDGCornerstone.Measurement.formGreatestCommonDivisor(with:))
     /// Sets `self` to the greatest common divisor of `self` and `other`.
     ///
     /// - Parameters:
@@ -307,7 +307,7 @@ extension Measurement {
         rawValue.formGreatestCommonDivisor(with: other.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.lcm(_:_:)_]
+    // #documentation(SDGCornerstone.Measurement.lcm(_:_:))
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
@@ -317,7 +317,7 @@ extension Measurement {
         return nonmutatingVariant(of: Self.formLeastCommonMultiple, on: a, with: b)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.formLeastCommonMultiple(with:)_]
+    // #documentation(SDGCornerstone.Measurement.formLeastCommonMultiple(with:))
     /// Sets `self` to the least common multiple of `self` and `other`.
     ///
     /// - Parameters:
@@ -326,7 +326,7 @@ extension Measurement {
         rawValue.formLeastCommonMultiple(with: other.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.round(_:toMultipleOf:)_]
+    // #documentation(SDGCornerstone.Measurement.round(_:toMultipleOf:))
     /// Rounds the value to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -336,7 +336,7 @@ extension Measurement {
         rawValue.round(rule, toMultipleOf: factor.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Measurement.rounded(_:toMultipleOf:)_]
+    // #documentation(SDGCornerstone.Measurement.rounded(_:toMultipleOf:))
     /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -348,7 +348,7 @@ extension Measurement {
 
     // MARK: - Addable
 
-    // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+_]
+    // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.
     ///
     /// - Parameters:
@@ -358,7 +358,7 @@ extension Measurement {
         return Self(rawValue: precedingValue.rawValue + followingValue.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Addable(Summation).+=_]
+    // #documentation(SDGCornerstone.Addable(Summation).+=)
     /// Adds the following value to the preceding value.
     ///
     /// - Parameters:
@@ -370,7 +370,7 @@ extension Measurement {
 
     // MARK: - AdditiveArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.AdditiveArithmetic.additiveIdentity_]
+    // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
     /// The additive identity (origin).
     @_inlineable public static var additiveIdentity: Self {
         return Self(rawValue: 0)
@@ -378,7 +378,7 @@ extension Measurement {
 
     // MARK: - Comparable
 
-    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
@@ -390,7 +390,7 @@ extension Measurement {
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -402,7 +402,7 @@ extension Measurement {
 
     // MARK: - Hashable
 
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
     @_inlineable public var hashValue: Int {
         return rawValue.hashValue
@@ -410,7 +410,7 @@ extension Measurement {
 
     // MARK: - Negatable
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−_]
+    // #documentation(SDGCornerstone.Negatable.−)
     /// Returns the additive inverse of the operand.
     ///
     /// - Parameters:
@@ -419,7 +419,7 @@ extension Measurement {
         return Self(rawValue: −operand.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Negatable.−=_]
+    // #documentation(SDGCornerstone.Negatable.−=)
     /// Sets the operand to its additive inverse.
     ///
     /// - Parameters:
@@ -430,37 +430,37 @@ extension Measurement {
 
     // MARK: - NumericAdditiveArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isPositive_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
     /// Returns `true` if `self` is positive.
     @_inlineable public var isPositive: Bool {
         return rawValue.isPositive
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
     @_inlineable public var isNegative: Bool {
         return rawValue.isNegative
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
     @_inlineable public var isNonNegative: Bool {
         return rawValue.isNonNegative
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonPositive_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
     /// Returns `true` if `self` is negative or zero.
     @_inlineable public var isNonPositive: Bool {
         return rawValue.isNonPositive
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     @_inlineable public var absoluteValue: Self {
         return Self(rawValue: rawValue.absoluteValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     @_inlineable public mutating func formAbsoluteValue() {
         rawValue.formAbsoluteValue()
@@ -468,7 +468,7 @@ extension Measurement {
 
     // MARK: - Subtractable
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+    // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -478,7 +478,7 @@ extension Measurement {
         return Self(rawValue: precedingValue.rawValue − followingValue.rawValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+    // #documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -491,7 +491,7 @@ extension Measurement {
 
 // MARK: - Measurements
 
-// [_Inherit Documentation: SDGCornerstone.Measurement.gcd(_:_:)_]
+// #documentation(SDGCornerstone.Measurement.gcd(_:_:))
 /// Returns the greatest common divisor of `a` and `b`.
 ///
 /// - Parameters:
@@ -501,7 +501,7 @@ extension Measurement {
     return M.gcd(a, b)
 }
 
-// [_Inherit Documentation: SDGCornerstone.Measurement.lcm(_:_:)_]
+// #documentation(SDGCornerstone.Measurement.lcm(_:_:))
 /// Returns the least common multiple of `a` and `b`.
 ///
 /// - Parameters:
@@ -526,7 +526,7 @@ extension CodableViaMeasurement {
 
     // These will be inlined by the conformance declaration in the module which declares the conformance. Only those inlined specializations will ever be called.
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -535,7 +535,7 @@ extension CodableViaMeasurement {
         try rawValue.encode(to: encoder)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:

@@ -26,19 +26,19 @@ extension UIntFamily {
 
     // MARK: - BitField
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseNot()_]
+    // #documentation(SDGCornerstone.BitField.bitwiseNot())
     /// Returns the bits not present in `self`.
     @_inlineable public func bitwiseNot() -> Self {
         return ~self
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseNot()_]
+    // #documentation(SDGCornerstone.BitField.formBitwiseNot())
     /// Inverts the bits.
     @_inlineable public mutating func formBitwiseNot() {
         self = bitwiseNot()
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseAnd(with:)_]
+    // #documentation(SDGCornerstone.BitField.bitwiseAnd(with:))
     /// Returns the bits present in both `self` and `other`.
     ///
     /// - Parameters:
@@ -47,7 +47,7 @@ extension UIntFamily {
         return self & other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseAnd(with:)_]
+    // #documentation(SDGCornerstone.BitField.formBitwiseAnd(with:))
     /// Removes the bits not also present in `other`.
     ///
     /// - Parameters:
@@ -56,7 +56,7 @@ extension UIntFamily {
         self = bitwiseAnd(with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseOr(with:)_]
+    // #documentation(SDGCornerstone.BitField.bitwiseOr(with:))
     /// Returns the bits present in either `self` or `other`.
     ///
     /// - Parameters:
@@ -65,7 +65,7 @@ extension UIntFamily {
         return self | other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseOr(with:)_]
+    // #documentation(SDGCornerstone.BitField.formBitwiseOr(with:))
     /// Inserts the bits present in `other`.
     ///
     /// - Parameters:
@@ -74,7 +74,7 @@ extension UIntFamily {
         self = bitwiseOr(with: other)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.bitwiseExclusiveOr(with:)_]
+    // #documentation(SDGCornerstone.BitField.bitwiseExclusiveOr(with:))
     /// Returns the bits present only in `self` or only in `other`.
     ///
     /// - Parameters:
@@ -83,7 +83,7 @@ extension UIntFamily {
         return self ^ other
     }
 
-    // [_Inherit Documentation: SDGCornerstone.BitField.formBitwiseExclusiveOr(with:)_]
+    // #documentation(SDGCornerstone.BitField.formBitwiseExclusiveOr(with:))
     /// Inserts the bits present in `other` and removes the bits present in both.
     ///
     /// - Parameters:
@@ -94,7 +94,7 @@ extension UIntFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+_]
+    // #documentation(SDGCornerstone.PointProtocol.+)
     /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
     ///
     /// - Parameters:
@@ -104,7 +104,7 @@ extension UIntFamily {
         return precedingValue.advanced(by: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    // #documentation(SDGCornerstone.PointProtocol.+=)
     /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
@@ -114,7 +114,7 @@ extension UIntFamily {
         precedingValue = precedingValue.advanced(by: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    // #documentation(SDGCornerstone.PointProtocol.−)
     /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
@@ -126,7 +126,7 @@ extension UIntFamily {
 
     // MARK: - Subtractable
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+    // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -136,7 +136,7 @@ extension UIntFamily {
         return precedingValue - followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+    // #documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -148,7 +148,7 @@ extension UIntFamily {
 
     // MARK: - WholeArithmetic
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(uIntFamily:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(uIntFamily:))
     /// Creates an instance equal to `uInt`.
     ///
     /// - Properties:
@@ -157,7 +157,7 @@ extension UIntFamily {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×)
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -167,7 +167,7 @@ extension UIntFamily {
         return precedingValue * followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -177,7 +177,7 @@ extension UIntFamily {
         precedingValue *= followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:))
     /// Returns the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -188,7 +188,7 @@ extension UIntFamily {
         return self / divisor
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
     /// Sets `self` to the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -199,7 +199,7 @@ extension UIntFamily {
         self /= divisor
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.mod(_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.mod(_:))
     /// Returns the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -210,7 +210,7 @@ extension UIntFamily {
         return self % divisor
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.formRemainder(mod:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.formRemainder(mod:))
     /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -221,13 +221,13 @@ extension UIntFamily {
         self %= divisor
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isEven_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isEven)
     /// Returns true if `self` is an even integer.
     @_inlineable public var isEven: Bool {
         return ¬isOdd
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isOdd_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
     /// Returns true if `self` is an odd integer.
     @_inlineable public var isOdd: Bool {
         return self.bitwiseAnd(with: 1) == 1
@@ -244,7 +244,7 @@ extension UInt : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
@@ -252,7 +252,7 @@ extension UInt64 : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
@@ -260,7 +260,7 @@ extension UInt32 : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
@@ -268,7 +268,7 @@ extension UInt16 : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }
@@ -276,7 +276,7 @@ extension UInt8 : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
 }

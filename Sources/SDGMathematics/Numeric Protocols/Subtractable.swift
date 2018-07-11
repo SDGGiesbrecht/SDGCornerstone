@@ -26,7 +26,7 @@ import SDGControlFlow
 /// - `static func −= (precedingValue: inout Self, followingValue: Self)`
 public protocol Subtractable : Addable {
 
-    // [_Define Documentation: SDGCornerstone.Subtractable.−_]
+    // @documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -34,7 +34,7 @@ public protocol Subtractable : Addable {
     ///     - followingValue: The value to subtract.
     static func − (precedingValue: Self, followingValue: Self) -> Self
 
-    // [_Define Documentation: SDGCornerstone.Subtractable.−=_]
+    // @documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -42,7 +42,7 @@ public protocol Subtractable : Addable {
     ///     - followingValue: The value to subtract.
     static func −= (precedingValue: inout Self, followingValue: Self)
 
-    // [_Define Documentation: SDGCornerstone.Subtractable.±_]
+    // @documentation(SDGCornerstone.Subtractable.±)
     /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
     ///
     /// - Parameters:
@@ -53,7 +53,7 @@ public protocol Subtractable : Addable {
 
 extension Subtractable {
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+    // #documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -63,7 +63,7 @@ extension Subtractable {
         return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.±_]
+    // #documentation(SDGCornerstone.Subtractable.±)
     /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
     ///
     /// - Parameters:

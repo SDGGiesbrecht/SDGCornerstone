@@ -14,6 +14,6 @@
 
 extension ExpressibleByDictionaryLiteral {
 
-    // [_Define Documentation: SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:)_]
+    // @documentation(SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:))
     /// Creates an instance from a dictionary literal.
 }

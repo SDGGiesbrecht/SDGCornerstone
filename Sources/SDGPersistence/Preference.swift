@@ -52,7 +52,7 @@ public struct Preference : Equatable, TransparentWrapper {
     // MARK: - Usage
 
     #if !canImport(ObjectiveC)
-    // [_Workaround: Linux has casting issues. (Swift 4.1.2)_]
+    // #workaround(Swift 4.1.2, Linux has casting issues.)
     private func cast(_ instance: Any) -> NSObject {
         return Preference.cast(instance)
     }
@@ -103,7 +103,7 @@ public struct Preference : Equatable, TransparentWrapper {
     }
     #endif
 
-    // [_Define Documentation: SDGCornerstone.Preference.set(to:)_]
+    // @documentation(SDGCornerstone.Preference.set(to:))
     /// Sets the preference to a particular value.
     ///
     /// - Parameters:
@@ -118,7 +118,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
         do {
             #if os(Linux)
-            // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1.2)_]
+            // #workaround(Swift 4.1.2, Until Linux has PropertyListEncoder.)
             let encodedArray = try JSONEncoder().encode([theValue])
             let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray
             let object = cast(arrayObject.firstObject!)
@@ -128,16 +128,16 @@ public struct Preference : Equatable, TransparentWrapper {
             let object = arrayObject.firstObject! as! NSObject
             #endif
             propertyListObject = object
-        } catch { // [_Exempt from Test Coverage_]
-            if BuildConfiguration.current == .debug { // [_Exempt from Test Coverage_]
+        } catch { // @exempt(from: tests)
+            if BuildConfiguration.current == .debug { // @exempt(from: tests)
                 // This indicates a precondition violation during coding, but it is not worth stopping execution.
                 print(error)
-            } // [_Exempt from Test Coverage_]
+            } // @exempt(from: tests)
             propertyListObject = nil
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Preference.set(to:)_]
+    // #documentation(SDGCornerstone.Preference.set(to:))
     /// Sets the preference to a particular value.
     ///
     /// - Parameters:
@@ -159,7 +159,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
             do {
                 #if os(Linux)
-                // [_Workaround: Until Linux has PropertyListEncoder. (Swift 4.1.2)_]
+                // #workaround(Swift 4.1.2, Until Linux has PropertyListEncoder.)
                 let encodedArray = try JSONSerialization.data(withJSONObject: NSArray(object: object), options: [])
                 let decodedArray = try JSONDecoder().decode([T].self, from: encodedArray)
                 #else
@@ -179,7 +179,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -191,7 +191,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
     @_inlineable public var wrappedInstance: Any {
         return propertyListObject as Any

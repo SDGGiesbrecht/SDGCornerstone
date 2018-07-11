@@ -16,14 +16,14 @@ extension Comparable {
 
     // MARK: - Comparison
 
-    // [_Define Documentation: SDGCornerstone.Comparable.<_]
+    // @documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≤_]
+    // @documentation(SDGCornerstone.Comparable.≤)
     /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
     ///
     /// - Parameters:
@@ -33,7 +33,7 @@ extension Comparable {
         return precedingValue <= followingValue
     }
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≥_]
+    // @documentation(SDGCornerstone.Comparable.≥)
     /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
     ///
     /// - Parameters:
@@ -43,8 +43,8 @@ extension Comparable {
         return precedingValue >= followingValue
     }
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≥=_]
-    // [_Example 1: increase(to:)_]
+    // @documentation(SDGCornerstone.Comparable.≥=)
+    // #example(1, increase)
     /// Increases the value of `self` so that falls at or above `minimum`.
     ///
     /// This is accomplished by changing `self` to match the value of `minimum` if and only if `self` does not already satisfy `self ≥ minimum`.
@@ -75,8 +75,8 @@ extension Comparable {
         }
     }
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≤=_]
-    // [_Example 1: decrease(to:)_]
+    // @documentation(SDGCornerstone.Comparable.≤=)
+    // #example(1, decrease)
     /// Decreases the value of `self` so that falls at or below `maximum`.
     ///
     /// This is accomplished by changing `self` to match the value of `maximum` if and only if `self` does not already satisfy `self ≤ maximum`.
@@ -109,8 +109,8 @@ extension Comparable {
 
     // MARK: - Approximation
 
-    // [_Define Documentation: SDGCornerstone.Comparable.≈_]
-    // [_Example 1: ≈_]
+    // @documentation(SDGCornerstone.Comparable.≈)
+    // #example(1, ≈)
     /// Returns `true` if `precedingValue` is within the range described by `followingValue`.
     ///
     /// ```swift

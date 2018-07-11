@@ -36,7 +36,7 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : Custo
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     @_inlineable public var description: String {
         return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
@@ -44,11 +44,11 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : Custo
 
     // MARK: - SetDefinition
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.Element_]
+    // #documentation(SDGCornerstone.SetDefinition.Element)
     /// The element type.
     public typealias Element = Base1.Element
 
-    // [_Inherit Documentation: SDGCornerstone.SetDefinition.∋_]
+    // #documentation(SDGCornerstone.SetDefinition.∋)
     /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:

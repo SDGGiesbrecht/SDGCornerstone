@@ -38,8 +38,8 @@ public enum Casing {
     /// - Warning: This method is only intended for use with compile‐time constants to reduce repetition in source code. Only the very simplest strings are supported. Passing a string which contains anything besides lowercase letters and combining marks will cause a precondition failure.
     @_inlineable public func apply(to compileTimeString: StaticString) -> StrictString {
         var string = StrictString(compileTimeString)
-        assert(¬string.contains(where: { $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters }), UserFacing<StrictString, _APILocalization>({ localization in // [_Exempt from Test Coverage_]
-            switch localization { // [_Exempt from Test Coverage_]
+        assert(¬string.contains(where: { $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters }), UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return StrictString("“\(string)” is too complex for automatic casing.")
             }

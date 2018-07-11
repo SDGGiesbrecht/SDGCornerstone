@@ -80,7 +80,7 @@ public class Shell : TransparentWrapper {
     /// - Returns: The output of the command.
     ///
     /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // [_Exempt from Test Coverage_]
+    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // @exempt(from: tests)
 
         let commandString = command.map({ (argument: String) -> String in
             if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
@@ -88,7 +88,7 @@ public class Shell : TransparentWrapper {
             } else {
                 return argument
             }
-        }).joined(separator: " ") // [_Exempt from Test Coverage_] False result in Xcode 9.3.
+        }).joined(separator: " ") // @exempt(from: tests) False result in Xcode 9.3.
 
         reportProgress("$ " + commandString)
 
@@ -99,7 +99,7 @@ public class Shell : TransparentWrapper {
 
     // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
     public var wrappedInstance: Any {
         return process

@@ -22,4 +22,4 @@
 @_exported import SDGPersistenceTestUtilities
 @_exported import SDGLocalizationTestUtilities
 
-func aFunctionToTriggerTestCoverage() {} // [_Exempt from Test Coverage_]
+func aFunctionToTriggerTestCoverage() {} // @exempt(from: tests)

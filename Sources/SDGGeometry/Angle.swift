@@ -28,7 +28,7 @@ extension Angle : CustomPlaygroundDisplayConvertible {
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription_]
+    // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
     /// Returns the custom playground description for this instance.
     @_inlineable public var playgroundDescription: Any {
         #if canImport(CoreGraphics) && (canImport(AppKit) || canImport(UIKit))

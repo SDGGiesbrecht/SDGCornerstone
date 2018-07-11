@@ -16,7 +16,7 @@ extension Bool : Comparable {
 
     // MARK: - Logical Operatiors
 
-    // [_Define Documentation: SDGCornerstone.Bool.¬_]
+    // @documentation(SDGCornerstone.Bool.¬)
     /// Returns the logical inverse of the operand.
     ///
     /// - Parameters:
@@ -25,7 +25,7 @@ extension Bool : Comparable {
         return !proposition
     }
 
-    // [_Define Documentation: SDGCornerstone.Bool.¬=_]
+    // @documentation(SDGCornerstone.Bool.¬=)
     /// Modifies the operand by logical inversion.
     ///
     /// - Parameters:
@@ -34,7 +34,7 @@ extension Bool : Comparable {
         proposition = ¬proposition
     }
 
-    // [_Define Documentation: SDGCornerstone.Bool.∧_]
+    // @documentation(SDGCornerstone.Bool.∧)
     /// Returns the logical conjunction of the two Boolean values.
     ///
     /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `true`.
@@ -46,7 +46,7 @@ extension Bool : Comparable {
         return try precedingValue && followingValue
     }
 
-    // [_Define Documentation: SDGCornerstone.Bool.∧=_]
+    // @documentation(SDGCornerstone.Bool.∧=)
     /// Modifies the preceding operand by logical conjunction with the following operand.
     ///
     /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `true`.
@@ -58,7 +58,7 @@ extension Bool : Comparable {
         precedingValue = try precedingValue ∧ followingValue
     }
 
-    // [_Define Documentation: SDGCornerstone.Bool.∨_]
+    // @documentation(SDGCornerstone.Bool.∨)
     /// Returns the logical disjunction of the two Boolean values.
     ///
     /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` evaluates to `false`.
@@ -70,7 +70,7 @@ extension Bool : Comparable {
         return try precedingValue || followingValue
     }
 
-    // [_Define Documentation: SDGCornerstone.Bool.∨=_]
+    // @documentation(SDGCornerstone.Bool.∨=)
     /// Modifies the preceding operand by logical disjunction with the following operand.
     ///
     /// This operator uses short‐circuit evaluation; `followingValue` is only evaluated if `precedingValue` is `false`.
@@ -84,7 +84,7 @@ extension Bool : Comparable {
 
     // MARK: - Comparable
 
-    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:

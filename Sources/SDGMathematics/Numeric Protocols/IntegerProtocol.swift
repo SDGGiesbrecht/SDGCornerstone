@@ -23,7 +23,7 @@ public protocol IntegerProtocol : IntegralArithmetic {
 
 extension IntegerProtocol {
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.↑=)
     /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
@@ -40,13 +40,13 @@ extension IntegerProtocol {
         precedingValue.raiseIntegerToThePowerOf(integer: followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.isIntegral_]
+    // #documentation(SDGCornerstone.WholeArithmetic.isIntegral)
     /// Returns `true` if `self` is an integer.
     @_inlineable public var isIntegral: Bool {
         return true
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.round(_:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.round(_:))
     /// Rounds the value to an integral value using the specified rounding rule.
     ///
     /// - Parameters:

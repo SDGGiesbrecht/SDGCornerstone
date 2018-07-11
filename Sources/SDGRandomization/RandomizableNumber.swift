@@ -22,7 +22,7 @@ import SDGMathematics
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
 public protocol RandomizableNumber : WholeArithmetic {
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
@@ -33,7 +33,7 @@ public protocol RandomizableNumber : WholeArithmetic {
 
 extension RandomizableNumber {
 
-    // [_Define Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
+    // @documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:))
     /// Creates a random value within a particular range.
     ///
     /// - Parameters:
@@ -46,7 +46,7 @@ extension RandomizableNumber {
 extension RandomizableNumber where Self : RationalArithmetic {
     // MARK: - where Self : RationalArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:))
     /// Creates a random value within a particular range.
     ///
     /// - Parameters:
@@ -55,7 +55,7 @@ extension RandomizableNumber where Self : RationalArithmetic {
         self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
@@ -64,7 +64,7 @@ extension RandomizableNumber where Self : RationalArithmetic {
     @_inlineable public init(randomInRange range: Range<Self>, fromRandomizer randomizer: Randomizer) {
 
         _assert(¬range.isEmpty, { (localization: _APILocalization) in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "Empty range."
             }

@@ -43,7 +43,7 @@ internal struct FoundationDate : DateDefinition, TransparentWrapper {
 
     // MARK: - Decodable
 
-    // [_Inherit Documentation: SDGCornerstone.Decodable.init(from:)_]
+    // #documentation(SDGCornerstone.Decodable.init(from:))
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameters:
@@ -54,7 +54,7 @@ internal struct FoundationDate : DateDefinition, TransparentWrapper {
 
     // MARK: - Encodable
 
-    // [_Inherit Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:
@@ -65,7 +65,7 @@ internal struct FoundationDate : DateDefinition, TransparentWrapper {
 
     // MARK: - TransparentWrapper
 
-    // [_Inherit Documentation: SDGCornerstone.TransparentWrapper.wrapped_]
+    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
     public var wrappedInstance: Any {
         return date

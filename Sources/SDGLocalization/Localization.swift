@@ -24,24 +24,24 @@ import SDGLogic
 ///   - `static var developmentLocalization: Self { get }`
 public protocol Localization : TextualPlaygroundDisplay {
 
-    // [_Define Documentation: SDGCornerstone.Localization.init(code:)_]
+    // @documentation(SDGCornerstone.Localization.init(code:))
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     ///
     /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
     init?(exactly code: String)
 
-    // [_Define Documentation: SDGCornerstone.Localization.code_]
+    // @documentation(SDGCornerstone.Localization.code)
     /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     var code: String { get }
 
-    // [_Define Documentation: SDGCornerstone.Localization.fallbackLocalization_]
+    // @documentation(SDGCornerstone.Localization.fallbackLocalization)
     /// The localization to use whenever none of the localizations requested by the user are available.
     static var fallbackLocalization: Self { get }
 }
 
 extension Localization {
 
-    // [_Example 1: Macrolanguages_] [_Example 2: Localization Groups_]
+    // #example(1, macrolanguages) #example(2, localizationGroups)
     /// Creates a localization from the specified code, or as a fallback, creates a related localization that can be reasonably used as a replacement.
     ///
     /// For example, if a type supports British but not American English, it creates an instance of British English when either code is specified.
@@ -126,7 +126,7 @@ extension Localization {
         if let scripts = ContentLocalization.groups[language] {
 
             if let script = possibleScript {
-                if possibleCountry ≠ nil { // [_Exempt from Test Coverage_]
+                if possibleCountry ≠ nil { // @exempt(from: tests)
                     // language‐script‐country
 
                     // Already covered by exact match.
@@ -240,7 +240,7 @@ extension Localization {
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         guard let contentLocalization = ContentLocalization(exactly: code) else {
@@ -253,7 +253,7 @@ extension Localization {
 extension Localization where Self : RawRepresentable, Self.RawValue == String {
     // MARK: - where Self : RawRepresentable, Self.RawValue == String
 
-    // [_Inherit Documentation: SDGCornerstone.Localization.init(code:)_]
+    // #documentation(SDGCornerstone.Localization.init(code:))
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     ///
     /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
@@ -261,7 +261,7 @@ extension Localization where Self : RawRepresentable, Self.RawValue == String {
         self.init(rawValue: code)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Localization.code_]
+    // #documentation(SDGCornerstone.Localization.code)
     /// The corresponding [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     @_inlineable public var code: String {
         return rawValue

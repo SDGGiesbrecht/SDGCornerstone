@@ -27,67 +27,67 @@ public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
 
     // MARK: - Classification
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.isPositive_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
     /// Returns `true` if `self` is positive.
     var isPositive: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
     var isNegative: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonNegative_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
     var isNonNegative: Bool { get }
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonPositive_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
     /// Returns `true` if `self` is negative or zero.
     var isNonPositive: Bool { get }
 
     // MARK: - Operations
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     var absoluteValue: Self { get }
 
-    // [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
+    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     mutating func formAbsoluteValue()
 }
 
 extension NumericAdditiveArithmetic {
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isPositive_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
     /// Returns `true` if `self` is positive.
     @_inlineable public var isPositive: Bool {
         return self > Self.additiveIdentity
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
     @_inlineable public var isNegative: Bool {
         return self < Self.additiveIdentity
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonNegative_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
     @_inlineable public var isNonNegative: Bool {
         return self ≥ Self.additiveIdentity
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.isNonPositive_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
     /// Returns `true` if `self` is negative or zero.
     @_inlineable public var isNonPositive: Bool {
         return self ≤ Self.additiveIdentity
     }
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.absoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     @_inlineable public var absoluteValue: Self {
         return nonmutatingVariant(of: Self.formAbsoluteValue, on: self)
     }
 }
 
-// [_Workaround: This should be made debug‐only once conditional compiling is available. (Swift 4.1.2)_]
+// #workaround(Swift 4.1.2, This should be made debug‐only once conditional compiling is available.)
 /// :nodoc:
 public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     /// :nodoc:
@@ -98,8 +98,8 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     public var contents: Wrapped
 }
 
-// [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.|x_]
-// [_Example 1: Absolute Value_]
+// @documentation(SDGCornerstone.NumericAdditiveArithmetic.|x)
+// #example(1, absoluteValue)
 /// Returns the absolute value (in conjuction with postfix `|(_:)`).
 ///
 /// ```swift
@@ -111,8 +111,8 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     return operand.contents
 }
 
-// [_Define Documentation: SDGCornerstone.NumericAdditiveArithmetic.x|_]
-// [_Example 1: Absolute Value_]
+// @documentation(SDGCornerstone.NumericAdditiveArithmetic.x|)
+// #example(1, absoluteValue)
 /// Returns the absolute value (in conjuction with prefix `|(_:)`).
 ///
 /// ```swift
@@ -127,7 +127,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 extension NumericAdditiveArithmetic where Self : Negatable {
     // MARK: - where Self : Negatable
 
-    // [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue_]
+    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     @_inlineable public mutating func formAbsoluteValue() {
         if self < Self.additiveIdentity {

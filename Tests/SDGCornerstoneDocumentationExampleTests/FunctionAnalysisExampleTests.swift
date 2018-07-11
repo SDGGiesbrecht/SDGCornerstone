@@ -18,7 +18,7 @@ import SDGXCTestUtilities
 class FunctionAnalysisExampleTests : TestCase {
 
     func testFindLocalMinimum() {
-        // [_Define Example: findLocalMinimum_]
+        // @example(findLocalMinimum)
         let approximateSquareRootOf120 = findLocalMinimum(near: 10) { (guess: Int) -> Int in
 
             // Find the square of the guess.
@@ -40,55 +40,55 @@ class FunctionAnalysisExampleTests : TestCase {
         // No longer decreasing, so stop. 1 was the local minimum.
 
         XCTAssertEqual(approximateSquareRootOf120, 11)
-        // [_End_]
+        // @endExample
     }
 
     func doNotTestPreconditionViolationForFindLocalMinimum() {
-        // [_Define Example: findLocalMinimum Precondition Violation_]
+        // @example(findLocalMinimumPreconditionViolation)
         // Never do this:
         _ = findLocalMinimum(near: 0, inFunction: {$0})
-        // [_End_]
+        // @endExample
     }
 
     func doNotTestPreconditionViolationForFindLocalMaximum() {
-        // [_Define Example: findLocalMaximum Precondition Violation_]
+        // @example(findLocalMaximumPreconditionViolation)
         // Never do this:
         _ = findLocalMaximum(near: 0, inFunction: {$0})
-        // [_End_]
+        // @endExample
     }
 
     func testUndefinedCaseOneForFindLocalMaximum() {
-        // [_Define Example: findLocalMaximum Undefined 1_]
+        // @example(findLocalMaximumUndefined1)
         // This is undefined:
         let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? $0 ↑ 2 : −($0 ↑ 2) }
-        // [_End_]
+        // @endExample
 
         XCTAssert(maximum ∈ Set([−10, 10]))
     }
 
     func testUndefinedCaseOneForFindLocalMinimum() {
-        // [_Define Example: findLocalMinimum Undefined 1_]
+        // @example(findLocalMinimumUndefined1)
         // This is undefined:
         let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −($0 ↑ 2) : $0 ↑ 2 }
-        // [_End_]
+        // @endExample
 
         XCTAssert(minimum ∈ Set([−10, 10]))
     }
 
     func testUndefinedCaseTwoForFindLocalMaximum() {
-        // [_Define Example: findLocalMaximum Undefined 2_]
+        // @example(findLocalMaximumUndefined2)
         // This is undefined:
         let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? 1 : −(|$0|) }
-        // [_End_]
+        // @endExample
 
         XCTAssert(maximum ∈ −10 ... 10)
     }
 
     func testUndefinedCaseTwoForFindLocalMinimum() {
-        // [_Define Example: findLocalMinimum Undefined 2_]
+        // @example(findLocalMinimumUndefined2)
         // This is undefined:
         let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −1 : |$0| }
-        // [_End_]
+        // @endExample
 
         XCTAssert(minimum ∈ −10 ... 10)
     }

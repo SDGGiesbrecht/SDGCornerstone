@@ -29,7 +29,7 @@ public final class CyclicalNumberGenerator : Randomizer {
     ///     - sequence: The sequence.
     public init(_ sequence: [UIntMax]) {
         _assert(¬sequence.isEmpty, { (localization: _APILocalization) -> String in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return "Empty sequence."
             }

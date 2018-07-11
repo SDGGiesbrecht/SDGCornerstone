@@ -14,6 +14,6 @@
 
 extension TextOutputStream {
 
-    // [_Define Documentation: SDGCornerstone.TextOutputStream.write(_:)_]
+    // @documentation(SDGCornerstone.TextOutputStream.write(_:))
     /// Appends the given string to the stream.
 }

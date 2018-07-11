@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≤_]
+// #documentation(SDGCornerstone.Comparable.≤)
 /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
 ///
 /// - Parameters:
@@ -20,7 +20,7 @@
 ///     - followingValue: Another value to compare.
 infix operator ≤: ComparisonPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≥_]
+// #documentation(SDGCornerstone.Comparable.≥)
 /// Returns `true` if the preceding operand is ordered after or the same as the following operand.
 ///
 /// - Parameters:
@@ -28,7 +28,7 @@ infix operator ≤: ComparisonPrecedence
 ///     - followingValue: Another value to compare.
 infix operator ≥: ComparisonPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.Comparable.≈_]
+// #documentation(SDGCornerstone.Comparable.≈)
 /// Returns `true` if `precedingValue` is within the range described by `followingValue`.
 ///
 /// ```swift
@@ -40,7 +40,7 @@ infix operator ≥: ComparisonPrecedence
 ///     - followingValue: The bounds of the range.
 infix operator ≈: ComparisonPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.Subtractable.−_]
+// #documentation(SDGCornerstone.Subtractable.−)
 /// Returns the difference of the preceding value minus the following value.
 ///
 /// - Parameters:
@@ -51,7 +51,7 @@ infix operator −: AdditionPrecedence
 /// Performs additive inversion.
 prefix operator −
 
-// [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+// #documentation(SDGCornerstone.Subtractable.−=)
 /// Subtracts the following value from the preceding value.
 ///
 /// - Parameters:
@@ -62,7 +62,7 @@ infix operator −=: AssignmentPrecedence
 /// Modifies the operand by additive inversion.
 postfix operator −=
 
-// [_Inherit Documentation: SDGCornerstone.Subtractable.±_]
+// #documentation(SDGCornerstone.Subtractable.±)
 /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
 ///
 /// - Parameters:
@@ -70,7 +70,7 @@ postfix operator −=
 ///     - followingValue: The addend/subtrahend.
 infix operator ±: AdditionPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.|x_]
+// #documentation(SDGCornerstone.NumericAdditiveArithmetic.|x)
 /// Returns the absolute value (in conjuction with postfix `|(_:)`).
 ///
 /// ```swift
@@ -80,7 +80,7 @@ infix operator ±: AdditionPrecedence
 /// ```
 prefix operator |
 
-// [_Inherit Documentation: SDGCornerstone.NumericAdditiveArithmetic.x|_]
+// #documentation(SDGCornerstone.NumericAdditiveArithmetic.x|)
 /// Returns the absolute value (in conjuction with prefix `|(_:)`).
 ///
 /// ```swift
@@ -90,11 +90,11 @@ prefix operator |
 /// ```
 postfix operator |
 
-// [_Inherit Documentation: SDGCornerstone.Sequence.∑_]
+// #documentation(SDGCornerstone.Sequence.∑)
 /// Returns the sum of all values in the sequence.
 prefix operator ∑
 
-// [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
+// #documentation(SDGCornerstone.WholeArithmetic.×)
 /// Returns the product of the preceding value times the following value.
 ///
 /// - Parameters:
@@ -102,7 +102,7 @@ prefix operator ∑
 ///     - followingValue: Another value.
 infix operator ×: MultiplicationPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
+// #documentation(SDGCornerstone.WholeArithmetic.×=)
 /// Modifies the preceding value by multiplication with the following value.
 ///
 /// - Parameters:
@@ -110,7 +110,7 @@ infix operator ×: MultiplicationPrecedence
 ///     - followingValue: The coefficient by which to multiply.
 infix operator ×=: AssignmentPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷_]
+// #documentation(SDGCornerstone.RationalArithmetic.÷)
 /// Returns the (rational) quotient of the preceding value divided by the following value.
 ///
 /// - Parameters:
@@ -118,7 +118,7 @@ infix operator ×=: AssignmentPrecedence
 ///     - followingValue: The divisor.
 infix operator ÷: MultiplicationPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.RationalArithmetic.÷=_]
+// #documentation(SDGCornerstone.RationalArithmetic.÷=)
 /// Modifies the preceding value by dividing it by the following value.
 ///
 /// - Parameters:
@@ -126,7 +126,7 @@ infix operator ÷: MultiplicationPrecedence
 ///     - followingValue: The divisor.
 infix operator ÷=: AssignmentPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.Sequence.∏_]
+// #documentation(SDGCornerstone.Sequence.∏)
 /// Returns the product of all values in the sequence.
 prefix operator ∏
 
@@ -140,7 +140,7 @@ precedencegroup ExponentPrecedence {
     higherThan: MultiplicationPrecedence
 }
 
-// [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑_]
+// #documentation(SDGCornerstone.WholeArithmetic.↑)
 /// Returns the result of the preceding value to the power of the following value.
 ///
 /// - Precondition:
@@ -155,7 +155,7 @@ precedencegroup ExponentPrecedence {
 ///     - followingValue: The exponent.
 infix operator ↑: ExponentPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.WholeArithmetic.↑=_]
+// #documentation(SDGCornerstone.WholeArithmetic.↑=)
 /// Modifies the preceding value by exponentiation with the following value.
 ///
 /// - Precondition:
@@ -170,21 +170,21 @@ infix operator ↑: ExponentPrecedence
 ///     - followingValue: The exponent.
 infix operator ↑=: AssignmentPrecedence
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.√_]
+// #documentation(SDGCornerstone.RealArithmetic.√)
 /// Returns the square root of `operand`.
 ///
 /// - Parameters:
 ///     - operand: The radicand.
 prefix operator √
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.√=_]
+// #documentation(SDGCornerstone.RealArithmetic.√=)
 /// Sets `operand` to its square root.
 ///
 /// - Parameters:
 ///     - operand: The value to modify.
 postfix operator √=
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.°_]
+// #documentation(SDGCornerstone.RealArithmetic.°)
 /// Returns an angle in degrees.
 ///
 /// - Parameters:
@@ -197,7 +197,7 @@ postfix operator °
 ///     - operand: The operand.
 postfix operator ′
 
-// [_Inherit Documentation: SDGCornerstone.RealArithmetic.′′_]
+// #documentation(SDGCornerstone.RealArithmetic.′′)
 /// Returns an angle in seconds.
 ///
 /// - Parameters:

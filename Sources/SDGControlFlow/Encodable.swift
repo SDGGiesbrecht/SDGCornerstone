@@ -14,7 +14,7 @@
 
 extension Encodable {
 
-    // [_Define Documentation: SDGCornerstone.Encodable.encode(to:)_]
+    // @documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
     ///
     /// - Parameters:

@@ -14,6 +14,6 @@
 
 extension TextOutputStreamable {
 
-    // [_Define Documentation: SDGCornerstone.TextOutputStreamable.write(to:)_]
+    // @documentation(SDGCornerstone.TextOutputStreamable.write(to:))
     /// Writes a textual representation of this instance into the given output stream.
 }

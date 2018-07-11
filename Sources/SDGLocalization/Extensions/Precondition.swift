@@ -41,10 +41,10 @@ public func unreachable(function: String = #function, file: StaticString = #file
     }), file: file, line: line)
 }
 
-private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String { // [_Exempt from Test Coverage_]
-    return String(UserFacing<StrictString, _APILocalization>({ localization in // [_Exempt from Test Coverage_]
+private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String { // @exempt(from: tests)
+    return String(UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
         switch localization {
-        case .englishCanada: // [_Exempt from Test Coverage_]
+        case .englishCanada: // @exempt(from: tests)
             return StrictString("\(function) has not been implemented yet. (\(file), Line \(line))")
         }
     }).resolved())
@@ -58,7 +58,7 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) { // [_Exempt from Test Coverage_]
+public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) { // @exempt(from: tests)
     print(unimplementedMessage(function: function, file: file, line: line))
 }
 

@@ -56,7 +56,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - BidirectionalCollection
 
-    // [_Inherit Documentation: SDGCornerstone.BidirectionalCollection.index(before:)_]
+    // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
     /// Returns the index immediately before the specified index.
     ///
     /// - Parameters:
@@ -72,7 +72,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
             guard let found = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< (i.start ?? base.scalars.endIndex))?.range else {
                 _preconditionFailure({ (localization: _APILocalization) -> String in
                     switch localization {
-                    case .englishCanada: // [_Exempt from Test Coverage_]
+                    case .englishCanada: // @exempt(from: tests)
                         return "No index precedes the start index."
                     }
                 })
@@ -89,19 +89,19 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Collection
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.Indices_]
+    // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultBidirectionalIndices<LineView>
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.startIndex_]
+    // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
     public let startIndex: LineViewIndex
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.endIndex_]
+    // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
     public let endIndex: LineViewIndex = LineViewIndex.endIndex()
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.index(after:)_]
+    // #documentation(SDGCornerstone.Collection.index(after:))
     /// Returns the index immediately after the specified index.
     ///
     /// - Parameters:
@@ -116,7 +116,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         return LineViewIndex(start: newline.upperBound)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.Collection.subscript(position:)_]
+    // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
     @_inlineable public subscript(_ position: LineViewIndex) -> Line<Base> {
         @_specialize(exported: true, where Base == StrictString)
@@ -140,7 +140,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - RangeReplaceableCollection
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.init()_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
     /// Creates a new, empty collection.
     @_specialize(exported: true, where Base == StrictString)
     @_specialize(exported: true, where Base == String)
@@ -148,7 +148,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         self.init(Base())
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:)_]
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
     @_specialize(exported: true, kind: partial, where Base == StrictString)
     @_specialize(exported: true, kind: partial, where Base == String)
@@ -165,7 +165,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     @_inlineable public var description: String {
         return String(describing: base)

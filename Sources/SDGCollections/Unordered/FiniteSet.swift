@@ -21,8 +21,8 @@
 /// - `Element == Element`
 public protocol FiniteSet : Collection, ComparableSet {
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.⊆_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊆_]
+    // @documentation(SDGCornerstone.FiniteSet.⊆)
+    // #documentation(SDGCornerstone.ComparableSet.⊆)
     /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
@@ -30,8 +30,8 @@ public protocol FiniteSet : Collection, ComparableSet {
     ///     - followingValue: The other set.
     static func ⊆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.⊈_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊈_]
+    // @documentation(SDGCornerstone.FiniteSet.⊈)
+    // #documentation(SDGCornerstone.ComparableSet.⊈)
     /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
     ///
     /// - Parameters:
@@ -39,8 +39,8 @@ public protocol FiniteSet : Collection, ComparableSet {
     ///     - followingValue: The other set.
     static func ⊈ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.⊇_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊇_]
+    // @documentation(SDGCornerstone.FiniteSet.⊇)
+    // #documentation(SDGCornerstone.ComparableSet.⊇)
     /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
@@ -48,8 +48,8 @@ public protocol FiniteSet : Collection, ComparableSet {
     ///     - followingValue: The other set.
     static func ⊇ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.⊉_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊉_]
+    // @documentation(SDGCornerstone.FiniteSet.⊉)
+    // #documentation(SDGCornerstone.ComparableSet.⊉)
     /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
     ///
     /// - Parameters:
@@ -57,8 +57,8 @@ public protocol FiniteSet : Collection, ComparableSet {
     ///     - followingValue: The other set.
     static func ⊉ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.⊊_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊊_]
+    // @documentation(SDGCornerstone.FiniteSet.⊊)
+    // #documentation(SDGCornerstone.ComparableSet.⊊)
     /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
@@ -66,8 +66,8 @@ public protocol FiniteSet : Collection, ComparableSet {
     ///     - followingValue: The other set.
     static func ⊊ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.⊋_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.⊋_]
+    // @documentation(SDGCornerstone.FiniteSet.⊋)
+    // #documentation(SDGCornerstone.ComparableSet.⊋)
     /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
@@ -75,8 +75,8 @@ public protocol FiniteSet : Collection, ComparableSet {
     ///     - followingValue: The other set.
     static func ⊋ <S : FiniteSet>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.==_]
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // @documentation(SDGCornerstone.FiniteSet.==)
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -84,8 +84,8 @@ public protocol FiniteSet : Collection, ComparableSet {
     ///     - followingValue: Another value to compare.
     static func == <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.≠_]
-    // [_Inherit Documentation: SDGCornerstone.Equatable.≠_]
+    // @documentation(SDGCornerstone.FiniteSet.≠)
+    // #documentation(SDGCornerstone.Equatable.≠)
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
@@ -93,16 +93,16 @@ public protocol FiniteSet : Collection, ComparableSet {
     ///     - followingValue: Another value to compare.
     static func ≠ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.overlaps(_:)_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    // @documentation(SDGCornerstone.FiniteSet.overlaps(_:))
+    // #documentation(SDGCornerstone.ComparableSet.overlaps(_:))
     /// Returns `true` if the sets overlap.
     ///
     /// - Parameters:
     ///     - other: The other set.
     func overlaps<S : SetDefinition>(_ other: S) -> Bool where S.Element == Self.Element
 
-    // [_Define Documentation: SDGCornerstone.FiniteSet.isDisjoint(with:)_]
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.isDisjoint(with:)_]
+    // @documentation(SDGCornerstone.FiniteSet.isDisjoint(with:))
+    // #documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))
     /// Returns `true` if the sets are disjoint.
     ///
     /// - Parameters:
@@ -112,7 +112,7 @@ public protocol FiniteSet : Collection, ComparableSet {
 
 extension FiniteSet {
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊆_]
+    // #documentation(SDGCornerstone.FiniteSet.⊆)
     /// Returns `true` if `precedingValue` is a subset of `followingValue`.
     ///
     /// - Parameters:
@@ -125,7 +125,7 @@ extension FiniteSet {
         return true
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊈_]
+    // #documentation(SDGCornerstone.FiniteSet.⊈)
     /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
     ///
     /// - Parameters:
@@ -135,7 +135,7 @@ extension FiniteSet {
         return ¬(precedingValue ⊆ followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊇_]
+    // #documentation(SDGCornerstone.FiniteSet.⊇)
     /// Returns `true` if `precedingValue` is a superset of `followingValue`.
     ///
     /// - Parameters:
@@ -145,7 +145,7 @@ extension FiniteSet {
         return followingValue ⊆ precedingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊉_]
+    // #documentation(SDGCornerstone.FiniteSet.⊉)
     /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
     ///
     /// - Parameters:
@@ -155,7 +155,7 @@ extension FiniteSet {
         return ¬(precedingValue ⊇ followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊊_]
+    // #documentation(SDGCornerstone.FiniteSet.⊊)
     /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
     ///
     /// - Parameters:
@@ -165,7 +165,7 @@ extension FiniteSet {
         return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.⊋_]
+    // #documentation(SDGCornerstone.FiniteSet.⊋)
     /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
     ///
     /// - Parameters:
@@ -175,7 +175,7 @@ extension FiniteSet {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.==_]
+    // #documentation(SDGCornerstone.FiniteSet.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -185,7 +185,7 @@ extension FiniteSet {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.≠_]
+    // #documentation(SDGCornerstone.FiniteSet.≠)
     /// Returns `true` if the two values are inequal.
     ///
     /// - Parameters:
@@ -195,7 +195,7 @@ extension FiniteSet {
         return ¬(precedingValue == followingValue)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ComparableSet.overlaps(_:)_]
+    // #documentation(SDGCornerstone.ComparableSet.overlaps(_:))
     /// Returns `true` if the sets overlap.
     ///
     /// - Parameters:
@@ -207,7 +207,7 @@ extension FiniteSet {
         return false
     }
 
-    // [_Inherit Documentation: SDGCornerstone.FiniteSet.isDisjoint(with:)_]
+    // #documentation(SDGCornerstone.FiniteSet.isDisjoint(with:))
     /// Returns `true` if the sets are disjoint.
     ///
     /// - Parameters:

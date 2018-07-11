@@ -17,7 +17,7 @@ import SDGLogic
 import SDGRandomization
 import SDGCornerstoneLocalizations
 
-// [_Example 1: WholeNumber Literals_]
+// #example(1, wholeNumberLiterals)
 /// An arbitrary‐precision whole number.
 ///
 /// ```swift
@@ -85,7 +85,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Addable
 
-    // [_Inherit Documentation: SDGCornerstone.Addable.+=_]
+    // #documentation(SDGCornerstone.Addable.+=)
     /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
@@ -113,7 +113,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Comparable
 
-    // [_Inherit Documentation: SDGCornerstone.Comparable.<_]
+    // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
     /// - Parameters:
@@ -139,7 +139,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
@@ -152,7 +152,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Equatable
 
-    // [_Inherit Documentation: SDGCornerstone.Equatable.==_]
+    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:
@@ -164,7 +164,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Hashable
 
-    // [_Inherit Documentation: SDGCornerstone.Hashable.hashValue_]
+    // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
     public var hashValue: Int {
         return digits.first?.hashValue ?? 0
@@ -172,7 +172,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Numeric
 
-    // [_Inherit Documentation: SDGCornerstone.Numeric.init(exactly:)_]
+    // #documentation(SDGCornerstone.Numeric.init(exactly:))
     /// Creates a new instance from the given integer, if it can be represented exactly.
     @_inlineable public init?<T>(exactly source: T) where T : BinaryInteger {
         guard let whole = UIntMax(exactly: source) else {
@@ -183,11 +183,11 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Integer
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.+=_]
+    // #documentation(SDGCornerstone.PointProtocol.+=)
     /// Moves the preceding point by the following vector.
     ///
     /// - Parameters:
@@ -201,7 +201,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         }
     }
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.−_]
+    // #documentation(SDGCornerstone.PointProtocol.−)
     /// Returns the vector that leads from the preceding point to the following point.
     ///
     /// - Parameters:
@@ -213,7 +213,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Subtractable
 
-    // [_Inherit Documentation: SDGCornerstone.Subtractable.−=_]
+    // #documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -221,7 +221,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
     ///     - followingValue: The value to subtract.
     public static func −= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
         assert(precedingValue ≥ followingValue, UserFacing<StrictString, APILocalization>({ [precedingValue] localization in
-            switch localization { // [_Exempt from Test Coverage_]
+            switch localization { // @exempt(from: tests)
             case .englishCanada:
                 return StrictString("\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(WholeNumber.self).")
             }
@@ -247,7 +247,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - WholeArithmetic
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(uInt:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
     /// Creates an instance equal to `uInt`.
     ///
     /// - Properties:
@@ -256,7 +256,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         digits = [uInt]
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×)
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -286,7 +286,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         return product
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.×=_]
+    // #documentation(SDGCornerstone.WholeArithmetic.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -329,7 +329,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         return (quotient, remainingDividend)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
     /// Sets `self` to the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -340,7 +340,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         self = quotientAndRemainder(for: divisor).quotient
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.formRemainder(mod:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.formRemainder(mod:))
     /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -351,7 +351,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         self = quotientAndRemainder(for: divisor).remainder
     }
 
-    // [_Inherit Documentation: SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:)_]
+    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
@@ -367,11 +367,11 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
                 let maximum = rangeSize[digitIndex]
                 let digit = Digit(randomInRange: 0 ... maximum, fromRandomizer: randomizer)
                 if digit ≠ maximum {
-                    atLimit = false // [_Exempt from Test Coverage_]
+                    atLimit = false // @exempt(from: tests)
                 }
                 offset[digitIndex] = digit
             } else {
-                // [_Exempt from Test Coverage_]
+                // @exempt(from: tests)
                 offset[digitIndex] = Digit(randomInRange: 0 ... Digit.max, fromRandomizer: randomizer)
             }
         }

@@ -472,16 +472,16 @@ internal enum ContentLocalization : String, InputLocalization {
     ]
 
     internal static let macrolanguages = [
-        // [_Define Example: Macrolanguages_]
+        // @example(macrolanguages)
         "zh": ["cmn"],
         "ar": ["arb"],
         "no": ["nb"],
         "ms": ["zsm"]
-        // [_End_]
+        // @endExample
     ]
 
     internal static let groups: [String: [(script: String, countries: [String])]] = [
-        // [_Define Example: Localization Groups_]
+        // @example(localizationGroups)
         "cmn": [
             ("Hans", ["CN", "SG"]),
             ("Hant", ["TW"])],
@@ -516,7 +516,7 @@ internal enum ContentLocalization : String, InputLocalization {
         "nb": [("Latn", ["NO"])],
         "hr": [("Latn", ["HR"])],
         "ca": [("Latn", ["ES", "AD"])]
-        // [_End_]
+        // @endExample
     ]
 
     internal static let macrolanguageMembership: [String: String] = {

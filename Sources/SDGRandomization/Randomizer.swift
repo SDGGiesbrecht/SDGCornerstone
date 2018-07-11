@@ -31,13 +31,13 @@ import SDGMathematics
 /// - `func randomNumber() -> UInt64`
 public protocol Randomizer : class {
 
-    // [_Define Documentation: SDGCornerstone.Randomizer.randomNumber()_]
+    // @documentation(SDGCornerstone.Randomizer.randomNumber())
     /// Returns a random value.
     ///
     /// - SeeAlso: `randomNumber(inRange:)`
     func randomNumber() -> SDGMathematics.UIntMax
 
-    // [_Define Documentation: SDGCornerstone.Randomizer.randomNumber(inRange:)_]
+    // @documentation(SDGCornerstone.Randomizer.randomNumber(inRange:))
     /// Returns a random value within the specified range.
     ///
     /// The following information applies to the default implementation:
@@ -56,7 +56,7 @@ public protocol Randomizer : class {
 
 extension Randomizer {
 
-    // [_Inherit Documentation: SDGCornerstone.Randomizer.randomNumber(inRange:)_]
+    // #documentation(SDGCornerstone.Randomizer.randomNumber(inRange:))
     /// Returns a random value within the specified range.
     ///
     /// The following information applies to the default implementation:

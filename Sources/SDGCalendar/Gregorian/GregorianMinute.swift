@@ -29,7 +29,7 @@ public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresen
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // [_Define Documentation: SDGCornerstone.ConsistentDurationCalendarComponent.duration_]
+    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
     /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).minutes
@@ -44,7 +44,7 @@ public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresen
 
     // MARK: - CustomStringConvertible
 
-    // [_Inherit Documentation: SDGCornerstone.CustomStringConvertible.description_]
+    // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
@@ -57,7 +57,7 @@ public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresen
 
     // MARK: - ISOCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ISOCalendarCompenent.inISOFormat()_]
+    // #documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
     /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
         return minute.inDigits().filled(to: 2, with: "0", from: .start)
@@ -65,13 +65,13 @@ public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresen
 
     // MARK: - PointProtocol
 
-    // [_Inherit Documentation: SDGCornerstone.PointProtocol.Vector_]
+    // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Int
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:)_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
@@ -79,11 +79,11 @@ public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresen
         minute = unsafeRawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.validRange_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
     /// The valid range for raw values.
     public static let validRange: Range<RawValue>? = 0 ..< GregorianMinute.minutesPerHour
 
-    // [_Inherit Documentation: SDGCornerstone.RawRepresentableCalendarComponent.rawValue_]
+    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
     /// The raw value.
     public var rawValue: RawValue {
         return minute

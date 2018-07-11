@@ -16,7 +16,7 @@ import SDGCornerstone
 import SDGXCTestUtilities
 import SDGPersistenceTestUtilities
 
-// [_Define Example: DateDefinition_]
+// @example(dateDefinition)
 extension CalendarDate {
 
     // This initializer creates a date using the number of days into the current millennium.
@@ -58,7 +58,7 @@ private struct DaysIntoMillennium : DateDefinition {
         try self.init(from: decoder, via: FloatMax.self, convert: { DaysIntoMillennium($0) })
     }
 }
-// [_End_]
+// @endExample
 
 class DateExampleTests : TestCase {
 

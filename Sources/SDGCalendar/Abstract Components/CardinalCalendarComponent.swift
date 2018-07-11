@@ -21,7 +21,7 @@ extension CardinalCalendarComponent {
 
     // MARK: - ConsistentlyOrderedCalendarComponent
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:)_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
     /// Creates a component from the number of complete components already elapsed.
     ///
     /// - Precondition: The number must be valid for the particular compenent.
@@ -32,7 +32,7 @@ extension CardinalCalendarComponent {
         self.init(numberAlreadyElapsed)
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(ordinal:)_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(ordinal:))
     /// Creates a component from an ordinal.
     ///
     /// - Precondition: The ordinal must be valid for the particular compenent.
@@ -43,13 +43,13 @@ extension CardinalCalendarComponent {
         self.init(ordinal − (1 as Vector))
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
     @_inlineable public var numberAlreadyElapsed: RawValue {
         return rawValue
     }
 
-    // [_Inherit Documentation: SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal_]
+    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal)
     /// The ordinal.
     @_inlineable public var ordinal: RawValue {
         return rawValue + (1 as Vector)
