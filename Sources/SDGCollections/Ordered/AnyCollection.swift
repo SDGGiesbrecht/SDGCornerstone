@@ -15,9 +15,9 @@
 extension AnyCollection : SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
-extension AnyBidirectionalCollection : SearchableBidirectionalCollection where Element : Equatable {
+extension AnyBidirectionalCollection : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
-extension AnyRandomAccessCollection : SearchableBidirectionalCollection where Element : Equatable {
+extension AnyRandomAccessCollection : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
