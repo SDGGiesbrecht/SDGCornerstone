@@ -29,19 +29,35 @@
     test(assignmentOperator: (*=, "*="), with: (4 as T, 4), resultsIn: 16, file: file, line: line) // Numeric
 
     test(method: (T.dividedAccordingToEuclid, "dividedAccordingToEuclid"), of: 5 as T, with: 3, returns: 1, file: file, line: line)
+    #if swift(>=4.1.50)
+    test(mutatingMethod: ({ $0.divideAccordingToEuclid(by: $1) }, "divideAccordingToEuclid"), of: 72 as T, with: 25, resultsIn: 2, file: file, line: line)
+    #else
     test(mutatingMethod: (T.divideAccordingToEuclid, "divideAccordingToEuclid"), of: 72 as T, with: 25, resultsIn: 2, file: file, line: line)
+    #endif
 
     test(method: (T.mod, "mod"), of: 86 as T, with: 18, returns: 14, file: file, line: line)
+    #if swift(>=4.1.50)
+    test(mutatingMethod: ({ $0.formRemainder(mod: $1) }, "formRemainder"), of: 32 as T, with: 2, resultsIn: 0, file: file, line: line)
+    #else
     test(mutatingMethod: (T.formRemainder, "formRemainder"), of: 32 as T, with: 2, resultsIn: 0, file: file, line: line)
+    #endif
 
     test(method: (T.isDivisible, "isDivisible"), of: 64 as T, with: 4, returns: true, file: file, line: line)
     test(method: (T.isDivisible, "isDivisible"), of: 23 as T, with: 62, returns: false, file: file, line: line)
 
     test(function: (gcd, "gcd"), on: (32 as T, 80), returns: 16, file: file, line: line)
+    #if swift(>=4.1.50)
+    test(mutatingMethod: ({ $0.formGreatestCommonDivisor(with: $1) }, "formGreatestCommonDivisor"), of: 60 as T, with: 10, resultsIn: 10, file: file, line: line)
+    #else
     test(mutatingMethod: (T.formGreatestCommonDivisor, "formGreatestCommonDivisor"), of: 60 as T, with: 10, resultsIn: 10, file: file, line: line)
+    #endif
 
     test(function: (lcm, "lcm"), on: (5 as T, 3), returns: 15, file: file, line: line)
+    #if swift(>=4.1.50)
+    test(mutatingMethod: ({ $0.formLeastCommonMultiple(with: $1) }, "formLeastCommonMultiple"), of: 4 as T, with: 30, resultsIn: 60, file: file, line: line)
+    #else
     test(mutatingMethod: (T.formLeastCommonMultiple, "formLeastCommonMultiple"), of: 4 as T, with: 30, resultsIn: 60, file: file, line: line)
+    #endif
 
     test(operator: (↑, "↑"), on: (5 as T, 3), returns: 125, file: file, line: line)
     test(assignmentOperator: (↑=, "↑="), with: (2 as T, 5), resultsIn: 32, file: file, line: line)
@@ -69,10 +85,18 @@
     test(property: ({ $0.isOdd }, "isOdd"), of: 15 as T, is: true, file: file, line: line)
     test(property: ({ $0.isOdd }, "isOdd"), of: 42 as T, is: false, file: file, line: line)
 
+    #if swift(>=4.1.50)
+    test(mutatingMethod: ({ $0.round($1) }, "round"), of: 26 as T, with: .toNearestOrAwayFromZero, resultsIn: 26, file: file, line: line)
+    #else
     test(mutatingMethod: (T.round, "round"), of: 26 as T, with: .toNearestOrAwayFromZero, resultsIn: 26, file: file, line: line)
+    #endif
     test(method: (T.rounded, "rounded"), of: 114 as T, with: .toNearestOrAwayFromZero, returns: 114, file: file, line: line)
 
+    #if swift(>=4.1.50)
+    test(mutatingMethod: ({ $0.round($1, toMultipleOf: $2) }, "round"), of: 52 as T, with: (.toNearestOrAwayFromZero, 39), resultsIn: 39, file: file, line: line)
+    #else
     test(mutatingMethod: (T.round, "round"), of: 52 as T, with: (.toNearestOrAwayFromZero, 39), resultsIn: 39, file: file, line: line)
+    #endif
     test(method: (T.rounded, "rounded"), of: 99 as T, with: (.toNearestOrAwayFromZero, 10), returns: 100, file: file, line: line)
     test(method: (T.rounded, "rounded"), of: 91 as T, with: (.up, 10), returns: 100, file: file, line: line)
     test(method: (T.rounded, "rounded"), of: 99 as T, with: (.towardZero, 10), returns: 90, file: file, line: line)
