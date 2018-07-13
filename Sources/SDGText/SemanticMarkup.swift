@@ -99,7 +99,11 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     /// Returns a string formed by superscripting the instance.
     @_inlineable public func superscripted() -> SemanticMarkup {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.superscript() }, on: self)
+        #else
         return nonmutatingVariant(of: SemanticMarkup.superscript, on: self)
+        #endif
     }
 
     /// Subscripts the string.
@@ -110,7 +114,11 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     /// Returns a string formed by subscripting the instance.
     @_inlineable public func subscripted() -> SemanticMarkup {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.subscript() }, on: self)
+        #else
         return nonmutatingVariant(of: SemanticMarkup.subscript, on: self)
+        #endif
     }
 
     // MARK: - Output

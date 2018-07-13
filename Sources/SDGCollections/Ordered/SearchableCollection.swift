@@ -1238,7 +1238,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(before pattern: Pattern<Element>) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.trucated(before:))
@@ -1249,7 +1253,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(before pattern: CompositePattern<Element>) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.trucated(after:))
@@ -1260,7 +1268,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated<C : SearchableCollection>(before pattern: C) -> Self where C.Element == Self.Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.trucated(after:))
@@ -1271,7 +1283,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(before pattern: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
+        #endif
     }
 
     // @documentation(SDGCornerstone.Collection.trucate(after:))
@@ -1333,7 +1349,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: Pattern<Element>) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.trucated(after:))
@@ -1344,7 +1364,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: CompositePattern<Element>) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.trucated(after:))
@@ -1355,7 +1379,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated<C : SearchableCollection>(after pattern: C) -> Self where C.Element == Self.Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.trucated(after:))
@@ -1366,7 +1394,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
+        #endif
     }
 
     // @documentation(SDGCornerstone.Collection.drop(upTo:))
@@ -1432,7 +1464,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(upTo pattern: Pattern<Element>) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.dropping(upTo:))
@@ -1443,7 +1479,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(upTo pattern: CompositePattern<Element>) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.dropping(upTo:))
@@ -1454,7 +1494,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping<C : SearchableCollection>(upTo pattern: C) -> Self where C.Element == Self.Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.dropping(upTo:))
@@ -1465,7 +1509,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(upTo pattern: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
+        #endif
     }
 
     // @documentation(SDGCornerstone.Collection.drop(through:))
@@ -1531,7 +1579,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(through pattern: Pattern<Element>) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.dropping(through:))
@@ -1542,7 +1594,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(through pattern: CompositePattern<Element>) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.dropping(through:))
@@ -1553,7 +1609,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping<C : SearchableCollection>(through pattern: C) -> Self where C.Element == Self.Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.dropping(through:))
@@ -1564,7 +1624,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(through pattern: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
+        #else
         return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
+        #endif
     }
 
     // @documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
@@ -1621,7 +1685,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func replacingMatches<C : SearchableCollection>(for pattern: Pattern<Element>, with replacement: C) -> Self where C.Element == Self.Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
+        #else
         return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
@@ -1631,7 +1699,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func replacingMatches<C : SearchableCollection>(for pattern: CompositePattern<Element>, with replacement: C) -> Self where C.Element == Self.Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
+        #else
         return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
@@ -1641,7 +1713,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func replacingMatches<P : SearchableCollection, C : SearchableCollection>(for pattern: P, with replacement: C) -> Self where P.Element == Self.Element, C.Element == Self.Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
+        #else
         return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
+        #endif
     }
 
     // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
@@ -1651,7 +1727,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func replacingMatches(for pattern: Self, with replacement: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
+        #else
         return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
+        #endif
     }
 
     // @documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))

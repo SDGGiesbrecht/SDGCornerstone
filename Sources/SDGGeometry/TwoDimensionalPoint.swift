@@ -84,7 +84,11 @@ extension TwoDimensionalPoint {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     @_inlineable public func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.round($1) }, on: self, with: rule)
+        #else
         return nonmutatingVariant(of: Self.round, on: self, with: rule)
+        #endif
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:))
@@ -105,7 +109,11 @@ extension TwoDimensionalPoint {
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
     @_inlineable public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.round($1, toMultipleOf: $2) }, on: self, with: (rule, factor))
+        #else
         return nonmutatingVariant(of: Self.round, on: self, with: (rule, factor))
+        #endif
     }
 
     // MARK: - PointProtocol

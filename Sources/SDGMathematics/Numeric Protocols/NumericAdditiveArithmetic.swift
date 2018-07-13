@@ -83,7 +83,11 @@ extension NumericAdditiveArithmetic {
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     @_inlineable public var absoluteValue: Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.formAbsoluteValue() }, on: self)
+        #else
         return nonmutatingVariant(of: Self.formAbsoluteValue, on: self)
+        #endif
     }
 }
 
