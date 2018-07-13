@@ -20,11 +20,11 @@ import UIKit
 
 #if canImport(AppKit)
 // MARK: - #if canImport(AppKit)
-// `NSBezierPath` or `UIBezierPath`.
+/// An alias for `NSBezierPath` or `UIBezierPath`.
 public typealias BézierPath = NSBezierPath
 #elseif canImport(UIKit)
 // MARK: - #if canImport(UIKit)
-// `NSBezierPath` or `UIBezierPath`.
+/// An alias for `NSBezierPath` or `UIBezierPath`.
 public typealias BézierPath = UIBezierPath
 #endif
 
