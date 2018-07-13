@@ -50,6 +50,9 @@ extension Collection {
         return startIndex ..< endIndex
     }
 
+    #if !swift(>=4.1.50)
+    // #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
+
     /// Returns the backward version of the specified range.
     @_inlineable public func backward(_ range: Range<Self.Index>) -> Range<ReversedIndex<Self>> {
         return ReversedIndex(range.upperBound) ..< ReversedIndex(range.lowerBound)
@@ -59,6 +62,7 @@ extension Collection {
     @_inlineable public func forward(_ range: Range<ReversedIndex<Self>>) -> Range<Self.Index> {
         return range.upperBound.base ..< range.lowerBound.base
     }
+    #endif
 }
 
 extension Collection where Index : Hashable {
