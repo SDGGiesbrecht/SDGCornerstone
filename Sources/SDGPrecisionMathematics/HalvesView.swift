@@ -109,5 +109,11 @@ internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Co
 
     // MARK: - RandomAccessCollection
 
+    #if swift(>=4.1.50)
+    // #workaround(Swift 4.1.2, This check can be removed in Swift 4.2)
+    internal typealias Indices = DefaultIndices<HalvesView>
+    #else
+    // #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
     internal typealias Indices = DefaultRandomAccessIndices<HalvesView>
+    #endif
 }
