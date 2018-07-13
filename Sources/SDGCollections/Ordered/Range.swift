@@ -104,9 +104,12 @@ extension Range : RangeFamily {
     /// The element type.
     public typealias Element = Bound
 }
+#if !swift(>=4.1.50)
+// #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
 extension Range : Hashable where Bound : Hashable {
     // MARK: - where Bound : Hashable
 }
+#endif
 
 extension ClosedRange : RangeFamily {
 
@@ -124,10 +127,15 @@ extension ClosedRange : RangeFamily {
     /// The element type.
     public typealias Element = Bound
 }
+#if !swift(>=4.1.50)
+// #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
 extension ClosedRange : Hashable where Bound : Hashable {
     // MARK: - where Bound : Hashable
 }
+#endif
 
+#if !swift(>=4.1.50)
+// #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
 extension CountableRange : RangeFamily {
 
     // MARK: - RangeFamily
@@ -155,3 +163,4 @@ extension CountableClosedRange : RangeFamily {
 extension CountableClosedRange : Hashable where Bound : Hashable {
     // MARK: - where Bound : Hashable
 }
+#endif
