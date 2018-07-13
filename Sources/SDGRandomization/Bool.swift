@@ -60,10 +60,13 @@ extension Bool {
     /// ```
     public static let trueRandomizerValue: UInt64 = randomizationBit
 
+    #if !swift(>=4.1.50)
+    // #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
     /// Returns a random Boolean value.
     @_inlineable public static func random() -> Bool {
         return Bool(fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
+    #endif
 
     /// Creates a random Boolean value derived from a particular randomizer.
     ///
