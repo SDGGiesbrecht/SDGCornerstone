@@ -90,12 +90,10 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     // MARK: - Collection
 
     #if swift(>=4.1.50)
-    // #workaround(Swift 4.1.2, This check can be removed in Swift 4.2)
     // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultIndices<LineView>
     #else
-    // #workaround(Swift 4.1.2, This check can be removed in Swift 4.2)
     // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultBidirectionalIndices<LineView>
