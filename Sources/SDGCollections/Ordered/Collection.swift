@@ -51,6 +51,7 @@ extension Collection {
     }
 
     #if !swift(>=4.1.50)
+    // MARK: - #if swift(>=4.1.50)
     // #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
 
     /// Returns the backward version of the specified range.

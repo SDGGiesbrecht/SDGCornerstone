@@ -84,6 +84,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 }
 
 #if swift(>=4.1.50)
+// MARK: - #if swift(>=4.1.50)
 /// Tests a method, verifying that it returns the expected result.
 @_inlineable public func test<T>(mutatingMethod method: (method: (inout T) throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
@@ -96,6 +97,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     }
 }
 #else
+// MARK: - #if !swift(>=4.1.50)
 /// Tests a method, verifying that it returns the expected result.
 @_inlineable public func test<T>(mutatingMethod method: (method: (inout T) -> () throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
@@ -110,6 +112,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 #endif
 
 #if swift(>=4.1.50)
+// MARK: - #if swift(>=4.1.50)
 /// Tests a method, verifying that it returns the expected result.
 @_inlineable public func test<T, A>(mutatingMethod method: (method: (inout T, A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
@@ -122,6 +125,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     }
 }
 #else
+// MARK: - #if !swift(>=4.1.50)
 /// Tests a method, verifying that it returns the expected result.
 @_inlineable public func test<T, A>(mutatingMethod method: (method: (inout T) -> (A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
@@ -136,6 +140,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 #endif
 
 #if swift(>=4.1.50)
+// MARK: - #if swift(>=4.1.50)
 /// Tests a method, verifying that it returns the expected result.
 @_inlineable public func test<T, A, B>(mutatingMethod method: (method: (inout T, A, B) throws -> Void, name: String), of instance: T, with arguments: (A, B), resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
@@ -148,6 +153,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     }
 }
 #else
+// MARK: - #if !swift(>=4.1.50)
 /// Tests a method, verifying that it returns the expected result.
 @_inlineable public func test<T, A, B>(mutatingMethod method: (method: (inout T) -> (A, B) throws -> Void, name: String), of instance: T, with arguments: (A, B), resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
