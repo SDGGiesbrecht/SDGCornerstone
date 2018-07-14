@@ -41,6 +41,19 @@
     }
 }
 
+#if swift(>=4.1.50)
+/// Tests a method, verifying that it returns the expected result.
+@_inlineable public func test<T>(mutatingMethod method: (method: (inout T) throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
+    do {
+        var copy = instance
+        try method.method(&copy)
+        test(copy ≈ expectedResult, "\(instance).\(method.name)() → \(copy) ≠ \(expectedResult)",
+            file: file, line: line)
+    } catch {
+        fail("\(error)", file: file, line: line)
+    }
+}
+#else
 /// Tests a method, verifying that it returns the expected result.
 @_inlineable public func test<T>(mutatingMethod method: (method: (inout T) -> () throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
     do {
@@ -52,7 +65,21 @@
         fail("\(error)", file: file, line: line)
     }
 }
+#endif
 
+#if swift(>=4.1.50)
+/// Tests a method, verifying that it returns the expected result.
+@_inlineable public func test<T, A>(mutatingMethod method: (method: (inout T, A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
+    do {
+        var copy = instance
+        try method.method(&copy, argument)
+        test(copy ≈ expectedResult, "\(instance).\(method.name)(\(argument)) → \(copy) ≠ \(expectedResult)",
+            file: file, line: line)
+    } catch {
+        fail("\(error)", file: file, line: line)
+    }
+}
+#else
 /// Tests a method, verifying that it returns the expected result.
 @_inlineable public func test<T, A>(mutatingMethod method: (method: (inout T) -> (A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
     do {
@@ -64,6 +91,7 @@
         fail("\(error)", file: file, line: line)
     }
 }
+#endif
 
 // MARK: - Functions
 
