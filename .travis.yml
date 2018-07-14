@@ -70,14 +70,6 @@ matrix:
         - "eval \"$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)\""
         - "bash \"./Refresh (macOS).command\""
         - "bash \"./Validate (macOS).command\" •job miscellaneous"
-    - os: osx
-      env:
-        - JOB="macOS + Swift 4.2"
-      osx_image: xcode9.4
-      script:
-        - "export SWIFT_VERSION=4.2-DEVELOPMENT-SNAPSHOT-2018-07-03-a"
-        - "eval \"$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)\""
-        - "swift test"
     - os: linux
       env:
         - JOB="Linux + Swift 4.2"
