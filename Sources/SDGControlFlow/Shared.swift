@@ -26,7 +26,7 @@ public class Shared<Value> : TransparentWrapper {
 
     /// The value.
     public var value: Value {
-        @_inlineable didSet {
+        didSet {
             for index in observers.indices.reversed() {
                 let (possibleObserver, identifier) = observers[index]
 

@@ -50,7 +50,7 @@ extension URL : Comparable {
         }
         let otherLength = other.path.clusters.count
         var relative = path.clusters.dropFirst(otherLength)
-        if relative.hasPrefix("/") {
+        if relative.first == "/" {
             relative = relative.dropFirst()
         }
         return String(relative)

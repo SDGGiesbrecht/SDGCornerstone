@@ -14,6 +14,8 @@
 
 import SDGControlFlow
 
+#if !swift(>=4.1.50) // No sense complicating the example.
+
 // @example(nonmutatingVariant)
 extension Array where Element : Comparable {
     // MARK: - where Element : Comparable
@@ -29,3 +31,4 @@ extension Array where Element : Comparable {
     }
 }
 // @endExample
+#endif

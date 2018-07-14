@@ -74,9 +74,17 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     /// The type of the indices of the collection.
     public typealias Index = UIntValue
 
+    #if swift(>=4.1.50)
+    // MARK: - #if swift(>=4.1.50)
+    // #documentation(SDGCornerstone.Collection.Indices)
+    /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
+    public typealias Indices = DefaultIndices<BinaryView>
+    #else
+    // MARK: - #if !swift(>=4.1.50)
     // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultRandomAccessIndices<BinaryView>
+    #endif
 
     // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.

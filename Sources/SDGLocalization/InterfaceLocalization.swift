@@ -12,14 +12,19 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+/// :nodoc:
 public enum _InterfaceLocalization : String, InputLocalization {
 
     // MARK: - Cases
 
+    /// :nodoc:
     case englishUnitedKingdom = "en\u{2D}GB"
+    /// :nodoc:
     case englishUnitedStates = "en\u{2D}US"
+    /// :nodoc:
     case englishCanada = "en\u{2D}CA"
 
+    /// :nodoc:
     public static let cases: [_InterfaceLocalization] = [
 
         .englishUnitedKingdom,
@@ -29,5 +34,6 @@ public enum _InterfaceLocalization : String, InputLocalization {
 
     // MARK: - Localization
 
+    /// :nodoc:
     public static let fallbackLocalization: _InterfaceLocalization = .englishUnitedKingdom
 }

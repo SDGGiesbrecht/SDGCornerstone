@@ -56,6 +56,9 @@ configuration.documentation.api.encryptedTravisCIDeploymentKey = "gzx7ARrCgcNJiD
 configuration.applySDGOverrides()
 configuration.validateSDGStandards()
 
+// #workaround(Swift 4.1.2, Workspace would overwrite the 4.2 jobs.
+configuration.continuousIntegration.manage = false
+
 // #workaround(workspace version 0.10.2, Jazzy’s redundant building is way too slow.)
 configuration.documentation.api.generate = false
 configuration.documentation.api.enforceCoverage = false

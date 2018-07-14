@@ -276,7 +276,11 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - degree: The degree of the root.
     @_inlineable public func root(ofDegree degree: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.formRoot(ofDegree: $1) }, on: self, with: degree)
+        #else
         return nonmutatingVariant(of: Self.formRoot, on: self, with: degree)
+        #endif
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.formRoot(ofDegree:))
@@ -319,7 +323,11 @@ extension RealArithmetic {
     ///     - base: The base.
     ///     - antilogarithm: The antilogarithm.
     @_inlineable public static func log(toBase base: Self, of antilogarithm: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.formLogarithm(toBase: $1) }, on: antilogarithm, with: base)
+        #else
         return nonmutatingVariant(of: Self.formLogarithm, on: antilogarithm, with: base)
+        #endif
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.log(_:))
@@ -330,7 +338,11 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
     @_inlineable public static func log(_ antilogarithm: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.formCommonLogarithm() }, on: antilogarithm)
+        #else
         return nonmutatingVariant(of: Self.formCommonLogarithm, on: antilogarithm)
+        #endif
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.formCommonLogarithm())
@@ -349,7 +361,11 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
     @_inlineable public static func ln(_ antilogarithm: Self) -> Self {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.formNaturalLogarithm() }, on: antilogarithm)
+        #else
         return nonmutatingVariant(of: Self.formNaturalLogarithm, on: antilogarithm)
+        #endif
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.formNaturalLogarithm())

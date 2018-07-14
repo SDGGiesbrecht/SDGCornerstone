@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+// #workaround(Swift 4.1.2, All instances of “#if swift” throughout the package can be resolved and removed.)
+
 /// A build configuration.
 public enum BuildConfiguration {
 

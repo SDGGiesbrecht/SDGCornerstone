@@ -21,4 +21,17 @@ extension BidirectionalCollection {
     ///
     /// - Parameters:
     ///     - i: The following index.
+
+    #if swift(>=4.1.50)
+    // MARK: - #if swift(>=4.1.50)
+    /// Returns the backward version of the specified range.
+    @_inlineable public func backward(_ range: Range<Self.Index>) -> Range<ReversedCollection<Self>.Index> {
+        return ReversedCollection<Self>.Index(range.upperBound) ..< ReversedCollection<Self>.Index(range.lowerBound)
+    }
+
+    /// Returns the forward version of the specified range.
+    @_inlineable public func forward(_ range: Range<ReversedCollection<Self>.Index>) -> Range<Self.Index> {
+        return range.upperBound.base ..< range.lowerBound.base
+    }
+    #endif
 }

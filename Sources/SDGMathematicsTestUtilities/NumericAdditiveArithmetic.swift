@@ -51,8 +51,16 @@
         test(property: ({ $0.absoluteValue }, "absoluteValue"), of: T.additiveIdentity − augend, is: augend, file: file, line: line)
     }
 
+    #if swift(>=4.1.50)
+    test(mutatingMethod: ({ $0.formAbsoluteValue() }, "formAbsoluteValue"), of: augend, resultsIn: augend, file: file, line: line)
+    #else
     test(mutatingMethod: (T.formAbsoluteValue, "formAbsoluteValue"), of: augend, resultsIn: augend, file: file, line: line)
+    #endif
     if includingNegatives {
+        #if swift(>=4.1.50)
+        test(mutatingMethod: ({ $0.formAbsoluteValue() }, "formAbsoluteValue"), of: T.additiveIdentity − augend, resultsIn: augend, file: file, line: line)
+        #else
         test(mutatingMethod: (T.formAbsoluteValue, "formAbsoluteValue"), of: T.additiveIdentity − augend, resultsIn: augend, file: file, line: line)
+        #endif
     }
 }

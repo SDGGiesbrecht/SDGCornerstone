@@ -20,11 +20,11 @@ import UIKit
 
 #if canImport(AppKit)
 // MARK: - #if canImport(AppKit)
-// `NSFont` or `UIFont`.
+/// An alias for `NSFont` or `UIFont`.
 public typealias Font = NSFont
 #elseif canImport(UIKit)
 // MARK: - #if canImport(UIKit)
-// `NSFont` or `UIFont`.
+/// An alias for `NSFont` or `UIFont`.
 public typealias Font = UIFont
 #endif
 
