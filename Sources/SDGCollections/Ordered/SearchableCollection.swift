@@ -23,7 +23,7 @@ import SDGMathematics
 /// - `Collection`
 /// - `Element : Equatable`
 /// - `SubSequence : SearchableCollection`
-public protocol SearchableCollection : Collection
+public protocol SearchableCollection : Collection, PatternProtocol
 where Element : Equatable, SubSequence : SearchableCollection {
 
     // @documentation(SDGCornerstone.Collection.firstMatch(for:in:))
@@ -307,7 +307,7 @@ where Element : Equatable, SubSequence : SearchableCollection {
 
 extension SearchableCollection {
 
-    @_inlineable @_versioned internal func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @_inlineable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         var checkingIndex = self.startIndex
         var collectionIndex = location
