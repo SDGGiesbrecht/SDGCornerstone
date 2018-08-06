@@ -32,14 +32,7 @@ where SubSequence : SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search.
-    func firstMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>) -> PatternMatch<Self>?
-    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
-    /// Returns the first match for `pattern` in the specified subrange.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search.
-    func firstMatch<C : SearchableCollection>(for pattern: C, in searchRange: Range<Index>) -> PatternMatch<Self>? where C.Element == Self.Element
+    func firstMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element
     // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
@@ -307,13 +300,7 @@ where SubSequence : SearchableCollection {
 
 extension SearchableCollection {
 
-    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
-    /// Returns the first match for `pattern` in the specified subrange.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search.
-    @_inlineable public func firstMatch(for pattern: Pattern<Element>, in searchRange: Range<Index>) -> PatternMatch<Self>? {
+    @_inlineable @_versioned internal func _firstMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
         var i = searchRange.lowerBound
         while i ≠ searchRange.upperBound {
             if let range = pattern.primaryMatch(in: self, at: i, limitedTo: searchRange.upperBound) {
@@ -324,6 +311,15 @@ extension SearchableCollection {
         return nil
     }
 
+    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
+    /// Returns the first match for `pattern` in the specified subrange.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to search for.
+    ///     - searchRange: A subrange to search.
+    @_inlineable public func firstMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+        return _firstMatch(for: pattern, in: searchRange)
+    }
     // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
@@ -333,27 +329,6 @@ extension SearchableCollection {
     @_inlineable public func firstMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>) -> PatternMatch<Self>? {
         return firstMatch(for: pattern as Pattern<Element>, in: searchRange)
     }
-
-    @_inlineable @_versioned internal func _firstMatch<C : SearchableCollection>(for pattern: C, in searchRange: Range<Index>) -> PatternMatch<Self>? where C.Element == Self.Element {
-        var i = searchRange.lowerBound
-        while i ≠ searchRange.upperBound {
-            if let range = pattern.primaryMatch(in: self, at: i, limitedTo: searchRange.upperBound) {
-                return PatternMatch(range: range, in: self)
-            }
-            i = index(after: i)
-        }
-        return nil
-    }
-    // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
-    /// Returns the first match for `pattern` in the specified subrange.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search.
-    @_inlineable public func firstMatch<C : SearchableCollection>(for pattern: C, in searchRange: Range<Index>) -> PatternMatch<Self>? where C.Element == Self.Element {
-        return _firstMatch(for: pattern, in: searchRange)
-    }
-
     // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
