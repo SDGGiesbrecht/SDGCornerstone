@@ -307,35 +307,6 @@ where SubSequence : SearchableCollection {
 
 extension SearchableCollection {
 
-    // #documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:limitedTo:))
-    /// Returns the primary match beginning at the specified index in the collection.
-    ///
-    /// - Parameters:
-    ///     - collection: The collection in which to search.
-    ///     - location: The index at which to check for the beginning of a match.
-    ///     - upperBound: An index beyond which matches are not allowed to extend.
-    @_inlineable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
-
-        var checkingIndex = self.startIndex
-        var collectionIndex = location
-        while checkingIndex ≠ self.endIndex {
-            guard collectionIndex ≠ upperBound else {
-                // Ran out of space to check.
-                return nil
-            }
-
-            if self[checkingIndex] ≠ collection[collectionIndex] {
-                // Mis‐match.
-                return nil
-            }
-
-            checkingIndex = self.index(after: checkingIndex)
-            collectionIndex = collection.index(after: collectionIndex)
-        }
-
-        return location ..< collectionIndex
-    }
-
     // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
     ///
@@ -1180,6 +1151,37 @@ extension SearchableCollection {
     ///     - other: The other collection. (The starting point.)
     @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element {
         return _difference(from: other)
+    }
+
+    // MARK: - PatternProtocol
+
+    // #documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:limitedTo:))
+    /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    ///     - upperBound: An index beyond which matches are not allowed to extend.
+    @_inlineable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
+
+        var checkingIndex = self.startIndex
+        var collectionIndex = location
+        while checkingIndex ≠ self.endIndex {
+            guard collectionIndex ≠ upperBound else {
+                // Ran out of space to check.
+                return nil
+            }
+
+            if self[checkingIndex] ≠ collection[collectionIndex] {
+                // Mis‐match.
+                return nil
+            }
+
+            checkingIndex = self.index(after: checkingIndex)
+            collectionIndex = collection.index(after: collectionIndex)
+        }
+
+        return location ..< collectionIndex
     }
 }
 
