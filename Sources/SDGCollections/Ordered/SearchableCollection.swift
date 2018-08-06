@@ -307,6 +307,13 @@ where SubSequence : SearchableCollection {
 
 extension SearchableCollection {
 
+    // #documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:limitedTo:))
+    /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    ///     - upperBound: An index beyond which matches are not allowed to extend.
     @_inlineable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         var checkingIndex = self.startIndex

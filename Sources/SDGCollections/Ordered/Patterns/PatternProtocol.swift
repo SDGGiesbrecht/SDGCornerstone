@@ -17,13 +17,12 @@ public protocol PatternProtocol {
     /// The type of the pattern elements.
     associatedtype Element : Equatable
 
-    // @documentation(SDGCornerstone.Pattern.primaryMatch(in:at:))
+    // @documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:limitedTo:))
     /// Returns the primary match beginning at the specified index in the collection.
-    ///
-    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
     ///
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
+    ///     - upperBound: An index beyond which matches are not allowed to extend.
     func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element
 }

@@ -234,6 +234,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     // MARK: - Collection
 
     // #documentation(SDGCornerstone.Collection.Element)
+    /// The type of the elements of the collection.
     public typealias Element = Unicode.Scalar
 
     // #documentation(SDGCornerstone.Collection.startIndex)
