@@ -24,7 +24,7 @@ import SDGMathematics
 /// - `Element : Equatable`
 /// - `SubSequence : SearchableCollection`
 public protocol SearchableCollection : Collection, PatternProtocol
-where Element : Equatable, SubSequence : SearchableCollection {
+where SubSequence : SearchableCollection {
 
     // @documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
