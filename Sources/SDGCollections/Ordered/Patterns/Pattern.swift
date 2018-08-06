@@ -46,7 +46,7 @@ open class Pattern<Element : Equatable> {
         _primitiveMethod()
     }
 
-    // @documentation(SDGCornerstone.Pattern.primaryMatch(in:at:))
+    // #documentation(SDGCornerstone.Pattern.primaryMatch(in:at:))
     /// Returns the primary match beginning at the specified index in the collection.
     ///
     /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
