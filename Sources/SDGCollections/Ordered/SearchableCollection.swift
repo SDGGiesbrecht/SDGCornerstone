@@ -1100,7 +1100,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: Self) -> Self {
-        return truncated(after: pattern)
+        return _truncated(after: pattern)
     }
 
     @_inlineable @_versioned internal mutating func _drop<P>(upTo pattern: P) where P : PatternProtocol, P.Element == Element {
