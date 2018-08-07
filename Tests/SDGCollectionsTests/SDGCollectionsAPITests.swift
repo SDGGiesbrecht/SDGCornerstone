@@ -112,7 +112,7 @@ class SDGCollectionsAPITests : TestCase {
 
         let mapping: BijectiveMapping = [1: "1", 2: "2", 3: "3"]
 
-        XCTAssertEqual(mapping[mapping.bounds].count, 3)
+        XCTAssertEqual(mapping[...].count, 3)
 
         for (x, y) in mapping {
             XCTAssertEqual(mapping[x], y)
