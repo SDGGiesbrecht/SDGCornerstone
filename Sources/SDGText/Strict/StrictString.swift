@@ -267,7 +267,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     /// Replaces the specified subrange of elements with the given collection.
     @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
 
-        let preceding = StrictString(unsafeString: String(string.scalars[string.scalars.startIndex ..< subrange.lowerBound]))
+        let preceding = StrictString(unsafeString: String(string.scalars[..<subrange.lowerBound]))
         let succeeding = StrictString(unsafeString: String(string.scalars[subrange.upperBound...]))
         let replacement = StrictString.normalize(newElements)
 

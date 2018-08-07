@@ -53,7 +53,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
         guard scalar ∈ NewlinePattern.newlineCharacters else {
             return []
         }
-        var result = [location ..< collection.index(after: location)]
+        var result = [(location ... location).relative(to: collection)]
 
         if scalar == carriageReturn {
             let nextIndex = collection.index(after: location)
@@ -87,7 +87,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
                 return location ..< collection.index(location, offsetBy: 2)
             }
         }
-        return location ..< collection.index(after: location)
+        return (location ... location).relative(to: collection)
     }
 
     // #documentation(SDGCornerstone.Pattern.reverse())

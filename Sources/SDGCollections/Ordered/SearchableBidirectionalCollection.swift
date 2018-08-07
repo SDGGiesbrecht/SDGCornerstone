@@ -312,7 +312,7 @@ extension SearchableBidirectionalCollection {
         var difference: [Change<C.Index, Index>] = prefix(upTo: suffixStart).suffixIgnorantDifference(from: other.prefix(upTo: otherSuffixStart))
 
         if suffixLength ≠ 0 {
-            difference.append(.keep(otherSuffixStart ..< other.endIndex))
+            difference.append(.keep((otherSuffixStart...).relative(to: other)))
         }
 
         return difference

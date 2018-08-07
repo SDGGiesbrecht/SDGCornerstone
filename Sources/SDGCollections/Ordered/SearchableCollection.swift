@@ -309,7 +309,7 @@ extension SearchableCollection {
         guard let match = firstMatch(for: pattern) else {
             return nil
         }
-        return PatternMatch(range: startIndex ..< match.range.lowerBound, in: self)
+        return PatternMatch(range: ..<match.range.lowerBound, in: self)
     }
     // #documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
@@ -340,7 +340,7 @@ extension SearchableCollection {
         guard let match = firstMatch(for: pattern) else {
             return nil
         }
-        return PatternMatch(range: startIndex ..< match.range.upperBound, in: self)
+        return PatternMatch(range: ..<match.range.upperBound, in: self)
     }
     // #documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
@@ -371,7 +371,7 @@ extension SearchableCollection {
         guard let match = firstMatch(for: pattern) else {
             return nil
         }
-        return PatternMatch(range: match.range.lowerBound ..< endIndex, in: self)
+        return PatternMatch(range: match.range.lowerBound..., in: self)
     }
     // #documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
@@ -402,7 +402,7 @@ extension SearchableCollection {
         guard let match = firstMatch(for: pattern) else {
             return nil
         }
-        return PatternMatch(range: match.range.upperBound ..< endIndex, in: self)
+        return PatternMatch(range: match.range.upperBound..., in: self)
     }
     // #documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
@@ -535,7 +535,7 @@ extension SearchableCollection {
                 break
             }
         }
-        return PatternMatch(range: startIndex ..< end, in: self)
+        return PatternMatch(range: ..<end, in: self)
     }
     // @documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
@@ -711,7 +711,7 @@ extension SearchableCollection {
                     switch individualChange {
                     case .keep(let index):
                         changeGroups.removeLast()
-                        changeGroups.append(.keep(range.lowerBound ..< self.index(after: index)))
+                        changeGroups.append(.keep((range.lowerBound ... index).relative(to: self)))
                         continue changes
                     default:
                         break
@@ -720,7 +720,7 @@ extension SearchableCollection {
                     switch individualChange {
                     case .remove(let index):
                         changeGroups.removeLast()
-                        changeGroups.append(.remove(range.lowerBound ..< self.index(after: index)))
+                        changeGroups.append(.remove((range.lowerBound ... index).relative(to: self)))
                         continue changes
                     default:
                         break
@@ -729,7 +729,7 @@ extension SearchableCollection {
                     switch individualChange {
                     case .insert(let index):
                         changeGroups.removeLast()
-                        changeGroups.append(.insert(range.lowerBound ..< other.index(after: index)))
+                        changeGroups.append(.insert((range.lowerBound ... index).relative(to: other)))
                         continue changes
                     default:
                         break
@@ -738,11 +738,11 @@ extension SearchableCollection {
             }
             switch individualChange {
             case .keep(let index):
-                changeGroups.append(.keep(index ..< self.index(after: index)))
+                changeGroups.append(.keep((index ... index).relative(to: self)))
             case .remove(let index):
-                changeGroups.append(.remove(index ..< self.index(after: index)))
+                changeGroups.append(.remove((index ... index).relative(to: self)))
             case .insert(let index):
-                changeGroups.append(.insert(index ..< other.index(after: index)))
+                changeGroups.append(.insert((index ... index).relative(to: other)))
             }
         }
         return changeGroups
@@ -816,7 +816,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
 
     @_inlineable @_versioned internal mutating func _truncate<P>(before pattern: P) where P : PatternProtocol, P.Element == Element {
         if let match = firstMatch(for: pattern) {
-            removeSubrange(match.range.lowerBound ..< endIndex)
+            removeSubrange(match.range.lowerBound...)
         }
     }
     // @documentation(SDGCornerstone.Collection.trucate(before:))
@@ -891,7 +891,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
 
     @_inlineable @_versioned internal mutating func _truncate<P>(after pattern: P) where P : PatternProtocol, P.Element == Element {
         if let match = firstMatch(for: pattern) {
-            removeSubrange(match.range.upperBound ..< endIndex)
+            removeSubrange(match.range.upperBound...)
         }
     }
     // @documentation(SDGCornerstone.Collection.trucate(after:))
@@ -965,7 +965,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
 
     @_inlineable @_versioned internal mutating func _drop<P>(upTo pattern: P) where P : PatternProtocol, P.Element == Element {
         if let match = firstMatch(for: pattern) {
-            removeSubrange(startIndex ..< match.range.lowerBound)
+            removeSubrange(..<match.range.lowerBound)
         } else {
             self = Self()
         }
@@ -1041,7 +1041,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
 
     @_inlineable @_versioned internal mutating func _drop<P>(through pattern: P) where P : PatternProtocol, P.Element == Element {
         if let match = firstMatch(for: pattern) {
-            removeSubrange(startIndex ..< match.range.upperBound)
+            removeSubrange(..<match.range.upperBound)
         } else {
             self = Self()
         }

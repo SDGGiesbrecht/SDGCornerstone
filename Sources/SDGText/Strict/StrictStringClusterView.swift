@@ -123,7 +123,7 @@ extension StrictString {
         /// Replaces the specified subrange of elements with the given collection.
         @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ClusterView.Index>, with newElements: S) where S.Element == ExtendedGraphemeCluster {
 
-            let preceding = StrictString(ClusterView(self[startIndex ..< subrange.lowerBound]))
+            let preceding = StrictString(ClusterView(self[..<subrange.lowerBound]))
             let succeeding = StrictString(ClusterView(self[subrange.upperBound...]))
             let replacement = StrictString(ClusterView.normalize(newElements))
 

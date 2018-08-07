@@ -163,7 +163,7 @@ extension RangeReplaceableCollection {
 
     /// Truncates the `self` at `index`.
     @_inlineable public mutating func truncate(at index: Index) {
-        removeSubrange(index ..< endIndex)
+        removeSubrange(index...)
     }
 
     /// Returns a collection formed by truncating `self` at `index`.
