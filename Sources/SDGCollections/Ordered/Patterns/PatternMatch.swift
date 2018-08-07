@@ -33,4 +33,13 @@ public struct PatternMatch<Searched : SearchableCollection> {
     public let range: Range<Searched.Index>
     /// The contents of the match.
     public let contents: Searched.SubSequence
+
+    // MARK: - Conversions
+
+    /// Returns the same match in another collection whose indices are shared with the collection originally searched; this is intended for converting a match found in a subsequence into a match in the base collection or vice versa.
+    ///
+    /// - Requires: The range is valid for the target collection and points to the same elements.
+    public func `in`<C>(_ otherCollection: C) -> PatternMatch<C> where C : SearchableCollection, C.Index == Searched.Index {
+        return PatternMatch<C>(range: range, in: otherCollection)
+    }
 }

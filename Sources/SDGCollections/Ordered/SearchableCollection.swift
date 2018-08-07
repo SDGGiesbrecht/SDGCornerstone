@@ -231,9 +231,9 @@ where SubSequence : SearchableCollection {
 extension SearchableCollection {
 
     @_inlineable @_versioned internal func _firstMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        var i = searchRange.lowerBound
-        while i ≠ searchRange.upperBound {
-            if let range = pattern.primaryMatch(in: self, at: i, limitedTo: searchRange.upperBound) {
+        var i = startIndex
+        while i ≠ endIndex {
+            if let range = pattern.primaryMatch(in: self, at: i, limitedTo: endIndex) { // #warning(Remove “limitedTo”.)
                 return PatternMatch(range: range, in: self)
             }
             i = index(after: i)
@@ -246,7 +246,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func firstMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        return _firstMatch(for: pattern, in: searchRange)
+        return _firstMatch(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.firstMatch(for:))
     /// Returns the first match for `pattern` in the entire collection.
@@ -254,7 +254,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func firstMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return _firstMatch(for: pattern, in: searchRange)
+        return _firstMatch(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.firstMatch(for:))
     /// Returns the first match for `pattern` in the entire collection.
@@ -262,40 +262,15 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func firstMatch(for pattern: Self) -> PatternMatch<Self>? {
-        return _firstMatch(for: pattern, in: searchRange)
-    }
-
-    // @documentation(SDGCornerstone.Collection.firstMatch(for:))
-    /// Returns the first match for `pattern` in the entire collection.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func firstMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        return firstMatch(for: pattern, in: bounds)
-    }
-    // #documentation(SDGCornerstone.Collection.firstMatch(for:))
-    /// Returns the first match for `pattern` in the entire collection.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func firstMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return firstMatch(for: pattern, in: bounds)
-    }
-    // #documentation(SDGCornerstone.Collection.firstMatch(for:))
-    /// Returns the first match for `pattern` in the entire collection.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func firstMatch(for pattern: Self) -> PatternMatch<Self>? {
-        return firstMatch(for: pattern, in: bounds)
+        return _firstMatch(for: pattern)
     }
 
     @_inlineable @_versioned internal func _matches<P>(for pattern: P) -> [PatternMatch<Self>] where P : PatternProtocol, P.Element == Element {
-        var accountedFor = searchRange.lowerBound
+        var accountedFor = startIndex
         var results: [PatternMatch<Self>] = []
-        while let match = firstMatch(for: pattern, in: accountedFor ..< searchRange.upperBound) {
+        while let match = self[accountedFor ..< endIndex].firstMatch(for: pattern) {
             accountedFor = match.range.upperBound
-            results.append(match)
+            results.append(match.in(self))
         }
         return results
     }
@@ -307,7 +282,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func matches<P>(for pattern: P) -> [PatternMatch<Self>] where P : PatternProtocol, P.Element == Element {
-        return _matches(for: pattern, in: searchRange)
+        return _matches(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.matches(for:))
     /// Returns a list of all matches for `pattern` in the entire collection.
@@ -317,7 +292,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func matches(for pattern: CompositePattern<Element>) -> [PatternMatch<Self>] {
-        return _matches(for: pattern, in: searchRange)
+        return _matches(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.matches(for:))
     /// Returns a list of all matches for `pattern` in the entire collection.
@@ -327,38 +302,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func matches(for pattern: Self) -> [PatternMatch<Self>] {
-        return _matches(for: pattern, in: searchRange)
-    }
-
-    // @documentation(SDGCornerstone.Collection.matches(for:))
-    /// Returns a list of all matches for `pattern` in the entire collection.
-    ///
-    /// This does not check for overlapping matches.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func matches<P>(for pattern: P) -> [PatternMatch<Self>] where P : PatternProtocol, P.Element == Element {
-        return matches(for: pattern, in: bounds)
-    }
-    // #documentation(SDGCornerstone.Collection.matches(for:))
-    /// Returns a list of all matches for `pattern` in the entire collection.
-    ///
-    /// This does not check for overlapping matches.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func matches(for pattern: CompositePattern<Element>) -> [PatternMatch<Self>] {
-        return matches(for: pattern, in: bounds)
-    }
-    // #documentation(SDGCornerstone.Collection.matches(for:))
-    /// Returns a list of all matches for `pattern` in the entire collection.
-    ///
-    /// This does not check for overlapping matches.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func matches(for pattern: Self) -> [PatternMatch<Self>] {
-        return matches(for: pattern, in: bounds)
+        return _matches(for: pattern)
     }
 
     @_inlineable @_versioned internal func _prefix<P>(upTo pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
@@ -611,18 +555,18 @@ extension SearchableCollection {
     }
 
     @_inlineable @_versioned internal func _firstNestingLevel<C : SearchableCollection, D : SearchableCollection>(startingWith openingToken: C, endingWith closingToken: D) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
-        var searchArea = searchRange
+        var searchArea = startIndex ..< endIndex
 
-        guard let start = firstMatch(for: openingToken, in: searchArea)?.range else {
+        guard let start = self[searchArea].firstMatch(for: openingToken)?.range else {
             return nil
         }
         searchArea = start.upperBound ..< searchArea.upperBound
 
         var level = 1
-        while let hit = firstMatch(for: AlternativePatterns([
+        while let hit = self[searchArea].firstMatch(for: AlternativePatterns([
             LiteralPattern(openingToken),
             LiteralPattern(closingToken)
-            ]), in: searchArea) {
+            ])) {
 
                 if hit.contents.elementsEqual(openingToken) {
                     level += 1
@@ -651,7 +595,7 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
     @_inlineable public func firstNestingLevel<C : SearchableCollection, D : SearchableCollection>(startingWith openingToken: C, endingWith closingToken: D) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
-        return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: searchRange)
+        return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken)
     }
     // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
     /// Returns the first nesting level found in the entire collection.
@@ -666,51 +610,7 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
     @_inlineable public func firstNestingLevel(startingWith openingToken: Self, endingWith closingToken: Self) -> NestingLevel<Self>? {
-        return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: searchRange)
-    }
-
-    // @documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
-    // #example(1, nestingLevel)
-    /// Returns the first nesting level found in the entire collection.
-    ///
-    /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
-    ///
-    /// ```swift
-    /// let equation = "2(3x − (y + 4)) = z"
-    /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
-    ///
-    /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
-    /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
-    /// ```
-    @_inlineable public func firstNestingLevel<C : SearchableCollection, D : SearchableCollection>(startingWith openingToken: C, endingWith closingToken: D) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
-        return firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: bounds)
-    }
-    // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
-    /// Returns the first nesting level found in the entire collection.
-    ///
-    /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
-    ///
-    /// ```swift
-    /// let equation = "2(3x − (y + 4)) = z"
-    /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
-    ///
-    /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
-    /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
-    /// ```
-    // #example(1, nestingLevel)
-    /// Returns the first nesting level found in the specified range.
-    ///
-    /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
-    ///
-    /// ```swift
-    /// let equation = "2(3x − (y + 4)) = z"
-    /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
-    ///
-    /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
-    /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
-    /// ```
-    @_inlineable public func firstNestingLevel(startingWith openingToken: Self, endingWith closingToken: Self) -> NestingLevel<Self>? {
-        return firstNestingLevel(startingWith: openingToken, endingWith: closingToken, in: bounds)
+        return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken)
     }
 
     @_inlineable @_versioned internal func _advance<P>(_ index: inout Index, over pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {

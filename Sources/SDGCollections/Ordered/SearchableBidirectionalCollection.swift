@@ -126,12 +126,13 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    @_inlineable @_versioned internal func _lastMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        let backwards: ReversedCollection<Self> = self.reversed()
-        guard let range = backwards.firstMatch(for: pattern.reversed(), in: backward(searchRange))?.range else {
+    @_inlineable @_versioned internal func _lastMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element { // #warning(Remove “searchRange”.)
+        let slice = self[searchRange]
+        let backwards: ReversedCollection<Self.SubSequence> = slice.reversed()
+        guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
             return nil
         }
-        return PatternMatch(range: forward(range), in: self)
+        return PatternMatch(range: slice.forward(range), in: self)
     }
     // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     /// Returns the last match for `pattern` in the specified subrange.

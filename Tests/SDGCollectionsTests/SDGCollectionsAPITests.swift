@@ -300,8 +300,8 @@ class SDGCollectionsAPITests : TestCase {
 
         XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 == "." }))))
         XCTAssertNil("...".scalars.lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds))
-        XCTAssertNil("...".scalars.firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds))
-        XCTAssert("...".scalars.matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds).isEmpty)
+        XCTAssertNil("...".scalars[...].firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
+        XCTAssert("...".scalars[...].matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])).isEmpty)
     }
 
     struct ComparableSetExample : ComparableSet {

@@ -48,7 +48,7 @@ public struct LineViewIndex : Comparable, Equatable {
             return nil
         }
         return cached(in: &cache.newline) {
-            return scalars.firstMatch(for: CharacterSet.newlinePattern, in: startIndex ..< scalars.endIndex)?.range ?? scalars.endIndex ..< scalars.endIndex
+            return scalars[startIndex ..< scalars.endIndex].firstMatch(for: CharacterSet.newlinePattern)?.range ?? scalars.endIndex ..< scalars.endIndex
         }
     }
 
