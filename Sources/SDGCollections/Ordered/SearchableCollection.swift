@@ -555,7 +555,7 @@ extension SearchableCollection {
     }
 
     @_inlineable @_versioned internal func _firstNestingLevel<C : SearchableCollection, D : SearchableCollection>(startingWith openingToken: C, endingWith closingToken: D) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
-        var searchArea = startIndex ..< endIndex
+        var searchArea = bounds
 
         guard let start = self[searchArea].firstMatch(for: openingToken)?.range else {
             return nil
