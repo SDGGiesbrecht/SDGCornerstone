@@ -256,7 +256,7 @@ extension SearchableBidirectionalCollection {
 
     @_inlineable @_versioned internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
         let backwards: ReversedCollection<Self> = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
+        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
     // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.

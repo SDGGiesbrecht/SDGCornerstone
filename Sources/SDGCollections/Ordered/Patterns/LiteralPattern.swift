@@ -49,8 +49,8 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> [Range<C.Index>] where C.Element == Element {
-        if let match = primaryMatch(in: collection, at: location, limitedTo: upperBound) {
+    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+        if let match = primaryMatch(in: collection, at: location) {
             return [match]
         } else {
             return []
@@ -65,8 +65,8 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
-        return literal.primaryMatch(in: collection, at: location, limitedTo: upperBound)
+    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+        return literal.primaryMatch(in: collection, at: location)
     }
 
     // #documentation(SDGCornerstone.Pattern.reverse())

@@ -156,7 +156,7 @@ class SDGTextAPITests : TestCase {
     func testNewlinePattern() {
         testPattern(CharacterSet.newlinePattern, match: "\n".scalars)
         testPattern(CharacterSet.newlinePattern, match: "\u{D}\u{A}".scalars)
-        XCTAssert(CharacterSet.newlinePattern.matches(in: ["a", "b", "c"], at: 0, limitedTo: 3).isEmpty)
+        XCTAssert(CharacterSet.newlinePattern.matches(in: ["a", "b", "c"], at: 0).isEmpty)
     }
 
     func testScalarView() {

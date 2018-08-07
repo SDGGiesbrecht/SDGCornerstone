@@ -233,7 +233,7 @@ extension SearchableCollection {
     @_inlineable @_versioned internal func _firstMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
         var i = startIndex
         while i ≠ endIndex {
-            if let range = pattern.primaryMatch(in: self, at: i, limitedTo: endIndex) { // #warning(Remove “limitedTo”.)
+            if let range = pattern.primaryMatch(in: self, at: i) {
                 return PatternMatch(range: range, in: self)
             }
             i = index(after: i)
@@ -499,7 +499,7 @@ extension SearchableCollection {
     }
 
     @_inlineable public func _hasPrefix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
-        return pattern.primaryMatch(in: self, at: startIndex, limitedTo: endIndex) ≠ nil
+        return pattern.primaryMatch(in: self, at: startIndex) ≠ nil
     }
     // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
@@ -614,7 +614,7 @@ extension SearchableCollection {
     }
 
     @_inlineable @_versioned internal func _advance<P>(_ index: inout Index, over pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
-        if let match = pattern.primaryMatch(in: self, at: index, limitedTo: endIndex) {
+        if let match = pattern.primaryMatch(in: self, at: index) {
             index = match.upperBound
             return true
         } else {
@@ -788,12 +788,12 @@ extension SearchableCollection {
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
     ///     - upperBound: An index beyond which matches are not allowed to extend.
-    @_inlineable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @_inlineable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         var checkingIndex = self.startIndex
         var collectionIndex = location
         while checkingIndex ≠ self.endIndex {
-            guard collectionIndex ≠ upperBound else {
+            guard collectionIndex ≠ collection.endIndex else {
                 // Ran out of space to check.
                 return nil
             }
