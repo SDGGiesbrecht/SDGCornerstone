@@ -21,13 +21,13 @@ extension Array : ArrayFamily {}
 extension ArraySlice : ArrayFamily {}
 extension ContiguousArray : ArrayFamily {}
 
-extension Array : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
+extension Array : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
-extension ArraySlice : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
+extension ArraySlice : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
-extension ContiguousArray : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
+extension ContiguousArray : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
 

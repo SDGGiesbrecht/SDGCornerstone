@@ -21,7 +21,7 @@
     let result2 = pattern.primaryMatch(in: match, at: match.startIndex, limitedTo: match.endIndex)
     test(result2 == match.bounds, "\(pattern).primaryMatch(in: \(match), at: \(match.startIndex)) → \(String(describing: result2)) ≠ \(match.bounds)", file: file, line: line)
 
-    let reversedMatch = match.reversed()
+    let reversedMatch: [C.Element] = match.reversed()
     let result3 = pattern.reversed().primaryMatch(in: reversedMatch, at: reversedMatch.startIndex, limitedTo: reversedMatch.endIndex)
     test(result3 == reversedMatch.bounds, "\(pattern).reversed().primaryMatch(in: \(reversedMatch), at: \(reversedMatch.startIndex)) → \(String(describing: result3)) ≠ \(reversedMatch.bounds)", file: file, line: line)
 }

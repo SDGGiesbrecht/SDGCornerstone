@@ -261,10 +261,10 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssert(scalars.advance(&mobileIndex, over: ConditionalPattern({ $0 == "C" })))
         XCTAssertFalse(scalars.advance(&mobileIndex, over: ConditionalPattern({ $0 == "C" })))
 
-        let start = [".", ".", "G", "A", "C", "!", "!", ".", "."]
-        let end = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
+        let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
+        let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
         let diff = end.difference(from: start)
-        var changed: [String] = []
+        var changed: [Unicode.Scalar] = []
         for change in diff {
             switch change {
             case .keep(let range):
@@ -295,6 +295,8 @@ class SDGCollectionsAPITests : TestCase {
 
         let set = AnyCollection(Set(endString))
         _ = set.difference(from: startString)
+        _ = endString.scalars.difference(from: start)
+        _ = AnyCollection(Set(startString)).difference(from: AnyCollection(Set(startString)))
 
         XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 == "." }))))
         XCTAssertNil("...".scalars.lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds))

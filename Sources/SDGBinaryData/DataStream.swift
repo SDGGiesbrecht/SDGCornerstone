@@ -27,7 +27,7 @@ public struct DataStream {
     // MARK: - Properties
 
     /// The portion of the data stream currently in the buffer.
-    public var buffer = Data()
+    public var buffer: Data = Data()
 
     // MARK: - Units
 

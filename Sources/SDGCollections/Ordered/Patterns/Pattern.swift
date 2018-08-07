@@ -19,7 +19,7 @@ import SDGControlFlow
 /// Required Overrides for Subclasses:
 ///     - `func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element`
 ///     - `func reversed() -> Pattern<Element>`
-open class Pattern<Element : Equatable> {
+open class Pattern<Element : Equatable> : PatternProtocol {
 
     /// Pattern consumption behaviour.
     public enum Consumption {

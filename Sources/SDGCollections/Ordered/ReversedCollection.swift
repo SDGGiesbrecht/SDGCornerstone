@@ -12,8 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension ReversedCollection : SearchableCollection where Base : SearchableCollection {
+extension ReversedCollection : PatternProtocol, SearchableCollection where Base : SearchableCollection {
     // MARK: - where Base : SearchableCollection
+
+    // #documentation(SDGCornerstone.PatternProtocol.Reversed)
+    /// The type of the reverse pattern.
+    public typealias Reversed = ReversedCollection<ReversedCollection<Base>> // #workaround(Swift 4.1.2, Probably unnecessary in Swift 4.2)
 }
 extension ReversedCollection : SearchableBidirectionalCollection where Base : SearchableBidirectionalCollection {
     // MARK: - where Base : SearchableCollection
