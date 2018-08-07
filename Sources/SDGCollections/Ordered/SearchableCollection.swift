@@ -33,7 +33,7 @@ where SubSequence : SearchableCollection {
     ///     - pattern: The pattern to search for.
     func firstMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element
     // #documentation(SDGCornerstone.Collection.firstMatch(for:))
-    /// Returns the first match for `pattern` in the entire collection.
+    /// Returns the first match for `pattern` in the collection.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
@@ -48,7 +48,7 @@ where SubSequence : SearchableCollection {
     ///     - pattern: The pattern to search for.
     func matches<P>(for pattern: P) -> [PatternMatch<Self>] where P : PatternProtocol, P.Element == Element
     // #documentation(SDGCornerstone.Collection.matches(for:))
-    /// Returns a list of all matches for `pattern` in the entire collection.
+    /// Returns a list of all matches for `pattern` in the collection.
     ///
     /// This does not check for overlapping matches.
     ///
@@ -182,7 +182,7 @@ where SubSequence : SearchableCollection {
     /// ```
     func firstNestingLevel<C : SearchableCollection, D : SearchableCollection>(startingWith openingToken: C, endingWith closingToken: D) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element
     // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
-    /// Returns the first nesting level found in the entire collection.
+    /// Returns the first nesting level found in the collection.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
     ///
@@ -241,7 +241,7 @@ extension SearchableCollection {
         return nil
     }
     // #documentation(SDGCornerstone.Collection.firstMatch(for:))
-    /// Returns the first match for `pattern` in the entire collection.
+    /// Returns the first match for `pattern` in the collection.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
@@ -249,7 +249,7 @@ extension SearchableCollection {
         return _firstMatch(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.firstMatch(for:))
-    /// Returns the first match for `pattern` in the entire collection.
+    /// Returns the first match for `pattern` in the collection.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
@@ -257,7 +257,7 @@ extension SearchableCollection {
         return _firstMatch(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.firstMatch(for:))
-    /// Returns the first match for `pattern` in the entire collection.
+    /// Returns the first match for `pattern` in the collection.
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
@@ -275,7 +275,7 @@ extension SearchableCollection {
         return results
     }
     // #documentation(SDGCornerstone.Collection.matches(for:))
-    /// Returns a list of all matches for `pattern` in the entire collection.
+    /// Returns a list of all matches for `pattern` in the collection.
     ///
     /// This does not check for overlapping matches.
     ///
@@ -285,7 +285,7 @@ extension SearchableCollection {
         return _matches(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.matches(for:))
-    /// Returns a list of all matches for `pattern` in the entire collection.
+    /// Returns a list of all matches for `pattern` in the collection.
     ///
     /// This does not check for overlapping matches.
     ///
@@ -295,7 +295,7 @@ extension SearchableCollection {
         return _matches(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.matches(for:))
-    /// Returns a list of all matches for `pattern` in the entire collection.
+    /// Returns a list of all matches for `pattern` in the collection.
     ///
     /// This does not check for overlapping matches.
     ///
@@ -583,7 +583,7 @@ extension SearchableCollection {
         return nil
     }
     // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
-    /// Returns the first nesting level found in the entire collection.
+    /// Returns the first nesting level found in the collection.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
     ///
@@ -598,7 +598,7 @@ extension SearchableCollection {
         return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken)
     }
     // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
-    /// Returns the first nesting level found in the entire collection.
+    /// Returns the first nesting level found in the collection.
     ///
     /// Use this to search for corresponding pairs of delimiters that may be nested. For example:
     ///
