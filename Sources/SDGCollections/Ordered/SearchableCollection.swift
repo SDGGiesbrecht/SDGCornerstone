@@ -236,6 +236,12 @@ where SubSequence : SearchableCollection {
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
     func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element
+    // @documentation(SDGCornerstone.Collection.difference(from:))
+    /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
+    ///
+    /// - Parameters:
+    ///     - other: The other collection. (The starting point.)
+    func difference(from other: Self) -> [Change<Index, Index>]
 }
 
 extension SearchableCollection {
@@ -888,7 +894,7 @@ extension SearchableCollection {
         return changeGroups
     }
 
-    @_inlineable @_versioned internal func _difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element {
+    @_inlineable @_versioned internal func suffixIgnorantDifference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element {
         let prefixEnd = commonPrefix(with: other).range.upperBound
         let prefixLength = distance(from: startIndex, to: prefixEnd)
         let otherPrefixEnd = other.index(other.startIndex, offsetBy: prefixLength)
@@ -908,7 +914,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
     @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element {
-        return _difference(from: other)
+        return suffixIgnorantDifference(from: other)
     }
     // @documentation(SDGCornerstone.Collection.difference(from:))
     /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
@@ -916,7 +922,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
     @_inlineable public func difference(from other: Self) -> [Change<Index, Index>] {
-        return _difference(from: other)
+        return suffixIgnorantDifference(from: other)
     }
 
     // MARK: - PatternProtocol
