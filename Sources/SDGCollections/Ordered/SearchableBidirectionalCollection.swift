@@ -185,7 +185,8 @@ extension SearchableBidirectionalCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     @_inlineable public func lastMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        guard let range = reversed().firstMatch(for: pattern.reversed(), in: backward(searchRange))?.range else {
+        let backwards: ReversedCollection<Self> = self.reversed()
+        guard let range = backwards.firstMatch(for: pattern.reversed(), in: backward(searchRange))?.range else {
             return nil
         }
         return PatternMatch(range: forward(range), in: self)
@@ -433,8 +434,8 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix<P>(_ pattern: P) -> Bool { where P : PatternProtocol, P.Element == Element
-        let backwards = reversed()
+    @_inlineable public func hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+        let backwards: ReversedCollection<Self> = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
     }
 
@@ -453,12 +454,12 @@ extension SearchableBidirectionalCollection {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     @_inlineable public func hasSuffix<C : SearchableCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
-        let backwards = reversed()
+        let backwards: ReversedCollection<Self> = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
     }
 
     @_inlineable @_versioned internal func _hasSuffix<C : SearchableBidirectionalCollection>(_ pattern: C) -> Bool where C.Element == Self.Element {
-        let backwards = reversed()
+        let backwards: ReversedCollection<Self> = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
     }
     // #documentation(SDGCornerstone.Collection.hasSuffix(_:))

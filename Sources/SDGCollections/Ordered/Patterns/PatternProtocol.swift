@@ -17,6 +17,10 @@ public protocol PatternProtocol {
     /// The type of the pattern elements.
     associatedtype Element : Equatable
 
+    // @documentation(SDGCornerstone.PatternProtocol.Reversed)
+    /// The type of the reverse pattern.
+    associatedtype Reversed : PatternProtocol where Reversed.Element == Self.Element
+
     // @documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:limitedTo:))
     /// Returns the primary match beginning at the specified index in the collection.
     ///
@@ -25,4 +29,10 @@ public protocol PatternProtocol {
     ///     - location: The index at which to check for the beginning of a match.
     ///     - upperBound: An index beyond which matches are not allowed to extend.
     func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element
+
+    // @documentation(SDGCornerstone.PatternProtocol.reversed())
+    /// A pattern that checks for the reverse pattern.
+    ///
+    /// This is suitable for performing backward searches by applying it to the reversed collection.
+    func reversed() -> Reversed
 }

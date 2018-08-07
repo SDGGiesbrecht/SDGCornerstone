@@ -45,7 +45,7 @@ extension Range where Bound == StrictString.ClusterView.Index {
     }
 }
 
-extension Range where Bound == StrictString.ScalarView.Index {
+extension Range where Bound == StrictString/*.ScalarView*/.Index {
     // MARK: - where Bound == StrictString.ScalarView.Index
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
