@@ -49,12 +49,12 @@ extension RangeReplaceableCollection {
     // @documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
 
-    @_inlineable @_versioned internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
-        replaceSubrange(subrange, with: newElements)
+    @_inlineable @_versioned internal mutating func replaceSubrangeAsCollection<R, C>(_ subrange: R, with newElements: C) where R : RangeExpression, R.Bound == Self.Index, C : Collection, C.Element == Self.Element {
+        replaceSubrange(subrange.relative(to: self), with: newElements)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
-    @_inlineable public mutating func replaceSubrange(_ subrange: Range<Self.Index>, with newElements: Self) {
+    @_inlineable public mutating func replaceSubrange<R>(_ subrange: R, with newElements: Self) where R : RangeExpression, R.Bound == Self.Index {
         replaceSubrangeAsCollection(subrange, with: newElements)
     }
 

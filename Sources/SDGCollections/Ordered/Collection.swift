@@ -55,8 +55,9 @@ extension Collection {
     // #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
 
     /// Returns the backward version of the specified range.
-    @_inlineable public func backward(_ range: Range<Self.Index>) -> Range<ReversedIndex<Self>> {
-        return ReversedIndex(range.upperBound) ..< ReversedIndex(range.lowerBound)
+    @_inlineable public func backward<R>(_ range: R) -> Range<ReversedIndex<Self>> where R : RangeExpression, R.Bound == Self.Index {
+        let resolved = range.relative(to: self)
+        return ReversedIndex(resolved.upperBound) ..< ReversedIndex(resolved.lowerBound)
     }
 
     /// Returns the forward version of the specified range.
