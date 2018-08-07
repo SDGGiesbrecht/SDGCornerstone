@@ -124,13 +124,12 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    @_inlineable @_versioned internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element { // #warning(Remove “searchRange”.)
-        let slice = self[searchRange]
-        let backwards: ReversedCollection<Self.SubSequence> = slice.reversed()
+    @_inlineable @_versioned internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+        let backwards: ReversedCollection<Self> = reversed()
         guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
             return nil
         }
-        return PatternMatch(range: slice.forward(range), in: self)
+        return PatternMatch(range: forward(range), in: self)
     }
     // #documentation(SDGCornerstone.Collection.lastMatch(for:))
     /// Returns the last match for `pattern` in the collection.
@@ -190,7 +189,7 @@ extension SearchableBidirectionalCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     @_inlineable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        return _lastMatch(for: pattern, in: searchRange)
+        return _lastMatch(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.lastMatch(for:))
     /// Returns the last match for `pattern` in the collection.
@@ -221,7 +220,7 @@ extension SearchableBidirectionalCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern, in: searchRange)
+        return _lastMatch(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.lastMatch(for:))
     /// Returns the last match for `pattern` in the collection.
@@ -252,7 +251,7 @@ extension SearchableBidirectionalCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern, in: searchRange)
+        return _lastMatch(for: pattern)
     }
 
     @_inlineable @_versioned internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {

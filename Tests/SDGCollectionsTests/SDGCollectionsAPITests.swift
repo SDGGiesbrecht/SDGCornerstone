@@ -299,7 +299,7 @@ class SDGCollectionsAPITests : TestCase {
         _ = AnyCollection(Set(startString)).difference(from: AnyCollection(Set(startString)))
 
         XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 == "." }))))
-        XCTAssertNil("...".scalars.lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds))
+        XCTAssertNil("...".scalars[...].lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
         XCTAssertNil("...".scalars[...].firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
         XCTAssert("...".scalars[...].matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])).isEmpty)
     }
