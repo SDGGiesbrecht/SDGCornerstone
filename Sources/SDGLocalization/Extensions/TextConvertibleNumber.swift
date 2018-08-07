@@ -326,7 +326,7 @@ extension TextConvertibleNumber where Self : RationalArithmetic {
         let numeratorString: StrictString
         if let radix = radixLocation {
             wholeString = StrictString(representation[representation.startIndex ..< radix])
-            numeratorString = StrictString(representation[representation.index(after: radix) ..< representation.endIndex])
+            numeratorString = StrictString(representation[representation.index(after: radix)...])
         } else {
             wholeString = representation
             numeratorString = ""

@@ -265,8 +265,7 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(clusters.index(before: clusters.endIndex), clusters.startIndex)
 
         XCTAssert(StrictString.ClusterView("0".clusters).elementsEqual(clusters))
-        let slice = clusters[clusters.startIndex ..< clusters.endIndex]
-        XCTAssert(StrictString.ClusterView(slice).elementsEqual(clusters))
+        XCTAssert(StrictString.ClusterView(clusters[...]).elementsEqual(clusters))
 
         XCTAssertEqual(StrictString("A" as ExtendedGraphemeCluster), "A")
         XCTAssertEqual("...\(StrictString("A"))...", "...A...")

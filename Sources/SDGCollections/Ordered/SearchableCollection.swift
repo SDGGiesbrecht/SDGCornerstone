@@ -268,7 +268,7 @@ extension SearchableCollection {
     @_inlineable @_versioned internal func _matches<P>(for pattern: P) -> [PatternMatch<Self>] where P : PatternProtocol, P.Element == Element {
         var accountedFor = startIndex
         var results: [PatternMatch<Self>] = []
-        while let match = self[accountedFor ..< endIndex].firstMatch(for: pattern) {
+        while let match = self[accountedFor...].firstMatch(for: pattern) {
             accountedFor = match.range.upperBound
             results.append(match.in(self))
         }

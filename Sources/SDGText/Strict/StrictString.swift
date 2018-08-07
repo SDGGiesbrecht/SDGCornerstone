@@ -79,7 +79,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         case let strict as StrictString :
             return strict
         case let strictSlice as Slice<StrictString> :
-            return StrictString(unsafeString: String(strictSlice.base.string.scalars[strictSlice.startIndex ..< strictSlice.endIndex]))
+            return StrictString(unsafeString: String(strictSlice.base.string.scalars[strictSlice.bounds]))
 
         // Need normalization.
         case let nonStrictScalars as String.ScalarView :
@@ -268,7 +268,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
 
         let preceding = StrictString(unsafeString: String(string.scalars[string.scalars.startIndex ..< subrange.lowerBound]))
-        let succeeding = StrictString(unsafeString: String(string.scalars[subrange.upperBound ..< string.scalars.endIndex]))
+        let succeeding = StrictString(unsafeString: String(string.scalars[subrange.upperBound...]))
         let replacement = StrictString.normalize(newElements)
 
         let throughNew = StrictString.concatenateStrictStrings(preceding, replacement)
