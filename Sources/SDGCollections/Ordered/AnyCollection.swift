@@ -12,12 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension AnyCollection : SearchableCollection where Element : Equatable {
+extension AnyCollection : PatternProtocol, SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
-extension AnyBidirectionalCollection : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
+extension AnyBidirectionalCollection : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
-extension AnyRandomAccessCollection : SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
+extension AnyRandomAccessCollection : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
     // MARK: - where Element : Equatable
 }
