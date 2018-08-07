@@ -266,7 +266,7 @@ extension SearchableCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search.
     @_inlineable public func firstMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>) -> PatternMatch<Self>? {
-        return firstMatch(for: pattern as Pattern<Element>, in: searchRange)
+        return _firstMatch(for: pattern, in: searchRange)
     }
     // #documentation(SDGCornerstone.Collection.firstMatch(for:in:))
     /// Returns the first match for `pattern` in the specified subrange.
@@ -332,7 +332,7 @@ extension SearchableCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search.
     @_inlineable public func matches(for pattern: CompositePattern<Element>, in searchRange: Range<Index>) -> [PatternMatch<Self>] {
-        return matches(for: pattern as Pattern<Element>, in: searchRange)
+        return _matches(for: pattern, in: searchRange)
     }
     // #documentation(SDGCornerstone.Collection.matches(for:in:))
     /// Returns a list of all matches for `pattern` in the specified subrange.
@@ -397,7 +397,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func prefix(upTo pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return prefix(upTo: pattern as Pattern<Element>)
+        return _prefix(upTo: pattern)
     }
     // #documentation(SDGCornerstone.Collection.prefix(upTo:))
     /// Returns the subsequence of `self` up to the start of `pattern`, or `nil` if `pattern` does not occur.
@@ -428,7 +428,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func prefix(through pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return prefix(through: pattern as Pattern<Element>)
+        return _prefix(through: pattern)
     }
     // #documentation(SDGCornerstone.Collection.prefix(through:))
     /// Returns the subsequence of `self` up to and including `pattern`, or `nil` if `pattern` does not occur.
@@ -459,7 +459,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func suffix(from pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return suffix(from: pattern as Pattern<Element>)
+        return _suffix(from: pattern)
     }
     // #documentation(SDGCornerstone.Collection.suffix(from:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
@@ -490,7 +490,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func suffix(after pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return suffix(after: pattern as Pattern<Element>)
+        return _suffix(after: pattern)
     }
     // #documentation(SDGCornerstone.Collection.suffix(after:))
     /// Returns the subsequence from the beginning `pattern` to the end of `self`, or `nil` if `pattern` does not occur.
@@ -531,7 +531,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func components(separatedBy pattern: CompositePattern<Element>) -> [PatternMatch<Self>] {
-        return components(separatedBy: pattern as Pattern<Element>)
+        return _components(separatedBy: pattern)
     }
     // #documentation(SDGCornerstone.Collection.components(separatedBy:))
     /// Returns the segments of `self` separated by instances of `pattern`.
@@ -559,7 +559,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func contains(_ pattern: CompositePattern<Element>) -> Bool {
-        return contains(pattern as Pattern<Element>)
+        return _contains(pattern)
     }
     // #documentation(SDGCornerstone.Collection.contains(pattern:))
     /// Returns `true` if `self` contains an match for `pattern`.
@@ -587,7 +587,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     @_inlineable public func hasPrefix(_ pattern: CompositePattern<Element>) -> Bool {
-        return hasPrefix(pattern as Pattern<Element>)
+        return _hasPrefix(pattern)
     }
     // #documentation(SDGCornerstone.Collection.hasPrefix(_:))
     /// Returns `true` if `self` begins with `pattern`.
@@ -781,7 +781,7 @@ extension SearchableCollection {
     ///
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @_inlineable @discardableResult public func advance(_ index: inout Index, over pattern: CompositePattern<Element>) -> Bool {
-        return advance(&index, over: pattern as Pattern<Element>)
+        return _advance(&index, over: pattern)
     }
     // #documentation(SDGCornerstone.Collection.advance(_: over:))
     /// Advances the index over the pattern.
@@ -977,7 +977,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public mutating func truncate(before pattern: CompositePattern<Element>) {
-        truncate(before: pattern as Pattern<Element>)
+        _truncate(before: pattern)
     }
     // #documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
@@ -990,6 +990,13 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _truncate(before: pattern)
     }
 
+    @_inlineable @_versioned internal func _truncated<P>(before pattern: P) -> Self where P : PatternProtocol, P.Element == Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
+        #else
+        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
+        #endif
+    }
     // @documentation(SDGCornerstone.Collection.trucated(before:))
     /// Returns a collection formed by truncating `self` at the start of the first match for the specified pattern.
     ///
@@ -998,11 +1005,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated<P>(before pattern: P) -> Self where P : PatternProtocol, P.Element == Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
-        #endif
+        return _truncated(before: pattern)
     }
 
     // #documentation(SDGCornerstone.Collection.trucated(before:))
@@ -1013,28 +1016,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(before pattern: CompositePattern<Element>) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
-        #endif
+        return _truncated(before: pattern)
     }
-
-    // #documentation(SDGCornerstone.Collection.trucated(after:))
-    /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
-    ///
-    /// If the pattern does not occur, the collection will remain unchanged.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func truncated<C : SearchableCollection>(before pattern: C) -> Self where C.Element == Self.Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
-        #endif
-    }
-
     // #documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
@@ -1043,13 +1026,14 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(before pattern: Self) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.truncate(before: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.truncate(before: ), on: self, with: pattern)
-        #endif
+        return _truncated(before: pattern)
     }
 
+    @_inlineable @_versioned internal mutating func _truncate<P>(after pattern: P) where P : PatternProtocol, P.Element == Element {
+        if let match = firstMatch(for: pattern) {
+            removeSubrange(match.range.upperBound ..< endIndex)
+        }
+    }
     // @documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
@@ -1058,11 +1042,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public mutating func truncate<P>(after pattern: P) where P : PatternProtocol, P.Element == Element {
-        if let match = firstMatch(for: pattern) {
-            removeSubrange(match.range.upperBound ..< endIndex)
-        }
+        return _truncate(after: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
@@ -1071,25 +1052,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public mutating func truncate(after pattern: CompositePattern<Element>) {
-        truncate(after: pattern as Pattern<Element>)
-    }
-
-    @_inlineable @_versioned internal mutating func _truncate<C : SearchableCollection>(after pattern: C) where C.Element == Self.Element {
-        if let match = firstMatch(for: pattern) {
-            removeSubrange(match.range.upperBound ..< endIndex)
-        }
-    }
-    // #documentation(SDGCornerstone.Collection.trucate(after:))
-    /// Truncates `self` at the end of the first match for the specified pattern.
-    ///
-    /// If the pattern does not occur, the collection will remain unchanged.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public mutating func truncate<C : SearchableCollection>(after pattern: C) where C.Element == Self.Element {
         _truncate(after: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.trucate(after:))
     /// Truncates `self` at the end of the first match for the specified pattern.
     ///
@@ -1101,6 +1065,13 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _truncate(after: pattern)
     }
 
+    @_inlineable @_versioned internal func _truncated<P>(after pattern: P) -> Self where P : PatternProtocol, P.Element == Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
+        #else
+        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
+        #endif
+    }
     // @documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
@@ -1109,13 +1080,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated<P>(after pattern: P) -> Self where P : PatternProtocol, P.Element == Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
-        #endif
+        return _truncated(after: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
@@ -1124,28 +1090,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: CompositePattern<Element>) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
-        #endif
+        return _truncated(after: pattern)
     }
-
-    // #documentation(SDGCornerstone.Collection.trucated(after:))
-    /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
-    ///
-    /// If the pattern does not occur, the collection will remain unchanged.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func truncated<C : SearchableCollection>(after pattern: C) -> Self where C.Element == Self.Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
-        #endif
-    }
-
     // #documentation(SDGCornerstone.Collection.trucated(after:))
     /// Returns a collection formed by truncating `self` at the end of the first match for the specified pattern.
     ///
@@ -1154,13 +1100,16 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func truncated(after pattern: Self) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.truncate(after: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.truncate(after: ), on: self, with: pattern)
-        #endif
+        return truncated(after: pattern)
     }
 
+    @_inlineable @_versioned internal mutating func _drop<P>(upTo pattern: P) where P : PatternProtocol, P.Element == Element {
+        if let match = firstMatch(for: pattern) {
+            removeSubrange(startIndex ..< match.range.lowerBound)
+        } else {
+            self = Self()
+        }
+    }
     // @documentation(SDGCornerstone.Collection.drop(upTo:))
     /// Drops elements from the beginning of the collection to the start of the first match for the specified pattern.
     ///
@@ -1169,13 +1118,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public mutating func drop<P>(upTo pattern: P) where P : PatternProtocol, P.Element == Element {
-        if let match = firstMatch(for: pattern) {
-            removeSubrange(startIndex ..< match.range.lowerBound)
-        } else {
-            self = Self()
-        }
+        return _drop(upTo: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.drop(upTo:))
     /// Drops elements from the beginning of the collection to the start of the first match for the specified pattern.
     ///
@@ -1184,27 +1128,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public mutating func drop(upTo pattern: CompositePattern<Element>) {
-        drop(upTo: pattern as Pattern<Element>)
-    }
-
-    @_inlineable @_versioned internal mutating func _drop<C : SearchableCollection>(upTo pattern: C) where C.Element == Self.Element {
-        if let match = firstMatch(for: pattern) {
-            removeSubrange(startIndex ..< match.range.lowerBound)
-        } else {
-            self = Self()
-        }
-    }
-    // #documentation(SDGCornerstone.Collection.drop(upTo:))
-    /// Drops elements from the beginning of the collection to the start of the first match for the specified pattern.
-    ///
-    /// If the pattern does not occur, the collection will empty itself.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public mutating func drop<C : SearchableCollection>(upTo pattern: C) where C.Element == Self.Element {
         _drop(upTo: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.drop(upTo:))
     /// Drops elements from the beginning of the collection to the start of the first match for the specified pattern.
     ///
@@ -1216,6 +1141,13 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _drop(upTo: pattern)
     }
 
+    @_inlineable @_versioned internal func _dropping<P>(upTo pattern: P) -> Self where P : PatternProtocol, P.Element == Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
+        #else
+        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
+        #endif
+    }
     // @documentation(SDGCornerstone.Collection.dropping(upTo:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the start of the first match for the pattern.
     ///
@@ -1224,13 +1156,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping<P>(upTo pattern: P) -> Self where P : PatternProtocol, P.Element == Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
-        #endif
+        return _dropping(upTo: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.dropping(upTo:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the start of the first match for the pattern.
     ///
@@ -1239,28 +1166,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(upTo pattern: CompositePattern<Element>) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
-        #endif
+        return _dropping(upTo: pattern)
     }
-
-    // #documentation(SDGCornerstone.Collection.dropping(upTo:))
-    /// Returns a collection formed by dropping the elements from the beginning of the collection to the start of the first match for the pattern.
-    ///
-    /// If the pattern does not occur, the collection will empty itself.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func dropping<C : SearchableCollection>(upTo pattern: C) -> Self where C.Element == Self.Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
-        #endif
-    }
-
     // #documentation(SDGCornerstone.Collection.dropping(upTo:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the start of the first match for the pattern.
     ///
@@ -1269,13 +1176,16 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(upTo pattern: Self) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.drop(upTo: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.drop(upTo: ), on: self, with: pattern)
-        #endif
+        return _dropping(upTo: pattern)
     }
 
+    @_inlineable @_versioned internal mutating func _drop<P>(through pattern: P) where P : PatternProtocol, P.Element == Element {
+        if let match = firstMatch(for: pattern) {
+            removeSubrange(startIndex ..< match.range.upperBound)
+        } else {
+            self = Self()
+        }
+    }
     // @documentation(SDGCornerstone.Collection.drop(through:))
     /// Drops elements from the beginning of the collection to the end of the first match for the specified pattern.
     ///
@@ -1284,13 +1194,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public mutating func drop<P>(through pattern: P) where P : PatternProtocol, P.Element == Element {
-        if let match = firstMatch(for: pattern) {
-            removeSubrange(startIndex ..< match.range.upperBound)
-        } else {
-            self = Self()
-        }
+        return _drop(through: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.drop(through:))
     /// Drops elements from the beginning of the collection to the end of the first match for the specified pattern.
     ///
@@ -1299,27 +1204,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public mutating func drop(through pattern: CompositePattern<Element>) {
-        drop(through: pattern as Pattern<Element>)
-    }
-
-    @_inlineable @_versioned internal mutating func _drop<C : SearchableCollection>(through pattern: C) where C.Element == Self.Element {
-        if let match = firstMatch(for: pattern) {
-            removeSubrange(startIndex ..< match.range.upperBound)
-        } else {
-            self = Self()
-        }
-    }
-    // #documentation(SDGCornerstone.Collection.drop(through:))
-    /// Drops elements from the beginning of the collection to the end of the first match for the specified pattern.
-    ///
-    /// If the pattern does not occur, the collection will empty itself.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public mutating func drop<C : SearchableCollection>(through pattern: C) where C.Element == Self.Element {
         _drop(through: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.drop(through:))
     /// Drops elements from the beginning of the collection to the end of the first match for the specified pattern.
     ///
@@ -1331,6 +1217,13 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _drop(through: pattern)
     }
 
+    @_inlineable @_versioned internal func _dropping<P>(through pattern: P) -> Self where P : PatternProtocol, P.Element == Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
+        #else
+        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
+        #endif
+    }
     // @documentation(SDGCornerstone.Collection.dropping(through:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the end of the first match for the pattern.
     ///
@@ -1339,13 +1232,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping<P>(through pattern: P) -> Self where P : PatternProtocol, P.Element == Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
-        #endif
+        return _dropping(through: pattern)
     }
-
     // #documentation(SDGCornerstone.Collection.dropping(through:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the end of the first match for the pattern.
     ///
@@ -1354,28 +1242,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(through pattern: CompositePattern<Element>) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
-        #endif
+        return _dropping(through: pattern)
     }
-
-    // #documentation(SDGCornerstone.Collection.dropping(through:))
-    /// Returns a collection formed by dropping the elements from the beginning of the collection to the end of the first match for the pattern.
-    ///
-    /// If the pattern does not occur, the collection will empty itself.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    @_inlineable public func dropping<C : SearchableCollection>(through pattern: C) -> Self where C.Element == Self.Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
-        #endif
-    }
-
     // #documentation(SDGCornerstone.Collection.dropping(through:))
     /// Returns a collection formed by dropping the elements from the beginning of the collection to the end of the first match for the pattern.
     ///
@@ -1384,13 +1252,14 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     @_inlineable public func dropping(through pattern: Self) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.drop(through: $1) }, on: self, with: pattern)
-        #else
-        return nonmutatingVariant(of: Self.drop(through: ), on: self, with: pattern)
-        #endif
+        return _dropping(through: pattern)
     }
 
+    @_inlineable @_versioned internal mutating func _replaceMatches<P, C>(for pattern: P, with replacement: C) where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
+        mutateMatches(for: pattern, mutation: { (_) -> C in
+            return replacement
+        })
+    }
     // @documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
     /// Replaces each match for the pattern with the elements of the replacement.
     ///
@@ -1398,11 +1267,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public mutating func replaceMatches<P, C>(for pattern: P, with replacement: C) where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
-        mutateMatches(for: pattern, mutation: { (_) -> C in
-            return replacement
-        })
+        return _replaceMatches(for: pattern, with: replacement)
     }
-
     // #documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
     /// Replaces each match for the pattern with the elements of the replacement.
     ///
@@ -1410,24 +1276,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public mutating func replaceMatches<C : SearchableCollection>(for pattern: CompositePattern<Element>, with replacement: C) where C.Element == Self.Element {
-        replaceMatches(for: pattern as Pattern<Element>, with: replacement)
-    }
-
-    @_inlineable @_versioned internal mutating func _replaceMatches<P : SearchableCollection, C : SearchableCollection>(for pattern: P, with replacement: C) where P.Element == Self.Element, C.Element == Self.Element {
-        mutateMatches(for: pattern, mutation: { (_) -> C in
-            return replacement
-        })
-    }
-    // #documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
-    /// Replaces each match for the pattern with the elements of the replacement.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
-    @_inlineable public mutating func replaceMatches<P : SearchableCollection, C : SearchableCollection>(for pattern: P, with replacement: C) where P.Element == Self.Element, C.Element == Self.Element {
         _replaceMatches(for: pattern, with: replacement)
     }
-
     // #documentation(SDGCornerstone.Collection.replaceMatches(for:with:))
     /// Replaces each match for the pattern with the elements of the replacement.
     ///
@@ -1438,6 +1288,13 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _replaceMatches(for: pattern, with: replacement)
     }
 
+    @_inlineable @_versioned internal func _replacingMatches<P, C>(for pattern: P, with replacement: C) -> Self where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
+        #if swift(>=4.1.50)
+        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
+        #else
+        return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
+        #endif
+    }
     // @documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
     /// Returns a collection formed by replacing each match for the pattern with the elements of the replacement.
     ///
@@ -1445,11 +1302,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func replacingMatches<P, C>(for pattern: P, with replacement: C) -> Self where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
-        #else
-        return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
-        #endif
+        return _replacingMatches(for: pattern, with: replacement)
     }
 
     // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
@@ -1459,27 +1312,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func replacingMatches<C : SearchableCollection>(for pattern: CompositePattern<Element>, with replacement: C) -> Self where C.Element == Self.Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
-        #else
-        return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
-        #endif
+        return _replacingMatches(for: pattern, with: replacement)
     }
-
-    // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
-    /// Returns a collection formed by replacing each match for the pattern with the elements of the replacement.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
-    @_inlineable public func replacingMatches<P : SearchableCollection, C : SearchableCollection>(for pattern: P, with replacement: C) -> Self where P.Element == Self.Element, C.Element == Self.Element {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
-        #else
-        return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
-        #endif
-    }
-
     // #documentation(SDGCornerstone.Collection.replacingMatches(for:with:))
     /// Returns a collection formed by replacing each match for the pattern with the elements of the replacement.
     ///
@@ -1487,13 +1321,26 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func replacingMatches(for pattern: Self, with replacement: Self) -> Self {
-        #if swift(>=4.1.50)
-        return nonmutatingVariant(of: { $0.replaceMatches(for: $1, with: $2) }, on: self, with: (pattern, replacement))
-        #else
-        return nonmutatingVariant(of: Self.replaceMatches, on: self, with: (pattern, replacement))
-        #endif
+        return _replacingMatches(for: pattern, with: replacement)
     }
 
+    @_inlineable @_versioned internal mutating func _mutateMatches<P, C>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
+
+        let hits = matches(for: pattern)
+        var unaltered = ranges(separatedBy: hits.map({ $0.range }))
+
+        var replacements = hits.map({ mutation($0) })
+
+        var result = Self()
+        while ¬replacements.isEmpty {
+            result.append(contentsOf: self[unaltered.removeFirst()])
+            result.append(contentsOf: replacements.removeFirst())
+        }
+
+        result.append(contentsOf: self[unaltered.removeFirst()])
+
+        self = result
+    }
     // @documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))
     /// Mutates each match for the pattern according to a closure.
     ///
@@ -1501,23 +1348,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
     @_inlineable public mutating func mutateMatches<P, C>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
-
-        let hits = matches(for: pattern)
-        var unaltered = ranges(separatedBy: hits.map({ $0.range }))
-
-        var replacements = hits.map({ mutation($0) })
-
-        var result = Self()
-        while ¬replacements.isEmpty {
-            result.append(contentsOf: self[unaltered.removeFirst()])
-            result.append(contentsOf: replacements.removeFirst())
-        }
-
-        result.append(contentsOf: self[unaltered.removeFirst()])
-
-        self = result
+        return _mutateMatches(for: pattern, mutation: mutation)
     }
-
     // #documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))
     /// Mutates each match for the pattern according to a closure.
     ///
@@ -1525,36 +1357,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
     @_inlineable public mutating func mutateMatches<C : SearchableCollection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
-        mutateMatches(for: pattern as Pattern<Element>, mutation: mutation)
-    }
-
-    @_inlineable @_versioned internal mutating func _mutateMatches<P : SearchableCollection, C : SearchableCollection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P.Element == Self.Element, C.Element == Self.Element {
-
-        let hits = matches(for: pattern)
-        var unaltered = ranges(separatedBy: hits.map({ $0.range }))
-
-        var replacements = hits.map({ mutation($0) })
-
-        var result = Self()
-        while ¬replacements.isEmpty {
-            result.append(contentsOf: self[unaltered.removeFirst()])
-            result.append(contentsOf: replacements.removeFirst())
-        }
-
-        result.append(contentsOf: self[unaltered.removeFirst()])
-
-        self = result
-    }
-    // #documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))
-    /// Mutates each match for the pattern according to a closure.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - mutation: A closure that generates a replacement collection from a match.
-    @_inlineable public mutating func mutateMatches<P : SearchableCollection, C : SearchableCollection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P.Element == Self.Element, C.Element == Self.Element {
         _mutateMatches(for: pattern, mutation: mutation)
     }
-
     // #documentation(SDGCornerstone.Collection.mutateMatches(for:mutation:))
     /// Mutates each match for the pattern according to a closure.
     ///
@@ -1565,6 +1369,11 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
         _mutateMatches(for: pattern, mutation: mutation)
     }
 
+    @_inlineable @_versioned internal func _mutatingMatches<P, C>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
+        var copy = self
+        copy.mutateMatches(for: pattern, mutation: mutation)
+        return copy
+    }
     // @documentation(SDGCornerstone.Collection.mutatingMatches(for:mutation:))
     /// Returns a collection formed by mutating each match for the pattern according to a closure.
     ///
@@ -1572,9 +1381,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func mutatingMatches<P, C>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
-        var copy = self
-        copy.mutateMatches(for: pattern, mutation: mutation)
-        return copy
+        return _mutatingMatches(for: pattern, mutation: mutation)
     }
 
     // #documentation(SDGCornerstone.Collection.mutatingMatches(for:mutation:))
@@ -1584,23 +1391,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func mutatingMatches<C : SearchableCollection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
-        var copy = self
-        copy.mutateMatches(for: pattern, mutation: mutation)
-        return copy
+        return _mutatingMatches(for: pattern, mutation: mutation)
     }
-
-    // #documentation(SDGCornerstone.Collection.mutatingMatches(for:mutation:))
-    /// Returns a collection formed by mutating each match for the pattern according to a closure.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
-    @_inlineable public func mutatingMatches<P : SearchableCollection, C : SearchableCollection>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where P.Element == Self.Element, C.Element == Self.Element {
-        var copy = self
-        copy.mutateMatches(for: pattern, mutation: mutation)
-        return copy
-    }
-
     // #documentation(SDGCornerstone.Collection.mutatingMatches(for:mutation:))
     /// Returns a collection formed by mutating each match for the pattern according to a closure.
     ///
@@ -1608,8 +1400,6 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///     - pattern: The pattern to search for.
     ///     - replacement: The collection to use as a replacement
     @_inlineable public func mutatingMatches<C : SearchableCollection>(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
-        var copy = self
-        copy.mutateMatches(for: pattern, mutation: mutation)
-        return copy
+        return _mutatingMatches(for: pattern, mutation: mutation)
     }
 }
