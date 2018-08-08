@@ -105,6 +105,9 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(index, 2)
         XCTAssertFalse(advancingCollection.advance(&index, over: [LiteralPattern([2]), LiteralPattern([3])]))
         XCTAssertEqual(index, 2)
+
+        let bounds = collection.bounds
+        XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)
     }
 
     func testBijectiveMapping() {
@@ -704,6 +707,10 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssert(scalars.mutatingMatches(for: ["B", "C"], mutation: { _ in return "x".scalars }).elementsEqual("AxDE".scalars))
 
         XCTAssertEqual("ABC", String(arrayLiteral: "A", "B", "C"))
+
+        mutable = collection
+        mutable.replaceSubrange(mutable.startIndex..., with: [0])
+        XCTAssertEqual(mutable, [0])
     }
 
     func testRepetitionPattern() {
