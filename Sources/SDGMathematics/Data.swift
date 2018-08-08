@@ -37,7 +37,7 @@ extension Data : BitField {
         for index in startIndex ..< end {
             self[index].formBitwiseAnd(with: other[index])
         }
-        removeSubrange(end ..< endIndex)
+        removeSubrange(end...)
     }
 
     // #documentation(SDGCornerstone.BitField.formBitwiseOr(with:))
@@ -51,7 +51,7 @@ extension Data : BitField {
         for index in startIndex ..< end {
             self[index].formBitwiseOr(with: other[index])
         }
-        append(contentsOf: other[end ..< other.endIndex])
+        append(contentsOf: other[end...])
     }
 
     // #documentation(SDGCornerstone.BitField.formBitwiseExclusiveOr(with:))
@@ -65,6 +65,6 @@ extension Data : BitField {
         for index in startIndex ..< end {
             self[index].formBitwiseExclusiveOr(with: other[index])
         }
-        append(contentsOf: other[end ..< other.endIndex])
+        append(contentsOf: other[end...])
     }
 }

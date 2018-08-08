@@ -25,13 +25,15 @@ extension BidirectionalCollection {
     #if swift(>=4.1.50)
     // MARK: - #if swift(>=4.1.50)
     /// Returns the backward version of the specified range.
-    @_inlineable public func backward(_ range: Range<Self.Index>) -> Range<ReversedCollection<Self>.Index> {
-        return ReversedCollection<Self>.Index(range.upperBound) ..< ReversedCollection<Self>.Index(range.lowerBound)
+    @_inlineable public func backward<R>(_ range: R) -> Range<ReversedCollection<Self>.Index> where R : RangeExpression, R.Bound == Self.Index {
+        let resolved = range.relative(to: self)
+        return ReversedCollection<Self>.Index(resolved.upperBound) ..< ReversedCollection<Self>.Index(resolved.lowerBound)
     }
 
     /// Returns the forward version of the specified range.
-    @_inlineable public func forward(_ range: Range<ReversedCollection<Self>.Index>) -> Range<Self.Index> {
-        return range.upperBound.base ..< range.lowerBound.base
+    @_inlineable public func forward<R>(_ range: R) -> Range<Self.Index> where R : RangeExpression, R.Bound == ReversedCollection<Self>.Index {
+        let resolved = range.relative(to: reversed())
+        return resolved.upperBound.base ..< resolved.lowerBound.base
     }
     #endif
 }

@@ -140,8 +140,8 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
                 stream.append(newData)
 
                 while let lineEnd = stream.range(of: newLineData) {
-                    let lineData = stream.subdata(in: stream.startIndex ..< lineEnd.lowerBound)
-                    stream.removeSubrange(stream.startIndex ..< lineEnd.upperBound)
+                    let lineData = stream.subdata(in: (..<lineEnd.lowerBound).relative(to: stream))
+                    stream.removeSubrange(..<lineEnd.upperBound)
 
                     guard let line = try? String(file: lineData, origin: nil) else {
                         unreachable()

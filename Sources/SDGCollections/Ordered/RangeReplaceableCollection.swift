@@ -49,12 +49,20 @@ extension RangeReplaceableCollection {
     // @documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
 
-    @_inlineable @_versioned internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Self.Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
+    @_inlineable @_versioned internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
-    @_inlineable public mutating func replaceSubrange(_ subrange: Range<Self.Index>, with newElements: Self) {
+    @_inlineable public mutating func replaceSubrange(_ subrange: Range<Index>, with newElements: Self) {
+        replaceSubrangeAsCollection(subrange, with: newElements)
+    }
+    @_inlineable @_versioned internal mutating func replaceSubrangeAsCollection<R, C>(_ subrange: R, with newElements: C) where R : RangeExpression, R.Bound == Self.Index, C : Collection, C.Element == Self.Element {
+        replaceSubrange(subrange, with: newElements)
+    }
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
+    /// Inserts the contents of the sequence to the specified index.
+    @_inlineable public mutating func replaceSubrange<R>(_ subrange: R, with newElements: Self) where R : RangeExpression, R.Bound == Self.Index {
         replaceSubrangeAsCollection(subrange, with: newElements)
     }
 
@@ -163,7 +171,7 @@ extension RangeReplaceableCollection {
 
     /// Truncates the `self` at `index`.
     @_inlineable public mutating func truncate(at index: Index) {
-        removeSubrange(index ..< endIndex)
+        removeSubrange(index...)
     }
 
     /// Returns a collection formed by truncating `self` at `index`.

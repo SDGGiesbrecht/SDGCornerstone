@@ -105,6 +105,9 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(index, 2)
         XCTAssertFalse(advancingCollection.advance(&index, over: [LiteralPattern([2]), LiteralPattern([3])]))
         XCTAssertEqual(index, 2)
+
+        let bounds = collection.bounds
+        XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)
     }
 
     func testBijectiveMapping() {
@@ -112,7 +115,7 @@ class SDGCollectionsAPITests : TestCase {
 
         let mapping: BijectiveMapping = [1: "1", 2: "2", 3: "3"]
 
-        XCTAssertEqual(mapping[mapping.bounds].count, 3)
+        XCTAssertEqual(mapping[...].count, 3)
 
         for (x, y) in mapping {
             XCTAssertEqual(mapping[x], y)
@@ -299,9 +302,9 @@ class SDGCollectionsAPITests : TestCase {
         _ = AnyCollection(Set(startString)).difference(from: AnyCollection(Set(startString)))
 
         XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 == "." }))))
-        XCTAssertNil("...".scalars.lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds))
-        XCTAssertNil("...".scalars.firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds))
-        XCTAssert("...".scalars.matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})]), in: "...".scalars.bounds).isEmpty)
+        XCTAssertNil("...".scalars[...].lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
+        XCTAssertNil("...".scalars[...].firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
+        XCTAssert("...".scalars[...].matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])).isEmpty)
     }
 
     struct ComparableSetExample : ComparableSet {
@@ -335,7 +338,7 @@ class SDGCollectionsAPITests : TestCase {
 
     func testConditionalPattern() {
         testPattern(ConditionalPattern({ $0 < 10 }), match: [0])
-        XCTAssert(ConditionalPattern({ $0 < 10 }).matches(in: [11], at: 0, limitedTo: 1).isEmpty)
+        XCTAssert(ConditionalPattern({ $0 < 10 }).matches(in: [11], at: 0).isEmpty)
     }
 
     func testDictionary() {
@@ -528,15 +531,15 @@ class SDGCollectionsAPITests : TestCase {
     func testNotPattern() {
         let pattern = NotPattern(LiteralPattern([1]))
         testPattern(pattern, match: [2])
-        XCTAssert(NotPattern(LiteralPattern([1])).matches(in: [1], at: 0, limitedTo: 1).isEmpty)
+        XCTAssert(NotPattern(LiteralPattern([1])).matches(in: [1], at: 0).isEmpty)
 
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "¬1", overwriteSpecificationInsteadOfFailing: false)
     }
 
     class CustomPattern : SDGCollections.Pattern<Int> {
         let pattern = LiteralPattern([1])
-        override func matches<C>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> [Range<C.Index>] where Int == C.Element, C : SearchableCollection {
-            return pattern.matches(in: collection, at: location, limitedTo: upperBound)
+        override func matches<C>(in collection: C, at location: C.Index) -> [Range<C.Index>] where Int == C.Element, C : SearchableCollection {
+            return pattern.matches(in: collection, at: location)
         }
         override func reversed() -> CustomPattern {
             return self
@@ -704,6 +707,10 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssert(scalars.mutatingMatches(for: ["B", "C"], mutation: { _ in return "x".scalars }).elementsEqual("AxDE".scalars))
 
         XCTAssertEqual("ABC", String(arrayLiteral: "A", "B", "C"))
+
+        mutable = collection
+        mutable.replaceSubrange(mutable.startIndex..., with: [0])
+        XCTAssertEqual(mutable, [0])
     }
 
     func testRepetitionPattern() {

@@ -19,8 +19,8 @@ public struct Line<Base : StringFamily> : TextualPlaygroundDisplay {
 
     /// Creates a line.
     @_inlineable public init(line: Base, newline: Base) {
-        self.line = line.scalars[line.scalars.bounds]
-        self.newline = newline.scalars[newline.scalars.bounds]
+        self.line = line.scalars[...]
+        self.newline = newline.scalars[...]
     }
 
     /// Creates a line.

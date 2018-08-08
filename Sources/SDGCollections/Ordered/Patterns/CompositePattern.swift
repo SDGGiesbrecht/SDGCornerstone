@@ -49,7 +49,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
         for component in components {
@@ -58,7 +58,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
                 return []
             } else {
                 // Continue
-                endIndices = endIndices.map({ component.matches(in: collection, at: $0, limitedTo: upperBound) }).joined().map({ $0.upperBound })
+                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
             }
         }
 
@@ -73,7 +73,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index, limitedTo upperBound: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
         for component in components {
@@ -82,7 +82,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
                 return nil
             } else {
                 // Continue
-                endIndices = endIndices.map({ component.matches(in: collection, at: $0, limitedTo: upperBound) }).joined().map({ $0.upperBound })
+                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
             }
         }
 

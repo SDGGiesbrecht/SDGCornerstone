@@ -22,9 +22,9 @@
 public protocol SearchableBidirectionalCollection : BidirectionalCollection, SearchableCollection
 where SubSequence : SearchableBidirectionalCollection {
 
-    // @documentation(SDGCornerstone.Collection.lastMatch(for:in:))
+    // @documentation(SDGCornerstone.Collection.lastMatch(for:))
     // #example(1, lastMatchBackwardsDifferences1) #example(2, lastMatchBackwardsDifferences2)
-    /// Returns the last match for `pattern` in the specified subrange.
+    /// Returns the last match for `pattern` in the collection.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
     ///
@@ -51,10 +51,9 @@ where SubSequence : SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search.
-    func lastMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element
-    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
-    /// Returns the last match for `pattern` in the specified subrange.
+    func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:))
+    /// Returns the last match for `pattern` in the collection.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
     ///
@@ -81,8 +80,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    func lastMatch(for pattern: Self, in searchRange: Range<Index>) -> PatternMatch<Self>?
+    func lastMatch(for pattern: Self) -> PatternMatch<Self>?
 
     // @documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
@@ -126,15 +124,15 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    @_inlineable @_versioned internal func _lastMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        let backwards: ReversedCollection<Self> = self.reversed()
-        guard let range = backwards.firstMatch(for: pattern.reversed(), in: backward(searchRange))?.range else {
+    @_inlineable @_versioned internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+        let backwards: ReversedCollection<Self> = reversed()
+        guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
             return nil
         }
         return PatternMatch(range: forward(range), in: self)
     }
-    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
-    /// Returns the last match for `pattern` in the specified subrange.
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:))
+    /// Returns the last match for `pattern` in the collection.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
     ///
@@ -161,105 +159,6 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    // #example(1, lastMatchBackwardsDifferences1) #example(2, lastMatchBackwardsDifferences2)
-    /// Returns the last match for `pattern` in the specified subrange.
-    ///
-    /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
-    ///
-    /// ```swift
-    /// let collection = [0, 0, 0, 0, 0]
-    /// let pattern = [0, 0]
-    ///
-    /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 3 ..< 5)
-    ///
-    /// XCTAssertEqual(collection.matches(for: pattern).last?.range, 2 ..< 4)
-    /// // (Here the matches are 0 ..< 2 and 2 ..< 4; the final zero is incomplete.)
-    /// ```
-    ///
-    /// ```swift
-    /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
-    ///
-    /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
-    /// // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
-    ///
-    /// XCTAssertEqual(collection.matches(for: pattern).last?.range, 0 ..< 3)
-    /// // (Forwards, the lazy consumption keeps consuming zeros until the pattern can be completed with a one.)
-    /// ```
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_inlineable public func lastMatch<P>(for pattern: P, in searchRange: Range<Index>) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        return _lastMatch(for: pattern, in: searchRange)
-    }
-    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
-    /// Returns the last match for `pattern` in the specified subrange.
-    ///
-    /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
-    ///
-    /// ```swift
-    /// let collection = [0, 0, 0, 0, 0]
-    /// let pattern = [0, 0]
-    ///
-    /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 3 ..< 5)
-    ///
-    /// XCTAssertEqual(collection.matches(for: pattern).last?.range, 2 ..< 4)
-    /// // (Here the matches are 0 ..< 2 and 2 ..< 4; the final zero is incomplete.)
-    /// ```
-    ///
-    /// ```swift
-    /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
-    ///
-    /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
-    /// // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
-    ///
-    /// XCTAssertEqual(collection.matches(for: pattern).last?.range, 0 ..< 3)
-    /// // (Forwards, the lazy consumption keeps consuming zeros until the pattern can be completed with a one.)
-    /// ```
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_inlineable public func lastMatch(for pattern: CompositePattern<Element>, in searchRange: Range<Index>) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern, in: searchRange)
-    }
-    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
-    /// Returns the last match for `pattern` in the specified subrange.
-    ///
-    /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
-    ///
-    /// ```swift
-    /// let collection = [0, 0, 0, 0, 0]
-    /// let pattern = [0, 0]
-    ///
-    /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 3 ..< 5)
-    ///
-    /// XCTAssertEqual(collection.matches(for: pattern).last?.range, 2 ..< 4)
-    /// // (Here the matches are 0 ..< 2 and 2 ..< 4; the final zero is incomplete.)
-    /// ```
-    ///
-    /// ```swift
-    /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
-    ///
-    /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
-    /// // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
-    ///
-    /// XCTAssertEqual(collection.matches(for: pattern).last?.range, 0 ..< 3)
-    /// // (Forwards, the lazy consumption keeps consuming zeros until the pattern can be completed with a one.)
-    /// ```
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_inlineable public func lastMatch(for pattern: Self, in searchRange: Range<Index>) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern, in: searchRange)
-    }
-
-    // @documentation(SDGCornerstone.Collection.lastMatch(for:in:))
     // #example(1, lastMatchBackwardsDifferences1) #example(2, lastMatchBackwardsDifferences2)
     /// Returns the last match for `pattern` in the specified subrange.
     ///
@@ -290,10 +189,10 @@ extension SearchableBidirectionalCollection {
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     @_inlineable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        return lastMatch(for: pattern, in: bounds)
+        return _lastMatch(for: pattern)
     }
-    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
-    /// Returns the last match for `pattern` in the specified subrange.
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:))
+    /// Returns the last match for `pattern` in the collection.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
     ///
@@ -320,12 +219,11 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     @_inlineable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return lastMatch(for: pattern, in: bounds)
+        return _lastMatch(for: pattern)
     }
-    // #documentation(SDGCornerstone.Collection.lastMatch(for:in:))
-    /// Returns the last match for `pattern` in the specified subrange.
+    // #documentation(SDGCornerstone.Collection.lastMatch(for:))
+    /// Returns the last match for `pattern` in the collection.
     ///
     /// This mathod searches backward from the end of the search range. This is not always the same thing as the last forward‐searched match:
     ///
@@ -352,14 +250,13 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     @_inlineable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
-        return lastMatch(for: pattern, in: bounds)
+        return _lastMatch(for: pattern)
     }
 
     @_inlineable @_versioned internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
         let backwards: ReversedCollection<Self> = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex, limitedTo: backwards.endIndex) ≠ nil
+        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
     // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
@@ -415,7 +312,7 @@ extension SearchableBidirectionalCollection {
         var difference: [Change<C.Index, Index>] = prefix(upTo: suffixStart).suffixIgnorantDifference(from: other.prefix(upTo: otherSuffixStart))
 
         if suffixLength ≠ 0 {
-            difference.append(.keep(otherSuffixStart ..< other.endIndex))
+            difference.append(.keep((otherSuffixStart...).relative(to: other)))
         }
 
         return difference

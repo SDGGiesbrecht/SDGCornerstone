@@ -34,16 +34,16 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         if scalar == base.scalars.endIndex {
             return endIndex
         }
-        guard var previousNewline = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< scalar) else {
+        guard var previousNewline = base.scalars[..<scalar].lastMatch(for: CharacterSet.newlinePattern) else {
             return startIndex
         }
 
         var encounteredNewline: Range<String.ScalarView.Index>?
-        if let newline = CharacterSet.newlinePattern.primaryMatch(in: base.scalars, at: previousNewline.range.lowerBound, limitedTo: base.scalars.endIndex),
+        if let newline = CharacterSet.newlinePattern.primaryMatch(in: base.scalars, at: previousNewline.range.lowerBound),
             newline.contains(scalar) {
             // Between CR and LF
 
-            guard let actualPreviousNewline = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< newline.lowerBound) else {
+            guard let actualPreviousNewline = base.scalars[..<newline.lowerBound].lastMatch(for: CharacterSet.newlinePattern) else {
                 return startIndex
             }
 
@@ -69,7 +69,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         if i == endIndex {
             newline = base.scalars.endIndex ..< base.scalars.endIndex
         } else {
-            guard let found = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< (i.start ?? base.scalars.endIndex))?.range else {
+            guard let found = base.scalars[..<(i.start ?? base.scalars.endIndex)].lastMatch(for: CharacterSet.newlinePattern)?.range else {
                 _preconditionFailure({ (localization: _APILocalization) -> String in
                     switch localization {
                     case .englishCanada: // @exempt(from: tests)
@@ -80,7 +80,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
             newline = found
         }
 
-        guard let previousNewline = base.scalars.lastMatch(for: CharacterSet.newlinePattern, in: base.scalars.startIndex ..< newline.lowerBound)?.range else {
+        guard let previousNewline = base.scalars[..<newline.lowerBound].lastMatch(for: CharacterSet.newlinePattern)?.range else {
             startIndex.cache.newline = newline
             return startIndex
         }

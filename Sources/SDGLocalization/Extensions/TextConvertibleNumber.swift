@@ -167,7 +167,7 @@ extension TextConvertibleNumber {
             ["F", "f"]
         ]
 
-        let selectedDigits = [[UnicodeScalar]](digits[0 ..< base])
+        let selectedDigits = [[UnicodeScalar]](digits[..<base])
 
         try self.init(fromRepresentation: representation, usingDigits: selectedDigits, radixCharacters: [",", ".", "٫"], formattingSeparators: [" ", "٬"])
     }
@@ -325,8 +325,8 @@ extension TextConvertibleNumber where Self : RationalArithmetic {
         let wholeString: StrictString
         let numeratorString: StrictString
         if let radix = radixLocation {
-            wholeString = StrictString(representation[representation.startIndex ..< radix])
-            numeratorString = StrictString(representation[representation.index(after: radix) ..< representation.endIndex])
+            wholeString = StrictString(representation[..<radix])
+            numeratorString = StrictString(representation[representation.index(after: radix)...])
         } else {
             wholeString = representation
             numeratorString = ""

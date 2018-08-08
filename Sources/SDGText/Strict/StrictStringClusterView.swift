@@ -43,7 +43,7 @@ extension StrictString {
             case let strict as StrictString.ClusterView :
                 return strict
             case let strictSlice as Slice<StrictString.ClusterView> :
-                return StrictString(unsafeString: String(strictSlice.base.string.clusters[strictSlice.startIndex ..< strictSlice.endIndex])).clusters
+                return StrictString(unsafeString: String(strictSlice.base.string.clusters[strictSlice.bounds])).clusters
 
             // Need normalization.
             case let nonStrictClusters as String.ClusterView :
@@ -123,8 +123,8 @@ extension StrictString {
         /// Replaces the specified subrange of elements with the given collection.
         @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ClusterView.Index>, with newElements: S) where S.Element == ExtendedGraphemeCluster {
 
-            let preceding = StrictString(ClusterView(self[startIndex ..< subrange.lowerBound]))
-            let succeeding = StrictString(ClusterView(self[subrange.upperBound ..< endIndex]))
+            let preceding = StrictString(ClusterView(self[..<subrange.lowerBound]))
+            let succeeding = StrictString(ClusterView(self[subrange.upperBound...]))
             let replacement = StrictString(ClusterView.normalize(newElements))
 
             self = (preceding + replacement + succeeding).clusters
