@@ -2,10 +2,21 @@
 
  */
 
+/* Layout */
+
 html, body {
     margin: 0;
     padding: 0;
 }
+
+/* Colours */
+
+html {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+/* Fonts */
 
 @media print {
     html {

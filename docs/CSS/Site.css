@@ -2,12 +2,22 @@
 
  */
 
+/* Layout */
+
 *, *:before, *:after {
     box-sizing: inherit;
 }
 html {
     box-sizing: border-box;
 }
+
+/* Colours */
+
+html {
+    color: #333333;
+}
+
+/* Fonts */
 
 html {
     font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
