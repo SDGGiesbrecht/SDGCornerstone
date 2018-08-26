@@ -24,7 +24,7 @@ import PackageDescription
 /// >
 /// > ―⁧יהוה⁩/Yehova
 ///
-/// ## Features:
+/// ### Features:
 ///
 /// - Localization tools compatible with the Swift Package Manager and Linux. (`SDGLocalization`)
 /// - User preferences compatible with Linux. (`PreferenceSet`, `Preference`)
