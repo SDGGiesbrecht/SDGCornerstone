@@ -43,14 +43,14 @@ let package = Package(
     products: [
         // The entire package.
 
+        // #documentation(SDGCornerstone)
+        /// A module representing the entire `SDGCornerstone` package. All the other modules can be used from this single import (except test utilities).
         .library(name: "SDGCornerstone", targets: ["SDGCornerstone"]),
         .library(name: "SDGCornerstoneTestUtilities", targets: ["SDGCornerstoneTestUtilities"]),
         .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
 
         // Individual component modules.
 
-        // #documentation(SDGCornerstone)
-        /// A module representing the entire `SDGCornerstone` package. All the other modules can be used from this single import (except test utilities).
         .library(name: "SDGControlFlow", targets: ["SDGControlFlow"]),
 
         .library(name: "SDGLogic", targets: ["SDGLogic"]),
