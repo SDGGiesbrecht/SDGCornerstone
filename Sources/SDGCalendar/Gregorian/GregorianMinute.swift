@@ -21,7 +21,7 @@ public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresen
     // MARK: - Static Properties
 
     /// The number of minutes in an hour.
-    public static let minutesPerHour = 60
+    public static let minutesPerHour: Int = 60
 
     // MARK: - Properties
 

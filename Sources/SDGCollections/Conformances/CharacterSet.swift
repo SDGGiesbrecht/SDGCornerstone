@@ -163,7 +163,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
     // MARK: - SetInRepresentableUniverse
 
-    public static let universe = CharacterSet().inverted
+    public static let universe: CharacterSet = CharacterSet().inverted
 
     // #documentation(SDGCornerstone.RepresentableUniverse.′)
     /// Returns the absolute complement of the set.

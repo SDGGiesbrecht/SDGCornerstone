@@ -21,7 +21,7 @@ public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentable
     // MARK: - Static Properties
 
     /// The number of parts in a Hebrew hour.
-    public static let partsPerHour = 1080
+    public static let partsPerHour: Int = 1080
 
     // MARK: - Properties
 

@@ -25,7 +25,7 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
 
     // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
     /// The additive identity (origin).
-    public static let additiveIdentity = zero
+    public static let additiveIdentity: CGVector = zero
 
     // MARK: - TwoDimensionalVector
 
