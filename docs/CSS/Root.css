@@ -28,3 +28,7 @@ html {
         font-family: sans-serif;
     }
 }
+
+span[lang] {
+    font-style: italic;
+}
