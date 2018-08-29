@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>init(searching:commandName:validate:)</title>
+  <link rel="stylesheet" href="../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../🇨🇦EN/Types/ExternalProcess.html">ExternalProcess</a>
+<span>init(searching:commandName:validate:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>init(searching:commandName:validate:)</h1>
+   </div>
+
+<div class="description">
+<p>Creates an instance by searching the system for the exectutable.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">init</span><span class="punctuation">?</span><span class="punctuation">(</span><span class="internal identifier">searching</span> <span class="internal identifier">locations</span><span class="punctuation">:</span> <span class="external identifier">S</span><span class="punctuation">,</span> <span class="internal identifier">commandName</span><span class="punctuation">:</span> <span class="external identifier">?</span><span class="punctuation">,</span> <span class="internal identifier">validate</span><span class="punctuation">:</span> <span class="external identifier">-></span><span class="punctuation">)</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<ul><li><p>Parameters:</p><ul><li><p>locations: A list of locations to search. They will be tried in order.</p></li><li><p>commandName: A name to try with the default shell’s <code class="swift"><span class="external identifier">which</span></code> command. This will be tried after the provided search list.</p></li><li><p>validate: A closure to validate any located executables. Return <code class="swift"><span class="keyword">true</span></code> to accept it. Return <code class="swift"><span class="keyword">false</span></code> to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.</p></li><li><p>process: An executable to validate. Its existence and executability have already been verified.</p></li></ul></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>runForDriver(_:)</title>
+  <link rel="stylesheet" href="../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../🇨🇦EN/Extensions/RunLoop.html">RunLoop</a>
+<span>runForDriver(_:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>runForDriver(_:)</h1>
+   </div>
+
+<div class="description">
+<p>Runs the run loop for the lifetime of the driver provided to <code class="swift"><span class="external identifier">holdDriver</span></code>.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">runForDriver</span><span class="punctuation">(</span><span class="keyword">_</span> <span class="internal identifier">holdDriver</span><span class="punctuation">:</span> <span class="external identifier">-></span><span class="punctuation">)</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>For example:</p>
+
+<code class="swift blockquote"><span class="code">var driver: RunLoop.Driver?
+DispatchQueue.global(qos: .userInitiated).async {
+    RunLoop.current.runForDriver { driver = $0 }
+}
+// The background run loop is now running.
+
+driver = nil
+// The background run loop has now stopped.</span></code>
+
+<ul><li>Warning<p> Giving the run loop (or any of its timers, ports, etc.) a strong reference to the driver will create a retain cycle.</p></li><li><p>Parameters:</p><ul><li><p>holdDriver: A closer that takes ownershipe of the driver by creating a strong reference to it somewhere with the desired lifetime.</p></li><li><p>driver: The driver that runs the loop. As soon as ARC deallocates this driver, the run loop will stop.</p></li></ul></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

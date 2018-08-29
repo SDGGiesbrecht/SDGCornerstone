@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>limit(_:to:file:line:test:)</title>
+  <link rel="stylesheet" href="../../CSS/Root.css">
+  <link rel="stylesheet" href="../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<span>limit(_:to:file:line:test:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>limit(_:to:file:line:test:)</h1>
+   </div>
+
+<div class="description">
+<p>Tests that a closure executes within a specified amount of time.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">limit</span><span class="punctuation">(</span><span class="keyword">_</span> <span class="internal identifier">testName</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/String.html"><span class="external identifier">String</span></a><span class="punctuation">,</span> <span class="internal identifier">to</span> <a href="../../🇨🇦EN/Types/GregorianDay/Type Properties/duration.html"><span class="internal identifier">duration</span></a><span class="punctuation">:</span> <span class="external identifier">TimeInterval</span><span class="punctuation">,</span> <a href="../../🇨🇦EN/Extensions/Data/Properties/file.html"><span class="internal identifier">file</span></a><span class="punctuation">:</span> <span class="external identifier">StaticString</span> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <a href="../../🇨🇦EN/Types/Line<Base>/Properties/line.html"><span class="internal identifier">line</span></a><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/UInt.html"><span class="external identifier">UInt</span></a> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <span class="internal identifier">test</span><span class="punctuation">:</span> <span class="external identifier">-></span><span class="punctuation">)</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>The closure will be run several times to determine the mean duration. If the mean duration is slower than the expected time, the test will fail. If the mean duration is within the expected time, then the test will pass and the mean duration will be printed.</p>
+
+<p>Notes: A closure’s execution times may vary vastly accross different systems or build configurations. Expectations must either be set according to the slowest environment where the tests will be run, or else limited by conditions so as to only run on those environments that are meaningful.</p>
+
+<ul><li><p>Parameters:</p><ul><li><p>testName: A name to identify the particular test in the output.</p></li><li><p>duration: The time limit within which the closure is expected to complete.</p></li><li><p>file: The file name where the call occurs. Provided.</p></li><li><p>line: The line number where the call occurs. Provided.</p></li><li><p>test: The closure to test.</p></li></ul></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

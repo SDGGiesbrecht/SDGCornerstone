@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>testDecoding(_:failsFor:file:line:)</title>
+  <link rel="stylesheet" href="../../CSS/Root.css">
+  <link rel="stylesheet" href="../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<span>testDecoding(_:failsFor:file:line:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>testDecoding(_:failsFor:file:line:)</h1>
+   </div>
+
+<div class="description">
+<p>Tests that decoding fails with a value encoded from an invalid mock type.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">testDecoding</span><span class="punctuation">(</span><span class="keyword">_</span> <span class="internal identifier">type</span><span class="punctuation">:</span> <span class="external identifier">Type</span><span class="punctuation">,</span> <span class="internal identifier">failsFor</span> <span class="internal identifier">invalidMock</span><span class="punctuation">:</span> <span class="external identifier">O</span><span class="punctuation">,</span> <a href="../../🇨🇦EN/Extensions/Data/Properties/file.html"><span class="internal identifier">file</span></a><span class="punctuation">:</span> <span class="external identifier">StaticString</span> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <a href="../../🇨🇦EN/Types/Line<Base>/Properties/line.html"><span class="internal identifier">line</span></a><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/UInt.html"><span class="external identifier">UInt</span></a> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">)</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>For example, if a type encodes a property as an integer, but only supports a certain range of numbers, this function can be used to test that decoding an invalid number fails. The mock instance should be a dictionary, array or something else that can mimic the same encoding structure as the actual type, but is free from the restraints the type imposes.</p>
+
+<p>Parameters:- type: The type to try to decode.- invalidMock: A mock instance. See above.</p>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

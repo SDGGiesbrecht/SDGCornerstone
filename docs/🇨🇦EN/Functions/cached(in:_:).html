@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>cached(in:_:)</title>
+  <link rel="stylesheet" href="../../CSS/Root.css">
+  <link rel="stylesheet" href="../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<span>cached(in:_:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>cached(in:_:)</h1>
+   </div>
+
+<div class="description">
+<p>Returns the result of <code class="swift"><span class="external identifier">computation</span></code>, using caching to improve efficiency upon repeated use.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">cached</span><span class="punctuation">(</span><span class="internal identifier">in</span> <a href="../../🇨🇦EN/Extensions/FileManager/Types/RecommendedLocation/Cases/cache.html"><span class="internal identifier">cache</span></a><span class="punctuation">:</span> <span class="keyword">inout</span> <span class="external identifier">?</span><span class="punctuation">,</span> <span class="keyword">_</span> <span class="internal identifier">computation</span><span class="punctuation">:</span> <span class="external identifier">throws</span><span class="punctuation">)</span> <span class="punctuation">-></span> <span class="external identifier">Result</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>This is accomplished by either...</p>
+
+<ul><li><p>retrieving a previous result from <code class="swift"><a href="../../🇨🇦EN/Extensions/FileManager/Types/RecommendedLocation/Cases/cache.html"><span class="internal identifier">cache</span></a></code> (if <code class="swift"><a href="../../🇨🇦EN/Extensions/FileManager/Types/RecommendedLocation/Cases/cache.html"><span class="internal identifier">cache</span></a></code> is non‐<code class="swift"><span class="keyword">nil</span></code>), or</p></li><li><p>executing <code class="swift"><span class="external identifier">computation</span></code> and saving the result to <code class="swift"><a href="../../🇨🇦EN/Extensions/FileManager/Types/RecommendedLocation/Cases/cache.html"><span class="internal identifier">cache</span></a></code> before returning it.</p></li><li><p>Parameters:</p><ul><li><p>cache: The variable in which to cache the result. Declare it in the appropriate scope for the desired cache lifetime. The cache can be refreshed at any time by setting it to <code class="swift"><span class="keyword">nil</span></code>.</p></li><li><p>computation: The computation to be evaluated.</p></li></ul></li><li>Returns<p> The result of <code class="swift"><span class="external identifier">computation</span></code>.</p></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

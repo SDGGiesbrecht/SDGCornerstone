@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>falseRandomizerValue</title>
+  <link rel="stylesheet" href="../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../🇨🇦EN/Extensions/Bool.html">Bool</a>
+<span>falseRandomizerValue</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>falseRandomizerValue</h1>
+   </div>
+
+<div class="description">
+<p>A value a <code class="swift"><a href="../../../🇨🇦EN/Extensions/Randomizer.html"><span class="external identifier">Randomizer</span></a></code> can return that will result in <code class="swift"><span class="keyword">false</span></code>.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">static</span> <span class="keyword">var</span> <a href="../../../🇨🇦EN/Extensions/Bool/Type Properties/falseRandomizerValue.html"><span class="internal identifier">falseRandomizerValue</span></a><span class="punctuation">:</span> <a href="../../../🇨🇦EN/Extensions/UInt64.html"><span class="external identifier">UInt64</span></a> <span class="punctuation">{</span> <span class="keyword">get</span> <span class="punctuation">}</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>For example:</p>
+
+<code class="swift blockquote"><span class="code">let alternating = CyclicalNumberGenerator([
+    Bool.falseRandomizerValue,
+    Bool.trueRandomizerValue
+    ])
+
+XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+XCTAssertEqual(Bool(fromRandomizer: alternating), false)
+XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+// ...</span></code>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

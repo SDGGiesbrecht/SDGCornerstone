@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>nonmutatingVariant(of:on:)</title>
+  <link rel="stylesheet" href="../../CSS/Root.css">
+  <link rel="stylesheet" href="../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<span>nonmutatingVariant(of:on:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>nonmutatingVariant(of:on:)</h1>
+   </div>
+
+<div class="description">
+<p>Implements a nonmutating function based on its mutating counterpart.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">nonmutatingVariant</span><span class="punctuation">(</span><span class="internal identifier">of</span> <span class="internal identifier">mutation</span><span class="punctuation">:</span> <span class="external identifier">-></span><span class="punctuation">,</span> <span class="internal identifier">on</span> <span class="internal identifier">self</span><span class="punctuation">:</span> <span class="external identifier">T</span><span class="punctuation">)</span> <span class="punctuation">-></span> <span class="external identifier">T</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<code class="swift blockquote"><span class="keyword">extension</span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a> <span class="keyword">where</span> <a href="../../🇨🇦EN/Types/AbsoluteComplement<Base>/Types/Element.html"><span class="internal identifier">Element</span></a> <span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/Comparable.html"><span class="external identifier">Comparable</span></a> <span class="punctuation">{</span>
+    <span class="comment"><span class="comment‐punctuation">//</span> <span class="comment‐keyword">MARK: - </span><span class="text">where Element : Comparable</span></span>
+
+    <span class="keyword">func</span> <span class="external identifier">sorted</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">-></span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a> <span class="punctuation">{</span>
+        <span class="keyword">return</span> <span class="internal identifier">nonmutatingVariant</span><span class="punctuation">(</span><span class="internal identifier">of</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a><span class="punctuation">.</span><span class="external identifier">sort</span><span class="punctuation">,</span> <span class="internal identifier">on</span><span class="punctuation">:</span> <span class="keyword">self</span><span class="punctuation">)</span>
+    <span class="punctuation">}</span>
+    <span class="keyword">func</span> <span class="internal identifier">appending</span><span class="punctuation">(</span><span class="keyword">_</span> <span class="external identifier">appendix</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a><span class="punctuation">)</span> <span class="punctuation">-></span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a> <span class="punctuation">{</span>
+        <span class="keyword">return</span> <span class="internal identifier">nonmutatingVariant</span><span class="punctuation">(</span><span class="internal identifier">of</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a><span class="punctuation">.</span><span class="internal identifier">append</span><span class="punctuation">,</span> <span class="internal identifier">on</span><span class="punctuation">:</span> <span class="keyword">self</span><span class="punctuation">,</span> <span class="internal identifier">with</span><span class="punctuation">:</span> <span class="external identifier">appendix</span><span class="punctuation">)</span>
+    <span class="punctuation">}</span>
+    <span class="keyword">static</span> <span class="keyword">func</span> <span class="internal identifier">+</span> <span class="punctuation">(</span><span class="internal identifier">a</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a><span class="punctuation">,</span> <span class="internal identifier">b</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a><span class="punctuation">)</span> <span class="punctuation">-></span> <a href="../../🇨🇦EN/Extensions/Array.html"><span class="external identifier">Array</span></a> <span class="punctuation">{</span>
+        <span class="keyword">return</span> <span class="internal identifier">nonmutatingVariant</span><span class="punctuation">(</span><span class="internal identifier">of</span><span class="punctuation">:</span> <span class="internal identifier">+=</span><span class="punctuation">,</span> <span class="internal identifier">on</span><span class="punctuation">:</span> <span class="internal identifier">a</span><span class="punctuation">,</span> <span class="internal identifier">with</span><span class="punctuation">:</span> <span class="internal identifier">b</span><span class="punctuation">)</span>
+    <span class="punctuation">}</span>
+<span class="punctuation">}</span></code>
+
+<ul><li><p>Parameters:</p><ul><li><p>mutation: The mutating counterpart.</p></li><li><p>self: The instance.</p></li></ul></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

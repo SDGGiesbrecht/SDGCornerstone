@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>DateDefinition</title>
+  <link rel="stylesheet" href="../../CSS/Root.css">
+  <link rel="stylesheet" href="../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<span>DateDefinition</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>DateDefinition</h1>
+   </div>
+
+<div class="description">
+<p>A type that provides a definition for a <code class="swift"><a href="../../🇨🇦EN/Types/CalendarDate.html"><span class="internal identifier">CalendarDate</span></a></code>.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">protocol</span> <a href="../../🇨🇦EN/Protocols/DateDefinition.html"><span class="internal identifier">DateDefinition</span></a></code>
+</section>
+<section>
+<h2>Discussion</h2>
+
+<code class="swift blockquote"><span class="keyword">extension</span> <a href="../../🇨🇦EN/Types/CalendarDate.html"><span class="internal identifier">CalendarDate</span></a> <span class="punctuation">{</span>
+
+    <span class="comment"><span class="comment‐punctuation">//</span> <span class="text">This initializer creates a date using the number of days into the current millennium.</span></span>
+    <span class="keyword">public</span> <span class="keyword">init</span><span class="punctuation">(</span><span class="external identifier">daysIntoMillennium</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Types/FloatMax.html"><span class="internal identifier">FloatMax</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+        <span class="keyword">self</span><span class="punctuation">.</span><span class="external identifier">init</span><span class="punctuation">(</span><span class="internal identifier">definition</span><span class="punctuation">:</span> <span class="external identifier">DaysIntoMillennium</span><span class="punctuation">(</span><span class="external identifier">daysIntoMillennium</span><span class="punctuation">)</span><span class="punctuation">)</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment"><span class="comment‐punctuation">//</span> <span class="text">This property is available to dates with any kind of definition.</span></span>
+    <span class="keyword">public</span> <span class="keyword">var</span> <span class="external identifier">daysIntoMillennium</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Types/FloatMax.html"><span class="internal identifier">FloatMax</span></a> <span class="punctuation">{</span>
+        <span class="keyword">return</span> <span class="internal identifier">converted</span><span class="punctuation">(</span><span class="internal identifier">to</span><span class="punctuation">:</span> <span class="external identifier">DaysIntoMillennium</span><span class="punctuation">.</span><span class="keyword">self</span><span class="punctuation">)</span><span class="punctuation">.</span><span class="external identifier">daysIntoMillennium</span>
+    <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+
+<span class="keyword">private</span> <span class="keyword">struct</span> <span class="external identifier">DaysIntoMillennium</span> <span class="punctuation">:</span> <a href="../../🇨🇦EN/Protocols/DateDefinition.html"><span class="internal identifier">DateDefinition</span></a> <span class="punctuation">{</span>
+
+    <span class="comment"><span class="comment‐punctuation">//</span> <span class="text">The reference date is January 1, 2001 at 00:00</span></span>
+    <span class="keyword">fileprivate</span> <span class="keyword">static</span> <span class="keyword">let</span> <a href="../../🇨🇦EN/Protocols/DateDefinition/Type Properties/referenceDate.html"><span class="internal identifier">referenceDate</span></a> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Types/CalendarDate.html"><span class="internal identifier">CalendarDate</span></a><span class="punctuation">(</span><span class="internal identifier">gregorian</span><span class="punctuation">:</span> <span class="punctuation">.</span><a href="../../🇨🇦EN/Types/GregorianMonth/Cases/january.html"><span class="internal identifier">january</span></a><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">2001</span><span class="punctuation">,</span> <span class="internal identifier">at</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span>
+
+    <span class="keyword">fileprivate</span> <span class="keyword">static</span> <span class="keyword">let</span> <a href="../../🇨🇦EN/Protocols/DateDefinition/Type Properties/identifier.html"><span class="internal identifier">identifier</span></a><span class="punctuation">:</span> <a href="../../🇨🇦EN/Types/StrictString.html"><span class="internal identifier">StrictString</span></a> <span class="punctuation">=</span> <span class="string"><span class="string‐punctuation">"</span><span class="text">MyModule.DaysIntoMillenium</span><span class="string‐punctuation">"</span></span>
+    <span class="keyword">fileprivate</span> <span class="keyword">let</span> <span class="external identifier">daysIntoMillennium</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Types/FloatMax.html"><span class="internal identifier">FloatMax</span></a>
+    <span class="keyword">fileprivate</span> <span class="keyword">let</span> <a href="../../🇨🇦EN/Protocols/DateDefinition/Properties/intervalSinceReferenceDate.html"><span class="internal identifier">intervalSinceReferenceDate</span></a><span class="punctuation">:</span> <a href="../../🇨🇦EN/Types/CalendarInterval<Scalar>.html"><span class="internal identifier">CalendarInterval</span></a><span class="punctuation">&#x003C;</span><a href="../../🇨🇦EN/Types/FloatMax.html"><span class="internal identifier">FloatMax</span></a><span class="punctuation">></span>
+
+    <span class="keyword">fileprivate</span> <span class="keyword">init</span><span class="punctuation">(</span><span class="keyword">_</span> <span class="external identifier">daysIntoMillennium</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Types/FloatMax.html"><span class="internal identifier">FloatMax</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+        <span class="keyword">self</span><span class="punctuation">.</span><span class="external identifier">daysIntoMillennium</span> <span class="punctuation">=</span> <span class="external identifier">daysIntoMillennium</span>
+        <a href="../../🇨🇦EN/Protocols/DateDefinition/Properties/intervalSinceReferenceDate.html"><span class="internal identifier">intervalSinceReferenceDate</span></a> <span class="punctuation">=</span> <span class="external identifier">daysIntoMillennium</span><span class="punctuation">.</span><a href="../../🇨🇦EN/Extensions/RationalArithmetic/Properties/days.html"><span class="internal identifier">days</span></a>
+    <span class="punctuation">}</span>
+
+    <span class="keyword">fileprivate</span> <span class="keyword">init</span><span class="punctuation">(</span><a href="../../🇨🇦EN/Protocols/DateDefinition/Properties/intervalSinceReferenceDate.html"><span class="internal identifier">intervalSinceReferenceDate</span></a><span class="punctuation">:</span> <a href="../../🇨🇦EN/Types/CalendarInterval<Scalar>.html"><span class="internal identifier">CalendarInterval</span></a><span class="punctuation">&#x003C;</span><a href="../../🇨🇦EN/Types/FloatMax.html"><span class="internal identifier">FloatMax</span></a><span class="punctuation">></span><span class="punctuation">)</span> <span class="punctuation">{</span>
+        <span class="keyword">self</span><span class="punctuation">.</span><a href="../../🇨🇦EN/Protocols/DateDefinition/Properties/intervalSinceReferenceDate.html"><span class="internal identifier">intervalSinceReferenceDate</span></a> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Protocols/DateDefinition/Properties/intervalSinceReferenceDate.html"><span class="internal identifier">intervalSinceReferenceDate</span></a>
+        <span class="external identifier">daysIntoMillennium</span> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Protocols/DateDefinition/Properties/intervalSinceReferenceDate.html"><span class="internal identifier">intervalSinceReferenceDate</span></a><span class="punctuation">.</span><a href="../../🇨🇦EN/Types/CalendarInterval<Scalar>/Properties/inDays.html"><span class="internal identifier">inDays</span></a>
+    <span class="punctuation">}</span>
+
+    <span class="keyword">fileprivate</span> <span class="keyword">func</span> <span class="internal identifier">encode</span><span class="punctuation">(</span><span class="internal identifier">to</span> <span class="external identifier">encoder</span><span class="punctuation">:</span> <span class="external identifier">Encoder</span><span class="punctuation">)</span> <span class="keyword">throws</span> <span class="punctuation">{</span>
+        <span class="comment"><span class="comment‐punctuation">//</span> <span class="text">Only the definition (i.e. daysIntoMillennium) needs to be encoded.</span></span>
+        <span class="comment"><span class="comment‐punctuation">//</span> <span class="text">Derived information (i.e. intervalSinceRefrenceDate) can be recomputed.</span></span>
+        <span class="keyword">try</span> <span class="internal identifier">encode</span><span class="punctuation">(</span><span class="internal identifier">to</span><span class="punctuation">:</span> <span class="external identifier">encoder</span><span class="punctuation">,</span> <span class="internal identifier">via</span><span class="punctuation">:</span> <span class="external identifier">daysIntoMillennium</span><span class="punctuation">)</span>
+    <span class="punctuation">}</span>
+    <span class="keyword">fileprivate</span> <span class="keyword">init</span><span class="punctuation">(</span><span class="internal identifier">from</span> <span class="external identifier">decoder</span><span class="punctuation">:</span> <span class="external identifier">Decoder</span><span class="punctuation">)</span> <span class="keyword">throws</span> <span class="punctuation">{</span>
+        <span class="keyword">try</span> <span class="keyword">self</span><span class="punctuation">.</span><span class="external identifier">init</span><span class="punctuation">(</span><span class="internal identifier">from</span><span class="punctuation">:</span> <span class="external identifier">decoder</span><span class="punctuation">,</span> <span class="internal identifier">via</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Types/FloatMax.html"><span class="internal identifier">FloatMax</span></a><span class="punctuation">.</span><span class="keyword">self</span><span class="punctuation">,</span> <span class="internal identifier">convert</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span class="external identifier">DaysIntoMillennium</span><span class="punctuation">(</span><span class="punctuation">$0</span><span class="punctuation">)</span> <span class="punctuation">}</span><span class="punctuation">)</span>
+    <span class="punctuation">}</span>
+<span class="punctuation">}</span></code>
+
+<ul><li>Warning<p> If you intend to encode and decode a custom definition type, you must register the type with <code class="swift"><span class="code">CalendarDate.register(_:)</span></code> before performing any decoding operations.</p></li></ul>
+<p>Conformance Requirements:</p>
+
+<ul><li><p><code class="swift"><span class="code">static var referenceDate: CalendarDate { get }</span></code></p></li><li><p><code class="swift"><span class="code">init(intervalSinceReferenceDate: CalendarInterval&#x003C;FloatMax>)</span></code></p></li><li><p><code class="swift"><span class="code">var intervalSinceReferenceDate: CalendarInterval&#x003C;FloatMax> { get }</span></code></p></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

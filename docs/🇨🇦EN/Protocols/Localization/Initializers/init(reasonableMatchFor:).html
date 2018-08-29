@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>init(reasonableMatchFor:)</title>
+  <link rel="stylesheet" href="../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../🇨🇦EN/Protocols/Localization.html">Localization</a>
+<span>init(reasonableMatchFor:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>init(reasonableMatchFor:)</h1>
+   </div>
+
+<div class="description">
+<p>Creates a localization from the specified code, or as a fallback, creates a related localization that can be reasonably used as a replacement.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">init</span><span class="punctuation">?</span><span class="punctuation">(</span><span class="internal identifier">reasonableMatchFor</span> <a href="../../../🇨🇦EN/Protocols/Localization/Properties/code.html"><span class="internal identifier">code</span></a><span class="punctuation">:</span> <a href="../../../🇨🇦EN/Extensions/String.html"><span class="external identifier">String</span></a><span class="punctuation">)</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>For example, if a type supports British but not American English, it creates an instance of British English when either code is specified.</p>
+
+<p>The full list of currently supported groups of related localizations is as follows (taken directly from the source code):</p>
+
+<code class="swift blockquote"><span class="code">"zh": ["cmn"],
+"ar": ["arb"],
+"no": ["nb"],
+"ms": ["zsm"]</span></code>
+
+<code class="swift blockquote"><span class="code">"cmn": [
+    ("Hans", ["CN", "SG"]),
+    ("Hant", ["TW"])],
+"es": [("Latn", ["ES", "419", "MX", "CO", "AR", "VE", "PE", "CL", "EC", "CU", "DO", "GT", "HN", "SV", "NI", "BO", "CR", "UY", "PA", "PY", "GQ"])],
+"en": [("Latn", ["GB", "US", "CA", "AU", "ZA", "IE", "NZ", "SG", "TT", "GY", "LR", "SL", "MY", "BB", "BS", "ZW", "IN", "BZ", "PG", "VC", "ZM", "GD", "AG", "VU", "JM", "KN", "LK", "PH", "LC", "NA", "BN", "SB", "NR", "FJ", "FM", "DM", "SC", "MU", "WS", "PW", "MW", "BW", "BI", "CM", "ET", "GM", "GH", "KE", "KI", "LS", "MT", "MH", "NG", "PK", "RW", "SS", "SD", "SZ", "TZ", "TO", "TV", "UG"])],
+"arb": [("Arab", ["SA", "EG", "DZ", "SD", "MA", "IQ", "SY", "YE", "TN", "JO", "LY", "LB", "SO", "AE", "MR", "OM", "IL", "KW", "TD", "QA", "BH", "DJ", "KM"])],
+"hi" : [("Deva", ["IN"])],
+"pt": [("Latn", ["PT", "BR", "AO", "MZ", "ST", "TL", "CV", "GQ", "GW"])],
+"ru": [("Cyrl", ["RU", "BY", "KZ", "KG"])],
+"ja": [("Jpan", ["JP"])],
+"de": [("Latn", ["DE", "AT", "CH", "BE", "LI", "LU"])],
+"vi": [("Latn", ["VN"])],
+"ko": [("Kore", ["KR", "KP"])],
+"fr": [("Latn", ["FR", "CA", "BE", "CH", "BF", "LU", "SN", "MU", "GA", "CG", "MG", "CI", "BJ", "MC", "DJ", "CF", "ML", "NE", "TD", "TG", "RW", "BI", "KM", "VU", "SC", "CM", "CD", "GN", "GQ", "HT"])],
+"tr": [("Latn", ["TR", "CY"])],
+"it": [("Latn", ["IT", "CH", "SM", "VA"])],
+"pl": [("Latn", ["PL"])],
+"uk": [("Cyrl", ["UA"])],
+"nl": [("Latn", ["NL", "BE", "SR"])],
+"zsm": [("Latn", ["MY", "SG", "BN"])],
+"ro": [("Latn", ["RO", "MD"])],
+"th": [("Thai", ["TH"])],
+"el": [("Grek", ["GR", "CY"])],
+"cs": [("Latn", ["CZ"])],
+"hu": [("Latn", ["HU"])],
+"sv": [("Latn", ["SE", "FI"])],
+"id": [("Latn", ["ID"])],
+"da": [("Latn", ["DK"])],
+"fi": [("Latn", ["FI"])],
+"sk": [("Latn", ["SK"])],
+"he": [("Hebr", ["IL"])],
+"nb": [("Latn", ["NO"])],
+"hr": [("Latn", ["HR"])],
+"ca": [("Latn", ["ES", "AD"])]</span></code>
+
+<p>Requests for additional groups are welcome and can be made by <a href="https://github.com/SDGGiesbrecht/SDGCornerstone/issues">opening a Github issue</a>.</p>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

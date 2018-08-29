@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>compare(_:against:overwriteSpecificationInsteadOfFailing:file:line:)</title>
+  <link rel="stylesheet" href="../../CSS/Root.css">
+  <link rel="stylesheet" href="../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<span>compare(_:against:overwriteSpecificationInsteadOfFailing:file:line:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>compare(_:against:overwriteSpecificationInsteadOfFailing:file:line:)</h1>
+   </div>
+
+<div class="description">
+<p>Compares a string against a test specification.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">compare</span><span class="punctuation">(</span><span class="keyword">_</span> <span class="internal identifier">string</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/String.html"><span class="external identifier">String</span></a><span class="punctuation">,</span> <span class="internal identifier">against</span> <span class="internal identifier">specification</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/URL.html"><span class="external identifier">URL</span></a><span class="punctuation">,</span> <span class="internal identifier">overwriteSpecificationInsteadOfFailing</span><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/Bool.html"><span class="external identifier">Bool</span></a><span class="punctuation">,</span> <a href="../../🇨🇦EN/Extensions/Data/Properties/file.html"><span class="internal identifier">file</span></a><span class="punctuation">:</span> <span class="external identifier">StaticString</span> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <a href="../../🇨🇦EN/Types/Line<Base>/Properties/line.html"><span class="internal identifier">line</span></a><span class="punctuation">:</span> <a href="../../🇨🇦EN/Extensions/UInt.html"><span class="external identifier">UInt</span></a> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">)</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>If the string does not match the specification, the test will fail.</p>
+
+<p>If the specification does not exist yet, it will be created according to the string. It is recommeded to check specifications into source control to monitor changes.</p>
+
+<p>To update a specification instead of testing against it, change <code class="swift"><span class="internal identifier">overwriteSpecificationInsteadOfFailing</span></code> to <code class="swift"><span class="keyword">true</span></code> and re‐run the test suite. The specification will be rewritten to match the provided string. <em>Do not forget to change it back afterward, or the test will cease to validate anything.</em></p>
+
+<ul><li><p>Parameters:</p><ul><li><p>string: The string to test.</p></li><li><p>specification: The location of the specification to compare against (or write to).</p></li><li><p>overwriteSpecificationInsteadOfFailing: Set to <code class="swift"><span class="keyword">false</span></code> for normal behaviour. Set to <code class="swift"><span class="keyword">true</span></code> temporarily to update a specification.</p></li></ul></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

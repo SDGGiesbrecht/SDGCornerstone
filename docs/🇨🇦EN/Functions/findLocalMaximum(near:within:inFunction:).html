@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>findLocalMaximum(near:within:inFunction:)</title>
+  <link rel="stylesheet" href="../../CSS/Root.css">
+  <link rel="stylesheet" href="../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<span>findLocalMaximum(near:within:inFunction:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>findLocalMaximum(near:within:inFunction:)</h1>
+   </div>
+
+<div class="description">
+<p>Returns the input (<em>x</em>) corresponding to the local maximum output (<em>y</em>) near <code class="swift"><span class="external identifier">location</span></code>.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">findLocalMaximum</span><span class="punctuation">(</span><span class="internal identifier">near</span> <span class="internal identifier">location</span><span class="punctuation">:</span> <span class="external identifier">I</span><span class="punctuation">,</span> <span class="internal identifier">within</span> <a href="../../🇨🇦EN/Extensions/Collection/Properties/bounds.html"><span class="internal identifier">bounds</span></a><span class="punctuation">:</span> <span class="external identifier">?</span> <span class="punctuation">=</span> <a href="../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <span class="internal identifier">inFunction</span> <span class="internal identifier">function</span><span class="punctuation">:</span> <span class="external identifier">-></span><span class="punctuation">)</span> <span class="punctuation">-></span> <a href="../../🇨🇦EN/Protocols/OneDimensionalPoint.html"><span class="internal identifier">OneDimensionalPoint</span></a></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>This function automates a guess‐and‐check strategy and is useful for inverting otherwise one‐way functions. See the related function <code class="swift"><span class="code">findLocalMaximum(near:bounds:inFunction:)</span></code> for an example.</p>
+
+<ul><li>Warning<p> Behaviour is undefined when:</p><ul><li><p><code class="swift"><span class="external identifier">location</span></code> is at a local minimum. For example:</p><code class="swift blockquote">      <span class="comment"><span class="comment‐punctuation">//</span> <span class="text">This is undefined:</span></span>
+      <span class="keyword">let</span> <span class="external identifier">maximum</span> <span class="punctuation">=</span> <span class="internal identifier">findLocalMaximum</span><span class="punctuation">(</span><span class="internal identifier">near</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">)</span> <span class="punctuation">{</span> <span class="punctuation">$0</span> <span class="internal identifier">∈</span> <span class="internal identifier">−</span><span class="number">10</span> <span class="external identifier">...</span> <span class="number">10</span> <span class="punctuation">?</span> <span class="punctuation">$0</span> <span class="internal identifier">↑</span> <span class="number">2</span> <span class="punctuation">:</span> <span class="internal identifier">−</span><span class="punctuation">(</span><span class="punctuation">$0</span> <span class="internal identifier">↑</span> <span class="number">2</span><span class="punctuation">)</span> <span class="punctuation">}</span>
+     </code></li><li><p>two or more adjascent inputs share the maximum output. For example:</p><code class="swift blockquote">      <span class="comment"><span class="comment‐punctuation">//</span> <span class="text">This is undefined:</span></span>
+      <span class="keyword">let</span> <span class="external identifier">maximum</span> <span class="punctuation">=</span> <span class="internal identifier">findLocalMaximum</span><span class="punctuation">(</span><span class="internal identifier">near</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">)</span> <span class="punctuation">{</span> <span class="punctuation">$0</span> <span class="internal identifier">∈</span> <span class="internal identifier">−</span><span class="number">10</span> <span class="external identifier">...</span> <span class="number">10</span> <span class="punctuation">?</span> <span class="number">1</span> <span class="punctuation">:</span> <span class="internal identifier">−</span><span class="punctuation">(</span><span class="internal identifier">|</span><span class="punctuation">$0</span><span class="internal identifier">|</span><span class="punctuation">)</span> <span class="punctuation">}</span>
+     </code></li></ul></li><li>Precondition<p> If <code class="swift"><a href="../../🇨🇦EN/Extensions/Collection/Properties/bounds.html"><span class="internal identifier">bounds</span></a> <span class="internal identifier">≠</span> <span class="keyword">nil</span></code>, a local maximum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:</p><code class="swift blockquote">  <span class="comment"><span class="comment‐punctuation">//</span> <span class="text">Never do this:</span></span>
+  <span class="keyword">_</span> <span class="punctuation">=</span> <span class="internal identifier">findLocalMaximum</span><span class="punctuation">(</span><span class="internal identifier">near</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span> <span class="internal identifier">inFunction</span><span class="punctuation">:</span> <span class="punctuation">{</span><span class="punctuation">$0</span><span class="punctuation">}</span><span class="punctuation">)</span>
+ </code></li><li><p>Parameters:</p><ul><li><p>location: A location (<em>x</em>) where the slope approaches the searched‐for local maximum.</p></li><li><p>bounds: An optional domain (for <em>x</em>) to stay within.</p></li><li><p>function: The function to analyze.</p></li><li><p>input: An input value.</p></li></ul></li><li>Returns<p> The input (<em>x</em>) that results in the local maximum (<em>y</em>).</p></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

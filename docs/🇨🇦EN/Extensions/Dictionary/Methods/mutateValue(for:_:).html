@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>mutateValue(for:_:)</title>
+  <link rel="stylesheet" href="../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../🇨🇦EN/Extensions/Dictionary.html">Dictionary</a>
+<span>mutateValue(for:_:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>mutateValue(for:_:)</h1>
+   </div>
+
+<div class="description">
+<p>Mutates the value for the specified key.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">mutating</span> <span class="keyword">func</span> <span class="internal identifier">mutateValue</span><span class="punctuation">(</span><span class="internal identifier">for</span> <span class="internal identifier">key</span><span class="punctuation">:</span> <span class="external identifier">Key</span><span class="punctuation">,</span> <span class="keyword">_</span> <span class="internal identifier">mutate</span><span class="punctuation">:</span> <span class="external identifier">throws</span><span class="punctuation">)</span></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<code class="swift blockquote"><span class="keyword">func</span> <span class="external identifier">rollDie</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">-></span> <a href="../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a> <span class="punctuation">{</span>
+    <span class="keyword">return</span> <a href="../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">(</span><span class="internal identifier">randomInRange</span><span class="punctuation">:</span> <span class="number">1</span> <span class="external identifier">...</span> <span class="number">6</span><span class="punctuation">)</span>
+<span class="punctuation">}</span>
+
+<span class="keyword">var</span> <span class="external identifier">frequencies</span> <span class="punctuation">=</span> <span class="punctuation">[</span><a href="../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">:</span> <a href="../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">]</span><span class="punctuation">(</span><span class="punctuation">)</span>
+<span class="keyword">for</span> <span class="keyword">_</span> <span class="keyword">in</span> <span class="number">1</span> <span class="external identifier">...</span> <span class="number">100</span> <span class="punctuation">{</span>
+    <span class="external identifier">frequencies</span><span class="punctuation">.</span><span class="internal identifier">mutateValue</span><span class="punctuation">(</span><span class="internal identifier">for</span><span class="punctuation">:</span> <span class="external identifier">rollDie</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">{</span> <span class="punctuation">(</span><span class="punctuation">$0</span> <span class="external identifier">??</span> <span class="number">0</span><span class="punctuation">)</span> <span class="internal identifier">+</span> <span class="number">1</span> <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+<span class="external identifier">print</span><span class="punctuation">(</span><span class="external identifier">frequencies</span><span class="punctuation">.</span><span class="external identifier">keys</span><span class="punctuation">.</span><span class="external identifier">sorted</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">.</span><span class="external identifier">map</span><span class="punctuation">(</span><span class="punctuation">{</span> <span class="string"><span class="string‐punctuation">"</span><span class="text">\($0.inDigits()): \(frequencies[$0]!.inDigits())</span><span class="string‐punctuation">"</span></span> <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">.</span><span class="internal identifier">joined</span><span class="punctuation">(</span><span class="internal identifier">separator</span><span class="punctuation">:</span> <span class="string"><span class="string‐punctuation">"</span><span class="text">\n</span><span class="string‐punctuation">"</span></span><span class="punctuation">)</span><span class="punctuation">)</span>
+<span class="comment"><span class="comment‐punctuation">//</span> <span class="text">Prints, for example:</span></span>
+<span class="comment"><span class="comment‐punctuation">//</span></span>
+<span class="comment"><span class="comment‐punctuation">//</span> <span class="text">1: 21</span></span>
+<span class="comment"><span class="comment‐punctuation">//</span> <span class="text">2: 8</span></span>
+<span class="comment"><span class="comment‐punctuation">//</span> <span class="text">3: 29</span></span>
+<span class="comment"><span class="comment‐punctuation">//</span> <span class="text">4: 12</span></span>
+<span class="comment"><span class="comment‐punctuation">//</span> <span class="text">5: 20</span></span>
+<span class="comment"><span class="comment‐punctuation">//</span> <span class="text">6: 10</span></span>
+
+<span class="comment"><span class="comment‐punctuation">//</span> <span class="text">In this example, the die is rolled 100 times, and each time the tally for the outcome is incremented. After the for loop, the dictionary contains the frequencies (values) for each outcome (keys).</span></span></code>
+
+<ul><li><p>Parameters:</p><ul><li><p>key: The key whose value should change.</p></li><li><p>mutate: A mutating closure.</p></li><li><p>previous: The previous value or <code class="swift"><span class="keyword">nil</span></code> if the dictionary does not contain the specified key.</p></li></ul></li></ul>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf-8">
+  <title>firstNestingLevel(startingWith:endingWith:)</title>
+  <link rel="stylesheet" href="../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../CSS/Site.css">
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../🇨🇦EN/Protocols/SearchableCollection.html">SearchableCollection</a>
+<span>firstNestingLevel(startingWith:endingWith:)</span>
+
+    </div>
+   </nav>
+  </header>
+  <main>
+   <div class="title">
+    <div class="symbol‐type"></div>
+    <h1>firstNestingLevel(startingWith:endingWith:)</h1>
+   </div>
+
+<div class="description">
+<p>Returns the first nesting level found in the collection.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">firstNestingLevel</span><span class="punctuation">(</span><span class="internal identifier">startingWith</span> <span class="internal identifier">openingToken</span><span class="punctuation">:</span> <span class="external identifier">C</span><span class="punctuation">,</span> <span class="internal identifier">endingWith</span> <span class="internal identifier">closingToken</span><span class="punctuation">:</span> <span class="external identifier">D</span><span class="punctuation">)</span> <span class="punctuation">-></span> <a href="../../../🇨🇦EN/Protocols/SearchableCollection.html"><span class="internal identifier">SearchableCollection</span></a></code>
+</section>
+<section>
+<h2>Overview</h2>
+
+<p>Use this to search for corresponding pairs of delimiters that may be nested. For example:</p>
+
+<code class="swift blockquote"><span class="code">let equation = "2(3x − (y + 4)) = z"
+let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
+
+XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
+XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")</span></code>
+</section>
+
+
+
+
+
+
+
+
+  </main>
+ </body>
+</html>
