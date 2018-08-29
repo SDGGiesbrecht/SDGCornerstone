@@ -8,17 +8,17 @@
  <head>
   <meta charset="utf-8">
   <title>run(command:in:with:autoquote:reportProgress:)</title>
-  <link rel="stylesheet" href="../../../CSS/Root.css">
-  <link rel="stylesheet" href="../../../CSS/Swift.css">
-  <link rel="stylesheet" href="../../../CSS/Site.css">
+  <link rel="stylesheet" href="../../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../../CSS/Site.css">
  </head>
  <body>
   <header class="navigation‐bar">
    <nav class="navigation‐bar">
     <div class="navigation‐path" dir="ltr">
 
-<a href="../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
-<a href="../../../🇨🇦EN/Types/Shell.html">Shell</a>
+<a href="../../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../../🇨🇦EN/Types/Shell.html">Shell</a>
 <span>run(command:in:with:autoquote:reportProgress:)</span>
 
     </div>
@@ -36,12 +36,12 @@
 </div>
 <section class="declaration">
 <h2>Declaration</h2>
-<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">run</span><span class="punctuation">(</span><span class="internal identifier">command</span><span class="punctuation">:</span> <span class="external identifier">[</span><span class="punctuation">,</span> <span class="internal identifier">in</span> <span class="internal identifier">workingDirectory</span><span class="punctuation">:</span> <a href="../../../🇨🇦EN/Extensions/URL.html"><span class="external identifier">URL</span></a><span class="punctuation">?</span> <span class="punctuation">=</span> <a href="../../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <span class="internal identifier">with</span> <span class="internal identifier">environment</span><span class="punctuation">:</span> <span class="external identifier">[</span><span class="punctuation">?</span> <span class="punctuation">=</span> <a href="../../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <span class="internal identifier">autoquote</span><span class="punctuation">:</span> <a href="../../../🇨🇦EN/Extensions/Bool.html"><span class="external identifier">Bool</span></a> <span class="punctuation">=</span> <a href="../../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <span class="internal identifier">reportProgress</span><span class="punctuation">:</span> <span class="external identifier">-></span> <span class="punctuation">=</span> <a href="../../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">)</span> <span class="keyword">throws</span> <span class="punctuation">-></span> <a href="../../../🇨🇦EN/Extensions/String.html"><span class="external identifier">String</span></a></code>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="internal identifier">run</span><span class="punctuation">(</span><span class="internal identifier">command</span><span class="punctuation">:</span> <span class="external identifier">[</span><span class="punctuation">,</span> <span class="internal identifier">in</span> <span class="internal identifier">workingDirectory</span><span class="punctuation">:</span> <a href="../../../../🇨🇦EN/Extensions/URL.html"><span class="external identifier">URL</span></a><span class="punctuation">?</span> <span class="punctuation">=</span> <a href="../../../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <span class="internal identifier">with</span> <span class="internal identifier">environment</span><span class="punctuation">:</span> <span class="external identifier">[</span><span class="punctuation">?</span> <span class="punctuation">=</span> <a href="../../../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <span class="internal identifier">autoquote</span><span class="punctuation">:</span> <a href="../../../../🇨🇦EN/Extensions/Bool.html"><span class="external identifier">Bool</span></a> <span class="punctuation">=</span> <a href="../../../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">,</span> <span class="internal identifier">reportProgress</span><span class="punctuation">:</span> <span class="external identifier">-></span> <span class="punctuation">=</span> <a href="../../../../🇨🇦EN/Types/Shell/Type Properties/default.html"><span class="keyword">default</span></a><span class="punctuation">)</span> <span class="keyword">throws</span> <span class="punctuation">-></span> <a href="../../../../🇨🇦EN/Extensions/String.html"><span class="external identifier">String</span></a></code>
 </section>
 <section>
 <h2>Overview</h2>
 
-<ul><li><p>Parameters:</p><ul><li><p>command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.</p></li><li><p>workingDirectory: Optional. A different working directory to run inside of than that of the current process.</p></li><li><p>environment: Optional. A different environment to use instead of that of the current process.</p></li><li><p>autoquote: Whether or not to automatically quote arguments. Defaults to <code class="swift"><span class="keyword">true</span></code>.</p></li><li><p>reportProgress: Optional. A closure to execute for each line of output as it is received.</p></li><li><p>line: The line of output.</p></li></ul></li><li>Returns<p> The output of the command.</p></li><li>Throws<p> An <code class="swift"><a href="../../../🇨🇦EN/Types/ExternalProcess.html"><span class="internal identifier">ExternalProcess</span></a><span class="punctuation">.</span><a href="../../../🇨🇦EN/Types/ExternalProcess/Types/Error.html"><span class="internal identifier">Error</span></a></code> if the exit code indicates a failure.</p></li></ul>
+<ul><li><p>Parameters:</p><ul><li><p>command: An array representing the command and its arguments. Each element in the array is a separate argument. Quoting of arguments with spaces is handled automatically.</p></li><li><p>workingDirectory: Optional. A different working directory to run inside of than that of the current process.</p></li><li><p>environment: Optional. A different environment to use instead of that of the current process.</p></li><li><p>autoquote: Whether or not to automatically quote arguments. Defaults to <code class="swift"><span class="keyword">true</span></code>.</p></li><li><p>reportProgress: Optional. A closure to execute for each line of output as it is received.</p></li><li><p>line: The line of output.</p></li></ul></li><li>Returns<p> The output of the command.</p></li><li>Throws<p> An <code class="swift"><a href="../../../../🇨🇦EN/Types/ExternalProcess.html"><span class="internal identifier">ExternalProcess</span></a><span class="punctuation">.</span><a href="../../../../🇨🇦EN/Types/ExternalProcess/Types/Error.html"><span class="internal identifier">Error</span></a></code> if the exit code indicates a failure.</p></li></ul>
 </section>
 
 

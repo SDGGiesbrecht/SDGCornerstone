@@ -8,17 +8,17 @@
  <head>
   <meta charset="utf-8">
   <title>mutateValue(for:_:)</title>
-  <link rel="stylesheet" href="../../../CSS/Root.css">
-  <link rel="stylesheet" href="../../../CSS/Swift.css">
-  <link rel="stylesheet" href="../../../CSS/Site.css">
+  <link rel="stylesheet" href="../../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../../CSS/Site.css">
  </head>
  <body>
   <header class="navigation‐bar">
    <nav class="navigation‐bar">
     <div class="navigation‐path" dir="ltr">
 
-<a href="../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
-<a href="../../../🇨🇦EN/Extensions/Dictionary.html">Dictionary</a>
+<a href="../../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../../🇨🇦EN/Extensions/Dictionary.html">Dictionary</a>
 <span>mutateValue(for:_:)</span>
 
     </div>
@@ -41,11 +41,11 @@
 <section>
 <h2>Overview</h2>
 
-<code class="swift blockquote"><span class="keyword">func</span> <span class="external identifier">rollDie</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">-></span> <a href="../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a> <span class="punctuation">{</span>
-    <span class="keyword">return</span> <a href="../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">(</span><span class="internal identifier">randomInRange</span><span class="punctuation">:</span> <span class="number">1</span> <span class="external identifier">...</span> <span class="number">6</span><span class="punctuation">)</span>
+<code class="swift blockquote"><span class="keyword">func</span> <span class="external identifier">rollDie</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">-></span> <a href="../../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a> <span class="punctuation">{</span>
+    <span class="keyword">return</span> <a href="../../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">(</span><span class="internal identifier">randomInRange</span><span class="punctuation">:</span> <span class="number">1</span> <span class="external identifier">...</span> <span class="number">6</span><span class="punctuation">)</span>
 <span class="punctuation">}</span>
 
-<span class="keyword">var</span> <span class="external identifier">frequencies</span> <span class="punctuation">=</span> <span class="punctuation">[</span><a href="../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">:</span> <a href="../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">]</span><span class="punctuation">(</span><span class="punctuation">)</span>
+<span class="keyword">var</span> <span class="external identifier">frequencies</span> <span class="punctuation">=</span> <span class="punctuation">[</span><a href="../../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">:</span> <a href="../../../../🇨🇦EN/Extensions/Int.html"><span class="external identifier">Int</span></a><span class="punctuation">]</span><span class="punctuation">(</span><span class="punctuation">)</span>
 <span class="keyword">for</span> <span class="keyword">_</span> <span class="keyword">in</span> <span class="number">1</span> <span class="external identifier">...</span> <span class="number">100</span> <span class="punctuation">{</span>
     <span class="external identifier">frequencies</span><span class="punctuation">.</span><span class="internal identifier">mutateValue</span><span class="punctuation">(</span><span class="internal identifier">for</span><span class="punctuation">:</span> <span class="external identifier">rollDie</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">{</span> <span class="punctuation">(</span><span class="punctuation">$0</span> <span class="external identifier">??</span> <span class="number">0</span><span class="punctuation">)</span> <span class="internal identifier">+</span> <span class="number">1</span> <span class="punctuation">}</span>
 <span class="punctuation">}</span>
