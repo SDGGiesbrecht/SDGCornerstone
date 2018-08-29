@@ -29,12 +29,25 @@
     <h1>SemanticMarkup</h1>
    </div>
 
-
+<div class="description">
+<p>Text with additional semantic markup.</p>
+</div>
 <section class="declaration">
 <h2>Declaration</h2>
 <code class="swift blockquote"><span class="keyword">struct</span> <a href="../../🇨🇦EN/Types/SemanticMarkup.html"><span class="internal identifier">SemanticMarkup</span></a></code>
 </section>
+<section>
+<h2>Discussion</h2>
 
+<p>Semantic markup assigns control functions to several private use scalars.</p>
+
+<code class="swift blockquote"><span class="code">private let reservedRange: ClosedRange&#x003C;UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
+
+@_versioned internal let beginSuperscript: UnicodeScalar = "\u{107000}"
+@_versioned internal let endSuperscript: UnicodeScalar = "\u{107001}"
+@_versioned internal let beginSubscript: UnicodeScalar = "\u{107002}"
+@_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"</span></code>
+</section>
 
 
 
