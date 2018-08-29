@@ -22,16 +22,9 @@ public protocol Year : TextualPlaygroundDisplay {
     /// Returns the year in English digits.
     func inEnglishDigits() -> StrictString
 
-    /// :nodoc:
     func _inDeutschenZiffern() -> StrictString
-
-    /// :nodoc:
     func _enChiffresFrançais() -> StrictString
-
-    /// :nodoc:
     func _σεΕλληνικάΨηφία() -> StrictString
-
-    /// :nodoc:
     func _בעברית־בספרות() -> StrictString
 }
 

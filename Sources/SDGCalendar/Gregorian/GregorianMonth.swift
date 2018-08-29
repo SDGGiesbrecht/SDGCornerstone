@@ -190,7 +190,6 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         }
     }
 
-    /// :nodoc:
     public func _aufDeutsch() -> StrictString {
         switch self {
         case .january:
@@ -220,7 +219,6 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         }
     }
 
-    /// :nodoc:
     public func _enFrançais(_ majuscules: Casing) -> StrictString {
         switch self {
         case .january:
@@ -250,7 +248,6 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         }
     }
 
-    /// :nodoc:
     public func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString {
         let όνομα: StrictString
 
@@ -303,7 +300,6 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
         }
     }
 
-    /// :nodoc:
     public func _בעברית() -> StrictString {
         switch self {
         case .january:

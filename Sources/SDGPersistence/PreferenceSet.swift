@@ -22,7 +22,6 @@ public final class PreferenceSet {
 
     // MARK: - Static Properties
 
-    /// :nodoc:
     public static let _sdgCornerstoneDomain = "ca.solideogloria.SDGCornerstone"
 
     // MARK: - Initialization

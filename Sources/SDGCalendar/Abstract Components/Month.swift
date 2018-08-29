@@ -22,16 +22,9 @@ public protocol Month : TextualPlaygroundDisplay {
     /// Returns the English name.
     func inEnglish() -> StrictString
 
-    /// :nodoc:
     func _aufDeutsch() -> StrictString
-
-    /// :nodoc:
     func _enFrançais(_ majuscules: Casing) -> StrictString
-
-    /// :nodoc:
     func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString
-
-    /// :nodoc:  /// מחזירה את השם העברי.
     func _בעברית() -> StrictString
 }
 
