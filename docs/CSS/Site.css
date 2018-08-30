@@ -11,6 +11,10 @@ html {
     box-sizing: border-box;
 }
 
+main {
+    max-width: 50em;
+}
+
 h1, h2 {
     margin: 0;
 }
@@ -62,10 +66,6 @@ li:not(:first-child) {
     margin-top: 0.7em;
 }
 
-footer {
-    padding: calc((21 / 17) * 1rem);
-}
-
 /* Specific Layout */
 
 header.navigation‐bar {
@@ -112,6 +112,24 @@ nav.navigation‐bar {
     display: none;
 }
 
+.index‐container {
+    display: flex;
+}
+header.index {
+    max-width: 25%;
+}
+nav.index {
+    height: calc(100vh - calc((52 / 17) * 1rem));
+    overflow: auto;
+    position: sticky;
+     position: -webkit-sticky;
+     top: calc((52 / 17) * 1rem);
+}
+
+main {
+    padding: 0 calc((22 / 17) * 1rem);
+}
+
 .title {
     margin-top: 2rem;
     margin-bottom: 1.5rem;
@@ -152,6 +170,10 @@ h2 + .child {
     margin: 0 2.35294rem;
 }
 
+footer {
+    padding: 1rem calc((22 / 17) * 1rem);
+}
+
 /* Colours */
 
 html {
@@ -172,6 +194,11 @@ blockquote {
 }
 .navigation‐path a {
     color: #FFFFFF;
+}
+
+.index {
+    background-color: #F2F2F2;
+    color: #666;
 }
 
 .symbol‐type {
