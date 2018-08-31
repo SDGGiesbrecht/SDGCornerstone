@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../../CSS/Root.css">
   <link rel="stylesheet" href="../../CSS/Swift.css">
   <link rel="stylesheet" href="../../CSS/Site.css">
+  <script src="../../JavaScript/Site.js"></script>
  </head>
  <body>
   <header class="navigation‐bar">
@@ -31,7 +32,7 @@
     <nav class="index">
 
 <div>
-<a class="heading">Library Products</a>
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Library Products</a>
 <a href="../../🇨🇦EN/Libraries/SDGCornerstone.html">
 SDGCornerstone
 </a>
@@ -106,7 +107,7 @@ SDGTesting
 </a>
 </div>
 <div>
-<a class="heading">Modules</a>
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Modules</a>
 <a href="../../🇨🇦EN/Modules/SDGCornerstone.html">
 SDGCornerstone
 </a>
@@ -235,5 +236,6 @@ Copyright ©2017–2018 Jeremy David Giesbrecht and the SDGCornerstone project c
 </p>
    <p dir="ltr" lang="en-CA">Generated with <a href="https://github.com/SDGGiesbrecht/Workspace#workspace">Workspace</a>. <span lang="la-IT">Soli Deo gloria.</span></p>
   </footer>
+  <script>contractIndex();</script>
  </body>
 </html>
