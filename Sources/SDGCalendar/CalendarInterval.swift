@@ -23,7 +23,7 @@ private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutes
 @_versioned internal let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 
 // #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
-private func helpSwiftSyntax() {}
+private func helpSwiftSyntax() {} // @exempt(from: tests)
 
 /// A time interval.
 ///
