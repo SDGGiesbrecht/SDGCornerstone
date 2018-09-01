@@ -96,16 +96,12 @@ public protocol DateDefinition : Codable {
 
     // MARK: - Coding
 
-    /// :nodoc:
     func _encode() throws -> StrictString
-
-    /// :nodoc:
     init(_decoding json: StrictString, codingPath: [CodingKey]) throws
 }
 
 extension DateDefinition {
 
-    /// :nodoc:
     @_inlineable public func _encode() throws -> StrictString {
         return try StrictString(file: try JSONEncoder().encode([self]), origin: nil)
     }
@@ -113,7 +109,6 @@ extension DateDefinition {
         return try _encode()
     }
 
-    /// :nodoc:
     @_inlineable public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
         guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {
 

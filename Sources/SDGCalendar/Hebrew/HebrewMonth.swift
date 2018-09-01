@@ -467,7 +467,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         }
     }
 
-    /// :nodoc:
     public func _aufDeutsch() -> StrictString {
         switch self {
         case .tishrei:
@@ -501,7 +500,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         }
     }
 
-    /// :nodoc:
     public func _enFrançais(_ majuscules: Casing) -> StrictString {
         switch self {
         case .tishrei:
@@ -535,7 +533,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         }
     }
 
-    /// :nodoc:
     public func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString {
         switch self {
         case .tishrei:
@@ -569,7 +566,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
         }
     }
 
-    /// :nodoc:
     public func _בעברית() -> StrictString {
         switch self {
         case .tishrei:

@@ -12,13 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// :nodoc:
 public enum _GenreGrammatical {
     // Public for SDGCalendar.
 
-    /// :nodoc:
     case masculin
-
-    /// :nodoc:
     case féminin
 }

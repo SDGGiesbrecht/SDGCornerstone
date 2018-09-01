@@ -137,7 +137,6 @@ public struct LocalizationSetting : Codable, Equatable {
     // MARK: - Static Methods
 
     // For user available menus.
-    /// :nodoc:
     public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
         sdgSystemWidePreferences.value.set(to: setting)
     }

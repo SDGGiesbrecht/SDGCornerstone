@@ -41,7 +41,12 @@ open class TestCase : XCTestCase {
         super.setUp()
     }
 
-    /// :nodoc:
+    // #workaround(Swift 4.1.2, Can be removed when test lists can be generated safely without it.)
+    /// Does nothing.
+    ///
+    /// If this method were not present, the Swift Package Manager would encounter issues generating test lists for Linux.
+    ///
+    /// - Warning: Do not reference this method directly. It is not an intended part of the API and may be removed at any time.
     public func testLinuxMainGenerationCompatibility() {}
 }
 

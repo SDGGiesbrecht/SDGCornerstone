@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+/// A pattern that can be searched for in collections with equatable elements.
 public protocol PatternProtocol {
 
     /// The type of the pattern elements.

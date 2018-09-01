@@ -12,21 +12,17 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// :nodoc:
 public enum _APILocalization : String {
 
     // MARK: - Cases
 
-    /// :nodoc:
     case englishCanada = "en\u{2D}CA"
 
-    /// :nodoc:
     public static var cases: [_APILocalization] = [
         .englishCanada
     ]
 
     // MARK: - Localization
 
-    /// :nodoc:
     public static let fallbackLocalization: _APILocalization = .englishCanada
 }

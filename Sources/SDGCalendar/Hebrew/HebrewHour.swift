@@ -21,7 +21,7 @@ public struct HebrewHour : CardinalCalendarComponent, CodableViaRawRepresentable
     // MARK: - Static Properties
 
     /// The number of hours in a day.
-    public static let hoursPerDay = 24
+    public static let hoursPerDay: Int = 24
 
     // MARK: - Properties
 

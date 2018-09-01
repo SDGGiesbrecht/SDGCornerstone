@@ -27,7 +27,7 @@ public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentable
     }
 
     /// The number of years in a leap year cycle.
-    public static let yearsPerLeapYearCycle = 19
+    public static let yearsPerLeapYearCycle: Int = 19
 
     /// The number of months in a leap year cycle.
     public static let monthsPerLeapYearCycle: Int = {
@@ -128,22 +128,18 @@ public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentable
         return inDigits()
     }
 
-    /// :nodoc:
     public func _inDeutschenZiffern() -> StrictString {
         return inDigits()
     }
 
-    /// :nodoc:
     public func _enChiffresFrançais() -> StrictString {
         return inDigits()
     }
 
-    /// :nodoc:
     public func _σεΕλληνικάΨηφία() -> StrictString {
         return inDigits()
     }
 
-    /// :nodoc:
     public func _בעברית־בספרות() -> StrictString {
         return inDigits()
     }

@@ -12,19 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// :nodoc:
 public enum _ΓραμματικήΠτώση {
     // Public for SDGCalendar.
 
-    /// :nodoc:
     case ονομαστική
-
-    /// :nodoc:
     case αιτιατική
-
-    /// :nodoc:
     case γενική
-
-    /// :nodoc:
     case κλητική
 }
