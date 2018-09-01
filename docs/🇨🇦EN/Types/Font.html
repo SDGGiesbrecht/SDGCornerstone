@@ -1267,7 +1267,7 @@ testAssertionMethod
    <main>
     <div class="title">
      <div class="symbol‐type">Type Alias</div>
-     <code class="swift"><span class="compilation‐condition">#if</span> <span class="external identifier">!</span><span class="punctuation">(</span><span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">AppKit</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="external identifier">&#x0026;&#x0026;</span> <span class="punctuation">(</span><span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">UIKit</span><span class="punctuation">)</span><span class="punctuation">)</span></code>
+     <code class="swift"><span class="compilation‐condition">#if</span> <span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">AppKit</span><span class="punctuation">)</span></code>
      <h1>Font</h1>
     </div>
 
@@ -1288,7 +1288,15 @@ testAssertionMethod
 
 
 
-
+<section>
+<h2>Type Properties</h2>
+<div class="child">
+<code class="swift"><span class="compilation‐condition">#if</span> <span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">AppKit</span><span class="punctuation">)</span> <span class="external identifier">||</span> <span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">UIKit</span><span class="punctuation">)</span></code>
+<br>
+<a href="../../🇨🇦EN/Types/Font/Type Properties/systemSize.html"><code class="swift"><span class="internal identifier">systemSize</span></code></a>
+<p>Returns the size of the standard system font.</p>
+</div>
+</section>
 
 
 

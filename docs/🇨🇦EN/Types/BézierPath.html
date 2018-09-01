@@ -1267,7 +1267,7 @@ testAssertionMethod
    <main>
     <div class="title">
      <div class="symbol‐type">Type Alias</div>
-     <code class="swift"><span class="compilation‐condition">#if</span> <span class="external identifier">!</span><span class="punctuation">(</span><span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">AppKit</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="external identifier">&#x0026;&#x0026;</span> <span class="punctuation">(</span><span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">UIKit</span><span class="punctuation">)</span><span class="punctuation">)</span></code>
+     <code class="swift"><span class="compilation‐condition">#if</span> <span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">AppKit</span><span class="punctuation">)</span></code>
      <h1>BézierPath</h1>
     </div>
 
@@ -1293,7 +1293,21 @@ testAssertionMethod
 
 
 
-
+<section>
+<h2>Methods</h2>
+<div class="child">
+<code class="swift"><span class="compilation‐condition">#if</span> <span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">AppKit</span><span class="punctuation">)</span> <span class="external identifier">||</span> <span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">UIKit</span><span class="punctuation">)</span></code>
+<br>
+<a href="../../🇨🇦EN/Types/BézierPath/Methods/appendArc(withCentre:radius:startAngle:endAngle:clockwise:).html"><code class="swift"><span class="internal identifier">appendArc</span><span class="punctuation">(</span><span class="internal identifier">withCentre</span><span class="punctuation">:</span><span class="internal identifier">radius</span><span class="punctuation">:</span><span class="internal identifier">startAngle</span><span class="punctuation">:</span><span class="internal identifier">endAngle</span><span class="punctuation">:</span><span class="internal identifier">clockwise</span><span class="punctuation">:</span><span class="internal identifier"></span><span class="punctuation">)</span><span class="internal identifier"></span></code></a>
+<p>Appends an arc of a circle to the receiver’s path.</p>
+</div>
+<div class="child">
+<code class="swift"><span class="compilation‐condition">#if</span> <span class="punctuation">(</span><span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">AppKit</span><span class="punctuation">)</span> <span class="external identifier">||</span> <span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">UIKit</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="external identifier">&#x0026;&#x0026;</span> <span class="punctuation">(</span><span class="external identifier">canImport</span><span class="punctuation">(</span><span class="external identifier">UIKit</span><span class="punctuation">)</span><span class="punctuation">)</span></code>
+<br>
+<a href="../../🇨🇦EN/Types/BézierPath/Methods/line(to:).html"><code class="swift"><span class="internal identifier">line</span><span class="punctuation">(</span><span class="internal identifier">to</span><span class="punctuation">:</span><span class="internal identifier"></span><span class="punctuation">)</span><span class="internal identifier"></span></code></a>
+<p>Appends a straight line to the receiver’s path.</p>
+</div>
+</section>
 
    </main>
   </div>
