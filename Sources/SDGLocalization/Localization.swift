@@ -204,6 +204,11 @@ extension Localization {
         return nil
     }
 
+    /// The native text direction of the localization, if known.
+    public var textDirection: TextDirection? {
+        return ContentLocalization(reasonableMatchFor: code)?.language.textDirection
+    }
+
     /// Creates a localization from an icon.
     ///
     /// - SeeAlso: `icon`

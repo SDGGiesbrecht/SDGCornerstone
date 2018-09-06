@@ -58,6 +58,7 @@ class SDGLocalizationAPITests : TestCase {
         case chineseTraditionalTaiwan = "cmn\u{2D}Hant\u{2D}TW"
         case malaysianLatin = "zsm\u{2D}Latn"
         case norwegian = "no"
+        case עברית = "he"
         static let fallbackLocalization: LocalizationExample = .englishUnitedKingdom
     }
     func testLocalization() {
@@ -84,6 +85,10 @@ class SDGLocalizationAPITests : TestCase {
 
         XCTAssertEqual(LocalizationExample.icon(for: "ca\u{2D}AD"), "🇦🇩CA")
         XCTAssertEqual(LocalizationExample.code(for: "🇦🇩CA"), "ca\u{2D}AD")
+
+        XCTAssertEqual(LocalizationExample.עברית.textDirection, .rightToLeftTopToBottom)
+        XCTAssertEqual(LocalizationExample.englishUnitedKingdom.textDirection, .leftToRightTopToBottom)
+        XCTAssertEqual(LocalizationExample.chineseTraditionalTaiwan.textDirection, .topToBottomRightToLeft)
     }
 
     func testLocalizationRelationships() {
