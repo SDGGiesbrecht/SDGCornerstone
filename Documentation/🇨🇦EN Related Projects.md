@@ -22,10 +22,6 @@ Workspace automates management of Swift projects.
 
 ### [SDGInterface](https://github.com/SDGGiesbrecht/SDGInterface)
 
-### [SDGInterface](https://github.com/SDGGiesbrecht/SDGInterface)
-
-SDGInterface provides tools for implementing a graphical user interface.
-
 ### [SDGCommandLine](https://github.com/SDGGiesbrecht/SDGCommandLine)
 
 ### [SDGCornerstone](https://github.com/SDGGiesbrecht/SDGCornerstone)
