@@ -12,11 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  -->
 
-[🇨🇦EN](Documentation/🇨🇦EN%20Read%20Me.md) <!--Skip in Jazzy-->
+[🇨🇦EN](Documentation/🇨🇦EN%20Read%20Me.md)
 
 macOS • Linux • iOS • watchOS • tvOS
 
-APIs: [SDGCornerstone](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone) • [SDGCornerstoneTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstoneTestUtilities) • [SDGXCTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGXCTestUtilities) • [SDGControlFlow](https://sdggiesbrecht.github.io/SDGCornerstone/SDGControlFlow) • [SDGLogic](https://sdggiesbrecht.github.io/SDGCornerstone/SDGLogic) • [SDGLogicTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGLogicTestUtilities) • [SDGMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGMathematics) • [SDGMathematicsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGMathematicsTestUtilities) • [SDGCollections](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCollections) • [SDGCollectionsTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCollectionsTestUtilities) • [SDGBinaryData](https://sdggiesbrecht.github.io/SDGCornerstone/SDGBinaryData) • [SDGText](https://sdggiesbrecht.github.io/SDGCornerstone/SDGText) • [SDGPersistence](https://sdggiesbrecht.github.io/SDGCornerstone/SDGPersistence) • [SDGPersistenceTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGPersistenceTestUtilities) • [SDGRandomization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGRandomization) • [SDGRandomizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGRandomizationTestUtilities) • [SDGLocalization](https://sdggiesbrecht.github.io/SDGCornerstone/SDGLocalization) • [SDGLocalizationTestUtilities](https://sdggiesbrecht.github.io/SDGCornerstone/SDGLocalizationTestUtilities) • [SDGGeometry](https://sdggiesbrecht.github.io/SDGCornerstone/SDGGeometry) • [SDGCalendar](https://sdggiesbrecht.github.io/SDGCornerstone/SDGCalendar) • [SDGPrecisionMathematics](https://sdggiesbrecht.github.io/SDGCornerstone/SDGPrecisionMathematics) • [SDGConcurrency](https://sdggiesbrecht.github.io/SDGCornerstone/SDGConcurrency) • [SDGExternalProcess](https://sdggiesbrecht.github.io/SDGCornerstone/SDGExternalProcess) • [SDGTesting](https://sdggiesbrecht.github.io/SDGCornerstone/SDGTesting)
+[Documentation](https://sdggiesbrecht.github.io/SDGCornerstone/%F0%9F%87%A8%F0%9F%87%A6EN)
 
 # SDGCornerstone
 
@@ -39,7 +39,7 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 
 Use the entire package together by importing the `SDGCornerstone` product, or pick and choose pieces by importing the various component products.
 
-(For a list of related projects, see [here](Documentation/🇨🇦EN%20Related%20Projects.md).) <!--Skip in Jazzy-->
+(For a list of related projects, see [here](Documentation/🇨🇦EN%20Related%20Projects.md).)
 
 ## Importing
 
