@@ -15,7 +15,7 @@
 import SDGControlFlow
 
 /// A direction in which natural text is written.
-public enum TextDirection: Int, IterableEnumeration {
+public enum TextDirection : Int, IterableEnumeration {
 
     /// Written right‐to‐left, top‐to‐bottom, such as Hebrew, Arabic or Persian.
     case rightToLeftTopToBottom
