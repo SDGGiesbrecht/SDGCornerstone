@@ -27,6 +27,9 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 @_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"
 // @endExample
 
+// #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
+private func helpSwiftSyntax() {} // @exempt(from: tests)
+
 // #example(1, markupEncoding)
 /// Text with additional semantic markup.
 ///

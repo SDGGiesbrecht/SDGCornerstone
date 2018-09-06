@@ -21,7 +21,7 @@ public struct GregorianSecond : CardinalCalendarComponent, CodableViaRawRepresen
     // MARK: - Static Properties
 
     /// The number of seconds in a minute.
-    public static let secondsPerMinute = 60
+    public static let secondsPerMinute: Int = 60
 
     // MARK: - Properties
 

@@ -37,7 +37,7 @@ extension PresentableError {
 
     // MARK: - Error
 
-    // The localized description for this error.
+    /// The localized description for this error.
     public var errorDescription: String? {
         return String(presentableDescription())
     }

@@ -25,7 +25,6 @@
     return "\n" + result.joined(separator: "\n") + "\n"
 }
 
-/// :nodoc:
 public func _primitiveMethodMessage(for method: String) -> (_APILocalization) -> String {
     return { (localization: _APILocalization) -> String in // @exempt(from: tests)
         switch localization {
@@ -34,12 +33,10 @@ public func _primitiveMethodMessage(for method: String) -> (_APILocalization) ->
         }
     }
 }
-/// :nodoc:
 public func _primitiveMethod(_ method: String = #function, file: StaticString = #file, line: UInt = #line) -> Never {
     _preconditionFailure(_primitiveMethodMessage(for: method), file: file, line: line)
 }
 
-/// :nodoc:
 public func _unreachableMessage(function: String, file: StaticString, line: UInt, column: UInt) -> (_APILocalization) -> String {
     return { (localization: _APILocalization) -> String in // @exempt(from: tests)
         switch localization {
@@ -48,17 +45,14 @@ public func _unreachableMessage(function: String, file: StaticString, line: UInt
         }
     }
 }
-/// :nodoc:
 public func _unreachable(function: String = #function, file: StaticString = #file, line: UInt = #line, column: UInt = #column) -> Never {
     _preconditionFailure(_unreachableMessage(function: function, file: file, line: line, column: column), file: file, line: line)
 }
 
-/// :nodoc:
 @_inlineable public func _assert(_ condition: @autoclosure () -> Bool, _ message: (_APILocalization) -> String, file: StaticString = #file, line: UInt = #line) {
     Swift.assert(condition, list(message), file: file, line: line)
 }
 
-/// :nodoc:
 public func _preconditionFailure(_ message: (_APILocalization) -> String, file: StaticString = #file, line: UInt = #line) -> Never {
     Swift.preconditionFailure(list(message), file: file, line: line)
 }

@@ -15,5 +15,5 @@
 extension CharacterSet {
 
     /// A pattern representing any newline variant.
-    public static let newlinePattern = NewlinePattern.newline
+    public static let newlinePattern: NewlinePattern = NewlinePattern.newline
 }

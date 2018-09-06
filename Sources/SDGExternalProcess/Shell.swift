@@ -24,7 +24,7 @@ public class Shell : TransparentWrapper {
     // MARK: - Static Properties
 
     /// The default shell.
-    public static let `default` = Shell(at: URL(fileURLWithPath: "/bin/sh"))
+    public static let `default`: Shell = Shell(at: URL(fileURLWithPath: "/bin/sh"))
 
     // MARK: - Static Functions
 
