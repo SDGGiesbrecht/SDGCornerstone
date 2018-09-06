@@ -53,7 +53,18 @@ internal enum Language : String {
 
     // MARK: - Description
 
-    func isolatedEnglishName() -> StrictString {
+    internal var textDirection: TextDirection {
+        switch self {
+        case .普通话, .日本語, .한국어:
+            return .topToBottomRightToLeft
+        case .español, .english, .हिन्दी, .português, .русский, .deutsch, .tiếngViệt, .français, .türkçe, .italiano, .polski, .українська, .nederlands, .malaysia, .română, .ไทย, .ελληνικά, .čeština, .magyar, .svenska, .indonesia, .dansk, .suomi, .slovenčina, .norskBokmål, .hrvatski, .català:
+            return .leftToRightTopToBottom
+        case .العربية, .עברית:
+            return .rightToLeftTopToBottom
+        }
+    }
+
+    internal func isolatedEnglishName() -> StrictString {
         switch self {
         case .普通话:
             return "Mandarin"
