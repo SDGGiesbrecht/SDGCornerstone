@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// A direction in which natural text is written.
-public enum TextDirection {
+public enum TextDirection: Int, IterableEnumeration {
 
     /// Written right‐to‐left, top‐to‐bottom, such as Hebrew, Arabic or Persian.
     case rightToLeftTopToBottom
