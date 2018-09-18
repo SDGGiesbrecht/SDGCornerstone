@@ -268,11 +268,7 @@ extension Measurement {
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     @_inlineable public func mod(_ divisor: Self) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.formRemainder(mod: $1) }, on: self, with: divisor)
-        #else
-        return nonmutatingVariant(of: Self.formRemainder, on: self, with: divisor)
-        #endif
     }
 
     // #documentation(SDGCornerstone.Measurement.formRemainder(mod:))
@@ -299,11 +295,7 @@ extension Measurement {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @_inlineable public static func gcd(_ a: Self, _ b: Self) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.formGreatestCommonDivisor(with: $1) }, on: a, with: b)
-        #else
-        return nonmutatingVariant(of: Self.formGreatestCommonDivisor, on: a, with: b)
-        #endif
     }
 
     // #documentation(SDGCornerstone.Measurement.formGreatestCommonDivisor(with:))
@@ -322,11 +314,7 @@ extension Measurement {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @_inlineable public static func lcm(_ a: Self, _ b: Self) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.formLeastCommonMultiple(with: $1) }, on: a, with: b)
-        #else
-        return nonmutatingVariant(of: Self.formLeastCommonMultiple, on: a, with: b)
-        #endif
     }
 
     // #documentation(SDGCornerstone.Measurement.formLeastCommonMultiple(with:))
@@ -355,11 +343,7 @@ extension Measurement {
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
     @_inlineable public func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.round($1, toMultipleOf: $2) }, on: self, with: (rule, factor))
-        #else
-        return nonmutatingVariant(of: Self.round, on: self, with: (rule, factor))
-        #endif
     }
 
     // MARK: - Addable

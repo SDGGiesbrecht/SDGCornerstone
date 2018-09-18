@@ -140,11 +140,7 @@ extension OrderedEnumeration where RawValue == Int {
     // #documentation(SDGCornerstone.OrderedEnumeration.cyclicSuccessor())
     /// Returns the next case, wrapping around to the first case if necessary.
     @_inlineable public func cyclicSuccessor() -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.incrementCyclically($1) }, on: self, with: {})
-        #else
-        return nonmutatingVariant(of: Self.incrementCyclically, on: self, with: {})
-        #endif
     }
 
     // #documentation(SDGCornerstone.OrderedEnumeration.decrementCyclically())
@@ -164,11 +160,7 @@ extension OrderedEnumeration where RawValue == Int {
     // #documentation(SDGCornerstone.OrderedEnumeration.cyclicPredecessor())
     /// Returns the previous case, wrapping around to the last case if necessary.
     @_inlineable public func cyclicPredecessor() -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.decrementCyclically($1) }, on: self, with: {})
-        #else
-        return nonmutatingVariant(of: Self.decrementCyclically, on: self, with: {})
-        #endif
     }
 
     // MARK: - Comparable

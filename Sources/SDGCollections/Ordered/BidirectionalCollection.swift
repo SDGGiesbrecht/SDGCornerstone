@@ -22,8 +22,6 @@ extension BidirectionalCollection {
     /// - Parameters:
     ///     - i: The following index.
 
-    #if swift(>=4.1.50)
-    // MARK: - #if swift(>=4.1.50)
     /// Returns the backward version of the specified range.
     @_inlineable public func backward<R>(_ range: R) -> Range<ReversedCollection<Self>.Index> where R : RangeExpression, R.Bound == Self.Index {
         let resolved = range.relative(to: self)
@@ -35,5 +33,4 @@ extension BidirectionalCollection {
         let resolved = range.relative(to: reversed())
         return resolved.upperBound.base ..< resolved.lowerBound.base
     }
-    #endif
 }

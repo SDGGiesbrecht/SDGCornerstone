@@ -101,35 +101,19 @@ class SDGControlFlowAPITests : TestCase {
             if c { value.insert("c") }
         }
         func modifying(a: Bool, b: Bool, c: Bool) -> NonmutatingVariantExample {
-            #if swift(>=4.1.50)
             return nonmutatingVariant(of: { $0.modify(a: $1, b: $2, c: $3) }, on: self, with: (a, b, c))
-            #else
-            return nonmutatingVariant(of: NonmutatingVariantExample.modify, on: self, with: (a, b, c))
-            #endif
         }
         static func == (precedingValue: NonmutatingVariantExample, followingValue: NonmutatingVariantExample) -> Bool {
             return precedingValue.value == followingValue.value
         }
     }
     func testNonmutatingVariants() {
-        #if swift(>=4.1.50)
         let sorted = nonmutatingVariant(of: { $0.sort() }, on: [2, 3, 1])
-        #else
-        let sorted = nonmutatingVariant(of: Array.sort, on: [2, 3, 1])
-        #endif
         XCTAssert(sorted == [1, 2, 3], "Nonmutating variant returned an unexpected value: \(sorted)")
-        #if swift(>=4.1.50)
         let appended = nonmutatingVariant(of: { $0.append($1) }, on: [1, 2], with: 3)
-        #else
-        let appended = nonmutatingVariant(of: Array.append, on: [1, 2], with: 3)
-        #endif
         XCTAssert(appended == [1, 2, 3], "Nonmutating variant returned an unexpected value: \(appended)")
         let start = "BCD"
-        #if swift(>=4.1.50)
         let inserted = nonmutatingVariant(of: { $0.insert($1, at: $2) }, on: start, with: ("A", start.startIndex))
-        #else
-        let inserted = nonmutatingVariant(of: String.insert, on: start, with: ("A", start.startIndex))
-        #endif
         XCTAssert(inserted == "ABCD", "Nonmutating variant returned an unexpected value: \(inserted)")
         let modified = NonmutatingVariantExample().modifying(a: true, b: false, c: true)
         XCTAssert(modified.value == ["a", "c"], "Nonmutating variant returned an unexpected value: \(modified)")

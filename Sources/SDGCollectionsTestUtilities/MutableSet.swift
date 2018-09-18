@@ -43,11 +43,7 @@
     test(assignmentOperator: (∩=, "∩="), with: (set, overlapping), resultsIn: intersection, file: file, line: line)
     // SetAlgebra
     test(method: (T.intersection, "intersection"), of: set, with: overlapping, returns: intersection, file: file, line: line)
-    #if swift(>=4.1.50)
     test(mutatingMethod: ({ $0.formIntersection($1) }, "formIntersection"), of: set, with: overlapping, resultsIn: intersection, file: file, line: line)
-    #else
-    test(mutatingMethod: (T.formIntersection, "formIntersection"), of: set, with: overlapping, resultsIn: intersection, file: file, line: line)
-    #endif
 
     test(operator: (∪, "∪"), on: (set, Set([b, c])), returns: superset, file: file, line: line)
     test(operator: (∪, "∪"), on: (set, overlapping), returns: superset, file: file, line: line)
@@ -55,11 +51,7 @@
     test(assignmentOperator: (∪=, "∪="), with: (set, overlapping), resultsIn: superset, file: file, line: line)
     // SetAlgebra
     test(method: (T.union, "union"), of: set, with: overlapping, returns: superset, file: file, line: line)
-    #if swift(>=4.1.50)
     test(mutatingMethod: ({ $0.formUnion($1) }, "formUnion"), of: set, with: overlapping, resultsIn: superset, file: file, line: line)
-    #else
-    test(mutatingMethod: (T.formUnion, "formUnion"), of: set, with: overlapping, resultsIn: superset, file: file, line: line)
-    #endif
 
     var complement = T()
     complement.insert(a)
@@ -76,9 +68,5 @@
     test(assignmentOperator: (∆=, "∆="), with: (set, overlapping), resultsIn: symmetricDifference, file: file, line: line)
     // SetAlgebra
     test(method: (T.symmetricDifference, "symmetricDifference"), of: set, with: overlapping, returns: symmetricDifference, file: file, line: line)
-    #if swift(>=4.1.50)
     test(mutatingMethod: ({ $0.formSymmetricDifference($1) }, "formSymmetricDifference"), of: set, with: overlapping, resultsIn: symmetricDifference, file: file, line: line)
-    #else
-    test(mutatingMethod: (T.formSymmetricDifference, "formSymmetricDifference"), of: set, with: overlapping, resultsIn: symmetricDifference, file: file, line: line)
-    #endif
 }

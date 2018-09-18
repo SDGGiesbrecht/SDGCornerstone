@@ -34,10 +34,6 @@ extension RangeReplaceableCollection {
     /// - Parameters:
     ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
     @_inlineable public func shuffled(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.shuffle(usingRandomizer: $1) }, on: self, with: randomizer)
-        #else
-        return nonmutatingVariant(of: Self.shuffle, on: self, with: randomizer)
-        #endif
     }
 }

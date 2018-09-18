@@ -14,21 +14,19 @@
 
 import SDGControlFlow
 
-#if !swift(>=4.1.50) // No sense complicating the example.
-
 // @example(nonmutatingVariant)
 extension Array where Element : Comparable {
     // MARK: - where Element : Comparable
 
     func sorted() -> Array {
-        return nonmutatingVariant(of: Array.sort, on: self)
+        return nonmutatingVariant(of: { $0.sort() }, on: self)
+        //return nonmutatingVariant(of: Array.sort, on: self)
     }
     func appending(_ appendix: Array) -> Array {
-        return nonmutatingVariant(of: Array.append, on: self, with: appendix)
+        return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: appendix)
     }
     static func + (a: Array, b: Array) -> Array {
         return nonmutatingVariant(of: +=, on: a, with: b)
     }
 }
 // @endExample
-#endif

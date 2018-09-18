@@ -71,11 +71,7 @@ extension RangeReplaceableCollection {
     /// - Parameters:
     ///     - newElement: The element to append to the collection
     @_inlineable public func appending(_ newElement: Self.Element) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.append($1) }, on: self, with: newElement)
-        #else
-        return nonmutatingVariant(of: Self.append, on: self, with: newElement)
-        #endif
     }
 
     // @documentation(SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:))
@@ -84,11 +80,7 @@ extension RangeReplaceableCollection {
     /// - Parameters:
     ///     - newElements: The elements to append to the collection
     @_inlineable public func appending<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: newElements)
-        #else
-        return nonmutatingVariant(of: Self.append, on: self, with: newElements)
-        #endif
     }
 
     @_inlineable @_versioned internal func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
@@ -137,11 +129,7 @@ extension RangeReplaceableCollection {
     /// - Parameters:
     ///     - newElement: The element to prepend to the collection
     @_inlineable public func prepending(_ newElement: Self.Element) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.prepend($1) }, on: self, with: newElement)
-        #else
-        return nonmutatingVariant(of: Self.prepend, on: self, with: newElement)
-        #endif
     }
 
     // @documentation(SDGCornerstone.RangeReplaceableCollection.prepending(contentsOf:))
@@ -150,11 +138,7 @@ extension RangeReplaceableCollection {
     /// - Parameters:
     ///     - newElements: The elements to prepend to the collection
     @_inlineable public func prepending<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.prepend(contentsOf: $1) }, on: self, with: newElements)
-        #else
-        return nonmutatingVariant(of: Self.prepend, on: self, with: newElements)
-        #endif
     }
 
     @_inlineable @_versioned internal func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
@@ -176,11 +160,7 @@ extension RangeReplaceableCollection {
 
     /// Returns a collection formed by truncating `self` at `index`.
     @_inlineable public func truncated(at index: Index) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.truncate(at: $1) }, on: self, with: index)
-        #else
-        return nonmutatingVariant(of: Self.truncate, on: self, with: index)
-        #endif
     }
 
     /// Fills the collection to a certain count.
@@ -207,11 +187,7 @@ extension RangeReplaceableCollection {
     ///     - element: The element with which to fill the collection.
     ///     - direction: The direction from which to fill the collection.
     @_inlineable public func filled(to count: Int, with element: Element, from direction: FillDirection) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.fill(to: $1, with: $2, from: $3) }, on: self, with: (count, element, direction))
-        #else
-        return nonmutatingVariant(of: Self.fill, on: self, with: (count, element, direction))
-        #endif
     }
 
     // MARK: - ExpressibleByArrayLiteral

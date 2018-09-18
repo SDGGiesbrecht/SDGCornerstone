@@ -104,12 +104,6 @@ extension Range : RangeFamily {
     /// The element type.
     public typealias Element = Bound
 }
-#if !swift(>=4.1.50)
-// #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
-extension Range : Hashable where Bound : Hashable {
-    // MARK: - where Bound : Hashable
-}
-#endif
 
 extension ClosedRange : RangeFamily {
 
@@ -127,41 +121,3 @@ extension ClosedRange : RangeFamily {
     /// The element type.
     public typealias Element = Bound
 }
-#if !swift(>=4.1.50)
-// #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
-extension ClosedRange : Hashable where Bound : Hashable {
-    // MARK: - where Bound : Hashable
-}
-#endif
-
-#if !swift(>=4.1.50)
-// MARK: - #if swift(>=4.1.50)
-// #workaround(Swift 4.1.2, This section can be removed in Swift 4.2)
-extension CountableRange : RangeFamily {
-
-    // MARK: - RangeFamily
-
-    // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
-    /// `true` if the type has a closed upper bound.
-    @_inlineable public static var hasClosedUpperBound: Bool {
-        return false
-    }
-}
-extension CountableRange : Hashable where Bound : Hashable {
-    // MARK: - where Bound : Hashable
-}
-
-extension CountableClosedRange : RangeFamily {
-
-    // MARK: - RangeFamily
-
-    // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
-    /// `true` if the type has a closed upper bound.
-    @_inlineable public static var hasClosedUpperBound: Bool {
-        return true
-    }
-}
-extension CountableClosedRange : Hashable where Bound : Hashable {
-    // MARK: - where Bound : Hashable
-}
-#endif

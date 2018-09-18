@@ -66,11 +66,7 @@ extension Dictionary {
     /// - Parameters:
     ///     - other: Another dictionary.
     @_inlineable public func mergedByOverwriting(from other: [Key: Value]) -> [Key: Value] {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.mergeByOverwriting(from: $1) }, on: self, with: other)
-        #else
-        return nonmutatingVariant(of: Dictionary.mergeByOverwriting, on: self, with: other)
-        #endif
     }
 
     // MARK: - Mapping

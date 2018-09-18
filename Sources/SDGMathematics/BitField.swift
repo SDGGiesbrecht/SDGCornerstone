@@ -80,11 +80,7 @@ extension BitField {
     // #documentation(SDGCornerstone.BitField.bitwiseNot())
     /// Returns the bits not present in `self`.
     @_inlineable public func bitwiseNot() -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.formBitwiseNot() }, on: self)
-        #else
-        return nonmutatingVariant(of: Self.formBitwiseNot, on: self)
-        #endif
     }
 
     // #documentation(SDGCornerstone.BitField.bitwiseAnd(with:))
@@ -93,11 +89,7 @@ extension BitField {
     /// - Parameters:
     ///     - other: The other bits.
     @_inlineable public func bitwiseAnd(with other: Self) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.formBitwiseAnd(with: $1) }, on: self, with: other)
-        #else
-        return nonmutatingVariant(of: Self.formBitwiseAnd, on: self, with: other)
-        #endif
     }
 
     // #documentation(SDGCornerstone.BitField.bitwiseOr(with:))
@@ -106,11 +98,7 @@ extension BitField {
     /// - Parameters:
     ///     - other: The other bits.
     @_inlineable public func bitwiseOr(with other: Self) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.formBitwiseOr(with: $1) }, on: self, with: other)
-        #else
-        return nonmutatingVariant(of: Self.formBitwiseOr, on: self, with: other)
-        #endif
     }
 
     // #documentation(SDGCornerstone.BitField.bitwiseExclusiveOr(with:))
@@ -119,10 +107,6 @@ extension BitField {
     /// - Parameters:
     ///     - other: The other bits.
     @_inlineable public func bitwiseExclusiveOr(with other: Self) -> Self {
-        #if swift(>=4.1.50)
         return nonmutatingVariant(of: { $0.formBitwiseExclusiveOr(with: $1) }, on: self, with: other)
-        #else
-        return nonmutatingVariant(of: Self.formBitwiseExclusiveOr, on: self, with: other)
-        #endif
     }
 }
