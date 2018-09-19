@@ -195,7 +195,7 @@ extension IntXFamily {
 }
 
 extension BinaryInteger {
-    @inlinable @usableFromInline internal init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
+    @inlinable internal init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
         self.init(int)
     }
 }

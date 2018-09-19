@@ -20,7 +20,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    @inlinable @usableFromInline internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // @exempt(from: tests) False positive in Xcode 9.3.
+    @inlinable internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // @exempt(from: tests) False positive in Xcode 9.3.
         _assert(count == nil ∨ count!.lowerBound.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // @exempt(from: tests)
@@ -137,7 +137,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Pattern
 
-    @inlinable @usableFromInline internal func checkNext<C : SearchableCollection>(in collection: C, at locations: inout [C.Index])  where C.Element == Element {
+    @inlinable internal func checkNext<C : SearchableCollection>(in collection: C, at locations: inout [C.Index])  where C.Element == Element {
         locations = Array(locations.map({ (location: C.Index) -> [Range<C.Index>] in
             if location ≠ collection.endIndex {
                 return pattern.matches(in: collection, at: location)

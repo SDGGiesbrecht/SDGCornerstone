@@ -22,7 +22,7 @@ extension StrictString {
 
         // MARK: - Initialization
 
-        @inlinable @usableFromInline internal init(_ string: StrictString) {
+        @inlinable internal init(_ string: StrictString) {
             self.string = string
         }
 
@@ -32,11 +32,11 @@ extension StrictString {
 
         // MARK: - Normalization
 
-        @inlinable @usableFromInline internal static func normalize(_ string: String) -> StrictString.ClusterView {
+        @inlinable internal static func normalize(_ string: String) -> StrictString.ClusterView {
             return StrictString(string).clusters
         }
 
-        @inlinable @usableFromInline internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString.ClusterView where S.Element == ExtendedGraphemeCluster {
+        @inlinable internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString.ClusterView where S.Element == ExtendedGraphemeCluster {
             switch sequence {
 
             // Already normalized.

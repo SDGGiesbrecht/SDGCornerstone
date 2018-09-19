@@ -67,7 +67,7 @@ public protocol OrderedEnumeration : Comparable, IterableEnumeration {
 extension OrderedEnumeration where RawValue == Int {
     // MARK: - where RawValue == Int
 
-    @inlinable @usableFromInline internal mutating func _increment() {
+    @inlinable internal mutating func _increment() {
         guard let result = successor() else {
             _preconditionFailure({ [instance = self] (localization: _APILocalization) -> String in
                 switch localization {
@@ -86,7 +86,7 @@ extension OrderedEnumeration where RawValue == Int {
         _increment()
     }
 
-    @inlinable @usableFromInline internal func _successor() -> Self? {
+    @inlinable internal func _successor() -> Self? {
         return Self(rawValue: rawValue.successor())
     }
     // #documentation(SDGCornerstone.OrderedEnumeration.successor())
@@ -95,7 +95,7 @@ extension OrderedEnumeration where RawValue == Int {
         return _successor()
     }
 
-    @inlinable @usableFromInline internal mutating func _decrement() {
+    @inlinable internal mutating func _decrement() {
         guard let result = predecessor() else {
             _preconditionFailure({ [instance = self] (localization: _APILocalization) -> String in
                 switch localization {
@@ -114,7 +114,7 @@ extension OrderedEnumeration where RawValue == Int {
         _decrement()
     }
 
-    @inlinable @usableFromInline internal func _predecessor() -> Self? {
+    @inlinable internal func _predecessor() -> Self? {
         return Self(rawValue: rawValue.predecessor())
     }
     // #documentation(SDGCornerstone.OrderedEnumeration.predecessor())

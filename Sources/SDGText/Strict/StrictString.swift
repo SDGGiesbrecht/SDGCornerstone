@@ -19,7 +19,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Initialization
 
-    @inlinable @usableFromInline internal init(unsafeString: String) {
+    @inlinable internal init(unsafeString: String) {
         self.string = unsafeString
     }
 
@@ -60,19 +60,19 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Normalization
 
-    @inlinable @usableFromInline internal static func normalizeAsString(_ string: String) -> String {
+    @inlinable internal static func normalizeAsString(_ string: String) -> String {
         return string.decomposedStringWithCompatibilityMapping
     }
 
-    @inlinable @usableFromInline internal static func normalize(_ string: String) -> StrictString {
+    @inlinable internal static func normalize(_ string: String) -> StrictString {
         return StrictString(unsafeString: normalizeAsString(string))
     }
 
-    @inlinable @usableFromInline internal static func normalize(_ scalars: String.ScalarView) -> StrictString {
+    @inlinable internal static func normalize(_ scalars: String.ScalarView) -> StrictString {
         return normalize(String(scalars))
     }
 
-    @inlinable @usableFromInline internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Element == UnicodeScalar {
+    @inlinable internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Element == UnicodeScalar {
         switch sequence {
 
         // Already normalized.
@@ -226,7 +226,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         self = StrictString.normalize(elements)
     }
 
-    @inlinable @usableFromInline internal static func concatenateStrictStrings(_ first: StrictString, _ second: StrictString) -> StrictString {
+    @inlinable internal static func concatenateStrictStrings(_ first: StrictString, _ second: StrictString) -> StrictString {
 
         if first.isEmpty {
             return second

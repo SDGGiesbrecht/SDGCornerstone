@@ -31,11 +31,11 @@ extension Day {
         return ordinal.inDigits()
     }
 
-    @inlinable @usableFromInline internal func inDeutschenZiffern() -> StrictString {
+    @inlinable internal func inDeutschenZiffern() -> StrictString {
         return ordinal._verkürzteDeutscheOrdnungszahl()
     }
 
-    @inlinable @usableFromInline internal func enChiffresFrançais() -> SemanticMarkup {
+    @inlinable internal func enChiffresFrançais() -> SemanticMarkup {
         if ordinal == 1 {
             return ordinal._ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
         } else {
@@ -43,11 +43,11 @@ extension Day {
         }
     }
 
-    @inlinable @usableFromInline internal func σεΕλληνικάΨηφία() -> StrictString {
+    @inlinable internal func σεΕλληνικάΨηφία() -> StrictString {
         return ordinal.inDigits()
     }
 
-    @inlinable @usableFromInline internal func בעברית־בספרות() -> StrictString {
+    @inlinable internal func בעברית־בספרות() -> StrictString {
         return ordinal.inDigits()
     }
 

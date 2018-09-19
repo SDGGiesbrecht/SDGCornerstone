@@ -42,7 +42,7 @@ extension IntegralArithmetic {
         self.init(IntMax(int))
     }
 
-    @inlinable @usableFromInline internal mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
+    @inlinable internal mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
 
         _assert(exponent.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)

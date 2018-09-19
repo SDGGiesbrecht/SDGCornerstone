@@ -39,7 +39,7 @@ public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithme
 
 extension TextConvertibleNumber {
 
-    @inlinable @usableFromInline internal init(forceParsing parse: () throws -> Self) {
+    @inlinable internal init(forceParsing parse: () throws -> Self) {
         do {
             self = try parse()
         } catch let error as TextConvertibleNumberParseError {
@@ -172,7 +172,7 @@ extension TextConvertibleNumber {
         try self.init(fromRepresentation: representation, usingDigits: selectedDigits, radixCharacters: [",", ".", "٫"], formattingSeparators: [" ", "٬"])
     }
 
-    @inlinable @usableFromInline internal static func assertNFKD(digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
+    @inlinable internal static func assertNFKD(digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
 
         let assertNFKD = { () -> [UnicodeScalar] in
             var scalars = digits.reduce([]) { $0 + $1 }
@@ -212,11 +212,11 @@ extension TextConvertibleNumber {
         try self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
     }
 
-    @inlinable @usableFromInline internal static func getBase(_ digits: [[UnicodeScalar]]) -> Self {
+    @inlinable internal static func getBase(_ digits: [[UnicodeScalar]]) -> Self {
         return Self(UInt(digits.count))
     }
 
-    @inlinable @usableFromInline internal static func getMapping(_ digits: [[UnicodeScalar]]) -> [UnicodeScalar: Self] {
+    @inlinable internal static func getMapping(_ digits: [[UnicodeScalar]]) -> [UnicodeScalar: Self] {
         var digitMapping: [UnicodeScalar: Self] = [:]
         for index in digits.indices {
             let characters = digits[index]
@@ -229,7 +229,7 @@ extension TextConvertibleNumber {
         return digitMapping
     }
 
-    @inlinable @usableFromInline internal init(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable internal init(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
 
         self = 0
         var position: Self = 0
@@ -279,7 +279,7 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
         try self.init(integer: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
     }
 
-    @inlinable @usableFromInline internal init(integer representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable internal init(integer representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
         var representation = representation
 
         let negative = representation.scalars.first == "−"

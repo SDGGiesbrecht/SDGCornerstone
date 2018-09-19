@@ -162,19 +162,19 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
 
 extension SetAlgebra {
 
-    @inlinable @usableFromInline internal func unionAsSetAlgebra(_ other: Self) -> Self {
+    @inlinable internal func unionAsSetAlgebra(_ other: Self) -> Self {
         return union(other)
     }
 
-    @inlinable @usableFromInline internal mutating func formUnionAsSetAlgebra(_ other: Self) {
+    @inlinable internal mutating func formUnionAsSetAlgebra(_ other: Self) {
         formUnion(other)
     }
 
-    @inlinable @usableFromInline internal mutating func formIntersectionAsSetAlgebra(_ other: Self) {
+    @inlinable internal mutating func formIntersectionAsSetAlgebra(_ other: Self) {
         formIntersection(other)
     }
 
-    @inlinable @usableFromInline internal func symmetricDifferenceAsSetAlgebra(_ other: Self) -> Self {
+    @inlinable internal func symmetricDifferenceAsSetAlgebra(_ other: Self) -> Self {
         return symmetricDifference(other)
     }
 }

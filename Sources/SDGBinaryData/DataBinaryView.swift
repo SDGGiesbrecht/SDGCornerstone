@@ -21,7 +21,7 @@ extension Data {
 
         // MARK: - Initialization
 
-        @inlinable @usableFromInline internal init(_ data: Data) {
+        @inlinable internal init(_ data: Data) {
             self.data = data
         }
 
@@ -32,11 +32,11 @@ extension Data {
 
         // MARK: - Conversions
 
-        @inlinable @usableFromInline internal func byteIndex(_ index: IntMax) -> Data.Index {
+        @inlinable internal func byteIndex(_ index: IntMax) -> Data.Index {
             return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
         }
 
-        @inlinable @usableFromInline internal func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
+        @inlinable internal func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
             return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
         }
 

@@ -19,7 +19,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
 
     // MARK: - Initialization
 
-    @inlinable @usableFromInline internal init(abstractBasePattern base: Pattern<Element>) { // @exempt(from: tests) False result with Xcode 9.3.
+    @inlinable internal init(abstractBasePattern base: Pattern<Element>) { // @exempt(from: tests) False result with Xcode 9.3.
         self.base = base
     }
 

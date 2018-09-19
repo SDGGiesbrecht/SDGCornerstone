@@ -17,15 +17,15 @@ import SDGMathematics
 
 extension WholeArithmetic {
 
-    @inlinable @usableFromInline internal var egyptianDigits: [UnicodeScalar] {
+    @inlinable internal var egyptianDigits: [UnicodeScalar] {
         return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     }
 
-    @inlinable @usableFromInline internal func radix(for digits: [UnicodeScalar]) -> Self {
+    @inlinable internal func radix(for digits: [UnicodeScalar]) -> Self {
         return Self(UInt(digits.count))
     }
 
-    @inlinable @usableFromInline internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
+    @inlinable internal func mapping(for digits: [UnicodeScalar]) -> [Self: UnicodeScalar] {
         var result: [Self: UnicodeScalar] = [:]
         for value in digits.indices {
             result[Self(UInt(value))] = digits[value]
@@ -33,7 +33,7 @@ extension WholeArithmetic {
         return result
     }
 
-    @inlinable @usableFromInline internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+    @inlinable internal func wholeDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         let digitSet = egyptianDigits
 
         let radix = self.radix(for: digitSet)
@@ -67,7 +67,7 @@ extension WholeArithmetic {
         return StrictString(digits.reversed())
     }
 
-    @inlinable @usableFromInline internal func generateAbbreviatedEnglishOrdinal() -> SemanticMarkup {
+    @inlinable internal func generateAbbreviatedEnglishOrdinal() -> SemanticMarkup {
         let digits = SemanticMarkup(wholeDigits())
         guard let last = digits.last else {
             unreachable()
@@ -90,11 +90,11 @@ extension WholeArithmetic {
         }
     }
 
-    @inlinable @usableFromInline func verkürzteDeutscheOrdnungszahlErzeugen() -> StrictString {
+    @inlinable func verkürzteDeutscheOrdnungszahlErzeugen() -> StrictString {
         return wholeDigits() + "."
     }
 
-    @inlinable @usableFromInline internal func générerOrdinalFrançaisAbrégé(genre: _GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
+    @inlinable internal func générerOrdinalFrançaisAbrégé(genre: _GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
         var singulier: StrictString
 
         if self == 1 {
@@ -118,7 +118,7 @@ extension WholeArithmetic {
         return SemanticMarkup(wholeDigits()) + SemanticMarkup(singulier).superscripted()
     }
 
-    @inlinable @usableFromInline internal func romanNumerals(lowercase: Bool) -> StrictString {
+    @inlinable internal func romanNumerals(lowercase: Bool) -> StrictString {
 
         func format(_ string: StrictString) -> StrictString {
             if lowercase {
@@ -225,7 +225,7 @@ extension WholeArithmetic {
         return result
     }
 
-    @inlinable @usableFromInline internal func ελληνικοίΑριθμοί(μικράΓράμματα: Bool, κεραία: Bool) -> StrictString {
+    @inlinable internal func ελληνικοίΑριθμοί(μικράΓράμματα: Bool, κεραία: Bool) -> StrictString {
 
         func μορφοποίηση(_ κείμενο: StrictString) -> StrictString {
             if μικράΓράμματα {
@@ -359,7 +359,7 @@ extension WholeArithmetic {
         return αποτέλεσμα
     }
 
-    @inlinable @usableFromInline func ספרות־עבריות(גרשיים: Bool) -> StrictString {
+    @inlinable func ספרות־עבריות(גרשיים: Bool) -> StrictString {
 
         var מספר = self
         var תוצאה: StrictString = ""

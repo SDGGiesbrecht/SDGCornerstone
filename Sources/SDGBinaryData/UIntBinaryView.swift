@@ -20,7 +20,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - Initialization
 
-    @inlinable @usableFromInline internal init(_ uInt: UIntValue) {
+    @inlinable internal init(_ uInt: UIntValue) {
         self.uInt = uInt
     }
 
@@ -103,7 +103,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
         return i + (1 as Index)
     }
 
-    @inlinable @usableFromInline internal func assertIndexExists(_ index: Index) {
+    @inlinable internal func assertIndexExists(_ index: Index) {
         _assert(index ∈ bounds, { (localization: _APILocalization) in
             switch localization { // @exempt(from: tests)
             case .englishCanada:

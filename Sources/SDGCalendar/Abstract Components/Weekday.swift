@@ -45,7 +45,7 @@ extension Weekday {
         }
     }
 
-    @inlinable @usableFromInline internal func aufDeutsch() -> StrictString {
+    @inlinable internal func aufDeutsch() -> StrictString {
         switch ordinal {
         case 1:
             return "Sonntag"
@@ -66,7 +66,7 @@ extension Weekday {
         }
     }
 
-    @inlinable @usableFromInline internal func enFrançais(_ majuscules: Casing) -> StrictString {
+    @inlinable internal func enFrançais(_ majuscules: Casing) -> StrictString {
         switch ordinal {
         case 1:
             return majuscules.apply(to: "dimanche")
@@ -87,7 +87,7 @@ extension Weekday {
         }
     }
 
-    @inlinable @usableFromInline internal func σεΕλληνικά() -> StrictString {
+    @inlinable internal func σεΕλληνικά() -> StrictString {
         switch ordinal {
         case 1:
             return "Κυριακή"
@@ -108,7 +108,7 @@ extension Weekday {
         }
     }
 
-    @inlinable @usableFromInline internal func בעברית() -> StrictString {
+    @inlinable internal func בעברית() -> StrictString {
         let יום: StrictString = "יום "
         switch ordinal {
         case 1:
