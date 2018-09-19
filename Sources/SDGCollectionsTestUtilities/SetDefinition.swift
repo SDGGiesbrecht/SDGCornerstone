@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to SetDefinition.
-@_inlineable public func testSetDefinitionConformance<T>(of set: T, member: T.Element, nonmember: T.Element, file: StaticString = #file, line: UInt = #line) where T : SetDefinition {
+@inlinable public func testSetDefinitionConformance<T>(of set: T, member: T.Element, nonmember: T.Element, file: StaticString = #file, line: UInt = #line) where T : SetDefinition {
 
     test(operator: (∈, "∈"), on: (member, set), returns: true, file: file, line: line)
     test(operator: (∉, "∉"), on: (member, set), returns: false, file: file, line: line)

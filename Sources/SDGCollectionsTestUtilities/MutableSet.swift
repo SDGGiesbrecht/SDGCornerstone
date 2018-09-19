@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to MutableSet.
-@_inlineable public func testMutableSetConformance<T>(of type: T.Type, a: T.Element, b: T.Element, c: T.Element, file: StaticString = #file, line: UInt = #line) where T : MutableSet, T.Element : Hashable {
+@inlinable public func testMutableSetConformance<T>(of type: T.Type, a: T.Element, b: T.Element, c: T.Element, file: StaticString = #file, line: UInt = #line) where T : MutableSet, T.Element : Hashable {
 
     var set = T()
     set.insert(a)

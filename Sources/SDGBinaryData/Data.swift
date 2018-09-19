@@ -17,7 +17,7 @@ extension Data {
     // MARK: - Properties
 
     /// The data represented as a collection of bits.
-    @_inlineable public var binary: BinaryView {
+    @inlinable public var binary: BinaryView {
         get {
             return BinaryView(self)
         }

@@ -68,7 +68,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The element to test.
     ///     - followingValue: The set.
-    @_inlineable public static func ∈ (precedingValue: Element, followingValue: Self) -> Bool {
+    @inlinable public static func ∈ (precedingValue: Element, followingValue: Self) -> Bool {
         return followingValue ∋ precedingValue
     }
 
@@ -78,7 +78,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The element to test.
     ///     - followingValue: The set.
-    @_inlineable public static func ∉ (precedingValue: Element, followingValue: Self) -> Bool {
+    @inlinable public static func ∉ (precedingValue: Element, followingValue: Self) -> Bool {
         return ¬(precedingValue ∈ followingValue)
     }
 
@@ -88,7 +88,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_inlineable public static func ∌ (precedingValue: Self, followingValue: Element) -> Bool {
+    @inlinable public static func ∌ (precedingValue: Self, followingValue: Element) -> Bool {
         return ¬(precedingValue ∋ followingValue)
     }
 
@@ -98,7 +98,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∩ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Intersection<Self, S> {
+    @inlinable public static func ∩ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Intersection<Self, S> {
         return Intersection(precedingValue, followingValue)
     }
 
@@ -108,7 +108,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∪ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Self, S> {
+    @inlinable public static func ∪ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Self, S> {
         return Union(precedingValue, followingValue)
     }
 
@@ -118,7 +118,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Intersection<Self, AbsoluteComplement<S>> {
+    @inlinable public static func ∖ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Intersection<Self, AbsoluteComplement<S>> {
         return precedingValue ∩ followingValue′
     }
 
@@ -127,7 +127,7 @@ extension SetDefinition {
     ///
     /// - Parameters:
     ///     - operand: The set.
-    @_inlineable public static postfix func ′(operand: Self) -> AbsoluteComplement<Self> {
+    @inlinable public static postfix func ′(operand: Self) -> AbsoluteComplement<Self> {
         return AbsoluteComplement(operand)
     }
 
@@ -137,7 +137,7 @@ extension SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Intersection<Self, AbsoluteComplement<S>>, Intersection<S, AbsoluteComplement<Self>>> {
+    @inlinable public static func ∆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Intersection<Self, AbsoluteComplement<S>>, Intersection<S, AbsoluteComplement<Self>>> {
         return (precedingValue ∖ followingValue) ∪ (followingValue ∖ precedingValue)
     }
 }
@@ -150,7 +150,7 @@ extension SetDefinition where Self : SetAlgebra {
     ///
     /// - Parameters:
     ///     - member: The element to test.
-    @_inlineable public func contains(_ member: Self.Element) -> Bool {
+    @inlinable public func contains(_ member: Self.Element) -> Bool {
         return self ∋ member
     }
 }

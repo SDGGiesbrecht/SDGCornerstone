@@ -20,7 +20,7 @@
 /// Allows code which autoreleases on Darwin to compile on Linux without the need for operating system checks.
 ///
 /// This function does nothing on Linux, because Linux has no autoreleasing Objective‐C APIs to link against.
-@_inlineable public func autoreleasepool<Result>(invoking body: () throws -> Result) rethrows -> Result {
+@inlinable public func autoreleasepool<Result>(invoking body: () throws -> Result) rethrows -> Result {
     return try body()
 }
 #endif

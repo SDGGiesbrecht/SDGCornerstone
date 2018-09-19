@@ -15,7 +15,7 @@
 import Foundation
 
 /// Tests a type’s conformance to Equatable.
-@_inlineable public func testEquatableConformance<T>(differingInstances: (T, T), file: StaticString = #file, line: UInt = #line) where T : Equatable {
+@inlinable public func testEquatableConformance<T>(differingInstances: (T, T), file: StaticString = #file, line: UInt = #line) where T : Equatable {
     test(operator: (==, "=="), on: (differingInstances.0, differingInstances.0), returns: true, file: file, line: line)
     test(operator: (==, "=="), on: differingInstances, returns: false, file: file, line: line)
 }

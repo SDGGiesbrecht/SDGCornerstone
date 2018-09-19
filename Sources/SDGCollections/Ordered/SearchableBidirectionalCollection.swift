@@ -124,7 +124,7 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    @_inlineable @_versioned internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+    @inlinable @_versioned internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
         let backwards: ReversedCollection<Self> = reversed()
         guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
             return nil
@@ -188,7 +188,7 @@ extension SearchableBidirectionalCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
-    @_inlineable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+    @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
         return _lastMatch(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.lastMatch(for:))
@@ -219,7 +219,7 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_inlineable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+    @inlinable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
         return _lastMatch(for: pattern)
     }
     // #documentation(SDGCornerstone.Collection.lastMatch(for:))
@@ -250,11 +250,11 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    @_inlineable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
+    @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
         return _lastMatch(for: pattern)
     }
 
-    @_inlineable @_versioned internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+    @inlinable @_versioned internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
         let backwards: ReversedCollection<Self> = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
@@ -263,7 +263,7 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+    @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
         return _hasSuffix(pattern)
     }
     // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
@@ -271,7 +271,7 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
+    @inlinable public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
         return _hasSuffix(pattern)
     }
     // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
@@ -279,11 +279,11 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    @_inlineable public func hasSuffix(_ pattern: Self) -> Bool {
+    @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
         return _hasSuffix(pattern)
     }
 
-    @_inlineable @_versioned internal func _commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+    @inlinable @_versioned internal func _commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return PatternMatch(range: forward(reversed().commonPrefix(with: other.reversed()).range), in: self)
     }
     // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
@@ -291,7 +291,7 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - other: The other collection
-    @_inlineable public func commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+    @inlinable public func commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return _commonSuffix(with: other)
     }
     // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
@@ -299,11 +299,11 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - other: The other collection
-    @_inlineable public func commonSuffix(with other: Self) -> PatternMatch<Self> {
+    @inlinable public func commonSuffix(with other: Self) -> PatternMatch<Self> {
         return _commonSuffix(with: other)
     }
 
-    @_inlineable @_versioned internal func _difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableBidirectionalCollection, C.Element == Self.Element {
+    @inlinable @_versioned internal func _difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableBidirectionalCollection, C.Element == Self.Element {
 
         let suffixStart = commonSuffix(with: other).range.lowerBound
         let suffixLength = distance(from: suffixStart, to: endIndex)
@@ -322,7 +322,7 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
-    @_inlineable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableBidirectionalCollection, C.Element == Self.Element {
+    @inlinable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableBidirectionalCollection, C.Element == Self.Element {
         return _difference(from: other)
     }
     // #documentation(SDGCornerstone.Collection.difference(from:))
@@ -330,7 +330,7 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
-    @_inlineable public func difference(from other: Self) -> [Change<Index, Index>] {
+    @inlinable public func difference(from other: Self) -> [Change<Index, Index>] {
         return _difference(from: other)
     }
 }

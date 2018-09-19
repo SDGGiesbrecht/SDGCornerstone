@@ -246,27 +246,27 @@ extension RealArithmetic {
     /// π in the same type.
     ///
     /// - Note: This is an alias for `Self.π` to improve the legibility of code involving mathematical equations.
-    @_inlineable public var π: Self {
+    @inlinable public var π: Self {
         return Self.π
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.τ)
     /// An instance of τ.
-    @_inlineable public static var τ: Self {
+    @inlinable public static var τ: Self {
         return 2 × π
     }
 
     /// τ in the same type.
     ///
     /// - Note: This is an alias for `Self.τ` to improve the legibility of code involving mathematical equations.
-    @_inlineable public var τ: Self {
+    @inlinable public var τ: Self {
         return Self.τ
     }
 
     /// *e* in the same type.
     ///
     /// - Note: This is an alias for `Self.e` to improve the legibility of code involving mathematical equations.
-    @_inlineable public var e: Self {
+    @inlinable public var e: Self {
         return Self.e
     }
 
@@ -275,7 +275,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - degree: The degree of the root.
-    @_inlineable public func root(ofDegree degree: Self) -> Self {
+    @inlinable public func root(ofDegree degree: Self) -> Self {
         return nonmutatingVariant(of: { $0.formRoot(ofDegree: $1) }, on: self, with: degree)
     }
 
@@ -284,7 +284,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - degree: The degree of the root.
-    @_inlineable public mutating func formRoot(ofDegree degree: Self) {
+    @inlinable public mutating func formRoot(ofDegree degree: Self) {
         self ↑= (1 ÷ degree)
     }
 
@@ -293,7 +293,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - operand: The radicand.
-    @_inlineable public static prefix func √ (operand: Self) -> Self {
+    @inlinable public static prefix func √ (operand: Self) -> Self {
         return nonmutatingVariant(of: √=, on: operand)
     }
 
@@ -302,7 +302,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - operand: The value to modify.
-    @_inlineable public static postfix func √= (operand: inout Self) {
+    @inlinable public static postfix func √= (operand: inout Self) {
         operand.formRoot(ofDegree: 2)
     }
 
@@ -318,7 +318,7 @@ extension RealArithmetic {
     /// - Parameters:
     ///     - base: The base.
     ///     - antilogarithm: The antilogarithm.
-    @_inlineable public static func log(toBase base: Self, of antilogarithm: Self) -> Self {
+    @inlinable public static func log(toBase base: Self, of antilogarithm: Self) -> Self {
         return nonmutatingVariant(of: { $0.formLogarithm(toBase: $1) }, on: antilogarithm, with: base)
     }
 
@@ -329,7 +329,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
-    @_inlineable public static func log(_ antilogarithm: Self) -> Self {
+    @inlinable public static func log(_ antilogarithm: Self) -> Self {
         return nonmutatingVariant(of: { $0.formCommonLogarithm() }, on: antilogarithm)
     }
 
@@ -337,7 +337,7 @@ extension RealArithmetic {
     /// Sets `self` to its common logarithm.
     ///
     /// - Precondition: `self` > 0
-    @_inlineable public mutating func formCommonLogarithm() {
+    @inlinable public mutating func formCommonLogarithm() {
         formLogarithm(toBase: 10)
     }
 
@@ -348,7 +348,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - antilogarithm: The antilogarithm.
-    @_inlineable public static func ln(_ antilogarithm: Self) -> Self {
+    @inlinable public static func ln(_ antilogarithm: Self) -> Self {
         return nonmutatingVariant(of: { $0.formNaturalLogarithm() }, on: antilogarithm)
     }
 
@@ -356,7 +356,7 @@ extension RealArithmetic {
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
-    @_inlineable public mutating func formNaturalLogarithm() {
+    @inlinable public mutating func formNaturalLogarithm() {
         formLogarithm(toBase: e)
     }
 
@@ -365,7 +365,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - angle: The angle.
-    @_inlineable public static func cos(_ angle: Angle<Self>) -> Self {
+    @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
         return sin(angle + (π ÷ 2).rad)
     }
 
@@ -374,7 +374,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - angle: The angle.
-    @_inlineable public static func tan(_ angle: Angle<Self>) -> Self {
+    @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
         return sin(angle) ÷ cos(angle)
     }
 
@@ -383,7 +383,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - angle: The angle.
-    @_inlineable public static func csc(_ angle: Angle<Self>) -> Self {
+    @inlinable public static func csc(_ angle: Angle<Self>) -> Self {
         return 1 ÷ sin(angle)
     }
 
@@ -392,7 +392,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - angle: The angle.
-    @_inlineable public static func sec(_ angle: Angle<Self>) -> Self {
+    @inlinable public static func sec(_ angle: Angle<Self>) -> Self {
         return 1 ÷ cos(angle)
     }
 
@@ -401,7 +401,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - angle: The angle.
-    @_inlineable public static func cot(_ angle: Angle<Self>) -> Self {
+    @inlinable public static func cot(_ angle: Angle<Self>) -> Self {
         return 1 ÷ tan(angle)
     }
 
@@ -414,7 +414,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - sine: The sine.
-    @_inlineable public static func arcsin(_ sine: Self) -> Angle<Self> {
+    @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
         _assert((−1 ... 1).contains(sine), { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
@@ -433,7 +433,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - cosine: The cosine.
-    @_inlineable public static func arccos(_ cosine: Self) -> Angle<Self> {
+    @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
         _assert((−1 ... 1).contains(cosine), { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
@@ -452,7 +452,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - cosecant: The cosecant.
-    @_inlineable public static func arccsc(_ cosecant: Self) -> Angle<Self> {
+    @inlinable public static func arccsc(_ cosecant: Self) -> Angle<Self> {
         _assert(¬(−1 ... 1).contains(cosecant), { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
@@ -471,7 +471,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - secant: The secant.
-    @_inlineable public static func arcsec(_ secant: Self) -> Angle<Self> {
+    @inlinable public static func arcsec(_ secant: Self) -> Angle<Self> {
         _assert(¬(−1 ... 1).contains(secant), { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
@@ -488,7 +488,7 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - cotangent: The cotangent.
-    @_inlineable public static func arccot(_ cotangent: Self) -> Angle<Self> {
+    @inlinable public static func arccot(_ cotangent: Self) -> Angle<Self> {
         let reference = arctan(1 ÷ cotangent)
         if reference < Angle.additiveIdentity {
             return reference + π.rad
@@ -505,21 +505,21 @@ extension RealArithmetic {
 /// An instance of π in the desired return type.
 ///
 /// - Note: This is an alias for `N.π` to improve the legibility of code involving mathematical equations.
-@_inlineable public func π<N : RealArithmetic>() -> N {
+@inlinable public func π<N : RealArithmetic>() -> N {
     return N.π
 }
 
 /// An instance of τ in the desired return type.
 ///
 /// - Note: This is an alias for `N.τ` to improve the legibility of code involving mathematical equations.
-@_inlineable public func τ<N : RealArithmetic>() -> N {
+@inlinable public func τ<N : RealArithmetic>() -> N {
     return N.τ
 }
 
 /// An instance of *e* in the desired return type.
 ///
 /// - Note: This is an alias for `N.e` to improve the legibility of code involving mathematical equations.
-@_inlineable public func e<N : RealArithmetic>() -> N {
+@inlinable public func e<N : RealArithmetic>() -> N {
     return N.e
 }
 
@@ -535,7 +535,7 @@ extension RealArithmetic {
 /// - Parameters:
 ///     - base: The base.
 ///     - antilogarithm: The antilogarithm.
-@_inlineable public func log<N : RealArithmetic>(toBase base: N, of antilogarithm: N) -> N {
+@inlinable public func log<N : RealArithmetic>(toBase base: N, of antilogarithm: N) -> N {
     return N.log(toBase: base, of: antilogarithm)
 }
 
@@ -546,7 +546,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - antilogarithm: The antilogarithm.
-@_inlineable public func log<N : RealArithmetic>(_ antilogarithm: N) -> N {
+@inlinable public func log<N : RealArithmetic>(_ antilogarithm: N) -> N {
     return N.log(antilogarithm)
 }
 
@@ -557,7 +557,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - antilogarithm: The antilogarithm.
-@_inlineable public func ln<N : RealArithmetic>(_ antilogarithm: N) -> N {
+@inlinable public func ln<N : RealArithmetic>(_ antilogarithm: N) -> N {
     return N.ln(antilogarithm)
 }
 
@@ -566,7 +566,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-@_inlineable public func sin<N>(_ angle: Angle<N>) -> N {
+@inlinable public func sin<N>(_ angle: Angle<N>) -> N {
     return N.sin(angle)
 }
 
@@ -575,7 +575,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-@_inlineable public func cos<N>(_ angle: Angle<N>) -> N {
+@inlinable public func cos<N>(_ angle: Angle<N>) -> N {
     return N.cos(angle)
 }
 
@@ -584,7 +584,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-@_inlineable public func tan<N>(_ angle: Angle<N>) -> N {
+@inlinable public func tan<N>(_ angle: Angle<N>) -> N {
     return N.tan(angle)
 }
 
@@ -593,7 +593,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-@_inlineable public func csc<N>(_ angle: Angle<N>) -> N {
+@inlinable public func csc<N>(_ angle: Angle<N>) -> N {
     return N.csc(angle)
 }
 
@@ -602,7 +602,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-@_inlineable public func sec<N>(_ angle: Angle<N>) -> N {
+@inlinable public func sec<N>(_ angle: Angle<N>) -> N {
     return N.sec(angle)
 }
 
@@ -611,7 +611,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - angle: The angle.
-@_inlineable public func cot<N>(_ angle: Angle<N>) -> N {
+@inlinable public func cot<N>(_ angle: Angle<N>) -> N {
     return N.cot(angle)
 }
 
@@ -624,7 +624,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - sine: The sine.
-@_inlineable public func arcsin<N : RealArithmetic>(_ sine: N) -> Angle<N> {
+@inlinable public func arcsin<N : RealArithmetic>(_ sine: N) -> Angle<N> {
     return N.arcsin(sine)
 }
 
@@ -637,7 +637,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - cosine: The cosine.
-@_inlineable public func arccos<N : RealArithmetic>(_ cosine: N) -> Angle<N> {
+@inlinable public func arccos<N : RealArithmetic>(_ cosine: N) -> Angle<N> {
     return N.arccos(cosine)
 }
 
@@ -648,7 +648,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - tangent: The tangent.
-@_inlineable public func arctan<N : RealArithmetic>(_ tangent: N) -> Angle<N> {
+@inlinable public func arctan<N : RealArithmetic>(_ tangent: N) -> Angle<N> {
     return N.arctan(tangent)
 }
 
@@ -661,7 +661,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - cosecant: The cosecant.
-@_inlineable public func arccsc<N : RealArithmetic>(_ cosecant: N) -> Angle<N> {
+@inlinable public func arccsc<N : RealArithmetic>(_ cosecant: N) -> Angle<N> {
     return N.arccsc(cosecant)
 }
 
@@ -674,7 +674,7 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - secant: The secant.
-@_inlineable public func arcsec<N : RealArithmetic>(_ secant: N) -> Angle<N> {
+@inlinable public func arcsec<N : RealArithmetic>(_ secant: N) -> Angle<N> {
     return N.arcsec(secant)
 }
 
@@ -685,6 +685,6 @@ extension RealArithmetic {
 ///
 /// - Parameters:
 ///     - tangent: The tangent.
-@_inlineable public func arccot<N : RealArithmetic>(_ cotangent: N) -> Angle<N> {
+@inlinable public func arccot<N : RealArithmetic>(_ cotangent: N) -> Angle<N> {
     return N.arccot(cotangent)
 }

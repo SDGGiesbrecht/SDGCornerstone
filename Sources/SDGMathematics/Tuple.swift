@@ -18,7 +18,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≤ <A : Comparable, B : Comparable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
+@inlinable public func ≤ <A : Comparable, B : Comparable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
     return precedingValue <= followingValue
 }
 
@@ -28,7 +28,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≤ <A : Comparable, B : Comparable, C : Comparable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
+@inlinable public func ≤ <A : Comparable, B : Comparable, C : Comparable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
     return precedingValue <= followingValue
 }
 
@@ -38,7 +38,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
+@inlinable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
     return precedingValue <= followingValue
 }
 
@@ -48,7 +48,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
+@inlinable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
     return precedingValue <= followingValue
 }
 
@@ -58,7 +58,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
+@inlinable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
     return precedingValue <= followingValue
 }
 
@@ -68,7 +68,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≥ <A : Comparable, B : Comparable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
+@inlinable public func ≥ <A : Comparable, B : Comparable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
     return precedingValue >= followingValue
 }
 
@@ -78,7 +78,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≥ <A : Comparable, B : Comparable, C : Comparable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
+@inlinable public func ≥ <A : Comparable, B : Comparable, C : Comparable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
     return precedingValue >= followingValue
 }
 
@@ -88,7 +88,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
+@inlinable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
     return precedingValue >= followingValue
 }
 
@@ -98,7 +98,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
+@inlinable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
     return precedingValue >= followingValue
 }
 
@@ -108,6 +108,6 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
+@inlinable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
     return precedingValue >= followingValue
 }

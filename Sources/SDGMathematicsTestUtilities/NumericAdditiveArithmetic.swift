@@ -17,7 +17,7 @@
 /// - Precondition: `augend` is expected to be less than `sum`.
 ///
 /// - Precondition: `augend` is expected to be positive.
-@_inlineable public func testNumericAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : NumericAdditiveArithmetic {
+@inlinable public func testNumericAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : NumericAdditiveArithmetic {
 
     testAdditiveArithmeticConformance(augend: augend, addend: addend, sum: sum, file: file, line: line)
     testComparableConformance(less: augend, greater: sum, file: file, line: line)

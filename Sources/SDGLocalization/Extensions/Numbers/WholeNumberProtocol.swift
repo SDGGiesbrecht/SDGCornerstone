@@ -21,13 +21,13 @@ extension WholeNumberProtocol {
     ///
     /// - Parameters:
     ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
-    @_inlineable public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+    @inlinable public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         return wholeDigits(thousandsSeparator: thousandsSeparator)
     }
 
     // @documentation(SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal())
     /// Returns the ordinal in its abbreviated English form. (“1st”, “2nd”, “3rd”, etc.)
-    @_inlineable public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
+    @inlinable public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
         return generateAbbreviatedEnglishOrdinal()
     }
 
@@ -36,7 +36,7 @@ extension WholeNumberProtocol {
     ///
     /// - Parameters:
     ///     - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
-    @_inlineable public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
+    @inlinable public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
         return romanNumerals(lowercase: lowercase)
     }
 }

@@ -25,7 +25,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
     ///
     /// - Parameters:
     ///     - alternatives: The alternative patterns.
-    @_inlineable public init(_ alternatives: [Pattern<Element>]) {
+    @inlinable public init(_ alternatives: [Pattern<Element>]) {
         self.alternatives = alternatives
     }
 
@@ -33,7 +33,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
     ///
     /// - Parameters:
     ///     - elements: The alternative element.
-    @_inlineable public init(_ elements: [Element]) {
+    @inlinable public init(_ elements: [Element]) {
         self.alternatives = elements.map { LiteralPattern([$0]) }
     }
 
@@ -51,7 +51,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var results: [Range<C.Index>] = []
         for alternative in alternatives {
@@ -68,7 +68,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         for alternative in alternatives {
             if let match = alternative.primaryMatch(in: collection, at: location) {
                 return match
@@ -81,7 +81,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> AlternativePatterns<Element> {
+    @inlinable public override func reversed() -> AlternativePatterns<Element> {
         return AlternativePatterns(alternatives.map({ $0.reversed() }))
     }
 
@@ -89,7 +89,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         let entries = alternatives.map { "(" + String(describing: $0) + ")" }
         return entries.joined(separator: " ∨ ")
     }

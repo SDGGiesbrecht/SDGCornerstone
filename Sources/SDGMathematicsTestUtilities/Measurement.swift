@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to Measurement.
-@_inlineable public func testMeasurementConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : Measurement {
+@inlinable public func testMeasurementConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : Measurement {
 
     testNumericAdditiveArithmeticConformance(augend: T(rawValue: 3), addend: T(rawValue: 5), sum: T(rawValue: 8), includingNegatives: true, file: file, line: line)
     testNegatableConformance(minuend: T(rawValue: 8), subtrahend: T(rawValue: 5), difference: T(rawValue: 3), file: file, line: line)

@@ -24,7 +24,7 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : CustomString
     /// - Parameters:
     ///     - a: A set.
     ///     - b: Another set.
-    @_inlineable public init(_ a: Base1, _ b: Base2) {
+    @inlinable public init(_ a: Base1, _ b: Base2) {
         self.a = a
         self.b = b
     }
@@ -38,7 +38,7 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : CustomString
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return "(" + String(describing: a) + ") ∪ (" + String(describing: b) + ")"
     }
 
@@ -54,7 +54,7 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : CustomString
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_inlineable public static func ∋ (precedingValue: Union, followingValue: Base1.Element) -> Bool {
+    @inlinable public static func ∋ (precedingValue: Union, followingValue: Base1.Element) -> Bool {
         return precedingValue.a ∋ followingValue ∨ precedingValue.b ∋ followingValue
     }
 }

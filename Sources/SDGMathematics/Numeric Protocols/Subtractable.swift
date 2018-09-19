@@ -59,7 +59,7 @@ extension Subtractable {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
     }
 
@@ -69,7 +69,7 @@ extension Subtractable {
     /// - Parameters:
     ///     - precedingValue: The augend/minuend.
     ///     - followingValue: The addend/subtrahend.
-    @_inlineable public static func ± (precedingValue: Self, followingValue: Self) -> (sum: Self, difference: Self) {
+    @inlinable public static func ± (precedingValue: Self, followingValue: Self) -> (sum: Self, difference: Self) {
         return (precedingValue + followingValue, precedingValue − followingValue)
     }
 }
@@ -78,12 +78,12 @@ extension Subtractable where Self : Numeric {
     // MARK: - where Self : Numeric
 
     /// Subtracts one value from another and produces their difference.
-    @_inlineable public static func - (precedingValue: Self, followingValue: Self) -> Self { // Numeric
+    @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self { // Numeric
         return precedingValue − followingValue
     }
 
     /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
-    @_inlineable public static func -= (precedingValue: inout Self, followingValue: Self) { // Numeric
+    @inlinable public static func -= (precedingValue: inout Self, followingValue: Self) { // Numeric
         precedingValue −= followingValue
     }
 }
@@ -92,12 +92,12 @@ extension Subtractable where Self : Strideable, Self.Stride == Self {
     // MARK: - where Self : Strideable, Self.Stride == Self
 
     /// Subtracts one value from another and produces their difference.
-    @_inlineable public static func - (precedingValue: Self, followingValue: Self) -> Self { // Numeric
+    @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self { // Numeric
         return precedingValue − followingValue
     }
 
     /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
-    @_inlineable public static func -= (precedingValue: inout Self, followingValue: Self) { // Numeric
+    @inlinable public static func -= (precedingValue: inout Self, followingValue: Self) { // Numeric
         precedingValue −= followingValue
     }
 }

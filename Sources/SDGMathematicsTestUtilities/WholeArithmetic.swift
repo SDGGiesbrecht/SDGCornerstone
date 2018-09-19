@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to WholeArithmetic.
-@_inlineable public func testWholeArithmeticConformance<T>(of type: T.Type, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : WholeArithmetic {
+@inlinable public func testWholeArithmeticConformance<T>(of type: T.Type, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : WholeArithmetic {
 
     testFixedScaleOneDimensionalPointConformance(departure: 58 as T, vector: 21, destination: 79, file: file, line: line)
     testNumericAdditiveArithmeticConformance(augend: 25 as T, addend: 9, sum: 34, includingNegatives: includingNegatives, file: file, line: line)

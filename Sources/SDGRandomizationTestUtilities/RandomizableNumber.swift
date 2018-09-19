@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to RandomizableNumber.
-@_inlineable public func testRandomizableNumberConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RandomizableNumber {
+@inlinable public func testRandomizableNumberConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RandomizableNumber {
 
     let range: ClosedRange<T> = 0 ... 10
 

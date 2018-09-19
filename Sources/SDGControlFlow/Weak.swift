@@ -18,7 +18,7 @@ public struct Weak<Pointee : AnyObject> : TransparentWrapper {
     // MARK: - Initialization
 
     /// Creates a reference to a class instance.
-    @_inlineable public init(_ pointee: Pointee?) {
+    @inlinable public init(_ pointee: Pointee?) {
         self.pointee = pointee
     }
 
@@ -31,7 +31,7 @@ public struct Weak<Pointee : AnyObject> : TransparentWrapper {
 
     // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
-    @_inlineable public var wrappedInstance: Any {
+    @inlinable public var wrappedInstance: Any {
         return pointee as Any
     }
 }

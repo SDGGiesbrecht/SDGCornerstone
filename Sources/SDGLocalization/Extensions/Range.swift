@@ -17,7 +17,7 @@ import SDGCollections
 extension RangeFamily {
 
     /// Returns the range in inequality notation. (eg. “1 ≤ x ≤ 10”)
-    @_inlineable public func inInequalityNotation(_ describe: (_ bound: Bound) -> StrictString) -> StrictString {
+    @inlinable public func inInequalityNotation(_ describe: (_ bound: Bound) -> StrictString) -> StrictString {
         return StrictString("\(describe(lowerBound)) ≤ x \(Self.hasClosedUpperBound ? "≤" : "<") \(describe(upperBound))")
     }
 }

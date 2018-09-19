@@ -30,7 +30,7 @@ extension Angle : CustomPlaygroundDisplayConvertible {
 
     // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
     /// Returns the custom playground description for this instance.
-    @_inlineable public var playgroundDescription: Any {
+    @inlinable public var playgroundDescription: Any {
         #if canImport(CoreGraphics) && (canImport(AppKit) || canImport(UIKit))
 
         let floatAngle: Angle<CGFloat> = CGFloat(self.inRadians.floatingPointApproximation).radians

@@ -28,7 +28,7 @@ public struct Preference : Equatable, TransparentWrapper {
     /// The returned instance can be used with any API which expects a `Preference` type, but it does not belong to a `PreferenceSet` and will never be saved to the disk.
     ///
     /// (Real preferences are obtained from `PreferenceSet.subscript(key:)`.)
-    @_inlineable public static func mock() -> Preference {
+    @inlinable public static func mock() -> Preference {
         return Preference(propertyListObject: nil)
     }
 
@@ -142,14 +142,14 @@ public struct Preference : Equatable, TransparentWrapper {
     ///
     /// - Parameters:
     ///     - value: The new preference value, either an instance of a `Codable` type or `nil`.
-    @_inlineable public mutating func set(to value: NilLiteral) {
+    @inlinable public mutating func set(to value: NilLiteral) {
         propertyListObject = nil
     }
 
     /// Returns the preference cast to a particular type.
     ///
     /// The result will be `nil` if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
-    @_inlineable public func `as`<T>(_ type: T.Type) -> T? where T : Decodable {
+    @inlinable public func `as`<T>(_ type: T.Type) -> T? where T : Decodable {
         guard let object = propertyListObject else {
             // Value is nil.
             return nil
@@ -185,7 +185,7 @@ public struct Preference : Equatable, TransparentWrapper {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: Preference, followingValue: Preference) -> Bool {
+    @inlinable public static func == (precedingValue: Preference, followingValue: Preference) -> Bool {
         return precedingValue.propertyListObject == followingValue.propertyListObject
     }
 
@@ -193,7 +193,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
-    @_inlineable public var wrappedInstance: Any {
+    @inlinable public var wrappedInstance: Any {
         return propertyListObject as Any
     }
 }

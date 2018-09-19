@@ -33,7 +33,7 @@ extension IterableEnumeration where RawValue == Int {
 
     // #documentation(SDGCornerstone.IterableEnumeration.cases)
     /// An array containing every case of the enumeration.
-    @_inlineable public static var cases: [Self] {
+    @inlinable public static var cases: [Self] {
         guard var instance = Self(rawValue: 0) else {
             _preconditionFailure({ (localization: _APILocalization) -> String in // @exempt(from: tests)
                 switch localization {

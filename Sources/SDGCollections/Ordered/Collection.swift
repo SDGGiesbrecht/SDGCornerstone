@@ -46,7 +46,7 @@ extension Collection {
     // MARK: - Indices
 
     /// Returns the range for all of `self`.
-    @_inlineable public var bounds: Range<Index> {
+    @inlinable public var bounds: Range<Index> {
         return startIndex ..< endIndex
     }
 }
@@ -55,7 +55,7 @@ extension Collection where Index : Hashable {
     // MARK: - where Index : Hashable
 
     /// Returns the collection as a `Dictionary`, with the collection’s indices used as keys.
-    @_inlineable public var indexMapping: [Index: Element] {
+    @inlinable public var indexMapping: [Index: Element] {
         var mapping: [Index: Element] = [:]
         for index in indices {
             mapping[index] = self[index]
@@ -70,7 +70,7 @@ extension Collection where Element : Hashable, Index : Hashable {
     /// Returns the collection as a `BjectiveMapping` between the indices and values.
     ///
     /// - Requires: No values are repeated.
-    @_inlineable public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
+    @inlinable public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
         return BijectiveMapping(indexMapping)
     }
 }

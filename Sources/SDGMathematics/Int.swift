@@ -33,7 +33,7 @@ extension IntFamily {
     ///
     /// - Properties:
     ///     - int: An instance of a member of the `Int` family.
-    @_inlineable public init<I : IntFamily>(_ int: I) {
+    @inlinable public init<I : IntFamily>(_ int: I) {
         self.init(asBinaryIntegerWithInt: int)
     }
 
@@ -44,7 +44,7 @@ extension IntFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    @_inlineable public static prefix func − (operand: Self) -> Self {
+    @inlinable public static prefix func − (operand: Self) -> Self {
         return -operand
     }
 
@@ -53,7 +53,7 @@ extension IntFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    @_inlineable public static postfix func −= (operand: inout Self) {
+    @inlinable public static postfix func −= (operand: inout Self) {
         operand.negate()
     }
 
@@ -61,13 +61,13 @@ extension IntFamily {
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
-    @_inlineable public var absoluteValue: Self {
+    @inlinable public var absoluteValue: Self {
         return abs(self)
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
-    @_inlineable public mutating func formAbsoluteValue() {
+    @inlinable public mutating func formAbsoluteValue() {
         self = abs(self)
     }
 
@@ -79,7 +79,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue - followingValue
     }
 
@@ -89,7 +89,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue -= followingValue
     }
 
@@ -100,7 +100,7 @@ extension IntFamily {
     ///
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
-    @_inlineable public init<U : UIntFamily>(_ uInt: U) {
+    @inlinable public init<U : UIntFamily>(_ uInt: U) {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
@@ -110,7 +110,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue
     }
 
@@ -120,7 +120,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
-    @_inlineable public static func ×= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue
     }
 
@@ -131,7 +131,7 @@ extension IntFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    @_inlineable public mutating func divideAccordingToEuclid(by divisor: Self) {
+    @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
 
         let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
 
@@ -148,13 +148,13 @@ extension IntFamily {
 
     // #documentation(SDGCornerstone.WholeArithmetic.isEven)
     /// Returns true if `self` is an even integer.
-    @_inlineable public var isEven: Bool {
+    @inlinable public var isEven: Bool {
         return ¬isOdd
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
     /// Returns true if `self` is an odd integer.
-    @_inlineable public var isOdd: Bool {
+    @inlinable public var isOdd: Bool {
         return self & 1 == 1
     }
 }
@@ -169,7 +169,7 @@ extension IntXFamily {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         return precedingValue.advanced(by: followingValue)
     }
 
@@ -179,7 +179,7 @@ extension IntXFamily {
     /// - Parameters:
     ///     - precedingValue: The point to modify.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func += (precedingValue: inout Self, followingValue: Vector) {
+    @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue = precedingValue.advanced(by: followingValue)
     }
 
@@ -189,13 +189,13 @@ extension IntXFamily {
     /// - Parameters:
     ///     - precedingValue: The endpoint.
     ///     - followingValue: The startpoint.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return followingValue.distance(to: precedingValue)
     }
 }
 
 extension BinaryInteger {
-    @_inlineable @_versioned internal init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
+    @inlinable @_versioned internal init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
         self.init(int)
     }
 }
@@ -216,7 +216,7 @@ extension Int : IntFamily {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func − (precedingValue: Int, followingValue: Int) -> Int {
+    @inlinable public static func − (precedingValue: Int, followingValue: Int) -> Int {
         return precedingValue - followingValue
     }
 }

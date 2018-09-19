@@ -49,7 +49,7 @@ extension SetInRepresentableUniverse {
     ///
     /// - Parameters:
     ///     - operand: The set.
-    @_inlineable public static postfix func ′(operand: Self) -> Self {
+    @inlinable public static postfix func ′(operand: Self) -> Self {
         return nonmutatingVariant(of: ′=, on: operand)
     }
 
@@ -58,7 +58,7 @@ extension SetInRepresentableUniverse {
     ///
     /// - Parameters:
     ///     - operand: The set.
-    @_inlineable public static postfix func ′=(operand: inout Self) {
+    @inlinable public static postfix func ′=(operand: inout Self) {
         operand = universe ∖ operand
     }
 }

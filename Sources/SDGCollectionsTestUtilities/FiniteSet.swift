@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to FiniteSet.
-@_inlineable public func testFiniteSetConformance<T>(of set: T, member: T.Element, nonmember: T.Element, superset: T, overlapping: T, disjoint: T, file: StaticString = #file, line: UInt = #line) where T : FiniteSet, T.Element : Hashable {
+@inlinable public func testFiniteSetConformance<T>(of set: T, member: T.Element, nonmember: T.Element, superset: T, overlapping: T, disjoint: T, file: StaticString = #file, line: UInt = #line) where T : FiniteSet, T.Element : Hashable {
 
     testComparableSetConformance(of: set, member: member, nonmember: nonmember, superset: superset, overlapping: overlapping, disjoint: disjoint, file: file, line: line)
 

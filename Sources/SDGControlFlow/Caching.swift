@@ -26,7 +26,7 @@
 ///     - computation: The computation to be evaluated.
 ///
 /// - Returns: The result of `computation`.
-@_inlineable public func cached<Result>(in cache: inout Result?, _ computation: () throws -> Result) rethrows -> Result {
+@inlinable public func cached<Result>(in cache: inout Result?, _ computation: () throws -> Result) rethrows -> Result {
     if let result = cache {
         return result
     } else {

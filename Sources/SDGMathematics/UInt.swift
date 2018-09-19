@@ -28,13 +28,13 @@ extension UIntFamily {
 
     // #documentation(SDGCornerstone.BitField.bitwiseNot())
     /// Returns the bits not present in `self`.
-    @_inlineable public func bitwiseNot() -> Self {
+    @inlinable public func bitwiseNot() -> Self {
         return ~self
     }
 
     // #documentation(SDGCornerstone.BitField.formBitwiseNot())
     /// Inverts the bits.
-    @_inlineable public mutating func formBitwiseNot() {
+    @inlinable public mutating func formBitwiseNot() {
         self = bitwiseNot()
     }
 
@@ -43,7 +43,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public func bitwiseAnd(with other: Self) -> Self {
+    @inlinable public func bitwiseAnd(with other: Self) -> Self {
         return self & other
     }
 
@@ -52,7 +52,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseAnd(with other: Self) {
+    @inlinable public mutating func formBitwiseAnd(with other: Self) {
         self = bitwiseAnd(with: other)
     }
 
@@ -61,7 +61,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public func bitwiseOr(with other: Self) -> Self {
+    @inlinable public func bitwiseOr(with other: Self) -> Self {
         return self | other
     }
 
@@ -70,7 +70,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseOr(with other: Self) {
+    @inlinable public mutating func formBitwiseOr(with other: Self) {
         self = bitwiseOr(with: other)
     }
 
@@ -79,7 +79,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public func bitwiseExclusiveOr(with other: Self) -> Self {
+    @inlinable public func bitwiseExclusiveOr(with other: Self) -> Self {
         return self ^ other
     }
 
@@ -88,7 +88,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseExclusiveOr(with other: Self) {
+    @inlinable public mutating func formBitwiseExclusiveOr(with other: Self) {
         self = bitwiseExclusiveOr(with: other)
     }
 
@@ -100,7 +100,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         return precedingValue.advanced(by: followingValue)
     }
 
@@ -110,7 +110,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The point to modify.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func += (precedingValue: inout Self, followingValue: Vector) {
+    @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue = precedingValue.advanced(by: followingValue)
     }
 
@@ -120,7 +120,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The endpoint.
     ///     - followingValue: The startpoint.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return followingValue.distance(to: precedingValue)
     }
 
@@ -132,7 +132,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue - followingValue
     }
 
@@ -142,7 +142,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue -= followingValue
     }
 
@@ -153,7 +153,7 @@ extension UIntFamily {
     ///
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
-    @_inlineable public init<U : UIntFamily>(_ uInt: U) {
+    @inlinable public init<U : UIntFamily>(_ uInt: U) {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
@@ -163,7 +163,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue
     }
 
@@ -173,7 +173,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
-    @_inlineable public static func ×= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue
     }
 
@@ -184,7 +184,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    @_inlineable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
+    @inlinable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
         return self / divisor
     }
 
@@ -195,7 +195,7 @@ extension UIntFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    @_inlineable public mutating func divideAccordingToEuclid(by divisor: Self) {
+    @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
         self /= divisor
     }
 
@@ -206,7 +206,7 @@ extension UIntFamily {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    @_inlineable public func mod(_ divisor: Self) -> Self {
+    @inlinable public func mod(_ divisor: Self) -> Self {
         return self % divisor
     }
 
@@ -217,25 +217,25 @@ extension UIntFamily {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    @_inlineable public mutating func formRemainder(mod divisor: Self) {
+    @inlinable public mutating func formRemainder(mod divisor: Self) {
         self %= divisor
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isEven)
     /// Returns true if `self` is an even integer.
-    @_inlineable public var isEven: Bool {
+    @inlinable public var isEven: Bool {
         return ¬isOdd
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
     /// Returns true if `self` is an odd integer.
-    @_inlineable public var isOdd: Bool {
+    @inlinable public var isOdd: Bool {
         return self.bitwiseAnd(with: 1) == 1
     }
 }
 
 extension BinaryInteger {
-    @_inlineable @_versioned internal init<U : UIntFamily>(asBinaryIntegerWithUInt uInt: U) {
+    @inlinable @_versioned internal init<U : UIntFamily>(asBinaryIntegerWithUInt uInt: U) {
         self.init(uInt)
     }
 }

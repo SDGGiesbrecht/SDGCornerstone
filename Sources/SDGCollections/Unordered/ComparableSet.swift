@@ -92,7 +92,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊈ (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func ⊈ (precedingValue: Self, followingValue: Self) -> Bool {
         return ¬(precedingValue ⊆ followingValue)
     }
 
@@ -102,7 +102,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool {
         return followingValue ⊆ precedingValue
     }
 
@@ -112,7 +112,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊉ (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func ⊉ (precedingValue: Self, followingValue: Self) -> Bool {
         return ¬(precedingValue ⊇ followingValue)
     }
 
@@ -122,7 +122,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
     }
 
@@ -132,11 +132,11 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
     }
 
-    @_inlineable @_versioned internal func isDisjointAsComparableSet(with other: Self) -> Bool {
+    @inlinable @_versioned internal func isDisjointAsComparableSet(with other: Self) -> Bool {
         return ¬overlaps(other)
     }
     // #documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))
@@ -144,7 +144,7 @@ extension ComparableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_inlineable public func isDisjoint(with other: Self) -> Bool {
+    @inlinable public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
     }
 
@@ -156,7 +156,7 @@ extension ComparableSet {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
     }
 }
@@ -169,7 +169,7 @@ extension ComparableSet where Self : SetAlgebra {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_inlineable public func isDisjoint(with other: Self) -> Bool {
+    @inlinable public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
         // Disambiguate ComparableSet.isDisjoint(with:) vs SetAlgebra.isDisjoint(with:)
     }

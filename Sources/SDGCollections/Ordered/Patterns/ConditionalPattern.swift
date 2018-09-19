@@ -21,7 +21,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     ///
     /// - Parameters:
     ///     - condition: The condition an element must meet in order to match.
-    @_inlineable public init(_ condition: @escaping (Element) -> Bool) {
+    @inlinable public init(_ condition: @escaping (Element) -> Bool) {
         self.condition = condition
     }
     // MARK: - Properties
@@ -38,7 +38,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         if condition(collection[location]) {
             return [(location ... location).relative(to: collection)]
@@ -55,7 +55,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         if condition(collection[location]) {
             return (location ... location).relative(to: collection)
@@ -68,7 +68,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> ConditionalPattern<Element> {
+    @inlinable public override func reversed() -> ConditionalPattern<Element> {
         return self
     }
 }

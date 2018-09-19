@@ -36,19 +36,19 @@ extension WholeNumberProtocol {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
-    @_inlineable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isWhole)
     /// Returns `true` if `self` is a whole number.
-    @_inlineable public var isWhole: Bool {
+    @inlinable public var isWhole: Bool {
         return true
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isIntegral)
     /// Returns `true` if `self` is an integer.
-    @_inlineable public var isIntegral: Bool {
+    @inlinable public var isIntegral: Bool {
         return true
     }
 
@@ -57,7 +57,7 @@ extension WholeNumberProtocol {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_inlineable public mutating func round(_ rule: RoundingRule) {
+    @inlinable public mutating func round(_ rule: RoundingRule) {
         // self = self
     }
 
@@ -65,19 +65,19 @@ extension WholeNumberProtocol {
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
-    @_inlineable public var isNegative: Bool {
+    @inlinable public var isNegative: Bool {
         return false
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
-    @_inlineable public var isNonNegative: Bool {
+    @inlinable public var isNonNegative: Bool {
         return true
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
-    @_inlineable public mutating func formAbsoluteValue() {
+    @inlinable public mutating func formAbsoluteValue() {
         // self = self
     }
 }

@@ -43,7 +43,7 @@ public struct LineViewIndex : Comparable, Equatable {
 
     @_specialize(exported: true, where S == StrictString.ScalarView)
     @_specialize(exported: true, where S == String.ScalarView)
-    @_inlineable @_versioned internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? {
+    @inlinable @_versioned internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? {
         guard let startIndex = start else {
             return nil
         }
@@ -55,22 +55,22 @@ public struct LineViewIndex : Comparable, Equatable {
     // MARK: - Conversions
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
-    @_inlineable public func samePosition(in scalars: StrictString) -> StrictString.Index {
+    @inlinable public func samePosition(in scalars: StrictString) -> StrictString.Index {
         return start ?? scalars.endIndex
     }
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
-    @_inlineable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
+    @inlinable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
         return start ?? scalars.endIndex
     }
 
     /// Returns the position in the given view of clusters that corresponds exactly to this index.
-    @_inlineable public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
+    @inlinable public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
         return samePosition(in: String(StrictString(clusters)).clusters)
     }
 
     /// Returns the position in the given view of clusters that corresponds exactly to this index.
-    @_inlineable public func samePosition(in clusters: String.ClusterView) -> String.ClusterView.Index {
+    @inlinable public func samePosition(in clusters: String.ClusterView) -> String.ClusterView.Index {
         let string = String(clusters)
         return samePosition(in: string.scalars).cluster(in: string.clusters)
     }
@@ -83,7 +83,7 @@ public struct LineViewIndex : Comparable, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func < (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
+    @inlinable public static func < (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
         if let precedingValueStart = precedingValue.start {
             if let followingValueStart = followingValue.start {
                 return precedingValueStart < followingValueStart
@@ -105,7 +105,7 @@ public struct LineViewIndex : Comparable, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
+    @inlinable public static func == (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
         return precedingValue.start == followingValue.start
     }
 }

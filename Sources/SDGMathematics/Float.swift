@@ -55,7 +55,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    @_inlineable public static prefix func − (operand: Self) -> Self {
+    @inlinable public static prefix func − (operand: Self) -> Self {
         return -operand
     }
 
@@ -64,7 +64,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    @_inlineable public static postfix func −= (operand: inout Self) {
+    @inlinable public static postfix func −= (operand: inout Self) {
         operand.negate()
     }
 
@@ -72,13 +72,13 @@ extension FloatFamily {
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
-    @_inlineable public var absoluteValue: Self {
+    @inlinable public var absoluteValue: Self {
         return abs(self)
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
-    @_inlineable public mutating func formAbsoluteValue() {
+    @inlinable public mutating func formAbsoluteValue() {
         self = abs(self)
     }
 
@@ -90,7 +90,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
-    @_inlineable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue / followingValue
     }
 
@@ -100,7 +100,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The divisor.
-    @_inlineable public static func ÷= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Self) {
         precedingValue /= followingValue
     }
 
@@ -108,7 +108,7 @@ extension FloatFamily {
 
     // #documentation(SDGCornerstone.RealArithmetic.π)
     /// An instance of π.
-    @_inlineable public static var π: Self {
+    @inlinable public static var π: Self {
         return pi
     }
 
@@ -117,7 +117,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The radicand.
-    @_inlineable public static prefix func √ (operand: Self) -> Self {
+    @inlinable public static prefix func √ (operand: Self) -> Self {
         return operand.squareRoot()
     }
 
@@ -126,11 +126,11 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - operand: The value to modify.
-    @_inlineable public static postfix func √= (operand: inout Self) {
+    @inlinable public static postfix func √= (operand: inout Self) {
         operand = operand.squareRoot()
     }
 
-    @_inlineable @_versioned internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
+    @inlinable @_versioned internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
 
         _assert(self > 0, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
@@ -174,7 +174,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - base: The base.
-    @_inlineable public mutating func formLogarithm(toBase base: Self) {
+    @inlinable public mutating func formLogarithm(toBase base: Self) {
 
         if ¬tryConvenientLogarithms(toBase: base) {
 
@@ -190,7 +190,7 @@ extension FloatFamily {
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
-    @_inlineable public mutating func formNaturalLogarithm() {
+    @inlinable public mutating func formNaturalLogarithm() {
 
         if ¬tryConvenientLogarithms(toBase: e) {
 
@@ -240,7 +240,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - angle: The angle.
-    @_inlineable public static func sin(_ angle: Angle<Self>) -> Self {
+    @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
 
         if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
             // Use periodic reference angle.
@@ -300,7 +300,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - angle: The angle.
-    @_inlineable public static func cos(_ angle: Angle<Self>) -> Self {
+    @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
 
         if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
             // Use periodic reference angle.
@@ -362,7 +362,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - tangent: The tangent.
-    @_inlineable public static func arctan(_ tangent: Self) -> Angle<Self> {
+    @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
 
         if tangent.isNegative {
             return −arctan(−tangent)
@@ -412,7 +412,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue - followingValue
     }
 
@@ -422,7 +422,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue -= followingValue
     }
 
@@ -434,7 +434,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue
     }
 
@@ -444,7 +444,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
-    @_inlineable public static func ×= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue
     }
 
@@ -455,7 +455,7 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    @_inlineable public mutating func divideAccordingToEuclid(by divisor: Self) {
+    @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
         self ÷= divisor
         self.round(.down)
     }
@@ -473,7 +473,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
-    @_inlineable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
 
         _assert(precedingValue.isNonNegative ∨ followingValue.isIntegral, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
@@ -529,13 +529,13 @@ extension FloatFamily {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_inlineable public func rounded(_ rule: RoundingRule) -> Self {
+    @inlinable public func rounded(_ rule: RoundingRule) -> Self {
         return roundedAsFloatingPoint(rule)
     }
 }
 
 extension FloatingPoint {
-    @_inlineable @_versioned internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
+    @inlinable @_versioned internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
         return rounded(rule)
     }
 }
@@ -562,7 +562,7 @@ extension Double : FloatFamily {
 
     // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
-    @_inlineable public var floatingPointApproximation: FloatMax {
+    @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
     }
 }
@@ -575,7 +575,7 @@ extension CGFloat : FloatFamily {
     // MARK: - CustomDebugStringConvertible
 
     /// A textual representation of this instance, suitable for debugging.
-    @_inlineable public var debugDescription: String {
+    @inlinable public var debugDescription: String {
         return NativeType(self).debugDescription
     }
 
@@ -591,7 +591,7 @@ extension CGFloat : FloatFamily {
     ///
     /// - Parameters:
     ///     - description: The string representation.
-    @_inlineable public init?(_ description: String) {
+    @inlinable public init?(_ description: String) {
         if let result = NativeType(description) {
             self = CGFloat(result)
         } else {
@@ -613,7 +613,7 @@ extension CGFloat : FloatFamily {
 
     // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
-    @_inlineable public var floatingPointApproximation: FloatMax {
+    @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(NativeType(self))
     }
 }
@@ -632,7 +632,7 @@ extension Float80 : Codable, FloatFamily {
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    @_inlineable public init(from decoder: Decoder) throws {
+    @inlinable public init(from decoder: Decoder) throws {
         self.init(try Double(from: decoder))
     }
 
@@ -643,7 +643,7 @@ extension Float80 : Codable, FloatFamily {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    @_inlineable public func encode(to encoder: Encoder) throws {
+    @inlinable public func encode(to encoder: Encoder) throws {
         // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
         try Double(self).encode(to: encoder)
     }
@@ -668,7 +668,7 @@ extension Float80 : Codable, FloatFamily {
 
     // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
-    @_inlineable public var floatingPointApproximation: FloatMax {
+    @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
     }
 }
@@ -696,7 +696,7 @@ extension Float : FloatFamily {
 
     // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
     /// A floating point approximation.
-    @_inlineable public var floatingPointApproximation: FloatMax {
+    @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
     }
 }

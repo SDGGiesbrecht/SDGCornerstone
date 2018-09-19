@@ -42,7 +42,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     ///     - commandName: A name to try with the default shell’s `which` command. This will be tried after the provided search list.
     ///     - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
     ///     - process: An executable to validate. Its existence and executability have already been verified.
-    @_inlineable public convenience init?<S>(searching locations: S, commandName: String?, validate: (_ process: ExternalProcess) -> Bool) where S : Sequence, S.Element == URL {
+    @inlinable public convenience init?<S>(searching locations: S, commandName: String?, validate: (_ process: ExternalProcess) -> Bool) where S : Sequence, S.Element == URL {
 
         func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
             var isDirectory: ObjCBool = false

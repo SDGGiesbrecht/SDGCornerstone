@@ -53,7 +53,7 @@ public class Shared<Value> : TransparentWrapper {
     ///     - reportInitialState: If `true`, the observer will receive its first notification immediately to report the initial state. If `false`, the observer will not be notified until the state actually changes.
     ///
     /// - SeeAlso: `valueChanged(for:)`
-    @_inlineable public func register(observer: SharedValueObserver, identifier: String = "", reportInitialState: Bool = true) {
+    @inlinable public func register(observer: SharedValueObserver, identifier: String = "", reportInitialState: Bool = true) {
 
         // Prevent duplicates.
         cancel(observer: observer)
@@ -71,7 +71,7 @@ public class Shared<Value> : TransparentWrapper {
     ///
     /// - Parameters:
     ///     - observer: The observer.
-    @_inlineable public func cancel(observer: SharedValueObserver) {
+    @inlinable public func cancel(observer: SharedValueObserver) {
         for index in observers.indices.reversed() {
             let (existingObserver, _) = observers[index]
 
@@ -87,7 +87,7 @@ public class Shared<Value> : TransparentWrapper {
 
     // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
-    @_inlineable public var wrappedInstance: Any {
+    @inlinable public var wrappedInstance: Any {
         return value
     }
 }

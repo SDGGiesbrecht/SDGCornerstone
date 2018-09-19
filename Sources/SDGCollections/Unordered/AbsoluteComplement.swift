@@ -23,7 +23,7 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
     ///
     /// - Parameters:
     ///     - set: A set.
-    @_inlineable public init(_ base: Base) {
+    @inlinable public init(_ base: Base) {
         self.base = base
     }
 
@@ -35,7 +35,7 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return "(" + String(describing: base) + ")′"
     }
 
@@ -51,7 +51,7 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_inlineable public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element) -> Bool {
+    @inlinable public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element) -> Bool {
         return precedingValue.base ∌ followingValue
     }
 }

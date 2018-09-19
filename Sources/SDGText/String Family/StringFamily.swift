@@ -54,13 +54,13 @@ extension StringFamily {
 
     // @documentation(SDGCornerstone.StringFamily.init(lines:))
     /// Creates a string from a collection of lines.
-    @_inlineable public init(_ lines: LineView<Self>) {
+    @inlinable public init(_ lines: LineView<Self>) {
         self = lines.base
     }
 
     // @documentation(SDGCornerstone.StringFamily.lines)
     /// A view of a string’s contents as a collection of lines.
-    @_inlineable public var lines: LineView<Self> {
+    @inlinable public var lines: LineView<Self> {
         get {
             return LineView(self)
         }
@@ -71,7 +71,7 @@ extension StringFamily {
 
     // @documentation(SDGCornerstone.String.isMultiline)
     /// Whether or not the string contains multiple lines.
-    @_inlineable public var isMultiline: Bool {
+    @inlinable public var isMultiline: Bool {
         return scalars.isMultiline
     }
 }

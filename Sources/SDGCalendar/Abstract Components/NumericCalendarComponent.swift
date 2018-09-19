@@ -27,7 +27,7 @@ extension NumericCalendarComponent {
     /// - Parameters:
     ///     - precedingValue: The point to modify.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func += (precedingValue: inout Self, followingValue: Vector) {
+    @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue = Self(precedingValue.rawValue + followingValue)
     }
 
@@ -37,7 +37,7 @@ extension NumericCalendarComponent {
     /// - Parameters:
     ///     - precedingValue: The endpoint.
     ///     - followingValue: The startpoint.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return precedingValue.rawValue − followingValue.rawValue
     }
 }

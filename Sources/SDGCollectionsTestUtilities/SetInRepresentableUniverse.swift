@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to SetInRepresentableUniverse.
-@_inlineable public func testSetInRepresentableUniverseConformance<T>(of type: T.Type, a: T.Element, b: T.Element, c: T.Element, file: StaticString = #file, line: UInt = #line) where T : SetInRepresentableUniverse, T.Element : Hashable {
+@inlinable public func testSetInRepresentableUniverseConformance<T>(of type: T.Type, a: T.Element, b: T.Element, c: T.Element, file: StaticString = #file, line: UInt = #line) where T : SetInRepresentableUniverse, T.Element : Hashable {
 
     testMutableSetConformance(of: type, a: a, b: b, c: c, file: file, line: line)
 

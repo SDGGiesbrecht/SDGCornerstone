@@ -180,7 +180,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∩ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+    @inlinable public static func ∩ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
         return nonmutatingVariant(of: ∩=, on: precedingValue, with: followingValue)
     }
 
@@ -190,7 +190,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∩ (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func ∩ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ∩=, on: precedingValue, with: followingValue)
     }
 
@@ -200,7 +200,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∩= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+    @inlinable public static func ∩= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         var result = Self()
         for element in followingValue where element ∈ precedingValue {
             result.insert(element)
@@ -214,7 +214,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∪ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+    @inlinable public static func ∪ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
         return nonmutatingVariant(of: ∪=, on: precedingValue, with: followingValue)
     }
 
@@ -224,7 +224,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∪ (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func ∪ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ∪=, on: precedingValue, with: followingValue)
     }
 
@@ -234,7 +234,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∪= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+    @inlinable public static func ∪= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         for element in followingValue {
             precedingValue.insert(element)
         }
@@ -246,7 +246,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+    @inlinable public static func ∖ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
         return nonmutatingVariant(of: ∖=, on: precedingValue, with: followingValue)
     }
 
@@ -256,7 +256,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖ (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func ∖ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ∖=, on: precedingValue, with: followingValue)
     }
 
@@ -266,7 +266,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+    @inlinable public static func ∖= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         for element in followingValue {
             precedingValue.remove(element)
         }
@@ -278,7 +278,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆ (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func ∆ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ∆=, on: precedingValue, with: followingValue)
     }
 
@@ -288,7 +288,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func ∆= (precedingValue: inout Self, followingValue: Self) {
         var result = precedingValue
         result ∪= followingValue
         result ∖= precedingValue ∩ followingValue
@@ -301,7 +301,7 @@ extension MutableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_inlineable public func intersection(_ other: Self) -> Self {
+    @inlinable public func intersection(_ other: Self) -> Self {
         return self ∩ other
     }
 
@@ -309,7 +309,7 @@ extension MutableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_inlineable public mutating func formIntersection(_ other: Self) {
+    @inlinable public mutating func formIntersection(_ other: Self) {
         self ∩= other
     }
 
@@ -317,7 +317,7 @@ extension MutableSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_inlineable public func union(_ other: Self) -> Self {
+    @inlinable public func union(_ other: Self) -> Self {
         return self ∪ other
     }
 
@@ -326,7 +326,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - other: Another set.
-    @_inlineable public mutating func formUnion(_ other: Self) {
+    @inlinable public mutating func formUnion(_ other: Self) {
         self ∪= other
     }
 
@@ -335,7 +335,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - other: Another set.
-    @_inlineable public func symmetricDifference(_ other: Self) -> Self {
+    @inlinable public func symmetricDifference(_ other: Self) -> Self {
         return self ∆ other
     }
 
@@ -344,7 +344,7 @@ extension MutableSet {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - other: The set to subtract.
-    @_inlineable public mutating func formSymmetricDifference(_ other: Self) {
+    @inlinable public mutating func formSymmetricDifference(_ other: Self) {
         self ∆= other
     }
 }
@@ -358,7 +358,7 @@ extension MutableSet where Self : FiniteSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
+    @inlinable public static func ∆ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Self where S.Element == Self.Element {
         return nonmutatingVariant(of: ∆=, on: precedingValue, with: followingValue)
     }
 
@@ -368,7 +368,7 @@ extension MutableSet where Self : FiniteSet {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
+    @inlinable public static func ∆= <S : FiniteSet>(precedingValue: inout Self, followingValue: S) where S.Element == Self.Element {
         var result = precedingValue
         result ∪= followingValue
         result ∖= precedingValue ∩ followingValue

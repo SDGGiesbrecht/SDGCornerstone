@@ -18,32 +18,32 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
     // MARK: - Initialization
 
     /// Creates an angle in radians.
-    @_inlineable public init(radians: Scalar) {
+    @inlinable public init(radians: Scalar) {
         self.inRadians = radians
     }
 
     /// Creates an angle in rotations.
-    @_inlineable public init(rotations: Scalar) {
+    @inlinable public init(rotations: Scalar) {
         inRotations = rotations
     }
 
     /// Creates an angle in degrees.
-    @_inlineable public init(degrees: Scalar) {
+    @inlinable public init(degrees: Scalar) {
         inDegrees = degrees
     }
 
     /// Creates an angle in minutes.
-    @_inlineable public init(minutes: Scalar) {
+    @inlinable public init(minutes: Scalar) {
         inMinutes = minutes
     }
 
     /// Creates an angle in seconds.
-    @_inlineable public init(seconds: Scalar) {
+    @inlinable public init(seconds: Scalar) {
         inSeconds = seconds
     }
 
     /// Creates an angle in gradians.
-    @_inlineable public init(gradians: Scalar) {
+    @inlinable public init(gradians: Scalar) {
         inGradians = gradians
     }
 
@@ -52,11 +52,11 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
     /// The numeric value in radians.
     public var inRadians: Scalar = Scalar.additiveIdentity
 
-    @_inlineable @_versioned internal static var radiansPerRotation: Scalar {
+    @inlinable @_versioned internal static var radiansPerRotation: Scalar {
         return Scalar.τ
     }
     /// The numeric value in rotations.
-    @_inlineable public var inRotations: Scalar {
+    @inlinable public var inRotations: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerRotation
         }
@@ -65,11 +65,11 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         }
     }
 
-    @_inlineable @_versioned internal static var radiansPerDegree: Scalar {
+    @inlinable @_versioned internal static var radiansPerDegree: Scalar {
         return radiansPerRotation ÷ 360
     }
     /// The numeric value in degrees.
-    @_inlineable public var inDegrees: Scalar {
+    @inlinable public var inDegrees: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerDegree
         }
@@ -78,11 +78,11 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         }
     }
 
-    @_inlineable @_versioned internal static var radiansPerMinute: Scalar {
+    @inlinable @_versioned internal static var radiansPerMinute: Scalar {
         return radiansPerDegree ÷ 60
     }
     /// The numeric value in minutes.
-    @_inlineable public var inMinutes: Scalar {
+    @inlinable public var inMinutes: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerMinute
         }
@@ -91,11 +91,11 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         }
     }
 
-    @_inlineable @_versioned internal static var radiansPerSecond: Scalar {
+    @inlinable @_versioned internal static var radiansPerSecond: Scalar {
         return radiansPerMinute ÷ 60
     }
     /// The numeric value in seconds.
-    @_inlineable public var inSeconds: Scalar {
+    @inlinable public var inSeconds: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerSecond
         }
@@ -104,11 +104,11 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         }
     }
 
-    @_inlineable @_versioned internal static var radiansPerGradian: Scalar {
+    @inlinable @_versioned internal static var radiansPerGradian: Scalar {
         return radiansPerRotation ÷ 400
     }
     /// The numeric value in gradians.
-    @_inlineable public var inGradians: Scalar {
+    @inlinable public var inGradians: Scalar {
         get {
             return inRadians ÷ Angle.radiansPerGradian
         }
@@ -123,7 +123,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
     /// Creates a measurement from a raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
-    @_inlineable public init(rawValue: Scalar) {
+    @inlinable public init(rawValue: Scalar) {
         inRadians = rawValue
     }
 
@@ -131,7 +131,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
     /// A raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
-    @_inlineable public var rawValue: Scalar {
+    @inlinable public var rawValue: Scalar {
         get {
             return inRadians
         }
@@ -149,25 +149,25 @@ extension RealArithmetic {
 
     // @documentation(SDGCornerstone.RealArithmetic.radians)
     /// Returns an angle in radians.
-    @_inlineable public var radians: Angle<Self> {
+    @inlinable public var radians: Angle<Self> {
         return Angle(radians: self)
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.radians)
     /// Returns an angle in radians.
-    @_inlineable public var rad: Angle<Self> {
+    @inlinable public var rad: Angle<Self> {
         return radians
     }
 
     // @documentation(SDGCornerstone.RealArithmetic.rotations)
     /// Returns an angle in rotations.
-    @_inlineable public var rotations: Angle<Self> {
+    @inlinable public var rotations: Angle<Self> {
         return Angle(rotations: self)
     }
 
     // @documentation(SDGCornerstone.RealArithmetic.degrees)
     /// Returns an angle in degrees.
-    @_inlineable public var degrees: Angle<Self> {
+    @inlinable public var degrees: Angle<Self> {
         return Angle(degrees: self)
     }
 
@@ -176,13 +176,13 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - value: The value in degrees.
-    @_inlineable public static postfix func ° (value: Self) -> Angle<Self> {
+    @inlinable public static postfix func ° (value: Self) -> Angle<Self> {
         return value.degrees
     }
 
     // @documentation(SDGCornerstone.RealArithmetic.minutes)
     /// Returns an angle in minutes.
-    @_inlineable public var minutes: Angle<Self> {
+    @inlinable public var minutes: Angle<Self> {
         return Angle(minutes: self)
     }
 
@@ -191,13 +191,13 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - value: The value in minutes.
-    @_inlineable public static postfix func ′ (value: Self) -> Angle<Self> {
+    @inlinable public static postfix func ′ (value: Self) -> Angle<Self> {
         return value.minutes
     }
 
     // @documentation(SDGCornerstone.RealArithmetic.seconds)
     /// Returns an angle in seconds.
-    @_inlineable public var seconds: Angle<Self> {
+    @inlinable public var seconds: Angle<Self> {
         return Angle(seconds: self)
     }
 
@@ -206,19 +206,19 @@ extension RealArithmetic {
     ///
     /// - Parameters:
     ///     - value: The value in seconds.
-    @_inlineable public static postfix func ′′ (value: Self) -> Angle<Self> {
+    @inlinable public static postfix func ′′ (value: Self) -> Angle<Self> {
         return value.seconds
     }
 
     // @documentation(SDGCornerstone.RealArithmetic.gradians)
     /// Returns an angle in gradians.
-    @_inlineable public var gradians: Angle<Self> {
+    @inlinable public var gradians: Angle<Self> {
         return Angle(gradians: self)
     }
 
     // @documentation(SDGCornerstone.RealArithmetic.gradians)
     /// Returns an angle in gradians.
-    @_inlineable public var gon: Angle<Self> {
+    @inlinable public var gon: Angle<Self> {
         return gradians
     }
 }

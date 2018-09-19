@@ -23,7 +23,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
     ///
     /// - Parameters:
     ///     - literal: The collection to match as a literal.
-    @_inlineable public init<C : SearchableCollection>(_ literal: C) where C.Element == Element {
+    @inlinable public init<C : SearchableCollection>(_ literal: C) where C.Element == Element {
         self.literal = Array(literal)
     }
 
@@ -35,7 +35,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
 
     // #documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))
     /// Creates an instance from an array literal.
-    @_inlineable public convenience init(arrayLiteral: Element...) {
+    @inlinable public convenience init(arrayLiteral: Element...) {
         self.init(arrayLiteral)
     }
 
@@ -49,7 +49,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
         if let match = primaryMatch(in: collection, at: location) {
             return [match]
         } else {
@@ -65,7 +65,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         return literal.primaryMatch(in: collection, at: location)
     }
 
@@ -73,7 +73,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> LiteralPattern<Element> {
+    @inlinable public override func reversed() -> LiteralPattern<Element> {
         return LiteralPattern(literal.reversed())
     }
 
@@ -81,7 +81,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return String(describing: literal)
     }
 }

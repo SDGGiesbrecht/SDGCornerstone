@@ -20,7 +20,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≠ <A : Equatable, B : Equatable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
+@inlinable public func ≠ <A : Equatable, B : Equatable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
     return precedingValue != followingValue
 }
 
@@ -30,7 +30,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≠ <A : Equatable, B : Equatable, C : Equatable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
+@inlinable public func ≠ <A : Equatable, B : Equatable, C : Equatable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
     return precedingValue != followingValue
 }
 
@@ -40,7 +40,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≠ <A : Equatable, B : Equatable, C : Equatable, D : Equatable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
+@inlinable public func ≠ <A : Equatable, B : Equatable, C : Equatable, D : Equatable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
     return precedingValue != followingValue
 }
 
@@ -50,7 +50,7 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≠ <A : Equatable, B : Equatable, C : Equatable, D : Equatable, E : Equatable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
+@inlinable public func ≠ <A : Equatable, B : Equatable, C : Equatable, D : Equatable, E : Equatable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
     return precedingValue != followingValue
 }
 
@@ -60,6 +60,6 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@_inlineable public func ≠ <A : Equatable, B : Equatable, C : Equatable, D : Equatable, E : Equatable, F : Equatable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
+@inlinable public func ≠ <A : Equatable, B : Equatable, C : Equatable, D : Equatable, E : Equatable, F : Equatable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
     return precedingValue != followingValue
 }

@@ -17,7 +17,7 @@ extension Collection where Element == UnicodeScalar {
 
     // #documentation(SDGCornerstone.String.isMultiline)
     /// Whether or not the string contains multiple lines.
-    @_inlineable public var isMultiline: Bool {
+    @inlinable public var isMultiline: Bool {
         return contains(where: { $0 ∈ CharacterSet.newlines })
     }
 }

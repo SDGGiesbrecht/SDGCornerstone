@@ -59,7 +59,7 @@ extension RangeFamily {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.lowerBound ≥ followingValue.lowerBound ∧ precedingValue.upperBound ≤ followingValue.upperBound
     }
 
@@ -71,7 +71,7 @@ extension RangeFamily {
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_inlineable public static func ∋ (precedingValue: Self, followingValue: Bound) -> Bool {
+    @inlinable public static func ∋ (precedingValue: Self, followingValue: Bound) -> Bool {
         return precedingValue.contains(followingValue)
     }
 }
@@ -83,7 +83,7 @@ extension RangeFamily where Bound : Hashable {
 
     // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
-    @_inlineable public var hashValue: Int {
+    @inlinable public var hashValue: Int {
         return lowerBound.hashValue ^ upperBound.hashValue
     }
 }
@@ -94,7 +94,7 @@ extension Range : RangeFamily {
 
     // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
-    @_inlineable public static var hasClosedUpperBound: Bool {
+    @inlinable public static var hasClosedUpperBound: Bool {
         return false
     }
 
@@ -111,7 +111,7 @@ extension ClosedRange : RangeFamily {
 
     // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
-    @_inlineable public static var hasClosedUpperBound: Bool {
+    @inlinable public static var hasClosedUpperBound: Bool {
         return true
     }
 

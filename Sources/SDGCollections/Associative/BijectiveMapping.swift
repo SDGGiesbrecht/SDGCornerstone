@@ -28,7 +28,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     ///
     /// - Parameters:
     ///     - mapping: The mapping.
-    @_inlineable public init(_ mapping: [X: Y]) {
+    @inlinable public init(_ mapping: [X: Y]) {
 
         xToY = mapping
 
@@ -48,21 +48,21 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     // MARK: - Look‐Up
 
     /// Returns the corresponding `Y` for a particular `X`.
-    @_inlineable public func y(for x: X) -> Y? {
+    @inlinable public func y(for x: X) -> Y? {
         return xToY[x]
     }
     /// Returns the corresponding `X` for a particular `Y`.
-    @_inlineable public func x(for y: Y) -> X? {
+    @inlinable public func x(for y: Y) -> X? {
         return yToX[y]
     }
 
     /// Accesses the corresponding `Y` for a particular `X`.
-    @_inlineable public subscript(x: X) -> Y? {
+    @inlinable public subscript(x: X) -> Y? {
         return xToY[x]
     }
 
     /// Accesses the corresponding `X` for a particular `Y`.
-    @_inlineable public subscript(y: Y) -> X? {
+    @inlinable public subscript(y: Y) -> X? {
         return yToX[y]
     }
 
@@ -70,13 +70,13 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
-    @_inlineable public var startIndex: Dictionary<X, Y>.Index {
+    @inlinable public var startIndex: Dictionary<X, Y>.Index {
         return xToY.startIndex
     }
 
     // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
-    @_inlineable public var endIndex: Dictionary<X, Y>.Index {
+    @inlinable public var endIndex: Dictionary<X, Y>.Index {
         return xToY.endIndex
     }
 
@@ -85,13 +85,13 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    @_inlineable public func index(after i: Dictionary<X, Y>.Index) -> Dictionary<X, Y>.Index {
+    @inlinable public func index(after i: Dictionary<X, Y>.Index) -> Dictionary<X, Y>.Index {
         return xToY.index(after: i)
     }
 
     // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
-    @_inlineable public subscript(position: Dictionary<X, Y>.Index) -> (X, Y) {
+    @inlinable public subscript(position: Dictionary<X, Y>.Index) -> (X, Y) {
         return xToY[position]
     }
 
@@ -99,7 +99,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // #documentation(SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:))
     /// Creates an instance from a dictionary literal.
-    @_inlineable public init(dictionaryLiteral elements: (X, Y)...) {
+    @inlinable public init(dictionaryLiteral elements: (X, Y)...) {
         self.init(Dictionary(uniqueKeysWithValues: elements))
     }
 
@@ -107,7 +107,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
     /// The wrapped instance.
-    @_inlineable public var wrappedInstance: Any {
+    @inlinable public var wrappedInstance: Any {
         return xToY
     }
 }

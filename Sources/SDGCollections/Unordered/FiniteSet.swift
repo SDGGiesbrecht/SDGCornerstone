@@ -118,7 +118,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+    @inlinable public static func ⊆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
         for element in precedingValue where element ∉ followingValue {
             return false
         }
@@ -131,7 +131,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊈ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+    @inlinable public static func ⊈ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
         return ¬(precedingValue ⊆ followingValue)
     }
 
@@ -141,7 +141,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊇ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
+    @inlinable public static func ⊇ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
         return followingValue ⊆ precedingValue
     }
 
@@ -151,7 +151,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊉ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
+    @inlinable public static func ⊉ <S : SetDefinition>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
         return ¬(precedingValue ⊇ followingValue)
     }
 
@@ -161,7 +161,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊊ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+    @inlinable public static func ⊊ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
         return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
     }
 
@@ -171,7 +171,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊋ <S : FiniteSet>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
+    @inlinable public static func ⊋ <S : FiniteSet>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
     }
 
@@ -181,7 +181,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+    @inlinable public static func == <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
     }
 
@@ -191,7 +191,7 @@ extension FiniteSet {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func ≠ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
+    @inlinable public static func ≠ <S : FiniteSet>(precedingValue: Self, followingValue: S) -> Bool where S.Element == Self.Element {
         return ¬(precedingValue == followingValue)
     }
 
@@ -200,7 +200,7 @@ extension FiniteSet {
     ///
     /// - Parameters:
     ///     - other: The other set.
-    @_inlineable public func overlaps<S : SetDefinition>(_ other: S) -> Bool where S.Element == Self.Element {
+    @inlinable public func overlaps<S : SetDefinition>(_ other: S) -> Bool where S.Element == Self.Element {
         for element in self where element ∈ other {
             return true
         }
@@ -212,7 +212,7 @@ extension FiniteSet {
     ///
     /// - Parameters:
     ///     - other: Another set.
-    @_inlineable public func isDisjoint<S : SetDefinition>(with other: S) -> Bool where S.Element == Self.Element {
+    @inlinable public func isDisjoint<S : SetDefinition>(with other: S) -> Bool where S.Element == Self.Element {
         return ¬overlaps(other)
     }
 }

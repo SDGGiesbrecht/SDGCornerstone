@@ -19,7 +19,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Initialization
 
-    @_inlineable @_versioned internal init(_ base: Base) {
+    @inlinable @_versioned internal init(_ base: Base) {
         self.base = base
         startIndex = Index(start: base.scalars.startIndex)
     }
@@ -30,7 +30,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Conversions
 
-    @_inlineable @_versioned internal func line(for scalar: String.ScalarView.Index) -> LineViewIndex {
+    @inlinable @_versioned internal func line(for scalar: String.ScalarView.Index) -> LineViewIndex {
         if scalar == base.scalars.endIndex {
             return endIndex
         }
@@ -63,7 +63,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///     - i: The following index.
     @_specialize(exported: true, where Base == StrictString)
     @_specialize(exported: true, where Base == String)
-    @_inlineable public func index(before i: LineViewIndex) -> LineViewIndex {
+    @inlinable public func index(before i: LineViewIndex) -> LineViewIndex {
 
         let newline: Range<String.ScalarView.Index>
         if i == endIndex {
@@ -108,7 +108,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     ///     - i: The preceding index.
     @_specialize(exported: true, where Base == StrictString)
     @_specialize(exported: true, where Base == String)
-    @_inlineable public func index(after i: LineViewIndex) -> LineViewIndex {
+    @inlinable public func index(after i: LineViewIndex) -> LineViewIndex {
         guard let newline = i.newline(in: base.scalars),
             ¬newline.isEmpty else {
                 return LineViewIndex.endIndex()
@@ -118,7 +118,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
-    @_inlineable public subscript(_ position: LineViewIndex) -> Line<Base> {
+    @inlinable public subscript(_ position: LineViewIndex) -> Line<Base> {
         @_specialize(exported: true, where Base == StrictString)
         @_specialize(exported: true, where Base == String)
         get {
@@ -144,7 +144,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     /// Creates a new, empty collection.
     @_specialize(exported: true, where Base == StrictString)
     @_specialize(exported: true, where Base == String)
-    @_inlineable public init() {
+    @inlinable public init() {
         self.init(Base())
     }
 
@@ -152,7 +152,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
     /// Replaces the specified subrange of elements with the given collection.
     @_specialize(exported: true, kind: partial, where Base == StrictString)
     @_specialize(exported: true, kind: partial, where Base == String)
-    @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Element == Line<Base> {
+    @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Element == Line<Base> {
         var replacement = Base()
         for line in newElements {
             replacement.scalars.append(contentsOf: line.line)
@@ -167,7 +167,7 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return String(describing: base)
     }
 }

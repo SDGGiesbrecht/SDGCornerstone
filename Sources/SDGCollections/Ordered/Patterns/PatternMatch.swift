@@ -22,7 +22,7 @@ public struct PatternMatch<Searched : SearchableCollection> {
     /// - Parameters:
     ///     - range: The range of the match.
     ///     - contents: The contents of the match.
-    @_inlineable public init<R>(range: R, in collection: Searched) where R : RangeExpression, R.Bound == Searched.Index {
+    @inlinable public init<R>(range: R, in collection: Searched) where R : RangeExpression, R.Bound == Searched.Index {
         self.range = range.relative(to: collection)
         self.contents = collection[range]
     }

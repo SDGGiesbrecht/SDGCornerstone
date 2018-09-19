@@ -42,7 +42,7 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
 
     // #documentation(SDGCornerstone.TwoDimensionalVector.Δx)
     /// The difference in *x*.
-    @_inlineable public var Δx : Scalar {
+    @inlinable public var Δx : Scalar {
         get {
             return dx
         }
@@ -53,7 +53,7 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
 
     // #documentation(SDGCornerstone.TwoDimensionalVector.Δy)
     /// The difference in *y*.
-    @_inlineable public var Δy : Scalar {
+    @inlinable public var Δy : Scalar {
         get {
             return dy
         }

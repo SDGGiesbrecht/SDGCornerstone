@@ -29,7 +29,7 @@ extension Comparable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func ≤ (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func ≤ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue <= followingValue
     }
 
@@ -39,7 +39,7 @@ extension Comparable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func ≥ (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func ≥ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue >= followingValue
     }
 
@@ -69,7 +69,7 @@ extension Comparable {
     ///
     /// - Parameters:
     ///     - minimum: The desired minimum for the value.
-    @_inlineable public mutating func increase(to minimum: Self) {
+    @inlinable public mutating func increase(to minimum: Self) {
         if self < minimum {
             self = minimum
         }
@@ -101,7 +101,7 @@ extension Comparable {
     ///
     /// - Parameters:
     ///     - maximum: The desired maximum for the value.
-    @_inlineable public mutating func decrease(to maximum: Self) {
+    @inlinable public mutating func decrease(to maximum: Self) {
         if self > maximum {
             self = maximum
         }
@@ -120,7 +120,7 @@ extension Comparable {
     /// - Parameters:
     ///     - precedingValue: The value to test.
     ///     - followingValue: The bounds of the range.
-    @_inlineable public static func ≈ (precedingValue: Self, followingValue: (Self, Self)) -> Bool {
+    @inlinable public static func ≈ (precedingValue: Self, followingValue: (Self, Self)) -> Bool {
         let range: ClosedRange<Self>
         if followingValue.0 ≥ followingValue.1 {
             range = followingValue.1 ... followingValue.0

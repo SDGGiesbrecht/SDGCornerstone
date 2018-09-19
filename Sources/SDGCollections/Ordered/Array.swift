@@ -39,7 +39,7 @@ extension ArrayFamily where Element : RangeReplaceableCollection {
     /// - Parameters:
     ///     - element: The element with which to fill the collections.
     ///     - direction: The direction from which to fill the collections.
-    @_inlineable public mutating func equalizeCounts(byFillingWith element: Element.Element, from direction: FillDirection) {
+    @inlinable public mutating func equalizeCounts(byFillingWith element: Element.Element, from direction: FillDirection) {
         let count = reduce(0) { Swift.max($0, $1.count) }
         let mapped = map { (collection: Element) -> Element in
             var mutable = collection
@@ -54,7 +54,7 @@ extension ArrayFamily where Element : RangeReplaceableCollection {
     /// - Parameters:
     ///     - element: The element with which to fill the collections.
     ///     - direction: The direction from which to fill the collections.
-    @_inlineable public func countsEqualized(byFillingWith element: Element.Element, from direction: FillDirection) -> Self {
+    @inlinable public func countsEqualized(byFillingWith element: Element.Element, from direction: FillDirection) -> Self {
         var result = self
         result.equalizeCounts(byFillingWith: element, from: direction)
         return result

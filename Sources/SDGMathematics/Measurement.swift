@@ -183,7 +183,7 @@ extension Measurement {
 
     // #documentation(SDGCornerstone.Measurement.init())
     /// Creates an empty (zero) measurement.
-    @_inlineable public init() {
+    @inlinable public init() {
         self.init(rawValue: 0)
     }
 
@@ -193,7 +193,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The measurement.
     ///     - followingValue: The scalar.
-    @_inlineable public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
+    @inlinable public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
@@ -203,7 +203,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The measurement.
     ///     - followingValue: The scalar.
-    @_inlineable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
+    @inlinable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
         return followingValue × precedingValue
     }
 
@@ -213,7 +213,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The measurement to modify.
     ///     - followingValue: The scalar.
-    @_inlineable public static func ×= (precedingValue: inout Self, followingValue: Scalar) {
+    @inlinable public static func ×= (precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.rawValue ×= followingValue
     }
 
@@ -223,7 +223,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The measurement.
     ///     - followingValue: The scalar.
-    @_inlineable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
+    @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
 
@@ -233,7 +233,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
-    @_inlineable public static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar {
+    @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar {
         return precedingValue.rawValue ÷ followingValue.rawValue
     }
 
@@ -243,7 +243,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The measurement to modify.
     ///     - followingValue: The scalar divisor.
-    @_inlineable public static func ÷= (precedingValue: inout Self, followingValue: Scalar) {
+    @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.rawValue ÷= followingValue
     }
 
@@ -256,7 +256,7 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    @_inlineable public func dividedAccordingToEuclid(by divisor: Self) -> Scalar {
+    @inlinable public func dividedAccordingToEuclid(by divisor: Self) -> Scalar {
         return rawValue.dividedAccordingToEuclid(by: divisor.rawValue)
     }
 
@@ -267,7 +267,7 @@ extension Measurement {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    @_inlineable public func mod(_ divisor: Self) -> Self {
+    @inlinable public func mod(_ divisor: Self) -> Self {
         return nonmutatingVariant(of: { $0.formRemainder(mod: $1) }, on: self, with: divisor)
     }
 
@@ -278,13 +278,13 @@ extension Measurement {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    @_inlineable public mutating func formRemainder(mod divisor: Self) {
+    @inlinable public mutating func formRemainder(mod divisor: Self) {
         rawValue.formRemainder(mod: divisor.rawValue)
     }
 
     // #documentation(SDGCornerstone.Measurement.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
-    @_inlineable public func isDivisible(by divisor: Self) -> Bool {
+    @inlinable public func isDivisible(by divisor: Self) -> Bool {
         return rawValue.isDivisible(by: divisor.rawValue)
     }
 
@@ -294,7 +294,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func gcd(_ a: Self, _ b: Self) -> Self {
+    @inlinable public static func gcd(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formGreatestCommonDivisor(with: $1) }, on: a, with: b)
     }
 
@@ -303,7 +303,7 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    @_inlineable public mutating func formGreatestCommonDivisor(with other: Self) {
+    @inlinable public mutating func formGreatestCommonDivisor(with other: Self) {
         rawValue.formGreatestCommonDivisor(with: other.rawValue)
     }
 
@@ -313,7 +313,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func lcm(_ a: Self, _ b: Self) -> Self {
+    @inlinable public static func lcm(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formLeastCommonMultiple(with: $1) }, on: a, with: b)
     }
 
@@ -322,7 +322,7 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    @_inlineable public mutating func formLeastCommonMultiple(with other: Self) {
+    @inlinable public mutating func formLeastCommonMultiple(with other: Self) {
         rawValue.formLeastCommonMultiple(with: other.rawValue)
     }
 
@@ -332,7 +332,7 @@ extension Measurement {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    @_inlineable public mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self) {
+    @inlinable public mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self) {
         rawValue.round(rule, toMultipleOf: factor.rawValue)
     }
 
@@ -342,7 +342,7 @@ extension Measurement {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    @_inlineable public func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self {
+    @inlinable public func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self {
         return nonmutatingVariant(of: { $0.round($1, toMultipleOf: $2) }, on: self, with: (rule, factor))
     }
 
@@ -354,7 +354,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
         return Self(rawValue: precedingValue.rawValue + followingValue.rawValue)
     }
 
@@ -364,7 +364,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to add.
-    @_inlineable public static func += (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
         precedingValue.rawValue += followingValue.rawValue
     }
 
@@ -372,7 +372,7 @@ extension Measurement {
 
     // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
     /// The additive identity (origin).
-    @_inlineable public static var additiveIdentity: Self {
+    @inlinable public static var additiveIdentity: Self {
         return Self(rawValue: 0)
     }
 
@@ -384,7 +384,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.rawValue < followingValue.rawValue
     }
 
@@ -396,7 +396,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
+    @inlinable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.rawValue == followingValue.rawValue
     }
 
@@ -404,7 +404,7 @@ extension Measurement {
 
     // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
-    @_inlineable public var hashValue: Int {
+    @inlinable public var hashValue: Int {
         return rawValue.hashValue
     }
 
@@ -415,7 +415,7 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    @_inlineable public static prefix func − (operand: Self) -> Self {
+    @inlinable public static prefix func − (operand: Self) -> Self {
         return Self(rawValue: −operand.rawValue)
     }
 
@@ -424,7 +424,7 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    @_inlineable public static postfix func −= (operand: inout Self) {
+    @inlinable public static postfix func −= (operand: inout Self) {
         operand.rawValue−=
     }
 
@@ -432,37 +432,37 @@ extension Measurement {
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
     /// Returns `true` if `self` is positive.
-    @_inlineable public var isPositive: Bool {
+    @inlinable public var isPositive: Bool {
         return rawValue.isPositive
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
-    @_inlineable public var isNegative: Bool {
+    @inlinable public var isNegative: Bool {
         return rawValue.isNegative
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
-    @_inlineable public var isNonNegative: Bool {
+    @inlinable public var isNonNegative: Bool {
         return rawValue.isNonNegative
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
     /// Returns `true` if `self` is negative or zero.
-    @_inlineable public var isNonPositive: Bool {
+    @inlinable public var isNonPositive: Bool {
         return rawValue.isNonPositive
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
-    @_inlineable public var absoluteValue: Self {
+    @inlinable public var absoluteValue: Self {
         return Self(rawValue: rawValue.absoluteValue)
     }
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
-    @_inlineable public mutating func formAbsoluteValue() {
+    @inlinable public mutating func formAbsoluteValue() {
         rawValue.formAbsoluteValue()
     }
 
@@ -474,7 +474,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return Self(rawValue: precedingValue.rawValue − followingValue.rawValue)
     }
 
@@ -484,7 +484,7 @@ extension Measurement {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.rawValue −= followingValue.rawValue
     }
 }
@@ -497,7 +497,7 @@ extension Measurement {
 /// - Parameters:
 ///     - precedingValue: A value.
 ///     - followingValue: Another value.
-@_inlineable public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
+@inlinable public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.gcd(a, b)
 }
 
@@ -507,7 +507,7 @@ extension Measurement {
 /// - Parameters:
 ///     - precedingValue: A value.
 ///     - followingValue: Another value.
-@_inlineable public func lcm<M : Measurement>(_ a: M, _ b: M) -> M {
+@inlinable public func lcm<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.lcm(a, b)
 }
 
@@ -531,7 +531,7 @@ extension CodableViaMeasurement {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    @_inlineable public func encode(to encoder: Encoder) throws {
+    @inlinable public func encode(to encoder: Encoder) throws {
         try rawValue.encode(to: encoder)
     }
 
@@ -540,7 +540,7 @@ extension CodableViaMeasurement {
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    @_inlineable public init(from decoder: Decoder) throws {
+    @inlinable public init(from decoder: Decoder) throws {
         try self.init(rawValue: Scalar(from: decoder))
     }
 }

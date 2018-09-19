@@ -19,7 +19,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
 
     // MARK: - Initialization
 
-    @_inlineable @_versioned internal init(abstractBasePattern base: Pattern<Element>) { // @exempt(from: tests) False result with Xcode 9.3.
+    @inlinable @_versioned internal init(abstractBasePattern base: Pattern<Element>) { // @exempt(from: tests) False result with Xcode 9.3.
         self.base = base
     }
 
@@ -28,7 +28,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
     ///
     /// - Parameters:
     ///     - pattern: The underlying pattern to negate.
-    @_inlineable public convenience init(_ pattern: Pattern<Element>) {
+    @inlinable public convenience init(_ pattern: Pattern<Element>) {
         self.init(abstractBasePattern: pattern)
     }
 
@@ -39,7 +39,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    @_inlineable public convenience init(_ pattern: LiteralPattern<Element>) {
+    @inlinable public convenience init(_ pattern: LiteralPattern<Element>) {
         self.init(abstractBasePattern: pattern)
     }
 
@@ -50,7 +50,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    @_inlineable public convenience init(_ pattern: CompositePattern<Element>) {
+    @inlinable public convenience init(_ pattern: CompositePattern<Element>) {
         self.init(abstractBasePattern: pattern)
     }
 
@@ -68,7 +68,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         if base.primaryMatch(in: collection, at: location) == nil {
             return [(location ... location).relative(to: collection)]
@@ -85,7 +85,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         if base.primaryMatch(in: collection, at: location) == nil {
             return (location ... location).relative(to: collection)
@@ -98,7 +98,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> NotPattern<Element> {
+    @inlinable public override func reversed() -> NotPattern<Element> {
         return NotPattern(base.reversed())
     }
 
@@ -106,7 +106,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return "¬(" + String(describing: base) + ")"
     }
 }

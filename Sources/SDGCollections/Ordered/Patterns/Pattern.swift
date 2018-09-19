@@ -30,7 +30,7 @@ open class Pattern<Element : Equatable> : PatternProtocol {
     }
 
     /// This initializer does nothing. It only exists so that subclasses have an available parent initializer they can forward to in order to satisfy the compiler.
-    @_inlineable public init() { // @exempt(from: tests) False result with Xcode 9.3.
+    @inlinable public init() { // @exempt(from: tests) False result with Xcode 9.3.
 
     }
 
@@ -42,7 +42,7 @@ open class Pattern<Element : Equatable> : PatternProtocol {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable open func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @inlinable open func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
         _primitiveMethod()
     }
 
@@ -54,7 +54,7 @@ open class Pattern<Element : Equatable> : PatternProtocol {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable open func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable open func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         return matches(in: collection, at: location).first
     }
 
@@ -62,7 +62,7 @@ open class Pattern<Element : Equatable> : PatternProtocol {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable open func reversed() -> Pattern<Element> {
+    @inlinable open func reversed() -> Pattern<Element> {
         _primitiveMethod()
     }
 }

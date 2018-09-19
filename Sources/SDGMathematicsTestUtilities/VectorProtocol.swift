@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to VectorProtocol.
-@_inlineable public func testVectorProtocolConformance<T>(augend: T, addend: T, sum: T, multiplicand: T, multiplier: T.Scalar, product: T, file: StaticString = #file, line: UInt = #line) where T : VectorProtocol {
+@inlinable public func testVectorProtocolConformance<T>(augend: T, addend: T, sum: T, multiplicand: T, multiplier: T.Scalar, product: T, file: StaticString = #file, line: UInt = #line) where T : VectorProtocol {
 
     testAdditiveArithmeticConformance(augend: augend, addend: addend, sum: sum, file: file, line: line)
 

@@ -38,11 +38,11 @@ extension IntegralArithmetic {
     ///
     /// - Properties:
     ///     - int: An instance of a member of the `Int` family.
-    @_inlineable public init<I : IntFamily>(_ int: I) {
+    @inlinable public init<I : IntFamily>(_ int: I) {
         self.init(IntMax(int))
     }
 
-    @_inlineable @_versioned internal mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
+    @inlinable @_versioned internal mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
 
         _assert(exponent.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)

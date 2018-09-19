@@ -27,15 +27,15 @@ extension Day {
     // MARK: - Text Representations
 
     /// Returns the day in English digits. (“1”, “2”, “3”, etc.)
-    @_inlineable public func inEnglishDigits() -> StrictString {
+    @inlinable public func inEnglishDigits() -> StrictString {
         return ordinal.inDigits()
     }
 
-    @_inlineable @_versioned internal func inDeutschenZiffern() -> StrictString {
+    @inlinable @_versioned internal func inDeutschenZiffern() -> StrictString {
         return ordinal._verkürzteDeutscheOrdnungszahl()
     }
 
-    @_inlineable @_versioned internal func enChiffresFrançais() -> SemanticMarkup {
+    @inlinable @_versioned internal func enChiffresFrançais() -> SemanticMarkup {
         if ordinal == 1 {
             return ordinal._ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
         } else {
@@ -43,11 +43,11 @@ extension Day {
         }
     }
 
-    @_inlineable @_versioned internal func σεΕλληνικάΨηφία() -> StrictString {
+    @inlinable @_versioned internal func σεΕλληνικάΨηφία() -> StrictString {
         return ordinal.inDigits()
     }
 
-    @_inlineable @_versioned internal func בעברית־בספרות() -> StrictString {
+    @inlinable @_versioned internal func בעברית־בספרות() -> StrictString {
         return ordinal.inDigits()
     }
 
@@ -55,7 +55,7 @@ extension Day {
 
     // #documentation(SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup())
     /// The markup representation of the instance.
-    @_inlineable public func playgroundDescriptionMarkup() -> SemanticMarkup {
+    @inlinable public func playgroundDescriptionMarkup() -> SemanticMarkup {
         return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:

@@ -48,12 +48,12 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     // MARK: - Initialization
 
     /// Creates semantic markup from raw text.
-    @_inlineable public init(_ rawText: StrictString) {
+    @inlinable public init(_ rawText: StrictString) {
         source = rawText
     }
 
     /// Creates semantic markup from raw text.
-    @_inlineable public init(_ rawText: String) {
+    @inlinable public init(_ rawText: String) {
         source = StrictString(rawText)
     }
 
@@ -63,7 +63,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     public var source: StrictString
 
     /// A view of the source as a collection of Unicode scalars.
-    @_inlineable public var scalars: StrictString.ScalarView {
+    @inlinable public var scalars: StrictString.ScalarView {
         get {
             return source.scalars
         }
@@ -73,7 +73,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     }
 
     /// A view of the source as a collection of extended grapheme clusters.
-    @_inlineable public var clusters: StrictString.ClusterView {
+    @inlinable public var clusters: StrictString.ClusterView {
         get {
             return source.clusters
         }
@@ -83,7 +83,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     }
 
     /// A view of the source as a collection of lines.
-    @_inlineable public var lines: LineView<StrictString> {
+    @inlinable public var lines: LineView<StrictString> {
         get {
             return source.lines
         }
@@ -95,24 +95,24 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     // MARK: - Mutation
 
     /// Superscripts the string.
-    @_inlineable public mutating func superscript() {
+    @inlinable public mutating func superscript() {
         source.prepend(beginSuperscript)
         source.append(endSuperscript)
     }
 
     /// Returns a string formed by superscripting the instance.
-    @_inlineable public func superscripted() -> SemanticMarkup {
+    @inlinable public func superscripted() -> SemanticMarkup {
         return nonmutatingVariant(of: { $0.superscript() }, on: self)
     }
 
     /// Subscripts the string.
-    @_inlineable public mutating func `subscript`() {
+    @inlinable public mutating func `subscript`() {
         source.prepend(beginSubscript)
         source.append(endSubscript)
     }
 
     /// Returns a string formed by subscripting the instance.
-    @_inlineable public func subscripted() -> SemanticMarkup {
+    @inlinable public func subscripted() -> SemanticMarkup {
         return nonmutatingVariant(of: { $0.subscript() }, on: self)
     }
 
@@ -191,7 +191,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to add.
-    @_inlineable public static func += (precedingValue: inout SemanticMarkup, followingValue: SemanticMarkup) {
+    @inlinable public static func += (precedingValue: inout SemanticMarkup, followingValue: SemanticMarkup) {
         precedingValue.source += followingValue.source
     }
 
@@ -202,7 +202,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     ///
     /// - Parameters:
     ///     - i: The following index.
-    @_inlineable public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
+    @inlinable public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(before: i)
     }
 
@@ -213,7 +213,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    @_inlineable public init(from decoder: Decoder) throws {
+    @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: StrictString.self, convert: { SemanticMarkup($0) })
     }
 
@@ -222,7 +222,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    @_inlineable public func encode(to encoder: Encoder) throws {
+    @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: source)
     }
 
@@ -234,13 +234,13 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
-    @_inlineable public var startIndex: String.ScalarView.Index {
+    @inlinable public var startIndex: String.ScalarView.Index {
         return source.startIndex
     }
 
     // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
-    @_inlineable public var endIndex: String.ScalarView.Index {
+    @inlinable public var endIndex: String.ScalarView.Index {
         return source.endIndex
     }
 
@@ -249,13 +249,13 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    @_inlineable public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
+    @inlinable public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(after: i)
     }
 
     // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
-    @_inlineable public subscript(position: String.ScalarView.Index) -> Unicode.Scalar {
+    @inlinable public subscript(position: String.ScalarView.Index) -> Unicode.Scalar {
         return source[position]
     }
 
@@ -263,7 +263,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
     /// Returns the custom playground description for this instance.
-    @_inlineable public var playgroundDescription: Any {
+    @inlinable public var playgroundDescription: Any {
         #if canImport(AppKit) || canImport(UIKit)
             return richText(font: Font.systemFont(ofSize: Font.systemSize))
         #else
@@ -275,7 +275,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return String(rawTextApproximation())
     }
 
@@ -287,7 +287,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: SemanticMarkup, followingValue: SemanticMarkup) -> Bool {
+    @inlinable public static func == (precedingValue: SemanticMarkup, followingValue: SemanticMarkup) -> Bool {
         return precedingValue.source == followingValue.source
     }
 
@@ -298,7 +298,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     ///
     /// - Parameters:
     ///     - stringLiteral: The string literal.
-    @_inlineable public init(stringLiteral: String) {
+    @inlinable public init(stringLiteral: String) {
         self.init(StrictString(stringLiteral))
     }
 
@@ -314,31 +314,31 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
     /// Creates a new, empty collection.
-    @_inlineable public init() {
+    @inlinable public init() {
         source = ""
     }
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.init(_:))
     /// Creates a new instance of a collection containing the elements of a sequence.
-    @_inlineable public init<S : Sequence>(_ elements: S) where S.Element == Unicode.Scalar {
+    @inlinable public init<S : Sequence>(_ elements: S) where S.Element == Unicode.Scalar {
         source = StrictString(elements)
     }
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
     /// Appends the contents of the sequence to the end of the collection.
-    @_inlineable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == Unicode.Scalar {
+    @inlinable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == Unicode.Scalar {
         source.append(contentsOf: newElements)
     }
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
-    @_inlineable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == Unicode.Scalar {
+    @inlinable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == Unicode.Scalar {
         source.insert(contentsOf: newElements, at: i)
     }
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
-    @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == Unicode.Scalar {
+    @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == Unicode.Scalar {
         source.replaceSubrange(subrange, with: newElements)
     }
 }

@@ -228,7 +228,7 @@ extension WholeArithmetic {
     ///
     /// - Properties:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
-    @_inlineable public init<U : UIntFamily>(_ uInt: U) {
+    @inlinable public init<U : UIntFamily>(_ uInt: U) {
         self.init(UIntMax(uInt))
     }
 
@@ -238,7 +238,7 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
@@ -249,7 +249,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - divisor: The divisor.
-    @_inlineable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
+    @inlinable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
         return nonmutatingVariant(of: { $0.divideAccordingToEuclid(by: $1) }, on: self, with: divisor)
     }
 
@@ -260,7 +260,7 @@ extension WholeArithmetic {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    @_inlineable public func mod(_ divisor: Self) -> Self {
+    @inlinable public func mod(_ divisor: Self) -> Self {
         return nonmutatingVariant(of: { $0.formRemainder(mod: $1) }, on: self, with: divisor)
     }
 
@@ -271,13 +271,13 @@ extension WholeArithmetic {
     ///     - divisor: The divisor.
     ///
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
-    @_inlineable public mutating func formRemainder(mod divisor: Self) {
+    @inlinable public mutating func formRemainder(mod divisor: Self) {
         self −= dividedAccordingToEuclid(by: divisor) × divisor
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
-    @_inlineable public func isDivisible(by divisor: Self) -> Bool {
+    @inlinable public func isDivisible(by divisor: Self) -> Bool {
         return mod(divisor) == 0
     }
 
@@ -287,7 +287,7 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func gcd(_ a: Self, _ b: Self) -> Self {
+    @inlinable public static func gcd(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formGreatestCommonDivisor(with: $1) }, on: a, with: b)
     }
 
@@ -296,7 +296,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    @_inlineable public mutating func formGreatestCommonDivisor(with other: Self) {
+    @inlinable public mutating func formGreatestCommonDivisor(with other: Self) {
         if self.isNegative ∨ other.isNegative {
             self.formAbsoluteValue()
             formGreatestCommonDivisor(with: |other|)
@@ -313,7 +313,7 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func lcm(_ a: Self, _ b: Self) -> Self {
+    @inlinable public static func lcm(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formLeastCommonMultiple(with: $1) }, on: a, with: b)
     }
 
@@ -322,7 +322,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - other: Another value.
-    @_inlineable public mutating func formLeastCommonMultiple(with other: Self) {
+    @inlinable public mutating func formLeastCommonMultiple(with other: Self) {
         self ×= other.dividedAccordingToEuclid(by: Self.gcd(self, other))
     }
 
@@ -339,11 +339,11 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - precedingValue: The base.
     ///     - followingValue: The exponent.
-    @_inlineable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ↑=, on: precedingValue, with: followingValue)
     }
 
-    @_inlineable @_versioned internal mutating func raiseWholeNumberToThePowerOf(wholeNumber exponent: Self) {
+    @inlinable @_versioned internal mutating func raiseWholeNumberToThePowerOf(wholeNumber exponent: Self) {
         if exponent == 0 {
             self = 1
         } else if exponent == 1 {
@@ -360,31 +360,31 @@ extension WholeArithmetic {
 
     // #documentation(SDGCornerstone.WholeArithmetic.isNatural)
     /// Returns `true` if `self` is a natural number.
-    @_inlineable public var isNatural: Bool {
+    @inlinable public var isNatural: Bool {
         return isWhole ∧ self ≠ 0
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isWhole)
     /// Returns `true` if `self` is a whole number.
-    @_inlineable public var isWhole: Bool {
+    @inlinable public var isWhole: Bool {
         return isIntegral ∧ isNonNegative
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isIntegral)
     /// Returns `true` if `self` is an integer.
-    @_inlineable public var isIntegral: Bool {
+    @inlinable public var isIntegral: Bool {
         return isDivisible(by: 1)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isEven)
     /// Returns true if `self` is an even integer.
-    @_inlineable public var isEven: Bool {
+    @inlinable public var isEven: Bool {
         return isDivisible(by: 2)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
     /// Returns true if `self` is an odd integer.
-    @_inlineable public var isOdd: Bool {
+    @inlinable public var isOdd: Bool {
         return isIntegral ∧ ¬isEven
     }
 
@@ -394,7 +394,7 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    @_inlineable public mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self) {
+    @inlinable public mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self) {
         switch rule {
         case .down:
             self.divideAccordingToEuclid(by: factor)
@@ -453,7 +453,7 @@ extension WholeArithmetic {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    @_inlineable public func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self {
+    @inlinable public func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self {
         return nonmutatingVariant(of: { $0.round($1, toMultipleOf: $2) }, on: self, with: (rule, factor))
     }
 
@@ -462,7 +462,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_inlineable public mutating func round(_ rule: RoundingRule) {
+    @inlinable public mutating func round(_ rule: RoundingRule) {
         round(rule, toMultipleOf: 1)
     }
 
@@ -471,7 +471,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_inlineable public func rounded(_ rule: RoundingRule) -> Self {
+    @inlinable public func rounded(_ rule: RoundingRule) -> Self {
         return nonmutatingVariant(of: { $0.round($1) }, on: self, with: rule)
     }
 
@@ -482,7 +482,7 @@ extension WholeArithmetic {
     ///
     /// - Parameters:
     ///     - integerLiteral: The integer literal.
-    @_inlineable public init(integerLiteral: UIntMax) {
+    @inlinable public init(integerLiteral: UIntMax) {
         self.init(integerLiteral)
     }
 
@@ -492,12 +492,12 @@ extension WholeArithmetic {
     /// Creates a new instance from the given integer, if it can be represented exactly.
 
     /// Multiplies two values and produces their product.
-    @_inlineable public static func * (precedingValue: Self, followingValue: Self) -> Self { // Numeric
+    @inlinable public static func * (precedingValue: Self, followingValue: Self) -> Self { // Numeric
         return precedingValue × followingValue
     }
 
     /// Multiplies two values and stores the result in the left‐hand‐side variable.
-    @_inlineable public static func *= (precedingValue: inout Self, followingValue: Self) { // Numeric
+    @inlinable public static func *= (precedingValue: inout Self, followingValue: Self) { // Numeric
         precedingValue ×= followingValue
     }
 }
@@ -510,7 +510,7 @@ extension WholeArithmetic {
 /// - Parameters:
 ///     - precedingValue: A value.
 ///     - followingValue: Another value.
-@_inlineable public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
+@inlinable public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.gcd(a, b)
 }
 
@@ -520,6 +520,6 @@ extension WholeArithmetic {
 /// - Parameters:
 ///     - precedingValue: A value.
 ///     - followingValue: Another value.
-@_inlineable public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
+@inlinable public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.lcm(a, b)
 }

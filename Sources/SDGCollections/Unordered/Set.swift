@@ -22,7 +22,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊆ (precedingValue: Set, followingValue: Set) -> Bool {
+    @inlinable public static func ⊆ (precedingValue: Set, followingValue: Set) -> Bool {
         return precedingValue.isSubset(of: followingValue)
     }
 
@@ -32,7 +32,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊇ (precedingValue: Set, followingValue: Set) -> Bool {
+    @inlinable public static func ⊇ (precedingValue: Set, followingValue: Set) -> Bool {
         return precedingValue.isSuperset(of: followingValue)
     }
 
@@ -42,7 +42,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊊ (precedingValue: Set, followingValue: Set) -> Bool {
+    @inlinable public static func ⊊ (precedingValue: Set, followingValue: Set) -> Bool {
         return precedingValue.isStrictSubset(of: followingValue)
     }
 
@@ -52,7 +52,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊋ (precedingValue: Set, followingValue: Set) -> Bool {
+    @inlinable public static func ⊋ (precedingValue: Set, followingValue: Set) -> Bool {
         return precedingValue.isStrictSuperset(of: followingValue)
     }
 
@@ -61,7 +61,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     ///
     /// - Parameters:
     ///     - other: The other set.
-    @_inlineable public func overlaps(_ other: Set) -> Bool {
+    @inlinable public func overlaps(_ other: Set) -> Bool {
         return ¬isDisjoint(with: other)
     }
 
@@ -73,7 +73,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∩ (precedingValue: Set, followingValue: Set) -> Set {
+    @inlinable public static func ∩ (precedingValue: Set, followingValue: Set) -> Set {
         return precedingValue.intersection(followingValue)
     }
 
@@ -83,7 +83,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∩= (precedingValue: inout Set, followingValue: Set) {
+    @inlinable public static func ∩= (precedingValue: inout Set, followingValue: Set) {
         precedingValue.formIntersectionAsSetAlgebra(followingValue)
     }
 
@@ -93,7 +93,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∪ (precedingValue: Set, followingValue: Set) -> Set {
+    @inlinable public static func ∪ (precedingValue: Set, followingValue: Set) -> Set {
         return precedingValue.unionAsSetAlgebra(followingValue)
     }
 
@@ -103,7 +103,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∪= (precedingValue: inout Set, followingValue: Set) {
+    @inlinable public static func ∪= (precedingValue: inout Set, followingValue: Set) {
         return precedingValue.formUnionAsSetAlgebra(followingValue)
     }
 
@@ -113,7 +113,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖ (precedingValue: Set, followingValue: Set) -> Set {
+    @inlinable public static func ∖ (precedingValue: Set, followingValue: Set) -> Set {
         return precedingValue.subtracting(followingValue)
     }
 
@@ -123,7 +123,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖= (precedingValue: inout Set, followingValue: Set) {
+    @inlinable public static func ∖= (precedingValue: inout Set, followingValue: Set) {
         precedingValue.subtract(followingValue)
     }
 
@@ -133,7 +133,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆ (precedingValue: Set, followingValue: Set) -> Set {
+    @inlinable public static func ∆ (precedingValue: Set, followingValue: Set) -> Set {
         return precedingValue.symmetricDifferenceAsSetAlgebra(followingValue)
     }
 
@@ -143,7 +143,7 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆= (precedingValue: inout Set, followingValue: Set) {
+    @inlinable public static func ∆= (precedingValue: inout Set, followingValue: Set) {
         return precedingValue.formSymmetricDifference(followingValue)
     }
 
@@ -155,26 +155,26 @@ extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_inlineable public static func ∋ (precedingValue: Set, followingValue: Element) -> Bool {
+    @inlinable public static func ∋ (precedingValue: Set, followingValue: Element) -> Bool {
         return precedingValue.contains(followingValue)
     }
 }
 
 extension SetAlgebra {
 
-    @_inlineable @_versioned internal func unionAsSetAlgebra(_ other: Self) -> Self {
+    @inlinable @_versioned internal func unionAsSetAlgebra(_ other: Self) -> Self {
         return union(other)
     }
 
-    @_inlineable @_versioned internal mutating func formUnionAsSetAlgebra(_ other: Self) {
+    @inlinable @_versioned internal mutating func formUnionAsSetAlgebra(_ other: Self) {
         formUnion(other)
     }
 
-    @_inlineable @_versioned internal mutating func formIntersectionAsSetAlgebra(_ other: Self) {
+    @inlinable @_versioned internal mutating func formIntersectionAsSetAlgebra(_ other: Self) {
         formIntersection(other)
     }
 
-    @_inlineable @_versioned internal func symmetricDifferenceAsSetAlgebra(_ other: Self) -> Self {
+    @inlinable @_versioned internal func symmetricDifferenceAsSetAlgebra(_ other: Self) -> Self {
         return symmetricDifference(other)
     }
 }

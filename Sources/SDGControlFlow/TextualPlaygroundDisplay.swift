@@ -27,7 +27,7 @@ extension TextualPlaygroundDisplay {
 
     // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
     /// Returns the custom playground description for this instance.
-    @_inlineable public var playgroundDescription: Any {
+    @inlinable public var playgroundDescription: Any {
         return String(describing: self)
     }
 }

@@ -23,7 +23,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
     ///
     /// - Parameters:
     ///     - components: The component patterns.
-    @_inlineable public  init(_ components: [Pattern<Element>]) {
+    @inlinable public  init(_ components: [Pattern<Element>]) {
         self.components = components
     }
 
@@ -35,7 +35,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
 
     // #documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))
     /// Creates an instance from an array literal.
-    @_inlineable public convenience init(arrayLiteral: Pattern<Element>...) {
+    @inlinable public convenience init(arrayLiteral: Pattern<Element>...) {
         self.init(arrayLiteral)
     }
 
@@ -49,7 +49,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
         for component in components {
@@ -73,7 +73,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
         for component in components {
@@ -93,7 +93,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> CompositePattern<Element> {
+    @inlinable public override func reversed() -> CompositePattern<Element> {
         return CompositePattern(components.map({ $0.reversed() }).reversed())
     }
 
@@ -101,7 +101,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         let entries = components.map { "(" + String(describing: $0) + ")" }
         return entries.joined(separator: " + ")
     }

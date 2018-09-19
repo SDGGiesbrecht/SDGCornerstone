@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to Collection.
-@_inlineable public func testCollectionConformance<T>(of collection: T, file: StaticString = #file, line: UInt = #line) where T : Collection {
+@inlinable public func testCollectionConformance<T>(of collection: T, file: StaticString = #file, line: UInt = #line) where T : Collection {
     _ = collection.startIndex
     _ = collection.endIndex
     _ = collection[collection.startIndex]
