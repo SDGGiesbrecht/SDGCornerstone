@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to RangeReplaceableCollection.
-@_inlineable public func testRangeReplaceableCollectionConformance<T>(of type: T.Type, element: T.Element, file: StaticString = #file, line: UInt = #line) where T : RangeReplaceableCollection, T.Element : Equatable {
+@inlinable public func testRangeReplaceableCollectionConformance<T>(of type: T.Type, element: T.Element, file: StaticString = #file, line: UInt = #line) where T : RangeReplaceableCollection, T.Element : Equatable {
 
     var collection = T()
     collection.append(element)

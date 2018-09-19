@@ -19,7 +19,7 @@ extension String.ScalarView.Index {
     // MARK: - Conversions
 
     /// Returns the position of the cluster that contains this index.
-    @_inlineable public func cluster(in clusters: String.ClusterView) -> String.ClusterView.Index {
+    @inlinable public func cluster(in clusters: String.ClusterView) -> String.ClusterView.Index {
         let string = String(clusters)
 
         var copy = self
@@ -37,7 +37,7 @@ extension String.ScalarView.Index {
     }
 
     /// Returns the position in the given view of lines that corresponds exactly to this index.
-    @_inlineable public func samePosition(in lines: LineView<String>) -> LineView<String>.Index? {
+    @inlinable public func samePosition(in lines: LineView<String>) -> LineView<String>.Index? {
         let line = self.line(in: lines)
         guard let start = line.start else {
             // End index
@@ -51,7 +51,7 @@ extension String.ScalarView.Index {
     }
 
     /// Returns the position of the line that contains this index.
-    @_inlineable public func line(in lines: LineView<String>) -> LineView<String>.Index {
+    @inlinable public func line(in lines: LineView<String>) -> LineView<String>.Index {
         return lines.line(for: self)
     }
 }

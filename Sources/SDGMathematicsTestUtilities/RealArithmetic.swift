@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to RealArithmetic.
-@_inlineable public func testRealArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : FloatingPoint, T : RealArithmetic {
+@inlinable public func testRealArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : FloatingPoint, T : RealArithmetic {
 
     testRationalArithmeticConformance(of: T.self, file: file, line: line)
 
@@ -24,11 +24,7 @@
     test(operator: (↑, "↑"), on: (2 as T, −0.5), returns: 0.707_11, file: file, line: line)
 
     test(method: (T.root, "root"), of: 81 as T, with: 4, returns: 3, file: file, line: line)
-    #if swift(>=4.1.50)
     test(mutatingMethod: ({ $0.formRoot(ofDegree: $1) }, "formRoot"), of: 64 as T, with: 3, resultsIn: 4, file: file, line: line)
-    #else
-    test(mutatingMethod: (T.formRoot, "formRoot"), of: 64 as T, with: 3, resultsIn: 4, file: file, line: line)
-    #endif
 
     test(prefixOperator: (√, "√"), on: 100 as T, returns: 10, file: file, line: line)
     test(postfixAssignmentOperator: (√=, "√="), with: 64, resultsIn: 8, file: file, line: line)
@@ -36,25 +32,13 @@
     test(function: (log, "log"), on: (2 as T, 8), returns: 3, file: file, line: line)
     test(function: (log, "log"), on: (2 as T, 1), returns: 0, file: file, line: line)
     test(function: (log, "log"), on: (8 as T, 8), returns: 1, file: file, line: line)
-    #if swift(>=4.1.50)
     test(mutatingMethod: ({ $0.formLogarithm(toBase: $1) }, "formLogarithm"), of: 81 as T, with: 3, resultsIn: 4, file: file, line: line)
-    #else
-    test(mutatingMethod: (T.formLogarithm, "formLogarithm"), of: 81 as T, with: 3, resultsIn: 4, file: file, line: line)
-    #endif
 
     test(function: (log, "log"), on: 100 as T, returns: 2, file: file, line: line)
-    #if swift(>=4.1.50)
     test(mutatingMethod: ({ $0.formCommonLogarithm() }, "formCommonLogarithm"), of: 1000 as T, resultsIn: 3, file: file, line: line)
-    #else
-    test(mutatingMethod: (T.formCommonLogarithm, "formCommonLogarithm"), of: 1000 as T, resultsIn: 3, file: file, line: line)
-    #endif
 
     test(function: (ln, "ln"), on: 714 as T, returns: 6.570_88, file: file, line: line)
-    #if swift(>=4.1.50)
     test(mutatingMethod: ({ $0.formNaturalLogarithm() }, "formNaturalLogarithm"), of: 342 as T, resultsIn: 5.834_81, file: file, line: line)
-    #else
-    test(mutatingMethod: (T.formNaturalLogarithm, "formNaturalLogarithm"), of: 342 as T, resultsIn: 5.834_81, file: file, line: line)
-    #endif
 
     test(function: (sin, "sin"), on: (171 as T).rad, returns: 0.976_59, file: file, line: line)
     test(function: (cos, "cos"), on: (401 as T).rad, returns: 0.432_21, file: file, line: line)

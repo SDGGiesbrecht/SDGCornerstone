@@ -20,7 +20,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - Initialization
 
-    @_inlineable @_versioned internal init(_ uInt: UIntValue) {
+    @inlinable internal init(_ uInt: UIntValue) {
         self.uInt = uInt
     }
 
@@ -28,26 +28,26 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
-    @_inlineable public static var startIndex: Index {
+    @inlinable public static var startIndex: Index {
         return 0
     }
 
     // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
-    @_inlineable public static var endIndex: Index {
+    @inlinable public static var endIndex: Index {
         return Index(count)
     }
 
     // #documentation(SDGCornerstone.Collection.count)
     /// The number of elements in the collection.
-    @_inlineable public static var count: Int {
+    @inlinable public static var count: Int {
         let bytes = MemoryLayout<UIntValue>.size
         return bytes × 8
     }
 
     // MARK: - Properties
 
-    @_versioned internal var uInt: UIntValue
+    @usableFromInline internal var uInt: UIntValue
 
     // MARK: - BidirectionalCollection
 
@@ -61,7 +61,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     @_specialize(exported: true, where UIntValue == UInt32)
     @_specialize(exported: true, where UIntValue == UInt16)
     @_specialize(exported: true, where UIntValue == UInt8)
-    @_inlineable public func index(before i: Index) -> Index {
+    @inlinable public func index(before i: Index) -> Index {
         return i − (1 as Index)
     }
 
@@ -74,26 +74,18 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     /// The type of the indices of the collection.
     public typealias Index = UIntValue
 
-    #if swift(>=4.1.50)
-    // MARK: - #if swift(>=4.1.50)
     // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultIndices<BinaryView>
-    #else
-    // MARK: - #if !swift(>=4.1.50)
-    // #documentation(SDGCornerstone.Collection.Indices)
-    /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
-    public typealias Indices = DefaultRandomAccessIndices<BinaryView>
-    #endif
 
     // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
-    @_inlineable public var startIndex: Index {
+    @inlinable public var startIndex: Index {
         return BinaryView.startIndex
     }
     // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
-    @_inlineable public var endIndex: Index {
+    @inlinable public var endIndex: Index {
         return BinaryView.endIndex
     }
 
@@ -107,11 +99,11 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     @_specialize(exported: true, where UIntValue == UInt32)
     @_specialize(exported: true, where UIntValue == UInt16)
     @_specialize(exported: true, where UIntValue == UInt8)
-    @_inlineable public func index(after i: Index) -> Index {
+    @inlinable public func index(after i: Index) -> Index {
         return i + (1 as Index)
     }
 
-    @_inlineable @_versioned internal func assertIndexExists(_ index: Index) {
+    @inlinable internal func assertIndexExists(_ index: Index) {
         _assert(index ∈ bounds, { (localization: _APILocalization) in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
@@ -122,7 +114,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
-    @_inlineable public subscript(index: Index) -> Element {
+    @inlinable public subscript(index: Index) -> Element {
         @_specialize(exported: true, where UIntValue == UInt)
         @_specialize(exported: true, where UIntValue == UInt64)
         @_specialize(exported: true, where UIntValue == UInt32)

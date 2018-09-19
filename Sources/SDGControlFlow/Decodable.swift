@@ -22,7 +22,7 @@ extension Decodable {
 
     // @documentation(SDGCornerstone.Decodable.init(from:via:convert:))
     /// Creates a new instance by decoding a proxy type from the given decoder.
-    @_inlineable public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) -> Self) throws where Other : Decodable {
+    @inlinable public init<Other>(from decoder: Decoder, via type: Other.Type, convert: (_ other: Other) -> Self) throws where Other : Decodable {
         let container = try decoder.singleValueContainer()
         let other = try container.decode(Other.self)
         self = convert(other)

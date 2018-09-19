@@ -27,7 +27,7 @@ extension SmallestCalendarComponent {
     ///
     /// - Parameters:
     ///     - floatLiteral: The floating point literal.
-    @_inlineable public init(floatLiteral: FloatMax) {
+    @inlinable public init(floatLiteral: FloatMax) {
         self.init(RawValue(floatLiteral))
     }
 }

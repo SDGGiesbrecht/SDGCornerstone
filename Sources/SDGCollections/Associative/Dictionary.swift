@@ -47,7 +47,7 @@ extension Dictionary {
     ///     - key: The key whose value should change.
     ///     - mutate: A mutating closure.
     ///     - previous: The previous value or `nil` if the dictionary does not contain the specified key.
-    @_inlineable public mutating func mutateValue(for key: Key, _ mutate: (_ previous: Value?) throws -> Value?) rethrows {
+    @inlinable public mutating func mutateValue(for key: Key, _ mutate: (_ previous: Value?) throws -> Value?) rethrows {
         self[key] = try mutate(self[key])
     }
 
@@ -57,7 +57,7 @@ extension Dictionary {
     ///
     /// - Parameters:
     ///     - other: Another dictionary.
-    @_inlineable public mutating func mergeByOverwriting(from other: [Key: Value]) {
+    @inlinable public mutating func mergeByOverwriting(from other: [Key: Value]) {
         merge(other, uniquingKeysWith: { $1 })
     }
 
@@ -65,12 +65,8 @@ extension Dictionary {
     ///
     /// - Parameters:
     ///     - other: Another dictionary.
-    @_inlineable public func mergedByOverwriting(from other: [Key: Value]) -> [Key: Value] {
-        #if swift(>=4.1.50)
+    @inlinable public func mergedByOverwriting(from other: [Key: Value]) -> [Key: Value] {
         return nonmutatingVariant(of: { $0.mergeByOverwriting(from: $1) }, on: self, with: other)
-        #else
-        return nonmutatingVariant(of: Dictionary.mergeByOverwriting, on: self, with: other)
-        #endif
     }
 
     // MARK: - Mapping
@@ -79,7 +75,7 @@ extension Dictionary {
     ///
     /// - Parameters:
     ///     - transform: A mapping closure.
-    @_inlineable public func mapKeyValuePairs<K, V>(_ transform: (_ key: Key, _ value: Value) throws -> (key: K, value: V)) rethrows -> [K: V] {
+    @inlinable public func mapKeyValuePairs<K, V>(_ transform: (_ key: Key, _ value: Value) throws -> (key: K, value: V)) rethrows -> [K: V] {
         var result = [K: V]()
         for (key, value) in self {
             let mapped = try transform(key, value)
@@ -92,7 +88,7 @@ extension Dictionary {
     ///
     /// - Parameters:
     ///     - transform: A mapping closure.
-    @_inlineable public func mapKeys<T>(_ transform: (Key) throws -> T) rethrows -> [T: Value] {
+    @inlinable public func mapKeys<T>(_ transform: (Key) throws -> T) rethrows -> [T: Value] {
         return try mapKeyValuePairs { (try transform($0), $1) }
     }
 }

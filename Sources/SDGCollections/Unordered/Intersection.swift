@@ -24,21 +24,21 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : Custo
     /// - Parameters:
     ///     - a: A set.
     ///     - b: Another set.
-    @_inlineable public init(_ a: Base1, _ b: Base2) {
+    @inlinable public init(_ a: Base1, _ b: Base2) {
         self.a = a
         self.b = b
     }
 
     // MARK: - Properties
 
-    @_versioned internal let a: Base1
-    @_versioned internal let b: Base2
+    @usableFromInline internal let a: Base1
+    @usableFromInline internal let b: Base2
 
     // MARK: - CustomStringConvertible
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
     }
 
@@ -54,7 +54,7 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : Custo
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_inlineable public static func ∋ (precedingValue: Intersection, followingValue: Base1.Element) -> Bool {
+    @inlinable public static func ∋ (precedingValue: Intersection, followingValue: Base1.Element) -> Bool {
         return precedingValue.a ∋ followingValue ∧ precedingValue.b ∋ followingValue
     }
 }

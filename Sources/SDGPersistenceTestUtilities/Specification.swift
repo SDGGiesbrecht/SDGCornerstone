@@ -18,7 +18,7 @@ import SDGControlFlow
 import SDGLogic
 import SDGCornerstoneLocalizations
 
-@_versioned internal var specificationDirectory: URL?
+@usableFromInline internal var specificationDirectory: URL?
 
 // #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
 private func helpSwiftSyntax() {} // @exempt(from: tests)
@@ -26,14 +26,14 @@ private func helpSwiftSyntax() {} // @exempt(from: tests)
 /// Sets the directory where test specifications should be stored.
 ///
 /// The directory should be specified relative to a source file using some combination of `#file` and `deletingLastPathComponent()`.
-@_inlineable public func setTestSpecificationDirectory(to directory: URL) {
+@inlinable public func setTestSpecificationDirectory(to directory: URL) {
     specificationDirectory = directory
 }
 
 /// Returns the directory where test specifications should be stored.
 ///
 /// The directory can be set by `setTestSpecificationDirectory(to:)`. Otherwise the default directory is determined relative to the first calling source file based on the assumption that that it is in a Swift Package Manager test target, and not in any further subdirectories.
-@_inlineable public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -> URL {
+@inlinable public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -> URL {
     return cached(in: &specificationDirectory) {
         let repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation)).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
@@ -52,7 +52,7 @@ private func helpSwiftSyntax() {} // @exempt(from: tests)
 ///     - string: The string to test.
 ///     - specification: The location of the specification to compare against (or write to).
 ///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update a specification.
-@_inlineable public func compare(_ string: String, against specification: URL, overwriteSpecificationInsteadOfFailing: Bool, file: StaticString = #file, line: UInt = #line) {
+@inlinable public func compare(_ string: String, against specification: URL, overwriteSpecificationInsteadOfFailing: Bool, file: StaticString = #file, line: UInt = #line) {
     autoreleasepool {
 
         guard let specificationString = try? String(from: specification) else {

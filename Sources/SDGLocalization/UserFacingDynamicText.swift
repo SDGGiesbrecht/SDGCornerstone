@@ -23,30 +23,30 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     ///     - localize: A closure that resolves the element based on a requested localization.
     ///     - localization: The requested localization.
     ///     - arguments: One or more (as a tuple) arguments necessary for the correct resolution of the element.
-    @_inlineable public init(_ localize: @escaping (_ localization: Localization, _ arguments: Arguments) -> Element) {
+    @inlinable public init(_ localize: @escaping (_ localization: Localization, _ arguments: Arguments) -> Element) {
         self.localize = localize
     }
 
     // MARK: - Properties
 
-    @_versioned internal var localize: (Localization, Arguments) -> Element
+    @usableFromInline internal var localize: (Localization, Arguments) -> Element
 
     // MARK: - Output
 
     /// Returns the resolved element for the current localization using the specified arguments.
-    @_inlineable public func resolved(using arguments: Arguments) -> Element {
+    @inlinable public func resolved(using arguments: Arguments) -> Element {
         return localize(LocalizationSetting.current.value.resolved(), arguments)
     }
 
     /// Returns the resolved element for the specified localization using the specified arguments.
-    @_inlineable public func resolved(for localization: Localization, using arguments: Arguments) -> Element {
+    @inlinable public func resolved(for localization: Localization, using arguments: Arguments) -> Element {
         return localize(localization, arguments)
     }
 
     // MARK: - Conversions
 
     /// The static instance typed as `UserFacing<Element, Localization>`.
-    @_inlineable public func `static`(using arguments: Arguments) -> UserFacing<Element, Localization> {
+    @inlinable public func `static`(using arguments: Arguments) -> UserFacing<Element, Localization> {
         let resolution = localize
         return UserFacing<Element, Localization>({ resolution($0, arguments) })
     }

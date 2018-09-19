@@ -18,13 +18,13 @@ public struct IntensionalSet<Member> : SetDefinition {
     // MARK: - Initialization
 
     /// Creates a set with a condition.
-    @_inlineable public init(where condition: @escaping (Element) -> Bool) {
+    @inlinable public init(where condition: @escaping (Element) -> Bool) {
         self.condition = condition
     }
 
     // MARK: - Properties
 
-    @_versioned internal let condition: (Element) -> Bool
+    @usableFromInline internal let condition: (Element) -> Bool
 
     // MARK: - SetDefinition
 
@@ -38,7 +38,7 @@ public struct IntensionalSet<Member> : SetDefinition {
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_inlineable public static func ∋ (precedingValue: IntensionalSet, followingValue: Element) -> Bool {
+    @inlinable public static func ∋ (precedingValue: IntensionalSet, followingValue: Element) -> Bool {
         return precedingValue.condition(followingValue)
     }
 }

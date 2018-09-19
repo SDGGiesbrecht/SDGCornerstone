@@ -45,7 +45,7 @@ extension Negatable {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    @_inlineable public static prefix func − (operand: Self) -> Self {
+    @inlinable public static prefix func − (operand: Self) -> Self {
         return nonmutatingVariant(of: −=, on: operand)
     }
 
@@ -54,7 +54,7 @@ extension Negatable {
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    @_inlineable public static postfix func −= (operand: inout Self) {
+    @inlinable public static postfix func −= (operand: inout Self) {
         operand = additiveIdentity − operand
     }
 }
@@ -63,12 +63,12 @@ extension Negatable where Self : SignedNumeric {
     // MARK: - where Self : SignedNumeric
 
     /// Returns the additive inverse of the specified value.
-    @_inlineable public static prefix func - (operand: Self) -> Self {
+    @inlinable public static prefix func - (operand: Self) -> Self {
         return −operand
     }
 
     /// Replaces this value with its additive inverse.
-    @_inlineable public mutating func negate() {
+    @inlinable public mutating func negate() {
         self−=
     }
 }

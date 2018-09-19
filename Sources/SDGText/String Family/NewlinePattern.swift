@@ -21,9 +21,9 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     private static let carriageReturn: Unicode.Scalar = "\u{D}"
     private static let lineFeed: Unicode.Scalar = "\u{A}"
-    @_versioned internal static let newlineCharacters = CharacterSet.newlines
+    @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
     internal static let newline = NewlinePattern(carriageReturnLineFeed: (carriageReturn, lineFeed))
-    @_versioned internal static let reverseNewline = NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
+    @usableFromInline internal static let reverseNewline = NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
 
     // MARK: - Initialization
 
@@ -34,8 +34,8 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     // MARK: - Properties
 
-    @_versioned internal let carriageReturn: Unicode.Scalar
-    @_versioned internal let lineFeed: Unicode.Scalar
+    @usableFromInline internal let carriageReturn: Unicode.Scalar
+    @usableFromInline internal let lineFeed: Unicode.Scalar
 
     // MARK: - Pattern
 
@@ -47,7 +47,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
+    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
         guard scalar ∈ NewlinePattern.newlineCharacters else {
@@ -73,7 +73,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     /// - Parameters:
     ///     - collection: The collection in which to search.
     ///     - location: The index at which to check for the beginning of a match.
-    @_inlineable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
+    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
         guard scalar ∈ NewlinePattern.newlineCharacters else {
@@ -94,7 +94,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     /// A pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
-    @_inlineable public override func reversed() -> NewlinePattern {
+    @inlinable public override func reversed() -> NewlinePattern {
         return NewlinePattern.reverseNewline
     }
 }

@@ -55,11 +55,11 @@ extension RationalArithmetic {
     /// - Parameters:
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
-    @_inlineable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
 
-    @_inlineable @_versioned internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
+    @inlinable internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
 
         _assert(exponent.isIntegral, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
@@ -82,7 +82,7 @@ extension RationalArithmetic {
     ///
     /// - Parameters:
     ///     - floatLiteral: The floating point literal.
-    @_inlineable public init(floatLiteral: FloatMax) {
+    @inlinable public init(floatLiteral: FloatMax) {
         self.init(floatLiteral)
     }
 }

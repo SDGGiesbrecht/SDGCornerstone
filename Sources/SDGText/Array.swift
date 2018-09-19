@@ -19,7 +19,7 @@ extension Array where Element : StringFamily {
     ///
     /// - Parameters:
     ///     - separator: A sequence to insert between each of this sequence’s elements.
-    @_inlineable public func joined(separator: Element = "") -> Element {
+    @inlinable public func joined(separator: Element = "") -> Element {
         guard var result = self.first else {
             return ""
         }

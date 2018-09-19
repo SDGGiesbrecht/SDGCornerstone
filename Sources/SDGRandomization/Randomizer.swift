@@ -70,7 +70,7 @@ extension Randomizer {
     ///
     /// - Parameters:
     ///     - range: The range of acceptable values for the random number.
-    @_inlineable public func randomNumber(inRange range: ClosedRange<UIntMax>) -> UIntMax {
+    @inlinable public func randomNumber(inRange range: ClosedRange<UIntMax>) -> UIntMax {
 
         var unboundedRandom = randomNumber()
 

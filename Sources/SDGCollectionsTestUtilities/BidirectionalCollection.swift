@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to BidirectionalCollection.
-@_inlineable public func testBidirectionalCollectionConformance<T>(of collection: T, file: StaticString = #file, line: UInt = #line) where T : BidirectionalCollection {
+@inlinable public func testBidirectionalCollectionConformance<T>(of collection: T, file: StaticString = #file, line: UInt = #line) where T : BidirectionalCollection {
 
     testCollectionConformance(of: collection, file: file, line: line)
 

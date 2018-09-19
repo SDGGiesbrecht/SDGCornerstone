@@ -24,7 +24,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+    @inlinable public static func ⊆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
         return precedingValue.isSubset(of: followingValue)
     }
 
@@ -34,7 +34,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊇ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+    @inlinable public static func ⊇ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
         return precedingValue.isSuperset(of: followingValue)
     }
 
@@ -44,7 +44,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The possible subset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊊ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+    @inlinable public static func ⊊ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
         return precedingValue.isStrictSubset(of: followingValue)
     }
 
@@ -54,7 +54,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The possible superset to test.
     ///     - followingValue: The other set.
-    @_inlineable public static func ⊋ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
+    @inlinable public static func ⊋ (precedingValue: CharacterSet, followingValue: CharacterSet) -> Bool {
         return precedingValue.isStrictSuperset(of: followingValue)
     }
 
@@ -63,7 +63,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///
     /// - Parameters:
     ///     - other: The other set.
-    @_inlineable public func overlaps(_ other: CharacterSet) -> Bool {
+    @inlinable public func overlaps(_ other: CharacterSet) -> Bool {
         return ¬isDisjointAsSetAlgebra(with: other)
     }
 
@@ -75,7 +75,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    @inlinable public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.intersection(followingValue)
     }
 
@@ -85,7 +85,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∩= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+    @inlinable public static func ∩= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
         precedingValue.formIntersection(followingValue)
     }
 
@@ -95,7 +95,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    @inlinable public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.union(followingValue)
     }
 
@@ -105,7 +105,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∪= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+    @inlinable public static func ∪= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
         return precedingValue.formUnion(followingValue)
     }
 
@@ -115,7 +115,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    @inlinable public static func ∖ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.subtracting(followingValue)
     }
 
@@ -125,7 +125,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The set to subtract from.
     ///     - followingValue: The set to subtract.
-    @_inlineable public static func ∖= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+    @inlinable public static func ∖= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
         precedingValue.subtract(followingValue)
     }
 
@@ -135,7 +135,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
+    @inlinable public static func ∆ (precedingValue: CharacterSet, followingValue: CharacterSet) -> CharacterSet {
         return precedingValue.symmetricDifference(followingValue)
     }
 
@@ -145,7 +145,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: A set.
     ///     - followingValue: Another set.
-    @_inlineable public static func ∆= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
+    @inlinable public static func ∆= (precedingValue: inout CharacterSet, followingValue: CharacterSet) {
         return precedingValue.formSymmetricDifference(followingValue)
     }
 
@@ -157,7 +157,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     /// - Parameters:
     ///     - precedingValue: The set.
     ///     - followingValue: The element to test.
-    @_inlineable public static func ∋ (precedingValue: CharacterSet, followingValue: Element) -> Bool {
+    @inlinable public static func ∋ (precedingValue: CharacterSet, followingValue: Element) -> Bool {
         return precedingValue.contains(followingValue)
     }
 
@@ -172,7 +172,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///
     /// - Parameters:
     ///     - operand: The set.
-    @_inlineable public static postfix func ′(operand: CharacterSet) -> CharacterSet {
+    @inlinable public static postfix func ′(operand: CharacterSet) -> CharacterSet {
         return operand.inverted
     }
 
@@ -181,14 +181,14 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
     ///
     /// - Parameters:
     ///     - operand: The set.
-    @_inlineable public static postfix func ′=(operand: inout CharacterSet) {
+    @inlinable public static postfix func ′=(operand: inout CharacterSet) {
         operand.invert()
     }
 }
 
 extension SetAlgebra {
 
-    @_inlineable @_versioned internal func isDisjointAsSetAlgebra(with other: Self) -> Bool {
+    @inlinable internal func isDisjointAsSetAlgebra(with other: Self) -> Bool {
         return isDisjoint(with: other)
     }
 }

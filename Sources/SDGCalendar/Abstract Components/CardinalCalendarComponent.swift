@@ -28,7 +28,7 @@ extension CardinalCalendarComponent {
     ///
     /// - Parameters:
     ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
-    @_inlineable public init(numberAlreadyElapsed: RawValue) {
+    @inlinable public init(numberAlreadyElapsed: RawValue) {
         self.init(numberAlreadyElapsed)
     }
 
@@ -39,19 +39,19 @@ extension CardinalCalendarComponent {
     ///
     /// - Parameters:
     ///     - ordinal: The ordinal.
-    @_inlineable public init(ordinal: RawValue) {
+    @inlinable public init(ordinal: RawValue) {
         self.init(ordinal − (1 as Vector))
     }
 
     // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
-    @_inlineable public var numberAlreadyElapsed: RawValue {
+    @inlinable public var numberAlreadyElapsed: RawValue {
         return rawValue
     }
 
     // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal)
     /// The ordinal.
-    @_inlineable public var ordinal: RawValue {
+    @inlinable public var ordinal: RawValue {
         return rawValue + (1 as Vector)
     }
 }

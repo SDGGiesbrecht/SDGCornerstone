@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to Randomizer.
-@_inlineable public func testRandomizerConformance<T>(of randomizer: T, file: StaticString = #file, line: UInt = #line) where T : Randomizer {
+@inlinable public func testRandomizerConformance<T>(of randomizer: T, file: StaticString = #file, line: UInt = #line) where T : Randomizer {
 
     let range: ClosedRange<UIntMax> = 0 ... 10
 

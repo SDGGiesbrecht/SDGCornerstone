@@ -18,13 +18,13 @@ import SDGControlFlow
 public struct Line<Base : StringFamily> : TextualPlaygroundDisplay {
 
     /// Creates a line.
-    @_inlineable public init(line: Base, newline: Base) {
+    @inlinable public init(line: Base, newline: Base) {
         self.line = line.scalars[...]
         self.newline = newline.scalars[...]
     }
 
     /// Creates a line.
-    @_inlineable public init(line: Base.ScalarView.SubSequence, newline: Base.ScalarView.SubSequence) {
+    @inlinable public init(line: Base.ScalarView.SubSequence, newline: Base.ScalarView.SubSequence) {
         self.line = line
         self.newline = newline
     }
@@ -40,7 +40,7 @@ public struct Line<Base : StringFamily> : TextualPlaygroundDisplay {
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return String(describing: Base(Base.ScalarView(line))) + newline.map({ $0.visibleRepresentation }).joined()
     }
 }

@@ -24,7 +24,7 @@ public struct NestingLevel<Searched : SearchableCollection> {
     /// - Parameters:
     ///     - container: A match describing the nesting level, including its delimiting tokens.
     ///     - contents: A match describing the contents of the nesting level without its delimiting tokens.
-    @_inlineable public init(container: PatternMatch<Searched>, contents: PatternMatch<Searched>) {
+    @inlinable public init(container: PatternMatch<Searched>, contents: PatternMatch<Searched>) {
         self.container = container
         self.contents = contents
     }

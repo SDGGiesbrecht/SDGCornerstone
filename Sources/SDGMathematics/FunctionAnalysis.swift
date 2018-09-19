@@ -18,7 +18,7 @@ import SDGControlFlow
 
 // Local Extremes
 
-@_inlineable @_versioned internal func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, within bounds: CountableClosedRange<I>?, inFunction function: (I) -> O, isCloser: (O, O) -> Bool) -> I where I.Vector : IntegerProtocol {
+@inlinable internal func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, within bounds: CountableClosedRange<I>?, inFunction function: (I) -> O, isCloser: (O, O) -> Bool) -> I where I.Vector : IntegerProtocol {
     var location = location
 
     _assert(bounds == nil ∨ bounds!.contains(location), { (localization: _APILocalization) -> String in
@@ -68,7 +68,7 @@ import SDGControlFlow
 ///     - function: The function to analyze.
 ///     - input: An input value.
 /// - Returns: The input (*x*) that results in the local maximum (*y*).
-@_inlineable public func findLocalMaximum<I : OneDimensionalPoint, O : Comparable>(near location: I, within bounds: CountableClosedRange<I>? = nil, inFunction function: (_ input: I) -> O) -> I where I.Vector : IntegerProtocol {
+@inlinable public func findLocalMaximum<I : OneDimensionalPoint, O : Comparable>(near location: I, within bounds: CountableClosedRange<I>? = nil, inFunction function: (_ input: I) -> O) -> I where I.Vector : IntegerProtocol {
     return findLocalExtreme(near: location, within: bounds, inFunction: function, isCloser: { $0 ≥ $1 })
 }
 
@@ -125,6 +125,6 @@ import SDGControlFlow
 ///     - function: The function to analyze.
 ///     - input: An input value.
 /// - Returns: The input (*x*) that results in the local minimum (*y*).
-@_inlineable public func findLocalMinimum<I : OneDimensionalPoint, O : Comparable>(near location: I, within bounds: CountableClosedRange<I>? = nil, inFunction function: (_ input: I) -> O) -> I where I.Vector : IntegerProtocol {
+@inlinable public func findLocalMinimum<I : OneDimensionalPoint, O : Comparable>(near location: I, within bounds: CountableClosedRange<I>? = nil, inFunction function: (_ input: I) -> O) -> I where I.Vector : IntegerProtocol {
     return findLocalExtreme(near: location, within: bounds, inFunction: function, isCloser: { $0 ≤ $1 })
 }

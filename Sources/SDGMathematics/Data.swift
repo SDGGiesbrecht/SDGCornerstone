@@ -20,7 +20,7 @@ extension Data : BitField {
 
     // #documentation(SDGCornerstone.BitField.formBitwiseNot())
     /// Inverts the bits.
-    @_inlineable public mutating func formBitwiseNot() {
+    @inlinable public mutating func formBitwiseNot() {
         for index in indices {
             self[index].formBitwiseNot()
         }
@@ -31,7 +31,7 @@ extension Data : BitField {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseAnd(with other: Data) {
+    @inlinable public mutating func formBitwiseAnd(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {
@@ -45,7 +45,7 @@ extension Data : BitField {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseOr(with other: Data) {
+    @inlinable public mutating func formBitwiseOr(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {
@@ -59,7 +59,7 @@ extension Data : BitField {
     ///
     /// - Parameters:
     ///     - other: The other bits.
-    @_inlineable public mutating func formBitwiseExclusiveOr(with other: Data) {
+    @inlinable public mutating func formBitwiseExclusiveOr(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {

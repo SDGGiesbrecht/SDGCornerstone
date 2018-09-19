@@ -19,7 +19,7 @@ public struct LineViewIndex : Comparable, Equatable {
 
     // MARK: - Initialization
 
-    @_versioned internal init(start: String.ScalarView.Index, newline: Range<String.ScalarView.Index>? = nil) {
+    @usableFromInline internal init(start: String.ScalarView.Index, newline: Range<String.ScalarView.Index>? = nil) {
         self.start = start
         cache.newline = newline
     }
@@ -27,23 +27,23 @@ public struct LineViewIndex : Comparable, Equatable {
     private init() {
         start = nil
     }
-    @_versioned internal static func endIndex() -> LineViewIndex {
+    @usableFromInline internal static func endIndex() -> LineViewIndex {
         return LineViewIndex()
     }
 
     // MARK: - Properties
 
-    @_versioned internal class Cache {
+    @usableFromInline internal class Cache {
         fileprivate init() {}
-        @_versioned internal var newline: Range<String.ScalarView.Index>?
+        @usableFromInline internal var newline: Range<String.ScalarView.Index>?
     }
-    @_versioned internal var cache = Cache()
+    @usableFromInline internal var cache = Cache()
 
-    @_versioned internal let start: String.ScalarView.Index? // nil indicates the end index
+    @usableFromInline internal let start: String.ScalarView.Index? // nil indicates the end index
 
     @_specialize(exported: true, where S == StrictString.ScalarView)
     @_specialize(exported: true, where S == String.ScalarView)
-    @_inlineable @_versioned internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? {
+    @inlinable internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? {
         guard let startIndex = start else {
             return nil
         }
@@ -55,22 +55,22 @@ public struct LineViewIndex : Comparable, Equatable {
     // MARK: - Conversions
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
-    @_inlineable public func samePosition(in scalars: StrictString) -> StrictString.Index {
+    @inlinable public func samePosition(in scalars: StrictString) -> StrictString.Index {
         return start ?? scalars.endIndex
     }
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
-    @_inlineable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
+    @inlinable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
         return start ?? scalars.endIndex
     }
 
     /// Returns the position in the given view of clusters that corresponds exactly to this index.
-    @_inlineable public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
+    @inlinable public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
         return samePosition(in: String(StrictString(clusters)).clusters)
     }
 
     /// Returns the position in the given view of clusters that corresponds exactly to this index.
-    @_inlineable public func samePosition(in clusters: String.ClusterView) -> String.ClusterView.Index {
+    @inlinable public func samePosition(in clusters: String.ClusterView) -> String.ClusterView.Index {
         let string = String(clusters)
         return samePosition(in: string.scalars).cluster(in: string.clusters)
     }
@@ -83,7 +83,7 @@ public struct LineViewIndex : Comparable, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func < (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
+    @inlinable public static func < (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
         if let precedingValueStart = precedingValue.start {
             if let followingValueStart = followingValue.start {
                 return precedingValueStart < followingValueStart
@@ -105,7 +105,7 @@ public struct LineViewIndex : Comparable, Equatable {
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
+    @inlinable public static func == (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
         return precedingValue.start == followingValue.start
     }
 }

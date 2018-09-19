@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to Negatable.
-@_inlineable public func testNegatableConformance<T>(minuend: T, subtrahend: T, difference: T, file: StaticString = #file, line: UInt = #line) where T : Negatable {
+@inlinable public func testNegatableConformance<T>(minuend: T, subtrahend: T, difference: T, file: StaticString = #file, line: UInt = #line) where T : Negatable {
 
     testAddableConformance(augend: difference, addend: subtrahend, sum: minuend, file: file, line: line)
 

@@ -73,7 +73,7 @@ extension TwoDimensionalPoint {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_inlineable public mutating func round(_ rule: WholeArithmetic.RoundingRule) {
+    @inlinable public mutating func round(_ rule: WholeArithmetic.RoundingRule) {
         x.round(rule)
         y.round(rule)
     }
@@ -83,12 +83,8 @@ extension TwoDimensionalPoint {
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
-    @_inlineable public func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self {
-        #if swift(>=4.1.50)
+    @inlinable public func rounded(_ rule: WholeArithmetic.RoundingRule) -> Self {
         return nonmutatingVariant(of: { $0.round($1) }, on: self, with: rule)
-        #else
-        return nonmutatingVariant(of: Self.round, on: self, with: rule)
-        #endif
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:))
@@ -97,7 +93,7 @@ extension TwoDimensionalPoint {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    @_inlineable public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) {
+    @inlinable public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) {
         x.round(rule, toMultipleOf: factor)
         y.round(rule, toMultipleOf: factor)
     }
@@ -108,12 +104,8 @@ extension TwoDimensionalPoint {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    @_inlineable public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) -> Self {
-        #if swift(>=4.1.50)
+    @inlinable public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) -> Self {
         return nonmutatingVariant(of: { $0.round($1, toMultipleOf: $2) }, on: self, with: (rule, factor))
-        #else
-        return nonmutatingVariant(of: Self.round, on: self, with: (rule, factor))
-        #endif
     }
 
     // MARK: - PointProtocol
@@ -124,7 +116,7 @@ extension TwoDimensionalPoint {
     /// - Parameters:
     ///     - precedingValue: The point to modify.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func += (precedingValue: inout Self, followingValue: Vector) {
+    @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue.x += followingValue.Δx
         precedingValue.y += followingValue.Δy
     }
@@ -135,7 +127,7 @@ extension TwoDimensionalPoint {
     /// - Parameters:
     ///     - precedingValue: The endpoint.
     ///     - followingValue: The startpoint.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         let Δx = precedingValue.x − followingValue.x
         let Δy = precedingValue.y − followingValue.y
         return Self.Vector(Δx : Δx, Δy : Δy)

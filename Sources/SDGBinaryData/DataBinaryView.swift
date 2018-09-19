@@ -21,22 +21,22 @@ extension Data {
 
         // MARK: - Initialization
 
-        @_inlineable @_versioned internal init(_ data: Data) {
+        @inlinable internal init(_ data: Data) {
             self.data = data
         }
 
         // MARK: - Properties
 
-        @_versioned internal static let bitsPerByte: IntMax = 8
-        @_versioned internal var data: Data
+        @usableFromInline internal static let bitsPerByte: IntMax = 8
+        @usableFromInline internal var data: Data
 
         // MARK: - Conversions
 
-        @_inlineable @_versioned internal func byteIndex(_ index: IntMax) -> Data.Index {
+        @inlinable internal func byteIndex(_ index: IntMax) -> Data.Index {
             return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
         }
 
-        @_inlineable @_versioned internal func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
+        @inlinable internal func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
             return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
         }
 
@@ -47,13 +47,13 @@ extension Data {
         ///
         /// - Parameters:
         ///     - i: The following index.
-        @_inlineable public func index(before i: IntMax) -> IntMax {
+        @inlinable public func index(before i: IntMax) -> IntMax {
             return i − 1
         }
 
         // MARK: - Collection
 
-        @_versioned internal static let startIndex: IntMax = 0
+        @usableFromInline internal static let startIndex: IntMax = 0
         // #documentation(SDGCornerstone.Collection.startIndex)
         /// The position of the first element in a non‐empty collection.
         public var startIndex: IntMax {
@@ -61,7 +61,7 @@ extension Data {
         }
         // #documentation(SDGCornerstone.Collection.endIndex)
         /// The position following the last valid index.
-        @_inlineable public var endIndex: IntMax {
+        @inlinable public var endIndex: IntMax {
             return IntMax(data.endIndex) × BinaryView.bitsPerByte
         }
 
@@ -70,13 +70,13 @@ extension Data {
         ///
         /// - Parameters:
         ///     - i: The preceding index.
-        @_inlineable public func index(after i: IntMax) -> IntMax {
+        @inlinable public func index(after i: IntMax) -> IntMax {
             return i + 1
         }
 
         // #documentation(SDGCornerstone.Collection.subscript(position:))
         /// Accesses the element at the specified position.
-        @_inlineable public subscript(position: IntMax) -> Bool {
+        @inlinable public subscript(position: IntMax) -> Bool {
             get {
                 return data[byteIndex(position)].binary[bitIndex(position)]
             }

@@ -20,7 +20,7 @@ extension Collection {
     ///
     /// - Parameters:
     ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @_inlineable public func randomIndex(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Index {
+    @inlinable public func randomIndex(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Index {
         let random = Int(randomInRange: 0 ... count − 1, fromRandomizer: randomizer)
         return index(startIndex, offsetBy: random)
     }
@@ -29,7 +29,7 @@ extension Collection {
     ///
     /// - Parameters:
     ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @_inlineable public func randomElement(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Element {
+    @inlinable public func randomElement(fromRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Element {
         return self[randomIndex(fromRandomizer: randomizer)]
     }
 }

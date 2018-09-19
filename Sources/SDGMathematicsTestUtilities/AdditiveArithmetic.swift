@@ -16,7 +16,7 @@ import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities
 
 /// Tests a type’s conformance to AdditiveArithmetic.
-@_inlineable public func testAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : AdditiveArithmetic {
+@inlinable public func testAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : AdditiveArithmetic {
     testHashableConformance(differingInstances: (augend, sum), file: file, line: line)
     testSubtractableConformance(minuend: sum, subtrahend: addend, difference: augend, file: file, line: line)
     testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)

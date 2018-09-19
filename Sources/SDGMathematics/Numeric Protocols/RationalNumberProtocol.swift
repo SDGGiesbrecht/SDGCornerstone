@@ -44,7 +44,7 @@ extension RationalNumberProtocol {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
-    @_inlineable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
     }
 }

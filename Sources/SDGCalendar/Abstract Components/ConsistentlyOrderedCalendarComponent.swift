@@ -54,7 +54,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
     ///
     /// - Parameters:
     ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
-    @_inlineable public init(numberAlreadyElapsed: RawValue) {
+    @inlinable public init(numberAlreadyElapsed: RawValue) {
         guard let result = Self(rawValue: numberAlreadyElapsed) else {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
@@ -73,19 +73,19 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
     ///
     /// - Parameters:
     ///     - ordinal: The ordinal.
-    @_inlineable public init(ordinal: RawValue) {
+    @inlinable public init(ordinal: RawValue) {
         self.init(numberAlreadyElapsed: ordinal − 1)
     }
 
     // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
     /// The number of complete components already elapsed.
-    @_inlineable public var numberAlreadyElapsed: RawValue {
+    @inlinable public var numberAlreadyElapsed: RawValue {
         return rawValue
     }
 
     // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal)
     /// The ordinal.
-    @_inlineable public var ordinal: RawValue {
+    @inlinable public var ordinal: RawValue {
         return rawValue + 1
     }
 
@@ -97,7 +97,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
     /// - Parameters:
     ///     - precedingValue: The point to modify.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func += (precedingValue: inout Self, followingValue: Vector) {
+    @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue = Self(numberAlreadyElapsed: precedingValue.numberAlreadyElapsed + followingValue)
     }
 
@@ -107,7 +107,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
     /// - Parameters:
     ///     - precedingValue: The endpoint.
     ///     - followingValue: The startpoint.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return precedingValue.numberAlreadyElapsed − followingValue.numberAlreadyElapsed
     }
 }
@@ -117,14 +117,14 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
 
     // MARK: - Decodable
 
-    @_inlineable @_versioned internal init(usingOrdinalFrom decoder: Decoder) throws {
+    @inlinable internal init(usingOrdinalFrom decoder: Decoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
         try self.init(from: decoder, via: Vector.self, convert: { Self(rawValue: $0 − (1 as Vector)) })
     }
 
     // MARK: - Encodable
 
-    @_inlineable @_versioned internal func encodeUsingOrdinal(to encoder: Encoder) throws {
+    @inlinable internal func encodeUsingOrdinal(to encoder: Encoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
         try encode(to: encoder, via: ordinal)
     }

@@ -13,7 +13,7 @@
  */
 
 /// Tests a subclass of Pattern.
-@_inlineable public func testPattern<T, C>(_ pattern: Pattern<T>, match: C, file: StaticString = #file, line: UInt = #line) where C : SearchableCollection, C.Element == T {
+@inlinable public func testPattern<T, C>(_ pattern: Pattern<T>, match: C, file: StaticString = #file, line: UInt = #line) where C : SearchableCollection, C.Element == T {
 
     let result = pattern.matches(in: match, at: match.startIndex).first
     test(result == match.bounds, "\(pattern).matches(in: \(match), at: \(match.startIndex)).first → \(String(describing: result)) ≠ \(match.bounds)", file: file, line: line)

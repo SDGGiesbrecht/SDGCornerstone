@@ -22,21 +22,21 @@ extension StrictString {
 
         // MARK: - Initialization
 
-        @_inlineable @_versioned internal init(_ string: StrictString) {
+        @inlinable internal init(_ string: StrictString) {
             self.string = string
         }
 
         // MARK: - Properties
 
-        @_versioned internal var string: StrictString
+        @usableFromInline internal var string: StrictString
 
         // MARK: - Normalization
 
-        @_inlineable @_versioned internal static func normalize(_ string: String) -> StrictString.ClusterView {
+        @inlinable internal static func normalize(_ string: String) -> StrictString.ClusterView {
             return StrictString(string).clusters
         }
 
-        @_inlineable @_versioned internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString.ClusterView where S.Element == ExtendedGraphemeCluster {
+        @inlinable internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString.ClusterView where S.Element == ExtendedGraphemeCluster {
             switch sequence {
 
             // Already normalized.
@@ -60,7 +60,7 @@ extension StrictString {
         ///
         /// - Parameters:
         ///     - i: The following index.
-        @_inlineable public func index(before i: String.ClusterView.Index) -> String.ClusterView.Index {
+        @inlinable public func index(before i: String.ClusterView.Index) -> String.ClusterView.Index {
             return string.string.clusters.index(before: i)
         }
 
@@ -68,13 +68,13 @@ extension StrictString {
 
         // #documentation(SDGCornerstone.Collection.startIndex)
         /// The position of the first element in a non‐empty collection.
-        @_inlineable public var startIndex: String.ClusterView.Index {
+        @inlinable public var startIndex: String.ClusterView.Index {
             return string.string.clusters.startIndex
         }
 
         // #documentation(SDGCornerstone.Collection.endIndex)
         /// The position following the last valid index.
-        @_inlineable public var endIndex: String.ClusterView.Index {
+        @inlinable public var endIndex: String.ClusterView.Index {
             return string.string.clusters.endIndex
         }
 
@@ -83,13 +83,13 @@ extension StrictString {
         ///
         /// - Parameters:
         ///     - i: The preceding index.
-        @_inlineable public func index(after i: String.ClusterView.Index) -> String.ClusterView.Index {
+        @inlinable public func index(after i: String.ClusterView.Index) -> String.ClusterView.Index {
             return string.string.clusters.index(after: i)
         }
 
         // #documentation(SDGCornerstone.Collection.subscript(position:))
         /// Accesses the element at the specified position.
-        @_inlineable public subscript(position: String.ClusterView.Index) -> ExtendedGraphemeCluster {
+        @inlinable public subscript(position: String.ClusterView.Index) -> ExtendedGraphemeCluster {
             return string.string.clusters[position]
         }
 
@@ -97,31 +97,31 @@ extension StrictString {
 
         // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
         /// Creates a new, empty collection.
-        @_inlineable public init() {
+        @inlinable public init() {
             string = StrictString()
         }
 
         // #documentation(SDGCornerstone.RangeReplaceableCollection.init(_:))
         /// Creates a new instance of a collection containing the elements of a sequence.
-        @_inlineable public init<S : Sequence>(_ elements: S) where S.Element == Element {
+        @inlinable public init<S : Sequence>(_ elements: S) where S.Element == Element {
             self = ClusterView.normalize(elements)
         }
 
         // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
         /// Appends the contents of the sequence to the end of the collection.
-        @_inlineable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == ExtendedGraphemeCluster {
+        @inlinable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == ExtendedGraphemeCluster {
             self = (StrictString(self) + StrictString(ClusterView.normalize(newElements))).clusters
         }
 
         // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
         /// Inserts the contents of the sequence to the specified index.
-        @_inlineable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ClusterView.Index) where S.Element == ExtendedGraphemeCluster {
+        @inlinable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ClusterView.Index) where S.Element == ExtendedGraphemeCluster {
             replaceSubrange(i ..< i, with: newElements)
         }
 
         // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
         /// Replaces the specified subrange of elements with the given collection.
-        @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ClusterView.Index>, with newElements: S) where S.Element == ExtendedGraphemeCluster {
+        @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ClusterView.Index>, with newElements: S) where S.Element == ExtendedGraphemeCluster {
 
             let preceding = StrictString(ClusterView(self[..<subrange.lowerBound]))
             let succeeding = StrictString(ClusterView(self[subrange.upperBound...]))

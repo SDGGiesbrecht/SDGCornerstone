@@ -17,7 +17,7 @@ extension String.Index {
     // MARK: - Conversions
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
-    @_inlineable public func samePosition(in scalars: StrictString) -> StrictString.Index {
+    @inlinable public func samePosition(in scalars: StrictString) -> StrictString.Index {
         return samePosition(in: String(StrictString(scalars)).scalars)
     }
 }

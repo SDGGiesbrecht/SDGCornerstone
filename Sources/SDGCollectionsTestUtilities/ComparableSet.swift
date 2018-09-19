@@ -17,7 +17,7 @@ import Foundation
 import SDGLogicTestUtilities
 
 /// Tests a type’s conformance to ComparableSet.
-@_inlineable public func testComparableSetConformance<T>(of set: T, member: T.Element, nonmember: T.Element, superset: T, overlapping: T, disjoint: T, file: StaticString = #file, line: UInt = #line) where T : ComparableSet {
+@inlinable public func testComparableSetConformance<T>(of set: T, member: T.Element, nonmember: T.Element, superset: T, overlapping: T, disjoint: T, file: StaticString = #file, line: UInt = #line) where T : ComparableSet {
 
     testEquatableConformance(differingInstances: (set, superset), file: file, line: line)
 

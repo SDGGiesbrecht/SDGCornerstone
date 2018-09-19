@@ -31,25 +31,25 @@ extension OneDimensionalPoint where Vector : IntegerProtocol {
 
     // @documentation(SDGCornerstone.OneDimensionalPoint.increment())
     /// Advances to the next value.
-    @_inlineable public mutating func increment() {
+    @inlinable public mutating func increment() {
         self += 1
     }
 
     // @documentation(SDGCornerstone.OneDimensionalPoint.decrement())
     /// Retreats to the previous value.
-    @_inlineable public mutating func decrement() {
+    @inlinable public mutating func decrement() {
         self −= 1
     }
 
     // @documentation(SDGCornerstone.OneDimensionalPoint.successor())
     /// Returns the value which comes immediately after.
-    @_inlineable public func successor() -> Self {
+    @inlinable public func successor() -> Self {
         return self + 1
     }
 
     // @documentation(SDGCornerstone.OneDimensionalPoint.predecessor())
     /// Returns the value which comes immediately before.
-    @_inlineable public func predecessor() -> Self {
+    @inlinable public func predecessor() -> Self {
         return self − 1
     }
 }
@@ -61,7 +61,7 @@ extension OneDimensionalPoint where Self : Strideable {
     ///
     /// - Parameters:
     ///     - n: The distance to advance.
-    @_inlineable public func advanced(by n: Vector) -> Self {
+    @inlinable public func advanced(by n: Vector) -> Self {
         return self + n
     }
 
@@ -69,7 +69,7 @@ extension OneDimensionalPoint where Self : Strideable {
     ///
     /// - Parameters:
     ///     - other: The value to which the distance should be measured.
-    @_inlineable public func distance(to other: Self) -> Vector {
+    @inlinable public func distance(to other: Self) -> Vector {
         return other − self
     }
 }

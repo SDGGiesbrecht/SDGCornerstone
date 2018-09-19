@@ -18,7 +18,7 @@ extension Sequence where Element : Hashable {
     /// Returns the statistical modes.
     ///
     /// - Returns: The statistical modes. This may be empty if the original sequence is empty.
-    @_inlineable public func statisticalModes() -> [Element] {
+    @inlinable public func statisticalModes() -> [Element] {
         var modes: [Element] = []
         var modeCount: Int = 0
         for (element, count) in countedSet() {
@@ -33,7 +33,7 @@ extension Sequence where Element : Hashable {
     }
 
     /// Returns the number of each type of element present in the sequence.
-    @_inlineable public func countedSet() -> [Element: Int] {
+    @inlinable public func countedSet() -> [Element: Int] {
         var set: [Element: Int] = [:]
         for element in self {
             set[element, default: 0] += 1
@@ -47,7 +47,7 @@ extension Sequence where Element : AdditiveArithmetic {
 
     // @documentation(SDGCornerstone.Sequence.∑)
     /// Returns the sum of all values in the sequence.
-    @_inlineable public static prefix func ∑ (sequence: Self) -> Element {
+    @inlinable public static prefix func ∑ (sequence: Self) -> Element {
         var sum = Element.additiveIdentity
         for element in sequence {
             sum += element
@@ -61,7 +61,7 @@ extension Sequence where Element : WholeArithmetic {
 
     // @documentation(SDGCornerstone.Sequence.∏)
     /// Returns the product of all values in the sequence.
-    @_inlineable public static prefix func ∏ (sequence: Self) -> Element {
+    @inlinable public static prefix func ∏ (sequence: Self) -> Element {
         var product: Element = 1
         for element in sequence {
             product ×= element
@@ -76,7 +76,7 @@ extension Sequence where Element : RationalArithmetic {
     /// Returns the arithmetic mean.
     ///
     /// - Returns: The arithmetic mean or `nil` if the collection is empty.
-    @_inlineable public func mean() -> Element? {
+    @inlinable public func mean() -> Element? {
         var iterator = makeIterator()
         guard var average = iterator.next() else {
             return nil
@@ -92,7 +92,7 @@ extension Sequence where Element : RationalArithmetic {
     /// Returns the median.
     ///
     /// - Returns: The median or `nil` if the collection is empty.
-    @_inlineable public func median() -> Element? {
+    @inlinable public func median() -> Element? {
         let sorted = self.sorted()
         let count = sorted.count
         if count == 0 { return nil }

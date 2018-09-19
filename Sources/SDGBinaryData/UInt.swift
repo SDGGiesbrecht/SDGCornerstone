@@ -17,7 +17,7 @@ extension UIntFamily {
     // MARK: - Binary
 
     /// The value of self represented in binary as a collection of bits.
-    @_inlineable public var binary: BinaryView<Self> {
+    @inlinable public var binary: BinaryView<Self> {
         get {
             return BinaryView(self)
         }

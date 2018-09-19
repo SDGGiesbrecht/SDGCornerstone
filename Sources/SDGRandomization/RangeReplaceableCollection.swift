@@ -20,7 +20,7 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @_inlineable public mutating func shuffle(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) {
+    @inlinable public mutating func shuffle(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) {
         for i in indices {
             let originalLocation = distance(from: startIndex, to: i)
             let newLocation = Int(randomInRange: 0 ... originalLocation, fromRandomizer: randomizer)
@@ -33,11 +33,7 @@ extension RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @_inlineable public func shuffled(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Self {
-        #if swift(>=4.1.50)
+    @inlinable public func shuffled(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Self {
         return nonmutatingVariant(of: { $0.shuffle(usingRandomizer: $1) }, on: self, with: randomizer)
-        #else
-        return nonmutatingVariant(of: Self.shuffle, on: self, with: randomizer)
-        #endif
     }
 }

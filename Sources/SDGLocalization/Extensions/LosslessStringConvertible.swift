@@ -28,7 +28,7 @@ extension CodableViaLosslessStringConvertible {
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    @_inlineable public func encode(to encoder: Encoder) throws {
+    @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: description)
     }
 
@@ -37,7 +37,7 @@ extension CodableViaLosslessStringConvertible {
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    @_inlineable public init(from decoder: Decoder) throws {
+    @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: String.self, convert: { Self($0) })
     }
 }

@@ -174,7 +174,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // #documentation(SDGCornerstone.Numeric.init(exactly:))
     /// Creates a new instance from the given integer, if it can be represented exactly.
-    @_inlineable public init?<T>(exactly source: T) where T : BinaryInteger {
+    @inlinable public init?<T>(exactly source: T) where T : BinaryInteger {
         guard let whole = UIntMax(exactly: source) else {
             return nil // Source could be a negative integer.
         }

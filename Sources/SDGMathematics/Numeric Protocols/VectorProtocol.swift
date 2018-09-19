@@ -68,7 +68,7 @@ extension VectorProtocol {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: A scalar coefficient.
-    @_inlineable public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
+    @inlinable public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
@@ -78,7 +78,7 @@ extension VectorProtocol {
     /// - Parameters:
     ///     - precedingValue: A scalar coefficient.
     ///     - followingValue: A value.
-    @_inlineable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
+    @inlinable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
         return followingValue × precedingValue
     }
 
@@ -88,7 +88,7 @@ extension VectorProtocol {
     /// - Parameters:
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
-    @_inlineable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
+    @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
 }

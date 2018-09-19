@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_versioned internal func list(_ localizations: (_APILocalization) -> String) -> String { // @exempt(from: tests)
+@usableFromInline internal func list(_ localizations: (_APILocalization) -> String) -> String { // @exempt(from: tests)
     var included: Set<String> = []
     let result = _APILocalization.cases.map(localizations).filter { (message) in // @exempt(from: tests)
         if included.contains(message) { // @exempt(from: tests)
@@ -49,7 +49,7 @@ public func _unreachable(function: String = #function, file: StaticString = #fil
     _preconditionFailure(_unreachableMessage(function: function, file: file, line: line, column: column), file: file, line: line)
 }
 
-@_inlineable public func _assert(_ condition: @autoclosure () -> Bool, _ message: (_APILocalization) -> String, file: StaticString = #file, line: UInt = #line) {
+@inlinable public func _assert(_ condition: @autoclosure () -> Bool, _ message: (_APILocalization) -> String, file: StaticString = #file, line: UInt = #line) {
     Swift.assert(condition, list(message), file: file, line: line)
 }
 

@@ -48,7 +48,7 @@ extension Addable {
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to add.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 
@@ -76,7 +76,7 @@ extension Addable where Self : Strideable, Self.Stride == Self {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
         // Disambiguate Addable vs Strideable
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }

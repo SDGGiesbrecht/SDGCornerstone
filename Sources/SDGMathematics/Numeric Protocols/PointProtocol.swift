@@ -78,7 +78,7 @@ extension PointProtocol {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 
@@ -88,7 +88,7 @@ extension PointProtocol {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to subtract.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Vector) -> Self {
+    @inlinable public static func − (precedingValue: Self, followingValue: Vector) -> Self {
         return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
     }
 
@@ -98,7 +98,7 @@ extension PointProtocol {
     /// - Parameters:
     ///     - precedingValue: The point to modify.
     ///     - followingValue: The vector to subtract.
-    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Vector) {
+    @inlinable public static func −= (precedingValue: inout Self, followingValue: Vector) {
         precedingValue += −followingValue
     }
 }
@@ -114,7 +114,7 @@ extension PointProtocol where Self.Vector == Self {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
         // Disambiguate Addable.+ vs PointProtocol.+
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
@@ -125,7 +125,7 @@ extension PointProtocol where Self.Vector == Self {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to subtract.
-    @_inlineable public static func − (precedingValue: Self, followingValue: Vector) -> Self {
+    @inlinable public static func − (precedingValue: Self, followingValue: Vector) -> Self {
         // Disambiguate Self − Vector vs Self − Self
         return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
     }
@@ -140,7 +140,7 @@ extension PointProtocol where Self : Strideable {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to add.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         // Disambiguate PointProtocol vs Strideable
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
@@ -155,7 +155,7 @@ extension PointProtocol where Self : Strideable, Self.Stride == Self.Vector {
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         // Disambiguate PointProtocol.+ vs Strideable.+
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
@@ -170,7 +170,7 @@ extension PointProtocol where Self.Vector == Self, Self : Strideable, Self.Strid
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
         // Disambiguate PointProtocol.+ vs Strideable.+
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }

@@ -19,60 +19,60 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Initialization
 
-    @_inlineable @_versioned internal init(unsafeString: String) {
+    @inlinable internal init(unsafeString: String) {
         self.string = unsafeString
     }
 
     /// Creates a string from a scalar.
-    @_inlineable public init(_ scalar: Unicode.Scalar) {
+    @inlinable public init(_ scalar: Unicode.Scalar) {
         self.init(String(scalar))
     }
 
     /// Creates a string from an extended grapheme cluster.
-    @_inlineable public init(_ cluster: ExtendedGraphemeCluster) {
+    @inlinable public init(_ cluster: ExtendedGraphemeCluster) {
         self.init(String(cluster))
     }
 
     /// Creates a string from a `String`.
-    @_inlineable public init(_ string: String) {
+    @inlinable public init(_ string: String) {
         self.string = StrictString.normalizeAsString(string)
     }
 
     /// Creates a string from a `StaticString`.
-    @_inlineable public init(_ string: StaticString) {
+    @inlinable public init(_ string: StaticString) {
         self.init("\(string)")
     }
 
     /// Creates a string from a `StrictString`.
-    @_inlineable public init(_ string: StrictString) {
+    @inlinable public init(_ string: StrictString) {
         self = string
     }
 
     // #documentation(SDGCornerstone.StringFamily.init(clusters:))
     /// Creates a string from a collection of clusters.
-    @_inlineable public init(_ clusters: ClusterView) {
+    @inlinable public init(_ clusters: ClusterView) {
         self = clusters.string
     }
 
     // MARK: - Properties
 
-    @_versioned internal var string: String
+    @usableFromInline internal var string: String
 
     // MARK: - Normalization
 
-    @_inlineable @_versioned internal static func normalizeAsString(_ string: String) -> String {
+    @inlinable internal static func normalizeAsString(_ string: String) -> String {
         return string.decomposedStringWithCompatibilityMapping
     }
 
-    @_inlineable @_versioned internal static func normalize(_ string: String) -> StrictString {
+    @inlinable internal static func normalize(_ string: String) -> StrictString {
         return StrictString(unsafeString: normalizeAsString(string))
     }
 
-    @_inlineable @_versioned internal static func normalize(_ scalars: String.ScalarView) -> StrictString {
+    @inlinable internal static func normalize(_ scalars: String.ScalarView) -> StrictString {
         return normalize(String(scalars))
     }
 
-    @_inlineable @_versioned internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Element == UnicodeScalar {
+    @inlinable internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Element == UnicodeScalar {
         switch sequence {
 
         // Already normalized.
@@ -97,7 +97,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to add.
-    @_inlineable public static func += (precedingValue: inout StrictString, followingValue: StrictString) {
+    @inlinable public static func += (precedingValue: inout StrictString, followingValue: StrictString) {
         precedingValue.append(contentsOf: followingValue)
     }
 
@@ -108,7 +108,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - i: The following index.
-    @_inlineable public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
+    @inlinable public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(before: i)
     }
 
@@ -119,7 +119,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - encoder: The encoder to write data to.
-    @_inlineable public func encode(to encoder: Encoder) throws {
+    @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: description)
     }
 
@@ -128,7 +128,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - decoder: The decoder to read data from.
-    @_inlineable public init(from decoder: Decoder) throws {
+    @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: String.self, convert: { StrictString($0) })
     }
 
@@ -136,13 +136,13 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.Collection.startIndex)
     /// The position of the first element in a non‐empty collection.
-    @_inlineable public var startIndex: String.ScalarView.Index {
+    @inlinable public var startIndex: String.ScalarView.Index {
         return string.scalars.startIndex
     }
 
     // #documentation(SDGCornerstone.Collection.endIndex)
     /// The position following the last valid index.
-    @_inlineable public var endIndex: String.ScalarView.Index {
+    @inlinable public var endIndex: String.ScalarView.Index {
         return string.scalars.endIndex
     }
 
@@ -151,13 +151,13 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    @_inlineable public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
+    @inlinable public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(after: i)
     }
 
     // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
-    @_inlineable public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
+    @inlinable public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
         return string.scalars[position]
     }
 
@@ -169,7 +169,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     /// - Parameters:
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
-    @_inlineable public static func < (precedingValue: StrictString, followingValue: StrictString) -> Bool {
+    @inlinable public static func < (precedingValue: StrictString, followingValue: StrictString) -> Bool {
         return precedingValue.string < followingValue.string
     }
 
@@ -177,7 +177,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return string
     }
 
@@ -189,7 +189,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     /// - Parameters:
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
-    @_inlineable public static func == (precedingValue: StrictString, followingValue: StrictString) -> Bool {
+    @inlinable public static func == (precedingValue: StrictString, followingValue: StrictString) -> Bool {
         return precedingValue.string.scalars.elementsEqual(followingValue.string.scalars)
     }
 
@@ -200,7 +200,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     ///
     /// - Parameters:
     ///     - stringLiteral: The string literal.
-    @_inlineable public init(stringLiteral: String) {
+    @inlinable public init(stringLiteral: String) {
         self.init(stringLiteral)
     }
 
@@ -216,17 +216,17 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
     /// Creates a new, empty collection.
-    @_inlineable public init() {
+    @inlinable public init() {
         self.init(unsafeString: String())
     }
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.init(_:))
     /// Creates a new instance of a collection containing the elements of a sequence.
-    @_inlineable public init<S : Sequence>(_ elements: S) where S.Element == Element {
+    @inlinable public init<S : Sequence>(_ elements: S) where S.Element == Element {
         self = StrictString.normalize(elements)
     }
 
-    @_inlineable @_versioned internal static func concatenateStrictStrings(_ first: StrictString, _ second: StrictString) -> StrictString {
+    @inlinable internal static func concatenateStrictStrings(_ first: StrictString, _ second: StrictString) -> StrictString {
 
         if first.isEmpty {
             return second
@@ -253,19 +253,19 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
     /// Appends the contents of the sequence to the end of the collection.
-    @_inlineable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == UnicodeScalar {
+    @inlinable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == UnicodeScalar {
         self = StrictString.concatenateStrictStrings(self, StrictString.normalize(newElements))
     }
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
-    @_inlineable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == UnicodeScalar {
+    @inlinable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == UnicodeScalar {
         replaceSubrange(i ..< i, with: newElements)
     }
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
-    @_inlineable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
+    @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == UnicodeScalar {
 
         let preceding = StrictString(unsafeString: String(string.scalars[..<subrange.lowerBound]))
         let succeeding = StrictString(unsafeString: String(string.scalars[subrange.upperBound...]))
@@ -279,7 +279,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.StringFamily.scalars)
     /// A view of a string’s contents as a collection of Unicode scalars.
-    @_inlineable public var scalars: StrictString {
+    @inlinable public var scalars: StrictString {
         get {
             return self
         }
@@ -290,7 +290,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.StringFamily.clusters)
     /// A view of a string’s contents as a collection of extended grapheme clusters.
-    @_inlineable public var clusters: ClusterView {
+    @inlinable public var clusters: ClusterView {
         get {
             return ClusterView(self)
         }
@@ -303,7 +303,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.TextOutputStream.write(_:))
     /// Appends the given string to the stream.
-    @_inlineable public mutating func write(_ string: String) {
+    @inlinable public mutating func write(_ string: String) {
         self.append(contentsOf: string.scalars)
     }
 
@@ -311,7 +311,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.TextOutputStreamable.write(to:))
     /// Writes a textual representation of this instance into the given output stream.
-    @_inlineable public func write<Target>(to target: inout Target) where Target : TextOutputStream {
+    @inlinable public func write<Target>(to target: inout Target) where Target : TextOutputStream {
         target.write(string)
     }
 }

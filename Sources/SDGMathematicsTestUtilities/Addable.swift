@@ -13,7 +13,7 @@
  */
 
 /// Tests a type’s conformance to Addable.
-@_inlineable public func testAddableConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : Addable, T : Equatable {
+@inlinable public func testAddableConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : Addable, T : Equatable {
     test(operator: (+, "+"), on: (augend, addend), returns: sum, file: file, line: line)
     test(assignmentOperator: (+=, "+="), with: (augend, addend), resultsIn: sum, file: file, line: line)
 }

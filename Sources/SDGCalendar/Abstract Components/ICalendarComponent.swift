@@ -25,7 +25,7 @@ extension ICalendarComponent where Self : ISOCalendarComponent {
 
     // #documentation(SDGCornerstone.ICalendarCompenent.inICalendarFormat())
     /// Returns a string representation in the iCalendar format.
-    @_inlineable public func inICalendarFormat() -> StrictString {
+    @inlinable public func inICalendarFormat() -> StrictString {
         return inISOFormat()
     }
 }

@@ -37,7 +37,7 @@ extension TwoDimensionalVector {
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// The difference in *y*.
-    @_inlineable public init(Δx : Scalar, Δy : Scalar) {
+    @inlinable public init(Δx : Scalar, Δy : Scalar) {
         self = Self.additiveIdentity
         self.Δx = Δx
         self.Δy = Δy
@@ -48,12 +48,12 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
     // MARK: - where Self.Scalar : RealArithmetic
 
     /// Creates a vector from an angular direction and a length.
-    @_inlineable public init(direction: Angle<Scalar>, length: Scalar) {
+    @inlinable public init(direction: Angle<Scalar>, length: Scalar) {
         self.init(Δx : cos(direction) × length, Δy : sin(direction) × length)
     }
 
     /// The angular direction of the vector.
-    @_inlineable public var direction: Angle<Scalar> {
+    @inlinable public var direction: Angle<Scalar> {
         get {
             // Intercept Division by Zero
             if Δx == 0 {
@@ -88,7 +88,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
     }
 
     /// The length of the vector.
-    @_inlineable public var length: Scalar {
+    @inlinable public var length: Scalar {
         get {
             return √(Δx ↑ 2 + Δy ↑ 2)
         }
@@ -105,7 +105,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to add.
-    @_inlineable public static func += (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
         precedingValue.Δx += followingValue.Δx
         precedingValue.Δy += followingValue.Δy
     }
@@ -118,7 +118,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
-    @_inlineable public static func −= (precedingValue: inout Self, followingValue: Self) {
+    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.Δx −= followingValue.Δx
         precedingValue.Δy −= followingValue.Δy
     }
@@ -127,7 +127,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
-    @_inlineable public var hashValue: Int {
+    @inlinable public var hashValue: Int {
         return Δx.hashValue ^ Δy.hashValue
     }
 
@@ -139,7 +139,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The scalar coefficient by which to multiply.
-    @_inlineable public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
+    @inlinable public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ×= followingValue
         precedingValue.Δy ×= followingValue
     }
@@ -150,7 +150,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
     /// - Parameters:
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The divisor.
-    @_inlineable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
+    @inlinable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ÷= followingValue
         precedingValue.Δy ÷= followingValue
     }

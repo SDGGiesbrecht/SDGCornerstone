@@ -32,7 +32,7 @@ extension MarkupPlaygroundDisplay {
 
     // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
     /// Returns the custom playground description for this instance.
-    @_inlineable public var playgroundDescription: Any {
+    @inlinable public var playgroundDescription: Any {
         return playgroundDescriptionMarkup()
     }
 
@@ -40,7 +40,7 @@ extension MarkupPlaygroundDisplay {
 
     // #documentation(SDGCornerstone.CustomStringConvertible.description)
     /// A textual representation of the instance.
-    @_inlineable public var description: String {
+    @inlinable public var description: String {
         return String(playgroundDescriptionMarkup().rawTextApproximation())
     }
 }
