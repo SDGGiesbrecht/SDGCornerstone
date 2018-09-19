@@ -31,8 +31,8 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : CustomString
 
     // MARK: - Properties
 
-    @_versioned internal let a: Base1
-    @_versioned internal let b: Base2
+    @usableFromInline internal let a: Base1
+    @usableFromInline internal let b: Base2
 
     // MARK: - CustomStringConvertible
 

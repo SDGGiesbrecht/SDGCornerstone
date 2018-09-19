@@ -26,7 +26,7 @@ extension RationalNumberProtocol {
         return ¬number.contains(where: { $0 ∉ CharacterSet.decimalDigits ∪ ["−"] })
     }
 
-    @_versioned internal func parenthesizeIfNecessary(_ number: inout StrictString) {
+    @usableFromInline internal func parenthesizeIfNecessary(_ number: inout StrictString) {
         if ¬digitsOnly(number) {
             number.prepend("(")
             number.append(")")

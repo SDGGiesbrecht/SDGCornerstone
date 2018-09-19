@@ -16,7 +16,7 @@ import SDGMathematics
 
 extension IntegralArithmetic {
 
-    @inlinable @_versioned internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+    @inlinable @usableFromInline internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
         var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
         if self.isNegative {
             digits.prepend("−")

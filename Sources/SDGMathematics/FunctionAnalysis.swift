@@ -18,7 +18,7 @@ import SDGControlFlow
 
 // Local Extremes
 
-@inlinable @_versioned internal func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, within bounds: CountableClosedRange<I>?, inFunction function: (I) -> O, isCloser: (O, O) -> Bool) -> I where I.Vector : IntegerProtocol {
+@inlinable @usableFromInline internal func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, within bounds: CountableClosedRange<I>?, inFunction function: (I) -> O, isCloser: (O, O) -> Bool) -> I where I.Vector : IntegerProtocol {
     var location = location
 
     _assert(bounds == nil ∨ bounds!.contains(location), { (localization: _APILocalization) -> String in

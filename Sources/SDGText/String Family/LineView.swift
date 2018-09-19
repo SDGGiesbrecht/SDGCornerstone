@@ -19,18 +19,18 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Initialization
 
-    @inlinable @_versioned internal init(_ base: Base) {
+    @inlinable @usableFromInline internal init(_ base: Base) {
         self.base = base
         startIndex = Index(start: base.scalars.startIndex)
     }
 
     // MARK: - Properties
 
-    @_versioned internal var base: Base
+    @usableFromInline internal var base: Base
 
     // MARK: - Conversions
 
-    @inlinable @_versioned internal func line(for scalar: String.ScalarView.Index) -> LineViewIndex {
+    @inlinable @usableFromInline internal func line(for scalar: String.ScalarView.Index) -> LineViewIndex {
         if scalar == base.scalars.endIndex {
             return endIndex
         }

@@ -25,7 +25,7 @@ extension RangeReplaceableCollection {
     // @documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
     /// Appends the contents of the sequence to the end of the collection.
 
-    @inlinable @_versioned internal mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
+    @inlinable @usableFromInline internal mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
         append(contentsOf: newElements)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
@@ -37,7 +37,7 @@ extension RangeReplaceableCollection {
     // @documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
 
-    @inlinable @_versioned internal mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
+    @inlinable @usableFromInline internal mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
         insert(contentsOf: newElements, at: i)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
@@ -49,7 +49,7 @@ extension RangeReplaceableCollection {
     // @documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
 
-    @inlinable @_versioned internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
+    @inlinable @usableFromInline internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
@@ -57,7 +57,7 @@ extension RangeReplaceableCollection {
     @inlinable public mutating func replaceSubrange(_ subrange: Range<Index>, with newElements: Self) {
         replaceSubrangeAsCollection(subrange, with: newElements)
     }
-    @inlinable @_versioned internal mutating func replaceSubrangeAsCollection<R, C>(_ subrange: R, with newElements: C) where R : RangeExpression, R.Bound == Self.Index, C : Collection, C.Element == Self.Element {
+    @inlinable @usableFromInline internal mutating func replaceSubrangeAsCollection<R, C>(_ subrange: R, with newElements: C) where R : RangeExpression, R.Bound == Self.Index, C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
@@ -83,7 +83,7 @@ extension RangeReplaceableCollection {
         return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: newElements)
     }
 
-    @inlinable @_versioned internal func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
+    @inlinable @usableFromInline internal func appendingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         return appending(contentsOf: newElements)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollectionType.appending(contentsOf:))
@@ -112,7 +112,7 @@ extension RangeReplaceableCollection {
         insert(contentsOf: newElements, at: startIndex)
     }
 
-    @inlinable @_versioned internal mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
+    @inlinable @usableFromInline internal mutating func prependAsCollection<C : Collection>(contentsOf newElements: C) where C.Element == Self.Element {
         prepend(contentsOf: newElements)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:))
@@ -141,7 +141,7 @@ extension RangeReplaceableCollection {
         return nonmutatingVariant(of: { $0.prepend(contentsOf: $1) }, on: self, with: newElements)
     }
 
-    @inlinable @_versioned internal func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
+    @inlinable @usableFromInline internal func prependingAsCollection<C : Collection>(contentsOf newElements: C) -> Self where C.Element == Self.Element {
         return prepending(contentsOf: newElements)
     }
     // #documentation(SDGCornerstone.RangeReplaceableCollection.prepend(contentsOf:))

@@ -59,7 +59,7 @@ extension RationalArithmetic {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
 
-    @inlinable @_versioned internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
+    @inlinable @usableFromInline internal mutating func raiseRationalNumberToThePowerOf(rationalNumber exponent: Self) {
 
         _assert(exponent.isIntegral, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)

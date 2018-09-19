@@ -136,7 +136,7 @@ extension ComparableSet {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
     }
 
-    @inlinable @_versioned internal func isDisjointAsComparableSet(with other: Self) -> Bool {
+    @inlinable @usableFromInline internal func isDisjointAsComparableSet(with other: Self) -> Bool {
         return ¬overlaps(other)
     }
     // #documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))

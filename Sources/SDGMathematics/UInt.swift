@@ -235,7 +235,7 @@ extension UIntFamily {
 }
 
 extension BinaryInteger {
-    @inlinable @_versioned internal init<U : UIntFamily>(asBinaryIntegerWithUInt uInt: U) {
+    @inlinable @usableFromInline internal init<U : UIntFamily>(asBinaryIntegerWithUInt uInt: U) {
         self.init(uInt)
     }
 }

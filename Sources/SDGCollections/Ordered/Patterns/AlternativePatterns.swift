@@ -39,7 +39,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
 
     // MARK: - Properties
 
-    @_versioned internal var alternatives: [Pattern<Element>]
+    @usableFromInline internal var alternatives: [Pattern<Element>]
 
     // MARK: - Pattern
 

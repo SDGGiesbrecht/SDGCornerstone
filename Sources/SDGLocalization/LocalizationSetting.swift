@@ -194,7 +194,7 @@ public struct LocalizationSetting : Codable, Equatable {
 
     // MARK: - Properties
 
-    @_versioned internal let orderOfPrecedence: [[String]]
+    @usableFromInline internal let orderOfPrecedence: [[String]]
 
     // MARK: - Usage
 

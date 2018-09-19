@@ -32,22 +32,22 @@ public struct Preference : Equatable, TransparentWrapper {
         return Preference(propertyListObject: nil)
     }
 
-    @_versioned internal init(propertyListObject: NSObject?) {
+    @usableFromInline internal init(propertyListObject: NSObject?) {
         self.propertyListObject = propertyListObject
     }
 
     // MARK: - Properties
 
-    @_versioned internal var propertyListObject: NSObject? {
+    @usableFromInline internal var propertyListObject: NSObject? {
         didSet {
             cache = Cache()
         }
     }
-    @_versioned internal class Cache {
+    @usableFromInline internal class Cache {
         fileprivate init() {}
-        @_versioned internal var types: [ObjectIdentifier: Any?] = [:]
+        @usableFromInline internal var types: [ObjectIdentifier: Any?] = [:]
     }
-    @_versioned internal var cache: Cache = Cache()
+    @usableFromInline internal var cache: Cache = Cache()
 
     // MARK: - Usage
 

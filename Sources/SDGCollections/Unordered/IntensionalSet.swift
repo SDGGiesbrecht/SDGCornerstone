@@ -24,7 +24,7 @@ public struct IntensionalSet<Member> : SetDefinition {
 
     // MARK: - Properties
 
-    @_versioned internal let condition: (Element) -> Bool
+    @usableFromInline internal let condition: (Element) -> Bool
 
     // MARK: - SetDefinition
 

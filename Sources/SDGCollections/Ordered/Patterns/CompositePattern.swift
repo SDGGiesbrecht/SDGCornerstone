@@ -29,7 +29,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
 
     // MARK: - Properties
 
-    @_versioned internal var components: [Pattern<Element>]
+    @usableFromInline internal var components: [Pattern<Element>]
 
     // MARK: - ExpressibleByArrayLiteral
 

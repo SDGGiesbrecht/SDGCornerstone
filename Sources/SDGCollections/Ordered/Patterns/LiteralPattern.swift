@@ -29,7 +29,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
 
     // MARK: - Properties
 
-    @_versioned internal let literal: [Element]
+    @usableFromInline internal let literal: [Element]
 
     // MARK: - ExpressibleByArrayLiteral
 

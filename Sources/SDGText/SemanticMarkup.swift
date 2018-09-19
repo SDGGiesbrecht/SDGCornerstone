@@ -21,10 +21,10 @@ import SDGControlFlow
 // @example(markupEncoding)
 private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
 
-@_versioned internal let beginSuperscript: UnicodeScalar = "\u{107000}"
-@_versioned internal let endSuperscript: UnicodeScalar = "\u{107001}"
-@_versioned internal let beginSubscript: UnicodeScalar = "\u{107002}"
-@_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"
+@usableFromInline internal let beginSuperscript: UnicodeScalar = "\u{107000}"
+@usableFromInline internal let endSuperscript: UnicodeScalar = "\u{107001}"
+@usableFromInline internal let beginSubscript: UnicodeScalar = "\u{107002}"
+@usableFromInline internal let endSubscript: UnicodeScalar = "\u{107003}"
 // @endExample
 
 // #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
@@ -38,10 +38,10 @@ private func helpSwiftSyntax() {} // @exempt(from: tests)
 /// ```swift
 /// private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
 ///
-/// @_versioned internal let beginSuperscript: UnicodeScalar = "\u{107000}"
-/// @_versioned internal let endSuperscript: UnicodeScalar = "\u{107001}"
-/// @_versioned internal let beginSubscript: UnicodeScalar = "\u{107002}"
-/// @_versioned internal let endSubscript: UnicodeScalar = "\u{107003}"
+/// @usableFromInline internal let beginSuperscript: UnicodeScalar = "\u{107000}"
+/// @usableFromInline internal let endSuperscript: UnicodeScalar = "\u{107001}"
+/// @usableFromInline internal let beginSubscript: UnicodeScalar = "\u{107002}"
+/// @usableFromInline internal let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
 public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay {
 

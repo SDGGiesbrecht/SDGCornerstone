@@ -26,7 +26,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     }
     // MARK: - Properties
 
-    @_versioned internal var condition: (Element) -> Bool
+    @usableFromInline internal var condition: (Element) -> Bool
 
     // MARK: - Pattern
 

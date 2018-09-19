@@ -124,7 +124,7 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    @inlinable @_versioned internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+    @inlinable @usableFromInline internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
         let backwards: ReversedCollection<Self> = reversed()
         guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
             return nil
@@ -254,7 +254,7 @@ extension SearchableBidirectionalCollection {
         return _lastMatch(for: pattern)
     }
 
-    @inlinable @_versioned internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+    @inlinable @usableFromInline internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
         let backwards: ReversedCollection<Self> = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
@@ -283,7 +283,7 @@ extension SearchableBidirectionalCollection {
         return _hasSuffix(pattern)
     }
 
-    @inlinable @_versioned internal func _commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
+    @inlinable @usableFromInline internal func _commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         return PatternMatch(range: forward(reversed().commonPrefix(with: other.reversed()).range), in: self)
     }
     // #documentation(SDGCornerstone.Collection.commonPrefix(with:))
@@ -303,7 +303,7 @@ extension SearchableBidirectionalCollection {
         return _commonSuffix(with: other)
     }
 
-    @inlinable @_versioned internal func _difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableBidirectionalCollection, C.Element == Self.Element {
+    @inlinable @usableFromInline internal func _difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableBidirectionalCollection, C.Element == Self.Element {
 
         let suffixStart = commonSuffix(with: other).range.lowerBound
         let suffixLength = distance(from: suffixStart, to: endIndex)

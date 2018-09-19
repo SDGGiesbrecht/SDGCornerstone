@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@_versioned internal func list(_ localizations: (_APILocalization) -> String) -> String { // @exempt(from: tests)
+@usableFromInline internal func list(_ localizations: (_APILocalization) -> String) -> String { // @exempt(from: tests)
     var included: Set<String> = []
     let result = _APILocalization.cases.map(localizations).filter { (message) in // @exempt(from: tests)
         if included.contains(message) { // @exempt(from: tests)

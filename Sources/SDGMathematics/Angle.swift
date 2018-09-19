@@ -52,7 +52,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
     /// The numeric value in radians.
     public var inRadians: Scalar = Scalar.additiveIdentity
 
-    @inlinable @_versioned internal static var radiansPerRotation: Scalar {
+    @inlinable @usableFromInline internal static var radiansPerRotation: Scalar {
         return Scalar.τ
     }
     /// The numeric value in rotations.
@@ -65,7 +65,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         }
     }
 
-    @inlinable @_versioned internal static var radiansPerDegree: Scalar {
+    @inlinable @usableFromInline internal static var radiansPerDegree: Scalar {
         return radiansPerRotation ÷ 360
     }
     /// The numeric value in degrees.
@@ -78,7 +78,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         }
     }
 
-    @inlinable @_versioned internal static var radiansPerMinute: Scalar {
+    @inlinable @usableFromInline internal static var radiansPerMinute: Scalar {
         return radiansPerDegree ÷ 60
     }
     /// The numeric value in minutes.
@@ -91,7 +91,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         }
     }
 
-    @inlinable @_versioned internal static var radiansPerSecond: Scalar {
+    @inlinable @usableFromInline internal static var radiansPerSecond: Scalar {
         return radiansPerMinute ÷ 60
     }
     /// The numeric value in seconds.
@@ -104,7 +104,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
         }
     }
 
-    @inlinable @_versioned internal static var radiansPerGradian: Scalar {
+    @inlinable @usableFromInline internal static var radiansPerGradian: Scalar {
         return radiansPerRotation ÷ 400
     }
     /// The numeric value in gradians.

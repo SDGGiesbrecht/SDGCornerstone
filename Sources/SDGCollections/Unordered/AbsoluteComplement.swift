@@ -29,7 +29,7 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
 
     // MARK: - Properties
 
-    @_versioned internal let base: Base
+    @usableFromInline internal let base: Base
 
     // MARK: - CustomStringConvertible
 

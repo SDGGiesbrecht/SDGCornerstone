@@ -19,7 +19,7 @@ public struct LineViewIndex : Comparable, Equatable {
 
     // MARK: - Initialization
 
-    @_versioned internal init(start: String.ScalarView.Index, newline: Range<String.ScalarView.Index>? = nil) {
+    @usableFromInline internal init(start: String.ScalarView.Index, newline: Range<String.ScalarView.Index>? = nil) {
         self.start = start
         cache.newline = newline
     }
@@ -27,23 +27,23 @@ public struct LineViewIndex : Comparable, Equatable {
     private init() {
         start = nil
     }
-    @_versioned internal static func endIndex() -> LineViewIndex {
+    @usableFromInline internal static func endIndex() -> LineViewIndex {
         return LineViewIndex()
     }
 
     // MARK: - Properties
 
-    @_versioned internal class Cache {
+    @usableFromInline internal class Cache {
         fileprivate init() {}
-        @_versioned internal var newline: Range<String.ScalarView.Index>?
+        @usableFromInline internal var newline: Range<String.ScalarView.Index>?
     }
-    @_versioned internal var cache = Cache()
+    @usableFromInline internal var cache = Cache()
 
-    @_versioned internal let start: String.ScalarView.Index? // nil indicates the end index
+    @usableFromInline internal let start: String.ScalarView.Index? // nil indicates the end index
 
     @_specialize(exported: true, where S == StrictString.ScalarView)
     @_specialize(exported: true, where S == String.ScalarView)
-    @inlinable @_versioned internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? {
+    @inlinable @usableFromInline internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? {
         guard let startIndex = start else {
             return nil
         }

@@ -19,7 +19,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Initialization
 
-    @inlinable @_versioned internal init(unsafeString: String) {
+    @inlinable @usableFromInline internal init(unsafeString: String) {
         self.string = unsafeString
     }
 
@@ -56,23 +56,23 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Properties
 
-    @_versioned internal var string: String
+    @usableFromInline internal var string: String
 
     // MARK: - Normalization
 
-    @inlinable @_versioned internal static func normalizeAsString(_ string: String) -> String {
+    @inlinable @usableFromInline internal static func normalizeAsString(_ string: String) -> String {
         return string.decomposedStringWithCompatibilityMapping
     }
 
-    @inlinable @_versioned internal static func normalize(_ string: String) -> StrictString {
+    @inlinable @usableFromInline internal static func normalize(_ string: String) -> StrictString {
         return StrictString(unsafeString: normalizeAsString(string))
     }
 
-    @inlinable @_versioned internal static func normalize(_ scalars: String.ScalarView) -> StrictString {
+    @inlinable @usableFromInline internal static func normalize(_ scalars: String.ScalarView) -> StrictString {
         return normalize(String(scalars))
     }
 
-    @inlinable @_versioned internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Element == UnicodeScalar {
+    @inlinable @usableFromInline internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString where S.Element == UnicodeScalar {
         switch sequence {
 
         // Already normalized.
@@ -226,7 +226,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         self = StrictString.normalize(elements)
     }
 
-    @inlinable @_versioned internal static func concatenateStrictStrings(_ first: StrictString, _ second: StrictString) -> StrictString {
+    @inlinable @usableFromInline internal static func concatenateStrictStrings(_ first: StrictString, _ second: StrictString) -> StrictString {
 
         if first.isEmpty {
             return second

@@ -19,8 +19,8 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // MARK: - Properties
 
-    @_versioned internal let xToY: [X: Y]
-    @_versioned internal let yToX: [Y: X]
+    @usableFromInline internal let xToY: [X: Y]
+    @usableFromInline internal let yToX: [Y: X]
 
     // MARK: - Initialization
 

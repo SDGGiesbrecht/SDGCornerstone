@@ -117,14 +117,14 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
 
     // MARK: - Decodable
 
-    @inlinable @_versioned internal init(usingOrdinalFrom decoder: Decoder) throws {
+    @inlinable @usableFromInline internal init(usingOrdinalFrom decoder: Decoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
         try self.init(from: decoder, via: Vector.self, convert: { Self(rawValue: $0 − (1 as Vector)) })
     }
 
     // MARK: - Encodable
 
-    @inlinable @_versioned internal func encodeUsingOrdinal(to encoder: Encoder) throws {
+    @inlinable @usableFromInline internal func encodeUsingOrdinal(to encoder: Encoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
         try encode(to: encoder, via: ordinal)
     }

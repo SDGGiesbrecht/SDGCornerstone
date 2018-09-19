@@ -22,21 +22,21 @@ extension StrictString {
 
         // MARK: - Initialization
 
-        @inlinable @_versioned internal init(_ string: StrictString) {
+        @inlinable @usableFromInline internal init(_ string: StrictString) {
             self.string = string
         }
 
         // MARK: - Properties
 
-        @_versioned internal var string: StrictString
+        @usableFromInline internal var string: StrictString
 
         // MARK: - Normalization
 
-        @inlinable @_versioned internal static func normalize(_ string: String) -> StrictString.ClusterView {
+        @inlinable @usableFromInline internal static func normalize(_ string: String) -> StrictString.ClusterView {
             return StrictString(string).clusters
         }
 
-        @inlinable @_versioned internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString.ClusterView where S.Element == ExtendedGraphemeCluster {
+        @inlinable @usableFromInline internal static func normalize<S : Sequence>(_ sequence: S) -> StrictString.ClusterView where S.Element == ExtendedGraphemeCluster {
             switch sequence {
 
             // Already normalized.

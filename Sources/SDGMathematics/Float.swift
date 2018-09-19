@@ -130,7 +130,7 @@ extension FloatFamily {
         operand = operand.squareRoot()
     }
 
-    @inlinable @_versioned internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
+    @inlinable @usableFromInline internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
 
         _assert(self > 0, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
@@ -535,7 +535,7 @@ extension FloatFamily {
 }
 
 extension FloatingPoint {
-    @inlinable @_versioned internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
+    @inlinable @usableFromInline internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
         return rounded(rule)
     }
 }

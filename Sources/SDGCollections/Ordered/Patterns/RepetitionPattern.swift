@@ -20,7 +20,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    @inlinable @_versioned internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // @exempt(from: tests) False positive in Xcode 9.3.
+    @inlinable @usableFromInline internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // @exempt(from: tests) False positive in Xcode 9.3.
         _assert(count == nil ∨ count!.lowerBound.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization {
             case .englishCanada: // @exempt(from: tests)
@@ -33,7 +33,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         self.consumption = consumption
     }
 
-    @_versioned internal static func convert(_ range: CountableClosedRange<Int>?) -> CountableRange<Int>? {
+    @usableFromInline internal static func convert(_ range: CountableClosedRange<Int>?) -> CountableRange<Int>? {
         if let result = range {
             return result.lowerBound ..< result.upperBound + 1
         } else {
@@ -131,13 +131,13 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Properties
 
-    @_versioned internal var pattern: Pattern<Element>
-    @_versioned internal var count: CountableRange<Int>
-    @_versioned internal var consumption: Consumption
+    @usableFromInline internal var pattern: Pattern<Element>
+    @usableFromInline internal var count: CountableRange<Int>
+    @usableFromInline internal var consumption: Consumption
 
     // MARK: - Pattern
 
-    @inlinable @_versioned internal func checkNext<C : SearchableCollection>(in collection: C, at locations: inout [C.Index])  where C.Element == Element {
+    @inlinable @usableFromInline internal func checkNext<C : SearchableCollection>(in collection: C, at locations: inout [C.Index])  where C.Element == Element {
         locations = Array(locations.map({ (location: C.Index) -> [Range<C.Index>] in
             if location ≠ collection.endIndex {
                 return pattern.matches(in: collection, at: location)

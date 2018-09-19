@@ -39,7 +39,7 @@ public class Shared<Value> : TransparentWrapper {
         }
     }
 
-    @_versioned internal var observers: [(observer: Weak<AnyObject>, identifier: String)] = []
+    @usableFromInline internal var observers: [(observer: Weak<AnyObject>, identifier: String)] = []
 
     // MARK: - Observing
 

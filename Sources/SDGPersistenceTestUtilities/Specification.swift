@@ -18,7 +18,7 @@ import SDGControlFlow
 import SDGLogic
 import SDGCornerstoneLocalizations
 
-@_versioned internal var specificationDirectory: URL?
+@usableFromInline internal var specificationDirectory: URL?
 
 // #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
 private func helpSwiftSyntax() {} // @exempt(from: tests)

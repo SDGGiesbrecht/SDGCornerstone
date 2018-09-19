@@ -21,9 +21,9 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     private static let carriageReturn: Unicode.Scalar = "\u{D}"
     private static let lineFeed: Unicode.Scalar = "\u{A}"
-    @_versioned internal static let newlineCharacters = CharacterSet.newlines
+    @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
     internal static let newline = NewlinePattern(carriageReturnLineFeed: (carriageReturn, lineFeed))
-    @_versioned internal static let reverseNewline = NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
+    @usableFromInline internal static let reverseNewline = NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
 
     // MARK: - Initialization
 
@@ -34,8 +34,8 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     // MARK: - Properties
 
-    @_versioned internal let carriageReturn: Unicode.Scalar
-    @_versioned internal let lineFeed: Unicode.Scalar
+    @usableFromInline internal let carriageReturn: Unicode.Scalar
+    @usableFromInline internal let lineFeed: Unicode.Scalar
 
     // MARK: - Pattern
 

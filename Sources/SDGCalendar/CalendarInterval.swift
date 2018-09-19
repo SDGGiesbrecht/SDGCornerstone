@@ -20,7 +20,7 @@ import SDGCornerstoneLocalizations
 private let hebrewPartsPerDay = HebrewHour.hoursPerDay × HebrewPart.partsPerHour
 private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutesPerHour × GregorianSecond.secondsPerMinute
 
-@_versioned internal let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
+@usableFromInline internal let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 
 // #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
 private func helpSwiftSyntax() {} // @exempt(from: tests)
@@ -74,9 +74,9 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Properties
 
-    @_versioned internal var inUnits: Scalar = Scalar.additiveIdentity
+    @usableFromInline internal var inUnits: Scalar = Scalar.additiveIdentity
 
-    @inlinable @_versioned internal var unitsPerGregorianLeapYearCycle: Scalar {
+    @inlinable @usableFromInline internal var unitsPerGregorianLeapYearCycle: Scalar {
         return unitsPerDay × Scalar(GregorianYear.daysPerLeapYearCycle)
     }
     /// The numeric value in Gregorian leap year cycles.
@@ -89,7 +89,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         }
     }
 
-    @inlinable @_versioned internal var unitsPerHebrewMoon: Scalar {
+    @inlinable @usableFromInline internal var unitsPerHebrewMoon: Scalar {
         return Scalar(HebrewMonth.lengthOfMoon.inUnits)
     }
     /// The numeric value in Hebrew moons.
@@ -102,7 +102,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         }
     }
 
-    @inlinable @_versioned internal var unitsPerWeek: Scalar {
+    @inlinable @usableFromInline internal var unitsPerWeek: Scalar {
         return unitsPerDay × Scalar(HebrewWeekday.daysPerWeek)
     }
     /// The numeric value in weeks.
@@ -115,7 +115,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         }
     }
 
-    @inlinable @_versioned internal var unitsPerDay: Scalar {
+    @inlinable @usableFromInline internal var unitsPerDay: Scalar {
         return Scalar(integralUnitsPerDay)
     }
     /// The numeric value in days.
@@ -128,7 +128,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         }
     }
 
-    @inlinable @_versioned internal var unitsPerHour: Scalar {
+    @inlinable @usableFromInline internal var unitsPerHour: Scalar {
         return unitsPerDay ÷ Scalar(HebrewHour.hoursPerDay)
     }
     /// The numeric value in hours.
@@ -141,7 +141,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         }
     }
 
-    @inlinable @_versioned internal var unitsPerMinute: Scalar {
+    @inlinable @usableFromInline internal var unitsPerMinute: Scalar {
         return unitsPerHour ÷ Scalar(GregorianMinute.minutesPerHour)
     }
     /// The numeric value in minutes.
@@ -154,7 +154,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         }
     }
 
-    @inlinable @_versioned internal var unitsPerHebrewPart: Scalar {
+    @inlinable @usableFromInline internal var unitsPerHebrewPart: Scalar {
         return unitsPerHour ÷ Scalar(HebrewPart.partsPerHour)
     }
     /// The numeric value in Hebrew parts.
@@ -167,7 +167,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
         }
     }
 
-    @inlinable @_versioned internal var unitsPerSecond: Scalar {
+    @inlinable @usableFromInline internal var unitsPerSecond: Scalar {
         return unitsPerMinute ÷ Scalar(GregorianSecond.secondsPerMinute)
     }
     /// The numeric value in seconds.

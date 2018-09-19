@@ -188,7 +188,7 @@ extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, 
 
 extension SetAlgebra {
 
-    @inlinable @_versioned internal func isDisjointAsSetAlgebra(with other: Self) -> Bool {
+    @inlinable @usableFromInline internal func isDisjointAsSetAlgebra(with other: Self) -> Bool {
         return isDisjoint(with: other)
     }
 }

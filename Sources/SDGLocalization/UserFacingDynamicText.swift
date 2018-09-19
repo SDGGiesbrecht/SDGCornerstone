@@ -29,7 +29,7 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
 
     // MARK: - Properties
 
-    @_versioned internal var localize: (Localization, Arguments) -> Element
+    @usableFromInline internal var localize: (Localization, Arguments) -> Element
 
     // MARK: - Output
 
