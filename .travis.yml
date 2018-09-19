@@ -49,7 +49,7 @@ matrix:
       osx_image: xcode10
       script:
         - "swift package generate-xcodeproj"
-        - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package"
+        - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package >> /dev/null"
     - os: osx
       env:
         - JOB="tvOS"
