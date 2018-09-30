@@ -55,6 +55,3 @@ configuration.documentation.api.encryptedTravisCIDeploymentKey = "gzx7ARrCgcNJiD
 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
-
-// #workaround(Swift 4.1.2, Workspace would overwrite the 4.2 jobs.
-configuration.continuousIntegration.manage = false
