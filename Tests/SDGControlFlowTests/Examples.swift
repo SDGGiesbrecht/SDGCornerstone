@@ -20,7 +20,6 @@ extension Array where Element : Comparable {
 
     func sorted() -> Array {
         return nonmutatingVariant(of: { $0.sort() }, on: self)
-        //return nonmutatingVariant(of: Array.sort, on: self)
     }
     func appending(_ appendix: Array) -> Array {
         return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: appendix)
