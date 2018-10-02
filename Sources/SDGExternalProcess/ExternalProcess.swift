@@ -63,8 +63,8 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         }
 
         for location in locations {
-            if checkLocation(location, validate: validate) { // @exempt(from: tests) False coverage result in Xcode 9.3.
-                self.init(at: location)
+            if checkLocation(location, validate: validate) {
+                self.init(at: location) // @exempt(from: tests) False coverage result in Xcode 9.3.
                 return
             }
         }
