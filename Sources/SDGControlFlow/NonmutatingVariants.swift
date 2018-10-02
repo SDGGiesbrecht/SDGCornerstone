@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// MARK: - Methods
-
 // #example(1, nonmutatingVariant)
 /// Implements a nonmutating function based on its mutating counterpart.
 ///
@@ -36,100 +34,11 @@
 /// - Parameters:
 ///     - mutation: The mutating counterpart.
 ///     - self: The instance.
-@inlinable public func nonmutatingVariant<T>(of mutation: (inout T) -> Void, on `self`: T) -> T {
+@inlinable public func nonmutatingVariant<T>(of mutation: (inout T) throws -> Void, on `self`: T) rethrows -> T {
     var copy = `self`
-    mutation(&copy)
+    try mutation(&copy)
     return copy
 }
-
-// #example(1, nonmutatingVariant)
-/// Implements a nonmutating function based on its mutating counterpart.
-///
-/// ```swift
-/// extension Array where Element : Comparable {
-///     // MARK: - where Element : Comparable
-///
-///     func sorted() -> Array {
-///         return nonmutatingVariant(of: { $0.sort() }, on: self)
-///     }
-///     func appending(_ appendix: Array) -> Array {
-///         return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: appendix)
-///     }
-///     static func + (a: Array, b: Array) -> Array {
-///         return nonmutatingVariant(of: +=, on: a, with: b)
-///     }
-/// }
-/// ```
-///
-/// - Parameters:
-///     - mutation: The mutating counterpart.
-///     - self: The instance.
-///     - argument: An argument to pass to the mutating counterpart.
-@inlinable public func nonmutatingVariant<T, A>(of mutation: (inout T, A) -> Void, on `self`: T, with argument: A) -> T {
-    var copy = `self`
-    mutation(&copy, argument)
-    return copy
-}
-
-// #example(1, nonmutatingVariant)
-/// Implements a nonmutating function based on its mutating counterpart.
-///
-/// ```swift
-/// extension Array where Element : Comparable {
-///     // MARK: - where Element : Comparable
-///
-///     func sorted() -> Array {
-///         return nonmutatingVariant(of: { $0.sort() }, on: self)
-///     }
-///     func appending(_ appendix: Array) -> Array {
-///         return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: appendix)
-///     }
-///     static func + (a: Array, b: Array) -> Array {
-///         return nonmutatingVariant(of: +=, on: a, with: b)
-///     }
-/// }
-/// ```
-///
-/// - Parameters:
-///     - mutation: The mutating counterpart.
-///     - self: The instance.
-///     - argument: An argument to pass to the mutating counterpart.
-@inlinable public func nonmutatingVariant<T, A, B>(of mutation: (inout T, A, B) -> Void, on `self`: T, with arguments: (A, B)) -> T {
-    var copy = `self`
-    mutation(&copy, arguments.0, arguments.1)
-    return copy
-}
-
-// #example(1, nonmutatingVariant)
-/// Implements a nonmutating function based on its mutating counterpart.
-///
-/// ```swift
-/// extension Array where Element : Comparable {
-///     // MARK: - where Element : Comparable
-///
-///     func sorted() -> Array {
-///         return nonmutatingVariant(of: { $0.sort() }, on: self)
-///     }
-///     func appending(_ appendix: Array) -> Array {
-///         return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: appendix)
-///     }
-///     static func + (a: Array, b: Array) -> Array {
-///         return nonmutatingVariant(of: +=, on: a, with: b)
-///     }
-/// }
-/// ```
-///
-/// - Parameters:
-///     - mutation: The mutating counterpart.
-///     - self: The instance.
-///     - argument: An argument to pass to the mutating counterpart.
-@inlinable public func nonmutatingVariant<T, A, B, C>(of mutation: (inout T, A, B, C) -> Void, on `self`: T, with arguments: (A, B, C)) -> T {
-    var copy = `self`
-    mutation(&copy, arguments.0, arguments.1, arguments.2)
-    return copy
-}
-
-// MARK: - Operators
 
 // #example(1, nonmutatingVariant)
 /// Implements a nonmutating function based on its mutating counterpart.
@@ -182,6 +91,38 @@
 /// - Parameters:
 ///     - mutation: The mutating counterpart.
 ///     - self: The instance.
-@inlinable public func nonmutatingVariant<T>(of mutation: (inout T) throws -> Void, on `self`: T) rethrows -> T {
-    return try nonmutatingVariant(of: { (x: inout T, _: Void) in try mutation(&x) }, on: `self`, with: ())
+///     - argument: An argument to pass to the mutating counterpart.
+@inlinable public func nonmutatingVariant<T, A, B>(of mutation: (inout T, A, B) throws -> Void, on `self`: T, with arguments: (A, B)) rethrows -> T {
+    var copy = `self`
+    try mutation(&copy, arguments.0, arguments.1)
+    return copy
+}
+
+// #example(1, nonmutatingVariant)
+/// Implements a nonmutating function based on its mutating counterpart.
+///
+/// ```swift
+/// extension Array where Element : Comparable {
+///     // MARK: - where Element : Comparable
+///
+///     func sorted() -> Array {
+///         return nonmutatingVariant(of: { $0.sort() }, on: self)
+///     }
+///     func appending(_ appendix: Array) -> Array {
+///         return nonmutatingVariant(of: { $0.append(contentsOf: $1) }, on: self, with: appendix)
+///     }
+///     static func + (a: Array, b: Array) -> Array {
+///         return nonmutatingVariant(of: +=, on: a, with: b)
+///     }
+/// }
+/// ```
+///
+/// - Parameters:
+///     - mutation: The mutating counterpart.
+///     - self: The instance.
+///     - argument: An argument to pass to the mutating counterpart.
+@inlinable public func nonmutatingVariant<T, A, B, C>(of mutation: (inout T, A, B, C) throws -> Void, on `self`: T, with arguments: (A, B, C)) rethrows -> T {
+    var copy = `self`
+    try mutation(&copy, arguments.0, arguments.1, arguments.2)
+    return copy
 }
