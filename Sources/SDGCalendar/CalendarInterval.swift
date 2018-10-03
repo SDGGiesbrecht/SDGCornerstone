@@ -22,9 +22,6 @@ private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutes
 
 @usableFromInline internal let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 
-// #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
-private func helpSwiftSyntax() {} // @exempt(from: tests)
-
 /// A time interval.
 ///
 /// The units are all defined as fractions or multiples of days. This makes them convenient for calendaring, but not for physics. (Seconds are not SI seconds and leap seconds do not exist.)

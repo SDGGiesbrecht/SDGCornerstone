@@ -20,9 +20,6 @@ import SDGCornerstoneLocalizations
 
 @usableFromInline internal var specificationDirectory: URL?
 
-// #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
-private func helpSwiftSyntax() {} // @exempt(from: tests)
-
 /// Sets the directory where test specifications should be stored.
 ///
 /// The directory should be specified relative to a source file using some combination of `#file` and `deletingLastPathComponent()`.
