@@ -42,6 +42,7 @@ class SDGRandomizationAPITests : TestCase {
         }
         XCTAssert(sameOccurred)
         XCTAssert(differentOccurred)
+        _ = [1, 2, 3].randomElement(fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
     }
 
     func testCyclicalNumberGenerator() {

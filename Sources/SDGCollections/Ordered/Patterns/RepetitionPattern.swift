@@ -22,9 +22,9 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     @inlinable internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // @exempt(from: tests) False positive in Xcode 9.3.
         _assert(count == nil ∨ count!.lowerBound.isNonNegative, { (localization: _APILocalization) -> String in
-            switch localization {
-            case .englishCanada: // @exempt(from: tests)
-                return "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))" // @exempt(from: tests)
+            switch localization { // @exempt(from: tests)
+            case .englishCanada:
+                return "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))"
             }
         })
 

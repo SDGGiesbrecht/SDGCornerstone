@@ -76,18 +76,6 @@ extension RangeFamily {
     }
 }
 
-extension RangeFamily where Bound : Hashable {
-    // MARK: - where Bound : Hashable
-
-    // MARK: - Hashable
-
-    // #documentation(SDGCornerstone.Hashable.hashValue)
-    /// The hash value.
-    @inlinable public var hashValue: Int {
-        return lowerBound.hashValue ^ upperBound.hashValue
-    }
-}
-
 extension Range : RangeFamily {
 
     // MARK: - RangeFamily
