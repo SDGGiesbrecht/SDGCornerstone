@@ -13,7 +13,7 @@
  */
 
 #if canImport(Glibc)
-// #workaround(Swift 4.1.2, See move method below.)
+// #workaround(Swift 4.2, See move method below.)
 import Glibc
 #endif
 
@@ -153,7 +153,7 @@ extension FileManager {
         try createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
 
         #if canImport(Glibc)
-        // #workaround(Swift 4.1.2, Until Linux’ Foundation implements cross‐device moves.)
+        // #workaround(Swift 4.2, Until Linux’ Foundation implements cross‐device moves.)
         // See https://github.com/apple/swift-corelibs-foundation/blob/6c54c84c9e8f8e39b7556e5eb68f837cdb8824dc/Foundation/FileManager.swift#L559
 
         if ¬fileExists(atPath: destination.path) {
