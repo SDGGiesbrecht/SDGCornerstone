@@ -50,7 +50,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
     /// The maximum number of days in a Gregorian month.
     public static let maximumNumberOfDays: Int = {
         var max = 0
-        for month in GregorianMonth.cases {
+        for month in GregorianMonth.allCases {
             max.increase(to: month.maximumNumberOfDays)
         }
         return max
@@ -58,7 +58,7 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
     /// The minimum number of days in a Gregorian month.
     public static let minimumNumberOfDays: Int = {
         var min = maximumNumberOfDays
-        for month in GregorianMonth.cases {
+        for month in GregorianMonth.allCases {
             min.decrease(to: month.minimumNumberOfDays)
         }
         return min

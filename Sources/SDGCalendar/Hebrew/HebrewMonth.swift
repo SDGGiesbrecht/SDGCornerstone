@@ -60,7 +60,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
     /// The maximum number of days in any month.
     public static let maximumNumberOfDays: Int = {
         var max = 0
-        for month in HebrewMonth.cases {
+        for month in HebrewMonth.allCases {
             max.increase(to: month.maximumNumberOfDays)
         }
         return max
@@ -68,7 +68,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
     /// The minimum number of days in any month.
     public static let minimumNumberOfDays: Int = {
         var min = maximumNumberOfDays
-        for month in HebrewMonth.cases {
+        for month in HebrewMonth.allCases {
             min.decrease(to: month.minimumNumberOfDays)
         }
         return min
@@ -131,7 +131,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
     public var maximumNumberOfDays: Int {
         return cached(in: &HebrewMonth.maximumNumberOfDaysCache[self]) {
             var max = 0
-            for length in HebrewYear.Length.cases {
+            for length in HebrewYear.Length.allCases {
                 max.increase(to: numberOfDays(yearLength: length, leapYear: false))
                 max.increase(to: numberOfDays(yearLength: length, leapYear: true))
             }
@@ -143,7 +143,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
     public var minimumNumberOfDays: Int {
         return cached(in: &HebrewMonth.minimumNumberOfDaysCache[self]) {
             var min = maximumNumberOfDays
-            for length in HebrewYear.Length.cases {
+            for length in HebrewYear.Length.allCases {
                 min.decrease(to: numberOfDays(yearLength: length, leapYear: false))
                 min.decrease(to: numberOfDays(yearLength: length, leapYear: true))
             }

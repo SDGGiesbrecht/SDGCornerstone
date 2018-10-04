@@ -18,8 +18,12 @@ import SDGControlFlow
 ///
 /// Conformance Requirements:
 ///
-/// - `IterableEnumeration`
-public protocol OrderedEnumeration : Comparable, IterableEnumeration {
+/// - `CaseIterable`
+/// - `Hashable`
+/// - `AllCases : BidirectionalCollection`
+/// - `allCases` must have stable indices, and should be O(1).
+public protocol OrderedEnumeration : CaseIterable, Comparable, Hashable
+where AllCases : BidirectionalCollection {
 
     // @documentation(SDGCornerstone.OrderedEnumeration.increment())
     /// Increments to the next case.
@@ -64,8 +68,35 @@ public protocol OrderedEnumeration : Comparable, IterableEnumeration {
     func cyclicPredecessor() -> Self
 }
 
-extension OrderedEnumeration where RawValue == Int {
-    // MARK: - where RawValue == Int
+@usableFromInline internal var orderedEnumerationCache = OrderedEnumerationCache()
+@usableFromInline internal class OrderedEnumerationCache {
+    private var storage: [ObjectIdentifier: Any] = [:]
+    private subscript<T>(_ type: T.Type) -> [T: T.AllCases.Index]? where T : OrderedEnumeration {
+        get {
+            return storage[ObjectIdentifier(type)] as? [T: T.AllCases.Index]
+        }
+        set {
+            storage[ObjectIdentifier(type)] = newValue
+        }
+    }
+    @usableFromInline internal func mapping<T>(for type: T.Type) -> [T: T.AllCases.Index] where T : OrderedEnumeration {
+        return cached(in: &self[T.self]) {
+            var result: [T: T.AllCases.Index] = [:]
+            let cases = T.allCases
+            for index in cases.indices {
+                let `case` = cases[index]
+                result[`case`] = index
+            }
+            return result
+        }
+    }
+}
+
+extension OrderedEnumeration {
+
+    @inlinable internal static func index(of `case`: Self) -> AllCases.Index {
+        return orderedEnumerationCache.mapping(for: Self.self)[`case`]!
+    }
 
     @inlinable internal mutating func _increment() {
         guard let result = successor() else {
@@ -87,7 +118,12 @@ extension OrderedEnumeration where RawValue == Int {
     }
 
     @inlinable internal func _successor() -> Self? {
-        return Self(rawValue: rawValue.successor())
+        let successorIndex = Self.allCases.index(after: Self.index(of: self))
+        if successorIndex == Self.allCases.endIndex {
+            return nil
+        } else {
+            return Self.allCases[successorIndex]
+        }
     }
     // #documentation(SDGCornerstone.OrderedEnumeration.successor())
     /// Returns the next case or `nil` if there are no later cases.
@@ -115,7 +151,12 @@ extension OrderedEnumeration where RawValue == Int {
     }
 
     @inlinable internal func _predecessor() -> Self? {
-        return Self(rawValue: rawValue.predecessor())
+        let index = Self.index(of: self)
+        if index == Self.allCases.startIndex {
+            return nil
+        } else {
+            return Self.allCases[Self.allCases.index(before: index)]
+        }
     }
     // #documentation(SDGCornerstone.OrderedEnumeration.predecessor())
     /// Returns the previous case or `nil` if there are no earlier cases.
@@ -133,7 +174,7 @@ extension OrderedEnumeration where RawValue == Int {
             self = next
         } else {
             wrap()
-            self = Self.cases.first!
+            self = Self.allCases.first!
         }
     }
 
@@ -153,7 +194,7 @@ extension OrderedEnumeration where RawValue == Int {
             self = previous
         } else {
             wrap()
-            self = Self.cases.last!
+            self = Self.allCases.last!
         }
     }
 
@@ -165,6 +206,9 @@ extension OrderedEnumeration where RawValue == Int {
 
     // MARK: - Comparable
 
+    @inlinable internal func isLessThan(_ other: Self) -> Bool {
+        return Self.index(of: self) < Self.index(of: other)
+    }
     // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
@@ -172,12 +216,12 @@ extension OrderedEnumeration where RawValue == Int {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
-        return precedingValue.rawValue < followingValue.rawValue
+        return precedingValue.isLessThan(followingValue)
     }
 }
 
 // Disambiguate Strideable vs OrderedEnumeration for calendar components.
-extension OrderedEnumeration where Self : Strideable, Self.RawValue == Int {
+extension OrderedEnumeration where Self : Strideable {
     // MARK: - where Self : Strideable, Self.RawValue == Int
 
     // MARK: - Comparable
@@ -189,12 +233,12 @@ extension OrderedEnumeration where Self : Strideable, Self.RawValue == Int {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
-        return precedingValue.rawValue < followingValue.rawValue
+        return precedingValue.isLessThan(followingValue)
     }
 }
 
 // Disambiguate OneDimensionalPoint vs OrderedEnumeration for calendar components.
-extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol, RawValue == Int {
+extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol {
     // MARK: - where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol
 
     // #documentation(SDGCornerstone.OrderedEnumeration.increment())

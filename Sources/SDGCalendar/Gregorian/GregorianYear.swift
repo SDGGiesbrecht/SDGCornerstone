@@ -54,14 +54,14 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
     // Months
 
     /// The number of months in a year.
-    public static let monthsPerYear: Int = GregorianMonth.cases.count
+    public static let monthsPerYear: Int = GregorianMonth.allCases.count
 
     // Days
 
     /// The number of days in a non‐leap year.
     public static let daysPerNormalYear: Int = {
         var days = 0
-        for month in GregorianMonth.cases {
+        for month in GregorianMonth.allCases {
             days += month.numberOfDays(leapYear: false)
         }
         return days
@@ -69,7 +69,7 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
     /// The number of days in a leap year.
     public static let daysPerLeapYear: Int = {
         var days = 0
-        for month in GregorianMonth.cases {
+        for month in GregorianMonth.allCases {
             days += month.numberOfDays(leapYear: true)
         }
         return days

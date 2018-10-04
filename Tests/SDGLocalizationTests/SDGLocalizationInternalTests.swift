@@ -24,7 +24,7 @@ import SDGXCTestUtilities
 class SDGLocalizationInternalTests : TestCase {
 
     func testContentLocalization() {
-        for localization in ContentLocalization.cases {
+        for localization in ContentLocalization.allCases {
 
             // Make sure its group is defined.
             let components: [String] = localization.code.components(separatedBy: "\u{2D}")
@@ -70,7 +70,7 @@ class SDGLocalizationInternalTests : TestCase {
     }
 
     func testInterfaceLocalization() {
-        for localization in InterfaceLocalization.cases {
+        for localization in InterfaceLocalization.allCases {
             XCTAssertNotNil(ContentLocalization(exactly: localization.code))
 
             if let icon = localization.icon {

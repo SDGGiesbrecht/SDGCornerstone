@@ -14,7 +14,7 @@
 
 @usableFromInline internal func list(_ localizations: (_APILocalization) -> String) -> String { // @exempt(from: tests)
     var included: Set<String> = []
-    let result = _APILocalization.cases.map(localizations).filter { (message) in // @exempt(from: tests)
+    let result = _APILocalization.allCases.map(localizations).filter { (message) in // @exempt(from: tests)
         if included.contains(message) { // @exempt(from: tests)
             return false
         } else { // @exempt(from: tests)

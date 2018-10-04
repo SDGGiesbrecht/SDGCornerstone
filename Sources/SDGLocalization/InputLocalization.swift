@@ -12,19 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 4.1.2, This should be adjusted to align with SE-0194 when it is implemented.)
-
 /// An enumeration that describes the set of localizations available for a particular input usage.
 ///
 /// Conformance Requirements:
+///   - `CaseIterable`
 ///   - `Localization`
-///   - `static var cases: [Self] { get }`
-public protocol InputLocalization : Localization {
-
-    // #documentation(SDGCornerstone.IterableEnumeration.cases)
-    /// An array containing every case of the enumeration.
-    static var cases: [Self] { get }
-}
+public protocol InputLocalization : CaseIterable, Localization {}
 
 extension InputLocalization {
 
@@ -32,6 +25,6 @@ extension InputLocalization {
     ///
     /// Use this to compare two `Localization` types with set comparison operations such as `⊆`.
     public static func codeSet() -> Set<String> {
-        return Set(cases.map({ $0.code }))
+        return Set(allCases.map({ $0.code }))
     }
 }

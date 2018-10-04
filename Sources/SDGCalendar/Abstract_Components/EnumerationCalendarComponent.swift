@@ -13,6 +13,6 @@
  */
 
 /// A calendar component defined by an enumeration.
-public protocol EnumerationCalendarComponent : CalendarComponent, OrderedEnumeration {
+public protocol EnumerationCalendarComponent : CalendarComponent, OrderedEnumeration, RawRepresentable {
 
 }
