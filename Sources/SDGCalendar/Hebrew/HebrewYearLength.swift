@@ -18,7 +18,7 @@ import SDGCornerstoneLocalizations
 extension HebrewYear {
 
     /// The length of a Hebrew year.
-    public enum Length : Int, IterableEnumeration {
+    public enum Length : CaseIterable {
 
         // MARK: - Static Properties
 
