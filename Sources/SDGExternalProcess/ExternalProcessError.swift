@@ -15,7 +15,6 @@
 import SDGLocalization
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 
 extension ExternalProcess {
 

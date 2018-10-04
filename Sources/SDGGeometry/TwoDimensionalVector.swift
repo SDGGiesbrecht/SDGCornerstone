@@ -45,7 +45,6 @@ extension TwoDimensionalVector {
 }
 
 extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
-    // MARK: - where Self.Scalar : RealArithmetic
 
     /// Creates a vector from an angular direction and a length.
     @inlinable public init(direction: Angle<Scalar>, length: Scalar) {

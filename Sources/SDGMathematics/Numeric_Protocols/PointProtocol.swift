@@ -104,7 +104,6 @@ extension PointProtocol {
 }
 
 extension PointProtocol where Self.Vector == Self {
-    // MARK: - where Self.Vector == Self
 
     // This also covers all clashes with Addable and Subtractable, since Vector is must conform to them via Negatable.
 
@@ -132,7 +131,6 @@ extension PointProtocol where Self.Vector == Self {
 }
 
 extension PointProtocol where Self : Strideable {
-    // MARK: - where Self : Strideable
 
     // #documentation(SDGCornerstone.PointProtocol.+)
     /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
@@ -147,7 +145,6 @@ extension PointProtocol where Self : Strideable {
 }
 
 extension PointProtocol where Self : Strideable, Self.Stride == Self.Vector {
-    // MARK: - where Self : Strideable, Self.Stride == Self.Vector
 
     // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.
@@ -162,7 +159,6 @@ extension PointProtocol where Self : Strideable, Self.Stride == Self.Vector {
 }
 
 extension PointProtocol where Self.Vector == Self, Self : Strideable, Self.Stride == Self.Vector {
-    // MARK: - where Self.Vector == Self, Self : Strideable, Self.Stride == Self.Vector
 
     // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.

@@ -143,7 +143,6 @@ extension SetDefinition {
 }
 
 extension SetDefinition where Self : SetAlgebra {
-    // MARK: - where Self : SetAlgebra
 
     // @documentation(SDGCornerstone.SetAlgebra.contains(_:))
     /// Returns `true` if `self` contains `member`.

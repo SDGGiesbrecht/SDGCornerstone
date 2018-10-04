@@ -68,7 +68,6 @@ extension Addable {
 }
 
 extension Addable where Self : Strideable, Self.Stride == Self {
-    // MARK: - where Self : Strideable, Stride == Self
 
     // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.

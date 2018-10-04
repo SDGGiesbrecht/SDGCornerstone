@@ -52,7 +52,6 @@ extension Collection {
 }
 
 extension Collection where Index : Hashable {
-    // MARK: - where Index : Hashable
 
     /// Returns the collection as a `Dictionary`, with the collection’s indices used as keys.
     @inlinable public var indexMapping: [Index: Element] {
@@ -65,7 +64,6 @@ extension Collection where Index : Hashable {
 }
 
 extension Collection where Element : Hashable, Index : Hashable {
-    // MARK: - where Element: Hashable, Index : Hashable
 
     /// Returns the collection as a `BjectiveMapping` between the indices and values.
     ///

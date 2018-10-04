@@ -21,7 +21,6 @@ public protocol ICalendarComponent {
 }
 
 extension ICalendarComponent where Self : ISOCalendarComponent {
-    // MARK: - where Self : ISOCalendarComponent
 
     // #documentation(SDGCornerstone.ICalendarCompenent.inICalendarFormat())
     /// Returns a string representation in the iCalendar format.

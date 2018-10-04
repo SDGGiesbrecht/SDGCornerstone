@@ -162,7 +162,6 @@ extension ComparableSet {
 }
 
 extension ComparableSet where Self : SetAlgebra {
-    // MARK: - where Self : SetAlgebra
 
     // #documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))
     /// Returns `true` if the sets are disjoint.

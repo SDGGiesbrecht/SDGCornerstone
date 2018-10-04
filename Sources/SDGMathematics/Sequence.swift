@@ -13,7 +13,6 @@
  */
 
 extension Sequence where Element : Hashable {
-    // MARK: - where Element : Hashable
 
     /// Returns the statistical modes.
     ///
@@ -43,7 +42,6 @@ extension Sequence where Element : Hashable {
 }
 
 extension Sequence where Element : AdditiveArithmetic {
-    // MARK: - where Element : AdditiveArithmetic
 
     // @documentation(SDGCornerstone.Sequence.∑)
     /// Returns the sum of all values in the sequence.
@@ -57,7 +55,6 @@ extension Sequence where Element : AdditiveArithmetic {
 }
 
 extension Sequence where Element : WholeArithmetic {
-    // MARK: - where Element : WholeArithmetic
 
     // @documentation(SDGCornerstone.Sequence.∏)
     /// Returns the product of all values in the sequence.
@@ -71,7 +68,6 @@ extension Sequence where Element : WholeArithmetic {
 }
 
 extension Sequence where Element : RationalArithmetic {
-    // MARK: - where Element : RationalArithmetic
 
     /// Returns the arithmetic mean.
     ///

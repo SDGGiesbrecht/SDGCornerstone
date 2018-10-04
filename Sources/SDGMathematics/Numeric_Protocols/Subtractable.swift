@@ -75,7 +75,6 @@ extension Subtractable {
 }
 
 extension Subtractable where Self : Numeric {
-    // MARK: - where Self : Numeric
 
     /// Subtracts one value from another and produces their difference.
     @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self { // Numeric
@@ -89,7 +88,6 @@ extension Subtractable where Self : Numeric {
 }
 
 extension Subtractable where Self : Strideable, Self.Stride == Self {
-    // MARK: - where Self : Strideable, Self.Stride == Self
 
     /// Subtracts one value from another and produces their difference.
     @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self { // Numeric

@@ -45,7 +45,6 @@ public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedS
 }
 
 extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.RawValue == Int {
-    // MARK: - where Self : EnumerationCalendarComponent
 
     // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
     /// Creates a component from the number of complete components already elapsed.
@@ -113,7 +112,6 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
 }
 
 extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.RawValue == Self.Vector {
-    // MARK: - where Self : EnumerationCalendarComponent, Self.RawValue == Self.Vector
 
     // MARK: - Decodable
 

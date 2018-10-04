@@ -13,7 +13,6 @@
  */
 
 extension Array where Element : StringFamily {
-    // MARK: - where Element : StringFamily
 
     /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
     ///

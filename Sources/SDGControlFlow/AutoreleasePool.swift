@@ -15,8 +15,6 @@
 #if canImport(ObjectiveC)
 @_exported import func ObjectiveC.autoreleasepool
 #else
-// MARK: - #if !canImport(ObjectiveC)
-
 /// Allows code which autoreleases on Darwin to compile on Linux without the need for operating system checks.
 ///
 /// This function does nothing on Linux, because Linux has no autoreleasing Objective‐C APIs to link against.

@@ -19,14 +19,9 @@ import CoreGraphics
 import SDGControlFlow
 
 #if os(iOS) || os(watchOS) || os(tvOS)
-// MARK: - #if os(iOS) || os(watchOS) || os(tvOS)
-// #workaround(Swift 4.1.2, Probably available in Swift 4.2)
-
 /// The member of the `Float` family with the largest bit field.
 public typealias FloatMax = Double
 #else
-// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
-
 /// The member of the `Float` family with the largest bit field.
 public typealias FloatMax = Float80
 #endif
@@ -568,7 +563,6 @@ extension Double : FloatFamily {
 }
 
 #if canImport(CoreGraphics)
-// MARK: - #if canImport(CoreGraphics)
 
 extension CGFloat : FloatFamily {
 
@@ -620,8 +614,6 @@ extension CGFloat : FloatFamily {
 #endif
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
-// #workaround(Swift 4.1.2, Probably available in Swift 4.2)
 
 extension Float80 : Codable, FloatFamily {
 

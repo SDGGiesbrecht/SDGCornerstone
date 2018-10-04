@@ -27,7 +27,6 @@ public protocol OneDimensionalPoint : Comparable, PointProtocol {
 }
 
 extension OneDimensionalPoint where Vector : IntegerProtocol {
-    // MARK: - where Vector : IntegerProtocol
 
     // @documentation(SDGCornerstone.OneDimensionalPoint.increment())
     /// Advances to the next value.
@@ -55,7 +54,6 @@ extension OneDimensionalPoint where Vector : IntegerProtocol {
 }
 
 extension OneDimensionalPoint where Self : Strideable {
-    // MARK: - where Self : Strideable
 
     /// Returns the value that follows `self` by a distance of `n`.
     ///

@@ -54,7 +54,6 @@ extension SDGTextRegressionTests {
 }
 
 #if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGTextAPITests.__allTests),

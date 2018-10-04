@@ -122,7 +122,6 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 }
 
 extension NumericAdditiveArithmetic where Self : Negatable {
-    // MARK: - where Self : Negatable
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
@@ -134,7 +133,6 @@ extension NumericAdditiveArithmetic where Self : Negatable {
 }
 
 extension NumericAdditiveArithmetic where Self : Numeric {
-    // MARK: - where Self : Numeric
 
     /// The magnitude of this value.
     @inlinable public var magnitude: Self {

@@ -21,18 +21,11 @@ extension Array : ArrayFamily {}
 extension ArraySlice : ArrayFamily {}
 extension ContiguousArray : ArrayFamily {}
 
-extension Array : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
-    // MARK: - where Element : Equatable
-}
-extension ArraySlice : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
-    // MARK: - where Element : Equatable
-}
-extension ContiguousArray : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {
-    // MARK: - where Element : Equatable
-}
+extension Array : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
+extension ArraySlice : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
+extension ContiguousArray : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
 
 extension ArrayFamily where Element : RangeReplaceableCollection {
-    // MARK: - where Element : RangeReplaceableCollection
 
     /// Fills the collections in the array so that all of them have the same count.
     ///

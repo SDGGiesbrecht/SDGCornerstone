@@ -19,21 +19,19 @@ import UIKit
 #endif
 
 #if canImport(AppKit)
-// MARK: - #if canImport(AppKit)
+// @documentation(SDGCornerstone.BézierPath)
 /// An alias for `NSBezierPath` or `UIBezierPath`.
 public typealias BézierPath = NSBezierPath
 #elseif canImport(UIKit)
-// MARK: - #if canImport(UIKit)
+// #documentation(SDGCornerstone.BézierPath)
 /// An alias for `NSBezierPath` or `UIBezierPath`.
 public typealias BézierPath = UIBezierPath
 #endif
 
 #if canImport(AppKit) || canImport(UIKit)
-// MARK: - #if canImport(AppKit) || canImport(UIKit)
 extension BézierPath {
 
     #if canImport(UIKit)
-    // MARK: - #if canImport(UIKit)
     /// Appends a straight line to the receiver’s path.
     @inlinable public func line(to point: CGPoint) {
         addLine(to: point)

@@ -24,7 +24,6 @@ extension SDGGeometryAPITests {
 }
 
 #if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGGeometryAPITests.__allTests)
