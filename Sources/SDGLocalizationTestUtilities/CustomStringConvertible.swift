@@ -28,7 +28,7 @@ import SDGPersistenceTestUtilities
 @inlinable public func testCustomStringConvertibleConformance<T, L>(of instance: T, localizations: L.Type, uniqueTestName: StrictString, overwriteSpecificationInsteadOfFailing: Bool, file: StaticString = #file, line: UInt = #line) where T : CustomStringConvertible, L : InputLocalization {
 
     var report = ""
-    for localization in localizations.cases {
+    for localization in localizations.allCases {
         if let icon = localization.icon {
             print(icon, to: &report)
         } else {
