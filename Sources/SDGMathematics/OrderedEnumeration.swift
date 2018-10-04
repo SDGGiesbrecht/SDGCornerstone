@@ -18,8 +18,11 @@ import SDGControlFlow
 ///
 /// Conformance Requirements:
 ///
-/// - `IterableEnumeration`
-public protocol OrderedEnumeration : Comparable, IterableEnumeration {
+/// - `CaseIterable`
+/// - `AllCases.Index == Int`
+/// -
+public protocol OrderedEnumeration : CaseIterable, Comparable, Hashable
+where AllCases.Index == Int {
 
     // @documentation(SDGCornerstone.OrderedEnumeration.increment())
     /// Increments to the next case.
@@ -64,8 +67,30 @@ public protocol OrderedEnumeration : Comparable, IterableEnumeration {
     func cyclicPredecessor() -> Self
 }
 
-extension OrderedEnumeration where RawValue == Int {
-    // MARK: - where RawValue == Int
+@usableFromInline internal var orderedEnumerationCache = OrderedEnumerationCache()
+@usableFromInline internal class OrderedEnumerationCache {
+    private var storage: [ObjectIdentifier: Any] = [:]
+    private subscript<T>(_ type: T.Type) -> [T: Int]? where T : OrderedEnumeration {
+        get {
+            return storage[ObjectIdentifier(type)] as? [T: Int]
+        }
+        set {
+            storage[ObjectIdentifier(type)] = newValue
+        }
+    }
+    @usableFromInline internal func mapping<T>(for type: T.Type) -> [T: Int] where T : OrderedEnumeration {
+        return cached(in: &self[T.self]) {
+            var result: [T: Int] = [:]
+            let cases = T.allCases
+            for index in cases.indices {
+                let `case` = cases[index]
+                result[`case`] = index
+            }
+        }
+    }
+}
+
+extension OrderedEnumeration {
 
     @inlinable internal mutating func _increment() {
         guard let result = successor() else {
@@ -87,7 +112,13 @@ extension OrderedEnumeration where RawValue == Int {
     }
 
     @inlinable internal func _successor() -> Self? {
-        return Self(rawValue: rawValue.successor())
+        let index = orderedEnumerationCache.mapping(for: Self.self)[self]!
+        let successorIndex = index.successor()
+        if successorIndex == Self.allCases.endIndex {
+            return nil
+        } else {
+            return Self.allCases[index]
+        }
     }
     // #documentation(SDGCornerstone.OrderedEnumeration.successor())
     /// Returns the next case or `nil` if there are no later cases.
@@ -115,7 +146,12 @@ extension OrderedEnumeration where RawValue == Int {
     }
 
     @inlinable internal func _predecessor() -> Self? {
-        return Self(rawValue: rawValue.predecessor())
+        let index = orderedEnumerationCache.mapping(for: Self.self)[self]!
+        if index == Self.allCases.startIndex {
+            return nil
+        } else {
+            return Self.allCases[index.predecessor()]
+        }
     }
     // #documentation(SDGCornerstone.OrderedEnumeration.predecessor())
     /// Returns the previous case or `nil` if there are no earlier cases.
