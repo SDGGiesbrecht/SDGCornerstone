@@ -21,6 +21,7 @@ import SDGControlFlow
 /// - `CaseIterable`
 /// - `Hashable`
 /// - `AllCases : BidirectionalCollection`
+/// - `allCases` must have stable indices, and should be O(1).
 public protocol OrderedEnumeration : CaseIterable, Comparable, Hashable
 where AllCases : BidirectionalCollection {
 
