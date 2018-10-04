@@ -24,9 +24,6 @@ private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _
 /// The assertion method used by `test(_:_:_:_:)`
 public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, _ file: StaticString, _ line: UInt) -> Void = defaultTestAssertionMethod
 
-// #workaround(workspace version 0.12.0, SwiftSyntax drops this section otherwise.)
-private func helpSwiftSyntax() {} // @exempt(from: tests)
-
 /// Tests an expression, verifying that it is true.
 @inlinable public func test(_ expression: @autoclosure () throws -> Bool, _ message: @autoclosure () throws -> String, file: StaticString = #file, line: UInt = #line) {
 
