@@ -811,7 +811,6 @@ extension SearchableCollection {
 }
 
 extension SearchableCollection where Self : RangeReplaceableCollection {
-    // MARK: - where Self : RangeReplaceableCollection
 
     @inlinable internal mutating func _truncate<P>(before pattern: P) where P : PatternProtocol, P.Element == Element {
         if let match = firstMatch(for: pattern) {

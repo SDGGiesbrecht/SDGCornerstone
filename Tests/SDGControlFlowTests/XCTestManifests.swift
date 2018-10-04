@@ -28,7 +28,6 @@ extension SDGControlFlowAPITests {
 }
 
 #if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGControlFlowAPITests.__allTests)

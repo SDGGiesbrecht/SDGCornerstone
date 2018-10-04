@@ -44,7 +44,6 @@ extension RandomizableNumber {
 }
 
 extension RandomizableNumber where Self : RationalArithmetic {
-    // MARK: - where Self : RationalArithmetic
 
     // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:))
     /// Creates a random value within a particular range.

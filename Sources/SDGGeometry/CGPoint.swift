@@ -13,7 +13,6 @@
  */
 
 #if canImport(CoreGraphics)
-// MARK: - #if canImport(CoreGraphics)
 
 import CoreGraphics
 

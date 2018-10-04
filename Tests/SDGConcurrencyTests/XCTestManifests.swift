@@ -22,7 +22,6 @@ extension SDGConcurrencyAPITests {
 }
 
 #if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGConcurrencyAPITests.__allTests)

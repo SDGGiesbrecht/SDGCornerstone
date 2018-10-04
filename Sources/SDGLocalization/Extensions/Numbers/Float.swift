@@ -18,11 +18,9 @@ import CoreGraphics
 
 extension Double : TextConvertibleNumber {}
 #if canImport(CoreGraphics)
-// MARK: - #if canImport(CoreGraphics)
 extension CGFloat : TextConvertibleNumber {}
 #endif
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-// MARK: - #if !(os(iOS) || os(watchOS) || os(tvOS))
 extension Float80 : TextConvertibleNumber {}
 #endif
 extension Float : TextConvertibleNumber {}

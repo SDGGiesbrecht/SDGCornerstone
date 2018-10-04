@@ -13,7 +13,6 @@
  */
 
 extension Range where Bound == LineViewIndex {
-    // MARK: - where Bound == LineViewIndex
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
     @inlinable public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index> {
@@ -37,7 +36,6 @@ extension Range where Bound == LineViewIndex {
 }
 
 extension Range where Bound == StrictString.ClusterView.Index {
-    // MARK: - where Bound == StrictString.ClusterView.Index
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
     @inlinable public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index> {
@@ -46,7 +44,6 @@ extension Range where Bound == StrictString.ClusterView.Index {
 }
 
 extension Range where Bound == StrictString/*.ScalarView*/.Index {
-    // MARK: - where Bound == StrictString.ScalarView.Index
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
     @inlinable public func sameRange(in clusters: StrictString.ClusterView) -> Range<StrictString.ClusterView.Index>? {
@@ -90,7 +87,6 @@ extension Range where Bound == StrictString/*.ScalarView*/.Index {
 }
 
 extension Range where Bound == String.ClusterView.Index {
-    // MARK: - where Bound == String.ClusterView.Index
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
     @inlinable public func sameRange(in scalars: String.ScalarView) -> Range<String.ScalarView.Index> {
@@ -99,7 +95,6 @@ extension Range where Bound == String.ClusterView.Index {
 }
 
 extension Range where Bound == String.ScalarView.Index {
-    // MARK: - where Bound == String.ScalarView.Index
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
     @inlinable public func sameRange(in clusters: String.ClusterView) -> Range<String.ClusterView.Index>? {

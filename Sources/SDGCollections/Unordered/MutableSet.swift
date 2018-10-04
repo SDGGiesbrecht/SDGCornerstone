@@ -350,7 +350,6 @@ extension MutableSet {
 }
 
 extension MutableSet where Self : FiniteSet {
-    // MARK: - where Self : FiniteSet
 
     // #documentation(SDGCornerstone.SetDefinition.∆)
     /// Returns the symmetric difference of `followingValue` in `precedingValue`.

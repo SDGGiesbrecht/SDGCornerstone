@@ -29,7 +29,6 @@ public protocol AdditiveArithmetic : Codable, Hashable, Subtractable {
 }
 
 extension AdditiveArithmetic where Self : ExpressibleByIntegerLiteral {
-    // MARK: - where Self : ExpressibleByIntegerLiteral
 
     // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
     /// The additive identity (origin).

@@ -13,7 +13,6 @@
  */
 
 extension Collection where Element == UnicodeScalar {
-    // MARK: - where Element == UnicodeScalar
 
     // #documentation(SDGCornerstone.String.isMultiline)
     /// Whether or not the string contains multiple lines.

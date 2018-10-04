@@ -32,7 +32,6 @@ extension SDGPrecisionMathematicsInternalTests {
 }
 
 #if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGPrecisionMathematicsAPITests.__allTests),

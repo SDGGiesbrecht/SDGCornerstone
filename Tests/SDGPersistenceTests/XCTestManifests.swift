@@ -35,7 +35,6 @@ extension SDGPersistenceRegressionTests {
 }
 
 #if !canImport(ObjectiveC)
-// MARK: - #if !canImport(ObjectiveC)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(SDGPersistenceAPITests.__allTests),

@@ -258,7 +258,6 @@ extension TextConvertibleNumber {
 }
 
 extension TextConvertibleNumber where Self : IntegralArithmetic {
-    // MARK: - where Self : IntegralArithmetic
 
     // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
@@ -296,7 +295,6 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
 }
 
 extension TextConvertibleNumber where Self : RationalArithmetic {
-    // MARK: - where Self : RationalArithmetic
 
     // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
@@ -371,7 +369,6 @@ extension CodableViaTextConvertibleNumber {
 }
 
 extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
-    // MARK: - where Self : IntegerProtocol
 
     // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.
@@ -384,7 +381,6 @@ extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
 }
 
 extension CodableViaTextConvertibleNumber where Self : WholeNumberProtocol {
-    // MARK: - where Self : WholeNumberProtocol
 
     // #documentation(SDGCornerstone.Encodable.encode(to:))
     /// Encodes this value into the given encoder.

@@ -19,17 +19,16 @@ import UIKit
 #endif
 
 #if canImport(AppKit)
-// MARK: - #if canImport(AppKit)
+// @documentation(SDGCornerstone.Font)
 /// An alias for `NSFont` or `UIFont`.
 public typealias Font = NSFont
 #elseif canImport(UIKit)
-// MARK: - #if canImport(UIKit)
+// #documentation(SDGCornerstone.Font)
 /// An alias for `NSFont` or `UIFont`.
 public typealias Font = UIFont
 #endif
 
 #if canImport(AppKit) || canImport(UIKit)
-// MARK: - #if canImport(AppKit) || canImport(UIKit)
 
 extension Font {
 
