@@ -19,10 +19,10 @@ import SDGControlFlow
 /// Conformance Requirements:
 ///
 /// - `CaseIterable`
-/// - `AllCases.Index == Int`
-/// -
+/// - `Hashable`
+/// - `AllCases : BidirectionalCollection`
 public protocol OrderedEnumeration : CaseIterable, Comparable, Hashable
-where AllCases : BidirectionalCollection, AllCases.Index == Int {
+where AllCases : BidirectionalCollection {
 
     // @documentation(SDGCornerstone.OrderedEnumeration.increment())
     /// Increments to the next case.
@@ -70,17 +70,17 @@ where AllCases : BidirectionalCollection, AllCases.Index == Int {
 @usableFromInline internal var orderedEnumerationCache = OrderedEnumerationCache()
 @usableFromInline internal class OrderedEnumerationCache {
     private var storage: [ObjectIdentifier: Any] = [:]
-    private subscript<T>(_ type: T.Type) -> [T: Int]? where T : OrderedEnumeration {
+    private subscript<T>(_ type: T.Type) -> [T: T.AllCases.Index]? where T : OrderedEnumeration {
         get {
-            return storage[ObjectIdentifier(type)] as? [T: Int]
+            return storage[ObjectIdentifier(type)] as? [T: T.AllCases.Index]
         }
         set {
             storage[ObjectIdentifier(type)] = newValue
         }
     }
-    @usableFromInline internal func mapping<T>(for type: T.Type) -> [T: Int] where T : OrderedEnumeration {
+    @usableFromInline internal func mapping<T>(for type: T.Type) -> [T: T.AllCases.Index] where T : OrderedEnumeration {
         return cached(in: &self[T.self]) {
-            var result: [T: Int] = [:]
+            var result: [T: T.AllCases.Index] = [:]
             let cases = T.allCases
             for index in cases.indices {
                 let `case` = cases[index]
@@ -117,7 +117,7 @@ extension OrderedEnumeration {
     }
 
     @inlinable internal func _successor() -> Self? {
-        let successorIndex = Self.index(of: self).successor()
+        let successorIndex = Self.allCases.index(after: Self.index(of: self))
         if successorIndex == Self.allCases.endIndex {
             return nil
         } else {
@@ -154,7 +154,7 @@ extension OrderedEnumeration {
         if index == Self.allCases.startIndex {
             return nil
         } else {
-            return Self.allCases[index.predecessor()]
+            return Self.allCases[Self.allCases.index(before: index)]
         }
     }
     // #documentation(SDGCornerstone.OrderedEnumeration.predecessor())
