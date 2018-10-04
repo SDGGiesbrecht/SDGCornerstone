@@ -220,6 +220,8 @@ extension OrderedEnumeration {
     }
 }
 
+#warning("These are no longer simpler.")
+
 // Disambiguate Strideable vs OrderedEnumeration for calendar components.
 extension OrderedEnumeration where Self : Strideable {
     // MARK: - where Self : Strideable, Self.RawValue == Int
