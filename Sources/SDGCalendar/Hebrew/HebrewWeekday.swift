@@ -35,7 +35,7 @@ public enum HebrewWeekday : Int, Codable, ConsistentDurationCalendarComponent, C
     // MARK: - Static Properties
 
     /// The number of days in a week.
-    public static let daysPerWeek: Int = cases.count
+    public static let daysPerWeek: Int = allCases.count
 
     // MARK: - ConsistentDurationCalendarComponent
 
