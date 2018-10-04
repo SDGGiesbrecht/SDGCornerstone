@@ -44,7 +44,6 @@ class SDGLocalizationAPITests : TestCase {
 
     enum IconlessLocalizationExample : String, InputLocalization {
         case none = "zxx"
-        static let cases: [IconlessLocalizationExample] = [.none]
         static let fallbackLocalization: IconlessLocalizationExample = .none
     }
     func testCustomStringConvertible() {

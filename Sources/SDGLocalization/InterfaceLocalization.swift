@@ -20,13 +20,6 @@ public enum _InterfaceLocalization : String, InputLocalization {
     case englishUnitedStates = "en\u{2D}US"
     case englishCanada = "en\u{2D}CA"
 
-    public static let cases: [_InterfaceLocalization] = [
-
-        .englishUnitedKingdom,
-        .englishUnitedStates,
-        .englishCanada
-    ]
-
     // MARK: - Localization
 
     public static let fallbackLocalization: _InterfaceLocalization = .englishUnitedKingdom
