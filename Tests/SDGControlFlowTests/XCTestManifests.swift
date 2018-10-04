@@ -19,7 +19,6 @@ extension SDGControlFlowAPITests {
         ("testBuildConfiguration", testBuildConfiguration),
         ("testCaching", testCaching),
         ("testCodable", testCodable),
-        ("testIterableEnumeration", testIterableEnumeration),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testNonmutatingVariants", testNonmutatingVariants),
         ("testPerformanceTest", testPerformanceTest),

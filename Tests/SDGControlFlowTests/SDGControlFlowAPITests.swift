@@ -83,16 +83,6 @@ class SDGControlFlowAPITests : TestCase {
         }
     }
 
-    enum IterableEnumerationExample : Int, IterableEnumeration {
-        typealias RawValue = Int
-        case a
-        case b
-        case c
-    }
-    func testIterableEnumeration() {
-        XCTAssertEqual(IterableEnumerationExample.cases.count, 3)
-    }
-
     struct NonmutatingVariantExample : Equatable {
         var value: Set<UnicodeScalar> = []
         mutating func modify(a: Bool, b: Bool, c: Bool) {
