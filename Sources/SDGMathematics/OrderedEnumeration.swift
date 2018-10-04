@@ -22,7 +22,7 @@ import SDGControlFlow
 /// - `AllCases.Index == Int`
 /// -
 public protocol OrderedEnumeration : CaseIterable, Comparable, Hashable
-where AllCases.Index == Int {
+where AllCases : BidirectionalCollection, AllCases.Index == Int {
 
     // @documentation(SDGCornerstone.OrderedEnumeration.increment())
     /// Increments to the next case.
@@ -86,11 +86,16 @@ where AllCases.Index == Int {
                 let `case` = cases[index]
                 result[`case`] = index
             }
+            return result
         }
     }
 }
 
 extension OrderedEnumeration {
+
+    @inlinable internal static func index(of `case`: Self) -> AllCases.Index {
+        return orderedEnumerationCache.mapping(for: Self.self)[`case`]!
+    }
 
     @inlinable internal mutating func _increment() {
         guard let result = successor() else {
@@ -112,12 +117,11 @@ extension OrderedEnumeration {
     }
 
     @inlinable internal func _successor() -> Self? {
-        let index = orderedEnumerationCache.mapping(for: Self.self)[self]!
-        let successorIndex = index.successor()
+        let successorIndex = Self.index(of: self).successor()
         if successorIndex == Self.allCases.endIndex {
             return nil
         } else {
-            return Self.allCases[index]
+            return Self.allCases[successorIndex]
         }
     }
     // #documentation(SDGCornerstone.OrderedEnumeration.successor())
@@ -146,7 +150,7 @@ extension OrderedEnumeration {
     }
 
     @inlinable internal func _predecessor() -> Self? {
-        let index = orderedEnumerationCache.mapping(for: Self.self)[self]!
+        let index = Self.index(of: self)
         if index == Self.allCases.startIndex {
             return nil
         } else {
@@ -169,7 +173,7 @@ extension OrderedEnumeration {
             self = next
         } else {
             wrap()
-            self = Self.cases.first!
+            self = Self.allCases.first!
         }
     }
 
@@ -189,7 +193,7 @@ extension OrderedEnumeration {
             self = previous
         } else {
             wrap()
-            self = Self.cases.last!
+            self = Self.allCases.last!
         }
     }
 
@@ -201,6 +205,9 @@ extension OrderedEnumeration {
 
     // MARK: - Comparable
 
+    @inlinable internal func isLessThan(_ other: Self) -> Bool {
+        return Self.index(of: self) < Self.index(of: other)
+    }
     // #documentation(SDGCornerstone.Comparable.<)
     /// Returns `true` if the preceding value is less than the following value.
     ///
@@ -208,12 +215,12 @@ extension OrderedEnumeration {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
-        return precedingValue.rawValue < followingValue.rawValue
+        return precedingValue.isLessThan(followingValue)
     }
 }
 
 // Disambiguate Strideable vs OrderedEnumeration for calendar components.
-extension OrderedEnumeration where Self : Strideable, Self.RawValue == Int {
+extension OrderedEnumeration where Self : Strideable {
     // MARK: - where Self : Strideable, Self.RawValue == Int
 
     // MARK: - Comparable
@@ -225,12 +232,12 @@ extension OrderedEnumeration where Self : Strideable, Self.RawValue == Int {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
-        return precedingValue.rawValue < followingValue.rawValue
+        return precedingValue.isLessThan(followingValue)
     }
 }
 
 // Disambiguate OneDimensionalPoint vs OrderedEnumeration for calendar components.
-extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol, RawValue == Int {
+extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol {
     // MARK: - where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol
 
     // #documentation(SDGCornerstone.OrderedEnumeration.increment())
