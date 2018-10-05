@@ -17,15 +17,17 @@ import SDGMathematics
 // #workaround(Swift 4.1.2, In Swift 4.1, this can be just “extension Measurement {”.)
 extension Measurement where Scalar : RandomizableNumber {
 
+
     // @documentation(SDGCornerstone.Measurement.init(randomInRange:))
-    /// Creates a random value within a particular range.
+    /// Returns a random value within a particular range.
     ///
     /// - Precondition: `range` is not empty.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    @inlinable public init(randomInRange range: Range<Self>) {
-        self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
+    @inlinable public static func random(in range: Range<Self>) -> Self {
+        var generator = SystemRandomNumberGenerator()
+        return random(in: range, using: &generator)
     }
 
     // #documentation(SDGCornerstone.Measurement.init(randomInRange:))
@@ -35,8 +37,9 @@ extension Measurement where Scalar : RandomizableNumber {
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    @inlinable public init(randomInRange range: ClosedRange<Self>) {
-        self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
+    @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
+        var generator = SystemRandomNumberGenerator()
+        return random(in: range, using: &generator)
     }
 
     // @documentation(SDGCornerstone.Measurement.init(randomInRange:fromRandomizer:))
@@ -46,8 +49,8 @@ extension Measurement where Scalar : RandomizableNumber {
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    @inlinable public init(randomInRange range: Range<Self>, fromRandomizer randomizer: Randomizer) {
+    ///     - generator: The randomizer to use to generate the random value.
+    @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
         let scalar = Scalar(randomInRange: range.lowerBound.rawValue ..< range.upperBound.rawValue, fromRandomizer: randomizer)
         self.init(rawValue: scalar)
     }
@@ -60,7 +63,7 @@ extension Measurement where Scalar : RandomizableNumber {
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    @inlinable public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
+    @inlinable public static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
         let scalar = Scalar(randomInRange: range.lowerBound.rawValue ... range.upperBound.rawValue, fromRandomizer: randomizer)
         self.init(rawValue: scalar)
     }
