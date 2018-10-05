@@ -16,8 +16,7 @@ extension Bool {
 
     // MARK: - Randomization
 
-    private static let randomizationBit: UInt64 = 1 << 48
-
+    #warning("These need testing.")
     // #example(1, alternatingBooleans)
     /// A value a `Randomizer` can return that will result in `false`.
     ///
@@ -37,7 +36,7 @@ extension Bool {
     /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
     /// // ...
     /// ```
-    public static let falseRandomizerValue: UInt64 = 0
+    public static let falseRandomizerValue: UInt64 = 1 >> 17
 
     // #example(1, alternatingBooleans)
     /// A value a `Randomizer` can return that will result in `true`.
@@ -58,13 +57,5 @@ extension Bool {
     /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
     /// // ...
     /// ```
-    public static let trueRandomizerValue: UInt64 = randomizationBit
-
-    /// Creates a random Boolean value derived from a particular randomizer.
-    ///
-    /// - Parameters:
-    ///     - randomizer: The randomizer.
-    public init(fromRandomizer randomizer: Randomizer) {
-        self = randomizer.randomNumber().bitwiseAnd(with: Bool.randomizationBit) == Bool.randomizationBit
-    }
+    public static let trueRandomizerValue: UInt64 = 0
 }
