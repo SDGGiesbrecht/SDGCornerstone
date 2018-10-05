@@ -105,7 +105,7 @@ extension PointProtocol {
 
 extension PointProtocol where Self.Vector == Self {
 
-    // This also covers all clashes with Addable and Subtractable, since Vector is must conform to them via Negatable.
+    // This also covers all clashes with Addable and Subtractable, since Vector must conform to them via Negatable.
 
     // #documentation(SDGCornerstone.Addable(Summation).+)
     /// Returns the sum of the two values.
@@ -124,7 +124,7 @@ extension PointProtocol where Self.Vector == Self {
     /// - Parameters:
     ///     - precedingValue: The starting point.
     ///     - followingValue: The vector to subtract.
-    @inlinable public static func − (precedingValue: Self, followingValue: Vector) -> Self {
+    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         // Disambiguate Self − Vector vs Self − Self
         return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
     }

@@ -59,7 +59,7 @@ extension FileManager {
         let zoneURL = cached(in: &locations[location]) {
 
             #if os(Linux)
-            // #workaround(Swift 4.1.2, Foundation may do this itself eventually.)
+            // #workaround(Swift 4.2, Foundation may do this itself eventually.)
 
             let path: String
             switch location {
@@ -214,7 +214,7 @@ extension FileManager {
 
             let isDirectory: Bool
             #if os(Linux)
-            // #workaround(Swift 4.1.2, Linux has no implementation for resourcesValues.)
+            // #workaround(Swift 4.2, Linux has no implementation for resourcesValues.)
             var objCBool: ObjCBool = false
             isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool) ∧ objCBool.boolValue
             #else

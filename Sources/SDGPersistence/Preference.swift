@@ -32,7 +32,7 @@ public struct Preference : Equatable, TransparentWrapper {
         return Preference(propertyListObject: nil)
     }
 
-    @usableFromInline internal init(propertyListObject: NSObject?) {
+    @inlinable internal init(propertyListObject: NSObject?) {
         self.propertyListObject = propertyListObject
     }
 
@@ -51,12 +51,10 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - Usage
 
-    #if !canImport(ObjectiveC)
-    // #workaround(Swift 4.1.2, Linux has casting issues.)
-    private func cast(_ instance: Any) -> NSObject {
+    @inlinable internal func cast(_ instance: Any) -> NSObject {
         return Preference.cast(instance)
     }
-    internal static func cast(_ instance: Any) -> NSObject {
+    @inlinable internal static func cast(_ instance: Any) -> NSObject {
         if let object = instance as? NSObject {
             return object
         } else if let dictionary = instance as? [String: Any] {
@@ -101,14 +99,30 @@ public struct Preference : Equatable, TransparentWrapper {
             _unreachable()
         }
     }
-    #endif
+
+    @inlinable internal func encodeAndDeserialize<T>(_ value: [T]) throws -> Any where T : Encodable {
+        #if os(Linux)
+        // #workaround(Swift 4.2, Until Linux has PropertyListEncoder.)
+        return try JSONSerialization.jsonObject(with: JSONEncoder().encode(value), options: [])
+        #else
+        return try PropertyListSerialization.propertyList(from: PropertyListEncoder().encode(value), options: [], format: nil)
+        #endif
+    }
+    @inlinable internal func serializeAndDecode<T>(_ array: NSArray, as type: T.Type) throws -> [T] where T : Decodable {
+        #if os(Linux)
+        // #workaround(Swift 4.2, Until Linux has PropertyListDecoder.)
+        return try JSONDecoder().decode([T].self, from: JSONSerialization.data(withJSONObject: array, options: []))
+        #else
+        return try PropertyListDecoder().decode([T].self, from: PropertyListSerialization.data(fromPropertyList: array, format: .binary, options: 0))
+        #endif
+    }
 
     // @documentation(SDGCornerstone.Preference.set(to:))
     /// Sets the preference to a particular value.
     ///
     /// - Parameters:
     ///     - value: The new preference value, either an instance of a `Codable` type or `nil`.
-    public mutating func set<T>(to value: T?) where T : Encodable {
+    @inlinable public mutating func set<T>(to value: T?) where T : Encodable {
 
         guard let theValue = value else {
             // Setting to nil
@@ -117,16 +131,8 @@ public struct Preference : Equatable, TransparentWrapper {
         }
 
         do {
-            #if os(Linux)
-            // #workaround(Swift 4.1.2, Until Linux has PropertyListEncoder.)
-            let encodedArray = try JSONEncoder().encode([theValue])
-            let arrayObject = cast(try JSONSerialization.jsonObject(with: encodedArray, options: [])) as! NSArray
+            let arrayObject = cast(try encodeAndDeserialize([theValue])) as! NSArray
             let object = cast(arrayObject.firstObject!)
-            #else
-            let encodedArray = try PropertyListEncoder().encode([theValue])
-            let arrayObject = try PropertyListSerialization.propertyList(from: encodedArray, options: [], format: nil) as! NSArray
-            let object = arrayObject.firstObject! as! NSObject
-            #endif
             propertyListObject = object
         } catch { // @exempt(from: tests)
             if BuildConfiguration.current == .debug { // @exempt(from: tests)
@@ -158,15 +164,7 @@ public struct Preference : Equatable, TransparentWrapper {
         let converted = cached(in: &cache.types[ObjectIdentifier(type)]) { () -> Any? in
 
             do {
-                #if os(Linux)
-                // #workaround(Swift 4.1.2, Until Linux has PropertyListEncoder.)
-                let encodedArray = try JSONSerialization.data(withJSONObject: NSArray(object: object), options: [])
-                let decodedArray = try JSONDecoder().decode([T].self, from: encodedArray)
-                #else
-                let encodedArray = try PropertyListSerialization.data(fromPropertyList: NSArray(object: object), format: .binary, options: 0)
-                let decodedArray = try PropertyListDecoder().decode([T].self, from: encodedArray)
-                #endif
-                return decodedArray[0]
+                return try serializeAndDecode(NSArray(object: object), as: T.self)[0]
             } catch {
                 if BuildConfiguration.current == .debug {
                     print(error)
