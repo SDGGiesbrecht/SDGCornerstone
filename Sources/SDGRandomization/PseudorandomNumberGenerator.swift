@@ -21,7 +21,7 @@ import SDGMathematics
 /// - Warning: The above guarantee of deterministic behaviour does not apply between differing module versions.
 ///
 /// Currently, `PseudorandomNumberGenerator` uses the [xoroshiro128+](https://en.wikipedia.org/wiki/Xoroshiro128%2B) algorithm designed by David Blackman and Sebastiano Vigna.
-public final class PseudorandomNumberGenerator : RandomNumberGenerator {
+public struct PseudorandomNumberGenerator : RandomNumberGenerator {
 
     /// The seed.
     public typealias Seed = (UInt64, UInt64)
@@ -42,16 +42,14 @@ public final class PseudorandomNumberGenerator : RandomNumberGenerator {
     ///     - seed: The seed.
     public init(seed: Seed) {
         self.state = seed
-        _ = randomNumber() // Step away from seed itself.
+        _ = next() // Step away from seed itself.
     }
 
-    // MARK: - Randomizer
+    // MARK: - RandomNumberGenerator
 
-    // #documentation(SDGCornerstone.Randomizer.randomNumber())
+    // #documentation(SDGCornerstone.RandomNumberGenerator.next())
     /// Returns a random value.
-    ///
-    /// - SeeAlso: `randomNumber(inRange:)`
-    public func randomNumber() -> UIntMax {
+    public mutating func next() -> UInt64 {
 
         // This is derived from the C code of David Blackman and Sebastiano Vigna’s xoroshiro128+ algorithm, which they have dedicated to the public domain. (retrieved on 2016‐12‐08 from http://vigna.di.unimi.it/xorshift/xoroshiro128plus.c)
 
