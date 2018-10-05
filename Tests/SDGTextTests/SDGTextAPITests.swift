@@ -456,10 +456,7 @@ class SDGTextAPITests : TestCase {
 
         func verifyVisible(_ codePoint: Int) {
             if let scalar = UnicodeScalar(codePoint) {
-                #if !os(Linux)
-                // #workaround(Swift 4.1.2, A number of obscure compatibility characters end up empty on Linux.)
                 XCTAssertNotEqual(scalar.visibleRepresentation, "")
-                #endif
             }
         }
         for codePoint in 0 ..< 0xFF {
