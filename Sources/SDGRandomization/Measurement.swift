@@ -51,8 +51,8 @@ extension Measurement where Scalar : RandomizableNumber {
     ///     - range: The allowed range for the random value.
     ///     - generator: The randomizer to use to generate the random value.
     @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
-        let scalar = Scalar(randomInRange: range.lowerBound.rawValue ..< range.upperBound.rawValue, fromRandomizer: randomizer)
-        self.init(rawValue: scalar)
+        let scalar = Scalar.random(in: range.lowerBound.rawValue ..< range.upperBound.rawValue, using: &generator)
+        return Self(rawValue: scalar)
     }
 
     // #documentation(SDGCornerstone.Measurement.init(randomInRange:fromRandomizer:))
@@ -64,7 +64,7 @@ extension Measurement where Scalar : RandomizableNumber {
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
     @inlinable public static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
-        let scalar = Scalar(randomInRange: range.lowerBound.rawValue ... range.upperBound.rawValue, fromRandomizer: randomizer)
-        self.init(rawValue: scalar)
+        let scalar = Scalar.random(in: range.lowerBound.rawValue ... range.upperBound.rawValue, using: &generator)
+        return Self(rawValue: scalar)
     }
 }
