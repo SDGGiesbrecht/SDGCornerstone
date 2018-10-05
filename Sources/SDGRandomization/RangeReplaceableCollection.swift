@@ -17,23 +17,16 @@ import SDGControlFlow
 extension RangeReplaceableCollection {
 
     /// Shuffles the collection.
-    ///
-    /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @inlinable public mutating func shuffle(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) {
-        for i in indices {
-            let originalLocation = distance(from: startIndex, to: i)
-            let newLocation = Int(randomInRange: 0 ... originalLocation, fromRandomizer: randomizer)
-            let element = remove(at: index(startIndex, offsetBy: originalLocation))
-            insert(element, at: index(startIndex, offsetBy: newLocation))
-        }
+    @inlinable public mutating func shuffle() {
+        var generator = SystemRandomNumberGenerator()
+        self = Self(shuffled(using: &generator))
     }
 
-    /// Returns a shuffled collection.
+    /// Shuffles the collection.
     ///
     /// - Parameters:
-    ///     - randomizer: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
-    @inlinable public func shuffled(usingRandomizer randomizer: Randomizer = PseudorandomNumberGenerator.defaultGenerator) -> Self {
-        return nonmutatingVariant(of: { $0.shuffle(usingRandomizer: $1) }, on: self, with: randomizer)
+    ///     - generator: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    @inlinable public mutating func shuffle<R>(using generator: inout R) where R : RandomNumberGenerator {
+        self = Self(shuffled(using: &generator))
     }
 }
