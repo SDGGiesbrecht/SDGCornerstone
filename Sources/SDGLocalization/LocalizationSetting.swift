@@ -18,7 +18,6 @@ import SDGControlFlow
 import SDGLogic
 import SDGText
 import SDGPersistence
-import SDGRandomization
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
 public struct LocalizationSetting : Codable, Equatable {
