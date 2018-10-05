@@ -16,7 +16,6 @@ extension Bool {
 
     // MARK: - Randomization
 
-    #warning("These need testing.")
     // #example(1, alternatingBooleans)
     /// A value a `Randomizer` can return that will result in `false`.
     ///
