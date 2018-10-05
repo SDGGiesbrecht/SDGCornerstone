@@ -83,7 +83,7 @@ class MiscellaneousExampleTests : TestCase {
 
         // @example(decrease)
         func rollDie() -> Int {
-            return Int(randomInRange: 1 ... 6)
+            return Int.random(in: 1 ... 6)
         }
 
         let numberOfRolls = 5
@@ -104,7 +104,7 @@ class MiscellaneousExampleTests : TestCase {
 
         // @example(mutateValue)
         func rollDie() -> Int {
-            return Int(randomInRange: 1 ... 6)
+            return Int.random(in: 1 ... 6)
         }
 
         var frequencies = [Int: Int]()
@@ -142,7 +142,7 @@ class MiscellaneousExampleTests : TestCase {
 
         // @example(increase)
         func rollDie() -> Int {
-            return Int(randomInRange: 1 ... 6)
+            return Int.random(in: 1 ... 6)
         }
 
         let numberOfRolls = 5
