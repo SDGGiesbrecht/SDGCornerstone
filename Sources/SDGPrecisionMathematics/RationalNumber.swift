@@ -316,13 +316,13 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     private static let randomPrecision: Integer = Integer(UIntMax.max) + 1
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<RationalNumber>, fromRandomizer randomizer: Randomizer) {
+    public static func random<R>(in range: ClosedRange<RationalNumber>, using generator: inout R) -> RationalNumber where R : RandomNumberGenerator {
         let difference = range.upperBound − range.lowerBound
         let denominator = difference.denominator
 
@@ -330,10 +330,11 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
         let scaled = numeratorRange × RationalNumber.randomPrecision
 
-        let scaledNumerator = Integer(randomInRange: 0 ... scaled, fromRandomizer: randomizer)
+        let scaledNumerator = Integer.random(in: 0 ... scaled, using: &generator)
 
-        self = RationalNumber(numerator: scaledNumerator, denominator: RationalNumber.randomPrecision × denominator)
+        var result = RationalNumber(numerator: scaledNumerator, denominator: RationalNumber.randomPrecision × denominator)
 
-        self += range.lowerBound
+        result += range.lowerBound
+        return result
     }
 }
