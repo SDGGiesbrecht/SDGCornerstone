@@ -16,30 +16,6 @@
 import CoreGraphics
 #endif
 
-import SDGMathematics
-
-extension FloatFamily {
-
-    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
-
-        // 0 ..< UInt64.max
-        let random: UInt64 = randomizer.randomNumber()
-
-        // 0 ..< 1
-        let converted = Self(random) ÷ Self(UInt64.max)
-
-        // lowerBound ..< upperBound
-        let rangeSize: Self = range.upperBound − range.lowerBound
-        self = range.lowerBound + (rangeSize × converted)
-    }
-}
-
 extension Double : RandomizableNumber {}
 #if canImport(CoreGraphics)
 extension CGFloat : RandomizableNumber {}
