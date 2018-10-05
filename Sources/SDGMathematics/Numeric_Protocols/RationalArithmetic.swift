@@ -45,6 +45,21 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The divisor.
     static func ÷= (precedingValue: inout Self, followingValue: Self)
+
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    static func random(in range: Range<Self>) -> Self
+
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using))
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator
 }
 
 extension RationalArithmetic {
@@ -75,6 +90,46 @@ extension RationalArithmetic {
         }
     }
 
+    @inlinable internal static func _random(in range: Range<Self>) -> Self {
+        var generator = SystemRandomNumberGenerator()
+        return random(in: range, using: &generator)
+    }
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    @inlinable public static func random(in range: Range<Self>) -> Self {
+        return _random(in: range)
+    }
+
+    @inlinable internal static func _random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
+
+        _assert(¬range.isEmpty, { (localization: _APILocalization) in
+            switch localization { // @exempt(from: tests)
+            case .englishCanada:
+                return "Empty range."
+            }
+        })
+
+        var result = range.upperBound
+
+        while result == range.upperBound {
+            result = Self.random(in: range.lowerBound ... range.upperBound, using: &generator)
+        }
+
+        return result
+    }
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using))
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
+        return _random(in: range, using: &generator)
+    }
+
     // MARK: - ExpressibleByFloatLiteral
 
     // @documentation(SDGCornerstone.ExpressibleByFloatLiteral.init(floatLiteral:))
@@ -84,5 +139,28 @@ extension RationalArithmetic {
     ///     - floatLiteral: The floating point literal.
     @inlinable public init(floatLiteral: FloatMax) {
         self.init(floatLiteral)
+    }
+}
+
+extension RationalArithmetic where Self : BinaryFloatingPoint, Self.RawSignificand : FixedWidthInteger {
+    // Disambiguate
+
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    @inlinable public static func random(in range: Range<Self>) -> Self {
+        return _random(in: range)
+    }
+
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using))
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - randomizer: The randomizer to use to generate the random value.
+    @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
+        return _random(in: range, using: &generator)
     }
 }

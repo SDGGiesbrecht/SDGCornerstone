@@ -15,12 +15,12 @@
 /// Tests a type’s conformance to RandomNumberGenerator.
 @inlinable public func testRandomNumberGeneratorConformance<T>(of randomizer: T, file: StaticString = #file, line: UInt = #line) where T : RandomNumberGenerator {
 
-    let range: ClosedRange<UIntMax> = 0 ... 10
+    let range: ClosedRange<UInt64> = 0 ... 10
 
     for _ in 1 ... 10 {
         var generator = randomizer
         _ = generator.next()
-        let random = UIntMax.random(in: range, using: &generator)
+        let random = UInt64.random(in: range, using: &generator)
         test(range.contains(random), "\(random) ∉ \(range)")
     }
 }

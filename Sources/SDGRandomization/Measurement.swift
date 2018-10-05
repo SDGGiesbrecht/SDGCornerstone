@@ -14,8 +14,7 @@
 
 import SDGMathematics
 
-// #workaround(Swift 4.1.2, In Swift 4.1, this can be just “extension Measurement {”.)
-extension Measurement where Scalar : RandomizableNumber {
+extension Measurement {
 
 
     // @documentation(SDGCornerstone.Measurement.init(randomInRange:))
