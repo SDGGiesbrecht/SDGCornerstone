@@ -12,12 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-#if canImport(Glibc)
-import Glibc
-#endif
-
-import SDGControlFlow
 import SDGMathematics
 
 /// A pseudorandom number generator.
