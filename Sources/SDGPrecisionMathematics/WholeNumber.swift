@@ -351,13 +351,13 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         self = quotientAndRemainder(for: divisor).remainder
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<WholeNumber>, fromRandomizer randomizer: Randomizer) {
+    public static func random<R>(in range: ClosedRange<WholeNumber>, using generator: inout R) -> WholeNumber where R : RandomNumberGenerator {
         let rangeSize: WholeNumber = range.upperBound − range.lowerBound
 
         var atLimit = true
@@ -365,17 +365,17 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         for digitIndex in rangeSize.digitIndices.reversed() {
             if atLimit {
                 let maximum = rangeSize[digitIndex]
-                let digit = Digit(randomInRange: 0 ... maximum, fromRandomizer: randomizer)
+                let digit = Digit.random(in: 0 ... maximum, using: &generator)
                 if digit ≠ maximum {
                     atLimit = false // @exempt(from: tests)
                 }
                 offset[digitIndex] = digit
             } else {
                 // @exempt(from: tests)
-                offset[digitIndex] = Digit(randomInRange: 0 ... Digit.max, fromRandomizer: randomizer)
+                offset[digitIndex] = Digit.random(in: 0 ... Digit.max, using: &generator)
             }
         }
 
-        self = range.lowerBound + offset
+        return range.lowerBound + offset
     }
 }
