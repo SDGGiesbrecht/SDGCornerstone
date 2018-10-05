@@ -134,19 +134,6 @@ class SDGPersistenceAPITests : TestCase {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
-        #elseif os(Linux)
-        let url = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config/\(testDomainExternalName).plist")
-        do {
-            let data = try Data(from: url)
-            let decoded = try PropertyListSerialization.propertyList(from: data, options: [], format: nil)
-            guard let preferences = decoded as? [String: Any] else {
-                XCTFail("Loading written preference resulted in an unexpected type: \(type(of: decoded))")
-                return
-            }
-            XCTAssertEqual(preferences[testKey] as? Bool, true, "Failed to write preferences to disk.")
-        } catch {
-            XCTFail("An error occurred while verifying write test: \(error)")
-        }
         #endif
 
         let externalTestKey = "SDGExternalTestKey"
@@ -159,21 +146,13 @@ class SDGPersistenceAPITests : TestCase {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
-        #elseif os(Linux)
-        do {
-            let data = try PropertyListSerialization.data(fromPropertyList: [externalTestKey: stringValue], format: .xml, options: 0)
-            try data.save(to: url)
-        } catch {
-            XCTFail("An error occurred while setting up read test: \(error)")
-        }
         #endif
 
         let causeSynchronization = "CauseSynchronization"
         preferences[testKey].value.set(to: causeSynchronization)
         XCTAssertEqual(preferences[testKey].value.as(String.self), causeSynchronization)
-        #if !(os(iOS) || os(watchOS) || os(tvOS))
-        // iOS and tvOS could not externally write this to the disk in the first place (see #if statement above).
-
+        #if os(macOS)
+        // Only macOS can externally write this to the disk in the first place (see #if statement above).
         XCTAssertEqual(preferences[externalTestKey].value.as(String.self), stringValue, "Failed to read preferences from disk.")
         #endif
 

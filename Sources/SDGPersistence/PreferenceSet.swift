@@ -91,70 +91,26 @@ public final class PreferenceSet {
 
     // MARK: - Storage
 
-    #if os(Linux)
-    // #workaround(Swift 4.1.2, Foundation may handle preferences itself eventually.)
-    private static let directory = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".config")
-    #endif
-
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: Preference] {
-
-        let objects: [String: NSObject]
-
-        #if os(Linux)
-
-            do {
-                let propertyListData = try Data(from: PreferenceSet.directory.appendingPathComponent("\(possibleDebugDomain).plist"))
-                let decoded = try PropertyListSerialization.propertyList(from: propertyListData, options: [], format: nil)
-                guard let dictionary = decoded as? [String: Any] else {
-                    return [:]
-                }
-                objects = dictionary.mapValues { Preference.cast($0) }
-            } catch {
-                return [:]
-            }
-
-        #else
-
-            objects = (UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) ?? [:]) as! [String: NSObject]
-
-        #endif
-
-        return objects.mapValues { Preference(propertyListObject: $0) }
+        let values = UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) ?? [:]
+        return values.mapValues { Preference(propertyListObject: Preference.cast($0)) }
     }
     private func readFromDisk() -> [String: Preference] {
         return PreferenceSet.readFromDisk(for: possibleDebugDomain)
     }
 
     private func writeToDisk(_ preferences: [String: Preference]) {
-
         var objects: [String: NSObject] = [:]
         for (key, prefrence) in preferences {
             objects[key] = prefrence.propertyListObject
         }
-
-        #if os(Linux)
-
-            do {
-                let propertyList = try PropertyListSerialization.data(fromPropertyList: objects, format: .xml, options: 0)
-                try propertyList.save(to: PreferenceSet.directory.appendingPathComponent("\(possibleDebugDomain).plist"))
-            } catch {
-                if BuildConfiguration.current == .debug {
-                    print(error)
-                }
+        _assert(possibleDebugDomain ≠ UserDefaults.globalDomain, { (localization: _APILocalization) -> String in
+            switch localization { // @exempt(from: tests)
+            case .englishCanada:
+                return "Attempted to write preferences to the global domain. This domain is read‐only."
             }
-
-        #else
-
-            _assert(possibleDebugDomain ≠ UserDefaults.globalDomain, { (localization: _APILocalization) -> String in
-                switch localization { // @exempt(from: tests)
-                case .englishCanada:
-                    return "Attempted to write preferences to the global domain. This domain is read‐only."
-                }
-            })
-
-            UserDefaults.standard.setPersistentDomain(objects, forName: possibleDebugDomain)
-
-        #endif
+        })
+        UserDefaults.standard.setPersistentDomain(objects, forName: possibleDebugDomain)
     }
 
     // MARK: - Merging Changes
