@@ -85,15 +85,17 @@ class SDGRandomizationAPITests : TestCase {
     }
 
     func testRangeReplaceableCollection() {
-        var last = [1, 2, 3, 4, 5]
+        var last = "12345"
         var same = true
         for _ in 1 ... 100 where same {
-            let next = last.shuffled()
+            let next = String(last.shuffled())
             if ¬next.elementsEqual(last) {
                 same = false
             }
             last = next
         }
         XCTAssert(¬same)
+
+        last.shuffle()
     }
 }
