@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGLogic
 
 /// A “random” number generator that returns numbers in a pre‐determined cycle.
-public final class CyclicalNumberGenerator : Randomizer {
+public final class CyclicalNumberGenerator : RandomNumberGenerator {
 
     private let sequence: [UIntMax]
     private var index: Array<UIntMax>.Index
