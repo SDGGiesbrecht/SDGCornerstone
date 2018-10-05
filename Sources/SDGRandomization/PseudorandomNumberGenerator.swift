@@ -22,73 +22,23 @@ import SDGMathematics
 
 /// A pseudorandom number generator.
 ///
+/// Two independent instances that have been initialized the same way will return the same sequence of values. For example, in a networked game, as long as each device initializes their instance of the `PseudorandomNumberGenerator` the same, each device can safely rely on its local instance to return the same values as are being returned on the other devices with no risk of the game states diverging.
+///
+/// - Warning: The above guarantee of deterministic behaviour does not apply between differing module versions.
+///
 /// Currently, `PseudorandomNumberGenerator` uses the [xoroshiro128+](https://en.wikipedia.org/wiki/Xoroshiro128%2B) algorithm designed by David Blackman and Sebastiano Vigna.
-public final class PseudorandomNumberGenerator : Randomizer {
+public final class PseudorandomNumberGenerator : RandomNumberGenerator {
 
     /// The seed.
     public typealias Seed = (UInt64, UInt64)
 
     private var state: Seed
 
-    /// An automatically seeded pseudorandom number generator for general use.
-    ///
-    /// - Note: If deterministic behaviour is needed, use `init(seed: Seed)` instead.
-    public static let defaultGenerator: PseudorandomNumberGenerator = {
-        return PseudorandomNumberGenerator(seed: generateSeed())
-    }()
-
-    #if canImport(Glibc)
-    private static var _linuxState: random_data = random_data()
-    private static var __linuxStateStorage: [Int8] = Array(repeating: 0, count: 256) /* Must be static to persist under memory management. */
-    private static let linuxIsSeeded: Bool = {
-        // “static let” in order to be run only once.
-        let instantInt: Int = time(nil)
-        let instant: UInt32 = UInt32(truncatingIfNeeded: instantInt)
-
-        let storagePointer: UnsafeMutablePointer<Int8> = UnsafeMutablePointer(mutating: __linuxStateStorage)
-
-        _ = initstate_r(instant, storagePointer, __linuxStateStorage.count, &_linuxState)
-
-        return true
-    }()
-    private static var linuxState: random_data {
-        get {
-            if linuxIsSeeded {
-                return _linuxState
-            } else {
-                _unreachable()
-            }
-        }
-        set {
-            _linuxState = newValue
-        }
-    }
-    #endif
-
     /// Returns a new, randomly generated seed.
     public static func generateSeed() -> Seed {
-        func systemSpecificRandom() -> UInt32 {
-            #if canImport(Glibc)
-
-            var result: Int32 = 0
-            _ = random_r(&linuxState, &result) /* 0 ≤ x < 2 ↑ 31 */
-            return UInt32(bitPattern: result)
-
-            #else
-
-            return arc4random()
-
-            #endif
-        }
-
         func generateHalf() -> UInt64 {
-
-            var result = UInt64(systemSpecificRandom())
-            result = result << 32
-            result += UInt64(systemSpecificRandom())
-            return result
+            return UInt64.random(in: UInt64.min ... UInt64.max)
         }
-
         return (generateHalf(), generateHalf())
     }
 
