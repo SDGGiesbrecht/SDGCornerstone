@@ -490,17 +490,14 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: { $0.round($1) }, on: self, with: rule)
     }
 
-    @inlinable internal static func _random(in range: ClosedRange<Self>) -> Self {
-        var generator = SystemRandomNumberGenerator()
-        return random(in: range, using: &generator)
-    }
     // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
     /// Creates a random value within a particular range.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
-        return _random(in: range)
+        var generator = SystemRandomNumberGenerator()
+        return random(in: range, using: &generator)
     }
 
     // MARK: - ExpressibleByIntegerLiteral
@@ -552,6 +549,11 @@ extension WholeArithmetic {
     return N.lcm(a, b)
 }
 
+extension BinaryFloatingPoint where Self.RawSignificand : FixedWidthInteger {
+    @inlinable internal static func _random(in range: ClosedRange<Self>) -> Self {
+        return random(in: range)
+    }
+}
 extension WholeArithmetic where Self : BinaryFloatingPoint, Self.RawSignificand : FixedWidthInteger {
     // Disambiguate
 
@@ -565,6 +567,11 @@ extension WholeArithmetic where Self : BinaryFloatingPoint, Self.RawSignificand 
     }
 }
 
+extension FixedWidthInteger {
+    @inlinable internal static func _random(in range: ClosedRange<Self>) -> Self {
+        return random(in: range)
+    }
+}
 extension WholeArithmetic where Self : FixedWidthInteger {
     // Disambiguate
 
