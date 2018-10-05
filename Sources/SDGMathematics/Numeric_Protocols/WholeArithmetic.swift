@@ -219,6 +219,21 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
     func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
+
+    // @documentation(SDGCornerstone.WholeArithmetic.random(in:))
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    static func random(in range: ClosedRange<Self>) -> Self
+
+    // @documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
+    /// Creates a random value within a particular range using the specified randomizer.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    ///     - generator: The randomizer to use to generate the random value.
+    static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator
 }
 
 extension WholeArithmetic {
@@ -475,6 +490,19 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: { $0.round($1) }, on: self, with: rule)
     }
 
+    @inlinable internal static func _random(in range: ClosedRange<Self>) -> Self {
+        var generator = SystemRandomNumberGenerator()
+        return random(in: range, using: &generator)
+    }
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
+        return _random(in: range)
+    }
+
     // MARK: - ExpressibleByIntegerLiteral
 
     // @documentation(SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:))
@@ -522,4 +550,30 @@ extension WholeArithmetic {
 ///     - followingValue: Another value.
 @inlinable public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.lcm(a, b)
+}
+
+extension WholeArithmetic where Self : BinaryFloatingPoint, Self.RawSignificand : FixedWidthInteger {
+    // Disambiguate
+
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
+        return _random(in: range)
+    }
+}
+
+extension WholeArithmetic where Self : FixedWidthInteger {
+    // Disambiguate
+
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
+    /// Creates a random value within a particular range.
+    ///
+    /// - Parameters:
+    ///     - range: The allowed range for the random value.
+    @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
+        return _random(in: range)
+    }
 }

@@ -20,29 +20,7 @@ import SDGMathematics
 /// Conformance Requirements:
 ///
 /// - `init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)`
-public protocol RandomizableNumber : WholeArithmetic {
-
-    // @documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
-    static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator
-}
-
-extension RandomizableNumber {
-
-    // @documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:))
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
-        var generator = SystemRandomNumberGenerator()
-        return random(in: range, using: &generator)
-    }
-}
+public protocol RandomizableNumber : WholeArithmetic {}
 
 extension RandomizableNumber where Self : RationalArithmetic {
 
