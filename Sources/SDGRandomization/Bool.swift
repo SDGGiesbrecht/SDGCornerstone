@@ -35,7 +35,7 @@ extension Bool {
     /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
     /// // ...
     /// ```
-    public static let falseRandomizerValue: UInt64 = 1 >> 17
+    public static let falseRandomizerValue: UInt64 = 1 << 17
 
     // #example(1, alternatingBooleans)
     /// A value a `Randomizer` can return that will result in `true`.
