@@ -12,37 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGMathematics
-
-extension UIntFamily {
-
-    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer) {
-        let value = UIntMax(randomInRange: UIntMax(range.lowerBound) ... UIntMax(range.upperBound), fromRandomizer: randomizer)
-        self.init(value)
-    }
-}
-
-extension UIntMax {
-
-    // MARK: - RandomizableNumber
-
-    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<UIntMax>, fromRandomizer randomizer: Randomizer) {
-        self = randomizer.randomNumber(inRange: range)
-    }
-}
-
 extension UInt : RandomizableNumber {}
 extension UInt64 : RandomizableNumber {}
 extension UInt32 : RandomizableNumber {}
