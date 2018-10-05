@@ -27,8 +27,8 @@ public protocol RandomizableNumber : WholeArithmetic {
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    init(randomInRange range: ClosedRange<Self>, fromRandomizer randomizer: Randomizer)
+    ///     - generator: The randomizer to use to generate the random value.
+    static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator
 }
 
 extension RandomizableNumber {
@@ -38,8 +38,9 @@ extension RandomizableNumber {
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    @inlinable public init(randomInRange range: ClosedRange<Self>) {
-        self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
+    @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
+        var generator = SystemRandomNumberGenerator()
+        return random(in: range, using: &generator)
     }
 }
 
@@ -50,8 +51,9 @@ extension RandomizableNumber where Self : RationalArithmetic {
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    @inlinable public init(randomInRange range: Range<Self>) {
-        self.init(randomInRange: range, fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
+    @inlinable public static func random(in range: Range<Self>) -> Self {
+        var generator = SystemRandomNumberGenerator()
+        return random(in: range, using: &generator)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
@@ -60,7 +62,7 @@ extension RandomizableNumber where Self : RationalArithmetic {
     /// - Parameters:
     ///     - range: The allowed range for the random value.
     ///     - randomizer: The randomizer to use to generate the random value.
-    @inlinable public init(randomInRange range: Range<Self>, fromRandomizer randomizer: Randomizer) {
+    @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
 
         _assert(¬range.isEmpty, { (localization: _APILocalization) in
             switch localization { // @exempt(from: tests)
@@ -69,12 +71,12 @@ extension RandomizableNumber where Self : RationalArithmetic {
             }
         })
 
-        var random = range.upperBound
+        var result = range.upperBound
 
-        while random == range.upperBound {
-            random = Self(randomInRange: range.lowerBound ... range.upperBound, fromRandomizer: randomizer)
+        while result == range.upperBound {
+            result = Self.random(in: range.lowerBound ... range.upperBound, using: &generator)
         }
 
-        self = random
+        return result
     }
 }
