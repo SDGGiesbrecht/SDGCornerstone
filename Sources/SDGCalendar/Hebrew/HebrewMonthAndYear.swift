@@ -107,7 +107,7 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
     public static func == (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Bool {
-        return (precedingValue.year, precedingValue.month) == (followingValue.year, followingValue.month)
+        return precedingValue.year == followingValue.year ∧ precedingValue.month == followingValue.month
     }
 
     // MARK: - PointProtocol
