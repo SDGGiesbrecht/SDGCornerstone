@@ -56,6 +56,7 @@ class SDGGeometryAPITests : TestCase {
     #endif
     func testVector() {
         #if canImport(CoreGraphics)
+
         XCTAssertEqual(CGVector(Δx : 1, Δy : 1) − CGVector(Δx : 1, Δy : 1), CGVector(Δx : 0, Δy : 0))
         XCTAssertEqual(CGVector(Δx : 0, Δy : 0) + CGVector(Δx : 1, Δy : 1), CGVector(Δx : 1, Δy : 1))
 
@@ -83,7 +84,8 @@ class SDGGeometryAPITests : TestCase {
         XCTAssert(CGVector(direction: 270°, length: 1).Δx ≈ 0)
         XCTAssert(CGVector(direction: 270°, length: 1).Δy ≈ −1)
 
-        XCTAssert(CGVector(Δx : 1, Δy : 1).hashValue ≤ Int.max)
+        var hasher = Hasher()
+        CGVector(Δx : 1, Δy : 1).hash(into: &hasher)
 
         XCTAssertEqual(TwoDimensionalVectorExample(Δx : 0, Δy : 0), TwoDimensionalVectorExample.additiveIdentity)
 

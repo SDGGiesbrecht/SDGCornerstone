@@ -124,10 +124,11 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - Hashable
 
-    // #documentation(SDGCornerstone.Hashable.hashValue)
-    /// The hash value.
-    @inlinable public var hashValue: Int {
-        return Δx.hashValue ^ Δy.hashValue
+    // #documentation(SDGCornerstone.Hashable.hash(into:))
+    /// Hashes the essential components of this value by feeding them into the given hasher.
+    @inlinable public func hash(into hasher: inout Hasher) {
+        hasher.combine(Δx)
+        hasher.combine(Δy)
     }
 
     // MARK: - VectorProtocol

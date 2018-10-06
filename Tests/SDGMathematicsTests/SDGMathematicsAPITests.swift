@@ -222,9 +222,6 @@ class SDGMathematicsAPITests : TestCase {
         init(_ value: Int) {
             self.value = value
         }
-        var hashValue: Int {
-            return value
-        }
         static var additiveIdentity = PointProtocolVectorSelfExample(0)
         static func += (precedingValue: inout PointProtocolVectorSelfExample, followingValue: PointProtocolVectorSelfExample) {
             precedingValue.value += followingValue.value
@@ -281,9 +278,6 @@ class SDGMathematicsAPITests : TestCase {
         var value: Double
         init(_ value: Double) {
             self.value = value
-        }
-        var hashValue: Int {
-            return value.hashValue
         }
         static func < (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample) -> Bool {
             return precedingValue.value < followingValue.value
@@ -522,9 +516,6 @@ class SDGMathematicsAPITests : TestCase {
         }
         static var additiveIdentity: VectorProtocolExample {
             return VectorProtocolExample(0)
-        }
-        var hashValue: Int {
-            return value.hashValue
         }
         typealias Scalar = Double
         static func ×= (precedingValue: inout VectorProtocolExample, followingValue: Scalar) {
