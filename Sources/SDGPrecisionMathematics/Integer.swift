@@ -184,8 +184,8 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    public static postfix func −= (operand: inout Integer) {
-        operand.isNegative.toggle()
+    public mutating func negate() {
+        isNegative.toggle()
     }
 
     // MARK: - Numeric

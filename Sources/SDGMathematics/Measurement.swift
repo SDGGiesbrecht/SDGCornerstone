@@ -469,13 +469,10 @@ extension Measurement {
         return Self(rawValue: −operand.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Negatable.−=)
-    /// Sets the operand to its additive inverse.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify by inversion.
-    @inlinable public static postfix func −= (operand: inout Self) {
-        operand.rawValue−=
+    // #documentation(SDGCornerstone.Negatable.negate())
+    /// Replaces this value with its additive inverse.
+    @inlinable public mutating func negate() {
+        rawValue.negate()
     }
 
     // MARK: - NumericAdditiveArithmetic

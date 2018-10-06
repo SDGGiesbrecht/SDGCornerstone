@@ -44,7 +44,6 @@ infix operator ≈: ComparisonPrecedence
 infix operator −: AdditionPrecedence
 prefix operator −
 infix operator −=: AssignmentPrecedence
-postfix operator −=
 infix operator ±: AdditionPrecedence
 prefix operator |
 postfix operator |

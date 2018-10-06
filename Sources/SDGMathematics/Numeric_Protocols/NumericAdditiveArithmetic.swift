@@ -127,7 +127,7 @@ extension NumericAdditiveArithmetic where Self : Negatable {
     /// Sets `self` to its absolute value.
     @inlinable public mutating func formAbsoluteValue() {
         if self < Self.additiveIdentity {
-            self−=
+            self.negate()
         }
     }
 }

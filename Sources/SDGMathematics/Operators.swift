@@ -59,9 +59,6 @@ prefix operator −
 ///     - followingValue: The value to subtract.
 infix operator −=: AssignmentPrecedence
 
-/// Modifies the operand by additive inversion.
-postfix operator −=
-
 // #documentation(SDGCornerstone.Subtractable.±)
 /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
 ///

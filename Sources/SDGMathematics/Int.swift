@@ -48,15 +48,6 @@ extension IntFamily {
         return -operand
     }
 
-    // #documentation(SDGCornerstone.Negatable.−=)
-    /// Sets the operand to its additive inverse.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify by inversion.
-    @inlinable public static postfix func −= (operand: inout Self) {
-        operand.negate()
-    }
-
     // MARK: - NumericAdditiveArithmetic
 
     // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)

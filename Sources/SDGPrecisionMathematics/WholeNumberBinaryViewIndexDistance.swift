@@ -70,9 +70,9 @@ extension WholeNumber.BinaryView {
 
         // MARK: - Negatable
 
-        internal static postfix func −= (operand: inout IndexDistance) {
-            operand.digitDistance−=
-            operand.bitDistance−=
+        internal mutating func negate() {
+            digitDistance.negate()
+            bitDistance.negate()
         }
 
         // MARK: - SignedNumeric

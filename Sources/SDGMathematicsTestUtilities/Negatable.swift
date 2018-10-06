@@ -18,5 +18,5 @@
     testAddableConformance(augend: difference, addend: subtrahend, sum: minuend, file: file, line: line)
 
     test(prefixOperator: (−, "−"), on: subtrahend, returns: difference − minuend, file: file, line: line)
-    test(postfixAssignmentOperator: (−=, "−="), with: subtrahend, resultsIn: difference − minuend, file: file, line: line)
+    test(mutatingMethod: ({ $0.negate() }, "negate"), of: subtrahend, resultsIn: difference − minuend, file: file, line: line)
 }

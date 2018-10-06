@@ -70,8 +70,8 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
             // Normalize
 
             if unsafeDefinition.denominator.isNegative {
-                unsafeDefinition.numerator−=
-                unsafeDefinition.denominator−=
+                unsafeDefinition.numerator.negate()
+                unsafeDefinition.denominator.negate()
             }
 
             let divisor = SDGPrecisionMathematics.gcd(unsafeDefinition.numerator, unsafeDefinition.denominator)
@@ -206,14 +206,14 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     }
 
     // MARK: - Negatable
-
+    
     // #documentation(SDGCornerstone.Negatable.−=)
     /// Sets the operand to its additive inverse.
     ///
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
-    public static postfix func −= (operand: inout RationalNumber) {
-        operand.definition.numerator−=
+    public mutating func negate() {
+        definition.numerator.negate()
     }
 
     // MARK: - Numeric
