@@ -30,6 +30,7 @@ public typealias FloatMax = Float80
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
 public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
     static func _tgmath_log(_ x: Self) -> Self
+    static func _tgmath_log10(_ x: Self) -> Self
 }
 
 extension FloatFamily {
@@ -161,6 +162,25 @@ extension FloatFamily {
             formNaturalLogarithm()
             self ÷= Self.ln(base)
         }
+    }
+
+    // @documentation(SDGCornerstone.RealArithmetic.log(_:))
+    /// Returns the common logarithm of `antilogarithm`.
+    ///
+    /// - Precondition: `antilogarithm` > 0
+    ///
+    /// - Parameters:
+    ///     - antilogarithm: The antilogarithm.
+    @inlinable public static func log(_ antilogarithm: Self) -> Self {
+        return Self._tgmath_log10(antilogarithm)
+    }
+
+    // @documentation(SDGCornerstone.RealArithmetic.formCommonLogarithm())
+    /// Sets `self` to its common logarithm.
+    ///
+    /// - Precondition: `self` > 0
+    @inlinable public mutating func formCommonLogarithm() {
+        self = Self.log(self)
     }
 
     // @documentation(SDGCornerstone.RealArithmetic.ln(_:))
@@ -495,6 +515,10 @@ extension Double : FloatFamily {
         return Foundation.log(x)
     }
 
+    @inlinable public static func _tgmath_log10(_ x: Double) -> Double {
+        return Foundation.log10(x)
+    }
+
     // MARK: - PointProtocol
 
     // #documentation(SDGCornerstone.PointProtocol.Vector)
@@ -529,6 +553,10 @@ extension CGFloat : FloatFamily {
 
     @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
         return CoreGraphics.log(x)
+    }
+
+    @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.log10(x)
     }
 
     // MARK: - LosslessStringConvertible
@@ -598,6 +626,10 @@ extension Float80 : Codable, FloatFamily {
         return Foundation.log(x)
     }
 
+    @inlinable public static func _tgmath_log10(_ x: Float80) -> Float80 {
+        return Foundation.log10(x)
+    }
+
     // MARK: - PointProtocol
 
     // #documentation(SDGCornerstone.PointProtocol.Vector)
@@ -624,6 +656,10 @@ extension Float : FloatFamily {
 
     @inlinable public static func _tgmath_log(_ x: Float) -> Float {
         return Foundation.log(x)
+    }
+
+    @inlinable public static func _tgmath_log10(_ x: Float) -> Float {
+        return Foundation.log10(x)
     }
 
     // MARK: - PointProtocol
