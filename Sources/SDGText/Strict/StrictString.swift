@@ -208,8 +208,8 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // #documentation(SDGCornerstone.Hashable.hashValue)
     /// The hash value.
-    public var hashValue: Int {
-        return string.hashValue
+    @inlinable public func hash(into hasher: inout Hasher) {
+        hasher.combine(string)
     }
 
     // MARK: - RangeReplaceableCollection
