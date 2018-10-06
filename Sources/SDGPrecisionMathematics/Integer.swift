@@ -40,7 +40,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Properties
 
-    private struct Definition {
+    private struct Definition : Equatable, Hashable {
         fileprivate var magnitude: WholeNumber
         fileprivate var isNegative: Bool
     }
@@ -156,15 +156,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
     public static func == (precedingValue: Integer, followingValue: Integer) -> Bool {
-        return (precedingValue.isNegative, precedingValue.wholeMagnitude) == (followingValue.isNegative, followingValue.wholeMagnitude)
-    }
-
-    // MARK: - Hashable
-
-    // #documentation(SDGCornerstone.Hashable.hashValue)
-    /// The hash value.
-    public var hashValue: Int {
-        return wholeMagnitude.hashValue
+        return precedingValue.definition == followingValue.definition
     }
 
     // MARK: - IntegralArithmetic

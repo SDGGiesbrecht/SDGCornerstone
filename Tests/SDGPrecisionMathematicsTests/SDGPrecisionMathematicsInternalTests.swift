@@ -38,6 +38,7 @@ class SDGPrecisionMathematicsInternalTests : TestCase {
 
         XCTAssertEqual(WholeNumber.BinaryView(0).endIndex, WholeNumber.BinaryView.Index(digit: 0, bit: 0))
 
-        XCTAssert(WholeNumber.BinaryView.IndexDistance(digitDistance: 0, bitDistance: 0).hashValue ≤ Int.max)
+        var hasher = Hasher()
+        WholeNumber.BinaryView.IndexDistance(digitDistance: 0, bitDistance: 0).hash(into: &hasher)
     }
 }

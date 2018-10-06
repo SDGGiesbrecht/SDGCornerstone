@@ -199,7 +199,8 @@ class SDGTextAPITests : TestCase {
 
         XCTAssertEqual(markup.subscripted().rawTextApproximation(), "...")
 
-        XCTAssert(markup.hashValue ≤ Int.max)
+        var hasher = Hasher()
+        markup.hash(into: &hasher)
         XCTAssertEqual(SemanticMarkup("").source, "")
         XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
         XCTAssertEqual(SemanticMarkup().source, "")

@@ -105,9 +105,6 @@ class SDGMathematicsAPITests : TestCase {
         mutating func formBitwiseExclusiveOr(with other: BitFieldExample) {
             field.formBitwiseExclusiveOr(with: other.field)
         }
-        static func == (lhs: BitFieldExample, rhs: BitFieldExample) -> Bool {
-            return lhs.field == rhs.field
-        }
     }
     func testBitField() {
         testBitFieldConformance(start: 0b0101_0110 as BitFieldExample, not: 0b1010_1001, other: 0b1101_0010, and: 0b0101_0010, or: 0b1101_0110, exclusiveOr: 0b1000_0100)
@@ -225,12 +222,6 @@ class SDGMathematicsAPITests : TestCase {
         init(_ value: Int) {
             self.value = value
         }
-        static func == (precedingValue: PointProtocolVectorSelfExample, followingValue: PointProtocolVectorSelfExample) -> Bool {
-            return precedingValue.value == followingValue.value
-        }
-        var hashValue: Int {
-            return value
-        }
         static var additiveIdentity = PointProtocolVectorSelfExample(0)
         static func += (precedingValue: inout PointProtocolVectorSelfExample, followingValue: PointProtocolVectorSelfExample) {
             precedingValue.value += followingValue.value
@@ -287,12 +278,6 @@ class SDGMathematicsAPITests : TestCase {
         var value: Double
         init(_ value: Double) {
             self.value = value
-        }
-        static func == (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample) -> Bool {
-            return precedingValue.value == followingValue.value
-        }
-        var hashValue: Int {
-            return value.hashValue
         }
         static func < (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample) -> Bool {
             return precedingValue.value < followingValue.value
@@ -384,9 +369,6 @@ class SDGMathematicsAPITests : TestCase {
         var value: Int
         init(_ value: Int) {
             self.value = value
-        }
-        static func == (precedingValue: SubtractableNumericExample, followingValue: SubtractableNumericExample) -> Bool {
-            return precedingValue.value == followingValue.value
         }
         static func < (precedingValue: SubtractableNumericExample, followingValue: SubtractableNumericExample) -> Bool {
             return precedingValue.value < followingValue.value
@@ -534,12 +516,6 @@ class SDGMathematicsAPITests : TestCase {
         }
         static var additiveIdentity: VectorProtocolExample {
             return VectorProtocolExample(0)
-        }
-        static func == (precedingValue: VectorProtocolExample, followingValue: VectorProtocolExample) -> Bool {
-            return precedingValue.value == followingValue.value
-        }
-        var hashValue: Int {
-            return value.hashValue
         }
         typealias Scalar = Double
         static func ×= (precedingValue: inout VectorProtocolExample, followingValue: Scalar) {

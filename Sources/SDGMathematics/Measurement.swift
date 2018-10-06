@@ -452,10 +452,10 @@ extension Measurement {
 
     // MARK: - Hashable
 
-    // #documentation(SDGCornerstone.Hashable.hashValue)
-    /// The hash value.
-    @inlinable public var hashValue: Int {
-        return rawValue.hashValue
+    // #documentation(SDGCornerstone.Hashable.hash(into:))
+    /// Hashes the essential components of this value by feeding them into the given hasher.
+    @inlinable public func hash(into hasher: inout Hasher) {
+        hasher.combine(rawValue)
     }
 
     // MARK: - Negatable
