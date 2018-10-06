@@ -33,6 +33,8 @@ public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible,
     static func _tgmath_log(_ x: Self) -> Self
     static func _tgmath_log10(_ x: Self) -> Self
     static func _tgmath_sin(_ x: Self) -> Self
+    static func _tgmath_cos(_ x: Self) -> Self
+    static func _tgmath_atan(_ x: Self) -> Self
 }
 
 extension FloatFamily {
@@ -181,58 +183,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - angle: The angle.
     @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
-
-        if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
-            // Use periodic reference angle.
-            return cos(angle.mod(τ.rad))
-        } else if angle > π.rad {
-            // Quadrants III & IV
-            return cos(τ.rad − angle)
-        } else if angle > (π ÷ 2).rad {
-            // Quadrant II
-            return −cos(π.rad − angle)
-        } else {
-            // Quadrant I
-
-            if angle > (π ÷ 4).rad {
-                // Sine converges faster in this range.
-                return sin((π ÷ 2).rad − angle)
-            } else {
-
-                //   ∞         n + 1      2n
-                //   ∑    ( (−1)      ___θ___ )
-                // n = 0               (2n)!
-
-                var result: Self = 0
-                var lastApproximate: Self = result
-                var negative = false
-                var numerator: Self = 1
-                var _2n: Self = 0
-                var denominator: Self = 1
-                repeat {
-                    lastApproximate = result
-
-                    var term = numerator ÷ denominator
-                    if negative {
-                        term.negate()
-                    }
-                    result += term
-
-                    negative.toggle()
-
-                    let multiplicationStep = {
-                        numerator ×= angle.inRadians
-                        _2n += 1 as Self
-                        denominator ×= _2n
-                    }
-                    multiplicationStep()
-                    multiplicationStep()
-
-                } while result ≠ lastApproximate
-
-                return result
-            }
-        }
+        return Self._tgmath_cos(angle.inRadians)
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
@@ -243,45 +194,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - tangent: The tangent.
     @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
-
-        if tangent.isNegative {
-            return −arctan(−tangent)
-        } else if tangent > 1 {
-            return (π ÷ 2).rad − arctan(1 ÷ tangent)
-        } else if tangent > 2 − √3 {
-            let r3: Self = √3
-            let numerator: Self = r3 × tangent − (1 as Self)
-            let referenceTangent: Self = numerator ÷ (r3 + tangent)
-            return (π ÷ 6).rad + arctan(referenceTangent)
-        } else {
-
-            //   ∞         n + 1     2n − 1
-            //   ∑    ( (−1)      __x_______ )
-            // n = 1               (2n − 1)
-
-            var result: Self = 0
-            var lastApproximate: Self = result
-            var negative = false
-            var numerator = tangent
-            let x_2 = tangent × tangent
-            var denominator: Self = 1
-            repeat {
-                lastApproximate = result
-
-                var term = numerator ÷ denominator
-                if negative {
-                    term.negate()
-                }
-                result += term
-
-                negative.toggle()
-                numerator ×= x_2
-                denominator += 2 as Self
-
-            } while result ≠ lastApproximate
-
-            return result.radians
-        }
+        return Self._tgmath_atan(tangent).radians
     }
 
     // MARK: - Subtractable
@@ -436,6 +349,14 @@ extension Double : FloatFamily {
         return Foundation.sin(x)
     }
 
+    @inlinable public static func _tgmath_cos(_ x: Double) -> Double {
+        return Foundation.cos(x)
+    }
+
+    @inlinable public static func _tgmath_atan(_ x: Double) -> Double {
+        return Foundation.atan(x)
+    }
+
     // MARK: - PointProtocol
 
     // #documentation(SDGCornerstone.PointProtocol.Vector)
@@ -478,6 +399,14 @@ extension CGFloat : FloatFamily {
 
     @inlinable public static func _tgmath_sin(_ x: CGFloat) -> CGFloat {
         return CoreGraphics.sin(x)
+    }
+
+    @inlinable public static func _tgmath_cos(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.cos(x)
+    }
+
+    @inlinable public static func _tgmath_atan(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.atan(x)
     }
 
     // MARK: - LosslessStringConvertible
@@ -555,6 +484,14 @@ extension Float80 : Codable, FloatFamily {
         return Foundation.sin(x)
     }
 
+    @inlinable public static func _tgmath_cos(_ x: Float80) -> Float80 {
+        return Foundation.cos(x)
+    }
+
+    @inlinable public static func _tgmath_atan(_ x: Float80) -> Float80 {
+        return Foundation.atan(x)
+    }
+
     // MARK: - PointProtocol
 
     // #documentation(SDGCornerstone.PointProtocol.Vector)
@@ -589,6 +526,14 @@ extension Float : FloatFamily {
 
     @inlinable public static func _tgmath_sin(_ x: Float) -> Float {
         return Foundation.sin(x)
+    }
+
+    @inlinable public static func _tgmath_cos(_ x: Float) -> Float {
+        return Foundation.cos(x)
+    }
+
+    @inlinable public static func _tgmath_atan(_ x: Float) -> Float {
+        return Foundation.atan(x)
     }
 
     // MARK: - PointProtocol
