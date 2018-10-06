@@ -14,7 +14,6 @@
 
 import SDGControlFlow
 import SDGLogic
-import SDGRandomization
 import SDGLocalization
 import SDGCornerstoneLocalizations
 
@@ -26,7 +25,7 @@ import SDGCornerstoneLocalizations
 /// let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
 /// let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
 /// ```
-public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, RandomizableNumber, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
+public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Equatable, Hashable, IntegerProtocol, IntegralArithmetic, Negatable, PointProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -279,23 +278,22 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(randomInRange:fromRandomizer:))
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
-    public init(randomInRange range: ClosedRange<Integer>, fromRandomizer randomizer: Randomizer) {
-
+    ///     - generator: The randomizer to use to generate the random value.
+    public static func random<R>(in range: ClosedRange<Integer>, using generator: inout R) -> Integer where R : RandomNumberGenerator {
         if range.lowerBound.isWhole {
             let wholeRange: ClosedRange<WholeNumber> = range.lowerBound.wholeMagnitude ... range.upperBound.wholeMagnitude
-            let whole = WholeNumber(randomInRange: wholeRange, fromRandomizer: randomizer)
-            self = Integer(whole)
+            let whole = WholeNumber.random(in: wholeRange, using: &generator)
+            return Integer(whole)
         } else {
             let span = range.upperBound − range.lowerBound
             let wholeRange: ClosedRange<WholeNumber> = 0 ... span.wholeMagnitude
-            let whole = WholeNumber(randomInRange: wholeRange, fromRandomizer: randomizer)
-            self = range.lowerBound + Integer(whole)
+            let whole = WholeNumber.random(in: wholeRange, using: &generator)
+            return range.lowerBound + Integer(whole)
         }
     }
 }

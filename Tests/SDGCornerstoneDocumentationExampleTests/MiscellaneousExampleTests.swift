@@ -30,17 +30,17 @@ class MiscellaneousExampleTests : TestCase {
 
     func testAlternatingBooleans() {
         // @example(alternatingBooleans)
-        let alternating = CyclicalNumberGenerator([
+        var alternating = CyclicalNumberGenerator([
             Bool.falseRandomizerValue,
             Bool.trueRandomizerValue
             ])
 
-        XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-        XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-        XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-        XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-        XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-        XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+        XCTAssertEqual(Bool.random(using: &alternating), false)
+        XCTAssertEqual(Bool.random(using: &alternating), true)
+        XCTAssertEqual(Bool.random(using: &alternating), false)
+        XCTAssertEqual(Bool.random(using: &alternating), true)
+        XCTAssertEqual(Bool.random(using: &alternating), false)
+        XCTAssertEqual(Bool.random(using: &alternating), true)
         // ...
         // @endExample
     }
@@ -83,7 +83,7 @@ class MiscellaneousExampleTests : TestCase {
 
         // @example(decrease)
         func rollDie() -> Int {
-            return Int(randomInRange: 1 ... 6)
+            return Int.random(in: 1 ... 6)
         }
 
         let numberOfRolls = 5
@@ -104,7 +104,7 @@ class MiscellaneousExampleTests : TestCase {
 
         // @example(mutateValue)
         func rollDie() -> Int {
-            return Int(randomInRange: 1 ... 6)
+            return Int.random(in: 1 ... 6)
         }
 
         var frequencies = [Int: Int]()
@@ -142,7 +142,7 @@ class MiscellaneousExampleTests : TestCase {
 
         // @example(increase)
         func rollDie() -> Int {
-            return Int(randomInRange: 1 ... 6)
+            return Int.random(in: 1 ... 6)
         }
 
         let numberOfRolls = 5

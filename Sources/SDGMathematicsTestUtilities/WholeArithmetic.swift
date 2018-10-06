@@ -85,4 +85,10 @@
         test(method: (T.rounded, "rounded"), of: 0 − 95 as T, with: (.toNearestOrAwayFromZero, 10), returns: 0 − 100, file: file, line: line)
         test(method: (T.rounded, "rounded"), of: 0 − 95 as T, with: (.toNearestOrEven, 10), returns: 0 − 100, file: file, line: line)
     }
+
+    let range: ClosedRange<T> = 0 ... 10
+    for _ in 1 ... 10 {
+        let random = T.random(in: range)
+        test(range.contains(random), "\(random) ∉ \(range)")
+    }
 }

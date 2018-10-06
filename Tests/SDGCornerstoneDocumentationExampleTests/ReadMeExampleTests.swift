@@ -103,18 +103,6 @@ class ReadMeExampleTests : TestCase {
             XCTAssertEqual(numbers.firstMatch(for: pattern)?.range,
                            numbers.startIndex ..< numbers.endIndex)
 
-            // ••••••• Randomization •••••••
-
-            func rollDie() -> Int {
-                return Int(randomInRange: 1 ... 6)
-            }
-
-            if rollDie() == 1 ∧ rollDie() == 1 {
-                print("Snake eyes!")
-            } else {
-                print("Not this time...")
-            }
-
             // ••••••• Arbitrary Precision Arithmetic •••••••
 
             let tenDuotrigintillion: WholeNumber = "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"

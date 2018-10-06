@@ -280,8 +280,7 @@ let package = Package(
             "SDGMathematics",
             "SDGCollections",
             "SDGText",
-            "SDGPersistence",
-            "SDGRandomization"
+            "SDGPersistence"
             ]),
         // @documentation(SDGLocalizationTestUtilities)
         /// Utilities for testing code which uses `SDGLocalization`.
@@ -316,7 +315,6 @@ let package = Package(
             "SDGMathematics",
             "SDGCollections",
             "SDGBinaryData",
-            "SDGRandomization",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
             ]),

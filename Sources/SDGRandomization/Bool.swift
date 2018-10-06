@@ -16,28 +16,26 @@ extension Bool {
 
     // MARK: - Randomization
 
-    private static let randomizationBit: UInt64 = 1 << 48
-
     // #example(1, alternatingBooleans)
     /// A value a `Randomizer` can return that will result in `false`.
     ///
     /// For example:
     ///
     /// ```swift
-    /// let alternating = CyclicalNumberGenerator([
+    /// var alternating = CyclicalNumberGenerator([
     ///     Bool.falseRandomizerValue,
     ///     Bool.trueRandomizerValue
     ///     ])
     ///
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
     /// // ...
     /// ```
-    public static let falseRandomizerValue: UInt64 = 0
+    public static let falseRandomizerValue: UInt64 = 1 << 17
 
     // #example(1, alternatingBooleans)
     /// A value a `Randomizer` can return that will result in `true`.
@@ -45,26 +43,18 @@ extension Bool {
     /// For example:
     ///
     /// ```swift
-    /// let alternating = CyclicalNumberGenerator([
+    /// var alternating = CyclicalNumberGenerator([
     ///     Bool.falseRandomizerValue,
     ///     Bool.trueRandomizerValue
     ///     ])
     ///
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
     /// // ...
     /// ```
-    public static let trueRandomizerValue: UInt64 = randomizationBit
-
-    /// Creates a random Boolean value derived from a particular randomizer.
-    ///
-    /// - Parameters:
-    ///     - randomizer: The randomizer.
-    public init(fromRandomizer randomizer: Randomizer) {
-        self = randomizer.randomNumber().bitwiseAnd(with: Bool.randomizationBit) == Bool.randomizationBit
-    }
+    public static let trueRandomizerValue: UInt64 = 0
 }

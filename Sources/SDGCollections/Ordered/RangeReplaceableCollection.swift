@@ -190,6 +190,20 @@ extension RangeReplaceableCollection {
         return nonmutatingVariant(of: { $0.fill(to: $1, with: $2, from: $3) }, on: self, with: (count, element, direction))
     }
 
+    /// Shuffles the collection.
+    @inlinable public mutating func shuffle() {
+        var generator = SystemRandomNumberGenerator()
+        shuffle(using: &generator)
+    }
+
+    /// Shuffles the collection.
+    ///
+    /// - Parameters:
+    ///     - generator: A particular randomizer to use. (A `PseudorandomNumberGenerator` by default.)
+    @inlinable public mutating func shuffle<R>(using generator: inout R) where R : RandomNumberGenerator {
+        self = Self(shuffled(using: &generator))
+    }
+
     // MARK: - ExpressibleByArrayLiteral
 
     // #documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))

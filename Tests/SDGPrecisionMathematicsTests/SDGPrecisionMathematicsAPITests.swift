@@ -30,8 +30,8 @@ class SDGPrecisionMathematicsAPITests : TestCase {
         XCTAssertNotNil(Integer(exactly: SDGMathematics.IntMax.max))
         XCTAssertNotNil(Integer(exactly: SDGMathematics.IntMax.min))
 
-        XCTAssertEqual(Integer(randomInRange: 1 ... 1), 1)
-        XCTAssertEqual(Integer(randomInRange: −1 ... −1), −1)
+        XCTAssertEqual(Integer.random(in: 1 ... 1), 1)
+        XCTAssertEqual(Integer.random(in: −1 ... −1), −1)
 
         let negativeMillion: SDGPrecisionMathematics.Integer = −1000000
         testCustomStringConvertibleConformance(of: negativeMillion, localizations: FormatLocalization.self, uniqueTestName: negativeMillion.inDigits(), overwriteSpecificationInsteadOfFailing: false)
@@ -59,7 +59,7 @@ class SDGPrecisionMathematicsAPITests : TestCase {
         XCTAssertEqual((6 as RationalNumber).asRatio(), "6 ∶ 1")
         XCTAssertEqual((50_001 as RationalNumber ÷ 10_000).asRatio(), "50 001 ∶ 10 000")
 
-        XCTAssertEqual(RationalNumber(randomInRange: 1 ... 1), 1)
+        XCTAssertEqual(RationalNumber.random(in: 1 ... 1), 1)
 
         let simple = (−19 as RationalNumber ÷ 2)
         testCustomStringConvertibleConformance(of: simple, localizations: FormatLocalization.self, uniqueTestName: simple.asSimpleFraction(), overwriteSpecificationInsteadOfFailing: false)
@@ -89,10 +89,10 @@ class SDGPrecisionMathematicsAPITests : TestCase {
 
         XCTAssertEqual((1 as WholeNumber).abbreviatedEnglishOrdinal().rawTextApproximation(), "1st")
 
-        XCTAssertEqual(WholeNumber(randomInRange: 1 ... 1), 1)
+        XCTAssertEqual(WholeNumber.random(in: 1 ... 1), 1)
         let multipleDigits = WholeNumber(UIntMax.max).successor() ↑ 2
         let range = 0 ... multipleDigits.successor()
-        XCTAssert(range.contains(WholeNumber(randomInRange: range)))
+        XCTAssert(range.contains(WholeNumber.random(in: range)))
 
         let thousand: WholeNumber = 1000
         testCustomStringConvertibleConformance(of: thousand, localizations: FormatLocalization.self, uniqueTestName: thousand.inDigits(), overwriteSpecificationInsteadOfFailing: false)

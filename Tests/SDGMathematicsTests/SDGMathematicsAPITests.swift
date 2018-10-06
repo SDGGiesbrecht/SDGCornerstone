@@ -284,7 +284,6 @@ class SDGMathematicsAPITests : TestCase {
     }
 
     struct RealArithmeticExample : RealArithmetic {
-
         var value: Double
         init(_ value: Double) {
             self.value = value
@@ -322,6 +321,9 @@ class SDGMathematicsAPITests : TestCase {
         }
         static func ↑= (precedingValue: inout RealArithmeticExample, followingValue: RealArithmeticExample) {
             precedingValue.value ↑= followingValue.value
+        }
+        static func random<R>(in range: ClosedRange<SDGMathematicsAPITests.RealArithmeticExample>, using generator: inout R) -> SDGMathematicsAPITests.RealArithmeticExample where R : RandomNumberGenerator {
+            return RealArithmeticExample(Double.random(in: range.lowerBound.value ... range.upperBound.value, using: &generator))
         }
         init(_ int: SDGMathematics.IntMax) {
             value = Double(int)

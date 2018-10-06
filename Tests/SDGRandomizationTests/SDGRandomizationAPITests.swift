@@ -42,49 +42,40 @@ class SDGRandomizationAPITests : TestCase {
         }
         XCTAssert(sameOccurred)
         XCTAssert(differentOccurred)
-        _ = [1, 2, 3].randomElement(fromRandomizer: PseudorandomNumberGenerator.defaultGenerator)
+        _ = [1, 2, 3].randomElement()
     }
 
     func testCyclicalNumberGenerator() {
-        testRandomizerConformance(of: CyclicalNumberGenerator([0, 1, 6, 7, 11, 12, UInt64.max]))
-    }
-
-    func testDouble() {
-        XCTAssertEqual(Double(randomInRange: 0 ... 0), 0)
-        XCTAssert((0 ..< 1).contains(Double(randomInRange: 0 ..< 1)))
-    }
-
-    func testInt() {
-        testRandomizableNumberConformance(of: Int.self)
+        testRandomNumberGeneratorConformance(of: CyclicalNumberGenerator([0, 1, 6, 7, 11, 12, UInt64.max]))
     }
 
     func testMeasurement() {
-        XCTAssertEqual(Angle<Double>(randomInRange: 0.rad ... 0.rad), 0.rad)
-        XCTAssert((0° ..< 1°).contains(Angle<Double>(randomInRange: 0° ..< 1°)))
+        XCTAssertEqual(Angle<Double>.random(in: 0.rad ... 0.rad), 0.rad)
+        XCTAssert((0° ..< 1°).contains(Angle<Double>.random(in: 0° ..< 1°)))
     }
 
     func testPseudorandomNumberGenerator() {
-        let randomizer = PseudorandomNumberGenerator.defaultGenerator
-        testRandomizerConformance(of: randomizer)
+        var randomizer = PseudorandomNumberGenerator(seed: PseudorandomNumberGenerator.generateSeed())
+        testRandomNumberGeneratorConformance(of: randomizer)
 
         var uInt64sReturned: Set<UInt64> = []
         var int64sReturned: Set<Int64> = []
         var positiveInt64sReturned: Set<Int64> = []
 
         for _ in 1 ... 100 {
-            let random = randomizer.randomNumber(inRange: 1 ... 6)
+            let random = UInt64.random(in: 1 ... 6, using: &randomizer)
             uInt64sReturned.insert(random)
             XCTAssert(1 ≤ random ∧ random ≤ 6)
 
-            let randomInt = Int64(randomInRange: −3 ... 3)
+            let randomInt = Int64.random(in: −3 ... 3, using: &randomizer)
             int64sReturned.insert(randomInt)
             XCTAssert(−3 ≤ randomInt ∧ randomInt ≤ 3)
 
-            let randomPositiveInt = Int64(randomInRange: 1 ... 6)
+            let randomPositiveInt = Int64.random(in: 1 ... 6, using: &randomizer)
             positiveInt64sReturned.insert(randomPositiveInt)
             XCTAssert(1 ≤ randomPositiveInt ∧ randomPositiveInt ≤ 6)
 
-            let randomDouble = Double(randomInRange: −3 ... 3)
+            let randomDouble = Double.random(in: −3 ... 3, using: &randomizer)
             XCTAssert(−3 ≤ randomDouble ∧ randomDouble ≤ 3)
         }
 
@@ -94,19 +85,17 @@ class SDGRandomizationAPITests : TestCase {
     }
 
     func testRangeReplaceableCollection() {
-        var last = [1, 2, 3, 4, 5]
+        var last = "12345"
         var same = true
         for _ in 1 ... 100 where same {
-            let next = last.shuffled()
+            let next = String(last.shuffled())
             if ¬next.elementsEqual(last) {
                 same = false
             }
             last = next
         }
         XCTAssert(¬same)
-    }
 
-    func testUInt() {
-        testRandomizableNumberConformance(of: UInt.self)
+        last.shuffle()
     }
 }

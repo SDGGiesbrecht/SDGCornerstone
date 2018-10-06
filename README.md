@@ -31,7 +31,6 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 - Platform‐independent access to best‐practice file system locations.
 - Shared instances of value types.
 - Generic pattern matching.
-- Customizable randomization.
 - Arbitrary‐precision arithmetic.
 - Simple API for running shell commands (desktop platforms only).
 
@@ -197,18 +196,6 @@ let pattern = CompositePattern([
 
 XCTAssertEqual(numbers.firstMatch(for: pattern)?.range,
                numbers.startIndex ..< numbers.endIndex)
-
-// ••••••• Randomization •••••••
-
-func rollDie() -> Int {
-    return Int(randomInRange: 1 ... 6)
-}
-
-if rollDie() == 1 ∧ rollDie() == 1 {
-    print("Snake eyes!")
-} else {
-    print("Not this time...")
-}
 
 // ••••••• Arbitrary Precision Arithmetic •••••••
 

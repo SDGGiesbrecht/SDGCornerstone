@@ -16,10 +16,10 @@ import SDGControlFlow
 import SDGLogic
 
 /// A “random” number generator that returns numbers in a pre‐determined cycle.
-public final class CyclicalNumberGenerator : Randomizer {
+public struct CyclicalNumberGenerator : RandomNumberGenerator {
 
-    private let sequence: [UIntMax]
-    private var index: Array<UIntMax>.Index
+    private let sequence: [UInt64]
+    private var index: Array<UInt64>.Index
 
     /// Creates a cyclical number generator that returns numbers according to `sequence`.
     ///
@@ -27,7 +27,7 @@ public final class CyclicalNumberGenerator : Randomizer {
     ///
     /// - Parameters:
     ///     - sequence: The sequence.
-    public init(_ sequence: [UIntMax]) {
+    public init(_ sequence: [UInt64]) {
         _assert(¬sequence.isEmpty, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
@@ -39,10 +39,10 @@ public final class CyclicalNumberGenerator : Randomizer {
         self.index = sequence.startIndex
     }
 
-    // MARK: - Randomizer
+    // MARK: - RandomNumberGenerator
 
     /// Returns the next value in the sequence.
-    public func randomNumber() -> UIntMax {
+    public mutating func next() -> UInt64 {
 
         let result = sequence[index]
 
