@@ -29,14 +29,6 @@ public typealias FloatMax = Float80
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
 public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
-
-    // @documentation(SDGCornerstone.FloatFamily.init(_:))
-    /// Creates a new value, rounded to the closest possible representation.
-    ///
-    /// - Parameters:
-    ///     - value: The number to convert to a floating‐point value.
-    init(_ value: Exponent)
-
     static func _tgmath_log(_ x: Self) -> Self
 }
 
