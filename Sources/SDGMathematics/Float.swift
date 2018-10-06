@@ -32,6 +32,7 @@ public typealias FloatMax = Float80
 public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
     static func _tgmath_log(_ x: Self) -> Self
     static func _tgmath_log10(_ x: Self) -> Self
+    static func _tgmath_sin(_ x: Self) -> Self
 }
 
 extension FloatFamily {
@@ -171,58 +172,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - angle: The angle.
     @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
-
-        if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
-            // Use periodic reference angle.
-            return sin(angle.mod(τ.rad))
-        } else if angle > π.rad {
-            // Quadrants III & IV
-            return −sin(angle − π.rad)
-        } else if angle > (π ÷ 2).rad {
-            // Quadrant II
-            return sin(π.rad − angle)
-        } else {
-            // Quadrant I
-
-            if angle > (π ÷ 4).rad {
-                // Cosine converges faster in this range.
-                return cos((π ÷ 2).rad − angle)
-            } else {
-
-                //   ∞         n + 1     2n − 1
-                //   ∑    ( (−1)      __θ________ )
-                // n = 1               (2n − 1)!
-
-                var result: Self = 0
-                var lastApproximate: Self = result
-                var negative = false
-                var numerator = angle.inRadians
-                var _2n_m_1: Self = 1
-                var denominator: Self = 1
-                repeat {
-                    lastApproximate = result
-
-                    var term = numerator ÷ denominator
-                    if negative {
-                        term.negate()
-                    }
-                    result += term
-
-                    negative.toggle()
-
-                    let multiplicationStep = {
-                        numerator ×= angle.inRadians
-                        _2n_m_1 += 1 as Self
-                        denominator ×= _2n_m_1
-                    }
-                    multiplicationStep()
-                    multiplicationStep()
-
-                } while result ≠ lastApproximate
-
-                return result
-            }
-        }
+        return Self._tgmath_sin(angle.inRadians)
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.cos(_:))
@@ -482,6 +432,10 @@ extension Double : FloatFamily {
         return Foundation.log10(x)
     }
 
+    @inlinable public static func _tgmath_sin(_ x: Double) -> Double {
+        return Foundation.sin(x)
+    }
+
     // MARK: - PointProtocol
 
     // #documentation(SDGCornerstone.PointProtocol.Vector)
@@ -520,6 +474,10 @@ extension CGFloat : FloatFamily {
 
     @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
         return CoreGraphics.log10(x)
+    }
+
+    @inlinable public static func _tgmath_sin(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.sin(x)
     }
 
     // MARK: - LosslessStringConvertible
@@ -593,6 +551,10 @@ extension Float80 : Codable, FloatFamily {
         return Foundation.log10(x)
     }
 
+    @inlinable public static func _tgmath_sin(_ x: Float80) -> Float80 {
+        return Foundation.sin(x)
+    }
+
     // MARK: - PointProtocol
 
     // #documentation(SDGCornerstone.PointProtocol.Vector)
@@ -623,6 +585,10 @@ extension Float : FloatFamily {
 
     @inlinable public static func _tgmath_log10(_ x: Float) -> Float {
         return Foundation.log10(x)
+    }
+
+    @inlinable public static func _tgmath_sin(_ x: Float) -> Float {
+        return Foundation.sin(x)
     }
 
     // MARK: - PointProtocol
