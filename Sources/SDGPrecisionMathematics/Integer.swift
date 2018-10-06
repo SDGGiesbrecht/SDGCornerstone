@@ -40,7 +40,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Properties
 
-    private struct Definition {
+    private struct Definition : Equatable {
         fileprivate var magnitude: WholeNumber
         fileprivate var isNegative: Bool
     }
@@ -156,7 +156,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
     public static func == (precedingValue: Integer, followingValue: Integer) -> Bool {
-        return (precedingValue.isNegative, precedingValue.wholeMagnitude) == (followingValue.isNegative, followingValue.wholeMagnitude)
+        return precedingValue.definition == followingValue.definition
     }
 
     // MARK: - Hashable
