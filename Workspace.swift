@@ -39,7 +39,6 @@ configuration.documentation.readMe.featureList["🇨🇦EN"] = [
     "\u{2D} Platform‐independent access to best‐practice file system locations.",
     "\u{2D} Shared instances of value types.",
     "\u{2D} Generic pattern matching.",
-    "\u{2D} Customizable randomization.",
     "\u{2D} Arbitrary‐precision arithmetic.",
     "\u{2D} Simple API for running shell commands (desktop platforms only).",
     "",

@@ -53,7 +53,7 @@ extension Comparable {
     ///
     /// ```swift
     /// func rollDie() -> Int {
-    ///     return Int(randomInRange: 1 ... 6)
+    ///     return Int.random(in: 1 ... 6)
     /// }
     ///
     /// let numberOfRolls = 5
@@ -85,7 +85,7 @@ extension Comparable {
     ///
     /// ```swift
     /// func rollDie() -> Int {
-    ///     return Int(randomInRange: 1 ... 6)
+    ///     return Int.random(in: 1 ... 6)
     /// }
     ///
     /// let numberOfRolls = 5

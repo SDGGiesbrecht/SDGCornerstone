@@ -278,12 +278,12 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.rangom(in:using:))
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
+    ///     - generator: The randomizer to use to generate the random value.
     public static func random<R>(in range: ClosedRange<Integer>, using generator: inout R) -> Integer where R : RandomNumberGenerator {
         if range.lowerBound.isWhole {
             let wholeRange: ClosedRange<WholeNumber> = range.lowerBound.wholeMagnitude ... range.upperBound.wholeMagnitude

@@ -22,17 +22,17 @@ extension Bool {
     /// For example:
     ///
     /// ```swift
-    /// let alternating = CyclicalNumberGenerator([
+    /// var alternating = CyclicalNumberGenerator([
     ///     Bool.falseRandomizerValue,
     ///     Bool.trueRandomizerValue
     ///     ])
     ///
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
     /// // ...
     /// ```
     public static let falseRandomizerValue: UInt64 = 1 << 17
@@ -43,17 +43,17 @@ extension Bool {
     /// For example:
     ///
     /// ```swift
-    /// let alternating = CyclicalNumberGenerator([
+    /// var alternating = CyclicalNumberGenerator([
     ///     Bool.falseRandomizerValue,
     ///     Bool.trueRandomizerValue
     ///     ])
     ///
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), false)
-    /// XCTAssertEqual(Bool(fromRandomizer: alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
+    /// XCTAssertEqual(Bool.random(using: &alternating), false)
+    /// XCTAssertEqual(Bool.random(using: &alternating), true)
     /// // ...
     /// ```
     public static let trueRandomizerValue: UInt64 = 0

@@ -53,12 +53,12 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     ///     - range: The allowed range for the random value.
     static func random(in range: Range<Self>) -> Self
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using))
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
+    ///     - generator: The randomizer to use to generate the random value.
     static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator
 }
 
@@ -100,12 +100,12 @@ extension RationalArithmetic {
         return random(in: range, using: &generator)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using))
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
+    ///     - generator: The randomizer to use to generate the random value.
     @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
 
         _assert(¬range.isEmpty, { (localization: _APILocalization) in
@@ -156,12 +156,12 @@ extension RationalArithmetic where Self : BinaryFloatingPoint, Self.RawSignifica
         return _random(in: range)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using))
+    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
     /// Creates a random value within a particular range using the specified randomizer.
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
+    ///     - generator: The randomizer to use to generate the random value.
     @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
         return _random(in: range, using: &generator)
     }

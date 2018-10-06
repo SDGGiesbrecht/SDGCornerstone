@@ -355,7 +355,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
+    ///     - generator: The randomizer to use to generate the random value.
     public static func random<R>(in range: ClosedRange<WholeNumber>, using generator: inout R) -> WholeNumber where R : RandomNumberGenerator {
         let rangeSize: WholeNumber = range.upperBound − range.lowerBound
 

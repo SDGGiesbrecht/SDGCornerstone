@@ -47,7 +47,6 @@ public struct PseudorandomNumberGenerator : RandomNumberGenerator {
 
     // MARK: - RandomNumberGenerator
 
-    // #documentation(SDGCornerstone.RandomNumberGenerator.next())
     /// Returns a random value.
     public mutating func next() -> UInt64 {
 

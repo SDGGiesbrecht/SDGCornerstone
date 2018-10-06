@@ -320,7 +320,7 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
+    ///     - generator: The randomizer to use to generate the random value.
     public static func random<R>(in range: ClosedRange<RationalNumber>, using generator: inout R) -> RationalNumber where R : RandomNumberGenerator {
         let difference = range.upperBound − range.lowerBound
         let denominator = difference.denominator

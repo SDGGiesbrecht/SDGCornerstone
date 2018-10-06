@@ -359,7 +359,7 @@ extension Measurement {
     }
 
     // #documentation(SDGCornerstone.Measurement.init(randomInRange:))
-    /// Creates a random value within a particular range.
+    /// Returns a random value within a particular range.
     ///
     /// - Precondition: `range` is not empty.
     ///
@@ -390,7 +390,7 @@ extension Measurement {
     ///
     /// - Parameters:
     ///     - range: The allowed range for the random value.
-    ///     - randomizer: The randomizer to use to generate the random value.
+    ///     - generator: The randomizer to use to generate the random value.
     @inlinable public static func random<R>(in range: ClosedRange<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
         let scalar = Scalar.random(in: range.lowerBound.rawValue ... range.upperBound.rawValue, using: &generator)
         return Self(rawValue: scalar)
