@@ -17,6 +17,7 @@ import Foundation
 import CoreGraphics
 #endif
 
+#warning("Is this necessary?")
 import SDGControlFlow
 
 #if os(iOS) || os(watchOS) || os(tvOS)
@@ -108,39 +109,6 @@ extension FloatFamily {
         operand = operand.squareRoot()
     }
 
-    @inlinable internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
-
-        _assert(self > 0, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "Logarithms of non‐positive numbers are undefined. (\(self))"
-            }
-        })
-        _assert(base > 0, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "Logarithms in a non‐positive base are undefined. (\(base))"
-            }
-        })
-        _assert(base ≠ 1, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "Logarithms in base 1 are undefined."
-            }
-        })
-
-        if self == 1 {
-            self = 0 // x ↑ 0 = 1
-            return true
-        } else if self == base {
-            self = 1 // x ↑ 1 = x
-            return true
-        } else {
-            // not convenient
-            return false
-        }
-    }
-
     // #documentation(SDGCornerstone.RealArithmetic.formLogarithm(toBase:))
     /// Sets `self` to its base `base` logarithm.
     ///
@@ -153,15 +121,10 @@ extension FloatFamily {
     /// - Parameters:
     ///     - base: The base.
     @inlinable public mutating func formLogarithm(toBase base: Self) {
-
-        if ¬tryConvenientLogarithms(toBase: base) {
-
-            // log (a) = log (a) ÷ log (b)
-            //    b         x         x
-
-            formNaturalLogarithm()
-            self ÷= Self.ln(base)
-        }
+        // log (a) = log (a) ÷ log (b)
+        //    b         x         x
+        formNaturalLogarithm()
+        self ÷= Self.ln(base)
     }
 
     // @documentation(SDGCornerstone.RealArithmetic.log(_:))
