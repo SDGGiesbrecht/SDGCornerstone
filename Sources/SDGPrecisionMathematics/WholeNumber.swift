@@ -161,14 +161,6 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         return precedingValue.digits == followingValue.digits
     }
 
-    // MARK: - Hashable
-
-    // #documentation(SDGCornerstone.Hashable.hashValue)
-    /// The hash value.
-    public var hashValue: Int {
-        return digits.first?.hashValue ?? 0
-    }
-
     // MARK: - Numeric
 
     // #documentation(SDGCornerstone.Numeric.init(exactly:))
