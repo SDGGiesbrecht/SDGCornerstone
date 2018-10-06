@@ -275,18 +275,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
         return String(rawTextApproximation())
     }
 
-    // MARK: - Equatable
-
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
-    @inlinable public static func == (precedingValue: SemanticMarkup, followingValue: SemanticMarkup) -> Bool {
-        return precedingValue.source == followingValue.source
-    }
-
     // MARK: - ExpressibleByStringLiteral
 
     // #documentation(SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:))
