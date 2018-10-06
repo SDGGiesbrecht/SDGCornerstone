@@ -98,18 +98,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
         try container.encode(year)
     }
 
-    // MARK: - Equatable
-
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
-    public static func == (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Bool {
-        return (precedingValue.year, precedingValue.month) == (followingValue.year, followingValue.month)
-    }
-
     // MARK: - PointProtocol
 
     // #documentation(SDGCornerstone.PointProtocol.Vector)
