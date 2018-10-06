@@ -193,7 +193,7 @@ extension RangeReplaceableCollection {
     /// Shuffles the collection.
     @inlinable public mutating func shuffle() {
         var generator = SystemRandomNumberGenerator()
-        self = Self(shuffled(using: &generator))
+        shuffle(using: &generator)
     }
 
     /// Shuffles the collection.
