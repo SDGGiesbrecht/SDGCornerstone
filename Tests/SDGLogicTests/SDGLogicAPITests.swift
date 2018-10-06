@@ -29,7 +29,6 @@ class SDGLogicAPITests : TestCase {
         testComparableConformance(less: false, greater: true)
 
         test(prefixOperator: (¬, "¬"), on: true, returns: false)
-        test(postfixAssignmentOperator: (¬=, "¬="), with: false, resultsIn: true)
         test(operator: (∧, "∧"), on: true, true, returns: true)
         test(assignmentOperator: (∧=, "∧="), with: true, false, resultsIn: false)
         test(operator: (∨, "∨"), on: true, false, returns: true)

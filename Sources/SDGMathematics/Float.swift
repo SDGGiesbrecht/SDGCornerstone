@@ -220,7 +220,7 @@ extension FloatFamily {
                     self += term
 
                     n += 1 as Self
-                    negative¬=
+                    negative.toggle()
                     numerator ×= sMinusOne
 
                 } while self ≠ lastApproximate
@@ -273,7 +273,7 @@ extension FloatFamily {
                     }
                     result += term
 
-                    negative¬=
+                    negative.toggle()
 
                     let multiplicationStep = {
                         numerator ×= angle.inRadians
@@ -333,7 +333,7 @@ extension FloatFamily {
                     }
                     result += term
 
-                    negative¬=
+                    negative.toggle()
 
                     let multiplicationStep = {
                         numerator ×= angle.inRadians
@@ -389,7 +389,7 @@ extension FloatFamily {
                 }
                 result += term
 
-                negative¬=
+                negative.toggle()
                 numerator ×= x_2
                 denominator += 2 as Self
 

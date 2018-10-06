@@ -27,13 +27,6 @@ infix operator ≠: ComparisonPrecedence
 ///     - proposition: The proposition to invert.
 prefix operator ¬
 
-// #documentation(SDGCornerstone.Bool.¬=)
-/// Modifies the operand by logical inversion.
-///
-/// - Parameters:
-///     - proposition: The proposition to modify by inversion.
-postfix operator ¬=
-
 // #documentation(SDGCornerstone.Bool.∧)
 /// Returns the logical conjunction of the two Boolean values.
 ///

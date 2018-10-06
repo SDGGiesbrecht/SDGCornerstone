@@ -101,7 +101,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
             } else {
                 // ...and crossing it.
                 precedingValue.wholeMagnitude = followingValue.wholeMagnitude − precedingValue.wholeMagnitude
-                precedingValue.isNegative¬=
+                precedingValue.isNegative.toggle()
             }
         }
     }
@@ -185,7 +185,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
     /// - Parameters:
     ///     - operand: The value to modify by inversion.
     public static postfix func −= (operand: inout Integer) {
-        operand.isNegative¬=
+        operand.isNegative.toggle()
     }
 
     // MARK: - Numeric
