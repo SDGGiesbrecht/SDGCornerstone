@@ -68,9 +68,6 @@ class SDGControlFlowAPITests : TestCase {
         init(from decoder: Decoder) throws {
             try self.init(from: decoder, via: Bool.self) { CodableExample($0) }
         }
-        static func == (precedingValue: CodableExample, followingValue: CodableExample) -> Bool {
-            return precedingValue.value == followingValue.value
-        }
     }
     func testCodable() {
         let original = CodableExample(true)
@@ -92,9 +89,6 @@ class SDGControlFlowAPITests : TestCase {
         }
         func modifying(a: Bool, b: Bool, c: Bool) -> NonmutatingVariantExample {
             return nonmutatingVariant(of: { $0.modify(a: $1, b: $2, c: $3) }, on: self, with: (a, b, c))
-        }
-        static func == (precedingValue: NonmutatingVariantExample, followingValue: NonmutatingVariantExample) -> Bool {
-            return precedingValue.value == followingValue.value
         }
     }
     func testNonmutatingVariants() {

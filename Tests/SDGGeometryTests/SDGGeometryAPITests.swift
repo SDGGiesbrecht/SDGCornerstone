@@ -43,9 +43,6 @@ class SDGGeometryAPITests : TestCase {
     struct TwoDimensionalVectorExample : TwoDimensionalVector {
         var vector: CGVector
         static let additiveIdentity = TwoDimensionalVectorExample(vector: CGVector(Δx : 0, Δy : 0))
-        static func == (precedingValue: TwoDimensionalVectorExample, followingValue: TwoDimensionalVectorExample) -> Bool {
-            return precedingValue.vector == followingValue.vector
-        }
         typealias Scalar = CGVector.Scalar
         var Δx : CGFloat {
             get { return vector.Δx }

@@ -95,9 +95,6 @@ class SDGPersistenceAPITests : TestCase {
         init(_ value: String) {
             self.value = value
         }
-        static func == (precedingValue: LosslessStirngConvertibleExample, followingValue: LosslessStirngConvertibleExample) -> Bool {
-            return precedingValue.value == followingValue.value
-        }
         var description: String {
             return value
         }
