@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
 #if canImport(CoreGraphics)
 import CoreGraphics
 #endif
@@ -36,9 +37,7 @@ public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible,
     ///     - value: The number to convert to a floating‐point value.
     init(_ value: Exponent)
 
-    // @documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    static var ln2: Self { get }
+    static func _tgmath_log(_ x: Self) -> Self
 }
 
 extension FloatFamily {
@@ -172,53 +171,23 @@ extension FloatFamily {
         }
     }
 
+    // @documentation(SDGCornerstone.RealArithmetic.ln(_:))
+    /// Returns the natural logarithm of `antilogarithm`.
+    ///
+    /// - Precondition: `antilogarithm` > 0
+    ///
+    /// - Parameters:
+    ///     - antilogarithm: The antilogarithm.
+    @inlinable public static func ln(_ antilogarithm: Self) -> Self {
+        return Self._tgmath_log(antilogarithm)
+    }
+
     // #documentation(SDGCornerstone.RealArithmetic.formNaturalLogarithm())
     /// Sets `self` to its natural logarithm.
     ///
     /// - Precondition: `self` > 0
     @inlinable public mutating func formNaturalLogarithm() {
-
-        if ¬tryConvenientLogarithms(toBase: e) {
-
-            if self == 2 {
-                self = Self.ln2
-            } else {
-                // if y = s × b ↑ x
-                // then ln(y) = ln(s) + x × ln(b)
-
-                let s: Self = significand
-                let x = Self(exponent)
-                // Since 1 ≤ s < 2, (or possibly 0 ≤ s for subnormal values?)
-                // s satisfies 0 ≤ s < 2 and the Taylor series around 1 will converge:
-                //
-                //   ∞         n + 1          n
-                //   ∑    ( (−1)      _(s_−_1)__ )
-                // n = 1                  n
-
-                self = 0
-                var lastApproximate = self
-                var n: Self = 1
-                var negative = false
-                let sMinusOne: Self = s − (1 as Self)
-                var numerator: Self = sMinusOne
-                repeat {
-                    lastApproximate = self
-
-                    var term = numerator ÷ n
-                    if negative {
-                        term.negate()
-                    }
-                    self += term
-
-                    n += 1 as Self
-                    negative.toggle()
-                    numerator ×= sMinusOne
-
-                } while self ≠ lastApproximate
-
-                self += x × Self.ln2
-            }
-        }
+        self = Self.ln(self)
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.sin(_:))
@@ -530,9 +499,9 @@ extension Double : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // #documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    public static let ln2: Double = 0x1.62E42FEFA39EFp-1
+    @inlinable public static func _tgmath_log(_ x: Double) -> Double {
+        return Foundation.log(x)
+    }
 
     // MARK: - PointProtocol
 
@@ -566,9 +535,9 @@ extension CGFloat : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // #documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    public static let ln2: CGFloat = CGFloat(Double.ln2)
+    @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
+        return Foundation.log(x)
+    }
 
     // MARK: - LosslessStringConvertible
 
@@ -633,9 +602,9 @@ extension Float80 : Codable, FloatFamily {
 
     // MARK: - FloatFamily
 
-    // #documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    public static let ln2: Float80 = 0x1.62E42FEFA39EF358p-1
+    @inlinable public static func _tgmath_log(_ x: Float80) -> Float80 {
+        return Foundation.log(x)
+    }
 
     // MARK: - PointProtocol
 
@@ -661,9 +630,9 @@ extension Float : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // #documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    public static let ln2: Float = 0x1.62E430p-1
+    @inlinable public static func _tgmath_log(_ x: Float) -> Float {
+        return Foundation.log(x)
+    }
 
     // MARK: - PointProtocol
 

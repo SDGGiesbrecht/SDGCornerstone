@@ -206,7 +206,7 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     }
 
     // MARK: - Negatable
-    
+
     // #documentation(SDGCornerstone.Negatable.−=)
     /// Sets the operand to its additive inverse.
     ///
