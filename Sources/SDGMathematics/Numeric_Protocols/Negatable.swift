@@ -73,7 +73,10 @@ extension Negatable where Self : SignedInteger {
 extension Negatable where Self : SignedNumeric {
 
     // #documentation(SDGCornerstone.Negatable.−)
-    /// Returns the additive inverse of the specified value.
+    /// Returns the additive inverse of the operand.
+    ///
+    /// - Parameters:
+    ///     - operand: The value to invert.
     @inlinable public static prefix func - (operand: Self) -> Self {
         return −operand
     }

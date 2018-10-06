@@ -179,11 +179,8 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Negatable
 
-    // #documentation(SDGCornerstone.Negatable.−=)
-    /// Sets the operand to its additive inverse.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify by inversion.
+    // #documentation(SDGCornerstone.Negatable.negate())
+    /// Replaces this value with its additive inverse.
     public mutating func negate() {
         isNegative.toggle()
     }

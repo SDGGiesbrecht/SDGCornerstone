@@ -197,23 +197,27 @@ extension FloatFamily {
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
-    /// Returns the arctangent of a value.
+    /// Returns the arcsine of a value.
     ///
-    /// The returned angle will be between −90° and 90°.
+    /// The returned angle will be between −90° and 90° inclusive.
+    ///
+    /// - Precondition: −1 ≤ `sine` ≤ 1
     ///
     /// - Parameters:
-    ///     - tangent: The tangent.
+    ///     - sine: The sine.
     @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
         return Self._tgmath_asin(tangent).radians
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.arccos(_:))
-    /// Returns the arctangent of a value.
+    /// Returns the arccosine of a value.
     ///
-    /// The returned angle will be between −90° and 90°.
+    /// The returned angle will be between 0° and 180° inclusive.
+    ///
+    /// - Precondition: −1 ≤ `sine` ≤ 1
     ///
     /// - Parameters:
-    ///     - tangent: The tangent.
+    ///     - cosine: The cosine.
     @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
         return Self._tgmath_acos(tangent).radians
     }

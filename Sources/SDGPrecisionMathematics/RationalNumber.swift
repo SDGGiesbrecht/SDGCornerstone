@@ -207,11 +207,8 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - Negatable
 
-    // #documentation(SDGCornerstone.Negatable.−=)
-    /// Sets the operand to its additive inverse.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify by inversion.
+    // #documentation(SDGCornerstone.Negatable.negate())
+    /// Replaces this value with its additive inverse.
     public mutating func negate() {
         definition.numerator.negate()
     }
