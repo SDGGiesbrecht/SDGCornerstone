@@ -536,7 +536,7 @@ extension CGFloat : FloatFamily {
     // MARK: - FloatFamily
 
     @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
-        return Foundation.log(x)
+        return CoreGraphics.log(x)
     }
 
     // MARK: - LosslessStringConvertible
