@@ -17,9 +17,6 @@ import Foundation
 import CoreGraphics
 #endif
 
-#warning("Is this necessary?")
-import SDGControlFlow
-
 #if os(iOS) || os(watchOS) || os(tvOS)
 /// The member of the `Float` family with the largest bit field.
 public typealias FloatMax = Double
@@ -35,6 +32,9 @@ public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible,
     static func _tgmath_log10(_ x: Self) -> Self
     static func _tgmath_sin(_ x: Self) -> Self
     static func _tgmath_cos(_ x: Self) -> Self
+    static func _tgmath_tan(_ x: Self) -> Self
+    static func _tgmath_asin(_ x: Self) -> Self
+    static func _tgmath_acos(_ x: Self) -> Self
     static func _tgmath_atan(_ x: Self) -> Self
 }
 
@@ -131,7 +131,7 @@ extension FloatFamily {
         self ÷= Self.ln(base)
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.log(_:))
+    // #documentation(SDGCornerstone.RealArithmetic.log(_:))
     /// Returns the common logarithm of `antilogarithm`.
     ///
     /// - Precondition: `antilogarithm` > 0
@@ -142,7 +142,7 @@ extension FloatFamily {
         return Self._tgmath_log10(antilogarithm)
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.formCommonLogarithm())
+    // #documentation(SDGCornerstone.RealArithmetic.formCommonLogarithm())
     /// Sets `self` to its common logarithm.
     ///
     /// - Precondition: `self` > 0
@@ -150,7 +150,7 @@ extension FloatFamily {
         self = Self.log(self)
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.ln(_:))
+    // #documentation(SDGCornerstone.RealArithmetic.ln(_:))
     /// Returns the natural logarithm of `antilogarithm`.
     ///
     /// - Precondition: `antilogarithm` > 0
@@ -185,6 +185,37 @@ extension FloatFamily {
     ///     - angle: The angle.
     @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
         return Self._tgmath_cos(angle.inRadians)
+    }
+
+    // #documentation(SDGCornerstone.RealArithmetic.tan(_:))
+    /// Returns the tangent of an angle.
+    ///
+    /// - Parameters:
+    ///     - angle: The angle.
+    @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
+        return Self._tgmath_tan(angle.inRadians)
+    }
+
+    // #documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
+    /// Returns the arctangent of a value.
+    ///
+    /// The returned angle will be between −90° and 90°.
+    ///
+    /// - Parameters:
+    ///     - tangent: The tangent.
+    @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
+        return Self._tgmath_asin(tangent).radians
+    }
+
+    // #documentation(SDGCornerstone.RealArithmetic.arccos(_:))
+    /// Returns the arctangent of a value.
+    ///
+    /// The returned angle will be between −90° and 90°.
+    ///
+    /// - Parameters:
+    ///     - tangent: The tangent.
+    @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
+        return Self._tgmath_acos(tangent).radians
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
@@ -328,6 +359,18 @@ extension Double : FloatFamily {
         return Foundation.cos(x)
     }
 
+    @inlinable public static func _tgmath_tan(_ x: Double) -> Double {
+        return Foundation.tan(x)
+    }
+
+    @inlinable public static func _tgmath_asin(_ x: Double) -> Double {
+        return Foundation.asin(x)
+    }
+
+    @inlinable public static func _tgmath_acos(_ x: Double) -> Double {
+        return Foundation.acos(x)
+    }
+
     @inlinable public static func _tgmath_atan(_ x: Double) -> Double {
         return Foundation.atan(x)
     }
@@ -382,6 +425,18 @@ extension CGFloat : FloatFamily {
 
     @inlinable public static func _tgmath_cos(_ x: CGFloat) -> CGFloat {
         return CoreGraphics.cos(x)
+    }
+
+    @inlinable public static func _tgmath_tan(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.tan(x)
+    }
+
+    @inlinable public static func _tgmath_asin(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.asin(x)
+    }
+
+    @inlinable public static func _tgmath_acos(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.acos(x)
     }
 
     @inlinable public static func _tgmath_atan(_ x: CGFloat) -> CGFloat {
@@ -471,6 +526,18 @@ extension Float80 : Codable, FloatFamily {
         return Foundation.cos(x)
     }
 
+    @inlinable public static func _tgmath_tan(_ x: Float80) -> Float80 {
+        return Foundation.tan(x)
+    }
+
+    @inlinable public static func _tgmath_asin(_ x: Float80) -> Float80 {
+        return Foundation.asin(x)
+    }
+
+    @inlinable public static func _tgmath_acos(_ x: Float80) -> Float80 {
+        return Foundation.acos(x)
+    }
+
     @inlinable public static func _tgmath_atan(_ x: Float80) -> Float80 {
         return Foundation.atan(x)
     }
@@ -517,6 +584,18 @@ extension Float : FloatFamily {
 
     @inlinable public static func _tgmath_cos(_ x: Float) -> Float {
         return Foundation.cos(x)
+    }
+
+    @inlinable public static func _tgmath_tan(_ x: Float) -> Float {
+        return Foundation.tan(x)
+    }
+
+    @inlinable public static func _tgmath_asin(_ x: Float) -> Float {
+        return Foundation.asin(x)
+    }
+
+    @inlinable public static func _tgmath_acos(_ x: Float) -> Float {
+        return Foundation.acos(x)
     }
 
     @inlinable public static func _tgmath_atan(_ x: Float) -> Float {
