@@ -158,7 +158,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
     public static func == (precedingValue: WholeNumber, followingValue: WholeNumber) -> Bool {
-        return precedingValue.digits.elementsEqual(followingValue.digits)
+        return precedingValue.digits == followingValue.digits
     }
 
     // MARK: - Hashable
