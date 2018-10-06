@@ -30,6 +30,7 @@ public typealias FloatMax = Float80
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
 public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
+    static func _tgmath_pow(_ x: Self, _ y: Self) -> Self
     static func _tgmath_log(_ x: Self) -> Self
     static func _tgmath_log10(_ x: Self) -> Self
     static func _tgmath_sin(_ x: Self) -> Self
@@ -253,6 +254,23 @@ extension FloatFamily {
         self.round(.down)
     }
 
+    // #documentation(SDGCornerstone.WholeArithmetic.↑)
+    /// Returns the result of the preceding value to the power of the following value.
+    ///
+    /// - Precondition:
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The base.
+    ///     - followingValue: The exponent.
+    @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+        return Self._tgmath_pow(precedingValue, followingValue)
+    }
+
     // #documentation(SDGCornerstone.WholeArithmetic.↑=)
     /// Modifies the preceding value by exponentiation with the following value.
     ///
@@ -267,54 +285,7 @@ extension FloatFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
     @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-
-        _assert(precedingValue.isNonNegative ∨ followingValue.isIntegral, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead. (\(precedingValue) ↑ \(followingValue))"
-            }
-        })
-
-        if followingValue.isIntegral {
-            precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
-        } else if followingValue.isNegative /* but not an integer */ {
-            precedingValue = 1 ÷ precedingValue ↑ −followingValue
-        } else if precedingValue == e /* (natural) exponential function */ {
-
-            // if x = e ↑ (w + r)
-            // then x = e ↑ w × e ↑ r
-            let w: Self = followingValue.rounded(.toNearestOrAwayFromZero)
-            let r: Self = followingValue − w
-
-            precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: w)
-
-            // The Taylor series around 0 will converge for any real r:
-            //
-            //   ∞       n
-            //   ∑   ( _x__ )
-            // n = 0    n!
-
-            var e_r: Self = 1
-            var lastApproximate: Self = 0
-            var n: Self = 1
-            var numerator: Self = r
-            var denominator: Self = n
-            repeat {
-                lastApproximate = e_r
-
-                e_r += numerator ÷ denominator
-
-                n += 1 as Self
-                numerator ×= r
-                denominator ×= n
-
-            } while e_r ≠ lastApproximate
-
-            precedingValue ×= e_r
-
-        } else {
-            precedingValue = e ↑ (followingValue × ln(precedingValue))
-        }
+        precedingValue = precedingValue ↑ followingValue
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
@@ -336,6 +307,10 @@ extension FloatingPoint {
 extension Double : FloatFamily {
 
     // MARK: - FloatFamily
+
+    @inlinable public static func _tgmath_pow(_ x: Double, _ y: Double) -> Double {
+        return Foundation.pow(x, y)
+    }
 
     @inlinable public static func _tgmath_log(_ x: Double) -> Double {
         return Foundation.log(x)
@@ -388,6 +363,10 @@ extension CGFloat : FloatFamily {
     }
 
     // MARK: - FloatFamily
+
+    @inlinable public static func _tgmath_pow(_ x: CGFloat, _ y: CGFloat) -> CGFloat {
+        return CoreGraphics.pow(x, y)
+    }
 
     @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
         return CoreGraphics.log(x)
@@ -472,6 +451,10 @@ extension Float80 : Codable, FloatFamily {
 
     // MARK: - FloatFamily
 
+    @inlinable public static func _tgmath_pow(_ x: Float80, _ y: Float80) -> Float80 {
+        return Foundation.pow(x, y)
+    }
+
     @inlinable public static func _tgmath_log(_ x: Float80) -> Float80 {
         return Foundation.log(x)
     }
@@ -515,6 +498,10 @@ extension Float80 : Codable, FloatFamily {
 extension Float : FloatFamily {
 
     // MARK: - FloatFamily
+
+    @inlinable public static func _tgmath_pow(_ x: Float, _ y: Float) -> Float {
+        return Foundation.pow(x, y)
+    }
 
     @inlinable public static func _tgmath_log(_ x: Float) -> Float {
         return Foundation.log(x)
