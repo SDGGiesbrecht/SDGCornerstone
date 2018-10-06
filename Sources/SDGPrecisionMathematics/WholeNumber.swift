@@ -160,6 +160,14 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
     public static func == (precedingValue: WholeNumber, followingValue: WholeNumber) -> Bool {
         return precedingValue.digits == followingValue.digits
     }
+    
+    // MARK: - Hashable
+    
+    // #documentation(SDGCornerstone.Hashable.hash(into:))
+    /// Hashes the essential components of this value by feeding them into the given hasher.
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(digits.first)
+    }
 
     // MARK: - Numeric
 
