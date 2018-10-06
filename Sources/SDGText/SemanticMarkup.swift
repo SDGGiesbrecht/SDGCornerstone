@@ -286,14 +286,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
         self.init(StrictString(stringLiteral))
     }
 
-    // MARK: - Hashable
-
-    // #documentation(SDGCornerstone.Hashable.hashValue)
-    /// The hash value.
-    public var hashValue: Int {
-        return source.hashValue
-    }
-
     // MARK: - RangeReplaceableCollection
 
     // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
