@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollections
+
 /// Tests a type’s conformance to RationalArithmetic.
 @inlinable public func testRationalArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RationalArithmetic {
 
@@ -24,4 +26,8 @@
     test(assignmentOperator: (÷=, "÷="), with: (76 as T, 4), resultsIn: 19, file: file, line: line)
 
     test(operator: (↑, "↑"), on: (0.5 as T, −2), returns: 4, file: file, line: line)
+
+    let range: Range<T> = −5 ..< 5
+    let result = T.random(in: range)
+    test(result ∈ range, "\(T.self).random(in: \(range)) → \(result) ∉ \(range)", file: file, line: line)
 }
