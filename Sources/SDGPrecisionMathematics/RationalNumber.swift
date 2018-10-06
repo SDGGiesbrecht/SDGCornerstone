@@ -55,7 +55,7 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - Properties
 
-    private struct Definition : Equatable {
+    private struct Definition : Equatable, Hashable {
         fileprivate var numerator: Integer
         fileprivate var denominator: Integer
     }
@@ -192,14 +192,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
     ///     - followingValue: Another value to compare.
     public static func == (precedingValue: RationalNumber, followingValue: RationalNumber) -> Bool {
         return precedingValue.definition == followingValue.definition
-    }
-
-    // MARK: - Hashable
-
-    // #documentation(SDGCornerstone.Hashable.hashValue)
-    /// The hash value.
-    public var hashValue: Int {
-        return numerator.hashValue
     }
 
     // MARK: - IntegralArithmetic
