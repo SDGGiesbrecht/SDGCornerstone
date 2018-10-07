@@ -30,12 +30,9 @@ public protocol Negatable : AdditiveArithmetic {
     ///     - operand: The value to invert.
     static prefix func − (operand: Self) -> Self
 
-    // @documentation(SDGCornerstone.Negatable.−=)
-    /// Sets the operand to its additive inverse.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify by inversion.
-    static postfix func −= (operand: inout Self)
+    // @documentation(SDGCornerstone.Negatable.negate())
+    /// Replaces this value with its additive inverse.
+    mutating func negate()
 }
 
 extension Negatable {
@@ -46,28 +43,47 @@ extension Negatable {
     /// - Parameters:
     ///     - operand: The value to invert.
     @inlinable public static prefix func − (operand: Self) -> Self {
-        return nonmutatingVariant(of: −=, on: operand)
+        return nonmutatingVariant(of: { $0.negate() }, on: operand)
     }
 
-    // #documentation(SDGCornerstone.Negatable.−=)
-    /// Sets the operand to its additive inverse.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify by inversion.
-    @inlinable public static postfix func −= (operand: inout Self) {
-        operand = additiveIdentity − operand
+    @inlinable internal mutating func _negate() {
+        self = Self.additiveIdentity − self
+    }
+    // #documentation(SDGCornerstone.Negatable.negate())
+    /// Replaces this value with its additive inverse.
+    @inlinable public mutating func negate() {
+        _negate()
+    }
+}
+
+extension SignedInteger {
+    @inlinable internal mutating func __negate() {
+        negate()
+    }
+}
+extension Negatable where Self : SignedInteger {
+
+    // #documentation(SDGCornerstone.Negatable.negate())
+    /// Replaces this value with its additive inverse.
+    @inlinable public mutating func negate() {
+        __negate()
     }
 }
 
 extension Negatable where Self : SignedNumeric {
 
-    /// Returns the additive inverse of the specified value.
+    // #documentation(SDGCornerstone.Negatable.−)
+    /// Returns the additive inverse of the operand.
+    ///
+    /// - Parameters:
+    ///     - operand: The value to invert.
     @inlinable public static prefix func - (operand: Self) -> Self {
         return −operand
     }
 
+    // #documentation(SDGCornerstone.Negatable.negate())
     /// Replaces this value with its additive inverse.
     @inlinable public mutating func negate() {
-        self−=
+        _negate()
     }
 }

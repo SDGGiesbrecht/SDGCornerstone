@@ -32,7 +32,6 @@
 // SDGLogic
 infix operator ≠: ComparisonPrecedence
 prefix operator ¬
-postfix operator ¬=
 infix operator ∧: LogicalConjunctionPrecedence
 infix operator ∧=: AssignmentPrecedence
 infix operator ∨: LogicalDisjunctionPrecedence
@@ -45,7 +44,6 @@ infix operator ≈: ComparisonPrecedence
 infix operator −: AdditionPrecedence
 prefix operator −
 infix operator −=: AssignmentPrecedence
-postfix operator −=
 infix operator ±: AdditionPrecedence
 prefix operator |
 postfix operator |

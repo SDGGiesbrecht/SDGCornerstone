@@ -289,7 +289,7 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
         try self.init(whole: representation, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
 
         if negative {
-            self−=
+            self.negate()
         }
     }
 }

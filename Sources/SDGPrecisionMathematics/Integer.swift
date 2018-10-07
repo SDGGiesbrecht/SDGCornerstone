@@ -101,7 +101,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
             } else {
                 // ...and crossing it.
                 precedingValue.wholeMagnitude = followingValue.wholeMagnitude − precedingValue.wholeMagnitude
-                precedingValue.isNegative¬=
+                precedingValue.isNegative.toggle()
             }
         }
     }
@@ -179,13 +179,10 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Negatable
 
-    // #documentation(SDGCornerstone.Negatable.−=)
-    /// Sets the operand to its additive inverse.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify by inversion.
-    public static postfix func −= (operand: inout Integer) {
-        operand.isNegative¬=
+    // #documentation(SDGCornerstone.Negatable.negate())
+    /// Replaces this value with its additive inverse.
+    public mutating func negate() {
+        isNegative.toggle()
     }
 
     // MARK: - Numeric

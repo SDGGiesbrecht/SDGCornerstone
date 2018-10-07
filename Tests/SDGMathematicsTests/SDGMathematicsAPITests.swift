@@ -184,6 +184,40 @@ class SDGMathematicsAPITests : TestCase {
         testIntegralArithmeticConformance(of: Int8.self)
     }
 
+    struct NegatableSignedNumeric : Negatable, SignedNumeric {
+        typealias IntegerLiteralType = Int
+        typealias Magnitude = UInt
+        var value: Int
+        init(_ value: Int) {
+            self.value = value
+        }
+        static func += (precedingValue: inout NegatableSignedNumeric, followingValue: NegatableSignedNumeric) {
+            precedingValue.value += followingValue.value
+        }
+        static func −= (precedingValue: inout NegatableSignedNumeric, followingValue: NegatableSignedNumeric) {
+            precedingValue.value −= followingValue.value
+        }
+        init?<T>(exactly source: T) where T : BinaryInteger {
+            guard let int = Int(exactly: source) else { return nil }
+            self = NegatableSignedNumeric(int)
+        }
+        init(integerLiteral value: Int) {
+            self = NegatableSignedNumeric(value)
+        }
+        var magnitude: UInt {
+            return value.magnitude
+        }
+        static func * (lhs: NegatableSignedNumeric, rhs: NegatableSignedNumeric) -> NegatableSignedNumeric {
+            return NegatableSignedNumeric(lhs.value × rhs.value)
+        }
+        static func *= (lhs: inout NegatableSignedNumeric, rhs: NegatableSignedNumeric) {
+            lhs.value ×= rhs.value
+        }
+    }
+    func testNegatable() {
+        testNegatableConformance(minuend: NegatableSignedNumeric(5), subtrahend: NegatableSignedNumeric(3), difference: NegatableSignedNumeric(2))
+    }
+
     func testOneDimensionalPoint() {
         var x = 1
         x.decrement()
@@ -279,6 +313,9 @@ class SDGMathematicsAPITests : TestCase {
         init(_ value: Double) {
             self.value = value
         }
+        static func == (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample) -> Bool {
+            return precedingValue.value == followingValue.value
+        }
         static func < (precedingValue: RealArithmeticExample, followingValue: RealArithmeticExample) -> Bool {
             return precedingValue.value < followingValue.value
         }
@@ -341,8 +378,12 @@ class SDGMathematicsAPITests : TestCase {
         XCTAssertEqual(0.τ, Double.τ)
         XCTAssertEqual(e(), Double.e)
         XCTAssert((√RealArithmeticExample(4)).value ≈ RealArithmeticExample(2).value)
+        test(function: (log, "log"), on: 100 as RealArithmeticExample, returns: 2)
         XCTAssert(ln(RealArithmeticExample(714)).value ≈ 6.570_88)
         XCTAssert(cos(RealArithmeticExample(401).radians).value ≈ 0.432_21)
+        XCTAssert(tan((5 as RealArithmeticExample).rad).value ≈ −3.380_52)
+        XCTAssert(arcsin((1 ÷ 6 as RealArithmeticExample)).inRadians.value ≈ 0.167_44)
+        XCTAssert(arccos((1 ÷ 7 as RealArithmeticExample)).inRadians.value ≈ 1.427_44)
     }
 
     func testSequence() {

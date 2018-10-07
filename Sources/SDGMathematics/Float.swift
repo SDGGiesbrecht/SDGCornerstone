@@ -12,11 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
 #if canImport(CoreGraphics)
 import CoreGraphics
 #endif
-
-import SDGControlFlow
 
 #if os(iOS) || os(watchOS) || os(tvOS)
 /// The member of the `Float` family with the largest bit field.
@@ -28,17 +27,15 @@ public typealias FloatMax = Float80
 
 /// A member of the `Float` family: `Double`, `Float80` or `Float`
 public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
-
-    // @documentation(SDGCornerstone.FloatFamily.init(_:))
-    /// Creates a new value, rounded to the closest possible representation.
-    ///
-    /// - Parameters:
-    ///     - value: The number to convert to a floating‐point value.
-    init(_ value: Exponent)
-
-    // @documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    static var ln2: Self { get }
+    static func _tgmath_pow(_ x: Self, _ y: Self) -> Self
+    static func _tgmath_log(_ x: Self) -> Self
+    static func _tgmath_log10(_ x: Self) -> Self
+    static func _tgmath_sin(_ x: Self) -> Self
+    static func _tgmath_cos(_ x: Self) -> Self
+    static func _tgmath_tan(_ x: Self) -> Self
+    static func _tgmath_asin(_ x: Self) -> Self
+    static func _tgmath_acos(_ x: Self) -> Self
+    static func _tgmath_atan(_ x: Self) -> Self
 }
 
 extension FloatFamily {
@@ -52,15 +49,6 @@ extension FloatFamily {
     ///     - operand: The value to invert.
     @inlinable public static prefix func − (operand: Self) -> Self {
         return -operand
-    }
-
-    // #documentation(SDGCornerstone.Negatable.−=)
-    /// Sets the operand to its additive inverse.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify by inversion.
-    @inlinable public static postfix func −= (operand: inout Self) {
-        operand.negate()
     }
 
     // MARK: - NumericAdditiveArithmetic
@@ -125,39 +113,6 @@ extension FloatFamily {
         operand = operand.squareRoot()
     }
 
-    @inlinable internal mutating func tryConvenientLogarithms(toBase base: Self) -> Bool {
-
-        _assert(self > 0, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "Logarithms of non‐positive numbers are undefined. (\(self))"
-            }
-        })
-        _assert(base > 0, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "Logarithms in a non‐positive base are undefined. (\(base))"
-            }
-        })
-        _assert(base ≠ 1, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "Logarithms in base 1 are undefined."
-            }
-        })
-
-        if self == 1 {
-            self = 0 // x ↑ 0 = 1
-            return true
-        } else if self == base {
-            self = 1 // x ↑ 1 = x
-            return true
-        } else {
-            // not convenient
-            return false
-        }
-    }
-
     // #documentation(SDGCornerstone.RealArithmetic.formLogarithm(toBase:))
     /// Sets `self` to its base `base` logarithm.
     ///
@@ -170,15 +125,40 @@ extension FloatFamily {
     /// - Parameters:
     ///     - base: The base.
     @inlinable public mutating func formLogarithm(toBase base: Self) {
+        // log (a) = log (a) ÷ log (b)
+        //    b         x         x
+        formNaturalLogarithm()
+        self ÷= Self.ln(base)
+    }
 
-        if ¬tryConvenientLogarithms(toBase: base) {
+    // #documentation(SDGCornerstone.RealArithmetic.log(_:))
+    /// Returns the common logarithm of `antilogarithm`.
+    ///
+    /// - Precondition: `antilogarithm` > 0
+    ///
+    /// - Parameters:
+    ///     - antilogarithm: The antilogarithm.
+    @inlinable public static func log(_ antilogarithm: Self) -> Self {
+        return Self._tgmath_log10(antilogarithm)
+    }
 
-            // log (a) = log (a) ÷ log (b)
-            //    b         x         x
+    // #documentation(SDGCornerstone.RealArithmetic.formCommonLogarithm())
+    /// Sets `self` to its common logarithm.
+    ///
+    /// - Precondition: `self` > 0
+    @inlinable public mutating func formCommonLogarithm() {
+        self = Self.log(self)
+    }
 
-            formNaturalLogarithm()
-            self ÷= Self.ln(base)
-        }
+    // #documentation(SDGCornerstone.RealArithmetic.ln(_:))
+    /// Returns the natural logarithm of `antilogarithm`.
+    ///
+    /// - Precondition: `antilogarithm` > 0
+    ///
+    /// - Parameters:
+    ///     - antilogarithm: The antilogarithm.
+    @inlinable public static func ln(_ antilogarithm: Self) -> Self {
+        return Self._tgmath_log(antilogarithm)
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.formNaturalLogarithm())
@@ -186,48 +166,7 @@ extension FloatFamily {
     ///
     /// - Precondition: `self` > 0
     @inlinable public mutating func formNaturalLogarithm() {
-
-        if ¬tryConvenientLogarithms(toBase: e) {
-
-            if self == 2 {
-                self = Self.ln2
-            } else {
-                // if y = s × b ↑ x
-                // then ln(y) = ln(s) + x × ln(b)
-
-                let s: Self = significand
-                let x = Self(exponent)
-                // Since 1 ≤ s < 2, (or possibly 0 ≤ s for subnormal values?)
-                // s satisfies 0 ≤ s < 2 and the Taylor series around 1 will converge:
-                //
-                //   ∞         n + 1          n
-                //   ∑    ( (−1)      _(s_−_1)__ )
-                // n = 1                  n
-
-                self = 0
-                var lastApproximate = self
-                var n: Self = 1
-                var negative = false
-                let sMinusOne: Self = s − (1 as Self)
-                var numerator: Self = sMinusOne
-                repeat {
-                    lastApproximate = self
-
-                    var term = numerator ÷ n
-                    if negative {
-                        term−=
-                    }
-                    self += term
-
-                    n += 1 as Self
-                    negative¬=
-                    numerator ×= sMinusOne
-
-                } while self ≠ lastApproximate
-
-                self += x × Self.ln2
-            }
-        }
+        self = Self.ln(self)
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.sin(_:))
@@ -236,58 +175,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - angle: The angle.
     @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
-
-        if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
-            // Use periodic reference angle.
-            return sin(angle.mod(τ.rad))
-        } else if angle > π.rad {
-            // Quadrants III & IV
-            return −sin(angle − π.rad)
-        } else if angle > (π ÷ 2).rad {
-            // Quadrant II
-            return sin(π.rad − angle)
-        } else {
-            // Quadrant I
-
-            if angle > (π ÷ 4).rad {
-                // Cosine converges faster in this range.
-                return cos((π ÷ 2).rad − angle)
-            } else {
-
-                //   ∞         n + 1     2n − 1
-                //   ∑    ( (−1)      __θ________ )
-                // n = 1               (2n − 1)!
-
-                var result: Self = 0
-                var lastApproximate: Self = result
-                var negative = false
-                var numerator = angle.inRadians
-                var _2n_m_1: Self = 1
-                var denominator: Self = 1
-                repeat {
-                    lastApproximate = result
-
-                    var term = numerator ÷ denominator
-                    if negative {
-                        term−=
-                    }
-                    result += term
-
-                    negative¬=
-
-                    let multiplicationStep = {
-                        numerator ×= angle.inRadians
-                        _2n_m_1 += 1 as Self
-                        denominator ×= _2n_m_1
-                    }
-                    multiplicationStep()
-                    multiplicationStep()
-
-                } while result ≠ lastApproximate
-
-                return result
-            }
-        }
+        return Self._tgmath_sin(angle.inRadians)
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.cos(_:))
@@ -296,58 +184,42 @@ extension FloatFamily {
     /// - Parameters:
     ///     - angle: The angle.
     @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
+        return Self._tgmath_cos(angle.inRadians)
+    }
 
-        if ¬(additiveIdentity.rad ..< τ.rad).contains(angle) {
-            // Use periodic reference angle.
-            return cos(angle.mod(τ.rad))
-        } else if angle > π.rad {
-            // Quadrants III & IV
-            return cos(τ.rad − angle)
-        } else if angle > (π ÷ 2).rad {
-            // Quadrant II
-            return −cos(π.rad − angle)
-        } else {
-            // Quadrant I
+    // #documentation(SDGCornerstone.RealArithmetic.tan(_:))
+    /// Returns the tangent of an angle.
+    ///
+    /// - Parameters:
+    ///     - angle: The angle.
+    @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
+        return Self._tgmath_tan(angle.inRadians)
+    }
 
-            if angle > (π ÷ 4).rad {
-                // Sine converges faster in this range.
-                return sin((π ÷ 2).rad − angle)
-            } else {
+    // #documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
+    /// Returns the arcsine of a value.
+    ///
+    /// The returned angle will be between −90° and 90° inclusive.
+    ///
+    /// - Precondition: −1 ≤ `sine` ≤ 1
+    ///
+    /// - Parameters:
+    ///     - sine: The sine.
+    @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
+        return Self._tgmath_asin(tangent).radians
+    }
 
-                //   ∞         n + 1      2n
-                //   ∑    ( (−1)      ___θ___ )
-                // n = 0               (2n)!
-
-                var result: Self = 0
-                var lastApproximate: Self = result
-                var negative = false
-                var numerator: Self = 1
-                var _2n: Self = 0
-                var denominator: Self = 1
-                repeat {
-                    lastApproximate = result
-
-                    var term = numerator ÷ denominator
-                    if negative {
-                        term−=
-                    }
-                    result += term
-
-                    negative¬=
-
-                    let multiplicationStep = {
-                        numerator ×= angle.inRadians
-                        _2n += 1 as Self
-                        denominator ×= _2n
-                    }
-                    multiplicationStep()
-                    multiplicationStep()
-
-                } while result ≠ lastApproximate
-
-                return result
-            }
-        }
+    // #documentation(SDGCornerstone.RealArithmetic.arccos(_:))
+    /// Returns the arccosine of a value.
+    ///
+    /// The returned angle will be between 0° and 180° inclusive.
+    ///
+    /// - Precondition: −1 ≤ `sine` ≤ 1
+    ///
+    /// - Parameters:
+    ///     - cosine: The cosine.
+    @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
+        return Self._tgmath_acos(tangent).radians
     }
 
     // #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
@@ -358,45 +230,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - tangent: The tangent.
     @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
-
-        if tangent.isNegative {
-            return −arctan(−tangent)
-        } else if tangent > 1 {
-            return (π ÷ 2).rad − arctan(1 ÷ tangent)
-        } else if tangent > 2 − √3 {
-            let r3: Self = √3
-            let numerator: Self = r3 × tangent − (1 as Self)
-            let referenceTangent: Self = numerator ÷ (r3 + tangent)
-            return (π ÷ 6).rad + arctan(referenceTangent)
-        } else {
-
-            //   ∞         n + 1     2n − 1
-            //   ∑    ( (−1)      __x_______ )
-            // n = 1               (2n − 1)
-
-            var result: Self = 0
-            var lastApproximate: Self = result
-            var negative = false
-            var numerator = tangent
-            let x_2 = tangent × tangent
-            var denominator: Self = 1
-            repeat {
-                lastApproximate = result
-
-                var term = numerator ÷ denominator
-                if negative {
-                    term−=
-                }
-                result += term
-
-                negative¬=
-                numerator ×= x_2
-                denominator += 2 as Self
-
-            } while result ≠ lastApproximate
-
-            return result.radians
-        }
+        return Self._tgmath_atan(tangent).radians
     }
 
     // MARK: - Subtractable
@@ -455,6 +289,23 @@ extension FloatFamily {
         self.round(.down)
     }
 
+    // #documentation(SDGCornerstone.WholeArithmetic.↑)
+    /// Returns the result of the preceding value to the power of the following value.
+    ///
+    /// - Precondition:
+    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
+    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
+    ///   - If `Self` conforms to `RealNumberProtocol`, either
+    ///     - `precedingValue` must be positive, or
+    ///     - `followingValue` must be an integer.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The base.
+    ///     - followingValue: The exponent.
+    @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+        return Self._tgmath_pow(precedingValue, followingValue)
+    }
+
     // #documentation(SDGCornerstone.WholeArithmetic.↑=)
     /// Modifies the preceding value by exponentiation with the following value.
     ///
@@ -469,54 +320,7 @@ extension FloatFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The exponent.
     @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-
-        _assert(precedingValue.isNonNegative ∨ followingValue.isIntegral, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "The result of a negative number raised to a non‐integer exponent may be outside the set of real numbers. Use a type that can represent complex numbers instead. (\(precedingValue) ↑ \(followingValue))"
-            }
-        })
-
-        if followingValue.isIntegral {
-            precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
-        } else if followingValue.isNegative /* but not an integer */ {
-            precedingValue = 1 ÷ precedingValue ↑ −followingValue
-        } else if precedingValue == e /* (natural) exponential function */ {
-
-            // if x = e ↑ (w + r)
-            // then x = e ↑ w × e ↑ r
-            let w: Self = followingValue.rounded(.toNearestOrAwayFromZero)
-            let r: Self = followingValue − w
-
-            precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: w)
-
-            // The Taylor series around 0 will converge for any real r:
-            //
-            //   ∞       n
-            //   ∑   ( _x__ )
-            // n = 0    n!
-
-            var e_r: Self = 1
-            var lastApproximate: Self = 0
-            var n: Self = 1
-            var numerator: Self = r
-            var denominator: Self = n
-            repeat {
-                lastApproximate = e_r
-
-                e_r += numerator ÷ denominator
-
-                n += 1 as Self
-                numerator ×= r
-                denominator ×= n
-
-            } while e_r ≠ lastApproximate
-
-            precedingValue ×= e_r
-
-        } else {
-            precedingValue = e ↑ (followingValue × ln(precedingValue))
-        }
+        precedingValue = precedingValue ↑ followingValue
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
@@ -539,9 +343,41 @@ extension Double : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // #documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    public static let ln2: Double = 0x1.62E42FEFA39EFp-1
+    @inlinable public static func _tgmath_pow(_ x: Double, _ y: Double) -> Double {
+        return Foundation.pow(x, y)
+    }
+
+    @inlinable public static func _tgmath_log(_ x: Double) -> Double {
+        return Foundation.log(x)
+    }
+
+    @inlinable public static func _tgmath_log10(_ x: Double) -> Double {
+        return Foundation.log10(x)
+    }
+
+    @inlinable public static func _tgmath_sin(_ x: Double) -> Double {
+        return Foundation.sin(x)
+    }
+
+    @inlinable public static func _tgmath_cos(_ x: Double) -> Double {
+        return Foundation.cos(x)
+    }
+
+    @inlinable public static func _tgmath_tan(_ x: Double) -> Double {
+        return Foundation.tan(x)
+    }
+
+    @inlinable public static func _tgmath_asin(_ x: Double) -> Double {
+        return Foundation.asin(x)
+    }
+
+    @inlinable public static func _tgmath_acos(_ x: Double) -> Double {
+        return Foundation.acos(x)
+    }
+
+    @inlinable public static func _tgmath_atan(_ x: Double) -> Double {
+        return Foundation.atan(x)
+    }
 
     // MARK: - PointProtocol
 
@@ -575,9 +411,41 @@ extension CGFloat : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // #documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    public static let ln2: CGFloat = CGFloat(Double.ln2)
+    @inlinable public static func _tgmath_pow(_ x: CGFloat, _ y: CGFloat) -> CGFloat {
+        return CoreGraphics.pow(x, y)
+    }
+
+    @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.log(x)
+    }
+
+    @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.log10(x)
+    }
+
+    @inlinable public static func _tgmath_sin(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.sin(x)
+    }
+
+    @inlinable public static func _tgmath_cos(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.cos(x)
+    }
+
+    @inlinable public static func _tgmath_tan(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.tan(x)
+    }
+
+    @inlinable public static func _tgmath_asin(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.asin(x)
+    }
+
+    @inlinable public static func _tgmath_acos(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.acos(x)
+    }
+
+    @inlinable public static func _tgmath_atan(_ x: CGFloat) -> CGFloat {
+        return CoreGraphics.atan(x)
+    }
 
     // MARK: - LosslessStringConvertible
 
@@ -642,9 +510,41 @@ extension Float80 : Codable, FloatFamily {
 
     // MARK: - FloatFamily
 
-    // #documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    public static let ln2: Float80 = 0x1.62E42FEFA39EF358p-1
+    @inlinable public static func _tgmath_pow(_ x: Float80, _ y: Float80) -> Float80 {
+        return Foundation.pow(x, y)
+    }
+
+    @inlinable public static func _tgmath_log(_ x: Float80) -> Float80 {
+        return Foundation.log(x)
+    }
+
+    @inlinable public static func _tgmath_log10(_ x: Float80) -> Float80 {
+        return Foundation.log10(x)
+    }
+
+    @inlinable public static func _tgmath_sin(_ x: Float80) -> Float80 {
+        return Foundation.sin(x)
+    }
+
+    @inlinable public static func _tgmath_cos(_ x: Float80) -> Float80 {
+        return Foundation.cos(x)
+    }
+
+    @inlinable public static func _tgmath_tan(_ x: Float80) -> Float80 {
+        return Foundation.tan(x)
+    }
+
+    @inlinable public static func _tgmath_asin(_ x: Float80) -> Float80 {
+        return Foundation.asin(x)
+    }
+
+    @inlinable public static func _tgmath_acos(_ x: Float80) -> Float80 {
+        return Foundation.acos(x)
+    }
+
+    @inlinable public static func _tgmath_atan(_ x: Float80) -> Float80 {
+        return Foundation.atan(x)
+    }
 
     // MARK: - PointProtocol
 
@@ -670,9 +570,41 @@ extension Float : FloatFamily {
 
     // MARK: - FloatFamily
 
-    // #documentation(SDGCornerstone.FloatFamily.ln2)
-    /// The value of ln2.
-    public static let ln2: Float = 0x1.62E430p-1
+    @inlinable public static func _tgmath_pow(_ x: Float, _ y: Float) -> Float {
+        return Foundation.pow(x, y)
+    }
+
+    @inlinable public static func _tgmath_log(_ x: Float) -> Float {
+        return Foundation.log(x)
+    }
+
+    @inlinable public static func _tgmath_log10(_ x: Float) -> Float {
+        return Foundation.log10(x)
+    }
+
+    @inlinable public static func _tgmath_sin(_ x: Float) -> Float {
+        return Foundation.sin(x)
+    }
+
+    @inlinable public static func _tgmath_cos(_ x: Float) -> Float {
+        return Foundation.cos(x)
+    }
+
+    @inlinable public static func _tgmath_tan(_ x: Float) -> Float {
+        return Foundation.tan(x)
+    }
+
+    @inlinable public static func _tgmath_asin(_ x: Float) -> Float {
+        return Foundation.asin(x)
+    }
+
+    @inlinable public static func _tgmath_acos(_ x: Float) -> Float {
+        return Foundation.acos(x)
+    }
+
+    @inlinable public static func _tgmath_atan(_ x: Float) -> Float {
+        return Foundation.atan(x)
+    }
 
     // MARK: - PointProtocol
 

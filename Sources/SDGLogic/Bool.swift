@@ -25,15 +25,6 @@ extension Bool : Comparable {
         return !proposition
     }
 
-    // @documentation(SDGCornerstone.Bool.¬=)
-    /// Modifies the operand by logical inversion.
-    ///
-    /// - Parameters:
-    ///     - proposition: The proposition to modify by inversion.
-    @inlinable public static postfix func ¬= (proposition: inout Bool) {
-        proposition = ¬proposition
-    }
-
     // @documentation(SDGCornerstone.Bool.∧)
     /// Returns the logical conjunction of the two Boolean values.
     ///
