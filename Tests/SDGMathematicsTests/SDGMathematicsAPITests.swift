@@ -184,6 +184,40 @@ class SDGMathematicsAPITests : TestCase {
         testIntegralArithmeticConformance(of: Int8.self)
     }
 
+    struct NegatableSignedNumeric : Negatable, SignedNumeric {
+        typealias IntegerLiteralType = Int
+        typealias Magnitude = UInt
+        var value: Int
+        init(_ value: Int) {
+            self.value = value
+        }
+        static func += (precedingValue: inout NegatableSignedNumeric, followingValue: NegatableSignedNumeric) {
+            precedingValue.value += followingValue.value
+        }
+        static func −= (precedingValue: inout NegatableSignedNumeric, followingValue: NegatableSignedNumeric) {
+            precedingValue.value −= followingValue.value
+        }
+        init?<T>(exactly source: T) where T : BinaryInteger {
+            guard let int = Int(exactly: source) else { return nil }
+            self = NegatableSignedNumeric(int)
+        }
+        init(integerLiteral value: Int) {
+            self = NegatableSignedNumeric(value)
+        }
+        var magnitude: UInt {
+            return value.magnitude
+        }
+        static func * (lhs: NegatableSignedNumeric, rhs: NegatableSignedNumeric) -> NegatableSignedNumeric {
+            return NegatableSignedNumeric(lhs.value × rhs.value)
+        }
+        static func *= (lhs: inout NegatableSignedNumeric, rhs: NegatableSignedNumeric) {
+            lhs.value ×= rhs.value
+        }
+    }
+    func testNegatable() {
+        testNegatableConformance(minuend: NegatableSignedNumeric(5), subtrahend: NegatableSignedNumeric(3), difference: NegatableSignedNumeric(2))
+    }
+
     func testOneDimensionalPoint() {
         var x = 1
         x.decrement()
