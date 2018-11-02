@@ -54,7 +54,3 @@ configuration.documentation.api.encryptedTravisCIDeploymentKey = "gzx7ARrCgcNJiD
 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
-
-// #workaround(workspace version 0.13.2, Rules are outdated.)
-configuration.proofreading.rules.remove(.documentationOfCompilationConditions)
-configuration.proofreading.rules.remove(.documentationOfExtensionConstraints)
