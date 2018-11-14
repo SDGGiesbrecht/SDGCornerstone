@@ -368,7 +368,7 @@ class SDGTextAPITests : TestCase {
         let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
         XCTAssertEqual(utf16, unicode)
         #if false
-        // #workaround(Swift 4.2, macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16.)
+        // #workaround(Swift 4.2.1, macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16.)
         let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
         XCTAssertEqual(utf32, unicode)
 
