@@ -2,7 +2,7 @@
  Workspace.swift
 
  This source file is part of the SDGCornerstone open source project.
- https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone
+ https://sdggiesbrecht.github.io/SDGCornerstone
 
  Copyright ©2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
@@ -19,7 +19,7 @@ configuration._applySDGDefaults()
 
 configuration.documentation.currentVersion = Version(0, 12, 0)
 
-configuration.documentation.projectWebsite = URL(string: "https://sdggiesbrecht.github.io/SDGCornerstone/SDGCornerstone")!
+configuration.documentation.projectWebsite = URL(string: "https://sdggiesbrecht.github.io/SDGCornerstone")!
 configuration.documentation.documentationURL = URL(string: "https://sdggiesbrecht.github.io/SDGCornerstone")!
 configuration.documentation.api.yearFirstPublished = 2017
 configuration.documentation.repositoryURL = URL(string: "https://github.com/SDGGiesbrecht/SDGCornerstone")!
