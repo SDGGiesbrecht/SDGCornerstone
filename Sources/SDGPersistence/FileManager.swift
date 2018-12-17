@@ -213,7 +213,7 @@ extension FileManager {
 
             let isDirectory: Bool
             #if os(Linux)
-            // #workaround(Swift 4.2, Linux has no implementation for resourcesValues.)
+            // #workaround(Swift 4.2.1, Linux has no implementation for resourcesValues.)
             var objCBool: ObjCBool = false
             isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool) ∧ objCBool.boolValue
             #else
