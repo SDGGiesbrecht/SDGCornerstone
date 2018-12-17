@@ -154,7 +154,6 @@ extension FileManager {
 
         #if canImport(Glibc)
         // #workaround(Swift 4.2.1, Until Linux’ Foundation implements cross‐device moves in Swift 5.)
-        // See https://github.com/apple/swift-corelibs-foundation/blob/6c54c84c9e8f8e39b7556e5eb68f837cdb8824dc/Foundation/FileManager.swift#L559
 
         if ¬fileExists(atPath: destination.path) {
             // Otherwise Foundation can generate its own error.
