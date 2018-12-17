@@ -59,7 +59,7 @@ extension FileManager {
         let zoneURL = cached(in: &locations[location]) {
 
             #if os(Linux)
-            // #workaround(Swift 4.2.1, Foundation will do this itself in Swift 5.0.)
+            // #workaround(Swift 4.2.1, Foundation will handle the first two itself in Swift 5.0.)
 
             let path: String
             switch location {
