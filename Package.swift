@@ -444,5 +444,3 @@ let package = Package(
             ])*/
     ]
 )
-
-// #workaround(Swift 4.2, Spaces can be restored to directory names when SR‐8803 is fixed. https://bugs.swift.org/browse/SR-8803)
