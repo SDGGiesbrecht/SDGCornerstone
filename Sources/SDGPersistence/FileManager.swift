@@ -13,7 +13,7 @@
  */
 
 #if canImport(Glibc)
-// #workaround(Swift 4.2, See move method below.)
+// #workaround(Swift 4.2.1, See move method below.)
 import Glibc
 #endif
 
