@@ -40,13 +40,13 @@ extension StrictString {
             switch sequence {
 
             // Already normalized.
-            case let strict as StrictString.ClusterView :
+            case let strict as StrictString.ClusterView:
                 return strict
-            case let strictSlice as Slice<StrictString.ClusterView> :
+            case let strictSlice as Slice<StrictString.ClusterView>:
                 return StrictString(unsafeString: String(strictSlice.base.string.clusters[strictSlice.bounds])).clusters
 
             // Need normalization.
-            case let nonStrictClusters as String.ClusterView :
+            case let nonStrictClusters as String.ClusterView:
                 return normalize(nonStrictClusters)
             default:
                 return normalize(String.ClusterView(sequence))

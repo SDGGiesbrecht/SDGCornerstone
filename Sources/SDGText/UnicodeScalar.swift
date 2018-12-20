@@ -64,17 +64,17 @@ extension UnicodeScalar {
             return control(acronym: "BS")
         case "\u{9}":
             return control(acronym: "HT")
-        case "\u{A}" :
+        case "\u{A}":
             return control(acronym: "LF")
-        case "\u{B}" :
+        case "\u{B}":
             return control(acronym: "VT")
-        case "\u{C}" :
+        case "\u{C}":
             return control(acronym: "FF")
-        case "\u{D}" :
+        case "\u{D}":
             return control(acronym: "CR")
-        case "\u{E}" :
+        case "\u{E}":
             return control(acronym: "SO")
-        case "\u{F}" :
+        case "\u{F}":
             return control(acronym: "SI")
         case "\u{10}":
             return control(acronym: "DLE")
@@ -178,9 +178,9 @@ extension UnicodeScalar {
             return control(acronym: "PM")
         case "\u{9F}":
             return control(acronym: "APC")
-        case "\u{A0}" :
+        case "\u{A0}":
             return control(acronym: "NBSP")
-        case "\u{AD}" :
+        case "\u{AD}":
             return control(acronym: "SHY‐")
 
         // Combining Diacritical Marks
@@ -306,22 +306,22 @@ extension UnicodeScalar {
             return control(acronym: "IDSP")
 
         // Variation Selectors
-        case "\u{FE00}" ... "\u{FE0F}" :
+        case "\u{FE00}" ... "\u{FE0F}":
             let baseCode = self.value − 0xFE00 + UInt32(1)
             return control(acronym: "VS" + "\(baseCode)")
 
         // Arabic Presentation Forms‐B
-        case "\u{FEFF}" :
+        case "\u{FEFF}":
             return control(acronym: "ZWNBSP")
 
         // Specials
-        case "\u{FFF9}" :
+        case "\u{FFF9}":
             return control(acronym: "IAA")
-        case "\u{FFFA}" :
+        case "\u{FFFA}":
             return control(acronym: "IAS")
-        case "\u{FFFB}" :
+        case "\u{FFFB}":
             return control(acronym: "IAT")
-        case "\u{FFFC}" :
+        case "\u{FFFC}":
             return control(acronym: "OBJ")
 
         // Kaithi
@@ -358,13 +358,13 @@ extension UnicodeScalar {
         case "\u{1D17A}":
             return control(acronym: "END PHR.")
 
-        case "\u{E0001}" :
+        case "\u{E0001}":
             return control(acronym: "BEGIN🏷")
-        case "\u{E0020}" :
+        case "\u{E0020}":
             return control(acronym: "SP🏷")
-        case "\u{E0020}" ..< "\u{E007E}" :
+        case "\u{E0020}" ..< "\u{E007E}":
             return control(acronym: String(UnicodeScalar(value − 0xE0000)!) + "🏷")
-        case "\u{E007F}" :
+        case "\u{E007F}":
             return control(acronym: "END🏷")
 
         default:

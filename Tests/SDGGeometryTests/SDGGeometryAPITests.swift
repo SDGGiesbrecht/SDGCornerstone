@@ -26,9 +26,9 @@ class SDGGeometryAPITests : TestCase {
 
     func testPoint() {
         #if canImport(CoreGraphics)
-        XCTAssertEqual(CGPoint(x: 1, y: 1) − CGVector(Δx : 1, Δy : 1), CGPoint(x: 0, y: 0))
-        XCTAssertEqual(CGPoint(x: 0, y: 0) + CGVector(Δx : 1, Δy : 1), CGPoint(x: 1, y: 1))
-        XCTAssertEqual(CGPoint(x: 1, y: 1) − CGPoint(x: 0, y: 0), CGVector(Δx : 1, Δy : 1))
+        XCTAssertEqual(CGPoint(x: 1, y: 1) − CGVector(Δx: 1, Δy: 1), CGPoint(x: 0, y: 0))
+        XCTAssertEqual(CGPoint(x: 0, y: 0) + CGVector(Δx: 1, Δy: 1), CGPoint(x: 1, y: 1))
+        XCTAssertEqual(CGPoint(x: 1, y: 1) − CGPoint(x: 0, y: 0), CGVector(Δx: 1, Δy: 1))
 
         let point = CGPoint(x: 1.21, y: 1.21).rounded(.down, toMultipleOf: 0.2)
         XCTAssert(point.x ≈ 1.2 as CGFloat)
@@ -42,13 +42,13 @@ class SDGGeometryAPITests : TestCase {
     #if canImport(CoreGraphics)
     struct TwoDimensionalVectorExample : TwoDimensionalVector {
         var vector: CGVector
-        static let additiveIdentity = TwoDimensionalVectorExample(vector: CGVector(Δx : 0, Δy : 0))
+        static let additiveIdentity = TwoDimensionalVectorExample(vector: CGVector(Δx: 0, Δy: 0))
         typealias Scalar = CGVector.Scalar
-        var Δx : CGFloat {
+        var Δx: CGFloat {
             get { return vector.Δx }
             set { vector.Δx = newValue }
         }
-        var Δy : CGFloat {
+        var Δy: CGFloat {
             get { return vector.Δy }
             set { vector.Δy = newValue }
         }
@@ -57,23 +57,23 @@ class SDGGeometryAPITests : TestCase {
     func testVector() {
         #if canImport(CoreGraphics)
 
-        XCTAssertEqual(CGVector(Δx : 1, Δy : 1) − CGVector(Δx : 1, Δy : 1), CGVector(Δx : 0, Δy : 0))
-        XCTAssertEqual(CGVector(Δx : 0, Δy : 0) + CGVector(Δx : 1, Δy : 1), CGVector(Δx : 1, Δy : 1))
+        XCTAssertEqual(CGVector(Δx: 1, Δy: 1) − CGVector(Δx: 1, Δy: 1), CGVector(Δx: 0, Δy: 0))
+        XCTAssertEqual(CGVector(Δx: 0, Δy: 0) + CGVector(Δx: 1, Δy: 1), CGVector(Δx: 1, Δy: 1))
 
-        XCTAssert(CGVector(Δx : 3, Δy : 4).length ≈ 5)
-        XCTAssert(CGVector(Δx : −3, Δy : 4).length ≈ 5)
-        XCTAssert(CGVector(Δx : 3, Δy : −4).length ≈ 5)
-        XCTAssert(CGVector(Δx : −3, Δy : −4).length ≈ 5)
+        XCTAssert(CGVector(Δx: 3, Δy: 4).length ≈ 5)
+        XCTAssert(CGVector(Δx: −3, Δy: 4).length ≈ 5)
+        XCTAssert(CGVector(Δx: 3, Δy: −4).length ≈ 5)
+        XCTAssert(CGVector(Δx: −3, Δy: −4).length ≈ 5)
 
-        XCTAssert(CGVector(Δx : 1, Δy : 0).direction.inDegrees ≈ 0)
-        XCTAssert(CGVector(Δx : 0, Δy : 1).direction.inDegrees ≈ 90)
-        XCTAssert(CGVector(Δx : −1, Δy : 0).direction.inDegrees ≈ 180)
-        XCTAssert(CGVector(Δx : 0, Δy : −1).direction.inDegrees ≈ 270)
+        XCTAssert(CGVector(Δx: 1, Δy: 0).direction.inDegrees ≈ 0)
+        XCTAssert(CGVector(Δx: 0, Δy: 1).direction.inDegrees ≈ 90)
+        XCTAssert(CGVector(Δx: −1, Δy: 0).direction.inDegrees ≈ 180)
+        XCTAssert(CGVector(Δx: 0, Δy: −1).direction.inDegrees ≈ 270)
 
-        XCTAssert(CGVector(Δx : 1, Δy : 1).direction.inDegrees ≈ 45)
-        XCTAssert(CGVector(Δx : −1, Δy : 1).direction.inDegrees ≈ 135)
-        XCTAssert(CGVector(Δx : −1, Δy : −1).direction.inDegrees ≈ 225)
-        XCTAssert(CGVector(Δx : 1, Δy : −1).direction.inDegrees ≈ 315)
+        XCTAssert(CGVector(Δx: 1, Δy: 1).direction.inDegrees ≈ 45)
+        XCTAssert(CGVector(Δx: −1, Δy: 1).direction.inDegrees ≈ 135)
+        XCTAssert(CGVector(Δx: −1, Δy: −1).direction.inDegrees ≈ 225)
+        XCTAssert(CGVector(Δx: 1, Δy: −1).direction.inDegrees ≈ 315)
 
         XCTAssert(CGVector(direction: 0°, length: 1).Δx ≈ 1)
         XCTAssert(CGVector(direction: 0°, length: 1).Δy ≈ 0)
@@ -85,11 +85,11 @@ class SDGGeometryAPITests : TestCase {
         XCTAssert(CGVector(direction: 270°, length: 1).Δy ≈ −1)
 
         var hasher = Hasher()
-        CGVector(Δx : 1, Δy : 1).hash(into: &hasher)
+        CGVector(Δx: 1, Δy: 1).hash(into: &hasher)
 
-        XCTAssertEqual(TwoDimensionalVectorExample(Δx : 0, Δy : 0), TwoDimensionalVectorExample.additiveIdentity)
+        XCTAssertEqual(TwoDimensionalVectorExample(Δx: 0, Δy: 0), TwoDimensionalVectorExample.additiveIdentity)
 
-        var vector = CGVector(Δx : 1, Δy : 0)
+        var vector = CGVector(Δx: 1, Δy: 0)
         vector.direction = 90°
         XCTAssert(vector.Δx ≈ 0)
         XCTAssert(vector.Δy ≈ 1)
