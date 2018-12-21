@@ -41,8 +41,6 @@ public struct LineViewIndex : Comparable, Equatable {
 
     @usableFromInline internal let start: String.ScalarView.Index? // nil indicates the end index
 
-    @_specialize(exported: true, where S == StrictString.ScalarView)
-    @_specialize(exported: true, where S == String.ScalarView)
     @inlinable internal func newline<S : UnicodeScalarView>(in scalars: S) -> Range<String.ScalarView.Index>? {
         guard let startIndex = start else {
             return nil
