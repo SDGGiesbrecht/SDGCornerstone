@@ -76,13 +76,13 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         switch sequence {
 
         // Already normalized.
-        case let strict as StrictString :
+        case let strict as StrictString:
             return strict
-        case let strictSlice as Slice<StrictString> :
+        case let strictSlice as Slice<StrictString>:
             return StrictString(unsafeString: String(strictSlice.base.string.scalars[strictSlice.bounds]))
 
         // Need normalization.
-        case let nonStrictScalars as String.ScalarView :
+        case let nonStrictScalars as String.ScalarView:
             return normalize(nonStrictScalars)
         default:
             return normalize(String.ScalarView(sequence))

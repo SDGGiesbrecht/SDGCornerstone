@@ -22,22 +22,22 @@ public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// Creates a vector using the specified differences in *x* and *y*.
-    init(Δx : Scalar, Δy : Scalar)
+    init(Δx: Scalar, Δy: Scalar)
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.Δx)
     /// The difference in *x*.
-    var Δx : Scalar { get set }
+    var Δx: Scalar { get set }
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.Δy)
     /// The difference in *y*.
-    var Δy : Scalar { get set }
+    var Δy: Scalar { get set }
 }
 
 extension TwoDimensionalVector {
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// The difference in *y*.
-    @inlinable public init(Δx : Scalar, Δy : Scalar) {
+    @inlinable public init(Δx: Scalar, Δy: Scalar) {
         self = Self.additiveIdentity
         self.Δx = Δx
         self.Δy = Δy
@@ -48,7 +48,7 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     /// Creates a vector from an angular direction and a length.
     @inlinable public init(direction: Angle<Scalar>, length: Scalar) {
-        self.init(Δx : cos(direction) × length, Δy : sin(direction) × length)
+        self.init(Δx: cos(direction) × length, Δy: sin(direction) × length)
     }
 
     /// The angular direction of the vector.

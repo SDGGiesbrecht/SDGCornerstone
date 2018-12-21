@@ -130,6 +130,6 @@ extension TwoDimensionalPoint {
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         let Δx = precedingValue.x − followingValue.x
         let Δy = precedingValue.y − followingValue.y
-        return Self.Vector(Δx : Δx, Δy : Δy)
+        return Self.Vector(Δx: Δx, Δy: Δy)
     }
 }
