@@ -56,11 +56,6 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     ///
     /// - Parameters:
     ///     - i: The following index.
-    @_specialize(exported: true, where UIntValue == UInt)
-    @_specialize(exported: true, where UIntValue == UInt64)
-    @_specialize(exported: true, where UIntValue == UInt32)
-    @_specialize(exported: true, where UIntValue == UInt16)
-    @_specialize(exported: true, where UIntValue == UInt8)
     @inlinable public func index(before i: Index) -> Index {
         return i − (1 as Index)
     }
@@ -94,11 +89,6 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     ///
     /// - Parameters:
     ///     - i: The preceding index.
-    @_specialize(exported: true, where UIntValue == UInt)
-    @_specialize(exported: true, where UIntValue == UInt64)
-    @_specialize(exported: true, where UIntValue == UInt32)
-    @_specialize(exported: true, where UIntValue == UInt16)
-    @_specialize(exported: true, where UIntValue == UInt8)
     @inlinable public func index(after i: Index) -> Index {
         return i + (1 as Index)
     }
@@ -115,20 +105,10 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
     // #documentation(SDGCornerstone.Collection.subscript(position:))
     /// Accesses the element at the specified position.
     @inlinable public subscript(index: Index) -> Element {
-        @_specialize(exported: true, where UIntValue == UInt)
-        @_specialize(exported: true, where UIntValue == UInt64)
-        @_specialize(exported: true, where UIntValue == UInt32)
-        @_specialize(exported: true, where UIntValue == UInt16)
-        @_specialize(exported: true, where UIntValue == UInt8)
         get {
             assertIndexExists(index)
             return uInt.bitwiseAnd(with: 1 << index) >> index == 1
         }
-        @_specialize(exported: true, where UIntValue == UInt)
-        @_specialize(exported: true, where UIntValue == UInt64)
-        @_specialize(exported: true, where UIntValue == UInt32)
-        @_specialize(exported: true, where UIntValue == UInt16)
-        @_specialize(exported: true, where UIntValue == UInt8)
         set {
             assertIndexExists(index)
             let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << index).bitwiseNot())
