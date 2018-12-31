@@ -59,7 +59,7 @@ public final class PreferenceSet {
         self.domain = domain
         let possibleDebugDomain: String
         if domain == UserDefaults.globalDomain {
-            possibleDebugDomain = domain // @exempt(from: tests) False coverage result in Xcode 9.3
+            possibleDebugDomain = domain
         } else {
             possibleDebugDomain = FileManager.possibleDebugDomain(domain)
         }
