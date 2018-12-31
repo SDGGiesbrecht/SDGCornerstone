@@ -20,7 +20,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Initialization
 
-    @inlinable internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) { // @exempt(from: tests) False positive in Xcode 9.3.
+    @inlinable internal init(abstractPattern pattern: Pattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
         _assert(count == nil ∨ count!.lowerBound.isNonNegative, { (localization: _APILocalization) -> String in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
