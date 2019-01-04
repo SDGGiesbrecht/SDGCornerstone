@@ -144,7 +144,19 @@ extension SetDefinition {
     // MARK: - Switch Expression Pattern
 
     // @documentation(SDGCornerstone.ExpressionPattern.~=)
-    /// Enables use in switch cases.
+    // #example(1, setSwitch)
+    /// Enables use of any set definition in switch cases.
+    ///
+    /// ```swift
+    /// switch 5 {
+    /// case IntensionalSet(where: { $0.isEven }):
+    ///     XCTFail("This case does not match.")
+    /// case (2 ... 4 ∪ 7 ... 9)′:
+    ///     print("This case does match.")
+    /// default:
+    ///     XCTFail("This case is never reached.")
+    /// }
+    /// ```
     @inlinable public static func ~= (pattern: Self, value: Element) -> Bool {
         return value ∈ pattern
     }
