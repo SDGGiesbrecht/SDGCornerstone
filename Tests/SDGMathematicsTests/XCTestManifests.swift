@@ -24,6 +24,7 @@ extension SDGMathematicsAPITests {
         ("testFunctionAnalysis", testFunctionAnalysis),
         ("testInt", testInt),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
+        ("testNegatable", testNegatable),
         ("testOneDimensionalPoint", testOneDimensionalPoint),
         ("testOrderedEnumeration", testOrderedEnumeration),
         ("testPointProtocol", testPointProtocol),
