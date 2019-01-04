@@ -185,6 +185,22 @@ class MiscellaneousExampleTests : TestCase {
         // @endExample
     }
 
+    func testPatternSwitch() {
+        // @example(patternSwitch)
+        switch "This is a string." {
+        case RepetitionPattern(LiteralPattern(".")):
+            XCTFail("This case does not match.")
+        case CompositePattern([
+            RepetitionPattern(NotPattern(LiteralPattern("."))),
+            LiteralPattern(".")
+            ]):
+            print("This case does match.")
+        default:
+            XCTFail("This case is never reached.")
+        }
+        // @endExample
+    }
+
     func testRationalNumberLiterals() {
 
         func ensureLiteralsCompile() {
