@@ -211,6 +211,10 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssert([1, 2, 3, 4].hasPrefix(AlternativePatterns([LiteralPattern([1, 2]), LiteralPattern([3, 4])])))
         XCTAssert([1, 2, 3, 4].hasPrefix([LiteralPattern([1]), LiteralPattern([2])]))
 
+        XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
+        XCTAssert([1, 2, 3, 4].isMatch(for: AlternativePatterns([LiteralPattern([1, 2, 3, 4]), LiteralPattern([4, 3, 2, 1])])))
+        XCTAssert([1, 2, 3, 4].isMatch(for: [LiteralPattern([1]), LiteralPattern([2, 3, 4])]))
+
         XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
         XCTAssert([1, 2, 3, 4].hasSuffix(AlternativePatterns([LiteralPattern([3, 4]), LiteralPattern([5, 6])])))
         XCTAssert([1, 2, 3, 4].hasSuffix([LiteralPattern([3]), LiteralPattern([4])]))
