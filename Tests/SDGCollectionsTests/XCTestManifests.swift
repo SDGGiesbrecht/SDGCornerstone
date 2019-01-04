@@ -46,7 +46,8 @@ extension SDGCollectionsAPITests {
 
 extension SDGCollectionsRegressionTests {
     static let __allTests = [
-        ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch)
+        ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch),
+        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
     ]
 }
 
