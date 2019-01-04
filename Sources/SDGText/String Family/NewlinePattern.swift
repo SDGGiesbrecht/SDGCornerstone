@@ -39,7 +39,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     // MARK: - Pattern
 
-    // #documentation(SDGCornerstone.Pattern.match(in:at:))
+    // #documentation(SDGCornerstone.PatternProtocol.matches(in:at:))
     /// Returns the ranges of possible matches beginning at the specified index in the collection.
     ///
     /// The ranges are sorted in order of preference. Ranges can be tried one after another down through the list in the event that some should be disqualified for some external reason, such as being part of a larger composite pattern.
@@ -65,7 +65,7 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
         return result
     }
 
-    // #documentation(SDGCornerstone.Pattern.primaryMatch(in:at:))
+    // #documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:))
     /// Returns the primary match beginning at the specified index in the collection.
     ///
     /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
@@ -90,8 +90,8 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
         return (location ... location).relative(to: collection)
     }
 
-    // #documentation(SDGCornerstone.Pattern.reverse())
-    /// A pattern that checks for the reverse pattern.
+    // #documentation(SDGCornerstone.PatternProtocol.reversed())
+    /// Retruns a pattern that checks for the reverse pattern.
     ///
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     @inlinable public override func reversed() -> NewlinePattern {

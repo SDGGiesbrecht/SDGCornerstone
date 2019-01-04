@@ -781,8 +781,26 @@ extension SearchableCollection {
 
     // MARK: - PatternProtocol
 
+    // #documentation(SDGCornerstone.PatternProtocol.matches(in:at:))
+    /// Returns the ranges of possible matches beginning at the specified index in the collection.
+    ///
+    /// The ranges are sorted in order of preference. Ranges can be tried one after another down through the list in the event that some should be disqualified for some external reason, such as being part of a larger composite pattern.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+        if let match = primaryMatch(in: collection, at: location) {
+            return [match]
+        } else {
+            return []
+        }
+    }
+
     // #documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:))
     /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
     ///
     /// - Parameters:
     ///     - collection: The collection in which to search.
