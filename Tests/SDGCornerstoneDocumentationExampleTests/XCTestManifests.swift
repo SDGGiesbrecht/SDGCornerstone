@@ -46,8 +46,10 @@ extension MiscellaneousExampleTests {
         ("testIntegerLiterals", testIntegerLiterals),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testNestingLevel", testNestingLevel),
+        ("testPatternSwitch", testPatternSwitch),
         ("testRationalNumberLiterals", testRationalNumberLiterals),
         ("testRunLoopUsage", testRunLoopUsage),
+        ("testSetSwitch", testSetSwitch),
         ("testWholeNumberLiterals", testWholeNumberLiterals)
     ]
 }
