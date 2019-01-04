@@ -15,7 +15,7 @@
 extension RangeExpression where Self : SetDefinition {
 
     // #documentation(SDGCornerstone.ExpressionPattern.~=)
-    /// Enables use as a pattern in `switch` statements.
+    /// Enables use in switch cases.
     @inlinable public static func ~= (pattern: Self, value: Bound) -> Bool {
         // Disambiguate RangeExpression vs SetDefinition
         return pattern.contains(value)

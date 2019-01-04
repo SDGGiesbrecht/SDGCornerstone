@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2017–2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017–2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -144,7 +144,7 @@ extension SetDefinition {
     // MARK: - Switch Expression Pattern
 
     // @documentation(SDGCornerstone.ExpressionPattern.~=)
-    /// Enables use as a pattern in `switch` statements.
+    /// Enables use in switch cases.
     @inlinable public static func ~= (pattern: Self, value: Element) -> Bool {
         return value ∈ pattern
     }
