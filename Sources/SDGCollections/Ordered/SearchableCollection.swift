@@ -564,7 +564,7 @@ extension SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     @inlinable public func isMatch(for pattern: Self) -> Bool {
-        return _isMatch(for: pattern)
+        return elementsEqual(pattern)
     }
 
     @inlinable internal func _commonPrefix<C : SearchableCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {

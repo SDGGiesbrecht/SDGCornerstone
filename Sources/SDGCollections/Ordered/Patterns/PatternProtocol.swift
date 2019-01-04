@@ -50,3 +50,18 @@ public protocol PatternProtocol {
     /// This is suitable for performing backward searches by applying it to the reversed collection.
     func reversed() -> Reversed
 }
+
+extension PatternProtocol {
+
+    // MARK: - Switch Expression Pattern
+
+    // @documentation(SDGCornerstone.PatternProtocol.~=)
+    // #example(1, patternSwitch)
+    /// Enables use of any set pattern in switch cases.
+    ///
+    /// ```swift
+    /// ```
+    @inlinable public static func ~= <C : SearchableCollection>(pattern: Self, value: C) -> Bool where C.Element == Element {
+        return value.isMatch(for: pattern)
+    }
+}
