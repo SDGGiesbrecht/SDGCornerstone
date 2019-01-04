@@ -55,11 +55,21 @@ extension PatternProtocol {
 
     // MARK: - Switch Expression Pattern
 
-    // @documentation(SDGCornerstone.PatternProtocol.~=)
     // #example(1, patternSwitch)
     /// Enables use of any set pattern in switch cases.
     ///
     /// ```swift
+    /// switch "This is a string." {
+    /// case RepetitionPattern(LiteralPattern(".")):
+    ///     XCTFail("This case does not match.")
+    /// case CompositePattern([
+    ///     RepetitionPattern(NotPattern(LiteralPattern("."))),
+    ///     LiteralPattern(".")
+    ///     ]):
+    ///     print("This case does match.")
+    /// default:
+    ///     XCTFail("This case is never reached.")
+    /// }
     /// ```
     @inlinable public static func ~= <C : SearchableCollection>(pattern: Self, value: C) -> Bool where C.Element == Element {
         return value.isMatch(for: pattern)
