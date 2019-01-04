@@ -154,6 +154,19 @@ where SubSequence : SearchableCollection {
     ///     - pattern: The pattern to try.
     func hasPrefix(_ pattern: Self) -> Bool
 
+    // @documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    func isMatch<P>(for pattern: P) -> Bool where P : PatternProtocol, P.Element == Element
+    // #documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    func isMatch(for pattern: Self) -> Bool
+
     // @documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
     ///
@@ -524,6 +537,34 @@ extension SearchableCollection {
     ///     - pattern: The pattern to try.
     @inlinable public func hasPrefix(_ pattern: Self) -> Bool {
         return _hasPrefix(pattern)
+    }
+
+    @inlinable public func _isMatch<P>(for pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+        return pattern.matches(in: self, at: startIndex).contains(where: { $0.upperBound == endIndex })
+    }
+    // #documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @inlinable public func isMatch<P>(for pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+        return _isMatch(for: pattern)
+    }
+    // #documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @inlinable public func isMatch(for pattern: CompositePattern<Element>) -> Bool {
+        return _isMatch(for: pattern)
+    }
+    // #documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @inlinable public func isMatch(for pattern: Self) -> Bool {
+        return _isMatch(for: pattern)
     }
 
     @inlinable internal func _commonPrefix<C : SearchableCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
