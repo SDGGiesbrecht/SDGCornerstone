@@ -15,11 +15,7 @@
 import SDGMathematics
 
 /// A member of the `Range` family: `Range`, `ClosedRange`, `CountableRange` or `CountableClosedRange`.
-public protocol RangeFamily : ComparableSet, CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible {
-
-    // @documentation(SDGCornerstone.RangeFamily.Bound)
-    /// The bound type.
-    associatedtype Bound : Comparable
+public protocol RangeFamily : ComparableSet, CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible, RangeExpression {
 
     // @documentation(SDGCornerstone.RangeFamily.lowerBound)
     /// The lower bound.
@@ -28,13 +24,6 @@ public protocol RangeFamily : ComparableSet, CustomDebugStringConvertible, Custo
     // @documentation(SDGCornerstone.RangeFamily.upperBound)
     /// The upper bound.
     var upperBound: Bound { get }
-
-    // @documentation(SDGCornerstone.RangeFamily.contains(_:).)
-    /// Returns `true` if `element` is within the range.
-    ///
-    /// - Parameters:
-    ///     - element: The element.
-    func contains(_ element: Bound) -> Bool
 
     // @documentation(SDGCornerstone.RangeFamily.overlaps(_:).)
     // #documentation(SDGCornerstone.ComparableSet.overlaps(_:))

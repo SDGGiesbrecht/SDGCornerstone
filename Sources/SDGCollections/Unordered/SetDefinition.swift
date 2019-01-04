@@ -140,6 +140,14 @@ extension SetDefinition {
     @inlinable public static func ∆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Intersection<Self, AbsoluteComplement<S>>, Intersection<S, AbsoluteComplement<Self>>> {
         return (precedingValue ∖ followingValue) ∪ (followingValue ∖ precedingValue)
     }
+
+    // MARK: - Switch Expression Pattern
+
+    // @documentation(SDGCornerstone.ExpressionPattern.~=)
+    /// Enables use as a pattern in `switch` statements.
+    @inlinable public static func ~= (pattern: Self, value: Element) -> Bool {
+        return value ∈ pattern
+    }
 }
 
 extension SetDefinition where Self : SetAlgebra {
