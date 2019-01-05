@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -185,6 +185,22 @@ class MiscellaneousExampleTests : TestCase {
         // @endExample
     }
 
+    func testPatternSwitch() {
+        // @example(patternSwitch)
+        switch "This is a string." {
+        case RepetitionPattern(LiteralPattern(".")):
+            XCTFail("This case does not match.")
+        case CompositePattern([
+            RepetitionPattern(NotPattern(LiteralPattern("."))),
+            LiteralPattern(".")
+            ]):
+            print("This case does match.")
+        default:
+            XCTFail("This case is never reached.")
+        }
+        // @endExample
+    }
+
     func testRationalNumberLiterals() {
 
         func ensureLiteralsCompile() {
@@ -217,6 +233,20 @@ class MiscellaneousExampleTests : TestCase {
         // @endExample
 
         _ = driver
+    }
+
+    func testSetSwitch() {
+
+        // @example(setSwitch)
+        switch 5 {
+        case IntensionalSet(where: { $0.isEven }):
+            XCTFail("This case does not match.")
+        case (2 ... 4 ∪ 7 ... 9)′:
+            print("This case does match.")
+        default:
+            XCTFail("This case is never reached.")
+        }
+        // @endExample
     }
 
     func testWholeNumberLiterals() {

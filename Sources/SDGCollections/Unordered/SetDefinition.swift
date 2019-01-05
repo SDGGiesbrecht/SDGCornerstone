@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2017–2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017–2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -139,6 +139,26 @@ extension SetDefinition {
     ///     - followingValue: Another set.
     @inlinable public static func ∆ <S : SetDefinition>(precedingValue: Self, followingValue: S) -> Union<Intersection<Self, AbsoluteComplement<S>>, Intersection<S, AbsoluteComplement<Self>>> {
         return (precedingValue ∖ followingValue) ∪ (followingValue ∖ precedingValue)
+    }
+
+    // MARK: - Switch Expression Pattern
+
+    // @documentation(SDGCornerstone.ExpressionPattern.~=)
+    // #example(1, setSwitch)
+    /// Enables use of any set definition in switch cases.
+    ///
+    /// ```swift
+    /// switch 5 {
+    /// case IntensionalSet(where: { $0.isEven }):
+    ///     XCTFail("This case does not match.")
+    /// case (2 ... 4 ∪ 7 ... 9)′:
+    ///     print("This case does match.")
+    /// default:
+    ///     XCTFail("This case is never reached.")
+    /// }
+    /// ```
+    @inlinable public static func ~= (pattern: Self, value: Element) -> Bool {
+        return value ∈ pattern
     }
 }
 

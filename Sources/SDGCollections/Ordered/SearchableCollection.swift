@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -153,6 +153,19 @@ where SubSequence : SearchableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to try.
     func hasPrefix(_ pattern: Self) -> Bool
+
+    // @documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    func isMatch<P>(for pattern: P) -> Bool where P : PatternProtocol, P.Element == Element
+    // #documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    func isMatch(for pattern: Self) -> Bool
 
     // @documentation(SDGCornerstone.Collection.commonPrefix(with:))
     /// Returns the longest prefix subsequence shared with the other collection.
@@ -526,6 +539,34 @@ extension SearchableCollection {
         return _hasPrefix(pattern)
     }
 
+    @inlinable public func _isMatch<P>(for pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+        return pattern.matches(in: self, at: startIndex).contains(where: { $0.upperBound == endIndex })
+    }
+    // #documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @inlinable public func isMatch<P>(for pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+        return _isMatch(for: pattern)
+    }
+    // #documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @inlinable public func isMatch(for pattern: CompositePattern<Element>) -> Bool {
+        return _isMatch(for: pattern)
+    }
+    // #documentation(SDGCornerstone.Collection.isMatch(for:))
+    /// Returns `true` if the whole collection matches the specified pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to try.
+    @inlinable public func isMatch(for pattern: Self) -> Bool {
+        return elementsEqual(pattern)
+    }
+
     @inlinable internal func _commonPrefix<C : SearchableCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
         var end: Index = startIndex
         for (ownIndex, otherIndex) in zip(indices, other.indices) {
@@ -781,8 +822,26 @@ extension SearchableCollection {
 
     // MARK: - PatternProtocol
 
+    // #documentation(SDGCornerstone.PatternProtocol.matches(in:at:))
+    /// Returns the ranges of possible matches beginning at the specified index in the collection.
+    ///
+    /// The ranges are sorted in order of preference. Ranges can be tried one after another down through the list in the event that some should be disqualified for some external reason, such as being part of a larger composite pattern.
+    ///
+    /// - Parameters:
+    ///     - collection: The collection in which to search.
+    ///     - location: The index at which to check for the beginning of a match.
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+        if let match = primaryMatch(in: collection, at: location) {
+            return [match]
+        } else {
+            return []
+        }
+    }
+
     // #documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:))
     /// Returns the primary match beginning at the specified index in the collection.
+    ///
+    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
     ///
     /// - Parameters:
     ///     - collection: The collection in which to search.

@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -210,6 +210,13 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssert([1, 2, 3, 4].hasPrefix([1, 2]))
         XCTAssert([1, 2, 3, 4].hasPrefix(AlternativePatterns([LiteralPattern([1, 2]), LiteralPattern([3, 4])])))
         XCTAssert([1, 2, 3, 4].hasPrefix([LiteralPattern([1]), LiteralPattern([2])]))
+
+        XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
+        XCTAssert([1, 2, 3, 4].isMatch(for: AlternativePatterns([LiteralPattern([1, 2, 3, 4]), LiteralPattern([4, 3, 2, 1])])))
+        XCTAssert([1, 2, 3, 4].isMatch(for: [LiteralPattern([1]), LiteralPattern([2, 3, 4])]))
+        XCTAssert("abcd".isMatch(for: ["a", "b", "c", "d"]))
+        XCTAssertFalse("abcd".isMatch(for: ["a", "b", "c"]))
+        XCTAssertFalse("abcd".isMatch(for: ["b", "c", "d"]))
 
         XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
         XCTAssert([1, 2, 3, 4].hasSuffix(AlternativePatterns([LiteralPattern([3, 4]), LiteralPattern([5, 6])])))
