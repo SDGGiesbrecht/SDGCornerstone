@@ -214,6 +214,9 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
         XCTAssert([1, 2, 3, 4].isMatch(for: AlternativePatterns([LiteralPattern([1, 2, 3, 4]), LiteralPattern([4, 3, 2, 1])])))
         XCTAssert([1, 2, 3, 4].isMatch(for: [LiteralPattern([1]), LiteralPattern([2, 3, 4])]))
+        XCTAssert("abcd".isMatch(for: ["a", "b", "c", "d"]))
+        XCTAssertFalse("abcd".isMatch(for: ["a", "b", "c"]))
+        XCTAssertFalse("abcd".isMatch(for: ["b", "c", "d"]))
 
         XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
         XCTAssert([1, 2, 3, 4].hasSuffix(AlternativePatterns([LiteralPattern([3, 4]), LiteralPattern([5, 6])])))
