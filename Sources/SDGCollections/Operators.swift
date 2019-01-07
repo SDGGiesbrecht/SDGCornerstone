@@ -12,159 +12,85 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #documentation(SDGCornerstone.SetDefinition.∈)
-/// Returns `true` if `precedingValue` is an element of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The element to test.
-///     - followingValue: The set.
+// @documentation(SDGCornerstone.∈)
+/// Checks for set membership.
 infix operator ∈: ComparisonPrecedence
 
-// #documentation(SDGCornerstone.SetDefinition.∉)
-/// Returns `true` if `precedingValue` is not an element of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The element to test.
-///     - followingValue: The set.
+// @documentation(SDGCornerstone.∉)
+/// Checks for non‐membership.
 infix operator ∉: ComparisonPrecedence
 
-// #documentation(SDGCornerstone.SetDefinition.∋)
-/// Returns `true` if `precedingValue` contains `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The set.
-///     - followingValue: The element to test.
+// @documentation(SDGCornerstone.∋)
+/// Checks for containment.
 infix operator ∋: ComparisonPrecedence
 
-// #documentation(SDGCornerstone.SetDefinition.∌)
-/// Returns `true` if `precedingValue` does not contain `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The set.
-///     - followingValue: The element to test.
+// @documentation(SDGCornerstone.∌)
+/// Checks for non‐containment.
 infix operator ∌: ComparisonPrecedence
 
-/// The precedence group for `∩`, `∪` and `∖`.
+// @documentation(SDGCornerstone.BinarySetOperationPrecedence)
+/// The precedence of binary set operations.
 precedencegroup BinarySetOperationPrecedence {
     lowerThan: RangeFormationPrecedence
     higherThan: ComparisonPrecedence
 }
 
-// #documentation(SDGCornerstone.SetDefinition.∩)
-/// Returns the intersection of the two sets.
-///
-/// - Parameters:
-///     - precedingValue: A set.
-///     - followingValue: Another set.
+// @documentation(SDGCornerstone.∩)
+/// Performs intersection.
 infix operator ∩: BinarySetOperationPrecedence
 
-// #documentation(SDGCornerstone.MutableSet.∩=)
-/// Sets `precedingValue` to the intersection of the two sets.
-///
-/// - Parameters:
-///     - precedingValue: A set.
-///     - followingValue: Another set.
+// @documentation(SDGCornerstone.∩=)
+/// Assigns to the intersection.
 infix operator ∩=: AssignmentPrecedence
 
-// #documentation(SDGCornerstone.SetDefinition.∪)
-/// Returns the union of the two sets.
-///
-/// - Parameters:
-///     - precedingValue: A set.
-///     - followingValue: Another set.
+// @documentation(SDGCornerstone.∪)
+/// Performs union.
 infix operator ∪: BinarySetOperationPrecedence
 
-// #documentation(SDGCornerstone.MutableSet.∪=)
-/// Sets `precedingValue` to the union of the two sets.
-///
-/// - Parameters:
-///     - precedingValue: A set.
-///     - followingValue: Another set.
+// @documentation(SDGCornerstone.∪=)
+/// Assigns to the union.
 infix operator ∪=: AssignmentPrecedence
 
-// #documentation(SDGCornerstone.RepresentableUniverse.′=)
-/// Sets the operand to its absolute complement.
-///
-/// - Parameters:
-///     - operand: The set.
+// @documentation(SDGCornerstone.′=)
+/// Assigns to the absolute complement.
 postfix operator ′=
 
-// #documentation(SDGCornerstone.SetDefinition.∖)
-/// Returns the relative complement of `followingValue` in `precedingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The set to subtract from.
-///     - followingValue: The set to subtract.
+// @documentation(SDGCornerstone.∖)
+/// Returns the relative complement.
 infix operator ∖: BinarySetOperationPrecedence
 
-// #documentation(SDGCornerstone.MutableSet.∖=)
-/// Subtracts `followingValue` from `precedingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The set to subtract from.
-///     - followingValue: The set to subtract.
+// @documentation(SDGCornerstone.∖=)
+/// Assings to the relative complement.
 infix operator ∖=: AssignmentPrecedence
 
-// #documentation(SDGCornerstone.SetDefinition.∆)
-/// Returns the symmetric difference of `followingValue` in `precedingValue`.
-///
-/// - Parameters:
-///     - precedingValue: A set.
-///     - followingValue: Another set.
+// @documentation(SDGCornerstone.∆)
+/// Returns the symmetric difference.
 infix operator ∆: BinarySetOperationPrecedence
 
-// #documentation(SDGCornerstone.MutableSet.∆=)
-/// Sets `precedingValue` to the symmetric difference of the two sets.
-///
-/// - Parameters:
-///     - precedingValue: A set.
-///     - followingValue: Another set.
+// @documentation(SDGCornerstone.∆=)
+/// Assigns to the symmetric difference.
 infix operator ∆=: AssignmentPrecedence
 
-// #documentation(SDGCornerstone.ComparableSet.⊆)
-/// Returns `true` if `precedingValue` is a subset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible subset to test.
-///     - followingValue: The other set.
+// @documentation(SDGCornerstone.⊆)
+/// Checks for a subset relationship.
 infix operator ⊆: ComparisonPrecedence
 
-// #documentation(SDGCornerstone.ComparableSet.⊆)
-/// Returns `true` if `precedingValue` is a subset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible subset to test.
-///     - followingValue: The other set.
+// @documentation(SDGCornerstone.⊆)
+/// Checks for a non‐subset relationship.
 infix operator ⊈: ComparisonPrecedence
 
-// #documentation(SDGCornerstone.ComparableSet.⊇)
-/// Returns `true` if `precedingValue` is a superset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible superset to test.
-///     - followingValue: The other set.
+// @documentation(SDGCornerstone.⊇)
+/// Checks for a superset relationship.
 infix operator ⊇: ComparisonPrecedence
 
-// #documentation(SDGCornerstone.ComparableSet.⊇)
-/// Returns `true` if `precedingValue` is a superset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible superset to test.
-///     - followingValue: The other set.
+// @documentation(SDGCornerstone.⊇)
+/// Checks for a non‐superset relationship.
 infix operator ⊉: ComparisonPrecedence
 
-// #documentation(SDGCornerstone.ComparableSet.⊊)
-/// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible subset to test.
-///     - followingValue: The other set.
+// @documentation(SDGCornerstone.⊊)
+/// Checks for a strict subset relationship.
 infix operator ⊊: ComparisonPrecedence
 
-// #documentation(SDGCornerstone.ComparableSet.⊋)
-/// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
-///
-/// - Parameters:
-///     - precedingValue: The possible superset to test.
-///     - followingValue: The other set.
+// @documentation(SDGCornerstone.⊋)
+/// Checks for a strict superset relationship.
 infix operator ⊋: ComparisonPrecedence
