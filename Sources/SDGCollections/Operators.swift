@@ -75,7 +75,7 @@ infix operator ∆=: AssignmentPrecedence
 /// Checks for a subset relationship.
 infix operator ⊆: ComparisonPrecedence
 
-// @documentation(SDGCornerstone.⊆)
+// @documentation(SDGCornerstone.⊈)
 /// Checks for a non‐subset relationship.
 infix operator ⊈: ComparisonPrecedence
 
@@ -83,7 +83,7 @@ infix operator ⊈: ComparisonPrecedence
 /// Checks for a superset relationship.
 infix operator ⊇: ComparisonPrecedence
 
-// @documentation(SDGCornerstone.⊇)
+// @documentation(SDGCornerstone.⊉)
 /// Checks for a non‐superset relationship.
 infix operator ⊉: ComparisonPrecedence
 
