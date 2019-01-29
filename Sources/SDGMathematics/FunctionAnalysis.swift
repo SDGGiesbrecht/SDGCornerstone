@@ -59,7 +59,7 @@ import SDGControlFlow
 /// - Precondition: If `bounds ≠ nil`, a local maximum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:
 ///   ```swift
 ///   // Never do this:
-///   _ = findLocalMaximum(near: 0, inFunction: {$0})
+///   _ = findLocalMaximum(near: 0, inFunction: { $0 })
 ///   ```
 ///
 /// - Parameters:
@@ -116,7 +116,7 @@ import SDGControlFlow
 /// - Precondition: If `bounds ≠ nil`, a local minimum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:
 ///   ```swift
 ///   // Never do this:
-///   _ = findLocalMinimum(near: 0, inFunction: {$0})
+///   _ = findLocalMinimum(near: 0, inFunction: { $0 })
 ///   ```
 ///
 /// - Parameters:
