@@ -16,8 +16,9 @@ import Foundation
 
 /// An error suitable to present to users.
 ///
-/// Conformance Requirements
-///     - `var localizedDescription: String`
+/// Conformance Requirements:
+///
+/// - `var localizedDescription: String`
 public protocol PresentableError : CustomStringConvertible, LocalizedError {
 
     // @documentation(SDGCornerstone.PresentableError.presentableDescription())

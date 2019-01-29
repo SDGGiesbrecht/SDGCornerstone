@@ -17,8 +17,9 @@ import SDGControlFlow
 /// A pattern that can be searched for in collections with equatable elements.
 ///
 /// Required Overrides for Subclasses:
-///     - `func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element`
-///     - `func reversed() -> Pattern<Element>`
+///
+/// - `func matches<C : Collection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element`
+/// - `func reversed() -> Pattern<Element>`
 open class Pattern<Element : Equatable> : PatternProtocol {
 
     /// Pattern consumption behaviour.
@@ -30,9 +31,7 @@ open class Pattern<Element : Equatable> : PatternProtocol {
     }
 
     /// This initializer does nothing. It only exists so that subclasses have an available parent initializer they can forward to in order to satisfy the compiler.
-    @inlinable public init() {
-
-    }
+    @inlinable public init() {}
 
     // #documentation(SDGCornerstone.PatternProtocol.matches(in:at:))
     /// Returns the ranges of possible matches beginning at the specified index in the collection.

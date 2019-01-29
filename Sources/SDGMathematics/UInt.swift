@@ -18,9 +18,7 @@ public typealias UIntMax = UInt64
 /// A type that represents a fixed‐length unsigned integer.
 ///
 /// This protocol exists so that extensions to it can provide shared functionality for `UInt`, `UInt64`, `UInt32`, `UInt16` and `UInt8`.
-public protocol UIntFamily : BitField, CustomReflectable, CVarArg, FixedWidthInteger, UnsignedInteger, WholeNumberProtocol {
-
-}
+public protocol UIntFamily : BitField, CustomReflectable, CVarArg, FixedWidthInteger, UnsignedInteger, WholeNumberProtocol {}
 
 extension UIntFamily {
 
@@ -133,7 +131,7 @@ extension UIntFamily {
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue - followingValue
+        return precedingValue - followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.Subtractable.−=)
@@ -143,7 +141,7 @@ extension UIntFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
     @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue -= followingValue
+        precedingValue -= followingValue // @exempt(from: unicode)
     }
 
     // MARK: - WholeArithmetic
@@ -164,7 +162,7 @@ extension UIntFamily {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue * followingValue
+        return precedingValue * followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.×=)
@@ -174,7 +172,7 @@ extension UIntFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
     @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue *= followingValue
+        precedingValue *= followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:))
@@ -185,7 +183,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - divisor: The divisor.
     @inlinable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
-        return self / divisor
+        return self / divisor // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
@@ -196,7 +194,7 @@ extension UIntFamily {
     /// - Parameters:
     ///     - divisor: The divisor.
     @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
-        self /= divisor
+        self /= divisor // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.mod(_:))

@@ -13,6 +13,4 @@
  */
 
 /// A one dimensional point with a fixed scale.
-public protocol FixedScaleOneDimensionalPoint : OneDimensionalPoint, Strideable where Stride == Vector {
-
-}
+public protocol FixedScaleOneDimensionalPoint : OneDimensionalPoint, Strideable where Stride == Vector {}

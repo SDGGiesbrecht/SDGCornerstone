@@ -46,14 +46,14 @@ class FunctionAnalysisExampleTests : TestCase {
     func doNotTestPreconditionViolationForFindLocalMinimum() {
         // @example(findLocalMinimumPreconditionViolation)
         // Never do this:
-        _ = findLocalMinimum(near: 0, inFunction: {$0})
+        _ = findLocalMinimum(near: 0, inFunction: { $0 })
         // @endExample
     }
 
     func doNotTestPreconditionViolationForFindLocalMaximum() {
         // @example(findLocalMaximumPreconditionViolation)
         // Never do this:
-        _ = findLocalMaximum(near: 0, inFunction: {$0})
+        _ = findLocalMaximum(near: 0, inFunction: { $0 })
         // @endExample
     }
 

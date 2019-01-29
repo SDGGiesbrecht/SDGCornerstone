@@ -133,7 +133,7 @@ extension Localization {
                 } else {
                     // language‐script
 
-                    if let countries = scripts.first(where: {$0.script == script})?.countries {
+                    if let countries = scripts.first(where: { $0.script == script })?.countries {
                         for country in countries {
                             if let result = Self(exactly: [language, script, country].joined(separator: "\u{2D}")) {
                                 self = result

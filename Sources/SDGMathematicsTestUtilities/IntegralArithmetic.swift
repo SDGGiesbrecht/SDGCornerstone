@@ -17,8 +17,8 @@
 
     testNegatableConformance(minuend: 61 as T, subtrahend: 23, difference: 38, file: file, line: line)
     testWholeArithmeticConformance(of: T.self, includingNegatives: true, file: file, line: line)
-    test(prefixOperator: (-, "-"), on: 9 as T, returns: −9, file: file, line: line) // SignedNumeric
-    test(mutatingMethod: ({ $0.negate() }, "negate"), of: −5 as T, resultsIn: 5, file: file, line: line) // SignedNumeric
+    test(prefixOperator: (-, "-"), on: 9 as T, returns: −9, file: file, line: line) // @exempt(from: unicode)
+    test(mutatingMethod: ({ $0.negate() }, "negate"), of: −5 as T, resultsIn: 5, file: file, line: line) // @exempt(from: unicode)
 
     // Comparable (extended)
     test(operator: (<, "<"), on: (−2 as T, −1), returns: true, file: file, line: line)

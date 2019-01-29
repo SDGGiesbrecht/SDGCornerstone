@@ -97,7 +97,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     /// - Returns: The entire output.
     ///
     /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-    @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // @exempt(from: tests)
+    @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = { _ in }) throws -> String { // @exempt(from: tests)
 
         let process = Process()
         process.launchPath = executable.path

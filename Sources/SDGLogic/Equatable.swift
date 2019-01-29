@@ -28,6 +28,6 @@ extension Equatable {
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
     @inlinable public static func ≠ (precedingValue: Self, followingValue: Self) -> Bool {
-        return precedingValue != followingValue
+        return precedingValue != followingValue // @exempt(from: unicode)
     }
 }

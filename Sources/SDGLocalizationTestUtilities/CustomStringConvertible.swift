@@ -20,7 +20,7 @@ import SDGPersistenceTestUtilities
 ///
 /// To update the specification instead of testing against it, change `overwriteSpecificationInsteadOfFailing` to `true` and re‐run the test suite. The specification will be rewritten to match the descriptions. *Do not forget to change it back afterward, or the test will cease to validate anything.*
 ///
-/// Parameters:
+/// - Parameters:
 ///     - instance: An instance to get a description from.
 ///     - localizations: The localization set to test.
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.

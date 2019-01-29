@@ -517,12 +517,12 @@ extension WholeArithmetic {
     /// Creates a new instance from the given integer, if it can be represented exactly.
 
     /// Multiplies two values and produces their product.
-    @inlinable public static func * (precedingValue: Self, followingValue: Self) -> Self { // Numeric
+    @inlinable public static func * (precedingValue: Self, followingValue: Self) -> Self { // @exempt(from: unicode)
         return precedingValue × followingValue
     }
 
     /// Multiplies two values and stores the result in the left‐hand‐side variable.
-    @inlinable public static func *= (precedingValue: inout Self, followingValue: Self) { // Numeric
+    @inlinable public static func *= (precedingValue: inout Self, followingValue: Self) { // @exempt(from: unicode)
         precedingValue ×= followingValue
     }
 }

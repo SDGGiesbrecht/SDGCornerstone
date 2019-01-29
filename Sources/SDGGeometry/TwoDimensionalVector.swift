@@ -16,8 +16,8 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `var Δx : Scalar { get set }`
-/// - `var Δy : Scalar { get set }`
+/// - `var Δx: Scalar { get set }`
+/// - `var Δy: Scalar { get set }`
 public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))

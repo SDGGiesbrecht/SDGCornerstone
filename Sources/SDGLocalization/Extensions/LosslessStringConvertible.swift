@@ -17,9 +17,7 @@
 /// Conformance Requirements:
 ///
 /// - `LosslessStringConvertible`
-public protocol CodableViaLosslessStringConvertible : Codable, LosslessStringConvertible {
-
-}
+public protocol CodableViaLosslessStringConvertible : Codable, LosslessStringConvertible {}
 
 extension CodableViaLosslessStringConvertible {
 

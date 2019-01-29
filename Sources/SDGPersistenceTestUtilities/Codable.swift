@@ -23,7 +23,7 @@ import SDGCornerstoneLocalizations
 ///
 /// This function will write the encoded data to the test specification directory in the project repository and will attempt to load that data in future calls. It is recommeded to check those specifications into source control, as this will make it easier to track backwards compatibility. These files can be deleted manually in the event that a particular encoding form should no longer be supported.
 ///
-/// Parameters:
+/// - Parameters:
 ///     - instance: An instance to encode and decode.
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
 @inlinable public func testCodableConformance<T>(of instance: T, uniqueTestName: StrictString, file: StaticString = #file, line: UInt = #line) where T : Codable, T : Equatable {
@@ -55,7 +55,7 @@ import SDGCornerstoneLocalizations
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted]
-        if #available(OSX 10.13, iOS 11, watchOS 4, tvOS 11, *) { // @exempt(from: tests)
+        if #available(OSX 10.13, iOS 11, watchOS 4, tvOS 11, *) { // @exempt(from: tests) @exempt(from: unicode)
             encoder.outputFormatting.insert(.sortedKeys)
         }
         let encoded = try encoder.encode([instance])
@@ -78,7 +78,7 @@ import SDGCornerstoneLocalizations
 ///
 /// For example, if a type encodes a property as an integer, but only supports a certain range of numbers, this function can be used to test that decoding an invalid number fails. The mock instance should be a dictionary, array or something else that can mimic the same encoding structure as the actual type, but is free from the restraints the type imposes.
 ///
-/// Parameters:
+/// - Parameters:
 ///     - type: The type to try to decode.
 ///     - invalidMock: A mock instance. See above.
 @inlinable public func testDecoding<T, O>(_ type: T.Type, failsFor invalidMock: O, file: StaticString = #file, line: UInt = #line) where T : Codable, O : Encodable {

@@ -28,7 +28,7 @@ extension BidirectionalCollection {
         return ReversedCollection<Self>.Index(resolved.upperBound) ..< ReversedCollection<Self>.Index(resolved.lowerBound)
     }
 
-    // #workaround(workspace version 0.16.0, SwiftSyntax crashes if this is used directly.)
+    // #workaround(workspace version 0.17.0, SwiftSyntax crashes if this is used directly.)
     public typealias _ReversedCollectionSelf = ReversedCollection<Self>
     /// Returns the forward version of the specified range.
     @inlinable public func forward<R>(_ range: R) -> Range<Self.Index> where R : RangeExpression, R.Bound == _ReversedCollectionSelf.Index {

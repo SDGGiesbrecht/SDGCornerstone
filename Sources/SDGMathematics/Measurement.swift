@@ -565,9 +565,7 @@ extension Measurement {
 /// Conformance Requirements:
 ///
 /// - `Measurement`
-public protocol CodableViaMeasurement : Measurement {
-
-}
+public protocol CodableViaMeasurement : Measurement {}
 
 extension CodableViaMeasurement {
 

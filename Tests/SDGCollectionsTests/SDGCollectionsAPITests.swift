@@ -309,9 +309,9 @@ class SDGCollectionsAPITests : TestCase {
         _ = AnyCollection(Set(startString)).difference(from: AnyCollection(Set(startString)))
 
         XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 == "." }))))
-        XCTAssertNil("...".scalars[...].lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
-        XCTAssertNil("...".scalars[...].firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])))
-        XCTAssert("...".scalars[...].matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "."})])).isEmpty)
+        XCTAssertNil("...".scalars[...].lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "." })])))
+        XCTAssertNil("...".scalars[...].firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "." })])))
+        XCTAssert("...".scalars[...].matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "." })])).isEmpty)
     }
 
     struct ComparableSetExample : ComparableSet {
@@ -395,9 +395,9 @@ class SDGCollectionsAPITests : TestCase {
             "b": 2,
             "c": 3
         ]
-        XCTAssertEqual(numbersToLetters.mapKeyValuePairs({($1, $0)}), lettersToNumbers)
-        XCTAssertEqual(numbersToLetters.mapKeys({$0 + 1}), [2: "a", 3: "b", 4: "c"])
-        XCTAssertEqual(lettersToNumbers.mapValues({$0 + 1}), ["a": 2, "b": 3, "c": 4])
+        XCTAssertEqual(numbersToLetters.mapKeyValuePairs({ ($1, $0) }), lettersToNumbers)
+        XCTAssertEqual(numbersToLetters.mapKeys({ $0 + 1 }), [2: "a", 3: "b", 4: "c"])
+        XCTAssertEqual(lettersToNumbers.mapValues({ $0 + 1 }), ["a": 2, "b": 3, "c": 4])
 
         var variable: [Int: String] = numbersToLetters
         variable.mutateValue(for: 1) { ($0 ?? "") + "..." }

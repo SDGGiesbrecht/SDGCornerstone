@@ -54,6 +54,3 @@ configuration.documentation.api.encryptedTravisCIDeploymentKey = "gzx7ARrCgcNJiD
 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
-
-// #workaround(workspace version 0.16.0, SwiftSyntax traps.)
-configuration.proofreading.rules.remove(.colonSpacing)

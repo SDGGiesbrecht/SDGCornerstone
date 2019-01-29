@@ -83,9 +83,7 @@ extension RawRepresentableCalendarComponent {
 /// Conformance Requirements:
 ///
 /// - `RawRepresentableCalendarComponent`
-public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCalendarComponent {
-
-}
+public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCalendarComponent {}
 
 extension CodableViaRawRepresentableCalendarComponent {
 
