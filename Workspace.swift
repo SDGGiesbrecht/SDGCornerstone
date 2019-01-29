@@ -56,5 +56,4 @@ configuration._applySDGOverrides()
 configuration._validateSDGStandards()
 
 // #workaround(Prevent timeout on Travis CI.)
-configuration.documentation.api.generate = false
-configuration.documentation.api.enforceCoverage = false
+configuration.documentation.relatedProjects = []

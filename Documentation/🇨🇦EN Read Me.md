@@ -38,8 +38,6 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 
 Use the entire package together by importing the `SDGCornerstone` product, or pick and choose pieces by importing the various component products.
 
-(For a list of related projects, see [here](🇨🇦EN%20Related%20Projects.md).)
-
 ## Importing
 
 SDGCornerstone provides libraries for use with the [Swift Package Manager](https://swift.org/package-manager/).
