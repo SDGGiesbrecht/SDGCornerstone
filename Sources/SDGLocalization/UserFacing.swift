@@ -1,5 +1,5 @@
 /*
- UserFacingText.swift
+ UserFacing.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone

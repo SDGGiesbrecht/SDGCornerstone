@@ -36,9 +36,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
-    ///     - pattern: The pattern to repeat.
-    ///     - count: A range representing the allowed number of repetitions.
-    ///     - consumption: The desired consumption behaviour.
+    ///     - pattern: The underlying pattern to negate.
     @inlinable public convenience init(_ pattern: LiteralPattern<Element>) {
         self.init(abstractBasePattern: pattern)
     }
@@ -47,9 +45,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
-    ///     - pattern: The pattern to repeat.
-    ///     - count: A range representing the allowed number of repetitions.
-    ///     - consumption: The desired consumption behaviour.
+    ///     - pattern: The underlying pattern to negate.
     @inlinable public convenience init(_ pattern: CompositePattern<Element>) {
         self.init(abstractBasePattern: pattern)
     }

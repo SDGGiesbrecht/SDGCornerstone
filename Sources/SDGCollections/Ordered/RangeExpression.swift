@@ -29,7 +29,7 @@ extension RangeExpression where Self : SetDefinition {
     /// ```
     ///
     /// - Parameters:
-    ///     - pattern: The pattern to check for.
+    ///     - pattern: The pattern to check against.
     ///     - value: The value to check.
     @inlinable public static func ~= (pattern: Self, value: Bound) -> Bool {
         // Disambiguate RangeExpression vs SetDefinition

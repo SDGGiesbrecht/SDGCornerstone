@@ -200,9 +200,6 @@ extension RangeReplaceableCollection {
 
     // #documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))
     /// Creates an instance from an array literal.
-    ///
-    /// - Parameters:
-    ///     - arrayLiteral: The array literal.
     @inlinable public init(arrayLiteral: Element...) {
         self.init()
         append(contentsOf: arrayLiteral)
