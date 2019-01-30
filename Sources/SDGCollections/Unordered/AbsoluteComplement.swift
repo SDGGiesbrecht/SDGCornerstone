@@ -22,7 +22,7 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
     /// Creates an absolute complement from a set.
     ///
     /// - Parameters:
-    ///     - set: A set.
+    ///     - base: A set.
     @inlinable public init(_ base: Base) {
         self.base = base
     }

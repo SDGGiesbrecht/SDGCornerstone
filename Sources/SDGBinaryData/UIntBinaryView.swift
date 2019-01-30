@@ -102,8 +102,6 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
         })
     }
 
-    // #documentation(SDGCornerstone.Collection.subscript(position:))
-    /// Accesses the element at the specified position.
     @inlinable public subscript(index: Index) -> Element {
         get {
             assertIndexExists(index)

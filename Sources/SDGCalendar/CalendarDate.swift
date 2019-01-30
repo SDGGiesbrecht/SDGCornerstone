@@ -43,6 +43,9 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     // MARK: - Initialization
 
     /// Creates an instance with the provided definition.
+    ///
+    /// - Parameters:
+    ///     - definition: The definition of the date.
     public init(definition: DateDefinition) {
         self.definition = definition
     }
@@ -68,27 +71,45 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     // @documentation(SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:))
-    /// Creates a date using the Hebrew calendar.
+    /// Creates a date using the Gregorian calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
     /// - `init(gregorianYear:month:day:hour:minute:second:)` tends to be more legible when used with variables.
     /// - `init(gregorian:_:_:at:_:_:)` tends to be more legible when used with literals.
+    ///
+    /// - Parameters:
+    ///     - year: The year.
+    ///     - month: The month.
+    ///     - day: The day of the month.
+    ///     - hour: The hour.
+    ///     - minute: The minute.
+    ///     - second: The second.
     public init(gregorianYear year: GregorianYear, month: GregorianMonth = .january, day: GregorianDay = 1, hour: GregorianHour = 0, minute: GregorianMinute = 0, second: GregorianSecond = 0) {
         let definition = GregorianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second)
         self.init(definition: definition)
     }
 
-    // #documentation(SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:))
-    /// Creates a date using the Hebrew calendar.
+    /// Creates a date using the Gregorian calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
     /// - `init(gregorianYear:month:day:hour:minute:second:)` tends to be more legible when used with variables.
     /// - `init(gregorian:_:_:at:_:_:)` tends to be more legible when used with literals.
+    ///
+    /// - Parameters:
+    ///     - month: The month.
+    ///     - day: The day of the month.
+    ///     - year: The year.
+    ///     - hour: The hour.
+    ///     - minute: The minute.
+    ///     - second: The second.
     public init(gregorian month: GregorianMonth, _ day: GregorianDay, _ year: GregorianYear, at hour: GregorianHour = 0, _ minute: GregorianMinute = 0, _ second: GregorianSecond = 0) {
         self.init(gregorianYear: year, month: month, day: day, hour: hour, minute: minute, second: second)
     }
 
     /// Creates a calendar date using an instance of `Date`.
+    ///
+    /// - Parameters:
+    ///     - date: The `Date` instance.
     public init(_ date: Date) {
         self.init(definition: FoundationDate(date))
     }
@@ -418,6 +439,9 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     ]
 
     /// Registers a definition type so that its instances can be decoded.
+    ///
+    /// - Parameters:
+    ///     - type: The type to register.
     public static func register(_ type: DateDefinition.Type) {
         knownDateDefinitions[type.identifier] = type
     }

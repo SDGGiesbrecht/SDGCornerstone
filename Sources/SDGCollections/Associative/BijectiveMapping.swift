@@ -48,20 +48,32 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
     // MARK: - Look‐Up
 
     /// Returns the corresponding `Y` for a particular `X`.
+    ///
+    /// - Parameters:
+    ///     - x: The `X` value.
     @inlinable public func y(for x: X) -> Y? {
         return xToY[x]
     }
     /// Returns the corresponding `X` for a particular `Y`.
+    ///
+    /// - Parameters:
+    ///     - y: The `Y` value.
     @inlinable public func x(for y: Y) -> X? {
         return yToX[y]
     }
 
     /// Accesses the corresponding `Y` for a particular `X`.
+    ///
+    /// - Parameters:
+    ///     - x: The `X` value.
     @inlinable public subscript(x: X) -> Y? {
         return xToY[x]
     }
 
     /// Accesses the corresponding `X` for a particular `Y`.
+    ///
+    /// - Parameters:
+    ///     - y: The `Y` value.
     @inlinable public subscript(y: Y) -> X? {
         return yToX[y]
     }
