@@ -278,10 +278,6 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Measurement
 
-    // #documentation(SDGCornerstone.Measurement.init(rawValue:))
-    /// Creates a measurement from a raw value in undefined but consistent units.
-    ///
-    /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
     @inlinable public init(rawValue: Scalar) {
         inUnits = rawValue
     }

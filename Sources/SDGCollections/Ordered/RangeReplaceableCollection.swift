@@ -24,10 +24,18 @@ extension RangeReplaceableCollection {
 
     // @documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
     /// Appends the contents of the sequence to the end of the collection.
+    ///
+    /// - Parameters:
+    ///     - newElements: The new elements to append.
 
     @inlinable internal mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
         append(contentsOf: newElements)
     }
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
+    /// Appends the contents of the sequence to the end of the collection.
+    ///
+    /// - Parameters:
+    ///     - newElements: The new elements to append.
     @inlinable public mutating func append(contentsOf newElements: Self) {
         appendAsCollection(contentsOf: newElements)
     }
@@ -200,6 +208,9 @@ extension RangeReplaceableCollection {
 
     // #documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))
     /// Creates an instance from an array literal.
+    ///
+    /// - Parameters:
+    ///     - arrayLiteral: The array literal.
     @inlinable public init(arrayLiteral: Element...) {
         self.init()
         append(contentsOf: arrayLiteral)

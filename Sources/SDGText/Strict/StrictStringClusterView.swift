@@ -109,6 +109,9 @@ extension StrictString {
 
         // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
         /// Appends the contents of the sequence to the end of the collection.
+        ///
+        /// - Parameters:
+        ///     - newElements: The new elements to append.
         @inlinable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == ExtendedGraphemeCluster {
             self = (StrictString(self) + StrictString(ClusterView.normalize(newElements))).clusters
         }

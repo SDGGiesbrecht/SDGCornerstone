@@ -45,7 +45,7 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     ///
     /// - Parameters:
     ///     - localization: The target localization.
-    ///     - argmuents: The arguments to interpolate.
+    ///     - arguments: The arguments to interpolate.
     @inlinable public func resolved(for localization: Localization, using arguments: Arguments) -> Element {
         return localize(localization, arguments)
     }
