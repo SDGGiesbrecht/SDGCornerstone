@@ -32,7 +32,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
         self.init(abstractBasePattern: pattern)
     }
 
-    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
+    // #documentation(SDGCornerstone.Not.init(_:))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:
@@ -43,7 +43,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
         self.init(abstractBasePattern: pattern)
     }
 
-    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
+    // #documentation(SDGCornerstone.Not.init(_:))
     /// Creates a repetition pattern from another pattern.
     ///
     /// - Parameters:

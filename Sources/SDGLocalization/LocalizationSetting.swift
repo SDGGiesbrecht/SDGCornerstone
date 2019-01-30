@@ -150,6 +150,9 @@ public struct LocalizationSetting : Codable, Equatable {
     ///   - are at the direct request of the user.
     ///
     /// Otherwise, use `do(_:)` instead.
+    ///
+    /// - Parameters:
+    ///     - setting: The new localization setting.
     public static func setApplicationPreferences(to setting: LocalizationSetting?) {
         _ = ProcessInfo.applicationIdentifier // Make sure this was set and it is not just a silent mock preference.
 

@@ -155,6 +155,9 @@ public struct Preference : Equatable, TransparentWrapper {
     /// Returns the preference cast to a particular type.
     ///
     /// The result will be `nil` if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
+    ///
+    /// - Parameters:
+    ///     - type: The type to cast to.
     @inlinable public func `as`<T>(_ type: T.Type) -> T? where T : Decodable {
         guard let object = propertyListObject else {
             // Value is nil.

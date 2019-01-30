@@ -75,6 +75,8 @@ extension Dictionary {
     ///
     /// - Parameters:
     ///     - transform: A mapping closure.
+    ///     - key: A key to transform.
+    ///     - value: A value to transform.
     @inlinable public func mapKeyValuePairs<K, V>(_ transform: (_ key: Key, _ value: Value) throws -> (key: K, value: V)) rethrows -> [K: V] {
         var result = [K: V]()
         for (key, value) in self {

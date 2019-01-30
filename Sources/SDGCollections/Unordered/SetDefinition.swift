@@ -157,6 +157,10 @@ extension SetDefinition {
     ///     XCTFail("This case is never reached.")
     /// }
     /// ```
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to check against.
+    ///     - value: The value to check.
     @inlinable public static func ~= (pattern: Self, value: Element) -> Bool {
         return value ∈ pattern
     }

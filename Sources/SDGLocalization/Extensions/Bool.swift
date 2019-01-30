@@ -25,6 +25,9 @@ extension Bool {
     }
 
     /// Returns “true” or “false”.
+    ///
+    /// - Parameters:
+    ///     - casing: The casing to use.
     @inlinable public func trueOrFalse(_ casing: EnglishCasing) -> StrictString {
         switch self {
         case true:
@@ -35,6 +38,9 @@ extension Bool {
     }
 
     /// Returns “yes” or “no”.
+    ///
+    /// - Parameters:
+    ///     - casing: The casing to use.
     @inlinable public func yesOrNo(_ casing: EnglishCasing) -> StrictString {
         switch self {
         case true:

@@ -30,41 +30,65 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
     // MARK: - Initialization
 
     /// Creates an interval from a number of Gregorian leap year cycles.
+    ///
+    /// - Parameters:
+    ///     - gregorianLeapYearCycles: The number of leap year cycles.
     @inlinable public init(gregorianLeapYearCycles: Scalar) {
         self.inGregorianLeapYearCycles = gregorianLeapYearCycles
     }
 
     /// Creates an interval from a number of Hebrew moons.
+    ///
+    /// - Parameters:
+    ///     - hebrewMoons: The number of moons.
     @inlinable public init(hebrewMoons: Scalar) {
         self.inHebrewMoons = hebrewMoons
     }
 
     /// Creates an interval from a number of weeks.
+    ///
+    /// - Parameters:
+    ///     - weeks: The number of weeks.
     @inlinable public init(weeks: Scalar) {
         self.inWeeks = weeks
     }
 
     /// Creates an interval from a number of days.
+    ///
+    /// - Parameters:
+    ///     - days: The number of days.
     @inlinable public init(days: Scalar) {
         self.inDays = days
     }
 
     /// Creates an interval from a number of hours.
+    ///
+    /// - Parameters:
+    ///     - hours: The number of hours.
     @inlinable public init(hours: Scalar) {
         self.inHours = hours
     }
 
     /// Creates an interval from a number of minutes.
+    ///
+    /// - Parameters:
+    ///     - minutes: The number of minutes.
     @inlinable public init(minutes: Scalar) {
         self.inMinutes = minutes
     }
 
     /// Creates an interval from a number of Hebrew parts.
+    ///
+    /// - Parameters:
+    ///     - hebrewParts: The number of parts.
     @inlinable public init(hebrewParts: Scalar) {
         self.inHebrewParts = hebrewParts
     }
 
     /// Creates an interval from a number of seconds.
+    ///
+    /// - Parameters:
+    ///     - seconds: The number of seconds.
     @inlinable public init(seconds: Scalar) {
         self.inSeconds = seconds
     }

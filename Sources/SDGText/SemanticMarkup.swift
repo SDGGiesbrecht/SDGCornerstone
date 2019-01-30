@@ -149,6 +149,9 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
     #if canImport(AppKit) || canImport(UIKit)
 
     /// Returns the rich text representation.
+    ///
+    /// - Parameters:
+    ///     - font: The font to use.
     public func richText(font: Font) -> NSAttributedString {
 
         var modified = "<span style=\u{22}"

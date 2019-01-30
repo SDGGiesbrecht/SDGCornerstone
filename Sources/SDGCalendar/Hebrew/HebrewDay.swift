@@ -22,6 +22,10 @@ public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, Consisten
     // MARK: - Recurrence
 
     /// Corrects the day for the specified month and year, altering them if necessary. (If it doesn’t exist that year, Cheshvan 30 will be replaced by Kislev 1, etc.)
+    ///
+    /// - Parameters:
+    ///     - month: The month to correct for.
+    ///     - year: The year to correct for.
     public mutating func correct(forMonth month: inout HebrewMonth, year: inout HebrewYear) {
         month.correctForYear(leapYear: year.isLeapYear)
 

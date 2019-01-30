@@ -18,6 +18,9 @@ public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentable
     // MARK: - Static Properties
 
     /// The number of months in a year.
+    ///
+    /// - Parameters:
+    ///     - leapYear: Whether or not the number should represent a leap year.
     public static func numberOfMonths(leapYear: Bool) -> Int {
         if leapYear {
             return 13

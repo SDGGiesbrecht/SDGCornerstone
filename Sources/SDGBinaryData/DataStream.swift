@@ -38,6 +38,9 @@ public struct DataStream {
     private static let escapeData = Data([escapeMarker])
 
     /// Appends a unit of data.
+    ///
+    /// - Parameters:
+    ///     - unit: The unit of data to append.
     public mutating func append(unit: Data) {
         var unit = unit
 
