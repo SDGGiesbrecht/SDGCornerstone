@@ -34,7 +34,11 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
     public typealias Scalar = CGFloat
 
     // #documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
-    /// The difference in *y*.
+    /// Creates a vector using the specified differences in *x* and *y*.
+    ///
+    /// - Parameters:
+    ///     - Δx: The difference in *x*.
+    ///     - Δy: The difference in *y*.
     public init(Δx: Scalar, Δy: Scalar) {
         self = CGVector(dx: Δx, dy: Δy)
     }

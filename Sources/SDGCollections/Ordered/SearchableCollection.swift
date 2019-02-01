@@ -1304,7 +1304,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
+    ///     - mutation: The mutation to perform on each match.
+    ///     - match: A match to perform the mutation on.
     @inlinable public func mutatingMatches<C : SearchableCollection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
         return _mutatingMatches(for: pattern, mutation: mutation)
     }
@@ -1313,7 +1314,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
+    ///     - mutation: The mutation to perform on each match.
+    ///     - match: A match to perform the mutation on.
     @inlinable public func mutatingMatches<C : SearchableCollection>(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
         return _mutatingMatches(for: pattern, mutation: mutation)
     }
