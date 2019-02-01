@@ -13,6 +13,10 @@
  */
 
 /// Checks whether the two values are approximately equal.
+///
+/// - Parameters:
+///     - precedingValue: A value to compare.
+///     - followingValue: Another value to compare.
 @inlinable public func ≈ <T>(precedingValue: T, followingValue: T) -> Bool where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
     return precedingValue ≈ followingValue ± 0.000_01
 }

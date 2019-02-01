@@ -219,8 +219,12 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests an infix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - function: The operator function to test.
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
 ///     - operands: The operands to pass to the function.
+///     - precedingValue: The preceding operand.
+///     - followingValue: The following operand.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
@@ -237,8 +241,12 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests an infix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - function: The operator function to test.
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
 ///     - operands: The operands to pass to the function.
+///     - precedingValue: The preceding operand.
+///     - followingValue: The following operand.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
@@ -255,8 +263,12 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests an infix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - function: The operator function to test.
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
 ///     - operands: The operands to pass to the function.
+///     - precedingValue: The preceding operand.
+///     - followingValue: The following operand.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
@@ -273,8 +285,12 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests an infix assignment operator, verifying that the mutated value matches the expected result.
 ///
 /// - Parameters:
-///     - function: The operator function to test.
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
 ///     - operands: The operands to pass to the function.
+///     - precedingValue: The preceding operand.
+///     - followingValue: The following operand.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
@@ -292,8 +308,12 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests an infix assignment operator, verifying that the mutated value matches the expected result.
 ///
 /// - Parameters:
-///     - function: The operator function to test.
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
 ///     - operands: The operands to pass to the function.
+///     - precedingValue: The preceding operand.
+///     - followingValue: The following operand.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
@@ -311,7 +331,9 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests a prefix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - function: The operator function to test.
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
 ///     - operand: The operand to pass to the function.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
@@ -329,7 +351,9 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests a postfix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
-///     - function: The operator function to test.
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
 ///     - operand: The operand to pass to the function.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
@@ -347,7 +371,9 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// Tests a postfix assignment operator, verifying that the mutated value matches the expected result.
 ///
 /// - Parameters:
-///     - function: The operator function to test.
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
 ///     - operand: The operand to pass to the function.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.

@@ -453,11 +453,6 @@ extension SearchableCollection {
         return _suffix(after: pattern)
     }
 
-    /// Returns an array of ranges representing the complement of those provided.
-    ///
-    /// - SeeAlso: `components(separatedBy:)`
-    ///
-    /// - Precondition: The provided ranges must be sorted and not overlap.
     @inlinable public func ranges(separatedBy separators: [Range<Index>]) -> [Range<Index>] {
         let startIndices = [startIndex] + separators.map({ $0.upperBound })
         let endIndices = separators.map({ $0.lowerBound }) + [endIndex]
@@ -1298,7 +1293,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
+    ///     - mutation: The mutation to perform on each match.
+    ///     - match: A match to perform the mutation on.
     @inlinable public func mutatingMatches<P, C>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
         return _mutatingMatches(for: pattern, mutation: mutation)
     }

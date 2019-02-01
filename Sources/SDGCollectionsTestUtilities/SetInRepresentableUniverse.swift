@@ -13,6 +13,14 @@
  */
 
 /// Tests a type’s conformance to SetInRepresentableUniverse.
+///
+/// - Parameters:
+///     - type: The type.
+///     - a: An element.
+///     - b: Another, distinct element.
+///     - c: Yet another distinct element.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testSetInRepresentableUniverseConformance<T>(of type: T.Type, a: T.Element, b: T.Element, c: T.Element, file: StaticString = #file, line: UInt = #line) where T : SetInRepresentableUniverse, T.Element : Hashable {
 
     testMutableSetConformance(of: type, a: a, b: b, c: c, file: file, line: line)

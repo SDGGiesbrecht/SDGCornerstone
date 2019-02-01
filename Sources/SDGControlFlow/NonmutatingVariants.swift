@@ -88,7 +88,7 @@
 /// - Parameters:
 ///     - mutation: The mutating counterpart.
 ///     - self: The instance.
-///     - argument: An argument to pass to the mutating counterpart.
+///     - arguments: Arguments to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A, B>(of mutation: (inout T, A, B) throws -> Void, on `self`: T, with arguments: (A, B)) rethrows -> T {
     var copy = `self`
     try mutation(&copy, arguments.0, arguments.1)
@@ -116,7 +116,7 @@
 /// - Parameters:
 ///     - mutation: The mutating counterpart.
 ///     - self: The instance.
-///     - argument: An argument to pass to the mutating counterpart.
+///     - arguments: Arguments to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A, B, C>(of mutation: (inout T, A, B, C) throws -> Void, on `self`: T, with arguments: (A, B, C)) rethrows -> T {
     var copy = `self`
     try mutation(&copy, arguments.0, arguments.1, arguments.2)

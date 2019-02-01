@@ -13,6 +13,12 @@
  */
 
 /// Tests a type’s conformance to RangeReplaceableCollection.
+///
+/// - Parameters:
+///     - type: The type.
+///     - element: An element instance.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testRangeReplaceableCollectionConformance<T>(of type: T.Type, element: T.Element, file: StaticString = #file, line: UInt = #line) where T : RangeReplaceableCollection, T.Element : Equatable {
 
     var collection = T()

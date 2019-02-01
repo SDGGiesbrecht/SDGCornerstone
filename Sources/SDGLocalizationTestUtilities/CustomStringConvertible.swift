@@ -25,6 +25,8 @@ import SDGPersistenceTestUtilities
 ///     - localizations: The localization set to test.
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
 ///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update the specification.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testCustomStringConvertibleConformance<T, L>(of instance: T, localizations: L.Type, uniqueTestName: StrictString, overwriteSpecificationInsteadOfFailing: Bool, file: StaticString = #file, line: UInt = #line) where T : CustomStringConvertible, L : InputLocalization {
 
     var report = ""

@@ -39,8 +39,6 @@ public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
 extension TwoDimensionalVector {
 
-    // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
-    /// The difference in *y*.
     @inlinable public init(Δx: Scalar, Δy: Scalar) {
         self = Self.additiveIdentity
         self.Δx = Δx
@@ -51,6 +49,10 @@ extension TwoDimensionalVector {
 extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     /// Creates a vector from an angular direction and a length.
+    ///
+    /// - Parameters:
+    ///     - direction: The direction of the vector.
+    ///     - length: The length of the vector.
     @inlinable public init(direction: Angle<Scalar>, length: Scalar) {
         self.init(Δx: cos(direction) × length, Δy: sin(direction) × length)
     }

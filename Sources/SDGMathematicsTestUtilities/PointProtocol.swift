@@ -18,6 +18,13 @@ import SDGPersistenceTestUtilities
 /// Tests a type’s conformance to PointProtocol.
 ///
 /// - Precondition: `departure` and `destination` are expected to be inequal.
+///
+/// - Parameters:
+///     - departure: A point of departure.
+///     - vector: A vector.
+///     - destination: The expected point of arrival.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testPointProtocolConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : PointProtocol {
 
     testEquatableConformance(differingInstances: (departure, destination), file: file, line: line)

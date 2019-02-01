@@ -15,6 +15,13 @@
 /// Tests a type’s conformance to FixedScaleOneDimensionalPoint.
 ///
 /// - Precondition: `departure` is expected to be less than `destination`.
+///
+/// - Parameters:
+///     - departure: A point of departure.
+///     - vector: A vector.
+///     - destination: The expected point of arrival.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testFixedScaleOneDimensionalPointConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : OneDimensionalPoint {
     testOneDimensionalPointConformance(departure: departure, vector: vector, destination: destination, file: file, line: line)
 }

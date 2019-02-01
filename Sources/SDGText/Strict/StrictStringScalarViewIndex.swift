@@ -17,16 +17,25 @@ extension String.UnicodeScalarView.Index {
     // MARK: - Conversions
 
     /// Returns the position in the given view of clusters that corresponds exactly to this index.
+    ///
+    /// - Parameters:
+    ///     - clusters: The cluster view of the string the range refers to.
     @inlinable public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index? {
         return samePosition(in: String(StrictString(clusters)))
     }
 
     /// Returns the position of the cluster that contains this index.
+    ///
+    /// - Parameters:
+    ///     - clusters: The cluster view of the string the range refers to.
     @inlinable public func cluster(in clusters: StrictString.ClusterView) -> StrictString.ClusterView.Index {
         return cluster(in: String(StrictString(clusters)).clusters)
     }
 
     /// Returns the position in the given view of lines that corresponds exactly to this index.
+    ///
+    /// - Parameters:
+    ///     - lines: The line view of the string the range refers to.
     @inlinable public func samePosition(in lines: LineView<StrictString>) -> LineView<StrictString>.Index? {
         let line = self.line(in: lines)
         guard let start = line.start else {
@@ -41,6 +50,9 @@ extension String.UnicodeScalarView.Index {
     }
 
     /// Returns the position of the line that contains this index.
+    ///
+    /// - Parameters:
+    ///     - lines: The line view of the string the range refers to.
     @inlinable public func line(in lines: LineView<StrictString>) -> LineView<StrictString>.Index {
         return lines.line(for: self)
     }

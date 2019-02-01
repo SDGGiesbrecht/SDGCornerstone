@@ -15,6 +15,11 @@
 import SDGLogicTestUtilities
 
 /// Tests a type’s conformance to Hashable.
+///
+/// - Parameters:
+///     - differingInstances: Two instances expected to be inequal.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testHashableConformance<T>(differingInstances: (T, T), file: StaticString = #file, line: UInt = #line) where T : Hashable {
     var hasher = Hasher()
     testEquatableConformance(differingInstances: differingInstances, file: file, line: line)
