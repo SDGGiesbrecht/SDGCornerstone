@@ -61,17 +61,20 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 
 // MARK: - Methods
 
+// @documentation(SDGCornerstone.test(method:of:returns:expectedResult:)
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
 ///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, R>(method: (method: (T) -> () throws -> R, name: String), of instance: T, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
+@inlinable public func test<T, R>(method: (call: (T) -> () throws -> R, name: String), of instance: T, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
-        let result = try method.method(instance)()
+        let result = try method.call(instance)()
         test(result == expectedResult, "\(instance).\(method.name)() → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -79,18 +82,21 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
     }
 }
 
+// @documentation(SDGCornerstone.test(method:of:with:returns:expectedResult:)
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
 ///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - argument: The argument to pass to the method.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, A, R>(method: (method: (T) -> (A) throws -> R, name: String), of instance: T, with argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
+@inlinable public func test<T, A, R>(method: (call: (T) -> (A) throws -> R, name: String), of instance: T, with argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
-        let result = try method.method(instance)(argument)
+        let result = try method.call(instance)(argument)
         test(result == expectedResult, "\(instance).\(method.name)(\(argument)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -102,14 +108,16 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///
 /// - Parameters:
 ///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - arguments: The arguments to pass to the method.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, A, B, R>(method: (method: (T) -> (A, B) throws -> R, name: String), of instance: T, with arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
+@inlinable public func test<T, A, B, R>(method: (call: (T) -> (A, B) throws -> R, name: String), of instance: T, with arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
-        let result = try method.method(instance)(arguments.0, arguments.1)
+        let result = try method.call(instance)(arguments.0, arguments.1)
         test(result == expectedResult, "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -121,14 +129,16 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///
 /// - Parameters:
 ///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T>(mutatingMethod method: (method: (inout T) throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
+@inlinable public func test<T>(mutatingMethod method: (call: (inout T) throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
         var copy = instance
-        try method.method(&copy)
+        try method.call(&copy)
         test(copy == expectedResult, "\(instance).\(method.name)() → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -140,15 +150,17 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///
 /// - Parameters:
 ///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - argument: The argument to pass to the method.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, A>(mutatingMethod method: (method: (inout T, A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
+@inlinable public func test<T, A>(mutatingMethod method: (call: (inout T, A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
         var copy = instance
-        try method.method(&copy, argument)
+        try method.call(&copy, argument)
         test(copy == expectedResult, "\(instance).\(method.name)(\(argument)) → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -160,15 +172,17 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///
 /// - Parameters:
 ///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - arguments: The arguments to pass to the method.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, A, B>(mutatingMethod method: (method: (inout T, A, B) throws -> Void, name: String), of instance: T, with arguments: (A, B), resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
+@inlinable public func test<T, A, B>(mutatingMethod method: (call: (inout T, A, B) throws -> Void, name: String), of instance: T, with arguments: (A, B), resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : Equatable {
     do {
         var copy = instance
-        try method.method(&copy, arguments.0, arguments.1)
+        try method.call(&copy, arguments.0, arguments.1)
         test(copy == expectedResult, "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -182,13 +196,15 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///
 /// - Parameters:
 ///     - function: The function to test.
+///     - call: The function itself.
+///     - name: The function name.
 ///     - argument: The argument to pass to the function.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<A, R>(function: (function: (A) throws -> R, name: String), on argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
+@inlinable public func test<A, R>(function: (call: (A) throws -> R, name: String), on argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do { // @exempt(from: tests)
-        let result = try function.function(argument)
+        let result = try function.call(argument)
         test(result == expectedResult, "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -200,13 +216,15 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///
 /// - Parameters:
 ///     - function: The function to test.
+///     - call: The function itself.
+///     - name: The function name.
 ///     - arguments: The arguments to pass to the function.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<A, B, R>(function: (function: (A, B) throws -> R, name: String), on arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
+@inlinable public func test<A, B, R>(function: (call: (A, B) throws -> R, name: String), on arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
-        let result = try function.function(arguments.0, arguments.1)
+        let result = try function.call(arguments.0, arguments.1)
         test(result == expectedResult, "\(function.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -266,7 +284,6 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
 ///     - name: The function name.
-///     - operands: The operands to pass to the function.
 ///     - precedingValue: The preceding operand.
 ///     - followingValue: The following operand.
 ///     - expectedResult: The expected result.
@@ -311,7 +328,6 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
 ///     - name: The function name.
-///     - operands: The operands to pass to the function.
 ///     - precedingValue: The preceding operand.
 ///     - followingValue: The following operand.
 ///     - expectedResult: The expected result.

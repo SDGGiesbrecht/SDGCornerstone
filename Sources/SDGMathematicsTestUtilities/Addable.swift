@@ -15,7 +15,7 @@
 /// Tests a type’s conformance to Addable.
 ///
 /// - Parameters:
-///     - aguend: An augend.
+///     - augend: An augend.
 ///     - addend: An addend.
 ///     - sum: The expected sum.
 ///     - file: Optional. A different source file to associate with any failures.
