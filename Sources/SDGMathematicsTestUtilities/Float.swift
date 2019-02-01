@@ -23,6 +23,17 @@
 
 // MARK: - Methods
 
+// #documentation(SDGCornerstone.test(method:of:returns:)
+/// Tests a method, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
+///     - instance: The instance on which to call the method.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<T, R>(method: (call: (T) -> () throws -> R, name: String), of instance: T, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try method.call(instance)()
@@ -33,6 +44,18 @@
     }
 }
 
+// #documentation(SDGCornerstone.test(method:of:with:returns:)
+/// Tests a method, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
+///     - instance: The instance on which to call the method.
+///     - argument: The argument to pass to the method.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<T, A, R>(method: (call: (T) -> (A) throws -> R, name: String), of instance: T, with argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try method.call(instance)(argument)
@@ -43,6 +66,17 @@
     }
 }
 
+// #documentation(SDGCornerstone.test(mutatingMethod:of:resultsIn:)
+/// Tests a method, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
+///     - instance: The instance on which to call the method.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<T>(mutatingMethod method: (call: (inout T) throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
     do {
         var copy = instance
@@ -54,6 +88,18 @@
     }
 }
 
+// #documentation(SDGCornerstone.test(mutatingMethod:of:with:resultsIn:)
+/// Tests a method, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - method: The method to test.
+///     - call: The method itself.
+///     - name: The method name.
+///     - instance: The instance on which to call the method.
+///     - argument: The argument to pass to the method.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<T, A>(mutatingMethod method: (call: (inout T, A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
     do {
         var copy = instance
@@ -67,6 +113,17 @@
 
 // MARK: - Functions
 
+// #documentation(SDGCornerstone.test(function:on:returns:)
+/// Tests a function, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - function: The function to test.
+///     - call: The function itself.
+///     - name: The function name.
+///     - argument: The argument to pass to the function.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<A, R>(function: (call: (A) throws -> R, name: String), on argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try function.call(argument)
@@ -77,6 +134,17 @@
     }
 }
 
+// #documentation(SDGCornerstone.test(function:on:(2)returns:)
+/// Tests a function, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - function: The function to test.
+///     - call: The function itself.
+///     - name: The function name.
+///     - arguments: The arguments to pass to the function.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<A, B, R>(function: (call: (A, B) throws -> R, name: String), on arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try function.call(arguments.0, arguments.1)
@@ -87,6 +155,17 @@
     }
 }
 
+// #documentation(SDGCornerstone.test(function:on:returns:)
+/// Tests a function, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - function: The function to test.
+///     - call: The function itself.
+///     - name: The function name.
+///     - argument: The argument to pass to the function.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<A>(function: (call: (A) throws -> Angle<A>, name: String), on argument: A, returns expectedResult: Angle<A>, file: StaticString = #file, line: UInt = #line) where A : FloatingPoint {
     do {
         let result = try function.call(argument)
@@ -99,6 +178,19 @@
 
 // MARK: - Operators
 
+// #documentation(SDGCornerstone.test(operator:on:returns:)
+/// Tests an infix operator, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
+///     - operands: The operands to pass to the function.
+///     - precedingValue: The preceding operand.
+///     - followingValue: The following operand.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<P, F, R>(operator: (function: (P, F) throws -> R, name: String), on operands: (precedingValue: P, followingValue: F), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try `operator`.function(operands.precedingValue, operands.followingValue)
@@ -109,6 +201,17 @@
     }
 }
 
+// #documentation(SDGCornerstone.test(prefixOperator:on:returns:)
+/// Tests a prefix operator, verifying that it returns the expected result.
+///
+/// - Parameters:
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
+///     - operand: The operand to pass to the function.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<O, R>(prefixOperator operator: (function: (O) throws -> R, name: String), on operand: O, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try `operator`.function(operand)
@@ -119,6 +222,17 @@
     }
 }
 
+// #documentation(SDGCornerstone.test(postfixAssignmentOperator:with:resultsIn:)
+/// Tests a postfix assignment operator, verifying that the mutated value matches the expected result.
+///
+/// - Parameters:
+///     - operator: The operator function to test.
+///     - function: The function itself.
+///     - name: The function name.
+///     - operand: The operand to pass to the function.
+///     - expectedResult: The expected result.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<O>(postfixAssignmentOperator operator: (function: (inout O) throws -> Void, name: String), with operand: O, resultsIn expectedResult: O, file: StaticString = #file, line: UInt = #line) where O : ExpressibleByFloatLiteral, O : FloatingPoint, O : Subtractable {
     do {
         var copy = operand
@@ -132,6 +246,14 @@
 
 // MARK: - Global Variables
 
+// #documentation(SDGCornerstone.test(variable:is:)
+/// Tests a variable, verifying that it contains the expected value.
+///
+/// - Parameters:
+///     - variable: The variable to test.
+///     - expectedValue: The expected property value.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<V>(variable: (contents: V, name: String), is expectedValue: V, file: StaticString = #file, line: UInt = #line) where V : ExpressibleByFloatLiteral, V : FloatingPoint, V : Subtractable {
     test(variable.contents ≈ expectedValue, "\(variable.name) → \(variable.contents) ≠ \(expectedValue)",
         file: file, line: line)
