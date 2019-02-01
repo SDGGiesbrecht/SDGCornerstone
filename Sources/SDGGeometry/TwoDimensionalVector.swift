@@ -22,6 +22,10 @@ public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// Creates a vector using the specified differences in *x* and *y*.
+    ///
+    /// - Parameters:
+    ///     - Δx: The difference in *x*.
+    ///     - Δy: The difference in *y*.
     init(Δx: Scalar, Δy: Scalar)
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.Δx)

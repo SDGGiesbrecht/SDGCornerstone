@@ -38,6 +38,9 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// Creates a measurement from a raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
+    ///
+    /// - Parameters:
+    ///     - rawValue: The raw value.
     init(rawValue: Scalar)
 
     // @documentation(SDGCornerstone.Measurement.rawValue)
@@ -125,14 +128,17 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // @documentation(SDGCornerstone.Measurement.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
+    ///
+    /// - Parameters:
+    ///     - divisor: The divisor to check.
     func isDivisible(by divisor: Self) -> Bool
 
     // @documentation(SDGCornerstone.Measurement.gcd(_:_:))
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    ///     - a: A value.
+    ///     - b: Another value.
     static func gcd(_ a: Self, _ b: Self) -> Self
 
     // @documentation(SDGCornerstone.Measurement.formGreatestCommonDivisor(with:))
@@ -146,8 +152,8 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    ///     - a: A value.
+    ///     - b: Another value.
     static func lcm(_ a: Self, _ b: Self) -> Self
 
     // @documentation(SDGCornerstone.Measurement.formLeastCommonMultiple(with:))
@@ -284,6 +290,9 @@ extension Measurement {
 
     // #documentation(SDGCornerstone.Measurement.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
+    ///
+    /// - Parameters:
+    ///     - divisor: The divisor to check.
     @inlinable public func isDivisible(by divisor: Self) -> Bool {
         return rawValue.isDivisible(by: divisor.rawValue)
     }
@@ -292,8 +301,8 @@ extension Measurement {
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    ///     - a: A value.
+    ///     - b: Another value.
     @inlinable public static func gcd(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formGreatestCommonDivisor(with: $1) }, on: a, with: b)
     }
@@ -311,8 +320,8 @@ extension Measurement {
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    ///     - a: A value.
+    ///     - b: Another value.
     @inlinable public static func lcm(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formLeastCommonMultiple(with: $1) }, on: a, with: b)
     }
@@ -542,8 +551,8 @@ extension Measurement {
 /// Returns the greatest common divisor of `a` and `b`.
 ///
 /// - Parameters:
-///     - precedingValue: A value.
-///     - followingValue: Another value.
+///     - a: A value.
+///     - b: Another value.
 @inlinable public func gcd<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.gcd(a, b)
 }
@@ -552,8 +561,8 @@ extension Measurement {
 /// Returns the least common multiple of `a` and `b`.
 ///
 /// - Parameters:
-///     - precedingValue: A value.
-///     - followingValue: Another value.
+///     - a: A value.
+///     - b: Another value.
 @inlinable public func lcm<M : Measurement>(_ a: M, _ b: M) -> M {
     return M.lcm(a, b)
 }

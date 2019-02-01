@@ -42,16 +42,30 @@ extension RangeReplaceableCollection {
 
     // @documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
+    ///
+    /// - Parameters:
+    ///     - newElements: The new elements to insert into the collection.
+    ///     - i: The position at which to insert the new elements.
 
     @inlinable internal mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
         insert(contentsOf: newElements, at: i)
     }
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
+    /// Inserts the contents of the sequence to the specified index.
+    ///
+    /// - Parameters:
+    ///     - newElements: The new elements to insert into the collection.
+    ///     - i: The position at which to insert the new elements.
     @inlinable public mutating func insert(contentsOf newElements: Self, at i: Self.Index) {
         insertAsCollection(contentsOf: newElements, at: i)
     }
 
     // @documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
+    ///
+    /// - Parameters:
+    ///     - subrange: The subrange of the collection to replace.
+    ///     - newElements: The new elements to add to the collection.
 
     @inlinable internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
@@ -62,6 +76,12 @@ extension RangeReplaceableCollection {
     @inlinable internal mutating func replaceSubrangeAsCollection<R, C>(_ subrange: R, with newElements: C) where R : RangeExpression, R.Bound == Self.Index, C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
     }
+    // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
+    /// Replaces the specified subrange of elements with the given collection.
+    ///
+    /// - Parameters:
+    ///     - subrange: The subrange of the collection to replace.
+    ///     - newElements: The new elements to add to the collection.
     @inlinable public mutating func replaceSubrange<R>(_ subrange: R, with newElements: Self) where R : RangeExpression, R.Bound == Self.Index {
         replaceSubrangeAsCollection(subrange, with: newElements)
     }
@@ -154,11 +174,17 @@ extension RangeReplaceableCollection {
     }
 
     /// Truncates the `self` at `index`.
+    ///
+    /// - Parameters:
+    ///     - index: The index at which to truncate.
     @inlinable public mutating func truncate(at index: Index) {
         removeSubrange(index...)
     }
 
     /// Returns a collection formed by truncating `self` at `index`.
+    ///
+    /// - Parameters:
+    ///     - index: The index at which to truncate.
     @inlinable public func truncated(at index: Index) -> Self {
         return nonmutatingVariant(of: { $0.truncate(at: $1) }, on: self, with: index)
     }

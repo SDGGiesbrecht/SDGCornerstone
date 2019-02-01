@@ -17,6 +17,10 @@ import SDGCollections
 extension RangeFamily {
 
     /// Returns the range in inequality notation. (eg. “1 ≤ x ≤ 10”)
+    ///
+    /// - Parameters:
+    ///     - describe: A closure which provides the description of an individual bound.
+    ///     - bound: The bound to describe.
     @inlinable public func inInequalityNotation(_ describe: (_ bound: Bound) -> StrictString) -> StrictString {
         return StrictString("\(describe(lowerBound)) ≤ x \(Self.hasClosedUpperBound ? "≤" : "<") \(describe(upperBound))")
     }

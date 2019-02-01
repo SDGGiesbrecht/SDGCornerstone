@@ -34,6 +34,9 @@ extension RationalNumberProtocol {
     }
 
     /// Returns the number as a simple fraction. (“−19⁄2”, “6”, “(50 001)⁄(10 000)”,  etc.)
+    ///
+    /// - Parameters:
+    ///     - thousandsSeparator: Optional. An older thousands separator to use instead of the modern, internationally standard space.
     @inlinable public func asSimpleFraction(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         let (numerator, denominator) = reducedSimpleFraction()
 
@@ -52,6 +55,9 @@ extension RationalNumberProtocol {
     }
 
     /// Returns the number as a mixed fraction. (“−9 1⁄2”, “6”, “5 + 1⁄(10 000)”,  etc.)
+    ///
+    /// - Parameters:
+    ///     - thousandsSeparator: Optional. An older thousands separator to use instead of the modern, internationally standard space.
     @inlinable public func asMixedFraction(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         let wholeString = integralDigits(thousandsSeparator: thousandsSeparator)
 
@@ -70,6 +76,9 @@ extension RationalNumberProtocol {
     }
 
     /// Returns the number as a ratio. (“−19 ∶ 2”, “6 ∶ 1”, “50 001 ∶ 10 000”,  etc.)
+    ///
+    /// - Parameters:
+    ///     - thousandsSeparator: Optional. An older thousands separator to use instead of the modern, internationally standard space.
     @inlinable public func asRatio(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         let (numerator, denominator) = reducedSimpleFraction()
         return numerator.integralDigits(thousandsSeparator: thousandsSeparator) + " ∶ " + denominator.integralDigits(thousandsSeparator: thousandsSeparator)

@@ -23,6 +23,8 @@ import SDGCornerstoneLocalizations
 /// Sets the directory where test specifications should be stored.
 ///
 /// The directory should be specified relative to a source file using some combination of `#file` and `deletingLastPathComponent()`.
+/// - Parameters:
+///     - directory: The directory.
 @inlinable public func setTestSpecificationDirectory(to directory: URL) {
     specificationDirectory = directory
 }
@@ -30,6 +32,9 @@ import SDGCornerstoneLocalizations
 /// Returns the directory where test specifications should be stored.
 ///
 /// The directory can be set by `setTestSpecificationDirectory(to:)`. Otherwise the default directory is determined relative to the first calling source file based on the assumption that that it is in a Swift Package Manager test target, and not in any further subdirectories.
+///
+/// - Parameters:
+///     - callerLocation: Optional. A different file to consider as the location of the call.
 @inlinable public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -> URL {
     return cached(in: &specificationDirectory) {
         let repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation)).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
@@ -49,6 +54,8 @@ import SDGCornerstoneLocalizations
 ///     - string: The string to test.
 ///     - specification: The location of the specification to compare against (or write to).
 ///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update a specification.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func compare(_ string: String, against specification: URL, overwriteSpecificationInsteadOfFailing: Bool, file: StaticString = #file, line: UInt = #line) {
     autoreleasepool {
 

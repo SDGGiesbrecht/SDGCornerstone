@@ -118,12 +118,20 @@ extension StrictString {
 
         // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
         /// Inserts the contents of the sequence to the specified index.
+        ///
+        /// - Parameters:
+        ///     - newElements: The new elements to insert into the collection.
+        ///     - i: The position at which to insert the new elements.
         @inlinable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ClusterView.Index) where S.Element == ExtendedGraphemeCluster {
             replaceSubrange(i ..< i, with: newElements)
         }
 
         // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
         /// Replaces the specified subrange of elements with the given collection.
+        ///
+        /// - Parameters:
+        ///     - subrange: The subrange of the collection to replace.
+        ///     - newElements: The new elements to add to the collection.
         @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ClusterView.Index>, with newElements: S) where S.Element == ExtendedGraphemeCluster {
 
             let preceding = StrictString(ClusterView(self[..<subrange.lowerBound]))

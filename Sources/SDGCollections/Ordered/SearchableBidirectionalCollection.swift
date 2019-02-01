@@ -187,7 +187,6 @@ extension SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - searchRange: A subrange to search. (Defaults to the entire collection.)
     @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
         return _lastMatch(for: pattern)
     }

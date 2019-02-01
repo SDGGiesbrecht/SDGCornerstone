@@ -76,12 +76,22 @@ extension Subtractable {
 
 extension Subtractable where Self : Numeric {
 
+    // @documentation(SDGCornerstone.Subtractable.ASCII.−(_:_:))
     /// Subtracts one value from another and produces their difference.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The minuend.
+    ///     - followingValue: The subtrahend.
     @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self { // @exempt(from: unicode)
         return precedingValue − followingValue
     }
 
+    // @documentation(SDGCornerstone.Subtractable.ASCII.−=(_:_:))
     /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The minuend.
+    ///     - followingValue: The subtrahend.
     @inlinable public static func -= (precedingValue: inout Self, followingValue: Self) { // @exempt(from: unicode)
         precedingValue −= followingValue
     }
@@ -89,12 +99,22 @@ extension Subtractable where Self : Numeric {
 
 extension Subtractable where Self : Strideable, Self.Stride == Self {
 
+    // #documentation(SDGCornerstone.Subtractable.ASCII.−(_:_:))
     /// Subtracts one value from another and produces their difference.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The minuend.
+    ///     - followingValue: The subtrahend.
     @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self { // @exempt(from: unicode)
         return precedingValue − followingValue
     }
 
+    // #documentation(SDGCornerstone.Subtractable.ASCII.−=(_:_:))
     /// Subtracts the second value from the first and stores the difference in the left‐hand‐side variable.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The minuend.
+    ///     - followingValue: The subtrahend.
     @inlinable public static func -= (precedingValue: inout Self, followingValue: Self) { // @exempt(from: unicode)
         precedingValue −= followingValue
     }

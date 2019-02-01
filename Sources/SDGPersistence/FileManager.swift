@@ -107,7 +107,6 @@ extension FileManager {
     ///
     /// - Parameters:
     ///     - location: The location.
-    ///     - domain: The domain.
     ///     - relativePath: The path.
     public func url(in location: RecommendedLocation, at relativePath: String) -> URL {
         return url(in: location, for: ProcessInfo.applicationDomain, at: relativePath)
@@ -195,6 +194,9 @@ extension FileManager {
     /// Returns a list of all files in the specified directory, including those nested within subdirectories.
     ///
     /// Directories themselves are not returned—only the files they contain.
+    ///
+    /// - Parameters:
+    ///     - directory: The root directory for the search.
     public func deepFileEnumeration(in directory: URL) throws -> [URL] {
 
         var failureReason: Error? // Thrown after enumeration stops. (See below.)

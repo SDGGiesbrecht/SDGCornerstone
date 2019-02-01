@@ -224,7 +224,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
     // #documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
     /// Creates an instance equal to `uInt`.
     ///
-    /// - Properties:
+    /// - Parameters:
     ///     - uInt: An instance of `UIntMax`.
     public init(_ uInt: UIntMax) {
         self.init(WholeNumber(uInt))
