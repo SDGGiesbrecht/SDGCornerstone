@@ -22,9 +22,7 @@
 ///
 /// - `PointProtocol`
 /// - `Comparable`
-public protocol OneDimensionalPoint : Comparable, PointProtocol {
-
-}
+public protocol OneDimensionalPoint : Comparable, PointProtocol {}
 
 extension OneDimensionalPoint where Vector : IntegerProtocol {
 

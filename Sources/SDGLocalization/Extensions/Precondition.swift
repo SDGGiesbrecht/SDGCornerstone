@@ -58,7 +58,7 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) { // @exempt(from: tests)
+public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) { // @exempt(from: tests) @exempt(from: missingImplementation)
     print(unimplementedMessage(function: function, file: file, line: line))
 }
 
@@ -70,7 +70,7 @@ public func notImplementedYet(function: StaticString = #function, file: StaticSt
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYetAndCannotReturn(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) -> Never {
+public func notImplementedYetAndCannotReturn(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) -> Never { // @exempt(from: missingImplementation)
     preconditionFailure(unimplementedMessage(function: function, file: file, line: line))
 }
 

@@ -42,6 +42,9 @@ public class Shell : TransparentWrapper {
     /// Guarantees that an argument will be quoted exactly once when passed to `run(command:)`.
     ///
     /// Arguments which `Shell` already quotes automatically are not affected by this function, so as not to receive a duplicate set of quotation marks in the end.
+    ///
+    /// - Parameters:
+    ///     - argument: The argument to quote.
     public static func quote(_ argument: String) -> String {
         if Shell.argumentNeedsQuotationMarks(argument) {
             return argument
@@ -79,7 +82,7 @@ public class Shell : TransparentWrapper {
     /// - Returns: The output of the command.
     ///
     /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = {_ in }) throws -> String { // @exempt(from: tests)
+    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = { _ in }) throws -> String { // @exempt(from: tests)
 
         let commandString = command.map({ (argument: String) -> String in
             if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {

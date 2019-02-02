@@ -22,7 +22,7 @@ extension Bool : Comparable {
     /// - Parameters:
     ///     - proposition: The proposition to invert.
     @inlinable public static prefix func ¬ (proposition: Bool) -> Bool {
-        return !proposition
+        return !proposition // @exempt(from: unicode)
     }
 
     // @documentation(SDGCornerstone.Bool.∧)
@@ -34,7 +34,7 @@ extension Bool : Comparable {
     ///     - precedingValue: A Boolean value.
     ///     - followingValue: A closure that results in another Boolean value.
     @inlinable public static func ∧ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
-        return try precedingValue && followingValue
+        return try precedingValue && followingValue // @exempt(from: unicode)
     }
 
     // @documentation(SDGCornerstone.Bool.∧=)
@@ -58,7 +58,7 @@ extension Bool : Comparable {
     ///     - precedingValue: A Boolean value.
     ///     - followingValue: A closure that results in another Boolean value.
     @inlinable public static func ∨ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
-        return try precedingValue || followingValue
+        return try precedingValue || followingValue // @exempt(from: unicode)
     }
 
     // @documentation(SDGCornerstone.Bool.∨=)

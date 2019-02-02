@@ -13,6 +13,16 @@
  */
 
 /// Tests a type’s conformance to BitField.
+///
+/// - Parameters:
+///     - start: A starting bit field.
+///     - not: The expected result of a bitwise “not” operation.
+///     - other: Another bit field.
+///     - and: The expected result of a bitwise “and” operation.
+///     - or: The expected result of a bitwise “or” operation.
+///     - exclusiveOr: The expected result of a bitwise exclusive “or” operation.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testBitFieldConformance<F>(start: F, not: F, other: F, and: F, or: F, exclusiveOr: F, file: StaticString = #file, line: UInt = #line) where F : BitField {
     test(method: (F.bitwiseNot, "bitwiseNot"), of: start, returns: not, file: file, line: line)
     test(mutatingMethod: ({ $0.formBitwiseNot() }, "formBitwiseNot"), of: start, resultsIn: not, file: file, line: line)

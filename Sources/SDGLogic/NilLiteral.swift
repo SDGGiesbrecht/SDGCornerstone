@@ -32,7 +32,7 @@ public struct NilLiteral : ExpressibleByNilLiteral {
     ///     - precedingValue: A value to compare.
     ///     - followingValue: Another value to compare.
     @inlinable public static func ≠ <T>(precedingValue: T?, followingValue: NilLiteral) -> Bool {
-        return precedingValue != nil
+        return precedingValue != nil // @exempt(from: unicode)
         // Allows “x ≠ nil” even when x is not Equatable.
     }
 }

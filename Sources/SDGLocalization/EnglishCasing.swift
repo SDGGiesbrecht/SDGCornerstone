@@ -44,6 +44,9 @@ public enum EnglishCasing {
     /// Takes a string in the sentence medial case and transforms it to the expected case.
     ///
     /// - Warning: This method is only intended for use with compile‐time constants to reduce repetition in source code. Only the very simplest strings are supported. Passing a string which contains anything besides lowercase a–z will cause an precondition failure.
+    ///
+    /// - Parameters:
+    ///     - compileTimeString: The string to transform.
     @inlinable public func apply(to compileTimeString: StaticString) -> StrictString {
         var string = StrictString(compileTimeString)
         assert(¬string.contains(where: { $0 ∉ "a" ..< "z" }), UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)

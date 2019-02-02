@@ -18,31 +18,49 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
     // MARK: - Initialization
 
     /// Creates an angle in radians.
+    ///
+    /// - Parameters:
+    ///     - radians: The number of radians.
     @inlinable public init(radians: Scalar) {
         self.inRadians = radians
     }
 
     /// Creates an angle in rotations.
+    ///
+    /// - Parameters:
+    ///     - rotations: The number of rotations.
     @inlinable public init(rotations: Scalar) {
         inRotations = rotations
     }
 
     /// Creates an angle in degrees.
+    ///
+    /// - Parameters:
+    ///     - degrees: The number of degrees.
     @inlinable public init(degrees: Scalar) {
         inDegrees = degrees
     }
 
     /// Creates an angle in minutes.
+    ///
+    /// - Parameters:
+    ///     - minutes: The number of minutes.
     @inlinable public init(minutes: Scalar) {
         inMinutes = minutes
     }
 
     /// Creates an angle in seconds.
+    ///
+    /// - Parameters:
+    ///     - seconds: The number of seconds.
     @inlinable public init(seconds: Scalar) {
         inSeconds = seconds
     }
 
     /// Creates an angle in gradians.
+    ///
+    /// - Parameters:
+    ///     - gradians: The number of gradians.
     @inlinable public init(gradians: Scalar) {
         inGradians = gradians
     }
@@ -123,6 +141,9 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
     /// Creates a measurement from a raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
+    ///
+    /// - Parameters:
+    ///     - rawValue: The raw value.
     @inlinable public init(rawValue: Scalar) {
         inRadians = rawValue
     }

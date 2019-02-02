@@ -85,13 +85,16 @@ public protocol DateDefinition : Codable {
     // MARK: - Initialization
 
     // @documentation(SDGCornerstone.DateDefinition.init(intervalSinceReferenceDate:))
-    /// Creates a date from an interval since the reference date.
+    /// Creates a date from an interval since the type’s reference date.
+    ///
+    /// - Parameters:
+    ///     - intervalSinceReferenceDate: The interval since the type’s reference date.
     init(intervalSinceReferenceDate: CalendarInterval<FloatMax>)
 
     // MARK: - Properties
 
     // @documentation(SDGCornerstone.DateDefinition.intervalSinceReferenceDate)
-    /// The interval since the reference date.
+    /// The interval since the type’s reference date.
     var intervalSinceReferenceDate: CalendarInterval<FloatMax> { get }
 
     // MARK: - Coding

@@ -35,6 +35,9 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
 
     // #documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))
     /// Creates an instance from an array literal.
+    ///
+    /// - Parameters:
+    ///     - arrayLiteral: The array literal.
     @inlinable public convenience init(arrayLiteral: Pattern<Element>...) {
         self.init(arrayLiteral)
     }

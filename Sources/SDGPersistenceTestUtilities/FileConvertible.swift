@@ -22,9 +22,11 @@ import SDGCalendar
 ///
 /// This function will write the file to the test specification directory in the project repository and will attempt to load that data in future calls. It is recommeded to check those specifications into source control, as this will make it easier to track backwards compatibility. These files can be deleted manually in the event that a particular format should no longer be supported.
 ///
-/// Parameters:
+/// - Parameters:
 ///     - instance: An instance to save and load.
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testFileConvertibleConformance<T>(of instance: T, uniqueTestName: StrictString, file: StaticString = #file, line: UInt = #line) where T : Equatable, T : FileConvertible {
 
     let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent("FileConvertible").appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))

@@ -14,9 +14,7 @@
 
 /// The smallest component of a particular calendar.
 public protocol SmallestCalendarComponent : ExpressibleByFloatLiteral, NumericCalendarComponent
-where RawValue : RationalArithmetic {
-
-}
+where RawValue : RationalArithmetic {}
 
 extension SmallestCalendarComponent {
 

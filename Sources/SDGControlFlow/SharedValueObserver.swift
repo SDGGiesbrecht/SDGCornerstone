@@ -21,6 +21,6 @@ public protocol SharedValueObserver : AnyObject {
     /// - Parameters:
     ///     - identifier: The identifier that was specified when the observer was registered. This can be used to differentiate between several values watched by the same observer.
     ///
-    /// - SeeAlso: `register(observer:identifier)`
+    /// - SeeAlso: `register(observer:identifier:)`
     func valueChanged(for identifier: String)
 }

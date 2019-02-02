@@ -13,9 +13,7 @@
  */
 
 /// A calendar component defined by a numeric raw value.
-public protocol NumericCalendarComponent : RawRepresentableCalendarComponent {
-
-}
+public protocol NumericCalendarComponent : RawRepresentableCalendarComponent {}
 
 extension NumericCalendarComponent {
 

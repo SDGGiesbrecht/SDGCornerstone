@@ -102,17 +102,15 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
         })
     }
 
-    // #documentation(SDGCornerstone.Collection.subscript(position:))
-    /// Accesses the element at the specified position.
-    @inlinable public subscript(index: Index) -> Element {
+    @inlinable public subscript(position: Index) -> Element {
         get {
-            assertIndexExists(index)
-            return uInt.bitwiseAnd(with: 1 << index) >> index == 1
+            assertIndexExists(position)
+            return uInt.bitwiseAnd(with: 1 << position) >> position == 1
         }
         set {
-            assertIndexExists(index)
-            let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << index).bitwiseNot())
-            uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << index)
+            assertIndexExists(position)
+            let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << position).bitwiseNot())
+            uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << position)
         }
     }
 

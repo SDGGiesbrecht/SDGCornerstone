@@ -13,6 +13,16 @@
  */
 
 /// Tests a type’s conformance to VectorProtocol.
+///
+/// - Parameters:
+///     - augend: An augend.
+///     - addend: An addend.
+///     - sum: The expected sum.
+///     - multiplicand: A multiplicand.
+///     - multiplier: A multiplier.
+///     - product: The expected product.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testVectorProtocolConformance<T>(augend: T, addend: T, sum: T, multiplicand: T, multiplier: T.Scalar, product: T, file: StaticString = #file, line: UInt = #line) where T : VectorProtocol {
 
     testAdditiveArithmeticConformance(augend: augend, addend: addend, sum: sum, file: file, line: line)

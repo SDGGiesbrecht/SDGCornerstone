@@ -29,6 +29,9 @@ where Vector : IntegralArithmetic {
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
+    ///
+    /// - Parameters:
+    ///     - unsafeRawValue: The raw value.
     init(unsafeRawValue: RawValue)
 
     // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
@@ -45,6 +48,9 @@ extension RawRepresentableCalendarComponent {
     // MARK: - Initialization
 
     /// Creates an instance from a raw value.
+    ///
+    /// - Parameters:
+    ///     - value: The raw value.
     @inlinable public init(_ value: RawValue) {
         guard let result = Self(possibleRawValue: value) else {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
@@ -58,6 +64,9 @@ extension RawRepresentableCalendarComponent {
     }
 
     /// Creates an instance from a raw value.
+    ///
+    /// - Parameters:
+    ///     - value: The raw value.
     @inlinable public init?(possibleRawValue value: RawValue) {
         if let range = Self.validRange,
             value ∉ range {
@@ -83,9 +92,7 @@ extension RawRepresentableCalendarComponent {
 /// Conformance Requirements:
 ///
 /// - `RawRepresentableCalendarComponent`
-public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCalendarComponent {
-
-}
+public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCalendarComponent {}
 
 extension CodableViaRawRepresentableCalendarComponent {
 

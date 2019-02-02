@@ -18,6 +18,9 @@ public struct Weak<Pointee : AnyObject> : TransparentWrapper {
     // MARK: - Initialization
 
     /// Creates a reference to a class instance.
+    ///
+    /// - Parameters:
+    ///     - pointee: The pointee.
     @inlinable public init(_ pointee: Pointee?) {
         self.pointee = pointee
     }

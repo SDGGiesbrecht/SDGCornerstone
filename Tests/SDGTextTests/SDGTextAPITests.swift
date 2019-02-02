@@ -228,9 +228,9 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(decomposed.firstMatch(for: "e".scalars)?.range, decomposed.startIndex ..< decomposed.index(after: decomposed.startIndex))
         XCTAssertEqual(decomposed2.firstMatch(for: "́".scalars)?.range, decomposed2.startIndex..<decomposed2.index(after: decomposed2.startIndex))
 
-        let components = decomposed.components(separatedBy: "́".scalars).map({StrictString($0.contents)})
+        let components = decomposed.components(separatedBy: "́".scalars).map({ StrictString($0.contents) })
         XCTAssertEqual(components, [StrictString("e"), StrictString("e"), StrictString()])
-        let separatedComponents = decomposed.components(separatedBy: "e".scalars).map({StrictString($0.contents)})
+        let separatedComponents = decomposed.components(separatedBy: "e".scalars).map({ StrictString($0.contents) })
         XCTAssertEqual(separatedComponents, [StrictString(), StrictString("́"), StrictString("́")])
 
         XCTAssert(decomposed.hasPrefix("e".scalars), "Problem with decomposition.")

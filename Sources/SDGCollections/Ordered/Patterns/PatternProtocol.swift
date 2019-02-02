@@ -71,6 +71,10 @@ extension PatternProtocol {
     ///     XCTFail("This case is never reached.")
     /// }
     /// ```
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern to match against.
+    ///     - value: The value to check.
     @inlinable public static func ~= <C : SearchableCollection>(pattern: Self, value: C) -> Bool where C.Element == Element {
         return value.isMatch(for: pattern)
     }

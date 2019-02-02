@@ -27,7 +27,7 @@ class SDGBinaryDataAPITests : TestCase {
 
         let data = Data(bytes: [UInt8.max])
         XCTAssertEqual(data.binary.count, 8)
-        XCTAssertEqual(data.binary.map({ $0 ? "1" : "0"}).joined(), "11111111")
+        XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
         var toReverse = Data(bytes: [0b11110000, 0b00000000])
         toReverse.binary.reverse()

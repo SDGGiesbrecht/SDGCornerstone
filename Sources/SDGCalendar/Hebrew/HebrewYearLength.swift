@@ -41,6 +41,9 @@ extension HebrewYear {
         /// Creates a length from a number of days.
         ///
         /// - Precondition: The number of days is valid.
+        ///
+        /// - Parameters:
+        ///     - numberOfDays: The number of days in the year.
         public init(numberOfDays: Int) {
             let min = HebrewYear.Length.minimumNumberOfDays
             let max = HebrewYear.Length.maximumNumberOfDays

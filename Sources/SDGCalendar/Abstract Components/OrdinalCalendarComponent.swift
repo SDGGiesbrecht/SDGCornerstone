@@ -13,9 +13,7 @@
  */
 
 /// A calendar component defined by an ordinal raw value.
-public protocol OrdinalCalendarComponent : NumericCalendarComponent {
-
-}
+public protocol OrdinalCalendarComponent : NumericCalendarComponent {}
 
 extension OrdinalCalendarComponent {
 

@@ -18,6 +18,9 @@ public class Shared<Value> : TransparentWrapper {
     // MARK: - Initialization
 
     /// Creates a reference to a value.
+    ///
+    /// - Parameters:
+    ///     - value: The value.
     public init(_ value: Value) {
         self.value = value
     }

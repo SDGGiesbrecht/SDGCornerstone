@@ -13,6 +13,12 @@
  */
 
 /// Tests a subclass of Pattern.
+///
+/// - Parameters:
+///     - pattern: A pattern.
+///     - match: A collection expected to match the pattern exactly.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testPattern<T, C>(_ pattern: Pattern<T>, match: C, file: StaticString = #file, line: UInt = #line) where C : SearchableCollection, C.Element == T {
 
     let result = pattern.matches(in: match, at: match.startIndex).first

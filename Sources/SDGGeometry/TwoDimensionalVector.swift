@@ -16,12 +16,16 @@
 ///
 /// Conformance Requirements:
 ///
-/// - `var Δx : Scalar { get set }`
-/// - `var Δy : Scalar { get set }`
+/// - `var Δx: Scalar { get set }`
+/// - `var Δy: Scalar { get set }`
 public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// Creates a vector using the specified differences in *x* and *y*.
+    ///
+    /// - Parameters:
+    ///     - Δx: The difference in *x*.
+    ///     - Δy: The difference in *y*.
     init(Δx: Scalar, Δy: Scalar)
 
     // @documentation(SDGCornerstone.TwoDimensionalVector.Δx)
@@ -35,8 +39,6 @@ public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
 extension TwoDimensionalVector {
 
-    // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
-    /// The difference in *y*.
     @inlinable public init(Δx: Scalar, Δy: Scalar) {
         self = Self.additiveIdentity
         self.Δx = Δx
@@ -47,6 +49,10 @@ extension TwoDimensionalVector {
 extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     /// Creates a vector from an angular direction and a length.
+    ///
+    /// - Parameters:
+    ///     - direction: The direction of the vector.
+    ///     - length: The length of the vector.
     @inlinable public init(direction: Angle<Scalar>, length: Scalar) {
         self.init(Δx: cos(direction) × length, Δy: sin(direction) × length)
     }

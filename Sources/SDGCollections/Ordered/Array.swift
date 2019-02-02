@@ -13,9 +13,7 @@
  */
 
 /// A member of the `Array` family: `Array`, `ArraySlice` or `ContiguousArray`.
-public protocol ArrayFamily : CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible, ExpressibleByArrayLiteral, MutableCollection, RangeReplaceableCollection, RandomAccessCollection {
-
-}
+public protocol ArrayFamily : CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible, ExpressibleByArrayLiteral, MutableCollection, RangeReplaceableCollection, RandomAccessCollection {}
 
 extension Array : ArrayFamily {}
 extension ArraySlice : ArrayFamily {}

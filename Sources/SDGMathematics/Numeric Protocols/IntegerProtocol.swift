@@ -17,9 +17,7 @@
 /// Conformance Requirements:
 ///
 /// - `IntegralArithmetic`
-public protocol IntegerProtocol : IntegralArithmetic {
-
-}
+public protocol IntegerProtocol : IntegralArithmetic {}
 
 extension IntegerProtocol {
 

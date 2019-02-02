@@ -22,6 +22,10 @@ public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, Consisten
     // MARK: - Recurrence
 
     /// Corrects the day for the specified month and year, altering them if necessary. (If it doesn’t exist that year, Cheshvan 30 will be replaced by Kislev 1, etc.)
+    ///
+    /// - Parameters:
+    ///     - month: The month to correct for.
+    ///     - year: The year to correct for.
     public mutating func correct(forMonth month: inout HebrewMonth, year: inout HebrewYear) {
         month.correctForYear(leapYear: year.isLeapYear)
 
@@ -52,6 +56,9 @@ public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, Consisten
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
+    ///
+    /// - Parameters:
+    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: RawValue) {
         day = unsafeRawValue
     }

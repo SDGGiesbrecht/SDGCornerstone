@@ -17,6 +17,4 @@
 /// Conformance Requirements:
 ///
 /// - `RealArithmetic`
-public protocol RealNumberProtocol : RealArithmetic {
-
-}
+public protocol RealNumberProtocol : RealArithmetic {}

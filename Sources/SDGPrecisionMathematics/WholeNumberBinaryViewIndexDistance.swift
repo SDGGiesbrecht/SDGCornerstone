@@ -87,14 +87,12 @@ extension WholeNumber.BinaryView {
             // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }
 
-        // func ×
-        internal static func * (precedingValue: IndexDistance, followingValue: IndexDistance) -> IndexDistance {
+        internal static func * (precedingValue: IndexDistance, followingValue: IndexDistance) -> IndexDistance { // @exempt(from: unicode)
             unreachable()
             // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }
 
-        // func ×=
-        internal static func *= (precedingValue: inout IndexDistance, followingValue: IndexDistance) {
+        internal static func *= (precedingValue: inout IndexDistance, followingValue: IndexDistance) { // @exempt(from: unicode)
             unreachable()
             // This function is required to conform to Numeric in order to be a Stride for WholeNumber.BinaryView.Index, but it is neither meaningful nor ever used.
         }

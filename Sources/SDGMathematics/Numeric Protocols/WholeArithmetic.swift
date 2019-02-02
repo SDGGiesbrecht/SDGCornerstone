@@ -32,7 +32,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     // @documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
     /// Creates an instance equal to `uInt`.
     ///
-    /// - Properties:
+    /// - Parameters:
     ///     - uInt: An instance of `UIntMax`.
     init(_ uInt: UIntMax)
 
@@ -101,14 +101,17 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
     // @documentation(SDGCornerstone.WholeArithmetic.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
+    ///
+    /// - Parameters:
+    ///     - divisor: The divisor to check.
     func isDivisible(by divisor: Self) -> Bool
 
     // @documentation(SDGCornerstone.WholeArithmetic.gcd(_:_:))
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    ///     - a: A value.
+    ///     - b: Another value.
     static func gcd(_ a: Self, _ b: Self) -> Self
 
     // @documentation(SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:))
@@ -122,8 +125,8 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    ///     - a: A value.
+    ///     - b: Another value.
     static func lcm(_ a: Self, _ b: Self) -> Self
 
     // @documentation(SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:))
@@ -241,7 +244,7 @@ extension WholeArithmetic {
     // @documentation(SDGCornerstone.WholeArithmetic.init(uIntFamily:))
     /// Creates an instance equal to `uInt`.
     ///
-    /// - Properties:
+    /// - Parameters:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
     @inlinable public init<U : UIntFamily>(_ uInt: U) {
         self.init(UIntMax(uInt))
@@ -292,6 +295,9 @@ extension WholeArithmetic {
 
     // #documentation(SDGCornerstone.WholeArithmetic.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
+    ///
+    /// - Parameters:
+    ///     - divisor: The divisor to check.
     @inlinable public func isDivisible(by divisor: Self) -> Bool {
         return mod(divisor) == 0
     }
@@ -300,8 +306,8 @@ extension WholeArithmetic {
     /// Returns the greatest common divisor of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    ///     - a: A value.
+    ///     - b: Another value.
     @inlinable public static func gcd(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formGreatestCommonDivisor(with: $1) }, on: a, with: b)
     }
@@ -326,8 +332,8 @@ extension WholeArithmetic {
     /// Returns the least common multiple of `a` and `b`.
     ///
     /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    ///     - a: A value.
+    ///     - b: Another value.
     @inlinable public static func lcm(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formLeastCommonMultiple(with: $1) }, on: a, with: b)
     }
@@ -517,12 +523,12 @@ extension WholeArithmetic {
     /// Creates a new instance from the given integer, if it can be represented exactly.
 
     /// Multiplies two values and produces their product.
-    @inlinable public static func * (precedingValue: Self, followingValue: Self) -> Self { // Numeric
+    @inlinable public static func * (precedingValue: Self, followingValue: Self) -> Self { // @exempt(from: unicode)
         return precedingValue × followingValue
     }
 
     /// Multiplies two values and stores the result in the left‐hand‐side variable.
-    @inlinable public static func *= (precedingValue: inout Self, followingValue: Self) { // Numeric
+    @inlinable public static func *= (precedingValue: inout Self, followingValue: Self) { // @exempt(from: unicode)
         precedingValue ×= followingValue
     }
 }
@@ -533,8 +539,8 @@ extension WholeArithmetic {
 /// Returns the greatest common divisor of `a` and `b`.
 ///
 /// - Parameters:
-///     - precedingValue: A value.
-///     - followingValue: Another value.
+///     - a: A value.
+///     - b: Another value.
 @inlinable public func gcd<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.gcd(a, b)
 }
@@ -543,8 +549,8 @@ extension WholeArithmetic {
 /// Returns the least common multiple of `a` and `b`.
 ///
 /// - Parameters:
-///     - precedingValue: A value.
-///     - followingValue: Another value.
+///     - a: A value.
+///     - b: Another value.
 @inlinable public func lcm<N : WholeArithmetic>(_ a: N, _ b: N) -> N {
     return N.lcm(a, b)
 }

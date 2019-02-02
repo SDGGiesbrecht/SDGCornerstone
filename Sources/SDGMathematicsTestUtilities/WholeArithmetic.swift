@@ -13,6 +13,12 @@
  */
 
 /// Tests a type’s conformance to WholeArithmetic.
+///
+/// - Parameters:
+///     - type: The type.
+///     - includingNegatives: Whether or not to test negative numbers.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testWholeArithmeticConformance<T>(of type: T.Type, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : WholeArithmetic {
 
     testFixedScaleOneDimensionalPointConformance(departure: 58 as T, vector: 21, destination: 79, file: file, line: line)
@@ -25,8 +31,8 @@
 
     test(operator: (×, "×"), on: (42 as T, 3), returns: 126, file: file, line: line)
     test(assignmentOperator: (×=, "×="), with: (4 as T, 4), resultsIn: 16, file: file, line: line)
-    test(operator: (*, "*"), on: (42 as T, 3), returns: 126, file: file, line: line) // Numeric
-    test(assignmentOperator: (*=, "*="), with: (4 as T, 4), resultsIn: 16, file: file, line: line) // Numeric
+    test(operator: (*, "*"), on: (42 as T, 3), returns: 126, file: file, line: line) // @exempt(from: unicode)
+    test(assignmentOperator: (*=, "*="), with: (4 as T, 4), resultsIn: 16, file: file, line: line) // @exempt(from: unicode)
 
     test(method: (T.dividedAccordingToEuclid, "dividedAccordingToEuclid"), of: 5 as T, with: 3, returns: 1, file: file, line: line)
     test(mutatingMethod: ({ $0.divideAccordingToEuclid(by: $1) }, "divideAccordingToEuclid"), of: 72 as T, with: 25, resultsIn: 2, file: file, line: line)

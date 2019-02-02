@@ -1,5 +1,5 @@
 /*
- UserFacingDynamicText.swift
+ UserFacingDynamic.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -34,11 +34,18 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     // MARK: - Output
 
     /// Returns the resolved element for the current localization using the specified arguments.
+    ///
+    /// - Parameters:
+    ///     - arguments: The arguments to interpolate.
     @inlinable public func resolved(using arguments: Arguments) -> Element {
         return localize(LocalizationSetting.current.value.resolved(), arguments)
     }
 
     /// Returns the resolved element for the specified localization using the specified arguments.
+    ///
+    /// - Parameters:
+    ///     - localization: The target localization.
+    ///     - arguments: The arguments to interpolate.
     @inlinable public func resolved(for localization: Localization, using arguments: Arguments) -> Element {
         return localize(localization, arguments)
     }
@@ -46,6 +53,9 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     // MARK: - Conversions
 
     /// The static instance typed as `UserFacing<Element, Localization>`.
+    ///
+    /// - Parameters:
+    ///     - arguments: The arguments to interpolate.
     @inlinable public func `static`(using arguments: Arguments) -> UserFacing<Element, Localization> {
         let resolution = localize
         return UserFacing<Element, Localization>({ resolution($0, arguments) })

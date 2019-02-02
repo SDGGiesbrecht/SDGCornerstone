@@ -45,6 +45,9 @@ extension Sequence where Element : AdditiveArithmetic {
 
     // @documentation(SDGCornerstone.Sequence.∑)
     /// Returns the sum of all values in the sequence.
+    ///
+    /// - Parameters:
+    ///     - sequence: The sequence.
     @inlinable public static prefix func ∑ (sequence: Self) -> Element {
         var sum = Element.additiveIdentity
         for element in sequence {
@@ -58,6 +61,9 @@ extension Sequence where Element : WholeArithmetic {
 
     // @documentation(SDGCornerstone.Sequence.∏)
     /// Returns the product of all values in the sequence.
+    ///
+    /// - Parameters:
+    ///     - sequence: The sequence.
     @inlinable public static prefix func ∏ (sequence: Self) -> Element {
         var product: Element = 1
         for element in sequence {

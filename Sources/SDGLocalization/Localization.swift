@@ -28,6 +28,9 @@ public protocol Localization : TextualPlaygroundDisplay {
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     ///
     /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
+    ///
+    /// - Parameters:
+    ///     - code: The localization code.
     init?(exactly code: String)
 
     // @documentation(SDGCornerstone.Localization.code)
@@ -93,6 +96,9 @@ extension Localization {
     /// ```
     ///
     /// Requests for additional groups are welcome and can be made by [opening a Github issue](https://github.com/SDGGiesbrecht/SDGCornerstone/issues).
+    ///
+    /// - Parameters:
+    ///     - code: The localization code for which to find a reasonable match.
     public init?(reasonableMatchFor code: String) {
         if let result = Self(reasonableMatchFor: code, skippingParents: false) {
             self = result
@@ -133,7 +139,7 @@ extension Localization {
                 } else {
                     // language‐script
 
-                    if let countries = scripts.first(where: {$0.script == script})?.countries {
+                    if let countries = scripts.first(where: { $0.script == script })?.countries {
                         for country in countries {
                             if let result = Self(exactly: [language, script, country].joined(separator: "\u{2D}")) {
                                 self = result
@@ -212,6 +218,9 @@ extension Localization {
     /// Creates a localization from an icon.
     ///
     /// - SeeAlso: `icon`
+    ///
+    /// - Parameters:
+    ///     - icon: The localization icon.
     public init?(icon: StrictString) {
         if let recognized = ContentLocalization(definedIcon: icon) {
             self.init(reasonableMatchFor: recognized.code)
@@ -232,6 +241,9 @@ extension Localization {
     /// Returns the code corresponding to the specified icon.
     ///
     /// Use this to convert abritrary, user‐provided codes, even when they are not directly supported by the application.
+    ///
+    /// - Parameters:
+    ///     - icon: The localization icon.
     public static func code(for icon: StrictString) -> String? {
         return ContentLocalization(icon: icon)?.code
     }
@@ -239,6 +251,9 @@ extension Localization {
     /// Returns the icon corresponding to the specified code.
     ///
     /// Use this to convert abritrary, user‐provided icons, even when they are not directly supported by the application.
+    ///
+    /// - Parameters:
+    ///     - code: The localization code.
     public static func icon(for code: String) -> StrictString? {
         return ContentLocalization(reasonableMatchFor: code)?.icon
     }
@@ -261,6 +276,9 @@ extension Localization where Self : RawRepresentable, Self.RawValue == String {
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).
     ///
     /// This initializer does not attempt to resolve to a related localization. i.e. A request for Australian English prefers failure over the creation of an instance of British English. (Where such resolution is desired, use `init(reasonableMatchFor:)` instead.)
+    ///
+    /// - Parameters:
+    ///     - code: The localization code.
     @inlinable public init?(exactly code: String) {
         self.init(rawValue: code)
     }

@@ -16,13 +16,9 @@
 public typealias IntMax = Int64
 
 /// A member of the `Int` family: `Int`, `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntFamily : CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol, MirrorPath, SignedInteger {
-
-}
+public protocol IntFamily : CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol, MirrorPath, SignedInteger {}
 /// A numbered member of the `Int` family: `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntXFamily : IntFamily {
-
-}
+public protocol IntXFamily : IntFamily {}
 
 extension IntFamily {
 
@@ -45,7 +41,7 @@ extension IntFamily {
     /// - Parameters:
     ///     - operand: The value to invert.
     @inlinable public static prefix func − (operand: Self) -> Self {
-        return -operand
+        return -operand // @exempt(from: unicode)
     }
 
     // MARK: - NumericAdditiveArithmetic
@@ -71,7 +67,7 @@ extension IntFamily {
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue - followingValue
+        return precedingValue - followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.Subtractable.−=)
@@ -81,7 +77,7 @@ extension IntFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
     @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue -= followingValue
+        precedingValue -= followingValue // @exempt(from: unicode)
     }
 
     // MARK: - WholeArithmetic
@@ -102,7 +98,7 @@ extension IntFamily {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue * followingValue
+        return precedingValue * followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.×=)
@@ -112,7 +108,7 @@ extension IntFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
     @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue *= followingValue
+        precedingValue *= followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
@@ -130,7 +126,7 @@ extension IntFamily {
         // Wrap to previous if negative (ignoring when exactly even)
 
         // func divideAccordingToEuclid
-        self /= divisor
+        self /= divisor // @exempt(from: unicode)
 
         if needsToWrapToPrevious {
             self −= 1 as Self
@@ -208,7 +204,7 @@ extension Int : IntFamily {
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
     @inlinable public static func − (precedingValue: Int, followingValue: Int) -> Int {
-        return precedingValue - followingValue
+        return precedingValue - followingValue // @exempt(from: unicode)
     }
 }
 extension Int64 : IntXFamily {

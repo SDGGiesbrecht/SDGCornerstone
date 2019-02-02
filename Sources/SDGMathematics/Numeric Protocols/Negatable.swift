@@ -77,7 +77,7 @@ extension Negatable where Self : SignedNumeric {
     ///
     /// - Parameters:
     ///     - operand: The value to invert.
-    @inlinable public static prefix func - (operand: Self) -> Self {
+    @inlinable public static prefix func - (operand: Self) -> Self { // @exempt(from: unicode)
         return −operand
     }
 

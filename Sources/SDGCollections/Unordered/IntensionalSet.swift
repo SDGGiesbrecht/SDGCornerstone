@@ -18,6 +18,9 @@ public struct IntensionalSet<Member> : SetDefinition {
     // MARK: - Initialization
 
     /// Creates a set with a condition.
+    ///
+    /// - Parameters:
+    ///     - condition: The defining condition.
     @inlinable public init(where condition: @escaping (Element) -> Bool) {
         self.condition = condition
     }

@@ -17,6 +17,9 @@ extension String.Index {
     // MARK: - Conversions
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
+    ///
+    /// - Parameters:
+    ///     - scalars: The scalar view of the string the range refers to.
     @inlinable public func samePosition(in scalars: StrictString) -> StrictString.Index {
         return samePosition(in: String(StrictString(scalars)).scalars)
     }

@@ -1,5 +1,5 @@
 /*
- UserFacingText.swift
+ UserFacing.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -26,7 +26,6 @@ public struct UserFacing<Element, Localization : SDGLocalization.Localization> :
     /// - Parameters:
     ///     - localize: A closure that resolves the element based on a requested localization.
     ///     - localization: The requested localization.
-    ///     - arguments: One or more (as a tuple) arguments necessary for the correct resolution of the element.
     @inlinable public init(_ localize: @escaping (_ localization: Localization) -> Element) {
         self.dynamic = UserFacingDynamic<Element, Localization, Void>({ (localization, _) in
             return localize(localization)
@@ -46,6 +45,9 @@ public struct UserFacing<Element, Localization : SDGLocalization.Localization> :
     }
 
     /// Returns the resolved element for the specified localization.
+    ///
+    /// - Parameters:
+    ///     - localization: The target localization.
     @inlinable public func resolved(for localization: Localization) -> Element {
         return dynamic.resolved(for: localization, using: ())
     }

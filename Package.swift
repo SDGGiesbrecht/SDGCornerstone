@@ -434,13 +434,5 @@ let package = Package(
             "SDGCornerstone", "SDGXCTestUtilities",
             "SDGPersistenceTestUtilities"
         ])
-
-        // To run these tests, uncomment the following and run the executable in the release configuration.
-        /*.target(name: "performance‐tests", dependencies: [
-            "SDGTesting", "SDGPersistence",
-
-            "SDGText",
-            "SDGPrecisionMathematics"
-            ])*/
     ]
 )

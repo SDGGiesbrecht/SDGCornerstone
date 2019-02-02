@@ -113,6 +113,9 @@ where SubSequence : SearchableCollection {
     /// - SeeAlso: `components(separatedBy:)`
     ///
     /// - Precondition: The provided ranges must be sorted and not overlap.
+    ///
+    /// - Parameters:
+    ///     - separators: The ranges of the separators.
     func ranges(separatedBy separators: [Range<Index>]) -> [Range<Index>]
 
     // @documentation(SDGCornerstone.Collection.components(separatedBy:))
@@ -193,6 +196,10 @@ where SubSequence : SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
+    ///
+    /// - Parameters:
+    ///     - openingToken: The opening token.
+    ///     - closingToken: The closing token.
     func firstNestingLevel<C : SearchableCollection, D : SearchableCollection>(startingWith openingToken: C, endingWith closingToken: D) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element
     // #documentation(SDGCornerstone.Collection.firstNestingLevel(startingWith:endingWith:))
     /// Returns the first nesting level found in the collection.
@@ -206,6 +213,10 @@ where SubSequence : SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
+    ///
+    /// - Parameters:
+    ///     - openingToken: The opening token.
+    ///     - closingToken: The closing token.
     func firstNestingLevel(startingWith openingToken: Self, endingWith closingToken: Self) -> NestingLevel<Self>?
 
     // @documentation(SDGCornerstone.Collection.advance(_: over:))
@@ -442,11 +453,6 @@ extension SearchableCollection {
         return _suffix(after: pattern)
     }
 
-    /// Returns an array of ranges representing the complement of those provided.
-    ///
-    /// - SeeAlso: `components(separatedBy:)`
-    ///
-    /// - Precondition: The provided ranges must be sorted and not overlap.
     @inlinable public func ranges(separatedBy separators: [Range<Index>]) -> [Range<Index>] {
         let startIndices = [startIndex] + separators.map({ $0.upperBound })
         let endIndices = separators.map({ $0.lowerBound }) + [endIndex]
@@ -635,6 +641,10 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
+    ///
+    /// - Parameters:
+    ///     - openingToken: The opening token.
+    ///     - closingToken: The closing token.
     @inlinable public func firstNestingLevel<C : SearchableCollection, D : SearchableCollection>(startingWith openingToken: C, endingWith closingToken: D) -> NestingLevel<Self>? where C.Element == Element, D.Element == Element {
         return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken)
     }
@@ -650,6 +660,10 @@ extension SearchableCollection {
     /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
     /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
     /// ```
+    ///
+    /// - Parameters:
+    ///     - openingToken: The opening token.
+    ///     - closingToken: The closing token.
     @inlinable public func firstNestingLevel(startingWith openingToken: Self, endingWith closingToken: Self) -> NestingLevel<Self>? {
         return _firstNestingLevel(startingWith: openingToken, endingWith: closingToken)
     }
@@ -1244,6 +1258,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
+    ///     - match: A match to mutate.
     @inlinable public mutating func mutateMatches<P, C>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
         return _mutateMatches(for: pattern, mutation: mutation)
     }
@@ -1253,6 +1268,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
+    ///     - match: A match to mutate.
     @inlinable public mutating func mutateMatches<C : SearchableCollection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
         _mutateMatches(for: pattern, mutation: mutation)
     }
@@ -1262,6 +1278,7 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     /// - Parameters:
     ///     - pattern: The pattern to search for.
     ///     - mutation: A closure that generates a replacement collection from a match.
+    ///     - match: A match to mutate.
     @inlinable public mutating func mutateMatches<C : SearchableCollection>(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> C) where C.Element == Self.Element {
         _mutateMatches(for: pattern, mutation: mutation)
     }
@@ -1276,7 +1293,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
+    ///     - mutation: The mutation to perform on each match.
+    ///     - match: A match to perform the mutation on.
     @inlinable public func mutatingMatches<P, C>(for pattern: P, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where P : PatternProtocol, C : SearchableCollection, P.Element == Self.Element, C.Element == Self.Element {
         return _mutatingMatches(for: pattern, mutation: mutation)
     }
@@ -1286,7 +1304,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
+    ///     - mutation: The mutation to perform on each match.
+    ///     - match: A match to perform the mutation on.
     @inlinable public func mutatingMatches<C : SearchableCollection>(for pattern: CompositePattern<Element>, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
         return _mutatingMatches(for: pattern, mutation: mutation)
     }
@@ -1295,7 +1314,8 @@ extension SearchableCollection where Self : RangeReplaceableCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    ///     - replacement: The collection to use as a replacement
+    ///     - mutation: The mutation to perform on each match.
+    ///     - match: A match to perform the mutation on.
     @inlinable public func mutatingMatches<C : SearchableCollection>(for pattern: Self, mutation: (_ match: PatternMatch<Self>) -> C) -> Self where C.Element == Self.Element {
         return _mutatingMatches(for: pattern, mutation: mutation)
     }

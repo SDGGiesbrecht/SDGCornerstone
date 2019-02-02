@@ -19,6 +19,9 @@ extension String/*.ClusterView*/.Index {
     // MARK: - Conversions
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
+    ///
+    /// - Parameters:
+    ///     - scalars: The scalar view of the string the range refers to.
     @inlinable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
         guard let result = samePosition(in: scalars) as String.ScalarView.Index? else {
             _preconditionFailure({ (localization: _APILocalization) -> String in // @exempt(from: tests)

@@ -75,6 +75,9 @@ public struct GregorianSecond : CardinalCalendarComponent, CodableViaRawRepresen
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
+    ///
+    /// - Parameters:
+    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: FloatMax) {
         second = unsafeRawValue
     }

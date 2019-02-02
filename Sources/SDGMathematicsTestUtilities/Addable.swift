@@ -13,6 +13,13 @@
  */
 
 /// Tests a type’s conformance to Addable.
+///
+/// - Parameters:
+///     - augend: An augend.
+///     - addend: An addend.
+///     - sum: The expected sum.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testAddableConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : Addable, T : Equatable {
     test(operator: (+, "+"), on: (augend, addend), returns: sum, file: file, line: line)
     test(assignmentOperator: (+=, "+="), with: (augend, addend), resultsIn: sum, file: file, line: line)

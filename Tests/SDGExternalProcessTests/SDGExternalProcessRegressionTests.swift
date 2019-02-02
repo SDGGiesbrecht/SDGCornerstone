@@ -21,7 +21,7 @@ class SDGExternalProcessRegressionTests : TestCase {
         // Untracked
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        let longCommand = ["git", "ls-remote", "--tags", "https://github.com/realm/jazzy"]
+        let longCommand = ["git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy"]
         do {
             let output = try Shell.default.run(command: longCommand)
             XCTAssert(output.contains("0.8.3"))

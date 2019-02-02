@@ -18,9 +18,7 @@ import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the month.
 public protocol Day : ConsistentlyOrderedCalendarComponent, MarkupPlaygroundDisplay
-where Vector : IntegerProtocol {
-
-}
+where Vector : IntegerProtocol {}
 
 extension Day {
 

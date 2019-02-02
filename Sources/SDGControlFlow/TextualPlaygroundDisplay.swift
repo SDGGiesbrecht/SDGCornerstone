@@ -17,9 +17,7 @@
 /// Conformance Requirements:
 ///
 /// - `CustomStringConvertible`
-public protocol TextualPlaygroundDisplay : CustomPlaygroundDisplayConvertible, CustomStringConvertible {
-
-}
+public protocol TextualPlaygroundDisplay : CustomPlaygroundDisplayConvertible, CustomStringConvertible {}
 
 extension TextualPlaygroundDisplay {
 

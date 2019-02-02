@@ -15,6 +15,11 @@
 import SDGCollections
 
 /// Tests a type’s conformance to RationalArithmetic.
+///
+/// - Parameters:
+///     - type: The type.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testRationalArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RationalArithmetic {
 
     testIntegralArithmeticConformance(of: T.self, file: file, line: line)

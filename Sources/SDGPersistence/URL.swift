@@ -17,8 +17,9 @@ extension URL : Comparable {
     /// Returns `true` if the URL is in the location described by the specified URL.
     ///
     /// The URL is considered to be inside if it:
-    ///     - points to a file or subfolder of the other URL, or
-    ///     - points to the same file or folder as the other URL.
+    ///
+    /// - points to a file or subfolder of the other URL, or
+    /// - points to the same file or folder as the other URL.
     ///
     /// - Parameters:
     ///     - other: Another URL.

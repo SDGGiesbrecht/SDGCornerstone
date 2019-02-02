@@ -678,13 +678,13 @@ extension RealArithmetic {
     return N.arcsec(secant)
 }
 
-// #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
-/// Returns the arctangent of a value.
+// #documentation(SDGCornerstone.RealArithmetic.arccot(_:))
+/// Returns the arccotangent of a value.
 ///
-/// The returned angle will be between −90° and 90°.
+/// The returned angle will be between 0° and 180°.
 ///
 /// - Parameters:
-///     - tangent: The tangent.
+///     - cotangent: The cotangent.
 @inlinable public func arccot<N : RealArithmetic>(_ cotangent: N) -> Angle<N> {
     return N.arccot(cotangent)
 }

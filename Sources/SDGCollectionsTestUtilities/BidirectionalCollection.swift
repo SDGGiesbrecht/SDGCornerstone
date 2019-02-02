@@ -13,10 +13,15 @@
  */
 
 /// Tests a type’s conformance to BidirectionalCollection.
+///
+/// - Parameters:
+///     - collection: A collection.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testBidirectionalCollectionConformance<T>(of collection: T, file: StaticString = #file, line: UInt = #line) where T : BidirectionalCollection {
 
     testCollectionConformance(of: collection, file: file, line: line)
 
     let second = collection.index(after: collection.startIndex)
-    test(method: (T.index(before: ), "index(before: "), of: collection, with: second, returns: collection.startIndex, file: file, line: line)
+    test(method: (T.index(before:), "index(before: "), of: collection, with: second, returns: collection.startIndex, file: file, line: line)
 }

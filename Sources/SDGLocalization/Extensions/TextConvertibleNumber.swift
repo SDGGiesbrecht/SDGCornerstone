@@ -352,9 +352,7 @@ extension TextConvertibleNumber where Self : RationalArithmetic {
 ///
 /// - `TextConvertibleNumber`
 /// - `WholeNumberProtocol` or `IntegerProtocol`
-public protocol CodableViaTextConvertibleNumber : TextConvertibleNumber {
-
-}
+public protocol CodableViaTextConvertibleNumber : TextConvertibleNumber {}
 
 extension CodableViaTextConvertibleNumber {
 

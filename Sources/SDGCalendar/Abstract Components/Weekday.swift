@@ -17,9 +17,7 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the week.
-public protocol Weekday : ConsistentlyOrderedCalendarComponent, TextualPlaygroundDisplay {
-
-}
+public protocol Weekday : ConsistentlyOrderedCalendarComponent, TextualPlaygroundDisplay {}
 
 extension Weekday {
 

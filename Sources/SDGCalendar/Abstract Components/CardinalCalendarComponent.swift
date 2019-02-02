@@ -13,9 +13,7 @@
  */
 
 /// A calendar component defined by an cardinal number raw value.
-public protocol CardinalCalendarComponent : NumericCalendarComponent {
-
-}
+public protocol CardinalCalendarComponent : NumericCalendarComponent {}
 
 extension CardinalCalendarComponent {
 

@@ -21,5 +21,5 @@
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
 @inlinable public func ≠ (precedingValue: Any.Type?, followingValue: Any.Type?) -> Bool {
-    return precedingValue != followingValue
+    return precedingValue != followingValue // @exempt(from: unicode)
 }

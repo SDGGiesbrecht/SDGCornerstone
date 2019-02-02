@@ -48,7 +48,7 @@ extension FloatFamily {
     /// - Parameters:
     ///     - operand: The value to invert.
     @inlinable public static prefix func − (operand: Self) -> Self {
-        return -operand
+        return -operand // @exempt(from: unicode)
     }
 
     // MARK: - NumericAdditiveArithmetic
@@ -74,7 +74,7 @@ extension FloatFamily {
     ///     - precedingValue: The dividend.
     ///     - followingValue: The divisor.
     @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue / followingValue
+        return precedingValue / followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.RationalArithmetic.÷=)
@@ -84,7 +84,7 @@ extension FloatFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The divisor.
     @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue /= followingValue
+        precedingValue /= followingValue // @exempt(from: unicode)
     }
 
     // MARK: - RealArithmetic
@@ -242,7 +242,7 @@ extension FloatFamily {
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to subtract.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue - followingValue
+        return precedingValue - followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.Subtractable.−=)
@@ -252,7 +252,7 @@ extension FloatFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The value to subtract.
     @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue -= followingValue
+        precedingValue -= followingValue // @exempt(from: unicode)
     }
 
     // MARK: - WholeArithmetic
@@ -264,7 +264,7 @@ extension FloatFamily {
     ///     - precedingValue: A value.
     ///     - followingValue: Another value.
     @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue * followingValue
+        return precedingValue * followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.×=)
@@ -274,7 +274,7 @@ extension FloatFamily {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The coefficient by which to multiply.
     @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue *= followingValue
+        precedingValue *= followingValue // @exempt(from: unicode)
     }
 
     // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))

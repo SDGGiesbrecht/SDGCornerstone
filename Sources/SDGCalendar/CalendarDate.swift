@@ -43,54 +43,86 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     // MARK: - Initialization
 
     /// Creates an instance with the provided definition.
+    ///
+    /// - Parameters:
+    ///     - definition: The definition of the date.
     public init(definition: DateDefinition) {
         self.definition = definition
     }
 
-    // @documentation(SDGCornerstone.CalendarDate.init(hebrewYear:month:day:hour:part:))
     /// Creates a date using the Hebrew calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
     /// - `init(hebrewYear:month:day:hour:part:)` tends to be more legible when used with variables.
     /// - `init(hebrew:_:_:at:_:)` tends to be more legible when used with literals.
+    ///
+    /// - Parameters:
+    ///     - year: The year.
+    ///     - month: The month.
+    ///     - day: The day of the month.
+    ///     - hour: The hour.
+    ///     - part: The part.
     public init(hebrewYear year: HebrewYear, month: HebrewMonth = .tishrei, day: HebrewDay = 1, hour: HebrewHour = 0, part: HebrewPart = 0) {
         self.init(definition: HebrewDate(year: year, month: month, day: day, hour: hour, part: part))
     }
 
-    // #documentation(SDGCornerstone.CalendarDate.init(hebrewYear:month:day:hour:part:))
     /// Creates a date using the Hebrew calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
     /// - `init(hebrewYear:month:day:hour:part:)` tends to be more legible when used with variables.
     /// - `init(hebrew:_:_:at:_:)` tends to be more legible when used with literals.
+    ///
+    /// - Parameters:
+    ///     - month: The month.
+    ///     - day: The day of the month.
+    ///     - year: The year.
+    ///     - hour: The hour.
+    ///     - part: The part.
     public init(hebrew month: HebrewMonth, _ day: HebrewDay, _ year: HebrewYear, at hour: HebrewHour = 0, part: HebrewPart = 0) {
         self.init(hebrewYear: year, month: month, day: day, hour: hour, part: part)
     }
 
-    // @documentation(SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:))
-    /// Creates a date using the Hebrew calendar.
+    /// Creates a date using the Gregorian calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
     /// - `init(gregorianYear:month:day:hour:minute:second:)` tends to be more legible when used with variables.
     /// - `init(gregorian:_:_:at:_:_:)` tends to be more legible when used with literals.
+    ///
+    /// - Parameters:
+    ///     - year: The year.
+    ///     - month: The month.
+    ///     - day: The day of the month.
+    ///     - hour: The hour.
+    ///     - minute: The minute.
+    ///     - second: The second.
     public init(gregorianYear year: GregorianYear, month: GregorianMonth = .january, day: GregorianDay = 1, hour: GregorianHour = 0, minute: GregorianMinute = 0, second: GregorianSecond = 0) {
         let definition = GregorianDate(year: year, month: month, day: day, hour: hour, minute: minute, second: second)
         self.init(definition: definition)
     }
 
-    // #documentation(SDGCornerstone.CalendarDate.init(gregorianYear:month:day:hour:minute:second:))
-    /// Creates a date using the Hebrew calendar.
+    /// Creates a date using the Gregorian calendar.
     ///
     /// This initializer has two written forms whose effects are the same:
     /// - `init(gregorianYear:month:day:hour:minute:second:)` tends to be more legible when used with variables.
     /// - `init(gregorian:_:_:at:_:_:)` tends to be more legible when used with literals.
+    ///
+    /// - Parameters:
+    ///     - month: The month.
+    ///     - day: The day of the month.
+    ///     - year: The year.
+    ///     - hour: The hour.
+    ///     - minute: The minute.
+    ///     - second: The second.
     public init(gregorian month: GregorianMonth, _ day: GregorianDay, _ year: GregorianYear, at hour: GregorianHour = 0, _ minute: GregorianMinute = 0, _ second: GregorianSecond = 0) {
         self.init(gregorianYear: year, month: month, day: day, hour: hour, minute: minute, second: second)
     }
 
     /// Creates a calendar date using an instance of `Date`.
-    public init(_ date: Date) {
-        self.init(definition: FoundationDate(date))
+    ///
+    /// - Parameters:
+    ///     - dateInstance: The `Date` instance.
+    public init(_ dateInstance: Date) {
+        self.init(definition: FoundationDate(dateInstance))
     }
 
     // MARK: - Properties
@@ -242,21 +274,37 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     /// Returns the Hebrew date in British English.
+    ///
+    /// - Parameters:
+    ///     - withYear: Whether or not to include the year.
+    ///     - withWeekday: Whether or not to include the day of the week.
     public func hebrewDateInBritishEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
         return dateInBritishEnglish(year: hebrewYear, month: hebrewMonth, day: hebrewDay, weekday: hebrewWeekday, withYear: withYear, withWeekday: withWeekday)
     }
 
     /// Returns the Hebrew date in American English.
+    ///
+    /// - Parameters:
+    ///     - withYear: Whether or not to include the year.
+    ///     - withWeekday: Whether or not to include the day of the week.
     public func hebrewDateInAmericanEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
         return dateInAmericanEnglish(year: hebrewYear, month: hebrewMonth, day: hebrewDay, weekday: hebrewWeekday, withYear: withYear, withWeekday: withWeekday)
     }
 
     /// Returns the Gregorian date in British English.
+    ///
+    /// - Parameters:
+    ///     - withYear: Whether or not to include the year.
+    ///     - withWeekday: Whether or not to include the day of the week.
     public func gregorianDateInBritishEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
         return dateInBritishEnglish(year: gregorianYear, month: gregorianMonth, day: gregorianDay, weekday: gregorianWeekday, withYear: withYear, withWeekday: withWeekday)
     }
 
     /// Returns the Gregorian date in American English.
+    ///
+    /// - Parameters:
+    ///     - withYear: Whether or not to include the year.
+    ///     - withWeekday: Whether or not to include the day of the week.
     public func gregorianDateInAmericanEnglish(withYear: Bool = true, withWeekday: Bool = false) -> StrictString {
         return dateInAmericanEnglish(year: gregorianYear, month: gregorianMonth, day: gregorianDay, weekday: gregorianWeekday, withYear: withYear, withWeekday: withWeekday)
     }
@@ -341,6 +389,9 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     }
 
     /// Returns the time in the ISO format.
+    ///
+    /// - Parameters:
+    ///     - includeSeconds: Whether or not to include the seconds.
     public func timeInISOFormat(includeSeconds: Bool = false) -> StrictString {
         var result = gregorianHour.inISOFormat() + ":" + gregorianMinute.inISOFormat()
         if includeSeconds {
@@ -418,6 +469,9 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     ]
 
     /// Registers a definition type so that its instances can be decoded.
+    ///
+    /// - Parameters:
+    ///     - type: The type to register.
     public static func register(_ type: DateDefinition.Type) {
         knownDateDefinitions[type.identifier] = type
     }

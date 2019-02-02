@@ -18,6 +18,9 @@ public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentable
     // MARK: - Static Properties
 
     /// The number of months in a year.
+    ///
+    /// - Parameters:
+    ///     - leapYear: Whether or not the number should represent a leap year.
     public static func numberOfMonths(leapYear: Bool) -> Int {
         if leapYear {
             return 13
@@ -102,6 +105,9 @@ public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentable
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
+    ///
+    /// - Parameters:
+    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: RawValue) {
         year = unsafeRawValue
     }

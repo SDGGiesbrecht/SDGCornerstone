@@ -29,6 +29,10 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     // MARK: - Initialization
 
     /// Creates a month in a year.
+    ///
+    /// - Parameters:
+    ///     - month: The month.
+    ///     - year: The year.
     public init(month: HebrewMonth, year: HebrewYear) {
         var month = month
         month.correctForYear(leapYear: year.isLeapYear)
