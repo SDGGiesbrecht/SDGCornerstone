@@ -244,7 +244,7 @@ extension WholeArithmetic {
     // @documentation(SDGCornerstone.WholeArithmetic.init(uIntFamily:))
     /// Creates an instance equal to `uInt`.
     ///
-    /// - Properties:
+    /// - Parameters:
     ///     - uInt: An instance of a type conforming to `UIntFamily`.
     @inlinable public init<U : UIntFamily>(_ uInt: U) {
         self.init(UIntMax(uInt))

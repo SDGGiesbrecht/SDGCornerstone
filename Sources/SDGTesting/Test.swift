@@ -418,6 +418,8 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///
 /// - Parameters:
 ///     - property: The property to test.
+///     - accessor: A closure which retrieves the property.
+///     - name: The property name.
 ///     - instance: The instance on which to inspect the property.
 ///     - expectedValue: The expected property value.
 ///     - file: Optional. A different source file to associate with any failures.
@@ -435,6 +437,8 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///
 /// - Parameters:
 ///     - variable: The variable to test.
+///     - contents: The variable itself.
+///     - name: The name of the variable.
 ///     - expectedValue: The expected property value.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.

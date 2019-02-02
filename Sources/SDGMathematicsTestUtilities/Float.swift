@@ -251,6 +251,8 @@
 ///
 /// - Parameters:
 ///     - variable: The variable to test.
+///     - contents: The variable itself.
+///     - name: The name of the variable.
 ///     - expectedValue: The expected property value.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
