@@ -24,8 +24,6 @@ extension TransparentWrapper {
 
     // MARK: - CustomDebugStringConvertible
 
-    // #documentation(SDGCornerstone.CustomDebugStringConvertible.debugDescription)
-    /// A textual representation of this instance, suitable for debugging.
     @inlinable public var debugDescription: String {
         return String(reflecting: wrappedInstance)
     }
