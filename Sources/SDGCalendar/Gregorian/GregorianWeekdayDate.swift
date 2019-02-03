@@ -69,11 +69,6 @@ internal struct GregorianWeekdayDate : DateDefinition {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         unreachable() // This definition is only ever transiently created to determine the weekday of another date.
     }

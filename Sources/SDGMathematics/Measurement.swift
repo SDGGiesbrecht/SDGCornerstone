@@ -589,11 +589,6 @@ extension CodableViaMeasurement {
         try rawValue.encode(to: encoder)
     }
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         try self.init(rawValue: Scalar(from: decoder))
     }

@@ -40,7 +40,7 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 /// @usableFromInline internal let beginSubscript: UnicodeScalar = "\u{107002}"
 /// @usableFromInline internal let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
-public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collection, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay {
+public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Decodable, Encodable, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -207,11 +207,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     // MARK: - Codable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: StrictString.self, convert: { SemanticMarkup($0) })
     }

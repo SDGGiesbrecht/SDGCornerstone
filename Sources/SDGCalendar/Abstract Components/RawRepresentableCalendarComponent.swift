@@ -105,11 +105,6 @@ extension CodableViaRawRepresentableCalendarComponent {
         try encode(to: encoder, via: rawValue)
     }
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: RawValue.self, convert: { Self(possibleRawValue: $0) })
     }

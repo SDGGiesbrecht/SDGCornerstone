@@ -24,7 +24,7 @@ import SDGCornerstoneLocalizations
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 001"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber : Addable, Codable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
+public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -155,11 +155,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let numerator = try container.decode(Integer.self)

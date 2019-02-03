@@ -25,7 +25,7 @@ private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutes
 /// A time interval.
 ///
 /// The units are all defined as fractions or multiples of days. This makes them convenient for calendaring, but not for physics. (Seconds are not SI seconds and leap seconds do not exist.)
-public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathematics.Measurement, TextualPlaygroundDisplay {
+public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodable, SDGMathematics.Measurement, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -249,11 +249,6 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let units = try container.decode(Scalar.self)

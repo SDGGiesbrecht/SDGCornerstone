@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGCornerstoneLocalizations
 
 /// A month of the Gregorian year.
-public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent, TextualPlaygroundDisplay {
+public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, TextualPlaygroundDisplay {
 
     // MARK: - Cases
 
@@ -132,11 +132,6 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         try self.init(usingOrdinalFrom: decoder)
     }

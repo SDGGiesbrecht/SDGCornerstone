@@ -14,12 +14,6 @@
 
 extension Decodable {
 
-    // @documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
-
     // @documentation(SDGCornerstone.Decodable.init(from:via:convert:))
     /// Creates a new instance by decoding a proxy type from the given decoder.
     ///

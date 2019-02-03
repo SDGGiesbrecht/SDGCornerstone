@@ -20,7 +20,7 @@ import SDGText
 import SDGPersistence
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
-public struct LocalizationSetting : Codable, Equatable {
+public struct LocalizationSetting : Decodable, Encodable, Equatable {
 
     // MARK: - Static Properties
 
@@ -225,11 +225,6 @@ public struct LocalizationSetting : Codable, Equatable {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: [[String]].self, convert: { LocalizationSetting(orderOfPrecedence: $0) })
     }

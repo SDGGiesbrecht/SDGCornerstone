@@ -476,11 +476,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         knownDateDefinitions[type.identifier] = type
     }
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let encodingIdentifier = try container.decode(StrictString.self)

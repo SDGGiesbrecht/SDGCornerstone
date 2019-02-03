@@ -23,7 +23,7 @@ import SDGControlFlow
 /// - `Equatable`
 /// - `static func += (precedingValue: inout Self, followingValue: Vector)`
 /// - `static func − (precedingValue: Self, followingValue: Self) -> Vector`
-public protocol PointProtocol : Codable, Equatable {
+public protocol PointProtocol : Decodable, Encodable, Equatable {
 
     // @documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.

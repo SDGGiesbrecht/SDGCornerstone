@@ -70,7 +70,7 @@ import SDGCornerstoneLocalizations
 /// - `static var referenceDate: CalendarDate { get }`
 /// - `init(intervalSinceReferenceDate: CalendarInterval<FloatMax>)`
 /// - `var intervalSinceReferenceDate: CalendarInterval<FloatMax> { get }`
-public protocol DateDefinition : Codable {
+public protocol DateDefinition : Decodable, Encodable {
 
     // MARK: - Static Properties
 

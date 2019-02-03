@@ -123,11 +123,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         try encode(to: encoder, via: description)
     }
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: String.self, convert: { StrictString($0) })
     }

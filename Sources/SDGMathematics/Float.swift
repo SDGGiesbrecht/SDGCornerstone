@@ -483,15 +483,10 @@ extension CGFloat : FloatFamily {
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-extension Float80 : Codable, FloatFamily {
+extension Float80 : Decodable, Encodable, FloatFamily {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         self.init(try Double(from: decoder))
     }

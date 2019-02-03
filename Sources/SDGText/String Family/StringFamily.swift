@@ -13,7 +13,7 @@
  */
 
 /// A `String` or `StrictString`.
-public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByStringLiteral, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
+public protocol StringFamily : Addable, Comparable, Decodable, Encodable, ExpressibleByStringLiteral, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Associated Types
 

@@ -13,7 +13,7 @@
  */
 
 /// A day of the Gregorian week.
-public enum GregorianWeekday : Int, Codable, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, EnumerationCalendarComponent, Weekday {
+public enum GregorianWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent, Weekday {
 
     // MARK: - Cases
 
@@ -47,11 +47,6 @@ public enum GregorianWeekday : Int, Codable, ConsistentDurationCalendarComponent
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         try self.init(usingOrdinalFrom: decoder)
     }
