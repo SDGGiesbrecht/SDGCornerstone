@@ -33,8 +33,6 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     @inlinable public var description: String {
         return "(" + String(describing: base) + ")′"
     }

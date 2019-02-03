@@ -270,8 +270,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     @inlinable public var description: String {
         return String(rawTextApproximation())
     }

@@ -33,8 +33,6 @@ internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         return "(" + String(describing: baseDate) + ") + " + String(describing: intervalSince)
     }

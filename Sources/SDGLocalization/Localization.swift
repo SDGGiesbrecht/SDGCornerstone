@@ -260,8 +260,6 @@ extension Localization {
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         guard let contentLocalization = ContentLocalization(exactly: code) else {
             return code

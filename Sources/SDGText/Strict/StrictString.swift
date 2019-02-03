@@ -175,8 +175,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     @inlinable public var description: String {
         return string
     }

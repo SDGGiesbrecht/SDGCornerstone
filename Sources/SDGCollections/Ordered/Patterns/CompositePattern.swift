@@ -102,8 +102,6 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     @inlinable public var description: String {
         let entries = components.map { "(" + String(describing: $0) + ")" }
         return entries.joined(separator: " + ")
