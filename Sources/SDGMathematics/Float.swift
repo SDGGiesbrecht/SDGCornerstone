@@ -493,11 +493,6 @@ extension Float80 : Decodable, Encodable, FloatFamily {
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
         try Double(self).encode(to: encoder)

@@ -363,11 +363,6 @@ extension CodableViaTextConvertibleNumber {
 
 extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: inDigits())
     }
@@ -375,11 +370,6 @@ extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
 
 extension CodableViaTextConvertibleNumber where Self : WholeNumberProtocol {
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: inDigits())
     }

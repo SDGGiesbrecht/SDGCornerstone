@@ -96,11 +96,6 @@ public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCa
 
 extension CodableViaRawRepresentableCalendarComponent {
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: rawValue)
     }

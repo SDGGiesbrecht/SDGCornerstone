@@ -75,11 +75,6 @@ internal struct GregorianWeekdayDate : DateDefinition {
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         unreachable() // This definition is only ever transiently created to determine the weekday of another date.
     }

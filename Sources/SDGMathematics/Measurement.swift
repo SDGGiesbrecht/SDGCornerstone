@@ -580,11 +580,6 @@ extension CodableViaMeasurement {
 
     // These will be inlined by the conformance declaration in the module which declares the conformance. Only those inlined specializations will ever be called.
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         try rawValue.encode(to: encoder)
     }

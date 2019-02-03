@@ -84,11 +84,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(month)

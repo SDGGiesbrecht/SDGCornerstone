@@ -199,11 +199,6 @@ internal struct HebrewDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     internal func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(year)

@@ -49,11 +49,6 @@ internal struct FoundationDate : DateDefinition, TransparentWrapper {
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     internal func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: date)
     }

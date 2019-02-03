@@ -53,11 +53,6 @@ public enum HebrewWeekday : Int, ConsistentDurationCalendarComponent, Consistent
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         try encodeUsingOrdinal(to: encoder)
     }

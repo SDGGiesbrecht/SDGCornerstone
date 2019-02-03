@@ -446,11 +446,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         let number: StrictString
         switch self {

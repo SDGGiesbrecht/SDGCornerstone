@@ -14,12 +14,6 @@
 
 extension Encodable {
 
-    // @documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
-
     /// Encodes this value by encoding a proxy type into the given encoder.
     ///
     /// - Parameters:
