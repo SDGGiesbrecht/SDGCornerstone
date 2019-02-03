@@ -627,10 +627,4 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
             return "אלול"
         }
     }
-
-    // MARK: - RawRepresentable
-
-    // #documentation(SDGCornerstone.RawRepresentable.RawValue)
-    /// The raw value type.
-    public typealias RawValue = Int
 }

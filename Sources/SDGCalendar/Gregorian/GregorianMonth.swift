@@ -327,10 +327,4 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = RawValue
-
-    // MARK: - RawRepresentable
-
-    // #documentation(SDGCornerstone.RawRepresentable.RawValue)
-    /// The raw value type.
-    public typealias RawValue = Int
 }
