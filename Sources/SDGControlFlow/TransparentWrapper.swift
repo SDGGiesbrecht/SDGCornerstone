@@ -30,8 +30,6 @@ extension TransparentWrapper {
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
-    /// Returns the custom playground description for this instance.
     @inlinable public var playgroundDescription: Any {
         return wrappedInstance
     }

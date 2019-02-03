@@ -260,8 +260,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Codable, Collec
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
-    /// Returns the custom playground description for this instance.
     @inlinable public var playgroundDescription: Any {
         #if canImport(AppKit) || canImport(UIKit)
             return richText(font: Font.systemFont(ofSize: Font.systemSize))
