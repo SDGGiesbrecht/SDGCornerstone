@@ -51,22 +51,10 @@ extension IntFamily {
 
     // MARK: - Subtractable
 
-    // #documentation(SDGCornerstone.Subtractable.−)
-    /// Returns the difference of the preceding value minus the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The starting value.
-    ///     - followingValue: The value to subtract.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue - followingValue // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.Subtractable.−=)
-    /// Subtracts the following value from the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to subtract.
     @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue -= followingValue // @exempt(from: unicode)
     }
@@ -188,12 +176,6 @@ extension Int : IntFamily {
 
     // MARK: - Subtractible
 
-    // #documentation(SDGCornerstone.Subtractable.−)
-    /// Returns the difference of the preceding value minus the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The starting value.
-    ///     - followingValue: The value to subtract.
     @inlinable public static func − (precedingValue: Int, followingValue: Int) -> Int {
         return precedingValue - followingValue // @exempt(from: unicode)
     }

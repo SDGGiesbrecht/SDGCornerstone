@@ -192,12 +192,6 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Subtractable
 
-    // #documentation(SDGCornerstone.Subtractable.−=)
-    /// Subtracts the following value from the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to subtract.
     public static func −= (precedingValue: inout Integer, followingValue: Integer) {
         precedingValue += −followingValue
     }

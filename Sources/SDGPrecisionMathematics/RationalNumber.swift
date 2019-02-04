@@ -223,12 +223,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - Subtractable
 
-    // #documentation(SDGCornerstone.Subtractable.−=)
-    /// Subtracts the following value from the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to subtract.
     public static func −= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
         precedingValue += −followingValue
     }

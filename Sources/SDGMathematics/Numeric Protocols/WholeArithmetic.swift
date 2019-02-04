@@ -39,12 +39,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     // MARK: - Operations
 
     // #workaround(Swift 4.2.1, Duplicates Subtractable, but works around disambiguation bugs.)
-    // #documentation(SDGCornerstone.Subtractable.−)
-    /// Returns the difference of the preceding value minus the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The starting value.
-    ///     - followingValue: The value to subtract.
     static func − (precedingValue: Self, followingValue: Self) -> Self
 
     // @documentation(SDGCornerstone.WholeArithmetic.×)

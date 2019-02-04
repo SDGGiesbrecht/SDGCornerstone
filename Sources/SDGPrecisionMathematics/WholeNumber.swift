@@ -190,12 +190,6 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Subtractable
 
-    // #documentation(SDGCornerstone.Subtractable.−=)
-    /// Subtracts the following value from the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to subtract.
     public static func −= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
         assert(precedingValue ≥ followingValue, UserFacing<StrictString, APILocalization>({ [precedingValue] localization in
             switch localization { // @exempt(from: tests)

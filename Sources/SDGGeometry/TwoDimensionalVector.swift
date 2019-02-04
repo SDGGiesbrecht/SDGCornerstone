@@ -117,12 +117,6 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - Subtractable
 
-    // #documentation(SDGCornerstone.Subtractable.−=)
-    /// Subtracts the following value from the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to subtract.
     @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.Δx −= followingValue.Δx
         precedingValue.Δy −= followingValue.Δy

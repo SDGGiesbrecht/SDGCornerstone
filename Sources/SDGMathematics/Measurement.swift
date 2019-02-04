@@ -491,22 +491,10 @@ extension Measurement {
 
     // MARK: - Subtractable
 
-    // #documentation(SDGCornerstone.Subtractable.−)
-    /// Returns the difference of the preceding value minus the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The starting value.
-    ///     - followingValue: The value to subtract.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return Self(rawValue: precedingValue.rawValue − followingValue.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Subtractable.−=)
-    /// Subtracts the following value from the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to subtract.
     @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.rawValue −= followingValue.rawValue
     }
