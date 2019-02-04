@@ -58,22 +58,10 @@ extension FloatFamily {
 
     // MARK: - RationalArithmetic
 
-    // #documentation(SDGCornerstone.RationalArithmetic.÷)
-    /// Returns the (rational) quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
     @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue / followingValue // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.RationalArithmetic.÷=)
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
     @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Self) {
         precedingValue /= followingValue // @exempt(from: unicode)
     }

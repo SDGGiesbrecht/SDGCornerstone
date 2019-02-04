@@ -30,7 +30,6 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     ///     - floatingPoint: An instance of `FloatMax`.
     init(_ floatingPoint: FloatMax)
 
-    // @documentation(SDGCornerstone.RationalArithmetic.÷)
     /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -38,7 +37,6 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     ///     - followingValue: The divisor.
     static func ÷ (precedingValue: Self, followingValue: Self) -> Self
 
-    // @documentation(SDGCornerstone.RationalArithmetic.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
@@ -64,12 +62,6 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
 
 extension RationalArithmetic {
 
-    // #documentation(SDGCornerstone.RationalArithmetic.÷)
-    /// Returns the (rational) quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
     @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }

@@ -206,12 +206,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - RationalArithmetic
 
-    // #documentation(SDGCornerstone.RationalArithmetic.÷=)
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
     public static func ÷= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
         var irregular = precedingValue.definition
         irregular.numerator ×= followingValue.denominator
