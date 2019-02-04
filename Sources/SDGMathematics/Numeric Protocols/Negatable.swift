@@ -59,7 +59,7 @@ extension Negatable where Self : SignedInteger {
     }
 }
 
-extension Negatable where Self : SignedNumeric {
+extension SignedNumeric where Self : Negatable {
 
     @inlinable public static prefix func - (operand: Self) -> Self { // @exempt(from: unicode)
         return −operand
