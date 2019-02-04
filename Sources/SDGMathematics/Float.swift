@@ -48,14 +48,10 @@ extension FloatFamily {
 
     // MARK: - NumericAdditiveArithmetic
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
-    /// The absolute value.
     @inlinable public var absoluteValue: Self {
         return abs(self)
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
-    /// Sets `self` to its absolute value.
     @inlinable public mutating func formAbsoluteValue() {
         self = abs(self)
     }

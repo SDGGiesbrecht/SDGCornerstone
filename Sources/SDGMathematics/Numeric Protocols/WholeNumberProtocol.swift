@@ -61,20 +61,14 @@ extension WholeNumberProtocol {
 
     // MARK: - NumericAdditiveArithmetic
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
-    /// Returns `true` if `self` is negative.
     @inlinable public var isNegative: Bool {
         return false
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
-    /// Returns `true` if `self` is positive or zero.
     @inlinable public var isNonNegative: Bool {
         return true
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
-    /// Sets `self` to its absolute value.
     @inlinable public mutating func formAbsoluteValue() {
         // self = self
     }

@@ -69,8 +69,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         }
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
-    /// Returns `true` if `self` is negative.
+    // NumericAdditiveArithmetic
     public private(set) var isNegative: Bool {
         get {
             return definition.isNegative

@@ -465,38 +465,26 @@ extension Measurement {
 
     // MARK: - NumericAdditiveArithmetic
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
-    /// Returns `true` if `self` is positive.
     @inlinable public var isPositive: Bool {
         return rawValue.isPositive
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
-    /// Returns `true` if `self` is negative.
     @inlinable public var isNegative: Bool {
         return rawValue.isNegative
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
-    /// Returns `true` if `self` is positive or zero.
     @inlinable public var isNonNegative: Bool {
         return rawValue.isNonNegative
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
-    /// Returns `true` if `self` is negative or zero.
     @inlinable public var isNonPositive: Bool {
         return rawValue.isNonPositive
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
-    /// The absolute value.
     @inlinable public var absoluteValue: Self {
         return Self(rawValue: rawValue.absoluteValue)
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
-    /// Sets `self` to its absolute value.
     @inlinable public mutating func formAbsoluteValue() {
         rawValue.formAbsoluteValue()
     }
