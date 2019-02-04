@@ -23,7 +23,6 @@ import SDGControlFlow
 /// - `AdditiveArithmetic`
 public protocol Negatable : AdditiveArithmetic {
 
-    // @documentation(SDGCornerstone.Negatable.−)
     /// Returns the additive inverse of the operand.
     ///
     /// - Parameters:
@@ -62,11 +61,6 @@ extension Negatable where Self : SignedInteger {
 
 extension Negatable where Self : SignedNumeric {
 
-    // #documentation(SDGCornerstone.Negatable.−)
-    /// Returns the additive inverse of the operand.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to invert.
     @inlinable public static prefix func - (operand: Self) -> Self { // @exempt(from: unicode)
         return −operand
     }
