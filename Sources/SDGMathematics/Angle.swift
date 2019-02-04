@@ -169,19 +169,16 @@ extension RealArithmetic {
         return radians
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.rotations)
     /// Returns an angle in rotations.
     @inlinable public var rotations: Angle<Self> {
         return Angle(rotations: self)
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.degrees)
     /// Returns an angle in degrees.
     @inlinable public var degrees: Angle<Self> {
         return Angle(degrees: self)
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.°)
     /// Returns an angle in degrees.
     ///
     /// - Parameters:
@@ -190,13 +187,11 @@ extension RealArithmetic {
         return value.degrees
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.minutes)
     /// Returns an angle in minutes.
     @inlinable public var minutes: Angle<Self> {
         return Angle(minutes: self)
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.′)
     /// Returns an angle in minutes.
     ///
     /// - Parameters:
@@ -205,13 +200,11 @@ extension RealArithmetic {
         return value.minutes
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.seconds)
     /// Returns an angle in seconds.
     @inlinable public var seconds: Angle<Self> {
         return Angle(seconds: self)
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.′′)
     /// Returns an angle in seconds.
     ///
     /// - Parameters:
@@ -226,7 +219,7 @@ extension RealArithmetic {
         return Angle(gradians: self)
     }
 
-    // @documentation(SDGCornerstone.RealArithmetic.gradians)
+    // #documentation(SDGCornerstone.RealArithmetic.gradians)
     /// Returns an angle in gradians.
     @inlinable public var gon: Angle<Self> {
         return gradians
