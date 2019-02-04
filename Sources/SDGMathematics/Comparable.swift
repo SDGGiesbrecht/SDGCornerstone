@@ -36,7 +36,6 @@ extension Comparable {
         return precedingValue >= followingValue // @exempt(from: unicode)
     }
 
-    // @documentation(SDGCornerstone.Comparable.≥=)
     // #example(1, increase)
     /// Increases the value of `self` so that falls at or above `minimum`.
     ///
@@ -68,7 +67,6 @@ extension Comparable {
         }
     }
 
-    // @documentation(SDGCornerstone.Comparable.≤=)
     // #example(1, decrease)
     /// Decreases the value of `self` so that falls at or below `maximum`.
     ///
@@ -102,7 +100,6 @@ extension Comparable {
 
     // MARK: - Approximation
 
-    // @documentation(SDGCornerstone.Comparable.≈)
     // #example(1, ≈)
     /// Returns `true` if `precedingValue` is within the range described by `followingValue`.
     ///

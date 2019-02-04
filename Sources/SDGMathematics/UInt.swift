@@ -24,68 +24,34 @@ extension UIntFamily {
 
     // MARK: - BitField
 
-    // #documentation(SDGCornerstone.BitField.bitwiseNot())
-    /// Returns the bits not present in `self`.
     @inlinable public func bitwiseNot() -> Self {
         return ~self
     }
 
-    // #documentation(SDGCornerstone.BitField.formBitwiseNot())
-    /// Inverts the bits.
     @inlinable public mutating func formBitwiseNot() {
         self = bitwiseNot()
     }
 
-    // #documentation(SDGCornerstone.BitField.bitwiseAnd(with:))
-    /// Returns the bits present in both `self` and `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public func bitwiseAnd(with other: Self) -> Self {
         return self & other
     }
 
-    // #documentation(SDGCornerstone.BitField.formBitwiseAnd(with:))
-    /// Removes the bits not also present in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public mutating func formBitwiseAnd(with other: Self) {
         self = bitwiseAnd(with: other)
     }
 
-    // #documentation(SDGCornerstone.BitField.bitwiseOr(with:))
-    /// Returns the bits present in either `self` or `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public func bitwiseOr(with other: Self) -> Self {
         return self | other
     }
 
-    // #documentation(SDGCornerstone.BitField.formBitwiseOr(with:))
-    /// Inserts the bits present in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public mutating func formBitwiseOr(with other: Self) {
         self = bitwiseOr(with: other)
     }
 
-    // #documentation(SDGCornerstone.BitField.bitwiseExclusiveOr(with:))
-    /// Returns the bits present only in `self` or only in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public func bitwiseExclusiveOr(with other: Self) -> Self {
         return self ^ other
     }
 
-    // #documentation(SDGCornerstone.BitField.formBitwiseExclusiveOr(with:))
-    /// Inserts the bits present in `other` and removes the bits present in both.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public mutating func formBitwiseExclusiveOr(with other: Self) {
         self = bitwiseExclusiveOr(with: other)
     }
