@@ -93,12 +93,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - Addable
 
-    // #documentation(SDGCornerstone.Addable.+=)
-    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to add.
     public static func += (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
 
         // _a_  +  _c_, b ≠ 0, d ≠ 0

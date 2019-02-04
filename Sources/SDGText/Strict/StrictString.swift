@@ -91,12 +91,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Addable
 
-    // #documentation(SDGCornerstone.Addable.+=)
-    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to add.
     @inlinable public static func += (precedingValue: inout StrictString, followingValue: StrictString) {
         precedingValue.append(contentsOf: followingValue)
     }
