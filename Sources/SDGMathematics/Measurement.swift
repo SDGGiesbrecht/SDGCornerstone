@@ -28,7 +28,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // MARK: - Scalar Type
 
-    // @documentation(SDGCornerstone.Measurement.Scalar)
     /// The numeric type used to express the value in any given unit.
     associatedtype Scalar : RationalArithmetic
 
@@ -49,13 +48,11 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // MARK: - Initialization
 
-    // @documentation(SDGCornerstone.Measurement.init())
     /// Creates an empty (zero) measurement.
     init()
 
     // MARK: - Operations
 
-    // @documentation(SDGCornerstone.Measurement.×)
     /// Returns the result of multipling the measurement by the scalar.
     ///
     /// - Parameters:
@@ -63,7 +60,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: The scalar.
     static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
-    // @documentation(SDGCornerstone.Measurement.×=)
     /// Modifies the measurement by multiplication with a scalar.
     ///
     /// - Parameters:
@@ -71,7 +67,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: The scalar.
     static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
-    // @documentation(SDGCornerstone.Measurement.÷(_:scalar:))
     /// Returns the (rational) quotient of a measurement divided by a scalar.
     ///
     /// - Parameters:
@@ -79,7 +74,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: The scalar.
     static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
-    // @documentation(SDGCornerstone.Measurement.÷)
     /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -87,7 +81,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - followingValue: The divisor.
     static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
 
-    // @documentation(SDGCornerstone.Measurement.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
@@ -97,7 +90,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // A MEAUSUREMENT IS NOT AN INTEGER WITHOUT AN ARBITRARY SELECTION OF A UNIT, SO *EUCLIDEAN* DIVISON BY A SCALAR IS MEANINGLESS
 
-    // @documentation(SDGCornerstone.Measurement.dividedAccordingToEuclid(by:))
     /// Returns the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -106,7 +98,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - divisor: The divisor.
     func dividedAccordingToEuclid(by divisor: Self) -> Scalar
 
-    // @documentation(SDGCornerstone.Measurement.mod(_:))
     /// Returns the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -115,7 +106,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     func mod(_ divisor: Self) -> Self
 
-    // @documentation(SDGCornerstone.Measurement.formRemainder(mod:))
     /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -124,7 +114,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     mutating func formRemainder(mod divisor: Self)
 
-    // @documentation(SDGCornerstone.Measurement.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
     ///
     /// - Parameters:
@@ -139,7 +128,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - b: Another value.
     static func gcd(_ a: Self, _ b: Self) -> Self
 
-    // @documentation(SDGCornerstone.Measurement.formGreatestCommonDivisor(with:))
     /// Sets `self` to the greatest common divisor of `self` and `other`.
     ///
     /// - Parameters:
@@ -154,7 +142,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - b: Another value.
     static func lcm(_ a: Self, _ b: Self) -> Self
 
-    // @documentation(SDGCornerstone.Measurement.formLeastCommonMultiple(with:))
     /// Sets `self` to the least common multiple of `self` and `other`.
     ///
     /// - Parameters:
@@ -166,7 +153,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     /// A rule for rounding.
     typealias RoundingRule = WholeArithmetic.RoundingRule
 
-    // @documentation(SDGCornerstone.Measurement.round(_:toMultipleOf:))
     /// Rounds the value to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -174,7 +160,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - factor: The factor to round to a multiple of.
     mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self)
 
-    // @documentation(SDGCornerstone.Measurement.rounded(_:toMultipleOf:))
     /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -185,170 +170,72 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
 extension Measurement {
 
-    // #documentation(SDGCornerstone.Measurement.init())
-    /// Creates an empty (zero) measurement.
     @inlinable public init() {
         self.init(rawValue: 0)
     }
 
-    // #documentation(SDGCornerstone.Measurement.×)
-    /// Returns the result of multipling the measurement by the scalar.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The measurement.
-    ///     - followingValue: The scalar.
     @inlinable public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
-    // #documentation(SDGCornerstone.Measurement.×)
-    /// Returns the result of multipling the measurement by the scalar.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The measurement.
-    ///     - followingValue: The scalar.
     @inlinable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
         return followingValue × precedingValue
     }
 
-    // #documentation(SDGCornerstone.Measurement.×=)
-    /// Modifies the measurement by multiplication with a scalar.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The measurement to modify.
-    ///     - followingValue: The scalar.
     @inlinable public static func ×= (precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.rawValue ×= followingValue
     }
 
-    // #documentation(SDGCornerstone.Measurement.÷(_:scalar:))
-    /// Returns the (rational) quotient of a measurement divided by a scalar.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The measurement.
-    ///     - followingValue: The scalar.
     @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
 
-    // #documentation(SDGCornerstone.Measurement.÷)
-    /// Returns the (rational) scalar quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
     @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar {
         return precedingValue.rawValue ÷ followingValue.rawValue
     }
 
-    // #documentation(SDGCornerstone.Measurement.÷=)
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The measurement to modify.
-    ///     - followingValue: The scalar divisor.
     @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.rawValue ÷= followingValue
     }
 
     // A MEAUSUREMENT IS NOT AN INTEGER WITHOUT AN ARBITRARY SELECTION OF A UNIT, SO *EUCLIDEAN* DIVISON BY A SCALAR IS MEANINGLESS
 
-    // #documentation(SDGCornerstone.Measurement.dividedAccordingToEuclid(by:))
-    /// Returns the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     @inlinable public func dividedAccordingToEuclid(by divisor: Self) -> Scalar {
         return rawValue.dividedAccordingToEuclid(by: divisor.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Measurement.mod(_:))
-    /// Returns the Euclidean remainder of `self` ÷ `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
-    ///
-    /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     @inlinable public func mod(_ divisor: Self) -> Self {
         return nonmutatingVariant(of: { $0.formRemainder(mod: $1) }, on: self, with: divisor)
     }
 
-    // #documentation(SDGCornerstone.Measurement.formRemainder(mod:))
-    /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
-    ///
-    /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     @inlinable public mutating func formRemainder(mod divisor: Self) {
         rawValue.formRemainder(mod: divisor.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Measurement.isDivisible(by:))
-    /// Returns `true` if `self` is evenly divisible by `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor to check.
     @inlinable public func isDivisible(by divisor: Self) -> Bool {
         return rawValue.isDivisible(by: divisor.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Measurement.gcd(_:_:))
-    /// Returns the greatest common divisor of `a` and `b`.
-    ///
-    /// - Parameters:
-    ///     - a: A value.
-    ///     - b: Another value.
     @inlinable public static func gcd(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formGreatestCommonDivisor(with: $1) }, on: a, with: b)
     }
 
-    // #documentation(SDGCornerstone.Measurement.formGreatestCommonDivisor(with:))
-    /// Sets `self` to the greatest common divisor of `self` and `other`.
-    ///
-    /// - Parameters:
-    ///     - other: Another value.
     @inlinable public mutating func formGreatestCommonDivisor(with other: Self) {
         rawValue.formGreatestCommonDivisor(with: other.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Measurement.lcm(_:_:))
-    /// Returns the least common multiple of `a` and `b`.
-    ///
-    /// - Parameters:
-    ///     - a: A value.
-    ///     - b: Another value.
     @inlinable public static func lcm(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formLeastCommonMultiple(with: $1) }, on: a, with: b)
     }
 
-    // #documentation(SDGCornerstone.Measurement.formLeastCommonMultiple(with:))
-    /// Sets `self` to the least common multiple of `self` and `other`.
-    ///
-    /// - Parameters:
-    ///     - other: Another value.
     @inlinable public mutating func formLeastCommonMultiple(with other: Self) {
         rawValue.formLeastCommonMultiple(with: other.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Measurement.round(_:toMultipleOf:))
-    /// Rounds the value to a multiple of `factor` using the specified rounding rule.
-    ///
-    /// - Parameters:
-    ///     - rule: The rounding rule follow.
-    ///     - factor: The factor to round to a multiple of.
     @inlinable public mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self) {
         rawValue.round(rule, toMultipleOf: factor.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Measurement.rounded(_:toMultipleOf:))
-    /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
-    ///
-    /// - Parameters:
-    ///     - rule: The rounding rule follow.
-    ///     - factor: The factor to round to a multiple of.
     @inlinable public func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self {
         return nonmutatingVariant(of: { $0.round($1, toMultipleOf: $2) }, on: self, with: (rule, factor))
     }
@@ -405,30 +292,16 @@ extension Measurement {
 
     // MARK: - Addable
 
-    // #documentation(SDGCornerstone.Addable(Summation).+)
-    /// Returns the sum of the two values.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
         return Self(rawValue: precedingValue.rawValue + followingValue.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Addable(Summation).+=)
-    /// Adds the following value to the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to add.
     @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
         precedingValue.rawValue += followingValue.rawValue
     }
 
     // MARK: - AdditiveArithmetic
 
-    // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
-    /// The additive identity (origin).
     @inlinable public static var additiveIdentity: Self {
         return Self(rawValue: 0)
     }
@@ -447,8 +320,6 @@ extension Measurement {
 
     // MARK: - Hashable
 
-    // #documentation(SDGCornerstone.Hashable.hash(into:))
-    /// Hashes the essential components of this value by feeding them into the given hasher.
     @inlinable public func hash(into hasher: inout Hasher) {
         hasher.combine(rawValue)
     }
