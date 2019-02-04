@@ -23,7 +23,6 @@ import SDGControlFlow
 /// - `init(_ int: IntMax)`
 public protocol IntegralArithmetic : Negatable, SignedNumeric, WholeArithmetic {
 
-    // @documentation(SDGCornerstone.IntegralArithmetic.init(int:))
     /// Creates an instance equal to `int`.
     ///
     /// - Properties:

@@ -140,11 +140,6 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - IntegralArithmetic
 
-    // #documentation(SDGCornerstone.IntegralArithmetic.init(int:))
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of `IntMax`.
     public init(_ int: IntMax) {
         let magnitude: UIntMax
         if int == IntMax.min { // |int| would overflow.

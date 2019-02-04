@@ -166,11 +166,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - IntegralArithmetic
 
-    // #documentation(SDGCornerstone.IntegralArithmetic.init(int:))
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of `IntMax`.
     public init(_ int: IntMax) {
         self.init(Integer(int))
     }

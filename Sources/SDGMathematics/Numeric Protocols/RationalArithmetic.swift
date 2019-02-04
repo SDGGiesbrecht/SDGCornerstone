@@ -23,7 +23,6 @@ import SDGControlFlow
 /// - `static func ÷= (precedingValue: inout Self, followingValue: Self)`
 public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmetic {
 
-    // @documentation(SDGCornerstone.IntegralArithmetic.init(floatingPoint:))
     /// Creates an instance as close as possible to `floatingPoint`.
     ///
     /// - Properties:
