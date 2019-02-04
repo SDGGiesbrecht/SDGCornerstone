@@ -549,8 +549,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - TransparentWrapper
 
-    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
-    /// The wrapped instance.
     public var wrappedInstance: Any {
         return definition
     }

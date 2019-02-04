@@ -143,8 +143,6 @@ extension StrictString {
 
         // MARK: - TransparentWrapper
 
-        // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
-        /// The wrapped instance.
         public var wrappedInstance: Any {
             return string
         }

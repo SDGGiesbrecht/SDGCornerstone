@@ -192,8 +192,6 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - TransparentWrapper
 
-    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
-    /// The wrapped instance.
     @inlinable public var wrappedInstance: Any {
         return propertyListObject as Any
     }
