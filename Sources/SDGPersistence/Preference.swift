@@ -180,12 +180,6 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     @inlinable public static func == (precedingValue: Preference, followingValue: Preference) -> Bool {
         return precedingValue.propertyListObject == followingValue.propertyListObject
     }

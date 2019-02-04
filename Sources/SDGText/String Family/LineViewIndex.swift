@@ -103,12 +103,6 @@ public struct LineViewIndex : Comparable, Equatable {
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     @inlinable public static func == (precedingValue: LineViewIndex, followingValue: LineViewIndex) -> Bool {
         return precedingValue.start == followingValue.start
     }

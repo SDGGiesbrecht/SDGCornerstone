@@ -237,12 +237,6 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     @inlinable public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting) -> Bool {
         return precedingValue.orderOfPrecedence.elementsEqual(followingValue.orderOfPrecedence) { (leftGroup: [String], rightGroup: [String]) -> Bool in
             return Set(leftGroup) == Set(rightGroup)

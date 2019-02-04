@@ -76,7 +76,6 @@ public protocol FiniteSet : Collection, ComparableSet {
     static func ⊋ <S : FiniteSet>(precedingValue: S, followingValue: Self) -> Bool where S.Element == Self.Element
 
     // @documentation(SDGCornerstone.FiniteSet.==)
-    // #documentation(SDGCornerstone.Equatable.==)
     /// Returns `true` if the two values are equal.
     ///
     /// - Parameters:

@@ -501,12 +501,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     public static func == (precedingValue: CalendarDate, followingValue: CalendarDate) -> Bool {
         return precedingValue.intervalSinceEpoch == followingValue.intervalSinceEpoch
     }

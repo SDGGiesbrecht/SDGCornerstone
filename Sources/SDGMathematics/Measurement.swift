@@ -443,12 +443,6 @@ extension Measurement {
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     @inlinable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.rawValue == followingValue.rawValue
     }
