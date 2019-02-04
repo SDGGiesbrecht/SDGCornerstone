@@ -118,9 +118,6 @@ extension Int : IntFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 
     // MARK: - Subtractible
@@ -133,35 +130,23 @@ extension Int64 : IntXFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 extension Int32 : IntXFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 extension Int16 : IntXFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 extension Int8 : IntXFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }

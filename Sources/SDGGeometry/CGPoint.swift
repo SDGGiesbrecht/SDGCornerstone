@@ -20,9 +20,6 @@ extension CGPoint : TwoDimensionalPoint {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = CGVector
 
     // MARK: - TwoDimensionalPoint

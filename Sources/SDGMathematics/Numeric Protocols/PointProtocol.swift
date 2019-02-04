@@ -25,7 +25,6 @@ import SDGControlFlow
 /// - `static func − (precedingValue: Self, followingValue: Self) -> Vector`
 public protocol PointProtocol : Decodable, Encodable, Equatable {
 
-    // @documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     associatedtype Vector : Negatable
 

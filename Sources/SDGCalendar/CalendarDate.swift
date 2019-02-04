@@ -507,8 +507,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = CalendarInterval<FloatMax>
 
     public static func += (precedingValue: inout CalendarDate, followingValue: CalendarInterval<FloatMax>) {

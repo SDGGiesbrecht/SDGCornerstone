@@ -200,9 +200,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = RationalNumber
 
     // MARK: - RationalArithmetic

@@ -129,44 +129,29 @@ extension UInt : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 extension UInt64 : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 extension UInt32 : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 extension UInt16 : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }
 extension UInt8 : UIntFamily {
 
     // MARK: - PointProtocol
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Stride
 }

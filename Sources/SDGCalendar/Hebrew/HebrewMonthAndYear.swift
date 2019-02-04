@@ -92,8 +92,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Int
 
     public static func += (precedingValue: inout HebrewMonthAndYear, followingValue: Int) {
