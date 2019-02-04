@@ -232,7 +232,6 @@ extension CGFloat : FloatFamily {
 
     // MARK: - CustomDebugStringConvertible
 
-    /// A textual representation of this instance, suitable for debugging.
     @inlinable public var debugDescription: String {
         return NativeType(self).debugDescription
     }
@@ -277,10 +276,6 @@ extension CGFloat : FloatFamily {
 
     // MARK: - LosslessStringConvertible
 
-    /// Instantiates an instance of the conforming type from a string representation.
-    ///
-    /// - Parameters:
-    ///     - description: The string representation.
     @inlinable public init?(_ description: String) {
         if let result = NativeType(description) {
             self = CGFloat(result)
