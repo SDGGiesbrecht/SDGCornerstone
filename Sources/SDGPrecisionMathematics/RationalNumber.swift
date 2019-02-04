@@ -122,12 +122,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     public static func < (precedingValue: RationalNumber, followingValue: RationalNumber) -> Bool {
         //    _a_   <?     _c_ , b ≠ 0, d ≠ 0
         //     b            d

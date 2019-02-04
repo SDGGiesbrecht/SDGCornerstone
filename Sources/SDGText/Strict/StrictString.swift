@@ -153,12 +153,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: StrictString, followingValue: StrictString) -> Bool {
         return precedingValue.string < followingValue.string
     }

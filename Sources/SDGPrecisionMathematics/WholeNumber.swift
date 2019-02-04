@@ -112,12 +112,6 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     public static func < (precedingValue: WholeNumber, followingValue: WholeNumber) -> Bool {
 
         if precedingValue.digits.count ≠ followingValue.digits.count {

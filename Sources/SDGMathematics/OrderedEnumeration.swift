@@ -209,12 +209,6 @@ extension OrderedEnumeration {
     @inlinable internal func isLessThan(_ other: Self) -> Bool {
         return Self.index(of: self) < Self.index(of: other)
     }
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.isLessThan(followingValue)
     }
@@ -225,12 +219,6 @@ extension OrderedEnumeration where Self : Strideable {
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.isLessThan(followingValue)
     }

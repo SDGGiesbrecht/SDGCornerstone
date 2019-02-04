@@ -69,13 +69,7 @@ extension Bool : Comparable {
     }
 
     // MARK: - Comparable
-
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
+    
     @inlinable public static func < (precedingValue: Bool, followingValue: Bool) -> Bool {
         if precedingValue == false ∧ followingValue == true {
             return true

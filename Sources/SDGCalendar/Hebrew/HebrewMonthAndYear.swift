@@ -42,12 +42,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     public static func < (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Bool {
         return (precedingValue.year, precedingValue.month) < (followingValue.year, followingValue.month)
     }

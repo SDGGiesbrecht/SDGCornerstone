@@ -449,12 +449,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     public static func < (precedingValue: CalendarDate, followingValue: CalendarDate) -> Bool {
         return precedingValue.intervalSinceEpoch < followingValue.intervalSinceEpoch
     }
