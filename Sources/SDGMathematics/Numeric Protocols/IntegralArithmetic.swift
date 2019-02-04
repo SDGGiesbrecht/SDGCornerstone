@@ -33,7 +33,6 @@ public protocol IntegralArithmetic : Negatable, SignedNumeric, WholeArithmetic {
 
 extension IntegralArithmetic {
 
-    // @documentation(SDGCornerstone.IntegralArithmetic.init(intFamily:))
     /// Creates an instance equal to `int`.
     ///
     /// - Properties:

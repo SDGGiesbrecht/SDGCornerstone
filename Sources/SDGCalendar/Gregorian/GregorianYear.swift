@@ -178,16 +178,11 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Int
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     public static func += (precedingValue: inout GregorianYear, followingValue: Int) {
         var result = precedingValue.rawValue + followingValue
 
@@ -203,12 +198,6 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
         precedingValue = GregorianYear(result)
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     public static func − (precedingValue: GregorianYear, followingValue: GregorianYear) -> Int {
         var result = precedingValue.rawValue − followingValue.rawValue
 

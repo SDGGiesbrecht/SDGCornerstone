@@ -84,23 +84,11 @@ extension TwoDimensionalPoint {
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue.x += followingValue.Δx
         precedingValue.y += followingValue.Δy
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         let Δx = precedingValue.x − followingValue.x
         let Δy = precedingValue.y − followingValue.y

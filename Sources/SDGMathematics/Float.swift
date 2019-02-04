@@ -213,6 +213,7 @@ extension Double : FloatFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
@@ -286,6 +287,7 @@ extension CGFloat : FloatFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
@@ -357,6 +359,7 @@ extension Float80 : Decodable, Encodable, FloatFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
@@ -413,6 +416,7 @@ extension Float : FloatFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride

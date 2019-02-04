@@ -24,11 +24,6 @@ extension IntFamily {
 
     // MARK: - IntegralArithmetic
 
-    // #documentation(SDGCornerstone.IntegralArithmetic.init(intFamily:))
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of a member of the `Int` family.
     @inlinable public init<I : IntFamily>(_ int: I) {
         self.init(asBinaryIntegerWithInt: int)
     }
@@ -80,7 +75,6 @@ extension IntFamily {
         let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
         // Wrap to previous if negative (ignoring when exactly even)
 
-        // func divideAccordingToEuclid
         self /= divisor // @exempt(from: unicode)
 
         if needsToWrapToPrevious {
@@ -101,32 +95,14 @@ extension IntXFamily {
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.+)
-    /// Returns the point arrived at by starting at the preceding point and moving according to the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The starting point.
-    ///     - followingValue: The vector to add.
     @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
         return precedingValue.advanced(by: followingValue)
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue = precedingValue.advanced(by: followingValue)
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return followingValue.distance(to: precedingValue)
     }
@@ -142,6 +118,7 @@ extension Int : IntFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
@@ -156,6 +133,7 @@ extension Int64 : IntXFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
@@ -164,6 +142,7 @@ extension Int32 : IntXFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
@@ -172,6 +151,7 @@ extension Int16 : IntXFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride
@@ -180,6 +160,7 @@ extension Int8 : IntXFamily {
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Stride

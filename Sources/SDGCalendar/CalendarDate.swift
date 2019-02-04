@@ -511,12 +511,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
     /// The type to be used as a vector.
     public typealias Vector = CalendarInterval<FloatMax>
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     public static func += (precedingValue: inout CalendarDate, followingValue: CalendarInterval<FloatMax>) {
         if let relative = precedingValue.definition as? RelativeDate {
             precedingValue.definition = RelativeDate(relative.intervalSince + followingValue, after: relative.baseDate)
@@ -525,12 +519,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         }
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     public static func − (precedingValue: CalendarDate, followingValue: CalendarDate) -> CalendarInterval<FloatMax> {
         return precedingValue.intervalSinceEpoch − followingValue.intervalSinceEpoch
     }

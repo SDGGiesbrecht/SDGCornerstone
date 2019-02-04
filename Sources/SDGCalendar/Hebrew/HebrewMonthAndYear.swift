@@ -96,12 +96,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
     /// The type to be used as a vector.
     public typealias Vector = Int
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     public static func += (precedingValue: inout HebrewMonthAndYear, followingValue: Int) {
         if followingValue.isNegative {
             for _ in 1 ... |followingValue| {
@@ -114,12 +108,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
         }
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     public static func − (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Int {
         var distance = 0
         var point = precedingValue

@@ -160,16 +160,11 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - PointProtocol
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.PointProtocol.Vector)
     /// The type to be used as a vector.
     public typealias Vector = Integer
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     public static func += (precedingValue: inout WholeNumber, followingValue: Vector) {
         if followingValue.isNegative {
             precedingValue −= followingValue.wholeMagnitude
@@ -178,12 +173,6 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         }
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     public static func − (precedingValue: WholeNumber, followingValue: WholeNumber) -> Vector {
         return Integer(precedingValue) − Integer(followingValue)
     }
