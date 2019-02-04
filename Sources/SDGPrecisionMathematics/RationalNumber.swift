@@ -229,21 +229,10 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - WholeArithmetic
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
-    /// Creates an instance equal to `uInt`.
-    ///
-    /// - Parameters:
-    ///     - uInt: An instance of `UIntMax`.
     public init(_ uInt: UIntMax) {
         self.init(Integer(uInt))
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The coefficient by which to multiply.
     public static func ×= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
         var irregular = precedingValue.definition
         irregular.numerator ×= followingValue.numerator
@@ -251,13 +240,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
         precedingValue.definition = irregular
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
-    /// Sets `self` to the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     public mutating func divideAccordingToEuclid(by divisor: RationalNumber) {
         let rational = self ÷ divisor
         let euclidean = rational.numerator.dividedAccordingToEuclid(by: rational.denominator)
@@ -266,12 +248,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     private static let randomPrecision: Integer = Integer(UIntMax.max) + 1
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
     public static func random<R>(in range: ClosedRange<RationalNumber>, using generator: inout R) -> RationalNumber where R : RandomNumberGenerator {
         let difference = range.upperBound − range.lowerBound
         let denominator = difference.denominator

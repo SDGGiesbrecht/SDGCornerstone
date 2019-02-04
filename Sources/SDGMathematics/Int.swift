@@ -61,42 +61,18 @@ extension IntFamily {
 
     // MARK: - WholeArithmetic
 
-    // @documentation(SDGCornerstone.WholeArithmetic.init(uIntFamily:))
-    /// Creates an instance equal to `uInt`.
-    ///
-    /// - Properties:
-    ///     - uInt: An instance of a type conforming to `UIntFamily`.
     @inlinable public init<U : UIntFamily>(_ uInt: U) {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×)
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The coefficient by which to multiply.
     @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
-    /// Sets `self` to the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
 
         let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
@@ -112,14 +88,10 @@ extension IntFamily {
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isEven)
-    /// Returns true if `self` is an even integer.
     @inlinable public var isEven: Bool {
         return ¬isOdd
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
-    /// Returns true if `self` is an odd integer.
     @inlinable public var isOdd: Bool {
         return self & 1 == 1
     }

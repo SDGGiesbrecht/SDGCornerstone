@@ -100,87 +100,38 @@ extension UIntFamily {
 
     // MARK: - WholeArithmetic
 
-    // @documentation(SDGCornerstone.WholeArithmetic.init(uIntFamily:))
-    /// Creates an instance equal to `uInt`.
-    ///
-    /// - Properties:
-    ///     - uInt: An instance of a type conforming to `UIntFamily`.
     @inlinable public init<U : UIntFamily>(_ uInt: U) {
         self.init(asBinaryIntegerWithUInt: uInt)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×)
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The coefficient by which to multiply.
     @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:))
-    /// Returns the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     @inlinable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
         return self / divisor // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
-    /// Sets `self` to the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
         self /= divisor // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.mod(_:))
-    /// Returns the Euclidean remainder of `self` ÷ `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
-    ///
-    /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     @inlinable public func mod(_ divisor: Self) -> Self {
         return self % divisor
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.formRemainder(mod:))
-    /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
-    ///
-    /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     @inlinable public mutating func formRemainder(mod divisor: Self) {
         self %= divisor
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isEven)
-    /// Returns true if `self` is an even integer.
     @inlinable public var isEven: Bool {
         return ¬isOdd
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
-    /// Returns true if `self` is an odd integer.
     @inlinable public var isOdd: Bool {
         return self.bitwiseAnd(with: 1) == 1
     }

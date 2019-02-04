@@ -29,7 +29,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
     // MARK: - Initialization
 
-    // @documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
     /// Creates an instance equal to `uInt`.
     ///
     /// - Parameters:
@@ -41,7 +40,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     // #workaround(Swift 4.2.1, Duplicates Subtractable, but works around disambiguation bugs.)
     static func − (precedingValue: Self, followingValue: Self) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.×)
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -49,7 +47,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: Another value.
     static func × (precedingValue: Self, followingValue: Self) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -57,7 +54,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: The coefficient by which to multiply.
     static func ×= (precedingValue: inout Self, followingValue: Self)
 
-    // @documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
     /// Sets `self` to the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -66,7 +62,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - divisor: The divisor.
     mutating func divideAccordingToEuclid(by divisor: Self)
 
-    // @documentation(SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:))
     /// Returns the integral quotient of `self` divided by `divisor`.
     ///
     /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
@@ -75,7 +70,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - divisor: The divisor.
     func dividedAccordingToEuclid(by divisor: Self) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.mod(_:))
     /// Returns the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -84,7 +78,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     func mod(_ divisor: Self) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.formRemainder(mod:))
     /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
     ///
     /// - Parameters:
@@ -93,7 +86,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     mutating func formRemainder(mod divisor: Self)
 
-    // @documentation(SDGCornerstone.WholeArithmetic.isDivisible(by:))
     /// Returns `true` if `self` is evenly divisible by `divisor`.
     ///
     /// - Parameters:
@@ -108,7 +100,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - b: Another value.
     static func gcd(_ a: Self, _ b: Self) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:))
     /// Sets `self` to the greatest common divisor of `self` and `other`.
     ///
     /// - Parameters:
@@ -123,14 +114,12 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - b: Another value.
     static func lcm(_ a: Self, _ b: Self) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:))
     /// Sets `self` to the least common multiple of `self` and `other`.
     ///
     /// - Parameters:
     ///     - other: Another value.
     mutating func formLeastCommonMultiple(with other: Self)
 
-    // @documentation(SDGCornerstone.WholeArithmetic.↑)
     /// Returns the result of the preceding value to the power of the following value.
     ///
     /// - Precondition:
@@ -145,7 +134,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - followingValue: The exponent.
     static func ↑ (precedingValue: Self, followingValue: Self) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.↑=)
     /// Modifies the preceding value by exponentiation with the following value.
     ///
     /// - Precondition:
@@ -162,23 +150,18 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
     // MARK: - Classification
 
-    // @documentation(SDGCornerstone.WholeArithmetic.isNatural)
     /// Returns `true` if `self` is a natural number.
     var isNatural: Bool { get }
 
-    // @documentation(SDGCornerstone.WholeArithmetic.isWhole)
     /// Returns `true` if `self` is a whole number.
     var isWhole: Bool { get }
 
-    // @documentation(SDGCornerstone.WholeArithmetic.isIntegral)
     /// Returns `true` if `self` is an integer.
     var isIntegral: Bool { get }
 
-    // @documentation(SDGCornerstone.WholeArithmetic.isEven)
     /// Returns true if `self` is an even integer.
     var isEven: Bool { get }
 
-    // @documentation(SDGCornerstone.WholeArithmetic.isOdd)
     /// Returns true if `self` is an odd integer.
     var isOdd: Bool { get }
 
@@ -187,21 +170,18 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     /// A rule for rounding.
     typealias RoundingRule = FloatingPointRoundingRule
 
-    // @documentation(SDGCornerstone.WholeArithmetic.round(_:))
     /// Rounds the value to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     mutating func round(_ rule: RoundingRule)
 
-    // @documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
     /// Returns the value rounded to an integral value using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     func rounded(_ rule: RoundingRule) -> Self
 
-    // @documentation(SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:))
     /// Rounds the value to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -209,7 +189,6 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - factor: The factor to round to a multiple of.
     mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self)
 
-    // @documentation(SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:))
     /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
@@ -235,82 +214,34 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
 extension WholeArithmetic {
 
-    // @documentation(SDGCornerstone.WholeArithmetic.init(uIntFamily:))
-    /// Creates an instance equal to `uInt`.
-    ///
-    /// - Parameters:
-    ///     - uInt: An instance of a type conforming to `UIntFamily`.
     @inlinable public init<U : UIntFamily>(_ uInt: U) {
         self.init(UIntMax(uInt))
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×)
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.dividedAccordingToEuclid(by:))
-    /// Returns the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     @inlinable public func dividedAccordingToEuclid(by divisor: Self) -> Self {
         return nonmutatingVariant(of: { $0.divideAccordingToEuclid(by: $1) }, on: self, with: divisor)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.mod(_:))
-    /// Returns the Euclidean remainder of `self` ÷ `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
-    ///
-    /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     @inlinable public func mod(_ divisor: Self) -> Self {
         return nonmutatingVariant(of: { $0.formRemainder(mod: $1) }, on: self, with: divisor)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.formRemainder(mod:))
-    /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
-    ///
-    /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     @inlinable public mutating func formRemainder(mod divisor: Self) {
         self −= dividedAccordingToEuclid(by: divisor) × divisor
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isDivisible(by:))
-    /// Returns `true` if `self` is evenly divisible by `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor to check.
     @inlinable public func isDivisible(by divisor: Self) -> Bool {
         return mod(divisor) == 0
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.gcd(_:_:))
-    /// Returns the greatest common divisor of `a` and `b`.
-    ///
-    /// - Parameters:
-    ///     - a: A value.
-    ///     - b: Another value.
     @inlinable public static func gcd(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formGreatestCommonDivisor(with: $1) }, on: a, with: b)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.formGreatestCommonDivisor(with:))
-    /// Sets `self` to the greatest common divisor of `self` and `other`.
-    ///
-    /// - Parameters:
-    ///     - other: Another value.
     @inlinable public mutating func formGreatestCommonDivisor(with other: Self) {
         if self.isNegative ∨ other.isNegative {
             self.formAbsoluteValue()
@@ -322,38 +253,14 @@ extension WholeArithmetic {
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.lcm(_:_:))
-    /// Returns the least common multiple of `a` and `b`.
-    ///
-    /// - Parameters:
-    ///     - a: A value.
-    ///     - b: Another value.
     @inlinable public static func lcm(_ a: Self, _ b: Self) -> Self {
         return nonmutatingVariant(of: { $0.formLeastCommonMultiple(with: $1) }, on: a, with: b)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.formLeastCommonMultiple(with:))
-    /// Sets `self` to the least common multiple of `self` and `other`.
-    ///
-    /// - Parameters:
-    ///     - other: Another value.
     @inlinable public mutating func formLeastCommonMultiple(with other: Self) {
         self ×= other.dividedAccordingToEuclid(by: Self.gcd(self, other))
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.↑)
-    /// Returns the result of the preceding value to the power of the following value.
-    ///
-    /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
-    ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `precedingValue` must be positive, or
-    ///     - `followingValue` must be an integer.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The base.
-    ///     - followingValue: The exponent.
     @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ↑=, on: precedingValue, with: followingValue)
     }
@@ -373,42 +280,26 @@ extension WholeArithmetic {
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isNatural)
-    /// Returns `true` if `self` is a natural number.
     @inlinable public var isNatural: Bool {
         return isWhole ∧ self ≠ 0
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isWhole)
-    /// Returns `true` if `self` is a whole number.
     @inlinable public var isWhole: Bool {
         return isIntegral ∧ isNonNegative
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isIntegral)
-    /// Returns `true` if `self` is an integer.
     @inlinable public var isIntegral: Bool {
         return isDivisible(by: 1)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isEven)
-    /// Returns true if `self` is an even integer.
     @inlinable public var isEven: Bool {
         return isDivisible(by: 2)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.isOdd)
-    /// Returns true if `self` is an odd integer.
     @inlinable public var isOdd: Bool {
         return isIntegral ∧ ¬isEven
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.round(_:toMultipleOf:))
-    /// Rounds the value to a multiple of `factor` using the specified rounding rule.
-    ///
-    /// - Parameters:
-    ///     - rule: The rounding rule follow.
-    ///     - factor: The factor to round to a multiple of.
     @inlinable public mutating func round(_ rule: RoundingRule, toMultipleOf factor: Self) {
         switch rule {
         case .down:
@@ -462,39 +353,18 @@ extension WholeArithmetic {
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.rounded(_:toMultipleOf:))
-    /// Returns the value rounded to a multiple of `factor` using the specified rounding rule.
-    ///
-    /// - Parameters:
-    ///     - rule: The rounding rule follow.
-    ///     - factor: The factor to round to a multiple of.
     @inlinable public func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self {
         return nonmutatingVariant(of: { $0.round($1, toMultipleOf: $2) }, on: self, with: (rule, factor))
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.round(_:))
-    /// Rounds the value to an integral value using the specified rounding rule.
-    ///
-    /// - Parameters:
-    ///     - rule: The rounding rule follow.
     @inlinable public mutating func round(_ rule: RoundingRule) {
         round(rule, toMultipleOf: 1)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
-    /// Returns the value rounded to an integral value using the specified rounding rule.
-    ///
-    /// - Parameters:
-    ///     - rule: The rounding rule follow.
     @inlinable public func rounded(_ rule: RoundingRule) -> Self {
         return nonmutatingVariant(of: { $0.round($1) }, on: self, with: rule)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
     @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
         var generator = SystemRandomNumberGenerator()
         return random(in: range, using: &generator)
@@ -557,11 +427,6 @@ extension BinaryFloatingPoint where Self.RawSignificand : FixedWidthInteger {
 extension WholeArithmetic where Self : BinaryFloatingPoint, Self.RawSignificand : FixedWidthInteger {
     // Disambiguate
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
     @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
         return _random(in: range)
     }
@@ -575,11 +440,6 @@ extension FixedWidthInteger {
 extension WholeArithmetic where Self : FixedWidthInteger {
     // Disambiguate
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
     @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
         return _random(in: range)
     }

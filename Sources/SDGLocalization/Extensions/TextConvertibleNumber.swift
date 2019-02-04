@@ -22,7 +22,6 @@ public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithme
 
     // MARK: - Initialization
 
-    // @documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
     /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
     ///
     /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
@@ -194,18 +193,6 @@ extension TextConvertibleNumber {
         }))
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
-    /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
-    ///
-    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
-    ///
-    /// - Parameters:
-    ///     - representation: The string to interpret.
-    ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
-    ///     - radixCharacters: The set of characters that can mark the radix position.
-    ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
     @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
@@ -259,18 +246,6 @@ extension TextConvertibleNumber {
 
 extension TextConvertibleNumber where Self : IntegralArithmetic {
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
-    /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
-    ///
-    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
-    ///
-    /// - Parameters:
-    ///     - representation: The string to interpret.
-    ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
-    ///     - radixCharacters: The set of characters that can mark the radix position.
-    ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
     @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
 
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
@@ -296,18 +271,6 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
 
 extension TextConvertibleNumber where Self : RationalArithmetic {
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(fromRepresentation:usingDigits:radixCharacters:))
-    /// Creates an instance by interpreting `representation` as a place value system using the provided digits and radix characters.
-    ///
-    /// - Precondition: `digits`, `radixCharacters` and `formattingSeparators` only contain scalars that are valid in NFKD (they should not be decomposable).
-    ///
-    /// - Parameters:
-    ///     - representation: The string to interpret.
-    ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
-    ///     - radixCharacters: The set of characters that can mark the radix position.
-    ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
     @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 

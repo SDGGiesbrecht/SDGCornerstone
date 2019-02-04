@@ -139,77 +139,27 @@ extension FloatFamily {
 
     // MARK: - WholeArithmetic
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×)
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
         return precedingValue * followingValue // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The coefficient by which to multiply.
     @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
         precedingValue *= followingValue // @exempt(from: unicode)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
-    /// Sets `self` to the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
         self ÷= divisor
         self.round(.down)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.↑)
-    /// Returns the result of the preceding value to the power of the following value.
-    ///
-    /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
-    ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `precedingValue` must be positive, or
-    ///     - `followingValue` must be an integer.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The base.
-    ///     - followingValue: The exponent.
     @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
         return Self._tgmath_pow(precedingValue, followingValue)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.↑=)
-    /// Modifies the preceding value by exponentiation with the following value.
-    ///
-    /// - Precondition:
-    ///   - If `Self` conforms to `IntegerProtocol`, `followingValue` must be non‐negative.
-    ///   - If `Self` conforms to `RationalNumberProtocol`, `followingValue` must be an integer.
-    ///   - If `Self` conforms to `RealNumberProtocol`, either
-    ///     - `precedingValue` must be positive, or
-    ///     - `followingValue` must be an integer.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The exponent.
     @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
         precedingValue = precedingValue ↑ followingValue
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.rounded(_:))
-    /// Returns the value rounded to an integral value using the specified rounding rule.
-    ///
-    /// - Parameters:
-    ///     - rule: The rounding rule follow.
     @inlinable public func rounded(_ rule: RoundingRule) -> Self {
         return roundedAsFloatingPoint(rule)
     }

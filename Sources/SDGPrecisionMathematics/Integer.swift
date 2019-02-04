@@ -198,21 +198,10 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - WholeArithmetic
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
-    /// Creates an instance equal to `uInt`.
-    ///
-    /// - Parameters:
-    ///     - uInt: An instance of `UIntMax`.
     public init(_ uInt: UIntMax) {
         self.init(WholeNumber(uInt))
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The coefficient by which to multiply.
     public static func ×= (precedingValue: inout Integer, followingValue: Integer) {
         precedingValue.wholeMagnitude ×= followingValue.wholeMagnitude
         if precedingValue.isNegative == followingValue.isNegative {
@@ -222,13 +211,6 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
-    /// Sets `self` to the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     public mutating func divideAccordingToEuclid(by divisor: Integer) {
 
         let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
@@ -244,12 +226,6 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
     public static func random<R>(in range: ClosedRange<Integer>, using generator: inout R) -> Integer where R : RandomNumberGenerator {
         if range.lowerBound.isWhole {
             let wholeRange: ClosedRange<WholeNumber> = range.lowerBound.wholeMagnitude ... range.upperBound.wholeMagnitude

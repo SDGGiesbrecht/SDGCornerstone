@@ -218,21 +218,10 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - WholeArithmetic
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
-    /// Creates an instance equal to `uInt`.
-    ///
-    /// - Parameters:
-    ///     - uInt: An instance of `UIntMax`.
     public init(_ uInt: UIntMax) {
         digits = [uInt]
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×)
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     public static func × (precedingValue: WholeNumber, followingValue: WholeNumber) -> WholeNumber {
 
         var product: WholeNumber = 0
@@ -257,12 +246,6 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         return product
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The coefficient by which to multiply.
     public static func ×= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
         precedingValue = precedingValue × followingValue
     }
@@ -300,34 +283,14 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         return (quotient, remainingDividend)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
-    /// Sets `self` to the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     public mutating func divideAccordingToEuclid(by divisor: WholeNumber) {
         self = quotientAndRemainder(for: divisor).quotient
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.formRemainder(mod:))
-    /// Sets `self` to the Euclidean remainder of `self` ÷ `divisor`.
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
-    ///
-    /// - Note: This is a true mathematical modulo operation. i.e. (−5) mod 3 = 1, *not* −2
     public mutating func formRemainder(mod divisor: WholeNumber) {
         self = quotientAndRemainder(for: divisor).remainder
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
     public static func random<R>(in range: ClosedRange<WholeNumber>, using generator: inout R) -> WholeNumber where R : RandomNumberGenerator {
         let rangeSize: WholeNumber = range.upperBound − range.lowerBound
 
