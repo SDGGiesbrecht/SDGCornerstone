@@ -183,8 +183,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - Negatable
 
-    // #documentation(SDGCornerstone.Negatable.negate())
-    /// Replaces this value with its additive inverse.
     public mutating func negate() {
         definition.numerator.negate()
     }

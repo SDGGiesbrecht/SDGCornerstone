@@ -455,17 +455,10 @@ extension Measurement {
 
     // MARK: - Negatable
 
-    // #documentation(SDGCornerstone.Negatable.−)
-    /// Returns the additive inverse of the operand.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to invert.
     @inlinable public static prefix func − (operand: Self) -> Self {
         return Self(rawValue: −operand.rawValue)
     }
 
-    // #documentation(SDGCornerstone.Negatable.negate())
-    /// Replaces this value with its additive inverse.
     @inlinable public mutating func negate() {
         rawValue.negate()
     }

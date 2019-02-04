@@ -42,11 +42,6 @@ extension FloatFamily {
 
     // MARK: - Negatable
 
-    // #documentation(SDGCornerstone.Negatable.−)
-    /// Returns the additive inverse of the operand.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to invert.
     @inlinable public static prefix func − (operand: Self) -> Self {
         return -operand // @exempt(from: unicode)
     }
