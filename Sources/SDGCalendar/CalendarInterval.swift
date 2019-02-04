@@ -22,10 +22,11 @@ private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutes
 
 @usableFromInline internal let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 
+private typealias Measurement = SDGMathematics.Measurement
 /// A time interval.
 ///
 /// The units are all defined as fractions or multiples of days. This makes them convenient for calendaring, but not for physics. (Seconds are not SI seconds and leap seconds do not exist.)
-public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodable, SDGMathematics.Measurement, TextualPlaygroundDisplay {
+public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodable, Measurement, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -266,21 +267,10 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
 
     // MARK: - Measurement
 
-    // #documentation(SDGCornerstone.Measurement.init(rawValue:))
-    /// Creates a measurement from a raw value in undefined but consistent units.
-    ///
-    /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
-    ///
-    /// - Parameters:
-    ///     - rawValue: The raw value.
     @inlinable public init(rawValue: Scalar) {
         inUnits = rawValue
     }
 
-    // #documentation(SDGCornerstone.Measurement.rawValue)
-    /// A raw value in undefined but consistent units.
-    ///
-    /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
     @inlinable public var rawValue: Scalar {
         get {
             return inUnits

@@ -34,7 +34,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // MARK: - Internal Values
 
-    // @documentation(SDGCornerstone.Measurement.init(rawValue:))
     /// Creates a measurement from a raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
@@ -43,7 +42,6 @@ public protocol Measurement : Negatable, NumericAdditiveArithmetic {
     ///     - rawValue: The raw value.
     init(rawValue: Scalar)
 
-    // @documentation(SDGCornerstone.Measurement.rawValue)
     /// A raw value in undefined but consistent units.
     ///
     /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).

@@ -137,21 +137,10 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
 
     // MARK: - Measurement
 
-    // #documentation(SDGCornerstone.Measurement.init(rawValue:))
-    /// Creates a measurement from a raw value in undefined but consistent units.
-    ///
-    /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
-    ///
-    /// - Parameters:
-    ///     - rawValue: The raw value.
     @inlinable public init(rawValue: Scalar) {
         inRadians = rawValue
     }
 
-    // #documentation(SDGCornerstone.Measurement.rawValue)
-    /// A raw value in undefined but consistent units.
-    ///
-    /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
     @inlinable public var rawValue: Scalar {
         get {
             return inRadians
