@@ -68,41 +68,18 @@ extension FloatFamily {
 
     // MARK: - RealArithmetic
 
-    // #documentation(SDGCornerstone.RealArithmetic.π)
-    /// An instance of π.
     @inlinable public static var π: Self {
         return pi
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.√)
-    /// Returns the square root of `operand`.
-    ///
-    /// - Parameters:
-    ///     - operand: The radicand.
     @inlinable public static prefix func √ (operand: Self) -> Self {
         return operand.squareRoot()
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.√=)
-    /// Sets `operand` to its square root.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to modify.
     @inlinable public static postfix func √= (operand: inout Self) {
         operand = operand.squareRoot()
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.formLogarithm(toBase:))
-    /// Sets `self` to its base `base` logarithm.
-    ///
-    /// - Precondition: `self` > 0
-    ///
-    /// - Precondition: `base` > 0
-    ///
-    /// - Precondition: `base` ≠ 1
-    ///
-    /// - Parameters:
-    ///     - base: The base.
     @inlinable public mutating func formLogarithm(toBase base: Self) {
         // log (a) = log (a) ÷ log (b)
         //    b         x         x
@@ -110,104 +87,42 @@ extension FloatFamily {
         self ÷= Self.ln(base)
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.log(_:))
-    /// Returns the common logarithm of `antilogarithm`.
-    ///
-    /// - Precondition: `antilogarithm` > 0
-    ///
-    /// - Parameters:
-    ///     - antilogarithm: The antilogarithm.
     @inlinable public static func log(_ antilogarithm: Self) -> Self {
         return Self._tgmath_log10(antilogarithm)
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.formCommonLogarithm())
-    /// Sets `self` to its common logarithm.
-    ///
-    /// - Precondition: `self` > 0
     @inlinable public mutating func formCommonLogarithm() {
         self = Self.log(self)
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.ln(_:))
-    /// Returns the natural logarithm of `antilogarithm`.
-    ///
-    /// - Precondition: `antilogarithm` > 0
-    ///
-    /// - Parameters:
-    ///     - antilogarithm: The antilogarithm.
     @inlinable public static func ln(_ antilogarithm: Self) -> Self {
         return Self._tgmath_log(antilogarithm)
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.formNaturalLogarithm())
-    /// Sets `self` to its natural logarithm.
-    ///
-    /// - Precondition: `self` > 0
     @inlinable public mutating func formNaturalLogarithm() {
         self = Self.ln(self)
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.sin(_:))
-    /// Returns the sine of an angle.
-    ///
-    /// - Parameters:
-    ///     - angle: The angle.
     @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
         return Self._tgmath_sin(angle.inRadians)
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.cos(_:))
-    /// Returns the cosine of an angle.
-    ///
-    /// - Parameters:
-    ///     - angle: The angle.
     @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
         return Self._tgmath_cos(angle.inRadians)
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.tan(_:))
-    /// Returns the tangent of an angle.
-    ///
-    /// - Parameters:
-    ///     - angle: The angle.
     @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
         return Self._tgmath_tan(angle.inRadians)
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.arcsin(_:))
-    /// Returns the arcsine of a value.
-    ///
-    /// The returned angle will be between −90° and 90° inclusive.
-    ///
-    /// - Precondition: −1 ≤ `sine` ≤ 1
-    ///
-    /// - Parameters:
-    ///     - sine: The sine.
     @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
         return Self._tgmath_asin(tangent).radians
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.arccos(_:))
-    /// Returns the arccosine of a value.
-    ///
-    /// The returned angle will be between 0° and 180° inclusive.
-    ///
-    /// - Precondition: −1 ≤ `sine` ≤ 1
-    ///
-    /// - Parameters:
-    ///     - cosine: The cosine.
     @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
         return Self._tgmath_acos(tangent).radians
     }
 
-    // #documentation(SDGCornerstone.RealArithmetic.arctan(_:))
-    /// Returns the arctangent of a value.
-    ///
-    /// The returned angle will be between −90° and 90°.
-    ///
-    /// - Parameters:
-    ///     - tangent: The tangent.
     @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
         return Self._tgmath_atan(tangent).radians
     }
@@ -366,12 +281,8 @@ extension Double : FloatFamily {
 
     // MARK: - RealArithmetic
 
-    // #documentation(SDGCornerstone.RealArithmetic.e)
-    /// An instance of *e*.
     public static let e: Double = 0x1.5BF0A8B145769p1
 
-    // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
-    /// A floating point approximation.
     @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
     }
@@ -448,12 +359,8 @@ extension CGFloat : FloatFamily {
 
     // MARK: - RealArithmetic
 
-    // #documentation(SDGCornerstone.RealArithmetic.e)
-    /// An instance of *e*.
     public static let e: CGFloat = CGFloat(Double.e)
 
-    // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
-    /// A floating point approximation.
     @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(NativeType(self))
     }
@@ -523,12 +430,8 @@ extension Float80 : Decodable, Encodable, FloatFamily {
 
     // MARK: - RealArithmetic
 
-    // #documentation(SDGCornerstone.RealArithmetic.e)
-    /// An instance of *e*.
     public static let e: Float80 = 0x1.5BF0A8B145769535p1
 
-    // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
-    /// A floating point approximation.
     @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
     }
@@ -583,12 +486,8 @@ extension Float : FloatFamily {
 
     // MARK: - RealArithmetic
 
-    // #documentation(SDGCornerstone.RealArithmetic.e)
-    /// An instance of *e*.
     public static let e: Float = 0x1.5BF0A9p1
 
-    // #documentation(SDGCornerstone.RealArithmetic.floatingPointApproximation)
-    /// A floating point approximation.
     @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
     }
