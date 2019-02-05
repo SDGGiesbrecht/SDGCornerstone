@@ -372,19 +372,11 @@ extension WholeArithmetic {
 
     // MARK: - ExpressibleByIntegerLiteral
 
-    // @documentation(SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:))
-    /// Creates an instance from an integer literal.
-    ///
-    /// - Parameters:
-    ///     - integerLiteral: The integer literal.
     @inlinable public init(integerLiteral: UIntMax) {
         self.init(integerLiteral)
     }
 
     // MARK: - Numeric
-
-    // @documentation(SDGCornerstone.Numeric.init(exactly:))
-    /// Creates a new instance from the given integer, if it can be represented exactly.
 
     /// Multiplies two values and produces their product.
     @inlinable public static func * (precedingValue: Self, followingValue: Self) -> Self { // @exempt(from: unicode)

@@ -178,8 +178,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - Numeric
 
-    // #documentation(SDGCornerstone.Numeric.init(exactly:))
-    /// Creates a new instance from the given integer, if it can be represented exactly.
     @inlinable public init?<T>(exactly source: T) where T : BinaryInteger {
         guard let integer = Integer(exactly: source) else {
             unreachable()
@@ -202,8 +200,6 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - RationalNumberProtocol
 
-    // @documentation(SDGCornerstone.RationalNumberProtocol.reducedSimpleFraction())
-    /// Returns the numerator and denominator of the number as a reduced simple fraction.
     public func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer) {
         return (numerator, denominator)
     }

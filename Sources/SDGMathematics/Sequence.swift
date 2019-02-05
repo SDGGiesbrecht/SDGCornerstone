@@ -43,7 +43,6 @@ extension Sequence where Element : Hashable {
 
 extension Sequence where Element : AdditiveArithmetic {
 
-    // @documentation(SDGCornerstone.Sequence.∑)
     /// Returns the sum of all values in the sequence.
     ///
     /// - Parameters:
@@ -59,7 +58,6 @@ extension Sequence where Element : AdditiveArithmetic {
 
 extension Sequence where Element : WholeArithmetic {
 
-    // @documentation(SDGCornerstone.Sequence.∏)
     /// Returns the product of all values in the sequence.
     ///
     /// - Parameters:

@@ -106,11 +106,6 @@ extension RationalArithmetic {
 
     // MARK: - ExpressibleByFloatLiteral
 
-    // @documentation(SDGCornerstone.ExpressibleByFloatLiteral.init(floatLiteral:))
-    /// Creates an instance from a floating‐point literal.
-    ///
-    /// - Parameters:
-    ///     - floatLiteral: The floating point literal.
     @inlinable public init(floatLiteral: FloatMax) {
         self.init(floatLiteral)
     }

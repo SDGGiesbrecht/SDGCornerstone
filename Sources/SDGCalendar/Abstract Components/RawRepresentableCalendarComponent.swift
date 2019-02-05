@@ -77,11 +77,6 @@ extension RawRepresentableCalendarComponent {
 
     // MARK: - ExpressibleByIntegerLiteral
 
-    // #documentation(SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:))
-    /// Creates an instance from an integer literal.
-    ///
-    /// - Parameters:
-    ///     - integerLiteral: The integer literal.
     @inlinable public init(integerLiteral: UIntMax) {
         self.init(RawValue(integerLiteral))
     }

@@ -23,11 +23,9 @@ import SDGControlFlow
 /// - `static func ÷= (precedingValue: inout Self, followingValue: Scalar)`
 public protocol VectorProtocol : AdditiveArithmetic {
 
-    // @documentation(SDGCornerstone.VectorProtocol.Scalar)
     /// The scalar type.
     associatedtype Scalar : RationalArithmetic
 
-    // @documentation(SDGCornerstone.VectorProtocol.×(_:scalar:))
     /// Returns the product of the preceding value times the following value.
     ///
     /// - Parameters:
@@ -35,7 +33,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     ///     - followingValue: A scalar coefficient.
     static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
-    // @documentation(SDGCornerstone.VectorProtocol.×=)
     /// Modifies the preceding value by multiplication with the following value.
     ///
     /// - Parameters:
@@ -43,7 +40,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     ///     - followingValue: The scalar coefficient by which to multiply.
     static func ×= (precedingValue: inout Self, followingValue: Scalar)
 
-    // @documentation(SDGCornerstone.VectorProtocol.÷)
     /// Returns the quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -51,7 +47,6 @@ public protocol VectorProtocol : AdditiveArithmetic {
     ///     - followingValue: The divisor.
     static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
-    // @documentation(SDGCornerstone.VectorProtocol.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
@@ -62,32 +57,14 @@ public protocol VectorProtocol : AdditiveArithmetic {
 
 extension VectorProtocol {
 
-    // #documentation(SDGCornerstone.VectorProtocol.×(_:scalar:))
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: A scalar coefficient.
     @inlinable public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
     }
 
-    // @documentation(SDGCornerstone.VectorProtocol.×(scalar:_:))
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A scalar coefficient.
-    ///     - followingValue: A value.
     @inlinable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
         return followingValue × precedingValue
     }
 
-    // #documentation(SDGCornerstone.VectorProtocol.÷)
-    /// Returns the quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
     @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }

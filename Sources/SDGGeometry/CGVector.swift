@@ -26,9 +26,6 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
 
     // MARK: - TwoDimensionalVector
 
-    // #documentation(SDGCornerstone.VectorProtocol.Scalar)
-    /// The scalar type.
-    // The scalar type.
     public typealias Scalar = CGFloat
 
     // #documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))

@@ -20,11 +20,9 @@
 /// - `func reduced() -> (numerator: Integer, denominator: Integer)`
 public protocol RationalNumberProtocol : RationalArithmetic {
 
-    // @documentation(SDGCornerstone.RationalNumberProtocol.Integer)
     /// The type to use for the numerator and denominator.
     associatedtype Integer : IntegerProtocol
 
-    // @documentation(SDGCornerstone.RationalNumberProtocol.reducedSimpleFraction())
     /// Returns the numerator and denominator of the number as a reduced simple fraction.
     func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer)
 }

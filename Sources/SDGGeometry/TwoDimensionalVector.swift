@@ -127,23 +127,11 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - VectorProtocol
 
-    // #documentation(SDGCornerstone.VectorProtocol.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The scalar coefficient by which to multiply.
     @inlinable public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ×= followingValue
         precedingValue.Δy ×= followingValue
     }
 
-    // #documentation(SDGCornerstone.VectorProtocol.÷=)
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
     @inlinable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ÷= followingValue
         precedingValue.Δy ÷= followingValue
