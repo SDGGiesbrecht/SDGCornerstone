@@ -15,15 +15,12 @@
 /// A component of a particular calendar.
 public protocol CalendarComponent : Decodable, Encodable {
 
-    // @documentation(SDGCornerstone.CalendarComponent.meanDuration)
     /// The mean duration.
     static var meanDuration: CalendarInterval<FloatMax> { get }
 
-    // @documentation(SDGCornerstone.CalendarComponent.minimumDuration)
     /// The minimum duration.
     static var minimumDuration: CalendarInterval<FloatMax> { get }
 
-    // @documentation(SDGCornerstone.CalendarComponent.maximumDuration)
     /// The maximum duration.
     static var maximumDuration: CalendarInterval<FloatMax> { get }
 }

@@ -29,8 +29,6 @@ public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresent
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
-    /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).hours
     }
@@ -78,8 +76,6 @@ public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresent
 
     // MARK: - ISOCalendarComponent
 
-    // #documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
-    /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
         return hour.inDigits().filled(to: 2, with: "0", from: .start)
     }
@@ -90,23 +86,12 @@ public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresent
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
-    /// Creates an instance with an unchecked raw value.
-    ///
-    /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    ///
-    /// - Parameters:
-    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: RawValue) {
         hour = unsafeRawValue
     }
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
-    /// The valid range for raw values.
     public static let validRange: Range<RawValue>? = 0 ..< GregorianHour.hoursPerDay
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
-    /// The raw value.
     public var rawValue: RawValue {
         return hour
     }

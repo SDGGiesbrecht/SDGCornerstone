@@ -39,8 +39,6 @@ public enum GregorianWeekday : Int, ConsistentDurationCalendarComponent, Consist
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
-    /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).days
     }

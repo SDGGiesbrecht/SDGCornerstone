@@ -109,64 +109,38 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
 
     // MARK: - CalendarComponent
 
-    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
-    /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianYear.daysPerLeapYearCycle).days ÷ FloatMax(GregorianYear.yearsPerLeapYearCycle)
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
-    /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianYear.daysPerNormalYear).days
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
-    /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianYear.daysPerLeapYear).days
     }
 
     // MARK: - ConsistentlyOrderedCalendarComponent
 
-    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
-    /// Creates a component from the number of complete components already elapsed.
-    ///
-    /// - Precondition: The number must be valid for the particular compenent.
-    ///
-    /// - Parameters:
-    ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
     public init(numberAlreadyElapsed: Int) {
         self = (1 as GregorianYear) + numberAlreadyElapsed
     }
 
-    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
-    /// Creates a component from the number of complete components already elapsed.
-    ///
-    /// - Precondition: The number must be valid for the particular compenent.
-    ///
-    /// - Parameters:
-    ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
     public init(ordinal: Int) {
         self.init(ordinal)
     }
 
-    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
-    /// The number of complete components already elapsed.
     public var numberAlreadyElapsed: Int {
         return self − (1 as GregorianYear)
     }
 
-    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
-    /// The number of complete components already elapsed.
     public var ordinal: Int {
         return rawValue
     }
 
     // MARK: - ISOCalendarComponent
 
-    // #documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
-    /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
         let cardinal = self − GregorianYear(−1)
         var digits = (|cardinal|).inDigits().filled(to: 4, with: "0", from: .start)
@@ -212,13 +186,6 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
-    /// Creates an instance with an unchecked raw value.
-    ///
-    /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    ///
-    /// - Parameters:
-    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: Int) {
         assert(unsafeRawValue ≠ 0, UserFacing<StrictString, APILocalization>({ localization in
             switch localization { // @exempt(from: tests)
@@ -229,12 +196,8 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
         year = unsafeRawValue
     }
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
-    /// The valid range for raw values.
     public static let validRange: Range<Int>? = nil
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
-    /// The raw value.
     public var rawValue: Int {
         return year
     }
@@ -253,8 +216,6 @@ public struct GregorianYear : CalendarComponent, CodableViaRawRepresentableCalen
         return digits
     }
 
-    // #documentation(SDGCornerstone.Year.inEnglishDigits())
-    /// Returns the year in English digits.
     public func inEnglishDigits() -> StrictString {
         return inDigits(bcAbbreviation: "BC")
     }

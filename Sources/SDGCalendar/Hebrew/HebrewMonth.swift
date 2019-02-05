@@ -291,20 +291,14 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - CalendarComponent
 
-    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
-    /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return lengthOfMoon
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
-    /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(HebrewMonth.minimumNumberOfDays).days
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
-    /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(HebrewMonth.maximumNumberOfDays).days
     }
@@ -461,8 +455,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Month
 
-    // #documentation(SDGCornerstone.Month.inEnglish())
-    /// Returns the English name.
     public func inEnglish() -> StrictString {
         switch self {
         case .tishrei:

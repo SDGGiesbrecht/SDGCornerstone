@@ -38,8 +38,6 @@ public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, Consisten
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
-    /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).days
     }
@@ -50,23 +48,12 @@ public struct HebrewDay : CodableViaRawRepresentableCalendarComponent, Consisten
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
-    /// Creates an instance with an unchecked raw value.
-    ///
-    /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    ///
-    /// - Parameters:
-    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: RawValue) {
         day = unsafeRawValue
     }
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
-    /// The valid range for raw values.
     public static let validRange: Range<RawValue>? = 1 ..< HebrewMonth.maximumNumberOfDays + 1
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
-    /// The raw value.
     public var rawValue: RawValue {
         return day
     }

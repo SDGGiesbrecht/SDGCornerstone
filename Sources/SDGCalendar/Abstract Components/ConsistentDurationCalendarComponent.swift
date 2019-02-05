@@ -13,9 +13,8 @@
  */
 
 /// A calendar component with a consisent duration.
-public protocol ConsistentDurationCalendarComponent {
+public protocol ConsistentDurationCalendarComponent : CalendarComponent {
 
-    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
     /// The duration.
     static var duration: CalendarInterval<FloatMax> { get }
 }
@@ -24,20 +23,14 @@ extension ConsistentDurationCalendarComponent {
 
     // MARK: - CalendarComponent
 
-    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
-    /// The mean duration.
     @inlinable public static var meanDuration: CalendarInterval<FloatMax> {
         return duration
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
-    /// The minimum duration.
     @inlinable public static var minimumDuration: CalendarInterval<FloatMax> {
         return duration
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
-    /// The maximum duration.
     @inlinable public static var maximumDuration: CalendarInterval<FloatMax> {
         return duration
     }

@@ -39,8 +39,6 @@ public enum HebrewWeekday : Int, ConsistentDurationCalendarComponent, Consistent
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
-    /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).days
     }

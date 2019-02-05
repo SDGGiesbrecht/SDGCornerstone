@@ -36,8 +36,6 @@ public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentable
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
-    /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).hebrewParts
     }
@@ -59,23 +57,12 @@ public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentable
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
-    /// Creates an instance with an unchecked raw value.
-    ///
-    /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    ///
-    /// - Parameters:
-    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: RawValue) {
         part = unsafeRawValue
     }
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
-    /// The valid range for raw values.
     public static let validRange: Range<RawValue>? = 0 ..< FloatMax(HebrewPart.partsPerHour)
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
-    /// The raw value.
     public var rawValue: RawValue {
         return part
     }

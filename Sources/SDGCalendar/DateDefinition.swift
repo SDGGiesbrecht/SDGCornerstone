@@ -74,17 +74,14 @@ public protocol DateDefinition : Decodable, Encodable {
 
     // MARK: - Static Properties
 
-    // @documentation(SDGCornerstone.DateDefinition.identifier)
     /// A string that uniquely identifies the type for encoding and decoding.
     static var identifier: StrictString { get }
 
-    // @documentation(SDGCornerstone.DateDefinition.referenceDate)
     /// The reference date for the type.
     static var referenceDate: CalendarDate { get }
 
     // MARK: - Initialization
 
-    // @documentation(SDGCornerstone.DateDefinition.init(intervalSinceReferenceDate:))
     /// Creates a date from an interval since the type’s reference date.
     ///
     /// - Parameters:
@@ -93,7 +90,6 @@ public protocol DateDefinition : Decodable, Encodable {
 
     // MARK: - Properties
 
-    // @documentation(SDGCornerstone.DateDefinition.intervalSinceReferenceDate)
     /// The interval since the type’s reference date.
     var intervalSinceReferenceDate: CalendarInterval<FloatMax> { get }
 

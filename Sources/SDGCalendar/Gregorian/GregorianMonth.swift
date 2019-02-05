@@ -112,20 +112,14 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
 
     // MARK: - CalendarComponent
 
-    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
-    /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return GregorianYear.meanDuration ÷ FloatMax(GregorianYear.monthsPerYear)
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
-    /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianMonth.minimumNumberOfDays).days
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
-    /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianMonth.maximumNumberOfDays).days
     }
@@ -144,16 +138,12 @@ public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendar
 
     // MARK: - ISOCalendarComponent
 
-    // #documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
-    /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
         return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - Month
 
-    // #documentation(SDGCornerstone.Month.inEnglish())
-    /// Returns the English name.
     public func inEnglish() -> StrictString {
         switch self {
         case .january:
