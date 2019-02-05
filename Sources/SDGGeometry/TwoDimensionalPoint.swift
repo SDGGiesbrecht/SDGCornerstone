@@ -23,15 +23,12 @@ import SDGControlFlow
 public protocol TwoDimensionalPoint : PointProtocol
 where Vector : TwoDimensionalVector {
 
-    // @documentation(SDGCornerstone.TwoDimensionalPoint.Scalar)
     /// The scalar type.
     typealias Scalar = Vector.Scalar
 
-    // @documentation(SDGCornerstone.TwoDimensionalPoint.x)
     /// The *x* co‐ordinate.
     var x: Scalar { get set }
 
-    // @documentation(SDGCornerstone.TwoDimensionalPoint.y)
     /// The *y* co‐ordinate.
     var y: Scalar { get set }
 
