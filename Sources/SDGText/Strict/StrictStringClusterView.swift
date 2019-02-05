@@ -55,11 +55,6 @@ extension StrictString {
 
         // MARK: - BidirectionalCollection
 
-        // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
-        /// Returns the index immediately before the specified index.
-        ///
-        /// - Parameters:
-        ///     - i: The following index.
         @inlinable public func index(before i: String.ClusterView.Index) -> String.ClusterView.Index {
             return string.string.clusters.index(before: i)
         }

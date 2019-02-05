@@ -17,15 +17,12 @@ import SDGMathematics
 /// A member of the `Range` family: `Range`, `ClosedRange`, `CountableRange` or `CountableClosedRange`.
 public protocol RangeFamily : ComparableSet, CustomDebugStringConvertible, CustomReflectable, CustomStringConvertible, RangeExpression {
 
-    // @documentation(SDGCornerstone.RangeFamily.lowerBound)
     /// The lower bound.
     var lowerBound: Bound { get }
 
-    // @documentation(SDGCornerstone.RangeFamily.upperBound)
     /// The upper bound.
     var upperBound: Bound { get }
 
-    // @documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
     static var hasClosedUpperBound: Bool { get }
 }
@@ -49,8 +46,6 @@ extension Range : RangeFamily {
 
     // MARK: - RangeFamily
 
-    // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
-    /// `true` if the type has a closed upper bound.
     @inlinable public static var hasClosedUpperBound: Bool {
         return false
     }
@@ -64,7 +59,6 @@ extension ClosedRange : RangeFamily {
 
     // MARK: - RangeFamily
 
-    // #documentation(SDGCornerstone.RangeFamily.hasClosedUpperBound)
     /// `true` if the type has a closed upper bound.
     @inlinable public static var hasClosedUpperBound: Bool {
         return true

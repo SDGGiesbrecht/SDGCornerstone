@@ -147,14 +147,6 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         }).joined().map({ $0.upperBound }))
     }
 
-    // #documentation(SDGCornerstone.PatternProtocol.matches(in:at:))
-    /// Returns the ranges of possible matches beginning at the specified index in the collection.
-    ///
-    /// The ranges are sorted in order of preference. Ranges can be tried one after another down through the list in the event that some should be disqualified for some external reason, such as being part of a larger composite pattern.
-    ///
-    /// - Parameters:
-    ///     - collection: The collection in which to search.
-    ///     - location: The index at which to check for the beginning of a match.
     @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var locations: [C.Index] = [location]
@@ -195,14 +187,6 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         return cleanUp()
     }
 
-    // #documentation(SDGCornerstone.PatternProtocol.primaryMatch(in:at:))
-    /// Returns the primary match beginning at the specified index in the collection.
-    ///
-    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
-    ///
-    /// - Parameters:
-    ///     - collection: The collection in which to search.
-    ///     - location: The index at which to check for the beginning of a match.
     @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         switch consumption {
@@ -230,10 +214,6 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
         }
     }
 
-    // #documentation(SDGCornerstone.PatternProtocol.reversed())
-    /// Retruns a pattern that checks for the reverse pattern.
-    ///
-    /// This is suitable for performing backward searches by applying it to the reversed collection.
     @inlinable public override func reversed() -> RepetitionPattern<Element> {
         return RepetitionPattern(pattern.reversed(), count: count, consumption: consumption)
     }

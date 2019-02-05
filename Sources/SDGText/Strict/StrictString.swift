@@ -97,11 +97,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - BidirectionalCollection
 
-    // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
-    /// Returns the index immediately before the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The following index.
     @inlinable public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(before: i)
     }

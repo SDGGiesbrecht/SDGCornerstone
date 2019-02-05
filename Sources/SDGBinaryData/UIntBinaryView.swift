@@ -48,11 +48,6 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - BidirectionalCollection
 
-    // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
-    /// Returns the index immediately before the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The following index.
     @inlinable public func index(before i: Index) -> Index {
         return i − (1 as Index)
     }

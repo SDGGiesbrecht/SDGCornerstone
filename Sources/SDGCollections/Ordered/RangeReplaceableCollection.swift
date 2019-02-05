@@ -232,7 +232,6 @@ extension RangeReplaceableCollection {
 
     // MARK: - ExpressibleByArrayLiteral
 
-    // #documentation(SDGCornerstone.ExpressibleByArrayLiteral.init(arrayLiteral:))
     /// Creates an instance from an array literal.
     ///
     /// - Parameters:

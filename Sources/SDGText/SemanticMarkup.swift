@@ -190,11 +190,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // MARK: - BidirectionalCollection
 
-    // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
-    /// Returns the index immediately before the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The following index.
     @inlinable public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(before: i)
     }
