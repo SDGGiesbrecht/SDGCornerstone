@@ -21,7 +21,6 @@ import SDGMathematics
 /// - `static func ∋ (precedingValue: Element, followingValue: Self) -> Bool`
 public protocol SetDefinition {
 
-    // @documentation(SDGCornerstone.SetDefinition.Element)
     /// The element type.
     associatedtype Element
 

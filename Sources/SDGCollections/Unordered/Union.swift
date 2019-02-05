@@ -42,16 +42,8 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : CustomString
 
     // MARK: - SetDefinition
 
-    // #documentation(SDGCornerstone.SetDefinition.Element)
-    /// The element type.
     public typealias Element = Base1.Element
 
-    // #documentation(SDGCornerstone.SetDefinition.∋)
-    /// Returns `true` if `precedingValue` contains `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The set.
-    ///     - followingValue: The element to test.
     @inlinable public static func ∋ (precedingValue: Union, followingValue: Base1.Element) -> Bool {
         return precedingValue.a ∋ followingValue ∨ precedingValue.b ∋ followingValue
     }
