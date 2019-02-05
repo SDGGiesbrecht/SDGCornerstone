@@ -16,22 +16,9 @@ import SDGControlFlow
 
 extension RangeReplaceableCollection {
 
-    // @documentation(SDGCornerstone.RangeReplaceableCollection.init())
-    /// Creates a new, empty collection.
-
-    // @documentation(SDGCornerstone.RangeReplaceableCollection.init(_:))
-    /// Creates a new instance of a collection containing the elements of a sequence.
-
-    // @documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
-    /// Appends the contents of the sequence to the end of the collection.
-    ///
-    /// - Parameters:
-    ///     - newElements: The new elements to append.
-
     @inlinable internal mutating func appendAsCollection<S>(contentsOf newElements: S) where S : Sequence, S.Element == Self.Element {
         append(contentsOf: newElements)
     }
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
     /// Appends the contents of the sequence to the end of the collection.
     ///
     /// - Parameters:
@@ -40,17 +27,9 @@ extension RangeReplaceableCollection {
         appendAsCollection(contentsOf: newElements)
     }
 
-    // @documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
-    /// Inserts the contents of the sequence to the specified index.
-    ///
-    /// - Parameters:
-    ///     - newElements: The new elements to insert into the collection.
-    ///     - i: The position at which to insert the new elements.
-
     @inlinable internal mutating func insertAsCollection<S>(contentsOf newElements: S, at i: Self.Index) where S : Collection, S.Element == Self.Element {
         insert(contentsOf: newElements, at: i)
     }
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
     /// Inserts the contents of the sequence to the specified index.
     ///
     /// - Parameters:
@@ -59,13 +38,6 @@ extension RangeReplaceableCollection {
     @inlinable public mutating func insert(contentsOf newElements: Self, at i: Self.Index) {
         insertAsCollection(contentsOf: newElements, at: i)
     }
-
-    // @documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
-    /// Replaces the specified subrange of elements with the given collection.
-    ///
-    /// - Parameters:
-    ///     - subrange: The subrange of the collection to replace.
-    ///     - newElements: The new elements to add to the collection.
 
     @inlinable internal mutating func replaceSubrangeAsCollection<C>(_ subrange: Range<Index>, with newElements: C) where C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
@@ -76,7 +48,6 @@ extension RangeReplaceableCollection {
     @inlinable internal mutating func replaceSubrangeAsCollection<R, C>(_ subrange: R, with newElements: C) where R : RangeExpression, R.Bound == Self.Index, C : Collection, C.Element == Self.Element {
         replaceSubrange(subrange, with: newElements)
     }
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
     /// Replaces the specified subrange of elements with the given collection.
     ///
     /// - Parameters:

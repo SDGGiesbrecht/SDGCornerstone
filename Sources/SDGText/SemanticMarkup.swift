@@ -256,43 +256,22 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // MARK: - RangeReplaceableCollection
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
-    /// Creates a new, empty collection.
     @inlinable public init() {
         source = ""
     }
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.init(_:))
-    /// Creates a new instance of a collection containing the elements of a sequence.
     @inlinable public init<S : Sequence>(_ elements: S) where S.Element == Unicode.Scalar {
         source = StrictString(elements)
     }
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.append(contentsOf:))
-    /// Appends the contents of the sequence to the end of the collection.
-    ///
-    /// - Parameters:
-    ///     - newElements: The new elements to append.
     @inlinable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == Unicode.Scalar {
         source.append(contentsOf: newElements)
     }
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.insert(contentsOf:at:))
-    /// Inserts the contents of the sequence to the specified index.
-    ///
-    /// - Parameters:
-    ///     - newElements: The new elements to insert into the collection.
-    ///     - i: The position at which to insert the new elements.
     @inlinable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == Unicode.Scalar {
         source.insert(contentsOf: newElements, at: i)
     }
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
-    /// Replaces the specified subrange of elements with the given collection.
-    ///
-    /// - Parameters:
-    ///     - subrange: The subrange of the collection to replace.
-    ///     - newElements: The new elements to add to the collection.
     @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == Unicode.Scalar {
         source.replaceSubrange(subrange, with: newElements)
     }

@@ -26,7 +26,6 @@ public protocol SetDefinition {
 
     // MARK: - Membership
 
-    // @documentation(SDGCornerstone.SetDefinition.∈)
     /// Returns `true` if `precedingValue` is an element of `followingValue`.
     ///
     /// - Parameters:
@@ -34,7 +33,6 @@ public protocol SetDefinition {
     ///     - followingValue: The set.
     static func ∈ (precedingValue: Element, followingValue: Self) -> Bool
 
-    // @documentation(SDGCornerstone.SetDefinition.∉)
     /// Returns `true` if `precedingValue` is not an element of `followingValue`.
     ///
     /// - Parameters:
@@ -42,7 +40,6 @@ public protocol SetDefinition {
     ///     - followingValue: The set.
     static func ∉ (precedingValue: Element, followingValue: Self) -> Bool
 
-    // @documentation(SDGCornerstone.SetDefinition.∋)
     /// Returns `true` if `precedingValue` contains `followingValue`.
     ///
     /// - Parameters:
@@ -50,7 +47,6 @@ public protocol SetDefinition {
     ///     - followingValue: The element to test.
     static func ∋ (precedingValue: Self, followingValue: Element) -> Bool
 
-    // @documentation(SDGCornerstone.SetDefinition.∌)
     /// Returns `true` if `precedingValue` does not contain `followingValue`.
     ///
     /// - Parameters:
@@ -61,32 +57,14 @@ public protocol SetDefinition {
 
 extension SetDefinition {
 
-    // #documentation(SDGCornerstone.SetDefinition.∈)
-    /// Returns `true` if `precedingValue` is an element of `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The element to test.
-    ///     - followingValue: The set.
     @inlinable public static func ∈ (precedingValue: Element, followingValue: Self) -> Bool {
         return followingValue ∋ precedingValue
     }
 
-    // #documentation(SDGCornerstone.SetDefinition.∉)
-    /// Returns `true` if `precedingValue` is not an element of `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The element to test.
-    ///     - followingValue: The set.
     @inlinable public static func ∉ (precedingValue: Element, followingValue: Self) -> Bool {
         return ¬(precedingValue ∈ followingValue)
     }
 
-    // #documentation(SDGCornerstone.SetDefinition.∌)
-    /// Returns `true` if `precedingValue` does not contain `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The set.
-    ///     - followingValue: The element to test.
     @inlinable public static func ∌ (precedingValue: Self, followingValue: Element) -> Bool {
         return ¬(precedingValue ∋ followingValue)
     }
@@ -167,7 +145,6 @@ extension SetDefinition {
 
 extension SetDefinition where Self : SetAlgebra {
 
-    // @documentation(SDGCornerstone.SetAlgebra.contains(_:))
     /// Returns `true` if `self` contains `member`.
     ///
     /// - Parameters:

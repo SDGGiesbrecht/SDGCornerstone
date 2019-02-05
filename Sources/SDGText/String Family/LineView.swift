@@ -117,18 +117,10 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - RangeReplaceableCollection
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
-    /// Creates a new, empty collection.
     @inlinable public init() {
         self.init(Base())
     }
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
-    /// Replaces the specified subrange of elements with the given collection.
-    ///
-    /// - Parameters:
-    ///     - subrange: The subrange of the collection to replace.
-    ///     - newElements: The new elements to add to the collection.
     @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Element == Line<Base> {
         var replacement = Base()
         for line in newElements {
