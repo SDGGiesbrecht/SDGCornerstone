@@ -21,7 +21,6 @@ import Foundation
 /// - `var localizedDescription: String`
 public protocol PresentableError : CustomStringConvertible, LocalizedError {
 
-    // @documentation(SDGCornerstone.PresentableError.presentableDescription())
     /// Returns a localized description of the error.
     func presentableDescription() -> StrictString
 }
