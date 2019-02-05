@@ -69,7 +69,7 @@ extension Bool : Comparable {
     }
 
     // MARK: - Comparable
-    
+
     @inlinable public static func < (precedingValue: Bool, followingValue: Bool) -> Bool {
         if precedingValue == false ∧ followingValue == true {
             return true
