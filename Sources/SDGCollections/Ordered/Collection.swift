@@ -16,32 +16,17 @@ extension Collection {
 
     // MARK: - Conformance
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // @documentation(SDGCornerstone.Collection.Element)
     /// The type of the elements of the collection.
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // @documentation(SDGCornerstone.Collection.Index)
     /// The type of the indices of the collection.
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // @documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
-
-    // @documentation(SDGCornerstone.Collection.startIndex)
-    /// The position of the first element in a non‐empty collection.
-
-    // @documentation(SDGCornerstone.Collection.endIndex)
-    /// The position following the last valid index.
-
-    // @documentation(SDGCornerstone.Collection.subscript(position:))
-    /// Accesses the element at the specified position.
-
-    // @documentation(SDGCornerstone.Collection.count)
-    /// The number of elements in the collection.
-
-    // @documentation(SDGCornerstone.Collection.index(after:))
-    /// Returns the index immediately after the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The preceding index.
 
     // MARK: - Indices
 

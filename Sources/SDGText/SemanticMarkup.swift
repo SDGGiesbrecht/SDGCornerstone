@@ -211,33 +211,23 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // MARK: - Collection
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.Collection.Element)
     /// The type of the elements of the collection.
     public typealias Element = Unicode.Scalar
 
-    // #documentation(SDGCornerstone.Collection.startIndex)
-    /// The position of the first element in a non‐empty collection.
     @inlinable public var startIndex: String.ScalarView.Index {
         return source.startIndex
     }
 
-    // #documentation(SDGCornerstone.Collection.endIndex)
-    /// The position following the last valid index.
     @inlinable public var endIndex: String.ScalarView.Index {
         return source.endIndex
     }
 
-    // #documentation(SDGCornerstone.Collection.index(after:))
-    /// Returns the index immediately after the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The preceding index.
     @inlinable public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(after: i)
     }
 
-    // #documentation(SDGCornerstone.Collection.subscript(position:))
-    /// Accesses the element at the specified position.
     @inlinable public subscript(position: String.ScalarView.Index) -> Unicode.Scalar {
         return source[position]
     }

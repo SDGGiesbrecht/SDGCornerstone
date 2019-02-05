@@ -87,23 +87,15 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Collection
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultIndices<LineView>
 
-    // #documentation(SDGCornerstone.Collection.startIndex)
-    /// The position of the first element in a non‐empty collection.
     public let startIndex: LineViewIndex
 
-    // #documentation(SDGCornerstone.Collection.endIndex)
-    /// The position following the last valid index.
     public let endIndex: LineViewIndex = LineViewIndex.endIndex()
 
-    // #documentation(SDGCornerstone.Collection.index(after:))
-    /// Returns the index immediately after the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The preceding index.
     @inlinable public func index(after i: LineViewIndex) -> LineViewIndex {
         guard let newline = i.newline(in: base.scalars),
             ¬newline.isEmpty else {
@@ -112,8 +104,6 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         return LineViewIndex(start: newline.upperBound)
     }
 
-    // #documentation(SDGCornerstone.Collection.subscript(position:))
-    /// Accesses the element at the specified position.
     @inlinable public subscript(_ position: LineViewIndex) -> Line<Base> {
         get {
             let newline = position.newline(in: base.scalars)!

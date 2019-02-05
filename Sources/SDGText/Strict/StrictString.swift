@@ -118,29 +118,18 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Collection
 
-    // #documentation(SDGCornerstone.Collection.startIndex)
-    /// The position of the first element in a non‐empty collection.
     @inlinable public var startIndex: String.ScalarView.Index {
         return string.scalars.startIndex
     }
 
-    // #documentation(SDGCornerstone.Collection.endIndex)
-    /// The position following the last valid index.
     @inlinable public var endIndex: String.ScalarView.Index {
         return string.scalars.endIndex
     }
 
-    // #documentation(SDGCornerstone.Collection.index(after:))
-    /// Returns the index immediately after the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The preceding index.
     @inlinable public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
         return string.scalars.index(after: i)
     }
 
-    // #documentation(SDGCornerstone.Collection.subscript(position:))
-    /// Accesses the element at the specified position.
     @inlinable public subscript(position: String.ScalarView.Index) -> UnicodeScalar {
         return string.scalars[position]
     }
