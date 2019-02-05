@@ -48,8 +48,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         self = string
     }
 
-    // #documentation(SDGCornerstone.StringFamily.init(clusters:))
-    /// Creates a string from a collection of clusters.
+    /// Creates a string from a strict `ClusterView`.
     @inlinable public init(_ clusters: ClusterView) {
         self = clusters.string
     }
@@ -149,11 +148,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - ExpressibleByStringLiteral
 
-    // #documentation(SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:))
-    /// Creates an instance from a string literal.
-    ///
-    /// - Parameters:
-    ///     - stringLiteral: The string literal.
     @inlinable public init(stringLiteral: String) {
         self.init(stringLiteral)
     }
@@ -219,8 +213,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - StringFamily
 
-    // #documentation(SDGCornerstone.StringFamily.scalars)
-    /// A view of a string’s contents as a collection of Unicode scalars.
     @inlinable public var scalars: StrictString {
         get {
             return self
@@ -230,8 +222,6 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         }
     }
 
-    // #documentation(SDGCornerstone.StringFamily.clusters)
-    /// A view of a string’s contents as a collection of extended grapheme clusters.
     @inlinable public var clusters: ClusterView {
         get {
             return ClusterView(self)
@@ -243,16 +233,12 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - TextOutputStream
 
-    // #documentation(SDGCornerstone.TextOutputStream.write(_:))
-    /// Appends the given string to the stream.
     @inlinable public mutating func write(_ string: String) {
         self.append(contentsOf: string.scalars)
     }
 
     // MARK: - TextOutputStreamable
 
-    // #documentation(SDGCornerstone.TextOutputStreamable.write(to:))
-    /// Writes a textual representation of this instance into the given output stream.
     @inlinable public func write<Target>(to target: inout Target) where Target : TextOutputStream {
         target.write(string)
     }

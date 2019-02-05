@@ -170,8 +170,6 @@ internal struct GregorianDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - MarkupPlaygroundDisplay
 
-    // #documentation(SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup())
-    /// The markup representation of the instance.
     public func playgroundDescriptionMarkup() -> SemanticMarkup {
         return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             let date = CalendarDate(definition: self)

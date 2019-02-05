@@ -245,11 +245,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // MARK: - ExpressibleByStringLiteral
 
-    // #documentation(SDGCornerstone.ExpressibleByStringLiteral.init(stringLiteral:))
-    /// Creates an instance from a string literal.
-    ///
-    /// - Parameters:
-    ///     - stringLiteral: The string literal.
     @inlinable public init(stringLiteral: String) {
         self.init(StrictString(stringLiteral))
     }

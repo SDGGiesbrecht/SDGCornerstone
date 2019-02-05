@@ -23,14 +23,10 @@ extension String : StringFamily {
 
     // MARK: - StringFamily
 
-    /// A view of a string’s contents as a collection of Unicode scalars.
     public typealias ScalarView = String.UnicodeScalarView
 
-    /// A view of a string’s contents as a collection of extended grapheme clusters.
     public typealias ClusterView = String
 
-    // #documentation(SDGCornerstone.StringFamily.scalars)
-    /// A view of a string’s contents as a collection of Unicode scalars.
     @inlinable public var scalars: ScalarView {
         get {
             return unicodeScalars
@@ -40,8 +36,6 @@ extension String : StringFamily {
         }
     }
 
-    // #documentation(SDGCornerstone.StringFamily.clusters)
-    /// A view of a string’s contents as a collection of extended grapheme clusters.
     @inlinable public var clusters: ClusterView {
         get {
             return self

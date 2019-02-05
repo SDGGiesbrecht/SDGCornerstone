@@ -51,8 +51,6 @@ extension Day {
 
     // MARK: - MarkupPlaygroundDisplay
 
-    // #documentation(SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup())
-    /// The markup representation of the instance.
     @inlinable public func playgroundDescriptionMarkup() -> SemanticMarkup {
         return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             switch localization {
