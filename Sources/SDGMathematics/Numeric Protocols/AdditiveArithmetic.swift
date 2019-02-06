@@ -21,17 +21,14 @@
 /// - `Hashable`
 /// - `Subtractable`
 /// - `IntegralArithmetic`, `WholeNumberProtocol`, `ExpressibleByIntegerLiteral` or `static var additiveIdentity: Self { get }`
-public protocol AdditiveArithmetic : Codable, Hashable, Subtractable {
+public protocol AdditiveArithmetic : Decodable, Encodable, Hashable, Subtractable {
 
-    // @documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
     /// The additive identity (origin).
     static var additiveIdentity: Self { get }
 }
 
 extension AdditiveArithmetic where Self : ExpressibleByIntegerLiteral {
 
-    // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
-    /// The additive identity (origin).
     @inlinable public static var additiveIdentity: Self {
         return 0
     }

@@ -19,22 +19,10 @@ extension NumericCalendarComponent {
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue = Self(precedingValue.rawValue + followingValue)
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return precedingValue.rawValue − followingValue.rawValue
     }

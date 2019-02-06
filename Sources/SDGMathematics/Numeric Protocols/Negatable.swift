@@ -30,18 +30,12 @@ public protocol Negatable : AdditiveArithmetic {
     ///     - operand: The value to invert.
     static prefix func − (operand: Self) -> Self
 
-    // @documentation(SDGCornerstone.Negatable.negate())
     /// Replaces this value with its additive inverse.
     mutating func negate()
 }
 
 extension Negatable {
 
-    // #documentation(SDGCornerstone.Negatable.−)
-    /// Returns the additive inverse of the operand.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to invert.
     @inlinable public static prefix func − (operand: Self) -> Self {
         return nonmutatingVariant(of: { $0.negate() }, on: operand)
     }
@@ -49,8 +43,6 @@ extension Negatable {
     @inlinable internal mutating func _negate() {
         self = Self.additiveIdentity − self
     }
-    // #documentation(SDGCornerstone.Negatable.negate())
-    /// Replaces this value with its additive inverse.
     @inlinable public mutating func negate() {
         _negate()
     }
@@ -63,8 +55,6 @@ extension SignedInteger {
 }
 extension Negatable where Self : SignedInteger {
 
-    // #documentation(SDGCornerstone.Negatable.negate())
-    /// Replaces this value with its additive inverse.
     @inlinable public mutating func negate() {
         __negate()
     }
@@ -81,8 +71,6 @@ extension Negatable where Self : SignedNumeric {
         return −operand
     }
 
-    // #documentation(SDGCornerstone.Negatable.negate())
-    /// Replaces this value with its additive inverse.
     @inlinable public mutating func negate() {
         _negate()
     }

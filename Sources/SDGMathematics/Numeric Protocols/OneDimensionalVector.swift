@@ -20,7 +20,6 @@
 /// - `static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar`
 public protocol OneDimensionalVector : VectorProtocol {
 
-    // @documentation(SDGCornerstone.OneDimensionalVector.÷)
     /// Returns the quotient of the precedng value divided by the following value.
     ///
     /// - Parameters:

@@ -449,12 +449,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     public static func < (precedingValue: CalendarDate, followingValue: CalendarDate) -> Bool {
         return precedingValue.intervalSinceEpoch < followingValue.intervalSinceEpoch
     }
@@ -476,11 +470,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         knownDateDefinitions[type.identifier] = type
     }
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let encodingIdentifier = try container.decode(StrictString.self)
@@ -496,11 +485,6 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         if let unknown = definition as? UnknownDate {
@@ -517,28 +501,14 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     public static func == (precedingValue: CalendarDate, followingValue: CalendarDate) -> Bool {
         return precedingValue.intervalSinceEpoch == followingValue.intervalSinceEpoch
     }
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = CalendarInterval<FloatMax>
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     public static func += (precedingValue: inout CalendarDate, followingValue: CalendarInterval<FloatMax>) {
         if let relative = precedingValue.definition as? RelativeDate {
             precedingValue.definition = RelativeDate(relative.intervalSince + followingValue, after: relative.baseDate)
@@ -547,20 +517,12 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         }
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     public static func − (precedingValue: CalendarDate, followingValue: CalendarDate) -> CalendarInterval<FloatMax> {
         return precedingValue.intervalSinceEpoch − followingValue.intervalSinceEpoch
     }
 
     // MARK: - TransparentWrapper
 
-    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
-    /// The wrapped instance.
     public var wrappedInstance: Any {
         return definition
     }

@@ -46,22 +46,12 @@ internal struct UnknownDate : DateDefinition {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     internal init(from decoder: Decoder) throws {
         unreachable() // This definition is never encoded.
     }
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     internal func encode(to encoder: Encoder) throws {
         unreachable() // This definition is never encoded.
     }

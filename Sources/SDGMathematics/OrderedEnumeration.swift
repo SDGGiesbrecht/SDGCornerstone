@@ -25,45 +25,37 @@ import SDGControlFlow
 public protocol OrderedEnumeration : CaseIterable, Comparable, Hashable
 where AllCases : BidirectionalCollection {
 
-    // @documentation(SDGCornerstone.OrderedEnumeration.increment())
     /// Increments to the next case.
     ///
     /// - Precondition: There is a valid next case.
     mutating func increment()
 
-    // @documentation(SDGCornerstone.OrderedEnumeration.successor())
     /// Returns the next case or `nil` if there are no later cases.
     func successor() -> Self?
 
-    // @documentation(SDGCornerstone.OrderedEnumeration.decrement())
     /// Decrements to the previous case.
     ///
     /// - Precondition: There is a valid previous case.
     mutating func decrement()
 
-    // @documentation(SDGCornerstone.OrderedEnumeration.predecessor())
     /// Returns the previous case or `nil` if there are no earlier cases.
     func predecessor() -> Self?
 
-    // @documentation(SDGCornerstone.OrderedEnumeration.incrementCyclically())
     /// Increments to the next case in the cycle.
     ///
     /// - Parameters:
     ///     - wrap: A closure that will be executed if the incrementation wraps around to the beginnig of the sequence.
     mutating func incrementCyclically(_ wrap: () -> Void)
 
-    // @documentation(SDGCornerstone.OrderedEnumeration.cyclicSuccessor())
     /// Returns the next case, wrapping around to the first case if necessary.
     func cyclicSuccessor() -> Self
 
-    // @documentation(SDGCornerstone.OrderedEnumeration.decrementCyclically())
     /// Decrements to the previous case in the cycle.
     ///
     /// - Parameters:
     ///     - wrap: A closure that will be executed if the decrementation wraps around to the end of the sequence.
     mutating func decrementCyclically(_ wrap: () -> Void)
 
-    // @documentation(SDGCornerstone.OrderedEnumeration.cyclicPredecessor())
     /// Returns the previous case, wrapping around to the last case if necessary.
     func cyclicPredecessor() -> Self
 }
@@ -109,10 +101,6 @@ extension OrderedEnumeration {
         }
         self = result
     }
-    // #documentation(SDGCornerstone.OrderedEnumeration.increment())
-    /// Increments to the next case.
-    ///
-    /// - Precondition: There is a valid next case.
     @inlinable public mutating func increment() {
         _increment()
     }
@@ -125,8 +113,6 @@ extension OrderedEnumeration {
             return Self.allCases[successorIndex]
         }
     }
-    // #documentation(SDGCornerstone.OrderedEnumeration.successor())
-    /// Returns the next case or `nil` if there are no later cases.
     @inlinable public func successor() -> Self? {
         return _successor()
     }
@@ -142,10 +128,6 @@ extension OrderedEnumeration {
         }
         self = result
     }
-    // #documentation(SDGCornerstone.OrderedEnumeration.decrement())
-    /// Decrements to the previous case.
-    ///
-    /// - Precondition: There is a valid previous case.
     @inlinable public mutating func decrement() {
         _decrement()
     }
@@ -158,17 +140,10 @@ extension OrderedEnumeration {
             return Self.allCases[Self.allCases.index(before: index)]
         }
     }
-    // #documentation(SDGCornerstone.OrderedEnumeration.predecessor())
-    /// Returns the previous case or `nil` if there are no earlier cases.
     @inlinable public func predecessor() -> Self? {
         return _predecessor()
     }
 
-    // #documentation(SDGCornerstone.OrderedEnumeration.incrementCyclically())
-    /// Increments to the next case in the cycle.
-    ///
-    /// - Parameters:
-    ///     - wrap: A closure that will be executed if the incrementation wraps around to the beginnig of the sequence.
     @inlinable public mutating func incrementCyclically(_ wrap: () -> Void = {}) {
         if let next = successor() {
             self = next
@@ -178,17 +153,10 @@ extension OrderedEnumeration {
         }
     }
 
-    // #documentation(SDGCornerstone.OrderedEnumeration.cyclicSuccessor())
-    /// Returns the next case, wrapping around to the first case if necessary.
     @inlinable public func cyclicSuccessor() -> Self {
         return nonmutatingVariant(of: { $0.incrementCyclically($1) }, on: self, with: {})
     }
 
-    // #documentation(SDGCornerstone.OrderedEnumeration.decrementCyclically())
-    /// Decrements to the previous case in the cycle.
-    ///
-    /// - Parameters:
-    ///     - wrap: A closure that will be executed if the decrementation wraps around to the end of the sequence.
     @inlinable public mutating func decrementCyclically(_ wrap: () -> Void = {}) {
         if let previous = predecessor() {
             self = previous
@@ -198,8 +166,6 @@ extension OrderedEnumeration {
         }
     }
 
-    // #documentation(SDGCornerstone.OrderedEnumeration.cyclicPredecessor())
-    /// Returns the previous case, wrapping around to the last case if necessary.
     @inlinable public func cyclicPredecessor() -> Self {
         return nonmutatingVariant(of: { $0.decrementCyclically($1) }, on: self, with: {})
     }
@@ -209,12 +175,6 @@ extension OrderedEnumeration {
     @inlinable internal func isLessThan(_ other: Self) -> Bool {
         return Self.index(of: self) < Self.index(of: other)
     }
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.isLessThan(followingValue)
     }
@@ -225,12 +185,6 @@ extension OrderedEnumeration where Self : Strideable {
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.isLessThan(followingValue)
     }
@@ -239,30 +193,18 @@ extension OrderedEnumeration where Self : Strideable {
 // Disambiguate OneDimensionalPoint vs OrderedEnumeration for calendar components.
 extension OrderedEnumeration where Self : OneDimensionalPoint, Self.Vector : IntegerProtocol {
 
-    // #documentation(SDGCornerstone.OrderedEnumeration.increment())
-    /// Increments to the next case.
-    ///
-    /// - Precondition: There is a valid next case.
     @inlinable public mutating func increment() {
         _increment()
     }
 
-    // #documentation(SDGCornerstone.OrderedEnumeration.successor())
-    /// Returns the next case or `nil` if there are no later cases.
     @inlinable public func successor() -> Self? {
         return _successor()
     }
 
-    // #documentation(SDGCornerstone.OrderedEnumeration.decrement())
-    /// Decrements to the previous case.
-    ///
-    /// - Precondition: There is a valid previous case.
     @inlinable public mutating func decrement() {
         _decrement()
     }
 
-    // #documentation(SDGCornerstone.OrderedEnumeration.predecessor())
-    /// Returns the previous case or `nil` if there are no earlier cases.
     @inlinable public func predecessor() -> Self? {
         return _predecessor()
     }

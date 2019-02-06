@@ -23,14 +23,12 @@ import SDGControlFlow
 /// - `static func ÷= (precedingValue: inout Self, followingValue: Self)`
 public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmetic {
 
-    // @documentation(SDGCornerstone.IntegralArithmetic.init(floatingPoint:))
     /// Creates an instance as close as possible to `floatingPoint`.
     ///
     /// - Properties:
     ///     - floatingPoint: An instance of `FloatMax`.
     init(_ floatingPoint: FloatMax)
 
-    // @documentation(SDGCornerstone.RationalArithmetic.÷)
     /// Returns the (rational) quotient of the preceding value divided by the following value.
     ///
     /// - Parameters:
@@ -38,7 +36,6 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
     ///     - followingValue: The divisor.
     static func ÷ (precedingValue: Self, followingValue: Self) -> Self
 
-    // @documentation(SDGCornerstone.RationalArithmetic.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
@@ -64,12 +61,6 @@ public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmet
 
 extension RationalArithmetic {
 
-    // #documentation(SDGCornerstone.RationalArithmetic.÷)
-    /// Returns the (rational) quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
     @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
@@ -90,22 +81,11 @@ extension RationalArithmetic {
         }
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
     @inlinable public static func random(in range: Range<Self>) -> Self {
         var generator = SystemRandomNumberGenerator()
         return random(in: range, using: &generator)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
     @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
 
         _assert(¬range.isEmpty, { (localization: _APILocalization) in
@@ -126,11 +106,6 @@ extension RationalArithmetic {
 
     // MARK: - ExpressibleByFloatLiteral
 
-    // @documentation(SDGCornerstone.ExpressibleByFloatLiteral.init(floatLiteral:))
-    /// Creates an instance from a floating‐point literal.
-    ///
-    /// - Parameters:
-    ///     - floatLiteral: The floating point literal.
     @inlinable public init(floatLiteral: FloatMax) {
         self.init(floatLiteral)
     }
@@ -147,21 +122,10 @@ extension BinaryFloatingPoint where Self.RawSignificand : FixedWidthInteger {
 extension RationalArithmetic where Self : BinaryFloatingPoint, Self.RawSignificand : FixedWidthInteger {
     // Disambiguate
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:))
-    /// Creates a random value within a particular range.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
     @inlinable public static func random(in range: Range<Self>) -> Self {
         return _random(in: range)
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
     @inlinable public static func random<R>(in range: Range<Self>, using generator: inout R) -> Self where R : RandomNumberGenerator {
         return _random(in: range, using: &generator)
     }

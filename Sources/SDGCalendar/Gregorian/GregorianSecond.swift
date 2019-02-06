@@ -29,8 +29,6 @@ public struct GregorianSecond : CardinalCalendarComponent, CodableViaRawRepresen
 
     // MARK: - ConsistentDurationCalendarComponent
 
-    // @documentation(SDGCornerstone.ConsistentDurationCalendarComponent.duration)
-    /// The duration.
     public static var duration: CalendarInterval<FloatMax> {
         return (1 as FloatMax).seconds
     }
@@ -44,8 +42,6 @@ public struct GregorianSecond : CardinalCalendarComponent, CodableViaRawRepresen
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
@@ -57,37 +53,22 @@ public struct GregorianSecond : CardinalCalendarComponent, CodableViaRawRepresen
 
     // MARK: - ISOCalendarComponent
 
-    // #documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
-    /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
         return Int((second + 0.000_001).rounded(.down)).inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = FloatMax
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
-    /// Creates an instance with an unchecked raw value.
-    ///
-    /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    ///
-    /// - Parameters:
-    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: FloatMax) {
         second = unsafeRawValue
     }
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
-    /// The valid range for raw values.
     public static let validRange: Range<FloatMax>? = 0 ..< FloatMax(GregorianSecond.secondsPerMinute)
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
-    /// The raw value.
     public var rawValue: FloatMax {
         return second
     }

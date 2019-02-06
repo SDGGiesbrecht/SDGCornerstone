@@ -17,24 +17,14 @@
 /// Conformance Requirements:
 ///
 /// - `LosslessStringConvertible`
-public protocol CodableViaLosslessStringConvertible : Codable, LosslessStringConvertible {}
+public protocol CodableViaLosslessStringConvertible : Decodable, Encodable, LosslessStringConvertible {}
 
 extension CodableViaLosslessStringConvertible {
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: description)
     }
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: String.self, convert: { Self($0) })
     }

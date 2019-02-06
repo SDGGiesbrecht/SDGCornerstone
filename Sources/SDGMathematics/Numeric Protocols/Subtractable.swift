@@ -26,7 +26,6 @@ import SDGControlFlow
 /// - `static func −= (precedingValue: inout Self, followingValue: Self)`
 public protocol Subtractable : Addable {
 
-    // @documentation(SDGCornerstone.Subtractable.−)
     /// Returns the difference of the preceding value minus the following value.
     ///
     /// - Parameters:
@@ -34,7 +33,6 @@ public protocol Subtractable : Addable {
     ///     - followingValue: The value to subtract.
     static func − (precedingValue: Self, followingValue: Self) -> Self
 
-    // @documentation(SDGCornerstone.Subtractable.−=)
     /// Subtracts the following value from the preceding value.
     ///
     /// - Parameters:
@@ -42,7 +40,6 @@ public protocol Subtractable : Addable {
     ///     - followingValue: The value to subtract.
     static func −= (precedingValue: inout Self, followingValue: Self)
 
-    // @documentation(SDGCornerstone.Subtractable.±)
     /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
     ///
     /// - Parameters:
@@ -53,22 +50,10 @@ public protocol Subtractable : Addable {
 
 extension Subtractable {
 
-    // #documentation(SDGCornerstone.Subtractable.−)
-    /// Returns the difference of the preceding value minus the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The starting value.
-    ///     - followingValue: The value to subtract.
     @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: −=, on: precedingValue, with: followingValue)
     }
 
-    // #documentation(SDGCornerstone.Subtractable.±)
-    /// Returns a tuple containing the sum and difference of `precedingValue` and `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The augend/minuend.
-    ///     - followingValue: The addend/subtrahend.
     @inlinable public static func ± (precedingValue: Self, followingValue: Self) -> (sum: Self, difference: Self) {
         return (precedingValue + followingValue, precedingValue − followingValue)
     }

@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGCornerstoneLocalizations
 
 /// A month of the Gregorian year.
-public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrderedCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, EnumerationCalendarComponent, TextualPlaygroundDisplay {
+public enum GregorianMonth : Int, CalendarComponent, ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent, ICalendarComponent, ISOCalendarComponent, Month, TextualPlaygroundDisplay {
 
     // MARK: - Cases
 
@@ -112,58 +112,38 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - CalendarComponent
 
-    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
-    /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return GregorianYear.meanDuration ÷ FloatMax(GregorianYear.monthsPerYear)
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
-    /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianMonth.minimumNumberOfDays).days
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
-    /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(GregorianMonth.maximumNumberOfDays).days
     }
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         try self.init(usingOrdinalFrom: decoder)
     }
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         try encodeUsingOrdinal(to: encoder)
     }
 
     // MARK: - ISOCalendarComponent
 
-    // #documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
-    /// Returns a string representation in the ISO format.
     public func inISOFormat() -> StrictString {
         return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
     }
 
     // MARK: - Month
 
-    // #documentation(SDGCornerstone.Month.inEnglish())
-    /// Returns the English name.
     public func inEnglish() -> StrictString {
         switch self {
         case .january:
@@ -334,13 +314,5 @@ public enum GregorianMonth : Int, CalendarComponent, Codable, ConsistentlyOrdere
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = RawValue
-
-    // MARK: - RawRepresentable
-
-    // #documentation(SDGCornerstone.RawRepresentable.RawValue)
-    /// The raw value type.
-    public typealias RawValue = Int
 }

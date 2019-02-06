@@ -20,7 +20,7 @@ import SDGText
 import SDGPersistence
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
-public struct LocalizationSetting : Codable, Equatable {
+public struct LocalizationSetting : Decodable, Encodable, Equatable {
 
     // MARK: - Static Properties
 
@@ -225,34 +225,18 @@ public struct LocalizationSetting : Codable, Equatable {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: [[String]].self, convert: { LocalizationSetting(orderOfPrecedence: $0) })
     }
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: orderOfPrecedence)
     }
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     @inlinable public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting) -> Bool {
         return precedingValue.orderOfPrecedence.elementsEqual(followingValue.orderOfPrecedence) { (leftGroup: [String], rightGroup: [String]) -> Bool in
             return Set(leftGroup) == Set(rightGroup)

@@ -13,7 +13,7 @@
  */
 
 /// A `String` or `StrictString`.
-public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByStringLiteral, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
+public protocol StringFamily : Addable, Comparable, Decodable, Encodable, ExpressibleByStringLiteral, Hashable, LosslessStringConvertible, TextOutputStream, TextOutputStreamable {
 
     // MARK: - Associated Types
 
@@ -27,38 +27,31 @@ public protocol StringFamily : Addable, Codable, Comparable, ExpressibleByString
 
     // MARK: - Initialization
 
-    // @documentation(SDGCornerstone.StringFamily.init(scalars:))
     /// Creates an empty string.
     init()
 
-    // @documentation(SDGCornerstone.StringFamily.init(scalars:))
     /// Creates a string from a collection of scalars.
     init(_ scalars: ScalarView)
 
-    // @documentation(SDGCornerstone.StringFamily.init(clusters:))
     /// Creates a string from a collection of clusters.
     init(_ clusters: ClusterView)
 
     // MARK: - Properties
 
-    // @documentation(SDGCornerstone.StringFamily.scalars)
     /// A view of a string’s contents as a collection of Unicode scalars.
     var scalars: ScalarView { get set }
 
-    // @documentation(SDGCornerstone.StringFamily.clusters)
     /// A view of a string’s contents as a collection of extended grapheme clusters.
     var clusters: ClusterView { get set }
 }
 
 extension StringFamily {
 
-    // @documentation(SDGCornerstone.StringFamily.init(lines:))
     /// Creates a string from a collection of lines.
     @inlinable public init(_ lines: LineView<Self>) {
         self = lines.base
     }
 
-    // @documentation(SDGCornerstone.StringFamily.lines)
     /// A view of a string’s contents as a collection of lines.
     @inlinable public var lines: LineView<Self> {
         get {

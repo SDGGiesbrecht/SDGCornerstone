@@ -22,29 +22,16 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
 
     // MARK: - AdditiveArithmetic
 
-    // #documentation(SDGCornerstone.AdditiveArithmetic.additiveIdentity)
-    /// The additive identity (origin).
     public static let additiveIdentity: CGVector = zero
 
     // MARK: - TwoDimensionalVector
 
-    // #documentation(SDGCornerstone.VectorProtocol.Scalar)
-    /// The scalar type.
-    // The scalar type.
     public typealias Scalar = CGFloat
 
-    // #documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
-    /// Creates a vector using the specified differences in *x* and *y*.
-    ///
-    /// - Parameters:
-    ///     - Δx: The difference in *x*.
-    ///     - Δy: The difference in *y*.
     public init(Δx: Scalar, Δy: Scalar) {
         self = CGVector(dx: Δx, dy: Δy)
     }
 
-    // #documentation(SDGCornerstone.TwoDimensionalVector.Δx)
-    /// The difference in *x*.
     @inlinable public var Δx: Scalar {
         get {
             return dx
@@ -54,8 +41,6 @@ extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
         }
     }
 
-    // #documentation(SDGCornerstone.TwoDimensionalVector.Δy)
-    /// The difference in *y*.
     @inlinable public var Δy: Scalar {
         get {
             return dy

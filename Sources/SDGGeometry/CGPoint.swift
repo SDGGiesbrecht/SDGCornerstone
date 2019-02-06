@@ -20,14 +20,10 @@ extension CGPoint : TwoDimensionalPoint {
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = CGVector
 
     // MARK: - TwoDimensionalPoint
 
-    // #documentation(SDGCornerstone.TwoDimensionalPoint.Scalar)
-    /// The scalar type.
     public typealias Scalar = Vector.Scalar
 }
 

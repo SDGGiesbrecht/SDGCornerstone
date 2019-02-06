@@ -54,8 +54,6 @@ public struct UserFacing<Element, Localization : SDGLocalization.Localization> :
 
     // MARK: - TransparentWrapper
 
-    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
-    /// The wrapped instance.
     @inlinable public var wrappedInstance: Any {
         return resolved()
     }

@@ -14,13 +14,6 @@
 
 extension Equatable {
 
-    // @documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
-
     // @documentation(SDGCornerstone.Equatable.≠)
     /// Returns `true` if the two values are inequal.
     ///

@@ -26,20 +26,17 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - Static Properties
 
-    // #documentation(SDGCornerstone.Collection.startIndex)
-    /// The position of the first element in a non‐empty collection.
+    /// The position of the first element in any instance.
     @inlinable public static var startIndex: Index {
         return 0
     }
 
-    // #documentation(SDGCornerstone.Collection.endIndex)
-    /// The position following the last valid index.
+    /// The position following the last valid index in any instance.
     @inlinable public static var endIndex: Index {
         return Index(count)
     }
 
-    // #documentation(SDGCornerstone.Collection.count)
-    /// The number of elements in the collection.
+    /// The number of elements in any instance.
     @inlinable public static var count: Int {
         let bytes = MemoryLayout<UIntValue>.size
         return bytes × 8
@@ -51,44 +48,33 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - BidirectionalCollection
 
-    // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
-    /// Returns the index immediately before the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The following index.
     @inlinable public func index(before i: Index) -> Index {
         return i − (1 as Index)
     }
 
     // MARK: - Collection
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.Collection.Element)
     /// The type of the elements of the collection.
     public typealias Element = Bool
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.Collection.Index)
     /// The type of the indices of the collection.
     public typealias Index = UIntValue
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultIndices<BinaryView>
 
-    // #documentation(SDGCornerstone.Collection.startIndex)
-    /// The position of the first element in a non‐empty collection.
     @inlinable public var startIndex: Index {
         return BinaryView.startIndex
     }
-    // #documentation(SDGCornerstone.Collection.endIndex)
-    /// The position following the last valid index.
     @inlinable public var endIndex: Index {
         return BinaryView.endIndex
     }
 
-    // #documentation(SDGCornerstone.Collection.index(after:))
-    /// Returns the index immediately after the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The preceding index.
     @inlinable public func index(after i: Index) -> Index {
         return i + (1 as Index)
     }
@@ -116,8 +102,6 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         let bits = self.map { bit in
             return bit ? "1" : "0"

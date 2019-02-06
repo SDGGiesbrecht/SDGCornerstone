@@ -21,7 +21,6 @@ import SDGControlFlow
 /// - `func playgroundDescriptionMarkup() -> SemanticMarkup`
 public protocol MarkupPlaygroundDisplay : TextualPlaygroundDisplay {
 
-    // @documentation(SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup())
     /// The markup representation of the instance.
     func playgroundDescriptionMarkup() -> SemanticMarkup
 }
@@ -30,16 +29,12 @@ extension MarkupPlaygroundDisplay {
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    // #documentation(SDGCornerstone.CustomPlaygroundDisplayConvertible.playgroundDescription)
-    /// Returns the custom playground description for this instance.
     @inlinable public var playgroundDescription: Any {
         return playgroundDescriptionMarkup()
     }
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     @inlinable public var description: String {
         return String(playgroundDescriptionMarkup().rawTextApproximation())
     }

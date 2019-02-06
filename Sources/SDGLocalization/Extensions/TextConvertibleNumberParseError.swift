@@ -22,8 +22,6 @@ public enum TextConvertibleNumberParseError : PresentableError {
 
     // MARK: - PresentableError
 
-    // #documentation(SDGCornerstone.PresentableError.presentableDescription())
-    /// Returns a localized description of the error.
     public func presentableDescription() -> StrictString {
         switch self {
         case .invalidDigit(let scalar, let entireString):

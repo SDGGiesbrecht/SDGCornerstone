@@ -32,8 +32,6 @@ public struct Weak<Pointee : AnyObject> : TransparentWrapper {
 
     // MARK: - TransparentWrapper
 
-    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
-    /// The wrapped instance.
     @inlinable public var wrappedInstance: Any {
         return pointee as Any
     }

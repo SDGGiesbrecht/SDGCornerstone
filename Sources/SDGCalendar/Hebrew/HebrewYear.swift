@@ -75,49 +75,30 @@ public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentable
 
     // MARK: - CalendarComponent
 
-    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
-    /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return FloatMax(monthsPerLeapYearCycle).hebrewMoons ÷ FloatMax(HebrewYear.yearsPerLeapYearCycle)
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
-    /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(HebrewYear.Length.minimumNumberOfDays).days
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
-    /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(HebrewYear.Length.maximumNumberOfDays).days
     }
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Int
 
     // MARK: - RawRepresentableCalendarComponent
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
-    /// Creates an instance with an unchecked raw value.
-    ///
-    /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
-    ///
-    /// - Parameters:
-    ///     - unsafeRawValue: The raw value.
     public init(unsafeRawValue: RawValue) {
         year = unsafeRawValue
     }
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
-    /// The valid range for raw values.
     public static let validRange: Range<RawValue>? = nil
 
-    // #documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
-    /// The raw value.
     public var rawValue: RawValue {
         return year
     }
@@ -128,8 +109,6 @@ public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentable
         return year.inDigits()
     }
 
-    // #documentation(SDGCornerstone.Year.inEnglishDigits())
-    /// Returns the year in English digits.
     public func inEnglishDigits() -> StrictString {
         return inDigits()
     }

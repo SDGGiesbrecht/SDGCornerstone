@@ -16,13 +16,6 @@ extension Comparable {
 
     // MARK: - Comparison
 
-    // @documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
-
     // @documentation(SDGCornerstone.Comparable.≤)
     /// Returns `true` if the preceding operand is ordered before or the same as the following operand.
     ///
@@ -43,7 +36,6 @@ extension Comparable {
         return precedingValue >= followingValue // @exempt(from: unicode)
     }
 
-    // @documentation(SDGCornerstone.Comparable.≥=)
     // #example(1, increase)
     /// Increases the value of `self` so that falls at or above `minimum`.
     ///
@@ -75,7 +67,6 @@ extension Comparable {
         }
     }
 
-    // @documentation(SDGCornerstone.Comparable.≤=)
     // #example(1, decrease)
     /// Decreases the value of `self` so that falls at or below `maximum`.
     ///
@@ -109,7 +100,6 @@ extension Comparable {
 
     // MARK: - Approximation
 
-    // @documentation(SDGCornerstone.Comparable.≈)
     // #example(1, ≈)
     /// Returns `true` if `precedingValue` is within the range described by `followingValue`.
     ///

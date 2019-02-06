@@ -42,11 +42,6 @@ extension Data {
 
         // MARK: - BidirectionalCollection
 
-        // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
-        /// Returns the index immediately before the specified index.
-        ///
-        /// - Parameters:
-        ///     - i: The following index.
         @inlinable public func index(before i: IntMax) -> IntMax {
             return i − 1
         }
@@ -54,28 +49,17 @@ extension Data {
         // MARK: - Collection
 
         @usableFromInline internal static let startIndex: IntMax = 0
-        // #documentation(SDGCornerstone.Collection.startIndex)
-        /// The position of the first element in a non‐empty collection.
         public var startIndex: IntMax {
             return Data.BinaryView.startIndex
         }
-        // #documentation(SDGCornerstone.Collection.endIndex)
-        /// The position following the last valid index.
         @inlinable public var endIndex: IntMax {
             return IntMax(data.endIndex) × BinaryView.bitsPerByte
         }
 
-        // #documentation(SDGCornerstone.Collection.index(after:))
-        /// Returns the index immediately after the specified index.
-        ///
-        /// - Parameters:
-        ///     - i: The preceding index.
         @inlinable public func index(after i: IntMax) -> IntMax {
             return i + 1
         }
 
-        // #documentation(SDGCornerstone.Collection.subscript(position:))
-        /// Accesses the element at the specified position.
         @inlinable public subscript(position: IntMax) -> Bool {
             get {
                 return data[byteIndex(position)].binary[bitIndex(position)]
@@ -87,8 +71,6 @@ extension Data {
 
         // MARK: - CustomStringConvertible
 
-        // #documentation(SDGCornerstone.CustomStringConvertible.description)
-        /// A textual representation of the instance.
         public var description: String {
             let bytes = data.map { String(describing: $0.binary) }
             return bytes.joined(separator: " ")

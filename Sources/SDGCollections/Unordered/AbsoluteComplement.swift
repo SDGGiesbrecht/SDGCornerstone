@@ -33,24 +33,14 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     @inlinable public var description: String {
         return "(" + String(describing: base) + ")′"
     }
 
     // MARK: - SetDefinition
 
-    // #documentation(SDGCornerstone.SetDefinition.Element)
-    /// The element type.
     public typealias Element = Base.Element
 
-    // #documentation(SDGCornerstone.SetDefinition.∋)
-    /// Returns `true` if `precedingValue` contains `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The set.
-    ///     - followingValue: The element to test.
     @inlinable public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element) -> Bool {
         return precedingValue.base ∌ followingValue
     }

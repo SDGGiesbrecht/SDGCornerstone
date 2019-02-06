@@ -22,11 +22,9 @@ import SDGControlFlow
 /// - `static var universe: Self { get }`
 public protocol SetInRepresentableUniverse : MutableSet {
 
-    // @documentation(SDGCornerstone.RepresentableUniverse.universe)
     /// An instance containing all possible elements.
     static var universe: Self { get }
 
-    // @documentation(SDGCornerstone.RepresentableUniverse.′)
     // #documentation(SDGCornerstone.SetDefinition.′)
     /// Returns the absolute complement of the set.
     ///
@@ -34,7 +32,6 @@ public protocol SetInRepresentableUniverse : MutableSet {
     ///     - operand: The set.
     static postfix func ′(operand: Self) -> Self
 
-    // @documentation(SDGCornerstone.RepresentableUniverse.′=)
     /// Sets the operand to its absolute complement.
     ///
     /// - Parameters:
@@ -44,20 +41,10 @@ public protocol SetInRepresentableUniverse : MutableSet {
 
 extension SetInRepresentableUniverse {
 
-    // #documentation(SDGCornerstone.RepresentableUniverse.′)
-    /// Returns the absolute complement of the set.
-    ///
-    /// - Parameters:
-    ///     - operand: The set.
     @inlinable public static postfix func ′(operand: Self) -> Self {
         return nonmutatingVariant(of: ′=, on: operand)
     }
 
-    // #documentation(SDGCornerstone.RepresentableUniverse.′=)
-    /// Sets the operand to its absolute complement.
-    ///
-    /// - Parameters:
-    ///     - operand: The set.
     @inlinable public static postfix func ′=(operand: inout Self) {
         operand = universe ∖ operand
     }

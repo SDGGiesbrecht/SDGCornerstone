@@ -80,45 +80,30 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // MARK: - Collection
 
-    // #documentation(SDGCornerstone.Collection.startIndex)
-    /// The position of the first element in a non‐empty collection.
     @inlinable public var startIndex: Dictionary<X, Y>.Index {
         return xToY.startIndex
     }
 
-    // #documentation(SDGCornerstone.Collection.endIndex)
-    /// The position following the last valid index.
     @inlinable public var endIndex: Dictionary<X, Y>.Index {
         return xToY.endIndex
     }
 
-    // #documentation(SDGCornerstone.Collection.index(after:))
-    /// Returns the index immediately after the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The preceding index.
     @inlinable public func index(after i: Dictionary<X, Y>.Index) -> Dictionary<X, Y>.Index {
         return xToY.index(after: i)
     }
 
-    // #documentation(SDGCornerstone.Collection.subscript(position:))
-    /// Accesses the element at the specified position.
     @inlinable public subscript(position: Dictionary<X, Y>.Index) -> (X, Y) {
         return xToY[position]
     }
 
     // MARK: - ExpressibleByDictionaryLiteral
 
-    // #documentation(SDGCornerstone.ExpressibleByDictionaryLiteral.init(dictionaryLiteral:))
-    /// Creates an instance from a dictionary literal.
     @inlinable public init(dictionaryLiteral elements: (X, Y)...) {
         self.init(Dictionary(uniqueKeysWithValues: elements))
     }
 
     // MARK: - TransparentWrapper
 
-    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
-    /// The wrapped instance.
     @inlinable public var wrappedInstance: Any {
         return xToY
     }

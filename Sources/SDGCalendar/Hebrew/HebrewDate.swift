@@ -187,11 +187,6 @@ internal struct HebrewDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     internal init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let year = try container.decode(HebrewYear.self)
@@ -204,11 +199,6 @@ internal struct HebrewDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     internal func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(year)
@@ -220,8 +210,6 @@ internal struct HebrewDate : DateDefinition, MarkupPlaygroundDisplay {
 
     // MARK: - MarkupPlaygroundDisplay
 
-    // #documentation(SDGCornerstone.MarkupPlaygroundDisplay.playgroundDescriptionMarkup())
-    /// The markup representation of the instance.
     public func playgroundDescriptionMarkup() -> SemanticMarkup {
         return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             let date = CalendarDate(definition: self)

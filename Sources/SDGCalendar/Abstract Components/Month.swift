@@ -18,7 +18,6 @@ import SDGCornerstoneLocalizations
 /// A calendar compenent representing a month of the year.
 public protocol Month : TextualPlaygroundDisplay {
 
-    // @documentation(SDGCornerstone.Month.inEnglish())
     /// Returns the English name.
     func inEnglish() -> StrictString
 
@@ -32,8 +31,6 @@ extension Month {
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {

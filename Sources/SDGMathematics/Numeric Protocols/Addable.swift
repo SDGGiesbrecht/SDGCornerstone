@@ -23,7 +23,6 @@ import SDGControlFlow
 /// - `static func += (precedingValue: inout Self, followingValue: Self)`
 public protocol Addable {
 
-    // @documentation(SDGCornerstone.Addable.+)
     /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
@@ -31,7 +30,6 @@ public protocol Addable {
     ///     - followingValue: The value to add.
     static func + (precedingValue: Self, followingValue: Self) -> Self
 
-    // @documentation(SDGCornerstone.Addable.+=)
     /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
@@ -42,39 +40,13 @@ public protocol Addable {
 
 extension Addable {
 
-    // #documentation(SDGCornerstone.Addable.+)
-    /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The starting value.
-    ///     - followingValue: The value to add.
     @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
-
-    // @documentation(SDGCornerstone.Addable(Summation).+)
-    /// Returns the sum of the two values.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
-
-    // @documentation(SDGCornerstone.Addable(Summation).+=)
-    /// Adds the following value to the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to add.
 }
 
 extension Addable where Self : Strideable, Self.Stride == Self {
 
-    // #documentation(SDGCornerstone.Addable(Summation).+)
-    /// Returns the sum of the two values.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
         // Disambiguate Addable vs Strideable
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)

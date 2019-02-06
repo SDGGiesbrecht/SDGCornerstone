@@ -18,19 +18,12 @@ extension Data : BitField {
 
     // MARK: - BitField
 
-    // #documentation(SDGCornerstone.BitField.formBitwiseNot())
-    /// Inverts the bits.
     @inlinable public mutating func formBitwiseNot() {
         for index in indices {
             self[index].formBitwiseNot()
         }
     }
 
-    // #documentation(SDGCornerstone.BitField.formBitwiseAnd(with:))
-    /// Removes the bits not also present in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public mutating func formBitwiseAnd(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
@@ -40,11 +33,6 @@ extension Data : BitField {
         removeSubrange(end...)
     }
 
-    // #documentation(SDGCornerstone.BitField.formBitwiseOr(with:))
-    /// Inserts the bits present in `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public mutating func formBitwiseOr(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
@@ -54,11 +42,6 @@ extension Data : BitField {
         append(contentsOf: other[end...])
     }
 
-    // #documentation(SDGCornerstone.BitField.formBitwiseExclusiveOr(with:))
-    /// Inserts the bits present in `other` and removes the bits present in both.
-    ///
-    /// - Parameters:
-    ///     - other: The other bits.
     @inlinable public mutating func formBitwiseExclusiveOr(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 

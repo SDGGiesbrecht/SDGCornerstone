@@ -21,11 +21,9 @@ where Vector : IntegralArithmetic {
 
     // MARK: - Associated Type
 
-    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.RawValue)
     /// The raw value type.
     typealias  RawValue = Vector
 
-    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.init(unsafeRawValue:))
     /// Creates an instance with an unchecked raw value.
     ///
     /// - Note: Do not call this initializer directly. Call `init(_:)` instead, because it validates the raw value before passing it to this initializer.
@@ -34,11 +32,9 @@ where Vector : IntegralArithmetic {
     ///     - unsafeRawValue: The raw value.
     init(unsafeRawValue: RawValue)
 
-    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.validRange)
     /// The valid range for raw values.
     static var validRange: Range<RawValue>? { get }
 
-    // @documentation(SDGCornerstone.RawRepresentableCalendarComponent.rawValue)
     /// The raw value.
     var rawValue: RawValue { get }
 }
@@ -77,11 +73,6 @@ extension RawRepresentableCalendarComponent {
 
     // MARK: - ExpressibleByIntegerLiteral
 
-    // #documentation(SDGCornerstone.ExpressibleByIntegerLiteral.init(integerLiteral:))
-    /// Creates an instance from an integer literal.
-    ///
-    /// - Parameters:
-    ///     - integerLiteral: The integer literal.
     @inlinable public init(integerLiteral: UIntMax) {
         self.init(RawValue(integerLiteral))
     }
@@ -96,20 +87,10 @@ public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCa
 
 extension CodableViaRawRepresentableCalendarComponent {
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: rawValue)
     }
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: RawValue.self, convert: { Self(possibleRawValue: $0) })
     }

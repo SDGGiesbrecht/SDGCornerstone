@@ -15,15 +15,12 @@
 /// A calendar component with an iCalendar representation.
 public protocol ICalendarComponent {
 
-    // @documentation(SDGCornerstone.ICalendarCompenent.inICalendarFormat())
     /// Returns a string representation in the iCalendar format.
     func inICalendarFormat() -> StrictString
 }
 
 extension ICalendarComponent where Self : ISOCalendarComponent {
 
-    // #documentation(SDGCornerstone.ICalendarCompenent.inICalendarFormat())
-    /// Returns a string representation in the iCalendar format.
     @inlinable public func inICalendarFormat() -> StrictString {
         return inISOFormat()
     }

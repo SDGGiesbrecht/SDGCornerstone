@@ -20,7 +20,6 @@
 /// - `var Δy: Scalar { get set }`
 public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 
-    // @documentation(SDGCornerstone.TwoDimensionalVector.init(Δx:Δy:))
     /// Creates a vector using the specified differences in *x* and *y*.
     ///
     /// - Parameters:
@@ -28,11 +27,9 @@ public protocol TwoDimensionalVector : Negatable, VectorProtocol {
     ///     - Δy: The difference in *y*.
     init(Δx: Scalar, Δy: Scalar)
 
-    // @documentation(SDGCornerstone.TwoDimensionalVector.Δx)
     /// The difference in *x*.
     var Δx: Scalar { get set }
 
-    // @documentation(SDGCornerstone.TwoDimensionalVector.Δy)
     /// The difference in *y*.
     var Δy: Scalar { get set }
 }
@@ -104,12 +101,6 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - Addable
 
-    // #documentation(SDGCornerstone.Addable.+=)
-    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to add.
     @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
         precedingValue.Δx += followingValue.Δx
         precedingValue.Δy += followingValue.Δy
@@ -117,12 +108,6 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - Subtractable
 
-    // #documentation(SDGCornerstone.Subtractable.−=)
-    /// Subtracts the following value from the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to subtract.
     @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
         precedingValue.Δx −= followingValue.Δx
         precedingValue.Δy −= followingValue.Δy
@@ -130,8 +115,6 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - Hashable
 
-    // #documentation(SDGCornerstone.Hashable.hash(into:))
-    /// Hashes the essential components of this value by feeding them into the given hasher.
     @inlinable public func hash(into hasher: inout Hasher) {
         hasher.combine(Δx)
         hasher.combine(Δy)
@@ -139,23 +122,11 @@ extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
 
     // MARK: - VectorProtocol
 
-    // #documentation(SDGCornerstone.VectorProtocol.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The scalar coefficient by which to multiply.
     @inlinable public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ×= followingValue
         precedingValue.Δy ×= followingValue
     }
 
-    // #documentation(SDGCornerstone.VectorProtocol.÷=)
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
     @inlinable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ÷= followingValue
         precedingValue.Δy ÷= followingValue

@@ -56,11 +56,6 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - BidirectionalCollection
 
-    // #documentation(SDGCornerstone.BidirectionalCollection.index(before:))
-    /// Returns the index immediately before the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The following index.
     @inlinable public func index(before i: LineViewIndex) -> LineViewIndex {
 
         let newline: Range<String.ScalarView.Index>
@@ -87,23 +82,15 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Collection
 
+    // #workaround(workspace version 0.17.0, Redundant documentation.)
     // #documentation(SDGCornerstone.Collection.Indices)
     /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultIndices<LineView>
 
-    // #documentation(SDGCornerstone.Collection.startIndex)
-    /// The position of the first element in a non‐empty collection.
     public let startIndex: LineViewIndex
 
-    // #documentation(SDGCornerstone.Collection.endIndex)
-    /// The position following the last valid index.
     public let endIndex: LineViewIndex = LineViewIndex.endIndex()
 
-    // #documentation(SDGCornerstone.Collection.index(after:))
-    /// Returns the index immediately after the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The preceding index.
     @inlinable public func index(after i: LineViewIndex) -> LineViewIndex {
         guard let newline = i.newline(in: base.scalars),
             ¬newline.isEmpty else {
@@ -112,8 +99,6 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
         return LineViewIndex(start: newline.upperBound)
     }
 
-    // #documentation(SDGCornerstone.Collection.subscript(position:))
-    /// Accesses the element at the specified position.
     @inlinable public subscript(_ position: LineViewIndex) -> Line<Base> {
         get {
             let newline = position.newline(in: base.scalars)!
@@ -132,18 +117,10 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - RangeReplaceableCollection
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.init())
-    /// Creates a new, empty collection.
     @inlinable public init() {
         self.init(Base())
     }
 
-    // #documentation(SDGCornerstone.RangeReplaceableCollection.replaceSubrange(_:with:))
-    /// Replaces the specified subrange of elements with the given collection.
-    ///
-    /// - Parameters:
-    ///     - subrange: The subrange of the collection to replace.
-    ///     - newElements: The new elements to add to the collection.
     @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<Index>, with newElements: S) where S.Element == Line<Base> {
         var replacement = Base()
         for line in newElements {
@@ -157,8 +134,6 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     @inlinable public var description: String {
         return String(describing: base)
     }

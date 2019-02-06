@@ -33,8 +33,6 @@ internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         return "(" + String(describing: baseDate) + ") + " + String(describing: intervalSince)
     }
@@ -55,11 +53,6 @@ internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     internal init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let interval = try container.decode(CalendarInterval<FloatMax>.self)
@@ -69,11 +62,6 @@ internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     internal func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(intervalSince)

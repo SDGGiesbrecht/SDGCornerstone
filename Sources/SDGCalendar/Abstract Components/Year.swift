@@ -18,7 +18,6 @@ import SDGCornerstoneLocalizations
 /// A calendar compenent representing a year.
 public protocol Year : TextualPlaygroundDisplay {
 
-    // @documentation(SDGCornerstone.Year.inEnglishDigits())
     /// Returns the year in English digits.
     func inEnglishDigits() -> StrictString
 
@@ -32,8 +31,6 @@ extension Year {
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {

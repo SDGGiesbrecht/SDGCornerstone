@@ -27,61 +27,45 @@ public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
 
     // MARK: - Classification
 
-    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
     /// Returns `true` if `self` is positive.
     var isPositive: Bool { get }
 
-    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
     /// Returns `true` if `self` is negative.
     var isNegative: Bool { get }
 
-    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
     /// Returns `true` if `self` is positive or zero.
     var isNonNegative: Bool { get }
 
-    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
     /// Returns `true` if `self` is negative or zero.
     var isNonPositive: Bool { get }
 
     // MARK: - Operations
 
-    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
     /// The absolute value.
     var absoluteValue: Self { get }
 
-    // @documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
     /// Sets `self` to its absolute value.
     mutating func formAbsoluteValue()
 }
 
 extension NumericAdditiveArithmetic {
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isPositive)
-    /// Returns `true` if `self` is positive.
     @inlinable public var isPositive: Bool {
         return self > Self.additiveIdentity
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNegative)
-    /// Returns `true` if `self` is negative.
     @inlinable public var isNegative: Bool {
         return self < Self.additiveIdentity
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonNegative)
-    /// Returns `true` if `self` is positive or zero.
     @inlinable public var isNonNegative: Bool {
         return self ≥ Self.additiveIdentity
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.isNonPositive)
-    /// Returns `true` if `self` is negative or zero.
     @inlinable public var isNonPositive: Bool {
         return self ≤ Self.additiveIdentity
     }
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.absoluteValue)
-    /// The absolute value.
     @inlinable public var absoluteValue: Self {
         return nonmutatingVariant(of: { $0.formAbsoluteValue() }, on: self)
     }
@@ -95,7 +79,6 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     public var contents: Wrapped
 }
 
-// @documentation(SDGCornerstone.NumericAdditiveArithmetic.|x)
 // #example(1, absoluteValue)
 /// Returns the absolute value (in conjuction with postfix `|(_:)`).
 ///
@@ -111,7 +94,6 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     return operand.contents
 }
 
-// @documentation(SDGCornerstone.NumericAdditiveArithmetic.x|)
 // #example(1, absoluteValue)
 /// Returns the absolute value (in conjuction with prefix `|(_:)`).
 ///
@@ -129,8 +111,6 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 
 extension NumericAdditiveArithmetic where Self : Negatable {
 
-    // #documentation(SDGCornerstone.NumericAdditiveArithmetic.formAbsoluteValue)
-    /// Sets `self` to its absolute value.
     @inlinable public mutating func formAbsoluteValue() {
         if self < Self.additiveIdentity {
             self.negate()

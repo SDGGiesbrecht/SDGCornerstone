@@ -24,7 +24,7 @@ import SDGCornerstoneLocalizations
 /// let decillionth: RationalNumber = "0.000 000 000 000 000 000 000 000 000 000 001"
 /// let half = RationalNumber(binary: "0.1")
 /// ```
-public struct RationalNumber : Addable, Codable, Comparable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
+public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equatable, ExpressibleByFloatLiteral, Hashable, IntegralArithmetic, Negatable, PointProtocol, RationalArithmetic, RationalNumberProtocol, Subtractable, TextConvertibleNumber, WholeArithmetic, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -93,12 +93,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - Addable
 
-    // #documentation(SDGCornerstone.Addable.+=)
-    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to add.
     public static func += (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
 
         // _a_  +  _c_, b ≠ 0, d ≠ 0
@@ -122,12 +116,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     public static func < (precedingValue: RationalNumber, followingValue: RationalNumber) -> Bool {
         //    _a_   <?     _c_ , b ≠ 0, d ≠ 0
         //     b            d
@@ -144,8 +132,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
@@ -157,11 +143,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let numerator = try container.decode(Integer.self)
@@ -171,11 +152,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(numerator)
@@ -184,39 +160,24 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     public static func == (precedingValue: RationalNumber, followingValue: RationalNumber) -> Bool {
         return precedingValue.definition == followingValue.definition
     }
 
     // MARK: - IntegralArithmetic
 
-    // #documentation(SDGCornerstone.IntegralArithmetic.init(int:))
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of `IntMax`.
     public init(_ int: IntMax) {
         self.init(Integer(int))
     }
 
     // MARK: - Negatable
 
-    // #documentation(SDGCornerstone.Negatable.negate())
-    /// Replaces this value with its additive inverse.
     public mutating func negate() {
         definition.numerator.negate()
     }
 
     // MARK: - Numeric
 
-    // #documentation(SDGCornerstone.Numeric.init(exactly:))
-    /// Creates a new instance from the given integer, if it can be represented exactly.
     @inlinable public init?<T>(exactly source: T) where T : BinaryInteger {
         guard let integer = Integer(exactly: source) else {
             unreachable()
@@ -226,18 +187,10 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = RationalNumber
 
     // MARK: - RationalArithmetic
 
-    // #documentation(SDGCornerstone.RationalArithmetic.÷=)
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
     public static func ÷= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
         var irregular = precedingValue.definition
         irregular.numerator ×= followingValue.denominator
@@ -247,41 +200,22 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     // MARK: - RationalNumberProtocol
 
-    // @documentation(SDGCornerstone.RationalNumberProtocol.reducedSimpleFraction())
-    /// Returns the numerator and denominator of the number as a reduced simple fraction.
     public func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer) {
         return (numerator, denominator)
     }
 
     // MARK: - Subtractable
 
-    // #documentation(SDGCornerstone.Subtractable.−=)
-    /// Subtracts the following value from the preceding value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to subtract.
     public static func −= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
         precedingValue += −followingValue
     }
 
     // MARK: - WholeArithmetic
 
-    // #documentation(SDGCornerstone.WholeArithmetic.init(uInt:))
-    /// Creates an instance equal to `uInt`.
-    ///
-    /// - Parameters:
-    ///     - uInt: An instance of `UIntMax`.
     public init(_ uInt: UIntMax) {
         self.init(Integer(uInt))
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.×=)
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The coefficient by which to multiply.
     public static func ×= (precedingValue: inout RationalNumber, followingValue: RationalNumber) {
         var irregular = precedingValue.definition
         irregular.numerator ×= followingValue.numerator
@@ -289,13 +223,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
         precedingValue.definition = irregular
     }
 
-    // #documentation(SDGCornerstone.WholeArithmetic.divideAccordingToEuclid(by:))
-    /// Sets `self` to the integral quotient of `self` divided by `divisor`.
-    ///
-    /// - Note: This is a true mathematical quotient. i.e. (−5) ÷ 3 = −2 remainder 1, *not* −1 remainder −2
-    ///
-    /// - Parameters:
-    ///     - divisor: The divisor.
     public mutating func divideAccordingToEuclid(by divisor: RationalNumber) {
         let rational = self ÷ divisor
         let euclidean = rational.numerator.dividedAccordingToEuclid(by: rational.denominator)
@@ -304,12 +231,6 @@ public struct RationalNumber : Addable, Codable, Comparable, Equatable, Expressi
 
     private static let randomPrecision: Integer = Integer(UIntMax.max) + 1
 
-    // #documentation(SDGCornerstone.WholeArithmetic.random(in:using:))
-    /// Creates a random value within a particular range using the specified randomizer.
-    ///
-    /// - Parameters:
-    ///     - range: The allowed range for the random value.
-    ///     - generator: The randomizer to use to generate the random value.
     public static func random<R>(in range: ClosedRange<RationalNumber>, using generator: inout R) -> RationalNumber where R : RandomNumberGenerator {
         let difference = range.upperBound − range.lowerBound
         let denominator = difference.denominator

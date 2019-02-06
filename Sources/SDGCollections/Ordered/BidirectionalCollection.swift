@@ -16,12 +16,6 @@ import SDGMathematics
 
 extension BidirectionalCollection {
 
-    // @documentation(SDGCornerstone.BidirectionalCollection.index(before:))
-    /// Returns the index immediately before the specified index.
-    ///
-    /// - Parameters:
-    ///     - i: The following index.
-
     /// Returns the backward version of the specified range.
     ///
     /// - Parameters:

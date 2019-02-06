@@ -86,52 +86,22 @@ public protocol ComparableSet : Equatable, SetDefinition {
 
 extension ComparableSet {
 
-    // #documentation(SDGCornerstone.ComparableSet.⊈)
-    /// Returns `true` if `precedingValue` is not a subset of `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The possible subset to test.
-    ///     - followingValue: The other set.
     @inlinable public static func ⊈ (precedingValue: Self, followingValue: Self) -> Bool {
         return ¬(precedingValue ⊆ followingValue)
     }
 
-    // #documentation(SDGCornerstone.ComparableSet.⊇)
-    /// Returns `true` if `precedingValue` is a superset of `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The possible superset to test.
-    ///     - followingValue: The other set.
     @inlinable public static func ⊇ (precedingValue: Self, followingValue: Self) -> Bool {
         return followingValue ⊆ precedingValue
     }
 
-    // #documentation(SDGCornerstone.ComparableSet.⊉)
-    /// Returns `true` if `precedingValue` is not a superset of `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The possible superset to test.
-    ///     - followingValue: The other set.
     @inlinable public static func ⊉ (precedingValue: Self, followingValue: Self) -> Bool {
         return ¬(precedingValue ⊇ followingValue)
     }
 
-    // #documentation(SDGCornerstone.ComparableSet.⊊)
-    /// Returns `true` if `precedingValue` is a strict subset of `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The possible subset to test.
-    ///     - followingValue: The other set.
     @inlinable public static func ⊊ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊆ followingValue ∧ precedingValue ⊉ followingValue
     }
 
-    // #documentation(SDGCornerstone.ComparableSet.⊋)
-    /// Returns `true` if `precedingValue` is a strict superset of `followingValue`.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The possible superset to test.
-    ///     - followingValue: The other set.
     @inlinable public static func ⊋ (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊈ followingValue
     }
@@ -139,23 +109,12 @@ extension ComparableSet {
     @inlinable internal func isDisjointAsComparableSet(with other: Self) -> Bool {
         return ¬overlaps(other)
     }
-    // #documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))
-    /// Returns `true` if the sets are disjoint.
-    ///
-    /// - Parameters:
-    ///     - other: Another set.
     @inlinable public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
     }
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     @inlinable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue ⊇ followingValue ∧ precedingValue ⊆ followingValue
     }
@@ -163,11 +122,6 @@ extension ComparableSet {
 
 extension ComparableSet where Self : SetAlgebra {
 
-    // #documentation(SDGCornerstone.ComparableSet.isDisjoint(with:))
-    /// Returns `true` if the sets are disjoint.
-    ///
-    /// - Parameters:
-    ///     - other: Another set.
     @inlinable public func isDisjoint(with other: Self) -> Bool {
         return isDisjointAsComparableSet(with: other)
         // Disambiguate ComparableSet.isDisjoint(with:) vs SetAlgebra.isDisjoint(with:)

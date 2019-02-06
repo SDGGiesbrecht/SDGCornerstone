@@ -42,20 +42,12 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
 
     // MARK: - Comparable
 
-    // #documentation(SDGCornerstone.Comparable.<)
-    /// Returns `true` if the preceding value is less than the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: Another value.
     public static func < (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Bool {
         return (precedingValue.year, precedingValue.month) < (followingValue.year, followingValue.month)
     }
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
@@ -77,11 +69,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let month = try container.decode(HebrewMonth.self)
@@ -91,11 +78,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(month)
@@ -104,28 +86,14 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
 
     // MARK: - Equatable
 
-    // #documentation(SDGCornerstone.Equatable.==)
-    /// Returns `true` if the two values are equal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
     public static func == (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Bool {
         return precedingValue.year == followingValue.year ∧ precedingValue.month == followingValue.month
     }
 
     // MARK: - PointProtocol
 
-    // #documentation(SDGCornerstone.PointProtocol.Vector)
-    /// The type to be used as a vector.
     public typealias Vector = Int
 
-    // #documentation(SDGCornerstone.PointProtocol.+=)
-    /// Moves the preceding point by the following vector.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The point to modify.
-    ///     - followingValue: The vector to add.
     public static func += (precedingValue: inout HebrewMonthAndYear, followingValue: Int) {
         if followingValue.isNegative {
             for _ in 1 ... |followingValue| {
@@ -138,12 +106,6 @@ public struct HebrewMonthAndYear : Comparable, Equatable, FixedScaleOneDimension
         }
     }
 
-    // #documentation(SDGCornerstone.PointProtocol.−)
-    /// Returns the vector that leads from the preceding point to the following point.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The endpoint.
-    ///     - followingValue: The startpoint.
     public static func − (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear) -> Int {
         var distance = 0
         var point = precedingValue

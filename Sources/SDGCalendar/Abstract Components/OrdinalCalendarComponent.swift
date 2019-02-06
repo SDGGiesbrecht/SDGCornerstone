@@ -19,36 +19,18 @@ extension OrdinalCalendarComponent {
 
     // MARK: - ConsistentlyOrderedCalendarComponent
 
-    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(numberAlreadyElapsed:))
-    /// Creates a component from the number of complete components already elapsed.
-    ///
-    /// - Precondition: The number must be valid for the particular compenent.
-    ///
-    /// - Parameters:
-    ///     - numberAlreadyElapsed: The number of complete compenents already elapsed.
     @inlinable public init(numberAlreadyElapsed: Vector) {
         self.init(numberAlreadyElapsed + (1 as Vector))
     }
 
-    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.init(ordinal:))
-    /// Creates a component from an ordinal.
-    ///
-    /// - Precondition: The ordinal must be valid for the particular compenent.
-    ///
-    /// - Parameters:
-    ///     - ordinal: The ordinal.
     @inlinable public init(ordinal: Vector) {
         self.init(ordinal)
     }
 
-    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.numberAlreadyElapsed)
-    /// The number of complete components already elapsed.
     @inlinable public var numberAlreadyElapsed: Vector {
         return rawValue − (1 as Vector)
     }
 
-    // #documentation(SDGCornerstone.ConsistentlyOrderedCalendarComponent.ordinal)
-    /// The ordinal.
     @inlinable public var ordinal: Vector {
         return rawValue
     }

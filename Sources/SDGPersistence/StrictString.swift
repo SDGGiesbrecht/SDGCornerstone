@@ -18,18 +18,10 @@ extension StrictString : FileConvertible {
 
     // MARK: - FileConvertible
 
-    // #documentation(SDGCornerstone.FileConvertible.init(file:origin:))
-    /// Creates an instance using raw data from a file on the disk.
-    ///
-    /// - Parameters:
-    ///     - file: The data.
-    ///     - origin: A URL indicating where the data came from. In some cases this may be helpful in determining how to interpret the data, such as by checking the file extension. This parameter may be `nil` if the data did not come from a file on the disk.
     @inlinable public init(file: Data, origin: URL?) throws {
         self.init(try String(file: file, origin: origin))
     }
 
-    // #documentation(SDGCornerstone.FileConvertible.file)
-    /// A binary representation that can be written as a file.
     @inlinable public var file: Data {
         return String(self).file
     }

@@ -43,30 +43,18 @@ internal struct FoundationDate : DateDefinition, TransparentWrapper {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     internal init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: Date.self, convert: { FoundationDate($0) })
     }
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     internal func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: date)
     }
 
     // MARK: - TransparentWrapper
 
-    // #documentation(SDGCornerstone.TransparentWrapper.wrapped)
-    /// The wrapped instance.
     public var wrappedInstance: Any {
         return date
     }

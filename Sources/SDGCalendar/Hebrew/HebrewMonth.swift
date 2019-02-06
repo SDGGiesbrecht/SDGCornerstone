@@ -291,20 +291,14 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - CalendarComponent
 
-    // #documentation(SDGCornerstone.CalendarComponent.meanDuration)
-    /// The mean duration.
     public static var meanDuration: CalendarInterval<FloatMax> {
         return lengthOfMoon
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.minimumDuration)
-    /// The minimum duration.
     public static var minimumDuration: CalendarInterval<FloatMax> {
         return FloatMax(HebrewMonth.minimumNumberOfDays).days
     }
 
-    // #documentation(SDGCornerstone.CalendarComponent.maximumDuration)
-    /// The maximum duration.
     public static var maximumDuration: CalendarInterval<FloatMax> {
         return FloatMax(HebrewMonth.maximumNumberOfDays).days
     }
@@ -422,11 +416,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: StrictString.self, convert: { (string: StrictString) -> HebrewMonth? in
             switch string {
@@ -451,11 +440,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         let number: StrictString
         switch self {
@@ -471,8 +455,6 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
 
     // MARK: - Month
 
-    // #documentation(SDGCornerstone.Month.inEnglish())
-    /// Returns the English name.
     public func inEnglish() -> StrictString {
         switch self {
         case .tishrei:
@@ -637,10 +619,4 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
             return "אלול"
         }
     }
-
-    // MARK: - RawRepresentable
-
-    // #documentation(SDGCornerstone.RawRepresentable.RawValue)
-    /// The raw value type.
-    public typealias RawValue = Int
 }

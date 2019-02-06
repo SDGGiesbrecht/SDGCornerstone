@@ -15,7 +15,6 @@
 /// A calendar component with an iCalendar representation.
 public protocol ISOCalendarComponent {
 
-    // @documentation(SDGCornerstone.ISOCalendarCompenent.inISOFormat())
     /// Returns a string representation in the ISO format.
     func inISOFormat() -> StrictString
 }

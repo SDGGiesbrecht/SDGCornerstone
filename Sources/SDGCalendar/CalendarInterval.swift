@@ -22,10 +22,11 @@ private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutes
 
 @usableFromInline internal let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 
+private typealias Measurement = SDGMathematics.Measurement
 /// A time interval.
 ///
 /// The units are all defined as fractions or multiples of days. This makes them convenient for calendaring, but not for physics. (Seconds are not SI seconds and leap seconds do not exist.)
-public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathematics.Measurement, TextualPlaygroundDisplay {
+public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodable, Measurement, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
@@ -203,8 +204,6 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - CustomStringConvertible
 
-    // #documentation(SDGCornerstone.CustomStringConvertible.description)
-    /// A textual representation of the instance.
     public var description: String {
         return String(UserFacing<StrictString, FormatLocalization>({ localization in
             switch localization {
@@ -251,11 +250,6 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Decodable
 
-    // #documentation(SDGCornerstone.Decodable.init(from:))
-    /// Creates a new instance by decoding from the given decoder.
-    ///
-    /// - Parameters:
-    ///     - decoder: The decoder to read data from.
     @inlinable public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let units = try container.decode(Scalar.self)
@@ -265,11 +259,6 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Encodable
 
-    // #documentation(SDGCornerstone.Encodable.encode(to:))
-    /// Encodes this value into the given encoder.
-    ///
-    /// - Parameters:
-    ///     - encoder: The encoder to write data to.
     @inlinable public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(inUnits)
@@ -278,21 +267,10 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Codable, SDGMathem
 
     // MARK: - Measurement
 
-    // #documentation(SDGCornerstone.Measurement.init(rawValue:))
-    /// Creates a measurement from a raw value in undefined but consistent units.
-    ///
-    /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
-    ///
-    /// - Parameters:
-    ///     - rawValue: The raw value.
     @inlinable public init(rawValue: Scalar) {
         inUnits = rawValue
     }
 
-    // #documentation(SDGCornerstone.Measurement.rawValue)
-    /// A raw value in undefined but consistent units.
-    ///
-    /// Used by `Measurement`’s default implementation of methods where various units make no difference (such as multiplication by a scalar).
     @inlinable public var rawValue: Scalar {
         get {
             return inUnits
