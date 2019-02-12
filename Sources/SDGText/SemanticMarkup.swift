@@ -206,9 +206,6 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // MARK: - Collection
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.Collection.Element)
-    /// The type of the elements of the collection.
     public typealias Element = Unicode.Scalar
 
     @inlinable public var startIndex: String.ScalarView.Index {

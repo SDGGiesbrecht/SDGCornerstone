@@ -82,9 +82,6 @@ public struct LineView<Base : StringFamily> : BidirectionalCollection, Collectio
 
     // MARK: - Collection
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.Collection.Indices)
-    /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultIndices<LineView>
 
     public let startIndex: LineViewIndex

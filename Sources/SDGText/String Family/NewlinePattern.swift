@@ -39,14 +39,6 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     // MARK: - Pattern
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    /// Returns the ranges of possible matches beginning at the specified index in the collection.
-    ///
-    /// The ranges are sorted in order of preference. Ranges can be tried one after another down through the list in the event that some should be disqualified for some external reason, such as being part of a larger composite pattern.
-    ///
-    /// - Parameters:
-    ///     - collection: The collection in which to search.
-    ///     - location: The index at which to check for the beginning of a match.
     @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
@@ -65,14 +57,6 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
         return result
     }
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    /// Returns the primary match beginning at the specified index in the collection.
-    ///
-    /// This may be optimized, but the result must be the same as `matches(in: collection at: location).first`.
-    ///
-    /// - Parameters:
-    ///     - collection: The collection in which to search.
-    ///     - location: The index at which to check for the beginning of a match.
     @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
@@ -90,10 +74,6 @@ public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
         return (location ... location).relative(to: collection)
     }
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    /// Retruns a pattern that checks for the reverse pattern.
-    ///
-    /// This is suitable for performing backward searches by applying it to the reversed collection.
     @inlinable public override func reversed() -> NewlinePattern {
         return NewlinePattern.reverseNewline
     }

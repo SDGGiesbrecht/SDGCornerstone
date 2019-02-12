@@ -14,20 +14,6 @@
 
 extension Collection {
 
-    // MARK: - Conformance
-
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // @documentation(SDGCornerstone.Collection.Element)
-    /// The type of the elements of the collection.
-
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // @documentation(SDGCornerstone.Collection.Index)
-    /// The type of the indices of the collection.
-
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // @documentation(SDGCornerstone.Collection.Indices)
-    /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
-
     // MARK: - Indices
 
     /// Returns the range for all of `self`.
