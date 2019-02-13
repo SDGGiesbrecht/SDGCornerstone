@@ -23,7 +23,7 @@
 
 // MARK: - Methods
 
-// #documentation(SDGCornerstone.test(method:of:returns:)
+// #documentation(SDGCornerstone.test(method:of:returns:))
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -45,7 +45,7 @@
     }
 }
 
-// #documentation(SDGCornerstone.test(method:of:with:returns:)
+// #documentation(SDGCornerstone.test(method:of:with:returns:))
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -69,7 +69,7 @@
     }
 }
 
-// #documentation(SDGCornerstone.test(mutatingMethod:of:resultsIn:)
+// #documentation(SDGCornerstone.test(mutatingMethod:of:resultsIn:))
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -92,7 +92,7 @@
     }
 }
 
-// #documentation(SDGCornerstone.test(mutatingMethod:of:with:resultsIn:)
+// #documentation(SDGCornerstone.test(mutatingMethod:of:with:resultsIn:))
 /// Tests a method, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -119,7 +119,7 @@
 
 // MARK: - Functions
 
-// #documentation(SDGCornerstone.test(function:on:returns:)
+// #documentation(SDGCornerstone.test(function:on:returns:))
 /// Tests a function, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -141,7 +141,7 @@
     }
 }
 
-// #documentation(SDGCornerstone.test(function:on:(2)returns:)
+// #documentation(SDGCornerstone.test(function:on:(2)returns:))
 /// Tests a function, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -164,7 +164,7 @@
     }
 }
 
-// #documentation(SDGCornerstone.test(function:on:returns:)
+// #documentation(SDGCornerstone.test(function:on:returns:))
 /// Tests a function, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -188,7 +188,7 @@
 
 // MARK: - Operators
 
-// #documentation(SDGCornerstone.test(operator:on:returns:)
+// #documentation(SDGCornerstone.test(operator:on:returns:))
 /// Tests an infix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -213,7 +213,7 @@
     }
 }
 
-// #documentation(SDGCornerstone.test(prefixOperator:on:returns:)
+// #documentation(SDGCornerstone.test(prefixOperator:on:returns:))
 /// Tests a prefix operator, verifying that it returns the expected result.
 ///
 /// - Parameters:
@@ -235,7 +235,7 @@
     }
 }
 
-// #documentation(SDGCornerstone.test(postfixAssignmentOperator:with:resultsIn:)
+// #documentation(SDGCornerstone.test(postfixAssignmentOperator:with:resultsIn:))
 /// Tests a postfix assignment operator, verifying that the mutated value matches the expected result.
 ///
 /// - Parameters:
