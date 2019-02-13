@@ -21,7 +21,8 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
     ///
     /// - Parameters:
     ///     - condition: The condition an element must meet in order to match.
-    @inlinable public init(_ condition: @escaping (Element) -> Bool) {
+    ///     - element: An element to check.
+    @inlinable public init(_ condition: @escaping (_ element: Element) -> Bool) {
         self.condition = condition
     }
     // MARK: - Properties
