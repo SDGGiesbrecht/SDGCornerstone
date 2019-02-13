@@ -131,7 +131,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<A, R>(function: (call: (A) throws -> R, name: String), on argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
+@inlinable public func test<A, R>(function: (call: (_ functionArgument: A) throws -> R, name: String), on argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try function.call(argument)
         test(result ≈ expectedResult, "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
@@ -154,7 +154,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<A, B, R>(function: (call: (A, B) throws -> R, name: String), on arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
+@inlinable public func test<A, B, R>(function: (call: (_ firstFunctionArgment: A, _ secondFunctionArgument: B) throws -> R, name: String), on arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try function.call(arguments.0, arguments.1)
         test(result ≈ expectedResult, "\(function.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
@@ -176,7 +176,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<A>(function: (call: (A) throws -> Angle<A>, name: String), on argument: A, returns expectedResult: Angle<A>, file: StaticString = #file, line: UInt = #line) where A : FloatingPoint {
+@inlinable public func test<A>(function: (call: (_ functionArgument: A) throws -> Angle<A>, name: String), on argument: A, returns expectedResult: Angle<A>, file: StaticString = #file, line: UInt = #line) where A : FloatingPoint {
     do {
         let result = try function.call(argument)
         test(result.rawValue ≈ expectedResult.rawValue, "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
@@ -203,7 +203,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<P, F, R>(operator: (function: (P, F) throws -> R, name: String), on operands: (precedingValue: P, followingValue: F), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
+@inlinable public func test<P, F, R>(operator: (function: (_ precedingOperand: P, _ followingOperand: F) throws -> R, name: String), on operands: (precedingValue: P, followingValue: F), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try `operator`.function(operands.precedingValue, operands.followingValue)
         test(result ≈ expectedResult, "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
@@ -225,7 +225,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<O, R>(prefixOperator operator: (function: (O) throws -> R, name: String), on operand: O, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
+@inlinable public func test<O, R>(prefixOperator operator: (function: (_ functionOperand: O) throws -> R, name: String), on operand: O, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try `operator`.function(operand)
         test(result ≈ expectedResult, "\(`operator`.name)\(operand) → \(result) ≠ \(expectedResult)",
@@ -247,7 +247,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<O>(postfixAssignmentOperator operator: (function: (inout O) throws -> Void, name: String), with operand: O, resultsIn expectedResult: O, file: StaticString = #file, line: UInt = #line) where O : ExpressibleByFloatLiteral, O : FloatingPoint, O : Subtractable {
+@inlinable public func test<O>(postfixAssignmentOperator operator: (function: (_ functionOperand: inout O) throws -> Void, name: String), with operand: O, resultsIn expectedResult: O, file: StaticString = #file, line: UInt = #line) where O : ExpressibleByFloatLiteral, O : FloatingPoint, O : Subtractable {
     do {
         var copy = operand
         try `operator`.function(&copy)
