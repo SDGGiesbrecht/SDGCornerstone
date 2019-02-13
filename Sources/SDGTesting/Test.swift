@@ -309,6 +309,8 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// - Parameters:
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
+///     - precedingOperand: The preceding operand.
+///     - followingOperand: The following operand.
 ///     - name: The function name.
 ///     - operands: The operands to pass to the function.
 ///     - precedingValue: The preceding operand.
@@ -316,7 +318,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<P, F>(assignmentOperator operator: (function: (inout P, F) throws -> Void, name: String), with operands: (precedingValue: P, followingValue: F), resultsIn expectedResult: P, file: StaticString = #file, line: UInt = #line) where P : Equatable {
+@inlinable public func test<P, F>(assignmentOperator operator: (function: (_ precedingOperand: inout P, _ followingOperand: F) throws -> Void, name: String), with operands: (precedingValue: P, followingValue: F), resultsIn expectedResult: P, file: StaticString = #file, line: UInt = #line) where P : Equatable {
     do {
         var copy = operands.precedingValue
         try `operator`.function(&copy, operands.followingValue)
@@ -332,13 +334,15 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// - Parameters:
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
+///     - precedingOperand: The preceding operand.
+///     - followingOperand: The following operand.
 ///     - name: The function name.
 ///     - precedingValue: The preceding operand.
 ///     - followingValue: The following operand.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<P, F>(assignmentOperator operator: (function: (inout P, @autoclosure () throws -> F) throws -> Void, name: String), with precedingValue: P, _ followingValue: @autoclosure () throws -> F, resultsIn expectedResult: P, file: StaticString = #file, line: UInt = #line) where P : Equatable {
+@inlinable public func test<P, F>(assignmentOperator operator: (function: (_ precedingOperand: inout P, _ followingOperand: @autoclosure () throws -> F) throws -> Void, name: String), with precedingValue: P, _ followingValue: @autoclosure () throws -> F, resultsIn expectedResult: P, file: StaticString = #file, line: UInt = #line) where P : Equatable {
     do {
         var copy = precedingValue
         try `operator`.function(&copy, followingValue)
