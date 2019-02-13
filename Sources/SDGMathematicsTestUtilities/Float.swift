@@ -260,7 +260,7 @@
 
 // MARK: - Global Variables
 
-// #documentation(SDGCornerstone.test(variable:is:)
+// #documentation(SDGCornerstone.test(variable:is:))
 /// Tests a variable, verifying that it contains the expected value.
 ///
 /// - Parameters:
