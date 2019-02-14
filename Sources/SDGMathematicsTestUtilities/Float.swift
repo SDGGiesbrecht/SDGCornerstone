@@ -54,7 +54,6 @@
 ///     - call: The method itself.
 ///     - methodInstance: The instance on which to call the method.
 ///     - methodInstance: The instance on which to call the method.
-///     - methodArgument: An argument to pass to the method.
 ///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - argument: The argument to pass to the method.
