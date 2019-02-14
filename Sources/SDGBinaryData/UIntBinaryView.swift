@@ -54,18 +54,8 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - Collection
 
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.Collection.Element)
-    /// The type of the elements of the collection.
     public typealias Element = Bool
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.Collection.Index)
-    /// The type of the indices of the collection.
     public typealias Index = UIntValue
-
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    // #documentation(SDGCornerstone.Collection.Indices)
-    /// The type that represents the indices that are valid for subscripting the collection, in ascending order.
     public typealias Indices = DefaultIndices<BinaryView>
 
     @inlinable public var startIndex: Index {

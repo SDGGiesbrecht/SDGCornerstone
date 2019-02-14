@@ -21,7 +21,8 @@ public struct IntensionalSet<Member> : SetDefinition {
     ///
     /// - Parameters:
     ///     - condition: The defining condition.
-    @inlinable public init(where condition: @escaping (Element) -> Bool) {
+    ///     - possibleMember: An instence to check for membership.
+    @inlinable public init(where condition: @escaping (_ possibleMember: Element) -> Bool) {
         self.condition = condition
     }
 

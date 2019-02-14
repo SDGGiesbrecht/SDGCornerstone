@@ -22,10 +22,6 @@ import SDGTesting
 open class TestCase : XCTestCase {
 
     static var initialized = false
-    // #workaround(workspace version 0.17.0, Redundant documentation.)
-    /// Provides an opportunity to reset state before each test method in a test case is called.
-    ///
-    /// - Note: Subclasses must call `super.setUp()`.
     open override func setUp() {
         if ¬TestCase.initialized {
             TestCase.initialized = true

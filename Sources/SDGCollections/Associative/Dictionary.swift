@@ -90,7 +90,8 @@ extension Dictionary {
     ///
     /// - Parameters:
     ///     - transform: A mapping closure.
-    @inlinable public func mapKeys<T>(_ transform: (Key) throws -> T) rethrows -> [T: Value] {
+    ///     - key: A key to transform.
+    @inlinable public func mapKeys<T>(_ transform: (_ key: Key) throws -> T) rethrows -> [T: Value] {
         return try mapKeyValuePairs { (try transform($0), $1) }
     }
 }
