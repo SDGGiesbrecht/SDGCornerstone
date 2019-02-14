@@ -230,6 +230,7 @@
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
 ///     - functionOperand: The operand to pass to the function.
+///     - functionOperand: The operand to pass to the function.
 ///     - name: The function name.
 ///     - operand: The operand to pass to the function.
 ///     - expectedResult: The expected result.
@@ -251,6 +252,7 @@
 /// - Parameters:
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
+///     - functionOperand: The operand to pass to the function.
 ///     - functionOperand: The operand to pass to the function.
 ///     - name: The function name.
 ///     - operand: The operand to pass to the function.

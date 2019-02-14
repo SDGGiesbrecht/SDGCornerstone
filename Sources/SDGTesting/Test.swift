@@ -400,6 +400,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
 ///     - functionOperand: The operand to pass to the function.
+///     - functionOperand: The operand to pass to the function.
 ///     - name: The function name.
 ///     - operand: The operand to pass to the function.
 ///     - expectedResult: The expected result.
@@ -420,6 +421,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// - Parameters:
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
+///     - functionOperand: The operand to pass to the function.
 ///     - functionOperand: The operand to pass to the function.
 ///     - name: The function name.
 ///     - operand: The operand to pass to the function.
@@ -442,6 +444,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// - Parameters:
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
+///     - functionOperand: The operand to pass to the function.
 ///     - functionOperand: The operand to pass to the function.
 ///     - name: The function name.
 ///     - operand: The operand to pass to the function.
@@ -466,6 +469,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// - Parameters:
 ///     - property: The property to test.
 ///     - accessor: A closure which retrieves the property.
+///     - accessorInstance: The instance on which to inspect the property.
 ///     - accessorInstance: The instance on which to inspect the property.
 ///     - name: The property name.
 ///     - instance: The instance on which to inspect the property.
