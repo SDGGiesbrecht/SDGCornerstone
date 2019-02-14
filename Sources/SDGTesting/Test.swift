@@ -138,6 +138,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - method: The method to test.
 ///     - call: The method itself.
 ///     - methodInstance: The instance on which to call the method.
+///     - methodInstance: The instance on which to call the method.
 ///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - expectedResult: The expected result.
@@ -162,6 +163,8 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - call: The method itself.
 ///     - methodInstance: The instance on which to call the method.
 ///     - methodArgument: An argument to pass to the method.
+///     - methodInstance: The instance on which to call the method.
+///     - methodArgument: An argument to pass to the method.
 ///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - argument: The argument to pass to the method.
@@ -184,6 +187,9 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// - Parameters:
 ///     - method: The method to test.
 ///     - call: The method itself.
+///     - methodInstance: The instance on which to call the method.
+///     - firstMethodArgument: An argument to pass to the method.
+///     - secondMethodArgument: Another argument to pass to the method.
 ///     - methodInstance: The instance on which to call the method.
 ///     - firstMethodArgument: An argument to pass to the method.
 ///     - secondMethodArgument: Another argument to pass to the method.

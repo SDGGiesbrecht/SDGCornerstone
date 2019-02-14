@@ -77,6 +77,7 @@
 ///     - method: The method to test.
 ///     - call: The method itself.
 ///     - methodInstance: The instance on which to call the method.
+///     - methodInstance: The instance on which to call the method.
 ///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - expectedResult: The expected result.
@@ -99,6 +100,8 @@
 /// - Parameters:
 ///     - method: The method to test.
 ///     - call: The method itself.
+///     - methodInstance: The instance on which to call the method.
+///     - methodArgument: An argument to pass to the method.
 ///     - methodInstance: The instance on which to call the method.
 ///     - methodArgument: An argument to pass to the method.
 ///     - name: The method name.
