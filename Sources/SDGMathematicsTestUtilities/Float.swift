@@ -30,6 +30,7 @@
 ///     - method: The method to test.
 ///     - call: The method itself.
 ///     - methodInstance: The instance on which to call the method.
+///     - methodInstance: The instance on which to call the method.
 ///     - name: The method name.
 ///     - instance: The instance on which to call the method.
 ///     - expectedResult: The expected result.
@@ -52,6 +53,7 @@
 ///     - method: The method to test.
 ///     - call: The method itself.
 ///     - methodInstance: The instance on which to call the method.
+///     - methodInstance: The instance on which to call the method.
 ///     - methodArgument: An argument to pass to the method.
 ///     - name: The method name.
 ///     - instance: The instance on which to call the method.
@@ -59,7 +61,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, A, R>(method: (call: (_ methodInstance: T) -> (A) throws -> R, name: String), of instance: T, with argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
+@inlinable public func test<T, A, R>(method: (call: (_ methodInstance: T) -> (_ methodArgument: A) throws -> R, name: String), of instance: T, with argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try method.call(instance)(argument)
         test(result ≈ expectedResult, "\(instance).\(method.name)(\(argument)) → \(result) ≠ \(expectedResult)",
