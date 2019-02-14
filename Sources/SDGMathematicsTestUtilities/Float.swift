@@ -35,7 +35,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, R>(method: (call: (T) -> () throws -> R, name: String), of instance: T, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
+@inlinable public func test<T, R>(method: (call: (_ methodInstance: T) -> () throws -> R, name: String), of instance: T, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try method.call(instance)()
         test(result ≈ expectedResult, "\(instance).\(method.name)() → \(result) ≠ \(expectedResult)",
@@ -59,7 +59,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, A, R>(method: (call: (T) -> (A) throws -> R, name: String), of instance: T, with argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
+@inlinable public func test<T, A, R>(method: (call: (_ methodInstance: T) -> (A) throws -> R, name: String), of instance: T, with argument: A, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try method.call(instance)(argument)
         test(result ≈ expectedResult, "\(instance).\(method.name)(\(argument)) → \(result) ≠ \(expectedResult)",
@@ -81,7 +81,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T>(mutatingMethod method: (call: (inout T) throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
+@inlinable public func test<T>(mutatingMethod method: (call: (_ methodInstance: inout T) throws -> Void, name: String), of instance: T, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
     do {
         var copy = instance
         try method.call(&copy)
@@ -106,7 +106,7 @@
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<T, A>(mutatingMethod method: (call: (inout T, A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
+@inlinable public func test<T, A>(mutatingMethod method: (call: (_ methodInstance: inout T, _ methodArgument: A) throws -> Void, name: String), of instance: T, with argument: A, resultsIn expectedResult: T, file: StaticString = #file, line: UInt = #line) where T : ExpressibleByFloatLiteral, T : FloatingPoint, T : Subtractable {
     do {
         var copy = instance
         try method.call(&copy, argument)
@@ -125,6 +125,7 @@
 /// - Parameters:
 ///     - function: The function to test.
 ///     - call: The function itself.
+///     - functionArgument: An argument to pass to the function.
 ///     - functionArgument: An argument to pass to the function.
 ///     - name: The function name.
 ///     - argument: The argument to pass to the function.
@@ -149,12 +150,14 @@
 ///     - call: The function itself.
 ///     - firstFunctionArgument: An argument to pass to the function.
 ///     - secondFunctionArgument: An argument to pass to the function.
+///     - firstFunctionArgument: An argument to pass to the function.
+///     - secondFunctionArgument: An argument to pass to the function.
 ///     - name: The function name.
 ///     - arguments: The arguments to pass to the function.
 ///     - expectedResult: The expected result.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<A, B, R>(function: (call: (_ firstFunctionArgment: A, _ secondFunctionArgument: B) throws -> R, name: String), on arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
+@inlinable public func test<A, B, R>(function: (call: (_ firstFunctionArgument: A, _ secondFunctionArgument: B) throws -> R, name: String), on arguments: (A, B), returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : ExpressibleByFloatLiteral, R : FloatingPoint, R : Subtractable {
     do {
         let result = try function.call(arguments.0, arguments.1)
         test(result ≈ expectedResult, "\(function.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
@@ -170,6 +173,7 @@
 /// - Parameters:
 ///     - function: The function to test.
 ///     - call: The function itself.
+///     - functionArgument: An argument to pass to the function.
 ///     - functionArgument: An argument to pass to the function.
 ///     - name: The function name.
 ///     - argument: The argument to pass to the function.

@@ -213,6 +213,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - function: The function to test.
 ///     - call: The function itself.
 ///     - functionArgument: An argument to pass to the function.
+///     - functionArgument: An argument to pass to the function.
 ///     - name: The function name.
 ///     - argument: The argument to pass to the function.
 ///     - expectedResult: The expected result.
@@ -234,6 +235,8 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// - Parameters:
 ///     - function: The function to test.
 ///     - call: The function itself.
+///     - firstFunctionArgument: An argument to pass to the function.
+///     - secondFunctionArgument: An argument to pass to the function.
 ///     - firstFunctionArgument: An argument to pass to the function.
 ///     - secondFunctionArgument: An argument to pass to the function.
 ///     - name: The function name.
