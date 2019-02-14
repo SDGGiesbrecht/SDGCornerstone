@@ -204,6 +204,8 @@
 ///     - function: The function itself.
 ///     - precedingOperand: The preceding operand.
 ///     - followingOperand: The following operand.
+///     - precedingOperand: The preceding operand.
+///     - followingOperand: The following operand.
 ///     - name: The function name.
 ///     - operands: The operands to pass to the function.
 ///     - precedingValue: The preceding operand.

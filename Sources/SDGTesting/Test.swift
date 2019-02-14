@@ -270,6 +270,8 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - function: The function itself.
 ///     - precedingOperand: The preceding operand.
 ///     - followingOperand: The following operand.
+///     - precedingOperand: The preceding operand.
+///     - followingOperand: The following operand.
 ///     - name: The function name.
 ///     - operands: The operands to pass to the function.
 ///     - precedingValue: The preceding operand.
@@ -294,6 +296,8 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - function: The function itself.
 ///     - precedingOperand: The preceding operand.
 ///     - followingOperand: The following operand.
+///     - precedingOperand: The preceding operand.
+///     - followingOperand: The following operand.
 ///     - name: The function name.
 ///     - operands: The operands to pass to the function.
 ///     - precedingValue: The preceding operand.
@@ -316,6 +320,8 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 /// - Parameters:
 ///     - operator: The operator function to test.
 ///     - function: The function itself.
+///     - precedingOperand: The preceding operand.
+///     - followingOperand: The following operand.
 ///     - precedingOperand: The preceding operand.
 ///     - followingOperand: The following operand.
 ///     - name: The function name.
