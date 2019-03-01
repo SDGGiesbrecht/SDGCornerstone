@@ -36,9 +36,11 @@ class SDGPersistenceRegressionTests : TestCase {
     func testPercentEncodingIsNotDoubled() {
         // Untracked
 
-        var url = FileManager.default.url(in: .temporary, at: "A Folder")
-        url.appendPathComponent("A File")
-        XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
-        XCTAssert(url.path.hasSuffix("A Folder/A File"))
+        FileManager.default.withTemporaryDirectory(appropriateFor: nil) { directory in
+            var url = directory.appendingPathComponent("A Folder")
+            url.appendPathComponent("A File")
+            XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
+            XCTAssert(url.path.hasSuffix("A Folder/A File"))
+        }
     }
 }
