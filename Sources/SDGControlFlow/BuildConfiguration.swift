@@ -18,6 +18,7 @@ public enum BuildConfiguration {
     // MARK: - Initialization
 
     private static func isDebug() -> Bool {
+        // #workaround(Swift 4.2.1, Will be supplanted by SE‐0238.)
         return _isDebugAssertConfiguration()
     }
     /// The current build configuration.
