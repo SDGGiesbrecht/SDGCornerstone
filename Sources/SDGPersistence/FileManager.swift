@@ -33,6 +33,8 @@ extension FileManager {
     // MARK: - Recommended File Locations
 
     /// A recommended location for file operations.
+    ///
+    /// For the temporary files used only transiently, use `FileManager.withTemporaryDirectory(appropriateFor:_:)` instead.
     public enum RecommendedLocation {
 
         /// Permanent, backed‐up storage for application‐related, internal‐use files that are hidden from the user.
@@ -40,9 +42,6 @@ extension FileManager {
 
         /// For caches that are saved to improve performance. The operating system may empty this if it needs to create space. Do not save anything here that cannot be regenerated if necessary.
         case cache
-
-        /// For files that are used only transiently. The operating system empties this periodically.
-        case temporary
     }
 
     private static var locations: [FileManager: [RecommendedLocation: URL]] = [:]
@@ -67,8 +66,6 @@ extension FileManager {
                 path = NSHomeDirectory() + "/.Application Support"
             case .cache:
                 path = NSHomeDirectory() + "/.cache"
-            case .temporary:
-                path = "/tmp"
             }
             return URL(fileURLWithPath: path)
 
@@ -80,19 +77,9 @@ extension FileManager {
                 searchPath = .applicationSupportDirectory
             case .cache:
                 searchPath = .cachesDirectory
-            case .temporary:
-                searchPath = .itemReplacementDirectory
             }
 
-            var volume: URL?
-            if location == .temporary {
-                guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
-                    _unreachable()
-                }
-                volume = documents
-            }
-
-            guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: volume, create: true) else {
+            guard let result = try? url(for: searchPath, in: .userDomainMask, appropriateFor: nil, create: true) else {
                 _unreachable()
             }
             return result
@@ -138,6 +125,42 @@ extension FileManager {
     public func delete(_ location: RecommendedLocation, for domain: String) {
         let folder = url(in: location, for: domain)
         try? removeItem(at: folder)
+    }
+
+    /// Performs an operation with a temporary directory.
+    ///
+    /// This method cleans up the directory its provides immediately after the operation completes.
+    ///
+    /// The directory will be in a location where the operating system will clean it up eventually in the event of a crash preventing the method from performing clean‐up itself.
+    ///
+    /// - Parameters:
+    ///     - destination: The approximate destination of any files that will be moved out of the temporary directory. The method will attempt to use a temporary directory on the same volume so the move can be made faster. Pass `nil` if it does not matter.
+    ///     - body: The body of the operation.
+    ///     - directory: The provided temporary directory.
+    public func withTemporaryDirectory<Result>(appropriateFor destination: URL?, _ body: (_ directory: URL) throws -> Result) rethrows -> Result {
+        var directory: URL
+        #if os(Linux)
+        // #workaround(Swift 4.2.1, Foundation may handle this eventually.)
+
+        directory = temporaryDirectory
+
+        #else
+
+        guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
+            _unreachable()
+        }
+        let volume = documents
+
+        guard let itemReplacement = try? url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: volume, create: true) else {
+            _unreachable()
+        }
+        directory = itemReplacement
+
+        #endif
+
+        directory.appendPathComponent(UUID().uuidString)
+        defer { try? removeItem(at: directory) }
+        return try body(directory)
     }
 
     // Moving Files and Directories

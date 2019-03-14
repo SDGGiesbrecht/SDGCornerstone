@@ -29,62 +29,45 @@ class SDGPersistenceAPITests : TestCase {
         testFileConvertibleConformance(of: "Hello, world!", uniqueTestName: "Hello")
     }
 
-    func testFileManager() {
-        defer { FileManager.default.delete(.temporary) }
+    func testFileManager() throws {
+        let destination = FileManager.default.url(in: .applicationSupport, at: "Subdirectory")
+        try FileManager.default.withTemporaryDirectory(appropriateFor: destination) { temporaryDirectory in
 
-        let path = "example/path"
-        XCTAssertEqual(FileManager.default.url(in: .temporary, at: path), FileManager.default.url(in: .temporary, at: path), "Differing temporary directories provided.")
+            let path = "example/path"
 
-        XCTAssert(FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains("Application%20Support"), "Unexpected support directory.")
-        XCTAssertNotNil(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Cache".scalars), LiteralPattern("cache".scalars)])))
-        XCTAssertNotNil(FileManager.default.url(in: .temporary, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Temp".scalars), LiteralPattern("temp".scalars), LiteralPattern("tmp".scalars), LiteralPattern("Being%20Saved%20By".scalars)])))
+            XCTAssert(FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains("Application%20Support"), "Unexpected support directory.")
+            XCTAssertNotNil(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Cache".scalars), LiteralPattern("cache".scalars)])))
+            XCTAssertNotNil(temporaryDirectory.appendingPathComponent(path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Temp".scalars), LiteralPattern("temp".scalars), LiteralPattern("tmp".scalars), LiteralPattern("Being%20Saved%20By".scalars)])))
 
-        let directoryName = "Directory"
-        let directory = FileManager.default.url(in: .temporary, at: directoryName)
-        let file = directory.appendingPathComponent("File.txt")
-        do {
+            let directoryName = "Directory"
+            let directory = temporaryDirectory.appendingPathComponent(directoryName)
+            let file = directory.appendingPathComponent("File.txt")
+
             try FileManager.default.do(in: directory) {
                 // When the directory does not exist yet.
                 XCTAssertEqual(URL(fileURLWithPath: FileManager.default.currentDirectoryPath).lastPathComponent, directoryName)
             }
-
             let fileContents = "File"
             try fileContents.save(to: file)
-
             try FileManager.default.do(in: directory) {
                 // When the directory already exists.
                 XCTAssertEqual(URL(fileURLWithPath: FileManager.default.currentDirectoryPath).lastPathComponent, directoryName)
             }
-
             XCTAssertEqual(try? String(from: file), fileContents) // Directory not overwritten.
-        } catch {
-            XCTFail("\(error)")
-        }
 
-        do {
-            let sourceDirectory = FileManager.default.url(in: .temporary, at: "Source Directory")
-            let destinationDirectory = FileManager.default.url(in: .temporary, at: "/Intermediate Directory/Destination Directory")
-
-            let fileContents = "File"
+            let sourceDirectory = temporaryDirectory.appendingPathComponent("Source Directory")
+            let destinationDirectory = temporaryDirectory.appendingPathComponent("Intermediate Directory/Destination Directory")
             let fileName = "File.txt"
             try fileContents.save(to: sourceDirectory.appendingPathComponent(fileName))
-
             try FileManager.default.move(sourceDirectory, to: destinationDirectory)
             XCTAssertEqual(try? String(from: destinationDirectory.appendingPathComponent(fileName)), fileContents)
             XCTAssertNil(try? String(from: sourceDirectory.appendingPathComponent(fileName)))
-
-            FileManager.default.delete(.temporary)
+            try? FileManager.default.removeItem(at: temporaryDirectory)
             try fileContents.save(to: sourceDirectory.appendingPathComponent(fileName))
-
             try FileManager.default.copy(sourceDirectory, to: destinationDirectory)
             XCTAssertEqual(try? String(from: destinationDirectory.appendingPathComponent(fileName)), fileContents)
             XCTAssertEqual(try? String(from: sourceDirectory.appendingPathComponent(fileName)), fileContents)
 
-        } catch {
-            XCTFail("\(error)")
-        }
-
-        do {
             let thisFile = URL(fileURLWithPath: #file)
             XCTAssert(try FileManager.default.deepFileEnumeration(in: thisFile.deletingLastPathComponent().deletingLastPathComponent()).contains(thisFile), "Failed to enumerate files.")
         }
