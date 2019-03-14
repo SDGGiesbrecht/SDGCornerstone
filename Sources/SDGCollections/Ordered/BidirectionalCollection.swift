@@ -25,7 +25,7 @@ extension BidirectionalCollection {
         return ReversedCollection<Self>.Index(resolved.upperBound) ..< ReversedCollection<Self>.Index(resolved.lowerBound)
     }
 
-    // #workaround(workspace version 0.17.1, SwiftSyntax crashes if this is used directly.)
+    // #workaround(workspace version 0.17.2, SwiftSyntax crashes if this is used directly.)
     public typealias _ReversedCollectionSelf = ReversedCollection<Self>
     /// Returns the forward version of the specified range.
     ///
