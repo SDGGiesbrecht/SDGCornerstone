@@ -22,6 +22,12 @@ private func defaultTestAssertionMethod(_ expression: @autoclosure () -> Bool, _
 }
 
 /// The assertion method used by `test(_:_:_:_:)`
+///
+/// - Parameters:
+///     - expression: The expression to test.
+///     - message: The message to use when indicating failure.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
 public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String, _ file: StaticString, _ line: UInt) -> Void = defaultTestAssertionMethod
 
 /// Tests an expression, verifying that it is true.
