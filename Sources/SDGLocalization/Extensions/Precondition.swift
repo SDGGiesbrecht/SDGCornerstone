@@ -82,7 +82,7 @@ public func notImplementedYetAndCannotReturn(function: StaticString = #function,
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
 public func precondition<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) {
-    Swift.precondition(condition, String(message().resolved()), file: file, line: line)
+    Swift.precondition(condition(), String(message().resolved()), file: file, line: line)
 }
 
 /// Indicates that a precondition was violated.
@@ -103,7 +103,7 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacing<Stri
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
 @inlinable public func assert<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) {
-    Swift.assert(condition, String(message().resolved()), file: file, line: line)
+    Swift.assert(condition(), String(message().resolved()), file: file, line: line)
 }
 
 /// Indicates that an internal sanity check failed.

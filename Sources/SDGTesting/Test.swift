@@ -62,7 +62,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
 @inlinable public func fail(_ message: @autoclosure () throws -> String, file: StaticString = #file, line: UInt = #line) {
-    test(false, message, file: file, line: line)
+    test(false, message(), file: file, line: line)
 }
 
 // MARK: - Methods
@@ -338,7 +338,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - line: Optional. A different line to associate with any failures.
 @inlinable public func test<P, F, R>(operator: (function: (_ precedingOperand: P, _ followingOperand: @autoclosure () throws -> F) throws -> R, name: String), on precedingValue: P, _ followingValue: @autoclosure () throws -> F, returns expectedResult: R, file: StaticString = #file, line: UInt = #line) where R : Equatable {
     do {
-        let result = try `operator`.function(precedingValue, followingValue)
+        let result = try `operator`.function(precedingValue, followingValue())
         test(result == expectedResult, "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(result) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
@@ -391,7 +391,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 @inlinable public func test<P, F>(assignmentOperator operator: (function: (_ precedingOperand: inout P, _ followingOperand: @autoclosure () throws -> F) throws -> Void, name: String), with precedingValue: P, _ followingValue: @autoclosure () throws -> F, resultsIn expectedResult: P, file: StaticString = #file, line: UInt = #line) where P : Equatable {
     do {
         var copy = precedingValue
-        try `operator`.function(&copy, followingValue)
+        try `operator`.function(&copy, followingValue())
         test(copy == expectedResult, "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(copy) ≠ \(expectedResult)",
             file: file, line: line)
     } catch {
