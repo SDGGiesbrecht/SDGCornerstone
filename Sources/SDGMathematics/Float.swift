@@ -272,6 +272,12 @@ extension CGFloat : FloatFamily {
         return CoreGraphics.atan(x)
     }
 
+    // MARK: - IntegralArithmetic
+
+    @inlinable public init(_ int: IntMax) {
+        self = CGFloat(NativeType(int))
+    }
+
     // MARK: - LosslessStringConvertible
 
     @inlinable public init?(_ description: String) {
