@@ -62,7 +62,7 @@ public var testAssertionMethod: (_ expression: @autoclosure () -> Bool, _ messag
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
 @inlinable public func fail(_ message: @autoclosure () throws -> String, file: StaticString = #file, line: UInt = #line) {
-    test(false, message(), file: file, line: line)
+    test(false, try message(), file: file, line: line)
 }
 
 // MARK: - Methods
