@@ -293,6 +293,12 @@ extension CGFloat : FloatFamily {
     @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(NativeType(self))
     }
+
+    // MARK: - WholeArithmetic
+
+    @inlinable public init(_ uInt: UIntMax) {
+        self = CGFloat(NativeType(uInt))
+    }
 }
 #endif
 
