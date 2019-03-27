@@ -26,7 +26,7 @@ import SDGLocalizationTestUtilities
 class SDGTextAPITests : TestCase {
 
     func testCharacterSet() {
-        #warning("Bad access in form intersection.")
+        XCTFail("Bad access in form intersection.")
         //testSetInRepresentableUniverseConformance(of: CharacterSet.self, a: "a", b: "e", c: "i")
     }
 
