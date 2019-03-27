@@ -411,7 +411,7 @@ extension Float : FloatFamily {
 
     // MARK: - RealArithmetic
 
-    public static let e: Float = 0x1.5BF0Bp1
+    public static let e: Float = 0x1.5BF0A9p1
 
     @inlinable public var floatingPointApproximation: FloatMax {
         return FloatMax(self)
