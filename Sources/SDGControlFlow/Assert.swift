@@ -50,7 +50,7 @@ public func _unreachable(function: String = #function, file: StaticString = #fil
 }
 
 @inlinable public func _assert(_ condition: @autoclosure () -> Bool, _ message: (_APILocalization) -> String, file: StaticString = #file, line: UInt = #line) {
-    Swift.assert(condition, list(message), file: file, line: line)
+    Swift.assert(condition(), list(message), file: file, line: line)
 }
 
 public func _preconditionFailure(_ message: (_APILocalization) -> String, file: StaticString = #file, line: UInt = #line) -> Never {
