@@ -50,8 +50,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testBidirectionalCollection() {
-        XCTFail("Bad access in index conversion.")
-        /*let collection = [1, 2, 3, 4, 5, 4, 5, 6]
+        let collection = [1, 2, 3, 4, 5, 4, 5, 6]
         let match = collection.lastMatch(for: [4, 5])
         XCTAssertEqual(match?.range, 5 ..< 7)
         XCTAssertEqual(match?.contents.elementsEqual([4, 5]), true)
@@ -108,7 +107,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(index, 2)
 
         let bounds = collection.bounds
-        XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)*/
+        XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)
     }
 
     func testBijectiveMapping() {
