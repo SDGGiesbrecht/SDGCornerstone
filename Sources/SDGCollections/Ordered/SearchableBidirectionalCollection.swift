@@ -158,7 +158,10 @@ extension SearchableBidirectionalCollection {
         return _hasSuffix(pattern)
     }
     @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
-        return _hasSuffix(pattern)
+        // #workaround(Swift 5, Duplicate implementation works around compiler bug.)
+        let backwards: ReversedCollection<Self> = reversed()
+        let reversedPattern: ReversedCollection<Self> = pattern.reversed()
+        return reversedPattern.primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
 
     @inlinable internal func _commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {
