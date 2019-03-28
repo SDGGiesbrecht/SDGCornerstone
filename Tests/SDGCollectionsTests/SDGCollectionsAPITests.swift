@@ -727,8 +727,7 @@ class SDGCollectionsAPITests : TestCase {
 
     func testSet() {
         testFiniteSetConformance(of: Set([1, 2, 3]), member: 1, nonmember: 0, superset: [1, 2, 3, 4, 5], overlapping: [1, 3, 5], disjoint: [7, 8, 9])
-        XCTFail("Bad access in intersection.")
-        //testMutableSetConformance(of: Set<Int>.self, a: 1, b: 2, c: 3)
+        testMutableSetConformance(of: Set<Int>.self, a: 1, b: 2, c: 3)
     }
 
     struct SetInRepresentableUniverseExample : SetInRepresentableUniverse {
