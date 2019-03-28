@@ -138,7 +138,12 @@ extension SearchableBidirectionalCollection {
         return _lastMatch(for: pattern)
     }
     @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern)
+        let backwards: ReversedCollection<Self> = reversed()
+        let reversedPattern: ReversedCollection<Self> = pattern.reversed()
+        guard let range = backwards.firstMatch(for: reversedPattern)?.range else {
+            return nil
+        }
+        return PatternMatch(range: forward(range), in: self)
     }
 
     @inlinable internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
