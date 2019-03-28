@@ -106,7 +106,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
             process.environment = environment
         }
         if let location = workingDirectory {
-            process.currentDirectoryPath = location.path
+            process.currentDirectoryURL = location
         }
 
         let pipe = Pipe()
@@ -116,7 +116,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         #if !os(Linux) // #workaround(Swift 4.2.1, Linux does not have this property.)
         process.qualityOfService = Thread.current.qualityOfService
         #endif
-        process.launch()
+        try process.run()
 
         var output = String()
         var stream = Data()
