@@ -768,8 +768,7 @@ class SDGCollectionsAPITests : TestCase {
         static let universe = SetInRepresentableUniverseExample([1, 2, 3, 4, 5])
     }
     func testSetInRepresentableUniverse() {
-        XCTFail("Bad access in intersection.")
-        //testSetInRepresentableUniverseConformance(of: SetInRepresentableUniverseExample.self, a: 1, b: 2, c: 3)
+        testSetInRepresentableUniverseConformance(of: SetInRepresentableUniverseExample.self, a: 1, b: 2, c: 3)
     }
 
     func testSymmetricDifference() {
