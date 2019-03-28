@@ -26,6 +26,7 @@ matrix:
       osx_image: xcode10.2
       script:
         - "git config --global protocol.version 1"
+        - "swift package generate-xcodeproj"
         - "xcodebuild test -sdk macosx -scheme SDGCornerstone-Package"
     - os: linux
       env:
@@ -43,6 +44,7 @@ matrix:
       xcode_sdk: iphonesimulator
       script:
         - "git config --global protocol.version 1"
+        - "swift package generate-xcodeproj"
         - "xcodebuild test -destination 'name=iPhone 8' -scheme SDGCornerstone-Package"
     - os: osx
       env:
@@ -50,6 +52,7 @@ matrix:
       osx_image: xcode10.2
       script:
         - "git config --global protocol.version 1"
+        - "swift package generate-xcodeproj"
         - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package"
     - os: osx
       env:
@@ -59,6 +62,7 @@ matrix:
       xcode_sdk: appletvsimulator
       script:
         - "git config --global protocol.version 1"
+        - "swift package generate-xcodeproj"
         - "xcodebuild test -destination 'name=Apple TV 4K' -scheme SDGCornerstone-Package"
 
 cache:
