@@ -138,6 +138,7 @@ extension SearchableBidirectionalCollection {
         return _lastMatch(for: pattern)
     }
     @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
+        // #workaround(Swift 5, Duplicate implementation works around compiler bug.)
         let backwards: ReversedCollection<Self> = reversed()
         let reversedPattern: ReversedCollection<Self> = pattern.reversed()
         guard let range = backwards.firstMatch(for: reversedPattern)?.range else {
