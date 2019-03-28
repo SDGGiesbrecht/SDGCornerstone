@@ -124,27 +124,26 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    @inlinable internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+    @inlinable internal func _lastMatch<P>(for reversedPattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+        // #workaround(Swift 5, Pattern reversal should be done here but for a compiler bug.)
         let backwards: ReversedCollection<Self> = reversed()
-        guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
+        guard let range = backwards.firstMatch(for: reversedPattern)?.range else {
             return nil
         }
         return PatternMatch(range: forward(range), in: self)
     }
     @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        return _lastMatch(for: pattern)
+        return _lastMatch(for: pattern.reversed())
+    }
+    @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : SearchableCollection, P.Element == Element {
+        // #workaround(Swift 5, Works around the above compiler bug. The method itself is otherwise redundant.)
+        return _lastMatch(for: pattern.reversed() as [P.Element])
     }
     @inlinable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern)
+        return _lastMatch(for: pattern.reversed())
     }
     @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
-        // #workaround(Swift 5, Duplicate implementation works around compiler bug.)
-        let backwards: ReversedCollection<Self> = reversed()
-        let reversedPattern: ReversedCollection<Self> = pattern.reversed()
-        guard let range = backwards.firstMatch(for: reversedPattern)?.range else {
-            return nil
-        }
-        return PatternMatch(range: forward(range), in: self)
+        return _lastMatch(for: pattern.reversed() as ReversedCollection<Self>)
     }
 
     @inlinable internal func _hasSuffix<P>(_ reversedPattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
