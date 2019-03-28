@@ -40,6 +40,9 @@ import PackageDescription
 /// Use the entire package together by importing the `SDGCornerstone` product, or pick and choose pieces by importing the various component products.
 let package = Package(
     name: "SDGCornerstone",
+    platforms: [
+        .macOS(.v10_13)
+    ],
     products: [
         // The entire package.
 

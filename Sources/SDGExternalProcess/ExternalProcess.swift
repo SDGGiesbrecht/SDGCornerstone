@@ -100,7 +100,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = { _ in }) throws -> String { // @exempt(from: tests)
 
         let process = Process()
-        process.launchPath = executable.path
+        process.executableURL = executable
         process.arguments = arguments
         if environment ≠ nil {
             process.environment = environment
