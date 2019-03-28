@@ -53,7 +53,7 @@ matrix:
       script:
         - "git config --global protocol.version 1"
         - "swift package generate-xcodeproj"
-        - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package"
+        - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package > /dev/null"
     - os: osx
       env:
         - JOB="tvOS"
