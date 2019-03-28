@@ -50,7 +50,8 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testBidirectionalCollection() {
-        let collection = [1, 2, 3, 4, 5, 4, 5, 6]
+        XCTFail("Bad access in index conversion.")
+        /*let collection = [1, 2, 3, 4, 5, 4, 5, 6]
         let match = collection.lastMatch(for: [4, 5])
         XCTAssertEqual(match?.range, 5 ..< 7)
         XCTAssertEqual(match?.contents.elementsEqual([4, 5]), true)
@@ -107,7 +108,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(index, 2)
 
         let bounds = collection.bounds
-        XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)
+        XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)*/
     }
 
     func testBijectiveMapping() {
@@ -218,14 +219,15 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertFalse("abcd".isMatch(for: ["a", "b", "c"]))
         XCTAssertFalse("abcd".isMatch(for: ["b", "c", "d"]))
 
-        XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
+        XCTFail("Bad access in index conversion.")
+        /*XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
         XCTAssert([1, 2, 3, 4].hasSuffix(AlternativePatterns([LiteralPattern([3, 4]), LiteralPattern([5, 6])])))
         XCTAssert([1, 2, 3, 4].hasSuffix([LiteralPattern([3]), LiteralPattern([4])]))
 
         XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4]))
         XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix(AlternativePatterns([LiteralPattern([3, 4]), LiteralPattern([5, 6])])))
         XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([LiteralPattern([3]), LiteralPattern([4])]))
-        XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix(AnyCollection([1, 2, 3, 4])))
+        XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix(AnyCollection([1, 2, 3, 4])))*/
 
         XCTAssertEqual([5, 4, 3, 2, 1].commonPrefix(with: [5, 2, 1]).contents, [5])
 
@@ -530,9 +532,10 @@ class SDGCollectionsAPITests : TestCase {
         }
     }
     func testMutableSet() {
-        testMutableSetConformance(of: MutableSetExample.self, a: 1, b: 2, c: 3)
+        XCTFail("Bad access in intersection.")
+        /*testMutableSetConformance(of: MutableSetExample.self, a: 1, b: 2, c: 3)
         testMutableSetConformance(of: MutableFiniteSetExample.self, a: 1, b: 2, c: 3)
-        XCTAssertEqual(MutableFiniteSetExample([1, 2, 3]) ∆ FiniteSetExample([3, 4, 5]), MutableFiniteSetExample([1, 2, 4, 5]))
+        XCTAssertEqual(MutableFiniteSetExample([1, 2, 3]) ∆ FiniteSetExample([3, 4, 5]), MutableFiniteSetExample([1, 2, 4, 5]))*/
     }
 
     func testNotPattern() {
@@ -726,7 +729,8 @@ class SDGCollectionsAPITests : TestCase {
 
     func testSet() {
         testFiniteSetConformance(of: Set([1, 2, 3]), member: 1, nonmember: 0, superset: [1, 2, 3, 4, 5], overlapping: [1, 3, 5], disjoint: [7, 8, 9])
-        testMutableSetConformance(of: Set<Int>.self, a: 1, b: 2, c: 3)
+        XCTFail("Bad access in intersection.")
+        //testMutableSetConformance(of: Set<Int>.self, a: 1, b: 2, c: 3)
     }
 
     struct SetInRepresentableUniverseExample : SetInRepresentableUniverse {
@@ -768,7 +772,8 @@ class SDGCollectionsAPITests : TestCase {
         static let universe = SetInRepresentableUniverseExample([1, 2, 3, 4, 5])
     }
     func testSetInRepresentableUniverse() {
-        testSetInRepresentableUniverseConformance(of: SetInRepresentableUniverseExample.self, a: 1, b: 2, c: 3)
+        XCTFail("Bad access in intersection.")
+        //testSetInRepresentableUniverseConformance(of: SetInRepresentableUniverseExample.self, a: 1, b: 2, c: 3)
     }
 
     func testSymmetricDifference() {

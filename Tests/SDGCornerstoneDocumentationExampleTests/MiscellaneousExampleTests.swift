@@ -53,7 +53,8 @@ class MiscellaneousExampleTests : TestCase {
     }
 
     func testBackwardsSearchDifferences1() {
-
+        XCTFail("Unknown crash.")
+        /*
         // @example(lastMatchBackwardsDifferences1)
         let collection = [0, 0, 0, 0, 0]
         let pattern = [0, 0]
@@ -63,6 +64,7 @@ class MiscellaneousExampleTests : TestCase {
         XCTAssertEqual(collection.matches(for: pattern).last?.range, 2 ..< 4)
         // (Here the matches are 0 ..< 2 and 2 ..< 4; the final zero is incomplete.)
         // @endExample
+        */
     }
 
     func testBackwardsSearchDifferences2() {
