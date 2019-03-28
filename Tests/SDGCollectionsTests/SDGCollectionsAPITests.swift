@@ -530,10 +530,9 @@ class SDGCollectionsAPITests : TestCase {
         }
     }
     func testMutableSet() {
-        XCTFail("Bad access in intersection.")
-        /*testMutableSetConformance(of: MutableSetExample.self, a: 1, b: 2, c: 3)
+        testMutableSetConformance(of: MutableSetExample.self, a: 1, b: 2, c: 3)
         testMutableSetConformance(of: MutableFiniteSetExample.self, a: 1, b: 2, c: 3)
-        XCTAssertEqual(MutableFiniteSetExample([1, 2, 3]) ∆ FiniteSetExample([3, 4, 5]), MutableFiniteSetExample([1, 2, 4, 5]))*/
+        XCTAssertEqual(MutableFiniteSetExample([1, 2, 3]) ∆ FiniteSetExample([3, 4, 5]), MutableFiniteSetExample([1, 2, 4, 5]))
     }
 
     func testNotPattern() {
