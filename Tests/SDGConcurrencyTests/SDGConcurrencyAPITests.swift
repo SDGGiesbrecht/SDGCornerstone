@@ -31,7 +31,7 @@ class SDGConcurrencyAPITests : TestCase {
                 didRun.fulfill()
                 driver = nil
             }
-            #if os(macOS) || os(iOS)
+            #if os(macOS) || os(iOS) || os(tvOS)
             // #workaround(Swift 4.2.1, Swift’s Xcode project generation targets 10.10.)
             Timer.scheduledTimer(timeInterval: 0, target: BlockOperation(block: block), selector: #selector(Operation.main), userInfo: nil, repeats: false)
             #else
