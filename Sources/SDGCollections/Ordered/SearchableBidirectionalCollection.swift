@@ -155,7 +155,7 @@ extension SearchableBidirectionalCollection {
         return _hasSuffix(pattern)
     }
     @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P : SearchableBidirectionalCollection, P.Element == Element {
-        // #workaround(Swift 5, Duplicate implementation works around compiler bug.)
+        // #workaround(Swift 5, Duplicate implementation works around compiler bug. The method itself is otherwise redundant.)
         let backwards: ReversedCollection<Self> = reversed()
         let reversedPattern: ReversedCollection<P> = pattern.reversed()
         return reversedPattern.primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
