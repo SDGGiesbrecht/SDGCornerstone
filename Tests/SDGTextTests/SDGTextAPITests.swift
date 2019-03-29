@@ -116,8 +116,9 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(strict.clusters.bounds.sameRange(in: strict.scalars), strict.scalars.bounds)
 
         let partialLine = string.clusters.startIndex ..< string.clusters.index(after: string.clusters.startIndex)
+        let strictPartialLine = strict.clusters.startIndex ..< strict.clusters.index(after: string.clusters.startIndex)
         XCTAssertNil(partialLine.sameRange(in: string.lines))
-        XCTAssertNil(partialLine.sameRange(in: strict.lines))
+        XCTAssertNil(strictPartialLine.sameRange(in: strict.lines))
 
         XCTAssertEqual(string.scalars.bounds.sameRange(in: string.lines), string.lines.bounds)
         XCTAssertEqual(strict.scalars.bounds.sameRange(in: strict.lines), strict.lines.bounds)

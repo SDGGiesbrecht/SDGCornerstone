@@ -149,7 +149,7 @@ class SDGMathematicsAPITests : TestCase {
         #if !os(Linux)
         XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
         XCTAssertNotNil(CGFloat("1"))
-        XCTAssertNil(CGFloat("a"))
+        XCTAssertNil(CGFloat(String("a")))
         #endif
 
         test(method: (Double.rounded, "rounded"), of: 5.1, returns: 5)

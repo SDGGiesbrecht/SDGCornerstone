@@ -124,35 +124,45 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    @inlinable internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+    @inlinable internal func _lastMatch<P>(for reversedPattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+        // #workaround(Swift 5, Pattern reversal should be done here but for a compiler bug.)
         let backwards: ReversedCollection<Self> = reversed()
-        guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
+        guard let range = backwards.firstMatch(for: reversedPattern)?.range else {
             return nil
         }
         return PatternMatch(range: forward(range), in: self)
     }
     @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        return _lastMatch(for: pattern)
+        return _lastMatch(for: pattern.reversed())
+    }
+    @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : SearchableCollection, P.Element == Element {
+        // #workaround(Swift 5, Works around the above compiler bug. The method itself is otherwise redundant.)
+        return _lastMatch(for: pattern.reversed() as [P.Element])
     }
     @inlinable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern)
+        return _lastMatch(for: pattern.reversed())
     }
     @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern)
+        return _lastMatch(for: pattern.reversed() as ReversedCollection<Self>)
     }
 
-    @inlinable internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+    @inlinable internal func _hasSuffix<P>(_ reversedPattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+        // #workaround(Swift 5, Pattern reversal should be done here but for a compiler bug.)
         let backwards: ReversedCollection<Self> = reversed()
-        return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
+        return reversedPattern.primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
     @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
-        return _hasSuffix(pattern)
+        return _hasSuffix(pattern.reversed())
+    }
+    @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool where P : SearchableCollection, P.Element == Element {
+        // #workaround(Swift 5, Works around the above compiler bug. The method itself is otherwise redundant.)
+        return _hasSuffix(pattern.reversed() as [P.Element])
     }
     @inlinable public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
-        return _hasSuffix(pattern)
+        return _hasSuffix(pattern.reversed())
     }
     @inlinable public func hasSuffix(_ pattern: Self) -> Bool {
-        return _hasSuffix(pattern)
+        return _hasSuffix(pattern.reversed() as ReversedCollection<Self>)
     }
 
     @inlinable internal func _commonSuffix<C : SearchableBidirectionalCollection>(with other: C) -> PatternMatch<Self> where C.Element == Self.Element {

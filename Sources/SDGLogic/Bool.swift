@@ -32,7 +32,7 @@ extension Bool : Comparable {
     ///     - precedingValue: A Boolean value.
     ///     - followingValue: A closure that results in another Boolean value.
     @inlinable public static func ∧ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
-        return try precedingValue && followingValue // @exempt(from: unicode)
+        return try precedingValue && followingValue() // @exempt(from: unicode)
     }
 
     /// Modifies the preceding operand by logical conjunction with the following operand.
@@ -43,7 +43,7 @@ extension Bool : Comparable {
     ///     - precedingValue: The Boolean value to modify.
     ///     - followingValue: A closure that results in another Boolean value.
     @inlinable public static func ∧= (precedingValue: inout Bool, followingValue: @autoclosure () throws -> Bool) rethrows {
-        precedingValue = try precedingValue ∧ followingValue
+        precedingValue = try precedingValue ∧ followingValue()
     }
 
     /// Returns the logical disjunction of the two Boolean values.
@@ -54,7 +54,7 @@ extension Bool : Comparable {
     ///     - precedingValue: A Boolean value.
     ///     - followingValue: A closure that results in another Boolean value.
     @inlinable public static func ∨ (precedingValue: Bool, followingValue: @autoclosure () throws -> Bool) rethrows -> Bool {
-        return try precedingValue || followingValue // @exempt(from: unicode)
+        return try precedingValue || followingValue() // @exempt(from: unicode)
     }
 
     /// Modifies the preceding operand by logical disjunction with the following operand.
@@ -65,7 +65,7 @@ extension Bool : Comparable {
     ///     - precedingValue: The Boolean value to modify.
     ///     - followingValue: A closure that results in another Boolean value.
     @inlinable public static func ∨= (precedingValue: inout Bool, followingValue: @autoclosure () throws -> Bool) rethrows {
-        precedingValue = try precedingValue ∨ followingValue
+        precedingValue = try precedingValue ∨ followingValue()
     }
 
     // MARK: - Comparable

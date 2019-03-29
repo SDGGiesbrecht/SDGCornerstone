@@ -50,16 +50,36 @@
     test(assignmentOperator: (∩=, "∩="), with: (set, Set([b, c])), resultsIn: intersection, file: file, line: line)
     test(assignmentOperator: (∩=, "∩="), with: (set, overlapping), resultsIn: intersection, file: file, line: line)
     // SetAlgebra
-    test(method: (T.intersection, "intersection"), of: set, with: overlapping, returns: intersection, file: file, line: line)
-    test(mutatingMethod: ({ $0.formIntersection($1) }, "formIntersection"), of: set, with: overlapping, resultsIn: intersection, file: file, line: line)
+    let intersectionMethod: (T) -> (T) -> T = { instance in
+        // #workaround(Swift 5, Indirect use avoids compiler bug.)
+        return { (argument: T) -> T in
+            return instance.intersection(argument)
+        }
+    }
+    test(method: (intersectionMethod, "intersection"), of: set, with: overlapping, returns: intersection, file: file, line: line)
+    let formIntersectionMethod: (inout T, T) -> Void = { instance, argument in
+        // #workaround(Swift 5, Indirect use avoids compiler bug.)
+        return instance.formIntersection(argument)
+    }
+    test(mutatingMethod: (formIntersectionMethod, "formIntersection"), of: set, with: overlapping, resultsIn: intersection, file: file, line: line)
 
     test(operator: (∪, "∪"), on: (set, Set([b, c])), returns: superset, file: file, line: line)
     test(operator: (∪, "∪"), on: (set, overlapping), returns: superset, file: file, line: line)
     test(assignmentOperator: (∪=, "∪="), with: (set, Set([b, c])), resultsIn: superset, file: file, line: line)
     test(assignmentOperator: (∪=, "∪="), with: (set, overlapping), resultsIn: superset, file: file, line: line)
     // SetAlgebra
-    test(method: (T.union, "union"), of: set, with: overlapping, returns: superset, file: file, line: line)
-    test(mutatingMethod: ({ $0.formUnion($1) }, "formUnion"), of: set, with: overlapping, resultsIn: superset, file: file, line: line)
+    let unionMethod: (T) -> (T) -> T = { instance in
+        // #workaround(Swift 5, Indirect use avoids compiler bug.)
+        return { (argument: T) -> T in
+            return instance.union(argument)
+        }
+    }
+    test(method: (unionMethod, "union"), of: set, with: overlapping, returns: superset, file: file, line: line)
+    let formUnionMethod: (inout T, T) -> Void = { instance, argument in
+        // #workaround(Swift 5, Indirect use avoids compiler bug.)
+        return instance.formUnion(argument)
+    }
+    test(mutatingMethod: (formUnionMethod, "formUnion"), of: set, with: overlapping, resultsIn: superset, file: file, line: line)
 
     var complement = T()
     complement.insert(a)
@@ -75,6 +95,16 @@
     test(operator: (∆, "∆"), on: (set, overlapping), returns: symmetricDifference, file: file, line: line)
     test(assignmentOperator: (∆=, "∆="), with: (set, overlapping), resultsIn: symmetricDifference, file: file, line: line)
     // SetAlgebra
-    test(method: (T.symmetricDifference, "symmetricDifference"), of: set, with: overlapping, returns: symmetricDifference, file: file, line: line)
-    test(mutatingMethod: ({ $0.formSymmetricDifference($1) }, "formSymmetricDifference"), of: set, with: overlapping, resultsIn: symmetricDifference, file: file, line: line)
+    let symmetricDifferenceMethod: (T) -> (T) -> T = { instance in
+        // #workaround(Swift 5, Indirect use avoids compiler bug.)
+        return { (argument: T) -> T in
+            return instance.symmetricDifference(argument)
+        }
+    }
+    test(method: (symmetricDifferenceMethod, "symmetricDifference"), of: set, with: overlapping, returns: symmetricDifference, file: file, line: line)
+    let formSymmetricDifferenceMethod: (inout T, T) -> Void = { instance, argument in
+        // #workaround(Swift 5, Indirect use avoids compiler bug.)
+        return instance.formSymmetricDifference(argument)
+    }
+    test(mutatingMethod: (formSymmetricDifferenceMethod, "formSymmetricDifference"), of: set, with: overlapping, resultsIn: symmetricDifference, file: file, line: line)
 }
