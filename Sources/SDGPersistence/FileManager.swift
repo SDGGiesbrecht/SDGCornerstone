@@ -52,20 +52,6 @@ extension FileManager {
 
         let zoneURL = cached(in: &locations[location]) {
 
-            #if os(Linux)
-            // #workaround(Swift 4.2.1, Foundation will handle the first two itself in Swift 5.0.)
-
-            let path: String
-            switch location {
-            case .applicationSupport:
-                path = NSHomeDirectory() + "/.Application Support"
-            case .cache:
-                path = NSHomeDirectory() + "/.cache"
-            }
-            return URL(fileURLWithPath: path)
-
-            #else
-
             let searchPath: FileManager.SearchPathDirectory
             switch location {
             case .applicationSupport:
@@ -78,8 +64,6 @@ extension FileManager {
                 _unreachable()
             }
             return result
-
-            #endif
         }
 
         return zoneURL.appendingPathComponent(FileManager.possibleDebugDomain(domain))
