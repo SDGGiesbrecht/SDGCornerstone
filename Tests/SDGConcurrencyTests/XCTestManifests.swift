@@ -16,7 +16,6 @@ import XCTest
 
 extension SDGConcurrencyAPITests {
     static let __allTests = [
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testRunLoop", testRunLoop)
     ]
 }

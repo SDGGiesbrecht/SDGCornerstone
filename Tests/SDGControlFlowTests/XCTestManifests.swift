@@ -18,7 +18,6 @@ extension SDGControlFlowAPITests {
     static let __allTests = [
         ("testCaching", testCaching),
         ("testCodable", testCodable),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testNonmutatingVariants", testNonmutatingVariants),
         ("testPerformanceTest", testPerformanceTest),
         ("testShared", testShared),

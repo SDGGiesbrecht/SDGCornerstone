@@ -20,7 +20,6 @@ extension SDGLocalizationAPITests {
         ("testBool", testBool),
         ("testCasing", testCasing),
         ("testCustomStringConvertible", testCustomStringConvertible),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testLocalization", testLocalization),
         ("testLocalizationRelationships", testLocalizationRelationships),
         ("testLocalizationSetting", testLocalizationSetting),
@@ -35,7 +34,6 @@ extension SDGLocalizationInternalTests {
     static let __allTests = [
         ("testContentLocalization", testContentLocalization),
         ("testInterfaceLocalization", testInterfaceLocalization),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testLocalizationSetting", testLocalizationSetting),
         ("testWholeNumber", testWholeNumber)
     ]

@@ -20,7 +20,6 @@ extension SDGTextAPITests {
         ("testFont", testFont),
         ("testLineView", testLineView),
         ("testLineViewIndex", testLineViewIndex),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testNewlinePattern", testNewlinePattern),
         ("testRange", testRange),
         ("testScalarView", testScalarView),
@@ -37,15 +36,13 @@ extension SDGTextAPITests {
 
 extension SDGTextInternalTests {
     static let __allTests = [
-        ("testLineViewIndex", testLineViewIndex),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
+        ("testLineViewIndex", testLineViewIndex)
     ]
 }
 
 extension SDGTextRegressionTests {
     static let __allTests = [
         ("testLastLineNotDropped", testLastLineNotDropped),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testMatchlessComponentSeperation", testMatchlessComponentSeperation),
         ("testMatchlessSearch", testMatchlessSearch),
         ("testNestingLevelLocation", testNestingLevelLocation),

@@ -18,15 +18,13 @@ extension SDGExternalProcessAPITests {
     static let __allTests = [
         ("testExternalProcess", testExternalProcess),
         ("testExternalProcessError", testExternalProcessError),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testShell", testShell)
     ]
 }
 
 extension SDGExternalProcessRegressionTests {
     static let __allTests = [
-        ("testDelayedShellOutput", testDelayedShellOutput),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
+        ("testDelayedShellOutput", testDelayedShellOutput)
     ]
 }
 

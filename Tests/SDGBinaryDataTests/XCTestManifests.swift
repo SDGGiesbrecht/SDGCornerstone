@@ -18,7 +18,6 @@ extension SDGBinaryDataAPITests {
     static let __allTests = [
         ("testData", testData),
         ("testDataStream", testDataStream),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testUInt", testUInt)
     ]
 }

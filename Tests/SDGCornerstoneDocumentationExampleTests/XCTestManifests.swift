@@ -16,15 +16,13 @@ import XCTest
 
 extension DateExampleTests {
     static let __allTests = [
-        ("testCustomDate", testCustomDate),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
+        ("testCustomDate", testCustomDate)
     ]
 }
 
 extension FunctionAnalysisExampleTests {
     static let __allTests = [
         ("testFindLocalMinimum", testFindLocalMinimum),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testUndefinedCaseOneForFindLocalMaximum", testUndefinedCaseOneForFindLocalMaximum),
         ("testUndefinedCaseOneForFindLocalMinimum", testUndefinedCaseOneForFindLocalMinimum),
         ("testUndefinedCaseTwoForFindLocalMaximum", testUndefinedCaseTwoForFindLocalMaximum),
@@ -44,7 +42,6 @@ extension MiscellaneousExampleTests {
         ("testGregorianYear", testGregorianYear),
         ("testIncreasing", testIncreasing),
         ("testIntegerLiterals", testIntegerLiterals),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testNestingLevel", testNestingLevel),
         ("testPatternSwitch", testPatternSwitch),
         ("testRationalNumberLiterals", testRationalNumberLiterals),
@@ -56,7 +53,6 @@ extension MiscellaneousExampleTests {
 
 extension ReadMeExampleTests {
     static let __allTests = [
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testReadMe", testReadMe)
     ]
 }

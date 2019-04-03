@@ -17,7 +17,6 @@ import XCTest
 extension SDGGeometryAPITests {
     static let __allTests = [
         ("testAngle", testAngle),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testPoint", testPoint),
         ("testVector", testVector)
     ]

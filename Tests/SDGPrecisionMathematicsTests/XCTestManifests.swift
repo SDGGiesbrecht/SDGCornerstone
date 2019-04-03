@@ -17,7 +17,6 @@ import XCTest
 extension SDGPrecisionMathematicsAPITests {
     static let __allTests = [
         ("testInteger", testInteger),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testRationalNumber", testRationalNumber),
         ("testWholeNumber", testWholeNumber)
     ]
@@ -25,7 +24,6 @@ extension SDGPrecisionMathematicsAPITests {
 
 extension SDGPrecisionMathematicsInternalTests {
     static let __allTests = [
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testUIntHalvesView", testUIntHalvesView),
         ("testWholeNumberBinaryView", testWholeNumberBinaryView)
     ]

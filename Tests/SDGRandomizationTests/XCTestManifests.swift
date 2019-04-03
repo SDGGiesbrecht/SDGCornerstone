@@ -19,7 +19,6 @@ extension SDGRandomizationAPITests {
         ("testBool", testBool),
         ("testCollection", testCollection),
         ("testCyclicalNumberGenerator", testCyclicalNumberGenerator),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testMeasurement", testMeasurement),
         ("testPseudorandomNumberGenerator", testPseudorandomNumberGenerator),
         ("testRangeReplaceableCollection", testRangeReplaceableCollection)

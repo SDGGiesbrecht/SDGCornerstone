@@ -33,7 +33,6 @@ extension SDGCalendarAPITests {
         ("testHebrewPart", testHebrewPart),
         ("testHebrewWeekday", testHebrewWeekday),
         ("testHebrewYear", testHebrewYear),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testWeekday", testWeekday)
     ]
 }
@@ -45,7 +44,6 @@ extension SDGCalendarInternalTests {
         ("testGregorianWeekdayDate", testGregorianWeekdayDate),
         ("testHebrewWeekdayDate", testHebrewWeekdayDate),
         ("testHebrewYear", testHebrewYear),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testRelativeDate", testRelativeDate)
     ]
 }
@@ -53,7 +51,6 @@ extension SDGCalendarInternalTests {
 extension SDGCalendarRegressionTests {
     static let __allTests = [
         ("testCalendarEquatability", testCalendarEquatability),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testWeekday", testWeekday)
     ]
 }

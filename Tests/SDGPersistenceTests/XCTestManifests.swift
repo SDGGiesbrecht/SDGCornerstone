@@ -18,7 +18,6 @@ extension SDGPersistenceAPITests {
     static let __allTests = [
         ("testFileConvertible", testFileConvertible),
         ("testFileManager", testFileManager),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testLosslessStringConvertible", testLosslessStringConvertible),
         ("testPreferences", testPreferences),
         ("testSpecification", testSpecification),
@@ -29,7 +28,6 @@ extension SDGPersistenceAPITests {
 extension SDGPersistenceRegressionTests {
     static let __allTests = [
         ("testCachePermissions", testCachePermissions),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled)
     ]
 }

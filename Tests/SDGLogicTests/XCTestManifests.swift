@@ -19,7 +19,6 @@ extension SDGLogicAPITests {
         ("testAny", testAny),
         ("testBool", testBool),
         ("testEquatable", testEquatable),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testOptional", testOptional)
     ]
 }

@@ -23,7 +23,6 @@ extension SDGMathematicsAPITests {
         ("testFloat", testFloat),
         ("testFunctionAnalysis", testFunctionAnalysis),
         ("testInt", testInt),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testNegatable", testNegatable),
         ("testOneDimensionalPoint", testOneDimensionalPoint),
         ("testOrderedEnumeration", testOrderedEnumeration),
@@ -43,7 +42,6 @@ extension SDGMathematicsRegressionTests {
         ("testDivisionIsUnambiguous", testDivisionIsUnambiguous),
         ("testDivisionOfNegatives", testDivisionOfNegatives),
         ("testFloor", testFloor),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testSubtraction", testSubtraction),
         ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous)
     ]

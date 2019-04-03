@@ -29,7 +29,6 @@ extension SDGCollectionsAPITests {
         ("testFiniteSet", testFiniteSet),
         ("testIntensionalSet", testIntensionalSet),
         ("testIntersection", testIntersection),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),
         ("testLiteralPattern", testLiteralPattern),
         ("testMutableSet", testMutableSet),
         ("testNotPattern", testNotPattern),
@@ -46,8 +45,7 @@ extension SDGCollectionsAPITests {
 
 extension SDGCollectionsRegressionTests {
     static let __allTests = [
-        ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch),
-        ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility)
+        ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch)
     ]
 }
 
