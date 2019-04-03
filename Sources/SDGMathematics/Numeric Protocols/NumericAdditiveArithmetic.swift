@@ -71,7 +71,6 @@ extension NumericAdditiveArithmetic {
     }
 }
 
-// #workaround(Swift 4.2.1, This should be made debug‐only once conditional compiling is available.)
 public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     @inlinable public init(contents: Wrapped) {
         self.contents = contents
