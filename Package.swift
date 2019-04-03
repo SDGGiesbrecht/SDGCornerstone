@@ -41,7 +41,9 @@ import PackageDescription
 let package = Package(
     name: "SDGCornerstone",
     platforms: [
-        .macOS(.v10_13)
+        .macOS(.v10_13),
+        .iOS(.v10),
+        .tvOS(.v10)
     ],
     products: [
         // The entire package.
