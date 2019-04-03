@@ -123,7 +123,7 @@ extension FileManager {
     public func withTemporaryDirectory<Result>(appropriateFor destination: URL?, _ body: (_ directory: URL) throws -> Result) rethrows -> Result {
         var directory: URL
         #if os(Linux)
-        // #workaround(Swift 4.2.1, Foundation may handle this eventually.)
+        // #workaround(Swift 5.0, Foundation may handle this eventually.)
 
         directory = temporaryDirectory
 
@@ -198,7 +198,7 @@ extension FileManager {
 
             let isDirectory: Bool
             #if os(Linux)
-            // #workaround(Swift 4.2.1, Linux has no implementation for resourcesValues.)
+            // #workaround(Swift 5.0, Linux has no implementation for resourcesValues.)
             var objCBool: ObjCBool = false
             isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool) ∧ objCBool.boolValue
             #else
