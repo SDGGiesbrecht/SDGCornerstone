@@ -21,12 +21,6 @@ import SDGXCTestUtilities
 
 class SDGControlFlowAPITests : TestCase {
 
-    func testBuildConfiguration() {
-        if _isDebugAssertConfiguration() {
-            test(variable: (BuildConfiguration.current, "BuildConfiguration.current"), is: .debug)
-        }
-    }
-
     func testCaching() {
 
         var callCount = 0

@@ -22,7 +22,11 @@ extension FileManager {
     // MARK: - Domains
 
     internal static func possibleDebugDomain(_ domain: String) -> String {
-        return BuildConfiguration.current == .debug ? domain + ".debug" : domain // @exempt(from: tests)
+        #if DEBUG_DOMAINS
+        return domain + ".debug"
+        #else
+        return domain
+        #endif
     }
 
     // MARK: - Recommended File Locations

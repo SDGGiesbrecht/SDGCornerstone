@@ -16,7 +16,6 @@ import XCTest
 
 extension SDGControlFlowAPITests {
     static let __allTests = [
-        ("testBuildConfiguration", testBuildConfiguration),
         ("testCaching", testCaching),
         ("testCodable", testCodable),
         ("testLinuxMainGenerationCompatibility", testLinuxMainGenerationCompatibility),

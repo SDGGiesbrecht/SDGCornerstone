@@ -248,6 +248,9 @@ let package = Package(
             "SDGLogic",
             "SDGCollections",
             "SDGText"
+            ], swiftSettings: [
+                .define("DEBUG_DOMAINS", .when(configuration: .debug)),
+                .define("PREFERENCE_WARNINGS", .when(configuration: .debug))
             ]),
         // @documentation(SDGPersistenceTestUtilities)
         /// Utilities for testing code which uses `SDGPersistence`.
