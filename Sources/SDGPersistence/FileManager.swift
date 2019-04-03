@@ -12,11 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if canImport(Glibc)
-// #workaround(Swift 4.2.1, See move method below.)
-import Glibc
-#endif
-
 import Foundation
 
 import SDGControlFlow
@@ -171,30 +166,7 @@ extension FileManager {
     ///     - source: The URL of the source item.
     ///     - destination: The destination URL.
     public func move(_ source: URL, to destination: URL) throws {
-
         try createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
-
-        #if canImport(Glibc)
-        // #workaround(Swift 4.2.1, Until Linux’ Foundation implements cross‐device moves in Swift 5.)
-
-        if ¬fileExists(atPath: destination.path) {
-            // Otherwise Foundation can generate its own error.
-
-            if rename(source.path, destination.path) == 0 {
-                return // Move complete.
-            } else {
-                if errno == EXDEV {
-                    // Cross‐device
-                    try copy(source, to: destination)
-                    try removeItem(at: source)
-                    return // Move complete.
-                } else {
-                    // Foundation can generate it own error.
-                }
-            }
-        }
-        #endif
-
         try moveItem(at: source, to: destination)
     }
 
