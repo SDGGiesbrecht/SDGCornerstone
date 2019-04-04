@@ -230,7 +230,7 @@ public protocol RealArithmetic : RationalArithmetic {
 
 extension RealArithmetic {
 
-    // #workaround(Swift 4.2.1, These can be removed when global generic constants are available.)
+    // #workaround(Swift 5.0, These can be removed when global generic constants are available.)
 
     /// π in the same type.
     ///
@@ -355,7 +355,7 @@ extension RealArithmetic {
 
     @inlinable public static func arccot(_ cotangent: Self) -> Angle<Self> {
         let reference = arctan(1 ÷ cotangent)
-        if reference < Angle.additiveIdentity {
+        if reference < Angle.zero {
             return reference + π.rad
         } else {
             return reference
@@ -365,7 +365,7 @@ extension RealArithmetic {
 
 // MARK: - Real Arithmetic
 
-// #workaround(Swift 4.2.1, These should be switched to generic constants when they become available.)
+// #workaround(Swift 5.0, These should be switched to generic constants when they become available.)
 
 /// An instance of π in the desired return type.
 ///

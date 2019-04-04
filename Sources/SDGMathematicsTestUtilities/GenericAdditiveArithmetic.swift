@@ -1,5 +1,5 @@
 /*
- AdditiveArithmetic.swift
+ GenericAdditiveArithmetic.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -15,7 +15,7 @@
 import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities
 
-/// Tests a type’s conformance to AdditiveArithmetic.
+/// Tests a type’s conformance to GenericAdditiveArithmetic.
 ///
 /// - Parameters:
 ///     - augend: An augend.
@@ -23,10 +23,12 @@ import SDGPersistenceTestUtilities
 ///     - sum: The expected sum.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : AdditiveArithmetic {
+@inlinable public func testGenericAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : GenericAdditiveArithmetic {
     testHashableConformance(differingInstances: (augend, sum), file: file, line: line)
     testSubtractableConformance(minuend: sum, subtrahend: addend, difference: augend, file: file, line: line)
     testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)
 
-    test(operator: (+, "+"), on: (sum, T.additiveIdentity), returns: sum, file: file, line: line)
+    test(operator: (+, "+"), on: (sum, T.zero), returns: sum, file: file, line: line)
+    test(operator: (-, "-"), on: (sum, T.zero), returns: sum, file: file, line: line) // @exempt(from: unicode)
+    test(assignmentOperator: (-=, "-="), with: (sum, T.zero), resultsIn: sum, file: file, line: line) // @exempt(from: unicode)
 }

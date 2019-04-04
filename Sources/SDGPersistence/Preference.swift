@@ -102,7 +102,7 @@ public struct Preference : Equatable, TransparentWrapper {
 
     @inlinable internal func encodeAndDeserialize<T>(_ value: [T]) throws -> Any where T : Encodable {
         #if os(Linux)
-        // #workaround(Swift 4.2.1, Until Linux has PropertyListEncoder.)
+        // #workaround(Swift 5.0, Until Linux has PropertyListEncoder.)
         return try JSONSerialization.jsonObject(with: JSONEncoder().encode(value), options: [])
         #else
         return try PropertyListSerialization.propertyList(from: PropertyListEncoder().encode(value), options: [], format: nil)
@@ -110,7 +110,7 @@ public struct Preference : Equatable, TransparentWrapper {
     }
     @inlinable internal func serializeAndDecode<T>(_ array: NSArray, as type: T.Type) throws -> [T] where T : Decodable {
         #if os(Linux)
-        // #workaround(Swift 4.2.1, Until Linux has PropertyListDecoder.)
+        // #workaround(Swift 5.0, Until Linux has PropertyListDecoder.)
         return try JSONDecoder().decode([T].self, from: JSONSerialization.data(withJSONObject: array, options: []))
         #else
         return try PropertyListDecoder().decode([T].self, from: PropertyListSerialization.data(fromPropertyList: array, format: .binary, options: 0))
@@ -135,10 +135,10 @@ public struct Preference : Equatable, TransparentWrapper {
             let object = cast(arrayObject.firstObject!)
             propertyListObject = object
         } catch { // @exempt(from: tests)
-            if BuildConfiguration.current == .debug { // @exempt(from: tests)
+            #if PREFERENCE_WARNINGS // @exempt(from: tests)
                 // This indicates a precondition violation during coding, but it is not worth stopping execution.
                 print(error)
-            } // @exempt(from: tests)
+            #endif
             propertyListObject = nil
         }
     }
@@ -169,9 +169,9 @@ public struct Preference : Equatable, TransparentWrapper {
             do {
                 return try serializeAndDecode(NSArray(object: object), as: T.self)[0]
             } catch {
-                if BuildConfiguration.current == .debug {
+                #if PREFERENCE_WARNINGS
                     print(error)
-                }
+                #endif
                 return nil
             }
         }

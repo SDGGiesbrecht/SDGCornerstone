@@ -12,11 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if canImport(Glibc)
-// #workaround(Swift 4.2.1, See move method below.)
-import Glibc
-#endif
-
 import Foundation
 
 import SDGControlFlow
@@ -27,7 +22,11 @@ extension FileManager {
     // MARK: - Domains
 
     internal static func possibleDebugDomain(_ domain: String) -> String {
-        return BuildConfiguration.current == .debug ? domain + ".debug" : domain // @exempt(from: tests)
+        #if DEBUG_DOMAINS
+        return domain + ".debug"
+        #else
+        return domain
+        #endif
     }
 
     // MARK: - Recommended File Locations
@@ -57,20 +56,6 @@ extension FileManager {
 
         let zoneURL = cached(in: &locations[location]) {
 
-            #if os(Linux)
-            // #workaround(Swift 4.2.1, Foundation will handle the first two itself in Swift 5.0.)
-
-            let path: String
-            switch location {
-            case .applicationSupport:
-                path = NSHomeDirectory() + "/.Application Support"
-            case .cache:
-                path = NSHomeDirectory() + "/.cache"
-            }
-            return URL(fileURLWithPath: path)
-
-            #else
-
             let searchPath: FileManager.SearchPathDirectory
             switch location {
             case .applicationSupport:
@@ -83,8 +68,6 @@ extension FileManager {
                 _unreachable()
             }
             return result
-
-            #endif
         }
 
         return zoneURL.appendingPathComponent(FileManager.possibleDebugDomain(domain))
@@ -140,21 +123,24 @@ extension FileManager {
     public func withTemporaryDirectory<Result>(appropriateFor destination: URL?, _ body: (_ directory: URL) throws -> Result) rethrows -> Result {
         var directory: URL
         #if os(Linux)
-        // #workaround(Swift 4.2.1, Foundation may handle this eventually.)
+        // #workaround(Swift 5.0, Foundation may handle this eventually.)
 
         directory = temporaryDirectory
 
         #else
 
-        guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
-            _unreachable()
+        let volume = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        if let itemReplacement = try? url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: volume, create: true) {
+            directory = itemReplacement
+        } else {
+            // @exempt(from: tests) macOS fails to find the preferred item replacement directory from time to time.
+            if let anyVolume = try? url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: nil, create: true) {
+                directory = anyVolume
+            } else {
+                // @exempt(from: tests)
+                directory = temporaryDirectory
+            }
         }
-        let volume = documents
-
-        guard let itemReplacement = try? url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: volume, create: true) else {
-            _unreachable()
-        }
-        directory = itemReplacement
 
         #endif
 
@@ -171,30 +157,7 @@ extension FileManager {
     ///     - source: The URL of the source item.
     ///     - destination: The destination URL.
     public func move(_ source: URL, to destination: URL) throws {
-
         try createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
-
-        #if canImport(Glibc)
-        // #workaround(Swift 4.2.1, Until Linux’ Foundation implements cross‐device moves in Swift 5.)
-
-        if ¬fileExists(atPath: destination.path) {
-            // Otherwise Foundation can generate its own error.
-
-            if rename(source.path, destination.path) == 0 {
-                return // Move complete.
-            } else {
-                if errno == EXDEV {
-                    // Cross‐device
-                    try copy(source, to: destination)
-                    try removeItem(at: source)
-                    return // Move complete.
-                } else {
-                    // Foundation can generate it own error.
-                }
-            }
-        }
-        #endif
-
         try moveItem(at: source, to: destination)
     }
 
@@ -238,7 +201,7 @@ extension FileManager {
 
             let isDirectory: Bool
             #if os(Linux)
-            // #workaround(Swift 4.2.1, Linux has no implementation for resourcesValues.)
+            // #workaround(Swift 5.0, Linux has no implementation for resourcesValues.)
             var objCBool: ObjCBool = false
             isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool) ∧ objCBool.boolValue
             #else

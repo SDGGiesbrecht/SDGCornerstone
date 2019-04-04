@@ -41,14 +41,14 @@ extension Sequence where Element : Hashable {
     }
 }
 
-extension Sequence where Element : AdditiveArithmetic {
+extension Sequence where Element : GenericAdditiveArithmetic {
 
     /// Returns the sum of all values in the sequence.
     ///
     /// - Parameters:
     ///     - sequence: The sequence.
     @inlinable public static prefix func ∑ (sequence: Self) -> Element {
-        var sum = Element.additiveIdentity
+        var sum = Element.zero
         for element in sequence {
             sum += element
         }

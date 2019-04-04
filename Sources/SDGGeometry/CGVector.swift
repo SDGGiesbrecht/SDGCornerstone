@@ -18,11 +18,7 @@ import CoreGraphics
 
 import SDGMathematics
 
-extension CGVector : AdditiveArithmetic, Negatable, TwoDimensionalVector {
-
-    // MARK: - AdditiveArithmetic
-
-    public static let additiveIdentity: CGVector = zero
+extension CGVector : GenericAdditiveArithmetic, Negatable, TwoDimensionalVector {
 
     // MARK: - TwoDimensionalVector
 

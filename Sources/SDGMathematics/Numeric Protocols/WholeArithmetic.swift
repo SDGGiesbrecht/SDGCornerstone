@@ -37,7 +37,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
 
     // MARK: - Operations
 
-    // #workaround(Swift 4.2.1, Duplicates Subtractable, but works around disambiguation bugs.)
+    // #workaround(Swift 5.0, Duplicates Subtractable, but works around disambiguation bugs.)
     static func − (precedingValue: Self, followingValue: Self) -> Self
 
     /// Returns the product of the preceding value times the following value.

@@ -27,7 +27,7 @@
 @_exported import SDGConcurrency
 @_exported import SDGExternalProcess
 
-// #workaround(Swift 4.2.1, Compensate because @_export drops operator definitions.)
+// #workaround(Swift 5.0, Compensate because @_export drops operator definitions.)
 
 // SDGLogic
 // #documentation(SDGCornerstone.≠)

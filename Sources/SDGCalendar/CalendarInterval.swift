@@ -96,7 +96,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
 
     // MARK: - Properties
 
-    @usableFromInline internal var inUnits: Scalar = Scalar.additiveIdentity
+    @usableFromInline internal var inUnits: Scalar = Scalar.zero
 
     @inlinable internal var unitsPerGregorianLeapYearCycle: Scalar {
         return unitsPerDay × Scalar(GregorianYear.daysPerLeapYearCycle)

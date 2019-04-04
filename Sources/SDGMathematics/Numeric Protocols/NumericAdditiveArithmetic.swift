@@ -20,10 +20,10 @@ import SDGControlFlow
 ///
 /// Conformance Requirements:
 ///
-/// - `AdditiveArithmetic`
+/// - `GenericAdditiveArithmetic`
 /// - `Comparable`
 /// - `Negatable`, `WholeNumberProtocol` or `mutating func formAbsoluteValue()`
-public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
+public protocol NumericAdditiveArithmetic : GenericAdditiveArithmetic, Comparable {
 
     // MARK: - Classification
 
@@ -51,19 +51,19 @@ public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
 extension NumericAdditiveArithmetic {
 
     @inlinable public var isPositive: Bool {
-        return self > Self.additiveIdentity
+        return self > Self.zero
     }
 
     @inlinable public var isNegative: Bool {
-        return self < Self.additiveIdentity
+        return self < Self.zero
     }
 
     @inlinable public var isNonNegative: Bool {
-        return self ≥ Self.additiveIdentity
+        return self ≥ Self.zero
     }
 
     @inlinable public var isNonPositive: Bool {
-        return self ≤ Self.additiveIdentity
+        return self ≤ Self.zero
     }
 
     @inlinable public var absoluteValue: Self {
@@ -71,7 +71,6 @@ extension NumericAdditiveArithmetic {
     }
 }
 
-// #workaround(Swift 4.2.1, This should be made debug‐only once conditional compiling is available.)
 public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
     @inlinable public init(contents: Wrapped) {
         self.contents = contents
@@ -112,7 +111,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 extension NumericAdditiveArithmetic where Self : Negatable {
 
     @inlinable public mutating func formAbsoluteValue() {
-        if self < Self.additiveIdentity {
+        if self < Self.zero {
             self.negate()
         }
     }

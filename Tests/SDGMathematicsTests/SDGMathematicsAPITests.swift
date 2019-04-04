@@ -149,6 +149,7 @@ class SDGMathematicsAPITests : TestCase {
         #if !os(Linux)
         XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
         XCTAssertNotNil(CGFloat("1"))
+        XCTAssertNotNil(CGFloat(String("1")))
         XCTAssertNil(CGFloat(String("a")))
         #endif
 
@@ -156,8 +157,7 @@ class SDGMathematicsAPITests : TestCase {
     }
 
     func testFunctionAnalysis() {
-        let negativeQuatratic = {
-            (input: Int) -> Int in
+        let negativeQuatratic = { (input: Int) -> Int in
             return −(input ↑ 2)
         }
         XCTAssertEqual(findLocalMaximum(near: 10, inFunction: negativeQuatratic), 0, "Failed to find local maximum.")
@@ -165,8 +165,7 @@ class SDGMathematicsAPITests : TestCase {
         XCTAssertEqual(findLocalMaximum(near: 10, within: 5...15, inFunction: negativeQuatratic), 5, "Failed to find local maximum.")
         XCTAssertEqual(findLocalMaximum(near: −10, inFunction: negativeQuatratic), 0, "Failed to find local maximum.")
 
-        let quatratic = {
-            (input: Int) -> Int in
+        let quatratic = { (input: Int) -> Int in
             return (input ↑ 2)
         }
 
@@ -256,7 +255,7 @@ class SDGMathematicsAPITests : TestCase {
         init(_ value: Int) {
             self.value = value
         }
-        static var additiveIdentity = PointProtocolVectorSelfExample(0)
+        static var zero = PointProtocolVectorSelfExample(0)
         static func += (precedingValue: inout PointProtocolVectorSelfExample, followingValue: PointProtocolVectorSelfExample) {
             precedingValue.value += followingValue.value
         }
@@ -555,7 +554,7 @@ class SDGMathematicsAPITests : TestCase {
         static func += (precedingValue: inout VectorProtocolExample, followingValue: VectorProtocolExample) {
             precedingValue.value += followingValue.value
         }
-        static var additiveIdentity: VectorProtocolExample {
+        static var zero: VectorProtocolExample {
             return VectorProtocolExample(0)
         }
         typealias Scalar = Double

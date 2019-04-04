@@ -20,8 +20,8 @@ import SDGControlFlow
 ///
 /// Conformance Requirements:
 ///
-/// - `AdditiveArithmetic`
-public protocol Negatable : AdditiveArithmetic {
+/// - `GenericAdditiveArithmetic`
+public protocol Negatable : GenericAdditiveArithmetic {
 
     // @documentation(SDGCornerstone.Negatable.−)
     /// Returns the additive inverse of the operand.
@@ -41,7 +41,7 @@ extension Negatable {
     }
 
     @inlinable internal mutating func _negate() {
-        self = Self.additiveIdentity − self
+        self = Self.zero − self
     }
     @inlinable public mutating func negate() {
         _negate()

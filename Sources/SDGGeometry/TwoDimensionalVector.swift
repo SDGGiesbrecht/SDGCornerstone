@@ -37,7 +37,7 @@ public protocol TwoDimensionalVector : Negatable, VectorProtocol {
 extension TwoDimensionalVector {
 
     @inlinable public init(Δx: Scalar, Δy: Scalar) {
-        self = Self.additiveIdentity
+        self = Self.zero
         self.Δx = Δx
         self.Δy = Δy
     }

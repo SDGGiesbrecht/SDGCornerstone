@@ -41,7 +41,10 @@ import PackageDescription
 let package = Package(
     name: "SDGCornerstone",
     platforms: [
-        .macOS(.v10_13)
+        .macOS(.v10_13),
+        .iOS(.v10),
+        .watchOS(.v3),
+        .tvOS(.v10)
     ],
     products: [
         // The entire package.
@@ -248,6 +251,9 @@ let package = Package(
             "SDGLogic",
             "SDGCollections",
             "SDGText"
+            ], swiftSettings: [
+                .define("DEBUG_DOMAINS", .when(configuration: .debug)),
+                .define("PREFERENCE_WARNINGS", .when(configuration: .debug))
             ]),
         // @documentation(SDGPersistenceTestUtilities)
         /// Utilities for testing code which uses `SDGPersistence`.

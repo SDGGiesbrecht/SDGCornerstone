@@ -25,7 +25,7 @@
 ///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testVectorProtocolConformance<T>(augend: T, addend: T, sum: T, multiplicand: T, multiplier: T.Scalar, product: T, file: StaticString = #file, line: UInt = #line) where T : VectorProtocol {
 
-    testAdditiveArithmeticConformance(augend: augend, addend: addend, sum: sum, file: file, line: line)
+    testGenericAdditiveArithmeticConformance(augend: augend, addend: addend, sum: sum, file: file, line: line)
 
     test(operator: (×, "×"), on: (multiplicand, multiplier), returns: product, file: file, line: line)
     test(assignmentOperator: (×=, "×="), with: (multiplicand, multiplier), resultsIn: product, file: file, line: line)

@@ -209,6 +209,8 @@ class SDGTextAPITests : TestCase {
         let html = SemanticMarkup("&<>").subscripted().html()
         compare(String(html), against: testSpecificationDirectory().appendingPathComponent("SemanticMarkup/HTML/Escapes.txt"), overwriteSpecificationInsteadOfFailing: false)
         _ = markup.playgroundDescription
+
+        XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("...")))
     }
 
     func testStrictString() {
@@ -369,7 +371,7 @@ class SDGTextAPITests : TestCase {
         let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
         XCTAssertEqual(utf16, unicode)
         #if false
-        // #workaround(Swift 4.2.1, macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16.)
+        // #workaround(Swift 5.0, macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16.)
         let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
         XCTAssertEqual(utf32, unicode)
 

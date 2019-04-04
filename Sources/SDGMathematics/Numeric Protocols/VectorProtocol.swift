@@ -18,10 +18,10 @@ import SDGControlFlow
 ///
 /// Conformance Requirements:
 ///
-/// - `AdditiveArithmetic`
+/// - `GenericAdditiveArithmetic`
 /// - `static func ×= (precedingValue: inout Self, followingValue: Scalar)`
 /// - `static func ÷= (precedingValue: inout Self, followingValue: Scalar)`
-public protocol VectorProtocol : AdditiveArithmetic {
+public protocol VectorProtocol : GenericAdditiveArithmetic {
 
     /// The scalar type.
     associatedtype Scalar : RationalArithmetic

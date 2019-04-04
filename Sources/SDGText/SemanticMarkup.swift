@@ -40,7 +40,7 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 /// @usableFromInline internal let beginSubscript: UnicodeScalar = "\u{107002}"
 /// @usableFromInline internal let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
-public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Decodable, Encodable, Equatable, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay {
+public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Decodable, Encodable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
