@@ -300,12 +300,6 @@ extension Measurement {
         precedingValue.rawValue += followingValue.rawValue
     }
 
-    // MARK: - AdditiveArithmetic
-
-    @inlinable public static var additiveIdentity: Self {
-        return Self(rawValue: 0)
-    }
-
     // MARK: - Comparable
 
     @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
@@ -316,6 +310,12 @@ extension Measurement {
 
     @inlinable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
         return precedingValue.rawValue == followingValue.rawValue
+    }
+
+    // MARK: - GenericAdditiveArithmetic
+
+    @inlinable public static var additiveIdentity: Self {
+        return Self(rawValue: 0)
     }
 
     // MARK: - Hashable

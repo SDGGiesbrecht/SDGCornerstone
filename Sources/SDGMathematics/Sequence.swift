@@ -41,7 +41,7 @@ extension Sequence where Element : Hashable {
     }
 }
 
-extension Sequence where Element : AdditiveArithmetic {
+extension Sequence where Element : GenericAdditiveArithmetic {
 
     /// Returns the sum of all values in the sequence.
     ///

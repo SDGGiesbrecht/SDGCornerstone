@@ -20,10 +20,10 @@ import SDGControlFlow
 ///
 /// Conformance Requirements:
 ///
-/// - `AdditiveArithmetic`
+/// - `GenericAdditiveArithmetic`
 /// - `Comparable`
 /// - `Negatable`, `WholeNumberProtocol` or `mutating func formAbsoluteValue()`
-public protocol NumericAdditiveArithmetic : AdditiveArithmetic, Comparable {
+public protocol NumericAdditiveArithmetic : GenericAdditiveArithmetic, Comparable {
 
     // MARK: - Classification
 

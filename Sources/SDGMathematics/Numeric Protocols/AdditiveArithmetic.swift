@@ -1,5 +1,5 @@
 /*
- AdditiveArithmetic.swift
+ GenericAdditiveArithmetic.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -14,20 +14,20 @@
 
 /// A value that can be added and subtracted.
 ///
-/// - Note: Unlike `SignedNumeric`, `AdditiveArithmetic` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc. For additional behaviour specific to one‐dimensional types, see `NumericAdditiveArithmetic`.
+/// `GenericAdditiveArithmetic` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc. For additional behaviour specific to one‐dimensional types, see `NumericAdditiveArithmetic`.
 ///
 /// Conformance Requirements:
 ///
 /// - `Hashable`
 /// - `Subtractable`
 /// - `IntegralArithmetic`, `WholeNumberProtocol`, `ExpressibleByIntegerLiteral` or `static var additiveIdentity: Self { get }`
-public protocol AdditiveArithmetic : Decodable, Encodable, Hashable, Subtractable {
+public protocol GenericAdditiveArithmetic : Decodable, Encodable, Hashable, Subtractable {
 
     /// The additive identity (origin).
     static var additiveIdentity: Self { get }
 }
 
-extension AdditiveArithmetic where Self : ExpressibleByIntegerLiteral {
+extension GenericAdditiveArithmetic where Self : ExpressibleByIntegerLiteral {
 
     @inlinable public static var additiveIdentity: Self {
         return 0

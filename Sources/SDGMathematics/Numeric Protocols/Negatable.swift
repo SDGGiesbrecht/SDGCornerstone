@@ -20,8 +20,8 @@ import SDGControlFlow
 ///
 /// Conformance Requirements:
 ///
-/// - `AdditiveArithmetic`
-public protocol Negatable : AdditiveArithmetic {
+/// - `GenericAdditiveArithmetic`
+public protocol Negatable : GenericAdditiveArithmetic {
 
     // @documentation(SDGCornerstone.Negatable.−)
     /// Returns the additive inverse of the operand.
