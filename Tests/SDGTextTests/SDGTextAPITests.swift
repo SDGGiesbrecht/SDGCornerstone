@@ -209,6 +209,8 @@ class SDGTextAPITests : TestCase {
         let html = SemanticMarkup("&<>").subscripted().html()
         compare(String(html), against: testSpecificationDirectory().appendingPathComponent("SemanticMarkup/HTML/Escapes.txt"), overwriteSpecificationInsteadOfFailing: false)
         _ = markup.playgroundDescription
+
+        XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("")))
     }
 
     func testStrictString() {

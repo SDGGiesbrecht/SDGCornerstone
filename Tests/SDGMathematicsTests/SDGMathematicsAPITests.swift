@@ -149,6 +149,7 @@ class SDGMathematicsAPITests : TestCase {
         #if !os(Linux)
         XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
         XCTAssertNotNil(CGFloat("1"))
+        XCTAssertNotNil(CGFloat(String("1")))
         XCTAssertNil(CGFloat(String("a")))
         #endif
 

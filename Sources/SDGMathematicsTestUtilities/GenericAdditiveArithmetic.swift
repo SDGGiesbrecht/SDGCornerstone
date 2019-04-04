@@ -29,4 +29,6 @@ import SDGPersistenceTestUtilities
     testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)
 
     test(operator: (+, "+"), on: (sum, T.zero), returns: sum, file: file, line: line)
+    test(operator: (-, "-"), on: (sum, T.zero), returns: sum, file: file, line: line) // @exempt(from: unicode)
+    test(assignmentOperator: (-=, "-="), with: (sum, T.zero), resultsIn: sum, file: file, line: line) // @exempt(from: unicode)
 }
