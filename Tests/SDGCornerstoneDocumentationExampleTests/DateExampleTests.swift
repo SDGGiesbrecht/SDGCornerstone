@@ -65,7 +65,7 @@ class DateExampleTests : TestCase {
     func testCustomDate() {
         DateExampleTests.testCustomDate()
     }
-    static func testCustomDate() {
+    private static func testCustomDate() {
         XCTAssertEqual(CalendarDate(gregorian: .january, 12, 2001, at: 0, 0).daysIntoMillennium, 11)
 
         // Unregistered definitions.
