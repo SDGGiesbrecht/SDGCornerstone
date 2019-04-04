@@ -129,15 +129,13 @@ extension FileManager {
 
         #else
 
-        guard let documents = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
-            _unreachable()
+        let volume = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        if let itemReplacement = try? url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: volume, create: true) {
+            directory = itemReplacement
+        } else {
+            // @exempt(from: tests) macOS fails to find the preferred item replacement directory from time to time.
+            directory = temporaryDirectory
         }
-        let volume = documents
-
-        guard let itemReplacement = try? url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: volume, create: true) else {
-            _unreachable()
-        }
-        directory = itemReplacement
 
         #endif
 
