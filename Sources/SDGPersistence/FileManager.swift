@@ -134,7 +134,12 @@ extension FileManager {
             directory = itemReplacement
         } else {
             // @exempt(from: tests) macOS fails to find the preferred item replacement directory from time to time.
-            directory = temporaryDirectory
+            if let anyVolume = try? url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: nil, create: true) {
+                directory = anyVolume
+            } else {
+                // @exempt(from: tests)
+                directory = temporaryDirectory
+            }
         }
 
         #endif
