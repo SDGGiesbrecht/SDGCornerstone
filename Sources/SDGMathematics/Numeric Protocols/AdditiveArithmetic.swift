@@ -21,23 +21,21 @@
 /// - `Hashable`
 /// - `Subtractable`
 /// - `IntegralArithmetic`, `WholeNumberProtocol`, `ExpressibleByIntegerLiteral` or `static var zero: Self { get }`
-public protocol GenericAdditiveArithmetic : Decodable, Encodable, Hashable, Subtractable {
+public protocol GenericAdditiveArithmetic : AdditiveArithmetic, Decodable, Encodable, Hashable, Subtractable {}
 
-    #warning("Remove.")
-    /// The additive identity (origin).
-    static var zero: Self { get }
+extension GenericAdditiveArithmetic {
+
+    @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self { // @exempt(from: unicode)
+        return precedingValue − followingValue
+    }
+
+    @inlinable public static func -= (precedingValue: inout Self, followingValue: Self) { // @exempt(from: unicode)
+        precedingValue −= followingValue
+    }
 }
 
 extension GenericAdditiveArithmetic where Self : ExpressibleByIntegerLiteral {
 
-    @inlinable public static var zero: Self {
-        return 0
-    }
-}
-
-extension GenericAdditiveArithmetic where Self : AdditiveArithmetic, Self : ExpressibleByIntegerLiteral {
-
-    #warning("Remove.")
     @inlinable public static var zero: Self {
         return 0
     }
