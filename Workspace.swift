@@ -54,3 +54,6 @@ configuration.documentation.api.encryptedTravisCIDeploymentKey = "gzx7ARrCgcNJiD
 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
+
+// #workaround(workspace version 0.18.1, Coverage report is inaccurate.)
+configuration.documentation.api.enforceCoverage = false
