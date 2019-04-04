@@ -157,8 +157,7 @@ class SDGMathematicsAPITests : TestCase {
     }
 
     func testFunctionAnalysis() {
-        let negativeQuatratic = {
-            (input: Int) -> Int in
+        let negativeQuatratic = { (input: Int) -> Int in
             return −(input ↑ 2)
         }
         XCTAssertEqual(findLocalMaximum(near: 10, inFunction: negativeQuatratic), 0, "Failed to find local maximum.")
@@ -166,8 +165,7 @@ class SDGMathematicsAPITests : TestCase {
         XCTAssertEqual(findLocalMaximum(near: 10, within: 5...15, inFunction: negativeQuatratic), 5, "Failed to find local maximum.")
         XCTAssertEqual(findLocalMaximum(near: −10, inFunction: negativeQuatratic), 0, "Failed to find local maximum.")
 
-        let quatratic = {
-            (input: Int) -> Int in
+        let quatratic = { (input: Int) -> Int in
             return (input ↑ 2)
         }
 
