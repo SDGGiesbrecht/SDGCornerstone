@@ -355,7 +355,7 @@ extension RealArithmetic {
 
     @inlinable public static func arccot(_ cotangent: Self) -> Angle<Self> {
         let reference = arctan(1 ÷ cotangent)
-        if reference < Angle.additiveIdentity {
+        if reference < Angle.zero {
             return reference + π.rad
         } else {
             return reference

@@ -314,7 +314,7 @@ extension Measurement {
 
     // MARK: - GenericAdditiveArithmetic
 
-    @inlinable public static var additiveIdentity: Self {
+    @inlinable public static var zero: Self {
         return Self(rawValue: 0)
     }
 

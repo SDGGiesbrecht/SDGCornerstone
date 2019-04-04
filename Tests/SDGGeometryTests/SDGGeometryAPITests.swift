@@ -42,7 +42,7 @@ class SDGGeometryAPITests : TestCase {
     #if canImport(CoreGraphics)
     struct TwoDimensionalVectorExample : TwoDimensionalVector {
         var vector: CGVector
-        static let additiveIdentity = TwoDimensionalVectorExample(vector: CGVector(Δx: 0, Δy: 0))
+        static let zero = TwoDimensionalVectorExample(vector: CGVector(Δx: 0, Δy: 0))
         typealias Scalar = CGVector.Scalar
         var Δx: CGFloat {
             get { return vector.Δx }
@@ -87,7 +87,7 @@ class SDGGeometryAPITests : TestCase {
         var hasher = Hasher()
         CGVector(Δx: 1, Δy: 1).hash(into: &hasher)
 
-        XCTAssertEqual(TwoDimensionalVectorExample(Δx: 0, Δy: 0), TwoDimensionalVectorExample.additiveIdentity)
+        XCTAssertEqual(TwoDimensionalVectorExample(Δx: 0, Δy: 0), TwoDimensionalVectorExample.zero)
 
         var vector = CGVector(Δx: 1, Δy: 0)
         vector.direction = 90°

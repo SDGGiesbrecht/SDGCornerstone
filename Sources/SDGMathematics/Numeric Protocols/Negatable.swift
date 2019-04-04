@@ -41,7 +41,7 @@ extension Negatable {
     }
 
     @inlinable internal mutating func _negate() {
-        self = Self.additiveIdentity − self
+        self = Self.zero − self
     }
     @inlinable public mutating func negate() {
         _negate()

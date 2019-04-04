@@ -28,5 +28,5 @@ import SDGPersistenceTestUtilities
     testSubtractableConformance(minuend: sum, subtrahend: addend, difference: augend, file: file, line: line)
     testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)
 
-    test(operator: (+, "+"), on: (sum, T.additiveIdentity), returns: sum, file: file, line: line)
+    test(operator: (+, "+"), on: (sum, T.zero), returns: sum, file: file, line: line)
 }

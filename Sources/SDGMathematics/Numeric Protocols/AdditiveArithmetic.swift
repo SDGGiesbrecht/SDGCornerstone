@@ -20,16 +20,25 @@
 ///
 /// - `Hashable`
 /// - `Subtractable`
-/// - `IntegralArithmetic`, `WholeNumberProtocol`, `ExpressibleByIntegerLiteral` or `static var additiveIdentity: Self { get }`
+/// - `IntegralArithmetic`, `WholeNumberProtocol`, `ExpressibleByIntegerLiteral` or `static var zero: Self { get }`
 public protocol GenericAdditiveArithmetic : Decodable, Encodable, Hashable, Subtractable {
 
+    #warning("Remove.")
     /// The additive identity (origin).
-    static var additiveIdentity: Self { get }
+    static var zero: Self { get }
 }
 
 extension GenericAdditiveArithmetic where Self : ExpressibleByIntegerLiteral {
 
-    @inlinable public static var additiveIdentity: Self {
+    @inlinable public static var zero: Self {
+        return 0
+    }
+}
+
+extension GenericAdditiveArithmetic where Self : AdditiveArithmetic, Self : ExpressibleByIntegerLiteral {
+
+    #warning("Remove.")
+    @inlinable public static var zero: Self {
         return 0
     }
 }

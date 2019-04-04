@@ -68,7 +68,7 @@ public struct Angle<Scalar : RealArithmetic> : CodableViaMeasurement {
     // MARK: - Units
 
     /// The numeric value in radians.
-    public var inRadians: Scalar = Scalar.additiveIdentity
+    public var inRadians: Scalar = Scalar.zero
 
     @inlinable internal static var radiansPerRotation: Scalar {
         return Scalar.τ

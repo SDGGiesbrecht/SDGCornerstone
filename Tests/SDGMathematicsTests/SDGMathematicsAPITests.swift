@@ -256,7 +256,7 @@ class SDGMathematicsAPITests : TestCase {
         init(_ value: Int) {
             self.value = value
         }
-        static var additiveIdentity = PointProtocolVectorSelfExample(0)
+        static var zero = PointProtocolVectorSelfExample(0)
         static func += (precedingValue: inout PointProtocolVectorSelfExample, followingValue: PointProtocolVectorSelfExample) {
             precedingValue.value += followingValue.value
         }
@@ -555,7 +555,7 @@ class SDGMathematicsAPITests : TestCase {
         static func += (precedingValue: inout VectorProtocolExample, followingValue: VectorProtocolExample) {
             precedingValue.value += followingValue.value
         }
-        static var additiveIdentity: VectorProtocolExample {
+        static var zero: VectorProtocolExample {
             return VectorProtocolExample(0)
         }
         typealias Scalar = Double

@@ -20,10 +20,6 @@ import SDGMathematics
 
 extension CGVector : GenericAdditiveArithmetic, Negatable, TwoDimensionalVector {
 
-    // MARK: - GenericAdditiveArithmetic
-
-    public static let additiveIdentity: CGVector = zero
-
     // MARK: - TwoDimensionalVector
 
     public typealias Scalar = CGFloat
