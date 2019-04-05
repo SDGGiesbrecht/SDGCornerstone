@@ -57,9 +57,7 @@ import SDGCornerstoneLocalizations
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted]
-        if #available(OSX 10.13, iOS 11, watchOS 4, tvOS 11, *) { // @exempt(from: tests) @exempt(from: unicode)
-            encoder.outputFormatting.insert(.sortedKeys)
-        }
+        encoder.outputFormatting.insert(.sortedKeys)
         let encoded = try encoder.encode([instance])
 
         let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
