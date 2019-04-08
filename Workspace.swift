@@ -54,25 +54,3 @@ configuration.documentation.api.encryptedTravisCIDeploymentKey = "gzx7ARrCgcNJiD
 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
-
-// #workaround(workspace version 0.18.1, Coverage report is inaccurate.)
-configuration.documentation.api.enforceCoverage = false
-configuration.documentation.api.generate = false
-
-// #workaround(workspace version 0.18.1, Generated test files are not ignored by default.)
-configuration.repository.ignoredPaths.insert("Tests/LinuxMain.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGBinaryDataTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGCalendarTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGCollectionsTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGConcurrencyTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGControlFlowTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGCornerstoneDocumentationExampleTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGExternalProcessTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGGeometryTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGLocalizationTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGLogicTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGMathematicsTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGPersistenceTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGPrecisionMathematicsTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGRandomizationTests/XCTestManifests.swift")
-configuration.repository.ignoredPaths.insert("Tests/SDGTextTests/XCTestManifests.swift")
