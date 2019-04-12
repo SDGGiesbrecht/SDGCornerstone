@@ -44,5 +44,10 @@ extension StrictString {
         @inlinable public mutating func appendInterpolation(_ cluster: ExtendedGraphemeCluster) {
             result.append(contentsOf: cluster.unicodeScalars)
         }
+
+        @inlinable public mutating func appendInterpolation(_ interpolated: Any) {
+            let resolved: String = "\(interpolated)"
+            appendInterpolation(resolved)
+        }
     }
 }
