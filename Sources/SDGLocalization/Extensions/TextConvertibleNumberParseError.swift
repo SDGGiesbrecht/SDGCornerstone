@@ -28,7 +28,7 @@ public enum TextConvertibleNumberParseError : PresentableError {
             return UserFacing<StrictString, _InterfaceLocalization>({ localization in
                 switch localization {
                 case .englishUnitedKingdom:
-                    return "‘\(entireString)’ could not be parsed as a number because ‘\(scalar.visibleRepresentation)’ is not a valid digit."
+                    return StrictString("‘\(entireString)’ could not be parsed as a number because ‘\(scalar.visibleRepresentation)’ is not a valid digit.")
                 case .englishUnitedStates, .englishCanada:
                     return "“\(entireString)” could not be parsed as a number because “\(scalar.visibleRepresentation)” is not a valid digit."
                 }
