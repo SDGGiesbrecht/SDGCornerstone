@@ -47,7 +47,7 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
             preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada: // @exempt(from: tests)
-                    return StrictString("Invalid raw value “\(numberAlreadyElapsed)” for \(Self.self).")
+                    return "Invalid raw value “\(numberAlreadyElapsed)” for \(Self.self)."
                 }
             }))
         }

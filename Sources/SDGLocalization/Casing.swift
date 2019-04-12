@@ -44,7 +44,7 @@ public enum Casing {
         assert(¬string.contains(where: { $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters }), UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
             switch localization { // @exempt(from: tests)
             case .englishCanada:
-                return StrictString("“\(string)” is too complex for automatic casing.")
+                return "“\(string)” is too complex for automatic casing."
             }
         }))
 

@@ -51,14 +51,14 @@ import SDGCornerstoneLocalizations
         fail(String(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
             case .englishCanada: // @exempt(from: tests)
-                return StrictString("“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds).")
+                return "“\(testName)” took an average of \(mean) seconds! That is too slow (compared to \(duration) seconds)."
             }
         }).resolved()), file: file, line: line)
     } else {
         print(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
             case .englishCanada:
-                return StrictString("• “\(testName)” took an average of \(mean) seconds.")
+                return "• “\(testName)” took an average of \(mean) seconds."
             }
         }).resolved())
     }

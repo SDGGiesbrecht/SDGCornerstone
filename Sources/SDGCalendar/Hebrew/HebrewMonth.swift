@@ -358,7 +358,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
                 preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                     switch localization {
                     case .englishCanada: // @exempt(from: tests)
-                        return StrictString("Invalid month ordinal: \(ordinal.inDigits())")
+                        return "Invalid month ordinal: \(ordinal.inDigits())"
                     }
                 }))
             }

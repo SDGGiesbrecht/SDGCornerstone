@@ -22,6 +22,6 @@ extension RangeFamily {
     ///     - describe: A closure which provides the description of an individual bound.
     ///     - bound: The bound to describe.
     @inlinable public func inInequalityNotation(_ describe: (_ bound: Bound) -> StrictString) -> StrictString {
-        return StrictString("\(describe(lowerBound)) ≤ x \(Self.hasClosedUpperBound ? "≤" : "<") \(describe(upperBound))")
+        return "\(describe(lowerBound)) ≤ x \(Self.hasClosedUpperBound ? "≤" : "<") \(describe(upperBound))"
     }
 }

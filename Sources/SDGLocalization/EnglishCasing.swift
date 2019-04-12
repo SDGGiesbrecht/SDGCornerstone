@@ -52,7 +52,7 @@ public enum EnglishCasing {
         assert(¬string.contains(where: { $0 ∉ "a" ..< "z" }), UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
             switch localization { // @exempt(from: tests)
             case .englishCanada:
-                return StrictString("“\(string)” is too complex for automatic casing.")
+                return "“\(string)” is too complex for automatic casing."
             }
         }))
 

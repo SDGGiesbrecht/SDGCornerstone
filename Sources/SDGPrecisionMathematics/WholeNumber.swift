@@ -172,7 +172,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
         assert(precedingValue ≥ followingValue, UserFacing<StrictString, APILocalization>({ [precedingValue] localization in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
-                return StrictString("\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(WholeNumber.self).")
+                return "\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(WholeNumber.self)."
             }
         }))
 
