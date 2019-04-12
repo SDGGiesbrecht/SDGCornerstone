@@ -28,14 +28,21 @@ extension StrictString {
             result.append(contentsOf: StrictString(literal))
         }
 
-        @inlinable public mutating func appendInterpolation<S>(_ segment: S) where S : Sequence, S.Element == Unicode.Scalar {
-            result.append(contentsOf: segment)
+        @inlinable public mutating func appendInterpolation<S>(_ scalars: S) where S : Sequence, S.Element == Unicode.Scalar {
+            result.append(contentsOf: scalars)
         }
-        @inlinable public mutating func appendInterpolation(_ segment: String) {
-            appendInterpolation(segment.scalars)
+        @inlinable public mutating func appendInterpolation(_ string: String) {
+            appendInterpolation(string.scalars)
         }
-        @inlinable public mutating func appendInterpolation<S>(_ segment: S) where S : Sequence, S.Element == ExtendedGraphemeCluster {
-            appendInterpolation(String(segment))
+        @inlinable public mutating func appendInterpolation<S>(_ clusters: S) where S : Sequence, S.Element == ExtendedGraphemeCluster {
+            appendInterpolation(String(clusters))
+        }
+
+        @inlinable public mutating func appendInterpolation(_ scalar: Unicode.Scalar) {
+            result.append(scalar)
+        }
+        @inlinable public mutating func appendInterpolation(_ cluster: ExtendedGraphemeCluster) {
+            result.append(contentsOf: cluster.unicodeScalars)
         }
     }
 }
