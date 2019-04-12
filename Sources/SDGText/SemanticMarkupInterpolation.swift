@@ -1,5 +1,5 @@
 /*
- StrictStringInterpolation.swift
+ SemanticMarkupInterpolation.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension StrictString {
+extension SemanticMarkup {
 
     public struct _Interpolation : _StrictStringInterpolationProtocol {
 
@@ -23,5 +23,15 @@ extension StrictString {
         }
 
         public var result: StrictString
+
+        // MARK: - StringInterpolationProtocol
+
+        @inlinable public mutating func appendInterpolation(_ markup: SemanticMarkup) {
+            appendInterpolation(markup.source)
+        }
+
+        @inlinable public mutating func appendInterpolation(_ markup: SemanticMarkup.SubSequence) {
+            appendInterpolation(SemanticMarkup(markup).source)
+        }
     }
 }
