@@ -152,6 +152,12 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         self.init(stringLiteral)
     }
 
+    // MARK: - ExpressibleByStringInterpolation
+
+    @inlinable public init(stringInterpolation: _Interpolation) {
+        self = stringInterpolation.result
+    }
+
     // MARK: - Hashable
 
     @inlinable public func hash(into hasher: inout Hasher) {
