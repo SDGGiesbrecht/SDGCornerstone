@@ -146,16 +146,16 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         return precedingValue.string.scalars.elementsEqual(followingValue.string.scalars)
     }
 
-    // MARK: - ExpressibleByStringLiteral
-
-    @inlinable public init(stringLiteral: String) {
-        self.init(stringLiteral)
-    }
-
     // MARK: - ExpressibleByStringInterpolation
 
     @inlinable public init(stringInterpolation: _Interpolation) {
         self = stringInterpolation.result
+    }
+
+    // MARK: - ExpressibleByStringLiteral
+
+    @inlinable public init(stringLiteral: String) {
+        self.init(stringLiteral)
     }
 
     // MARK: - Hashable

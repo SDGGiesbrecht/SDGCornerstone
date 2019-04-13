@@ -211,6 +211,12 @@ class SDGTextAPITests : TestCase {
         _ = markup.playgroundDescription
 
         XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("...")))
+
+        let exponent = SemanticMarkup("y").superscripted()
+        let power: SemanticMarkup = "x\(exponent)"
+        XCTAssertNotEqual(power.source, power.rawTextApproximation())
+        let otherPower: SemanticMarkup = "x\(exponent[exponent.bounds])"
+        XCTAssertNotEqual(otherPower.source, otherPower.rawTextApproximation())
     }
 
     func testStrictString() {
@@ -331,6 +337,12 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(patternSampleSpace.replacingMatches(for: "EF", with: "..."), "ABCD...")
         mutableSampleSpace.mutateMatches(for: "EF") { $0.contents }
         XCTAssertEqual(patternSampleSpace.mutatingMatches(for: "EF", mutation: { $0.contents }), "ABCDEF")
+
+        let interpolation: StrictString = "..."
+        XCTAssertEqual(interpolation, "\(interpolation)")
+        XCTAssertEqual(interpolation, "\(interpolation[interpolation.bounds])")
+        XCTAssertEqual(interpolation, "\(interpolation.clusters)")
+        XCTAssertEqual(interpolation, "\(interpolation.clusters[interpolation.clusters.bounds])")
     }
 
     func testStrictStringClusterView() {
