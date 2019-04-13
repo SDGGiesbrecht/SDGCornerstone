@@ -74,7 +74,7 @@ extension WholeNumber {
             assert(start ≤ end, UserFacing<StrictString, APILocalization>({ localization in
                 switch localization { // @exempt(from: tests)
                 case .englishCanada:
-                    return StrictString("Ascending range: \(end − 1)–\(start)")
+                    return "Ascending range: \(end − 1)–\(start)"
                 }
             }))
 
@@ -99,7 +99,7 @@ extension WholeNumber {
             assert(distance ≥ 0, UserFacing<StrictString, APILocalization>({ localization in
                 switch localization { // @exempt(from: tests)
                 case .englishCanada:
-                    return StrictString("Negative distance: \(distance)")
+                    return "Negative distance: \(distance)"
                 }
             }))
 
@@ -128,7 +128,7 @@ extension WholeNumber {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ [wholeNumber = self.wholeNumber] localization in
                 switch localization { // @exempt(from: tests)
                 case .englishCanada:
-                    return StrictString("\(wholeNumber.inDigits()) is not in normalized form.\n\(dump(wholeNumber))")
+                    return "\(wholeNumber.inDigits()) is not in normalized form.\n\(dump(wholeNumber))"
                 }
             }))
         }

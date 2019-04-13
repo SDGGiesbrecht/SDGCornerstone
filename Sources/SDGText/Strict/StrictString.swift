@@ -77,7 +77,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
         // Already normalized.
         case let strict as StrictString:
             return strict
-        case let strictSlice as Slice<StrictString>:
+        case let strictSlice as StrictString.SubSequence:
             return StrictString(unsafeString: String(strictSlice.base.string.scalars[strictSlice.bounds]))
 
         // Need normalization.
@@ -144,6 +144,12 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     @inlinable public static func == (precedingValue: StrictString, followingValue: StrictString) -> Bool {
         return precedingValue.string.scalars.elementsEqual(followingValue.string.scalars)
+    }
+
+    // MARK: - ExpressibleByStringInterpolation
+
+    @inlinable public init(stringInterpolation: _Interpolation) {
+        self = stringInterpolation.result
     }
 
     // MARK: - ExpressibleByStringLiteral

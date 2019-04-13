@@ -48,7 +48,7 @@ extension TextConvertibleNumber {
                 preconditionFailure(UserFacing<StrictString, _APILocalization>({ localization in
                     switch localization {
                     case .englishCanada: // @exempt(from: tests)
-                        return StrictString("\(scalar) is not a valid digit.")
+                        return "\(scalar) is not a valid digit."
                     }
                 }))
             }
@@ -142,7 +142,7 @@ extension TextConvertibleNumber {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacing<StrictString, _APILocalization>({ localization in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
-                return StrictString("Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive.")
+                return "Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive."
             }
         }))
 
@@ -188,7 +188,7 @@ extension TextConvertibleNumber {
         assert(assertNFKD().isEmpty, UserFacing<StrictString, _APILocalization>({ localization in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
-                return StrictString("Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))")
+                return "Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))"
             }
         }))
     }

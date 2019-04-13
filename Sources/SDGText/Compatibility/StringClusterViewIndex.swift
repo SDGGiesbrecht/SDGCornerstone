@@ -20,6 +20,8 @@ extension String/*.ClusterView*/.Index {
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
     ///
+    /// - Precondition: The index must be a valid cluster index, such as those received from any `String` or `ClusterView` API. Since Swift 4 it has been possible for the indices of other string views (`ScalarView`, `UTF8View`, `UTF16View`) to masquerade as cluster indices by way of some unfortunate typealiases, despite being completely invalid. This method traps upon receiving such an invalid index.
+    ///
     /// - Parameters:
     ///     - scalars: The scalar view of the string the range refers to.
     @inlinable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {

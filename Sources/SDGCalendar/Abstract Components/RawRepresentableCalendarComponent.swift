@@ -52,7 +52,7 @@ extension RawRepresentableCalendarComponent {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
                 case .englishCanada: // @exempt(from: tests)
-                    return StrictString("Raw value invalid for “\(Self.self)”: \(value)")
+                    return "Raw value invalid for “\(Self.self)”: \(value)"
                 }
             }))
         }

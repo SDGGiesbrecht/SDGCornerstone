@@ -100,7 +100,7 @@ import SDGCornerstoneLocalizations
         fail(String(UserFacing<StrictString, APILocalization>({ localization in
             switch localization {
             case .englishCanada:
-                return StrictString("String does not match specification.\n\(specification.path)\n\n\(report)\n")
+                return "String does not match specification.\n\(specification.path)\n\n\(report)\n"
             }
         }).resolved()), file: file, line: line)
     }

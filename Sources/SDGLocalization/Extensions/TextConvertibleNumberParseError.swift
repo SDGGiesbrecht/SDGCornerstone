@@ -30,7 +30,7 @@ public enum TextConvertibleNumberParseError : PresentableError {
                 case .englishUnitedKingdom:
                     return StrictString("‘\(entireString)’ could not be parsed as a number because ‘\(scalar.visibleRepresentation)’ is not a valid digit.")
                 case .englishUnitedStates, .englishCanada:
-                    return StrictString("“\(entireString)” could not be parsed as a number because “\(scalar.visibleRepresentation)” is not a valid digit.")
+                    return "“\(entireString)” could not be parsed as a number because “\(scalar.visibleRepresentation)” is not a valid digit."
                 }
             }).resolved()
         }

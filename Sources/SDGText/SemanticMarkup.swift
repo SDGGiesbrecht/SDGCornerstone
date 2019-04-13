@@ -240,6 +240,12 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
         return String(rawTextApproximation())
     }
 
+    // MARK: - ExpressibleByStringInterpolation
+
+    @inlinable public init(stringInterpolation: _Interpolation) {
+        self.init(stringInterpolation.result)
+    }
+
     // MARK: - ExpressibleByStringLiteral
 
     @inlinable public init(stringLiteral: String) {
