@@ -186,9 +186,12 @@ extension TextConvertibleNumber {
             return set.sorted()
         }
         assert(assertNFKD().isEmpty, UserFacing<StrictString, _APILocalization>({ localization in
-            switch localization { // @exempt(from: tests)
+            let scalars: [StrictString] = assertNFKD().map { scalar in
+                return "\(scalar.visibleRepresentation) \(scalar.hexadecimalCode)"
+            }
+            switch localization {
             case .englishCanada:
-                return "Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))"
+                return "Some scalars are not in NFKD: \(scalars.joined(separator: ", "))"
             }
         }))
     }

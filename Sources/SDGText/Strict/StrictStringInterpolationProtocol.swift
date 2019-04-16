@@ -45,9 +45,33 @@ extension _StrictStringInterpolationProtocol {
     @inlinable public mutating func appendInterpolation(_ string: String) {
         result.append(contentsOf: string.scalars)
     }
+    @inlinable public mutating func appendInterpolation(_ string: String.SubSequence) {
+        result.append(contentsOf: string.unicodeScalars)
+    }
+    @inlinable public mutating func appendInterpolation(_ scalars: String.ScalarView) {
+        result.append(contentsOf: scalars)
+    }
+    @inlinable public mutating func appendInterpolation(_ scalars: String.ScalarView.SubSequence) {
+        result.append(contentsOf: scalars)
+    }
 
-    @inlinable public mutating func appendInterpolation(_ interpolated: Any) {
-        let resolved: String = "\(interpolated)"
-        appendInterpolation(resolved)
+    @inlinable public mutating func appendInterpolation(_ string: StaticString) {
+        result.append(contentsOf: StrictString(string))
+    }
+
+    @inlinable public mutating func appendInterpolation(_ scalar: Unicode.Scalar) {
+        result.append(scalar)
+    }
+    @inlinable public mutating func appendInterpolation(_ cluster: ExtendedGraphemeCluster) {
+        result.append(contentsOf: cluster.unicodeScalars)
+    }
+
+    @inlinable public mutating func appendInterpolation(typeName type: Any.Type) {
+        let typeName: String = "\(type)"
+        result.append(contentsOf: typeName.scalars)
+    }
+    @inlinable public mutating func appendInterpolation(arbitraryDescriptionOf value: Any) {
+        let description: String = "\(value)"
+        result.append(contentsOf: description.scalars)
     }
 }

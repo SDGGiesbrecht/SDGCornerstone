@@ -45,7 +45,7 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
     return String(UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
         switch localization {
         case .englishCanada: // @exempt(from: tests)
-            return "\(function) has not been implemented yet. (\(file), Line \(line))"
+            return "\(function) has not been implemented yet. (\(file), Line \(line.inDigits()))"
         }
     }).resolved())
 }
