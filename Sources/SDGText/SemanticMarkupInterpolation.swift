@@ -14,15 +14,15 @@
 
 extension SemanticMarkup {
 
-    public struct _Interpolation : _StrictStringInterpolationProtocol {
+    public struct _Interpolation : StrictStringInterpolationProtocol {
 
         // MARK: - StrictStringInterpolationProtocol
 
-        @inlinable public init(_ result: StrictString) {
-            self.result = result
+        @inlinable public init(_result result: StrictString) {
+            _result = result
         }
 
-        public var result: StrictString
+        public var _result: StrictString
 
         // MARK: - StringInterpolationProtocol
 
