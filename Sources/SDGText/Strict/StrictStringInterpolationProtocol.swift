@@ -42,39 +42,91 @@ extension StrictStringInterpolationProtocol {
         result.append(contentsOf: StrictString(literal))
     }
 
+    // @documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
+    ///
+    /// - Parameters:
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ string: StrictString) {
         result.append(contentsOf: string)
     }
+    // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
+    ///
+    /// - Parameters:
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ string: StrictString.SubSequence) {
         result.append(contentsOf: string)
     }
+    // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
+    ///
+    /// - Parameters:
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ clusters: StrictString.ClusterView) {
         result.append(contentsOf: StrictString(clusters))
     }
+    // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
+    ///
+    /// - Parameters:
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ clusters: StrictString.ClusterView.SubSequence) {
         result.append(contentsOf: StrictString(StrictString.ClusterView(clusters)))
     }
 
+    // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
+    ///
+    /// - Parameters:
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ string: String) {
         result.append(contentsOf: string.scalars)
     }
+    // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
+    ///
+    /// - Parameters:
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ string: String.SubSequence) {
         result.append(contentsOf: string.unicodeScalars)
     }
+    // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
+    ///
+    /// - Parameters:
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ scalars: String.ScalarView) {
         result.append(contentsOf: scalars)
     }
+    // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
+    ///
+    /// - Parameters:
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ scalars: String.ScalarView.SubSequence) {
         result.append(contentsOf: scalars)
     }
 
+    /// Interpolates a static string.
+    ///
+    /// - Parameters:
+    ///     - string: The static string.
     @inlinable public mutating func appendInterpolation(_ string: StaticString) {
         result.append(contentsOf: StrictString(string))
     }
 
+    /// Interpolates a Unicode scalar.
+    ///
+    /// - Parameters:
+    ///     - scalar: The Unicode scalar.
     @inlinable public mutating func appendInterpolation(_ scalar: Unicode.Scalar) {
         result.append(scalar)
     }
+    /// Interpolates an extended grapheme cluster.
+    ///
+    /// - Parameters:
+    ///     - cluster: The extended grapheme cluster.
     @inlinable public mutating func appendInterpolation(_ cluster: ExtendedGraphemeCluster) {
         result.append(contentsOf: cluster.unicodeScalars)
     }
