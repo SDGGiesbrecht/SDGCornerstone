@@ -28,7 +28,7 @@ extension StrictStringInterpolationProtocol {
             return _result
         }
         set {
-            _result = result
+            _result = newValue
         }
     }
 
