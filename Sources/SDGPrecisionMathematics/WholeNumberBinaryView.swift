@@ -71,13 +71,6 @@ extension WholeNumber {
         // MARK: - Sequences
 
         internal func indicesBackwards(from end: Index, to start: Index) -> UnfoldSequence<Index, Index> {
-            assert(start ≤ end, UserFacing<StrictString, APILocalization>({ localization in
-                switch localization { // @exempt(from: tests)
-                case .englishCanada:
-                    return "Ascending range: \(end − 1)–\(start)"
-                }
-            }))
-
             return sequence(state: end) { (index: inout Index) -> Index? in
                 guard index ≠ self.startIndex else {
                     return nil
@@ -96,13 +89,6 @@ extension WholeNumber {
         }
 
         internal func lastBitsBackwards(maximum distance: IndexDistance) -> LazyMapSequence<UnfoldSequence<Index, Index>, Bool> {
-            assert(distance ≥ 0, UserFacing<StrictString, APILocalization>({ localization in
-                switch localization { // @exempt(from: tests)
-                case .englishCanada:
-                    return "Negative distance: \(distance)"
-                }
-            }))
-
             guard distance ≥ count else {
                 return bitsBackwards()
             }
@@ -128,7 +114,7 @@ extension WholeNumber {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ [wholeNumber = self.wholeNumber] localization in
                 switch localization { // @exempt(from: tests)
                 case .englishCanada:
-                    return "\(wholeNumber.inDigits()) is not in normalized form.\n\(dump(wholeNumber))"
+                    return "\(wholeNumber.inDigits()) is not in normalized form."
                 }
             }))
         }
