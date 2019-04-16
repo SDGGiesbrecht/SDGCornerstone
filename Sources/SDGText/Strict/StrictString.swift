@@ -17,7 +17,7 @@ import SDGControlFlow
 // #example(1, strictInterpolation)
 /// A string that maintains Unicode normalization form NFKD.
 ///
-/// Values interpolated in strict strings must explicitly select a format. Only text‐like types such as strings and characters can be interpolated directly.
+/// Interpolation requires values to be converted to explicit text representations.
 ///
 /// ```swift
 /// var strict: StrictString = ""
@@ -27,11 +27,11 @@ import SDGControlFlow
 /// let character: Unicode.Scalar = "?"
 /// strict = "\(string) ...\(character)"
 ///
-/// // Most other types must be explicitly converted to some text format first:
+/// // Most other types must be explicitly converted to some predictable text representation:
 /// let number = Int.random(in: 0 ... 1000)
 /// strict = "“\(number.inRomanNumerals())” means the same as “\(number.inDigits())”."
 ///
-/// // The Swift compiler’s own description of any value can still be used explicitly:
+/// // The Swift compiler’s own description of any value can still be requested explicitly:
 /// let something: Any = getError()
 /// strict = "Error: \(arbitraryDescriptionOf: something)"
 /// ```

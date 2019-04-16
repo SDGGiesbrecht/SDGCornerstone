@@ -29,7 +29,7 @@ class StrictInterpolationExampleTests : TestCase {
         let character: Unicode.Scalar = "?"
         strict = "\(string) ...\(character)"
 
-        // Most other types must be explicitly converted to some text format:
+        // Most other types must be explicitly converted to some predictable text representation:
         let number = Int.random(in: 0 ... 1000)
         strict = "“\(number.inRomanNumerals())” means the same as “\(number.inDigits())”."
 
