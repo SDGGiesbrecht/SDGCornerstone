@@ -35,7 +35,7 @@ extension StrictStringInterpolationProtocol {
     // MARK: - StringInterpolationProtocol
 
     @inlinable public init(literalCapacity: Int, interpolationCount: Int) {
-        self = Self(_result: StrictString())
+        self = Self(result: StrictString())
     }
 
     @inlinable public mutating func appendLiteral(_ literal: String) {
