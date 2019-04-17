@@ -63,16 +63,16 @@ extension StrictStringInterpolationProtocol {
     ///
     /// - Parameters:
     ///     - string: The string.
-    @inlinable public mutating func appendInterpolation(_ clusters: StrictString.ClusterView) {
-        result.append(contentsOf: StrictString(clusters))
+    @inlinable public mutating func appendInterpolation(_ string: StrictString.ClusterView) {
+        result.append(contentsOf: StrictString(string))
     }
     // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
     /// Interpolates a string.
     ///
     /// - Parameters:
     ///     - string: The string.
-    @inlinable public mutating func appendInterpolation(_ clusters: StrictString.ClusterView.SubSequence) {
-        result.append(contentsOf: StrictString(StrictString.ClusterView(clusters)))
+    @inlinable public mutating func appendInterpolation(_ string: StrictString.ClusterView.SubSequence) {
+        result.append(contentsOf: StrictString(StrictString.ClusterView(string)))
     }
 
     // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
@@ -96,22 +96,22 @@ extension StrictStringInterpolationProtocol {
     ///
     /// - Parameters:
     ///     - string: The string.
-    @inlinable public mutating func appendInterpolation(_ scalars: String.ScalarView) {
-        result.append(contentsOf: scalars)
+    @inlinable public mutating func appendInterpolation(_ string: String.ScalarView) {
+        result.append(contentsOf: string)
     }
     // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
     /// Interpolates a string.
     ///
     /// - Parameters:
     ///     - string: The string.
-    @inlinable public mutating func appendInterpolation(_ scalars: String.ScalarView.SubSequence) {
-        result.append(contentsOf: scalars)
+    @inlinable public mutating func appendInterpolation(_ string: String.ScalarView.SubSequence) {
+        result.append(contentsOf: string)
     }
-
-    /// Interpolates a static string.
+    // #documentation(StrictStringInterpolationProtocol.appendInterpolation(string))
+    /// Interpolates a string.
     ///
     /// - Parameters:
-    ///     - string: The static string.
+    ///     - string: The string.
     @inlinable public mutating func appendInterpolation(_ string: StaticString) {
         result.append(contentsOf: StrictString(string))
     }
