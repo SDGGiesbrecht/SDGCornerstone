@@ -43,15 +43,7 @@ extension TextConvertibleNumber {
             self = try parse()
         } catch let error as TextConvertibleNumberParseError {
             // @exempt(from: tests)
-            switch error {
-            case .invalidDigit(let scalar):
-                preconditionFailure(UserFacing<StrictString, _APILocalization>({ localization in
-                    switch localization {
-                    case .englishCanada: // @exempt(from: tests)
-                        return "\(scalar) is not a valid digit."
-                    }
-                }))
-            }
+            preconditionFailure(error.unresolvedPresentableDescription())
         } catch {
             unreachable()
         }
@@ -186,9 +178,12 @@ extension TextConvertibleNumber {
             return set.sorted()
         }
         assert(assertNFKD().isEmpty, UserFacing<StrictString, _APILocalization>({ localization in
-            switch localization { // @exempt(from: tests)
+            let scalars: [StrictString] = assertNFKD().map { scalar in
+                return "\(scalar.visibleRepresentation) \(scalar.hexadecimalCode)"
+            }
+            switch localization {
             case .englishCanada:
-                return "Some scalars are not in NFKD: \(assertNFKD().map({ $0.visibleRepresentation }))"
+                return "Some scalars are not in NFKD: \(scalars.joined(separator: ", "))"
             }
         }))
     }

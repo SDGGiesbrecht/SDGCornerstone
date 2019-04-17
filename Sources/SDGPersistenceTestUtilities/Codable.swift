@@ -46,7 +46,7 @@ import SDGCornerstoneLocalizations
                     fail(String(UserFacing<StrictString, APILocalization>({ localization in
                         switch localization {
                         case .englishCanada: // @exempt(from: tests)
-                            return "Empty array decoded from “\(specificationURL)”."
+                            return "Empty array decoded from “\(specificationURL.absoluteString)”."
                         }
                     }).resolved()), file: file, line: line)
                     return // from autorelease pool and move to next specification.
@@ -91,7 +91,7 @@ import SDGCornerstoneLocalizations
         fail(String(UserFacing<StrictString, APILocalization>({ localization in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
-                return "No error thrown. Decoded: \(decoded)"
+                return "No error thrown. Decoded: \(arbitraryDescriptionOf: decoded)"
             }
         }).resolved()), file: file, line: line)
     } catch {

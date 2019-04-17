@@ -32,7 +32,7 @@ extension Decodable {
             let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: String(UserFacing<StrictString, _APILocalization>({ localization in
                 switch localization {
                 case .englishCanada:
-                    return "Invalid “\(Other.self)” representation of “\(Self.self)”: \(other)"
+                    return "Invalid “\(typeName: Other.self)” representation of “\(typeName: Self.self)”: \(arbitraryDescriptionOf: other)"
                 }
             }).resolved()), underlyingError: underlyingError)
             return DecodingError.typeMismatch(Self.self, context)

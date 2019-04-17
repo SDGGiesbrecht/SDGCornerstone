@@ -22,7 +22,7 @@ public enum TextConvertibleNumberParseError : PresentableError {
 
     // MARK: - PresentableError
 
-    public func presentableDescription() -> StrictString {
+    @inlinable internal func unresolvedPresentableDescription() -> UserFacing<StrictString, _InterfaceLocalization> {
         switch self {
         case .invalidDigit(let scalar, let entireString):
             return UserFacing<StrictString, _InterfaceLocalization>({ localization in
@@ -32,7 +32,10 @@ public enum TextConvertibleNumberParseError : PresentableError {
                 case .englishUnitedStates, .englishCanada:
                     return "“\(entireString)” could not be parsed as a number because “\(scalar.visibleRepresentation)” is not a valid digit."
                 }
-            }).resolved()
+            })
         }
+    }
+    public func presentableDescription() -> StrictString {
+        return unresolvedPresentableDescription().resolved()
     }
 }

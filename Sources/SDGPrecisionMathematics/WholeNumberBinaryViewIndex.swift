@@ -28,7 +28,7 @@ extension WholeNumber.BinaryView {
 
         // MARK: - Comparable
 
-        internal static func < (precedingValue: Index, followingValue: Index) -> Bool {
+        internal static func < (precedingValue: Index, followingValue: Index) -> Bool { // @exempt(from: tests) Unreachable?
             return (precedingValue.digit, precedingValue.bit) < (followingValue.digit, followingValue.bit)
         }
 

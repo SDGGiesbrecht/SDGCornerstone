@@ -343,6 +343,14 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(interpolation, "\(interpolation[interpolation.bounds])")
         XCTAssertEqual(interpolation, "\(interpolation.clusters)")
         XCTAssertEqual(interpolation, "\(interpolation.clusters[interpolation.clusters.bounds])")
+
+        let stringInterpolation: String = "..."
+        XCTAssertEqual("\(stringInterpolation[stringInterpolation.bounds])", interpolation)
+        XCTAssertEqual("\(stringInterpolation.scalars)", interpolation)
+        XCTAssertEqual("\(stringInterpolation.scalars[stringInterpolation.scalars.bounds])", interpolation)
+        let `static`: StaticString = "..."
+        XCTAssertEqual("\(`static`)", interpolation)
+        XCTAssertEqual("\(stringInterpolation.first!)", "." as StrictString)
     }
 
     func testStrictStringClusterView() {

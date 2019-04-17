@@ -14,7 +14,27 @@
 
 import SDGControlFlow
 
+// #example(1, strictInterpolation)
 /// A string that maintains Unicode normalization form NFKD.
+///
+/// Interpolation requires values to be converted to explicit text representations.
+///
+/// ```swift
+/// var strict: StrictString = ""
+///
+/// // String‐like types can be interpolated directly:
+/// let string: String = "Hello, world!"
+/// let character: Unicode.Scalar = "?"
+/// strict = "\(string) ...\(character)"
+///
+/// // Most other types must be explicitly converted to some predictable text representation:
+/// let number = Int.random(in: 0 ... 1000)
+/// strict = "“\(number.inRomanNumerals())” means the same as “\(number.inDigits())”."
+///
+/// // The Swift compiler’s own description of any value can still be requested explicitly:
+/// let something: Any = getError()
+/// strict = "Error: \(arbitraryDescriptionOf: something)"
+/// ```
 public struct StrictString : Addable, BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
