@@ -22,4 +22,13 @@ class SDGCollectionsRegressionTests : TestCase {
 
         XCTAssertEqual([1, 1, 1][1 ..< 2].matches(for: RepetitionPattern(LiteralPattern([1]))).map({ $0.range }), [1 ..< 2])
     }
+
+    func testTrailingConditionSearch() {
+        // Untracked
+
+        XCTAssertNil([1, 2, 3].firstMatch(for: CompositePattern([
+            LiteralPattern([1, 2, 3]),
+            ConditionalPattern({ _ in true })
+            ])))
+    }
 }

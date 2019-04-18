@@ -33,7 +33,8 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
 
     @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
-        if condition(collection[location]) {
+        if location ≠ collection.endIndex,
+            condition(collection[location]) {
             return [(location ... location).relative(to: collection)]
         } else {
             return []
@@ -42,7 +43,8 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
 
     @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
-        if condition(collection[location]) {
+        if location ≠ collection.endIndex,
+            condition(collection[location]) {
             return (location ... location).relative(to: collection)
         } else {
             return nil
