@@ -123,7 +123,7 @@ extension FileManager {
     public func withTemporaryDirectory<Result>(appropriateFor destination: URL?, _ body: (_ directory: URL) throws -> Result) rethrows -> Result {
         var directory: URL
         #if os(Linux)
-        // #workaround(Swift 5.0, Foundation may handle this eventually.)
+        // #workaround(Swift 5.0, Foundation will be capable of this in 5.1.)
 
         directory = temporaryDirectory
 
@@ -199,14 +199,8 @@ extension FileManager {
                 throw FileManager.unknownFileReadingError // @exempt(from: tests) It is unknown why something other than a URL would be returned.
             }
 
-            let isDirectory: Bool
-            #if os(Linux)
-            // #workaround(Swift 5.0, Linux has no implementation for resourcesValues.)
             var objCBool: ObjCBool = false
-            isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool) ∧ objCBool.boolValue
-            #else
-            isDirectory = (try url.resourceValues(forKeys: [.isDirectoryKey])).isDirectory!
-            #endif
+            let isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool) ∧ objCBool.boolValue
 
             if ¬isDirectory { // Skip directories.
                 result.append(url)

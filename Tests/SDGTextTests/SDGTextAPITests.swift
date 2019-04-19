@@ -390,15 +390,6 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(utf8, unicode)
         let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
         XCTAssertEqual(utf16, unicode)
-        #if false
-        // #workaround(Swift 5.0, macOS does not fail UTF‐16 on invalid surrogate use, so this is mistaken for UTF‐16.)
-        let utf32 = try? String(file: unicode.data(using: .utf32)!, origin: nil)
-        XCTAssertEqual(utf32, unicode)
-
-        let european = "¡¢£¤¥§©«¬®°±¶·»¿ÆÐ×Þßæð÷þ".data(using: .isoLatin1)! + Data([0xD8, 0x00, 0xD8, 0x00, 0x00, 0xD8, 0x00, 0xD8])
-        let latin1 = try? String(file: european, origin: nil)
-        XCTAssertEqual(latin1?.data(using: .isoLatin1), european)
-        #endif
 
         XCTAssertNil("ABC".scalars.firstMatch(for: ConditionalPattern({ $0 == "D" })))
 
