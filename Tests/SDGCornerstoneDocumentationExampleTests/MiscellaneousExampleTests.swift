@@ -14,6 +14,8 @@
 
 import Dispatch
 
+import SDGMathematics
+import SDGCollections
 import SDGCornerstone
 import SDGXCTestUtilities
 
