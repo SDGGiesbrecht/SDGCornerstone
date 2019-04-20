@@ -113,7 +113,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         process.standardOutput = pipe
         process.standardError = pipe
 
-        #if !os(Linux) // #workaround(Swift 5.0, Linux does not have this property.)
+        #if !os(Linux) // #workaround(Swift 5.1, Linux will gain this property in 5.2.)
         process.qualityOfService = Thread.current.qualityOfService
         #endif
         try process.run()
