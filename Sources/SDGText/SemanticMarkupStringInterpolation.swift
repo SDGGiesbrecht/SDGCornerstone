@@ -1,5 +1,5 @@
 /*
- SemanticMarkupInterpolation.swift
+ SemanticMarkupStringInterpolation.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -14,15 +14,21 @@
 
 extension SemanticMarkup {
 
-    public struct _Interpolation : StrictStringInterpolationProtocol {
+    /// The type which handles interpolation of semantic markup.
+    public struct StringInterpolation : StrictStringInterpolationProtocol {
+
+        /// The semantic markup.
+        public var semanticMarkup: SemanticMarkup {
+            return SemanticMarkup.init(string)
+        }
 
         // MARK: - StrictStringInterpolationProtocol
 
-        @inlinable public init(_result result: StrictString) {
-            _result = result
+        @inlinable public init(string: StrictString) {
+            self.string = string
         }
 
-        public var _result: StrictString
+        public var string: StrictString
 
         // MARK: - StringInterpolationProtocol
 

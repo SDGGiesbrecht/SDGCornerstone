@@ -242,8 +242,8 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // MARK: - ExpressibleByStringInterpolation
 
-    @inlinable public init(stringInterpolation: _Interpolation) {
-        self.init(stringInterpolation.result)
+    @inlinable public init(stringInterpolation: StringInterpolation) {
+        self.init(stringInterpolation.string)
     }
 
     // MARK: - ExpressibleByStringLiteral

@@ -168,8 +168,8 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - ExpressibleByStringInterpolation
 
-    @inlinable public init(stringInterpolation: _Interpolation) {
-        self = stringInterpolation.result
+    @inlinable public init(stringInterpolation: StringInterpolation) {
+        self = stringInterpolation.string
     }
 
     // MARK: - ExpressibleByStringLiteral
