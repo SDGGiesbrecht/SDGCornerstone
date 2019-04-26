@@ -14,8 +14,13 @@
 
 /// The protocol which handles interpolation for strict strings.
 public protocol StrictStringInterpolationProtocol : StringInterpolationProtocol {
+
     /// Creates an interpolation starting with an initial string.
+    ///
+    /// - Parameters:
+    ///     - string: The initial string.
     init(string: StrictString)
+
     /// The string described by the interpolation.
     var string: StrictString { get set }
 }
