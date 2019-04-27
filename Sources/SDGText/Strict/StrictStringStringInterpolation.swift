@@ -1,5 +1,5 @@
 /*
- StrictStringInterpolation.swift
+ StrictStringStringInterpolation.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -14,14 +14,15 @@
 
 extension StrictString {
 
-    public struct _Interpolation : StrictStringInterpolationProtocol {
+    /// The type which handles interpolation of strict strings.
+    public struct StringInterpolation : StrictStringInterpolationProtocol {
 
         // MARK: - StrictStringInterpolationProtocol
 
-        @inlinable public init(_result result: StrictString) {
-            _result = result
+        @inlinable public init(string: StrictString) {
+            self.string = string
         }
 
-        public var _result: StrictString
+        public var string: StrictString
     }
 }
