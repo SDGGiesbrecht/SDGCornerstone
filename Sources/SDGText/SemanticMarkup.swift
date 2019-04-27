@@ -243,7 +243,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
     // MARK: - ExpressibleByStringInterpolation
 
     @inlinable public init(stringInterpolation: StringInterpolation) {
-        self.init(stringInterpolation.string)
+        self = stringInterpolation.semanticMarkup
     }
 
     // MARK: - ExpressibleByStringLiteral
