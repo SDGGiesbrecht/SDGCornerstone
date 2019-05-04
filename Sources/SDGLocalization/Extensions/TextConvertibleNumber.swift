@@ -48,6 +48,8 @@ extension TextConvertibleNumber {
 
     /// Creates an instance from a decimal representation.
     ///
+    /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
+    ///
     /// - Parameters:
     ///     - decimal: The decimal representation.
     @inlinable public init(_ decimal: StrictString) {
@@ -55,6 +57,8 @@ extension TextConvertibleNumber {
     }
 
     /// Creates an instance from a hexadecimal representation.
+    ///
+    /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
     ///
     /// - Parameters:
     ///     - hexadecimal: The hexadecimal representation.
@@ -64,6 +68,8 @@ extension TextConvertibleNumber {
 
     /// Creates an instance from a octal representation.
     ///
+    /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
+    ///
     /// - Parameters:
     ///     - octal: The octal representation.
     @inlinable public init(octal: StrictString) {
@@ -71,6 +77,8 @@ extension TextConvertibleNumber {
     }
 
     /// Creates an instance from a binary representation.
+    ///
+    /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
     ///
     /// - Parameters:
     ///     - binary: The binary representation.
