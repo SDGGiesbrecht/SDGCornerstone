@@ -90,8 +90,6 @@ extension TextConvertibleNumber {
     ///
     /// - Parameters:
     ///     - decimal: The decimal representation.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
     @inlinable public static func parse(
         possibleDecimal decimal: StrictString
         ) -> Result<Self, TextConvertibleNumberParseError> {
@@ -102,8 +100,6 @@ extension TextConvertibleNumber {
     ///
     /// - Parameters:
     ///     - hexadecimal: The hexadecimal representation.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
     @inlinable public static func parse(
         possibleHexadecimal hexadecimal: StrictString
     ) -> Result<Self, TextConvertibleNumberParseError> {
@@ -114,8 +110,6 @@ extension TextConvertibleNumber {
     ///
     /// - Parameters:
     ///     - octal: The octal representation.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
     @inlinable public static func parse(
         possibleOctal octal: StrictString
         ) -> Result<Self, TextConvertibleNumberParseError> {
@@ -126,8 +120,6 @@ extension TextConvertibleNumber {
     ///
     /// - Parameters:
     ///     - binary: The binary representation.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
     @inlinable public static func parse(
         possibleBinary binary: StrictString
         ) -> Result<Self, TextConvertibleNumberParseError> {
@@ -141,9 +133,11 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - representation: The string to interpret.
     ///     - base: The base of the number system.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public static func parse(_ representation: StrictString, base: Int) -> Result<Self, TextConvertibleNumberParseError> {
+    @inlinable public static func parse(
+        _ representation: StrictString,
+        base: Int
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacing<StrictString, _APILocalization>({ localization in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
