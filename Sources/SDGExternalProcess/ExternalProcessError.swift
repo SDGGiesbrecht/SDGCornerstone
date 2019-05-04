@@ -18,28 +18,24 @@ import SDGLocalization
 
 extension ExternalProcess {
 
-    /// A shell error.
-    public struct Error : PresentableError {
+    /// An error related to running an external process.
+    public enum Error : PresentableError {
 
-        // MARK: - Initialization
+        /// Foundation encountered an error.
+        case foundationError(Swift.Error)
 
-        internal init(code: Int, output: String) {
-            self.code = code
-            self.output = output
-        }
-
-        // MARK: - Properties
-
-        /// The exit code.
-        public let code: Int
-
-        /// The output received.
-        public let output: String
+        /// The external process exited with an error.
+        case processError(code: Int, output: String)
 
         // MARK: - PresentableError
 
         public func presentableDescription() -> StrictString {
-            return StrictString(output)
+            switch self {
+            case .foundationError(let error):
+                return StrictString(error.localizedDescription)
+            case .processError(code: _, output: let output):
+                return StrictString(output)
+            }
         }
     }
 }

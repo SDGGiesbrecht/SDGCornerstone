@@ -95,9 +95,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     ///     - line: The line of output.
     ///
     /// - Returns: The entire output.
-    ///
-    /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-    @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = { _ in }) throws -> String { // @exempt(from: tests)
+    @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = { _ in }) -> Result<String, ExternalProcess.Error> {
 
         let process = Process()
         process.executableURL = executable
@@ -116,7 +114,11 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         #if !os(Linux) // #workaround(Swift 5.1, Linux will gain this property in 5.2.)
         process.qualityOfService = Thread.current.qualityOfService
         #endif
-        try process.run()
+        do {
+            try process.run()
+        } catch {
+            return .failure(.foundationError(error))
+        }
 
         var output = String()
         var stream = Data()
@@ -160,9 +162,9 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
 
         let exitCode = process.terminationStatus
         if exitCode == 0 {
-            return output
+            return .success(output)
         } else {
-            throw Error(code: Int(exitCode), output: output)
+            return .failure(.processError(code: Int(exitCode), output: output))
         }
     }
 
