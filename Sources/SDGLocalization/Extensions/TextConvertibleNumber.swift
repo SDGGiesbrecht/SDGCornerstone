@@ -36,14 +36,13 @@ public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithme
 
 extension TextConvertibleNumber {
 
-    @inlinable internal init(forceParsing parse: () throws -> Self) {
-        do {
-            self = try parse()
-        } catch let error as TextConvertibleNumberParseError {
+    @inlinable internal init(forcing parse: () -> Result<Self, TextConvertibleNumberParseError>) {
+        switch parse() {
+        case .success(let value):
+            self = value
+        case .failure(let error):
             // @exempt(from: tests)
             preconditionFailure(error.unresolvedPresentableDescription())
-        } catch {
-            unreachable()
         }
     }
 
@@ -52,7 +51,7 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - decimal: The decimal representation.
     @inlinable public init(_ decimal: StrictString) {
-        self.init(forceParsing: { try Self(possibleDecimal: decimal) })
+        self.init(forcing: { Self.parse(possibleDecimal: decimal) })
     }
 
     /// Creates an instance from a hexadecimal representation.
@@ -60,7 +59,7 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - hexadecimal: The hexadecimal representation.
     @inlinable public init(hexadecimal: StrictString) {
-        self.init(forceParsing: { try Self(possibleHexadecimal: hexadecimal) })
+        self.init(forcing: { Self.parse(possibleHexadecimal: hexadecimal) })
     }
 
     /// Creates an instance from a octal representation.
@@ -68,7 +67,7 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - octal: The octal representation.
     @inlinable public init(octal: StrictString) {
-        self.init(forceParsing: { try Self(possibleOctal: octal) })
+        self.init(forcing: { Self.parse(possibleOctal: octal) })
     }
 
     /// Creates an instance from a binary representation.
@@ -76,7 +75,7 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - binary: The binary representation.
     @inlinable public init(binary: StrictString) {
-        self.init(forceParsing: { try Self(possibleBinary: binary) })
+        self.init(forcing: { Self.parse(possibleBinary: binary) })
     }
 
     /// Creates an instance from a decimal representation.
@@ -85,8 +84,10 @@ extension TextConvertibleNumber {
     ///     - decimal: The decimal representation.
     ///
     /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(possibleDecimal decimal: StrictString) throws {
-        try self.init(decimal, base: 10)
+    @inlinable public static func parse(
+        possibleDecimal decimal: StrictString
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+        return parse(decimal, base: 10)
     }
 
     /// Creates an instance from a hexadecimal representation.
@@ -95,8 +96,10 @@ extension TextConvertibleNumber {
     ///     - hexadecimal: The hexadecimal representation.
     ///
     /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(possibleHexadecimal hexadecimal: StrictString) throws {
-        try self.init(hexadecimal, base: 16)
+    @inlinable public static func parse(
+        possibleHexadecimal hexadecimal: StrictString
+    ) -> Result<Self, TextConvertibleNumberParseError> {
+        return parse(hexadecimal, base: 16)
     }
 
     /// Creates an instance from a octal representation.
@@ -105,8 +108,10 @@ extension TextConvertibleNumber {
     ///     - octal: The octal representation.
     ///
     /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(possibleOctal octal: StrictString) throws {
-        try self.init(octal, base: 8)
+    @inlinable public static func parse(
+        possibleOctal octal: StrictString
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+        return parse(octal, base: 8)
     }
 
     /// Creates an instance from a binary representation.
@@ -115,8 +120,10 @@ extension TextConvertibleNumber {
     ///     - binary: The binary representation.
     ///
     /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(possibleBinary binary: StrictString) throws {
-        try self.init(binary, base: 2)
+    @inlinable public static func parse(
+        possibleBinary binary: StrictString
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+        return parse(binary, base: 2)
     }
 
     /// Creates an instance by interpreting `representation` in a particular base.
@@ -128,7 +135,7 @@ extension TextConvertibleNumber {
     ///     - base: The base of the number system.
     ///
     /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(_ representation: StrictString, base: Int) throws {
+    @inlinable public static func parse(_ representation: StrictString, base: Int) -> Result<Self, TextConvertibleNumberParseError> {
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacing<StrictString, _APILocalization>({ localization in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
@@ -158,7 +165,11 @@ extension TextConvertibleNumber {
 
         let selectedDigits = [[UnicodeScalar]](digits[..<base])
 
-        try self.init(fromRepresentation: representation, usingDigits: selectedDigits, radixCharacters: [",", ".", "٫"], formattingSeparators: [" ", "٬"])
+        return parse(
+            fromRepresentation: representation,
+            usingDigits: selectedDigits,
+            radixCharacters: [",", ".", "٫"],
+            formattingSeparators: [" ", "٬"])
     }
 
     @inlinable internal static func assertNFKD(digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
