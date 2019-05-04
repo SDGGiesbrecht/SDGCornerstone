@@ -55,8 +55,8 @@ class SDGExternalProcessAPITests : TestCase {
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-        try Shell.default.run(command: ["ls"]).get()
-        try Shell.default.run(command: ["pwd"], in: URL(fileURLWithPath: "/"), with: [:]).get()
+        _ = try Shell.default.run(command: ["ls"]).get()
+        _ = try Shell.default.run(command: ["pwd"], in: URL(fileURLWithPath: "/"), with: [:]).get()
 
         let message = "Hello, world!"
         XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
