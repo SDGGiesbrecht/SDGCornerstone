@@ -343,15 +343,17 @@ extension TextConvertibleNumber where Self : RationalArithmetic {
             return StrictString(value.map({ digitMapping[$0] ≠ nil ? "0" : $0 }))
         }
 
-        func component(_ value: StrictString) throws -> Self {
-            return try Self(integer: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
+        func component(_ value: StrictString) -> Result<Self, TextConvertibleNumberParseError> {
+            return parse(integer: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
         }
 
-        let whole = try component(wholeString)
-        let numerator = try component(numeratorString)
-        let denominator = try component("1" + flattenToZeroes(numeratorString))
-
-        self = whole + numerator ÷ denominator
+        return component(wholeString).flatMap { whole in
+            return component(numeratorString).flatMap { numerator in
+                return component("1" + flattenToZeroes(numeratorString)).flatMap { denominator in
+                    return .success(whole + numerator ÷ denominator)
+                }
+            }
+        }
     }
 }
 
@@ -366,7 +368,10 @@ public protocol CodableViaTextConvertibleNumber : TextConvertibleNumber {}
 extension CodableViaTextConvertibleNumber {
 
     @inlinable public init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: StrictString.self, convert: { try Self(possibleDecimal: $0) })
+        try self.init(
+            from: decoder,
+            via: StrictString.self,
+            convert: { try Self.parse(possibleDecimal: $0).get() })
     }
 }
 
