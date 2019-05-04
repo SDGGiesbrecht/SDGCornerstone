@@ -260,18 +260,19 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
             radixCharacters: radixCharacters,
             formattingSeparators: formattingSeparators)
 
-        try self.init(
+        return parse(
             integer: representation,
-            base: Self.getBase(digits),
-            digits: Self.getMapping(digits),
+            base: getBase(digits),
+            digits: getMapping(digits),
             formattingSeparators: formattingSeparators)
     }
 
-    @inlinable internal init(
+    @inlinable internal static func parse(
         integer representation: StrictString,
         base: Self,
         digits digitMapping: [UnicodeScalar: Self],
-        formattingSeparators: Set<UnicodeScalar>) throws {
+        formattingSeparators: Set<UnicodeScalar>
+        ) -> Result<Self, TextConvertibleNumberParseError> {
 
         var representation = representation
 
@@ -280,14 +281,17 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
             representation.scalars.removeFirst()
         }
 
-        try self.init(
-            whole: representation,
+        return parse(
+            wholeNumber: representation,
             base: base,
             digits: digitMapping,
-            formattingSeparators: formattingSeparators)
+            formattingSeparators: formattingSeparators).map { value in
 
-        if negative {
-            self.negate()
+                if negative {
+                    return −value
+                } else {
+                    return value
+                }
         }
     }
 }
