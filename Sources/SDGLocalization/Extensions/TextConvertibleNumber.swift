@@ -211,20 +211,21 @@ extension TextConvertibleNumber {
         return digitMapping
     }
 
-    @inlinable internal init(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable internal static func initialize(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) -> Result<Self, TextConvertibleNumberParseError> {
 
-        self = 0
+        var `self`: Self = 0
         var position: Self = 0
         for character in representation.reversed() {
             if let digit = digitMapping[character], digit < base {
-                self += (base ↑ position) × digit
+                `self` += (base ↑ position) × digit
                 position += 1 as Self
             } else {
                 if character ∉ formattingSeparators {
-                    throw TextConvertibleNumberParseError.invalidDigit(character, entireString: representation)
+                    return .failure(TextConvertibleNumberParseError.invalidDigit(character, entireString: representation))
                 }
             }
         }
+        return .success(`self`)
     }
 
     // MARK: - ExpressibleByStringLiteral
