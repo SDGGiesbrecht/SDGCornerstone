@@ -31,9 +31,7 @@ public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithme
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
-    init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws
+    static func parse(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) -> Result<Self, TextConvertibleNumberParseError>
 }
 
 extension TextConvertibleNumber {
@@ -250,14 +248,31 @@ extension TextConvertibleNumber {
 
 extension TextConvertibleNumber where Self : IntegralArithmetic {
 
-    @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable public static func parse(
+        fromRepresentation representation: StrictString,
+        usingDigits digits:  [[UnicodeScalar]],
+        radixCharacters: Set<UnicodeScalar>,
+        formattingSeparators: Set<UnicodeScalar>
+        ) -> Result<Self, TextConvertibleNumberParseError> {
 
-        Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
+        Self.assertNFKD(
+            digits: digits,
+            radixCharacters: radixCharacters,
+            formattingSeparators: formattingSeparators)
 
-        try self.init(integer: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+        try self.init(
+            integer: representation,
+            base: Self.getBase(digits),
+            digits: Self.getMapping(digits),
+            formattingSeparators: formattingSeparators)
     }
 
-    @inlinable internal init(integer representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable internal init(
+        integer representation: StrictString,
+        base: Self,
+        digits digitMapping: [UnicodeScalar: Self],
+        formattingSeparators: Set<UnicodeScalar>) throws {
+
         var representation = representation
 
         let negative = representation.scalars.first == "−"
@@ -265,7 +280,11 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
             representation.scalars.removeFirst()
         }
 
-        try self.init(whole: representation, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
+        try self.init(
+            whole: representation,
+            base: base,
+            digits: digitMapping,
+            formattingSeparators: formattingSeparators)
 
         if negative {
             self.negate()
@@ -275,7 +294,7 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
 
 extension TextConvertibleNumber where Self : RationalArithmetic {
 
-    @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable public static func parse(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) -> Result<Self, TextConvertibleNumberParseError> {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
         let base = Self.getBase(digits)
