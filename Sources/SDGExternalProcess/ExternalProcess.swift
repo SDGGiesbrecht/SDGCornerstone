@@ -69,7 +69,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         }
 
         if let name = commandName,
-            let path = try? Shell.default.run(command: ["which", name]) {
+            let path = try? Shell.default.run(command: ["which", name]).get() {
             let location = URL(fileURLWithPath: path)
             if checkLocation(location, validate: validate) {
                 self.init(at: location)
