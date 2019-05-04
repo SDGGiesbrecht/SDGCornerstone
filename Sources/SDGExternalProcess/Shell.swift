@@ -80,9 +80,7 @@ public class Shell : TransparentWrapper {
     ///     - line: The line of output.
     ///
     /// - Returns: The output of the command.
-    ///
-    /// - Throws: An `ExternalProcess.Error` if the exit code indicates a failure.
-    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = { _ in }) throws -> String { // @exempt(from: tests)
+    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = { _ in }) throws -> Result<String, ExternalProcess.Error> { // @exempt(from: tests)
 
         let commandString = command.map({ (argument: String) -> String in
             if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
@@ -94,7 +92,7 @@ public class Shell : TransparentWrapper {
 
         reportProgress("$ " + commandString)
 
-        return try process.run(["\u{2D}c", commandString], in: workingDirectory, with: environment) {
+        return process.run(["\u{2D}c", commandString], in: workingDirectory, with: environment) {
             reportProgress($0)
         }
     }
