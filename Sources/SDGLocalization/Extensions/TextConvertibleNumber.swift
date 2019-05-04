@@ -188,10 +188,23 @@ extension TextConvertibleNumber {
         }))
     }
 
-    @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
-        Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
+    @inlinable public static func parse(
+        fromRepresentation representation: StrictString,
+        usingDigits digits: [[UnicodeScalar]],
+        radixCharacters: Set<UnicodeScalar>,
+        formattingSeparators: Set<UnicodeScalar>
+        ) -> Result<Self, TextConvertibleNumberParseError>  {
 
-        try self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+        Self.assertNFKD(
+            digits: digits,
+            radixCharacters: radixCharacters,
+            formattingSeparators: formattingSeparators)
+
+        return parse(
+            wholeNumber: representation,
+            base: getBase(digits),
+            digits: getMapping(digits),
+            formattingSeparators: formattingSeparators)
     }
 
     @inlinable internal static func getBase(_ digits: [[UnicodeScalar]]) -> Self {
@@ -211,13 +224,13 @@ extension TextConvertibleNumber {
         return digitMapping
     }
 
-    @inlinable internal static func initialize(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) -> Result<Self, TextConvertibleNumberParseError> {
+    @inlinable internal static func parse(wholeNumber representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) -> Result<Self, TextConvertibleNumberParseError> {
 
-        var `self`: Self = 0
+        var value: Self = 0
         var position: Self = 0
         for character in representation.reversed() {
             if let digit = digitMapping[character], digit < base {
-                `self` += (base ↑ position) × digit
+                value += (base ↑ position) × digit
                 position += 1 as Self
             } else {
                 if character ∉ formattingSeparators {
@@ -225,7 +238,7 @@ extension TextConvertibleNumber {
                 }
             }
         }
-        return .success(`self`)
+        return .success(value)
     }
 
     // MARK: - ExpressibleByStringLiteral
