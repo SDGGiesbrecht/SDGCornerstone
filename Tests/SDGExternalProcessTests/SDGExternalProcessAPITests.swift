@@ -42,11 +42,10 @@ class SDGExternalProcessAPITests : TestCase {
 
     func testExternalProcessError() {
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        do {
-            try Shell.default.run(command: ["/no/such/process"]).get()
+        if case .failure = Shell.default.run(command: ["/no/such/process"]) {
+            // Expected
+        } else {
             XCTFail("Process should have thrown an error.")
-        } catch {
-            _ = String(describing: error)
         }
         #endif
     }
