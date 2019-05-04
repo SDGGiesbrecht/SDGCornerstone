@@ -206,7 +206,7 @@ XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
 
 // ••••••• Shell Commands •••••••
 
-XCTAssertEqual(try? Shell.default.run(command: ["echo", "Hello, world!"]),
+XCTAssertEqual(try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
                "Hello, world!")
 #endif
 ```
