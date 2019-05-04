@@ -51,32 +51,15 @@ class SDGExternalProcessAPITests : TestCase {
         #endif
     }
 
-    func testShell() {
+    func testShell() throws {
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-        var command = ["ls"]
-        do {
-            try Shell.default.run(command: command).get()
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
-
-        command = ["pwd"]
-        do {
-            try Shell.default.run(command: command, in: URL(fileURLWithPath: "/"), with: [:]).get()
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
+        try Shell.default.run(command: ["ls"]).get()
+        try Shell.default.run(command: ["pwd"], in: URL(fileURLWithPath: "/"), with: [:]).get()
 
         let message = "Hello, world!"
-        command = ["echo", message]
-        do {
-            let result = try Shell.default.run(command: command).get()
-            XCTAssertEqual(result, message)
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
+        XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
 
         let nonexistentCommand = "no‐such‐command"
         let result = Shell.default.run(command: [nonexistentCommand])
@@ -88,27 +71,13 @@ class SDGExternalProcessAPITests : TestCase {
             case .foundationError(let error):
                 XCTFail(error.localizedDescription)
             case .processError(code: _, output: let output):
-                XCTAssert(output.contains("not found"), "Unexpected error: \(command) → \(error)")
+                XCTAssert(output.contains("not found"), "\(error)")
             }
         }
 
         let metacharacters = "(...)"
-        command = ["echo", Shell.quote(metacharacters)]
-        do {
-            let result = try Shell.default.run(command: command).get()
-            XCTAssertEqual(result, metacharacters)
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
-
-        let automatic = "Hello, world!"
-        command = ["echo", Shell.quote(automatic)]
-        do {
-            let result = try Shell.default.run(command: command).get()
-            XCTAssert(¬result.contains("\u{22}"))
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
+        XCTAssertEqual(try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(), metacharacters)
+        XCTAssert(¬(try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get().contains("\u{22}")))
 
         _ = "\(Shell.default)"
         #endif
