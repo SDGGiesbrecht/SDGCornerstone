@@ -43,7 +43,7 @@ class SDGExternalProcessAPITests : TestCase {
     func testExternalProcessError() {
         #if !(os(iOS) || os(watchOS) || os(tvOS))
         do {
-            try Shell.default.run(command: ["/no/such/process"])
+            try Shell.default.run(command: ["/no/such/process"]).get()
             XCTFail("Process should have thrown an error.")
         } catch {
             _ = String(describing: error)
@@ -57,14 +57,14 @@ class SDGExternalProcessAPITests : TestCase {
 
         var command = ["ls"]
         do {
-            try Shell.default.run(command: command)
+            try Shell.default.run(command: command).get()
         } catch {
             XCTFail("Unexpected error: \(command) → \(error)")
         }
 
         command = ["pwd"]
         do {
-            try Shell.default.run(command: command, in: URL(fileURLWithPath: "/"), with: [:])
+            try Shell.default.run(command: command, in: URL(fileURLWithPath: "/"), with: [:]).get()
         } catch {
             XCTFail("Unexpected error: \(command) → \(error)")
         }
@@ -72,28 +72,30 @@ class SDGExternalProcessAPITests : TestCase {
         let message = "Hello, world!"
         command = ["echo", message]
         do {
-            let result = try Shell.default.run(command: command)
+            let result = try Shell.default.run(command: command).get()
             XCTAssertEqual(result, message)
         } catch {
             XCTFail("Unexpected error: \(command) → \(error)")
         }
 
         let nonexistentCommand = "no‐such‐command"
-        let threw = expectation(description: "Error thrown for unidentified command.")
-        do {
-            try Shell.default.run(command: [nonexistentCommand])
-        } catch let error as ExternalProcess.Error {
-            XCTAssert(error.output.contains("not found"), "Unexpected error: \(command) → \(error)")
-            threw.fulfill()
-        } catch {
-            XCTFail("Wrong error type.")
+        let result = Shell.default.run(command: [nonexistentCommand])
+        switch result {
+        case .success(let output):
+            XCTFail("Should have failed: \(output)")
+        case .failure(let error):
+            switch error {
+            case .foundationError(let error):
+                XCTFail(error.localizedDescription)
+            case .processError(code: _, output: let output):
+                XCTAssert(output.contains("not found"), "Unexpected error: \(command) → \(error)")
+            }
         }
-        waitForExpectations(timeout: 0)
 
         let metacharacters = "(...)"
         command = ["echo", Shell.quote(metacharacters)]
         do {
-            let result = try Shell.default.run(command: command)
+            let result = try Shell.default.run(command: command).get()
             XCTAssertEqual(result, metacharacters)
         } catch {
             XCTFail("Unexpected error: \(command) → \(error)")
@@ -102,7 +104,7 @@ class SDGExternalProcessAPITests : TestCase {
         let automatic = "Hello, world!"
         command = ["echo", Shell.quote(automatic)]
         do {
-            let result = try Shell.default.run(command: command)
+            let result = try Shell.default.run(command: command).get()
             XCTAssert(¬result.contains("\u{22}"))
         } catch {
             XCTFail("Unexpected error: \(command) → \(error)")

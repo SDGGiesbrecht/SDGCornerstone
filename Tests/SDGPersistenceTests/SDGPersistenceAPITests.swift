@@ -114,7 +114,7 @@ class SDGPersistenceAPITests : TestCase {
         preferences[testKey].value.set(to: true)
         #if os(macOS)
         do {
-            let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey])
+            let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey]).get()
             XCTAssertEqual(output, "1", "Failed to write preferences to disk.")
         } catch {
             XCTFail("Unexpected error: \(error)")

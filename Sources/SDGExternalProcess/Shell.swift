@@ -80,7 +80,7 @@ public class Shell : TransparentWrapper {
     ///     - line: The line of output.
     ///
     /// - Returns: The output of the command.
-    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = { _ in }) throws -> Result<String, ExternalProcess.Error> { // @exempt(from: tests)
+    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = { _ in }) -> Result<String, ExternalProcess.Error> { // @exempt(from: tests)
 
         let commandString = command.map({ (argument: String) -> String in
             if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
