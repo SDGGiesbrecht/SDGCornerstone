@@ -14,10 +14,7 @@
 
 import SDGGeometry
 
-import SDGLogicTestUtilities
 import SDGMathematicsTestUtilities
-import SDGCollectionTestUtilities
-import SDGPersistenceTestUtilities
 
 /// Tests a type’s conformance to TwoDimensionalVectorProtocol.
 ///
@@ -30,11 +27,11 @@ import SDGPersistenceTestUtilities
     file: StaticString = #file,
     line: UInt = #line) where T : TwoDimensionalVectorProtocol {
 
-    testHashableConformance(differingInstances: (augend, sum), file: file, line: line)
-    testSubtractableConformance(minuend: sum, subtrahend: addend, difference: augend, file: file, line: line)
-    testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)
-
-    test(operator: (+, "+"), on: (sum, T.zero), returns: sum, file: file, line: line)
-    test(operator: (-, "-"), on: (sum, T.zero), returns: sum, file: file, line: line) // @exempt(from: unicode)
-    test(assignmentOperator: (-=, "-="), with: (sum, T.zero), resultsIn: sum, file: file, line: line) // @exempt(from: unicode)
+    testVectorProtocolConformance(
+        augend: T(Δx: 1, Δy: 2),
+        addend: T(Δx: 3, Δy: 4),
+        sum: T(Δx: 4, Δy: 6),
+        multiplicand: T(Δx: 5, Δy: 6),
+        multiplier: 7,
+        product: T(Δx: 35, Δy: 42))
 }

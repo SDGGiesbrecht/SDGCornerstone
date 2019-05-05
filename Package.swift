@@ -311,10 +311,7 @@ let package = Package(
         /// Utilities for testing code which uses `SDGLocalization`.
         .target(name: "SDGGeometryTestUtilities", dependencies: [
             "SDGGeometry", "SDGTesting",
-            "SDGLogicTestUtilities",
-            "SDGMathematicsTestUtilities",
-            "SDGCollectionsTestUtilities",
-            "SDGPersistenceTestUtilities"
+            "SDGMathematicsTestUtilities"
             ]),
 
         // @documentation(SDGCalendar)
