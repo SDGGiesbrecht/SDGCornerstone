@@ -1,5 +1,5 @@
 /*
- TwoDimensionalVector.swift
+ TwoDimensionalVectorProtocol.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -40,6 +40,39 @@ extension TwoDimensionalVectorProtocol {
         self = Self.zero
         self.Δx = Δx
         self.Δy = Δy
+    }
+
+    // MARK: - Addable
+
+    @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.Δx += followingValue.Δx
+        precedingValue.Δy += followingValue.Δy
+    }
+
+    // MARK: - Subtractable
+
+    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.Δx −= followingValue.Δx
+        precedingValue.Δy −= followingValue.Δy
+    }
+
+    // MARK: - Hashable
+
+    @inlinable public func hash(into hasher: inout Hasher) {
+        hasher.combine(Δx)
+        hasher.combine(Δy)
+    }
+
+    // MARK: - VectorProtocol
+
+    @inlinable public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
+        precedingValue.Δx ×= followingValue
+        precedingValue.Δy ×= followingValue
+    }
+
+    @inlinable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
+        precedingValue.Δx ÷= followingValue
+        precedingValue.Δy ÷= followingValue
     }
 }
 
@@ -97,38 +130,5 @@ extension TwoDimensionalVectorProtocol where Self.Scalar : RealArithmetic {
         set {
             self = Self(direction: direction, length: newValue)
         }
-    }
-
-    // MARK: - Addable
-
-    @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
-        precedingValue.Δx += followingValue.Δx
-        precedingValue.Δy += followingValue.Δy
-    }
-
-    // MARK: - Subtractable
-
-    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue.Δx −= followingValue.Δx
-        precedingValue.Δy −= followingValue.Δy
-    }
-
-    // MARK: - Hashable
-
-    @inlinable public func hash(into hasher: inout Hasher) {
-        hasher.combine(Δx)
-        hasher.combine(Δy)
-    }
-
-    // MARK: - VectorProtocol
-
-    @inlinable public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
-        precedingValue.Δx ×= followingValue
-        precedingValue.Δy ×= followingValue
-    }
-
-    @inlinable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
-        precedingValue.Δx ÷= followingValue
-        precedingValue.Δy ÷= followingValue
     }
 }
