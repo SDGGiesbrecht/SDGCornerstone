@@ -20,7 +20,7 @@ import SDGControlFlow
 ///
 /// - `GenericAdditiveArithmetic`
 /// - `static func ×= (precedingValue: inout Self, followingValue: Scalar)`
-public protocol VectorProtocol : GenericAdditiveArithmetic {
+public protocol VectorProtocol : Negatable {
 
     /// The scalar type.
     associatedtype Scalar : IntegralArithmetic
