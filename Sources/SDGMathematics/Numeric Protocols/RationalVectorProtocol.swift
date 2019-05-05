@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 /// An value that can be used with ×(_:_) and ÷(_:_:) in conjunction with a scalar.
 ///
 /// Conformance Requirements:
