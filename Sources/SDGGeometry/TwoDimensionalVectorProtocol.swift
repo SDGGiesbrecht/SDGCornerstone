@@ -49,11 +49,9 @@ extension TwoDimensionalVectorProtocol {
         precedingValue.Δy += followingValue.Δy
     }
 
-    // MARK: - Subtractable
-
-    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue.Δx −= followingValue.Δx
-        precedingValue.Δy −= followingValue.Δy
+    // MARK: - AdditiveArithmetic
+    @inlinable public static var zero: Self {
+        return Self(Δx: 0, Δy: 0)
     }
 
     // MARK: - Hashable
@@ -61,6 +59,13 @@ extension TwoDimensionalVectorProtocol {
     @inlinable public func hash(into hasher: inout Hasher) {
         hasher.combine(Δx)
         hasher.combine(Δy)
+    }
+
+    // MARK: - Subtractable
+
+    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
+        precedingValue.Δx −= followingValue.Δx
+        precedingValue.Δy −= followingValue.Δy
     }
 
     // MARK: - VectorProtocol

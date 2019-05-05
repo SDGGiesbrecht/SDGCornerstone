@@ -16,12 +16,6 @@
 public struct TwoDimensionalVector<Scalar> : TwoDimensionalVectorProtocol
 where Scalar : WholeArithmetic {
 
-    // MARK: - AdditiveArithmetic
-
-    @inlinable public static var zero: TwoDimensionalVector {
-        return TwoDimensionalVector(Δx: 0, Δy: 0)
-    }
-
     // MARK: - TwoDimensionalVectorProtocol
 
     @inlinable public init(Δx: Scalar, Δy: Scalar) {
