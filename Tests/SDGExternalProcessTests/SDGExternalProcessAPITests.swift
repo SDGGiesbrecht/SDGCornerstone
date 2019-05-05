@@ -42,9 +42,11 @@ class SDGExternalProcessAPITests : TestCase {
 
     func testExternalProcessError() {
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        if case .failure = Shell.default.run(command: ["/no/such/process"]) {
+        switch Shell.default.run(command: ["/no/such/process"]) {
+        case .failure(let error):
             // Expected
-        } else {
+            _ = error.localizedDescription
+        case .success:
             XCTFail("Process should have thrown an error.")
         }
         #endif
@@ -79,6 +81,13 @@ class SDGExternalProcessAPITests : TestCase {
         XCTAssert(¬(try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get().contains("\u{22}")))
 
         _ = "\(Shell.default)"
+        switch (Shell.default.wrappedInstance as! ExternalProcess).run(["..."]) {
+        case .failure(let error):
+            // Expected.
+            _ = error.localizedDescription
+        case .success:
+            XCTFail("Shell should have thrown an error.")
+        }
         #endif
     }
 }
