@@ -30,17 +30,19 @@ class SDGGeometryAPITests : TestCase {
         testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
         #if canImport(CoreGraphics)
         testTwoDimensionalPointProtocolConformance(CGPoint.self)
-        XCTAssertEqual(CGPoint(x: 1, y: 1) − CGVector(Δx: 1, Δy: 1), CGPoint(x: 0, y: 0))
-        XCTAssertEqual(CGPoint(x: 0, y: 0) + CGVector(Δx: 1, Δy: 1), CGPoint(x: 1, y: 1))
-        XCTAssertEqual(CGPoint(x: 1, y: 1) − CGPoint(x: 0, y: 0), CGVector(Δx: 1, Δy: 1))
+        #endif
 
-        let point = CGPoint(x: 1.21, y: 1.21).rounded(.down, toMultipleOf: 0.2)
-        XCTAssert(point.x ≈ 1.2 as CGFloat)
-        XCTAssert(point.y ≈ 1.2 as CGFloat)
+        typealias Point = TwoDimensionalPoint<Double>
+        XCTAssertEqual(Point(1, 1) − Point.Vector(Δx: 1, Δy: 1), Point(0, 0))
+        XCTAssertEqual(Point(0, 0) + Point.Vector(Δx: 1, Δy: 1), Point(1, 1))
+        XCTAssertEqual(Point(1, 1) − Point(0, 0), Point.Vector(Δx: 1, Δy: 1))
+
+        let point = Point(1.21, 1.21).rounded(.down, toMultipleOf: 0.2)
+        XCTAssert(point.x ≈ 1.2)
+        XCTAssert(point.y ≈ 1.2)
         let anotherPoint = point.rounded(.down)
         XCTAssert(anotherPoint.x ≈ 1)
         XCTAssert(anotherPoint.y ≈ 1)
-        #endif
     }
 
     #if canImport(CoreGraphics)
