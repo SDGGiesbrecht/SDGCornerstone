@@ -546,7 +546,7 @@ class SDGMathematicsAPITests : TestCase {
         testBitFieldConformance(start: 0b0101_0110 as UInt8, not: 0b1010_1001, other: 0b1101_0010, and: 0b0101_0010, or: 0b1101_0110, exclusiveOr: 0b1000_0100)
     }
 
-    struct VectorProtocolExample : VectorProtocol {
+    struct VectorProtocolExample : RationalVector {
         var value: Double
         init(_ value: Double) {
             self.value = value
@@ -569,7 +569,7 @@ class SDGMathematicsAPITests : TestCase {
         }
     }
     func testVectorProtocol() {
-        testVectorProtocolConformance(augend: VectorProtocolExample(1), addend: VectorProtocolExample(2), sum: VectorProtocolExample(3), multiplicand: VectorProtocolExample(4), multiplier: 5, product: VectorProtocolExample(20))
+        testRationalVectorConformance(augend: VectorProtocolExample(1), addend: VectorProtocolExample(2), sum: VectorProtocolExample(3), multiplicand: VectorProtocolExample(4), multiplier: 5, product: VectorProtocolExample(20))
         XCTAssertEqual(5 × VectorProtocolExample(4), VectorProtocolExample(20))
     }
 }

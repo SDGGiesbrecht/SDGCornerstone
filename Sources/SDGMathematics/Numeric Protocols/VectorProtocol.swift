@@ -38,13 +38,6 @@ public protocol VectorProtocol : GenericAdditiveArithmetic {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The scalar coefficient by which to multiply.
     static func ×= (precedingValue: inout Self, followingValue: Scalar)
-
-    /// Returns the quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
-    static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 }
 
 extension VectorProtocol {

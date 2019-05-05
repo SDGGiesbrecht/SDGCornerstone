@@ -14,8 +14,7 @@
 
 /// A two‐dimensional vector.
 public struct TwoDimensionalVector<Scalar> : TwoDimensionalVectorProtocol
-where Scalar : RationalArithmetic {
-    #warning("Does it have to be rational?")
+where Scalar : WholeArithmetic {
 
     // MARK: - AdditiveArithmetic
 
@@ -33,3 +32,5 @@ where Scalar : RationalArithmetic {
     public var Δx: Scalar
     public var Δy: Scalar
 }
+
+extension TwoDimensionalVector : RationalVector where Scalar : RationalArithmetic {}

@@ -1,5 +1,5 @@
 /*
- RationalVectorProtocol.swift
+ RationalVector.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -20,8 +20,15 @@ import SDGControlFlow
 ///
 /// - `VectorProtocol`
 /// - `static func ÷= (precedingValue: inout Self, followingValue: Scalar)`
-public protocol RationalVectorProtocol : VectorProtocol
+public protocol RationalVector : VectorProtocol
 where Scalar : RationalArithmetic {
+
+    /// Returns the quotient of the preceding value divided by the following value.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The dividend.
+    ///     - followingValue: The divisor.
+    static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
     /// Modifies the preceding value by dividing it by the following value.
     ///
@@ -31,7 +38,7 @@ where Scalar : RationalArithmetic {
     static func ÷= (precedingValue: inout Self, followingValue: Scalar)
 }
 
-extension RationalVectorProtocol {
+extension RationalVector {
 
     @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
         return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)

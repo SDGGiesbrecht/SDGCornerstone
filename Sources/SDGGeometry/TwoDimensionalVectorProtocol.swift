@@ -18,7 +18,7 @@
 ///
 /// - `var Δx: Scalar { get set }`
 /// - `var Δy: Scalar { get set }`
-public protocol TwoDimensionalVectorProtocol : Negatable, VectorProtocol {
+public protocol TwoDimensionalVectorProtocol : VectorProtocol {
 
     /// Creates a vector using the specified differences in *x* and *y*.
     ///
@@ -69,6 +69,9 @@ extension TwoDimensionalVectorProtocol {
         precedingValue.Δx ×= followingValue
         precedingValue.Δy ×= followingValue
     }
+}
+
+extension TwoDimensionalVectorProtocol where Self.Scalar : RationalArithmetic {
 
     @inlinable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ÷= followingValue

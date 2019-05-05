@@ -1,10 +1,10 @@
 /*
- VectorProtocol.swift
+ RationalVector.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018–2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// Tests a type’s conformance to VectorProtocol.
+/// Tests a type’s conformance to RationalVector.
 ///
 /// - Parameters:
 ///     - augend: An augend.
@@ -23,7 +23,7 @@
 ///     - product: The expected product.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testVectorProtocolConformance<T>(
+@inlinable public func testRationalVectorConformance<T>(
     augend: T,
     addend: T,
     sum: T,
@@ -31,10 +31,18 @@
     multiplier: T.Scalar,
     product: T,
     file: StaticString = #file,
-    line: UInt = #line) where T : VectorProtocol {
+    line: UInt = #line) where T : RationalVector {
 
-    testGenericAdditiveArithmeticConformance(augend: augend, addend: addend, sum: sum, file: file, line: line)
+    testVectorProtocolConformance(
+        augend: augend,
+        addend: addend,
+        sum: sum,
+        multiplicand: multiplicand,
+        multiplier: multiplier,
+        product: product,
+        file: file,
+        line: line)
 
-    test(operator: (×, "×"), on: (multiplicand, multiplier), returns: product, file: file, line: line)
-    test(assignmentOperator: (×=, "×="), with: (multiplicand, multiplier), resultsIn: product, file: file, line: line)
+    test(operator: (÷, "÷"), on: (product, multiplier), returns: multiplicand, file: file, line: line)
+    test(assignmentOperator: (÷=, "÷="), with: (product, multiplier), resultsIn: multiplicand, file: file, line: line)
 }
