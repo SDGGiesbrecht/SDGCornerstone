@@ -120,6 +120,9 @@ let package = Package(
         // #documentation(SDGGeometry)
         /// Extensions related to geometry.
         .library(name: "SDGGeometry", targets: ["SDGGeometry"]),
+        // #documentation(SDGGeometryTestUtilities)
+        /// Utilities for testing code which uses `SDGGeometry`.
+        .library(name: "SDGGeometryTestUtilities", targets: ["SDGGeometryTestUtilities"]),
 
         // #documentation(SDGCalendar)
         /// Tools for working with human calendar systems.
@@ -304,6 +307,12 @@ let package = Package(
             "SDGControlFlow",
             "SDGMathematics"
             ]),
+        // @documentation(SDGGeometryTestUtilities)
+        /// Utilities for testing code which uses `SDGLocalization`.
+        .target(name: "SDGGeometryTestUtilities", dependencies: [
+            "SDGGeometry", "SDGTesting",
+            "SDGPersistenceTestUtilities"
+            ]),
 
         // @documentation(SDGCalendar)
         /// Tools for working with human calendar systems.
@@ -414,7 +423,7 @@ let package = Package(
             "SDGPersistenceTestUtilities"
             ]),
         .testTarget(name: "SDGGeometryTests", dependencies: [
-            "SDGGeometry", "SDGXCTestUtilities",
+            "SDGGeometryTestUtilities", "SDGXCTestUtilities",
             "SDGMathematicsTestUtilities"
             ]),
         .testTarget(name: "SDGCalendarTests", dependencies: [
