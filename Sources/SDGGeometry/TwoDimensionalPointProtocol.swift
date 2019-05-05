@@ -23,18 +23,21 @@ import SDGControlFlow
 public protocol TwoDimensionalPointProtocol : PointProtocol
 where Vector : TwoDimensionalVectorProtocol {
 
+    /// The co‐ordinate type.
+    typealias Coordinate = Vector.Scalar
+
     /// Creates a point from two co‐ordinates.
     ///
     /// - Parameters:
     ///     - x: The *x* co‐ordinate.
     ///     - y: The *y* co‐ordinate.i
-    init(_ x: Vector.Scalar, _ y: Vector.Scalar)
+    init(_ x: Coordinate, _ y: Coordinate)
 
     /// The *x* co‐ordinate.
-    var x: Vector.Scalar { get set }
+    var x: Coordinate { get set }
 
     /// The *y* co‐ordinate.
-    var y: Vector.Scalar { get set }
+    var y: Coordinate { get set }
 
     /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
     ///
@@ -87,8 +90,8 @@ extension TwoDimensionalPointProtocol {
 
     @inlinable public init(from decoder: Decoder) throws {
         var coordinates = try decoder.unkeyedContainer()
-        let x = try coordinates.decode(Vector.Scalar.self)
-        let y = try coordinates.decode(Vector.Scalar.self)
+        let x = try coordinates.decode(Coordinate.self)
+        let y = try coordinates.decode(Coordinate.self)
         self.init(x, y)
     }
 
