@@ -20,8 +20,8 @@ import SDGControlFlow
 ///
 /// - `var x: Scalar { get set }`
 /// - `var y: Scalar { get set }`
-public protocol TwoDimensionalPoint : PointProtocol
-where Vector : TwoDimensionalVector {
+public protocol TwoDimensionalPointProtocol : PointProtocol
+where Vector : TwoDimensionalVectorProtocol {
 
     /// The scalar type.
     typealias Scalar = Vector.Scalar
@@ -59,7 +59,7 @@ where Vector : TwoDimensionalVector {
     func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar) -> Self
 }
 
-extension TwoDimensionalPoint {
+extension TwoDimensionalPointProtocol {
 
     @inlinable public mutating func round(_ rule: WholeArithmetic.RoundingRule) {
         x.round(rule)

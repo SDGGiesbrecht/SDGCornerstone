@@ -18,7 +18,7 @@ import CoreGraphics
 
 import SDGMathematics
 
-extension CGVector : GenericAdditiveArithmetic, Negatable, TwoDimensionalVector {
+extension CGVector : GenericAdditiveArithmetic, Negatable, TwoDimensionalVectorProtocol {
 
     // MARK: - TwoDimensionalVector
 

@@ -40,7 +40,7 @@ class SDGGeometryAPITests : TestCase {
     }
 
     #if canImport(CoreGraphics)
-    struct TwoDimensionalVectorExample : TwoDimensionalVector {
+    struct TwoDimensionalVectorExample : TwoDimensionalVectorProtocol {
         var vector: CGVector
         static let zero = TwoDimensionalVectorExample(vector: CGVector(Δx: 0, Δy: 0))
         typealias Scalar = CGVector.Scalar

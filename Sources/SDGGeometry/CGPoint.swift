@@ -16,7 +16,7 @@
 
 import CoreGraphics
 
-extension CGPoint : TwoDimensionalPoint {
+extension CGPoint : TwoDimensionalPointProtocol {
 
     // MARK: - PointProtocol
 

@@ -18,7 +18,7 @@
 ///
 /// - `var Δx: Scalar { get set }`
 /// - `var Δy: Scalar { get set }`
-public protocol TwoDimensionalVector : Negatable, VectorProtocol {
+public protocol TwoDimensionalVectorProtocol : Negatable, VectorProtocol {
 
     /// Creates a vector using the specified differences in *x* and *y*.
     ///
@@ -34,7 +34,7 @@ public protocol TwoDimensionalVector : Negatable, VectorProtocol {
     var Δy: Scalar { get set }
 }
 
-extension TwoDimensionalVector {
+extension TwoDimensionalVectorProtocol {
 
     @inlinable public init(Δx: Scalar, Δy: Scalar) {
         self = Self.zero
@@ -43,7 +43,7 @@ extension TwoDimensionalVector {
     }
 }
 
-extension TwoDimensionalVector where Self.Scalar : RealArithmetic {
+extension TwoDimensionalVectorProtocol where Self.Scalar : RealArithmetic {
 
     /// Creates a vector from an angular direction and a length.
     ///
