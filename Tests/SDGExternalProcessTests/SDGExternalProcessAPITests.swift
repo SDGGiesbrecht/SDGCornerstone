@@ -42,7 +42,7 @@ class SDGExternalProcessAPITests : TestCase {
 
     func testExternalProcessError() {
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        switch Shell.default.run(command: ["/no/such/process"]) {
+        switch ExternalProcess(at: URL(fileURLWithPath: "/no/such/process")).run([]) {
         case .failure(let error):
             // Expected
             _ = error.localizedDescription
