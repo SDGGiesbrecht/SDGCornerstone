@@ -23,14 +23,18 @@ import SDGControlFlow
 public protocol TwoDimensionalPointProtocol : PointProtocol
 where Vector : TwoDimensionalVectorProtocol {
 
-    /// The scalar type.
-    typealias Scalar = Vector.Scalar
+    /// Creates a point from two co‐ordinates.
+    ///
+    /// - Parameters:
+    ///     - x: The *x* co‐ordinate.
+    ///     - y: The *y* co‐ordinate.i
+    init(_ x: Vector.Scalar, _ y: Vector.Scalar)
 
     /// The *x* co‐ordinate.
-    var x: Scalar { get set }
+    var x: Vector.Scalar { get set }
 
     /// The *y* co‐ordinate.
-    var y: Scalar { get set }
+    var y: Vector.Scalar { get set }
 
     /// Rounds the point’s co‐ordinates to an integral value using the specified rounding rule.
     ///
@@ -49,14 +53,14 @@ where Vector : TwoDimensionalVectorProtocol {
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar)
+    mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar)
 
     /// Returns the point with its co‐ordinates rounded to a multiple of `factor` using the specified rounding rule.
     ///
     /// - Parameters:
     ///     - rule: The rounding rule follow.
     ///     - factor: The factor to round to a multiple of.
-    func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Self.Scalar) -> Self
+    func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar) -> Self
 }
 
 extension TwoDimensionalPointProtocol {
@@ -70,13 +74,36 @@ extension TwoDimensionalPointProtocol {
         return nonmutatingVariant(of: { $0.round($1) }, on: self, with: rule)
     }
 
-    @inlinable public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) {
+    @inlinable public mutating func round(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar) {
         x.round(rule, toMultipleOf: factor)
         y.round(rule, toMultipleOf: factor)
     }
 
-    @inlinable public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Scalar) -> Self {
+    @inlinable public func rounded(_ rule: WholeArithmetic.RoundingRule, toMultipleOf factor: Vector.Scalar) -> Self {
         return nonmutatingVariant(of: { $0.round($1, toMultipleOf: $2) }, on: self, with: (rule, factor))
+    }
+
+    // MARK: - Decodable
+
+    @inlinable public init(from decoder: Decoder) throws {
+        var coordinates = try decoder.unkeyedContainer()
+        let x = try coordinates.decode(Vector.Scalar.self)
+        let y = try coordinates.decode(Vector.Scalar.self)
+        self.init(x, y)
+    }
+
+    // MARK: - Encodable
+
+    @inlinable public func encode(to encoder: Encoder) throws {
+        var coordinates = encoder.unkeyedContainer()
+        try coordinates.encode(x)
+        try coordinates.encode(y)
+    }
+
+    // MARK: - Equatable
+
+    @inlinable public static func == (precedingValue: Self, followingValue: Self) -> Bool {
+        return (precedingValue.x, precedingValue.y) == (followingValue.x, followingValue.y)
     }
 
     // MARK: - PointProtocol

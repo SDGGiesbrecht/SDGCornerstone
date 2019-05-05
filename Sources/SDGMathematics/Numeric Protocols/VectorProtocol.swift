@@ -23,7 +23,7 @@ import SDGControlFlow
 public protocol VectorProtocol : GenericAdditiveArithmetic {
 
     /// The scalar type.
-    associatedtype Scalar : WholeArithmetic
+    associatedtype Scalar : IntegralArithmetic
 
     /// Returns the product of the preceding value times the following value.
     ///

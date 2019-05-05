@@ -14,7 +14,7 @@
 
 /// A two‐dimensional vector.
 public struct TwoDimensionalVector<Scalar> : TwoDimensionalVectorProtocol
-where Scalar : WholeArithmetic {
+where Scalar : IntegralArithmetic {
 
     // MARK: - TwoDimensionalVectorProtocol
 
