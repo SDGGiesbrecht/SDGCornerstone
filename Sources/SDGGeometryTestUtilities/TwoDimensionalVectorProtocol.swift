@@ -12,131 +12,29 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A two‐dimensional vector.
+import SDGGeometry
+
+import SDGLogicTestUtilities
+import SDGMathematicsTestUtilities
+import SDGCollectionTestUtilities
+import SDGPersistenceTestUtilities
+
+/// Tests a type’s conformance to TwoDimensionalVectorProtocol.
 ///
-/// Conformance Requirements:
-///
-/// - `var Δx: Scalar { get set }`
-/// - `var Δy: Scalar { get set }`
-public protocol TwoDimensionalVectorProtocol : VectorProtocol {
+/// - Parameters:
+///     - type: The type.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
+@inlinable public func testTwoDimensionalVectorConformance<T>(
+    augend: T.Type,
+    file: StaticString = #file,
+    line: UInt = #line) where T : TwoDimensionalVectorProtocol {
 
-    /// Creates a vector using the specified differences in *x* and *y*.
-    ///
-    /// - Parameters:
-    ///     - Δx: The difference in *x*.
-    ///     - Δy: The difference in *y*.
-    init(Δx: Scalar, Δy: Scalar)
+    testHashableConformance(differingInstances: (augend, sum), file: file, line: line)
+    testSubtractableConformance(minuend: sum, subtrahend: addend, difference: augend, file: file, line: line)
+    testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)
 
-    /// The difference in *x*.
-    var Δx: Scalar { get set }
-
-    /// The difference in *y*.
-    var Δy: Scalar { get set }
-}
-
-extension TwoDimensionalVectorProtocol {
-
-    @inlinable public init(Δx: Scalar, Δy: Scalar) {
-        self = Self.zero
-        self.Δx = Δx
-        self.Δy = Δy
-    }
-
-    // MARK: - Addable
-
-    @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
-        precedingValue.Δx += followingValue.Δx
-        precedingValue.Δy += followingValue.Δy
-    }
-
-    // MARK: - AdditiveArithmetic
-    @inlinable public static var zero: Self {
-        return Self(Δx: 0, Δy: 0)
-    }
-
-    // MARK: - Hashable
-
-    @inlinable public func hash(into hasher: inout Hasher) {
-        hasher.combine(Δx)
-        hasher.combine(Δy)
-    }
-
-    // MARK: - Subtractable
-
-    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue.Δx −= followingValue.Δx
-        precedingValue.Δy −= followingValue.Δy
-    }
-
-    // MARK: - VectorProtocol
-
-    @inlinable public static func ×=(precedingValue: inout Self, followingValue: Scalar) {
-        precedingValue.Δx ×= followingValue
-        precedingValue.Δy ×= followingValue
-    }
-}
-
-extension TwoDimensionalVectorProtocol where Self.Scalar : RationalArithmetic {
-
-    @inlinable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
-        precedingValue.Δx ÷= followingValue
-        precedingValue.Δy ÷= followingValue
-    }
-}
-
-extension TwoDimensionalVectorProtocol where Self.Scalar : RealArithmetic {
-
-    /// Creates a vector from an angular direction and a length.
-    ///
-    /// - Parameters:
-    ///     - direction: The direction of the vector.
-    ///     - length: The length of the vector.
-    @inlinable public init(direction: Angle<Scalar>, length: Scalar) {
-        self.init(Δx: cos(direction) × length, Δy: sin(direction) × length)
-    }
-
-    /// The angular direction of the vector.
-    @inlinable public var direction: Angle<Scalar> {
-        get {
-            // Intercept Division by Zero
-            if Δx == 0 {
-                if Δy < 0 {
-                    let result: Scalar = 3 × π() ÷ 2
-                    return result.radians
-                } else {
-                    let result: Scalar = π() ÷ 2
-                    return result.radians
-                }
-            }
-
-            let referenceAngle = arctan(|(Δy ÷ Δx)|)
-            if Δx < 0 {
-                if Δy < 0 {
-                    return (π() as Scalar).radians + referenceAngle
-                } else {
-                    return (π() as Scalar).radians − referenceAngle
-                }
-            } else {
-                if Δy < 0 {
-                    let constant: Scalar = 2 × π()
-                    return constant.radians − referenceAngle
-                } else {
-                    return referenceAngle
-                }
-            }
-        }
-        set {
-            self = Self(direction: newValue, length: length)
-        }
-    }
-
-    /// The length of the vector.
-    @inlinable public var length: Scalar {
-        get {
-            return √(Δx ↑ 2 + Δy ↑ 2)
-        }
-        set {
-            self = Self(direction: direction, length: newValue)
-        }
-    }
+    test(operator: (+, "+"), on: (sum, T.zero), returns: sum, file: file, line: line)
+    test(operator: (-, "-"), on: (sum, T.zero), returns: sum, file: file, line: line) // @exempt(from: unicode)
+    test(assignmentOperator: (-=, "-="), with: (sum, T.zero), resultsIn: sum, file: file, line: line) // @exempt(from: unicode)
 }
