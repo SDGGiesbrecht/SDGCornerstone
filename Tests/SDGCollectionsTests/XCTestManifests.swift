@@ -39,6 +39,7 @@ extension SDGCollectionsRegressionTests {
     // to regenerate.
     static let __allTests__SDGCollectionsRegressionTests = [
         ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch),
+        ("testTrailingConditionSearch", testTrailingConditionSearch),
     ]
 }
 
