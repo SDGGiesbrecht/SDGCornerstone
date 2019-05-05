@@ -27,7 +27,9 @@ class SDGGeometryAPITests : TestCase {
     }
 
     func testPoint() {
+        testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
         #if canImport(CoreGraphics)
+        testTwoDimensionalPointProtocolConformance(CGPoint.self)
         XCTAssertEqual(CGPoint(x: 1, y: 1) − CGVector(Δx: 1, Δy: 1), CGPoint(x: 0, y: 0))
         XCTAssertEqual(CGPoint(x: 0, y: 0) + CGVector(Δx: 1, Δy: 1), CGPoint(x: 1, y: 1))
         XCTAssertEqual(CGPoint(x: 1, y: 1) − CGPoint(x: 0, y: 0), CGVector(Δx: 1, Δy: 1))
@@ -58,9 +60,9 @@ class SDGGeometryAPITests : TestCase {
     #endif
 
     func testVector() {
-        testTwoDimensionalVectorConformance(TwoDimensionalVector<Double>.self)
+        testTwoDimensionalVectorProtocolConformance(TwoDimensionalVector<Double>.self)
         #if canImport(CoreGraphics)
-        testTwoDimensionalVectorConformance(CGVector.self)
+        testTwoDimensionalVectorProtocolConformance(CGVector.self)
 
         XCTAssertEqual(CGVector(Δx: 1, Δy: 1) − CGVector(Δx: 1, Δy: 1), CGVector(Δx: 0, Δy: 0))
         XCTAssertEqual(CGVector(Δx: 0, Δy: 0) + CGVector(Δx: 1, Δy: 1), CGVector(Δx: 1, Δy: 1))
