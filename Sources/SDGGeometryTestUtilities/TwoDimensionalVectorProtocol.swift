@@ -23,7 +23,7 @@ import SDGMathematicsTestUtilities
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
 @inlinable public func testTwoDimensionalVectorConformance<T>(
-    augend: T.Type,
+    _ type: T.Type,
     file: StaticString = #file,
     line: UInt = #line) where T : TwoDimensionalVectorProtocol {
 

@@ -15,7 +15,9 @@
 import SDGMathematics
 import SDGMathematicsTestUtilities
 import SDGGeometry
+
 import SDGXCTestUtilities
+import SDGGeometryTestUtilities
 
 class SDGGeometryAPITests : TestCase {
 
@@ -54,8 +56,11 @@ class SDGGeometryAPITests : TestCase {
         }
     }
     #endif
+
     func testVector() {
+        testTwoDimensionalVectorConformance(TwoDimensionalVector<Double>.self)
         #if canImport(CoreGraphics)
+        testTwoDimensionalVectorConformance(CGVector.self)
 
         XCTAssertEqual(CGVector(Δx: 1, Δy: 1) − CGVector(Δx: 1, Δy: 1), CGVector(Δx: 0, Δy: 0))
         XCTAssertEqual(CGVector(Δx: 0, Δy: 0) + CGVector(Δx: 1, Δy: 1), CGVector(Δx: 1, Δy: 1))
