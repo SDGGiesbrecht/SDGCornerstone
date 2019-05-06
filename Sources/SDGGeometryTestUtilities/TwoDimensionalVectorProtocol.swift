@@ -36,4 +36,6 @@ import SDGMathematicsTestUtilities
         product: T(Δx: 35, Δy: 42),
         file: file,
         line: line)
+
+    test(variable: (T.zero, "\(T.self).zero"), is: T(Δx: 0, Δy: 0), file: file, line: line)
 }
