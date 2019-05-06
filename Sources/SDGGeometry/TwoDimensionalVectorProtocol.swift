@@ -72,7 +72,7 @@ extension TwoDimensionalVectorProtocol {
 
 extension RationalVector where Self : TwoDimensionalVectorProtocol, Scalar : RationalArithmetic {
 
-    @inlinable public static func ÷=(precedingValue: inout Self, followingValue: Scalar) {
+    @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ÷= followingValue
         precedingValue.Δy ÷= followingValue
     }
