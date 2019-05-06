@@ -73,6 +73,7 @@ let package = Package(
             .productItem(name: "SDGLocalization", package: "SDGCornerstone"),
             .productItem(name: "SDGLocalizationTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGGeometry", package: "SDGCornerstone"),
+            .productItem(name: "SDGGeometryTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGCalendar", package: "SDGCornerstone"),
             .productItem(name: "SDGPrecisionMathematics", package: "SDGCornerstone"),
             .productItem(name: "SDGConcurrency", package: "SDGCornerstone"),
@@ -105,6 +106,7 @@ import SDGRandomizationTestUtilities
 import SDGLocalization
 import SDGLocalizationTestUtilities
 import SDGGeometry
+import SDGGeometryTestUtilities
 import SDGCalendar
 import SDGPrecisionMathematics
 import SDGConcurrency

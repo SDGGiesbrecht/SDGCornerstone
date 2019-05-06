@@ -19,7 +19,6 @@ where Coordinate : IntegralArithmetic {
     // MARK: - TwoDimensionalPointProtocol
 
     public typealias Vector = TwoDimensionalVector<Coordinate>
-    public typealias Scalar = Coordinate
 
     @inlinable public init(_ x: Coordinate, _ y: Coordinate) {
         self.x = x
