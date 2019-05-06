@@ -50,7 +50,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
             preferences.value.set(to: converted)
         } else if let language = ProcessInfo.processInfo.environment["LANG"],
             let locale: PatternMatch<String> = language.prefix(upTo: ".") {
-            let converted = convert(locale: String(locale.contents))
+            let converted = convert(locale: String(locale.contents)) // @exempt(from: tests)
             preferences.value.set(to: [converted])
         } else {
             preferences.value.set(to: nil)
