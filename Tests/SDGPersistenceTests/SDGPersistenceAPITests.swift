@@ -90,7 +90,7 @@ class SDGPersistenceAPITests : TestCase {
         testCodableConformance(of: LosslessStirngConvertibleExample("Example"), uniqueTestName: "Example")
     }
 
-    func testPreferences() {
+    func testPreferences() throws {
         let testKey = "SDGTestKey"
         let testDomain = "ca.solideogloria.SDGCornerstone.Tests.Preferences"
         let testDomainExternalName = testDomain + ".debug"
@@ -113,12 +113,8 @@ class SDGPersistenceAPITests : TestCase {
 
         preferences[testKey].value.set(to: true)
         #if os(macOS)
-        do {
-            let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey])
-            XCTAssertEqual(output, "1", "Failed to write preferences to disk.")
-        } catch {
-            XCTFail("Unexpected error: \(error)")
-        }
+        let output = try Shell.default.run(command: ["defaults", "read", testDomainExternalName, testKey]).get()
+        XCTAssertEqual(output, "1", "Failed to write preferences to disk.")
         #endif
 
         let externalTestKey = "SDGExternalTestKey"
@@ -126,11 +122,7 @@ class SDGPersistenceAPITests : TestCase {
 
         let stringValue = "value"
         #if os(macOS)
-        do {
-            try Shell.default.run(command: ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue])
-        } catch {
-            XCTFail("Unexpected error: \(error)")
-        }
+        _ = try Shell.default.run(command: ["defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue]).get()
         #endif
 
         let causeSynchronization = "CauseSynchronization"

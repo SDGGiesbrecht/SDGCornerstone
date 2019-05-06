@@ -65,7 +65,7 @@ public final class PreferenceSet {
         self.domain = domain
         let possibleDebugDomain: String
         if domain == UserDefaults.globalDomain {
-            possibleDebugDomain = domain
+            possibleDebugDomain = domain // @exempt(from: tests) Absent from Linux?
         } else {
             possibleDebugDomain = FileManager.possibleDebugDomain(domain)
         }
@@ -98,7 +98,7 @@ public final class PreferenceSet {
     // MARK: - Storage
 
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: Preference] {
-        let values = UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) ?? [:]
+        let values = UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) ?? [:] // @exempt(from: tests) Linux returns an empty dictionary instead of nil.
         return values.mapValues { Preference(propertyListObject: Preference.cast($0)) }
     }
     private func readFromDisk() -> [String: Preference] {

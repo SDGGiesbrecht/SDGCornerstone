@@ -14,17 +14,16 @@
 
 import SDGControlFlow
 
-/// An value that can be used with ×(_:_) and ÷(_:_:) in conjunction with a scalar.
+/// An value that can be used with ×(_:_) in conjunction with a scalar.
 ///
 /// Conformance Requirements:
 ///
 /// - `GenericAdditiveArithmetic`
 /// - `static func ×= (precedingValue: inout Self, followingValue: Scalar)`
-/// - `static func ÷= (precedingValue: inout Self, followingValue: Scalar)`
-public protocol VectorProtocol : GenericAdditiveArithmetic {
+public protocol VectorProtocol : Negatable {
 
     /// The scalar type.
-    associatedtype Scalar : RationalArithmetic
+    associatedtype Scalar : IntegralArithmetic
 
     /// Returns the product of the preceding value times the following value.
     ///
@@ -39,20 +38,6 @@ public protocol VectorProtocol : GenericAdditiveArithmetic {
     ///     - precedingValue: The value to modify.
     ///     - followingValue: The scalar coefficient by which to multiply.
     static func ×= (precedingValue: inout Self, followingValue: Scalar)
-
-    /// Returns the quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
-    static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
-
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
-    static func ÷= (precedingValue: inout Self, followingValue: Scalar)
 }
 
 extension VectorProtocol {
@@ -63,9 +48,5 @@ extension VectorProtocol {
 
     @inlinable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
         return followingValue × precedingValue
-    }
-
-    @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
-        return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
     }
 }

@@ -54,3 +54,11 @@ configuration.documentation.api.encryptedTravisCIDeploymentKey = "gzx7ARrCgcNJiD
 
 configuration._applySDGOverrides()
 configuration._validateSDGStandards()
+
+configuration.documentation.api.ignoredDependencies = [
+
+    // Swift
+    "Dispatch",
+    "Foundation",
+    "XCTest"
+]

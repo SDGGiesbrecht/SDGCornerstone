@@ -25,7 +25,7 @@ class SDGExternalProcessAPITests : TestCase {
         XCTAssertNil(ExternalProcess(searching: [
             "/no/such/file",
             "/tmp", // Directory
-            "/.file" // Not executable
+            "/.file", "/dev/null" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: nil, validate: { (_: ExternalProcess) in true }), "Failed to reject non‐executables.")
         XCTAssertEqual(ExternalProcess(searching: [
             "/no/such/file",
@@ -42,73 +42,52 @@ class SDGExternalProcessAPITests : TestCase {
 
     func testExternalProcessError() {
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        do {
-            try Shell.default.run(command: ["/no/such/process"])
+        switch ExternalProcess(at: URL(fileURLWithPath: "/no/such/process")).run([]) {
+        case .failure(let error):
+            // Expected
+            _ = error.localizedDescription
+        case .success:
             XCTFail("Process should have thrown an error.")
-        } catch {
-            _ = String(describing: error)
         }
         #endif
     }
 
-    func testShell() {
+    func testShell() throws {
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-        var command = ["ls"]
-        do {
-            try Shell.default.run(command: command)
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
-
-        command = ["pwd"]
-        do {
-            try Shell.default.run(command: command, in: URL(fileURLWithPath: "/"), with: [:])
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
+        _ = try Shell.default.run(command: ["ls"]).get()
+        _ = try Shell.default.run(command: ["pwd"], in: URL(fileURLWithPath: "/"), with: [:]).get()
 
         let message = "Hello, world!"
-        command = ["echo", message]
-        do {
-            let result = try Shell.default.run(command: command)
-            XCTAssertEqual(result, message)
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
+        XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
 
         let nonexistentCommand = "no‐such‐command"
-        let threw = expectation(description: "Error thrown for unidentified command.")
-        do {
-            try Shell.default.run(command: [nonexistentCommand])
-        } catch let error as ExternalProcess.Error {
-            XCTAssert(error.output.contains("not found"), "Unexpected error: \(command) → \(error)")
-            threw.fulfill()
-        } catch {
-            XCTFail("Wrong error type.")
+        let result = Shell.default.run(command: [nonexistentCommand])
+        switch result {
+        case .success(let output):
+            XCTFail("Should have failed: \(output)")
+        case .failure(let error):
+            switch error {
+            case .foundationError(let error):
+                XCTFail(error.localizedDescription)
+            case .processError(code: _, output: let output):
+                XCTAssert(output.contains("not found"), "\(error)")
+            }
         }
-        waitForExpectations(timeout: 0)
 
         let metacharacters = "(...)"
-        command = ["echo", Shell.quote(metacharacters)]
-        do {
-            let result = try Shell.default.run(command: command)
-            XCTAssertEqual(result, metacharacters)
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
-
-        let automatic = "Hello, world!"
-        command = ["echo", Shell.quote(automatic)]
-        do {
-            let result = try Shell.default.run(command: command)
-            XCTAssert(¬result.contains("\u{22}"))
-        } catch {
-            XCTFail("Unexpected error: \(command) → \(error)")
-        }
+        XCTAssertEqual(try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(), metacharacters)
+        XCTAssert(¬(try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get().contains("\u{22}")))
 
         _ = "\(Shell.default)"
+        switch (Shell.default.wrappedInstance as! ExternalProcess).run(["..."]) {
+        case .failure(let error):
+            // Expected.
+            _ = error.localizedDescription
+        case .success:
+            XCTFail("Shell should have thrown an error.")
+        }
         #endif
     }
 }

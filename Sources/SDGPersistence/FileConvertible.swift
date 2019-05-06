@@ -37,8 +37,6 @@ extension FileConvertible {
     ///
     /// - Parameters:
     ///     - url: The URL to save to.
-    ///
-    /// - Throws: Any error encountered by `FileManager.createDirectory(at:withIntermediateDirectories:attributes:)` or `Data.write(to:options:)`
     public func save(to url: URL) throws {
         let directory = url.deletingLastPathComponent()
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
@@ -49,8 +47,6 @@ extension FileConvertible {
     ///
     /// - Parameters:
     ///     - url: The URL to read from.
-    ///
-    /// - Throws: Any error encountered by `Data(contentsOfURL:options:)` or `init(file:origin:)`.
     public init(from url: URL) throws {
         let data: Data
         if let read = try? Data(contentsOf: url, options: [.mappedIfSafe]) {

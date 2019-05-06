@@ -15,7 +15,9 @@
 import SDGMathematics
 import SDGMathematicsTestUtilities
 import SDGGeometry
+
 import SDGXCTestUtilities
+import SDGGeometryTestUtilities
 
 class SDGGeometryAPITests : TestCase {
 
@@ -25,71 +27,65 @@ class SDGGeometryAPITests : TestCase {
     }
 
     func testPoint() {
+        testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
         #if canImport(CoreGraphics)
-        XCTAssertEqual(CGPoint(x: 1, y: 1) − CGVector(Δx: 1, Δy: 1), CGPoint(x: 0, y: 0))
-        XCTAssertEqual(CGPoint(x: 0, y: 0) + CGVector(Δx: 1, Δy: 1), CGPoint(x: 1, y: 1))
-        XCTAssertEqual(CGPoint(x: 1, y: 1) − CGPoint(x: 0, y: 0), CGVector(Δx: 1, Δy: 1))
+        testTwoDimensionalPointProtocolConformance(CGPoint.self)
+        #endif
 
-        let point = CGPoint(x: 1.21, y: 1.21).rounded(.down, toMultipleOf: 0.2)
-        XCTAssert(point.x ≈ 1.2 as CGFloat)
-        XCTAssert(point.y ≈ 1.2 as CGFloat)
+        typealias Point = TwoDimensionalPoint<Double>
+        XCTAssertEqual(Point(1, 1) − Point.Vector(Δx: 1, Δy: 1), Point(0, 0))
+        XCTAssertEqual(Point(0, 0) + Point.Vector(Δx: 1, Δy: 1), Point(1, 1))
+        XCTAssertEqual(Point(1, 1) − Point(0, 0), Point.Vector(Δx: 1, Δy: 1))
+
+        let point = Point(1.21, 1.21).rounded(.down, toMultipleOf: 0.2)
+        XCTAssert(point.x ≈ 1.2)
+        XCTAssert(point.y ≈ 1.2)
         let anotherPoint = point.rounded(.down)
         XCTAssert(anotherPoint.x ≈ 1)
         XCTAssert(anotherPoint.y ≈ 1)
-        #endif
     }
 
-    #if canImport(CoreGraphics)
-    struct TwoDimensionalVectorExample : TwoDimensionalVector {
-        var vector: CGVector
-        static let zero = TwoDimensionalVectorExample(vector: CGVector(Δx: 0, Δy: 0))
-        typealias Scalar = CGVector.Scalar
-        var Δx: CGFloat {
-            get { return vector.Δx }
-            set { vector.Δx = newValue }
-        }
-        var Δy: CGFloat {
-            get { return vector.Δy }
-            set { vector.Δy = newValue }
-        }
-    }
-    #endif
     func testVector() {
+        testTwoDimensionalVectorProtocolConformance(TwoDimensionalVector<Double>.self)
         #if canImport(CoreGraphics)
+        testTwoDimensionalVectorProtocolConformance(CGVector.self)
+        #endif
 
-        XCTAssertEqual(CGVector(Δx: 1, Δy: 1) − CGVector(Δx: 1, Δy: 1), CGVector(Δx: 0, Δy: 0))
-        XCTAssertEqual(CGVector(Δx: 0, Δy: 0) + CGVector(Δx: 1, Δy: 1), CGVector(Δx: 1, Δy: 1))
+        typealias Vector = TwoDimensionalVector<Double>
 
-        XCTAssert(CGVector(Δx: 3, Δy: 4).length ≈ 5)
-        XCTAssert(CGVector(Δx: −3, Δy: 4).length ≈ 5)
-        XCTAssert(CGVector(Δx: 3, Δy: −4).length ≈ 5)
-        XCTAssert(CGVector(Δx: −3, Δy: −4).length ≈ 5)
+        XCTAssertEqual(Vector(Δx: 1, Δy: 1) − Vector(Δx: 1, Δy: 1), Vector(Δx: 0, Δy: 0))
+        XCTAssertEqual(Vector(Δx: 0, Δy: 0) + Vector(Δx: 1, Δy: 1), Vector(Δx: 1, Δy: 1))
 
-        XCTAssert(CGVector(Δx: 1, Δy: 0).direction.inDegrees ≈ 0)
-        XCTAssert(CGVector(Δx: 0, Δy: 1).direction.inDegrees ≈ 90)
-        XCTAssert(CGVector(Δx: −1, Δy: 0).direction.inDegrees ≈ 180)
-        XCTAssert(CGVector(Δx: 0, Δy: −1).direction.inDegrees ≈ 270)
+        XCTAssert(Vector(Δx: 3, Δy: 4).length ≈ 5)
+        XCTAssert(Vector(Δx: −3, Δy: 4).length ≈ 5)
+        XCTAssert(Vector(Δx: 3, Δy: −4).length ≈ 5)
+        XCTAssert(Vector(Δx: −3, Δy: −4).length ≈ 5)
 
-        XCTAssert(CGVector(Δx: 1, Δy: 1).direction.inDegrees ≈ 45)
-        XCTAssert(CGVector(Δx: −1, Δy: 1).direction.inDegrees ≈ 135)
-        XCTAssert(CGVector(Δx: −1, Δy: −1).direction.inDegrees ≈ 225)
-        XCTAssert(CGVector(Δx: 1, Δy: −1).direction.inDegrees ≈ 315)
+        XCTAssert(Vector(Δx: 1, Δy: 0).direction.inDegrees ≈ 0)
+        XCTAssert(Vector(Δx: 0, Δy: 1).direction.inDegrees ≈ 90)
+        XCTAssert(Vector(Δx: −1, Δy: 0).direction.inDegrees ≈ 180)
+        XCTAssert(Vector(Δx: 0, Δy: −1).direction.inDegrees ≈ 270)
 
-        XCTAssert(CGVector(direction: 0°, length: 1).Δx ≈ 1)
-        XCTAssert(CGVector(direction: 0°, length: 1).Δy ≈ 0)
-        XCTAssert(CGVector(direction: 90°, length: 1).Δx ≈ 0)
-        XCTAssert(CGVector(direction: 90°, length: 1).Δy ≈ 1)
-        XCTAssert(CGVector(direction: 180°, length: 1).Δx ≈ −1)
-        XCTAssert(CGVector(direction: 180°, length: 1).Δy ≈ 0)
-        XCTAssert(CGVector(direction: 270°, length: 1).Δx ≈ 0)
-        XCTAssert(CGVector(direction: 270°, length: 1).Δy ≈ −1)
+        XCTAssert(Vector(Δx: 1, Δy: 1).direction.inDegrees ≈ 45)
+        XCTAssert(Vector(Δx: −1, Δy: 1).direction.inDegrees ≈ 135)
+        XCTAssert(Vector(Δx: −1, Δy: −1).direction.inDegrees ≈ 225)
+        XCTAssert(Vector(Δx: 1, Δy: −1).direction.inDegrees ≈ 315)
+
+        XCTAssert(Vector(direction: 0°, length: 1).Δx ≈ 1)
+        XCTAssert(Vector(direction: 0°, length: 1).Δy ≈ 0)
+        XCTAssert(Vector(direction: 90°, length: 1).Δx ≈ 0)
+        XCTAssert(Vector(direction: 90°, length: 1).Δy ≈ 1)
+        XCTAssert(Vector(direction: 180°, length: 1).Δx ≈ −1)
+        XCTAssert(Vector(direction: 180°, length: 1).Δy ≈ 0)
+        XCTAssert(Vector(direction: 270°, length: 1).Δx ≈ 0)
+        XCTAssert(Vector(direction: 270°, length: 1).Δy ≈ −1)
 
         var hasher = Hasher()
-        CGVector(Δx: 1, Δy: 1).hash(into: &hasher)
+        Vector(Δx: 1, Δy: 1).hash(into: &hasher)
 
-        XCTAssertEqual(TwoDimensionalVectorExample(Δx: 0, Δy: 0), TwoDimensionalVectorExample.zero)
+        XCTAssertEqual(Vector(Δx: 0, Δy: 0), Vector.zero)
 
-        var vector = CGVector(Δx: 1, Δy: 0)
+        var vector = Vector(Δx: 1, Δy: 0)
         vector.direction = 90°
         XCTAssert(vector.Δx ≈ 0)
         XCTAssert(vector.Δy ≈ 1)
@@ -105,6 +101,5 @@ class SDGGeometryAPITests : TestCase {
         vector ÷= 4
         XCTAssert(vector.Δx ≈ 0)
         XCTAssert(vector.Δy ≈ 1)
-        #endif
     }
 }

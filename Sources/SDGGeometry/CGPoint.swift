@@ -16,15 +16,17 @@
 
 import CoreGraphics
 
-extension CGPoint : TwoDimensionalPoint {
+extension CGPoint : TwoDimensionalPointProtocol {
 
     // MARK: - PointProtocol
 
     public typealias Vector = CGVector
 
-    // MARK: - TwoDimensionalPoint
+    // MARK: - TwoDimensionalPointProtocol
 
-    public typealias Scalar = Vector.Scalar
+    @inlinable public init(_ x: Vector.Scalar, _ y: Vector.Scalar) {
+        self.init(x: x, y: y)
+    }
 }
 
 #endif

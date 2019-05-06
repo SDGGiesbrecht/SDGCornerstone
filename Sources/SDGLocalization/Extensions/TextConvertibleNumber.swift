@@ -31,94 +31,99 @@ public protocol TextConvertibleNumber : ExpressibleByStringLiteral, WholeArithme
     ///     - digits: The digits to use. Each entry in the array defines a set of digit characters that have the value corresponding to the array index. The length of the array determines the base.
     ///     - radixCharacters: The set of characters that can mark the radix position.
     ///     - formattingSeparators: A set of characters, such as thousands separators, that should be ignored.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
-    init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws
+    static func parse(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) -> Result<Self, TextConvertibleNumberParseError>
 }
 
 extension TextConvertibleNumber {
 
-    @inlinable internal init(forceParsing parse: () throws -> Self) {
-        do {
-            self = try parse()
-        } catch let error as TextConvertibleNumberParseError {
+    @inlinable internal init(forcing parse: () -> Result<Self, TextConvertibleNumberParseError>) {
+        switch parse() {
+        case .success(let value):
+            self = value
+        case .failure(let error):
             // @exempt(from: tests)
             preconditionFailure(error.unresolvedPresentableDescription())
-        } catch {
-            unreachable()
         }
     }
 
     /// Creates an instance from a decimal representation.
     ///
+    /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
+    ///
     /// - Parameters:
     ///     - decimal: The decimal representation.
     @inlinable public init(_ decimal: StrictString) {
-        self.init(forceParsing: { try Self(possibleDecimal: decimal) })
+        self.init(forcing: { Self.parse(possibleDecimal: decimal) })
     }
 
     /// Creates an instance from a hexadecimal representation.
     ///
+    /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
+    ///
     /// - Parameters:
     ///     - hexadecimal: The hexadecimal representation.
     @inlinable public init(hexadecimal: StrictString) {
-        self.init(forceParsing: { try Self(possibleHexadecimal: hexadecimal) })
+        self.init(forcing: { Self.parse(possibleHexadecimal: hexadecimal) })
     }
 
     /// Creates an instance from a octal representation.
     ///
+    /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
+    ///
     /// - Parameters:
     ///     - octal: The octal representation.
     @inlinable public init(octal: StrictString) {
-        self.init(forceParsing: { try Self(possibleOctal: octal) })
+        self.init(forcing: { Self.parse(possibleOctal: octal) })
     }
 
     /// Creates an instance from a binary representation.
     ///
+    /// - Precondition: The representation must be valid. This initializer is intended for use with string literals. Dynamically acquired representations should instead be converted using the failable static `parse` methods instead.
+    ///
     /// - Parameters:
     ///     - binary: The binary representation.
     @inlinable public init(binary: StrictString) {
-        self.init(forceParsing: { try Self(possibleBinary: binary) })
+        self.init(forcing: { Self.parse(possibleBinary: binary) })
     }
 
     /// Creates an instance from a decimal representation.
     ///
     /// - Parameters:
     ///     - decimal: The decimal representation.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(possibleDecimal decimal: StrictString) throws {
-        try self.init(decimal, base: 10)
+    @inlinable public static func parse(
+        possibleDecimal decimal: StrictString
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+        return parse(decimal, base: 10)
     }
 
     /// Creates an instance from a hexadecimal representation.
     ///
     /// - Parameters:
     ///     - hexadecimal: The hexadecimal representation.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(possibleHexadecimal hexadecimal: StrictString) throws {
-        try self.init(hexadecimal, base: 16)
+    @inlinable public static func parse(
+        possibleHexadecimal hexadecimal: StrictString
+    ) -> Result<Self, TextConvertibleNumberParseError> {
+        return parse(hexadecimal, base: 16)
     }
 
     /// Creates an instance from a octal representation.
     ///
     /// - Parameters:
     ///     - octal: The octal representation.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(possibleOctal octal: StrictString) throws {
-        try self.init(octal, base: 8)
+    @inlinable public static func parse(
+        possibleOctal octal: StrictString
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+        return parse(octal, base: 8)
     }
 
     /// Creates an instance from a binary representation.
     ///
     /// - Parameters:
     ///     - binary: The binary representation.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(possibleBinary binary: StrictString) throws {
-        try self.init(binary, base: 2)
+    @inlinable public static func parse(
+        possibleBinary binary: StrictString
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+        return parse(binary, base: 2)
     }
 
     /// Creates an instance by interpreting `representation` in a particular base.
@@ -128,9 +133,11 @@ extension TextConvertibleNumber {
     /// - Parameters:
     ///     - representation: The string to interpret.
     ///     - base: The base of the number system.
-    ///
-    /// - Throws: `TextConvertibleNumberParseError`
-    @inlinable public init(_ representation: StrictString, base: Int) throws {
+    @inlinable public static func parse(
+        _ representation: StrictString,
+        base: Int
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+
         assert(base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16, UserFacing<StrictString, _APILocalization>({ localization in
             switch localization { // @exempt(from: tests)
             case .englishCanada:
@@ -160,7 +167,11 @@ extension TextConvertibleNumber {
 
         let selectedDigits = [[UnicodeScalar]](digits[..<base])
 
-        try self.init(fromRepresentation: representation, usingDigits: selectedDigits, radixCharacters: [",", ".", "٫"], formattingSeparators: [" ", "٬"])
+        return parse(
+            fromRepresentation: representation,
+            usingDigits: selectedDigits,
+            radixCharacters: [",", ".", "٫"],
+            formattingSeparators: [" ", "٬"])
     }
 
     @inlinable internal static func assertNFKD(digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) {
@@ -188,10 +199,23 @@ extension TextConvertibleNumber {
         }))
     }
 
-    @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
-        Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
+    @inlinable public static func parse(
+        fromRepresentation representation: StrictString,
+        usingDigits digits: [[UnicodeScalar]],
+        radixCharacters: Set<UnicodeScalar>,
+        formattingSeparators: Set<UnicodeScalar>
+        ) -> Result<Self, TextConvertibleNumberParseError>  {
 
-        try self.init(whole: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+        Self.assertNFKD(
+            digits: digits,
+            radixCharacters: radixCharacters,
+            formattingSeparators: formattingSeparators)
+
+        return parse(
+            wholeNumber: representation,
+            base: getBase(digits),
+            digits: getMapping(digits),
+            formattingSeparators: formattingSeparators)
     }
 
     @inlinable internal static func getBase(_ digits: [[UnicodeScalar]]) -> Self {
@@ -211,20 +235,21 @@ extension TextConvertibleNumber {
         return digitMapping
     }
 
-    @inlinable internal init(whole representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable internal static func parse(wholeNumber representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) -> Result<Self, TextConvertibleNumberParseError> {
 
-        self = 0
+        var value: Self = 0
         var position: Self = 0
         for character in representation.reversed() {
             if let digit = digitMapping[character], digit < base {
-                self += (base ↑ position) × digit
+                value += (base ↑ position) × digit
                 position += 1 as Self
             } else {
                 if character ∉ formattingSeparators {
-                    throw TextConvertibleNumberParseError.invalidDigit(character, entireString: representation)
+                    return .failure(TextConvertibleNumberParseError.invalidDigit(character, entireString: representation))
                 }
             }
         }
+        return .success(value)
     }
 
     // MARK: - ExpressibleByStringLiteral
@@ -236,14 +261,32 @@ extension TextConvertibleNumber {
 
 extension TextConvertibleNumber where Self : IntegralArithmetic {
 
-    @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits:  [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable public static func parse(
+        fromRepresentation representation: StrictString,
+        usingDigits digits:  [[UnicodeScalar]],
+        radixCharacters: Set<UnicodeScalar>,
+        formattingSeparators: Set<UnicodeScalar>
+        ) -> Result<Self, TextConvertibleNumberParseError> {
 
-        Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
+        Self.assertNFKD(
+            digits: digits,
+            radixCharacters: radixCharacters,
+            formattingSeparators: formattingSeparators)
 
-        try self.init(integer: representation, base: Self.getBase(digits), digits: Self.getMapping(digits), formattingSeparators: formattingSeparators)
+        return parse(
+            integer: representation,
+            base: getBase(digits),
+            digits: getMapping(digits),
+            formattingSeparators: formattingSeparators)
     }
 
-    @inlinable internal init(integer representation: StrictString, base: Self, digits digitMapping: [UnicodeScalar: Self], formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable internal static func parse(
+        integer representation: StrictString,
+        base: Self,
+        digits digitMapping: [UnicodeScalar: Self],
+        formattingSeparators: Set<UnicodeScalar>
+        ) -> Result<Self, TextConvertibleNumberParseError> {
+
         var representation = representation
 
         let negative = representation.scalars.first == "−"
@@ -251,17 +294,24 @@ extension TextConvertibleNumber where Self : IntegralArithmetic {
             representation.scalars.removeFirst()
         }
 
-        try self.init(whole: representation, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
+        return parse(
+            wholeNumber: representation,
+            base: base,
+            digits: digitMapping,
+            formattingSeparators: formattingSeparators).map { value in
 
-        if negative {
-            self.negate()
+                if negative {
+                    return −value
+                } else {
+                    return value
+                }
         }
     }
 }
 
 extension TextConvertibleNumber where Self : RationalArithmetic {
 
-    @inlinable public init(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) throws {
+    @inlinable public static func parse(fromRepresentation representation: StrictString, usingDigits digits: [[UnicodeScalar]], radixCharacters: Set<UnicodeScalar>, formattingSeparators: Set<UnicodeScalar>) -> Result<Self, TextConvertibleNumberParseError> {
         Self.assertNFKD(digits: digits, radixCharacters: radixCharacters, formattingSeparators: formattingSeparators)
 
         let base = Self.getBase(digits)
@@ -287,15 +337,17 @@ extension TextConvertibleNumber where Self : RationalArithmetic {
             return StrictString(value.map({ digitMapping[$0] ≠ nil ? "0" : $0 }))
         }
 
-        func component(_ value: StrictString) throws -> Self {
-            return try Self(integer: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
+        func component(_ value: StrictString) -> Result<Self, TextConvertibleNumberParseError> {
+            return parse(integer: value, base: base, digits: digitMapping, formattingSeparators: formattingSeparators)
         }
 
-        let whole = try component(wholeString)
-        let numerator = try component(numeratorString)
-        let denominator = try component("1" + flattenToZeroes(numeratorString))
-
-        self = whole + numerator ÷ denominator
+        return component(wholeString).flatMap { whole in
+            return component(numeratorString).flatMap { numerator in
+                return component("1" + flattenToZeroes(numeratorString)).flatMap { denominator in
+                    return .success(whole + numerator ÷ denominator)
+                }
+            }
+        }
     }
 }
 
@@ -310,7 +362,10 @@ public protocol CodableViaTextConvertibleNumber : TextConvertibleNumber {}
 extension CodableViaTextConvertibleNumber {
 
     @inlinable public init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: StrictString.self, convert: { try Self(possibleDecimal: $0) })
+        try self.init(
+            from: decoder,
+            via: StrictString.self,
+            convert: { try Self.parse(possibleDecimal: $0).get() })
     }
 }
 

@@ -424,7 +424,7 @@ public enum HebrewMonth : Int, EnumerationCalendarComponent, Month {
             case "6ב":
                 return .adarII
             default:
-                let number = try Int(possibleDecimal: string)
+                let number = try Int.parse(possibleDecimal: string).get()
                 if number == 6 {
                     return .adar
                 } else {
