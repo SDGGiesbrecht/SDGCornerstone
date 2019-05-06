@@ -36,12 +36,6 @@ public protocol TwoDimensionalVectorProtocol : VectorProtocol {
 
 extension TwoDimensionalVectorProtocol {
 
-    @inlinable public init(Δx: Scalar, Δy: Scalar) {
-        self = Self.zero
-        self.Δx = Δx
-        self.Δy = Δy
-    }
-
     // MARK: - Addable
 
     @inlinable public static func += (precedingValue: inout Self, followingValue: Self) {
