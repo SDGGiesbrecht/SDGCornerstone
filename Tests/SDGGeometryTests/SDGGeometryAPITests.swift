@@ -45,22 +45,6 @@ class SDGGeometryAPITests : TestCase {
         XCTAssert(anotherPoint.y ≈ 1)
     }
 
-    #if canImport(CoreGraphics)
-    struct TwoDimensionalVectorExample : TwoDimensionalVectorProtocol {
-        var vector: CGVector
-        static let zero = TwoDimensionalVectorExample(vector: CGVector(Δx: 0, Δy: 0))
-        typealias Scalar = CGVector.Scalar
-        var Δx: CGFloat {
-            get { return vector.Δx }
-            set { vector.Δx = newValue }
-        }
-        var Δy: CGFloat {
-            get { return vector.Δy }
-            set { vector.Δy = newValue }
-        }
-    }
-    #endif
-
     func testVector() {
         testTwoDimensionalVectorProtocolConformance(TwoDimensionalVector<Double>.self)
         #if canImport(CoreGraphics)
@@ -99,7 +83,7 @@ class SDGGeometryAPITests : TestCase {
         var hasher = Hasher()
         Vector(Δx: 1, Δy: 1).hash(into: &hasher)
 
-        XCTAssertEqual(TwoDimensionalVectorExample(Δx: 0, Δy: 0), TwoDimensionalVectorExample.zero)
+        XCTAssertEqual(Vector(Δx: 0, Δy: 0), Vector.zero)
 
         var vector = Vector(Δx: 1, Δy: 0)
         vector.direction = 90°
