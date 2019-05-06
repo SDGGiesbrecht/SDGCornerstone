@@ -24,9 +24,7 @@ extension CGPoint : TwoDimensionalPointProtocol {
 
     // MARK: - TwoDimensionalPointProtocol
 
-    public typealias Scalar = Vector.Scalar
-
-    @inlinable public init(_ x: Scalar, _ y: Scalar) {
+    @inlinable public init(_ x: Vector.Scalar, _ y: Vector.Scalar) {
         self.init(x: x, y: y)
     }
 }
