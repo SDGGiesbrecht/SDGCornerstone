@@ -308,7 +308,7 @@ let package = Package(
             "SDGMathematics"
             ]),
         // @documentation(SDGGeometryTestUtilities)
-        /// Utilities for testing code which uses `SDGLocalization`.
+        /// Utilities for testing code which uses `SDGGeometry`.
         .target(name: "SDGGeometryTestUtilities", dependencies: [
             "SDGGeometry", "SDGTesting",
             "SDGMathematicsTestUtilities"
