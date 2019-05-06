@@ -70,8 +70,14 @@ extension TwoDimensionalVectorProtocol {
     }
 }
 
-extension RationalVector where Self : TwoDimensionalVectorProtocol, Scalar : RationalArithmetic {
+extension TwoDimensionalVectorProtocol where Self : RationalVector {
 
+    // #documentation(RationalVector.÷=)
+    /// Modifies the preceding value by dividing it by the following value.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The value to modify.
+    ///     - followingValue: The divisor.
     @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Scalar) {
         precedingValue.Δx ÷= followingValue
         precedingValue.Δy ÷= followingValue

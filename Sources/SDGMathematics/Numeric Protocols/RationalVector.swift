@@ -30,6 +30,7 @@ where Scalar : RationalArithmetic {
     ///     - followingValue: The divisor.
     static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
+    // @documentation(RationalVector.÷=)
     /// Modifies the preceding value by dividing it by the following value.
     ///
     /// - Parameters:
