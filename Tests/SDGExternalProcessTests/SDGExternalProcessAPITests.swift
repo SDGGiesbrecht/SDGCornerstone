@@ -25,7 +25,7 @@ class SDGExternalProcessAPITests : TestCase {
         XCTAssertNil(ExternalProcess(searching: [
             "/no/such/file",
             "/tmp", // Directory
-            "/.file" // Not executable
+            "/.file", "/dev/null" // Not executable
             ].map({ URL(fileURLWithPath: $0) }), commandName: nil, validate: { (_: ExternalProcess) in true }), "Failed to reject non‐executables.")
         XCTAssertEqual(ExternalProcess(searching: [
             "/no/such/file",
