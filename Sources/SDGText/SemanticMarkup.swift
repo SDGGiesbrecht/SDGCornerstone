@@ -148,27 +148,31 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     #if canImport(AppKit) || canImport(UIKit)
 
-    /// Returns the rich text representation.
-    ///
-    /// - Parameters:
-    ///     - font: The font to use.
-    public func richText(font: Font) -> NSAttributedString {
-
+    // Exposed for use by SDGInterface.
+    public static func _attributedString(from html: String, in font: Font) throws -> NSAttributedString {
         var modified = "<span style=\u{22}"
 
         modified += "font\u{2D}family: &#x22;" + font.fontName + "&#x22;;"
         modified += "font\u{2D}size: \(font.pointSize)pt;"
 
         modified += "\u{22}>"
-        modified += String(html())
+        modified += html
         modified += "</span>"
 
         let data = modified.data(using: .utf8)!
-        do {
-            return try NSAttributedString(data: data, options: [
-                NSAttributedString.DocumentReadingOptionKey.characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue),
-            NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
+        return try NSAttributedString(data: data, options: [
+            .characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue),
+            .documentType: NSAttributedString.DocumentType.html
             ], documentAttributes: nil)
+    }
+
+    /// Returns the rich text representation.
+    ///
+    /// - Parameters:
+    ///     - font: The font to use.
+    public func richText(font: Font) -> NSAttributedString {
+        do {
+            return try SemanticMarkup._attributedString(from: String(html()), in: font)
         } catch {
             preconditionFailure(error.localizedDescription)
         }
