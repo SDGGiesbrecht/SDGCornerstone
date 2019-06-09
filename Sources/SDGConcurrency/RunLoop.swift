@@ -22,7 +22,7 @@ extension RunLoop {
     // MARK: - Running the Loop
 
     /// A class that manages a run loop.
-    public class Driver {
+    public final class Driver {
         @usableFromInline internal init() {}
     }
 

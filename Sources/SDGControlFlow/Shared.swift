@@ -13,7 +13,7 @@
  */
 
 /// A reference to a shared value.
-public class Shared<Value> : TransparentWrapper {
+public final class Shared<Value> : TransparentWrapper {
 
     // MARK: - Initialization
 
