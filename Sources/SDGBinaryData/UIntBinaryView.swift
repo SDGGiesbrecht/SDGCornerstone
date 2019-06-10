@@ -92,7 +92,7 @@ public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Coll
 
     // MARK: - CustomStringConvertible
 
-    public var description: String {
+    @inlinable public var description: String {
         let bits = self.map { bit in
             return bit ? "1" : "0"
         }
