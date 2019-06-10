@@ -22,7 +22,7 @@ public protocol Weekday : ConsistentlyOrderedCalendarComponent, TextualPlaygroun
 extension Weekday {
 
     /// Returns the English name.
-    @inlinable public func inEnglish() -> StrictString {
+    public func inEnglish() -> StrictString {
         switch ordinal {
         case 1:
             return "Sunday"
@@ -43,7 +43,7 @@ extension Weekday {
         }
     }
 
-    @inlinable internal func aufDeutsch() -> StrictString {
+    internal func aufDeutsch() -> StrictString {
         switch ordinal {
         case 1:
             return "Sonntag"
@@ -64,7 +64,7 @@ extension Weekday {
         }
     }
 
-    @inlinable internal func enFrançais(_ majuscules: Casing) -> StrictString {
+    internal func enFrançais(_ majuscules: Casing) -> StrictString {
         switch ordinal {
         case 1:
             return majuscules.apply(to: "dimanche")
@@ -85,7 +85,7 @@ extension Weekday {
         }
     }
 
-    @inlinable internal func σεΕλληνικά() -> StrictString {
+    internal func σεΕλληνικά() -> StrictString {
         switch ordinal {
         case 1:
             return "Κυριακή"
@@ -106,7 +106,7 @@ extension Weekday {
         }
     }
 
-    @inlinable internal func בעברית() -> StrictString {
+    internal func בעברית() -> StrictString {
         let יום: StrictString = "יום "
         switch ordinal {
         case 1:

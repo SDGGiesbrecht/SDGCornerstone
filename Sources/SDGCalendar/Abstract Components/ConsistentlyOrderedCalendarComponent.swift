@@ -42,7 +42,7 @@ public protocol ConsistentlyOrderedCalendarComponent : CalendarComponent, FixedS
 
 extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarComponent, Self.RawValue == Int {
 
-    @inlinable public init(numberAlreadyElapsed: RawValue) {
+    public init(numberAlreadyElapsed: RawValue) {
         guard let result = Self(rawValue: numberAlreadyElapsed) else {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
@@ -54,25 +54,25 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
         self = result
     }
 
-    @inlinable public init(ordinal: RawValue) {
+    public init(ordinal: RawValue) {
         self.init(numberAlreadyElapsed: ordinal − 1)
     }
 
-    @inlinable public var numberAlreadyElapsed: RawValue {
+    public var numberAlreadyElapsed: RawValue {
         return rawValue
     }
 
-    @inlinable public var ordinal: RawValue {
+    public var ordinal: RawValue {
         return rawValue + 1
     }
 
     // MARK: - PointProtocol
 
-    @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
+    public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue = Self(numberAlreadyElapsed: precedingValue.numberAlreadyElapsed + followingValue)
     }
 
-    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return precedingValue.numberAlreadyElapsed − followingValue.numberAlreadyElapsed
     }
 }
@@ -81,14 +81,14 @@ extension ConsistentlyOrderedCalendarComponent where Self : EnumerationCalendarC
 
     // MARK: - Decodable
 
-    @inlinable internal init(usingOrdinalFrom decoder: Decoder) throws {
+    internal init(usingOrdinalFrom decoder: Decoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
         try self.init(from: decoder, via: Vector.self, convert: { Self(rawValue: $0 − (1 as Vector)) })
     }
 
     // MARK: - Encodable
 
-    @inlinable internal func encodeUsingOrdinal(to encoder: Encoder) throws {
+    internal func encodeUsingOrdinal(to encoder: Encoder) throws {
         // For GregorianMonth, GregorianWeekday & HebrewWeekday
         try encode(to: encoder, via: ordinal)
     }

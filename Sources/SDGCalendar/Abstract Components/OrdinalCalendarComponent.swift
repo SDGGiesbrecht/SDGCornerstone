@@ -19,19 +19,19 @@ extension OrdinalCalendarComponent {
 
     // MARK: - ConsistentlyOrderedCalendarComponent
 
-    @inlinable public init(numberAlreadyElapsed: Vector) {
+    public init(numberAlreadyElapsed: Vector) {
         self.init(numberAlreadyElapsed + (1 as Vector))
     }
 
-    @inlinable public init(ordinal: Vector) {
+    public init(ordinal: Vector) {
         self.init(ordinal)
     }
 
-    @inlinable public var numberAlreadyElapsed: Vector {
+    public var numberAlreadyElapsed: Vector {
         return rawValue − (1 as Vector)
     }
 
-    @inlinable public var ordinal: Vector {
+    public var ordinal: Vector {
         return rawValue
     }
 }

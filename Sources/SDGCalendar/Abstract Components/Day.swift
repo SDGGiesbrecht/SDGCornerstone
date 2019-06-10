@@ -25,15 +25,15 @@ extension Day {
     // MARK: - Text Representations
 
     /// Returns the day in English digits. (“1”, “2”, “3”, etc.)
-    @inlinable public func inEnglishDigits() -> StrictString {
+    public func inEnglishDigits() -> StrictString {
         return ordinal.inDigits()
     }
 
-    @inlinable internal func inDeutschenZiffern() -> StrictString {
+    internal func inDeutschenZiffern() -> StrictString {
         return ordinal._verkürzteDeutscheOrdnungszahl()
     }
 
-    @inlinable internal func enChiffresFrançais() -> SemanticMarkup {
+    internal func enChiffresFrançais() -> SemanticMarkup {
         if ordinal == 1 {
             return ordinal._ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
         } else {
@@ -41,17 +41,17 @@ extension Day {
         }
     }
 
-    @inlinable internal func σεΕλληνικάΨηφία() -> StrictString {
+    internal func σεΕλληνικάΨηφία() -> StrictString {
         return ordinal.inDigits()
     }
 
-    @inlinable internal func בעברית־בספרות() -> StrictString {
+    internal func בעברית־בספרות() -> StrictString {
         return ordinal.inDigits()
     }
 
     // MARK: - MarkupPlaygroundDisplay
 
-    @inlinable public func playgroundDescriptionMarkup() -> SemanticMarkup {
+    public func playgroundDescriptionMarkup() -> SemanticMarkup {
         return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
