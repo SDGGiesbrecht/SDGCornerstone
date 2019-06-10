@@ -14,6 +14,8 @@
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
+import Foundation
+
 import SDGControlFlow
 import SDGLogic
 
