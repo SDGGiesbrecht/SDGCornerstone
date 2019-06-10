@@ -14,6 +14,7 @@
 
 import SDGGeometry
 
+import SDGTesting
 import SDGMathematicsTestUtilities
 
 /// Tests a type’s conformance to TwoDimensionalVectorProtocol.

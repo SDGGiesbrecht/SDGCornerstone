@@ -12,10 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
 import Dispatch
 
 import SDGMathematics
 import SDGCollections
+import SDGCalendar
+import SDGConcurrency
+import SDGRandomization
+import SDGPrecisionMathematics
 
 import XCTest
 

@@ -16,6 +16,8 @@ import Foundation
 
 import SDGControlFlow
 
+import XCTest
+
 import SDGTesting
 import SDGXCTestUtilities
 
