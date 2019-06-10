@@ -14,6 +14,7 @@
 
 import SDGLogic
 import SDGMathematics
+import SDGText
 
 extension RationalArithmetic {
 
