@@ -286,7 +286,6 @@ let package = Package(
         // @documentation(SDGConcurrency)
         /// Concurrency and threading tools.
         .target(name: "SDGConcurrency", dependencies: [
-            "SDGControlFlow",
             "SDGLogic"
             ]),
 
