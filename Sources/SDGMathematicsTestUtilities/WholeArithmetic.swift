@@ -19,7 +19,7 @@
 ///     - includingNegatives: Whether or not to test negative numbers.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testWholeArithmeticConformance<T>(of type: T.Type, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : WholeArithmetic {
+public func testWholeArithmeticConformance<T>(of type: T.Type, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : WholeArithmetic {
 
     testFixedScaleOneDimensionalPointConformance(departure: 58 as T, vector: 21, destination: 79, file: file, line: line)
     testNumericAdditiveArithmeticConformance(augend: 25 as T, addend: 9, sum: 34, includingNegatives: includingNegatives, file: file, line: line)

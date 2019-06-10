@@ -23,7 +23,7 @@
 ///     - product: The expected product.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testVectorProtocolConformance<T>(
+public func testVectorProtocolConformance<T>(
     augend: T,
     addend: T,
     sum: T,

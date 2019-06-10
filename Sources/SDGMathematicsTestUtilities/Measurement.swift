@@ -18,7 +18,7 @@
 ///     - type: The type to test.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testMeasurementConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : Measurement {
+public func testMeasurementConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : Measurement {
 
     testNumericAdditiveArithmeticConformance(augend: T(rawValue: 3), addend: T(rawValue: 5), sum: T(rawValue: 8), includingNegatives: true, file: file, line: line)
     testNegatableConformance(minuend: T(rawValue: 8), subtrahend: T(rawValue: 5), difference: T(rawValue: 3), file: file, line: line)

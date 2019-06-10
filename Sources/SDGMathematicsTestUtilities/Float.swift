@@ -269,7 +269,7 @@
 ///     - expectedValue: The expected property value.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func test<V>(variable: (contents: V, name: String), is expectedValue: V, file: StaticString = #file, line: UInt = #line) where V : ExpressibleByFloatLiteral, V : FloatingPoint, V : Subtractable {
+public func test<V>(variable: (contents: V, name: String), is expectedValue: V, file: StaticString = #file, line: UInt = #line) where V : ExpressibleByFloatLiteral, V : FloatingPoint, V : Subtractable {
     test(variable.contents ≈ expectedValue, "\(variable.name) → \(variable.contents) ≠ \(expectedValue)",
         file: file, line: line)
 }

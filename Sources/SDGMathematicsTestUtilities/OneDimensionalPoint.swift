@@ -22,7 +22,7 @@
 ///     - destination: The expected point of arrival.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testOneDimensionalPointConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : OneDimensionalPoint {
+public func testOneDimensionalPointConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : OneDimensionalPoint {
     testComparableConformance(less: departure, greater: destination, file: file, line: line)
     testPointProtocolConformance(departure: departure, vector: vector, destination: destination, file: file, line: line)
 }
