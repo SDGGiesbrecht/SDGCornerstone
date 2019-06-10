@@ -12,6 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
+import SDGLogic
+import SDGMathematics
+import SDGCollections
+
 extension UnicodeScalar {
 
     /// `true` if the scalar is decomposable in NFKD, otherwise `false`.

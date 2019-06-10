@@ -12,6 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
+import SDGCollections
+
 extension Collection where Element == UnicodeScalar {
 
     /// Whether or not the string‐like collection contains multiple lines.

@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGMathematics
 
 // #example(1, strictInterpolation)
 /// A string that maintains Unicode normalization form NFKD.
