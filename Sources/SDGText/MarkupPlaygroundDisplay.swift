@@ -29,13 +29,13 @@ extension MarkupPlaygroundDisplay {
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    @inlinable public var playgroundDescription: Any {
+    public var playgroundDescription: Any {
         return playgroundDescriptionMarkup()
     }
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         return String(playgroundDescriptionMarkup().rawTextApproximation())
     }
 }

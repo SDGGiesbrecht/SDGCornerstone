@@ -24,7 +24,7 @@ extension SemanticMarkup {
 
         // MARK: - StrictStringInterpolationProtocol
 
-        @inlinable public init(string: StrictString) {
+        public init(string: StrictString) {
             self.string = string
         }
 
@@ -32,11 +32,11 @@ extension SemanticMarkup {
 
         // MARK: - StringInterpolationProtocol
 
-        @inlinable public mutating func appendInterpolation(_ markup: SemanticMarkup) {
+        public mutating func appendInterpolation(_ markup: SemanticMarkup) {
             appendInterpolation(markup.source)
         }
 
-        @inlinable public mutating func appendInterpolation(_ markup: SemanticMarkup.SubSequence) {
+        public mutating func appendInterpolation(_ markup: SemanticMarkup.SubSequence) {
             appendInterpolation(SemanticMarkup(markup).source)
         }
     }
