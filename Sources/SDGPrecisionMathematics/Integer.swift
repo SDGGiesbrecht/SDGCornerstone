@@ -159,7 +159,7 @@ public struct Integer : Addable, CodableViaTextConvertibleNumber, Comparable, Eq
 
     // MARK: - Numeric
 
-    @inlinable public init?<T>(exactly source: T) where T : BinaryInteger {
+    public init?<T>(exactly source: T) where T : BinaryInteger {
         if let whole = WholeNumber(exactly: source) {
             self.init(whole)
             return

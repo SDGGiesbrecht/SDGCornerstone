@@ -143,7 +143,7 @@ public struct WholeNumber : Addable, CodableViaTextConvertibleNumber, Comparable
 
     // MARK: - Numeric
 
-    @inlinable public init?<T>(exactly source: T) where T : BinaryInteger {
+    public init?<T>(exactly source: T) where T : BinaryInteger {
         guard let whole = UIntMax(exactly: source) else {
             return nil // Source could be a negative integer.
         }

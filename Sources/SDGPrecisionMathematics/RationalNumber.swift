@@ -178,7 +178,7 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
 
     // MARK: - Numeric
 
-    @inlinable public init?<T>(exactly source: T) where T : BinaryInteger {
+    public init?<T>(exactly source: T) where T : BinaryInteger {
         guard let integer = Integer(exactly: source) else {
             unreachable()
         }
