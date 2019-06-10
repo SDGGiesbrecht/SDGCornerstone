@@ -17,6 +17,8 @@ import SDGCollections
 @testable import SDGLocalization
 import SDGCornerstoneLocalizations
 
+import XCTest
+
 import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities

@@ -13,6 +13,9 @@
  */
 
 @testable import SDGText
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class SDGTextInternalTests : TestCase {

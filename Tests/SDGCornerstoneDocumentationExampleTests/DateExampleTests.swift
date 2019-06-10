@@ -12,7 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGCornerstone
+import SDGMathematics
+import SDGText
+import SDGCalendar
+
+import XCTest
+
 import SDGXCTestUtilities
 import SDGPersistenceTestUtilities
 

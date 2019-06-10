@@ -14,6 +14,7 @@
 
 import SDGMathematics
 
+import SDGTesting
 import SDGLogicTestUtilities
 import SDGPersistenceTestUtilities
 

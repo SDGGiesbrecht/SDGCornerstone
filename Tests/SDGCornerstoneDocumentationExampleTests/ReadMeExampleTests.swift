@@ -12,7 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGCornerstone
+import SDGText
+import SDGPersistence
+import SDGLocalization
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class ReadMeExampleTests : TestCase {

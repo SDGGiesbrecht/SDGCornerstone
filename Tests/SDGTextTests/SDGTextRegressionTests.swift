@@ -14,6 +14,9 @@
 
 import SDGCollections
 import SDGText
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class SDGTextRegressionTests : TestCase {

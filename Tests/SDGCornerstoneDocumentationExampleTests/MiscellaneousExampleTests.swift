@@ -16,7 +16,9 @@ import Dispatch
 
 import SDGMathematics
 import SDGCollections
-import SDGCornerstone
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class MiscellaneousExampleTests : TestCase {
