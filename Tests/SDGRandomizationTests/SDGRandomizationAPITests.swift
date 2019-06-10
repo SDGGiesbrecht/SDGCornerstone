@@ -12,11 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGRandomizationTestUtilities
-import SDGXCTestUtilities
-
 import SDGLogic
 import SDGMathematics
+import SDGRandomization
+
+import XCTest
+
+import SDGRandomizationTestUtilities
+import SDGXCTestUtilities
 
 class SDGRandomizationAPITests : TestCase {
 
