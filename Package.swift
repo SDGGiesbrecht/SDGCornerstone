@@ -36,8 +36,6 @@ import PackageDescription
 /// - A simple API for running shell commands on desktop platforms. (`SDGExternalProcess`)
 ///
 /// ...and much more.
-///
-/// Use the entire package together by importing the `SDGCornerstone` product, or pick and choose pieces by importing the various component products.
 let package = Package(
     name: "SDGCornerstone",
     platforms: [
@@ -47,21 +45,6 @@ let package = Package(
         .tvOS(.v11)
     ],
     products: [
-        // The entire package.
-
-        // #documentation(SDGCornerstone)
-        /// A module representing the entire `SDGCornerstone` package. All the other modules can be used from this single import (except test utilities).
-        .library(name: "SDGCornerstone", targets: ["SDGCornerstone"]),
-        // #documentation(SDGCornerstoneTestUtilities)
-        /// A module representing the entire set of test utilities. Most of the other test utility modules can be used from this single import.
-        ///
-        /// Nothing in this module depends on `XCTest`, so it can be used anywhere, including on mobile devices in the release configuration.
-        .library(name: "SDGCornerstoneTestUtilities", targets: ["SDGCornerstoneTestUtilities"]),
-        // #documentation(SDGXCTestUtilities)
-        /// Additional test utilities which require `XCTest`.
-        .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
-
-        // Individual component modules.
 
         // #documentation(SDGControlFlow)
         /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
@@ -142,53 +125,13 @@ let package = Package(
 
         // #documentation(SDGTesting)
         /// Miscellaneous test utilities.
-        .library(name: "SDGTesting", targets: ["SDGTesting"])
+        .library(name: "SDGTesting", targets: ["SDGTesting"]),
+
+        // #documentation(SDGXCTestUtilities)
+        /// Additional test utilities which require `XCTest`.
+        .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"])
     ],
     targets: [
-        // The entire package.
-
-        // @documentation(SDGCornerstone)
-        /// A module representing the entire `SDGCornerstone` package. All the other modules can be used from this single import (except test utilities).
-        .target(name: "SDGCornerstone", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGBinaryData",
-            "SDGText",
-            "SDGPersistence",
-            "SDGRandomization",
-            "SDGLocalization",
-            "SDGGeometry",
-            "SDGCalendar",
-            "SDGPrecisionMathematics",
-            "SDGConcurrency",
-            "SDGExternalProcess"
-            ]),
-        // @documentation(SDGCornerstoneTestUtilities)
-        /// A module representing the entire set of test utilities. Most of the other test utility modules can be used from this single import.
-        ///
-        /// Nothing in this module depends on `XCTest`, so it can be used anywhere, including on mobile devices in the release configuration.
-        .target(name: "SDGCornerstoneTestUtilities", dependencies: [
-            "SDGLogicTestUtilities",
-            "SDGMathematicsTestUtilities",
-            "SDGCollectionsTestUtilities",
-            "SDGPersistenceTestUtilities",
-            "SDGRandomizationTestUtilities",
-            "SDGLocalizationTestUtilities",
-
-            "SDGCornerstone",
-            "SDGTesting"
-            ]),
-        // @documentation(SDGXCTestUtilities)
-        /// Additional test utilities which require `XCTest`.
-        .target(name: "SDGXCTestUtilities", dependencies: [
-            "SDGTesting",
-            "SDGLogic",
-            "SDGPersistence"
-            ]),
-
-        // Individual component modules.
 
         // @documentation(SDGControlFlow)
         /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
@@ -360,6 +303,14 @@ let package = Package(
             "SDGMathematics",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
+            ]),
+
+        // @documentation(SDGXCTestUtilities)
+        /// Additional test utilities which require `XCTest`.
+        .target(name: "SDGXCTestUtilities", dependencies: [
+            "SDGTesting",
+            "SDGLogic",
+            "SDGPersistence"
             ]),
 
         // Internal utilities.
