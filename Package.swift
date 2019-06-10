@@ -154,6 +154,7 @@ let package = Package(
         /// Utilities for testing code which uses `SDGMathematics`.
         .target(name: "SDGMathematicsTestUtilities", dependencies: [
             "SDGMathematics", "SDGTesting",
+            "SDGCollections",
             "SDGLogicTestUtilities",
             "SDGCollectionsTestUtilities",
             "SDGPersistenceTestUtilities"
@@ -177,6 +178,7 @@ let package = Package(
         /// Extensions related to raw binary data.
         .target(name: "SDGBinaryData", dependencies: [
             "SDGControlFlow",
+            "SDGLogic",
             "SDGMathematics",
             "SDGCollections"
             ]),
@@ -207,8 +209,8 @@ let package = Package(
             "SDGPersistence", "SDGTesting",
             "SDGControlFlow",
             "SDGLogic",
-            "SDGText",
             "SDGCollections",
+            "SDGText",
             "SDGLocalization",
             "SDGCalendar",
             "SDGCornerstoneLocalizations"
