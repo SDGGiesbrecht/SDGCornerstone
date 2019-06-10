@@ -28,33 +28,33 @@ public struct Preference : Equatable, TransparentWrapper {
     /// The returned instance can be used with any API which expects a `Preference` type, but it does not belong to a `PreferenceSet` and will never be saved to the disk.
     ///
     /// (Real preferences are obtained from `PreferenceSet.subscript(key:)`.)
-    @inlinable public static func mock() -> Preference {
+    public static func mock() -> Preference {
         return Preference(propertyListObject: nil)
     }
 
-    @inlinable internal init(propertyListObject: NSObject?) {
+    internal init(propertyListObject: NSObject?) {
         self.propertyListObject = propertyListObject
     }
 
     // MARK: - Properties
 
-    @usableFromInline internal var propertyListObject: NSObject? {
+    internal var propertyListObject: NSObject? {
         didSet {
             cache = Cache()
         }
     }
-    @usableFromInline internal class Cache {
+    private class Cache {
         fileprivate init() {}
-        @usableFromInline internal var types: [ObjectIdentifier: Any?] = [:]
+        fileprivate var types: [ObjectIdentifier: Any?] = [:]
     }
-    @usableFromInline internal var cache: Cache = Cache()
+    private var cache: Cache = Cache()
 
     // MARK: - Usage
 
-    @inlinable internal func cast(_ instance: Any) -> NSObject {
+    private func cast(_ instance: Any) -> NSObject {
         return Preference.cast(instance)
     }
-    @inlinable internal static func cast(_ instance: Any) -> NSObject {
+    internal static func cast(_ instance: Any) -> NSObject {
         if let object = instance as? NSObject {
             return object
         } else if let dictionary = instance as? [String: Any] { // @exempt(from: tests) Unreachable where the Objective‐C runtime is available.
@@ -100,7 +100,7 @@ public struct Preference : Equatable, TransparentWrapper {
         }
     }
 
-    @inlinable internal func encodeAndDeserialize<T>(_ value: [T]) throws -> Any where T : Encodable {
+    private func encodeAndDeserialize<T>(_ value: [T]) throws -> Any where T : Encodable {
         #if os(Linux)
         // #workaround(Swift 5.0, Linux gains PropertyListEncoder in Swift 5.1.)
         return try JSONSerialization.jsonObject(with: JSONEncoder().encode(value), options: [])
@@ -108,7 +108,7 @@ public struct Preference : Equatable, TransparentWrapper {
         return try PropertyListSerialization.propertyList(from: PropertyListEncoder().encode(value), options: [], format: nil)
         #endif
     }
-    @inlinable internal func serializeAndDecode<T>(_ array: NSArray, as type: T.Type) throws -> [T] where T : Decodable {
+    private func serializeAndDecode<T>(_ array: NSArray, as type: T.Type) throws -> [T] where T : Decodable {
         #if os(Linux)
         // #workaround(Swift 5.0, Linux gains PropertyListEncoder in Swift 5.1.)
         return try JSONDecoder().decode([T].self, from: JSONSerialization.data(withJSONObject: array, options: []))
@@ -122,7 +122,7 @@ public struct Preference : Equatable, TransparentWrapper {
     ///
     /// - Parameters:
     ///     - value: The new preference value, either an instance of a `Codable` type or `nil`.
-    @inlinable public mutating func set<T>(to value: T?) where T : Encodable {
+    public mutating func set<T>(to value: T?) where T : Encodable {
 
         guard let theValue = value else {
             // Setting to nil
@@ -148,7 +148,7 @@ public struct Preference : Equatable, TransparentWrapper {
     ///
     /// - Parameters:
     ///     - value: The new preference value, either an instance of a `Codable` type or `nil`.
-    @inlinable public mutating func set(to value: NilLiteral) {
+    public mutating func set(to value: NilLiteral) {
         propertyListObject = nil
     }
 
@@ -158,7 +158,7 @@ public struct Preference : Equatable, TransparentWrapper {
     ///
     /// - Parameters:
     ///     - type: The type to cast to.
-    @inlinable public func `as`<T>(_ type: T.Type) -> T? where T : Decodable {
+    public func `as`<T>(_ type: T.Type) -> T? where T : Decodable {
         guard let object = propertyListObject else {
             // Value is nil.
             return nil
@@ -180,13 +180,13 @@ public struct Preference : Equatable, TransparentWrapper {
 
     // MARK: - Equatable
 
-    @inlinable public static func == (precedingValue: Preference, followingValue: Preference) -> Bool {
+    public static func == (precedingValue: Preference, followingValue: Preference) -> Bool {
         return precedingValue.propertyListObject == followingValue.propertyListObject
     }
 
     // MARK: - TransparentWrapper
 
-    @inlinable public var wrappedInstance: Any {
+    public var wrappedInstance: Any {
         return propertyListObject as Any
     }
 }
