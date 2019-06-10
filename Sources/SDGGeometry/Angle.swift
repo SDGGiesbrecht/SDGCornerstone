@@ -28,7 +28,7 @@ extension Angle : CustomPlaygroundDisplayConvertible {
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    @inlinable public var playgroundDescription: Any {
+    public var playgroundDescription: Any {
         #if canImport(CoreGraphics) && (canImport(AppKit) || canImport(UIKit))
 
         let floatAngle: Angle<CGFloat> = CGFloat(self.inRadians.floatingPointApproximation).radians

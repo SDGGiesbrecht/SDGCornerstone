@@ -21,7 +21,7 @@ public protocol ICalendarComponent {
 
 extension ICalendarComponent where Self : ISOCalendarComponent {
 
-    @inlinable public func inICalendarFormat() -> StrictString {
+    public func inICalendarFormat() -> StrictString {
         return inISOFormat()
     }
 }

@@ -23,7 +23,7 @@ extension RationalArithmetic {
     ///     - maximumDecimalPlaces: The maximum number of decimal places.
     ///     - radixCharacter: The character to use to represent the radix.
     ///     - thousandsSeparator: The thousands separator. (Space by default.)
-    @inlinable public func inDigits(maximumDecimalPlaces: Int, radixCharacter: UnicodeScalar, thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+    public func inDigits(maximumDecimalPlaces: Int, radixCharacter: UnicodeScalar, thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         let digitSet = egyptianDigits
 
         let radix = self.radix(for: digitSet)

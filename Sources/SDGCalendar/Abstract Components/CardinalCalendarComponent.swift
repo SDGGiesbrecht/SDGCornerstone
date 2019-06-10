@@ -19,19 +19,19 @@ extension CardinalCalendarComponent {
 
     // MARK: - ConsistentlyOrderedCalendarComponent
 
-    @inlinable public init(numberAlreadyElapsed: RawValue) {
+    public init(numberAlreadyElapsed: RawValue) {
         self.init(numberAlreadyElapsed)
     }
 
-    @inlinable public init(ordinal: RawValue) {
+    public init(ordinal: RawValue) {
         self.init(ordinal − (1 as Vector))
     }
 
-    @inlinable public var numberAlreadyElapsed: RawValue {
+    public var numberAlreadyElapsed: RawValue {
         return rawValue
     }
 
-    @inlinable public var ordinal: RawValue {
+    public var ordinal: RawValue {
         return rawValue + (1 as Vector)
     }
 }

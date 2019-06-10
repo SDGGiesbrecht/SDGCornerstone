@@ -18,7 +18,7 @@
 ///     - type: The type.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testRealArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : FloatingPoint, T : RealArithmetic {
+public func testRealArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : FloatingPoint, T : RealArithmetic {
 
     testRationalArithmeticConformance(of: T.self, file: file, line: line)
 

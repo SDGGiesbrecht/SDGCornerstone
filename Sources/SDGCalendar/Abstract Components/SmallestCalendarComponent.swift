@@ -20,7 +20,7 @@ extension SmallestCalendarComponent {
 
     // MARK: - ExpressibleByFloatLiteral
 
-    @inlinable public init(floatLiteral: FloatMax) {
+    public init(floatLiteral: FloatMax) {
         self.init(RawValue(floatLiteral))
     }
 }

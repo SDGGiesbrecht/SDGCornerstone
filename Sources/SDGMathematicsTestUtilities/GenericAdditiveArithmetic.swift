@@ -23,7 +23,7 @@ import SDGPersistenceTestUtilities
 ///     - sum: The expected sum.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testGenericAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : GenericAdditiveArithmetic {
+public func testGenericAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, file: StaticString = #file, line: UInt = #line) where T : GenericAdditiveArithmetic {
     testHashableConformance(differingInstances: (augend, sum), file: file, line: line)
     testSubtractableConformance(minuend: sum, subtrahend: addend, difference: augend, file: file, line: line)
     testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)

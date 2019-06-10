@@ -23,7 +23,7 @@
 ///     - exclusiveOr: The expected result of a bitwise exclusive “or” operation.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testBitFieldConformance<F>(start: F, not: F, other: F, and: F, or: F, exclusiveOr: F, file: StaticString = #file, line: UInt = #line) where F : BitField {
+public func testBitFieldConformance<F>(start: F, not: F, other: F, and: F, or: F, exclusiveOr: F, file: StaticString = #file, line: UInt = #line) where F : BitField {
     test(method: (F.bitwiseNot, "bitwiseNot"), of: start, returns: not, file: file, line: line)
     test(mutatingMethod: ({ $0.formBitwiseNot() }, "formBitwiseNot"), of: start, resultsIn: not, file: file, line: line)
     test(method: (F.bitwiseAnd, "bitwiseAnd"), of: start, with: other, returns: and, file: file, line: line)

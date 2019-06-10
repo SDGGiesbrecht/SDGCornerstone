@@ -18,11 +18,11 @@ extension StrictString : FileConvertible {
 
     // MARK: - FileConvertible
 
-    @inlinable public init(file: Data, origin: URL?) throws {
+    public init(file: Data, origin: URL?) throws {
         self.init(try String(file: file, origin: origin))
     }
 
-    @inlinable public var file: Data {
+    public var file: Data {
         return String(self).file
     }
 }

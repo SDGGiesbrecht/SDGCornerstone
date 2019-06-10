@@ -42,7 +42,7 @@ public struct PatternMatch<Searched : SearchableCollection> {
     ///
     /// - Parameters:
     ///     - otherCollection: The other collection.
-    public func `in`<C>(_ otherCollection: C) -> PatternMatch<C> where C : SearchableCollection, C.Index == Searched.Index {
+    @inlinable public func `in`<C>(_ otherCollection: C) -> PatternMatch<C> where C : SearchableCollection, C.Index == Searched.Index {
         return PatternMatch<C>(range: range, in: otherCollection)
     }
 }

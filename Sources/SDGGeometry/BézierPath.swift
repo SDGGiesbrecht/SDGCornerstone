@@ -36,7 +36,7 @@ extension BézierPath {
     ///
     /// - Parameters:
     ///     - point: The target point.
-    @inlinable public func line(to point: CGPoint) {
+    public func line(to point: CGPoint) {
         addLine(to: point)
     }
     #endif
@@ -49,7 +49,7 @@ extension BézierPath {
     ///     - startAngle: The starting angle of the arc, measured in degrees counterclockwise from the x‐axis.
     ///     - endAngle: The end angle of the arc, measured in degrees counterclockwise from the x‐axis.
     ///     - clockwise: `true` the arc should be drawn in a clockwise direction; otherwise `false` to draw the arc in a counterclockwise direction.
-    @inlinable public func appendArc(withCentre centre: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) {
+    public func appendArc(withCentre centre: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) {
         #if canImport(AppKit)
         return appendArc(withCenter: centre, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
         #elseif canImport(UIKit)

@@ -15,12 +15,12 @@
 extension UnicodeScalar {
 
     /// `true` if the scalar is decomposable in NFKD, otherwise `false`.
-    @inlinable public var isDecomposableInNFKD: Bool {
+    public var isDecomposableInNFKD: Bool {
         return ¬StrictString(self).elementsEqual([self])
     }
 
     /// The hexadecimal code for the character.
-    @inlinable public var hexadecimalCode: String {
+    public var hexadecimalCode: String {
         var result = String(value, radix: 16, uppercase: true)
         result.scalars.fill(to: 4, with: "0", from: .start)
         return result

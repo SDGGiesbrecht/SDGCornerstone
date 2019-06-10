@@ -19,7 +19,7 @@ extension StrictString {
 
         // MARK: - StrictStringInterpolationProtocol
 
-        @inlinable public init(string: StrictString) {
+        public init(string: StrictString) {
             self.string = string
         }
 

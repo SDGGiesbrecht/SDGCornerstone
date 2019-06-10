@@ -57,7 +57,7 @@ public final class LiteralPattern<Element : Equatable> : Pattern<Element>, Custo
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         return String(describing: literal)
     }
 }

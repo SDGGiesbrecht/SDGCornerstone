@@ -26,7 +26,7 @@ public struct UserFacing<Element, Localization : SDGLocalization.Localization> :
     /// - Parameters:
     ///     - localize: A closure that resolves the element based on a requested localization.
     ///     - localization: The requested localization.
-    @inlinable public init(_ localize: @escaping (_ localization: Localization) -> Element) {
+    public init(_ localize: @escaping (_ localization: Localization) -> Element) {
         self.dynamic = UserFacingDynamic<Element, Localization, Void>({ (localization, _) in
             return localize(localization)
         })
@@ -40,7 +40,7 @@ public struct UserFacing<Element, Localization : SDGLocalization.Localization> :
     // MARK: - Output
 
     /// Returns the resolved element for the current localization.
-    @inlinable public func resolved() -> Element {
+    public func resolved() -> Element {
         return dynamic.resolved(using: ())
     }
 
@@ -48,13 +48,13 @@ public struct UserFacing<Element, Localization : SDGLocalization.Localization> :
     ///
     /// - Parameters:
     ///     - localization: The target localization.
-    @inlinable public func resolved(for localization: Localization) -> Element {
+    public func resolved(for localization: Localization) -> Element {
         return dynamic.resolved(for: localization, using: ())
     }
 
     // MARK: - TransparentWrapper
 
-    @inlinable public var wrappedInstance: Any {
+    public var wrappedInstance: Any {
         return resolved()
     }
 }

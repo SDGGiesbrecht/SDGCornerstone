@@ -25,7 +25,7 @@
 ///     - includingNegatives: Whether or not to test negative numbers.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testNumericAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : NumericAdditiveArithmetic {
+public func testNumericAdditiveArithmeticConformance<T>(augend: T, addend: T, sum: T, includingNegatives: Bool, file: StaticString = #file, line: UInt = #line) where T : NumericAdditiveArithmetic {
 
     testGenericAdditiveArithmeticConformance(augend: augend, addend: addend, sum: sum, file: file, line: line)
     testComparableConformance(less: augend, greater: sum, file: file, line: line)

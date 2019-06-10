@@ -23,7 +23,7 @@
 ///     - disjoint: Another set which is disjoint with `set`.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testFiniteSetConformance<T>(of set: T, member: T.Element, nonmember: T.Element, superset: T, overlapping: T, disjoint: T, file: StaticString = #file, line: UInt = #line) where T : FiniteSet, T.Element : Hashable {
+public func testFiniteSetConformance<T>(of set: T, member: T.Element, nonmember: T.Element, superset: T, overlapping: T, disjoint: T, file: StaticString = #file, line: UInt = #line) where T : FiniteSet, T.Element : Hashable {
 
     testComparableSetConformance(of: set, member: member, nonmember: nonmember, superset: superset, overlapping: overlapping, disjoint: disjoint, file: file, line: line)
 

@@ -31,7 +31,7 @@ import SDGCornerstoneLocalizations
 ///     - file: The file name where the call occurs. Provided.
 ///     - line: The line number where the call occurs. Provided.
 ///     - test: The closure to test.
-@inlinable public func limit(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
+public func limit(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
 
     let iterations = 10
 

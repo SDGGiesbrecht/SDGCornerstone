@@ -39,7 +39,7 @@ public enum Casing {
     ///
     /// - Parameters:
     ///     - compileTimeString: The string to transform.
-    @inlinable public func apply(to compileTimeString: StaticString) -> StrictString {
+    public func apply(to compileTimeString: StaticString) -> StrictString {
         var string = StrictString(compileTimeString)
         assert(¬string.contains(where: { $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters }), UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
             switch localization { // @exempt(from: tests)

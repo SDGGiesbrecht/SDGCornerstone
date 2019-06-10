@@ -16,11 +16,11 @@ extension Data : FileConvertible {
 
     // MARK: - FileConvertible
 
-    @inlinable public init(file: Data, origin: URL?) throws {
+    public init(file: Data, origin: URL?) throws {
         self = file
     }
 
-    @inlinable public var file: Data {
+    public var file: Data {
         return self
     }
 }

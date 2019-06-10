@@ -21,10 +21,10 @@ import SDGControlFlow
 // @example(markupEncoding)
 private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
 
-@usableFromInline internal let beginSuperscript: UnicodeScalar = "\u{107000}"
-@usableFromInline internal let endSuperscript: UnicodeScalar = "\u{107001}"
-@usableFromInline internal let beginSubscript: UnicodeScalar = "\u{107002}"
-@usableFromInline internal let endSubscript: UnicodeScalar = "\u{107003}"
+private let beginSuperscript: UnicodeScalar = "\u{107000}"
+private let endSuperscript: UnicodeScalar = "\u{107001}"
+private let beginSubscript: UnicodeScalar = "\u{107002}"
+private let endSubscript: UnicodeScalar = "\u{107003}"
 // @endExample
 
 // #example(1, markupEncoding)
@@ -35,22 +35,22 @@ private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{107
 /// ```swift
 /// private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
 ///
-/// @usableFromInline internal let beginSuperscript: UnicodeScalar = "\u{107000}"
-/// @usableFromInline internal let endSuperscript: UnicodeScalar = "\u{107001}"
-/// @usableFromInline internal let beginSubscript: UnicodeScalar = "\u{107002}"
-/// @usableFromInline internal let endSubscript: UnicodeScalar = "\u{107003}"
+/// private let beginSuperscript: UnicodeScalar = "\u{107000}"
+/// private let endSuperscript: UnicodeScalar = "\u{107001}"
+/// private let beginSubscript: UnicodeScalar = "\u{107002}"
+/// private let endSubscript: UnicodeScalar = "\u{107003}"
 /// ```
 public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Decodable, Encodable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, SearchableBidirectionalCollection, TextualPlaygroundDisplay {
 
     // MARK: - Initialization
 
     /// Creates semantic markup from raw text.
-    @inlinable public init(_ rawText: StrictString) {
+    public init(_ rawText: StrictString) {
         source = rawText
     }
 
     /// Creates semantic markup from raw text.
-    @inlinable public init(_ rawText: String) {
+    public init(_ rawText: String) {
         source = StrictString(rawText)
     }
 
@@ -60,7 +60,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
     public var source: StrictString
 
     /// A view of the source as a collection of Unicode scalars.
-    @inlinable public var scalars: StrictString.ScalarView {
+    public var scalars: StrictString.ScalarView {
         get {
             return source.scalars
         }
@@ -70,7 +70,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
     }
 
     /// A view of the source as a collection of extended grapheme clusters.
-    @inlinable public var clusters: StrictString.ClusterView {
+    public var clusters: StrictString.ClusterView {
         get {
             return source.clusters
         }
@@ -80,7 +80,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
     }
 
     /// A view of the source as a collection of lines.
-    @inlinable public var lines: LineView<StrictString> {
+    public var lines: LineView<StrictString> {
         get {
             return source.lines
         }
@@ -92,24 +92,24 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
     // MARK: - Mutation
 
     /// Superscripts the string.
-    @inlinable public mutating func superscript() {
+    public mutating func superscript() {
         source.prepend(beginSuperscript)
         source.append(endSuperscript)
     }
 
     /// Returns a string formed by superscripting the instance.
-    @inlinable public func superscripted() -> SemanticMarkup {
+    public func superscripted() -> SemanticMarkup {
         return nonmutatingVariant(of: { $0.superscript() }, on: self)
     }
 
     /// Subscripts the string.
-    @inlinable public mutating func `subscript`() {
+    public mutating func `subscript`() {
         source.prepend(beginSubscript)
         source.append(endSubscript)
     }
 
     /// Returns a string formed by subscripting the instance.
-    @inlinable public func subscripted() -> SemanticMarkup {
+    public func subscripted() -> SemanticMarkup {
         return nonmutatingVariant(of: { $0.subscript() }, on: self)
     }
 
@@ -188,23 +188,23 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // MARK: - Addable
 
-    @inlinable public static func += (precedingValue: inout SemanticMarkup, followingValue: SemanticMarkup) {
+    public static func += (precedingValue: inout SemanticMarkup, followingValue: SemanticMarkup) {
         precedingValue.source += followingValue.source
     }
 
     // MARK: - BidirectionalCollection
 
-    @inlinable public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
+    public func index(before i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(before: i)
     }
 
     // MARK: - Codable
 
-    @inlinable public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: StrictString.self, convert: { SemanticMarkup($0) })
     }
 
-    @inlinable public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: source)
     }
 
@@ -212,25 +212,25 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     public typealias Element = Unicode.Scalar
 
-    @inlinable public var startIndex: String.ScalarView.Index {
+    public var startIndex: String.ScalarView.Index {
         return source.startIndex
     }
 
-    @inlinable public var endIndex: String.ScalarView.Index {
+    public var endIndex: String.ScalarView.Index {
         return source.endIndex
     }
 
-    @inlinable public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
+    public func index(after i: String.ScalarView.Index) -> String.ScalarView.Index {
         return source.index(after: i)
     }
 
-    @inlinable public subscript(position: String.ScalarView.Index) -> Unicode.Scalar {
+    public subscript(position: String.ScalarView.Index) -> Unicode.Scalar {
         return source[position]
     }
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    @inlinable public var playgroundDescription: Any {
+    public var playgroundDescription: Any {
         #if canImport(AppKit) || canImport(UIKit)
             return richText(font: Font.systemFont(ofSize: Font.systemSize))
         #else
@@ -240,41 +240,41 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         return String(rawTextApproximation())
     }
 
     // MARK: - ExpressibleByStringInterpolation
 
-    @inlinable public init(stringInterpolation: StringInterpolation) {
+    public init(stringInterpolation: StringInterpolation) {
         self = stringInterpolation.semanticMarkup
     }
 
     // MARK: - ExpressibleByStringLiteral
 
-    @inlinable public init(stringLiteral: String) {
+    public init(stringLiteral: String) {
         self.init(StrictString(stringLiteral))
     }
 
     // MARK: - RangeReplaceableCollection
 
-    @inlinable public init() {
+    public init() {
         source = ""
     }
 
-    @inlinable public init<S : Sequence>(_ elements: S) where S.Element == Unicode.Scalar {
+    public init<S : Sequence>(_ elements: S) where S.Element == Unicode.Scalar {
         source = StrictString(elements)
     }
 
-    @inlinable public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == Unicode.Scalar {
+    public mutating func append<S : Sequence>(contentsOf newElements: S) where S.Element == Unicode.Scalar {
         source.append(contentsOf: newElements)
     }
 
-    @inlinable public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == Unicode.Scalar {
+    public mutating func insert<S : Sequence>(contentsOf newElements: S, at i: String.ScalarView.Index) where S.Element == Unicode.Scalar {
         source.insert(contentsOf: newElements, at: i)
     }
 
-    @inlinable public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == Unicode.Scalar {
+    public mutating func replaceSubrange<S : Sequence>(_ subrange: Range<String.ScalarView.Index>, with newElements: S) where S.Element == Unicode.Scalar {
         source.replaceSubrange(subrange, with: newElements)
     }
 }

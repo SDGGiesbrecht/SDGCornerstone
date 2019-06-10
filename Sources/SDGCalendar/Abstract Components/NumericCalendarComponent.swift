@@ -19,11 +19,11 @@ extension NumericCalendarComponent {
 
     // MARK: - PointProtocol
 
-    @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
+    public static func += (precedingValue: inout Self, followingValue: Vector) {
         precedingValue = Self(precedingValue.rawValue + followingValue)
     }
 
-    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    public static func − (precedingValue: Self, followingValue: Self) -> Vector {
         return precedingValue.rawValue − followingValue.rawValue
     }
 }

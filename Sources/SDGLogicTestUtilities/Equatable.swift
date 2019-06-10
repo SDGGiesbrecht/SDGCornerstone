@@ -20,7 +20,7 @@ import Foundation
 ///     - differingInstances: Two instances expected to be inequal.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testEquatableConformance<T>(differingInstances: (T, T), file: StaticString = #file, line: UInt = #line) where T : Equatable {
+public func testEquatableConformance<T>(differingInstances: (T, T), file: StaticString = #file, line: UInt = #line) where T : Equatable {
     test(operator: (==, "=="), on: (differingInstances.0, differingInstances.0), returns: true, file: file, line: line)
     test(operator: (==, "=="), on: differingInstances, returns: false, file: file, line: line)
 }

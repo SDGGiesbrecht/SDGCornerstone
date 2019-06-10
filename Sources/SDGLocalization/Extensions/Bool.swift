@@ -15,7 +15,7 @@
 extension Bool {
 
     /// Returns “✓” or “✗”.
-    @inlinable public func checkOrX() -> StrictString {
+    public func checkOrX() -> StrictString {
         switch self {
         case true:
             return "✓"
@@ -28,7 +28,7 @@ extension Bool {
     ///
     /// - Parameters:
     ///     - casing: The casing to use.
-    @inlinable public func trueOrFalse(_ casing: EnglishCasing) -> StrictString {
+    public func trueOrFalse(_ casing: EnglishCasing) -> StrictString {
         switch self {
         case true:
             return casing.apply(to: "true")
@@ -41,7 +41,7 @@ extension Bool {
     ///
     /// - Parameters:
     ///     - casing: The casing to use.
-    @inlinable public func yesOrNo(_ casing: EnglishCasing) -> StrictString {
+    public func yesOrNo(_ casing: EnglishCasing) -> StrictString {
         switch self {
         case true:
             return casing.apply(to: "yes")

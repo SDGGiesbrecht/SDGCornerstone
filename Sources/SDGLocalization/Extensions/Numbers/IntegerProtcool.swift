@@ -21,22 +21,22 @@ extension IntegerProtocol {
     ///
     /// - Parameters:
     ///     - thousandsSeparator: The character to use as a thousands separator. (Space by default.)
-    @inlinable public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
+    public func inDigits(thousandsSeparator: UnicodeScalar = " ") -> StrictString {
         return integralDigits(thousandsSeparator: thousandsSeparator)
     }
 
     // #documentation(SDGCornerstone.WholeNumberProtocol.abbreviatedEnglishOrdinal())
     /// Returns the ordinal in its abbreviated English form. (“1st”, “2nd”, “3rd”, etc.)
-    @inlinable public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
+    public func abbreviatedEnglishOrdinal() -> SemanticMarkup {
         return generateAbbreviatedEnglishOrdinal()
     }
 
-    @inlinable public func _verkürzteDeutscheOrdnungszahl() -> StrictString {
+    public func _verkürzteDeutscheOrdnungszahl() -> StrictString {
         // Public for SDGCalendar.
         return verkürzteDeutscheOrdnungszahlErzeugen()
     }
 
-    @inlinable public func _ordinalFrançaisAbrégé(genre: _GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
+    public func _ordinalFrançaisAbrégé(genre: _GenreGrammatical, nombre: GrammaticalNumber) -> SemanticMarkup {
         return générerOrdinalFrançaisAbrégé(genre: genre, nombre: nombre)
     }
 
@@ -45,16 +45,16 @@ extension IntegerProtocol {
     ///
     /// - Parameters:
     ///     - lowercase: Whether the numeral should be in lowercase. (`false` by default.)
-    @inlinable public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
+    public func inRomanNumerals(lowercase: Bool = false) -> StrictString {
         return romanNumerals(lowercase: lowercase)
     }
 
-    @inlinable public func _σεΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
+    public func _σεΕλληνικούςΑριθμούς(μικράΓράμματα: Bool = false, κεραία: Bool = true) -> StrictString {
         // Public for SDGCalendar
         return ελληνικοίΑριθμοί(μικράΓράμματα: μικράΓράμματα, κεραία: κεραία)
     }
 
-    @inlinable public func _בספרות־עבריות(גרשיים: Bool = true) -> StrictString {
+    public func _בספרות־עבריות(גרשיים: Bool = true) -> StrictString {
         // Public for SDGCalendar
         return ספרות־עבריות(גרשיים: גרשיים)
     }

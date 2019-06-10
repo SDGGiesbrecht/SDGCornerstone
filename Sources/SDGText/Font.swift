@@ -33,7 +33,7 @@ public typealias Font = UIFont
 extension Font {
 
     /// Returns the size of the standard system font.
-    public class var systemSize: CGFloat {
+    public static var systemSize: CGFloat {
         #if os(watchOS)
             return 16 // From https://developer.apple.com/watchos/human-interface-guidelines/visual-design/typography/.
         #elseif os(tvOS)

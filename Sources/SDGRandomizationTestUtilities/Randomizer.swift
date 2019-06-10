@@ -18,7 +18,7 @@
 ///     - randomizer: A randomizer to test.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testRandomNumberGeneratorConformance<T>(of randomizer: T, file: StaticString = #file, line: UInt = #line) where T : RandomNumberGenerator {
+public func testRandomNumberGeneratorConformance<T>(of randomizer: T, file: StaticString = #file, line: UInt = #line) where T : RandomNumberGenerator {
 
     let range: ClosedRange<UInt64> = 0 ... 10
 

@@ -27,7 +27,7 @@ import SDGCalendar
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testFileConvertibleConformance<T>(of instance: T, uniqueTestName: StrictString, file: StaticString = #file, line: UInt = #line) where T : Equatable, T : FileConvertible {
+public func testFileConvertibleConformance<T>(of instance: T, uniqueTestName: StrictString, file: StaticString = #file, line: UInt = #line) where T : Equatable, T : FileConvertible {
 
     let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent("FileConvertible").appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
     try? FileManager.default.createDirectory(at: specificationsDirectory, withIntermediateDirectories: true, attributes: nil)

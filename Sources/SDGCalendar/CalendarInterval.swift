@@ -20,7 +20,7 @@ import SDGCornerstoneLocalizations
 private let hebrewPartsPerDay = HebrewHour.hoursPerDay × HebrewPart.partsPerHour
 private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutesPerHour × GregorianSecond.secondsPerMinute
 
-@usableFromInline internal let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
+private let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)
 
 private typealias Measurement = SDGMathematics.Measurement
 /// A time interval.
@@ -34,7 +34,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
     ///
     /// - Parameters:
     ///     - gregorianLeapYearCycles: The number of leap year cycles.
-    @inlinable public init(gregorianLeapYearCycles: Scalar) {
+    public init(gregorianLeapYearCycles: Scalar) {
         self.inGregorianLeapYearCycles = gregorianLeapYearCycles
     }
 
@@ -42,7 +42,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
     ///
     /// - Parameters:
     ///     - hebrewMoons: The number of moons.
-    @inlinable public init(hebrewMoons: Scalar) {
+    public init(hebrewMoons: Scalar) {
         self.inHebrewMoons = hebrewMoons
     }
 
@@ -50,7 +50,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
     ///
     /// - Parameters:
     ///     - weeks: The number of weeks.
-    @inlinable public init(weeks: Scalar) {
+    public init(weeks: Scalar) {
         self.inWeeks = weeks
     }
 
@@ -58,7 +58,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
     ///
     /// - Parameters:
     ///     - days: The number of days.
-    @inlinable public init(days: Scalar) {
+    public init(days: Scalar) {
         self.inDays = days
     }
 
@@ -66,7 +66,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
     ///
     /// - Parameters:
     ///     - hours: The number of hours.
-    @inlinable public init(hours: Scalar) {
+    public init(hours: Scalar) {
         self.inHours = hours
     }
 
@@ -74,7 +74,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
     ///
     /// - Parameters:
     ///     - minutes: The number of minutes.
-    @inlinable public init(minutes: Scalar) {
+    public init(minutes: Scalar) {
         self.inMinutes = minutes
     }
 
@@ -82,7 +82,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
     ///
     /// - Parameters:
     ///     - hebrewParts: The number of parts.
-    @inlinable public init(hebrewParts: Scalar) {
+    public init(hebrewParts: Scalar) {
         self.inHebrewParts = hebrewParts
     }
 
@@ -90,19 +90,19 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
     ///
     /// - Parameters:
     ///     - seconds: The number of seconds.
-    @inlinable public init(seconds: Scalar) {
+    public init(seconds: Scalar) {
         self.inSeconds = seconds
     }
 
     // MARK: - Properties
 
-    @usableFromInline internal var inUnits: Scalar = Scalar.zero
+    private var inUnits: Scalar = Scalar.zero
 
-    @inlinable internal var unitsPerGregorianLeapYearCycle: Scalar {
+    internal var unitsPerGregorianLeapYearCycle: Scalar {
         return unitsPerDay × Scalar(GregorianYear.daysPerLeapYearCycle)
     }
     /// The numeric value in Gregorian leap year cycles.
-    @inlinable public var inGregorianLeapYearCycles: Scalar {
+    public var inGregorianLeapYearCycles: Scalar {
         get {
             return inUnits ÷ unitsPerGregorianLeapYearCycle
         }
@@ -111,11 +111,11 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
         }
     }
 
-    @inlinable internal var unitsPerHebrewMoon: Scalar {
+    internal var unitsPerHebrewMoon: Scalar {
         return Scalar(HebrewMonth.lengthOfMoon.inUnits)
     }
     /// The numeric value in Hebrew moons.
-    @inlinable public var inHebrewMoons: Scalar {
+    public var inHebrewMoons: Scalar {
         get {
             return inUnits ÷ unitsPerHebrewMoon
         }
@@ -124,11 +124,11 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
         }
     }
 
-    @inlinable internal var unitsPerWeek: Scalar {
+    internal var unitsPerWeek: Scalar {
         return unitsPerDay × Scalar(HebrewWeekday.daysPerWeek)
     }
     /// The numeric value in weeks.
-    @inlinable public var inWeeks: Scalar {
+    public var inWeeks: Scalar {
         get {
             return inUnits ÷ unitsPerWeek
         }
@@ -137,11 +137,11 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
         }
     }
 
-    @inlinable internal var unitsPerDay: Scalar {
+    internal var unitsPerDay: Scalar {
         return Scalar(integralUnitsPerDay)
     }
     /// The numeric value in days.
-    @inlinable public var inDays: Scalar {
+    public var inDays: Scalar {
         get {
             return inUnits ÷ unitsPerDay
         }
@@ -150,11 +150,11 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
         }
     }
 
-    @inlinable internal var unitsPerHour: Scalar {
+    internal var unitsPerHour: Scalar {
         return unitsPerDay ÷ Scalar(HebrewHour.hoursPerDay)
     }
     /// The numeric value in hours.
-    @inlinable public var inHours: Scalar {
+    public var inHours: Scalar {
         get {
             return inUnits ÷ unitsPerHour
         }
@@ -163,11 +163,11 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
         }
     }
 
-    @inlinable internal var unitsPerMinute: Scalar {
+    internal var unitsPerMinute: Scalar {
         return unitsPerHour ÷ Scalar(GregorianMinute.minutesPerHour)
     }
     /// The numeric value in minutes.
-    @inlinable public var inMinutes: Scalar {
+    public var inMinutes: Scalar {
         get {
             return inUnits ÷ unitsPerMinute
         }
@@ -176,11 +176,11 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
         }
     }
 
-    @inlinable internal var unitsPerHebrewPart: Scalar {
+    internal var unitsPerHebrewPart: Scalar {
         return unitsPerHour ÷ Scalar(HebrewPart.partsPerHour)
     }
     /// The numeric value in Hebrew parts.
-    @inlinable public var inHebrewParts: Scalar {
+    public var inHebrewParts: Scalar {
         get {
             return inUnits ÷ unitsPerHebrewPart
         }
@@ -189,11 +189,11 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
         }
     }
 
-    @inlinable internal var unitsPerSecond: Scalar {
+    internal var unitsPerSecond: Scalar {
         return unitsPerMinute ÷ Scalar(GregorianSecond.secondsPerMinute)
     }
     /// The numeric value in seconds.
-    @inlinable public var inSeconds: Scalar {
+    public var inSeconds: Scalar {
         get {
             return inUnits ÷ unitsPerSecond
         }
@@ -250,7 +250,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
 
     // MARK: - Decodable
 
-    @inlinable public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let units = try container.decode(Scalar.self)
         let unitsPerDay = try container.decode(Int.self)
@@ -259,7 +259,7 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
 
     // MARK: - Encodable
 
-    @inlinable public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(inUnits)
         try container.encode(integralUnitsPerDay)
@@ -267,11 +267,11 @@ public struct CalendarInterval<Scalar : RationalArithmetic> : Decodable, Encodab
 
     // MARK: - Measurement
 
-    @inlinable public init(rawValue: Scalar) {
+    public init(rawValue: Scalar) {
         inUnits = rawValue
     }
 
-    @inlinable public var rawValue: Scalar {
+    public var rawValue: Scalar {
         get {
             return inUnits
         }

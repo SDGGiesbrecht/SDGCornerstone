@@ -18,7 +18,7 @@
 ///     - type: The type to test.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testIntegralArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : IntegralArithmetic {
+public func testIntegralArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : IntegralArithmetic {
 
     testNegatableConformance(minuend: 61 as T, subtrahend: 23, difference: 38, file: file, line: line)
     testWholeArithmeticConformance(of: T.self, includingNegatives: true, file: file, line: line)

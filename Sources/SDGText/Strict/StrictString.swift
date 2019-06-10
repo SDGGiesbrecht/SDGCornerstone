@@ -122,11 +122,11 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
 
     // MARK: - Codable
 
-    @inlinable public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: description)
     }
 
-    @inlinable public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: String.self, convert: { StrictString($0) })
     }
 

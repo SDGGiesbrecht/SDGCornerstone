@@ -21,46 +21,46 @@ extension Data {
 
         // MARK: - Initialization
 
-        @inlinable internal init(_ data: Data) {
+        internal init(_ data: Data) {
             self.data = data
         }
 
         // MARK: - Properties
 
-        @usableFromInline internal static let bitsPerByte: IntMax = 8
-        @usableFromInline internal var data: Data
+        private static let bitsPerByte: IntMax = 8
+        internal var data: Data
 
         // MARK: - Conversions
 
-        @inlinable internal func byteIndex(_ index: IntMax) -> Data.Index {
+        private func byteIndex(_ index: IntMax) -> Data.Index {
             return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
         }
 
-        @inlinable internal func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
+        private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
             return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
         }
 
         // MARK: - BidirectionalCollection
 
-        @inlinable public func index(before i: IntMax) -> IntMax {
+        public func index(before i: IntMax) -> IntMax {
             return i − 1
         }
 
         // MARK: - Collection
 
-        @usableFromInline internal static let startIndex: IntMax = 0
+        private static let startIndex: IntMax = 0
         public var startIndex: IntMax {
             return Data.BinaryView.startIndex
         }
-        @inlinable public var endIndex: IntMax {
+        public var endIndex: IntMax {
             return IntMax(data.endIndex) × BinaryView.bitsPerByte
         }
 
-        @inlinable public func index(after i: IntMax) -> IntMax {
+        public func index(after i: IntMax) -> IntMax {
             return i + 1
         }
 
-        @inlinable public subscript(position: IntMax) -> Bool {
+        public subscript(position: IntMax) -> Bool {
             get {
                 return data[byteIndex(position)].binary[bitIndex(position)]
             }

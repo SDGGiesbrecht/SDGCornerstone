@@ -23,15 +23,15 @@ extension ConsistentDurationCalendarComponent {
 
     // MARK: - CalendarComponent
 
-    @inlinable public static var meanDuration: CalendarInterval<FloatMax> {
+    public static var meanDuration: CalendarInterval<FloatMax> {
         return duration
     }
 
-    @inlinable public static var minimumDuration: CalendarInterval<FloatMax> {
+    public static var minimumDuration: CalendarInterval<FloatMax> {
         return duration
     }
 
-    @inlinable public static var maximumDuration: CalendarInterval<FloatMax> {
+    public static var maximumDuration: CalendarInterval<FloatMax> {
         return duration
     }
 }

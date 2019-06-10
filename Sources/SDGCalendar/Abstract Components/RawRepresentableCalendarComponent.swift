@@ -47,7 +47,7 @@ extension RawRepresentableCalendarComponent {
     ///
     /// - Parameters:
     ///     - value: The raw value.
-    @inlinable public init(_ value: RawValue) {
+    public init(_ value: RawValue) {
         guard let result = Self(possibleRawValue: value) else {
             preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
                 switch localization {
@@ -63,7 +63,7 @@ extension RawRepresentableCalendarComponent {
     ///
     /// - Parameters:
     ///     - value: The raw value.
-    @inlinable public init?(possibleRawValue value: RawValue) {
+    public init?(possibleRawValue value: RawValue) {
         if let range = Self.validRange,
             value ∉ range {
             return nil
@@ -73,7 +73,7 @@ extension RawRepresentableCalendarComponent {
 
     // MARK: - ExpressibleByIntegerLiteral
 
-    @inlinable public init(integerLiteral: UIntMax) {
+    public init(integerLiteral: UIntMax) {
         self.init(RawValue(integerLiteral))
     }
 }
@@ -87,11 +87,11 @@ public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCa
 
 extension CodableViaRawRepresentableCalendarComponent {
 
-    @inlinable public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: rawValue)
     }
 
-    @inlinable public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: RawValue.self, convert: { Self(possibleRawValue: $0) })
     }
 }

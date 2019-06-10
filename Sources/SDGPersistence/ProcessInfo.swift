@@ -49,7 +49,7 @@ extension ProcessInfo {
     }
 
     /// The application domain.
-    @inlinable public static var applicationDomain: String {
+    public static var applicationDomain: String {
         return applicationIdentifier
     }
 }

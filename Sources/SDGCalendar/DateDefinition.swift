@@ -101,14 +101,14 @@ public protocol DateDefinition : Decodable, Encodable {
 
 extension DateDefinition {
 
-    @inlinable public func _encode() throws -> StrictString {
+    public func _encode() throws -> StrictString {
         return try StrictString(file: try JSONEncoder().encode([self]), origin: nil)
     }
     internal func encode() throws -> StrictString {
         return try _encode()
     }
 
-    @inlinable public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
+    public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
         guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {
 
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath, debugDescription: String(UserFacing<StrictString, APILocalization>({ localization in

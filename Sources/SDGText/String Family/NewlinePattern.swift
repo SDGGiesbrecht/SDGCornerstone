@@ -15,7 +15,7 @@
 import SDGLogic
 
 /// A pattern representing any newline variant.
-public class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
+public final class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     // MARK: - Static Properties
 

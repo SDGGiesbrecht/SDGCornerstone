@@ -21,7 +21,7 @@
 ///     - c: Yet another distinct element instance.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testMutableSetConformance<T>(of type: T.Type, a: T.Element, b: T.Element, c: T.Element, file: StaticString = #file, line: UInt = #line) where T : MutableSet, T.Element : Hashable {
+public func testMutableSetConformance<T>(of type: T.Type, a: T.Element, b: T.Element, c: T.Element, file: StaticString = #file, line: UInt = #line) where T : MutableSet, T.Element : Hashable {
 
     var set = T()
     set.insert(a)
