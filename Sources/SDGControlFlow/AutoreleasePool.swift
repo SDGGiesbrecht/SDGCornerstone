@@ -12,9 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if canImport(ObjectiveC)
-@_exported import func ObjectiveC.autoreleasepool
-#else
+#if !canImport(ObjectiveC)
 /// Allows code which autoreleases on Darwin to compile on Linux without the need for operating system checks.
 ///
 /// This function does nothing more than execute the provided body on Linux, because Linux has no autoreleasing Objective‐C APIs to link against.
