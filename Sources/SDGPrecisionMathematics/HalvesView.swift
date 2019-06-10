@@ -13,7 +13,9 @@
  */
 
 import SDGBinaryData
+import SDGMathematics
 import SDGCollections
+import SDGText
 import SDGLocalization
 import SDGCornerstoneLocalizations
 

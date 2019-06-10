@@ -13,7 +13,11 @@
  */
 
 import SDGControlFlow
+import SDGLogic
+import SDGMathematics
+import SDGText
 import SDGLocalization
+
 import SDGCornerstoneLocalizations
 
 // #example(1, rationalNumberLiterals)
@@ -74,7 +78,7 @@ public struct RationalNumber : Addable, Comparable, Decodable, Encodable, Equata
                 unsafeDefinition.denominator.negate()
             }
 
-            let divisor = SDGPrecisionMathematics.gcd(unsafeDefinition.numerator, unsafeDefinition.denominator)
+            let divisor = SDGMathematics.gcd(unsafeDefinition.numerator, unsafeDefinition.denominator)
 
             unsafeDefinition.numerator = unsafeDefinition.numerator.dividedAccordingToEuclid(by: divisor)
             unsafeDefinition.denominator = unsafeDefinition.denominator.dividedAccordingToEuclid(by: divisor)
