@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 /// A set that can be compared against other sets of the same type.
 ///
 /// Conformance Requirements:

@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+import SDGMathematics
+
 /// An bidirectional ordered collection which can be searched for elements, subsequences and patterns.
 ///
 /// Conformance Requirements:
