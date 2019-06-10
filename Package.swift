@@ -402,6 +402,7 @@ let package = Package(
             ]),
         .testTarget(name: "SDGPrecisionMathematicsTests", dependencies: [
             "SDGPrecisionMathematics", "SDGTesting", "SDGXCTestUtilities",
+            "SDGMathematics",
             "SDGBinaryData",
             "SDGCornerstoneLocalizations",
             "SDGMathematicsTestUtilities",
