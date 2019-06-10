@@ -400,8 +400,8 @@ let package = Package(
             "SDGLogic"
             ]),
         .testTarget(name: "SDGCornerstoneDocumentationExampleTests", dependencies: [
-            "SDGCornerstone", "SDGXCTestUtilities",
-            "SDGPersistenceTestUtilities"
+            "SDGPersistenceTestUtilities",
+            "SDGXCTestUtilities"
         ])
     ]
 )
