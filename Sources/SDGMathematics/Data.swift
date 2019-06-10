@@ -18,13 +18,13 @@ extension Data : BitField {
 
     // MARK: - BitField
 
-    @inlinable public mutating func formBitwiseNot() {
+    public mutating func formBitwiseNot() {
         for index in indices {
             self[index].formBitwiseNot()
         }
     }
 
-    @inlinable public mutating func formBitwiseAnd(with other: Data) {
+    public mutating func formBitwiseAnd(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {
@@ -33,7 +33,7 @@ extension Data : BitField {
         removeSubrange(end...)
     }
 
-    @inlinable public mutating func formBitwiseOr(with other: Data) {
+    public mutating func formBitwiseOr(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {
@@ -42,7 +42,7 @@ extension Data : BitField {
         append(contentsOf: other[end...])
     }
 
-    @inlinable public mutating func formBitwiseExclusiveOr(with other: Data) {
+    public mutating func formBitwiseExclusiveOr(with other: Data) {
         let end = Swift.min(endIndex, other.endIndex)
 
         for index in startIndex ..< end {
