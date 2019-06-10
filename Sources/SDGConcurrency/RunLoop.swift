@@ -23,7 +23,7 @@ extension RunLoop {
 
     /// A class that manages a run loop.
     public final class Driver {
-        @usableFromInline internal init() {}
+        fileprivate init() {}
     }
 
     // #example(1, runLoopUsage)
@@ -47,7 +47,7 @@ extension RunLoop {
     /// - Parameters:
     ///     - holdDriver: A closure that takes ownershipe of the driver by creating a strong reference to it somewhere with the desired lifetime.
     ///     - driver: The driver that runs the loop. As soon as ARC deallocates this driver, the run loop will stop.
-    @inlinable public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void) {
+    public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void) {
         var driver: Driver? = Driver()
         weak var weakDriver = driver
         holdDriver(driver!)
@@ -68,7 +68,7 @@ extension RunLoop {
     ///     - holdDriver: A closure that takes ownershipe of the driver by creating a strong reference to it somewhere with the desired lifetime.
     ///     - driver: The driver that runs the loop. As soon as ARC deallocates this driver, the run loop will stop.
     ///     - cleanUp: A closure that will be executed when the loop stops.
-    @inlinable public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void, withCleanUp cleanUp: () -> Void) {
+    public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void, withCleanUp cleanUp: () -> Void) {
         runForDriver(holdDriver)
         cleanUp()
     }
