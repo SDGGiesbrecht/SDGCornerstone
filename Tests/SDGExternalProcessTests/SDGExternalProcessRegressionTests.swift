@@ -13,6 +13,9 @@
  */
 
 import SDGExternalProcess
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class SDGExternalProcessRegressionTests : TestCase {
