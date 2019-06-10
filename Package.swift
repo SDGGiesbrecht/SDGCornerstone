@@ -294,6 +294,7 @@ let package = Package(
         .target(name: "SDGExternalProcess", dependencies: [
             "SDGControlFlow",
             "SDGLogic",
+            "SDGText",
             "SDGPersistence",
             "SDGLocalization"
             ]),
