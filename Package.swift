@@ -278,6 +278,7 @@ let package = Package(
             "SDGMathematics",
             "SDGCollections",
             "SDGBinaryData",
+            "SDGText",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
             ]),

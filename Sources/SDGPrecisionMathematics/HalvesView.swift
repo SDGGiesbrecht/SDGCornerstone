@@ -12,11 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGBinaryData
 import SDGMathematics
 import SDGCollections
+import SDGBinaryData
 import SDGText
 import SDGLocalization
+
 import SDGCornerstoneLocalizations
 
 internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
