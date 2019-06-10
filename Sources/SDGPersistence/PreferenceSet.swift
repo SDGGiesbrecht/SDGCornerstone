@@ -15,6 +15,7 @@
 import Foundation
 
 import SDGControlFlow
+import SDGLogic
 import SDGCollections
 
 /// A set of preferences for a particular domain.
