@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 /// The member of the `UInt` family with the largest bit field.
 public typealias UIntMax = UInt64
 
