@@ -267,11 +267,11 @@ extension Localization {
 
 extension Localization where Self : RawRepresentable, Self.RawValue == String {
 
-    @inlinable public init?(exactly code: String) {
+    public init?(exactly code: String) {
         self.init(rawValue: code)
     }
 
-    @inlinable public var code: String {
+    public var code: String {
         return rawValue
     }
 }

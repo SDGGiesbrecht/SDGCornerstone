@@ -361,7 +361,7 @@ public protocol CodableViaTextConvertibleNumber : TextConvertibleNumber {}
 
 extension CodableViaTextConvertibleNumber {
 
-    @inlinable public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         try self.init(
             from: decoder,
             via: StrictString.self,
@@ -371,14 +371,14 @@ extension CodableViaTextConvertibleNumber {
 
 extension CodableViaTextConvertibleNumber where Self : IntegerProtocol {
 
-    @inlinable public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: inDigits())
     }
 }
 
 extension CodableViaTextConvertibleNumber where Self : WholeNumberProtocol {
 
-    @inlinable public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: inDigits())
     }
 }

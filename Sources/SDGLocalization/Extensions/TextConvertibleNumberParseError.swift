@@ -22,7 +22,7 @@ public enum TextConvertibleNumberParseError : PresentableError {
 
     // MARK: - PresentableError
 
-    @inlinable internal func unresolvedPresentableDescription() -> UserFacing<StrictString, _InterfaceLocalization> {
+    @usableFromInline internal func unresolvedPresentableDescription() -> UserFacing<StrictString, _InterfaceLocalization> {
         switch self {
         case .invalidDigit(let scalar, let entireString):
             return UserFacing<StrictString, _InterfaceLocalization>({ localization in

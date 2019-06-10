@@ -47,7 +47,7 @@ public enum EnglishCasing {
     ///
     /// - Parameters:
     ///     - compileTimeString: The string to transform.
-    @inlinable public func apply(to compileTimeString: StaticString) -> StrictString {
+    public func apply(to compileTimeString: StaticString) -> StrictString {
         var string = StrictString(compileTimeString)
         assert(¬string.contains(where: { $0 ∉ "a" ..< "z" }), UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
             switch localization { // @exempt(from: tests)

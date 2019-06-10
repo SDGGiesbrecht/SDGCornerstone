@@ -23,13 +23,13 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     ///     - localize: A closure that resolves the element based on a requested localization.
     ///     - localization: The requested localization.
     ///     - arguments: One or more (as a tuple) arguments necessary for the correct resolution of the element.
-    @inlinable public init(_ localize: @escaping (_ localization: Localization, _ arguments: Arguments) -> Element) {
+    public init(_ localize: @escaping (_ localization: Localization, _ arguments: Arguments) -> Element) {
         self.localize = localize
     }
 
     // MARK: - Properties
 
-    @usableFromInline internal var localize: (Localization, Arguments) -> Element
+    private var localize: (Localization, Arguments) -> Element
 
     // MARK: - Output
 
@@ -37,7 +37,7 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     ///
     /// - Parameters:
     ///     - arguments: The arguments to interpolate.
-    @inlinable public func resolved(using arguments: Arguments) -> Element {
+    public func resolved(using arguments: Arguments) -> Element {
         return localize(LocalizationSetting.current.value.resolved(), arguments)
     }
 
@@ -46,7 +46,7 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     /// - Parameters:
     ///     - localization: The target localization.
     ///     - arguments: The arguments to interpolate.
-    @inlinable public func resolved(for localization: Localization, using arguments: Arguments) -> Element {
+    public func resolved(for localization: Localization, using arguments: Arguments) -> Element {
         return localize(localization, arguments)
     }
 
@@ -56,7 +56,7 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     ///
     /// - Parameters:
     ///     - arguments: The arguments to interpolate.
-    @inlinable public func `static`(using arguments: Arguments) -> UserFacing<Element, Localization> {
+    public func `static`(using arguments: Arguments) -> UserFacing<Element, Localization> {
         let resolution = localize
         return UserFacing<Element, Localization>({ resolution($0, arguments) })
     }

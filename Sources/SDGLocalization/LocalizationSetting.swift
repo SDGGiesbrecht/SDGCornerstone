@@ -175,7 +175,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     ///
     /// - Parameters:
     ///     - orderOfPrecedence: An array of precedence groups. The outer array represents the order of precedence. Each inner array represents a group of localizations with equal precedence. Within a specific group, localizations will be mixed and matched at random. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
-    @inlinable public init(orderOfPrecedence: [[String]]) {
+    public init(orderOfPrecedence: [[String]]) {
         self.orderOfPrecedence = orderOfPrecedence
     }
 
@@ -183,7 +183,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     ///
     /// - Parameters:
     ///     - orderOfPrecedence: An array of localizations describing there order of precedence. Each string must be an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) representing a desired localization.
-    @inlinable public init(orderOfPrecedence: [String]) {
+    public init(orderOfPrecedence: [String]) {
         self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
     }
 
@@ -196,7 +196,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
 
     // MARK: - Properties
 
-    @usableFromInline internal let orderOfPrecedence: [[String]]
+    private let orderOfPrecedence: [[String]]
 
     // MARK: - Usage
 
@@ -212,7 +212,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     }
 
     /// Returns the preferred localization out of those supported by the type `L`.
-    @inlinable public func resolved<L : Localization>() -> L {
+    public func resolved<L : Localization>() -> L {
         for group in orderOfPrecedence {
             for localization in group.shuffled() {
                 if let result = L(reasonableMatchFor: localization) {
@@ -225,19 +225,19 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
 
     // MARK: - Decodable
 
-    @inlinable public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         try self.init(from: decoder, via: [[String]].self, convert: { LocalizationSetting(orderOfPrecedence: $0) })
     }
 
     // MARK: - Encodable
 
-    @inlinable public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         try encode(to: encoder, via: orderOfPrecedence)
     }
 
     // MARK: - Equatable
 
-    @inlinable public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting) -> Bool {
+    public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting) -> Bool {
         return precedingValue.orderOfPrecedence.elementsEqual(followingValue.orderOfPrecedence) { (leftGroup: [String], rightGroup: [String]) -> Bool in
             return Set(leftGroup) == Set(rightGroup)
         }
