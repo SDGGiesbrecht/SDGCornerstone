@@ -366,8 +366,9 @@ let package = Package(
             "SDGPersistence", "SDGPersistenceTestUtilities", "SDGTesting", "SDGXCTestUtilities",
             "SDGCollections",
             "SDGText",
-            "SDGCornerstoneLocalizations",
+            "SDGLocalization",
             "SDGExternalProcess",
+            "SDGCornerstoneLocalizations",
             "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGRandomizationTests", dependencies: [
