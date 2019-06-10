@@ -67,7 +67,7 @@ public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, 
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         let entries = alternatives.map { "(" + String(describing: $0) + ")" }
         return entries.joined(separator: " ∨ ")
     }

@@ -80,7 +80,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         return "¬(" + String(describing: base) + ")"
     }
 }

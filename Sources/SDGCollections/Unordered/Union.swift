@@ -36,7 +36,7 @@ public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : CustomString
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         return "(" + String(describing: a) + ") ∪ (" + String(describing: b) + ")"
     }
 

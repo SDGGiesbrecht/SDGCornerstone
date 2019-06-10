@@ -33,7 +33,7 @@ public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         return "(" + String(describing: base) + ")′"
     }
 

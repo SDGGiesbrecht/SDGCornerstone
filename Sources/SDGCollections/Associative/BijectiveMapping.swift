@@ -104,7 +104,7 @@ public struct BijectiveMapping<X : Hashable, Y : Hashable> : Collection, Express
 
     // MARK: - TransparentWrapper
 
-    @inlinable public var wrappedInstance: Any {
+    public var wrappedInstance: Any {
         return xToY
     }
 }

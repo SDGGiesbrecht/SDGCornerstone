@@ -77,7 +77,7 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         let entries = components.map { "(" + String(describing: $0) + ")" }
         return entries.joined(separator: " + ")
     }

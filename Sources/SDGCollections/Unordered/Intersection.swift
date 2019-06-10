@@ -36,7 +36,7 @@ public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : Custo
 
     // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
+    public var description: String {
         return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
     }
 
