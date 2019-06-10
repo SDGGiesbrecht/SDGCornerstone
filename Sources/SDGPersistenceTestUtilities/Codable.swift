@@ -28,7 +28,7 @@ import SDGCornerstoneLocalizations
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testCodableConformance<T>(of instance: T, uniqueTestName: StrictString, file: StaticString = #file, line: UInt = #line) where T : Codable, T : Equatable {
+public func testCodableConformance<T>(of instance: T, uniqueTestName: StrictString, file: StaticString = #file, line: UInt = #line) where T : Codable, T : Equatable {
 
     let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent("Codable").appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
     try? FileManager.default.createDirectory(at: specificationsDirectory, withIntermediateDirectories: true, attributes: nil)
@@ -83,7 +83,7 @@ import SDGCornerstoneLocalizations
 ///     - invalidMock: A mock instance. See above.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func testDecoding<T, O>(_ type: T.Type, failsFor invalidMock: O, file: StaticString = #file, line: UInt = #line) where T : Codable, O : Encodable {
+public func testDecoding<T, O>(_ type: T.Type, failsFor invalidMock: O, file: StaticString = #file, line: UInt = #line) where T : Codable, O : Encodable {
 
     do {
         let encoded = try JSONEncoder().encode([invalidMock])

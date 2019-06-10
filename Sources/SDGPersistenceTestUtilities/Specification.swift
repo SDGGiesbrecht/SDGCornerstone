@@ -25,7 +25,7 @@ import SDGCornerstoneLocalizations
 /// The directory should be specified relative to a source file using some combination of `#file` and `deletingLastPathComponent()`.
 /// - Parameters:
 ///     - directory: The directory.
-@inlinable public func setTestSpecificationDirectory(to directory: URL) {
+public func setTestSpecificationDirectory(to directory: URL) {
     specificationDirectory = directory
 }
 
@@ -35,7 +35,7 @@ import SDGCornerstoneLocalizations
 ///
 /// - Parameters:
 ///     - callerLocation: Optional. A different file to consider as the location of the call.
-@inlinable public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -> URL {
+public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -> URL {
     return cached(in: &specificationDirectory) {
         let repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation)).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
@@ -56,7 +56,7 @@ import SDGCornerstoneLocalizations
 ///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update a specification.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-@inlinable public func compare(_ string: String, against specification: URL, overwriteSpecificationInsteadOfFailing: Bool, file: StaticString = #file, line: UInt = #line) {
+public func compare(_ string: String, against specification: URL, overwriteSpecificationInsteadOfFailing: Bool, file: StaticString = #file, line: UInt = #line) {
     autoreleasepool {
 
         guard let specificationString = try? String(from: specification) else {
