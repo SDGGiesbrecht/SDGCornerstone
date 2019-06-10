@@ -15,6 +15,9 @@
 import Foundation
 
 import SDGControlFlow
+import SDGMathematics
+import SDGText
+
 import SDGCornerstoneLocalizations
 
 internal struct FoundationDate : DateDefinition, TransparentWrapper {
