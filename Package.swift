@@ -388,6 +388,7 @@ let package = Package(
             ]),
         .testTarget(name: "SDGGeometryTests", dependencies: [
             "SDGGeometry", "SDGGeometryTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+            "SDGMathematics",
             "SDGMathematicsTestUtilities"
             ]),
         .testTarget(name: "SDGCalendarTests", dependencies: [

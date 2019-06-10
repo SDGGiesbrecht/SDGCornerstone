@@ -17,12 +17,12 @@ import CoreGraphics
 #endif
 
 import SDGMathematics
-import SDGMathematicsTestUtilities
 import SDGGeometry
 
 import XCTest
 
 import SDGXCTestUtilities
+import SDGMathematicsTestUtilities
 import SDGGeometryTestUtilities
 
 class SDGGeometryAPITests : TestCase {
