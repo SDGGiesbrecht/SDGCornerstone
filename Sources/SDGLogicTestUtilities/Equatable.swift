@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGTesting
+
 /// Tests a type’s conformance to Equatable.
 ///
 /// - Parameters:
