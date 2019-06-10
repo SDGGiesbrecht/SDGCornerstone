@@ -16,6 +16,8 @@
 
 import CoreGraphics
 
+import SDGMathematics
+
 extension CGPoint : TwoDimensionalPointProtocol {
 
     // MARK: - PointProtocol
