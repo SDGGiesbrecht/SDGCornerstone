@@ -24,7 +24,7 @@ extension CGVector : GenericAdditiveArithmetic, Negatable, RationalVector, TwoDi
 
     public typealias Scalar = CGFloat
 
-    public init(Δx: Scalar, Δy: Scalar) {
+    @inlinable public init(Δx: Scalar, Δy: Scalar) {
         self = CGVector(dx: Δx, dy: Δy)
     }
 

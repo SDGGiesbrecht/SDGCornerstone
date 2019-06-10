@@ -88,7 +88,7 @@ extension TwoDimensionalPointProtocol {
 
     // MARK: - Decodable
 
-    @inlinable public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         var coordinates = try decoder.unkeyedContainer()
         let x = try coordinates.decode(Coordinate.self)
         let y = try coordinates.decode(Coordinate.self)
@@ -97,7 +97,7 @@ extension TwoDimensionalPointProtocol {
 
     // MARK: - Encodable
 
-    @inlinable public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var coordinates = encoder.unkeyedContainer()
         try coordinates.encode(x)
         try coordinates.encode(y)
