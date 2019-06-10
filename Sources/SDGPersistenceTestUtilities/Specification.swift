@@ -16,7 +16,12 @@ import Foundation
 
 import SDGControlFlow
 import SDGLogic
+import SDGText
+import SDGLocalization
+
 import SDGCornerstoneLocalizations
+
+import SDGTesting
 
 @usableFromInline internal var specificationDirectory: URL?
 

@@ -15,8 +15,13 @@
 import SDGLogic
 import SDGMathematics
 import SDGCollections
+import SDGText
+import SDGLocalization
 import SDGPrecisionMathematics
+
 import SDGCornerstoneLocalizations
+
+import XCTest
 
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
