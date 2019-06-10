@@ -304,6 +304,7 @@ let package = Package(
         .target(name: "SDGTesting", dependencies: [
             "SDGControlFlow",
             "SDGMathematics",
+            "SDGText",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
             ]),
