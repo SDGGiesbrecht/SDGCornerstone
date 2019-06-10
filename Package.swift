@@ -417,6 +417,17 @@ let package = Package(
             "SDGLogic"
             ]),
         .testTarget(name: "SDGCornerstoneDocumentationExampleTests", dependencies: [
+            "SDGControlFlow",
+            "SDGMathematics",
+            "SDGCollections",
+            "SDGText",
+            "SDGPersistence",
+            "SDGRandomization",
+            "SDGLocalization",
+            "SDGCalendar",
+            "SDGConcurrency",
+            "SDGPrecisionMathematics",
+            "SDGExternalProcess",
             "SDGPersistenceTestUtilities",
             "SDGXCTestUtilities"
         ])
