@@ -379,7 +379,9 @@ let package = Package(
         .testTarget(name: "SDGLocalizationTests", dependencies: [
             "SDGLocalization", "SDGLocalizationTestUtilities", "SDGTesting", "SDGXCTestUtilities",
             "SDGLogic",
+            "SDGMathematics",
             "SDGCollections",
+            "SDGText",
             "SDGPrecisionMathematics",
             "SDGCornerstoneLocalizations",
             "SDGPersistenceTestUtilities"
