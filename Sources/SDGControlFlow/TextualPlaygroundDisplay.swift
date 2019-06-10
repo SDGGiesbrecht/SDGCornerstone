@@ -23,7 +23,7 @@ extension TextualPlaygroundDisplay {
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
-    @inlinable public var playgroundDescription: Any {
+    public var playgroundDescription: Any {
         return String(describing: self)
     }
 }

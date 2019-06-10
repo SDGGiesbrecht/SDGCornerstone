@@ -42,7 +42,7 @@ public final class Shared<Value> : TransparentWrapper {
         }
     }
 
-    @usableFromInline internal var observers: [(observer: Weak<AnyObject>, identifier: String)] = []
+    private var observers: [(observer: Weak<AnyObject>, identifier: String)] = []
 
     // MARK: - Observing
 
@@ -56,7 +56,7 @@ public final class Shared<Value> : TransparentWrapper {
     ///     - reportInitialState: If `true`, the observer will receive its first notification immediately to report the initial state. If `false`, the observer will not be notified until the state actually changes.
     ///
     /// - SeeAlso: `valueChanged(for:)`
-    @inlinable public func register(observer: SharedValueObserver, identifier: String = "", reportInitialState: Bool = true) {
+    public func register(observer: SharedValueObserver, identifier: String = "", reportInitialState: Bool = true) {
 
         // Prevent duplicates.
         cancel(observer: observer)
@@ -74,7 +74,7 @@ public final class Shared<Value> : TransparentWrapper {
     ///
     /// - Parameters:
     ///     - observer: The observer.
-    @inlinable public func cancel(observer: SharedValueObserver) {
+    public func cancel(observer: SharedValueObserver) {
         for index in observers.indices.reversed() {
             let (existingObserver, _) = observers[index]
 
@@ -88,7 +88,7 @@ public final class Shared<Value> : TransparentWrapper {
 
     // MARK: - TransparentWrapper
 
-    @inlinable public var wrappedInstance: Any {
+    public var wrappedInstance: Any {
         return value
     }
 }

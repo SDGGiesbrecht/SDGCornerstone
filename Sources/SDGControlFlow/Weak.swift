@@ -21,7 +21,7 @@ public struct Weak<Pointee : AnyObject> : TransparentWrapper {
     ///
     /// - Parameters:
     ///     - pointee: The pointee.
-    @inlinable public init(_ pointee: Pointee?) {
+    public init(_ pointee: Pointee?) {
         self.pointee = pointee
     }
 
@@ -32,7 +32,7 @@ public struct Weak<Pointee : AnyObject> : TransparentWrapper {
 
     // MARK: - TransparentWrapper
 
-    @inlinable public var wrappedInstance: Any {
+    public var wrappedInstance: Any {
         return pointee as Any
     }
 }
