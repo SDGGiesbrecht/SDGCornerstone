@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGLogic
+import SDGCollections
 
 /// A pattern representing any newline variant.
 public final class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {

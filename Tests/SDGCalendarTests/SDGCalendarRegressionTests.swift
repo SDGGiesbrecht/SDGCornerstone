@@ -13,6 +13,9 @@
  */
 
 import SDGCalendar
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class SDGCalendarRegressionTests : TestCase {

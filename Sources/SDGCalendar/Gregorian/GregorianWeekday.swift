@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 /// A day of the Gregorian week.
 public enum GregorianWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent, Weekday {
 

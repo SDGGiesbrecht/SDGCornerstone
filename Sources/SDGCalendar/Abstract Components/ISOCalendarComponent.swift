@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGText
+
 /// A calendar component with an iCalendar representation.
 public protocol ISOCalendarComponent {
 

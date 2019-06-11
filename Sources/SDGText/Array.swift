@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 extension Array where Element : StringFamily {
 
     /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.

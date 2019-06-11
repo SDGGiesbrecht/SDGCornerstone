@@ -14,6 +14,10 @@
 
 import Foundation
 
+import SDGMathematics
+import SDGText
+import SDGLocalization
+
 import SDGCornerstoneLocalizations
 
 // #example(1, dateDefinition)

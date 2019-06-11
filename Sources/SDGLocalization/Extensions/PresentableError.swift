@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGText
+
 /// An error suitable to present to users.
 ///
 /// Conformance Requirements:

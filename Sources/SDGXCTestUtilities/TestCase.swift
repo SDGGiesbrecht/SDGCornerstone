@@ -14,6 +14,8 @@
 
 #if canImport(XCTest) && (!(os(iOS) || os(watchOS) || os(tvOS)) || targetEnvironment(simulator)) // XCTest does not contain bitcode.
 
+import XCTest
+
 import SDGLogic
 import SDGPersistence
 import SDGTesting

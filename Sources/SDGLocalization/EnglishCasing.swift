@@ -15,6 +15,7 @@
 import SDGControlFlow
 import SDGLogic
 import SDGCollections
+import SDGText
 
 /// A casing position used by the English language.
 ///

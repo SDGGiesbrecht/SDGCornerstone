@@ -14,6 +14,9 @@
 
 import Foundation
 
+import SDGCollections
+
+import SDGTesting
 import SDGLogicTestUtilities
 
 /// Tests a type’s conformance to ComparableSet.

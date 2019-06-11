@@ -17,6 +17,7 @@ import Foundation
 import SDGControlFlow
 import SDGLogic
 import SDGCollections
+import SDGText
 
 /// A casing position used by languages that have distinct letter cases (but which use the same casing for titles as for sentences).
 ///

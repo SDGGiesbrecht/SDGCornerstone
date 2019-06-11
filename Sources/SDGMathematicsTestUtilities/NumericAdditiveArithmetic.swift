@@ -12,6 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
+import SDGTesting
+
 /// Tests a type’s conformance to NumericAdditiveArithmetic.
 ///
 /// - Precondition: `augend` is expected to be less than `sum`.

@@ -15,6 +15,10 @@
 import Foundation
 
 import SDGControlFlow
+import SDGMathematics
+import SDGText
+import SDGLocalization
+
 import SDGCornerstoneLocalizations
 
 /// A date on a particular calendar.

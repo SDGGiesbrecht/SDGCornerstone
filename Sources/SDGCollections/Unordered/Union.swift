@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGLogic
 
 /// A union of two sets.
 public struct Union<Base1 : SetDefinition, Base2 : SetDefinition> : CustomStringConvertible, SetDefinition, TextualPlaygroundDisplay where Base1.Element == Base2.Element {

@@ -12,5 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 /// A calendar component defined by an enumeration.
 public protocol EnumerationCalendarComponent : CalendarComponent, OrderedEnumeration, RawRepresentable {}

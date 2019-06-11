@@ -12,11 +12,18 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
 import Dispatch
 
 import SDGMathematics
 import SDGCollections
-import SDGCornerstone
+import SDGCalendar
+import SDGConcurrency
+import SDGRandomization
+import SDGPrecisionMathematics
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class MiscellaneousExampleTests : TestCase {

@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGLogic
 
 /// A type that can be used for whole‐number arithmetic.
 ///

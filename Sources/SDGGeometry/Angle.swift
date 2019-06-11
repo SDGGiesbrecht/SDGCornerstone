@@ -23,6 +23,7 @@ import UIKit
 #endif
 
 import SDGControlFlow
+import SDGMathematics
 
 extension Angle : CustomPlaygroundDisplayConvertible {
 

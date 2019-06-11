@@ -13,7 +13,11 @@
  */
 
 import SDGLogic
+import SDGMathematics
 import SDGBinaryData
+import SDGText
+import SDGLocalization
+
 import SDGCornerstoneLocalizations
 
 extension WholeNumber {

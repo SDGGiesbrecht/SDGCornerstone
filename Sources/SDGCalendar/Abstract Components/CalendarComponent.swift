@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 /// A component of a particular calendar.
 public protocol CalendarComponent : Decodable, Encodable {
 

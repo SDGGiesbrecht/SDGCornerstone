@@ -54,9 +54,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "MyTarget", dependencies: [
-            .productItem(name: "SDGCornerstone", package: "SDGCornerstone"),
-            .productItem(name: "SDGCornerstoneTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGXCTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGControlFlow", package: "SDGCornerstone"),
             .productItem(name: "SDGLogic", package: "SDGCornerstone"),
             .productItem(name: "SDGLogicTestUtilities", package: "SDGCornerstone"),
@@ -79,6 +76,7 @@ let package = Package(
             .productItem(name: "SDGConcurrency", package: "SDGCornerstone"),
             .productItem(name: "SDGExternalProcess", package: "SDGCornerstone"),
             .productItem(name: "SDGTesting", package: "SDGCornerstone"),
+            .productItem(name: "SDGXCTestUtilities", package: "SDGCornerstone"),
         ])
     ]
 )
@@ -87,9 +85,6 @@ let package = Package(
 The libraries’ modules can then be imported in source files:
 
 ```swift
-import SDGCornerstone
-import SDGCornerstoneTestUtilities
-import SDGXCTestUtilities
 import SDGControlFlow
 import SDGLogic
 import SDGLogicTestUtilities
@@ -112,6 +107,7 @@ import SDGPrecisionMathematics
 import SDGConcurrency
 import SDGExternalProcess
 import SDGTesting
+import SDGXCTestUtilities
 ```
 
 ## Example Usage

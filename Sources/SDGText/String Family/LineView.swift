@@ -12,7 +12,11 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGControlFlow
+import SDGLogic
+import SDGCollections
 
 /// A view of a string’s contents as a collection of lines.
 public struct LineView<Base : StringFamily> : BidirectionalCollection, Collection, MutableCollection, RangeReplaceableCollection, TextualPlaygroundDisplay {

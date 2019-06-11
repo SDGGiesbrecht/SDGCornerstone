@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
+
 /// A two‐dimensional vector.
 public struct TwoDimensionalVector<Scalar> : TwoDimensionalVectorProtocol
 where Scalar : IntegralArithmetic {

@@ -12,12 +12,18 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
+import SDGLogic
 import SDGMathematics
 import SDGCollections
 import SDGText
-import SDGXCTestUtilities
 
 import SDGCornerstoneLocalizations
+
+import XCTest
+
+import SDGXCTestUtilities
 import SDGMathematicsTestUtilities
 import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities

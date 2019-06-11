@@ -14,6 +14,9 @@
 
 import Foundation
 
+import SDGLogic
+import SDGMathematics
+
 extension CharacterSet : ComparableSet, MutableSet, SetInRepresentableUniverse, SetDefinition {
 
     // MARK: - ComparableSet

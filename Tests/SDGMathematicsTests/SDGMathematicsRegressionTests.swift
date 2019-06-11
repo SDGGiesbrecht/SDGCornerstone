@@ -13,6 +13,9 @@
  */
 
 import SDGMathematics
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class SDGMathematicsRegressionTests : TestCase {

@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGLogic
 import SDGMathematics
 
 /// A pattern that matches against repetitions of another pattern.

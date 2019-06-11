@@ -14,6 +14,10 @@
 
 import SDGControlFlow
 import SDGLogic
+import SDGMathematics
+import SDGText
+import SDGLocalization
+
 import SDGCornerstoneLocalizations
 
 /// A Hebrew month of a particular year.

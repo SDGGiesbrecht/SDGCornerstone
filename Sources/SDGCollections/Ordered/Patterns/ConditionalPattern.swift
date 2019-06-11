@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 /// A pattern that matches based on a condition.
 public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
 

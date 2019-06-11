@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollections
+
 /// A view of a string’s contents as a collection of Unicode scalar values.
 public protocol UnicodeScalarView : RangeReplaceableCollection, SearchableBidirectionalCollection
 where Element == Unicode.Scalar, Index == String.UnicodeScalarView.Index {}

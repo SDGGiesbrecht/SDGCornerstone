@@ -16,7 +16,11 @@ import Foundation
 
 import SDGControlFlow
 import SDGCollections
+import SDGText
+import SDGPersistence
 import SDGCalendar
+
+import SDGTesting
 
 /// Tests a type’s conformance to FileConvertible.
 ///

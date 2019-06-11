@@ -14,6 +14,7 @@
 
 import SDGControlFlow
 import SDGLogic
+import SDGText
 
 /// An enumeration that describes the set of localizations available for a particular usage.
 ///

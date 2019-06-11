@@ -12,11 +12,17 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#if canImport(CoreGraphics)
+import CoreGraphics
+#endif
+
 import SDGMathematics
-import SDGMathematicsTestUtilities
 import SDGGeometry
 
+import XCTest
+
 import SDGXCTestUtilities
+import SDGMathematicsTestUtilities
 import SDGGeometryTestUtilities
 
 class SDGGeometryAPITests : TestCase {

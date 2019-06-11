@@ -16,7 +16,9 @@ import Foundation
 
 import SDGControlFlow
 import SDGMathematics
+import SDGText
 import SDGLocalization
+
 import SDGCornerstoneLocalizations
 
 /// Tests that a closure executes within a specified amount of time.

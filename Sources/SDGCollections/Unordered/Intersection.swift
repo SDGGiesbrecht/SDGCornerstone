@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGLogic
 
 /// An intersection of two sets.
 public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : CustomStringConvertible, SetDefinition, TextualPlaygroundDisplay where Base1.Element == Base2.Element {

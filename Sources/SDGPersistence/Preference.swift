@@ -15,6 +15,7 @@
 import Foundation
 
 import SDGControlFlow
+import SDGLogic
 
 /// A persistent user preference which can hold any codable value.
 ///

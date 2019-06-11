@@ -13,6 +13,9 @@
  */
 
 import SDGCollections
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class SDGCollectionsRegressionTests : TestCase {

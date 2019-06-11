@@ -15,6 +15,9 @@
 import SDGMathematics
 import SDGBinaryData
 @testable import SDGPrecisionMathematics
+
+import XCTest
+
 import SDGXCTestUtilities
 
 class SDGPrecisionMathematicsInternalTests : TestCase {

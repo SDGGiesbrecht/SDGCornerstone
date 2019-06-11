@@ -12,9 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLocalization
-
 #if !(os(iOS) || os(watchOS) || os(tvOS))
+
+import SDGText
+import SDGLocalization
 
 extension ExternalProcess {
 

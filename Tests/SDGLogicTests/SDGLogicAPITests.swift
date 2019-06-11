@@ -13,10 +13,13 @@
  */
 
 import SDGLogic
-import SDGLogicTestUtilities
-import SDGXCTestUtilities
 
+import XCTest
+
+import SDGTesting
+import SDGLogicTestUtilities
 import SDGMathematicsTestUtilities
+import SDGXCTestUtilities
 
 class SDGLogicAPITests : TestCase {
 

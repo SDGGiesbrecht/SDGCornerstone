@@ -13,6 +13,10 @@
  */
 
 import SDGControlFlow
+import SDGMathematics
+import SDGText
+import SDGLocalization
+
 import SDGCornerstoneLocalizations
 
 /// A second of the Gregorian minute.

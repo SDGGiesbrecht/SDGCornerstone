@@ -36,8 +36,6 @@ import PackageDescription
 /// - A simple API for running shell commands on desktop platforms. (`SDGExternalProcess`)
 ///
 /// ...and much more.
-///
-/// Use the entire package together by importing the `SDGCornerstone` product, or pick and choose pieces by importing the various component products.
 let package = Package(
     name: "SDGCornerstone",
     platforms: [
@@ -47,21 +45,6 @@ let package = Package(
         .tvOS(.v11)
     ],
     products: [
-        // The entire package.
-
-        // #documentation(SDGCornerstone)
-        /// A module representing the entire `SDGCornerstone` package. All the other modules can be used from this single import (except test utilities).
-        .library(name: "SDGCornerstone", targets: ["SDGCornerstone"]),
-        // #documentation(SDGCornerstoneTestUtilities)
-        /// A module representing the entire set of test utilities. Most of the other test utility modules can be used from this single import.
-        ///
-        /// Nothing in this module depends on `XCTest`, so it can be used anywhere, including on mobile devices in the release configuration.
-        .library(name: "SDGCornerstoneTestUtilities", targets: ["SDGCornerstoneTestUtilities"]),
-        // #documentation(SDGXCTestUtilities)
-        /// Additional test utilities which require `XCTest`.
-        .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
-
-        // Individual component modules.
 
         // #documentation(SDGControlFlow)
         /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
@@ -142,53 +125,13 @@ let package = Package(
 
         // #documentation(SDGTesting)
         /// Miscellaneous test utilities.
-        .library(name: "SDGTesting", targets: ["SDGTesting"])
+        .library(name: "SDGTesting", targets: ["SDGTesting"]),
+
+        // #documentation(SDGXCTestUtilities)
+        /// Additional test utilities which require `XCTest`.
+        .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"])
     ],
     targets: [
-        // The entire package.
-
-        // @documentation(SDGCornerstone)
-        /// A module representing the entire `SDGCornerstone` package. All the other modules can be used from this single import (except test utilities).
-        .target(name: "SDGCornerstone", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGBinaryData",
-            "SDGText",
-            "SDGPersistence",
-            "SDGRandomization",
-            "SDGLocalization",
-            "SDGGeometry",
-            "SDGCalendar",
-            "SDGPrecisionMathematics",
-            "SDGConcurrency",
-            "SDGExternalProcess"
-            ]),
-        // @documentation(SDGCornerstoneTestUtilities)
-        /// A module representing the entire set of test utilities. Most of the other test utility modules can be used from this single import.
-        ///
-        /// Nothing in this module depends on `XCTest`, so it can be used anywhere, including on mobile devices in the release configuration.
-        .target(name: "SDGCornerstoneTestUtilities", dependencies: [
-            "SDGLogicTestUtilities",
-            "SDGMathematicsTestUtilities",
-            "SDGCollectionsTestUtilities",
-            "SDGPersistenceTestUtilities",
-            "SDGRandomizationTestUtilities",
-            "SDGLocalizationTestUtilities",
-
-            "SDGCornerstone",
-            "SDGTesting"
-            ]),
-        // @documentation(SDGXCTestUtilities)
-        /// Additional test utilities which require `XCTest`.
-        .target(name: "SDGXCTestUtilities", dependencies: [
-            "SDGTesting",
-            "SDGLogic",
-            "SDGPersistence"
-            ]),
-
-        // Individual component modules.
 
         // @documentation(SDGControlFlow)
         /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
@@ -211,6 +154,7 @@ let package = Package(
         /// Utilities for testing code which uses `SDGMathematics`.
         .target(name: "SDGMathematicsTestUtilities", dependencies: [
             "SDGMathematics", "SDGTesting",
+            "SDGCollections",
             "SDGLogicTestUtilities",
             "SDGCollectionsTestUtilities",
             "SDGPersistenceTestUtilities"
@@ -234,6 +178,7 @@ let package = Package(
         /// Extensions related to raw binary data.
         .target(name: "SDGBinaryData", dependencies: [
             "SDGControlFlow",
+            "SDGLogic",
             "SDGMathematics",
             "SDGCollections"
             ]),
@@ -264,8 +209,8 @@ let package = Package(
             "SDGPersistence", "SDGTesting",
             "SDGControlFlow",
             "SDGLogic",
-            "SDGText",
             "SDGCollections",
+            "SDGText",
             "SDGLocalization",
             "SDGCalendar",
             "SDGCornerstoneLocalizations"
@@ -333,6 +278,7 @@ let package = Package(
             "SDGMathematics",
             "SDGCollections",
             "SDGBinaryData",
+            "SDGText",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
             ]),
@@ -349,6 +295,7 @@ let package = Package(
         .target(name: "SDGExternalProcess", dependencies: [
             "SDGControlFlow",
             "SDGLogic",
+            "SDGText",
             "SDGPersistence",
             "SDGLocalization"
             ]),
@@ -358,8 +305,17 @@ let package = Package(
         .target(name: "SDGTesting", dependencies: [
             "SDGControlFlow",
             "SDGMathematics",
+            "SDGText",
             "SDGLocalization",
             "SDGCornerstoneLocalizations"
+            ]),
+
+        // @documentation(SDGXCTestUtilities)
+        /// Additional test utilities which require `XCTest`.
+        .target(name: "SDGXCTestUtilities", dependencies: [
+            "SDGTesting",
+            "SDGLogic",
+            "SDGPersistence"
             ]),
 
         // Internal utilities.
@@ -372,29 +328,35 @@ let package = Package(
         // Internal tests.
 
         .testTarget(name: "SDGControlFlowTests", dependencies: [
-            "SDGControlFlow", "SDGXCTestUtilities"
+            "SDGControlFlow", "SDGTesting", "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGLogicTests", dependencies: [
-            "SDGLogicTestUtilities", "SDGXCTestUtilities",
+            "SDGLogic", "SDGLogicTestUtilities", "SDGTesting", "SDGXCTestUtilities",
             "SDGMathematicsTestUtilities"
             ]),
         .testTarget(name: "SDGBinaryDataTests", dependencies: [
-            "SDGBinaryData", "SDGXCTestUtilities",
+            "SDGBinaryData", "SDGTesting", "SDGXCTestUtilities",
+            "SDGLogic",
             "SDGCornerstoneLocalizations",
             "SDGMathematicsTestUtilities",
             "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGMathematicsTests", dependencies: [
-            "SDGMathematicsTestUtilities", "SDGXCTestUtilities"
+            "SDGMathematics", "SDGMathematicsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+            "SDGLogic",
             ]),
         .testTarget(name: "SDGCollectionsTests", dependencies: [
-            "SDGCollectionsTestUtilities", "SDGXCTestUtilities",
+            "SDGCollections", "SDGCollectionsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+            "SDGLogic",
             "SDGMathematics",
             "SDGCornerstoneLocalizations",
             "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGTextTests", dependencies: [
-            "SDGText", "SDGXCTestUtilities",
+            "SDGText", "SDGTesting", "SDGXCTestUtilities",
+            "SDGLogic",
+            "SDGMathematics",
+            "SDGCollections",
             "SDGCornerstoneLocalizations",
             "SDGMathematicsTestUtilities",
             "SDGCollectionsTestUtilities",
@@ -402,39 +364,46 @@ let package = Package(
             "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGPersistenceTests", dependencies: [
-            "SDGPersistenceTestUtilities", "SDGXCTestUtilities",
+            "SDGPersistence", "SDGPersistenceTestUtilities", "SDGTesting", "SDGXCTestUtilities",
             "SDGCollections",
             "SDGText",
-            "SDGCornerstoneLocalizations",
+            "SDGLocalization",
             "SDGExternalProcess",
+            "SDGCornerstoneLocalizations",
             "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGRandomizationTests", dependencies: [
-            "SDGRandomizationTestUtilities", "SDGXCTestUtilities",
+            "SDGRandomization", "SDGRandomizationTestUtilities", "SDGTesting", "SDGXCTestUtilities",
             "SDGLogic",
             "SDGMathematics"
             ]),
         .testTarget(name: "SDGLocalizationTests", dependencies: [
-            "SDGLocalizationTestUtilities", "SDGXCTestUtilities",
+            "SDGLocalization", "SDGLocalizationTestUtilities", "SDGTesting", "SDGXCTestUtilities",
             "SDGLogic",
+            "SDGMathematics",
             "SDGCollections",
+            "SDGText",
             "SDGPrecisionMathematics",
             "SDGCornerstoneLocalizations",
             "SDGPersistenceTestUtilities"
             ]),
         .testTarget(name: "SDGGeometryTests", dependencies: [
-            "SDGGeometryTestUtilities", "SDGXCTestUtilities",
+            "SDGGeometry", "SDGGeometryTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+            "SDGMathematics",
             "SDGMathematicsTestUtilities"
             ]),
         .testTarget(name: "SDGCalendarTests", dependencies: [
-            "SDGCalendar", "SDGXCTestUtilities",
+            "SDGCalendar", "SDGTesting", "SDGXCTestUtilities",
+            "SDGMathematics",
+            "SDGLocalization",
             "SDGCornerstoneLocalizations",
             "SDGMathematicsTestUtilities",
             "SDGPersistenceTestUtilities",
             "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGPrecisionMathematicsTests", dependencies: [
-            "SDGPrecisionMathematics", "SDGXCTestUtilities",
+            "SDGPrecisionMathematics", "SDGTesting", "SDGXCTestUtilities",
+            "SDGMathematics",
             "SDGBinaryData",
             "SDGCornerstoneLocalizations",
             "SDGMathematicsTestUtilities",
@@ -442,15 +411,26 @@ let package = Package(
             "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGConcurrencyTests", dependencies: [
-            "SDGConcurrency", "SDGXCTestUtilities"
+            "SDGConcurrency", "SDGTesting", "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGExternalProcessTests", dependencies: [
-            "SDGExternalProcess", "SDGXCTestUtilities",
+            "SDGExternalProcess", "SDGTesting", "SDGXCTestUtilities",
             "SDGLogic"
             ]),
         .testTarget(name: "SDGCornerstoneDocumentationExampleTests", dependencies: [
-            "SDGCornerstone", "SDGXCTestUtilities",
-            "SDGPersistenceTestUtilities"
+            "SDGControlFlow",
+            "SDGMathematics",
+            "SDGCollections",
+            "SDGText",
+            "SDGPersistence",
+            "SDGRandomization",
+            "SDGLocalization",
+            "SDGCalendar",
+            "SDGConcurrency",
+            "SDGPrecisionMathematics",
+            "SDGExternalProcess",
+            "SDGPersistenceTestUtilities",
+            "SDGXCTestUtilities"
         ])
     ]
 )
