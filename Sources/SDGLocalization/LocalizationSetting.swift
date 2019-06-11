@@ -16,6 +16,7 @@ import Foundation
 
 import SDGControlFlow
 import SDGLogic
+import SDGCollections
 import SDGText
 import SDGPersistence
 
