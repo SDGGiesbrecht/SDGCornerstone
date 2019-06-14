@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  -->
 
-[🇨🇦EN](Documentation/🇨🇦EN%20Read%20Me.md)
-
 macOS • Linux • iOS • watchOS • tvOS
 
 [Documentation](https://sdggiesbrecht.github.io/SDGCornerstone/%F0%9F%87%A8%F0%9F%87%A6EN)
@@ -22,95 +20,26 @@ macOS • Linux • iOS • watchOS • tvOS
 
 SDGCornerstone forms the foundation of the SDG module family. It establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation).
 
-> [הִנְנִי יִסַּד בְּצִיּוֹן אָבֶן אֶבֶן בֹּחַן פִּנַּת יִקְרַת מוּסָד מוּסָד׃<br>Behold, I establish in Zion a stone, a tested stone, a precious cornerstone, a sure foundation.](https://www.biblegateway.com/passage/?search=Isaiah+28&version=WLC;NIV)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;―⁧יהוה⁩/Yehova
+> [הִנְנִי יִסַּד בְּצִיּוֹן אָבֶן אֶבֶן בֹּחַן פִּנַּת יִקְרַת מוּסָד מוּסָד׃](https://www.biblegateway.com/passage/?search=Isaiah+28&version=WLC;NIV)
+>
+> [Behold, I establish in Zion a stone, a tested stone, a precious cornerstone, a sure foundation.](https://www.biblegateway.com/passage/?search=Isaiah+28&version=WLC;NIV)
+>
+> ―⁧יהוה⁩/Yehova
 
-## Features
+### Features:
 
-- Localization tools (compatible with the Swift Package Manager and Linux).
-- User preferences access (compatible with Linux).
-- Platform‐independent access to best‐practice file system locations.
-- Shared instances of value types.
-- Generic pattern matching.
-- Arbitrary‐precision arithmetic.
-- Simple API for running shell commands (desktop platforms only).
+- Localization tools compatible with the Swift Package Manager and Linux. (`SDGLocalization`)
+- User preferences compatible with Linux. (`PreferenceSet`, `Preference`)
+- Platform‐independent access to best‐practice file system locations. (`url(for:in:at:)`)
+- Shared instances of value types. (`Shared<Value>`)
+- Generic pattern matching. (`SearchableCollection`, `Pattern<Element>`)
+- Customizable randomization. (`SDGRandomization`)
+- Arbitrary‐precision arithmetic. (`SDGPrecisionMathematics`)
+- A simple API for running shell commands on desktop platforms. (`SDGExternalProcess`)
 
 ...and much more.
 
-Use the entire package together by importing the `SDGCornerstone` product, or pick and choose pieces by importing the various component products.
-
-(For a list of related projects, see [here](Documentation/🇨🇦EN%20Related%20Projects.md).)
-
-## Importing
-
-SDGCornerstone provides libraries for use with the [Swift Package Manager](https://swift.org/package-manager/).
-
-Simply add SDGCornerstone as a dependency in `Package.swift` and specify which of the libraries to use:
-
-```swift
-let package = Package(
-    name: "MyPackage",
-    dependencies: [
-        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", from: Version(1, 0, 0)),
-    ],
-    targets: [
-        .target(name: "MyTarget", dependencies: [
-            .productItem(name: "SDGControlFlow", package: "SDGCornerstone"),
-            .productItem(name: "SDGLogic", package: "SDGCornerstone"),
-            .productItem(name: "SDGLogicTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGMathematics", package: "SDGCornerstone"),
-            .productItem(name: "SDGMathematicsTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGCollections", package: "SDGCornerstone"),
-            .productItem(name: "SDGCollectionsTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGBinaryData", package: "SDGCornerstone"),
-            .productItem(name: "SDGText", package: "SDGCornerstone"),
-            .productItem(name: "SDGPersistence", package: "SDGCornerstone"),
-            .productItem(name: "SDGPersistenceTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGRandomization", package: "SDGCornerstone"),
-            .productItem(name: "SDGRandomizationTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGLocalization", package: "SDGCornerstone"),
-            .productItem(name: "SDGLocalizationTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGGeometry", package: "SDGCornerstone"),
-            .productItem(name: "SDGGeometryTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGCalendar", package: "SDGCornerstone"),
-            .productItem(name: "SDGPrecisionMathematics", package: "SDGCornerstone"),
-            .productItem(name: "SDGConcurrency", package: "SDGCornerstone"),
-            .productItem(name: "SDGExternalProcess", package: "SDGCornerstone"),
-            .productItem(name: "SDGTesting", package: "SDGCornerstone"),
-            .productItem(name: "SDGXCTestUtilities", package: "SDGCornerstone"),
-        ])
-    ]
-)
-```
-
-The libraries’ modules can then be imported in source files:
-
-```swift
-import SDGControlFlow
-import SDGLogic
-import SDGLogicTestUtilities
-import SDGMathematics
-import SDGMathematicsTestUtilities
-import SDGCollections
-import SDGCollectionsTestUtilities
-import SDGBinaryData
-import SDGText
-import SDGPersistence
-import SDGPersistenceTestUtilities
-import SDGRandomization
-import SDGRandomizationTestUtilities
-import SDGLocalization
-import SDGLocalizationTestUtilities
-import SDGGeometry
-import SDGGeometryTestUtilities
-import SDGCalendar
-import SDGPrecisionMathematics
-import SDGConcurrency
-import SDGExternalProcess
-import SDGTesting
-import SDGXCTestUtilities
-```
-
-## Example Usage
+### Exampe Usage
 
 ```swift
 // ••••••• Localization •••••••
@@ -209,6 +138,76 @@ XCTAssertEqual(try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
 #endif
 ```
 
+## Importing
+
+SDGCornerstone provides libraries for use with the [Swift Package Manager](https://swift.org/package-manager/).
+
+Simply add SDGCornerstone as a dependency in `Package.swift` and specify which of the libraries to use:
+
+```swift
+let package = Package(
+    name: "MyPackage",
+    dependencies: [
+        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", from: Version(1, 0, 0)),
+    ],
+    targets: [
+        .target(name: "MyTarget", dependencies: [
+            .productItem(name: "SDGControlFlow", package: "SDGCornerstone"),
+            .productItem(name: "SDGLogic", package: "SDGCornerstone"),
+            .productItem(name: "SDGLogicTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGMathematics", package: "SDGCornerstone"),
+            .productItem(name: "SDGMathematicsTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGCollections", package: "SDGCornerstone"),
+            .productItem(name: "SDGCollectionsTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGBinaryData", package: "SDGCornerstone"),
+            .productItem(name: "SDGText", package: "SDGCornerstone"),
+            .productItem(name: "SDGPersistence", package: "SDGCornerstone"),
+            .productItem(name: "SDGPersistenceTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGRandomization", package: "SDGCornerstone"),
+            .productItem(name: "SDGRandomizationTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGLocalization", package: "SDGCornerstone"),
+            .productItem(name: "SDGLocalizationTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGGeometry", package: "SDGCornerstone"),
+            .productItem(name: "SDGGeometryTestUtilities", package: "SDGCornerstone"),
+            .productItem(name: "SDGCalendar", package: "SDGCornerstone"),
+            .productItem(name: "SDGPrecisionMathematics", package: "SDGCornerstone"),
+            .productItem(name: "SDGConcurrency", package: "SDGCornerstone"),
+            .productItem(name: "SDGExternalProcess", package: "SDGCornerstone"),
+            .productItem(name: "SDGTesting", package: "SDGCornerstone"),
+            .productItem(name: "SDGXCTestUtilities", package: "SDGCornerstone"),
+        ])
+    ]
+)
+```
+
+The libraries’ modules can then be imported in source files:
+
+```swift
+import SDGControlFlow
+import SDGLogic
+import SDGLogicTestUtilities
+import SDGMathematics
+import SDGMathematicsTestUtilities
+import SDGCollections
+import SDGCollectionsTestUtilities
+import SDGBinaryData
+import SDGText
+import SDGPersistence
+import SDGPersistenceTestUtilities
+import SDGRandomization
+import SDGRandomizationTestUtilities
+import SDGLocalization
+import SDGLocalizationTestUtilities
+import SDGGeometry
+import SDGGeometryTestUtilities
+import SDGCalendar
+import SDGPrecisionMathematics
+import SDGConcurrency
+import SDGExternalProcess
+import SDGTesting
+import SDGXCTestUtilities
+```
+
 ## About
 
 The SDGCornerstone project is maintained by Jeremy David Giesbrecht.
@@ -217,4 +216,8 @@ If SDGCornerstone saves you money, consider giving some of it as a [donation](ht
 
 If SDGCornerstone saves you time, consider devoting some of it to [contributing](https://github.com/SDGGiesbrecht/SDGCornerstone) back to the project.
 
-> [Ἄξιος γὰρ ὁ ἐργάτης τοῦ μισθοῦ αὐτοῦ ἐστι.<br>For the worker is worthy of his wages.](https://www.biblegateway.com/passage/?search=Luke+10&version=SBLGNT;NIV)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;―‎ישוע/Yeshuʼa
+> [Ἄξιος γὰρ ὁ ἐργάτης τοῦ μισθοῦ αὐτοῦ ἐστι.](https://www.biblegateway.com/passage/?search=Luke+10&version=SBLGNT;NIV)
+>
+> [For the worker is worthy of his wages.](https://www.biblegateway.com/passage/?search=Luke+10&version=SBLGNT;NIV)
+>
+> ―‎ישוע/Yeshuʼa
