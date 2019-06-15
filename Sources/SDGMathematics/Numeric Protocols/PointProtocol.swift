@@ -17,12 +17,6 @@ import SDGControlFlow
 /// A type that can be used with `+(_:_:)` and `−(_:_:)` in conjunction with an associated `Vector` type.
 ///
 /// - Note: Unlike `Strideable`, types conforming to `PointProtocol` do not need to conform to `Comparable`, allowing conformance by two‐dimensional points, etc.
-///
-/// Conformance Requirements:
-///
-/// - `Equatable`
-/// - `static func += (precedingValue: inout Self, followingValue: Vector)`
-/// - `static func − (precedingValue: Self, followingValue: Self) -> Vector`
 public protocol PointProtocol : Decodable, Encodable, Equatable {
 
     /// The type to be used as a vector.

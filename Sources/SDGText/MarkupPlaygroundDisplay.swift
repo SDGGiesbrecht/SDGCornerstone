@@ -15,10 +15,6 @@
 import SDGControlFlow
 
 /// A type which displays its rich text description in playgrounds.
-///
-/// Conformance Requirements:
-///
-/// - `func playgroundDescriptionMarkup() -> SemanticMarkup`
 public protocol MarkupPlaygroundDisplay : TextualPlaygroundDisplay {
 
     /// The markup representation of the instance.

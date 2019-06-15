@@ -16,11 +16,6 @@ import SDGControlFlow
 import SDGMathematics
 
 /// A point in a two‐dimensional space.
-///
-/// Conformance Requirements:
-///
-/// - `var x: Scalar { get set }`
-/// - `var y: Scalar { get set }`
 public protocol TwoDimensionalPointProtocol : PointProtocol
 where Vector : TwoDimensionalVectorProtocol {
 

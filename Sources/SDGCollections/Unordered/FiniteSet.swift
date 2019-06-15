@@ -15,12 +15,6 @@
 import SDGLogic
 
 /// A set small enough to reasonably iterate over.
-///
-/// Conformance Requirements:
-///
-/// - `SetDefinition`
-/// - `Collection`
-/// - `Element == Element`
 public protocol FiniteSet : Collection, ComparableSet {
 
     // @documentation(SDGCornerstone.FiniteSet.⊆)

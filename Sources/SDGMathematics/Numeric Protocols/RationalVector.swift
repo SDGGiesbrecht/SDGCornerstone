@@ -15,11 +15,6 @@
 import SDGControlFlow
 
 /// An value that can be used with ×(_:_) and ÷(_:_:) in conjunction with a scalar.
-///
-/// Conformance Requirements:
-///
-/// - `VectorProtocol`
-/// - `static func ÷= (precedingValue: inout Self, followingValue: Scalar)`
 public protocol RationalVector : VectorProtocol
 where Scalar : RationalArithmetic {
 

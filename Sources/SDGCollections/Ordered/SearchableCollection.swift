@@ -17,12 +17,6 @@ import SDGLogic
 import SDGMathematics
 
 /// An ordered collection which can be searched for elements, subsequences and patterns.
-///
-/// Conformance Requirements:
-///
-/// - `Collection`
-/// - `Element : Equatable`
-/// - `SubSequence : SearchableCollection`
 public protocol SearchableCollection : Collection, PatternProtocol
 where SubSequence : SearchableCollection {
 

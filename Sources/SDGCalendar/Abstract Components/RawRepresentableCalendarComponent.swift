@@ -83,10 +83,6 @@ extension RawRepresentableCalendarComponent {
 }
 
 /// A type that conforms to `Codable` through its `RawRepresentableCalendarComponent` interface.
-///
-/// Conformance Requirements:
-///
-/// - `RawRepresentableCalendarComponent`
 public protocol CodableViaRawRepresentableCalendarComponent : RawRepresentableCalendarComponent {}
 
 extension CodableViaRawRepresentableCalendarComponent {

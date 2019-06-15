@@ -13,10 +13,6 @@
  */
 
 /// A type that conforms to `Codable` through its `LosslessStringConvertible` interface.
-///
-/// Conformance Requirements:
-///
-/// - `LosslessStringConvertible`
 public protocol CodableViaLosslessStringConvertible : Decodable, Encodable, LosslessStringConvertible {}
 
 extension CodableViaLosslessStringConvertible {

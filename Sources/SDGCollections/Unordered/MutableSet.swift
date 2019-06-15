@@ -15,16 +15,6 @@
 import SDGControlFlow
 
 /// A mutable set.
-///
-/// Conformance Requirements:
-///   - `ComparableSet`
-///   - `init()`
-///   - `@discardableResult mutating func insert(_ newMember: Element) -> (inserted: Bool, memberAfterInsert: Element)`
-///   - `@discardableResult mutating func remove(_ member: Element) -> Element?`
-///   - Either `FiniteSet` or all of the following:
-///     - `static func ∩= (precedingValue: inout Self, followingValue: Self)`
-///     - `static func ∪= (precedingValue: inout Self, followingValue: Self)`
-///     - `static func ∖= (precedingValue: inout Self, followingValue: Self)`
 public protocol MutableSet : ComparableSet, SetAlgebra {
 
     /// Creates an empty set.

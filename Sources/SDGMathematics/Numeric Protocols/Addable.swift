@@ -17,10 +17,6 @@ import SDGControlFlow
 /// A type that can be used with `+(_:_:)`.
 ///
 /// The precise behaviour of `+` depends on the conforming type. It may be arithmetic addition, string concatenation, etc.
-///
-/// Conformance Requirements:
-///
-/// - `static func += (precedingValue: inout Self, followingValue: Self)`
 public protocol Addable {
 
     /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.

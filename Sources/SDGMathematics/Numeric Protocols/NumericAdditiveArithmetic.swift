@@ -17,12 +17,6 @@ import SDGControlFlow
 /// A one‐dimensional value that can be added and subtracted.
 ///
 /// - Note: Unlike `WholeArithmetic` or `Swift.Numeric`, `NumericAdditiveArithmetic` does not need a defined scale, allowing conformance by measurements that can use multiple units.
-///
-/// Conformance Requirements:
-///
-/// - `GenericAdditiveArithmetic`
-/// - `Comparable`
-/// - `Negatable`, `WholeNumberProtocol` or `mutating func formAbsoluteValue()`
 public protocol NumericAdditiveArithmetic : GenericAdditiveArithmetic, Comparable {
 
     // MARK: - Classification

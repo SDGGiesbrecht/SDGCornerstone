@@ -16,16 +16,6 @@ import SDGControlFlow
 import SDGLogic
 
 /// A type that can be used for whole‐number arithmetic.
-///
-/// Conformance Requirements:
-///
-/// - `NumericAdditiveArithmetic`
-/// - `FixedScaleOneDimensionalPoint`
-/// - `init(_ uInt: UIntMax)`
-/// - `init?<T>(exactly source: T) where T : BinaryInteger`
-/// - `static func ×= (precedingValue: inout Self, followingValue: Self)`
-/// - `mutating func divideAccordingToEuclid(by divisor: Self)`
-/// - `WholeNumberProtocol`, `IntegerProtocol`, `RationalNumberProtocol` or `static func ↑= (precedingValue: inout Self, followingValue: Self)`
 public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, NumericAdditiveArithmetic {
 
     // MARK: - Initialization

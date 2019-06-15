@@ -18,11 +18,7 @@ import SDGText
 
 /// An enumeration that describes the set of localizations available for a particular usage.
 ///
-/// Conformance Requirements:
-///   - `RawRepresentable` with raw values that correspond to [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag), or both of the following:
-///     - `init?(code: String)`, and
-///     - `var code: String { get }`
-///   - `static var developmentLocalization: Self { get }`
+/// Default implementations exist for most methods if an enumeration has `String` raw values corresponding to [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag).
 public protocol Localization : TextualPlaygroundDisplay {
 
     /// Creates an instance from an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).

@@ -68,12 +68,6 @@ import SDGCornerstoneLocalizations
 /// ```
 ///
 /// - Warning: If you intend to encode and decode a custom definition type, you must register the type with `CalendarDate.register(_:)` before performing any decoding operations.
-///
-/// Conformance Requirements:
-///
-/// - `static var referenceDate: CalendarDate { get }`
-/// - `init(intervalSinceReferenceDate: CalendarInterval<FloatMax>)`
-/// - `var intervalSinceReferenceDate: CalendarInterval<FloatMax> { get }`
 public protocol DateDefinition : Decodable, Encodable {
 
     // MARK: - Static Properties

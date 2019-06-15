@@ -16,11 +16,6 @@ import SDGControlFlow
 import SDGMathematics
 
 /// A set small enough to reasonably iterate over.
-///
-/// Conformance Requirements:
-///
-/// - `SetDefinition`
-/// - `static var universe: Self { get }`
 public protocol SetInRepresentableUniverse : MutableSet {
 
     /// An instance containing all possible elements.
