@@ -13,10 +13,6 @@
  */
 
 /// A type which *only ever* represents whole numbers.
-///
-/// Conformance Requirements:
-///
-/// - `WholeArithmetic`
 public protocol WholeNumberProtocol : WholeArithmetic {}
 
 extension WholeNumberProtocol {

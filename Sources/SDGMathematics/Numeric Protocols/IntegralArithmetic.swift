@@ -15,12 +15,6 @@
 import SDGControlFlow
 
 /// A type that can be used for integral arithmetic.
-///
-/// Conformance Requirements:
-///
-/// - `WholeArithmetic`
-/// - `Negatable`
-/// - `init(_ int: IntMax)`
 public protocol IntegralArithmetic : Negatable, SignedNumeric, WholeArithmetic {
 
     /// Creates an instance equal to `int`.

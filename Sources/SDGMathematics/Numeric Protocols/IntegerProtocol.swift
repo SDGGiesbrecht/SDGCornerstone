@@ -13,10 +13,6 @@
  */
 
 /// A type which *only ever* represents integers.
-///
-/// Conformance Requirements:
-///
-/// - `IntegralArithmetic`
 public protocol IntegerProtocol : IntegralArithmetic {}
 
 extension IntegerProtocol {

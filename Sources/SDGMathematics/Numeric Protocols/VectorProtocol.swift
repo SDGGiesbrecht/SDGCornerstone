@@ -15,11 +15,6 @@
 import SDGControlFlow
 
 /// An value that can be used with ×(_:_) in conjunction with a scalar.
-///
-/// Conformance Requirements:
-///
-/// - `GenericAdditiveArithmetic`
-/// - `static func ×= (precedingValue: inout Self, followingValue: Scalar)`
 public protocol VectorProtocol : Negatable {
 
     /// The scalar type.

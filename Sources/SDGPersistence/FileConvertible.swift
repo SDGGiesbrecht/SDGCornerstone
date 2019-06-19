@@ -15,11 +15,6 @@
 import Foundation
 
 /// A type than can be saved to the disk or initialized from a file.
-///
-/// Conformance Requirements:
-///
-/// - `init(file: Data, origin: URL?) throws`
-/// - `var file: Data { get }`
 public protocol FileConvertible {
 
     /// Creates an instance using raw data from a file on the disk.

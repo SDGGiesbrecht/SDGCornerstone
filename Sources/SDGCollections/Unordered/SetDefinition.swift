@@ -16,10 +16,6 @@ import SDGLogic
 import SDGMathematics
 
 /// A type that defines a set.
-///
-/// Conformance Requirements:
-///
-/// - `static func ∋ (precedingValue: Element, followingValue: Self) -> Bool`
 public protocol SetDefinition {
 
     /// The element type.

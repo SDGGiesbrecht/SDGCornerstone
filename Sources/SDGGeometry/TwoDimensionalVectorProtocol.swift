@@ -15,11 +15,6 @@
 import SDGMathematics
 
 /// A two‐dimensional vector.
-///
-/// Conformance Requirements:
-///
-/// - `var Δx: Scalar { get set }`
-/// - `var Δy: Scalar { get set }`
 public protocol TwoDimensionalVectorProtocol : VectorProtocol {
 
     /// Creates a vector using the specified differences in *x* and *y*.

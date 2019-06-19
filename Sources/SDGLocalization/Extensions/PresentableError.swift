@@ -17,10 +17,6 @@ import Foundation
 import SDGText
 
 /// An error suitable to present to users.
-///
-/// Conformance Requirements:
-///
-/// - `var localizedDescription: String`
 public protocol PresentableError : CustomStringConvertible, LocalizedError {
 
     /// Returns a localized description of the error.

@@ -13,11 +13,6 @@
  */
 
 /// A type which *only ever* represents rational numbers.
-///
-/// Conformance Requirements:
-///
-/// - `RationalArithmetic`
-/// - `func reduced() -> (numerator: Integer, denominator: Integer)`
 public protocol RationalNumberProtocol : RationalArithmetic {
 
     /// The type to use for the numerator and denominator.

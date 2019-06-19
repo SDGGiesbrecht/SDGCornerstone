@@ -15,12 +15,6 @@
 import SDGLogic
 
 /// A set that can be compared against other sets of the same type.
-///
-/// Conformance Requirements:
-///
-/// - `SetDefinition`
-/// - `static func ⊆ (precedingValue: Self, followingValue: Self) -> Bool`
-/// - `func overlaps(_ other: Self) -> Bool`
 public protocol ComparableSet : Equatable, SetDefinition {
 
     // @documentation(SDGCornerstone.ComparableSet.⊆)

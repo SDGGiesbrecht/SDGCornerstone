@@ -13,11 +13,6 @@
  */
 
 /// A one‐dimensional value that can be used with ×(_:_) and ÷(_:_:) in conjunction with a scalar.
-///
-/// Conformance Requirements:
-///
-/// - `VectorProtocol`
-/// - `static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar`
 public protocol OneDimensionalVector : VectorProtocol {
 
     /// Returns the quotient of the precedng value divided by the following value.

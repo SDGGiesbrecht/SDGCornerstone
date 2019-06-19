@@ -19,11 +19,6 @@ import SDGControlFlow
 /// See `Angle` and `CalendarInterval` for examples.
 ///
 /// - Requires: A `Measurement`’s units must be definable as ratios of one another. (For example, `Measurement` can describe angles as radians, degrees and gradians, but not temperature as Kelvins, Celsius and Fahrenheit.)
-///
-/// Conformance Requirements:
-///
-/// - `init(rawValue: Scalar)`
-/// - `var rawValue: Scalar { get set }`
 public protocol Measurement : Negatable, NumericAdditiveArithmetic {
 
     // MARK: - Scalar Type
@@ -396,10 +391,6 @@ extension Measurement {
 /// A type that conforms to `Codable` through its `Measurement` interface.
 ///
 /// Coding occurs via the `rawValue` property. If its scale changes, the provided implementation will not be backwards compatible.
-///
-/// Conformance Requirements:
-///
-/// - `Measurement`
 public protocol CodableViaMeasurement : Measurement {}
 
 extension CodableViaMeasurement {

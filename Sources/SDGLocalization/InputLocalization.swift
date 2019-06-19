@@ -13,10 +13,6 @@
  */
 
 /// An enumeration that describes the set of localizations available for a particular input usage.
-///
-/// Conformance Requirements:
-///   - `CaseIterable`
-///   - `Localization`
 public protocol InputLocalization : CaseIterable, Localization {}
 
 extension InputLocalization {

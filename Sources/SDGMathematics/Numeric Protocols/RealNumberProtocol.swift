@@ -13,8 +13,4 @@
  */
 
 /// A type which *only ever* represents real numbers.
-///
-/// Conformance Requirements:
-///
-/// - `RealArithmetic`
 public protocol RealNumberProtocol : RealArithmetic {}

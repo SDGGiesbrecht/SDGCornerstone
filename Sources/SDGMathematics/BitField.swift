@@ -15,13 +15,6 @@
 import SDGControlFlow
 
 /// A type that can be used with bitwise operations.
-///
-/// Conformance Requirements:
-///
-/// - `mutating func formBitwiseNot()`
-/// - `mutating func formBitwiseAnd(with other: Self)`
-/// - `mutating func formBitwiseOr(with other: Self)`
-/// - `mutating func formBitwiseExclusiveOr(with other: Self)`
 public protocol BitField : Equatable {
 
     /// Returns the bits not present in `self`.

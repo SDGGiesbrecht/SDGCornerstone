@@ -16,12 +16,7 @@ import SDGControlFlow
 
 /// An enumeration whose cases have a defined order.
 ///
-/// Conformance Requirements:
-///
-/// - `CaseIterable`
-/// - `Hashable`
-/// - `AllCases : BidirectionalCollection`
-/// - `allCases` must have stable indices, and should be O(1).
+/// - Requires: `allCases` must have stable indices, and should be O(1).
 public protocol OrderedEnumeration : CaseIterable, Comparable, Hashable
 where AllCases : BidirectionalCollection {
 

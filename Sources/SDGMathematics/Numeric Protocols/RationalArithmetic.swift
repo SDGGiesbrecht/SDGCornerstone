@@ -16,12 +16,6 @@ import SDGControlFlow
 import SDGLogic
 
 /// A type that can be used for rational arithmetic.
-///
-/// Conformance Requirements:
-///
-/// - `IntegralArithmetic`
-/// - `init(_ floatingPoint: FloatMax)`
-/// - `static func ÷= (precedingValue: inout Self, followingValue: Self)`
 public protocol RationalArithmetic : ExpressibleByFloatLiteral, IntegralArithmetic {
 
     /// Creates an instance as close as possible to `floatingPoint`.

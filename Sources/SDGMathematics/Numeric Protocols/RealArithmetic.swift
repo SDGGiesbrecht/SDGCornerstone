@@ -16,16 +16,6 @@ import SDGControlFlow
 import SDGLogic
 
 /// A type that can be used for real arithmetic.
-///
-/// Conformance Requirements:
-///
-/// - `RationalArithmetic`
-/// - `static var π: Self { get }`
-/// - `static var e: Self { get }`
-/// - `mutating func formLogarithm(toBase base: Self)`
-/// - `static func sin(_ angle: Angle<Self>) -> Self`
-/// - `static func arctan(_ tangent: Self) -> Angle<Self>`
-/// - `var floatingPointApproximation: FloatMax { get }`
 public protocol RealArithmetic : RationalArithmetic {
 
     // MARK: - Constants

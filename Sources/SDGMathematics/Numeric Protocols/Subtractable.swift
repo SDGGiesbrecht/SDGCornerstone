@@ -19,11 +19,6 @@ import SDGControlFlow
 /// - Note: `Subtractable` is distinct from `Negatable` to allow whole number types to perform subtraction.
 ///
 /// - Note: Unlike `Numeric`, `Subtractable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
-///
-/// Conformance Requirements:
-///
-/// - `Addable`
-/// - `static func −= (precedingValue: inout Self, followingValue: Self)`
 public protocol Subtractable : Addable {
 
     /// Returns the difference of the preceding value minus the following value.

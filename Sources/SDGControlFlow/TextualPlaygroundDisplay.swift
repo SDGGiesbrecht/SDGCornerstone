@@ -13,10 +13,6 @@
  */
 
 /// A type which displays its textual description in playgrounds.
-///
-/// Conformance Requirements:
-///
-/// - `CustomStringConvertible`
 public protocol TextualPlaygroundDisplay : CustomPlaygroundDisplayConvertible, CustomStringConvertible {}
 
 extension TextualPlaygroundDisplay {
