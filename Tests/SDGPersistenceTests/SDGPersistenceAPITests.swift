@@ -155,6 +155,9 @@ class SDGPersistenceAPITests : TestCase {
         XCTAssertEqual(mock.as(Bool.self), true)
         XCTAssertNil(mock.as(String.self))
         testCustomStringConvertibleConformance(of: mock, localizations: InterfaceLocalization.self, uniqueTestName: "true", overwriteSpecificationInsteadOfFailing: false)
+
+        mock[as: [String: Bool].self, default: [:]]["key"] = true
+        XCTAssertEqual(mock[as: [String: Bool].self, default: [:]]["key"], true)
     }
 
     func testSpecification() {
