@@ -179,6 +179,15 @@ public struct Preference : Equatable, TransparentWrapper {
         return converted as! T?
     }
 
+    public subscript<T>(as type: T.Type) -> T? where T : Decodable, T : Encodable {
+        get {
+            return `as`(type)
+        }
+        set {
+            set(to: newValue)
+        }
+    }
+
     // MARK: - Equatable
 
     public static func == (precedingValue: Preference, followingValue: Preference) -> Bool {
