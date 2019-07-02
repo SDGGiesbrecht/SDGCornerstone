@@ -179,12 +179,34 @@ public struct Preference : Equatable, TransparentWrapper {
         return converted as! T?
     }
 
+    /// The preference cast to a particular type.
+    ///
+    /// The result will be `nil` if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
+    ///
+    /// - Parameters:
+    ///     - type: The type to cast to.
     public subscript<T>(as type: T.Type) -> T? where T : Decodable, T : Encodable {
         get {
             return `as`(type)
         }
         set {
             set(to: newValue)
+        }
+    }
+
+    /// The preference cast to a particular type, or a default value.
+    ///
+    /// The result will be the default if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
+    ///
+    /// - Parameters:
+    ///     - type: The type to cast to.
+    ///     - default: The default.
+    public subscript<T>(as type: T.Type, default default: T) -> T where T : Decodable, T : Encodable {
+        get {
+            return self[as: type] ?? `default`
+        }
+        set {
+            self[as: type] = newValue
         }
     }
 
