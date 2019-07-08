@@ -22,7 +22,7 @@ import UIKit
 import SDGMathematics
 
 /// A Bézier path.
-public struct BézierPath {
+public struct BézierPath : CustomPlaygroundDisplayConvertible {
 
     // MARK: - Initialization
 
@@ -110,6 +110,12 @@ public struct BézierPath {
             endAngle: CGFloat(endAngle.inDegrees),
             clockwise: clockwise)
         #endif
+    }
+
+    // MARK: - CustomPlaygroundDisplayConvertible
+
+    public var playgroundDescription: Any {
+        return native
     }
 }
 #endif
