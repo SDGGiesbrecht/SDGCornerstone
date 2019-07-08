@@ -67,7 +67,7 @@ extension Angle : CustomPlaygroundDisplayConvertible {
         arrow.appendLine(to: rightSide)
         arrow.appendLine(to: end)
 
-        return arrow.native
+        return arrow
         #else
         return String(describing: self)
         #endif
