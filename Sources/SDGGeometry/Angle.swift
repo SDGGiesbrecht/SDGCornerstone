@@ -32,35 +32,40 @@ extension Angle : CustomPlaygroundDisplayConvertible {
     public var playgroundDescription: Any {
         #if canImport(CoreGraphics) && (canImport(AppKit) || canImport(UIKit))
 
-        let floatAngle: Angle<CGFloat> = CGFloat(self.inRadians.floatingPointApproximation).radians
+        let floatAngle: Angle<Double> = Double(self.inRadians.floatingPointApproximation).radians
 
-        let arrow: BézierPath = BézierPath()
-        let centre: CGPoint = CGPoint(x: 0, y: 0)
+        var arrow = BézierPath()
+        let centre = TwoDimensionalPoint<Double>(0, 0)
         arrow.move(to: centre)
-        let radius: CGFloat = 50
-        let start: CGPoint = CGPoint(x: radius, y: 0)
-        arrow.line(to: start)
-        arrow.appendArc(withCentre: centre, radius: radius, startAngle: 0, endAngle: floatAngle.inDegrees, clockwise: floatAngle.isNegative)
-        let end: CGPoint = centre + CGVector(direction: floatAngle, length: radius)
+        let radius: Double = 50
+        let start = TwoDimensionalPoint<Double>(radius, 0)
+        arrow.appendLine(to: start)
+        arrow.appendArc(
+            centre: centre,
+            radius: radius,
+            startAngle: 0.radians,
+            endAngle: floatAngle,
+            clockwise: floatAngle.isNegative)
+        let end = centre + TwoDimensionalVector(direction: floatAngle, length: radius)
 
-        let flip: Angle<CGFloat>
+        let flip: Angle<Double>
         if floatAngle.isNegative {
-            flip = CGFloat.π.rad
+            flip = Double.π.rad
         } else {
-            flip = (0 as CGFloat).rad
+            flip = (0 as Double).rad
         }
-        let arrowHeadLength: CGFloat = 10
-        let leftDirection: Angle<CGFloat> = ((5 as CGFloat × π()) ÷ 4).radians
-        let adjustedLeftDirection: Angle<CGFloat> = leftDirection + floatAngle + flip
-        let leftSide: CGPoint = end + CGVector(direction: adjustedLeftDirection, length: arrowHeadLength)
-        arrow.line(to: leftSide)
-        arrow.line(to: end)
+        let arrowHeadLength: Double = 10
+        let leftDirection = ((5 as Double × π()) ÷ 4).radians
+        let adjustedLeftDirection = leftDirection + floatAngle + flip
+        let leftSide = end + TwoDimensionalVector(direction: adjustedLeftDirection, length: arrowHeadLength)
+        arrow.appendLine(to: leftSide)
+        arrow.appendLine(to: end)
 
-        let rightDirection: Angle<CGFloat> = ((−1 as CGFloat × π()) ÷ 4).radians
-        let adjustedRightDirection: Angle<CGFloat> = rightDirection + floatAngle + flip
-        let rightSide: CGPoint = end + CGVector(direction: adjustedRightDirection, length: arrowHeadLength)
-        arrow.line(to: rightSide)
-        arrow.line(to: end)
+        let rightDirection = ((−1 as Double × π()) ÷ 4).radians
+        let adjustedRightDirection = rightDirection + floatAngle + flip
+        let rightSide = end + TwoDimensionalVector(direction: adjustedRightDirection, length: arrowHeadLength)
+        arrow.appendLine(to: rightSide)
+        arrow.appendLine(to: end)
 
         return arrow
         #else

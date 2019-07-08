@@ -26,6 +26,15 @@ public struct BézierPath {
 
     // MARK: - Initialization
 
+    /// Creates an empty Bézier path.
+    public init() {
+        #if canImport(AppKit)
+        self.init(NSBezierPath())
+        #elseif canImport(UIKit)
+        self.init(UIBezierPath())
+        #endif
+    }
+
     #if canImport(AppKit)
     // @documentation(BézierPath.init(native:))
     /// Creates a Bézier path with a native Bézier path.
@@ -54,15 +63,20 @@ public struct BézierPath {
 
     // MARK: - Drawing
 
+    /// Moves the current point to a new location without drawing anything in between.
+    public mutating func move(to point: TwoDimensionalPoint<Double>) {
+        native.move(to: CGPoint(point))
+    }
+
     /// Appends a straight line to the path.
     ///
     /// - Parameters:
     ///     - point: The target point.
     public mutating func appendLine(to point: TwoDimensionalPoint<Double>) {
         #if canImport(AppKit)
-        native.line(to: CGPoint(x: CGFloat(point.x), y: CGFloat(point.y)))
+        native.line(to: CGPoint(point))
         #elseif canImport(UIKit)
-        native.addLine(to: CGPoint(x: CGFloat(point.x), y: CGFloat(point.y)))
+        native.addLine(to: CGPoint(point))
         #endif
     }
 
@@ -74,22 +88,23 @@ public struct BézierPath {
     ///     - startAngle: The starting angle of the arc, measured counterclockwise from the x‐axis.
     ///     - endAngle: The end angle of the arc, measured counterclockwise from the x‐axis.
     ///     - clockwise: Whether or not the arc should be drawn in the clockwise direction.
-    public func appendArc(
+    public mutating func appendArc(
         centre: TwoDimensionalPoint<Double>,
         radius: Double,
         startAngle: Angle<Double>,
         endAngle: Angle<Double>,
         clockwise: Bool) {
+
         #if canImport(AppKit)
         return native.appendArc(
-            withCenter: CGPoint(x: CGFloat(centre.x), y: CGFloat(centre.y)),
+            withCenter: CGPoint(centre),
             radius: CGFloat(radius),
             startAngle: CGFloat(startAngle.inDegrees),
             endAngle: CGFloat(endAngle.inDegrees),
             clockwise: clockwise)
         #elseif canImport(UIKit)
         return native.addArc(
-            withCenter: CGPoint(x: CGFloat(centre.x), y: CGFloat(centre.y)),
+            withCenter: CGPoint(centre),
             radius: CGFloat(radius),
             startAngle: CGFloat(startAngle.inDegrees),
             endAngle: CGFloat(endAngle.inDegrees),
