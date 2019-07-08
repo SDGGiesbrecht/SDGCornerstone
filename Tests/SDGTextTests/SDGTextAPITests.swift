@@ -37,7 +37,7 @@ class SDGTextAPITests : TestCase {
 
     func testFont() {
         #if canImport(AppKit) || canImport(UIKit)
-        _ = Font.systemSize
+        _ = Font.system.size
         #endif
     }
 
