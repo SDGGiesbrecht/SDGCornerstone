@@ -67,7 +67,7 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
         #if canImport(AppKit)
         native = native.copy() as! NSBezierPath
         #elseif canImport(UIKit)
-        native = native.copy() as! NSBezierPath
+        native = native.copy() as! UIBezierPath
         #endif
     }
 
