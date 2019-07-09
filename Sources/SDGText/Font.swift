@@ -65,7 +65,15 @@ public struct Font {
             return native.fontName
         }
         set {
-            native = NSFont(name: newValue, size: native.pointSize) ?? Font.system.native
+            #if canImport(AppKit)
+            if let succeeded = NSFont(name: newValue, size: native.pointSize) {
+                native = succeeded
+            }
+            #elseif canImport(UIKit)
+            if let succeeded = UIFont(name: newValue, size: native.pointSize) {
+                native = succeeded
+            }
+            #endif
         }
     }
 
@@ -75,7 +83,11 @@ public struct Font {
             return Double(native.pointSize)
         }
         set {
+            #if canImport(AppKit)
             native = NSFontManager.shared.convert(native, toSize: CGFloat(newValue))
+            #elseif canImport(UIKit)
+            native = native.withSize(CGFloat(newValue))
+            #endif
         }
     }
 
