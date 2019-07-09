@@ -40,6 +40,7 @@ class SDGTextAPITests : TestCase {
         _ = Font.system.size
         var font = Font.system
         font.fontName = "Some Font"
+        font.fontName = Font.system.fontName
         font.size = 10
         #endif
     }
