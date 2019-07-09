@@ -155,7 +155,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
         var modified = "<span style=\u{22}"
 
         modified += "font\u{2D}family: &#x22;" + font.fontName + "&#x22;;"
-        modified += "font\u{2D}size: \(font.pointSize)pt;"
+        modified += "font\u{2D}size: \(font.size)pt;"
 
         modified += "\u{22}>"
         modified += html
@@ -234,7 +234,7 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     public var playgroundDescription: Any {
         #if canImport(AppKit) || canImport(UIKit)
-            return richText(font: Font.systemFont(ofSize: Font.systemSize))
+            return richText(font: Font.system)
         #else
             return rawTextApproximation()
         #endif

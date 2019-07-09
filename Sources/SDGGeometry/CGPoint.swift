@@ -20,6 +20,12 @@ import SDGMathematics
 
 extension CGPoint : TwoDimensionalPointProtocol {
 
+    // MARK: - Conversions
+
+    internal init(_ point: TwoDimensionalPoint<Double>) {
+        self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
+    }
+
     // MARK: - PointProtocol
 
     public typealias Vector = CGVector

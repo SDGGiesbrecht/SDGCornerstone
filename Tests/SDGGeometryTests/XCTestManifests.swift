@@ -7,6 +7,7 @@ extension SDGGeometryAPITests {
     // to regenerate.
     static let __allTests__SDGGeometryAPITests = [
         ("testAngle", testAngle),
+        ("testBézierPath", testBézierPath),
         ("testPoint", testPoint),
         ("testVector", testVector),
     ]

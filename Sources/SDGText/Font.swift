@@ -12,35 +12,99 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#if canImport(AppKit) || canImport(UIKit)
 #if canImport(AppKit)
 import AppKit
 #elseif canImport(UIKit)
 import UIKit
 #endif
 
-#if canImport(AppKit)
-// @documentation(SDGCornerstone.Font)
-/// An alias for `NSFont` or `UIFont`.
-public typealias Font = NSFont
-#elseif canImport(UIKit)
-// #documentation(SDGCornerstone.Font)
-/// An alias for `NSFont` or `UIFont`.
-public typealias Font = UIFont
-#endif
+/// A font.
+public struct Font {
 
-#if canImport(AppKit) || canImport(UIKit)
+    // MARK: - Static Properties
 
-extension Font {
-
-    /// Returns the size of the standard system font.
-    public static var systemSize: CGFloat {
+    /// Returns the standard system font.
+    public static var system: Font {
+        #if canImport(AppKit)
+        return Font(NSFont.systemFont(ofSize: NSFont.systemFontSize))
+        #elseif canImport(UIKit)
+        let size: CGFloat
         #if os(watchOS)
-            return 16 // From https://developer.apple.com/watchos/human-interface-guidelines/visual-design/typography/.
+        size = 16 // From https://developer.apple.com/watchos/human-interface-guidelines/visual-design/typography/.
         #elseif os(tvOS)
-            return 29 // From https://developer.apple.com/tvos/human-interface-guidelines/visual-design/typography.
+        size = 29 // From https://developer.apple.com/tvos/human-interface-guidelines/visual-design/typography.
         #else
-            return systemFontSize
+        size = UIFont.systemFontSize
+        #endif
+        return Font(UIFont.systemFont(ofSize: size))
         #endif
     }
+
+    // MARK: - Initialization
+
+    #if canImport(AppKit)
+    // @documentation(Font.init(native:))
+    /// Creates a font with a native font.
+    ///
+    /// - Parameters:
+    ///     - native: The native font.
+    public init(_ native: NSFont) {
+        self.native = native
+    }
+    #elseif canImport(UIKit)
+    // #documentation(Font.init(native:))
+    /// Creates a font with a native font.
+    ///
+    /// - Parameters:
+    ///     - native: The native font.
+    public init(_ native: UIFont) {
+        self.native = native
+    }
+    #endif
+
+    // MARK: - Properties
+
+    /// The name of the font. (This is a machine identifier; it is not for display.)
+    public var fontName: String {
+        get {
+            return native.fontName
+        }
+        set {
+            #if canImport(AppKit)
+            if let succeeded = NSFont(name: newValue, size: native.pointSize) {
+                native = succeeded
+            }
+            #elseif canImport(UIKit)
+            if let succeeded = UIFont(name: newValue, size: native.pointSize) {
+                native = succeeded
+            }
+            #endif
+        }
+    }
+
+    /// The point size of the font.
+    public var size: Double {
+        get {
+            return Double(native.pointSize)
+        }
+        set {
+            #if canImport(AppKit)
+            native = NSFontManager.shared.convert(native, toSize: CGFloat(newValue))
+            #elseif canImport(UIKit)
+            native = native.withSize(CGFloat(newValue))
+            #endif
+        }
+    }
+
+    #if canImport(AppKit)
+    // @documentation(Font.native)
+    /// The native font.
+    public var native: NSFont
+    #elseif canImport(UIKit)
+    // #documentation(Font.native)
+    /// The native font.
+    public var native: UIFont
+    #endif
 }
 #endif
