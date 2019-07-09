@@ -32,6 +32,12 @@ class SDGGeometryAPITests : TestCase {
         _ = (−90)°.playgroundDescription
     }
 
+    func testBézierPath() {
+        #if canImport(AppKit) || canImport(UIKit)
+        _ = BézierPath().playgroundDescription
+        #endif
+    }
+
     func testPoint() {
         testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
         #if canImport(CoreGraphics)
