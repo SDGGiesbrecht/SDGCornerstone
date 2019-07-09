@@ -51,7 +51,7 @@ public struct Font {
     }
     #elseif canImport(UIKit)
     // #documentation(Font.init(native:))
-    /// The native font.
+    /// Creates a font with a native font.
     public init(_ native: UIFont) {
         self.native = native
     }

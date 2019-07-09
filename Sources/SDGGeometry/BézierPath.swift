@@ -44,7 +44,7 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     }
     #elseif canImport(UIKit)
     // #documentation(BézierPath.init(native:))
-    /// The native font.
+    /// Creates a Bézier path with a native Bézier path.
     public init(_ native: UIBezierPath) {
         self.native = native
         separateCopy()
@@ -59,7 +59,7 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     public private(set) var native: NSBezierPath
     #elseif canImport(UIKit)
     // #documentation(BézierPath.native)
-    /// The native font.
+    /// The native Bézier path.
     public private(set) var native: UIBezierPath
     #endif
 
