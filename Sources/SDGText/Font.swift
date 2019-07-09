@@ -46,12 +46,18 @@ public struct Font {
     #if canImport(AppKit)
     // @documentation(Font.init(native:))
     /// Creates a font with a native font.
+    ///
+    /// - Parameters:
+    ///     - native: The native font.
     public init(_ native: NSFont) {
         self.native = native
     }
     #elseif canImport(UIKit)
     // #documentation(Font.init(native:))
     /// Creates a font with a native font.
+    ///
+    /// - Parameters:
+    ///     - native: The native font.
     public init(_ native: UIFont) {
         self.native = native
     }

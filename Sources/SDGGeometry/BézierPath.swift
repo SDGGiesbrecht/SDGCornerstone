@@ -38,6 +38,9 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     #if canImport(AppKit)
     // @documentation(BézierPath.init(native:))
     /// Creates a Bézier path with a native Bézier path.
+    ///
+    /// - Parameters:
+    ///     - native: The native Bézier path.
     public init(_ native: NSBezierPath) {
         self.native = native
         separateCopy()
@@ -45,6 +48,9 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     #elseif canImport(UIKit)
     // #documentation(BézierPath.init(native:))
     /// Creates a Bézier path with a native Bézier path.
+    ///
+    /// - Parameters:
+    ///     - native: The native Bézier path.
     public init(_ native: UIBezierPath) {
         self.native = native
         separateCopy()
@@ -74,6 +80,9 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     // MARK: - Drawing
 
     /// Moves the current point to a new location without drawing anything in between.
+    ///
+    /// - Parameters:
+    ///     - point: The destination to move to.
     public mutating func move(to point: TwoDimensionalPoint<Double>) {
         separateCopy()
         native.move(to: CGPoint(point))
