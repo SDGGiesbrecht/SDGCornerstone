@@ -40,12 +40,14 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     /// Creates a Bézier path with a native Bézier path.
     public init(_ native: NSBezierPath) {
         self.native = native
+        separateCopy()
     }
     #elseif canImport(UIKit)
     // #documentation(BézierPath.init(native:))
     /// The native font.
     public init(_ native: UIBezierPath) {
         self.native = native
+        separateCopy()
     }
     #endif
 
@@ -54,17 +56,26 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     #if canImport(AppKit)
     // @documentation(BézierPath.native)
     /// The native Bézier path.
-    public var native: NSBezierPath
+    public private(set) var native: NSBezierPath
     #elseif canImport(UIKit)
     // #documentation(BézierPath.native)
     /// The native font.
-    public var native: UIBezierPath
+    public private(set) var native: UIBezierPath
     #endif
+
+    private mutating func separateCopy() {
+        #if canImport(AppKit)
+        native = native.copy() as! NSBezierPath
+        #elseif canImport(UIKit)
+        native = native.copy() as! NSBezierPath
+        #endif
+    }
 
     // MARK: - Drawing
 
     /// Moves the current point to a new location without drawing anything in between.
     public mutating func move(to point: TwoDimensionalPoint<Double>) {
+        separateCopy()
         native.move(to: CGPoint(point))
     }
 
@@ -73,6 +84,7 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     /// - Parameters:
     ///     - point: The target point.
     public mutating func appendLine(to point: TwoDimensionalPoint<Double>) {
+        separateCopy()
         #if canImport(AppKit)
         native.line(to: CGPoint(point))
         #elseif canImport(UIKit)
@@ -94,6 +106,8 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
         startAngle: Angle<Double>,
         endAngle: Angle<Double>,
         clockwise: Bool) {
+
+        separateCopy()
 
         #if canImport(AppKit)
         return native.appendArc(
