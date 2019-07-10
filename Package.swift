@@ -179,6 +179,12 @@ let package = Package(
         /// Extensions related to text and Unicode.
         .library(name: "SDGText", targets: ["SDGText"]),
 
+        // #documentatino(SDGCollation)
+        /// Text collation.
+        ///
+        /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
+        .library(name: "SDGCollation", targets: ["SDGCollation"]),
+
         // #documentation(SDGPersistence)
         /// Preferences and simplified file system interactions.
         .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
@@ -290,6 +296,9 @@ let package = Package(
             "SDGLogic",
             "SDGMathematics",
             "SDGCollections"
+            ]),
+        // @documentation(SDGCollation)
+        .target(name: "SDGCollation", dependencies: [
             ]),
 
         // @documentation(SDGPersistence)
