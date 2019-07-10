@@ -15,7 +15,6 @@
 import SDGControlFlow
 import SDGLogic
 
-#warning("Consider using subsequences.")
 /// A mapping where the surrounding elements affect the output, and the output can be a different length than the original. An example would be spelling to pronounciation: “c” → “k”, but “ce” → “sɛ” and “ch” → “t͡ʃ”. The most specific (longest) match determines the output. Matches cannot overlap.
 public struct ContextualMapping<Input, Output>
     where Input : Hashable,
@@ -139,7 +138,7 @@ Output : RangeReplaceableCollection {
     /// - Parameters:
     ///     - input: The input.
     @inlinable public func map(_ input: Input) -> Output {
-        var remainder = input
+        var remainder = input[input.bounds]
         var output = Output()
         while ¬remainder.isEmpty {
             mapNext(&remainder, output: &output)
@@ -147,7 +146,7 @@ Output : RangeReplaceableCollection {
         return output
     }
 
-    @inlinable internal func mapNext(_ remainder: inout Input, output: inout Output) {
+    @inlinable internal func mapNext(_ remainder: inout Input.SubSequence, output: inout Output) {
         guard let first = remainder.first else {
             // End
             output += simpleOrAutomatedOutput
@@ -155,12 +154,12 @@ Output : RangeReplaceableCollection {
         }
 
         if let rule = complexMapping[first] {
-            remainder = Input(remainder.dropFirst())
+            remainder = remainder.dropFirst()
             rule.mapNext(&remainder, output: &output)
         } else {
             if isRoot {
                 let outputElements = fallbackAlgorithm(first)
-                remainder = Input(remainder.dropFirst())
+                remainder = remainder.dropFirst()
                 output += outputElements
             } else {
                 output += simpleOrAutomatedOutput
