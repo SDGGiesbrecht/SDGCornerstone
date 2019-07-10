@@ -299,7 +299,8 @@ let package = Package(
             ]),
         // @documentation(SDGCollation)
         .target(name: "SDGCollation", dependencies: [
-            "SDGControlFlow"
+            "SDGControlFlow",
+            "SDGMathematics"
             ]),
 
         // @documentation(SDGPersistence)
