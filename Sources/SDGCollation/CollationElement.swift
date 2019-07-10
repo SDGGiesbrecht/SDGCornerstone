@@ -1,22 +1,52 @@
-//
-//  CollationElement.swift
-//  SDGCollation
-//
-//  Created by Jeremy David Giesbrecht on 2016‐06‐23.
-//  Copyright © 2016 Jeremy David Giesbrecht. All rights reserved.
-//
+/*
+ CollationElement.swift
 
-import Foundation
+ This source file is part of the SDGCornerstone open source project.
+ https://sdggiesbrecht.github.io/SDGCornerstone
 
-import SDGSwiftExtensions
-import SDGFoundationExtensions
+ Copyright ©2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
-internal struct CollationElement: Archivable, EqualityOperators, JSONConvertible {
-    
+ Soli Deo gloria.
+
+ Licensed under the Apache Licence, Version 2.0.
+ See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
+ */
+
+import SDGControlFlow
+
+internal struct CollationElement : Decodable, Encodable, Equatable {
+
     // MARK: - Initialization
-    
+
+    private init(indices: [[Int]]) {
+        self.indices = indices
+    }
+
+    // MARK: - Properties
+
+    private var indices: [[Int]]
+
+    // MARK: - Encodable
+
+    internal func encode(to encoder: Encoder) throws {
+        try encode(to: encoder, via: indices)
+    }
+
+    // MARK: - Decodable
+
+    internal init(from decoder: Decoder) throws {
+        try self.init(from: decoder, via: [[Int]].self) { CollationElement(indices: $0) }
+    }
+}
+
+/*
+#warning("Needs converting.")
+internal struct CollationElement: Archivable, EqualityOperators, JSONConvertible {
+
+    // MARK: - Initialization
+
     private static func relative(index: Int, forLevel targetLevel: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
-        
+
         var circumFix: (prefix: [[Int]], suffix: [[Int]]) = ([], [])
         for level in CollationLevel.all {
             if level < targetLevel {
@@ -34,69 +64,23 @@ internal struct CollationElement: Archivable, EqualityOperators, JSONConvertible
         }
         return (CollationElement(rawIndices: circumFix.prefix), CollationElement(rawIndices: circumFix.suffix))
     }
-    
+
     internal static func beforeForLevel(level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
         return relative(CollationOrder.BeforeIndex, forLevel: level)
     }
-    
+
     internal static func afterForLevel(level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
         return relative(CollationOrder.AfterIndex, forLevel: level)
     }
-    
+
     internal init(rawIndices: [[Int]]) {
         assert(rawIndices.count == CollationLevel.all.count)
         indices = rawIndices
     }
-    
-    // MARK: - Properties
-    
-    var indices: [[Int]]
-    
+
     // MARK: - Usage
-    
+
     internal func indicesForLevel(level: CollationLevel) -> [Int] {
         return indices[level.rawValue]
     }
-    
-    // MARK: - Archivable
-    internal static let prototype: Any = CollationElement(rawIndices: [])
-    
-    // MARK: - EqualityOperators
-    
-    internal static func equalsOperator(lhs: CollationElement, _ rhs: CollationElement) -> Bool {
-        return lhs.indices.elementsEqual(rhs.indices, isEquivalent: {$0.elementsEqual($1)})
-    }
-    
-    // MARK: - JSONConvertible
-    
-    internal var JSON: JSONValue {
-        return JSONValue.ArrayValue(indices.map({JSONValue.ArrayValue($0.map({JSONValue.NumericValue($0 as NSNumber)}))}))
-    }
-    
-    internal init(JSON: JSONValue) throws {
-        switch JSON {
-        case .ArrayValue(let array):
-            indices = try array.map() {
-                (value: JSONValue) -> [Int] in
-                
-                switch value {
-                case .ArrayValue(let subArray):
-                    return try subArray.map() {
-                        (subValue: JSONValue) -> Int in
-                        
-                        switch subValue {
-                        case .NumericValue(let number):
-                            return number as Int
-                        default:
-                            throw SerializationError.InvalidData
-                        }
-                    }
-                default:
-                    throw SerializationError.InvalidData
-                }
-            }
-        default:
-            throw SerializationError.InvalidData
-        }
-    }
-}
+ */
