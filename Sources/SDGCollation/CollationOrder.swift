@@ -22,6 +22,7 @@ public struct CollationOrder {
     // MARK: - Static Properties
 
     private static let fallbackAlgorithm: (StrictString.Element) -> [CollationElement] = { _ in
+        #warning("Include in coding?")
         #warning("Not implemented yet.")
         fatalError()
     }
@@ -34,6 +35,10 @@ public struct CollationOrder {
     }()
 
     // MARK: - Initialization
+
+    private init(rules: [StrictString: [CollationElement]]) {
+        self.rules = rules
+    }
 
     // MARK: - Properties
 
