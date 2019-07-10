@@ -16,15 +16,53 @@ import SDGControlFlow
 
 internal struct CollationElement : Decodable, Encodable, Equatable {
 
+    // MARK: - Constructors
+
+    private static func relative(index: Int, at targetLevel: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
+
+        var circumfix: (prefix: [[Int]], suffix: [[Int]]) = ([], [])
+        for level in CollationLevel.allCases {
+            if level < targetLevel {
+                circumfix.prefix.append([])
+                circumfix.suffix.append([])
+            } else {
+                if level.isInReverse {
+                    circumfix.prefix.append([index])
+                    circumfix.suffix.append([])
+                } else {
+                    circumfix.prefix.append([])
+                    circumfix.suffix.append([index])
+                }
+            }
+        }
+        return (CollationElement(rawIndices: circumfix.prefix), CollationElement(rawIndices: circumfix.suffix))
+    }
+
+    internal static func before(for level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
+        #warning("Missing information.")
+        return relative(index: /* CollationOrder.beforeIndex */ 0, at: level)
+    }
+
+    internal static func after(for level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
+        #warning("Missing information.")
+        return relative(index: /* CollationOrder.afterIndex */ 0, at: level)
+    }
+
     // MARK: - Initialization
 
-    private init(indices: [[Int]]) {
-        self.indices = indices
+    private init(rawIndices: [[Int]]) {
+        self.indices = rawIndices
     }
 
     // MARK: - Properties
 
     private var indices: [[Int]]
+
+    // MARK: - Usage
+
+    internal func indices(for level: CollationLevel) -> [Int] {
+        return indices[level.rawValue]
+    }
 
     // MARK: - Encodable
 
@@ -35,52 +73,6 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
     // MARK: - Decodable
 
     internal init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: [[Int]].self) { CollationElement(indices: $0) }
+        try self.init(from: decoder, via: [[Int]].self) { CollationElement(rawIndices: $0) }
     }
 }
-
-/*
-#warning("Needs converting.")
-internal struct CollationElement: Archivable, EqualityOperators, JSONConvertible {
-
-    // MARK: - Initialization
-
-    private static func relative(index: Int, forLevel targetLevel: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
-
-        var circumFix: (prefix: [[Int]], suffix: [[Int]]) = ([], [])
-        for level in CollationLevel.all {
-            if level < targetLevel {
-                circumFix.prefix.append([])
-                circumFix.suffix.append([])
-            } else {
-                if level.isInReverse {
-                    circumFix.prefix.append([index])
-                    circumFix.suffix.append([])
-                } else {
-                    circumFix.prefix.append([])
-                    circumFix.suffix.append([index])
-                }
-            }
-        }
-        return (CollationElement(rawIndices: circumFix.prefix), CollationElement(rawIndices: circumFix.suffix))
-    }
-
-    internal static func beforeForLevel(level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
-        return relative(CollationOrder.BeforeIndex, forLevel: level)
-    }
-
-    internal static func afterForLevel(level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
-        return relative(CollationOrder.AfterIndex, forLevel: level)
-    }
-
-    internal init(rawIndices: [[Int]]) {
-        assert(rawIndices.count == CollationLevel.all.count)
-        indices = rawIndices
-    }
-
-    // MARK: - Usage
-
-    internal func indicesForLevel(level: CollationLevel) -> [Int] {
-        return indices[level.rawValue]
-    }
- */
