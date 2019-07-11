@@ -31,10 +31,6 @@ extension CollationOrder {
 
     internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
-    #warning("Are these actually necessary?")
-    static let byteOrderMark: StrictString = "\u{FEFF}"
-    static let byteOrderMarkIndices = [CollationElement(rawIndices: [[], [], [], [], [], []])]
-
     static func ducet() throws -> CollationOrder {
 
         // Constants to fetch.
@@ -148,15 +144,8 @@ extension CollationOrder {
                             elements.append(CollationElement(rawIndices: indices))
                         }
                     }
-
-                    if strictCharacters == CollationOrder.byteOrderMark {
-                        assert(
-                            CollationOrder.byteOrderMarkIndices == elements,
-                            "Missmatched byte order mark indices.")
-                    } else {
-                        rules[strictCharacters] = elements
-                    }
-
+                    
+                    rules[strictCharacters] = elements
                 }
             }
         }
