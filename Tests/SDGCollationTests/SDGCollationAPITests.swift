@@ -21,6 +21,16 @@ import SDGXCTestUtilities
 
 class SDGCollationAPITests : TestCase {
 
+    override func setUp() {
+        super.setUp()
+        StrictString.sortAlgorithm = { CollationOrder.root.stringsAreOrderedAscending($0, $1) }
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        StrictString.sortAlgorithm = { String($0) < String($1) }
+    }
+
     func testCollationOrder() {
         XCTAssert(CollationOrder.root.stringsAreOrderedAscending("A", "B"))
 
