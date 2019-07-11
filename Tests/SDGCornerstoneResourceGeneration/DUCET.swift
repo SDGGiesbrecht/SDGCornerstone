@@ -24,12 +24,24 @@ import SDGPersistence
 
 extension CollationOrder {
 
+    // MARK: - Constants
+
+    internal static let beforeIndex: CollationIndex = 0
+    internal static let endOfStringIndex: CollationIndex = beforeIndex.successor()
+    internal static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
+
+    internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
+
+    #warning("Are these actually necessary?")
     static let byteOrderMark: StrictString = "\u{FEFF}"
     static let byteOrderMarkIndices = [CollationElement(rawIndices: [[], [], [], [], [], []])]
 
     static func ducet() throws -> CollationOrder {
 
-
+        // Constants to fetch.
+        var ducetDefaultAccent: CollationIndex?
+        var ducetDefaultCase: CollationIndex?
+        var ducetMaxIndex: CollationIndex = 0
 
         print("Loading DUCET...")
 
@@ -38,7 +50,6 @@ extension CollationOrder {
 
         print("Parsing DUCET...")
 
-        var maxIndex: CollationIndex = 0
         var rules = [StrictString: [CollationElement]]()
         let lines: [String] = ducetText.lines.map { String($0.line) }
         for index in lines.indices {
@@ -89,7 +100,7 @@ extension CollationOrder {
 
                                     let string = String(StrictString(substring.contents))
                                     if let integer = CollationIndex(string, radix: 16) {
-                                        maxIndex.increase(to: integer)
+                                        ducetMaxIndex.increase(to: integer)
                                         return integer
                                     } else {
                                         preconditionFailure("Could not parse hexadecimal: \(string)")
@@ -97,8 +108,8 @@ extension CollationOrder {
                             }
                             assert(ducetIndices.count == 3, "Unexpected number of indices: \(ducetIndices) for line: \(StrictString(line))")
                             if strictCharacters == "א" {
-                                assert(ducetIndices[1] == CollationOrder.ducetDefaultAccent, "Missmatched DUCET default case. Expected: \(ducetIndices[1]))")
-                                assert(ducetIndices[2] == CollationOrder.ducetDefaultCase, "Missmatched DUCET default case. Expected: \(ducetIndices[2]))")
+                                ducetDefaultAccent = ducetIndices[1]
+                                ducetDefaultCase = ducetIndices[2]
                             }
 
                             var indices = [[CollationIndex]]()
@@ -151,6 +162,16 @@ extension CollationOrder {
             }
         }
 
+        // Derived constants.
+        let defaultAccent: CollationIndex = ducetDefaultAccent! + offsetFromDUCET
+        let defaultCase: CollationIndex = ducetDefaultCase! + offsetFromDUCET
+
+        let unifiedIdeographs: CollationIndex = ducetMaxIndex.successor() + offsetFromDUCET
+        let otherUnifiedIdeographs: CollationIndex = unifiedIdeographs.successor()
+        let unassignedCodePoints: CollationIndex = otherUnifiedIdeographs.successor()
+        let finalIndex: CollationIndex = unassignedCodePoints.successor()
+        let afterIndex: CollationIndex = finalIndex.successor()
+
         rules["<_end_>"] = [CollationElement(rawIndices: [
             [CollationOrder.endOfStringIndex],
             [CollationOrder.endOfStringIndex],
@@ -160,11 +181,11 @@ extension CollationOrder {
             [CollationOrder.endOfStringIndex]
             ])]
         rules["<_final_>"] = [CollationElement(rawIndices: [
-            [CollationOrder.finalIndex],
+            [finalIndex],
             [CollationOrder.placeholderIndex],
-            [CollationOrder.defaultAccent],
-            [CollationOrder.defaultCase],
-            [CollationOrder.finalIndex],
+            [defaultAccent],
+            [defaultCase],
+            [finalIndex],
             [CollationOrder.placeholderIndex]
             ])]
 
@@ -172,42 +193,26 @@ extension CollationOrder {
         rules["<_ReverseAccent_>"] = [CollationElement(rawIndices: [
             [],
             [afterPlaceholder],
-            [CollationOrder.defaultAccent],
-            [CollationOrder.defaultCase],
+            [defaultAccent],
+            [defaultCase],
             [],
             [CollationOrder.placeholderIndex]
             ])]
         rules["<_Script_>"] = [CollationElement(rawIndices: [[], [], [], [], [], [afterPlaceholder]])]
 
-        assert(maxIndex == CollationOrder.ducetMaxIndex, "Missmatched maximum index. Expected \(maxIndex)")
-
         print("Finished parsing DUCET.")
-
-        internal static let beforeIndex: CollationIndex = 0
-        internal static let endOfStringIndex: CollationIndex = beforeIndex.successor()
-        internal static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
-
-        internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
-
-        internal static let ducetDefaultAccent: CollationIndex = 0x20
-        internal static let defaultAccent: CollationIndex = ducetDefaultAccent + offsetFromDUCET
-        internal static let ducetDefaultCase: CollationIndex = 0x2
-        internal static let defaultCase: CollationIndex = ducetDefaultCase + offsetFromDUCET
-
-        internal static let ducetMaxIndex: CollationIndex = 65533
-        private static let unifiedIdeographs: CollationIndex = ducetMaxIndex.successor() + offsetFromDUCET
-        private static let otherUnifiedIdeographs: CollationIndex = unifiedIdeographs.successor()
-        private static let unassignedCodePoints: CollationIndex = otherUnifiedIdeographs.successor()
-        internal static let finalIndex: CollationIndex = unassignedCodePoints.successor()
-        internal static let afterIndex: CollationIndex = finalIndex.successor()
 
         return CollationOrder(
             rules: rules,
+            beforeIndex: CollationOrder.beforeIndex,
+            endOfStringIndex: CollationOrder.endOfStringIndex,
             placeholderIndex: CollationOrder.placeholderIndex,
-            defaultAccent: CollationOrder.defaultAccent,
-            defaultCase: CollationOrder.defaultCase,
-            unifiedIdeographs: CollationOrder.unifiedIdeographs,
-            otherUnifiedIdeographs: CollationOrder.otherUnifiedIdeographs,
-            unassignedCodePoints: CollationOrder.unassignedCodePoints)
+            defaultAccent: defaultAccent,
+            defaultCase: defaultCase,
+            unifiedIdeographs: unifiedIdeographs,
+            otherUnifiedIdeographs: otherUnifiedIdeographs,
+            unassignedCodePoints: unassignedCodePoints,
+            afterIndex: afterIndex
+        )
     }
 }
