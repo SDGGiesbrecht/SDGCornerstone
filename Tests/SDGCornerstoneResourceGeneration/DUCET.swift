@@ -24,8 +24,7 @@ import SDGPersistence
 
 extension CollationOrder {
 
-    // MARK: - Constants
-
+    // Constants
     internal static let beforeIndex: CollationIndex = 0
     internal static let endOfStringIndex: CollationIndex = beforeIndex.successor()
     internal static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
