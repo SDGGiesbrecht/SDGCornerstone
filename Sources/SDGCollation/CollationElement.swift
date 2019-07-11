@@ -18,9 +18,9 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
 
     // MARK: - Constructors
 
-    private static func relative(index: Int, at targetLevel: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
+    private static func relative(index: CollationIndex, at targetLevel: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
 
-        var circumfix: (prefix: [[Int]], suffix: [[Int]]) = ([], [])
+        var circumfix: (prefix: [[CollationIndex]], suffix: [[CollationIndex]]) = ([], [])
         for level in CollationLevel.allCases {
             if level < targetLevel {
                 circumfix.prefix.append([])
@@ -48,18 +48,17 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
 
     // MARK: - Initialization
 
-    internal init(rawIndices: [[Int]]) {
+    internal init(rawIndices: [[CollationIndex]]) {
         self.indices = rawIndices
     }
 
     // MARK: - Properties
 
-    #warning("These would be smaller as UInt32?")
-    private var indices: [[Int]]
+    private var indices: [[CollationIndex]]
 
     // MARK: - Usage
 
-    internal func indices(for level: CollationLevel) -> [Int] {
+    internal func indices(for level: CollationLevel) -> [CollationIndex] {
         return indices[level.rawValue]
     }
 
@@ -72,6 +71,6 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
     // MARK: - Decodable
 
     internal init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: [[Int]].self) { CollationElement(rawIndices: $0) }
+        try self.init(from: decoder, via: [[CollationIndex]].self) { CollationElement(rawIndices: $0) }
     }
 }

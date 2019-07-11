@@ -16,7 +16,7 @@
 
     // MARK: - Initialization
 
-    @inlinable init(string: String, indices: [Int]) {
+    @inlinable init(string: String, indices: [CollationIndex]) {
         self.string = string
         self.indices = indices
     }
@@ -24,5 +24,5 @@
     // MARK: - Properties
 
     @usableFromInline internal let string: String
-    @usableFromInline internal let indices: [Int]
+    @usableFromInline internal let indices: [CollationIndex]
 }

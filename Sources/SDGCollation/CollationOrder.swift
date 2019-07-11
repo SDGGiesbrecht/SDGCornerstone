@@ -24,25 +24,25 @@ public struct CollationOrder {
     // MARK: - Static Properties
 
     #warning("Are these up to date?")
-    internal static let beforeIndex: Int = 0
-    private static let endOfStringIndex: Int = beforeIndex.successor()
-    private static let offsetFromDUCET: Int = endOfStringIndex − beforeIndex
+    internal static let beforeIndex: CollationIndex = 0
+    private static let endOfStringIndex: CollationIndex = beforeIndex.successor()
+    private static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
 
-    private static let placeholderIndex: Int = endOfStringIndex.successor()
+    private static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
-    private static let ducetDefaultAccent: Int = 0x20
-    private static let defaultAccent: Int = ducetDefaultAccent + offsetFromDUCET
-    private static let ducetDefaultCase: Int = 0x2
-    private static let defaultCase: Int = ducetDefaultCase + offsetFromDUCET
+    private static let ducetDefaultAccent: CollationIndex = 0x20
+    private static let defaultAccent: CollationIndex = ducetDefaultAccent + offsetFromDUCET
+    private static let ducetDefaultCase: CollationIndex = 0x2
+    private static let defaultCase: CollationIndex = ducetDefaultCase + offsetFromDUCET
 
-    private static let ducetMaxIndex: Int = 65533
-    private static let unifiedIdeographs: Int = ducetMaxIndex.successor() + offsetFromDUCET
-    private static let otherUnifiedIdeographs: Int = unifiedIdeographs.successor()
-    private static let unassignedCodePoints: Int = otherUnifiedIdeographs.successor()
-    private static let finalIndex: Int = unassignedCodePoints.successor()
-    internal static let afterIndex: Int = finalIndex.successor()
+    private static let ducetMaxIndex: CollationIndex = 65533
+    private static let unifiedIdeographs: CollationIndex = ducetMaxIndex.successor() + offsetFromDUCET
+    private static let otherUnifiedIdeographs: CollationIndex = unifiedIdeographs.successor()
+    private static let unassignedCodePoints: CollationIndex = otherUnifiedIdeographs.successor()
+    private static let finalIndex: CollationIndex = unassignedCodePoints.successor()
+    internal static let afterIndex: CollationIndex = finalIndex.successor()
 
-    private static func elements(for category: Int, codepoint: Int) -> [CollationElement] {
+    private static func elements(for category: CollationIndex, codepoint: CollationIndex) -> [CollationElement] {
         return [CollationElement(rawIndices: [
             [category, codepoint],
             [CollationOrder.placeholderIndex],
@@ -54,9 +54,8 @@ public struct CollationOrder {
     }
 
     private static let fallbackAlgorithm: (StrictString.Element) -> [CollationElement] = { character in
-        #warning("Include in coding?")
 
-        let codepoint = Int(character.value)
+        let codepoint = CollationIndex(character.value)
 
         // Ideographs, Compatibility
         if (0x4E00 ... 0x9FFF).contains(codepoint) ∨ (0xF900 ... 0xFAFF).contains(codepoint) {
@@ -105,10 +104,10 @@ public struct CollationOrder {
 
     // MARK: - Usage
 
-    @usableFromInline internal func collationIndices(for string: StrictString) -> [Int] {
+    @usableFromInline internal func collationIndices(for string: StrictString) -> [CollationIndex] {
         let elements = contextualMapping.map(string)
 
-        var indices = [Int]()
+        var indices = [CollationIndex]()
         for level in CollationLevel.allCases {
             if level.isInReverse {
                 for element in elements.reversed() {
@@ -125,16 +124,16 @@ public struct CollationOrder {
         return indices
     }
 
-    @inlinable internal func indenticalIndices<S>(for string: S) -> [Int] where S : Collection, S.Element == Unicode.Scalar {
-        var indices = [Int]()
+    @inlinable internal func indenticalIndices<S>(for string: S) -> [CollationIndex] where S : Collection, S.Element == Unicode.Scalar {
+        var indices = [CollationIndex]()
         for character in string {
-            indices.append(Int(character.value))
+            indices.append(CollationIndex(character.value))
         }
         return indices
     }
 
     /// Returns the collation indices for a particular string.
-    @inlinable public func indices<S>(for string: S) -> [Int] where S : StringFamily {
+    @inlinable public func indices<S>(for string: S) -> [CollationIndex] where S : StringFamily {
         let strict: StrictString
         if let already = string as? StrictString {
             strict = already
