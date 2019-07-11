@@ -280,7 +280,7 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
 
     public var file: Data {
         #warning("Can this be made smaller?")
-        let encoder = JSONEncoder()
+        let encoder = CollationEncoder()
         return try! encoder.encode(self)
     }
 }
