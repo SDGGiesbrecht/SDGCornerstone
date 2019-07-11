@@ -50,7 +50,7 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
 
     // MARK: - Initialization
 
-    private init(rawIndices: [[Int]]) {
+    internal init(rawIndices: [[Int]]) {
         self.indices = rawIndices
     }
 

@@ -13,6 +13,8 @@
  */
 
 import SDGControlFlow
+import SDGLogic
+import SDGMathematics
 import SDGCollections
 import SDGText
 
@@ -21,10 +23,51 @@ public struct CollationOrder {
 
     // MARK: - Static Properties
 
-    private static let fallbackAlgorithm: (StrictString.Element) -> [CollationElement] = { _ in
+    #warning("Are these up to date?")
+    private static let beforeIndex: Int = 0
+    private static let endOfStringIndex: Int = beforeIndex.successor()
+    private static let offsetFromDUCET: Int = endOfStringIndex − beforeIndex
+
+    private static let placeholderIndex: Int = endOfStringIndex.successor()
+
+    private static let ducetDefaultAccent: Int = 0x20
+    private static let defaultAccent: Int = ducetDefaultAccent + offsetFromDUCET
+    private static let ducetDefaultCase: Int = 0x2
+    private static let defaultCase: Int = ducetDefaultCase + offsetFromDUCET
+
+    private static let ducetMaxIndex: Int = 65533
+    private static let unifiedIdeographs: Int = ducetMaxIndex.successor() + offsetFromDUCET
+    private static let otherUnifiedIdeographs: Int = unifiedIdeographs.successor()
+    private static let unassignedCodePoints: Int = otherUnifiedIdeographs.successor()
+    private static let finalIndex: Int = unassignedCodePoints.successor()
+    private static let afterIndex: Int = finalIndex.successor()
+
+    private static func elements(for category: Int, codepoint: Int) -> [CollationElement] {
+        return [CollationElement(rawIndices: [
+            [category, codepoint],
+            [CollationOrder.placeholderIndex],
+            [CollationOrder.defaultAccent],
+            [CollationOrder.defaultCase],
+            [category, codepoint],
+            [CollationOrder.placeholderIndex],
+            ])]
+    }
+
+    private static let fallbackAlgorithm: (StrictString.Element) -> [CollationElement] = { character in
         #warning("Include in coding?")
-        #warning("Not implemented yet.")
-        fatalError()
+
+        let codepoint = Int(character.value)
+
+        // Ideographs, Compatibility
+        if (0x4E00 ... 0x9FFF).contains(codepoint) ∨ (0xF900 ... 0xFAFF).contains(codepoint) {
+            // Ideographs, Compatibility
+            return elements(for: unifiedIdeographs, codepoint: codepoint)
+        } else if (0x3400 ... 0x4DBF).contains(codepoint) ∨ (0x20000 ... 0x2A6DF).contains(codepoint) ∨ (0x2A700 ... 0x2B73F).contains(codepoint) ∨ (0x2B740 ... 0x2B81F).contains(codepoint) ∨ (0x2B820 ... 0x2CEAF).contains(codepoint) {
+            // Extensions A, B, C, D, E
+            return elements(for: otherUnifiedIdeographs, codepoint: codepoint)
+        } else {
+            return elements(for: unassignedCodePoints, codepoint: codepoint)
+        }
     }
 
     /// The root collation order.
