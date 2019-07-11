@@ -295,7 +295,7 @@ let package = Package(
             "SDGControlFlow",
             "SDGLogic",
             "SDGMathematics",
-            "SDGCollections"
+            "SDGCollections",
             ]),
         // @documentation(SDGCollation)
         .target(name: "SDGCollation", dependencies: [
@@ -489,6 +489,11 @@ let package = Package(
             "SDGCollectionsTestUtilities",
             "SDGPersistenceTestUtilities",
             "SDGLocalizationTestUtilities"
+            ]),
+        .testTarget(name: "SDGCollationTests", dependencies: [
+            "SDGText",
+            "SDGCollation",
+            "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGPersistenceTests", dependencies: [
             "SDGPersistence", "SDGPersistenceTestUtilities", "SDGTesting", "SDGXCTestUtilities",

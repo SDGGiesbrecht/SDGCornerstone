@@ -197,21 +197,21 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
     }
 
     /// Returns whether or not the strings are sorted in ascending order.
-    @inlinable public func stringsAreSortedAscending<S>(
+    @inlinable public func stringsAreOrderedAscending<S>(
         _ preceding: S,
         _ following: S) -> Bool where S : StringFamily {
         return indices(for: preceding).lexicographicallyPrecedes(indices(for: following))
     }
 
     /// Returns whether or not the strings are sorted equal.
-    @inlinable public func stringsAreSortedEqual<S>(
+    @inlinable public func stringsAreOrderedEqual<S>(
         _ preceding: S,
         _ following: S) -> Bool where S : StringFamily {
         return indices(for: preceding).elementsEqual(indices(for: following))
     }
 
     /// Sorts an array of strings.
-    @inlinable public func collate<C, S>(strings: C) -> [S] where C : Sequence, S : StringFamily, C.Element == S {
+    @inlinable public func collate<C, S>(_ strings: C) -> [S] where C : Sequence, S : StringFamily, C.Element == S {
         var cache: [CollationCacheEntry<S>] = strings.map { string in
             return CollationCacheEntry(string: string, indices: self.indices(for: string))
         }
