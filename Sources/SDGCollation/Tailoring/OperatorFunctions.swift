@@ -43,7 +43,7 @@ private func add(
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
-public func ←=(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
+@discardableResult public func ←=(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
     return duplicate(definition: anchor, for: new)
 }
 
@@ -54,7 +54,7 @@ public func ←=(anchor: CollationTailoringAnchor, new: StrictString) -> Collati
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
-public func =→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
+@discardableResult public func =→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
     return duplicate(definition: anchor, for: new)
 }
 
@@ -65,7 +65,7 @@ public func =→(new: StrictString, anchor: CollationTailoringAnchor) -> Collati
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
-public func ←<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
+@discardableResult public func ←<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.after(for: .primary), to: new, basedOn: anchor)
 }
 
@@ -76,7 +76,7 @@ public func ←<(anchor: CollationTailoringAnchor, new: StrictString) -> Collati
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
-public func <→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
+@discardableResult public func <→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.before(for: .primary), to: new, basedOn: anchor)
 }
 
@@ -87,7 +87,7 @@ public func <→(new: StrictString, anchor: CollationTailoringAnchor) -> Collati
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
-public func ←<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
+@discardableResult public func ←<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.after(for: .accentsInReverse), to: new, basedOn: anchor)
 }
 
@@ -98,7 +98,7 @@ public func ←<<(anchor: CollationTailoringAnchor, new: StrictString) -> Collat
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
-public func <<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
+@discardableResult public func <<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.before(for: .accentsInReverse), to: new, basedOn: anchor)
 }
 
@@ -109,7 +109,7 @@ public func <<→(new: StrictString, anchor: CollationTailoringAnchor) -> Collat
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
-public func ←<<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
+@discardableResult public func ←<<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.after(for: .accentsForward), to: new, basedOn: anchor)
 }
 
@@ -120,7 +120,7 @@ public func ←<<<(anchor: CollationTailoringAnchor, new: StrictString) -> Colla
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
-public func <<<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
+@discardableResult public func <<<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.before(for: .accentsForward), to: new, basedOn: anchor)
 }
 
@@ -131,7 +131,7 @@ public func <<<→(new: StrictString, anchor: CollationTailoringAnchor) -> Colla
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
-public func ←<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
+@discardableResult public func ←<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.after(for: .case), to: new, basedOn: anchor)
 }
 
@@ -142,7 +142,7 @@ public func ←<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> Coll
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
-public func <<<<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
+@discardableResult public func <<<<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.before(for: .case), to: new, basedOn: anchor)
 }
 
@@ -153,7 +153,7 @@ public func <<<<→(new: StrictString, anchor: CollationTailoringAnchor) -> Coll
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
-public func ←<<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
+@discardableResult public func ←<<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.after(for: .punctuation), to: new, basedOn: anchor)
 }
 
@@ -164,7 +164,7 @@ public func ←<<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> Col
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
-public func <<<<<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
+@discardableResult public func <<<<<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.before(for: .punctuation), to: new, basedOn: anchor)
 }
 
@@ -175,7 +175,7 @@ public func <<<<<→(new: StrictString, anchor: CollationTailoringAnchor) -> Col
 /// - Parameters:
 ///     - anchor: The anchor for the rule.
 ///     - new: The new element.
-public func ←<<<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
+@discardableResult public func ←<<<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.after(for: .script), to: new, basedOn: anchor)
 }
 
@@ -186,6 +186,6 @@ public func ←<<<<<<(anchor: CollationTailoringAnchor, new: StrictString) -> Co
 /// - Parameters:
 ///     - new: The new element.
 ///     - anchor: The anchor for the rule.
-public func <<<<<<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
+@discardableResult public func <<<<<<→(new: StrictString, anchor: CollationTailoringAnchor) -> CollationTailoringAnchor {
     return add(circumfix: CollationElement.before(for: .script), to: new, basedOn: anchor)
 }
