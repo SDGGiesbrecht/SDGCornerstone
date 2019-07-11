@@ -85,7 +85,7 @@ public struct CollationOrder {
 
     // MARK: - Properties
 
-    private var rules: [StrictString: [CollationElement]] {
+    internal var rules: [StrictString: [CollationElement]] {
         didSet {
             cache = Cache()
         }
@@ -97,7 +97,7 @@ public struct CollationOrder {
     }
     private var cache = Cache()
 
-    private var contextualMapping: ContextualMapping<StrictString, [CollationElement]> {
+    internal var contextualMapping: ContextualMapping<StrictString, [CollationElement]> {
         return cached(in: &cache.contextualMapping) {
             return ContextualMapping(mapping: rules, fallbackAlgorithm: CollationOrder.fallbackAlgorithm)
         }
@@ -168,5 +168,25 @@ public struct CollationOrder {
         }
         cache.sort() { $0.indices.lexicographicallyPrecedes($1.indices) }
         return cache.map { $0.string }
+    }
+
+    // MARK: - Tailoring
+
+    /// Returns a tailored order by appling the provided rules.
+    ///
+    /// - Warning: This method cannot be called within itself and cannot be called on multiple instances at once.
+    ///
+    /// - Parameters:
+    ///     - tailoringRules: A closure which tailors the collation by listing rules defined using the operators in this module. (This is the only place where the operators can be used.)
+    public func tailored(accordingTo tailoringRules: () -> Void) -> CollationOrder {
+        inTheProcessOfTailoring = true
+        defer { inTheProcessOfTailoring = false }
+
+        tailoringRoot = self
+        defer { tailoringRoot = nil }
+
+        tailoringRules()
+
+        return tailoringRoot!
     }
 }
