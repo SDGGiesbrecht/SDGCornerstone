@@ -62,7 +62,7 @@ public struct CollationOrder {
 
     // MARK: - Usage
 
-    private func collationIndices(for string: StrictString) -> [Int] {
+    @usableFromInline internal func collationIndices(for string: StrictString) -> [Int] {
         let elements = contextualMapping.map(string)
 
         var indices = [Int]()
@@ -92,7 +92,7 @@ public struct CollationOrder {
     }
 
     /// Returns the collation indices for a particular string.
-    public func indices<S>(for string: S) -> [Int] where S : StringFamily {
+    @inlinable public func indices<S>(for string: S) -> [Int] where S : StringFamily {
         let strict: StrictString
         if let already = string as? StrictString {
             strict = already
@@ -102,5 +102,28 @@ public struct CollationOrder {
         var indices = collationIndices(for: strict)
         indices.append(contentsOf: indenticalIndices(for: string.scalars))
         return indices
+    }
+
+    /// Returns whether or not the strings are sorted in ascending order.
+    @inlinable public func stringsAreSortedAscending<S>(
+        _ preceding: S,
+        _ following: S) -> Bool where S : StringFamily {
+        return indices(for: preceding).lexicographicallyPrecedes(indices(for: following))
+    }
+
+    /// Returns whether or not the strings are sorted equal.
+    @inlinable public func stringsAreSortedEqual<S>(
+        _ preceding: S,
+        _ following: S) -> Bool where S : StringFamily {
+        return indices(for: preceding).elementsEqual(indices(for: following))
+    }
+
+    /// Sorts an array of strings.
+    @inlinable public func collate<C, S>(strings: C) -> [S] where C : Sequence, S : StringFamily, C.Element == S {
+        var cache: [CollationCacheEntry<S>] = strings.map { string in
+            return CollationCacheEntry(string: string, indices: self.indices(for: string))
+        }
+        cache.sort() { $0.indices.lexicographicallyPrecedes($1.indices) }
+        return cache.map { $0.string }
     }
 }
