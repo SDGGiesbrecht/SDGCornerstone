@@ -12,14 +12,17 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGControlFlow
 import SDGLogic
 import SDGMathematics
 import SDGCollections
 import SDGText
+import SDGPersistence
 
 /// A collation order for sorting strings.
-public struct CollationOrder : Decodable, Encodable {
+public struct CollationOrder : Decodable, Encodable, FileConvertible {
 
     // MARK: - Static Properties
 
@@ -268,5 +271,17 @@ public struct CollationOrder : Decodable, Encodable {
         try container.encode(unassignedCodePoints)
         try container.encode(afterIndex)
         try container.encode(rules)
+    }
+
+    // MARK: - FileConvertible
+
+    public init(file: Data, origin: URL?) throws {
+        let decoder = JSONDecoder()
+        self = try decoder.decode(CollationOrder.self, from: file)
+    }
+
+    public var file: Data {
+        let encoder = JSONEncoder()
+        return try! encoder.encode(self)
     }
 }

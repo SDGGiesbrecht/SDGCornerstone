@@ -303,7 +303,8 @@ let package = Package(
             "SDGLogic",
             "SDGMathematics",
             "SDGCollections",
-            "SDGText"
+            "SDGText",
+            "SDGPersistence"
             ]),
 
         // @documentation(SDGPersistence)
