@@ -28,9 +28,7 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
 
     /// The root collation order.
     public static let root: CollationOrder = {
-        #warning("Not implemented yet.")
-        fatalError()
-        /*return CollationResource(resource: "RootCollation", fileExtension: nil, bundle: SDGCollationBundle).collationOrder*/
+        return try! CollationOrder(file: Resources.root, origin: nil)
     }()
 
     // MARK: - Initialization
