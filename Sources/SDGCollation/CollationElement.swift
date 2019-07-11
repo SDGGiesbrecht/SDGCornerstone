@@ -39,13 +39,11 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
     }
 
     internal static func before(for level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
-        #warning("Missing information.")
-        return relative(index: /* CollationOrder.beforeIndex */ 0, at: level)
+        return relative(index: CollationOrder.beforeIndex, at: level)
     }
 
     internal static func after(for level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
-        #warning("Missing information.")
-        return relative(index: /* CollationOrder.afterIndex */ 0, at: level)
+        return relative(index: CollationOrder.afterIndex, at: level)
     }
 
     // MARK: - Initialization

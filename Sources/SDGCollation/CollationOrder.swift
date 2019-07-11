@@ -24,7 +24,7 @@ public struct CollationOrder {
     // MARK: - Static Properties
 
     #warning("Are these up to date?")
-    private static let beforeIndex: Int = 0
+    internal static let beforeIndex: Int = 0
     private static let endOfStringIndex: Int = beforeIndex.successor()
     private static let offsetFromDUCET: Int = endOfStringIndex − beforeIndex
 
@@ -40,7 +40,7 @@ public struct CollationOrder {
     private static let otherUnifiedIdeographs: Int = unifiedIdeographs.successor()
     private static let unassignedCodePoints: Int = otherUnifiedIdeographs.successor()
     private static let finalIndex: Int = unassignedCodePoints.successor()
-    private static let afterIndex: Int = finalIndex.successor()
+    internal static let afterIndex: Int = finalIndex.successor()
 
     private static func elements(for category: Int, codepoint: Int) -> [CollationElement] {
         return [CollationElement(rawIndices: [
