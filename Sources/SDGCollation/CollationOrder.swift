@@ -24,21 +24,21 @@ public struct CollationOrder {
     // MARK: - Static Properties
 
     internal static let beforeIndex: CollationIndex = 0
-    private static let endOfStringIndex: CollationIndex = beforeIndex.successor()
+    internal static let endOfStringIndex: CollationIndex = beforeIndex.successor()
     internal static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
 
     internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
     internal static let ducetDefaultAccent: CollationIndex = 0x20
-    private static let defaultAccent: CollationIndex = ducetDefaultAccent + offsetFromDUCET
+    internal static let defaultAccent: CollationIndex = ducetDefaultAccent + offsetFromDUCET
     internal static let ducetDefaultCase: CollationIndex = 0x2
-    private static let defaultCase: CollationIndex = ducetDefaultCase + offsetFromDUCET
+    internal static let defaultCase: CollationIndex = ducetDefaultCase + offsetFromDUCET
 
-    private static let ducetMaxIndex: CollationIndex = 65533
+    internal static let ducetMaxIndex: CollationIndex = 65533
     private static let unifiedIdeographs: CollationIndex = ducetMaxIndex.successor() + offsetFromDUCET
     private static let otherUnifiedIdeographs: CollationIndex = unifiedIdeographs.successor()
     private static let unassignedCodePoints: CollationIndex = otherUnifiedIdeographs.successor()
-    private static let finalIndex: CollationIndex = unassignedCodePoints.successor()
+    internal static let finalIndex: CollationIndex = unassignedCodePoints.successor()
     internal static let afterIndex: CollationIndex = finalIndex.successor()
 
     private static func elements(for category: CollationIndex, codepoint: CollationIndex) -> [CollationElement] {
@@ -77,7 +77,7 @@ public struct CollationOrder {
 
     // MARK: - Initialization
 
-    private init(rules: [StrictString: [CollationElement]]) {
+    internal init(rules: [StrictString: [CollationElement]]) {
         self.rules = rules
     }
 
