@@ -28,6 +28,9 @@ extension CollationOrder {
     static let byteOrderMarkIndices = [CollationElement(rawIndices: [[], [], [], [], [], []])]
 
     static func ducet() throws -> CollationOrder {
+
+
+
         print("Loading DUCET...")
 
         let ducetURL = URL(string: "http://www.unicode.org/Public/UCA/latest/allkeys.txt")!
@@ -180,6 +183,31 @@ extension CollationOrder {
 
         print("Finished parsing DUCET.")
 
-        return CollationOrder(rules: rules)
+        internal static let beforeIndex: CollationIndex = 0
+        internal static let endOfStringIndex: CollationIndex = beforeIndex.successor()
+        internal static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
+
+        internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
+
+        internal static let ducetDefaultAccent: CollationIndex = 0x20
+        internal static let defaultAccent: CollationIndex = ducetDefaultAccent + offsetFromDUCET
+        internal static let ducetDefaultCase: CollationIndex = 0x2
+        internal static let defaultCase: CollationIndex = ducetDefaultCase + offsetFromDUCET
+
+        internal static let ducetMaxIndex: CollationIndex = 65533
+        private static let unifiedIdeographs: CollationIndex = ducetMaxIndex.successor() + offsetFromDUCET
+        private static let otherUnifiedIdeographs: CollationIndex = unifiedIdeographs.successor()
+        private static let unassignedCodePoints: CollationIndex = otherUnifiedIdeographs.successor()
+        internal static let finalIndex: CollationIndex = unassignedCodePoints.successor()
+        internal static let afterIndex: CollationIndex = finalIndex.successor()
+
+        return CollationOrder(
+            rules: rules,
+            placeholderIndex: CollationOrder.placeholderIndex,
+            defaultAccent: CollationOrder.defaultAccent,
+            defaultCase: CollationOrder.defaultCase,
+            unifiedIdeographs: CollationOrder.unifiedIdeographs,
+            otherUnifiedIdeographs: CollationOrder.otherUnifiedIdeographs,
+            unassignedCodePoints: CollationOrder.unassignedCodePoints)
     }
 }

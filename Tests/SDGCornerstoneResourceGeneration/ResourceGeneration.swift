@@ -22,7 +22,7 @@ final class SDGInterfaceResourceGeneration : XCTestCase {
     // Complete the word “test” to activate and run the generators.
 
     func tesRefreshUnicodeData() throws {
-        _ = try CollationOrder.ducet()
+        _ = try CollationOrder.generateRoot()
     }
 }
 #endif

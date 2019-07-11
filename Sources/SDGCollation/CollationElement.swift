@@ -18,7 +18,7 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
 
     // MARK: - Constructors
 
-    private static func relative(index: CollationIndex, at targetLevel: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
+    internal static func relative(index: CollationIndex, at targetLevel: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
 
         var circumfix: (prefix: [[CollationIndex]], suffix: [[CollationIndex]]) = ([], [])
         for level in CollationLevel.allCases {
@@ -36,14 +36,6 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
             }
         }
         return (CollationElement(rawIndices: circumfix.prefix), CollationElement(rawIndices: circumfix.suffix))
-    }
-
-    internal static func before(for level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
-        return relative(index: CollationOrder.beforeIndex, at: level)
-    }
-
-    internal static func after(for level: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
-        return relative(index: CollationOrder.afterIndex, at: level)
     }
 
     // MARK: - Initialization

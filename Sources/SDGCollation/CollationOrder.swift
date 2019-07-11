@@ -23,51 +23,6 @@ public struct CollationOrder {
 
     // MARK: - Static Properties
 
-    internal static let beforeIndex: CollationIndex = 0
-    internal static let endOfStringIndex: CollationIndex = beforeIndex.successor()
-    internal static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
-
-    internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
-
-    internal static let ducetDefaultAccent: CollationIndex = 0x20
-    internal static let defaultAccent: CollationIndex = ducetDefaultAccent + offsetFromDUCET
-    internal static let ducetDefaultCase: CollationIndex = 0x2
-    internal static let defaultCase: CollationIndex = ducetDefaultCase + offsetFromDUCET
-
-    internal static let ducetMaxIndex: CollationIndex = 65533
-    private static let unifiedIdeographs: CollationIndex = ducetMaxIndex.successor() + offsetFromDUCET
-    private static let otherUnifiedIdeographs: CollationIndex = unifiedIdeographs.successor()
-    private static let unassignedCodePoints: CollationIndex = otherUnifiedIdeographs.successor()
-    internal static let finalIndex: CollationIndex = unassignedCodePoints.successor()
-    internal static let afterIndex: CollationIndex = finalIndex.successor()
-
-    private static func elements(for category: CollationIndex, codepoint: CollationIndex) -> [CollationElement] {
-        return [CollationElement(rawIndices: [
-            [category, codepoint],
-            [CollationOrder.placeholderIndex],
-            [CollationOrder.defaultAccent],
-            [CollationOrder.defaultCase],
-            [category, codepoint],
-            [CollationOrder.placeholderIndex],
-            ])]
-    }
-
-    private static let fallbackAlgorithm: (StrictString.Element) -> [CollationElement] = { character in
-
-        let codepoint = CollationIndex(character.value)
-
-        // Ideographs, Compatibility
-        if (0x4E00 ... 0x9FFF).contains(codepoint) ∨ (0xF900 ... 0xFAFF).contains(codepoint) {
-            // Ideographs, Compatibility
-            return elements(for: unifiedIdeographs, codepoint: codepoint)
-        } else if (0x3400 ... 0x4DBF).contains(codepoint) ∨ (0x20000 ... 0x2A6DF).contains(codepoint) ∨ (0x2A700 ... 0x2B73F).contains(codepoint) ∨ (0x2B740 ... 0x2B81F).contains(codepoint) ∨ (0x2B820 ... 0x2CEAF).contains(codepoint) {
-            // Extensions A, B, C, D, E
-            return elements(for: otherUnifiedIdeographs, codepoint: codepoint)
-        } else {
-            return elements(for: unassignedCodePoints, codepoint: codepoint)
-        }
-    }
-
     /// The root collation order.
     public static let root: CollationOrder = {
         #warning("Not implemented yet.")
@@ -77,8 +32,27 @@ public struct CollationOrder {
 
     // MARK: - Initialization
 
-    internal init(rules: [StrictString: [CollationElement]]) {
+    internal init(
+        rules: [StrictString: [CollationElement]],
+        beforeIndex: CollationIndex,
+        endOfStringIndex: CollationIndex,
+        placeholderIndex: CollationIndex,
+        defaultAccent: CollationIndex,
+        defaultCase: CollationIndex,
+        unifiedIdeographs: CollationIndex,
+        otherUnifiedIdeographs: CollationIndex,
+        unassignedCodePoints: CollationIndex,
+        afterIndex: CollationIndex) {
         self.rules = rules
+        self.beforeIndex = beforeIndex
+        self.endOfStringIndex = endOfStringIndex
+        self.placeholderIndex = placeholderIndex
+        self.defaultAccent = defaultAccent
+        self.defaultCase = defaultCase
+        self.unifiedIdeographs = unifiedIdeographs
+        self.otherUnifiedIdeographs = otherUnifiedIdeographs
+        self.unassignedCodePoints = unassignedCodePoints
+        self.afterIndex = afterIndex
     }
 
     // MARK: - Properties
@@ -95,9 +69,86 @@ public struct CollationOrder {
     }
     private var cache = Cache()
 
+    internal let beforeIndex: CollationIndex
+    private let endOfStringIndex: CollationIndex
+    private let placeholderIndex: CollationIndex
+    private let defaultAccent: CollationIndex
+    private let defaultCase: CollationIndex
+    private let unifiedIdeographs: CollationIndex
+    private let otherUnifiedIdeographs: CollationIndex
+    private let unassignedCodePoints: CollationIndex
+    internal let afterIndex: CollationIndex
+
     internal var contextualMapping: ContextualMapping<StrictString, [CollationElement]> {
         return cached(in: &cache.contextualMapping) {
-            return ContextualMapping(mapping: rules, fallbackAlgorithm: CollationOrder.fallbackAlgorithm)
+            return ContextualMapping(mapping: rules, fallbackAlgorithm: fallbackAlgorithm(
+                placeholderIndex: placeholderIndex,
+                defaultAccent: defaultAccent,
+                defaultCase: defaultCase,
+                unifiedIdeographs: unifiedIdeographs,
+                otherUnifiedIdeographs: otherUnifiedIdeographs,
+                unassignedCodePoints: unassignedCodePoints))
+        }
+    }
+
+    // MARK: - Fallback
+
+    // These must not depend on static constants. The original constants from when the instance was encoded must be used instead.
+
+    private static func elements(
+        for category: CollationIndex,
+        codepoint: CollationIndex,
+        constants: (
+        placeholderIndex: CollationIndex,
+        defaultAccent: CollationIndex,
+        defaultCase: CollationIndex
+        )) -> [CollationElement] {
+
+        return [CollationElement(rawIndices: [
+            [category, codepoint],
+            [constants.placeholderIndex],
+            [constants.defaultAccent],
+            [constants.defaultCase],
+            [category, codepoint],
+            [constants.placeholderIndex],
+            ])]
+    }
+
+    private func fallbackAlgorithm(
+        placeholderIndex: CollationIndex,
+        defaultAccent: CollationIndex,
+        defaultCase: CollationIndex,
+        unifiedIdeographs: CollationIndex,
+        otherUnifiedIdeographs: CollationIndex,
+        unassignedCodePoints: CollationIndex) -> (StrictString.Element) -> [CollationElement] {
+
+        return { character in
+
+            let codepoint = CollationIndex(character.value)
+            let constants = (
+                placeholderIndex: placeholderIndex,
+                defaultAccent: defaultAccent,
+                defaultCase: defaultCase)
+
+            // Ideographs, Compatibility
+            if (0x4E00 ... 0x9FFF).contains(codepoint) ∨ (0xF900 ... 0xFAFF).contains(codepoint) {
+                // Ideographs, Compatibility
+                return CollationOrder.elements(
+                    for: unifiedIdeographs,
+                    codepoint: codepoint,
+                    constants: constants)
+            } else if (0x3400 ... 0x4DBF).contains(codepoint) ∨ (0x20000 ... 0x2A6DF).contains(codepoint) ∨ (0x2A700 ... 0x2B73F).contains(codepoint) ∨ (0x2B740 ... 0x2B81F).contains(codepoint) ∨ (0x2B820 ... 0x2CEAF).contains(codepoint) {
+                // Extensions A, B, C, D, E
+                return CollationOrder.elements(
+                    for: otherUnifiedIdeographs,
+                    codepoint: codepoint,
+                    constants: constants)
+            } else {
+                return CollationOrder.elements(
+                    for: unassignedCodePoints,
+                    codepoint: codepoint,
+                    constants: constants)
+            }
         }
     }
 
@@ -117,7 +168,7 @@ public struct CollationOrder {
                     indices += element.indices(for: level)
                 }
             }
-            indices.append(CollationOrder.endOfStringIndex)
+            indices.append(endOfStringIndex)
         }
 
         return indices
