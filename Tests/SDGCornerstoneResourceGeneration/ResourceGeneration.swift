@@ -22,7 +22,8 @@ final class SDGInterfaceResourceGeneration : XCTestCase {
     // Complete the word “test” to activate and run the generators.
 
     func tesRefreshUnicodeData() throws {
-        _ = try CollationOrder.generateRoot()
+        let root = try CollationOrder.generateRoot()
+        try root.save(to: collationResourcesDirectory.appendingPathComponent("Root"))
     }
 }
 #endif
