@@ -56,6 +56,7 @@ internal struct CollationElement : Decodable, Encodable, Equatable {
 
     // MARK: - Properties
 
+    #warning("These would be smaller as UInt32?")
     private var indices: [[Int]]
 
     // MARK: - Usage
