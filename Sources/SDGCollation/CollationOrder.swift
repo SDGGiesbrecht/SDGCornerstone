@@ -119,8 +119,7 @@ public struct CollationOrder {
                     indices += element.indices(for: level)
                 }
             }
-            #warning("Not available yet.")
-            //indices += CollationOrder.endOfStringIndex
+            indices.append(CollationOrder.endOfStringIndex)
         }
 
         return indices
