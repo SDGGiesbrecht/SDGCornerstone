@@ -1,5 +1,5 @@
 /*
- CollationIndex.swift
+ Repository.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,5 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-/// A collation index.
-public typealias CollationIndex = UInt32
+import Foundation
+
+let repositoryRoot = URL(fileURLWithPath: #file).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+
+let resourcesDirectory = repositoryRoot.appendingPathComponent("Resources")
+let collationResourcesDirectory = resourcesDirectory.appendingPathComponent("SDGCollation")

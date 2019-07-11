@@ -432,10 +432,22 @@ let package = Package(
             "SDGPersistence"
             ]),
 
-        // Internal utilities.
+        // Internal modules.
 
         .target(name: "SDGCornerstoneLocalizations", dependencies: [
             "SDGControlFlow",
+            "SDGLocalization"
+            ]),
+
+        // Internal utilities.
+
+        .testTarget(name: "SDGCornerstoneResourceGeneration", dependencies: [
+            "SDGLogic",
+            "SDGMathematics",
+            "SDGCollections",
+            "SDGText",
+            "SDGCollation",
+            "SDGPersistence",
             "SDGLocalization"
             ]),
 

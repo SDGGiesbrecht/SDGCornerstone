@@ -23,16 +23,15 @@ public struct CollationOrder {
 
     // MARK: - Static Properties
 
-    #warning("Are these up to date?")
     internal static let beforeIndex: CollationIndex = 0
     private static let endOfStringIndex: CollationIndex = beforeIndex.successor()
-    private static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
+    internal static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
 
-    private static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
+    internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
-    private static let ducetDefaultAccent: CollationIndex = 0x20
+    internal static let ducetDefaultAccent: CollationIndex = 0x20
     private static let defaultAccent: CollationIndex = ducetDefaultAccent + offsetFromDUCET
-    private static let ducetDefaultCase: CollationIndex = 0x2
+    internal static let ducetDefaultCase: CollationIndex = 0x2
     private static let defaultCase: CollationIndex = ducetDefaultCase + offsetFromDUCET
 
     private static let ducetMaxIndex: CollationIndex = 65533
