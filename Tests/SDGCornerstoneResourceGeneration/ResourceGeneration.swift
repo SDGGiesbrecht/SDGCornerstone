@@ -13,6 +13,8 @@
  */
 
 #if canImport(AppKit)
+import SDGCollation
+
 import XCTest
 
 final class SDGInterfaceResourceGeneration : XCTestCase {
@@ -20,7 +22,7 @@ final class SDGInterfaceResourceGeneration : XCTestCase {
     // Complete the word “test” to activate and run the generators.
 
     func tesRefreshUnicodeData() throws {
-        _ = CollationOrder.ducet()
+        _ = try CollationOrder.ducet()
     }
 }
 #endif
