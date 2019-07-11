@@ -144,7 +144,7 @@ extension CollationOrder {
                             elements.append(CollationElement(rawIndices: indices))
                         }
                     }
-                    
+
                     rules[strictCharacters] = elements
                 }
             }

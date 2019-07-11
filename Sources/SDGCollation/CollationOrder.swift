@@ -19,7 +19,7 @@ import SDGCollections
 import SDGText
 
 /// A collation order for sorting strings.
-public struct CollationOrder {
+public struct CollationOrder : Decodable, Encodable {
 
     // MARK: - Static Properties
 
@@ -236,5 +236,37 @@ public struct CollationOrder {
         tailoringRules()
 
         return tailoringRoot!
+    }
+
+    // MARK: - Decodable
+
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        beforeIndex = try container.decode(CollationIndex.self)
+        endOfStringIndex = try container.decode(CollationIndex.self)
+        placeholderIndex = try container.decode(CollationIndex.self)
+        defaultAccent = try container.decode(CollationIndex.self)
+        defaultCase = try container.decode(CollationIndex.self)
+        unifiedIdeographs = try container.decode(CollationIndex.self)
+        otherUnifiedIdeographs = try container.decode(CollationIndex.self)
+        unassignedCodePoints = try container.decode(CollationIndex.self)
+        afterIndex = try container.decode(CollationIndex.self)
+        rules = try container.decode([StrictString: [CollationElement]].self)
+    }
+
+    // MARK: - Encodable
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(beforeIndex)
+        try container.encode(endOfStringIndex)
+        try container.encode(placeholderIndex)
+        try container.encode(defaultAccent)
+        try container.encode(defaultCase)
+        try container.encode(unifiedIdeographs)
+        try container.encode(otherUnifiedIdeographs)
+        try container.encode(unassignedCodePoints)
+        try container.encode(afterIndex)
+        try container.encode(rules)
     }
 }
