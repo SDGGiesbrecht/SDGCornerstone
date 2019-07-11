@@ -22,7 +22,7 @@ import SDGText
 import SDGPersistence
 
 /// A collation order for sorting strings.
-public struct CollationOrder : Decodable, Encodable, FileConvertible {
+public struct CollationOrder : Decodable, Encodable, Equatable, FileConvertible {
 
     // MARK: - Static Properties
 
@@ -64,9 +64,12 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
         }
     }
 
-    private class Cache {
+    private class Cache : Equatable {
         fileprivate init() {}
         fileprivate var contextualMapping: ContextualMapping<StrictString, [CollationElement]>?
+
+        // For Equatable synthesis:
+        fileprivate static func == (precedingValue: Cache, followingValue: Cache) -> Bool { return true }
     }
     private var cache = Cache()
 
@@ -274,7 +277,7 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
     // MARK: - FileConvertible
 
     public init(file: Data, origin: URL?) throws {
-        let decoder = JSONDecoder()
+        let decoder = CollationDecoder()
         self = try decoder.decode(CollationOrder.self, from: file)
     }
 

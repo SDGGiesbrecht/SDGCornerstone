@@ -31,6 +31,12 @@ class SDGCollationAPITests : TestCase {
         StrictString.sortAlgorithm = { String($0) < String($1) }
     }
 
+    func testCoding() {
+        let encoded = CollationOrder.root.file
+        let decoded = try CollationOrder(file: encoded, origin: nil)
+        XCTAssertEqual(decoded, CollationOrder.root)
+    }
+
     func testCollationOrder() {
         XCTAssert(CollationOrder.root.stringsAreOrderedAscending("A", "B"))
 

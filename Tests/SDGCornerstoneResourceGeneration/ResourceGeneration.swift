@@ -25,10 +25,5 @@ final class SDGInterfaceResourceGeneration : XCTestCase {
         let root = try CollationOrder.generateRoot()
         try root.save(to: collationResourcesDirectory.appendingPathComponent("Root"))
     }
-
-    func testEncoding() throws {
-        #warning("Temporary.")
-        _ = CollationOrder.root.file
-    }
 }
 #endif

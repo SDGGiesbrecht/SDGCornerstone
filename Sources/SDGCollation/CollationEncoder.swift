@@ -51,17 +51,20 @@ internal class CollationEncoder : Encoder, SingleValueEncodingContainer, Unkeyed
     internal func encode(_ value: String) throws {
         let bytes = value.file
         let count = UInt8(truncatingIfNeeded: bytes.count)
-        data.append(count)
         data.append(contentsOf: bytes)
+        data.append(count)
+    }
+
+    internal func encode(_ value: UInt8) throws {
+        data.append(value)
     }
 
     internal func encode(_ value: CollationIndex) throws {
-        var littleEndian = value.littleEndian
+        let littleEndian = value.littleEndian
         let count = MemoryLayout<CollationIndex>.size
-        let bytes = withUnsafePointer(to: &littleEndian) {
-            $0.withMemoryRebound(to: UInt8.self, capacity: count) {
-                UnsafeBufferPointer(start: $0, count: count)
-            }
+        let bytes: [UInt8] = (0 ..< UInt32(truncatingIfNeeded: count)).map { index in
+            let offset: UInt32 = index × 8
+            return UInt8(truncatingIfNeeded: littleEndian >> offset)
         }
         data.append(contentsOf: bytes)
     }
