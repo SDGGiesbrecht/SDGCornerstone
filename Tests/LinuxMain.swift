@@ -2,6 +2,7 @@ import XCTest
 
 import SDGBinaryDataTests
 import SDGCalendarTests
+import SDGCollationTests
 import SDGCollectionsTests
 import SDGConcurrencyTests
 import SDGControlFlowTests
@@ -19,6 +20,7 @@ import SDGTextTests
 var tests = [XCTestCaseEntry]()
 tests += SDGBinaryDataTests.__allTests()
 tests += SDGCalendarTests.__allTests()
+tests += SDGCollationTests.__allTests()
 tests += SDGCollectionsTests.__allTests()
 tests += SDGConcurrencyTests.__allTests()
 tests += SDGControlFlowTests.__allTests()
