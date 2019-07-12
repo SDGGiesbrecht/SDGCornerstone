@@ -43,7 +43,8 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
         unifiedIdeographs: CollationIndex,
         otherUnifiedIdeographs: CollationIndex,
         unassignedCodePoints: CollationIndex,
-        afterIndex: CollationIndex) {
+        afterIndex: CollationIndex) { // @exmpt(from: tests) Ureachable exept via @testable for resource generation.
+
         self.rules = rules
         self.beforeIndex = beforeIndex
         self.endOfStringIndex = endOfStringIndex

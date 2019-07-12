@@ -75,6 +75,12 @@ class SDGCollationAPITests : TestCase {
         XCTAssert(testCollation.stringsAreOrderedAscending("β", "β̣"))
 
         XCTAssert(testCollation.collate(["γ", "α", "β"]) == ["α", "β", "γ"])
+
+        XCTAssert(testCollation.stringsAreOrderedAscending("\u{FAFE}", "\u{FAFF}"))
+        XCTAssert(testCollation.stringsAreOrderedAscending("\u{2B820}", "\u{2B821}"))
+        XCTAssert(testCollation.stringsAreOrderedAscending("\u{30000}", "\u{30001}"))
+
+        XCTAssert(testCollation.stringsAreOrderedEqual("a", "a"))
     }
 
     func testInterspersion() {
