@@ -93,7 +93,6 @@ Output : RangeReplaceableCollection {
     ///     - element: The element to use the fallback algorithm on.
     @inlinable public init(mapping: [Input: Output], fallbackAlgorithm: @escaping (_ element: Input.Element) -> Output) {
         self.isRoot = true
-        self.input = nil
         self.simpleOutput = nil
         self.complexMapping = ContextualMapping.generate(mapping: mapping, fallbackAlgorithm: fallbackAlgorithm)
         self.fallbackAlgorithm = fallbackAlgorithm
@@ -106,7 +105,6 @@ Output : RangeReplaceableCollection {
         fallbackAlgorithm: @escaping (Input.Element) -> Output) {
 
         self.isRoot = false
-        self.input = input
         self.simpleOutput = simpleOutput
         self.complexMapping = ContextualMapping.generate(
             mapping: complexMapping,
@@ -117,20 +115,9 @@ Output : RangeReplaceableCollection {
     // MARK: - Properties
 
     @usableFromInline internal let isRoot: Bool
-    @usableFromInline internal let input: Input.Element?
     @usableFromInline internal let simpleOutput: Output?
     @usableFromInline internal let complexMapping: [Input.Element: ContextualMapping<Input, Output>]
     @usableFromInline internal let fallbackAlgorithm: (Input.Element) -> Output
-
-    @usableFromInline internal var simpleOrAutomatedOutput: Output {
-        if let simple = simpleOutput {
-            return simple
-        } else if let simpleInput = input {
-            return fallbackAlgorithm(simpleInput)
-        } else {
-            _unreachable()
-        }
-    }
 
     // MARK: - Usage
 
@@ -150,7 +137,7 @@ Output : RangeReplaceableCollection {
     @inlinable internal func mapNext(_ remainder: inout Input.SubSequence, output: inout Output) {
         guard let first = remainder.first else {
             // End
-            output += simpleOrAutomatedOutput
+            output += simpleOutput!
             return
         }
 
@@ -163,7 +150,7 @@ Output : RangeReplaceableCollection {
                 remainder = remainder.dropFirst()
                 output += outputElements
             } else {
-                output += simpleOrAutomatedOutput
+                output += simpleOutput!
             }
         }
     }
