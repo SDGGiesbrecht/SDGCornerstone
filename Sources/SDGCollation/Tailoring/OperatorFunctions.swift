@@ -20,7 +20,7 @@ import SDGText
 ///
 /// - Parameters:
 ///     - anchor: The anchor string.
-public prefix func *(anchor: StrictString) -> CollationTailoringAnchor {
+public postfix func *(anchor: StrictString) -> CollationTailoringAnchor { // @exempt(from: unicode)
     return CollationTailoringAnchor(tailoringRoot!.contextualMapping.map(anchor))
 }
 

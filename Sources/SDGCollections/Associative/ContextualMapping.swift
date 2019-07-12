@@ -25,7 +25,7 @@ Output : RangeReplaceableCollection {
     // MARK: - Static Methods
 
     @inlinable internal static var defaultFallbackAlgorithm:  (Input.Element) -> Output {
-        return {(input: Input.Element) -> Output in
+        return { (input: Input.Element) -> Output in
             _preconditionFailure({ localization in
                 switch localization {
                 case .englishCanada:

@@ -90,8 +90,8 @@ extension CollationOrder {
 
                             let ducetIndices = collationElementText.components(
                                 separatedBy: ConditionalPattern({ $0 ∈ Set<UnicodeScalar>([".", "*"]) }))
-                                .filter({ ¬$0.range.isEmpty }).map {
-                                    (substring: PatternMatch<StrictString>) -> CollationIndex in
+                                .filter({ ¬$0.range.isEmpty })
+                                .map { (substring: PatternMatch<StrictString>) -> CollationIndex in
 
                                     let string = String(StrictString(substring.contents))
                                     if let integer = CollationIndex(string, radix: 16) {

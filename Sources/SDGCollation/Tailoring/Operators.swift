@@ -20,7 +20,7 @@ internal var tailoringRoot: CollationOrder?
 // MARK: - Operators
 
 /// Creates a collation tailoring anchor.
-prefix operator *
+prefix operator * // @exempt(from: unicode)
 
 /// The precedence of tailoring rules which anchor to the preceding operand.
 precedencegroup TailoringRuleAnchoredToPreceding {
@@ -33,43 +33,43 @@ precedencegroup TailoringRuleAnchoredToFollowing {
 }
 
 /// Moves the following operand to be the same as the preceding operand up until the scalar level.
-infix operator ←= : TailoringRuleAnchoredToPreceding
+infix operator ←=: TailoringRuleAnchoredToPreceding
 
 /// Moves the preceding operand to be the same as the following up until the scalar level.
-infix operator =→ : TailoringRuleAnchoredToFollowing
+infix operator =→: TailoringRuleAnchoredToFollowing
 
 /// Moves the following operand so that it comes after the preceding operand at the primary level.
-infix operator ←< : TailoringRuleAnchoredToPreceding
+infix operator ←<: TailoringRuleAnchoredToPreceding
 
 /// Moves the preceding operand so that it comes before the following operand at the primary level.
-infix operator <→ : TailoringRuleAnchoredToFollowing
+infix operator <→: TailoringRuleAnchoredToFollowing
 
 /// Moves the following operand so that it comes after the preceding operand at the reverse accent level.
-infix operator ←<< : TailoringRuleAnchoredToPreceding
+infix operator ←<<: TailoringRuleAnchoredToPreceding
 
 /// Moves the preceding operand so that it comes before the following operand at the reverse accent level.
-infix operator <<→ : TailoringRuleAnchoredToFollowing
+infix operator <<→: TailoringRuleAnchoredToFollowing
 
 /// Moves the following operand so that it comes after the preceding operand at the forward accent level.
-infix operator ←<<< : TailoringRuleAnchoredToPreceding
+infix operator ←<<<: TailoringRuleAnchoredToPreceding
 
 /// Moves the preceding operand so that it comes before the following operand at the forward accent level.
-infix operator <<<→ : TailoringRuleAnchoredToFollowing
+infix operator <<<→: TailoringRuleAnchoredToFollowing
 
 /// Moves the following operand so that it comes after the preceding operand at the case level.
-infix operator ←<<<< : TailoringRuleAnchoredToPreceding
+infix operator ←<<<<: TailoringRuleAnchoredToPreceding
 
 /// Moves the preceding operand so that it comes before the following operand at the case level.
-infix operator <<<<→ : TailoringRuleAnchoredToFollowing
+infix operator <<<<→: TailoringRuleAnchoredToFollowing
 
 /// Moves the following operand so that it comes after the preceding operand at the punctuation level.
-infix operator ←<<<<< : TailoringRuleAnchoredToPreceding
+infix operator ←<<<<<: TailoringRuleAnchoredToPreceding
 
 /// Moves the preceding operand so that it comes before the following operand at the punctuation level.
-infix operator <<<<<→ : TailoringRuleAnchoredToFollowing
+infix operator <<<<<→: TailoringRuleAnchoredToFollowing
 
 /// Moves the following operand so that it comes after the preceding operand at the script level.
-infix operator ←<<<<<< : TailoringRuleAnchoredToPreceding
+infix operator ←<<<<<<: TailoringRuleAnchoredToPreceding
 
 /// Moves the preceding operand so that it comes before the following operand at the script level.
-infix operator <<<<<<→ : TailoringRuleAnchoredToFollowing
+infix operator <<<<<<→: TailoringRuleAnchoredToFollowing
