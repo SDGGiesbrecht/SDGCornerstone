@@ -19,9 +19,6 @@ internal var tailoringRoot: CollationOrder?
 
 // MARK: - Operators
 
-/// Creates a collation tailoring anchor.
-prefix operator * // @exempt(from: unicode)
-
 /// The precedence of tailoring rules which anchor to the preceding operand.
 precedencegroup TailoringRuleAnchoredToPreceding {
     associativity: left

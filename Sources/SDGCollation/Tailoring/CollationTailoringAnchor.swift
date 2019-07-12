@@ -12,8 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGText
+
 /// An anchor for relative collation rules. The result of `*(_:)`.
-public struct CollationTailoringAnchor {
+///
+/// - Warning: This type can only be used inside a `tailored(accordingTo:)` closure.
+public struct CollationTailoringAnchor : ExpressibleByStringLiteral {
 
     // MARK: - Initialization
 
@@ -24,4 +28,10 @@ public struct CollationTailoringAnchor {
     // MARK: - Properties
 
     internal let elements: [CollationElement]
+
+    // MARK: - ExpressiblyByStringLiteral
+
+    public init(stringLiteral value: String) {
+        self = CollationTailoringAnchor(tailoringRoot!.contextualMapping.map(StrictString(value)))
+    }
 }
