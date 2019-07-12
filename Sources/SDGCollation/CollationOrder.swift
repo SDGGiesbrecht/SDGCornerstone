@@ -187,7 +187,7 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
     /// Returns the collation indices for a particular string.
     ///
     /// - Parameters:
-    ///     - strings: The strings to convert to collation indices.
+    ///     - string: The string to convert to collation indices.
     @inlinable public func indices<S>(for string: S) -> [CollationIndex] where S : StringFamily {
         let strict: StrictString
         if let already = string as? StrictString {
