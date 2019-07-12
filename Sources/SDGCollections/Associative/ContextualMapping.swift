@@ -90,7 +90,8 @@ Output : RangeReplaceableCollection {
     /// - Parameters:
     ///     - mapping: A dictionary representing the mapping. Keys are input, values are corresponding output.
     ///     - fallbackAlgorithm: An algorithm to use for any single elements not defined in the mapping.
-    @inlinable public init(mapping: [Input: Output], fallbackAlgorithm: @escaping (Input.Element) -> Output) {
+    ///     - element: The element to use the fallback algorithm on.
+    @inlinable public init(mapping: [Input: Output], fallbackAlgorithm: @escaping (_ element: Input.Element) -> Output) {
         self.isRoot = true
         self.input = nil
         self.simpleOutput = nil

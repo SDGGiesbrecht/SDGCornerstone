@@ -185,6 +185,9 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
     }
 
     /// Returns the collation indices for a particular string.
+    ///
+    /// - Parameters:
+    ///     - strings: The strings to convert to collation indices.
     @inlinable public func indices<S>(for string: S) -> [CollationIndex] where S : StringFamily {
         let strict: StrictString
         if let already = string as? StrictString {
@@ -198,6 +201,10 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
     }
 
     /// Returns whether or not the strings are sorted in ascending order.
+    ///
+    /// - Parameters:
+    ///     - preceding: The preceding string.
+    ///     - following: The following string
     @inlinable public func stringsAreOrderedAscending<S>(
         _ preceding: S,
         _ following: S) -> Bool where S : StringFamily {
@@ -205,13 +212,20 @@ public struct CollationOrder : Decodable, Encodable, FileConvertible {
     }
 
     /// Returns whether or not the strings are sorted equal.
+    ///
+    /// - Parameters:
+    ///     - preceding: The preceding string.
+    ///     - following: The following string
     @inlinable public func stringsAreOrderedEqual<S>(
         _ preceding: S,
         _ following: S) -> Bool where S : StringFamily {
         return indices(for: preceding).elementsEqual(indices(for: following))
     }
 
-    /// Sorts an array of strings.
+    /// Sorts a collection of strings.
+    ///
+    /// - Parameters:
+    ///     - strings: The strings to sort.
     @inlinable public func collate<C, S>(_ strings: C) -> [S] where C : Sequence, S : StringFamily, C.Element == S {
         var cache: [CollationCacheEntry<S>] = strings.map { string in
             return CollationCacheEntry(string: string, indices: self.indices(for: string))

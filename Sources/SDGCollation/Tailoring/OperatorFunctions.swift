@@ -17,6 +17,9 @@ import SDGText
 /// Creates an anchor from a base string.
 ///
 /// - Warning: This function can only be used inside a `tailored(accordingTo:)` closure.
+///
+/// - Parameters:
+///     - anchor: The anchor string.
 public prefix func *(anchor: StrictString) -> CollationTailoringAnchor {
     return CollationTailoringAnchor(tailoringRoot!.contextualMapping.map(anchor))
 }
