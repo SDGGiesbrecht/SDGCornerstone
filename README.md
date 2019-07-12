@@ -161,6 +161,7 @@ let package = Package(
             .productItem(name: "SDGCollectionsTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGBinaryData", package: "SDGCornerstone"),
             .productItem(name: "SDGText", package: "SDGCornerstone"),
+            .productItem(name: "SDGCollation", package: "SDGCornerstone"),
             .productItem(name: "SDGPersistence", package: "SDGCornerstone"),
             .productItem(name: "SDGPersistenceTestUtilities", package: "SDGCornerstone"),
             .productItem(name: "SDGRandomization", package: "SDGCornerstone"),
@@ -192,6 +193,7 @@ import SDGCollections
 import SDGCollectionsTestUtilities
 import SDGBinaryData
 import SDGText
+import SDGCollation
 import SDGPersistence
 import SDGPersistenceTestUtilities
 import SDGRandomization

@@ -350,6 +350,26 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssert(ConditionalPattern({ $0 < 10 }).matches(in: [11], at: 0).isEmpty)
     }
 
+    func testContextualMapping() {
+        let mappingEntries = [
+            " ": [],
+            "1": [1],
+            "2": [2],
+            "12": [12],
+        ]
+        let exhaustive = ContextualMapping<String, [Int]>(exhaustiveMapping: mappingEntries)
+        let withFallback = ContextualMapping<String, [Int]>(
+            mapping: mappingEntries,
+            fallbackAlgorithm: { _ in return [] })
+
+        XCTAssertEqual(exhaustive.map("1 2 12"), [1, 2, 12])
+        XCTAssertEqual(withFallback.map("1 2 12 3"), [1, 2, 12])
+
+        let unused = ContextualMapping<String, String>(mapping: [:], fallbackAlgorithm: { String($0) })
+        let string = "Hello"
+        XCTAssertEqual(unused.map(string), string)
+    }
+
     func testDictionary() {
         let numbers = [
             1: "1",

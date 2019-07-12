@@ -179,6 +179,12 @@ let package = Package(
         /// Extensions related to text and Unicode.
         .library(name: "SDGText", targets: ["SDGText"]),
 
+        // #documentatino(SDGCollation)
+        /// Text collation.
+        ///
+        /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
+        .library(name: "SDGCollation", targets: ["SDGCollation"]),
+
         // #documentation(SDGPersistence)
         /// Preferences and simplified file system interactions.
         .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
@@ -289,7 +295,19 @@ let package = Package(
             "SDGControlFlow",
             "SDGLogic",
             "SDGMathematics",
-            "SDGCollections"
+            "SDGCollections",
+            ]),
+        // @documentation(SDGCollation)
+        /// Text collation.
+        ///
+        /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
+        .target(name: "SDGCollation", dependencies: [
+            "SDGControlFlow",
+            "SDGLogic",
+            "SDGMathematics",
+            "SDGCollections",
+            "SDGText",
+            "SDGPersistence"
             ]),
 
         // @documentation(SDGPersistence)
@@ -418,10 +436,22 @@ let package = Package(
             "SDGPersistence"
             ]),
 
-        // Internal utilities.
+        // Internal modules.
 
         .target(name: "SDGCornerstoneLocalizations", dependencies: [
             "SDGControlFlow",
+            "SDGLocalization"
+            ]),
+
+        // Internal utilities.
+
+        .testTarget(name: "SDGCornerstoneResourceGeneration", dependencies: [
+            "SDGLogic",
+            "SDGMathematics",
+            "SDGCollections",
+            "SDGText",
+            "SDGCollation",
+            "SDGPersistence",
             "SDGLocalization"
             ]),
 
@@ -462,6 +492,11 @@ let package = Package(
             "SDGCollectionsTestUtilities",
             "SDGPersistenceTestUtilities",
             "SDGLocalizationTestUtilities"
+            ]),
+        .testTarget(name: "SDGCollationTests", dependencies: [
+            "SDGText",
+            "SDGCollation",
+            "SDGXCTestUtilities"
             ]),
         .testTarget(name: "SDGPersistenceTests", dependencies: [
             "SDGPersistence", "SDGPersistenceTestUtilities", "SDGTesting", "SDGXCTestUtilities",

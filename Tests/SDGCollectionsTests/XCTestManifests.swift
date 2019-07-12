@@ -15,6 +15,7 @@ extension SDGCollectionsAPITests {
         ("testComparableSet", testComparableSet),
         ("testCompositePattern", testCompositePattern),
         ("testConditionalPattern", testConditionalPattern),
+        ("testContextualMapping", testContextualMapping),
         ("testDictionary", testDictionary),
         ("testFiniteSet", testFiniteSet),
         ("testIntensionalSet", testIntensionalSet),

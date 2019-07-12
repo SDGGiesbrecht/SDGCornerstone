@@ -38,6 +38,25 @@ import SDGMathematics
 /// ```
 public struct StrictString : Addable, BidirectionalCollection, Collection, Comparable, Equatable, ExpressibleByStringInterpolation, ExpressibleByStringLiteral, Hashable, RangeReplaceableCollection, StringFamily, UnicodeScalarView, TextOutputStream, TextOutputStreamable, TextualPlaygroundDisplay {
 
+    // MARK: - Static Properties
+
+    /// The algorithm used by `StrictString`’s conformance to `Comparable`.
+    ///
+    /// Change this property to modify the collation order of `StrictString` instances. It corresponds to the `<` operator.
+    ///
+    /// The default order is merely the fastest—simply to delegating the order to the `String` type and its `<` function. This is sufficient for many programming internals, but is unsatisfactory for sorted lists displayed to users.
+    ///
+    /// A unified international order intended for displayed human text is provided in `SDGCollation`. To use it globally, set this property to `{ CollationOrder.root.stringsAreOrderedAscending($0, $1) }`.
+    ///
+    /// - Important: Changing this invalidates any existing sorted data. Care should be taken if changes need to be made after an application has already done some work.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The preceding string.
+    /// 	- followingValue: The following string.
+    public static var sortAlgorithm: (_ precedingValue: StrictString, _ followingValue: StrictString) -> Bool = {
+        return $0.string < $1.string
+    }
+
     // MARK: - Initialization
 
     @inlinable internal init(unsafeString: String) {
@@ -152,7 +171,7 @@ public struct StrictString : Addable, BidirectionalCollection, Collection, Compa
     // MARK: - Comparable
 
     @inlinable public static func < (precedingValue: StrictString, followingValue: StrictString) -> Bool {
-        return precedingValue.string < followingValue.string
+        return StrictString.sortAlgorithm(precedingValue, followingValue)
     }
 
     // MARK: - CustomStringConvertible
