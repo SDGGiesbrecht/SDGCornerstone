@@ -25,6 +25,7 @@ class SDGCollationAPITests : TestCase {
 
     override func setUp() {
         super.setUp()
+        XCTAssert(StrictString("a") < StrictString("b"))
         strictStringSortAlgorithm = StrictString.sortAlgorithm
         StrictString.sortAlgorithm = { CollationOrder.root.stringsAreOrderedAscending($0, $1) }
     }
