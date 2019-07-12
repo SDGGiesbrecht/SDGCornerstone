@@ -92,7 +92,6 @@ Output : RangeReplaceableCollection {
     ///     - fallbackAlgorithm: An algorithm to use for any single elements not defined in the mapping.
     ///     - element: The element to use the fallback algorithm on.
     @inlinable public init(mapping: [Input: Output], fallbackAlgorithm: @escaping (_ element: Input.Element) -> Output) {
-        self.isRoot = true
         self.simpleOutput = nil
         self.complexMapping = ContextualMapping.generate(mapping: mapping, fallbackAlgorithm: fallbackAlgorithm)
         self.fallbackAlgorithm = fallbackAlgorithm
@@ -104,7 +103,6 @@ Output : RangeReplaceableCollection {
         complexMapping: [Input: Output],
         fallbackAlgorithm: @escaping (Input.Element) -> Output) {
 
-        self.isRoot = false
         self.simpleOutput = simpleOutput
         self.complexMapping = ContextualMapping.generate(
             mapping: complexMapping,
@@ -114,7 +112,6 @@ Output : RangeReplaceableCollection {
 
     // MARK: - Properties
 
-    @usableFromInline internal let isRoot: Bool
     @usableFromInline internal let simpleOutput: Output?
     @usableFromInline internal let complexMapping: [Input.Element: ContextualMapping<Input, Output>]
     @usableFromInline internal let fallbackAlgorithm: (Input.Element) -> Output
@@ -137,21 +134,19 @@ Output : RangeReplaceableCollection {
     @inlinable internal func mapNext(_ remainder: inout Input.SubSequence, output: inout Output) {
         guard let first = remainder.first else {
             // End
-            output += simpleOutput!
+            output += simpleOutput! // Only sub‐mappings (with simple output) reach this code. See “map” above.
             return
         }
 
         if let rule = complexMapping[first] {
             remainder = remainder.dropFirst()
             rule.mapNext(&remainder, output: &output)
+        } else if let simple = simpleOutput {
+            output += simple
         } else {
-            if isRoot {
-                let outputElements = fallbackAlgorithm(first)
-                remainder = remainder.dropFirst()
-                output += outputElements
-            } else {
-                output += simpleOutput!
-            }
+            let outputElements = fallbackAlgorithm(first)
+            remainder = remainder.dropFirst()
+            output += outputElements
         }
     }
 }
