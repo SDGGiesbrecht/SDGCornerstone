@@ -21,14 +21,17 @@ import SDGXCTestUtilities
 
 class SDGCollationAPITests : TestCase {
 
+    var strictStringSortAlgorithm: ((StrictString, StrictString) -> Bool)?
+
     override func setUp() {
         super.setUp()
+        strictStringSortAlgorithm = StrictString.sortAlgorithm
         StrictString.sortAlgorithm = { CollationOrder.root.stringsAreOrderedAscending($0, $1) }
     }
 
     override func tearDown() {
         super.tearDown()
-        StrictString.sortAlgorithm = { String($0) < String($1) }
+        StrictString.sortAlgorithm = strictStringSortAlgorithm!
     }
 
     func testCoding() throws {

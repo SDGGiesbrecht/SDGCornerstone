@@ -298,6 +298,9 @@ let package = Package(
             "SDGCollections",
             ]),
         // @documentation(SDGCollation)
+        /// Text collation.
+        ///
+        /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
         .target(name: "SDGCollation", dependencies: [
             "SDGControlFlow",
             "SDGLogic",
