@@ -64,80 +64,231 @@ internal enum Language : String {
         }
     }
 
-    internal func isolatedEnglishName() -> StrictString {
-        switch self {
-        case .普通话:
-            return "Mandarin"
-        case .español:
-            return "Spanish"
-        case .english:
-            return "English"
-        case .العربية:
-            return "Arabic"
-        case .हिन्दी:
-            return "Hindi"
-        case .português:
-            return "Portuguese"
-        case .русский:
-            return "Russian"
-        case .日本語:
-            return "Japanese"
-        case .deutsch:
-            return "German"
-        case .tiếngViệt:
-            return "Vietnamese"
-        case .한국어:
-            return "Korean"
-        case .français:
-            return "French"
-        case .türkçe:
-            return "Turkish"
-        case .italiano:
-            return "Italian"
-        case .polski:
-            return "Polish"
-        case .українська:
-            return "Ukrainian"
-        case .nederlands:
-            return "Dutch"
-        case .malaysia:
-            return "Malaysian"
-        case .română:
-            return "Romanian"
-        case .ไทย:
-            return "Thai"
-        case .ελληνικά:
-            return "Greek"
-        case .čeština:
-            return "Czech"
-        case .magyar:
-            return "Hungarian"
-        case .svenska:
-            return "Swedish"
-        case .indonesia:
-            return "Indonesian"
-        case .dansk:
-            return "Danish"
-        case .suomi:
-            return "Finnish"
-        case .slovenčina:
-            return "Slovak"
-        case .עברית:
-            return "Hebrew"
-        case .norskBokmål:
-            return "Norwegian Bokmål"
-        case .hrvatski:
-            return "Croatian"
-        case .català:
-            return "Catalan"
-        }
-    }
-
     internal func localizedIsolatedName() -> StrictString {
         return UserFacing<StrictString, _InterfaceLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                return self.isolatedEnglishName()
+            switch self {
+            case .普通话:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada,
+                     .deutschDeutschland:
+                    return "Mandarin"
+                }
+            case .español:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Spanish"
+                case .deutschDeutschland:
+                    return "Spanisch"
+                }
+            case .english:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "English"
+                case .deutschDeutschland:
+                    return "Englisch"
+                }
+            case .العربية:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Arabic"
+                case .deutschDeutschland:
+                    return "Arabisch"
+                }
+            case .हिन्दी:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada,
+                     .deutschDeutschland:
+                    return "Hindi"
+                }
+            case .português:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Portuguese"
+                case .deutschDeutschland:
+                    return "Portugiesisch"
+                }
+            case .русский:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Russian"
+                case .deutschDeutschland:
+                    return "Russisch"
+                }
+            case .日本語:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Japanese"
+                case .deutschDeutschland:
+                    return "Japanisch"
+                }
+            case .deutsch:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "German"
+                case .deutschDeutschland:
+                    return "Deutsch"
+                }
+            case .tiếngViệt:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Vietnamese"
+                case .deutschDeutschland:
+                    return "Vietnamesisch"
+                }
+            case .한국어:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Korean"
+                case .deutschDeutschland:
+                    return "Koreanisch"
+                }
+            case .français:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "French"
+                case .deutschDeutschland:
+                    return "Französisch"
+                }
+            case .türkçe:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Turkish"
+                case .deutschDeutschland:
+                    return "Türkisch"
+                }
+            case .italiano:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Italian"
+                case .deutschDeutschland:
+                    return "Italienisch"
+                }
+            case .polski:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Polish"
+                case .deutschDeutschland:
+                    return "Polnisch"
+                }
+            case .українська:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Ukrainian"
+                case .deutschDeutschland:
+                    return "Ukrainisch"
+                }
+            case .nederlands:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Dutch"
+                case .deutschDeutschland:
+                    return "Niederländisch"
+                }
+            case .malaysia:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Malaysian"
+                case .deutschDeutschland:
+                    return "Malaysisch"
+                }
+            case .română:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Romanian"
+                case .deutschDeutschland:
+                    return "Rumänisch"
+                }
+            case .ไทย:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Thai"
+                case .deutschDeutschland:
+                    return "Thailändisch"
+                }
+            case .ελληνικά:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Greek"
+                case .deutschDeutschland:
+                    return "Griechisch"
+                }
+            case .čeština:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Czech"
+                case .deutschDeutschland:
+                    return "Tschechisch"
+                }
+            case .magyar:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Hungarian"
+                case .deutschDeutschland:
+                    return "Ungarisch"
+                }
+            case .svenska:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Swedish"
+                case .deutschDeutschland:
+                    return "Schwedisch"
+                }
+            case .indonesia:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Indonesian"
+                case .deutschDeutschland:
+                    return "Indonesisch"
+                }
+            case .dansk:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Danish"
+                case .deutschDeutschland:
+                    return "Dänisch"
+                }
+            case .suomi:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Finnish"
+                case .deutschDeutschland:
+                    return "Finnisch"
+                }
+            case .slovenčina:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Slovak"
+                case .deutschDeutschland:
+                    return "Slowakisch"
+                }
+            case .עברית:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Hebrew"
+                case .deutschDeutschland:
+                    return "Hebräisch"
+                }
+            case .norskBokmål:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Norwegian Bokmål"
+                case .deutschDeutschland:
+                    return "Norwegisches Bokmål"
+                }
+            case .hrvatski:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Croatian"
+                case .deutschDeutschland:
+                    return "Kroatisch"
+                }
+            case .català:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Catalan"
+                case .deutschDeutschland:
+                    return "Katalanisch"
+                }
             }
         }).resolved()
     }
