@@ -7,3 +7,6 @@ Optional(1)
 🇨🇦EN
 Optional(1)
 
+🇩🇪DE
+Optional(1)
+
