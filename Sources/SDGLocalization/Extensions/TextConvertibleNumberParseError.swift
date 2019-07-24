@@ -32,6 +32,8 @@ public enum TextConvertibleNumberParseError : PresentableError {
                     return StrictString("‘\(entireString)’ could not be parsed as a number because ‘\(scalar.visibleRepresentation)’ is not a valid digit.")
                 case .englishUnitedStates, .englishCanada:
                     return "“\(entireString)” could not be parsed as a number because “\(scalar.visibleRepresentation)” is not a valid digit."
+                case .deutschDeutschland:
+                    return "„\(entireString)“ konnte nicht als Zahl zerteilt werden, weil „\(scalar.visibleRepresentation)“ keine erkannte Ziffer ist."
                 }
             })
         }
