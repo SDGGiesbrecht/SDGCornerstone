@@ -23,21 +23,25 @@ internal enum Script : String {
 
     // MARK: - Description
 
-    func isolatedEnglishName() -> StrictString {
-        switch self {
-        case .简化字:
-            return "Simplified Chinese"
-        case .正體字:
-            return "Traditional Chinese"
-        }
-    }
-
     internal func localizedIsolatedName() -> StrictString {
         return UserFacing<StrictString, _InterfaceLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                return self.isolatedEnglishName()
+            switch self {
+            case .简化字:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Simplified Chinese"
+                case .deutschDeutschland:
+                    return "Vereinfachtes Chinesisch"
+                }
+            case .正體字:
+                switch localization {
+                case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+                    return "Traditional Chinese"
+                case .deutschDeutschland:
+                    return "Traditionelles Chinesisch"
+                }
             }
+
         }).resolved()
     }
 }

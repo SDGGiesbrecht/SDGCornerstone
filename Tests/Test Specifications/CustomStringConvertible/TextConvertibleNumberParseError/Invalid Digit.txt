@@ -7,3 +7,6 @@
 🇨🇦EN
 “abc” could not be parsed as a number because “a” is not a valid digit.
 
+🇩🇪DE
+„abc“ konnte nicht als Zahl zerteilt werden, weil „a“ keine erkannte Ziffer ist.
+
