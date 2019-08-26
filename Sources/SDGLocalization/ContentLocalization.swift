@@ -404,7 +404,7 @@ internal enum ContentLocalization : String, InputLocalization {
                 if let script = self.script {
                     result += script.localizedIsolatedName() + StrictString(", ")
                 }
-                result += self.state.localizedIsolatedName() + StrictString(")")
+                result += self.state.localizedIsolatedName().resolved() + StrictString(")")
                 return result
             }
         }).resolved()

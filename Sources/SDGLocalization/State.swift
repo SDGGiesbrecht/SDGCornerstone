@@ -15,7 +15,8 @@
 import SDGMathematics
 import SDGText
 
-internal enum State : String {
+// Internal so that adding and removing cases is not source‐breaking. See StateData for exposed functionality.
+internal enum State : String, CaseIterable {
 
     // MARK: - Cases
 
@@ -218,15 +219,14 @@ internal enum State : String {
 
     case andorra = "AD"
 
-    // MARK: - Description
+    // MARK: - Initialization
 
-    private static let flagOffset: UInt32 = 0x1F1A5
-    internal var flag: StrictString {
-        return StrictString(rawValue.scalars.map({ UnicodeScalar($0.value + State.flagOffset)! }))
+    internal init?(code: String) {
+        self.init(rawValue: code)
     }
 
     internal init?(flag: StrictString) {
-        self.init(rawValue: String(String.ScalarView(flag.scalars.map({
+        self.init(code: String(String.ScalarView(flag.scalars.map({
             if $0.value > State.flagOffset {
                 return UnicodeScalar($0.value − State.flagOffset)!
             } else {
@@ -235,7 +235,20 @@ internal enum State : String {
         })))) // @exempt(from: tests) Meaningless region.
     }
 
-    internal func localizedIsolatedName() -> StrictString {
+    // MARK: - Properties
+
+    internal var code: String {
+        return rawValue
+    }
+
+    private static let flagOffset: UInt32 = 0x1F1A5
+    internal var flag: StrictString {
+        return StrictString(code.scalars.map({ UnicodeScalar($0.value + State.flagOffset)! }))
+    }
+
+    // MARK: - Description
+
+    internal func localizedIsolatedName() -> UserFacing<StrictString, _InterfaceLocalization> {
         return UserFacing<StrictString, _InterfaceLocalization>({ localization in
             switch self {
             case .中国:
@@ -1374,6 +1387,6 @@ internal enum State : String {
                     return "Andorra"
                 }
             }
-        }).resolved()
+        })
     }
 }

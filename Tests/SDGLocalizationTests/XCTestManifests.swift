@@ -15,6 +15,7 @@ extension SDGLocalizationAPITests {
         ("testLocalizationSetting", testLocalizationSetting),
         ("testRange", testRange),
         ("testRationalArithmetic", testRationalArithmetic),
+        ("testStateData", testStateData),
         ("testUserFacingDynamicText", testUserFacingDynamicText),
         ("testWholeArithmetic", testWholeArithmetic),
     ]
