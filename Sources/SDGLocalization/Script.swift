@@ -23,7 +23,7 @@ internal enum Script : String {
 
     // MARK: - Description
 
-    internal func localizedIsolatedName() -> StrictString {
+    internal func isolatedName() -> UserFacing<StrictString, _InterfaceLocalization> {
         return UserFacing<StrictString, _InterfaceLocalization>({ localization in
             switch self {
             case .简化字:
@@ -42,6 +42,6 @@ internal enum Script : String {
                 }
             }
 
-        }).resolved()
+        })
     }
 }

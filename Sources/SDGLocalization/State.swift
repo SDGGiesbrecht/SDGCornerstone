@@ -248,7 +248,7 @@ internal enum State : String, CaseIterable {
 
     // MARK: - Description
 
-    internal func localizedIsolatedName() -> UserFacing<StrictString, _InterfaceLocalization> {
+    internal func isolatedName() -> UserFacing<StrictString, _InterfaceLocalization> {
         return UserFacing<StrictString, _InterfaceLocalization>({ localization in
             switch self {
             case .中国:

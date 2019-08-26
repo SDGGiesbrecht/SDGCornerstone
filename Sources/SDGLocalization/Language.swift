@@ -64,7 +64,7 @@ internal enum Language : String {
         }
     }
 
-    internal func localizedIsolatedName() -> StrictString {
+    internal func isolatedName() -> UserFacing<StrictString, _InterfaceLocalization> {
         return UserFacing<StrictString, _InterfaceLocalization>({ localization in
             switch self {
             case .普通话:
@@ -290,6 +290,6 @@ internal enum Language : String {
                     return "Katalanisch"
                 }
             }
-        }).resolved()
+        })
     }
 }
