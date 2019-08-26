@@ -176,6 +176,23 @@ class SDGLocalizationAPITests : TestCase {
         XCTAssertEqual((9_999_999 as RationalNumber ÷ 10_000_000).inDigits(maximumDecimalPlaces: 3, radixCharacter: "."), "1.000")
     }
 
+    func testStateData() {
+        for state in StateData.list {
+            _ = state.code
+            _ = state.flag
+            _ = state.isolatedName(in: InterfaceLocalization.englishCanada)
+        }
+        XCTAssertNotNil(StateData(code: "CA"))
+        XCTAssertNotNil(StateData(flag: "🇨🇦"))
+        XCTAssertNil(StateData(code: "N/A"))
+        XCTAssertNil(StateData(flag: "N/A"))
+        enum UnsupportedLocalization : String, Localization {
+            case unknown = "und"
+            static var fallbackLocalization: UnsupportedLocalization = .unknown
+        }
+        XCTAssertNil(StateData(code: "CA")?.isolatedName(in: UnsupportedLocalization.unknown))
+    }
+
     func testUserFacingDynamicText() {
 
         let text = UserFacingDynamic<StrictString, LocalizationExample, (Int, Int)>({ localization, numbers in
