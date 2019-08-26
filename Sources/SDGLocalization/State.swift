@@ -15,7 +15,7 @@
 import SDGMathematics
 import SDGText
 
-// Internal so that adding and removing cases is not source‐breaking.
+// Internal so that adding and removing cases is not source‐breaking. See StateData for exposed functionality.
 internal enum State : String, CaseIterable {
 
     // MARK: - Cases
