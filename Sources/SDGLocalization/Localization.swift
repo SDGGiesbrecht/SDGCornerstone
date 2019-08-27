@@ -258,7 +258,7 @@ extension Localization {
         guard let contentLocalization = ContentLocalization(exactly: code) else {
             return code
         }
-        return String(contentLocalization.isolatedName().resolved())
+        return String(contentLocalization.localizedIsolatedName())
     }
 }
 
