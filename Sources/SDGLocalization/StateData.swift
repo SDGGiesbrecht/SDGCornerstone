@@ -86,7 +86,7 @@ public struct StateData {
     ///     - localization: The localization.
     public func isolatedName<L>(in localization: L) -> StrictString? where L : Localization {
         if let localization = _InterfaceLocalization(exactly: localization.code) {
-            return state.localizedIsolatedName().resolved(for: localization)
+            return state.isolatedName().resolved(for: localization)
         } else {
             return nil
         }

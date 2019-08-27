@@ -11,6 +11,7 @@ extension SDGLocalizationAPITests {
         ("testCasing", testCasing),
         ("testCustomStringConvertible", testCustomStringConvertible),
         ("testLocalization", testLocalization),
+        ("testLocalizationData", testLocalizationData),
         ("testLocalizationRelationships", testLocalizationRelationships),
         ("testLocalizationSetting", testLocalizationSetting),
         ("testRange", testRange),

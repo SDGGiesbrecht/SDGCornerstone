@@ -95,6 +95,23 @@ class SDGLocalizationAPITests : TestCase {
         XCTAssertEqual(LocalizationExample.chineseTraditionalTaiwan.textDirection, .topToBottomRightToLeft)
     }
 
+    func testLocalizationData() {
+        for localization in LocalizationData.list {
+            _ = localization.code
+            _ = localization.icon
+            _ = localization.isolatedName(in: InterfaceLocalization.englishCanada)
+        }
+        XCTAssertNotNil(LocalizationData(code: "en\u{2D}CA"))
+        XCTAssertNotNil(LocalizationData(icon: "🇨🇦EN"))
+        XCTAssertNil(LocalizationData(code: "N/A"))
+        XCTAssertNil(LocalizationData(icon: "N/A"))
+        enum UnsupportedLocalization : String, Localization {
+            case unknown = "und"
+            static var fallbackLocalization: UnsupportedLocalization = .unknown
+        }
+        XCTAssertNil(LocalizationData(code: "en\u{2D}CA")?.isolatedName(in: UnsupportedLocalization.unknown))
+    }
+
     func testLocalizationRelationships() {
         XCTAssert(FormatLocalization.codeSet() ⊇ InterfaceLocalization.codeSet(), "Formats should support at least every localization the user interface elements do.")
         XCTAssert(InterfaceLocalization.codeSet() ⊇ APILocalization.codeSet(), "The user interface elements should support at least every localization the Swift API does.")

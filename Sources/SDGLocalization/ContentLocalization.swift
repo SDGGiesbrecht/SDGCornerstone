@@ -396,15 +396,28 @@ internal enum ContentLocalization : String, InputLocalization {
         self.init(exactly: language + "\u{2D}" + state.rawValue)
     }
 
+    internal func isolatedName() -> UserFacing<StrictString, _InterfaceLocalization> {
+        return UserFacing<StrictString, _InterfaceLocalization>({ localization in
+            switch localization {
+            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland:
+                var result: StrictString = self.language.isolatedName().resolved(for: localization) + " ("
+                if let script = self.script {
+                    result += script.isolatedName().resolved(for: localization) + StrictString(", ")
+                }
+                result += self.state.isolatedName().resolved(for: localization) + StrictString(")")
+                return result
+            }
+        })
+    }
     internal func localizedIsolatedName() -> StrictString {
         return UserFacing<StrictString, _FormatLocalization>({ localization in
             switch localization {
             case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
-                var result: StrictString = self.language.localizedIsolatedName() + " ("
+                var result: StrictString = self.language.isolatedName().resolved() + " ("
                 if let script = self.script {
-                    result += script.localizedIsolatedName() + StrictString(", ")
+                    result += script.isolatedName().resolved() + StrictString(", ")
                 }
-                result += self.state.localizedIsolatedName().resolved() + StrictString(")")
+                result += self.state.isolatedName().resolved() + StrictString(")")
                 return result
             }
         }).resolved()
