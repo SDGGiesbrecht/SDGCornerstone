@@ -324,11 +324,23 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         return ergebnis
     }
 
-    internal func hebräischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false) -> StrictString {
+    // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+    /// Gibt das hebräische Datum auf Deutsch zurück.
+    ///
+    /// - Parameters:
+    ///     - mitJahr: Ob das Datum das Jahr enthalten soll.
+    ///     - mitWochentag: Ob das Datum den Wochentag enthalten soll.
+    public func hebräischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false) -> StrictString {
         return datumAufDeutsch(jahr: hebrewYear, monat: hebrewMonth, tag: hebrewDay, wochentag: hebrewWeekday, mitJahr: mitJahr, mitWochentag: mitWochentag)
     }
 
-    internal func gregorianischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false) -> StrictString {
+    // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+    /// Gibt das gregorianisches Datum auf Deutsch zurück.
+    ///
+    /// - Parameters:
+    ///     - mitJahr: Ob das Datum das Jahr enthalten soll.
+    ///     - mitWochentag: Ob das Datum den Wochentag enthalten soll.
+    public func gregorianischesDatumAufDeutsch(mitJahr: Bool = true, mitWochentag: Bool = false) -> StrictString {
         return datumAufDeutsch(jahr: gregorianYear, monat: gregorianMonth, tag: gregorianDay, wochentag: gregorianWeekday, mitJahr: mitJahr, mitWochentag: mitWochentag)
     }
 
@@ -346,11 +358,25 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         return résultat
     }
 
-    internal func dateHébraïqueEnFrançais(_ majuscules: Casing, avecAn: Bool = true, avecJourDeSemaine: Bool = false) -> SemanticMarkup {
+    // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
+    /// Retourne la date hébraïque en français.
+    ///
+    /// - Parameters:
+    ///     - majuscules: La mode d’utilisation des majuscules.
+    ///     - avecAn: Si la date devrait inclure l’an.
+    ///     - avecJourDeSemaine: Si la date devrait inclure le jour de semaine.
+    public func dateHébraïqueEnFrançais(_ majuscules: Casing, avecAn: Bool = true, avecJourDeSemaine: Bool = false) -> SemanticMarkup {
         return dateEnFrançais(majuscules, an: hebrewYear, mois: hebrewMonth, jour: hebrewDay, jourDeSemaine: hebrewWeekday, avecAn: avecAn, avecJourDeSemaine: avecJourDeSemaine)
     }
 
-    internal func dateGrégorienneEnFrançais(_ majuscules: Casing, avecAn: Bool = true, avecJourDeSemaine: Bool = false) -> SemanticMarkup {
+    // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
+    /// Retourne la date grégorienne en français.
+    ///
+    /// - Parameters:
+    ///     - majuscules: La mode d’utilisation des majuscules.
+    ///     - avecAn: Si la date devrait inclure l’an.
+    ///     - avecJourDeSemaine: Si la date devrait inclure le jour de semaine.
+    public func dateGrégorienneEnFrançais(_ majuscules: Casing, avecAn: Bool = true, avecJourDeSemaine: Bool = false) -> SemanticMarkup {
         return dateEnFrançais(majuscules, an: gregorianYear, mois: gregorianMonth, jour: gregorianDay, jourDeSemaine: gregorianWeekday, avecAn: avecAn, avecJourDeSemaine: avecJourDeSemaine)
     }
 
@@ -365,11 +391,23 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         return αποτέλεσμα
     }
 
-    internal func εβραϊκήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
+    // @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
+    /// Επιστρέφει την εβραϊκή ημερομηνία στα Ελληνικά.
+    ///
+    /// - Parameters:
+    ///     - μεΧρόνο: Αν η ημερομηνία θα περιλάβει τον χρόνο.
+    ///     - μεΗμέραΤηςΕβδομάδας: Αν η ημερομηνία θα περιλάβει την ημέρα της εβδομάδας.
+    public func εβραϊκήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
         return ημερομηνίαΣεΕλληνικά(χρόνος: hebrewYear, μήνας: hebrewMonth, ημέρα: hebrewDay, ημέραΤηςΕβδομάδας: hebrewWeekday, μεΧρόνο: μεΧρόνο, μεΗμέραΤηςΕβδομάδας: μεΗμέραΤηςΕβδομάδας)
     }
 
-    internal func γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
+    // @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
+    /// Επιστρέφει την γρηγοριανή ημερομηνία στα Ελληνικά.
+    ///
+    /// - Parameters:
+    ///     - μεΧρόνο: Αν η ημερομηνία θα περιλάβει τον χρόνο.
+    ///     - μεΗμέραΤηςΕβδομάδας: Αν η ημερομηνία θα περιλάβει την ημέρα της εβδομάδας.
+    public func γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
         return ημερομηνίαΣεΕλληνικά(χρόνος: gregorianYear, μήνας: gregorianMonth, ημέρα: gregorianDay, ημέραΤηςΕβδομάδας: gregorianWeekday, μεΧρόνο: μεΧρόνο, μεΗμέραΤηςΕβδομάδας: μεΗμέραΤηςΕβδομάδας)
     }
 
@@ -384,11 +422,23 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         return תוצאה
     }
 
-    internal func תאריך־עברי־בעברית(עם־שנה: Bool = true, עם־יום־שבוע: Bool = false) -> StrictString {
+    // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
+    /// משיבה את התאריך עברי בעברית.
+    ///
+    /// - Parameters:
+    ///     - עם־שנה: אם התאריך צריך להכיל את השנה.
+    ///     - עם־שנה: אם התאריך צריך להכיל את יום השבוע.
+    public func תאריך־עברי־בעברית(עם־שנה: Bool = true, עם־יום־שבוע: Bool = false) -> StrictString {
         return תאריך־בעברית(שנה: hebrewYear, חודש: hebrewMonth, יום: hebrewDay, יום־שבוע: hebrewWeekday, עם־שנה: עם־שנה, עם־יום־שבוע: עם־יום־שבוע)
     }
 
-    internal func תאריך־גרגוריאני־בעברית(עם־שנה: Bool = true, עם־יום־שבוע: Bool = false) -> StrictString {
+    // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
+    /// משיבה את התאריך גרגוריאני בעברית.
+    ///
+    /// - Parameters:
+    ///     - עם־שנה: אם התאריך צריך להכיל את השנה.
+    ///     - עם־שנה: אם התאריך צריך להכיל את יום השבוע.
+    public func תאריך־גרגוריאני־בעברית(עם־שנה: Bool = true, עם־יום־שבוע: Bool = false) -> StrictString {
         return תאריך־בעברית(שנה: gregorianYear, חודש: gregorianMonth, יום: gregorianDay, יום־שבוע: gregorianWeekday, עם־שנה: עם־שנה, עם־יום־שבוע: עם־יום־שבוע)
     }
 
