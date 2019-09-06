@@ -39,3 +39,6 @@ configuration.documentation.api.ignoredDependencies = [
     "Foundation",
     "XCTest"
 ]
+
+// #workaround(workspace version 0.22.0, Too long for Travis CI.)
+configuration.documentation.relatedProjects = []
