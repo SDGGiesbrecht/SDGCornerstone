@@ -466,19 +466,27 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
         return result
     }
 
-    internal func uhrzeitAufDeutsch() -> StrictString {
+    // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+    /// Gibt die Uhrzeit auf Deutsch zurück.
+    public func uhrzeitAufDeutsch() -> StrictString {
         return gregorianHour.inDigitsInTwentyFourHourFormat() + "." + gregorianMinute.inDigits()
     }
 
-    internal func heureEnFrançais() -> StrictString {
+    // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
+    /// Retourne l’heure en français.
+    public func heureEnFrançais() -> StrictString {
         return gregorianHour.inDigitsInTwentyFourHourFormat() + " h " + gregorianMinute.inDigits()
     }
 
-    internal func ώραΣεΕλληνικά(μεΧρόνο: Bool = true, μεΗμέραΤηςΕβδομάδας: Bool = false) -> StrictString {
+    // @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
+    /// Επιστρέφει την ώρα στα Ελληνικά.
+    internal func ώραΣεΕλληνικά() -> StrictString {
         return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()
     }
 
-    internal func שעה־בעברית() -> StrictString {
+    // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
+    /// משיבה את השעה בעברית.
+    public func שעה־בעברית() -> StrictString {
         return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()
     }
 
