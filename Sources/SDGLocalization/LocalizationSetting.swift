@@ -236,12 +236,13 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
             return resolvedFresh()
         case .stabilized:
             let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)
+            let key = LocalizationSetting.stabilityCacheKey + ".\(type(of: L.self))"
             var cache: CachedLocalization<L>? {
                 get {
-                    return preferences[LocalizationSetting.stabilityCacheKey].value.as(CachedLocalization<L>.self)
+                    return preferences[key].value.as(CachedLocalization<L>.self)
                 }
                 set {
-                    preferences[LocalizationSetting.stabilityCacheKey].value.set(to: newValue)
+                    preferences[key].value.set(to: newValue)
                 }
             }
             let container = cached(in: &cache) {
