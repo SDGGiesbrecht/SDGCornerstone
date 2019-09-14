@@ -27,12 +27,11 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     // MARK: - Static Properties
 
     private static let sdgDomainSuffix = ".Language"
-    private static let languageDomain = PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
+    internal static let languageDomain = PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
     #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private static let osPreferenceKey = "AppleLanguages"
     #endif
-    private static let sdgPreferenceKey = "SDGLanguages" // In application domain too.
-    private static let stabilityCacheKey = "StabilityCache" // SDGCornerstone domain only.
+    private static let sdgPreferenceKey = "SDGLanguages"
 
     internal static let osSystemWidePreferences: Shared<Preference> = {
         let preferences: Shared<Preference>
@@ -226,14 +225,26 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
         return L.fallbackLocalization
     }
 
-    private func stabilizationCacheKey<L>(for: L.Type) -> String {
-        var key = LocalizationSetting.stabilityCacheKey
-        key += "."
-        key += String(reflecting: L.self)
-        key += "."
-        key += orderOfPrecedence
-            .map({ $0.joined(separator: ",") }).joined(separator: ";")
-        return key
+    private func stabilityCacheURL<L>(for: L.Type) -> URL {
+        var path = "Stable Localizations"
+        path += "/"
+        path += String(reflecting: L.self)
+        path += "/"
+        path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
+        return FileManager.default.url(in: .cache, for: LocalizationSetting.languageDomain, at: path)
+    }
+
+    private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
+        get {
+            if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
+                Date() ≤ cache.date {
+                return cache
+            }
+            return nil
+        }
+        nonmutating set {
+            try? newValue?.save(to: stabilityCacheURL(for: L.self))
+        }
     }
 
     /// Returns the preferred localization out of those supported by the type `L`.
@@ -245,29 +256,13 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
         case .none:
             return resolvedFresh()
         case .stabilized:
-            let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)
-            let key = stabilizationCacheKey(for: L.self)
-            var cache: CachedLocalization<L>? {
-                get {
-                    return preferences[key].value.as(CachedLocalization<L>.self)
-                }
-                set {
-                    preferences[key].value.set(to: newValue)
-                }
-            }
-            let container = cached(in: &cache) {
+            let container = cached(in: &self[stabilityCacheFor: L.self]) {
                 return CachedLocalization<L>(
                     localization: resolvedFresh(),
                     date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/)
             }
             return container.localization
         }
-    }
-
-    internal func resetStabilization<L>(for: L.Type) {
-        let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)
-        let key = stabilizationCacheKey(for: L.self)
-        preferences[key].value.set(to: nil)
     }
 
     // MARK: - Decodable

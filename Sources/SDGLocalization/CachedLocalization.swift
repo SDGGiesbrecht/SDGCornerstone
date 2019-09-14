@@ -14,7 +14,9 @@
 
 import Foundation
 
-internal struct CachedLocalization<L> : Codable where L : Localization {
+import SDGPersistence
+
+internal struct CachedLocalization<L> : Codable, FileConvertible where L : Localization {
 
     // MARK: - Initialization
 
@@ -47,5 +49,15 @@ internal struct CachedLocalization<L> : Codable where L : Localization {
         var container = encoder.unkeyedContainer()
         try container.encode(localization.code)
         try container.encode(date)
+    }
+
+    // MARK: - FileConvertible
+
+    internal init(file: Data, origin: URL?) throws {
+        self = try JSONDecoder().decode(CachedLocalization.self, from: file)
+    }
+
+    internal var file: Data {
+        return try! JSONEncoder().encode(self)
     }
 }

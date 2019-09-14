@@ -12,11 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+import SDGPersistence
+
 @testable import SDGLocalization
 
 extension LocalizationSetting {
 
-    internal func clearStabilizationCache<L>(for: L.Type) {
-        resetStabilization(for: L.self)
+    func clearStabilization() {
+        FileManager.default.delete(.cache, for: LocalizationSetting.languageDomain)
     }
 }
