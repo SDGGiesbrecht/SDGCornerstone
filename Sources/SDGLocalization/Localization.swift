@@ -43,9 +43,9 @@ extension Localization {
     /// Returns the preferred localization out of those supported by the type.
     ///
     /// - Parameters:
-    ///     - stabilized: When `true`, the result will be cached and the same value returned for a longer period of time. This mode can be useful to prevent interface elements with a high refresh rate from bouncing rapidly between localizations when several are active at once.
-    public func resolved(stabilized: Bool = false) -> Self {
-        return LocalizationSetting.current.value.resolved(stabilized: stabilized) as Self
+    ///     - stabilization: The stabilization mode.
+    public func resolved(stabilization: LocalizationSetting.StabilizationMode = .none) -> Self {
+        return LocalizationSetting.current.value.resolved(stabilization: stabilization) as Self
     }
 
     // MARK: - Conversion
