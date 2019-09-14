@@ -159,10 +159,10 @@ class SDGLocalizationAPITests : TestCase {
 
         LocalizationSetting.setApplicationPreferences(to: nil)
 
-        let codes = InterfaceLocalization.allCases.map { $0.code }
+        let codes = FormatLocalization.allCases.map { $0.code }
         let stabilizedSetting = LocalizationSetting(orderOfPrecedence: [codes])
         stabilizedSetting.clearStabilizationCache(for: FormatLocalization.self)
-        let first: InterfaceLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
+        let first: FormatLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
         for _ in 1 ... 10 {
             XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
         }
