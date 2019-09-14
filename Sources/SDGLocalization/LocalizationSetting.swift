@@ -231,21 +231,26 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     /// - Parameters:
     ///     - stabilization: The stabilization mode.
     public func resolved<L : Localization>(stabilization: StabilizationMode = .none) -> L {
-        let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)
-        var cache: CachedLocalization<L>? {
-            get {
-                return preferences[LocalizationSetting.stabilityCacheKey].value.as(CachedLocalization<L>.self)
+        switch stabilization {
+        case .none:
+            return resolvedFresh()
+        case .stabilized:
+            let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)
+            var cache: CachedLocalization<L>? {
+                get {
+                    return preferences[LocalizationSetting.stabilityCacheKey].value.as(CachedLocalization<L>.self)
+                }
+                set {
+                    preferences[LocalizationSetting.stabilityCacheKey].value.set(to: newValue)
+                }
             }
-            set {
-                preferences[LocalizationSetting.stabilityCacheKey].value.set(to: newValue)
+            let container = cached(in: &cache) {
+                return CachedLocalization<L>(
+                    localization: resolvedFresh(),
+                    date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/)
             }
+            return container.localization
         }
-        let container = cached(in: &cache) {
-            return CachedLocalization<L>(
-                localization: resolvedFresh(),
-                date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/)
-        }
-        return container.localization
     }
 
     // MARK: - Decodable
