@@ -40,8 +40,11 @@ public struct UserFacing<Element, Localization : SDGLocalization.Localization> :
     // MARK: - Output
 
     /// Returns the resolved element for the current localization.
-    public func resolved() -> Element {
-        return dynamic.resolved(using: ())
+    ///
+    /// - Parameters:
+    ///     - stabilization: The stabilization mode.
+    public func resolved(stabilization: LocalizationSetting.StabilizationMode = .none) -> Element {
+        return dynamic.resolved(using: (), stabilization: stabilization)
     }
 
     /// Returns the resolved element for the specified localization.
