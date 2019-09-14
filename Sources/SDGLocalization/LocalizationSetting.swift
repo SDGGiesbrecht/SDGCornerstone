@@ -226,6 +226,10 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
         return L.fallbackLocalization
     }
 
+    private func stabilizationCacheKey<L>(for: L.Type) -> String {
+        return LocalizationSetting.stabilityCacheKey + ".\(type(of: L.self))"
+    }
+
     /// Returns the preferred localization out of those supported by the type `L`.
     ///
     /// - Parameters:
@@ -236,7 +240,8 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
             return resolvedFresh()
         case .stabilized:
             let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)
-            let key = LocalizationSetting.stabilityCacheKey + ".\(type(of: L.self))"
+            let key = stabilizationCacheKey(for: L.self)
+            print(key)
             var cache: CachedLocalization<L>? {
                 get {
                     return preferences[key].value.as(CachedLocalization<L>.self)
@@ -252,6 +257,12 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
             }
             return container.localization
         }
+    }
+
+    internal func resetStabilization<L>(for: L.Type) {
+        let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)
+        let key = stabilizationCacheKey(for: L.self)
+        preferences[key].value.set(to: nil)
     }
 
     // MARK: - Decodable
