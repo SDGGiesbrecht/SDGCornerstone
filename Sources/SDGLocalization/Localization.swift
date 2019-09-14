@@ -44,7 +44,7 @@ extension Localization {
     ///
     /// - Parameters:
     ///     - stabilization: The stabilization mode.
-    public func resolved(stabilization: LocalizationSetting.StabilizationMode = .none) -> Self {
+    public static func resolved(stabilization: LocalizationSetting.StabilizationMode = .none) -> Self {
         return LocalizationSetting.current.value.resolved(stabilization: stabilization) as Self
     }
 

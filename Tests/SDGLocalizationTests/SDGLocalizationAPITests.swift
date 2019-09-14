@@ -93,6 +93,8 @@ class SDGLocalizationAPITests : TestCase {
         XCTAssertEqual(LocalizationExample.עברית.textDirection, .rightToLeftTopToBottom)
         XCTAssertEqual(LocalizationExample.englishUnitedKingdom.textDirection, .leftToRightTopToBottom)
         XCTAssertEqual(LocalizationExample.chineseTraditionalTaiwan.textDirection, .topToBottomRightToLeft)
+
+        _ = LocalizationExample.resolved()
     }
 
     func testLocalizationData() {
