@@ -38,6 +38,18 @@ public protocol Localization : TextualPlaygroundDisplay {
 
 extension Localization {
 
+    // MARK: - Static Methods
+
+    /// Returns the preferred localization out of those supported by the type.
+    ///
+    /// - Parameters:
+    ///     - stabilized: When `true`, the result will be cached and the same value returned for a longer period of time. This mode can be useful to prevent interface elements with a high refresh rate from bouncing rapidly between localizations when several are active at once.
+    public func resolved(stabilized: Bool = false) -> Self {
+        return LocalizationSetting.current.value.resolved(stabilized: stabilized) as Self
+    }
+
+    // MARK: - Conversion
+
     // #example(1, macrolanguages) #example(2, localizationGroups)
     /// Creates a localization from the specified code, or as a fallback, creates a related localization that can be reasonably used as a replacement.
     ///
@@ -203,6 +215,8 @@ extension Localization {
 
         return nil
     }
+
+    // MARK: - Metadata
 
     /// The native text direction of the localization, if known.
     public var textDirection: TextDirection? {

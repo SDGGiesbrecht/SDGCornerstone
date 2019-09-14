@@ -212,8 +212,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
         try closure()
     }
 
-    /// Returns the preferred localization out of those supported by the type `L`.
-    public func resolved<L : Localization>() -> L {
+    private func resolvedFresh<L : Localization>() -> L {
         for group in orderOfPrecedence {
             for localization in group.shuffled() {
                 if let result = L(reasonableMatchFor: localization) {
@@ -222,6 +221,15 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
             }
         }
         return L.fallbackLocalization
+    }
+
+    /// Returns the preferred localization out of those supported by the type `L`.
+    ///
+    /// - Parameters:
+    ///     - stabilized: When `true`, the result will be cached and the same value returned for a longer period of time. This mode can be useful to prevent interface elements with a high refresh rate from bouncing rapidly between localizations when several are active at once.
+    public func resolved<L : Localization>(stabilized: Bool = false) -> L {
+        #warning("Handle stability.")
+        return resolvedFresh()
     }
 
     // MARK: - Decodable
