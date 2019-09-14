@@ -16,6 +16,7 @@ import Foundation
 
 import SDGControlFlow
 import SDGLogic
+import SDGMathematics
 import SDGCollections
 import SDGText
 import SDGPersistence
@@ -26,10 +27,12 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     // MARK: - Static Properties
 
     private static let sdgDomainSuffix = ".Language"
+    private static let languageDomain = PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
     #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private static let osPreferenceKey = "AppleLanguages"
     #endif
-    private static let sdgPreferenceKey = "SDGLanguages"
+    private static let sdgPreferenceKey = "SDGLanguages" // In application domain too.
+    private static let stabilityCacheKey = "StabilityCache" // SDGCornerstone domain only.
 
     internal static let osSystemWidePreferences: Shared<Preference> = {
         let preferences: Shared<Preference>
@@ -64,7 +67,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     }()
 
     private static let sdgSystemWidePreferences: Shared<Preference> = {
-        let preferences = PreferenceSet.preferences(for: PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix)[sdgPreferenceKey]
+        let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
@@ -228,8 +231,21 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     /// - Parameters:
     ///     - stabilization: The stabilization mode.
     public func resolved<L : Localization>(stabilization: StabilizationMode = .none) -> L {
-        #warning("Handle stability.")
-        return resolvedFresh()
+        let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)
+        var cache: CachedLocalization<L>? {
+            get {
+                return preferences[LocalizationSetting.stabilityCacheKey].value.as(CachedLocalization<L>.self)
+            }
+            set {
+                preferences[LocalizationSetting.stabilityCacheKey].value.set(to: newValue)
+            }
+        }
+        let container = cached(in: &cache) {
+            return CachedLocalization<L>(
+                localization: resolvedFresh(),
+                date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/)
+        }
+        return container.localization
     }
 
     // MARK: - Decodable
