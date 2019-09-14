@@ -16,7 +16,7 @@
 
 extension LocalizationSetting {
 
-    internal static func clearStabilizationCache<L>(for: L.Type) {
+    internal func clearStabilizationCache<L>(for: L.Type) {
         resetStabilization(for: L.self)
     }
 }
