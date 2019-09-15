@@ -430,6 +430,12 @@ class SDGTextAPITests : TestCase {
         XCTAssertEqual(index.line(in: string.lines), string.lines.startIndex)
     }
 
+    func testStringFamily() {
+        let string = "..."
+        _ = string.markedAsRightToLeft()
+        _ = string.markedAsLeftToRight()
+    }
+
     func testStringScalarIndex() {
         let strict = StrictString("français")
         let string = String(strict)
