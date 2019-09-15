@@ -16,6 +16,7 @@ import Foundation
 
 import SDGControlFlow
 import SDGLogic
+import SDGMathematics
 import SDGCollections
 import SDGText
 import SDGPersistence
@@ -26,6 +27,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     // MARK: - Static Properties
 
     private static let sdgDomainSuffix = ".Language"
+    internal static let languageDomain = PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
     #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private static let osPreferenceKey = "AppleLanguages"
     #endif
@@ -64,7 +66,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     }()
 
     private static let sdgSystemWidePreferences: Shared<Preference> = {
-        let preferences = PreferenceSet.preferences(for: PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix)[sdgPreferenceKey]
+        let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
@@ -212,8 +214,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
         try closure()
     }
 
-    /// Returns the preferred localization out of those supported by the type `L`.
-    public func resolved<L : Localization>() -> L {
+    private func resolvedFresh<L : Localization>() -> L {
         for group in orderOfPrecedence {
             for localization in group.shuffled() {
                 if let result = L(reasonableMatchFor: localization) {
@@ -222,6 +223,46 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
             }
         }
         return L.fallbackLocalization
+    }
+
+    private func stabilityCacheURL<L>(for: L.Type) -> URL {
+        var path = "Stable Localizations"
+        path += "/"
+        path += String(reflecting: L.self)
+        path += "/"
+        path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
+        return FileManager.default.url(in: .cache, for: LocalizationSetting.languageDomain, at: path)
+    }
+
+    private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
+        get {
+            if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
+                Date() ≤ cache.date {
+                return cache
+            }
+            return nil
+        }
+        nonmutating set {
+            try? newValue?.save(to: stabilityCacheURL(for: L.self))
+        }
+    }
+
+    /// Returns the preferred localization out of those supported by the type `L`.
+    ///
+    /// - Parameters:
+    ///     - stabilization: The stabilization mode.
+    public func resolved<L : Localization>(stabilization: StabilizationMode = .none) -> L {
+        switch stabilization {
+        case .none:
+            return resolvedFresh()
+        case .stabilized:
+            let container = cached(in: &self[stabilityCacheFor: L.self]) {
+                return CachedLocalization<L>(
+                    localization: resolvedFresh(),
+                    date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/)
+            }
+            return container.localization
+        }
     }
 
     // MARK: - Decodable

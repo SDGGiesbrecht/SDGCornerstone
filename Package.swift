@@ -518,6 +518,7 @@ let package = Package(
             "SDGMathematics",
             "SDGCollections",
             "SDGText",
+            "SDGPersistence",
             "SDGPrecisionMathematics",
             "SDGCornerstoneLocalizations",
             "SDGPersistenceTestUtilities"

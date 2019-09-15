@@ -37,8 +37,11 @@ public struct UserFacingDynamic<Element, Localization : SDGLocalization.Localiza
     ///
     /// - Parameters:
     ///     - arguments: The arguments to interpolate.
-    public func resolved(using arguments: Arguments) -> Element {
-        return localize(LocalizationSetting.current.value.resolved(), arguments)
+    ///     - stabilization: The stabilization mode.
+    public func resolved(
+        using arguments: Arguments,
+        stabilization: LocalizationSetting.StabilizationMode = .none) -> Element {
+        return localize(LocalizationSetting.current.value.resolved(stabilization: stabilization), arguments)
     }
 
     /// Returns the resolved element for the specified localization using the specified arguments.

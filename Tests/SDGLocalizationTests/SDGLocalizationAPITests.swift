@@ -93,6 +93,8 @@ class SDGLocalizationAPITests : TestCase {
         XCTAssertEqual(LocalizationExample.עברית.textDirection, .rightToLeftTopToBottom)
         XCTAssertEqual(LocalizationExample.englishUnitedKingdom.textDirection, .leftToRightTopToBottom)
         XCTAssertEqual(LocalizationExample.chineseTraditionalTaiwan.textDirection, .topToBottomRightToLeft)
+
+        _ = LocalizationExample.resolved()
     }
 
     func testLocalizationData() {
@@ -158,6 +160,14 @@ class SDGLocalizationAPITests : TestCase {
         XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
 
         LocalizationSetting.setApplicationPreferences(to: nil)
+
+        let codes = FormatLocalization.allCases.map { $0.code }
+        let stabilizedSetting = LocalizationSetting(orderOfPrecedence: [codes])
+        stabilizedSetting.clearStabilization()
+        let first: FormatLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
+        for _ in 1 ... 10 {
+            XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
+        }
     }
 
     func testRange() {
