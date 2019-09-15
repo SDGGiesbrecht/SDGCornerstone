@@ -18,6 +18,7 @@ extension SDGTextAPITests {
         ("testStrictStringClusterView", testStrictStringClusterView),
         ("testString", testString),
         ("testStringClusterIndex", testStringClusterIndex),
+        ("testStringFamily", testStringFamily),
         ("testStringScalarIndex", testStringScalarIndex),
         ("testStringScalarView", testStringScalarView),
         ("testUnicodeScalar", testUnicodeScalar),
