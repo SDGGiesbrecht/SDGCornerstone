@@ -35,7 +35,7 @@ internal struct CachedLocalization<L> : Codable, FileConvertible where L : Local
     internal init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let code = try container.decode(String.self)
-        guard let localization = L(exactly: code) else {
+        guard let localization = L(exactly: code) else { // @exempt(from: tests)
             // Never leaves the internal scope anyway.
             throw DecodingError.dataCorruptedError(in: container, debugDescription: code)
         }
