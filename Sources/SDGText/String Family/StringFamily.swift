@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGMathematics
 
 /// A `String` or `StrictString`.
@@ -68,5 +69,29 @@ extension StringFamily {
     /// Whether or not the string contains multiple lines.
     @inlinable public var isMultiline: Bool {
         return scalars.isMultiline
+    }
+
+    @inlinable internal mutating func closeDirectionality() {
+        scalars.append("\u{2069}")
+    }
+
+    /// Marks the string as right‐to‐left by surrunding it in directional isolate controls.
+    @inlinable public mutating func markAsRightToLeft() {
+        scalars.prepend("\u{2067}")
+        closeDirectionality()
+    }
+    /// Marks the string as left‐to‐right by surrunding it in directional isolate controls.
+    @inlinable public mutating func markAsLeftToRight() {
+        scalars.prepend("\u{2066}")
+        closeDirectionality()
+    }
+
+    /// Returns the string marked as right‐to‐left by surrunding it in directional isolate controls.
+    @inlinable public func markedAsRightToLeft() -> Self {
+        return nonmutatingVariant(of: { $0.markAsRightToLeft() }, on: self)
+    }
+    /// Returns the string marked as left‐to‐right by surrunding it in directional isolate controls.
+    @inlinable public func markedAsLeftToRight() -> Self {
+        return nonmutatingVariant(of: { $0.markAsLeftToRight() }, on: self)
     }
 }
