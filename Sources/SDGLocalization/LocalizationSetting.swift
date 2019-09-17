@@ -27,7 +27,6 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     // MARK: - Static Properties
 
     private static let sdgDomainSuffix = ".Language"
-    internal static let languageDomain = PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
     #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private static let osPreferenceKey = "AppleLanguages"
     #endif
@@ -66,7 +65,8 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     }()
 
     private static let sdgSystemWidePreferences: Shared<Preference> = {
-        let preferences = PreferenceSet.preferences(for: LocalizationSetting.languageDomain)[sdgPreferenceKey]
+        let preferences = PreferenceSet.preferences(
+            for: PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix)[sdgPreferenceKey]
         preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
         return preferences
     }()
@@ -231,7 +231,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
         path += String(reflecting: L.self)
         path += "/"
         path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
-        return FileManager.default.url(in: .cache, for: LocalizationSetting.languageDomain, at: path)
+        return FileManager.default.url(in: .cache, at: path)
     }
 
     private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
