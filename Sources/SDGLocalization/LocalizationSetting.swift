@@ -226,7 +226,7 @@ public struct LocalizationSetting : Decodable, Encodable, Equatable {
     }
 
     private func stabilityCacheURL<L>(for: L.Type) -> URL {
-        var path = "Stable Localizations"
+        var path = "SDGCornerstone/Stable Localizations"
         path += "/"
         path += String(reflecting: L.self)
         path += "/"
