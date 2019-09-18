@@ -480,7 +480,7 @@ public struct CalendarDate : Comparable, Equatable, OneDimensionalPoint, PointPr
 
     // @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
     /// Επιστρέφει την ώρα στα Ελληνικά.
-    internal func ώραΣεΕλληνικά() -> StrictString {
+    public func ώραΣεΕλληνικά() -> StrictString {
         return gregorianHour.inDigitsInTwentyFourHourFormat() + ":" + gregorianMinute.inDigits()
     }
 
