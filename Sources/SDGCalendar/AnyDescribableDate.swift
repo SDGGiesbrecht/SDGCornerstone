@@ -17,6 +17,10 @@ public struct AnyDescribableDate : DescribableDate {
 
     // MARK: - Initialization
 
+    /// Creates a wrapped date.
+    ///
+    /// - Parameters:
+    ///     - date: The date.
     public init(_ date: DescribableDate) {
         self.date = date
     }
