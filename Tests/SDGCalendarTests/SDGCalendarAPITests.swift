@@ -176,12 +176,6 @@ class SDGCalendarAPITests : TestCase {
             adjustedToZone.twentyFourHourTimeInEnglish(),
             timeZoneEquivalent.twentyFourHourTimeInEnglish())
         XCTAssertEqual(
-            adjustedToZone.debugDescription,
-            timeZoneEquivalent.debugDescription)
-        XCTAssertEqual(
-            adjustedToZone.description,
-            timeZoneEquivalent.description)
-        XCTAssertEqual(
             adjustedToZone.hebrewDateInAmericanEnglish(),
             timeZoneEquivalent.hebrewDateInAmericanEnglish())
         XCTAssertEqual(
@@ -193,6 +187,8 @@ class SDGCalendarAPITests : TestCase {
         XCTAssertEqual(
             adjustedToZone.hebrewPart,
             timeZoneEquivalent.hebrewPart)
+        _ = adjustedToZone.description
+        _ = adjustedToZone.debugDescription
         _ = adjustedToZone.playgroundDescription
         let longitude: Angle<Double> = 90°
         let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
