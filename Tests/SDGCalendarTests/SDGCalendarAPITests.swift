@@ -165,6 +165,24 @@ class SDGCalendarAPITests : TestCase {
         testCustomStringConvertibleConformance(of: relative, localizations: FormatLocalization.self, uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")", overwriteSpecificationInsteadOfFailing: false)
 
         _ = "\(CalendarDate(Date()))"
+
+        let utc = CalendarDate(gregorian: .september, 20, 2019, at: 21, 31)
+        let zone = TimeZone(identifier: "Asia/Jerusalem")!
+        let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
+        XCTAssertEqual(
+            utc.adjusted(to: zone).gregorianDateInAmericanEnglish(),
+            timeZoneEquivalent.gregorianDateInAmericanEnglish())
+        XCTAssertEqual(
+            utc.adjusted(to: zone).twentyFourHourTimeInEnglish(),
+            timeZoneEquivalent.twentyFourHourTimeInEnglish())
+        let longitude: Angle<Double> = 90°
+        let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
+        XCTAssertEqual(
+            utc.adjustedToMeanSolarTime(atLongitude: longitude).gregorianDateInAmericanEnglish(),
+            longitudeEquivalent.gregorianDateInAmericanEnglish())
+        XCTAssertEqual(
+            utc.adjustedToMeanSolarTime(atLongitude: longitude).twentyFourHourTimeInEnglish(),
+            longitudeEquivalent.twentyFourHourTimeInEnglish())
     }
 
     func testCalendarInterval() {
