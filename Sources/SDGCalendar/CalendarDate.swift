@@ -241,7 +241,8 @@ public struct CalendarDate : Comparable, DescribableDate, Equatable, OneDimensio
     ///
     /// - Parameters:
     ///     - longitude: The target longitude.
-    public func adjustedToMeanSolarTime<N>(atLongitude longitude: Angle<N>) -> AnyDescribableDate where N : BinaryFloatingPoint {
+    public func adjustedToMeanSolarTime<N>(atLongitude longitude: Angle<N>) -> AnyDescribableDate
+        where N : BinaryFloatingPoint {
         let convertedAngle = Angle(rawValue: FloatMax(longitude.rawValue))
         let date = self + CalendarInterval(days: convertedAngle.inRotations)
         return AnyDescribableDate(date)
