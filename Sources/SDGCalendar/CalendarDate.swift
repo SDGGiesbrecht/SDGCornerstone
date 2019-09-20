@@ -226,6 +226,27 @@ public struct CalendarDate : Comparable, DescribableDate, Equatable, OneDimensio
         return floatingICalendarFormat() + "Z"
     }
 
+    // MARK: - Time Zones
+
+    /// Returns date properties adjusted to the specified time zone.
+    ///
+    /// - Parameters:
+    ///     - timeZone: The target time zone.
+    public func adjusted(to timeZone: TimeZone) -> AnyDescribableDate {
+        let date = self + FloatMax(timeZone.secondsFromGMT(for: Date(self))).seconds
+        return AnyDescribableDate(date)
+    }
+
+    /// Returns date properties adjusted to mean solar time at the specified longitude. (Negative angles represent west.)
+    ///
+    /// - Parameters:
+    ///     - longitude: The target longitude.
+    public func adjustedToMeanSolarTime<N>(atLongitude longitude: Angle<N>) -> AnyDescribableDate where N : BinaryFloatingPoint {
+        let convertedAngle = Angle(rawValue: FloatMax(longitude.rawValue))
+        let date = self + CalendarInterval(days: convertedAngle.inRotations)
+        return AnyDescribableDate(date)
+    }
+
     // MARK: - Comparable
 
     public static func < (precedingValue: CalendarDate, followingValue: CalendarDate) -> Bool {
