@@ -146,64 +146,6 @@ public struct CalendarDate : Comparable, DescribableDate, Equatable, OneDimensio
     }
     private var cache = Cache()
 
-    // Hebrew
-
-    /// The Hebrew year.
-    public var hebrewYear: HebrewYear {
-        return converted(to: HebrewDate.self).year
-    }
-    /// The Hebrew month.
-    public var hebrewMonth: HebrewMonth {
-        return converted(to: HebrewDate.self).month
-    }
-    /// The Hebrew weekday.
-    public var hebrewWeekday: HebrewWeekday {
-        return converted(to: HebrewWeekdayDate.self).weekday
-    }
-    /// The Hebrew day.
-    public var hebrewDay: HebrewDay {
-        return converted(to: HebrewDate.self).day
-    }
-    /// The Hebrew hour.
-    public var hebrewHour: HebrewHour {
-        return converted(to: HebrewDate.self).hour
-    }
-    /// The Hebrew part.
-    public var hebrewPart: HebrewPart {
-        return converted(to: HebrewDate.self).part
-    }
-
-    // Gregorian
-
-    /// The Gregorian year.
-    public var gregorianYear: GregorianYear {
-        return converted(to: GregorianDate.self).year
-    }
-    /// The Gregorian month.
-    public var gregorianMonth: GregorianMonth {
-        return converted(to: GregorianDate.self).month
-    }
-    /// The Gregorian weekday.
-    public var gregorianWeekday: GregorianWeekday {
-        return converted(to: GregorianWeekdayDate.self).weekday
-    }
-    /// The Gregorian day.
-    public var gregorianDay: GregorianDay {
-        return converted(to: GregorianDate.self).day
-    }
-    /// The Gregorian hour.
-    public var gregorianHour: GregorianHour {
-        return converted(to: GregorianDate.self).hour
-    }
-    /// The Gregorian minute.
-    public var gregorianMinute: GregorianMinute {
-        return converted(to: GregorianDate.self).minute
-    }
-    /// The Gregorian second.
-    public var gregorianSecond: GregorianSecond {
-        return converted(to: GregorianDate.self).second
-    }
-
     private var intervalSinceEpoch: CalendarInterval<FloatMax> {
         if let hebrew = definition as? HebrewDate {
             return hebrew.intervalSinceReferenceDate
@@ -318,6 +260,49 @@ public struct CalendarDate : Comparable, DescribableDate, Equatable, OneDimensio
         } else {
             self.init(definition: UnknownDate(encodingIdentifier: encodingIdentifier, encodedDefinition: encodedDefinition, lastCalculatedInstant: lastCalculatedInstant))
         }
+    }
+
+    // MARK: - DesbcribableDate
+
+    public var hebrewYear: HebrewYear {
+        return converted(to: HebrewDate.self).year
+    }
+    public var hebrewMonth: HebrewMonth {
+        return converted(to: HebrewDate.self).month
+    }
+    public var hebrewWeekday: HebrewWeekday {
+        return converted(to: HebrewWeekdayDate.self).weekday
+    }
+    public var hebrewDay: HebrewDay {
+        return converted(to: HebrewDate.self).day
+    }
+    public var hebrewHour: HebrewHour {
+        return converted(to: HebrewDate.self).hour
+    }
+    public var hebrewPart: HebrewPart {
+        return converted(to: HebrewDate.self).part
+    }
+
+    public var gregorianYear: GregorianYear {
+        return converted(to: GregorianDate.self).year
+    }
+    public var gregorianMonth: GregorianMonth {
+        return converted(to: GregorianDate.self).month
+    }
+    public var gregorianWeekday: GregorianWeekday {
+        return converted(to: GregorianWeekdayDate.self).weekday
+    }
+    public var gregorianDay: GregorianDay {
+        return converted(to: GregorianDate.self).day
+    }
+    public var gregorianHour: GregorianHour {
+        return converted(to: GregorianDate.self).hour
+    }
+    public var gregorianMinute: GregorianMinute {
+        return converted(to: GregorianDate.self).minute
+    }
+    public var gregorianSecond: GregorianSecond {
+        return converted(to: GregorianDate.self).second
     }
 
     // MARK: - Encodable

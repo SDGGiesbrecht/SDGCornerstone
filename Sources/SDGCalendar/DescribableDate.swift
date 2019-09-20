@@ -19,7 +19,7 @@ import SDGLocalization
 /// A date that can be described.
 ///
 /// Describable dates can be queried for properties such as the hour of the day or the day of the week, but may not be suitable for further calendaring computations.
-public protocol DescribableDate {
+public protocol DescribableDate : CustomDebugStringConvertible, CustomPlaygroundDisplayConvertible, CustomStringConvertible {
 
     // Hebrew
 
