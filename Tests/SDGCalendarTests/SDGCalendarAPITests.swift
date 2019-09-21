@@ -65,7 +65,7 @@ class SDGCalendarAPITests : TestCase {
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
-        let system = try XCTUnwrap(formatter.date(from: "1991‐04‐18 00:00:00 +0000"))
+        let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
         XCTAssert(
             Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
                 ≈ system.timeIntervalSinceReferenceDate,
