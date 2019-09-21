@@ -43,4 +43,4 @@ matrix:
       language: objective-c
       xcode_sdk: appletvsimulator
       script:
-        - "xcodebuild test -destination 'name=Apple TV 4K' -scheme SDGWeb-Package"
+        - "xcodebuild test -destination 'name=Apple TV 4K' -scheme SDGCornerstone-Package"
