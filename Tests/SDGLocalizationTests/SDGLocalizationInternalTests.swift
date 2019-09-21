@@ -85,7 +85,9 @@ class SDGLocalizationInternalTests : TestCase {
     }
 
     func testLocalizationSetting() {
-        XCTAssertNotNil(LocalizationSetting.osSystemWidePreferences.value.as([String].self), "Failed to detect operating system localization setting.")
+        XCTAssertNotNil(
+            LocalizationSetting.osSystemWidePreferences.value.as([String].self),
+            "Failed to detect operating system localization setting.")
 
         LocalizationSetting.setSystemWidePreferences(to: nil)
         LocalizationSetting.setApplicationPreferences(to: nil)
