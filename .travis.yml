@@ -15,31 +15,31 @@ matrix:
   include:
     - name: "macOS"
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11
       script:
         - "swift test"
     - name: "Linux"
       os: linux
       dist: xenial
       script:
-        - "export SWIFT_VERSION=5.0"
+        - "export SWIFT_VERSION=5.1"
         - "eval \"$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)\""
         - "swift test"
     - name: "iOS"
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11
       language: objective-c
       xcode_sdk: iphonesimulator
       script:
         - "xcodebuild test -destination 'name=iPhone 11' -scheme SDGCornerstone-Package"
     - name: "watchOS"
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11
       script:
         - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package"
     - name: "tvOS"
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11
       language: objective-c
       xcode_sdk: appletvsimulator
       script:
