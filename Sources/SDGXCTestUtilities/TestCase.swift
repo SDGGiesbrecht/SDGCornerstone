@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if canImport(XCTest) && (!os(watchOS) || targetEnvironment(simulator)) // XCTest does not contain bitcode.
+#if !os(watchOS)
 
 import XCTest
 
