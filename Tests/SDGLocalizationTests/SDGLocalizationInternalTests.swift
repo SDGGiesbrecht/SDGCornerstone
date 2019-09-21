@@ -85,9 +85,13 @@ class SDGLocalizationInternalTests : TestCase {
     }
 
     func testLocalizationSetting() {
+        #if !(targetEnvironment(simulator) && (os(iOS) || os(tvOS)))
+        // Default simulator state has no language set.
+
         XCTAssertNotNil(
             LocalizationSetting.osSystemWidePreferences.value.as([String].self),
             "Failed to detect operating system localization setting.")
+        #endif
 
         LocalizationSetting.setSystemWidePreferences(to: nil)
         LocalizationSetting.setApplicationPreferences(to: nil)
