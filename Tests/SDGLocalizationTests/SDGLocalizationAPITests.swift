@@ -168,6 +168,13 @@ class SDGLocalizationAPITests : TestCase {
         for _ in 1 ... 10 {
             XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
         }
+
+        LocalizationSetting(orderOfPrecedence: [] as [String]).do {
+            // Localization must be able to handle the complete absence of preferences.
+            XCTAssertEqual(
+                LocalizationExample.resolved(),
+                LocalizationExample.fallbackLocalization)
+        }
     }
 
     func testRange() {

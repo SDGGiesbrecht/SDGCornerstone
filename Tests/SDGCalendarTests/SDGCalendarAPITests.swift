@@ -54,7 +54,7 @@ class SDGCalendarAPITests : TestCase {
         XCTAssertEqual(day, .sunday)
     }
 
-    func testCalendarDate() {
+    func testCalendarDate() throws {
         // Force these to take place first.
         SDGCalendarInternalTests.testHebrewYear()
 
@@ -64,8 +64,12 @@ class SDGCalendarAPITests : TestCase {
         XCTAssertEqual(CalendarDate(hebrew: .tevet, 10, 5776, at: 3), CalendarDate(gregorian: .december, 21, 2015, at: 21), "Date conversion failed.")
 
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss +zzzz"
-        XCTAssert(Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate ≈ formatter.date(from: "1991‐04‐18 00:00:00 +0000")!.timeIntervalSinceReferenceDate, "CalendarDate does not match Foundation.")
+        formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
+        let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
+        XCTAssert(
+            Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
+                ≈ system.timeIntervalSinceReferenceDate,
+            "CalendarDate does not match Foundation.")
 
         XCTAssertEqual(CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday, .wednesday, "Weekday failure.")
         XCTAssertEqual(CalendarDate(hebrew: .tevet, 11, 5776).hebrewWeekday, .wednesday, "Weekday failure.")
