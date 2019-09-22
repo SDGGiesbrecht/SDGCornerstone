@@ -37,7 +37,7 @@ matrix:
       osx_image: xcode11
       script:
         - "swift package generate-xcodeproj"
-        - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package"
+        - "xcodebuild build -sdk watchos -scheme SDGCornerstone-Package > /dev/null"
     - name: "tvOS"
       os: osx
       osx_image: xcode11
