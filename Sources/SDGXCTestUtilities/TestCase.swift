@@ -14,6 +14,7 @@
 
 #if !os(watchOS)
 
+#if !Xcode || MANIFEST_LOADED_BY_XCODE || !(os(iOS) || os(tvOS)) || targetEnvironment(simulator)
 import XCTest
 
 import SDGLogic
@@ -40,4 +41,5 @@ open class TestCase : XCTestCase {
     }
 }
 
+#endif
 #endif
