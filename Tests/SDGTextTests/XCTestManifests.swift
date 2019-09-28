@@ -44,6 +44,7 @@ extension SDGTextRegressionTests {
         ("testMatchlessSearch", testMatchlessSearch),
         ("testNestingLevelLocation", testNestingLevelLocation),
         ("testReverseSearch", testReverseSearch),
+        ("testSemanticMarkupToAttributedStringPreservesFont", testSemanticMarkupToAttributedStringPreservesFont),
     ]
 }
 

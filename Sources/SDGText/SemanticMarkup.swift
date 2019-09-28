@@ -152,9 +152,20 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
 
     // Exposed for use by SDGInterface.
     public static func _attributedString(from html: String, in font: Font) throws -> NSAttributedString {
+        var adjustedFontName = font.fontName
+
+        #if canImport(UIKit)
+        if #available(iOS 13, watchOS 6, tvOS 13, *) { // @exempt(from: unicode)
+            // Older platforms do not support this CSS, but can use the name directly.
+            if adjustedFontName == Font.system.fontName {
+                adjustedFontName = "\u{2D}apple\u{2D}system"
+            }
+        }
+        #endif
+
         var modified = "<span style=\u{22}"
 
-        modified += "font\u{2D}family: &#x22;" + font.fontName + "&#x22;;"
+        modified += "font\u{2D}family: &#x22;" + adjustedFontName + "&#x22;;"
         modified += "font\u{2D}size: \(font.size)pt;"
 
         modified += "\u{22}>"
