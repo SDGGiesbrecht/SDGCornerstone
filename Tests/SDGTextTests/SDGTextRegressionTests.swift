@@ -62,4 +62,26 @@ class SDGTextRegressionTests : TestCase {
         let glitch = StrictString("x{a^a}")
         XCTAssertEqual(glitch.lastMatch(for: "{".scalars)?.range, glitch.index(after: glitch.startIndex) ..< glitch.index(after: glitch.index(after: glitch.startIndex)))
     }
+
+    func testSemanticMarkupToAttributedStringPreservesFont() {
+        // Untracked
+
+        #if canImport(AppKit) || canImport(UIKit)
+        #if canImport(UIKit)
+        typealias NSFont = UIFont
+        #endif
+        let markup = SemanticMarkup("...")
+        for font in [
+            Font.system
+            ] {
+                let attributedString = markup.richText(font: font)
+                let attribute = attributedString.attribute(.font, at: 0, effectiveRange: nil)
+                var resultingName = (attribute as? NSFont)?.fontName
+                if resultingName == ".SFNSText" {
+                    resultingName = ".AppleSystemUIFont"
+                }
+                XCTAssertEqual(resultingName, font.fontName)
+        }
+        #endif
+    }
 }
