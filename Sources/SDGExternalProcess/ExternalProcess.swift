@@ -24,6 +24,10 @@ import SDGLocalization
 /// An external process.
 public final class ExternalProcess : TextualPlaygroundDisplay {
 
+    // MARK: - Static Properties
+
+    internal static var compatibilityMode: Bool = false
+
     // MARK: - Initialization
 
     /// Creates an instance with the executable at the specified location.
@@ -98,13 +102,23 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = { _ in }) -> Result<String, ExternalProcess.Error> {
 
         let process = Process()
-        process.executableURL = executable
+        if #available(macOS 10.13, *),
+            ¬ExternalProcess.compatibilityMode {
+            process.executableURL = executable
+        } else {
+            process.launchPath = executable.path
+        }
         process.arguments = arguments
         if environment ≠ nil {
             process.environment = environment
         }
         if let location = workingDirectory {
-            process.currentDirectoryURL = location
+            if #available(macOS 10.13, *),
+                ¬ExternalProcess.compatibilityMode {
+                process.currentDirectoryURL = location
+            } else {
+                process.currentDirectoryPath = location.path
+            }
         }
 
         let pipe = Pipe()
@@ -115,7 +129,13 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         process.qualityOfService = Thread.current.qualityOfService
         #endif
         do {
-            try process.run()
+            if #available(macOS 10.13, *),
+                ¬ExternalProcess.compatibilityMode {
+                try process.run()
+            } else {
+                _ = try executable.checkResourceIsReachable()
+                process.launch()
+            }
         } catch {
             return .failure(.foundationError(error))
         }

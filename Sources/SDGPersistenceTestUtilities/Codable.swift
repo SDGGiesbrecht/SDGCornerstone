@@ -62,7 +62,9 @@ public func testCodableConformance<T>(of instance: T, uniqueTestName: StrictStri
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted]
-        encoder.outputFormatting.insert(.sortedKeys)
+        if #available(macOS 10.13, *) {
+            encoder.outputFormatting.insert(.sortedKeys)
+        }
         let encoded = try encoder.encode([instance])
 
         let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
