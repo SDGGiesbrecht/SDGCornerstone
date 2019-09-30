@@ -139,7 +139,7 @@ import PackageDescription
 let package = Package(
     name: "SDGCornerstone",
     platforms: [
-        .iOS(.v10),
+        .iOS(.v8),
         .watchOS(.v4),
         .tvOS(.v11)
     ],
