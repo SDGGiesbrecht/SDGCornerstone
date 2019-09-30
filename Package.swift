@@ -138,10 +138,6 @@ import PackageDescription
 /// ```
 let package = Package(
     name: "SDGCornerstone",
-    platforms: [
-        .watchOS(.v4),
-        .tvOS(.v11)
-    ],
     products: [
 
         // #documentation(SDGControlFlow)
