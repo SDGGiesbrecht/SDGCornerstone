@@ -23,6 +23,7 @@ import SDGXCTestUtilities
 
 class SDGConcurrencyAPITests : TestCase {
 
+    @available(macOS 10.12, *)
     func testRunLoop() {
         var driver: RunLoop.Driver?
 

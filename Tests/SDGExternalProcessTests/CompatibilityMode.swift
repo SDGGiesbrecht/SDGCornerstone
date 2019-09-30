@@ -20,6 +20,6 @@ func forAllCompatibilityModes(_ closure: () throws -> Void) rethrows {
         ExternalProcess.compatibilityMode = mode
         defer { ExternalProcess.compatibilityMode = previous }
 
-        closure()
+        try closure()
     }
 }

@@ -24,7 +24,7 @@ class SDGExternalProcessRegressionTests : TestCase {
         // Untracked
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
-        forAllCompatibilityModes {
+        try forAllCompatibilityModes {
             let longCommand = ["git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy"]
             let output = try Shell.default.run(command: longCommand).get()
             XCTAssert(output.contains("0.8.3"))

@@ -64,7 +64,7 @@ class SDGExternalProcessAPITests : TestCase {
 
         #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-        forAllCompatibilityModes {
+        try forAllCompatibilityModes {
             _ = try Shell.default.run(command: ["ls"]).get()
             _ = try Shell.default.run(command: ["pwd"], in: URL(fileURLWithPath: "/"), with: [:]).get()
 
