@@ -104,7 +104,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         let process = Process()
 
         #if os(macOS)
-        if #available(macOS 10.13, *),
+        if #available(macOS 10.13, *), // @exempt(from: unicode)
             ¬ExternalProcess.compatibilityMode {
             process.executableURL = executable
         } else {
@@ -121,7 +121,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
 
         if let location = workingDirectory {
             #if os(macOS)
-            if #available(macOS 10.13, *),
+            if #available(macOS 10.13, *), // @exempt(from: unicode)
                 ¬ExternalProcess.compatibilityMode {
                 process.currentDirectoryURL = location
             } else {
@@ -142,7 +142,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
 
         do {
             #if os(macOS)
-            if #available(macOS 10.13, *),
+            if #available(macOS 10.13, *), // @exempt(from: unicode)
                 ¬ExternalProcess.compatibilityMode {
                 try process.run()
             } else {
