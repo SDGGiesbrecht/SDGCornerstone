@@ -141,7 +141,7 @@ class SDGCalendarAPITests : TestCase {
         struct Mock : Encodable {
             let key = "gregoriano"
             let container = "[]"
-            let other = [138059393067, 259200]
+            let other: [Int64] = [138059393067, 259200]
             func encode(to encoder: Encoder) throws {
                 var container = encoder.unkeyedContainer()
                 try container.encode(key)

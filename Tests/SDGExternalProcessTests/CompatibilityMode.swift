@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#if !(os(iOS) || os(tvOS))
 @testable import SDGExternalProcess
 
 func forAllCompatibilityModes(_ closure: () throws -> Void) rethrows {
@@ -23,3 +24,4 @@ func forAllCompatibilityModes(_ closure: () throws -> Void) rethrows {
         try closure()
     }
 }
+#endif
