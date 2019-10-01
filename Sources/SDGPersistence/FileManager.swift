@@ -122,12 +122,6 @@ extension FileManager {
     ///     - directory: The provided temporary directory.
     public func withTemporaryDirectory<Result>(appropriateFor destination: URL?, _ body: (_ directory: URL) throws -> Result) rethrows -> Result {
         var directory: URL
-        #if os(Linux)
-        // #workaround(Swift 5.0, Foundation will be capable of this in 5.1.)
-
-        directory = temporaryDirectory
-
-        #else
 
         let volume = try? url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         if let itemReplacement = try? url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: volume, create: true) {
@@ -145,8 +139,6 @@ extension FileManager {
                 }
             }
         }
-
-        #endif
 
         directory.appendPathComponent(UUID().uuidString)
         defer { try? removeItem(at: directory) }
