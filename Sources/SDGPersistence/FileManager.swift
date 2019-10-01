@@ -138,7 +138,11 @@ extension FileManager {
                 directory = anyVolume
             } else {
                 // @exempt(from: tests)
-                directory = temporaryDirectory
+                if #available(macOS 10.12, iOS 10, watchOS 3, tvOS 10, *) { // @exempt(from: tests) @exempt(from: unicode)
+                    directory = temporaryDirectory
+                } else { // @exempt(from: tests)
+                    directory = URL(fileURLWithPath: NSTemporaryDirectory())
+                }
             }
         }
 

@@ -23,6 +23,7 @@ import SDGXCTestUtilities
 
 class SDGConcurrencyAPITests : TestCase {
 
+    @available(macOS 10.12, iOS 10, tvOS 10, *) // @exempt(from: unicode)
     func testRunLoop() {
         var driver: RunLoop.Driver?
 

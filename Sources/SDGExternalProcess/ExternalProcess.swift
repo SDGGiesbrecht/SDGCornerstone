@@ -24,6 +24,10 @@ import SDGLocalization
 /// An external process.
 public final class ExternalProcess : TextualPlaygroundDisplay {
 
+    // MARK: - Static Properties
+
+    internal static var compatibilityMode: Bool = false
+
     // MARK: - Initialization
 
     /// Creates an instance with the executable at the specified location.
@@ -98,13 +102,34 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = { _ in }) -> Result<String, ExternalProcess.Error> {
 
         let process = Process()
+
+        #if os(macOS)
+        if #available(macOS 10.13, *), // @exempt(from: unicode)
+            ¬ExternalProcess.compatibilityMode {
+            process.executableURL = executable
+        } else {
+            process.launchPath = executable.path
+        }
+        #else
         process.executableURL = executable
+        #endif
+
         process.arguments = arguments
         if environment ≠ nil {
             process.environment = environment
         }
+
         if let location = workingDirectory {
+            #if os(macOS)
+            if #available(macOS 10.13, *), // @exempt(from: unicode)
+                ¬ExternalProcess.compatibilityMode {
+                process.currentDirectoryURL = location
+            } else {
+                process.currentDirectoryPath = location.path
+            }
+            #else
             process.currentDirectoryURL = location
+            #endif
         }
 
         let pipe = Pipe()
@@ -114,8 +139,19 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
         #if !os(Linux) // #workaround(Swift 5.1, Linux will gain this property in 5.2.)
         process.qualityOfService = Thread.current.qualityOfService
         #endif
+
         do {
+            #if os(macOS)
+            if #available(macOS 10.13, *), // @exempt(from: unicode)
+                ¬ExternalProcess.compatibilityMode {
+                try process.run()
+            } else {
+                _ = try executable.checkResourceIsReachable()
+                process.launch()
+            }
+            #else
             try process.run()
+            #endif
         } catch {
             return .failure(.foundationError(error))
         }
