@@ -102,20 +102,10 @@ public struct Preference : Equatable, TransparentWrapper {
     }
 
     private func encodeAndDeserialize<T>(_ value: [T]) throws -> Any where T : Encodable {
-        #if os(Linux)
-        // #workaround(Swift 5.0, Linux gains PropertyListEncoder in Swift 5.1.)
-        return try JSONSerialization.jsonObject(with: JSONEncoder().encode(value), options: [])
-        #else
         return try PropertyListSerialization.propertyList(from: PropertyListEncoder().encode(value), options: [], format: nil)
-        #endif
     }
     private func serializeAndDecode<T>(_ array: NSArray, as type: T.Type) throws -> [T] where T : Decodable {
-        #if os(Linux)
-        // #workaround(Swift 5.0, Linux gains PropertyListEncoder in Swift 5.1.)
-        return try JSONDecoder().decode([T].self, from: JSONSerialization.data(withJSONObject: array, options: []))
-        #else
         return try PropertyListDecoder().decode([T].self, from: PropertyListSerialization.data(fromPropertyList: array, format: .binary, options: 0))
-        #endif
     }
 
     // @documentation(SDGCornerstone.Preference.set(to:))
