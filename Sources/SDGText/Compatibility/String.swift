@@ -12,6 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+// @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+/// Eine Zeichenkette aus Unicode‐Zeichen. (`String`)
+public typealias Zeichenkette = String
+
 extension String : StringFamily {
 
     // MARK: - Initialization

@@ -14,6 +14,10 @@
 
 import Foundation
 
+// @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+/// Ein Wert, der den Standort einer Ressource kennzeichnet. (`URL`)
+public typealias EinheitlicherRessourcenzeiger = URL
+
 extension URL : Comparable {
 
     /// Returns `true` if the URL is in the location described by the specified URL.
