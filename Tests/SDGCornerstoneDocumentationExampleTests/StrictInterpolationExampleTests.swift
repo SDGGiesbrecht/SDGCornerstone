@@ -52,7 +52,7 @@ class StrictInterpolationExampleTests : TestCase {
         streng = "\(zeichenkette) ...\(zeichen)"
 
         // Die meisten anderen Typen müssen ausdrücklich in einer bestimmten Textform umgewandelt werden:
-        let zahl = Zahl.zufällig(in: 0 ... 1000)
+        let zahl = Ganzzahl.zufällig(in: 0 ... 1000)
         streng = "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
 
         // Die Beschreibungen des Swift‐Übersetzers können immer noch ausdrücklich verlangt werden:
