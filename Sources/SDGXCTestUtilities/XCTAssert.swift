@@ -21,6 +21,7 @@ import XCTest
 
 import SDGText
 
+// @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Stellt fest, ob zwei Werte gleich sind.
 ///
 /// - Parameters:
