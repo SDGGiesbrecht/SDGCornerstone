@@ -39,5 +39,26 @@ class StrictInterpolationExampleTests : TestCase {
         strict = "Error: \(arbitraryDescriptionOf: something)"
         // @endExample
         _ = strict
+
+        func fehlerHolen() -> Any {
+            return ""
+        }
+        // @example(strengerInterpolation)
+        var streng: StrengerZeichenkette = ""
+
+        // Typen, die Zeichenketten ähneln können direkt interpoliert werden:
+        let zeichenkette: Zeichenkette = "Hallo, Welt!"
+        let zeichen: Unicode.Skalar = "?"
+        streng = "\(zeichenkette) ...\(zeichen)"
+
+        // Die meisten anderen Typen müssen ausdrücklich in einer bestimmten Textform umgewandelt werden:
+        let zahl = Zahl.zufällig(in: 0 ... 1000)
+        streng = "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
+
+        // Die Beschreibungen des Swift‐Übersetzers können immer noch ausdrücklich verlangt werden:
+        let etwas: Any = fehlerHolen()
+        streng = "Fehler: \(willkürlicheBeschreibungVon: etwas)"
+        // @endExample
+        _ = streng
     }
 }
