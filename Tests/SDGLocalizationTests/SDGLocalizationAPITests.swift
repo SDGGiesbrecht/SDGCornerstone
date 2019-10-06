@@ -314,5 +314,8 @@ class SDGLocalizationAPITests : TestCase {
 
         testCustomStringConvertibleConformance(of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"), localizations: _InterfaceLocalization.self, uniqueTestName: "Invalid Digit", overwriteSpecificationInsteadOfFailing: false)
         _ = TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc").errorDescription
+
+        XCTAssertEqual((10_000 as UInt).inZahlzeichen(), "10 000")
+        XCTAssertEqual(777.inRömischerZahlschrift(), "DCCLXXVII")
     }
 }

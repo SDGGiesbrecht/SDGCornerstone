@@ -35,10 +35,10 @@ import SDGText
 @inlinable public func XCTFeststellenGleich<T>(
     _ ausdruck1: @autoclosure () throws -> T,
     _ ausdruck2: @autoclosure () throws -> T,
-    _ mitteilung: @autoclosure () -> Zeichenkette = "",
+    _ mitteilung: @autoclosure () -> Zeichenkette = "", // @exempt(from: tests)
     datei: StatischeZeichenkette = #file,
     zeile: NZahl = #line) where T : Vergleichbar { // @exempt(from: tests)
-    XCTAssertEqual(try ausdruck1(), try ausdruck2(), mitteilung(), file: datei, line: zeile)
+    XCTAssertEqual(try ausdruck1(), try ausdruck2(), mitteilung(), file: datei, line: zeile) // @exempt(from: tests)
 }
 
 #endif
