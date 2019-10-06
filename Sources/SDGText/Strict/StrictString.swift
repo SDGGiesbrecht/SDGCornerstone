@@ -16,7 +16,7 @@ import SDGControlFlow
 import SDGMathematics
 
 // @localization(🇩🇪DE) @crossReference(StrictString)
-// #example(1, strengerInterpolation)
+// #example(1, strengeInterpolation)
 /// Eine Zeichenkette, die Unicode‐Normalisierungsform NFKD erhält.
 ///
 /// Interpolation benötigt, das Werte in ausdrückliche Textformen umgewandelt sind.
@@ -37,7 +37,7 @@ import SDGMathematics
 /// let something: Any = getError()
 /// strict = "Error: \(arbitraryDescriptionOf: something)"
 /// ```
-public typealias StrengerZeichenkette = StrictString
+public typealias StrengeZeichenkette = StrictString
 // @localization(🇨🇦EN) @crossReference(StrictString)
 // #example(1, strictInterpolation)
 /// A string that maintains Unicode normalization form NFKD.

@@ -12,11 +12,22 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
 import SDGMathematics
 import SDGText
 
 extension IntegerProtocol {
 
+    // @localization(🇩🇪DE) @crossReference(IntegerProtocol.inDigits(thousandsSeparator:))
+    // #documentation(SDGCornerstone.WholeNumberProtocol.inZahlzeichen(tausendertrennzeichen:))
+    /// Gibt die Zahl in Zahlzeichen zurück.
+    ///
+    /// - Parameters:
+    ///     - tausendertrennzeichen: Das Tausendertrennzeichen. (Ein Leerzeichen, wenn nicht angegeben.)
+    @inlinable public func inZahlzeichen(tausendertrennzeichen: Unicode.Skalar = " ") -> StrengeZeichenkette {
+        return inDigits(thousandsSeparator: tausendertrennzeichen)
+    }
+    // @localization(🇨🇦EN) @crossReference(IntegerProtocol.inDigits(thousandsSeparator:))
     // #documentation(SDGCornerstone.WholeNumberProtocol.inDigits(thousandsSeparator:))
     /// Returns the number in digits.
     ///
@@ -41,6 +52,16 @@ extension IntegerProtocol {
         return générerOrdinalFrançaisAbrégé(genre: genre, nombre: nombre)
     }
 
+    // @localization(🇩🇪DE) @crossReference(IntegerProtocol.inRomanNumerals(lowercase:))
+    // #documentation(SDGCornerstone.WholeNumberProtocol.inRömischerZahlschrift(kleinbuchstaben:))
+    /// Gibt die Zahl in römischer Zahlschrift zurück.
+    ///
+    /// - Parameters:
+    ///     - kleinbuchstaben: Ob Kleinbuchstaben verwendet werden sollen. (`falsch` wenn nicht angegeben.)
+    @inlinable public func inRömischerZahlschrift(kleinbuchstaben: Bool = falsch) -> StrengeZeichenkette {
+        return inRomanNumerals(lowercase: kleinbuchstaben)
+    }
+    // @localization(🇨🇦EN) @crossReference(IntegerProtocol.inRomanNumerals(lowercase:))
     // #documentation(SDGCornerstone.WholeNumberProtocol.inRomanNumerals(lowercase:))
     /// Returns the number in roman numerals.
     ///

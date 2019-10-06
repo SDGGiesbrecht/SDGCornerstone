@@ -44,8 +44,8 @@ class StrictInterpolationExampleTests : TestCase {
         func fehlerHolen() -> Any {
             return ""
         }
-        // @example(strengerInterpolation)
-        var streng: StrengerZeichenkette = ""
+        // @example(strengeInterpolation)
+        var streng: StrengeZeichenkette = ""
 
         // Typen, die Zeichenketten ähneln können direkt interpoliert werden:
         let zeichenkette: Zeichenkette = "Hallo, Welt!"
@@ -53,7 +53,7 @@ class StrictInterpolationExampleTests : TestCase {
         streng = "\(zeichenkette) ...\(zeichen)"
 
         // Die meisten anderen Typen müssen ausdrücklich in einer bestimmten Textform umgewandelt werden:
-        let zahl = GZahl.zufällig(in: 0 ... 1000)
+        let zahl = GZahl.zufällige(in: 0 ... 1000)
         streng = "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
 
         // Die Beschreibungen des Swift‐Übersetzers können immer noch ausdrücklich verlangt werden:

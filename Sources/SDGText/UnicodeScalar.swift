@@ -18,7 +18,13 @@ import SDGLogic
 import SDGMathematics
 import SDGCollections
 
-extension UnicodeScalar {
+extension Unicode {
+    // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+    /// Ein Unicode‐Skalarwert. (`Scalar`)
+    public typealias Skalar = Scalar
+}
+
+extension Unicode.Scalar {
 
     /// `true` if the scalar is decomposable in NFKD, otherwise `false`.
     public var isDecomposableInNFKD: Bool {
