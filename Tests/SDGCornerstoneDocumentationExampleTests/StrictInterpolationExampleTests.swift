@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
 import SDGText
 
 import SDGXCTestUtilities
@@ -52,7 +53,7 @@ class StrictInterpolationExampleTests : TestCase {
         streng = "\(zeichenkette) ...\(zeichen)"
 
         // Die meisten anderen Typen müssen ausdrücklich in einer bestimmten Textform umgewandelt werden:
-        let zahl = Ganzzahl.zufällig(in: 0 ... 1000)
+        let zahl = GZahl.zufällig(in: 0 ... 1000)
         streng = "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
 
         // Die Beschreibungen des Swift‐Übersetzers können immer noch ausdrücklich verlangt werden:

@@ -118,7 +118,7 @@ extension BinaryInteger {
 
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Eine Ganzzahl mit Vorzeichen. (`Int`)
-public typealias Ganzzahl = Int
+public typealias GZahl = Int
 extension Int : IntFamily {
 
     // MARK: - PointProtocol

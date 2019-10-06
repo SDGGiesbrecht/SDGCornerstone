@@ -19,6 +19,8 @@
 
 import XCTest
 
+import SDGLogic
+import SDGMathematics
 import SDGText
 
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
@@ -35,8 +37,8 @@ import SDGText
     _ ausdruck2: @autoclosure () throws -> T,
     _ mitteilung: @autoclosure () -> Zeichenkette = "",
     datei: StatischeZeichenkette = #file,
-    zeile: NatürlicheZahl = #line) where T : Vergleichbar { // @exempt(from: tests)
-    XCTAssertEqual(ausdruck1, ausdruck2, mitteilung, datei, zeile)
+    zeile: NZahl = #line) where T : Vergleichbar { // @exempt(from: tests)
+    XCTAssertEqual(try ausdruck1(), try ausdruck2(), mitteilung(), file: datei, line: zeile)
 }
 
 #endif

@@ -127,6 +127,9 @@ extension BinaryInteger {
     }
 }
 
+// @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+/// Eine natürliche Zahl ohne Vorzeichen. (`UInt`)
+public typealias NZahl = UInt
 extension UInt : UIntFamily {
 
     // MARK: - PointProtocol
