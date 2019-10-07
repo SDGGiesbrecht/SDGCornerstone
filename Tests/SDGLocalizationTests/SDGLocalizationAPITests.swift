@@ -317,5 +317,6 @@ class SDGLocalizationAPITests : TestCase {
 
         XCTAssertEqual((10_000 as UInt).inZahlzeichen(), "10 000")
         XCTAssertEqual(777.inRömischerZahlschrift(), "DCCLXXVII")
+        XCTAssertEqual((777 as UInt).inRömischerZahlschrift(), "DCCLXXVII")
     }
 }
