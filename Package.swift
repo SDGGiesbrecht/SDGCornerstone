@@ -427,6 +427,8 @@ let package = Package(
         .target(name: "SDGXCTestUtilities", dependencies: [
             "SDGTesting",
             "SDGLogic",
+            "SDGMathematics",
+            "SDGText",
             "SDGPersistence"
             ]),
 

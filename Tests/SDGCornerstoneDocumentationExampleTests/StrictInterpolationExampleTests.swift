@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGMathematics
 import SDGText
 
 import SDGXCTestUtilities
@@ -39,5 +40,26 @@ class StrictInterpolationExampleTests : TestCase {
         strict = "Error: \(arbitraryDescriptionOf: something)"
         // @endExample
         _ = strict
+
+        func fehlerHolen() -> Any {
+            return ""
+        }
+        // @example(strengeInterpolation)
+        var streng: StrengeZeichenkette = ""
+
+        // Typen, die Zeichenketten ähneln können direkt interpoliert werden:
+        let zeichenkette: Zeichenkette = "Hallo, Welt!"
+        let zeichen: Unicode.Skalar = "?"
+        streng = "\(zeichenkette) ...\(zeichen)"
+
+        // Die meisten anderen Typen müssen ausdrücklich in einer bestimmten Textform umgewandelt werden:
+        let zahl = GZahl.zufällige(in: 0 ... 1000)
+        streng = "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
+
+        // Die Beschreibungen des Swift‐Übersetzers können immer noch ausdrücklich verlangt werden:
+        let etwas: Any = fehlerHolen()
+        streng = "Fehler: \(willkürlicheBeschreibungVon: etwas)"
+        // @endExample
+        _ = streng
     }
 }

@@ -135,6 +135,17 @@ extension StrictStringInterpolationProtocol {
         self.string.append(contentsOf: typeName.scalars)
     }
 
+    // @localization(🇩🇪DE)
+    // @crossReference(StrictStringInterpolationProtocol.appendInterpolation(arbitraryDescriptionOf:))
+    /// Interpoliert eine willkürliche Beschreibung des Werts, bereitgestellt von dem Swift‐Übersetzer.
+    ///
+    /// - Parameters:
+    ///     - wert: Der Wert.
+    @inlinable public mutating func appendInterpolation(willkürlicheBeschreibungVon wert: Any) {
+        appendInterpolation(arbitraryDescriptionOf: wert)
+    }
+    // @localization(🇨🇦EN)
+    // @crossReference(StrictStringInterpolationProtocol.appendInterpolation(arbitraryDescriptionOf:))
     /// Interpolates an arbitrary description of the value, supplied by the Swift compiler.
     ///
     /// - Parameters:

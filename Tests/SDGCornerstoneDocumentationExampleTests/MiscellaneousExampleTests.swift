@@ -145,6 +145,15 @@ class MiscellaneousExampleTests : TestCase {
         XCTAssertEqual(adOne − oneYear, oneBC)
         XCTAssertEqual(adOne − oneBC, oneYear)
         // @endExample
+
+        // @example(gregorianischesJahr)
+        let einsNChr = GregorianischesJahr(1)
+        let einsVChr = GregorianischesJahr(−1)
+        let einJahr = Int(1)
+
+        XCTFeststellenGleich(einsNChr − einJahr, einsVChr)
+        XCTFeststellenGleich(einsNChr − einsVChr, einJahr)
+        // @endExample
     }
 
     func testIncreasing() {

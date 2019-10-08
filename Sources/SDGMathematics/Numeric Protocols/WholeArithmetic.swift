@@ -187,6 +187,7 @@ public protocol WholeArithmetic : FixedScaleOneDimensionalPoint, Numeric, Numeri
     ///     - factor: The factor to round to a multiple of.
     func rounded(_ rule: RoundingRule, toMultipleOf factor: Self) -> Self
 
+    // @localization(🇨🇦EN) @crossReference(WholeArithmetic.random(in:))
     // @documentation(SDGCornerstone.WholeArithmetic.random(in:))
     /// Creates a random value within a particular range.
     ///
@@ -356,6 +357,14 @@ extension WholeArithmetic {
         return nonmutatingVariant(of: { $0.round($1) }, on: self, with: rule)
     }
 
+    // @localization(🇩🇪DE) @crossReference(WholeArithmetic.random(in:))
+    /// Erstellt einen zufälligen Wert innerhalb eines bestimmten Intervall.
+    ///
+    /// - Parameters:
+    ///     - intervall: Das erlaubte Intervall für den zufälligen Wert.
+    @inlinable public static func zufällige(in intervall: AbgeschlossenesIntervall<Self>) -> Self {
+        return random(in: intervall)
+    }
     @inlinable public static func random(in range: ClosedRange<Self>) -> Self {
         var generator = SystemRandomNumberGenerator()
         return random(in: range, using: &generator)

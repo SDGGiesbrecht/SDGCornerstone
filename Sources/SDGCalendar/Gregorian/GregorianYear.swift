@@ -19,6 +19,22 @@ import SDGLocalization
 
 import SDGCornerstoneLocalizations
 
+// @localization(🇩🇪DE) @crossReference(GregorianYear)
+// #example(1, gregorianischesJahr)
+/// Ein gregorianisches Jahr.
+///
+/// Jahren vor Christus werden mit einer negativen Zahl voreingestellt. Die bereitgestellte mathematische Funktionen berücksichtigen automatisch das Fehlen eines Jahre Null. Zum Beispiel:
+///
+/// ```swift
+/// let einsNChr = GregorianischesJahr(1)
+/// let einsVChr = GregorianischesJahr(−1)
+/// let einJahr = Int(1)
+///
+/// XCTFeststellenGleich(einsNChr − einJahr, einsVChr)
+/// XCTFeststellenGleich(einsNChr − einsVChr, einJahr)
+/// ```
+public typealias GregorianischesJahr = GregorianYear
+// @localization(🇨🇦EN) @crossReference(GregorianYear)
 // #example(1, gregorianYear)
 /// A Gregorian year.
 ///

@@ -36,6 +36,8 @@ class SDGLogicAPITests : TestCase {
         test(assignmentOperator: (∧=, "∧="), with: true, false, resultsIn: false)
         test(operator: (∨, "∨"), on: true, false, returns: true)
         test(assignmentOperator: (∨=, "∨="), with: false, false, resultsIn: false)
+
+        XCTAssert(wahr)
     }
 
     func testEquatable() {

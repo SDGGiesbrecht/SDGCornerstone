@@ -14,6 +14,10 @@
 
 import SDGLogic
 
+// @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+/// Eine ungeordnete Sammlung eindeutigen Elementen. (`Set`)
+public typealias Menge = Set
+
 extension Set : ComparableSet, FiniteSet, MutableSet, SetDefinition {
 
     // MARK: - ComparableSet

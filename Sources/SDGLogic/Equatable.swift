@@ -12,6 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+// @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+/// Ein Typ, der nach Wertgleiche verglichen werden kann. (`Equatable`)
+public typealias Vergleichbar = Equatable
+
 extension Equatable {
 
     // @documentation(SDGCornerstone.Equatable.≠)

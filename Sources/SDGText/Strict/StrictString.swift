@@ -15,6 +15,30 @@
 import SDGControlFlow
 import SDGMathematics
 
+// @localization(🇩🇪DE) @crossReference(StrictString)
+// #example(1, strengeInterpolation)
+/// Eine Zeichenkette, die Unicode‐Normalisierungsform NFKD erhält.
+///
+/// Interpolation benötigt, das Werte in ausdrückliche Textformen umgewandelt sind.
+///
+/// ```swift
+/// var streng: StrengeZeichenkette = ""
+///
+/// // Typen, die Zeichenketten ähneln können direkt interpoliert werden:
+/// let zeichenkette: Zeichenkette = "Hallo, Welt!"
+/// let zeichen: Unicode.Skalar = "?"
+/// streng = "\(zeichenkette) ...\(zeichen)"
+///
+/// // Die meisten anderen Typen müssen ausdrücklich in einer bestimmten Textform umgewandelt werden:
+/// let zahl = GZahl.zufällige(in: 0 ... 1000)
+/// streng = "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
+///
+/// // Die Beschreibungen des Swift‐Übersetzers können immer noch ausdrücklich verlangt werden:
+/// let etwas: Any = fehlerHolen()
+/// streng = "Fehler: \(willkürlicheBeschreibungVon: etwas)"
+/// ```
+public typealias StrengeZeichenkette = StrictString
+// @localization(🇨🇦EN) @crossReference(StrictString)
 // #example(1, strictInterpolation)
 /// A string that maintains Unicode normalization form NFKD.
 ///
