@@ -80,7 +80,29 @@ extension Range where Bound == String.Index {
         return map { $0.samePosition(in: scalars) }
     }
 
-    #warning("scalars(in:).")
+    // @documentation(Range.scalars(in:))
+    /// Returns the range of scalars that contains this range.
+    ///
+    /// - Parameters:
+    ///     - clusters: The scalar view of the string the range refers to.
+    @inlinable public func scalars(in scalars: String.ScalarView) -> Range<String.Index> {
+        return map(
+            convertAndRoundDown: { $0.scalar(in: scalars) },
+            convertIfPossible: { $0.scalar(in: scalars) },
+            advance: { scalars.index(after: $0) })
+    }
+
+    // #documentation(Range.scalars(in:))
+    /// Returns the range of scalars that contains this range.
+    ///
+    /// - Parameters:
+    ///     - scalars: The scalar view of the string the range refers to.
+    @inlinable public func scalars(in scalars: StrictString.ScalarView) -> Range<StrictString.Index> {
+        return map(
+            convertAndRoundDown: { $0.scalar(in: scalars) },
+            convertIfPossible: { $0.scalar(in: scalars) },
+            advance: { scalars.index(after: $0) })
+    }
 
     // @documentation(Range.sameRange(in:))
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
