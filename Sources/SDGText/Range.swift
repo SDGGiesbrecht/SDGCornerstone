@@ -84,7 +84,7 @@ extension Range where Bound == String.Index {
     /// Returns the range of scalars that contains this range.
     ///
     /// - Parameters:
-    ///     - clusters: The scalar view of the string the range refers to.
+    ///     - scalars: The scalar view of the string the range refers to.
     @inlinable public func scalars(in scalars: String.ScalarView) -> Range<String.Index> {
         return map(
             convertAndRoundDown: { $0.scalar(in: scalars) },
