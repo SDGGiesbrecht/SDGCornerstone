@@ -88,7 +88,7 @@ extension Range where Bound == String.Index {
     @inlinable public func scalars(in scalars: String.ScalarView) -> Range<String.Index> {
         return map(
             convertAndRoundDown: { $0.scalar(in: scalars) },
-            convertIfPossible: { $0.scalar(in: scalars) },
+            convertIfPossible: { $0.samePosition(in: scalars) },
             advance: { scalars.index(after: $0) })
     }
 
@@ -100,7 +100,7 @@ extension Range where Bound == String.Index {
     @inlinable public func scalars(in scalars: StrictString.ScalarView) -> Range<StrictString.Index> {
         return map(
             convertAndRoundDown: { $0.scalar(in: scalars) },
-            convertIfPossible: { $0.scalar(in: scalars) },
+            convertIfPossible: { $0.samePosition(in: scalars) },
             advance: { scalars.index(after: $0) })
     }
 
@@ -130,7 +130,7 @@ extension Range where Bound == String.Index {
     @inlinable public func clusters(in clusters: String.ClusterView) -> Range<String.Index> {
         return map(
             convertAndRoundDown: { $0.cluster(in: clusters) },
-            convertIfPossible: { $0.cluster(in: clusters) },
+            convertIfPossible: { $0.samePosition(in: clusters) },
             advance: { clusters.index(after: $0) })
     }
 
@@ -142,7 +142,7 @@ extension Range where Bound == String.Index {
     @inlinable public func clusters(in clusters: StrictString.ClusterView) -> Range<StrictString.Index> {
         return map(
             convertAndRoundDown: { $0.cluster(in: clusters) },
-            convertIfPossible: { $0.cluster(in: clusters) },
+            convertIfPossible: { $0.samePosition(in: clusters) },
             advance: { clusters.index(after: $0) })
     }
 
@@ -161,7 +161,7 @@ extension Range where Bound == String.Index {
     @inlinable public func lines<S>(in lines: LineView<S>) -> Range<LineView<S>.Index> {
         return map(
             convertAndRoundDown: { $0.line(in: lines) },
-            convertIfPossible: { $0.line(in: lines) },
+            convertIfPossible: { $0.samePosition(in: lines) },
             advance: { lines.index(after: $0) })
     }
 }
