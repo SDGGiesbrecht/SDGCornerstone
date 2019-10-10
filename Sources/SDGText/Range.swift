@@ -49,15 +49,6 @@ extension Range where Bound == LineViewIndex {
 
 extension Range where Bound == String.Index {
 
-    #warning("Move these?")
-    @inlinable internal func map<B>(_ convert: (Bound) -> B?) -> Range<B>? {
-        guard let lower = convert(lowerBound),
-            let upper = convert(upperBound) else {
-                return nil
-        }
-        return lower ..< upper
-    }
-
     @inlinable internal func map<B>(
         convertAndRoundDown: (Bound) -> B,
         convertIfPossible: (Bound) -> B?,
