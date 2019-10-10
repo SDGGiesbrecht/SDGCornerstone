@@ -124,25 +124,11 @@ extension Range where Bound == String.Index {
             advance: { clusters.index(after: $0) })
     }
 
-    #warning("Genericize?")
     /// Returns the range in the given view of lines that corresponds exactly to this range.
     ///
     /// - Parameters:
     ///     - lines: The line view of the string the range refers to.
-    @inlinable public func sameRange(in lines: LineView<String>) -> Range<LineView<String>.Index>? {
-        if let lower = lowerBound.samePosition(in: lines),
-            let upper = upperBound.samePosition(in: lines) {
-            return lower ..< upper
-        } else {
-            return nil
-        }
-    }
-
-    /// Returns the range in the given view of lines that corresponds exactly to this range.
-    ///
-    /// - Parameters:
-    ///     - lines: The line view of the string the range refers to.
-    @inlinable public func sameRange(in lines: LineView<StrictString>) -> Range<LineView<StrictString>.Index>? {
+    @inlinable public func sameRange<S>(in lines: LineView<S>) -> Range<LineView<S>.Index>? {
         return map { $0.samePosition(in: lines) }
     }
 
@@ -150,25 +136,10 @@ extension Range where Bound == String.Index {
     ///
     /// - Parameters:
     ///     - lines: The line view of the string the range refers to.
-    @inlinable public func lines(in lines: LineView<String>) -> Range<LineView<String>.Index> {
-        let lower = lowerBound.line(in: lines)
-        if let upper = upperBound.samePosition(in: lines) {
-            return lower ..< upper
-        } else {
-            return lower ..< lines.index(after: upperBound.line(in: lines))
-        }
-    }
-
-    /// Returns the range of lines that contains this range.
-    ///
-    /// - Parameters:
-    ///     - lines: The line view of the string the range refers to.
-    @inlinable public func lines(in lines: LineView<StrictString>) -> Range<LineView<StrictString>.Index> {
-        let lower = lowerBound.line(in: lines)
-        if let upper = upperBound.samePosition(in: lines) {
-            return lower ..< upper
-        } else {
-            return lower ..< lines.index(after: upperBound.line(in: lines))
-        }
+    @inlinable public func lines<S>(in lines: LineView<S>) -> Range<LineView<S>.Index> {
+        return map(
+            convertAndRoundDown: { $0.line(in: lines) },
+            convertIfPossible: { $0.line(in: lines) },
+            advance: { lines.index(after: $0) })
     }
 }
