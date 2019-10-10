@@ -12,60 +12,78 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#warning("Is this necessary?")
-import SDGControlFlow
-
 extension String.Index {
 
     // MARK: - Conversions
 
     /// Returns the position in the given view of scalars that corresponds exactly to this index.
     ///
-    /// - Precondition: The index must be a valid cluster index, such as those received from any `String` or `ClusterView` API. Since Swift 4 it has been possible for the indices of other string views (`ScalarView`, `UTF8View`, `UTF16View`) to masquerade as cluster indices by way of some unfortunate typealiases, despite being completely invalid. This method traps upon receiving such an invalid index.
-    ///
     /// - Parameters:
     ///     - scalars: The scalar view of the string the range refers to.
-    @inlinable public func samePosition(in scalars: String.ScalarView) -> String.ScalarView.Index {
-        guard let result = samePosition(in: scalars) as String.ScalarView.Index? else {
-            _preconditionFailure({ (localization: _APILocalization) -> String in // @exempt(from: tests)
-                switch localization {
-                case .englishCanada: // @exempt(from: tests)
-                    return "Not a cluster boundary: \(self)"
-                }
-            })
-        }
-        return result
-    }
-
-    /// Returns the position in the given view of scalars that corresponds exactly to this index.
-    ///
-    /// - Parameters:
-    ///     - scalars: The scalar view of the string the range refers to.
-    @inlinable public func samePosition(in scalars: StrictString) -> StrictString.Index {
+    @inlinable public func samePosition(in scalars: StrictString.ScalarView) -> StrictString.Index? {
         return samePosition(in: String(StrictString(scalars)).scalars)
     }
 
+    // @documentation(String.Index.scalar(in:))
+    /// Returns the position of the scalar that contains this index.
+    ///
+    /// - Parameters:
+    ///     - scalars: The scalar view of the string the range refers to.
+    @inlinable public func scalar(in scalars: String.ScalarView) -> String.Index {
+        let string = String(scalars)
+        var cursor = self
+        var position = samePosition(in: scalars)
+        while position == nil {
+            cursor = string.utf8.index(before: cursor)
+            position = cursor.samePosition(in: string.scalars)
+        }
+        return position!
+    }
+
+    // #documentation(String.Index.scalar(in:))
+    /// Returns the position of the scalar that contains this index.
+    ///
+    /// - Parameters:
+    ///     - scalars: The scalar view of the string the range refers to.
+    @inlinable public func scalar(in scalars: StrictString.ScalarView) -> StrictString.Index {
+        return scalar(in: String(StrictString(scalars)).scalars)
+    }
+
+    /// Returns the position in the given view of clusters that corresponds exactly to this index.
+    ///
+    /// - Parameters:
+    ///     - clusters: The cluster view of the string the range refers to.
+    @inlinable public func samePosition(in clusters: StrictString.ClusterView) -> StrictString.Index? {
+        return samePosition(in: String(StrictString(clusters)))
+    }
+
+    // @documentation(String.Index.cluster(in:))
     /// Returns the position of the cluster that contains this index.
     ///
     /// - Parameters:
     ///     - clusters: The cluster view of the string the range refers to.
-    @inlinable public func cluster(in clusters: String.ClusterView) -> String.ClusterView.Index {
+    @inlinable public func cluster(in clusters: String.ClusterView) -> String.Index {
         let string = String(clusters)
-
-        var copy = self
-        var position = samePosition(in: string)
-
+        let startScalar = scalar(in: string.scalars)
+        var cursor = self
+        var position = startScalar.samePosition(in: string.clusters)
         while position == nil {
-            copy = string.unicodeScalars.index(before: copy)
-            position = copy.samePosition(in: string)
+            cursor = string.unicodeScalars.index(before: cursor)
+            position = cursor.samePosition(in: string.clusters)
         }
-
-        guard let result = copy.samePosition(in: string) else {
-            _unreachable()
-        }
-        return result
+        return position!
     }
 
+    // #documentation(String.Index.cluster(in:))
+    /// Returns the position of the cluster that contains this index.
+    ///
+    /// - Parameters:
+    ///     - clusters: The cluster view of the string the range refers to.
+    @inlinable public func cluster(in clusters: StrictString.ClusterView) -> StrictString.Index {
+        return cluster(in: String(StrictString(clusters)))
+    }
+
+    #warning("Genericize?")
     /// Returns the position in the given view of lines that corresponds exactly to this index.
     ///
     /// - Parameters:
@@ -83,11 +101,36 @@ extension String.Index {
         return line
     }
 
+    /// Returns the position in the given view of lines that corresponds exactly to this index.
+    ///
+    /// - Parameters:
+    ///     - lines: The line view of the string the range refers to.
+    @inlinable public func samePosition(in lines: LineView<StrictString>) -> LineView<StrictString>.Index? {
+        let line = self.line(in: lines)
+        guard let start = line.start else {
+            // End index
+            return line
+        }
+        guard start == self else {
+            // In the middle.
+            return nil
+        }
+        return line
+    }
+
     /// Returns the position of the line that contains this index.
     ///
     /// - Parameters:
     ///     - lines: The line view of the string the range refers to.
     @inlinable public func line(in lines: LineView<String>) -> LineView<String>.Index {
+        return lines.line(for: self)
+    }
+
+    /// Returns the position of the line that contains this index.
+    ///
+    /// - Parameters:
+    ///     - lines: The line view of the string the range refers to.
+    @inlinable public func line(in lines: LineView<StrictString>) -> LineView<StrictString>.Index {
         return lines.line(for: self)
     }
 }

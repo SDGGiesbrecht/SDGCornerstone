@@ -14,144 +14,131 @@
 
 extension Range where Bound == LineViewIndex {
 
-    /// Returns the range in the given view of scalars that corresponds exactly to this range.
-    ///
-    /// - Parameters:
-    ///     - scalars: The scalar view of the string the range refers to.
-    @inlinable public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index> {
-        return lowerBound.samePosition(in: scalars) ..< upperBound.samePosition(in: scalars)
+    #warning("Move these?")
+    @inlinable internal func map<B>(_ convert: (Bound) -> B) -> Range<B> {
+        return convert(lowerBound) ..< convert(upperBound)
     }
 
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
     ///
     /// - Parameters:
     ///     - scalars: The scalar view of the string the range refers to.
-    @inlinable public func sameRange(in scalars: String.ScalarView) -> Range<String.ScalarView.Index> {
-        return lowerBound.samePosition(in: scalars) ..< upperBound.samePosition(in: scalars)
+    @inlinable public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.Index> {
+        return map { $0.samePosition(in: scalars) }
+    }
+
+    /// Returns the range in the given view of scalars that corresponds exactly to this range.
+    ///
+    /// - Parameters:
+    ///     - scalars: The scalar view of the string the range refers to.
+    @inlinable public func sameRange(in scalars: String.ScalarView) -> Range<String.Index> {
+        return map { $0.samePosition(in: scalars) }
     }
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
     ///
     /// - Parameters:
     ///     - clusters: The cluster view of the string the range refers to.
-    @inlinable public func sameRange(in clusters: StrictString.ClusterView) -> Range<StrictString.ClusterView.Index> {
-        return lowerBound.samePosition(in: clusters) ..< upperBound.samePosition(in: clusters)
+    @inlinable public func sameRange(in clusters: StrictString.ClusterView) -> Range<StrictString.Index> {
+        return map { $0.samePosition(in: clusters) }
     }
 
     /// Returns the range in the given view of clusters that corresponds exactly to this range.
     ///
     /// - Parameters:
     ///     - clusters: The cluster view of the string the range refers to.
-    @inlinable public func sameRange(in clusters: String.ClusterView) -> Range<String.ClusterView.Index> {
-        return lowerBound.samePosition(in: clusters) ..< upperBound.samePosition(in: clusters)
+    @inlinable public func sameRange(in clusters: String.ClusterView) -> Range<String.Index> {
+        return map { $0.samePosition(in: clusters) }
     }
 }
 
-extension Range where Bound == StrictString.ClusterView.Index {
+extension Range where Bound == String.Index {
 
-    /// Returns the range in the given view of scalars that corresponds exactly to this range.
-    ///
-    /// - Parameters:
-    ///     - scalars: The scalar view of the string the range refers to.
-    @inlinable public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.ScalarView.Index> {
-        return lowerBound.samePosition(in: scalars) ..< upperBound.samePosition(in: scalars)
+    #warning("Move these?")
+    @inlinable internal func map<B>(_ convert: (Bound) -> B?) -> Range<B>? {
+        guard let lower = convert(lowerBound),
+            let upper = convert(upperBound) else {
+                return nil
+        }
+        return lower ..< upper
     }
-}
 
-extension Range where Bound == StrictString/*.ScalarView*/.Index {
+    @inlinable internal func map<B>(
+        convertAndRoundDown: (Bound) -> B,
+        convertIfPossible: (Bound) -> B?,
+        advance: (B) -> B) -> Range<B> {
 
-    /// Returns the range in the given view of clusters that corresponds exactly to this range.
-    ///
-    /// - Parameters:
-    ///     - clusters: The cluster view of the string the range refers to.
-    @inlinable public func sameRange(in clusters: StrictString.ClusterView) -> Range<StrictString.ClusterView.Index>? {
-        if let lower = lowerBound.samePosition(in: clusters),
-            let upper = upperBound.samePosition(in: clusters) {
+        let lower = convertAndRoundDown(lowerBound)
+        if let upper = convertIfPossible(upperBound) {
             return lower ..< upper
         } else {
-            return nil
+            return lower ..< advance(convertAndRoundDown(upperBound))
         }
     }
 
+    // @documentation(Range.sameRange(in:))
+    /// Returns the range in the given view of scalars that corresponds exactly to this range.
+    ///
+    /// - Parameters:
+    ///     - scalars: The scalar view of the string the range refers to.
+    @inlinable public func sameRange(in scalars: String.ScalarView) -> Range<String.Index>? {
+        return map { $0.samePosition(in: scalars) }
+    }
+
+    // #documentation(Range.sameRange(in:))
+    /// Returns the range in the given view of scalars that corresponds exactly to this range.
+    ///
+    /// - Parameters:
+    ///     - scalars: The scalar view of the string the range refers to.
+    @inlinable public func sameRange(in scalars: StrictString.ScalarView) -> Range<StrictString.Index>? {
+        return map { $0.samePosition(in: scalars) }
+    }
+
+    #warning("scalars(in:).")
+
+    // @documentation(Range.sameRange(in:))
+    /// Returns the range in the given view of clusters that corresponds exactly to this range.
+    ///
+    /// - Parameters:
+    ///     - clusters: The cluster view of the string the range refers to.
+    @inlinable public func sameRange(in clusters: String.ClusterView) -> Range<String.Index>? {
+        return map { $0.samePosition(in: clusters) }
+    }
+
+    // #documentation(Range.sameRange(in:))
+    /// Returns the range in the given view of clusters that corresponds exactly to this range.
+    ///
+    /// - Parameters:
+    ///     - clusters: The cluster view of the string the range refers to.
+    @inlinable public func sameRange(in clusters: StrictString.ClusterView) -> Range<StrictString.Index>? {
+        return map { $0.samePosition(in: clusters) }
+    }
+
+    // @documentation(Range.clusters(in:))
     /// Returns the range of clusters that contains this range.
     ///
     /// - Parameters:
     ///     - clusters: The cluster view of the string the range refers to.
-    @inlinable public func clusters(in clusters: StrictString.ClusterView) -> Range<StrictString.ClusterView.Index> {
-        let lower = lowerBound.cluster(in: clusters)
-        if let upper = upperBound.samePosition(in: clusters) {
-            return lower ..< upper
-        } else {
-            return lower ..< clusters.index(after: upperBound.cluster(in: clusters))
-        }
+    @inlinable public func clusters(in clusters: String.ClusterView) -> Range<String.Index> {
+        return map(
+            convertAndRoundDown: { $0.cluster(in: clusters) },
+            convertIfPossible: { $0.cluster(in: clusters) },
+            advance: { clusters.index(after: $0) })
     }
 
-    /// Returns the range in the given view of lines that corresponds exactly to this range.
-    ///
-    /// - Parameters:
-    ///     - lines: The line view of the string the range refers to.
-    @inlinable public func sameRange(in lines: LineView<StrictString>) -> Range<LineView<StrictString>.Index>? {
-        if let lower = lowerBound.samePosition(in: lines),
-            let upper = upperBound.samePosition(in: lines) {
-            return lower ..< upper
-        } else {
-            return nil
-        }
-    }
-
-    /// Returns the range of lines that contains this range.
-    ///
-    /// - Parameters:
-    ///     - lines: The line view of the string the range refers to.
-    @inlinable public func lines(in lines: LineView<StrictString>) -> Range<LineView<StrictString>.Index> {
-        let lower = lowerBound.line(in: lines)
-        if let upper = upperBound.samePosition(in: lines) {
-            return lower ..< upper
-        } else {
-            return lower ..< lines.index(after: upperBound.line(in: lines))
-        }
-    }
-}
-
-extension Range where Bound == String.ClusterView.Index {
-
-    /// Returns the range in the given view of scalars that corresponds exactly to this range.
-    ///
-    /// - Parameters:
-    ///     - scalars: The scalar view of the string the range refers to.
-    @inlinable public func sameRange(in scalars: String.ScalarView) -> Range<String.ScalarView.Index> {
-        return lowerBound.samePosition(in: scalars) ..< upperBound.samePosition(in: scalars)
-    }
-}
-
-extension Range where Bound == String.ScalarView.Index {
-
-    /// Returns the range in the given view of clusters that corresponds exactly to this range.
-    ///
-    /// - Parameters:
-    ///     - clusters: The cluster view of the string the range refers to.
-    @inlinable public func sameRange(in clusters: String.ClusterView) -> Range<String.ClusterView.Index>? {
-        if let lower = lowerBound.samePosition(in: String(clusters)),
-            let upper = upperBound.samePosition(in: String(clusters)) {
-            return lower ..< upper
-        } else {
-            return nil
-        }
-    }
-
+    // #documentation(Range.clusters(in:))
     /// Returns the range of clusters that contains this range.
     ///
     /// - Parameters:
     ///     - clusters: The cluster view of the string the range refers to.
-    @inlinable public func clusters(in clusters: String.ClusterView) -> Range<String.ClusterView.Index> {
-        let lower = lowerBound.cluster(in: clusters)
-        if let upper = upperBound.samePosition(in: String(clusters)) {
-            return lower ..< upper
-        } else {
-            return lower ..< clusters.index(after: upperBound.cluster(in: clusters))
-        }
+    @inlinable public func clusters(in clusters: StrictString.ClusterView) -> Range<StrictString.Index> {
+        return map(
+            convertAndRoundDown: { $0.cluster(in: clusters) },
+            convertIfPossible: { $0.cluster(in: clusters) },
+            advance: { clusters.index(after: $0) })
     }
 
+    #warning("Genericize?")
     /// Returns the range in the given view of lines that corresponds exactly to this range.
     ///
     /// - Parameters:
@@ -165,11 +152,32 @@ extension Range where Bound == String.ScalarView.Index {
         }
     }
 
+    /// Returns the range in the given view of lines that corresponds exactly to this range.
+    ///
+    /// - Parameters:
+    ///     - lines: The line view of the string the range refers to.
+    @inlinable public func sameRange(in lines: LineView<StrictString>) -> Range<LineView<StrictString>.Index>? {
+        return map { $0.samePosition(in: lines) }
+    }
+
     /// Returns the range of lines that contains this range.
     ///
     /// - Parameters:
     ///     - lines: The line view of the string the range refers to.
     @inlinable public func lines(in lines: LineView<String>) -> Range<LineView<String>.Index> {
+        let lower = lowerBound.line(in: lines)
+        if let upper = upperBound.samePosition(in: lines) {
+            return lower ..< upper
+        } else {
+            return lower ..< lines.index(after: upperBound.line(in: lines))
+        }
+    }
+
+    /// Returns the range of lines that contains this range.
+    ///
+    /// - Parameters:
+    ///     - lines: The line view of the string the range refers to.
+    @inlinable public func lines(in lines: LineView<StrictString>) -> Range<LineView<StrictString>.Index> {
         let lower = lowerBound.line(in: lines)
         if let upper = upperBound.samePosition(in: lines) {
             return lower ..< upper
