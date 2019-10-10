@@ -83,29 +83,11 @@ extension String.Index {
         return cluster(in: String(StrictString(clusters)))
     }
 
-    #warning("Genericize?")
     /// Returns the position in the given view of lines that corresponds exactly to this index.
     ///
     /// - Parameters:
     ///     - lines: The line view of the string the range refers to.
-    @inlinable public func samePosition(in lines: LineView<String>) -> LineView<String>.Index? {
-        let line = self.line(in: lines)
-        guard let start = line.start else {
-            // End index
-            return line
-        }
-        guard start == self else {
-            // In the middle.
-            return nil
-        }
-        return line
-    }
-
-    /// Returns the position in the given view of lines that corresponds exactly to this index.
-    ///
-    /// - Parameters:
-    ///     - lines: The line view of the string the range refers to.
-    @inlinable public func samePosition(in lines: LineView<StrictString>) -> LineView<StrictString>.Index? {
+    @inlinable public func samePosition<S>(in lines: LineView<S>) -> LineView<S>.Index? {
         let line = self.line(in: lines)
         guard let start = line.start else {
             // End index
@@ -122,15 +104,7 @@ extension String.Index {
     ///
     /// - Parameters:
     ///     - lines: The line view of the string the range refers to.
-    @inlinable public func line(in lines: LineView<String>) -> LineView<String>.Index {
-        return lines.line(for: self)
-    }
-
-    /// Returns the position of the line that contains this index.
-    ///
-    /// - Parameters:
-    ///     - lines: The line view of the string the range refers to.
-    @inlinable public func line(in lines: LineView<StrictString>) -> LineView<StrictString>.Index {
+    @inlinable public func line<S>(in lines: LineView<S>) -> LineView<S>.Index {
         return lines.line(for: self)
     }
 }
