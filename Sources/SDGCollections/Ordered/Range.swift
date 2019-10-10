@@ -51,7 +51,8 @@ extension Range : RangeFamily {
     ///
     /// - Parameters:
     ///     - convert: A closure which converts a single bound.
-    @inlinable public func map<B>(_ convert: (Bound) -> B) -> Range<B> {
+    ///     - bound: The bound to convert.
+    @inlinable public func map<B>(_ convert: (_ bound: Bound) -> B) -> Range<B> {
         return convert(lowerBound) ..< convert(upperBound)
     }
 
@@ -61,7 +62,8 @@ extension Range : RangeFamily {
     ///
     /// - Parameters:
     ///     - convert: A closure which converts a single bound.
-    @inlinable public func map<B>(_ convert: (Bound) -> B?) -> Range<B>? {
+    ///     - bound: The bound to convert.
+    @inlinable public func map<B>(_ convert: (_ bound: Bound) -> B?) -> Range<B>? {
         guard let lower = convert(lowerBound),
             let upper = convert(upperBound),
             lower ≤ upper else {
