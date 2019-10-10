@@ -77,7 +77,7 @@ class SDGTextRegressionTests : TestCase {
                 let attributedString = markup.richText(font: font)
                 let attribute = attributedString.attribute(.font, at: 0, effectiveRange: nil)
                 var resultingName = (attribute as? NSFont)?.fontName
-                if resultingName == ".SFNSText" {
+                if resultingName == ".SFNSText" || resultingName == ".SFNS\u{2D}Regular" {
                     resultingName = ".AppleSystemUIFont"
                 }
                 XCTAssertEqual(resultingName, font.fontName)
