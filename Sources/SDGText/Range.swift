@@ -14,11 +14,6 @@
 
 extension Range where Bound == LineViewIndex {
 
-    #warning("Move these?")
-    @inlinable internal func map<B>(_ convert: (Bound) -> B) -> Range<B> {
-        return convert(lowerBound) ..< convert(upperBound)
-    }
-
     /// Returns the range in the given view of scalars that corresponds exactly to this range.
     ///
     /// - Parameters:
