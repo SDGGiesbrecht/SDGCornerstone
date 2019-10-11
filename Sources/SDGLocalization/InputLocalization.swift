@@ -17,9 +17,10 @@ public protocol InputLocalization : CaseIterable, Localization {}
 
 extension InputLocalization {
 
+    // #workaround(workspace version 0.23.1, “⊆” should be code voice.)
     /// Returns the equivalent set of codes.
     ///
-    /// Use this to compare two `Localization` types with set comparison operations such as `⊆`.
+    /// Use this to compare two `Localization` types with set comparison operations such as “⊆”.
     public static func codeSet() -> Set<String> {
         return Set(allCases.map({ $0.code }))
     }

@@ -45,6 +45,33 @@ extension RangeFamily {
 
 extension Range : RangeFamily {
 
+    /// Maps the range to another bound type.
+    ///
+    /// - Precondition: The conversion must generate valid bounds—the upper bound must not precede the lower bound.
+    ///
+    /// - Parameters:
+    ///     - convert: A closure which converts a single bound.
+    ///     - bound: The bound to convert.
+    @inlinable public func map<B>(_ convert: (_ bound: Bound) -> B) -> Range<B> {
+        return convert(lowerBound) ..< convert(upperBound)
+    }
+
+    /// Maps the range to another bound type.
+    ///
+    /// The result will be `nil` if either bound conversion fails, or if the upper bound ends up preceding the lower bound.
+    ///
+    /// - Parameters:
+    ///     - convert: A closure which converts a single bound.
+    ///     - bound: The bound to convert.
+    @inlinable public func map<B>(_ convert: (_ bound: Bound) -> B?) -> Range<B>? {
+        guard let lower = convert(lowerBound),
+            let upper = convert(upperBound),
+            lower ≤ upper else {
+                return nil
+        }
+        return lower ..< upper
+    }
+
     // MARK: - RangeFamily
 
     @inlinable public static var hasClosedUpperBound: Bool {

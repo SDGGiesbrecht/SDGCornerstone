@@ -114,9 +114,9 @@ class SDGTextAPITests : TestCase {
     }
 
     func testRange() {
-        let string = "á\nb̂\nc̀"
+        var string = "á\nb̂\nc̀"
         XCTAssertEqual(string.lines.bounds.sameRange(in: string.scalars), string.scalars.bounds)
-        let strict = StrictString(string)
+        var strict = StrictString(string)
         XCTAssertEqual(strict.lines.bounds.sameRange(in: strict.scalars), strict.scalars.bounds)
 
         XCTAssertEqual(string.lines.bounds.sameRange(in: string.clusters), string.clusters.bounds)
@@ -162,6 +162,20 @@ class SDGTextAPITests : TestCase {
 
         XCTAssertEqual(string.scalars.bounds.lines(in: string.lines), string.lines.bounds)
         XCTAssertEqual(strict.scalars.bounds.lines(in: strict.lines), strict.lines.bounds)
+
+        string = "🇮🇱"
+        strict = StrictString(string)
+        for partialScalar in [
+            string.utf8.index(after: string.utf8.startIndex),
+            string.utf16.index(after: string.utf16.startIndex)
+            ] {
+                XCTAssertEqual(
+                    (string.startIndex ..< partialScalar).scalars(in: string.scalars),
+                    string.startIndex ..< string.scalars.index(after: string.scalars.startIndex))
+                XCTAssertEqual(
+                    (strict.startIndex ..< partialScalar).scalars(in: strict.scalars),
+                    strict.startIndex ..< strict.scalars.index(after: strict.scalars.startIndex))
+        }
     }
 
     func testNewlinePattern() {
