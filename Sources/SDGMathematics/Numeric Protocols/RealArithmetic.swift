@@ -223,9 +223,10 @@ extension RealArithmetic {
 
     // #workaround(Swift 5.1, These can be removed when global generic constants are available.)
 
+    // #workaround(workspace version 0.23.1, “Self.π” should be code voice.)
     /// π in the same type.
     ///
-    /// - Note: This is an alias for `Self.π` to improve the legibility of code involving mathematical equations.
+    /// - Note: This is an alias for “Self.π” to improve the legibility of code involving mathematical equations.
     @inlinable public var π: Self {
         return Self.π
     }
@@ -234,9 +235,10 @@ extension RealArithmetic {
         return 2 × π
     }
 
+    // #workaround(workspace version 0.23.1, “Self.τ” should be code voice.)
     /// τ in the same type.
     ///
-    /// - Note: This is an alias for `Self.τ` to improve the legibility of code involving mathematical equations.
+    /// - Note: This is an alias for “Self.τ” to improve the legibility of code involving mathematical equations.
     @inlinable public var τ: Self {
         return Self.τ
     }
@@ -358,16 +360,18 @@ extension RealArithmetic {
 
 // #workaround(Swift 5.1, These should be switched to generic constants when they become available.)
 
+// #workaround(workspace version 0.23.1, “N.π” should be code voice.)
 /// An instance of π in the desired return type.
 ///
-/// - Note: This is an alias for `N.π` to improve the legibility of code involving mathematical equations.
+/// - Note: This is an alias for “N.π” to improve the legibility of code involving mathematical equations.
 @inlinable public func π<N : RealArithmetic>() -> N {
     return N.π
 }
 
+// #workaround(workspace version 0.23.1, “N.τ” should be code voice.)
 /// An instance of τ in the desired return type.
 ///
-/// - Note: This is an alias for `N.τ` to improve the legibility of code involving mathematical equations.
+/// - Note: This is an alias for “N.τ” to improve the legibility of code involving mathematical equations.
 @inlinable public func τ<N : RealArithmetic>() -> N {
     return N.τ
 }
