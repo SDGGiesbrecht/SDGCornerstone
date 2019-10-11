@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 extension String.Index {
 
     // MARK: - Conversions
@@ -34,7 +36,11 @@ extension String.Index {
         var cursor = self
         var position = samePosition(in: scalars)
         while position == nil {
-            cursor = string.utf8.index(before: cursor)
+            if cursor.samePosition(in: string.utf8) ≠ nil {
+                cursor = string.utf8.index(before: cursor)
+            } else /* UTF‐16 */ {
+                cursor = string.utf16.index(before: cursor)
+            }
             position = cursor.samePosition(in: string.scalars)
         }
         return position!
