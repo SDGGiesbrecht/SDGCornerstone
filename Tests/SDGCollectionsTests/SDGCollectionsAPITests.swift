@@ -275,7 +275,7 @@ class SDGCollectionsAPITests : TestCase {
 
         let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
         let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
-        let diff = end.difference(from: start)
+        let diff = end.groupedDifferences(from: start)
         var changed: [Unicode.Scalar] = []
         for change in diff {
             switch change {
@@ -291,7 +291,7 @@ class SDGCollectionsAPITests : TestCase {
 
         let startString = "..GAC‐‐!!.."
         let endString = "..AGCAT‐‐??.."
-        let diffString = endString.difference(from: startString)
+        let diffString = endString.groupedDifferences(from: startString)
         var changedString = ""
         for change in diffString {
             switch change {
@@ -306,9 +306,9 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(changedString, endString)
 
         let set = AnyCollection(Set(endString))
-        _ = set.difference(from: startString)
-        _ = endString.scalars.difference(from: start)
-        _ = AnyCollection(Set(startString)).difference(from: AnyCollection(Set(startString)))
+        _ = set.groupedDifferences(from: startString)
+        _ = endString.scalars.groupedDifferences(from: start)
+        _ = AnyCollection(Set(startString)).groupedDifferences(from: AnyCollection(Set(startString)))
 
         XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 == "." }))))
         XCTAssertNil("...".scalars[...].lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "." })])))

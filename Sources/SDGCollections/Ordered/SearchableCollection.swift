@@ -232,18 +232,30 @@ where SubSequence : SearchableCollection {
     /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
     @discardableResult func advance(_ index: inout Index, over pattern: Self) -> Bool
 
-    // @documentation(SDGCornerstone.Collection.difference(from:))
+    // @documentation(SDGCornerstone.Collection.groupedDifferences(from:))
     /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
+    ///
+    /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
+    ///
+    /// - It is only intended for analyzing changes; it is not designed for re‐applying them.
+    /// - It reports changes as contiguous ranges of indices instead of individual offsets.
+    /// - It has no platform restrictions.
     ///
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
-    func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element
-    // #documentation(SDGCornerstone.Collection.difference(from:))
+    func groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element
+    // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
     /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
+    ///
+    /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
+    ///
+    /// - It is only intended for analyzing changes; it is not designed for re‐applying them.
+    /// - It reports changes as contiguous ranges of indices instead of individual offsets.
+    /// - It has no platform restrictions.
     ///
     /// - Parameters:
     ///     - other: The other collection. (The starting point.)
-    func difference(from other: Self) -> [Change<Index, Index>]
+    func groupedDifferences(from other: Self) -> [Change<Index, Index>]
 }
 
 extension SearchableCollection {
@@ -589,10 +601,10 @@ extension SearchableCollection {
 
         return difference
     }
-    @inlinable public func difference<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element {
+    @inlinable public func groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>] where C : SearchableCollection, C.Element == Self.Element {
         return suffixIgnorantDifference(from: other)
     }
-    @inlinable public func difference(from other: Self) -> [Change<Index, Index>] {
+    @inlinable public func groupedDifferences(from other: Self) -> [Change<Index, Index>] {
         return suffixIgnorantDifference(from: other)
     }
 
