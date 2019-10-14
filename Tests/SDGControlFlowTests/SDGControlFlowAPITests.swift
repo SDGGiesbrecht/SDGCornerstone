@@ -206,8 +206,6 @@ class SDGControlFlowAPITests : TestCase {
             func valueChanged(for identifier: String) {}
         }
         instance.$property.cancel(observer: Observer())
-        #warning("Reactivate?")
-        //instance.$property = Shared("different")
     }
 
     func testWeak() {
