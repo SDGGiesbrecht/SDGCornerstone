@@ -13,7 +13,7 @@
  */
 
 /// A reference to a shared value.
-@propertyWrapper public final class Shared<Value> : TransparentWrapper {
+@propertyWrapper public final class Shared<Value> : DefaultAssignmentPropertyWrapper, SelfProjectingPropertyWrapper, TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -86,6 +86,18 @@
         }
     }
 
+    // MARK: - DefaultAssignmentPropertyWrapper
+
+    public init(wrappedValue: Value) {
+        self.value = wrappedValue
+    }
+
+    // MARK: - ProjectingPropertyWrapper
+
+    public var projectedValue: Shared {
+        return self
+    }
+
     // MARK: - PropertyWrapper
 
     public var wrappedValue: Value {
@@ -95,14 +107,6 @@
         set {
             value = newValue
         }
-    }
-
-    public init(wrappedValue: Value) {
-        self.value = wrappedValue
-    }
-
-    public var projectedValue: Shared {
-        return self
     }
 
     // MARK: - TransparentWrapper
