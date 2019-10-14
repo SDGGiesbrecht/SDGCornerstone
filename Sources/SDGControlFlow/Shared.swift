@@ -13,7 +13,7 @@
  */
 
 /// A reference to a shared value.
-public final class Shared<Value> : TransparentWrapper {
+@propertyWrapper public final class Shared<Value> : TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -84,6 +84,25 @@ public final class Shared<Value> : TransparentWrapper {
                 observers.remove(at: index)
             }
         }
+    }
+
+    // MARK: - PropertyWrapper
+
+    public var wrappedValue: Value {
+        get {
+            return value
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    public init(wrappedValue: Value) {
+        self.value = wrappedValue
+    }
+
+    public var projectedValue: Shared {
+        return self
     }
 
     // MARK: - TransparentWrapper

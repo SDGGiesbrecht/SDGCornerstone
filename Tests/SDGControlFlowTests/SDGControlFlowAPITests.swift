@@ -188,6 +188,24 @@ class SDGControlFlowAPITests : TestCase {
         XCTAssertEqual(observer1?.lastReportedValue, 6)
 
         _ = String(reflecting: Shared(1))
+
+        class Class {
+            init() {}
+            init(property: String) {
+                self.property = property
+            }
+            @Shared var property: String = "default"
+            @Shared("direct") var otherProperty: String
+        }
+        var instance = Class()
+        XCTAssertEqual(instance.property, "default")
+        instance = Class(property: "initialized")
+        XCTAssertEqual(instance.property, "initialized")
+        XCTAssertEqual(instance.otherProperty, "direct")
+        class Observer : SharedValueObserver {
+            func valueChanged(for identifier: String) {}
+        }
+        instance.$property.cancel(observer: Observer())
     }
 
     func testWeak() {
