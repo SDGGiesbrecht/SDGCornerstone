@@ -88,7 +88,7 @@ public func compare(_ string: String, against specification: URL, overwriteSpeci
 
         let stringLines = string.lines.map({ String($0.line) })
         let specificationLines = specificationString.lines.map({ String($0.line) })
-        let differences = stringLines.difference(from: specificationLines)
+        let differences = stringLines.groupedDifferences(from: specificationLines)
 
         var report = ""
         for difference in differences {
