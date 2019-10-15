@@ -210,7 +210,7 @@ class SDGControlFlowAPITests : TestCase {
         instance.$property.cancel(observer: Observer())
         instance.$property = Shared("replaced")
         XCTAssertEqual(instance.property, "replaced")
-        _ = instance.$property.wrappedInstance
+        _ = SharedProperty(wrappedValue: "").wrappedInstance
     }
 
     func testWeak() {
