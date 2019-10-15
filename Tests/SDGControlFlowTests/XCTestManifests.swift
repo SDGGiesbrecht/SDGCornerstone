@@ -11,6 +11,7 @@ extension SDGControlFlowAPITests {
         ("testNonmutatingVariants", testNonmutatingVariants),
         ("testPerformanceTest", testPerformanceTest),
         ("testShared", testShared),
+        ("testSharedProperty", testSharedProperty),
         ("testWeak", testWeak),
     ]
 }
