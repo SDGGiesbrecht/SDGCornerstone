@@ -94,17 +94,16 @@ do {
 // ••••••• Shared Values •••••••
 
 class Owner {
-    var property: Shared<String>
-    init(property: Shared<String>) {
-        self.property = property
-    }
+    @SharedProperty var property: String = ""
 }
 
-let originalOwner = Owner(property: Shared("original"))
-let anotherOwner = Owner(property: originalOwner.property)
+let originalOwner = Owner()
+originalOwner.property = "original"
+let anotherOwner = Owner()
+anotherOwner.$property = originalOwner.$property
 
-anotherOwner.property.value = "changed"
-XCTAssertEqual(originalOwner.property.value,
+anotherOwner.property = "changed"
+XCTAssertEqual(originalOwner.property,
                "changed")
 
 // ••••••• Pattern Matching •••••••
