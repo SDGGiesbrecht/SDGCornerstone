@@ -13,7 +13,7 @@
  */
 
 /// A reference to a shared value.
-@propertyWrapper public final class Shared<Value> : DefaultAssignmentPropertyWrapper, SelfProjectingPropertyWrapper, TransparentWrapper {
+public final class Shared<Value> : TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -83,29 +83,6 @@
             } else if existingObserver.pointee === observer {
                 observers.remove(at: index)
             }
-        }
-    }
-
-    // MARK: - DefaultAssignmentPropertyWrapper
-
-    public init(wrappedValue: Value) {
-        self.value = wrappedValue
-    }
-
-    // MARK: - ProjectingPropertyWrapper
-
-    public var projectedValue: Shared {
-        return self
-    }
-
-    // MARK: - PropertyWrapper
-
-    public var wrappedValue: Value {
-        get {
-            return value
-        }
-        set {
-            value = newValue
         }
     }
 
