@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+/// A property wrapper for shared values.
+///
+/// The projected value is the `Shared` instance. The wrapped value is the shared instance’s value.
 @propertyWrapper public struct SharedProperty<Value> : DefaultAssignmentPropertyWrapper, ProjectingPropertyWrapper, TransparentWrapper {
 
     /// Creates a shared property with a shared value.
