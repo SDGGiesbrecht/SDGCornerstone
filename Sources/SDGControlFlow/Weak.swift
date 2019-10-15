@@ -13,7 +13,7 @@
  */
 
 /// A weak reference to a class instance.
-public struct Weak<Pointee : AnyObject> : TransparentWrapper {
+@propertyWrapper public struct Weak<Pointee : AnyObject> : ProjectingPropertyWrapper, TransparentWrapper {
 
     // MARK: - Initialization
 
@@ -25,10 +25,35 @@ public struct Weak<Pointee : AnyObject> : TransparentWrapper {
         self.pointee = pointee
     }
 
+    /// Creates an empty reference.
+    public init() {}
+
     // MARK: - Properties
 
     /// The pointee.
     public weak var pointee: Pointee?
+
+    // MARK: - ProjectingPropertyWrapper
+
+    public var projectedValue: Weak<Pointee> {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+
+    // MARK: - PropertyWrapper
+
+    public var wrappedValue: Pointee? {
+        get {
+            return pointee
+        }
+        set {
+            pointee = newValue
+        }
+    }
 
     // MARK: - TransparentWrapper
 
