@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@propertyWrapper public final class SharedProperty<Value> : DefaultAssignmentPropertyWrapper, ProjectingPropertyWrapper, TransparentWrapper {
+@propertyWrapper public struct SharedProperty<Value> : DefaultAssignmentPropertyWrapper, ProjectingPropertyWrapper, TransparentWrapper {
 
     /// Creates a shared property with a shared value.
     ///
@@ -26,13 +26,13 @@
     ///
     /// - Parameters:
     ///     - value: The value.
-    public convenience init(_ value: Value) {
+    public init(_ value: Value) {
         self.init(Shared(value))
     }
 
     // MARK: - DefaultAssignmentPropertyWrapper
 
-    public convenience init(wrappedValue: Value) {
+    public init(wrappedValue: Value) {
         self.init(wrappedValue)
     }
 
