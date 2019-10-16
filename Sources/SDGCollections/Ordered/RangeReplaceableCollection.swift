@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGMathematics
 
 extension RangeReplaceableCollection {
 
@@ -210,5 +211,13 @@ extension RangeReplaceableCollection {
     @inlinable public init(arrayLiteral: Element...) {
         self.init()
         append(contentsOf: arrayLiteral)
+    }
+}
+
+extension RangeReplaceableCollection where Self : PatternProtocol {
+
+    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+        // Disambiguate RangeReplaceableCollection vs PatternProtocol
+        return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 }

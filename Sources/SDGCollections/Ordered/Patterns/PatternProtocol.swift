@@ -54,6 +54,19 @@ extension PatternProtocol {
 
     // MARK: - Composition
 
+    /// Combines two patterns into a single pattern by concatenating them.
+    ///
+    /// See the `CompositePattern` type for details.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The first pattern.
+    ///     - followingValue: The second pattern.
+    @inlinable public static func +<Other>(
+        precedingValue: Self,
+        followingValue: Other) -> CompositePattern<Self, Other> {
+        return CompositePattern(precedingValue, followingValue)
+    }
+
     /// Combines two patterns into a single pattern that will match either.
     ///
     /// See the `AlternativePatterns` type for details.

@@ -63,20 +63,24 @@ class SDGCollectionsAPITests : TestCase {
         let lazyRepetitionMatch = collection.lastMatch(for: RepetitionPattern([4, 5], count: 1 ..< Int.max, consumption: .lazy))
         XCTAssertEqual(lazyRepetitionMatch?.range, 5 ..< 7)
 
-        let compositeMatch = collection.lastMatch(for: [
-            LiteralPattern([1, 2]),
-            PatternWrapper([3] ∨ [−3]),
-            RepetitionPattern([4, 5], count: 1 ..< Int.max)
-        ])
+        let compositeMatchPatternOne = [1, 2]
+        let compositeMatchPatternTwo = compositeMatchPatternOne + PatternWrapper([3] ∨ [−3])
+        let compositeMatchPattern = compositeMatchPatternTwo + RepetitionPattern([4, 5], count: 1 ..< Int.max)
+        let compositeMatch = collection.lastMatch(for: compositeMatchPattern)
         XCTAssertEqual(compositeMatch?.range, 0 ..< 7)
 
-        let dangerous = collection.lastMatch(for: [RepetitionPattern([4, 5], count: 1 ..< Int.max), LiteralPattern([4, 5])])
+        let dangerous = collection.lastMatch(
+            for: RepetitionPattern([4, 5], count: 1 ..< Int.max) + LiteralPattern([4, 5]))
         XCTAssertEqual(dangerous?.range, 3 ..< 7)
 
-        let alsoDangerous = collection.lastMatch(for: [RepetitionPattern([4, 5], consumption: .lazy), LiteralPattern([6])])
+        let alsoDangerous = collection.lastMatch(
+            for: RepetitionPattern([4, 5], consumption: .lazy) + LiteralPattern([6]))
         XCTAssertEqual(alsoDangerous?.range, 7 ..< 8)
 
-        let anotherTrap = collection.lastMatch(for: [LiteralPattern([1, 2]), RepetitionPattern([−1, −2]), LiteralPattern([3, 4])])
+        let anotherTrapPatternOne = [1, 2]
+        let anotherTrapPatternTwo = anotherTrapPatternOne + RepetitionPattern([−1, −2])
+        let anotherTrapPattern = anotherTrapPatternTwo + [3, 4]
+        let anotherTrap = collection.lastMatch(for: anotherTrapPattern)
         XCTAssertEqual(anotherTrap?.range, 0 ..< 4)
 
         let backwardsCollection1 = [0, 0, 0, 0, 0]
@@ -87,7 +91,8 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(forwardsResult1?.range, 2 ..< 4)
 
         let backwardsCollection2 = [0, 0, 1]
-        let backwardsPattern2 = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+        let backwardsPattern2 = RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy)
+            + LiteralPattern([1])
         let backwardsResult2 = backwardsCollection2.lastMatch(for: backwardsPattern2)
         XCTAssertEqual(backwardsResult2?.range, 1 ..< 3)
         let forwardsResult2 = backwardsCollection2.matches(for: backwardsPattern2).last
@@ -103,7 +108,7 @@ class SDGCollectionsAPITests : TestCase {
         var index = advancingCollection.startIndex
         XCTAssert(advancingCollection.advance(&index, over: [1, 2]))
         XCTAssertEqual(index, 2)
-        XCTAssertFalse(advancingCollection.advance(&index, over: [LiteralPattern([2]), LiteralPattern([3])]))
+        XCTAssertFalse(advancingCollection.advance(&index, over: LiteralPattern([2]) + LiteralPattern([3])))
         XCTAssertEqual(index, 2)
 
         let bounds = collection.bounds
@@ -153,20 +158,24 @@ class SDGCollectionsAPITests : TestCase {
         let lazyRepetitionMatch = collection.firstMatch(for: RepetitionPattern([4, 5], count: 1 ..< Int.max, consumption: .lazy))
         XCTAssertEqual(lazyRepetitionMatch?.range, 3 ..< 5)
 
-        let compositeMatch = collection.firstMatch(for: [
-            LiteralPattern([1, 2]),
-            PatternWrapper([3] ∨ [−3]),
-            RepetitionPattern([4, 5], count: 1 ..< Int.max)
-        ])
+        let compositeMatchPatternOne = [1, 2]
+        let compositeMatchPatternTwo = compositeMatchPatternOne + PatternWrapper([3] ∨ [−3])
+        let compositeMatchPattern = compositeMatchPatternTwo + RepetitionPattern([4, 5], count: 1 ..< Int.max)
+        let compositeMatch = collection.firstMatch(for: compositeMatchPattern)
         XCTAssertEqual(compositeMatch?.range, 0 ..< 7)
 
-        let dangerous = collection.firstMatch(for: [RepetitionPattern([4, 5], count: 1 ..< Int.max), LiteralPattern([4, 5])])
+        let dangerous = collection.firstMatch(
+            for: RepetitionPattern([4, 5], count: 1 ..< Int.max) + LiteralPattern([4, 5]))
         XCTAssertEqual(dangerous?.range, 3 ..< 7)
 
-        let alsoDangerous = collection.firstMatch(for: [RepetitionPattern([4, 5], consumption: .lazy), LiteralPattern([6])])
+        let alsoDangerous = collection.firstMatch(
+            for: RepetitionPattern([4, 5], consumption: .lazy) + LiteralPattern([6]))
         XCTAssertEqual(alsoDangerous?.range, 3 ..< 8)
 
-        let anotherTrap = collection.firstMatch(for: [LiteralPattern([1, 2]), RepetitionPattern([−1, −2]), LiteralPattern([3, 4])])
+        let anotherTrapPatternOne = [1, 2]
+        let anotherTrapPatternTwo = anotherTrapPatternOne + RepetitionPattern([−1, −2])
+        let anotherTrapPattern = anotherTrapPatternTwo + [3, 4]
+        let anotherTrap = collection.firstMatch(for: anotherTrapPattern)
         XCTAssertEqual(anotherTrap?.range, 0 ..< 4)
 
         let equation = "2(3x − (y + 4)) = z"
@@ -178,54 +187,57 @@ class SDGCollectionsAPITests : TestCase {
 
         XCTAssertEqual([1, 2, 3, 4].prefix(upTo: LiteralPattern([2, 3]) ∨ LiteralPattern([3, 4]))?.range, 0 ..< 1)
         XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [2, 3])?.range, 0 ..< 1)
-        XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [LiteralPattern([2]), LiteralPattern([3])])?.range, 0 ..< 1)
+        XCTAssertEqual([1, 2, 3, 4].prefix(upTo: LiteralPattern([2]) + LiteralPattern([3]))?.range, 0 ..< 1)
         XCTAssertNil([1, 2, 3, 4].prefix(upTo: [8, 9])?.range)
         XCTAssertNil([1, 2, 3, 4].prefix(upTo: ConditionalPattern({ $0 > 100 })))
 
         XCTAssertEqual([1, 2, 3, 4].prefix(through: [2, 3] ∨ [3, 4])?.range, 0 ..< 3)
         XCTAssertEqual([1, 2, 3, 4].prefix(through: [2, 3])?.range, 0 ..< 3)
-        XCTAssertEqual([1, 2, 3, 4].prefix(through: [LiteralPattern([2]), LiteralPattern([3])])?.range, 0 ..< 3)
+        XCTAssertEqual([1, 2, 3, 4].prefix(
+            through: LiteralPattern([2]) + LiteralPattern([3]))?.range, 0 ..< 3)
         XCTAssertNil([1, 2, 3, 4].prefix(through: [8, 9]))
         XCTAssertNil([1, 2, 3, 4].prefix(through: ConditionalPattern({ $0 > 100 })))
 
         XCTAssertEqual([1, 2, 3, 4].suffix(from: [2, 3] ∨ [3, 4])?.range, 1 ..< 4)
         XCTAssertEqual([1, 2, 3, 4].suffix(from: [2, 3])?.range, 1 ..< 4)
-        XCTAssertEqual([1, 2, 3, 4].suffix(from: [LiteralPattern([2]), LiteralPattern([3])])?.range, 1 ..< 4)
+        XCTAssertEqual([1, 2, 3, 4].suffix(from: LiteralPattern([2]) + LiteralPattern([3]))?.range, 1 ..< 4)
         XCTAssertNil([1, 2, 3, 4].suffix(from: [8, 9]))
         XCTAssertNil([1, 2, 3, 4].suffix(from: ConditionalPattern({ $0 > 100 })))
 
         XCTAssertEqual([1, 2, 3, 4].suffix(after: [2, 3] ∨ [3, 4])?.range, 3 ..< 4)
         XCTAssertEqual([1, 2, 3, 4].suffix(after: [2, 3])?.range, 3 ..< 4)
-        XCTAssertEqual([1, 2, 3, 4].suffix(after: [LiteralPattern([2]), LiteralPattern([3])])?.range, 3 ..< 4)
+        XCTAssertEqual([1, 2, 3, 4].suffix(after: LiteralPattern([2]) + LiteralPattern([3]))?.range, 3 ..< 4)
         XCTAssertNil([1, 2, 3, 4].suffix(after: [8, 9]))
         XCTAssertNil([1, 2, 3, 4].suffix(after: ConditionalPattern({ $0 > 100 })))
 
         XCTAssert([1, 2, 3, 4].components(separatedBy: [2, 3]).map({ Array($0.contents) }).joined().elementsEqual([1, 4]))
         XCTAssert([1, 2, 3, 4].components(separatedBy: [2, 3] ∨ [3, 4]).map({ Array($0.contents) }).joined().elementsEqual([1, 4]))
-        XCTAssert([1, 2, 3, 4].components(separatedBy: [LiteralPattern([2]), LiteralPattern([3])]).map({ Array($0.contents) }).joined().elementsEqual([1, 4]))
+        XCTAssert([1, 2, 3, 4].components(separatedBy: LiteralPattern([2]) + LiteralPattern([3]))
+            .map({ Array($0.contents) }).joined().elementsEqual([1, 4]))
 
         XCTAssert([1, 2, 3, 4].contains([2, 3]))
         XCTAssert([1, 2, 3, 4].contains([2, 3] ∨ [3, 4]))
-        XCTAssert([1, 2, 3, 4].contains([LiteralPattern([2]), LiteralPattern([3])]))
+        XCTAssert([1, 2, 3, 4].contains(LiteralPattern([2]) + LiteralPattern([3])))
 
         XCTAssert([1, 2, 3, 4].hasPrefix([1, 2]))
         XCTAssert([1, 2, 3, 4].hasPrefix([1, 2] ∨ [3, 4]))
-        XCTAssert([1, 2, 3, 4].hasPrefix([LiteralPattern([1]), LiteralPattern([2])]))
+        XCTAssert([1, 2, 3, 4].hasPrefix(LiteralPattern([1]) + LiteralPattern([2])))
 
         XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
         XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4] ∨ [4, 3, 2, 1]))
-        XCTAssert([1, 2, 3, 4].isMatch(for: [LiteralPattern([1]), LiteralPattern([2, 3, 4])]))
+        XCTAssert([1, 2, 3, 4].isMatch(for: LiteralPattern([1]) + LiteralPattern([2, 3, 4])))
         XCTAssert("abcd".isMatch(for: ["a", "b", "c", "d"]))
         XCTAssertFalse("abcd".isMatch(for: ["a", "b", "c"]))
         XCTAssertFalse("abcd".isMatch(for: ["b", "c", "d"]))
 
         XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
         XCTAssert([1, 2, 3, 4].hasSuffix([3, 4] ∨ [5, 6]))
-        XCTAssert([1, 2, 3, 4].hasSuffix([LiteralPattern([3]), LiteralPattern([4])]))
+        XCTAssert([1, 2, 3, 4].hasSuffix(LiteralPattern([3]) + LiteralPattern([4])))
 
         XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4]))
         XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4] ∨ [5, 6]))
-        XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([LiteralPattern([3]), LiteralPattern([4])]))
+        XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4])
+            .hasSuffix(LiteralPattern([3]) + LiteralPattern([4])))
         XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix(AnyCollection([1, 2, 3, 4])))
 
         XCTAssertEqual([5, 4, 3, 2, 1].commonPrefix(with: [5, 2, 1]).contents, [5])
@@ -233,13 +245,18 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: ConditionalPattern({ $0.isEven }))?.range, 1 ..< 2)
 
         XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: NotPattern([5, 4, 3]))?.range, 1 ..< 2)
-        XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: NotPattern(CompositePattern([LiteralPattern([5]), LiteralPattern([4]), LiteralPattern([3])])))?.range, 1 ..< 2)
+        XCTAssertEqual(
+            [5, 4, 3, 2, 1].firstMatch(for: NotPattern(PatternWrapper([5, 4, 3])))?.range,
+            1 ..< 2)
 
-        let compositeRepetition = [5, 4, 5, 4].firstMatch(for: RepetitionPattern(CompositePattern([LiteralPattern([5]), LiteralPattern([4])]), count: 0 ..< 2, consumption: .greedy))
+        let compositeRepetition = [5, 4, 5, 4].firstMatch(
+            for: RepetitionPattern([5, 4], count: 0 ..< 2, consumption: .greedy))
         XCTAssertEqual(compositeRepetition?.range, 0 ..< 2)
-        let compositeRepetition2 = [5, 4, 5, 4, 5].firstMatch(for: RepetitionPattern(CompositePattern([LiteralPattern([5]), LiteralPattern([4])]), count: 0 ..< 5, consumption: .greedy))
+        let compositeRepetition2 = [5, 4, 5, 4, 5].firstMatch(
+            for: RepetitionPattern([5, 4], count: 0 ..< 5, consumption: .greedy))
         XCTAssertEqual(compositeRepetition2?.range, 0 ..< 4)
-        let compositeRepetition3 = [5, 4, 5, 4, 5].firstMatch(for: RepetitionPattern(CompositePattern([LiteralPattern([5]), LiteralPattern([4])]), count: 3 ..< 5, consumption: .greedy))
+        let compositeRepetition3 = [5, 4, 5, 4, 5].firstMatch(
+            for: RepetitionPattern([5, 4], count: 3 ..< 5, consumption: .greedy))
         XCTAssertNil(compositeRepetition3)
 
         XCTAssertNil([1, 1].firstMatch(for: RepetitionPattern([1], count: 3 ... 3)))
@@ -251,7 +268,8 @@ class SDGCollectionsAPITests : TestCase {
         let countableRange: CountableClosedRange<Int>? = nil
         XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range, [1, 1, 1].bounds)
         XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(LiteralPattern([1]), count: countableRange))?.range, [1, 1, 1].bounds)
-        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(CompositePattern([LiteralPattern([1])]), count: countableRange))?.range, [1, 1, 1].bounds)
+        XCTAssertEqual([1, 1, 1].firstMatch(
+            for: RepetitionPattern([1], count: countableRange))?.range, [1, 1, 1].bounds)
         XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(ConditionalPattern({ $0 == 1 }), count: countableRange))?.range, [1, 1, 1].bounds)
 
         XCTAssertNil([1].firstMatch(for: RepetitionPattern([1], count: 2 ... 4, consumption: .lazy)))
@@ -310,9 +328,9 @@ class SDGCollectionsAPITests : TestCase {
         _ = AnyCollection(Set(startString)).groupedDifferences(from: AnyCollection(Set(startString)))
 
         XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 == "." }))))
-        XCTAssertNil("...".scalars[...].lastMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "." })])))
-        XCTAssertNil("...".scalars[...].firstMatch(for: CompositePattern([ConditionalPattern({ $0 ≠ "." })])))
-        XCTAssert("...".scalars[...].matches(for: CompositePattern([ConditionalPattern({ $0 ≠ "." })])).isEmpty)
+        XCTAssertNil("...".scalars[...].lastMatch(for: ConditionalPattern({ $0 ≠ "." })))
+        XCTAssertNil("...".scalars[...].firstMatch(for: ConditionalPattern({ $0 ≠ "." })))
+        XCTAssert("...".scalars[...].matches(for: ConditionalPattern({ $0 ≠ "." })).isEmpty)
     }
 
     struct ComparableSetExample : ComparableSet {
@@ -336,11 +354,8 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testCompositePattern() {
-        let pattern = CompositePattern([
-            LiteralPattern([1, 2]),
-            LiteralPattern([3])
-            ])
-        testPattern(pattern, match: [1, 2, 3])
+        let pattern: CompositePattern<[Int], [Int]> = [1, 2] + [3]
+        testPattern(PatternWrapper(pattern), match: [1, 2, 3])
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "12 + 3", overwriteSpecificationInsteadOfFailing: false)
     }
 
@@ -637,7 +652,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(mutable, [1])
 
         mutable = collection
-        mutable.truncate(before: CompositePattern([LiteralPattern([2]), LiteralPattern([3])]))
+        mutable.truncate(before: [2, 3])
         XCTAssertEqual(mutable, [1])
 
         mutable = collection
@@ -645,7 +660,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(mutable, [1, 2, 3])
 
         mutable = collection
-        mutable.truncate(after: CompositePattern([LiteralPattern([2]), LiteralPattern([3])]))
+        mutable.truncate(after: [2, 3])
         XCTAssertEqual(mutable, [1, 2, 3])
 
         mutable = collection
@@ -653,7 +668,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(mutable, [2, 3, 4, 5])
 
         mutable = collection
-        mutable.drop(upTo: CompositePattern([LiteralPattern([2]), LiteralPattern([3])]))
+        mutable.drop(upTo: [2, 3])
         XCTAssertEqual(mutable, [2, 3, 4, 5])
 
         mutable = collection
@@ -661,7 +676,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(mutable, [4, 5])
 
         mutable = collection
-        mutable.drop(through: CompositePattern([LiteralPattern([2]), LiteralPattern([3])]))
+        mutable.drop(through: [2, 3])
         XCTAssertEqual(mutable, [4, 5])
 
         mutable = collection
@@ -687,28 +702,30 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(text.map({ String($0) }), equalized)
 
         XCTAssertEqual(collection.truncated(before: [3, 4]), [1, 2])
-        XCTAssertEqual(collection.truncated(before: [LiteralPattern([3]), LiteralPattern([4])]), [1, 2])
+        XCTAssertEqual(collection.truncated(before: [3, 4]), [1, 2])
         XCTAssertEqual([1, 2].truncated(before: ConditionalPattern({ $0 == 1 })), [])
         XCTAssertEqual(collection.truncated(after: [3, 4]), [1, 2, 3, 4])
-        XCTAssertEqual(collection.truncated(after: [LiteralPattern([3]), LiteralPattern([4])]), [1, 2, 3, 4])
+        XCTAssertEqual(collection.truncated(after: [3, 4]), [1, 2, 3, 4])
         XCTAssertEqual([1, 2].truncated(after: ConditionalPattern({ $0 == 1 })), [1])
         XCTAssertEqual(collection.dropping(upTo: [3, 4]), [3, 4, 5])
-        XCTAssertEqual(collection.dropping(upTo: [LiteralPattern([3]), LiteralPattern([4])]), [3, 4, 5])
+        XCTAssertEqual(collection.dropping(upTo: [3, 4]), [3, 4, 5])
         XCTAssertEqual([1, 2].dropping(upTo: ConditionalPattern({ $0 == 3 })), [])
         XCTAssertEqual(collection.dropping(through: [3, 4]), [5])
-        XCTAssertEqual(collection.dropping(through: [LiteralPattern([3]), LiteralPattern([4])]), [5])
+        XCTAssertEqual(collection.dropping(through: [3, 4]), [5])
         XCTAssertEqual([1, 2].dropping(through: ConditionalPattern({ $0 == 3 })), [])
 
         XCTAssertEqual(collection.replacingMatches(for: [3, 4], with: [0]), [1, 2, 0, 5])
-        XCTAssertEqual(collection.replacingMatches(for: [LiteralPattern([3]), LiteralPattern([4])], with: [0]), [1, 2, 0, 5])
+        XCTAssertEqual(collection.replacingMatches(for: [3, 4], with: [0]), [1, 2, 0, 5])
         XCTAssertEqual([1, 2, 3, 4].replacingMatches(for: ConditionalPattern({ $0 < 4 }), with: [0]), [0, 0, 0, 4])
 
         mutable = collection
-        mutable.replaceMatches(for: [LiteralPattern([3]), LiteralPattern([4])], with: [0])
+        mutable.replaceMatches(for: [3, 4], with: [0])
         XCTAssertEqual(mutable, [1, 2, 0, 5])
 
         XCTAssertEqual(collection.mutatingMatches(for: [3, 4], mutation: { $0.contents.map({ $0 + 1 }) }), [1, 2, 4, 5, 5])
-        XCTAssertEqual(collection.mutatingMatches(for: [LiteralPattern([3]), LiteralPattern([4])], mutation: { $0.contents.map({ $0 + 1 }) }), [1, 2, 4, 5, 5])
+        XCTAssertEqual(
+            collection.mutatingMatches(for: [3, 4], mutation: { $0.contents.map({ $0 + 1 }) }),
+            [1, 2, 4, 5, 5])
         XCTAssertEqual([1, 2, 3, 4].mutatingMatches(for: ConditionalPattern({ $0 < 4 }), mutation: { _ in return [0] }), [0, 0, 0, 4])
 
         mutable = collection
@@ -716,7 +733,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(mutable, [1, 2, 4, 5, 5])
 
         mutable = collection
-        mutable.mutateMatches(for: [LiteralPattern([3]), LiteralPattern([4])], mutation: { $0.contents.map({ $0 + 1 }) })
+        mutable.mutateMatches(for: [3, 4], mutation: { $0.contents.map({ $0 + 1 }) })
         XCTAssertEqual(mutable, [1, 2, 4, 5, 5])
 
         let scalars = "ABCDE".scalars

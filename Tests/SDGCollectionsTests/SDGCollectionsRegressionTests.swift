@@ -29,9 +29,6 @@ class SDGCollectionsRegressionTests : TestCase {
     func testTrailingConditionSearch() {
         // Untracked
 
-        XCTAssertNil([1, 2, 3].firstMatch(for: CompositePattern([
-            LiteralPattern([1, 2, 3]),
-            ConditionalPattern({ _ in true })
-            ])))
+        XCTAssertNil([1, 2, 3].firstMatch(for: [1, 2, 3] + ConditionalPattern({ _ in true })))
     }
 }

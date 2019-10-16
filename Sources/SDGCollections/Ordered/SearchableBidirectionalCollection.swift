@@ -143,9 +143,6 @@ extension SearchableBidirectionalCollection {
     @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
         return _lastMatch(for: pattern)
     }
-    @inlinable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
-        return _lastMatch(for: pattern)
-    }
     @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
         return _lastMatch(for: pattern)
     }
@@ -155,9 +152,6 @@ extension SearchableBidirectionalCollection {
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
     @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
-        return _hasSuffix(pattern)
-    }
-    @inlinable public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
         return _hasSuffix(pattern)
     }
     @inlinable public func hasSuffix(_ pattern: Self) -> Bool {

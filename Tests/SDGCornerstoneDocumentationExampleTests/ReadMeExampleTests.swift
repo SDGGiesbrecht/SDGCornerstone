@@ -97,16 +97,14 @@ class ReadMeExampleTests : TestCase {
             // ••••••• Pattern Matching •••••••
 
             let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-            let pattern = CompositePattern([
-                LiteralPattern([1]), // 1
-                ConditionalPattern({ $0.isEven }), // 2
-                PatternWrapper(AlternativePatterns(
-                    LiteralPattern([30, 40]), // (∅)
-                    LiteralPattern([3, 4]) // 3, 4
-                    )),
-                RepetitionPattern(NotPattern(LiteralPattern([5, 7]))), // 5, 6, 7, 8, 9 (...)
-                LiteralPattern([10]) // 10
-                ])
+            let patternFirstPart = [1] // 1
+                + ConditionalPattern({ $0.isEven }) // 2
+                + AlternativePatterns(
+                    [30, 40], // (∅)
+                    [3, 4]) // 3, 4
+            let pattern = patternFirstPart
+                + RepetitionPattern(NotPattern(LiteralPattern([5, 7]))) // 5, 6, 7, 8, 9 (...)
+                + [10] // 10
 
             XCTAssertEqual(numbers.firstMatch(for: pattern)?.range,
                            numbers.startIndex ..< numbers.endIndex)

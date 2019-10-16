@@ -14,71 +14,64 @@
 
 import SDGControlFlow
 
-/// A pattern that matches against several component patterns contiguously.
-public final class CompositePattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible, ExpressibleByArrayLiteral, TextualPlaygroundDisplay {
+/// A pattern that matches against a pair of component patterns contiguously.
+public struct CompositePattern<First, Second> : PatternProtocol, CustomStringConvertible, TextualPlaygroundDisplay where First : PatternProtocol, Second : PatternProtocol, First.Element == Second.Element {
 
     // MARK: - Initialization
 
-    /// Creates a repetition pattern from several component patterns.
+    /// Creates a pattern from a pair of component patterns.
     ///
     /// - Parameters:
-    ///     - components: The component patterns.
-    @inlinable public  init(_ components: [Pattern<Element>]) {
-        self.components = components
+    ///     - first: The first pattern.
+    ///     - second: The second pattern.
+    @inlinable public  init(_ first: First, _ second: Second) {
+        self.first = first
+        self.second = second
     }
 
     // MARK: - Properties
 
-    @usableFromInline internal var components: [Pattern<Element>]
-
-    // MARK: - ExpressibleByArrayLiteral
-
-    @inlinable public convenience init(arrayLiteral: Pattern<Element>...) {
-        self.init(arrayLiteral)
-    }
+    @usableFromInline internal var first: First
+    @usableFromInline internal var second: Second
 
     // MARK: - Pattern
 
-    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    public typealias Element = First.Element
 
+    @inlinable internal func advance<P, C>(
+        ends endIndices: inout [C.Index],
+        for pattern: P,
+        in collection: C)
+        where P : PatternProtocol, C : SearchableCollection, C.Element == Element, P.Element == Element {
+        endIndices = endIndices
+            .lazy.map({ pattern.matches(in: collection, at: $0) })
+            .joined()
+            .map({ $0.upperBound })
+    }
+
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
         var endIndices: [C.Index] = [location]
-        for component in components {
-            if endIndices.isEmpty {
-                // No matches
-                return []
-            } else {
-                // Continue
-                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
-            }
-        }
-
+        advance(ends: &endIndices, for: first, in: collection)
+        if endIndices.isEmpty { return [] }
+        advance(ends: &endIndices, for: second, in: collection)
         return endIndices.map { location ..< $0 }
     }
 
-    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-
+    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         var endIndices: [C.Index] = [location]
-        for component in components {
-            if endIndices.isEmpty {
-                // No matches
-                return nil
-            } else {
-                // Continue
-                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
-            }
-        }
-
+        advance(ends: &endIndices, for: first, in: collection)
+        if endIndices.isEmpty { return nil }
+        advance(ends: &endIndices, for: second, in: collection)
         return endIndices.first.map { location ..< $0 }
     }
 
-    @inlinable public override func reversed() -> CompositePattern<Element> {
-        return CompositePattern(components.map({ $0.reversed() }).reversed())
+    @inlinable public func reversed() -> CompositePattern<Second.Reversed, First.Reversed> {
+        return CompositePattern<Second.Reversed, First.Reversed>(second.reversed(), first.reversed())
     }
 
     // MARK: - CustomStringConvertible
 
     public var description: String {
-        let entries = components.map { "(" + String(describing: $0) + ")" }
-        return entries.joined(separator: " + ")
+        return "(\(String(describing: first))) + (\(String(describing: second)))"
     }
 }
