@@ -14,24 +14,29 @@
 
 import SDGControlFlow
 
-#warning("Not permanent.")
-/*
-public struct PatternWrapper<Element> : PatternProtocol, TransparentWrapper where Element : Equatable {
+/// A type‐erased pattern.
+///
+/// - Note: The indirection used by `AnyPattern` can negatively affect performance. While use of `AnyPattern` is sometimes necessitated by the type system, it is recommended to use other strategies when possible.
+public struct AnyPattern<Element> : PatternProtocol, TransparentWrapper where Element : Equatable {
 
     // MARK: - Initialization
 
+    /// Creates a type erased instance of a pattern.
+    ///
+    /// - Parameters:
+    ///     - pattern: The pattern.
     @inlinable public init<P>(_ pattern: P) where P : PatternProtocol, P.Element == Element {
         matches = { pattern.matches(in: $0, at: $1) }
         primaryMatch = { pattern.primaryMatch(in: $0, at: $1) }
         wrappedInstance = pattern
-        reversedPattern = { PatternWrapper(pattern.reversed()) }
+        reversedPattern = { AnyPattern(pattern.reversed()) }
     }
 
     // MARK: - Properties
 
     @usableFromInline internal let matches: ([Element], Int) -> [Range<Int>]
     @usableFromInline internal let primaryMatch: ([Element], Int) -> Range<Int>?
-    @usableFromInline internal let reversedPattern: () -> PatternWrapper<Element>
+    @usableFromInline internal let reversedPattern: () -> AnyPattern<Element>
 
     // MARK: - Pattern
 
@@ -49,7 +54,7 @@ public struct PatternWrapper<Element> : PatternProtocol, TransparentWrapper wher
         return result.map { $0.map({ collection.index(collection.startIndex, offsetBy: $0) }) }
     }
 
-    @inlinable public func reversed() -> PatternWrapper<Element> {
+    @inlinable public func reversed() -> AnyPattern<Element> {
         return reversedPattern()
     }
 
@@ -57,4 +62,3 @@ public struct PatternWrapper<Element> : PatternProtocol, TransparentWrapper wher
 
     public let wrappedInstance: Any
 }
-*/
