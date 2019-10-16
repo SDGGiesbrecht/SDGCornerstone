@@ -223,5 +223,16 @@ class SDGControlFlowAPITests : TestCase {
         XCTAssertNil(reference.pointee)
 
         _ = reference.wrappedInstance
+
+        class Class {}
+        struct Structure {
+            init() {}
+            @Weak var property: Class?
+        }
+        var instance = Structure()
+        instance.property = Class()
+        XCTAssertNil(instance.property)
+        instance.$property = Weak(Class())
+        XCTAssertNil(instance.$property.pointee)
     }
 }
