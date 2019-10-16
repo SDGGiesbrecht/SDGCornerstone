@@ -18,8 +18,8 @@ import SDGControlFlow
 /// A pattern that matches against a pair of alternative patterns.
 ///
 /// The order of the alternatives is significant. If both alternatives match, preference will be given to the first one.
-public struct AlternativePatterns<First, Second> : CustomStringConvertible, PatternProtocol, TextualPlaygroundDisplay
-where First : PatternProtocol, Second : PatternProtocol, First.Element == Second.Element {
+public struct AlternativePatterns<First, Second> : CustomStringConvertible, Pattern, TextualPlaygroundDisplay
+where First : Pattern, Second : Pattern, First.Element == Second.Element {
 
     // MARK: - Initialization
 

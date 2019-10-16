@@ -18,7 +18,7 @@ import SDGLogic
 import SDGCollections
 
 /// A pattern representing any newline variant.
-public struct NewlinePattern : PatternProtocol {
+public struct NewlinePattern : SDGCollections.Pattern {
 
     // MARK: - Static Properties
 

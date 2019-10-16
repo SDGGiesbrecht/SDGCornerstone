@@ -15,7 +15,7 @@
 import SDGLogic
 
 /// A pattern that matches based on a condition.
-public struct ConditionalPattern<Element : Equatable> : PatternProtocol {
+public struct ConditionalPattern<Element : Equatable> : Pattern {
 
     // MARK: - Initialization
 

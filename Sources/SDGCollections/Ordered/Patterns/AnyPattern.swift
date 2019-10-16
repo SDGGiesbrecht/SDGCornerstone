@@ -17,7 +17,7 @@ import SDGControlFlow
 /// A type‐erased pattern.
 ///
 /// - Note: The indirection used by `AnyPattern` can negatively affect performance. While use of `AnyPattern` is sometimes necessitated by the type system, it is recommended to use other strategies when possible.
-public struct AnyPattern<Element> : PatternProtocol, TransparentWrapper where Element : Equatable {
+public struct AnyPattern<Element> : Pattern, TransparentWrapper where Element : Equatable {
 
     // MARK: - Initialization
 
@@ -25,7 +25,7 @@ public struct AnyPattern<Element> : PatternProtocol, TransparentWrapper where El
     ///
     /// - Parameters:
     ///     - pattern: The pattern.
-    @inlinable public init<P>(_ pattern: P) where P : PatternProtocol, P.Element == Element {
+    @inlinable public init<P>(_ pattern: P) where P : Pattern, P.Element == Element {
         matches = { pattern.matches(in: $0, at: $1) }
         primaryMatch = { pattern.primaryMatch(in: $0, at: $1) }
         wrappedInstance = pattern

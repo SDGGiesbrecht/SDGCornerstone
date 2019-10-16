@@ -17,7 +17,7 @@ import SDGControlFlow
 #warning("Rename to concatenated patterns.")
 #warning("Needs N‐ary.")
 /// A pattern that matches against a pair of component patterns contiguously.
-public struct CompositePattern<First, Second> : PatternProtocol, CustomStringConvertible, TextualPlaygroundDisplay where First : PatternProtocol, Second : PatternProtocol, First.Element == Second.Element {
+public struct CompositePattern<First, Second> : Pattern, CustomStringConvertible, TextualPlaygroundDisplay where First : Pattern, Second : Pattern, First.Element == Second.Element {
 
     // MARK: - Initialization
 
@@ -44,7 +44,7 @@ public struct CompositePattern<First, Second> : PatternProtocol, CustomStringCon
         ends endIndices: inout [C.Index],
         for pattern: P,
         in collection: C)
-        where P : PatternProtocol, C : SearchableCollection, C.Element == Element, P.Element == Element {
+        where P : Pattern, C : SearchableCollection, C.Element == Element, P.Element == Element {
         endIndices = endIndices
             .lazy.map({ pattern.matches(in: collection, at: $0) })
             .joined()

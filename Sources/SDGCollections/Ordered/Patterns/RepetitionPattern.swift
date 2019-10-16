@@ -17,7 +17,7 @@ import SDGLogic
 import SDGMathematics
 
 /// A pattern that matches against repetitions of another pattern.
-public struct RepetitionPattern<Base> : PatternProtocol where Base : PatternProtocol {
+public struct RepetitionPattern<Base> : Pattern where Base : Pattern {
 
     // MARK: - Initialization
 

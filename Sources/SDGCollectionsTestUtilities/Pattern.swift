@@ -24,7 +24,7 @@ import SDGTesting
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
 public func testPattern<P, C>(_ pattern: P, match: C, file: StaticString = #file, line: UInt = #line)
-    where P : PatternProtocol, C : SearchableCollection, C.Element == P.Element {
+    where P : Pattern, C : SearchableCollection, C.Element == P.Element {
 
         let result = pattern.matches(in: match, at: match.startIndex).first
         test(result == match.bounds, "\(pattern).matches(in: \(match), at: \(match.startIndex)).first → \(String(describing: result)) ≠ \(match.bounds)", file: file, line: line)

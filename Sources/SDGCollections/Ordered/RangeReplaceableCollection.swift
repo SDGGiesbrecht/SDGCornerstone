@@ -214,10 +214,10 @@ extension RangeReplaceableCollection {
     }
 }
 
-extension RangeReplaceableCollection where Self : PatternProtocol {
+extension RangeReplaceableCollection where Self : Pattern {
 
     @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
-        // Disambiguate RangeReplaceableCollection vs PatternProtocol
+        // Disambiguate RangeReplaceableCollection vs Pattern
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 }

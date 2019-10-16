@@ -16,8 +16,8 @@ import SDGControlFlow
 
 #warning("Rename to negated pattern.")
 /// A pattern that matches if the underlying pattern does not.
-public struct NotPattern<Base> : CustomStringConvertible, PatternProtocol, TextualPlaygroundDisplay
-where Base : PatternProtocol {
+public struct NotPattern<Base> : CustomStringConvertible, Pattern, TextualPlaygroundDisplay
+where Base : Pattern {
 
     // MARK: - Initialization
 

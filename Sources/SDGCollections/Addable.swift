@@ -15,18 +15,18 @@
 import SDGControlFlow
 import SDGMathematics
 
-extension Addable where Self : PatternProtocol {
+extension Addable where Self : Pattern {
 
     @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
-        // Disambiguate Addable vs PatternProtocol
+        // Disambiguate Addable vs Pattern
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 }
 
-extension Addable where Self : RangeReplaceableCollection, Self : PatternProtocol {
+extension Addable where Self : RangeReplaceableCollection, Self : Pattern {
 
     @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
-        // Disambiguate Addable vs RangeReplaceableCollection vs PatternProtocol
+        // Disambiguate Addable vs RangeReplaceableCollection vs Pattern
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 }

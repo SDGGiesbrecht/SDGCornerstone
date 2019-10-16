@@ -1,5 +1,5 @@
 /*
- PatternProtocol.swift
+ Pattern.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -16,15 +16,13 @@ import SDGLogic
 
 #warning("Shorten name.")
 /// A pattern that can be searched for in collections with equatable elements.
-///
-/// Instead of conforming to this protocol directly, it is advised to subclass `Pattern`. That way the type will also be nestable with other patterns like `CompositePattern` and `RepetitionPattern`.
-public protocol PatternProtocol {
+public protocol Pattern {
 
     /// The type of the pattern elements.
     associatedtype Element : Equatable
 
     /// The type of the reverse pattern.
-    associatedtype Reversed : PatternProtocol where Reversed.Element == Self.Element
+    associatedtype Reversed : Pattern where Reversed.Element == Self.Element
 
     /// Returns the ranges of possible matches beginning at the specified index in the collection.
     ///
@@ -50,7 +48,7 @@ public protocol PatternProtocol {
     func reversed() -> Reversed
 }
 
-extension PatternProtocol {
+extension Pattern {
 
     @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         return matches(in: collection, at: location).first

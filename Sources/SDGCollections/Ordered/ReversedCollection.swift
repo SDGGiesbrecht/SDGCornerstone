@@ -12,5 +12,5 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension ReversedCollection : PatternProtocol, SearchableCollection where Base : SearchableCollection {}
+extension ReversedCollection : Pattern, SearchableCollection where Base : SearchableCollection {}
 extension ReversedCollection : SearchableBidirectionalCollection where Base : SearchableBidirectionalCollection {}

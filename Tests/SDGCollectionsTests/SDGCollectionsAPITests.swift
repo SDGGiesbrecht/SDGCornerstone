@@ -582,7 +582,7 @@ class SDGCollectionsAPITests : TestCase {
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "¬1", overwriteSpecificationInsteadOfFailing: false)
     }
 
-    struct CustomPattern : PatternProtocol {
+    struct CustomPattern : SDGCollections.Pattern {
         let pattern = [1]
         typealias Element = Int
         func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>]
