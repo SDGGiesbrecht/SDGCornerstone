@@ -15,11 +15,12 @@
 import SDGControlFlow
 
 #warning("Not permanent.")
+/*
 public struct PatternWrapper<Element> : PatternProtocol, TransparentWrapper where Element : Equatable {
 
     // MARK: - Initialization
 
-    public init<P>(_ pattern: P) where P : PatternProtocol, P.Element == Element {
+    @inlinable public init<P>(_ pattern: P) where P : PatternProtocol, P.Element == Element {
         matches = { pattern.matches(in: $0, at: $1) }
         primaryMatch = { pattern.primaryMatch(in: $0, at: $1) }
         wrappedInstance = pattern
@@ -56,3 +57,4 @@ public struct PatternWrapper<Element> : PatternProtocol, TransparentWrapper wher
 
     public let wrappedInstance: Any
 }
+*/

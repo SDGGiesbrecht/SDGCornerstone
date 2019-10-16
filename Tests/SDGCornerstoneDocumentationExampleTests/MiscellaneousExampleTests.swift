@@ -206,9 +206,9 @@ class MiscellaneousExampleTests : TestCase {
     func testPatternSwitch() {
         // @example(patternSwitch)
         switch "This is a string." {
-        case RepetitionPattern(PatternWrapper(".")):
+        case RepetitionPattern("."):
             XCTFail("This case does not match.")
-        case RepetitionPattern(PatternWrapper(¬".")) + ".":
+        case RepetitionPattern(¬".") + ".":
             print("This case does match.")
         default:
             XCTFail("This case is never reached.")

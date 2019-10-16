@@ -32,7 +32,7 @@ class SDGCollectionsAPITests : TestCase {
 
     func testAlternativePatterns() {
         let pattern = [1, 2, 3] ∨ [3, 2, 1]
-        testPattern(PatternWrapper(pattern), match: [1, 2, 3])
+        testPattern(pattern, match: [1, 2, 3])
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "123 ∨ 321", overwriteSpecificationInsteadOfFailing: false)
     }
 
@@ -64,7 +64,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(lazyRepetitionMatch?.range, 5 ..< 7)
 
         let compositeMatchPatternOne = [1, 2]
-        let compositeMatchPatternTwo = compositeMatchPatternOne + PatternWrapper([3] ∨ [−3])
+        let compositeMatchPatternTwo = compositeMatchPatternOne + ([3] ∨ [−3])
         let compositeMatchPattern = compositeMatchPatternTwo + RepetitionPattern([4, 5], count: 1 ..< Int.max)
         let compositeMatch = collection.lastMatch(for: compositeMatchPattern)
         XCTAssertEqual(compositeMatch?.range, 0 ..< 7)
@@ -102,7 +102,7 @@ class SDGCollectionsAPITests : TestCase {
 
         XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: ConditionalPattern({ $0.isEven }))?.range, 3 ..< 4)
 
-        XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: NotPattern(PatternWrapper([3, 2, 1])))?.range, 3 ..< 4)
+        XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: ¬[3, 2, 1])?.range, 3 ..< 4)
 
         let advancingCollection = [1, 2, 1, 2, 3]
         var index = advancingCollection.startIndex
@@ -159,7 +159,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(lazyRepetitionMatch?.range, 3 ..< 5)
 
         let compositeMatchPatternOne = [1, 2]
-        let compositeMatchPatternTwo = compositeMatchPatternOne + PatternWrapper([3] ∨ [−3])
+        let compositeMatchPatternTwo = compositeMatchPatternOne + ([3] ∨ [−3])
         let compositeMatchPattern = compositeMatchPatternTwo + RepetitionPattern([4, 5], count: 1 ..< Int.max)
         let compositeMatch = collection.firstMatch(for: compositeMatchPattern)
         XCTAssertEqual(compositeMatch?.range, 0 ..< 7)
@@ -244,9 +244,9 @@ class SDGCollectionsAPITests : TestCase {
 
         XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: ConditionalPattern({ $0.isEven }))?.range, 1 ..< 2)
 
-        XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: NotPattern(PatternWrapper([5, 4, 3])))?.range, 1 ..< 2)
+        XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: ¬[5, 4, 3])?.range, 1 ..< 2)
         XCTAssertEqual(
-            [5, 4, 3, 2, 1].firstMatch(for: NotPattern(PatternWrapper([5, 4, 3])))?.range,
+            [5, 4, 3, 2, 1].firstMatch(for: ¬[5, 4, 3])?.range,
             1 ..< 2)
 
         let compositeRepetition = [5, 4, 5, 4].firstMatch(
@@ -267,15 +267,18 @@ class SDGCollectionsAPITests : TestCase {
 
         let countableRange: CountableClosedRange<Int>? = nil
         XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range, [1, 1, 1].bounds)
-        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(PatternWrapper([1]), count: countableRange))?.range, [1, 1, 1].bounds)
+        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range, [1, 1, 1].bounds)
         XCTAssertEqual([1, 1, 1].firstMatch(
             for: RepetitionPattern([1], count: countableRange))?.range, [1, 1, 1].bounds)
-        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(PatternWrapper(ConditionalPattern({ $0 == 1 })), count: countableRange))?.range, [1, 1, 1].bounds)
+        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(ConditionalPattern({ $0 == 1 }), count: countableRange))?.range, [1, 1, 1].bounds)
 
         XCTAssertNil([1].firstMatch(for: RepetitionPattern([1], count: 2 ... 4, consumption: .lazy)))
 
-        XCTAssertEqual([1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern(PatternWrapper([1]), count: 0 ..< 15))?.range, [1, 1, 1].bounds)
-        XCTAssertNil([1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern(PatternWrapper([1]), count: 5 ..< 15, consumption: .lazy)))
+        XCTAssertEqual(
+            [1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern([1], count: 0 ..< 15))?.range,
+            [1, 1, 1].bounds)
+        XCTAssertNil([1, 1, 1, 2, 3].firstMatch(
+            for: RepetitionPattern([1], count: 5 ..< 15, consumption: .lazy)))
 
         XCTAssertEqual("ABCDE".scalars.matches(for: ["A", "B", "C"]).count, 1)
         XCTAssertEqual("ABCDE".scalars.prefix(upTo: ["B", "C"])?.contents.count, 1)
@@ -327,7 +330,7 @@ class SDGCollectionsAPITests : TestCase {
         _ = endString.scalars.groupedDifferences(from: start)
         _ = AnyCollection(Set(startString)).groupedDifferences(from: AnyCollection(Set(startString)))
 
-        XCTAssertNil("...".scalars.firstMatch(for: NotPattern(PatternWrapper(ConditionalPattern({ $0 == "." })))))
+        XCTAssertNil("...".scalars.firstMatch(for: ¬ConditionalPattern({ $0 == "." })))
         XCTAssertNil("...".scalars[...].lastMatch(for: ConditionalPattern({ $0 ≠ "." })))
         XCTAssertNil("...".scalars[...].firstMatch(for: ConditionalPattern({ $0 ≠ "." })))
         XCTAssert("...".scalars[...].matches(for: ConditionalPattern({ $0 ≠ "." })).isEmpty)
@@ -355,12 +358,12 @@ class SDGCollectionsAPITests : TestCase {
 
     func testCompositePattern() {
         let pattern: CompositePattern<[Int], [Int]> = [1, 2] + [3]
-        testPattern(PatternWrapper(pattern), match: [1, 2, 3])
+        testPattern(pattern, match: [1, 2, 3])
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "12 + 3", overwriteSpecificationInsteadOfFailing: false)
     }
 
     func testConditionalPattern() {
-        testPattern(PatternWrapper(ConditionalPattern({ $0 < 10 })), match: [0])
+        testPattern(ConditionalPattern({ $0 < 10 }), match: [0])
         XCTAssert(ConditionalPattern({ $0 < 10 }).matches(in: [11], at: 0).isEmpty)
     }
 
@@ -478,7 +481,7 @@ class SDGCollectionsAPITests : TestCase {
 
     func testLiteralPattern() {
         let pattern = [1, 2, 3]
-        testPattern(PatternWrapper(pattern), match: [1, 2, 3])
+        testPattern(pattern, match: [1, 2, 3])
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "123", overwriteSpecificationInsteadOfFailing: false)
     }
 
@@ -573,8 +576,8 @@ class SDGCollectionsAPITests : TestCase {
 
     func testNotPattern() {
         let pattern = ¬[1]
-        testPattern(PatternWrapper(pattern), match: [2])
-        XCTAssert(NotPattern(PatternWrapper([1])).matches(in: [1], at: 0).isEmpty)
+        testPattern(pattern, match: [2])
+        XCTAssert((¬[1]).matches(in: [1], at: 0).isEmpty)
 
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "¬1", overwriteSpecificationInsteadOfFailing: false)
     }
@@ -761,7 +764,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testRepetitionPattern() {
-        testPattern(PatternWrapper(RepetitionPattern([1, 2, 3])), match: [1, 2, 3, 1, 2, 3])
+        testPattern(RepetitionPattern([1, 2, 3]), match: [1, 2, 3, 1, 2, 3])
     }
 
     func testSet() {

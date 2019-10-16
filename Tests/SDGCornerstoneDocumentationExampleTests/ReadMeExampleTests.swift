@@ -103,7 +103,7 @@ class ReadMeExampleTests : TestCase {
                 + ([30, 40] // (∅)
                     ∨ [3, 4]) // 3, 4
             let pattern = patternFirstPart
-                + RepetitionPattern(PatternWrapper(¬[5, 7])) // 5, 6, 7, 8, 9 (...)
+                + RepetitionPattern(¬[5, 7]) // 5, 6, 7, 8, 9 (...)
                 + [10] // 10
 
             XCTAssertEqual(numbers.firstMatch(for: pattern)?.range,
