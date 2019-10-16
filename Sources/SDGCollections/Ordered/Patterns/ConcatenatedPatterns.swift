@@ -1,5 +1,5 @@
 /*
- CompositePattern.swift
+ ConcatenatedPatterns.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -14,10 +14,9 @@
 
 import SDGControlFlow
 
-#warning("Rename to concatenated patterns.")
 #warning("Needs N‐ary.")
 /// A pattern that matches against a pair of component patterns contiguously.
-public struct CompositePattern<First, Second> : Pattern, CustomStringConvertible, TextualPlaygroundDisplay where First : Pattern, Second : Pattern, First.Element == Second.Element {
+public struct ConcatenatedPatterns<First, Second> : Pattern, CustomStringConvertible, TextualPlaygroundDisplay where First : Pattern, Second : Pattern, First.Element == Second.Element {
 
     // MARK: - Initialization
 
@@ -67,8 +66,8 @@ public struct CompositePattern<First, Second> : Pattern, CustomStringConvertible
         return endIndices.first.map { location ..< $0 }
     }
 
-    @inlinable public func reversed() -> CompositePattern<Second.Reversed, First.Reversed> {
-        return CompositePattern<Second.Reversed, First.Reversed>(second.reversed(), first.reversed())
+    @inlinable public func reversed() -> ConcatenatedPatterns<Second.Reversed, First.Reversed> {
+        return ConcatenatedPatterns<Second.Reversed, First.Reversed>(second.reversed(), first.reversed())
     }
 
     // MARK: - CustomStringConvertible

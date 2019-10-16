@@ -356,8 +356,8 @@ class SDGCollectionsAPITests : TestCase {
         testComparableSetConformance(of: ComparableSetExample([1, 2, 3]), member: 1, nonmember: 10, superset: ComparableSetExample([0, 1, 2, 3]), overlapping: ComparableSetExample([2, 4]), disjoint: ComparableSetExample([−1, −2, −3]))
     }
 
-    func testCompositePattern() {
-        let pattern: CompositePattern<[Int], [Int]> = [1, 2] + [3]
+    func testConcatenatedPatterns() {
+        let pattern: ConcatenatedPatterns<[Int], [Int]> = [1, 2] + [3]
         testPattern(pattern, match: [1, 2, 3])
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "12 + 3", overwriteSpecificationInsteadOfFailing: false)
     }
