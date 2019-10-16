@@ -14,31 +14,31 @@
 
 import SDGControlFlow
 
+#warning("Rename to negated pattern.")
 /// A pattern that matches if the underlying pattern does not.
-public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible, TextualPlaygroundDisplay {
+public struct NotPattern<Base> : CustomStringConvertible, PatternProtocol, TextualPlaygroundDisplay
+where Base : PatternProtocol {
 
     // MARK: - Initialization
 
-    @inlinable internal init(abstractBasePattern base: Pattern<Element>) {
-        self.base = base
-    }
-
     // @documentation(SDGCornerstone.Not.init(_:))
-    /// Creates a repetition pattern from another pattern.
+    /// Creates a not pattern from another pattern.
     ///
     /// - Parameters:
     ///     - pattern: The underlying pattern to negate.
-    @inlinable public convenience init(_ pattern: Pattern<Element>) {
-        self.init(abstractBasePattern: pattern)
+    @inlinable public init(_ pattern: Base) {
+        self.base = pattern
     }
 
     // MARK: - Properties
 
-    @usableFromInline internal var base: Pattern<Element>
+    @usableFromInline internal var base: Base
 
     // MARK: - Pattern
 
-    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    public typealias Element = Base.Element
+
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         if base.primaryMatch(in: collection, at: location) == nil {
             return [(location ... location).relative(to: collection)]
@@ -47,7 +47,7 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
         }
     }
 
-    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         if base.primaryMatch(in: collection, at: location) == nil {
             return (location ... location).relative(to: collection)
@@ -56,8 +56,8 @@ public final class NotPattern<Element : Equatable> : Pattern<Element>, CustomStr
         }
     }
 
-    @inlinable public override func reversed() -> NotPattern<Element> {
-        return NotPattern(base.reversed())
+    @inlinable public func reversed() -> NotPattern<Base.Reversed> {
+        return NotPattern<Base.Reversed>(base.reversed())
     }
 
     // MARK: - CustomStringConvertible

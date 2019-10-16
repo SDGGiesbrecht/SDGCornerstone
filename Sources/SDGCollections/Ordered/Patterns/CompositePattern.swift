@@ -14,6 +14,7 @@
 
 import SDGControlFlow
 
+#warning("Rename to concatenated patterns.")
 /// A pattern that matches against a pair of component patterns contiguously.
 public struct CompositePattern<First, Second> : PatternProtocol, CustomStringConvertible, TextualPlaygroundDisplay where First : PatternProtocol, Second : PatternProtocol, First.Element == Second.Element {
 

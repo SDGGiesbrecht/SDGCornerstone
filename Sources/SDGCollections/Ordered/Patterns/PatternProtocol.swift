@@ -80,6 +80,16 @@ extension PatternProtocol {
         return AlternativePatterns(precedingValue, followingValue)
     }
 
+    /// Creates a negated pattern from another pattern.
+    ///
+    /// See the `NotPattern` type for details.
+    ///
+    /// - Parameters:
+    ///     - operand: The pattern to negate.
+    @inlinable public static prefix func ¬(operand: Self) -> NotPattern<Self> {
+        return NotPattern(operand)
+    }
+
     // MARK: - Switch Expression Pattern
 
     // #example(1, patternSwitch)

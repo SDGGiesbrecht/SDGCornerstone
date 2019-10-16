@@ -208,7 +208,7 @@ class MiscellaneousExampleTests : TestCase {
         switch "This is a string." {
         case RepetitionPattern(PatternWrapper(".")):
             XCTFail("This case does not match.")
-        case RepetitionPattern(NotPattern(PatternWrapper("."))) + ".":
+        case RepetitionPattern(PatternWrapper(¬".")) + ".":
             print("This case does match.")
         default:
             XCTFail("This case is never reached.")

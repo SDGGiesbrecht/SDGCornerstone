@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGLogic
 import SDGCollections
 import SDGText
 import SDGPersistence
@@ -99,11 +100,10 @@ class ReadMeExampleTests : TestCase {
             let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             let patternFirstPart = [1] // 1
                 + ConditionalPattern({ $0.isEven }) // 2
-                + AlternativePatterns(
-                    [30, 40], // (∅)
-                    [3, 4]) // 3, 4
+                + ([30, 40] // (∅)
+                    ∨ [3, 4]) // 3, 4
             let pattern = patternFirstPart
-                + RepetitionPattern(NotPattern(PatternWrapper([5, 7]))) // 5, 6, 7, 8, 9 (...)
+                + RepetitionPattern(PatternWrapper(¬[5, 7])) // 5, 6, 7, 8, 9 (...)
                 + [10] // 10
 
             XCTAssertEqual(numbers.firstMatch(for: pattern)?.range,

@@ -572,8 +572,8 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testNotPattern() {
-        let pattern = NotPattern(PatternWrapper([1]))
-        testPattern(pattern, match: [2])
+        let pattern = ¬[1]
+        testPattern(PatternWrapper(pattern), match: [2])
         XCTAssert(NotPattern(PatternWrapper([1])).matches(in: [1], at: 0).isEmpty)
 
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "¬1", overwriteSpecificationInsteadOfFailing: false)
