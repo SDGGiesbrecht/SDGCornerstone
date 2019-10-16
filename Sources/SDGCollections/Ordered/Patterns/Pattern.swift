@@ -14,7 +14,6 @@
 
 import SDGLogic
 
-#warning("Shorten name.")
 /// A pattern that can be searched for in collections with equatable elements.
 public protocol Pattern {
 
