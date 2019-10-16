@@ -45,18 +45,24 @@ public func testCodableConformance<T>(of instance: T, uniqueTestName: StrictStri
 
                 let specification = try String(from: specificationURL)
                 specifications.insert(specification)
-                let data = specification.file
-                let array = try JSONDecoder().decode([T].self, from: data)
-                guard let decoded = array.first else {
-                    fail(String(UserFacing<StrictString, APILocalization>({ localization in
-                        switch localization {
-                        case .englishCanada: // @exempt(from: tests)
-                            return "Empty array decoded from “\(specificationURL.absoluteString)”."
-                        }
-                    }).resolved()), file: file, line: line)
-                    return // from autorelease pool and move to next specification.
+                for representation in [
+                    specification,
+                    specification.decomposedStringWithCanonicalMapping,
+                    specification.precomposedStringWithCanonicalMapping
+                    ] {
+                    let data = representation.file
+                    let array = try JSONDecoder().decode([T].self, from: data)
+                    guard let decoded = array.first else {
+                        fail(String(UserFacing<StrictString, APILocalization>({ localization in
+                            switch localization {
+                            case .englishCanada: // @exempt(from: tests)
+                                return "Empty array decoded from “\(specificationURL.absoluteString)”."
+                            }
+                        }).resolved()), file: file, line: line)
+                        return // from autorelease pool and move to next specification.
+                    }
+                    test(decoded == instance, "\(instance) ≠ \(decoded) (\(specificationURL)", file: file, line: line)
                 }
-                test(decoded == instance, "\(instance) ≠ \(decoded) (\(specificationURL)", file: file, line: line)
             }
         }
 
