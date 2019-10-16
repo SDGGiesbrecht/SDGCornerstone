@@ -574,7 +574,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual(MutableFiniteSetExample([1, 2, 3]) ∆ FiniteSetExample([3, 4, 5]), MutableFiniteSetExample([1, 2, 4, 5]))
     }
 
-    func testNotPattern() {
+    func testNegatedPattern() {
         let pattern = ¬[1]
         testPattern(pattern, match: [2])
         XCTAssert((¬[1]).matches(in: [1], at: 0).isEmpty)

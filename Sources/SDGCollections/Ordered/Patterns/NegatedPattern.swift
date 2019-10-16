@@ -1,5 +1,5 @@
 /*
- NotPattern.swift
+ NegatedPattern.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -14,9 +14,8 @@
 
 import SDGControlFlow
 
-#warning("Rename to negated pattern.")
 /// A pattern that matches if the underlying pattern does not.
-public struct NotPattern<Base> : CustomStringConvertible, Pattern, TextualPlaygroundDisplay
+public struct NegatedPattern<Base> : CustomStringConvertible, Pattern, TextualPlaygroundDisplay
 where Base : Pattern {
 
     // MARK: - Initialization
@@ -56,8 +55,8 @@ where Base : Pattern {
         }
     }
 
-    @inlinable public func reversed() -> NotPattern<Base.Reversed> {
-        return NotPattern<Base.Reversed>(base.reversed())
+    @inlinable public func reversed() -> NegatedPattern<Base.Reversed> {
+        return NegatedPattern<Base.Reversed>(base.reversed())
     }
 
     // MARK: - CustomStringConvertible

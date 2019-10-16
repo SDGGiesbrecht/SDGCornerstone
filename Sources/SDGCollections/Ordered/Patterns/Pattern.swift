@@ -85,12 +85,12 @@ extension Pattern {
 
     /// Creates a negated pattern from another pattern.
     ///
-    /// See the `NotPattern` type for details.
+    /// See the `NegatedPattern` type for details.
     ///
     /// - Parameters:
     ///     - operand: The pattern to negate.
-    @inlinable public static prefix func ¬(operand: Self) -> NotPattern<Self> {
-        return NotPattern(operand)
+    @inlinable public static prefix func ¬(operand: Self) -> NegatedPattern<Self> {
+        return NegatedPattern(operand)
     }
 
     // MARK: - Switch Expression Pattern
