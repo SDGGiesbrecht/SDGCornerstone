@@ -495,6 +495,7 @@ let package = Package(
             ]),
         .testTarget(name: "SDGPersistenceTests", dependencies: [
             "SDGPersistence", "SDGPersistenceTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+            "SDGLogic",
             "SDGCollections",
             "SDGText",
             "SDGLocalization",

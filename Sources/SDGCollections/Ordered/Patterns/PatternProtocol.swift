@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
+#warning("Shorten name.")
 /// A pattern that can be searched for in collections with equatable elements.
 ///
 /// Instead of conforming to this protocol directly, it is advised to subclass `Pattern`. That way the type will also be nestable with other patterns like `CompositePattern` and `RepetitionPattern`.
@@ -48,6 +51,21 @@ public protocol PatternProtocol {
 }
 
 extension PatternProtocol {
+
+    // MARK: - Composition
+
+    /// Combines two patterns into a single pattern that will match either.
+    ///
+    /// See the `AlternativePatterns` type for details.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The first pattern.
+    ///     - followingValue: The second pattern.
+    @inlinable public static func ∨<Other>(
+        precedingValue: Self,
+        followingValue: Other) -> AlternativePatterns<Self, Other> {
+        return AlternativePatterns(precedingValue, followingValue)
+    }
 
     // MARK: - Switch Expression Pattern
 

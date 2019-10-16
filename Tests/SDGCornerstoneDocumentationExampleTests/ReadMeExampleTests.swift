@@ -100,10 +100,10 @@ class ReadMeExampleTests : TestCase {
             let pattern = CompositePattern([
                 LiteralPattern([1]), // 1
                 ConditionalPattern({ $0.isEven }), // 2
-                AlternativePatterns([
+                PatternWrapper(AlternativePatterns(
                     LiteralPattern([30, 40]), // (∅)
                     LiteralPattern([3, 4]) // 3, 4
-                    ]),
+                    )),
                 RepetitionPattern(NotPattern(LiteralPattern([5, 7]))), // 5, 6, 7, 8, 9 (...)
                 LiteralPattern([10]) // 10
                 ])

@@ -14,6 +14,7 @@
 
 import Foundation
 
+import SDGLogic
 import SDGCollections
 import SDGText
 import SDGPersistence
@@ -47,8 +48,14 @@ class SDGPersistenceAPITests : TestCase {
             #else
             XCTAssert(FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains("Application%20Support"), "Unexpected support directory.")
             #endif
-            XCTAssertNotNil(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Cache".scalars), LiteralPattern("cache".scalars)])))
-            XCTAssertNotNil(temporaryDirectory.appendingPathComponent(path).absoluteString.scalars.firstMatch(for: AlternativePatterns([LiteralPattern("Temp".scalars), LiteralPattern("temp".scalars), LiteralPattern("tmp".scalars), LiteralPattern("Being%20Saved%20By".scalars)])))
+            XCTAssertNotNil(FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(
+                for: "Cache".scalars ∨ "cache".scalars))
+            XCTAssertNotNil(
+                temporaryDirectory.appendingPathComponent(path).absoluteString.scalars.firstMatch(
+                    for: LiteralPattern("Temp".scalars)
+                        ∨ LiteralPattern("temp".scalars)
+                        ∨ LiteralPattern("tmp".scalars)
+                        ∨ LiteralPattern("Being%20Saved%20By".scalars)))
 
             let directoryName = "Directory"
             let directory = temporaryDirectory.appendingPathComponent(directoryName)

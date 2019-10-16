@@ -14,61 +14,52 @@
 
 import SDGControlFlow
 
-/// A pattern that matches against several alternative patterns.
+/// A pattern that matches against a pair of alternative patterns.
 ///
-/// The order of the alternatives is significant. If multiple alternatives match, preference will be given to one higher in the list.
-public final class AlternativePatterns<Element : Equatable> : Pattern<Element>, CustomStringConvertible, TextualPlaygroundDisplay {
+/// The order of the alternatives is significant. If both alternatives match, preference will be given to the first one.
+public struct AlternativePatterns<First, Second> : CustomStringConvertible, PatternProtocol, TextualPlaygroundDisplay
+where First : PatternProtocol, Second : PatternProtocol, First.Element == Second.Element {
 
     // MARK: - Initialization
 
-    /// Creates a set of alternative patterns.
+    /// Creates a pair of alternative patterns.
     ///
     /// - Parameters:
-    ///     - alternatives: The alternative patterns.
-    @inlinable public init(_ alternatives: [Pattern<Element>]) {
-        self.alternatives = alternatives
-    }
-
-    /// Creates a set of alternative elements.
-    ///
-    /// - Parameters:
-    ///     - elements: The alternative element.
-    @inlinable public init(_ elements: [Element]) {
-        self.alternatives = elements.map { LiteralPattern([$0]) }
+    ///     - first: The first pattern.
+    ///     - second: The second pattern.
+    @inlinable public init(_ first: First, _ second: Second) {
+        self.first = first
+        self.second = second
     }
 
     // MARK: - Properties
 
-    @usableFromInline internal var alternatives: [Pattern<Element>]
+    @usableFromInline internal var first: First
+    @usableFromInline internal var second: Second
 
     // MARK: - Pattern
 
-    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    public typealias Element = First.Element
 
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
         var results: [Range<C.Index>] = []
-        for alternative in alternatives {
-            results.append(contentsOf: alternative.matches(in: collection, at: location))
-        }
+        results.append(contentsOf: first.matches(in: collection, at: location))
+        results.append(contentsOf: second.matches(in: collection, at: location))
         return results
     }
 
-    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-        for alternative in alternatives {
-            if let match = alternative.primaryMatch(in: collection, at: location) {
-                return match
-            }
-        }
-        return nil
+    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+        return first.primaryMatch(in: collection, at: location)
+            ?? second.primaryMatch(in: collection, at: location)
     }
 
-    @inlinable public override func reversed() -> AlternativePatterns<Element> {
-        return AlternativePatterns(alternatives.map({ $0.reversed() }))
+    @inlinable public func reversed() -> AlternativePatterns<First.Reversed, Second.Reversed> {
+        return AlternativePatterns<First.Reversed, Second.Reversed>(first.reversed(), second.reversed())
     }
 
     // MARK: - CustomStringConvertible
 
     public var description: String {
-        let entries = alternatives.map { "(" + String(describing: $0) + ")" }
-        return entries.joined(separator: " ∨ ")
+        return "(\(String(describing: first))) ∨ (\(String(describing: second)))"
     }
 }

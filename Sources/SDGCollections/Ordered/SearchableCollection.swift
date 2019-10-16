@@ -450,11 +450,7 @@ extension SearchableCollection {
         searchArea = start.upperBound ..< searchArea.upperBound
 
         var level = 1
-        while let hit = self[searchArea].firstMatch(for: AlternativePatterns([
-            LiteralPattern(openingToken),
-            LiteralPattern(closingToken)
-            ])) {
-
+        while let hit = self[searchArea].firstMatch(for: openingToken ∨ closingToken) {
                 if hit.contents.elementsEqual(openingToken) {
                     level += 1
                 } else {
