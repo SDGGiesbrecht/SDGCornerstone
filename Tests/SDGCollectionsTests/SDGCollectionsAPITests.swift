@@ -270,7 +270,7 @@ class SDGCollectionsAPITests : TestCase {
         XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(LiteralPattern([1]), count: countableRange))?.range, [1, 1, 1].bounds)
         XCTAssertEqual([1, 1, 1].firstMatch(
             for: RepetitionPattern([1], count: countableRange))?.range, [1, 1, 1].bounds)
-        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(ConditionalPattern({ $0 == 1 }), count: countableRange))?.range, [1, 1, 1].bounds)
+        XCTAssertEqual([1, 1, 1].firstMatch(for: RepetitionPattern(PatternWrapper(ConditionalPattern({ $0 == 1 })), count: countableRange))?.range, [1, 1, 1].bounds)
 
         XCTAssertNil([1].firstMatch(for: RepetitionPattern([1], count: 2 ... 4, consumption: .lazy)))
 
@@ -327,7 +327,7 @@ class SDGCollectionsAPITests : TestCase {
         _ = endString.scalars.groupedDifferences(from: start)
         _ = AnyCollection(Set(startString)).groupedDifferences(from: AnyCollection(Set(startString)))
 
-        XCTAssertNil("...".scalars.firstMatch(for: NotPattern(ConditionalPattern({ $0 == "." }))))
+        XCTAssertNil("...".scalars.firstMatch(for: NotPattern(PatternWrapper(ConditionalPattern({ $0 == "." })))))
         XCTAssertNil("...".scalars[...].lastMatch(for: ConditionalPattern({ $0 ≠ "." })))
         XCTAssertNil("...".scalars[...].firstMatch(for: ConditionalPattern({ $0 ≠ "." })))
         XCTAssert("...".scalars[...].matches(for: ConditionalPattern({ $0 ≠ "." })).isEmpty)
@@ -360,7 +360,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testConditionalPattern() {
-        testPattern(ConditionalPattern({ $0 < 10 }), match: [0])
+        testPattern(PatternWrapper(ConditionalPattern({ $0 < 10 })), match: [0])
         XCTAssert(ConditionalPattern({ $0 < 10 }).matches(in: [11], at: 0).isEmpty)
     }
 

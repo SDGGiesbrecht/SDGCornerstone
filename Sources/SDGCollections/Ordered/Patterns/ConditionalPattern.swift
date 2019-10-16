@@ -15,7 +15,7 @@
 import SDGLogic
 
 /// A pattern that matches based on a condition.
-public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
+public struct ConditionalPattern<Element : Equatable> : PatternProtocol {
 
     // MARK: - Initialization
 
@@ -33,7 +33,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
 
     // MARK: - Pattern
 
-    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         if location ≠ collection.endIndex,
             condition(collection[location]) {
@@ -43,7 +43,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
         }
     }
 
-    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         if location ≠ collection.endIndex,
             condition(collection[location]) {
@@ -53,7 +53,7 @@ public final class ConditionalPattern<Element : Equatable> : Pattern<Element> {
         }
     }
 
-    @inlinable public override func reversed() -> ConditionalPattern<Element> {
+    @inlinable public func reversed() -> ConditionalPattern<Element> {
         return self
     }
 }
