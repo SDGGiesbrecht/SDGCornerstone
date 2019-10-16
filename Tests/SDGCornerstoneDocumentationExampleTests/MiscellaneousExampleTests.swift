@@ -78,7 +78,7 @@ class MiscellaneousExampleTests : TestCase {
 
         // @example(lastMatchBackwardsDifferences2)
         let collection = [0, 0, 1]
-        let pattern = RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy) + LiteralPattern([1])
+        let pattern = RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy) + [1]
 
         XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
         // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
@@ -206,9 +206,9 @@ class MiscellaneousExampleTests : TestCase {
     func testPatternSwitch() {
         // @example(patternSwitch)
         switch "This is a string." {
-        case RepetitionPattern(LiteralPattern(".")):
+        case RepetitionPattern(PatternWrapper(".")):
             XCTFail("This case does not match.")
-        case RepetitionPattern(NotPattern(LiteralPattern("."))) + LiteralPattern("."):
+        case RepetitionPattern(NotPattern(PatternWrapper("."))) + ".":
             print("This case does match.")
         default:
             XCTFail("This case is never reached.")

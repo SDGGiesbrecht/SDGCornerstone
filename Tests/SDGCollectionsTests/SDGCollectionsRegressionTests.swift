@@ -23,7 +23,7 @@ class SDGCollectionsRegressionTests : TestCase {
     func testBoundedRepetitionPatternSearch() {
         // Untracked
 
-        XCTAssertEqual([1, 1, 1][1 ..< 2].matches(for: RepetitionPattern(LiteralPattern([1]))).map({ $0.range }), [1 ..< 2])
+        XCTAssertEqual([1, 1, 1][1 ..< 2].matches(for: RepetitionPattern(PatternWrapper([1]))).map({ $0.range }), [1 ..< 2])
     }
 
     func testTrailingConditionSearch() {

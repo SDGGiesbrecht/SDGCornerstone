@@ -12,14 +12,17 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
+
 #warning("Not permanent.")
-public final class PatternWrapper<Element> : Pattern<Element> where Element : Equatable {
+public final class PatternWrapper<Element> : Pattern<Element>, TransparentWrapper where Element : Equatable {
 
     // MARK: - Initialization
 
     public init<P>(_ pattern: P) where P : PatternProtocol, P.Element == Element {
         matches = { pattern.matches(in: $0, at: $1) }
         primaryMatch = { pattern.primaryMatch(in: $0, at: $1) }
+        wrappedInstance = pattern
         reversedPattern = Pattern<Element>()
         super.init()
         reversedPattern = PatternWrapper(pattern.reversed(), reversed: self)
@@ -28,6 +31,7 @@ public final class PatternWrapper<Element> : Pattern<Element> where Element : Eq
     public init<P>(_ pattern: P, reversed: Pattern<Element>) where P : PatternProtocol, P.Element == Element {
         matches = { pattern.matches(in: $0, at: $1) }
         primaryMatch = { pattern.primaryMatch(in: $0, at: $1) }
+        wrappedInstance = pattern
         reversedPattern = reversed
     }
 
@@ -56,4 +60,8 @@ public final class PatternWrapper<Element> : Pattern<Element> where Element : Eq
     @inlinable public override func reversed() -> Pattern<Element> {
         return reversedPattern
     }
+
+    // MARK: - TransparentWrapper
+
+    public let wrappedInstance: Any
 }

@@ -71,30 +71,8 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - pattern: The pattern to repeat.
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
-    @inlinable public convenience init(_ pattern: LiteralPattern<Element>, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) {
-        self.init(abstractPattern: pattern, count: count, consumption: consumption)
-    }
-
-    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
-    /// Creates a repetition pattern from another pattern.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to repeat.
-    ///     - count: A range representing the allowed number of repetitions.
-    ///     - consumption: The desired consumption behaviour.
-    @inlinable public convenience init(_ pattern: LiteralPattern<Element>, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) {
-        self.init(abstractPattern: pattern, count: RepetitionPattern.convert(count), consumption: consumption)
-    }
-
-    // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
-    /// Creates a repetition pattern from another pattern.
-    ///
-    /// - Parameters:
-    ///     - pattern: The pattern to repeat.
-    ///     - count: A range representing the allowed number of repetitions.
-    ///     - consumption: The desired consumption behaviour.
     @inlinable public convenience init<C : SearchableCollection>(_ pattern: C, count: CountableRange<Int>? = nil, consumption: Consumption = .greedy) where C.Element == Element {
-        self.init(abstractPattern: LiteralPattern(pattern), count: count, consumption: consumption)
+        self.init(abstractPattern: PatternWrapper(pattern), count: count, consumption: consumption)
     }
 
     // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
@@ -105,7 +83,7 @@ public final class RepetitionPattern<Element : Equatable> : Pattern<Element> {
     ///     - count: A range representing the allowed number of repetitions.
     ///     - consumption: The desired consumption behaviour.
     @inlinable public convenience init<C : SearchableCollection>(_ pattern: C, count: CountableClosedRange<Int>?, consumption: Consumption = .greedy) where C.Element == Element {
-        self.init(abstractPattern: LiteralPattern(pattern), count: RepetitionPattern.convert(count), consumption: consumption)
+        self.init(abstractPattern: PatternWrapper(pattern), count: RepetitionPattern.convert(count), consumption: consumption)
     }
 
     // MARK: - Properties

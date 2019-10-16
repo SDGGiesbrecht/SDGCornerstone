@@ -52,10 +52,10 @@ class SDGPersistenceAPITests : TestCase {
                 for: "Cache".scalars ∨ "cache".scalars))
             XCTAssertNotNil(
                 temporaryDirectory.appendingPathComponent(path).absoluteString.scalars.firstMatch(
-                    for: LiteralPattern("Temp".scalars)
-                        ∨ LiteralPattern("temp".scalars)
-                        ∨ LiteralPattern("tmp".scalars)
-                        ∨ LiteralPattern("Being%20Saved%20By".scalars)))
+                    for: "Temp".scalars
+                        ∨ "temp".scalars
+                        ∨ "tmp".scalars
+                        ∨ "Being%20Saved%20By".scalars))
 
             let directoryName = "Directory"
             let directory = temporaryDirectory.appendingPathComponent(directoryName)
