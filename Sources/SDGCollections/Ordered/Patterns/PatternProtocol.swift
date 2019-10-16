@@ -54,6 +54,7 @@ extension PatternProtocol {
 
     // MARK: - Composition
 
+    #warning("Better operators?")
     /// Combines two patterns into a single pattern by concatenating them.
     ///
     /// See the `CompositePattern` type for details.

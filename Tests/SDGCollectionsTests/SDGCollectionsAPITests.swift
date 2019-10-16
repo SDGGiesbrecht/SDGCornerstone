@@ -759,7 +759,7 @@ class SDGCollectionsAPITests : TestCase {
     }
 
     func testRepetitionPattern() {
-        testPattern(RepetitionPattern(PatternWrapper([1, 2, 3])), match: [1, 2, 3, 1, 2, 3])
+        testPattern(PatternWrapper(RepetitionPattern([1, 2, 3])), match: [1, 2, 3, 1, 2, 3])
     }
 
     func testSet() {
