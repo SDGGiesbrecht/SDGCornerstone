@@ -14,7 +14,6 @@
 
 import SDGControlFlow
 
-#warning("Needs N‐ary.")
 /// A pattern that matches against a pair of alternative patterns.
 ///
 /// The order of the alternatives is significant. If both alternatives match, preference will be given to the first one.
