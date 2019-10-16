@@ -579,12 +579,14 @@ class SDGCollectionsAPITests : TestCase {
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "¬1", overwriteSpecificationInsteadOfFailing: false)
     }
 
-    class CustomPattern : SDGCollections.Pattern<Int> {
+    struct CustomPattern : PatternProtocol {
         let pattern = [1]
-        override func matches<C>(in collection: C, at location: C.Index) -> [Range<C.Index>] where Int == C.Element, C : SearchableCollection {
+        typealias Element = Int
+        func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>]
+            where C.Element == Element {
             return pattern.matches(in: collection, at: location)
         }
-        override func reversed() -> CustomPattern {
+        func reversed() -> CustomPattern {
             return self
         }
     }

@@ -52,6 +52,10 @@ public protocol PatternProtocol {
 
 extension PatternProtocol {
 
+    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+        return matches(in: collection, at: location).first
+    }
+
     // MARK: - Composition
 
     #warning("Better operators?")

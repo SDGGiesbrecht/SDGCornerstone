@@ -15,7 +15,7 @@
 import SDGControlFlow
 
 #warning("Not permanent.")
-public final class PatternWrapper<Element> : Pattern<Element>, TransparentWrapper where Element : Equatable {
+public struct PatternWrapper<Element> : PatternProtocol, TransparentWrapper where Element : Equatable {
 
     // MARK: - Initialization
 
@@ -23,42 +23,33 @@ public final class PatternWrapper<Element> : Pattern<Element>, TransparentWrappe
         matches = { pattern.matches(in: $0, at: $1) }
         primaryMatch = { pattern.primaryMatch(in: $0, at: $1) }
         wrappedInstance = pattern
-        reversedPattern = Pattern<Element>()
-        super.init()
-        reversedPattern = PatternWrapper(pattern.reversed(), reversed: self)
-    }
-
-    public init<P>(_ pattern: P, reversed: Pattern<Element>) where P : PatternProtocol, P.Element == Element {
-        matches = { pattern.matches(in: $0, at: $1) }
-        primaryMatch = { pattern.primaryMatch(in: $0, at: $1) }
-        wrappedInstance = pattern
-        reversedPattern = reversed
+        reversedPattern = { PatternWrapper(pattern.reversed()) }
     }
 
     // MARK: - Properties
 
     @usableFromInline internal let matches: ([Element], Int) -> [Range<Int>]
     @usableFromInline internal let primaryMatch: ([Element], Int) -> Range<Int>?
-    @usableFromInline internal var reversedPattern: Pattern<Element>
+    @usableFromInline internal let reversedPattern: () -> PatternWrapper<Element>
 
     // MARK: - Pattern
 
-    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
         let array = Array(collection)
         let offset = collection.distance(from: collection.startIndex, to: location)
         let result = matches(array, offset)
         return result.map { $0.map({ collection.index(collection.startIndex, offsetBy: $0) }) }
     }
 
-    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
         let array = Array(collection)
         let offset = collection.distance(from: collection.startIndex, to: location)
         let result = primaryMatch(array, offset)
         return result.map { $0.map({ collection.index(collection.startIndex, offsetBy: $0) }) }
     }
 
-    @inlinable public override func reversed() -> Pattern<Element> {
-        return reversedPattern
+    @inlinable public func reversed() -> PatternWrapper<Element> {
+        return reversedPattern()
     }
 
     // MARK: - TransparentWrapper
