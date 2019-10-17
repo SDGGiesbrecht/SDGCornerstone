@@ -34,25 +34,59 @@ public struct AnyPattern<Element> : Pattern, TransparentWrapper where Element : 
 
     // MARK: - Properties
 
-    @usableFromInline internal let matches: ([Element], Int) -> [Range<Int>]
-    @usableFromInline internal let primaryMatch: ([Element], Int) -> Range<Int>?
+    @usableFromInline internal let matches: (AnyCollection<Element>, AnyIndex) -> [Range<AnyIndex>]
+    @usableFromInline internal let primaryMatch: (AnyCollection<Element>, AnyIndex) -> Range<AnyIndex>?
     @usableFromInline internal let reversedPattern: () -> AnyPattern<Element>
 
     // MARK: - Pattern
 
+    @inlinable internal func extract<C>(
+        index anyIndex: AnyIndex,
+        relativeTo equivalentIndices: (any: AnyIndex, concrete: C.Index),
+        in anyCollection: AnyCollection<Element>,
+        for collection: C) -> C.Index where C : SearchableCollection {
+        let offset = anyCollection.distance(from: equivalentIndices.any, to: anyIndex)
+        return collection.index(equivalentIndices.concrete, offsetBy: offset)
+    }
+
+    @inlinable internal func extract<C>(
+        range anyRange: Range<AnyIndex>,
+        relativeTo equivalentIndices: (any: AnyIndex, concrete: C.Index),
+        in anyCollection: AnyCollection<Element>,
+        for collection: C) -> Range<C.Index> where C : SearchableCollection {
+        return anyRange.map { anyIndex in
+            return extract(
+                index: anyIndex,
+                relativeTo: equivalentIndices,
+                in: anyCollection,
+                for: collection)
+        }
+    }
+
     @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
-        #warning("Can this be made more efficient?")
-        let array = Array(collection)
-        let offset = collection.distance(from: collection.startIndex, to: location)
-        let result = matches(array, offset)
-        return result.map { $0.map({ collection.index(collection.startIndex, offsetBy: $0) }) }
+        let anyCollection = AnyCollection(collection)
+        let anyLocation = AnyIndex(location)
+        let anyResult = matches(anyCollection, anyLocation)
+        return anyResult.map { anyRange in
+            return extract(
+                range: anyRange,
+                relativeTo: (anyLocation, location),
+                in: anyCollection,
+                for: collection)
+        }
     }
 
     @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-        let array = Array(collection)
-        let offset = collection.distance(from: collection.startIndex, to: location)
-        let result = primaryMatch(array, offset)
-        return result.map { $0.map({ collection.index(collection.startIndex, offsetBy: $0) }) }
+        let anyCollection = AnyCollection(collection)
+        let anyLocation = AnyIndex(location)
+        let anyResult = primaryMatch(anyCollection, anyLocation)
+        return anyResult.map { anyRange in
+            return extract(
+                range: anyRange,
+                relativeTo: (anyLocation, location),
+                in: anyCollection,
+                for: collection)
+        }
     }
 
     @inlinable public func reversed() -> AnyPattern<Element> {
