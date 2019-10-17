@@ -42,17 +42,6 @@ where ComponentPattern : Pattern {
 
     public typealias Element = ComponentPattern.Element
 
-    @inlinable internal func advance<P, C>(
-        ends endIndices: inout [C.Index],
-        for pattern: P,
-        in collection: C)
-        where P : Pattern, C : SearchableCollection, C.Element == Element, P.Element == Element {
-        endIndices = endIndices
-            .lazy.map({ pattern.matches(in: collection, at: $0) })
-            .joined()
-            .map({ $0.upperBound })
-    }
-
     @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
@@ -62,7 +51,7 @@ where ComponentPattern : Pattern {
                 return []
             } else {
                 // Continue
-                advance(ends: &endIndices, for: component, in: collection)
+                ConcatenationPatterning.advance(ends: &endIndices, for: component, in: collection)
             }
         }
 
@@ -78,7 +67,7 @@ where ComponentPattern : Pattern {
                 return nil
             } else {
                 // Continue
-                advance(ends: &endIndices, for: component, in: collection)
+                ConcatenationPatterning.advance(ends: &endIndices, for: component, in: collection)
             }
         }
 
