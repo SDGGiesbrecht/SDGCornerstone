@@ -12,13 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+import struct Foundation.CharacterSet
 
 import SDGLogic
 import SDGCollections
 
 /// A pattern representing any newline variant.
-public struct NewlinePattern : SDGCollections.Pattern {
+public struct NewlinePattern : Pattern {
 
     // MARK: - Static Properties
 

@@ -19,6 +19,7 @@ import SDGControlFlow
 /// The precise behaviour of `+` depends on the conforming type. It may be arithmetic addition, string concatenation, etc.
 public protocol Addable {
 
+    // @documentation(Addable.+)
     /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
