@@ -21,7 +21,7 @@ where Base : Pattern {
     // MARK: - Initialization
 
     // @documentation(SDGCornerstone.Not.init(_:))
-    /// Creates a not pattern from another pattern.
+    /// Creates a negated pattern from another pattern.
     ///
     /// - Parameters:
     ///     - pattern: The underlying pattern to negate.
