@@ -55,7 +55,6 @@ extension Pattern {
 
     // MARK: - Composition
 
-    #warning("Better operators?")
     /// Combines two patterns into a single pattern by concatenating them.
     ///
     /// See the `ConcatenatedPatterns` type for details.
