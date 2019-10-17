@@ -30,10 +30,40 @@ class SDGCollectionsAPITests : TestCase {
         testCustomStringConvertibleConformance(of: (1 ... 10)′, localizations: InterfaceLocalization.self, uniqueTestName: "(0–10)′", overwriteSpecificationInsteadOfFailing: false)
     }
 
+    struct AddablePattern : Addable, SDGCollections.Pattern {
+        static func += (precedingValue: inout AddablePattern, followingValue: AddablePattern) {}
+        typealias Element = Int
+        typealias Reversed = AddablePattern
+        func matches<C>(in collection: C, at location: C.Index) -> [Range<C.Index>]
+            where C : SearchableCollection, C.Element == Element {
+            return []
+        }
+        func reversed() -> SDGCollectionsAPITests.AddablePattern {
+            return self
+        }
+    }
+    func testAddable() {
+        _ = AddablePattern() + AddablePattern()
+    }
+
     func testAlternativePatterns() {
         let pattern = [1, 2, 3] ∨ [3, 2, 1]
         testPattern(pattern, match: [1, 2, 3])
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "123 ∨ 321", overwriteSpecificationInsteadOfFailing: false)
+
+        let naryPattern = NaryAlternativePatterns([[1, 2, 3], [3, 2, 1], [9, 8, 7]])
+        testPattern(naryPattern, match: [1, 2, 3])
+        testCustomStringConvertibleConformance(
+            of: naryPattern,
+            localizations: InterfaceLocalization.self,
+            uniqueTestName: "123 ∨ 321 ∨ 987",
+            overwriteSpecificationInsteadOfFailing: false)
+        XCTAssertNil([1, 2].firstMatch(for: naryPattern))
+    }
+
+    func testAnyPattern() {
+        let pattern = AnyPattern([1, 2, 3])
+        testPattern(pattern, match: [1, 2, 3])
     }
 
     func testArray() {
@@ -360,6 +390,16 @@ class SDGCollectionsAPITests : TestCase {
         let pattern: ConcatenatedPatterns<[Int], [Int]> = [1, 2] + [3]
         testPattern(pattern, match: [1, 2, 3])
         testCustomStringConvertibleConformance(of: pattern, localizations: InterfaceLocalization.self, uniqueTestName: "12 + 3", overwriteSpecificationInsteadOfFailing: false)
+
+        let naryPattern: NaryConcatenatedPatterns<[Int]> = [[1, 2], [3], [4, 5]]
+        testPattern(naryPattern, match: [1, 2, 3, 4, 5])
+        testCustomStringConvertibleConformance(
+            of: naryPattern,
+            localizations: InterfaceLocalization.self,
+            uniqueTestName: "12 + 3 + 45",
+            overwriteSpecificationInsteadOfFailing: false)
+        XCTAssertNil([1, 2, 4, 5].firstMatch(for: naryPattern))
+        XCTAssertNil([1, 2, 4, 5].firstMatch(for: NaryConcatenatedPatterns([naryPattern])))
     }
 
     func testConditionalPattern() {

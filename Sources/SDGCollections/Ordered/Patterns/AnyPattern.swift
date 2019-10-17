@@ -41,6 +41,7 @@ public struct AnyPattern<Element> : Pattern, TransparentWrapper where Element : 
     // MARK: - Pattern
 
     @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+        #warning("Can this be made more efficient?")
         let array = Array(collection)
         let offset = collection.distance(from: collection.startIndex, to: location)
         let result = matches(array, offset)
