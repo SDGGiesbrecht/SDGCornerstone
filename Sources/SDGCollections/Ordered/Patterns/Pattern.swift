@@ -98,12 +98,9 @@ extension Pattern {
     ///
     /// ```swift
     /// switch "This is a string." {
-    /// case RepetitionPattern(LiteralPattern(".")):
+    /// case RepetitionPattern("."):
     ///     XCTFail("This case does not match.")
-    /// case CompositePattern([
-    ///     RepetitionPattern(NotPattern(LiteralPattern("."))),
-    ///     LiteralPattern(".")
-    ///     ]):
+    /// case RepetitionPattern(¬".") + ".":
     ///     print("This case does match.")
     /// default:
     ///     XCTFail("This case is never reached.")

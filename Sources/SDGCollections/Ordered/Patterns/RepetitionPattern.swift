@@ -70,13 +70,15 @@ public struct RepetitionPattern<Base> : Pattern where Base : Pattern {
     public typealias Element = Base.Element
 
     @inlinable internal func checkNext<C : SearchableCollection>(in collection: C, at locations: inout [C.Index])  where C.Element == Element {
-        locations = Array(locations.map({ (location: C.Index) -> [Range<C.Index>] in
+        var result: [C.Index] = []
+        for location in locations {
             if location ≠ collection.endIndex {
-                return pattern.matches(in: collection, at: location)
-            } else {
-                return []
+                for new in pattern.matches(in: collection, at: location) {
+                    result.append(new.upperBound)
+                }
             }
-        }).joined().map({ $0.upperBound }))
+        }
+        locations = result
     }
 
     @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {

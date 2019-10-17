@@ -37,7 +37,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    /// let pattern = RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy) + [1]
     ///
     /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
     /// // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
@@ -66,7 +66,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    /// let pattern = RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy) + [1]
     ///
     /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
     /// // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
