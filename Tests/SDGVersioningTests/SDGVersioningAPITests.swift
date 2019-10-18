@@ -36,7 +36,10 @@ class SDGVersioningAPITests : TestCase {
         XCTAssertNil(Version(String("1.0.A")))
         XCTAssertNil(Version(String("1.A")))
         XCTAssertNil(Version(String("A")))
+        XCTAssertEqual(Version(1, 0, 0).compatibleVersions.upperBound, Version(2, 0, 0))
         XCTAssertEqual(Version(0, 1, 0).compatibleVersions.upperBound, Version(0, 2, 0))
         XCTAssertEqual(Version(1, 0, 0), "1.0.0")
+        XCTAssertEqual(Version(1, 0, 0).string(droppingEmptyPatch: true), "1.0")
+        XCTAssertEqual(Version(1, 2, 3).string(droppingEmptyPatch: true), "1.2.3")
     }
 }
