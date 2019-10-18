@@ -144,7 +144,7 @@ Simply add SDGCornerstone as a dependency in `Package.swift` and specify which o
 let package = Package(
     name: "MyPackage",
     dependencies: [
-        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", from: Version(2, 6, 0)),
+        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", from: Version(3, 0, 0)),
     ],
     targets: [
         .target(name: "MyTarget", dependencies: [
