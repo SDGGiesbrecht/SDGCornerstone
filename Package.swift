@@ -219,6 +219,10 @@ let package = Package(
         /// Tools for running external processes and shell commands.
         .library(name: "SDGExternalProcess", targets: ["SDGExternalProcess"]),
 
+        // #documentation(SDGVersioning)
+        /// Utilities for working with semantic versions.
+        .library(name: "SDGVersioning", targets: ["SDGVersioning"]),
+
         // #documentation(SDGTesting)
         /// Miscellaneous test utilities.
         .library(name: "SDGTesting", targets: ["SDGTesting"]),
@@ -408,6 +412,17 @@ let package = Package(
             "SDGLocalization"
             ]),
 
+        // @documentation(SDGVersioning)
+        /// Utilities for working with semantic versions.
+        .target(name: "SDGVersioning", dependencies: [
+            "SDGControlFlow",
+            "SDGLogic",
+            "SDGCollections",
+            "SDGText",
+            "SDGLocalization",
+            "SDGCornerstoneLocalizations"
+        ]),
+
         // @documentation(SDGTesting)
         /// Miscellaneous test utilities.
         .target(name: "SDGTesting", dependencies: [
@@ -545,6 +560,11 @@ let package = Package(
         .testTarget(name: "SDGExternalProcessTests", dependencies: [
             "SDGExternalProcess", "SDGTesting", "SDGXCTestUtilities",
             "SDGLogic"
+            ]),
+        .testTarget(name: "SDGVersioningTests", dependencies: [
+            "SDGVersioning", "SDGTesting", "SDGXCTestUtilities",
+            "SDGCornerstoneLocalizations",
+            "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGCornerstoneDocumentationExampleTests", dependencies: [
             "SDGControlFlow",
