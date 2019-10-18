@@ -170,6 +170,7 @@ let package = Package(
             .productItem(name: "SDGPrecisionMathematics", package: "SDGCornerstone"),
             .productItem(name: "SDGConcurrency", package: "SDGCornerstone"),
             .productItem(name: "SDGExternalProcess", package: "SDGCornerstone"),
+            .productItem(name: "SDGVersioning", package: "SDGCornerstone"),
             .productItem(name: "SDGTesting", package: "SDGCornerstone"),
             .productItem(name: "SDGXCTestUtilities", package: "SDGCornerstone"),
         ])
@@ -202,6 +203,7 @@ import SDGCalendar
 import SDGPrecisionMathematics
 import SDGConcurrency
 import SDGExternalProcess
+import SDGVersioning
 import SDGTesting
 import SDGXCTestUtilities
 ```

@@ -16,6 +16,7 @@ import SDGPersistenceTests
 import SDGPrecisionMathematicsTests
 import SDGRandomizationTests
 import SDGTextTests
+import SDGVersioningTests
 
 var tests = [XCTestCaseEntry]()
 tests += SDGBinaryDataTests.__allTests()
@@ -34,5 +35,6 @@ tests += SDGPersistenceTests.__allTests()
 tests += SDGPrecisionMathematicsTests.__allTests()
 tests += SDGRandomizationTests.__allTests()
 tests += SDGTextTests.__allTests()
+tests += SDGVersioningTests.__allTests()
 
 XCTMain(tests)
