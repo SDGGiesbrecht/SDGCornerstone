@@ -19,9 +19,9 @@ extension Array : ArrayFamily {}
 extension ArraySlice : ArrayFamily {}
 extension ContiguousArray : ArrayFamily {}
 
-extension Array : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
-extension ArraySlice : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
-extension ContiguousArray : PatternProtocol, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
+extension Array : Pattern, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
+extension ArraySlice : Pattern, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
+extension ContiguousArray : Pattern, SearchableBidirectionalCollection, SearchableCollection where Element : Equatable {}
 
 extension ArrayFamily where Element : RangeReplaceableCollection {
 

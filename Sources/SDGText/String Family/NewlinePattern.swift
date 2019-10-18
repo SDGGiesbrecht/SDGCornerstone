@@ -12,13 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+import struct Foundation.CharacterSet
 
 import SDGLogic
 import SDGCollections
 
 /// A pattern representing any newline variant.
-public final class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
+public struct NewlinePattern : Pattern {
 
     // MARK: - Static Properties
 
@@ -26,11 +26,10 @@ public final class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
     private static let lineFeed: Unicode.Scalar = "\u{A}"
     @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
     internal static let newline = NewlinePattern(carriageReturnLineFeed: (carriageReturn, lineFeed))
-    @usableFromInline internal static let reverseNewline = NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
 
     // MARK: - Initialization
 
-    private init(carriageReturnLineFeed: (Unicode.Scalar, Unicode.Scalar)) {
+    @usableFromInline internal init(carriageReturnLineFeed: (Unicode.Scalar, Unicode.Scalar)) {
         carriageReturn = carriageReturnLineFeed.0
         lineFeed = carriageReturnLineFeed.1
     }
@@ -42,7 +41,9 @@ public final class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
 
     // MARK: - Pattern
 
-    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
+    public typealias Element = Unicode.Scalar
+
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
         guard scalar ∈ NewlinePattern.newlineCharacters else {
@@ -60,7 +61,7 @@ public final class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
         return result
     }
 
-    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
+    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
 
         let scalar = collection[location]
         guard scalar ∈ NewlinePattern.newlineCharacters else {
@@ -77,7 +78,7 @@ public final class NewlinePattern : SDGCollections.Pattern<Unicode.Scalar> {
         return (location ... location).relative(to: collection)
     }
 
-    @inlinable public override func reversed() -> NewlinePattern {
-        return NewlinePattern.reverseNewline
+    @inlinable public func reversed() -> NewlinePattern {
+        return NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
     }
 }

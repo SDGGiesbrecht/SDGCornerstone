@@ -1,10 +1,10 @@
 /*
- CompositePattern.swift
+ NaryConcatenatedPatterns.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2017–2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -15,7 +15,8 @@
 import SDGControlFlow
 
 /// A pattern that matches against several component patterns contiguously.
-public final class CompositePattern<Element : Equatable> : Pattern<Element>, CustomStringConvertible, ExpressibleByArrayLiteral, TextualPlaygroundDisplay {
+public struct NaryConcatenatedPatterns<ComponentPattern> : Pattern, CustomStringConvertible, ExpressibleByArrayLiteral, TextualPlaygroundDisplay
+where ComponentPattern : Pattern {
 
     // MARK: - Initialization
 
@@ -23,23 +24,25 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
     ///
     /// - Parameters:
     ///     - components: The component patterns.
-    @inlinable public  init(_ components: [Pattern<Element>]) {
+    @inlinable public init(_ components: [ComponentPattern]) {
         self.components = components
     }
 
     // MARK: - Properties
 
-    @usableFromInline internal var components: [Pattern<Element>]
+    @usableFromInline internal var components: [ComponentPattern]
 
     // MARK: - ExpressibleByArrayLiteral
 
-    @inlinable public convenience init(arrayLiteral: Pattern<Element>...) {
+    @inlinable public init(arrayLiteral: ComponentPattern...) {
         self.init(arrayLiteral)
     }
 
     // MARK: - Pattern
 
-    @inlinable public override func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+    public typealias Element = ComponentPattern.Element
+
+    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
         for component in components {
@@ -48,14 +51,14 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
                 return []
             } else {
                 // Continue
-                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
+                ConcatenationPatterning.advance(ends: &endIndices, for: component, in: collection)
             }
         }
 
         return endIndices.map { location ..< $0 }
     }
 
-    @inlinable public override func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
+    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
         var endIndices: [C.Index] = [location]
         for component in components {
@@ -64,15 +67,16 @@ public final class CompositePattern<Element : Equatable> : Pattern<Element>, Cus
                 return nil
             } else {
                 // Continue
-                endIndices = endIndices.map({ component.matches(in: collection, at: $0) }).joined().map({ $0.upperBound })
+                ConcatenationPatterning.advance(ends: &endIndices, for: component, in: collection)
             }
         }
 
         return endIndices.first.map { location ..< $0 }
     }
 
-    @inlinable public override func reversed() -> CompositePattern<Element> {
-        return CompositePattern(components.map({ $0.reversed() }).reversed())
+    @inlinable public func reversed() -> NaryConcatenatedPatterns<ComponentPattern.Reversed> {
+        return NaryConcatenatedPatterns<ComponentPattern.Reversed>(
+            components.lazy.map({ $0.reversed() }).reversed())
     }
 
     // MARK: - CustomStringConvertible

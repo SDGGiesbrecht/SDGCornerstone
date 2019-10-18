@@ -37,7 +37,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    /// let pattern = RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy) + [1]
     ///
     /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
     /// // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
@@ -48,7 +48,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to search for.
-    func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element
+    func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : Pattern, P.Element == Element
     // #documentation(SDGCornerstone.Collection.lastMatch(for:))
     /// Returns the last match for `pattern` in the collection.
     ///
@@ -66,7 +66,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///
     /// ```swift
     /// let collection = [0, 0, 1]
-    /// let pattern = CompositePattern([RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy), LiteralPattern([1])])
+    /// let pattern = RepetitionPattern([0], count: 1 ..< Int.max, consumption: .lazy) + [1]
     ///
     /// XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1 ..< 3)
     /// // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
@@ -84,7 +84,7 @@ where SubSequence : SearchableBidirectionalCollection {
     ///
     /// - Parameters:
     ///     - pattern: The pattern to try.
-    func hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element
+    func hasSuffix<P>(_ pattern: P) -> Bool where P : Pattern, P.Element == Element
     // #documentation(SDGCornerstone.Collection.hasSuffix(_:))
     /// Returns `true` if `self` begins with `pattern`.
     ///
@@ -133,31 +133,25 @@ where SubSequence : SearchableBidirectionalCollection {
 
 extension SearchableBidirectionalCollection {
 
-    @inlinable internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
+    @inlinable internal func _lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : Pattern, P.Element == Element {
         let backwards: ReversedCollection<Self> = reversed()
         guard let range = backwards.firstMatch(for: pattern.reversed())?.range else {
             return nil
         }
         return PatternMatch(range: forward(range), in: self)
     }
-    @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : PatternProtocol, P.Element == Element {
-        return _lastMatch(for: pattern)
-    }
-    @inlinable public func lastMatch(for pattern: CompositePattern<Element>) -> PatternMatch<Self>? {
+    @inlinable public func lastMatch<P>(for pattern: P) -> PatternMatch<Self>? where P : Pattern, P.Element == Element {
         return _lastMatch(for: pattern)
     }
     @inlinable public func lastMatch(for pattern: Self) -> PatternMatch<Self>? {
         return _lastMatch(for: pattern)
     }
 
-    @inlinable internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
+    @inlinable internal func _hasSuffix<P>(_ pattern: P) -> Bool where P : Pattern, P.Element == Element {
         let backwards: ReversedCollection<Self> = reversed()
         return pattern.reversed().primaryMatch(in: backwards, at: backwards.startIndex) ≠ nil
     }
-    @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool where P : PatternProtocol, P.Element == Element {
-        return _hasSuffix(pattern)
-    }
-    @inlinable public func hasSuffix(_ pattern: CompositePattern<Element>) -> Bool {
+    @inlinable public func hasSuffix<P>(_ pattern: P) -> Bool where P : Pattern, P.Element == Element {
         return _hasSuffix(pattern)
     }
     @inlinable public func hasSuffix(_ pattern: Self) -> Bool {

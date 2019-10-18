@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2016–2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2019 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -13,39 +13,26 @@
  */
 
 import SDGControlFlow
+import SDGMathematics
 
-/// A type that can be used with `+(_:_:)`.
-///
-/// The precise behaviour of `+` depends on the conforming type. It may be arithmetic addition, string concatenation, etc.
-public protocol Addable {
+extension Addable where Self : Pattern {
 
-    // @documentation(Addable.+)
+    // #documentation(Addable.+)
     /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
     ///
     /// - Parameters:
     ///     - precedingValue: The starting value.
     ///     - followingValue: The value to add.
-    static func + (precedingValue: Self, followingValue: Self) -> Self
-
-    /// Adds or concatenates the following value to the preceding value, or performs a similar operation implied by the “+” symbol. Exact behaviour depends on the type.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The value to add.
-    static func += (precedingValue: inout Self, followingValue: Self)
-}
-
-extension Addable {
-
     @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+        // Disambiguate Addable vs Pattern
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 }
 
-extension Addable where Self : Strideable, Self.Stride == Self {
+extension Addable where Self : RangeReplaceableCollection, Self : Pattern {
 
     @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
-        // Disambiguate Addable vs Strideable
+        // Disambiguate Addable vs RangeReplaceableCollection vs Pattern
         return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 }

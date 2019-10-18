@@ -1,5 +1,5 @@
 /*
- ConditionalPattern.swift
+ NegatedPattern.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,31 +12,34 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogic
+import SDGControlFlow
 
-/// A pattern that matches based on a condition.
-public struct ConditionalPattern<Element : Equatable> : Pattern {
+/// A pattern that matches if the underlying pattern does not.
+public struct NegatedPattern<Base> : CustomStringConvertible, Pattern, TextualPlaygroundDisplay
+where Base : Pattern {
 
     // MARK: - Initialization
 
-    /// Creates an algorithmic pattern based on a condition.
+    // @documentation(SDGCornerstone.Not.init(_:))
+    /// Creates a negated pattern from another pattern.
     ///
     /// - Parameters:
-    ///     - condition: The condition an element must meet in order to match.
-    ///     - element: An element to check.
-    @inlinable public init(_ condition: @escaping (_ element: Element) -> Bool) {
-        self.condition = condition
+    ///     - pattern: The underlying pattern to negate.
+    @inlinable public init(_ pattern: Base) {
+        self.base = pattern
     }
+
     // MARK: - Properties
 
-    @usableFromInline internal var condition: (Element) -> Bool
+    @usableFromInline internal var base: Base
 
     // MARK: - Pattern
 
+    public typealias Element = Base.Element
+
     @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
 
-        if location ≠ collection.endIndex,
-            condition(collection[location]) {
+        if base.primaryMatch(in: collection, at: location) == nil {
             return [(location ... location).relative(to: collection)]
         } else {
             return []
@@ -45,15 +48,20 @@ public struct ConditionalPattern<Element : Equatable> : Pattern {
 
     @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
 
-        if location ≠ collection.endIndex,
-            condition(collection[location]) {
+        if base.primaryMatch(in: collection, at: location) == nil {
             return (location ... location).relative(to: collection)
         } else {
             return nil
         }
     }
 
-    @inlinable public func reversed() -> ConditionalPattern<Element> {
-        return self
+    @inlinable public func reversed() -> NegatedPattern<Base.Reversed> {
+        return NegatedPattern<Base.Reversed>(base.reversed())
+    }
+
+    // MARK: - CustomStringConvertible
+
+    public var description: String {
+        return "¬(" + String(describing: base) + ")"
     }
 }

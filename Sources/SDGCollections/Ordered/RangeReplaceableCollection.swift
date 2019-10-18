@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGMathematics
 
 extension RangeReplaceableCollection {
 
@@ -210,5 +211,19 @@ extension RangeReplaceableCollection {
     @inlinable public init(arrayLiteral: Element...) {
         self.init()
         append(contentsOf: arrayLiteral)
+    }
+}
+
+extension RangeReplaceableCollection where Self : Pattern {
+
+    // #documentation(Addable.+)
+    /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
+    ///
+    /// - Parameters:
+    ///     - precedingValue: The starting value.
+    ///     - followingValue: The value to add.
+    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+        // Disambiguate RangeReplaceableCollection vs Pattern
+        return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
     }
 }
