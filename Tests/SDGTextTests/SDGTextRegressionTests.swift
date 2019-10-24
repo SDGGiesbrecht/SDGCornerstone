@@ -13,6 +13,7 @@
  */
 
 import SDGLogic
+import SDGMathematics
 import SDGCollections
 import SDGText
 
@@ -72,15 +73,20 @@ class SDGTextRegressionTests : TestCase {
         #endif
         let markup = SemanticMarkup("...")
         for font in [
-            Font.system
+            Font.system,
+            Font.system.resized(to: Font.system.size ÷ 2)
             ] {
                 let attributedString = markup.richText(font: font)
                 let attribute = attributedString.attribute(.font, at: 0, effectiveRange: nil)
+                var originalName = font.fontName
+                if originalName == ".SFNSText" ∨ originalName == ".SFNS\u{2D}Regular" {
+                    originalName = ".AppleSystemUIFont"
+                }
                 var resultingName = (attribute as? NSFont)?.fontName
                 if resultingName == ".SFNSText" ∨ resultingName == ".SFNS\u{2D}Regular" {
                     resultingName = ".AppleSystemUIFont"
                 }
-                XCTAssertEqual(resultingName, font.fontName)
+                XCTAssertEqual(resultingName, originalName)
         }
         #endif
     }

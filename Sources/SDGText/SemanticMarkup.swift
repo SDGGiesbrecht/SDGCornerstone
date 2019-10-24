@@ -15,6 +15,7 @@
 import Foundation
 
 import SDGControlFlow
+import SDGLogic
 import SDGMathematics
 import SDGCollections
 
@@ -154,10 +155,11 @@ public struct SemanticMarkup : Addable, BidirectionalCollection, Collection, Dec
     public static func _attributedString(from html: String, in font: Font) throws -> NSAttributedString {
         var adjustedFontName = font.fontName
 
-        #if canImport(UIKit)
+        #if canImport(AppKit) || canImport(UIKit)
         if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) { // @exempt(from: unicode)
             // Older platforms do not support this CSS, but can use the name directly.
-            if adjustedFontName == Font.system.fontName {
+            if adjustedFontName == Font.system.fontName
+                ∨ adjustedFontName == Font.system.resized(to: font.size).fontName {
                 adjustedFontName = "\u{2D}apple\u{2D}system"
             }
         }
