@@ -74,7 +74,8 @@ class SDGTextRegressionTests : TestCase {
         let markup = SemanticMarkup("...")
         for font in [
             Font.system,
-            Font.system.resized(to: Font.system.size ÷ 2)
+            Font.system.resized(to: Font.system.size ÷ 2),
+            Font(NSFont(name: "Helvetica", size: 12)!)
             ] {
                 let attributedString = markup.richText(font: font)
                 let attribute = attributedString.attribute(.font, at: 0, effectiveRange: nil)
