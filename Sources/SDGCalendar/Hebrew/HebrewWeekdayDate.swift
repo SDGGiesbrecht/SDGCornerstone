@@ -72,12 +72,14 @@ internal struct HebrewWeekdayDate: DateDefinition {
   // MARK: - Decodable
 
   internal init(from decoder: Decoder) throws {
-    unreachable()  // This definition is only ever transiently created to determine the weekday of another date.
+    unreachable()
+    // This definition is only ever transiently created to determine the weekday of another date.
   }
 
   // MARK: - Encodable
 
   internal func encode(to encoder: Encoder) throws {
-    unreachable()  // This definition is only ever transiently created to determine the weekday of another date.
+    unreachable()
+    // This definition is only ever transiently created to determine the weekday of another date.
   }
 }

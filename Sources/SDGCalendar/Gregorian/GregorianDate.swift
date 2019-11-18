@@ -115,8 +115,9 @@ internal struct GregorianDate: DateDefinition, MarkupPlaygroundDisplay {
 
     let approxYears = Int(intervalSinceReferenceDate ÷ GregorianYear.meanDuration)
     let guessYear = GregorianDate.referenceYear + approxYears
-    let year = findLocalMinimum(near: guessYear) {
-      (year: GregorianYear) -> CalendarInterval<FloatMax> in
+    let year = findLocalMinimum(
+      near: guessYear
+    ) { (year: GregorianYear) -> CalendarInterval<FloatMax> in
       let interval = intervalSinceReferenceDate
         − GregorianDate.intervalFromReferenceDate(toStartOf: year)
       if interval.isNonNegative {

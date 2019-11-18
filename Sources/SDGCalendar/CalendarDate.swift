@@ -281,7 +281,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     return AnyDescribableDate(date)
   }
 
-  /// Returns date properties adjusted to mean solar time at the specified longitude. (Negative angles represent west.)
+  /// Returns date properties adjusted to mean solar time at the specified longitude, with negative angles representing west.
   ///
   /// - Parameters:
   ///     - longitude: The target longitude.

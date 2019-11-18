@@ -230,7 +230,9 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     self = predecessor(leapYear: leapYear)
   }
 
-  /// Returns the next month, wrapping if necessary. If wrapping occurs, `wrap` will be executed.
+  /// Returns the next month, wrapping if necessary.
+  ///
+  /// If wrapping occurs, `wrap` will be executed.
   ///
   /// - Parameters:
   ///     - leapYear: Whether or not the month is in a leap year.
@@ -244,7 +246,9 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     }
   }
 
-  /// Increments the month, wrapping if necessary. If wrapping occurs, `wrap` will be executed.
+  /// Increments the month, wrapping if necessary.
+  ///
+  /// If wrapping occurs, `wrap` will be executed.
   ///
   /// - Parameters:
   ///     - leapYear: Whether or not the month is in a leap year.
@@ -253,7 +257,9 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     self = cyclicSuccessor(leapYear: leapYear, wrap)
   }
 
-  /// Returns the previous month, wrapping if necessary. If wrapping occurs, `warp` will be executed.
+  /// Returns the previous month, wrapping if necessary.
+  ///
+  /// If wrapping occurs, `warp` will be executed.
   ///
   /// - Parameters:
   ///     - leapYear: Whether or not the month is in a leap year.
@@ -267,7 +273,9 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     }
   }
 
-  /// Decrements the month, wrapping if necessary. If wrapping occurs, `wrap` will be executed.
+  /// Decrements the month, wrapping if necessary.
+  ///
+  /// If wrapping occurs, `wrap` will be executed.
   ///
   /// - Parameters:
   ///     - leapYear: Whether or not the month is in a leap year.
@@ -278,7 +286,9 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
 
   // MARK: - Recurrence
 
-  /// Corrects the month for a normal or leap year. (For leap years: Adar → Adar II. For normal years: Adar I/Adar II → Adar)
+  /// Corrects the month for a normal or leap year.
+  ///
+  /// For leap years, Adar becomes Adar II. For normal years: Adar I and Adar II become Adar.
   ///
   /// - Parameters:
   ///     - leapYear: Whether or not the month is in a leap year.

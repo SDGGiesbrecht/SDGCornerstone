@@ -27,7 +27,9 @@ public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
 
   // MARK: - Recurrence
 
-  /// Corrects the day for the specified month and year, altering them if necessary. (February 29 → March 1 in non‐leap years.)
+  /// Corrects the day for the specified month and year, altering them if necessary.
+  ///
+  /// February 29 becomes March 1 in non‐leap years.
   ///
   /// - Parameters:
   ///     - month: The month.

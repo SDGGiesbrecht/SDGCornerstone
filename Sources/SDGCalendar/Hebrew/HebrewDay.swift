@@ -26,7 +26,9 @@ public struct HebrewDay: CodableViaRawRepresentableCalendarComponent,
 
   // MARK: - Recurrence
 
-  /// Corrects the day for the specified month and year, altering them if necessary. (If it doesn’t exist that year, Cheshvan 30 will be replaced by Kislev 1, etc.)
+  /// Corrects the day for the specified month and year, altering them if necessary.
+  ///
+  /// If it doesn’t exist that year, Cheshvan 30 will be replaced by Kislev 1, etc.
   ///
   /// - Parameters:
   ///     - month: The month to correct for.

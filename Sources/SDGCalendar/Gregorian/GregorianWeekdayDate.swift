@@ -82,12 +82,14 @@ internal struct GregorianWeekdayDate: DateDefinition {
   // MARK: - Decodable
 
   public init(from decoder: Decoder) throws {
-    unreachable()  // This definition is only ever transiently created to determine the weekday of another date.
+    unreachable()
+    // This definition is only ever transiently created to determine the weekday of another date.
   }
 
   // MARK: - Encodable
 
   public func encode(to encoder: Encoder) throws {
-    unreachable()  // This definition is only ever transiently created to determine the weekday of another date.
+    unreachable()
+    // This definition is only ever transiently created to determine the weekday of another date.
   }
 }

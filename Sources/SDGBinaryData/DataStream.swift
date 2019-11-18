@@ -62,22 +62,22 @@ public struct DataStream {
   ///
   /// If the final unit is incomplete, it will not be extracted and will remain in the buffer.
   public mutating func extractCompleteUnits() -> [Data] {
-    let endMarkerRanges = buffer.matches(for: DataStream.endData).filter {
-      (match: PatternMatch<Data>) -> Bool in
+    let endMarkerRanges = buffer.matches(for: DataStream.endData)
+      .filter { (match: PatternMatch<Data>) -> Bool in
 
-      // Count escapes.
-      var escapes = 0
-      for byte in buffer.prefix(upTo: match.range.lowerBound).reversed() {
-        if byte == DataStream.escapeMarker {
-          escapes += 1
-        } else {
-          break
+        // Count escapes.
+        var escapes = 0
+        for byte in buffer.prefix(upTo: match.range.lowerBound).reversed() {
+          if byte == DataStream.escapeMarker {
+            escapes += 1
+          } else {
+            break
+          }
         }
-      }
 
-      // An odd number of escapes means the last one affects the marker.
-      return ¬escapes.isOdd
-    }
+        // An odd number of escapes means the last one affects the marker.
+        return ¬escapes.isOdd
+      }
 
     let unitRanges = buffer.ranges(separatedBy: endMarkerRanges.map({ $0.range }))
 

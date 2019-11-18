@@ -250,7 +250,7 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
     var cache: [CollationCacheEntry<S>] = strings.map { string in
       return CollationCacheEntry(string: string, indices: self.indices(for: string))
     }
-    cache.sort() { $0.indices.lexicographicallyPrecedes($1.indices) }
+    cache.sort { $0.indices.lexicographicallyPrecedes($1.indices) }
     return cache.map { $0.string }
   }
 

@@ -183,8 +183,9 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
 
     let approxYears = Int(intervalSinceReferenceDate ÷ HebrewYear.meanDuration)
     let guessYear = HebrewDate.referenceYear + approxYears
-    let year = findLocalMinimum(near: guessYear) {
-      (year: HebrewYear) -> CalendarInterval<FloatMax> in
+    let year = findLocalMinimum(
+      near: guessYear
+    ) { (year: HebrewYear) -> CalendarInterval<FloatMax> in
       let interval = intervalSinceReferenceDate
         − HebrewDate.intervalFromReferenceDate(toStartOf: year)
       if interval ≥ (0 as FloatMax).hebrewParts {
