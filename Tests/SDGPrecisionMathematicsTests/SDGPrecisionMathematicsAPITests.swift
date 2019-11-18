@@ -36,7 +36,7 @@ class SDGPrecisionMathematicsAPITests: TestCase {
     XCTAssertEqual(Integer.random(in: 1...1), 1)
     XCTAssertEqual(Integer.random(in: −1...(−1)), −1)
 
-    let negativeMillion: SDGPrecisionMathematics.Integer = −1000000
+    let negativeMillion: SDGPrecisionMathematics.Integer = −1_000_000
     testCustomStringConvertibleConformance(
       of: negativeMillion,
       localizations: FormatLocalization.self,

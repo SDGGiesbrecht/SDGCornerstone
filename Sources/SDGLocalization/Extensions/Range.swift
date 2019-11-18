@@ -17,7 +17,7 @@ import SDGText
 
 extension RangeFamily {
 
-  /// Returns the range in inequality notation. (eg. “1 ≤ x ≤ 10”)
+  /// Returns the range in inequality notation, such as “1 ≤ x ≤ 10”.
   ///
   /// - Parameters:
   ///     - describe: A closure which provides the description of an individual bound.

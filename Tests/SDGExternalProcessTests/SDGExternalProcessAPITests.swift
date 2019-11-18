@@ -102,7 +102,7 @@ class SDGExternalProcessAPITests: TestCase {
           switch error {
           case .foundationError(let error):
             XCTFail(error.localizedDescription)
-          case .processError(code: _, output: let output):
+          case .processError(code: _, let output):
             XCTAssert(output.contains("not found"), "\(error)")
           }
         }

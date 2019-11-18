@@ -107,11 +107,11 @@ extension Pattern {
   /// ```swift
   /// switch "This is a string." {
   /// case RepetitionPattern("."):
-  ///     XCTFail("This case does not match.")
+  ///   XCTFail("This case does not match.")
   /// case RepetitionPattern(¬".") + ".":
-  ///     print("This case does match.")
+  ///   print("This case does match.")
   /// default:
-  ///     XCTFail("This case is never reached.")
+  ///   XCTFail("This case is never reached.")
   /// }
   /// ```
   ///

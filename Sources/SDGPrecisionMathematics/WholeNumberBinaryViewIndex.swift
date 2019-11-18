@@ -29,7 +29,10 @@ extension WholeNumber.BinaryView {
 
     // MARK: - Comparable
 
-    internal static func < (precedingValue: Index, followingValue: Index) -> Bool {  // @exempt(from: tests) Unreachable?
+    internal static func < (
+      precedingValue: Index,
+      followingValue: Index
+    ) -> Bool {  // @exempt(from: tests) Unreachable?
       return (precedingValue.digit, precedingValue.bit) < (followingValue.digit, followingValue.bit)
     }
 
@@ -58,7 +61,8 @@ extension WholeNumber.BinaryView {
       var digitDistance = precedingValue.digit − followingValue.digit
 
       let bitDistance: Int
-      if precedingValue.bit < followingValue.bit {  // Would be negative (invalid for whole number type).
+      if precedingValue.bit < followingValue.bit {
+        // Would be negative (invalid for whole number type).
         bitDistance = BinaryView<WholeNumber.Digit>.count − (
           followingValue.bit − precedingValue.bit
         )

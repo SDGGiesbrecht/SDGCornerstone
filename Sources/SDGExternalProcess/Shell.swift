@@ -57,7 +57,7 @@
 
     // MARK: - Initialization
 
-    /// Creates an instance with the
+    /// Creates a shell instance referring to the executable.
     ///
     /// - Parameters:
     ///     - executable: The location of the executable file.

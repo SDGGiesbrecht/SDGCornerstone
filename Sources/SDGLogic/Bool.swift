@@ -92,13 +92,13 @@ extension Bool: Comparable {
 }
 
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
-/// Wahr. (`true`)
+/// Wahr (`true`).
 @inlinable public var wahr: Bool {
   return true
 }
 
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
-/// Falsch. (`false`)
+/// Falsch (`false`).
 @inlinable public var falsch: Bool {
   return false
 }

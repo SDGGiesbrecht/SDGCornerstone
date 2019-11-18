@@ -159,7 +159,7 @@ extension FileManager {
         directory = anyVolume
       } else {
         // @exempt(from: tests)
-        if #available(macOS 10.12, iOS 10, watchOS 3, tvOS 10, *) {  // @exempt(from: tests) @exempt(from: unicode)
+        if #available(macOS 10.12, iOS 10, watchOS 3, tvOS 10, *) {  // @exempt(from: tests)
           directory = temporaryDirectory
         } else {  // @exempt(from: tests)
           directory = URL(fileURLWithPath: NSTemporaryDirectory())
@@ -226,19 +226,22 @@ extension FileManager {
         at: directory,
         includingPropertiesForKeys: [.isDirectoryKey],
         options: [],
-        errorHandler: { (_, error: Error) -> Bool in  // @exempt(from: tests) It is unknown what circumstances would actually cause an error.
+        errorHandler: { (_, error: Error) -> Bool in  // @exempt(from: tests)
+          // It is unknown what circumstances would actually cause an error.
           failureReason = error
           return false  // Stop.
         }
       )
-    else {  // @exempt(from: tests) It is unknown what circumstances would actually result in a `nil` enumerator being returned.
+    else {  // @exempt(from: tests)
+      // It is unknown what circumstances would actually result in a `nil` enumerator being returned.
       throw FileManager.unknownFileReadingError
     }
 
     var result: [URL] = []
     for object in enumerator {
       guard let url = object as? URL else {
-        throw FileManager.unknownFileReadingError  // @exempt(from: tests) It is unknown why something other than a URL would be returned.
+        throw FileManager.unknownFileReadingError  // @exempt(from: tests)
+        //It is unknown why something other than a URL would be returned.
       }
 
       var objCBool: ObjCBool = false
@@ -251,7 +254,8 @@ extension FileManager {
     }
 
     if let error = failureReason {
-      throw error  // @exempt(from: tests) It is unknown what circumstances would actually cause an error.
+      throw error  // @exempt(from: tests)
+      // It is unknown what circumstances would actually cause an error.
     }
 
     return result

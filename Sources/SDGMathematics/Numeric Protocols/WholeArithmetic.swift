@@ -384,12 +384,18 @@ extension WholeArithmetic {
   // MARK: - Numeric
 
   /// Multiplies two values and produces their product.
-  @inlinable public static func * (precedingValue: Self, followingValue: Self) -> Self {  // @exempt(from: unicode)
+  @inlinable public static func * (  // @exempt(from: unicode)
+    precedingValue: Self,
+    followingValue: Self
+  ) -> Self {
     return precedingValue × followingValue
   }
 
   /// Multiplies two values and stores the result in the left‐hand‐side variable.
-  @inlinable public static func *= (precedingValue: inout Self, followingValue: Self) {  // @exempt(from: unicode)
+  @inlinable public static func *= (  // @exempt(from: unicode)
+    precedingValue: inout Self,
+    followingValue: Self
+  ) {
     precedingValue ×= followingValue
   }
 }

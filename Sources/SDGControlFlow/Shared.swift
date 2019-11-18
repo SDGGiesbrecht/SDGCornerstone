@@ -46,7 +46,7 @@ public final class Shared<Value>: TransparentWrapper {
 
   // MARK: - Observing
 
-  /// Registers an observer. The observer will be notified when the value changes.
+  /// Registers an observer, so that the observer will be notified when the value changes.
   ///
   /// The observer will receive its first such message immediately.
   ///
@@ -72,7 +72,7 @@ public final class Shared<Value>: TransparentWrapper {
     }
   }
 
-  /// Cancels an observer. The observer will be no longer be notified when the value changes.
+  /// Cancels an observer, so that the observer will be no longer be notified when the value changes.
   ///
   /// This method is only necessary when an observer needs to persist after cancelling observation. In most cases, cancellation is automated through ARC.
   ///

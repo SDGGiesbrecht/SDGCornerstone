@@ -26,7 +26,10 @@ import SDGCornerstoneLocalizations
 /// ```swift
 /// let million: WholeNumber = 1_000_000
 /// let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
-/// let yobiMultiplier = WholeNumber(binary: "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000")
+/// let yobiMultiplier = WholeNumber(
+///   binary:
+///     "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
+/// )
 /// ```
 ///
 /// `WholeNumber` has a current theoretical limit of about 10 ↑ 178 000 000 000 000 000 000, but since that would occupy over 73 exabytes, in practice `WholeNumber` is limited by the amount of memory available.
@@ -250,7 +253,9 @@ public struct WholeNumber: Addable, CodableViaTextConvertibleNumber, Comparable,
     var remainingDividend = self
 
     while remainingDividend ≥ divisor {
-      var divides = true  // If the following iteration finishes, it is exactly equal and divides precicely once.
+      // If the following iteration finishes, it is exactly equal and divides precicely once.
+      var divides = true
+
       for (dividendBit, divisorBit) in zip(
         remainingDividend.binary.lastBitsBackwards(maximum: divisor.binary.count),
         divisor.binary.bitsBackwards()

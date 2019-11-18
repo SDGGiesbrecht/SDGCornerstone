@@ -30,7 +30,7 @@ import SDGMathematics
 /// streng = "\(zeichenkette) ...\(zeichen)"
 ///
 /// // Die meisten anderen Typen müssen ausdrücklich in einer bestimmten Textform umgewandelt werden:
-/// let zahl = GZahl.zufällige(in: 0 ... 1000)
+/// let zahl = GZahl.zufällige(in: 0...1000)
 /// streng = "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
 ///
 /// // Die Beschreibungen des Swift‐Übersetzers können immer noch ausdrücklich verlangt werden:
@@ -53,7 +53,7 @@ public typealias StrengeZeichenkette = StrictString
 /// strict = "\(string) ...\(character)"
 ///
 /// // Most other types must be explicitly converted to some predictable text representation:
-/// let number = Int.random(in: 0 ... 1000)
+/// let number = Int.random(in: 0...1000)
 /// strict = "“\(number.inRomanNumerals())” means the same as “\(number.inDigits())”."
 ///
 /// // The Swift compiler’s own description of any value can still be requested explicitly:

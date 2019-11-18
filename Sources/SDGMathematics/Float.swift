@@ -25,7 +25,7 @@ import Foundation
   public typealias FloatMax = Float80
 #endif
 
-/// A member of the `Float` family: `Double`, `Float80` or `Float`
+/// A member of the `Float` family; `Double`, `Float80` or `Float`.
 public protocol FloatFamily: BinaryFloatingPoint, CustomDebugStringConvertible,
   LosslessStringConvertible, RealNumberProtocol
 {

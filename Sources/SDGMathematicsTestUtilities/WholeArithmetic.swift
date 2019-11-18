@@ -53,8 +53,20 @@ public func testWholeArithmeticConformance<T>(
 
   test(operator: (×, "×"), on: (42 as T, 3), returns: 126, file: file, line: line)
   test(assignmentOperator: (×=, "×="), with: (4 as T, 4), resultsIn: 16, file: file, line: line)
-  test(operator: (*, "*"), on: (42 as T, 3), returns: 126, file: file, line: line)  // @exempt(from: unicode)
-  test(assignmentOperator: (*=, "*="), with: (4 as T, 4), resultsIn: 16, file: file, line: line)  // @exempt(from: unicode)
+  test(
+    operator: (*, "*"),  // @exempt(from: unicode)
+    on: (42 as T, 3),
+    returns: 126,
+    file: file,
+    line: line
+  )
+  test(
+    assignmentOperator: (*=, "*="),  // @exempt(from: unicode)
+    with: (4 as T, 4),
+    resultsIn: 16,
+    file: file,
+    line: line
+  )
 
   test(
     method: (T.dividedAccordingToEuclid, "dividedAccordingToEuclid"),

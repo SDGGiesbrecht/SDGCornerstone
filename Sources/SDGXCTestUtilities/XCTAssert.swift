@@ -39,7 +39,13 @@
       datei: StatischeZeichenkette = #file,
       zeile: NZahl = #line
     ) where T: Vergleichbar {  // @exempt(from: tests)
-      XCTAssertEqual(try ausdruck1(), try ausdruck2(), mitteilung(), file: datei, line: zeile)  // @exempt(from: tests)
+      XCTAssertEqual(
+        try ausdruck1(),  // @exempt(from: tests)
+        try ausdruck2(),  // @exempt(from: tests)
+        mitteilung(),  // @exempt(from: tests)
+        file: datei,
+        line: zeile
+      )
     }
 
   #endif

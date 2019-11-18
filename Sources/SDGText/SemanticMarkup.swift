@@ -36,7 +36,7 @@ private let endSubscript: UnicodeScalar = "\u{107003}"
 /// Semantic markup assigns control functions to several private use scalars.
 ///
 /// ```swift
-/// private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}" ... "\u{1070FF}"
+/// private let reservedRange: ClosedRange<UnicodeScalar> = "\u{107000}"..."\u{1070FF}"
 ///
 /// private let beginSuperscript: UnicodeScalar = "\u{107000}"
 /// private let endSuperscript: UnicodeScalar = "\u{107001}"
@@ -162,7 +162,7 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
 
       #if canImport(AppKit) || canImport(UIKit)
         // #workaround(workspace version 0.23.1, Test exemption only because CI is on 10.14.)
-        if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {  // @exempt(from: unicode) @exempt(from: tests)
+        if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {  // @exempt(from: tests)
           // Older platforms do not support this CSS, but can use the name directly.
           if adjustedFontName == Font.system.fontName
             ∨ adjustedFontName == Font.system.resized(to: font.size).fontName

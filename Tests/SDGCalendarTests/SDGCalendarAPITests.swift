@@ -171,7 +171,7 @@ class SDGCalendarAPITests: TestCase {
       uniqueTestName: "Gregorian"
     )
     testCodableConformance(
-      of: CalendarDate(Date(timeIntervalSinceReferenceDate: 123456789)),
+      of: CalendarDate(Date(timeIntervalSinceReferenceDate: 123_456_789)),
       uniqueTestName: "Foundation"
     )
     testCodableConformance(of: hebrew + (12345 as FloatMax).days, uniqueTestName: "Relative")
@@ -180,7 +180,7 @@ class SDGCalendarAPITests: TestCase {
     struct Mock: Encodable {
       let key = "gregoriano"
       let container = "[]"
-      let other: [Int64] = [138059393067, 259200]
+      let other: [Int64] = [138_059_393_067, 259_200]
       func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(key)

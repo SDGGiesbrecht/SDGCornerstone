@@ -31,9 +31,11 @@
       #elseif canImport(UIKit)
         let size: CGFloat
         #if os(watchOS)
-          size = 16  // From https://developer.apple.com/watchos/human-interface-guidelines/visual-design/typography/.
+          // From https://developer.apple.com/watchos/human-interface-guidelines/visual-design/typography/.
+          size = 16
         #elseif os(tvOS)
-          size = 29  // From https://developer.apple.com/tvos/human-interface-guidelines/visual-design/typography.
+          // From https://developer.apple.com/tvos/human-interface-guidelines/visual-design/typography.
+          size = 29
         #else
           size = UIFont.systemFontSize
         #endif
@@ -65,7 +67,9 @@
 
     // MARK: - Properties
 
-    /// The name of the font. (This is a machine identifier; it is not for display.)
+    /// The name of the font.
+    ///
+    /// This is a machine identifier; it is not for display.
     public var fontName: String {
       get {
         return native.fontName

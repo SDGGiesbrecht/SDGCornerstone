@@ -21,11 +21,17 @@ public protocol GenericAdditiveArithmetic: AdditiveArithmetic, Decodable, Encoda
 
 extension GenericAdditiveArithmetic {
 
-  @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self {  // @exempt(from: unicode)
+  @inlinable public static func - (  // @exempt(from: unicode)
+    precedingValue: Self,
+    followingValue: Self
+  ) -> Self {
     return precedingValue − followingValue
   }
 
-  @inlinable public static func -= (precedingValue: inout Self, followingValue: Self) {  // @exempt(from: unicode)
+  @inlinable public static func -= (  // @exempt(from: unicode)
+    precedingValue: inout Self,
+    followingValue: Self
+  ) {
     precedingValue −= followingValue
   }
 }

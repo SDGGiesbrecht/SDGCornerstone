@@ -23,9 +23,9 @@ extension Bool {
   ///
   /// ```swift
   /// var alternating = CyclicalNumberGenerator([
-  ///     Bool.falseRandomizerValue,
-  ///     Bool.trueRandomizerValue
-  ///     ])
+  ///   Bool.falseRandomizerValue,
+  ///   Bool.trueRandomizerValue
+  /// ])
   ///
   /// XCTAssertEqual(Bool.random(using: &alternating), false)
   /// XCTAssertEqual(Bool.random(using: &alternating), true)
@@ -44,9 +44,9 @@ extension Bool {
   ///
   /// ```swift
   /// var alternating = CyclicalNumberGenerator([
-  ///     Bool.falseRandomizerValue,
-  ///     Bool.trueRandomizerValue
-  ///     ])
+  ///   Bool.falseRandomizerValue,
+  ///   Bool.trueRandomizerValue
+  /// ])
   ///
   /// XCTAssertEqual(Bool.random(using: &alternating), false)
   /// XCTAssertEqual(Bool.random(using: &alternating), true)

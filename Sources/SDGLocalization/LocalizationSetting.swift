@@ -160,7 +160,9 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
   /// - Parameters:
   ///     - setting: The new localization setting.
   public static func setApplicationPreferences(to setting: LocalizationSetting?) {
-    _ = ProcessInfo.applicationIdentifier  // Make sure this was set and it is not just a silent mock preference.
+
+    // Make sure this was set and it is not just a silent mock preference.
+    _ = ProcessInfo.applicationIdentifier
 
     sdgApplicationPreferences.value.set(to: setting)
 
@@ -291,9 +293,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
   public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting)
     -> Bool
   {
-    return precedingValue.orderOfPrecedence.elementsEqual(followingValue.orderOfPrecedence) {
-      (leftGroup: [String], rightGroup: [String]) -> Bool in
-      return Set(leftGroup) == Set(rightGroup)
-    }
+    return precedingValue.orderOfPrecedence
+      .elementsEqual(followingValue.orderOfPrecedence) { Set($0) == Set($1) }
   }
 }

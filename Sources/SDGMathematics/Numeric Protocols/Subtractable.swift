@@ -64,7 +64,10 @@ extension Subtractable where Self: Numeric {
   /// - Parameters:
   ///     - precedingValue: The minuend.
   ///     - followingValue: The subtrahend.
-  @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self {  // @exempt(from: unicode)
+  @inlinable public static func - (  // @exempt(from: unicode)
+    precedingValue: Self,
+    followingValue: Self
+  ) -> Self {
     return precedingValue − followingValue
   }
 
@@ -74,7 +77,10 @@ extension Subtractable where Self: Numeric {
   /// - Parameters:
   ///     - precedingValue: The minuend.
   ///     - followingValue: The subtrahend.
-  @inlinable public static func -= (precedingValue: inout Self, followingValue: Self) {  // @exempt(from: unicode)
+  @inlinable public static func -= (  // @exempt(from: unicode)
+    precedingValue: inout Self,
+    followingValue: Self
+  ) {
     precedingValue −= followingValue
   }
 }
@@ -87,7 +93,10 @@ extension Subtractable where Self: Strideable, Self.Stride == Self {
   /// - Parameters:
   ///     - precedingValue: The minuend.
   ///     - followingValue: The subtrahend.
-  @inlinable public static func - (precedingValue: Self, followingValue: Self) -> Self {  // @exempt(from: unicode)
+  @inlinable public static func - (  // @exempt(from: unicode)
+    precedingValue: Self,
+    followingValue: Self
+  ) -> Self {
     return precedingValue − followingValue
   }
 
@@ -97,7 +106,10 @@ extension Subtractable where Self: Strideable, Self.Stride == Self {
   /// - Parameters:
   ///     - precedingValue: The minuend.
   ///     - followingValue: The subtrahend.
-  @inlinable public static func -= (precedingValue: inout Self, followingValue: Self) {  // @exempt(from: unicode)
+  @inlinable public static func -= (  // @exempt(from: unicode)
+    precedingValue: inout Self,
+    followingValue: Self
+  ) {
     precedingValue −= followingValue
   }
 }

@@ -46,7 +46,8 @@ extension ProcessInfo {
   ///
   /// Framework authors can read from this version of the propery when it should not matter if the client application has neglected to specify an identifier.
   public static var possibleApplicationIdentifier: String? {
-    return _applicationIdentifier ?? Bundle.main.bundleIdentifier  // @exempt(from: tests) The right side of “??” is unreachable from tests.
+    return _applicationIdentifier ?? Bundle.main.bundleIdentifier  // @exempt(from: tests)
+    // The right side of “??” is unreachable from tests.
   }
 
   /// The application domain.

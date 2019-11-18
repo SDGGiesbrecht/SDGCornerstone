@@ -44,6 +44,18 @@ public func testGenericAdditiveArithmeticConformance<T>(
   testCodableConformance(of: augend, uniqueTestName: "AdditiveArithmetic", file: file, line: line)
 
   test(operator: (+, "+"), on: (sum, T.zero), returns: sum, file: file, line: line)
-  test(operator: (-, "-"), on: (sum, T.zero), returns: sum, file: file, line: line)  // @exempt(from: unicode)
-  test(assignmentOperator: (-=, "-="), with: (sum, T.zero), resultsIn: sum, file: file, line: line)  // @exempt(from: unicode)
+  test(
+    operator: (-, "-"),  // @exempt(from: unicode)
+    on: (sum, T.zero),
+    returns: sum,
+    file: file,
+    line: line
+  )
+  test(  // @exempt(from: unicode)
+    assignmentOperator: (-=, "-="),
+    with: (sum, T.zero),
+    resultsIn: sum,
+    file: file,
+    line: line
+  )
 }

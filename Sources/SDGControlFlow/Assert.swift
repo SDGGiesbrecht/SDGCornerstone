@@ -12,16 +12,19 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@usableFromInline internal func list(_ localizations: (_APILocalization) -> String) -> String {  // @exempt(from: tests)
+@usableFromInline internal func list(
+  _ localizations: (_APILocalization) -> String
+) -> String {  // @exempt(from: tests)
   var included: Set<String> = []
-  let result = _APILocalization.allCases.map(localizations).filter { (message) in  // @exempt(from: tests)
-    if included.contains(message) {  // @exempt(from: tests)
-      return false
-    } else {  // @exempt(from: tests)
-      included.insert(message)
-      return true
+  let result = _APILocalization.allCases.map(localizations)
+    .filter { (message) in  // @exempt(from: tests)
+      if included.contains(message) {  // @exempt(from: tests)
+        return false
+      } else {  // @exempt(from: tests)
+        included.insert(message)
+        return true
+      }
     }
-  }
   return "\n" + result.joined(separator: "\n") + "\n"
 }
 

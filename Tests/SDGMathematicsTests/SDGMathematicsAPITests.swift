@@ -46,28 +46,28 @@ class SDGMathematicsAPITests: TestCase {
     ) {
       precedingValue.value += followingValue.value
     }
-    static func -= (
+    static func -= (  // @exempt(from: unicode)
       precedingValue: inout AddableStrideableExample,
       followingValue: AddableStrideableExample
-    ) {  // @exempt(from: unicode)
+    ) {
       precedingValue.value −= followingValue.value
     }
-    static func - (
+    static func - (  // @exempt(from: unicode)
       precedingValue: AddableStrideableExample,
       followingValue: AddableStrideableExample
-    ) -> AddableStrideableExample {  // @exempt(from: unicode)
+    ) -> AddableStrideableExample {
       return AddableStrideableExample(precedingValue.value − followingValue.value)
     }
-    static func *= (
+    static func *= (  // @exempt(from: unicode)
       precedingValue: inout AddableStrideableExample,
       followingValue: AddableStrideableExample
-    ) {  // @exempt(from: unicode)
+    ) {
       precedingValue.value ×= followingValue.value
     }
-    static func * (
+    static func * (  // @exempt(from: unicode)
       precedingValue: AddableStrideableExample,
       followingValue: AddableStrideableExample
-    ) -> AddableStrideableExample {  // @exempt(from: unicode)
+    ) -> AddableStrideableExample {
       return AddableStrideableExample(precedingValue.value × followingValue.value)
     }
     var magnitude: UInt {
@@ -269,12 +269,16 @@ class SDGMathematicsAPITests: TestCase {
     var magnitude: UInt {
       return value.magnitude
     }
-    static func * (lhs: NegatableSignedNumeric, rhs: NegatableSignedNumeric)
-      -> NegatableSignedNumeric
-    {  // @exempt(from: unicode)
+    static func * (  // @exempt(from: unicode)
+      lhs: NegatableSignedNumeric,
+      rhs: NegatableSignedNumeric
+    ) -> NegatableSignedNumeric {
       return NegatableSignedNumeric(lhs.value × rhs.value)
     }
-    static func *= (lhs: inout NegatableSignedNumeric, rhs: NegatableSignedNumeric) {  // @exempt(from: unicode)
+    static func *= (  // @exempt(from: unicode)
+      lhs: inout NegatableSignedNumeric,
+      rhs: NegatableSignedNumeric
+    ) {
       lhs.value ×= rhs.value
     }
   }
@@ -548,16 +552,16 @@ class SDGMathematicsAPITests: TestCase {
     ) {
       precedingValue.value −= followingValue.value
     }
-    static func *= (
+    static func *= (  // @exempt(from: unicode)
       precedingValue: inout SubtractableNumericExample,
       followingValue: SubtractableNumericExample
-    ) {  // @exempt(from: unicode)
+    ) {
       precedingValue.value ×= followingValue.value
     }
-    static func * (
+    static func * (  // @exempt(from: unicode)
       precedingValue: SubtractableNumericExample,
       followingValue: SubtractableNumericExample
-    ) -> SubtractableNumericExample {  // @exempt(from: unicode)
+    ) -> SubtractableNumericExample {
       return SubtractableNumericExample(precedingValue.value × followingValue.value)
     }
     var magnitude: UInt {
@@ -609,16 +613,16 @@ class SDGMathematicsAPITests: TestCase {
     func advanced(by n: SubtractableStrideableExample) -> SubtractableStrideableExample {
       return SubtractableStrideableExample(value.advanced(by: n.value))
     }
-    static func *= (
+    static func *= (  // @exempt(from: unicode)
       precedingValue: inout SubtractableStrideableExample,
       followingValue: SubtractableStrideableExample
-    ) {  // @exempt(from: unicode)
+    ) {
       precedingValue.value ×= followingValue.value
     }
-    static func * (
+    static func * (  // @exempt(from: unicode)
       precedingValue: SubtractableStrideableExample,
       followingValue: SubtractableStrideableExample
-    ) -> SubtractableStrideableExample {  // @exempt(from: unicode)
+    ) -> SubtractableStrideableExample {
       return SubtractableStrideableExample(precedingValue.value × followingValue.value)
     }
     var magnitude: UInt {
@@ -636,17 +640,17 @@ class SDGMathematicsAPITests: TestCase {
   }
   func testSubtractable() {
     XCTAssertEqual(
-      SubtractableNumericExample(6) - SubtractableNumericExample(5),
+      SubtractableNumericExample(6) - SubtractableNumericExample(5),  // @exempt(from: unicode)
       SubtractableNumericExample(1)
-    )  // @exempt(from: unicode)
+    )
     var x = SubtractableNumericExample(7)
     x -= SubtractableNumericExample(8)  // @exempt(from: unicode)
     XCTAssertEqual(x, SubtractableNumericExample(−1))
 
     XCTAssertEqual(
-      SubtractableStrideableExample(6) - SubtractableStrideableExample(5),
+      SubtractableStrideableExample(6) - SubtractableStrideableExample(5),  // @exempt(from: unicode)
       SubtractableStrideableExample(1)
-    )  // @exempt(from: unicode)
+    )
     var y = SubtractableStrideableExample(7)
     y -= SubtractableStrideableExample(8)  // @exempt(from: unicode)
     XCTAssertEqual(y, SubtractableStrideableExample(−1))

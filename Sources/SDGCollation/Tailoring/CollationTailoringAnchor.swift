@@ -14,7 +14,7 @@
 
 import SDGText
 
-/// An anchor for relative collation rules. The result of `*(_:)`.
+/// An anchor for relative collation rules; the result of `*(_:)`.
 ///
 /// - Warning: This type can only be used inside a `tailored(accordingTo:)` closure.
 public struct CollationTailoringAnchor: ExpressibleByStringLiteral {

@@ -246,7 +246,9 @@ extension RangeReplaceableCollection {
 extension RangeReplaceableCollection where Self: Pattern {
 
   // #documentation(Addable.+)
-  /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
+  /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol.
+  ///
+  /// Exact behaviour depends on the type.
   ///
   /// - Parameters:
   ///     - precedingValue: The starting value.

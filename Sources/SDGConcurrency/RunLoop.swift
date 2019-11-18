@@ -34,7 +34,7 @@ extension RunLoop {
   /// ```swift
   /// var driver: RunLoop.Driver?
   /// DispatchQueue.global(qos: .userInitiated).async {
-  ///     RunLoop.current.runForDriver { driver = $0 }
+  ///   RunLoop.current.runForDriver { driver = $0 }
   /// }
   /// // The background run loop is now running.
   ///

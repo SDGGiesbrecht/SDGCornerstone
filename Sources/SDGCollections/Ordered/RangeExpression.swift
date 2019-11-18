@@ -20,11 +20,11 @@ extension RangeExpression where Self: SetDefinition {
   /// ```swift
   /// switch 5 {
   /// case IntensionalSet(where: { $0.isEven }):
-  ///     XCTFail("This case does not match.")
-  /// case (2 ... 4 ∪ 7 ... 9)′:
-  ///     print("This case does match.")
+  ///   XCTFail("This case does not match.")
+  /// case (2...4 ∪ 7...9)′:
+  ///   print("This case does match.")
   /// default:
-  ///     XCTFail("This case is never reached.")
+  ///   XCTFail("This case is never reached.")
   /// }
   /// ```
   ///

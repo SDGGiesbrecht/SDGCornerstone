@@ -338,19 +338,18 @@ class SDGLocalizationAPITests: TestCase {
 
   func testUserFacingDynamicText() {
 
-    let text = UserFacingDynamic<StrictString, LocalizationExample, (Int, Int)>({
-      localization,
-      numbers in
+    let text = UserFacingDynamic<StrictString, LocalizationExample, (Int, Int)>(
+      { localization, numbers in
 
-      switch localization {
-      case .englishUnitedKingdom:
-        return StrictString("Numbers \(numbers.0.inDigits()) and \(numbers.1.inDigits())")
-      case .français:
-        return StrictString("Numéros \(numbers.0.inDigits()) et \(numbers.1.inDigits())")
-      default:
-        return StrictString("\(numbers.0.inDigits()), \(numbers.1.inDigits())")
-      }
-    })
+        switch localization {
+        case .englishUnitedKingdom:
+          return StrictString("Numbers \(numbers.0.inDigits()) and \(numbers.1.inDigits())")
+        case .français:
+          return StrictString("Numéros \(numbers.0.inDigits()) et \(numbers.1.inDigits())")
+        default:
+          return StrictString("\(numbers.0.inDigits()), \(numbers.1.inDigits())")
+        }
+      })
     XCTAssertEqual(text.resolved(for: .englishUnitedKingdom, using: (0, 1)), "Numbers 0 and 1")
     XCTAssertEqual(text.resolved(for: .français, using: (0, 1)), "Numéros 0 et 1")
     XCTAssert(¬text.resolved(using: (0, 1)).isEmpty)
@@ -408,7 +407,7 @@ class SDGLocalizationAPITests: TestCase {
     XCTAssertEqual(1000.inRomanNumerals(lowercase: true), "m")
     XCTAssertEqual((1 as Int8).inRomanNumerals(), "I")
     XCTAssertEqual((1 as UInt8).inRomanNumerals(), "I")
-    _ = 1000000.inRomanNumerals()
+    _ = 1_000_000.inRomanNumerals()
 
     XCTAssertEqual(1.abbreviatedEnglishOrdinal().rawTextApproximation(), "1st")
     XCTAssertEqual(2.abbreviatedEnglishOrdinal().rawTextApproximation(), "2nd")

@@ -60,12 +60,12 @@ import SDGLogic
 ///     - `location` is at a local minimum. For example:
 ///       ```swift
 ///       // This is undefined:
-///       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? $0 ↑ 2 : −($0 ↑ 2) }
+///       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10...10 ? $0 ↑ 2 : −($0 ↑ 2) }
 ///       ```
 ///     - two or more adjascent inputs share the maximum output. For example:
 ///       ```swift
 ///       // This is undefined:
-///       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10 ... 10 ? 1 : −(|$0|) }
+///       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10...10 ? 1 : −(|$0|) }
 ///       ```
 ///
 /// - Precondition: If `bounds ≠ nil`, a local maximum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:
@@ -101,11 +101,11 @@ import SDGLogic
 /// ```swift
 /// let approximateSquareRootOf120 = findLocalMinimum(near: 10) { (guess: Int) -> Int in
 ///
-///     // Find the square of the guess.
-///     let square = guess × guess
+///   // Find the square of the guess.
+///   let square = guess × guess
 ///
-///     // Determine its proximity to 120.
-///     return |(square − 120)|
+///   // Determine its proximity to 120.
+///   return |(square − 120)|
 /// }
 ///
 /// // First iteration (determined by “near: 10”):
@@ -126,12 +126,12 @@ import SDGLogic
 ///     - `location` is at a local maximum. For example:
 ///       ```swift
 ///       // This is undefined:
-///       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −($0 ↑ 2) : $0 ↑ 2 }
+///       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10...10 ? −($0 ↑ 2) : $0 ↑ 2 }
 ///       ```
 ///     - two or more adjascent inputs share the minimum output. For example:
 ///       ```swift
 ///       // This is undefined:
-///       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10 ... 10 ? −1 : |$0| }
+///       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10...10 ? −1 : |$0| }
 ///       ```
 ///
 /// - Precondition: If `bounds ≠ nil`, a local minimum must be known to exist, otherwise execution will get stuck in an infinite loop. For example:

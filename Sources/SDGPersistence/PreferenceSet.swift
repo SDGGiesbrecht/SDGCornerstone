@@ -102,7 +102,11 @@ public final class PreferenceSet {
   // MARK: - Storage
 
   private static func readFromDisk(for possibleDebugDomain: String) -> [String: Preference] {
-    let values = UserDefaults.standard.persistentDomain(forName: possibleDebugDomain) ?? [:]  // @exempt(from: tests) Linux returns an empty dictionary instead of nil.
+    let values = UserDefaults.standard.persistentDomain(
+      forName: possibleDebugDomain
+    ) ?? [:]  // @exempt(from: tests)
+    // Linux returns an empty dictionary instead of nil.
+
     return values.mapValues { Preference(propertyListObject: Preference.cast($0)) }
   }
   private func readFromDisk() -> [String: Preference] {

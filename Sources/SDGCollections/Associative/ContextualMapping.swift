@@ -15,7 +15,9 @@
 import SDGControlFlow
 import SDGLogic
 
-/// A mapping where the surrounding elements affect the output, and the output can be a different length than the original. An example would be spelling to pronounciation: “c” → “k”, but “ce” → “sɛ” and “ch” → “t͡ʃ”. The most specific (longest) match determines the output. Matches cannot overlap.
+/// A mapping where the surrounding elements affect the output, and the output can be a different length than the original.
+///
+/// An example would be spelling to pronounciation: “c” → “k”, but “ce” → “sɛ” and “ch” → “t͡ʃ”. The most specific (longest) match determines the output. Matches cannot overlap.
 public struct ContextualMapping<Input, Output>
 where Input: Hashable,
   Input: RangeReplaceableCollection,
@@ -148,7 +150,9 @@ where Input: Hashable,
   @inlinable internal func mapNext(_ remainder: inout Input.SubSequence, output: inout Output) {
     guard let first = remainder.first else {
       // End
-      output += simpleOutput!  // Only sub‐mappings (with simple output) reach this code. See “map” above.
+
+      // Only sub‐mappings (with simple output) reach this code. See “map” above.
+      output += simpleOutput!
       return
     }
 

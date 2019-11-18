@@ -23,14 +23,18 @@ extension Dictionary {
   ///
   /// ```swift
   /// func rollDie() -> Int {
-  ///     return Int.random(in: 1 ... 6)
+  ///   return Int.random(in: 1...6)
   /// }
   ///
   /// var frequencies = [Int: Int]()
-  /// for _ in 1 ... 100 {
-  ///     frequencies.mutateValue(for: rollDie()) { ($0 ?? 0) + 1 }
+  /// for _ in 1...100 {
+  ///   frequencies.mutateValue(for: rollDie()) { ($0 ?? 0) + 1 }
   /// }
-  /// print(frequencies.keys.sorted().map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" }).joined(separator: "\n"))
+  /// print(
+  ///   frequencies.keys.sorted().map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" }).joined(
+  ///     separator: "\n"
+  ///   )
+  /// )
   /// // Prints, for example:
   /// //
   /// // 1: 21

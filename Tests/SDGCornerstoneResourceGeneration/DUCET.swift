@@ -143,7 +143,9 @@ extension CollationOrder {
                 appendPlaceholderIndices(&indices)  // Placeholder reverse accents.
                 appendDUCET(index: 1, to: &indices)  // DUCET forward accents.
                 appendDUCET(index: 2, to: &indices)  // DUCET case.
-                appendDUCET(index: 0, to: &indices)  // Reuse DUCET primary to intersort with DUCET punctuation.
+
+                // Reuse DUCET primary to intersort with DUCET punctuation.
+                appendDUCET(index: 0, to: &indices)
               }
               appendPlaceholderIndices(&indices)  // Placeholder script.
 

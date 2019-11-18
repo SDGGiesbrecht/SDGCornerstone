@@ -83,11 +83,11 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYet(
+public func notImplementedYet(  // @exempt(from: missingImplementation)
   function: StaticString = #function,
   file: StaticString = #file,
   line: UInt = #line
-) {  // @exempt(from: tests) @exempt(from: missingImplementation)
+) {  // @exempt(from: tests)
   print(unimplementedMessage(function: function, file: file, line: line))
 }
 
@@ -99,11 +99,11 @@ public func notImplementedYet(
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYetAndCannotReturn(
+public func notImplementedYetAndCannotReturn(  // @exempt(from: missingImplementation)
   function: StaticString = #function,
   file: StaticString = #file,
   line: UInt = #line
-) -> Never {  // @exempt(from: missingImplementation)
+) -> Never {
   preconditionFailure(unimplementedMessage(function: function, file: file, line: line))
 }
 

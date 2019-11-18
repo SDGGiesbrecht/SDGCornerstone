@@ -187,7 +187,10 @@ where SubSequence: SearchableCollection {
   ///
   /// ```swift
   /// let equation = "2(3x − (y + 4)) = z"
-  /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
+  /// let nestingLevel = equation.scalars.firstNestingLevel(
+  ///   startingWith: "(".scalars,
+  ///   endingWith: ")".scalars
+  /// )!
   ///
   /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
   /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
@@ -207,7 +210,10 @@ where SubSequence: SearchableCollection {
   ///
   /// ```swift
   /// let equation = "2(3x − (y + 4)) = z"
-  /// let nestingLevel = equation.scalars.firstNestingLevel(startingWith: "(".scalars, endingWith: ")".scalars)!
+  /// let nestingLevel = equation.scalars.firstNestingLevel(
+  ///   startingWith: "(".scalars,
+  ///   endingWith: ")".scalars
+  /// )!
   ///
   /// XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
   /// XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")

@@ -34,7 +34,7 @@
         switch self {
         case .foundationError(let error):
           return StrictString(error.localizedDescription)
-        case .processError(code: _, output: let output):
+        case .processError(code: _, let output):
           return StrictString(output)
         }
       }

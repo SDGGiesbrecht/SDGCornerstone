@@ -26,7 +26,7 @@ private func defaultTestAssertionMethod(
   }
 }
 
-/// The assertion method used by `test(_:_:_:_:)`
+/// The assertion method used by `test(_:_:_:_:)`.
 ///
 /// - Parameters:
 ///     - expression: The expression to test.

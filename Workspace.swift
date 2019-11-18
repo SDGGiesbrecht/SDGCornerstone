@@ -46,3 +46,10 @@ configuration.documentation.api.ignoredDependencies = [
   "Foundation",
   "XCTest"
 ]
+
+// #workaround(workspace version 0.26.0, SwiftFormat is extremely slow.)
+configuration.repository.ignoredPaths = ["Sources/SDGCollation/Resources.swift"]
+
+// #workaround(workspace version 0.26.0, SwiftFormat gets these wrong.)
+configuration.proofreading.swiftFormatConfiguration?.rules["AmbiguousTrailingClosureOverload"] =
+  false

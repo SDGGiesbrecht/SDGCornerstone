@@ -58,7 +58,8 @@ public struct Preference: Equatable, TransparentWrapper {
   internal static func cast(_ instance: Any) -> NSObject {
     if let object = instance as? NSObject {
       return object
-    } else if let dictionary = instance as? [String: Any] {  // @exempt(from: tests) Unreachable where the Objective‐C runtime is available.
+    } else if let dictionary = instance as? [String: Any] {  // @exempt(from: tests)
+      // Unreachable where the Objective‐C runtime is available.
       return NSDictionary(dictionary: dictionary.mapValues({ cast($0) }))  // @exempt(from: tests)
     } else if let array = instance as? [Any] {
       return NSArray(array: array.map({ cast($0) }))  // @exempt(from: tests)
