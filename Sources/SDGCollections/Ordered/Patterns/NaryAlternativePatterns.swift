@@ -17,53 +17,59 @@ import SDGControlFlow
 /// A pattern that matches against several alternative patterns.
 ///
 /// The order of the alternatives is significant. If multiple alternatives match, preference will be given to one higher in the list.
-public struct NaryAlternativePatterns<ComponentPattern> : Pattern, CustomStringConvertible, TextualPlaygroundDisplay
-where ComponentPattern : Pattern {
+public struct NaryAlternativePatterns<ComponentPattern>: Pattern, CustomStringConvertible,
+  TextualPlaygroundDisplay
+where ComponentPattern: Pattern {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a set of alternative patterns.
-    ///
-    /// - Parameters:
-    ///     - alternatives: The alternative patterns.
-    @inlinable public init(_ alternatives: [ComponentPattern]) {
-        self.alternatives = alternatives
+  /// Creates a set of alternative patterns.
+  ///
+  /// - Parameters:
+  ///     - alternatives: The alternative patterns.
+  @inlinable public init(_ alternatives: [ComponentPattern]) {
+    self.alternatives = alternatives
+  }
+
+  // MARK: - Properties
+
+  @usableFromInline internal var alternatives: [ComponentPattern]
+
+  // MARK: - Pattern
+
+  public typealias Element = ComponentPattern.Element
+
+  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
+    -> [Range<C.Index>] where C.Element == Element
+  {
+
+    var results: [Range<C.Index>] = []
+    for alternative in alternatives {
+      results.append(contentsOf: alternative.matches(in: collection, at: location))
     }
+    return results
+  }
 
-    // MARK: - Properties
-
-    @usableFromInline internal var alternatives: [ComponentPattern]
-
-    // MARK: - Pattern
-
-    public typealias Element = ComponentPattern.Element
-
-    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
-
-        var results: [Range<C.Index>] = []
-        for alternative in alternatives {
-            results.append(contentsOf: alternative.matches(in: collection, at: location))
-        }
-        return results
+  @inlinable public func primaryMatch<C: SearchableCollection>(
+    in collection: C,
+    at location: C.Index
+  ) -> Range<C.Index>? where C.Element == Element {
+    for alternative in alternatives {
+      if let match = alternative.primaryMatch(in: collection, at: location) {
+        return match
+      }
     }
+    return nil
+  }
 
-    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-        for alternative in alternatives {
-            if let match = alternative.primaryMatch(in: collection, at: location) {
-                return match
-            }
-        }
-        return nil
-    }
+  @inlinable public func reversed() -> NaryAlternativePatterns<ComponentPattern.Reversed> {
+    return NaryAlternativePatterns<ComponentPattern.Reversed>(alternatives.map({ $0.reversed() }))
+  }
 
-    @inlinable public func reversed() -> NaryAlternativePatterns<ComponentPattern.Reversed> {
-        return NaryAlternativePatterns<ComponentPattern.Reversed>(alternatives.map({ $0.reversed() }))
-    }
+  // MARK: - CustomStringConvertible
 
-    // MARK: - CustomStringConvertible
-
-    public var description: String {
-        let entries = alternatives.map { "(" + String(describing: $0) + ")" }
-        return entries.joined(separator: " ∨ ")
-    }
+  public var description: String {
+    let entries = alternatives.map { "(" + String(describing: $0) + ")" }
+    return entries.joined(separator: " ∨ ")
+  }
 }

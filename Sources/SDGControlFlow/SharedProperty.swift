@@ -15,48 +15,51 @@
 /// A property wrapper for shared values.
 ///
 /// The projected value is the `Shared` instance. The wrapped value is the shared instance’s value.
-@propertyWrapper public struct SharedProperty<Value> : DefaultAssignmentPropertyWrapper, ProjectingPropertyWrapper, TransparentWrapper {
+@propertyWrapper
+public struct SharedProperty<Value>: DefaultAssignmentPropertyWrapper, ProjectingPropertyWrapper,
+  TransparentWrapper
+{
 
-    /// Creates a shared property with a shared value.
-    ///
-    /// - Parameters:
-    ///     - sharedValue: The shared value.
-    public init(_ sharedValue: Shared<Value>) {
-        self.projectedValue = sharedValue
+  /// Creates a shared property with a shared value.
+  ///
+  /// - Parameters:
+  ///     - sharedValue: The shared value.
+  public init(_ sharedValue: Shared<Value>) {
+    self.projectedValue = sharedValue
+  }
+
+  /// Creates a shared property with a value.
+  ///
+  /// - Parameters:
+  ///     - value: The value.
+  public init(_ value: Value) {
+    self.init(Shared(value))
+  }
+
+  // MARK: - DefaultAssignmentPropertyWrapper
+
+  public init(wrappedValue: Value) {
+    self.init(wrappedValue)
+  }
+
+  // MARK: - ProjectingPropertyWrapper
+
+  public var projectedValue: Shared<Value>
+
+  // MARK: - PropertyWrapper
+
+  public var wrappedValue: Value {
+    get {
+      return projectedValue.value
     }
-
-    /// Creates a shared property with a value.
-    ///
-    /// - Parameters:
-    ///     - value: The value.
-    public init(_ value: Value) {
-        self.init(Shared(value))
+    set {
+      projectedValue.value = newValue
     }
+  }
 
-    // MARK: - DefaultAssignmentPropertyWrapper
+  // MARK: - TransparentWrapper
 
-    public init(wrappedValue: Value) {
-        self.init(wrappedValue)
-    }
-
-    // MARK: - ProjectingPropertyWrapper
-
-    public var projectedValue: Shared<Value>
-
-    // MARK: - PropertyWrapper
-
-    public var wrappedValue: Value {
-        get {
-            return projectedValue.value
-        }
-        set {
-            projectedValue.value = newValue
-        }
-    }
-
-    // MARK: - TransparentWrapper
-
-    public var wrappedInstance: Any {
-        return projectedValue
-    }
+  public var wrappedInstance: Any {
+    return projectedValue
+  }
 }

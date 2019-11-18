@@ -14,32 +14,32 @@
 
 extension Collection {
 
-    // MARK: - Indices
+  // MARK: - Indices
 
-    /// Returns the range for all of `self`.
-    @inlinable public var bounds: Range<Index> {
-        return startIndex ..< endIndex
-    }
+  /// Returns the range for all of `self`.
+  @inlinable public var bounds: Range<Index> {
+    return startIndex..<endIndex
+  }
 }
 
-extension Collection where Index : Hashable {
+extension Collection where Index: Hashable {
 
-    /// Returns the collection as a `Dictionary`, with the collection’s indices used as keys.
-    @inlinable public var indexMapping: [Index: Element] {
-        var mapping: [Index: Element] = [:]
-        for index in indices {
-            mapping[index] = self[index]
-        }
-        return mapping
+  /// Returns the collection as a `Dictionary`, with the collection’s indices used as keys.
+  @inlinable public var indexMapping: [Index: Element] {
+    var mapping: [Index: Element] = [:]
+    for index in indices {
+      mapping[index] = self[index]
     }
+    return mapping
+  }
 }
 
-extension Collection where Element : Hashable, Index : Hashable {
+extension Collection where Element: Hashable, Index: Hashable {
 
-    /// Returns the collection as a `BjectiveMapping` between the indices and values.
-    ///
-    /// - Requires: No values are repeated.
-    @inlinable public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
-        return BijectiveMapping(indexMapping)
-    }
+  /// Returns the collection as a `BjectiveMapping` between the indices and values.
+  ///
+  /// - Requires: No values are repeated.
+  @inlinable public var bijectiveIndexMapping: BijectiveMapping<Index, Element> {
+    return BijectiveMapping(indexMapping)
+  }
 }

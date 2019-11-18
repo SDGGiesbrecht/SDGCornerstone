@@ -13,17 +13,17 @@
  */
 
 #if canImport(AppKit)
-import SDGCollation
+  import SDGCollation
 
-import XCTest
+  import XCTest
 
-final class SDGInterfaceResourceGeneration : XCTestCase {
+  final class SDGInterfaceResourceGeneration: XCTestCase {
 
     // Complete the word “test” to activate and run the generators.
 
     func tesRefreshUnicodeData() throws {
-        let root = try CollationOrder.generateRoot()
-        try root.save(to: collationResourcesDirectory.appendingPathComponent("Root"))
+      let root = try CollationOrder.generateRoot()
+      try root.save(to: collationResourcesDirectory.appendingPathComponent("Root"))
     }
-}
+  }
 #endif

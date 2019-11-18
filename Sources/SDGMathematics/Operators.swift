@@ -75,8 +75,8 @@ prefix operator ∏
 // @documentation(SDGCornerstone.ExponentPrecedence)
 /// The precedence of exponentiation.
 precedencegroup ExponentPrecedence {
-    associativity: right
-    higherThan: MultiplicationPrecedence
+  associativity: right
+  higherThan: MultiplicationPrecedence
 }
 
 // @documentation(SDGCornerstone.↑)

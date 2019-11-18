@@ -13,15 +13,15 @@
  */
 
 #if !(os(iOS) || os(tvOS))
-@testable import SDGExternalProcess
+  @testable import SDGExternalProcess
 
-func forAllCompatibilityModes(_ closure: () throws -> Void) rethrows {
+  func forAllCompatibilityModes(_ closure: () throws -> Void) rethrows {
     for mode in [false, true] {
-        let previous = ExternalProcess.compatibilityMode
-        ExternalProcess.compatibilityMode = mode
-        defer { ExternalProcess.compatibilityMode = previous }
+      let previous = ExternalProcess.compatibilityMode
+      ExternalProcess.compatibilityMode = mode
+      defer { ExternalProcess.compatibilityMode = previous }
 
-        try closure()
+      try closure()
     }
-}
+  }
 #endif

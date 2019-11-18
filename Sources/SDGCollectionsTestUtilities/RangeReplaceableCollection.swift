@@ -21,22 +21,47 @@ import SDGTesting
 ///     - element: An element instance.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testRangeReplaceableCollectionConformance<T>(of type: T.Type, element: T.Element, file: StaticString = #file, line: UInt = #line) where T : RangeReplaceableCollection, T.Element : Equatable {
+public func testRangeReplaceableCollectionConformance<T>(
+  of type: T.Type,
+  element: T.Element,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: RangeReplaceableCollection, T.Element: Equatable {
 
-    var collection = T()
-    collection.append(element)
+  var collection = T()
+  collection.append(element)
 
-    testCollectionConformance(of: collection, file: file, line: line)
+  testCollectionConformance(of: collection, file: file, line: line)
 
-    test(collection.elementsEqual(T([element])), "\(T.self)(\(element) → \(T([element])) ≠ \(collection)", file: file, line: line)
+  test(
+    collection.elementsEqual(T([element])),
+    "\(T.self)(\(element) → \(T([element])) ≠ \(collection)",
+    file: file,
+    line: line
+  )
 
-    collection.insert(contentsOf: [element], at: collection.startIndex)
-    test(collection.elementsEqual(T([element, element])), "\(T([element])).insert(contentsOf: \([element]), at: \(collection.startIndex) → \(collection) ≠ \(T([element, element]))", file: file, line: line)
+  collection.insert(contentsOf: [element], at: collection.startIndex)
+  test(
+    collection.elementsEqual(T([element, element])),
+    "\(T([element])).insert(contentsOf: \([element]), at: \(collection.startIndex) → \(collection) ≠ \(T([element, element]))",
+    file: file,
+    line: line
+  )
 
-    var appended = collection.appending(contentsOf: [element])
-    let appendedExpectation = T([element, element, element])
-    test(appended.elementsEqual(appendedExpectation), "\(collection).appending(contentsOf: \([element])) → \(appended) ≠ \(appendedExpectation)", file: file, line: line)
+  var appended = collection.appending(contentsOf: [element])
+  let appendedExpectation = T([element, element, element])
+  test(
+    appended.elementsEqual(appendedExpectation),
+    "\(collection).appending(contentsOf: \([element])) → \(appended) ≠ \(appendedExpectation)",
+    file: file,
+    line: line
+  )
 
-    appended = collection.appending(contentsOf: T([element]))
-    test(appended.elementsEqual(appendedExpectation), "\(collection).appending(contentsOf: \(T([element]))) → \(appended) ≠ \(appendedExpectation)", file: file, line: line)
+  appended = collection.appending(contentsOf: T([element]))
+  test(
+    appended.elementsEqual(appendedExpectation),
+    "\(collection).appending(contentsOf: \(T([element]))) → \(appended) ≠ \(appendedExpectation)",
+    file: file,
+    line: line
+  )
 }

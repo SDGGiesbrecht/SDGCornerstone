@@ -21,47 +21,48 @@ import SDGMathematics
 /// - Warning: The above guarantee of deterministic behaviour does not apply between differing module versions.
 ///
 /// Currently, `PseudorandomNumberGenerator` uses the [xoroshiro128+](https://en.wikipedia.org/wiki/Xoroshiro128%2B) algorithm designed by David Blackman and Sebastiano Vigna.
-public struct PseudorandomNumberGenerator : RandomNumberGenerator {
+public struct PseudorandomNumberGenerator: RandomNumberGenerator {
 
-    /// The seed.
-    public typealias Seed = (UInt64, UInt64)
+  /// The seed.
+  public typealias Seed = (UInt64, UInt64)
 
-    private var state: Seed
+  private var state: Seed
 
-    /// Returns a new, randomly generated seed.
-    public static func generateSeed() -> Seed {
-        func generateHalf() -> UInt64 {
-            return UInt64.random(in: UInt64.min ... UInt64.max)
-        }
-        return (generateHalf(), generateHalf())
+  /// Returns a new, randomly generated seed.
+  public static func generateSeed() -> Seed {
+    func generateHalf() -> UInt64 {
+      return UInt64.random(in: UInt64.min...UInt64.max)
     }
+    return (generateHalf(), generateHalf())
+  }
 
-    /// Creates a pseudorandom number generator with a specific seed.
-    ///
-    /// - Parameters:
-    ///     - seed: The seed.
-    public init(seed: Seed) {
-        self.state = seed
-        _ = next() // Step away from seed itself.
+  /// Creates a pseudorandom number generator with a specific seed.
+  ///
+  /// - Parameters:
+  ///     - seed: The seed.
+  public init(seed: Seed) {
+    self.state = seed
+    _ = next()  // Step away from seed itself.
+  }
+
+  // MARK: - RandomNumberGenerator
+
+  /// Returns a random value.
+  public mutating func next() -> UInt64 {
+
+    // This is derived from the C code of David Blackman and Sebastiano Vigna’s xoroshiro128+ algorithm, which they have dedicated to the public domain. (retrieved on 2016‐12‐08 from http://vigna.di.unimi.it/xorshift/xoroshiro128plus.c)
+
+    let result = state.0 &+ state.1
+
+    state.1.formBitwiseExclusiveOr(with: state.0)
+
+    func bits(of value: UInt64, rotatedLeft distance: UInt64) -> UInt64 {
+      return (value << distance).bitwiseOr(with: value >> (64 − distance))
     }
+    state.0 = bits(of: state.0, rotatedLeft: 55).bitwiseExclusiveOr(with: state.1)
+      .bitwiseExclusiveOr(with: state.1 << 14)
+    state.1 = bits(of: state.1, rotatedLeft: 36)
 
-    // MARK: - RandomNumberGenerator
-
-    /// Returns a random value.
-    public mutating func next() -> UInt64 {
-
-        // This is derived from the C code of David Blackman and Sebastiano Vigna’s xoroshiro128+ algorithm, which they have dedicated to the public domain. (retrieved on 2016‐12‐08 from http://vigna.di.unimi.it/xorshift/xoroshiro128plus.c)
-
-        let result = state.0 &+ state.1
-
-        state.1.formBitwiseExclusiveOr(with: state.0)
-
-        func bits(of value: UInt64, rotatedLeft distance: UInt64) -> UInt64 {
-            return (value << distance).bitwiseOr(with: value >> (64 − distance))
-        }
-        state.0 = bits(of: state.0, rotatedLeft: 55).bitwiseExclusiveOr(with: state.1).bitwiseExclusiveOr(with: state.1 << 14)
-        state.1 = bits(of: state.1, rotatedLeft: 36)
-
-        return result
-    }
+    return result
+  }
 }

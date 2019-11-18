@@ -16,11 +16,11 @@ import Foundation
 
 extension Date {
 
-    /// Creates a date from a calendar date.
-    ///
-    /// - Parameters:
-    ///     - calendarDate: The calendar date.
-    public init(_ calendarDate: CalendarDate) {
-        self = calendarDate.converted(to: FoundationDate.self).date
-    }
+  /// Creates a date from a calendar date.
+  ///
+  /// - Parameters:
+  ///     - calendarDate: The calendar date.
+  public init(_ calendarDate: CalendarDate) {
+    self = calendarDate.converted(to: FoundationDate.self).date
+  }
 }

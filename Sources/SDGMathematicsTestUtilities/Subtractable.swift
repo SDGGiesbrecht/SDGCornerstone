@@ -24,11 +24,35 @@ import SDGTesting
 ///     - difference: The expected difference.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testSubtractableConformance<T>(minuend: T, subtrahend: T, difference: T, file: StaticString = #file, line: UInt = #line) where T : Subtractable, T : Equatable {
+public func testSubtractableConformance<T>(
+  minuend: T,
+  subtrahend: T,
+  difference: T,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: Subtractable, T: Equatable {
 
-    testAddableConformance(augend: difference, addend: subtrahend, sum: minuend, file: file, line: line)
+  testAddableConformance(
+    augend: difference,
+    addend: subtrahend,
+    sum: minuend,
+    file: file,
+    line: line
+  )
 
-    test(operator: (−, "−"), on: (minuend, subtrahend), returns: difference, file: file, line: line)
-    test(assignmentOperator: (−=, "−="), with: (minuend, subtrahend), resultsIn: difference, file: file, line: line)
-    test(operator: (±, "±"), on: (minuend, subtrahend), returns: (sum: minuend + subtrahend, difference: difference), file: file, line: line)
+  test(operator: (−, "−"), on: (minuend, subtrahend), returns: difference, file: file, line: line)
+  test(
+    assignmentOperator: (−=, "−="),
+    with: (minuend, subtrahend),
+    resultsIn: difference,
+    file: file,
+    line: line
+  )
+  test(
+    operator: (±, "±"),
+    on: (minuend, subtrahend),
+    returns: (sum: minuend + subtrahend, difference: difference),
+    file: file,
+    line: line
+  )
 }

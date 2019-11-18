@@ -14,8 +14,8 @@
 
 /// Pattern consumption behaviour.
 public enum Consumption {
-    /// Prefers longer matches.
-    case greedy
-    /// Prefers shorter matches.
-    case lazy
+  /// Prefers longer matches.
+  case greedy
+  /// Prefers shorter matches.
+  case lazy
 }

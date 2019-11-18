@@ -17,9 +17,9 @@
 /// - Note: The protocol exists mostly for documentation purposes, since conforming types inherit its documentation comments. It has no means of enforcing the presence of a `@propertyWrapper` attribute.
 public protocol PropertyWrapper {
 
-    /// The wrapped type.
-    associatedtype Wrapped
+  /// The wrapped type.
+  associatedtype Wrapped
 
-    /// The wrapped value.
-    var wrappedValue: Wrapped { get }
+  /// The wrapped value.
+  var wrappedValue: Wrapped { get }
 }

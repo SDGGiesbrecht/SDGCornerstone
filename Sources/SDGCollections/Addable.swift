@@ -15,24 +15,24 @@
 import SDGControlFlow
 import SDGMathematics
 
-extension Addable where Self : Pattern {
+extension Addable where Self: Pattern {
 
-    // #documentation(Addable.+)
-    /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The starting value.
-    ///     - followingValue: The value to add.
-    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
-        // Disambiguate Addable vs Pattern
-        return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
-    }
+  // #documentation(Addable.+)
+  /// Returns the sum, concatenation, or the result of a similar operation on two values implied by the “+” symbol. Exact behaviour depends on the type.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The starting value.
+  ///     - followingValue: The value to add.
+  @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+    // Disambiguate Addable vs Pattern
+    return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
+  }
 }
 
-extension Addable where Self : RangeReplaceableCollection, Self : Pattern {
+extension Addable where Self: RangeReplaceableCollection, Self: Pattern {
 
-    @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
-        // Disambiguate Addable vs RangeReplaceableCollection vs Pattern
-        return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
-    }
+  @inlinable public static func + (precedingValue: Self, followingValue: Self) -> Self {
+    // Disambiguate Addable vs RangeReplaceableCollection vs Pattern
+    return nonmutatingVariant(of: +=, on: precedingValue, with: followingValue)
+  }
 }

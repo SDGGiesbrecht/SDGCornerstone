@@ -14,15 +14,15 @@
 
 @usableFromInline internal struct CollationCacheEntry<String> {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    @inlinable init(string: String, indices: [CollationIndex]) {
-        self.string = string
-        self.indices = indices
-    }
+  @inlinable init(string: String, indices: [CollationIndex]) {
+    self.string = string
+    self.indices = indices
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    @usableFromInline internal let string: String
-    @usableFromInline internal let indices: [CollationIndex]
+  @usableFromInline internal let string: String
+  @usableFromInline internal let indices: [CollationIndex]
 }

@@ -15,45 +15,52 @@
 import SDGLogic
 
 /// A pattern that matches based on a condition.
-public struct ConditionalPattern<Element : Equatable> : Pattern {
+public struct ConditionalPattern<Element: Equatable>: Pattern {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates an algorithmic pattern based on a condition.
-    ///
-    /// - Parameters:
-    ///     - condition: The condition an element must meet in order to match.
-    ///     - element: An element to check.
-    @inlinable public init(_ condition: @escaping (_ element: Element) -> Bool) {
-        self.condition = condition
+  /// Creates an algorithmic pattern based on a condition.
+  ///
+  /// - Parameters:
+  ///     - condition: The condition an element must meet in order to match.
+  ///     - element: An element to check.
+  @inlinable public init(_ condition: @escaping (_ element: Element) -> Bool) {
+    self.condition = condition
+  }
+  // MARK: - Properties
+
+  @usableFromInline internal var condition: (Element) -> Bool
+
+  // MARK: - Pattern
+
+  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
+    -> [Range<C.Index>] where C.Element == Element
+  {
+
+    if location ≠ collection.endIndex,
+      condition(collection[location])
+    {
+      return [(location...location).relative(to: collection)]
+    } else {
+      return []
     }
-    // MARK: - Properties
+  }
 
-    @usableFromInline internal var condition: (Element) -> Bool
+  @inlinable public func primaryMatch<C: SearchableCollection>(
+    in collection: C,
+    at location: C.Index
+  ) -> Range<C.Index>? where C.Element == Element {
 
-    // MARK: - Pattern
-
-    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
-
-        if location ≠ collection.endIndex,
-            condition(collection[location]) {
-            return [(location ... location).relative(to: collection)]
-        } else {
-            return []
-        }
+    if location ≠ collection.endIndex,
+      condition(collection[location])
+    {
+      return (location...location).relative(to: collection)
+    } else {
+      return nil
     }
+  }
 
-    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-
-        if location ≠ collection.endIndex,
-            condition(collection[location]) {
-            return (location ... location).relative(to: collection)
-        } else {
-            return nil
-        }
-    }
-
-    @inlinable public func reversed() -> ConditionalPattern<Element> {
-        return self
-    }
+  @inlinable public func reversed() -> ConditionalPattern<Element> {
+    return self
+  }
 }

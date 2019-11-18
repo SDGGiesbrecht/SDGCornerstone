@@ -16,15 +16,15 @@ import SDGMathematics
 
 extension UIntFamily {
 
-    // MARK: - Binary
+  // MARK: - Binary
 
-    /// The value of self represented in binary as a collection of bits.
-    @inlinable public var binary: BinaryView<Self> {
-        get {
-            return BinaryView(self)
-        }
-        set {
-            self = newValue.uInt
-        }
+  /// The value of self represented in binary as a collection of bits.
+  @inlinable public var binary: BinaryView<Self> {
+    get {
+      return BinaryView(self)
     }
+    set {
+      self = newValue.uInt
+    }
+  }
 }

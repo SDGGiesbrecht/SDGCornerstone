@@ -14,40 +14,40 @@
 
 import Foundation
 
-extension Data : BitField {
+extension Data: BitField {
 
-    // MARK: - BitField
+  // MARK: - BitField
 
-    public mutating func formBitwiseNot() {
-        for index in indices {
-            self[index].formBitwiseNot()
-        }
+  public mutating func formBitwiseNot() {
+    for index in indices {
+      self[index].formBitwiseNot()
     }
+  }
 
-    public mutating func formBitwiseAnd(with other: Data) {
-        let end = Swift.min(endIndex, other.endIndex)
+  public mutating func formBitwiseAnd(with other: Data) {
+    let end = Swift.min(endIndex, other.endIndex)
 
-        for index in startIndex ..< end {
-            self[index].formBitwiseAnd(with: other[index])
-        }
-        removeSubrange(end...)
+    for index in startIndex..<end {
+      self[index].formBitwiseAnd(with: other[index])
     }
+    removeSubrange(end...)
+  }
 
-    public mutating func formBitwiseOr(with other: Data) {
-        let end = Swift.min(endIndex, other.endIndex)
+  public mutating func formBitwiseOr(with other: Data) {
+    let end = Swift.min(endIndex, other.endIndex)
 
-        for index in startIndex ..< end {
-            self[index].formBitwiseOr(with: other[index])
-        }
-        append(contentsOf: other[end...])
+    for index in startIndex..<end {
+      self[index].formBitwiseOr(with: other[index])
     }
+    append(contentsOf: other[end...])
+  }
 
-    public mutating func formBitwiseExclusiveOr(with other: Data) {
-        let end = Swift.min(endIndex, other.endIndex)
+  public mutating func formBitwiseExclusiveOr(with other: Data) {
+    let end = Swift.min(endIndex, other.endIndex)
 
-        for index in startIndex ..< end {
-            self[index].formBitwiseExclusiveOr(with: other[index])
-        }
-        append(contentsOf: other[end...])
+    for index in startIndex..<end {
+      self[index].formBitwiseExclusiveOr(with: other[index])
     }
+    append(contentsOf: other[end...])
+  }
 }

@@ -20,83 +20,89 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// An hour of the Gregorian day.
-public struct GregorianHour :  CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, TextualPlaygroundDisplay {
+public struct GregorianHour: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent,
+  ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent,
+  RawRepresentableCalendarComponent, TextualPlaygroundDisplay
+{
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// The number of hours in a day.
-    public static let hoursPerDay: Int = HebrewHour.hoursPerDay
+  /// The number of hours in a day.
+  public static let hoursPerDay: Int = HebrewHour.hoursPerDay
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private var hour: Int
+  private var hour: Int
 
-    // MARK: - ConsistentDurationCalendarComponent
+  // MARK: - ConsistentDurationCalendarComponent
 
-    public static var duration: CalendarInterval<FloatMax> {
-        return (1 as FloatMax).hours
+  public static var duration: CalendarInterval<FloatMax> {
+    return (1 as FloatMax).hours
+  }
+
+  // MARK: - Text Representations
+
+  /// Returns the hour in digits for twenty‐four–hour notation. (0–23)
+  public func inDigitsInTwentyFourHourFormat() -> StrictString {
+    return hour.inDigits()
+  }
+
+  /// Returns the hour in digits for twelve‐hour notation. (1–12)
+  public func inDigitsInTwelveHourFormat() -> StrictString {
+    var result = hour
+    if result > 12 {
+      result −= 12
     }
-
-    // MARK: - Text Representations
-
-    /// Returns the hour in digits for twenty‐four–hour notation. (0–23)
-    public func inDigitsInTwentyFourHourFormat() -> StrictString {
-        return hour.inDigits()
+    if result == 0 {
+      result = 12
     }
+    return result.inDigits()
+  }
 
-    /// Returns the hour in digits for twelve‐hour notation. (1–12)
-    public func inDigitsInTwelveHourFormat() -> StrictString {
-        var result = hour
-        if result > 12 {
-            result −= 12
+  /// Returns “a.m.” or “p.m.”, corresponding to the hour.
+  public func amOrPM() -> StrictString {
+    if hour ≥ 12 {
+      return "p.m."
+    } else {
+      return "a.m."
+    }
+  }
+
+  // MARK: - CustomStringConvertible
+
+  public var description: String {
+    return String(
+      UserFacing<StrictString, FormatLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα,
+          .עברית־ישראל:
+          return self.inDigitsInTwentyFourHourFormat()
+        case .englishUnitedStates, .englishCanada:
+          return self.inDigitsInTwelveHourFormat() + " " + self.amOrPM()
         }
-        if result == 0 {
-            result = 12
-        }
-        return result.inDigits()
-    }
+      }).resolved()
+    )
+  }
 
-    /// Returns “a.m.” or “p.m.”, corresponding to the hour.
-    public func amOrPM() -> StrictString {
-        if hour ≥ 12 {
-            return "p.m."
-        } else {
-            return "a.m."
-        }
-    }
+  // MARK: - ISOCalendarComponent
 
-    // MARK: - CustomStringConvertible
+  public func inISOFormat() -> StrictString {
+    return hour.inDigits().filled(to: 2, with: "0", from: .start)
+  }
 
-    public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
-                return self.inDigitsInTwentyFourHourFormat()
-            case .englishUnitedStates, .englishCanada:
-                return self.inDigitsInTwelveHourFormat() + " " + self.amOrPM()
-            }
-        }).resolved())
-    }
+  // MARK: - PointProtocol
 
-    // MARK: - ISOCalendarComponent
+  public typealias Vector = Int
 
-    public func inISOFormat() -> StrictString {
-        return hour.inDigits().filled(to: 2, with: "0", from: .start)
-    }
+  // MARK: - RawRepresentableCalendarComponent
 
-    // MARK: - PointProtocol
+  public init(unsafeRawValue: RawValue) {
+    hour = unsafeRawValue
+  }
 
-    public typealias Vector = Int
+  public static let validRange: Range<RawValue>? = 0..<GregorianHour.hoursPerDay
 
-    // MARK: - RawRepresentableCalendarComponent
-
-    public init(unsafeRawValue: RawValue) {
-        hour = unsafeRawValue
-    }
-
-    public static let validRange: Range<RawValue>? = 0 ..< GregorianHour.hoursPerDay
-
-    public var rawValue: RawValue {
-        return hour
-    }
+  public var rawValue: RawValue {
+    return hour
+  }
 }

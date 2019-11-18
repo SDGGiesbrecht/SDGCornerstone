@@ -18,67 +18,74 @@ import SDGLogic
 import SDGCollections
 
 /// A pattern representing any newline variant.
-public struct NewlinePattern : Pattern {
+public struct NewlinePattern: Pattern {
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    private static let carriageReturn: Unicode.Scalar = "\u{D}"
-    private static let lineFeed: Unicode.Scalar = "\u{A}"
-    @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
-    internal static let newline = NewlinePattern(carriageReturnLineFeed: (carriageReturn, lineFeed))
+  private static let carriageReturn: Unicode.Scalar = "\u{D}"
+  private static let lineFeed: Unicode.Scalar = "\u{A}"
+  @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
+  internal static let newline = NewlinePattern(carriageReturnLineFeed: (carriageReturn, lineFeed))
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    @usableFromInline internal init(carriageReturnLineFeed: (Unicode.Scalar, Unicode.Scalar)) {
-        carriageReturn = carriageReturnLineFeed.0
-        lineFeed = carriageReturnLineFeed.1
+  @usableFromInline internal init(carriageReturnLineFeed: (Unicode.Scalar, Unicode.Scalar)) {
+    carriageReturn = carriageReturnLineFeed.0
+    lineFeed = carriageReturnLineFeed.1
+  }
+
+  // MARK: - Properties
+
+  @usableFromInline internal let carriageReturn: Unicode.Scalar
+  @usableFromInline internal let lineFeed: Unicode.Scalar
+
+  // MARK: - Pattern
+
+  public typealias Element = Unicode.Scalar
+
+  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
+    -> [Range<C.Index>] where C.Element == Unicode.Scalar
+  {
+
+    let scalar = collection[location]
+    guard scalar ∈ NewlinePattern.newlineCharacters else {
+      return []
+    }
+    var result = [(location...location).relative(to: collection)]
+
+    if scalar == carriageReturn {
+      let nextIndex = collection.index(after: location)
+      if nextIndex ≠ collection.endIndex,
+        collection[nextIndex] == lineFeed
+      {
+        result.prepend(location..<collection.index(location, offsetBy: 2))
+      }
+    }
+    return result
+  }
+
+  @inlinable public func primaryMatch<C: SearchableCollection>(
+    in collection: C,
+    at location: C.Index
+  ) -> Range<C.Index>? where C.Element == Unicode.Scalar {
+
+    let scalar = collection[location]
+    guard scalar ∈ NewlinePattern.newlineCharacters else {
+      return nil
     }
 
-    // MARK: - Properties
-
-    @usableFromInline internal let carriageReturn: Unicode.Scalar
-    @usableFromInline internal let lineFeed: Unicode.Scalar
-
-    // MARK: - Pattern
-
-    public typealias Element = Unicode.Scalar
-
-    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Unicode.Scalar {
-
-        let scalar = collection[location]
-        guard scalar ∈ NewlinePattern.newlineCharacters else {
-            return []
-        }
-        var result = [(location ... location).relative(to: collection)]
-
-        if scalar == carriageReturn {
-            let nextIndex = collection.index(after: location)
-            if nextIndex ≠ collection.endIndex,
-                collection[nextIndex] == lineFeed {
-                result.prepend(location ..< collection.index(location, offsetBy: 2))
-            }
-        }
-        return result
+    if scalar == carriageReturn {
+      let nextIndex = collection.index(after: location)
+      if nextIndex ≠ collection.endIndex,
+        collection[nextIndex] == lineFeed
+      {
+        return location..<collection.index(location, offsetBy: 2)
+      }
     }
+    return (location...location).relative(to: collection)
+  }
 
-    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Unicode.Scalar {
-
-        let scalar = collection[location]
-        guard scalar ∈ NewlinePattern.newlineCharacters else {
-            return nil
-        }
-
-        if scalar == carriageReturn {
-            let nextIndex = collection.index(after: location)
-            if nextIndex ≠ collection.endIndex,
-                collection[nextIndex] == lineFeed {
-                return location ..< collection.index(location, offsetBy: 2)
-            }
-        }
-        return (location ... location).relative(to: collection)
-    }
-
-    @inlinable public func reversed() -> NewlinePattern {
-        return NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
-    }
+  @inlinable public func reversed() -> NewlinePattern {
+    return NewlinePattern(carriageReturnLineFeed: (lineFeed, carriageReturn))
+  }
 }

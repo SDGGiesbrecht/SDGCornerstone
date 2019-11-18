@@ -13,26 +13,26 @@
  */
 
 /// A `nil` literal.
-public struct NilLiteral : ExpressibleByNilLiteral {
+public struct NilLiteral: ExpressibleByNilLiteral {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates an instance of `NilLiteral`.
-    ///
-    /// - Parameters:
-    ///     - nilLiteral: Void.
-    @inlinable public init(nilLiteral: Void) {}
+  /// Creates an instance of `NilLiteral`.
+  ///
+  /// - Parameters:
+  ///     - nilLiteral: Void.
+  @inlinable public init(nilLiteral: Void) {}
 
-    // MARK: - Equality
+  // MARK: - Equality
 
-    // #documentation(SDGCornerstone.Equatable.≠)
-    /// Returns `true` if the two values are inequal.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value to compare.
-    ///     - followingValue: Another value to compare.
-    @inlinable public static func ≠ <T>(precedingValue: T?, followingValue: NilLiteral) -> Bool {
-        return precedingValue != nil // @exempt(from: unicode)
-        // Allows “x ≠ nil” even when x is not Equatable.
-    }
+  // #documentation(SDGCornerstone.Equatable.≠)
+  /// Returns `true` if the two values are inequal.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: A value to compare.
+  ///     - followingValue: Another value to compare.
+  @inlinable public static func ≠ <T>(precedingValue: T?, followingValue: NilLiteral) -> Bool {
+    return precedingValue != nil  // @exempt(from: unicode)
+    // Allows “x ≠ nil” even when x is not Equatable.
+  }
 }

@@ -12,13 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-public enum _APILocalization : String, CaseIterable {
+public enum _APILocalization: String, CaseIterable {
 
-    // MARK: - Cases
+  // MARK: - Cases
 
-    case englishCanada = "en\u{2D}CA"
+  case englishCanada = "en\u{2D}CA"
 
-    // MARK: - Localization
+  // MARK: - Localization
 
-    public static let fallbackLocalization: _APILocalization = .englishCanada
+  public static let fallbackLocalization: _APILocalization = .englishCanada
 }

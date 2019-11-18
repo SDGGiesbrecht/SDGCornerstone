@@ -13,29 +13,31 @@
  */
 
 /// A wrapper which should be transparent when logging or displaying in a playground.
-public protocol TransparentWrapper : CustomDebugStringConvertible, CustomPlaygroundDisplayConvertible, CustomStringConvertible {
+public protocol TransparentWrapper: CustomDebugStringConvertible,
+  CustomPlaygroundDisplayConvertible, CustomStringConvertible
+{
 
-    /// The wrapped instance.
-    var wrappedInstance: Any { get }
+  /// The wrapped instance.
+  var wrappedInstance: Any { get }
 }
 
 extension TransparentWrapper {
 
-    // MARK: - CustomDebugStringConvertible
+  // MARK: - CustomDebugStringConvertible
 
-    public var debugDescription: String {
-        return String(reflecting: wrappedInstance)
-    }
+  public var debugDescription: String {
+    return String(reflecting: wrappedInstance)
+  }
 
-    // MARK: - CustomPlaygroundDisplayConvertible
+  // MARK: - CustomPlaygroundDisplayConvertible
 
-    public var playgroundDescription: Any {
-        return wrappedInstance
-    }
+  public var playgroundDescription: Any {
+    return wrappedInstance
+  }
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(describing: wrappedInstance)
-    }
+  public var description: String {
+    return String(describing: wrappedInstance)
+  }
 }

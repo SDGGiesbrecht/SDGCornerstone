@@ -21,29 +21,32 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGConcurrencyAPITests : TestCase {
+class SDGConcurrencyAPITests: TestCase {
 
-    @available(macOS 10.12, iOS 10, tvOS 10, *) // @exempt(from: unicode)
-    func testRunLoop() {
-        var driver: RunLoop.Driver?
+  @available(macOS 10.12, iOS 10, tvOS 10, *)  // @exempt(from: unicode)
+  func testRunLoop() {
+    var driver: RunLoop.Driver?
 
-        let didRun = expectation(description: "Run loop ran.")
-        let didStop = expectation(description: "Run loop exited.")
+    let didRun = expectation(description: "Run loop ran.")
+    let didStop = expectation(description: "Run loop exited.")
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            let block = {
-                didRun.fulfill()
-                driver = nil
-            }
-            _ = Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { (_) -> Void in
-                block()
-            }
+    DispatchQueue.global(qos: .userInitiated).async {
+      let block = {
+        didRun.fulfill()
+        driver = nil
+      }
+      _ = Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { (_) -> Void in
+        block()
+      }
 
-            RunLoop.current.runForDriver({ driver = $0 }, withCleanUp: {
-                didStop.fulfill()
-            })
+      RunLoop.current.runForDriver(
+        { driver = $0 },
+        withCleanUp: {
+          didStop.fulfill()
         }
-        waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertNil(driver)
+      )
     }
+    waitForExpectations(timeout: 5, handler: nil)
+    XCTAssertNil(driver)
+  }
 }

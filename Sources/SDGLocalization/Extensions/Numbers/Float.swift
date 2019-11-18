@@ -13,14 +13,14 @@
  */
 
 #if canImport(CoreGraphics)
-import CoreGraphics
+  import CoreGraphics
 #endif
 
-extension Double : TextConvertibleNumber {}
+extension Double: TextConvertibleNumber {}
 #if canImport(CoreGraphics)
-extension CGFloat : TextConvertibleNumber {}
+  extension CGFloat: TextConvertibleNumber {}
 #endif
 #if !(os(iOS) || os(watchOS) || os(tvOS))
-extension Float80 : TextConvertibleNumber {}
+  extension Float80: TextConvertibleNumber {}
 #endif
-extension Float : TextConvertibleNumber {}
+extension Float: TextConvertibleNumber {}

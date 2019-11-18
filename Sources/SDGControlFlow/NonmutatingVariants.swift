@@ -34,10 +34,13 @@
 ///     - mutation: The mutating counterpart.
 ///     - instance: An instance on which to perform the mutating counterpart.
 ///     - self: The starting instance.
-@inlinable public func nonmutatingVariant<T>(of mutation: (_ instance: inout T) throws -> Void, on `self`: T) rethrows -> T {
-    var copy = `self`
-    try mutation(&copy)
-    return copy
+@inlinable public func nonmutatingVariant<T>(
+  of mutation: (_ instance: inout T) throws -> Void,
+  on `self`: T
+) rethrows -> T {
+  var copy = `self`
+  try mutation(&copy)
+  return copy
 }
 
 // #example(1, nonmutatingVariant)
@@ -64,10 +67,14 @@
 ///     - mutationArgument: An argument for the mutation.
 ///     - self: The starting instance.
 ///     - argument: An argument to pass to the mutating counterpart.
-@inlinable public func nonmutatingVariant<T, A>(of mutation: (_ instance: inout T, _ mutationArgument: A) throws -> Void, on `self`: T, with argument: A) rethrows -> T {
-    var copy = `self`
-    try mutation(&copy, argument)
-    return copy
+@inlinable public func nonmutatingVariant<T, A>(
+  of mutation: (_ instance: inout T, _ mutationArgument: A) throws -> Void,
+  on `self`: T,
+  with argument: A
+) rethrows -> T {
+  var copy = `self`
+  try mutation(&copy, argument)
+  return copy
 }
 
 // #example(1, nonmutatingVariant)
@@ -95,10 +102,15 @@
 ///     - secondMutationArgument: Another argument for the mutation.
 ///     - self: The starting instance.
 ///     - arguments: Arguments to pass to the mutating counterpart.
-@inlinable public func nonmutatingVariant<T, A, B>(of mutation: (_ instance: inout T, _ firstMutationArgument: A, _ secondMutationArgument: B) throws -> Void, on `self`: T, with arguments: (A, B)) rethrows -> T {
-    var copy = `self`
-    try mutation(&copy, arguments.0, arguments.1)
-    return copy
+@inlinable public func nonmutatingVariant<T, A, B>(
+  of mutation: (_ instance: inout T, _ firstMutationArgument: A, _ secondMutationArgument: B) throws
+    -> Void,
+  on `self`: T,
+  with arguments: (A, B)
+) rethrows -> T {
+  var copy = `self`
+  try mutation(&copy, arguments.0, arguments.1)
+  return copy
 }
 
 // #example(1, nonmutatingVariant)
@@ -127,8 +139,15 @@
 ///     - thirdMutationArgument: Another argument for the mutation.
 ///     - self: The starting instance.
 ///     - arguments: Arguments to pass to the mutating counterpart.
-@inlinable public func nonmutatingVariant<T, A, B, C>(of mutation: (_ instance: inout T, _ firstMutationArgument: A, _ secondMutationArgument: B, _ thirdMutationArgument: C) throws -> Void, on `self`: T, with arguments: (A, B, C)) rethrows -> T {
-    var copy = `self`
-    try mutation(&copy, arguments.0, arguments.1, arguments.2)
-    return copy
+@inlinable public func nonmutatingVariant<T, A, B, C>(
+  of mutation: (
+    _ instance: inout T, _ firstMutationArgument: A, _ secondMutationArgument: B,
+    _ thirdMutationArgument: C
+  ) throws -> Void,
+  on `self`: T,
+  with arguments: (A, B, C)
+) rethrows -> T {
+  var copy = `self`
+  try mutation(&copy, arguments.0, arguments.1, arguments.2)
+  return copy
 }

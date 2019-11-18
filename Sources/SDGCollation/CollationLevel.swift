@@ -14,25 +14,25 @@
 
 import SDGMathematics
 
-internal enum CollationLevel : Int, OrderedEnumeration {
+internal enum CollationLevel: Int, OrderedEnumeration {
 
-    // MARK: - Cases
+  // MARK: - Cases
 
-    case primary
-    case accentsInReverse
-    case accentsForward
-    case `case`
-    case punctuation
-    case script
+  case primary
+  case accentsInReverse
+  case accentsForward
+  case `case`
+  case punctuation
+  case script
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    internal var isInReverse: Bool {
-        switch self {
-        case .primary, .accentsForward, .case, .punctuation, .script:
-            return false
-        case .accentsInReverse:
-            return true
-        }
+  internal var isInReverse: Bool {
+    switch self {
+    case .primary, .accentsForward, .case, .punctuation, .script:
+      return false
+    case .accentsInReverse:
+      return true
     }
+  }
 }

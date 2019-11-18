@@ -13,51 +13,52 @@
  */
 
 /// A weak reference to a class instance.
-@propertyWrapper public struct Weak<Pointee : AnyObject> : ProjectingPropertyWrapper, TransparentWrapper {
+@propertyWrapper
+public struct Weak<Pointee: AnyObject>: ProjectingPropertyWrapper, TransparentWrapper {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a reference to a class instance.
-    ///
-    /// - Parameters:
-    ///     - pointee: The pointee.
-    public init(_ pointee: Pointee?) {
-        self.pointee = pointee
+  /// Creates a reference to a class instance.
+  ///
+  /// - Parameters:
+  ///     - pointee: The pointee.
+  public init(_ pointee: Pointee?) {
+    self.pointee = pointee
+  }
+
+  /// Creates an empty reference.
+  public init() {}
+
+  // MARK: - Properties
+
+  /// The pointee.
+  public weak var pointee: Pointee?
+
+  // MARK: - ProjectingPropertyWrapper
+
+  public var projectedValue: Weak<Pointee> {
+    get {
+      return self
     }
-
-    /// Creates an empty reference.
-    public init() {}
-
-    // MARK: - Properties
-
-    /// The pointee.
-    public weak var pointee: Pointee?
-
-    // MARK: - ProjectingPropertyWrapper
-
-    public var projectedValue: Weak<Pointee> {
-        get {
-            return self
-        }
-        set {
-            self = newValue
-        }
+    set {
+      self = newValue
     }
+  }
 
-    // MARK: - PropertyWrapper
+  // MARK: - PropertyWrapper
 
-    public var wrappedValue: Pointee? {
-        get {
-            return pointee
-        }
-        set {
-            pointee = newValue
-        }
+  public var wrappedValue: Pointee? {
+    get {
+      return pointee
     }
-
-    // MARK: - TransparentWrapper
-
-    public var wrappedInstance: Any {
-        return pointee as Any
+    set {
+      pointee = newValue
     }
+  }
+
+  // MARK: - TransparentWrapper
+
+  public var wrappedInstance: Any {
+    return pointee as Any
+  }
 }

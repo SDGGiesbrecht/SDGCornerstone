@@ -13,11 +13,11 @@
  */
 
 /// A property wrapper which projects a value accessible with `$`.
-public protocol ProjectingPropertyWrapper : PropertyWrapper {
+public protocol ProjectingPropertyWrapper: PropertyWrapper {
 
-    /// The projected type.
-    associatedtype Projected
+  /// The projected type.
+  associatedtype Projected
 
-    /// The projected value.
-    var projectedValue: Projected { get }
+  /// The projected value.
+  var projectedValue: Projected { get }
 }

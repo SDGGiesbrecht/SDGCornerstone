@@ -17,57 +17,57 @@ import SDGControlFlow
 /// A type that can be additively inverted.
 ///
 /// - Note: Unlike `SignedNumeric`, `Negatable` types do not need to conform to `Comparable`, allowing conformance by two‐dimensional vectors, etc.
-public protocol Negatable : GenericAdditiveArithmetic {
+public protocol Negatable: GenericAdditiveArithmetic {
 
-    // @documentation(SDGCornerstone.Negatable.−)
-    /// Returns the additive inverse of the operand.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to invert.
-    static prefix func − (operand: Self) -> Self
+  // @documentation(SDGCornerstone.Negatable.−)
+  /// Returns the additive inverse of the operand.
+  ///
+  /// - Parameters:
+  ///     - operand: The value to invert.
+  static prefix func − (operand: Self) -> Self
 
-    /// Replaces this value with its additive inverse.
-    mutating func negate()
+  /// Replaces this value with its additive inverse.
+  mutating func negate()
 }
 
 extension Negatable {
 
-    @inlinable public static prefix func − (operand: Self) -> Self {
-        return nonmutatingVariant(of: { $0.negate() }, on: operand)
-    }
+  @inlinable public static prefix func − (operand: Self) -> Self {
+    return nonmutatingVariant(of: { $0.negate() }, on: operand)
+  }
 
-    @inlinable internal mutating func _negate() {
-        self = Self.zero − self
-    }
-    @inlinable public mutating func negate() {
-        _negate()
-    }
+  @inlinable internal mutating func _negate() {
+    self = Self.zero − self
+  }
+  @inlinable public mutating func negate() {
+    _negate()
+  }
 }
 
 extension SignedInteger {
-    @inlinable internal mutating func __negate() {
-        negate()
-    }
+  @inlinable internal mutating func __negate() {
+    negate()
+  }
 }
-extension Negatable where Self : SignedInteger {
+extension Negatable where Self: SignedInteger {
 
-    @inlinable public mutating func negate() {
-        __negate()
-    }
+  @inlinable public mutating func negate() {
+    __negate()
+  }
 }
 
-extension Negatable where Self : SignedNumeric {
+extension Negatable where Self: SignedNumeric {
 
-    // #documentation(SDGCornerstone.Negatable.−)
-    /// Returns the additive inverse of the operand.
-    ///
-    /// - Parameters:
-    ///     - operand: The value to invert.
-    @inlinable public static prefix func - (operand: Self) -> Self { // @exempt(from: unicode)
-        return −operand
-    }
+  // #documentation(SDGCornerstone.Negatable.−)
+  /// Returns the additive inverse of the operand.
+  ///
+  /// - Parameters:
+  ///     - operand: The value to invert.
+  @inlinable public static prefix func - (operand: Self) -> Self {  // @exempt(from: unicode)
+    return −operand
+  }
 
-    @inlinable public mutating func negate() {
-        _negate()
-    }
+  @inlinable public mutating func negate() {
+    _negate()
+  }
 }

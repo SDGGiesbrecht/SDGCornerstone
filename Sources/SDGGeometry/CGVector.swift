@@ -14,37 +14,39 @@
 
 #if canImport(CoreGraphics)
 
-import CoreGraphics
+  import CoreGraphics
 
-import SDGMathematics
+  import SDGMathematics
 
-extension CGVector : GenericAdditiveArithmetic, Negatable, RationalVector, TwoDimensionalVectorProtocol {
+  extension CGVector: GenericAdditiveArithmetic, Negatable, RationalVector,
+    TwoDimensionalVectorProtocol
+  {
 
     // MARK: - TwoDimensionalVector
 
     public typealias Scalar = CGFloat
 
     @inlinable public init(Δx: Scalar, Δy: Scalar) {
-        self = CGVector(dx: Δx, dy: Δy)
+      self = CGVector(dx: Δx, dy: Δy)
     }
 
     @inlinable public var Δx: Scalar {
-        get {
-            return dx
-        }
-        set {
-            dx = newValue
-        }
+      get {
+        return dx
+      }
+      set {
+        dx = newValue
+      }
     }
 
     @inlinable public var Δy: Scalar {
-        get {
-            return dy
-        }
-        set {
-            dy = newValue
-        }
+      get {
+        return dy
+      }
+      set {
+        dy = newValue
+      }
     }
-}
+  }
 
 #endif

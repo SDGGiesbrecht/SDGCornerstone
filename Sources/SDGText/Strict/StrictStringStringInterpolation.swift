@@ -14,15 +14,15 @@
 
 extension StrictString {
 
-    /// The type which handles interpolation of strict strings.
-    public struct StringInterpolation : StrictStringInterpolationProtocol {
+  /// The type which handles interpolation of strict strings.
+  public struct StringInterpolation: StrictStringInterpolationProtocol {
 
-        // MARK: - StrictStringInterpolationProtocol
+    // MARK: - StrictStringInterpolationProtocol
 
-        public init(string: StrictString) {
-            self.string = string
-        }
-
-        public var string: StrictString
+    public init(string: StrictString) {
+      self.string = string
     }
+
+    public var string: StrictString
+  }
 }

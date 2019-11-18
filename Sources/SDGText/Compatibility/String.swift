@@ -16,36 +16,36 @@
 /// Eine Zeichenkette aus Unicode‐Zeichen. (`String`)
 public typealias Zeichenkette = String
 
-extension String : StringFamily {
+extension String: StringFamily {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a string from a `StrictString`.
-    @inlinable public init(_ string: StrictString) {
-        self = string.string
+  /// Creates a string from a `StrictString`.
+  @inlinable public init(_ string: StrictString) {
+    self = string.string
+  }
+
+  // MARK: - StringFamily
+
+  public typealias ScalarView = String.UnicodeScalarView
+
+  public typealias ClusterView = String
+
+  @inlinable public var scalars: ScalarView {
+    get {
+      return unicodeScalars
     }
-
-    // MARK: - StringFamily
-
-    public typealias ScalarView = String.UnicodeScalarView
-
-    public typealias ClusterView = String
-
-    @inlinable public var scalars: ScalarView {
-        get {
-            return unicodeScalars
-        }
-        set {
-            unicodeScalars = newValue
-        }
+    set {
+      unicodeScalars = newValue
     }
+  }
 
-    @inlinable public var clusters: ClusterView {
-        get {
-            return self
-        }
-        set {
-            self = newValue
-        }
+  @inlinable public var clusters: ClusterView {
+    get {
+      return self
     }
+    set {
+      self = newValue
+    }
+  }
 }

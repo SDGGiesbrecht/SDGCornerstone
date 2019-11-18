@@ -16,52 +16,55 @@ import SDGMathematics
 import SDGText
 
 /// A day of a Gregorian month.
-public struct GregorianDay : CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, Day, ICalendarComponent, ISOCalendarComponent, OrdinalCalendarComponent, RawRepresentableCalendarComponent {
+public struct GregorianDay: CodableViaRawRepresentableCalendarComponent,
+  ConsistentDurationCalendarComponent, Day, ICalendarComponent, ISOCalendarComponent,
+  OrdinalCalendarComponent, RawRepresentableCalendarComponent
+{
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private var day: Int
+  private var day: Int
 
-    // MARK: - Recurrence
+  // MARK: - Recurrence
 
-    /// Corrects the day for the specified month and year, altering them if necessary. (February 29 → March 1 in non‐leap years.)
-    ///
-    /// - Parameters:
-    ///     - month: The month.
-    ///     - year: The year.
-    public mutating func correct(forMonth month: inout GregorianMonth, year: GregorianYear) {
-        let daysInMonth = month.numberOfDays(leapYear: year.isLeapYear)
-        if self.day > daysInMonth {
-            self.day −= daysInMonth
-            month.increment()
-        }
+  /// Corrects the day for the specified month and year, altering them if necessary. (February 29 → March 1 in non‐leap years.)
+  ///
+  /// - Parameters:
+  ///     - month: The month.
+  ///     - year: The year.
+  public mutating func correct(forMonth month: inout GregorianMonth, year: GregorianYear) {
+    let daysInMonth = month.numberOfDays(leapYear: year.isLeapYear)
+    if self.day > daysInMonth {
+      self.day −= daysInMonth
+      month.increment()
     }
+  }
 
-    // MARK: - ConsistentDurationCalendarComponent
+  // MARK: - ConsistentDurationCalendarComponent
 
-    public static var duration: CalendarInterval<FloatMax> {
-        return (1 as FloatMax).days
-    }
+  public static var duration: CalendarInterval<FloatMax> {
+    return (1 as FloatMax).days
+  }
 
-    // MARK: - ISOCalendarComponent
+  // MARK: - ISOCalendarComponent
 
-    public func inISOFormat() -> StrictString {
-        return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
-    }
+  public func inISOFormat() -> StrictString {
+    return ordinal.inDigits().filled(to: 2, with: "0", from: .start)
+  }
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Int
+  public typealias Vector = Int
 
-    // MARK: - RawRepresentableCalendarComponent
+  // MARK: - RawRepresentableCalendarComponent
 
-    public init(unsafeRawValue: RawValue) {
-        day = unsafeRawValue
-    }
+  public init(unsafeRawValue: RawValue) {
+    day = unsafeRawValue
+  }
 
-    public static let validRange: Range<RawValue>? = 1 ..< GregorianMonth.maximumNumberOfDays + 1
+  public static let validRange: Range<RawValue>? = 1..<GregorianMonth.maximumNumberOfDays + 1
 
-    public var rawValue: Int {
-        return day
-    }
+  public var rawValue: Int {
+    return day
+  }
 }

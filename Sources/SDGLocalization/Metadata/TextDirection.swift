@@ -15,16 +15,16 @@
 import SDGControlFlow
 
 /// A direction in which natural text is written.
-public enum TextDirection : CaseIterable {
+public enum TextDirection: CaseIterable {
 
-    /// Written right‐to‐left, top‐to‐bottom, such as Hebrew, Arabic or Persian.
-    case rightToLeftTopToBottom
+  /// Written right‐to‐left, top‐to‐bottom, such as Hebrew, Arabic or Persian.
+  case rightToLeftTopToBottom
 
-    /// Written left‐to‐right, top‐to‐bottom, such as Spanish, English or Russian.
-    case leftToRightTopToBottom
+  /// Written left‐to‐right, top‐to‐bottom, such as Spanish, English or Russian.
+  case leftToRightTopToBottom
 
-    /// Written top‐to‐bottom, right‐to‐left, such as Chinese, Japanese or Korean.
-    ///
-    /// Languages written this way can alternatively be written left‐to‐right, top‐to‐bottom.
-    case topToBottomRightToLeft
+  /// Written top‐to‐bottom, right‐to‐left, such as Chinese, Japanese or Korean.
+  ///
+  /// Languages written this way can alternatively be written left‐to‐right, top‐to‐bottom.
+  case topToBottomRightToLeft
 }

@@ -33,36 +33,52 @@ import SDGCornerstoneLocalizations
 ///     - file: The file name where the call occurs. Provided.
 ///     - line: The line number where the call occurs. Provided.
 ///     - test: The closure to test.
-public func limit(_ testName: String, to duration: TimeInterval, file: StaticString = #file, line: UInt = #line, test: () -> Void) {
+public func limit(
+  _ testName: String,
+  to duration: TimeInterval,
+  file: StaticString = #file,
+  line: UInt = #line,
+  test: () -> Void
+) {
 
-    let iterations = 10
+  let iterations = 10
 
-    var results: [TimeInterval] = []
-    for _ in 1 ... iterations {
-        autoreleasepool {
-            let start = Date.timeIntervalSinceReferenceDate
-            test()
-            let end = Date.timeIntervalSinceReferenceDate
-            results.append(end − start)
+  var results: [TimeInterval] = []
+  for _ in 1...iterations {
+    autoreleasepool {
+      let start = Date.timeIntervalSinceReferenceDate
+      test()
+      let end = Date.timeIntervalSinceReferenceDate
+      results.append(end − start)
+    }
+  }
+  let sum = results.reduce(0) { $0 + $1 }
+  let mean = sum ÷ TimeInterval(iterations)
+
+  let decimals = 3
+  if mean > duration {
+    fail(
+      String(
+        UserFacing<StrictString, APILocalization>({ localization in
+          switch localization {
+          case .englishCanada:  // @exempt(from: tests)
+            return
+              "“\(testName)” took an average of \(mean.inDigits(maximumDecimalPlaces: decimals, radixCharacter: ".")) seconds! That is too slow (compared to \(duration.inDigits(maximumDecimalPlaces: decimals, radixCharacter: ".")) seconds)."
+          }
+        }).resolved()
+      ),
+      file: file,
+      line: line
+    )
+  } else {
+    print(
+      UserFacing<StrictString, APILocalization>({ localization in
+        switch localization {
+        case .englishCanada:
+          return
+            "• “\(testName)” took an average of \(mean.inDigits(maximumDecimalPlaces: decimals, radixCharacter: ".")) seconds."
         }
-    }
-    let sum = results.reduce(0) { $0 + $1 }
-    let mean = sum ÷ TimeInterval(iterations)
-
-    let decimals = 3
-    if mean > duration {
-        fail(String(UserFacing<StrictString, APILocalization>({ localization in
-            switch localization {
-            case .englishCanada: // @exempt(from: tests)
-                return "“\(testName)” took an average of \(mean.inDigits(maximumDecimalPlaces: decimals, radixCharacter: ".")) seconds! That is too slow (compared to \(duration.inDigits(maximumDecimalPlaces: decimals, radixCharacter: ".")) seconds)."
-            }
-        }).resolved()), file: file, line: line)
-    } else {
-        print(UserFacing<StrictString, APILocalization>({ localization in
-            switch localization {
-            case .englishCanada:
-                return "• “\(testName)” took an average of \(mean.inDigits(maximumDecimalPlaces: decimals, radixCharacter: ".")) seconds."
-            }
-        }).resolved())
-    }
+      }).resolved()
+    )
+  }
 }

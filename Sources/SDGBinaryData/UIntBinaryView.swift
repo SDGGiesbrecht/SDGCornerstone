@@ -17,86 +17,91 @@ import SDGMathematics
 import SDGCollections
 
 /// A view of the contents of a fixed‐length unsigned integer as a collection of bits.
-public struct BinaryView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, CustomStringConvertible, MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay {
+public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collection,
+  CustomStringConvertible, MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay
+{
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    @inlinable internal init(_ uInt: UIntValue) {
-        self.uInt = uInt
-    }
+  @inlinable internal init(_ uInt: UIntValue) {
+    self.uInt = uInt
+  }
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// The position of the first element in any instance.
-    @inlinable public static var startIndex: Index {
-        return 0
-    }
+  /// The position of the first element in any instance.
+  @inlinable public static var startIndex: Index {
+    return 0
+  }
 
-    /// The position following the last valid index in any instance.
-    @inlinable public static var endIndex: Index {
-        return Index(count)
-    }
+  /// The position following the last valid index in any instance.
+  @inlinable public static var endIndex: Index {
+    return Index(count)
+  }
 
-    /// The number of elements in any instance.
-    @inlinable public static var count: Int {
-        let bytes = MemoryLayout<UIntValue>.size
-        return bytes × 8
-    }
+  /// The number of elements in any instance.
+  @inlinable public static var count: Int {
+    let bytes = MemoryLayout<UIntValue>.size
+    return bytes × 8
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    @usableFromInline internal var uInt: UIntValue
+  @usableFromInline internal var uInt: UIntValue
 
-    // MARK: - BidirectionalCollection
+  // MARK: - BidirectionalCollection
 
-    @inlinable public func index(before i: Index) -> Index {
-        return i − (1 as Index)
-    }
+  @inlinable public func index(before i: Index) -> Index {
+    return i − (1 as Index)
+  }
 
-    // MARK: - Collection
+  // MARK: - Collection
 
-    public typealias Element = Bool
-    public typealias Index = UIntValue
-    public typealias Indices = DefaultIndices<BinaryView>
+  public typealias Element = Bool
+  public typealias Index = UIntValue
+  public typealias Indices = DefaultIndices<BinaryView>
 
-    @inlinable public var startIndex: Index {
-        return BinaryView.startIndex
-    }
-    @inlinable public var endIndex: Index {
-        return BinaryView.endIndex
-    }
+  @inlinable public var startIndex: Index {
+    return BinaryView.startIndex
+  }
+  @inlinable public var endIndex: Index {
+    return BinaryView.endIndex
+  }
 
-    @inlinable public func index(after i: Index) -> Index {
-        return i + (1 as Index)
-    }
+  @inlinable public func index(after i: Index) -> Index {
+    return i + (1 as Index)
+  }
 
-    @inlinable internal func assertIndexExists(_ index: Index) {
-        _assert(index ∈ bounds, { (localization: _APILocalization) in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "Index out of bounds."
-            }
-        })
-    }
-
-    @inlinable public subscript(position: Index) -> Element {
-        get {
-            assertIndexExists(position)
-            return uInt.bitwiseAnd(with: 1 << position) >> position == 1
+  @inlinable internal func assertIndexExists(_ index: Index) {
+    _assert(
+      index ∈ bounds,
+      { (localization: _APILocalization) in
+        switch localization {  // @exempt(from: tests)
+        case .englishCanada:
+          return "Index out of bounds."
         }
-        set {
-            assertIndexExists(position)
-            let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << position).bitwiseNot())
-            uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << position)
-        }
-    }
+      }
+    )
+  }
 
-    // MARK: - CustomStringConvertible
-
-    public var description: String {
-        let bits = self.map { bit in
-            return bit ? "1" : "0"
-        }
-        return bits.joined()
+  @inlinable public subscript(position: Index) -> Element {
+    get {
+      assertIndexExists(position)
+      return uInt.bitwiseAnd(with: 1 << position) >> position == 1
     }
+    set {
+      assertIndexExists(position)
+      let oldErased = uInt.bitwiseAnd(with: ((1 as Index) << position).bitwiseNot())
+      uInt = oldErased.bitwiseOr(with: (newValue ? 1 : 0) << position)
+    }
+  }
+
+  // MARK: - CustomStringConvertible
+
+  public var description: String {
+    let bits = self.map { bit in
+      return bit ? "1" : "0"
+    }
+    return bits.joined()
+  }
 }

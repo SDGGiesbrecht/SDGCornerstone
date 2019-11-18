@@ -19,57 +19,60 @@ import SDGLogic
 
 extension RunLoop {
 
-    // MARK: - Running the Loop
+  // MARK: - Running the Loop
 
-    /// A class that manages a run loop.
-    public final class Driver {
-        fileprivate init() {}
+  /// A class that manages a run loop.
+  public final class Driver {
+    fileprivate init() {}
+  }
+
+  // #example(1, runLoopUsage)
+  /// Runs the run loop for the lifetime of the driver provided to `holdDriver`.
+  ///
+  /// For example:
+  ///
+  /// ```swift
+  /// var driver: RunLoop.Driver?
+  /// DispatchQueue.global(qos: .userInitiated).async {
+  ///     RunLoop.current.runForDriver { driver = $0 }
+  /// }
+  /// // The background run loop is now running.
+  ///
+  /// driver = nil
+  /// // The background run loop has now stopped.
+  /// ```
+  ///
+  /// - Warning: Giving the run loop (or any of its timers, ports, etc.) a strong reference to the driver will create a retain cycle.
+  ///
+  /// - Parameters:
+  ///     - holdDriver: A closure that takes ownershipe of the driver by creating a strong reference to it somewhere with the desired lifetime.
+  ///     - driver: The driver that runs the loop. As soon as ARC deallocates this driver, the run loop will stop.
+  public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void) {
+    var driver: Driver? = Driver()
+    weak var weakDriver = driver
+    holdDriver(driver!)
+    driver = nil
+
+    while weakDriver ≠ nil {
+      autoreleasepool {
+        run(until: Date(timeIntervalSinceNow: 1))
+      }
     }
+  }
 
-    // #example(1, runLoopUsage)
-    /// Runs the run loop for the lifetime of the driver provided to `holdDriver`.
-    ///
-    /// For example:
-    ///
-    /// ```swift
-    /// var driver: RunLoop.Driver?
-    /// DispatchQueue.global(qos: .userInitiated).async {
-    ///     RunLoop.current.runForDriver { driver = $0 }
-    /// }
-    /// // The background run loop is now running.
-    ///
-    /// driver = nil
-    /// // The background run loop has now stopped.
-    /// ```
-    ///
-    /// - Warning: Giving the run loop (or any of its timers, ports, etc.) a strong reference to the driver will create a retain cycle.
-    ///
-    /// - Parameters:
-    ///     - holdDriver: A closure that takes ownershipe of the driver by creating a strong reference to it somewhere with the desired lifetime.
-    ///     - driver: The driver that runs the loop. As soon as ARC deallocates this driver, the run loop will stop.
-    public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void) {
-        var driver: Driver? = Driver()
-        weak var weakDriver = driver
-        holdDriver(driver!)
-        driver = nil
-
-        while weakDriver ≠ nil {
-            autoreleasepool {
-                run(until: Date(timeIntervalSinceNow: 1))
-            }
-        }
-    }
-
-    /// Runs the run loop for the lifetime of the driver provided to `holdDriver` and executes `cleanUp` when the run loop stops.
-    ///
-    /// - SeeAlso: `runForDriver(_:)`
-    ///
-    /// - Parameters:
-    ///     - holdDriver: A closure that takes ownershipe of the driver by creating a strong reference to it somewhere with the desired lifetime.
-    ///     - driver: The driver that runs the loop. As soon as ARC deallocates this driver, the run loop will stop.
-    ///     - cleanUp: A closure that will be executed when the loop stops.
-    public func runForDriver(_ holdDriver: (_ driver: Driver) -> Void, withCleanUp cleanUp: () -> Void) {
-        runForDriver(holdDriver)
-        cleanUp()
-    }
+  /// Runs the run loop for the lifetime of the driver provided to `holdDriver` and executes `cleanUp` when the run loop stops.
+  ///
+  /// - SeeAlso: `runForDriver(_:)`
+  ///
+  /// - Parameters:
+  ///     - holdDriver: A closure that takes ownershipe of the driver by creating a strong reference to it somewhere with the desired lifetime.
+  ///     - driver: The driver that runs the loop. As soon as ARC deallocates this driver, the run loop will stop.
+  ///     - cleanUp: A closure that will be executed when the loop stops.
+  public func runForDriver(
+    _ holdDriver: (_ driver: Driver) -> Void,
+    withCleanUp cleanUp: () -> Void
+  ) {
+    runForDriver(holdDriver)
+    cleanUp()
+  }
 }

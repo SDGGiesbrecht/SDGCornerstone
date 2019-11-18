@@ -20,60 +20,67 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A minute of the Gregorian hour.
-public struct GregorianMinute : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, TextualPlaygroundDisplay {
+public struct GregorianMinute: CardinalCalendarComponent,
+  CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent,
+  ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent,
+  TextualPlaygroundDisplay
+{
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// The number of minutes in an hour.
-    public static let minutesPerHour: Int = 60
+  /// The number of minutes in an hour.
+  public static let minutesPerHour: Int = 60
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private var minute: Int
+  private var minute: Int
 
-    // MARK: - ConsistentDurationCalendarComponent
+  // MARK: - ConsistentDurationCalendarComponent
 
-    public static var duration: CalendarInterval<FloatMax> {
-        return (1 as FloatMax).minutes
-    }
+  public static var duration: CalendarInterval<FloatMax> {
+    return (1 as FloatMax).minutes
+  }
 
-    // MARK: - Text Representations
+  // MARK: - Text Representations
 
-    /// Returns the minite in digits with leading zeroes.
-    public func inDigits() -> StrictString {
-        return minute.inDigits().filled(to: 2, with: "0", from: .start)
-    }
+  /// Returns the minite in digits with leading zeroes.
+  public func inDigits() -> StrictString {
+    return minute.inDigits().filled(to: 2, with: "0", from: .start)
+  }
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
-                return self.inDigits()
-            }
-        }).resolved())
-    }
+  public var description: String {
+    return String(
+      UserFacing<StrictString, FormatLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland,
+          .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
+          return self.inDigits()
+        }
+      }).resolved()
+    )
+  }
 
-    // MARK: - ISOCalendarComponent
+  // MARK: - ISOCalendarComponent
 
-    public func inISOFormat() -> StrictString {
-        return minute.inDigits().filled(to: 2, with: "0", from: .start)
-    }
+  public func inISOFormat() -> StrictString {
+    return minute.inDigits().filled(to: 2, with: "0", from: .start)
+  }
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Int
+  public typealias Vector = Int
 
-    // MARK: - RawRepresentableCalendarComponent
+  // MARK: - RawRepresentableCalendarComponent
 
-    public init(unsafeRawValue: RawValue) {
-        minute = unsafeRawValue
-    }
+  public init(unsafeRawValue: RawValue) {
+    minute = unsafeRawValue
+  }
 
-    public static let validRange: Range<RawValue>? = 0 ..< GregorianMinute.minutesPerHour
+  public static let validRange: Range<RawValue>? = 0..<GregorianMinute.minutesPerHour
 
-    public var rawValue: RawValue {
-        return minute
-    }
+  public var rawValue: RawValue {
+    return minute
+  }
 }

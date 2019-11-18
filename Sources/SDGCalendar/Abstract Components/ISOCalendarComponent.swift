@@ -17,6 +17,6 @@ import SDGText
 /// A calendar component with an iCalendar representation.
 public protocol ISOCalendarComponent {
 
-    /// Returns a string representation in the ISO format.
-    func inISOFormat() -> StrictString
+  /// Returns a string representation in the ISO format.
+  func inISOFormat() -> StrictString
 }

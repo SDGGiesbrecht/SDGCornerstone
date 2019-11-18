@@ -14,13 +14,13 @@
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-import Foundation
+  import Foundation
 
-import SDGControlFlow
-import SDGLogic
+  import SDGControlFlow
+  import SDGLogic
 
-/// A command line shell.
-public final class Shell : TransparentWrapper {
+  /// A command line shell.
+  public final class Shell: TransparentWrapper {
 
     // MARK: - Static Properties
 
@@ -30,15 +30,15 @@ public final class Shell : TransparentWrapper {
     // MARK: - Static Functions
 
     private static func argumentNeedsQuotationMarks(_ argument: String) -> Bool {
-        if argument.contains(" ") {
-            return true
-        } else {
-            return false
-        }
+      if argument.contains(" ") {
+        return true
+      } else {
+        return false
+      }
     }
 
     private static func addQuotationMarks(_ argument: String) -> String {
-        return "\u{22}" + argument + "\u{22}"
+      return "\u{22}" + argument + "\u{22}"
     }
 
     /// Guarantees that an argument will be quoted exactly once when passed to `run(command:)`.
@@ -48,11 +48,11 @@ public final class Shell : TransparentWrapper {
     /// - Parameters:
     ///     - argument: The argument to quote.
     public static func quote(_ argument: String) -> String {
-        if Shell.argumentNeedsQuotationMarks(argument) {
-            return argument
-        } else {
-            return Shell.addQuotationMarks(argument)
-        }
+      if Shell.argumentNeedsQuotationMarks(argument) {
+        return argument
+      } else {
+        return Shell.addQuotationMarks(argument)
+      }
     }
 
     // MARK: - Initialization
@@ -62,7 +62,7 @@ public final class Shell : TransparentWrapper {
     /// - Parameters:
     ///     - executable: The location of the executable file.
     public init(at executable: URL) {
-        process = ExternalProcess(at: executable)
+      process = ExternalProcess(at: executable)
     }
 
     // MARK: - Properties
@@ -82,28 +82,34 @@ public final class Shell : TransparentWrapper {
     ///     - line: The line of output.
     ///
     /// - Returns: The output of the command.
-    @discardableResult public func run(command: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, autoquote: Bool = true, reportProgress: (_ line: String) -> Void = { _ in }) -> Result<String, ExternalProcess.Error> { // @exempt(from: tests)
+    @discardableResult public func run(
+      command: [String],
+      in workingDirectory: URL? = nil,
+      with environment: [String: String]? = nil,
+      autoquote: Bool = true,
+      reportProgress: (_ line: String) -> Void = { _ in }
+    ) -> Result<String, ExternalProcess.Error> {  // @exempt(from: tests)
 
-        let commandString = command.map({ (argument: String) -> String in
-            if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
-                return Shell.addQuotationMarks(argument)
-            } else {
-                return argument
-            }
-        }).joined(separator: " ") // @exempt(from: tests) False result in Xcode 9.3.
-
-        reportProgress("$ " + commandString)
-
-        return process.run(["\u{2D}c", commandString], in: workingDirectory, with: environment) {
-            reportProgress($0)
+      let commandString = command.map({ (argument: String) -> String in
+        if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
+          return Shell.addQuotationMarks(argument)
+        } else {
+          return argument
         }
+      }).joined(separator: " ")  // @exempt(from: tests) False result in Xcode 9.3.
+
+      reportProgress("$ " + commandString)
+
+      return process.run(["\u{2D}c", commandString], in: workingDirectory, with: environment) {
+        reportProgress($0)
+      }
     }
 
     // MARK: - TransparentWrapper
 
     public var wrappedInstance: Any {
-        return process
+      return process
     }
-}
+  }
 
 #endif

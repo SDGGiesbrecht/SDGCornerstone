@@ -13,13 +13,15 @@
  */
 
 #if !canImport(ObjectiveC)
-/// Allows code which autoreleases on Darwin to compile on Linux without the need for operating system checks.
-///
-/// This function does nothing more than execute the provided body on Linux, because Linux has no autoreleasing Objective‐C APIs to link against.
-///
-/// - Parameters:
-///     - body: A closure to invoke.
-@inlinable public func autoreleasepool<Result>(invoking body: () throws -> Result) rethrows -> Result {
+  /// Allows code which autoreleases on Darwin to compile on Linux without the need for operating system checks.
+  ///
+  /// This function does nothing more than execute the provided body on Linux, because Linux has no autoreleasing Objective‐C APIs to link against.
+  ///
+  /// - Parameters:
+  ///     - body: A closure to invoke.
+  @inlinable public func autoreleasepool<Result>(invoking body: () throws -> Result) rethrows
+    -> Result
+  {
     return try body()
-}
+  }
 #endif

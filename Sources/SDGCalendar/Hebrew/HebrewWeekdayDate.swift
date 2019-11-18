@@ -16,64 +16,68 @@ import SDGMathematics
 import SDGText
 import SDGLocalization
 
-internal struct HebrewWeekdayDate : DateDefinition {
+internal struct HebrewWeekdayDate: DateDefinition {
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    internal static let referenceMoment = CalendarDate(hebrew: .tishrei, 4, 5758)
-    private static let referenceWeekday: HebrewWeekday = .sunday
+  internal static let referenceMoment = CalendarDate(hebrew: .tishrei, 4, 5758)
+  private static let referenceWeekday: HebrewWeekday = .sunday
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private let week: Int
-    internal let weekday: HebrewWeekday
-    private let hour: HebrewHour
-    private let part: HebrewPart
+  private let week: Int
+  internal let weekday: HebrewWeekday
+  private let hour: HebrewHour
+  private let part: HebrewPart
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    internal init(week: Int, weekday: HebrewWeekday, hour: HebrewHour, part: HebrewPart) {
+  internal init(week: Int, weekday: HebrewWeekday, hour: HebrewHour, part: HebrewPart) {
 
-        self.week = week
-        self.weekday = weekday
-        self.hour = hour
-        self.part = part
+    self.week = week
+    self.weekday = weekday
+    self.hour = hour
+    self.part = part
 
-        var interval: CalendarInterval<FloatMax> = FloatMax(week).weeks
-        interval += FloatMax(weekday.numberAlreadyElapsed).days
-        interval += FloatMax(hour.numberAlreadyElapsed).hours
-        interval += FloatMax(part.numberAlreadyElapsed).hebrewParts
-        intervalSinceReferenceDate = interval
-    }
+    var interval: CalendarInterval<FloatMax> = FloatMax(week).weeks
+    interval += FloatMax(weekday.numberAlreadyElapsed).days
+    interval += FloatMax(hour.numberAlreadyElapsed).hours
+    interval += FloatMax(part.numberAlreadyElapsed).hebrewParts
+    intervalSinceReferenceDate = interval
+  }
 
-    // MARK: - DateDefinition
+  // MARK: - DateDefinition
 
-    internal static let identifier: StrictString = "שבוע עברי"
-    internal static let referenceDate: CalendarDate = referenceMoment
+  internal static let identifier: StrictString = "שבוע עברי"
+  internal static let referenceDate: CalendarDate = referenceMoment
 
-    internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
+  internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
 
-    internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
-        self.intervalSinceReferenceDate = intervalSinceReferenceDate
+  internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
+    self.intervalSinceReferenceDate = intervalSinceReferenceDate
 
-        let date = HebrewWeekdayDate.referenceDate + intervalSinceReferenceDate
-        hour = date.hebrewHour
-        part = date.hebrewPart
+    let date = HebrewWeekdayDate.referenceDate + intervalSinceReferenceDate
+    hour = date.hebrewHour
+    part = date.hebrewPart
 
-        let week = Int(intervalSinceReferenceDate.inWeeks.rounded(.down))
-        self.week = week
-        weekday = HebrewWeekday(numberAlreadyElapsed: Int((intervalSinceReferenceDate − FloatMax(week).weeks).inDays.rounded(.down)))
-    }
+    let week = Int(intervalSinceReferenceDate.inWeeks.rounded(.down))
+    self.week = week
+    weekday = HebrewWeekday(
+      numberAlreadyElapsed: Int(
+        (intervalSinceReferenceDate − FloatMax(week).weeks).inDays.rounded(.down)
+      )
+    )
+  }
 
-    // MARK: - Decodable
+  // MARK: - Decodable
 
-    internal init(from decoder: Decoder) throws {
-        unreachable() // This definition is only ever transiently created to determine the weekday of another date.
-    }
+  internal init(from decoder: Decoder) throws {
+    unreachable()  // This definition is only ever transiently created to determine the weekday of another date.
+  }
 
-    // MARK: - Encodable
+  // MARK: - Encodable
 
-    internal func encode(to encoder: Encoder) throws {
-        unreachable() // This definition is only ever transiently created to determine the weekday of another date.
-    }
+  internal func encode(to encoder: Encoder) throws {
+    unreachable()  // This definition is only ever transiently created to determine the weekday of another date.
+  }
 }

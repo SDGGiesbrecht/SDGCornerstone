@@ -19,133 +19,135 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the week.
-public protocol Weekday : ConsistentlyOrderedCalendarComponent, TextualPlaygroundDisplay {}
+public protocol Weekday: ConsistentlyOrderedCalendarComponent, TextualPlaygroundDisplay {}
 
 extension Weekday {
 
-    /// Returns the English name.
-    public func inEnglish() -> StrictString {
-        switch ordinal {
-        case 1:
-            return "Sunday"
-        case 2:
-            return "Monday"
-        case 3:
-            return "Tuesday"
-        case 4:
-            return "Wednesday"
-        case 5:
-            return "Thursday"
-        case 6:
-            return "Friday"
-        case 7:
-            return "Saturday"
-        default:
-            unreachable()
+  /// Returns the English name.
+  public func inEnglish() -> StrictString {
+    switch ordinal {
+    case 1:
+      return "Sunday"
+    case 2:
+      return "Monday"
+    case 3:
+      return "Tuesday"
+    case 4:
+      return "Wednesday"
+    case 5:
+      return "Thursday"
+    case 6:
+      return "Friday"
+    case 7:
+      return "Saturday"
+    default:
+      unreachable()
+    }
+  }
+
+  internal func aufDeutsch() -> StrictString {
+    switch ordinal {
+    case 1:
+      return "Sonntag"
+    case 2:
+      return "Montag"
+    case 3:
+      return "Dienstag"
+    case 4:
+      return "Mittwoch"
+    case 5:
+      return "Donnerstag"
+    case 6:
+      return "Freitag"
+    case 7:
+      return "Samstag"
+    default:
+      unreachable()
+    }
+  }
+
+  internal func enFrançais(_ majuscules: Casing) -> StrictString {
+    switch ordinal {
+    case 1:
+      return majuscules.apply(to: "dimanche")
+    case 2:
+      return majuscules.apply(to: "lundi")
+    case 3:
+      return majuscules.apply(to: "mardi")
+    case 4:
+      return majuscules.apply(to: "mercredi")
+    case 5:
+      return majuscules.apply(to: "jeudi")
+    case 6:
+      return majuscules.apply(to: "vendredi")
+    case 7:
+      return majuscules.apply(to: "samedi")
+    default:
+      unreachable()
+    }
+  }
+
+  internal func σεΕλληνικά() -> StrictString {
+    switch ordinal {
+    case 1:
+      return "Κυριακή"
+    case 2:
+      return "Δευτέρα"
+    case 3:
+      return "Τρίτη"
+    case 4:
+      return "Τετάρτη"
+    case 5:
+      return "Πέμπτη"
+    case 6:
+      return "Παρασκευή"
+    case 7:
+      return "Σάββατο"
+    default:
+      unreachable()
+    }
+  }
+
+  internal func בעברית() -> StrictString {
+    let יום: StrictString = "יום "
+    switch ordinal {
+    case 1:
+      return יום.appending(contentsOf: "ראשון")
+    case 2:
+      return יום.appending(contentsOf: "שני")
+    case 3:
+      return יום.appending(contentsOf: "שלישי")
+    case 4:
+      return יום.appending(contentsOf: "רביעי")
+    case 5:
+      return יום.appending(contentsOf: "חמישי")
+    case 6:
+      return יום.appending(contentsOf: "ששי")
+    case 7:
+      return "שבת"
+    default:
+      unreachable()
+    }
+  }
+
+  // MARK: - CustomStringConvertible
+
+  public var description: String {
+    return String(
+      UserFacing<StrictString, FormatLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+          return self.inEnglish()
+        case .deutschDeutschland:
+          return self.aufDeutsch()
+        case .françaisFrance:
+          return self.enFrançais(.sentenceMedial)
+        case .ελληνικάΕλλάδα:
+          return self.σεΕλληνικά()
+        case .עברית־ישראל:
+          return self.בעברית()
         }
-    }
-
-    internal func aufDeutsch() -> StrictString {
-        switch ordinal {
-        case 1:
-            return "Sonntag"
-        case 2:
-            return "Montag"
-        case 3:
-            return "Dienstag"
-        case 4:
-            return "Mittwoch"
-        case 5:
-            return "Donnerstag"
-        case 6:
-            return "Freitag"
-        case 7:
-            return "Samstag"
-        default:
-            unreachable()
-        }
-    }
-
-    internal func enFrançais(_ majuscules: Casing) -> StrictString {
-        switch ordinal {
-        case 1:
-            return majuscules.apply(to: "dimanche")
-        case 2:
-            return majuscules.apply(to: "lundi")
-        case 3:
-            return majuscules.apply(to: "mardi")
-        case 4:
-            return majuscules.apply(to: "mercredi")
-        case 5:
-            return majuscules.apply(to: "jeudi")
-        case 6:
-            return majuscules.apply(to: "vendredi")
-        case 7:
-            return majuscules.apply(to: "samedi")
-        default:
-            unreachable()
-        }
-    }
-
-    internal func σεΕλληνικά() -> StrictString {
-        switch ordinal {
-        case 1:
-            return "Κυριακή"
-        case 2:
-            return "Δευτέρα"
-        case 3:
-            return "Τρίτη"
-        case 4:
-            return "Τετάρτη"
-        case 5:
-            return "Πέμπτη"
-        case 6:
-            return "Παρασκευή"
-        case 7:
-            return "Σάββατο"
-        default:
-            unreachable()
-        }
-    }
-
-    internal func בעברית() -> StrictString {
-        let יום: StrictString = "יום "
-        switch ordinal {
-        case 1:
-            return יום.appending(contentsOf: "ראשון")
-        case 2:
-            return יום.appending(contentsOf: "שני")
-        case 3:
-            return יום.appending(contentsOf: "שלישי")
-        case 4:
-            return יום.appending(contentsOf: "רביעי")
-        case 5:
-            return יום.appending(contentsOf: "חמישי")
-        case 6:
-            return יום.appending(contentsOf: "ששי")
-        case 7:
-            return "שבת"
-        default:
-            unreachable()
-        }
-    }
-
-    // MARK: - CustomStringConvertible
-
-    public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                return self.inEnglish()
-            case .deutschDeutschland:
-                return self.aufDeutsch()
-            case .françaisFrance:
-                return self.enFrançais(.sentenceMedial)
-            case .ελληνικάΕλλάδα:
-                return self.σεΕλληνικά()
-            case .עברית־ישראל:
-                return self.בעברית()
-            }
-        }).resolved())
-    }
+      }).resolved()
+    )
+  }
 }

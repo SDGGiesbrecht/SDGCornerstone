@@ -16,119 +16,121 @@ import SDGMathematics
 import SDGText
 
 /// A Hebrew year.
-public struct HebrewYear : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, RawRepresentableCalendarComponent, Year {
+public struct HebrewYear: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent,
+  RawRepresentableCalendarComponent, Year
+{
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// The number of months in a year.
-    ///
-    /// - Parameters:
-    ///     - leapYear: Whether or not the number should represent a leap year.
-    public static func numberOfMonths(leapYear: Bool) -> Int {
-        if leapYear {
-            return 13
-        } else {
-            return 12
-        }
+  /// The number of months in a year.
+  ///
+  /// - Parameters:
+  ///     - leapYear: Whether or not the number should represent a leap year.
+  public static func numberOfMonths(leapYear: Bool) -> Int {
+    if leapYear {
+      return 13
+    } else {
+      return 12
     }
+  }
 
-    /// The number of years in a leap year cycle.
-    public static let yearsPerLeapYearCycle: Int = 19
+  /// The number of years in a leap year cycle.
+  public static let yearsPerLeapYearCycle: Int = 19
 
-    /// The number of months in a leap year cycle.
-    public static let monthsPerLeapYearCycle: Int = {
-        var months = 0
-        for year in 1 ... HebrewYear(yearsPerLeapYearCycle) {
-            months += year.numberOfMonths
-        }
-        return months
-    }()
-
-    // MARK: - Properties
-
-    private var year: Int
-
-    /// Returns `true` if the year is a leap year.
-    public var isLeapYear: Bool {
-        switch self.year.mod(HebrewYear.yearsPerLeapYearCycle) {
-        case 3, 6, 8, 11, 14, 17, 0 /* 19 */:
-            return true
-        default:
-            return false
-        }
+  /// The number of months in a leap year cycle.
+  public static let monthsPerLeapYearCycle: Int = {
+    var months = 0
+    for year in 1...HebrewYear(yearsPerLeapYearCycle) {
+      months += year.numberOfMonths
     }
+    return months
+  }()
 
-    /// Returns the year length.
-    public var length: Length {
-        return Length(numberOfDays: numberOfDays)
+  // MARK: - Properties
+
+  private var year: Int
+
+  /// Returns `true` if the year is a leap year.
+  public var isLeapYear: Bool {
+    switch self.year.mod(HebrewYear.yearsPerLeapYearCycle) {
+    case 3, 6, 8, 11, 14, 17, 0 /* 19 */:
+      return true
+    default:
+      return false
     }
+  }
 
-    /// The number of months in the year.
-    public var numberOfMonths: Int {
-        return HebrewYear.numberOfMonths(leapYear: isLeapYear)
-    }
+  /// Returns the year length.
+  public var length: Length {
+    return Length(numberOfDays: numberOfDays)
+  }
 
-    /// The number of days in the year.
-    public var numberOfDays: Int {
-        let nextStart = HebrewDate.intervalFromReferenceDate(toStartOf: self + 1)
-        let ownStart = HebrewDate.intervalFromReferenceDate(toStartOf: self)
-        let result = (nextStart − ownStart).inDays
-        return Int(result)
-    }
+  /// The number of months in the year.
+  public var numberOfMonths: Int {
+    return HebrewYear.numberOfMonths(leapYear: isLeapYear)
+  }
 
-    // MARK: - CalendarComponent
+  /// The number of days in the year.
+  public var numberOfDays: Int {
+    let nextStart = HebrewDate.intervalFromReferenceDate(toStartOf: self + 1)
+    let ownStart = HebrewDate.intervalFromReferenceDate(toStartOf: self)
+    let result = (nextStart − ownStart).inDays
+    return Int(result)
+  }
 
-    public static var meanDuration: CalendarInterval<FloatMax> {
-        return FloatMax(monthsPerLeapYearCycle).hebrewMoons ÷ FloatMax(HebrewYear.yearsPerLeapYearCycle)
-    }
+  // MARK: - CalendarComponent
 
-    public static var minimumDuration: CalendarInterval<FloatMax> {
-        return FloatMax(HebrewYear.Length.minimumNumberOfDays).days
-    }
+  public static var meanDuration: CalendarInterval<FloatMax> {
+    return FloatMax(monthsPerLeapYearCycle).hebrewMoons ÷ FloatMax(HebrewYear.yearsPerLeapYearCycle)
+  }
 
-    public static var maximumDuration: CalendarInterval<FloatMax> {
-        return FloatMax(HebrewYear.Length.maximumNumberOfDays).days
-    }
+  public static var minimumDuration: CalendarInterval<FloatMax> {
+    return FloatMax(HebrewYear.Length.minimumNumberOfDays).days
+  }
 
-    // MARK: - PointProtocol
+  public static var maximumDuration: CalendarInterval<FloatMax> {
+    return FloatMax(HebrewYear.Length.maximumNumberOfDays).days
+  }
 
-    public typealias Vector = Int
+  // MARK: - PointProtocol
 
-    // MARK: - RawRepresentableCalendarComponent
+  public typealias Vector = Int
 
-    public init(unsafeRawValue: RawValue) {
-        year = unsafeRawValue
-    }
+  // MARK: - RawRepresentableCalendarComponent
 
-    public static let validRange: Range<RawValue>? = nil
+  public init(unsafeRawValue: RawValue) {
+    year = unsafeRawValue
+  }
 
-    public var rawValue: RawValue {
-        return year
-    }
+  public static let validRange: Range<RawValue>? = nil
 
-    // MARK: - Year
+  public var rawValue: RawValue {
+    return year
+  }
 
-    private func inDigits() -> StrictString {
-        return year.inDigits()
-    }
+  // MARK: - Year
 
-    public func inEnglishDigits() -> StrictString {
-        return inDigits()
-    }
+  private func inDigits() -> StrictString {
+    return year.inDigits()
+  }
 
-    public func _inDeutschenZiffern() -> StrictString {
-        return inDigits()
-    }
+  public func inEnglishDigits() -> StrictString {
+    return inDigits()
+  }
 
-    public func _enChiffresFrançais() -> StrictString {
-        return inDigits()
-    }
+  public func _inDeutschenZiffern() -> StrictString {
+    return inDigits()
+  }
 
-    public func _σεΕλληνικάΨηφία() -> StrictString {
-        return inDigits()
-    }
+  public func _enChiffresFrançais() -> StrictString {
+    return inDigits()
+  }
 
-    public func _בעברית־בספרות() -> StrictString {
-        return inDigits()
-    }
+  public func _σεΕλληνικάΨηφία() -> StrictString {
+    return inDigits()
+  }
+
+  public func _בעברית־בספרות() -> StrictString {
+    return inDigits()
+  }
 }

@@ -17,21 +17,21 @@ import SDGText
 /// An anchor for relative collation rules. The result of `*(_:)`.
 ///
 /// - Warning: This type can only be used inside a `tailored(accordingTo:)` closure.
-public struct CollationTailoringAnchor : ExpressibleByStringLiteral {
+public struct CollationTailoringAnchor: ExpressibleByStringLiteral {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    internal init(_ elements: [CollationElement]) {
-        self.elements = elements
-    }
+  internal init(_ elements: [CollationElement]) {
+    self.elements = elements
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    internal let elements: [CollationElement]
+  internal let elements: [CollationElement]
 
-    // MARK: - ExpressiblyByStringLiteral
+  // MARK: - ExpressiblyByStringLiteral
 
-    public init(stringLiteral value: String) {
-        self = CollationTailoringAnchor(tailoringRoot!.contextualMapping.map(StrictString(value)))
-    }
+  public init(stringLiteral value: String) {
+    self = CollationTailoringAnchor(tailoringRoot!.contextualMapping.map(StrictString(value)))
+  }
 }

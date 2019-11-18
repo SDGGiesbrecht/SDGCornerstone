@@ -15,49 +15,51 @@
 import SDGMathematics
 
 /// A day of the Hebrew week.
-public enum HebrewWeekday : Int, ConsistentDurationCalendarComponent, ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent, Weekday {
+public enum HebrewWeekday: Int, ConsistentDurationCalendarComponent,
+  ConsistentlyOrderedCalendarComponent, Decodable, Encodable, EnumerationCalendarComponent, Weekday
+{
 
-    // MARK: - Cases
+  // MARK: - Cases
 
-    /// Sunday.
-    case sunday
-    /// Monday.
-    case monday
-    /// Tuesday.
-    case tuesday
-    /// Wednesday.
-    case wednesday
-    /// Thursday.
-    case thursday
-    /// Friday.
-    case friday
-    /// Saturday.
-    case saturday
+  /// Sunday.
+  case sunday
+  /// Monday.
+  case monday
+  /// Tuesday.
+  case tuesday
+  /// Wednesday.
+  case wednesday
+  /// Thursday.
+  case thursday
+  /// Friday.
+  case friday
+  /// Saturday.
+  case saturday
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// The number of days in a week.
-    public static let daysPerWeek: Int = allCases.count
+  /// The number of days in a week.
+  public static let daysPerWeek: Int = allCases.count
 
-    // MARK: - ConsistentDurationCalendarComponent
+  // MARK: - ConsistentDurationCalendarComponent
 
-    public static var duration: CalendarInterval<FloatMax> {
-        return (1 as FloatMax).days
-    }
+  public static var duration: CalendarInterval<FloatMax> {
+    return (1 as FloatMax).days
+  }
 
-    // MARK: - Decodable
+  // MARK: - Decodable
 
-    public init(from decoder: Decoder) throws {
-        try self.init(usingOrdinalFrom: decoder)
-    }
+  public init(from decoder: Decoder) throws {
+    try self.init(usingOrdinalFrom: decoder)
+  }
 
-    // MARK: - Encodable
+  // MARK: - Encodable
 
-    public func encode(to encoder: Encoder) throws {
-        try encodeUsingOrdinal(to: encoder)
-    }
+  public func encode(to encoder: Encoder) throws {
+    try encodeUsingOrdinal(to: encoder)
+  }
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = RawValue
+  public typealias Vector = RawValue
 }

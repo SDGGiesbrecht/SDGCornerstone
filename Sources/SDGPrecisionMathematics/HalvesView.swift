@@ -20,77 +20,82 @@ import SDGLocalization
 
 import SDGCornerstoneLocalizations
 
-internal struct HalvesView<UIntValue : UIntFamily> : BidirectionalCollection, Collection, MutableCollection, RandomAccessCollection {
+internal struct HalvesView<UIntValue: UIntFamily>: BidirectionalCollection, Collection,
+  MutableCollection, RandomAccessCollection
+{
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    internal init(_ uInt: UIntValue) {
-        self.uInt = uInt
-    }
+  internal init(_ uInt: UIntValue) {
+    self.uInt = uInt
+  }
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    internal static var count: Int {
-        return 2
-    }
+  internal static var count: Int {
+    return 2
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    internal var uInt: UIntValue
+  internal var uInt: UIntValue
 
-    private typealias BinarySize = UIntValue
-    private var elementSize: BinarySize {
-        let totalSize = BinarySize(BinaryView<UIntValue>.count)
-        let elementCount = BinarySize(count)
-        return totalSize.dividedAccordingToEuclid(by: elementCount)
-    }
+  private typealias BinarySize = UIntValue
+  private var elementSize: BinarySize {
+    let totalSize = BinarySize(BinaryView<UIntValue>.count)
+    let elementCount = BinarySize(count)
+    return totalSize.dividedAccordingToEuclid(by: elementCount)
+  }
 
-    private var elementMask: UIntValue {
-        return (1 << elementSize) − 1
-    }
+  private var elementMask: UIntValue {
+    return (1 << elementSize) − 1
+  }
 
-    // MARK: - BidirectionalCollection
+  // MARK: - BidirectionalCollection
 
-    internal func index(before i: Index) -> Index {
-        return i − (1 as Index)
-    }
+  internal func index(before i: Index) -> Index {
+    return i − (1 as Index)
+  }
 
-    // MARK: - Collection
+  // MARK: - Collection
 
-    internal typealias Element = UIntValue
-    internal typealias Index = UIntValue
+  internal typealias Element = UIntValue
+  internal typealias Index = UIntValue
 
-    internal let startIndex: Index = 0
-    internal let endIndex: Index = Index(HalvesView.count)
+  internal let startIndex: Index = 0
+  internal let endIndex: Index = Index(HalvesView.count)
 
-    internal func index(after i: Index) -> Index {
-        return i + (1 as Index)
-    }
+  internal func index(after i: Index) -> Index {
+    return i + (1 as Index)
+  }
 
-    internal func assertIndexExists(_ index: Index) {
-        assert(index ∈ bounds, UserFacing<StrictString, APILocalization>({ localization in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "Index out of bounds."
-            }
-        }))
-    }
-
-    internal subscript(index: Index) -> Element {
-        get {
-            assertIndexExists(index)
-            let offset = index × elementSize
-            return uInt.bitwiseAnd(with: elementMask << offset) >> offset
+  internal func assertIndexExists(_ index: Index) {
+    assert(
+      index ∈ bounds,
+      UserFacing<StrictString, APILocalization>({ localization in
+        switch localization {  // @exempt(from: tests)
+        case .englishCanada:
+          return "Index out of bounds."
         }
-        set {
-            assertIndexExists(index)
-            let offset = index × elementSize
-            let oldErased = uInt.bitwiseAnd(with: (elementMask << offset).bitwiseNot())
-            uInt = oldErased.bitwiseOr(with: newValue << offset)
-        }
+      })
+    )
+  }
+
+  internal subscript(index: Index) -> Element {
+    get {
+      assertIndexExists(index)
+      let offset = index × elementSize
+      return uInt.bitwiseAnd(with: elementMask << offset) >> offset
     }
+    set {
+      assertIndexExists(index)
+      let offset = index × elementSize
+      let oldErased = uInt.bitwiseAnd(with: (elementMask << offset).bitwiseNot())
+      uInt = oldErased.bitwiseOr(with: newValue << offset)
+    }
+  }
 
-    // MARK: - RandomAccessCollection
+  // MARK: - RandomAccessCollection
 
-    internal typealias Indices = DefaultIndices<HalvesView>
+  internal typealias Indices = DefaultIndices<HalvesView>
 }

@@ -19,25 +19,36 @@ import SDGLogic
 
 // Local Extremes
 
-@inlinable internal func findLocalExtreme<I : OneDimensionalPoint, O>(near location: I, within bounds: CountableClosedRange<I>?, inFunction function: (I) -> O, isCloser: (O, O) -> Bool) -> I where I.Vector : IntegerProtocol {
-    var location = location
+@inlinable internal func findLocalExtreme<I: OneDimensionalPoint, O>(
+  near location: I,
+  within bounds: CountableClosedRange<I>?,
+  inFunction function: (I) -> O,
+  isCloser: (O, O) -> Bool
+) -> I where I.Vector: IntegerProtocol {
+  var location = location
 
-    _assert(bounds == nil ∨ bounds!.contains(location), { (localization: _APILocalization) -> String in
-        switch localization { // @exempt(from: tests)
-        case .englishCanada:
-            return "Location out of bounds. \(location) ∉ \(String(describing: bounds))"
-        }
-    })
-
-    while location ≠ bounds?.upperBound ∧ isCloser(function(location.successor()), function(location)) {
-        location = location.successor()
+  _assert(
+    bounds == nil ∨ bounds!.contains(location),
+    { (localization: _APILocalization) -> String in
+      switch localization {  // @exempt(from: tests)
+      case .englishCanada:
+        return "Location out of bounds. \(location) ∉ \(String(describing: bounds))"
+      }
     }
+  )
 
-    while location ≠ bounds?.lowerBound ∧ isCloser(function(location.predecessor()), function(location)) {
-        location = location.predecessor()
-    }
+  while location ≠ bounds?.upperBound ∧ isCloser(function(location.successor()), function(location))
+  {
+    location = location.successor()
+  }
 
-    return location
+  while location ≠ bounds?.lowerBound
+    ∧ isCloser(function(location.predecessor()), function(location))
+  {
+    location = location.predecessor()
+  }
+
+  return location
 }
 
 // #example(1, findLocalMaximumUndefined1) #example(2, findLocalMaximumUndefined2) #example(3, findLocalMaximumPreconditionViolation)
@@ -69,8 +80,17 @@ import SDGLogic
 ///     - function: The function to analyze.
 ///     - input: An input value.
 /// - Returns: The input (*x*) that results in the local maximum (*y*).
-@inlinable public func findLocalMaximum<I : OneDimensionalPoint, O : Comparable>(near location: I, within bounds: CountableClosedRange<I>? = nil, inFunction function: (_ input: I) -> O) -> I where I.Vector : IntegerProtocol {
-    return findLocalExtreme(near: location, within: bounds, inFunction: function, isCloser: { $0 ≥ $1 })
+@inlinable public func findLocalMaximum<I: OneDimensionalPoint, O: Comparable>(
+  near location: I,
+  within bounds: CountableClosedRange<I>? = nil,
+  inFunction function: (_ input: I) -> O
+) -> I where I.Vector: IntegerProtocol {
+  return findLocalExtreme(
+    near: location,
+    within: bounds,
+    inFunction: function,
+    isCloser: { $0 ≥ $1 }
+  )
 }
 
 // #example(1, findLocalMinimum) #example(2, findLocalMinimumUndefined1) #example(3, findLocalMinimumUndefined2) #example(4, findLocalMinimumPreconditionViolation)
@@ -126,6 +146,15 @@ import SDGLogic
 ///     - function: The function to analyze.
 ///     - input: An input value.
 /// - Returns: The input (*x*) that results in the local minimum (*y*).
-@inlinable public func findLocalMinimum<I : OneDimensionalPoint, O : Comparable>(near location: I, within bounds: CountableClosedRange<I>? = nil, inFunction function: (_ input: I) -> O) -> I where I.Vector : IntegerProtocol {
-    return findLocalExtreme(near: location, within: bounds, inFunction: function, isCloser: { $0 ≤ $1 })
+@inlinable public func findLocalMinimum<I: OneDimensionalPoint, O: Comparable>(
+  near location: I,
+  within bounds: CountableClosedRange<I>? = nil,
+  inFunction function: (_ input: I) -> O
+) -> I where I.Vector: IntegerProtocol {
+  return findLocalExtreme(
+    near: location,
+    within: bounds,
+    inFunction: function,
+    isCloser: { $0 ≤ $1 }
+  )
 }

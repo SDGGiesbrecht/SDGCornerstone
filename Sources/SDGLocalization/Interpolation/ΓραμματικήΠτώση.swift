@@ -13,10 +13,10 @@
  */
 
 public enum _ΓραμματικήΠτώση {
-    // Public for SDGCalendar.
+  // Public for SDGCalendar.
 
-    case ονομαστική
-    case αιτιατική
-    case γενική
-    case κλητική
+  case ονομαστική
+  case αιτιατική
+  case γενική
+  case κλητική
 }

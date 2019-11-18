@@ -13,8 +13,8 @@
  */
 
 public enum _GenreGrammatical {
-    // Public for SDGCalendar.
+  // Public for SDGCalendar.
 
-    case masculin
-    case féminin
+  case masculin
+  case féminin
 }

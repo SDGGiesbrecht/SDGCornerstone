@@ -68,57 +68,64 @@ import SDGCornerstoneLocalizations
 /// ```
 ///
 /// - Warning: If you intend to encode and decode a custom definition type, you must register the type with `CalendarDate.register(_:)` before performing any decoding operations.
-public protocol DateDefinition : Decodable, Encodable {
+public protocol DateDefinition: Decodable, Encodable {
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// A string that uniquely identifies the type for encoding and decoding.
-    static var identifier: StrictString { get }
+  /// A string that uniquely identifies the type for encoding and decoding.
+  static var identifier: StrictString { get }
 
-    /// The reference date for the type.
-    static var referenceDate: CalendarDate { get }
+  /// The reference date for the type.
+  static var referenceDate: CalendarDate { get }
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a date from an interval since the type’s reference date.
-    ///
-    /// - Parameters:
-    ///     - intervalSinceReferenceDate: The interval since the type’s reference date.
-    init(intervalSinceReferenceDate: CalendarInterval<FloatMax>)
+  /// Creates a date from an interval since the type’s reference date.
+  ///
+  /// - Parameters:
+  ///     - intervalSinceReferenceDate: The interval since the type’s reference date.
+  init(intervalSinceReferenceDate: CalendarInterval<FloatMax>)
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    /// The interval since the type’s reference date.
-    var intervalSinceReferenceDate: CalendarInterval<FloatMax> { get }
+  /// The interval since the type’s reference date.
+  var intervalSinceReferenceDate: CalendarInterval<FloatMax> { get }
 
-    // MARK: - Coding
+  // MARK: - Coding
 
-    func _encode() throws -> StrictString
-    init(_decoding json: StrictString, codingPath: [CodingKey]) throws
+  func _encode() throws -> StrictString
+  init(_decoding json: StrictString, codingPath: [CodingKey]) throws
 }
 
 extension DateDefinition {
 
-    public func _encode() throws -> StrictString {
-        return try StrictString(file: try JSONEncoder().encode([self]), origin: nil)
-    }
-    internal func encode() throws -> StrictString {
-        return try _encode()
-    }
+  public func _encode() throws -> StrictString {
+    return try StrictString(file: try JSONEncoder().encode([self]), origin: nil)
+  }
+  internal func encode() throws -> StrictString {
+    return try _encode()
+  }
 
-    public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
-        guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {
+  public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
+    guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {
 
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath, debugDescription: String(UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                    return "Empty container array."
-                }
-            }).resolved())))
-        }
-        self = result
+      throw DecodingError.dataCorrupted(
+        DecodingError.Context(
+          codingPath: codingPath,
+          debugDescription: String(
+            UserFacing<StrictString, APILocalization>({ localization in
+              switch localization {
+              case .englishCanada:
+                return "Empty container array."
+              }
+            }).resolved()
+          )
+        )
+      )
     }
-    internal init(decoding json: StrictString, codingPath: [CodingKey]) throws {
-        try self.init(_decoding: json, codingPath: codingPath)
-    }
+    self = result
+  }
+  internal init(decoding json: StrictString, codingPath: [CodingKey]) throws {
+    try self.init(_decoding: json, codingPath: codingPath)
+  }
 }

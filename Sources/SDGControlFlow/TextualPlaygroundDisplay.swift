@@ -13,13 +13,15 @@
  */
 
 /// A type which displays its textual description in playgrounds.
-public protocol TextualPlaygroundDisplay : CustomPlaygroundDisplayConvertible, CustomStringConvertible {}
+public protocol TextualPlaygroundDisplay: CustomPlaygroundDisplayConvertible,
+  CustomStringConvertible
+{}
 
 extension TextualPlaygroundDisplay {
 
-    // MARK: - CustomPlaygroundDisplayConvertible
+  // MARK: - CustomPlaygroundDisplayConvertible
 
-    public var playgroundDescription: Any {
-        return String(describing: self)
-    }
+  public var playgroundDescription: Any {
+    return String(describing: self)
+  }
 }

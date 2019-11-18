@@ -18,17 +18,17 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGCollectionsRegressionTests : TestCase {
+class SDGCollectionsRegressionTests: TestCase {
 
-    func testBoundedRepetitionPatternSearch() {
-        // Untracked
+  func testBoundedRepetitionPatternSearch() {
+    // Untracked
 
-        XCTAssertEqual([1, 1, 1][1 ..< 2].matches(for: RepetitionPattern([1])).map({ $0.range }), [1 ..< 2])
-    }
+    XCTAssertEqual([1, 1, 1][1..<2].matches(for: RepetitionPattern([1])).map({ $0.range }), [1..<2])
+  }
 
-    func testTrailingConditionSearch() {
-        // Untracked
+  func testTrailingConditionSearch() {
+    // Untracked
 
-        XCTAssertNil([1, 2, 3].firstMatch(for: [1, 2, 3] + ConditionalPattern({ _ in true })))
-    }
+    XCTAssertNil([1, 2, 3].firstMatch(for: [1, 2, 3] + ConditionalPattern({ _ in true })))
+  }
 }

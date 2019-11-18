@@ -15,25 +15,25 @@
 import SDGMathematics
 
 /// A calendar component with a consisent duration.
-public protocol ConsistentDurationCalendarComponent : CalendarComponent {
+public protocol ConsistentDurationCalendarComponent: CalendarComponent {
 
-    /// The duration.
-    static var duration: CalendarInterval<FloatMax> { get }
+  /// The duration.
+  static var duration: CalendarInterval<FloatMax> { get }
 }
 
 extension ConsistentDurationCalendarComponent {
 
-    // MARK: - CalendarComponent
+  // MARK: - CalendarComponent
 
-    public static var meanDuration: CalendarInterval<FloatMax> {
-        return duration
-    }
+  public static var meanDuration: CalendarInterval<FloatMax> {
+    return duration
+  }
 
-    public static var minimumDuration: CalendarInterval<FloatMax> {
-        return duration
-    }
+  public static var minimumDuration: CalendarInterval<FloatMax> {
+    return duration
+  }
 
-    public static var maximumDuration: CalendarInterval<FloatMax> {
-        return duration
-    }
+  public static var maximumDuration: CalendarInterval<FloatMax> {
+    return duration
+  }
 }

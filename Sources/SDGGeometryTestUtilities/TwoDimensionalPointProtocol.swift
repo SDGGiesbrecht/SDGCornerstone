@@ -23,14 +23,16 @@ import SDGMathematicsTestUtilities
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
 public func testTwoDimensionalPointProtocolConformance<T>(
-    _ type: T.Type,
-    file: StaticString = #file,
-    line: UInt = #line) where T : TwoDimensionalPointProtocol {
+  _ type: T.Type,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: TwoDimensionalPointProtocol {
 
-    testPointProtocolConformance(
-        departure: T(1, 2),
-        vector: T.Vector(Δx: 3, Δy: 4),
-        destination: T(4, 6),
-        file: file,
-        line: line)
+  testPointProtocolConformance(
+    departure: T(1, 2),
+    vector: T.Vector(Δx: 3, Δy: 4),
+    destination: T(4, 6),
+    file: file,
+    line: line
+  )
 }

@@ -16,36 +16,40 @@ import SDGControlFlow
 import SDGLogic
 
 /// An intersection of two sets.
-public struct Intersection<Base1 : SetDefinition, Base2 : SetDefinition> : CustomStringConvertible, SetDefinition, TextualPlaygroundDisplay where Base1.Element == Base2.Element {
+public struct Intersection<Base1: SetDefinition, Base2: SetDefinition>: CustomStringConvertible,
+  SetDefinition, TextualPlaygroundDisplay
+where Base1.Element == Base2.Element {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates an intersection from two sets.
-    ///
-    /// - Parameters:
-    ///     - a: A set.
-    ///     - b: Another set.
-    @inlinable public init(_ a: Base1, _ b: Base2) {
-        self.a = a
-        self.b = b
-    }
+  /// Creates an intersection from two sets.
+  ///
+  /// - Parameters:
+  ///     - a: A set.
+  ///     - b: Another set.
+  @inlinable public init(_ a: Base1, _ b: Base2) {
+    self.a = a
+    self.b = b
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    @usableFromInline internal let a: Base1
-    @usableFromInline internal let b: Base2
+  @usableFromInline internal let a: Base1
+  @usableFromInline internal let b: Base2
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
-    }
+  public var description: String {
+    return "(" + String(describing: a) + ") ∩ (" + String(describing: b) + ")"
+  }
 
-    // MARK: - SetDefinition
+  // MARK: - SetDefinition
 
-    public typealias Element = Base1.Element
+  public typealias Element = Base1.Element
 
-    @inlinable public static func ∋ (precedingValue: Intersection, followingValue: Base1.Element) -> Bool {
-        return precedingValue.a ∋ followingValue ∧ precedingValue.b ∋ followingValue
-    }
+  @inlinable public static func ∋ (precedingValue: Intersection, followingValue: Base1.Element)
+    -> Bool
+  {
+    return precedingValue.a ∋ followingValue ∧ precedingValue.b ∋ followingValue
+  }
 }

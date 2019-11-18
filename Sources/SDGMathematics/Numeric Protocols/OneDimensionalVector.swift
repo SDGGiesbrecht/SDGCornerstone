@@ -13,12 +13,12 @@
  */
 
 /// A one‐dimensional value that can be used with ×(_:_) and ÷(_:_:) in conjunction with a scalar.
-public protocol OneDimensionalVector : VectorProtocol {
+public protocol OneDimensionalVector: VectorProtocol {
 
-    /// Returns the quotient of the precedng value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
-    static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
+  /// Returns the quotient of the precedng value divided by the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The dividend.
+  ///     - followingValue: The divisor.
+  static func ÷ (precedingValue: Self, followingValue: Self) -> Scalar
 }

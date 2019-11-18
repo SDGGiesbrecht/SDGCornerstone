@@ -15,33 +15,33 @@
 import SDGControlFlow
 
 /// An value that can be used with ×(_:_) in conjunction with a scalar.
-public protocol VectorProtocol : Negatable {
+public protocol VectorProtocol: Negatable {
 
-    /// The scalar type.
-    associatedtype Scalar : IntegralArithmetic
+  /// The scalar type.
+  associatedtype Scalar: IntegralArithmetic
 
-    /// Returns the product of the preceding value times the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: A value.
-    ///     - followingValue: A scalar coefficient.
-    static func × (precedingValue: Self, followingValue: Scalar) -> Self
+  /// Returns the product of the preceding value times the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: A value.
+  ///     - followingValue: A scalar coefficient.
+  static func × (precedingValue: Self, followingValue: Scalar) -> Self
 
-    /// Modifies the preceding value by multiplication with the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The scalar coefficient by which to multiply.
-    static func ×= (precedingValue: inout Self, followingValue: Scalar)
+  /// Modifies the preceding value by multiplication with the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The value to modify.
+  ///     - followingValue: The scalar coefficient by which to multiply.
+  static func ×= (precedingValue: inout Self, followingValue: Scalar)
 }
 
 extension VectorProtocol {
 
-    @inlinable public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
-        return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
-    }
+  @inlinable public static func × (precedingValue: Self, followingValue: Scalar) -> Self {
+    return nonmutatingVariant(of: ×=, on: precedingValue, with: followingValue)
+  }
 
-    @inlinable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
-        return followingValue × precedingValue
-    }
+  @inlinable public static func × (precedingValue: Scalar, followingValue: Self) -> Self {
+    return followingValue × precedingValue
+  }
 }

@@ -17,11 +17,11 @@ import SDGText
 
 extension IntegralArithmetic {
 
-    internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
-        var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
-        if self.isNegative {
-            digits.prepend("−")
-        }
-        return digits
+  internal func integralDigits(thousandsSeparator: UnicodeScalar) -> StrictString {
+    var digits = wholeDigits(thousandsSeparator: thousandsSeparator)
+    if self.isNegative {
+      digits.prepend("−")
     }
+    return digits
+  }
 }

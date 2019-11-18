@@ -21,12 +21,12 @@ internal var tailoringRoot: CollationOrder?
 
 /// The precedence of tailoring rules which anchor to the preceding operand.
 precedencegroup TailoringRuleAnchoredToPreceding {
-    associativity: left
+  associativity: left
 }
 
 /// The precedence of tailoring rules which anchor to the following operand.
 precedencegroup TailoringRuleAnchoredToFollowing {
-    associativity: right
+  associativity: right
 }
 
 /// Moves the following operand to be the same as the preceding operand up until the scalar level.

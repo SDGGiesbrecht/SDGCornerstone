@@ -16,4 +16,4 @@ import SDGControlFlow
 import SDGLocalization
 
 public typealias APILocalization = _APILocalization
-extension APILocalization : InputLocalization {}
+extension APILocalization: InputLocalization {}

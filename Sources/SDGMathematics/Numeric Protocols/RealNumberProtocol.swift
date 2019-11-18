@@ -13,4 +13,4 @@
  */
 
 /// A type which *only ever* represents real numbers.
-public protocol RealNumberProtocol : RealArithmetic {}
+public protocol RealNumberProtocol: RealArithmetic {}

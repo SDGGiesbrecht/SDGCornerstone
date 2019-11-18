@@ -20,60 +20,71 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A second of the Gregorian minute.
-public struct GregorianSecond : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent, TextualPlaygroundDisplay {
+public struct GregorianSecond: CardinalCalendarComponent,
+  CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent,
+  ICalendarComponent, ISOCalendarComponent, RawRepresentableCalendarComponent,
+  SmallestCalendarComponent, TextualPlaygroundDisplay
+{
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// The number of seconds in a minute.
-    public static let secondsPerMinute: Int = 60
+  /// The number of seconds in a minute.
+  public static let secondsPerMinute: Int = 60
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private var second: FloatMax
+  private var second: FloatMax
 
-    // MARK: - ConsistentDurationCalendarComponent
+  // MARK: - ConsistentDurationCalendarComponent
 
-    public static var duration: CalendarInterval<FloatMax> {
-        return (1 as FloatMax).seconds
-    }
+  public static var duration: CalendarInterval<FloatMax> {
+    return (1 as FloatMax).seconds
+  }
 
-    // MARK: - Text Representations
+  // MARK: - Text Representations
 
-    /// Returns the second in digits, floored and with leading zeroes.
-    public func inDigits() -> StrictString {
-        return Int(second.rounded(.down)).inDigits().filled(to: 2, with: "0", from: .start)
-    }
+  /// Returns the second in digits, floored and with leading zeroes.
+  public func inDigits() -> StrictString {
+    return Int(second.rounded(.down)).inDigits().filled(to: 2, with: "0", from: .start)
+  }
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
-                return self.inDigits()
-            }
-        }).resolved())
-    }
+  public var description: String {
+    return String(
+      UserFacing<StrictString, FormatLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland,
+          .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
+          return self.inDigits()
+        }
+      }).resolved()
+    )
+  }
 
-    // MARK: - ISOCalendarComponent
+  // MARK: - ISOCalendarComponent
 
-    public func inISOFormat() -> StrictString {
-        return Int((second + 0.000_001).rounded(.down)).inDigits().filled(to: 2, with: "0", from: .start)
-    }
+  public func inISOFormat() -> StrictString {
+    return Int((second + 0.000_001).rounded(.down)).inDigits().filled(
+      to: 2,
+      with: "0",
+      from: .start
+    )
+  }
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = FloatMax
+  public typealias Vector = FloatMax
 
-    // MARK: - RawRepresentableCalendarComponent
+  // MARK: - RawRepresentableCalendarComponent
 
-    public init(unsafeRawValue: FloatMax) {
-        second = unsafeRawValue
-    }
+  public init(unsafeRawValue: FloatMax) {
+    second = unsafeRawValue
+  }
 
-    public static let validRange: Range<FloatMax>? = 0 ..< FloatMax(GregorianSecond.secondsPerMinute)
+  public static let validRange: Range<FloatMax>? = 0..<FloatMax(GregorianSecond.secondsPerMinute)
 
-    public var rawValue: FloatMax {
-        return second
-    }
+  public var rawValue: FloatMax {
+    return second
+  }
 }

@@ -13,28 +13,29 @@
  */
 
 /// A set with an intensional definion.
-public struct IntensionalSet<Member> : SetDefinition {
+public struct IntensionalSet<Member>: SetDefinition {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a set with a condition.
-    ///
-    /// - Parameters:
-    ///     - condition: The defining condition.
-    ///     - possibleMember: An instence to check for membership.
-    @inlinable public init(where condition: @escaping (_ possibleMember: Element) -> Bool) {
-        self.condition = condition
-    }
+  /// Creates a set with a condition.
+  ///
+  /// - Parameters:
+  ///     - condition: The defining condition.
+  ///     - possibleMember: An instence to check for membership.
+  @inlinable public init(where condition: @escaping (_ possibleMember: Element) -> Bool) {
+    self.condition = condition
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    @usableFromInline internal let condition: (Element) -> Bool
+  @usableFromInline internal let condition: (Element) -> Bool
 
-    // MARK: - SetDefinition
+  // MARK: - SetDefinition
 
-    public typealias Element = Member
+  public typealias Element = Member
 
-    @inlinable public static func ∋ (precedingValue: IntensionalSet, followingValue: Element) -> Bool {
-        return precedingValue.condition(followingValue)
-    }
+  @inlinable public static func ∋ (precedingValue: IntensionalSet, followingValue: Element) -> Bool
+  {
+    return precedingValue.condition(followingValue)
+  }
 }

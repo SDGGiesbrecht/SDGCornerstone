@@ -19,35 +19,37 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a month of the year.
-public protocol Month : TextualPlaygroundDisplay {
+public protocol Month: TextualPlaygroundDisplay {
 
-    /// Returns the English name.
-    func inEnglish() -> StrictString
+  /// Returns the English name.
+  func inEnglish() -> StrictString
 
-    func _aufDeutsch() -> StrictString
-    func _enFrançais(_ majuscules: Casing) -> StrictString
-    func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString
-    func _בעברית() -> StrictString
+  func _aufDeutsch() -> StrictString
+  func _enFrançais(_ majuscules: Casing) -> StrictString
+  func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString
+  func _בעברית() -> StrictString
 }
 
 extension Month {
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                return self.inEnglish()
-            case .deutschDeutschland:
-                return self._aufDeutsch()
-            case .françaisFrance:
-                return self._enFrançais(.sentenceMedial)
-            case .ελληνικάΕλλάδα:
-                return self._σεΕλληνικά(.ονομαστική)
-            case .עברית־ישראל:
-                return self._בעברית()
-            }
-        }).resolved())
-    }
+  public var description: String {
+    return String(
+      UserFacing<StrictString, FormatLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+          return self.inEnglish()
+        case .deutschDeutschland:
+          return self._aufDeutsch()
+        case .françaisFrance:
+          return self._enFrançais(.sentenceMedial)
+        case .ελληνικάΕλλάδα:
+          return self._σεΕλληνικά(.ονομαστική)
+        case .עברית־ישראל:
+          return self._בעברית()
+        }
+      }).resolved()
+    )
+  }
 }

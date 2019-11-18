@@ -13,18 +13,18 @@
  */
 
 /// A type which *only ever* represents rational numbers.
-public protocol RationalNumberProtocol : RationalArithmetic {
+public protocol RationalNumberProtocol: RationalArithmetic {
 
-    /// The type to use for the numerator and denominator.
-    associatedtype Integer : IntegerProtocol
+  /// The type to use for the numerator and denominator.
+  associatedtype Integer: IntegerProtocol
 
-    /// Returns the numerator and denominator of the number as a reduced simple fraction.
-    func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer)
+  /// Returns the numerator and denominator of the number as a reduced simple fraction.
+  func reducedSimpleFraction() -> (numerator: Integer, denominator: Integer)
 }
 
 extension RationalNumberProtocol {
 
-    @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
-    }
+  @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue.raiseRationalNumberToThePowerOf(rationalNumber: followingValue)
+  }
 }

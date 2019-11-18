@@ -15,34 +15,38 @@
 import SDGControlFlow
 
 /// A type that can be used for integral arithmetic.
-public protocol IntegralArithmetic : Negatable, SignedNumeric, WholeArithmetic {
+public protocol IntegralArithmetic: Negatable, SignedNumeric, WholeArithmetic {
 
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of `IntMax`.
-    init(_ int: IntMax)
+  /// Creates an instance equal to `int`.
+  ///
+  /// - Properties:
+  ///     - int: An instance of `IntMax`.
+  init(_ int: IntMax)
 }
 
 extension IntegralArithmetic {
 
-    /// Creates an instance equal to `int`.
-    ///
-    /// - Properties:
-    ///     - int: An instance of a member of the `Int` family.
-    @inlinable public init<I : IntFamily>(_ int: I) {
-        self.init(IntMax(int))
-    }
+  /// Creates an instance equal to `int`.
+  ///
+  /// - Properties:
+  ///     - int: An instance of a member of the `Int` family.
+  @inlinable public init<I: IntFamily>(_ int: I) {
+    self.init(IntMax(int))
+  }
 
-    @inlinable internal mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
+  @inlinable internal mutating func raiseIntegerToThePowerOf(integer exponent: Self) {
 
-        _assert(exponent.isNonNegative, { (localization: _APILocalization) -> String in
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead. (\(exponent))"
-            }
-        })
+    _assert(
+      exponent.isNonNegative,
+      { (localization: _APILocalization) -> String in
+        switch localization {  // @exempt(from: tests)
+        case .englishCanada:
+          return
+            "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead. (\(exponent))"
+        }
+      }
+    )
 
-        raiseWholeNumberToThePowerOf(wholeNumber: exponent)
-    }
+    raiseWholeNumberToThePowerOf(wholeNumber: exponent)
+  }
 }

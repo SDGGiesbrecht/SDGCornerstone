@@ -15,40 +15,41 @@
 import SDGControlFlow
 
 /// A line in a string.
-public struct Line<Base : StringFamily> : TextualPlaygroundDisplay {
+public struct Line<Base: StringFamily>: TextualPlaygroundDisplay {
 
-    // @documentation(SDGCornerstone.Line.init(line:newline:))
-    /// Creates a line.
-    ///
-    /// - Parameters:
-    ///     - line: The text of the line.
-    ///     - newline: The text of the newline control.
-    @inlinable public init(line: Base, newline: Base) {
-        self.line = line.scalars[...]
-        self.newline = newline.scalars[...]
-    }
+  // @documentation(SDGCornerstone.Line.init(line:newline:))
+  /// Creates a line.
+  ///
+  /// - Parameters:
+  ///     - line: The text of the line.
+  ///     - newline: The text of the newline control.
+  @inlinable public init(line: Base, newline: Base) {
+    self.line = line.scalars[...]
+    self.newline = newline.scalars[...]
+  }
 
-    // #documentation(SDGCornerstone.Line.init(line:newline:))
-    /// Creates a line.
-    ///
-    /// - Parameters:
-    ///     - line: The text of the line.
-    ///     - newline: The text of the newline control.
-    @inlinable public init(line: Base.ScalarView.SubSequence, newline: Base.ScalarView.SubSequence) {
-        self.line = line
-        self.newline = newline
-    }
+  // #documentation(SDGCornerstone.Line.init(line:newline:))
+  /// Creates a line.
+  ///
+  /// - Parameters:
+  ///     - line: The text of the line.
+  ///     - newline: The text of the newline control.
+  @inlinable public init(line: Base.ScalarView.SubSequence, newline: Base.ScalarView.SubSequence) {
+    self.line = line
+    self.newline = newline
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    /// The contents of the line.
-    public var line: Base.ScalarView.SubSequence
-    /// The trailing newline character(s).
-    public var newline: Base.ScalarView.SubSequence
+  /// The contents of the line.
+  public var line: Base.ScalarView.SubSequence
+  /// The trailing newline character(s).
+  public var newline: Base.ScalarView.SubSequence
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    @inlinable public var description: String {
-        return String(describing: Base(Base.ScalarView(line))) + newline.map({ $0.visibleRepresentation }).joined()
-    }
+  @inlinable public var description: String {
+    return String(describing: Base(Base.ScalarView(line)))
+      + newline.map({ $0.visibleRepresentation }).joined()
+  }
 }

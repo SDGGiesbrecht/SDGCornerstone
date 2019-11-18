@@ -16,39 +16,39 @@ import SDGText
 
 extension Bool {
 
-    /// Returns “✓” or “✗”.
-    public func checkOrX() -> StrictString {
-        switch self {
-        case true:
-            return "✓"
-        case false:
-            return "✗"
-        }
+  /// Returns “✓” or “✗”.
+  public func checkOrX() -> StrictString {
+    switch self {
+    case true:
+      return "✓"
+    case false:
+      return "✗"
     }
+  }
 
-    /// Returns “true” or “false”.
-    ///
-    /// - Parameters:
-    ///     - casing: The casing to use.
-    public func trueOrFalse(_ casing: EnglishCasing) -> StrictString {
-        switch self {
-        case true:
-            return casing.apply(to: "true")
-        case false:
-            return casing.apply(to: "false")
-        }
+  /// Returns “true” or “false”.
+  ///
+  /// - Parameters:
+  ///     - casing: The casing to use.
+  public func trueOrFalse(_ casing: EnglishCasing) -> StrictString {
+    switch self {
+    case true:
+      return casing.apply(to: "true")
+    case false:
+      return casing.apply(to: "false")
     }
+  }
 
-    /// Returns “yes” or “no”.
-    ///
-    /// - Parameters:
-    ///     - casing: The casing to use.
-    public func yesOrNo(_ casing: EnglishCasing) -> StrictString {
-        switch self {
-        case true:
-            return casing.apply(to: "yes")
-        case false:
-            return casing.apply(to: "no")
-        }
+  /// Returns “yes” or “no”.
+  ///
+  /// - Parameters:
+  ///     - casing: The casing to use.
+  public func yesOrNo(_ casing: EnglishCasing) -> StrictString {
+    switch self {
+    case true:
+      return casing.apply(to: "yes")
+    case false:
+      return casing.apply(to: "no")
     }
+  }
 }

@@ -19,11 +19,11 @@
 /// ```swift
 /// @Wrapper var property: Type = assignedDefault
 /// ```
-public protocol DefaultAssignmentPropertyWrapper : PropertyWrapper {
+public protocol DefaultAssignmentPropertyWrapper: PropertyWrapper {
 
-    /// Creates a wrapper with a value.
-    ///
-    /// - Parameters:
-    ///     - wrappedValue: The wrapped value.
-    init(wrappedValue: Wrapped)
+  /// Creates a wrapper with a value.
+  ///
+  /// - Parameters:
+  ///     - wrappedValue: The wrapped value.
+  init(wrappedValue: Wrapped)
 }

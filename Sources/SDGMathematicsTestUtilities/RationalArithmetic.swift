@@ -23,19 +23,33 @@ import SDGTesting
 ///     - type: The type.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testRationalArithmeticConformance<T>(of type: T.Type, file: StaticString = #file, line: UInt = #line) where T : RationalArithmetic {
+public func testRationalArithmeticConformance<T>(
+  of type: T.Type,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: RationalArithmetic {
 
-    testIntegralArithmeticConformance(of: T.self, file: file, line: line)
+  testIntegralArithmeticConformance(of: T.self, file: file, line: line)
 
-    let converted = T(FloatMax(0.875))
-    test(converted == 0.875, "\(T.self)(FloatMax(0.875)) → \(converted) ≠ 0.875", file: file, line: line)
+  let converted = T(FloatMax(0.875))
+  test(
+    converted == 0.875,
+    "\(T.self)(FloatMax(0.875)) → \(converted) ≠ 0.875",
+    file: file,
+    line: line
+  )
 
-    test(operator: (÷, "÷"), on: (55 as T, 11), returns: 5, file: file, line: line)
-    test(assignmentOperator: (÷=, "÷="), with: (76 as T, 4), resultsIn: 19, file: file, line: line)
+  test(operator: (÷, "÷"), on: (55 as T, 11), returns: 5, file: file, line: line)
+  test(assignmentOperator: (÷=, "÷="), with: (76 as T, 4), resultsIn: 19, file: file, line: line)
 
-    test(operator: (↑, "↑"), on: (0.5 as T, −2), returns: 4, file: file, line: line)
+  test(operator: (↑, "↑"), on: (0.5 as T, −2), returns: 4, file: file, line: line)
 
-    let range: Range<T> = −5 ..< 5
-    let result = T.random(in: range)
-    test(result ∈ range, "\(T.self).random(in: \(range)) → \(result) ∉ \(range)", file: file, line: line)
+  let range: Range<T> = −5..<5
+  let result = T.random(in: range)
+  test(
+    result ∈ range,
+    "\(T.self).random(in: \(range)) → \(result) ∉ \(range)",
+    file: file,
+    line: line
+  )
 }

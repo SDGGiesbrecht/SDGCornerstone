@@ -17,13 +17,13 @@ import SDGText
 /// A calendar component with an iCalendar representation.
 public protocol ICalendarComponent {
 
-    /// Returns a string representation in the iCalendar format.
-    func inICalendarFormat() -> StrictString
+  /// Returns a string representation in the iCalendar format.
+  func inICalendarFormat() -> StrictString
 }
 
-extension ICalendarComponent where Self : ISOCalendarComponent {
+extension ICalendarComponent where Self: ISOCalendarComponent {
 
-    public func inICalendarFormat() -> StrictString {
-        return inISOFormat()
-    }
+  public func inICalendarFormat() -> StrictString {
+    return inISOFormat()
+  }
 }

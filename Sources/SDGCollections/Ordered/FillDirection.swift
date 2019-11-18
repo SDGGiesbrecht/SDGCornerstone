@@ -14,8 +14,8 @@
 
 /// The direction from which to fill a collection.
 public enum FillDirection {
-    /// Fill from the start.
-    case start
-    /// Fill from the end.
-    case end
+  /// Fill from the start.
+  case start
+  /// Fill from the end.
+  case end
 }
