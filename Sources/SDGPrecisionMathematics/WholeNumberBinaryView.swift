@@ -122,12 +122,13 @@ extension WholeNumber {
         return Index(digit: lastDigitIndex, bit: bitIndex) + 1
       }
       preconditionFailure(
-        UserFacing<StrictString, APILocalization>({ [wholeNumber = self.wholeNumber] localization in
-          switch localization {  // @exempt(from: tests)
-          case .englishCanada:
-            return "\(wholeNumber.inDigits()) is not in normalized form."
-          }
-        })
+        UserFacing<StrictString, APILocalization>(
+          { [wholeNumber = self.wholeNumber] localization in  // @exempt(from: tests)
+            switch localization {
+            case .englishCanada:
+              return "\(wholeNumber.inDigits()) is not in normalized form."
+            }
+          })
       )
     }
     internal var count: IndexDistance {

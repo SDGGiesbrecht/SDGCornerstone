@@ -556,11 +556,13 @@ extension SearchableCollection {
     let otherLastIndexDistance = otherPrefixLength == 0 ? 0 : otherPrefixLength − 1
 
     let lastIndex = cached(in: &indexCache[lastIndexDistance]) {
+      // @exempt(from: tests) Already present.
       self.index(startIndex, offsetBy: lastIndexDistance)
-    }  // @exempt(from: tests) Already present.
+    }
     let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) {
+      // @exempt(from: tests) Already present.
       other.index(other.startIndex, offsetBy: otherLastIndexDistance)
-    }  // @exempt(from: tests) Already present.
+    }
     if prefixLength > 0 ∧ otherPrefixLength > 0 ∧ self[lastIndex] == other[otherLastIndex] {
       traceDifference(
         table,

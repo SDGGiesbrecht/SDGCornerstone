@@ -51,6 +51,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     let result = try method.call(instance)()
     test(
       result ≈ expectedResult,
+      // @exempt(from: tests)
       "\(instance).\(method.name)() → \(result) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -85,6 +86,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     let result = try method.call(instance)(argument)
     test(
       result ≈ expectedResult,
+      // @exempt(from: tests)
       "\(instance).\(method.name)(\(argument)) → \(result) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -118,6 +120,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     try method.call(&copy)
     test(
       copy ≈ expectedResult,
+      // @exempt(from: tests)
       "\(instance).\(method.name)() → \(copy) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -156,6 +159,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     try method.call(&copy, argument)
     test(
       copy ≈ expectedResult,
+      // @exempt(from: tests)
       "\(instance).\(method.name)(\(argument)) → \(copy) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -190,6 +194,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     let result = try function.call(argument)
     test(
       result ≈ expectedResult,
+      // @exempt(from: tests)
       "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -225,6 +230,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     let result = try function.call(arguments.0, arguments.1)
     test(
       result ≈ expectedResult,
+      // @exempt(from: tests)
       "\(function.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -257,6 +263,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     let result = try function.call(argument)
     test(
       result.rawValue ≈ expectedResult.rawValue,
+      // @exempt(from: tests)
       "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -294,6 +301,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     let result = try `operator`.function(operands.precedingValue, operands.followingValue)
     test(
       result ≈ expectedResult,
+      // @exempt(from: tests)
       "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -326,6 +334,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     let result = try `operator`.function(operand)
     test(
       result ≈ expectedResult,
+      // @exempt(from: tests)
       "\(`operator`.name)\(operand) → \(result) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -361,6 +370,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
     try `operator`.function(&copy)
     test(
       copy ≈ expectedResult,
+      // @exempt(from: tests)
       "\(operand)\(`operator`.name) → \(copy) ≠ \(expectedResult)",
       file: file,
       line: line
@@ -390,6 +400,7 @@ public func test<V>(
 ) where V: ExpressibleByFloatLiteral, V: FloatingPoint, V: Subtractable {
   test(
     variable.contents ≈ expectedValue,
+    // @exempt(from: tests)
     "\(variable.name) → \(variable.contents) ≠ \(expectedValue)",
     file: file,
     line: line

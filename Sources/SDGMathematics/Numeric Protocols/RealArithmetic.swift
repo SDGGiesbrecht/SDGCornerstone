@@ -309,8 +309,8 @@ extension RealArithmetic {
   @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
     _assert(
       (−1...1).contains(sine),
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "There is no arcsine angle for any number x, where |x| > 1. (\(sine))"
         }
@@ -322,8 +322,8 @@ extension RealArithmetic {
   @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
     _assert(
       (−1...1).contains(cosine),
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "There is no arccosine angle for any number x, where |x| > 1. (\(cosine))"
         }
@@ -335,8 +335,8 @@ extension RealArithmetic {
   @inlinable public static func arccsc(_ cosecant: Self) -> Angle<Self> {
     _assert(
       ¬(−1...1).contains(cosecant),
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "There is no arccosecant angle for any number x, where |x| < 1. (\(cosecant))"
         }
@@ -348,8 +348,8 @@ extension RealArithmetic {
   @inlinable public static func arcsec(_ secant: Self) -> Angle<Self> {
     _assert(
       ¬(−1...1).contains(secant),
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "There is no arccosecant angle for any number x, where |x| < 1. (\(secant))"
         }

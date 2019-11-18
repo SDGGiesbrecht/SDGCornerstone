@@ -58,8 +58,8 @@ public final class PreferenceSet {
   public required init(domain: String) {
     _assert(
       PreferenceSet.domains[domain] == nil,
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "Detected duplicate initialization of \(domain). Call preferences(for:) instead."
         }
@@ -120,8 +120,8 @@ public final class PreferenceSet {
     }
     _assert(
       possibleDebugDomain ≠ UserDefaults.globalDomain,
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "Attempted to write preferences to the global domain. This domain is read‐only."
         }

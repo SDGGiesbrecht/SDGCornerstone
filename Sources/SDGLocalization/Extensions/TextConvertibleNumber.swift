@@ -146,13 +146,14 @@ extension TextConvertibleNumber {
 
     assert(
       base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16,
-      UserFacing<StrictString, _APILocalization>({ localization in
-        switch localization {  // @exempt(from: tests)
-        case .englishCanada:
-          return
-            "Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive."
-        }
-      })
+      UserFacing<StrictString, _APILocalization>(
+        { localization in  // @exempt(from: tests)
+          switch localization {
+          case .englishCanada:
+            return
+              "Base \(base.inDigits()) is not supported. The base must be an integer between 2 and 16 inclusive."
+          }
+        })
     )
 
     let digits: [[UnicodeScalar]] = [
@@ -207,6 +208,7 @@ extension TextConvertibleNumber {
       assertNFKD().isEmpty,
       UserFacing<StrictString, _APILocalization>({ localization in
         let scalars: [StrictString] = assertNFKD().map { scalar in
+          // @exempt(from: tests)
           return "\(scalar.visibleRepresentation) \(scalar.hexadecimalCode)"
         }
         switch localization {

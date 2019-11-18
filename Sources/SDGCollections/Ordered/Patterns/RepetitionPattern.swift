@@ -35,8 +35,8 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
   ) {
     _assert(
       count == nil ∨ count!.lowerBound.isNonNegative,
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return
             "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))"

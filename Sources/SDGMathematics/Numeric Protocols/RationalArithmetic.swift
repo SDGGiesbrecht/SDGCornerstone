@@ -65,8 +65,8 @@ extension RationalArithmetic {
 
     _assert(
       exponent.isIntegral,
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return
             "The result of a non‐integer exponent may be outside the set of rational numbers. Use a type that conforms to RealArithmetic instead. (\(exponent))"
@@ -91,8 +91,8 @@ extension RationalArithmetic {
 
     _assert(
       ¬range.isEmpty,
-      { (localization: _APILocalization) in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "Empty range."
         }

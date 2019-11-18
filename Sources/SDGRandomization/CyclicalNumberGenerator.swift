@@ -30,8 +30,8 @@ public struct CyclicalNumberGenerator: RandomNumberGenerator {
   public init(_ sequence: [UInt64]) {
     _assert(
       ¬sequence.isEmpty,
-      { (localization: _APILocalization) -> String in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) -> String in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "Empty sequence."
         }

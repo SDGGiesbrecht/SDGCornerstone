@@ -75,8 +75,8 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
   @inlinable internal func assertIndexExists(_ index: Index) {
     _assert(
       index ∈ bounds,
-      { (localization: _APILocalization) in
-        switch localization {  // @exempt(from: tests)
+      { (localization: _APILocalization) in  // @exempt(from: tests)
+        switch localization {
         case .englishCanada:
           return "Index out of bounds."
         }

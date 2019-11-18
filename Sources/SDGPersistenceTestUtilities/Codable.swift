@@ -83,6 +83,7 @@ public func testCodableConformance<T>(
           }
           test(
             decoded == instance,
+            // @exempt(from: tests)
             "\(instance) ≠ \(decoded) (\(specificationURL)",
             file: file,
             line: line
@@ -134,7 +135,7 @@ public func testDecoding<T, O>(
     let encoded = try JSONEncoder().encode([invalidMock])
     let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
     fail(
-      String(
+      String(  // @exempt(from: tests)
         UserFacing<StrictString, APILocalization>({ localization in
           switch localization {  // @exempt(from: tests)
           case .englishCanada:

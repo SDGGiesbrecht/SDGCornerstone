@@ -184,13 +184,14 @@ public struct WholeNumber: Addable, CodableViaTextConvertibleNumber, Comparable,
   public static func −= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
     assert(
       precedingValue ≥ followingValue,
-      UserFacing<StrictString, APILocalization>({ [precedingValue] localization in
-        switch localization {  // @exempt(from: tests)
-        case .englishCanada:
-          return
-            "\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(typeName: WholeNumber.self)."
-        }
-      })
+      UserFacing<StrictString, APILocalization>(
+        { [precedingValue] localization in  // @exempt(from: tests)
+          switch localization {
+          case .englishCanada:
+            return
+              "\(precedingValue.inDigits()) − \(followingValue.inDigits()) is impossible for \(typeName: WholeNumber.self)."
+          }
+        })
     )
 
     var borrowing: Digit = 0
