@@ -51,8 +51,8 @@ public func testGenericAdditiveArithmeticConformance<T>(
     file: file,
     line: line
   )
-  test(  // @exempt(from: unicode)
-    assignmentOperator: (-=, "-="),
+  test(
+    assignmentOperator: (-=, "-="),  // @exempt(from: unicode)
     with: (sum, T.zero),
     resultsIn: sum,
     file: file,

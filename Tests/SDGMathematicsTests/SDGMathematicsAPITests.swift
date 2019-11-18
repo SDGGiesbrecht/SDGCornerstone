@@ -648,7 +648,8 @@ class SDGMathematicsAPITests: TestCase {
     XCTAssertEqual(x, SubtractableNumericExample(−1))
 
     XCTAssertEqual(
-      SubtractableStrideableExample(6) - SubtractableStrideableExample(5),  // @exempt(from: unicode)
+      SubtractableStrideableExample(6)
+        - SubtractableStrideableExample(5),  // @exempt(from: unicode)
       SubtractableStrideableExample(1)
     )
     var y = SubtractableStrideableExample(7)
