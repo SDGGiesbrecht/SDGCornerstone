@@ -40,7 +40,8 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
     let cyclesElapsed = yearsElapsed.dividedAccordingToEuclid(by: HebrewYear.yearsPerLeapYearCycle)
     var monthsElapsed = cyclesElapsed × HebrewYear.monthsPerLeapYearCycle
 
-    for countingYear in (HebrewDate.referenceYear + cyclesElapsed × HebrewYear.yearsPerLeapYearCycle
+    for countingYear in (
+      HebrewDate.referenceYear + cyclesElapsed × HebrewYear.yearsPerLeapYearCycle
     )..<targetYear {
       monthsElapsed += countingYear.numberOfMonths
     }

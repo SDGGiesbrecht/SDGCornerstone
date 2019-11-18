@@ -34,7 +34,7 @@ class SDGPrecisionMathematicsAPITests: TestCase {
     XCTAssertNotNil(Integer(exactly: SDGMathematics.IntMax.min))
 
     XCTAssertEqual(Integer.random(in: 1...1), 1)
-    XCTAssertEqual(Integer.random(in: −1...−1), −1)
+    XCTAssertEqual(Integer.random(in: −1...(−1)), −1)
 
     let negativeMillion: SDGPrecisionMathematics.Integer = −1000000
     testCustomStringConvertibleConformance(

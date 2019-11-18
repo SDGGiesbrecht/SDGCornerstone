@@ -108,7 +108,7 @@ public struct HebrewMonthAndYear: Comparable, Equatable, FixedScaleOneDimensiona
 
   public static func += (precedingValue: inout HebrewMonthAndYear, followingValue: Int) {
     if followingValue.isNegative {
-      for _ in 1...|followingValue| {
+      for _ in 1...(|followingValue|) {
         precedingValue.month.decrementCyclically(leapYear: precedingValue.year.isLeapYear) {
           precedingValue.year −= 1
         }
