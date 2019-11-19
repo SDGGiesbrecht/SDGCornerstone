@@ -77,15 +77,13 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
     if i == endIndex {
       newline = base.scalars.endIndex..<base.scalars.endIndex
     } else {
-      guard
-        let searchEnd = i.start ?? base.scalars.endIndex      // @exempt(from: tests)
+      let searchEnd = i.start ?? base.scalars.endIndex  // @exempt(from: tests)
       // `nil` ought to have been handled by “if i == endIndex” above.
-
-      let found = base.scalars[..<searchEnd].lastMatch(
-        for: CharacterSet.newlinePattern
-      )?.range
-      else
-      {
+      guard
+        let found = base.scalars[..<searchEnd].lastMatch(
+          for: CharacterSet.newlinePattern
+        )?.range
+      else {
         _preconditionFailure({ (localization: _APILocalization) -> String in
           switch localization {
           case .englishCanada:  // @exempt(from: tests)
