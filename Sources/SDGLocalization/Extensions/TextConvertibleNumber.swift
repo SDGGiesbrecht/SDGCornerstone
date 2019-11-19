@@ -206,8 +206,8 @@ extension TextConvertibleNumber {
     }
     assert(
       assertNFKD().isEmpty,
-      UserFacing<StrictString, _APILocalization>(
-        { localization in  // @exempt(from: tests)
+      UserFacing<StrictString, _APILocalization>(  // @exempt(from: tests)
+        { localization in
           let scalars: [StrictString] = assertNFKD().map { scalar in
             return "\(scalar.visibleRepresentation) \(scalar.hexadecimalCode)"
           }
