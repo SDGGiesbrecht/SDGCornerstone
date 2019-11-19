@@ -496,7 +496,7 @@ public func test<P, F, R>(
     let result = try `operator`.function(precedingValue, followingValue())
     test(
       result == expectedResult,
-      {  // @exempt(from: tests)
+      try {  // @exempt(from: tests)
         return
           "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(result) ≠ \(expectedResult)"
       }(),
@@ -577,7 +577,7 @@ public func test<P, F>(
     try `operator`.function(&copy, followingValue())
     test(
       copy == expectedResult,
-      {  // @exempt(from: tests)
+      try {  // @exempt(from: tests)
         return
           "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(copy) ≠ \(expectedResult)"
       }(),
