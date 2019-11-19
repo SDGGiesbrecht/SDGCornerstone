@@ -113,8 +113,9 @@ public func test<T, R>(
     let result = try method.call(instance)()
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(instance).\(method.name)() → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(instance).\(method.name)() → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -148,8 +149,9 @@ public func test<T, A, R>(
     let result = try method.call(instance)(argument)
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(instance).\(method.name)(\(argument)) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(instance).\(method.name)(\(argument)) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -185,8 +187,10 @@ public func test<T, A, B, R>(
     let result = try method.call(instance)(arguments.0, arguments.1)
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return
+          "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -219,8 +223,9 @@ public func test<T>(
     try method.call(&copy)
     test(
       copy == expectedResult,
-      // @exempt(from: tests)
-      "\(instance).\(method.name)() → \(copy) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(instance).\(method.name)() → \(copy) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -258,8 +263,9 @@ public func test<T, A>(
     try method.call(&copy, argument)
     test(
       copy == expectedResult,
-      // @exempt(from: tests)
-      "\(instance).\(method.name)(\(argument)) → \(copy) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(instance).\(method.name)(\(argument)) → \(copy) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -298,8 +304,10 @@ public func test<T, A, B>(
     try method.call(&copy, arguments.0, arguments.1)
     test(
       copy == expectedResult,
-      // @exempt(from: tests)
-      "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(copy) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return
+          "\(instance).\(method.name)(\(arguments.0), \(arguments.1)) → \(copy) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -333,8 +341,9 @@ public func test<A, R>(
     let result = try function.call(argument)
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(function.name)(\(argument)) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -369,8 +378,9 @@ public func test<A, B, R>(
     let result = try function.call(arguments.0, arguments.1)
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(function.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(function.name)(\(arguments.0), \(arguments.1)) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -407,8 +417,10 @@ public func test<P, F, R>(
     let result = try `operator`.function(operands.precedingValue, operands.followingValue)
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return
+          "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -444,8 +456,10 @@ public func test<P, F, R, S>(
     let result = try `operator`.function(operands.precedingValue, operands.followingValue)
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return
+          "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -482,8 +496,10 @@ public func test<P, F, R>(
     let result = try `operator`.function(precedingValue, followingValue())
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return
+          "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -520,8 +536,10 @@ public func test<P, F>(
     try `operator`.function(&copy, operands.followingValue)
     test(
       copy == expectedResult,
-      // @exempt(from: tests)
-      "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(copy) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return
+          "\(operands.precedingValue) \(`operator`.name) \(operands.followingValue) → \(copy) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -559,8 +577,10 @@ public func test<P, F>(
     try `operator`.function(&copy, followingValue())
     test(
       copy == expectedResult,
-      // @exempt(from: tests)
-      "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(copy) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return
+          "\(precedingValue) \(`operator`.name) \(try followingValue()) → \(copy) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -592,8 +612,9 @@ public func test<O, R>(
     let result = try `operator`.function(operand)
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(`operator`.name)\(operand) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(`operator`.name)\(operand) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -624,8 +645,9 @@ public func test<O, R>(
     let result = try `operator`.function(operand)
     test(
       result == expectedResult,
-      // @exempt(from: tests)
-      "\(operand)\(`operator`.name) → \(result) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(operand)\(`operator`.name) → \(result) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -660,8 +682,9 @@ public func test<O>(
     try `operator`.function(&copy)
     test(
       copy == expectedResult,
-      // @exempt(from: tests)
-      "\(operand)\(`operator`.name) → \(copy) ≠ \(expectedResult)",
+      {  // @exempt(from: tests)
+        return "\(operand)\(`operator`.name) → \(copy) ≠ \(expectedResult)"
+      }(),
       file: file,
       line: line
     )
@@ -693,8 +716,9 @@ public func test<T, P>(
   let contents = property.accessor(instance)
   test(
     contents == expectedValue,
-    // @exempt(from: tests)
-    "\(instance).\(property.name) → \(contents) ≠ \(expectedValue)",
+    {  // @exempt(from: tests)
+      return "\(instance).\(property.name) → \(contents) ≠ \(expectedValue)"
+    }(),
     file: file,
     line: line
   )
@@ -720,8 +744,9 @@ public func test<V>(
 ) where V: Equatable {
   test(
     variable.contents == expectedValue,
-    // @exempt(from: tests)
-    "\(variable.name) → \(variable.contents) ≠ \(expectedValue)",
+    {  // @exempt(from: tests)
+      return "\(variable.name) → \(variable.contents) ≠ \(expectedValue)"
+    }(),
     file: file,
     line: line
   )

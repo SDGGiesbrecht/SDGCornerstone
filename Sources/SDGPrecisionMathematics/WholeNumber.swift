@@ -184,8 +184,8 @@ public struct WholeNumber: Addable, CodableViaTextConvertibleNumber, Comparable,
   public static func −= (precedingValue: inout WholeNumber, followingValue: WholeNumber) {
     assert(
       precedingValue ≥ followingValue,
-      UserFacing<StrictString, APILocalization>(
-        { [precedingValue] localization in  // @exempt(from: tests)
+      UserFacing<StrictString, APILocalization>(  // @exempt(from: tests)
+        { [precedingValue] localization in
           switch localization {
           case .englishCanada:
             return

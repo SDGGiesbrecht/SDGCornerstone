@@ -61,8 +61,10 @@ public func testFileConvertibleConformance<T>(
         let decoded = try T(file: specification, origin: specificationURL)
         test(
           decoded == instance,
-          // @exempt(from: tests)
-          "\(instance) ≠ \(decoded) (\(specificationURL)",
+          {  // @exempt(from: tests)
+            return
+              "\(instance) ≠ \(decoded) (\(specificationURL)"
+          }(),
           file: file,
           line: line
         )
