@@ -138,9 +138,9 @@ public func testDecoding<T, O>(
     let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
     fail(
       String(  // @exempt(from: tests)
-        UserFacing<StrictString, APILocalization>(
-          { localization in  // @exempt(from: tests)
-            switch localization {  // @exempt(from: tests)
+        UserFacing<StrictString, APILocalization>(  // @exempt(from: tests)
+          { localization in
+            switch localization {
             case .englishCanada:
               return "No error thrown. Decoded: \(arbitraryDescriptionOf: decoded)"
             }
