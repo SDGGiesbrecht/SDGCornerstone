@@ -84,7 +84,7 @@ public func testCodableConformance<T>(
           test(
             decoded == instance,
             {  // @exempt(from: tests)
-              return
+              return  // @exempt(from: tests)
                 "\(instance) ≠ \(decoded) (\(specificationURL)"
             }(),
             file: file,
@@ -138,12 +138,13 @@ public func testDecoding<T, O>(
     let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
     fail(
       String(  // @exempt(from: tests)
-        UserFacing<StrictString, APILocalization>({ localization in
-          switch localization {  // @exempt(from: tests)
-          case .englishCanada:
-            return "No error thrown. Decoded: \(arbitraryDescriptionOf: decoded)"
-          }
-        }).resolved()
+        UserFacing<StrictString, APILocalization>(
+          { localization in  // @exempt(from: tests)
+            switch localization {  // @exempt(from: tests)
+            case .englishCanada:
+              return "No error thrown. Decoded: \(arbitraryDescriptionOf: decoded)"
+            }
+          }).resolved()
       ),
       file: file,
       line: line

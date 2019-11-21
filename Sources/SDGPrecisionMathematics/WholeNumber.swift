@@ -185,7 +185,7 @@ public struct WholeNumber: Addable, CodableViaTextConvertibleNumber, Comparable,
     assert(
       precedingValue ≥ followingValue,
       UserFacing<StrictString, APILocalization>(  // @exempt(from: tests)
-        { [precedingValue] localization in
+        { [precedingValue] localization in  // @exempt(from: tests)
           switch localization {
           case .englishCanada:
             return

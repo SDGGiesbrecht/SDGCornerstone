@@ -39,7 +39,7 @@ extension IntegralArithmetic {
     _assert(
       exponent.isNonNegative,
       { (localization: _APILocalization) -> String in  // @exempt(from: tests)
-        switch localization {
+        switch localization {  // @exempt(from: tests)
         case .englishCanada:
           return
             "The result of a negative exponent may be outside the set of integers. Use a type that conforms to RationalArithmetic instead. (\(exponent))"

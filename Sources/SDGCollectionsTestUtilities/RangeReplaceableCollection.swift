@@ -36,7 +36,8 @@ public func testRangeReplaceableCollectionConformance<T>(
   test(
     collection.elementsEqual(T([element])),
     {  // @exempt(from: tests)
-      return "\(T.self)(\(element) → \(T([element])) ≠ \(collection)"
+      return  // @exempt(from: tests)
+        "\(T.self)(\(element) → \(T([element])) ≠ \(collection)"
     }(),
     file: file,
     line: line
@@ -46,7 +47,7 @@ public func testRangeReplaceableCollectionConformance<T>(
   test(
     collection.elementsEqual(T([element, element])),
     {  // @exempt(from: tests)
-      return
+      return  // @exempt(from: tests)
         "\(T([element])).insert(contentsOf: \([element]), at: \(collection.startIndex) → \(collection) ≠ \(T([element, element]))"
     }(),
     file: file,
@@ -58,7 +59,7 @@ public func testRangeReplaceableCollectionConformance<T>(
   test(
     appended.elementsEqual(appendedExpectation),
     {  // @exempt(from: tests)
-      return
+      return  // @exempt(from: tests)
         "\(collection).appending(contentsOf: \([element])) → \(appended) ≠ \(appendedExpectation)"
     }(),
     file: file,
@@ -69,7 +70,7 @@ public func testRangeReplaceableCollectionConformance<T>(
   test(
     appended.elementsEqual(appendedExpectation),
     {  // @exempt(from: tests)
-      return
+      return  // @exempt(from: tests)
         "\(collection).appending(contentsOf: \(T([element]))) → \(appended) ≠ \(appendedExpectation)"
     }(),
     file: file,

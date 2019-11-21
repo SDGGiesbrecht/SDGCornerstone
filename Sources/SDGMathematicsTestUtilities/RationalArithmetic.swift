@@ -35,7 +35,7 @@ public func testRationalArithmeticConformance<T>(
   test(
     converted == 0.875,
     {  // @exempt(from: tests)
-      return
+      return  // @exempt(from: tests)
         "\(T.self)(FloatMax(0.875)) → \(converted) ≠ 0.875"
 
     }(),
@@ -53,7 +53,7 @@ public func testRationalArithmeticConformance<T>(
   test(
     result ∈ range,
     {  // @exempt(from: tests)
-      return
+      return  // @exempt(from: tests)
         "\(T.self).random(in: \(range)) → \(result) ∉ \(range)"
 
     }(),

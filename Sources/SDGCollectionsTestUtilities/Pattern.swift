@@ -35,7 +35,7 @@ where P: Pattern, C: SearchableCollection, C.Element == P.Element {
   test(
     result == match.bounds,
     {  // @exempt(from: tests)
-      return
+      return  // @exempt(from: tests)
         "\(pattern).matches(in: \(match), at: \(match.startIndex)).first → \(String(describing: result)) ≠ \(match.bounds)"
     }(),
     file: file,
@@ -46,7 +46,7 @@ where P: Pattern, C: SearchableCollection, C.Element == P.Element {
   test(
     result2 == match.bounds,
     {  // @exempt(from: tests)
-      return
+      return  // @exempt(from: tests)
         "\(pattern).primaryMatch(in: \(match), at: \(match.startIndex)) → \(String(describing: result2)) ≠ \(match.bounds)"
     }(),
     file: file,
@@ -58,7 +58,7 @@ where P: Pattern, C: SearchableCollection, C.Element == P.Element {
   test(
     result3 == reversedMatch.bounds,
     {  // @exempt(from: tests)
-      return
+      return  // @exempt(from: tests)
         "\(pattern).reversed().primaryMatch(in: \(reversedMatch), at: \(reversedMatch.startIndex)) → \(String(describing: result3)) ≠ \(reversedMatch.bounds)"
     }(),
     file: file,

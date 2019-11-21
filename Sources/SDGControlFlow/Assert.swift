@@ -46,7 +46,7 @@ public func _primitiveMethod(
 
 public func _unreachableMessage(function: String, file: StaticString, line: UInt, column: UInt) -> (
   _APILocalization
-) -> String {
+) -> String {  // @exempt(from: tests)
   return { (localization: _APILocalization) -> String in  // @exempt(from: tests)
     switch localization {
     case .englishCanada:

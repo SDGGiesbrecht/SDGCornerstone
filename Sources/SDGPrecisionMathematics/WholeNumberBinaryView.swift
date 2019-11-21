@@ -123,7 +123,7 @@ extension WholeNumber {
       }
       preconditionFailure(
         UserFacing<StrictString, APILocalization>(  // @exempt(from: tests)
-          { [wholeNumber = self.wholeNumber] localization in
+          { [wholeNumber = self.wholeNumber] localization in  // @exempt(from: tests)
             switch localization {
             case .englishCanada:
               return "\(wholeNumber.inDigits()) is not in normalized form."

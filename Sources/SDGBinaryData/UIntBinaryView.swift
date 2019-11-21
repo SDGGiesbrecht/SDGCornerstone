@@ -76,7 +76,7 @@ public struct BinaryView<UIntValue: UIntFamily>: BidirectionalCollection, Collec
     _assert(
       index ∈ bounds,
       { (localization: _APILocalization) in  // @exempt(from: tests)
-        switch localization {
+        switch localization {  // @exempt(from: tests)
         case .englishCanada:
           return "Index out of bounds."
         }

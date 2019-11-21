@@ -24,6 +24,8 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
   // @documentation(SDGCornerstone.Repetition.init(of:count:consumption))
   /// Creates a repetition pattern from another pattern.
   ///
+  /// - Precondition: `count` must not involve a negative bound.
+  ///
   /// - Parameters:
   ///     - pattern: The pattern to repeat.
   ///     - count: A range representing the allowed number of repetitions.
@@ -36,7 +38,7 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
     _assert(
       count == nil ∨ count!.lowerBound.isNonNegative,
       { (localization: _APILocalization) -> String in  // @exempt(from: tests)
-        switch localization {
+        switch localization {  // @exempt(from: tests)
         case .englishCanada:
           return
             "Matching a negative number of instances of a pattern is undefined. (\(count!.lowerBound))"
@@ -51,6 +53,8 @@ public struct RepetitionPattern<Base>: Pattern where Base: Pattern {
 
   // #documentation(SDGCornerstone.Repetition.init(of:count:consumption))
   /// Creates a repetition pattern from another pattern.
+  ///
+  /// - Precondition: `count` must not involve a negative bound.
   ///
   /// - Parameters:
   ///     - pattern: The pattern to repeat.

@@ -227,13 +227,13 @@ extension FileManager {
         includingPropertiesForKeys: [.isDirectoryKey],
         options: [],
         errorHandler: { (_, error: Error) -> Bool in  // @exempt(from: tests)
-          // It is unknown what circumstances would actually cause an error.
+          // @exempt(from: tests) It is unknown what circumstances would actually cause an error.
           failureReason = error
           return false  // Stop.
         }
       )
     else {  // @exempt(from: tests)
-      // It is unknown what circumstances would actually result in a `nil` enumerator being returned.
+      // @exempt(from: tests) It is unknown what circumstances would actually result in a `nil` enumerator being returned.
       throw FileManager.unknownFileReadingError
     }
 

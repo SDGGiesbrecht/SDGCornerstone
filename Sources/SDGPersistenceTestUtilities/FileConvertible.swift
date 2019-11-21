@@ -62,7 +62,7 @@ public func testFileConvertibleConformance<T>(
         test(
           decoded == instance,
           {  // @exempt(from: tests)
-            return
+            return  // @exempt(from: tests)
               "\(instance) ≠ \(decoded) (\(specificationURL)"
           }(),
           file: file,

@@ -73,7 +73,7 @@ internal struct HalvesView<UIntValue: UIntFamily>: BidirectionalCollection, Coll
     assert(
       index ∈ bounds,
       UserFacing<StrictString, APILocalization>(  // @exempt(from: tests)
-        { localization in
+        { localization in  // @exempt(from: tests)
           switch localization {
           case .englishCanada:
             return "Index out of bounds."

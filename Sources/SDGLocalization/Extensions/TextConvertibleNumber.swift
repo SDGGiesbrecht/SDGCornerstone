@@ -147,7 +147,7 @@ extension TextConvertibleNumber {
     assert(
       base.isIntegral ∧ 2 ≤ base ∧ base ≤ 16,
       UserFacing<StrictString, _APILocalization>(  // @exempt(from: tests)
-        { localization in
+        { localization in  // @exempt(from: tests)
           switch localization {
           case .englishCanada:
             return
@@ -207,7 +207,7 @@ extension TextConvertibleNumber {
     assert(
       assertNFKD().isEmpty,
       UserFacing<StrictString, _APILocalization>(  // @exempt(from: tests)
-        { localization in
+        { localization in  // @exempt(from: tests)
           let scalars: [StrictString] = assertNFKD().map { scalar in
             return "\(scalar.visibleRepresentation) \(scalar.hexadecimalCode)"
           }

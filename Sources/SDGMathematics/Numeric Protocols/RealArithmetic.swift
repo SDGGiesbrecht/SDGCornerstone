@@ -310,7 +310,7 @@ extension RealArithmetic {
     _assert(
       (−1...1).contains(sine),
       { (localization: _APILocalization) -> String in  // @exempt(from: tests)
-        switch localization {
+        switch localization {  // @exempt(from: tests)
         case .englishCanada:
           return "There is no arcsine angle for any number x, where |x| > 1. (\(sine))"
         }
@@ -323,7 +323,7 @@ extension RealArithmetic {
     _assert(
       (−1...1).contains(cosine),
       { (localization: _APILocalization) -> String in  // @exempt(from: tests)
-        switch localization {
+        switch localization {  // @exempt(from: tests)
         case .englishCanada:
           return "There is no arccosine angle for any number x, where |x| > 1. (\(cosine))"
         }
@@ -336,7 +336,7 @@ extension RealArithmetic {
     _assert(
       ¬(−1...1).contains(cosecant),
       { (localization: _APILocalization) -> String in  // @exempt(from: tests)
-        switch localization {
+        switch localization {  // @exempt(from: tests)
         case .englishCanada:
           return "There is no arccosecant angle for any number x, where |x| < 1. (\(cosecant))"
         }
@@ -349,7 +349,7 @@ extension RealArithmetic {
     _assert(
       ¬(−1...1).contains(secant),
       { (localization: _APILocalization) -> String in  // @exempt(from: tests)
-        switch localization {
+        switch localization {  // @exempt(from: tests)
         case .englishCanada:
           return "There is no arccosecant angle for any number x, where |x| < 1. (\(secant))"
         }

@@ -30,7 +30,7 @@ import SDGLogic
   _assert(
     bounds == nil ∨ bounds!.contains(location),
     { (localization: _APILocalization) -> String in  // @exempt(from: tests)
-      switch localization {
+      switch localization {  // @exempt(from: tests)
       case .englishCanada:
         return "Location out of bounds. \(location) ∉ \(String(describing: bounds))"
       }
