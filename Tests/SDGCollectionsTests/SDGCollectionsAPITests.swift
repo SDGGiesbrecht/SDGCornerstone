@@ -414,7 +414,10 @@ class SDGCollectionsAPITests: TestCase {
       case .remove(let offset, _, _):
         changedString.remove(at: changedString.index(changedString.startIndex, offsetBy: offset))
       case .insert(let offset, let element, _):
-        changedString.insert(element, at: changedString.index(changedString.startIndex, offsetBy: offset))
+        changedString.insert(
+          element,
+          at: changedString.index(changedString.startIndex, offsetBy: offset)
+        )
       }
     }
     XCTAssertEqual(changedString, endString)

@@ -342,6 +342,7 @@ let package = Package(
             "SDGPersistence", "SDGTesting",
             "SDGControlFlow",
             "SDGLogic",
+            "SDGMathematics",
             "SDGCollections",
             "SDGText",
             "SDGLocalization",
