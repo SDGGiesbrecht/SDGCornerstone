@@ -106,10 +106,7 @@ where SubSequence: SearchableBidirectionalCollection {
   ///     - other: The other collection
   func commonSuffix(with other: Self) -> PatternMatch<Self>
 
-  #warning("Rethink")
-
-  #warning("Temporarily disabled.")
-  // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
+  // #documentation(SDGCornerstone.Collection.shimmedDifference(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
   ///
   /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
@@ -120,9 +117,9 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<Element>
+  func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
-  // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
+  // #documentation(SDGCornerstone.Collection.shimmedDifference(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
   ///
   /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
@@ -133,7 +130,7 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<Element>
+  func shimmedDifference(from other: Self) -> ShimmedCollectionDifference<Element>
 }
 
 extension SearchableBidirectionalCollection {
@@ -183,25 +180,19 @@ extension SearchableBidirectionalCollection {
     return _commonSuffix(with: other)
   }
 
-  #warning("Rethink")
-
-  @inlinable internal func bidirectionalDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
+  @inlinable internal func bidirectionalDifference<C>(from other: C) -> ShimmedCollectionDifference<
+    Element
+  >
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
-
-    let suffixStart = commonSuffix(with: other).range.lowerBound
-    let suffixLength = distance(from: suffixStart, to: endIndex)
-    let otherSuffixStart = other.index(other.endIndex, offsetBy: −suffixLength)
-
-    return self[..<suffixStart].forwardDifference(from: other[..<otherSuffixStart])
+    return shimmedDifference(from: other, by: ==)
   }
-  #warning("Temporarily disabled.")
-  @inlinable public func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<
+  @inlinable public func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<
     Element
   >
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
     return bidirectionalDifference(from: other)
   }
-  @inlinable public func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<
+  @inlinable public func shimmedDifference(from other: Self) -> ShimmedCollectionDifference<
     Element
   > {
     return bidirectionalDifference(from: other)
