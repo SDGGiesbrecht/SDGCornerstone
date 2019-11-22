@@ -513,39 +513,6 @@ extension SearchableCollection {
 
   #warning("Rethink")
 
-  @inlinable internal func longestCommonSubsequenceTable<C>(
-    with other: C,
-    indexCache: inout [Int: Index],
-    otherIndexCache: inout [Int: C.Index]
-  ) -> [[Int]] where C: SearchableCollection, C.Element == Self.Element {
-    let row = [Int](repeating: 0, count: Int(other.count) + 1)
-    var table = [[Int]](repeating: row, count: Int(count) + 1)
-    if ¬isEmpty ∧ ¬other.isEmpty {
-      for prefixLength in 1...Int(count) {
-        for otherPrefixLength in 1...Int(other.count) {
-          let lastIndexDistance = prefixLength − 1
-          let otherLastIndexDistance = otherPrefixLength − 1
-          let lastIndex = cached(in: &indexCache[lastIndexDistance]) {
-            self.index(startIndex, offsetBy: lastIndexDistance)
-          }
-          let otherLastIndex = cached(in: &otherIndexCache[otherLastIndexDistance]) {
-            other.index(other.startIndex, offsetBy: otherLastIndexDistance)
-          }
-          if self[lastIndex] == other[otherLastIndex] {
-            table[prefixLength][otherPrefixLength] = table[prefixLength − 1][otherPrefixLength − 1]
-              + 1
-          } else {
-            table[prefixLength][otherPrefixLength] = Swift.max(
-              table[prefixLength][otherPrefixLength − 1],
-              table[prefixLength − 1][otherPrefixLength]
-            )
-          }
-        }
-      }
-    }
-    return table
-  }
-
   @inlinable internal func traceDifference<C>(
     _ table: [[Int]],
     other: C,

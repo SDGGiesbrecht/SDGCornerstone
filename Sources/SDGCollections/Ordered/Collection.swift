@@ -12,6 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+import SDGMathematics
+
 extension Collection {
 
   // MARK: - Indices
@@ -19,6 +22,36 @@ extension Collection {
   /// Returns the range for all of `self`.
   @inlinable public var bounds: Range<Index> {
     return startIndex..<endIndex
+  }
+
+  @inlinable internal func longestCommonSubsequenceTable<C>(
+    with other: C,
+    by areEquivalent: (Element, Element) -> Bool,
+    indexMapping: [Index],
+    otherIndexMapping: [C.Index]
+  ) -> [[Int]] where C: SearchableCollection, C.Element == Self.Element {
+    let row = [Int](repeating: 0, count: otherIndexMapping.count + 1)
+    var table = [[Int]](repeating: row, count: indexMapping.count + 1)
+    if ¬isEmpty ∧ ¬other.isEmpty {
+      for prefixLength in 1...indexMapping.count {
+        for otherPrefixLength in 1...otherIndexMapping.count {
+          let lastIndexDistance = prefixLength − 1
+          let otherLastIndexDistance = otherPrefixLength − 1
+          let lastIndex = indexMapping[lastIndexDistance]
+          let otherLastIndex = otherIndexMapping[otherLastIndexDistance]
+          if areEquivalent(self[lastIndex], other[otherLastIndex]) {
+            table[prefixLength][otherPrefixLength] = table[prefixLength − 1][otherPrefixLength − 1]
+              + 1
+          } else {
+            table[prefixLength][otherPrefixLength] = Swift.max(
+              table[prefixLength][otherPrefixLength − 1],
+              table[prefixLength − 1][otherPrefixLength]
+            )
+          }
+        }
+      }
+    }
+    return table
   }
 }
 
