@@ -503,6 +503,7 @@ let package = Package(
             "SDGLogic",
             "SDGMathematics",
             "SDGCornerstoneLocalizations",
+            "SDGPersistenceTestUtilities",
             "SDGLocalizationTestUtilities"
             ]),
         .testTarget(name: "SDGTextTests", dependencies: [

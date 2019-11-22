@@ -102,15 +102,14 @@ public func compare(
 
     var removals: Set<Int> = []
     var inserts: [Int: String] = [:]
-    #warning("Restore.")
-    /*for difference in differences {
+    for difference in differences {
       switch difference {
       case .remove(let offset, _, _):
         removals.insert(offset)
       case .insert(let offset, let element, _):
         inserts[offset] = element
       }
-    }*/
+    }
 
     var reportArray: [String] = []
     var resultOffset = 0

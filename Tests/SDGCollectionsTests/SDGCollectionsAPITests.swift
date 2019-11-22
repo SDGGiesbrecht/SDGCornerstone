@@ -21,6 +21,7 @@ import SDGCornerstoneLocalizations
 import XCTest
 
 import SDGCollectionsTestUtilities
+import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
@@ -395,23 +396,21 @@ class SDGCollectionsAPITests: TestCase {
     let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
     let diff = end.shimmedDifference(from: start)
     var changed: [Unicode.Scalar] = start
-    #warning("Restore.")
-    /*for change in diff {
+    for change in diff {
       switch change {
       case .remove(let offset, _, _):
         changed.remove(at: changed.index(changed.startIndex, offsetBy: offset))
       case .insert(let offset, let element, _):
         changed.insert(element, at: changed.index(changed.startIndex, offsetBy: offset))
       }
-    }*/
+    }
     XCTAssertEqual(changed, end)
 
     let startString = "..GAC‐‐!!.."
     let endString = "..AGCAT‐‐??.."
     let diffString = endString.shimmedDifference(from: startString)
     var changedString = startString
-    #warning("Restore.")
-    /*for change in diffString {
+    for change in diffString {
       switch change {
       case .remove(let offset, _, _):
         changedString.remove(at: changedString.index(changedString.startIndex, offsetBy: offset))
@@ -421,7 +420,7 @@ class SDGCollectionsAPITests: TestCase {
           at: changedString.index(changedString.startIndex, offsetBy: offset)
         )
       }
-    }*/
+    }
     XCTAssertEqual(changedString, endString)
 
     let set = AnyCollection(Set(endString))
@@ -435,11 +434,31 @@ class SDGCollectionsAPITests: TestCase {
     XCTAssert("...".scalars[...].matches(for: ConditionalPattern({ $0 ≠ "." })).isEmpty)
   }
 
+  func testCollectionDifference() throws {
+    let start: [String] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
+    let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
+    let shimmedDifference = end.shimmedDifference(from: start)
+    if #available(macOS 10.15, *) {
+      #warning("Restore.")
+      /*let standardDifference = CollectionDifference(shimmedDifference)
+      var encoded = try JSONEncoder().encode(shimmedDifference)
+      let decodedStandard = try JSONDecoder().decode(
+        [CollectionDifference<String>.Change].self,
+        from: encoded
+      )
+      XCTAssertEqual(decodedStandard, standardDifference)
+
+      encoded = try JSONEncoder().encode(standardDifference)let decodedShimmed = try JSONDecoder().decode([ShimmedCollectionDifference<String>.Change].self, from: encoded)
+      XCTAssertEqual(decodedShimmed, shimmedDifference)*/
+    }
+  }
+
   func testCollectionDifferenceChange() throws {
     let shimmedEntries: [ShimmedCollectionDifference<String>.Change] = [
       .remove(offset: 10, element: "removed element", associatedWith: 20),
       .insert(offset: 30, element: "inserted element", associatedWith: 40)
     ]
+    testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
     if #available(macOS 10.15, *) {
       let standardEntries = shimmedEntries.map { shimmed in
         return CollectionDifference.Change(shimmed)
@@ -452,7 +471,10 @@ class SDGCollectionsAPITests: TestCase {
       XCTAssertEqual(decodedStandard, standardEntries)
 
       encoded = try JSONEncoder().encode(standardEntries)
-      let decodedShimmed = try JSONDecoder().decode([ShimmedCollectionDifference<String>.Change].self, from: encoded)
+      let decodedShimmed = try JSONDecoder().decode(
+        [ShimmedCollectionDifference<String>.Change].self,
+        from: encoded
+      )
       XCTAssertEqual(decodedShimmed, shimmedEntries)
     }
   }

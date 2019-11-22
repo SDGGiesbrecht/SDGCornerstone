@@ -38,11 +38,27 @@ extension ShimmedCollectionDifference {
 
     // MARK: - Cases
 
-    /// A removal.
+    /// A shimmed version of `CollectionDifference.Change.remove(offset:element:associatedWith:)` with no availability constraints.
     case remove(offset: Int, element: ChangeElement, associatedWith: Int?)
 
-    /// An insertion.
+    /// A shimmed version of `CollectionDifference.Change.insert(offset:element:associatedWith:)` with no availability constraints.
     case insert(offset: Int, element: ChangeElement, associatedWith: Int?)
+
+    // MARK: - Initialization
+
+    /// Wraps an instance of a standard `Change`.
+    ///
+    /// - Parameters:
+    ///   - standard: The shimmed instance.
+    @available(macOS 10.15, *)
+    @inlinable public init(_ standard: CollectionDifference<ChangeElement>.Change) {
+      switch standard {
+      case .remove(let offset, let element, let associatedOffset):
+        self = .remove(offset: offset, element: element, associatedWith: associatedOffset)
+      case .insert(let offset, let element, let associatedOffset):
+        self = .insert(offset: offset, element: element, associatedWith: associatedOffset)
+      }
+    }
   }
 }
 
