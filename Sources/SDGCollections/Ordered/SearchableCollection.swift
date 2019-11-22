@@ -247,6 +247,7 @@ where SubSequence: SearchableCollection {
 
   #warning("Rethink")
 
+  #warning("Temporarily disabled.")
   // @documentation(SDGCornerstone.Collection.groupedDifferences(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
   ///
@@ -258,7 +259,7 @@ where SubSequence: SearchableCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
   where C: SearchableCollection, C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
@@ -271,7 +272,7 @@ where SubSequence: SearchableCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func groupedDifferences(from other: Self) -> [Change<Index, Index>]
+  func _groupedDifferences(from other: Self) -> [Change<Index, Index>]
 }
 
 extension SearchableCollection {
@@ -691,11 +692,12 @@ extension SearchableCollection {
 
     return difference
   }
-  @inlinable public func groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  #warning("Temporarily disabled.")
+  @inlinable public func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
   where C: SearchableCollection, C.Element == Self.Element {
     return suffixIgnorantDifference(from: other)
   }
-  @inlinable public func groupedDifferences(from other: Self) -> [Change<Index, Index>] {
+  @inlinable public func _groupedDifferences(from other: Self) -> [Change<Index, Index>] {
     return suffixIgnorantDifference(from: other)
   }
 

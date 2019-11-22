@@ -149,6 +149,12 @@ import PackageDescription
 /// ```
 let package = Package(
     name: "SDGCornerstone",
+    platforms: [
+      {
+        #warning("Remove this!")
+        return .macOS(.v10_15)
+      }()
+    ],
     products: [
 
         // #documentation(SDGControlFlow)

@@ -108,6 +108,7 @@ where SubSequence: SearchableBidirectionalCollection {
 
   #warning("Rethink")
 
+  #warning("Temporarily disabled.")
   // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
   ///
@@ -119,7 +120,7 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
@@ -132,7 +133,7 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func groupedDifferences(from other: Self) -> [Change<Index, Index>]
+  func _groupedDifferences(from other: Self) -> [Change<Index, Index>]
 }
 
 extension SearchableBidirectionalCollection {
@@ -201,11 +202,12 @@ extension SearchableBidirectionalCollection {
 
     return difference
   }
-  @inlinable public func groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  #warning("Temporarily disabled.")
+  @inlinable public func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
     return _difference(from: other)
   }
-  @inlinable public func groupedDifferences(from other: Self) -> [Change<Index, Index>] {
+  @inlinable public func _groupedDifferences(from other: Self) -> [Change<Index, Index>] {
     return _difference(from: other)
   }
 }
