@@ -43,6 +43,10 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
     insertions = standard.insertions.map { Change($0) }
   }
 
+  /// A shimmed version of `CollectionDifference.init?(_:)` with no availability constraints.
+  ///
+  /// - Parameters:
+  ///   - changes: The changes.
   @inlinable public init?<Changes>(_ changes: Changes)
   where Changes: Collection, Changes.Element == Change {
     if changes.isEmpty {
@@ -129,6 +133,20 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
 
   @inlinable public func index(before i: Int) -> Int {
     return i − 1
+  }
+
+  // MARK: - Reversal
+
+  @inlinable public func inverse() -> Self {
+    let reversedChanges: [Change] = map { change in
+      switch change {
+      case .remove(let offset, let element, let associatedOffset):
+        return .insert(offset: offset, element: element, associatedWith: associatedOffset)
+      case .insert(let offset, let element, let associatedOffset):
+        return .remove(offset: offset, element: element, associatedWith: associatedOffset)
+      }
+    }
+    return ShimmedCollectionDifference(unsafeChanges: reversedChanges)
   }
 
   // MARK: - Collection
