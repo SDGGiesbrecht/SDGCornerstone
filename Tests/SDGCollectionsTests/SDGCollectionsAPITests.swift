@@ -393,23 +393,25 @@ class SDGCollectionsAPITests: TestCase {
 
     let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
     let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
-    let diff = end.difference(from: start)
+    let diff = end.shimmedDifference(from: start)
     var changed: [Unicode.Scalar] = start
-    for change in diff {
+    #warning("Restore.")
+    /*for change in diff {
       switch change {
       case .remove(let offset, _, _):
         changed.remove(at: changed.index(changed.startIndex, offsetBy: offset))
       case .insert(let offset, let element, _):
         changed.insert(element, at: changed.index(changed.startIndex, offsetBy: offset))
       }
-    }
+    }*/
     XCTAssertEqual(changed, end)
 
     let startString = "..GAC‐‐!!.."
     let endString = "..AGCAT‐‐??.."
-    let diffString = endString.difference(from: startString)
+    let diffString = endString.shimmedDifference(from: startString)
     var changedString = startString
-    for change in diffString {
+    #warning("Restore.")
+    /*for change in diffString {
       switch change {
       case .remove(let offset, _, _):
         changedString.remove(at: changedString.index(changedString.startIndex, offsetBy: offset))
@@ -419,7 +421,7 @@ class SDGCollectionsAPITests: TestCase {
           at: changedString.index(changedString.startIndex, offsetBy: offset)
         )
       }
-    }
+    }*/
     XCTAssertEqual(changedString, endString)
 
     let set = AnyCollection(Set(endString))
@@ -431,6 +433,24 @@ class SDGCollectionsAPITests: TestCase {
     XCTAssertNil("...".scalars[...].lastMatch(for: ConditionalPattern({ $0 ≠ "." })))
     XCTAssertNil("...".scalars[...].firstMatch(for: ConditionalPattern({ $0 ≠ "." })))
     XCTAssert("...".scalars[...].matches(for: ConditionalPattern({ $0 ≠ "." })).isEmpty)
+  }
+
+  func testCollectionDifferenceChange() throws {
+    let shimmedEntries: [ShimmedCollectionDifference<String>.Change] = [
+      .remove(offset: 10, element: "removed element", associatedWith: 20),
+      .insert(offset: 30, element: "inserted element", associatedWith: 40)
+    ]
+    if #available(macOS 10.15, *) {
+      let standardEntries = shimmedEntries.map { shimmed in
+        return CollectionDifference.Change(shimmed)
+      }
+      var encoded = try JSONEncoder().encode(shimmedEntries)
+      let decodedStandard = try JSONDecoder().decode(
+        [CollectionDifference<String>.Change].self,
+        from: encoded
+      )
+      XCTAssertEqual(decodedStandard, standardEntries)
+    }
   }
 
   struct ComparableSetExample: ComparableSet {

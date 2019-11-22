@@ -98,18 +98,19 @@ public func compare(
     // These need to be random access collections.
     let stringLines: [String] = string.lines.map({ String($0.line) })
     let specificationLines: [String] = specificationString.lines.map({ String($0.line) })
-    let differences = stringLines.difference(from: specificationLines)
+    let differences = stringLines.shimmedDifference(from: specificationLines)
 
     var removals: Set<Int> = []
     var inserts: [Int: String] = [:]
-    for difference in differences {
+    #warning("Restore.")
+    /*for difference in differences {
       switch difference {
       case .remove(let offset, _, _):
         removals.insert(offset)
       case .insert(let offset, let element, _):
         inserts[offset] = element
       }
-    }
+    }*/
 
     var reportArray: [String] = []
     var resultOffset = 0
