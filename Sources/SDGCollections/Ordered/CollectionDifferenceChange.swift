@@ -59,6 +59,35 @@ extension ShimmedCollectionDifference {
         self = .insert(offset: offset, element: element, associatedWith: associatedOffset)
       }
     }
+
+    // MARK: - Properties
+
+    /// The offset.
+    @inlinable public var offset: Int {
+      switch self {
+      case .remove(let offset, _, _),
+        .insert(let offset, _, _):
+        return offset
+      }
+    }
+
+    /// The element.
+    @inlinable public var element: ChangeElement {
+      switch self {
+      case .remove(_, let element, _),
+        .insert(_, let element, _):
+        return element
+      }
+    }
+
+    /// The associated offset.
+    @inlinable public var associatedOffset: Int? {
+      switch self {
+      case .remove(_, _, let associatedOffset),
+        .insert(_, _, let associatedOffset):
+        return associatedOffset
+      }
+    }
   }
 }
 

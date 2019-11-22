@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
 import SDGMathematics
 
 @available(macOS 10.15, *)
@@ -40,6 +41,80 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
   @inlinable public init(_ standard: CollectionDifference<ChangeElement>) {
     removals = standard.removals.map { Change($0) }
     insertions = standard.insertions.map { Change($0) }
+  }
+
+  @inlinable public init?<Changes>(_ changes: Changes)
+  where Changes: Collection, Changes.Element == Change {
+    if changes.isEmpty {
+      return nil
+    }
+
+    var insertionAssociations: [Int: Int] = [:]
+    var removalAssociations: [Int: Int] = [:]
+    var insertions: Set<Int> = []
+    var removals: Set<Int> = []
+
+    for change in changes {
+      if change.offset < 0 {
+        return nil
+      }
+      if let associated = change.associatedOffset,
+        associated < 0
+      {
+        return nil
+      }
+
+      switch change {
+      case .remove(let offset, _, let associatedOffset):
+
+        if offset ∈ removals {
+          return nil
+        }
+        removals.insert(offset)
+
+        if let associated = associatedOffset {
+          if removalAssociations[offset] ≠ nil {
+            return nil
+          }
+          removalAssociations[offset] = associated
+        }
+
+      case .insert(let offset, _, let associatedOffset):
+
+        if offset ∈ insertions {
+          return nil
+        }
+        insertions.insert(offset)
+
+        if let associated = associatedOffset {
+          if insertionAssociations[offset] ≠ nil {
+            return nil
+          }
+          insertionAssociations[offset] = associated
+        }
+      }
+    }
+    if removalAssociations ≠ insertionAssociations {
+      return nil
+    }
+
+    self.init(unsafeChanges: changes)
+  }
+
+  @inlinable internal init<Changes>(unsafeChanges changes: Changes)
+  where Changes: Collection, Changes.Element == Change {
+    var removals: [Change] = []
+    var insertions: [Change] = []
+    for change in changes {
+      switch change {
+      case .remove:
+        removals.append(change)
+      case .insert:
+        insertions.append(change)
+      }
+    }
+    self.removals = removals.sorted(by: { $0.offset < $1.offset })
+    self.insertions = insertions.sorted(by: { $0.offset < $1.offset })
   }
 
   // MARK: - Properties
