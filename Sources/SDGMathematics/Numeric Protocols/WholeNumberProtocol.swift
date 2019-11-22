@@ -13,37 +13,37 @@
  */
 
 /// A type which *only ever* represents whole numbers.
-public protocol WholeNumberProtocol : WholeArithmetic {}
+public protocol WholeNumberProtocol: WholeArithmetic {}
 
 extension WholeNumberProtocol {
 
-    @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
-    }
+  @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue.raiseWholeNumberToThePowerOf(wholeNumber: followingValue)
+  }
 
-    @inlinable public var isWhole: Bool {
-        return true
-    }
+  @inlinable public var isWhole: Bool {
+    return true
+  }
 
-    @inlinable public var isIntegral: Bool {
-        return true
-    }
+  @inlinable public var isIntegral: Bool {
+    return true
+  }
 
-    @inlinable public mutating func round(_ rule: RoundingRule) {
-        // self = self
-    }
+  @inlinable public mutating func round(_ rule: RoundingRule) {
+    // self = self
+  }
 
-    // MARK: - NumericAdditiveArithmetic
+  // MARK: - NumericAdditiveArithmetic
 
-    @inlinable public var isNegative: Bool {
-        return false
-    }
+  @inlinable public var isNegative: Bool {
+    return false
+  }
 
-    @inlinable public var isNonNegative: Bool {
-        return true
-    }
+  @inlinable public var isNonNegative: Bool {
+    return true
+  }
 
-    @inlinable public mutating func formAbsoluteValue() {
-        // self = self
-    }
+  @inlinable public mutating func formAbsoluteValue() {
+    // self = self
+  }
 }

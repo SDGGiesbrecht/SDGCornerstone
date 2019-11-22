@@ -18,44 +18,48 @@ import SDGLocalization
 
 import SDGCornerstoneLocalizations
 
-internal struct UnknownDate : DateDefinition {
+internal struct UnknownDate: DateDefinition {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    internal init(encodingIdentifier: StrictString, encodedDefinition: StrictString, lastCalculatedInstant: CalendarInterval<FloatMax>) {
-        self.encodingIdentifier = encodingIdentifier
-        self.encodedDefinition = encodedDefinition
-        self.lastCalculatedInstant = lastCalculatedInstant
-    }
+  internal init(
+    encodingIdentifier: StrictString,
+    encodedDefinition: StrictString,
+    lastCalculatedInstant: CalendarInterval<FloatMax>
+  ) {
+    self.encodingIdentifier = encodingIdentifier
+    self.encodedDefinition = encodedDefinition
+    self.lastCalculatedInstant = lastCalculatedInstant
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    internal let encodingIdentifier: StrictString
-    internal let encodedDefinition: StrictString
-    internal let lastCalculatedInstant: CalendarInterval<FloatMax>
+  internal let encodingIdentifier: StrictString
+  internal let encodedDefinition: StrictString
+  internal let lastCalculatedInstant: CalendarInterval<FloatMax>
 
-    // MARK: - DateDefinition
+  // MARK: - DateDefinition
 
-    internal static let identifier: StrictString = "?"
-    internal static let referenceDate: CalendarDate = CalendarDate.epoch
+  internal static let identifier: StrictString = "?"
+  internal static let referenceDate: CalendarDate = CalendarDate.epoch
 
-    internal var intervalSinceReferenceDate: CalendarInterval<FloatMax> {
-        return lastCalculatedInstant
-    }
+  internal var intervalSinceReferenceDate: CalendarInterval<FloatMax> {
+    return lastCalculatedInstant
+  }
 
-    internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
-        unreachable() // This definition is never converted to.
-    }
+  internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
+    unreachable()  // This definition is never converted to.
+  }
 
-    // MARK: - Decodable
+  // MARK: - Decodable
 
-    internal init(from decoder: Decoder) throws {
-        unreachable() // This definition is never encoded.
-    }
+  internal init(from decoder: Decoder) throws {
+    unreachable()  // This definition is never encoded.
+  }
 
-    // MARK: - Encodable
+  // MARK: - Encodable
 
-    internal func encode(to encoder: Encoder) throws {
-        unreachable() // This definition is never encoded.
-    }
+  internal func encode(to encoder: Encoder) throws {
+    unreachable()  // This definition is never encoded.
+  }
 }

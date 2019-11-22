@@ -28,25 +28,33 @@ import SDGTesting
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
 public func testRationalVectorConformance<T>(
-    augend: T,
-    addend: T,
-    sum: T,
-    multiplicand: T,
-    multiplier: T.Scalar,
-    product: T,
-    file: StaticString = #file,
-    line: UInt = #line) where T : RationalVector {
+  augend: T,
+  addend: T,
+  sum: T,
+  multiplicand: T,
+  multiplier: T.Scalar,
+  product: T,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: RationalVector {
 
-    testVectorProtocolConformance(
-        augend: augend,
-        addend: addend,
-        sum: sum,
-        multiplicand: multiplicand,
-        multiplier: multiplier,
-        product: product,
-        file: file,
-        line: line)
+  testVectorProtocolConformance(
+    augend: augend,
+    addend: addend,
+    sum: sum,
+    multiplicand: multiplicand,
+    multiplier: multiplier,
+    product: product,
+    file: file,
+    line: line
+  )
 
-    test(operator: (÷, "÷"), on: (product, multiplier), returns: multiplicand, file: file, line: line)
-    test(assignmentOperator: (÷=, "÷="), with: (product, multiplier), resultsIn: multiplicand, file: file, line: line)
+  test(operator: (÷, "÷"), on: (product, multiplier), returns: multiplicand, file: file, line: line)
+  test(
+    assignmentOperator: (÷=, "÷="),
+    with: (product, multiplier),
+    resultsIn: multiplicand,
+    file: file,
+    line: line
+  )
 }

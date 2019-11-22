@@ -14,4 +14,4 @@
 
 import Foundation
 
-extension Data : SearchableBidirectionalCollection {}
+extension Data: SearchableBidirectionalCollection {}

@@ -15,28 +15,28 @@
 import SDGControlFlow
 
 /// An value that can be used with ×(_:_) and ÷(_:_:) in conjunction with a scalar.
-public protocol RationalVector : VectorProtocol
-where Scalar : RationalArithmetic {
+public protocol RationalVector: VectorProtocol
+where Scalar: RationalArithmetic {
 
-    /// Returns the quotient of the preceding value divided by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The dividend.
-    ///     - followingValue: The divisor.
-    static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
+  /// Returns the quotient of the preceding value divided by the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The dividend.
+  ///     - followingValue: The divisor.
+  static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self
 
-    // @documentation(RationalVector.÷=)
-    /// Modifies the preceding value by dividing it by the following value.
-    ///
-    /// - Parameters:
-    ///     - precedingValue: The value to modify.
-    ///     - followingValue: The divisor.
-    static func ÷= (precedingValue: inout Self, followingValue: Scalar)
+  // @documentation(RationalVector.÷=)
+  /// Modifies the preceding value by dividing it by the following value.
+  ///
+  /// - Parameters:
+  ///     - precedingValue: The value to modify.
+  ///     - followingValue: The divisor.
+  static func ÷= (precedingValue: inout Self, followingValue: Scalar)
 }
 
 extension RationalVector {
 
-    @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
-        return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
-    }
+  @inlinable public static func ÷ (precedingValue: Self, followingValue: Scalar) -> Self {
+    return nonmutatingVariant(of: ÷=, on: precedingValue, with: followingValue)
+  }
 }

@@ -16,29 +16,35 @@ import SDGControlFlow
 import SDGText
 
 /// An error that occurs while parsing a number from a string.
-public enum TextConvertibleNumberParseError : PresentableError {
+public enum TextConvertibleNumberParseError: PresentableError {
 
-    /// A character is present which is not a valid digit.
-    case invalidDigit(UnicodeScalar, entireString: StrictString)
+  /// A character is present which is not a valid digit.
+  case invalidDigit(UnicodeScalar, entireString: StrictString)
 
-    // MARK: - PresentableError
+  // MARK: - PresentableError
 
-    @usableFromInline internal func unresolvedPresentableDescription() -> UserFacing<StrictString, _InterfaceLocalization> {
-        switch self {
-        case .invalidDigit(let scalar, let entireString):
-            return UserFacing<StrictString, _InterfaceLocalization>({ localization in
-                switch localization {
-                case .englishUnitedKingdom:
-                    return StrictString("‘\(entireString)’ could not be parsed as a number because ‘\(scalar.visibleRepresentation)’ is not a valid digit.")
-                case .englishUnitedStates, .englishCanada:
-                    return "“\(entireString)” could not be parsed as a number because “\(scalar.visibleRepresentation)” is not a valid digit."
-                case .deutschDeutschland:
-                    return "„\(entireString)“ konnte nicht als Zahl zerteilt werden, weil „\(scalar.visibleRepresentation)“ keine erkannte Ziffer ist."
-                }
-            })
+  @usableFromInline internal func unresolvedPresentableDescription() -> UserFacing<
+    StrictString, _InterfaceLocalization
+  > {
+    switch self {
+    case .invalidDigit(let scalar, let entireString):
+      return UserFacing<StrictString, _InterfaceLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom:
+          return StrictString(
+            "‘\(entireString)’ could not be parsed as a number because ‘\(scalar.visibleRepresentation)’ is not a valid digit."
+          )
+        case .englishUnitedStates, .englishCanada:
+          return
+            "“\(entireString)” could not be parsed as a number because “\(scalar.visibleRepresentation)” is not a valid digit."
+        case .deutschDeutschland:
+          return
+            "„\(entireString)“ konnte nicht als Zahl zerteilt werden, weil „\(scalar.visibleRepresentation)“ keine erkannte Ziffer ist."
         }
+      })
     }
-    public func presentableDescription() -> StrictString {
-        return unresolvedPresentableDescription().resolved()
-    }
+  }
+  public func presentableDescription() -> StrictString {
+    return unresolvedPresentableDescription().resolved()
+  }
 }

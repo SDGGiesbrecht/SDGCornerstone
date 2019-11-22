@@ -20,54 +20,59 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// An hour of the Hebrew day.
-public struct HebrewHour : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, TextualPlaygroundDisplay {
+public struct HebrewHour: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent,
+  ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, TextualPlaygroundDisplay
+{
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// The number of hours in a day.
-    public static let hoursPerDay: Int = 24
+  /// The number of hours in a day.
+  public static let hoursPerDay: Int = 24
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private var hour: Int
+  private var hour: Int
 
-    // MARK: - Text Representations
+  // MARK: - Text Representations
 
-    /// Returns the hour in digits.
-    public func inDigits() -> StrictString {
-        return hour.inDigits()
-    }
+  /// Returns the hour in digits.
+  public func inDigits() -> StrictString {
+    return hour.inDigits()
+  }
 
-    // MARK: - ConsistentDurationCalendarComponent
+  // MARK: - ConsistentDurationCalendarComponent
 
-    public static var duration: CalendarInterval<FloatMax> {
-        return (1 as FloatMax).hours
-    }
+  public static var duration: CalendarInterval<FloatMax> {
+    return (1 as FloatMax).hours
+  }
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
-                return self.inDigits()
-            }
-        }).resolved())
-    }
+  public var description: String {
+    return String(
+      UserFacing<StrictString, FormatLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland,
+          .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
+          return self.inDigits()
+        }
+      }).resolved()
+    )
+  }
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Int
+  public typealias Vector = Int
 
-    // MARK: - RawRepresentableCalendarComponent
+  // MARK: - RawRepresentableCalendarComponent
 
-    public init(unsafeRawValue: RawValue) {
-        hour = unsafeRawValue
-    }
+  public init(unsafeRawValue: RawValue) {
+    hour = unsafeRawValue
+  }
 
-    public static let validRange: Range<RawValue>? = 0 ..< HebrewHour.hoursPerDay
+  public static let validRange: Range<RawValue>? = 0..<HebrewHour.hoursPerDay
 
-    public var rawValue: RawValue {
-        return hour
-    }
+  public var rawValue: RawValue {
+    return hour
+  }
 }

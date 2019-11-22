@@ -15,18 +15,18 @@
 import SDGMathematics
 
 /// A two‐dimensional vector.
-public struct TwoDimensionalVector<Scalar> : TwoDimensionalVectorProtocol
-where Scalar : IntegralArithmetic {
+public struct TwoDimensionalVector<Scalar>: TwoDimensionalVectorProtocol
+where Scalar: IntegralArithmetic {
 
-    // MARK: - TwoDimensionalVectorProtocol
+  // MARK: - TwoDimensionalVectorProtocol
 
-    @inlinable public init(Δx: Scalar, Δy: Scalar) {
-        self.Δx = Δx
-        self.Δy = Δy
-    }
+  @inlinable public init(Δx: Scalar, Δy: Scalar) {
+    self.Δx = Δx
+    self.Δy = Δy
+  }
 
-    public var Δx: Scalar
-    public var Δy: Scalar
+  public var Δx: Scalar
+  public var Δy: Scalar
 }
 
-extension TwoDimensionalVector : RationalVector where Scalar : RationalArithmetic {}
+extension TwoDimensionalVector: RationalVector where Scalar: RationalArithmetic {}

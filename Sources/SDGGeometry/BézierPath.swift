@@ -13,68 +13,68 @@
  */
 
 #if canImport(AppKit) || canImport(UIKit)
-#if canImport(AppKit)
-import AppKit
-#elseif canImport(UIKit)
-import UIKit
-#endif
+  #if canImport(AppKit)
+    import AppKit
+  #elseif canImport(UIKit)
+    import UIKit
+  #endif
 
-import SDGMathematics
+  import SDGMathematics
 
-/// A Bézier path.
-public struct BézierPath : CustomPlaygroundDisplayConvertible {
+  /// A Bézier path.
+  public struct BézierPath: CustomPlaygroundDisplayConvertible {
 
     // MARK: - Initialization
 
     /// Creates an empty Bézier path.
     public init() {
-        #if canImport(AppKit)
+      #if canImport(AppKit)
         self.init(NSBezierPath())
-        #elseif canImport(UIKit)
+      #elseif canImport(UIKit)
         self.init(UIBezierPath())
-        #endif
+      #endif
     }
 
     #if canImport(AppKit)
-    // @documentation(BézierPath.init(native:))
-    /// Creates a Bézier path with a native Bézier path.
-    ///
-    /// - Parameters:
-    ///     - native: The native Bézier path.
-    public init(_ native: NSBezierPath) {
+      // @documentation(BézierPath.init(native:))
+      /// Creates a Bézier path with a native Bézier path.
+      ///
+      /// - Parameters:
+      ///     - native: The native Bézier path.
+      public init(_ native: NSBezierPath) {
         self.native = native
         separateCopy()
-    }
+      }
     #elseif canImport(UIKit)
-    // #documentation(BézierPath.init(native:))
-    /// Creates a Bézier path with a native Bézier path.
-    ///
-    /// - Parameters:
-    ///     - native: The native Bézier path.
-    public init(_ native: UIBezierPath) {
+      // #documentation(BézierPath.init(native:))
+      /// Creates a Bézier path with a native Bézier path.
+      ///
+      /// - Parameters:
+      ///     - native: The native Bézier path.
+      public init(_ native: UIBezierPath) {
         self.native = native
         separateCopy()
-    }
+      }
     #endif
 
     // MARK: - Properties
 
     #if canImport(AppKit)
-    // @documentation(BézierPath.native)
-    /// The native Bézier path.
-    public private(set) var native: NSBezierPath
+      // @documentation(BézierPath.native)
+      /// The native Bézier path.
+      public private(set) var native: NSBezierPath
     #elseif canImport(UIKit)
-    // #documentation(BézierPath.native)
-    /// The native Bézier path.
-    public private(set) var native: UIBezierPath
+      // #documentation(BézierPath.native)
+      /// The native Bézier path.
+      public private(set) var native: UIBezierPath
     #endif
 
     private mutating func separateCopy() {
-        #if canImport(AppKit)
+      #if canImport(AppKit)
         native = native.copy() as! NSBezierPath
-        #elseif canImport(UIKit)
+      #elseif canImport(UIKit)
         native = native.copy() as! UIBezierPath
-        #endif
+      #endif
     }
 
     // MARK: - Drawing
@@ -84,8 +84,8 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     /// - Parameters:
     ///     - point: The destination to move to.
     public mutating func move(to point: TwoDimensionalPoint<Double>) {
-        separateCopy()
-        native.move(to: CGPoint(point))
+      separateCopy()
+      native.move(to: CGPoint(point))
     }
 
     /// Appends a straight line to the path.
@@ -93,12 +93,12 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     /// - Parameters:
     ///     - point: The target point.
     public mutating func appendLine(to point: TwoDimensionalPoint<Double>) {
-        separateCopy()
-        #if canImport(AppKit)
+      separateCopy()
+      #if canImport(AppKit)
         native.line(to: CGPoint(point))
-        #elseif canImport(UIKit)
+      #elseif canImport(UIKit)
         native.addLine(to: CGPoint(point))
-        #endif
+      #endif
     }
 
     /// Appends an arc of a circle to the path.
@@ -110,35 +110,38 @@ public struct BézierPath : CustomPlaygroundDisplayConvertible {
     ///     - endAngle: The end angle of the arc, measured counterclockwise from the x‐axis.
     ///     - clockwise: Whether or not the arc should be drawn in the clockwise direction.
     public mutating func appendArc(
-        centre: TwoDimensionalPoint<Double>,
-        radius: Double,
-        startAngle: Angle<Double>,
-        endAngle: Angle<Double>,
-        clockwise: Bool) {
+      centre: TwoDimensionalPoint<Double>,
+      radius: Double,
+      startAngle: Angle<Double>,
+      endAngle: Angle<Double>,
+      clockwise: Bool
+    ) {
 
-        separateCopy()
+      separateCopy()
 
-        #if canImport(AppKit)
+      #if canImport(AppKit)
         return native.appendArc(
-            withCenter: CGPoint(centre),
-            radius: CGFloat(radius),
-            startAngle: CGFloat(startAngle.inDegrees),
-            endAngle: CGFloat(endAngle.inDegrees),
-            clockwise: clockwise)
-        #elseif canImport(UIKit)
+          withCenter: CGPoint(centre),
+          radius: CGFloat(radius),
+          startAngle: CGFloat(startAngle.inDegrees),
+          endAngle: CGFloat(endAngle.inDegrees),
+          clockwise: clockwise
+        )
+      #elseif canImport(UIKit)
         return native.addArc(
-            withCenter: CGPoint(centre),
-            radius: CGFloat(radius),
-            startAngle: CGFloat(startAngle.inDegrees),
-            endAngle: CGFloat(endAngle.inDegrees),
-            clockwise: clockwise)
-        #endif
+          withCenter: CGPoint(centre),
+          radius: CGFloat(radius),
+          startAngle: CGFloat(startAngle.inDegrees),
+          endAngle: CGFloat(endAngle.inDegrees),
+          clockwise: clockwise
+        )
+      #endif
     }
 
     // MARK: - CustomPlaygroundDisplayConvertible
 
     public var playgroundDescription: Any {
-        return native
+      return native
     }
-}
+  }
 #endif

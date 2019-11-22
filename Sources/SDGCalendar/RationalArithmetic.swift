@@ -16,45 +16,45 @@ import SDGMathematics
 
 extension RationalArithmetic {
 
-    // MARK: - Calendar Intervals
+  // MARK: - Calendar Intervals
 
-    /// Returns a calendar interval in Gregorian leap year cycles.
-    public var gregorianLeapYearCycles: CalendarInterval<Self> {
-        return CalendarInterval(gregorianLeapYearCycles: self)
-    }
+  /// Returns a calendar interval in Gregorian leap year cycles.
+  public var gregorianLeapYearCycles: CalendarInterval<Self> {
+    return CalendarInterval(gregorianLeapYearCycles: self)
+  }
 
-    /// Returns a calendar interval in Hebrew moons.
-    public var hebrewMoons: CalendarInterval<Self> {
-        return CalendarInterval(hebrewMoons: self)
-    }
+  /// Returns a calendar interval in Hebrew moons.
+  public var hebrewMoons: CalendarInterval<Self> {
+    return CalendarInterval(hebrewMoons: self)
+  }
 
-    /// Returns a calendar interval in weeks.
-    public var weeks: CalendarInterval<Self> {
-        return CalendarInterval(weeks: self)
-    }
+  /// Returns a calendar interval in weeks.
+  public var weeks: CalendarInterval<Self> {
+    return CalendarInterval(weeks: self)
+  }
 
-    /// Returns a calendar interval in days.
-    public var days: CalendarInterval<Self> {
-        return CalendarInterval(days: self)
-    }
+  /// Returns a calendar interval in days.
+  public var days: CalendarInterval<Self> {
+    return CalendarInterval(days: self)
+  }
 
-    /// Returns a calendar interval in hours.
-    public var hours: CalendarInterval<Self> {
-        return CalendarInterval(hours: self)
-    }
+  /// Returns a calendar interval in hours.
+  public var hours: CalendarInterval<Self> {
+    return CalendarInterval(hours: self)
+  }
 
-    /// Returns a calendar interval in minutes.
-    public var minutes: CalendarInterval<Self> {
-        return CalendarInterval(minutes: self)
-    }
+  /// Returns a calendar interval in minutes.
+  public var minutes: CalendarInterval<Self> {
+    return CalendarInterval(minutes: self)
+  }
 
-    /// Returns a calendar interval in Hebrew parts.
-    public var hebrewParts: CalendarInterval<Self> {
-        return CalendarInterval(hebrewParts: self)
-    }
+  /// Returns a calendar interval in Hebrew parts.
+  public var hebrewParts: CalendarInterval<Self> {
+    return CalendarInterval(hebrewParts: self)
+  }
 
-    /// Returns a calendar interval in seconds.
-    public var seconds: CalendarInterval<Self> {
-        return CalendarInterval(seconds: self)
-    }
+  /// Returns a calendar interval in seconds.
+  public var seconds: CalendarInterval<Self> {
+    return CalendarInterval(seconds: self)
+  }
 }

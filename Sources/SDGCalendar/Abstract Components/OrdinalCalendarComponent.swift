@@ -15,25 +15,25 @@
 import SDGMathematics
 
 /// A calendar component defined by an ordinal raw value.
-public protocol OrdinalCalendarComponent : NumericCalendarComponent {}
+public protocol OrdinalCalendarComponent: NumericCalendarComponent {}
 
 extension OrdinalCalendarComponent {
 
-    // MARK: - ConsistentlyOrderedCalendarComponent
+  // MARK: - ConsistentlyOrderedCalendarComponent
 
-    public init(numberAlreadyElapsed: Vector) {
-        self.init(numberAlreadyElapsed + (1 as Vector))
-    }
+  public init(numberAlreadyElapsed: Vector) {
+    self.init(numberAlreadyElapsed + (1 as Vector))
+  }
 
-    public init(ordinal: Vector) {
-        self.init(ordinal)
-    }
+  public init(ordinal: Vector) {
+    self.init(ordinal)
+  }
 
-    public var numberAlreadyElapsed: Vector {
-        return rawValue − (1 as Vector)
-    }
+  public var numberAlreadyElapsed: Vector {
+    return rawValue − (1 as Vector)
+  }
 
-    public var ordinal: Vector {
-        return rawValue
-    }
+  public var ordinal: Vector {
+    return rawValue
+  }
 }

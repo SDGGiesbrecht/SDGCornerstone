@@ -14,15 +14,15 @@
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-import Foundation
+  import Foundation
 
-import SDGControlFlow
-import SDGLogic
-import SDGPersistence
-import SDGLocalization
+  import SDGControlFlow
+  import SDGLogic
+  import SDGPersistence
+  import SDGLocalization
 
-/// An external process.
-public final class ExternalProcess : TextualPlaygroundDisplay {
+  /// An external process.
+  public final class ExternalProcess: TextualPlaygroundDisplay {
 
     // MARK: - Static Properties
 
@@ -35,7 +35,7 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     /// - Parameters:
     ///     - executable: The location of the executable file.
     public init(at executable: URL) {
-        self.executable = executable
+      self.executable = executable
     }
 
     /// Creates an instance by searching the system for the exectutable.
@@ -45,43 +45,48 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     ///     - commandName: A name to try with the default shell’s `which` command. This will be tried after the provided search list.
     ///     - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
     ///     - process: An executable to validate. Its existence and executability have already been verified.
-    public convenience init?<S>(searching locations: S, commandName: String?, validate: (_ process: ExternalProcess) -> Bool) where S : Sequence, S.Element == URL {
+    public convenience init?<S>(
+      searching locations: S,
+      commandName: String?,
+      validate: (_ process: ExternalProcess) -> Bool
+    ) where S: Sequence, S.Element == URL {
 
-        func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
-            var isDirectory: ObjCBool = false
-            if ¬FileManager.default.fileExists(atPath: location.path, isDirectory: &isDirectory) {
-                return false
-            }
-            if isDirectory.boolValue {
-                return false
-            }
-            if ¬FileManager.default.isExecutableFile(atPath: location.path) {
-                return false
-            }
-            let possible = ExternalProcess(at: location)
-            if ¬validate(possible) {
-                return false
-            }
-            return true
+      func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
+        var isDirectory: ObjCBool = false
+        if ¬FileManager.default.fileExists(atPath: location.path, isDirectory: &isDirectory) {
+          return false
         }
-
-        for location in locations {
-            if checkLocation(location, validate: validate) {
-                self.init(at: location) // @exempt(from: tests) False coverage result in Xcode 10.1.
-                return
-            }
+        if isDirectory.boolValue {
+          return false
         }
-
-        if let name = commandName,
-            let path = try? Shell.default.run(command: ["which", name]).get() {
-            let location = URL(fileURLWithPath: path)
-            if checkLocation(location, validate: validate) {
-                self.init(at: location)
-                return
-            }
+        if ¬FileManager.default.isExecutableFile(atPath: location.path) {
+          return false
         }
+        let possible = ExternalProcess(at: location)
+        if ¬validate(possible) {
+          return false
+        }
+        return true
+      }
 
-        return nil
+      for location in locations {
+        if checkLocation(location, validate: validate) {
+          self.init(at: location)  // @exempt(from: tests) False coverage result in Xcode 10.1.
+          return
+        }
+      }
+
+      if let name = commandName,
+        let path = try? Shell.default.run(command: ["which", name]).get()
+      {
+        let location = URL(fileURLWithPath: path)
+        if checkLocation(location, validate: validate) {
+          self.init(at: location)
+          return
+        }
+      }
+
+      return nil
     }
 
     // MARK: - Properties
@@ -99,116 +104,124 @@ public final class ExternalProcess : TextualPlaygroundDisplay {
     ///     - line: The line of output.
     ///
     /// - Returns: The entire output.
-    @discardableResult public func run(_ arguments: [String], in workingDirectory: URL? = nil, with environment: [String: String]? = nil, reportProgress: (_ line: String) -> Void = { _ in }) -> Result<String, ExternalProcess.Error> {
+    @discardableResult public func run(
+      _ arguments: [String],
+      in workingDirectory: URL? = nil,
+      with environment: [String: String]? = nil,
+      reportProgress: (_ line: String) -> Void = { _ in }
+    ) -> Result<String, ExternalProcess.Error> {
 
-        let process = Process()
+      let process = Process()
 
-        #if os(macOS)
-        if #available(macOS 10.13, *), // @exempt(from: unicode)
-            ¬ExternalProcess.compatibilityMode {
-            process.executableURL = executable
+      #if os(macOS)
+        if #available(macOS 10.13, *),  // @exempt(from: unicode)
+          ¬ExternalProcess.compatibilityMode
+        {
+          process.executableURL = executable
         } else {
-            process.launchPath = executable.path
+          process.launchPath = executable.path
         }
-        #else
+      #else
         process.executableURL = executable
-        #endif
+      #endif
 
-        process.arguments = arguments
-        if environment ≠ nil {
-            process.environment = environment
-        }
+      process.arguments = arguments
+      if environment ≠ nil {
+        process.environment = environment
+      }
 
-        if let location = workingDirectory {
-            #if os(macOS)
-            if #available(macOS 10.13, *), // @exempt(from: unicode)
-                ¬ExternalProcess.compatibilityMode {
-                process.currentDirectoryURL = location
-            } else {
-                process.currentDirectoryPath = location.path
-            }
-            #else
+      if let location = workingDirectory {
+        #if os(macOS)
+          if #available(macOS 10.13, *),  // @exempt(from: unicode)
+            ¬ExternalProcess.compatibilityMode
+          {
             process.currentDirectoryURL = location
-            #endif
-        }
-
-        let pipe = Pipe()
-        process.standardOutput = pipe
-        process.standardError = pipe
-
-        #if !os(Linux) // #workaround(Swift 5.1, Linux will gain this property in 5.2.)
-        process.qualityOfService = Thread.current.qualityOfService
+          } else {
+            process.currentDirectoryPath = location.path
+          }
+        #else
+          process.currentDirectoryURL = location
         #endif
+      }
 
-        do {
-            #if os(macOS)
-            if #available(macOS 10.13, *), // @exempt(from: unicode)
-                ¬ExternalProcess.compatibilityMode {
-                try process.run()
-            } else {
-                _ = try executable.checkResourceIsReachable()
-                process.launch()
-            }
-            #else
+      let pipe = Pipe()
+      process.standardOutput = pipe
+      process.standardError = pipe
+
+      #if !os(Linux)  // #workaround(Swift 5.1, Linux will gain this property in 5.2.)
+        process.qualityOfService = Thread.current.qualityOfService
+      #endif
+
+      do {
+        #if os(macOS)
+          if #available(macOS 10.13, *),  // @exempt(from: unicode)
+            ¬ExternalProcess.compatibilityMode
+          {
             try process.run()
-            #endif
-        } catch {
-            return .failure(.foundationError(error))
-        }
+          } else {
+            _ = try executable.checkResourceIsReachable()
+            process.launch()
+          }
+        #else
+          try process.run()
+        #endif
+      } catch {
+        return .failure(.foundationError(error))
+      }
 
-        var output = String()
-        var stream = Data()
+      var output = String()
+      var stream = Data()
 
-        let newLine = "\n"
-        let newLineData = newLine.data(using: String.Encoding.utf8)!
+      let newLine = "\n"
+      let newLineData = newLine.data(using: String.Encoding.utf8)!
 
-        func read() -> Data? {
-            let new = pipe.fileHandleForReading.availableData
-            return new.isEmpty ? nil : new
-        }
+      func read() -> Data? {
+        let new = pipe.fileHandleForReading.availableData
+        return new.isEmpty ? nil : new
+      }
 
-        var end = false
-        while ¬end {
-            autoreleasepool {
-                guard let newData = read() else {
-                    end = true
-                    return
-                }
-                stream.append(newData)
+      var end = false
+      while ¬end {
+        autoreleasepool {
+          guard let newData = read() else {
+            end = true
+            return
+          }
+          stream.append(newData)
 
-                while let lineEnd = stream.range(of: newLineData) {
-                    let lineData = stream.subdata(in: (..<lineEnd.lowerBound).relative(to: stream))
-                    stream.removeSubrange(..<lineEnd.upperBound)
+          while let lineEnd = stream.range(of: newLineData) {
+            let lineData = stream.subdata(in: (..<lineEnd.lowerBound).relative(to: stream))
+            stream.removeSubrange(..<lineEnd.upperBound)
 
-                    guard let line = try? String(file: lineData, origin: nil) else {
-                        unreachable()
-                    }
-
-                    output.append(line + newLine)
-                    reportProgress(line)
-                }
+            guard let line = try? String(file: lineData, origin: nil) else {
+              unreachable()
             }
-        }
 
-        while process.isRunning {} // @exempt(from: tests)
-
-        if output.hasSuffix(newLine) {
-            output.scalars.removeLast()
+            output.append(line + newLine)
+            reportProgress(line)
+          }
         }
+      }
 
-        let exitCode = process.terminationStatus
-        if exitCode == 0 {
-            return .success(output)
-        } else {
-            return .failure(.processError(code: Int(exitCode), output: output))
-        }
+      while process.isRunning {}  // @exempt(from: tests)
+
+      if output.hasSuffix(newLine) {
+        output.scalars.removeLast()
+      }
+
+      let exitCode = process.terminationStatus
+      if exitCode == 0 {
+        return .success(output)
+      } else {
+        return .failure(.processError(code: Int(exitCode), output: output))
+      }
     }
 
     // MARK: - CustomStringConvertible
 
     public var description: String {
-        return executable.path
+      return executable.path
     }
-}
+  }
 
 #endif

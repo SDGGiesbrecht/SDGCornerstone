@@ -15,12 +15,12 @@
 /// A grammatical gender used by languages that differentiate between masculine, feminine and neuter.
 public enum GrammaticalGender {
 
-    /// Masculine.
-    case masculine
+  /// Masculine.
+  case masculine
 
-    /// Feminine.
-    case feminine
+  /// Feminine.
+  case feminine
 
-    /// Neuter.
-    case neuter
+  /// Neuter.
+  case neuter
 }

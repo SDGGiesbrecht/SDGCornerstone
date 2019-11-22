@@ -28,14 +28,32 @@ import SDGPersistenceTestUtilities
 ///     - destination: The expected point of arrival.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testPointProtocolConformance<T>(departure: T, vector: T.Vector, destination: T, file: StaticString = #file, line: UInt = #line) where T : PointProtocol {
+public func testPointProtocolConformance<T>(
+  departure: T,
+  vector: T.Vector,
+  destination: T,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: PointProtocol {
 
-    testEquatableConformance(differingInstances: (departure, destination), file: file, line: line)
-    testCodableConformance(of: departure, uniqueTestName: "PointProtocol")
+  testEquatableConformance(differingInstances: (departure, destination), file: file, line: line)
+  testCodableConformance(of: departure, uniqueTestName: "PointProtocol")
 
-    test(operator: (+, "+"), on: (departure, vector), returns: destination, file: file, line: line)
-    test(assignmentOperator: (+=, "+="), with: (departure, vector), resultsIn: destination, file: file, line: line)
-    test(operator: (−, "−"), on: (destination, vector), returns: departure, file: file, line: line)
-    test(assignmentOperator: (−=, "−="), with: (destination, vector), resultsIn: departure, file: file, line: line)
-    test(operator: (−, "−"), on: (destination, departure), returns: vector, file: file, line: line)
+  test(operator: (+, "+"), on: (departure, vector), returns: destination, file: file, line: line)
+  test(
+    assignmentOperator: (+=, "+="),
+    with: (departure, vector),
+    resultsIn: destination,
+    file: file,
+    line: line
+  )
+  test(operator: (−, "−"), on: (destination, vector), returns: departure, file: file, line: line)
+  test(
+    assignmentOperator: (−=, "−="),
+    with: (destination, vector),
+    resultsIn: departure,
+    file: file,
+    line: line
+  )
+  test(operator: (−, "−"), on: (destination, departure), returns: vector, file: file, line: line)
 }

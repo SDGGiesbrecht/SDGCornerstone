@@ -15,74 +15,81 @@
 import SDGControlFlow
 
 /// A pattern that matches against several component patterns contiguously.
-public struct NaryConcatenatedPatterns<ComponentPattern> : Pattern, CustomStringConvertible, ExpressibleByArrayLiteral, TextualPlaygroundDisplay
-where ComponentPattern : Pattern {
+public struct NaryConcatenatedPatterns<ComponentPattern>: Pattern, CustomStringConvertible,
+  ExpressibleByArrayLiteral, TextualPlaygroundDisplay
+where ComponentPattern: Pattern {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a repetition pattern from several component patterns.
-    ///
-    /// - Parameters:
-    ///     - components: The component patterns.
-    @inlinable public init(_ components: [ComponentPattern]) {
-        self.components = components
+  /// Creates a repetition pattern from several component patterns.
+  ///
+  /// - Parameters:
+  ///     - components: The component patterns.
+  @inlinable public init(_ components: [ComponentPattern]) {
+    self.components = components
+  }
+
+  // MARK: - Properties
+
+  @usableFromInline internal var components: [ComponentPattern]
+
+  // MARK: - ExpressibleByArrayLiteral
+
+  @inlinable public init(arrayLiteral: ComponentPattern...) {
+    self.init(arrayLiteral)
+  }
+
+  // MARK: - Pattern
+
+  public typealias Element = ComponentPattern.Element
+
+  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
+    -> [Range<C.Index>] where C.Element == Element
+  {
+
+    var endIndices: [C.Index] = [location]
+    for component in components {
+      if endIndices.isEmpty {
+        // No matches
+        return []
+      } else {
+        // Continue
+        ConcatenationPatterning.advance(ends: &endIndices, for: component, in: collection)
+      }
     }
 
-    // MARK: - Properties
+    return endIndices.map { location..<$0 }
+  }
 
-    @usableFromInline internal var components: [ComponentPattern]
+  @inlinable public func primaryMatch<C: SearchableCollection>(
+    in collection: C,
+    at location: C.Index
+  ) -> Range<C.Index>? where C.Element == Element {
 
-    // MARK: - ExpressibleByArrayLiteral
-
-    @inlinable public init(arrayLiteral: ComponentPattern...) {
-        self.init(arrayLiteral)
+    var endIndices: [C.Index] = [location]
+    for component in components {
+      if endIndices.isEmpty {
+        // No matches
+        return nil
+      } else {
+        // Continue
+        ConcatenationPatterning.advance(ends: &endIndices, for: component, in: collection)
+      }
     }
 
-    // MARK: - Pattern
+    return endIndices.first.map { location..<$0 }
+  }
 
-    public typealias Element = ComponentPattern.Element
+  @inlinable public func reversed() -> NaryConcatenatedPatterns<ComponentPattern.Reversed> {
+    return NaryConcatenatedPatterns<ComponentPattern.Reversed>(
+      components.lazy.map({ $0.reversed() }).reversed()
+    )
+  }
 
-    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
+  // MARK: - CustomStringConvertible
 
-        var endIndices: [C.Index] = [location]
-        for component in components {
-            if endIndices.isEmpty {
-                // No matches
-                return []
-            } else {
-                // Continue
-                ConcatenationPatterning.advance(ends: &endIndices, for: component, in: collection)
-            }
-        }
-
-        return endIndices.map { location ..< $0 }
-    }
-
-    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-
-        var endIndices: [C.Index] = [location]
-        for component in components {
-            if endIndices.isEmpty {
-                // No matches
-                return nil
-            } else {
-                // Continue
-                ConcatenationPatterning.advance(ends: &endIndices, for: component, in: collection)
-            }
-        }
-
-        return endIndices.first.map { location ..< $0 }
-    }
-
-    @inlinable public func reversed() -> NaryConcatenatedPatterns<ComponentPattern.Reversed> {
-        return NaryConcatenatedPatterns<ComponentPattern.Reversed>(
-            components.lazy.map({ $0.reversed() }).reversed())
-    }
-
-    // MARK: - CustomStringConvertible
-
-    public var description: String {
-        let entries = components.map { "(" + String(describing: $0) + ")" }
-        return entries.joined(separator: " + ")
-    }
+  public var description: String {
+    let entries = components.map { "(" + String(describing: $0) + ")" }
+    return entries.joined(separator: " + ")
+  }
 }

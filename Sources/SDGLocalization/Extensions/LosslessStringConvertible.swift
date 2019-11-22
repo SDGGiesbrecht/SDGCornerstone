@@ -13,15 +13,16 @@
  */
 
 /// A type that conforms to `Codable` through its `LosslessStringConvertible` interface.
-public protocol CodableViaLosslessStringConvertible : Decodable, Encodable, LosslessStringConvertible {}
+public protocol CodableViaLosslessStringConvertible: Decodable, Encodable, LosslessStringConvertible
+{}
 
 extension CodableViaLosslessStringConvertible {
 
-    public func encode(to encoder: Encoder) throws {
-        try encode(to: encoder, via: description)
-    }
+  public func encode(to encoder: Encoder) throws {
+    try encode(to: encoder, via: description)
+  }
 
-    public init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: String.self, convert: { Self($0) })
-    }
+  public init(from decoder: Decoder) throws {
+    try self.init(from: decoder, via: String.self, convert: { Self($0) })
+  }
 }

@@ -14,4 +14,4 @@
 
 import SDGControlFlow
 
-extension _APILocalization : Localization {}
+extension _APILocalization: Localization {}

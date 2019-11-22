@@ -31,8 +31,8 @@ infix operator ∌: ComparisonPrecedence
 // @documentation(SDGCornerstone.BinarySetOperationPrecedence)
 /// The precedence of binary set operations.
 precedencegroup BinarySetOperationPrecedence {
-    lowerThan: RangeFormationPrecedence
-    higherThan: ComparisonPrecedence
+  lowerThan: RangeFormationPrecedence
+  higherThan: ComparisonPrecedence
 }
 
 // @documentation(SDGCornerstone.∩)

@@ -21,74 +21,82 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGTextRegressionTests : TestCase {
+class SDGTextRegressionTests: TestCase {
 
-    func testLastLineNotDropped() {
-        // Untracked
+  func testLastLineNotDropped() {
+    // Untracked
 
-        XCTAssertEqual("".lines.count, 1)
-        XCTAssertEqual("\n".lines.count, 2)
-        XCTAssertEqual("\n\n".lines.count, 3)
-    }
+    XCTAssertEqual("".lines.count, 1)
+    XCTAssertEqual("\n".lines.count, 2)
+    XCTAssertEqual("\n\n".lines.count, 3)
+  }
 
-    func testMatchlessComponentSeperation() {
-        // Untracked
+  func testMatchlessComponentSeperation() {
+    // Untracked
 
-        let glitch = StrictString("@version 8.0.0")
-        let components = glitch.components(separatedBy: ConditionalPattern({ $0 ∈ ["#", "%"] as Set<UnicodeScalar> }))
-        XCTAssert(¬components.isEmpty, "Empty result of splitting collection at matches.")
-    }
+    let glitch = StrictString("@version 8.0.0")
+    let components = glitch.components(
+      separatedBy: ConditionalPattern({ $0 ∈ ["#", "%"] as Set<UnicodeScalar> })
+    )
+    XCTAssert(¬components.isEmpty, "Empty result of splitting collection at matches.")
+  }
 
-    func testMatchlessSearch() {
-        // Untracked
+  func testMatchlessSearch() {
+    // Untracked
 
-        XCTAssertNil(StrictString("...").firstMatch(for: "_".scalars))
-    }
+    XCTAssertNil(StrictString("...").firstMatch(for: "_".scalars))
+  }
 
-    func testNestingLevelLocation() {
-        // Untracked
+  func testNestingLevelLocation() {
+    // Untracked
 
-        let nestString = StrictString("%{1~a~a^a|^}")
-        let open: StrictString = "{"
-        let close: StrictString = "}"
-        let start = nestString.index(nestString.startIndex, offsetBy: 1)
-        let end = nestString.index(nestString.startIndex, offsetBy: 12)
-        let nestRange = nestString.firstNestingLevel(startingWith: open, endingWith: close)?.container.range
-        XCTAssertEqual(nestRange, start ..< end)
-    }
+    let nestString = StrictString("%{1~a~a^a|^}")
+    let open: StrictString = "{"
+    let close: StrictString = "}"
+    let start = nestString.index(nestString.startIndex, offsetBy: 1)
+    let end = nestString.index(nestString.startIndex, offsetBy: 12)
+    let nestRange = nestString.firstNestingLevel(startingWith: open, endingWith: close)?.container
+      .range
+    XCTAssertEqual(nestRange, start..<end)
+  }
 
-    func testReverseSearch() {
-        // Untracked
+  func testReverseSearch() {
+    // Untracked
 
-        let glitch = StrictString("x{a^a}")
-        XCTAssertEqual(glitch.lastMatch(for: "{".scalars)?.range, glitch.index(after: glitch.startIndex) ..< glitch.index(after: glitch.index(after: glitch.startIndex)))
-    }
+    let glitch = StrictString("x{a^a}")
+    XCTAssertEqual(
+      glitch.lastMatch(for: "{".scalars)?.range,
+      glitch.index(
+        after: glitch.startIndex
+      )..<glitch.index(after: glitch.index(after: glitch.startIndex))
+    )
+  }
 
-    func testSemanticMarkupToAttributedStringPreservesFont() {
-        // Untracked
+  func testSemanticMarkupToAttributedStringPreservesFont() {
+    // Untracked
 
-        #if canImport(AppKit) || canImport(UIKit)
-        #if canImport(UIKit)
+    #if canImport(AppKit) || canImport(UIKit)
+      #if canImport(UIKit)
         typealias NSFont = UIFont
-        #endif
-        let markup = SemanticMarkup("...")
-        for font in [
-            Font.system,
-            Font.system.resized(to: Font.system.size ÷ 2),
-            Font(NSFont(name: "Helvetica", size: 12)!)
-            ] {
-                let attributedString = markup.richText(font: font)
-                let attribute = attributedString.attribute(.font, at: 0, effectiveRange: nil)
-                var originalName = font.fontName
-                if originalName == ".SFNSText" ∨ originalName == ".SFNS\u{2D}Regular" {
-                    originalName = ".AppleSystemUIFont"
-                }
-                var resultingName = (attribute as? NSFont)?.fontName
-                if resultingName == ".SFNSText" ∨ resultingName == ".SFNS\u{2D}Regular" {
-                    resultingName = ".AppleSystemUIFont"
-                }
-                XCTAssertEqual(resultingName, originalName)
+      #endif
+      let markup = SemanticMarkup("...")
+      for font in [
+        Font.system,
+        Font.system.resized(to: Font.system.size ÷ 2),
+        Font(NSFont(name: "Helvetica", size: 12)!)
+      ] {
+        let attributedString = markup.richText(font: font)
+        let attribute = attributedString.attribute(.font, at: 0, effectiveRange: nil)
+        var originalName = font.fontName
+        if originalName == ".SFNSText" ∨ originalName == ".SFNS\u{2D}Regular" {
+          originalName = ".AppleSystemUIFont"
         }
-        #endif
-    }
+        var resultingName = (attribute as? NSFont)?.fontName
+        if resultingName == ".SFNSText" ∨ resultingName == ".SFNS\u{2D}Regular" {
+          resultingName = ".AppleSystemUIFont"
+        }
+        XCTAssertEqual(resultingName, originalName)
+      }
+    #endif
+  }
 }

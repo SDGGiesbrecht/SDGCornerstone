@@ -18,8 +18,11 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≤ <A : Comparable, B : Comparable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
-    return precedingValue <= followingValue // @exempt(from: unicode)
+@inlinable public func ≤ <A: Comparable, B: Comparable>(
+  precedingValue: (A, B),
+  followingValue: (A, B)
+) -> Bool {
+  return precedingValue <= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≤)
@@ -28,8 +31,11 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≤ <A : Comparable, B : Comparable, C : Comparable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
-    return precedingValue <= followingValue // @exempt(from: unicode)
+@inlinable public func ≤ <A: Comparable, B: Comparable, C: Comparable>(
+  precedingValue: (A, B, C),
+  followingValue: (A, B, C)
+) -> Bool {
+  return precedingValue <= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≤)
@@ -38,8 +44,11 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
-    return precedingValue <= followingValue // @exempt(from: unicode)
+@inlinable public func ≤ <A: Comparable, B: Comparable, C: Comparable, D: Comparable>(
+  precedingValue: (A, B, C, D),
+  followingValue: (A, B, C, D)
+) -> Bool {
+  return precedingValue <= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≤)
@@ -48,8 +57,14 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
-    return precedingValue <= followingValue // @exempt(from: unicode)
+@inlinable public func ≤ <
+  A: Comparable,
+  B: Comparable,
+  C: Comparable,
+  D: Comparable,
+  E: Comparable
+>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
+  return precedingValue <= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≤)
@@ -58,8 +73,15 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≤ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
-    return precedingValue <= followingValue // @exempt(from: unicode)
+@inlinable public func ≤ <
+  A: Comparable,
+  B: Comparable,
+  C: Comparable,
+  D: Comparable,
+  E: Comparable,
+  F: Comparable
+>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
+  return precedingValue <= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≥)
@@ -68,8 +90,11 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≥ <A : Comparable, B : Comparable>(precedingValue: (A, B), followingValue: (A, B)) -> Bool {
-    return precedingValue >= followingValue // @exempt(from: unicode)
+@inlinable public func ≥ <A: Comparable, B: Comparable>(
+  precedingValue: (A, B),
+  followingValue: (A, B)
+) -> Bool {
+  return precedingValue >= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≥)
@@ -78,8 +103,11 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≥ <A : Comparable, B : Comparable, C : Comparable>(precedingValue: (A, B, C), followingValue: (A, B, C)) -> Bool {
-    return precedingValue >= followingValue // @exempt(from: unicode)
+@inlinable public func ≥ <A: Comparable, B: Comparable, C: Comparable>(
+  precedingValue: (A, B, C),
+  followingValue: (A, B, C)
+) -> Bool {
+  return precedingValue >= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≥)
@@ -88,8 +116,11 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable>(precedingValue: (A, B, C, D), followingValue: (A, B, C, D)) -> Bool {
-    return precedingValue >= followingValue // @exempt(from: unicode)
+@inlinable public func ≥ <A: Comparable, B: Comparable, C: Comparable, D: Comparable>(
+  precedingValue: (A, B, C, D),
+  followingValue: (A, B, C, D)
+) -> Bool {
+  return precedingValue >= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≥)
@@ -98,8 +129,14 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
-    return precedingValue >= followingValue // @exempt(from: unicode)
+@inlinable public func ≥ <
+  A: Comparable,
+  B: Comparable,
+  C: Comparable,
+  D: Comparable,
+  E: Comparable
+>(precedingValue: (A, B, C, D, E), followingValue: (A, B, C, D, E)) -> Bool {
+  return precedingValue >= followingValue  // @exempt(from: unicode)
 }
 
 // #documentation(SDGCornerstone.Comparable.≥)
@@ -108,6 +145,13 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≥ <A : Comparable, B : Comparable, C : Comparable, D : Comparable, E : Comparable, F : Comparable>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
-    return precedingValue >= followingValue // @exempt(from: unicode)
+@inlinable public func ≥ <
+  A: Comparable,
+  B: Comparable,
+  C: Comparable,
+  D: Comparable,
+  E: Comparable,
+  F: Comparable
+>(precedingValue: (A, B, C, D, E, F), followingValue: (A, B, C, D, E, F)) -> Bool {
+  return precedingValue >= followingValue  // @exempt(from: unicode)
 }

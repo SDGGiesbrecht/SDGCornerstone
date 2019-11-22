@@ -14,47 +14,47 @@
 
 extension Bool {
 
-    // MARK: - Randomization
+  // MARK: - Randomization
 
-    // #example(1, alternatingBooleans)
-    /// A value a `Randomizer` can return that will result in `false`.
-    ///
-    /// For example:
-    ///
-    /// ```swift
-    /// var alternating = CyclicalNumberGenerator([
-    ///     Bool.falseRandomizerValue,
-    ///     Bool.trueRandomizerValue
-    ///     ])
-    ///
-    /// XCTAssertEqual(Bool.random(using: &alternating), false)
-    /// XCTAssertEqual(Bool.random(using: &alternating), true)
-    /// XCTAssertEqual(Bool.random(using: &alternating), false)
-    /// XCTAssertEqual(Bool.random(using: &alternating), true)
-    /// XCTAssertEqual(Bool.random(using: &alternating), false)
-    /// XCTAssertEqual(Bool.random(using: &alternating), true)
-    /// // ...
-    /// ```
-    public static let falseRandomizerValue: UInt64 = 1 << 17
+  // #example(1, alternatingBooleans)
+  /// A value a `Randomizer` can return that will result in `false`.
+  ///
+  /// For example:
+  ///
+  /// ```swift
+  /// var alternating = CyclicalNumberGenerator([
+  ///   Bool.falseRandomizerValue,
+  ///   Bool.trueRandomizerValue
+  /// ])
+  ///
+  /// XCTAssertEqual(Bool.random(using: &alternating), false)
+  /// XCTAssertEqual(Bool.random(using: &alternating), true)
+  /// XCTAssertEqual(Bool.random(using: &alternating), false)
+  /// XCTAssertEqual(Bool.random(using: &alternating), true)
+  /// XCTAssertEqual(Bool.random(using: &alternating), false)
+  /// XCTAssertEqual(Bool.random(using: &alternating), true)
+  /// // ...
+  /// ```
+  public static let falseRandomizerValue: UInt64 = 1 << 17
 
-    // #example(1, alternatingBooleans)
-    /// A value a `Randomizer` can return that will result in `true`.
-    ///
-    /// For example:
-    ///
-    /// ```swift
-    /// var alternating = CyclicalNumberGenerator([
-    ///     Bool.falseRandomizerValue,
-    ///     Bool.trueRandomizerValue
-    ///     ])
-    ///
-    /// XCTAssertEqual(Bool.random(using: &alternating), false)
-    /// XCTAssertEqual(Bool.random(using: &alternating), true)
-    /// XCTAssertEqual(Bool.random(using: &alternating), false)
-    /// XCTAssertEqual(Bool.random(using: &alternating), true)
-    /// XCTAssertEqual(Bool.random(using: &alternating), false)
-    /// XCTAssertEqual(Bool.random(using: &alternating), true)
-    /// // ...
-    /// ```
-    public static let trueRandomizerValue: UInt64 = 0
+  // #example(1, alternatingBooleans)
+  /// A value a `Randomizer` can return that will result in `true`.
+  ///
+  /// For example:
+  ///
+  /// ```swift
+  /// var alternating = CyclicalNumberGenerator([
+  ///   Bool.falseRandomizerValue,
+  ///   Bool.trueRandomizerValue
+  /// ])
+  ///
+  /// XCTAssertEqual(Bool.random(using: &alternating), false)
+  /// XCTAssertEqual(Bool.random(using: &alternating), true)
+  /// XCTAssertEqual(Bool.random(using: &alternating), false)
+  /// XCTAssertEqual(Bool.random(using: &alternating), true)
+  /// XCTAssertEqual(Bool.random(using: &alternating), false)
+  /// XCTAssertEqual(Bool.random(using: &alternating), true)
+  /// // ...
+  /// ```
+  public static let trueRandomizerValue: UInt64 = 0
 }

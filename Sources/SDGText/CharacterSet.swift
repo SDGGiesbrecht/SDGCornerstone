@@ -16,6 +16,6 @@ import Foundation
 
 extension CharacterSet {
 
-    /// A pattern representing any newline variant.
-    public static let newlinePattern: NewlinePattern = NewlinePattern.newline
+  /// A pattern representing any newline variant.
+  public static let newlinePattern: NewlinePattern = NewlinePattern.newline
 }

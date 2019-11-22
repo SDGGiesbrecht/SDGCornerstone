@@ -16,15 +16,15 @@ import Foundation
 
 extension Data {
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    /// The data represented as a collection of bits.
-    public var binary: BinaryView {
-        get {
-            return BinaryView(self)
-        }
-        set {
-            self = newValue.data
-        }
+  /// The data represented as a collection of bits.
+  public var binary: BinaryView {
+    get {
+      return BinaryView(self)
     }
+    set {
+      self = newValue.data
+    }
+  }
 }

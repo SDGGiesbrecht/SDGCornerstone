@@ -15,18 +15,18 @@
 import SDGMathematics
 
 /// A point in a two‐dimensional space.
-public struct TwoDimensionalPoint<Coordinate> : TwoDimensionalPointProtocol
-where Coordinate : IntegralArithmetic {
+public struct TwoDimensionalPoint<Coordinate>: TwoDimensionalPointProtocol
+where Coordinate: IntegralArithmetic {
 
-    // MARK: - TwoDimensionalPointProtocol
+  // MARK: - TwoDimensionalPointProtocol
 
-    public typealias Vector = TwoDimensionalVector<Coordinate>
+  public typealias Vector = TwoDimensionalVector<Coordinate>
 
-    @inlinable public init(_ x: Coordinate, _ y: Coordinate) {
-        self.x = x
-        self.y = y
-    }
+  @inlinable public init(_ x: Coordinate, _ y: Coordinate) {
+    self.x = x
+    self.y = y
+  }
 
-    public var x: Coordinate
-    public var y: Coordinate
+  public var x: Coordinate
+  public var y: Coordinate
 }

@@ -17,59 +17,59 @@ import SDGControlFlow
 /// A one‐dimensional value that can be added and subtracted.
 ///
 /// - Note: Unlike `WholeArithmetic` or `Swift.Numeric`, `NumericAdditiveArithmetic` does not need a defined scale, allowing conformance by measurements that can use multiple units.
-public protocol NumericAdditiveArithmetic : GenericAdditiveArithmetic, Comparable {
+public protocol NumericAdditiveArithmetic: GenericAdditiveArithmetic, Comparable {
 
-    // MARK: - Classification
+  // MARK: - Classification
 
-    /// Returns `true` if `self` is positive.
-    var isPositive: Bool { get }
+  /// Returns `true` if `self` is positive.
+  var isPositive: Bool { get }
 
-    /// Returns `true` if `self` is negative.
-    var isNegative: Bool { get }
+  /// Returns `true` if `self` is negative.
+  var isNegative: Bool { get }
 
-    /// Returns `true` if `self` is positive or zero.
-    var isNonNegative: Bool { get }
+  /// Returns `true` if `self` is positive or zero.
+  var isNonNegative: Bool { get }
 
-    /// Returns `true` if `self` is negative or zero.
-    var isNonPositive: Bool { get }
+  /// Returns `true` if `self` is negative or zero.
+  var isNonPositive: Bool { get }
 
-    // MARK: - Operations
+  // MARK: - Operations
 
-    /// The absolute value.
-    var absoluteValue: Self { get }
+  /// The absolute value.
+  var absoluteValue: Self { get }
 
-    /// Sets `self` to its absolute value.
-    mutating func formAbsoluteValue()
+  /// Sets `self` to its absolute value.
+  mutating func formAbsoluteValue()
 }
 
 extension NumericAdditiveArithmetic {
 
-    @inlinable public var isPositive: Bool {
-        return self > Self.zero
-    }
+  @inlinable public var isPositive: Bool {
+    return self > Self.zero
+  }
 
-    @inlinable public var isNegative: Bool {
-        return self < Self.zero
-    }
+  @inlinable public var isNegative: Bool {
+    return self < Self.zero
+  }
 
-    @inlinable public var isNonNegative: Bool {
-        return self ≥ Self.zero
-    }
+  @inlinable public var isNonNegative: Bool {
+    return self ≥ Self.zero
+  }
 
-    @inlinable public var isNonPositive: Bool {
-        return self ≤ Self.zero
-    }
+  @inlinable public var isNonPositive: Bool {
+    return self ≤ Self.zero
+  }
 
-    @inlinable public var absoluteValue: Self {
-        return nonmutatingVariant(of: { $0.formAbsoluteValue() }, on: self)
-    }
+  @inlinable public var absoluteValue: Self {
+    return nonmutatingVariant(of: { $0.formAbsoluteValue() }, on: self)
+  }
 }
 
-public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
-    @inlinable public init(contents: Wrapped) {
-        self.contents = contents
-    }
-    public var contents: Wrapped
+public struct _PartialAbsoluteValue<Wrapped: NumericAdditiveArithmetic> {
+  @inlinable public init(contents: Wrapped) {
+    self.contents = contents
+  }
+  public var contents: Wrapped
 }
 
 // #example(1, absoluteValue)
@@ -84,7 +84,7 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 /// - Parameters:
 ///     - operand: The value.
 @inlinable public prefix func | <Value>(operand: _PartialAbsoluteValue<Value>) -> Value {
-    return operand.contents
+  return operand.contents
 }
 
 // #example(1, absoluteValue)
@@ -99,22 +99,22 @@ public struct _PartialAbsoluteValue<Wrapped : NumericAdditiveArithmetic> {
 /// - Parameters:
 ///     - operand: The value.
 @inlinable public postfix func | <Value>(operand: Value) -> _PartialAbsoluteValue<Value> {
-    return _PartialAbsoluteValue(contents: operand.absoluteValue)
+  return _PartialAbsoluteValue(contents: operand.absoluteValue)
 }
 
-extension NumericAdditiveArithmetic where Self : Negatable {
+extension NumericAdditiveArithmetic where Self: Negatable {
 
-    @inlinable public mutating func formAbsoluteValue() {
-        if self < Self.zero {
-            self.negate()
-        }
+  @inlinable public mutating func formAbsoluteValue() {
+    if self < Self.zero {
+      self.negate()
     }
+  }
 }
 
-extension NumericAdditiveArithmetic where Self : Numeric {
+extension NumericAdditiveArithmetic where Self: Numeric {
 
-    /// The magnitude of this value.
-    @inlinable public var magnitude: Self {
-        return |self|
-    }
+  /// The magnitude of this value.
+  @inlinable public var magnitude: Self {
+    return |self|
+  }
 }

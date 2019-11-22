@@ -15,14 +15,14 @@
 import SDGMathematics
 
 /// A component of a particular calendar.
-public protocol CalendarComponent : Decodable, Encodable {
+public protocol CalendarComponent: Decodable, Encodable {
 
-    /// The mean duration.
-    static var meanDuration: CalendarInterval<FloatMax> { get }
+  /// The mean duration.
+  static var meanDuration: CalendarInterval<FloatMax> { get }
 
-    /// The minimum duration.
-    static var minimumDuration: CalendarInterval<FloatMax> { get }
+  /// The minimum duration.
+  static var minimumDuration: CalendarInterval<FloatMax> { get }
 
-    /// The maximum duration.
-    static var maximumDuration: CalendarInterval<FloatMax> { get }
+  /// The maximum duration.
+  static var maximumDuration: CalendarInterval<FloatMax> { get }
 }

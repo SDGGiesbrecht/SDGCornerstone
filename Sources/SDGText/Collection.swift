@@ -18,8 +18,8 @@ import SDGCollections
 
 extension Collection where Element == UnicodeScalar {
 
-    /// Whether or not the string‐like collection contains multiple lines.
-    @inlinable public var isMultiline: Bool {
-        return contains(where: { $0 ∈ CharacterSet.newlines })
-    }
+  /// Whether or not the string‐like collection contains multiple lines.
+  @inlinable public var isMultiline: Bool {
+    return contains(where: { $0 ∈ CharacterSet.newlines })
+  }
 }

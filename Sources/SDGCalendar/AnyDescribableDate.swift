@@ -13,92 +13,92 @@
  */
 
 /// An opaque wrapper for a `DescribableDate`.
-public struct AnyDescribableDate : DescribableDate {
+public struct AnyDescribableDate: DescribableDate {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a wrapped date.
-    ///
-    /// - Parameters:
-    ///     - wrapped: The date.
-    public init(_ wrapped: DescribableDate) {
-        self.date = wrapped
-    }
+  /// Creates a wrapped date.
+  ///
+  /// - Parameters:
+  ///     - wrapped: The date.
+  public init(_ wrapped: DescribableDate) {
+    self.date = wrapped
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private var date: DescribableDate
+  private var date: DescribableDate
 
-    // MARK: - CustomDebugStringConvertible
+  // MARK: - CustomDebugStringConvertible
 
-    public var debugDescription: String {
-        return date.debugDescription
-    }
+  public var debugDescription: String {
+    return date.debugDescription
+  }
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return date.description
-    }
+  public var description: String {
+    return date.description
+  }
 
-    // MARK: - CustomPlaygroundDisplayConvertible
+  // MARK: - CustomPlaygroundDisplayConvertible
 
-    public var playgroundDescription: Any {
-        return date.playgroundDescription
-    }
+  public var playgroundDescription: Any {
+    return date.playgroundDescription
+  }
 
-    // MARK: - DescribableDate
+  // MARK: - DescribableDate
 
-    public var hebrewYear: HebrewYear {
-        return date.hebrewYear
-    }
+  public var hebrewYear: HebrewYear {
+    return date.hebrewYear
+  }
 
-    public var hebrewMonth: HebrewMonth {
-        return date.hebrewMonth
-    }
+  public var hebrewMonth: HebrewMonth {
+    return date.hebrewMonth
+  }
 
-    public var hebrewWeekday: HebrewWeekday {
-        return date.hebrewWeekday
-    }
+  public var hebrewWeekday: HebrewWeekday {
+    return date.hebrewWeekday
+  }
 
-    public var hebrewDay: HebrewDay {
-        return date.hebrewDay
-    }
+  public var hebrewDay: HebrewDay {
+    return date.hebrewDay
+  }
 
-    public var hebrewHour: HebrewHour {
-        return date.hebrewHour
-    }
+  public var hebrewHour: HebrewHour {
+    return date.hebrewHour
+  }
 
-    public var hebrewPart: HebrewPart {
-        return date.hebrewPart
-    }
+  public var hebrewPart: HebrewPart {
+    return date.hebrewPart
+  }
 
-    public var gregorianYear: GregorianYear {
-        return date.gregorianYear
-    }
+  public var gregorianYear: GregorianYear {
+    return date.gregorianYear
+  }
 
-    public var gregorianMonth: GregorianMonth {
-        return date.gregorianMonth
-    }
+  public var gregorianMonth: GregorianMonth {
+    return date.gregorianMonth
+  }
 
-    public var gregorianWeekday: GregorianWeekday {
-        return date.gregorianWeekday
-    }
+  public var gregorianWeekday: GregorianWeekday {
+    return date.gregorianWeekday
+  }
 
-    public var gregorianDay: GregorianDay {
-        return date.gregorianDay
-    }
+  public var gregorianDay: GregorianDay {
+    return date.gregorianDay
+  }
 
-    public var gregorianHour: GregorianHour {
-        return date.gregorianHour
-    }
+  public var gregorianHour: GregorianHour {
+    return date.gregorianHour
+  }
 
-    public var gregorianMinute: GregorianMinute {
-        return date.gregorianMinute
-    }
+  public var gregorianMinute: GregorianMinute {
+    return date.gregorianMinute
+  }
 
-    public var gregorianSecond: GregorianSecond {
-        return date.gregorianSecond
-    }
+  public var gregorianSecond: GregorianSecond {
+    return date.gregorianSecond
+  }
 
 }

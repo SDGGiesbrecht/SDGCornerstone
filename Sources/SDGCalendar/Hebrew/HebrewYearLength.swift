@@ -20,52 +20,54 @@ import SDGCornerstoneLocalizations
 
 extension HebrewYear {
 
-    /// The length of a Hebrew year.
-    public enum Length : CaseIterable {
+  /// The length of a Hebrew year.
+  public enum Length: CaseIterable {
 
-        // MARK: - Static Properties
+    // MARK: - Static Properties
 
-        /// The minimum number of days in a year.
-        public static let minimumNumberOfDays: Int = 353
-        /// The maximum number of days in a year.
-        public static let maximumNumberOfDays: Int = 385
+    /// The minimum number of days in a year.
+    public static let minimumNumberOfDays: Int = 353
+    /// The maximum number of days in a year.
+    public static let maximumNumberOfDays: Int = 385
 
-        // MARK: - Cases
+    // MARK: - Cases
 
-        /// A deficient year.
-        case deficient
-        /// A normal year.
-        case normal
-        /// A whole year.
-        case whole
+    /// A deficient year.
+    case deficient
+    /// A normal year.
+    case normal
+    /// A whole year.
+    case whole
 
-        // MARK: - Initialization
+    // MARK: - Initialization
 
-        /// Creates a length from a number of days.
-        ///
-        /// - Precondition: The number of days is valid.
-        ///
-        /// - Parameters:
-        ///     - numberOfDays: The number of days in the year.
-        public init(numberOfDays: Int) {
-            let min = HebrewYear.Length.minimumNumberOfDays
-            let max = HebrewYear.Length.maximumNumberOfDays
-            switch numberOfDays {
+    /// Creates a length from a number of days.
+    ///
+    /// - Precondition: The number of days is valid.
+    ///
+    /// - Parameters:
+    ///     - numberOfDays: The number of days in the year.
+    public init(numberOfDays: Int) {
+      let min = HebrewYear.Length.minimumNumberOfDays
+      let max = HebrewYear.Length.maximumNumberOfDays
+      switch numberOfDays {
 
-            case min /* 353 */, 383:
-                self = .deficient
-            case 354, 384:
-                self = .normal
-            case 355, max /* 385 */:
-                self = .whole
-            default:
-                preconditionFailure(UserFacing<StrictString, APILocalization>({ localization in
-                    switch localization {
-                    case .englishCanada: // @exempt(from: tests)
-                        return "\(numberOfDays.inDigits()) is an invalid number of days for a Hebrew year."
-                    }
-                }))
+      case min /* 353 */, 383:
+        self = .deficient
+      case 354, 384:
+        self = .normal
+      case 355, max /* 385 */:
+        self = .whole
+      default:
+        preconditionFailure(
+          UserFacing<StrictString, APILocalization>({ localization in
+            switch localization {
+            case .englishCanada:  // @exempt(from: tests)
+              return "\(numberOfDays.inDigits()) is an invalid number of days for a Hebrew year."
             }
-        }
+          })
+        )
+      }
     }
+  }
 }

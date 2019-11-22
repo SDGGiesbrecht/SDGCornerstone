@@ -30,25 +30,40 @@ import SDGPersistenceTestUtilities
 ///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update the specification.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testCustomStringConvertibleConformance<T, L>(of instance: T, localizations: L.Type, uniqueTestName: StrictString, overwriteSpecificationInsteadOfFailing: Bool, file: StaticString = #file, line: UInt = #line) where T : CustomStringConvertible, L : InputLocalization {
+public func testCustomStringConvertibleConformance<T, L>(
+  of instance: T,
+  localizations: L.Type,
+  uniqueTestName: StrictString,
+  overwriteSpecificationInsteadOfFailing: Bool,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: CustomStringConvertible, L: InputLocalization {
 
-    var report = ""
-    for localization in localizations.allCases {
-        if let icon = localization.icon {
-            print(icon, to: &report)
-        } else {
-            print(localization.code, to: &report)
-        }
-        LocalizationSetting(orderOfPrecedence: [localization.code]).do {
-            print(String(describing: instance), to: &report)
-        }
-        print("", to: &report)
+  var report = ""
+  for localization in localizations.allCases {
+    if let icon = localization.icon {
+      print(icon, to: &report)
+    } else {
+      print(localization.code, to: &report)
     }
-
-    let specification = testSpecificationDirectory(file).appendingPathComponent("CustomStringConvertible").appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName) + ".txt")
-    SDGPersistenceTestUtilities.compare(report, against: specification, overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing, file: file, line: line)
-
-    if let playround = instance as? CustomPlaygroundDisplayConvertible {
-        _ = playround.playgroundDescription
+    LocalizationSetting(orderOfPrecedence: [localization.code]).do {
+      print(String(describing: instance), to: &report)
     }
+    print("", to: &report)
+  }
+
+  let specification = testSpecificationDirectory(file).appendingPathComponent(
+    "CustomStringConvertible"
+  ).appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName) + ".txt")
+  SDGPersistenceTestUtilities.compare(
+    report,
+    against: specification,
+    overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
+    file: file,
+    line: line
+  )
+
+  if let playround = instance as? CustomPlaygroundDisplayConvertible {
+    _ = playround.playgroundDescription
+  }
 }

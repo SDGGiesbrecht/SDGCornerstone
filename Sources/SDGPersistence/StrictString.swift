@@ -16,15 +16,15 @@ import Foundation
 
 import SDGText
 
-extension StrictString : FileConvertible {
+extension StrictString: FileConvertible {
 
-    // MARK: - FileConvertible
+  // MARK: - FileConvertible
 
-    public init(file: Data, origin: URL?) throws {
-        self.init(try String(file: file, origin: origin))
-    }
+  public init(file: Data, origin: URL?) throws {
+    self.init(try String(file: file, origin: origin))
+  }
 
-    public var file: Data {
-        return String(self).file
-    }
+  public var file: Data {
+    return String(self).file
+  }
 }

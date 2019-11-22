@@ -14,55 +14,59 @@
 
 import SDGControlFlow
 
-internal struct CollationElement : Decodable, Encodable, Equatable {
+internal struct CollationElement: Decodable, Encodable, Equatable {
 
-    // MARK: - Constructors
+  // MARK: - Constructors
 
-    internal static func relative(index: CollationIndex, at targetLevel: CollationLevel) -> (prefix: CollationElement, suffix: CollationElement) {
+  internal static func relative(index: CollationIndex, at targetLevel: CollationLevel) -> (
+    prefix: CollationElement, suffix: CollationElement
+  ) {
 
-        var circumfix: (prefix: [[CollationIndex]], suffix: [[CollationIndex]]) = ([], [])
-        for level in CollationLevel.allCases {
-            if level < targetLevel {
-                circumfix.prefix.append([])
-                circumfix.suffix.append([])
-            } else {
-                if level.isInReverse {
-                    circumfix.prefix.append([index])
-                    circumfix.suffix.append([])
-                } else {
-                    circumfix.prefix.append([])
-                    circumfix.suffix.append([index])
-                }
-            }
+    var circumfix: (prefix: [[CollationIndex]], suffix: [[CollationIndex]]) = ([], [])
+    for level in CollationLevel.allCases {
+      if level < targetLevel {
+        circumfix.prefix.append([])
+        circumfix.suffix.append([])
+      } else {
+        if level.isInReverse {
+          circumfix.prefix.append([index])
+          circumfix.suffix.append([])
+        } else {
+          circumfix.prefix.append([])
+          circumfix.suffix.append([index])
         }
-        return (CollationElement(rawIndices: circumfix.prefix), CollationElement(rawIndices: circumfix.suffix))
+      }
     }
+    return (
+      CollationElement(rawIndices: circumfix.prefix), CollationElement(rawIndices: circumfix.suffix)
+    )
+  }
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    internal init(rawIndices: [[CollationIndex]]) {
-        self.indices = rawIndices
-    }
+  internal init(rawIndices: [[CollationIndex]]) {
+    self.indices = rawIndices
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private var indices: [[CollationIndex]]
+  private var indices: [[CollationIndex]]
 
-    // MARK: - Usage
+  // MARK: - Usage
 
-    internal func indices(for level: CollationLevel) -> [CollationIndex] {
-        return indices[level.rawValue]
-    }
+  internal func indices(for level: CollationLevel) -> [CollationIndex] {
+    return indices[level.rawValue]
+  }
 
-    // MARK: - Encodable
+  // MARK: - Encodable
 
-    internal func encode(to encoder: Encoder) throws {
-        try encode(to: encoder, via: indices)
-    }
+  internal func encode(to encoder: Encoder) throws {
+    try encode(to: encoder, via: indices)
+  }
 
-    // MARK: - Decodable
+  // MARK: - Decodable
 
-    internal init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: [[CollationIndex]].self) { CollationElement(rawIndices: $0) }
-    }
+  internal init(from decoder: Decoder) throws {
+    try self.init(from: decoder, via: [[CollationIndex]].self) { CollationElement(rawIndices: $0) }
+  }
 }

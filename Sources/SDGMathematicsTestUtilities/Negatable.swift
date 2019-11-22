@@ -24,10 +24,34 @@ import SDGTesting
 ///     - difference: The expected difference.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testNegatableConformance<T>(minuend: T, subtrahend: T, difference: T, file: StaticString = #file, line: UInt = #line) where T : Negatable {
+public func testNegatableConformance<T>(
+  minuend: T,
+  subtrahend: T,
+  difference: T,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: Negatable {
 
-    testAddableConformance(augend: difference, addend: subtrahend, sum: minuend, file: file, line: line)
+  testAddableConformance(
+    augend: difference,
+    addend: subtrahend,
+    sum: minuend,
+    file: file,
+    line: line
+  )
 
-    test(prefixOperator: (−, "−"), on: subtrahend, returns: difference − minuend, file: file, line: line)
-    test(mutatingMethod: ({ $0.negate() }, "negate"), of: subtrahend, resultsIn: difference − minuend, file: file, line: line)
+  test(
+    prefixOperator: (−, "−"),
+    on: subtrahend,
+    returns: difference − minuend,
+    file: file,
+    line: line
+  )
+  test(
+    mutatingMethod: ({ $0.negate() }, "negate"),
+    of: subtrahend,
+    resultsIn: difference − minuend,
+    file: file,
+    line: line
+  )
 }

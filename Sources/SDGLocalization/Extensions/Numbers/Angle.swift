@@ -15,18 +15,20 @@
 import SDGMathematics
 import SDGText
 
-extension Angle : CustomStringConvertible {
+extension Angle: CustomStringConvertible {
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(UserFacing<StrictString, _FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .עברית־ישראל:
-                return self.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") + " rad"
-            case .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα:
-                return self.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ",") + " rad"
-            }
-        }).resolved())
-    }
+  public var description: String {
+    return String(
+      UserFacing<StrictString, _FormatLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .עברית־ישראל:
+          return self.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ".") + " rad"
+        case .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα:
+          return self.inRadians.inDigits(maximumDecimalPlaces: 3, radixCharacter: ",") + " rad"
+        }
+      }).resolved()
+    )
+  }
 }

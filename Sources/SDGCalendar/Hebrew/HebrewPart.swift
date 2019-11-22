@@ -20,54 +20,60 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A part of the Hebrew hour.
-public struct HebrewPart : CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent, ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent, TextualPlaygroundDisplay {
+public struct HebrewPart: CardinalCalendarComponent, CodableViaRawRepresentableCalendarComponent,
+  ConsistentDurationCalendarComponent, RawRepresentableCalendarComponent, SmallestCalendarComponent,
+  TextualPlaygroundDisplay
+{
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    /// The number of parts in a Hebrew hour.
-    public static let partsPerHour: Int = 1080
+  /// The number of parts in a Hebrew hour.
+  public static let partsPerHour: Int = 1080
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private var part: FloatMax
+  private var part: FloatMax
 
-    // MARK: - Text Representations
+  // MARK: - Text Representations
 
-    /// Returns the part in digits.
-    public func inDigits() -> StrictString {
-        return Int(part.rounded(.down)).inDigits()
-    }
+  /// Returns the part in digits.
+  public func inDigits() -> StrictString {
+    return Int(part.rounded(.down)).inDigits()
+  }
 
-    // MARK: - ConsistentDurationCalendarComponent
+  // MARK: - ConsistentDurationCalendarComponent
 
-    public static var duration: CalendarInterval<FloatMax> {
-        return (1 as FloatMax).hebrewParts
-    }
+  public static var duration: CalendarInterval<FloatMax> {
+    return (1 as FloatMax).hebrewParts
+  }
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(UserFacing<StrictString, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland, .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
-                return self.inDigits()
-            }
-        }).resolved())
-    }
+  public var description: String {
+    return String(
+      UserFacing<StrictString, FormatLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada, .deutschDeutschland,
+          .françaisFrance, .ελληνικάΕλλάδα, .עברית־ישראל:
+          return self.inDigits()
+        }
+      }).resolved()
+    )
+  }
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = FloatMax
+  public typealias Vector = FloatMax
 
-    // MARK: - RawRepresentableCalendarComponent
+  // MARK: - RawRepresentableCalendarComponent
 
-    public init(unsafeRawValue: RawValue) {
-        part = unsafeRawValue
-    }
+  public init(unsafeRawValue: RawValue) {
+    part = unsafeRawValue
+  }
 
-    public static let validRange: Range<RawValue>? = 0 ..< FloatMax(HebrewPart.partsPerHour)
+  public static let validRange: Range<RawValue>? = 0..<FloatMax(HebrewPart.partsPerHour)
 
-    public var rawValue: RawValue {
-        return part
-    }
+  public var rawValue: RawValue {
+    return part
+  }
 }

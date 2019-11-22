@@ -12,9 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension UInt : TextConvertibleNumber {}
+extension UInt: TextConvertibleNumber {}
 
-extension UInt64 : TextConvertibleNumber {}
-extension UInt32 : TextConvertibleNumber {}
-extension UInt16 : TextConvertibleNumber {}
-extension UInt8 : TextConvertibleNumber {}
+extension UInt64: TextConvertibleNumber {}
+extension UInt32: TextConvertibleNumber {}
+extension UInt16: TextConvertibleNumber {}
+extension UInt8: TextConvertibleNumber {}

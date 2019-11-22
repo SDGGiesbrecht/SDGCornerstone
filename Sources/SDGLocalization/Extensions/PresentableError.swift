@@ -17,24 +17,24 @@ import Foundation
 import SDGText
 
 /// An error suitable to present to users.
-public protocol PresentableError : CustomStringConvertible, LocalizedError {
+public protocol PresentableError: CustomStringConvertible, LocalizedError {
 
-    /// Returns a localized description of the error.
-    func presentableDescription() -> StrictString
+  /// Returns a localized description of the error.
+  func presentableDescription() -> StrictString
 }
 
 extension PresentableError {
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(presentableDescription())
-    }
+  public var description: String {
+    return String(presentableDescription())
+  }
 
-    // MARK: - Error
+  // MARK: - Error
 
-    /// The localized description for this error.
-    public var errorDescription: String? {
-        return String(presentableDescription())
-    }
+  /// The localized description for this error.
+  public var errorDescription: String? {
+    return String(presentableDescription())
+  }
 }

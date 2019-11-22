@@ -15,24 +15,24 @@
 /// The result of a search for a nesting level.
 ///
 /// - SeeAlso: `firstNestingLevel(startingWith:endingWith:in:)
-public struct NestingLevel<Searched : SearchableCollection> {
+public struct NestingLevel<Searched: SearchableCollection> {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a description of a nesting level.
-    ///
-    /// - Parameters:
-    ///     - container: A match describing the nesting level, including its delimiting tokens.
-    ///     - contents: A match describing the contents of the nesting level without its delimiting tokens.
-    @inlinable public init(container: PatternMatch<Searched>, contents: PatternMatch<Searched>) {
-        self.container = container
-        self.contents = contents
-    }
+  /// Creates a description of a nesting level.
+  ///
+  /// - Parameters:
+  ///     - container: A match describing the nesting level, including its delimiting tokens.
+  ///     - contents: A match describing the contents of the nesting level without its delimiting tokens.
+  @inlinable public init(container: PatternMatch<Searched>, contents: PatternMatch<Searched>) {
+    self.container = container
+    self.contents = contents
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    /// The match describing the nesting level, including its delimiting tokens.
-    public let container: PatternMatch<Searched>
-    /// The match describing the contents of the nesting level without its delimiting tokens.
-    public let contents: PatternMatch<Searched>
+  /// The match describing the nesting level, including its delimiting tokens.
+  public let container: PatternMatch<Searched>
+  /// The match describing the contents of the nesting level without its delimiting tokens.
+  public let contents: PatternMatch<Searched>
 }

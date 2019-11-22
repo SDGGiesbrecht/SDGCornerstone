@@ -24,15 +24,21 @@ import SDGTesting
 ///     - nonmember: A nonmember of the set.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testSetDefinitionConformance<T>(of set: T, member: T.Element, nonmember: T.Element, file: StaticString = #file, line: UInt = #line) where T : SetDefinition {
+public func testSetDefinitionConformance<T>(
+  of set: T,
+  member: T.Element,
+  nonmember: T.Element,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: SetDefinition {
 
-    test(operator: (∈, "∈"), on: (member, set), returns: true, file: file, line: line)
-    test(operator: (∉, "∉"), on: (member, set), returns: false, file: file, line: line)
-    test(operator: (∋, "∋"), on: (set, member), returns: true, file: file, line: line)
-    test(operator: (∌, "∌"), on: (set, member), returns: false, file: file, line: line)
+  test(operator: (∈, "∈"), on: (member, set), returns: true, file: file, line: line)
+  test(operator: (∉, "∉"), on: (member, set), returns: false, file: file, line: line)
+  test(operator: (∋, "∋"), on: (set, member), returns: true, file: file, line: line)
+  test(operator: (∌, "∌"), on: (set, member), returns: false, file: file, line: line)
 
-    test(operator: (∈, "∈"), on: (nonmember, set), returns: false, file: file, line: line)
-    test(operator: (∉, "∉"), on: (nonmember, set), returns: true, file: file, line: line)
-    test(operator: (∋, "∋"), on: (set, nonmember), returns: false, file: file, line: line)
-    test(operator: (∌, "∌"), on: (set, nonmember), returns: true, file: file, line: line)
+  test(operator: (∈, "∈"), on: (nonmember, set), returns: false, file: file, line: line)
+  test(operator: (∉, "∉"), on: (nonmember, set), returns: true, file: file, line: line)
+  test(operator: (∋, "∋"), on: (set, nonmember), returns: false, file: file, line: line)
+  test(operator: (∌, "∌"), on: (set, nonmember), returns: true, file: file, line: line)
 }

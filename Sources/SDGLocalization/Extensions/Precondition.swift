@@ -21,10 +21,18 @@ import SDGText
 ///     - method: The method. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func primitiveMethod(_ method: String = #function, file: StaticString = #file, line: UInt = #line) -> Never {
-    preconditionFailure(UserFacing<StrictString, _APILocalization>({ localization in
-        return StrictString(_primitiveMethodMessage(for: method)(localization))
-    }), file: file, line: line)
+public func primitiveMethod(
+  _ method: String = #function,
+  file: StaticString = #file,
+  line: UInt = #line
+) -> Never {
+  preconditionFailure(
+    UserFacing<StrictString, _APILocalization>({ localization in
+      return StrictString(_primitiveMethodMessage(for: method)(localization))
+    }),
+    file: file,
+    line: line
+  )
 }
 
 /// Throws a precondition failure indicating that the code path in which it is called is thought to be unreachable.
@@ -36,19 +44,35 @@ public func primitiveMethod(_ method: String = #function, file: StaticString = #
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
 ///     - column: The column number. (Provided by default.)
-public func unreachable(function: String = #function, file: StaticString = #file, line: UInt = #line, column: UInt = #column) -> Never {
-    preconditionFailure(UserFacing<StrictString, _APILocalization>({ localization in
-        return StrictString(_unreachableMessage(function: function, file: file, line: line, column: column)(localization))
-    }), file: file, line: line)
+public func unreachable(
+  function: String = #function,
+  file: StaticString = #file,
+  line: UInt = #line,
+  column: UInt = #column
+) -> Never {
+  preconditionFailure(
+    UserFacing<StrictString, _APILocalization>({ localization in
+      return StrictString(
+        _unreachableMessage(function: function, file: file, line: line, column: column)(
+          localization
+        )
+      )
+    }),
+    file: file,
+    line: line
+  )
 }
 
-private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String { // @exempt(from: tests)
-    return String(UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
-        switch localization {
-        case .englishCanada: // @exempt(from: tests)
-            return "\(function) has not been implemented yet. (\(file), Line \(line.inDigits()))"
-        }
-    }).resolved())
+private func unimplementedMessage(function: StaticString, file: StaticString, line: UInt) -> String
+{  // @exempt(from: tests)
+  return String(
+    UserFacing<StrictString, _APILocalization>({ localization in  // @exempt(from: tests)
+      switch localization {
+      case .englishCanada:  // @exempt(from: tests)
+        return "\(function) has not been implemented yet. (\(file), Line \(line.inDigits()))"
+      }
+    }).resolved()
+  )
 }
 
 /// Prints a warning that the method in which it is called has no real implementation yet.
@@ -59,8 +83,12 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYet(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) { // @exempt(from: tests) @exempt(from: missingImplementation)
-    print(unimplementedMessage(function: function, file: file, line: line))
+public func notImplementedYet(  // @exempt(from: missingImplementation)
+  function: StaticString = #function,
+  file: StaticString = #file,
+  line: UInt = #line
+) {  // @exempt(from: tests)
+  print(unimplementedMessage(function: function, file: file, line: line))
 }
 
 /// Throws a precondition failure indicating that the method in which it is called has no real implementation yet.
@@ -71,8 +99,12 @@ public func notImplementedYet(function: StaticString = #function, file: StaticSt
 ///     - function: The function. (Provided by default.)
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func notImplementedYetAndCannotReturn(function: StaticString = #function, file: StaticString = #file, line: UInt = #line) -> Never { // @exempt(from: missingImplementation)
-    preconditionFailure(unimplementedMessage(function: function, file: file, line: line))
+public func notImplementedYetAndCannotReturn(  // @exempt(from: missingImplementation)
+  function: StaticString = #function,
+  file: StaticString = #file,
+  line: UInt = #line
+) -> Never {
+  preconditionFailure(unimplementedMessage(function: function, file: file, line: line))
 }
 
 /// Checks a necessary condition for making forward progress.
@@ -82,8 +114,13 @@ public func notImplementedYetAndCannotReturn(function: StaticString = #function,
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func precondition<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) {
-    Swift.precondition(condition(), String(message().resolved()), file: file, line: line)
+public func precondition<L>(
+  _ condition: @autoclosure () -> Bool,
+  _ message: @autoclosure () -> UserFacing<StrictString, L>,
+  file: StaticString = #file,
+  line: UInt = #line
+) {
+  Swift.precondition(condition(), String(message().resolved()), file: file, line: line)
 }
 
 /// Indicates that a precondition was violated.
@@ -92,8 +129,12 @@ public func precondition<L>(_ condition: @autoclosure () -> Bool, _ message: @au
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) -> Never {
-    Swift.preconditionFailure(String(message().resolved()), file: file, line: line)
+public func preconditionFailure<L>(
+  _ message: @autoclosure () -> UserFacing<StrictString, L>,
+  file: StaticString = #file,
+  line: UInt = #line
+) -> Never {
+  Swift.preconditionFailure(String(message().resolved()), file: file, line: line)
 }
 
 /// Performs an internal sanity check.
@@ -103,8 +144,13 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacing<Stri
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-@inlinable public func assert<L>(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) {
-    Swift.assert(condition(), String(message().resolved()), file: file, line: line)
+@inlinable public func assert<L>(
+  _ condition: @autoclosure () -> Bool,
+  _ message: @autoclosure () -> UserFacing<StrictString, L>,
+  file: StaticString = #file,
+  line: UInt = #line
+) {
+  Swift.assert(condition(), String(message().resolved()), file: file, line: line)
 }
 
 /// Indicates that an internal sanity check failed.
@@ -113,8 +159,12 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacing<Stri
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-@inlinable public func assertionFailure<L>(_ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) {
-    Swift.assertionFailure(String(message().resolved()), file: file, line: line)
+@inlinable public func assertionFailure<L>(
+  _ message: @autoclosure () -> UserFacing<StrictString, L>,
+  file: StaticString = #file,
+  line: UInt = #line
+) {
+  Swift.assertionFailure(String(message().resolved()), file: file, line: line)
 }
 
 /// Unconditionally prints a given message and stops execution.
@@ -123,6 +173,10 @@ public func preconditionFailure<L>(_ message: @autoclosure () -> UserFacing<Stri
 ///     - message: A closure that generates a localized message.
 ///     - file: The file. (Provided by default.)
 ///     - line: The line number. (Provided by default.)
-public func fatalError<L>(_ message: @autoclosure () -> UserFacing<StrictString, L>, file: StaticString = #file, line: UInt = #line) -> Never {
-    Swift.fatalError(String(message().resolved()), file: file, line: line)
+public func fatalError<L>(
+  _ message: @autoclosure () -> UserFacing<StrictString, L>,
+  file: StaticString = #file,
+  line: UInt = #line
+) -> Never {
+  Swift.fatalError(String(message().resolved()), file: file, line: line)
 }

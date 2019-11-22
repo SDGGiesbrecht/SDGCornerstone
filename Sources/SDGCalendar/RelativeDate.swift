@@ -18,56 +18,56 @@ import SDGText
 
 import SDGCornerstoneLocalizations
 
-internal struct RelativeDate : DateDefinition, TextualPlaygroundDisplay {
+internal struct RelativeDate: DateDefinition, TextualPlaygroundDisplay {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    internal init(_ interval: CalendarInterval<FloatMax>, after date: CalendarDate) {
-        baseDate = date
-        intervalSince = interval
+  internal init(_ interval: CalendarInterval<FloatMax>, after date: CalendarDate) {
+    baseDate = date
+    intervalSince = interval
 
-        intervalSinceReferenceDate = (date − RelativeDate.referenceDate) + interval
-    }
+    intervalSinceReferenceDate = (date − RelativeDate.referenceDate) + interval
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    internal let baseDate: CalendarDate
-    internal let intervalSince: CalendarInterval<FloatMax>
+  internal let baseDate: CalendarDate
+  internal let intervalSince: CalendarInterval<FloatMax>
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return "(" + String(describing: baseDate) + ") + " + String(describing: intervalSince)
-    }
+  public var description: String {
+    return "(" + String(describing: baseDate) + ") + " + String(describing: intervalSince)
+  }
 
-    // MARK: - DateDefinition
+  // MARK: - DateDefinition
 
-    internal static let identifier: StrictString = "Δ"
-    internal static let referenceDate: CalendarDate = CalendarDate.epoch
+  internal static let identifier: StrictString = "Δ"
+  internal static let referenceDate: CalendarDate = CalendarDate.epoch
 
-    internal let intervalSinceReferenceDate: CalendarInterval<FloatMax>
+  internal let intervalSinceReferenceDate: CalendarInterval<FloatMax>
 
-    internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
-        self.intervalSinceReferenceDate = intervalSinceReferenceDate
+  internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
+    self.intervalSinceReferenceDate = intervalSinceReferenceDate
 
-        self.baseDate = RelativeDate.referenceDate
-        self.intervalSince = intervalSinceReferenceDate
-    }
+    self.baseDate = RelativeDate.referenceDate
+    self.intervalSince = intervalSinceReferenceDate
+  }
 
-    // MARK: - Decodable
+  // MARK: - Decodable
 
-    internal init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let interval = try container.decode(CalendarInterval<FloatMax>.self)
-        let baseDate = try container.decode(CalendarDate.self)
-        self = RelativeDate(interval, after: baseDate)
-    }
+  internal init(from decoder: Decoder) throws {
+    var container = try decoder.unkeyedContainer()
+    let interval = try container.decode(CalendarInterval<FloatMax>.self)
+    let baseDate = try container.decode(CalendarDate.self)
+    self = RelativeDate(interval, after: baseDate)
+  }
 
-    // MARK: - Encodable
+  // MARK: - Encodable
 
-    internal func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        try container.encode(intervalSince)
-        try container.encode(baseDate)
-    }
+  internal func encode(to encoder: Encoder) throws {
+    var container = encoder.unkeyedContainer()
+    try container.encode(intervalSince)
+    try container.encode(baseDate)
+  }
 }

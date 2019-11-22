@@ -15,14 +15,14 @@
 import SDGMathematics
 
 /// The smallest component of a particular calendar.
-public protocol SmallestCalendarComponent : ExpressibleByFloatLiteral, NumericCalendarComponent
-where RawValue : RationalArithmetic {}
+public protocol SmallestCalendarComponent: ExpressibleByFloatLiteral, NumericCalendarComponent
+where RawValue: RationalArithmetic {}
 
 extension SmallestCalendarComponent {
 
-    // MARK: - ExpressibleByFloatLiteral
+  // MARK: - ExpressibleByFloatLiteral
 
-    public init(floatLiteral: FloatMax) {
-        self.init(RawValue(floatLiteral))
-    }
+  public init(floatLiteral: FloatMax) {
+    self.init(RawValue(floatLiteral))
+  }
 }

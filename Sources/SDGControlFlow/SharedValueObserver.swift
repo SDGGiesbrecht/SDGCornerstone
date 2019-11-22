@@ -13,13 +13,13 @@
  */
 
 /// An observer of a shared value.
-public protocol SharedValueObserver : AnyObject {
+public protocol SharedValueObserver: AnyObject {
 
-    /// Called when a value changes.
-    ///
-    /// - Parameters:
-    ///     - identifier: The identifier that was specified when the observer was registered. This can be used to differentiate between several values watched by the same observer.
-    ///
-    /// - SeeAlso: `register(observer:identifier:)`
-    func valueChanged(for identifier: String)
+  /// Called when a value changes.
+  ///
+  /// - Parameters:
+  ///     - identifier: The identifier that was specified when the observer was registered. This can be used to differentiate between several values watched by the same observer.
+  ///
+  /// - SeeAlso: `register(observer:identifier:)`
+  func valueChanged(for identifier: String)
 }

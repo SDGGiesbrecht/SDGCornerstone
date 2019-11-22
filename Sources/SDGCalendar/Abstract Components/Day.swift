@@ -20,54 +20,54 @@ import SDGLocalization
 import SDGCornerstoneLocalizations
 
 /// A calendar compenent representing a day of the month.
-public protocol Day : ConsistentlyOrderedCalendarComponent, MarkupPlaygroundDisplay
-where Vector : IntegerProtocol {}
+public protocol Day: ConsistentlyOrderedCalendarComponent, MarkupPlaygroundDisplay
+where Vector: IntegerProtocol {}
 
 extension Day {
 
-    // MARK: - Text Representations
+  // MARK: - Text Representations
 
-    /// Returns the day in English digits. (“1”, “2”, “3”, etc.)
-    public func inEnglishDigits() -> StrictString {
-        return ordinal.inDigits()
+  /// Returns the day in English digits. (“1”, “2”, “3”, etc.)
+  public func inEnglishDigits() -> StrictString {
+    return ordinal.inDigits()
+  }
+
+  internal func inDeutschenZiffern() -> StrictString {
+    return ordinal._verkürzteDeutscheOrdnungszahl()
+  }
+
+  internal func enChiffresFrançais() -> SemanticMarkup {
+    if ordinal == 1 {
+      return ordinal._ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
+    } else {
+      return SemanticMarkup(ordinal.inDigits())
     }
+  }
 
-    internal func inDeutschenZiffern() -> StrictString {
-        return ordinal._verkürzteDeutscheOrdnungszahl()
-    }
+  internal func σεΕλληνικάΨηφία() -> StrictString {
+    return ordinal.inDigits()
+  }
 
-    internal func enChiffresFrançais() -> SemanticMarkup {
-        if ordinal == 1 {
-            return ordinal._ordinalFrançaisAbrégé(genre: .masculin, nombre: .singular)
-        } else {
-            return SemanticMarkup(ordinal.inDigits())
-        }
-    }
+  internal func בעברית־בספרות() -> StrictString {
+    return ordinal.inDigits()
+  }
 
-    internal func σεΕλληνικάΨηφία() -> StrictString {
-        return ordinal.inDigits()
-    }
+  // MARK: - MarkupPlaygroundDisplay
 
-    internal func בעברית־בספרות() -> StrictString {
-        return ordinal.inDigits()
-    }
-
-    // MARK: - MarkupPlaygroundDisplay
-
-    public func playgroundDescriptionMarkup() -> SemanticMarkup {
-        return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
-            switch localization {
-            case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-                return SemanticMarkup(self.inEnglishDigits())
-            case .deutschDeutschland:
-                return SemanticMarkup(self.inDeutschenZiffern())
-            case .françaisFrance:
-                return self.enChiffresFrançais()
-            case .ελληνικάΕλλάδα:
-                return SemanticMarkup(self.σεΕλληνικάΨηφία())
-            case .עברית־ישראל:
-                return SemanticMarkup(self.בעברית־בספרות())
-            }
-        }).resolved()
-    }
+  public func playgroundDescriptionMarkup() -> SemanticMarkup {
+    return UserFacing<SemanticMarkup, FormatLocalization>({ localization in
+      switch localization {
+      case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+        return SemanticMarkup(self.inEnglishDigits())
+      case .deutschDeutschland:
+        return SemanticMarkup(self.inDeutschenZiffern())
+      case .françaisFrance:
+        return self.enChiffresFrançais()
+      case .ελληνικάΕλλάδα:
+        return SemanticMarkup(self.σεΕλληνικάΨηφία())
+      case .עברית־ישראל:
+        return SemanticMarkup(self.בעברית־בספרות())
+      }
+    }).resolved()
+  }
 }

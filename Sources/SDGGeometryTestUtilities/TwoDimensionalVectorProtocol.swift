@@ -24,19 +24,21 @@ import SDGMathematicsTestUtilities
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
 public func testTwoDimensionalVectorProtocolConformance<T>(
-    _ type: T.Type,
-    file: StaticString = #file,
-    line: UInt = #line) where T : TwoDimensionalVectorProtocol {
+  _ type: T.Type,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: TwoDimensionalVectorProtocol {
 
-    testVectorProtocolConformance(
-        augend: T(Δx: 1, Δy: 2),
-        addend: T(Δx: 3, Δy: 4),
-        sum: T(Δx: 4, Δy: 6),
-        multiplicand: T(Δx: 5, Δy: 6),
-        multiplier: 7,
-        product: T(Δx: 35, Δy: 42),
-        file: file,
-        line: line)
+  testVectorProtocolConformance(
+    augend: T(Δx: 1, Δy: 2),
+    addend: T(Δx: 3, Δy: 4),
+    sum: T(Δx: 4, Δy: 6),
+    multiplicand: T(Δx: 5, Δy: 6),
+    multiplier: 7,
+    product: T(Δx: 35, Δy: 42),
+    file: file,
+    line: line
+  )
 
-    test(variable: (T.zero, "\(T.self).zero"), is: T(Δx: 0, Δy: 0), file: file, line: line)
+  test(variable: (T.zero, "\(T.self).zero"), is: T(Δx: 0, Δy: 0), file: file, line: line)
 }

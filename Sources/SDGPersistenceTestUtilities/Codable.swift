@@ -33,58 +33,88 @@ import SDGTesting
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testCodableConformance<T>(of instance: T, uniqueTestName: StrictString, file: StaticString = #file, line: UInt = #line) where T : Codable, T : Equatable {
+public func testCodableConformance<T>(
+  of instance: T,
+  uniqueTestName: StrictString,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: Codable, T: Equatable {
 
-    let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent("Codable").appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
-    try? FileManager.default.createDirectory(at: specificationsDirectory, withIntermediateDirectories: true, attributes: nil)
+  let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent("Codable")
+    .appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
+  try? FileManager.default.createDirectory(
+    at: specificationsDirectory,
+    withIntermediateDirectories: true,
+    attributes: nil
+  )
 
-    var specifications: Set<String> = []
-    do {
-        for specificationURL in try FileManager.default.contentsOfDirectory(at: specificationsDirectory, includingPropertiesForKeys: nil, options: []) where specificationURL.pathExtension == "txt" {
-            try autoreleasepool {
+  var specifications: Set<String> = []
+  do {
+    for specificationURL in try FileManager.default.contentsOfDirectory(
+      at: specificationsDirectory,
+      includingPropertiesForKeys: nil,
+      options: []
+    ) where specificationURL.pathExtension == "txt" {
+      try autoreleasepool {
 
-                let specification = try String(from: specificationURL)
-                specifications.insert(specification)
-                for representation in [
-                    specification,
-                    specification.decomposedStringWithCanonicalMapping,
-                    specification.precomposedStringWithCanonicalMapping
-                    ] {
-                    let data = representation.file
-                    let array = try JSONDecoder().decode([T].self, from: data)
-                    guard let decoded = array.first else {
-                        fail(String(UserFacing<StrictString, APILocalization>({ localization in
-                            switch localization {
-                            case .englishCanada: // @exempt(from: tests)
-                                return "Empty array decoded from “\(specificationURL.absoluteString)”."
-                            }
-                        }).resolved()), file: file, line: line)
-                        return // from autorelease pool and move to next specification.
-                    }
-                    test(decoded == instance, "\(instance) ≠ \(decoded) (\(specificationURL)", file: file, line: line)
-                }
-            }
+        let specification = try String(from: specificationURL)
+        specifications.insert(specification)
+        for representation in [
+          specification,
+          specification.decomposedStringWithCanonicalMapping,
+          specification.precomposedStringWithCanonicalMapping
+        ] {
+          let data = representation.file
+          let array = try JSONDecoder().decode([T].self, from: data)
+          guard let decoded = array.first else {
+            fail(
+              String(
+                UserFacing<StrictString, APILocalization>({ localization in
+                  switch localization {
+                  case .englishCanada:  // @exempt(from: tests)
+                    return "Empty array decoded from “\(specificationURL.absoluteString)”."
+                  }
+                }).resolved()
+              ),
+              file: file,
+              line: line
+            )
+            return  // from autorelease pool and move to next specification.
+          }
+          test(
+            decoded == instance,
+            {  // @exempt(from: tests)
+              return  // @exempt(from: tests)
+                "\(instance) ≠ \(decoded) (\(specificationURL)"
+            }(),
+            file: file,
+            line: line
+          )
         }
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted]
-        if #available(macOS 10.13, iOS 11, watchOS 4, tvOS 11, *) { // @exempt(from: unicode)
-            encoder.outputFormatting.insert(.sortedKeys)
-        }
-        let encoded = try encoder.encode([instance])
-
-        let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
-        test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
-
-        let newSpecification = try String(file: encoded, origin: nil)
-        if newSpecification ∉ specifications {
-            // @exempt(from: tests)
-            let now = CalendarDate.gregorianNow()
-            try newSpecification.save(to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt"))
-        }
-    } catch {
-        fail("\(error)", file: file, line: line)
+      }
     }
+
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted]
+    if #available(macOS 10.13, iOS 11, watchOS 4, tvOS 11, *) {  // @exempt(from: unicode)
+      encoder.outputFormatting.insert(.sortedKeys)
+    }
+    let encoded = try encoder.encode([instance])
+
+    let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
+    test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
+
+    let newSpecification = try String(file: encoded, origin: nil)
+    if newSpecification ∉ specifications {
+      // @exempt(from: tests)
+      let now = CalendarDate.gregorianNow()
+      try newSpecification.save(
+        to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
+      )
+    }
+  } catch {
+    fail("\(error)", file: file, line: line)
+  }
 }
 
 /// Tests that decoding fails with a value encoded from an invalid mock type.
@@ -96,18 +126,30 @@ public func testCodableConformance<T>(of instance: T, uniqueTestName: StrictStri
 ///     - invalidMock: A mock instance. See above.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testDecoding<T, O>(_ type: T.Type, failsFor invalidMock: O, file: StaticString = #file, line: UInt = #line) where T : Codable, O : Encodable {
+public func testDecoding<T, O>(
+  _ type: T.Type,
+  failsFor invalidMock: O,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: Codable, O: Encodable {
 
-    do {
-        let encoded = try JSONEncoder().encode([invalidMock])
-        let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
-        fail(String(UserFacing<StrictString, APILocalization>({ localization in
-            switch localization { // @exempt(from: tests)
+  do {
+    let encoded = try JSONEncoder().encode([invalidMock])
+    let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
+    fail(
+      String(  // @exempt(from: tests)
+        UserFacing<StrictString, APILocalization>(  // @exempt(from: tests)
+          { localization in
+            switch localization {
             case .englishCanada:
-                return "No error thrown. Decoded: \(arbitraryDescriptionOf: decoded)"
+              return "No error thrown. Decoded: \(arbitraryDescriptionOf: decoded)"
             }
-        }).resolved()), file: file, line: line)
-    } catch {
-        // Expected.
-    }
+          }).resolved()
+      ),
+      file: file,
+      line: line
+    )
+  } catch {
+    // Expected.
+  }
 }

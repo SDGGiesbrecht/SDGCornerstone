@@ -17,46 +17,46 @@
 /// - Note: For multi‐dimensional points, see `PointProtocol`.
 ///
 /// - Note: This is distinct from `FixedScaleOneDimensionalPoint` so that types can still conform to `OneDimensionalPoint` even if they have vectors that cannot conform to `Numeric`.
-public protocol OneDimensionalPoint : Comparable, PointProtocol {}
+public protocol OneDimensionalPoint: Comparable, PointProtocol {}
 
-extension OneDimensionalPoint where Vector : IntegerProtocol {
+extension OneDimensionalPoint where Vector: IntegerProtocol {
 
-    /// Advances to the next value.
-    @inlinable public mutating func increment() {
-        self += 1
-    }
+  /// Advances to the next value.
+  @inlinable public mutating func increment() {
+    self += 1
+  }
 
-    /// Retreats to the previous value.
-    @inlinable public mutating func decrement() {
-        self −= 1
-    }
+  /// Retreats to the previous value.
+  @inlinable public mutating func decrement() {
+    self −= 1
+  }
 
-    /// Returns the value which comes immediately after.
-    @inlinable public func successor() -> Self {
-        return self + 1
-    }
+  /// Returns the value which comes immediately after.
+  @inlinable public func successor() -> Self {
+    return self + 1
+  }
 
-    /// Returns the value which comes immediately before.
-    @inlinable public func predecessor() -> Self {
-        return self − 1
-    }
+  /// Returns the value which comes immediately before.
+  @inlinable public func predecessor() -> Self {
+    return self − 1
+  }
 }
 
-extension OneDimensionalPoint where Self : Strideable {
+extension OneDimensionalPoint where Self: Strideable {
 
-    /// Returns the value that follows `self` by a distance of `n`.
-    ///
-    /// - Parameters:
-    ///     - n: The distance to advance.
-    @inlinable public func advanced(by n: Vector) -> Self {
-        return self + n
-    }
+  /// Returns the value that follows `self` by a distance of `n`.
+  ///
+  /// - Parameters:
+  ///     - n: The distance to advance.
+  @inlinable public func advanced(by n: Vector) -> Self {
+    return self + n
+  }
 
-    /// Returns the distance from `self` to `other`.
-    ///
-    /// - Parameters:
-    ///     - other: The value to which the distance should be measured.
-    @inlinable public func distance(to other: Self) -> Vector {
-        return other − self
-    }
+  /// Returns the distance from `self` to `other`.
+  ///
+  /// - Parameters:
+  ///     - other: The value to which the distance should be measured.
+  @inlinable public func distance(to other: Self) -> Vector {
+    return other − self
+  }
 }

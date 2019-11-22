@@ -15,33 +15,37 @@
 import SDGControlFlow
 
 /// An absolute complement of a set.
-public struct AbsoluteComplement<Base : SetDefinition> : CustomStringConvertible, SetDefinition, TextualPlaygroundDisplay {
+public struct AbsoluteComplement<Base: SetDefinition>: CustomStringConvertible, SetDefinition,
+  TextualPlaygroundDisplay
+{
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates an absolute complement from a set.
-    ///
-    /// - Parameters:
-    ///     - base: A set.
-    @inlinable public init(_ base: Base) {
-        self.base = base
-    }
+  /// Creates an absolute complement from a set.
+  ///
+  /// - Parameters:
+  ///     - base: A set.
+  @inlinable public init(_ base: Base) {
+    self.base = base
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    @usableFromInline internal let base: Base
+  @usableFromInline internal let base: Base
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return "(" + String(describing: base) + ")′"
-    }
+  public var description: String {
+    return "(" + String(describing: base) + ")′"
+  }
 
-    // MARK: - SetDefinition
+  // MARK: - SetDefinition
 
-    public typealias Element = Base.Element
+  public typealias Element = Base.Element
 
-    @inlinable public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element) -> Bool {
-        return precedingValue.base ∌ followingValue
-    }
+  @inlinable public static func ∋ (precedingValue: AbsoluteComplement, followingValue: Base.Element)
+    -> Bool
+  {
+    return precedingValue.base ∌ followingValue
+  }
 }

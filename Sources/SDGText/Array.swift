@@ -14,19 +14,19 @@
 
 import SDGMathematics
 
-extension Array where Element : StringFamily {
+extension Array where Element: StringFamily {
 
-    /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
-    ///
-    /// - Parameters:
-    ///     - separator: A sequence to insert between each of this sequence’s elements.
-    @inlinable public func joined(separator: Element = "") -> Element {
-        guard var result = self.first else {
-            return ""
-        }
-        for line in self.dropFirst() {
-            result += separator + line
-        }
-        return result
+  /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
+  ///
+  /// - Parameters:
+  ///     - separator: A sequence to insert between each of this sequence’s elements.
+  @inlinable public func joined(separator: Element = "") -> Element {
+    guard var result = self.first else {
+      return ""
     }
+    for line in self.dropFirst() {
+      result += separator + line
+    }
+    return result
+  }
 }

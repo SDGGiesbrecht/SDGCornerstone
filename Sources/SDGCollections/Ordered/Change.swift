@@ -13,18 +13,18 @@
  */
 
 @usableFromInline internal enum IndividualChange<Index, OtherIndex> {
-    case keep(Index)
-    case remove(Index)
-    case insert(OtherIndex)
+  case keep(Index)
+  case remove(Index)
+  case insert(OtherIndex)
 }
 
 /// A single change in a sequence of modifications which transform one collection into another.
-public enum Change<Index : Comparable, OtherIndex : Comparable> {
+public enum Change<Index: Comparable, OtherIndex: Comparable> {
 
-    /// No change to a range in the original collection.
-    case keep(Range<Index>)
-    /// A removal of a range from the original collection.
-    case remove(Range<Index>)
-    /// An insertion of elements from a range of the new collection.
-    case insert(Range<OtherIndex>)
+  /// No change to a range in the original collection.
+  case keep(Range<Index>)
+  /// A removal of a range from the original collection.
+  case remove(Range<Index>)
+  /// An insertion of elements from a range of the new collection.
+  case insert(Range<OtherIndex>)
 }

@@ -24,38 +24,43 @@ import SDGText
 /// - SeeAlso: `EnglishCasing`
 public enum Casing {
 
-    /// The middle of a sentence.
-    ///
-    /// Everything is lowercase (except words such as names or acronyms which invariably appear capitalized).
-    case sentenceMedial
+  /// The middle of a sentence.
+  ///
+  /// Everything is lowercase (except words such as names or acronyms which invariably appear capitalized).
+  case sentenceMedial
 
-    /// The beginning of a sentence.
-    ///
-    /// The first letter is capitalized. The remainding words are treated the same as `sentenceMedial`.
-    case sentenceInitial
+  /// The beginning of a sentence.
+  ///
+  /// The first letter is capitalized. The remainding words are treated the same as `sentenceMedial`.
+  case sentenceInitial
 
-    /// Takes a string in the sentence medial case and transforms it to the expected case.
-    ///
-    /// - Warning: This method is only intended for use with compile‐time constants to reduce repetition in source code. Only the very simplest strings are supported. Passing a string which contains anything besides lowercase letters and combining marks will cause a precondition failure.
-    ///
-    /// - Parameters:
-    ///     - compileTimeString: The string to transform.
-    public func apply(to compileTimeString: StaticString) -> StrictString {
-        var string = StrictString(compileTimeString)
-        assert(¬string.contains(where: { $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters }), UserFacing<StrictString, _APILocalization>({ localization in // @exempt(from: tests)
-            switch localization { // @exempt(from: tests)
-            case .englishCanada:
-                return "“\(string)” is too complex for automatic casing."
-            }
-        }))
-
-        switch self {
-        case .sentenceMedial:
-            return string
-        case .sentenceInitial:
-            let first = String(string.removeFirst())
-            let replacement = first.uppercased()
-            return string.prepending(contentsOf: replacement.scalars)
+  /// Takes a string in the sentence medial case and transforms it to the expected case.
+  ///
+  /// - Warning: This method is only intended for use with compile‐time constants to reduce repetition in source code. Only the very simplest strings are supported. Passing a string which contains anything besides lowercase letters and combining marks will cause a precondition failure.
+  ///
+  /// - Parameters:
+  ///     - compileTimeString: The string to transform.
+  public func apply(to compileTimeString: StaticString) -> StrictString {
+    var string = StrictString(compileTimeString)
+    assert(
+      ¬string.contains(where: {
+        $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters
+      }),
+      UserFacing<StrictString, _APILocalization>({ localization in  // @exempt(from: tests)
+        switch localization {  // @exempt(from: tests)
+        case .englishCanada:
+          return "“\(string)” is too complex for automatic casing."
         }
+      })
+    )
+
+    switch self {
+    case .sentenceMedial:
+      return string
+    case .sentenceInitial:
+      let first = String(string.removeFirst())
+      let replacement = first.uppercased()
+      return string.prepending(contentsOf: replacement.scalars)
     }
+  }
 }

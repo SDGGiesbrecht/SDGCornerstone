@@ -13,19 +13,19 @@
  */
 
 /// A type which *only ever* represents integers.
-public protocol IntegerProtocol : IntegralArithmetic {}
+public protocol IntegerProtocol: IntegralArithmetic {}
 
 extension IntegerProtocol {
 
-    @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue.raiseIntegerToThePowerOf(integer: followingValue)
-    }
+  @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue.raiseIntegerToThePowerOf(integer: followingValue)
+  }
 
-    @inlinable public var isIntegral: Bool {
-        return true
-    }
+  @inlinable public var isIntegral: Bool {
+    return true
+  }
 
-    @inlinable public mutating func round(_ rule: RoundingRule) {
-        // self = self
-    }
+  @inlinable public mutating func round(_ rule: RoundingRule) {
+    // self = self
+  }
 }

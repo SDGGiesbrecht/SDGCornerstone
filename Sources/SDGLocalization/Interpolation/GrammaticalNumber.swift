@@ -15,9 +15,9 @@
 /// A grammatical number used by languages that distinguish only between singular and plural.
 public enum GrammaticalNumber {
 
-    /// Singular.
-    case singular
+  /// Singular.
+  case singular
 
-    /// Plural.
-    case plural
+  /// Plural.
+  case plural
 }

@@ -16,32 +16,32 @@ import SDGControlFlow
 import SDGMathematics
 
 /// A set small enough to reasonably iterate over.
-public protocol SetInRepresentableUniverse : MutableSet {
+public protocol SetInRepresentableUniverse: MutableSet {
 
-    /// An instance containing all possible elements.
-    static var universe: Self { get }
+  /// An instance containing all possible elements.
+  static var universe: Self { get }
 
-    // #documentation(SDGCornerstone.SetDefinition.′)
-    /// Returns the absolute complement of the set.
-    ///
-    /// - Parameters:
-    ///     - operand: The set.
-    static postfix func ′(operand: Self) -> Self
+  // #documentation(SDGCornerstone.SetDefinition.′)
+  /// Returns the absolute complement of the set.
+  ///
+  /// - Parameters:
+  ///     - operand: The set.
+  static postfix func ′ (operand: Self) -> Self
 
-    /// Sets the operand to its absolute complement.
-    ///
-    /// - Parameters:
-    ///     - operand: The set.
-    static postfix func ′=(operand: inout Self)
+  /// Sets the operand to its absolute complement.
+  ///
+  /// - Parameters:
+  ///     - operand: The set.
+  static postfix func ′= (operand: inout Self)
 }
 
 extension SetInRepresentableUniverse {
 
-    @inlinable public static postfix func ′(operand: Self) -> Self {
-        return nonmutatingVariant(of: ′=, on: operand)
-    }
+  @inlinable public static postfix func ′ (operand: Self) -> Self {
+    return nonmutatingVariant(of: ′=, on: operand)
+  }
 
-    @inlinable public static postfix func ′=(operand: inout Self) {
-        operand = universe ∖ operand
-    }
+  @inlinable public static postfix func ′= (operand: inout Self) {
+    operand = universe ∖ operand
+  }
 }

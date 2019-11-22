@@ -15,23 +15,23 @@
 import SDGControlFlow
 
 /// A type which displays its rich text description in playgrounds.
-public protocol MarkupPlaygroundDisplay : TextualPlaygroundDisplay {
+public protocol MarkupPlaygroundDisplay: TextualPlaygroundDisplay {
 
-    /// The markup representation of the instance.
-    func playgroundDescriptionMarkup() -> SemanticMarkup
+  /// The markup representation of the instance.
+  func playgroundDescriptionMarkup() -> SemanticMarkup
 }
 
 extension MarkupPlaygroundDisplay {
 
-    // MARK: - CustomPlaygroundDisplayConvertible
+  // MARK: - CustomPlaygroundDisplayConvertible
 
-    public var playgroundDescription: Any {
-        return playgroundDescriptionMarkup()
-    }
+  public var playgroundDescription: Any {
+    return playgroundDescriptionMarkup()
+  }
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return String(playgroundDescriptionMarkup().rawTextApproximation())
-    }
+  public var description: String {
+    return String(playgroundDescriptionMarkup().rawTextApproximation())
+  }
 }

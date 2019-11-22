@@ -15,67 +15,78 @@
 import SDGControlFlow
 
 /// A pattern that matches against a pair of component patterns contiguously.
-public struct ConcatenatedPatterns<First, Second> : Pattern, CustomStringConvertible, TextualPlaygroundDisplay where First : Pattern, Second : Pattern, First.Element == Second.Element {
+public struct ConcatenatedPatterns<First, Second>: Pattern, CustomStringConvertible,
+  TextualPlaygroundDisplay
+where First: Pattern, Second: Pattern, First.Element == Second.Element {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a pattern from a pair of component patterns.
-    ///
-    /// - Parameters:
-    ///     - first: The first pattern.
-    ///     - second: The second pattern.
-    @inlinable public  init(_ first: First, _ second: Second) {
-        self.first = first
-        self.second = second
-    }
+  /// Creates a pattern from a pair of component patterns.
+  ///
+  /// - Parameters:
+  ///     - first: The first pattern.
+  ///     - second: The second pattern.
+  @inlinable public init(_ first: First, _ second: Second) {
+    self.first = first
+    self.second = second
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    @usableFromInline internal var first: First
-    @usableFromInline internal var second: Second
+  @usableFromInline internal var first: First
+  @usableFromInline internal var second: Second
 
-    // MARK: - Pattern
+  // MARK: - Pattern
 
-    public typealias Element = First.Element
+  public typealias Element = First.Element
 
-    @inlinable public func matches<C : SearchableCollection>(in collection: C, at location: C.Index) -> [Range<C.Index>] where C.Element == Element {
-        var endIndices: [C.Index] = [location]
-        ConcatenationPatterning.advance(ends: &endIndices, for: first, in: collection)
-        if endIndices.isEmpty { return [] }
-        ConcatenationPatterning.advance(ends: &endIndices, for: second, in: collection)
-        return endIndices.map { location ..< $0 }
-    }
+  @inlinable public func matches<C: SearchableCollection>(in collection: C, at location: C.Index)
+    -> [Range<C.Index>] where C.Element == Element
+  {
+    var endIndices: [C.Index] = [location]
+    ConcatenationPatterning.advance(ends: &endIndices, for: first, in: collection)
+    if endIndices.isEmpty { return [] }
+    ConcatenationPatterning.advance(ends: &endIndices, for: second, in: collection)
+    return endIndices.map { location..<$0 }
+  }
 
-    @inlinable public func primaryMatch<C : SearchableCollection>(in collection: C, at location: C.Index) -> Range<C.Index>? where C.Element == Element {
-        var endIndices: [C.Index] = [location]
-        ConcatenationPatterning.advance(ends: &endIndices, for: first, in: collection)
-        if endIndices.isEmpty { return nil }
-        ConcatenationPatterning.advance(ends: &endIndices, for: second, in: collection)
-        return endIndices.first.map { location ..< $0 }
-    }
+  @inlinable public func primaryMatch<C: SearchableCollection>(
+    in collection: C,
+    at location: C.Index
+  ) -> Range<C.Index>? where C.Element == Element {
+    var endIndices: [C.Index] = [location]
+    ConcatenationPatterning.advance(ends: &endIndices, for: first, in: collection)
+    if endIndices.isEmpty { return nil }
+    ConcatenationPatterning.advance(ends: &endIndices, for: second, in: collection)
+    return endIndices.first.map { location..<$0 }
+  }
 
-    @inlinable public func reversed() -> ConcatenatedPatterns<Second.Reversed, First.Reversed> {
-        return ConcatenatedPatterns<Second.Reversed, First.Reversed>(second.reversed(), first.reversed())
-    }
+  @inlinable public func reversed() -> ConcatenatedPatterns<Second.Reversed, First.Reversed> {
+    return ConcatenatedPatterns<Second.Reversed, First.Reversed>(
+      second.reversed(),
+      first.reversed()
+    )
+  }
 
-    // MARK: - CustomStringConvertible
+  // MARK: - CustomStringConvertible
 
-    public var description: String {
-        return "(\(String(describing: first))) + (\(String(describing: second)))"
-    }
+  public var description: String {
+    return "(\(String(describing: first))) + (\(String(describing: second)))"
+  }
 }
 
 // Shared with N‐ary variant.
 @usableFromInline enum ConcatenationPatterning {
-    @inlinable internal static func advance<P, C>(
-        ends endIndices: inout [C.Index],
-        for pattern: P,
-        in collection: C)
-        where P : Pattern, C : SearchableCollection, C.Element == P.Element {
-            var result: [Range<C.Index>] = []
-            for index in endIndices {
-                result.append(contentsOf: pattern.matches(in: collection, at: index))
-            }
-            endIndices = result.map({ $0.upperBound })
+  @inlinable internal static func advance<P, C>(
+    ends endIndices: inout [C.Index],
+    for pattern: P,
+    in collection: C
+  )
+  where P: Pattern, C: SearchableCollection, C.Element == P.Element {
+    var result: [Range<C.Index>] = []
+    for index in endIndices {
+      result.append(contentsOf: pattern.matches(in: collection, at: index))
     }
+    endIndices = result.map({ $0.upperBound })
+  }
 }

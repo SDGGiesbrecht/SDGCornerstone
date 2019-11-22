@@ -15,5 +15,6 @@
 import SDGCollections
 
 /// A view of a string’s contents as a collection of extended grapheme clusters.
-public protocol ExtendedGraphemeClusterView : RangeReplaceableCollection, SearchableBidirectionalCollection
+public protocol ExtendedGraphemeClusterView: RangeReplaceableCollection,
+  SearchableBidirectionalCollection
 where Element == ExtendedGraphemeCluster, Index == String.Index {}

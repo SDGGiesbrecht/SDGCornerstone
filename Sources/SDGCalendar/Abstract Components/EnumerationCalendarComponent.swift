@@ -15,4 +15,6 @@
 import SDGMathematics
 
 /// A calendar component defined by an enumeration.
-public protocol EnumerationCalendarComponent : CalendarComponent, OrderedEnumeration, RawRepresentable {}
+public protocol EnumerationCalendarComponent: CalendarComponent, OrderedEnumeration,
+  RawRepresentable
+{}

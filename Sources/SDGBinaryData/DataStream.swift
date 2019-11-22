@@ -22,79 +22,80 @@ import SDGCollections
 /// Data streams are used to combine several distinct units of data into a single stream and separate the stream back into distinct units later, such as after transfering the stream over a network connection.
 public struct DataStream {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    /// Creates a data stream.
-    public init() {}
+  /// Creates a data stream.
+  public init() {}
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    /// The portion of the data stream currently in the buffer.
-    public var buffer: Data = Data()
+  /// The portion of the data stream currently in the buffer.
+  public var buffer: Data = Data()
 
-    // MARK: - Units
+  // MARK: - Units
 
-    private static let endMarker: Data.Element = 0x17 // C0 End of Transmission Block
-    private static let endData = Data([endMarker])
+  private static let endMarker: Data.Element = 0x17  // C0 End of Transmission Block
+  private static let endData = Data([endMarker])
 
-    private static let escapeMarker: Data.Element = 0x10 // C0 Data Link Escape
-    private static let escapeData = Data([escapeMarker])
+  private static let escapeMarker: Data.Element = 0x10  // C0 Data Link Escape
+  private static let escapeData = Data([escapeMarker])
 
-    /// Appends a unit of data.
-    ///
-    /// - Parameters:
-    ///     - unit: The unit of data to append.
-    public mutating func append(unit: Data) {
-        var unit = unit
+  /// Appends a unit of data.
+  ///
+  /// - Parameters:
+  ///     - unit: The unit of data to append.
+  public mutating func append(unit: Data) {
+    var unit = unit
 
-        func escape(_ element: Data, in data: inout Data) {
-            data.replaceMatches(for: element, with: DataStream.escapeData + element)
-        }
-
-        escape(DataStream.escapeData, in: &unit)
-        escape(DataStream.endData, in: &unit)
-        unit.append(DataStream.endMarker)
-
-        buffer.append(contentsOf: unit)
+    func escape(_ element: Data, in data: inout Data) {
+      data.replaceMatches(for: element, with: DataStream.escapeData + element)
     }
 
-    /// Extracts an array of all complete units and returns them.
-    ///
-    /// If the final unit is incomplete, it will not be extracted and will remain in the buffer.
-    public mutating func extractCompleteUnits() -> [Data] {
-        let endMarkerRanges = buffer.matches(for: DataStream.endData).filter { (match: PatternMatch<Data>) -> Bool in
+    escape(DataStream.escapeData, in: &unit)
+    escape(DataStream.endData, in: &unit)
+    unit.append(DataStream.endMarker)
 
-            // Count escapes.
-            var escapes = 0
-            for byte in buffer.prefix(upTo: match.range.lowerBound).reversed() {
-                if byte == DataStream.escapeMarker {
-                    escapes += 1
-                } else {
-                    break
-                }
-            }
+    buffer.append(contentsOf: unit)
+  }
 
-            // An odd number of escapes means the last one affects the marker.
-            return ¬escapes.isOdd
+  /// Extracts an array of all complete units and returns them.
+  ///
+  /// If the final unit is incomplete, it will not be extracted and will remain in the buffer.
+  public mutating func extractCompleteUnits() -> [Data] {
+    let endMarkerRanges = buffer.matches(for: DataStream.endData)
+      .filter { (match: PatternMatch<Data>) -> Bool in
+
+        // Count escapes.
+        var escapes = 0
+        for byte in buffer.prefix(upTo: match.range.lowerBound).reversed() {
+          if byte == DataStream.escapeMarker {
+            escapes += 1
+          } else {
+            break
+          }
         }
 
-        let unitRanges = buffer.ranges(separatedBy: endMarkerRanges.map({ $0.range }))
+        // An odd number of escapes means the last one affects the marker.
+        return ¬escapes.isOdd
+      }
 
-        var unitsAndRemainder = unitRanges.map { Data(buffer[$0]) }
+    let unitRanges = buffer.ranges(separatedBy: endMarkerRanges.map({ $0.range }))
 
-        buffer = unitsAndRemainder.removeLast()
+    var unitsAndRemainder = unitRanges.map { Data(buffer[$0]) }
 
-        return unitsAndRemainder.map { (unit: Data) -> Data in
-            var unit = unit
+    buffer = unitsAndRemainder.removeLast()
 
-            func unescape(_ element: Data, in data: inout Data) {
-                data.replaceMatches(for: DataStream.escapeData + element, with: element)
-            }
+    return unitsAndRemainder.map { (unit: Data) -> Data in
+      var unit = unit
 
-            unescape(DataStream.endData, in: &unit)
-            unescape(DataStream.escapeData, in: &unit)
+      func unescape(_ element: Data, in data: inout Data) {
+        data.replaceMatches(for: DataStream.escapeData + element, with: element)
+      }
 
-            return unit
-        }
+      unescape(DataStream.endData, in: &unit)
+      unescape(DataStream.escapeData, in: &unit)
+
+      return unit
     }
+  }
 }

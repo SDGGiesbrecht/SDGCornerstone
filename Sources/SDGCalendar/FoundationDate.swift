@@ -20,45 +20,47 @@ import SDGText
 
 import SDGCornerstoneLocalizations
 
-internal struct FoundationDate : DateDefinition, TransparentWrapper {
+internal struct FoundationDate: DateDefinition, TransparentWrapper {
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    internal init(_ date: Date) {
-        self.date = date
-        self.intervalSinceReferenceDate = FloatMax(date.timeIntervalSinceReferenceDate).seconds
-    }
+  internal init(_ date: Date) {
+    self.date = date
+    self.intervalSinceReferenceDate = FloatMax(date.timeIntervalSinceReferenceDate).seconds
+  }
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    internal let date: Date
+  internal let date: Date
 
-    // MARK: - DateDefinition
+  // MARK: - DateDefinition
 
-    internal static let identifier: StrictString = "Foundation"
-    internal static let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
-    internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
+  internal static let identifier: StrictString = "Foundation"
+  internal static let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
+  internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
 
-    internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
-        self.intervalSinceReferenceDate = intervalSinceReferenceDate
-        self.date = Date(timeIntervalSinceReferenceDate: TimeInterval(intervalSinceReferenceDate.inSeconds))
-    }
+  internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
+    self.intervalSinceReferenceDate = intervalSinceReferenceDate
+    self.date = Date(
+      timeIntervalSinceReferenceDate: TimeInterval(intervalSinceReferenceDate.inSeconds)
+    )
+  }
 
-    // MARK: - Decodable
+  // MARK: - Decodable
 
-    internal init(from decoder: Decoder) throws {
-        try self.init(from: decoder, via: Date.self, convert: { FoundationDate($0) })
-    }
+  internal init(from decoder: Decoder) throws {
+    try self.init(from: decoder, via: Date.self, convert: { FoundationDate($0) })
+  }
 
-    // MARK: - Encodable
+  // MARK: - Encodable
 
-    internal func encode(to encoder: Encoder) throws {
-        try encode(to: encoder, via: date)
-    }
+  internal func encode(to encoder: Encoder) throws {
+    try encode(to: encoder, via: date)
+  }
 
-    // MARK: - TransparentWrapper
+  // MARK: - TransparentWrapper
 
-    public var wrappedInstance: Any {
-        return date
-    }
+  public var wrappedInstance: Any {
+    return date
+  }
 }

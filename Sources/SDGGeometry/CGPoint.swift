@@ -14,16 +14,16 @@
 
 #if canImport(CoreGraphics)
 
-import CoreGraphics
+  import CoreGraphics
 
-import SDGMathematics
+  import SDGMathematics
 
-extension CGPoint : TwoDimensionalPointProtocol {
+  extension CGPoint: TwoDimensionalPointProtocol {
 
     // MARK: - Conversions
 
     internal init(_ point: TwoDimensionalPoint<Double>) {
-        self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
+      self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
     }
 
     // MARK: - PointProtocol
@@ -33,8 +33,8 @@ extension CGPoint : TwoDimensionalPointProtocol {
     // MARK: - TwoDimensionalPointProtocol
 
     @inlinable public init(_ x: Vector.Scalar, _ y: Vector.Scalar) {
-        self.init(x: x, y: y)
+      self.init(x: x, y: y)
     }
-}
+  }
 
 #endif

@@ -31,35 +31,60 @@ import SDGTesting
 ///     - uniqueTestName: A unique name for the test. This is used in the path to the persistent test specifications.
 ///     - file: Optional. A different source file to associate with any failures.
 ///     - line: Optional. A different line to associate with any failures.
-public func testFileConvertibleConformance<T>(of instance: T, uniqueTestName: StrictString, file: StaticString = #file, line: UInt = #line) where T : Equatable, T : FileConvertible {
+public func testFileConvertibleConformance<T>(
+  of instance: T,
+  uniqueTestName: StrictString,
+  file: StaticString = #file,
+  line: UInt = #line
+) where T: Equatable, T: FileConvertible {
 
-    let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent("FileConvertible").appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
-    try? FileManager.default.createDirectory(at: specificationsDirectory, withIntermediateDirectories: true, attributes: nil)
+  let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent(
+    "FileConvertible"
+  ).appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
+  try? FileManager.default.createDirectory(
+    at: specificationsDirectory,
+    withIntermediateDirectories: true,
+    attributes: nil
+  )
 
-    var specifications: Set<Data> = []
-    do {
-        for specificationURL in try FileManager.default.contentsOfDirectory(at: specificationsDirectory, includingPropertiesForKeys: nil, options: []) {
-            try autoreleasepool {
+  var specifications: Set<Data> = []
+  do {
+    for specificationURL in try FileManager.default.contentsOfDirectory(
+      at: specificationsDirectory,
+      includingPropertiesForKeys: nil,
+      options: []
+    ) {
+      try autoreleasepool {
 
-                let specification = try Data(from: specificationURL)
-                specifications.insert(specification)
-                let decoded = try T(file: specification, origin: specificationURL)
-                test(decoded == instance, "\(instance) ≠ \(decoded) (\(specificationURL)", file: file, line: line)
-            }
-        }
-
-        let encoded = instance.file
-
-        let decoded = try T(file: encoded, origin: nil)
-        test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
-
-        let newSpecification = encoded
-        if newSpecification ∉ specifications {
-            // @exempt(from: tests)
-            let now = CalendarDate.gregorianNow()
-            try newSpecification.save(to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).testspec"))
-        }
-    } catch {
-        fail("\(error)", file: file, line: line)
+        let specification = try Data(from: specificationURL)
+        specifications.insert(specification)
+        let decoded = try T(file: specification, origin: specificationURL)
+        test(
+          decoded == instance,
+          {  // @exempt(from: tests)
+            return  // @exempt(from: tests)
+              "\(instance) ≠ \(decoded) (\(specificationURL)"
+          }(),
+          file: file,
+          line: line
+        )
+      }
     }
+
+    let encoded = instance.file
+
+    let decoded = try T(file: encoded, origin: nil)
+    test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
+
+    let newSpecification = encoded
+    if newSpecification ∉ specifications {
+      // @exempt(from: tests)
+      let now = CalendarDate.gregorianNow()
+      try newSpecification.save(
+        to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).testspec")
+      )
+    }
+  } catch {
+    fail("\(error)", file: file, line: line)
+  }
 }

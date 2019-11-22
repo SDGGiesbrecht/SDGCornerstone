@@ -14,278 +14,280 @@
 
 import Foundation
 #if canImport(CoreGraphics)
-import CoreGraphics
+  import CoreGraphics
 #endif
 
 #if os(iOS) || os(watchOS) || os(tvOS)
-/// The member of the `Float` family with the largest bit field.
-public typealias FloatMax = Double
+  /// The member of the `Float` family with the largest bit field.
+  public typealias FloatMax = Double
 #else
-/// The member of the `Float` family with the largest bit field.
-public typealias FloatMax = Float80
+  /// The member of the `Float` family with the largest bit field.
+  public typealias FloatMax = Float80
 #endif
 
-/// A member of the `Float` family: `Double`, `Float80` or `Float`
-public protocol FloatFamily : BinaryFloatingPoint, CustomDebugStringConvertible, LosslessStringConvertible, RealNumberProtocol {
-    static func _tgmath_pow(_ x: Self, _ y: Self) -> Self
-    static func _tgmath_log(_ x: Self) -> Self
-    static func _tgmath_log10(_ x: Self) -> Self
-    static func _tgmath_sin(_ x: Self) -> Self
-    static func _tgmath_cos(_ x: Self) -> Self
-    static func _tgmath_tan(_ x: Self) -> Self
-    static func _tgmath_asin(_ x: Self) -> Self
-    static func _tgmath_acos(_ x: Self) -> Self
-    static func _tgmath_atan(_ x: Self) -> Self
+/// A member of the `Float` family; `Double`, `Float80` or `Float`.
+public protocol FloatFamily: BinaryFloatingPoint, CustomDebugStringConvertible,
+  LosslessStringConvertible, RealNumberProtocol
+{
+  static func _tgmath_pow(_ x: Self, _ y: Self) -> Self
+  static func _tgmath_log(_ x: Self) -> Self
+  static func _tgmath_log10(_ x: Self) -> Self
+  static func _tgmath_sin(_ x: Self) -> Self
+  static func _tgmath_cos(_ x: Self) -> Self
+  static func _tgmath_tan(_ x: Self) -> Self
+  static func _tgmath_asin(_ x: Self) -> Self
+  static func _tgmath_acos(_ x: Self) -> Self
+  static func _tgmath_atan(_ x: Self) -> Self
 }
 
 extension FloatFamily {
 
-    // MARK: - Negatable
+  // MARK: - Negatable
 
-    @inlinable public static prefix func − (operand: Self) -> Self {
-        return -operand // @exempt(from: unicode)
-    }
+  @inlinable public static prefix func − (operand: Self) -> Self {
+    return -operand  // @exempt(from: unicode)
+  }
 
-    // MARK: - NumericAdditiveArithmetic
+  // MARK: - NumericAdditiveArithmetic
 
-    @inlinable public var absoluteValue: Self {
-        return abs(self)
-    }
+  @inlinable public var absoluteValue: Self {
+    return abs(self)
+  }
 
-    @inlinable public mutating func formAbsoluteValue() {
-        self = abs(self)
-    }
+  @inlinable public mutating func formAbsoluteValue() {
+    self = abs(self)
+  }
 
-    // MARK: - RationalArithmetic
+  // MARK: - RationalArithmetic
 
-    @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue / followingValue // @exempt(from: unicode)
-    }
+  @inlinable public static func ÷ (precedingValue: Self, followingValue: Self) -> Self {
+    return precedingValue / followingValue  // @exempt(from: unicode)
+  }
 
-    @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue /= followingValue // @exempt(from: unicode)
-    }
+  @inlinable public static func ÷= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue /= followingValue  // @exempt(from: unicode)
+  }
 
-    // MARK: - RealArithmetic
+  // MARK: - RealArithmetic
 
-    @inlinable public static var π: Self {
-        return pi
-    }
+  @inlinable public static var π: Self {
+    return pi
+  }
 
-    @inlinable public static prefix func √ (operand: Self) -> Self {
-        return operand.squareRoot()
-    }
+  @inlinable public static prefix func √ (operand: Self) -> Self {
+    return operand.squareRoot()
+  }
 
-    @inlinable public static postfix func √= (operand: inout Self) {
-        operand = operand.squareRoot()
-    }
+  @inlinable public static postfix func √= (operand: inout Self) {
+    operand = operand.squareRoot()
+  }
 
-    @inlinable public mutating func formLogarithm(toBase base: Self) {
-        // log (a) = log (a) ÷ log (b)
-        //    b         x         x
-        formNaturalLogarithm()
-        self ÷= Self.ln(base)
-    }
+  @inlinable public mutating func formLogarithm(toBase base: Self) {
+    // log (a) = log (a) ÷ log (b)
+    //    b         x         x
+    formNaturalLogarithm()
+    self ÷= Self.ln(base)
+  }
 
-    @inlinable public static func log(_ antilogarithm: Self) -> Self {
-        return Self._tgmath_log10(antilogarithm)
-    }
+  @inlinable public static func log(_ antilogarithm: Self) -> Self {
+    return Self._tgmath_log10(antilogarithm)
+  }
 
-    @inlinable public mutating func formCommonLogarithm() {
-        self = Self.log(self)
-    }
+  @inlinable public mutating func formCommonLogarithm() {
+    self = Self.log(self)
+  }
 
-    @inlinable public static func ln(_ antilogarithm: Self) -> Self {
-        return Self._tgmath_log(antilogarithm)
-    }
+  @inlinable public static func ln(_ antilogarithm: Self) -> Self {
+    return Self._tgmath_log(antilogarithm)
+  }
 
-    @inlinable public mutating func formNaturalLogarithm() {
-        self = Self.ln(self)
-    }
+  @inlinable public mutating func formNaturalLogarithm() {
+    self = Self.ln(self)
+  }
 
-    @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
-        return Self._tgmath_sin(angle.inRadians)
-    }
+  @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
+    return Self._tgmath_sin(angle.inRadians)
+  }
 
-    @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
-        return Self._tgmath_cos(angle.inRadians)
-    }
+  @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
+    return Self._tgmath_cos(angle.inRadians)
+  }
 
-    @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
-        return Self._tgmath_tan(angle.inRadians)
-    }
+  @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
+    return Self._tgmath_tan(angle.inRadians)
+  }
 
-    @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
-        return Self._tgmath_asin(tangent).radians
-    }
+  @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
+    return Self._tgmath_asin(tangent).radians
+  }
 
-    @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
-        return Self._tgmath_acos(tangent).radians
-    }
+  @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
+    return Self._tgmath_acos(tangent).radians
+  }
 
-    @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
-        return Self._tgmath_atan(tangent).radians
-    }
+  @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
+    return Self._tgmath_atan(tangent).radians
+  }
 
-    // MARK: - Subtractable
+  // MARK: - Subtractable
 
-    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue - followingValue // @exempt(from: unicode)
-    }
+  @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    return precedingValue - followingValue  // @exempt(from: unicode)
+  }
 
-    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue -= followingValue // @exempt(from: unicode)
-    }
+  @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue -= followingValue  // @exempt(from: unicode)
+  }
 
-    // MARK: - WholeArithmetic
+  // MARK: - WholeArithmetic
 
-    @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue * followingValue // @exempt(from: unicode)
-    }
+  @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    return precedingValue * followingValue  // @exempt(from: unicode)
+  }
 
-    @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue *= followingValue // @exempt(from: unicode)
-    }
+  @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue *= followingValue  // @exempt(from: unicode)
+  }
 
-    @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
-        self ÷= divisor
-        self.round(.down)
-    }
+  @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
+    self ÷= divisor
+    self.round(.down)
+  }
 
-    @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-        return Self._tgmath_pow(precedingValue, followingValue)
-    }
+  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+    return Self._tgmath_pow(precedingValue, followingValue)
+  }
 
-    @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue = precedingValue ↑ followingValue
-    }
+  @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue = precedingValue ↑ followingValue
+  }
 
-    @inlinable public func rounded(_ rule: RoundingRule) -> Self {
-        return roundedAsFloatingPoint(rule)
-    }
+  @inlinable public func rounded(_ rule: RoundingRule) -> Self {
+    return roundedAsFloatingPoint(rule)
+  }
 }
 
 extension FloatingPoint {
-    @inlinable internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
-        return rounded(rule)
-    }
+  @inlinable internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
+    return rounded(rule)
+  }
 }
 
-extension Double : FloatFamily {
+extension Double: FloatFamily {
 
-    // MARK: - FloatFamily
+  // MARK: - FloatFamily
 
-    @inlinable public static func _tgmath_pow(_ x: Double, _ y: Double) -> Double {
-        return Foundation.pow(x, y)
-    }
+  @inlinable public static func _tgmath_pow(_ x: Double, _ y: Double) -> Double {
+    return Foundation.pow(x, y)
+  }
 
-    @inlinable public static func _tgmath_log(_ x: Double) -> Double {
-        return Foundation.log(x)
-    }
+  @inlinable public static func _tgmath_log(_ x: Double) -> Double {
+    return Foundation.log(x)
+  }
 
-    @inlinable public static func _tgmath_log10(_ x: Double) -> Double {
-        return Foundation.log10(x)
-    }
+  @inlinable public static func _tgmath_log10(_ x: Double) -> Double {
+    return Foundation.log10(x)
+  }
 
-    @inlinable public static func _tgmath_sin(_ x: Double) -> Double {
-        return Foundation.sin(x)
-    }
+  @inlinable public static func _tgmath_sin(_ x: Double) -> Double {
+    return Foundation.sin(x)
+  }
 
-    @inlinable public static func _tgmath_cos(_ x: Double) -> Double {
-        return Foundation.cos(x)
-    }
+  @inlinable public static func _tgmath_cos(_ x: Double) -> Double {
+    return Foundation.cos(x)
+  }
 
-    @inlinable public static func _tgmath_tan(_ x: Double) -> Double {
-        return Foundation.tan(x)
-    }
+  @inlinable public static func _tgmath_tan(_ x: Double) -> Double {
+    return Foundation.tan(x)
+  }
 
-    @inlinable public static func _tgmath_asin(_ x: Double) -> Double {
-        return Foundation.asin(x)
-    }
+  @inlinable public static func _tgmath_asin(_ x: Double) -> Double {
+    return Foundation.asin(x)
+  }
 
-    @inlinable public static func _tgmath_acos(_ x: Double) -> Double {
-        return Foundation.acos(x)
-    }
+  @inlinable public static func _tgmath_acos(_ x: Double) -> Double {
+    return Foundation.acos(x)
+  }
 
-    @inlinable public static func _tgmath_atan(_ x: Double) -> Double {
-        return Foundation.atan(x)
-    }
+  @inlinable public static func _tgmath_atan(_ x: Double) -> Double {
+    return Foundation.atan(x)
+  }
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Stride
+  public typealias Vector = Stride
 
-    // MARK: - RealArithmetic
+  // MARK: - RealArithmetic
 
-    public static let e: Double = 0x1.5BF0A8B145769p1
+  public static let e: Double = 0x1.5BF0A8B145769p1
 
-    @inlinable public var floatingPointApproximation: FloatMax {
-        return FloatMax(self)
-    }
+  @inlinable public var floatingPointApproximation: FloatMax {
+    return FloatMax(self)
+  }
 }
 
 #if canImport(CoreGraphics)
 
-extension CGFloat : FloatFamily {
+  extension CGFloat: FloatFamily {
 
     // MARK: - CustomDebugStringConvertible
 
     @inlinable public var debugDescription: String {
-        return NativeType(self).debugDescription
+      return NativeType(self).debugDescription
     }
 
     // MARK: - FloatFamily
 
     @inlinable public static func _tgmath_pow(_ x: CGFloat, _ y: CGFloat) -> CGFloat {
-        return CoreGraphics.pow(x, y)
+      return CoreGraphics.pow(x, y)
     }
 
     @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
-        return CoreGraphics.log(x)
+      return CoreGraphics.log(x)
     }
 
     @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
-        return CoreGraphics.log10(x)
+      return CoreGraphics.log10(x)
     }
 
     @inlinable public static func _tgmath_sin(_ x: CGFloat) -> CGFloat {
-        return CoreGraphics.sin(x)
+      return CoreGraphics.sin(x)
     }
 
     @inlinable public static func _tgmath_cos(_ x: CGFloat) -> CGFloat {
-        return CoreGraphics.cos(x)
+      return CoreGraphics.cos(x)
     }
 
     @inlinable public static func _tgmath_tan(_ x: CGFloat) -> CGFloat {
-        return CoreGraphics.tan(x)
+      return CoreGraphics.tan(x)
     }
 
     @inlinable public static func _tgmath_asin(_ x: CGFloat) -> CGFloat {
-        return CoreGraphics.asin(x)
+      return CoreGraphics.asin(x)
     }
 
     @inlinable public static func _tgmath_acos(_ x: CGFloat) -> CGFloat {
-        return CoreGraphics.acos(x)
+      return CoreGraphics.acos(x)
     }
 
     @inlinable public static func _tgmath_atan(_ x: CGFloat) -> CGFloat {
-        return CoreGraphics.atan(x)
+      return CoreGraphics.atan(x)
     }
 
     // MARK: - IntegralArithmetic
 
     @inlinable public init(_ int: IntMax) {
-        self = CGFloat(NativeType(int))
+      self = CGFloat(NativeType(int))
     }
 
     // MARK: - LosslessStringConvertible
 
     @inlinable public init?(_ description: String) {
-        if let result = NativeType(description) {
-            self = CGFloat(result)
-        } else {
-            return nil
-        }
+      if let result = NativeType(description) {
+        self = CGFloat(result)
+      } else {
+        return nil
+      }
     }
 
     // MARK: - PointProtocol
@@ -297,70 +299,70 @@ extension CGFloat : FloatFamily {
     public static let e: CGFloat = CGFloat(Double.e)
 
     @inlinable public var floatingPointApproximation: FloatMax {
-        return FloatMax(NativeType(self))
+      return FloatMax(NativeType(self))
     }
 
     // MARK: - WholeArithmetic
 
     @inlinable public init(_ uInt: UIntMax) {
-        self = CGFloat(NativeType(uInt))
+      self = CGFloat(NativeType(uInt))
     }
-}
+  }
 #endif
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-extension Float80 : Decodable, Encodable, FloatFamily {
+  extension Float80: Decodable, Encodable, FloatFamily {
 
     // MARK: - Decodable
 
     public init(from decoder: Decoder) throws {
-        self.init(try Double(from: decoder))
+      self.init(try Double(from: decoder))
     }
 
     // MARK: - Encodable
 
     public func encode(to encoder: Encoder) throws {
-        // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
-        try Double(self).encode(to: encoder)
+      // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
+      try Double(self).encode(to: encoder)
     }
 
     // MARK: - FloatFamily
 
     @inlinable public static func _tgmath_pow(_ x: Float80, _ y: Float80) -> Float80 {
-        return Foundation.pow(x, y)
+      return Foundation.pow(x, y)
     }
 
     @inlinable public static func _tgmath_log(_ x: Float80) -> Float80 {
-        return Foundation.log(x)
+      return Foundation.log(x)
     }
 
     @inlinable public static func _tgmath_log10(_ x: Float80) -> Float80 {
-        return Foundation.log10(x)
+      return Foundation.log10(x)
     }
 
     @inlinable public static func _tgmath_sin(_ x: Float80) -> Float80 {
-        return Foundation.sin(x)
+      return Foundation.sin(x)
     }
 
     @inlinable public static func _tgmath_cos(_ x: Float80) -> Float80 {
-        return Foundation.cos(x)
+      return Foundation.cos(x)
     }
 
     @inlinable public static func _tgmath_tan(_ x: Float80) -> Float80 {
-        return Foundation.tan(x)
+      return Foundation.tan(x)
     }
 
     @inlinable public static func _tgmath_asin(_ x: Float80) -> Float80 {
-        return Foundation.asin(x)
+      return Foundation.asin(x)
     }
 
     @inlinable public static func _tgmath_acos(_ x: Float80) -> Float80 {
-        return Foundation.acos(x)
+      return Foundation.acos(x)
     }
 
     @inlinable public static func _tgmath_atan(_ x: Float80) -> Float80 {
-        return Foundation.atan(x)
+      return Foundation.atan(x)
     }
 
     // MARK: - PointProtocol
@@ -372,60 +374,60 @@ extension Float80 : Decodable, Encodable, FloatFamily {
     public static let e: Float80 = 0x1.5BF0A8B145769535p1
 
     @inlinable public var floatingPointApproximation: FloatMax {
-        return FloatMax(self)
+      return FloatMax(self)
     }
-}
+  }
 #endif
 
-extension Float : FloatFamily {
+extension Float: FloatFamily {
 
-    // MARK: - FloatFamily
+  // MARK: - FloatFamily
 
-    @inlinable public static func _tgmath_pow(_ x: Float, _ y: Float) -> Float {
-        return Foundation.pow(x, y)
-    }
+  @inlinable public static func _tgmath_pow(_ x: Float, _ y: Float) -> Float {
+    return Foundation.pow(x, y)
+  }
 
-    @inlinable public static func _tgmath_log(_ x: Float) -> Float {
-        return Foundation.log(x)
-    }
+  @inlinable public static func _tgmath_log(_ x: Float) -> Float {
+    return Foundation.log(x)
+  }
 
-    @inlinable public static func _tgmath_log10(_ x: Float) -> Float {
-        return Foundation.log10(x)
-    }
+  @inlinable public static func _tgmath_log10(_ x: Float) -> Float {
+    return Foundation.log10(x)
+  }
 
-    @inlinable public static func _tgmath_sin(_ x: Float) -> Float {
-        return Foundation.sin(x)
-    }
+  @inlinable public static func _tgmath_sin(_ x: Float) -> Float {
+    return Foundation.sin(x)
+  }
 
-    @inlinable public static func _tgmath_cos(_ x: Float) -> Float {
-        return Foundation.cos(x)
-    }
+  @inlinable public static func _tgmath_cos(_ x: Float) -> Float {
+    return Foundation.cos(x)
+  }
 
-    @inlinable public static func _tgmath_tan(_ x: Float) -> Float {
-        return Foundation.tan(x)
-    }
+  @inlinable public static func _tgmath_tan(_ x: Float) -> Float {
+    return Foundation.tan(x)
+  }
 
-    @inlinable public static func _tgmath_asin(_ x: Float) -> Float {
-        return Foundation.asin(x)
-    }
+  @inlinable public static func _tgmath_asin(_ x: Float) -> Float {
+    return Foundation.asin(x)
+  }
 
-    @inlinable public static func _tgmath_acos(_ x: Float) -> Float {
-        return Foundation.acos(x)
-    }
+  @inlinable public static func _tgmath_acos(_ x: Float) -> Float {
+    return Foundation.acos(x)
+  }
 
-    @inlinable public static func _tgmath_atan(_ x: Float) -> Float {
-        return Foundation.atan(x)
-    }
+  @inlinable public static func _tgmath_atan(_ x: Float) -> Float {
+    return Foundation.atan(x)
+  }
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Stride
+  public typealias Vector = Stride
 
-    // MARK: - RealArithmetic
+  // MARK: - RealArithmetic
 
-    public static let e: Float = 0x1.5BF0Bp1
+  public static let e: Float = 0x1.5BF0Bp1
 
-    @inlinable public var floatingPointApproximation: FloatMax {
-        return FloatMax(self)
-    }
+  @inlinable public var floatingPointApproximation: FloatMax {
+    return FloatMax(self)
+  }
 }

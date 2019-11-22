@@ -18,140 +18,142 @@ import SDGLogic
 public typealias IntMax = Int64
 
 /// A member of the `Int` family: `Int`, `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntFamily : CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol, MirrorPath, SignedInteger {}
+public protocol IntFamily: CustomReflectable, CVarArg, FixedWidthInteger, IntegerProtocol,
+  MirrorPath, SignedInteger
+{}
 /// A numbered member of the `Int` family: `Int64`, `Int32`, `Int16` or `Int8`.
-public protocol IntXFamily : IntFamily {}
+public protocol IntXFamily: IntFamily {}
 
 extension IntFamily {
 
-    // MARK: - IntegralArithmetic
+  // MARK: - IntegralArithmetic
 
-    @inlinable public init<I : IntFamily>(_ int: I) {
-        self.init(asBinaryIntegerWithInt: int)
+  @inlinable public init<I: IntFamily>(_ int: I) {
+    self.init(asBinaryIntegerWithInt: int)
+  }
+
+  // MARK: - Negatable
+
+  @inlinable public static prefix func − (operand: Self) -> Self {
+    return -operand  // @exempt(from: unicode)
+  }
+
+  // MARK: - NumericAdditiveArithmetic
+
+  @inlinable public var absoluteValue: Self {
+    return abs(self)
+  }
+
+  @inlinable public mutating func formAbsoluteValue() {
+    self = abs(self)
+  }
+
+  // MARK: - Subtractable
+
+  @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
+    return precedingValue - followingValue  // @exempt(from: unicode)
+  }
+
+  @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue -= followingValue  // @exempt(from: unicode)
+  }
+
+  // MARK: - WholeArithmetic
+
+  @inlinable public init<U: UIntFamily>(_ uInt: U) {
+    self.init(asBinaryIntegerWithUInt: uInt)
+  }
+
+  @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
+    return precedingValue * followingValue  // @exempt(from: unicode)
+  }
+
+  @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
+    precedingValue *= followingValue  // @exempt(from: unicode)
+  }
+
+  @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
+
+    let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
+
+    let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
+    // Wrap to previous if negative (ignoring when exactly even)
+
+    self /= divisor  // @exempt(from: unicode)
+
+    if needsToWrapToPrevious {
+      self −= 1 as Self
     }
+  }
 
-    // MARK: - Negatable
+  @inlinable public var isEven: Bool {
+    return ¬isOdd
+  }
 
-    @inlinable public static prefix func − (operand: Self) -> Self {
-        return -operand // @exempt(from: unicode)
-    }
-
-    // MARK: - NumericAdditiveArithmetic
-
-    @inlinable public var absoluteValue: Self {
-        return abs(self)
-    }
-
-    @inlinable public mutating func formAbsoluteValue() {
-        self = abs(self)
-    }
-
-    // MARK: - Subtractable
-
-    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue - followingValue // @exempt(from: unicode)
-    }
-
-    @inlinable public static func −= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue -= followingValue // @exempt(from: unicode)
-    }
-
-    // MARK: - WholeArithmetic
-
-    @inlinable public init<U : UIntFamily>(_ uInt: U) {
-        self.init(asBinaryIntegerWithUInt: uInt)
-    }
-
-    @inlinable public static func × (precedingValue: Self, followingValue: Self) -> Self {
-        return precedingValue * followingValue // @exempt(from: unicode)
-    }
-
-    @inlinable public static func ×= (precedingValue: inout Self, followingValue: Self) {
-        precedingValue *= followingValue // @exempt(from: unicode)
-    }
-
-    @inlinable public mutating func divideAccordingToEuclid(by divisor: Self) {
-
-        let negative = (self.isNegative ∧ divisor.isPositive) ∨ (self.isPositive ∧ divisor.isNegative)
-
-        let needsToWrapToPrevious = negative ∧ self % divisor ≠ 0
-        // Wrap to previous if negative (ignoring when exactly even)
-
-        self /= divisor // @exempt(from: unicode)
-
-        if needsToWrapToPrevious {
-            self −= 1 as Self
-        }
-    }
-
-    @inlinable public var isEven: Bool {
-        return ¬isOdd
-    }
-
-    @inlinable public var isOdd: Bool {
-        return self & 1 == 1
-    }
+  @inlinable public var isOdd: Bool {
+    return self & 1 == 1
+  }
 }
 
 extension IntXFamily {
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
-        return precedingValue.advanced(by: followingValue)
-    }
+  @inlinable public static func + (precedingValue: Self, followingValue: Vector) -> Self {
+    return precedingValue.advanced(by: followingValue)
+  }
 
-    @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
-        precedingValue = precedingValue.advanced(by: followingValue)
-    }
+  @inlinable public static func += (precedingValue: inout Self, followingValue: Vector) {
+    precedingValue = precedingValue.advanced(by: followingValue)
+  }
 
-    @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
-        return followingValue.distance(to: precedingValue)
-    }
+  @inlinable public static func − (precedingValue: Self, followingValue: Self) -> Vector {
+    return followingValue.distance(to: precedingValue)
+  }
 }
 
 extension BinaryInteger {
-    @inlinable internal init<I : IntFamily>(asBinaryIntegerWithInt int: I) {
-        self.init(int)
-    }
+  @inlinable internal init<I: IntFamily>(asBinaryIntegerWithInt int: I) {
+    self.init(int)
+  }
 }
 
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Eine Ganzzahl mit Vorzeichen. (`Int`)
 public typealias GZahl = Int
-extension Int : IntFamily {
+extension Int: IntFamily {
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Stride
+  public typealias Vector = Stride
 
-    // MARK: - Subtractible
+  // MARK: - Subtractible
 
-    @inlinable public static func − (precedingValue: Int, followingValue: Int) -> Int {
-        return precedingValue - followingValue // @exempt(from: unicode)
-    }
+  @inlinable public static func − (precedingValue: Int, followingValue: Int) -> Int {
+    return precedingValue - followingValue  // @exempt(from: unicode)
+  }
 }
-extension Int64 : IntXFamily {
+extension Int64: IntXFamily {
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Stride
+  public typealias Vector = Stride
 }
-extension Int32 : IntXFamily {
+extension Int32: IntXFamily {
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Stride
+  public typealias Vector = Stride
 }
-extension Int16 : IntXFamily {
+extension Int16: IntXFamily {
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Stride
+  public typealias Vector = Stride
 }
-extension Int8 : IntXFamily {
+extension Int8: IntXFamily {
 
-    // MARK: - PointProtocol
+  // MARK: - PointProtocol
 
-    public typealias Vector = Stride
+  public typealias Vector = Stride
 }
