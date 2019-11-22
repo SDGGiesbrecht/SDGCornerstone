@@ -38,7 +38,7 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
   /// Wraps an instance of a standard `CollectionDifference`.
   @available(macOS 10.15, *)
   @inlinable public init(_ standard: CollectionDifference<ChangeElement>) {
-    removals = standard.insertions.map { Change($0) }
+    removals = standard.removals.map { Change($0) }
     insertions = standard.insertions.map { Change($0) }
   }
 
@@ -52,25 +52,25 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
 
   // MARK: - BidirectionalCollection
 
-  public func index(before i: Int) -> Int {
+  @inlinable public func index(before i: Int) -> Int {
     return i − 1
   }
 
   // MARK: - Collection
 
-  public var startIndex: Int {
+  @inlinable public var startIndex: Int {
     return 0
   }
 
-  public var endIndex: Int {
+  @inlinable public var endIndex: Int {
     return removals.count + insertions.count
   }
 
-  public func index(after i: Int) -> Int {
+  @inlinable public func index(after i: Int) -> Int {
     return i + 1
   }
 
-  public subscript(position: Int) -> Change {
+  @inlinable public subscript(position: Int) -> Change {
     if position < removals.count {
       return removals[removals.count − (position + 1)]
     }
@@ -79,11 +79,11 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
 
   // MARK: - RandomAccessCollection
 
-  public func index(_ i: Int, offsetBy distance: Int) -> Int {
+  @inlinable public func index(_ i: Int, offsetBy distance: Int) -> Int {
     return i + distance
   }
 
-  public func distance(from start: Int, to end: Int) -> Int {
+  @inlinable public func distance(from start: Int, to end: Int) -> Int {
     return end − start
   }
 }

@@ -438,18 +438,22 @@ class SDGCollectionsAPITests: TestCase {
     let start: [String] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
     let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
     let shimmedDifference = end.shimmedDifference(from: start)
+    testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
     if #available(macOS 10.15, *) {
-      #warning("Restore.")
-      /*let standardDifference = CollectionDifference(shimmedDifference)
+      let standardDifference = CollectionDifference(shimmedDifference)
       var encoded = try JSONEncoder().encode(shimmedDifference)
       let decodedStandard = try JSONDecoder().decode(
-        [CollectionDifference<String>.Change].self,
+        CollectionDifference<String>.self,
         from: encoded
       )
       XCTAssertEqual(decodedStandard, standardDifference)
 
-      encoded = try JSONEncoder().encode(standardDifference)let decodedShimmed = try JSONDecoder().decode([ShimmedCollectionDifference<String>.Change].self, from: encoded)
-      XCTAssertEqual(decodedShimmed, shimmedDifference)*/
+      encoded = try JSONEncoder().encode(standardDifference)
+      let decodedShimmed = try JSONDecoder().decode(
+        ShimmedCollectionDifference<String>.self,
+        from: encoded
+      )
+      XCTAssertEqual(decodedShimmed, shimmedDifference)
     }
   }
 
