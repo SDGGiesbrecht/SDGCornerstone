@@ -120,7 +120,7 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
@@ -133,7 +133,7 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func _groupedDifferences(from other: Self) -> [Change<Index, Index>]
+  func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<Element>
 }
 
 extension SearchableBidirectionalCollection {
@@ -185,29 +185,25 @@ extension SearchableBidirectionalCollection {
 
   #warning("Rethink")
 
-  @inlinable internal func _difference<C>(from other: C) -> [Change<C.Index, Index>]
+  @inlinable internal func _difference<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
 
     let suffixStart = commonSuffix(with: other).range.lowerBound
     let suffixLength = distance(from: suffixStart, to: endIndex)
     let otherSuffixStart = other.index(other.endIndex, offsetBy: −suffixLength)
 
-    var difference: [Change<C.Index, Index>] = prefix(upTo: suffixStart).suffixIgnorantDifference(
-      from: other.prefix(upTo: otherSuffixStart)
-    )
-
-    if suffixLength ≠ 0 {
-      difference.append(.keep((otherSuffixStart...).relative(to: other)))
-    }
-
-    return difference
+    return self[..<suffixStart].suffixIgnorantDifference(from: other[..<otherSuffixStart])
   }
   #warning("Temporarily disabled.")
-  @inlinable public func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  @inlinable public func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<
+    Element
+  >
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
     return _difference(from: other)
   }
-  @inlinable public func _groupedDifferences(from other: Self) -> [Change<Index, Index>] {
+  @inlinable public func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<
+    Element
+  > {
     return _difference(from: other)
   }
 }

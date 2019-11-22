@@ -259,7 +259,7 @@ where SubSequence: SearchableCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
@@ -272,7 +272,7 @@ where SubSequence: SearchableCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func _groupedDifferences(from other: Self) -> [Change<Index, Index>]
+  func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<Element>
 }
 
 extension SearchableCollection {
@@ -531,11 +531,15 @@ extension SearchableCollection {
     return ShimmedCollectionDifference(unsafeChanges: adjusted)
   }
   #warning("Temporarily disabled.")
-  @inlinable public func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  @inlinable public func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<
+    Element
+  >
   where C: SearchableCollection, C.Element == Self.Element {
     return suffixIgnorantDifference(from: other)
   }
-  @inlinable public func _groupedDifferences(from other: Self) -> [Change<Index, Index>] {
+  @inlinable public func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<
+    Element
+  > {
     return suffixIgnorantDifference(from: other)
   }
 
