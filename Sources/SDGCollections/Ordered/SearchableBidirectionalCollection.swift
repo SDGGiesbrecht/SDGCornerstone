@@ -192,7 +192,7 @@ extension SearchableBidirectionalCollection {
     let suffixLength = distance(from: suffixStart, to: endIndex)
     let otherSuffixStart = other.index(other.endIndex, offsetBy: −suffixLength)
 
-    return self[..<suffixStart].suffixIgnorantDifference(from: other[..<otherSuffixStart])
+    return self[..<suffixStart].forwardDifference(from: other[..<otherSuffixStart])
   }
   #warning("Temporarily disabled.")
   @inlinable public func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<

@@ -513,7 +513,7 @@ extension SearchableCollection {
 
   #warning("Rethink")
 
-  @inlinable internal func suffixIgnorantDifference<C>(from other: C)
+  @inlinable internal func forwardDifference<C>(from other: C)
     -> ShimmedCollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element {
     let prefixEnd = commonPrefix(with: other).range.upperBound
@@ -535,12 +535,12 @@ extension SearchableCollection {
     Element
   >
   where C: SearchableCollection, C.Element == Self.Element {
-    return suffixIgnorantDifference(from: other)
+    return forwardDifference(from: other)
   }
   @inlinable public func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<
     Element
   > {
-    return suffixIgnorantDifference(from: other)
+    return forwardDifference(from: other)
   }
 
   // MARK: - Pattern
