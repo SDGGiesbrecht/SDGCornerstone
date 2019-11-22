@@ -24,6 +24,8 @@ extension Collection {
     return startIndex..<endIndex
   }
 
+  // MARK: - Difference Analysis
+
   @inlinable internal func longestCommonSubsequenceTable<C>(
     with other: C,
     by areEquivalent: (Element, Element) -> Bool,
@@ -52,6 +54,80 @@ extension Collection {
       }
     }
     return table
+  }
+
+  @inlinable internal func traceDifference<C>(
+    _ table: [[Int]],
+    other: C,
+    by areEquivalent: (Element, Element) -> Bool,
+    prefixLength: Int,
+    otherPrefixLength: Int,
+    differenceUnderConstruction: inout [ShimmedCollectionDifference<Element>.Change],
+    indexMapping: [Index],
+    otherIndexMapping: [C.Index]
+  ) where C: SearchableCollection, C.Element == Self.Element {
+
+    // The “? :” prevents springing bounds. Such indices will not be queried anyway.
+    let lastIndexDistance = prefixLength == 0 ? 0 : prefixLength − 1
+    let otherLastIndexDistance = otherPrefixLength == 0 ? 0 : otherPrefixLength − 1
+
+    let lastIndex = indexMapping[lastIndexDistance]
+    let otherLastIndex = otherIndexMapping[otherLastIndexDistance]
+    if prefixLength > 0
+      ∧ otherPrefixLength > 0
+      ∧ areEquivalent(self[lastIndex], other[otherLastIndex])
+    {
+      traceDifference(
+        table,
+        other: other,
+        by: areEquivalent,
+        prefixLength: prefixLength − 1,
+        otherPrefixLength: otherPrefixLength − 1,
+        differenceUnderConstruction: &differenceUnderConstruction,
+        indexMapping: indexMapping,
+        otherIndexMapping: otherIndexMapping
+      )
+    } else if otherPrefixLength > 0
+      ∧ (
+        prefixLength == 0
+          ∨ table[prefixLength][(otherPrefixLength − 1) as Int]
+          ≥ table[(prefixLength − 1) as Int][otherPrefixLength]
+      )
+    {
+      traceDifference(
+        table,
+        other: other,
+        by: areEquivalent,
+        prefixLength: prefixLength,
+        otherPrefixLength: otherPrefixLength − 1,
+        differenceUnderConstruction: &differenceUnderConstruction,
+        indexMapping: indexMapping,
+        otherIndexMapping: otherIndexMapping
+      )
+      differenceUnderConstruction.append(
+        .insert(offset: otherLastIndexDistance, element: other[otherLastIndex], associatedWith: nil)
+      )
+    } else if prefixLength > 0
+      ∧ (
+        otherPrefixLength == 0
+          ∨ table[prefixLength][(otherPrefixLength − 1) as Int]
+          < table[(prefixLength − 1) as Int][otherPrefixLength]
+      )
+    {
+      traceDifference(
+        table,
+        other: other,
+        by: areEquivalent,
+        prefixLength: prefixLength − 1,
+        otherPrefixLength: otherPrefixLength,
+        differenceUnderConstruction: &differenceUnderConstruction,
+        indexMapping: indexMapping,
+        otherIndexMapping: otherIndexMapping
+      )
+      differenceUnderConstruction.append(
+        .remove(offset: lastIndexDistance, element: self[lastIndex], associatedWith: nil)
+      )
+    }
   }
 }
 
