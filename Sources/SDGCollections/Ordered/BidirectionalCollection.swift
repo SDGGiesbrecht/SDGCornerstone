@@ -44,13 +44,13 @@ extension BidirectionalCollection {
   @inlinable public func shimmedDifference<C>(
     from other: C,
     by areEquivalent: (Element, Element) -> Bool
-  ) -> ShimmedCollectionDifference<Element>
+  ) -> CollectionDifference<Element>
   where C: BidirectionalCollection, C.Element == Self.Element {
     if #available(macOS 10.15, *) {
       let unshimmed = difference(from: other, by: areEquivalent)
-      return ShimmedCollectionDifference(unshimmed)
+      return CollectionDifference(unshimmed)
     } else {
-      return ShimmedCollectionDifference(unsafeChanges: changes(toMake: other, by: areEquivalent))
+      return CollectionDifference(unsafeChanges: changes(toMake: other, by: areEquivalent))
     }
   }
 }
@@ -60,7 +60,7 @@ extension BidirectionalCollection where Element: Equatable {
   /// A shimmed version of `difference(from:)` with no availability constraints.
   @inlinable public func shimmedDifference<C>(
     from other: C
-  ) -> ShimmedCollectionDifference<Element>
+  ) -> CollectionDifference<Element>
   where C: BidirectionalCollection, C.Element == Self.Element {
     return shimmedDifference(from: other, by: ==)
   }

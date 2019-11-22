@@ -440,17 +440,17 @@ class SDGCollectionsAPITests: TestCase {
     let shimmedDifference = end.computeDifference(from: start)
     testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
     if #available(macOS 10.15, *) {
-      let standardDifference = CollectionDifference(shimmedDifference)
+      let standardDifference = Swift.CollectionDifference(shimmedDifference)
       var encoded = try JSONEncoder().encode(shimmedDifference)
       let decodedStandard = try JSONDecoder().decode(
-        CollectionDifference<String>.self,
+        Swift.CollectionDifference<String>.self,
         from: encoded
       )
       XCTAssertEqual(decodedStandard, standardDifference)
 
       encoded = try JSONEncoder().encode(standardDifference)
       let decodedShimmed = try JSONDecoder().decode(
-        ShimmedCollectionDifference<String>.self,
+        SDGCollections.CollectionDifference<String>.self,
         from: encoded
       )
       XCTAssertEqual(decodedShimmed, shimmedDifference)
@@ -458,25 +458,25 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testCollectionDifferenceChange() throws {
-    let shimmedEntries: [ShimmedCollectionDifference<String>.Change] = [
+    let shimmedEntries: [SDGCollections.CollectionDifference<String>.Change] = [
       .remove(offset: 10, element: "removed element", associatedWith: 20),
       .insert(offset: 30, element: "inserted element", associatedWith: 40)
     ]
     testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
     if #available(macOS 10.15, *) {
       let standardEntries = shimmedEntries.map { shimmed in
-        return CollectionDifference.Change(shimmed)
+        return Swift.CollectionDifference.Change(shimmed)
       }
       var encoded = try JSONEncoder().encode(shimmedEntries)
       let decodedStandard = try JSONDecoder().decode(
-        [CollectionDifference<String>.Change].self,
+        [Swift.CollectionDifference<String>.Change].self,
         from: encoded
       )
       XCTAssertEqual(decodedStandard, standardEntries)
 
       encoded = try JSONEncoder().encode(standardEntries)
       let decodedShimmed = try JSONDecoder().decode(
-        [ShimmedCollectionDifference<String>.Change].self,
+        [SDGCollections.CollectionDifference<String>.Change].self,
         from: encoded
       )
       XCTAssertEqual(decodedShimmed, shimmedEntries)

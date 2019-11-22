@@ -250,14 +250,14 @@ where SubSequence: SearchableCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func computeDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
+  func computeDifference<C>(from other: C) -> CollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.computeDifference(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func computeDifference(from other: Self) -> ShimmedCollectionDifference<Element>
+  func computeDifference(from other: Self) -> CollectionDifference<Element>
 }
 
 extension SearchableCollection {
@@ -497,29 +497,29 @@ extension SearchableCollection {
   }
 
   @inlinable internal func forwardDifference<C>(from other: C)
-    -> ShimmedCollectionDifference<Element>
+    -> CollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element {
     let prefixEnd = commonPrefix(with: other).range.upperBound
     let prefixLength = distance(from: startIndex, to: prefixEnd)
     let otherPrefixEnd = other.index(other.startIndex, offsetBy: prefixLength)
 
     let slice = other[otherPrefixEnd...].changes(toMake: self[prefixEnd...], by: ==)
-    let adjusted: [ShimmedCollectionDifference<Element>.Change] = slice.map { change in
+    let adjusted: [CollectionDifference<Element>.Change] = slice.map { change in
       var change = change
       change.offset += prefixLength
       change.associatedOffset? += prefixLength
       return change
     }
 
-    return ShimmedCollectionDifference(unsafeChanges: adjusted)
+    return CollectionDifference(unsafeChanges: adjusted)
   }
-  @inlinable public func computeDifference<C>(from other: C) -> ShimmedCollectionDifference<
+  @inlinable public func computeDifference<C>(from other: C) -> CollectionDifference<
     Element
   >
   where C: SearchableCollection, C.Element == Self.Element {
     return forwardDifference(from: other)
   }
-  @inlinable public func computeDifference(from other: Self) -> ShimmedCollectionDifference<
+  @inlinable public func computeDifference(from other: Self) -> CollectionDifference<
     Element
   > {
     return forwardDifference(from: other)

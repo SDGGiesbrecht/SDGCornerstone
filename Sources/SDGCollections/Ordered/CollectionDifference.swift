@@ -18,34 +18,34 @@ import SDGMathematics
 #warning("Need to apply.")
 
 @available(macOS 10.15, *)
-extension CollectionDifference {
+extension Swift.CollectionDifference {
 
   // MARK: - Initialization
 
-  /// Unwraps an instance of a shimmed `CollectionDifference`.
+  /// Unwraps an instance of a shimmed `SDGCollections.CollectionDifference`.
   ///
   /// - Parameters:
   ///   - shimmed: The shimmed instance.
-  @inlinable public init(_ shimmed: ShimmedCollectionDifference<ChangeElement>) {
+  @inlinable public init(_ shimmed: SDGCollections.CollectionDifference<ChangeElement>) {
     self.init(shimmed.map({ Change($0) }))!
   }
 }
 
-/// A shimmed version of `CollectionDifference` with no availability constraints.
-public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollection, Collection,
+/// A shimmed version of `Swift.CollectionDifference` with no availability constraints.
+public struct CollectionDifference<ChangeElement>: BidirectionalCollection, Collection,
   RandomAccessCollection
 {
 
   // MARK: - Initialization
 
-  /// Wraps an instance of a standard `CollectionDifference`.
+  /// Wraps an instance of a standard `Swift.CollectionDifference`.
   @available(macOS 10.15, *)
-  @inlinable public init(_ standard: CollectionDifference<ChangeElement>) {
+  @inlinable public init(_ standard: Swift.CollectionDifference<ChangeElement>) {
     removals = standard.removals.map { Change($0) }
     insertions = standard.insertions.map { Change($0) }
   }
 
-  /// A shimmed version of `CollectionDifference.init?(_:)` with no availability constraints.
+  /// A shimmed version of `Swift.CollectionDifference.init?(_:)` with no availability constraints.
   ///
   /// - Parameters:
   ///   - changes: The changes.
@@ -125,10 +125,10 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
 
   // MARK: - Properties
 
-  /// A shimmed version of `CollectionDifference.removals` with no availability constraints.
+  /// A shimmed version of `Swift.CollectionDifference.removals` with no availability constraints.
   public let removals: [Change]
 
-  /// A shimmed version of `CollectionDifference.insertions` with no availability constraints.
+  /// A shimmed version of `Swift.CollectionDifference.insertions` with no availability constraints.
   public let insertions: [Change]
 
   // MARK: - BidirectionalCollection
@@ -148,7 +148,7 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
         return .remove(offset: offset, element: element, associatedWith: associatedOffset)
       }
     }
-    return ShimmedCollectionDifference(unsafeChanges: reversedChanges)
+    return CollectionDifference(unsafeChanges: reversedChanges)
   }
 
   // MARK: - Collection
@@ -183,15 +183,15 @@ public struct ShimmedCollectionDifference<ChangeElement>: BidirectionalCollectio
   }
 }
 
-extension ShimmedCollectionDifference: Decodable where ChangeElement: Decodable {}
-extension ShimmedCollectionDifference: Encodable where ChangeElement: Encodable {}
+extension CollectionDifference: Decodable where ChangeElement: Decodable {}
+extension CollectionDifference: Encodable where ChangeElement: Encodable {}
 
-extension ShimmedCollectionDifference: Equatable where ChangeElement: Equatable {}
+extension CollectionDifference: Equatable where ChangeElement: Equatable {}
 
-extension ShimmedCollectionDifference: Hashable where ChangeElement: Hashable {
+extension CollectionDifference: Hashable where ChangeElement: Hashable {
 
-  /// A shimmed version of `CollectionDifference.inferringMoves()` with no availability constraints.
-  public func inferringMoves() -> ShimmedCollectionDifference<ChangeElement> {
+  /// A shimmed version of `Swift.CollectionDifference.inferringMoves()` with no availability constraints.
+  public func inferringMoves() -> CollectionDifference<ChangeElement> {
     var groupedRemovals = [ChangeElement: [Int]]()
     for removal in removals {
       groupedRemovals[removal.element, default: []].append(removal.offset)
@@ -229,6 +229,6 @@ extension ShimmedCollectionDifference: Hashable where ChangeElement: Hashable {
         )
       }
     }
-    return ShimmedCollectionDifference(unsafeChanges: pairedChanges)
+    return CollectionDifference(unsafeChanges: pairedChanges)
   }
 }

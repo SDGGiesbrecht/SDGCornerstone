@@ -13,15 +13,15 @@
  */
 
 @available(macOS 10.15, *)
-extension CollectionDifference.Change {
+extension Swift.CollectionDifference.Change {
 
   // MARK: - Initialization
 
-  /// Unwraps an instance of a shimmed `Change`.
+  /// Unwraps an instance of a shimmed `SDGCollections.CollectionDifference.Change`.
   ///
   /// - Parameters:
   ///   - shimmed: The shimmed instance.
-  @inlinable public init(_ shimmed: ShimmedCollectionDifference<ChangeElement>.Change) {
+  @inlinable public init(_ shimmed: SDGCollections.CollectionDifference<ChangeElement>.Change) {
     switch shimmed {
     case .remove(let offset, let element, let associatedOffset):
       self = .remove(offset: offset, element: element, associatedWith: associatedOffset)
@@ -31,27 +31,27 @@ extension CollectionDifference.Change {
   }
 }
 
-extension ShimmedCollectionDifference {
+extension CollectionDifference {
 
-  /// A shimmed version of `CollectionDifference.Change` with no availability constraints.
+  /// A shimmed version of `Swift.CollectionDifference.Change` with no availability constraints.
   public enum Change {
 
     // MARK: - Cases
 
-    /// A shimmed version of `CollectionDifference.Change.remove(offset:element:associatedWith:)` with no availability constraints.
+    /// A shimmed version of `Swift.CollectionDifference.Change.remove(offset:element:associatedWith:)` with no availability constraints.
     case remove(offset: Int, element: ChangeElement, associatedWith: Int?)
 
-    /// A shimmed version of `CollectionDifference.Change.insert(offset:element:associatedWith:)` with no availability constraints.
+    /// A shimmed version of `Swift.CollectionDifference.Change.insert(offset:element:associatedWith:)` with no availability constraints.
     case insert(offset: Int, element: ChangeElement, associatedWith: Int?)
 
     // MARK: - Initialization
 
-    /// Wraps an instance of a standard `Change`.
+    /// Wraps an instance of a standard `Swift.CollectionDifference.Change`.
     ///
     /// - Parameters:
     ///   - standard: The shimmed instance.
     @available(macOS 10.15, *)
-    @inlinable public init(_ standard: CollectionDifference<ChangeElement>.Change) {
+    @inlinable public init(_ standard: Swift.CollectionDifference<ChangeElement>.Change) {
       switch standard {
       case .remove(let offset, let element, let associatedOffset):
         self = .remove(offset: offset, element: element, associatedWith: associatedOffset)
@@ -130,7 +130,7 @@ fileprivate enum CodingKeys: CodingKey {
   case associatedOffset
 }
 
-extension ShimmedCollectionDifference.Change: Decodable where ChangeElement: Decodable {
+extension CollectionDifference.Change: Decodable where ChangeElement: Decodable {
 
   // MARK: - Decodable
 
@@ -147,7 +147,7 @@ extension ShimmedCollectionDifference.Change: Decodable where ChangeElement: Dec
   }
 }
 
-extension ShimmedCollectionDifference.Change: Encodable where ChangeElement: Encodable {
+extension CollectionDifference.Change: Encodable where ChangeElement: Encodable {
 
   // MARK: - Encodable
 
@@ -169,5 +169,5 @@ extension ShimmedCollectionDifference.Change: Encodable where ChangeElement: Enc
   }
 }
 
-extension ShimmedCollectionDifference.Change: Equatable where ChangeElement: Equatable {}
-extension ShimmedCollectionDifference.Change: Hashable where ChangeElement: Hashable {}
+extension CollectionDifference.Change: Equatable where ChangeElement: Equatable {}
+extension CollectionDifference.Change: Hashable where ChangeElement: Hashable {}

@@ -111,14 +111,14 @@ where SubSequence: SearchableBidirectionalCollection {
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func computeDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
+  func computeDifference<C>(from other: C) -> CollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.computeDifference(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func computeDifference(from other: Self) -> ShimmedCollectionDifference<Element>
+  func computeDifference(from other: Self) -> CollectionDifference<Element>
 }
 
 extension SearchableBidirectionalCollection {
@@ -170,13 +170,13 @@ extension SearchableBidirectionalCollection {
 
   @inlinable public func computeDifference<C>(
     from other: C
-  ) -> ShimmedCollectionDifference<Element>
+  ) -> CollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
     return shimmedDifference(from: other)
   }
   @inlinable public func computeDifference(
     from other: Self
-  ) -> ShimmedCollectionDifference<Element> {
+  ) -> CollectionDifference<Element> {
     return shimmedDifference(from: other)
   }
 }

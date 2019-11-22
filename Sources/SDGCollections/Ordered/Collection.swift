@@ -62,7 +62,7 @@ extension Collection {
     by areEquivalent: (Element, Element) -> Bool,
     prefixLength: Int,
     otherPrefixLength: Int,
-    differenceUnderConstruction: inout [ShimmedCollectionDifference<Element>.Change],
+    differenceUnderConstruction: inout [CollectionDifference<Element>.Change],
     indexMapping: [Index],
     otherIndexMapping: [C.Index]
   ) where C: Collection, C.Element == Self.Element {
@@ -133,7 +133,7 @@ extension Collection {
   @inlinable internal func changes<C>(
     toMake other: C,
     by areEquivalent: (Element, Element) -> Bool
-  ) -> [ShimmedCollectionDifference<Element>.Change]
+  ) -> [CollectionDifference<Element>.Change]
   where C: Collection, C.Element == Self.Element {
     let indexMapping = [Index](indices)
     let otherIndexMapping = [C.Index](other.indices)
@@ -143,7 +143,7 @@ extension Collection {
       indexMapping: indexMapping,
       otherIndexMapping: otherIndexMapping
     )
-    var differenceUnderConstruction: [ShimmedCollectionDifference<Element>.Change] = []
+    var differenceUnderConstruction: [CollectionDifference<Element>.Change] = []
     traceDifference(
       table,
       other: other,
