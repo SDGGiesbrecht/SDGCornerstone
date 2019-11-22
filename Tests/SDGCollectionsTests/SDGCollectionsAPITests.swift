@@ -394,18 +394,14 @@ class SDGCollectionsAPITests: TestCase {
     let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
     let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
     let diff = end.difference(from: start)
-    var changed: [Unicode.Scalar] = []
+    var changed: [Unicode.Scalar] = start
     for change in diff {
-      #warning("Need reimplementing.")
-      print(change)
-      /*switch change {
-      case .keep(let range):
-        changed.append(contentsOf: start[range])
-      case .remove:
-        break
-      case .insert(let range):
-        changed.append(contentsOf: end[range])
-      }*/
+      switch change {
+      case .remove(let offset, _, _):
+        changed.remove(at: changed.index(changed.startIndex, offsetBy: offset))
+      case .insert(let offset, let element, _):
+        changed.insert(element, at: changed.index(changed.startIndex, offsetBy: offset))
+      }
     }
     XCTAssertEqual(changed, end)
 
