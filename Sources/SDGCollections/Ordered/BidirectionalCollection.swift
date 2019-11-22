@@ -50,8 +50,7 @@ extension BidirectionalCollection {
       let unshimmed = difference(from: other, by: areEquivalent)
       return ShimmedCollectionDifference(unshimmed)
     } else {
-      #warning("Not implemented yet.")
-      fatalError()
+      return ShimmedCollectionDifference(unsafeChanges: changes(toMake: other, by: areEquivalent))
     }
   }
 }

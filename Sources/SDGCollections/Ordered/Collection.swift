@@ -135,8 +135,8 @@ extension Collection {
     by areEquivalent: (Element, Element) -> Bool
   ) -> [ShimmedCollectionDifference<Element>.Change]
   where C: Collection, C.Element == Self.Element {
-    var indexMapping = [Index](indices)
-    var otherIndexMapping = [C.Index](other.indices)
+    let indexMapping = [Index](indices)
+    let otherIndexMapping = [C.Index](other.indices)
     let table = longestCommonSubsequenceTable(
       with: other,
       by: areEquivalent,
