@@ -106,19 +106,19 @@ where SubSequence: SearchableBidirectionalCollection {
   ///     - other: The other collection
   func commonSuffix(with other: Self) -> PatternMatch<Self>
 
-  // #documentation(SDGCornerstone.Collection.shimmedDifference(from:))
+  // #documentation(SDGCornerstone.Collection.computeDifference(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
+  func computeDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
-  // #documentation(SDGCornerstone.Collection.shimmedDifference(from:))
+  // #documentation(SDGCornerstone.Collection.computeDifference(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func shimmedDifference(from other: Self) -> ShimmedCollectionDifference<Element>
+  func computeDifference(from other: Self) -> ShimmedCollectionDifference<Element>
 }
 
 extension SearchableBidirectionalCollection {
@@ -168,21 +168,15 @@ extension SearchableBidirectionalCollection {
     return _commonSuffix(with: other)
   }
 
-  @inlinable internal func bidirectionalDifference<C>(from other: C) -> ShimmedCollectionDifference<
-    Element
-  >
+  @inlinable public func computeDifference<C>(
+    from other: C
+  ) -> ShimmedCollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
-    return shimmedDifference(from: other, by: ==)
+    return shimmedDifference(from: other)
   }
-  @inlinable public func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<
-    Element
-  >
-  where C: SearchableBidirectionalCollection, C.Element == Self.Element {
-    return bidirectionalDifference(from: other)
-  }
-  @inlinable public func shimmedDifference(from other: Self) -> ShimmedCollectionDifference<
-    Element
-  > {
-    return bidirectionalDifference(from: other)
+  @inlinable public func computeDifference(
+    from other: Self
+  ) -> ShimmedCollectionDifference<Element> {
+    return shimmedDifference(from: other)
   }
 }

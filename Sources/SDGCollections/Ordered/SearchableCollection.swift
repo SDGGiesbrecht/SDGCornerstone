@@ -245,19 +245,19 @@ where SubSequence: SearchableCollection {
   /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
   @discardableResult func advance(_ index: inout Index, over pattern: Self) -> Bool
 
-  // @documentation(SDGCornerstone.Collection.shimmedDifference(from:))
+  // @documentation(SDGCornerstone.Collection.computeDifference(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
+  func computeDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element
-  // #documentation(SDGCornerstone.Collection.shimmedDifference(from:))
+  // #documentation(SDGCornerstone.Collection.computeDifference(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func shimmedDifference(from other: Self) -> ShimmedCollectionDifference<Element>
+  func computeDifference(from other: Self) -> ShimmedCollectionDifference<Element>
 }
 
 extension SearchableCollection {
@@ -513,13 +513,13 @@ extension SearchableCollection {
 
     return ShimmedCollectionDifference(unsafeChanges: adjusted)
   }
-  @inlinable public func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<
+  @inlinable public func computeDifference<C>(from other: C) -> ShimmedCollectionDifference<
     Element
   >
   where C: SearchableCollection, C.Element == Self.Element {
     return forwardDifference(from: other)
   }
-  @inlinable public func shimmedDifference(from other: Self) -> ShimmedCollectionDifference<
+  @inlinable public func computeDifference(from other: Self) -> ShimmedCollectionDifference<
     Element
   > {
     return forwardDifference(from: other)
