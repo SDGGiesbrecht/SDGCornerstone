@@ -95,18 +95,19 @@ public func compare(
 
     let stringLines = string.lines.map({ String($0.line) })
     let specificationLines = specificationString.lines.map({ String($0.line) })
-    let differences = stringLines.groupedDifferences(from: specificationLines)
+    let differences = stringLines.difference(from: specificationLines)
 
     var report = ""
     for difference in differences {
-      switch difference {
+      #warning("Needs replacing.")
+      /*switch difference {
       case .keep:
         print("  [...]", to: &report)
       case .remove(let range):
         print(specificationLines[range].map({ "− " + $0 }).joined(separator: "\n"), to: &report)
       case .insert(let range):
         print(stringLines[range].map({ "+ " + $0 }).joined(separator: "\n"), to: &report)
-      }
+      }*/
     }
 
     fail(

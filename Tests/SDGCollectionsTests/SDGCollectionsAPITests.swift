@@ -393,40 +393,43 @@ class SDGCollectionsAPITests: TestCase {
 
     let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
     let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
-    let diff = end.groupedDifferences(from: start)
+    let diff = end.difference(from: start)
     var changed: [Unicode.Scalar] = []
     for change in diff {
-      switch change {
+      #warning("Need reimplementing.")
+      print(change)
+      /*switch change {
       case .keep(let range):
         changed.append(contentsOf: start[range])
       case .remove:
         break
       case .insert(let range):
         changed.append(contentsOf: end[range])
-      }
+      }*/
     }
     XCTAssertEqual(changed, end)
 
     let startString = "..GAC‐‐!!.."
     let endString = "..AGCAT‐‐??.."
-    let diffString = endString.groupedDifferences(from: startString)
+    let diffString = endString.difference(from: startString)
     var changedString = ""
     for change in diffString {
-      switch change {
+      #warning("Needs reimplementing.")
+      /*switch change {
       case .keep(let range):
         changedString.append(contentsOf: startString[range])
       case .remove:
         break
       case .insert(let range):
         changedString.append(contentsOf: endString[range])
-      }
+      }*/
     }
     XCTAssertEqual(changedString, endString)
 
     let set = AnyCollection(Set(endString))
-    _ = set.groupedDifferences(from: startString)
-    _ = endString.scalars.groupedDifferences(from: start)
-    _ = AnyCollection(Set(startString)).groupedDifferences(from: AnyCollection(Set(startString)))
+    _ = set._groupedDifferences(from: startString)
+    _ = endString.scalars.shimmedDifference(from: start)
+    _ = AnyCollection(Set(startString))._groupedDifferences(from: AnyCollection(Set(startString)))
 
     XCTAssertNil("...".scalars.firstMatch(for: ¬ConditionalPattern({ $0 == "." })))
     XCTAssertNil("...".scalars[...].lastMatch(for: ConditionalPattern({ $0 ≠ "." })))
