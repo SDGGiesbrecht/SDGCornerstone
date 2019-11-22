@@ -245,34 +245,19 @@ where SubSequence: SearchableCollection {
   /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
   @discardableResult func advance(_ index: inout Index, over pattern: Self) -> Bool
 
-  #warning("Rethink")
-
-  #warning("Temporarily disabled.")
-  // @documentation(SDGCornerstone.Collection.groupedDifferences(from:))
-  /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
-  ///
-  /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
-  ///
-  /// - It is only intended for analyzing changes; it is not designed for re‐applying them.
-  /// - It reports changes as contiguous ranges of indices instead of individual offsets.
-  /// - It has no platform restrictions.
+  // @documentation(SDGCornerstone.Collection.shimmedDifference(from:))
+  /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<Element>
+  func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element
-  // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
-  /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
-  ///
-  /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
-  ///
-  /// - It is only intended for analyzing changes; it is not designed for re‐applying them.
-  /// - It reports changes as contiguous ranges of indices instead of individual offsets.
-  /// - It has no platform restrictions.
+  // #documentation(SDGCornerstone.Collection.shimmedDifference(from:))
+  /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<Element>
+  func shimmedDifference(from other: Self) -> ShimmedCollectionDifference<Element>
 }
 
 extension SearchableCollection {
@@ -511,8 +496,6 @@ extension SearchableCollection {
     return _advance(&index, over: pattern)
   }
 
-  #warning("Rethink")
-
   @inlinable internal func forwardDifference<C>(from other: C)
     -> ShimmedCollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element {
@@ -530,14 +513,13 @@ extension SearchableCollection {
 
     return ShimmedCollectionDifference(unsafeChanges: adjusted)
   }
-  #warning("Temporarily disabled.")
-  @inlinable public func _groupedDifferences<C>(from other: C) -> ShimmedCollectionDifference<
+  @inlinable public func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<
     Element
   >
   where C: SearchableCollection, C.Element == Self.Element {
     return forwardDifference(from: other)
   }
-  @inlinable public func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<
+  @inlinable public func shimmedDifference(from other: Self) -> ShimmedCollectionDifference<
     Element
   > {
     return forwardDifference(from: other)

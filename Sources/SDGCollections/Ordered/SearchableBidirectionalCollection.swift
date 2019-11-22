@@ -107,26 +107,14 @@ where SubSequence: SearchableBidirectionalCollection {
   func commonSuffix(with other: Self) -> PatternMatch<Self>
 
   // #documentation(SDGCornerstone.Collection.shimmedDifference(from:))
-  /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
-  ///
-  /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
-  ///
-  /// - It is only intended for analyzing changes; it is not designed for re‐applying them.
-  /// - It reports changes as contiguous ranges of indices instead of individual offsets.
-  /// - It has no platform restrictions.
+  /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
   func shimmedDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
   // #documentation(SDGCornerstone.Collection.shimmedDifference(from:))
-  /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
-  ///
-  /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
-  ///
-  /// - It is only intended for analyzing changes; it is not designed for re‐applying them.
-  /// - It reports changes as contiguous ranges of indices instead of individual offsets.
-  /// - It has no platform restrictions.
+  /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
