@@ -185,4 +185,48 @@ extension ShimmedCollectionDifference: Decodable where ChangeElement: Decodable 
 extension ShimmedCollectionDifference: Encodable where ChangeElement: Encodable {}
 
 extension ShimmedCollectionDifference: Equatable where ChangeElement: Equatable {}
-extension ShimmedCollectionDifference: Hashable where ChangeElement: Hashable {}
+
+extension ShimmedCollectionDifference: Hashable where ChangeElement: Hashable {
+
+  /// A shimmed version of `CollectionDifference.inferringMoves()` with no availability constraints.
+  public func inferringMoves() -> ShimmedCollectionDifference<ChangeElement> {
+    var groupedRemovals = [ChangeElement: [Int]]()
+    for removal in removals {
+      groupedRemovals[removal.element, default: []].append(removal.offset)
+    }
+    var groupedInsertions = [ChangeElement: [Int]]()
+    for insertion in insertions {
+      groupedInsertions[insertion.element, default: []].append(insertion.offset)
+    }
+
+    var pairedChanges: [Change] = []
+    pairedChanges.reserveCapacity(count)
+    for (element, removalOffsets) in groupedRemovals {
+      for removalOffset in removalOffsets.reversed() {
+        if let insertionOffset = groupedInsertions[element]?.last {
+          // Found a pair.
+          pairedChanges.append(
+            .remove(offset: removalOffset, element: element, associatedWith: insertionOffset)
+          )
+          // Handle the insert too and remove it from the list.
+          pairedChanges.append(
+            .insert(offset: insertionOffset, element: element, associatedWith: removalOffset)
+          )
+          groupedInsertions[element]?.removeLast()
+        } else {
+          pairedChanges.append(
+            .remove(offset: removalOffset, element: element, associatedWith: nil)
+          )
+        }
+      }
+    }
+    for (element, insertionOffsets) in groupedInsertions {
+      for insertionOffset in insertionOffsets {
+        pairedChanges.append(
+          .insert(offset: insertionOffset, element: element, associatedWith: nil)
+        )
+      }
+    }
+    return ShimmedCollectionDifference(unsafeChanges: pairedChanges)
+  }
+}
