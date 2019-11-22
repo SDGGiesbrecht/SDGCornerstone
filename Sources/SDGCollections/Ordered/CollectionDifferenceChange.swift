@@ -55,16 +55,22 @@ fileprivate enum CodingKeys: CodingKey {
   case associatedOffset
 }
 
-#warning("Complete")
-/*
 extension ShimmedCollectionDifference.Change: Decodable where ChangeElement: Decodable {
 
   // MARK: - Decodable
 
   public init(from decoder: Decoder) throws {
-
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let offset = try container.decode(Int.self, forKey: .offset)
+    let element = try container.decode(ChangeElement.self, forKey: .element)
+    let associatedOffset = try container.decode(Int?.self, forKey: .associatedOffset)
+    if try container.decode(Bool.self, forKey: .isRemove) {
+      self = .remove(offset: offset, element: element, associatedWith: associatedOffset)
+    } else {
+      self = .insert(offset: offset, element: element, associatedWith: associatedOffset)
+    }
   }
-}*/
+}
 
 extension ShimmedCollectionDifference.Change: Encodable where ChangeElement: Encodable {
 
@@ -87,7 +93,6 @@ extension ShimmedCollectionDifference.Change: Encodable where ChangeElement: Enc
     }
   }
 }
-#warning("Complete")
-/*
+
 extension ShimmedCollectionDifference.Change: Equatable where ChangeElement: Equatable {}
-extension ShimmedCollectionDifference.Change: Hashable where ChangeElement: Hashable {}*/
+extension ShimmedCollectionDifference.Change: Hashable where ChangeElement: Hashable {}

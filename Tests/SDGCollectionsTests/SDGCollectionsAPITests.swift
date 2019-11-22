@@ -450,6 +450,10 @@ class SDGCollectionsAPITests: TestCase {
         from: encoded
       )
       XCTAssertEqual(decodedStandard, standardEntries)
+
+      encoded = try JSONEncoder().encode(standardEntries)
+      let decodedShimmed = try JSONDecoder().decode([ShimmedCollectionDifference<String>.Change].self, from: encoded)
+      XCTAssertEqual(decodedShimmed, shimmedEntries)
     }
   }
 
