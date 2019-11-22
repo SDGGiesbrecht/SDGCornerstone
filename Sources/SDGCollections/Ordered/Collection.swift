@@ -31,7 +31,7 @@ extension Collection {
     by areEquivalent: (Element, Element) -> Bool,
     indexMapping: [Index],
     otherIndexMapping: [C.Index]
-  ) -> [[Int]] where C: SearchableCollection, C.Element == Self.Element {
+  ) -> [[Int]] where C: Collection, C.Element == Self.Element {
     let row = [Int](repeating: 0, count: otherIndexMapping.count + 1)
     var table = [[Int]](repeating: row, count: indexMapping.count + 1)
     if ¬isEmpty ∧ ¬other.isEmpty {
@@ -65,7 +65,7 @@ extension Collection {
     differenceUnderConstruction: inout [ShimmedCollectionDifference<Element>.Change],
     indexMapping: [Index],
     otherIndexMapping: [C.Index]
-  ) where C: SearchableCollection, C.Element == Self.Element {
+  ) where C: Collection, C.Element == Self.Element {
 
     // The “? :” prevents springing bounds. Such indices will not be queried anyway.
     let lastIndexDistance = prefixLength == 0 ? 0 : prefixLength − 1
@@ -128,6 +128,33 @@ extension Collection {
         .remove(offset: lastIndexDistance, element: self[lastIndex], associatedWith: nil)
       )
     }
+  }
+
+  @inlinable internal func changes<C>(
+    toMake other: C,
+    by areEquivalent: (Element, Element) -> Bool
+  ) -> ShimmedCollectionDifference<Element>
+  where C: Collection, C.Element == Self.Element {
+    var indexMapping = [Index](indices)
+    var otherIndexMapping = [C.Index](other.indices)
+    let table = longestCommonSubsequenceTable(
+      with: other,
+      by: areEquivalent,
+      indexMapping: indexMapping,
+      otherIndexMapping: otherIndexMapping
+    )
+    var differenceUnderConstruction: [ShimmedCollectionDifference<Element>.Change] = []
+    traceDifference(
+      table,
+      other: other,
+      by: areEquivalent,
+      prefixLength: table.count − 1,
+      otherPrefixLength: table.first!.count − 1,
+      differenceUnderConstruction: &differenceUnderConstruction,
+      indexMapping: indexMapping,
+      otherIndexMapping: otherIndexMapping
+    )
+    return ShimmedCollectionDifference(unsafeChanges: differenceUnderConstruction)
   }
 }
 
