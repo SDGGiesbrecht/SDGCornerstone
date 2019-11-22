@@ -408,17 +408,14 @@ class SDGCollectionsAPITests: TestCase {
     let startString = "..GAC‐‐!!.."
     let endString = "..AGCAT‐‐??.."
     let diffString = endString.difference(from: startString)
-    var changedString = ""
+    var changedString = startString
     for change in diffString {
-      #warning("Needs reimplementing.")
-      /*switch change {
-      case .keep(let range):
-        changedString.append(contentsOf: startString[range])
-      case .remove:
-        break
-      case .insert(let range):
-        changedString.append(contentsOf: endString[range])
-      }*/
+      switch change {
+      case .remove(let offset, _, _):
+        changedString.remove(at: changedString.index(changedString.startIndex, offsetBy: offset))
+      case .insert(let offset, let element, _):
+        changedString.insert(element, at: changedString.index(changedString.startIndex, offsetBy: offset))
+      }
     }
     XCTAssertEqual(changedString, endString)
 
