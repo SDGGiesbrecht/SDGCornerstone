@@ -63,6 +63,6 @@ extension BidirectionalCollection where Element: Equatable {
     from other: C
   ) -> ShimmedCollectionDifference<Element>
   where C: BidirectionalCollection, C.Element == Self.Element {
-    return shimmedDifference(from: other, by: { $0 == $1 })
+    return shimmedDifference(from: other, by: ==)
   }
 }
