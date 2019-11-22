@@ -98,7 +98,7 @@ public func compare(
     // These need to be random access collections.
     let stringLines: [String] = string.lines.map({ String($0.line) })
     let specificationLines: [String] = specificationString.lines.map({ String($0.line) })
-    let differences = stringLines.computeDifference(from: specificationLines)
+    let differences = stringLines.changes(from: specificationLines)
 
     var removals: Set<Int> = []
     var inserts: [Int: String] = [:]

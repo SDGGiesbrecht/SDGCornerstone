@@ -106,19 +106,19 @@ where SubSequence: SearchableBidirectionalCollection {
   ///     - other: The other collection
   func commonSuffix(with other: Self) -> PatternMatch<Self>
 
-  // #documentation(SDGCornerstone.Collection.computeDifference(from:))
+  // #documentation(SDGCornerstone.Collection.changes(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func computeDifference<C>(from other: C) -> CollectionDifference<Element>
+  func changes<C>(from other: C) -> CollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
-  // #documentation(SDGCornerstone.Collection.computeDifference(from:))
+  // #documentation(SDGCornerstone.Collection.changes(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func computeDifference(from other: Self) -> CollectionDifference<Element>
+  func changes(from other: Self) -> CollectionDifference<Element>
 }
 
 extension SearchableBidirectionalCollection {
@@ -168,13 +168,13 @@ extension SearchableBidirectionalCollection {
     return _commonSuffix(with: other)
   }
 
-  @inlinable public func computeDifference<C>(
+  @inlinable public func changes<C>(
     from other: C
   ) -> CollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
     return shimmedDifference(from: other)
   }
-  @inlinable public func computeDifference(
+  @inlinable public func changes(
     from other: Self
   ) -> CollectionDifference<Element> {
     return shimmedDifference(from: other)

@@ -245,19 +245,19 @@ where SubSequence: SearchableCollection {
   /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
   @discardableResult func advance(_ index: inout Index, over pattern: Self) -> Bool
 
-  // @documentation(SDGCornerstone.Collection.computeDifference(from:))
+  // @documentation(SDGCornerstone.Collection.changes(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func computeDifference<C>(from other: C) -> CollectionDifference<Element>
+  func changes<C>(from other: C) -> CollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element
-  // #documentation(SDGCornerstone.Collection.computeDifference(from:))
+  // #documentation(SDGCornerstone.Collection.changes(from:))
   /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func computeDifference(from other: Self) -> CollectionDifference<Element>
+  func changes(from other: Self) -> CollectionDifference<Element>
 }
 
 extension SearchableCollection {
@@ -513,13 +513,13 @@ extension SearchableCollection {
 
     return CollectionDifference(unsafeChanges: adjusted)
   }
-  @inlinable public func computeDifference<C>(from other: C) -> CollectionDifference<
+  @inlinable public func changes<C>(from other: C) -> CollectionDifference<
     Element
   >
   where C: SearchableCollection, C.Element == Self.Element {
     return forwardDifference(from: other)
   }
-  @inlinable public func computeDifference(from other: Self) -> CollectionDifference<
+  @inlinable public func changes(from other: Self) -> CollectionDifference<
     Element
   > {
     return forwardDifference(from: other)

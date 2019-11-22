@@ -394,7 +394,7 @@ class SDGCollectionsAPITests: TestCase {
 
     let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
     let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
-    let diff = end.computeDifference(from: start)
+    let diff = end.changes(from: start)
     var changed: [Unicode.Scalar] = start
     for change in diff {
       switch change {
@@ -408,7 +408,7 @@ class SDGCollectionsAPITests: TestCase {
 
     let startString = "..GAC‐‐!!.."
     let endString = "..AGCAT‐‐??.."
-    let diffString = endString.computeDifference(from: startString)
+    let diffString = endString.changes(from: startString)
     var changedString = startString
     for change in diffString {
       switch change {
@@ -424,9 +424,9 @@ class SDGCollectionsAPITests: TestCase {
     XCTAssertEqual(changedString, endString)
 
     let set = AnyCollection(Set(endString))
-    _ = set.computeDifference(from: startString)
-    _ = endString.scalars.computeDifference(from: start)
-    _ = AnyCollection(Set(startString)).computeDifference(from: AnyCollection(Set(startString)))
+    _ = set.changes(from: startString)
+    _ = endString.scalars.changes(from: start)
+    _ = AnyCollection(Set(startString)).changes(from: AnyCollection(Set(startString)))
 
     XCTAssertNil("...".scalars.firstMatch(for: ¬ConditionalPattern({ $0 == "." })))
     XCTAssertNil("...".scalars[...].lastMatch(for: ConditionalPattern({ $0 ≠ "." })))
@@ -437,7 +437,7 @@ class SDGCollectionsAPITests: TestCase {
   func testCollectionDifference() throws {
     let start: [String] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
     let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
-    let shimmedDifference = end.computeDifference(from: start)
+    let shimmedDifference = end.changes(from: start)
     testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
     if #available(macOS 10.15, *) {
       let standardDifference = Swift.CollectionDifference(shimmedDifference)
