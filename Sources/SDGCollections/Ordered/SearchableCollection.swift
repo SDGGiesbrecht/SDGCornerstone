@@ -513,22 +513,22 @@ extension SearchableCollection {
 
   #warning("Rethink")
 
-  @inlinable internal func suffixIgnorantDifference<C>(from other: C) -> [Change<C.Index, Index>]
+  @inlinable internal func suffixIgnorantDifference<C>(from other: C)
+    -> ShimmedCollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element {
     let prefixEnd = commonPrefix(with: other).range.upperBound
     let prefixLength = distance(from: startIndex, to: prefixEnd)
     let otherPrefixEnd = other.index(other.startIndex, offsetBy: prefixLength)
 
-    var difference: [Change<C.Index, Index>] = []
-    if prefixLength ≠ 0 {
-      difference.append(.keep(other.startIndex..<otherPrefixEnd))
+    let slice = other[otherPrefixEnd...].changes(toMake: self[prefixEnd...], by: ==)
+    let adjusted: [ShimmedCollectionDifference<Element>.Change] = slice.map { change in
+      var change = change
+      change.offset += prefixLength
+      change.associatedOffset? += prefixLength
+      return change
     }
 
-    difference.append(
-      contentsOf: other.suffix(from: otherPrefixEnd).changes(toMake: self.suffix(from: prefixEnd))
-    )
-
-    return difference
+    return ShimmedCollectionDifference(unsafeChanges: adjusted)
   }
   #warning("Temporarily disabled.")
   @inlinable public func _groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]

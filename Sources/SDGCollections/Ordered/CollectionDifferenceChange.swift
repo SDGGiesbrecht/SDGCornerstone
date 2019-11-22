@@ -64,28 +64,58 @@ extension ShimmedCollectionDifference {
 
     /// The offset.
     @inlinable public var offset: Int {
-      switch self {
-      case .remove(let offset, _, _),
-        .insert(let offset, _, _):
-        return offset
+      get {
+        switch self {
+        case .remove(let offset, _, _),
+          .insert(let offset, _, _):
+          return offset
+        }
+      }
+      set {
+        switch self {
+        case .remove:
+          self = .remove(offset: newValue, element: element, associatedWith: associatedOffset)
+        case .insert:
+          self = .insert(offset: newValue, element: element, associatedWith: associatedOffset)
+        }
       }
     }
 
     /// The element.
     @inlinable public var element: ChangeElement {
-      switch self {
-      case .remove(_, let element, _),
-        .insert(_, let element, _):
-        return element
+      get {
+        switch self {
+        case .remove(_, let element, _),
+          .insert(_, let element, _):
+          return element
+        }
+      }
+      set {
+        switch self {
+        case .remove:
+          self = .remove(offset: offset, element: newValue, associatedWith: associatedOffset)
+        case .insert:
+          self = .insert(offset: offset, element: newValue, associatedWith: associatedOffset)
+        }
       }
     }
 
     /// The associated offset.
     @inlinable public var associatedOffset: Int? {
-      switch self {
-      case .remove(_, _, let associatedOffset),
-        .insert(_, _, let associatedOffset):
-        return associatedOffset
+      get {
+        switch self {
+        case .remove(_, _, let associatedOffset),
+          .insert(_, _, let associatedOffset):
+          return associatedOffset
+        }
+      }
+      set {
+        switch self {
+        case .remove:
+          self = .remove(offset: offset, element: element, associatedWith: newValue)
+        case .insert:
+          self = .insert(offset: offset, element: element, associatedWith: newValue)
+        }
       }
     }
   }

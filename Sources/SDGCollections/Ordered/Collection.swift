@@ -133,7 +133,7 @@ extension Collection {
   @inlinable internal func changes<C>(
     toMake other: C,
     by areEquivalent: (Element, Element) -> Bool
-  ) -> ShimmedCollectionDifference<Element>
+  ) -> [ShimmedCollectionDifference<Element>.Change]
   where C: Collection, C.Element == Self.Element {
     var indexMapping = [Index](indices)
     var otherIndexMapping = [C.Index](other.indices)
@@ -154,7 +154,7 @@ extension Collection {
       indexMapping: indexMapping,
       otherIndexMapping: otherIndexMapping
     )
-    return ShimmedCollectionDifference(unsafeChanges: differenceUnderConstruction)
+    return differenceUnderConstruction
   }
 }
 
