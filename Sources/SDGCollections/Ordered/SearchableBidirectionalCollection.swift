@@ -106,6 +106,8 @@ where SubSequence: SearchableBidirectionalCollection {
   ///     - other: The other collection
   func commonSuffix(with other: Self) -> PatternMatch<Self>
 
+  #warning("Rethink")
+
   // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
   ///
@@ -179,6 +181,8 @@ extension SearchableBidirectionalCollection {
   @inlinable public func commonSuffix(with other: Self) -> PatternMatch<Self> {
     return _commonSuffix(with: other)
   }
+
+  #warning("Rethink")
 
   @inlinable internal func _difference<C>(from other: C) -> [Change<C.Index, Index>]
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {

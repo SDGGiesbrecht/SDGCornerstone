@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#warning("Rethink")
+
 @usableFromInline internal enum IndividualChange<Index, OtherIndex> {
   case keep(Index)
   case remove(Index)

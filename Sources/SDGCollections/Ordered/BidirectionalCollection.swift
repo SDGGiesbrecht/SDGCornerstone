@@ -37,4 +37,32 @@ extension BidirectionalCollection {
     let resolved = range.relative(to: reversed())
     return resolved.upperBound.base..<resolved.lowerBound.base
   }
+
+  // MARK: - Differences
+
+  /// A shimmed version of `difference(from:by:)` with no availability constraints.
+  @inlinable public func shimmedDifference<C>(
+    from other: C,
+    by areEquivalent: (Element, Element) -> Bool
+  ) -> ShimmedCollectionDifference<Element>
+  where C: BidirectionalCollection, C.Element == Self.Element {
+    if #available(macOS 10.15, *) {
+      let unshimmed = difference(from: other, by: areEquivalent)
+      return ShimmedCollectionDifference(unshimmed)
+    } else {
+      #warning("Not implemented yet.")
+      fatalError()
+    }
+  }
+}
+
+extension BidirectionalCollection where Element: Equatable {
+
+  /// A shimmed version of `difference(from:)` with no availability constraints.
+  @inlinable public func shimmedDifference<C>(
+    from other: C
+  ) -> ShimmedCollectionDifference<Element>
+  where C: BidirectionalCollection, C.Element == Self.Element {
+    return shimmedDifference(from: other, by: { $0 == $1 })
+  }
 }

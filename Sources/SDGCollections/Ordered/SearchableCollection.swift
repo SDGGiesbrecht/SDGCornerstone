@@ -245,6 +245,8 @@ where SubSequence: SearchableCollection {
   /// - Returns: `true` if the index was advanced over a match, `false` if there was no match.
   @discardableResult func advance(_ index: inout Index, over pattern: Self) -> Bool
 
+  #warning("Rethink")
+
   // @documentation(SDGCornerstone.Collection.groupedDifferences(from:))
   /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
   ///
@@ -507,6 +509,8 @@ extension SearchableCollection {
   {
     return _advance(&index, over: pattern)
   }
+
+  #warning("Rethink")
 
   @inlinable internal func longestCommonSubsequenceTable<C>(
     with other: C,
