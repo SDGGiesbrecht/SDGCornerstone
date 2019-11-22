@@ -185,7 +185,7 @@ extension SearchableBidirectionalCollection {
 
   #warning("Rethink")
 
-  @inlinable internal func _difference<C>(from other: C) -> ShimmedCollectionDifference<Element>
+  @inlinable internal func bidirectionalDifference<C>(from other: C) -> ShimmedCollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
 
     let suffixStart = commonSuffix(with: other).range.lowerBound
@@ -199,11 +199,11 @@ extension SearchableBidirectionalCollection {
     Element
   >
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
-    return _difference(from: other)
+    return bidirectionalDifference(from: other)
   }
   @inlinable public func _groupedDifferences(from other: Self) -> ShimmedCollectionDifference<
     Element
   > {
-    return _difference(from: other)
+    return bidirectionalDifference(from: other)
   }
 }
