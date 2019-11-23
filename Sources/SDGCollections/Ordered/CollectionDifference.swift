@@ -37,6 +37,9 @@ public struct CollectionDifference<ChangeElement>: BidirectionalCollection, Coll
   // MARK: - Initialization
 
   /// Wraps an instance of a standard `Swift.CollectionDifference`.
+  ///
+  /// - Parameters:
+  ///   - standard: The standard instance.
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   @inlinable public init(_ standard: Swift.CollectionDifference<ChangeElement>) {
     removals = standard.removals.map { Change($0) }
@@ -137,6 +140,7 @@ public struct CollectionDifference<ChangeElement>: BidirectionalCollection, Coll
 
   // MARK: - Reversal
 
+  /// A shimmed version of `Swift.CollectionDifference.inverse()` with no availability constraints.
   @inlinable public func inverse() -> Self {
     let reversedChanges: [Change] = map { change in
       switch change {

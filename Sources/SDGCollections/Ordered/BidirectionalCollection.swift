@@ -41,9 +41,15 @@ extension BidirectionalCollection {
   // MARK: - Differences
 
   /// A shimmed version of `difference(from:by:)` with no availability constraints.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection. (The starting point.)
+  ///   - areEquivalent: The closure to use when checking whether two elements are equivalent.
+  ///   - elementA: One element.
+  ///   - elementB: The other element.
   @inlinable public func shimmedDifference<C>(
     from other: C,
-    by areEquivalent: (Element, Element) -> Bool
+    by areEquivalent: (_ elementA: Element, _ elementB: Element) -> Bool
   ) -> CollectionDifference<Element>
   where C: BidirectionalCollection, C.Element == Self.Element {
     if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
@@ -58,6 +64,9 @@ extension BidirectionalCollection {
 extension BidirectionalCollection where Element: Equatable {
 
   /// A shimmed version of `difference(from:)` with no availability constraints.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection. (The starting point.)
   @inlinable public func shimmedDifference<C>(
     from other: C
   ) -> CollectionDifference<Element>
