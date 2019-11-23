@@ -54,11 +54,12 @@ extension BidirectionalCollection {
   ) -> CollectionDifference<Element>
   where C: BidirectionalCollection, C.Element == Self.Element {
     if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *),
-      ¬legacyMode {
+      ¬legacyMode
+    {
       let unshimmed = difference(from: other, by: areEquivalent)
       return CollectionDifference(unshimmed)
     } else {
-      return CollectionDifference(unsafeChanges: changes(toMake: other, by: areEquivalent))
+      return CollectionDifference(unsafeChanges: other.changes(toMake: self, by: areEquivalent))
     }
   }
 }

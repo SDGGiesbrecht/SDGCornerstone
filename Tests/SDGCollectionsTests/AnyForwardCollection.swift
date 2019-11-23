@@ -61,7 +61,7 @@ where Base: Equatable, Base: RangeReplaceableCollection, Base.Element: Equatable
   }
 
   mutating func replaceSubrange<C>(_ subrange: Range<Base.Index>, with newElements: C)
-    where C: Collection, C.Element == Base.Element {
+  where C: Collection, C.Element == Base.Element {
     base.replaceSubrange(subrange, with: newElements)
   }
 }

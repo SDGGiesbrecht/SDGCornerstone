@@ -235,7 +235,8 @@ extension RangeReplaceableCollection {
   /// A shimmed version of `applying(_:)` with no availability constraints.
   @inlinable public func applying(changes: CollectionDifference<Element>) -> Self? {
     if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *),
-      ¬legacyMode {
+      ¬legacyMode
+    {
       return applying(Swift.CollectionDifference(changes))
     } else {
       var array = Array(self)

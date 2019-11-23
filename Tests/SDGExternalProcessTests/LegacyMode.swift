@@ -1,5 +1,5 @@
 /*
- CompatibilityMode.swift
+ LegacyMode.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -19,7 +19,7 @@ func forAllLegacyModes(_ closure: () throws -> Void) rethrows {
     let previous = legacyMode
     legacyMode = mode
     defer { legacyMode = previous }
-    
+
     try closure()
   }
 }
