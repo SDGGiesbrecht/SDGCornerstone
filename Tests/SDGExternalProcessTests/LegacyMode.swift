@@ -12,16 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !(os(iOS) || os(tvOS))
-  @testable import SDGExternalProcess
+@testable import SDGExternalProcess
 
-  func forAllCompatibilityModes(_ closure: () throws -> Void) rethrows {
-    for mode in [false, true] {
-      let previous = ExternalProcess.compatibilityMode
-      ExternalProcess.compatibilityMode = mode
-      defer { ExternalProcess.compatibilityMode = previous }
-
-      try closure()
-    }
+func forAllLegacyModes(_ closure: () throws -> Void) rethrows {
+  for mode in [false, true] {
+    let previous = legacyMode
+    legacyMode = mode
+    defer { legacyMode = previous }
+    
+    try closure()
   }
-#endif
+}

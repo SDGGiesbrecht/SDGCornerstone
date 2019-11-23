@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
 import SDGMathematics
 
 extension BidirectionalCollection {
@@ -52,7 +53,8 @@ extension BidirectionalCollection {
     by areEquivalent: (_ elementA: Element, _ elementB: Element) -> Bool
   ) -> CollectionDifference<Element>
   where C: BidirectionalCollection, C.Element == Self.Element {
-    if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
+    if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *),
+      ¬legacyMode {
       let unshimmed = difference(from: other, by: areEquivalent)
       return CollectionDifference(unshimmed)
     } else {
