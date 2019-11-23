@@ -15,7 +15,7 @@
 import SDGLogic
 import SDGMathematics
 
-@available(macOS 10.15, *)
+@available(macOS 10.15, iOS 13, *)
 extension Swift.CollectionDifference {
 
   // MARK: - Initialization
@@ -37,7 +37,7 @@ public struct CollectionDifference<ChangeElement>: BidirectionalCollection, Coll
   // MARK: - Initialization
 
   /// Wraps an instance of a standard `Swift.CollectionDifference`.
-  @available(macOS 10.15, *)
+  @available(macOS 10.15, iOS 13, *)
   @inlinable public init(_ standard: Swift.CollectionDifference<ChangeElement>) {
     removals = standard.removals.map { Change($0) }
     insertions = standard.insertions.map { Change($0) }

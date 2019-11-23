@@ -46,7 +46,7 @@ extension BidirectionalCollection {
     by areEquivalent: (Element, Element) -> Bool
   ) -> CollectionDifference<Element>
   where C: BidirectionalCollection, C.Element == Self.Element {
-    if #available(macOS 10.15, *) {
+    if #available(macOS 10.15, iOS 13, *) {
       let unshimmed = difference(from: other, by: areEquivalent)
       return CollectionDifference(unshimmed)
     } else {

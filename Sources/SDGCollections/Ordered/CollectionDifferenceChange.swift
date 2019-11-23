@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-@available(macOS 10.15, *)
+@available(macOS 10.15, iOS 13, *)
 extension Swift.CollectionDifference.Change {
 
   // MARK: - Initialization
@@ -50,7 +50,7 @@ extension CollectionDifference {
     ///
     /// - Parameters:
     ///   - standard: The shimmed instance.
-    @available(macOS 10.15, *)
+    @available(macOS 10.15, iOS 13, *)
     @inlinable public init(_ standard: Swift.CollectionDifference<ChangeElement>.Change) {
       switch standard {
       case .remove(let offset, let element, let associatedOffset):

@@ -426,7 +426,7 @@ class SDGCollectionsAPITests: TestCase {
     let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
     let shimmedDifference = end.changes(from: start)
     testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
-    if #available(macOS 10.15, *) {
+    if #available(macOS 10.15, iOS 13, *) {
       let standardDifference = Swift.CollectionDifference(shimmedDifference)
       var encoded = try JSONEncoder().encode(shimmedDifference)
       let decodedStandard = try JSONDecoder().decode(
@@ -450,7 +450,7 @@ class SDGCollectionsAPITests: TestCase {
       .insert(offset: 30, element: "inserted element", associatedWith: 40)
     ]
     testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
-    if #available(macOS 10.15, *) {
+    if #available(macOS 10.15, iOS 13, *) {
       let standardEntries = shimmedEntries.map { shimmed in
         return Swift.CollectionDifference.Change(shimmed)
       }
