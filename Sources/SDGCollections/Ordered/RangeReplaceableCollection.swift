@@ -231,6 +231,22 @@ extension RangeReplaceableCollection {
     self = Self(shuffled(using: &generator))
   }
 
+  /// A shimmed version of `applying(_:)` with no availability constraints.
+  @inlinable public func applying(changes: CollectionDifference<Element>) -> Self? {
+    if #available(macOS 10.15, *) {
+      return applying(Swift.CollectionDifference(changes))
+    } else {
+      var array = Array(self)
+      for removal in changes.removals {
+        array.remove(at: removal.offset)
+      }
+      for insertion in changes.insertions {
+        array.insert(insertion.element, at: insertion.offset)
+      }
+      return Self(array)
+    }
+  }
+
   // MARK: - ExpressibleByArrayLiteral
 
   /// Creates an instance from an array literal.

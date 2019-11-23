@@ -15,8 +15,6 @@
 import SDGLogic
 import SDGMathematics
 
-#warning("Need to apply.")
-
 @available(macOS 10.15, *)
 extension Swift.CollectionDifference {
 
