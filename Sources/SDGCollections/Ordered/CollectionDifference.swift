@@ -202,22 +202,27 @@ extension CollectionDifference: Hashable where ChangeElement: Hashable {
     var pairedChanges: [Change] = []
     pairedChanges.reserveCapacity(count)
     for (element, removalOffsets) in groupedRemovals {
+      // Standard Library definition ignores moves which do not involve a unique element.
+      if removalOffsets.count == 1,
+        let removalOffset = removalOffsets.first,
+        let insertionOffsets = groupedInsertions[element],
+        insertionOffsets.count == 1,
+        let insertionOffset = insertionOffsets.first
+      {
+        // Found a pair.
+        pairedChanges.append(
+          .remove(offset: removalOffset, element: element, associatedWith: insertionOffset)
+        )
+        // Handle the insert too and remove it from the list.
+        pairedChanges.append(
+          .insert(offset: insertionOffset, element: element, associatedWith: removalOffset)
+        )
+        groupedInsertions[element] = nil
+      }
       for removalOffset in removalOffsets.reversed() {
-        if let insertionOffset = groupedInsertions[element]?.last {
-          // Found a pair.
-          pairedChanges.append(
-            .remove(offset: removalOffset, element: element, associatedWith: insertionOffset)
-          )
-          // Handle the insert too and remove it from the list.
-          pairedChanges.append(
-            .insert(offset: insertionOffset, element: element, associatedWith: removalOffset)
-          )
-          groupedInsertions[element]?.removeLast()
-        } else {
-          pairedChanges.append(
-            .remove(offset: removalOffset, element: element, associatedWith: nil)
-          )
-        }
+        pairedChanges.append(
+          .remove(offset: removalOffset, element: element, associatedWith: nil)
+        )
       }
     }
     for (element, insertionOffsets) in groupedInsertions {
