@@ -233,24 +233,24 @@ extension RangeReplaceableCollection {
 
   /// A shimmed version of `applying(_:)` with no availability constraints.
   @inlinable public func applying(changes: CollectionDifference<Element>) -> Self? {
-    //if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
-    //return applying(Swift.CollectionDifference(changes))
-    //} else {
-    var array = Array(self)
-    for removal in changes.removals {
-      if removal.offset ≥ array.endIndex {
-        return nil
+    if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
+      return applying(Swift.CollectionDifference(changes))
+    } else {
+      var array = Array(self)
+      for removal in changes.removals {
+        if removal.offset ≥ array.endIndex {
+          return nil
+        }
+        array.remove(at: removal.offset)
       }
-      array.remove(at: removal.offset)
-    }
-    for insertion in changes.insertions {
-      if insertion.offset > array.endIndex {
-        return nil
+      for insertion in changes.insertions {
+        if insertion.offset > array.endIndex {
+          return nil
+        }
+        array.insert(insertion.element, at: insertion.offset)
       }
-      array.insert(insertion.element, at: insertion.offset)
+      return Self(array)
     }
-    return Self(array)
-    //}
   }
 
   // MARK: - ExpressibleByArrayLiteral
