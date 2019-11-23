@@ -16,7 +16,7 @@ import SDGCollections
 
 struct AnyForwardCollection<Base>: Collection, Equatable, RangeReplaceableCollection,
   SearchableCollection
-where Base: Collection, Base: Equatable, Base: RangeReplaceableCollection {
+where Base: Equatable, Base: RangeReplaceableCollection, Base.Element: Equatable {
 
   // MARK: - Initialization
 
@@ -29,6 +29,8 @@ where Base: Collection, Base: Equatable, Base: RangeReplaceableCollection {
   var base: Base
 
   // MARK: - Collection
+
+  typealias Element = Base.Element
 
   var startIndex: Base.Index {
     return base.startIndex
@@ -59,7 +61,7 @@ where Base: Collection, Base: Equatable, Base: RangeReplaceableCollection {
   }
 
   mutating func replaceSubrange<C>(_ subrange: Range<Base.Index>, with newElements: C)
-  where C: Collection, Element == C.Element {
+    where C: Collection, C.Element == Base.Element {
     base.replaceSubrange(subrange, with: newElements)
   }
 }

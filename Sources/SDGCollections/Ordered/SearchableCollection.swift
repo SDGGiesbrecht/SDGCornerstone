@@ -513,15 +513,15 @@ extension SearchableCollection {
 
     return CollectionDifference(unsafeChanges: adjusted)
   }
-  @inlinable public func changes<C>(from other: C) -> CollectionDifference<
-    Element
-  >
+  @inlinable public func changes<C>(
+    from other: C
+  ) -> CollectionDifference<Element>
   where C: SearchableCollection, C.Element == Self.Element {
     return forwardDifference(from: other)
   }
-  @inlinable public func changes(from other: Self) -> CollectionDifference<
-    Element
-  > {
+  @inlinable public func changes(
+    from other: Self
+  ) -> CollectionDifference<Element> {
     return forwardDifference(from: other)
   }
 
