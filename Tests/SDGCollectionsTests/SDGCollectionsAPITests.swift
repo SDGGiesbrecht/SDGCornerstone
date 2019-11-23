@@ -405,10 +405,12 @@ class SDGCollectionsAPITests: TestCase {
     XCTAssertEqual(changedString, endString)
 
     // Not bidirectional.
-    let forwardStart = AnyCollection(startString)
-    let forwardEnd = AnyCollection(endString)
+    let forwardStart = AnyForwardCollection(startString)
+    let forwardEnd = AnyForwardCollection(endString)
     let forwardDiff = forwardEnd.changes(from: forwardStart)
     XCTAssertEqual(forwardDiff, diffString)
+    let forwardChanged = forwardStart.applying(changes: forwardDiff)
+    XCTAssertEqual(forwardChanged, forwardEnd)
 
     let set = AnyCollection(Set(endString))
     _ = set.changes(from: startString)
