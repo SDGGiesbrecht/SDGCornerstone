@@ -395,33 +395,20 @@ class SDGCollectionsAPITests: TestCase {
     let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
     let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
     let diff = end.changes(from: start)
-    var changed: [Unicode.Scalar] = start
-    for change in diff {
-      switch change {
-      case .remove(let offset, _, _):
-        changed.remove(at: changed.index(changed.startIndex, offsetBy: offset))
-      case .insert(let offset, let element, _):
-        changed.insert(element, at: changed.index(changed.startIndex, offsetBy: offset))
-      }
-    }
+    let changed = start.applying(changes: diff)
     XCTAssertEqual(changed, end)
 
     let startString = "..GAC‐‐!!.."
     let endString = "..AGCAT‐‐??.."
     let diffString = endString.changes(from: startString)
-    var changedString = startString
-    for change in diffString {
-      switch change {
-      case .remove(let offset, _, _):
-        changedString.remove(at: changedString.index(changedString.startIndex, offsetBy: offset))
-      case .insert(let offset, let element, _):
-        changedString.insert(
-          element,
-          at: changedString.index(changedString.startIndex, offsetBy: offset)
-        )
-      }
-    }
+    let changedString = startString.applying(changes: diffString)
     XCTAssertEqual(changedString, endString)
+
+    // Not bidirectional.
+    let forwardStart = AnyCollection(startString)
+    let forwardEnd = AnyCollection(endString)
+    let forwardDiff = forwardEnd.changes(from: forwardStart)
+    XCTAssertEqual(forwardDiff, diffString)
 
     let set = AnyCollection(Set(endString))
     _ = set.changes(from: startString)

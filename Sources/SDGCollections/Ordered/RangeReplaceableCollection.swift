@@ -238,9 +238,15 @@ extension RangeReplaceableCollection {
     } else {
       var array = Array(self)
       for removal in changes.removals {
+        if removal.offset ≥ array.endIndex {
+          return nil
+        }
         array.remove(at: removal.offset)
       }
       for insertion in changes.insertions {
+        if insertion.offset > array.endIndex {
+          return nil
+        }
         array.insert(insertion.element, at: insertion.offset)
       }
       return Self(array)
