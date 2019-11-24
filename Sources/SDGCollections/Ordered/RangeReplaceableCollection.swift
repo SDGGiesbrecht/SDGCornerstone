@@ -243,7 +243,7 @@ extension RangeReplaceableCollection {
       return applying(Swift.CollectionDifference(changes))
     } else {
       var array = Array(self)
-      for removal in changes.removals {
+      for removal in changes.removals.lazy.reversed() {
         if removal.offset ≥ array.endIndex {
           return nil
         }
