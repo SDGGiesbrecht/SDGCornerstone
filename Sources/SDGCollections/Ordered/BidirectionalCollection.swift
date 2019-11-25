@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
 import SDGMathematics
 
 extension BidirectionalCollection {
@@ -36,5 +37,44 @@ extension BidirectionalCollection {
   where R: RangeExpression, R.Bound == ReversedCollection<Self>.Index {
     let resolved = range.relative(to: reversed())
     return resolved.upperBound.base..<resolved.lowerBound.base
+  }
+
+  // MARK: - Differences
+
+  /// A shimmed version of `difference(from:by:)` with no availability constraints.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection. (The starting point.)
+  ///   - areEquivalent: The closure to use when checking whether two elements are equivalent.
+  ///   - elementA: One element.
+  ///   - elementB: The other element.
+  @inlinable public func shimmedDifference<C>(
+    from other: C,
+    by areEquivalent: (_ elementA: Element, _ elementB: Element) -> Bool
+  ) -> CollectionDifference<Element>
+  where C: BidirectionalCollection, C.Element == Self.Element {
+    if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *),
+      ¬legacyMode
+    {
+      // @exempt(from: tests) #workaround(workspace version 0.27.0, Exempt because CI does not have 10.15.)
+      let unshimmed = difference(from: other, by: areEquivalent)
+      return CollectionDifference(unshimmed)
+    } else {
+      return CollectionDifference(unsafeChanges: other.changes(toMake: self, by: areEquivalent))
+    }
+  }
+}
+
+extension BidirectionalCollection where Element: Equatable {
+
+  /// A shimmed version of `difference(from:)` with no availability constraints.
+  ///
+  /// - Parameters:
+  ///   - other: The other collection. (The starting point.)
+  @inlinable public func shimmedDifference<C>(
+    from other: C
+  ) -> CollectionDifference<Element>
+  where C: BidirectionalCollection, C.Element == Self.Element {
+    return shimmedDifference(from: other, by: ==)
   }
 }

@@ -16,6 +16,8 @@ import Foundation
 
 import SDGControlFlow
 import SDGLogic
+import SDGMathematics
+import SDGCollections
 import SDGText
 import SDGLocalization
 
@@ -93,21 +95,52 @@ public func compare(
       return
     }
 
-    let stringLines = string.lines.map({ String($0.line) })
-    let specificationLines = specificationString.lines.map({ String($0.line) })
-    let differences = stringLines.groupedDifferences(from: specificationLines)
+    // These need to be random access collections.
+    let stringLines: [String] = string.lines.map({ String($0.line) })
+    let specificationLines: [String] = specificationString.lines.map({ String($0.line) })
+    let differences = stringLines.changes(from: specificationLines)
 
-    var report = ""
+    var removals: Set<Int> = []
+    var inserts: [Int: String] = [:]
     for difference in differences {
       switch difference {
-      case .keep:
-        print("  [...]", to: &report)
-      case .remove(let range):
-        print(specificationLines[range].map({ "− " + $0 }).joined(separator: "\n"), to: &report)
-      case .insert(let range):
-        print(stringLines[range].map({ "+ " + $0 }).joined(separator: "\n"), to: &report)
+      case .remove(let offset, _, _):
+        removals.insert(offset)
+      case .insert(let offset, let element, _):
+        inserts[offset] = element
       }
     }
+
+    var reportArray: [String] = []
+    var resultOffset = 0
+    var originalOffset = 0
+    var continuingKeptRange = false
+    while resultOffset ≠ stringLines.count {
+      defer {
+        resultOffset += 1
+        originalOffset += 1
+      }
+
+      if originalOffset ∈ removals {
+        reportArray.append(
+          "− "
+            + specificationLines[
+              specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)]
+        )
+        resultOffset −= 1
+        continuingKeptRange = false
+      } else if let insert = inserts[resultOffset] {
+        reportArray.append("+ " + insert)
+        originalOffset −= 1
+        continuingKeptRange = false
+      } else {
+        if ¬continuingKeptRange {
+          reportArray.append("  [...]")
+        }
+        continuingKeptRange = true
+      }
+    }
+    let report = reportArray.joined(separator: "\n")
 
     fail(
       String(

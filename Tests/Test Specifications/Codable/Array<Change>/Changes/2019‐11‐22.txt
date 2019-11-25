@@ -1,0 +1,16 @@
+[
+  [
+    {
+      "associatedOffset" : 20,
+      "element" : "removed element",
+      "isRemove" : true,
+      "offset" : 10
+    },
+    {
+      "associatedOffset" : 40,
+      "element" : "inserted element",
+      "isRemove" : false,
+      "offset" : 30
+    }
+  ]
+]

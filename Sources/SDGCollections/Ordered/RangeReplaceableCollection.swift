@@ -13,6 +13,7 @@
  */
 
 import SDGControlFlow
+import SDGLogic
 import SDGMathematics
 
 extension RangeReplaceableCollection {
@@ -229,6 +230,34 @@ extension RangeReplaceableCollection {
   @inlinable public mutating func shuffle<R>(using generator: inout R)
   where R: RandomNumberGenerator {
     self = Self(shuffled(using: &generator))
+  }
+
+  /// A shimmed version of `applying(_:)` with no availability constraints.
+  ///
+  /// - Parameters:
+  ///   - changes: The changes to apply.
+  @inlinable public func applying(changes: CollectionDifference<Element>) -> Self? {
+    if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *),
+      ¬legacyMode
+    {
+      // @exempt(from: tests) #workaround(workspace 0.27.0, CI doesn’t run 10.15 yet.)
+      return applying(Swift.CollectionDifference(changes))
+    } else {
+      var array = Array(self)
+      for removal in changes.removals.lazy.reversed() {
+        if removal.offset ≥ array.endIndex {
+          return nil
+        }
+        array.remove(at: removal.offset)
+      }
+      for insertion in changes.insertions {
+        if insertion.offset > array.endIndex {
+          return nil
+        }
+        array.insert(insertion.element, at: insertion.offset)
+      }
+      return Self(array)
+    }
   }
 
   // MARK: - ExpressibleByArrayLiteral

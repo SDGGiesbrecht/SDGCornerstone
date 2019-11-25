@@ -24,10 +24,6 @@
   /// An external process.
   public final class ExternalProcess: TextualPlaygroundDisplay {
 
-    // MARK: - Static Properties
-
-    internal static var compatibilityMode: Bool = false
-
     // MARK: - Initialization
 
     /// Creates an instance with the executable at the specified location.
@@ -115,7 +111,7 @@
 
       #if os(macOS)
         if #available(macOS 10.13, *),  // @exempt(from: unicode)
-          ¬ExternalProcess.compatibilityMode
+          ¬legacyMode
         {
           process.executableURL = executable
         } else {
@@ -133,7 +129,7 @@
       if let location = workingDirectory {
         #if os(macOS)
           if #available(macOS 10.13, *),  // @exempt(from: unicode)
-            ¬ExternalProcess.compatibilityMode
+            ¬legacyMode
           {
             process.currentDirectoryURL = location
           } else {
@@ -155,7 +151,7 @@
       do {
         #if os(macOS)
           if #available(macOS 10.13, *),  // @exempt(from: unicode)
-            ¬ExternalProcess.compatibilityMode
+            ¬legacyMode
           {
             try process.run()
           } else {

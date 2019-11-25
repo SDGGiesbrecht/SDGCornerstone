@@ -26,7 +26,7 @@ class SDGExternalProcessAPITests: TestCase {
   func testExternalProcess() {
     #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-      forAllCompatibilityModes {
+      forAllLegacyModes {
         XCTAssertNil(
           ExternalProcess(
             searching: [
@@ -70,7 +70,7 @@ class SDGExternalProcessAPITests: TestCase {
 
   func testExternalProcessError() {
     #if !(os(iOS) || os(watchOS) || os(tvOS))
-      forAllCompatibilityModes {
+      forAllLegacyModes {
         switch ExternalProcess(at: URL(fileURLWithPath: "/no/such/process")).run([]) {
         case .failure(let error):
           // Expected
@@ -86,7 +86,7 @@ class SDGExternalProcessAPITests: TestCase {
 
     #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-      try forAllCompatibilityModes {
+      try forAllLegacyModes {
         _ = try Shell.default.run(command: ["ls"]).get()
         _ = try Shell.default.run(command: ["pwd"], in: URL(fileURLWithPath: "/"), with: [:]).get()
 

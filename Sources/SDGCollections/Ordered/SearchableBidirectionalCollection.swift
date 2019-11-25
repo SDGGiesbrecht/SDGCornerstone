@@ -106,31 +106,19 @@ where SubSequence: SearchableBidirectionalCollection {
   ///     - other: The other collection
   func commonSuffix(with other: Self) -> PatternMatch<Self>
 
-  // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
-  /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
-  ///
-  /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
-  ///
-  /// - It is only intended for analyzing changes; it is not designed for re‐applying them.
-  /// - It reports changes as contiguous ranges of indices instead of individual offsets.
-  /// - It has no platform restrictions.
+  // #documentation(SDGCornerstone.Collection.changes(from:))
+  /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
+  func changes<C>(from other: C) -> CollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element
-  // #documentation(SDGCornerstone.Collection.groupedDifferences(from:))
-  /// Returns the sequence of changes necessary to transform the other collection to be the same as this one.
-  ///
-  /// This method differs from the Standard Library’s `difference(from:)` method in several ways:
-  ///
-  /// - It is only intended for analyzing changes; it is not designed for re‐applying them.
-  /// - It reports changes as contiguous ranges of indices instead of individual offsets.
-  /// - It has no platform restrictions.
+  // #documentation(SDGCornerstone.Collection.changes(from:))
+  /// Returns the difference which transforms the specified collection to match this one.
   ///
   /// - Parameters:
   ///     - other: The other collection. (The starting point.)
-  func groupedDifferences(from other: Self) -> [Change<Index, Index>]
+  func changes(from other: Self) -> CollectionDifference<Element>
 }
 
 extension SearchableBidirectionalCollection {
@@ -180,28 +168,15 @@ extension SearchableBidirectionalCollection {
     return _commonSuffix(with: other)
   }
 
-  @inlinable internal func _difference<C>(from other: C) -> [Change<C.Index, Index>]
+  @inlinable public func changes<C>(
+    from other: C
+  ) -> CollectionDifference<Element>
   where C: SearchableBidirectionalCollection, C.Element == Self.Element {
-
-    let suffixStart = commonSuffix(with: other).range.lowerBound
-    let suffixLength = distance(from: suffixStart, to: endIndex)
-    let otherSuffixStart = other.index(other.endIndex, offsetBy: −suffixLength)
-
-    var difference: [Change<C.Index, Index>] = prefix(upTo: suffixStart).suffixIgnorantDifference(
-      from: other.prefix(upTo: otherSuffixStart)
-    )
-
-    if suffixLength ≠ 0 {
-      difference.append(.keep((otherSuffixStart...).relative(to: other)))
-    }
-
-    return difference
+    return shimmedDifference(from: other)
   }
-  @inlinable public func groupedDifferences<C>(from other: C) -> [Change<C.Index, Index>]
-  where C: SearchableBidirectionalCollection, C.Element == Self.Element {
-    return _difference(from: other)
-  }
-  @inlinable public func groupedDifferences(from other: Self) -> [Change<Index, Index>] {
-    return _difference(from: other)
+  @inlinable public func changes(
+    from other: Self
+  ) -> CollectionDifference<Element> {
+    return shimmedDifference(from: other)
   }
 }
