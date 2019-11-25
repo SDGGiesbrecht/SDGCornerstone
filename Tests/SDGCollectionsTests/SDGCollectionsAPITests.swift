@@ -490,6 +490,24 @@ class SDGCollectionsAPITests: TestCase {
         .insert(offset: 1, element: "1", associatedWith: 1)
       ]
       XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+      entries = [
+        .insert(offset: 1, element: "1", associatedWith: 1),
+        .insert(offset: 2, element: "2", associatedWith: 1),
+        .remove(offset: 1, element: "1", associatedWith: 1)
+      ]
+      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+      entries = [
+        .remove(offset: 1, element: "1", associatedWith: 1),
+        .remove(offset: 2, element: "2", associatedWith: 1),
+        .insert(offset: 1, element: "1", associatedWith: 1)
+      ]
+      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+      entries = [
+        .remove(offset: 1, element: "1", associatedWith: 1),
+        .remove(offset: 2, element: "2", associatedWith: 1),
+        .insert(offset: 2, element: "2", associatedWith: 2)
+      ]
+      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
     }
   }
 

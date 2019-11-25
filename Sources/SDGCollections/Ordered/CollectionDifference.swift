@@ -83,9 +83,6 @@ public struct CollectionDifference<ChangeElement>: BidirectionalCollection, Coll
         removals.insert(offset)
 
         if let associated = associatedOffset {
-          if removalAssociations[offset] ≠ nil {
-            return nil
-          }
           removalAssociations[offset] = associated
         }
 
