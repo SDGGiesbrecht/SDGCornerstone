@@ -56,6 +56,7 @@ extension BidirectionalCollection {
     if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *),
       ¬legacyMode
     {
+      // @exempt(from: tests) #workaround(workspace version 0.27.0, Exempt because CI does not have 10.15.)
       let unshimmed = difference(from: other, by: areEquivalent)
       return CollectionDifference(unshimmed)
     } else {
