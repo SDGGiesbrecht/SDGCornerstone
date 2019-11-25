@@ -225,11 +225,12 @@ extension CollectionDifference: Hashable where ChangeElement: Hashable {
           .insert(offset: insertionOffset, element: element, associatedWith: removalOffset)
         )
         groupedInsertions[element] = nil
-      }
-      for removalOffset in removalOffsets.reversed() {
-        pairedChanges.append(
-          .remove(offset: removalOffset, element: element, associatedWith: nil)
-        )
+      } else {
+        for removalOffset in removalOffsets.reversed() {
+          pairedChanges.append(
+            .remove(offset: removalOffset, element: element, associatedWith: nil)
+          )
+        }
       }
     }
     for (element, insertionOffsets) in groupedInsertions {
