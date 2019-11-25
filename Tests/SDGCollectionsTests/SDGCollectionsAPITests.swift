@@ -513,7 +513,32 @@ class SDGCollectionsAPITests: TestCase {
       XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
       testCollectionConformance(of: shimmedDifference)
       testBidirectionalCollectionConformance(of: shimmedDifference)
-      testRandomAccessCollectionConfirmance(of: shimmedDifference)
+      testRandomAccessCollectionConformance(of: shimmedDifference)
+    }
+
+    withLegacyMode {
+      let empty: [String] = []
+      XCTAssertNil(
+        empty.applying(
+          changes: SDGCollections.CollectionDifference([
+            .remove(offset: 0, element: " ", associatedWith: nil)
+          ])!
+        )
+      )
+      XCTAssertNil(
+        empty.applying(
+          changes: SDGCollections.CollectionDifference([
+            .insert(offset: 1, element: " ", associatedWith: nil)
+          ])!
+        )
+      )
+      XCTAssertNotNil(
+        empty.applying(
+          changes: SDGCollections.CollectionDifference([
+            .insert(offset: 0, element: " ", associatedWith: nil)
+          ])!
+        )
+      )
     }
   }
 
@@ -543,7 +568,7 @@ class SDGCollectionsAPITests: TestCase {
         XCTAssertEqual(decodedShimmed, shimmedEntries)
       }
       for entry in shimmedEntries {
-        let copy = entry
+        var copy = entry
         copy.offset = 5
         XCTAssertEqual(copy.offset, 5)
         copy.element = "..."
