@@ -508,6 +508,7 @@ class SDGCollectionsAPITests: TestCase {
         .insert(offset: 2, element: "2", associatedWith: 2)
       ]
       XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+      testCollectionConformance(of: shimmedDifference)
     }
   }
 
