@@ -436,10 +436,12 @@ class SDGCollectionsAPITests: TestCase {
       let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
       let shimmedDifference = end.changes(from: start)
       let shimmedMoves = shimmedDifference.inferringMoves()
+      let shimmedInverse = shimmedMoves.inverse()
       testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
       if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
         let standardDifference = Swift.CollectionDifference(shimmedDifference)
         let standardMoves = standardDifference.inferringMoves()
+        let standardInverse = standardMoves.inverse()
         var encoded = try JSONEncoder().encode(shimmedDifference)
         let decodedStandard = try JSONDecoder().decode(
           Swift.CollectionDifference<String>.self,
@@ -455,6 +457,7 @@ class SDGCollectionsAPITests: TestCase {
         XCTAssertEqual(decodedShimmed, shimmedDifference)
 
         XCTAssertEqual(shimmedMoves, SDGCollections.CollectionDifference(standardMoves))
+        XCTAssertEqual(shimmedInverse, SDGCollections.CollectionDifference(standardInverse))
       }
       XCTAssertEqual(SDGCollections.CollectionDifference(shimmedMoves), shimmedMoves)
 
@@ -509,6 +512,8 @@ class SDGCollectionsAPITests: TestCase {
       ]
       XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
       testCollectionConformance(of: shimmedDifference)
+      testBidirectionalCollectionConformance(of: shimmedDifference)
+      testRandomAccessCollectionConfirmance(of: shimmedDifference)
     }
   }
 
@@ -536,6 +541,15 @@ class SDGCollectionsAPITests: TestCase {
           from: encoded
         )
         XCTAssertEqual(decodedShimmed, shimmedEntries)
+      }
+      for entry in shimmedEntries {
+        let copy = entry
+        copy.offset = 5
+        XCTAssertEqual(copy.offset, 5)
+        copy.element = "..."
+        XCTAssertEqual(copy.element, "...")
+        copy.associatedOffset = 100
+        XCTAssertEqual(copy.associatedOffset, 100)
       }
     }
   }
