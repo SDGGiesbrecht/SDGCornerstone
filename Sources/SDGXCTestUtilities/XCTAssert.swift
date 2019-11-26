@@ -13,10 +13,6 @@
  */
 
 #if !os(watchOS)
-
-  // #workaround(Swift 5.1, The generated Xcode project cannot import XCTest on iOS devices.)
-  #if !Xcode || MANIFEST_LOADED_BY_XCODE || !(os(iOS) || os(tvOS)) || targetEnvironment(simulator)
-
     import XCTest
 
     import SDGLogic
@@ -47,7 +43,4 @@
         line: zeile
       )
     }
-
-  #endif
-
 #endif
