@@ -48,10 +48,11 @@ public struct HebrewMonthAndYear: Comparable, Equatable, FixedScaleOneDimensiona
 
   // MARK: - Comparable
 
-  public static func < (precedingValue: HebrewMonthAndYear, followingValue: HebrewMonthAndYear)
-    -> Bool
-  {
-    return (precedingValue.year, precedingValue.month) < (followingValue.year, followingValue.month)
+  public static func < (
+    precedingValue: HebrewMonthAndYear,
+    followingValue: HebrewMonthAndYear
+  ) -> Bool {
+    return compare(precedingValue, followingValue, by: { $0.year }, { $0.month })
   }
 
   // MARK: - CustomStringConvertible

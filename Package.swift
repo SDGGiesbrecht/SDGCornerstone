@@ -324,6 +324,7 @@ let package = Package(
         .target(name: "SDGPersistence", dependencies: [
             "SDGControlFlow",
             "SDGLogic",
+            "SDGMathematics",
             "SDGCollections",
             "SDGText"
             ], swiftSettings: [
@@ -433,6 +434,7 @@ let package = Package(
         .target(name: "SDGVersioning", dependencies: [
             "SDGControlFlow",
             "SDGLogic",
+            "SDGMathematics",
             "SDGCollections",
             "SDGText",
             "SDGLocalization",

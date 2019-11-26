@@ -125,3 +125,71 @@ extension Comparable {
     return range.contains(precedingValue)
   }
 }
+
+/// Compares two values according to some derived sort criteria.
+///
+/// - Parameters:
+///   - precedingValue: The value preceding the `<` sign.
+///   - followingValue: The value following the `<` sign.
+///   - comparison: A closure which returns the derived value to compare.
+///   - value: The value for which to derive the sort criterion.
+@inlinable public func compare<T, C>(
+  _ precedingValue: T,
+  _ followingValue: T,
+  by comparison: (_ value: T) -> C
+) -> Bool where C: Comparable {
+  return comparison(precedingValue) < comparison(followingValue)
+}
+
+/// Compares two values according to some derived sort criteria.
+///
+/// This function uses short‐circuit evaluation.
+///
+/// - Parameters:
+///   - precedingValue: The value preceding the `<` sign.
+///   - followingValue: The value following the `<` sign.
+///   - comparisonOne: A closure which returns the first derived value to compare.
+///   - valueOne: The value for which to derive the first sort criterion.
+///   - comparisonTwo: A closure which returns the second derived value to compare.
+///   - valueTwo: The value for which to derive the second sort criterion.
+@inlinable public func compare<T, C, D>(
+  _ precedingValue: T,
+  _ followingValue: T,
+  by comparisonOne: (_ valueOne: T) -> C,
+  _ comparisonTwo: (_ valueTwo: T) -> D
+) -> Bool
+where C: Comparable, D: Comparable {
+  if compare(precedingValue, followingValue, by: comparisonOne) {
+    return true
+  } else {
+    return compare(precedingValue, followingValue, by: comparisonTwo)
+  }
+}
+
+/// Compares two values according to some derived sort criteria.
+///
+/// This function uses short‐circuit evaluation.
+///
+/// - Parameters:
+///   - precedingValue: The value preceding the `<` sign.
+///   - followingValue: The value following the `<` sign.
+///   - comparisonOne: A closure which returns the first derived value to compare.
+///   - valueOne: The value for which to derive the first sort criterion.
+///   - comparisonTwo: A closure which returns the second derived value to compare.
+///   - valueTwo: The value for which to derive the second sort criterion.
+///   - comparisonThree: A closure which returns the third derived value to compare.
+///   - valueThree: The value for which to derive the third sort criterion.
+@inlinable public func compare<T, C, D, E>(
+  _ precedingValue: T,
+  _ followingValue: T,
+  by comparisonOne: (_ valueOne: T) -> C,
+  _ comparisonTwo: (_ valueTwo: T) -> D,
+  _ comparisonThree: (_ valueThree: T) -> E
+) -> Bool
+where C: Comparable, D: Comparable, E: Comparable {
+  if compare(precedingValue, followingValue, by: comparisonOne, comparisonTwo) {
+    return true
+  } else {
+    return compare(precedingValue, followingValue, by: comparisonThree)
+  }
+}

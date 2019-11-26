@@ -295,7 +295,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   // MARK: - Comparable
 
   public static func < (precedingValue: CalendarDate, followingValue: CalendarDate) -> Bool {
-    return precedingValue.intervalSinceEpoch < followingValue.intervalSinceEpoch
+    return compare(precedingValue, followingValue) { $0.intervalSinceEpoch }
   }
 
   // MARK: - Decodable

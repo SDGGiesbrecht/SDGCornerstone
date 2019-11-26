@@ -169,7 +169,7 @@ extension OrderedEnumeration {
   // MARK: - Comparable
 
   @inlinable internal func isLessThan(_ other: Self) -> Bool {
-    return Self.index(of: self) < Self.index(of: other)
+    return compare(self, other) { Self.index(of: $0) }
   }
   @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
     return precedingValue.isLessThan(followingValue)

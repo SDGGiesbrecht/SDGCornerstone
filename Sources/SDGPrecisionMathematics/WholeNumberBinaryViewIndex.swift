@@ -33,7 +33,7 @@ extension WholeNumber.BinaryView {
       precedingValue: Index,
       followingValue: Index
     ) -> Bool {  // @exempt(from: tests) Unreachable?
-      return (precedingValue.digit, precedingValue.bit) < (followingValue.digit, followingValue.bit)
+      return compare(precedingValue, followingValue, by: { $0.digit }, { $0.bit })
     }
 
     // MARK: - PointProtocol

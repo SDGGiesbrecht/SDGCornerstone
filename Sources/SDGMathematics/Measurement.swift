@@ -311,7 +311,7 @@ extension Measurement {
   // MARK: - Comparable
 
   @inlinable public static func < (precedingValue: Self, followingValue: Self) -> Bool {
-    return precedingValue.rawValue < followingValue.rawValue
+    return compare(precedingValue, followingValue) { $0.rawValue }
   }
 
   // MARK: - Equatable

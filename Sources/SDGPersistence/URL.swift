@@ -14,6 +14,8 @@
 
 import Foundation
 
+import SDGMathematics
+
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Ein Wert, der den Standort einer Ressource kennzeichnet. (`URL`)
 public typealias EinheitlicherRessourcenzeiger = URL
@@ -66,6 +68,6 @@ extension URL: Comparable {
   // MARK: - Comparable
 
   public static func < (precedingValue: URL, followingValue: URL) -> Bool {
-    return precedingValue.absoluteString < followingValue.absoluteString
+    return compare(precedingValue, followingValue) { $0.absoluteString }
   }
 }

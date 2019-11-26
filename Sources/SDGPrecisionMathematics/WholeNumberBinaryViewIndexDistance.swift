@@ -62,9 +62,7 @@ extension WholeNumber.BinaryView {
     // MARK: - Comparable
 
     internal static func < (precedingValue: IndexDistance, followingValue: IndexDistance) -> Bool {
-      return (precedingValue.digitDistance, precedingValue.bitDistance) < (
-        followingValue.digitDistance, followingValue.bitDistance
-      )
+      return compare(precedingValue, followingValue, by: { $0.digitDistance }, { $0.bitDistance })
     }
 
     // MARK: - ExpressibleByIntegerLiteral
