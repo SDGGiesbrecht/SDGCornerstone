@@ -14,6 +14,7 @@
 
 import SDGControlFlow
 import SDGLogic
+import SDGMathematics
 import SDGCollections
 import SDGText
 import SDGLocalization
@@ -150,8 +151,8 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
 
   // MARK: - Comparable
 
-  public static func < (lhs: Version, rhs: Version) -> Bool {
-    return (lhs.major, lhs.minor, lhs.patch) < (rhs.major, rhs.minor, rhs.patch)
+  public static func < (precedingValue: Version, followingValue: Version) -> Bool {
+    return compare(precedingValue, followingValue, by: { $0.major }, { $0.minor }, { $0.patch })
   }
 
   // MARK: - CustomStringConvertible
