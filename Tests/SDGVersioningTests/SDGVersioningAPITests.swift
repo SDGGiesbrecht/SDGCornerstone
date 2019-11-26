@@ -46,5 +46,6 @@ class SDGVersioningAPITests: TestCase {
     XCTAssertEqual(Version(1, 0, 0), "1.0.0")
     XCTAssertEqual(Version(1, 0, 0).string(droppingEmptyPatch: true), "1.0")
     XCTAssertEqual(Version(1, 2, 3).string(droppingEmptyPatch: true), "1.2.3")
+    XCTAssert(Version(1, 2, 3) < Version(2, 2, 3))
   }
 }
