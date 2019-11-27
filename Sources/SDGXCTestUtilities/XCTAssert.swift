@@ -13,41 +13,34 @@
  */
 
 #if !os(watchOS)
+  import XCTest
 
-  // #workaround(Swift 5.1, The generated Xcode project cannot import XCTest on iOS devices.)
-  #if !Xcode || MANIFEST_LOADED_BY_XCODE || !(os(iOS) || os(tvOS)) || targetEnvironment(simulator)
+  import SDGLogic
+  import SDGMathematics
+  import SDGText
 
-    import XCTest
-
-    import SDGLogic
-    import SDGMathematics
-    import SDGText
-
-    // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
-    /// Stellt fest, ob zwei Werte gleich sind.
-    ///
-    /// - Parameters:
-    ///     - ausdruck1: Der erste Ausdruck.
-    ///     - ausdruck2: Der zweite Ausdruck.
-    ///     - mitteilung: Eine beschreibung des Fehlers.
-    ///     - datei: Die Datei.
-    ///     - zeile: Die Zeile.
-    @inlinable public func XCTFeststellenGleich<T>(
-      _ ausdruck1: @autoclosure () throws -> T,
-      _ ausdruck2: @autoclosure () throws -> T,
-      _ mitteilung: @autoclosure () -> Zeichenkette = "",  // @exempt(from: tests)
-      datei: StatischeZeichenkette = #file,
-      zeile: NZahl = #line
-    ) where T: Vergleichbar {  // @exempt(from: tests)
-      XCTAssertEqual(
-        try ausdruck1(),  // @exempt(from: tests)
-        try ausdruck2(),  // @exempt(from: tests)
-        mitteilung(),  // @exempt(from: tests)
-        file: datei,
-        line: zeile
-      )
-    }
-
-  #endif
-
+  // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+  /// Stellt fest, ob zwei Werte gleich sind.
+  ///
+  /// - Parameters:
+  ///     - ausdruck1: Der erste Ausdruck.
+  ///     - ausdruck2: Der zweite Ausdruck.
+  ///     - mitteilung: Eine beschreibung des Fehlers.
+  ///     - datei: Die Datei.
+  ///     - zeile: Die Zeile.
+  @inlinable public func XCTFeststellenGleich<T>(
+    _ ausdruck1: @autoclosure () throws -> T,
+    _ ausdruck2: @autoclosure () throws -> T,
+    _ mitteilung: @autoclosure () -> Zeichenkette = "",  // @exempt(from: tests)
+    datei: StatischeZeichenkette = #file,
+    zeile: NZahl = #line
+  ) where T: Vergleichbar {  // @exempt(from: tests)
+    XCTAssertEqual(
+      try ausdruck1(),  // @exempt(from: tests)
+      try ausdruck2(),  // @exempt(from: tests)
+      mitteilung(),  // @exempt(from: tests)
+      file: datei,
+      line: zeile
+    )
+  }
 #endif
