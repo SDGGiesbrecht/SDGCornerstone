@@ -23,7 +23,7 @@ extension Swift.CollectionDifference.Change {
   ///   - shimmed: The shimmed instance.
   @inlinable public init(_ shimmed: SDGCollections.CollectionDifference<ChangeElement>.Change) {
     switch shimmed {  // @exempt(from: tests)
-    // #workaround(workspace 0.27.0, CI is not on 10.15 yet.)
+    // #workaround(workspace version 0.27.0, CI is not on 10.15 yet.)
     case .remove(let offset, let element, let associatedOffset):
       self = .remove(offset: offset, element: element, associatedWith: associatedOffset)
     case .insert(let offset, let element, let associatedOffset):
@@ -54,7 +54,7 @@ extension CollectionDifference {
     @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
     @inlinable public init(_ standard: Swift.CollectionDifference<ChangeElement>.Change) {
       switch standard {  // @exempt(from: tests)
-      // #workaround(workspace 0.27.0, CI is not on 10.15 yet.)
+      // #workaround(workspace version 0.27.0, CI is not on 10.15 yet.)
       case .remove(let offset, let element, let associatedOffset):
         self = .remove(offset: offset, element: element, associatedWith: associatedOffset)
       case .insert(let offset, let element, let associatedOffset):
