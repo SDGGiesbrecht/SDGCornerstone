@@ -42,6 +42,34 @@ class SDGMathematicsRegressionTests: TestCase {
     runTests(Float.self)
   }
 
+  struct Values: Comparable, Equatable {
+    let a: Int
+    let b: Int
+    let c: Int
+    static func < (precedingValue: Values, followingValue: Values) -> Bool {
+      return compare(precedingValue, followingValue, by: { $0.a }, { $0.b }, { $0.c })
+    }
+  }
+  func testComparisonAids() {
+    // Untracked
+
+    XCTAssert(Values(a: 0, b: 0, c: 0) < Values(a: 0, b: 0, c: 1))
+    XCTAssert(Values(a: 0, b: 0, c: 1) < Values(a: 0, b: 1, c: 0))
+    XCTAssert(Values(a: 0, b: 1, c: 0) < Values(a: 0, b: 1, c: 1))
+    XCTAssert(Values(a: 0, b: 1, c: 1) < Values(a: 1, b: 0, c: 0))
+    XCTAssert(Values(a: 1, b: 0, c: 0) < Values(a: 1, b: 0, c: 1))
+    XCTAssert(Values(a: 1, b: 0, c: 1) < Values(a: 1, b: 1, c: 0))
+    XCTAssert(Values(a: 1, b: 1, c: 0) < Values(a: 1, b: 1, c: 1))
+
+    XCTAssertFalse(Values(a: 0, b: 0, c: 0) > Values(a: 0, b: 0, c: 1))
+    XCTAssertFalse(Values(a: 0, b: 0, c: 1) > Values(a: 0, b: 1, c: 0))
+    XCTAssertFalse(Values(a: 0, b: 1, c: 0) > Values(a: 0, b: 1, c: 1))
+    XCTAssertFalse(Values(a: 0, b: 1, c: 1) > Values(a: 1, b: 0, c: 0))
+    XCTAssertFalse(Values(a: 1, b: 0, c: 0) > Values(a: 1, b: 0, c: 1))
+    XCTAssertFalse(Values(a: 1, b: 0, c: 1) > Values(a: 1, b: 1, c: 0))
+    XCTAssertFalse(Values(a: 1, b: 1, c: 0) > Values(a: 1, b: 1, c: 1))
+  }
+
   func testDivisionIsUnambiguous() {
     // Untracked
 
