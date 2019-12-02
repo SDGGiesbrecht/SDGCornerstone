@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 extension Comparable {
 
   // MARK: - Comparison
@@ -126,6 +128,22 @@ extension Comparable {
   }
 }
 
+@inlinable internal func compareElements<T, C>(
+  _ precedingValue: T,
+  _ followingValue: T,
+  by comparison: (_ value: T) -> C
+) -> Bool? where C: Comparable {
+  let resolvedPreceding = comparison(precedingValue)
+  let resolvedFollowing = comparison(followingValue)
+  if resolvedPreceding < resolvedFollowing {
+    return true
+  } else if resolvedPreceding > resolvedFollowing {
+    return false
+  } else {
+    return nil
+  }
+}
+
 /// Compares two values according to some derived sort criteria.
 ///
 /// - Parameters:
@@ -138,7 +156,7 @@ extension Comparable {
   _ followingValue: T,
   by comparison: (_ value: T) -> C
 ) -> Bool where C: Comparable {
-  return comparison(precedingValue) < comparison(followingValue)
+  return compareElements(precedingValue, followingValue, by: comparison) ?? false
 }
 
 /// Compares two values according to some derived sort criteria.
@@ -159,11 +177,8 @@ extension Comparable {
   _ comparisonTwo: (_ valueTwo: T) -> D
 ) -> Bool
 where C: Comparable, D: Comparable {
-  if compare(precedingValue, followingValue, by: comparisonOne) {
-    return true
-  } else {
-    return compare(precedingValue, followingValue, by: comparisonTwo)
-  }
+  return compareElements(precedingValue, followingValue, by: comparisonOne)
+    ?? compare(precedingValue, followingValue, by: comparisonTwo)
 }
 
 /// Compares two values according to some derived sort criteria.
@@ -187,9 +202,6 @@ where C: Comparable, D: Comparable {
   _ comparisonThree: (_ valueThree: T) -> E
 ) -> Bool
 where C: Comparable, D: Comparable, E: Comparable {
-  if compare(precedingValue, followingValue, by: comparisonOne, comparisonTwo) {
-    return true
-  } else {
-    return compare(precedingValue, followingValue, by: comparisonThree)
-  }
+  return compareElements(precedingValue, followingValue, by: comparisonOne)
+    ?? compare(precedingValue, followingValue, by: comparisonTwo, comparisonThree)
 }

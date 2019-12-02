@@ -83,11 +83,7 @@ extension Bool: Comparable {
   // MARK: - Comparable
 
   public static func < (precedingValue: Bool, followingValue: Bool) -> Bool {
-    if precedingValue == false ∧ followingValue == true {
-      return true
-    } else {
-      return false
-    }
+    return ¬precedingValue ∧ followingValue
   }
 }
 
