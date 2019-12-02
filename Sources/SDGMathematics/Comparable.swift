@@ -179,7 +179,6 @@ extension Comparable {
 where C: Comparable, D: Comparable {
   return compareElements(precedingValue, followingValue, by: comparisonOne)
     ?? compare(precedingValue, followingValue, by: comparisonTwo)
-  }
 }
 
 /// Compares two values according to some derived sort criteria.
