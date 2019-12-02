@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 extension Comparable {
 
   // MARK: - Comparison
@@ -159,11 +161,8 @@ extension Comparable {
   _ comparisonTwo: (_ valueTwo: T) -> D
 ) -> Bool
 where C: Comparable, D: Comparable {
-  if compare(precedingValue, followingValue, by: comparisonOne) {
-    return true
-  } else {
-    return compare(precedingValue, followingValue, by: comparisonTwo)
-  }
+  return compare(precedingValue, followingValue, by: comparisonOne)
+    ∨ compare(precedingValue, followingValue, by: comparisonTwo)
 }
 
 /// Compares two values according to some derived sort criteria.
@@ -187,9 +186,6 @@ where C: Comparable, D: Comparable {
   _ comparisonThree: (_ valueThree: T) -> E
 ) -> Bool
 where C: Comparable, D: Comparable, E: Comparable {
-  if compare(precedingValue, followingValue, by: comparisonOne, comparisonTwo) {
-    return true
-  } else {
-    return compare(precedingValue, followingValue, by: comparisonThree)
-  }
+  compare(precedingValue, followingValue, by: comparisonOne, comparisonTwo)
+    ∨ compare(precedingValue, followingValue, by: comparisonThree)
 }
