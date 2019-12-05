@@ -38,7 +38,7 @@ import PackageDescription
 ///
 /// ...and much more.
 ///
-/// ### Exampe Usage
+/// ### Example Usage
 ///
 /// ```swift
 /// // ••••••• Localization •••••••
