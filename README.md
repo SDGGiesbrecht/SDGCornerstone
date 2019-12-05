@@ -39,7 +39,7 @@ SDGCornerstone forms the foundation of the SDG module family. It establishes des
 
 ...and much more.
 
-### Exampe Usage
+### Example Usage
 
 ```swift
 // ••••••• Localization •••••••
