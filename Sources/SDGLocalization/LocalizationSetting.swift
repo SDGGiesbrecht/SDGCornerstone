@@ -47,15 +47,18 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
       }
 
       if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
+        // @exempt(from: tests) Depends on host.
         let entryMatches: [PatternMatch<String>] = languages.components(separatedBy: ":")
         let converted = entryMatches.map { convert(locale: String($0.contents)) }
         preferences.value.set(to: converted)
       } else if let language = ProcessInfo.processInfo.environment["LANG"],
         let locale:PatternMatch<String> = language.prefix(upTo: ".")
       {
-        let converted = convert(locale: String(locale.contents))  // @exempt(from: tests)
+        // @exempt(from: tests) Depends on host.
+        let converted = convert(locale: String(locale.contents))
         preferences.value.set(to: [converted])
       } else {
+        // @exempt(from: tests) Depends on host.
         preferences.value.set(to: nil)
       }
 
