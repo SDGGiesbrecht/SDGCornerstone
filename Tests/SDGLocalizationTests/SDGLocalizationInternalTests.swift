@@ -102,7 +102,7 @@ class SDGLocalizationInternalTests: TestCase {
       expectOperatingSystemLanguage = false
     #endif
     #if os(macOS)
-      if ProcessInfo.processInfo.environment["GITHUB_ACTIONS"] ≠ "true" {
+      if ProcessInfo.processInfo.environment["GITHUB_ACTIONS"] == "true" {
         // GitHub’s host has no language set.
         expectOperatingSystemLanguage = false
       }
