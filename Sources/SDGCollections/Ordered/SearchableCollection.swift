@@ -386,6 +386,10 @@ extension SearchableCollection {
   @inlinable public func contains<P>(_ pattern: P) -> Bool where P: Pattern, P.Element == Element {
     return _contains(pattern)
   }
+  @inlinable public func contains<P>(_ pattern: P) -> Bool where P: Pattern, P: StringProtocol, P.Element == Element {
+    // Disambiguates with StringProtocol.
+    return _contains(pattern)
+  }
   @inlinable public func contains(_ pattern: Self) -> Bool {
     return _contains(pattern)
   }
