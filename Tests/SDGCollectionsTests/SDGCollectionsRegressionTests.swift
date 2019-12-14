@@ -35,7 +35,7 @@ class SDGCollectionsRegressionTests: TestCase {
   func testSubstringContainmentIsUnambiguous() {
     // Untracked
 
-    let closure: (String.SubSequence) -> Bool = { $0.contains("...") }
+    let _: (String.SubSequence) -> Bool = { $0.contains("...") }
 
     let string = "..."
     var array = string.split { $0.isNewline }
