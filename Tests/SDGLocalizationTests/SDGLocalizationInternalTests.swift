@@ -96,14 +96,23 @@ class SDGLocalizationInternalTests: TestCase {
   }
 
   func testLocalizationSetting() {
-    #if !(targetEnvironment(simulator) && (os(iOS) || os(tvOS)))
+    var expectOperatingSystemLanguage = true
+    #if targetEnvironment(simulator) && (os(iOS) || os(tvOS))
       // Default simulator state has no language set.
-
+      expectOperatingSystemLanguage = false
+    #endif
+    #if os(macOS)
+      if ProcessInfo.processInfo.environment["GITHUB_ACTIONS"] == "true" {
+        // GitHub’s host has no language set.
+        expectOperatingSystemLanguage = false
+      }
+    #endif
+    if expectOperatingSystemLanguage {
       XCTAssertNotNil(
         LocalizationSetting.osSystemWidePreferences.value.as([String].self),
         "Failed to detect operating system localization setting."
       )
-    #endif
+    }
 
     LocalizationSetting.setSystemWidePreferences(to: nil)
     LocalizationSetting.setApplicationPreferences(to: nil)

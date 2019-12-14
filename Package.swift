@@ -17,7 +17,7 @@
 import PackageDescription
 
 // #example(1, readMe🇨🇦EN)
-/// SDGCornerstone forms the foundation of the SDG module family. It establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation).
+/// SDGCornerstone forms the foundation of the SDG module family; it establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation).
 ///
 /// > [הִנְנִי יִסַּד בְּצִיּוֹן אָבֶן אֶבֶן בֹּחַן פִּנַּת יִקְרַת מוּסָד מוּסָד׃](https://www.biblegateway.com/passage/?search=Isaiah+28&version=WLC;NIV)
 /// >
@@ -148,460 +148,584 @@ import PackageDescription
 /// #endif
 /// ```
 let package = Package(
-    name: "SDGCornerstone",
-    products: [
+  name: "SDGCornerstone",
+  products: [
 
-        // #documentation(SDGControlFlow)
-        /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
-        .library(name: "SDGControlFlow", targets: ["SDGControlFlow"]),
+    // #documentation(SDGControlFlow)
+    /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
+    .library(name: "SDGControlFlow", targets: ["SDGControlFlow"]),
 
-        // #documentation(SDGLogic)
-        /// Extensions to related to Boolean logic.
-        .library(name: "SDGLogic", targets: ["SDGLogic"]),
-        // #documentation(SDGLogicTestUtilities)
-        /// Utilities for testing code which uses `SDGLogic`.
-        .library(name: "SDGLogicTestUtilities", targets: ["SDGLogicTestUtilities"]),
+    // #documentation(SDGLogic)
+    /// Extensions to related to Boolean logic.
+    .library(name: "SDGLogic", targets: ["SDGLogic"]),
+    // #documentation(SDGLogicTestUtilities)
+    /// Utilities for testing code which uses `SDGLogic`.
+    .library(name: "SDGLogicTestUtilities", targets: ["SDGLogicTestUtilities"]),
 
-        // #documentation(SDGMathematics)
-        /// A hierarchy of mathematical protocols and extensions to number types.
-        .library(name: "SDGMathematics", targets: ["SDGMathematics"]),
-        // #documentation(SDGMathematicsTestUtilities)
-        /// Utilities for testing code which uses `SDGMathematics`.
-        .library(name: "SDGMathematicsTestUtilities", targets: ["SDGMathematicsTestUtilities"]),
+    // #documentation(SDGMathematics)
+    /// A hierarchy of mathematical protocols and extensions to number types.
+    .library(name: "SDGMathematics", targets: ["SDGMathematics"]),
+    // #documentation(SDGMathematicsTestUtilities)
+    /// Utilities for testing code which uses `SDGMathematics`.
+    .library(name: "SDGMathematicsTestUtilities", targets: ["SDGMathematicsTestUtilities"]),
 
-        // #documentation(SDGCollections)
-        /// Pattern searching, set logic, and other extensions to collection types.
-        .library(name: "SDGCollections", targets: ["SDGCollections"]),
-        // #documentation(SDGCollectionsTestUtilities)
-        /// Utilities for testing code which uses `SDGCollections`.
-        .library(name: "SDGCollectionsTestUtilities", targets: ["SDGCollectionsTestUtilities"]),
+    // #documentation(SDGCollections)
+    /// Pattern searching, set logic, and other extensions to collection types.
+    .library(name: "SDGCollections", targets: ["SDGCollections"]),
+    // #documentation(SDGCollectionsTestUtilities)
+    /// Utilities for testing code which uses `SDGCollections`.
+    .library(name: "SDGCollectionsTestUtilities", targets: ["SDGCollectionsTestUtilities"]),
 
-        // #documentation(SDGBinaryData)
-        /// Extensions related to raw binary data.
-        .library(name: "SDGBinaryData", targets: ["SDGBinaryData"]),
+    // #documentation(SDGBinaryData)
+    /// Extensions related to raw binary data.
+    .library(name: "SDGBinaryData", targets: ["SDGBinaryData"]),
 
-        // #documentation(SDGText)
-        /// Extensions related to text and Unicode.
-        .library(name: "SDGText", targets: ["SDGText"]),
+    // #documentation(SDGText)
+    /// Extensions related to text and Unicode.
+    .library(name: "SDGText", targets: ["SDGText"]),
 
-        // #documentatino(SDGCollation)
-        /// Text collation.
-        ///
-        /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
-        .library(name: "SDGCollation", targets: ["SDGCollation"]),
+    // #documentatino(SDGCollation)
+    /// Text collation.
+    ///
+    /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
+    .library(name: "SDGCollation", targets: ["SDGCollation"]),
 
-        // #documentation(SDGPersistence)
-        /// Preferences and simplified file system interactions.
-        .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
-        // #documentation(SDGPersistenceTestUtilities)
-        /// Utilities for testing code which uses `SDGPersistence`.
-        .library(name: "SDGPersistenceTestUtilities", targets: ["SDGPersistenceTestUtilities"]),
+    // #documentation(SDGPersistence)
+    /// Preferences and simplified file system interactions.
+    .library(name: "SDGPersistence", targets: ["SDGPersistence"]),
+    // #documentation(SDGPersistenceTestUtilities)
+    /// Utilities for testing code which uses `SDGPersistence`.
+    .library(name: "SDGPersistenceTestUtilities", targets: ["SDGPersistenceTestUtilities"]),
 
-        // #documentation(SDGRandomization)
-        /// Randomization tools.
-        .library(name: "SDGRandomization", targets: ["SDGRandomization"]),
-        // #documentation(SDGRandomizationTestUtilities)
-        /// Utilities for testing code which uses `SDGRandomization`.
-        .library(name: "SDGRandomizationTestUtilities", targets: ["SDGRandomizationTestUtilities"]),
+    // #documentation(SDGRandomization)
+    /// Randomization tools.
+    .library(name: "SDGRandomization", targets: ["SDGRandomization"]),
+    // #documentation(SDGRandomizationTestUtilities)
+    /// Utilities for testing code which uses `SDGRandomization`.
+    .library(name: "SDGRandomizationTestUtilities", targets: ["SDGRandomizationTestUtilities"]),
 
-        // #documentation(SDGLocalization)
-        /// Localization tools and locale information.
-        .library(name: "SDGLocalization", targets: ["SDGLocalization"]),
-        // #documentation(SDGLocalizationTestUtilities)
-        /// Utilities for testing code which uses `SDGLocalization`.
-        .library(name: "SDGLocalizationTestUtilities", targets: ["SDGLocalizationTestUtilities"]),
+    // #documentation(SDGLocalization)
+    /// Localization tools and locale information.
+    .library(name: "SDGLocalization", targets: ["SDGLocalization"]),
+    // #documentation(SDGLocalizationTestUtilities)
+    /// Utilities for testing code which uses `SDGLocalization`.
+    .library(name: "SDGLocalizationTestUtilities", targets: ["SDGLocalizationTestUtilities"]),
 
-        // #documentation(SDGGeometry)
-        /// Extensions related to geometry.
-        .library(name: "SDGGeometry", targets: ["SDGGeometry"]),
-        // #documentation(SDGGeometryTestUtilities)
-        /// Utilities for testing code which uses `SDGGeometry`.
-        .library(name: "SDGGeometryTestUtilities", targets: ["SDGGeometryTestUtilities"]),
+    // #documentation(SDGGeometry)
+    /// Extensions related to geometry.
+    .library(name: "SDGGeometry", targets: ["SDGGeometry"]),
+    // #documentation(SDGGeometryTestUtilities)
+    /// Utilities for testing code which uses `SDGGeometry`.
+    .library(name: "SDGGeometryTestUtilities", targets: ["SDGGeometryTestUtilities"]),
 
-        // #documentation(SDGCalendar)
-        /// Tools for working with human calendar systems.
-        .library(name: "SDGCalendar", targets: ["SDGCalendar"]),
+    // #documentation(SDGCalendar)
+    /// Tools for working with human calendar systems.
+    .library(name: "SDGCalendar", targets: ["SDGCalendar"]),
 
-        // #documentation(SDGPrecisionMathematics)
-        /// Arbitrary‐precision number types.
-        .library(name: "SDGPrecisionMathematics", targets: ["SDGPrecisionMathematics"]),
+    // #documentation(SDGPrecisionMathematics)
+    /// Arbitrary‐precision number types.
+    .library(name: "SDGPrecisionMathematics", targets: ["SDGPrecisionMathematics"]),
 
-        // #documentation(SDGConcurrency)
-        /// Concurrency and threading tools.
-        .library(name: "SDGConcurrency", targets: ["SDGConcurrency"]),
+    // #documentation(SDGConcurrency)
+    /// Concurrency and threading tools.
+    .library(name: "SDGConcurrency", targets: ["SDGConcurrency"]),
 
-        // #documentation(SDGExternalProcess)
-        /// Tools for running external processes and shell commands.
-        .library(name: "SDGExternalProcess", targets: ["SDGExternalProcess"]),
+    // #documentation(SDGExternalProcess)
+    /// Tools for running external processes and shell commands.
+    .library(name: "SDGExternalProcess", targets: ["SDGExternalProcess"]),
 
-        // #documentation(SDGVersioning)
-        /// Utilities for working with semantic versions.
-        .library(name: "SDGVersioning", targets: ["SDGVersioning"]),
+    // #documentation(SDGVersioning)
+    /// Utilities for working with semantic versions.
+    .library(name: "SDGVersioning", targets: ["SDGVersioning"]),
 
-        // #documentation(SDGTesting)
-        /// Miscellaneous test utilities.
-        .library(name: "SDGTesting", targets: ["SDGTesting"]),
+    // #documentation(SDGTesting)
+    /// Miscellaneous test utilities.
+    .library(name: "SDGTesting", targets: ["SDGTesting"]),
 
-        // #documentation(SDGXCTestUtilities)
-        /// Additional test utilities which require `XCTest`.
-        .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"])
-    ],
-    targets: [
+    // #documentation(SDGXCTestUtilities)
+    /// Additional test utilities which require `XCTest`.
+    .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"])
+  ],
+  targets: [
 
-        // @documentation(SDGControlFlow)
-        /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
-        .target(name: "SDGControlFlow"),
+    // @documentation(SDGControlFlow)
+    /// Very low‐level abstractions which can be used to reduce boilerplate code and simplify control flow.
+    .target(name: "SDGControlFlow"),
 
-        // @documentation(SDGLogic)
-        /// Extensions to related to Boolean logic.
-        .target(name: "SDGLogic", dependencies: []),
-        // @documentation(SDGLogicTestUtilities)
-        /// Utilities for testing code which uses `SDGLogic`.
-        .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),
+    // @documentation(SDGLogic)
+    /// Extensions to related to Boolean logic.
+    .target(name: "SDGLogic", dependencies: []),
+    // @documentation(SDGLogicTestUtilities)
+    /// Utilities for testing code which uses `SDGLogic`.
+    .target(name: "SDGLogicTestUtilities", dependencies: ["SDGLogic", "SDGTesting"]),
 
-        // @documentation(SDGMathematics)
-        /// A hierarchy of mathematical protocols and extensions to number types.
-        .target(name: "SDGMathematics", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic"
-            ]),
-        // @documentation(SDGMathematicsTestUtilities)
-        /// Utilities for testing code which uses `SDGMathematics`.
-        .target(name: "SDGMathematicsTestUtilities", dependencies: [
-            "SDGMathematics", "SDGTesting",
-            "SDGCollections",
-            "SDGLogicTestUtilities",
-            "SDGCollectionsTestUtilities",
-            "SDGPersistenceTestUtilities"
-            ]),
+    // @documentation(SDGMathematics)
+    /// A hierarchy of mathematical protocols and extensions to number types.
+    .target(
+      name: "SDGMathematics",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic"
+      ]
+    ),
+    // @documentation(SDGMathematicsTestUtilities)
+    /// Utilities for testing code which uses `SDGMathematics`.
+    .target(
+      name: "SDGMathematicsTestUtilities",
+      dependencies: [
+        "SDGMathematics", "SDGTesting",
+        "SDGCollections",
+        "SDGLogicTestUtilities",
+        "SDGCollectionsTestUtilities",
+        "SDGPersistenceTestUtilities"
+      ]
+    ),
 
-        // @documentation(SDGCollections)
-        /// Pattern searching, set logic, and other extensions to collection types.
-        .target(name: "SDGCollections", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics"
-            ]),
-        // @documentation(SDGCollectionsTestUtilities)
-        /// Utilities for testing code which uses `SDGCollections`.
-        .target(name: "SDGCollectionsTestUtilities", dependencies: [
-            "SDGCollections", "SDGTesting",
-            "SDGLogicTestUtilities"
-            ]),
+    // @documentation(SDGCollections)
+    /// Pattern searching, set logic, and other extensions to collection types.
+    .target(
+      name: "SDGCollections",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics"
+      ]
+    ),
+    // @documentation(SDGCollectionsTestUtilities)
+    /// Utilities for testing code which uses `SDGCollections`.
+    .target(
+      name: "SDGCollectionsTestUtilities",
+      dependencies: [
+        "SDGCollections", "SDGTesting",
+        "SDGLogicTestUtilities"
+      ]
+    ),
 
-        // @documentation(SDGBinaryData)
-        /// Extensions related to raw binary data.
-        .target(name: "SDGBinaryData", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections"
-            ]),
+    // @documentation(SDGBinaryData)
+    /// Extensions related to raw binary data.
+    .target(
+      name: "SDGBinaryData",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections"
+      ]
+    ),
 
-        // @documentation(SDGText)
-        /// Extensions related to text and Unicode.
-        .target(name: "SDGText", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            ]),
-        // @documentation(SDGCollation)
-        /// Text collation.
-        ///
-        /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
-        .target(name: "SDGCollation", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText",
-            "SDGPersistence"
-            ]),
+    // @documentation(SDGText)
+    /// Extensions related to text and Unicode.
+    .target(
+      name: "SDGText",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+      ]
+    ),
+    // @documentation(SDGCollation)
+    /// Text collation.
+    ///
+    /// This product is distinct from SDGText, because its required Unicode data take a lot of space.
+    .target(
+      name: "SDGCollation",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGPersistence"
+      ]
+    ),
 
-        // @documentation(SDGPersistence)
-        /// Preferences and simplified file system interactions.
-        .target(name: "SDGPersistence", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText"
-            ], swiftSettings: [
-                .define("DEBUG_DOMAINS", .when(configuration: .debug)),
-                .define("PREFERENCE_WARNINGS", .when(configuration: .debug))
-            ]),
-        // @documentation(SDGPersistenceTestUtilities)
-        /// Utilities for testing code which uses `SDGPersistence`.
-        .target(name: "SDGPersistenceTestUtilities", dependencies: [
-            "SDGPersistence", "SDGTesting",
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText",
-            "SDGLocalization",
-            "SDGCalendar",
-            "SDGCornerstoneLocalizations"
-            ]),
+    // @documentation(SDGPersistence)
+    /// Preferences and simplified file system interactions.
+    .target(
+      name: "SDGPersistence",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText"
+      ],
+      swiftSettings: [
+        .define("DEBUG_DOMAINS", .when(configuration: .debug)),
+        .define("PREFERENCE_WARNINGS", .when(configuration: .debug))
+      ]
+    ),
+    // @documentation(SDGPersistenceTestUtilities)
+    /// Utilities for testing code which uses `SDGPersistence`.
+    .target(
+      name: "SDGPersistenceTestUtilities",
+      dependencies: [
+        "SDGPersistence", "SDGTesting",
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGLocalization",
+        "SDGCalendar",
+        "SDGCornerstoneLocalizations"
+      ]
+    ),
 
-        // @documentation(SDGRandomization)
-        /// Randomization tools.
-        .target(name: "SDGRandomization", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics"
-            ]),
-        // @documentation(SDGRandomizationTestUtilities)
-        /// Utilities for testing code which uses `SDGRandomization`.
-        .target(name: "SDGRandomizationTestUtilities", dependencies: [
-            "SDGRandomization", "SDGTesting"
-            ]),
+    // @documentation(SDGRandomization)
+    /// Randomization tools.
+    .target(
+      name: "SDGRandomization",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics"
+      ]
+    ),
+    // @documentation(SDGRandomizationTestUtilities)
+    /// Utilities for testing code which uses `SDGRandomization`.
+    .target(
+      name: "SDGRandomizationTestUtilities",
+      dependencies: [
+        "SDGRandomization", "SDGTesting"
+      ]
+    ),
 
-        // @documentation(SDGLocalization)
-        /// Localization tools and locale information.
-        .target(name: "SDGLocalization", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText",
-            "SDGPersistence"
-            ]),
-        // @documentation(SDGLocalizationTestUtilities)
-        /// Utilities for testing code which uses `SDGLocalization`.
-        .target(name: "SDGLocalizationTestUtilities", dependencies: [
-            "SDGLocalization", "SDGTesting",
-            "SDGPersistenceTestUtilities"
-            ]),
+    // @documentation(SDGLocalization)
+    /// Localization tools and locale information.
+    .target(
+      name: "SDGLocalization",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGPersistence"
+      ]
+    ),
+    // @documentation(SDGLocalizationTestUtilities)
+    /// Utilities for testing code which uses `SDGLocalization`.
+    .target(
+      name: "SDGLocalizationTestUtilities",
+      dependencies: [
+        "SDGLocalization", "SDGTesting",
+        "SDGPersistenceTestUtilities"
+      ]
+    ),
 
-        // @documentation(SDGGeometry)
-        /// Extensions related to geometry.
-        .target(name: "SDGGeometry", dependencies: [
-            "SDGControlFlow",
-            "SDGMathematics"
-            ]),
-        // @documentation(SDGGeometryTestUtilities)
-        /// Utilities for testing code which uses `SDGGeometry`.
-        .target(name: "SDGGeometryTestUtilities", dependencies: [
-            "SDGGeometry", "SDGTesting",
-            "SDGMathematicsTestUtilities"
-            ]),
+    // @documentation(SDGGeometry)
+    /// Extensions related to geometry.
+    .target(
+      name: "SDGGeometry",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGMathematics"
+      ]
+    ),
+    // @documentation(SDGGeometryTestUtilities)
+    /// Utilities for testing code which uses `SDGGeometry`.
+    .target(
+      name: "SDGGeometryTestUtilities",
+      dependencies: [
+        "SDGGeometry", "SDGTesting",
+        "SDGMathematicsTestUtilities"
+      ]
+    ),
 
-        // @documentation(SDGCalendar)
-        /// Tools for working with human calendar systems.
-        .target(name: "SDGCalendar", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText",
-            "SDGLocalization",
-            "SDGCornerstoneLocalizations"
-            ]),
+    // @documentation(SDGCalendar)
+    /// Tools for working with human calendar systems.
+    .target(
+      name: "SDGCalendar",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations"
+      ]
+    ),
 
-        // @documentation(SDGPrecisionMathematics)
-        /// Arbitrary‐precision number types.
-        .target(name: "SDGPrecisionMathematics", dependencies: [
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGBinaryData",
-            "SDGText",
-            "SDGLocalization",
-            "SDGCornerstoneLocalizations"
-            ]),
+    // @documentation(SDGPrecisionMathematics)
+    /// Arbitrary‐precision number types.
+    .target(
+      name: "SDGPrecisionMathematics",
+      dependencies: [
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGBinaryData",
+        "SDGText",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations"
+      ]
+    ),
 
-        // @documentation(SDGConcurrency)
-        /// Concurrency and threading tools.
-        .target(name: "SDGConcurrency", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic"
-            ]),
+    // @documentation(SDGConcurrency)
+    /// Concurrency and threading tools.
+    .target(
+      name: "SDGConcurrency",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic"
+      ]
+    ),
 
-        // @documentation(SDGExternalProcess)
-        /// Tools for running external processes and shell commands.
-        .target(name: "SDGExternalProcess", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGText",
-            "SDGPersistence",
-            "SDGLocalization"
-            ]),
+    // @documentation(SDGExternalProcess)
+    /// Tools for running external processes and shell commands.
+    .target(
+      name: "SDGExternalProcess",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGText",
+        "SDGPersistence",
+        "SDGLocalization"
+      ]
+    ),
 
-        // @documentation(SDGVersioning)
-        /// Utilities for working with semantic versions.
-        .target(name: "SDGVersioning", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText",
-            "SDGLocalization",
-            "SDGCornerstoneLocalizations"
-        ]),
+    // @documentation(SDGVersioning)
+    /// Utilities for working with semantic versions.
+    .target(
+      name: "SDGVersioning",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations"
+      ]
+    ),
 
-        // @documentation(SDGTesting)
-        /// Miscellaneous test utilities.
-        .target(name: "SDGTesting", dependencies: [
-            "SDGControlFlow",
-            "SDGMathematics",
-            "SDGText",
-            "SDGLocalization",
-            "SDGCornerstoneLocalizations"
-            ]),
+    // @documentation(SDGTesting)
+    /// Miscellaneous test utilities.
+    .target(
+      name: "SDGTesting",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGMathematics",
+        "SDGText",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations"
+      ]
+    ),
 
-        // @documentation(SDGXCTestUtilities)
-        /// Additional test utilities which require `XCTest`.
-        .target(name: "SDGXCTestUtilities", dependencies: [
-            "SDGTesting",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGText",
-            "SDGPersistence"
-            ]),
+    // @documentation(SDGXCTestUtilities)
+    /// Additional test utilities which require `XCTest`.
+    .target(
+      name: "SDGXCTestUtilities",
+      dependencies: [
+        "SDGTesting",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGText",
+        "SDGPersistence"
+      ]
+    ),
 
-        // Internal modules.
+    // Internal modules.
 
-        .target(name: "SDGCornerstoneLocalizations", dependencies: [
-            "SDGControlFlow",
-            "SDGLocalization"
-            ]),
+    .target(
+      name: "SDGCornerstoneLocalizations",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLocalization"
+      ]
+    ),
 
-        // Internal utilities.
+    // Internal utilities.
 
-        .testTarget(name: "SDGCornerstoneResourceGeneration", dependencies: [
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText",
-            "SDGCollation",
-            "SDGPersistence",
-            "SDGLocalization"
-            ]),
+    .testTarget(
+      name: "SDGCornerstoneResourceGeneration",
+      dependencies: [
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGCollation",
+        "SDGPersistence",
+        "SDGLocalization"
+      ]
+    ),
 
-        // Internal tests.
+    // Internal tests.
 
-        .testTarget(name: "SDGControlFlowTests", dependencies: [
-            "SDGControlFlow", "SDGTesting", "SDGXCTestUtilities"
-            ]),
-        .testTarget(name: "SDGLogicTests", dependencies: [
-            "SDGLogic", "SDGLogicTestUtilities", "SDGTesting", "SDGXCTestUtilities",
-            "SDGMathematicsTestUtilities"
-            ]),
-        .testTarget(name: "SDGBinaryDataTests", dependencies: [
-            "SDGBinaryData", "SDGTesting", "SDGXCTestUtilities",
-            "SDGLogic",
-            "SDGCornerstoneLocalizations",
-            "SDGMathematicsTestUtilities",
-            "SDGLocalizationTestUtilities"
-            ]),
-        .testTarget(name: "SDGMathematicsTests", dependencies: [
-            "SDGMathematics", "SDGMathematicsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
-            "SDGLogic",
-            ]),
-        .testTarget(name: "SDGCollectionsTests", dependencies: [
-            "SDGCollections", "SDGCollectionsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCornerstoneLocalizations",
-            "SDGPersistenceTestUtilities",
-            "SDGLocalizationTestUtilities"
-            ]),
-        .testTarget(name: "SDGTextTests", dependencies: [
-            "SDGText", "SDGTesting", "SDGXCTestUtilities",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGCornerstoneLocalizations",
-            "SDGMathematicsTestUtilities",
-            "SDGCollectionsTestUtilities",
-            "SDGPersistenceTestUtilities",
-            "SDGLocalizationTestUtilities"
-            ]),
-        .testTarget(name: "SDGCollationTests", dependencies: [
-            "SDGText",
-            "SDGCollation",
-            "SDGXCTestUtilities"
-            ]),
-        .testTarget(name: "SDGPersistenceTests", dependencies: [
-            "SDGPersistence", "SDGPersistenceTestUtilities", "SDGTesting", "SDGXCTestUtilities",
-            "SDGLogic",
-            "SDGCollections",
-            "SDGText",
-            "SDGLocalization",
-            "SDGExternalProcess",
-            "SDGCornerstoneLocalizations",
-            "SDGLocalizationTestUtilities"
-            ]),
-        .testTarget(name: "SDGRandomizationTests", dependencies: [
-            "SDGRandomization", "SDGRandomizationTestUtilities", "SDGTesting", "SDGXCTestUtilities",
-            "SDGLogic",
-            "SDGMathematics"
-            ]),
-        .testTarget(name: "SDGLocalizationTests", dependencies: [
-            "SDGLocalization", "SDGLocalizationTestUtilities", "SDGTesting", "SDGXCTestUtilities",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText",
-            "SDGPersistence",
-            "SDGPrecisionMathematics",
-            "SDGCornerstoneLocalizations",
-            "SDGPersistenceTestUtilities"
-            ]),
-        .testTarget(name: "SDGGeometryTests", dependencies: [
-            "SDGGeometry", "SDGGeometryTestUtilities", "SDGTesting", "SDGXCTestUtilities",
-            "SDGMathematics",
-            "SDGMathematicsTestUtilities"
-            ]),
-        .testTarget(name: "SDGCalendarTests", dependencies: [
-            "SDGCalendar", "SDGTesting", "SDGXCTestUtilities",
-            "SDGMathematics",
-            "SDGLocalization",
-            "SDGCornerstoneLocalizations",
-            "SDGMathematicsTestUtilities",
-            "SDGPersistenceTestUtilities",
-            "SDGLocalizationTestUtilities"
-            ]),
-        .testTarget(name: "SDGPrecisionMathematicsTests", dependencies: [
-            "SDGPrecisionMathematics", "SDGTesting", "SDGXCTestUtilities",
-            "SDGMathematics",
-            "SDGBinaryData",
-            "SDGCornerstoneLocalizations",
-            "SDGMathematicsTestUtilities",
-            "SDGPersistenceTestUtilities",
-            "SDGLocalizationTestUtilities"
-            ]),
-        .testTarget(name: "SDGConcurrencyTests", dependencies: [
-            "SDGConcurrency", "SDGTesting", "SDGXCTestUtilities"
-            ]),
-        .testTarget(name: "SDGExternalProcessTests", dependencies: [
-            "SDGExternalProcess", "SDGTesting", "SDGXCTestUtilities",
-            "SDGLogic"
-            ]),
-        .testTarget(name: "SDGVersioningTests", dependencies: [
-            "SDGVersioning", "SDGTesting", "SDGXCTestUtilities",
-            "SDGCornerstoneLocalizations",
-            "SDGLocalizationTestUtilities"
-            ]),
-        .testTarget(name: "SDGCornerstoneDocumentationExampleTests", dependencies: [
-            "SDGControlFlow",
-            "SDGLogic",
-            "SDGMathematics",
-            "SDGCollections",
-            "SDGText",
-            "SDGPersistence",
-            "SDGRandomization",
-            "SDGLocalization",
-            "SDGCalendar",
-            "SDGConcurrency",
-            "SDGPrecisionMathematics",
-            "SDGExternalProcess",
-            "SDGPersistenceTestUtilities",
-            "SDGXCTestUtilities"
-        ])
-    ]
+    .testTarget(
+      name: "SDGControlFlowTests",
+      dependencies: [
+        "SDGControlFlow", "SDGTesting", "SDGXCTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGLogicTests",
+      dependencies: [
+        "SDGLogic", "SDGLogicTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+        "SDGMathematicsTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGBinaryDataTests",
+      dependencies: [
+        "SDGBinaryData", "SDGTesting", "SDGXCTestUtilities",
+        "SDGLogic",
+        "SDGCornerstoneLocalizations",
+        "SDGMathematicsTestUtilities",
+        "SDGLocalizationTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGMathematicsTests",
+      dependencies: [
+        "SDGMathematics", "SDGMathematicsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+        "SDGLogic",
+      ]
+    ),
+    .testTarget(
+      name: "SDGCollectionsTests",
+      dependencies: [
+        "SDGCollections", "SDGCollectionsTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCornerstoneLocalizations",
+        "SDGPersistenceTestUtilities",
+        "SDGLocalizationTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGTextTests",
+      dependencies: [
+        "SDGText", "SDGTesting", "SDGXCTestUtilities",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGCornerstoneLocalizations",
+        "SDGMathematicsTestUtilities",
+        "SDGCollectionsTestUtilities",
+        "SDGPersistenceTestUtilities",
+        "SDGLocalizationTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGCollationTests",
+      dependencies: [
+        "SDGText",
+        "SDGCollation",
+        "SDGXCTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGPersistenceTests",
+      dependencies: [
+        "SDGPersistence", "SDGPersistenceTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+        "SDGLogic",
+        "SDGCollections",
+        "SDGText",
+        "SDGLocalization",
+        "SDGExternalProcess",
+        "SDGCornerstoneLocalizations",
+        "SDGLocalizationTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGRandomizationTests",
+      dependencies: [
+        "SDGRandomization", "SDGRandomizationTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+        "SDGLogic",
+        "SDGMathematics"
+      ]
+    ),
+    .testTarget(
+      name: "SDGLocalizationTests",
+      dependencies: [
+        "SDGLocalization", "SDGLocalizationTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGPersistence",
+        "SDGPrecisionMathematics",
+        "SDGCornerstoneLocalizations",
+        "SDGPersistenceTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGGeometryTests",
+      dependencies: [
+        "SDGGeometry", "SDGGeometryTestUtilities", "SDGTesting", "SDGXCTestUtilities",
+        "SDGMathematics",
+        "SDGMathematicsTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGCalendarTests",
+      dependencies: [
+        "SDGCalendar", "SDGTesting", "SDGXCTestUtilities",
+        "SDGMathematics",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations",
+        "SDGMathematicsTestUtilities",
+        "SDGPersistenceTestUtilities",
+        "SDGLocalizationTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGPrecisionMathematicsTests",
+      dependencies: [
+        "SDGPrecisionMathematics", "SDGTesting", "SDGXCTestUtilities",
+        "SDGMathematics",
+        "SDGBinaryData",
+        "SDGCornerstoneLocalizations",
+        "SDGMathematicsTestUtilities",
+        "SDGPersistenceTestUtilities",
+        "SDGLocalizationTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGConcurrencyTests",
+      dependencies: [
+        "SDGConcurrency", "SDGTesting", "SDGXCTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGExternalProcessTests",
+      dependencies: [
+        "SDGExternalProcess", "SDGTesting", "SDGXCTestUtilities",
+        "SDGLogic"
+      ]
+    ),
+    .testTarget(
+      name: "SDGVersioningTests",
+      dependencies: [
+        "SDGVersioning", "SDGTesting", "SDGXCTestUtilities",
+        "SDGCornerstoneLocalizations",
+        "SDGLocalizationTestUtilities"
+      ]
+    ),
+    .testTarget(
+      name: "SDGCornerstoneDocumentationExampleTests",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGPersistence",
+        "SDGRandomization",
+        "SDGLocalization",
+        "SDGCalendar",
+        "SDGConcurrency",
+        "SDGPrecisionMathematics",
+        "SDGExternalProcess",
+        "SDGPersistenceTestUtilities",
+        "SDGXCTestUtilities"
+      ]
+    )
+  ]
 )
 
 // #workaround(Swift 5.1.2, The generated Xcode project cannot import XCTest on iOS devices.)
@@ -610,8 +734,8 @@ let path = ProcessInfo.processInfo.environment["PATH"] ?? ""
 let firstColon = path.range(of: ":")?.lowerBound ?? path.endIndex
 let firstEntry = path[..<firstColon]
 if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
-    let sdgXCTestUtilities = package.targets.first(where: { $0.name == "SDGXCTestUtilities" })!
-    var settings = sdgXCTestUtilities.swiftSettings ?? []
-    settings.append(.define("MANIFEST_LOADED_BY_XCODE"))
-    sdgXCTestUtilities.swiftSettings = settings
+  let sdgXCTestUtilities = package.targets.first(where: { $0.name == "SDGXCTestUtilities" })!
+  var settings = sdgXCTestUtilities.swiftSettings ?? []
+  settings.append(.define("MANIFEST_LOADED_BY_XCODE"))
+  sdgXCTestUtilities.swiftSettings = settings
 }
