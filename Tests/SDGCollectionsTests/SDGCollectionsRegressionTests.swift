@@ -31,4 +31,12 @@ class SDGCollectionsRegressionTests: TestCase {
 
     XCTAssertNil([1, 2, 3].firstMatch(for: [1, 2, 3] + ConditionalPattern({ _ in true })))
   }
+
+  func testSubstringContainmentIsUnambiguous() {
+    // Untracked
+
+    let string = "..."
+    var array = string.split { $0.isNewline }
+    array = array.filter { $0.contains("...")}
+  }
 }
