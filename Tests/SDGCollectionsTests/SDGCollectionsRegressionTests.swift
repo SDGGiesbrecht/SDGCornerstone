@@ -39,6 +39,6 @@ class SDGCollectionsRegressionTests: TestCase {
 
     let string = "..."
     var array = string.split { $0.isNewline }
-    array = array.filter { $0.contains("...")}
+    array = array.filter { $0.contains("...") }
   }
 }
