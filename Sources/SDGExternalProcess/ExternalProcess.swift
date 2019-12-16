@@ -144,7 +144,7 @@
       process.standardOutput = pipe
       process.standardError = pipe
 
-      #if !os(Linux)  // #workaround(Swift 5.1.2, Linux will gain this property in 5.2.)
+      #if !os(Linux)  // #workaround(Swift 5.1.3, Linux will gain this property in 5.2.)
         process.qualityOfService = Thread.current.qualityOfService
       #endif
 
