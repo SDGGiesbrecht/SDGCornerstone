@@ -12,9 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if canImport(CoreGraphics)
-  import CoreGraphics
-#endif
+import Foundation
 
 #if canImport(AppKit)
   import AppKit
@@ -30,7 +28,7 @@ extension Angle: CustomPlaygroundDisplayConvertible {
   // MARK: - CustomPlaygroundDisplayConvertible
 
   public var playgroundDescription: Any {
-    #if canImport(CoreGraphics) && (canImport(AppKit) || canImport(UIKit))
+    #if canImport(AppKit) || canImport(UIKit)
 
       let floatAngle: Angle<Double> = Double(self.inRadians.floatingPointApproximation).radians
 
