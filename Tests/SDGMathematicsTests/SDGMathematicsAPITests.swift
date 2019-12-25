@@ -175,9 +175,7 @@ class SDGMathematicsAPITests: TestCase {
   func testFloat() {
     testRealArithmeticConformance(of: Double.self)
     testRealArithmeticConformance(of: FloatMax.self)
-    #if canImport(CoreGraphics)
-      testRealArithmeticConformance(of: CGFloat.self)
-    #endif
+    testRealArithmeticConformance(of: CGFloat.self)
     #if !(os(iOS) || os(watchOS) || os(tvOS))
       testRealArithmeticConformance(of: Float80.self)
     #endif
