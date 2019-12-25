@@ -12,19 +12,21 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
+import SDGMathematics
+
+extension CGPoint {
+
+  // MARK: - Conversions
+
+  internal init(_ point: TwoDimensionalPoint<Double>) {
+    self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
+  }
+}
+
 #if canImport(CoreGraphics)
-
-  import CoreGraphics
-
-  import SDGMathematics
-
   extension CGPoint: TwoDimensionalPointProtocol {
-
-    // MARK: - Conversions
-
-    internal init(_ point: TwoDimensionalPoint<Double>) {
-      self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
-    }
 
     // MARK: - PointProtocol
 
@@ -36,5 +38,4 @@
       self.init(x: x, y: y)
     }
   }
-
 #endif
