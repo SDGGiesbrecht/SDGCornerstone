@@ -13,6 +13,9 @@
  */
 
 import Foundation
+#if canImport(CoreGraphics)
+  import CoreGraphics  // Not included in Foundation on iOS.
+#endif
 
 #if os(iOS) || os(watchOS) || os(tvOS)
   /// The member of the `Float` family with the largest bit field.
@@ -234,39 +237,55 @@ extension CGFloat: FloatFamily {
   // MARK: - FloatFamily
 
   @inlinable public static func _tgmath_pow(_ x: CGFloat, _ y: CGFloat) -> CGFloat {
-    return Foundation.pow(x, y)
+    return pow(x, y)
   }
 
   @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
-    return Foundation.log(x)
+    #if os(iOS) || os(watchOS) || os(tvOS)
+      return CoreGraphics.log(x)
+    #else
+      return Foundation.log(x)
+    #endif
   }
 
   @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
-    return Foundation.log10(x)
+    return log10(x)
   }
 
   @inlinable public static func _tgmath_sin(_ x: CGFloat) -> CGFloat {
-    return Foundation.sin(x)
+    #if os(iOS) || os(watchOS) || os(tvOS)
+      return CoreGraphics.sin(x)
+    #else
+      return Foundation.sin(x)
+    #endif
   }
 
   @inlinable public static func _tgmath_cos(_ x: CGFloat) -> CGFloat {
-    return Foundation.cos(x)
+    #if os(iOS) || os(watchOS) || os(tvOS)
+      return CoreGraphics.cos(x)
+    #else
+      return Foundation.cos(x)
+    #endif
   }
 
   @inlinable public static func _tgmath_tan(_ x: CGFloat) -> CGFloat {
-    return Foundation.tan(x)
+    #if os(iOS) || os(watchOS) || os(tvOS)
+      return CoreGraphics.tan(x)
+    #else
+      return Foundation.tan(x)
+    #endif
   }
 
   @inlinable public static func _tgmath_asin(_ x: CGFloat) -> CGFloat {
-    return Foundation.asin(x)
+    return asin(x)
   }
 
   @inlinable public static func _tgmath_acos(_ x: CGFloat) -> CGFloat {
-    return Foundation.acos(x)
+    return acos(x)
   }
 
   @inlinable public static func _tgmath_atan(_ x: CGFloat) -> CGFloat {
-    return Foundation.atan(x)
+    return atan(x)
   }
 
   // MARK: - IntegralArithmetic

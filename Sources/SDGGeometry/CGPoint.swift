@@ -13,6 +13,9 @@
  */
 
 import Foundation
+#if canImport(CoreGraphics)
+  import CoreGraphics  // Not included in Foundation on iOS.
+#endif
 
 import SDGMathematics
 
