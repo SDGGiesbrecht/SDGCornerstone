@@ -181,12 +181,10 @@ class SDGMathematicsAPITests: TestCase {
     #endif
     testRealArithmeticConformance(of: Float.self)
 
-    #if !os(Linux)
-      XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
-      XCTAssertNotNil(CGFloat("1"))
-      XCTAssertNotNil(CGFloat(String("1")))
-      XCTAssertNil(CGFloat(String("a")))
-    #endif
+    XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
+    XCTAssertNotNil(CGFloat("1"))
+    XCTAssertNotNil(CGFloat(String("1")))
+    XCTAssertNil(CGFloat(String("a")))
 
     test(method: (Double.rounded, "rounded"), of: 5.1, returns: 5)
   }
