@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#warning("Remove?")
 import Foundation
 #if canImport(CoreGraphics)
   import CoreGraphics  // Not included in Foundation on iOS.

@@ -130,7 +130,7 @@ extension TwoDimensionalVectorProtocol where Self.Scalar: RealArithmetic {
   /// The length of the vector.
   @inlinable public var length: Scalar {
     get {
-      return √(Δx ↑ 2 + Δy ↑ 2)
+      return √(|Δx| ↑ 2 + |Δy| ↑ 2)
     }
     set {
       self = Self(direction: direction, length: newValue)
