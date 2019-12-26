@@ -30,9 +30,7 @@ import Real
 /// A member of the `Float` family; `Double`, `Float80` or `Float`.
 public protocol FloatFamily: BinaryFloatingPoint, CustomDebugStringConvertible,
   LosslessStringConvertible, RealNumberProtocol
-{
-  static func _tgmath_log10(_ x: Self) -> Self
-}
+{}
 
 extension FloatFamily {
 
@@ -81,10 +79,6 @@ extension FloatFamily {
     //    b         x         x
     formNaturalLogarithm()
     self ÷= Self.ln(base)
-  }
-
-  @inlinable public static func log(_ antilogarithm: Self) -> Self {
-    return Self._tgmath_log10(antilogarithm)
   }
 
   @inlinable public mutating func formCommonLogarithm() {
@@ -174,13 +168,16 @@ extension FloatFamily where Self: ElementaryFunctions {
   }
 }
 
-extension Double: FloatFamily {
+extension FloatFamily where Self: RealFunctions {
 
-  // MARK: - FloatFamily
+  // MARK: - RealArithmetic
 
-  @inlinable public static func _tgmath_log10(_ x: Double) -> Double {
-    return Foundation.log10(x)
+  @inlinable public static func log(_ antilogarithm: Self) -> Self {
+    return Self.log10(antilogarithm)
   }
+}
+
+extension Double: FloatFamily {
 
   // MARK: - PointProtocol
 
@@ -201,12 +198,6 @@ extension CGFloat: FloatFamily {
 
   @inlinable public var debugDescription: String {
     return NativeType(self).debugDescription
-  }
-
-  // MARK: - FloatFamily
-
-  @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
-    return log10(x)
   }
 
   // MARK: - IntegralArithmetic
@@ -235,6 +226,10 @@ extension CGFloat: FloatFamily {
 
   @inlinable public static func ln(_ antilogarithm: Self) -> Self {
     return Foundation.log(antilogarithm)
+  }
+
+  @inlinable public static func log(_ antilogarithm: Self) -> Self {
+    return log10(antilogarithm)
   }
 
   @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
@@ -293,44 +288,6 @@ extension CGFloat: FloatFamily {
       try Double(self).encode(to: encoder)
     }
 
-    // MARK: - FloatFamily
-
-    @inlinable public static func _tgmath_pow(_ x: Float80, _ y: Float80) -> Float80 {
-      return Foundation.pow(x, y)
-    }
-
-    @inlinable public static func _tgmath_log(_ x: Float80) -> Float80 {
-      return Foundation.log(x)
-    }
-
-    @inlinable public static func _tgmath_log10(_ x: Float80) -> Float80 {
-      return Foundation.log10(x)
-    }
-
-    @inlinable public static func _tgmath_sin(_ x: Float80) -> Float80 {
-      return Foundation.sin(x)
-    }
-
-    @inlinable public static func _tgmath_cos(_ x: Float80) -> Float80 {
-      return Foundation.cos(x)
-    }
-
-    @inlinable public static func _tgmath_tan(_ x: Float80) -> Float80 {
-      return Foundation.tan(x)
-    }
-
-    @inlinable public static func _tgmath_asin(_ x: Float80) -> Float80 {
-      return Foundation.asin(x)
-    }
-
-    @inlinable public static func _tgmath_acos(_ x: Float80) -> Float80 {
-      return Foundation.acos(x)
-    }
-
-    @inlinable public static func _tgmath_atan(_ x: Float80) -> Float80 {
-      return Foundation.atan(x)
-    }
-
     // MARK: - PointProtocol
 
     public typealias Vector = Stride
@@ -346,44 +303,6 @@ extension CGFloat: FloatFamily {
 #endif
 
 extension Float: FloatFamily {
-
-  // MARK: - FloatFamily
-
-  @inlinable public static func _tgmath_pow(_ x: Float, _ y: Float) -> Float {
-    return Foundation.pow(x, y)
-  }
-
-  @inlinable public static func _tgmath_log(_ x: Float) -> Float {
-    return Foundation.log(x)
-  }
-
-  @inlinable public static func _tgmath_log10(_ x: Float) -> Float {
-    return Foundation.log10(x)
-  }
-
-  @inlinable public static func _tgmath_sin(_ x: Float) -> Float {
-    return Foundation.sin(x)
-  }
-
-  @inlinable public static func _tgmath_cos(_ x: Float) -> Float {
-    return Foundation.cos(x)
-  }
-
-  @inlinable public static func _tgmath_tan(_ x: Float) -> Float {
-    return Foundation.tan(x)
-  }
-
-  @inlinable public static func _tgmath_asin(_ x: Float) -> Float {
-    return Foundation.asin(x)
-  }
-
-  @inlinable public static func _tgmath_acos(_ x: Float) -> Float {
-    return Foundation.acos(x)
-  }
-
-  @inlinable public static func _tgmath_atan(_ x: Float) -> Float {
-    return Foundation.atan(x)
-  }
 
   // MARK: - PointProtocol
 
