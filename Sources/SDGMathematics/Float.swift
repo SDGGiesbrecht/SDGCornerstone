@@ -222,7 +222,7 @@ extension CGFloat: FloatFamily {
 
   // MARK: - RealArithmetic
 
-  public static let e: CGFloat = CGFloat(Double.e)
+  public static let e: CGFloat = CGFloat(NativeType.e)
 
   @inlinable public static func ln(_ antilogarithm: Self) -> Self {
     return Foundation.log(antilogarithm)
