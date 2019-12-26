@@ -12,7 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#warning("Remove?")
 import Foundation
 #if canImport(CoreGraphics)
   import CoreGraphics  // Not included in Foundation on iOS.
@@ -156,12 +155,12 @@ extension FloatFamily where Self: ElementaryFunctions {
     return Self.tan(angle.inRadians)
   }
 
-  @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
-    return Self.asin(tangent).radians
+  @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
+    return Self.asin(sine).radians
   }
 
-  @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
-    return Self.acos(tangent).radians
+  @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
+    return Self.acos(cosine).radians
   }
 
   @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
@@ -171,7 +170,7 @@ extension FloatFamily where Self: ElementaryFunctions {
   // MARK: - WholeArithmetic
 
   @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-    if precedingValue.isNonNegative { // SwiftNumerics refuses to do negatives.
+    if precedingValue.isNonNegative {  // SwiftNumerics refuses to do negatives.
       return Self.pow(precedingValue, followingValue)
     } else if let integer = Int(exactly: followingValue) {
       return Self.pow(precedingValue, integer)
@@ -235,51 +234,43 @@ extension CGFloat: FloatFamily {
   public static let e: CGFloat = CGFloat(NativeType.e)
 
   @inlinable public static func ln(_ antilogarithm: Self) -> Self {
-    #if os(iOS) || os(watchOS) || os(tvOS)
-    return CoreGraphics.log(antilogarithm)
-    #else
-    return Foundation.log(antilogarithm)
-    #endif
+    return CGFloat(SDGMathematics.ln(NativeType(antilogarithm)))
   }
 
   @inlinable public static func log(_ antilogarithm: Self) -> Self {
-    return log10(antilogarithm)
+    return CGFloat(SDGMathematics.log(NativeType(antilogarithm)))
+  }
+
+  @inlinable internal static func convert(_ angle: Angle<Self>) -> Angle<NativeType> {
+    return Angle(rawValue: NativeType(angle.rawValue))
   }
 
   @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
-    #if os(iOS) || os(watchOS) || os(tvOS)
-    return CoreGraphics.cos(angle.inRadians)
-    #else
-    return Foundation.cos(angle.inRadians)
-    #endif
+    return CGFloat(SDGMathematics.cos(convert(angle)))
   }
 
   @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
-    #if os(iOS) || os(watchOS) || os(tvOS)
-    return CoreGraphics.sin(angle.inRadians)
-    #else
-    return Foundation.sin(angle.inRadians)
-    #endif
+    return CGFloat(SDGMathematics.sin(convert(angle)))
   }
 
   @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
-    #if os(iOS) || os(watchOS) || os(tvOS)
-    return CoreGraphics.tan(angle.inRadians)
-    #else
-    return Foundation.tan(angle.inRadians)
-    #endif
+    return CGFloat(SDGMathematics.tan(convert(angle)))
   }
 
-  @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
-    return asin(tangent).radians
+  @inlinable internal static func convert(_ angle: Angle<NativeType>) -> Angle<Self> {
+    return Angle(rawValue: CGFloat(angle.rawValue))
   }
 
-  @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
-    return acos(tangent).radians
+  @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
+    return convert(SDGMathematics.arcsin(NativeType(sine)))
+  }
+
+  @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
+    return convert(SDGMathematics.arccos(NativeType(cosine)))
   }
 
   @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
-    return atan(tangent).radians
+    return convert(SDGMathematics.arctan(NativeType(tangent)))
   }
 
   @inlinable public var floatingPointApproximation: FloatMax {
@@ -293,7 +284,7 @@ extension CGFloat: FloatFamily {
   }
 
   @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-    return pow(precedingValue, followingValue)
+    return CGFloat(NativeType(precedingValue) ↑ NativeType(followingValue))
   }
 }
 
