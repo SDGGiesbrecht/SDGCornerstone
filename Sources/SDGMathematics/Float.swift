@@ -17,6 +17,8 @@ import Foundation
   import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
+import Real
+
 #if os(iOS) || os(watchOS) || os(tvOS)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
@@ -97,36 +99,8 @@ extension FloatFamily {
     self = Self.log(self)
   }
 
-  @inlinable public static func ln(_ antilogarithm: Self) -> Self {
-    return Self._tgmath_log(antilogarithm)
-  }
-
   @inlinable public mutating func formNaturalLogarithm() {
     self = Self.ln(self)
-  }
-
-  @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
-    return Self._tgmath_sin(angle.inRadians)
-  }
-
-  @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
-    return Self._tgmath_cos(angle.inRadians)
-  }
-
-  @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
-    return Self._tgmath_tan(angle.inRadians)
-  }
-
-  @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
-    return Self._tgmath_asin(tangent).radians
-  }
-
-  @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
-    return Self._tgmath_acos(tangent).radians
-  }
-
-  @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
-    return Self._tgmath_atan(tangent).radians
   }
 
   // MARK: - Subtractable
@@ -154,10 +128,6 @@ extension FloatFamily {
     self.round(.down)
   }
 
-  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-    return Self._tgmath_pow(precedingValue, followingValue)
-  }
-
   @inlinable public static func ↑= (precedingValue: inout Self, followingValue: Self) {
     precedingValue = precedingValue ↑ followingValue
   }
@@ -170,6 +140,45 @@ extension FloatFamily {
 extension FloatingPoint {
   @inlinable internal func roundedAsFloatingPoint(_ rule: FloatingPointRoundingRule) -> Self {
     return rounded(rule)
+  }
+}
+
+extension FloatFamily where Self: Real {
+
+  // MARK: - RealArithmetic
+
+  @inlinable public static func ln(_ antilogarithm: Self) -> Self {
+    return Self.log(antilogarithm)
+  }
+
+  @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
+    return Self.cos(angle.inRadians)
+  }
+
+  @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
+    return Self.sin(angle.inRadians)
+  }
+
+  @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
+    return Self.tan(angle.inRadians)
+  }
+
+  @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
+    return Self.asin(tangent).radians
+  }
+
+  @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
+    return Self.acos(tangent).radians
+  }
+
+  @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
+    return Self.atan(tangent).radians
+  }
+
+  // MARK: - WholeArithmetic
+
+  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+    return Self.pow(precedingValue, followingValue)
   }
 }
 
@@ -312,6 +321,34 @@ extension CGFloat: FloatFamily {
 
   public static let e: CGFloat = CGFloat(Double.e)
 
+  @inlinable public static func ln(_ antilogarithm: Self) -> Self {
+    return Foundation.log(antilogarithm)
+  }
+
+  @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
+    return Foundation.cos(angle.inRadians)
+  }
+
+  @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
+    return Foundation.sin(angle.inRadians)
+  }
+
+  @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
+    return Foundation.tan(angle.inRadians)
+  }
+
+  @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
+    return asin(tangent).radians
+  }
+
+  @inlinable public static func arccos(_ tangent: Self) -> Angle<Self> {
+    return acos(tangent).radians
+  }
+
+  @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
+    return atan(tangent).radians
+  }
+
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(NativeType(self))
   }
@@ -320,6 +357,10 @@ extension CGFloat: FloatFamily {
 
   @inlinable public init(_ uInt: UIntMax) {
     self = CGFloat(NativeType(uInt))
+  }
+
+  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+    return pow(precedingValue, followingValue)
   }
 }
 
