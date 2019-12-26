@@ -143,7 +143,7 @@ extension FloatingPoint {
   }
 }
 
-extension FloatFamily where Self: Real {
+extension FloatFamily where Self: ElementaryFunctions {
 
   // MARK: - RealArithmetic
 
