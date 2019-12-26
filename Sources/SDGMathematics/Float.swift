@@ -171,7 +171,15 @@ extension FloatFamily where Self: ElementaryFunctions {
   // MARK: - WholeArithmetic
 
   @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-    return Self.pow(precedingValue, followingValue)
+    if precedingValue.isNonNegative { // SwiftNumerics refuses to do negatives.
+      return Self.pow(precedingValue, followingValue)
+    } else if let integer = Int(exactly: followingValue) {
+      return Self.pow(precedingValue, integer)
+    } else {
+      // @exempt(from: tests)
+      // Allow SwiftNumerics to decide on the error:
+      return Self.pow(precedingValue, followingValue)
+    }
   }
 }
 

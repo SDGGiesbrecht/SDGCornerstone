@@ -35,6 +35,7 @@ public func testRealArithmeticConformance<T>(
   test(variable: (T.e, "\(T.self).e"), is: 2.718_28, file: file, line: line)
 
   test(operator: (↑, "↑"), on: (2 as T, −0.5), returns: 0.707_11, file: file, line: line)
+  test(operator: (↑, "↑"), on: (−3 as T, 2), returns: 9, file: file, line: line)
 
   test(method: (T.root, "root"), of: 81 as T, with: 4, returns: 3, file: file, line: line)
   test(
