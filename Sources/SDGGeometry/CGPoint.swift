@@ -23,9 +23,11 @@ extension CGPoint {
 
   // MARK: - Conversions
 
-  internal init(_ point: TwoDimensionalPoint<Double>) {
-    self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
-  }
+  #if canImport(AppKit) || canImport(UIKit)
+    internal init(_ point: TwoDimensionalPoint<Double>) {
+      self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
+    }
+  #endif
 }
 
 #if canImport(CoreGraphics)
