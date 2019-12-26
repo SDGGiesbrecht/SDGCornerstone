@@ -31,15 +31,7 @@ import Real
 public protocol FloatFamily: BinaryFloatingPoint, CustomDebugStringConvertible,
   LosslessStringConvertible, RealNumberProtocol
 {
-  static func _tgmath_pow(_ x: Self, _ y: Self) -> Self
-  static func _tgmath_log(_ x: Self) -> Self
   static func _tgmath_log10(_ x: Self) -> Self
-  static func _tgmath_sin(_ x: Self) -> Self
-  static func _tgmath_cos(_ x: Self) -> Self
-  static func _tgmath_tan(_ x: Self) -> Self
-  static func _tgmath_asin(_ x: Self) -> Self
-  static func _tgmath_acos(_ x: Self) -> Self
-  static func _tgmath_atan(_ x: Self) -> Self
 }
 
 extension FloatFamily {
@@ -186,40 +178,8 @@ extension Double: FloatFamily {
 
   // MARK: - FloatFamily
 
-  @inlinable public static func _tgmath_pow(_ x: Double, _ y: Double) -> Double {
-    return Foundation.pow(x, y)
-  }
-
-  @inlinable public static func _tgmath_log(_ x: Double) -> Double {
-    return Foundation.log(x)
-  }
-
   @inlinable public static func _tgmath_log10(_ x: Double) -> Double {
     return Foundation.log10(x)
-  }
-
-  @inlinable public static func _tgmath_sin(_ x: Double) -> Double {
-    return Foundation.sin(x)
-  }
-
-  @inlinable public static func _tgmath_cos(_ x: Double) -> Double {
-    return Foundation.cos(x)
-  }
-
-  @inlinable public static func _tgmath_tan(_ x: Double) -> Double {
-    return Foundation.tan(x)
-  }
-
-  @inlinable public static func _tgmath_asin(_ x: Double) -> Double {
-    return Foundation.asin(x)
-  }
-
-  @inlinable public static func _tgmath_acos(_ x: Double) -> Double {
-    return Foundation.acos(x)
-  }
-
-  @inlinable public static func _tgmath_atan(_ x: Double) -> Double {
-    return Foundation.atan(x)
   }
 
   // MARK: - PointProtocol
@@ -245,56 +205,8 @@ extension CGFloat: FloatFamily {
 
   // MARK: - FloatFamily
 
-  @inlinable public static func _tgmath_pow(_ x: CGFloat, _ y: CGFloat) -> CGFloat {
-    return pow(x, y)
-  }
-
-  @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
-    #if os(iOS) || os(watchOS) || os(tvOS)
-      return CoreGraphics.log(x)
-    #else
-      return Foundation.log(x)
-    #endif
-  }
-
   @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
     return log10(x)
-  }
-
-  @inlinable public static func _tgmath_sin(_ x: CGFloat) -> CGFloat {
-    #if os(iOS) || os(watchOS) || os(tvOS)
-      return CoreGraphics.sin(x)
-    #else
-      return Foundation.sin(x)
-    #endif
-  }
-
-  @inlinable public static func _tgmath_cos(_ x: CGFloat) -> CGFloat {
-    #if os(iOS) || os(watchOS) || os(tvOS)
-      return CoreGraphics.cos(x)
-    #else
-      return Foundation.cos(x)
-    #endif
-  }
-
-  @inlinable public static func _tgmath_tan(_ x: CGFloat) -> CGFloat {
-    #if os(iOS) || os(watchOS) || os(tvOS)
-      return CoreGraphics.tan(x)
-    #else
-      return Foundation.tan(x)
-    #endif
-  }
-
-  @inlinable public static func _tgmath_asin(_ x: CGFloat) -> CGFloat {
-    return asin(x)
-  }
-
-  @inlinable public static func _tgmath_acos(_ x: CGFloat) -> CGFloat {
-    return acos(x)
-  }
-
-  @inlinable public static func _tgmath_atan(_ x: CGFloat) -> CGFloat {
-    return atan(x)
   }
 
   // MARK: - IntegralArithmetic
