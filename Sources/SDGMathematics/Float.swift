@@ -129,12 +129,18 @@ extension FloatingPoint {
   }
 }
 
+extension ElementaryFunctions {
+  @inlinable internal static func logAsElementaryFunctions(_ x: Self) -> Self {
+    return Self.log(x)
+  }
+}
+
 extension FloatFamily where Self: ElementaryFunctions {
 
   // MARK: - RealArithmetic
 
   @inlinable public static func ln(_ antilogarithm: Self) -> Self {
-    return Self.log(antilogarithm)
+    return Self.logAsElementaryFunctions(antilogarithm)
   }
 
   @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
@@ -168,15 +174,6 @@ extension FloatFamily where Self: ElementaryFunctions {
   }
 }
 
-extension FloatFamily where Self: RealFunctions {
-
-  // MARK: - RealArithmetic
-
-  @inlinable public static func log(_ antilogarithm: Self) -> Self {
-    return Self.log10(antilogarithm)
-  }
-}
-
 extension Double: FloatFamily {
 
   // MARK: - PointProtocol
@@ -186,6 +183,10 @@ extension Double: FloatFamily {
   // MARK: - RealArithmetic
 
   public static let e: Double = 0x1.5BF0A8B145769p1
+
+  @inlinable public static func log(_ antilogarithm: Self) -> Self {
+    return Self.log10(antilogarithm)
+  }
 
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(self)
@@ -312,6 +313,10 @@ extension CGFloat: FloatFamily {
 
     public static let e: Float80 = 0x1.5BF0A8B145769535p1
 
+    @inlinable public static func log(_ antilogarithm: Self) -> Self {
+      return Self.log10(antilogarithm)
+    }
+
     @inlinable public var floatingPointApproximation: FloatMax {
       return FloatMax(self)
     }
@@ -327,6 +332,10 @@ extension Float: FloatFamily {
   // MARK: - RealArithmetic
 
   public static let e: Float = 0x1.5BF0Bp1
+
+  @inlinable public static func log(_ antilogarithm: Self) -> Self {
+    return Self.log10(antilogarithm)
+  }
 
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(self)
