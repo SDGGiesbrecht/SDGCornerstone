@@ -174,8 +174,7 @@ extension FloatFamily where Self: ElementaryFunctions {
       return Self.pow(precedingValue, followingValue)
     } else if let integer = Int(exactly: followingValue) {
       return Self.pow(precedingValue, integer)
-    } else {
-      // @exempt(from: tests)
+    } else {  // @exempt(from: tests)
       // Allow SwiftNumerics to decide on the error:
       return Self.pow(precedingValue, followingValue)
     }
