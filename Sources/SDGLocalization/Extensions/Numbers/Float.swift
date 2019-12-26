@@ -12,14 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
 #if canImport(CoreGraphics)
-  import CoreGraphics
+  import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
 extension Double: TextConvertibleNumber {}
-#if canImport(CoreGraphics)
-  extension CGFloat: TextConvertibleNumber {}
-#endif
+extension CGFloat: TextConvertibleNumber {}
 #if !(os(iOS) || os(watchOS) || os(tvOS))
   extension Float80: TextConvertibleNumber {}
 #endif

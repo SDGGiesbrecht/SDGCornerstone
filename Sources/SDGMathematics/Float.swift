@@ -14,7 +14,7 @@
 
 import Foundation
 #if canImport(CoreGraphics)
-  import CoreGraphics
+  import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
 #if os(iOS) || os(watchOS) || os(tvOS)
@@ -226,89 +226,102 @@ extension Double: FloatFamily {
   }
 }
 
-#if canImport(CoreGraphics)
+extension CGFloat: FloatFamily {
 
-  extension CGFloat: FloatFamily {
+  // MARK: - CustomDebugStringConvertible
 
-    // MARK: - CustomDebugStringConvertible
+  @inlinable public var debugDescription: String {
+    return NativeType(self).debugDescription
+  }
 
-    @inlinable public var debugDescription: String {
-      return NativeType(self).debugDescription
-    }
+  // MARK: - FloatFamily
 
-    // MARK: - FloatFamily
+  @inlinable public static func _tgmath_pow(_ x: CGFloat, _ y: CGFloat) -> CGFloat {
+    return pow(x, y)
+  }
 
-    @inlinable public static func _tgmath_pow(_ x: CGFloat, _ y: CGFloat) -> CGFloat {
-      return CoreGraphics.pow(x, y)
-    }
-
-    @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
+  @inlinable public static func _tgmath_log(_ x: CGFloat) -> CGFloat {
+    #if os(iOS) || os(watchOS) || os(tvOS)
       return CoreGraphics.log(x)
-    }
+    #else
+      return Foundation.log(x)
+    #endif
+  }
 
-    @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
-      return CoreGraphics.log10(x)
-    }
+  @inlinable public static func _tgmath_log10(_ x: CGFloat) -> CGFloat {
+    return log10(x)
+  }
 
-    @inlinable public static func _tgmath_sin(_ x: CGFloat) -> CGFloat {
+  @inlinable public static func _tgmath_sin(_ x: CGFloat) -> CGFloat {
+    #if os(iOS) || os(watchOS) || os(tvOS)
       return CoreGraphics.sin(x)
-    }
+    #else
+      return Foundation.sin(x)
+    #endif
+  }
 
-    @inlinable public static func _tgmath_cos(_ x: CGFloat) -> CGFloat {
+  @inlinable public static func _tgmath_cos(_ x: CGFloat) -> CGFloat {
+    #if os(iOS) || os(watchOS) || os(tvOS)
       return CoreGraphics.cos(x)
-    }
+    #else
+      return Foundation.cos(x)
+    #endif
+  }
 
-    @inlinable public static func _tgmath_tan(_ x: CGFloat) -> CGFloat {
+  @inlinable public static func _tgmath_tan(_ x: CGFloat) -> CGFloat {
+    #if os(iOS) || os(watchOS) || os(tvOS)
       return CoreGraphics.tan(x)
-    }
+    #else
+      return Foundation.tan(x)
+    #endif
+  }
 
-    @inlinable public static func _tgmath_asin(_ x: CGFloat) -> CGFloat {
-      return CoreGraphics.asin(x)
-    }
+  @inlinable public static func _tgmath_asin(_ x: CGFloat) -> CGFloat {
+    return asin(x)
+  }
 
-    @inlinable public static func _tgmath_acos(_ x: CGFloat) -> CGFloat {
-      return CoreGraphics.acos(x)
-    }
+  @inlinable public static func _tgmath_acos(_ x: CGFloat) -> CGFloat {
+    return acos(x)
+  }
 
-    @inlinable public static func _tgmath_atan(_ x: CGFloat) -> CGFloat {
-      return CoreGraphics.atan(x)
-    }
+  @inlinable public static func _tgmath_atan(_ x: CGFloat) -> CGFloat {
+    return atan(x)
+  }
 
-    // MARK: - IntegralArithmetic
+  // MARK: - IntegralArithmetic
 
-    @inlinable public init(_ int: IntMax) {
-      self = CGFloat(NativeType(int))
-    }
+  @inlinable public init(_ int: IntMax) {
+    self = CGFloat(NativeType(int))
+  }
 
-    // MARK: - LosslessStringConvertible
+  // MARK: - LosslessStringConvertible
 
-    @inlinable public init?(_ description: String) {
-      if let result = NativeType(description) {
-        self = CGFloat(result)
-      } else {
-        return nil
-      }
-    }
-
-    // MARK: - PointProtocol
-
-    public typealias Vector = Stride
-
-    // MARK: - RealArithmetic
-
-    public static let e: CGFloat = CGFloat(Double.e)
-
-    @inlinable public var floatingPointApproximation: FloatMax {
-      return FloatMax(NativeType(self))
-    }
-
-    // MARK: - WholeArithmetic
-
-    @inlinable public init(_ uInt: UIntMax) {
-      self = CGFloat(NativeType(uInt))
+  @inlinable public init?(_ description: String) {
+    if let result = NativeType(description) {
+      self = CGFloat(result)
+    } else {
+      return nil
     }
   }
-#endif
+
+  // MARK: - PointProtocol
+
+  public typealias Vector = Stride
+
+  // MARK: - RealArithmetic
+
+  public static let e: CGFloat = CGFloat(Double.e)
+
+  @inlinable public var floatingPointApproximation: FloatMax {
+    return FloatMax(NativeType(self))
+  }
+
+  // MARK: - WholeArithmetic
+
+  @inlinable public init(_ uInt: UIntMax) {
+    self = CGFloat(NativeType(uInt))
+  }
+}
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 

@@ -175,20 +175,16 @@ class SDGMathematicsAPITests: TestCase {
   func testFloat() {
     testRealArithmeticConformance(of: Double.self)
     testRealArithmeticConformance(of: FloatMax.self)
-    #if canImport(CoreGraphics)
-      testRealArithmeticConformance(of: CGFloat.self)
-    #endif
+    testRealArithmeticConformance(of: CGFloat.self)
     #if !(os(iOS) || os(watchOS) || os(tvOS))
       testRealArithmeticConformance(of: Float80.self)
     #endif
     testRealArithmeticConformance(of: Float.self)
 
-    #if !os(Linux)
-      XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
-      XCTAssertNotNil(CGFloat("1"))
-      XCTAssertNotNil(CGFloat(String("1")))
-      XCTAssertNil(CGFloat(String("a")))
-    #endif
+    XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
+    XCTAssertNotNil(CGFloat("1"))
+    XCTAssertNotNil(CGFloat(String("1")))
+    XCTAssertNil(CGFloat(String("a")))
 
     test(method: (Double.rounded, "rounded"), of: 5.1, returns: 5)
   }

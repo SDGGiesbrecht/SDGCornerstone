@@ -12,19 +12,26 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
 #if canImport(CoreGraphics)
+  import CoreGraphics  // Not included in Foundation on iOS.
+#endif
 
-  import CoreGraphics
+import SDGMathematics
 
-  import SDGMathematics
+extension CGPoint {
 
-  extension CGPoint: TwoDimensionalPointProtocol {
+  // MARK: - Conversions
 
-    // MARK: - Conversions
-
+  #if canImport(AppKit) || canImport(UIKit)
     internal init(_ point: TwoDimensionalPoint<Double>) {
       self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
     }
+  #endif
+}
+
+#if canImport(CoreGraphics)
+  extension CGPoint: TwoDimensionalPointProtocol {
 
     // MARK: - PointProtocol
 
@@ -36,5 +43,4 @@
       self.init(x: x, y: y)
     }
   }
-
 #endif
