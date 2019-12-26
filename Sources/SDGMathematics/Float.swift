@@ -225,7 +225,11 @@ extension CGFloat: FloatFamily {
   public static let e: CGFloat = CGFloat(NativeType.e)
 
   @inlinable public static func ln(_ antilogarithm: Self) -> Self {
+    #if os(iOS) || os(watchOS) || os(tvOS)
+    return CoreGraphics.log(antilogarithm)
+    #else
     return Foundation.log(antilogarithm)
+    #endif
   }
 
   @inlinable public static func log(_ antilogarithm: Self) -> Self {
@@ -233,15 +237,27 @@ extension CGFloat: FloatFamily {
   }
 
   @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
+    #if os(iOS) || os(watchOS) || os(tvOS)
+    return CoreGraphics.cos(angle.inRadians)
+    #else
     return Foundation.cos(angle.inRadians)
+    #endif
   }
 
   @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
+    #if os(iOS) || os(watchOS) || os(tvOS)
+    return CoreGraphics.sin(angle.inRadians)
+    #else
     return Foundation.sin(angle.inRadians)
+    #endif
   }
 
   @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
+    #if os(iOS) || os(watchOS) || os(tvOS)
+    return CoreGraphics.tan(angle.inRadians)
+    #else
     return Foundation.tan(angle.inRadians)
+    #endif
   }
 
   @inlinable public static func arcsin(_ tangent: Self) -> Angle<Self> {
