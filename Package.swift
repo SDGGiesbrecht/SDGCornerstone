@@ -246,6 +246,9 @@ let package = Package(
     /// Additional test utilities which require `XCTest`.
     .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"])
   ],
+  dependencies: [
+    .package(url: "https://github.com/apple/swift\u{2D}numerics", .exact(Version(0, 0, 3)))
+  ],
   targets: [
 
     // @documentation(SDGControlFlow)
@@ -265,7 +268,8 @@ let package = Package(
       name: "SDGMathematics",
       dependencies: [
         "SDGControlFlow",
-        "SDGLogic"
+        "SDGLogic",
+        .product(name: "Real", package: "swift\u{2D}numerics")
       ]
     ),
     // @documentation(SDGMathematicsTestUtilities)
