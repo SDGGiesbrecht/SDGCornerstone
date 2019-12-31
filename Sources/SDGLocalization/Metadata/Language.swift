@@ -223,7 +223,7 @@ internal enum Language: String {
       case .zulu:
         switch localization {
         case .englishUnitedKingdom, .englishUnitedStates, .englishCanada,
-             .deutschDeutschland:
+          .deutschDeutschland:
           return "Zulu"
         }
       case .čeština:
@@ -257,13 +257,13 @@ internal enum Language: String {
       case .xhosa:
         switch localization {
         case .englishUnitedKingdom, .englishUnitedStates, .englishCanada,
-             .deutschDeutschland:
+          .deutschDeutschland:
           return "Xhosa"
         }
       case .afrikaans:
         switch localization {
         case .englishUnitedKingdom, .englishUnitedStates, .englishCanada,
-             .deutschDeutschland:
+          .deutschDeutschland:
           return "Afrikaans"
         }
       case .sesotho:
