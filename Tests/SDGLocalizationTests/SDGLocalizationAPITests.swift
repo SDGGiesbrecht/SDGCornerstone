@@ -43,6 +43,11 @@ class SDGLocalizationAPITests: TestCase {
     )
   }
 
+  func testAnyLocalization() {
+    XCTAssertNotNil(AnyLocalization(exactly: "und"))
+    _ = AnyLocalization.fallbackLocalization
+  }
+
   func testBool() {
     for boolean in [true, false] {
       XCTAssertNotEqual(boolean.checkOrX(), "")
