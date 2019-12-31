@@ -61,8 +61,9 @@ extension Localization {
   /// ```swift
   /// "zh": ["cmn"],
   /// "ar": ["arb"],
+  /// "ms": ["zsm"],
   /// "no": ["nb"],
-  /// "ms": ["zsm"]
+  /// "syr": ["aii"]
   /// ```
   ///
   /// ```swift
@@ -125,17 +126,22 @@ extension Localization {
   /// "ro": [("Latn", ["RO", "MD"])],
   /// "th": [("Thai", ["TH"])],
   /// "el": [("Grek", ["GR", "CY"])],
+  /// "zu": [("Latn", ["ZA"])],
   /// "cs": [("Latn", ["CZ"])],
   /// "hu": [("Latn", ["HU"])],
   /// "sv": [("Latn", ["SE", "FI"])],
   /// "id": [("Latn", ["ID"])],
+  /// "xh": [("Latn", ["ZA"])],
+  /// "af": [("Latn", ["ZA"])],
+  /// "st": [("Latn", ["LS", "ZA"])],
   /// "da": [("Latn", ["DK"])],
   /// "fi": [("Latn", ["FI"])],
   /// "sk": [("Latn", ["SK"])],
   /// "he": [("Hebr", ["IL"])],
   /// "nb": [("Latn", ["NO"])],
   /// "hr": [("Latn", ["HR"])],
-  /// "ca": [("Latn", ["ES", "AD"])]
+  /// "ca": [("Latn", ["ES", "AD"])],
+  /// "aii": [("Syrc", ["IQ"])]
   /// ```
   ///
   /// Requests for additional groups are welcome and can be made by [opening a Github issue](https://github.com/SDGGiesbrecht/SDGCornerstone/issues).

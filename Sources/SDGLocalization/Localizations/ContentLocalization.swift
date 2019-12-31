@@ -220,6 +220,8 @@ internal enum ContentLocalization: String, InputLocalization {
   case ελληνικάΕλλάδα = "el\u{2D}GR"
   case ελληνικάΚύπρης = "el\u{2D}CY"
 
+  case zuluINingizimuAfrika = "zu\u{2D}ZA"
+
   case češtinaČesko = "cs\u{2D}CZ"
 
   case magyarMagyarország = "hu\u{2D}HU"
@@ -228,6 +230,13 @@ internal enum ContentLocalization: String, InputLocalization {
   case svenskaFinland = "sv\u{2D}FI"
 
   case indonesiaIndonesia = "id\u{2D}ID"
+
+  case xhosaEMzantsiAfrika = "xh\u{2D}ZA"
+
+  case afrikaansSuidAfrika = "af\u{2D}ZA"
+
+  case sesothoLesotho = "st\u{2D}LS"
+  case sesothoAfrikaBorwa = "st\u{2D}ZA"
 
   case danskDanmark = "da\u{2D}DK"
 
@@ -244,12 +253,15 @@ internal enum ContentLocalization: String, InputLocalization {
   case catalàEspanya = "ca\u{2D}ES"
   case catalàAndorra = "ca\u{2D}AD"
 
+  case ܣܘܪܝܬ_ܥܝܪܐܩ = "aii\u{2D}IQ"
+
   internal static let macrolanguages = [
     // @example(macrolanguages)
     "zh": ["cmn"],
     "ar": ["arb"],
+    "ms": ["zsm"],
     "no": ["nb"],
-    "ms": ["zsm"]
+    "syr": ["aii"]
     // @endExample
   ]
 
@@ -314,17 +326,22 @@ internal enum ContentLocalization: String, InputLocalization {
     "ro": [("Latn", ["RO", "MD"])],
     "th": [("Thai", ["TH"])],
     "el": [("Grek", ["GR", "CY"])],
+    "zu": [("Latn", ["ZA"])],
     "cs": [("Latn", ["CZ"])],
     "hu": [("Latn", ["HU"])],
     "sv": [("Latn", ["SE", "FI"])],
     "id": [("Latn", ["ID"])],
+    "xh": [("Latn", ["ZA"])],
+    "af": [("Latn", ["ZA"])],
+    "st": [("Latn", ["LS", "ZA"])],
     "da": [("Latn", ["DK"])],
     "fi": [("Latn", ["FI"])],
     "sk": [("Latn", ["SK"])],
     "he": [("Hebr", ["IL"])],
     "nb": [("Latn", ["NO"])],
     "hr": [("Latn", ["HR"])],
-    "ca": [("Latn", ["ES", "AD"])]
+    "ca": [("Latn", ["ES", "AD"])],
+    "aii": [("Syrc", ["IQ"])]
     // @endExample
   ]
 
@@ -375,17 +392,22 @@ internal enum ContentLocalization: String, InputLocalization {
     "ro": "RO",
     "th": "ไท",
     "el": "ΕΛ",
+    "zu": "ZU",
     "cs": "ČŠ",
     "hu": "MA",  // Unassigned in ISO
     "sv": "SV",
     "id": "ID",
+    "xh": "XH",
+    "af": "AF",
+    "st": "ST",
     "da": "DA",
     "fi": "SI",  // ISO: SU → Sunda ✗, SO → Soomaali ✗, SM → Sāmoa ✗, SI → සිංහල (code: සිං) ✓
     "sk": "SČ",
     "he": "עב",
     "nb": "NB",  // Norsk – Bokmål
     "hr": "HR",
-    "ca": "CA"
+    "ca": "CA",
+    "aii": "ܣܘ"
   ]
   private static let abbreviationToCode: [StrictString: String] = {
     var result: [StrictString: String] = [:]
