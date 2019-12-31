@@ -39,10 +39,14 @@ internal enum Language: String {
   case română = "ro"
   case ไทย = "th"
   case ελληνικά = "el"
+  case zulu = "zu"
   case čeština = "cs"
   case magyar = "hu"
   case svenska = "sv"
   case indonesia = "id"
+  case xhosa = "xh"
+  case afrikaans = "af"
+  case sesotho = "st"
   case dansk = "da"
   case suomi = "fi"
   case slovenčina = "sk"
@@ -50,6 +54,7 @@ internal enum Language: String {
   case norskBokmål = "nb"
   case hrvatski = "hr"
   case català = "ca"
+  case ܣܘܪܝܬ = "aii"
 
   // MARK: - Description
 
@@ -58,10 +63,11 @@ internal enum Language: String {
     case .普通话, .日本語, .한국어:
       return .topToBottomRightToLeft
     case .español, .english, .हिन्दी, .português, .русский, .deutsch, .tiếngViệt, .français, .türkçe,
-      .italiano, .polski, .українська, .nederlands, .malaysia, .română, .ไทย, .ελληνικά, .čeština,
-      .magyar, .svenska, .indonesia, .dansk, .suomi, .slovenčina, .norskBokmål, .hrvatski, .català:
+      .italiano, .polski, .українська, .nederlands, .malaysia, .română, .ไทย, .ελληνικά, .zulu,
+      .čeština, .magyar, .svenska, .indonesia, .xhosa, .afrikaans, .sesotho, .dansk, .suomi,
+      .slovenčina, .norskBokmål, .hrvatski, .català:
       return .leftToRightTopToBottom
-    case .العربية, .עברית:
+    case .العربية, .עברית, .ܣܘܪܝܬ:
       return .rightToLeftTopToBottom
     }
   }
@@ -214,6 +220,12 @@ internal enum Language: String {
         case .deutschDeutschland:
           return "Griechisch"
         }
+      case .zulu:
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada,
+             .deutschDeutschland:
+          return "Zulu"
+        }
       case .čeština:
         switch localization {
         case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
@@ -241,6 +253,25 @@ internal enum Language: String {
           return "Indonesian"
         case .deutschDeutschland:
           return "Indonesisch"
+        }
+      case .xhosa:
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada,
+             .deutschDeutschland:
+          return "Xhosa"
+        }
+      case .afrikaans:
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada,
+             .deutschDeutschland:
+          return "Afrikaans"
+        }
+      case .sesotho:
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+          return "Southern Sotho"
+        case .deutschDeutschland:
+          return "Süd‐Sotho"
         }
       case .dansk:
         switch localization {
@@ -290,6 +321,13 @@ internal enum Language: String {
           return "Catalan"
         case .deutschDeutschland:
           return "Katalanisch"
+        }
+      case .ܣܘܪܝܬ:
+        switch localization {
+        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
+          return "Aramaic"
+        case .deutschDeutschland:
+          return "Aramäisch"
         }
       }
     })
