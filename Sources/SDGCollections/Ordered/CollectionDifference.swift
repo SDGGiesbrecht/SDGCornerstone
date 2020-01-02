@@ -25,7 +25,6 @@ extension Swift.CollectionDifference {
   /// - Parameters:
   ///   - shimmed: The shimmed instance.
   @inlinable public init(_ shimmed: SDGCollections.CollectionDifference<ChangeElement>) {
-    // @exempt(from: tests) #workaround(workspace version 0.27.1, Exempt because CI does not have 10.15.)
     self.init(shimmed.map({ Change($0) }))!
   }
 }
@@ -43,8 +42,6 @@ public struct CollectionDifference<ChangeElement>: BidirectionalCollection, Coll
   ///   - standard: The standard instance.
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   @inlinable public init(_ standard: Swift.CollectionDifference<ChangeElement>) {
-    // @exempt(from: tests)
-    // #workaround(workspace version 0.27.1, Exempt because CI does not have 10.15.)
     removals = standard.removals.map { Change($0) }
     insertions = standard.insertions.map { Change($0) }
   }

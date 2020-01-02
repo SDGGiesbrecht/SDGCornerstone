@@ -161,8 +161,7 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
       var adjustedFontName = font.fontName
 
       #if canImport(AppKit) || canImport(UIKit)
-        // #workaround(workspace version 0.27.1, Test exemption only because CI is on 10.14.)
-        if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {  // @exempt(from: tests)
+        if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
           // Older platforms do not support this CSS, but can use the name directly.
           if adjustedFontName == Font.system.fontName
             ∨ adjustedFontName == Font.system.resized(to: font.size).fontName
