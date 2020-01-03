@@ -544,8 +544,8 @@ let package = Package(
 
     // Internal utilities.
 
-    .testTarget(
-      name: "SDGCornerstoneResourceGeneration",
+    .target(
+      name: "generate‐root‐collation",
       dependencies: [
         "SDGLogic",
         "SDGMathematics",
@@ -743,3 +743,8 @@ if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
   settings.append(.define("MANIFEST_LOADED_BY_XCODE"))
   sdgXCTestUtilities.swiftSettings = settings
 }
+
+// #workaround(workspace 0.28.0, Causes Xcode executable/scheme issues for iOS.)
+#if os(macOS)
+  package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
+#endif
