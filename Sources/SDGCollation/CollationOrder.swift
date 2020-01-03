@@ -287,7 +287,11 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
     otherUnifiedIdeographs = try container.decode(CollationIndex.self)
     unassignedCodePoints = try container.decode(CollationIndex.self)
     afterIndex = try container.decode(CollationIndex.self)
-    rules = try container.decode([StrictString: [CollationElement]].self)
+
+    var rules = try container.decode([StrictString: [CollationElement]].self)
+    /// JSON mishandles some control codes, possibly resulting in meaningless empty rules.
+    rules[""] = nil
+    self.rules = rules
   }
 
   // MARK: - Encodable
