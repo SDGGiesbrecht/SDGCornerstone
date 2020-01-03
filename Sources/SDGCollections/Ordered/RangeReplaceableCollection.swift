@@ -240,7 +240,6 @@ extension RangeReplaceableCollection {
     if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *),
       ¬legacyMode
     {
-      // @exempt(from: tests) #workaround(workspace version 0.27.1, CI doesn’t run 10.15 yet.)
       return applying(Swift.CollectionDifference(changes))
     } else {
       var array = Array(self)
