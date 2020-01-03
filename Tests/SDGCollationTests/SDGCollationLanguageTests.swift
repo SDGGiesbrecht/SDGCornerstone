@@ -31,6 +31,30 @@ class SDGCollationLanguageTests: TestCase {
     StrictString.sortAlgorithm = { String($0) < String($1) }
   }
 
+  func testAramaic() {
+    XCTAssert(StrictString("ܐܬ") < StrictString("ܒܐ"))
+    XCTAssert(StrictString("ܒܬ") < StrictString("ܓܐ"))
+    XCTAssert(StrictString("ܓܬ") < StrictString("ܕܐ"))
+    XCTAssert(StrictString("ܕܬ") < StrictString("ܗܐ"))
+    XCTAssert(StrictString("ܗܬ") < StrictString("ܘܐ"))
+    XCTAssert(StrictString("ܘܬ") < StrictString("ܙܐ"))
+    XCTAssert(StrictString("ܙܬ") < StrictString("ܚܐ"))
+    XCTAssert(StrictString("ܚܬ") < StrictString("ܛܐ"))
+    XCTAssert(StrictString("ܛܬ") < StrictString("ܝܐ"))
+    XCTAssert(StrictString("ܝܬ") < StrictString("ܟܐ"))
+    XCTAssert(StrictString("ܟܬ") < StrictString("ܠܐ"))
+    XCTAssert(StrictString("ܠܬ") < StrictString("ܡܐ"))
+    XCTAssert(StrictString("ܡܬ") < StrictString("ܢܐ"))
+    XCTAssert(StrictString("ܢܬ") < StrictString("ܣܐ"))
+    XCTAssert(StrictString("ܣܬ") < StrictString("ܥܐ"))
+    XCTAssert(StrictString("ܥܬ") < StrictString("ܦܐ"))
+    XCTAssert(StrictString("ܦܬ") < StrictString("ܨܐ"))
+    XCTAssert(StrictString("ܨܬ") < StrictString("ܩܐ"))
+    XCTAssert(StrictString("ܩܬ") < StrictString("ܪܐ"))
+    XCTAssert(StrictString("ܪܬ") < StrictString("ܫܐ"))
+    XCTAssert(StrictString("ܫܬ") < StrictString("ܬܐ"))
+  }
+
   func testBosnian() {
     XCTAssert(StrictString("AZ<̌‐hr>") < StrictString("BA"))
     XCTAssert(StrictString("BZ<̌‐hr>") < StrictString("CA"))
