@@ -1,5 +1,5 @@
 /*
- ΓραμματικήΠτώση.swift
+ ΓραμματικηΠτωση.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -11,6 +11,8 @@
  Licensed under the Apache Licence, Version 2.0.
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
+
+// #workaround(workspace 0.29.0, Should be “ΓραμματικήΠτώση.swift” but for normalization issue.)
 
 public enum _ΓραμματικήΠτώση {
   // Public for SDGCalendar.

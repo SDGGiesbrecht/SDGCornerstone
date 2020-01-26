@@ -746,5 +746,7 @@ if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
 
 // #workaround(workspace 0.28.0, Causes Xcode executable/scheme issues for iOS.)
 #if os(macOS)
-  package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
+  #if true  // #workaround(Causes Windows CMake differences between platforms.)
+    package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
+  #endif
 #endif
