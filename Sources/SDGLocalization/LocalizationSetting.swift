@@ -43,6 +43,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
       preferences = Shared(Preference.mock())
 
       func convert(locale: String) -> String {
+        // @exempt(from: tests) Depends on host.
         return locale.replacingOccurrences(of: "_", with: "\u{2D}")
       }
 
