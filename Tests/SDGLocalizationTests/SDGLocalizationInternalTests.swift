@@ -101,7 +101,7 @@ class SDGLocalizationInternalTests: TestCase {
       // Default simulator state has no language set.
       expectOperatingSystemLanguage = false
     #endif
-    #if os(macOS)
+    #if os(macOS) || os(Linux)
       if ProcessInfo.processInfo.environment["GITHUB_ACTIONS"] == "true" {
         // GitHub’s host has no language set.
         expectOperatingSystemLanguage = false
