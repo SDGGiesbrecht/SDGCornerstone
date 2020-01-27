@@ -415,6 +415,8 @@ let package = Package(
       name: "SDGLocalizationTestUtilities",
       dependencies: [
         "SDGLocalization", "SDGTesting",
+        "SDGText",
+        "SDGPersistence",
         "SDGPersistenceTestUtilities"
       ]
     ),
