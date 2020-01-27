@@ -43,7 +43,7 @@ public func testCodableConformance<T>(
   func directory(typeName: String) -> URL {
     return testSpecificationDirectory(file)
       .appendingPathComponent("Codable")
-      .appendingPathComponent("\(T.self)")
+      .appendingPathComponent(typeName)
       .appendingPathComponent(String(uniqueTestName))
   }
   let deprecatedDirectory = directory(typeName: "\(T.self)")
