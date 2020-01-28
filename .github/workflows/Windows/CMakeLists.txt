@@ -55,27 +55,6 @@ target_link_libraries("SDGConcurrency" PRIVATE
   "SDGLogic"
 )
 
-add_library("NumericsShims"
-  "../../../.build/SDG/Dependencies/swift-numerics/Sources/NumericsShims/NumericsShims.c"
-)
-set_target_properties("NumericsShims" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
-target_compile_options("NumericsShims" PRIVATE -enable-testing)
-
-add_library("Real"
-  "../../../.build/SDG/Dependencies/swift-numerics/Sources/Real/AlgebraicField.swift"
-  "../../../.build/SDG/Dependencies/swift-numerics/Sources/Real/Double+Real.swift"
-  "../../../.build/SDG/Dependencies/swift-numerics/Sources/Real/ElementaryFunctions.swift"
-  "../../../.build/SDG/Dependencies/swift-numerics/Sources/Real/Float+Real.swift"
-  "../../../.build/SDG/Dependencies/swift-numerics/Sources/Real/Float80+Real.swift"
-  "../../../.build/SDG/Dependencies/swift-numerics/Sources/Real/Real.swift"
-  "../../../.build/SDG/Dependencies/swift-numerics/Sources/Real/RealFunctions.swift"
-)
-set_target_properties("Real" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
-target_compile_options("Real" PRIVATE -enable-testing)
-target_link_libraries("Real" PRIVATE
-  "NumericsShims"
-)
-
 add_library("SDGMathematics"
   "../../../Sources/SDGMathematics/Angle.swift"
   "../../../Sources/SDGMathematics/BitField.swift"
@@ -116,7 +95,6 @@ target_compile_options("SDGMathematics" PRIVATE -enable-testing)
 target_link_libraries("SDGMathematics" PRIVATE
   "SDGControlFlow"
   "SDGLogic"
-  "Real"
 )
 
 add_library("SDGCollections"
