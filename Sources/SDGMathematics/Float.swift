@@ -21,7 +21,7 @@ import Foundation
   import Real
 #endif
 
-#if os(iOS) || os(watchOS) || os(tvOS)
+#if os(Windows) || os(tvOS) || os(iOS) || os(watchOS)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
 #else
