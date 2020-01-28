@@ -17,7 +17,9 @@ import Foundation
   import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
-#if !os(Windows)  // #workaround(workspace 0.29.0, Windows does not support C.)
+#if os(Windows)  // #workaround(workspace 0.29.0, Windows does not support C.)
+  import WinSDK
+#else
   import Real
 #endif
 
@@ -203,6 +205,42 @@ extension Double: FloatFamily {
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(self)
   }
+
+  #if os(Windows)  // #workaround(workspace 0.29.0, Windows does not support C.)
+    @inlinable public static func ln(_ antilogarithm: Double) -> Double {
+      return WinSDK.log(antilogarithm)
+    }
+
+    @inlinable public static func cos(_ angle: Angle<Double>) -> Double {
+      return WinSDK.cos(angle.inRadians)
+    }
+
+    @inlinable public static func sin(_ angle: Angle<Double>) -> Double {
+      return WinSDK.sin(angle.inRadians)
+    }
+
+    @inlinable public static func tan(_ angle: Angle<Double>) -> Double {
+      return WinSDK.tan(angle.inRadians)
+    }
+
+    @inlinable public static func arcsin(_ sine: Double) -> Angle<Double> {
+      return WinSDK.asin(sine).radians
+    }
+
+    @inlinable public static func arccos(_ cosine: Double) -> Angle<Double> {
+      return WinSDK.acos(cosine).radians
+    }
+
+    @inlinable public static func arctan(_ tangent: Double) -> Angle<Double> {
+      return WinSDK.atan(tangent).radians
+    }
+
+    // MARK: - WholeArithmetic
+
+    @inlinable public static func ↑ (precedingValue: Double, followingValue: Double) -> Double {
+      return WinSDK.pow(precedingValue, followingValue)
+    }
+  #endif
 }
 
 extension CGFloat: FloatFamily {
@@ -292,7 +330,7 @@ extension CGFloat: FloatFamily {
   }
 }
 
-#if !(os(iOS) || os(watchOS) || os(tvOS))
+#if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
 
   extension Float80: Decodable, Encodable, FloatFamily {
 
@@ -344,4 +382,40 @@ extension Float: FloatFamily {
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(self)
   }
+
+  #if os(Windows)  // #workaround(workspace 0.29.0, Windows does not support C.)
+    @inlinable public static func ln(_ antilogarithm: Double) -> Double {
+      return WinSDK.log(antilogarithm)
+    }
+
+    @inlinable public static func cos(_ angle: Angle<Double>) -> Double {
+      return WinSDK.cos(angle.inRadians)
+    }
+
+    @inlinable public static func sin(_ angle: Angle<Double>) -> Double {
+      return WinSDK.sin(angle.inRadians)
+    }
+
+    @inlinable public static func tan(_ angle: Angle<Double>) -> Double {
+      return WinSDK.tan(angle.inRadians)
+    }
+
+    @inlinable public static func arcsin(_ sine: Double) -> Angle<Double> {
+      return WinSDK.asin(sine).radians
+    }
+
+    @inlinable public static func arccos(_ cosine: Double) -> Angle<Double> {
+      return WinSDK.acos(cosine).radians
+    }
+
+    @inlinable public static func arctan(_ tangent: Double) -> Angle<Double> {
+      return WinSDK.atan(tangent).radians
+    }
+
+    // MARK: - WholeArithmetic
+
+    @inlinable public static func ↑ (precedingValue: Double, followingValue: Double) -> Double {
+      return WinSDK.pow(precedingValue, followingValue)
+    }
+  #endif
 }
