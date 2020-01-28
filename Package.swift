@@ -752,7 +752,7 @@ if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
 #endif
 
 func adjustForWindows() {
-  // #workaround(workspace 0.29.0, Windows does not support C.)
+  // #workaround(workspace version 0.29.0, Windows does not support C.)
   let impossibleProducts: Set<String> = [
     // SwiftNumerics
     "Real"

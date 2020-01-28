@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace 0.29.0, Should be “ΓραμματικήΠτώση.swift” but for normalization issue.)
+// #workaround(workspace version 0.29.0, Should be “ΓραμματικήΠτώση.swift” but for normalization issue.)
 
 public enum _ΓραμματικήΠτώση {
   // Public for SDGCalendar.
