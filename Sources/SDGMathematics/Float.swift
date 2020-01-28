@@ -17,7 +17,9 @@ import Foundation
   import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
-import Real
+#if !os(Windows)  // #workaround(workspace 0.29.0, Windows does not support C.)
+  import Real
+#endif
 
 #if os(iOS) || os(watchOS) || os(tvOS)
   /// The member of the `Float` family with the largest bit field.
