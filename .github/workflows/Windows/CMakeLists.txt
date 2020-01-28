@@ -536,6 +536,8 @@ target_compile_options("SDGLocalizationTestUtilities" PRIVATE -enable-testing)
 target_link_libraries("SDGLocalizationTestUtilities" PRIVATE
   "SDGLocalization"
   "SDGTesting"
+  "SDGText"
+  "SDGPersistence"
   "SDGPersistenceTestUtilities"
 )
 
