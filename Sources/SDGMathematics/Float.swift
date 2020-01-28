@@ -131,58 +131,60 @@ extension FloatingPoint {
   }
 }
 
-extension ElementaryFunctions {
-  @inlinable internal static func logAsElementaryFunctions(_ x: Self) -> Self {
-    return Self.log(x)
-  }
-}
-
-extension FloatFamily where Self: ElementaryFunctions {
-
-  // MARK: - RealArithmetic
-
-  @inlinable public static func ln(_ antilogarithm: Self) -> Self {
-    return Self.logAsElementaryFunctions(antilogarithm)
-  }
-
-  @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
-    return Self.cos(angle.inRadians)
-  }
-
-  @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
-    return Self.sin(angle.inRadians)
-  }
-
-  @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
-    return Self.tan(angle.inRadians)
-  }
-
-  @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
-    return Self.asin(sine).radians
-  }
-
-  @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
-    return Self.acos(cosine).radians
-  }
-
-  @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
-    return Self.atan(tangent).radians
-  }
-
-  // MARK: - WholeArithmetic
-
-  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-    if precedingValue.isNonNegative {  // SwiftNumerics refuses to do negatives.
-      return Self.pow(precedingValue, followingValue)
-    } else if let integer = Int(exactly: followingValue) {
-      return Self.pow(precedingValue, integer)
-    } else {  // @exempt(from: tests)
-      // @exempt(from: tests)
-      // Allow SwiftNumerics to decide on the error:
-      return Self.pow(precedingValue, followingValue)
+#if !os(Windows)  // #workaround(workspace 0.29.0, Windows does not support C.)
+  extension ElementaryFunctions {
+    @inlinable internal static func logAsElementaryFunctions(_ x: Self) -> Self {
+      return Self.log(x)
     }
   }
-}
+
+  extension FloatFamily where Self: ElementaryFunctions {
+
+    // MARK: - RealArithmetic
+
+    @inlinable public static func ln(_ antilogarithm: Self) -> Self {
+      return Self.logAsElementaryFunctions(antilogarithm)
+    }
+
+    @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
+      return Self.cos(angle.inRadians)
+    }
+
+    @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
+      return Self.sin(angle.inRadians)
+    }
+
+    @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
+      return Self.tan(angle.inRadians)
+    }
+
+    @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
+      return Self.asin(sine).radians
+    }
+
+    @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
+      return Self.acos(cosine).radians
+    }
+
+    @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
+      return Self.atan(tangent).radians
+    }
+
+    // MARK: - WholeArithmetic
+
+    @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+      if precedingValue.isNonNegative {  // SwiftNumerics refuses to do negatives.
+        return Self.pow(precedingValue, followingValue)
+      } else if let integer = Int(exactly: followingValue) {
+        return Self.pow(precedingValue, integer)
+      } else {  // @exempt(from: tests)
+        // @exempt(from: tests)
+        // Allow SwiftNumerics to decide on the error:
+        return Self.pow(precedingValue, followingValue)
+      }
+    }
+  }
+#endif
 
 extension Double: FloatFamily {
 
