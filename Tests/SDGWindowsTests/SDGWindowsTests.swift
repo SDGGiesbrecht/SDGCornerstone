@@ -34,7 +34,5 @@ class WindowsTests: XCTestCase {
 
   func testMathematics() {
     XCTAssertEqual(3 − 2, 1)
-    let x = sin(45°)
-    XCTAssertNotNil(x)
   }
 }
