@@ -63,6 +63,12 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
         preferences.value.set(to: nil)
       }
 
+    #elseif os(Windows)
+
+    // #workaround(Not implemented yet.)
+    preferences = Shared(Preference.mock())
+    preferences.value.set(to: nil)
+
     #endif
 
     preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
