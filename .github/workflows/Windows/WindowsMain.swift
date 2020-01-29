@@ -22,6 +22,7 @@ extension WindowsTests {
       ("testControlFlow", testControlFlow),
       ("testLogic", testLogic),
       ("testMathematics", testMathematics),
+      ("testCollections", testCollections),
     ])
   ]
 }

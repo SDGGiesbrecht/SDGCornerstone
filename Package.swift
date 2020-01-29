@@ -765,7 +765,6 @@ func adjustForWindows() {
     "SDGCalendarTests",
     "SDGCollation",
     "SDGCollationTests",
-    "SDGCollections",
     "SDGCollectionsTests",
     "SDGCollectionsTestUtilities",
     "SDGConcurrency",
@@ -833,7 +832,8 @@ package.targets.append(
     dependencies: [
       "SDGControlFlow",
       "SDGLogic",
-      "SDGMathematics"
+      "SDGMathematics",
+      "SDGCollections"
     ]
   )
 )

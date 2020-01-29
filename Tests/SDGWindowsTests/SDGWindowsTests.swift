@@ -17,6 +17,7 @@
 import SDGControlFlow
 import SDGLogic
 import SDGMathematics
+import SDGCollections
 
 import XCTest
 
@@ -34,5 +35,9 @@ class WindowsTests: XCTestCase {
 
   func testMathematics() {
     XCTAssertEqual(3 − 2, 1)
+  }
+
+  func testCollections() {
+    XCTAssertNotNil([1, 2, 3].firstMatch(for: [1]))
   }
 }
