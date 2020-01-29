@@ -20,6 +20,7 @@ extension WindowsTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testControlFlow", testControlFlow),
+      ("testLogic", testLogic),
     ])
   ]
 }

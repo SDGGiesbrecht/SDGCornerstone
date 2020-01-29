@@ -34,6 +34,17 @@ add_library("SDGControlFlow"
 set_target_properties("SDGControlFlow" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGControlFlow" PRIVATE -enable-testing)
 
+add_library("SDGLogic"
+  "../../../Sources/SDGLogic/Any.swift"
+  "../../../Sources/SDGLogic/Bool.swift"
+  "../../../Sources/SDGLogic/Equatable.swift"
+  "../../../Sources/SDGLogic/NilLiteral.swift"
+  "../../../Sources/SDGLogic/Operators.swift"
+  "../../../Sources/SDGLogic/Tuple.swift"
+)
+set_target_properties("SDGLogic" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGLogic" PRIVATE -enable-testing)
+
 add_library("SDGWindowsTests"
   "../../../Tests/SDGWindowsTests/SDGWindowsTests.swift"
 )
@@ -41,6 +52,7 @@ set_target_properties("SDGWindowsTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
 target_compile_options("SDGWindowsTests" PRIVATE -enable-testing)
 target_link_libraries("SDGWindowsTests" PRIVATE
   "SDGControlFlow"
+  "SDGLogic"
 )
 
 add_executable(WindowsMain
