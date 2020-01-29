@@ -757,22 +757,74 @@ func adjustForWindows() {
     // SwiftNumerics
     "Real"
   ]
+  // #workaround(Unknown segmentation fault.)
+  let impossibleTargets: Set<String> = [
+    "SDGBinaryData",
+    "SDGBinaryDataTests",
+    "SDGCalendar",
+    "SDGCalendarTests",
+    "SDGCollation",
+    "SDGCollationTests",
+    "SDGCollections",
+    "SDGCollectionsTests",
+    "SDGCollectionsTestUtilities",
+    "SDGConcurrency",
+    "SDGConcurrencyTests",
+    // "SDGControlFlow",
+    // "SDGControlFlowTests",
+    "SDGCornerstoneDocumentationExampleTests",
+    // "SDGCornerstoneLocalizations",
+    "SDGExternalProcess",
+    "SDGExternalProcessTests",
+    "SDGGeometry",
+    "SDGGeometryTests",
+    "SDGGeometryTestUtilities",
+    // "SDGLocalization",
+    "SDGLocalizationTests",
+    "SDGLocalizationTestUtilities",
+    // "SDGLogic",
+    "SDGLogicTests",
+    "SDGLogicTestUtilities",
+    // "SDGMathematics",
+    "SDGMathematicsTests",
+    "SDGMathematicsTestUtilities",
+    // "SDGPersistence",
+    "SDGPersistenceTests",
+    "SDGPersistenceTestUtilities",
+    "SDGPrecisionMathematics",
+    "SDGPrecisionMathematicsTests",
+    "SDGRandomization",
+    "SDGRandomizationTests",
+    "SDGRandomizationTestUtilities",
+    // "SDGTesting",
+    // "SDGText",
+    "SDGTextTests",
+    "SDGVersioning",
+    "SDGVersioningTests",
+    // "SDGXCTestUtilities",
+  ]
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
       switch dependency {
-      case ._targetItem, ._byNameItem:
-        return false
+      case ._targetItem(let name), ._byNameItem(let name):
+        return impossibleTargets.contains(name)
       case ._productItem(let name, _):
         return impossibleProducts.contains(name)
       }
     })
   }
+  package.targets.removeAll(where: { target in
+    return impossibleTargets.contains(target.name)
+  })
+  package.products.removeAll(where: { product in
+    impossibleTargets.contains(product.name)
+  })
 }
 #if os(Windows)
   adjustForWindows()
 #endif
 import Foundation
-// #workaround(workspace 0.28.0, Until packages work natively on windows.)
+// #workaround(workspace 0.29.0, Until packages work natively on windows.)
 if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
   adjustForWindows()
 }
