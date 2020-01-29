@@ -14,6 +14,17 @@
 
 import XCTest
 
+@testable import SDGWindowsTests
+
+extension WindowsTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testControlFlow", testControlFlow),
+    ])
+  ]
+}
+
 var tests = [XCTestCaseEntry]()
+tests += WindowsTests.windowsTests
 
 XCTMain(tests)
