@@ -19,7 +19,7 @@ import Foundation
 
 extension Double: TextConvertibleNumber {}
 extension CGFloat: TextConvertibleNumber {}
-#if !(os(iOS) || os(watchOS) || os(tvOS))
+#if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
   extension Float80: TextConvertibleNumber {}
 #endif
 extension Float: TextConvertibleNumber {}

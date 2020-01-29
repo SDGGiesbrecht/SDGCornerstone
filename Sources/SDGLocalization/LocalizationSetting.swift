@@ -63,6 +63,12 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
         preferences.value.set(to: nil)
       }
 
+    #elseif os(Windows)
+
+      // #workaround(Not implemented yet.)
+      preferences = Shared(Preference.mock())
+      preferences.value.set(to: nil)
+
     #endif
 
     preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
@@ -90,6 +96,11 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     #elseif os(Linux)
 
       // This is does not exist on Linux anyway.
+      preferences = Shared(Preference.mock())
+
+    #elseif os(Windows)
+
+      // #workaround(Not implemented yet.)
       preferences = Shared(Preference.mock())
 
     #endif

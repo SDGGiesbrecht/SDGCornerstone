@@ -40,8 +40,19 @@ public func testCodableConformance<T>(
   line: UInt = #line
 ) where T: Codable, T: Equatable {
 
-  let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent("Codable")
-    .appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
+  func directory(typeName: String) -> URL {
+    return testSpecificationDirectory(file)
+      .appendingPathComponent("Codable")
+      .appendingPathComponent(typeName)
+      .appendingPathComponent(String(uniqueTestName))
+  }
+  let deprecatedDirectory = directory(typeName: "\(T.self)")
+  let specificationsDirectory = directory(
+    typeName: "\(T.self)"
+      .replacingMatches(for: "<", with: "⟨")
+      .replacingMatches(for: ">", with: "⟩")
+  )
+  try? FileManager.default.move(deprecatedDirectory, to: specificationsDirectory)
   try? FileManager.default.createDirectory(
     at: specificationsDirectory,
     withIntermediateDirectories: true,

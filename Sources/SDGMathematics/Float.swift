@@ -17,9 +17,13 @@ import Foundation
   import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
-import Real
+#if os(Windows)  // #workaround(workspace version 0.29.0, Windows does not support C.)
+  import WinSDK
+#else
+  import Real
+#endif
 
-#if os(iOS) || os(watchOS) || os(tvOS)
+#if os(Windows) || os(tvOS) || os(iOS) || os(watchOS)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
 #else
@@ -129,58 +133,60 @@ extension FloatingPoint {
   }
 }
 
-extension ElementaryFunctions {
-  @inlinable internal static func logAsElementaryFunctions(_ x: Self) -> Self {
-    return Self.log(x)
-  }
-}
-
-extension FloatFamily where Self: ElementaryFunctions {
-
-  // MARK: - RealArithmetic
-
-  @inlinable public static func ln(_ antilogarithm: Self) -> Self {
-    return Self.logAsElementaryFunctions(antilogarithm)
-  }
-
-  @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
-    return Self.cos(angle.inRadians)
-  }
-
-  @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
-    return Self.sin(angle.inRadians)
-  }
-
-  @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
-    return Self.tan(angle.inRadians)
-  }
-
-  @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
-    return Self.asin(sine).radians
-  }
-
-  @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
-    return Self.acos(cosine).radians
-  }
-
-  @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
-    return Self.atan(tangent).radians
-  }
-
-  // MARK: - WholeArithmetic
-
-  @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
-    if precedingValue.isNonNegative {  // SwiftNumerics refuses to do negatives.
-      return Self.pow(precedingValue, followingValue)
-    } else if let integer = Int(exactly: followingValue) {
-      return Self.pow(precedingValue, integer)
-    } else {  // @exempt(from: tests)
-      // @exempt(from: tests)
-      // Allow SwiftNumerics to decide on the error:
-      return Self.pow(precedingValue, followingValue)
+#if !os(Windows)  // #workaround(workspace version 0.29.0, Windows does not support C.)
+  extension ElementaryFunctions {
+    @inlinable internal static func logAsElementaryFunctions(_ x: Self) -> Self {
+      return Self.log(x)
     }
   }
-}
+
+  extension FloatFamily where Self: ElementaryFunctions {
+
+    // MARK: - RealArithmetic
+
+    @inlinable public static func ln(_ antilogarithm: Self) -> Self {
+      return Self.logAsElementaryFunctions(antilogarithm)
+    }
+
+    @inlinable public static func cos(_ angle: Angle<Self>) -> Self {
+      return Self.cos(angle.inRadians)
+    }
+
+    @inlinable public static func sin(_ angle: Angle<Self>) -> Self {
+      return Self.sin(angle.inRadians)
+    }
+
+    @inlinable public static func tan(_ angle: Angle<Self>) -> Self {
+      return Self.tan(angle.inRadians)
+    }
+
+    @inlinable public static func arcsin(_ sine: Self) -> Angle<Self> {
+      return Self.asin(sine).radians
+    }
+
+    @inlinable public static func arccos(_ cosine: Self) -> Angle<Self> {
+      return Self.acos(cosine).radians
+    }
+
+    @inlinable public static func arctan(_ tangent: Self) -> Angle<Self> {
+      return Self.atan(tangent).radians
+    }
+
+    // MARK: - WholeArithmetic
+
+    @inlinable public static func ↑ (precedingValue: Self, followingValue: Self) -> Self {
+      if precedingValue.isNonNegative {  // SwiftNumerics refuses to do negatives.
+        return Self.pow(precedingValue, followingValue)
+      } else if let integer = Int(exactly: followingValue) {
+        return Self.pow(precedingValue, integer)
+      } else {  // @exempt(from: tests)
+        // @exempt(from: tests)
+        // Allow SwiftNumerics to decide on the error:
+        return Self.pow(precedingValue, followingValue)
+      }
+    }
+  }
+#endif
 
 extension Double: FloatFamily {
 
@@ -192,13 +198,51 @@ extension Double: FloatFamily {
 
   public static let e: Double = 0x1.5BF0A8B145769p1
 
-  @inlinable public static func log(_ antilogarithm: Self) -> Self {
-    return Self.log10(antilogarithm)
-  }
+  #if !os(Windows)  // #workaround(workspace version 0.29.0, Windows does not support C.)
+    @inlinable public static func log(_ antilogarithm: Self) -> Self {
+      return Self.log10(antilogarithm)
+    }
+  #endif
 
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(self)
   }
+
+  #if os(Windows)  // #workaround(workspace version 0.29.0, Windows does not support C.)
+    @inlinable public static func ln(_ antilogarithm: Double) -> Double {
+      return WinSDK.log(antilogarithm)
+    }
+
+    @inlinable public static func cos(_ angle: Angle<Double>) -> Double {
+      return WinSDK.cos(angle.inRadians)
+    }
+
+    @inlinable public static func sin(_ angle: Angle<Double>) -> Double {
+      return WinSDK.sin(angle.inRadians)
+    }
+
+    @inlinable public static func tan(_ angle: Angle<Double>) -> Double {
+      return WinSDK.tan(angle.inRadians)
+    }
+
+    @inlinable public static func arcsin(_ sine: Double) -> Angle<Double> {
+      return WinSDK.asin(sine).radians
+    }
+
+    @inlinable public static func arccos(_ cosine: Double) -> Angle<Double> {
+      return WinSDK.acos(cosine).radians
+    }
+
+    @inlinable public static func arctan(_ tangent: Double) -> Angle<Double> {
+      return WinSDK.atan(tangent).radians
+    }
+
+    // MARK: - WholeArithmetic
+
+    @inlinable public static func ↑ (precedingValue: Double, followingValue: Double) -> Double {
+      return WinSDK.pow(precedingValue, followingValue)
+    }
+  #endif
 }
 
 extension CGFloat: FloatFamily {
@@ -288,7 +332,7 @@ extension CGFloat: FloatFamily {
   }
 }
 
-#if !(os(iOS) || os(watchOS) || os(tvOS))
+#if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
 
   extension Float80: Decodable, Encodable, FloatFamily {
 
@@ -333,11 +377,49 @@ extension Float: FloatFamily {
 
   public static let e: Float = 0x1.5BF0Bp1
 
-  @inlinable public static func log(_ antilogarithm: Self) -> Self {
-    return Self.log10(antilogarithm)
-  }
+  #if !os(Windows)  // #workaround(workspace version 0.29.0, Windows does not support C.)
+    @inlinable public static func log(_ antilogarithm: Self) -> Self {
+      return Self.log10(antilogarithm)
+    }
+  #endif
 
   @inlinable public var floatingPointApproximation: FloatMax {
     return FloatMax(self)
   }
+
+  #if os(Windows)  // #workaround(workspace version 0.29.0, Windows does not support C.)
+    @inlinable public static func ln(_ antilogarithm: Float) -> Float {
+      return Float(WinSDK.log(Double(antilogarithm)))
+    }
+
+    @inlinable public static func cos(_ angle: Angle<Float>) -> Float {
+      return Float(WinSDK.cos(Double(angle.inRadians)))
+    }
+
+    @inlinable public static func sin(_ angle: Angle<Float>) -> Float {
+      return Float(WinSDK.sin(Double(angle.inRadians)))
+    }
+
+    @inlinable public static func tan(_ angle: Angle<Float>) -> Float {
+      return Float(WinSDK.tan(Double(angle.inRadians)))
+    }
+
+    @inlinable public static func arcsin(_ sine: Float) -> Angle<Float> {
+      return Float(WinSDK.asin(Double(sine))).radians
+    }
+
+    @inlinable public static func arccos(_ cosine: Float) -> Angle<Float> {
+      return Float(WinSDK.acos(Double(cosine))).radians
+    }
+
+    @inlinable public static func arctan(_ tangent: Float) -> Angle<Float> {
+      return Float(WinSDK.atan(Double(tangent))).radians
+    }
+
+    // MARK: - WholeArithmetic
+
+    @inlinable public static func ↑ (precedingValue: Float, followingValue: Float) -> Float {
+      return Float(WinSDK.pow(Double(precedingValue), Double(followingValue)))
+    }
+  #endif
 }

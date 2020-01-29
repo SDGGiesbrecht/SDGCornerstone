@@ -415,6 +415,8 @@ let package = Package(
       name: "SDGLocalizationTestUtilities",
       dependencies: [
         "SDGLocalization", "SDGTesting",
+        "SDGText",
+        "SDGPersistence",
         "SDGPersistenceTestUtilities"
       ]
     ),
@@ -745,6 +747,32 @@ if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
 }
 
 // #workaround(workspace 0.28.0, Causes Xcode executable/scheme issues for iOS.)
-#if os(macOS)
+#if os(macOS) || true  // #workaround(Causes Windows CMake differences between platforms.)
   package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
 #endif
+
+func adjustForWindows() {
+  // #workaround(workspace version 0.29.0, Windows does not support C.)
+  let impossibleProducts: Set<String> = [
+    // SwiftNumerics
+    "Real"
+  ]
+  for target in package.targets {
+    target.dependencies.removeAll(where: { dependency in
+      switch dependency {
+      case ._targetItem, ._byNameItem:
+        return false
+      case ._productItem(let name, _):
+        return impossibleProducts.contains(name)
+      }
+    })
+  }
+}
+#if os(Windows)
+  adjustForWindows()
+#endif
+import Foundation
+// #workaround(workspace 0.28.0, Until packages work natively on windows.)
+if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
+  adjustForWindows()
+}

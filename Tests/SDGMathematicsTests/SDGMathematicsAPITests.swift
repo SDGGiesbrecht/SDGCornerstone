@@ -176,7 +176,7 @@ class SDGMathematicsAPITests: TestCase {
     testRealArithmeticConformance(of: Double.self)
     testRealArithmeticConformance(of: FloatMax.self)
     testRealArithmeticConformance(of: CGFloat.self)
-    #if !(os(iOS) || os(watchOS) || os(tvOS))
+    #if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
       testRealArithmeticConformance(of: Float80.self)
     #endif
     testRealArithmeticConformance(of: Float.self)
@@ -466,7 +466,7 @@ class SDGMathematicsAPITests: TestCase {
     init(_ int: SDGMathematics.IntMax) {
       value = Double(int)
     }
-    #if !os(iOS) && !os(watchOS) && !os(tvOS)
+    #if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
       init(_ floatingPoint: FloatMax) {
         value = Double(floatingPoint)
       }

@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGText
+import SDGPersistence
 import SDGLocalization
 
 import SDGPersistenceTestUtilities
@@ -52,9 +55,19 @@ public func testCustomStringConvertibleConformance<T, L>(
     print("", to: &report)
   }
 
-  let specification = testSpecificationDirectory(file).appendingPathComponent(
-    "CustomStringConvertible"
-  ).appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName) + ".txt")
+  func fileName(typeName: String) -> URL {
+    testSpecificationDirectory(file)
+      .appendingPathComponent("CustomStringConvertible")
+      .appendingPathComponent(typeName)
+      .appendingPathComponent(String(uniqueTestName) + ".txt")
+  }
+  let deprecated = fileName(typeName: "\(T.self)")
+  let specification = fileName(
+    typeName: "\(T.self)"
+      .replacingMatches(for: "<", with: "⟨")
+      .replacingMatches(for: ">", with: "⟩")
+  )
+  try? FileManager.default.move(deprecated, to: specification)
   SDGPersistenceTestUtilities.compare(
     report,
     against: specification,

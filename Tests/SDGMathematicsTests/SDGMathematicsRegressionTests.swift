@@ -127,7 +127,7 @@ class SDGMathematicsRegressionTests: TestCase {
     let _: Int16 = 3 − 2
     let _: Int8 = 3 − 2
     let _: Double = 3 − 2
-    #if !(os(iOS) || os(watchOS) || os(tvOS))
+    #if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
       let _: Float80 = 3 − 2
     #endif
     let _: Float = 3 − 2
