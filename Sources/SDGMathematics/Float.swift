@@ -218,9 +218,7 @@ extension Double: FloatFamily {
     }
 
     @inlinable public static func sin(_ angle: Angle<Double>) -> Double {
-      #warning("Temporary for debugging.")
-      return angle.inRadians
-      //return WinSDK.sin(angle.inRadians)
+      return WinSDK.sin(angle.inRadians)
     }
 
     @inlinable public static func tan(_ angle: Angle<Double>) -> Double {
