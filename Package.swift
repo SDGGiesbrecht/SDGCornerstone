@@ -827,3 +827,13 @@ import Foundation
 if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
   adjustForWindows()
 }
+
+// #workaround(Until standard tests work.)
+package.targets.append(
+  .testTarget(
+    name: "SDGWindowsTests",
+    dependencies: [
+      "SDGControlFlow"
+    ]
+  )
+)
