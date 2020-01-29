@@ -15,6 +15,7 @@
 // #workaround(Until standard tests work.)
 
 import SDGControlFlow
+import SDGLogic
 
 import XCTest
 
@@ -24,5 +25,9 @@ class WindowsTests: XCTestCase {
     var cache: Bool?
     let computed = cached(in: &cache) { true }
     XCTAssert(computed)
+  }
+
+  func testLogic() {
+    XCTAssert(true ≠ false)
   }
 }
