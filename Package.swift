@@ -765,7 +765,7 @@ func adjustForWindows() {
     "SDGCalendarTests",
     "SDGCollation",
     "SDGCollationTests",
-    "SDGCollections",
+    // "SDGCollections",
     "SDGCollectionsTests",
     "SDGCollectionsTestUtilities",
     "SDGConcurrency",
