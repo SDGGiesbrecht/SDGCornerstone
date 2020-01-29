@@ -21,6 +21,7 @@ extension WindowsTests {
     testCase([
       ("testControlFlow", testControlFlow),
       ("testLogic", testLogic),
+      ("testMathematics", testMathematics),
     ])
   ]
 }

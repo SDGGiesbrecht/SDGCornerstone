@@ -783,7 +783,6 @@ func adjustForWindows() {
     "SDGLocalizationTestUtilities",
     "SDGLogicTests",
     "SDGLogicTestUtilities",
-    "SDGMathematics",
     "SDGMathematicsTests",
     "SDGMathematicsTestUtilities",
     "SDGPersistence",
@@ -833,7 +832,8 @@ package.targets.append(
     name: "SDGWindowsTests",
     dependencies: [
       "SDGControlFlow",
-      "SDGLogic"
+      "SDGLogic",
+      "SDGMathematics"
     ]
   )
 )
