@@ -87,6 +87,61 @@ target_link_libraries("SDGMathematics" PRIVATE
   "SDGLogic"
 )
 
+add_library("SDGCollections"
+  "../../../Sources/SDGCollections/Addable.swift"
+  "../../../Sources/SDGCollections/Associative/BijectiveMapping.swift"
+  "../../../Sources/SDGCollections/Associative/ContextualMapping.swift"
+  "../../../Sources/SDGCollections/Associative/Dictionary.swift"
+  "../../../Sources/SDGCollections/Conformances/CharacterSet.swift"
+  "../../../Sources/SDGCollections/Conformances/Data.swift"
+  "../../../Sources/SDGCollections/Conformances/String.swift"
+  "../../../Sources/SDGCollections/LegacyMode.swift"
+  "../../../Sources/SDGCollections/Operators.swift"
+  "../../../Sources/SDGCollections/Ordered/AnyCollection.swift"
+  "../../../Sources/SDGCollections/Ordered/Array.swift"
+  "../../../Sources/SDGCollections/Ordered/BidirectionalCollection.swift"
+  "../../../Sources/SDGCollections/Ordered/Collection.swift"
+  "../../../Sources/SDGCollections/Ordered/CollectionDifference.swift"
+  "../../../Sources/SDGCollections/Ordered/CollectionDifferenceChange.swift"
+  "../../../Sources/SDGCollections/Ordered/FillDirection.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/AlternativePatterns.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/AnyPattern.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/ConcatenatedPatterns.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/ConditionalPattern.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/NaryAlternativePatterns.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/NaryConcatenatedPatterns.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/NegatedPattern.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/NestingLevel.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/Pattern.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/PatternConsumption.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/PatternMatch.swift"
+  "../../../Sources/SDGCollections/Ordered/Patterns/RepetitionPattern.swift"
+  "../../../Sources/SDGCollections/Ordered/Range.swift"
+  "../../../Sources/SDGCollections/Ordered/RangeExpression.swift"
+  "../../../Sources/SDGCollections/Ordered/RangeReplaceableCollection.swift"
+  "../../../Sources/SDGCollections/Ordered/ReversedCollection.swift"
+  "../../../Sources/SDGCollections/Ordered/SearchableBidirectionalCollection.swift"
+  "../../../Sources/SDGCollections/Ordered/SearchableCollection.swift"
+  "../../../Sources/SDGCollections/Ordered/Slice.swift"
+  "../../../Sources/SDGCollections/Unordered/AbsoluteComplement.swift"
+  "../../../Sources/SDGCollections/Unordered/ComparableSet.swift"
+  "../../../Sources/SDGCollections/Unordered/FiniteSet.swift"
+  "../../../Sources/SDGCollections/Unordered/IntensionalSet.swift"
+  "../../../Sources/SDGCollections/Unordered/Intersection.swift"
+  "../../../Sources/SDGCollections/Unordered/MutableSet.swift"
+  "../../../Sources/SDGCollections/Unordered/Set.swift"
+  "../../../Sources/SDGCollections/Unordered/SetDefinition.swift"
+  "../../../Sources/SDGCollections/Unordered/SetInRepresentableUniverse.swift"
+  "../../../Sources/SDGCollections/Unordered/Union.swift"
+)
+set_target_properties("SDGCollections" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCollections" PRIVATE -enable-testing)
+target_link_libraries("SDGCollections" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+)
+
 add_library("SDGWindowsTests"
   "../../../Tests/SDGWindowsTests/SDGWindowsTests.swift"
 )
@@ -96,6 +151,7 @@ target_link_libraries("SDGWindowsTests" PRIVATE
   "SDGControlFlow"
   "SDGLogic"
   "SDGMathematics"
+  "SDGCollections"
 )
 
 add_executable(WindowsMain
