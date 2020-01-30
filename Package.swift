@@ -771,7 +771,6 @@ func adjustForWindows() {
     "SDGConcurrencyTests",
     "SDGControlFlowTests",
     "SDGCornerstoneDocumentationExampleTests",
-    "SDGCornerstoneLocalizations",
     "SDGExternalProcess",
     "SDGExternalProcessTests",
     "SDGGeometry",
@@ -833,7 +832,8 @@ package.targets.append(
       "SDGCollections",
       "SDGText",
       "SDGPersistence",
-      "SDGLocalization"
+      "SDGLocalization",
+      "SDGCornerstoneLocalizations"
     ]
   )
 )
