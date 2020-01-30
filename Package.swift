@@ -784,7 +784,6 @@ func adjustForWindows() {
     "SDGLogicTestUtilities",
     "SDGMathematicsTests",
     "SDGMathematicsTestUtilities",
-    "SDGPersistence",
     "SDGPersistenceTests",
     "SDGPersistenceTestUtilities",
     "SDGPrecisionMathematics",
@@ -833,7 +832,8 @@ package.targets.append(
       "SDGLogic",
       "SDGMathematics",
       "SDGCollections",
-      "SDGText"
+      "SDGText",
+      "SDGPersistence"
     ]
   )
 )

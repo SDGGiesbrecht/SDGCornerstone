@@ -24,6 +24,7 @@ extension WindowsTests {
       ("testMathematics", testMathematics),
       ("testCollections", testCollections),
       ("testText", testText),
+      ("testPersistence", testPersistence),
     ])
   ]
 }
