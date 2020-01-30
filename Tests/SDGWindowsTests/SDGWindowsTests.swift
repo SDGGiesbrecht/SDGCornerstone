@@ -22,6 +22,7 @@ import SDGMathematics
 import SDGCollections
 import SDGText
 import SDGPersistence
+import SDGLocalization
 
 import XCTest
 
@@ -51,5 +52,9 @@ class WindowsTests: XCTestCase {
 
   func testPersistence() {
     XCTAssertNotNil("text".file)
+  }
+
+  func testLocalization() {
+    XCTAssert(¬_APILocalization.allCases.isEmpty)
   }
 }

@@ -200,6 +200,61 @@ target_link_libraries("SDGPersistence" PRIVATE
   "SDGText"
 )
 
+add_library("SDGLocalization"
+  "../../../Sources/SDGLocalization/CachedLocalization.swift"
+  "../../../Sources/SDGLocalization/Extensions/Bool.swift"
+  "../../../Sources/SDGLocalization/Extensions/Decodable.swift"
+  "../../../Sources/SDGLocalization/Extensions/LosslessStringConvertible.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/Angle.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/Float.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/Int.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/IntegerProtcool.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/IntegralArithmetic.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/RationalArithmetic.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/RationalNumberProtocol.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/UInt.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/WholeArithmetic.swift"
+  "../../../Sources/SDGLocalization/Extensions/Numbers/WholeNumberProtocol.swift"
+  "../../../Sources/SDGLocalization/Extensions/Precondition.swift"
+  "../../../Sources/SDGLocalization/Extensions/PresentableError.swift"
+  "../../../Sources/SDGLocalization/Extensions/Range.swift"
+  "../../../Sources/SDGLocalization/Extensions/TextConvertibleNumber.swift"
+  "../../../Sources/SDGLocalization/Extensions/TextConvertibleNumberParseError.swift"
+  "../../../Sources/SDGLocalization/InputLocalization.swift"
+  "../../../Sources/SDGLocalization/Interpolation/Casing.swift"
+  "../../../Sources/SDGLocalization/Interpolation/EnglishCasing.swift"
+  "../../../Sources/SDGLocalization/Interpolation/GenreGrammatical.swift"
+  "../../../Sources/SDGLocalization/Interpolation/GrammaticalGender.swift"
+  "../../../Sources/SDGLocalization/Interpolation/GrammaticalNumber.swift"
+  "../../../Sources/SDGLocalization/Interpolation/GrammatikiPtosi.swift"
+  "../../../Sources/SDGLocalization/Localization.swift"
+  "../../../Sources/SDGLocalization/LocalizationSetting.swift"
+  "../../../Sources/SDGLocalization/LocalizationSettingStabilizationMode.swift"
+  "../../../Sources/SDGLocalization/Localizations/APILocalization.swift"
+  "../../../Sources/SDGLocalization/Localizations/AnyLocalization.swift"
+  "../../../Sources/SDGLocalization/Localizations/ContentLocalization.swift"
+  "../../../Sources/SDGLocalization/Localizations/FormatLocalization.swift"
+  "../../../Sources/SDGLocalization/Localizations/InterfaceLocalization.swift"
+  "../../../Sources/SDGLocalization/Metadata/Language.swift"
+  "../../../Sources/SDGLocalization/Metadata/LocalizationData.swift"
+  "../../../Sources/SDGLocalization/Metadata/Script.swift"
+  "../../../Sources/SDGLocalization/Metadata/State.swift"
+  "../../../Sources/SDGLocalization/Metadata/StateData.swift"
+  "../../../Sources/SDGLocalization/Metadata/TextDirection.swift"
+  "../../../Sources/SDGLocalization/UserFacing.swift"
+  "../../../Sources/SDGLocalization/UserFacingDynamic.swift"
+)
+set_target_properties("SDGLocalization" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGLocalization" PRIVATE -enable-testing)
+target_link_libraries("SDGLocalization" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGPersistence"
+)
+
 add_library("SDGWindowsTests"
   "../../../Tests/SDGWindowsTests/SDGWindowsTests.swift"
 )
@@ -212,6 +267,7 @@ target_link_libraries("SDGWindowsTests" PRIVATE
   "SDGCollections"
   "SDGText"
   "SDGPersistence"
+  "SDGLocalization"
 )
 
 add_executable(WindowsMain

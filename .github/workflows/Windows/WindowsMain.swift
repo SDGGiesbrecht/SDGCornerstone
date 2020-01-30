@@ -25,6 +25,7 @@ extension WindowsTests {
       ("testCollections", testCollections),
       ("testText", testText),
       ("testPersistence", testPersistence),
+      ("testLocalization", testLocalization),
     ])
   ]
 }
