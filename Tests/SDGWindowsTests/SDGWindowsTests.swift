@@ -50,6 +50,6 @@ class WindowsTests: XCTestCase {
   }
 
   func testPersistence() {
-    XCTAssertNotNil(FileManager.default.url(in: .cache, at: "path"))
+    XCTAssertNotNil("text".file)
   }
 }
