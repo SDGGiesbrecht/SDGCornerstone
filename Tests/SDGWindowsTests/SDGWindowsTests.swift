@@ -24,6 +24,7 @@ import SDGText
 import SDGPersistence
 import SDGLocalization
 import SDGCornerstoneLocalizations
+import SDGTesting
 
 import XCTest
 
@@ -61,5 +62,9 @@ class WindowsTests: XCTestCase {
 
   func testCornerstoneLocalizations() {
     XCTAssert(¬APILocalization.allCases.isEmpty)
+  }
+
+  func testTesting() {
+    test(true, "Failed.")
   }
 }

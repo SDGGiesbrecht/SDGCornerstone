@@ -27,6 +27,7 @@ extension WindowsTests {
       ("testPersistence", testPersistence),
       ("testLocalization", testLocalization),
       ("testCornerstoneLocalizations", testCornerstoneLocalizations),
+      ("testTesting", testTesting),
     ])
   ]
 }
