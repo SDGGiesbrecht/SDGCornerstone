@@ -14,11 +14,14 @@
 
 // #workaround(Until standard tests work.)
 
+import Foundation
+
 import SDGControlFlow
 import SDGLogic
 import SDGMathematics
 import SDGCollections
 import SDGText
+import SDGPersistence
 
 import XCTest
 
@@ -44,5 +47,9 @@ class WindowsTests: XCTestCase {
 
   func testText() {
     XCTAssertNotNil("text" as StrictString)
+  }
+
+  func testPersistence() {
+    XCTAssertNotNil("text".file)
   }
 }

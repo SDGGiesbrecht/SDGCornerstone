@@ -179,6 +179,27 @@ target_link_libraries("SDGText" PRIVATE
   "SDGCollections"
 )
 
+add_library("SDGPersistence"
+  "../../../Sources/SDGPersistence/Data.swift"
+  "../../../Sources/SDGPersistence/FileConvertible.swift"
+  "../../../Sources/SDGPersistence/FileManager.swift"
+  "../../../Sources/SDGPersistence/Preference.swift"
+  "../../../Sources/SDGPersistence/PreferenceSet.swift"
+  "../../../Sources/SDGPersistence/ProcessInfo.swift"
+  "../../../Sources/SDGPersistence/StrictString.swift"
+  "../../../Sources/SDGPersistence/String.swift"
+  "../../../Sources/SDGPersistence/URL.swift"
+)
+set_target_properties("SDGPersistence" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGPersistence" PRIVATE -enable-testing)
+target_link_libraries("SDGPersistence" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+)
+
 add_library("SDGWindowsTests"
   "../../../Tests/SDGWindowsTests/SDGWindowsTests.swift"
 )
@@ -190,6 +211,7 @@ target_link_libraries("SDGWindowsTests" PRIVATE
   "SDGMathematics"
   "SDGCollections"
   "SDGText"
+  "SDGPersistence"
 )
 
 add_executable(WindowsMain
