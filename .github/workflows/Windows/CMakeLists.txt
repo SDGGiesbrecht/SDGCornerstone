@@ -142,6 +142,43 @@ target_link_libraries("SDGCollections" PRIVATE
   "SDGMathematics"
 )
 
+add_library("SDGText"
+  "../../../Sources/SDGText/Array.swift"
+  "../../../Sources/SDGText/CharacterSet.swift"
+  "../../../Sources/SDGText/Collection.swift"
+  "../../../Sources/SDGText/Compatibility/StaticString.swift"
+  "../../../Sources/SDGText/Compatibility/String.swift"
+  "../../../Sources/SDGText/Compatibility/StringClusterView.swift"
+  "../../../Sources/SDGText/Compatibility/StringScalarView.swift"
+  "../../../Sources/SDGText/ExtendedGraphemeCluster.swift"
+  "../../../Sources/SDGText/Font.swift"
+  "../../../Sources/SDGText/MarkupPlaygroundDisplay.swift"
+  "../../../Sources/SDGText/Range.swift"
+  "../../../Sources/SDGText/SemanticMarkup.swift"
+  "../../../Sources/SDGText/SemanticMarkupStringInterpolation.swift"
+  "../../../Sources/SDGText/Strict/StrictString.swift"
+  "../../../Sources/SDGText/Strict/StrictStringClusterView.swift"
+  "../../../Sources/SDGText/Strict/StrictStringInterpolationProtocol.swift"
+  "../../../Sources/SDGText/Strict/StrictStringStringInterpolation.swift"
+  "../../../Sources/SDGText/String Family/ExtendedGraphemeClusterView.swift"
+  "../../../Sources/SDGText/String Family/Line.swift"
+  "../../../Sources/SDGText/String Family/LineView.swift"
+  "../../../Sources/SDGText/String Family/LineViewIndex.swift"
+  "../../../Sources/SDGText/String Family/NewlinePattern.swift"
+  "../../../Sources/SDGText/String Family/StringFamily.swift"
+  "../../../Sources/SDGText/String Family/StringIndex.swift"
+  "../../../Sources/SDGText/String Family/UnicodeScalarView.swift"
+  "../../../Sources/SDGText/UnicodeScalar.swift"
+)
+set_target_properties("SDGText" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGText" PRIVATE -enable-testing)
+target_link_libraries("SDGText" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+)
+
 add_library("SDGWindowsTests"
   "../../../Tests/SDGWindowsTests/SDGWindowsTests.swift"
 )
@@ -152,6 +189,7 @@ target_link_libraries("SDGWindowsTests" PRIVATE
   "SDGLogic"
   "SDGMathematics"
   "SDGCollections"
+  "SDGText"
 )
 
 add_executable(WindowsMain

@@ -18,6 +18,7 @@ import SDGControlFlow
 import SDGLogic
 import SDGMathematics
 import SDGCollections
+import SDGText
 
 import XCTest
 
@@ -39,5 +40,9 @@ class WindowsTests: XCTestCase {
 
   func testCollections() {
     XCTAssertNotNil([1, 2, 3].firstMatch(for: [1]))
+  }
+
+  func testText() {
+    XCTAssertNotNil("text" as StrictString)
   }
 }

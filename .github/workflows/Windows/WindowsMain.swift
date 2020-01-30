@@ -23,6 +23,7 @@ extension WindowsTests {
       ("testLogic", testLogic),
       ("testMathematics", testMathematics),
       ("testCollections", testCollections),
+      ("testText", testText),
     ])
   ]
 }

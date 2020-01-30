@@ -793,7 +793,6 @@ func adjustForWindows() {
     "SDGRandomizationTests",
     "SDGRandomizationTestUtilities",
     "SDGTesting",
-    "SDGText",
     "SDGTextTests",
     "SDGVersioning",
     "SDGVersioningTests",
@@ -833,7 +832,8 @@ package.targets.append(
       "SDGControlFlow",
       "SDGLogic",
       "SDGMathematics",
-      "SDGCollections"
+      "SDGCollections",
+      "SDGText"
     ]
   )
 )
