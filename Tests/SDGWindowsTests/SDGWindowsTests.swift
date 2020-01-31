@@ -25,6 +25,7 @@ import SDGPersistence
 import SDGLocalization
 import SDGCornerstoneLocalizations
 import SDGTesting
+import SDGXCTestUtilities
 
 import XCTest
 
@@ -66,5 +67,9 @@ class WindowsTests: XCTestCase {
 
   func testTesting() {
     test(true, "Failed.")
+  }
+
+  func testXCTest() {
+    XCTFeststellenGleich(1, 1)
   }
 }

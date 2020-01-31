@@ -791,8 +791,7 @@ func adjustForWindows() {
     "SDGRandomizationTestUtilities",
     "SDGTextTests",
     "SDGVersioning",
-    "SDGVersioningTests",
-    "SDGXCTestUtilities",
+    "SDGVersioningTests"
   ]
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
@@ -833,7 +832,8 @@ package.targets.append(
       "SDGPersistence",
       "SDGLocalization",
       "SDGCornerstoneLocalizations",
-      "SDGTesting"
+      "SDGTesting",
+      "SDGXCTestUtilities"
     ]
   )
 )

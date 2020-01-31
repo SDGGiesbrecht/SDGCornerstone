@@ -281,6 +281,20 @@ target_link_libraries("SDGTesting" PRIVATE
   "SDGCornerstoneLocalizations"
 )
 
+add_library("SDGXCTestUtilities"
+  "../../../Sources/SDGXCTestUtilities/TestCase.swift"
+  "../../../Sources/SDGXCTestUtilities/XCTAssert.swift"
+)
+set_target_properties("SDGXCTestUtilities" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGXCTestUtilities" PRIVATE -enable-testing)
+target_link_libraries("SDGXCTestUtilities" PRIVATE
+  "SDGTesting"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGText"
+  "SDGPersistence"
+)
+
 add_library("SDGWindowsTests"
   "../../../Tests/SDGWindowsTests/SDGWindowsTests.swift"
 )
@@ -296,6 +310,7 @@ target_link_libraries("SDGWindowsTests" PRIVATE
   "SDGLocalization"
   "SDGCornerstoneLocalizations"
   "SDGTesting"
+  "SDGXCTestUtilities"
 )
 
 add_executable(WindowsMain
