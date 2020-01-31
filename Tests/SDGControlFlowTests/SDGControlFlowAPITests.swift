@@ -130,6 +130,7 @@ class SDGControlFlowAPITests: TestCase {
   }
 
   func testPerformanceTest() {
+    print(#function)
     limit("Performance", to: 1) {}
   }
 

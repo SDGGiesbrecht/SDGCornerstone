@@ -40,12 +40,15 @@ public func limit(
   line: UInt = #line,
   test: () -> Void
 ) {
+  print(#function)
 
   let iterations = 10
 
   var results: [TimeInterval] = []
   for _ in 1...iterations {
+    print("Iterating...")
     autoreleasepool {
+      print("autoreleasepool")
       let start = Date.timeIntervalSinceReferenceDate
       test()
       let end = Date.timeIntervalSinceReferenceDate
@@ -54,6 +57,7 @@ public func limit(
   }
   let sum = results.reduce(0) { $0 + $1 }
   let mean = sum ÷ TimeInterval(iterations)
+  print("mean: \(mean)")
 
   let decimals = 3
   if mean > duration {
@@ -71,8 +75,10 @@ public func limit(
       line: line
     )
   } else {
+    print("Passed.")
     print(
       UserFacing<StrictString, APILocalization>({ localization in
+        print("Resolving message...")
         switch localization {
         case .englishCanada:
           return
