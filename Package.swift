@@ -769,7 +769,6 @@ func adjustForWindows() {
     "SDGCollectionsTestUtilities",
     "SDGConcurrency",
     "SDGConcurrencyTests",
-    "SDGControlFlowTests",
     "SDGCornerstoneDocumentationExampleTests",
     "SDGExternalProcess",
     "SDGExternalProcessTests",

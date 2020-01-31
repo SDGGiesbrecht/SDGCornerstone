@@ -14,7 +14,22 @@
 
 import XCTest
 
+@testable import SDGControlFlowTests
 @testable import SDGWindowsTests
+
+extension SDGControlFlowAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testCaching", testCaching),
+      ("testCodable", testCodable),
+      ("testNonmutatingVariants", testNonmutatingVariants),
+      ("testPerformanceTest", testPerformanceTest),
+      ("testShared", testShared),
+      ("testSharedProperty", testSharedProperty),
+      ("testWeak", testWeak),
+    ])
+  ]
+}
 
 extension WindowsTests {
   static let windowsTests: [XCTestCaseEntry] = [
@@ -34,6 +49,7 @@ extension WindowsTests {
 }
 
 var tests = [XCTestCaseEntry]()
+tests += SDGControlFlowAPITests.windowsTests
 tests += WindowsTests.windowsTests
 
 XCTMain(tests)
