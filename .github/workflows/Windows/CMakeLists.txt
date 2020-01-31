@@ -267,6 +267,64 @@ target_link_libraries("SDGCornerstoneLocalizations" PRIVATE
   "SDGLocalization"
 )
 
+add_library("SDGCalendar"
+  "../../../Sources/SDGCalendar/Abstract Components/CalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/CardinalCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/ConsistentDurationCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/ConsistentlyOrderedCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/Day.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/EnumerationCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/ICalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/ISOCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/Month.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/NumericCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/OrdinalCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/RawRepresentableCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/SmallestCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/Weekday.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/Year.swift"
+  "../../../Sources/SDGCalendar/AnyDescribableDate.swift"
+  "../../../Sources/SDGCalendar/CalendarDate.swift"
+  "../../../Sources/SDGCalendar/CalendarInterval.swift"
+  "../../../Sources/SDGCalendar/Date.swift"
+  "../../../Sources/SDGCalendar/DateDefinition.swift"
+  "../../../Sources/SDGCalendar/DescribableDate.swift"
+  "../../../Sources/SDGCalendar/FoundationDate.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianDate.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianDay.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianHour.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianMinute.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianMonth.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianSecond.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianWeekday.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianWeekdayDate.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianYear.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewDate.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewDay.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewHour.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewMonth.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewMonthAndYear.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewPart.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewWeekday.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewWeekdayDate.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewYear.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewYearLength.swift"
+  "../../../Sources/SDGCalendar/RationalArithmetic.swift"
+  "../../../Sources/SDGCalendar/RelativeDate.swift"
+  "../../../Sources/SDGCalendar/UnknownDate.swift"
+)
+set_target_properties("SDGCalendar" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCalendar" PRIVATE -enable-testing)
+target_link_libraries("SDGCalendar" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGLocalization"
+  "SDGCornerstoneLocalizations"
+)
+
 add_library("SDGTesting"
   "../../../Sources/SDGTesting/PerformanceTest.swift"
   "../../../Sources/SDGTesting/Test.swift"
@@ -328,6 +386,7 @@ target_link_libraries("SDGPersistenceTestUtilities" PRIVATE
   "SDGCollections"
   "SDGText"
   "SDGLocalization"
+  "SDGCalendar"
   "SDGCornerstoneLocalizations"
 )
 
@@ -387,6 +446,25 @@ target_link_libraries("SDGXCTestUtilities" PRIVATE
   "SDGMathematics"
   "SDGText"
   "SDGPersistence"
+)
+
+add_library("SDGCalendarTests"
+  "../../../Tests/SDGCalendarTests/SDGCalendarAPITests.swift"
+  "../../../Tests/SDGCalendarTests/SDGCalendarInternalTests.swift"
+  "../../../Tests/SDGCalendarTests/SDGCalendarRegressionTests.swift"
+)
+set_target_properties("SDGCalendarTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCalendarTests" PRIVATE -enable-testing)
+target_link_libraries("SDGCalendarTests" PRIVATE
+  "SDGCalendar"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGMathematics"
+  "SDGLocalization"
+  "SDGCornerstoneLocalizations"
+  "SDGMathematicsTestUtilities"
+  "SDGPersistenceTestUtilities"
+  "SDGLocalizationTestUtilities"
 )
 
 add_library("SDGCollectionsTests"
@@ -512,6 +590,7 @@ add_executable(WindowsMain
   WindowsMain.swift
 )
 target_link_libraries(WindowsMain PRIVATE
+  "SDGCalendarTests"
   "SDGCollectionsTests"
   "SDGControlFlowTests"
   "SDGLocalizationTests"

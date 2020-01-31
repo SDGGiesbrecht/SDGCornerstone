@@ -761,8 +761,6 @@ func adjustForWindows() {
   let impossibleTargets: Set<String> = [
     "SDGBinaryData",
     "SDGBinaryDataTests",
-    "SDGCalendar",
-    "SDGCalendarTests",
     "SDGCollation",
     "SDGCollationTests",
     "SDGConcurrency",

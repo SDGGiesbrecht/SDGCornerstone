@@ -14,6 +14,7 @@
 
 import XCTest
 
+@testable import SDGCalendarTests
 @testable import SDGCollectionsTests
 @testable import SDGControlFlowTests
 @testable import SDGLocalizationTests
@@ -21,6 +22,54 @@ import XCTest
 @testable import SDGMathematicsTests
 @testable import SDGPersistenceTests
 @testable import SDGTextTests
+
+extension SDGCalendarAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testCalendarComponent", testCalendarComponent),
+      ("testCalendarDate", testCalendarDate),
+      ("testCalendarInterval", testCalendarInterval),
+      ("testGregorianDay", testGregorianDay),
+      ("testGregorianHour", testGregorianHour),
+      ("testGregorianMinute", testGregorianMinute),
+      ("testGregorianMonth", testGregorianMonth),
+      ("testGregorianSecond", testGregorianSecond),
+      ("testGregorianWeekday", testGregorianWeekday),
+      ("testGregorianYear", testGregorianYear),
+      ("testHebrewDay", testHebrewDay),
+      ("testHebrewHour", testHebrewHour),
+      ("testHebrewMonth", testHebrewMonth),
+      ("testHebrewMonthAndYear", testHebrewMonthAndYear),
+      ("testHebrewPart", testHebrewPart),
+      ("testHebrewWeekday", testHebrewWeekday),
+      ("testHebrewYear", testHebrewYear),
+      ("testWeekday", testWeekday),
+    ])
+  ]
+}
+
+extension SDGCalendarInternalTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testDate", testDate),
+      ("testGregorianMonth", testGregorianMonth),
+      ("testGregorianWeekdayDate", testGregorianWeekdayDate),
+      ("testHebrewWeekdayDate", testHebrewWeekdayDate),
+      ("testHebrewYear", testHebrewYear),
+      ("testHebrewYear", testHebrewYear),
+      ("testRelativeDate", testRelativeDate),
+    ])
+  ]
+}
+
+extension SDGCalendarRegressionTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testCalendarEquatability", testCalendarEquatability),
+      ("testWeekday", testWeekday),
+    ])
+  ]
+}
 
 extension SDGCollectionsAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
@@ -233,6 +282,9 @@ extension SDGTextRegressionTests {
 }
 
 var tests = [XCTestCaseEntry]()
+tests += SDGCalendarAPITests.windowsTests
+tests += SDGCalendarInternalTests.windowsTests
+tests += SDGCalendarRegressionTests.windowsTests
 tests += SDGCollectionsAPITests.windowsTests
 tests += SDGCollectionsRegressionTests.windowsTests
 tests += SDGControlFlowAPITests.windowsTests
