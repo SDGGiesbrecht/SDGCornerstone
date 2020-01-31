@@ -104,7 +104,6 @@ class SDGControlFlowAPITests: TestCase {
     }
   }
   func testNonmutatingVariants() {
-    print("(In non‐mutating variants test.)")
     let sorted = nonmutatingVariant(of: { $0.sort() }, on: [2, 3, 1])
     XCTAssert(sorted == [1, 2, 3], "Nonmutating variant returned an unexpected value: \(sorted)")
     let appended = nonmutatingVariant(of: { $0.append($1) }, on: [1, 2], with: 3)
@@ -131,8 +130,6 @@ class SDGControlFlowAPITests: TestCase {
   }
 
   func testPerformanceTest() {
-    print("(In performance test.)")
-    print(#function)
     limit("Performance", to: 1) {}
   }
 
