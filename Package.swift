@@ -789,7 +789,6 @@ func adjustForWindows() {
     "SDGRandomization",
     "SDGRandomizationTests",
     "SDGRandomizationTestUtilities",
-    "SDGTesting",
     "SDGTextTests",
     "SDGVersioning",
     "SDGVersioningTests",
@@ -833,7 +832,8 @@ package.targets.append(
       "SDGText",
       "SDGPersistence",
       "SDGLocalization",
-      "SDGCornerstoneLocalizations"
+      "SDGCornerstoneLocalizations",
+      "SDGTesting"
     ]
   )
 )
