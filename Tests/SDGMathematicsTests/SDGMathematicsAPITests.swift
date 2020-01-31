@@ -98,24 +98,26 @@ class SDGMathematicsAPITests: TestCase {
   }
 
   func testAngle() {
-    testMeasurementConformance(of: Angle<Double>.self)
+    #if !os(Windows)  // #workaround(SegFault)
+      testMeasurementConformance(of: Angle<Double>.self)
 
-    let _1: Double = 1
+      let _1: Double = 1
 
-    XCTAssertEqual((_1 × τ()).rad, _1.rotations)
-    XCTAssertEqual((_1 × τ()).rad.inRotations, _1)
+      XCTAssertEqual((_1 × τ()).rad, _1.rotations)
+      XCTAssertEqual((_1 × τ()).rad.inRotations, _1)
 
-    let πValue: Double = π()
-    XCTAssert((_1 × 180)°.rawValue ≈ πValue.rad.rawValue)
-    XCTAssert((_1 × 6)°.inDegrees ≈ _1 × 6)
-    XCTAssertEqual((_1 × 60)′, _1°)
-    XCTAssert((_1 × 6)′.inMinutes ≈ _1 × 6)
-    XCTAssertEqual((_1 × 60)′′, _1′)
-    XCTAssert((_1 × 6)′′.inSeconds ≈ _1 × 6)
+      let πValue: Double = π()
+      XCTAssert((_1 × 180)°.rawValue ≈ πValue.rad.rawValue)
+      XCTAssert((_1 × 6)°.inDegrees ≈ _1 × 6)
+      XCTAssertEqual((_1 × 60)′, _1°)
+      XCTAssert((_1 × 6)′.inMinutes ≈ _1 × 6)
+      XCTAssertEqual((_1 × 60)′′, _1′)
+      XCTAssert((_1 × 6)′′.inSeconds ≈ _1 × 6)
 
-    XCTAssert((_1 × 200).gradians.rawValue ≈ πValue.rad.rawValue)
-    XCTAssert((_1 × 200).gon.rawValue ≈ πValue.rad.rawValue)
-    XCTAssert((_1 × 6).gradians.inGradians ≈ _1 × 6)
+      XCTAssert((_1 × 200).gradians.rawValue ≈ πValue.rad.rawValue)
+      XCTAssert((_1 × 200).gon.rawValue ≈ πValue.rad.rawValue)
+      XCTAssert((_1 × 6).gradians.inGradians ≈ _1 × 6)
+    #endif
   }
 
   struct BitFieldExample: BitField, Equatable, ExpressibleByIntegerLiteral {
