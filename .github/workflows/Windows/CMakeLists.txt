@@ -295,20 +295,14 @@ target_link_libraries("SDGXCTestUtilities" PRIVATE
   "SDGPersistence"
 )
 
-add_library("SDGWindowsTests"
-  "../../../Tests/SDGWindowsTests/SDGWindowsTests.swift"
+add_library("SDGControlFlowTests"
+  "../../../Tests/SDGControlFlowTests/Examples.swift"
+  "../../../Tests/SDGControlFlowTests/SDGControlFlowAPITests.swift"
 )
-set_target_properties("SDGWindowsTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
-target_compile_options("SDGWindowsTests" PRIVATE -enable-testing)
-target_link_libraries("SDGWindowsTests" PRIVATE
+set_target_properties("SDGControlFlowTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGControlFlowTests" PRIVATE -enable-testing)
+target_link_libraries("SDGControlFlowTests" PRIVATE
   "SDGControlFlow"
-  "SDGLogic"
-  "SDGMathematics"
-  "SDGCollections"
-  "SDGText"
-  "SDGPersistence"
-  "SDGLocalization"
-  "SDGCornerstoneLocalizations"
   "SDGTesting"
   "SDGXCTestUtilities"
 )
@@ -317,7 +311,7 @@ add_executable(WindowsMain
   WindowsMain.swift
 )
 target_link_libraries(WindowsMain PRIVATE
-  "SDGWindowsTests"
+  "SDGControlFlowTests"
 )
 add_test(NAME WindowsMain COMMAND WindowsMain)
 set_property(TEST WindowsMain PROPERTY ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
