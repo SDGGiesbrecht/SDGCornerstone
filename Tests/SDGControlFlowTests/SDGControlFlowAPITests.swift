@@ -130,7 +130,9 @@ class SDGControlFlowAPITests: TestCase {
   }
 
   func testPerformanceTest() {
-    limit("Performance", to: 1) {}
+    #if !os(Windows)  // #workaround(SegFault)
+      limit("Performance", to: 1) {}
+    #endif
   }
 
   class SharedValueObserverExample: SharedValueObserver {
