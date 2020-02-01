@@ -194,41 +194,43 @@ class SDGMathematicsAPITests: TestCase {
   }
 
   func testFunctionAnalysis() {
-    let negativeQuatratic = { (input: Int) -> Int in
-      return −(input ↑ 2)
-    }
-    XCTAssertEqual(
-      findLocalMaximum(near: 10, inFunction: negativeQuatratic),
-      0,
-      "Failed to find local maximum."
-    )
+    #if !os(Windows)  // #workaround(SegFault)
+      let negativeQuatratic = { (input: Int) -> Int in
+        return −(input ↑ 2)
+      }
+      XCTAssertEqual(
+        findLocalMaximum(near: 10, inFunction: negativeQuatratic),
+        0,
+        "Failed to find local maximum."
+      )
 
-    XCTAssertEqual(
-      findLocalMaximum(near: 10, within: 5...15, inFunction: negativeQuatratic),
-      5,
-      "Failed to find local maximum."
-    )
-    XCTAssertEqual(
-      findLocalMaximum(near: −10, inFunction: negativeQuatratic),
-      0,
-      "Failed to find local maximum."
-    )
+      XCTAssertEqual(
+        findLocalMaximum(near: 10, within: 5...15, inFunction: negativeQuatratic),
+        5,
+        "Failed to find local maximum."
+      )
+      XCTAssertEqual(
+        findLocalMaximum(near: −10, inFunction: negativeQuatratic),
+        0,
+        "Failed to find local maximum."
+      )
 
-    let quatratic = { (input: Int) -> Int in
-      return (input ↑ 2)
-    }
+      let quatratic = { (input: Int) -> Int in
+        return (input ↑ 2)
+      }
 
-    XCTAssertEqual(
-      findLocalMinimum(near: 10, inFunction: quatratic),
-      0,
-      "Failed to find local minimum."
-    )
+      XCTAssertEqual(
+        findLocalMinimum(near: 10, inFunction: quatratic),
+        0,
+        "Failed to find local minimum."
+      )
 
-    XCTAssertEqual(
-      findLocalMinimum(near: 10, within: 5...15, inFunction: quatratic),
-      5,
-      "Failed to find local minimum."
-    )
+      XCTAssertEqual(
+        findLocalMinimum(near: 10, within: 5...15, inFunction: quatratic),
+        5,
+        "Failed to find local minimum."
+      )
+    #endif
   }
 
   func testInt() {
