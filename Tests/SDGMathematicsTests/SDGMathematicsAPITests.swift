@@ -297,9 +297,11 @@ class SDGMathematicsAPITests: TestCase {
   }
 
   func testOneDimensionalPoint() {
-    var x = 1
-    x.decrement()
-    XCTAssertEqual(0, x)
+    #if !os(Windows)  // #workaround(SegFault)
+      var x = 1
+      x.decrement()
+      XCTAssertEqual(0, x)
+    #endif
   }
 
   enum OrderedEnumerationExample: Int, OrderedEnumeration {
