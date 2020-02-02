@@ -81,10 +81,12 @@ class SDGMathematicsRegressionTests: TestCase {
   func testDivisionOfNegatives() {
     // Untracked
 
-    let negativeThree = −3
-    XCTAssertEqual(negativeThree.dividedAccordingToEuclid(by: 1), −3)
-    let negativeEighteen = −18
-    XCTAssertEqual(negativeEighteen.dividedAccordingToEuclid(by: 19), −1)
+    #if !os(Windows)  // #workaround(SegFault)
+      let negativeThree = −3
+      XCTAssertEqual(negativeThree.dividedAccordingToEuclid(by: 1), −3)
+      let negativeEighteen = −18
+      XCTAssertEqual(negativeEighteen.dividedAccordingToEuclid(by: 19), −1)
+    #endif
   }
 
   func testFloor() {
