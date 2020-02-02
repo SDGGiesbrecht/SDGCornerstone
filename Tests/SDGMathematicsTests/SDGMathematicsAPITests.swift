@@ -716,21 +716,23 @@ class SDGMathematicsAPITests: TestCase {
   }
 
   func testUInt() {
-    testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
-    testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
-    testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
-    testWholeArithmeticConformance(of: UInt32.self, includingNegatives: false)
-    testWholeArithmeticConformance(of: UInt16.self, includingNegatives: false)
-    testWholeArithmeticConformance(of: UInt8.self, includingNegatives: false)
+    #if !os(Windows)  // #workaround(SegFault)
+      testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UInt32.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UInt16.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UInt8.self, includingNegatives: false)
 
-    testBitFieldConformance(
-      start: 0b0101_0110 as UInt8,
-      not: 0b1010_1001,
-      other: 0b1101_0010,
-      and: 0b0101_0010,
-      or: 0b1101_0110,
-      exclusiveOr: 0b1000_0100
-    )
+      testBitFieldConformance(
+        start: 0b0101_0110 as UInt8,
+        not: 0b1010_1001,
+        other: 0b1101_0010,
+        and: 0b0101_0010,
+        or: 0b1101_0110,
+        exclusiveOr: 0b1000_0100
+      )
+    #endif
   }
 
   struct VectorProtocolExample: RationalVector {
