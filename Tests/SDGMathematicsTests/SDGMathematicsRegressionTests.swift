@@ -23,23 +23,25 @@ class SDGMathematicsRegressionTests: TestCase {
   func testAddAndSetIsUnambiguous() {
     // Untracked
 
-    func runTests<N: IntegralArithmetic>(_ type: N.Type) {
-      var x: N = 0
-      let _1: N = 1
-      x −= _1
-      XCTAssertEqual(x, −1)
-      XCTAssertEqual((x − _1) as N, −2)
-      x += _1
-      XCTAssertEqual(x, 0)
-      XCTAssertEqual(x + _1, 1)
-    }
-    runTests(Int.self)
-    runTests(Int64.self)
-    runTests(Int32.self)
-    runTests(Int16.self)
-    runTests(Int8.self)
-    runTests(Double.self)
-    runTests(Float.self)
+    #if !os(Windows)  // #workaround(SegFault)
+      func runTests<N: IntegralArithmetic>(_ type: N.Type) {
+        var x: N = 0
+        let _1: N = 1
+        x −= _1
+        XCTAssertEqual(x, −1)
+        XCTAssertEqual((x − _1) as N, −2)
+        x += _1
+        XCTAssertEqual(x, 0)
+        XCTAssertEqual(x + _1, 1)
+      }
+      runTests(Int.self)
+      runTests(Int64.self)
+      runTests(Int32.self)
+      runTests(Int16.self)
+      runTests(Int8.self)
+      runTests(Double.self)
+      runTests(Float.self)
+    #endif
   }
 
   struct Values: Comparable, Equatable {
