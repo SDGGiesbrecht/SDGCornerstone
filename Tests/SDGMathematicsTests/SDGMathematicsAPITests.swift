@@ -653,22 +653,24 @@ class SDGMathematicsAPITests: TestCase {
     }
   }
   func testSubtractable() {
-    XCTAssertEqual(
-      SubtractableNumericExample(6) - SubtractableNumericExample(5),  // @exempt(from: unicode)
-      SubtractableNumericExample(1)
-    )
-    var x = SubtractableNumericExample(7)
-    x -= SubtractableNumericExample(8)  // @exempt(from: unicode)
-    XCTAssertEqual(x, SubtractableNumericExample(−1))
+    #if !os(Windows)  // #workaround(SegFault)
+      XCTAssertEqual(
+        SubtractableNumericExample(6) - SubtractableNumericExample(5),  // @exempt(from: unicode)
+        SubtractableNumericExample(1)
+      )
+      var x = SubtractableNumericExample(7)
+      x -= SubtractableNumericExample(8)  // @exempt(from: unicode)
+      XCTAssertEqual(x, SubtractableNumericExample(−1))
 
-    XCTAssertEqual(
-      SubtractableStrideableExample(6)
-        - SubtractableStrideableExample(5),  // @exempt(from: unicode)
-      SubtractableStrideableExample(1)
-    )
-    var y = SubtractableStrideableExample(7)
-    y -= SubtractableStrideableExample(8)  // @exempt(from: unicode)
-    XCTAssertEqual(y, SubtractableStrideableExample(−1))
+      XCTAssertEqual(
+        SubtractableStrideableExample(6)
+          - SubtractableStrideableExample(5),  // @exempt(from: unicode)
+        SubtractableStrideableExample(1)
+      )
+      var y = SubtractableStrideableExample(7)
+      y -= SubtractableStrideableExample(8)  // @exempt(from: unicode)
+      XCTAssertEqual(y, SubtractableStrideableExample(−1))
+    #endif
   }
 
   func testTuple() {
