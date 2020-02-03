@@ -122,20 +122,22 @@ class SDGMathematicsRegressionTests: TestCase {
   func testSubtractionIsUnambiguous() {
     // Untracked
 
-    let _: UInt = 3 − 2
-    let _: UInt64 = 3 − 2
-    let _: UInt32 = 3 − 2
-    let _: UInt16 = 3 − 2
-    let _: UInt8 = 3 − 2
-    let _: Int = 3 − 2
-    let _: Int64 = 3 − 2
-    let _: Int32 = 3 − 2
-    let _: Int16 = 3 − 2
-    let _: Int8 = 3 − 2
-    let _: Double = 3 − 2
-    #if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
-      let _: Float80 = 3 − 2
+    #if !os(Windows)  // #workaround(SegFault)
+      let _: UInt = 3 − 2
+      let _: UInt64 = 3 − 2
+      let _: UInt32 = 3 − 2
+      let _: UInt16 = 3 − 2
+      let _: UInt8 = 3 − 2
+      let _: Int = 3 − 2
+      let _: Int64 = 3 − 2
+      let _: Int32 = 3 − 2
+      let _: Int16 = 3 − 2
+      let _: Int8 = 3 − 2
+      let _: Double = 3 − 2
+      #if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
+        let _: Float80 = 3 − 2
+      #endif
+      let _: Float = 3 − 2
     #endif
-    let _: Float = 3 − 2
   }
 }
