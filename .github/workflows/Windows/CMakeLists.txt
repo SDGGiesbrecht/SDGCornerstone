@@ -267,6 +267,64 @@ target_link_libraries("SDGCornerstoneLocalizations" PRIVATE
   "SDGLocalization"
 )
 
+add_library("SDGCalendar"
+  "../../../Sources/SDGCalendar/Abstract Components/CalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/CardinalCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/ConsistentDurationCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/ConsistentlyOrderedCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/Day.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/EnumerationCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/ICalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/ISOCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/Month.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/NumericCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/OrdinalCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/RawRepresentableCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/SmallestCalendarComponent.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/Weekday.swift"
+  "../../../Sources/SDGCalendar/Abstract Components/Year.swift"
+  "../../../Sources/SDGCalendar/AnyDescribableDate.swift"
+  "../../../Sources/SDGCalendar/CalendarDate.swift"
+  "../../../Sources/SDGCalendar/CalendarInterval.swift"
+  "../../../Sources/SDGCalendar/Date.swift"
+  "../../../Sources/SDGCalendar/DateDefinition.swift"
+  "../../../Sources/SDGCalendar/DescribableDate.swift"
+  "../../../Sources/SDGCalendar/FoundationDate.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianDate.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianDay.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianHour.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianMinute.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianMonth.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianSecond.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianWeekday.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianWeekdayDate.swift"
+  "../../../Sources/SDGCalendar/Gregorian/GregorianYear.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewDate.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewDay.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewHour.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewMonth.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewMonthAndYear.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewPart.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewWeekday.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewWeekdayDate.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewYear.swift"
+  "../../../Sources/SDGCalendar/Hebrew/HebrewYearLength.swift"
+  "../../../Sources/SDGCalendar/RationalArithmetic.swift"
+  "../../../Sources/SDGCalendar/RelativeDate.swift"
+  "../../../Sources/SDGCalendar/UnknownDate.swift"
+)
+set_target_properties("SDGCalendar" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCalendar" PRIVATE -enable-testing)
+target_link_libraries("SDGCalendar" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGLocalization"
+  "SDGCornerstoneLocalizations"
+)
+
 add_library("SDGTesting"
   "../../../Sources/SDGTesting/PerformanceTest.swift"
   "../../../Sources/SDGTesting/Test.swift"
@@ -279,6 +337,88 @@ target_link_libraries("SDGTesting" PRIVATE
   "SDGText"
   "SDGLocalization"
   "SDGCornerstoneLocalizations"
+)
+
+add_library("SDGLogicTestUtilities"
+  "../../../Sources/SDGLogicTestUtilities/Equatable.swift"
+)
+set_target_properties("SDGLogicTestUtilities" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGLogicTestUtilities" PRIVATE -enable-testing)
+target_link_libraries("SDGLogicTestUtilities" PRIVATE
+  "SDGLogic"
+  "SDGTesting"
+)
+
+add_library("SDGCollectionsTestUtilities"
+  "../../../Sources/SDGCollectionsTestUtilities/BidirectionalCollection.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/Collection.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/ComparableSet.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/FiniteSet.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/Hashable.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/MutableSet.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/Pattern.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/RandomAccessCollection.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/RangeReplaceableCollection.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/SetDefinition.swift"
+  "../../../Sources/SDGCollectionsTestUtilities/SetInRepresentableUniverse.swift"
+)
+set_target_properties("SDGCollectionsTestUtilities" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCollectionsTestUtilities" PRIVATE -enable-testing)
+target_link_libraries("SDGCollectionsTestUtilities" PRIVATE
+  "SDGCollections"
+  "SDGTesting"
+  "SDGLogicTestUtilities"
+)
+
+add_library("SDGPersistenceTestUtilities"
+  "../../../Sources/SDGPersistenceTestUtilities/Codable.swift"
+  "../../../Sources/SDGPersistenceTestUtilities/FileConvertible.swift"
+  "../../../Sources/SDGPersistenceTestUtilities/Specification.swift"
+)
+set_target_properties("SDGPersistenceTestUtilities" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGPersistenceTestUtilities" PRIVATE -enable-testing)
+target_link_libraries("SDGPersistenceTestUtilities" PRIVATE
+  "SDGPersistence"
+  "SDGTesting"
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGLocalization"
+  "SDGCalendar"
+  "SDGCornerstoneLocalizations"
+)
+
+add_library("SDGMathematicsTestUtilities"
+  "../../../Sources/SDGMathematicsTestUtilities/Addable.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/BitField.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/Comparable.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/FixedScaleOneDimensionalPoint.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/Float.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/GenericAdditiveArithmetic.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/IntegralArithmetic.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/Measurement.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/Negatable.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/NumericAdditiveArithmetic.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/OneDimensionalPoint.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/PointProtocol.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/RationalArithmetic.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/RationalVector.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/RealArithmetic.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/Subtractable.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/VectorProtocol.swift"
+  "../../../Sources/SDGMathematicsTestUtilities/WholeArithmetic.swift"
+)
+set_target_properties("SDGMathematicsTestUtilities" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGMathematicsTestUtilities" PRIVATE -enable-testing)
+target_link_libraries("SDGMathematicsTestUtilities" PRIVATE
+  "SDGMathematics"
+  "SDGTesting"
+  "SDGCollections"
+  "SDGLogicTestUtilities"
+  "SDGCollectionsTestUtilities"
+  "SDGPersistenceTestUtilities"
 )
 
 add_library("SDGXCTestUtilities"
@@ -307,11 +447,40 @@ target_link_libraries("SDGControlFlowTests" PRIVATE
   "SDGXCTestUtilities"
 )
 
+add_library("SDGLogicTests"
+  "../../../Tests/SDGLogicTests/SDGLogicAPITests.swift"
+)
+set_target_properties("SDGLogicTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGLogicTests" PRIVATE -enable-testing)
+target_link_libraries("SDGLogicTests" PRIVATE
+  "SDGLogic"
+  "SDGLogicTestUtilities"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGMathematicsTestUtilities"
+)
+
+add_library("SDGMathematicsTests"
+  "../../../Tests/SDGMathematicsTests/SDGMathematicsAPITests.swift"
+  "../../../Tests/SDGMathematicsTests/SDGMathematicsRegressionTests.swift"
+)
+set_target_properties("SDGMathematicsTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGMathematicsTests" PRIVATE -enable-testing)
+target_link_libraries("SDGMathematicsTests" PRIVATE
+  "SDGMathematics"
+  "SDGMathematicsTestUtilities"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGLogic"
+)
+
 add_executable(WindowsMain
   WindowsMain.swift
 )
 target_link_libraries(WindowsMain PRIVATE
   "SDGControlFlowTests"
+  "SDGLogicTests"
+  "SDGMathematicsTests"
 )
 add_test(NAME WindowsMain COMMAND WindowsMain)
 set_property(TEST WindowsMain PROPERTY ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
