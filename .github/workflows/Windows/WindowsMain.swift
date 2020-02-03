@@ -15,7 +15,7 @@
 import XCTest
 
 @testable import SDGCalendarTests
-@testable import SDGCollationTests
+@testable import SDGCollectionsTests
 @testable import SDGControlFlowTests
 @testable import SDGLogicTests
 @testable import SDGMathematicsTests
@@ -69,28 +69,48 @@ extension SDGCalendarRegressionTests {
   ]
 }
 
-extension SDGCollationAPITests {
+extension SDGCollectionsAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testCoding", testCoding),
-      ("testCollationOrder", testCollationOrder),
-      ("testInterspersion", testInterspersion),
+      ("testAbsoluteComplement", testAbsoluteComplement),
+      ("testAddable", testAddable),
+      ("testAlternativePatterns", testAlternativePatterns),
+      ("testAnyPattern", testAnyPattern),
+      ("testArray", testArray),
+      ("testBidirectionalCollection", testBidirectionalCollection),
+      ("testBijectiveMapping", testBijectiveMapping),
+      ("testCollection", testCollection),
+      ("testCollectionDifference", testCollectionDifference),
+      ("testCollectionDifferenceChange", testCollectionDifferenceChange),
+      ("testComparableSet", testComparableSet),
+      ("testConcatenatedPatterns", testConcatenatedPatterns),
+      ("testConditionalPattern", testConditionalPattern),
+      ("testContextualMapping", testContextualMapping),
+      ("testDictionary", testDictionary),
+      ("testFiniteSet", testFiniteSet),
+      ("testIntensionalSet", testIntensionalSet),
+      ("testIntersection", testIntersection),
+      ("testLiteralPattern", testLiteralPattern),
+      ("testMutableSet", testMutableSet),
+      ("testNegatedPattern", testNegatedPattern),
+      ("testPatternClassCluster", testPatternClassCluster),
+      ("testRange", testRange),
+      ("testRangeReplaceableCollection", testRangeReplaceableCollection),
+      ("testRepetitionPattern", testRepetitionPattern),
+      ("testSet", testSet),
+      ("testSetInRepresentableUniverse", testSetInRepresentableUniverse),
+      ("testSymmetricDifference", testSymmetricDifference),
+      ("testUnion", testUnion),
     ])
   ]
 }
 
-extension SDGCollationLanguageTests {
+extension SDGCollectionsRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testAramaic", testAramaic),
-      ("testBosnian", testBosnian),
-      ("testEnglish", testEnglish),
-      ("testFrench", testFrench),
-      ("testGerman", testGerman),
-      ("testGreek", testGreek),
-      ("testHebrew", testHebrew),
-      ("testItalian", testItalian),
-      ("testSpanish", testSpanish),
+      ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch),
+      ("testTrailingConditionSearch", testTrailingConditionSearch),
+      ("testSubstringContainmentIsUnambiguous", testSubstringContainmentIsUnambiguous),
     ])
   ]
 }
@@ -209,8 +229,8 @@ var tests = [XCTestCaseEntry]()
 tests += SDGCalendarAPITests.windowsTests
 tests += SDGCalendarInternalTests.windowsTests
 tests += SDGCalendarRegressionTests.windowsTests
-tests += SDGCollationAPITests.windowsTests
-tests += SDGCollationLanguageTests.windowsTests
+tests += SDGCollectionsAPITests.windowsTests
+tests += SDGCollectionsRegressionTests.windowsTests
 tests += SDGControlFlowAPITests.windowsTests
 tests += SDGLogicAPITests.windowsTests
 tests += SDGMathematicsAPITests.windowsTests

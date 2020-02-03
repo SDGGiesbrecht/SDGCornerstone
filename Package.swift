@@ -762,7 +762,7 @@ func adjustForWindows() {
     "SDGBinaryData",
     "SDGBinaryDataTests",
     "SDGCollation",
-    "SDGCollectionsTests",
+    "SDGCollationTests",
     "SDGConcurrency",
     "SDGConcurrencyTests",
     "SDGCornerstoneDocumentationExampleTests",
