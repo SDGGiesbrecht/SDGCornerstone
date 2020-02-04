@@ -340,14 +340,16 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianHour() {
-    testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
-    testDecoding(GregorianHour.self, failsFor: 600)  // Invalid raw value.
-    testCustomStringConvertibleConformance(
-      of: GregorianHour(6),
-      localizations: FormatLocalization.self,
-      uniqueTestName: "6",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(SegFault)
+      testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
+      testDecoding(GregorianHour.self, failsFor: 600)  // Invalid raw value.
+      testCustomStringConvertibleConformance(
+        of: GregorianHour(6),
+        localizations: FormatLocalization.self,
+        uniqueTestName: "6",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testGregorianMinute() {
