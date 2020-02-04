@@ -27,7 +27,7 @@ import SDGXCTestUtilities
 class SDGCalendarAPITests: TestCase {
 
   func testCalendarComponent() {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
 
@@ -57,7 +57,7 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testCalendarDate() throws {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       // Force these to take place first.
       SDGCalendarInternalTests.testHebrewYear()
 
@@ -295,7 +295,7 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testCalendarInterval() {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
       testCustomStringConvertibleConformance(
         of: 1.days,
@@ -316,7 +316,7 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianDay() {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
       testCustomStringConvertibleConformance(
         of: GregorianDay(4),
@@ -340,7 +340,7 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianHour() {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
       testDecoding(GregorianHour.self, failsFor: 600)  // Invalid raw value.
       testCustomStringConvertibleConformance(
@@ -353,7 +353,7 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianMinute() {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
       testCustomStringConvertibleConformance(
         of: GregorianMinute(14),
@@ -365,7 +365,7 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianMonth() {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
       testDecoding(GregorianMonth.self, failsFor: 120)  // Invalid raw value.
       testCustomStringConvertibleConformance(
@@ -402,7 +402,7 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianSecond() {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
       testCustomStringConvertibleConformance(
         of: GregorianSecond(12),
