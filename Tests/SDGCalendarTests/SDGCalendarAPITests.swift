@@ -365,38 +365,40 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianMonth() {
-    testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
-    testDecoding(GregorianMonth.self, failsFor: 120)  // Invalid raw value.
-    testCustomStringConvertibleConformance(
-      of: GregorianMonth.august,
-      localizations: FormatLocalization.self,
-      uniqueTestName: "August",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(SegFault)
+      testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
+      testDecoding(GregorianMonth.self, failsFor: 120)  // Invalid raw value.
+      testCustomStringConvertibleConformance(
+        of: GregorianMonth.august,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "August",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    let length = FloatMax(GregorianMonth.january.numberOfDays(leapYear: false))
-      × (1 as FloatMax).days
-    XCTAssert(length ≥ GregorianMonth.minimumDuration)
-    XCTAssert(length ≤ GregorianMonth.maximumDuration)
+      let length = FloatMax(GregorianMonth.january.numberOfDays(leapYear: false))
+        × (1 as FloatMax).days
+      XCTAssert(length ≥ GregorianMonth.minimumDuration)
+      XCTAssert(length ≤ GregorianMonth.maximumDuration)
 
-    for month in GregorianMonth.january...GregorianMonth.december {
-      XCTAssertNotEqual(month.inEnglish(), "")
+      for month in GregorianMonth.january...GregorianMonth.december {
+        XCTAssertNotEqual(month.inEnglish(), "")
 
-      if month == .january {
-        XCTAssertEqual(month.inEnglish(), "January")
+        if month == .january {
+          XCTAssertEqual(month.inEnglish(), "January")
+        }
       }
-    }
 
-    XCTAssertNil(HebrewMonth.adarII.numberAlreadyElapsed(leapYear: false))
-    XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: false), 1)
-    XCTAssertNil(HebrewMonth.adarII.ordinal(leapYear: false))
-    XCTAssertEqual(HebrewMonth.adar.ordinal(leapYear: false), 6)
-    XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: false), 12)
-    XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: true), 1)
-    XCTAssertNil(HebrewMonth.adar.ordinal(leapYear: true))
-    XCTAssertEqual(HebrewMonth.adarI.ordinal(leapYear: true), 6)
-    XCTAssertEqual(HebrewMonth.adarII.ordinal(leapYear: true), 7)
-    XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: true), 13)
+      XCTAssertNil(HebrewMonth.adarII.numberAlreadyElapsed(leapYear: false))
+      XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: false), 1)
+      XCTAssertNil(HebrewMonth.adarII.ordinal(leapYear: false))
+      XCTAssertEqual(HebrewMonth.adar.ordinal(leapYear: false), 6)
+      XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: false), 12)
+      XCTAssertEqual(HebrewMonth.tishrei.ordinal(leapYear: true), 1)
+      XCTAssertNil(HebrewMonth.adar.ordinal(leapYear: true))
+      XCTAssertEqual(HebrewMonth.adarI.ordinal(leapYear: true), 6)
+      XCTAssertEqual(HebrewMonth.adarII.ordinal(leapYear: true), 7)
+      XCTAssertEqual(HebrewMonth.elul.ordinal(leapYear: true), 13)
+    #endif
   }
 
   func testGregorianSecond() {
