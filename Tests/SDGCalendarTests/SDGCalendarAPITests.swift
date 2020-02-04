@@ -402,18 +402,20 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianSecond() {
-    testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
-    testCustomStringConvertibleConformance(
-      of: GregorianSecond(12),
-      localizations: FormatLocalization.self,
-      uniqueTestName: "12",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(SegFault)
+      testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
+      testCustomStringConvertibleConformance(
+        of: GregorianSecond(12),
+        localizations: FormatLocalization.self,
+        uniqueTestName: "12",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    let second: GregorianSecond = 0.0
-    XCTAssertEqual(second, 0)
+      let second: GregorianSecond = 0.0
+      XCTAssertEqual(second, 0)
 
-    XCTAssertEqual(GregorianSecond(0).inDigits(), "00")
+      XCTAssertEqual(GregorianSecond(0).inDigits(), "00")
+    #endif
   }
 
   func testGregorianWeekday() {
