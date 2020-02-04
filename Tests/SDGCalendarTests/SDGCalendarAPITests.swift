@@ -465,26 +465,28 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testHebrewDay() {
-    testCodableConformance(of: HebrewDay(12), uniqueTestName: "12")
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(of: HebrewDay(12), uniqueTestName: "12")
 
-    var day: HebrewDay = 30
-    var month: HebrewMonth = .adar
-    var year: HebrewYear = 5774
-    day.correct(forMonth: &month, year: &year)
-    XCTAssertEqual(day, 1)
-    XCTAssertEqual(month, .nisan)
+      var day: HebrewDay = 30
+      var month: HebrewMonth = .adar
+      var year: HebrewYear = 5774
+      day.correct(forMonth: &month, year: &year)
+      XCTAssertEqual(day, 1)
+      XCTAssertEqual(month, .nisan)
 
-    day = 30
-    month = .elul
-    year = 5777
-    day.correct(forMonth: &month, year: &year)
-    XCTAssertEqual(day, 1)
-    XCTAssertEqual(month, .tishrei)
-    XCTAssertEqual(year, 5778)
+      day = 30
+      month = .elul
+      year = 5777
+      day.correct(forMonth: &month, year: &year)
+      XCTAssertEqual(day, 1)
+      XCTAssertEqual(month, .tishrei)
+      XCTAssertEqual(year, 5778)
 
-    XCTAssertEqual(HebrewMonth.nisan.numberAlreadyElapsed(leapYear: true), 7)
-    XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: false), 7)
-    XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: true), 8)
+      XCTAssertEqual(HebrewMonth.nisan.numberAlreadyElapsed(leapYear: true), 7)
+      XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: false), 7)
+      XCTAssertEqual(HebrewMonth.nisan.ordinal(leapYear: true), 8)
+    #endif
   }
 
   func testHebrewHour() {
