@@ -419,15 +419,17 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianWeekday() {
-    testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
-    for ordinal in 1...7 {
-      testCustomStringConvertibleConformance(
-        of: GregorianWeekday(ordinal: ordinal),
-        localizations: FormatLocalization.self,
-        uniqueTestName: ordinal.inDigits(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    }
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
+      for ordinal in 1...7 {
+        testCustomStringConvertibleConformance(
+          of: GregorianWeekday(ordinal: ordinal),
+          localizations: FormatLocalization.self,
+          uniqueTestName: ordinal.inDigits(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      }
+    #endif
   }
 
   func testGregorianYear() {
