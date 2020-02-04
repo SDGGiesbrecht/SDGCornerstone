@@ -353,13 +353,15 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianMinute() {
-    testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
-    testCustomStringConvertibleConformance(
-      of: GregorianMinute(14),
-      localizations: FormatLocalization.self,
-      uniqueTestName: "14",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(SegFault)
+      testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
+      testCustomStringConvertibleConformance(
+        of: GregorianMinute(14),
+        localizations: FormatLocalization.self,
+        uniqueTestName: "14",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testGregorianMonth() {
