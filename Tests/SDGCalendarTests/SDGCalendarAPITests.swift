@@ -433,33 +433,35 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianYear() {
-    testCodableConformance(of: GregorianYear(1234), uniqueTestName: "1234")
-    testCustomStringConvertibleConformance(
-      of: GregorianYear(1870),
-      localizations: FormatLocalization.self,
-      uniqueTestName: "1870",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(of: GregorianYear(1234), uniqueTestName: "1234")
+      testCustomStringConvertibleConformance(
+        of: GregorianYear(1870),
+        localizations: FormatLocalization.self,
+        uniqueTestName: "1870",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    let length = FloatMax(GregorianYear(2017).numberOfDays) × (1 as FloatMax).days
-    XCTAssert(length ≥ GregorianYear.minimumDuration)
-    XCTAssert(length ≤ GregorianYear.maximumDuration)
+      let length = FloatMax(GregorianYear(2017).numberOfDays) × (1 as FloatMax).days
+      XCTAssert(length ≥ GregorianYear.minimumDuration)
+      XCTAssert(length ≤ GregorianYear.maximumDuration)
 
-    XCTAssertEqual(GregorianYear(ordinal: 1), 1)
-    XCTAssertEqual(GregorianYear(2017).numberAlreadyElapsed, 2016)
+      XCTAssertEqual(GregorianYear(ordinal: 1), 1)
+      XCTAssertEqual(GregorianYear(2017).numberAlreadyElapsed, 2016)
 
-    XCTAssertEqual(GregorianYear(1).inISOFormat(), "0001")
-    XCTAssertEqual(GregorianYear(−1).inISOFormat(), "0000")
-    XCTAssertEqual(GregorianYear(−2).inISOFormat(), "−0001")
+      XCTAssertEqual(GregorianYear(1).inISOFormat(), "0001")
+      XCTAssertEqual(GregorianYear(−1).inISOFormat(), "0000")
+      XCTAssertEqual(GregorianYear(−2).inISOFormat(), "−0001")
 
-    XCTAssertEqual(GregorianYear(−1) + 1, GregorianYear(1))
-    XCTAssertEqual(GregorianYear(1) − 1, GregorianYear(−1))
-    XCTAssertEqual(GregorianYear(−1) − GregorianYear(1), −1)
+      XCTAssertEqual(GregorianYear(−1) + 1, GregorianYear(1))
+      XCTAssertEqual(GregorianYear(1) − 1, GregorianYear(−1))
+      XCTAssertEqual(GregorianYear(−1) − GregorianYear(1), −1)
 
-    XCTAssertEqual(GregorianYear(−1000).inEnglishDigits(), "1000 BC")
+      XCTAssertEqual(GregorianYear(−1000).inEnglishDigits(), "1000 BC")
 
-    XCTAssertEqual(GregorianYear(numberAlreadyElapsed: 0), 1)
-    XCTAssertEqual(GregorianYear(2017).ordinal, 2017)
+      XCTAssertEqual(GregorianYear(numberAlreadyElapsed: 0), 1)
+      XCTAssertEqual(GregorianYear(2017).ordinal, 2017)
+    #endif
   }
 
   func testHebrewDay() {
