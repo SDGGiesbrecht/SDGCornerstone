@@ -35,10 +35,12 @@ class SDGCalendarRegressionTests: TestCase {
   func testWeekday() {
     // Untracked
 
-    var date = CalendarDate(hebrew: .tishrei, 4, 5758)
-    for _ in 0..<1000 {
-      date += (1 as CalendarDate.Vector.Scalar).weeks
-      XCTAssertEqual(date.hebrewWeekday, .sunday)
-    }
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      var date = CalendarDate(hebrew: .tishrei, 4, 5758)
+      for _ in 0..<1000 {
+        date += (1 as CalendarDate.Vector.Scalar).weeks
+        XCTAssertEqual(date.hebrewWeekday, .sunday)
+      }
+    #endif
   }
 }
