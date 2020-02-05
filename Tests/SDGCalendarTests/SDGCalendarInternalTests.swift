@@ -85,10 +85,12 @@ class SDGCalendarInternalTests: TestCase {
   }
 
   func testHebrewWeekdayDate() {
-    XCTAssertEqual(
-      CalendarDate(definition: HebrewWeekdayDate(week: 1, weekday: .thursday, hour: 0, part: 0)),
-      CalendarDate(hebrew: .tishrei, 15, 5758)
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      XCTAssertEqual(
+        CalendarDate(definition: HebrewWeekdayDate(week: 1, weekday: .thursday, hour: 0, part: 0)),
+        CalendarDate(hebrew: .tishrei, 15, 5758)
+      )
+    #endif
   }
 
   func testHebrewYear() {
