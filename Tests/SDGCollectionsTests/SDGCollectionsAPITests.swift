@@ -91,75 +91,80 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testBidirectionalCollection() {
-    let collection = [1, 2, 3, 4, 5, 4, 5, 6]
-    let match = collection.lastMatch(for: [4, 5])
-    XCTAssertEqual(match?.range, 5..<7)
-    XCTAssertEqual(match?.contents.elementsEqual([4, 5]), true)
-    XCTAssertNil(collection.lastMatch(for: [−1, −2]))
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      let collection = [1, 2, 3, 4, 5, 4, 5, 6]
+      let match = collection.lastMatch(for: [4, 5])
+      XCTAssertEqual(match?.range, 5..<7)
+      XCTAssertEqual(match?.contents.elementsEqual([4, 5]), true)
+      XCTAssertNil(collection.lastMatch(for: [−1, −2]))
 
-    let alternativeMatch = collection.lastMatch(for: [1, 3] ∨ [2])
-    XCTAssertEqual(alternativeMatch?.range, 1..<2)
+      let alternativeMatch = collection.lastMatch(for: [1, 3] ∨ [2])
+      XCTAssertEqual(alternativeMatch?.range, 1..<2)
 
-    let repetitionMatch = collection.lastMatch(for: RepetitionPattern([4, 5], count: 1..<Int.max))
-    XCTAssertEqual(repetitionMatch?.range, 3..<7)
-    let lazyRepetitionMatch = collection.lastMatch(
-      for: RepetitionPattern([4, 5], count: 1..<Int.max, consumption: .lazy)
-    )
-    XCTAssertEqual(lazyRepetitionMatch?.range, 5..<7)
+      let repetitionMatch = collection.lastMatch(for: RepetitionPattern([4, 5], count: 1..<Int.max))
+      XCTAssertEqual(repetitionMatch?.range, 3..<7)
+      let lazyRepetitionMatch = collection.lastMatch(
+        for: RepetitionPattern([4, 5], count: 1..<Int.max, consumption: .lazy)
+      )
+      XCTAssertEqual(lazyRepetitionMatch?.range, 5..<7)
 
-    let compositeMatchPatternOne = [1, 2]
-    let compositeMatchPatternTwo = compositeMatchPatternOne + ([3] ∨ [−3])
-    let compositeMatchPattern = compositeMatchPatternTwo
-      + RepetitionPattern([4, 5], count: 1..<Int.max)
-    let compositeMatch = collection.lastMatch(for: compositeMatchPattern)
-    XCTAssertEqual(compositeMatch?.range, 0..<7)
+      let compositeMatchPatternOne = [1, 2]
+      let compositeMatchPatternTwo = compositeMatchPatternOne + ([3] ∨ [−3])
+      let compositeMatchPattern = compositeMatchPatternTwo
+        + RepetitionPattern([4, 5], count: 1..<Int.max)
+      let compositeMatch = collection.lastMatch(for: compositeMatchPattern)
+      XCTAssertEqual(compositeMatch?.range, 0..<7)
 
-    let dangerous = collection.lastMatch(
-      for: RepetitionPattern([4, 5], count: 1..<Int.max) + [4, 5]
-    )
-    XCTAssertEqual(dangerous?.range, 3..<7)
+      let dangerous = collection.lastMatch(
+        for: RepetitionPattern([4, 5], count: 1..<Int.max) + [4, 5]
+      )
+      XCTAssertEqual(dangerous?.range, 3..<7)
 
-    let alsoDangerous = collection.lastMatch(
-      for: RepetitionPattern([4, 5], consumption: .lazy) + [6]
-    )
-    XCTAssertEqual(alsoDangerous?.range, 7..<8)
+      let alsoDangerous = collection.lastMatch(
+        for: RepetitionPattern([4, 5], consumption: .lazy) + [6]
+      )
+      XCTAssertEqual(alsoDangerous?.range, 7..<8)
 
-    let anotherTrapPatternOne = [1, 2]
-    let anotherTrapPatternTwo = anotherTrapPatternOne + RepetitionPattern([−1, −2])
-    let anotherTrapPattern = anotherTrapPatternTwo + [3, 4]
-    let anotherTrap = collection.lastMatch(for: anotherTrapPattern)
-    XCTAssertEqual(anotherTrap?.range, 0..<4)
+      let anotherTrapPatternOne = [1, 2]
+      let anotherTrapPatternTwo = anotherTrapPatternOne + RepetitionPattern([−1, −2])
+      let anotherTrapPattern = anotherTrapPatternTwo + [3, 4]
+      let anotherTrap = collection.lastMatch(for: anotherTrapPattern)
+      XCTAssertEqual(anotherTrap?.range, 0..<4)
 
-    let backwardsCollection1 = [0, 0, 0, 0, 0]
-    let backwardsPattern1 = [0, 0]
-    let backwardsResult1 = backwardsCollection1.lastMatch(for: backwardsPattern1)
-    XCTAssertEqual(backwardsResult1?.range, 3..<5)
-    let forwardsResult1 = backwardsCollection1.matches(for: backwardsPattern1).last
-    XCTAssertEqual(forwardsResult1?.range, 2..<4)
+      let backwardsCollection1 = [0, 0, 0, 0, 0]
+      let backwardsPattern1 = [0, 0]
+      let backwardsResult1 = backwardsCollection1.lastMatch(for: backwardsPattern1)
+      XCTAssertEqual(backwardsResult1?.range, 3..<5)
+      let forwardsResult1 = backwardsCollection1.matches(for: backwardsPattern1).last
+      XCTAssertEqual(forwardsResult1?.range, 2..<4)
 
-    let backwardsCollection2 = [0, 0, 1]
-    let backwardsPattern2 = RepetitionPattern([0], count: 1..<Int.max, consumption: .lazy)
-      + [1]
-    let backwardsResult2 = backwardsCollection2.lastMatch(for: backwardsPattern2)
-    XCTAssertEqual(backwardsResult2?.range, 1..<3)
-    let forwardsResult2 = backwardsCollection2.matches(for: backwardsPattern2).last
-    XCTAssertEqual(forwardsResult2?.range, 0..<3)
+      let backwardsCollection2 = [0, 0, 1]
+      let backwardsPattern2 = RepetitionPattern([0], count: 1..<Int.max, consumption: .lazy)
+        + [1]
+      let backwardsResult2 = backwardsCollection2.lastMatch(for: backwardsPattern2)
+      XCTAssertEqual(backwardsResult2?.range, 1..<3)
+      let forwardsResult2 = backwardsCollection2.matches(for: backwardsPattern2).last
+      XCTAssertEqual(forwardsResult2?.range, 0..<3)
 
-    XCTAssertEqual([5, 4, 3, 2, 1].commonSuffix(with: [3, 2, 1]).contents, [3, 2, 1])
+      XCTAssertEqual([5, 4, 3, 2, 1].commonSuffix(with: [3, 2, 1]).contents, [3, 2, 1])
 
-    XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: ConditionalPattern({ $0.isEven }))?.range, 3..<4)
+      XCTAssertEqual(
+        [5, 4, 3, 2, 1].lastMatch(for: ConditionalPattern({ $0.isEven }))?.range,
+        3..<4
+      )
 
-    XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: ¬[3, 2, 1])?.range, 3..<4)
+      XCTAssertEqual([5, 4, 3, 2, 1].lastMatch(for: ¬[3, 2, 1])?.range, 3..<4)
 
-    let advancingCollection = [1, 2, 1, 2, 3]
-    var index = advancingCollection.startIndex
-    XCTAssert(advancingCollection.advance(&index, over: [1, 2]))
-    XCTAssertEqual(index, 2)
-    XCTAssertFalse(advancingCollection.advance(&index, over: [2, 3]))
-    XCTAssertEqual(index, 2)
+      let advancingCollection = [1, 2, 1, 2, 3]
+      var index = advancingCollection.startIndex
+      XCTAssert(advancingCollection.advance(&index, over: [1, 2]))
+      XCTAssertEqual(index, 2)
+      XCTAssertFalse(advancingCollection.advance(&index, over: [2, 3]))
+      XCTAssertEqual(index, 2)
 
-    let bounds = collection.bounds
-    XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)
+      let bounds = collection.bounds
+      XCTAssertEqual(collection.forward(collection.backward(bounds)), bounds)
+    #endif
   }
 
   func testBijectiveMapping() {
