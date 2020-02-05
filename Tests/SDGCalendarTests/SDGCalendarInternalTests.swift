@@ -94,7 +94,9 @@ class SDGCalendarInternalTests: TestCase {
   }
 
   func testHebrewYear() {
-    SDGCalendarInternalTests.testHebrewYear()
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      SDGCalendarInternalTests.testHebrewYear()
+    #endif
   }
   static func testHebrewYear() {
     // Untracked
