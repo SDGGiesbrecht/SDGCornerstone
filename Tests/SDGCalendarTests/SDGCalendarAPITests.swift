@@ -490,15 +490,17 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testHebrewHour() {
-    testCodableConformance(of: HebrewHour(12), uniqueTestName: "12")
-    testCustomStringConvertibleConformance(
-      of: HebrewHour(3),
-      localizations: FormatLocalization.self,
-      uniqueTestName: "3",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(of: HebrewHour(12), uniqueTestName: "12")
+      testCustomStringConvertibleConformance(
+        of: HebrewHour(3),
+        localizations: FormatLocalization.self,
+        uniqueTestName: "3",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    XCTAssertEqual(HebrewHour(5).inDigits(), "5")
+      XCTAssertEqual(HebrewHour(5).inDigits(), "5")
+    #endif
   }
 
   func testHebrewMonth() {
