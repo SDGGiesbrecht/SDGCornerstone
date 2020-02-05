@@ -579,16 +579,18 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testHebrewMonthAndYear() {
-    testCodableConformance(
-      of: HebrewMonthAndYear(month: .tishrei, year: 2345),
-      uniqueTestName: "Tishrei, 2345"
-    )
-    testCustomStringConvertibleConformance(
-      of: HebrewMonthAndYear(month: .nisan, year: 4460),
-      localizations: FormatLocalization.self,
-      uniqueTestName: "Nisan, 4460",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(
+        of: HebrewMonthAndYear(month: .tishrei, year: 2345),
+        uniqueTestName: "Tishrei, 2345"
+      )
+      testCustomStringConvertibleConformance(
+        of: HebrewMonthAndYear(month: .nisan, year: 4460),
+        localizations: FormatLocalization.self,
+        uniqueTestName: "Nisan, 4460",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testHebrewPart() {
