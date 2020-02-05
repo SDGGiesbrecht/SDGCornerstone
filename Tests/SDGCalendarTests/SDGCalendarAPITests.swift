@@ -504,75 +504,78 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testHebrewMonth() {
-    testCodableConformance(of: HebrewMonth.tishrei, uniqueTestName: "Tishrei")
-    testCodableConformance(of: HebrewMonth.adar, uniqueTestName: "Adar")
-    testCodableConformance(of: HebrewMonth.adarI, uniqueTestName: "Adar I")
-    testCodableConformance(of: HebrewMonth.adarII, uniqueTestName: "Adar II")
-    testCodableConformance(of: HebrewMonth.elul, uniqueTestName: "Elul")
-    for ordinal in 1...12 {
-      let month = HebrewMonth(ordinal: ordinal, leapYear: false)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(of: HebrewMonth.tishrei, uniqueTestName: "Tishrei")
+      testCodableConformance(of: HebrewMonth.adar, uniqueTestName: "Adar")
+      testCodableConformance(of: HebrewMonth.adarI, uniqueTestName: "Adar I")
+      testCodableConformance(of: HebrewMonth.adarII, uniqueTestName: "Adar II")
+      testCodableConformance(of: HebrewMonth.elul, uniqueTestName: "Elul")
+      for ordinal in 1...12 {
+        let month = HebrewMonth(ordinal: ordinal, leapYear: false)
+        testCustomStringConvertibleConformance(
+          of: month,
+          localizations: FormatLocalization.self,
+          uniqueTestName: ordinal.inDigits(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      }
       testCustomStringConvertibleConformance(
-        of: month,
+        of: HebrewMonth.adarI,
         localizations: FormatLocalization.self,
-        uniqueTestName: ordinal.inDigits(),
+        uniqueTestName: "Adar I",
         overwriteSpecificationInsteadOfFailing: false
       )
-    }
-    testCustomStringConvertibleConformance(
-      of: HebrewMonth.adarI,
-      localizations: FormatLocalization.self,
-      uniqueTestName: "Adar I",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    testCustomStringConvertibleConformance(
-      of: HebrewMonth.adarII,
-      localizations: FormatLocalization.self,
-      uniqueTestName: "Adar II",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+      testCustomStringConvertibleConformance(
+        of: HebrewMonth.adarII,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "Adar II",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    let length = FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false))
-      × (1 as FloatMax).days
-    XCTAssert(length ≥ HebrewMonth.minimumDuration)
-    XCTAssert(length ≤ HebrewMonth.maximumDuration)
+      let length = FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false))
+        × (1 as FloatMax).days
+      XCTAssert(length ≥ HebrewMonth.minimumDuration)
+      XCTAssert(length ≤ HebrewMonth.maximumDuration)
 
-    var month: HebrewMonth = .adar
-    month.increment(leapYear: false)
-    XCTAssertEqual(month, .nisan)
-    month.decrement(leapYear: false)
-    XCTAssertEqual(month, .adar)
+      var month: HebrewMonth = .adar
+      month.increment(leapYear: false)
+      XCTAssertEqual(month, .nisan)
+      month.decrement(leapYear: false)
+      XCTAssertEqual(month, .adar)
 
-    XCTAssertEqual(HebrewMonth.tishrei.cyclicPredecessor(leapYear: false, {}), .elul)
+      XCTAssertEqual(HebrewMonth.tishrei.cyclicPredecessor(leapYear: false, {}), .elul)
 
-    month = .adar
-    month.correctForYear(leapYear: true)
-    XCTAssertEqual(month, .adarII)
+      month = .adar
+      month.correctForYear(leapYear: true)
+      XCTAssertEqual(month, .adarII)
 
-    month = .adarII
-    month.correctForYear(leapYear: false)
-    XCTAssertEqual(month, .adar)
+      month = .adarII
+      month.correctForYear(leapYear: false)
+      XCTAssertEqual(month, .adar)
 
-    for month in sequence(first: HebrewMonth.tishrei, next: { $0.successor() }) {
-      XCTAssertNotEqual(month.inEnglish(), "")
+      for month in sequence(first: HebrewMonth.tishrei, next: { $0.successor() }) {
+        XCTAssertNotEqual(month.inEnglish(), "")
 
-      if month == .tishrei {
-        XCTAssertEqual(month.inEnglish(), "Tishrei")
-      } else if month == .adarII {
-        XCTAssertEqual(month.inEnglish(), "Adar II")
+        if month == .tishrei {
+          XCTAssertEqual(month.inEnglish(), "Tishrei")
+        } else if month == .adarII {
+          XCTAssertEqual(month.inEnglish(), "Adar II")
+        }
       }
-    }
 
-    XCTAssertEqual(HebrewMonthAndYear(month: .elul, year: 5777).successor().month, .tishrei)
-    XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5777).predecessor().month, .elul)
-    XCTAssertEqual(
-      HebrewMonthAndYear(month: .tishrei, year: 5778)
-        − HebrewMonthAndYear(month: .elul, year: 5777),
-      1
-    )
-    XCTAssertEqual(
-      HebrewMonthAndYear(month: .nisan, year: 5777) − HebrewMonthAndYear(month: .sivan, year: 5777),
-      −2
-    )
+      XCTAssertEqual(HebrewMonthAndYear(month: .elul, year: 5777).successor().month, .tishrei)
+      XCTAssertEqual(HebrewMonthAndYear(month: .tishrei, year: 5777).predecessor().month, .elul)
+      XCTAssertEqual(
+        HebrewMonthAndYear(month: .tishrei, year: 5778)
+          − HebrewMonthAndYear(month: .elul, year: 5777),
+        1
+      )
+      XCTAssertEqual(
+        HebrewMonthAndYear(month: .nisan, year: 5777)
+          − HebrewMonthAndYear(month: .sivan, year: 5777),
+        −2
+      )
+    #endif
   }
 
   func testHebrewMonthAndYear() {
