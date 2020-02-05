@@ -438,115 +438,117 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testCollectionDifference() throws {
-    try forAllLegacyModes {
-      let start: [String] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
-      let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
-      let shimmedDifference = end.changes(from: start)
-      let shimmedMoves = shimmedDifference.inferringMoves()
-      let shimmedInverse = shimmedMoves.inverse()
-      testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
-      if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
-        let standardDifference = Swift.CollectionDifference(shimmedDifference)
-        let standardMoves = standardDifference.inferringMoves()
-        let standardInverse = standardMoves.inverse()
-        var encoded = try JSONEncoder().encode(shimmedDifference)
-        let decodedStandard = try JSONDecoder().decode(
-          Swift.CollectionDifference<String>.self,
-          from: encoded
-        )
-        XCTAssertEqual(decodedStandard, standardDifference)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      try forAllLegacyModes {
+        let start: [String] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
+        let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
+        let shimmedDifference = end.changes(from: start)
+        let shimmedMoves = shimmedDifference.inferringMoves()
+        let shimmedInverse = shimmedMoves.inverse()
+        testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
+        if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
+          let standardDifference = Swift.CollectionDifference(shimmedDifference)
+          let standardMoves = standardDifference.inferringMoves()
+          let standardInverse = standardMoves.inverse()
+          var encoded = try JSONEncoder().encode(shimmedDifference)
+          let decodedStandard = try JSONDecoder().decode(
+            Swift.CollectionDifference<String>.self,
+            from: encoded
+          )
+          XCTAssertEqual(decodedStandard, standardDifference)
 
-        encoded = try JSONEncoder().encode(standardDifference)
-        let decodedShimmed = try JSONDecoder().decode(
-          SDGCollections.CollectionDifference<String>.self,
-          from: encoded
-        )
-        XCTAssertEqual(decodedShimmed, shimmedDifference)
+          encoded = try JSONEncoder().encode(standardDifference)
+          let decodedShimmed = try JSONDecoder().decode(
+            SDGCollections.CollectionDifference<String>.self,
+            from: encoded
+          )
+          XCTAssertEqual(decodedShimmed, shimmedDifference)
 
-        XCTAssertEqual(shimmedMoves, SDGCollections.CollectionDifference(standardMoves))
-        XCTAssertEqual(shimmedInverse, SDGCollections.CollectionDifference(standardInverse))
+          XCTAssertEqual(shimmedMoves, SDGCollections.CollectionDifference(standardMoves))
+          XCTAssertEqual(shimmedInverse, SDGCollections.CollectionDifference(standardInverse))
+        }
+        XCTAssertEqual(SDGCollections.CollectionDifference(shimmedMoves), shimmedMoves)
+
+        var entries: [SDGCollections.CollectionDifference<String>.Change] = [
+          .remove(offset: 1, element: "1", associatedWith: nil)
+        ]
+        XCTAssertNotNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = []
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .remove(offset: −1, element: "1", associatedWith: nil)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .remove(offset: 1, element: "1", associatedWith: −1)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .remove(offset: 1, element: "1", associatedWith: nil),
+          .remove(offset: 1, element: "1", associatedWith: nil)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .insert(offset: 1, element: "1", associatedWith: nil),
+          .insert(offset: 1, element: "1", associatedWith: nil)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .remove(offset: 1, element: "1", associatedWith: 1)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .insert(offset: 1, element: "1", associatedWith: 1)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .insert(offset: 1, element: "1", associatedWith: 1),
+          .insert(offset: 2, element: "2", associatedWith: 1),
+          .remove(offset: 1, element: "1", associatedWith: 1)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .remove(offset: 1, element: "1", associatedWith: 1),
+          .remove(offset: 2, element: "2", associatedWith: 1),
+          .insert(offset: 1, element: "1", associatedWith: 1)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        entries = [
+          .remove(offset: 1, element: "1", associatedWith: 1),
+          .remove(offset: 2, element: "2", associatedWith: 1),
+          .insert(offset: 2, element: "2", associatedWith: 2)
+        ]
+        XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
+        testCollectionConformance(of: shimmedDifference)
+        testBidirectionalCollectionConformance(of: shimmedDifference)
+        testRandomAccessCollectionConformance(of: shimmedDifference)
       }
-      XCTAssertEqual(SDGCollections.CollectionDifference(shimmedMoves), shimmedMoves)
 
-      var entries: [SDGCollections.CollectionDifference<String>.Change] = [
-        .remove(offset: 1, element: "1", associatedWith: nil)
-      ]
-      XCTAssertNotNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = []
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .remove(offset: −1, element: "1", associatedWith: nil)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .remove(offset: 1, element: "1", associatedWith: −1)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .remove(offset: 1, element: "1", associatedWith: nil),
-        .remove(offset: 1, element: "1", associatedWith: nil)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .insert(offset: 1, element: "1", associatedWith: nil),
-        .insert(offset: 1, element: "1", associatedWith: nil)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .remove(offset: 1, element: "1", associatedWith: 1)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .insert(offset: 1, element: "1", associatedWith: 1)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .insert(offset: 1, element: "1", associatedWith: 1),
-        .insert(offset: 2, element: "2", associatedWith: 1),
-        .remove(offset: 1, element: "1", associatedWith: 1)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .remove(offset: 1, element: "1", associatedWith: 1),
-        .remove(offset: 2, element: "2", associatedWith: 1),
-        .insert(offset: 1, element: "1", associatedWith: 1)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      entries = [
-        .remove(offset: 1, element: "1", associatedWith: 1),
-        .remove(offset: 2, element: "2", associatedWith: 1),
-        .insert(offset: 2, element: "2", associatedWith: 2)
-      ]
-      XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
-      testCollectionConformance(of: shimmedDifference)
-      testBidirectionalCollectionConformance(of: shimmedDifference)
-      testRandomAccessCollectionConformance(of: shimmedDifference)
-    }
-
-    withLegacyMode {
-      let empty: [String] = []
-      XCTAssertNil(
-        empty.applying(
-          changes: SDGCollections.CollectionDifference([
-            .remove(offset: 0, element: " ", associatedWith: nil)
-          ])!
+      withLegacyMode {
+        let empty: [String] = []
+        XCTAssertNil(
+          empty.applying(
+            changes: SDGCollections.CollectionDifference([
+              .remove(offset: 0, element: " ", associatedWith: nil)
+            ])!
+          )
         )
-      )
-      XCTAssertNil(
-        empty.applying(
-          changes: SDGCollections.CollectionDifference([
-            .insert(offset: 1, element: " ", associatedWith: nil)
-          ])!
+        XCTAssertNil(
+          empty.applying(
+            changes: SDGCollections.CollectionDifference([
+              .insert(offset: 1, element: " ", associatedWith: nil)
+            ])!
+          )
         )
-      )
-      XCTAssertNotNil(
-        empty.applying(
-          changes: SDGCollections.CollectionDifference([
-            .insert(offset: 0, element: " ", associatedWith: nil)
-          ])!
+        XCTAssertNotNil(
+          empty.applying(
+            changes: SDGCollections.CollectionDifference([
+              .insert(offset: 0, element: " ", associatedWith: nil)
+            ])!
+          )
         )
-      )
-    }
+      }
+    #endif
   }
 
   func testCollectionDifferenceChange() throws {
