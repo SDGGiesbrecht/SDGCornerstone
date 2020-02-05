@@ -115,7 +115,9 @@ class SDGCalendarInternalTests: TestCase {
   }
 
   func testRelativeDate() {
-    let date = CalendarDate.hebrewNow()
-    XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      let date = CalendarDate.hebrewNow()
+      XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
+    #endif
   }
 }
