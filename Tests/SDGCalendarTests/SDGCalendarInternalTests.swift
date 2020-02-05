@@ -68,12 +68,20 @@ class SDGCalendarInternalTests: TestCase {
   }
 
   func testGregorianWeekdayDate() {
-    XCTAssertEqual(
-      CalendarDate(
-        definition: GregorianWeekdayDate(week: 1, weekday: .tuesday, hour: 0, minute: 0, second: 0)
-      ),
-      CalendarDate(gregorian: .january, 16, 2001)
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      XCTAssertEqual(
+        CalendarDate(
+          definition: GregorianWeekdayDate(
+            week: 1,
+            weekday: .tuesday,
+            hour: 0,
+            minute: 0,
+            second: 0
+          )
+        ),
+        CalendarDate(gregorian: .january, 16, 2001)
+      )
+    #endif
   }
 
   func testHebrewWeekdayDate() {
