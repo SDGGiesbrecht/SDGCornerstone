@@ -196,243 +196,245 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testCollection() {
-    forAllLegacyModes {
-      let collection = [1, 2, 3, 4, 5, 4, 5, 6]
-      let match = collection.firstMatch(for: [2, 3])
-      XCTAssertEqual(match?.range, 1..<3)
-      XCTAssertEqual(match?.contents.elementsEqual([2, 3]), true)
-      XCTAssertNil(collection.firstMatch(for: [−1, −2]))
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      forAllLegacyModes {
+        let collection = [1, 2, 3, 4, 5, 4, 5, 6]
+        let match = collection.firstMatch(for: [2, 3])
+        XCTAssertEqual(match?.range, 1..<3)
+        XCTAssertEqual(match?.contents.elementsEqual([2, 3]), true)
+        XCTAssertNil(collection.firstMatch(for: [−1, −2]))
 
-      let alternativeMatch = collection.firstMatch(for: [1, 3] ∨ [2])
-      XCTAssertEqual(alternativeMatch?.range, 1..<2)
+        let alternativeMatch = collection.firstMatch(for: [1, 3] ∨ [2])
+        XCTAssertEqual(alternativeMatch?.range, 1..<2)
 
-      let repetitionMatch = collection.firstMatch(
-        for: RepetitionPattern([4, 5], count: 1..<Int.max)
-      )
-      XCTAssertEqual(repetitionMatch?.range, 3..<7)
-      let lazyRepetitionMatch = collection.firstMatch(
-        for: RepetitionPattern([4, 5], count: 1..<Int.max, consumption: .lazy)
-      )
-      XCTAssertEqual(lazyRepetitionMatch?.range, 3..<5)
-
-      let compositeMatchPatternOne = [1, 2]
-      let compositeMatchPatternTwo = compositeMatchPatternOne + ([3] ∨ [−3])
-      let compositeMatchPattern = compositeMatchPatternTwo
-        + RepetitionPattern([4, 5], count: 1..<Int.max)
-      let compositeMatch = collection.firstMatch(for: compositeMatchPattern)
-      XCTAssertEqual(compositeMatch?.range, 0..<7)
-
-      let dangerous = collection.firstMatch(
-        for: RepetitionPattern([4, 5], count: 1..<Int.max) + [4, 5]
-      )
-      XCTAssertEqual(dangerous?.range, 3..<7)
-
-      let alsoDangerous = collection.firstMatch(
-        for: RepetitionPattern([4, 5], consumption: .lazy) + [6]
-      )
-      XCTAssertEqual(alsoDangerous?.range, 3..<8)
-
-      let anotherTrapPatternOne = [1, 2]
-      let anotherTrapPatternTwo = anotherTrapPatternOne + RepetitionPattern([−1, −2])
-      let anotherTrapPattern = anotherTrapPatternTwo + [3, 4]
-      let anotherTrap = collection.firstMatch(for: anotherTrapPattern)
-      XCTAssertEqual(anotherTrap?.range, 0..<4)
-
-      let equation = "2(3x − (y + 4)) = z"
-      let nestingLevel = equation.scalars.firstNestingLevel(
-        startingWith: "(".scalars,
-        endingWith: ")".scalars
-      )!
-      XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
-      XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
-      XCTAssertNil(
-        equation.scalars.firstNestingLevel(startingWith: "[".scalars, endingWith: "]".scalars)
-      )
-      XCTAssertNil(
-        equation.scalars.firstNestingLevel(startingWith: "2".scalars, endingWith: "9".scalars)
-      )
-
-      XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [2, 3] ∨ [3, 4])?.range, 0..<1)
-      XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [2, 3])?.range, 0..<1)
-      XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [2, 3])?.range, 0..<1)
-      XCTAssertNil([1, 2, 3, 4].prefix(upTo: [8, 9])?.range)
-      XCTAssertNil([1, 2, 3, 4].prefix(upTo: ConditionalPattern({ $0 > 100 })))
-
-      XCTAssertEqual([1, 2, 3, 4].prefix(through: [2, 3] ∨ [3, 4])?.range, 0..<3)
-      XCTAssertEqual([1, 2, 3, 4].prefix(through: [2, 3])?.range, 0..<3)
-      XCTAssertEqual(
-        [1, 2, 3, 4].prefix(
-          through: [2, 3])?.range,
-        0..<3
-      )
-      XCTAssertNil([1, 2, 3, 4].prefix(through: [8, 9]))
-      XCTAssertNil([1, 2, 3, 4].prefix(through: ConditionalPattern({ $0 > 100 })))
-
-      XCTAssertEqual([1, 2, 3, 4].suffix(from: [2, 3] ∨ [3, 4])?.range, 1..<4)
-      XCTAssertEqual([1, 2, 3, 4].suffix(from: [2, 3])?.range, 1..<4)
-      XCTAssertEqual([1, 2, 3, 4].suffix(from: [2, 3])?.range, 1..<4)
-      XCTAssertNil([1, 2, 3, 4].suffix(from: [8, 9]))
-      XCTAssertNil([1, 2, 3, 4].suffix(from: ConditionalPattern({ $0 > 100 })))
-
-      XCTAssertEqual([1, 2, 3, 4].suffix(after: [2, 3] ∨ [3, 4])?.range, 3..<4)
-      XCTAssertEqual([1, 2, 3, 4].suffix(after: [2, 3])?.range, 3..<4)
-      XCTAssertEqual([1, 2, 3, 4].suffix(after: [2, 3])?.range, 3..<4)
-      XCTAssertNil([1, 2, 3, 4].suffix(after: [8, 9]))
-      XCTAssertNil([1, 2, 3, 4].suffix(after: ConditionalPattern({ $0 > 100 })))
-
-      XCTAssert(
-        [1, 2, 3, 4].components(separatedBy: [2, 3]).map({ Array($0.contents) }).joined()
-          .elementsEqual([1, 4])
-      )
-      XCTAssert(
-        [1, 2, 3, 4].components(separatedBy: [2, 3] ∨ [3, 4]).map({ Array($0.contents) }).joined()
-          .elementsEqual([1, 4])
-      )
-      XCTAssert(
-        [1, 2, 3, 4].components(separatedBy: [2, 3])
-          .map({ Array($0.contents) }).joined().elementsEqual([1, 4])
-      )
-
-      XCTAssert([1, 2, 3, 4].contains([2, 3]))
-      XCTAssert([1, 2, 3, 4].contains([2, 3] ∨ [3, 4]))
-      XCTAssert([1, 2, 3, 4].contains([2, 3]))
-
-      XCTAssert([1, 2, 3, 4].hasPrefix([1, 2]))
-      XCTAssert([1, 2, 3, 4].hasPrefix([1, 2] ∨ [3, 4]))
-      XCTAssert([1, 2, 3, 4].hasPrefix([1, 2]))
-
-      XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
-      XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4] ∨ [4, 3, 2, 1]))
-      XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
-      XCTAssert("abcd".isMatch(for: ["a", "b", "c", "d"]))
-      XCTAssertFalse("abcd".isMatch(for: ["a", "b", "c"]))
-      XCTAssertFalse("abcd".isMatch(for: ["b", "c", "d"]))
-
-      XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
-      XCTAssert([1, 2, 3, 4].hasSuffix([3, 4] ∨ [5, 6]))
-      XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
-
-      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4]))
-      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4] ∨ [5, 6]))
-      XCTAssert(
-        AnyBidirectionalCollection([1, 2, 3, 4])
-          .hasSuffix([3, 4])
-      )
-      XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix(AnyCollection([1, 2, 3, 4])))
-
-      XCTAssertEqual([5, 4, 3, 2, 1].commonPrefix(with: [5, 2, 1]).contents, [5])
-
-      XCTAssertEqual(
-        [5, 4, 3, 2, 1].firstMatch(for: ConditionalPattern({ $0.isEven }))?.range,
-        1..<2
-      )
-
-      XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: ¬[5, 4, 3])?.range, 1..<2)
-      XCTAssertEqual(
-        [5, 4, 3, 2, 1].firstMatch(for: ¬[5, 4, 3])?.range,
-        1..<2
-      )
-
-      let compositeRepetition = [5, 4, 5, 4].firstMatch(
-        for: RepetitionPattern([5, 4], count: 0..<2, consumption: .greedy)
-      )
-      XCTAssertEqual(compositeRepetition?.range, 0..<2)
-      let compositeRepetition2 = [5, 4, 5, 4, 5].firstMatch(
-        for: RepetitionPattern([5, 4], count: 0..<5, consumption: .greedy)
-      )
-      XCTAssertEqual(compositeRepetition2?.range, 0..<4)
-      let compositeRepetition3 = [5, 4, 5, 4, 5].firstMatch(
-        for: RepetitionPattern([5, 4], count: 3..<5, consumption: .greedy)
-      )
-      XCTAssertNil(compositeRepetition3)
-
-      XCTAssertNil([1, 1].firstMatch(for: RepetitionPattern([1], count: 3...3)))
-
-      var aCollection = [1, 2, 3]
-      aCollection.insert(contentsOf: [4, 5], at: aCollection.startIndex)
-      XCTAssert(aCollection == [4, 5, 1, 2, 3])
-
-      let countableRange: CountableClosedRange<Int>? = nil
-      XCTAssertEqual(
-        [1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range,
-        [1, 1, 1].bounds
-      )
-      XCTAssertEqual(
-        [1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range,
-        [1, 1, 1].bounds
-      )
-      XCTAssertEqual(
-        [1, 1, 1].firstMatch(
-          for: RepetitionPattern([1], count: countableRange)
-        )?.range,
-        [1, 1, 1].bounds
-      )
-      XCTAssertEqual(
-        [1, 1, 1].firstMatch(
-          for: RepetitionPattern(ConditionalPattern({ $0 == 1 }), count: countableRange)
-        )?.range,
-        [1, 1, 1].bounds
-      )
-
-      XCTAssertNil([1].firstMatch(for: RepetitionPattern([1], count: 2...4, consumption: .lazy)))
-
-      XCTAssertEqual(
-        [1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern([1], count: 0..<15))?.range,
-        [1, 1, 1].bounds
-      )
-      XCTAssertNil(
-        [1, 1, 1, 2, 3].firstMatch(
-          for: RepetitionPattern([1], count: 5..<15, consumption: .lazy)
+        let repetitionMatch = collection.firstMatch(
+          for: RepetitionPattern([4, 5], count: 1..<Int.max)
         )
-      )
+        XCTAssertEqual(repetitionMatch?.range, 3..<7)
+        let lazyRepetitionMatch = collection.firstMatch(
+          for: RepetitionPattern([4, 5], count: 1..<Int.max, consumption: .lazy)
+        )
+        XCTAssertEqual(lazyRepetitionMatch?.range, 3..<5)
 
-      XCTAssertEqual("ABCDE".scalars.matches(for: ["A", "B", "C"]).count, 1)
-      XCTAssertEqual("ABCDE".scalars.prefix(upTo: ["B", "C"])?.contents.count, 1)
-      XCTAssertEqual("ABCDE".scalars.prefix(through: ["B", "C"])?.contents.count, 3)
-      XCTAssertEqual("ABCDE".scalars.suffix(from: ["B", "C"])?.contents.count, 4)
-      XCTAssertEqual("ABCDE".scalars.suffix(after: ["B", "C"])?.contents.count, 2)
-      XCTAssertEqual(
-        "ABCDE".scalars.firstNestingLevel(startingWith: ["B", "C"], endingWith: ["E"])?.contents
-          .contents.count,
-        1
-      )
-      let scalars = "ABCDE".scalars
-      var mobileIndex = scalars.startIndex
-      XCTAssert(scalars.advance(&mobileIndex, over: ["A", "B"]))
-      XCTAssertFalse(scalars.advance(&mobileIndex, over: ["A", "B"]))
-      XCTAssert(scalars.advance(&mobileIndex, over: ConditionalPattern({ $0 == "C" })))
-      XCTAssertFalse(scalars.advance(&mobileIndex, over: ConditionalPattern({ $0 == "C" })))
+        let compositeMatchPatternOne = [1, 2]
+        let compositeMatchPatternTwo = compositeMatchPatternOne + ([3] ∨ [−3])
+        let compositeMatchPattern = compositeMatchPatternTwo
+          + RepetitionPattern([4, 5], count: 1..<Int.max)
+        let compositeMatch = collection.firstMatch(for: compositeMatchPattern)
+        XCTAssertEqual(compositeMatch?.range, 0..<7)
 
-      let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
-      let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
-      let diff = end.changes(from: start)
-      let changed = start.applying(changes: diff)
-      XCTAssertEqual(changed, end)
+        let dangerous = collection.firstMatch(
+          for: RepetitionPattern([4, 5], count: 1..<Int.max) + [4, 5]
+        )
+        XCTAssertEqual(dangerous?.range, 3..<7)
 
-      let startString = "..GAC‐‐!!.."
-      let endString = "..AGCAT‐‐??.."
-      let diffString = endString.changes(from: startString)
-      let changedString = startString.applying(changes: diffString)
-      XCTAssertEqual(changedString, endString)
+        let alsoDangerous = collection.firstMatch(
+          for: RepetitionPattern([4, 5], consumption: .lazy) + [6]
+        )
+        XCTAssertEqual(alsoDangerous?.range, 3..<8)
 
-      // Not bidirectional.
-      let forwardStart = AnyForwardCollection(startString)
-      let forwardEnd = AnyForwardCollection(endString)
-      let forwardDiff = forwardEnd.changes(from: forwardStart)
-      XCTAssertEqual(forwardDiff, diffString)
-      let forwardChanged = forwardStart.applying(changes: forwardDiff)
-      XCTAssertEqual(forwardChanged, forwardEnd)
+        let anotherTrapPatternOne = [1, 2]
+        let anotherTrapPatternTwo = anotherTrapPatternOne + RepetitionPattern([−1, −2])
+        let anotherTrapPattern = anotherTrapPatternTwo + [3, 4]
+        let anotherTrap = collection.firstMatch(for: anotherTrapPattern)
+        XCTAssertEqual(anotherTrap?.range, 0..<4)
 
-      let set = AnyCollection(Set(endString))
-      _ = set.changes(from: startString)
-      _ = endString.scalars.changes(from: start)
-      _ = AnyCollection(Set(startString)).changes(from: AnyCollection(Set(startString)))
+        let equation = "2(3x − (y + 4)) = z"
+        let nestingLevel = equation.scalars.firstNestingLevel(
+          startingWith: "(".scalars,
+          endingWith: ")".scalars
+        )!
+        XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
+        XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
+        XCTAssertNil(
+          equation.scalars.firstNestingLevel(startingWith: "[".scalars, endingWith: "]".scalars)
+        )
+        XCTAssertNil(
+          equation.scalars.firstNestingLevel(startingWith: "2".scalars, endingWith: "9".scalars)
+        )
 
-      XCTAssertNil("...".scalars.firstMatch(for: ¬ConditionalPattern({ $0 == "." })))
-      XCTAssertNil("...".scalars[...].lastMatch(for: ConditionalPattern({ $0 ≠ "." })))
-      XCTAssertNil("...".scalars[...].firstMatch(for: ConditionalPattern({ $0 ≠ "." })))
-      XCTAssert("...".scalars[...].matches(for: ConditionalPattern({ $0 ≠ "." })).isEmpty)
-    }
+        XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [2, 3] ∨ [3, 4])?.range, 0..<1)
+        XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [2, 3])?.range, 0..<1)
+        XCTAssertEqual([1, 2, 3, 4].prefix(upTo: [2, 3])?.range, 0..<1)
+        XCTAssertNil([1, 2, 3, 4].prefix(upTo: [8, 9])?.range)
+        XCTAssertNil([1, 2, 3, 4].prefix(upTo: ConditionalPattern({ $0 > 100 })))
+
+        XCTAssertEqual([1, 2, 3, 4].prefix(through: [2, 3] ∨ [3, 4])?.range, 0..<3)
+        XCTAssertEqual([1, 2, 3, 4].prefix(through: [2, 3])?.range, 0..<3)
+        XCTAssertEqual(
+          [1, 2, 3, 4].prefix(
+            through: [2, 3])?.range,
+          0..<3
+        )
+        XCTAssertNil([1, 2, 3, 4].prefix(through: [8, 9]))
+        XCTAssertNil([1, 2, 3, 4].prefix(through: ConditionalPattern({ $0 > 100 })))
+
+        XCTAssertEqual([1, 2, 3, 4].suffix(from: [2, 3] ∨ [3, 4])?.range, 1..<4)
+        XCTAssertEqual([1, 2, 3, 4].suffix(from: [2, 3])?.range, 1..<4)
+        XCTAssertEqual([1, 2, 3, 4].suffix(from: [2, 3])?.range, 1..<4)
+        XCTAssertNil([1, 2, 3, 4].suffix(from: [8, 9]))
+        XCTAssertNil([1, 2, 3, 4].suffix(from: ConditionalPattern({ $0 > 100 })))
+
+        XCTAssertEqual([1, 2, 3, 4].suffix(after: [2, 3] ∨ [3, 4])?.range, 3..<4)
+        XCTAssertEqual([1, 2, 3, 4].suffix(after: [2, 3])?.range, 3..<4)
+        XCTAssertEqual([1, 2, 3, 4].suffix(after: [2, 3])?.range, 3..<4)
+        XCTAssertNil([1, 2, 3, 4].suffix(after: [8, 9]))
+        XCTAssertNil([1, 2, 3, 4].suffix(after: ConditionalPattern({ $0 > 100 })))
+
+        XCTAssert(
+          [1, 2, 3, 4].components(separatedBy: [2, 3]).map({ Array($0.contents) }).joined()
+            .elementsEqual([1, 4])
+        )
+        XCTAssert(
+          [1, 2, 3, 4].components(separatedBy: [2, 3] ∨ [3, 4]).map({ Array($0.contents) }).joined()
+            .elementsEqual([1, 4])
+        )
+        XCTAssert(
+          [1, 2, 3, 4].components(separatedBy: [2, 3])
+            .map({ Array($0.contents) }).joined().elementsEqual([1, 4])
+        )
+
+        XCTAssert([1, 2, 3, 4].contains([2, 3]))
+        XCTAssert([1, 2, 3, 4].contains([2, 3] ∨ [3, 4]))
+        XCTAssert([1, 2, 3, 4].contains([2, 3]))
+
+        XCTAssert([1, 2, 3, 4].hasPrefix([1, 2]))
+        XCTAssert([1, 2, 3, 4].hasPrefix([1, 2] ∨ [3, 4]))
+        XCTAssert([1, 2, 3, 4].hasPrefix([1, 2]))
+
+        XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
+        XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4] ∨ [4, 3, 2, 1]))
+        XCTAssert([1, 2, 3, 4].isMatch(for: [1, 2, 3, 4]))
+        XCTAssert("abcd".isMatch(for: ["a", "b", "c", "d"]))
+        XCTAssertFalse("abcd".isMatch(for: ["a", "b", "c"]))
+        XCTAssertFalse("abcd".isMatch(for: ["b", "c", "d"]))
+
+        XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
+        XCTAssert([1, 2, 3, 4].hasSuffix([3, 4] ∨ [5, 6]))
+        XCTAssert([1, 2, 3, 4].hasSuffix([3, 4]))
+
+        XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4]))
+        XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix([3, 4] ∨ [5, 6]))
+        XCTAssert(
+          AnyBidirectionalCollection([1, 2, 3, 4])
+            .hasSuffix([3, 4])
+        )
+        XCTAssert(AnyBidirectionalCollection([1, 2, 3, 4]).hasSuffix(AnyCollection([1, 2, 3, 4])))
+
+        XCTAssertEqual([5, 4, 3, 2, 1].commonPrefix(with: [5, 2, 1]).contents, [5])
+
+        XCTAssertEqual(
+          [5, 4, 3, 2, 1].firstMatch(for: ConditionalPattern({ $0.isEven }))?.range,
+          1..<2
+        )
+
+        XCTAssertEqual([5, 4, 3, 2, 1].firstMatch(for: ¬[5, 4, 3])?.range, 1..<2)
+        XCTAssertEqual(
+          [5, 4, 3, 2, 1].firstMatch(for: ¬[5, 4, 3])?.range,
+          1..<2
+        )
+
+        let compositeRepetition = [5, 4, 5, 4].firstMatch(
+          for: RepetitionPattern([5, 4], count: 0..<2, consumption: .greedy)
+        )
+        XCTAssertEqual(compositeRepetition?.range, 0..<2)
+        let compositeRepetition2 = [5, 4, 5, 4, 5].firstMatch(
+          for: RepetitionPattern([5, 4], count: 0..<5, consumption: .greedy)
+        )
+        XCTAssertEqual(compositeRepetition2?.range, 0..<4)
+        let compositeRepetition3 = [5, 4, 5, 4, 5].firstMatch(
+          for: RepetitionPattern([5, 4], count: 3..<5, consumption: .greedy)
+        )
+        XCTAssertNil(compositeRepetition3)
+
+        XCTAssertNil([1, 1].firstMatch(for: RepetitionPattern([1], count: 3...3)))
+
+        var aCollection = [1, 2, 3]
+        aCollection.insert(contentsOf: [4, 5], at: aCollection.startIndex)
+        XCTAssert(aCollection == [4, 5, 1, 2, 3])
+
+        let countableRange: CountableClosedRange<Int>? = nil
+        XCTAssertEqual(
+          [1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range,
+          [1, 1, 1].bounds
+        )
+        XCTAssertEqual(
+          [1, 1, 1].firstMatch(for: RepetitionPattern([1], count: countableRange))?.range,
+          [1, 1, 1].bounds
+        )
+        XCTAssertEqual(
+          [1, 1, 1].firstMatch(
+            for: RepetitionPattern([1], count: countableRange)
+          )?.range,
+          [1, 1, 1].bounds
+        )
+        XCTAssertEqual(
+          [1, 1, 1].firstMatch(
+            for: RepetitionPattern(ConditionalPattern({ $0 == 1 }), count: countableRange)
+          )?.range,
+          [1, 1, 1].bounds
+        )
+
+        XCTAssertNil([1].firstMatch(for: RepetitionPattern([1], count: 2...4, consumption: .lazy)))
+
+        XCTAssertEqual(
+          [1, 1, 1, 2, 3].firstMatch(for: RepetitionPattern([1], count: 0..<15))?.range,
+          [1, 1, 1].bounds
+        )
+        XCTAssertNil(
+          [1, 1, 1, 2, 3].firstMatch(
+            for: RepetitionPattern([1], count: 5..<15, consumption: .lazy)
+          )
+        )
+
+        XCTAssertEqual("ABCDE".scalars.matches(for: ["A", "B", "C"]).count, 1)
+        XCTAssertEqual("ABCDE".scalars.prefix(upTo: ["B", "C"])?.contents.count, 1)
+        XCTAssertEqual("ABCDE".scalars.prefix(through: ["B", "C"])?.contents.count, 3)
+        XCTAssertEqual("ABCDE".scalars.suffix(from: ["B", "C"])?.contents.count, 4)
+        XCTAssertEqual("ABCDE".scalars.suffix(after: ["B", "C"])?.contents.count, 2)
+        XCTAssertEqual(
+          "ABCDE".scalars.firstNestingLevel(startingWith: ["B", "C"], endingWith: ["E"])?.contents
+            .contents.count,
+          1
+        )
+        let scalars = "ABCDE".scalars
+        var mobileIndex = scalars.startIndex
+        XCTAssert(scalars.advance(&mobileIndex, over: ["A", "B"]))
+        XCTAssertFalse(scalars.advance(&mobileIndex, over: ["A", "B"]))
+        XCTAssert(scalars.advance(&mobileIndex, over: ConditionalPattern({ $0 == "C" })))
+        XCTAssertFalse(scalars.advance(&mobileIndex, over: ConditionalPattern({ $0 == "C" })))
+
+        let start: [Unicode.Scalar] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
+        let end: [Unicode.Scalar] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
+        let diff = end.changes(from: start)
+        let changed = start.applying(changes: diff)
+        XCTAssertEqual(changed, end)
+
+        let startString = "..GAC‐‐!!.."
+        let endString = "..AGCAT‐‐??.."
+        let diffString = endString.changes(from: startString)
+        let changedString = startString.applying(changes: diffString)
+        XCTAssertEqual(changedString, endString)
+
+        // Not bidirectional.
+        let forwardStart = AnyForwardCollection(startString)
+        let forwardEnd = AnyForwardCollection(endString)
+        let forwardDiff = forwardEnd.changes(from: forwardStart)
+        XCTAssertEqual(forwardDiff, diffString)
+        let forwardChanged = forwardStart.applying(changes: forwardDiff)
+        XCTAssertEqual(forwardChanged, forwardEnd)
+
+        let set = AnyCollection(Set(endString))
+        _ = set.changes(from: startString)
+        _ = endString.scalars.changes(from: start)
+        _ = AnyCollection(Set(startString)).changes(from: AnyCollection(Set(startString)))
+
+        XCTAssertNil("...".scalars.firstMatch(for: ¬ConditionalPattern({ $0 == "." })))
+        XCTAssertNil("...".scalars[...].lastMatch(for: ConditionalPattern({ $0 ≠ "." })))
+        XCTAssertNil("...".scalars[...].firstMatch(for: ConditionalPattern({ $0 ≠ "." })))
+        XCTAssert("...".scalars[...].matches(for: ConditionalPattern({ $0 ≠ "." })).isEmpty)
+      }
+    #endif
   }
 
   func testCollectionDifference() throws {
