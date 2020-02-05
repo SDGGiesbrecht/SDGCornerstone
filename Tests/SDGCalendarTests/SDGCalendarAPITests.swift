@@ -614,11 +614,13 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testHebrewYear() {
-    testCodableConformance(of: HebrewYear(1234), uniqueTestName: "1234")
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(of: HebrewYear(1234), uniqueTestName: "1234")
 
-    let length = FloatMax(HebrewYear(5777).numberOfDays) × (1 as FloatMax).days
-    XCTAssert(length ≥ HebrewYear.minimumDuration)
-    XCTAssert(length ≤ HebrewYear.maximumDuration)
+      let length = FloatMax(HebrewYear(5777).numberOfDays) × (1 as FloatMax).days
+      XCTAssert(length ≥ HebrewYear.minimumDuration)
+      XCTAssert(length ≤ HebrewYear.maximumDuration)
+    #endif
   }
 
   func testWeekday() {
