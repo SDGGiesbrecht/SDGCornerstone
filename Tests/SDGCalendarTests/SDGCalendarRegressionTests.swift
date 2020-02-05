@@ -23,11 +23,13 @@ class SDGCalendarRegressionTests: TestCase {
   func testCalendarEquatability() {
     // Untracked
 
-    let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
-    XCTAssertEqual(tishrei, HebrewMonthAndYear(month: .tishrei, year: 5759))
-    let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
-    XCTAssertEqual(tevet, HebrewMonthAndYear(month: .tevet, year: 5759))
-    XCTAssertNotEqual(tishrei, tevet)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
+      XCTAssertEqual(tishrei, HebrewMonthAndYear(month: .tishrei, year: 5759))
+      let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
+      XCTAssertEqual(tevet, HebrewMonthAndYear(month: .tevet, year: 5759))
+      XCTAssertNotEqual(tishrei, tevet)
+    #endif
   }
 
   func testWeekday() {
