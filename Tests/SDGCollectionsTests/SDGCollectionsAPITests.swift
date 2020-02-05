@@ -552,40 +552,42 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testCollectionDifferenceChange() throws {
-    try forAllLegacyModes {
-      let shimmedEntries: [SDGCollections.CollectionDifference<String>.Change] = [
-        .remove(offset: 10, element: "removed element", associatedWith: 20),
-        .insert(offset: 30, element: "inserted element", associatedWith: 40)
-      ]
-      testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
-      if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
-        let standardEntries = shimmedEntries.map { shimmed in
-          return Swift.CollectionDifference.Change(shimmed)
-        }
-        var encoded = try JSONEncoder().encode(shimmedEntries)
-        let decodedStandard = try JSONDecoder().decode(
-          [Swift.CollectionDifference<String>.Change].self,
-          from: encoded
-        )
-        XCTAssertEqual(decodedStandard, standardEntries)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      try forAllLegacyModes {
+        let shimmedEntries: [SDGCollections.CollectionDifference<String>.Change] = [
+          .remove(offset: 10, element: "removed element", associatedWith: 20),
+          .insert(offset: 30, element: "inserted element", associatedWith: 40)
+        ]
+        testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
+        if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
+          let standardEntries = shimmedEntries.map { shimmed in
+            return Swift.CollectionDifference.Change(shimmed)
+          }
+          var encoded = try JSONEncoder().encode(shimmedEntries)
+          let decodedStandard = try JSONDecoder().decode(
+            [Swift.CollectionDifference<String>.Change].self,
+            from: encoded
+          )
+          XCTAssertEqual(decodedStandard, standardEntries)
 
-        encoded = try JSONEncoder().encode(standardEntries)
-        let decodedShimmed = try JSONDecoder().decode(
-          [SDGCollections.CollectionDifference<String>.Change].self,
-          from: encoded
-        )
-        XCTAssertEqual(decodedShimmed, shimmedEntries)
+          encoded = try JSONEncoder().encode(standardEntries)
+          let decodedShimmed = try JSONDecoder().decode(
+            [SDGCollections.CollectionDifference<String>.Change].self,
+            from: encoded
+          )
+          XCTAssertEqual(decodedShimmed, shimmedEntries)
+        }
+        for entry in shimmedEntries {
+          var copy = entry
+          copy.offset = 5
+          XCTAssertEqual(copy.offset, 5)
+          copy.element = "..."
+          XCTAssertEqual(copy.element, "...")
+          copy.associatedOffset = 100
+          XCTAssertEqual(copy.associatedOffset, 100)
+        }
       }
-      for entry in shimmedEntries {
-        var copy = entry
-        copy.offset = 5
-        XCTAssertEqual(copy.offset, 5)
-        copy.element = "..."
-        XCTAssertEqual(copy.element, "...")
-        copy.associatedOffset = 100
-        XCTAssertEqual(copy.associatedOffset, 100)
-      }
-    }
+    #endif
   }
 
   struct ComparableSetExample: ComparableSet {
