@@ -608,7 +608,9 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testHebrewWeekday() {
-    testCodableConformance(of: HebrewWeekday.sunday, uniqueTestName: "Sunday")
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(of: HebrewWeekday.sunday, uniqueTestName: "Sunday")
+    #endif
   }
 
   func testHebrewYear() {
