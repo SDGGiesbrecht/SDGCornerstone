@@ -115,6 +115,12 @@ class SDGPersistenceAPITests: TestCase {
         )
 
         let thisFile = URL(fileURLWithPath: #file)
+        #warning("Debugging")
+        print(thisFile.relativeString)
+        print(thisFile.absoluteString)
+        print((try FileManager.default.deepFileEnumeration(
+          in: thisFile.deletingLastPathComponent().deletingLastPathComponent()
+          )).map({ $0.absoluteString }))
         XCTAssert(
           try FileManager.default.deepFileEnumeration(
             in: thisFile.deletingLastPathComponent().deletingLastPathComponent()
