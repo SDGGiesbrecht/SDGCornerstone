@@ -25,7 +25,15 @@
     // MARK: - Static Properties
 
     /// The default shell.
-    public static let `default`: Shell = Shell(at: URL(fileURLWithPath: "/bin/sh"))
+    public static let `default`: Shell = {
+      let path: String
+      #if os(Windows)
+        path = "C:\Windows\System32\cmd.exe"
+      #else
+        path = "/bin/sh"
+      #endif
+      Shell(at: URL(fileURLWithPath: path))
+    }()
 
     // MARK: - Static Functions
 
