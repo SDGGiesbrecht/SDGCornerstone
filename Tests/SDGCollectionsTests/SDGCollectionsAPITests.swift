@@ -1210,11 +1210,13 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testSymmetricDifference() {
-    testSetDefinitionConformance(
-      of: IntensionalSet(where: { $0.isEven }) ∆ (1...100),
-      member: 1,
-      nonmember: 2
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testSetDefinitionConformance(
+        of: IntensionalSet(where: { $0.isEven }) ∆ (1...100),
+        member: 1,
+        nonmember: 2
+      )
+    #endif
   }
 
   func testUnion() {
