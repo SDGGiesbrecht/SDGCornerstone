@@ -44,6 +44,8 @@ class SDGPersistenceAPITests: TestCase {
 
         let path = "example/path"
 
+        #warning("Debugging.")
+        print(FileManager.default.url(in: .applicationSupport, at: path).absoluteString)
         #if os(Windows) || os(Linux)
           _ = FileManager.default.url(in: .applicationSupport, at: path)
         #else
@@ -54,6 +56,8 @@ class SDGPersistenceAPITests: TestCase {
             "Unexpected support directory."
           )
         #endif
+        #warning("Debugging.")
+        print(FileManager.default.url(in: .cache, at: path).absoluteString)
         XCTAssertNotNil(
           FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(
             for: "Cache".scalars ∨ "cache".scalars
