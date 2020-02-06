@@ -130,7 +130,7 @@ class SDGControlFlowAPITests: TestCase {
   }
 
   func testPerformanceTest() {
-    #if !os(Windows)  // #workaround(SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       limit("Performance", to: 1) {}
     #endif
   }

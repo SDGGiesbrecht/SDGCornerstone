@@ -390,6 +390,19 @@ target_link_libraries("SDGPersistenceTestUtilities" PRIVATE
   "SDGCornerstoneLocalizations"
 )
 
+add_library("SDGLocalizationTestUtilities"
+  "../../../Sources/SDGLocalizationTestUtilities/CustomStringConvertible.swift"
+)
+set_target_properties("SDGLocalizationTestUtilities" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGLocalizationTestUtilities" PRIVATE -enable-testing)
+target_link_libraries("SDGLocalizationTestUtilities" PRIVATE
+  "SDGLocalization"
+  "SDGTesting"
+  "SDGText"
+  "SDGPersistence"
+  "SDGPersistenceTestUtilities"
+)
+
 add_library("SDGMathematicsTestUtilities"
   "../../../Sources/SDGMathematicsTestUtilities/Addable.swift"
   "../../../Sources/SDGMathematicsTestUtilities/BitField.swift"
@@ -435,6 +448,45 @@ target_link_libraries("SDGXCTestUtilities" PRIVATE
   "SDGPersistence"
 )
 
+add_library("SDGCalendarTests"
+  "../../../Tests/SDGCalendarTests/SDGCalendarAPITests.swift"
+  "../../../Tests/SDGCalendarTests/SDGCalendarInternalTests.swift"
+  "../../../Tests/SDGCalendarTests/SDGCalendarRegressionTests.swift"
+)
+set_target_properties("SDGCalendarTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCalendarTests" PRIVATE -enable-testing)
+target_link_libraries("SDGCalendarTests" PRIVATE
+  "SDGCalendar"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGMathematics"
+  "SDGLocalization"
+  "SDGCornerstoneLocalizations"
+  "SDGMathematicsTestUtilities"
+  "SDGPersistenceTestUtilities"
+  "SDGLocalizationTestUtilities"
+)
+
+add_library("SDGCollectionsTests"
+  "../../../Tests/SDGCollectionsTests/AnyForwardCollection.swift"
+  "../../../Tests/SDGCollectionsTests/LegacyMode.swift"
+  "../../../Tests/SDGCollectionsTests/SDGCollectionsAPITests.swift"
+  "../../../Tests/SDGCollectionsTests/SDGCollectionsRegressionTests.swift"
+)
+set_target_properties("SDGCollectionsTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCollectionsTests" PRIVATE -enable-testing)
+target_link_libraries("SDGCollectionsTests" PRIVATE
+  "SDGCollections"
+  "SDGCollectionsTestUtilities"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCornerstoneLocalizations"
+  "SDGPersistenceTestUtilities"
+  "SDGLocalizationTestUtilities"
+)
+
 add_library("SDGControlFlowTests"
   "../../../Tests/SDGControlFlowTests/Examples.swift"
   "../../../Tests/SDGControlFlowTests/SDGControlFlowAPITests.swift"
@@ -474,13 +526,37 @@ target_link_libraries("SDGMathematicsTests" PRIVATE
   "SDGLogic"
 )
 
+add_library("SDGTextTests"
+  "../../../Tests/SDGTextTests/SDGTextAPITests.swift"
+  "../../../Tests/SDGTextTests/SDGTextInternalTests.swift"
+  "../../../Tests/SDGTextTests/SDGTextRegressionTests.swift"
+)
+set_target_properties("SDGTextTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGTextTests" PRIVATE -enable-testing)
+target_link_libraries("SDGTextTests" PRIVATE
+  "SDGText"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGCornerstoneLocalizations"
+  "SDGMathematicsTestUtilities"
+  "SDGCollectionsTestUtilities"
+  "SDGPersistenceTestUtilities"
+  "SDGLocalizationTestUtilities"
+)
+
 add_executable(WindowsMain
   WindowsMain.swift
 )
 target_link_libraries(WindowsMain PRIVATE
+  "SDGCalendarTests"
+  "SDGCollectionsTests"
   "SDGControlFlowTests"
   "SDGLogicTests"
   "SDGMathematicsTests"
+  "SDGTextTests"
 )
 add_test(NAME WindowsMain COMMAND WindowsMain)
 set_property(TEST WindowsMain PROPERTY ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")

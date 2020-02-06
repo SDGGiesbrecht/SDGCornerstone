@@ -100,6 +100,13 @@ public func compare(
     let specificationLines: [String] = specificationString.lines.map({ String($0.line) })
     let differences = stringLines.changes(from: specificationLines)
 
+    #if os(Windows)
+      // #workaround(Swift 5.1.3, Windows mistakes strings as inequal, but then reports no differences.)
+      if differences.isEmpty {
+        return  // Passing
+      }
+    #endif
+
     var removals: Set<Int> = []
     var inserts: [Int: String] = [:]
     for difference in differences {

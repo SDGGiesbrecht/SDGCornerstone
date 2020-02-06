@@ -24,31 +24,33 @@ import SDGXCTestUtilities
 class SDGCalendarInternalTests: TestCase {
 
   func testDate() {
-    let date = CalendarDate(gregorian: .august, 28, 8232)
-    let datesDirectory = testSpecificationDirectory().appendingPathComponent("Date Formats")
-    compare(
-      String(date.gregorianischesDatumAufDeutsch(mitJahr: true, mitWochentag: true)),
-      against: datesDirectory.appendingPathComponent("Deutsch.txt"),
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    compare(
-      String(
-        date.dateGrégorienneEnFrançais(.sentenceMedial, avecAn: true, avecJourDeSemaine: true)
-          .html()
-      ),
-      against: datesDirectory.appendingPathComponent("Français.txt"),
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    compare(
-      String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)),
-      against: datesDirectory.appendingPathComponent("Ελληνικά.txt"),
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    compare(
-      String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)),
-      against: datesDirectory.appendingPathComponent("עברית.txt"),
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      let date = CalendarDate(gregorian: .august, 28, 8232)
+      let datesDirectory = testSpecificationDirectory().appendingPathComponent("Date Formats")
+      compare(
+        String(date.gregorianischesDatumAufDeutsch(mitJahr: true, mitWochentag: true)),
+        against: datesDirectory.appendingPathComponent("Deutsch.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      compare(
+        String(
+          date.dateGrégorienneEnFrançais(.sentenceMedial, avecAn: true, avecJourDeSemaine: true)
+            .html()
+        ),
+        against: datesDirectory.appendingPathComponent("Français.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      compare(
+        String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)),
+        against: datesDirectory.appendingPathComponent("Ελληνικά.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      compare(
+        String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)),
+        against: datesDirectory.appendingPathComponent("עברית.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testGregorianMonth() {
@@ -66,23 +68,35 @@ class SDGCalendarInternalTests: TestCase {
   }
 
   func testGregorianWeekdayDate() {
-    XCTAssertEqual(
-      CalendarDate(
-        definition: GregorianWeekdayDate(week: 1, weekday: .tuesday, hour: 0, minute: 0, second: 0)
-      ),
-      CalendarDate(gregorian: .january, 16, 2001)
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      XCTAssertEqual(
+        CalendarDate(
+          definition: GregorianWeekdayDate(
+            week: 1,
+            weekday: .tuesday,
+            hour: 0,
+            minute: 0,
+            second: 0
+          )
+        ),
+        CalendarDate(gregorian: .january, 16, 2001)
+      )
+    #endif
   }
 
   func testHebrewWeekdayDate() {
-    XCTAssertEqual(
-      CalendarDate(definition: HebrewWeekdayDate(week: 1, weekday: .thursday, hour: 0, part: 0)),
-      CalendarDate(hebrew: .tishrei, 15, 5758)
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      XCTAssertEqual(
+        CalendarDate(definition: HebrewWeekdayDate(week: 1, weekday: .thursday, hour: 0, part: 0)),
+        CalendarDate(hebrew: .tishrei, 15, 5758)
+      )
+    #endif
   }
 
   func testHebrewYear() {
-    SDGCalendarInternalTests.testHebrewYear()
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      SDGCalendarInternalTests.testHebrewYear()
+    #endif
   }
   static func testHebrewYear() {
     // Untracked
@@ -101,7 +115,9 @@ class SDGCalendarInternalTests: TestCase {
   }
 
   func testRelativeDate() {
-    let date = CalendarDate.hebrewNow()
-    XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      let date = CalendarDate.hebrewNow()
+      XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
+    #endif
   }
 }
