@@ -128,7 +128,7 @@ class SDGPersistenceAPITests: TestCase {
         XCTAssert(
           try FileManager.default.deepFileEnumeration(
             in: thisFile.deletingLastPathComponent().deletingLastPathComponent()
-          ).contains(thisFile),
+          ).contains(where: { $0.absoluteString == thisFile.absoluteString }),
           "Failed to enumerate files."
         )
       }
