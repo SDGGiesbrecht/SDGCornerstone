@@ -108,7 +108,13 @@
 
       reportProgress("$ " + commandString)
 
-      return process.run(["\u{2D}c", commandString], in: workingDirectory, with: environment) {
+      let executionOption: String
+      if process.executable.lastPathComponent == "cmd.exe" {
+        executionOption = "/c"
+      } else {
+        executionOption = "\u{2D}c"
+      }
+      return process.run([executionOption, commandString], in: workingDirectory, with: environment) {
         reportProgress($0)
       }
     }
