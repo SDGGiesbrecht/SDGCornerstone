@@ -266,57 +266,59 @@ class SDGTextAPITests: TestCase {
   }
 
   func testSemanticMarkup() {
-    testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
-    testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
-    testCodableConformance(
-      of: SemanticMarkup("àbçđę...").superscripted(),
-      uniqueTestName: "Unicode"
-    )
-    testCustomStringConvertibleConformance(
-      of: SemanticMarkup("ABC").superscripted(),
-      localizations: APILocalization.self,
-      uniqueTestName: "ABC",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
+      testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
+      testCodableConformance(
+        of: SemanticMarkup("àbçđę...").superscripted(),
+        uniqueTestName: "Unicode"
+      )
+      testCustomStringConvertibleConformance(
+        of: SemanticMarkup("ABC").superscripted(),
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    let markup: SemanticMarkup = "..."
-    XCTAssertEqual(markup.scalars, markup.source.scalars)
-    XCTAssertEqual(StrictString(markup.clusters), StrictString(markup.source.clusters))
-    XCTAssertEqual(StrictString(markup.lines), StrictString(markup.source.lines))
+      let markup: SemanticMarkup = "..."
+      XCTAssertEqual(markup.scalars, markup.source.scalars)
+      XCTAssertEqual(StrictString(markup.clusters), StrictString(markup.source.clusters))
+      XCTAssertEqual(StrictString(markup.lines), StrictString(markup.source.lines))
 
-    var mutable = markup
-    mutable.scalars = markup.scalars
-    mutable.clusters = markup.clusters
-    mutable.lines = markup.lines
-    XCTAssertEqual(mutable.scalars, markup.scalars)
-    XCTAssertEqual(StrictString(mutable.clusters), StrictString(markup.clusters))
-    XCTAssertEqual(StrictString(mutable.lines), StrictString(markup.lines))
+      var mutable = markup
+      mutable.scalars = markup.scalars
+      mutable.clusters = markup.clusters
+      mutable.lines = markup.lines
+      XCTAssertEqual(mutable.scalars, markup.scalars)
+      XCTAssertEqual(StrictString(mutable.clusters), StrictString(markup.clusters))
+      XCTAssertEqual(StrictString(mutable.lines), StrictString(markup.lines))
 
-    XCTAssertEqual(markup.subscripted().rawTextApproximation(), "...")
+      XCTAssertEqual(markup.subscripted().rawTextApproximation(), "...")
 
-    var hasher = Hasher()
-    markup.hash(into: &hasher)
-    XCTAssertEqual(SemanticMarkup("").source, "")
-    XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
-    XCTAssertEqual(SemanticMarkup().source, "")
+      var hasher = Hasher()
+      markup.hash(into: &hasher)
+      XCTAssertEqual(SemanticMarkup("").source, "")
+      XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
+      XCTAssertEqual(SemanticMarkup().source, "")
 
-    let html = SemanticMarkup("&<>").subscripted().html()
-    compare(
-      String(html),
-      against: testSpecificationDirectory().appendingPathComponent(
-        "SemanticMarkup/HTML/Escapes.txt"
-      ),
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    _ = markup.playgroundDescription
+      let html = SemanticMarkup("&<>").subscripted().html()
+      compare(
+        String(html),
+        against: testSpecificationDirectory().appendingPathComponent(
+          "SemanticMarkup/HTML/Escapes.txt"
+        ),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      _ = markup.playgroundDescription
 
-    XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("...")))
+      XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("...")))
 
-    let exponent = SemanticMarkup("y").superscripted()
-    let power: SemanticMarkup = "x\(exponent)"
-    XCTAssertNotEqual(power.source, power.rawTextApproximation())
-    let otherPower: SemanticMarkup = "x\(exponent[exponent.bounds])"
-    XCTAssertNotEqual(otherPower.source, otherPower.rawTextApproximation())
+      let exponent = SemanticMarkup("y").superscripted()
+      let power: SemanticMarkup = "x\(exponent)"
+      XCTAssertNotEqual(power.source, power.rawTextApproximation())
+      let otherPower: SemanticMarkup = "x\(exponent[exponent.bounds])"
+      XCTAssertNotEqual(otherPower.source, otherPower.rawTextApproximation())
+    #endif
   }
 
   func testStrictString() {
