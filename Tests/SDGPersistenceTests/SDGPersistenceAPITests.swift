@@ -44,7 +44,7 @@ class SDGPersistenceAPITests: TestCase {
 
         let path = "example/path"
 
-        #if os(Linux)
+        #if os(Windows) || os(Linux)
           _ = FileManager.default.url(in: .applicationSupport, at: path)
         #else
           XCTAssert(
