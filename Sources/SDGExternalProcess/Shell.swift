@@ -28,11 +28,11 @@
     public static let `default`: Shell = {
       let path: String
       #if os(Windows)
-        path = "C:\Windows\System32\cmd.exe"
+        path = #"C:\Windows\System32\cmd.exe"#
       #else
         path = "/bin/sh"
       #endif
-      Shell(at: URL(fileURLWithPath: path))
+      return Shell(at: URL(fileURLWithPath: path))
     }()
 
     // MARK: - Static Functions
