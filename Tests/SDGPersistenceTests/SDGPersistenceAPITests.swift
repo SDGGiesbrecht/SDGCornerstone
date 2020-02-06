@@ -44,9 +44,7 @@ class SDGPersistenceAPITests: TestCase {
 
         let path = "example/path"
 
-        #warning("Debugging.")
-        print(FileManager.default.url(in: .applicationSupport, at: path).absoluteString)
-        #if os(Windows) || os(Linux)
+        #if os(Linux)
           _ = FileManager.default.url(in: .applicationSupport, at: path)
         #else
           let applicationSupport = FileManager.default
