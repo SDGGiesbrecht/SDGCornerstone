@@ -81,20 +81,9 @@ public func compare(
       }
       return
     }
-    #warning("Debug messages.")
-    print("Produced: “")
-    print(string)
-    print("”")
-    print("Expected: “")
-    print(specificationString)
-    print("”")
     if string == specificationString {
-      #warning("Debug messages.")
-      print("Equal.")
       return  // Passing
     }
-    #warning("Debug messages.")
-    print("Inequal.")
     // @exempt(from: tests) Not testable (would require failing a test).
 
     if overwriteSpecificationInsteadOfFailing {
@@ -111,8 +100,13 @@ public func compare(
     let specificationLines: [String] = specificationString.lines.map({ String($0.line) })
     let differences = stringLines.changes(from: specificationLines)
 
-    #warning("Debug messages.")
-    print("Differences:", differences)
+    #if os(Windows)
+      // #workaround(Swift 5.1.3, Windows mistakes strings as inequal, but then reports no differences.)
+      if differences.isEmpty {
+        return  // Passing
+      }
+    #endif
+
     var removals: Set<Int> = []
     var inserts: [Int: String] = [:]
     for difference in differences {
