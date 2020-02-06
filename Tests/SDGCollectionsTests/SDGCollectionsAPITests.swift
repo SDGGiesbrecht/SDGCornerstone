@@ -1133,7 +1133,9 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testRepetitionPattern() {
-    testPattern(RepetitionPattern([1, 2, 3]), match: [1, 2, 3, 1, 2, 3])
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testPattern(RepetitionPattern([1, 2, 3]), match: [1, 2, 3, 1, 2, 3])
+    #endif
   }
 
   func testSet() {
