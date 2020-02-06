@@ -49,10 +49,11 @@ class SDGPersistenceAPITests: TestCase {
         #if os(Windows) || os(Linux)
           _ = FileManager.default.url(in: .applicationSupport, at: path)
         #else
+          let applicationSupport = FileManager.default
+            .url(in: .applicationSupport, at: path).absoluteString
           XCTAssert(
-            FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains(
-              "Application%20Support"
-            ),
+            applicationSupport.contains("Application%20Support")
+              ∨ applicationSupport.contains("AppData"),
             "Unexpected support directory."
           )
         #endif
@@ -119,12 +120,6 @@ class SDGPersistenceAPITests: TestCase {
         )
 
         let thisFile = URL(fileURLWithPath: #file)
-        #warning("Debugging")
-        print(thisFile.relativeString)
-        print(thisFile.absoluteString)
-        print((try FileManager.default.deepFileEnumeration(
-          in: thisFile.deletingLastPathComponent().deletingLastPathComponent()
-          )).map({ $0.absoluteString }))
         XCTAssert(
           try FileManager.default.deepFileEnumeration(
             in: thisFile.deletingLastPathComponent().deletingLastPathComponent()

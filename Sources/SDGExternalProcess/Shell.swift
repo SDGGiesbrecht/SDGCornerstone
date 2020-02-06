@@ -114,7 +114,8 @@
       } else {
         executionOption = "\u{2D}c"
       }
-      return process.run([executionOption, commandString], in: workingDirectory, with: environment) {
+      return process.run([executionOption, commandString], in: workingDirectory, with: environment)
+      {
         reportProgress($0)
       }
     }
