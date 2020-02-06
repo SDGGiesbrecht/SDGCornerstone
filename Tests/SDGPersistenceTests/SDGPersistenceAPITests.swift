@@ -134,10 +134,12 @@ class SDGPersistenceAPITests: TestCase {
     }
   }
   func testLosslessStringConvertible() {
-    testCodableConformance(
-      of: LosslessStirngConvertibleExample("Example"),
-      uniqueTestName: "Example"
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(
+        of: LosslessStirngConvertibleExample("Example"),
+        uniqueTestName: "Example"
+      )
+    #endif
   }
 
   func testPreferences() throws {
