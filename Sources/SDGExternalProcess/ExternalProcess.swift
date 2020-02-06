@@ -38,7 +38,7 @@
     ///
     /// - Parameters:
     ///     - locations: A list of locations to search. They will be tried in order.
-    ///     - commandName: A name to try with the default shell’s `which` command. This will be tried after the provided search list.
+    ///     - commandName: A name to try with the default shell’s `which` command (`where` on Windows). This will be tried after the provided search list.
     ///     - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
     ///     - process: An executable to validate. Its existence and executability have already been verified.
     public convenience init?<S>(
@@ -72,8 +72,14 @@
         }
       }
 
+      let searchCommand: String
+      #if os(Windows)
+        searchCommand = "where"
+      #else
+        searchCommand = "which"
+      #endif
       if let name = commandName,
-        let path = try? Shell.default.run(command: ["which", name]).get()
+        let path = try? Shell.default.run(command: [searchCommand, name]).get()
       {
         let location = URL(fileURLWithPath: path)
         if checkLocation(location, validate: validate) {
