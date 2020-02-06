@@ -55,13 +55,15 @@ class SDGPersistenceAPITests: TestCase {
             "Unexpected support directory."
           )
         #endif
-        #warning("Debugging.")
-        print(FileManager.default.url(in: .cache, at: path).absoluteString)
-        XCTAssertNotNil(
-          FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(
-            for: "Cache".scalars ∨ "cache".scalars
+        #if os(Windows)
+          _ = FileManager.default.url(in: .cache, at: path)
+        #else
+          XCTAssertNotNil(
+            FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(
+              for: "Cache".scalars ∨ "cache".scalars
+            )
           )
-        )
+        #endif
         XCTAssertNotNil(
           temporaryDirectory.appendingPathComponent(path).absoluteString.scalars.firstMatch(
             for: "Temp".scalars
