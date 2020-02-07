@@ -66,26 +66,28 @@ class SDGBinaryDataAPITests: TestCase {
   }
 
   func testDataStream() {
-    var inputStream = DataStream()
-    var outputStream = DataStream()
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      var inputStream = DataStream()
+      var outputStream = DataStream()
 
-    var forwards = Data()
-    for byte in (0x00 as Data.Element)...(0xFF as Data.Element) {
-      forwards.append(byte)
-    }
-    let backwards = Data(forwards.reversed())
+      var forwards = Data()
+      for byte in (0x00 as Data.Element)...(0xFF as Data.Element) {
+        forwards.append(byte)
+      }
+      let backwards = Data(forwards.reversed())
 
-    inputStream.append(unit: forwards)
-    inputStream.append(unit: backwards)
+      inputStream.append(unit: forwards)
+      inputStream.append(unit: backwards)
 
-    var results: [Data] = []
-    while ¬inputStream.buffer.isEmpty {
-      let transfer = inputStream.buffer.removeFirst()
-      outputStream.buffer.append(transfer)
+      var results: [Data] = []
+      while ¬inputStream.buffer.isEmpty {
+        let transfer = inputStream.buffer.removeFirst()
+        outputStream.buffer.append(transfer)
 
-      results.append(contentsOf: outputStream.extractCompleteUnits())
-    }
-    XCTAssertEqual(results, [forwards, backwards])
+        results.append(contentsOf: outputStream.extractCompleteUnits())
+      }
+      XCTAssertEqual(results, [forwards, backwards])
+    #endif
   }
 
   func testUInt() {
