@@ -48,7 +48,7 @@ class SDGExternalProcessAPITests: TestCase {
             ].map({ URL(fileURLWithPath: $0) }),
             commandName: "swift",
             validate: { _ in true }
-          )?.executable.lastPathComponent,
+          )?.executable.deletingPathExtension().lastPathComponent,
           "swift",
           "Failed to find with “which”."
         )
