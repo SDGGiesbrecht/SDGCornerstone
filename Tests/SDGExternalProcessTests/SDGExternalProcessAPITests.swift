@@ -50,7 +50,7 @@ class SDGExternalProcessAPITests: TestCase {
             validate: { _ in true }
           )?.executable.deletingPathExtension().lastPathComponent,
           "swift",
-          "Failed to find with “which”."
+          "Failed to find with “which” (or “where” on Windows)."
         )
         XCTAssertNil(
           ExternalProcess(
