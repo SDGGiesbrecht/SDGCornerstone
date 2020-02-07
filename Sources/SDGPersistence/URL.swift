@@ -22,7 +22,7 @@ public typealias EinheitlicherRessourcenzeiger = URL
 
 extension URL: Comparable {
 
-  private var platformPathSeparator: String {
+  private var platformPathSeparator: Unicode.Scalar {
     #if os(Windows)
       return #"\"#
     #else
@@ -46,10 +46,10 @@ extension URL: Comparable {
       return true
     } else {
       let otherDirectory: String
-      if otherPath.hasSuffix(platformPathSeparator) {
+      if otherPath.scalars.last == platformPathSeparator {
         otherDirectory = otherPath
       } else {
-        otherDirectory = otherPath + platformPathSeparator
+        otherDirectory = otherPath + String(platformPathSeparator)
       }
       return path.hasPrefix(otherDirectory)
     }
@@ -67,7 +67,7 @@ extension URL: Comparable {
     }
     let otherLength = other.path.clusters.count
     var relative = path.clusters.dropFirst(otherLength)
-    if relative.first == platformPathSeparator {
+    if relative.first == Character(platformPathSeparator) {
       relative = relative.dropFirst()
     }
     return String(relative)
