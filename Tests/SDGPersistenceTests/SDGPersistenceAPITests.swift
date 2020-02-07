@@ -239,9 +239,21 @@ class SDGPersistenceAPITests: TestCase {
   }
 
   func testURL() {
-    let root = URL(fileURLWithPath: "/")
-    let users = URL(fileURLWithPath: "/Users")
-    let johnDoe = URL(fileURLWithPath: "/Users/John Doe")
+    let rootPath: String
+    let usersPath: String
+    let johnDoePath: String
+    #if os(Windows)
+      rootPath = #"C:\"#
+      usersPath = #"C:\Users"#
+      johnDoePath = #"C:\Users\John Doe"#
+    #else
+      rootPath = "/"
+      usersPath = "/Users"
+      johnDoePath = "/Users/John Doe"
+    #endif
+    let root = URL(fileURLWithPath: rootPath)
+    let users = URL(fileURLWithPath: usersPath)
+    let johnDoe = URL(fileURLWithPath: johnDoePath)
 
     XCTAssert(root < users)
     XCTAssert(users.is(in: root))
@@ -250,7 +262,7 @@ class SDGPersistenceAPITests: TestCase {
     XCTAssert(johnDoe.is(in: users))
 
     XCTAssertEqual(users.path(relativeTo: root), "Users")
-    XCTAssertEqual(users.path(relativeTo: johnDoe), "/Users")
+    XCTAssertEqual(users.path(relativeTo: johnDoe), usersPath)
     XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
   }
 }
