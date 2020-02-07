@@ -25,7 +25,15 @@
     // MARK: - Static Properties
 
     /// The default shell.
-    public static let `default`: Shell = Shell(at: URL(fileURLWithPath: "/bin/sh"))
+    public static let `default`: Shell = {
+      let path: String
+      #if os(Windows)
+        path = #"C:\Windows\System32\cmd.exe"#
+      #else
+        path = "/bin/sh"
+      #endif
+      return Shell(at: URL(fileURLWithPath: path))
+    }()
 
     // MARK: - Static Functions
 
@@ -69,6 +77,10 @@
 
     private let process: ExternalProcess
 
+    private var isCMD: Bool {
+      return process.executable.lastPathComponent == "cmd.exe"
+    }
+
     // MARK: - Usage
 
     /// Runs a command.
@@ -91,6 +103,9 @@
     ) -> Result<String, ExternalProcess.Error> {  // @exempt(from: tests)
 
       let commandString = command.map({ (argument: String) -> String in
+        if isCMD ∧ command.first == "echo" {  // @exempt(from: tests) cmd is only on Windows.
+          return argument
+        }
         if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
           return Shell.addQuotationMarks(argument)
         } else {
@@ -100,7 +115,14 @@
 
       reportProgress("$ " + commandString)
 
-      return process.run(["\u{2D}c", commandString], in: workingDirectory, with: environment) {
+      let executionOption: String
+      if isCMD {  // @exempt(from: tests) cmd is only on Windows.
+        executionOption = "/c"
+      } else {
+        executionOption = "\u{2D}c"
+      }
+      return process.run([executionOption, commandString], in: workingDirectory, with: environment)
+      {
         reportProgress($0)
       }
     }

@@ -325,6 +325,22 @@ target_link_libraries("SDGCalendar" PRIVATE
   "SDGCornerstoneLocalizations"
 )
 
+add_library("SDGExternalProcess"
+  "../../../Sources/SDGExternalProcess/ExternalProcess.swift"
+  "../../../Sources/SDGExternalProcess/ExternalProcessError.swift"
+  "../../../Sources/SDGExternalProcess/LegacyMode.swift"
+  "../../../Sources/SDGExternalProcess/Shell.swift"
+)
+set_target_properties("SDGExternalProcess" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGExternalProcess" PRIVATE -enable-testing)
+target_link_libraries("SDGExternalProcess" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGText"
+  "SDGPersistence"
+  "SDGLocalization"
+)
+
 add_library("SDGTesting"
   "../../../Sources/SDGTesting/PerformanceTest.swift"
   "../../../Sources/SDGTesting/Test.swift"
@@ -499,6 +515,20 @@ target_link_libraries("SDGControlFlowTests" PRIVATE
   "SDGXCTestUtilities"
 )
 
+add_library("SDGExternalProcessTests"
+  "../../../Tests/SDGExternalProcessTests/LegacyMode.swift"
+  "../../../Tests/SDGExternalProcessTests/SDGExternalProcessAPITests.swift"
+  "../../../Tests/SDGExternalProcessTests/SDGExternalProcessRegressionTests.swift"
+)
+set_target_properties("SDGExternalProcessTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGExternalProcessTests" PRIVATE -enable-testing)
+target_link_libraries("SDGExternalProcessTests" PRIVATE
+  "SDGExternalProcess"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGLogic"
+)
+
 add_library("SDGLogicTests"
   "../../../Tests/SDGLogicTests/SDGLogicAPITests.swift"
 )
@@ -524,6 +554,26 @@ target_link_libraries("SDGMathematicsTests" PRIVATE
   "SDGTesting"
   "SDGXCTestUtilities"
   "SDGLogic"
+)
+
+add_library("SDGPersistenceTests"
+  "../../../Tests/SDGPersistenceTests/SDGPersistenceAPITests.swift"
+  "../../../Tests/SDGPersistenceTests/SDGPersistenceRegressionTests.swift"
+)
+set_target_properties("SDGPersistenceTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGPersistenceTests" PRIVATE -enable-testing)
+target_link_libraries("SDGPersistenceTests" PRIVATE
+  "SDGPersistence"
+  "SDGPersistenceTestUtilities"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGLogic"
+  "SDGCollections"
+  "SDGText"
+  "SDGLocalization"
+  "SDGExternalProcess"
+  "SDGCornerstoneLocalizations"
+  "SDGLocalizationTestUtilities"
 )
 
 add_library("SDGTextTests"
@@ -554,8 +604,10 @@ target_link_libraries(WindowsMain PRIVATE
   "SDGCalendarTests"
   "SDGCollectionsTests"
   "SDGControlFlowTests"
+  "SDGExternalProcessTests"
   "SDGLogicTests"
   "SDGMathematicsTests"
+  "SDGPersistenceTests"
   "SDGTextTests"
 )
 add_test(NAME WindowsMain COMMAND WindowsMain)

@@ -48,9 +48,9 @@ class SDGExternalProcessAPITests: TestCase {
             ].map({ URL(fileURLWithPath: $0) }),
             commandName: "swift",
             validate: { _ in true }
-          )?.executable.lastPathComponent,
+          )?.executable.deletingPathExtension().lastPathComponent,
           "swift",
-          "Failed to find with “which”."
+          "Failed to find with “which” (or “where” on Windows)."
         )
         XCTAssertNil(
           ExternalProcess(
@@ -88,7 +88,17 @@ class SDGExternalProcessAPITests: TestCase {
 
       try forAllLegacyModes {
         _ = try Shell.default.run(command: ["ls"]).get()
-        _ = try Shell.default.run(command: ["pwd"], in: URL(fileURLWithPath: "/"), with: [:]).get()
+        let printWorkingDirectory: String
+        #if os(Windows)
+          printWorkingDirectory = "cd"
+        #else
+          printWorkingDirectory = "pwd"
+        #endif
+        _ = try Shell.default.run(
+          command: [printWorkingDirectory],
+          in: URL(fileURLWithPath: "/"),
+          with: [:]
+        ).get()
 
         let message = "Hello, world!"
         XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
@@ -103,30 +113,32 @@ class SDGExternalProcessAPITests: TestCase {
           case .foundationError(let error):
             XCTFail(error.localizedDescription)
           case .processError(code: _, let output):
-            XCTAssert(output.contains("not found"), "\(error)")
+            XCTAssert(output.contains("not found") ∨ output.contains("not recognized"), "\(error)")
           }
         }
 
-        let metacharacters = "(...)"
-        XCTAssertEqual(
-          try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
-          metacharacters
-        )
-        XCTAssert(
-          ¬(
-            try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get().contains(
-              "\u{22}"
+        #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
+          let metacharacters = "(...)"
+          XCTAssertEqual(
+            try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
+            metacharacters
+          )
+          XCTAssert(
+            ¬(
+              try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get().contains(
+                "\u{22}"
+              )
             )
           )
-        )
+        #endif
 
         _ = "\(Shell.default)"
-        switch (Shell.default.wrappedInstance as! ExternalProcess).run(["..."]) {
+        switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
         case .failure(let error):
           // Expected.
           _ = error.localizedDescription
-        case .success:
-          XCTFail("Shell should have thrown an error.")
+        case .success(let output):
+          XCTFail("Shell should have thrown an error. Output received:\n\(output)")
         }
       }
     #endif

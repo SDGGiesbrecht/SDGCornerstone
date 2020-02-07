@@ -47,18 +47,23 @@ class SDGPersistenceAPITests: TestCase {
         #if os(Linux)
           _ = FileManager.default.url(in: .applicationSupport, at: path)
         #else
+          let applicationSupport = FileManager.default
+            .url(in: .applicationSupport, at: path).absoluteString
           XCTAssert(
-            FileManager.default.url(in: .applicationSupport, at: path).absoluteString.contains(
-              "Application%20Support"
-            ),
+            applicationSupport.contains("Application%20Support")
+              ∨ applicationSupport.contains("AppData"),
             "Unexpected support directory."
           )
         #endif
-        XCTAssertNotNil(
-          FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(
-            for: "Cache".scalars ∨ "cache".scalars
+        #if os(Windows)
+          _ = FileManager.default.url(in: .cache, at: path)
+        #else
+          XCTAssertNotNil(
+            FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(
+              for: "Cache".scalars ∨ "cache".scalars
+            )
           )
-        )
+        #endif
         XCTAssertNotNil(
           temporaryDirectory.appendingPathComponent(path).absoluteString.scalars.firstMatch(
             for: "Temp".scalars
@@ -118,7 +123,7 @@ class SDGPersistenceAPITests: TestCase {
         XCTAssert(
           try FileManager.default.deepFileEnumeration(
             in: thisFile.deletingLastPathComponent().deletingLastPathComponent()
-          ).contains(thisFile),
+          ).contains(where: { $0.absoluteString == thisFile.absoluteString }),
           "Failed to enumerate files."
         )
       }
@@ -134,10 +139,12 @@ class SDGPersistenceAPITests: TestCase {
     }
   }
   func testLosslessStringConvertible() {
-    testCodableConformance(
-      of: LosslessStirngConvertibleExample("Example"),
-      uniqueTestName: "Example"
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCodableConformance(
+        of: LosslessStirngConvertibleExample("Example"),
+        uniqueTestName: "Example"
+      )
+    #endif
   }
 
   func testPreferences() throws {
@@ -232,9 +239,21 @@ class SDGPersistenceAPITests: TestCase {
   }
 
   func testURL() {
-    let root = URL(fileURLWithPath: "/")
-    let users = URL(fileURLWithPath: "/Users")
-    let johnDoe = URL(fileURLWithPath: "/Users/John Doe")
+    let rootPath: String
+    let usersPath: String
+    let johnDoePath: String
+    #if os(Windows)
+      rootPath = #"C:\"#
+      usersPath = #"C:\Users"#
+      johnDoePath = #"C:\Users\John Doe"#
+    #else
+      rootPath = "/"
+      usersPath = "/Users"
+      johnDoePath = "/Users/John Doe"
+    #endif
+    let root = URL(fileURLWithPath: rootPath)
+    let users = URL(fileURLWithPath: usersPath)
+    let johnDoe = URL(fileURLWithPath: johnDoePath)
 
     XCTAssert(root < users)
     XCTAssert(users.is(in: root))
@@ -243,7 +262,7 @@ class SDGPersistenceAPITests: TestCase {
     XCTAssert(johnDoe.is(in: users))
 
     XCTAssertEqual(users.path(relativeTo: root), "Users")
-    XCTAssertEqual(users.path(relativeTo: johnDoe), "/Users")
+    XCTAssertEqual(users.path(relativeTo: johnDoe), usersPath)
     XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
   }
 }

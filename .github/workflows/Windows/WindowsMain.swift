@@ -17,8 +17,10 @@ import XCTest
 @testable import SDGCalendarTests
 @testable import SDGCollectionsTests
 @testable import SDGControlFlowTests
+@testable import SDGExternalProcessTests
 @testable import SDGLogicTests
 @testable import SDGMathematicsTests
+@testable import SDGPersistenceTests
 @testable import SDGTextTests
 
 extension SDGCalendarAPITests {
@@ -129,6 +131,24 @@ extension SDGControlFlowAPITests {
   ]
 }
 
+extension SDGExternalProcessAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testExternalProcess", testExternalProcess),
+      ("testExternalProcessError", testExternalProcessError),
+      ("testShell", testShell),
+    ])
+  ]
+}
+
+extension SDGExternalProcessRegressionTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testDelayedShellOutput", testDelayedShellOutput),
+    ])
+  ]
+}
+
 extension SDGLogicAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
@@ -174,6 +194,28 @@ extension SDGMathematicsRegressionTests {
       ("testFloor", testFloor),
       ("testSubtraction", testSubtraction),
       ("testSubtractionIsUnambiguous", testSubtractionIsUnambiguous),
+    ])
+  ]
+}
+
+extension SDGPersistenceAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testFileConvertible", testFileConvertible),
+      ("testFileManager", testFileManager),
+      ("testLosslessStringConvertible", testLosslessStringConvertible),
+      ("testPreferences", testPreferences),
+      ("testSpecification", testSpecification),
+      ("testURL", testURL),
+    ])
+  ]
+}
+
+extension SDGPersistenceRegressionTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testCachePermissions", testCachePermissions),
+      ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled),
     ])
   ]
 }
@@ -232,9 +274,13 @@ tests += SDGCalendarRegressionTests.windowsTests
 tests += SDGCollectionsAPITests.windowsTests
 tests += SDGCollectionsRegressionTests.windowsTests
 tests += SDGControlFlowAPITests.windowsTests
+tests += SDGExternalProcessAPITests.windowsTests
+tests += SDGExternalProcessRegressionTests.windowsTests
 tests += SDGLogicAPITests.windowsTests
 tests += SDGMathematicsAPITests.windowsTests
 tests += SDGMathematicsRegressionTests.windowsTests
+tests += SDGPersistenceAPITests.windowsTests
+tests += SDGPersistenceRegressionTests.windowsTests
 tests += SDGTextAPITests.windowsTests
 tests += SDGTextInternalTests.windowsTests
 tests += SDGTextRegressionTests.windowsTests
