@@ -22,6 +22,14 @@ public typealias EinheitlicherRessourcenzeiger = URL
 
 extension URL: Comparable {
 
+  private var platformPathSeparator: String {
+    #if os(Windows)
+      return #"\"#
+    #else
+      return "/"
+    #endif
+  }
+
   /// Returns `true` if the URL is in the location described by the specified URL.
   ///
   /// The URL is considered to be inside if it:
@@ -38,10 +46,10 @@ extension URL: Comparable {
       return true
     } else {
       let otherDirectory: String
-      if otherPath.hasSuffix("/") {
+      if otherPath.hasSuffix(platformPathSeparator) {
         otherDirectory = otherPath
       } else {
-        otherDirectory = otherPath + "/"
+        otherDirectory = otherPath + platformPathSeparator
       }
       return path.hasPrefix(otherDirectory)
     }
@@ -59,7 +67,7 @@ extension URL: Comparable {
     }
     let otherLength = other.path.clusters.count
     var relative = path.clusters.dropFirst(otherLength)
-    if relative.first == "/" {
+    if relative.first == platformPathSeparator {
       relative = relative.dropFirst()
     }
     return String(relative)
