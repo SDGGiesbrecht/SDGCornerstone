@@ -133,7 +133,7 @@ class SDGExternalProcessAPITests: TestCase {
         #endif
 
         _ = "\(Shell.default)"
-        switch (Shell.default.wrappedInstance as! ExternalProcess).run(["..."]) {
+        switch (Shell.default.wrappedInstance as! ExternalProcess).run(["Invalid command."]) {
         case .failure(let error):
           // Expected.
           _ = error.localizedDescription
