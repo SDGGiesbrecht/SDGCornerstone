@@ -91,13 +91,15 @@ class SDGBinaryDataAPITests: TestCase {
   }
 
   func testUInt() {
-    var forDescription: UInt8 = 0
-    forDescription.binary[0] = true
-    testCustomStringConvertibleConformance(
-      of: forDescription.binary,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "1st",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      var forDescription: UInt8 = 0
+      forDescription.binary[0] = true
+      testCustomStringConvertibleConformance(
+        of: forDescription.binary,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "1st",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 }
