@@ -207,7 +207,10 @@
 
       while process.isRunning {}  // @exempt(from: tests)
 
-      if output.hasSuffix(newLine) {
+      if output.scalars.last == "\n" {
+        output.scalars.removeLast()
+      }
+      if output.scalars.last == "\r" {  // @exempt(from: tests) Windows only.
         output.scalars.removeLast()
       }
 
