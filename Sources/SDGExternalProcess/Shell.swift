@@ -116,7 +116,7 @@
       reportProgress("$ " + commandString)
 
       let executionOption: String
-      if isCMD {
+      if isCMD {  // @exempt(from: tests) cmd is only on Windows.
         executionOption = "/c"
       } else {
         executionOption = "\u{2D}c"
