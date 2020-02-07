@@ -759,8 +759,6 @@ func adjustForWindows() {
   ]
   // #workaround(Unknown segmentation fault.)
   let impossibleTargets: Set<String> = [
-    "SDGBinaryData",
-    "SDGBinaryDataTests",
     "SDGCollation",
     "SDGCollationTests",
     "SDGConcurrency",
