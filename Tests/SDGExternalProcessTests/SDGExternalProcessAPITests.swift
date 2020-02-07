@@ -88,7 +88,17 @@ class SDGExternalProcessAPITests: TestCase {
 
       try forAllLegacyModes {
         _ = try Shell.default.run(command: ["ls"]).get()
-        _ = try Shell.default.run(command: ["pwd"], in: URL(fileURLWithPath: "/"), with: [:]).get()
+        let printWorkingDirectory: String
+        #if os(Windows)
+          printWorkingDirectory = "cd"
+        #else
+          printWorkingDirectory = "pwd"
+        #endif
+        _ = try Shell.default.run(
+          command: [printWorkingDirectory],
+          in: URL(fileURLWithPath: "/"),
+          with: [:]
+        ).get()
 
         let message = "Hello, world!"
         XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
