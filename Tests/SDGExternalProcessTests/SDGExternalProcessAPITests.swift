@@ -113,7 +113,7 @@ class SDGExternalProcessAPITests: TestCase {
           case .foundationError(let error):
             XCTFail(error.localizedDescription)
           case .processError(code: _, let output):
-            XCTAssert(output.contains("not found"), "\(error)")
+            XCTAssert(output.contains("not found") ∨ output.contains("not recognized"), "\(error)")
           }
         }
 
@@ -135,8 +135,8 @@ class SDGExternalProcessAPITests: TestCase {
         case .failure(let error):
           // Expected.
           _ = error.localizedDescription
-        case .success:
-          XCTFail("Shell should have thrown an error.")
+        case .success(let output):
+          XCTFail("Shell should have thrown an error. Output received:\n\(output)")
         }
       }
     #endif
