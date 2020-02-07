@@ -142,6 +142,22 @@ target_link_libraries("SDGCollections" PRIVATE
   "SDGMathematics"
 )
 
+add_library("SDGBinaryData"
+  "../../../Sources/SDGBinaryData/Data.swift"
+  "../../../Sources/SDGBinaryData/DataBinaryView.swift"
+  "../../../Sources/SDGBinaryData/DataStream.swift"
+  "../../../Sources/SDGBinaryData/UInt.swift"
+  "../../../Sources/SDGBinaryData/UIntBinaryView.swift"
+)
+set_target_properties("SDGBinaryData" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGBinaryData" PRIVATE -enable-testing)
+target_link_libraries("SDGBinaryData" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+)
+
 add_library("SDGText"
   "../../../Sources/SDGText/Array.swift"
   "../../../Sources/SDGText/CharacterSet.swift"
@@ -464,6 +480,21 @@ target_link_libraries("SDGXCTestUtilities" PRIVATE
   "SDGPersistence"
 )
 
+add_library("SDGBinaryDataTests"
+  "../../../Tests/SDGBinaryDataTests/SDGBinaryDataAPITests.swift"
+)
+set_target_properties("SDGBinaryDataTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGBinaryDataTests" PRIVATE -enable-testing)
+target_link_libraries("SDGBinaryDataTests" PRIVATE
+  "SDGBinaryData"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGLogic"
+  "SDGCornerstoneLocalizations"
+  "SDGMathematicsTestUtilities"
+  "SDGLocalizationTestUtilities"
+)
+
 add_library("SDGCalendarTests"
   "../../../Tests/SDGCalendarTests/SDGCalendarAPITests.swift"
   "../../../Tests/SDGCalendarTests/SDGCalendarInternalTests.swift"
@@ -601,6 +632,7 @@ add_executable(WindowsMain
   WindowsMain.swift
 )
 target_link_libraries(WindowsMain PRIVATE
+  "SDGBinaryDataTests"
   "SDGCalendarTests"
   "SDGCollectionsTests"
   "SDGControlFlowTests"

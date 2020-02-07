@@ -14,6 +14,7 @@
 
 import XCTest
 
+@testable import SDGBinaryDataTests
 @testable import SDGCalendarTests
 @testable import SDGCollectionsTests
 @testable import SDGControlFlowTests
@@ -22,6 +23,16 @@ import XCTest
 @testable import SDGMathematicsTests
 @testable import SDGPersistenceTests
 @testable import SDGTextTests
+
+extension SDGBinaryDataAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testData", testData),
+      ("testDataStream", testDataStream),
+      ("testUInt", testUInt),
+    ])
+  ]
+}
 
 extension SDGCalendarAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
@@ -268,6 +279,7 @@ extension SDGTextRegressionTests {
 }
 
 var tests = [XCTestCaseEntry]()
+tests += SDGBinaryDataAPITests.windowsTests
 tests += SDGCalendarAPITests.windowsTests
 tests += SDGCalendarInternalTests.windowsTests
 tests += SDGCalendarRegressionTests.windowsTests
