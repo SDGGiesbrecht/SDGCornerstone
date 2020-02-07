@@ -45,7 +45,11 @@ class SDGPersistenceRegressionTests: TestCase {
       var url = directory.appendingPathComponent("A Folder")
       url.appendPathComponent("A File")
       XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
-      XCTAssert(url.path.hasSuffix("A Folder/A File"))
+      #if os(Windows)
+        XCTAssert(url.path.hasSuffix(#"A Folder\A File"#))
+      #else
+        XCTAssert(url.path.hasSuffix("A Folder/A File"))
+      #endif
     }
   }
 }
