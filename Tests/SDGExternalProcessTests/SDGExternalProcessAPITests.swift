@@ -117,18 +117,20 @@ class SDGExternalProcessAPITests: TestCase {
           }
         }
 
-        let metacharacters = "(...)"
-        XCTAssertEqual(
-          try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
-          metacharacters
-        )
-        XCTAssert(
-          ¬(
-            try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get().contains(
-              "\u{22}"
+        #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
+          let metacharacters = "(...)"
+          XCTAssertEqual(
+            try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
+            metacharacters
+          )
+          XCTAssert(
+            ¬(
+              try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get().contains(
+                "\u{22}"
+              )
             )
           )
-        )
+        #endif
 
         _ = "\(Shell.default)"
         switch (Shell.default.wrappedInstance as! ExternalProcess).run(["..."]) {
