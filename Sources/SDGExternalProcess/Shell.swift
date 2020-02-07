@@ -77,6 +77,10 @@
 
     private let process: ExternalProcess
 
+    private var isCMD: Bool {
+      return process.executable.lastPathComponent == "cmd.exe"
+    }
+
     // MARK: - Usage
 
     /// Runs a command.
@@ -99,6 +103,9 @@
     ) -> Result<String, ExternalProcess.Error> {  // @exempt(from: tests)
 
       let commandString = command.map({ (argument: String) -> String in
+        if isCMD ∧ command.first == "echo" {  // @exempt(from: tests) cmd is only on Windows.
+          return argument
+        }
         if autoquote ∧ Shell.argumentNeedsQuotationMarks(argument) {
           return Shell.addQuotationMarks(argument)
         } else {
@@ -109,7 +116,7 @@
       reportProgress("$ " + commandString)
 
       let executionOption: String
-      if process.executable.lastPathComponent == "cmd.exe" {
+      if isCMD {
         executionOption = "/c"
       } else {
         executionOption = "\u{2D}c"
