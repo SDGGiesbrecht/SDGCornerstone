@@ -341,6 +341,27 @@ target_link_libraries("SDGExternalProcess" PRIVATE
   "SDGLocalization"
 )
 
+add_library("SDGPrecisionMathematics"
+  "../../../Sources/SDGPrecisionMathematics/HalvesView.swift"
+  "../../../Sources/SDGPrecisionMathematics/Integer.swift"
+  "../../../Sources/SDGPrecisionMathematics/RationalNumber.swift"
+  "../../../Sources/SDGPrecisionMathematics/UInt.swift"
+  "../../../Sources/SDGPrecisionMathematics/WholeNumber.swift"
+  "../../../Sources/SDGPrecisionMathematics/WholeNumberBinaryView.swift"
+  "../../../Sources/SDGPrecisionMathematics/WholeNumberBinaryViewIndex.swift"
+  "../../../Sources/SDGPrecisionMathematics/WholeNumberBinaryViewIndexDistance.swift"
+)
+set_target_properties("SDGPrecisionMathematics" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGPrecisionMathematics" PRIVATE -enable-testing)
+target_link_libraries("SDGPrecisionMathematics" PRIVATE
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGLocalization"
+  "SDGCornerstoneLocalizations"
+)
+
 add_library("SDGTesting"
   "../../../Sources/SDGTesting/PerformanceTest.swift"
   "../../../Sources/SDGTesting/Test.swift"
@@ -529,6 +550,27 @@ target_link_libraries("SDGExternalProcessTests" PRIVATE
   "SDGLogic"
 )
 
+add_library("SDGLocalizationTests"
+  "../../../Tests/SDGLocalizationTests/SDGLocalizationAPITests.swift"
+  "../../../Tests/SDGLocalizationTests/SDGLocalizationInternalTests.swift"
+)
+set_target_properties("SDGLocalizationTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGLocalizationTests" PRIVATE -enable-testing)
+target_link_libraries("SDGLocalizationTests" PRIVATE
+  "SDGLocalization"
+  "SDGLocalizationTestUtilities"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGPersistence"
+  "SDGPrecisionMathematics"
+  "SDGCornerstoneLocalizations"
+  "SDGPersistenceTestUtilities"
+)
+
 add_library("SDGLogicTests"
   "../../../Tests/SDGLogicTests/SDGLogicAPITests.swift"
 )
@@ -576,6 +618,23 @@ target_link_libraries("SDGPersistenceTests" PRIVATE
   "SDGLocalizationTestUtilities"
 )
 
+add_library("SDGPrecisionMathematicsTests"
+  "../../../Tests/SDGPrecisionMathematicsTests/SDGPrecisionMathematicsAPITests.swift"
+  "../../../Tests/SDGPrecisionMathematicsTests/SDGPrecisionMathematicsInternalTests.swift"
+)
+set_target_properties("SDGPrecisionMathematicsTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGPrecisionMathematicsTests" PRIVATE -enable-testing)
+target_link_libraries("SDGPrecisionMathematicsTests" PRIVATE
+  "SDGPrecisionMathematics"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGMathematics"
+  "SDGCornerstoneLocalizations"
+  "SDGMathematicsTestUtilities"
+  "SDGPersistenceTestUtilities"
+  "SDGLocalizationTestUtilities"
+)
+
 add_library("SDGTextTests"
   "../../../Tests/SDGTextTests/SDGTextAPITests.swift"
   "../../../Tests/SDGTextTests/SDGTextInternalTests.swift"
@@ -605,9 +664,11 @@ target_link_libraries(WindowsMain PRIVATE
   "SDGCollectionsTests"
   "SDGControlFlowTests"
   "SDGExternalProcessTests"
+  "SDGLocalizationTests"
   "SDGLogicTests"
   "SDGMathematicsTests"
   "SDGPersistenceTests"
+  "SDGPrecisionMathematicsTests"
   "SDGTextTests"
 )
 add_test(NAME WindowsMain COMMAND WindowsMain)

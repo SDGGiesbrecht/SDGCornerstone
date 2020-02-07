@@ -18,9 +18,11 @@ import XCTest
 @testable import SDGCollectionsTests
 @testable import SDGControlFlowTests
 @testable import SDGExternalProcessTests
+@testable import SDGLocalizationTests
 @testable import SDGLogicTests
 @testable import SDGMathematicsTests
 @testable import SDGPersistenceTests
+@testable import SDGPrecisionMathematicsTests
 @testable import SDGTextTests
 
 extension SDGCalendarAPITests {
@@ -149,6 +151,38 @@ extension SDGExternalProcessRegressionTests {
   ]
 }
 
+extension SDGLocalizationAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testAngle", testAngle),
+      ("testAnyLocalization", testAnyLocalization),
+      ("testBool", testBool),
+      ("testCasing", testCasing),
+      ("testCustomStringConvertible", testCustomStringConvertible),
+      ("testLocalization", testLocalization),
+      ("testLocalizationData", testLocalizationData),
+      ("testLocalizationRelationships", testLocalizationRelationships),
+      ("testLocalizationSetting", testLocalizationSetting),
+      ("testRange", testRange),
+      ("testRationalArithmetic", testRationalArithmetic),
+      ("testStateData", testStateData),
+      ("testUserFacingDynamicText", testUserFacingDynamicText),
+      ("testWholeArithmetic", testWholeArithmetic),
+    ])
+  ]
+}
+
+extension SDGLocalizationInternalTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testContentLocalization", testContentLocalization),
+      ("testInterfaceLocalization", testInterfaceLocalization),
+      ("testLocalizationSetting", testLocalizationSetting),
+      ("testWholeNumber", testWholeNumber),
+    ])
+  ]
+}
+
 extension SDGLogicAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
@@ -220,6 +254,25 @@ extension SDGPersistenceRegressionTests {
   ]
 }
 
+extension SDGPrecisionMathematicsAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testInteger", testInteger),
+      ("testRationalNumber", testRationalNumber),
+      ("testWholeNumber", testWholeNumber),
+    ])
+  ]
+}
+
+extension SDGPrecisionMathematicsInternalTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testUIntHalvesView", testUIntHalvesView),
+      ("testWholeNumberBinaryView", testWholeNumberBinaryView),
+    ])
+  ]
+}
+
 extension SDGTextAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
@@ -276,11 +329,15 @@ tests += SDGCollectionsRegressionTests.windowsTests
 tests += SDGControlFlowAPITests.windowsTests
 tests += SDGExternalProcessAPITests.windowsTests
 tests += SDGExternalProcessRegressionTests.windowsTests
+tests += SDGLocalizationAPITests.windowsTests
+tests += SDGLocalizationInternalTests.windowsTests
 tests += SDGLogicAPITests.windowsTests
 tests += SDGMathematicsAPITests.windowsTests
 tests += SDGMathematicsRegressionTests.windowsTests
 tests += SDGPersistenceAPITests.windowsTests
 tests += SDGPersistenceRegressionTests.windowsTests
+tests += SDGPrecisionMathematicsAPITests.windowsTests
+tests += SDGPrecisionMathematicsInternalTests.windowsTests
 tests += SDGTextAPITests.windowsTests
 tests += SDGTextInternalTests.windowsTests
 tests += SDGTextRegressionTests.windowsTests
