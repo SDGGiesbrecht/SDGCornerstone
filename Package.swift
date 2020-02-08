@@ -768,7 +768,6 @@ func adjustForWindows() {
     "SDGGeometryTests",
     "SDGGeometryTestUtilities",
     "SDGLocalizationTests",
-    "SDGPrecisionMathematics",
     "SDGPrecisionMathematicsTests",
     "SDGRandomization",
     "SDGRandomizationTests",
