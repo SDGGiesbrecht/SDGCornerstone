@@ -582,27 +582,6 @@ target_link_libraries("SDGExternalProcessTests" PRIVATE
   "SDGLogic"
 )
 
-add_library("SDGLocalizationTests"
-  "../../../Tests/SDGLocalizationTests/SDGLocalizationAPITests.swift"
-  "../../../Tests/SDGLocalizationTests/SDGLocalizationInternalTests.swift"
-)
-set_target_properties("SDGLocalizationTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
-target_compile_options("SDGLocalizationTests" PRIVATE -enable-testing)
-target_link_libraries("SDGLocalizationTests" PRIVATE
-  "SDGLocalization"
-  "SDGLocalizationTestUtilities"
-  "SDGTesting"
-  "SDGXCTestUtilities"
-  "SDGLogic"
-  "SDGMathematics"
-  "SDGCollections"
-  "SDGText"
-  "SDGPersistence"
-  "SDGPrecisionMathematics"
-  "SDGCornerstoneLocalizations"
-  "SDGPersistenceTestUtilities"
-)
-
 add_library("SDGLogicTests"
   "../../../Tests/SDGLogicTests/SDGLogicAPITests.swift"
 )
@@ -698,7 +677,6 @@ target_link_libraries(WindowsMain PRIVATE
   "SDGCollectionsTests"
   "SDGControlFlowTests"
   "SDGExternalProcessTests"
-  "SDGLocalizationTests"
   "SDGLogicTests"
   "SDGMathematicsTests"
   "SDGPersistenceTests"
