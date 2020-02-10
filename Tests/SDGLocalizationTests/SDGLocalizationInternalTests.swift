@@ -113,10 +113,12 @@ class SDGLocalizationInternalTests: TestCase {
       }
     #endif
     if expectOperatingSystemLanguage {
-      XCTAssertNotNil(
-        LocalizationSetting.osSystemWidePreferences.value.as([String].self),
-        "Failed to detect operating system localization setting."
-      )
+      #if !os(Windows)  // #workaround(Not implemented yet.)
+        XCTAssertNotNil(
+          LocalizationSetting.osSystemWidePreferences.value.as([String].self),
+          "Failed to detect operating system localization setting."
+        )
+      #endif
     }
 
     LocalizationSetting.setSystemWidePreferences(to: nil)
@@ -137,32 +139,34 @@ class SDGLocalizationInternalTests: TestCase {
   }
 
   func testWholeNumber() {
-    var list = ""
-    for number in 1...2 {
-      for genre in [.masculin, .féminin] as [_GenreGrammatical] {
-        for nombre in [.singular, .plural] as [GrammaticalNumber] {
-          print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      var list = ""
+      for number in 1...2 {
+        for genre in [.masculin, .féminin] as [_GenreGrammatical] {
+          for nombre in [.singular, .plural] as [GrammaticalNumber] {
+            print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
+          }
         }
       }
-    }
-    compare(
-      list,
-      against: testSpecificationDirectory().appendingPathComponent("Ordinals.txt"),
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    var numerals = ""
-    for number in [1000, 1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999, 10_000] {
-      print(number.inDigits(), to: &numerals)
-      print(number._σεΕλληνικούςΑριθμούς(), to: &numerals)
-      print(number._σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false), to: &numerals)
-      print(number._בספרות־עבריות(), to: &numerals)
-      print(number.ספרות־עבריות(גרשיים: false), to: &numerals)
-      print("", to: &numerals)
-    }
-    compare(
-      numerals,
-      against: testSpecificationDirectory().appendingPathComponent("Numerals.txt"),
-      overwriteSpecificationInsteadOfFailing: false
-    )
+      compare(
+        list,
+        against: testSpecificationDirectory().appendingPathComponent("Ordinals.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      var numerals = ""
+      for number in [1000, 1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999, 10_000] {
+        print(number.inDigits(), to: &numerals)
+        print(number._σεΕλληνικούςΑριθμούς(), to: &numerals)
+        print(number._σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false), to: &numerals)
+        print(number._בספרות־עבריות(), to: &numerals)
+        print(number.ספרות־עבריות(גרשיים: false), to: &numerals)
+        print("", to: &numerals)
+      }
+      compare(
+        numerals,
+        against: testSpecificationDirectory().appendingPathComponent("Numerals.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 }
