@@ -343,20 +343,22 @@ class SDGLocalizationAPITests: TestCase {
   }
 
   func testStateData() {
-    for state in StateData.list {
-      _ = state.code
-      _ = state.flag
-      _ = state.isolatedName(in: InterfaceLocalization.englishCanada)
-    }
-    XCTAssertNotNil(StateData(code: "CA"))
-    XCTAssertNotNil(StateData(flag: "🇨🇦"))
-    XCTAssertNil(StateData(code: "N/A"))
-    XCTAssertNil(StateData(flag: "N/A"))
-    enum UnsupportedLocalization: String, Localization {
-      case unknown = "und"
-      static var fallbackLocalization: UnsupportedLocalization = .unknown
-    }
-    XCTAssertNil(StateData(code: "CA")?.isolatedName(in: UnsupportedLocalization.unknown))
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      for state in StateData.list {
+        _ = state.code
+        _ = state.flag
+        _ = state.isolatedName(in: InterfaceLocalization.englishCanada)
+      }
+      XCTAssertNotNil(StateData(code: "CA"))
+      XCTAssertNotNil(StateData(flag: "🇨🇦"))
+      XCTAssertNil(StateData(code: "N/A"))
+      XCTAssertNil(StateData(flag: "N/A"))
+      enum UnsupportedLocalization: String, Localization {
+        case unknown = "und"
+        static var fallbackLocalization: UnsupportedLocalization = .unknown
+      }
+      XCTAssertNil(StateData(code: "CA")?.isolatedName(in: UnsupportedLocalization.unknown))
+    #endif
   }
 
   func testUserFacingDynamicText() {

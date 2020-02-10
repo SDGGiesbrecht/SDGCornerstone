@@ -23,13 +23,13 @@ import SDGXCTestUtilities
 class SDGPrecisionMathematicsInternalTests: TestCase {
 
   func testUIntHalvesView() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
       XCTAssertEqual((0 as UInt).halves.index(before: 1), 0)
     #endif
   }
 
   func testWholeNumberBinaryView() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
       XCTAssertEqual(
         (
           WholeNumber.BinaryView.Index(digit: 1, bit: 0)
