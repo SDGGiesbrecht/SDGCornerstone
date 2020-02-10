@@ -88,44 +88,49 @@ class SDGLocalizationAPITests: TestCase {
     static let fallbackLocalization: LocalizationExample = .englishUnitedKingdom
   }
   func testLocalization() {
-    XCTAssertEqual(LocalizationExample(exactly: "fr")?.code, "fr")
-    XCTAssertEqual(LocalizationExample(exactly: "en\u{2D}GB"), .englishUnitedKingdom)
-    XCTAssertNil(LocalizationExample(exactly: "en\u{2D}"))
-    XCTAssertEqual(LocalizationExample(reasonableMatchFor: "en\u{2D}US"), .englishUnitedKingdom)
-    XCTAssertEqual(LocalizationExample(reasonableMatchFor: "fr\u{2D}FR"), .français)
-    XCTAssertNil(LocalizationExample(reasonableMatchFor: "el"))
-    XCTAssertNil(LocalizationExample(reasonableMatchFor: "zxx"))
-    XCTAssertEqual(
-      LocalizationExample(reasonableMatchFor: "cmn\u{2D}Hant\u{2D}"),
-      .chineseTraditionalTaiwan
-    )
-    XCTAssertEqual(
-      LocalizationExample(reasonableMatchFor: "cmn\u{2D}TW\u{2D}"),
-      .chineseTraditionalTaiwan
-    )
-    XCTAssertEqual(LocalizationExample(reasonableMatchFor: "zsm"), .malaysianLatin)
-    XCTAssertEqual(LocalizationExample(reasonableMatchFor: "zh"), .chineseTraditionalTaiwan)
-    XCTAssertNil(LocalizationExample(reasonableMatchFor: "ar"))
-    XCTAssertNil(LocalizationExample(reasonableMatchFor: "arb"))
-    XCTAssertEqual(LocalizationExample(reasonableMatchFor: "arb\u{2D}Arab"), nil)
-    XCTAssertEqual(LocalizationExample(reasonableMatchFor: "nb"), .norwegian)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      XCTAssertEqual(LocalizationExample(exactly: "fr")?.code, "fr")
+      XCTAssertEqual(LocalizationExample(exactly: "en\u{2D}GB"), .englishUnitedKingdom)
+      XCTAssertNil(LocalizationExample(exactly: "en\u{2D}"))
+      XCTAssertEqual(LocalizationExample(reasonableMatchFor: "en\u{2D}US"), .englishUnitedKingdom)
+      XCTAssertEqual(LocalizationExample(reasonableMatchFor: "fr\u{2D}FR"), .français)
+      XCTAssertNil(LocalizationExample(reasonableMatchFor: "el"))
+      XCTAssertNil(LocalizationExample(reasonableMatchFor: "zxx"))
+      XCTAssertEqual(
+        LocalizationExample(reasonableMatchFor: "cmn\u{2D}Hant\u{2D}"),
+        .chineseTraditionalTaiwan
+      )
+      XCTAssertEqual(
+        LocalizationExample(reasonableMatchFor: "cmn\u{2D}TW\u{2D}"),
+        .chineseTraditionalTaiwan
+      )
+      XCTAssertEqual(LocalizationExample(reasonableMatchFor: "zsm"), .malaysianLatin)
+      XCTAssertEqual(LocalizationExample(reasonableMatchFor: "zh"), .chineseTraditionalTaiwan)
+      XCTAssertNil(LocalizationExample(reasonableMatchFor: "ar"))
+      XCTAssertNil(LocalizationExample(reasonableMatchFor: "arb"))
+      XCTAssertEqual(LocalizationExample(reasonableMatchFor: "arb\u{2D}Arab"), nil)
+      XCTAssertEqual(LocalizationExample(reasonableMatchFor: "nb"), .norwegian)
 
-    XCTAssertEqual(LocalizationExample.français.icon, "🇫🇷FR")
+      XCTAssertEqual(LocalizationExample.français.icon, "🇫🇷FR")
 
-    XCTAssertNil(LocalizationExample(icon: ""))
-    XCTAssertNil(LocalizationExample(icon: "xyz?"))
+      XCTAssertNil(LocalizationExample(icon: ""))
+      XCTAssertNil(LocalizationExample(icon: "xyz?"))
 
-    XCTAssertEqual(LocalizationExample.icon(for: "ca\u{2D}AD"), "🇦🇩CA")
-    XCTAssertEqual(LocalizationExample.code(for: "🇦🇩CA"), "ca\u{2D}AD")
+      XCTAssertEqual(LocalizationExample.icon(for: "ca\u{2D}AD"), "🇦🇩CA")
+      XCTAssertEqual(LocalizationExample.code(for: "🇦🇩CA"), "ca\u{2D}AD")
 
-    XCTAssertEqual(LocalizationExample.עברית.textDirection, .rightToLeftTopToBottom)
-    XCTAssertEqual(LocalizationExample.englishUnitedKingdom.textDirection, .leftToRightTopToBottom)
-    XCTAssertEqual(
-      LocalizationExample.chineseTraditionalTaiwan.textDirection,
-      .topToBottomRightToLeft
-    )
+      XCTAssertEqual(LocalizationExample.עברית.textDirection, .rightToLeftTopToBottom)
+      XCTAssertEqual(
+        LocalizationExample.englishUnitedKingdom.textDirection,
+        .leftToRightTopToBottom
+      )
+      XCTAssertEqual(
+        LocalizationExample.chineseTraditionalTaiwan.textDirection,
+        .topToBottomRightToLeft
+      )
 
-    _ = LocalizationExample.resolved()
+      _ = LocalizationExample.resolved()
+    #endif
   }
 
   func testLocalizationData() {
