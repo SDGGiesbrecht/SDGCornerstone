@@ -45,6 +45,16 @@ add_library("SDGLogic"
 set_target_properties("SDGLogic" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGLogic" PRIVATE -enable-testing)
 
+add_library("SDGConcurrency"
+  "../../../Sources/SDGConcurrency/RunLoop.swift"
+)
+set_target_properties("SDGConcurrency" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGConcurrency" PRIVATE -enable-testing)
+target_link_libraries("SDGConcurrency" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+)
+
 add_library("SDGMathematics"
   "../../../Sources/SDGMathematics/Angle.swift"
   "../../../Sources/SDGMathematics/BitField.swift"
@@ -158,6 +168,36 @@ target_link_libraries("SDGBinaryData" PRIVATE
   "SDGCollections"
 )
 
+add_library("SDGGeometry"
+  "../../../Sources/SDGGeometry/Angle.swift"
+  "../../../Sources/SDGGeometry/BezierPath.swift"
+  "../../../Sources/SDGGeometry/CGPoint.swift"
+  "../../../Sources/SDGGeometry/CGVector.swift"
+  "../../../Sources/SDGGeometry/TwoDimensionalPoint.swift"
+  "../../../Sources/SDGGeometry/TwoDimensionalPointProtocol.swift"
+  "../../../Sources/SDGGeometry/TwoDimensionalVector.swift"
+  "../../../Sources/SDGGeometry/TwoDimensionalVectorProtocol.swift"
+)
+set_target_properties("SDGGeometry" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGGeometry" PRIVATE -enable-testing)
+target_link_libraries("SDGGeometry" PRIVATE
+  "SDGControlFlow"
+  "SDGMathematics"
+)
+
+add_library("SDGRandomization"
+  "../../../Sources/SDGRandomization/Bool.swift"
+  "../../../Sources/SDGRandomization/CyclicalNumberGenerator.swift"
+  "../../../Sources/SDGRandomization/PseudorandomNumberGenerator.swift"
+)
+set_target_properties("SDGRandomization" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGRandomization" PRIVATE -enable-testing)
+target_link_libraries("SDGRandomization" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+)
+
 add_library("SDGText"
   "../../../Sources/SDGText/Array.swift"
   "../../../Sources/SDGText/CharacterSet.swift"
@@ -214,6 +254,28 @@ target_link_libraries("SDGPersistence" PRIVATE
   "SDGMathematics"
   "SDGCollections"
   "SDGText"
+)
+
+add_library("SDGCollation"
+  "../../../Sources/SDGCollation/CollationCacheEntry.swift"
+  "../../../Sources/SDGCollation/CollationElement.swift"
+  "../../../Sources/SDGCollation/CollationIndex.swift"
+  "../../../Sources/SDGCollation/CollationLevel.swift"
+  "../../../Sources/SDGCollation/CollationOrder.swift"
+  "../../../Sources/SDGCollation/Resources.swift"
+  "../../../Sources/SDGCollation/Tailoring/CollationTailoringAnchor.swift"
+  "../../../Sources/SDGCollation/Tailoring/OperatorFunctions.swift"
+  "../../../Sources/SDGCollation/Tailoring/Operators.swift"
+)
+set_target_properties("SDGCollation" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCollation" PRIVATE -enable-testing)
+target_link_libraries("SDGCollation" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGPersistence"
 )
 
 add_library("SDGLocalization"
@@ -488,6 +550,43 @@ target_link_libraries("SDGMathematicsTestUtilities" PRIVATE
   "SDGPersistenceTestUtilities"
 )
 
+add_library("SDGGeometryTestUtilities"
+  "../../../Sources/SDGGeometryTestUtilities/TwoDimensionalPointProtocol.swift"
+  "../../../Sources/SDGGeometryTestUtilities/TwoDimensionalVectorProtocol.swift"
+)
+set_target_properties("SDGGeometryTestUtilities" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGGeometryTestUtilities" PRIVATE -enable-testing)
+target_link_libraries("SDGGeometryTestUtilities" PRIVATE
+  "SDGGeometry"
+  "SDGTesting"
+  "SDGMathematicsTestUtilities"
+)
+
+add_library("SDGRandomizationTestUtilities"
+  "../../../Sources/SDGRandomizationTestUtilities/Randomizer.swift"
+)
+set_target_properties("SDGRandomizationTestUtilities" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGRandomizationTestUtilities" PRIVATE -enable-testing)
+target_link_libraries("SDGRandomizationTestUtilities" PRIVATE
+  "SDGRandomization"
+  "SDGTesting"
+)
+
+add_library("SDGVersioning"
+  "../../../Sources/SDGVersioning/Version.swift"
+)
+set_target_properties("SDGVersioning" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGVersioning" PRIVATE -enable-testing)
+target_link_libraries("SDGVersioning" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGLocalization"
+  "SDGCornerstoneLocalizations"
+)
+
 add_library("SDGXCTestUtilities"
   "../../../Sources/SDGXCTestUtilities/TestCase.swift"
   "../../../Sources/SDGXCTestUtilities/XCTAssert.swift"
@@ -536,6 +635,18 @@ target_link_libraries("SDGCalendarTests" PRIVATE
   "SDGLocalizationTestUtilities"
 )
 
+add_library("SDGCollationTests"
+  "../../../Tests/SDGCollationTests/SDGCollationAPITests.swift"
+  "../../../Tests/SDGCollationTests/SDGCollationLanguageTests.swift"
+)
+set_target_properties("SDGCollationTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCollationTests" PRIVATE -enable-testing)
+target_link_libraries("SDGCollationTests" PRIVATE
+  "SDGText"
+  "SDGCollation"
+  "SDGXCTestUtilities"
+)
+
 add_library("SDGCollectionsTests"
   "../../../Tests/SDGCollectionsTests/AnyForwardCollection.swift"
   "../../../Tests/SDGCollectionsTests/LegacyMode.swift"
@@ -556,6 +667,17 @@ target_link_libraries("SDGCollectionsTests" PRIVATE
   "SDGLocalizationTestUtilities"
 )
 
+add_library("SDGConcurrencyTests"
+  "../../../Tests/SDGConcurrencyTests/SDGConcurrencyAPITests.swift"
+)
+set_target_properties("SDGConcurrencyTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGConcurrencyTests" PRIVATE -enable-testing)
+target_link_libraries("SDGConcurrencyTests" PRIVATE
+  "SDGConcurrency"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+)
+
 add_library("SDGControlFlowTests"
   "../../../Tests/SDGControlFlowTests/Examples.swift"
   "../../../Tests/SDGControlFlowTests/SDGControlFlowAPITests.swift"
@@ -565,6 +687,32 @@ target_compile_options("SDGControlFlowTests" PRIVATE -enable-testing)
 target_link_libraries("SDGControlFlowTests" PRIVATE
   "SDGControlFlow"
   "SDGTesting"
+  "SDGXCTestUtilities"
+)
+
+add_library("SDGCornerstoneDocumentationExampleTests"
+  "../../../Tests/SDGCornerstoneDocumentationExampleTests/DateExampleTests.swift"
+  "../../../Tests/SDGCornerstoneDocumentationExampleTests/FunctionAnalysisExampleTests.swift"
+  "../../../Tests/SDGCornerstoneDocumentationExampleTests/MiscellaneousExampleTests.swift"
+  "../../../Tests/SDGCornerstoneDocumentationExampleTests/ReadMeExampleTests.swift"
+  "../../../Tests/SDGCornerstoneDocumentationExampleTests/StrictInterpolationExampleTests.swift"
+)
+set_target_properties("SDGCornerstoneDocumentationExampleTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGCornerstoneDocumentationExampleTests" PRIVATE -enable-testing)
+target_link_libraries("SDGCornerstoneDocumentationExampleTests" PRIVATE
+  "SDGControlFlow"
+  "SDGLogic"
+  "SDGMathematics"
+  "SDGCollections"
+  "SDGText"
+  "SDGPersistence"
+  "SDGRandomization"
+  "SDGLocalization"
+  "SDGCalendar"
+  "SDGConcurrency"
+  "SDGPrecisionMathematics"
+  "SDGExternalProcess"
+  "SDGPersistenceTestUtilities"
   "SDGXCTestUtilities"
 )
 
@@ -580,6 +728,20 @@ target_link_libraries("SDGExternalProcessTests" PRIVATE
   "SDGTesting"
   "SDGXCTestUtilities"
   "SDGLogic"
+)
+
+add_library("SDGGeometryTests"
+  "../../../Tests/SDGGeometryTests/SDGGeometryAPITests.swift"
+)
+set_target_properties("SDGGeometryTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGGeometryTests" PRIVATE -enable-testing)
+target_link_libraries("SDGGeometryTests" PRIVATE
+  "SDGGeometry"
+  "SDGGeometryTestUtilities"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGMathematics"
+  "SDGMathematicsTestUtilities"
 )
 
 add_library("SDGLocalizationTests"
@@ -668,6 +830,20 @@ target_link_libraries("SDGPrecisionMathematicsTests" PRIVATE
   "SDGLocalizationTestUtilities"
 )
 
+add_library("SDGRandomizationTests"
+  "../../../Tests/SDGRandomizationTests/SDGRandomizationAPITests.swift"
+)
+set_target_properties("SDGRandomizationTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGRandomizationTests" PRIVATE -enable-testing)
+target_link_libraries("SDGRandomizationTests" PRIVATE
+  "SDGRandomization"
+  "SDGRandomizationTestUtilities"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGLogic"
+  "SDGMathematics"
+)
+
 add_library("SDGTextTests"
   "../../../Tests/SDGTextTests/SDGTextAPITests.swift"
   "../../../Tests/SDGTextTests/SDGTextInternalTests.swift"
@@ -689,21 +865,41 @@ target_link_libraries("SDGTextTests" PRIVATE
   "SDGLocalizationTestUtilities"
 )
 
+add_library("SDGVersioningTests"
+  "../../../Tests/SDGVersioningTests/SDGVersioningAPITests.swift"
+  "../../../Tests/SDGVersioningTests/SDGVersioningRegressionTests.swift"
+)
+set_target_properties("SDGVersioningTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+target_compile_options("SDGVersioningTests" PRIVATE -enable-testing)
+target_link_libraries("SDGVersioningTests" PRIVATE
+  "SDGVersioning"
+  "SDGTesting"
+  "SDGXCTestUtilities"
+  "SDGCornerstoneLocalizations"
+  "SDGLocalizationTestUtilities"
+)
+
 add_executable(WindowsMain
   WindowsMain.swift
 )
 target_link_libraries(WindowsMain PRIVATE
   "SDGBinaryDataTests"
   "SDGCalendarTests"
+  "SDGCollationTests"
   "SDGCollectionsTests"
+  "SDGConcurrencyTests"
   "SDGControlFlowTests"
+  "SDGCornerstoneDocumentationExampleTests"
   "SDGExternalProcessTests"
+  "SDGGeometryTests"
   "SDGLocalizationTests"
   "SDGLogicTests"
   "SDGMathematicsTests"
   "SDGPersistenceTests"
   "SDGPrecisionMathematicsTests"
+  "SDGRandomizationTests"
   "SDGTextTests"
+  "SDGVersioningTests"
 )
 add_test(NAME WindowsMain COMMAND WindowsMain)
 set_property(TEST WindowsMain PROPERTY ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
