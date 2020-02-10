@@ -87,15 +87,17 @@ class SDGLocalizationInternalTests: TestCase {
   }
 
   func testInterfaceLocalization() {
-    for localization in InterfaceLocalization.allCases {
-      XCTAssertNotNil(ContentLocalization(exactly: localization.code))
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      for localization in InterfaceLocalization.allCases {
+        XCTAssertNotNil(ContentLocalization(exactly: localization.code))
 
-      if let icon = localization.icon {
-        XCTAssertEqual(localization, InterfaceLocalization(icon: icon))
-      } else {
-        XCTFail("\(localization.code) has no icon.")
+        if let icon = localization.icon {
+          XCTAssertEqual(localization, InterfaceLocalization(icon: icon))
+        } else {
+          XCTFail("\(localization.code) has no icon.")
+        }
       }
-    }
+    #endif
   }
 
   func testLocalizationSetting() {
