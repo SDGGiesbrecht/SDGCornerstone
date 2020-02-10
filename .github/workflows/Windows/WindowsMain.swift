@@ -22,6 +22,7 @@ import XCTest
 @testable import SDGLogicTests
 @testable import SDGMathematicsTests
 @testable import SDGPersistenceTests
+@testable import SDGPrecisionMathematicsTests
 @testable import SDGTextTests
 
 extension SDGBinaryDataAPITests {
@@ -231,6 +232,25 @@ extension SDGPersistenceRegressionTests {
   ]
 }
 
+extension SDGPrecisionMathematicsAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testInteger", testInteger),
+      ("testRationalNumber", testRationalNumber),
+      ("testWholeNumber", testWholeNumber),
+    ])
+  ]
+}
+
+extension SDGPrecisionMathematicsInternalTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testUIntHalvesView", testUIntHalvesView),
+      ("testWholeNumberBinaryView", testWholeNumberBinaryView),
+    ])
+  ]
+}
+
 extension SDGTextAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
@@ -293,6 +313,8 @@ tests += SDGMathematicsAPITests.windowsTests
 tests += SDGMathematicsRegressionTests.windowsTests
 tests += SDGPersistenceAPITests.windowsTests
 tests += SDGPersistenceRegressionTests.windowsTests
+tests += SDGPrecisionMathematicsAPITests.windowsTests
+tests += SDGPrecisionMathematicsInternalTests.windowsTests
 tests += SDGTextAPITests.windowsTests
 tests += SDGTextInternalTests.windowsTests
 tests += SDGTextRegressionTests.windowsTests
