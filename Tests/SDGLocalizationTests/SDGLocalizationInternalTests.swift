@@ -27,6 +27,7 @@ import SDGXCTestUtilities
 class SDGLocalizationInternalTests: TestCase {
 
   func testContentLocalization() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
     for localization in ContentLocalization.allCases {
 
       // Make sure its group is defined.
@@ -81,6 +82,7 @@ class SDGLocalizationInternalTests: TestCase {
         }
       }
     }
+    #endif
   }
 
   func testInterfaceLocalization() {
