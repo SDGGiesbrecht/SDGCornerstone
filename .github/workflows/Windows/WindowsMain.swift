@@ -19,6 +19,7 @@ import XCTest
 @testable import SDGCollectionsTests
 @testable import SDGControlFlowTests
 @testable import SDGExternalProcessTests
+@testable import SDGLocalizationTests
 @testable import SDGLogicTests
 @testable import SDGMathematicsTests
 @testable import SDGPersistenceTests
@@ -157,6 +158,38 @@ extension SDGExternalProcessRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testDelayedShellOutput", testDelayedShellOutput),
+    ])
+  ]
+}
+
+extension SDGLocalizationAPITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testAngle", testAngle),
+      ("testAnyLocalization", testAnyLocalization),
+      ("testBool", testBool),
+      ("testCasing", testCasing),
+      ("testCustomStringConvertible", testCustomStringConvertible),
+      ("testLocalization", testLocalization),
+      ("testLocalizationData", testLocalizationData),
+      ("testLocalizationRelationships", testLocalizationRelationships),
+      ("testLocalizationSetting", testLocalizationSetting),
+      ("testRange", testRange),
+      ("testRationalArithmetic", testRationalArithmetic),
+      ("testStateData", testStateData),
+      ("testUserFacingDynamicText", testUserFacingDynamicText),
+      ("testWholeArithmetic", testWholeArithmetic),
+    ])
+  ]
+}
+
+extension SDGLocalizationInternalTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testContentLocalization", testContentLocalization),
+      ("testInterfaceLocalization", testInterfaceLocalization),
+      ("testLocalizationSetting", testLocalizationSetting),
+      ("testWholeNumber", testWholeNumber),
     ])
   ]
 }
@@ -308,6 +341,8 @@ tests += SDGCollectionsRegressionTests.windowsTests
 tests += SDGControlFlowAPITests.windowsTests
 tests += SDGExternalProcessAPITests.windowsTests
 tests += SDGExternalProcessRegressionTests.windowsTests
+tests += SDGLocalizationAPITests.windowsTests
+tests += SDGLocalizationInternalTests.windowsTests
 tests += SDGLogicAPITests.windowsTests
 tests += SDGMathematicsAPITests.windowsTests
 tests += SDGMathematicsRegressionTests.windowsTests
