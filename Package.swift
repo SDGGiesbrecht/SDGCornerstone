@@ -759,19 +759,6 @@ func adjustForWindows() {
   ]
   // #workaround(Unknown segmentation fault.)
   let impossibleTargets: Set<String> = [
-    "SDGCollation",
-    "SDGCollationTests",
-    "SDGConcurrency",
-    "SDGConcurrencyTests",
-    "SDGCornerstoneDocumentationExampleTests",
-    "SDGGeometry",
-    "SDGGeometryTests",
-    "SDGGeometryTestUtilities",
-    "SDGRandomization",
-    "SDGRandomizationTests",
-    "SDGRandomizationTestUtilities",
-    "SDGVersioning",
-    "SDGVersioningTests"
   ]
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
