@@ -234,14 +234,19 @@ class SDGLocalizationAPITests: TestCase {
   }
 
   func testRange() {
-    XCTAssertEqual(((0..<1) as Range).inInequalityNotation({ $0.inDigits() }), "0 ≤ x < 1")
-    XCTAssertEqual(((0..<1) as CountableRange).inInequalityNotation({ $0.inDigits() }), "0 ≤ x < 1")
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      XCTAssertEqual(((0..<1) as Range).inInequalityNotation({ $0.inDigits() }), "0 ≤ x < 1")
+      XCTAssertEqual(
+        ((0..<1) as CountableRange).inInequalityNotation({ $0.inDigits() }),
+        "0 ≤ x < 1"
+      )
 
-    XCTAssertEqual(((0...1) as ClosedRange).inInequalityNotation({ $0.inDigits() }), "0 ≤ x ≤ 1")
-    XCTAssertEqual(
-      ((0...1) as CountableClosedRange).inInequalityNotation({ $0.inDigits() }),
-      "0 ≤ x ≤ 1"
-    )
+      XCTAssertEqual(((0...1) as ClosedRange).inInequalityNotation({ $0.inDigits() }), "0 ≤ x ≤ 1")
+      XCTAssertEqual(
+        ((0...1) as CountableClosedRange).inInequalityNotation({ $0.inDigits() }),
+        "0 ≤ x ≤ 1"
+      )
+    #endif
   }
 
   func testRationalArithmetic() {
