@@ -166,69 +166,71 @@ class SDGLocalizationAPITests: TestCase {
   }
 
   func testLocalizationSetting() {
-    let english = LocalizationSetting(orderOfPrecedence: ["en", "fr"])
-    XCTAssertEqual(english.resolved() as LocalizationExample, .englishUnitedKingdom)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      let english = LocalizationSetting(orderOfPrecedence: ["en", "fr"])
+      XCTAssertEqual(english.resolved() as LocalizationExample, .englishUnitedKingdom)
 
-    let unrecognized = LocalizationSetting(orderOfPrecedence: [["zxx"]])
-    XCTAssertEqual(unrecognized.resolved() as LocalizationExample, .englishUnitedKingdom)
+      let unrecognized = LocalizationSetting(orderOfPrecedence: [["zxx"]])
+      XCTAssertEqual(unrecognized.resolved() as LocalizationExample, .englishUnitedKingdom)
 
-    english.do {
-      XCTAssertEqual(LocalizationSetting.current.value, english)
-    }
-    let français = LocalizationSetting(orderOfPrecedence: ["fr"])
-    français.do {
-      XCTAssertEqual(LocalizationSetting.current.value, français)
-    }
+      english.do {
+        XCTAssertEqual(LocalizationSetting.current.value, english)
+      }
+      let français = LocalizationSetting(orderOfPrecedence: ["fr"])
+      français.do {
+        XCTAssertEqual(LocalizationSetting.current.value, français)
+      }
 
-    let multilingual = LocalizationSetting(orderOfPrecedence: [["en", "fr"]])
-    var englishUsed = false
-    var françaisUtilisé = false
-    multilingual.do {
-      for _ in 1...100 where ¬englishUsed ∨ ¬françaisUtilisé {
-        switch LocalizationSetting.current.value.resolved() as LocalizationExample {
-        case .englishUnitedKingdom:
-          englishUsed = true
-        case .français:
-          françaisUtilisé = true
-        default:
-          break
+      let multilingual = LocalizationSetting(orderOfPrecedence: [["en", "fr"]])
+      var englishUsed = false
+      var françaisUtilisé = false
+      multilingual.do {
+        for _ in 1...100 where ¬englishUsed ∨ ¬françaisUtilisé {
+          switch LocalizationSetting.current.value.resolved() as LocalizationExample {
+          case .englishUnitedKingdom:
+            englishUsed = true
+          case .français:
+            françaisUtilisé = true
+          default:
+            break
+          }
         }
       }
-    }
-    XCTAssert(englishUsed)
-    XCTAssert(françaisUtilisé)
+      XCTAssert(englishUsed)
+      XCTAssert(françaisUtilisé)
 
-    LocalizationSetting.setApplicationPreferences(to: nil)
+      LocalizationSetting.setApplicationPreferences(to: nil)
 
-    LocalizationSetting.setApplicationPreferences(
-      to: LocalizationSetting(orderOfPrecedence: ["en"])
-    )
-    XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as LocalizationExample,
-      .englishUnitedKingdom
-    )
-    LocalizationSetting.setApplicationPreferences(
-      to: LocalizationSetting(orderOfPrecedence: ["fr"])
-    )
-    XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
-
-    LocalizationSetting.setApplicationPreferences(to: nil)
-
-    let codes = FormatLocalization.allCases.map { $0.code }
-    let stabilizedSetting = LocalizationSetting(orderOfPrecedence: [codes])
-    FileManager.default.delete(.cache)
-    let first: FormatLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
-    for _ in 1...10 {
-      XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
-    }
-
-    LocalizationSetting(orderOfPrecedence: [] as [String]).do {
-      // Localization must be able to handle the complete absence of preferences.
-      XCTAssertEqual(
-        LocalizationExample.resolved(),
-        LocalizationExample.fallbackLocalization
+      LocalizationSetting.setApplicationPreferences(
+        to: LocalizationSetting(orderOfPrecedence: ["en"])
       )
-    }
+      XCTAssertEqual(
+        LocalizationSetting.current.value.resolved() as LocalizationExample,
+        .englishUnitedKingdom
+      )
+      LocalizationSetting.setApplicationPreferences(
+        to: LocalizationSetting(orderOfPrecedence: ["fr"])
+      )
+      XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
+
+      LocalizationSetting.setApplicationPreferences(to: nil)
+
+      let codes = FormatLocalization.allCases.map { $0.code }
+      let stabilizedSetting = LocalizationSetting(orderOfPrecedence: [codes])
+      FileManager.default.delete(.cache)
+      let first: FormatLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
+      for _ in 1...10 {
+        XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
+      }
+
+      LocalizationSetting(orderOfPrecedence: [] as [String]).do {
+        // Localization must be able to handle the complete absence of preferences.
+        XCTAssertEqual(
+          LocalizationExample.resolved(),
+          LocalizationExample.fallbackLocalization
+        )
+      }
+    #endif
   }
 
   func testRange() {
