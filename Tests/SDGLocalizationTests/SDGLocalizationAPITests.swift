@@ -134,22 +134,24 @@ class SDGLocalizationAPITests: TestCase {
   }
 
   func testLocalizationData() {
-    for localization in LocalizationData.list {
-      _ = localization.code
-      _ = localization.icon
-      _ = localization.isolatedName(in: InterfaceLocalization.englishCanada)
-    }
-    XCTAssertNotNil(LocalizationData(code: "en\u{2D}CA"))
-    XCTAssertNotNil(LocalizationData(icon: "🇨🇦EN"))
-    XCTAssertNil(LocalizationData(code: "N/A"))
-    XCTAssertNil(LocalizationData(icon: "N/A"))
-    enum UnsupportedLocalization: String, Localization {
-      case unknown = "und"
-      static var fallbackLocalization: UnsupportedLocalization = .unknown
-    }
-    XCTAssertNil(
-      LocalizationData(code: "en\u{2D}CA")?.isolatedName(in: UnsupportedLocalization.unknown)
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      for localization in LocalizationData.list {
+        _ = localization.code
+        _ = localization.icon
+        _ = localization.isolatedName(in: InterfaceLocalization.englishCanada)
+      }
+      XCTAssertNotNil(LocalizationData(code: "en\u{2D}CA"))
+      XCTAssertNotNil(LocalizationData(icon: "🇨🇦EN"))
+      XCTAssertNil(LocalizationData(code: "N/A"))
+      XCTAssertNil(LocalizationData(icon: "N/A"))
+      enum UnsupportedLocalization: String, Localization {
+        case unknown = "und"
+        static var fallbackLocalization: UnsupportedLocalization = .unknown
+      }
+      XCTAssertNil(
+        LocalizationData(code: "en\u{2D}CA")?.isolatedName(in: UnsupportedLocalization.unknown)
+      )
+    #endif
   }
 
   func testLocalizationRelationships() {
