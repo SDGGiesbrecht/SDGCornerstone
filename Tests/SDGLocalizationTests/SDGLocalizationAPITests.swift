@@ -362,40 +362,41 @@ class SDGLocalizationAPITests: TestCase {
   }
 
   func testUserFacingDynamicText() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      let text = UserFacingDynamic<StrictString, LocalizationExample, (Int, Int)>(
+        { localization, numbers in
 
-    let text = UserFacingDynamic<StrictString, LocalizationExample, (Int, Int)>(
-      { localization, numbers in
+          switch localization {
+          case .englishUnitedKingdom:
+            return StrictString("Numbers \(numbers.0.inDigits()) and \(numbers.1.inDigits())")
+          case .français:
+            return StrictString("Numéros \(numbers.0.inDigits()) et \(numbers.1.inDigits())")
+          default:
+            return StrictString("\(numbers.0.inDigits()), \(numbers.1.inDigits())")
+          }
+        })
+      XCTAssertEqual(text.resolved(for: .englishUnitedKingdom, using: (0, 1)), "Numbers 0 and 1")
+      XCTAssertEqual(text.resolved(for: .français, using: (0, 1)), "Numéros 0 et 1")
+      XCTAssert(¬text.resolved(using: (0, 1)).isEmpty)
+      let simplified = text.static(using: (1, 2))
+      XCTAssertEqual(simplified.resolved(for: .englishUnitedKingdom), "Numbers 1 and 2")
+
+      let simple = UserFacing<StrictString, LocalizationExample>({ localization in
 
         switch localization {
         case .englishUnitedKingdom:
-          return StrictString("Numbers \(numbers.0.inDigits()) and \(numbers.1.inDigits())")
+          return StrictString("Hello, world!")
         case .français:
-          return StrictString("Numéros \(numbers.0.inDigits()) et \(numbers.1.inDigits())")
+          return StrictString("Bonjour, le monde !")
         default:
-          return StrictString("\(numbers.0.inDigits()), \(numbers.1.inDigits())")
+          return "..."
         }
       })
-    XCTAssertEqual(text.resolved(for: .englishUnitedKingdom, using: (0, 1)), "Numbers 0 and 1")
-    XCTAssertEqual(text.resolved(for: .français, using: (0, 1)), "Numéros 0 et 1")
-    XCTAssert(¬text.resolved(using: (0, 1)).isEmpty)
-    let simplified = text.static(using: (1, 2))
-    XCTAssertEqual(simplified.resolved(for: .englishUnitedKingdom), "Numbers 1 and 2")
+      XCTAssertEqual(simple.resolved(for: .français), "Bonjour, le monde !")
+      XCTAssert(¬simple.resolved().isEmpty)
 
-    let simple = UserFacing<StrictString, LocalizationExample>({ localization in
-
-      switch localization {
-      case .englishUnitedKingdom:
-        return StrictString("Hello, world!")
-      case .français:
-        return StrictString("Bonjour, le monde !")
-      default:
-        return "..."
-      }
-    })
-    XCTAssertEqual(simple.resolved(for: .français), "Bonjour, le monde !")
-    XCTAssert(¬simple.resolved().isEmpty)
-
-    _ = simplified.wrappedInstance
+      _ = simplified.wrappedInstance
+    #endif
   }
 
   func testWholeArithmetic() {
