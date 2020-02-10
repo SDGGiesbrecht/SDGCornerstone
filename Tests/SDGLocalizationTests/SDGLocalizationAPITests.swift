@@ -29,18 +29,20 @@ import SDGXCTestUtilities
 class SDGLocalizationAPITests: TestCase {
 
   func testAngle() {
-    testCustomStringConvertibleConformance(
-      of: 90°,
-      localizations: FormatLocalization.self,
-      uniqueTestName: "90°",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    testCustomStringConvertibleConformance(
-      of: −90°,
-      localizations: FormatLocalization.self,
-      uniqueTestName: "−90°",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testCustomStringConvertibleConformance(
+        of: 90°,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "90°",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      testCustomStringConvertibleConformance(
+        of: −90°,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "−90°",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testAnyLocalization() {
