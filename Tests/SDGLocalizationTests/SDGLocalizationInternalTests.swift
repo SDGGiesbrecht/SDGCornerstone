@@ -28,60 +28,61 @@ class SDGLocalizationInternalTests: TestCase {
 
   func testContentLocalization() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-    for localization in ContentLocalization.allCases {
+      for localization in ContentLocalization.allCases {
 
-      // Make sure its group is defined.
-      let components: [String] = localization.code.components(separatedBy: "\u{2D}")
+        // Make sure its group is defined.
+        let components: [String] = localization.code.components(separatedBy: "\u{2D}")
 
-      if let group = ContentLocalization.groups[components.first!] {
-        XCTAssert(
-          group.map({ $0.countries }).joined().contains(components.last!),
-          "\(localization.code) is missing from its group."
+        if let group = ContentLocalization.groups[components.first!] {
+          XCTAssert(
+            group.map({ $0.countries }).joined().contains(components.last!),
+            "\(localization.code) is missing from its group."
+          )
+        } else {
+          XCTFail("\(localization.code) has no group defined.")
+        }
+
+        let abbreviatedCode = (localization.code.components(separatedBy: "\u{2D}") as [String])
+          .first!
+        XCTAssertNotNil(ContentLocalization(reasonableMatchFor: abbreviatedCode))
+
+        // Make sure it has an icon.
+        if let icon = localization.icon {
+          // Make sure it can be recreated from the icon.
+          XCTAssertEqual(localization, ContentLocalization(definedIcon: icon))
+        } else {
+          XCTFail("\(localization.code) has no icon.")
+        }
+
+        testCustomStringConvertibleConformance(
+          of: localization,
+          localizations: InterfaceLocalization.self,
+          uniqueTestName: localization.icon!,
+          overwriteSpecificationInsteadOfFailing: false
         )
-      } else {
-        XCTFail("\(localization.code) has no group defined.")
+
+        XCTAssert(
+          ContentLocalization.codeSet() ⊇ InterfaceLocalization.codeSet(),
+          "Content should support at least every localization the interface elements do."
+        )
       }
 
-      let abbreviatedCode = (localization.code.components(separatedBy: "\u{2D}") as [String]).first!
-      XCTAssertNotNil(ContentLocalization(reasonableMatchFor: abbreviatedCode))
+      // Make sure each group member is defined.
+      for (languageCode, scripts) in ContentLocalization.groups {
+        for (scriptCode, countries) in scripts {
+          for country in countries {
+            var orthography = languageCode
+            if scripts.count ≠ 1 {
+              orthography += "\u{2D}" + scriptCode
+            }
+            let code = orthography + "\u{2D}" + country
 
-      // Make sure it has an icon.
-      if let icon = localization.icon {
-        // Make sure it can be recreated from the icon.
-        XCTAssertEqual(localization, ContentLocalization(definedIcon: icon))
-      } else {
-        XCTFail("\(localization.code) has no icon.")
-      }
-
-      testCustomStringConvertibleConformance(
-        of: localization,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: localization.icon!,
-        overwriteSpecificationInsteadOfFailing: false
-      )
-
-      XCTAssert(
-        ContentLocalization.codeSet() ⊇ InterfaceLocalization.codeSet(),
-        "Content should support at least every localization the interface elements do."
-      )
-    }
-
-    // Make sure each group member is defined.
-    for (languageCode, scripts) in ContentLocalization.groups {
-      for (scriptCode, countries) in scripts {
-        for country in countries {
-          var orthography = languageCode
-          if scripts.count ≠ 1 {
-            orthography += "\u{2D}" + scriptCode
-          }
-          let code = orthography + "\u{2D}" + country
-
-          if country ≠ "419" {
-            XCTAssertNotNil(ContentLocalization(exactly: code), "\(code) is not defined.")
+            if country ≠ "419" {
+              XCTAssertNotNil(ContentLocalization(exactly: code), "\(code) is not defined.")
+            }
           }
         }
       }
-    }
     #endif
   }
 
