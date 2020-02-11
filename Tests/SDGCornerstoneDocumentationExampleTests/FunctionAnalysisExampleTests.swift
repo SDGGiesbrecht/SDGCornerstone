@@ -86,12 +86,14 @@ class FunctionAnalysisExampleTests: TestCase {
   }
 
   func testUndefinedCaseTwoForFindLocalMaximum() {
-    // @example(findLocalMaximumUndefined2)
-    // This is undefined:
-    let maximum = findLocalMaximum(near: 0) { $0 ∈ −10...10 ? 1 : −(|$0|) }
-    // @endExample
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(findLocalMaximumUndefined2)
+      // This is undefined:
+      let maximum = findLocalMaximum(near: 0) { $0 ∈ −10...10 ? 1 : −(|$0|) }
+      // @endExample
 
-    XCTAssert(maximum ∈ −10...10)
+      XCTAssert(maximum ∈ −10...10)
+    #endif
   }
 
   func testUndefinedCaseTwoForFindLocalMinimum() {
