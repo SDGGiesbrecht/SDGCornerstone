@@ -131,10 +131,9 @@ class MiscellaneousExampleTests: TestCase {
         frequencies.mutateValue(for: rollDie()) { ($0 ?? 0) + 1 }
       }
       print(
-        frequencies.keys.sorted().map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" })
-          .joined(
-            separator: "\n"
-          )
+        frequencies.keys.sorted()
+          .map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" })
+          .joined(separator: "\n")
       )
       // Prints, for example:
       //
@@ -152,23 +151,26 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testGregorianYear() {
-    // @example(gregorianYear)
-    let adOne = GregorianYear(1)
-    let oneBC = GregorianYear(−1)
-    let oneYear = Int(1)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(gregorianYear)
+      let adOne = GregorianYear(1)
+      let oneBC = GregorianYear(−1)
+      let oneYear = Int(1)
 
-    XCTAssertEqual(adOne − oneYear, oneBC)
-    XCTAssertEqual(adOne − oneBC, oneYear)
-    // @endExample
+      XCTAssertEqual(adOne − oneYear, oneBC)
+      XCTAssertEqual(adOne − oneBC, oneYear)
+      // @endExample
 
-    // @example(gregorianischesJahr)
-    let einsNChr = GregorianischesJahr(1)
-    let einsVChr = GregorianischesJahr(−1)
-    let einJahr = Int(1)
+      // @example(gregorianischesJahr)
+      let einsNChr = GregorianischesJahr(1)
+      let einsVChr = GregorianischesJahr(−1)
+      let einJahr = Int(1)
 
-    XCTFeststellenGleich(einsNChr − einJahr, einsVChr)
-    XCTFeststellenGleich(einsNChr − einsVChr, einJahr)
-    // @endExample
+      XCTFeststellenGleich(einsNChr − einJahr, einsVChr)
+      XCTFeststellenGleich(einsNChr − einsVChr, einJahr)
+      // @endExample
+      _ = 0  // Prevents SwiftFormat from breaking the example.
+    #endif
   }
 
   func testIncreasing() {

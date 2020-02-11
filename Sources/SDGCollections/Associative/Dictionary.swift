@@ -31,9 +31,9 @@ extension Dictionary {
   ///   frequencies.mutateValue(for: rollDie()) { ($0 ?? 0) + 1 }
   /// }
   /// print(
-  ///   frequencies.keys.sorted().map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" }).joined(
-  ///     separator: "\n"
-  ///   )
+  ///   frequencies.keys.sorted()
+  ///     .map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" })
+  ///     .joined(separator: "\n")
   /// )
   /// // Prints, for example:
   /// //
