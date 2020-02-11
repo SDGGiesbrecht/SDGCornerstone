@@ -97,26 +97,26 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testDecreasing() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(decrease)
+      func rollDie() -> Int {
+        return Int.random(in: 1...6)
+      }
 
-    // @example(decrease)
-    func rollDie() -> Int {
-      return Int.random(in: 1...6)
-    }
+      let numberOfRolls = 5
+      var lowestRoll = 6
+      for _ in 1...numberOfRolls {
+        lowestRoll.decrease(to: rollDie())
+      }
+      print(
+        "After rolling the die \(numberOfRolls.inDigits()) time(s), the lowest roll was \(lowestRoll.inDigits())."
+      )
+      // Prints, for example, “After rolling the die 5 time(s), the lowest roll was 2.”
 
-    let numberOfRolls = 5
-    var lowestRoll = 6
-    for _ in 1...numberOfRolls {
-      lowestRoll.decrease(to: rollDie())
-    }
-    print(
-      "After rolling the die \(numberOfRolls.inDigits()) time(s), the lowest roll was \(lowestRoll.inDigits())."
-    )
-    // Prints, for example, “After rolling the die 5 time(s), the lowest roll was 2.”
-
-    // In each iteration of the for loop, a new number is rolled, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.
-    // @endExample
-
-    XCTAssert(lowestRoll ∈ 1...6)
+      // In each iteration of the for loop, a new number is rolled, and if it is less than lowestRoll’s existing value, decrease(to:) changes lowestRoll to reflect the new low.
+      // @endExample
+      XCTAssert(lowestRoll ∈ 1...6)
+    #endif
   }
 
   func testDictionaryMutation() {
