@@ -120,34 +120,35 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testDictionaryMutation() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(mutateValue)
+      func rollDie() -> Int {
+        return Int.random(in: 1...6)
+      }
 
-    // @example(mutateValue)
-    func rollDie() -> Int {
-      return Int.random(in: 1...6)
-    }
-
-    var frequencies = [Int: Int]()
-    for _ in 1...100 {
-      frequencies.mutateValue(for: rollDie()) { ($0 ?? 0) + 1 }
-    }
-    print(
-      frequencies.keys.sorted().map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" }).joined(
-        separator: "\n"
+      var frequencies = [Int: Int]()
+      for _ in 1...100 {
+        frequencies.mutateValue(for: rollDie()) { ($0 ?? 0) + 1 }
+      }
+      print(
+        frequencies.keys.sorted().map({ "\($0.inDigits()): \(frequencies[$0]!.inDigits())" })
+          .joined(
+            separator: "\n"
+          )
       )
-    )
-    // Prints, for example:
-    //
-    // 1: 21
-    // 2: 8
-    // 3: 29
-    // 4: 12
-    // 5: 20
-    // 6: 10
+      // Prints, for example:
+      //
+      // 1: 21
+      // 2: 8
+      // 3: 29
+      // 4: 12
+      // 5: 20
+      // 6: 10
 
-    // In this example, the die is rolled 100 times, and each time the tally for the outcome is incremented. After the for loop, the dictionary contains the frequencies (values) for each outcome (keys).
-    // @endExample
-
-    XCTAssert(frequencies.count ≤ 6)
+      // In this example, the die is rolled 100 times, and each time the tally for the outcome is incremented. After the for loop, the dictionary contains the frequencies (values) for each outcome (keys).
+      // @endExample
+      XCTAssert(frequencies.count ≤ 6)
+    #endif
   }
 
   func testGregorianYear() {
