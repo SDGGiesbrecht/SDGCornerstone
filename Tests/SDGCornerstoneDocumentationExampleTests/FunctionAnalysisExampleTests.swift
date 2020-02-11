@@ -75,12 +75,14 @@ class FunctionAnalysisExampleTests: TestCase {
   }
 
   func testUndefinedCaseOneForFindLocalMinimum() {
-    // @example(findLocalMinimumUndefined1)
-    // This is undefined:
-    let minimum = findLocalMinimum(near: 0) { $0 ∈ −10...10 ? −($0 ↑ 2) : $0 ↑ 2 }
-    // @endExample
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(findLocalMinimumUndefined1)
+      // This is undefined:
+      let minimum = findLocalMinimum(near: 0) { $0 ∈ −10...10 ? −($0 ↑ 2) : $0 ↑ 2 }
+      // @endExample
 
-    XCTAssert(minimum ∈ Set([−10, 10]))
+      XCTAssert(minimum ∈ Set([−10, 10]))
+    #endif
   }
 
   func testUndefinedCaseTwoForFindLocalMaximum() {
