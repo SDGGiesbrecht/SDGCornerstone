@@ -34,7 +34,8 @@ class MiscellaneousExampleTests: TestCase {
       let x = −1
       let y = |x|
       XCTAssertEqual(y, 1)
-    // @endExample
+      // @endExample
+      _ = 0  // Prevents SwiftFormat from breaking the example.
     #endif
   }
 
@@ -52,16 +53,19 @@ class MiscellaneousExampleTests: TestCase {
       XCTAssertEqual(Bool.random(using: &alternating), true)
       XCTAssertEqual(Bool.random(using: &alternating), false)
       XCTAssertEqual(Bool.random(using: &alternating), true)
-    // ...
-    // @endExample
+      // ...
+      // @endExample
+      _ = 0  // Prevents SwiftFormat from breaking the example.
     #endif
   }
 
   func testApproximation() {
-
-    // @example(≈)
-    XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
-    // @endExample
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(≈)
+      XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
+      // @endExample
+      _ = 0  // Prevents SwiftFormat from breaking the example.
+    #endif
   }
 
   func testBackwardsSearchDifferences1() {

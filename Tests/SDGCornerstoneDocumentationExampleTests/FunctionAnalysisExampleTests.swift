@@ -45,7 +45,8 @@ class FunctionAnalysisExampleTests: TestCase {
       // No longer decreasing, so stop. 1 was the local minimum.
 
       XCTAssertEqual(approximateSquareRootOf120, 11)
-    // @endExample
+      // @endExample
+      _ = 0  // Prevents SwiftFormat from breaking the example.
     #endif
   }
 
