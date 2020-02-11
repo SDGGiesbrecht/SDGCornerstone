@@ -22,29 +22,31 @@ import SDGXCTestUtilities
 class FunctionAnalysisExampleTests: TestCase {
 
   func testFindLocalMinimum() {
-    // @example(findLocalMinimum)
-    let approximateSquareRootOf120 = findLocalMinimum(near: 10) { (guess: Int) -> Int in
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(findLocalMinimum)
+      let approximateSquareRootOf120 = findLocalMinimum(near: 10) { (guess: Int) -> Int in
 
-      // Find the square of the guess.
-      let square = guess × guess
+        // Find the square of the guess.
+        let square = guess × guess
 
-      // Determine its proximity to 120.
-      return |(square − 120)|
-    }
+        // Determine its proximity to 120.
+        return |(square − 120)|
+      }
 
-    // First iteration (determined by “near: 10”):
-    // 10 → 20
+      // First iteration (determined by “near: 10”):
+      // 10 → 20
 
-    // Second iteration:
-    // 11 → 1
-    // Decreasing, so continue.
+      // Second iteration:
+      // 11 → 1
+      // Decreasing, so continue.
 
-    // Third iteration:
-    // 12 → 24
-    // No longer decreasing, so stop. 1 was the local minimum.
+      // Third iteration:
+      // 12 → 24
+      // No longer decreasing, so stop. 1 was the local minimum.
 
-    XCTAssertEqual(approximateSquareRootOf120, 11)
+      XCTAssertEqual(approximateSquareRootOf120, 11)
     // @endExample
+    #endif
   }
 
   func doNotTestPreconditionViolationForFindLocalMinimum() {
