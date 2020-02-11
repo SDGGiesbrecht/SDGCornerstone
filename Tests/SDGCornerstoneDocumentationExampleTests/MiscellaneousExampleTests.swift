@@ -29,12 +29,13 @@ import SDGXCTestUtilities
 class MiscellaneousExampleTests: TestCase {
 
   func testAbsoluteValue() {
-
-    // @example(absoluteValue)
-    let x = −1
-    let y = |x|
-    XCTAssertEqual(y, 1)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(absoluteValue)
+      let x = −1
+      let y = |x|
+      XCTAssertEqual(y, 1)
     // @endExample
+    #endif
   }
 
   func testAlternatingBooleans() {
