@@ -69,7 +69,6 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testBackwardsSearchDifferences1() {
-
     // @example(lastMatchBackwardsDifferences1)
     let collection = [0, 0, 0, 0, 0]
     let pattern = [0, 0]
@@ -82,17 +81,19 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testBackwardsSearchDifferences2() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(lastMatchBackwardsDifferences2)
+      let collection = [0, 0, 1]
+      let pattern = RepetitionPattern([0], count: 1..<Int.max, consumption: .lazy) + [1]
 
-    // @example(lastMatchBackwardsDifferences2)
-    let collection = [0, 0, 1]
-    let pattern = RepetitionPattern([0], count: 1..<Int.max, consumption: .lazy) + [1]
+      XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1..<3)
+      // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
 
-    XCTAssertEqual(collection.lastMatch(for: pattern)?.range, 1..<3)
-    // (Backwards, the pattern has already matched the 1, so the lazy consumption stops after the first 0 it encounteres.)
-
-    XCTAssertEqual(collection.matches(for: pattern).last?.range, 0..<3)
-    // (Forwards, the lazy consumption keeps consuming zeros until the pattern can be completed with a one.)
-    // @endExample
+      XCTAssertEqual(collection.matches(for: pattern).last?.range, 0..<3)
+      // (Forwards, the lazy consumption keeps consuming zeros until the pattern can be completed with a one.)
+      // @endExample
+      _ = 0  // Prevents SwiftFormat from breaking the example.
+    #endif
   }
 
   func testDecreasing() {
