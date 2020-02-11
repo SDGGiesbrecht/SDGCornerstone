@@ -39,20 +39,22 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testAlternatingBooleans() {
-    // @example(alternatingBooleans)
-    var alternating = CyclicalNumberGenerator([
-      Bool.falseRandomizerValue,
-      Bool.trueRandomizerValue
-    ])
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(alternatingBooleans)
+      var alternating = CyclicalNumberGenerator([
+        Bool.falseRandomizerValue,
+        Bool.trueRandomizerValue
+      ])
 
-    XCTAssertEqual(Bool.random(using: &alternating), false)
-    XCTAssertEqual(Bool.random(using: &alternating), true)
-    XCTAssertEqual(Bool.random(using: &alternating), false)
-    XCTAssertEqual(Bool.random(using: &alternating), true)
-    XCTAssertEqual(Bool.random(using: &alternating), false)
-    XCTAssertEqual(Bool.random(using: &alternating), true)
+      XCTAssertEqual(Bool.random(using: &alternating), false)
+      XCTAssertEqual(Bool.random(using: &alternating), true)
+      XCTAssertEqual(Bool.random(using: &alternating), false)
+      XCTAssertEqual(Bool.random(using: &alternating), true)
+      XCTAssertEqual(Bool.random(using: &alternating), false)
+      XCTAssertEqual(Bool.random(using: &alternating), true)
     // ...
     // @endExample
+    #endif
   }
 
   func testApproximation() {
