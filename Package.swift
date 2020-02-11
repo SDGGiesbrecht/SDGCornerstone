@@ -757,25 +757,16 @@ func adjustForWindows() {
     // SwiftNumerics
     "Real"
   ]
-  // #workaround(Unknown segmentation fault.)
-  let impossibleTargets: Set<String> = [
-  ]
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
       switch dependency {
-      case ._targetItem(let name), ._byNameItem(let name):
-        return impossibleTargets.contains(name)
       case ._productItem(let name, _):
         return impossibleProducts.contains(name)
+      default:
+        return false
       }
     })
   }
-  package.targets.removeAll(where: { target in
-    return impossibleTargets.contains(target.name)
-  })
-  package.products.removeAll(where: { product in
-    impossibleTargets.contains(product.name)
-  })
 }
 #if os(Windows)
   adjustForWindows()
