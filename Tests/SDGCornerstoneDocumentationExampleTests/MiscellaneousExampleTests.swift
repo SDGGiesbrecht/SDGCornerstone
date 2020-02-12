@@ -216,17 +216,19 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testNestingLevel() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(nestingLevel)
+      let equation = "2(3x − (y + 4)) = z"
+      let nestingLevel = equation.scalars.firstNestingLevel(
+        startingWith: "(".scalars,
+        endingWith: ")".scalars
+      )!
 
-    // @example(nestingLevel)
-    let equation = "2(3x − (y + 4)) = z"
-    let nestingLevel = equation.scalars.firstNestingLevel(
-      startingWith: "(".scalars,
-      endingWith: ")".scalars
-    )!
-
-    XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
-    XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
-    // @endExample
+      XCTAssertEqual(String(nestingLevel.container.contents), "(3x − (y + 4))")
+      XCTAssertEqual(String(nestingLevel.contents.contents), "3x − (y + 4)")
+      // @endExample
+      _ = 0  // Prevents SwiftFormat from breaking the example.
+    #endif
   }
 
   func testPatternSwitch() {
