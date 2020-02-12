@@ -197,21 +197,22 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testIntegerLiterals() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      typealias Integer = SDGPrecisionMathematics.Integer
 
-    typealias Integer = SDGPrecisionMathematics.Integer
+      // @example(integerLiterals)
+      let negativeMillion: Integer = −1_000_000
+      let negativeDecillion: Integer = "−1 000 000 000 000 000 000 000 000 000 000 000"
+      let negativeYobiMultiplier = Integer(
+        binary:
+          "−1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
+      )
+      // @endExample
 
-    // @example(integerLiterals)
-    let negativeMillion: Integer = −1_000_000
-    let negativeDecillion: Integer = "−1 000 000 000 000 000 000 000 000 000 000 000"
-    let negativeYobiMultiplier = Integer(
-      binary:
-        "−1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
-    )
-    // @endExample
-
-    XCTAssertEqual(−(1000 ↑ 2), negativeMillion)
-    XCTAssertEqual(−(1000 ↑ 11), negativeDecillion)
-    XCTAssertEqual(−(Integer(binary: "1 0000000000") ↑ 8), negativeYobiMultiplier)
+      XCTAssertEqual(−(1000 ↑ 2), negativeMillion)
+      XCTAssertEqual(−(1000 ↑ 11), negativeDecillion)
+      XCTAssertEqual(−(Integer(binary: "1 0000000000") ↑ 8), negativeYobiMultiplier)
+    #endif
   }
 
   func testNestingLevel() {
