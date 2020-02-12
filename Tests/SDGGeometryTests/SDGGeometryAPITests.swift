@@ -39,22 +39,24 @@ class SDGGeometryAPITests: TestCase {
   }
 
   func testPoint() {
-    testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
-    #if canImport(CoreGraphics)
-      testTwoDimensionalPointProtocolConformance(CGPoint.self)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
+      #if canImport(CoreGraphics)
+        testTwoDimensionalPointProtocolConformance(CGPoint.self)
+      #endif
+
+      typealias Point = TwoDimensionalPoint<Double>
+      XCTAssertEqual(Point(1, 1) − Point.Vector(Δx: 1, Δy: 1), Point(0, 0))
+      XCTAssertEqual(Point(0, 0) + Point.Vector(Δx: 1, Δy: 1), Point(1, 1))
+      XCTAssertEqual(Point(1, 1) − Point(0, 0), Point.Vector(Δx: 1, Δy: 1))
+
+      let point = Point(1.21, 1.21).rounded(.down, toMultipleOf: 0.2)
+      XCTAssert(point.x ≈ 1.2)
+      XCTAssert(point.y ≈ 1.2)
+      let anotherPoint = point.rounded(.down)
+      XCTAssert(anotherPoint.x ≈ 1)
+      XCTAssert(anotherPoint.y ≈ 1)
     #endif
-
-    typealias Point = TwoDimensionalPoint<Double>
-    XCTAssertEqual(Point(1, 1) − Point.Vector(Δx: 1, Δy: 1), Point(0, 0))
-    XCTAssertEqual(Point(0, 0) + Point.Vector(Δx: 1, Δy: 1), Point(1, 1))
-    XCTAssertEqual(Point(1, 1) − Point(0, 0), Point.Vector(Δx: 1, Δy: 1))
-
-    let point = Point(1.21, 1.21).rounded(.down, toMultipleOf: 0.2)
-    XCTAssert(point.x ≈ 1.2)
-    XCTAssert(point.y ≈ 1.2)
-    let anotherPoint = point.rounded(.down)
-    XCTAssert(anotherPoint.x ≈ 1)
-    XCTAssert(anotherPoint.y ≈ 1)
   }
 
   func testVector() {
