@@ -31,7 +31,8 @@ import SDGMathematics
 ///
 /// // Die meisten anderen Typen müssen ausdrücklich in einer bestimmten Textform umgewandelt werden:
 /// let zahl = GZahl.zufällige(in: 0...1000)
-/// streng = "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
+/// streng =
+///   "„\(zahl.inRömischerZahlschrift())“ bedeutet das selbe wie „\(zahl.inZahlzeichen())“."
 ///
 /// // Die Beschreibungen des Swift‐Übersetzers können immer noch ausdrücklich verlangt werden:
 /// let etwas: Any = fehlerHolen()
