@@ -25,6 +25,7 @@ import SDGXCTestUtilities
 class SDGVersioningAPITests: TestCase {
 
   func testVersion() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
     testCustomStringConvertibleConformance(
       of: Version(1, 2, 3),
       localizations: InterfaceLocalization.self,
@@ -48,5 +49,6 @@ class SDGVersioningAPITests: TestCase {
     XCTAssertEqual(Version(1, 2, 3).string(droppingEmptyPatch: true), "1.2.3")
     XCTAssert(Version(1, 2, 3) < Version(2, 2, 3))
     XCTAssert(Version(1, 2, 3) < Version(1, 2, 4))
+    #endif
   }
 }
