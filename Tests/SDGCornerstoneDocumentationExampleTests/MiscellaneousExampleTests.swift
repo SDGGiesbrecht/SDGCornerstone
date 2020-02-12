@@ -295,18 +295,19 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testWholeNumberLiterals() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(wholeNumberLiterals)
+      let million: WholeNumber = 1_000_000
+      let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
+      let yobiMultiplier = WholeNumber(
+        binary:
+          "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
+      )
+      // @endExample
 
-    // @example(wholeNumberLiterals)
-    let million: WholeNumber = 1_000_000
-    let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"
-    let yobiMultiplier = WholeNumber(
-      binary:
-        "1 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000"
-    )
-    // @endExample
-
-    XCTAssertEqual(1000 ↑ 2, million)
-    XCTAssertEqual(1000 ↑ 11, decillion)
-    XCTAssertEqual(WholeNumber(binary: "1 0000000000") ↑ 8, yobiMultiplier)
+      XCTAssertEqual(1000 ↑ 2, million)
+      XCTAssertEqual(1000 ↑ 11, decillion)
+      XCTAssertEqual(WholeNumber(binary: "1 0000000000") ↑ 8, yobiMultiplier)
+    #endif
   }
 }
