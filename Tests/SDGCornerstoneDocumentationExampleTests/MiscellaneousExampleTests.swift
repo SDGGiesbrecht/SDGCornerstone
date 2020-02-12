@@ -174,26 +174,26 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testIncreasing() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // @example(increase)
+      func rollDie() -> Int {
+        return Int.random(in: 1...6)
+      }
 
-    // @example(increase)
-    func rollDie() -> Int {
-      return Int.random(in: 1...6)
-    }
+      let numberOfRolls = 5
+      var highestRoll = 1
+      for _ in 1...numberOfRolls {
+        highestRoll.increase(to: rollDie())
+      }
+      print(
+        "After rolling the die \(numberOfRolls.inDigits()) time(s), the highest roll was \(highestRoll.inDigits())."
+      )
+      // Prints, for example, “After rolling the die 5 time(s), the highest roll was 4.”
 
-    let numberOfRolls = 5
-    var highestRoll = 1
-    for _ in 1...numberOfRolls {
-      highestRoll.increase(to: rollDie())
-    }
-    print(
-      "After rolling the die \(numberOfRolls.inDigits()) time(s), the highest roll was \(highestRoll.inDigits())."
-    )
-    // Prints, for example, “After rolling the die 5 time(s), the highest roll was 4.”
-
-    // In each iteration of the for loop, a new number is rolled, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.
-    // @endExample
-
-    XCTAssert(highestRoll ∈ 1...6)
+      // In each iteration of the for loop, a new number is rolled, and if it is greater than highestRoll’s existing value, increase(to:) changes highestRoll to reflect the new high.
+      // @endExample
+      XCTAssert(highestRoll ∈ 1...6)
+    #endif
   }
 
   func testIntegerLiterals() {
