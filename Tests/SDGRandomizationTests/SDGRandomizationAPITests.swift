@@ -49,9 +49,11 @@ class SDGRandomizationAPITests: TestCase {
   }
 
   func testCyclicalNumberGenerator() {
-    testRandomNumberGeneratorConformance(
-      of: CyclicalNumberGenerator([0, 1, 6, 7, 11, 12, UInt64.max])
-    )
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      testRandomNumberGeneratorConformance(
+        of: CyclicalNumberGenerator([0, 1, 6, 7, 11, 12, UInt64.max])
+      )
+    #endif
   }
 
   func testMeasurement() {
