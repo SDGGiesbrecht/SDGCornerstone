@@ -64,33 +64,35 @@ class SDGRandomizationAPITests: TestCase {
   }
 
   func testPseudorandomNumberGenerator() {
-    var randomizer = PseudorandomNumberGenerator(seed: PseudorandomNumberGenerator.generateSeed())
-    testRandomNumberGeneratorConformance(of: randomizer)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      var randomizer = PseudorandomNumberGenerator(seed: PseudorandomNumberGenerator.generateSeed())
+      testRandomNumberGeneratorConformance(of: randomizer)
 
-    var uInt64sReturned: Set<UInt64> = []
-    var int64sReturned: Set<Int64> = []
-    var positiveInt64sReturned: Set<Int64> = []
+      var uInt64sReturned: Set<UInt64> = []
+      var int64sReturned: Set<Int64> = []
+      var positiveInt64sReturned: Set<Int64> = []
 
-    for _ in 1...100 {
-      let random = UInt64.random(in: 1...6, using: &randomizer)
-      uInt64sReturned.insert(random)
-      XCTAssert(1 ≤ random ∧ random ≤ 6)
+      for _ in 1...100 {
+        let random = UInt64.random(in: 1...6, using: &randomizer)
+        uInt64sReturned.insert(random)
+        XCTAssert(1 ≤ random ∧ random ≤ 6)
 
-      let randomInt = Int64.random(in: −3...3, using: &randomizer)
-      int64sReturned.insert(randomInt)
-      XCTAssert(−3 ≤ randomInt ∧ randomInt ≤ 3)
+        let randomInt = Int64.random(in: −3...3, using: &randomizer)
+        int64sReturned.insert(randomInt)
+        XCTAssert(−3 ≤ randomInt ∧ randomInt ≤ 3)
 
-      let randomPositiveInt = Int64.random(in: 1...6, using: &randomizer)
-      positiveInt64sReturned.insert(randomPositiveInt)
-      XCTAssert(1 ≤ randomPositiveInt ∧ randomPositiveInt ≤ 6)
+        let randomPositiveInt = Int64.random(in: 1...6, using: &randomizer)
+        positiveInt64sReturned.insert(randomPositiveInt)
+        XCTAssert(1 ≤ randomPositiveInt ∧ randomPositiveInt ≤ 6)
 
-      let randomDouble = Double.random(in: −3...3, using: &randomizer)
-      XCTAssert(−3 ≤ randomDouble ∧ randomDouble ≤ 3)
-    }
+        let randomDouble = Double.random(in: −3...3, using: &randomizer)
+        XCTAssert(−3 ≤ randomDouble ∧ randomDouble ≤ 3)
+      }
 
-    XCTAssertEqual(uInt64sReturned.count, 6)
-    XCTAssertEqual(int64sReturned.count, 7)
-    XCTAssertEqual(positiveInt64sReturned.count, 6)
+      XCTAssertEqual(uInt64sReturned.count, 6)
+      XCTAssertEqual(int64sReturned.count, 7)
+      XCTAssertEqual(positiveInt64sReturned.count, 6)
+    #endif
   }
 
   func testRangeReplaceableCollection() {
