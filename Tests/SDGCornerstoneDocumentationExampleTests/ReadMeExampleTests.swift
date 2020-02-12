@@ -28,115 +28,116 @@ import SDGXCTestUtilities
 class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      LocalizationSetting(orderOfPrecedence: ["en"]).do {
+        // @example(readMe🇨🇦EN)
+        // ••••••• Localization •••••••
 
-    LocalizationSetting(orderOfPrecedence: ["en"]).do {
-      // @example(readMe🇨🇦EN)
-      // ••••••• Localization •••••••
-
-      enum ApplicationLocalization: String, Localization {
-        case english = "en"
-        case français = "fr"
-        static let fallbackLocalization = ApplicationLocalization.english
-      }
-
-      // Define
-      let text = UserFacing<StrictString, ApplicationLocalization>({ localization in
-        switch localization {
-        case .english:
-          return "Hello, world!"
-        case .français:
-          return "Bonjour, le monde !"
+        enum ApplicationLocalization: String, Localization {
+          case english = "en"
+          case français = "fr"
+          static let fallbackLocalization = ApplicationLocalization.english
         }
-      })
 
-      // Use
-      XCTAssertEqual(
-        text.resolved(),
-        "Hello, world!"
-      )
+        // Define
+        let text = UserFacing<StrictString, ApplicationLocalization>({ localization in
+          switch localization {
+          case .english:
+            return "Hello, world!"
+          case .français:
+            return "Bonjour, le monde !"
+          }
+        })
 
-      // ••••••• Preferences •••••••
+        // Use
+        XCTAssertEqual(
+          text.resolved(),
+          "Hello, world!"
+        )
 
-      let preferences = PreferenceSet.applicationPreferences
+        // ••••••• Preferences •••••••
 
-      // Save
-      preferences["name"].value.set(to: "John Doe")
-      // Load
-      let loaded: String? = preferences["name"].value.as(String.self)
+        let preferences = PreferenceSet.applicationPreferences
 
-      XCTAssertEqual(
-        loaded,
-        "John Doe"
-      )
-
-      // ••••••• File System •••••••
-
-      let url = FileManager.default.url(in: .applicationSupport, at: "folder/file.txt")
-      do {
         // Save
-        try "Contents".save(to: url)
+        preferences["name"].value.set(to: "John Doe")
         // Load
-        let loaded = try String(from: url)
+        let loaded: String? = preferences["name"].value.as(String.self)
 
         XCTAssertEqual(
           loaded,
-          "Contents"
+          "John Doe"
         )
-      } catch {
-        XCTFail(error.localizedDescription)
-      }
 
-      // ••••••• Shared Values •••••••
+        // ••••••• File System •••••••
 
-      class Owner {
-        @SharedProperty var property: String = ""
-      }
+        let url = FileManager.default.url(in: .applicationSupport, at: "folder/file.txt")
+        do {
+          // Save
+          try "Contents".save(to: url)
+          // Load
+          let loaded = try String(from: url)
 
-      let originalOwner = Owner()
-      originalOwner.property = "original"
-      let anotherOwner = Owner()
-      anotherOwner.$property = originalOwner.$property
+          XCTAssertEqual(
+            loaded,
+            "Contents"
+          )
+        } catch {
+          XCTFail(error.localizedDescription)
+        }
 
-      anotherOwner.property = "changed"
-      XCTAssertEqual(
-        originalOwner.property,
-        "changed"
-      )
+        // ••••••• Shared Values •••••••
 
-      // ••••••• Pattern Matching •••••••
+        class Owner {
+          @SharedProperty var property: String = ""
+        }
 
-      let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-      let patternFirstPart = [1]  // 1
-        + ConditionalPattern({ $0.isEven })  // 2
-        + (
-          [30, 40]  // (∅)
-            ∨ [3, 4]  // 3, 4
+        let originalOwner = Owner()
+        originalOwner.property = "original"
+        let anotherOwner = Owner()
+        anotherOwner.$property = originalOwner.$property
+
+        anotherOwner.property = "changed"
+        XCTAssertEqual(
+          originalOwner.property,
+          "changed"
         )
-      let pattern = patternFirstPart
-        + RepetitionPattern(¬[5, 7])  // 5, 6, 7, 8, 9 (...)
-        + [10]  // 10
 
-      XCTAssertEqual(
-        numbers.firstMatch(for: pattern)?.range,
-        numbers.startIndex..<numbers.endIndex
-      )
+        // ••••••• Pattern Matching •••••••
 
-      // ••••••• Arbitrary Precision Arithmetic •••••••
-
-      let tenDuotrigintillion: WholeNumber =
-        "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"
-      XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
-
-      #if !(os(iOS) || os(watchOS) || os(tvOS))
-
-        // ••••••• Shell Commands •••••••
+        let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        let patternFirstPart = [1]  // 1
+          + ConditionalPattern({ $0.isEven })  // 2
+          + (
+            [30, 40]  // (∅)
+              ∨ [3, 4]  // 3, 4
+          )
+        let pattern = patternFirstPart
+          + RepetitionPattern(¬[5, 7])  // 5, 6, 7, 8, 9 (...)
+          + [10]  // 10
 
         XCTAssertEqual(
-          try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
-          "Hello, world!"
+          numbers.firstMatch(for: pattern)?.range,
+          numbers.startIndex..<numbers.endIndex
         )
-      #endif
-      // @endExample
-    }
+
+        // ••••••• Arbitrary Precision Arithmetic •••••••
+
+        let tenDuotrigintillion: WholeNumber =
+          "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"
+        XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
+
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
+
+          // ••••••• Shell Commands •••••••
+
+          XCTAssertEqual(
+            try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
+            "Hello, world!"
+          )
+        #endif
+        // @endExample
+      }
+    #endif
   }
 }
