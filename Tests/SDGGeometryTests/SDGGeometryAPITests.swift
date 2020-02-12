@@ -26,8 +26,10 @@ import SDGGeometryTestUtilities
 class SDGGeometryAPITests: TestCase {
 
   func testAngle() {
-    _ = 0°.playgroundDescription
-    _ = (−90)°.playgroundDescription
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      _ = 0°.playgroundDescription
+      _ = (−90)°.playgroundDescription
+    #endif
   }
 
   func testBézierPath() {
