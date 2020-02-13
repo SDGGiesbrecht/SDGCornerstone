@@ -179,7 +179,7 @@ class SDGMathematicsAPITests: TestCase {
       testRealArithmeticConformance(of: Double.self)
       testRealArithmeticConformance(of: FloatMax.self)
       testRealArithmeticConformance(of: CGFloat.self)
-      #if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
+      #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
         testRealArithmeticConformance(of: Float80.self)
       #endif
       testRealArithmeticConformance(of: Float.self)

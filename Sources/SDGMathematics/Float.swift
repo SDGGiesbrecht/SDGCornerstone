@@ -23,7 +23,7 @@ import Foundation
   import Real
 #endif
 
-#if os(Windows) || os(tvOS) || os(iOS) || os(watchOS)
+#if os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
 #else
@@ -332,7 +332,7 @@ extension CGFloat: FloatFamily {
   }
 }
 
-#if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
+#if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
 
   extension Float80: Decodable, Encodable, FloatFamily {
 
