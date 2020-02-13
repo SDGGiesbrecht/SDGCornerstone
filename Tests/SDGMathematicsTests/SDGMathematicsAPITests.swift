@@ -480,7 +480,7 @@ class SDGMathematicsAPITests: TestCase {
     init(_ int: SDGMathematics.IntMax) {
       value = Double(int)
     }
-    #if !(os(Windows) || os(tvOS) || os(iOS) || os(watchOS))
+    #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
       init(_ floatingPoint: FloatMax) {
         value = Double(floatingPoint)
       }
