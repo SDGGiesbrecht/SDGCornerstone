@@ -72,7 +72,17 @@ extension FileManager {
           create: true
         )
       } catch {
-        preconditionFailure("\(error.localizedDescription)")
+        do {
+          // Enable read queries even if directories could not be created, such as on a read‐only file system.
+          try url(
+            for: searchPath,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+          )
+        } catch {
+          preconditionFailure("\(error.localizedDescription)")
+        }
       }
     }
 
