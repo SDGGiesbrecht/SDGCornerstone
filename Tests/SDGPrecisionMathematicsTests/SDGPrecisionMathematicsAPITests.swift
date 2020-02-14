@@ -28,7 +28,10 @@ class SDGPrecisionMathematicsAPITests: TestCase {
 
   func testInteger() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
-      testIntegralArithmeticConformance(of: Integer.self)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testIntegralArithmeticConformance(of: Integer.self)
+      #endif
 
       XCTAssertNotNil(Integer(exactly: SDGMathematics.UIntMax.max))
       XCTAssertNotNil(Integer(exactly: SDGMathematics.IntMax.max))
@@ -52,7 +55,10 @@ class SDGPrecisionMathematicsAPITests: TestCase {
 
   func testRationalNumber() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
-      testRationalArithmeticConformance(of: RationalNumber.self)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testRationalArithmeticConformance(of: RationalNumber.self)
+      #endif
 
       XCTAssertEqual(RationalNumber(undecillion).numerator, Integer(undecillion))
       XCTAssertEqual(RationalNumber(50), 50)
@@ -103,7 +109,10 @@ class SDGPrecisionMathematicsAPITests: TestCase {
   #endif
   func testWholeNumber() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
-      testWholeArithmeticConformance(of: WholeNumber.self, includingNegatives: false)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testWholeArithmeticConformance(of: WholeNumber.self, includingNegatives: false)
+      #endif
       testDecoding(WholeNumber.self, failsFor: "12c45")  // Invalid string.
 
       let billion: WholeNumber = 1_000_000_000
