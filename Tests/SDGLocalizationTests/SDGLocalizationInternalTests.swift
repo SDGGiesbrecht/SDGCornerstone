@@ -54,12 +54,14 @@ class SDGLocalizationInternalTests: TestCase {
           XCTFail("\(localization.code) has no icon.")
         }
 
-        testCustomStringConvertibleConformance(
-          of: localization,
-          localizations: InterfaceLocalization.self,
-          uniqueTestName: localization.icon!,
-          overwriteSpecificationInsteadOfFailing: false
-        )
+        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+          testCustomStringConvertibleConformance(
+            of: localization,
+            localizations: InterfaceLocalization.self,
+            uniqueTestName: localization.icon!,
+            overwriteSpecificationInsteadOfFailing: false
+          )
+        #endif
 
         XCTAssert(
           ContentLocalization.codeSet() ⊇ InterfaceLocalization.codeSet(),

@@ -214,12 +214,14 @@ class SDGPersistenceAPITests: TestCase {
     mock.set(to: true)
     XCTAssertEqual(mock.as(Bool.self), true)
     XCTAssertNil(mock.as(String.self))
-    testCustomStringConvertibleConformance(
-      of: mock,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "true",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: mock,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "true",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
 
     mock[as: [String: Bool].self, default: [:]]["key"] = true
     XCTAssertEqual(mock[as: [String: Bool].self, default: [:]]["key"], true)

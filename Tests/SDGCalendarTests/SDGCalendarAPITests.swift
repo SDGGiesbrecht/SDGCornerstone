@@ -202,20 +202,25 @@ class SDGCalendarAPITests: TestCase {
           GregorianMinute(n),
           GregorianSecond(FloatMax(n))
         )
-        testCustomStringConvertibleConformance(
-          of: date,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
+        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+          testCustomStringConvertibleConformance(
+            of: date,
+            localizations: FormatLocalization.self,
+            uniqueTestName: "Gregorian (" + date.dateInISOFormat() + ")",
+            overwriteSpecificationInsteadOfFailing: false
+          )
+        #endif
       }
       let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
-      testCustomStringConvertibleConformance(
-        of: bc,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: bc,
+          localizations: FormatLocalization.self,
+          uniqueTestName: "Gregorian (" + bc.dateInISOFormat() + ")",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
       for n in 1...12 {
         let date = CalendarDate(
           hebrew: HebrewMonth(ordinal: n, leapYear: false),
@@ -224,29 +229,35 @@ class SDGCalendarAPITests: TestCase {
           at: HebrewHour(n),
           part: HebrewPart(FloatMax(n))
         )
-        testCustomStringConvertibleConformance(
-          of: date,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
+        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+          testCustomStringConvertibleConformance(
+            of: date,
+            localizations: FormatLocalization.self,
+            uniqueTestName: "Hebrew (" + date.dateInISOFormat() + ")",
+            overwriteSpecificationInsteadOfFailing: false
+          )
+        #endif
       }
       for n in 21...22 {
         let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
-        testCustomStringConvertibleConformance(
-          of: adar,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")",
-          overwriteSpecificationInsteadOfFailing: false
-        )
+        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+          testCustomStringConvertibleConformance(
+            of: adar,
+            localizations: FormatLocalization.self,
+            uniqueTestName: "Hebrew (" + adar.dateInISOFormat() + ")",
+            overwriteSpecificationInsteadOfFailing: false
+          )
+        #endif
       }
       let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
-      testCustomStringConvertibleConformance(
-        of: relative,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: relative,
+          localizations: FormatLocalization.self,
+          uniqueTestName: "Relative (" + relative.dateInISOFormat() + ")",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       _ = "\(CalendarDate(Date()))"
 
@@ -297,18 +308,20 @@ class SDGCalendarAPITests: TestCase {
   func testCalendarInterval() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
-      testCustomStringConvertibleConformance(
-        of: 1.days,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "1 Day",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: 2.days,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "2 Days",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: 1.days,
+          localizations: FormatLocalization.self,
+          uniqueTestName: "1 Day",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+        testCustomStringConvertibleConformance(
+          of: 2.days,
+          localizations: FormatLocalization.self,
+          uniqueTestName: "2 Days",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       XCTAssert((365.days × 400).inGregorianLeapYearCycles < 1)
       XCTAssert(28.days.inHebrewMoons < 1)
@@ -318,12 +331,14 @@ class SDGCalendarAPITests: TestCase {
   func testGregorianDay() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
-      testCustomStringConvertibleConformance(
-        of: GregorianDay(4),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "4",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: GregorianDay(4),
+          localizations: FormatLocalization.self,
+          uniqueTestName: "4",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       var day: GregorianDay = 29
       var month: GregorianMonth = .february
@@ -343,24 +358,28 @@ class SDGCalendarAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
       testDecoding(GregorianHour.self, failsFor: 600)  // Invalid raw value.
-      testCustomStringConvertibleConformance(
-        of: GregorianHour(6),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "6",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: GregorianHour(6),
+          localizations: FormatLocalization.self,
+          uniqueTestName: "6",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
   func testGregorianMinute() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
-      testCustomStringConvertibleConformance(
-        of: GregorianMinute(14),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "14",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: GregorianMinute(14),
+          localizations: FormatLocalization.self,
+          uniqueTestName: "14",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
@@ -368,12 +387,14 @@ class SDGCalendarAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
       testDecoding(GregorianMonth.self, failsFor: 120)  // Invalid raw value.
-      testCustomStringConvertibleConformance(
-        of: GregorianMonth.august,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "August",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: GregorianMonth.august,
+          localizations: FormatLocalization.self,
+          uniqueTestName: "August",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       let length = FloatMax(GregorianMonth.january.numberOfDays(leapYear: false))
         × (1 as FloatMax).days
@@ -404,12 +425,14 @@ class SDGCalendarAPITests: TestCase {
   func testGregorianSecond() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
-      testCustomStringConvertibleConformance(
-        of: GregorianSecond(12),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "12",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: GregorianSecond(12),
+          localizations: FormatLocalization.self,
+          uniqueTestName: "12",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       let second: GregorianSecond = 0.0
       XCTAssertEqual(second, 0)
@@ -422,12 +445,14 @@ class SDGCalendarAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
       for ordinal in 1...7 {
-        testCustomStringConvertibleConformance(
-          of: GregorianWeekday(ordinal: ordinal),
-          localizations: FormatLocalization.self,
-          uniqueTestName: ordinal.inDigits(),
-          overwriteSpecificationInsteadOfFailing: false
-        )
+        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+          testCustomStringConvertibleConformance(
+            of: GregorianWeekday(ordinal: ordinal),
+            localizations: FormatLocalization.self,
+            uniqueTestName: ordinal.inDigits(),
+            overwriteSpecificationInsteadOfFailing: false
+          )
+        #endif
       }
     #endif
   }
@@ -435,12 +460,14 @@ class SDGCalendarAPITests: TestCase {
   func testGregorianYear() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianYear(1234), uniqueTestName: "1234")
-      testCustomStringConvertibleConformance(
-        of: GregorianYear(1870),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "1870",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: GregorianYear(1870),
+          localizations: FormatLocalization.self,
+          uniqueTestName: "1870",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       let length = FloatMax(GregorianYear(2017).numberOfDays) × (1 as FloatMax).days
       XCTAssert(length ≥ GregorianYear.minimumDuration)
@@ -492,12 +519,14 @@ class SDGCalendarAPITests: TestCase {
   func testHebrewHour() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: HebrewHour(12), uniqueTestName: "12")
-      testCustomStringConvertibleConformance(
-        of: HebrewHour(3),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "3",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: HebrewHour(3),
+          localizations: FormatLocalization.self,
+          uniqueTestName: "3",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       XCTAssertEqual(HebrewHour(5).inDigits(), "5")
     #endif
@@ -512,25 +541,29 @@ class SDGCalendarAPITests: TestCase {
       testCodableConformance(of: HebrewMonth.elul, uniqueTestName: "Elul")
       for ordinal in 1...12 {
         let month = HebrewMonth(ordinal: ordinal, leapYear: false)
+        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+          testCustomStringConvertibleConformance(
+            of: month,
+            localizations: FormatLocalization.self,
+            uniqueTestName: ordinal.inDigits(),
+            overwriteSpecificationInsteadOfFailing: false
+          )
+        #endif
+      }
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
         testCustomStringConvertibleConformance(
-          of: month,
+          of: HebrewMonth.adarI,
           localizations: FormatLocalization.self,
-          uniqueTestName: ordinal.inDigits(),
+          uniqueTestName: "Adar I",
           overwriteSpecificationInsteadOfFailing: false
         )
-      }
-      testCustomStringConvertibleConformance(
-        of: HebrewMonth.adarI,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Adar I",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: HebrewMonth.adarII,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Adar II",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+        testCustomStringConvertibleConformance(
+          of: HebrewMonth.adarII,
+          localizations: FormatLocalization.self,
+          uniqueTestName: "Adar II",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       let length = FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false))
         × (1 as FloatMax).days
@@ -584,24 +617,28 @@ class SDGCalendarAPITests: TestCase {
         of: HebrewMonthAndYear(month: .tishrei, year: 2345),
         uniqueTestName: "Tishrei, 2345"
       )
-      testCustomStringConvertibleConformance(
-        of: HebrewMonthAndYear(month: .nisan, year: 4460),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "Nisan, 4460",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: HebrewMonthAndYear(month: .nisan, year: 4460),
+          localizations: FormatLocalization.self,
+          uniqueTestName: "Nisan, 4460",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
   func testHebrewPart() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: HebrewPart(124), uniqueTestName: "124")
-      testCustomStringConvertibleConformance(
-        of: HebrewPart(82),
-        localizations: FormatLocalization.self,
-        uniqueTestName: "82",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: HebrewPart(82),
+          localizations: FormatLocalization.self,
+          uniqueTestName: "82",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       XCTAssertEqual(HebrewPart(102).inDigits(), "102")
     #endif

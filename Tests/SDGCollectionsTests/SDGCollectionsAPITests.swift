@@ -28,12 +28,14 @@ import SDGXCTestUtilities
 class SDGCollectionsAPITests: TestCase {
 
   func testAbsoluteComplement() {
-    testCustomStringConvertibleConformance(
-      of: (1...10)′,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "(0–10)′",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: (1...10)′,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "(0–10)′",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   struct AddablePattern: Addable, SDGCollections.Pattern {
@@ -55,21 +57,25 @@ class SDGCollectionsAPITests: TestCase {
   func testAlternativePatterns() {
     let pattern = [1, 2, 3] ∨ [3, 2, 1]
     testPattern(pattern, match: [1, 2, 3])
-    testCustomStringConvertibleConformance(
-      of: pattern,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "123 ∨ 321",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: pattern,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "123 ∨ 321",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
 
     let naryPattern = NaryAlternativePatterns([[1, 2, 3], [3, 2, 1], [9, 8, 7]])
     testPattern(naryPattern, match: [1, 2, 3])
-    testCustomStringConvertibleConformance(
-      of: naryPattern,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "123 ∨ 321 ∨ 987",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: naryPattern,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "123 ∨ 321 ∨ 987",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
     XCTAssertNil([1, 2].firstMatch(for: naryPattern))
   }
 
@@ -622,21 +628,25 @@ class SDGCollectionsAPITests: TestCase {
   func testConcatenatedPatterns() {
     let pattern: ConcatenatedPatterns<[Int], [Int]> = [1, 2] + [3]
     testPattern(pattern, match: [1, 2, 3])
-    testCustomStringConvertibleConformance(
-      of: pattern,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "12 + 3",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: pattern,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "12 + 3",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
 
     let naryPattern: NaryConcatenatedPatterns<[Int]> = [[1, 2], [3], [4, 5]]
     testPattern(naryPattern, match: [1, 2, 3, 4, 5])
-    testCustomStringConvertibleConformance(
-      of: naryPattern,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "12 + 3 + 45",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: naryPattern,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "12 + 3 + 45",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
     XCTAssertNil([1, 2, 4, 5].firstMatch(for: naryPattern))
     XCTAssertNil([1, 2, 4, 5].firstMatch(for: NaryConcatenatedPatterns([naryPattern])))
   }
@@ -773,23 +783,27 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testIntersection() {
-    testCustomStringConvertibleConformance(
-      of: (1...10) ∩ (5...15),
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "1–10 ∩ 5–15",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: (1...10) ∩ (5...15),
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "1–10 ∩ 5–15",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testLiteralPattern() {
     let pattern = [1, 2, 3]
     testPattern(pattern, match: [1, 2, 3])
-    testCustomStringConvertibleConformance(
-      of: pattern,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "123",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: pattern,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "123",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   struct MutableSetExample: MutableSet {
@@ -891,12 +905,14 @@ class SDGCollectionsAPITests: TestCase {
     testPattern(pattern, match: [2])
     XCTAssert((¬[1]).matches(in: [1], at: 0).isEmpty)
 
-    testCustomStringConvertibleConformance(
-      of: pattern,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "¬1",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: pattern,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "¬1",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   struct CustomPattern: SDGCollections.Pattern {
@@ -1220,11 +1236,13 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testUnion() {
-    testCustomStringConvertibleConformance(
-      of: 1...3 ∪ 7...9,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "1–3 ∪ 7–9",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: 1...3 ∪ 7...9,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "1–3 ∪ 7–9",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 }

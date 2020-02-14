@@ -30,18 +30,20 @@ class SDGLocalizationAPITests: TestCase {
 
   func testAngle() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      testCustomStringConvertibleConformance(
-        of: 90°,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "90°",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: −90°,
-        localizations: FormatLocalization.self,
-        uniqueTestName: "−90°",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: 90°,
+          localizations: FormatLocalization.self,
+          uniqueTestName: "90°",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+        testCustomStringConvertibleConformance(
+          of: −90°,
+          localizations: FormatLocalization.self,
+          uniqueTestName: "−90°",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
@@ -69,12 +71,14 @@ class SDGLocalizationAPITests: TestCase {
     static let fallbackLocalization: IconlessLocalizationExample = .none
   }
   func testCustomStringConvertible() {
-    testCustomStringConvertibleConformance(
-      of: "...",
-      localizations: IconlessLocalizationExample.self,
-      uniqueTestName: "No Icon",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: "...",
+        localizations: IconlessLocalizationExample.self,
+        uniqueTestName: "No Icon",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
     XCTAssert(IconlessLocalizationExample.none.description == "zxx")
   }
 
@@ -449,12 +453,14 @@ class SDGLocalizationAPITests: TestCase {
       XCTAssertEqual(23.abbreviatedEnglishOrdinal().rawTextApproximation(), "23rd")
       XCTAssertEqual(24.abbreviatedEnglishOrdinal().rawTextApproximation(), "24th")
 
-      testCustomStringConvertibleConformance(
-        of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"),
-        localizations: _InterfaceLocalization.self,
-        uniqueTestName: "Invalid Digit",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"),
+          localizations: _InterfaceLocalization.self,
+          uniqueTestName: "Invalid Digit",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
       _ = TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc").errorDescription
 
       XCTAssertEqual((10_000 as UInt).inZahlzeichen(), "10 000")

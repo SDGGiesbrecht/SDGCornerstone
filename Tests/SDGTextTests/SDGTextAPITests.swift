@@ -47,18 +47,20 @@ class SDGTextAPITests: TestCase {
 
   func testLineView() {
     testBidirectionalCollectionConformance(of: "A\nB\nC".lines)
-    testCustomStringConvertibleConformance(
-      of: "A\nB\nC".lines,
-      localizations: APILocalization.self,
-      uniqueTestName: "ABC",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    testCustomStringConvertibleConformance(
-      of: "ABC\nDEF".lines.first!,
-      localizations: APILocalization.self,
-      uniqueTestName: "ABC",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testCustomStringConvertibleConformance(
+        of: "A\nB\nC".lines,
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      testCustomStringConvertibleConformance(
+        of: "ABC\nDEF".lines.first!,
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
 
     let fileLines = [
       "Line 1",
@@ -273,12 +275,14 @@ class SDGTextAPITests: TestCase {
         of: SemanticMarkup("àbçđę...").superscripted(),
         uniqueTestName: "Unicode"
       )
-      testCustomStringConvertibleConformance(
-        of: SemanticMarkup("ABC").superscripted(),
-        localizations: APILocalization.self,
-        uniqueTestName: "ABC",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: SemanticMarkup("ABC").superscripted(),
+          localizations: APILocalization.self,
+          uniqueTestName: "ABC",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       let markup: SemanticMarkup = "..."
       XCTAssertEqual(markup.scalars, markup.source.scalars)
@@ -327,18 +331,20 @@ class SDGTextAPITests: TestCase {
       testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
       testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
       testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
-      testCustomStringConvertibleConformance(
-        of: StrictString("ABC"),
-        localizations: APILocalization.self,
-        uniqueTestName: "ABC",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: StrictString("ABC").clusters,
-        localizations: APILocalization.self,
-        uniqueTestName: "ABC",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: StrictString("ABC"),
+          localizations: APILocalization.self,
+          uniqueTestName: "ABC",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+        testCustomStringConvertibleConformance(
+          of: StrictString("ABC").clusters,
+          localizations: APILocalization.self,
+          uniqueTestName: "ABC",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       var string = StrictString("\u{BC}")
       let appendix: UnicodeScalar = "\u{BD}"

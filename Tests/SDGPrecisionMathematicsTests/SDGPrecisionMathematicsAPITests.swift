@@ -38,12 +38,14 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssertEqual(Integer.random(in: −1...(−1)), −1)
 
       let negativeMillion: SDGPrecisionMathematics.Integer = −1_000_000
-      testCustomStringConvertibleConformance(
-        of: negativeMillion,
-        localizations: FormatLocalization.self,
-        uniqueTestName: negativeMillion.inDigits(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: negativeMillion,
+          localizations: FormatLocalization.self,
+          uniqueTestName: negativeMillion.inDigits(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
@@ -73,19 +75,23 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssertEqual(RationalNumber.random(in: 1...1), 1)
 
       let simple = (−19 as RationalNumber ÷ 2)
-      testCustomStringConvertibleConformance(
-        of: simple,
-        localizations: FormatLocalization.self,
-        uniqueTestName: simple.asSimpleFraction(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: simple,
+          localizations: FormatLocalization.self,
+          uniqueTestName: simple.asSimpleFraction(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
       let complex = (50_001 as RationalNumber ÷ 10_000)
-      testCustomStringConvertibleConformance(
-        of: complex,
-        localizations: FormatLocalization.self,
-        uniqueTestName: complex.asSimpleFraction(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: complex,
+          localizations: FormatLocalization.self,
+          uniqueTestName: complex.asSimpleFraction(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
@@ -120,18 +126,20 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssert(range.contains(WholeNumber.random(in: range)))
 
       let thousand: WholeNumber = 1000
-      testCustomStringConvertibleConformance(
-        of: thousand,
-        localizations: FormatLocalization.self,
-        uniqueTestName: thousand.inDigits(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: billion,
-        localizations: FormatLocalization.self,
-        uniqueTestName: billion.inDigits(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        testCustomStringConvertibleConformance(
+          of: thousand,
+          localizations: FormatLocalization.self,
+          uniqueTestName: thousand.inDigits(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+        testCustomStringConvertibleConformance(
+          of: billion,
+          localizations: FormatLocalization.self,
+          uniqueTestName: billion.inDigits(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 }
