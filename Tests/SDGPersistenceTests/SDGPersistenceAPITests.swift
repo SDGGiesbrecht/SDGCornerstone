@@ -33,8 +33,10 @@ class SDGPersistenceAPITests: TestCase {
 
   func testFileConvertible() {
     setTestSpecificationDirectory(to: testSpecificationDirectory())
-    testFileConvertibleConformance(of: Data([0x10, 0x20, 0x30]), uniqueTestName: "Binary Data")
-    testFileConvertibleConformance(of: "Hello, world!", uniqueTestName: "Hello")
+    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      testFileConvertibleConformance(of: Data([0x10, 0x20, 0x30]), uniqueTestName: "Binary Data")
+      testFileConvertibleConformance(of: "Hello, world!", uniqueTestName: "Hello")
+    #endif
   }
 
   func testFileManager() throws {
