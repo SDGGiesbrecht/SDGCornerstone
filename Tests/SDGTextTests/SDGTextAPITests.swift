@@ -272,10 +272,13 @@ class SDGTextAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
       testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
-      testCodableConformance(
-        of: SemanticMarkup("àbçđę...").superscripted(),
-        uniqueTestName: "Unicode"
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testCodableConformance(
+          of: SemanticMarkup("àbçđę...").superscripted(),
+          uniqueTestName: "Unicode"
+        )
+      #endif
       // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
       #if !os(Android)
         testCustomStringConvertibleConformance(
@@ -331,8 +334,11 @@ class SDGTextAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testBidirectionalCollectionConformance(of: StrictString("ABC"))
       testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
-      testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
-      testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+        testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+      #endif
       // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
       #if !os(Android)
         testCustomStringConvertibleConformance(

@@ -454,7 +454,10 @@ class SDGCollectionsAPITests: TestCase {
         let shimmedDifference = end.changes(from: start)
         let shimmedMoves = shimmedDifference.inferringMoves()
         let shimmedInverse = shimmedMoves.inverse()
-        testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
+          testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
+        #endif
         if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
           let standardDifference = Swift.CollectionDifference(shimmedDifference)
           let standardMoves = standardDifference.inferringMoves()
@@ -567,7 +570,10 @@ class SDGCollectionsAPITests: TestCase {
           .remove(offset: 10, element: "removed element", associatedWith: 20),
           .insert(offset: 30, element: "inserted element", associatedWith: 40)
         ]
-        testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
+          testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
+        #endif
         if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
           let standardEntries = shimmedEntries.map { shimmed in
             return Swift.CollectionDifference.Change(shimmed)

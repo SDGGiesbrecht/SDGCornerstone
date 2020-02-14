@@ -143,10 +143,13 @@ class SDGPersistenceAPITests: TestCase {
   }
   func testLosslessStringConvertible() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      testCodableConformance(
-        of: LosslessStirngConvertibleExample("Example"),
-        uniqueTestName: "Example"
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testCodableConformance(
+          of: LosslessStirngConvertibleExample("Example"),
+          uniqueTestName: "Example"
+        )
+      #endif
     #endif
   }
 

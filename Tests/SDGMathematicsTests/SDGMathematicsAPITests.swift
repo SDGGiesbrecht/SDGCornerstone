@@ -176,13 +176,16 @@ class SDGMathematicsAPITests: TestCase {
 
   func testFloat() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      testRealArithmeticConformance(of: Double.self)
-      testRealArithmeticConformance(of: FloatMax.self)
-      testRealArithmeticConformance(of: CGFloat.self)
-      #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
-        testRealArithmeticConformance(of: Float80.self)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testRealArithmeticConformance(of: Double.self)
+        testRealArithmeticConformance(of: FloatMax.self)
+        testRealArithmeticConformance(of: CGFloat.self)
+        #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+          testRealArithmeticConformance(of: Float80.self)
+        #endif
+        testRealArithmeticConformance(of: Float.self)
       #endif
-      testRealArithmeticConformance(of: Float.self)
 
       XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
       XCTAssertNotNil(CGFloat("1"))
