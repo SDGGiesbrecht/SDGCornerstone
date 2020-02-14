@@ -29,7 +29,7 @@
       let path: String
       #if os(Windows)
         path = #"C:\Windows\System32\cmd.exe"#
-      #if os(Android)
+      #elseif os(Android)
         path = "/system/bin/sh"
       #else
         path = "/bin/sh"
