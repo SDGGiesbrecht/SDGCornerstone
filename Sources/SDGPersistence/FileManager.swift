@@ -64,19 +64,16 @@ extension FileManager {
         searchPath = .cachesDirectory
       }
 
-      guard
-        let result = try? url(
+      do {
+        return try url(
           for: searchPath,
           in: .userDomainMask,
           appropriateFor: nil,
           create: true
         )
-      else {
-        #warning("Debugging.")
-        fatalError("\(location)")
-        _unreachable()
+      } catch {
+        preconditionFailure("\(error.localizedDescription)")
       }
-      return result
     }
 
     return zoneURL.appendingPathComponent(FileManager.possibleDebugDomain(domain))
