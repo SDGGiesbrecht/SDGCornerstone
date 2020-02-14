@@ -72,7 +72,7 @@ extension FileManager {
           create: true
         )
       } catch {
-        do {
+        do {  // @exempt(from: tests)
           // Enable read queries even if directories could not be created, such as on a read‐only file system.
           return try url(
             for: searchPath,
