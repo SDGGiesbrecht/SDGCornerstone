@@ -73,7 +73,7 @@ extension FileManager {
         )
       else {
         #warning("Debugging.")
-        print(location)
+        fatalError("\(location)")
         _unreachable()
       }
       return result
