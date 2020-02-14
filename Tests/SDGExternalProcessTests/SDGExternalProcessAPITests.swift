@@ -39,6 +39,12 @@ class SDGExternalProcessAPITests: TestCase {
           ),
           "Failed to reject non‐executables."
         )
+        let command: String
+        #if os(Android)
+          command = "ls"
+        #else
+          command = "swift"
+        #endif
         XCTAssertEqual(
           ExternalProcess(
             searching: [
@@ -46,10 +52,10 @@ class SDGExternalProcessAPITests: TestCase {
               "/tmp",  // Directory
               "/.file"  // Not executable
             ].map({ URL(fileURLWithPath: $0) }),
-            commandName: "swift",
+            commandName: command,
             validate: { _ in true }
           )?.executable.deletingPathExtension().lastPathComponent,
-          "swift",
+          command,
           "Failed to find with “which” (or “where” on Windows)."
         )
         XCTAssertNil(

@@ -311,13 +311,17 @@ class SDGTextAPITests: TestCase {
       XCTAssertEqual(SemanticMarkup().source, "")
 
       let html = SemanticMarkup("&<>").subscripted().html()
-      compare(
-        String(html),
-        against: testSpecificationDirectory().appendingPathComponent(
-          "SemanticMarkup/HTML/Escapes.txt"
-        ),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        compare(
+          String(html),
+          against: testSpecificationDirectory().appendingPathComponent(
+            "SemanticMarkup/HTML/Escapes.txt"
+          ),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
       _ = markup.playgroundDescription
 
       XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("...")))
