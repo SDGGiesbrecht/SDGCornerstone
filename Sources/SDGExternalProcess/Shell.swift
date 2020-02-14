@@ -125,6 +125,8 @@
       }
       return process.run([executionOption, commandString], in: workingDirectory, with: environment)
       {
+        #warning("Debugging")
+        print($0)
         reportProgress($0)
       }
     }
