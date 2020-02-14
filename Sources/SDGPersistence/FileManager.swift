@@ -74,7 +74,7 @@ extension FileManager {
       } catch {
         do {
           // Enable read queries even if directories could not be created, such as on a read‐only file system.
-          try url(
+          return try url(
             for: searchPath,
             in: .userDomainMask,
             appropriateFor: nil,
