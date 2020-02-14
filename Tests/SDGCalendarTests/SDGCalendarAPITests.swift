@@ -315,7 +315,10 @@ class SDGCalendarAPITests: TestCase {
 
   func testCalendarInterval() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
+      #endif
       // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
       #if !os(Android)
         testCustomStringConvertibleConformance(

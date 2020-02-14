@@ -40,7 +40,10 @@ class SDGGeometryAPITests: TestCase {
 
   func testPoint() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
+      #endif
       #if canImport(CoreGraphics)
         testTwoDimensionalPointProtocolConformance(CGPoint.self)
       #endif
@@ -61,7 +64,10 @@ class SDGGeometryAPITests: TestCase {
 
   func testVector() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      testTwoDimensionalVectorProtocolConformance(TwoDimensionalVector<Double>.self)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testTwoDimensionalVectorProtocolConformance(TwoDimensionalVector<Double>.self)
+      #endif
       #if canImport(CoreGraphics)
         testTwoDimensionalVectorProtocolConformance(CGVector.self)
       #endif
