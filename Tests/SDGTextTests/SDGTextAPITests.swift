@@ -47,7 +47,8 @@ class SDGTextAPITests: TestCase {
 
   func testLineView() {
     testBidirectionalCollectionConformance(of: "A\nB\nC".lines)
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: "A\nB\nC".lines,
         localizations: APILocalization.self,
@@ -275,7 +276,8 @@ class SDGTextAPITests: TestCase {
         of: SemanticMarkup("àbçđę...").superscripted(),
         uniqueTestName: "Unicode"
       )
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: SemanticMarkup("ABC").superscripted(),
           localizations: APILocalization.self,
@@ -331,7 +333,8 @@ class SDGTextAPITests: TestCase {
       testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
       testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
       testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: StrictString("ABC"),
           localizations: APILocalization.self,

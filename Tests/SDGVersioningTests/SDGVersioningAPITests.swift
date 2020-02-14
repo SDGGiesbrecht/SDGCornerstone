@@ -26,7 +26,8 @@ class SDGVersioningAPITests: TestCase {
 
   func testVersion() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: Version(1, 2, 3),
           localizations: InterfaceLocalization.self,

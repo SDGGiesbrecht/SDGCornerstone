@@ -38,7 +38,8 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssertEqual(Integer.random(in: −1...(−1)), −1)
 
       let negativeMillion: SDGPrecisionMathematics.Integer = −1_000_000
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: negativeMillion,
           localizations: FormatLocalization.self,
@@ -75,7 +76,8 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssertEqual(RationalNumber.random(in: 1...1), 1)
 
       let simple = (−19 as RationalNumber ÷ 2)
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: simple,
           localizations: FormatLocalization.self,
@@ -84,7 +86,8 @@ class SDGPrecisionMathematicsAPITests: TestCase {
         )
       #endif
       let complex = (50_001 as RationalNumber ÷ 10_000)
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: complex,
           localizations: FormatLocalization.self,
@@ -126,7 +129,8 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssert(range.contains(WholeNumber.random(in: range)))
 
       let thousand: WholeNumber = 1000
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: thousand,
           localizations: FormatLocalization.self,

@@ -33,7 +33,8 @@ class SDGPersistenceAPITests: TestCase {
 
   func testFileConvertible() {
     setTestSpecificationDirectory(to: testSpecificationDirectory())
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testFileConvertibleConformance(of: Data([0x10, 0x20, 0x30]), uniqueTestName: "Binary Data")
       testFileConvertibleConformance(of: "Hello, world!", uniqueTestName: "Hello")
     #endif
@@ -214,7 +215,8 @@ class SDGPersistenceAPITests: TestCase {
     mock.set(to: true)
     XCTAssertEqual(mock.as(Bool.self), true)
     XCTAssertNil(mock.as(String.self))
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: mock,
         localizations: InterfaceLocalization.self,

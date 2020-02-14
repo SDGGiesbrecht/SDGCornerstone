@@ -54,7 +54,8 @@ class SDGLocalizationInternalTests: TestCase {
           XCTFail("\(localization.code) has no icon.")
         }
 
-        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
           testCustomStringConvertibleConformance(
             of: localization,
             localizations: InterfaceLocalization.self,

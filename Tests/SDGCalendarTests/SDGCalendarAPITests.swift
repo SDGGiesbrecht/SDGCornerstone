@@ -202,7 +202,8 @@ class SDGCalendarAPITests: TestCase {
           GregorianMinute(n),
           GregorianSecond(FloatMax(n))
         )
-        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
           testCustomStringConvertibleConformance(
             of: date,
             localizations: FormatLocalization.self,
@@ -213,7 +214,8 @@ class SDGCalendarAPITests: TestCase {
       }
       let bc = CalendarDate(gregorian: .january, 1, GregorianYear(−2000))
 
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: bc,
           localizations: FormatLocalization.self,
@@ -229,7 +231,8 @@ class SDGCalendarAPITests: TestCase {
           at: HebrewHour(n),
           part: HebrewPart(FloatMax(n))
         )
-        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
           testCustomStringConvertibleConformance(
             of: date,
             localizations: FormatLocalization.self,
@@ -240,7 +243,8 @@ class SDGCalendarAPITests: TestCase {
       }
       for n in 21...22 {
         let adar = CalendarDate(hebrew: .adarI, 1, 5700 + n)
-        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
           testCustomStringConvertibleConformance(
             of: adar,
             localizations: FormatLocalization.self,
@@ -250,7 +254,8 @@ class SDGCalendarAPITests: TestCase {
         #endif
       }
       let relative = CalendarDate(gregorian: .january, 1, 2001) + (100 as FloatMax).days
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: relative,
           localizations: FormatLocalization.self,
@@ -308,7 +313,8 @@ class SDGCalendarAPITests: TestCase {
   func testCalendarInterval() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: 1.days,
           localizations: FormatLocalization.self,
@@ -331,7 +337,8 @@ class SDGCalendarAPITests: TestCase {
   func testGregorianDay() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: GregorianDay(4),
           localizations: FormatLocalization.self,
@@ -358,7 +365,8 @@ class SDGCalendarAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
       testDecoding(GregorianHour.self, failsFor: 600)  // Invalid raw value.
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: GregorianHour(6),
           localizations: FormatLocalization.self,
@@ -372,7 +380,8 @@ class SDGCalendarAPITests: TestCase {
   func testGregorianMinute() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: GregorianMinute(14),
           localizations: FormatLocalization.self,
@@ -387,7 +396,8 @@ class SDGCalendarAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
       testDecoding(GregorianMonth.self, failsFor: 120)  // Invalid raw value.
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: GregorianMonth.august,
           localizations: FormatLocalization.self,
@@ -425,7 +435,8 @@ class SDGCalendarAPITests: TestCase {
   func testGregorianSecond() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: GregorianSecond(12),
           localizations: FormatLocalization.self,
@@ -445,7 +456,8 @@ class SDGCalendarAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
       for ordinal in 1...7 {
-        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
           testCustomStringConvertibleConformance(
             of: GregorianWeekday(ordinal: ordinal),
             localizations: FormatLocalization.self,
@@ -460,7 +472,8 @@ class SDGCalendarAPITests: TestCase {
   func testGregorianYear() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: GregorianYear(1234), uniqueTestName: "1234")
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: GregorianYear(1870),
           localizations: FormatLocalization.self,
@@ -519,7 +532,8 @@ class SDGCalendarAPITests: TestCase {
   func testHebrewHour() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: HebrewHour(12), uniqueTestName: "12")
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: HebrewHour(3),
           localizations: FormatLocalization.self,
@@ -541,7 +555,8 @@ class SDGCalendarAPITests: TestCase {
       testCodableConformance(of: HebrewMonth.elul, uniqueTestName: "Elul")
       for ordinal in 1...12 {
         let month = HebrewMonth(ordinal: ordinal, leapYear: false)
-        #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
           testCustomStringConvertibleConformance(
             of: month,
             localizations: FormatLocalization.self,
@@ -550,7 +565,8 @@ class SDGCalendarAPITests: TestCase {
           )
         #endif
       }
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: HebrewMonth.adarI,
           localizations: FormatLocalization.self,
@@ -617,7 +633,8 @@ class SDGCalendarAPITests: TestCase {
         of: HebrewMonthAndYear(month: .tishrei, year: 2345),
         uniqueTestName: "Tishrei, 2345"
       )
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: HebrewMonthAndYear(month: .nisan, year: 4460),
           localizations: FormatLocalization.self,
@@ -631,7 +648,8 @@ class SDGCalendarAPITests: TestCase {
   func testHebrewPart() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testCodableConformance(of: HebrewPart(124), uniqueTestName: "124")
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: HebrewPart(82),
           localizations: FormatLocalization.self,

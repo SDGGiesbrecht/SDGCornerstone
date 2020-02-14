@@ -30,7 +30,8 @@ class SDGLocalizationAPITests: TestCase {
 
   func testAngle() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: 90°,
           localizations: FormatLocalization.self,
@@ -71,7 +72,8 @@ class SDGLocalizationAPITests: TestCase {
     static let fallbackLocalization: IconlessLocalizationExample = .none
   }
   func testCustomStringConvertible() {
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: "...",
         localizations: IconlessLocalizationExample.self,
@@ -453,7 +455,8 @@ class SDGLocalizationAPITests: TestCase {
       XCTAssertEqual(23.abbreviatedEnglishOrdinal().rawTextApproximation(), "23rd")
       XCTAssertEqual(24.abbreviatedEnglishOrdinal().rawTextApproximation(), "24th")
 
-      #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
         testCustomStringConvertibleConformance(
           of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"),
           localizations: _InterfaceLocalization.self,

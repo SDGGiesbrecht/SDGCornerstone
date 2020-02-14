@@ -28,7 +28,8 @@ import SDGXCTestUtilities
 class SDGCollectionsAPITests: TestCase {
 
   func testAbsoluteComplement() {
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: (1...10)′,
         localizations: InterfaceLocalization.self,
@@ -57,7 +58,8 @@ class SDGCollectionsAPITests: TestCase {
   func testAlternativePatterns() {
     let pattern = [1, 2, 3] ∨ [3, 2, 1]
     testPattern(pattern, match: [1, 2, 3])
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: pattern,
         localizations: InterfaceLocalization.self,
@@ -68,7 +70,8 @@ class SDGCollectionsAPITests: TestCase {
 
     let naryPattern = NaryAlternativePatterns([[1, 2, 3], [3, 2, 1], [9, 8, 7]])
     testPattern(naryPattern, match: [1, 2, 3])
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: naryPattern,
         localizations: InterfaceLocalization.self,
@@ -628,7 +631,8 @@ class SDGCollectionsAPITests: TestCase {
   func testConcatenatedPatterns() {
     let pattern: ConcatenatedPatterns<[Int], [Int]> = [1, 2] + [3]
     testPattern(pattern, match: [1, 2, 3])
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: pattern,
         localizations: InterfaceLocalization.self,
@@ -639,7 +643,8 @@ class SDGCollectionsAPITests: TestCase {
 
     let naryPattern: NaryConcatenatedPatterns<[Int]> = [[1, 2], [3], [4, 5]]
     testPattern(naryPattern, match: [1, 2, 3, 4, 5])
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: naryPattern,
         localizations: InterfaceLocalization.self,
@@ -783,7 +788,8 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testIntersection() {
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: (1...10) ∩ (5...15),
         localizations: InterfaceLocalization.self,
@@ -796,7 +802,8 @@ class SDGCollectionsAPITests: TestCase {
   func testLiteralPattern() {
     let pattern = [1, 2, 3]
     testPattern(pattern, match: [1, 2, 3])
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: pattern,
         localizations: InterfaceLocalization.self,
@@ -905,7 +912,8 @@ class SDGCollectionsAPITests: TestCase {
     testPattern(pattern, match: [2])
     XCTAssert((¬[1]).matches(in: [1], at: 0).isEmpty)
 
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: pattern,
         localizations: InterfaceLocalization.self,
@@ -1236,7 +1244,8 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testUnion() {
-    #if !os(Android)  // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Android)
       testCustomStringConvertibleConformance(
         of: 1...3 ∪ 7...9,
         localizations: InterfaceLocalization.self,
