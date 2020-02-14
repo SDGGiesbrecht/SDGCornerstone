@@ -465,7 +465,8 @@ class SDGCalendarAPITests: TestCase {
   }
 
   func testGregorianWeekday() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)// #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
       #if !os(Android)
         testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
       #endif
