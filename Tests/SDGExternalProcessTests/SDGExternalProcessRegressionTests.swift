@@ -23,14 +23,17 @@ class SDGExternalProcessRegressionTests: TestCase {
   func testDelayedShellOutput() throws {
     // Untracked
 
-    #if !(os(iOS) || os(watchOS) || os(tvOS))
-      try forAllLegacyModes {
-        let longCommand = [
-          "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy"
-        ]
-        let output = try Shell.default.run(command: longCommand).get()
-        XCTAssert(output.contains("0.8.3"))
-      }
+    // #workaround(Swift 5.1.3, Insufficient information to debug.)
+    #if !os(Android)
+      #if !(os(iOS) || os(watchOS) || os(tvOS))
+        try forAllLegacyModes {
+          let longCommand = [
+            "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy"
+          ]
+          let output = try Shell.default.run(command: longCommand).get()
+          XCTAssert(output.contains("0.8.3"))
+        }
+      #endif
     #endif
   }
 }
