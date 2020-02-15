@@ -28,7 +28,10 @@ class SDGPrecisionMathematicsAPITests: TestCase {
 
   func testInteger() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
-      testIntegralArithmeticConformance(of: Integer.self)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testIntegralArithmeticConformance(of: Integer.self)
+      #endif
 
       XCTAssertNotNil(Integer(exactly: SDGMathematics.UIntMax.max))
       XCTAssertNotNil(Integer(exactly: SDGMathematics.IntMax.max))
@@ -38,18 +41,24 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssertEqual(Integer.random(in: −1...(−1)), −1)
 
       let negativeMillion: SDGPrecisionMathematics.Integer = −1_000_000
-      testCustomStringConvertibleConformance(
-        of: negativeMillion,
-        localizations: FormatLocalization.self,
-        uniqueTestName: negativeMillion.inDigits(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testCustomStringConvertibleConformance(
+          of: negativeMillion,
+          localizations: FormatLocalization.self,
+          uniqueTestName: negativeMillion.inDigits(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
   func testRationalNumber() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
-      testRationalArithmeticConformance(of: RationalNumber.self)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testRationalArithmeticConformance(of: RationalNumber.self)
+      #endif
 
       XCTAssertEqual(RationalNumber(undecillion).numerator, Integer(undecillion))
       XCTAssertEqual(RationalNumber(50), 50)
@@ -73,19 +82,25 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssertEqual(RationalNumber.random(in: 1...1), 1)
 
       let simple = (−19 as RationalNumber ÷ 2)
-      testCustomStringConvertibleConformance(
-        of: simple,
-        localizations: FormatLocalization.self,
-        uniqueTestName: simple.asSimpleFraction(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testCustomStringConvertibleConformance(
+          of: simple,
+          localizations: FormatLocalization.self,
+          uniqueTestName: simple.asSimpleFraction(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
       let complex = (50_001 as RationalNumber ÷ 10_000)
-      testCustomStringConvertibleConformance(
-        of: complex,
-        localizations: FormatLocalization.self,
-        uniqueTestName: complex.asSimpleFraction(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testCustomStringConvertibleConformance(
+          of: complex,
+          localizations: FormatLocalization.self,
+          uniqueTestName: complex.asSimpleFraction(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
@@ -94,7 +109,10 @@ class SDGPrecisionMathematicsAPITests: TestCase {
   #endif
   func testWholeNumber() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
-      testWholeArithmeticConformance(of: WholeNumber.self, includingNegatives: false)
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testWholeArithmeticConformance(of: WholeNumber.self, includingNegatives: false)
+      #endif
       testDecoding(WholeNumber.self, failsFor: "12c45")  // Invalid string.
 
       let billion: WholeNumber = 1_000_000_000
@@ -120,18 +138,21 @@ class SDGPrecisionMathematicsAPITests: TestCase {
       XCTAssert(range.contains(WholeNumber.random(in: range)))
 
       let thousand: WholeNumber = 1000
-      testCustomStringConvertibleConformance(
-        of: thousand,
-        localizations: FormatLocalization.self,
-        uniqueTestName: thousand.inDigits(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: billion,
-        localizations: FormatLocalization.self,
-        uniqueTestName: billion.inDigits(),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testCustomStringConvertibleConformance(
+          of: thousand,
+          localizations: FormatLocalization.self,
+          uniqueTestName: thousand.inDigits(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+        testCustomStringConvertibleConformance(
+          of: billion,
+          localizations: FormatLocalization.self,
+          uniqueTestName: billion.inDigits(),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 }

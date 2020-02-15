@@ -26,12 +26,15 @@ class SDGVersioningAPITests: TestCase {
 
   func testVersion() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      testCustomStringConvertibleConformance(
-        of: Version(1, 2, 3),
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "1.2.3",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        testCustomStringConvertibleConformance(
+          of: Version(1, 2, 3),
+          localizations: InterfaceLocalization.self,
+          uniqueTestName: "1.2.3",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
 
       XCTAssertEqual(Version(firstIn: "1.0.0"), Version(1, 0, 0))
       XCTAssertEqual(Version(firstIn: "1.0"), Version(1, 0, 0))

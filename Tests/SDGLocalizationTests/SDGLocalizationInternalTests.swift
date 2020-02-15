@@ -54,12 +54,15 @@ class SDGLocalizationInternalTests: TestCase {
           XCTFail("\(localization.code) has no icon.")
         }
 
-        testCustomStringConvertibleConformance(
-          of: localization,
-          localizations: InterfaceLocalization.self,
-          uniqueTestName: localization.icon!,
-          overwriteSpecificationInsteadOfFailing: false
-        )
+        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+        #if !os(Android)
+          testCustomStringConvertibleConformance(
+            of: localization,
+            localizations: InterfaceLocalization.self,
+            uniqueTestName: localization.icon!,
+            overwriteSpecificationInsteadOfFailing: false
+          )
+        #endif
 
         XCTAssert(
           ContentLocalization.codeSet() ⊇ InterfaceLocalization.codeSet(),
@@ -114,10 +117,12 @@ class SDGLocalizationInternalTests: TestCase {
     #endif
     if expectOperatingSystemLanguage {
       #if !os(Windows)  // #workaround(Not implemented yet.)
-        XCTAssertNotNil(
-          LocalizationSetting.osSystemWidePreferences.value.as([String].self),
-          "Failed to detect operating system localization setting."
-        )
+        #if !os(Android)  // #workaround(Not implemented yet.)
+          XCTAssertNotNil(
+            LocalizationSetting.osSystemWidePreferences.value.as([String].self),
+            "Failed to detect operating system localization setting."
+          )
+        #endif
       #endif
     }
 
@@ -148,11 +153,14 @@ class SDGLocalizationInternalTests: TestCase {
           }
         }
       }
-      compare(
-        list,
-        against: testSpecificationDirectory().appendingPathComponent("Ordinals.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        compare(
+          list,
+          against: testSpecificationDirectory().appendingPathComponent("Ordinals.txt"),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
       var numerals = ""
       for number in [1000, 1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999, 10_000] {
         print(number.inDigits(), to: &numerals)
@@ -162,11 +170,14 @@ class SDGLocalizationInternalTests: TestCase {
         print(number.ספרות־עבריות(גרשיים: false), to: &numerals)
         print("", to: &numerals)
       }
-      compare(
-        numerals,
-        against: testSpecificationDirectory().appendingPathComponent("Numerals.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        compare(
+          numerals,
+          against: testSpecificationDirectory().appendingPathComponent("Numerals.txt"),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 }

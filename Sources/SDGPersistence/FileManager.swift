@@ -64,17 +64,26 @@ extension FileManager {
         searchPath = .cachesDirectory
       }
 
-      guard
-        let result = try? url(
+      do {
+        return try url(
           for: searchPath,
           in: .userDomainMask,
           appropriateFor: nil,
           create: true
         )
-      else {
-        _unreachable()
+      } catch {
+        do {  // @exempt(from: tests)
+          // Enable read queries even if directories could not be created, such as on a read‐only file system.
+          return try url(
+            for: searchPath,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+          )
+        } catch {
+          preconditionFailure("\(error.localizedDescription)")
+        }
       }
-      return result
     }
 
     return zoneURL.appendingPathComponent(FileManager.possibleDebugDomain(domain))

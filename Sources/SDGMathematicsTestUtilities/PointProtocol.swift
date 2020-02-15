@@ -37,7 +37,7 @@ public func testPointProtocolConformance<T>(
 ) where T: PointProtocol {
 
   testEquatableConformance(differingInstances: (departure, destination), file: file, line: line)
-  testCodableConformance(of: departure, uniqueTestName: "PointProtocol")
+  testCodableConformance(of: departure, uniqueTestName: "PointProtocol", file: file, line: line)
 
   test(operator: (+, "+"), on: (departure, vector), returns: destination, file: file, line: line)
   test(

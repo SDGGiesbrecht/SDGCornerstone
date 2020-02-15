@@ -25,31 +25,35 @@ class SDGPersistenceRegressionTests: TestCase {
   func testCachePermissions() {
     // Untracked
 
-    defer { FileManager.default.delete(.cache) }
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
+      defer { FileManager.default.delete(.cache) }
 
-    let file = "File"
-    let url = FileManager.default.url(in: .cache, at: "File.txt")
+      let file = "File"
+      let url = FileManager.default.url(in: .cache, at: "File.txt")
 
-    do {
-      try file.save(to: url)
-      XCTAssertEqual(try? String(from: url), file)
-    } catch {
-      XCTFail("\(error)")
-    }
+      do {
+        try file.save(to: url)
+        XCTAssertEqual(try? String(from: url), file)
+      } catch {
+        XCTFail("\(error)")
+      }
+    #endif
   }
 
   func testPercentEncodingIsNotDoubled() {
     // Untracked
 
-    FileManager.default.withTemporaryDirectory(appropriateFor: nil) { directory in
-      var url = directory.appendingPathComponent("A Folder")
-      url.appendPathComponent("A File")
-      XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
-      #if os(Windows)
-        XCTAssert(url.path.hasSuffix(#"A Folder\A File"#))
-      #else
-        XCTAssert(url.path.hasSuffix("A Folder/A File"))
-      #endif
-    }
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
+      FileManager.default.withTemporaryDirectory(appropriateFor: nil) { directory in
+        var url = directory.appendingPathComponent("A Folder")
+        url.appendPathComponent("A File")
+        XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
+        #if os(Windows)
+          XCTAssert(url.path.hasSuffix(#"A Folder\A File"#))
+        #else
+          XCTAssert(url.path.hasSuffix("A Folder/A File"))
+        #endif
+      }
+    #endif
   }
 }
