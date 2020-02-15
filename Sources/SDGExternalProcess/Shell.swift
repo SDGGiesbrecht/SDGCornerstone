@@ -12,9 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#warning("Debugging")
-import XCTest
-
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
   import Foundation
@@ -128,8 +125,6 @@ import XCTest
       }
       return process.run([executionOption, commandString], in: workingDirectory, with: environment)
       {
-        #warning("Debugging")
-        XCTFail($0)
         reportProgress($0)
       }
     }
