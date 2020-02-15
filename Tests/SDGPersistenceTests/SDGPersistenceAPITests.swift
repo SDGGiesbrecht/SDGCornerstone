@@ -12,36 +12,35 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
-  import Foundation
+import Foundation
 
-  import SDGLogic
-  import SDGCollections
-  import SDGText
-  import SDGPersistence
-  import SDGLocalization
-  import SDGExternalProcess
+import SDGLogic
+import SDGCollections
+import SDGText
+import SDGPersistence
+import SDGLocalization
+import SDGExternalProcess
 
-  import SDGCornerstoneLocalizations
+import SDGCornerstoneLocalizations
 
-  import XCTest
+import XCTest
 
-  import SDGPersistenceTestUtilities
-  import SDGLocalizationTestUtilities
-  import SDGXCTestUtilities
+import SDGPersistenceTestUtilities
+import SDGLocalizationTestUtilities
+import SDGXCTestUtilities
 
-  class SDGPersistenceAPITests: TestCase {
+class SDGPersistenceAPITests: TestCase {
 
-    func testFileConvertible() {
+  func testFileConvertible() {
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
       setTestSpecificationDirectory(to: testSpecificationDirectory())
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testFileConvertibleConformance(of: Data([0x10, 0x20, 0x30]), uniqueTestName: "Binary Data")
-        testFileConvertibleConformance(of: "Hello, world!", uniqueTestName: "Hello")
-      #endif
-    }
+      testFileConvertibleConformance(of: Data([0x10, 0x20, 0x30]), uniqueTestName: "Binary Data")
+      testFileConvertibleConformance(of: "Hello, world!", uniqueTestName: "Hello")
+    #endif
+  }
 
-    func testFileManager() throws {
+  func testFileManager() throws {
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
       let destination = FileManager.default.url(in: .applicationSupport, at: "Subdirectory")
       try FileManager.default
         .withTemporaryDirectory(appropriateFor: destination) { temporaryDirectory in
@@ -131,30 +130,31 @@
             "Failed to enumerate files."
           )
         }
-    }
+    #endif
+  }
 
-    struct LosslessStirngConvertibleExample: CodableViaLosslessStringConvertible, Equatable {
-      var value: String
-      init(_ value: String) {
-        self.value = value
-      }
-      var description: String {
-        return value
-      }
+  struct LosslessStirngConvertibleExample: CodableViaLosslessStringConvertible, Equatable {
+    var value: String
+    init(_ value: String) {
+      self.value = value
     }
-    func testLosslessStringConvertible() {
+    var description: String {
+      return value
+    }
+  }
+  func testLosslessStringConvertible() {
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
       #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-        #if !os(Android)
-          testCodableConformance(
-            of: LosslessStirngConvertibleExample("Example"),
-            uniqueTestName: "Example"
-          )
-        #endif
+        testCodableConformance(
+          of: LosslessStirngConvertibleExample("Example"),
+          uniqueTestName: "Example"
+        )
       #endif
-    }
+    #endif
+  }
 
-    func testPreferences() throws {
+  func testPreferences() throws {
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
       let testKey = "SDGTestKey"
       let testDomain = "ca.solideogloria.SDGCornerstone.Tests.Preferences"
       let testDomainExternalName = testDomain + ".debug"
@@ -219,21 +219,20 @@
       mock.set(to: true)
       XCTAssertEqual(mock.as(Bool.self), true)
       XCTAssertNil(mock.as(String.self))
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCustomStringConvertibleConformance(
-          of: mock,
-          localizations: InterfaceLocalization.self,
-          uniqueTestName: "true",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      testCustomStringConvertibleConformance(
+        of: mock,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "true",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
       mock[as: [String: Bool].self, default: [:]]["key"] = true
       XCTAssertEqual(mock[as: [String: Bool].self, default: [:]]["key"], true)
-    }
+    #endif
+  }
 
-    func testSpecification() {
+  func testSpecification() {
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
       let specifications = testSpecificationDirectory().appendingPathComponent("Specification")
 
       let new = specifications.appendingPathComponent("New.txt")
@@ -246,9 +245,11 @@
         against: specifications.appendingPathComponent("Overwrite.txt"),
         overwriteSpecificationInsteadOfFailing: true
       )
-    }
+    #endif
+  }
 
-    func testURL() {
+  func testURL() {
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
       let rootPath: String
       let usersPath: String
       let johnDoePath: String
@@ -274,6 +275,6 @@
       XCTAssertEqual(users.path(relativeTo: root), "Users")
       XCTAssertEqual(users.path(relativeTo: johnDoe), usersPath)
       XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
-    }
+    #endif
   }
-#endif
+}

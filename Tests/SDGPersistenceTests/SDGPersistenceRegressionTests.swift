@@ -12,20 +12,20 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
-  import Foundation
+import Foundation
 
-  import SDGPersistence
+import SDGPersistence
 
-  import XCTest
+import XCTest
 
-  import SDGXCTestUtilities
+import SDGXCTestUtilities
 
-  class SDGPersistenceRegressionTests: TestCase {
+class SDGPersistenceRegressionTests: TestCase {
 
-    func testCachePermissions() {
-      // Untracked
+  func testCachePermissions() {
+    // Untracked
 
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
       defer { FileManager.default.delete(.cache) }
 
       let file = "File"
@@ -37,11 +37,13 @@
       } catch {
         XCTFail("\(error)")
       }
-    }
+    #endif
+  }
 
-    func testPercentEncodingIsNotDoubled() {
-      // Untracked
+  func testPercentEncodingIsNotDoubled() {
+    // Untracked
 
+    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
       FileManager.default.withTemporaryDirectory(appropriateFor: nil) { directory in
         var url = directory.appendingPathComponent("A Folder")
         url.appendPathComponent("A File")
@@ -52,6 +54,6 @@
           XCTAssert(url.path.hasSuffix("A Folder/A File"))
         #endif
       }
-    }
+    #endif
   }
-#endif
+}
