@@ -239,8 +239,6 @@ public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarC
   }
 
   public func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString {
-    let όνομα: StrictString
-
     func απλό(όνομα: StrictString) -> StrictString {
       switch πτώση {
       case .ονομαστική:
