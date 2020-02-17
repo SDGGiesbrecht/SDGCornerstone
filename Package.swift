@@ -354,10 +354,6 @@ let package = Package(
         "SDGMathematics",
         "SDGCollections",
         "SDGText"
-      ],
-      swiftSettings: [
-        .define("DEBUG_DOMAINS", .when(configuration: .debug)),
-        .define("PREFERENCE_WARNINGS", .when(configuration: .debug))
       ]
     ),
     // @documentation(SDGPersistenceTestUtilities)
