@@ -135,7 +135,7 @@ public struct Preference: Equatable, TransparentWrapper {
       let object = cast(arrayObject.firstObject!)
       propertyListObject = object
     } catch {  // @exempt(from: tests)
-      #if PREFERENCE_WARNINGS  // @exempt(from: tests)
+      #if DEBUG  // @exempt(from: tests)
         // This indicates a precondition violation during coding, but it is not worth stopping execution.
         print(error)
       #endif
@@ -169,7 +169,7 @@ public struct Preference: Equatable, TransparentWrapper {
       do {
         return try serializeAndDecode(NSArray(object: object), as: T.self)[0]
       } catch {
-        #if PREFERENCE_WARNINGS
+        #if DEBUG
           print(error)
         #endif
         return nil

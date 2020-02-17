@@ -22,7 +22,7 @@ extension FileManager {
   // MARK: - Domains
 
   internal static func possibleDebugDomain(_ domain: String) -> String {
-    #if DEBUG_DOMAINS
+    #if DEBUG
       return domain + ".debug"
     #else
       return domain
