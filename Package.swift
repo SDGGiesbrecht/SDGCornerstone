@@ -742,13 +742,16 @@ if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
   sdgXCTestUtilities.swiftSettings = settings
 }
 
-// #workaround(workspace 0.28.0, Causes Xcode executable/scheme issues for iOS.)
-#if os(macOS) || true  // #workaround(Causes Windows CMake differences between platforms.)
+// #workaround(workspace version 0.30.1, Causes Xcode executable/scheme issues for iOS.)
+func disableDevelopmentTools() {
   package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
+}
+#if os(macOS)  // #workaround(Causes Windows CMake differences between platforms.)
+  disableDevelopmentTools()
 #endif
 
 func adjustForWindows() {
-  // #workaround(workspace version 0.29.0, Windows does not support C.)
+  // #workaround(Swift 5.1.3, Windows does not support C.)
   let impossibleProducts: Set<String> = [
     // SwiftNumerics
     "Real"
@@ -763,12 +766,14 @@ func adjustForWindows() {
       }
     })
   }
+  // #workaround(workspace version 0.30.1, CMake cannot handle Unicode.)
+  disableDevelopmentTools()
 }
 #if os(Windows)
   adjustForWindows()
 #endif
 import Foundation
-// #workaround(workspace 0.29.0, Until packages work natively on windows.)
+// #workaround(workspace 0.30.1, Until packages work natively on windows.)
 if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
   adjustForWindows()
 }
