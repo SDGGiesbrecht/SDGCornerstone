@@ -57,19 +57,21 @@ class SDGCalendarInternalTests: TestCase {
   }
 
   func testGregorianMonth() {
-    var list = ""
-    for month in GregorianMonth.january...GregorianMonth.december {
-      for πτώση in [.ονομαστική, .αιτιατική, .γενική, .κλητική] as [_ΓραμματικήΠτώση] {
-        print(month._σεΕλληνικά(πτώση), to: &list)
+    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+      var list = ""
+      for month in GregorianMonth.january...GregorianMonth.december {
+        for πτώση in [.ονομαστική, .αιτιατική, .γενική, .κλητική] as [_ΓραμματικήΠτώση] {
+          print(month._σεΕλληνικά(πτώση), to: &list)
+        }
       }
-    }
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      compare(
-        list,
-        against: testSpecificationDirectory().appendingPathComponent("Ελληνικά.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
+      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
+      #if !os(Android)
+        compare(
+          list,
+          against: testSpecificationDirectory().appendingPathComponent("Ελληνικά.txt"),
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
