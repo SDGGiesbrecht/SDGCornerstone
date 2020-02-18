@@ -124,8 +124,9 @@ public func compare(
       }
 
       if originalOffset ∈ removals {
-        report.append(contentsOf:
-          "− "
+        report.append(
+          contentsOf:
+            "− "
             + specificationLines[
               specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)]
         )
