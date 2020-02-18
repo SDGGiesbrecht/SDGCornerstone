@@ -96,16 +96,11 @@ public func compare(
     }
 
     // These need to be random access collections.
-    let stringLines: [String] = string.lines.map({ String($0.line) })
-    let specificationLines: [String] = specificationString.lines.map({ String($0.line) })
+    let stringLines: [String] = string
+      .lines.map({ String($0.line) + String($0.newline) })
+    let specificationLines: [String] = specificationString
+      .lines.map({ String($0.line) + String($0.newline) })
     let differences = stringLines.changes(from: specificationLines)
-
-    #if os(Windows)
-      // #workaround(Swift 5.1.3, Windows mistakes strings as inequal, but then reports no differences.)
-      if differences.isEmpty {
-        return  // Passing
-      }
-    #endif
 
     var removals: Set<Int> = []
     var inserts: [Int: String] = [:]
@@ -118,7 +113,7 @@ public func compare(
       }
     }
 
-    var reportArray: [String] = []
+    var report: String = ""
     var resultOffset = 0
     var originalOffset = 0
     var continuingKeptRange = false
@@ -129,7 +124,7 @@ public func compare(
       }
 
       if originalOffset ∈ removals {
-        reportArray.append(
+        report.append(contentsOf:
           "− "
             + specificationLines[
               specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)]
@@ -137,17 +132,16 @@ public func compare(
         resultOffset −= 1
         continuingKeptRange = false
       } else if let insert = inserts[resultOffset] {
-        reportArray.append("+ " + insert)
+        report.append(contentsOf: "+ " + insert)
         originalOffset −= 1
         continuingKeptRange = false
       } else {
         if ¬continuingKeptRange {
-          reportArray.append("  [...]")
+          report.append(contentsOf: "  [...]\n")
         }
         continuingKeptRange = true
       }
     }
-    let report = reportArray.joined(separator: "\n")
 
     fail(
       String(
