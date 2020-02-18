@@ -113,7 +113,7 @@ public func compare(
       }
     }
 
-    var reportArray: [String] = []
+    var report: String = ""
     var resultOffset = 0
     var originalOffset = 0
     var continuingKeptRange = false
@@ -124,25 +124,24 @@ public func compare(
       }
 
       if originalOffset ∈ removals {
-        reportArray.append(
-          "− "
+        report.append(
+          contentsOf: "− "
             + specificationLines[
               specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)]
         )
         resultOffset −= 1
         continuingKeptRange = false
       } else if let insert = inserts[resultOffset] {
-        reportArray.append("+ " + insert)
+        report.append(contentsOf: "+ " + insert)
         originalOffset −= 1
         continuingKeptRange = false
       } else {
         if ¬continuingKeptRange {
-          reportArray.append("  [...]\n")
+          report.append(contentsOf: "  [...]\n")
         }
         continuingKeptRange = true
       }
     }
-    let report = reportArray.joined()
 
     fail(
       String(
