@@ -269,7 +269,7 @@ let package = Package(
       dependencies: [
         "SDGControlFlow",
         "SDGLogic",
-        .product(name: "Real", package: "swift\u{2D}numerics")
+        .product(name: "RealModule", package: "swift\u{2D}numerics")
       ]
     ),
     // @documentation(SDGMathematicsTestUtilities)
@@ -754,7 +754,7 @@ func adjustForWindows() {
   // #workaround(Swift 5.1.3, Windows does not support C.)
   let impossibleProducts: Set<String> = [
     // SwiftNumerics
-    "Real"
+    "RealModule"
   ]
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in

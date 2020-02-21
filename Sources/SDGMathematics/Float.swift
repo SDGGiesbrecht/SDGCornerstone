@@ -20,7 +20,7 @@ import Foundation
 #if os(Windows)  // #workaround(workspace version 0.30.1, Windows does not support C.)
   import WinSDK
 #else
-  import Real
+  import RealModule
 #endif
 
 #if os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
