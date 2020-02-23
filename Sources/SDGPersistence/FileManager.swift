@@ -144,10 +144,10 @@ extension FileManager {
   ) rethrows -> Result {
     var directory: URL
 
-    #if os(Android)
+    //#if os(Android)
       // #workaround(Swift 5.1.3, .itemReplacementDirectory leads to illegal instruction.)
-      directory = temporaryDirectory
-    #else
+      //directory = temporaryDirectory
+    //#else
       let volume = try? url(
         for: .documentDirectory,
         in: .userDomainMask,
@@ -179,7 +179,7 @@ extension FileManager {
           }
         }
       }
-    #endif
+    //#endif
 
     directory.appendPathComponent(UUID().uuidString)
     defer { try? removeItem(at: directory) }

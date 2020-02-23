@@ -22,7 +22,7 @@ import SDGXCTestUtilities
 
 class SDGPersistenceRegressionTests: TestCase {
 
-  func testAndroidTemporaryDirectory() {
+  func testAndroidTemporaryDirectory() throws {
     // Untracked
 
     try FileManager.default.withTemporaryDirectory(appropriateFor: nil) { temporary in
