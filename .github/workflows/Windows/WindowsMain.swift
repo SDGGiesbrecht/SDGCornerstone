@@ -370,6 +370,7 @@ extension SDGPersistenceAPITests {
 extension SDGPersistenceRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
+      ("testAndroidTemporaryDirectory", testAndroidTemporaryDirectory),
       ("testCachePermissions", testCachePermissions),
       ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled),
     ])

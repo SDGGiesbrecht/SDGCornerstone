@@ -22,6 +22,14 @@ import SDGXCTestUtilities
 
 class SDGPersistenceRegressionTests: TestCase {
 
+  func testAndroidTemporaryDirectory() throws {
+    // Untracked
+
+    try FileManager.default.withTemporaryDirectory(appropriateFor: nil) { temporary in
+      try "File".save(to: temporary.appendingPathComponent("File.txt"))
+    }
+  }
+
   func testCachePermissions() {
     // Untracked
 
