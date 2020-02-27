@@ -47,7 +47,9 @@ public func setTestSpecificationDirectory(to directory: URL) {
 public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -> URL {
   return cached(in: &specificationDirectory) {
     let repositoryRoot: URL
-    if let overridden = ProcessInfo.processInfo.environment["SWIFTPM_PACKAGE_ROOT"] {
+    if let overridden = ProcessInfo.processInfo
+      .environment["SWIFTPM_PACKAGE_ROOT"]
+    {  // @exempt(from: tests)
       repositoryRoot = URL(fileURLWithPath: overridden)
     } else {
       repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation))
