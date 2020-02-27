@@ -32,7 +32,7 @@ import XCTest
 @testable import SDGTextTests
 @testable import SDGVersioningTests
 
-extension SDGBinaryDataAPITests {
+extension SDGBinaryDataTests.SDGBinaryDataAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testData", testData),
@@ -42,7 +42,7 @@ extension SDGBinaryDataAPITests {
   ]
 }
 
-extension SDGCalendarAPITests {
+extension SDGCalendarTests.SDGCalendarAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testCalendarComponent", testCalendarComponent),
@@ -67,7 +67,7 @@ extension SDGCalendarAPITests {
   ]
 }
 
-extension SDGCalendarInternalTests {
+extension SDGCalendarTests.SDGCalendarInternalTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testDate", testDate),
@@ -81,7 +81,7 @@ extension SDGCalendarInternalTests {
   ]
 }
 
-extension SDGCalendarRegressionTests {
+extension SDGCalendarTests.SDGCalendarRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testCalendarEquatability", testCalendarEquatability),
@@ -90,7 +90,7 @@ extension SDGCalendarRegressionTests {
   ]
 }
 
-extension SDGCollationAPITests {
+extension SDGCollationTests.SDGCollationAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testCoding", testCoding),
@@ -100,7 +100,7 @@ extension SDGCollationAPITests {
   ]
 }
 
-extension SDGCollationLanguageTests {
+extension SDGCollationTests.SDGCollationLanguageTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAramaic", testAramaic),
@@ -116,7 +116,7 @@ extension SDGCollationLanguageTests {
   ]
 }
 
-extension SDGCollectionsAPITests {
+extension SDGCollectionsTests.SDGCollectionsAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAbsoluteComplement", testAbsoluteComplement),
@@ -152,7 +152,7 @@ extension SDGCollectionsAPITests {
   ]
 }
 
-extension SDGCollectionsRegressionTests {
+extension SDGCollectionsTests.SDGCollectionsRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch),
@@ -162,7 +162,7 @@ extension SDGCollectionsRegressionTests {
   ]
 }
 
-extension SDGConcurrencyAPITests {
+extension SDGConcurrencyTests.SDGConcurrencyAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testRunLoop", testRunLoop),
@@ -170,7 +170,7 @@ extension SDGConcurrencyAPITests {
   ]
 }
 
-extension SDGControlFlowAPITests {
+extension SDGControlFlowTests.SDGControlFlowAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testCaching", testCaching),
@@ -184,7 +184,7 @@ extension SDGControlFlowAPITests {
   ]
 }
 
-extension DateExampleTests {
+extension SDGCornerstoneDocumentationExampleTests.DateExampleTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testCustomDate", testCustomDate),
@@ -193,7 +193,7 @@ extension DateExampleTests {
   ]
 }
 
-extension FunctionAnalysisExampleTests {
+extension SDGCornerstoneDocumentationExampleTests.FunctionAnalysisExampleTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testFindLocalMinimum", testFindLocalMinimum),
@@ -205,7 +205,7 @@ extension FunctionAnalysisExampleTests {
   ]
 }
 
-extension MiscellaneousExampleTests {
+extension SDGCornerstoneDocumentationExampleTests.MiscellaneousExampleTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAbsoluteValue", testAbsoluteValue),
@@ -228,7 +228,7 @@ extension MiscellaneousExampleTests {
   ]
 }
 
-extension ReadMeExampleTests {
+extension SDGCornerstoneDocumentationExampleTests.ReadMeExampleTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testReadMe", testReadMe),
@@ -236,7 +236,7 @@ extension ReadMeExampleTests {
   ]
 }
 
-extension StrictInterpolationExampleTests {
+extension SDGCornerstoneDocumentationExampleTests.StrictInterpolationExampleTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testStrictInterpolation", testStrictInterpolation),
@@ -244,7 +244,7 @@ extension StrictInterpolationExampleTests {
   ]
 }
 
-extension SDGExternalProcessAPITests {
+extension SDGExternalProcessTests.SDGExternalProcessAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testExternalProcess", testExternalProcess),
@@ -254,7 +254,7 @@ extension SDGExternalProcessAPITests {
   ]
 }
 
-extension SDGExternalProcessRegressionTests {
+extension SDGExternalProcessTests.SDGExternalProcessRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testDelayedShellOutput", testDelayedShellOutput),
@@ -262,7 +262,7 @@ extension SDGExternalProcessRegressionTests {
   ]
 }
 
-extension SDGGeometryAPITests {
+extension SDGGeometryTests.SDGGeometryAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAngle", testAngle),
@@ -273,7 +273,7 @@ extension SDGGeometryAPITests {
   ]
 }
 
-extension SDGLocalizationAPITests {
+extension SDGLocalizationTests.SDGLocalizationAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAngle", testAngle),
@@ -294,7 +294,7 @@ extension SDGLocalizationAPITests {
   ]
 }
 
-extension SDGLocalizationInternalTests {
+extension SDGLocalizationTests.SDGLocalizationInternalTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testContentLocalization", testContentLocalization),
@@ -305,7 +305,7 @@ extension SDGLocalizationInternalTests {
   ]
 }
 
-extension SDGLogicAPITests {
+extension SDGLogicTests.SDGLogicAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAny", testAny),
@@ -316,7 +316,7 @@ extension SDGLogicAPITests {
   ]
 }
 
-extension SDGMathematicsAPITests {
+extension SDGMathematicsTests.SDGMathematicsAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAddable", testAddable),
@@ -340,7 +340,7 @@ extension SDGMathematicsAPITests {
   ]
 }
 
-extension SDGMathematicsRegressionTests {
+extension SDGMathematicsTests.SDGMathematicsRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAddAndSetIsUnambiguous", testAddAndSetIsUnambiguous),
@@ -354,7 +354,7 @@ extension SDGMathematicsRegressionTests {
   ]
 }
 
-extension SDGPersistenceAPITests {
+extension SDGPersistenceTests.SDGPersistenceAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testFileConvertible", testFileConvertible),
@@ -367,7 +367,7 @@ extension SDGPersistenceAPITests {
   ]
 }
 
-extension SDGPersistenceRegressionTests {
+extension SDGPersistenceTests.SDGPersistenceRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testAndroidTemporaryDirectory", testAndroidTemporaryDirectory),
@@ -377,7 +377,7 @@ extension SDGPersistenceRegressionTests {
   ]
 }
 
-extension SDGPrecisionMathematicsAPITests {
+extension SDGPrecisionMathematicsTests.SDGPrecisionMathematicsAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testInteger", testInteger),
@@ -387,7 +387,7 @@ extension SDGPrecisionMathematicsAPITests {
   ]
 }
 
-extension SDGPrecisionMathematicsInternalTests {
+extension SDGPrecisionMathematicsTests.SDGPrecisionMathematicsInternalTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testUIntHalvesView", testUIntHalvesView),
@@ -396,7 +396,7 @@ extension SDGPrecisionMathematicsInternalTests {
   ]
 }
 
-extension SDGRandomizationAPITests {
+extension SDGRandomizationTests.SDGRandomizationAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testBool", testBool),
@@ -409,7 +409,7 @@ extension SDGRandomizationAPITests {
   ]
 }
 
-extension SDGTextAPITests {
+extension SDGTextTests.SDGTextAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testCharacterSet", testCharacterSet),
@@ -432,7 +432,7 @@ extension SDGTextAPITests {
   ]
 }
 
-extension SDGTextInternalTests {
+extension SDGTextTests.SDGTextInternalTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testLineViewIndex", testLineViewIndex),
@@ -440,7 +440,7 @@ extension SDGTextInternalTests {
   ]
 }
 
-extension SDGTextRegressionTests {
+extension SDGTextTests.SDGTextRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testLastLineNotDropped", testLastLineNotDropped),
@@ -456,7 +456,7 @@ extension SDGTextRegressionTests {
   ]
 }
 
-extension SDGVersioningAPITests {
+extension SDGVersioningTests.SDGVersioningAPITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testVersion", testVersion),
@@ -464,7 +464,7 @@ extension SDGVersioningAPITests {
   ]
 }
 
-extension SDGVersioningRegressionTests {
+extension SDGVersioningTests.SDGVersioningRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testVersionRangesCanBeCreated", testVersionRangesCanBeCreated),
@@ -473,38 +473,38 @@ extension SDGVersioningRegressionTests {
 }
 
 var tests = [XCTestCaseEntry]()
-tests += SDGBinaryDataAPITests.windowsTests
-tests += SDGCalendarAPITests.windowsTests
-tests += SDGCalendarInternalTests.windowsTests
-tests += SDGCalendarRegressionTests.windowsTests
-tests += SDGCollationAPITests.windowsTests
-tests += SDGCollationLanguageTests.windowsTests
-tests += SDGCollectionsAPITests.windowsTests
-tests += SDGCollectionsRegressionTests.windowsTests
-tests += SDGConcurrencyAPITests.windowsTests
-tests += SDGControlFlowAPITests.windowsTests
-tests += DateExampleTests.windowsTests
-tests += FunctionAnalysisExampleTests.windowsTests
-tests += MiscellaneousExampleTests.windowsTests
-tests += ReadMeExampleTests.windowsTests
-tests += StrictInterpolationExampleTests.windowsTests
-tests += SDGExternalProcessAPITests.windowsTests
-tests += SDGExternalProcessRegressionTests.windowsTests
-tests += SDGGeometryAPITests.windowsTests
-tests += SDGLocalizationAPITests.windowsTests
-tests += SDGLocalizationInternalTests.windowsTests
-tests += SDGLogicAPITests.windowsTests
-tests += SDGMathematicsAPITests.windowsTests
-tests += SDGMathematicsRegressionTests.windowsTests
-tests += SDGPersistenceAPITests.windowsTests
-tests += SDGPersistenceRegressionTests.windowsTests
-tests += SDGPrecisionMathematicsAPITests.windowsTests
-tests += SDGPrecisionMathematicsInternalTests.windowsTests
-tests += SDGRandomizationAPITests.windowsTests
-tests += SDGTextAPITests.windowsTests
-tests += SDGTextInternalTests.windowsTests
-tests += SDGTextRegressionTests.windowsTests
-tests += SDGVersioningAPITests.windowsTests
-tests += SDGVersioningRegressionTests.windowsTests
+tests += SDGBinaryDataTests.SDGBinaryDataAPITests.windowsTests
+tests += SDGCalendarTests.SDGCalendarAPITests.windowsTests
+tests += SDGCalendarTests.SDGCalendarInternalTests.windowsTests
+tests += SDGCalendarTests.SDGCalendarRegressionTests.windowsTests
+tests += SDGCollationTests.SDGCollationAPITests.windowsTests
+tests += SDGCollationTests.SDGCollationLanguageTests.windowsTests
+tests += SDGCollectionsTests.SDGCollectionsAPITests.windowsTests
+tests += SDGCollectionsTests.SDGCollectionsRegressionTests.windowsTests
+tests += SDGConcurrencyTests.SDGConcurrencyAPITests.windowsTests
+tests += SDGControlFlowTests.SDGControlFlowAPITests.windowsTests
+tests += SDGCornerstoneDocumentationExampleTests.DateExampleTests.windowsTests
+tests += SDGCornerstoneDocumentationExampleTests.FunctionAnalysisExampleTests.windowsTests
+tests += SDGCornerstoneDocumentationExampleTests.MiscellaneousExampleTests.windowsTests
+tests += SDGCornerstoneDocumentationExampleTests.ReadMeExampleTests.windowsTests
+tests += SDGCornerstoneDocumentationExampleTests.StrictInterpolationExampleTests.windowsTests
+tests += SDGExternalProcessTests.SDGExternalProcessAPITests.windowsTests
+tests += SDGExternalProcessTests.SDGExternalProcessRegressionTests.windowsTests
+tests += SDGGeometryTests.SDGGeometryAPITests.windowsTests
+tests += SDGLocalizationTests.SDGLocalizationAPITests.windowsTests
+tests += SDGLocalizationTests.SDGLocalizationInternalTests.windowsTests
+tests += SDGLogicTests.SDGLogicAPITests.windowsTests
+tests += SDGMathematicsTests.SDGMathematicsAPITests.windowsTests
+tests += SDGMathematicsTests.SDGMathematicsRegressionTests.windowsTests
+tests += SDGPersistenceTests.SDGPersistenceAPITests.windowsTests
+tests += SDGPersistenceTests.SDGPersistenceRegressionTests.windowsTests
+tests += SDGPrecisionMathematicsTests.SDGPrecisionMathematicsAPITests.windowsTests
+tests += SDGPrecisionMathematicsTests.SDGPrecisionMathematicsInternalTests.windowsTests
+tests += SDGRandomizationTests.SDGRandomizationAPITests.windowsTests
+tests += SDGTextTests.SDGTextAPITests.windowsTests
+tests += SDGTextTests.SDGTextInternalTests.windowsTests
+tests += SDGTextTests.SDGTextRegressionTests.windowsTests
+tests += SDGVersioningTests.SDGVersioningAPITests.windowsTests
+tests += SDGVersioningTests.SDGVersioningRegressionTests.windowsTests
 
 XCTMain(tests)
