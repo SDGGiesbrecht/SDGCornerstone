@@ -51,7 +51,7 @@ public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -
       repositoryRoot = URL(fileURLWithPath: overridden)
     } else {
       repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation))
-      .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
     }
     return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
   }
