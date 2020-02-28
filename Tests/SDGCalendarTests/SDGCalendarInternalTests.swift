@@ -63,14 +63,11 @@ class SDGCalendarInternalTests: TestCase {
         print(month._σεΕλληνικά(πτώση), to: &list)
       }
     }
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      compare(
-        list,
-        against: testSpecificationDirectory().appendingPathComponent("Ελληνικά.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    compare(
+      list,
+      against: testSpecificationDirectory().appendingPathComponent("Ελληνικά.txt"),
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testGregorianWeekdayDate() {

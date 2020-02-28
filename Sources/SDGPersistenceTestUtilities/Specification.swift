@@ -40,12 +40,22 @@ public func setTestSpecificationDirectory(to directory: URL) {
 ///
 /// The directory can be set by `setTestSpecificationDirectory(to:)`. Otherwise the default directory is determined relative to the first calling source file based on the assumption that that it is in a Swift Package Manager test target, and not in any further subdirectories.
 ///
+/// This method normally assumes the package source is still accessible in the same location as it was compiled from. If that is not the case, the `SWIFTPM_PACKAGE_ROOT` environment variable, can be used to direct this function to look for the package at a different location instead.
+///
 /// - Parameters:
 ///     - callerLocation: Optional. A different file to consider as the location of the call.
 public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -> URL {
   return cached(in: &specificationDirectory) {
-    let repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation))
-      .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let repositoryRoot: URL
+    if let overridden = ProcessInfo.processInfo
+      .environment["SWIFTPM_PACKAGE_ROOT"]
+    {
+      // @exempt(from: tests)
+      repositoryRoot = URL(fileURLWithPath: overridden)
+    } else {
+      repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation))
+        .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    }
     return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
   }
 }

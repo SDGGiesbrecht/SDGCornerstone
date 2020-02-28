@@ -232,20 +232,18 @@ class SDGPersistenceAPITests: TestCase {
   }
 
   func testSpecification() {
-    #if !os(Android)  // #workaround(Swift 5.1.3, Illegal instruction, entire module.)
-      let specifications = testSpecificationDirectory().appendingPathComponent("Specification")
+    let specifications = testSpecificationDirectory().appendingPathComponent("Specification")
 
-      let new = specifications.appendingPathComponent("New.txt")
-      try? FileManager.default.removeItem(at: new)
-      compare("New!", against: new, overwriteSpecificationInsteadOfFailing: false)
-      try? FileManager.default.removeItem(at: new)
+    let new = specifications.appendingPathComponent("New.txt")
+    try? FileManager.default.removeItem(at: new)
+    compare("New!", against: new, overwriteSpecificationInsteadOfFailing: false)
+    try? FileManager.default.removeItem(at: new)
 
-      compare(
-        "Overwritten.",
-        against: specifications.appendingPathComponent("Overwrite.txt"),
-        overwriteSpecificationInsteadOfFailing: true
-      )
-    #endif
+    compare(
+      "Overwritten.",
+      against: specifications.appendingPathComponent("Overwrite.txt"),
+      overwriteSpecificationInsteadOfFailing: true
+    )
   }
 
   func testURL() {
