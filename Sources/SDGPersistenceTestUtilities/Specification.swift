@@ -49,7 +49,8 @@ public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -
     let repositoryRoot: URL
     if let overridden = ProcessInfo.processInfo
       .environment["SWIFTPM_PACKAGE_ROOT"]
-    {  // @exempt(from: tests)
+    {
+      // @exempt(from: tests)
       repositoryRoot = URL(fileURLWithPath: overridden)
     } else {
       repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation))
