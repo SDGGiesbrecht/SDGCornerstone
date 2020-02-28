@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace version 0.30.1, Should be “ΓραμματικήΠτώση.swift” but for CMake issue.)
+// #workaround(workspace version 0.30.2, Should be “ΓραμματικήΠτώση.swift” but for CMake issue.)
 
 public enum _ΓραμματικήΠτώση {
   // Public for SDGCalendar.

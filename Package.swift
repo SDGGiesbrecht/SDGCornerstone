@@ -742,11 +742,11 @@ if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
   sdgXCTestUtilities.swiftSettings = settings
 }
 
-// #workaround(workspace version 0.30.1, Causes Xcode executable/scheme issues for iOS.)
+// #workaround(workspace version 0.30.2, Causes Xcode executable/scheme issues for iOS.)
 func disableDevelopmentTools() {
   package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
 }
-#if os(macOS)  // #workaround(Causes Windows CMake differences between platforms.)
+#if os(macOS)
   disableDevelopmentTools()
 #endif
 
@@ -766,14 +766,14 @@ func adjustForWindows() {
       }
     })
   }
-  // #workaround(workspace version 0.30.1, CMake cannot handle Unicode.)
+  // #workaround(workspace version 0.30.2, CMake cannot handle Unicode.)
   disableDevelopmentTools()
 }
 #if os(Windows)
   adjustForWindows()
 #endif
 import Foundation
-// #workaround(workspace 0.30.1, Until packages work natively on windows.)
+// #workaround(workspace 0.30.2, Until packages work natively on windows.)
 if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
   adjustForWindows()
 }
