@@ -78,27 +78,18 @@ class DateExampleTests: TestCase {
     // Unregistered definitions.
     let testName: StrictString = "Custom"
     let unregistered = CalendarDate(daysIntoMillennium: 12345)
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCodableConformance(of: unregistered, uniqueTestName: testName)
-    #endif
+    testCodableConformance(of: unregistered, uniqueTestName: testName)
     do {
       let recoded = try JSONDecoder().decode(
         CalendarDate.self,
         from: try JSONEncoder().encode(unregistered)
       )
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCodableConformance(of: recoded, uniqueTestName: testName)
-      #endif
+      testCodableConformance(of: recoded, uniqueTestName: testName)
     } catch {
       XCTFail(error.localizedDescription)
     }
     // Once registered...
     CalendarDate.register(DaysIntoMillennium.self)
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCodableConformance(of: unregistered, uniqueTestName: testName)
-    #endif
+    testCodableConformance(of: unregistered, uniqueTestName: testName)
   }
 }

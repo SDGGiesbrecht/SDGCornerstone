@@ -29,9 +29,8 @@ class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      LocalizationSetting(orderOfPrecedence: ["en"]).do {
-        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-        #if !os(Android)
+      #if !os(Android)  // #workaround(Shell doesn’t work?)
+        LocalizationSetting(orderOfPrecedence: ["en"]).do {
           // @example(readMe🇨🇦EN)
           // ••••••• Localization •••••••
 
@@ -138,9 +137,9 @@ class ReadMeExampleTests: TestCase {
               "Hello, world!"
             )
           #endif
-        // @endExample
-        #endif
-      }
+          // @endExample
+        }
+      #endif
     #endif
   }
 }

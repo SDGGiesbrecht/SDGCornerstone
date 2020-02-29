@@ -47,21 +47,18 @@ class SDGTextAPITests: TestCase {
 
   func testLineView() {
     testBidirectionalCollectionConformance(of: "A\nB\nC".lines)
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: "A\nB\nC".lines,
-        localizations: APILocalization.self,
-        uniqueTestName: "ABC",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-      testCustomStringConvertibleConformance(
-        of: "ABC\nDEF".lines.first!,
-        localizations: APILocalization.self,
-        uniqueTestName: "ABC",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: "A\nB\nC".lines,
+      localizations: APILocalization.self,
+      uniqueTestName: "ABC",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    testCustomStringConvertibleConformance(
+      of: "ABC\nDEF".lines.first!,
+      localizations: APILocalization.self,
+      uniqueTestName: "ABC",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
     let fileLines = [
       "Line 1",
@@ -272,22 +269,16 @@ class SDGTextAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
       testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCodableConformance(
-          of: SemanticMarkup("àbçđę...").superscripted(),
-          uniqueTestName: "Unicode"
-        )
-      #endif
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCustomStringConvertibleConformance(
-          of: SemanticMarkup("ABC").superscripted(),
-          localizations: APILocalization.self,
-          uniqueTestName: "ABC",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      testCodableConformance(
+        of: SemanticMarkup("àbçđę...").superscripted(),
+        uniqueTestName: "Unicode"
+      )
+      testCustomStringConvertibleConformance(
+        of: SemanticMarkup("ABC").superscripted(),
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
       let markup: SemanticMarkup = "..."
       XCTAssertEqual(markup.scalars, markup.source.scalars)
@@ -312,16 +303,13 @@ class SDGTextAPITests: TestCase {
 
       let html = SemanticMarkup("&<>").subscripted().html()
 
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        compare(
-          String(html),
-          against: testSpecificationDirectory().appendingPathComponent(
-            "SemanticMarkup/HTML/Escapes.txt"
-          ),
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      compare(
+        String(html),
+        against: testSpecificationDirectory().appendingPathComponent(
+          "SemanticMarkup/HTML/Escapes.txt"
+        ),
+        overwriteSpecificationInsteadOfFailing: false
+      )
       _ = markup.playgroundDescription
 
       XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("...")))
@@ -338,26 +326,20 @@ class SDGTextAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       testBidirectionalCollectionConformance(of: StrictString("ABC"))
       testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
-        testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
-      #endif
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCustomStringConvertibleConformance(
-          of: StrictString("ABC"),
-          localizations: APILocalization.self,
-          uniqueTestName: "ABC",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-        testCustomStringConvertibleConformance(
-          of: StrictString("ABC").clusters,
-          localizations: APILocalization.self,
-          uniqueTestName: "ABC",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+      testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+      testCustomStringConvertibleConformance(
+        of: StrictString("ABC"),
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      testCustomStringConvertibleConformance(
+        of: StrictString("ABC").clusters,
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
       var string = StrictString("\u{BC}")
       let appendix: UnicodeScalar = "\u{BD}"

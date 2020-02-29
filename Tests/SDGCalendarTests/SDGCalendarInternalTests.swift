@@ -27,32 +27,29 @@ class SDGCalendarInternalTests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       let date = CalendarDate(gregorian: .august, 28, 8232)
       let datesDirectory = testSpecificationDirectory().appendingPathComponent("Date Formats")
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        compare(
-          String(date.gregorianischesDatumAufDeutsch(mitJahr: true, mitWochentag: true)),
-          against: datesDirectory.appendingPathComponent("Deutsch.txt"),
-          overwriteSpecificationInsteadOfFailing: false
-        )
-        compare(
-          String(
-            date.dateGrégorienneEnFrançais(.sentenceMedial, avecAn: true, avecJourDeSemaine: true)
-              .html()
-          ),
-          against: datesDirectory.appendingPathComponent("Français.txt"),
-          overwriteSpecificationInsteadOfFailing: false
-        )
-        compare(
-          String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)),
-          against: datesDirectory.appendingPathComponent("Ελληνικά.txt"),
-          overwriteSpecificationInsteadOfFailing: false
-        )
-        compare(
-          String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)),
-          against: datesDirectory.appendingPathComponent("עברית.txt"),
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      compare(
+        String(date.gregorianischesDatumAufDeutsch(mitJahr: true, mitWochentag: true)),
+        against: datesDirectory.appendingPathComponent("Deutsch.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      compare(
+        String(
+          date.dateGrégorienneEnFrançais(.sentenceMedial, avecAn: true, avecJourDeSemaine: true)
+            .html()
+        ),
+        against: datesDirectory.appendingPathComponent("Français.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      compare(
+        String(date.γρηγοριανήΗμερομηνίαΣεΕλληνικά(μεΧρόνο: true, μεΗμέραΤηςΕβδομάδας: true)),
+        against: datesDirectory.appendingPathComponent("Ελληνικά.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      compare(
+        String(date.תאריך־גרגוריאני־בעברית(עם־שנה: true, עם־יום־שבוע: true)),
+        against: datesDirectory.appendingPathComponent("עברית.txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 

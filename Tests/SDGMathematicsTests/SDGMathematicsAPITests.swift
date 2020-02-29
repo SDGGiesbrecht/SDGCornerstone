@@ -99,10 +99,7 @@ class SDGMathematicsAPITests: TestCase {
 
   func testAngle() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testMeasurementConformance(of: Angle<Double>.self)
-      #endif
+      testMeasurementConformance(of: Angle<Double>.self)
 
       let _1: Double = 1
 
@@ -179,16 +176,13 @@ class SDGMathematicsAPITests: TestCase {
 
   func testFloat() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testRealArithmeticConformance(of: Double.self)
-        testRealArithmeticConformance(of: FloatMax.self)
-        testRealArithmeticConformance(of: CGFloat.self)
-        #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
-          testRealArithmeticConformance(of: Float80.self)
-        #endif
-        testRealArithmeticConformance(of: Float.self)
+      testRealArithmeticConformance(of: Double.self)
+      testRealArithmeticConformance(of: FloatMax.self)
+      testRealArithmeticConformance(of: CGFloat.self)
+      #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+        testRealArithmeticConformance(of: Float80.self)
       #endif
+      testRealArithmeticConformance(of: Float.self)
 
       XCTAssert(¬CGFloat(28).debugDescription.isEmpty)
       XCTAssertNotNil(CGFloat("1"))
@@ -241,15 +235,12 @@ class SDGMathematicsAPITests: TestCase {
 
   func testInt() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testIntegralArithmeticConformance(of: Int.self)
-        testIntegralArithmeticConformance(of: IntMax.self)
-        testIntegralArithmeticConformance(of: Int64.self)
-        testIntegralArithmeticConformance(of: Int32.self)
-        testIntegralArithmeticConformance(of: Int16.self)
-        testIntegralArithmeticConformance(of: Int8.self)
-      #endif
+      testIntegralArithmeticConformance(of: Int.self)
+      testIntegralArithmeticConformance(of: IntMax.self)
+      testIntegralArithmeticConformance(of: Int64.self)
+      testIntegralArithmeticConformance(of: Int32.self)
+      testIntegralArithmeticConformance(of: Int16.self)
+      testIntegralArithmeticConformance(of: Int8.self)
     #endif
   }
 
@@ -408,24 +399,21 @@ class SDGMathematicsAPITests: TestCase {
   }
   func testPointProtocol() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testPointProtocolConformance(
-          departure: PointProtocolVectorSelfExample(8),
-          vector: PointProtocolVectorSelfExample(1),
-          destination: PointProtocolVectorSelfExample(9)
-        )
-        testPointProtocolConformance(
-          departure: PointProtocolStrideableExample(0),
-          vector: 9,
-          destination: PointProtocolStrideableExample(9)
-        )
-        testPointProtocolConformance(
-          departure: PointProtocolStrideableVectorStrideExample(7),
-          vector: 2,
-          destination: PointProtocolStrideableVectorStrideExample(9)
-        )
-      #endif
+      testPointProtocolConformance(
+        departure: PointProtocolVectorSelfExample(8),
+        vector: PointProtocolVectorSelfExample(1),
+        destination: PointProtocolVectorSelfExample(9)
+      )
+      testPointProtocolConformance(
+        departure: PointProtocolStrideableExample(0),
+        vector: 9,
+        destination: PointProtocolStrideableExample(9)
+      )
+      testPointProtocolConformance(
+        departure: PointProtocolStrideableVectorStrideExample(7),
+        vector: 2,
+        destination: PointProtocolStrideableVectorStrideExample(9)
+      )
     #endif
   }
 
@@ -729,15 +717,12 @@ class SDGMathematicsAPITests: TestCase {
 
   func testUInt() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
-        testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
-        testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
-        testWholeArithmeticConformance(of: UInt32.self, includingNegatives: false)
-        testWholeArithmeticConformance(of: UInt16.self, includingNegatives: false)
-        testWholeArithmeticConformance(of: UInt8.self, includingNegatives: false)
-      #endif
+      testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UInt32.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UInt16.self, includingNegatives: false)
+      testWholeArithmeticConformance(of: UInt8.self, includingNegatives: false)
 
       testBitFieldConformance(
         start: 0b0101_0110 as UInt8,
@@ -780,17 +765,14 @@ class SDGMathematicsAPITests: TestCase {
   }
   func testVectorProtocol() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testRationalVectorConformance(
-          augend: VectorProtocolExample(1),
-          addend: VectorProtocolExample(2),
-          sum: VectorProtocolExample(3),
-          multiplicand: VectorProtocolExample(4),
-          multiplier: 5,
-          product: VectorProtocolExample(20)
-        )
-      #endif
+      testRationalVectorConformance(
+        augend: VectorProtocolExample(1),
+        addend: VectorProtocolExample(2),
+        sum: VectorProtocolExample(3),
+        multiplicand: VectorProtocolExample(4),
+        multiplier: 5,
+        product: VectorProtocolExample(20)
+      )
       XCTAssertEqual(5 × VectorProtocolExample(4), VectorProtocolExample(20))
     #endif
   }

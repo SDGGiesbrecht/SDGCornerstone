@@ -56,15 +56,12 @@ class SDGBinaryDataAPITests: TestCase {
 
       var forDescription = Data([0, 0])
       forDescription.binary[11] = true
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCustomStringConvertibleConformance(
-          of: forDescription.binary,
-          localizations: InterfaceLocalization.self,
-          uniqueTestName: "10th",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      testCustomStringConvertibleConformance(
+        of: forDescription.binary,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "10th",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
@@ -97,15 +94,12 @@ class SDGBinaryDataAPITests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       var forDescription: UInt8 = 0
       forDescription.binary[0] = true
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCustomStringConvertibleConformance(
-          of: forDescription.binary,
-          localizations: InterfaceLocalization.self,
-          uniqueTestName: "1st",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      testCustomStringConvertibleConformance(
+        of: forDescription.binary,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "1st",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 }

@@ -28,15 +28,12 @@ import SDGXCTestUtilities
 class SDGCollectionsAPITests: TestCase {
 
   func testAbsoluteComplement() {
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: (1...10)′,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "(0–10)′",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: (1...10)′,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "(0–10)′",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   struct AddablePattern: Addable, SDGCollections.Pattern {
@@ -58,27 +55,21 @@ class SDGCollectionsAPITests: TestCase {
   func testAlternativePatterns() {
     let pattern = [1, 2, 3] ∨ [3, 2, 1]
     testPattern(pattern, match: [1, 2, 3])
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: pattern,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "123 ∨ 321",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: pattern,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "123 ∨ 321",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
     let naryPattern = NaryAlternativePatterns([[1, 2, 3], [3, 2, 1], [9, 8, 7]])
     testPattern(naryPattern, match: [1, 2, 3])
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: naryPattern,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "123 ∨ 321 ∨ 987",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: naryPattern,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "123 ∨ 321 ∨ 987",
+      overwriteSpecificationInsteadOfFailing: false
+    )
     XCTAssertNil([1, 2].firstMatch(for: naryPattern))
   }
 
@@ -454,10 +445,7 @@ class SDGCollectionsAPITests: TestCase {
         let shimmedDifference = end.changes(from: start)
         let shimmedMoves = shimmedDifference.inferringMoves()
         let shimmedInverse = shimmedMoves.inverse()
-        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-        #if !os(Android)
-          testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
-        #endif
+        testCodableConformance(of: shimmedDifference, uniqueTestName: "Difference")
         if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
           let standardDifference = Swift.CollectionDifference(shimmedDifference)
           let standardMoves = standardDifference.inferringMoves()
@@ -570,10 +558,7 @@ class SDGCollectionsAPITests: TestCase {
           .remove(offset: 10, element: "removed element", associatedWith: 20),
           .insert(offset: 30, element: "inserted element", associatedWith: 40)
         ]
-        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-        #if !os(Android)
-          testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
-        #endif
+        testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
         if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
           let standardEntries = shimmedEntries.map { shimmed in
             return Swift.CollectionDifference.Change(shimmed)
@@ -637,27 +622,21 @@ class SDGCollectionsAPITests: TestCase {
   func testConcatenatedPatterns() {
     let pattern: ConcatenatedPatterns<[Int], [Int]> = [1, 2] + [3]
     testPattern(pattern, match: [1, 2, 3])
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: pattern,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "12 + 3",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: pattern,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "12 + 3",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
     let naryPattern: NaryConcatenatedPatterns<[Int]> = [[1, 2], [3], [4, 5]]
     testPattern(naryPattern, match: [1, 2, 3, 4, 5])
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: naryPattern,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "12 + 3 + 45",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: naryPattern,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "12 + 3 + 45",
+      overwriteSpecificationInsteadOfFailing: false
+    )
     XCTAssertNil([1, 2, 4, 5].firstMatch(for: naryPattern))
     XCTAssertNil([1, 2, 4, 5].firstMatch(for: NaryConcatenatedPatterns([naryPattern])))
   }
@@ -794,29 +773,23 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testIntersection() {
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: (1...10) ∩ (5...15),
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "1–10 ∩ 5–15",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: (1...10) ∩ (5...15),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "1–10 ∩ 5–15",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testLiteralPattern() {
     let pattern = [1, 2, 3]
     testPattern(pattern, match: [1, 2, 3])
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: pattern,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "123",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: pattern,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "123",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   struct MutableSetExample: MutableSet {
@@ -918,15 +891,12 @@ class SDGCollectionsAPITests: TestCase {
     testPattern(pattern, match: [2])
     XCTAssert((¬[1]).matches(in: [1], at: 0).isEmpty)
 
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: pattern,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "¬1",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: pattern,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "¬1",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   struct CustomPattern: SDGCollections.Pattern {
@@ -1250,14 +1220,11 @@ class SDGCollectionsAPITests: TestCase {
   }
 
   func testUnion() {
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: 1...3 ∪ 7...9,
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "1–3 ∪ 7–9",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: 1...3 ∪ 7...9,
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "1–3 ∪ 7–9",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 }
