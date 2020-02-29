@@ -44,7 +44,7 @@ class SDGPersistenceAPITests: TestCase {
 
         let path = "example/path"
 
-        #if os(Linux)
+        #if os(Linux) || os(Android)
           _ = FileManager.default.url(in: .applicationSupport, at: path)
         #else
           let applicationSupport = FileManager.default
@@ -52,7 +52,7 @@ class SDGPersistenceAPITests: TestCase {
           XCTAssert(
             applicationSupport.contains("Application%20Support")
               ∨ applicationSupport.contains("AppData"),
-            "Unexpected support directory."
+            "Unexpected support directory: \(applicationSupport)"
           )
         #endif
         #if os(Windows)
@@ -119,11 +119,9 @@ class SDGPersistenceAPITests: TestCase {
           fileContents
         )
 
-        let thisFile = URL(fileURLWithPath: #file)
         XCTAssert(
-          try FileManager.default.deepFileEnumeration(
-            in: thisFile.deletingLastPathComponent().deletingLastPathComponent()
-          ).contains(where: { $0.absoluteString == thisFile.absoluteString }),
+          try FileManager.default.deepFileEnumeration(in: testSpecificationDirectory())
+            .contains(where: { $0.lastPathComponent == "Overwrite.txt" }),
           "Failed to enumerate files."
         )
       }
