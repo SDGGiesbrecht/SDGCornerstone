@@ -30,116 +30,113 @@ class ReadMeExampleTests: TestCase {
   func testReadMe() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       LocalizationSetting(orderOfPrecedence: ["en"]).do {
-        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-        #if !os(Android)
-          // @example(readMe🇨🇦EN)
-          // ••••••• Localization •••••••
+        // @example(readMe🇨🇦EN)
+        // ••••••• Localization •••••••
 
-          enum ApplicationLocalization: String, Localization {
-            case english = "en"
-            case français = "fr"
-            static let fallbackLocalization = ApplicationLocalization.english
+        enum ApplicationLocalization: String, Localization {
+          case english = "en"
+          case français = "fr"
+          static let fallbackLocalization = ApplicationLocalization.english
+        }
+
+        // Define
+        let text = UserFacing<StrictString, ApplicationLocalization>({ localization in
+          switch localization {
+          case .english:
+            return "Hello, world!"
+          case .français:
+            return "Bonjour, le monde !"
           }
+        })
 
-          // Define
-          let text = UserFacing<StrictString, ApplicationLocalization>({ localization in
-            switch localization {
-            case .english:
-              return "Hello, world!"
-            case .français:
-              return "Bonjour, le monde !"
-            }
-          })
+        // Use
+        XCTAssertEqual(
+          text.resolved(),
+          "Hello, world!"
+        )
 
-          // Use
-          XCTAssertEqual(
-            text.resolved(),
-            "Hello, world!"
-          )
+        // ••••••• Preferences •••••••
 
-          // ••••••• Preferences •••••••
+        let preferences = PreferenceSet.applicationPreferences
 
-          let preferences = PreferenceSet.applicationPreferences
+        // Save
+        preferences["name"].value.set(to: "John Doe")
+        // Load
+        let loaded: String? = preferences["name"].value.as(String.self)
 
+        XCTAssertEqual(
+          loaded,
+          "John Doe"
+        )
+
+        // ••••••• File System •••••••
+
+        let url = FileManager.default.url(in: .applicationSupport, at: "folder/file.txt")
+        do {
           // Save
-          preferences["name"].value.set(to: "John Doe")
+          try "Contents".save(to: url)
           // Load
-          let loaded: String? = preferences["name"].value.as(String.self)
+          let loaded = try String(from: url)
 
           XCTAssertEqual(
             loaded,
-            "John Doe"
+            "Contents"
           )
+        } catch {
+          XCTFail(error.localizedDescription)
+        }
 
-          // ••••••• File System •••••••
+        // ••••••• Shared Values •••••••
 
-          let url = FileManager.default.url(in: .applicationSupport, at: "folder/file.txt")
-          do {
-            // Save
-            try "Contents".save(to: url)
-            // Load
-            let loaded = try String(from: url)
+        class Owner {
+          @SharedProperty var property: String = ""
+        }
 
-            XCTAssertEqual(
-              loaded,
-              "Contents"
-            )
-          } catch {
-            XCTFail(error.localizedDescription)
-          }
+        let originalOwner = Owner()
+        originalOwner.property = "original"
+        let anotherOwner = Owner()
+        anotherOwner.$property = originalOwner.$property
 
-          // ••••••• Shared Values •••••••
+        anotherOwner.property = "changed"
+        XCTAssertEqual(
+          originalOwner.property,
+          "changed"
+        )
 
-          class Owner {
-            @SharedProperty var property: String = ""
-          }
+        // ••••••• Pattern Matching •••••••
 
-          let originalOwner = Owner()
-          originalOwner.property = "original"
-          let anotherOwner = Owner()
-          anotherOwner.$property = originalOwner.$property
+        let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        let patternFirstPart = [1]  // 1
+          + ConditionalPattern({ $0.isEven })  // 2
+          + (
+            [30, 40]  // (∅)
+              ∨ [3, 4]  // 3, 4
+          )
+        let pattern = patternFirstPart
+          + RepetitionPattern(¬[5, 7])  // 5, 6, 7, 8, 9 (...)
+          + [10]  // 10
 
-          anotherOwner.property = "changed"
+        XCTAssertEqual(
+          numbers.firstMatch(for: pattern)?.range,
+          numbers.startIndex..<numbers.endIndex
+        )
+
+        // ••••••• Arbitrary Precision Arithmetic •••••••
+
+        let tenDuotrigintillion: WholeNumber =
+          "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"
+        XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
+
+        #if !(os(iOS) || os(watchOS) || os(tvOS))
+
+          // ••••••• Shell Commands •••••••
+
           XCTAssertEqual(
-            originalOwner.property,
-            "changed"
+            try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
+            "Hello, world!"
           )
-
-          // ••••••• Pattern Matching •••••••
-
-          let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-          let patternFirstPart = [1]  // 1
-            + ConditionalPattern({ $0.isEven })  // 2
-            + (
-              [30, 40]  // (∅)
-                ∨ [3, 4]  // 3, 4
-            )
-          let pattern = patternFirstPart
-            + RepetitionPattern(¬[5, 7])  // 5, 6, 7, 8, 9 (...)
-            + [10]  // 10
-
-          XCTAssertEqual(
-            numbers.firstMatch(for: pattern)?.range,
-            numbers.startIndex..<numbers.endIndex
-          )
-
-          // ••••••• Arbitrary Precision Arithmetic •••••••
-
-          let tenDuotrigintillion: WholeNumber =
-            "10 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000"
-          XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
-
-          #if !(os(iOS) || os(watchOS) || os(tvOS))
-
-            // ••••••• Shell Commands •••••••
-
-            XCTAssertEqual(
-              try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
-              "Hello, world!"
-            )
-          #endif
-        // @endExample
         #endif
+        // @endExample
       }
     #endif
   }

@@ -30,21 +30,18 @@ class SDGLocalizationAPITests: TestCase {
 
   func testAngle() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCustomStringConvertibleConformance(
-          of: 90°,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "90°",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-        testCustomStringConvertibleConformance(
-          of: −90°,
-          localizations: FormatLocalization.self,
-          uniqueTestName: "−90°",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      testCustomStringConvertibleConformance(
+        of: 90°,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "90°",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      testCustomStringConvertibleConformance(
+        of: −90°,
+        localizations: FormatLocalization.self,
+        uniqueTestName: "−90°",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
@@ -72,15 +69,12 @@ class SDGLocalizationAPITests: TestCase {
     static let fallbackLocalization: IconlessLocalizationExample = .none
   }
   func testCustomStringConvertible() {
-    // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-    #if !os(Android)
-      testCustomStringConvertibleConformance(
-        of: "...",
-        localizations: IconlessLocalizationExample.self,
-        uniqueTestName: "No Icon",
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    testCustomStringConvertibleConformance(
+      of: "...",
+      localizations: IconlessLocalizationExample.self,
+      uniqueTestName: "No Icon",
+      overwriteSpecificationInsteadOfFailing: false
+    )
     XCTAssert(IconlessLocalizationExample.none.description == "zxx")
   }
 
@@ -226,10 +220,7 @@ class SDGLocalizationAPITests: TestCase {
       FileManager.default.delete(.cache)
       let first: FormatLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
       for _ in 1...10 {
-        // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-        #if !os(Android)
-          XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
-        #endif
+        XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
       }
 
       LocalizationSetting(orderOfPrecedence: [] as [String]).do {
@@ -458,15 +449,12 @@ class SDGLocalizationAPITests: TestCase {
       XCTAssertEqual(23.abbreviatedEnglishOrdinal().rawTextApproximation(), "23rd")
       XCTAssertEqual(24.abbreviatedEnglishOrdinal().rawTextApproximation(), "24th")
 
-      // #workaround(workspace version 0.30.1, GitHub Action lacks necessary permissions.)
-      #if !os(Android)
-        testCustomStringConvertibleConformance(
-          of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"),
-          localizations: _InterfaceLocalization.self,
-          uniqueTestName: "Invalid Digit",
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      #endif
+      testCustomStringConvertibleConformance(
+        of: TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc"),
+        localizations: _InterfaceLocalization.self,
+        uniqueTestName: "Invalid Digit",
+        overwriteSpecificationInsteadOfFailing: false
+      )
       _ = TextConvertibleNumberParseError.invalidDigit("a", entireString: "abc").errorDescription
 
       XCTAssertEqual((10_000 as UInt).inZahlzeichen(), "10 000")
