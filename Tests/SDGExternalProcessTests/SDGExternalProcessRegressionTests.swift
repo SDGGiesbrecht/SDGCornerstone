@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
 import SDGExternalProcess
 
 import XCTest
@@ -60,7 +61,7 @@ class SDGExternalProcessRegressionTests: TestCase {
       }
 
       var end = false
-      while !end {
+      while ¬end {
         guard let newData = read() else {
           end = true
           return
