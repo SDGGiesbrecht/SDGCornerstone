@@ -20,6 +20,38 @@ import SDGXCTestUtilities
 
 class SDGExternalProcessRegressionTests: TestCase {
 
+  func testAndroidShell() {
+    // Untracked
+
+    #if os(Android)
+      func reportError(_ error: Error, task: String) {
+        let message = [
+          "\nFailed to \(task):",
+          "Error: \(error)",
+          "Localized: \(error.localizedDescription)",
+          "Type: \(type(of: error))",
+          ].joined(separator: "\n")
+        #warning("Swap")
+        print(message)
+        XCTFail(message)
+      }
+
+      let process = Process()
+      process.executableURL = URL(fileURLWithPath: "/system/bin/sh")
+      process.arguments = ["\u{2D}c", "echo \u{27}Hello, world!\u{27}"]
+
+      let pipe = Pipe()
+      process.standardOutput = pipe
+      process.standardError = pipe
+
+      do {
+        try process.run()
+      } catch {
+        reportError(error, task: "run")
+      }
+    #endif
+  }
+
   func testDelayedShellOutput() throws {
     // Untracked
 
