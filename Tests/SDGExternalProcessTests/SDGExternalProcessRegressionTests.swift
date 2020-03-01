@@ -23,8 +23,7 @@ class SDGExternalProcessRegressionTests: TestCase {
   func testAndroidShell() {
     // Untracked
 
-    //#if os(Android)
-    if #available(macOS 10.13, *) {
+    #if os(Android)
       func reportError(_ error: Error, task: String) {
         let message = [
           "\nFailed to \(task):",
@@ -32,8 +31,6 @@ class SDGExternalProcessRegressionTests: TestCase {
           "Localized: \(error.localizedDescription)",
           "Type: \(type(of: error))",
         ].joined(separator: "\n")
-        #warning("Swap")
-        print(message)
         XCTFail(message)
       }
 
@@ -64,22 +61,22 @@ class SDGExternalProcessRegressionTests: TestCase {
 
       var end = false
       while !end {
-          guard let newData = read() else {
-            end = true
-            return
+        guard let newData = read() else {
+          end = true
+          return
+        }
+        stream.append(newData)
+
+        while let lineEnd = stream.range(of: newLineData) {
+          let lineData = stream.subdata(in: (..<lineEnd.lowerBound).relative(to: stream))
+          stream.removeSubrange(..<lineEnd.upperBound)
+
+          guard let line = try? String(file: lineData, origin: nil) else {
+            fatalError("Unable to decode data: \(lineData)")
           }
-          stream.append(newData)
 
-          while let lineEnd = stream.range(of: newLineData) {
-            let lineData = stream.subdata(in: (..<lineEnd.lowerBound).relative(to: stream))
-            stream.removeSubrange(..<lineEnd.upperBound)
-
-            guard let line = try? String(file: lineData, origin: nil) else {
-              fatalError("Unable to decode data: \(lineData)")
-            }
-
-            output.append(line + newLine)
-          }
+          output.append(line + newLine)
+        }
       }
 
       while process.isRunning {}
@@ -91,8 +88,7 @@ class SDGExternalProcessRegressionTests: TestCase {
       let exitCode = process.terminationStatus
       XCTAssertEqual(exitCode, 0)
       XCTAssertEqual(output, "Hello, world!")
-    }
-    //#endif
+    #endif
   }
 
   func testDelayedShellOutput() throws {
