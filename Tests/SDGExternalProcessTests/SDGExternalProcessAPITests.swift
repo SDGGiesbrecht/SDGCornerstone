@@ -121,15 +121,15 @@ class SDGExternalProcessAPITests: TestCase {
         case .failure(let error):
           switch error {
           case .foundationError(let error):
+            XCTFail(error.localizedDescription)
+          case .processError(code: _, let output):
             // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
             #if !os(Android)
-              XCTFail(error.localizedDescription)
+              XCTAssert(
+                output.contains("not found") ∨ output.contains("not recognized"),
+                "\(error)"
+              )
             #endif
-          case .processError(code: _, let output):
-            XCTAssert(
-              output.contains("not found") ∨ output.contains("not recognized"),
-              "\(error)"
-            )
           }
         }
 
