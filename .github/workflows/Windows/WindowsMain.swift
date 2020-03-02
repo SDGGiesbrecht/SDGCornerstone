@@ -257,7 +257,6 @@ extension SDGExternalProcessTests.SDGExternalProcessAPITests {
 extension SDGExternalProcessTests.SDGExternalProcessRegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testAndroidShell", testAndroidShell),
       ("testDelayedShellOutput", testDelayedShellOutput),
     ])
   ]
