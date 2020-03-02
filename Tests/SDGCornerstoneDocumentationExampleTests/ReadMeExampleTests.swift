@@ -29,7 +29,8 @@ class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      #if !os(Android)  // #workaround(Shell doesn’t work?)
+      // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
+      #if !os(Android)
         LocalizationSetting(orderOfPrecedence: ["en"]).do {
           // @example(readMe🇨🇦EN)
           // ••••••• Localization •••••••
