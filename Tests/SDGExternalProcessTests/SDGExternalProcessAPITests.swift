@@ -39,7 +39,7 @@ class SDGExternalProcessAPITests: TestCase {
           ),
           "Failed to reject non‐executables."
         )
-        // #workaround(Swift 5.1.3, Insufficient information to debug.)
+        // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
         #if !os(Android)
           XCTAssertEqual(
             ExternalProcess(
@@ -86,47 +86,57 @@ class SDGExternalProcessAPITests: TestCase {
   }
 
   func testShell() throws {
-    // #workaround(Swift 5.1.3, Insufficient information to debug.)
-    #if !os(Android)
-
-      #if !(os(iOS) || os(watchOS) || os(tvOS))
-
-        try forAllLegacyModes {
+    #if !(os(iOS) || os(watchOS) || os(tvOS))
+      try forAllLegacyModes {
+        // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
+        #if !os(Android)
           _ = try Shell.default.run(command: ["ls"]).get()
-          let printWorkingDirectory: String
-          #if os(Windows)
-            printWorkingDirectory = "cd"
-          #else
-            printWorkingDirectory = "pwd"
-          #endif
+        #endif
+        let printWorkingDirectory: String
+        #if os(Windows)
+          printWorkingDirectory = "cd"
+        #else
+          printWorkingDirectory = "pwd"
+        #endif
+        // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
+        #if !os(Android)
           _ = try Shell.default.run(
             command: [printWorkingDirectory],
             in: URL(fileURLWithPath: "/"),
             with: [:]
           ).get()
+        #endif
 
-          let message = "Hello, world!"
+        let message = "Hello, world!"
+        // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
+        #if !os(Android)
           XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
+        #endif
 
-          let nonexistentCommand = "no‐such‐command"
-          let result = Shell.default.run(command: [nonexistentCommand])
-          switch result {
-          case .success(let output):
-            XCTFail("Should have failed: \(output)")
-          case .failure(let error):
-            switch error {
-            case .foundationError(let error):
+        let nonexistentCommand = "no‐such‐command"
+        let result = Shell.default.run(command: [nonexistentCommand])
+        switch result {
+        case .success(let output):
+          XCTFail("Should have failed: \(output)")
+        case .failure(let error):
+          switch error {
+          case .foundationError(let error):
+            // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
+            #if !os(Android)
               XCTFail(error.localizedDescription)
-            case .processError(code: _, let output):
-              XCTAssert(
-                output.contains("not found") ∨ output.contains("not recognized"),
-                "\(error)"
-              )
-            }
+            #endif
+          case .processError(code: _, let output):
+            XCTAssert(
+              output.contains("not found") ∨ output.contains("not recognized"),
+              "\(error)"
+            )
           }
+        }
 
-          #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
-            let metacharacters = "(...)"
+        #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
+          let metacharacters = "(...)"
+          // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
+          #if !os(Android)
             XCTAssertEqual(
               try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
               metacharacters
@@ -140,17 +150,20 @@ class SDGExternalProcessAPITests: TestCase {
               )
             )
           #endif
+        #endif
 
-          _ = "\(Shell.default)"
-          switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
-          case .failure(let error):
-            // Expected.
-            _ = error.localizedDescription
-          case .success(let output):
+        _ = "\(Shell.default)"
+        switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
+        case .failure(let error):
+          // Expected.
+          _ = error.localizedDescription
+        case .success(let output):
+          // #workaround(Swift 5.1.3, Process/Pipe/FileHandle have wires crossed with standard output.)
+          #if !os(Android)
             XCTFail("Shell should have thrown an error. Output received:\n\(output)")
-          }
+          #endif
         }
-      #endif
+      }
     #endif
   }
 }
