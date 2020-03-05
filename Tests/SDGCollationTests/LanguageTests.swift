@@ -19,7 +19,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGCollationLanguageTests: TestCase {
+class LanguageTests: TestCase {
 
   override func setUp() {
     super.setUp()

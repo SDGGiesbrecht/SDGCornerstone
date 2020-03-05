@@ -24,7 +24,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGPrecisionMathematicsAPITests: TestCase {
+class APITests: TestCase {
 
   func testInteger() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)

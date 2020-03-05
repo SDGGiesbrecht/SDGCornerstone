@@ -21,7 +21,7 @@ import XCTest
 import SDGRandomizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGRandomizationAPITests: TestCase {
+class APITests: TestCase {
 
   func testBool() {
     var values: Set<Bool> = []

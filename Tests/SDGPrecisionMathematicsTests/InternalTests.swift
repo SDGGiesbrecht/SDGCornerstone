@@ -20,7 +20,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGPrecisionMathematicsInternalTests: TestCase {
+class InternalTests: TestCase {
 
   func testUIntHalvesView() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)

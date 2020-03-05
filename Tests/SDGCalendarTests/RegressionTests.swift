@@ -18,7 +18,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGCalendarRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testCalendarEquatability() {
     // Untracked

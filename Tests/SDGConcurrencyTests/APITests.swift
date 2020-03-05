@@ -21,7 +21,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGConcurrencyAPITests: TestCase {
+class APITests: TestCase {
 
   @available(macOS 10.12, iOS 10, tvOS 10, *)  // @exempt(from: unicode)
   func testRunLoop() {

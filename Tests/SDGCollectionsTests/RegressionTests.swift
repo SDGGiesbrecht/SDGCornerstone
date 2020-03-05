@@ -18,7 +18,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGCollectionsRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testBoundedRepetitionPatternSearch() {
     // Untracked

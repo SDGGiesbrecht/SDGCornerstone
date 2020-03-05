@@ -21,7 +21,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGExternalProcessAPITests: TestCase {
+class APITests: TestCase {
 
   func testExternalProcess() {
     #if !(os(iOS) || os(watchOS) || os(tvOS))

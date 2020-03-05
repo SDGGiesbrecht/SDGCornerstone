@@ -25,7 +25,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGCollectionsAPITests: TestCase {
+class APITests: TestCase {
 
   func testAbsoluteComplement() {
     testCustomStringConvertibleConformance(

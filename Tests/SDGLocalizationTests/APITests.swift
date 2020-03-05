@@ -26,7 +26,7 @@ import XCTest
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGLocalizationAPITests: TestCase {
+class APITests: TestCase {
 
   func testAngle() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)

@@ -21,7 +21,7 @@ import XCTest
 import SDGPersistenceTestUtilities
 import SDGXCTestUtilities
 
-class SDGCalendarInternalTests: TestCase {
+class InternalTests: TestCase {
 
   func testDate() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)

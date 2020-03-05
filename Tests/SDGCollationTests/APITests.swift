@@ -19,7 +19,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGCollationAPITests: TestCase {
+class APITests: TestCase {
 
   var strictStringSortAlgorithm: ((StrictString, StrictString) -> Bool)?
 
