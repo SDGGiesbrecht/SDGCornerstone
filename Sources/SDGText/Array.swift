@@ -14,9 +14,10 @@
 
 import SDGMathematics
 
-extension Array where Element: StringFamily {
+#if os(Android)  // #workaround(Swift 5.1.3, Compiler crashes on generic version.)
+  extension Array where Element == StrictString {
 
-  #if !os(Android)  // #workaround(Swift 5.1.3, Compiler crash.)
+    // #documentation(Array<StringFamily>.joined(separator:))
     /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
     ///
     /// - Parameters:
@@ -30,5 +31,23 @@ extension Array where Element: StringFamily {
       }
       return result
     }
-  #endif
-}
+  }
+#else
+  extension Array where Element: StringFamily {
+
+    // @documentation(Array<StringFamily>.joined(separator:))
+    /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
+    ///
+    /// - Parameters:
+    ///     - separator: A sequence to insert between each of this sequence’s elements.
+    @inlinable public func joined(separator: Element = "") -> Element {
+      guard var result = self.first else {
+        return ""
+      }
+      for line in self.dropFirst() {
+        result += separator + line
+      }
+      return result
+    }
+  }
+#endif
