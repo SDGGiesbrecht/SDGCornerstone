@@ -428,8 +428,9 @@ internal enum ContentLocalization: String, InputLocalization {
     case .조선말조선:
       return "조"
     default:
-      return ContentLocalization.codeToAbbreviation[
-        code.components(separatedBy: "\u{2D}").dropLast().joined(separator: "\u{2D}")]!
+      let droppingLast = code.components(separatedBy: "\u{2D}")
+        .dropLast().joined(separator: "\u{2D}")
+      return ContentLocalization.codeToAbbreviation[droppingLast]!
     }
   }
 

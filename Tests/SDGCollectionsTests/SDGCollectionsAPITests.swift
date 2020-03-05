@@ -290,8 +290,8 @@ class SDGCollectionsAPITests: TestCase {
             .elementsEqual([1, 4])
         )
         XCTAssert(
-          [1, 2, 3, 4].components(separatedBy: [2, 3])
-            .map({ Array($0.contents) }).joined().elementsEqual([1, 4])
+          [1, 2, 3, 4].components(separatedBy: [2, 3]).map({ Array($0.contents) }).joined()
+            .elementsEqual([1, 4])
         )
 
         XCTAssert([1, 2, 3, 4].contains([2, 3]))
