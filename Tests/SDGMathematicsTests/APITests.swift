@@ -470,9 +470,9 @@ class APITests: TestCase {
       precedingValue.value ↑= followingValue.value
     }
     static func random<R>(
-      in range: ClosedRange<SDGMathematicsAPITests.RealArithmeticExample>,
+      in range: ClosedRange<APITests.RealArithmeticExample>,
       using generator: inout R
-    ) -> SDGMathematicsAPITests.RealArithmeticExample where R: RandomNumberGenerator {
+    ) -> APITests.RealArithmeticExample where R: RandomNumberGenerator {
       return RealArithmeticExample(
         Double.random(in: range.lowerBound.value...range.upperBound.value, using: &generator)
       )

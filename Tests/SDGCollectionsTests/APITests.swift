@@ -44,7 +44,7 @@ class APITests: TestCase {
     where C: SearchableCollection, C.Element == Element {
       return []
     }
-    func reversed() -> SDGCollectionsAPITests.AddablePattern {
+    func reversed() -> APITests.AddablePattern {
       return self
     }
   }

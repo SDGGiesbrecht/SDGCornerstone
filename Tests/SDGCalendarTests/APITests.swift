@@ -59,7 +59,7 @@ class APITests: TestCase {
   func testCalendarDate() throws {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       // Force these to take place first.
-      SDGCalendarInternalTests.testHebrewYear()
+      InternalTests.testHebrewYear()
 
       XCTAssertEqual(
         CalendarDate(hebrew: .iyar, 4, 5751),

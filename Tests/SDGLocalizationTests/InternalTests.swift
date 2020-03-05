@@ -128,12 +128,12 @@ class InternalTests: TestCase {
 
     LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
     XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as SDGLocalizationAPITests.LocalizationExample,
+      LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
       .englishUnitedKingdom
     )
     LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
     XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as SDGLocalizationAPITests.LocalizationExample,
+      LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
       .français
     )
 
