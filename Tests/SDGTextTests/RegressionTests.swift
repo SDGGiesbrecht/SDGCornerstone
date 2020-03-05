@@ -21,7 +21,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGTextRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testLastLineNotDropped() {
     // Untracked

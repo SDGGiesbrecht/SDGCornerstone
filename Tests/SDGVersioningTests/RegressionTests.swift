@@ -19,7 +19,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGVersioningRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testVersionRangesCanBeCreated() {
     // Untracked

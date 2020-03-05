@@ -29,7 +29,7 @@ import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 
-class SDGTextAPITests: TestCase {
+class APITests: TestCase {
 
   func testCharacterSet() {
     testSetInRepresentableUniverseConformance(of: CharacterSet.self, a: "a", b: "e", c: "i")

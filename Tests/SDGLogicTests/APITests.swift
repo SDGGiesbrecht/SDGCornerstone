@@ -21,7 +21,7 @@ import SDGLogicTestUtilities
 import SDGMathematicsTestUtilities
 import SDGXCTestUtilities
 
-class SDGLogicAPITests: TestCase {
+class APITests: TestCase {
 
   func testAny() {
     test(operator: (≠, "≠"), on: (Bool.self, Int.self), returns: true)

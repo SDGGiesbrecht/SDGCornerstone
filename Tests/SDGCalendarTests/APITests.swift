@@ -24,7 +24,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGCalendarAPITests: TestCase {
+class APITests: TestCase {
 
   func testCalendarComponent() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)

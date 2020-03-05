@@ -18,7 +18,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGMathematicsRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testAddAndSetIsUnambiguous() {
     // Untracked

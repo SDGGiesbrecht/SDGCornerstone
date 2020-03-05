@@ -20,7 +20,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGPersistenceRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testAndroidTemporaryDirectory() throws {
     // Untracked

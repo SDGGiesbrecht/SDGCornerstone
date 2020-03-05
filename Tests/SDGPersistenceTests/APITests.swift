@@ -29,7 +29,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGPersistenceAPITests: TestCase {
+class APITests: TestCase {
 
   func testFileConvertible() {
     setTestSpecificationDirectory(to: testSpecificationDirectory())

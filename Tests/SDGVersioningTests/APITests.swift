@@ -22,7 +22,7 @@ import SDGTesting
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGVersioningAPITests: TestCase {
+class APITests: TestCase {
 
   func testVersion() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)

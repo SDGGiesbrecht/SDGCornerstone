@@ -18,7 +18,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGExternalProcessRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testDelayedShellOutput() throws {
     // Untracked

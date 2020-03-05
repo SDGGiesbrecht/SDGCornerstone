@@ -21,7 +21,7 @@ import XCTest
 import SDGTesting
 import SDGXCTestUtilities
 
-class SDGControlFlowAPITests: TestCase {
+class APITests: TestCase {
 
   func testCaching() {
 

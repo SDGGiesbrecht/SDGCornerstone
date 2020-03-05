@@ -21,7 +21,7 @@ import SDGTesting
 import SDGMathematicsTestUtilities
 import SDGXCTestUtilities
 
-class SDGMathematicsAPITests: TestCase {
+class APITests: TestCase {
 
   struct AddableStrideableExample: Addable, SignedNumeric, Strideable {
     var value: Int

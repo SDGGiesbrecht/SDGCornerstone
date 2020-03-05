@@ -18,7 +18,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGTextInternalTests: TestCase {
+class InternalTests: TestCase {
 
   func testLineViewIndex() {
     XCTAssertNil("ABC".lines.endIndex.newline(in: "ABC".scalars))

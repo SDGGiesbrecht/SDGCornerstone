@@ -24,7 +24,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGLocalizationInternalTests: TestCase {
+class InternalTests: TestCase {
 
   func testContentLocalization() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
