@@ -1,5 +1,5 @@
 /*
- SDGCollationLanguageTests.swift
+ LanguageTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -19,7 +19,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGCollationLanguageTests: TestCase {
+class LanguageTests: TestCase {
 
   override func setUp() {
     super.setUp()

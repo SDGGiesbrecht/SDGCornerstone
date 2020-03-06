@@ -1,5 +1,5 @@
 /*
- SDGLocalizationAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -26,7 +26,7 @@ import XCTest
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGLocalizationAPITests: TestCase {
+class APITests: TestCase {
 
   func testAngle() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)

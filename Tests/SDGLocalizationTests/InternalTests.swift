@@ -1,5 +1,5 @@
 /*
- SDGLocalizationInternalTests.swift
+ InternalTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -24,7 +24,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGLocalizationInternalTests: TestCase {
+class InternalTests: TestCase {
 
   func testContentLocalization() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
@@ -128,12 +128,12 @@ class SDGLocalizationInternalTests: TestCase {
 
     LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
     XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as SDGLocalizationAPITests.LocalizationExample,
+      LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
       .englishUnitedKingdom
     )
     LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
     XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as SDGLocalizationAPITests.LocalizationExample,
+      LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
       .français
     )
 

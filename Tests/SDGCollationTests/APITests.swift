@@ -1,5 +1,5 @@
 /*
- SDGCollationAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -19,7 +19,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGCollationAPITests: TestCase {
+class APITests: TestCase {
 
   var strictStringSortAlgorithm: ((StrictString, StrictString) -> Bool)?
 

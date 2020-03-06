@@ -1,5 +1,5 @@
 /*
- SDGCollectionsAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -25,7 +25,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGCollectionsAPITests: TestCase {
+class APITests: TestCase {
 
   func testAbsoluteComplement() {
     testCustomStringConvertibleConformance(
@@ -44,7 +44,7 @@ class SDGCollectionsAPITests: TestCase {
     where C: SearchableCollection, C.Element == Element {
       return []
     }
-    func reversed() -> SDGCollectionsAPITests.AddablePattern {
+    func reversed() -> APITests.AddablePattern {
       return self
     }
   }

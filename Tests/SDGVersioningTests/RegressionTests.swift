@@ -1,5 +1,5 @@
 /*
- SDGVersioningRegressionTests.swift
+ RegressionTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -19,7 +19,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGVersioningRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testVersionRangesCanBeCreated() {
     // Untracked

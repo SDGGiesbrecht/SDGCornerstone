@@ -1,5 +1,5 @@
 /*
- SDGPersistenceRegressionTests.swift
+ RegressionTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -20,7 +20,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGPersistenceRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testAndroidTemporaryDirectory() throws {
     // Untracked

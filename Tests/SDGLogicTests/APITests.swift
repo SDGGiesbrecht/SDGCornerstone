@@ -1,5 +1,5 @@
 /*
- SDGLogicAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -21,7 +21,7 @@ import SDGLogicTestUtilities
 import SDGMathematicsTestUtilities
 import SDGXCTestUtilities
 
-class SDGLogicAPITests: TestCase {
+class APITests: TestCase {
 
   func testAny() {
     test(operator: (≠, "≠"), on: (Bool.self, Int.self), returns: true)

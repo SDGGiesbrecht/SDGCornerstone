@@ -1,5 +1,5 @@
 /*
- SDGCalendarAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -24,7 +24,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGCalendarAPITests: TestCase {
+class APITests: TestCase {
 
   func testCalendarComponent() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
@@ -59,7 +59,7 @@ class SDGCalendarAPITests: TestCase {
   func testCalendarDate() throws {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       // Force these to take place first.
-      SDGCalendarInternalTests.testHebrewYear()
+      InternalTests.testHebrewYear()
 
       XCTAssertEqual(
         CalendarDate(hebrew: .iyar, 4, 5751),

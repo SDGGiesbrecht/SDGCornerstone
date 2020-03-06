@@ -1,5 +1,5 @@
 /*
- SDGExternalProcessRegressionTests.swift
+ RegressionTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -18,7 +18,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGExternalProcessRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testDelayedShellOutput() throws {
     // Untracked

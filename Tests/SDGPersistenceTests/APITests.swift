@@ -1,5 +1,5 @@
 /*
- SDGPersistenceAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -29,7 +29,7 @@ import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGPersistenceAPITests: TestCase {
+class APITests: TestCase {
 
   func testFileConvertible() {
     setTestSpecificationDirectory(to: testSpecificationDirectory())

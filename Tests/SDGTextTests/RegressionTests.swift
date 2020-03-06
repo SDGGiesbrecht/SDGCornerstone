@@ -1,5 +1,5 @@
 /*
- SDGTextRegressionTests.swift
+ RegressionTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -21,7 +21,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGTextRegressionTests: TestCase {
+class RegressionTests: TestCase {
 
   func testLastLineNotDropped() {
     // Untracked

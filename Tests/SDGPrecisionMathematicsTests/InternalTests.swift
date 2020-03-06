@@ -1,5 +1,5 @@
 /*
- SDGPrecisionMathematicsInternalTests.swift
+ InternalTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -20,7 +20,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGPrecisionMathematicsInternalTests: TestCase {
+class InternalTests: TestCase {
 
   func testUIntHalvesView() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)

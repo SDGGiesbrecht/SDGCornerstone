@@ -1,5 +1,5 @@
 /*
- SDGMathematicsAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -21,7 +21,7 @@ import SDGTesting
 import SDGMathematicsTestUtilities
 import SDGXCTestUtilities
 
-class SDGMathematicsAPITests: TestCase {
+class APITests: TestCase {
 
   struct AddableStrideableExample: Addable, SignedNumeric, Strideable {
     var value: Int
@@ -470,9 +470,9 @@ class SDGMathematicsAPITests: TestCase {
       precedingValue.value ↑= followingValue.value
     }
     static func random<R>(
-      in range: ClosedRange<SDGMathematicsAPITests.RealArithmeticExample>,
+      in range: ClosedRange<APITests.RealArithmeticExample>,
       using generator: inout R
-    ) -> SDGMathematicsAPITests.RealArithmeticExample where R: RandomNumberGenerator {
+    ) -> APITests.RealArithmeticExample where R: RandomNumberGenerator {
       return RealArithmeticExample(
         Double.random(in: range.lowerBound.value...range.upperBound.value, using: &generator)
       )

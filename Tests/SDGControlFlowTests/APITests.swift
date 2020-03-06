@@ -1,5 +1,5 @@
 /*
- SDGControlFlowAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -21,7 +21,7 @@ import XCTest
 import SDGTesting
 import SDGXCTestUtilities
 
-class SDGControlFlowAPITests: TestCase {
+class APITests: TestCase {
 
   func testCaching() {
 

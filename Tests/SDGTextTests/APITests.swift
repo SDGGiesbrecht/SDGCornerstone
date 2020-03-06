@@ -1,5 +1,5 @@
 /*
- SDGTextAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -29,7 +29,7 @@ import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 
-class SDGTextAPITests: TestCase {
+class APITests: TestCase {
 
   func testCharacterSet() {
     testSetInRepresentableUniverseConformance(of: CharacterSet.self, a: "a", b: "e", c: "i")

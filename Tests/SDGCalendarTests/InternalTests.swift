@@ -1,5 +1,5 @@
 /*
- SDGCalendarInternalTests.swift
+ InternalTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -21,7 +21,7 @@ import XCTest
 import SDGPersistenceTestUtilities
 import SDGXCTestUtilities
 
-class SDGCalendarInternalTests: TestCase {
+class InternalTests: TestCase {
 
   func testDate() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
@@ -95,7 +95,7 @@ class SDGCalendarInternalTests: TestCase {
 
   func testHebrewYear() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
-      SDGCalendarInternalTests.testHebrewYear()
+      InternalTests.testHebrewYear()
     #endif
   }
   static func testHebrewYear() {

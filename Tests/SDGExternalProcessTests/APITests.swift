@@ -1,5 +1,5 @@
 /*
- SDGExternalProcessAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -21,7 +21,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGExternalProcessAPITests: TestCase {
+class APITests: TestCase {
 
   func testExternalProcess() {
     #if !(os(iOS) || os(watchOS) || os(tvOS))

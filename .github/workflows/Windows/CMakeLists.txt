@@ -602,7 +602,7 @@ target_link_libraries("SDGXCTestUtilities" PRIVATE
 )
 
 add_library("SDGBinaryDataTests"
-  "../../../Tests/SDGBinaryDataTests/SDGBinaryDataAPITests.swift"
+  "../../../Tests/SDGBinaryDataTests/APITests.swift"
 )
 set_target_properties("SDGBinaryDataTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGBinaryDataTests" PRIVATE -enable-testing)
@@ -617,9 +617,9 @@ target_link_libraries("SDGBinaryDataTests" PRIVATE
 )
 
 add_library("SDGCalendarTests"
-  "../../../Tests/SDGCalendarTests/SDGCalendarAPITests.swift"
-  "../../../Tests/SDGCalendarTests/SDGCalendarInternalTests.swift"
-  "../../../Tests/SDGCalendarTests/SDGCalendarRegressionTests.swift"
+  "../../../Tests/SDGCalendarTests/APITests.swift"
+  "../../../Tests/SDGCalendarTests/InternalTests.swift"
+  "../../../Tests/SDGCalendarTests/RegressionTests.swift"
 )
 set_target_properties("SDGCalendarTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGCalendarTests" PRIVATE -enable-testing)
@@ -636,8 +636,8 @@ target_link_libraries("SDGCalendarTests" PRIVATE
 )
 
 add_library("SDGCollationTests"
-  "../../../Tests/SDGCollationTests/SDGCollationAPITests.swift"
-  "../../../Tests/SDGCollationTests/SDGCollationLanguageTests.swift"
+  "../../../Tests/SDGCollationTests/APITests.swift"
+  "../../../Tests/SDGCollationTests/LanguageTests.swift"
 )
 set_target_properties("SDGCollationTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGCollationTests" PRIVATE -enable-testing)
@@ -648,10 +648,10 @@ target_link_libraries("SDGCollationTests" PRIVATE
 )
 
 add_library("SDGCollectionsTests"
+  "../../../Tests/SDGCollectionsTests/APITests.swift"
   "../../../Tests/SDGCollectionsTests/AnyForwardCollection.swift"
   "../../../Tests/SDGCollectionsTests/LegacyMode.swift"
-  "../../../Tests/SDGCollectionsTests/SDGCollectionsAPITests.swift"
-  "../../../Tests/SDGCollectionsTests/SDGCollectionsRegressionTests.swift"
+  "../../../Tests/SDGCollectionsTests/RegressionTests.swift"
 )
 set_target_properties("SDGCollectionsTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGCollectionsTests" PRIVATE -enable-testing)
@@ -668,7 +668,7 @@ target_link_libraries("SDGCollectionsTests" PRIVATE
 )
 
 add_library("SDGConcurrencyTests"
-  "../../../Tests/SDGConcurrencyTests/SDGConcurrencyAPITests.swift"
+  "../../../Tests/SDGConcurrencyTests/APITests.swift"
 )
 set_target_properties("SDGConcurrencyTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGConcurrencyTests" PRIVATE -enable-testing)
@@ -679,8 +679,8 @@ target_link_libraries("SDGConcurrencyTests" PRIVATE
 )
 
 add_library("SDGControlFlowTests"
+  "../../../Tests/SDGControlFlowTests/APITests.swift"
   "../../../Tests/SDGControlFlowTests/Examples.swift"
-  "../../../Tests/SDGControlFlowTests/SDGControlFlowAPITests.swift"
 )
 set_target_properties("SDGControlFlowTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGControlFlowTests" PRIVATE -enable-testing)
@@ -717,9 +717,9 @@ target_link_libraries("SDGCornerstoneDocumentationExampleTests" PRIVATE
 )
 
 add_library("SDGExternalProcessTests"
+  "../../../Tests/SDGExternalProcessTests/APITests.swift"
   "../../../Tests/SDGExternalProcessTests/LegacyMode.swift"
-  "../../../Tests/SDGExternalProcessTests/SDGExternalProcessAPITests.swift"
-  "../../../Tests/SDGExternalProcessTests/SDGExternalProcessRegressionTests.swift"
+  "../../../Tests/SDGExternalProcessTests/RegressionTests.swift"
 )
 set_target_properties("SDGExternalProcessTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGExternalProcessTests" PRIVATE -enable-testing)
@@ -731,7 +731,7 @@ target_link_libraries("SDGExternalProcessTests" PRIVATE
 )
 
 add_library("SDGGeometryTests"
-  "../../../Tests/SDGGeometryTests/SDGGeometryAPITests.swift"
+  "../../../Tests/SDGGeometryTests/APITests.swift"
 )
 set_target_properties("SDGGeometryTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGGeometryTests" PRIVATE -enable-testing)
@@ -745,8 +745,8 @@ target_link_libraries("SDGGeometryTests" PRIVATE
 )
 
 add_library("SDGLocalizationTests"
-  "../../../Tests/SDGLocalizationTests/SDGLocalizationAPITests.swift"
-  "../../../Tests/SDGLocalizationTests/SDGLocalizationInternalTests.swift"
+  "../../../Tests/SDGLocalizationTests/APITests.swift"
+  "../../../Tests/SDGLocalizationTests/InternalTests.swift"
 )
 set_target_properties("SDGLocalizationTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGLocalizationTests" PRIVATE -enable-testing)
@@ -766,7 +766,7 @@ target_link_libraries("SDGLocalizationTests" PRIVATE
 )
 
 add_library("SDGLogicTests"
-  "../../../Tests/SDGLogicTests/SDGLogicAPITests.swift"
+  "../../../Tests/SDGLogicTests/APITests.swift"
 )
 set_target_properties("SDGLogicTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGLogicTests" PRIVATE -enable-testing)
@@ -779,8 +779,8 @@ target_link_libraries("SDGLogicTests" PRIVATE
 )
 
 add_library("SDGMathematicsTests"
-  "../../../Tests/SDGMathematicsTests/SDGMathematicsAPITests.swift"
-  "../../../Tests/SDGMathematicsTests/SDGMathematicsRegressionTests.swift"
+  "../../../Tests/SDGMathematicsTests/APITests.swift"
+  "../../../Tests/SDGMathematicsTests/RegressionTests.swift"
 )
 set_target_properties("SDGMathematicsTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGMathematicsTests" PRIVATE -enable-testing)
@@ -793,8 +793,8 @@ target_link_libraries("SDGMathematicsTests" PRIVATE
 )
 
 add_library("SDGPersistenceTests"
-  "../../../Tests/SDGPersistenceTests/SDGPersistenceAPITests.swift"
-  "../../../Tests/SDGPersistenceTests/SDGPersistenceRegressionTests.swift"
+  "../../../Tests/SDGPersistenceTests/APITests.swift"
+  "../../../Tests/SDGPersistenceTests/RegressionTests.swift"
 )
 set_target_properties("SDGPersistenceTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGPersistenceTests" PRIVATE -enable-testing)
@@ -813,8 +813,8 @@ target_link_libraries("SDGPersistenceTests" PRIVATE
 )
 
 add_library("SDGPrecisionMathematicsTests"
-  "../../../Tests/SDGPrecisionMathematicsTests/SDGPrecisionMathematicsAPITests.swift"
-  "../../../Tests/SDGPrecisionMathematicsTests/SDGPrecisionMathematicsInternalTests.swift"
+  "../../../Tests/SDGPrecisionMathematicsTests/APITests.swift"
+  "../../../Tests/SDGPrecisionMathematicsTests/InternalTests.swift"
 )
 set_target_properties("SDGPrecisionMathematicsTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGPrecisionMathematicsTests" PRIVATE -enable-testing)
@@ -831,7 +831,7 @@ target_link_libraries("SDGPrecisionMathematicsTests" PRIVATE
 )
 
 add_library("SDGRandomizationTests"
-  "../../../Tests/SDGRandomizationTests/SDGRandomizationAPITests.swift"
+  "../../../Tests/SDGRandomizationTests/APITests.swift"
 )
 set_target_properties("SDGRandomizationTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGRandomizationTests" PRIVATE -enable-testing)
@@ -845,9 +845,9 @@ target_link_libraries("SDGRandomizationTests" PRIVATE
 )
 
 add_library("SDGTextTests"
-  "../../../Tests/SDGTextTests/SDGTextAPITests.swift"
-  "../../../Tests/SDGTextTests/SDGTextInternalTests.swift"
-  "../../../Tests/SDGTextTests/SDGTextRegressionTests.swift"
+  "../../../Tests/SDGTextTests/APITests.swift"
+  "../../../Tests/SDGTextTests/InternalTests.swift"
+  "../../../Tests/SDGTextTests/RegressionTests.swift"
 )
 set_target_properties("SDGTextTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGTextTests" PRIVATE -enable-testing)
@@ -866,8 +866,8 @@ target_link_libraries("SDGTextTests" PRIVATE
 )
 
 add_library("SDGVersioningTests"
-  "../../../Tests/SDGVersioningTests/SDGVersioningAPITests.swift"
-  "../../../Tests/SDGVersioningTests/SDGVersioningRegressionTests.swift"
+  "../../../Tests/SDGVersioningTests/APITests.swift"
+  "../../../Tests/SDGVersioningTests/RegressionTests.swift"
 )
 set_target_properties("SDGVersioningTests" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 target_compile_options("SDGVersioningTests" PRIVATE -enable-testing)

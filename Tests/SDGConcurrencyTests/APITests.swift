@@ -1,5 +1,5 @@
 /*
- SDGConcurrencyAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -21,7 +21,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGConcurrencyAPITests: TestCase {
+class APITests: TestCase {
 
   @available(macOS 10.12, iOS 10, tvOS 10, *)  // @exempt(from: unicode)
   func testRunLoop() {

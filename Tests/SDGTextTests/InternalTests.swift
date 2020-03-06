@@ -1,5 +1,5 @@
 /*
- SDGTextInternalTests.swift
+ InternalTests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -18,7 +18,7 @@ import XCTest
 
 import SDGXCTestUtilities
 
-class SDGTextInternalTests: TestCase {
+class InternalTests: TestCase {
 
   func testLineViewIndex() {
     XCTAssertNil("ABC".lines.endIndex.newline(in: "ABC".scalars))

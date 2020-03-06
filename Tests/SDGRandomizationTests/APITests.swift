@@ -1,5 +1,5 @@
 /*
- SDGRandomizationAPITests.swift
+ APITests.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -21,7 +21,7 @@ import XCTest
 import SDGRandomizationTestUtilities
 import SDGXCTestUtilities
 
-class SDGRandomizationAPITests: TestCase {
+class APITests: TestCase {
 
   func testBool() {
     var values: Set<Bool> = []
