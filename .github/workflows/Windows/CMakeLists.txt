@@ -199,9 +199,9 @@ target_link_libraries("SDGRandomization" PRIVATE
 )
 
 add_library("SDGText"
-  "../../../Sources/SDGText/Array.swift"
   "../../../Sources/SDGText/CharacterSet.swift"
-  "../../../Sources/SDGText/Collection.swift"
+  "../../../Sources/SDGText/CollectionStringFamily.swift"
+  "../../../Sources/SDGText/CollectionUnicodeScalar.swift"
   "../../../Sources/SDGText/Compatibility/StaticString.swift"
   "../../../Sources/SDGText/Compatibility/String.swift"
   "../../../Sources/SDGText/Compatibility/StringClusterView.swift"
