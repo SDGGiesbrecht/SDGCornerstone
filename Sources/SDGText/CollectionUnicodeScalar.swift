@@ -16,7 +16,7 @@ import Foundation
 
 import SDGCollections
 
-extension Collection where Element == UnicodeScalar {
+extension Collection where Element == Unicode.Scalar {
 
   /// Whether or not the string‐like collection contains multiple lines.
   @inlinable public var isMultiline: Bool {
