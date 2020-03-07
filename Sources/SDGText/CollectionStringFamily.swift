@@ -1,5 +1,5 @@
 /*
- Array.swift
+ CollectionStringFamily.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -15,7 +15,7 @@
 import SDGMathematics
 
 #if os(Android)  // #workaround(Swift 5.1.3, Compiler crashes on generic version.)
-  extension Array where Element == StrictString {
+  extension Collection where Element == StrictString {
 
     // #documentation(Array<StringFamily>.joined(separator:))
     /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
@@ -33,7 +33,7 @@ import SDGMathematics
     }
   }
 #else
-  extension Array where Element: StringFamily {
+  extension Collection where Element: StringFamily {
 
     // @documentation(Array<StringFamily>.joined(separator:))
     /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
