@@ -54,7 +54,7 @@ public struct Line<Base: StringFamily>: TextualPlaygroundDisplay {
     return String(describing: Base(Base.ScalarView(line)))
       + newline.map({ $0.visibleRepresentation }).joined()
     #else
-    fatalError()
+     fatalError()
     #endif
   }
 }
