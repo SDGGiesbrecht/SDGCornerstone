@@ -12,55 +12,58 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  import Foundation
 
-import SDGControlFlow
-import SDGMathematics
-import SDGText
+  import SDGControlFlow
+  import SDGMathematics
+  import SDGText
 
-import SDGCornerstoneLocalizations
+  import SDGCornerstoneLocalizations
 
-internal struct FoundationDate: DateDefinition, TransparentWrapper {
+  internal struct FoundationDate: DateDefinition, TransparentWrapper {
 
-  // MARK: - Initialization
+    // MARK: - Initialization
 
-  internal init(_ date: Date) {
-    self.date = date
-    self.intervalSinceReferenceDate = FloatMax(date.timeIntervalSinceReferenceDate).seconds
+    internal init(_ date: Date) {
+      self.date = date
+      self.intervalSinceReferenceDate = FloatMax(date.timeIntervalSinceReferenceDate).seconds
+    }
+
+    // MARK: - Properties
+
+    internal let date: Date
+
+    // MARK: - DateDefinition
+
+    internal static let identifier: StrictString = "Foundation"
+    internal static let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
+    internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
+
+    internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
+      self.intervalSinceReferenceDate = intervalSinceReferenceDate
+      self.date = Date(
+        timeIntervalSinceReferenceDate: TimeInterval(intervalSinceReferenceDate.inSeconds)
+      )
+    }
+
+    // MARK: - Decodable
+
+    internal init(from decoder: Decoder) throws {
+      try self.init(from: decoder, via: Date.self, convert: { FoundationDate($0) })
+    }
+
+    // MARK: - Encodable
+
+    internal func encode(to encoder: Encoder) throws {
+      try encode(to: encoder, via: date)
+    }
+
+    // MARK: - TransparentWrapper
+
+    public var wrappedInstance: Any {
+      return date
+    }
   }
-
-  // MARK: - Properties
-
-  internal let date: Date
-
-  // MARK: - DateDefinition
-
-  internal static let identifier: StrictString = "Foundation"
-  internal static let referenceDate = CalendarDate(gregorian: .january, 1, 2001)
-  internal var intervalSinceReferenceDate: CalendarInterval<FloatMax>
-
-  internal init(intervalSinceReferenceDate: CalendarInterval<FloatMax>) {
-    self.intervalSinceReferenceDate = intervalSinceReferenceDate
-    self.date = Date(
-      timeIntervalSinceReferenceDate: TimeInterval(intervalSinceReferenceDate.inSeconds)
-    )
-  }
-
-  // MARK: - Decodable
-
-  internal init(from decoder: Decoder) throws {
-    try self.init(from: decoder, via: Date.self, convert: { FoundationDate($0) })
-  }
-
-  // MARK: - Encodable
-
-  internal func encode(to encoder: Encoder) throws {
-    try encode(to: encoder, via: date)
-  }
-
-  // MARK: - TransparentWrapper
-
-  public var wrappedInstance: Any {
-    return date
-  }
-}
+#endif

@@ -12,10 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  import Foundation
 
-extension CharacterSet {
+  extension CharacterSet {
 
-  /// A pattern representing any newline variant.
-  public static let newlinePattern: NewlinePattern = NewlinePattern.newline
-}
+    /// A pattern representing any newline variant.
+    public static var newlinePattern: NewlinePattern { .newline }
+  }
+#endif

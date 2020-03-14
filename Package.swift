@@ -758,12 +758,21 @@ func adjustForWindows() {
   ]
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
-      switch dependency {
-      case ._productItem(let name, _):
-        return impossibleProducts.contains(name)
-      default:
-        return false
-      }
+      #if compiler(<5.2)
+        switch dependency {
+        case ._productItem(let name, _):
+          return impossibleProducts.contains(name)
+        default:
+          return false
+        }
+      #else
+        switch dependency {
+        case ._productItem(let name, _, _):
+          return impossibleProducts.contains(name)
+        default:
+          return false
+        }
+      #endif
     })
   }
   // #workaround(workspace version 0.30.2, CMake cannot handle Unicode.)
@@ -776,4 +785,55 @@ import Foundation
 // #workaround(workspace version 0.30.2, Until packages work natively on windows.)
 if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
   adjustForWindows()
+}
+
+func adjustForWeb() {
+  // #workaround(Temporary.)
+  let impossibleTargets: Set<String> = [
+    "SDGText",
+    "SDGPersistence",
+    "SDGLocalization",
+    "SDGCornerstoneLocalizations",
+    "SDGCalendar",
+    "SDGPrecisionMathematics",
+    "SDGCollation",
+    "SDGVersioning",
+    "SDGTesting",
+    "SDGLogicTestUtilities",
+    "SDGMathematicsTestUtilities",
+    "SDGCollectionsTestUtilities",
+    "SDGPersistenceTestUtilities",
+    "SDGLocalizationTestUtilities",
+    "SDGGeometryTestUtilities",
+    "SDGRandomizationTestUtilities",
+    "SDGXCTestUtilities"
+  ]
+  package.products.removeAll(where: { product in
+    return impossibleTargets.contains(product.name)
+  })
+  package.targets.removeAll(where: { target in
+    return impossibleTargets.contains(target.name)
+  })
+  for target in package.targets {
+    target.dependencies.removeAll(where: { dependency in
+      #if compiler(<5.2)
+        switch dependency {
+        case ._targetItem(let name), ._byNameItem(let name):
+          return impossibleTargets.contains(name)
+        case ._productItem:
+          return false
+        }
+      #else
+        switch dependency {
+        case ._targetItem(let name, _), ._byNameItem(let name, _):
+          return impossibleTargets.contains(name)
+        case ._productItem:
+          return false
+        }
+      #endif
+    })
+  }
+}
+if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
+  adjustForWeb()
 }

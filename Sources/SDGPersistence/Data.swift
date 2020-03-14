@@ -12,17 +12,20 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  import Foundation
 
-extension Data: FileConvertible {
+  extension Data: FileConvertible {
 
-  // MARK: - FileConvertible
+    // MARK: - FileConvertible
 
-  public init(file: Data, origin: URL?) throws {
-    self = file
+    public init(file: Data, origin: URL?) throws {
+      self = file
+    }
+
+    public var file: Data {
+      return self
+    }
   }
-
-  public var file: Data {
-    return self
-  }
-}
+#endif

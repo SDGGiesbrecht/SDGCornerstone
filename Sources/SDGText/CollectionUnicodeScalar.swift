@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  import Foundation
+#endif
 
 import SDGCollections
 
@@ -20,6 +23,6 @@ extension Collection where Element == Unicode.Scalar {
 
   /// Whether or not the string‐like collection contains multiple lines.
   @inlinable public var isMultiline: Bool {
-    return contains(where: { $0 ∈ CharacterSet.newlines })
+    return contains(where: { $0 ∈ NewlinePattern.newlineCharacters })
   }
 }

@@ -51,6 +51,3 @@ configuration.repository.ignoredPaths.insert("Sources/SDGCollation/Resources.swi
 // #workaround(workspace version 0.30.2, SwiftFormat gets these wrong.)
 configuration.proofreading.swiftFormatConfiguration?
   .rules["AmbiguousTrailingClosureOverload"] = false
-
-// #workaround(For now.)
-configuration.supportedPlatforms.remove(.web)

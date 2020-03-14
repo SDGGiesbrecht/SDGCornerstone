@@ -12,42 +12,45 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  import Foundation
 
-extension Data: BitField {
+  extension Data: BitField {
 
-  // MARK: - BitField
+    // MARK: - BitField
 
-  public mutating func formBitwiseNot() {
-    for index in indices {
-      self[index].formBitwiseNot()
+    public mutating func formBitwiseNot() {
+      for index in indices {
+        self[index].formBitwiseNot()
+      }
+    }
+
+    public mutating func formBitwiseAnd(with other: Data) {
+      let end = Swift.min(endIndex, other.endIndex)
+
+      for index in startIndex..<end {
+        self[index].formBitwiseAnd(with: other[index])
+      }
+      removeSubrange(end...)
+    }
+
+    public mutating func formBitwiseOr(with other: Data) {
+      let end = Swift.min(endIndex, other.endIndex)
+
+      for index in startIndex..<end {
+        self[index].formBitwiseOr(with: other[index])
+      }
+      append(contentsOf: other[end...])
+    }
+
+    public mutating func formBitwiseExclusiveOr(with other: Data) {
+      let end = Swift.min(endIndex, other.endIndex)
+
+      for index in startIndex..<end {
+        self[index].formBitwiseExclusiveOr(with: other[index])
+      }
+      append(contentsOf: other[end...])
     }
   }
-
-  public mutating func formBitwiseAnd(with other: Data) {
-    let end = Swift.min(endIndex, other.endIndex)
-
-    for index in startIndex..<end {
-      self[index].formBitwiseAnd(with: other[index])
-    }
-    removeSubrange(end...)
-  }
-
-  public mutating func formBitwiseOr(with other: Data) {
-    let end = Swift.min(endIndex, other.endIndex)
-
-    for index in startIndex..<end {
-      self[index].formBitwiseOr(with: other[index])
-    }
-    append(contentsOf: other[end...])
-  }
-
-  public mutating func formBitwiseExclusiveOr(with other: Data) {
-    let end = Swift.min(endIndex, other.endIndex)
-
-    for index in startIndex..<end {
-      self[index].formBitwiseExclusiveOr(with: other[index])
-    }
-    append(contentsOf: other[end...])
-  }
-}
+#endif

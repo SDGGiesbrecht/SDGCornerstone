@@ -12,10 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  import Foundation
 
-let repositoryRoot = URL(fileURLWithPath: #file).deletingLastPathComponent()
-  .deletingLastPathComponent().deletingLastPathComponent()
+  let repositoryRoot = URL(fileURLWithPath: #file).deletingLastPathComponent()
+    .deletingLastPathComponent().deletingLastPathComponent()
 
-let resourcesDirectory = repositoryRoot.appendingPathComponent("Resources")
-let collationResourcesDirectory = resourcesDirectory.appendingPathComponent("SDGCollation")
+  let resourcesDirectory = repositoryRoot.appendingPathComponent("Resources")
+  let collationResourcesDirectory = resourcesDirectory.appendingPathComponent("SDGCollation")
+#endif

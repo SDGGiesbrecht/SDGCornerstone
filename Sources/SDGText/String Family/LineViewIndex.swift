@@ -12,7 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  import Foundation
+#endif
 
 import SDGControlFlow
 
@@ -53,7 +56,7 @@ public struct LineViewIndex: Comparable, Equatable {
       return nil
     }
     return cached(in: &cache.newline) {
-      return scalars[startIndex...].firstMatch(for: CharacterSet.newlinePattern)?.range
+      return scalars[startIndex...].firstMatch(for: NewlinePattern.newline)?.range
         ?? scalars.endIndex..<scalars.endIndex
     }
   }

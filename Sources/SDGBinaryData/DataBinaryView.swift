@@ -12,73 +12,76 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  import Foundation
 
-import SDGControlFlow
-import SDGMathematics
+  import SDGControlFlow
+  import SDGMathematics
 
-extension Data {
+  extension Data {
 
-  /// A view of the contents of `Data` as a collection of bits.
-  public struct BinaryView: BidirectionalCollection, Collection, CustomStringConvertible,
-    MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay
-  {
+    /// A view of the contents of `Data` as a collection of bits.
+    public struct BinaryView: BidirectionalCollection, Collection, CustomStringConvertible,
+      MutableCollection, RandomAccessCollection, TextualPlaygroundDisplay
+    {
 
-    // MARK: - Initialization
+      // MARK: - Initialization
 
-    internal init(_ data: Data) {
-      self.data = data
-    }
-
-    // MARK: - Properties
-
-    private static let bitsPerByte: IntMax = 8
-    internal var data: Data
-
-    // MARK: - Conversions
-
-    private func byteIndex(_ index: IntMax) -> Data.Index {
-      return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
-    }
-
-    private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
-      return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
-    }
-
-    // MARK: - BidirectionalCollection
-
-    public func index(before i: IntMax) -> IntMax {
-      return i − 1
-    }
-
-    // MARK: - Collection
-
-    private static let startIndex: IntMax = 0
-    public var startIndex: IntMax {
-      return Data.BinaryView.startIndex
-    }
-    public var endIndex: IntMax {
-      return IntMax(data.endIndex) × BinaryView.bitsPerByte
-    }
-
-    public func index(after i: IntMax) -> IntMax {
-      return i + 1
-    }
-
-    public subscript(position: IntMax) -> Bool {
-      get {
-        return data[byteIndex(position)].binary[bitIndex(position)]
+      internal init(_ data: Data) {
+        self.data = data
       }
-      set {
-        data[byteIndex(position)].binary[bitIndex(position)] = newValue
+
+      // MARK: - Properties
+
+      private static let bitsPerByte: IntMax = 8
+      internal var data: Data
+
+      // MARK: - Conversions
+
+      private func byteIndex(_ index: IntMax) -> Data.Index {
+        return Data.Index(index.dividedAccordingToEuclid(by: BinaryView.bitsPerByte))
       }
-    }
 
-    // MARK: - CustomStringConvertible
+      private func bitIndex(_ index: IntMax) -> SDGBinaryData.BinaryView<UInt8>.Index {
+        return SDGBinaryData.BinaryView<UInt8>.Index(index.mod(BinaryView.bitsPerByte))
+      }
 
-    public var description: String {
-      let bytes = data.map { String(describing: $0.binary) }
-      return bytes.joined(separator: " ")
+      // MARK: - BidirectionalCollection
+
+      public func index(before i: IntMax) -> IntMax {
+        return i − 1
+      }
+
+      // MARK: - Collection
+
+      private static let startIndex: IntMax = 0
+      public var startIndex: IntMax {
+        return Data.BinaryView.startIndex
+      }
+      public var endIndex: IntMax {
+        return IntMax(data.endIndex) × BinaryView.bitsPerByte
+      }
+
+      public func index(after i: IntMax) -> IntMax {
+        return i + 1
+      }
+
+      public subscript(position: IntMax) -> Bool {
+        get {
+          return data[byteIndex(position)].binary[bitIndex(position)]
+        }
+        set {
+          data[byteIndex(position)].binary[bitIndex(position)] = newValue
+        }
+      }
+
+      // MARK: - CustomStringConvertible
+
+      public var description: String {
+        let bytes = data.map { String(describing: $0.binary) }
+        return bytes.joined(separator: " ")
+      }
     }
   }
-}
+#endif
