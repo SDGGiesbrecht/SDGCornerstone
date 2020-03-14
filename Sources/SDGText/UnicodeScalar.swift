@@ -383,21 +383,25 @@ extension Unicode.Scalar {
       return control(acronym: "END🏷")
 
     default:
-
-      // Marks (Mn, Mc, Me)
-      if self ∈ CharacterSet.nonBaseCharacters {
-        return "◌" + String(self)
-
-        // Letters (Lu, Ll, Lt, Lm, Lo), Numbers (Nd, Nl, No), Punctuation (Pc, Pd, Ps, Pe, Pi, Pf, Po) & Symbols (Sm, Sc, Sk, So)
-      } else if self ∈ (CharacterSet.alphanumerics ∪ CharacterSet.punctuationCharacters)
-        ∪ CharacterSet.symbols
-      {
-        return String(self)
-
-        // Private Use (Co), Surrogate (Cs) & Unassigned (Cn)
-      } else {
+      // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+      #if !canImport(Foundation)
         return control(acronym: hexadecimalCode)
-      }
+      #else
+        // Marks (Mn, Mc, Me)
+        if self ∈ CharacterSet.nonBaseCharacters {
+          return "◌" + String(self)
+
+          // Letters (Lu, Ll, Lt, Lm, Lo), Numbers (Nd, Nl, No), Punctuation (Pc, Pd, Ps, Pe, Pi, Pf, Po) & Symbols (Sm, Sc, Sk, So)
+        } else if self ∈ (CharacterSet.alphanumerics ∪ CharacterSet.punctuationCharacters)
+          ∪ CharacterSet.symbols
+        {
+          return String(self)
+
+          // Private Use (Co), Surrogate (Cs) & Unassigned (Cn)
+        } else {
+          return control(acronym: hexadecimalCode)
+        }
+      #endif
     }
   }
 }

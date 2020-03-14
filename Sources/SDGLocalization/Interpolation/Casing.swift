@@ -45,17 +45,20 @@ public enum Casing {
   ///     - compileTimeString: The string to transform.
   public func apply(to compileTimeString: StaticString) -> StrictString {
     var string = StrictString(compileTimeString)
-    assert(
-      ¬string.contains(where: {
-        $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters
-      }),
-      UserFacing<StrictString, _APILocalization>({ localization in  // @exempt(from: tests)
-        switch localization {  // @exempt(from: tests)
-        case .englishCanada:
-          return "“\(string)” is too complex for automatic casing."
-        }
-      })
-    )
+    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+    #if canImport(Foundation)
+      assert(
+        ¬string.contains(where: {
+          $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters
+        }),
+        UserFacing<StrictString, _APILocalization>({ localization in  // @exempt(from: tests)
+          switch localization {  // @exempt(from: tests)
+          case .englishCanada:
+            return "“\(string)” is too complex for automatic casing."
+          }
+        })
+      )
+    #endif
 
     switch self {
     case .sentenceMedial:
