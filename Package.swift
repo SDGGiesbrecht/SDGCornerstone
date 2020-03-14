@@ -790,7 +790,6 @@ if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true"
 func adjustForWeb() {
   // #workaround(Temporary.)
   let impossibleTargets: Set<String> = [
-    "SDGText",
     "SDGPersistence",
     "SDGLocalization",
     "SDGCornerstoneLocalizations",
