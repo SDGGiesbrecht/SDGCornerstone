@@ -99,6 +99,8 @@ extension String.Index {
   }
   #endif
 
+  // #warning(Temporary)
+  #if false
   /// Returns the position in the given view of lines that corresponds exactly to this index.
   ///
   /// - Parameters:
@@ -123,4 +125,5 @@ extension String.Index {
   @inlinable public func line<S>(in lines: LineView<S>) -> LineView<S>.Index {
     return lines.line(for: self)
   }
+  #endif
 }

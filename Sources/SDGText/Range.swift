@@ -178,6 +178,8 @@ extension Range where Bound == String.Index {
   }
   #endif
 
+  // #warning(Temporary)
+  #if false
   /// Returns the range in the given view of lines that corresponds exactly to this range.
   ///
   /// - Parameters:
@@ -197,4 +199,5 @@ extension Range where Bound == String.Index {
       advance: { lines.index(after: $0) }
     )
   }
+  #endif
 }
