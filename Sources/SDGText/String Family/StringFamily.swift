@@ -69,13 +69,13 @@ extension StringFamily {
         self = newValue.base
       }
     }
-  #endif
 
-  // @documentation(SDGCornerstone.String.isMultiline)
-  /// Whether or not the string contains multiple lines.
-  @inlinable public var isMultiline: Bool {
-    return scalars.isMultiline
-  }
+    // @documentation(SDGCornerstone.String.isMultiline)
+    /// Whether or not the string contains multiple lines.
+    @inlinable public var isMultiline: Bool {
+      return scalars.isMultiline
+    }
+  #endif
 
   @inlinable internal mutating func closeDirectionality() {
     scalars.append("\u{2069}")
