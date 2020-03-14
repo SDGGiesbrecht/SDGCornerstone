@@ -758,3 +758,11 @@ func disableDevelopmentTools() {
     }
   }
 #endif
+
+// #workaround(Swift 5.1.3, Windows cannot handle Unicode.)
+#if os(Windows)
+  disableDevelopmentTools()
+#endif
+if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
+  disableDevelopmentTools()
+}
