@@ -56,7 +56,7 @@ public struct LineViewIndex: Comparable, Equatable {
       return nil
     }
     return cached(in: &cache.newline) {
-      return scalars[startIndex...].firstMatch(for: CharacterSet.newlinePattern)?.range
+      return scalars[startIndex...].firstMatch(for: NewlinePattern.newline)?.range
         ?? scalars.endIndex..<scalars.endIndex
     }
   }

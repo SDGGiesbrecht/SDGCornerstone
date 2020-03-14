@@ -43,13 +43,13 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
     if scalar == base.scalars.endIndex {
       return endIndex
     }
-    guard var previousNewline = base.scalars[..<scalar].lastMatch(for: CharacterSet.newlinePattern)
+    guard var previousNewline = base.scalars[..<scalar].lastMatch(for: NewlinePattern.newline)
     else {
       return startIndex
     }
 
     var encounteredNewline: Range<String.ScalarView.Index>?
-    if let newline = CharacterSet.newlinePattern.primaryMatch(
+    if let newline = NewlinePattern.newline.primaryMatch(
       in: base.scalars,
       at: previousNewline.range.lowerBound
     ),
@@ -59,7 +59,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
 
       guard
         let actualPreviousNewline = base.scalars[..<newline.lowerBound].lastMatch(
-          for: CharacterSet.newlinePattern
+          for: NewlinePattern.newline
         )
       else {
         return startIndex
@@ -84,7 +84,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
       // `nil` ought to have been handled by “if i == endIndex” above.
       guard
         let found = base.scalars[..<searchEnd].lastMatch(
-          for: CharacterSet.newlinePattern
+          for: NewlinePattern.newline
         )?.range
       else {
         _preconditionFailure({ (localization: _APILocalization) -> String in
@@ -99,7 +99,7 @@ public struct LineView<Base: StringFamily>: BidirectionalCollection, Collection,
 
     guard
       let previousNewline = base.scalars[..<newline.lowerBound].lastMatch(
-        for: CharacterSet.newlinePattern
+        for: NewlinePattern.newline
       )?.range
     else {
       startIndex.cache.newline = newline
