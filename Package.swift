@@ -786,3 +786,43 @@ import Foundation
 if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
   adjustForWindows()
 }
+
+func adjustForWeb() {
+  // #workaround(Temporary.)
+  let impossibleTargets: Set<String> = [
+    "SDGText",
+    "SDGPersistence",
+    "SDGLocalization",
+    "SDGCalendar",
+    "SDGPersistenceTestUtilities",
+    "SDGLocalizationTestUtilities"
+  ]
+  package.products.removeAll(where: { product in
+    return impossibleTargets.contains(product.name)
+  })
+  package.targets.removeAll(where: { target in
+    return impossibleTargets.contains(target.name)
+  })
+  for target in package.targets {
+    target.dependencies.removeAll(where: { dependency in
+      #if compiler(<5.2)
+        switch dependency {
+        case ._targetItem(let name), ._byNameItem(let name):
+          return impossibleTargets.contains(name)
+        case ._productItem:
+          return false
+        }
+      #else
+        switch dependency {
+        case ._targetItem(let name, _), ._byNameItem(let name, _):
+          return impossibleTargets.contains(name)
+        case ._productItem:
+          return false
+        }
+      #endif
+    })
+  }
+}
+if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
+  adjustForWeb()
+}
