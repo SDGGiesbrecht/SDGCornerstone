@@ -795,8 +795,14 @@ func adjustForWeb() {
     "SDGLocalization",
     "SDGCornerstoneLocalizations",
     "SDGCalendar",
+    "SDGTesting",
+    "SDGLogicTestUtilities",
+    "SDGMathematicsTestUtilities",
+    "SDGCollectionsTestUtilities",
     "SDGPersistenceTestUtilities",
-    "SDGLocalizationTestUtilities"
+    "SDGLocalizationTestUtilities",
+    "SDGGeometryTestUtilities",
+    "SDGRandomizationTestUtilities"
   ]
   package.products.removeAll(where: { product in
     return impossibleTargets.contains(product.name)
