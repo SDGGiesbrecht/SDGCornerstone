@@ -26,6 +26,9 @@ extension Double: TextConvertibleNumber {}
   extension CGFloat: TextConvertibleNumber {}
 #endif
 #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
-  extension Float80: TextConvertibleNumber {}
+  // #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    extension Float80: TextConvertibleNumber {}
+  #endif
 #endif
 extension Float: TextConvertibleNumber {}

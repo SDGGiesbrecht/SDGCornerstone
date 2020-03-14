@@ -26,12 +26,21 @@
   import RealModule
 #endif
 
-#if os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
+// #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  #if os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
+    // #documentation(FloatMax)
+    /// The member of the `Float` family with the largest bit field.
+    public typealias FloatMax = Double
+  #else
+    // @documentation(FloatMax)
+    /// The member of the `Float` family with the largest bit field.
+    public typealias FloatMax = Float80
+  #endif
+#else
+  // #documentation(FloatMax)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
-#else
-  /// The member of the `Float` family with the largest bit field.
-  public typealias FloatMax = Float80
 #endif
 
 /// A member of the `Float` family; `Double`, `Float80` or `Float`.
@@ -339,38 +348,41 @@ extension Double: FloatFamily {
 #endif
 
 #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+  // #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
 
-  extension Float80: Decodable, Encodable, FloatFamily {
+    extension Float80: Decodable, Encodable, FloatFamily {
 
-    // MARK: - Decodable
+      // MARK: - Decodable
 
-    public init(from decoder: Decoder) throws {
-      self.init(try Double(from: decoder))
+      public init(from decoder: Decoder) throws {
+        self.init(try Double(from: decoder))
+      }
+
+      // MARK: - Encodable
+
+      public func encode(to encoder: Encoder) throws {
+        // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
+        try Double(self).encode(to: encoder)
+      }
+
+      // MARK: - PointProtocol
+
+      public typealias Vector = Stride
+
+      // MARK: - RealArithmetic
+
+      public static let e: Float80 = 0x1.5BF0A8B145769535p1
+
+      @inlinable public static func log(_ antilogarithm: Self) -> Self {
+        return Self.log10(antilogarithm)
+      }
+
+      @inlinable public var floatingPointApproximation: FloatMax {
+        return FloatMax(self)
+      }
     }
-
-    // MARK: - Encodable
-
-    public func encode(to encoder: Encoder) throws {
-      // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
-      try Double(self).encode(to: encoder)
-    }
-
-    // MARK: - PointProtocol
-
-    public typealias Vector = Stride
-
-    // MARK: - RealArithmetic
-
-    public static let e: Float80 = 0x1.5BF0A8B145769535p1
-
-    @inlinable public static func log(_ antilogarithm: Self) -> Self {
-      return Self.log10(antilogarithm)
-    }
-
-    @inlinable public var floatingPointApproximation: FloatMax {
-      return FloatMax(self)
-    }
-  }
+  #endif
 #endif
 
 extension Float: FloatFamily {
