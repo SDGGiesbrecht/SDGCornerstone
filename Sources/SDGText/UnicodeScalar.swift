@@ -401,7 +401,7 @@ extension Unicode.Scalar {
         } else {
           return control(acronym: hexadecimalCode)
         }
-      #endif
+      #endif  // @exempt(from: tests)
     }
   }
 }
