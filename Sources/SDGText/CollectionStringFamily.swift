@@ -15,7 +15,9 @@
 import SDGMathematics
 
 // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if os(Android) || !canImport(Foundation)  // #workaround(Swift 5.1.3, Compiler crashes on generic version.)
+#if os(Android) || !canImport(Foundation)
+  // #workaround(Swift 5.1.3, Compiler crashes on generic version.)
+
   extension Collection where Element == StrictString {
 
     // #documentation(Array<StringFamily>.joined(separator:))
