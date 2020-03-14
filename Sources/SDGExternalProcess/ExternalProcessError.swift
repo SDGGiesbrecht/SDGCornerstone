@@ -14,31 +14,34 @@
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-  import SDGText
-  import SDGLocalization
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    import SDGText
+    import SDGLocalization
 
-  extension ExternalProcess {
+    extension ExternalProcess {
 
-    /// An error related to running an external process.
-    public enum Error: PresentableError {
+      /// An error related to running an external process.
+      public enum Error: PresentableError {
 
-      /// Foundation encountered an error.
-      case foundationError(Swift.Error)
+        /// Foundation encountered an error.
+        case foundationError(Swift.Error)
 
-      /// The external process exited with an error.
-      case processError(code: Int, output: String)
+        /// The external process exited with an error.
+        case processError(code: Int, output: String)
 
-      // MARK: - PresentableError
+        // MARK: - PresentableError
 
-      public func presentableDescription() -> StrictString {
-        switch self {
-        case .foundationError(let error):
-          return StrictString(error.localizedDescription)
-        case .processError(code: _, let output):
-          return StrictString(output)
+        public func presentableDescription() -> StrictString {
+          switch self {
+          case .foundationError(let error):
+            return StrictString(error.localizedDescription)
+          case .processError(code: _, let output):
+            return StrictString(output)
+          }
         }
       }
     }
-  }
+  #endif
 
 #endif
