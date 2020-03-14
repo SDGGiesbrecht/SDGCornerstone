@@ -53,29 +53,26 @@ public protocol StringFamily: Addable, Comparable, Decodable, Encodable,
 
 extension StringFamily {
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-  #if canImport(Foundation)
-    /// Creates a string from a collection of lines.
-    @inlinable public init(_ lines: LineView<Self>) {
-      self = lines.base
-    }
+  /// Creates a string from a collection of lines.
+  @inlinable public init(_ lines: LineView<Self>) {
+    self = lines.base
+  }
 
-    /// A view of a string’s contents as a collection of lines.
-    @inlinable public var lines: LineView<Self> {
-      get {
-        return LineView(self)
-      }
-      set {
-        self = newValue.base
-      }
+  /// A view of a string’s contents as a collection of lines.
+  @inlinable public var lines: LineView<Self> {
+    get {
+      return LineView(self)
     }
+    set {
+      self = newValue.base
+    }
+  }
 
-    // @documentation(SDGCornerstone.String.isMultiline)
-    /// Whether or not the string contains multiple lines.
-    @inlinable public var isMultiline: Bool {
-      return scalars.isMultiline
-    }
-  #endif
+  // @documentation(SDGCornerstone.String.isMultiline)
+  /// Whether or not the string contains multiple lines.
+  @inlinable public var isMultiline: Bool {
+    return scalars.isMultiline
+  }
 
   @inlinable internal mutating func closeDirectionality() {
     scalars.append("\u{2069}")

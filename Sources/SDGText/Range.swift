@@ -160,26 +160,23 @@ extension Range where Bound == String.Index {
     )
   }
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-  #if canImport(Foundation)
-    /// Returns the range in the given view of lines that corresponds exactly to this range.
-    ///
-    /// - Parameters:
-    ///     - lines: The line view of the string the range refers to.
-    @inlinable public func sameRange<S>(in lines: LineView<S>) -> Range<LineView<S>.Index>? {
-      return map { $0.samePosition(in: lines) }
-    }
+  /// Returns the range in the given view of lines that corresponds exactly to this range.
+  ///
+  /// - Parameters:
+  ///     - lines: The line view of the string the range refers to.
+  @inlinable public func sameRange<S>(in lines: LineView<S>) -> Range<LineView<S>.Index>? {
+    return map { $0.samePosition(in: lines) }
+  }
 
-    /// Returns the range of lines that contains this range.
-    ///
-    /// - Parameters:
-    ///     - lines: The line view of the string the range refers to.
-    @inlinable public func lines<S>(in lines: LineView<S>) -> Range<LineView<S>.Index> {
-      return map(
-        convertAndRoundDown: { $0.line(in: lines) },
-        convertIfPossible: { $0.samePosition(in: lines) },
-        advance: { lines.index(after: $0) }
-      )
-    }
-  #endif
+  /// Returns the range of lines that contains this range.
+  ///
+  /// - Parameters:
+  ///     - lines: The line view of the string the range refers to.
+  @inlinable public func lines<S>(in lines: LineView<S>) -> Range<LineView<S>.Index> {
+    return map(
+      convertAndRoundDown: { $0.line(in: lines) },
+      convertIfPossible: { $0.samePosition(in: lines) },
+      advance: { lines.index(after: $0) }
+    )
+  }
 }
