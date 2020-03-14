@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+// #warning(Temporary)
+#if false
 import SDGMathematics
 
 #if os(Android)  // #workaround(Swift 5.1.3, Compiler crashes on generic version.)
@@ -50,4 +52,5 @@ import SDGMathematics
       return result
     }
   }
+#endif
 #endif
