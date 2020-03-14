@@ -811,7 +811,7 @@ func adjustForWeb() {
     return impossibleTargets.contains(product.name)
   })
   package.targets.removeAll(where: { target in
-    return impossibleTargets.contains(target.name)
+    return impossibleTargets.contains(target.name) || target.name.hasSuffix("Tests") // #warning(Temporary.)
   })
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
@@ -833,6 +833,7 @@ func adjustForWeb() {
     })
   }
 }
-if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
+// #warning(Temporary.)
+//if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
   adjustForWeb()
-}
+//}

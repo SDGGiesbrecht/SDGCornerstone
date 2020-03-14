@@ -20,10 +20,13 @@ extension String: StringFamily {
 
   // MARK: - Initialization
 
+  // #warning(Temporary)
+  #if false
   /// Creates a string from a `StrictString`.
   @inlinable public init(_ string: StrictString) {
     self = string.string
   }
+  #endif
 
   // MARK: - StringFamily
 

@@ -14,6 +14,8 @@
 
 extension Range where Bound == LineViewIndex {
 
+  // #warning(Temporary)
+  #if false
   /// Returns the range in the given view of scalars that corresponds exactly to this range.
   ///
   /// - Parameters:
@@ -22,6 +24,7 @@ extension Range where Bound == LineViewIndex {
   {
     return map { $0.samePosition(in: scalars) }
   }
+  #endif
 
   /// Returns the range in the given view of scalars that corresponds exactly to this range.
   ///
@@ -31,6 +34,8 @@ extension Range where Bound == LineViewIndex {
     return map { $0.samePosition(in: scalars) }
   }
 
+  // #warning(Temporary)
+  #if false
   /// Returns the range in the given view of clusters that corresponds exactly to this range.
   ///
   /// - Parameters:
@@ -40,6 +45,7 @@ extension Range where Bound == LineViewIndex {
   > {
     return map { $0.samePosition(in: clusters) }
   }
+  #endif
 
   /// Returns the range in the given view of clusters that corresponds exactly to this range.
   ///
@@ -75,6 +81,8 @@ extension Range where Bound == String.Index {
     return map { $0.samePosition(in: scalars) }
   }
 
+  // #warning(Temporary)
+  #if false
   // #documentation(Range.sameRange(in scalars:))
   /// Returns the range in the given view of scalars that corresponds exactly to this range.
   ///
@@ -85,6 +93,7 @@ extension Range where Bound == String.Index {
   >? {
     return map { $0.samePosition(in: scalars) }
   }
+  #endif
 
   // @documentation(Range.scalars(in:))
   /// Returns the range of scalars that contains this range.
@@ -99,6 +108,8 @@ extension Range where Bound == String.Index {
     )
   }
 
+  // #warning(Temporary)
+  #if false
   // #documentation(Range.scalars(in:))
   /// Returns the range of scalars that contains this range.
   ///
@@ -111,6 +122,7 @@ extension Range where Bound == String.Index {
       advance: { scalars.index(after: $0) }
     )
   }
+  #endif
 
   // @documentation(Range.sameRange(in clusters:))
   /// Returns the range in the given view of clusters that corresponds exactly to this range.
@@ -121,6 +133,8 @@ extension Range where Bound == String.Index {
     return map { $0.samePosition(in: clusters) }
   }
 
+  // #warning(Temporary)
+  #if false
   // #documentation(Range.sameRange(in clusters:))
   /// Returns the range in the given view of clusters that corresponds exactly to this range.
   ///
@@ -131,6 +145,7 @@ extension Range where Bound == String.Index {
   >? {
     return map { $0.samePosition(in: clusters) }
   }
+  #endif
 
   // @documentation(Range.clusters(in:))
   /// Returns the range of clusters that contains this range.
@@ -145,6 +160,8 @@ extension Range where Bound == String.Index {
     )
   }
 
+  // #warning(Temporary)
+  #if false
   // #documentation(Range.clusters(in:))
   /// Returns the range of clusters that contains this range.
   ///
@@ -159,6 +176,7 @@ extension Range where Bound == String.Index {
       advance: { clusters.index(after: $0) }
     )
   }
+  #endif
 
   /// Returns the range in the given view of lines that corresponds exactly to this range.
   ///

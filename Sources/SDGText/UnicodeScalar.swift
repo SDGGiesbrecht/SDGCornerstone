@@ -29,10 +29,13 @@ extension Unicode {
 
 extension Unicode.Scalar {
 
+  // #warning(Temporary)
+  #if false
   /// `true` if the scalar is decomposable in NFKD, otherwise `false`.
   public var isDecomposableInNFKD: Bool {
     return ¬StrictString(self).elementsEqual([self])
   }
+  #endif
 
   /// The hexadecimal code for the character.
   public var hexadecimalCode: String {

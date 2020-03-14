@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+// #warning(Temporary)
+#if false
 import SDGControlFlow
 
 extension StrictString {
@@ -122,3 +124,4 @@ extension StrictString {
     }
   }
 }
+#endif
