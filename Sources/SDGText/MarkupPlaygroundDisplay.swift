@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #warning(Temporary)
-#if false
 import SDGControlFlow
 
 /// A type which displays its rich text description in playgrounds.
@@ -37,4 +35,3 @@ extension MarkupPlaygroundDisplay {
     return String(playgroundDescriptionMarkup().rawTextApproximation())
   }
 }
-#endif

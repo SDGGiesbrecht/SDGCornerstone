@@ -63,8 +63,6 @@ public struct LineViewIndex: Comparable, Equatable {
 
   // MARK: - Conversions
 
-  // #warning(Temporary)
-  #if false
   /// Returns the position in the given view of scalars that corresponds exactly to this index.
   ///
   /// - Parameters:
@@ -72,7 +70,6 @@ public struct LineViewIndex: Comparable, Equatable {
   @inlinable public func samePosition(in scalars: StrictString) -> StrictString.Index {
     return start ?? scalars.endIndex
   }
-  #endif
 
   /// Returns the position in the given view of scalars that corresponds exactly to this index.
   ///
@@ -82,8 +79,6 @@ public struct LineViewIndex: Comparable, Equatable {
     return start ?? scalars.endIndex
   }
 
-  // #warning(Temporary)
-  #if false
   /// Returns the position in the given view of clusters that corresponds exactly to this index.
   ///
   /// - Parameters:
@@ -93,7 +88,6 @@ public struct LineViewIndex: Comparable, Equatable {
   {
     return samePosition(in: String(StrictString(clusters)).clusters)
   }
-  #endif
 
   /// Returns the position in the given view of clusters that corresponds exactly to this index.
   ///

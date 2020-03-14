@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #warning(Temporary)
-#if false
 extension StrictString {
 
   /// The type which handles interpolation of strict strings.
@@ -28,4 +26,3 @@ extension StrictString {
     public var string: StrictString
   }
 }
-#endif

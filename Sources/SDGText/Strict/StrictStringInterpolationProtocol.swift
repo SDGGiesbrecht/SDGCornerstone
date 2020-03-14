@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #warning(Temporary)
-#if false
 /// The protocol which handles interpolation for strict strings.
 public protocol StrictStringInterpolationProtocol: StringInterpolationProtocol {
 
@@ -157,4 +155,3 @@ extension StrictStringInterpolationProtocol {
     self.string.append(contentsOf: description.scalars)
   }
 }
-#endif

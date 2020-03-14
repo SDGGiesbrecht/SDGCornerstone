@@ -49,12 +49,7 @@ public struct Line<Base: StringFamily>: TextualPlaygroundDisplay {
   // MARK: - CustomStringConvertible
 
   @inlinable public var description: String {
-    // #warning(Temporary)
-    #if false
     return String(describing: Base(Base.ScalarView(line)))
       + newline.map({ $0.visibleRepresentation }).joined()
-    #else
-     fatalError()
-    #endif
   }
 }

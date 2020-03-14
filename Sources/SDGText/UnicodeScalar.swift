@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #warning(Temporary)
-#if false
 // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
 #if canImport(Foundation)
   import Foundation
@@ -31,13 +29,10 @@ extension Unicode {
 
 extension Unicode.Scalar {
 
-  // #warning(Temporary)
-  #if false
   /// `true` if the scalar is decomposable in NFKD, otherwise `false`.
   public var isDecomposableInNFKD: Bool {
     return ¬StrictString(self).elementsEqual([self])
   }
-  #endif
 
   /// The hexadecimal code for the character.
   public var hexadecimalCode: String {
@@ -410,4 +405,3 @@ extension Unicode.Scalar {
     }
   }
 }
-#endif

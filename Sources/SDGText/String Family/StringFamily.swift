@@ -53,8 +53,6 @@ public protocol StringFamily: Addable, Comparable, Decodable, Encodable,
 
 extension StringFamily {
 
-  // #warning(Temporary)
-  #if false
   /// Creates a string from a collection of lines.
   @inlinable public init(_ lines: LineView<Self>) {
     self = lines.base
@@ -69,7 +67,6 @@ extension StringFamily {
       self = newValue.base
     }
   }
-  #endif
 
   // @documentation(SDGCornerstone.String.isMultiline)
   /// Whether or not the string contains multiple lines.

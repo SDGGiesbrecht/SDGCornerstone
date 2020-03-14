@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #warning(Temporary)
-#if false
 extension SemanticMarkup {
 
   /// The type which handles interpolation of semantic markup.
@@ -43,4 +41,3 @@ extension SemanticMarkup {
     }
   }
 }
-#endif

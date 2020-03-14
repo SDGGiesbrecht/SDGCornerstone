@@ -18,8 +18,6 @@ extension String.Index {
 
   // MARK: - Conversions
 
-  // #warning(Temporary)
-  #if false
   /// Returns the position in the given view of scalars that corresponds exactly to this index.
   ///
   /// - Parameters:
@@ -27,7 +25,6 @@ extension String.Index {
   @inlinable public func samePosition(in scalars: StrictString.ScalarView) -> StrictString.Index? {
     return samePosition(in: String(StrictString(scalars)).scalars)
   }
-  #endif
 
   // @documentation(String.Index.scalar(in:))
   /// Returns the position of the scalar that contains this index.
@@ -49,8 +46,6 @@ extension String.Index {
     return position!
   }
 
-  // #warning(Temporary)
-  #if false
   // #documentation(String.Index.scalar(in:))
   /// Returns the position of the scalar that contains this index.
   ///
@@ -68,7 +63,6 @@ extension String.Index {
   {
     return samePosition(in: String(StrictString(clusters)))
   }
-  #endif
 
   // @documentation(String.Index.cluster(in:))
   /// Returns the position of the cluster that contains this index.
@@ -87,8 +81,6 @@ extension String.Index {
     return position!
   }
 
-  // #warning(Temporary)
-  #if false
   // #documentation(String.Index.cluster(in:))
   /// Returns the position of the cluster that contains this index.
   ///
@@ -97,10 +89,7 @@ extension String.Index {
   @inlinable public func cluster(in clusters: StrictString.ClusterView) -> StrictString.Index {
     return cluster(in: String(StrictString(clusters)))
   }
-  #endif
 
-  // #warning(Temporary)
-  #if false
   /// Returns the position in the given view of lines that corresponds exactly to this index.
   ///
   /// - Parameters:
@@ -125,5 +114,4 @@ extension String.Index {
   @inlinable public func line<S>(in lines: LineView<S>) -> LineView<S>.Index {
     return lines.line(for: self)
   }
-  #endif
 }

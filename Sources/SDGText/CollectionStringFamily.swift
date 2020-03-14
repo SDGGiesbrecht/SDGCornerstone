@@ -12,11 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #warning(Temporary)
-#if false
 import SDGMathematics
 
-#if os(Android)  // #workaround(Swift 5.1.3, Compiler crashes on generic version.)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if os(Android) || !canImport(Foundation)  // #workaround(Swift 5.1.3, Compiler crashes on generic version.)
   extension Collection where Element == StrictString {
 
     // #documentation(Array<StringFamily>.joined(separator:))
@@ -52,5 +51,4 @@ import SDGMathematics
       return result
     }
   }
-#endif
 #endif
