@@ -758,12 +758,21 @@ func adjustForWindows() {
   ]
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
-      switch dependency {
-      case ._productItem(let name, _):
-        return impossibleProducts.contains(name)
-      default:
-        return false
-      }
+      #if compiler(<5.2)
+        switch dependency {
+        case ._productItem(let name, _):
+          return impossibleProducts.contains(name)
+        default:
+          return false
+        }
+      #else
+        switch dependency {
+        case ._productItem(let name, _, _):
+          return impossibleProducts.contains(name)
+        default:
+          return false
+        }
+      #endif
     })
   }
   // #workaround(workspace version 0.30.2, CMake cannot handle Unicode.)
