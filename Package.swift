@@ -793,6 +793,7 @@ func adjustForWeb() {
     "SDGText",
     "SDGPersistence",
     "SDGLocalization",
+    "SDGCornerstoneLocalizations",
     "SDGCalendar",
     "SDGPersistenceTestUtilities",
     "SDGLocalizationTestUtilities"
