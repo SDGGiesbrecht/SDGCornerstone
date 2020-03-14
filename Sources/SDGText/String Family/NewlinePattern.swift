@@ -41,7 +41,9 @@ public struct NewlinePattern: Pattern {
   #else
     @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
   #endif
-  internal static let newline = NewlinePattern(carriageReturnLineFeed: (carriageReturn, lineFeed))
+  @usableFromInline internal static let newline = NewlinePattern(
+    carriageReturnLineFeed: (carriageReturn, lineFeed)
+  )
 
   // MARK: - Initialization
 
