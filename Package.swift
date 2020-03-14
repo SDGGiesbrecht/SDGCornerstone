@@ -796,6 +796,7 @@ func adjustForWeb() {
     "SDGCornerstoneLocalizations",
     "SDGCalendar",
     "SDGCollation",
+    "SDGVersioning",
     "SDGTesting",
     "SDGLogicTestUtilities",
     "SDGMathematicsTestUtilities",
