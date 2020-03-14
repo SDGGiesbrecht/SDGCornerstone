@@ -88,15 +88,18 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
     }
   }
 
-  /// A view of the source as a collection of lines.
-  public var lines: LineView<StrictString> {
-    get {
-      return source.lines
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    /// A view of the source as a collection of lines.
+    public var lines: LineView<StrictString> {
+      get {
+        return source.lines
+      }
+      set {
+        source.lines = newValue
+      }
     }
-    set {
-      source.lines = newValue
-    }
-  }
+  #endif
 
   // MARK: - Mutation
 
