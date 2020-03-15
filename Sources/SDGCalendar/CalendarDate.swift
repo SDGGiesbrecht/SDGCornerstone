@@ -166,13 +166,16 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     )
   }
 
-  /// Creates a calendar date using an instance of `Date`.
-  ///
-  /// - Parameters:
-  ///     - dateInstance: The `Date` instance.
-  public init(_ dateInstance: Date) {
-    self.init(definition: FoundationDate(dateInstance))
-  }
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    /// Creates a calendar date using an instance of `Date`.
+    ///
+    /// - Parameters:
+    ///     - dateInstance: The `Date` instance.
+    public init(_ dateInstance: Date) {
+      self.init(definition: FoundationDate(dateInstance))
+    }
+  #endif
 
   // MARK: - Properties
 
@@ -303,12 +306,18 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Decodable
 
-  internal static var knownDateDefinitions: [StrictString: DateDefinition.Type] = [
-    HebrewDate.identifier: HebrewDate.self,
-    GregorianDate.identifier: GregorianDate.self,
-    FoundationDate.identifier: FoundationDate.self,
-    RelativeDate.identifier: RelativeDate.self
-  ]
+  internal static var knownDateDefinitions: [StrictString: DateDefinition.Type] = {
+    var definitions: [StrictString: DateDefinition.Type] = [
+      HebrewDate.identifier: HebrewDate.self,
+      GregorianDate.identifier: GregorianDate.self,
+      RelativeDate.identifier: RelativeDate.self
+    ]
+    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+    #if canImport(Foundation)
+      definitions[FoundationDate.identifier] = FoundationDate.self
+    #endif
+    return definitions
+  }()
 
   /// Registers a definition type so that its instances can be decoded.
   ///
