@@ -33,10 +33,13 @@ public struct CollationOrder: Decodable, Encodable {
 
   // MARK: - Static Properties
 
-  /// The root collation order.
-  public static let root: CollationOrder = {
-    return try! CollationOrder(file: Resources.root, origin: nil)
-  }()
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    /// The root collation order.
+    public static let root: CollationOrder = {
+      return try! CollationOrder(file: Resources.root, origin: nil)
+    }()
+  #endif
 
   // MARK: - Initialization
 
