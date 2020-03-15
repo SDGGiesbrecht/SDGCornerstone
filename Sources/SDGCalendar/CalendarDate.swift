@@ -39,15 +39,18 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Static Functions
 
-  /// Returns the current date on the Hebrew calendar.
-  public static func hebrewNow() -> CalendarDate {
-    return CalendarDate(definition: CalendarDate(Date()).converted(to: HebrewDate.self))
-  }
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    /// Returns the current date on the Hebrew calendar.
+    public static func hebrewNow() -> CalendarDate {
+      return CalendarDate(definition: CalendarDate(Date()).converted(to: HebrewDate.self))
+    }
 
-  /// Returns the current date on the Gregorian calendar.
-  public static func gregorianNow() -> CalendarDate {
-    return CalendarDate(definition: CalendarDate(Date()).converted(to: GregorianDate.self))
-  }
+    /// Returns the current date on the Gregorian calendar.
+    public static func gregorianNow() -> CalendarDate {
+      return CalendarDate(definition: CalendarDate(Date()).converted(to: GregorianDate.self))
+    }
+  #endif
 
   // MARK: - Initialization
 
