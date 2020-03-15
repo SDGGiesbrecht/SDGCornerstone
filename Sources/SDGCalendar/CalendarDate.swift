@@ -278,14 +278,17 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Time Zones
 
-  /// Returns date properties adjusted to the specified time zone.
-  ///
-  /// - Parameters:
-  ///     - timeZone: The target time zone.
-  public func adjusted(to timeZone: TimeZone) -> AnyDescribableDate {
-    let date = self + FloatMax(timeZone.secondsFromGMT(for: Date(self))).seconds
-    return AnyDescribableDate(date)
-  }
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    /// Returns date properties adjusted to the specified time zone.
+    ///
+    /// - Parameters:
+    ///     - timeZone: The target time zone.
+    public func adjusted(to timeZone: TimeZone) -> AnyDescribableDate {
+      let date = self + FloatMax(timeZone.secondsFromGMT(for: Date(self))).seconds
+      return AnyDescribableDate(date)
+    }
+  #endif
 
   /// Returns date properties adjusted to mean solar time at the specified longitude, with negative angles representing west.
   ///
