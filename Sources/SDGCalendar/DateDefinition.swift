@@ -102,7 +102,7 @@ public protocol DateDefinition: Decodable, Encodable {
 
 // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
 #if !canImport(Foundation)
-  internal struct FoundationUnavailable: PresentableError {
+  private struct FoundationUnavailable: PresentableError {
     public func presentableDescription() -> StrictString {
       return UserFacing<StrictString, InterfaceLocalization>({ localization in
         switch localization {
@@ -120,7 +120,7 @@ extension DateDefinition {
 
   public func _encode() throws -> StrictString {
     #if !canImport(Foundation)
-      throw FoundationMissing()
+      throw FoundationUnavailable()
     #else
       return try StrictString(file: try JSONEncoder().encode([self]), origin: nil)
     #endif
@@ -132,7 +132,7 @@ extension DateDefinition {
   public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
     // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
     #if !canImport(Foundation)
-      throw FoundationMissing()
+      throw FoundationUnavailable()
     #else
       guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {
 
