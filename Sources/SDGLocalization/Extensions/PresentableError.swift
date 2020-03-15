@@ -19,6 +19,12 @@
 
 import SDGText
 
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if !canImport(Foundation)
+  // @notLocalized(🇨🇦EN)
+  public typealias LocalizedError = Error
+#endif
+
 /// An error suitable to present to users.
 public protocol PresentableError: CustomStringConvertible, LocalizedError {
 
