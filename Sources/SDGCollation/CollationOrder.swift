@@ -24,8 +24,12 @@ import SDGCollections
 import SDGText
 import SDGPersistence
 
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+#if canImport(Foundation)
+  extension CollationOrder: FileConvertible {}
+#endif
 /// A collation order for sorting strings.
-public struct CollationOrder: Decodable, Encodable, FileConvertible {
+public struct CollationOrder: Decodable, Encodable {
 
   // MARK: - Static Properties
 
@@ -313,15 +317,18 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
     try container.encode(rules)
   }
 
-  // MARK: - FileConvertible
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    // MARK: - FileConvertible
 
-  public init(file: Data, origin: URL?) throws {
-    let decoder = JSONDecoder()
-    self = try decoder.decode(CollationOrder.self, from: file)
-  }
+    public init(file: Data, origin: URL?) throws {
+      let decoder = JSONDecoder()
+      self = try decoder.decode(CollationOrder.self, from: file)
+    }
 
-  public var file: Data {
-    let encoder = JSONEncoder()
-    return try! encoder.encode(self)
-  }
+    public var file: Data {
+      let encoder = JSONEncoder()
+      return try! encoder.encode(self)
+    }
+  #endif
 }
