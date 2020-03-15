@@ -163,7 +163,7 @@ extension Localization {
       return
     }
 
-    let originalTags: [String] = code.components(separatedBy: "\u{2D}")
+    let originalTags: [String] = code.components(separatedBy: "\u{2D}").map({ String($0.contents) })
     var processingTags = originalTags
 
     let language = processingTags.removeFirst()

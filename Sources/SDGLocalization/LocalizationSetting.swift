@@ -263,28 +263,31 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     return L.fallbackLocalization
   }
 
-  private func stabilityCacheURL<L>(for: L.Type) -> URL {
-    var path = "SDGCornerstone/Stable Localizations"
-    path += "/"
-    path += String(reflecting: L.self)
-    path += "/"
-    path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
-    return FileManager.default.url(in: .cache, at: path)
-  }
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    private func stabilityCacheURL<L>(for: L.Type) -> URL {
+      var path = "SDGCornerstone/Stable Localizations"
+      path += "/"
+      path += String(reflecting: L.self)
+      path += "/"
+      path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
+      return FileManager.default.url(in: .cache, at: path)
+    }
 
-  private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
-    get {
-      if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
-        Date() ≤ cache.date
-      {
-        return cache
+    private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
+      get {
+        if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
+          Date() ≤ cache.date
+        {
+          return cache
+        }
+        return nil
       }
-      return nil
+      nonmutating set {
+        try? newValue?.save(to: stabilityCacheURL(for: L.self))
+      }
     }
-    nonmutating set {
-      try? newValue?.save(to: stabilityCacheURL(for: L.self))
-    }
-  }
+  #endif
 
   /// Returns the preferred localization out of those supported by the type `L`.
   ///
@@ -295,13 +298,18 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     case .none:
       return resolvedFresh()
     case .stabilized:
-      let container = cached(in: &self[stabilityCacheFor: L.self]) {
-        return CachedLocalization<L>(
-          localization: resolvedFresh(),
-          date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/
-        )
-      }
-      return container.localization
+      // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+      #if !canImport(Foundation)
+        return resolvedFresh()
+      #else
+        let container = cached(in: &self[stabilityCacheFor: L.self]) {
+          return CachedLocalization<L>(
+            localization: resolvedFresh(),
+            date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/
+          )
+        }
+        return container.localization
+      #endif
     }
   }
 
