@@ -62,7 +62,9 @@
         return object
       } else if let dictionary = instance as? [String: Any] {  // @exempt(from: tests)
         // @exempt(from: tests) Unreachable where the Objective‐C runtime is available.
-        return NSDictionary(dictionary: dictionary.mapValues({ cast($0) }))  // @exempt(from: tests)
+        return NSDictionary(
+          dictionary: dictionary.mapValues({ cast($0) })  // @exempt(from: tests)
+        )
       } else if let array = instance as? [Any] {
         return NSArray(array: array.map({ cast($0) }))  // @exempt(from: tests)
       } else if let boolean = instance as? Bool {
@@ -98,7 +100,9 @@
       } else if let integer = instance as? UInt8 {
         return NSNumber(value: integer)
       } else if let dictionary = instance as? [NSString: Any] {
-        return NSDictionary(dictionary: dictionary.mapValues({ cast($0) }))  // @exempt(from: tests)
+        return NSDictionary(
+          dictionary: dictionary.mapValues({ cast($0) })  // @exempt(from: tests)
+        )
       } else {
         _unreachable()
       }

@@ -143,7 +143,8 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
         ?? sdgSystemWidePreferences.value.as(LocalizationSetting.self)
         ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
     #endif
-    return result ?? LocalizationSetting(orderOfPrecedence: [] as [[String]])  // @exempt(from: tests)
+    return result
+      ?? LocalizationSetting(orderOfPrecedence: [] as [[String]])  // @exempt(from: tests)
   }
 
   private class ChangeObserver: SharedValueObserver {
