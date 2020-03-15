@@ -766,3 +766,10 @@ func disableDevelopmentTools() {
 if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
   disableDevelopmentTools()
 }
+
+if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
+  for target in package.targets {
+    // #workaround(Swift 5.1.5, Web lacks foundation.)
+    target.exclude.append("Resources.swift")
+  }
+}
