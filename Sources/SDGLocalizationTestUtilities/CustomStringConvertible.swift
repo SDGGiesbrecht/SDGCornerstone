@@ -58,26 +58,29 @@ public func testCustomStringConvertibleConformance<T, L>(
     print("", to: &report)
   }
 
-  func fileName(typeName: String) -> URL {
-    testSpecificationDirectory(file)
-      .appendingPathComponent("CustomStringConvertible")
-      .appendingPathComponent(typeName)
-      .appendingPathComponent(String(uniqueTestName) + ".txt")
-  }
-  let deprecated = fileName(typeName: "\(T.self)")
-  let specification = fileName(
-    typeName: "\(T.self)"
-      .replacingMatches(for: "<", with: "⟨")
-      .replacingMatches(for: ">", with: "⟩")
-  )
-  try? FileManager.default.move(deprecated, to: specification)
-  SDGPersistenceTestUtilities.compare(
-    report,
-    against: specification,
-    overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
-    file: file,
-    line: line
-  )
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    func fileName(typeName: String) -> URL {
+      testSpecificationDirectory(file)
+        .appendingPathComponent("CustomStringConvertible")
+        .appendingPathComponent(typeName)
+        .appendingPathComponent(String(uniqueTestName) + ".txt")
+    }
+    let deprecated = fileName(typeName: "\(T.self)")
+    let specification = fileName(
+      typeName: "\(T.self)"
+        .replacingMatches(for: "<", with: "⟨")
+        .replacingMatches(for: ">", with: "⟩")
+    )
+    try? FileManager.default.move(deprecated, to: specification)
+    SDGPersistenceTestUtilities.compare(
+      report,
+      against: specification,
+      overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
+      file: file,
+      line: line
+    )
+  #endif
 
   if let playround = instance as? CustomPlaygroundDisplayConvertible {
     _ = playround.playgroundDescription

@@ -14,33 +14,38 @@
 
 #if !os(watchOS)
 
-  // #workaround(Swift 5.1.3, The generated Xcode project cannot import XCTest on iOS devices.)
-  #if !Xcode || MANIFEST_LOADED_BY_XCODE || !(os(iOS) || os(tvOS)) || targetEnvironment(simulator)
-    import XCTest
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    // #workaround(Swift 5.1.3, The generated Xcode project cannot import XCTest on iOS devices.)
+    #if !Xcode || MANIFEST_LOADED_BY_XCODE || !(os(iOS) || os(tvOS)) || targetEnvironment(simulator)
+      import XCTest
 
-    import SDGLogic
-    import SDGPersistence
-    import SDGTesting
+      import SDGLogic
+      import SDGPersistence
+      import SDGTesting
 
-    /// A test case which simplifies testing for targets which link against the `SDGCornerstone` package.
-    open class TestCase: XCTestCase {
+      /// A test case which simplifies testing for targets which link against the `SDGCornerstone` package.
+      open class TestCase: XCTestCase {
 
-      static var initialized = false
-      open override func setUp() {
-        if ¬TestCase.initialized {
-          TestCase.initialized = true
-          ProcessInfo.applicationIdentifier = "ca.solideogloria.SDGCornerstone.SharedTestingDomain"
+        static var initialized = false
+        open override func setUp() {
+          if ¬TestCase.initialized {
+            TestCase.initialized = true
+            ProcessInfo.applicationIdentifier =
+              "ca.solideogloria.SDGCornerstone.SharedTestingDomain"
+          }
+
+          testAssertionMethod = XCTAssert
+
+          #if !os(Linux)  // #workaround(Swift 5.1.3, Linux will gain this property in 5.2.)
+            // The default of .userInteractive is absurd.
+            Thread.current.qualityOfService = .utility
+          #endif
+
+          super.setUp()
         }
-
-        testAssertionMethod = XCTAssert
-
-        #if !os(Linux)  // #workaround(Swift 5.1.3, Linux will gain this property in 5.2.)
-          Thread.current.qualityOfService = .utility  // The default of .userInteractive is absurd.
-        #endif
-
-        super.setUp()
       }
-    }
 
+    #endif
   #endif
 #endif

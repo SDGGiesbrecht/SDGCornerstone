@@ -366,7 +366,7 @@ internal enum ContentLocalization: String, InputLocalization {
     return Script(rawValue: String(components[1].contents))
   }
   internal var state: State {
-    return State(rawValue: (rawValue.components(separatedBy: "\u{2D}") as [String]).last!)!
+    return State(rawValue: String(rawValue.components(separatedBy: "\u{2D}").last!.contents))!
   }
 
   private static let codeToAbbreviation: [String: StrictString] = [
@@ -428,8 +428,9 @@ internal enum ContentLocalization: String, InputLocalization {
     case .조선말조선:
       return "조"
     default:
-      let droppingLast = code.components(separatedBy: "\u{2D}")
-        .dropLast().joined(separator: "\u{2D}")
+      let droppingLast = code.components(separatedBy: "\u{2D}").dropLast()
+        .lazy.map({ $0.contents })
+        .joined(separator: "\u{2D}")
       return ContentLocalization.codeToAbbreviation[droppingLast]!
     }
   }

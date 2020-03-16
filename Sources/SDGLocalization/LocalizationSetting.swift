@@ -35,94 +35,97 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
   #endif
   private static let sdgPreferenceKey = "SDGLanguages"
 
-  internal static let osSystemWidePreferences: Shared<Preference> = {
-    let preferences: Shared<Preference>
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    internal static let osSystemWidePreferences: Shared<Preference> = {
+      let preferences: Shared<Preference>
+      #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
-      preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
+        preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
 
-    #elseif os(Windows) || os(Android)
+      #elseif os(Windows) || os(Android)
 
-      // #workaround(Swift 5.1.3, Windows: GetUserPreferredUILanguages? GlobalizationPreferences::Languages? Neither is accessible.)
-      // #workaround(Swift 5.1.3, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
-      preferences = Shared(Preference.mock())
-      preferences.value.set(to: nil)
-
-    #elseif os(Linux)
-
-      preferences = Shared(Preference.mock())
-
-      func convert(locale: String) -> String {
-        // @exempt(from: tests) Depends on host.
-        return locale.replacingOccurrences(of: "_", with: "\u{2D}")
-      }
-
-      if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
-        // @exempt(from: tests) Depends on host.
-        let entryMatches: [PatternMatch<String>] = languages.components(separatedBy: ":")
-        let converted = entryMatches.map { convert(locale: String($0.contents)) }
-        preferences.value.set(to: converted)
-      } else if let language = ProcessInfo.processInfo.environment["LANG"],
-        let locale:PatternMatch<String> = language.prefix(upTo: ".")
-      {
-        // @exempt(from: tests) Depends on host.
-        let converted = convert(locale: String(locale.contents))
-        preferences.value.set(to: [converted])
-      } else {
-        // @exempt(from: tests) Depends on host.
+        // #workaround(Swift 5.1.3, Windows: GetUserPreferredUILanguages? GlobalizationPreferences::Languages? Neither is accessible.)
+        // #workaround(Swift 5.1.3, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
+        preferences = Shared(Preference.mock())
         preferences.value.set(to: nil)
+
+      #elseif os(Linux)
+
+        preferences = Shared(Preference.mock())
+
+        func convert(locale: String) -> String {
+          // @exempt(from: tests) Depends on host.
+          return locale.replacingOccurrences(of: "_", with: "\u{2D}")
+        }
+
+        if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
+          // @exempt(from: tests) Depends on host.
+          let entryMatches: [PatternMatch<String>] = languages.components(separatedBy: ":")
+          let converted = entryMatches.map { convert(locale: String($0.contents)) }
+          preferences.value.set(to: converted)
+        } else if let language = ProcessInfo.processInfo.environment["LANG"],
+          let locale:PatternMatch<String> = language.prefix(upTo: ".")
+        {
+          // @exempt(from: tests) Depends on host.
+          let converted = convert(locale: String(locale.contents))
+          preferences.value.set(to: [converted])
+        } else {
+          // @exempt(from: tests) Depends on host.
+          preferences.value.set(to: nil)
+        }
+
+      #endif
+
+      preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+      return preferences
+    }()
+
+    private static let sdgSystemWidePreferences: Shared<Preference> = {
+      let preferences = PreferenceSet.preferences(
+        for: PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
+      )[sdgPreferenceKey]
+      preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+      return preferences
+    }()
+
+    private static let osApplicationPreferences: Shared<Preference> = {
+      guard ProcessInfo.possibleApplicationIdentifier ≠ nil else {
+        return Shared(Preference.mock())  // @exempt(from: tests)
       }
 
-    #endif
+      let preferences: Shared<Preference>
+      #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
-    preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-    return preferences
-  }()
+        preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
 
-  private static let sdgSystemWidePreferences: Shared<Preference> = {
-    let preferences = PreferenceSet.preferences(
-      for: PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
-    )[sdgPreferenceKey]
-    preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-    return preferences
-  }()
+      #elseif os(Windows) || os(Android)
 
-  private static let osApplicationPreferences: Shared<Preference> = {
-    guard ProcessInfo.possibleApplicationIdentifier ≠ nil else {
-      return Shared(Preference.mock())  // @exempt(from: tests)
-    }
+        // #workaround(Swift 5.1.3, Windows: GetProcessPreferredUILanguages? GlobalizationPreferences::Languages)
+        // #workaround(Swift 5.1.3, Android: Locale.getDefault().getLanguage()? Not available yet.)
+        preferences = Shared(Preference.mock())
 
-    let preferences: Shared<Preference>
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+      #elseif os(Linux)
 
-      preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
+        // This is does not exist on Linux anyway.
+        preferences = Shared(Preference.mock())
 
-    #elseif os(Windows) || os(Android)
+      #endif
 
-      // #workaround(Swift 5.1.3, Windows: GetProcessPreferredUILanguages? GlobalizationPreferences::Languages)
-      // #workaround(Swift 5.1.3, Android: Locale.getDefault().getLanguage()? Not available yet.)
-      preferences = Shared(Preference.mock())
+      preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+      return preferences
+    }()
 
-    #elseif os(Linux)
-
-      // This is does not exist on Linux anyway.
-      preferences = Shared(Preference.mock())
-
-    #endif
-
-    preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-    return preferences
-  }()
-
-  private static let sdgApplicationPreferences: Shared<Preference> = {
-    guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
-      return Shared(Preference.mock())  // @exempt(from: tests)
-    }
-    let preferences = PreferenceSet.preferences(for: applicationDomain + sdgDomainSuffix)[
-      sdgPreferenceKey]
-    preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-    return preferences
-  }()
+    private static let sdgApplicationPreferences: Shared<Preference> = {
+      guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
+        return Shared(Preference.mock())  // @exempt(from: tests)
+      }
+      let preferences = PreferenceSet.preferences(for: applicationDomain + sdgDomainSuffix)[
+        sdgPreferenceKey]
+      preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+      return preferences
+    }()
+  #endif
 
   private static let overrides: Shared<[LocalizationSetting]> = {
     let overrides: Shared<[LocalizationSetting]> = Shared([])
@@ -131,11 +134,16 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
   }()
 
   private static func resolveCurrentLocalization() -> LocalizationSetting {
-    return overrides.value.last
-      ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
-      ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
-      ?? sdgSystemWidePreferences.value.as(LocalizationSetting.self)
-      ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
+    var result = overrides.value.last
+    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+    #if canImport(Foundation)
+      result = result
+        ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
+        ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
+        ?? sdgSystemWidePreferences.value.as(LocalizationSetting.self)
+        ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
+    #endif
+    return result
       ?? LocalizationSetting(orderOfPrecedence: [] as [[String]])  // @exempt(from: tests)
   }
 
@@ -161,41 +169,44 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
 
   // MARK: - Static Methods
 
-  // For user available menus.
-  public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
-    sdgSystemWidePreferences.value.set(to: setting)
-  }
-  internal static func setSystemWidePreferences(to setting: LocalizationSetting?) {
-    _setSystemWidePreferences(to: setting)
-  }
-
-  /// Sets the application‐specific language preferences to the specified settings.
-  ///
-  /// This should only be used when the changes both:
-  ///   - need to be remembered the next time the application is launched, and
-  ///   - are at the direct request of the user.
-  ///
-  /// Otherwise, use `do(_:)` instead.
-  ///
-  /// - Parameters:
-  ///     - setting: The new localization setting.
-  public static func setApplicationPreferences(to setting: LocalizationSetting?) {
-
-    // Make sure this was set and it is not just a silent mock preference.
-    _ = ProcessInfo.applicationIdentifier
-
-    sdgApplicationPreferences.value.set(to: setting)
-
-    if let preferences = setting {
-      var flattened: [String] = []
-      for group in preferences.orderOfPrecedence {
-        flattened.append(contentsOf: group.shuffled())
-      }
-      osApplicationPreferences.value.set(to: flattened)
-    } else {
-      osApplicationPreferences.value.set(to: nil)
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    // For user available menus.
+    public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
+      sdgSystemWidePreferences.value.set(to: setting)
     }
-  }
+    internal static func setSystemWidePreferences(to setting: LocalizationSetting?) {
+      _setSystemWidePreferences(to: setting)
+    }
+
+    /// Sets the application‐specific language preferences to the specified settings.
+    ///
+    /// This should only be used when the changes both:
+    ///   - need to be remembered the next time the application is launched, and
+    ///   - are at the direct request of the user.
+    ///
+    /// Otherwise, use `do(_:)` instead.
+    ///
+    /// - Parameters:
+    ///     - setting: The new localization setting.
+    public static func setApplicationPreferences(to setting: LocalizationSetting?) {
+
+      // Make sure this was set and it is not just a silent mock preference.
+      _ = ProcessInfo.applicationIdentifier
+
+      sdgApplicationPreferences.value.set(to: setting)
+
+      if let preferences = setting {
+        var flattened: [String] = []
+        for group in preferences.orderOfPrecedence {
+          flattened.append(contentsOf: group.shuffled())
+        }
+        osApplicationPreferences.value.set(to: flattened)
+      } else {
+        osApplicationPreferences.value.set(to: nil)
+      }
+    }
+  #endif
 
   // MARK: - Initialization
 
@@ -215,12 +226,15 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
   }
 
-  private init?(osPreference preference: Preference) {
-    guard let result = preference.as([String].self) else {
-      return nil
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    private init?(osPreference preference: Preference) {
+      guard let result = preference.as([String].self) else {
+        return nil
+      }
+      self.init(orderOfPrecedence: result)
     }
-    self.init(orderOfPrecedence: result)
-  }
+  #endif
 
   // MARK: - Properties
 
@@ -250,28 +264,31 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     return L.fallbackLocalization
   }
 
-  private func stabilityCacheURL<L>(for: L.Type) -> URL {
-    var path = "SDGCornerstone/Stable Localizations"
-    path += "/"
-    path += String(reflecting: L.self)
-    path += "/"
-    path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
-    return FileManager.default.url(in: .cache, at: path)
-  }
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+  #if canImport(Foundation)
+    private func stabilityCacheURL<L>(for: L.Type) -> URL {
+      var path = "SDGCornerstone/Stable Localizations"
+      path += "/"
+      path += String(reflecting: L.self)
+      path += "/"
+      path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
+      return FileManager.default.url(in: .cache, at: path)
+    }
 
-  private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
-    get {
-      if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
-        Date() ≤ cache.date
-      {
-        return cache
+    private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
+      get {
+        if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
+          Date() ≤ cache.date
+        {
+          return cache
+        }
+        return nil
       }
-      return nil
+      nonmutating set {
+        try? newValue?.save(to: stabilityCacheURL(for: L.self))
+      }
     }
-    nonmutating set {
-      try? newValue?.save(to: stabilityCacheURL(for: L.self))
-    }
-  }
+  #endif
 
   /// Returns the preferred localization out of those supported by the type `L`.
   ///
@@ -282,13 +299,18 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     case .none:
       return resolvedFresh()
     case .stabilized:
-      let container = cached(in: &self[stabilityCacheFor: L.self]) {
-        return CachedLocalization<L>(
-          localization: resolvedFresh(),
-          date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/
-        )
-      }
-      return container.localization
+      // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
+      #if !canImport(Foundation)
+        return resolvedFresh()
+      #else
+        let container = cached(in: &self[stabilityCacheFor: L.self]) {
+          return CachedLocalization<L>(
+            localization: resolvedFresh(),
+            date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/
+          )
+        }
+        return container.localization
+      #endif
     }
   }
 

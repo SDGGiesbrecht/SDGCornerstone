@@ -268,8 +268,8 @@ let package = Package(
       name: "SDGMathematics",
       dependencies: [
         "SDGControlFlow",
-        "SDGLogic",
-        .product(name: "RealModule", package: "swift\u{2D}numerics")
+        "SDGLogic"
+        // RealModule (except Windows; see bottom of file)
       ]
     ),
     // @documentation(SDGMathematicsTestUtilities)
@@ -750,89 +750,26 @@ func disableDevelopmentTools() {
   disableDevelopmentTools()
 #endif
 
-func adjustForWindows() {
-  // #workaround(Swift 5.1.3, Windows does not support C.)
-  let impossibleProducts: Set<String> = [
-    // SwiftNumerics
-    "RealModule"
-  ]
-  for target in package.targets {
-    target.dependencies.removeAll(where: { dependency in
-      #if compiler(<5.2)
-        switch dependency {
-        case ._productItem(let name, _):
-          return impossibleProducts.contains(name)
-        default:
-          return false
-        }
-      #else
-        switch dependency {
-        case ._productItem(let name, _, _):
-          return impossibleProducts.contains(name)
-        default:
-          return false
-        }
-      #endif
-    })
+// #workaround(Swift 5.1.3, Windows does not support C.)
+#if !os(Windows)
+  if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == nil {
+    for target in package.targets where target.name == "SDGMathematics" {
+      target.dependencies.append(.product(name: "RealModule", package: "swift\u{2D}numerics"))
+    }
   }
-  // #workaround(workspace version 0.30.2, CMake cannot handle Unicode.)
+#endif
+
+// #workaround(Swift 5.1.3, Windows cannot handle Unicode.)
+#if os(Windows)
+  disableDevelopmentTools()
+#endif
+if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
   disableDevelopmentTools()
 }
-#if os(Windows)
-  adjustForWindows()
-#endif
-import Foundation
-// #workaround(workspace version 0.30.2, Until packages work natively on windows.)
-if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
-  adjustForWindows()
-}
 
-func adjustForWeb() {
-  // #workaround(Temporary.)
-  let impossibleTargets: Set<String> = [
-    "SDGPersistence",
-    "SDGLocalization",
-    "SDGCornerstoneLocalizations",
-    "SDGCalendar",
-    "SDGPrecisionMathematics",
-    "SDGCollation",
-    "SDGVersioning",
-    "SDGTesting",
-    "SDGLogicTestUtilities",
-    "SDGMathematicsTestUtilities",
-    "SDGCollectionsTestUtilities",
-    "SDGPersistenceTestUtilities",
-    "SDGLocalizationTestUtilities",
-    "SDGGeometryTestUtilities",
-    "SDGRandomizationTestUtilities",
-    "SDGXCTestUtilities"
-  ]
-  package.products.removeAll(where: { product in
-    return impossibleTargets.contains(product.name)
-  })
-  package.targets.removeAll(where: { target in
-    return impossibleTargets.contains(target.name)
-  })
-  for target in package.targets {
-    target.dependencies.removeAll(where: { dependency in
-      #if compiler(<5.2)
-        switch dependency {
-        case ._targetItem(let name), ._byNameItem(let name):
-          return impossibleTargets.contains(name)
-        case ._productItem:
-          return false
-        }
-      #else
-        switch dependency {
-        case ._targetItem(let name, _), ._byNameItem(let name, _):
-          return impossibleTargets.contains(name)
-        case ._productItem:
-          return false
-        }
-      #endif
-    })
-  }
-}
 if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
-  adjustForWeb()
+  for target in package.targets {
+    // #workaround(Swift 5.1.5, Web lacks foundation.)
+    target.exclude.append("Resources.swift")
+  }
 }

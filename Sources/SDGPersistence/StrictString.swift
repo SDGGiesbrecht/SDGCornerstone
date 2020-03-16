@@ -15,19 +15,19 @@
 // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
 #if canImport(Foundation)
   import Foundation
+
+  import SDGText
+
+  extension StrictString: FileConvertible {
+
+    // MARK: - FileConvertible
+
+    public init(file: Data, origin: URL?) throws {
+      self.init(try String(file: file, origin: origin))
+    }
+
+    public var file: Data {
+      return String(self).file
+    }
+  }
 #endif
-
-import SDGText
-
-extension StrictString: FileConvertible {
-
-  // MARK: - FileConvertible
-
-  public init(file: Data, origin: URL?) throws {
-    self.init(try String(file: file, origin: origin))
-  }
-
-  public var file: Data {
-    return String(self).file
-  }
-}
