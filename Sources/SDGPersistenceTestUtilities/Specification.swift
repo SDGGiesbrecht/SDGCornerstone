@@ -134,7 +134,7 @@
       var resultOffset = 0
       var originalOffset = 0
       var continuingKeptRange = false
-      while resultOffset ≠ stringLines.count {
+      while resultOffset ≠ stringLines.count ∨ originalOffset ≠ specificationLines.count {
         defer {
           resultOffset += 1
           originalOffset += 1
