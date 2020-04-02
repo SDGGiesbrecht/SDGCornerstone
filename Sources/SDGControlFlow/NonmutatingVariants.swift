@@ -103,8 +103,11 @@
 ///     - theInstance: The starting instance.
 ///     - arguments: Arguments to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A, B>(
-  of mutation: (_ anInstance: inout T, _ firstMutationArgument: A, _ secondMutationArgument: B) throws
-    -> Void,
+  of mutation: (
+    _ anInstance: inout T,
+    _ firstMutationArgument: A,
+    _ secondMutationArgument: B
+  ) throws -> Void,
   on theInstance: T,
   with arguments: (A, B)
 ) rethrows -> T {
@@ -141,7 +144,9 @@
 ///     - arguments: Arguments to pass to the mutating counterpart.
 @inlinable public func nonmutatingVariant<T, A, B, C>(
   of mutation: (
-    _ anInstance: inout T, _ firstMutationArgument: A, _ secondMutationArgument: B,
+    _ anInstance: inout T,
+    _ firstMutationArgument: A,
+    _ secondMutationArgument: B,
     _ thirdMutationArgument: C
   ) throws -> Void,
   on theInstance: T,
