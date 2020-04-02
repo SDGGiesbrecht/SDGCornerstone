@@ -42,7 +42,7 @@ configuration.documentation.api.ignoredDependencies = [
   // Swift
   "Dispatch",
   "Foundation",
-  "XCTest"
+  "XCTest",
 ]
 
 // #workaround(workspace version 0.30.2, SwiftFormat is extremely slow.)

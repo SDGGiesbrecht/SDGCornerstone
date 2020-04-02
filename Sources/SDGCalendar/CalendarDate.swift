@@ -316,7 +316,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     var definitions: [StrictString: DateDefinition.Type] = [
       HebrewDate.identifier: HebrewDate.self,
       GregorianDate.identifier: GregorianDate.self,
-      RelativeDate.identifier: RelativeDate.self
+      RelativeDate.identifier: RelativeDate.self,
     ]
     // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
     #if canImport(Foundation)

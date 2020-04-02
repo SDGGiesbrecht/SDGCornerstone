@@ -375,7 +375,8 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
 
-      let length = FloatMax(GregorianMonth.january.numberOfDays(leapYear: false))
+      let length =
+        FloatMax(GregorianMonth.january.numberOfDays(leapYear: false))
         × (1 as FloatMax).days
       XCTAssert(length ≥ GregorianMonth.minimumDuration)
       XCTAssert(length ≤ GregorianMonth.maximumDuration)
@@ -532,7 +533,8 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
 
-      let length = FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false))
+      let length =
+        FloatMax(HebrewMonth.tishrei.numberOfDays(yearLength: .normal, leapYear: false))
         × (1 as FloatMax).days
       XCTAssert(length ≥ HebrewMonth.minimumDuration)
       XCTAssert(length ≤ HebrewMonth.maximumDuration)

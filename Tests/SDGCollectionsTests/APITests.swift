@@ -110,7 +110,8 @@ class APITests: TestCase {
 
       let compositeMatchPatternOne = [1, 2]
       let compositeMatchPatternTwo = compositeMatchPatternOne + ([3] ∨ [−3])
-      let compositeMatchPattern = compositeMatchPatternTwo
+      let compositeMatchPattern =
+        compositeMatchPatternTwo
         + RepetitionPattern([4, 5], count: 1..<Int.max)
       let compositeMatch = collection.lastMatch(for: compositeMatchPattern)
       XCTAssertEqual(compositeMatch?.range, 0..<7)
@@ -139,7 +140,8 @@ class APITests: TestCase {
       XCTAssertEqual(forwardsResult1?.range, 2..<4)
 
       let backwardsCollection2 = [0, 0, 1]
-      let backwardsPattern2 = RepetitionPattern([0], count: 1..<Int.max, consumption: .lazy)
+      let backwardsPattern2 =
+        RepetitionPattern([0], count: 1..<Int.max, consumption: .lazy)
         + [1]
       let backwardsResult2 = backwardsCollection2.lastMatch(for: backwardsPattern2)
       XCTAssertEqual(backwardsResult2?.range, 1..<3)
@@ -218,7 +220,8 @@ class APITests: TestCase {
 
         let compositeMatchPatternOne = [1, 2]
         let compositeMatchPatternTwo = compositeMatchPatternOne + ([3] ∨ [−3])
-        let compositeMatchPattern = compositeMatchPatternTwo
+        let compositeMatchPattern =
+          compositeMatchPatternTwo
           + RepetitionPattern([4, 5], count: 1..<Int.max)
         let compositeMatch = collection.firstMatch(for: compositeMatchPattern)
         XCTAssertEqual(compositeMatch?.range, 0..<7)
@@ -485,12 +488,12 @@ class APITests: TestCase {
         XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
         entries = [
           .remove(offset: 1, element: "1", associatedWith: nil),
-          .remove(offset: 1, element: "1", associatedWith: nil)
+          .remove(offset: 1, element: "1", associatedWith: nil),
         ]
         XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
         entries = [
           .insert(offset: 1, element: "1", associatedWith: nil),
-          .insert(offset: 1, element: "1", associatedWith: nil)
+          .insert(offset: 1, element: "1", associatedWith: nil),
         ]
         XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
         entries = [
@@ -504,19 +507,19 @@ class APITests: TestCase {
         entries = [
           .insert(offset: 1, element: "1", associatedWith: 1),
           .insert(offset: 2, element: "2", associatedWith: 1),
-          .remove(offset: 1, element: "1", associatedWith: 1)
+          .remove(offset: 1, element: "1", associatedWith: 1),
         ]
         XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
         entries = [
           .remove(offset: 1, element: "1", associatedWith: 1),
           .remove(offset: 2, element: "2", associatedWith: 1),
-          .insert(offset: 1, element: "1", associatedWith: 1)
+          .insert(offset: 1, element: "1", associatedWith: 1),
         ]
         XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
         entries = [
           .remove(offset: 1, element: "1", associatedWith: 1),
           .remove(offset: 2, element: "2", associatedWith: 1),
-          .insert(offset: 2, element: "2", associatedWith: 2)
+          .insert(offset: 2, element: "2", associatedWith: 2),
         ]
         XCTAssertNil(SDGCollections.CollectionDifference<String>(entries))
         testCollectionConformance(of: shimmedDifference)
@@ -556,7 +559,7 @@ class APITests: TestCase {
       try forAllLegacyModes {
         let shimmedEntries: [SDGCollections.CollectionDifference<String>.Change] = [
           .remove(offset: 10, element: "removed element", associatedWith: 20),
-          .insert(offset: 30, element: "inserted element", associatedWith: 40)
+          .insert(offset: 30, element: "inserted element", associatedWith: 40),
         ]
         testCodableConformance(of: shimmedEntries, uniqueTestName: "Changes")
         if #available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *) {
@@ -671,12 +674,12 @@ class APITests: TestCase {
     let numbers = [
       1: "1",
       2: "2",
-      3: "3"
+      3: "3",
     ]
     let moreNumbers = numbers.mergedByOverwriting(from: [
       3: "three",
       4: "four",
-      5: "five"
+      5: "five",
     ])
     XCTAssertEqual(
       moreNumbers,
@@ -685,7 +688,7 @@ class APITests: TestCase {
         2: "2",
         3: "three",
         4: "four",
-        5: "five"
+        5: "five",
       ]
     )
     XCTAssert(numbers ≠ moreNumbers)
@@ -693,12 +696,12 @@ class APITests: TestCase {
     let letters = [
       "a": 4,
       "b": 6,
-      "c": 3
+      "c": 3,
     ]
     let moreLetters = [
       "b": 4,
       "c": 5,
-      "d": 8
+      "d": 8,
     ]
     XCTAssertEqual(
       letters.merging(moreLetters, uniquingKeysWith: { $0 + $1 }),
@@ -706,19 +709,19 @@ class APITests: TestCase {
         "a": 4,
         "b": 10,
         "c": 8,
-        "d": 8
+        "d": 8,
       ]
     )
 
     let numbersToLetters = [
       1: "a",
       2: "b",
-      3: "c"
+      3: "c",
     ]
     let lettersToNumbers = [
       "a": 1,
       "b": 2,
-      "c": 3
+      "c": 3,
     ]
     XCTAssertEqual(numbersToLetters.mapKeyValuePairs({ ($1, $0) }), lettersToNumbers)
     XCTAssertEqual(numbersToLetters.mapKeys({ $0 + 1 }), [2: "a", 3: "b", 4: "c"])
@@ -1042,12 +1045,12 @@ class APITests: TestCase {
     var text = [
       "5",
       "75",
-      "876"
+      "876",
     ].map { $0.scalars }
     let equalized = [
       "005",
       "075",
-      "876"
+      "876",
     ]
     XCTAssertEqual(
       text.countsEqualized(byFillingWith: "0", from: .start).map({ String($0) }),

@@ -40,13 +40,14 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
     let cyclesElapsed = yearsElapsed.dividedAccordingToEuclid(by: HebrewYear.yearsPerLeapYearCycle)
     var monthsElapsed = cyclesElapsed × HebrewYear.monthsPerLeapYearCycle
 
-    for countingYear in (
-      HebrewDate.referenceYear + cyclesElapsed × HebrewYear.yearsPerLeapYearCycle
-    )..<targetYear {
+    for countingYear
+      in (HebrewDate.referenceYear + cyclesElapsed × HebrewYear.yearsPerLeapYearCycle)..<targetYear
+    {
       monthsElapsed += countingYear.numberOfMonths
     }
 
-    let yearMoon = HebrewDate.intervalFromStartOfReferenceYearToReferenceMoon
+    let yearMoon =
+      HebrewDate.intervalFromStartOfReferenceYearToReferenceMoon
       + FloatMax(monthsElapsed).hebrewMoons
 
     var yearStart = yearMoon.rounded(.down, toMultipleOf: (1 as FloatMax).days)
@@ -59,7 +60,8 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
       oldMoonOccurred = true
     }
 
-    let intervalSinceStartOfReferenceWeek = yearStart
+    let intervalSinceStartOfReferenceWeek =
+      yearStart
       + FloatMax(weekdayOfReferenceYearStart.numberAlreadyElapsed).days
     let intervalIntoWeek = intervalSinceStartOfReferenceWeek.mod((1 as FloatMax).weeks)
     let weekday = HebrewWeekday(numberAlreadyElapsed: Int(intervalIntoWeek.inDays))
@@ -186,7 +188,8 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
     let year = findLocalMinimum(
       near: guessYear
     ) { (year: HebrewYear) -> CalendarInterval<FloatMax> in
-      let interval = intervalSinceReferenceDate
+      let interval =
+        intervalSinceReferenceDate
         − HebrewDate.intervalFromReferenceDate(toStartOf: year)
       if interval ≥ (0 as FloatMax).hebrewParts {
         return interval
@@ -194,7 +197,8 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
         return |interval| + HebrewYear.maximumDuration
       }
     }
-    var remainder = intervalSinceReferenceDate
+    var remainder =
+      intervalSinceReferenceDate
       − HebrewDate.intervalFromReferenceDate(toStartOf: year)
 
     var approxMonthsElapsed = Int(remainder ÷ HebrewMonth.meanDuration)
@@ -210,7 +214,8 @@ internal struct HebrewDate: DateDefinition, MarkupPlaygroundDisplay {
         year: year
       )...HebrewMonthAndYear(month: .elul, year: year),
       inFunction: { (month: HebrewMonthAndYear) -> CalendarInterval<FloatMax> in
-        let result = remainder
+        let result =
+          remainder
           − HebrewDate.intervalFromStartOfYear(
             toStartOf: month.month,
             leapYear: month.year.isLeapYear,

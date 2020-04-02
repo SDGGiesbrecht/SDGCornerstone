@@ -63,9 +63,8 @@ extension WholeNumber.BinaryView {
       let bitDistance: Int
       if precedingValue.bit < followingValue.bit {
         // Would be negative (invalid for whole number type).
-        bitDistance = BinaryView<WholeNumber.Digit>.count − (
-          followingValue.bit − precedingValue.bit
-        )
+        bitDistance = BinaryView<WholeNumber.Digit>.count
+          − (followingValue.bit − precedingValue.bit)
         digitDistance −= 1
       } else {
         bitDistance = precedingValue.bit − followingValue.bit

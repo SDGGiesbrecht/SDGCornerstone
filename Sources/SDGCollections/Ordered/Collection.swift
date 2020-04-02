@@ -42,7 +42,8 @@ extension Collection {
           let lastIndex = indexMapping[lastIndexDistance]
           let otherLastIndex = otherIndexMapping[otherLastIndexDistance]
           if areEquivalent(self[lastIndex], other[otherLastIndex]) {
-            table[prefixLength][otherPrefixLength] = table[prefixLength − 1][otherPrefixLength − 1]
+            table[prefixLength][otherPrefixLength] =
+              table[prefixLength − 1][otherPrefixLength − 1]
               + 1
           } else {
             table[prefixLength][otherPrefixLength] = Swift.max(
@@ -88,11 +89,9 @@ extension Collection {
         otherIndexMapping: otherIndexMapping
       )
     } else if otherPrefixLength > 0
-      ∧ (
-        prefixLength == 0
-          ∨ table[prefixLength][(otherPrefixLength − 1) as Int]
-          ≥ table[(prefixLength − 1) as Int][otherPrefixLength]
-      )
+      ∧ (prefixLength == 0
+        ∨ table[prefixLength][(otherPrefixLength − 1) as Int]
+        ≥ table[(prefixLength − 1) as Int][otherPrefixLength])
     {
       traceDifference(
         table,
@@ -108,11 +107,9 @@ extension Collection {
         .insert(offset: otherLastIndexDistance, element: other[otherLastIndex], associatedWith: nil)
       )
     } else if prefixLength > 0
-      ∧ (
-        otherPrefixLength == 0
-          ∨ table[prefixLength][(otherPrefixLength − 1) as Int]
-          < table[(prefixLength − 1) as Int][otherPrefixLength]
-      )
+      ∧ (otherPrefixLength == 0
+        ∨ table[prefixLength][(otherPrefixLength − 1) as Int]
+        < table[(prefixLength − 1) as Int][otherPrefixLength])
     {
       traceDifference(
         table,

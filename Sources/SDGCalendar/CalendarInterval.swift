@@ -22,7 +22,8 @@ import SDGCornerstoneLocalizations
 // MARK: - Definition
 
 private let hebrewPartsPerDay = HebrewHour.hoursPerDay × HebrewPart.partsPerHour
-private let secondsPerDay = GregorianHour.hoursPerDay × GregorianMinute.minutesPerHour
+private let secondsPerDay =
+  GregorianHour.hoursPerDay × GregorianMinute.minutesPerHour
   × GregorianSecond.secondsPerMinute
 
 private let integralUnitsPerDay = lcm(hebrewPartsPerDay, secondsPerDay)

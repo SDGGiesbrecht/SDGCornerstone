@@ -118,7 +118,8 @@ internal struct GregorianDate: DateDefinition, MarkupPlaygroundDisplay {
     let year = findLocalMinimum(
       near: guessYear
     ) { (year: GregorianYear) -> CalendarInterval<FloatMax> in
-      let interval = intervalSinceReferenceDate
+      let interval =
+        intervalSinceReferenceDate
         − GregorianDate.intervalFromReferenceDate(toStartOf: year)
       if interval.isNonNegative {
         return interval
@@ -126,7 +127,8 @@ internal struct GregorianDate: DateDefinition, MarkupPlaygroundDisplay {
         return |interval| + GregorianYear.maximumDuration
       }
     }
-    var remainder: CalendarInterval<FloatMax> = intervalSinceReferenceDate
+    var remainder: CalendarInterval<FloatMax> =
+      intervalSinceReferenceDate
       − GregorianDate.intervalFromReferenceDate(toStartOf: year)
 
     var approxMonthsElapsed = Int(remainder ÷ GregorianMonth.meanDuration)
@@ -136,7 +138,8 @@ internal struct GregorianDate: DateDefinition, MarkupPlaygroundDisplay {
       near: guessMonth,
       within: GregorianMonth.allCases.first!...GregorianMonth.allCases.last!
     ) { (month: GregorianMonth) -> CalendarInterval<FloatMax> in
-      let interval = remainder
+      let interval =
+        remainder
         − GregorianDate.intervalFromStartOfYear(toStartOf: month, leapYear: year.isLeapYear)
 
       if interval.isNonNegative {

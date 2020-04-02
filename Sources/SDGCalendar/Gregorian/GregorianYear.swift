@@ -61,7 +61,8 @@ public struct GregorianYear: CalendarComponent, CodableViaRawRepresentableCalend
   public static let yearsPerLeapYearCycle: Int = 400
 
   /// The number of months in a leap year cycle.
-  public static let monthsPerLeapYearCycle: Int = GregorianYear.yearsPerLeapYearCycle
+  public static let monthsPerLeapYearCycle: Int =
+    GregorianYear.yearsPerLeapYearCycle
     × GregorianYear.monthsPerYear
 
   /// The number of days in a leap year cycle.

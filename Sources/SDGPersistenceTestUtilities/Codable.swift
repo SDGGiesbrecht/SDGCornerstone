@@ -78,7 +78,7 @@ public func testCodableConformance<T>(
           for representation in [
             specification,
             specification.decomposedStringWithCanonicalMapping,
-            specification.precomposedStringWithCanonicalMapping
+            specification.precomposedStringWithCanonicalMapping,
           ] {
             let data = representation.file
             let array = try JSONDecoder().decode([T].self, from: data)

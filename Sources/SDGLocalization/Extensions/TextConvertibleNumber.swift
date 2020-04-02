@@ -173,7 +173,7 @@ extension TextConvertibleNumber {
       ["C", "c"],
       ["D", "d"],
       ["E", "e"],
-      ["F", "f"]
+      ["F", "f"],
     ]
 
     let selectedDigits = [[UnicodeScalar]](digits[..<base])

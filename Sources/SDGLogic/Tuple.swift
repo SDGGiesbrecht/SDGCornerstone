@@ -72,7 +72,8 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≠ <
+@inlinable
+public func ≠ <
   A: Equatable,
   B: Equatable,
   C: Equatable,

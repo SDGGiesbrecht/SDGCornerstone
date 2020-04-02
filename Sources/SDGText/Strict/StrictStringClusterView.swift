@@ -36,7 +36,8 @@ extension StrictString {
       return StrictString(string).clusters
     }
 
-    @inlinable internal static func normalize<S: Sequence>(_ sequence: S) -> StrictString
+    @inlinable internal static func normalize<S: Sequence>(_ sequence: S)
+      -> StrictString
       .ClusterView where S.Element == ExtendedGraphemeCluster
     {
       switch sequence {

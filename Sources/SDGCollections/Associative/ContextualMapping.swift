@@ -19,7 +19,8 @@ import SDGLogic
 ///
 /// An example would be spelling to pronounciation: “c” → “k”, but “ce” → “sɛ” and “ch” → “t͡ʃ”. The most specific (longest) match determines the output. Matches cannot overlap.
 public struct ContextualMapping<Input, Output>
-where Input: Hashable,
+where
+  Input: Hashable,
   Input: RangeReplaceableCollection,
   Input.Element: Hashable,
   Output: RangeReplaceableCollection

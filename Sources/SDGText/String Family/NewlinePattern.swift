@@ -36,7 +36,7 @@ public struct NewlinePattern: Pattern {
       "\u{D}",
       "\u{85}",
       "\u{2028}",
-      "\u{2029}"
+      "\u{2029}",
     ]
   #else
     @usableFromInline internal static let newlineCharacters = CharacterSet.newlines

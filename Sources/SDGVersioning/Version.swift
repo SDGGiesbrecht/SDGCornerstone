@@ -129,7 +129,7 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
     let versionPattern = RepetitionPattern(
       ConditionalPattern({ (scalar: UnicodeScalar) in
         let versionScalars: Set<UnicodeScalar> = [
-          "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."
+          "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".",
         ]
         return scalar ∈ versionScalars
       }),
