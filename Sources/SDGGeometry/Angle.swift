@@ -59,14 +59,16 @@ extension Angle: CustomPlaygroundDisplayConvertible {
       let arrowHeadLength: Double = 10
       let leftDirection = ((5 as Double × π()) ÷ 4).radians
       let adjustedLeftDirection = leftDirection + floatAngle + flip
-      let leftSide = end
+      let leftSide =
+        end
         + TwoDimensionalVector(direction: adjustedLeftDirection, length: arrowHeadLength)
       arrow.appendLine(to: leftSide)
       arrow.appendLine(to: end)
 
       let rightDirection = ((−1 as Double × π()) ÷ 4).radians
       let adjustedRightDirection = rightDirection + floatAngle + flip
-      let rightSide = end
+      let rightSide =
+        end
         + TwoDimensionalVector(direction: adjustedRightDirection, length: arrowHeadLength)
       arrow.appendLine(to: rightSide)
       arrow.appendLine(to: end)

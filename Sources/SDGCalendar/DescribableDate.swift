@@ -231,7 +231,8 @@ extension DescribableDate {
     avecAn: Bool,
     avecJourDeSemaine: Bool
   ) -> SemanticMarkup {
-    var résultat: SemanticMarkup = avecJourDeSemaine
+    var résultat: SemanticMarkup =
+      avecJourDeSemaine
       ? "le" : SemanticMarkup(majuscules.apply(to: "le"))  // @exempt(from: tests) Unused so far.
     résultat += " " + jour.enChiffresFrançais()
     résultat += " " + SemanticMarkup(mois._enFrançais(.sentenceMedial))

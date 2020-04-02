@@ -261,7 +261,8 @@
         }
 
         var objCBool: ObjCBool = false
-        let isDirectory = FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool)
+        let isDirectory =
+          FileManager.default.fileExists(atPath: url.path, isDirectory: &objCBool)
           ∧ objCBool.boolValue
 
         if ¬isDirectory {  // Skip directories.

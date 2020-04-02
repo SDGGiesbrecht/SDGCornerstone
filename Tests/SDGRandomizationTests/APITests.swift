@@ -59,7 +59,7 @@ class APITests: TestCase {
   func testMeasurement() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
       XCTAssertEqual(Angle<Double>.random(in: 0.rad...0.rad), 0.rad)
-      XCTAssert((0°..<1°).contains(Angle<Double>.random(in: 0°..<1°)))
+      XCTAssert((0° ..< 1°).contains(Angle<Double>.random(in: 0° ..< 1°)))
     #endif
   }
 

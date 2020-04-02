@@ -44,7 +44,7 @@ class MiscellaneousExampleTests: TestCase {
       // @example(alternatingBooleans)
       var alternating = CyclicalNumberGenerator([
         Bool.falseRandomizerValue,
-        Bool.trueRandomizerValue
+        Bool.trueRandomizerValue,
       ])
 
       XCTAssertEqual(Bool.random(using: &alternating), false)

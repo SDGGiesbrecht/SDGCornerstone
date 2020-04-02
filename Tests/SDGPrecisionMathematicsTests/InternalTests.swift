@@ -31,10 +31,8 @@ class InternalTests: TestCase {
   func testWholeNumberBinaryView() {
     #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault, entire executable)
       XCTAssertEqual(
-        (
-          WholeNumber.BinaryView.Index(digit: 1, bit: 0)
-            − WholeNumber.BinaryView.Index(digit: 0, bit: 63)
-        ).digitDistance,
+        (WholeNumber.BinaryView.Index(digit: 1, bit: 0)
+          − WholeNumber.BinaryView.Index(digit: 0, bit: 63)).digitDistance,
         0
       )
 

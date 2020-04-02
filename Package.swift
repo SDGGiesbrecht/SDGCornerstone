@@ -116,13 +116,13 @@ import PackageDescription
 /// // ••••••• Pattern Matching •••••••
 ///
 /// let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-/// let patternFirstPart = [1]  // 1
+/// let patternFirstPart =
+///   [1]  // 1
 ///   + ConditionalPattern({ $0.isEven })  // 2
-///   + (
-///     [30, 40]  // (∅)
-///       ∨ [3, 4]  // 3, 4
-///   )
-/// let pattern = patternFirstPart
+///   + ([30, 40]  // (∅)
+///     ∨ [3, 4])  // 3, 4
+/// let pattern =
+///   patternFirstPart
 ///   + RepetitionPattern(¬[5, 7])  // 5, 6, 7, 8, 9 (...)
 ///   + [10]  // 10
 ///
@@ -244,7 +244,7 @@ let package = Package(
 
     // #documentation(SDGXCTestUtilities)
     /// Additional test utilities which require `XCTest`.
-    .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"])
+    .library(name: "SDGXCTestUtilities", targets: ["SDGXCTestUtilities"]),
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift\u{2D}numerics", .exact(Version(0, 0, 5)))
@@ -268,7 +268,7 @@ let package = Package(
       name: "SDGMathematics",
       dependencies: [
         "SDGControlFlow",
-        "SDGLogic"
+        "SDGLogic",
         // RealModule (except Windows; see bottom of file)
       ]
     ),
@@ -281,7 +281,7 @@ let package = Package(
         "SDGCollections",
         "SDGLogicTestUtilities",
         "SDGCollectionsTestUtilities",
-        "SDGPersistenceTestUtilities"
+        "SDGPersistenceTestUtilities",
       ]
     ),
 
@@ -292,7 +292,7 @@ let package = Package(
       dependencies: [
         "SDGControlFlow",
         "SDGLogic",
-        "SDGMathematics"
+        "SDGMathematics",
       ]
     ),
     // @documentation(SDGCollectionsTestUtilities)
@@ -301,7 +301,7 @@ let package = Package(
       name: "SDGCollectionsTestUtilities",
       dependencies: [
         "SDGCollections", "SDGTesting",
-        "SDGLogicTestUtilities"
+        "SDGLogicTestUtilities",
       ]
     ),
 
@@ -313,7 +313,7 @@ let package = Package(
         "SDGControlFlow",
         "SDGLogic",
         "SDGMathematics",
-        "SDGCollections"
+        "SDGCollections",
       ]
     ),
 
@@ -340,7 +340,7 @@ let package = Package(
         "SDGMathematics",
         "SDGCollections",
         "SDGText",
-        "SDGPersistence"
+        "SDGPersistence",
       ]
     ),
 
@@ -353,7 +353,7 @@ let package = Package(
         "SDGLogic",
         "SDGMathematics",
         "SDGCollections",
-        "SDGText"
+        "SDGText",
       ]
     ),
     // @documentation(SDGPersistenceTestUtilities)
@@ -369,7 +369,7 @@ let package = Package(
         "SDGText",
         "SDGLocalization",
         "SDGCalendar",
-        "SDGCornerstoneLocalizations"
+        "SDGCornerstoneLocalizations",
       ]
     ),
 
@@ -380,7 +380,7 @@ let package = Package(
       dependencies: [
         "SDGControlFlow",
         "SDGLogic",
-        "SDGMathematics"
+        "SDGMathematics",
       ]
     ),
     // @documentation(SDGRandomizationTestUtilities)
@@ -388,7 +388,7 @@ let package = Package(
     .target(
       name: "SDGRandomizationTestUtilities",
       dependencies: [
-        "SDGRandomization", "SDGTesting"
+        "SDGRandomization", "SDGTesting",
       ]
     ),
 
@@ -402,7 +402,7 @@ let package = Package(
         "SDGMathematics",
         "SDGCollections",
         "SDGText",
-        "SDGPersistence"
+        "SDGPersistence",
       ]
     ),
     // @documentation(SDGLocalizationTestUtilities)
@@ -413,7 +413,7 @@ let package = Package(
         "SDGLocalization", "SDGTesting",
         "SDGText",
         "SDGPersistence",
-        "SDGPersistenceTestUtilities"
+        "SDGPersistenceTestUtilities",
       ]
     ),
 
@@ -423,7 +423,7 @@ let package = Package(
       name: "SDGGeometry",
       dependencies: [
         "SDGControlFlow",
-        "SDGMathematics"
+        "SDGMathematics",
       ]
     ),
     // @documentation(SDGGeometryTestUtilities)
@@ -432,7 +432,7 @@ let package = Package(
       name: "SDGGeometryTestUtilities",
       dependencies: [
         "SDGGeometry", "SDGTesting",
-        "SDGMathematicsTestUtilities"
+        "SDGMathematicsTestUtilities",
       ]
     ),
 
@@ -447,7 +447,7 @@ let package = Package(
         "SDGCollections",
         "SDGText",
         "SDGLocalization",
-        "SDGCornerstoneLocalizations"
+        "SDGCornerstoneLocalizations",
       ]
     ),
 
@@ -462,7 +462,7 @@ let package = Package(
         "SDGBinaryData",
         "SDGText",
         "SDGLocalization",
-        "SDGCornerstoneLocalizations"
+        "SDGCornerstoneLocalizations",
       ]
     ),
 
@@ -472,7 +472,7 @@ let package = Package(
       name: "SDGConcurrency",
       dependencies: [
         "SDGControlFlow",
-        "SDGLogic"
+        "SDGLogic",
       ]
     ),
 
@@ -485,7 +485,7 @@ let package = Package(
         "SDGLogic",
         "SDGText",
         "SDGPersistence",
-        "SDGLocalization"
+        "SDGLocalization",
       ]
     ),
 
@@ -500,7 +500,7 @@ let package = Package(
         "SDGCollections",
         "SDGText",
         "SDGLocalization",
-        "SDGCornerstoneLocalizations"
+        "SDGCornerstoneLocalizations",
       ]
     ),
 
@@ -513,7 +513,7 @@ let package = Package(
         "SDGMathematics",
         "SDGText",
         "SDGLocalization",
-        "SDGCornerstoneLocalizations"
+        "SDGCornerstoneLocalizations",
       ]
     ),
 
@@ -526,7 +526,7 @@ let package = Package(
         "SDGLogic",
         "SDGMathematics",
         "SDGText",
-        "SDGPersistence"
+        "SDGPersistence",
       ]
     ),
 
@@ -536,7 +536,7 @@ let package = Package(
       name: "SDGCornerstoneLocalizations",
       dependencies: [
         "SDGControlFlow",
-        "SDGLocalization"
+        "SDGLocalization",
       ]
     ),
 
@@ -551,7 +551,7 @@ let package = Package(
         "SDGText",
         "SDGCollation",
         "SDGPersistence",
-        "SDGLocalization"
+        "SDGLocalization",
       ]
     ),
 
@@ -560,14 +560,14 @@ let package = Package(
     .testTarget(
       name: "SDGControlFlowTests",
       dependencies: [
-        "SDGControlFlow", "SDGTesting", "SDGXCTestUtilities"
+        "SDGControlFlow", "SDGTesting", "SDGXCTestUtilities",
       ]
     ),
     .testTarget(
       name: "SDGLogicTests",
       dependencies: [
         "SDGLogic", "SDGLogicTestUtilities", "SDGTesting", "SDGXCTestUtilities",
-        "SDGMathematicsTestUtilities"
+        "SDGMathematicsTestUtilities",
       ]
     ),
     .testTarget(
@@ -577,7 +577,7 @@ let package = Package(
         "SDGLogic",
         "SDGCornerstoneLocalizations",
         "SDGMathematicsTestUtilities",
-        "SDGLocalizationTestUtilities"
+        "SDGLocalizationTestUtilities",
       ]
     ),
     .testTarget(
@@ -595,7 +595,7 @@ let package = Package(
         "SDGMathematics",
         "SDGCornerstoneLocalizations",
         "SDGPersistenceTestUtilities",
-        "SDGLocalizationTestUtilities"
+        "SDGLocalizationTestUtilities",
       ]
     ),
     .testTarget(
@@ -609,7 +609,7 @@ let package = Package(
         "SDGMathematicsTestUtilities",
         "SDGCollectionsTestUtilities",
         "SDGPersistenceTestUtilities",
-        "SDGLocalizationTestUtilities"
+        "SDGLocalizationTestUtilities",
       ]
     ),
     .testTarget(
@@ -617,7 +617,7 @@ let package = Package(
       dependencies: [
         "SDGText",
         "SDGCollation",
-        "SDGXCTestUtilities"
+        "SDGXCTestUtilities",
       ]
     ),
     .testTarget(
@@ -630,7 +630,7 @@ let package = Package(
         "SDGLocalization",
         "SDGExternalProcess",
         "SDGCornerstoneLocalizations",
-        "SDGLocalizationTestUtilities"
+        "SDGLocalizationTestUtilities",
       ]
     ),
     .testTarget(
@@ -638,7 +638,7 @@ let package = Package(
       dependencies: [
         "SDGRandomization", "SDGRandomizationTestUtilities", "SDGTesting", "SDGXCTestUtilities",
         "SDGLogic",
-        "SDGMathematics"
+        "SDGMathematics",
       ]
     ),
     .testTarget(
@@ -652,7 +652,7 @@ let package = Package(
         "SDGPersistence",
         "SDGPrecisionMathematics",
         "SDGCornerstoneLocalizations",
-        "SDGPersistenceTestUtilities"
+        "SDGPersistenceTestUtilities",
       ]
     ),
     .testTarget(
@@ -660,7 +660,7 @@ let package = Package(
       dependencies: [
         "SDGGeometry", "SDGGeometryTestUtilities", "SDGTesting", "SDGXCTestUtilities",
         "SDGMathematics",
-        "SDGMathematicsTestUtilities"
+        "SDGMathematicsTestUtilities",
       ]
     ),
     .testTarget(
@@ -672,7 +672,7 @@ let package = Package(
         "SDGCornerstoneLocalizations",
         "SDGMathematicsTestUtilities",
         "SDGPersistenceTestUtilities",
-        "SDGLocalizationTestUtilities"
+        "SDGLocalizationTestUtilities",
       ]
     ),
     .testTarget(
@@ -684,20 +684,20 @@ let package = Package(
         "SDGCornerstoneLocalizations",
         "SDGMathematicsTestUtilities",
         "SDGPersistenceTestUtilities",
-        "SDGLocalizationTestUtilities"
+        "SDGLocalizationTestUtilities",
       ]
     ),
     .testTarget(
       name: "SDGConcurrencyTests",
       dependencies: [
-        "SDGConcurrency", "SDGTesting", "SDGXCTestUtilities"
+        "SDGConcurrency", "SDGTesting", "SDGXCTestUtilities",
       ]
     ),
     .testTarget(
       name: "SDGExternalProcessTests",
       dependencies: [
         "SDGExternalProcess", "SDGTesting", "SDGXCTestUtilities",
-        "SDGLogic"
+        "SDGLogic",
       ]
     ),
     .testTarget(
@@ -705,7 +705,7 @@ let package = Package(
       dependencies: [
         "SDGVersioning", "SDGTesting", "SDGXCTestUtilities",
         "SDGCornerstoneLocalizations",
-        "SDGLocalizationTestUtilities"
+        "SDGLocalizationTestUtilities",
       ]
     ),
     .testTarget(
@@ -724,9 +724,9 @@ let package = Package(
         "SDGPrecisionMathematics",
         "SDGExternalProcess",
         "SDGPersistenceTestUtilities",
-        "SDGXCTestUtilities"
+        "SDGXCTestUtilities",
       ]
-    )
+    ),
   ]
 )
 

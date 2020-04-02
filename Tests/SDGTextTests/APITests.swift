@@ -63,7 +63,7 @@ class APITests: TestCase {
     let fileLines = [
       "Line 1",
       "Line 2",
-      "Line 3"
+      "Line 3",
     ]
     var file = fileLines.joined(separator: "\n")
     XCTAssertEqual(file.lines.map({ String($0.line) }), fileLines)
@@ -222,7 +222,7 @@ class APITests: TestCase {
     strict = StrictString(string)
     for partialScalar in [
       string.utf8.index(after: string.utf8.startIndex),
-      string.utf16.index(after: string.utf16.startIndex)
+      string.utf16.index(after: string.utf16.startIndex),
     ] {
       XCTAssertEqual(
         (string.startIndex..<partialScalar).scalars(in: string.scalars),

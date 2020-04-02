@@ -65,7 +65,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
           let converted = entryMatches.map { convert(locale: String($0.contents)) }
           preferences.value.set(to: converted)
         } else if let language = ProcessInfo.processInfo.environment["LANG"],
-          let locale:PatternMatch<String> = language.prefix(upTo: ".")
+          let locale: PatternMatch<String> = language.prefix(upTo: ".")
         {
           // @exempt(from: tests) Depends on host.
           let converted = convert(locale: String(locale.contents))
@@ -121,7 +121,8 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
         return Shared(Preference.mock())  // @exempt(from: tests)
       }
       let preferences = PreferenceSet.preferences(for: applicationDomain + sdgDomainSuffix)[
-        sdgPreferenceKey]
+        sdgPreferenceKey
+      ]
       preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
       return preferences
     }()
@@ -137,7 +138,8 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     var result = overrides.value.last
     // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
     #if canImport(Foundation)
-      result = result
+      result =
+        result
         ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
         ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
         ?? sdgSystemWidePreferences.value.as(LocalizationSetting.self)

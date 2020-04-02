@@ -83,7 +83,8 @@ public struct LineViewIndex: Comparable, Equatable {
   ///
   /// - Parameters:
   ///     - clusters: The cluster view.
-  @inlinable public func samePosition(in clusters: StrictString.ClusterView) -> StrictString
+  @inlinable public func samePosition(in clusters: StrictString.ClusterView)
+    -> StrictString
     .ClusterView.Index
   {
     return samePosition(in: String(StrictString(clusters)).clusters)

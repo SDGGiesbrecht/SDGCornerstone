@@ -59,7 +59,8 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
   // MARK: - Static Properties
 
   /// The length of a Hebrew moon.
-  public static let lengthOfMoon: CalendarInterval<FloatMax> = (29 as FloatMax).days
+  public static let lengthOfMoon: CalendarInterval<FloatMax> =
+    (29 as FloatMax).days
     + (12 as FloatMax).hours + (793 as FloatMax).hebrewParts
 
   /// The maximum number of days in any month.

@@ -169,7 +169,7 @@ class APITests: TestCase {
     preferences[testKey].value.set(to: true)
     #if os(macOS)
       let output = try Shell.default.run(command: [
-        "defaults", "read", testDomainExternalName, testKey
+        "defaults", "read", testDomainExternalName, testKey,
       ]).get()
       XCTAssertEqual(output, "1", "Failed to write preferences to disk.")
     #endif
@@ -180,7 +180,7 @@ class APITests: TestCase {
     let stringValue = "value"
     #if os(macOS)
       _ = try Shell.default.run(command: [
-        "defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue
+        "defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue,
       ]).get()
     #endif
 

@@ -45,7 +45,8 @@ extension WholeNumber {
       var extractionMask = insertionMask
       extractionMask.binary.reverse()
       let shiftDistance = WholeNumber.Digit(distance.bitDistance)
-      let extractionStart: WholeNumber.Digit = shiftDistance == 0
+      let extractionStart: WholeNumber.Digit =
+        shiftDistance == 0
         ? 0 : WholeNumber.Digit(SDGBinaryData.BinaryView<WholeNumber.Digit>.count) − shiftDistance
 
       let endIndex = wholeNumber.digitIndices.endIndex

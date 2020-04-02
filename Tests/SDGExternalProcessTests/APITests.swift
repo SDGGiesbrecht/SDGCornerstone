@@ -32,7 +32,7 @@ class APITests: TestCase {
             searching: [
               "/no/such/file",
               "/tmp",  // Directory
-              "/.file", "/dev/null"  // Not executable
+              "/.file", "/dev/null",  // Not executable
             ].map({ URL(fileURLWithPath: $0) }),
             commandName: nil,
             validate: { (_: ExternalProcess) in true }
@@ -46,7 +46,7 @@ class APITests: TestCase {
               searching: [
                 "/no/such/file",
                 "/tmp",  // Directory
-                "/.file"  // Not executable
+                "/.file",  // Not executable
               ].map({ URL(fileURLWithPath: $0) }),
               commandName: "swift",
               validate: { _ in true }
@@ -60,7 +60,7 @@ class APITests: TestCase {
             searching: [
               "/no/such/file",
               "/tmp",  // Directory
-              "/.file"  // Not executable
+              "/.file",  // Not executable
             ].map({ URL(fileURLWithPath: $0) }),
             commandName: "swift",
             validate: { _ in false }
@@ -145,12 +145,10 @@ class APITests: TestCase {
               metacharacters
             )
             XCTAssert(
-              ¬(
-                try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get()
-                  .contains(
-                    "\u{22}"
-                  )
-              )
+              ¬(try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get()
+                .contains(
+                  "\u{22}"
+                ))
             )
           #endif
         #endif

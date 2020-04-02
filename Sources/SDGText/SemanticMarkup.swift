@@ -188,7 +188,7 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
         data: data,
         options: [
           .characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue),
-          .documentType: NSAttributedString.DocumentType.html
+          .documentType: NSAttributedString.DocumentType.html,
         ],
         documentAttributes: nil
       )

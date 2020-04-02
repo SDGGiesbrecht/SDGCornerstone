@@ -89,7 +89,7 @@ extension CollationOrder {
             let collationElementStrings = collationText.components(
               separatedBy: ConditionalPattern({ $0 ∈ Set<Unicode.Scalar>(["[", "]"]) })
             )
-              .map { $0.contents.filter({ $0 ≠ " " }) }
+            .map { $0.contents.filter({ $0 ≠ " " }) }
             var elements = [CollationElement]()
             for collationElementSubstring in collationElementStrings {
               if ¬collationElementSubstring.isEmpty {
@@ -100,17 +100,17 @@ extension CollationOrder {
                 let ducetIndices = collationElementText.components(
                   separatedBy: ConditionalPattern({ $0 ∈ Set<UnicodeScalar>([".", "*"]) })
                 )
-                  .filter({ ¬$0.range.isEmpty })
-                  .map { (substring: PatternMatch<StrictString>) -> CollationIndex in
+                .filter({ ¬$0.range.isEmpty })
+                .map { (substring: PatternMatch<StrictString>) -> CollationIndex in
 
-                    let string = String(StrictString(substring.contents))
-                    if let integer = CollationIndex(string, radix: 16) {
-                      ducetMaxIndex.increase(to: integer)
-                      return integer
-                    } else {
-                      preconditionFailure("Could not parse hexadecimal: \(string)")
-                    }
+                  let string = String(StrictString(substring.contents))
+                  if let integer = CollationIndex(string, radix: 16) {
+                    ducetMaxIndex.increase(to: integer)
+                    return integer
+                  } else {
+                    preconditionFailure("Could not parse hexadecimal: \(string)")
                   }
+                }
                 assert(
                   ducetIndices.count == 3,
                   "Unexpected number of indices: \(ducetIndices) for line: \(StrictString(line))"
@@ -185,7 +185,7 @@ extension CollationOrder {
           [CollationOrder.endOfStringIndex],
           [CollationOrder.endOfStringIndex],
           [CollationOrder.endOfStringIndex],
-          [CollationOrder.endOfStringIndex]
+          [CollationOrder.endOfStringIndex],
         ])
       ]
       rules["<_final_>"] = [
@@ -195,7 +195,7 @@ extension CollationOrder {
           [defaultAccent],
           [defaultCase],
           [finalIndex],
-          [CollationOrder.placeholderIndex]
+          [CollationOrder.placeholderIndex],
         ])
       ]
 
@@ -207,7 +207,7 @@ extension CollationOrder {
           [defaultAccent],
           [defaultCase],
           [],
-          [CollationOrder.placeholderIndex]
+          [CollationOrder.placeholderIndex],
         ])
       ]
       rules["<_Script_>"] = [CollationElement(rawIndices: [[], [], [], [], [], [afterPlaceholder]])]

@@ -144,7 +144,8 @@
           reportArray.append(
             "− "
               + specificationLines[
-                specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)]
+                specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)
+              ]
           )
           resultOffset −= 1
           continuingKeptRange = false

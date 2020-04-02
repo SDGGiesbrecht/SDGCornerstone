@@ -57,7 +57,8 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≤ <
+@inlinable
+public func ≤ <
   A: Comparable,
   B: Comparable,
   C: Comparable,
@@ -73,7 +74,8 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≤ <
+@inlinable
+public func ≤ <
   A: Comparable,
   B: Comparable,
   C: Comparable,
@@ -129,7 +131,8 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≥ <
+@inlinable
+public func ≥ <
   A: Comparable,
   B: Comparable,
   C: Comparable,
@@ -145,7 +148,8 @@
 /// - Parameters:
 ///     - precedingValue: A value to compare.
 ///     - followingValue: Another value to compare.
-@inlinable public func ≥ <
+@inlinable
+public func ≥ <
   A: Comparable,
   B: Comparable,
   C: Comparable,

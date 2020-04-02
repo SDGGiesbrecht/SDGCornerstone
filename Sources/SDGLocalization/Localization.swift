@@ -63,20 +63,20 @@ extension Localization {
   /// "ar": ["arb"],
   /// "ms": ["zsm"],
   /// "no": ["nb"],
-  /// "syr": ["aii"]
+  /// "syr": ["aii"],
   /// ```
   ///
   /// ```swift
   /// "cmn": [
   ///   ("Hans", ["CN", "SG"]),
-  ///   ("Hant", ["TW"])
+  ///   ("Hant", ["TW"]),
   /// ],
   /// "es": [
   ///   (
   ///     "Latn",
   ///     [
   ///       "ES", "419", "MX", "CO", "AR", "VE", "PE", "CL", "EC", "CU", "DO", "GT", "HN", "SV", "NI",
-  ///       "BO", "CR", "UY", "PA", "PY", "GQ"
+  ///       "BO", "CR", "UY", "PA", "PY", "GQ",
   ///     ]
   ///   )
   /// ],
@@ -88,7 +88,7 @@ extension Localization {
   ///       "ZW", "IN", "BZ", "PG", "VC", "ZM", "GD", "AG", "VU", "JM", "KN", "LK", "PH", "LC", "NA",
   ///       "BN", "SB", "NR", "FJ", "FM", "DM", "SC", "MU", "WS", "PW", "MW", "BW", "BI", "CM", "ET",
   ///       "GM", "GH", "KE", "KI", "LS", "MT", "MH", "NG", "PK", "RW", "SS", "SD", "SZ", "TZ", "TO",
-  ///       "TV", "UG"
+  ///       "TV", "UG",
   ///     ]
   ///   )
   /// ],
@@ -97,7 +97,7 @@ extension Localization {
   ///     "Arab",
   ///     [
   ///       "SA", "EG", "DZ", "SD", "MA", "IQ", "SY", "YE", "TN", "JO", "LY", "LB", "SO", "AE", "MR",
-  ///       "OM", "IL", "KW", "TD", "QA", "BH", "DJ", "KM"
+  ///       "OM", "IL", "KW", "TD", "QA", "BH", "DJ", "KM",
   ///     ]
   ///   )
   /// ],
@@ -113,7 +113,7 @@ extension Localization {
   ///     "Latn",
   ///     [
   ///       "FR", "CA", "BE", "CH", "BF", "LU", "SN", "MU", "GA", "CG", "MG", "CI", "BJ", "MC", "DJ",
-  ///       "CF", "ML", "NE", "TD", "TG", "RW", "BI", "KM", "VU", "SC", "CM", "CD", "GN", "GQ", "HT"
+  ///       "CF", "ML", "NE", "TD", "TG", "RW", "BI", "KM", "VU", "SC", "CM", "CD", "GN", "GQ", "HT",
   ///     ]
   ///   )
   /// ],
@@ -141,7 +141,7 @@ extension Localization {
   /// "nb": [("Latn", ["NO"])],
   /// "hr": [("Latn", ["HR"])],
   /// "ca": [("Latn", ["ES", "AD"])],
-  /// "aii": [("Syrc", ["IQ"])]
+  /// "aii": [("Syrc", ["IQ"])],
   /// ```
   ///
   /// Requests for additional groups are welcome and can be made by [opening a Github issue](https://github.com/SDGGiesbrecht/SDGCornerstone/issues).
