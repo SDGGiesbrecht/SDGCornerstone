@@ -730,7 +730,7 @@ let package = Package(
   ]
 )
 
-// #workaround(Swift 5.1.3, The generated Xcode project cannot import XCTest on iOS devices.)
+// #workaround(Swift 5.2.0, The generated Xcode project cannot import XCTest on iOS devices.)
 import Foundation
 let path = ProcessInfo.processInfo.environment["PATH"] ?? ""
 let firstColon = path.range(of: ":")?.lowerBound ?? path.endIndex
@@ -742,7 +742,7 @@ if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
   sdgXCTestUtilities.swiftSettings = settings
 }
 
-// #workaround(workspace version 0.30.2, Causes Xcode executable/scheme issues for iOS.)
+// #workaround(Swift 5.2.0, The generated Xcode project cannot handle tools when building for iOS.)
 func disableDevelopmentTools() {
   package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
 }
