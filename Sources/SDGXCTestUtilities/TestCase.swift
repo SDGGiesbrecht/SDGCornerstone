@@ -16,7 +16,7 @@
 
   // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
   #if canImport(Foundation)
-    // #workaround(Swift 5.1.3, The generated Xcode project cannot import XCTest on iOS devices.)
+    // #workaround(Swift 5.2.0, The generated Xcode project cannot import XCTest on iOS devices.)
     #if !Xcode || MANIFEST_LOADED_BY_XCODE || !(os(iOS) || os(tvOS)) || targetEnvironment(simulator)
       import XCTest
 
