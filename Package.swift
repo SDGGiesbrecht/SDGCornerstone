@@ -269,7 +269,7 @@ let package = Package(
       dependencies: [
         "SDGControlFlow",
         "SDGLogic",
-        // RealModule (except Windows; see bottom of file)
+        .product(name: "RealModule", package: "swift\u{2D}numerics"),
       ]
     ),
     // @documentation(SDGMathematicsTestUtilities)
@@ -750,21 +750,22 @@ func disableDevelopmentTools() {
   disableDevelopmentTools()
 #endif
 
-// #workaround(Swift 5.1.3, Windows does not support C.)
-#if !os(Windows)
-  if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == nil {
-    for target in package.targets where target.name == "SDGMathematics" {
-      target.dependencies.append(.product(name: "RealModule", package: "swift\u{2D}numerics"))
-    }
-  }
-#endif
-
-// #workaround(Swift 5.1.3, Windows cannot handle Unicode.)
-#if os(Windows)
+func adjustForWindows() {
+  // #workaround(workspace version 0.32.0, CMake cannot handle Unicode.)
   disableDevelopmentTools()
+
+  for target in package.targets {
+    target.dependencies.removeAll(where: { dependency in
+      // #workaround(Swift 5.1.3, Windows does not support C.)
+      return "\(dependency)".contains("RealModule")
+    })
+  }
+}
+#if os(Windows)
+  adjustForWindows()
 #endif
 if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
-  disableDevelopmentTools()
+  adjustForWindows()
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
