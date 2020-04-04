@@ -25,10 +25,7 @@ extension Double: TextConvertibleNumber {}
 #if !os(WASI)
   extension CGFloat: TextConvertibleNumber {}
 #endif
-#if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
-  // #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
-  #if !os(WASI)
-    extension Float80: TextConvertibleNumber {}
-  #endif
+#if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+  extension Float80: TextConvertibleNumber {}
 #endif
 extension Float: TextConvertibleNumber {}

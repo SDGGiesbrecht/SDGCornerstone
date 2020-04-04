@@ -45,8 +45,8 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
 
       #elseif os(Windows) || os(Android)
 
-        // #workaround(Swift 5.1.3, Windows: GetUserPreferredUILanguages? GlobalizationPreferences::Languages? Neither is accessible.)
-        // #workaround(Swift 5.1.3, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
+        // #workaround(workspace version 0.32.0, Windows: GetUserPreferredUILanguages? GlobalizationPreferences::Languages? Neither is accessible.)
+        // #workaround(workspace version 0.32.0, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
         preferences = Shared(Preference.mock())
         preferences.value.set(to: nil)
 

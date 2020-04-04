@@ -204,7 +204,7 @@ extension TextConvertibleNumber {
 
       return set.sorted()
     }
-    #if !os(Android)  // #workaround(Swift 5.1.3, Compiler crash.)
+    #if !os(Android)  // #workaround(workspace version 0.32.0, Compiler crash.)
       assert(
         assertNFKD().isEmpty,
         UserFacing<StrictString, _APILocalization>(  // @exempt(from: tests)
