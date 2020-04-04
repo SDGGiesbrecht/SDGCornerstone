@@ -14,7 +14,7 @@
 
 #if !os(watchOS)
 
-  // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
+  // #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     import XCTest
 

@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -24,7 +24,7 @@ import SDGCollections
 import SDGText
 import SDGPersistence
 
-// #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   extension CollationOrder: FileConvertible {}
 #endif
@@ -33,7 +33,7 @@ public struct CollationOrder: Decodable, Encodable {
 
   // MARK: - Static Properties
 
-  // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
+  // #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     /// The root collation order.
     public static let root: CollationOrder = {
@@ -320,7 +320,7 @@ public struct CollationOrder: Decodable, Encodable {
     try container.encode(rules)
   }
 
-  // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
+  // #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     // MARK: - FileConvertible
 

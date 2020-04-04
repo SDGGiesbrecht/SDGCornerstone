@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -43,7 +43,7 @@ public func testCodableConformance<T>(
   line: UInt = #line
 ) where T: Codable, T: Equatable {
 
-  // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
+  // #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     func directory(typeName: String) -> URL {
       return testSpecificationDirectory(file)
@@ -134,7 +134,7 @@ public func testCodableConformance<T>(
   #endif
 }
 
-// #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   /// Tests that decoding fails with a value encoded from an invalid mock type.
   ///
