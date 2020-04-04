@@ -101,8 +101,8 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
 
       #elseif os(Windows) || os(Android)
 
-        // #workaround(Swift 5.1.3, Windows: GetProcessPreferredUILanguages? GlobalizationPreferences::Languages)
-        // #workaround(Swift 5.1.3, Android: Locale.getDefault().getLanguage()? Not available yet.)
+        // #workaround(workspace version 0.32.0, Windows: GetProcessPreferredUILanguages? GlobalizationPreferences::Languages)
+        // #workaround(workspace version 0.32.0, Android: Locale.getDefault().getLanguage()? Not available yet.)
         preferences = Shared(Preference.mock())
 
       #elseif os(Linux)
