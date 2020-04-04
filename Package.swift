@@ -756,7 +756,7 @@ func adjustForWindows() {
 
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
-      // #workaround(Swift 5.1.3, Windows does not support C.)
+      // #workaround(workspace version 0.32.0, Windows does not support C.)
       return "\(dependency)".contains("RealModule")
     })
   }
