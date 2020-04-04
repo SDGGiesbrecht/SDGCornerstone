@@ -266,7 +266,7 @@ class APITests: TestCase {
   }
 
   func testSemanticMarkup() {
-    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
       testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
       testCodableConformance(
@@ -323,7 +323,7 @@ class APITests: TestCase {
   }
 
   func testStrictString() {
-    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       testBidirectionalCollectionConformance(of: StrictString("ABC"))
       testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
       testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
