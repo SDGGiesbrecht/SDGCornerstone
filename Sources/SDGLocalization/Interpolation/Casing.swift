@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -45,7 +45,7 @@ public enum Casing {
   ///     - compileTimeString: The string to transform.
   public func apply(to compileTimeString: StaticString) -> StrictString {
     var string = StrictString(compileTimeString)
-    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+    // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
     #if !os(WASI)
       assert(
         ¬string.contains(where: {

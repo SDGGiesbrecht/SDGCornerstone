@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -35,7 +35,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
   #endif
   private static let sdgPreferenceKey = "SDGLanguages"
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+  // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
   #if !os(WASI)
     internal static let osSystemWidePreferences: Shared<Preference> = {
       let preferences: Shared<Preference>
@@ -136,7 +136,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
 
   private static func resolveCurrentLocalization() -> LocalizationSetting {
     var result = overrides.value.last
-    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+    // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
     #if !os(WASI)
       result =
         result
@@ -171,7 +171,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
 
   // MARK: - Static Methods
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+  // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
   #if !os(WASI)
     // For user available menus.
     public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
@@ -228,7 +228,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
   }
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+  // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
   #if !os(WASI)
     private init?(osPreference preference: Preference) {
       guard let result = preference.as([String].self) else {
@@ -266,7 +266,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     return L.fallbackLocalization
   }
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+  // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
   #if !os(WASI)
     private func stabilityCacheURL<L>(for: L.Type) -> URL {
       var path = "SDGCornerstone/Stable Localizations"
@@ -301,7 +301,7 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
     case .none:
       return resolvedFresh()
     case .stabilized:
-      // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+      // #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
       #if os(WASI)
         return resolvedFresh()
       #else

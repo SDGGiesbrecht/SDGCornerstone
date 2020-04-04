@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
 #if !os(WASI)
   import Foundation
   #if canImport(CoreGraphics)
@@ -257,7 +257,7 @@ extension Double: FloatFamily {
   #endif
 }
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have foundation yet.)
 #if !os(WASI)
   extension CGFloat: FloatFamily {
 
