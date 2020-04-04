@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+#if !os(WASI)
   import Foundation
 #endif
 
@@ -58,8 +58,8 @@ public func testCustomStringConvertibleConformance<T, L>(
     print("", to: &report)
   }
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-  #if canImport(Foundation)
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+  #if !os(WASI)
     func fileName(typeName: String) -> URL {
       testSpecificationDirectory(file)
         .appendingPathComponent("CustomStringConvertible")

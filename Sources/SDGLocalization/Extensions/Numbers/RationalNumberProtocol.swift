@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+#if !os(WASI)
   import Foundation
 #endif
 
@@ -27,8 +27,8 @@ extension RationalNumberProtocol {
   // MARK: - Text Representations
 
   private func digitsOnly(_ number: StrictString) -> Bool {
-    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-    #if !canImport(Foundation)
+    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+    #if os(WASI)
       return false
     #else
       return ¬number.contains(where: { $0 ∉ CharacterSet.decimalDigits ∪ ["−"] })

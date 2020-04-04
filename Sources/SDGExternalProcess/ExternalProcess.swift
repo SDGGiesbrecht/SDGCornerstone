@@ -14,8 +14,8 @@
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-  #if canImport(Foundation)
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+  #if !os(WASI)
     import Foundation
 
     import SDGControlFlow
