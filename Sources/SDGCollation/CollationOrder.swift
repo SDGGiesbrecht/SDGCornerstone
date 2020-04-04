@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+#if !os(WASI)
   import Foundation
 #endif
 
@@ -24,8 +24,8 @@ import SDGCollections
 import SDGText
 import SDGPersistence
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+#if !os(WASI)
   extension CollationOrder: FileConvertible {}
 #endif
 /// A collation order for sorting strings.
@@ -33,8 +33,8 @@ public struct CollationOrder: Decodable, Encodable {
 
   // MARK: - Static Properties
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-  #if canImport(Foundation)
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+  #if !os(WASI)
     /// The root collation order.
     public static let root: CollationOrder = {
       return try! CollationOrder(file: Resources.root, origin: nil)
@@ -320,8 +320,8 @@ public struct CollationOrder: Decodable, Encodable {
     try container.encode(rules)
   }
 
-  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-  #if canImport(Foundation)
+  // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+  #if !os(WASI)
     // MARK: - FileConvertible
 
     public init(file: Data, origin: URL?) throws {

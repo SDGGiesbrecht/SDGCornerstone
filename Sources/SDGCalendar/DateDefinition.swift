@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+#if !os(WASI)
   import Foundation
 #endif
 
@@ -100,8 +100,8 @@ public protocol DateDefinition: Decodable, Encodable {
   init(_decoding json: StrictString, codingPath: [CodingKey]) throws
 }
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if !canImport(Foundation)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+#if os(WASI)
   private struct FoundationUnavailable: PresentableError {
     public func presentableDescription() -> StrictString {
       return UserFacing<StrictString, InterfaceLocalization>({ localization in
@@ -119,7 +119,7 @@ public protocol DateDefinition: Decodable, Encodable {
 extension DateDefinition {
 
   public func _encode() throws -> StrictString {
-    #if !canImport(Foundation)
+    #if os(WASI)
       throw FoundationUnavailable()
     #else
       return try StrictString(file: try JSONEncoder().encode([self]), origin: nil)
@@ -130,8 +130,8 @@ extension DateDefinition {
   }
 
   public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
-    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-    #if !canImport(Foundation)
+    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+    #if os(WASI)
       throw FoundationUnavailable()
     #else
       guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {

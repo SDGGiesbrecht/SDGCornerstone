@@ -12,8 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+#if !os(WASI)
   import Foundation
   #if canImport(CoreGraphics)
     import CoreGraphics  // Not included in Foundation on iOS.
@@ -27,7 +27,7 @@
 #endif
 
 // #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+#if !os(WASI)
   #if os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
     // #documentation(FloatMax)
     /// The member of the `Float` family with the largest bit field.
@@ -257,8 +257,8 @@ extension Double: FloatFamily {
   #endif
 }
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+#if !os(WASI)
   extension CGFloat: FloatFamily {
 
     // MARK: - CustomDebugStringConvertible
@@ -349,7 +349,7 @@ extension Double: FloatFamily {
 
 #if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
   // #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
-  #if canImport(Foundation)
+  #if !os(WASI)
 
     extension Float80: Decodable, Encodable, FloatFamily {
 
