@@ -113,7 +113,7 @@
       let differences = stringLines.changes(from: specificationLines)
 
       #if os(Windows)
-        // #workaround(Swift 5.1.3, This works around line endings being ignored. But including line endings currently causes a SegFault.)
+        // #workaround(workspace version 0.32.0, This works around line endings being ignored. But including line endings currently causes a SegFault.)
         if differences.isEmpty {
           return  // Passing
         }

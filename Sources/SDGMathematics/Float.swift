@@ -340,10 +340,7 @@ extension Double: FloatFamily {
   }
 #endif
 
-#if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
-  // #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
-  #if !os(WASI)
-
+#if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
     extension Float80: Decodable, Encodable, FloatFamily {
 
       // MARK: - Decodable
@@ -376,7 +373,6 @@ extension Double: FloatFamily {
       }
     }
   #endif
-#endif
 
 extension Float: FloatFamily {
 

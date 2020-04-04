@@ -91,7 +91,7 @@ class APITests: TestCase {
   }
 
   func testBidirectionalCollection() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       let collection = [1, 2, 3, 4, 5, 4, 5, 6]
       let match = collection.lastMatch(for: [4, 5])
       XCTAssertEqual(match?.range, 5..<7)
@@ -198,7 +198,7 @@ class APITests: TestCase {
   }
 
   func testCollection() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       forAllLegacyModes {
         let collection = [1, 2, 3, 4, 5, 4, 5, 6]
         let match = collection.firstMatch(for: [2, 3])
@@ -441,7 +441,7 @@ class APITests: TestCase {
   }
 
   func testCollectionDifference() throws {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       try forAllLegacyModes {
         let start: [String] = [".", ".", "G", "A", "C", "!", "!", ".", "."]
         let end: [String] = [".", ".", "A", "G", "C", "A", "T", "?", "?", ".", "."]
@@ -555,7 +555,7 @@ class APITests: TestCase {
   }
 
   func testCollectionDifferenceChange() throws {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       try forAllLegacyModes {
         let shimmedEntries: [SDGCollections.CollectionDifference<String>.Change] = [
           .remove(offset: 10, element: "removed element", associatedWith: 20),
@@ -1136,7 +1136,7 @@ class APITests: TestCase {
   }
 
   func testRepetitionPattern() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       testPattern(RepetitionPattern([1, 2, 3]), match: [1, 2, 3, 1, 2, 3])
     #endif
   }
@@ -1213,7 +1213,7 @@ class APITests: TestCase {
   }
 
   func testSymmetricDifference() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       testSetDefinitionConformance(
         of: IntensionalSet(where: { $0.isEven }) ∆ (1...100),
         member: 1,

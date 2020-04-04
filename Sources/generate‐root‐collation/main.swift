@@ -14,8 +14,8 @@
 
 import SDGCollation
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet; compiler doesn’t recognize os(WASI).)
-#if canImport(Foundation)
+// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
+#if !os(WASI)
   let root = try CollationOrder.generateRoot()
   try root.save(to: collationResourcesDirectory.appendingPathComponent("Root"))
 #endif

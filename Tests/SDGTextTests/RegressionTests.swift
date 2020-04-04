@@ -50,7 +50,7 @@ class RegressionTests: TestCase {
   func testNestingLevelLocation() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       let nestString = StrictString("%{1~a~a^a|^}")
       let open: StrictString = "{"
       let close: StrictString = "}"

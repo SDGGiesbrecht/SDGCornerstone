@@ -28,7 +28,7 @@ import SDGLocalizationTestUtilities
 class APITests: TestCase {
 
   func testData() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       testBitFieldConformance(
         start: Data([0b0101_0110]),
         not: Data([0b1010_1001]),
@@ -66,7 +66,7 @@ class APITests: TestCase {
   }
 
   func testDataStream() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       var inputStream = DataStream()
       var outputStream = DataStream()
 
@@ -91,7 +91,7 @@ class APITests: TestCase {
   }
 
   func testUInt() {
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       var forDescription: UInt8 = 0
       forDescription.binary[0] = true
       testCustomStringConvertibleConformance(

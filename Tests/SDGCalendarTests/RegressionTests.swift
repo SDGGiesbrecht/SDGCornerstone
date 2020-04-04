@@ -23,7 +23,7 @@ class RegressionTests: TestCase {
   func testCalendarEquatability() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
       XCTAssertEqual(tishrei, HebrewMonthAndYear(month: .tishrei, year: 5759))
       let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
@@ -35,7 +35,7 @@ class RegressionTests: TestCase {
   func testWeekday() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.1.3, SegFault)
+    #if !os(Windows)  // #workaround(workspace 0.32.0, SegFault)
       var date = CalendarDate(hebrew: .tishrei, 4, 5758)
       for _ in 0..<1000 {
         date += (1 as CalendarDate.Vector.Scalar).weeks
