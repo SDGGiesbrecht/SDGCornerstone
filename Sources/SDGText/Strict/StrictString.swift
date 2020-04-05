@@ -130,7 +130,7 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   // MARK: - Normalization
 
   @inlinable internal static func normalizeAsString(_ string: String) -> String {
-    // #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+    // #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
     #if os(WASI)
       return string
     #else

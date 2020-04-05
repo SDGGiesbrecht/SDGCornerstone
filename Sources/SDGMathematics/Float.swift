@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
   #if canImport(CoreGraphics)
@@ -20,27 +20,20 @@
   #endif
 #endif
 
-#if os(Windows)  // #workaround(workspace version 0.30.2, Windows does not support C.)
+#if os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
   import WinSDK
 #else
   import RealModule
 #endif
 
-// #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
-#if !os(WASI)
-  #if os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
-    // #documentation(FloatMax)
-    /// The member of the `Float` family with the largest bit field.
-    public typealias FloatMax = Double
-  #else
-    // @documentation(FloatMax)
-    /// The member of the `Float` family with the largest bit field.
-    public typealias FloatMax = Float80
-  #endif
-#else
+#if os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
   // #documentation(FloatMax)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
+#else
+  // @documentation(FloatMax)
+  /// The member of the `Float` family with the largest bit field.
+  public typealias FloatMax = Float80
 #endif
 
 /// A member of the `Float` family; `Double`, `Float80` or `Float`.
@@ -145,7 +138,7 @@ extension FloatingPoint {
   }
 }
 
-#if !os(Windows)  // #workaround(workspace version 0.30.2, Windows does not support C.)
+#if !os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
   extension ElementaryFunctions {
     @inlinable internal static func logAsElementaryFunctions(_ x: Self) -> Self {
       return Self.log(x)
@@ -210,7 +203,7 @@ extension Double: FloatFamily {
 
   public static let e: Double = 0x1.5BF0A8B145769p1
 
-  #if !os(Windows)  // #workaround(workspace version 0.30.2, Windows does not support C.)
+  #if !os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
     @inlinable public static func log(_ antilogarithm: Self) -> Self {
       return Self.log10(antilogarithm)
     }
@@ -220,7 +213,7 @@ extension Double: FloatFamily {
     return FloatMax(self)
   }
 
-  #if os(Windows)  // #workaround(workspace version 0.30.2, Windows does not support C.)
+  #if os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
     @inlinable public static func ln(_ antilogarithm: Double) -> Double {
       return WinSDK.log(antilogarithm)
     }
@@ -257,7 +250,7 @@ extension Double: FloatFamily {
   #endif
 }
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   extension CGFloat: FloatFamily {
 
@@ -347,42 +340,38 @@ extension Double: FloatFamily {
   }
 #endif
 
-#if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
-  // #workaround(Swift 5.1.5, Compiler doesn’t recognize os(WASI).)
-  #if !os(WASI)
+#if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+  extension Float80: Decodable, Encodable, FloatFamily {
 
-    extension Float80: Decodable, Encodable, FloatFamily {
+    // MARK: - Decodable
 
-      // MARK: - Decodable
-
-      public init(from decoder: Decoder) throws {
-        self.init(try Double(from: decoder))
-      }
-
-      // MARK: - Encodable
-
-      public func encode(to encoder: Encoder) throws {
-        // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
-        try Double(self).encode(to: encoder)
-      }
-
-      // MARK: - PointProtocol
-
-      public typealias Vector = Stride
-
-      // MARK: - RealArithmetic
-
-      public static let e: Float80 = 0x1.5BF0A8B145769535p1
-
-      @inlinable public static func log(_ antilogarithm: Self) -> Self {
-        return Self.log10(antilogarithm)
-      }
-
-      @inlinable public var floatingPointApproximation: FloatMax {
-        return FloatMax(self)
-      }
+    public init(from decoder: Decoder) throws {
+      self.init(try Double(from: decoder))
     }
-  #endif
+
+    // MARK: - Encodable
+
+    public func encode(to encoder: Encoder) throws {
+      // This causes a reduction in precision, but is necessary to preserve compatibility with Double and Float. (Especially when used as FloatMax.) It is also more likely to be forward compatible than other formats if the Standard Library provides this conformance in the future.
+      try Double(self).encode(to: encoder)
+    }
+
+    // MARK: - PointProtocol
+
+    public typealias Vector = Stride
+
+    // MARK: - RealArithmetic
+
+    public static let e: Float80 = 0x1.5BF0A8B145769535p1
+
+    @inlinable public static func log(_ antilogarithm: Self) -> Self {
+      return Self.log10(antilogarithm)
+    }
+
+    @inlinable public var floatingPointApproximation: FloatMax {
+      return FloatMax(self)
+    }
+  }
 #endif
 
 extension Float: FloatFamily {
@@ -395,7 +384,7 @@ extension Float: FloatFamily {
 
   public static let e: Float = 0x1.5BF0Bp1
 
-  #if !os(Windows)  // #workaround(workspace version 0.30.2, Windows does not support C.)
+  #if !os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
     @inlinable public static func log(_ antilogarithm: Self) -> Self {
       return Self.log10(antilogarithm)
     }
@@ -405,7 +394,7 @@ extension Float: FloatFamily {
     return FloatMax(self)
   }
 
-  #if os(Windows)  // #workaround(workspace version 0.30.2, Windows does not support C.)
+  #if os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
     @inlinable public static func ln(_ antilogarithm: Float) -> Float {
       return Float(WinSDK.log(Double(antilogarithm)))
     }

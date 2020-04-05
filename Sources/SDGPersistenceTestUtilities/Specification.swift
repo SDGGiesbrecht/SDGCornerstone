@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.1.5, Web doesn’t have foundation yet.)
+// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 
@@ -113,7 +113,7 @@
       let differences = stringLines.changes(from: specificationLines)
 
       #if os(Windows)
-        // #workaround(Swift 5.1.3, This works around line endings being ignored. But including line endings currently causes a SegFault.)
+        // #workaround(workspace version 0.32.0, This works around line endings being ignored. But including line endings currently causes a SegFault.)
         if differences.isEmpty {
           return  // Passing
         }
