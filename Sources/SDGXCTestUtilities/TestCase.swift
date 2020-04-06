@@ -37,10 +37,8 @@
 
           testAssertionMethod = XCTAssert
 
-          #if !os(Linux)  // #workaround(Swift 5.1.3, Linux will gain this property in 5.2.)
-            // The default of .userInteractive is absurd.
-            Thread.current.qualityOfService = .utility
-          #endif
+          // The default of .userInteractive is absurd.
+          Thread.current.qualityOfService = .utility
 
           super.setUp()
         }
