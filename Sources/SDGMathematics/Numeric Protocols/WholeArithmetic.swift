@@ -28,7 +28,7 @@ public protocol WholeArithmetic: FixedScaleOneDimensionalPoint, Numeric, Numeric
 
   // MARK: - Operations
 
-  // #workaround(Swift 5.1.3, Duplicates Subtractable, but works around disambiguation bugs.)
+  // Duplicates Subtractable, but makes the compiler prefer the “Self” variant over the “Vector” variant.
   static func − (precedingValue: Self, followingValue: Self) -> Self
 
   /// Returns the product of the preceding value times the following value.
