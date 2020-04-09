@@ -147,7 +147,7 @@
       var directory: URL
 
       #if os(Android)
-        // #workaround(workspace version 0.32.0, .itemReplacementDirectory leads to illegal instruction.)
+        // #workaround(Swift 5.2.1, .itemReplacementDirectory leads to illegal instruction.)
         directory = temporaryDirectory
       #else
         let volume = try? url(
