@@ -751,12 +751,12 @@ func disableDevelopmentTools() {
 #endif
 
 func adjustForWindows() {
-  // #workaround(workspace version 0.32.0, CMake cannot handle Unicode.)
+  // #workaround(workspace version 0.32.1, CMake cannot handle Unicode.)
   disableDevelopmentTools()
 
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
-      // #workaround(workspace version 0.32.0, Windows does not support C.)
+      // #workaround(workspace version 0.32.1, Windows does not support C.)
       return "\(dependency)".contains("RealModule")
     })
   }

@@ -20,7 +20,7 @@
   #endif
 #endif
 
-#if os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
+#if os(Windows)  // #workaround(workspace version 0.32.1, Windows does not support C.)
   import WinSDK
 #else
   import RealModule
@@ -138,7 +138,7 @@ extension FloatingPoint {
   }
 }
 
-#if !os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
+#if !os(Windows)  // #workaround(workspace version 0.32.1, Windows does not support C.)
   extension ElementaryFunctions {
     @inlinable internal static func logAsElementaryFunctions(_ x: Self) -> Self {
       return Self.log(x)
@@ -203,7 +203,7 @@ extension Double: FloatFamily {
 
   public static let e: Double = 0x1.5BF0A8B145769p1
 
-  #if !os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
+  #if !os(Windows)  // #workaround(workspace version 0.32.1, Windows does not support C.)
     @inlinable public static func log(_ antilogarithm: Self) -> Self {
       return Self.log10(antilogarithm)
     }
@@ -213,7 +213,7 @@ extension Double: FloatFamily {
     return FloatMax(self)
   }
 
-  #if os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
+  #if os(Windows)  // #workaround(workspace version 0.32.1, Windows does not support C.)
     @inlinable public static func ln(_ antilogarithm: Double) -> Double {
       return WinSDK.log(antilogarithm)
     }
@@ -384,7 +384,7 @@ extension Float: FloatFamily {
 
   public static let e: Float = 0x1.5BF0Bp1
 
-  #if !os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
+  #if !os(Windows)  // #workaround(workspace version 0.32.1, Windows does not support C.)
     @inlinable public static func log(_ antilogarithm: Self) -> Self {
       return Self.log10(antilogarithm)
     }
@@ -394,7 +394,7 @@ extension Float: FloatFamily {
     return FloatMax(self)
   }
 
-  #if os(Windows)  // #workaround(workspace version 0.32.0, Windows does not support C.)
+  #if os(Windows)  // #workaround(workspace version 0.32.1, Windows does not support C.)
     @inlinable public static func ln(_ antilogarithm: Float) -> Float {
       return Float(WinSDK.log(Double(antilogarithm)))
     }
