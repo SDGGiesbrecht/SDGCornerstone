@@ -14,7 +14,7 @@
 
 import SDGMathematics
 
-// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
 #if os(Android) || os(WASI)
   // #workaround(workspace version 0.32.0, Compiler crashes on generic version.)
 
