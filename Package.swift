@@ -770,7 +770,7 @@ if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true"
 
 if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
   for target in package.targets {
-    // #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
+    // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
     target.exclude.append("Resources.swift")
   }
 }
