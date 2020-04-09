@@ -204,21 +204,19 @@ extension TextConvertibleNumber {
 
       return set.sorted()
     }
-    #if !os(Android)  // #workaround(workspace version 0.32.0, Compiler crash.)
-      assert(
-        assertNFKD().isEmpty,
-        UserFacing<StrictString, _APILocalization>(  // @exempt(from: tests)
-          { localization in  // @exempt(from: tests)
-            let scalars: [StrictString] = assertNFKD().map { scalar in
-              return "\(scalar.visibleRepresentation) \(scalar.hexadecimalCode)"
-            }
-            switch localization {
-            case .englishCanada:
-              return "Some scalars are not in NFKD: \(scalars.joined(separator: ", "))"
-            }
-          })
-      )
-    #endif
+    assert(
+      assertNFKD().isEmpty,
+      UserFacing<StrictString, _APILocalization>(  // @exempt(from: tests)
+        { localization in  // @exempt(from: tests)
+          let scalars: [StrictString] = assertNFKD().map { scalar in
+            return "\(scalar.visibleRepresentation) \(scalar.hexadecimalCode)"
+          }
+          switch localization {
+          case .englishCanada:
+            return "Some scalars are not in NFKD: \(scalars.joined(separator: ", "))"
+          }
+        })
+    )
   }
 
   @inlinable public static func parse(
