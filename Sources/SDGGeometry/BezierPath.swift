@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace version 0.32.0, Should be “BézierPath.swift” but for normalization issue.)
+// #workaround(Swift 5.2, Should be “BézierPath.swift” but for CMake normalization issue.)
 
 #if canImport(AppKit) || canImport(UIKit)
   #if canImport(AppKit)

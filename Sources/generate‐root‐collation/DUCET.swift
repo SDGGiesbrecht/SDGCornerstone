@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.2.1, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -34,7 +34,7 @@ extension CollationOrder {
 
   internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
-  // #workaround(workspace version 0.32.0, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.1, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     static func ducet() throws -> CollationOrder {
 
