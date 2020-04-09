@@ -146,42 +146,37 @@
     ) rethrows -> Result {
       var directory: URL
 
-      #if os(Android)
-        // #workaround(workspace version 0.32.0, .itemReplacementDirectory leads to illegal instruction.)
-        directory = temporaryDirectory
-      #else
-        let volume = try? url(
-          for: .documentDirectory,
+      let volume = try? url(
+        for: .documentDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true
+      )
+      if let itemReplacement = try? url(
+        for: .itemReplacementDirectory,
+        in: .userDomainMask,
+        appropriateFor: volume,
+        create: true
+      ) {
+        directory = itemReplacement
+      } else {
+        // @exempt(from: tests) macOS fails to find the preferred item replacement directory from time to time.
+        if let anyVolume = try? url(
+          for: .itemReplacementDirectory,
           in: .userDomainMask,
           appropriateFor: nil,
           create: true
-        )
-        if let itemReplacement = try? url(
-          for: .itemReplacementDirectory,
-          in: .userDomainMask,
-          appropriateFor: volume,
-          create: true
         ) {
-          directory = itemReplacement
+          directory = anyVolume
         } else {
-          // @exempt(from: tests) macOS fails to find the preferred item replacement directory from time to time.
-          if let anyVolume = try? url(
-            for: .itemReplacementDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-          ) {
-            directory = anyVolume
-          } else {
-            // @exempt(from: tests)
-            if #available(macOS 10.12, iOS 10, watchOS 3, tvOS 10, *) {  // @exempt(from: tests)
-              directory = temporaryDirectory
-            } else {  // @exempt(from: tests)
-              directory = URL(fileURLWithPath: NSTemporaryDirectory())
-            }
+          // @exempt(from: tests)
+          if #available(macOS 10.12, iOS 10, watchOS 3, tvOS 10, *) {  // @exempt(from: tests)
+            directory = temporaryDirectory
+          } else {  // @exempt(from: tests)
+            directory = URL(fileURLWithPath: NSTemporaryDirectory())
           }
         }
-      #endif
+      }
 
       directory.appendPathComponent(UUID().uuidString)
       defer { try? removeItem(at: directory) }
