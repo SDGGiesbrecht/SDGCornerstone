@@ -115,52 +115,56 @@
       let differences = stringLines.changes(from: specificationLines)
 
       #if os(Windows)
-        // #workaround(workspace version 0.32.0, This works around line endings being ignored. But including line endings currently causes a SegFault.)
-        return
-      #endif
 
-      var removals: Set<Int> = []
-      var inserts: [Int: String] = [:]
-      for difference in differences {
-        switch difference {
-        case .remove(let offset, _, _):
-          removals.insert(offset)
-        case .insert(let offset, let element, _):
-          inserts[offset] = element
-        }
-      }
+        // #workaround(Swift 5.2, The standard report triggers a SegFault.)
+        let report = "\(differences)\n\(string)"
 
-      var reportArray: [String] = []
-      var resultOffset = 0
-      var originalOffset = 0
-      var continuingKeptRange = false
-      while resultOffset ≠ stringLines.count ∨ originalOffset ≠ specificationLines.count {
-        defer {
-          resultOffset += 1
-          originalOffset += 1
-        }
+      #else
 
-        if originalOffset ∈ removals {
-          reportArray.append(
-            "− "
-              + specificationLines[
-                specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)
-              ]
-          )
-          resultOffset −= 1
-          continuingKeptRange = false
-        } else if let insert = inserts[resultOffset] {
-          reportArray.append("+ " + insert)
-          originalOffset −= 1
-          continuingKeptRange = false
-        } else {
-          if ¬continuingKeptRange {
-            reportArray.append("  [...]\n")
+        var removals: Set<Int> = []
+        var inserts: [Int: String] = [:]
+        for difference in differences {
+          switch difference {
+          case .remove(let offset, _, _):
+            removals.insert(offset)
+          case .insert(let offset, let element, _):
+            inserts[offset] = element
           }
-          continuingKeptRange = true
         }
-      }
-      let report = reportArray.joined()
+
+        var reportArray: [String] = []
+        var resultOffset = 0
+        var originalOffset = 0
+        var continuingKeptRange = false
+        while resultOffset ≠ stringLines.count ∨ originalOffset ≠ specificationLines.count {
+          defer {
+            resultOffset += 1
+            originalOffset += 1
+          }
+
+          if originalOffset ∈ removals {
+            reportArray.append(
+              "− "
+                + specificationLines[
+                  specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)
+                ]
+            )
+            resultOffset −= 1
+            continuingKeptRange = false
+          } else if let insert = inserts[resultOffset] {
+            reportArray.append("+ " + insert)
+            originalOffset −= 1
+            continuingKeptRange = false
+          } else {
+            if ¬continuingKeptRange {
+              reportArray.append("  [...]\n")
+            }
+            continuingKeptRange = true
+          }
+        }
+        let report = reportArray.joined()
+
+      #endif
 
       fail(
         String(
