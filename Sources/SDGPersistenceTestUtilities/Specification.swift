@@ -108,8 +108,10 @@
       }
 
       // These need to be random access collections.
-      let stringLines: [String] = string.lines.map({ String($0.line) + String($0.newline) })
-      let specificationLines: [String] = specificationString.lines.map({ String($0.line) + String($0.newline) })
+      let stringLines: [String] = string.lines
+        .map({ "\(String($0.line))\(String($0.newline))" })
+      let specificationLines: [String] = specificationString.lines
+        .map({ "\(String($0.line))\(String($0.newline))" })
       let differences = stringLines.changes(from: specificationLines)
 
       var removals: Set<Int> = []
