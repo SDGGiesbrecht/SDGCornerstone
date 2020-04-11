@@ -240,10 +240,17 @@ class APITests: TestCase {
     let failingSpecificationTests = {
       let previous = testAssertionMethod
       defer { testAssertionMethod = previous }
-      testAssertionMethod = { _, _, _, _ in }
+      testAssertionMethod = { _, describe, _, _ in
+        _ = describe()
+      }
 
       compare(
-        "Incorrect",
+        "Incorrect.",
+        against: overwrittenSpecification,
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      compare(
+        "Prependend.\nOverwritten.",
         against: overwrittenSpecification,
         overwriteSpecificationInsteadOfFailing: false
       )
