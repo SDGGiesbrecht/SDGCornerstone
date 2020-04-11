@@ -48,14 +48,14 @@ public func testCustomStringConvertibleConformance<T, L>(
   var report = ""
   for localization in localizations.allCases {
     if let icon = localization.icon {
-      print(icon, to: &report)
+      print(icon, terminator: "\n", to: &report)
     } else {
-      print(localization.code, to: &report)
+      print(localization.code, terminator: "\n", to: &report)
     }
     LocalizationSetting(orderOfPrecedence: [localization.code]).do {
-      print(String(describing: instance), to: &report)
+      print(String(describing: instance), terminator: "\n", to: &report)
     }
-    print("", to: &report)
+    print("", terminator: "\n", to: &report)
   }
 
   // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
