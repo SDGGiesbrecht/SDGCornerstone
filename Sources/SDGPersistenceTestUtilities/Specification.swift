@@ -103,6 +103,8 @@
 
       if overwriteSpecificationInsteadOfFailing {
         do {
+          #warning("???")
+          print("Here!")
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
         } catch {
           fail("\(error)", file: file, line: line)
