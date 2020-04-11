@@ -85,6 +85,15 @@
   ) {
     autoreleasepool {
 
+      if overwriteSpecificationInsteadOfFailing {
+        do {
+          try StrictString(string).save(to: specification)  // Enforce a normalized specification.
+        } catch {
+          fail("\(error)", file: file, line: line)
+        }
+        return
+      }
+
       guard var specificationString = try? String(from: specification) else {
         do {
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
@@ -99,17 +108,6 @@
       #endif
       if string == specificationString {
         return  // Passing
-      }
-
-      if overwriteSpecificationInsteadOfFailing {
-        do {
-          #warning("???")
-          print("Here!")
-          try StrictString(string).save(to: specification)  // Enforce a normalized specification.
-        } catch {
-          fail("\(error)", file: file, line: line)
-        }
-        return
       }
 
       // These need to be random access collections.
