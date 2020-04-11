@@ -100,7 +100,6 @@
       if string == specificationString {
         return  // Passing
       }
-      // @exempt(from: tests) Not testable (would require failing a test).
 
       if overwriteSpecificationInsteadOfFailing {
         do {
