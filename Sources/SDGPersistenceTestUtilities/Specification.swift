@@ -85,7 +85,7 @@
   ) {
     autoreleasepool {
 
-      guard let specificationString = try? String(from: specification) else {
+      guard var specificationString = try? String(from: specification) else {
         do {
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
         } catch {
@@ -93,6 +93,10 @@
         }
         return
       }
+      #if os(Windows)
+        // On Windows, Git may have butchered the newlines during checkout.
+        specificationString.scalars.replaceMatches(for: "\r\n".scalars, with: "\n".scalars)
+      #endif
       if string == specificationString {
         return  // Passing
       }
