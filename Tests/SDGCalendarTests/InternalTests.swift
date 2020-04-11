@@ -60,6 +60,8 @@ class InternalTests: TestCase {
         print(month._σεΕλληνικά(πτώση), terminator: "\n", to: &list)
       }
     }
+    #warning("Debugging.")
+    print([list])
     compare(
       list,
       against: testSpecificationDirectory().appendingPathComponent("Ελληνικά.txt"),
