@@ -85,19 +85,6 @@
   ) {
     autoreleasepool {
 
-      guard let specificationString = try? String(from: specification) else {
-        do {
-          try StrictString(string).save(to: specification)  // Enforce a normalized specification.
-        } catch {
-          fail("\(error)", file: file, line: line)
-        }
-        return
-      }
-      if string == specificationString {
-        return  // Passing
-      }
-      // @exempt(from: tests) Not testable (would require failing a test).
-
       if overwriteSpecificationInsteadOfFailing {
         do {
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
@@ -107,60 +94,80 @@
         return
       }
 
+      guard var specificationString = try? String(from: specification) else {
+        do {
+          try StrictString(string).save(to: specification)  // Enforce a normalized specification.
+        } catch {
+          fail("\(error)", file: file, line: line)
+        }
+        return
+      }
+      #if os(Windows)
+        // On Windows, Git may have butchered the newlines during checkout.
+        specificationString.scalars.replaceMatches(for: "\r\n".scalars, with: "\n".scalars)
+      #endif
+      if string == specificationString {
+        return  // Passing
+      }
+
       // These need to be random access collections.
-      let stringLines: [String] = string.lines.map({ String($0.line) })
-      let specificationLines: [String] = specificationString.lines.map({ String($0.line) })
+      let stringLines: [String] = string.lines
+        .map({ String($0.line) + String($0.newline) })
+      let specificationLines: [String] = specificationString.lines
+        .map({ String($0.line) + String($0.newline) })
       let differences = stringLines.changes(from: specificationLines)
 
       #if os(Windows)
-        // #workaround(workspace version 0.32.0, This works around line endings being ignored. But including line endings currently causes a SegFault.)
-        if differences.isEmpty {
-          return  // Passing
-        }
-      #endif
 
-      var removals: Set<Int> = []
-      var inserts: [Int: String] = [:]
-      for difference in differences {
-        switch difference {
-        case .remove(let offset, _, _):
-          removals.insert(offset)
-        case .insert(let offset, let element, _):
-          inserts[offset] = element
-        }
-      }
+        // #workaround(Swift 5.2, The standard report triggers a SegFault.)
+        let report = "\(differences)"
 
-      var reportArray: [String] = []
-      var resultOffset = 0
-      var originalOffset = 0
-      var continuingKeptRange = false
-      while resultOffset ≠ stringLines.count ∨ originalOffset ≠ specificationLines.count {
-        defer {
-          resultOffset += 1
-          originalOffset += 1
-        }
+      #else
 
-        if originalOffset ∈ removals {
-          reportArray.append(
-            "− "
-              + specificationLines[
-                specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)
-              ]
-          )
-          resultOffset −= 1
-          continuingKeptRange = false
-        } else if let insert = inserts[resultOffset] {
-          reportArray.append("+ " + insert)
-          originalOffset −= 1
-          continuingKeptRange = false
-        } else {
-          if ¬continuingKeptRange {
-            reportArray.append("  [...]")
+        var removals: Set<Int> = []
+        var inserts: [Int: String] = [:]
+        for difference in differences {
+          switch difference {
+          case .remove(let offset, _, _):
+            removals.insert(offset)
+          case .insert(let offset, let element, _):
+            inserts[offset] = element
           }
-          continuingKeptRange = true
         }
-      }
-      let report = reportArray.joined(separator: "\n")
+
+        var reportArray: [String] = []
+        var resultOffset = 0
+        var originalOffset = 0
+        var continuingKeptRange = false
+        while resultOffset ≠ stringLines.count ∨ originalOffset ≠ specificationLines.count {
+          defer {
+            resultOffset += 1
+            originalOffset += 1
+          }
+
+          if originalOffset ∈ removals {
+            reportArray.append(
+              "− "
+                + specificationLines[
+                  specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)
+                ]
+            )
+            resultOffset −= 1
+            continuingKeptRange = false
+          } else if let insert = inserts[resultOffset] {
+            reportArray.append("+ " + insert)
+            originalOffset −= 1
+            continuingKeptRange = false
+          } else {
+            if ¬continuingKeptRange {
+              reportArray.append("  [...]\n")
+            }
+            continuingKeptRange = true
+          }
+        }
+        let report = reportArray.joined()
+
+      #endif
 
       fail(
         String(

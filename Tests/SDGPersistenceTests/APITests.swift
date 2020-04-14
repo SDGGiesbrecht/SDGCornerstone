@@ -25,6 +25,7 @@ import SDGCornerstoneLocalizations
 
 import XCTest
 
+import SDGTesting
 import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
@@ -229,11 +230,32 @@ class APITests: TestCase {
     compare("New!", against: new, overwriteSpecificationInsteadOfFailing: false)
     try? FileManager.default.removeItem(at: new)
 
+    let overwrittenSpecification = specifications.appendingPathComponent("Overwrite.txt")
     compare(
       "Overwritten.",
-      against: specifications.appendingPathComponent("Overwrite.txt"),
+      against: overwrittenSpecification,
       overwriteSpecificationInsteadOfFailing: true
     )
+
+    let failingSpecificationTests = {
+      let previous = testAssertionMethod
+      defer { testAssertionMethod = previous }
+      testAssertionMethod = { _, describe, _, _ in
+        _ = describe()
+      }
+
+      compare(
+        "Incorrect.",
+        against: overwrittenSpecification,
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      compare(
+        "Prependend.\nOverwritten.",
+        against: overwrittenSpecification,
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    }
+    failingSpecificationTests()
   }
 
   func testURL() {
