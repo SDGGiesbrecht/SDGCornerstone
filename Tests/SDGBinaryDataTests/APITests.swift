@@ -37,6 +37,7 @@ class APITests: TestCase {
         exclusiveOr: Data([0b1000_0100])
       )
 
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       let data = Data([UInt8.max])
       XCTAssertEqual(data.binary.count, 8)
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
@@ -45,7 +46,6 @@ class APITests: TestCase {
       toReverse.binary.reverse()
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
 
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       let alternating = Data([0b01010101, 0b01010101])
       let sorted = Data([0b00000000, 0b11111111])
 
