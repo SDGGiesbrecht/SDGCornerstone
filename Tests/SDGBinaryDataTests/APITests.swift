@@ -37,11 +37,11 @@ class APITests: TestCase {
         exclusiveOr: Data([0b1000_0100])
       )
 
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       let data = Data([UInt8.max])
       XCTAssertEqual(data.binary.count, 8)
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
 
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       var toReverse = Data([0b11110000, 0b00000000])
       toReverse.binary.reverse()
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
