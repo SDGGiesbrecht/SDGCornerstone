@@ -14,43 +14,20 @@
 
 import SDGMathematics
 
-// #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
-#if os(Android) || os(WASI)
-  // #workaround(workspace version 0.32.0, Compiler crashes on generic version.)
+extension Collection where Element: StringFamily {
 
-  extension Collection where Element == StrictString {
-
-    // #documentation(Array<StringFamily>.joined(separator:))
-    /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
-    ///
-    /// - Parameters:
-    ///     - separator: A sequence to insert between each of this sequence’s elements.
-    @inlinable public func joined(separator: Element = "") -> Element {
-      guard var result = self.first else {
-        return ""
-      }
-      for line in self.dropFirst() {
-        result += separator + line
-      }
-      return result
+  // @documentation(Array<StringFamily>.joined(separator:))
+  /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
+  ///
+  /// - Parameters:
+  ///     - separator: A sequence to insert between each of this sequence’s elements.
+  @inlinable public func joined(separator: Element = "") -> Element {
+    guard var result = self.first else {
+      return ""
     }
-  }
-#else
-  extension Collection where Element: StringFamily {
-
-    // @documentation(Array<StringFamily>.joined(separator:))
-    /// Returns the concatenated elements of this sequence of sequences, inserting the given separator between each element.
-    ///
-    /// - Parameters:
-    ///     - separator: A sequence to insert between each of this sequence’s elements.
-    @inlinable public func joined(separator: Element = "") -> Element {
-      guard var result = self.first else {
-        return ""
-      }
-      for line in self.dropFirst() {
-        result += separator + line
-      }
-      return result
+    for line in self.dropFirst() {
+      result += separator + line
     }
+    return result
   }
-#endif
+}
