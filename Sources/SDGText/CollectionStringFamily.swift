@@ -14,8 +14,7 @@
 
 import SDGMathematics
 
-// #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
-#if os(Android) || os(WASI)
+#if os(WASI)
   // #workaround(workspace version 0.32.0, Compiler crashes on generic version.)
 
   extension Collection where Element == StrictString {
