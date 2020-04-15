@@ -38,8 +38,8 @@ class APITests: TestCase {
       )
 
       let data = Data([UInt8.max])
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       XCTAssertEqual(data.binary.count, 8)
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
     #endif
 
