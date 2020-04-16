@@ -44,8 +44,8 @@ class APITests: TestCase {
     #endif
 
       var toReverse = Data([0b11110000, 0b00000000])
-      toReverse.binary.reverse()
     #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+      toReverse.binary.reverse()
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
     #endif
 
