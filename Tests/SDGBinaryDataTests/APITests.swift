@@ -58,7 +58,9 @@ class APITests: TestCase {
       XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data([0b01010101, 0b10101010]))
 
       var forDescription = Data([0, 0])
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       forDescription.binary[11] = true
+    #endif
     #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
