@@ -59,12 +59,14 @@ class APITests: TestCase {
 
       var forDescription = Data([0, 0])
       forDescription.binary[11] = true
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
         localizations: InterfaceLocalization.self,
         uniqueTestName: "10th",
         overwriteSpecificationInsteadOfFailing: false
       )
+    #endif
   }
 
   func testDataStream() {
