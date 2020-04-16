@@ -49,8 +49,10 @@ class APITests: TestCase {
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
     #endif
 
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       let alternating = Data([0b01010101, 0b01010101])
       let sorted = Data([0b00000000, 0b11111111])
+    #endif
 
     #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       XCTAssertEqual(alternating.bitwiseNot(), Data([0b10101010, 0b10101010]))
