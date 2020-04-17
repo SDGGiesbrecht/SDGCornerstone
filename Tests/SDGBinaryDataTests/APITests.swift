@@ -83,13 +83,13 @@ class APITests: TestCase {
       inputStream.append(unit: backwards)
 
       var results: [Data] = []
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       while ¬inputStream.buffer.isEmpty {
         let transfer = inputStream.buffer.removeFirst()
         outputStream.buffer.append(transfer)
 
         results.append(contentsOf: outputStream.extractCompleteUnits())
       }
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       XCTAssertEqual(results, [forwards, backwards])
     #endif
   }
