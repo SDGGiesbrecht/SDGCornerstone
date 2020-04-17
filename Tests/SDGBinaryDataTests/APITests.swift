@@ -82,6 +82,7 @@ class APITests: TestCase {
       inputStream.append(unit: forwards)
       inputStream.append(unit: backwards)
 
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       var results: [Data] = []
       while ¬inputStream.buffer.isEmpty {
         let transfer = inputStream.buffer.removeFirst()
@@ -90,6 +91,7 @@ class APITests: TestCase {
         results.append(contentsOf: outputStream.extractCompleteUnits())
       }
       XCTAssertEqual(results, [forwards, backwards])
+    #endif
   }
 
   func testUInt() {
