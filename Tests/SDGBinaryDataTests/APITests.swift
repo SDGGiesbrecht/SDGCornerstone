@@ -87,11 +87,11 @@ class APITests: TestCase {
       let transfer = inputStream.buffer.removeFirst()
       outputStream.buffer.append(transfer)
 
-      #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
-      results.append(contentsOf: outputStream.extractCompleteUnits())
+      #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+        results.append(contentsOf: outputStream.extractCompleteUnits())
       #endif
     }
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       XCTAssertEqual(results, [forwards, backwards])
     #endif
   }
