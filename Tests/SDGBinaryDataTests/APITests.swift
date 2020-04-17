@@ -73,8 +73,8 @@ class APITests: TestCase {
     var inputStream = DataStream()
     var outputStream = DataStream()
 
+    var forwards = Data()
     #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
-      var forwards = Data()
       for byte in (0x00 as Data.Element)...(0xFF as Data.Element) {
         forwards.append(byte)
       }
