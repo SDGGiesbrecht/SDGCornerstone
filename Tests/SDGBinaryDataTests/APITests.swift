@@ -82,8 +82,8 @@ class APITests: TestCase {
       inputStream.append(unit: forwards)
       inputStream.append(unit: backwards)
 
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       var results: [Data] = []
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       while ¬inputStream.buffer.isEmpty {
         let transfer = inputStream.buffer.removeFirst()
         outputStream.buffer.append(transfer)
