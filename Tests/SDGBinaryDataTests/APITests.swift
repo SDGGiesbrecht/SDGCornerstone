@@ -74,7 +74,6 @@ class APITests: TestCase {
     var outputStream = DataStream()
 
     var forwards = Data()
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       for byte in (0x00 as Data.Element)...(0xFF as Data.Element) {
         forwards.append(byte)
       }
@@ -91,7 +90,6 @@ class APITests: TestCase {
         results.append(contentsOf: outputStream.extractCompleteUnits())
       }
       XCTAssertEqual(results, [forwards, backwards])
-    #endif
   }
 
   func testUInt() {
