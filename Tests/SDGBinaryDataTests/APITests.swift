@@ -74,22 +74,24 @@ class APITests: TestCase {
     var outputStream = DataStream()
 
     var forwards = Data()
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
-      for byte in (0x00 as Data.Element)...(0xFF as Data.Element) {
-        forwards.append(byte)
-      }
-      let backwards = Data(forwards.reversed())
+    for byte in (0x00 as Data.Element)...(0xFF as Data.Element) {
+      forwards.append(byte)
+    }
+    let backwards = Data(forwards.reversed())
 
-      inputStream.append(unit: forwards)
-      inputStream.append(unit: backwards)
+    inputStream.append(unit: forwards)
+    inputStream.append(unit: backwards)
 
-      var results: [Data] = []
-      while ¬inputStream.buffer.isEmpty {
-        let transfer = inputStream.buffer.removeFirst()
-        outputStream.buffer.append(transfer)
+    var results: [Data] = []
+    while ¬inputStream.buffer.isEmpty {
+      let transfer = inputStream.buffer.removeFirst()
+      outputStream.buffer.append(transfer)
 
+      #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
         results.append(contentsOf: outputStream.extractCompleteUnits())
-      }
+      #endif
+    }
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       XCTAssertEqual(results, [forwards, backwards])
     #endif
   }
