@@ -37,6 +37,7 @@ class APITests: TestCase {
 
       XCTAssertEqual(GregorianDay(ordinal: 8), 8)
 
+    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
       XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
       XCTAssertEqual(GregorianMinute.duration, (1 as FloatMax).minutes)
       XCTAssertEqual(GregorianSecond.duration, (1 as FloatMax).seconds)
@@ -52,6 +53,7 @@ class APITests: TestCase {
       var day = GregorianWeekday.monday
       day.decrement()
       XCTAssertEqual(day, .sunday)
+    #endif
   }
 
   func testCalendarDate() throws {
