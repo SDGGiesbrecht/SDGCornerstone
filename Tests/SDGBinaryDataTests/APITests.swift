@@ -97,7 +97,8 @@ class APITests: TestCase {
   }
 
   func testUInt() {
-      var forDescription: UInt8 = 0
+    var forDescription: UInt8 = 0
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       forDescription.binary[0] = true
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
@@ -105,5 +106,6 @@ class APITests: TestCase {
         uniqueTestName: "1st",
         overwriteSpecificationInsteadOfFailing: false
       )
+    #endif
   }
 }
