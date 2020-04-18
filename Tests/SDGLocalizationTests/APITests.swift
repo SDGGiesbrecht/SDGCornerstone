@@ -29,7 +29,7 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testAngle() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       testCustomStringConvertibleConformance(
         of: 90°,
         localizations: FormatLocalization.self,
@@ -88,7 +88,7 @@ class APITests: TestCase {
     static let fallbackLocalization: LocalizationExample = .englishUnitedKingdom
   }
   func testLocalization() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       XCTAssertEqual(LocalizationExample(exactly: "fr")?.code, "fr")
       XCTAssertEqual(LocalizationExample(exactly: "en\u{2D}GB"), .englishUnitedKingdom)
       XCTAssertNil(LocalizationExample(exactly: "en\u{2D}"))
@@ -134,7 +134,7 @@ class APITests: TestCase {
   }
 
   func testLocalizationData() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       for localization in LocalizationData.list {
         _ = localization.code
         _ = localization.icon
@@ -166,7 +166,7 @@ class APITests: TestCase {
   }
 
   func testLocalizationSetting() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       let english = LocalizationSetting(orderOfPrecedence: ["en", "fr"])
       XCTAssertEqual(english.resolved() as LocalizationExample, .englishUnitedKingdom)
 
@@ -234,7 +234,7 @@ class APITests: TestCase {
   }
 
   func testRange() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       XCTAssertEqual(((0..<1) as Range).inInequalityNotation({ $0.inDigits() }), "0 ≤ x < 1")
       XCTAssertEqual(
         ((0..<1) as CountableRange).inInequalityNotation({ $0.inDigits() }),
@@ -250,7 +250,7 @@ class APITests: TestCase {
   }
 
   func testRationalArithmetic() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       XCTAssertEqual(Double(binary: "10"), 2)
       XCTAssertEqual(Double(binary: "0.000 1"), 1 ÷ 16)
 
@@ -343,7 +343,7 @@ class APITests: TestCase {
   }
 
   func testStateData() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       for state in StateData.list {
         _ = state.code
         _ = state.flag
@@ -362,7 +362,7 @@ class APITests: TestCase {
   }
 
   func testUserFacingDynamicText() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       let text = UserFacingDynamic<StrictString, LocalizationExample, (Int, Int)>(
         { localization, numbers in
 
@@ -400,7 +400,7 @@ class APITests: TestCase {
   }
 
   func testWholeArithmetic() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       XCTAssertEqual("1" as Int, 1)
 
       XCTAssertEqual(Int(hexadecimal: "7F"), 127)

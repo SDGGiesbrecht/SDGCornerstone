@@ -25,7 +25,7 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testVersion() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       testCustomStringConvertibleConformance(
         of: Version(1, 2, 3),
         localizations: InterfaceLocalization.self,

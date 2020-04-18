@@ -130,7 +130,7 @@ class APITests: TestCase {
   }
 
   func testPerformanceTest() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       limit("Performance", to: 1) {}
     #endif
   }
