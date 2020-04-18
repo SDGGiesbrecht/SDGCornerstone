@@ -730,7 +730,7 @@ let package = Package(
   ]
 )
 
-// #workaround(Swift 5.2.0, The generated Xcode project cannot import XCTest on iOS devices.)
+// #workaround(Swift 5.2.2, The generated Xcode project cannot import XCTest on iOS devices.)
 import Foundation
 let path = ProcessInfo.processInfo.environment["PATH"] ?? ""
 let firstColon = path.range(of: ":")?.lowerBound ?? path.endIndex
