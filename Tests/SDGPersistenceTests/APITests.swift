@@ -138,7 +138,7 @@ class APITests: TestCase {
     }
   }
   func testLosslessStringConvertible() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       testCodableConformance(
         of: LosslessStirngConvertibleExample("Example"),
         uniqueTestName: "Example"

@@ -28,7 +28,7 @@ import SDGXCTestUtilities
 class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
-    #if !os(Windows)  // #workaround(workspace version 0.32.0, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
       // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
       #if !os(Android)
         LocalizationSetting(orderOfPrecedence: ["en"]).do {
