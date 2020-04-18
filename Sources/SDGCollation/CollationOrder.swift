@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -24,7 +24,7 @@ import SDGCollections
 import SDGText
 import SDGPersistence
 
-// #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   extension CollationOrder: FileConvertible {}
 #endif
@@ -33,7 +33,7 @@ public struct CollationOrder: Decodable, Encodable {
 
   // MARK: - Static Properties
 
-  // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     /// The root collation order.
     public static let root: CollationOrder = {
@@ -320,7 +320,7 @@ public struct CollationOrder: Decodable, Encodable {
     try container.encode(rules)
   }
 
-  // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     // MARK: - FileConvertible
 

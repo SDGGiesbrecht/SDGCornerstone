@@ -742,7 +742,7 @@ if firstEntry.hasSuffix("/Contents/Developer/usr/bin") {
   sdgXCTestUtilities.swiftSettings = settings
 }
 
-// #workaround(Swift 5.2.0, The generated Xcode project cannot handle tools when building for iOS.)
+// #workaround(Swift 5.2.2, The generated Xcode project cannot handle tools when building for iOS.)
 func disableDevelopmentTools() {
   package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
 }
@@ -751,12 +751,12 @@ func disableDevelopmentTools() {
 #endif
 
 func adjustForWindows() {
-  // #workaround(workspace version 0.32.1, CMake cannot handle Unicode.)
+  // #workaround(Swift 5.2.2, CMake cannot handle Unicode.)
   disableDevelopmentTools()
 
   for target in package.targets {
     target.dependencies.removeAll(where: { dependency in
-      // #workaround(workspace version 0.32.1, Windows does not support C.)
+      // #workaround(Swift 5.2.2, Windows does not support C.)
       return "\(dependency)".contains("RealModule")
     })
   }
@@ -770,7 +770,7 @@ if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true"
 
 if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
   for target in package.targets {
-    // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+    // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
     target.exclude.append("Resources.swift")
   }
 }

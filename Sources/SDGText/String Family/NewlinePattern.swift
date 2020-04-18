@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import struct Foundation.CharacterSet
 #endif
@@ -27,7 +27,7 @@ public struct NewlinePattern: Pattern {
 
   private static let carriageReturn: Unicode.Scalar = "\u{D}"
   private static let lineFeed: Unicode.Scalar = "\u{A}"
-  // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
   #if os(WASI)
     @usableFromInline internal static let newlineCharacters: Set<Unicode.Scalar> = [
       "\u{A}",

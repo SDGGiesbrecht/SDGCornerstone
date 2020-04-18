@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -39,7 +39,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Static Functions
 
-  // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     /// Returns the current date on the Hebrew calendar.
     public static func hebrewNow() -> CalendarDate {
@@ -169,7 +169,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     )
   }
 
-  // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     /// Creates a calendar date using an instance of `Date`.
     ///
@@ -281,7 +281,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Time Zones
 
-  // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     /// Returns date properties adjusted to the specified time zone.
     ///
@@ -318,7 +318,7 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
       GregorianDate.identifier: GregorianDate.self,
       RelativeDate.identifier: RelativeDate.self,
     ]
-    // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+    // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
     #if !os(WASI)
       definitions[FoundationDate.identifier] = FoundationDate.self
     #endif
