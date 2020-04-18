@@ -14,7 +14,7 @@
 
 #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-  // #workaround(Swift 5.2, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     import SDGText
     import SDGLocalization
