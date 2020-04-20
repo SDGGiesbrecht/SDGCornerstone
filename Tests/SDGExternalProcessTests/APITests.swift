@@ -39,7 +39,7 @@ class APITests: TestCase {
           ),
           "Failed to reject non‐executables."
         )
-        // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+        // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
         #if !os(Android)
           XCTAssertEqual(
             ExternalProcess(
@@ -88,7 +88,7 @@ class APITests: TestCase {
   func testShell() throws {
     #if !(os(iOS) || os(watchOS) || os(tvOS))
       try forAllLegacyModes {
-        // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+        // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
         #if !os(Android)
           _ = try Shell.default.run(command: ["ls"]).get()
         #endif
@@ -98,7 +98,7 @@ class APITests: TestCase {
         #else
           printWorkingDirectory = "pwd"
         #endif
-        // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+        // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
         #if !os(Android)
           _ = try Shell.default.run(
             command: [printWorkingDirectory],
@@ -108,13 +108,13 @@ class APITests: TestCase {
         #endif
 
         let message = "Hello, world!"
-        // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+        // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
         #if !os(Android)
           XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
         #endif
 
         let nonexistentCommand = "no‐such‐command"
-        // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+        // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
         #if !os(Android)
           let result = Shell.default.run(command: [nonexistentCommand])
           switch result {
@@ -125,7 +125,7 @@ class APITests: TestCase {
             case .foundationError(let error):
               XCTFail(error.localizedDescription)
             case .processError(code: _, let output):
-              // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+              // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
               #if !os(Android)
                 XCTAssert(
                   output.contains("not found") ∨ output.contains("not recognized"),
@@ -138,7 +138,7 @@ class APITests: TestCase {
 
         #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
           let metacharacters = "(...)"
-          // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+          // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
           #if !os(Android)
             XCTAssertEqual(
               try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
@@ -154,14 +154,14 @@ class APITests: TestCase {
         #endif
 
         _ = "\(Shell.default)"
-        // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+        // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
         #if !os(Android)
           switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
           case .failure(let error):
             // Expected.
             _ = error.localizedDescription
           case .success(let output):
-            // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+            // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
             #if !os(Android)
               XCTFail("Shell should have thrown an error. Output received:\n\(output)")
             #endif
