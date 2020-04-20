@@ -44,7 +44,3 @@ configuration.documentation.api.ignoredDependencies = [
   "Foundation",
   "XCTest",
 ]
-
-// #workaround(workspace version 0.32.1, SwiftFormat gets these wrong.)
-configuration.proofreading.swiftFormatConfiguration?
-  .rules["AmbiguousTrailingClosureOverload"] = false

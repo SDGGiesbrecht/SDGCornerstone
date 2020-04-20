@@ -28,7 +28,7 @@ class RegressionTests: TestCase {
         let longCommand = [
           "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy",
         ]
-        // #workaround(workspace version 0.32.0, Process/Pipe/FileHandle have wires crossed with standard output.)
+        // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
         #if !os(Android)
           let output = try Shell.default.run(command: longCommand).get()
           XCTAssert(output.contains("0.8.3"))
