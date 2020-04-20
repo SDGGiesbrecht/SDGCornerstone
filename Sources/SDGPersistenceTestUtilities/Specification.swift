@@ -119,7 +119,7 @@
 
       #if os(Windows)
 
-        // #workaround(Swift 5.2, The standard report triggers a SegFault.)
+        // #workaround(Swift 5.2.2, The standard report triggers a SegFault.)
         let report = "\(differences)"
 
       #else
