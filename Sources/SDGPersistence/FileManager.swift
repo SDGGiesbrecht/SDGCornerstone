@@ -146,7 +146,7 @@
     ) rethrows -> Result {
       var directory: URL
 
-      #if os(Android)
+      #if false && os(Android)
         // #workaround(Swift 5.2.1, .itemReplacementDirectory leads to illegal instruction.)
         directory = temporaryDirectory
       #else
