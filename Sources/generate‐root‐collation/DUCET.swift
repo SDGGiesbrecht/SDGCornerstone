@@ -34,7 +34,7 @@ extension CollationOrder {
 
   internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
-  // #workaround(Swift 5.2.1, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     static func ducet() throws -> CollationOrder {
 
