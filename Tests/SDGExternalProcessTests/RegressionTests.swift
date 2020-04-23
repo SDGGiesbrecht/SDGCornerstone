@@ -41,14 +41,17 @@ class RegressionTests: TestCase {
   func testSearchFindsGit() {
     // Untracked
 
-    XCTAssertNotNil(
-      ExternalProcess(
-        searching: [],
-        commandName: "git",
-        validate: { process in
-          return (try? process.run(["\u{2D}\u{2D}version"]).get()) ≠ nil
-        }
+    // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
+    #if !os(Android)
+      XCTAssertNotNil(
+        ExternalProcess(
+          searching: [],
+          commandName: "git",
+          validate: { process in
+            return (try? process.run(["\u{2D}\u{2D}version"]).get()) ≠ nil
+          }
+        )
       )
-    )
+    #endif
   }
 }
