@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
 import SDGExternalProcess
 
 import XCTest
@@ -34,6 +35,25 @@ class RegressionTests: TestCase {
           XCTAssert(output.contains("0.8.3"))
         #endif
       }
+    #endif
+  }
+
+  func testSearchFindsGit() {
+    // Untracked
+
+    #if !(os(iOS) || os(watchOS) || os(tvOS))
+      // #workaround(Swift 5.2.2, Process/Pipe/FileHandle have wires crossed with standard output.)
+      #if !os(Android)
+        XCTAssertNotNil(
+          ExternalProcess(
+            searching: [],
+            commandName: "git",
+            validate: { process in
+              return (try? process.run(["\u{2D}\u{2D}version"]).get()) ≠ nil
+            }
+          )
+        )
+      #endif
     #endif
   }
 }

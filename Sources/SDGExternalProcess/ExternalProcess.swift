@@ -81,12 +81,21 @@
           searchCommand = "which"
         #endif
         if let name = commandName,
-          let path = try? Shell.default.run(command: [searchCommand, name]).get()
+          let searchResult = try? Shell.default.run(command: [searchCommand, name]).get()
         {
-          let location = URL(fileURLWithPath: path)
-          if checkLocation(location, validate: validate) {
-            self.init(at: location)
-            return
+          let locations: [String]
+          #if os(Windows)
+            // “where” reports several paths; newlines are invalid
+            locations = searchResult.lines.map({ String($0.line) })
+          #else
+            // “which” reports a single path; newlines are valid
+            locations = [searchResult]
+          #endif
+          for location in locations.lazy.map({ URL(fileURLWithPath: $0) }) {
+            if checkLocation(location, validate: validate) {
+              self.init(at: location)
+              return
+            }
           }
         }
 
