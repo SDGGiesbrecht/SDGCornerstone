@@ -18,7 +18,7 @@
 
 /// Executes the closure, purging any autoreleased objects from memory afterward.
 ///
-/// On platforms lacking Objective C, this method simply executes the closure.
+/// On platforms lacking Objective C, this function simply executes the closure.
 ///
 /// - Parameters:
 ///     - closure: A closure to invoke.
