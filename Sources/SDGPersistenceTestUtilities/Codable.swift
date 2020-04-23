@@ -71,7 +71,7 @@ public func testCodableConformance<T>(
         includingPropertiesForKeys: nil,
         options: []
       ) where specificationURL.pathExtension == "txt" {
-        try autoreleasepool {
+        try purgingAutoreleased {
 
           let specification = try String(from: specificationURL)
           specifications.insert(specification)

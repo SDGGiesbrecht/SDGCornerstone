@@ -83,7 +83,7 @@
     file: StaticString = #file,
     line: UInt = #line
   ) {
-    autoreleasepool {
+    purgingAutoreleased {
 
       if overwriteSpecificationInsteadOfFailing {
         do {

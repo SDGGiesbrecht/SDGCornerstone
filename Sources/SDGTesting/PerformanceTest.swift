@@ -47,7 +47,7 @@
 
     var results: [TimeInterval] = []
     for _ in 1...iterations {
-      autoreleasepool {
+      purgingAutoreleased {
         let start = Date.timeIntervalSinceReferenceDate
         test()
         let end = Date.timeIntervalSinceReferenceDate
