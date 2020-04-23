@@ -36,4 +36,18 @@ class RegressionTests: TestCase {
       }
     #endif
   }
+
+  func testSearchFindsGit() {
+    // Untracked
+
+    XCTAssertNotNil(
+      ExternalProcess(
+        searching: [],
+        commandName: "git",
+        validate: { process in
+          return (try? process.run(["\u{2D}\u{2D}version"]).get()) ≠ nil
+        }
+      )
+    )
+  }
 }

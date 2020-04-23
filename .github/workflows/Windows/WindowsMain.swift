@@ -258,6 +258,7 @@ extension SDGExternalProcessTests.RegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testDelayedShellOutput", testDelayedShellOutput),
+      ("testSearchFindsGit", testSearchFindsGit),
     ])
   ]
 }
