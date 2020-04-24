@@ -48,23 +48,35 @@
 
     // MARK: - Initialization
 
-    #if canImport(AppKit)
-      // @documentation(Font.init(native:))
-      /// Creates a font with a native font.
+    #if canImport(SwiftUI)
+      // @documentation(Font.init(swiftUI:))
+      /// Creates a font by wrapping a SwiftUI font.
       ///
       /// - Parameters:
-      ///     - native: The native font.
-      public init(_ native: NSFont) {
-        self.native = native
+      ///     - swiftUI: The SwiftUI font.
+      @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
+      public init(_ swiftUI: SwiftUI.Font) {
+        self.definition = .swiftUI(swiftUI)
+      }
+    #endif
+
+    #if canImport(AppKit)
+      // @documentation(Font.init(cocoa:))
+      /// Creates a font by wrapping a Cocoa font.
+      ///
+      /// - Parameters:
+      ///     - cocoa: The Cocoa font.
+      public init(_ cocoa: NSFont) {
+        self.definition = .cocoa(cocoa)
       }
     #elseif canImport(UIKit)
-      // #documentation(Font.init(native:))
-      /// Creates a font with a native font.
+      // #documentation(Font.init(cocoa:))
+      /// Creates a font by wrapping a Cocoa font.
       ///
       /// - Parameters:
-      ///     - native: The native font.
-      public init(_ native: UIFont) {
-        self.native = native
+      ///     - cocoa: The Cocoa font.
+      public init(_ cocoa: UIFont) {
+        self.definition = .cocoa(cocoa)
       }
     #endif
 
