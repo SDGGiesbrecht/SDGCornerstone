@@ -106,13 +106,20 @@
       }
     }
 
+    #warning("Can these be converted to initializers on the respective type?")
+    #if canImport(SwiftUI)
+      // @documentation(Font.swiftUI())
+      /// The SwiftUI font.
+      public func swiftUI() -> SwiftUI.Font {
+      }
+    #endif
     #if canImport(AppKit)
-      // @documentation(Font.cocoa)
+      // @documentation(Font.cocoa())
       /// The Cocoa font.
       public func cocoa() -> NSFont {
       }
     #elseif canImport(UIKit)
-      // #documentation(Font.cocoa)
+      // #documentation(Font.cocoa())
       /// The Cocoa font.
       public func cocoa() -> UIFont {
       }
