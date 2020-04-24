@@ -26,6 +26,18 @@
 
     internal enum Definition {
 
+      #if canImport(SwiftUI)
+        @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
+        case swiftUI(SwiftUI.Font)
+      #endif
+
+      #if canImport(AppKit)
+        case appKit(NSFont)
+      #endif
+
+      #if canImport(UIKit)
+        case uiKit(UIFont)
+      #endif
     }
   }
 #endif
