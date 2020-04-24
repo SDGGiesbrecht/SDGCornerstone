@@ -56,7 +56,7 @@
         includingPropertiesForKeys: nil,
         options: []
       ) {
-        try autoreleasepool {
+        try purgingAutoreleased {
 
           let specification = try Data(from: specificationURL)
           specifications.insert(specification)

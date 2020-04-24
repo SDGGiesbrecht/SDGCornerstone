@@ -56,7 +56,7 @@
       driver = nil
 
       while weakDriver ≠ nil {
-        autoreleasepool {
+        purgingAutoreleased {
           run(until: Date(timeIntervalSinceNow: 1))
         }
       }

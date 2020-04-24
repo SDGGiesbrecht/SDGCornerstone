@@ -193,7 +193,7 @@
 
         var end = false
         while ¬end {
-          autoreleasepool {
+          purgingAutoreleased {
             guard let newData = read() else {
               end = true
               return
