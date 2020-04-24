@@ -70,6 +70,8 @@
 
     // MARK: - Properties
 
+    internal var definition: Definition
+
     /// The name of the font.
     ///
     /// This is a machine identifier; it is not for display.
@@ -105,13 +107,15 @@
     }
 
     #if canImport(AppKit)
-      // @documentation(Font.native)
-      /// The native font.
-      public var native: NSFont
+      // @documentation(Font.cocoa)
+      /// The Cocoa font.
+      public func cocoa() -> NSFont {
+      }
     #elseif canImport(UIKit)
-      // #documentation(Font.native)
-      /// The native font.
-      public var native: UIFont
+      // #documentation(Font.cocoa)
+      /// The Cocoa font.
+      public func cocoa() -> UIFont {
+      }
     #endif
 
     // MARK: - Variations

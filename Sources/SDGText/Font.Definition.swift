@@ -32,11 +32,9 @@
       #endif
 
       #if canImport(AppKit)
-        case appKit(NSFont)
-      #endif
-
-      #if canImport(UIKit)
-        case uiKit(UIFont)
+        case cocoa(NSFont)
+      #elseif canImport(UIKit)
+        case cocoa(UIFont)
       #endif
     }
   }
