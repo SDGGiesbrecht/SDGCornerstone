@@ -134,35 +134,13 @@ public struct Font {
     }
   }
 
-  #warning("Can these be converted to initializers on the respective type?")
-  #if canImport(SwiftUI) && !(os(iOS) && arch(arm))
-    /// The SwiftUI font.
-    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
-    public func swiftUI() -> SwiftUI.Font {
-      switch definition {
-      case .identifier(let name, let size):
-        return SwiftUI.Font.custom(name, size: CGFloat(size))
-      #if canImport(AppKit) || canImport(UIKit)
-        case .cocoa(let font):
-          return SwiftUI.Font(font)
-      #endif
-      }
-    }
-  #endif
-
   #if canImport(AppKit)
     // @documentation(Font.cocoa())
     /// The Cocoa font.
-    public func cocoa() -> NSFont {
+    public func cocoa() -> NSFont? {
       switch definition {
       case .identifier(let name, let size):
-        if let successful = NSFont(name: name, size: CGFloat(size)) {
-          return successful
-        } else {
-          var system = Font.system
-          system.size = size
-          return system.cocoa()
-        }
+        return NSFont(name: name, size: CGFloat(size))
       case .cocoa(let font):
         return font
       }
@@ -170,16 +148,10 @@ public struct Font {
   #elseif canImport(UIKit)
     // #documentation(Font.cocoa())
     /// The Cocoa font.
-    public func cocoa() -> UIFont {
+    public func cocoa() -> UIFont? {
       switch definition {
       case .identifier(let name, let size):
-        if let successful = UIFont(name: name, size: CGFloat(size)) {
-          return successful
-        } else {
-          var system = Font.system
-          system.size = size
-          return system.cocoa()
-        }
+        return UIFont(name: name, size: CGFloat(size))
       case .cocoa(let font):
         return font
       }
