@@ -17,7 +17,8 @@
 #endif
 #if canImport(AppKit)
   import AppKit
-#elseif canImport(UIKit)
+#endif
+#if canImport(UIKit)
   import UIKit
 #endif
 
@@ -133,30 +134,6 @@ public struct Font {
       }
     }
   }
-
-  #if canImport(AppKit)
-    // @documentation(Font.cocoa())
-    /// The Cocoa font.
-    public func cocoa() -> NSFont? {
-      switch definition {
-      case .identifier(let name, let size):
-        return NSFont(name: name, size: CGFloat(size))
-      case .cocoa(let font):
-        return font
-      }
-    }
-  #elseif canImport(UIKit)
-    // #documentation(Font.cocoa())
-    /// The Cocoa font.
-    public func cocoa() -> UIFont? {
-      switch definition {
-      case .identifier(let name, let size):
-        return UIFont(name: name, size: CGFloat(size))
-      case .cocoa(let font):
-        return font
-      }
-    }
-  #endif
 
   // MARK: - Variations
 
