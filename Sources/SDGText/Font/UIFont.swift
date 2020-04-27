@@ -21,7 +21,7 @@
     ///
     /// - Parameters:
     ///   - font: The font.
-    public static func from(_ font: Font) -> UIFont {
+    public static func from(_ font: Font) -> UIFont? {
       switch font.definition {
       case .identifier(let name, let size):
         return UIFont(name: name, size: CGFloat(size))

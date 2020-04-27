@@ -48,6 +48,10 @@ public struct Font {
 
   // MARK: - Initialization
 
+  private init(definition: Font.Definition) {
+    self.definition = definition
+  }
+
   /// Creates a font with a name and size.
   ///
   /// - Parameters:
@@ -120,18 +124,7 @@ public struct Font {
       }
     }
     set {
-      switch definition {
-      case .identifier(let name, _):
-        definition = .identifier(name: name, size: newValue)
-      #if canImport(AppKit) || canImport(UIKit)
-        case .cocoa(let font):
-          #if canImport(AppKit)
-            definition = .cocoa(NSFontManager.shared.convert(font, toSize: CGFloat(newValue)))
-          #elseif canImport(UIKit)
-            definition = .cocoa(font.withSize(CGFloat(newValue)))
-          #endif
-      #endif
-      }
+      self = resized(to: newValue)
     }
   }
 
@@ -142,8 +135,17 @@ public struct Font {
   /// - Parameters:
   ///     - size: The new point size.
   public func resized(to size: Double) -> Font {
-    var result = self
-    result.size = size
-    return result
+    switch definition {
+    case .identifier(let name, _):
+      return Font(definition: .identifier(name: name, size: size))
+    #if canImport(AppKit) || canImport(UIKit)
+      case .cocoa(let font):
+        #if canImport(AppKit)
+          return Font(definition: .cocoa(NSFontManager.shared.convert(font, toSize: CGFloat(size))))
+        #elseif canImport(UIKit)
+          return Font(definition: .cocoa(font.withSize(CGFloat(size))))
+        #endif
+    #endif
+    }
   }
 }
