@@ -36,12 +36,28 @@ class APITests: TestCase {
   }
 
   func testFont() {
+    _ = Font.system.size
+    var font = Font.system
+    font.fontName = "Some Font"
+    font.fontName = Font.system.fontName
+    font.size = 10
+
+    font = Font(fontName: "Some Font", size: 8)
+    XCTAssertEqual(font.fontName, "Some Font")
+    XCTAssertEqual(font.size, 8)
+
     #if canImport(AppKit) || canImport(UIKit)
-      _ = Font.system.size
-      var font = Font.system
-      font.fontName = "Some Font"
-      font.fontName = Font.system.fontName
-      font.size = 10
+      #if canImport(AppKit)
+        let cocoaFont = NSFont.systemFont(ofSize: 10)
+      #elseif canImport(UIKit)
+        let cocoaFont = UIFont.systemFont(ofSize: 10)
+      #endif
+      font = Font(cocoaFont)
+      #if canImport(AppKit)
+        XCTAssertEqual(NSFont.from(font), cocoaFont)
+      #elseif canImport(UIKit)
+        XCTAssertEqual(UIFont.from(font), cocoaFont)
+      #endif
     #endif
   }
 
