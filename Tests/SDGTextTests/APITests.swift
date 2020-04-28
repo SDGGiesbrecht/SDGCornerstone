@@ -13,6 +13,15 @@
  */
 
 import Foundation
+#if canImport(SwiftUI)
+  import SwiftUI
+#endif
+#if canImport(AppKit)
+  import AppKit
+#endif
+#if canImport(UIKit)
+  import UIKit
+#endif
 
 import SDGLogic
 import SDGMathematics
@@ -36,12 +45,40 @@ class APITests: TestCase {
   }
 
   func testFont() {
+    _ = Font.system.size
+    var font = Font.system
+    font.fontName = "Some Font"
+    font.fontName = Font.system.fontName
+    font.size = 10
+
+    font = Font(fontName: "Some Font", size: 8)
+    XCTAssertEqual(font.fontName, "Some Font")
+    XCTAssertEqual(font.size, 8)
+
     #if canImport(AppKit) || canImport(UIKit)
-      _ = Font.system.size
-      var font = Font.system
-      font.fontName = "Some Font"
-      font.fontName = Font.system.fontName
-      font.size = 10
+      #if canImport(AppKit)
+        _ = NSFont.from(font)
+      #elseif canImport(UIKit)
+        _ = UIFont.from(font)
+      #endif
+      #if canImport(AppKit)
+        let cocoaFont = NSFont.systemFont(ofSize: 10)
+      #elseif canImport(UIKit)
+        let cocoaFont = UIFont.systemFont(ofSize: 10)
+      #endif
+      font = Font(cocoaFont)
+      #if canImport(AppKit)
+        XCTAssertEqual(NSFont.from(font), cocoaFont)
+      #elseif canImport(UIKit)
+        XCTAssertEqual(UIFont.from(font), cocoaFont)
+      #endif
+    #endif
+    #if canImport(SwiftUI) && !(os(iOS) && arch(arm))
+      if #available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *) {
+        _ = SwiftUI.Font(font)
+        font = Font(fontName: "Some Font", size: 12)
+        _ = SwiftUI.Font(font)
+      }
     #endif
   }
 
