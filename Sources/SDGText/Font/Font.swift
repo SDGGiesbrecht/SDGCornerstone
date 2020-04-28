@@ -47,6 +47,8 @@ public struct Font {
       return Font(fontName: "Segoe UI", size: 9)
     #elseif os(WASI)
       return Font(fontName: "system\u{2D}ui", size: 16)
+    #elseif os(Linux)
+      return Font(fontName: "Ubuntu", size: 11)
     #elseif os(Android)
       return Font(fontName: "Roboto", size: 18)
     #endif
