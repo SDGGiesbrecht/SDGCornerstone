@@ -108,6 +108,7 @@ public final class Shared<Value>: TransparentWrapper {
     // MARK: - ObservableObject
 
     private var objectWillChangeStorage: Any?
+    /// A publisher that emits before the object has changed.
     @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     public var objectWillChange: ObservableObjectPublisher {
       return cached(in: &objectWillChangeStorage) {
