@@ -157,39 +157,46 @@ Simply add SDGCornerstone as a dependency in `Package.swift` and specify which o
 
 ```swift
 let package = Package(
-    name: "MyPackage",
-    dependencies: [
-        .package(url: "https://github.com/SDGGiesbrecht/SDGCornerstone", from: Version(5, 0, 0)),
-    ],
-    targets: [
-        .target(name: "MyTarget", dependencies: [
-            .productItem(name: "SDGControlFlow", package: "SDGCornerstone"),
-            .productItem(name: "SDGLogic", package: "SDGCornerstone"),
-            .productItem(name: "SDGLogicTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGMathematics", package: "SDGCornerstone"),
-            .productItem(name: "SDGMathematicsTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGCollections", package: "SDGCornerstone"),
-            .productItem(name: "SDGCollectionsTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGBinaryData", package: "SDGCornerstone"),
-            .productItem(name: "SDGText", package: "SDGCornerstone"),
-            .productItem(name: "SDGCollation", package: "SDGCornerstone"),
-            .productItem(name: "SDGPersistence", package: "SDGCornerstone"),
-            .productItem(name: "SDGPersistenceTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGRandomization", package: "SDGCornerstone"),
-            .productItem(name: "SDGRandomizationTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGLocalization", package: "SDGCornerstone"),
-            .productItem(name: "SDGLocalizationTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGGeometry", package: "SDGCornerstone"),
-            .productItem(name: "SDGGeometryTestUtilities", package: "SDGCornerstone"),
-            .productItem(name: "SDGCalendar", package: "SDGCornerstone"),
-            .productItem(name: "SDGPrecisionMathematics", package: "SDGCornerstone"),
-            .productItem(name: "SDGConcurrency", package: "SDGCornerstone"),
-            .productItem(name: "SDGExternalProcess", package: "SDGCornerstone"),
-            .productItem(name: "SDGVersioning", package: "SDGCornerstone"),
-            .productItem(name: "SDGTesting", package: "SDGCornerstone"),
-            .productItem(name: "SDGXCTestUtilities", package: "SDGCornerstone"),
-        ])
-    ]
+  name: "MyPackage",
+  dependencies: [
+    .package(
+      name: "SDGCornerstone",
+      url: "https://github.com/SDGGiesbrecht/SDGCornerstone",
+      from: Version(5, 0, 0)
+    ),
+  ],
+  targets: [
+    .target(
+      name: "MyTarget",
+      dependencies: [
+        .product(name: "SDGControlFlow", package: "SDGCornerstone"),
+        .product(name: "SDGLogic", package: "SDGCornerstone"),
+        .product(name: "SDGLogicTestUtilities", package: "SDGCornerstone"),
+        .product(name: "SDGMathematics", package: "SDGCornerstone"),
+        .product(name: "SDGMathematicsTestUtilities", package: "SDGCornerstone"),
+        .product(name: "SDGCollections", package: "SDGCornerstone"),
+        .product(name: "SDGCollectionsTestUtilities", package: "SDGCornerstone"),
+        .product(name: "SDGBinaryData", package: "SDGCornerstone"),
+        .product(name: "SDGText", package: "SDGCornerstone"),
+        .product(name: "SDGCollation", package: "SDGCornerstone"),
+        .product(name: "SDGPersistence", package: "SDGCornerstone"),
+        .product(name: "SDGPersistenceTestUtilities", package: "SDGCornerstone"),
+        .product(name: "SDGRandomization", package: "SDGCornerstone"),
+        .product(name: "SDGRandomizationTestUtilities", package: "SDGCornerstone"),
+        .product(name: "SDGLocalization", package: "SDGCornerstone"),
+        .product(name: "SDGLocalizationTestUtilities", package: "SDGCornerstone"),
+        .product(name: "SDGGeometry", package: "SDGCornerstone"),
+        .product(name: "SDGGeometryTestUtilities", package: "SDGCornerstone"),
+        .product(name: "SDGCalendar", package: "SDGCornerstone"),
+        .product(name: "SDGPrecisionMathematics", package: "SDGCornerstone"),
+        .product(name: "SDGConcurrency", package: "SDGCornerstone"),
+        .product(name: "SDGExternalProcess", package: "SDGCornerstone"),
+        .product(name: "SDGVersioning", package: "SDGCornerstone"),
+        .product(name: "SDGTesting", package: "SDGCornerstone"),
+        .product(name: "SDGXCTestUtilities", package: "SDGCornerstone"),
+      ]
+    )
+  ]
 )
 ```
 

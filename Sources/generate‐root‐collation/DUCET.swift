@@ -210,7 +210,9 @@ extension CollationOrder {
           [CollationOrder.placeholderIndex],
         ])
       ]
-      rules["<_Script_>"] = [CollationElement(rawIndices: [[], [], [], [], [], [afterPlaceholder]])]
+      rules["<_Script_>"] = [
+        CollationElement(rawIndices: [[], [], [], [], [], [afterPlaceholder]])
+      ]
 
       print("Finished parsing DUCET.")
 

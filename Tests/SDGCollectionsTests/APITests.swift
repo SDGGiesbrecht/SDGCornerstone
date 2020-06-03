@@ -101,7 +101,9 @@ class APITests: TestCase {
       let alternativeMatch = collection.lastMatch(for: [1, 3] ∨ [2])
       XCTAssertEqual(alternativeMatch?.range, 1..<2)
 
-      let repetitionMatch = collection.lastMatch(for: RepetitionPattern([4, 5], count: 1..<Int.max))
+      let repetitionMatch = collection.lastMatch(
+        for: RepetitionPattern([4, 5], count: 1..<Int.max)
+      )
       XCTAssertEqual(repetitionMatch?.range, 3..<7)
       let lazyRepetitionMatch = collection.lastMatch(
         for: RepetitionPattern([4, 5], count: 1..<Int.max, consumption: .lazy)

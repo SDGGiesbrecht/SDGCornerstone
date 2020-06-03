@@ -165,7 +165,7 @@ extension SDGCollectionsTests.RegressionTests {
 extension SDGConcurrencyTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testRunLoop", testRunLoop),
+      ("testRunLoop", testRunLoop)
     ])
   ]
 }
@@ -231,7 +231,7 @@ extension SDGCornerstoneDocumentationExampleTests.MiscellaneousExampleTests {
 extension SDGCornerstoneDocumentationExampleTests.ReadMeExampleTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testReadMe", testReadMe),
+      ("testReadMe", testReadMe)
     ])
   ]
 }
@@ -239,7 +239,7 @@ extension SDGCornerstoneDocumentationExampleTests.ReadMeExampleTests {
 extension SDGCornerstoneDocumentationExampleTests.StrictInterpolationExampleTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testStrictInterpolation", testStrictInterpolation),
+      ("testStrictInterpolation", testStrictInterpolation)
     ])
   ]
 }
@@ -436,7 +436,7 @@ extension SDGTextTests.APITests {
 extension SDGTextTests.InternalTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testLineViewIndex", testLineViewIndex),
+      ("testLineViewIndex", testLineViewIndex)
     ])
   ]
 }
@@ -460,7 +460,7 @@ extension SDGTextTests.RegressionTests {
 extension SDGVersioningTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testVersion", testVersion),
+      ("testVersion", testVersion)
     ])
   ]
 }
@@ -468,7 +468,7 @@ extension SDGVersioningTests.APITests {
 extension SDGVersioningTests.RegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testVersionRangesCanBeCreated", testVersionRangesCanBeCreated),
+      ("testVersionRangesCanBeCreated", testVersionRangesCanBeCreated)
     ])
   ]
 }
