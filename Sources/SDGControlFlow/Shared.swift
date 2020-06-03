@@ -16,8 +16,11 @@
   import Combine
 #endif
 
+#if canImport(Combine)
+  extension Shared: ObservableObject {}
+#endif
 /// A reference to a shared value.
-public final class Shared<Value>: ObservableObject, TransparentWrapper {
+public final class Shared<Value>: TransparentWrapper {
 
   // MARK: - Initialization
 
