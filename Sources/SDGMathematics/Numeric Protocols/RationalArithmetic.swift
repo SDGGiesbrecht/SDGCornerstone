@@ -76,7 +76,8 @@ extension RationalArithmetic {
 
     if exponent.isNegative {
       self = 1 ÷ self ↑ −exponent
-    } else /* exponent.isNonNegative */ {
+    } else /* exponent.isNonNegative */
+    {
       raiseIntegerToThePowerOf(integer: exponent)
     }
   }

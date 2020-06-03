@@ -23,7 +23,10 @@ class RegressionTests: TestCase {
   func testBoundedRepetitionPatternSearch() {
     // Untracked
 
-    XCTAssertEqual([1, 1, 1][1..<2].matches(for: RepetitionPattern([1])).map({ $0.range }), [1..<2])
+    XCTAssertEqual(
+      [1, 1, 1][1..<2].matches(for: RepetitionPattern([1])).map({ $0.range }),
+      [1..<2]
+    )
   }
 
   func testTrailingConditionSearch() {

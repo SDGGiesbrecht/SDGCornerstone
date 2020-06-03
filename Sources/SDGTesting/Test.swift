@@ -20,7 +20,8 @@ private func defaultTestAssertionMethod(
   file: StaticString,
   line: UInt
 ) {  // @exempt(from: tests)
-  if expression() {} else {  // @exempt(from: tests)
+  if expression() {
+  } else {  // @exempt(from: tests)
     // Release optimization removes assert and strips precondition’s message.
     fatalError(message(), file: file, line: line)
   }

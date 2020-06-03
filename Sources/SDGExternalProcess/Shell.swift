@@ -129,8 +129,7 @@
           [executionOption, commandString],
           in: workingDirectory,
           with: environment
-        )
-        {
+        ) {
           reportProgress($0)
         }
       }

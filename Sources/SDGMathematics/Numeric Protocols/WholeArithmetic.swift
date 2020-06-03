@@ -267,7 +267,8 @@ extension WholeArithmetic {
       // p = (b ↑ 2) ↑ (e ÷ 2)
       self ×= self
       self ↑= (exponent.dividedAccordingToEuclid(by: 2))
-    } else /* followingValue.isOdd */ {
+    } else /* followingValue.isOdd */
+    {
       // p = b × b ↑ (e − 1)
       self ×= (self ↑ (exponent − (1 as Self)))
     }

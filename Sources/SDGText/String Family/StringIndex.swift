@@ -38,7 +38,8 @@ extension String.Index {
     while position == nil {
       if cursor.samePosition(in: string.utf8) ≠ nil {
         cursor = string.utf8.index(before: cursor)
-      } else /* UTF‐16 */ {
+      } else /* UTF‐16 */
+      {
         cursor = string.utf16.index(before: cursor)
       }
       position = cursor.samePosition(in: string.scalars)

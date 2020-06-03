@@ -147,7 +147,8 @@ class APITests: TestCase {
     func valueChanged(for identifier: String) {
       lastReportedValue = value.value
       if normalizing {
-        if value.value == 0 {} else {
+        if value.value == 0 {
+        } else {
           value.value = 0
         }
       }
