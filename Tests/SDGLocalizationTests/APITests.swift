@@ -237,6 +237,7 @@ class APITests: TestCase {
         uniqueTestName: "Setting",
         overwriteSpecificationInsteadOfFailing: false
       )
+      _ = LocalizationSetting(orderOfPrecedence: ["en"]).playgroundDescription
     #endif
   }
 

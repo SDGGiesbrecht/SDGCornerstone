@@ -25,7 +25,9 @@ import SDGText
 import SDGPersistence
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
-public struct LocalizationSetting: CustomStringConvertible, Decodable, Encodable, Equatable {
+public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStringConvertible,
+  Decodable, Encodable, Equatable
+{
 
   // MARK: - Static Properties
 
@@ -316,16 +318,25 @@ public struct LocalizationSetting: CustomStringConvertible, Decodable, Encodable
     }
   }
 
-  // MARK: - CustomStringConvertible
-
-  public var description: String {
-    let order: [[AnyLocalization]] = orderOfPrecedence.map { level in
+  private var descriptionRepresentation: [[AnyLocalization]] {
+    return orderOfPrecedence.map { level in
       let levelDescription: [AnyLocalization] = level.lazy.sorted().map { identifier in
         return AnyLocalization(code: identifier)
       }
       return levelDescription
     }
-    return "\(order)"
+  }
+
+  // MARK: - CustomPlaygroundDisplayConvertible
+
+  public var playgroundDescription: Any {
+    return descriptionRepresentation
+  }
+
+  // MARK: - CustomStringConvertible
+
+  public var description: String {
+    return "\(descriptionRepresentation)"
   }
 
   // MARK: - Decodable
