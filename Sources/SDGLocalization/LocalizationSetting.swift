@@ -25,7 +25,7 @@ import SDGText
 import SDGPersistence
 
 /// A localization setting describing a list of preferred localizations and their order of precedence.
-public struct LocalizationSetting: Decodable, Encodable, Equatable {
+public struct LocalizationSetting: CustomStringConvertible, Decodable, Encodable, Equatable {
 
   // MARK: - Static Properties
 
@@ -314,6 +314,12 @@ public struct LocalizationSetting: Decodable, Encodable, Equatable {
         return container.localization
       #endif
     }
+  }
+
+  // MARK: - CustomStringConvertible
+
+  public var description: String {
+    return "..."
   }
 
   // MARK: - Decodable

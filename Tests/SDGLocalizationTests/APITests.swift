@@ -230,6 +230,13 @@ class APITests: TestCase {
           LocalizationExample.fallbackLocalization
         )
       }
+
+      testCustomStringConvertibleConformance(
+        of: LocalizationSetting(orderOfPrecedence: [["zh", "es"], ["en"]]),
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "Setting",
+        overwriteSpecificationInsteadOfFailing: false
+      )
     #endif
   }
 
