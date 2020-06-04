@@ -226,6 +226,18 @@ class APITests: TestCase {
     XCTAssertEqual(observer1?.lastReportedValue, 6)
 
     _ = String(reflecting: Shared(1))
+
+    #if canImport(Combine)
+      if #available(macOS 10.15, tvOS 13, iOS 13, watchOS 9, *) {
+        var changed = false
+        let subscriber = shared?.objectWillChange.sink(receiveValue: {
+          changed = true
+        })
+        shared?.value = 8
+        XCTAssert(changed)
+        _ = subscriber
+      }
+    #endif
   }
 
   func testSharedProperty() {

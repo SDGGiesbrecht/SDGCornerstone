@@ -12,6 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+#if canImport(Combine)
+  import Combine
+#endif
+
+#if canImport(Combine)
+  extension Shared: ObservableObject {}
+#endif
 /// A reference to a shared value.
 public final class Shared<Value>: TransparentWrapper {
 
@@ -29,6 +36,13 @@ public final class Shared<Value>: TransparentWrapper {
 
   /// The value.
   public var value: Value {
+    willSet {
+      #if canImport(Combine)
+        if #available(macOS 10.15, tvOS 13, iOS 13, watchOS 9, *) {
+          objectWillChange.send()
+        }
+      #endif
+    }
     didSet {
       for index in observers.indices.reversed() {
         let (possibleObserver, identifier) = observers[index]
@@ -89,6 +103,19 @@ public final class Shared<Value>: TransparentWrapper {
       }
     }
   }
+
+  #if canImport(Combine)
+    // MARK: - ObservableObject
+
+    private var objectWillChangeStorage: Any?
+    /// A publisher that emits before the object has changed.
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
+    public var objectWillChange: ObservableObjectPublisher {
+      return cached(in: &objectWillChangeStorage) {
+        return ObservableObjectPublisher()
+      } as! ObservableObjectPublisher
+    }
+  #endif
 
   // MARK: - TransparentWrapper
 
