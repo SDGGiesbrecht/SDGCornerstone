@@ -232,7 +232,7 @@ class APITests: TestCase {
       }
 
       testCustomStringConvertibleConformance(
-        of: LocalizationSetting(orderOfPrecedence: [["zh", "es"], ["en"]]),
+        of: LocalizationSetting(orderOfPrecedence: [["en\u{2D}GB", "fr\u{2D}FR"], ["de\u{2D}DE"]]),
         localizations: InterfaceLocalization.self,
         uniqueTestName: "Setting",
         overwriteSpecificationInsteadOfFailing: false

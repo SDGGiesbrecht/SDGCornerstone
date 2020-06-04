@@ -319,7 +319,13 @@ public struct LocalizationSetting: CustomStringConvertible, Decodable, Encodable
   // MARK: - CustomStringConvertible
 
   public var description: String {
-    return "..."
+    let order: [[AnyLocalization]] = orderOfPrecedence.map { level in
+      let levelDescription: [AnyLocalization] = level.lazy.sorted().map { identifier in
+        return AnyLocalization(code: identifier)
+      }
+      return levelDescription
+    }
+    return "\(order)"
   }
 
   // MARK: - Decodable
