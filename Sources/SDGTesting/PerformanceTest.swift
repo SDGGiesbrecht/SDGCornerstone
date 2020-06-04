@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.2.2, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 

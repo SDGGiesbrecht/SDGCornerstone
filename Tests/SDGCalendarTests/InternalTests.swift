@@ -24,7 +24,7 @@ import SDGXCTestUtilities
 class InternalTests: TestCase {
 
   func testDate() {
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       let date = CalendarDate(gregorian: .august, 28, 8232)
       let datesDirectory = testSpecificationDirectory().appendingPathComponent("Date Formats")
       compare(
@@ -68,7 +68,7 @@ class InternalTests: TestCase {
   }
 
   func testGregorianWeekdayDate() {
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       XCTAssertEqual(
         CalendarDate(
           definition: GregorianWeekdayDate(
@@ -85,7 +85,7 @@ class InternalTests: TestCase {
   }
 
   func testHebrewWeekdayDate() {
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       XCTAssertEqual(
         CalendarDate(definition: HebrewWeekdayDate(week: 1, weekday: .thursday, hour: 0, part: 0)),
         CalendarDate(hebrew: .tishrei, 15, 5758)
@@ -94,7 +94,7 @@ class InternalTests: TestCase {
   }
 
   func testHebrewYear() {
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       InternalTests.testHebrewYear()
     #endif
   }
@@ -115,7 +115,7 @@ class InternalTests: TestCase {
   }
 
   func testRelativeDate() {
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       let date = CalendarDate.hebrewNow()
       XCTAssertEqual(CalendarDate(definition: date.converted(to: RelativeDate.self)), date)
     #endif
