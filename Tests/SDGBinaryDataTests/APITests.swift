@@ -39,12 +39,12 @@ class APITests: TestCase {
 
     let data = Data([UInt8.max])
     XCTAssertEqual(data.binary.count, 8)
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       XCTAssertEqual(data.binary.map({ $0 ? "1" : "0" }).joined(), "11111111")
     #endif
 
     var toReverse = Data([0b11110000, 0b00000000])
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       toReverse.binary.reverse()
       XCTAssertEqual(toReverse, Data([0b000000000, 0b00001111]))
     #endif
@@ -58,7 +58,7 @@ class APITests: TestCase {
     XCTAssertEqual(alternating.bitwiseExclusiveOr(with: sorted), Data([0b01010101, 0b10101010]))
 
     var forDescription = Data([0, 0])
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       forDescription.binary[11] = true
       testCustomStringConvertibleConformance(
         of: forDescription.binary,
@@ -87,18 +87,18 @@ class APITests: TestCase {
       let transfer = inputStream.buffer.removeFirst()
       outputStream.buffer.append(transfer)
 
-      #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+      #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
         results.append(contentsOf: outputStream.extractCompleteUnits())
       #endif
     }
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       XCTAssertEqual(results, [forwards, backwards])
     #endif
   }
 
   func testUInt() {
     var forDescription: UInt8 = 0
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       forDescription.binary[0] = true
       testCustomStringConvertibleConformance(
         of: forDescription.binary,

@@ -303,7 +303,7 @@ class APITests: TestCase {
   }
 
   func testSemanticMarkup() {
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
       testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
       testCodableConformance(
@@ -360,7 +360,7 @@ class APITests: TestCase {
   }
 
   func testStrictString() {
-    #if !os(Windows)  // #workaround(Swift 5.2.2, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       testBidirectionalCollectionConformance(of: StrictString("ABC"))
       testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
       testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
