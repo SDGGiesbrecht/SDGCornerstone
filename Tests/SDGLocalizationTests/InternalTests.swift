@@ -144,7 +144,7 @@ class InternalTests: TestCase {
     #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       var list = ""
       for number in 1...2 {
-        for genre in [.masculin, .féminin] as [_GenreGrammatical] {
+        for genre in [.masculin, .féminin] as [GenreGrammatical] {
           for nombre in [.singular, .plural] as [GrammaticalNumber] {
             print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
           }
