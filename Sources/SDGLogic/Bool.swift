@@ -87,6 +87,10 @@ extension Bool: Comparable {
   }
 }
 
+// @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
+/// ערך בוליאני.
+public typealias בו״ל = Bool
+
 // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
 /// Wahr (`true`).
 @inlinable public var wahr: Bool {
