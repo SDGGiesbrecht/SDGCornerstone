@@ -20,7 +20,7 @@ import SDGText
 /// A casing position used by the English language.
 ///
 /// - SeeAlso: `Casing`
-public enum EnglishCasing {
+public enum EnglishCasing: CodableViaEnumeration {
 
   /// The middle of a sentence.
   ///
@@ -69,4 +69,22 @@ public enum EnglishCasing {
       return string.prepending(contentsOf: replacement.scalars)
     }
   }
+
+  // MARK: - CodableViaEnumeration
+
+  public static let codingRepresentations = BijectiveMapping<EnglishCasing, String>(
+    EnglishCasing.allCases,
+    map: { casing in
+      switch casing {
+      case .sentenceMedial:
+        return "a b"
+      case .sentenceInitial:
+        return "A b"
+      case .titleMedial:
+        return "a B"
+      case .titleInitial:
+        return "A B"
+      }
+    }
+  )
 }

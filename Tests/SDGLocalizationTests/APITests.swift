@@ -23,6 +23,7 @@ import SDGCornerstoneLocalizations
 
 import XCTest
 
+import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
@@ -62,6 +63,7 @@ class APITests: TestCase {
   func testCasing() {
     XCTAssertEqual(Casing.sentenceMedial.apply(to: "écrire"), "écrire")
     XCTAssertEqual(Casing.sentenceInitial.apply(to: "écrire"), "Écrire")
+    testCodableConformance(of: Casing.sentenceMedial, uniqueTestName: "Medial")
   }
 
   enum IconlessLocalizationExample: String, InputLocalization {
