@@ -285,6 +285,7 @@ target_link_libraries("SDGCollation" PRIVATE
 add_library("SDGLocalization"
   "../../../Sources/SDGLocalization/CachedLocalization.swift"
   "../../../Sources/SDGLocalization/Extensions/Bool.swift"
+  "../../../Sources/SDGLocalization/Extensions/CodableViaEnumeration.swift"
   "../../../Sources/SDGLocalization/Extensions/Decodable.swift"
   "../../../Sources/SDGLocalization/Extensions/LosslessStringConvertible.swift"
   "../../../Sources/SDGLocalization/Extensions/Numbers/Angle.swift"

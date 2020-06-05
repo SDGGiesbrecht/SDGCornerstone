@@ -25,7 +25,7 @@ import SDGText
 /// A casing position used by languages that have distinct letter cases (but which use the same casing for titles as for sentences).
 ///
 /// - SeeAlso: `EnglishCasing`
-public enum Casing: CaseIterable, Decodable, Encodable, Hashable {
+public enum Casing: CodableViaEnumeration {
 
   /// The middle of a sentence.
   ///
@@ -70,15 +70,9 @@ public enum Casing: CaseIterable, Decodable, Encodable, Hashable {
     }
   }
 
-  // MARK: Decodable
+  // MARK: - CodableViaEnumeration
 
-  public init(from decoder: Decoder) throws {
-    try self.init(from: decoder, via: String.self, convert: { return Casing.codes[$0] })
-  }
-
-  // MARK: - Encodable
-
-  private static let codes = BijectiveMapping<Casing, String>(
+  public static let codingRepresentations = BijectiveMapping<Casing, String>(
     Casing.allCases,
     map: { casing in
       switch casing {
@@ -89,8 +83,4 @@ public enum Casing: CaseIterable, Decodable, Encodable, Hashable {
       }
     }
   )
-
-  public func encode(to encoder: Encoder) throws {
-    try self.encode(to: encoder, via: Casing.codes[self]!)
-  }
 }
