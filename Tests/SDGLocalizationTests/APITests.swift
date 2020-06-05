@@ -80,6 +80,10 @@ class APITests: TestCase {
     XCTAssert(IconlessLocalizationExample.none.description == "zxx")
   }
 
+  func testEnglishCasing() {
+    testCodableConformance(of: EnglishCasing.sentenceMedial, uniqueTestName: "Medial")
+  }
+
   enum LocalizationExample: String, Localization {
     case englishUnitedKingdom = "en\u{2D}GB"
     case français = "fr"
