@@ -282,6 +282,7 @@ extension SDGLocalizationTests.APITests {
       ("testBool", testBool),
       ("testCasing", testCasing),
       ("testCustomStringConvertible", testCustomStringConvertible),
+      ("testEnglishCasing", testEnglishCasing),
       ("testLocalization", testLocalization),
       ("testLocalizationData", testLocalizationData),
       ("testLocalizationRelationships", testLocalizationRelationships),

@@ -77,13 +77,13 @@ public enum EnglishCasing: CodableViaEnumeration {
     map: { casing in
       switch casing {
       case .sentenceMedial:
-        return "a b"
+        return "ab"
       case .sentenceInitial:
-        return "A b"
+        return "Ab"
       case .titleMedial:
-        return "a B"
+        return "aB"
       case .titleInitial:
-        return "A B"
+        return "AB"
       }
     }
   )

@@ -14,12 +14,14 @@
 
 // #workaround(workspace version 0.32.4, Should be “מין־דיקדוקי.swift” but for CMake normalization issue.)
 
+import SDGCollections
+
 // @localization(🇫🇷FR) @crossReference(מין־דיקדוקי)
 /// Un genre grammatical utilisé par des langues qui distingent entre masculin et féminin.
 public typealias GenreGrammatical = מין־דיקדוקי
 // @localization(🇮🇱עב) @notLocalized(🇨🇦EN) @crossReference(מין־דיקדוקי)
 /// מין דיקדוקי לשפה עם זכר ונקבה.
-public enum מין־דיקדוקי: Hashable {
+public enum מין־דיקדוקי: CodableViaEnumeration {
 
   /// זכר.
   case זכר
@@ -34,4 +36,18 @@ public enum מין־דיקדוקי: Hashable {
   public static var féminin: GenreGrammatical {
     return .נקבה
   }
+
+  // MARK: - CodableViaEnumeration
+
+  public static let codingRepresentations = BijectiveMapping<מין־דיקדוקי, Bool>(
+    מין־דיקדוקי.allCases,
+    map: { casing in
+      switch casing {
+      case .זכר:
+        return "ז"
+      case .נקבה:
+        return "נ"
+      }
+    }
+  )
 }
