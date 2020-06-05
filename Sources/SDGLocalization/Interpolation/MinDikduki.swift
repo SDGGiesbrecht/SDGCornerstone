@@ -39,14 +39,14 @@ public enum מין־דיקדוקי: CodableViaEnumeration {
 
   // MARK: - CodableViaEnumeration
 
-  public static let codingRepresentations = BijectiveMapping<מין־דיקדוקי, Bool>(
+  public static let codingRepresentations = BijectiveMapping<מין־דיקדוקי, String>(
     מין־דיקדוקי.allCases,
     map: { casing in
       switch casing {
       case .זכר:
-        return "ז"
+        return "זכר"
       case .נקבה:
-        return "נ"
+        return "נקבה"
       }
     }
   )
