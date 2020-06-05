@@ -78,20 +78,17 @@ public enum Casing: CaseIterable, Decodable, Encodable, Hashable {
 
   // MARK: - Encodable
 
-  private static let codes: BijectiveMapping<Casing, String> = {
-    var dictionary: [Casing: String] = [:]
-    for entry in allCases {
-      let value: String
-      switch entry {
+  private static let codes = BijectiveMapping<Casing, String>(
+    Casing.allCases,
+    map: { casing in
+      switch casing {
       case .sentenceMedial:
-        value = "α"
+        return "α"
       case .sentenceInitial:
-        value = "Α"
+        return "Α"
       }
-      dictionary[entry] = value
     }
-    return BijectiveMapping(dictionary)
-  }()
+  )
 
   public func encode(to encoder: Encoder) throws {
     try self.encode(to: encoder, via: Casing.codes[self]!)
