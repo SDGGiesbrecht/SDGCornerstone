@@ -12,16 +12,16 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace version 0.32.4, Should be “מין־דיקדוקי.swift” but for CMake normalization issue.)
+// #workaround(workspace version 0.32.4, Should be “מין־דקדוקי.swift” but for CMake normalization issue.)
 
 import SDGCollections
 
-// @localization(🇫🇷FR) @crossReference(מין־דיקדוקי)
+// @localization(🇫🇷FR) @crossReference(מין־דקדוקי)
 /// Un genre grammatical utilisé par des langues qui distingent entre masculin et féminin.
-public typealias GenreGrammatical = מין־דיקדוקי
-// @localization(🇮🇱עב) @notLocalized(🇨🇦EN) @crossReference(מין־דיקדוקי)
-/// מין דיקדוקי לשפה עם זכר ונקבה.
-public enum מין־דיקדוקי: CodableViaEnumeration {
+public typealias GenreGrammatical = מין־דקדוקי
+// @localization(🇮🇱עב) @notLocalized(🇨🇦EN) @crossReference(מין־דקדוקי)
+/// מין דקדוקי לשפה עם זכר ונקבה.
+public enum מין־דקדוקי: CodableViaEnumeration {
 
   /// זכר.
   case זכר
@@ -39,14 +39,14 @@ public enum מין־דיקדוקי: CodableViaEnumeration {
 
   // MARK: - CodableViaEnumeration
 
-  public static let codingRepresentations = BijectiveMapping<מין־דיקדוקי, String>(
-    מין־דיקדוקי.allCases,
+  public static let codingRepresentations = BijectiveMapping<מין־דקדוקי, String>(
+    מין־דקדוקי.allCases,
     map: { casing in
       switch casing {
       case .זכר:
-        return "זכר"
+        return "ז"
       case .נקבה:
-        return "נקבה"
+        return "נ"
       }
     }
   )

@@ -577,7 +577,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     }
   }
 
-  public func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString {
+  public func _σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
     switch self {
     case .tishrei:
       return "Τισρί"

@@ -84,6 +84,18 @@ class APITests: TestCase {
     testCodableConformance(of: EnglishCasing.sentenceMedial, uniqueTestName: "Medial")
   }
 
+  func testGrammaticalGender() {
+    testCodableConformance(of: GrammaticalGender.masculine, uniqueTestName: "Masculine")
+  }
+
+  func testGrammaticalNumber() {
+    testCodableConformance(of: GrammaticalNumber.singular, uniqueTestName: "Singular")
+  }
+
+  func testΓραμματικήΠτώση() {
+    testCodableConformance(of: ΓραμματικήΠτώση.ονομαστική, uniqueTestName: "Ονομαστική")
+  }
+
   enum LocalizationExample: String, Localization {
     case englishUnitedKingdom = "en\u{2D}GB"
     case français = "fr"
@@ -245,6 +257,10 @@ class APITests: TestCase {
       )
       _ = LocalizationSetting(orderOfPrecedence: ["en"]).playgroundDescription
     #endif
+  }
+
+  func testמין־דיקדקי() {
+    testCodableConformance(of: מין־דקדוקי.זכר, uniqueTestName: "זכר")
   }
 
   func testRange() {

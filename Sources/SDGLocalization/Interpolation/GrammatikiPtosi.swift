@@ -37,13 +37,13 @@ public enum ΓραμματικήΠτώση: CodableViaEnumeration {
     map: { casing in
       switch casing {
       case .ονομαστική:
-        return "ονομαστική"
+        return "ονομ."
       case .αιτιατική:
-        return "αιτιατική"
+        return "αιτ."
       case .γενική:
-        return "γενική"
+        return "γεν."
       case .κλητική:
-        return "κλητική"
+        return "κλητ."
       }
     }
   )
