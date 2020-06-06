@@ -44,9 +44,9 @@ public enum מין־דקדוקי: CodableViaEnumeration {
     map: { casing in
       switch casing {
       case .זכר:
-        return "ז"
+        return "ז׳"
       case .נקבה:
-        return "נ"
+        return "נ׳"
       }
     }
   )

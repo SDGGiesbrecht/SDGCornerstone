@@ -56,7 +56,7 @@ class InternalTests: TestCase {
   func testGregorianMonth() {
     var list = ""
     for month in GregorianMonth.january...GregorianMonth.december {
-      for πτώση in [.ονομαστική, .αιτιατική, .γενική, .κλητική] as [_ΓραμματικήΠτώση] {
+      for πτώση in [.ονομαστική, .αιτιατική, .γενική, .κλητική] as [ΓραμματικήΠτώση] {
         print(month._σεΕλληνικά(πτώση), to: &list)
       }
     }
