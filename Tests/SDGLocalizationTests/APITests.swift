@@ -63,7 +63,9 @@ class APITests: TestCase {
   func testCasing() {
     XCTAssertEqual(Casing.sentenceMedial.apply(to: "écrire"), "écrire")
     XCTAssertEqual(Casing.sentenceInitial.apply(to: "écrire"), "Écrire")
-    testCodableConformance(of: Casing.sentenceMedial, uniqueTestName: "Medial")
+    #if !os(Windows) // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: Casing.sentenceMedial, uniqueTestName: "Medial")
+    #endif
   }
 
   enum IconlessLocalizationExample: String, InputLocalization {
