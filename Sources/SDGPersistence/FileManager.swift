@@ -209,7 +209,8 @@
           )) ?? []
         {
           let onDisk = existing.lastPathComponent
-          if onDisk == component {  // @exempt(from: tests) Not reachable from some file systems.
+          if onDisk == component {
+            // @exempt(from: tests) Not reachable from some file systems.
             return parent.appendingPathComponent(onDisk)
           }
         }
