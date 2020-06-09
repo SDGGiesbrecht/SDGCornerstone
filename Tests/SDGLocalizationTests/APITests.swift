@@ -63,7 +63,7 @@ class APITests: TestCase {
   func testCasing() {
     XCTAssertEqual(Casing.sentenceMedial.apply(to: "écrire"), "écrire")
     XCTAssertEqual(Casing.sentenceInitial.apply(to: "écrire"), "Écrire")
-    #if !os(Windows) // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
       testCodableConformance(of: Casing.sentenceMedial, uniqueTestName: "Medial")
     #endif
   }
@@ -83,19 +83,27 @@ class APITests: TestCase {
   }
 
   func testEnglishCasing() {
-    testCodableConformance(of: EnglishCasing.sentenceMedial, uniqueTestName: "Medial")
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: EnglishCasing.sentenceMedial, uniqueTestName: "Medial")
+    #endif
   }
 
   func testGrammaticalGender() {
-    testCodableConformance(of: GrammaticalGender.masculine, uniqueTestName: "Masculine")
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: GrammaticalGender.masculine, uniqueTestName: "Masculine")
+    #endif
   }
 
   func testGrammaticalNumber() {
-    testCodableConformance(of: GrammaticalNumber.singular, uniqueTestName: "Singular")
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: GrammaticalNumber.singular, uniqueTestName: "Singular")
+    #endif
   }
 
   func testΓραμματικήΠτώση() {
-    testCodableConformance(of: ΓραμματικήΠτώση.ονομαστική, uniqueTestName: "Ονομαστική")
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: ΓραμματικήΠτώση.ονομαστική, uniqueTestName: "Ονομαστική")
+    #endif
   }
 
   enum LocalizationExample: String, Localization {
