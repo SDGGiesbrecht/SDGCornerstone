@@ -270,7 +270,9 @@ class APITests: TestCase {
   }
 
   func testמין־דיקדקי() {
-    testCodableConformance(of: מין־דקדוקי.זכר, uniqueTestName: "זכר")
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: מין־דקדוקי.זכר, uniqueTestName: "זכר")
+    #endif
   }
 
   func testRange() {
