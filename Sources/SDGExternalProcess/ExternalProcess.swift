@@ -48,6 +48,8 @@
         commandName: String?,
         validate: (_ process: ExternalProcess) -> Bool
       ) where S: Sequence, S.Element == URL {
+        let adjustedLocations = locations
+          .lazy.map { FileManager.default.existingRepresentation(of: $0) }
 
         func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
           var isDirectory: ObjCBool = false
@@ -67,7 +69,7 @@
           return true
         }
 
-        for location in locations {
+        for location in adjustedLocations {
           if checkLocation(location, validate: validate) {
             self.init(at: location)  // @exempt(from: tests) False coverage result in Xcode 10.1.
             return
