@@ -190,7 +190,7 @@
 
     // MARK: - Unicode Path Representations
 
-    /// Return the URL with any path components adjusted to match their on‐disk Unicode representations.
+    /// Returns the URL with any path components adjusted to match their on‐disk Unicode representations.
     ///
     /// - Parameters:
     ///   - url: The URL to adjust.

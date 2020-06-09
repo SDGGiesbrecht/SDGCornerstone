@@ -125,6 +125,34 @@ class APITests: TestCase {
             .contains(where: { $0.lastPathComponent == "Overwrite.txt" }),
           "Failed to enumerate files."
         )
+
+        let notNormalized = "x" + "̄" + "̱"
+        XCTAssertFalse(
+          notNormalized.decomposedStringWithCompatibilityMapping.scalars
+            .elementsEqual(notNormalized.scalars)
+        )
+        XCTAssertFalse(
+          notNormalized.precomposedStringWithCompatibilityMapping.scalars
+            .elementsEqual(notNormalized.scalars)
+        )
+        let data = Data()
+        try data.save(to: temporaryDirectory.appendingPathComponent(notNormalized))
+        XCTAssertEqual(
+          try Data(
+            from: temporaryDirectory.appendingPathComponent(
+              notNormalized.decomposedStringWithCompatibilityMapping
+            )
+          ),
+          data
+        )
+        XCTAssertEqual(
+          try Data(
+            from: temporaryDirectory.appendingPathComponent(
+              notNormalized.precomposedStringWithCompatibilityMapping
+            )
+          ),
+          data
+        )
       }
   }
 
