@@ -126,7 +126,7 @@ class APITests: TestCase {
           "Failed to enumerate files."
         )
 
-        let notNormalized = "x" + "̄" + "̱"
+        let notNormalized = "x" + "\u{304}" + "\u{331}"
         XCTAssertFalse(
           notNormalized.decomposedStringWithCompatibilityMapping.scalars
             .elementsEqual(notNormalized.scalars)
