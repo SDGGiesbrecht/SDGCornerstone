@@ -127,20 +127,12 @@ class APITests: TestCase {
         )
 
         let notNormalized = "x" + "\u{304}" + "\u{331}"
-        XCTAssertFalse(
-          notNormalized.decomposedStringWithCompatibilityMapping.scalars
-            .elementsEqual(notNormalized.scalars)
-        )
-        XCTAssertFalse(
-          notNormalized.precomposedStringWithCompatibilityMapping.scalars
-            .elementsEqual(notNormalized.scalars)
-        )
         let data = Data()
         try data.save(to: temporaryDirectory.appendingPathComponent(notNormalized))
         XCTAssertEqual(
           try Data(
             from: temporaryDirectory.appendingPathComponent(
-              notNormalized.decomposedStringWithCompatibilityMapping
+              notNormalized.decomposedStringWithCanonicalMapping
             )
           ),
           data
@@ -148,7 +140,7 @@ class APITests: TestCase {
         XCTAssertEqual(
           try Data(
             from: temporaryDirectory.appendingPathComponent(
-              notNormalized.precomposedStringWithCompatibilityMapping
+              notNormalized.precomposedStringWithCanonicalMapping
             )
           ),
           data
