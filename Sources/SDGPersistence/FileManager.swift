@@ -237,22 +237,32 @@
 
     /// Moves the item at the specified source to the specified destination, creating intermediate directories if necessary.
     ///
+    /// This method will automatically use the on disk Unicode representation of any existing path components.
+    ///
     /// - Parameters:
     ///     - source: The URL of the source item.
     ///     - destination: The destination URL.
     public func move(_ source: URL, to destination: URL) throws {
       try createDirectory(at: destination.deletingLastPathComponent())
-      try moveItem(at: source, to: destination)
+      try moveItem(
+        at: existingRepresentation(of: source),
+        to: existingRepresentation(of: destination)
+      )
     }
 
     /// Copies the item at the specified source URL to the specified destination URL, creating intermediate directories if necessary.
+    ///
+    /// This method will automatically use the on disk Unicode representation of any existing path components.
     ///
     /// - Parameters:
     ///     - source: The URL of the source item.
     ///     - destination: The destination URL.
     public func copy(_ source: URL, to destination: URL) throws {
       try createDirectory(at: destination.deletingLastPathComponent())
-      try copyItem(at: source, to: destination)
+      try copyItem(
+        at: existingRepresentation(of: source),
+        to: existingRepresentation(of: destination)
+      )
     }
 
     // MARK: - Enumerating Files
@@ -274,7 +284,7 @@
       var failureReason: Error?  // Thrown after enumeration stops. (See below.)
       guard
         let enumerator = FileManager.default.enumerator(
-          at: directory,
+          at: existingRepresentation(of: directory),
           includingPropertiesForKeys: [.isDirectoryKey],
           options: [],
           errorHandler: { (_, error: Error) -> Bool in  // @exempt(from: tests)
