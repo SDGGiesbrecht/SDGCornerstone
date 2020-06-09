@@ -62,10 +62,8 @@ public func testCodableConformance<T>(
 
     var specifications: Set<String> = []
     do {
-      for specificationURL in try FileManager.default.contentsOfDirectory(
-        at: specificationsDirectory,
-        includingPropertiesForKeys: nil,
-        options: []
+      for specificationURL in try FileManager.default.contents(
+        ofDirectory: specificationsDirectory
       ) where specificationURL.pathExtension == "txt" {
         try purgingAutoreleased {
 

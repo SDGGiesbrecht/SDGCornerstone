@@ -209,7 +209,7 @@
           )) ?? []
         {
           let onDisk = existing.lastPathComponent
-          if onDisk == component { // @exempt(from: tests) Not reachable from some file systems.
+          if onDisk == component {  // @exempt(from: tests) Not reachable from some file systems.
             return parent.appendingPathComponent(onDisk)
           }
         }
@@ -266,6 +266,20 @@
     }
 
     // MARK: - Enumerating Files
+
+    /// Returns a list files and directories located immediately inside in the specified directory.
+    ///
+    /// This method will automatically use the on disk Unicode representation of any existing path components.
+    ///
+    /// - Parameters:
+    ///     - directory: The root directory for the search.
+    public func contents(ofDirectory directory: URL) throws -> [URL] {
+      return try contentsOfDirectory(
+        at: existingRepresentation(of: directory),
+        includingPropertiesForKeys: nil,
+        options: []
+      )
+    }
 
     private static let unknownFileReadingError = NSError(
       domain: NSCocoaErrorDomain,
