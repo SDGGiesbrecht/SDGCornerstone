@@ -188,7 +188,52 @@
       return try body(directory)
     }
 
-    // Moving Files and Directories
+    // MARK: - Unicode Path Representations
+
+    /// Return the URL with any path components adjusted to match their on‐disk Unicode representations.
+    ///
+    /// - Parameters:
+    ///   - url: The URL to adjust.
+    public func existingRepresentation(of url: URL) -> URL {
+      if (try? url.checkResourceIsReachable()) == true
+        ∨ url.pathComponents.isEmpty
+      {
+        return url
+      } else {
+        let component = url.lastPathComponent
+        let parent = existingRepresentation(of: url.deletingLastPathComponent())
+        for existing
+          in (try? FileManager.default.contentsOfDirectory(
+            at: parent,
+            includingPropertiesForKeys: nil
+          )) ?? []
+        {
+          let onDisk = existing.lastPathComponent
+          if onDisk == component {
+            return parent.appendingPathComponent(onDisk)
+          }
+        }
+        return parent.appendingPathComponent(component)
+      }
+    }
+
+    // MARK: - Making Changes to the File System
+
+    /// Creates a directory at the specified location.
+    ///
+    /// This method creates any missing intermediate directories. All directories are created with the default attributes.
+    ///
+    /// This method will automatically use the on disk Unicode representation of any existing path components.
+    ///
+    /// - Parameters:
+    ///   - location: The location where the directory should be created.
+    public func createDirectory(at location: URL) throws {
+      return try createDirectory(
+        at: existingRepresentation(of: location),
+        withIntermediateDirectories: true,
+        attributes: nil
+      )
+    }
 
     /// Moves the item at the specified source to the specified destination, creating intermediate directories if necessary.
     ///
@@ -196,11 +241,7 @@
     ///     - source: The URL of the source item.
     ///     - destination: The destination URL.
     public func move(_ source: URL, to destination: URL) throws {
-      try createDirectory(
-        at: destination.deletingLastPathComponent(),
-        withIntermediateDirectories: true,
-        attributes: nil
-      )
+      try createDirectory(at: destination.deletingLastPathComponent())
       try moveItem(at: source, to: destination)
     }
 
@@ -210,13 +251,7 @@
     ///     - source: The URL of the source item.
     ///     - destination: The destination URL.
     public func copy(_ source: URL, to destination: URL) throws {
-
-      try createDirectory(
-        at: destination.deletingLastPathComponent(),
-        withIntermediateDirectories: true,
-        attributes: nil
-      )
-
+      try createDirectory(at: destination.deletingLastPathComponent())
       try copyItem(at: source, to: destination)
     }
 
@@ -289,7 +324,7 @@
     ///     - closure: The closure.
     public func `do`(in directory: URL, closure: () throws -> Void) throws {
 
-      try createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+      try createDirectory(at: directory)
 
       let previous = currentDirectoryPath
       _ = changeCurrentDirectoryPath(directory.path)

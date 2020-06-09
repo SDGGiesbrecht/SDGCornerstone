@@ -58,11 +58,7 @@ public func testCodableConformance<T>(
         .replacingMatches(for: ">", with: "⟩")
     )
     try? FileManager.default.move(deprecatedDirectory, to: specificationsDirectory)
-    try? FileManager.default.createDirectory(
-      at: specificationsDirectory,
-      withIntermediateDirectories: true,
-      attributes: nil
-    )
+    try? FileManager.default.createDirectory(at: specificationsDirectory)
 
     var specifications: Set<String> = []
     do {

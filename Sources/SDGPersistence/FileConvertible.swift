@@ -38,11 +38,7 @@
     ///     - url: The URL to save to.
     public func save(to url: URL) throws {
       let directory = url.deletingLastPathComponent()
-      try FileManager.default.createDirectory(
-        at: directory,
-        withIntermediateDirectories: true,
-        attributes: nil
-      )
+      try FileManager.default.createDirectory(at: directory)
       try file.write(to: url, options: [.atomic])
     }
 
