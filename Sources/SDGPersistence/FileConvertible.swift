@@ -49,6 +49,9 @@
     ///     - url: The URL to read from.
     public init(from url: URL) throws {
       let adjusted = FileManager.default.existingRepresentation(of: url)
+      #warning("Remove.")
+      print("Before: \(url.absoluteString.scalars.map({ $0.hexadecimalCode }))")
+      print("After: \(adjusted.absoluteString.scalars.map({ $0.hexadecimalCode }))")
       try self.init(
         file: try Data(contentsOf: adjusted, options: [.mappedIfSafe]),
         origin: adjusted
