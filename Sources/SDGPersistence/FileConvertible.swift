@@ -37,9 +37,10 @@
     /// - Parameters:
     ///     - url: The URL to save to.
     public func save(to url: URL) throws {
-      let directory = url.deletingLastPathComponent()
+      let adjusted = FileManager.default.existingRepresentation(of: url)
+      let directory = adjusted.deletingLastPathComponent()
       try FileManager.default.createDirectory(at: directory)
-      try file.write(to: url, options: [.atomic])
+      try file.write(to: adjusted, options: [.atomic])
     }
 
     /// Loads the file at the specified URL.
@@ -47,22 +48,11 @@
     /// - Parameters:
     ///     - url: The URL to read from.
     public init(from url: URL) throws {
-      let data: Data
-      if let read = try? Data(contentsOf: url, options: [.mappedIfSafe]) {
-        data = read
-      } else if let read = try? Data(
-        contentsOf: URL(fileURLWithPath: url.path.decomposedStringWithCanonicalMapping),
-        options: [.mappedIfSafe]
-      ) {  // @exempt(from: tests)
-        // @exempt(from: tests) Only steps in if the file system has bugs.
-        data = read
-      } else {
-        data = try Data(
-          contentsOf: URL(fileURLWithPath: url.path.precomposedStringWithCanonicalMapping),
-          options: [.mappedIfSafe]
-        )
-      }
-      try self.init(file: data, origin: url)
+      let adjusted = FileManager.default.existingRepresentation(of: url)
+      try self.init(
+        file: try Data(contentsOf: adjusted, options: [.mappedIfSafe]),
+        origin: adjusted
+      )
     }
   }
 #endif
