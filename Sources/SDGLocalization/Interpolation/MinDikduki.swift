@@ -16,7 +16,7 @@
 
 import SDGCollections
 
-// @localization(🇫🇷FR) @crossReference(מין־דקדוקי)
+// @localization(🇫🇷FR) @notLocalized(🇨🇦EN) @crossReference(מין־דקדוקי)
 /// Un genre grammatical utilisé par des langues qui distingent entre masculin et féminin.
 public typealias GenreGrammatical = מין־דקדוקי
 // @localization(🇮🇱עב) @notLocalized(🇨🇦EN) @crossReference(מין־דקדוקי)

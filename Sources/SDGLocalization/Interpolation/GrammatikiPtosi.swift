@@ -16,6 +16,8 @@
 
 import SDGCollections
 
+// @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
+/// Μια γραμματική πτώση για τις γλώσσες που εχουν ονομαστική, αιτιατική, γενική και κλητική.
 public enum ΓραμματικήΠτώση: CodableViaEnumeration {
 
   /// Η ονομαστική.
