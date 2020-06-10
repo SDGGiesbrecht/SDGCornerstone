@@ -37,20 +37,10 @@
     /// - Parameters:
     ///     - url: The URL to save to.
     public func save(to url: URL) throws {
-      #warning("Remove.")
-      print("Original: \(url.path) \(url.path.scalars.map({ $0.hexadecimalCode }))")
       let adjusted = FileManager.default.existingRepresentation(of: url)
-      #warning("Remove.")
-      print("Adjusted: \(adjusted.path) \(adjusted.path.scalars.map({ $0.hexadecimalCode }))")
       let directory = adjusted.deletingLastPathComponent()
-      #warning("Remove.")
-      print("Creating directory...")
       try FileManager.default.createDirectory(at: directory)
-      #warning("Remove.")
-      print("Writing...")
       try file.write(to: adjusted, options: [.atomic])
-      #warning("Remove.")
-      print("Written.")
     }
 
     /// Loads the file at the specified URL.
