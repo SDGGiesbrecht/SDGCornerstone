@@ -56,8 +56,8 @@
         origin: adjusted
       )
       } catch {
-        print("Before: \(url.absoluteString.scalars.map({ $0.hexadecimalCode }))")
-        print("After: \(adjusted.absoluteString.scalars.map({ $0.hexadecimalCode }))")
+        print("Before: \( url.path) \(url.path.scalars.map({ $0.hexadecimalCode }))")
+        print("After: \( adjusted.path) \(adjusted.path.scalars.map({ $0.hexadecimalCode }))")
         throw error
       }
     }
