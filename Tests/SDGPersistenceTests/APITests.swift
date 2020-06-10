@@ -128,7 +128,11 @@ class APITests: TestCase {
 
         let notNormalized = "x" + "\u{304}" + "\u{331}"
         let data = Data()
+        #warning("Remove.")
+        print("Saving...")
         try data.save(to: temporaryDirectory.appendingPathComponent(notNormalized))
+        #warning("Remove.")
+        print("Trying decomposed...")
         XCTAssertEqual(
           try Data(
             from: temporaryDirectory.appendingPathComponent(
@@ -137,6 +141,8 @@ class APITests: TestCase {
           ),
           data
         )
+        #warning("Remove.")
+        print("Trying precomposed...")
         XCTAssertEqual(
           try Data(
             from: temporaryDirectory.appendingPathComponent(
@@ -145,6 +151,8 @@ class APITests: TestCase {
           ),
           data
         )
+        #warning("Remove.")
+        print("Done.")
       }
   }
 
