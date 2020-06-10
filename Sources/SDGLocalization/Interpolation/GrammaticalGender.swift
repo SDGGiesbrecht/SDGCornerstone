@@ -12,8 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollections
+
 /// A grammatical gender used by languages that differentiate between masculine, feminine and neuter.
-public enum GrammaticalGender {
+public enum GrammaticalGender: CodableViaEnumeration {
 
   /// Masculine.
   case masculine
@@ -23,4 +25,20 @@ public enum GrammaticalGender {
 
   /// Neuter.
   case neuter
+
+  // MARK: - CodableViaEnumeration
+
+  public static let codingRepresentations = BijectiveMapping<GrammaticalGender, String>(
+    GrammaticalGender.allCases,
+    map: { casing in
+      switch casing {
+      case .masculine:
+        return "m"
+      case .feminine:
+        return "f"
+      case .neuter:
+        return "n"
+      }
+    }
+  )
 }

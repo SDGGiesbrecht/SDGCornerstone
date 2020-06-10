@@ -26,7 +26,7 @@ public protocol Month: TextualPlaygroundDisplay {
 
   func _aufDeutsch() -> StrictString
   func _enFrançais(_ majuscules: Casing) -> StrictString
-  func _σεΕλληνικά(_ πτώση: _ΓραμματικήΠτώση) -> StrictString
+  func _σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString
   func _בעברית() -> StrictString
 }
 

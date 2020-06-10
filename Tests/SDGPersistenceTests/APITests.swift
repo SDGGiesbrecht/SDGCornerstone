@@ -125,6 +125,28 @@ class APITests: TestCase {
             .contains(where: { $0.lastPathComponent == "Overwrite.txt" }),
           "Failed to enumerate files."
         )
+
+        #if !os(Windows)  // #workaround(Swift 5.2.4, Windows fails to save this?)
+          let notNormalized = "x" + "\u{304}" + "\u{331}"
+          let data = Data()
+          try data.save(to: temporaryDirectory.appendingPathComponent(notNormalized))
+          XCTAssertEqual(
+            try Data(
+              from: temporaryDirectory.appendingPathComponent(
+                notNormalized.decomposedStringWithCanonicalMapping
+              )
+            ),
+            data
+          )
+          XCTAssertEqual(
+            try Data(
+              from: temporaryDirectory.appendingPathComponent(
+                notNormalized.precomposedStringWithCanonicalMapping
+              )
+            ),
+            data
+          )
+        #endif
       }
   }
 

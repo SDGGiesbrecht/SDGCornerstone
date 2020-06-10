@@ -14,11 +14,39 @@
 
 // #workaround(workspace version 0.32.4, Should be “ΓραμματικήΠτώση.swift” but for CMake normalization issue.)
 
-public enum _ΓραμματικήΠτώση {
-  // Public for SDGCalendar.
+import SDGCollections
 
+// @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
+/// Μια γραμματική πτώση για τις γλώσσες που εχουν ονομαστική, αιτιατική, γενική και κλητική.
+public enum ΓραμματικήΠτώση: CodableViaEnumeration {
+
+  /// Η ονομαστική.
   case ονομαστική
+
+  /// Η αιτιατική.
   case αιτιατική
+
+  /// Η γενική.
   case γενική
+
+  /// Η κλητική.
   case κλητική
+
+  // MARK: - CodableViaEnumeration
+
+  public static let codingRepresentations = BijectiveMapping<ΓραμματικήΠτώση, String>(
+    ΓραμματικήΠτώση.allCases,
+    map: { casing in
+      switch casing {
+      case .ονομαστική:
+        return "ονομ."
+      case .αιτιατική:
+        return "αιτ."
+      case .γενική:
+        return "γεν."
+      case .κλητική:
+        return "κλητ."
+      }
+    }
+  )
 }

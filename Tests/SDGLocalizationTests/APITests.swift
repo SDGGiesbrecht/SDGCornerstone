@@ -23,6 +23,7 @@ import SDGCornerstoneLocalizations
 
 import XCTest
 
+import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
@@ -62,6 +63,9 @@ class APITests: TestCase {
   func testCasing() {
     XCTAssertEqual(Casing.sentenceMedial.apply(to: "écrire"), "écrire")
     XCTAssertEqual(Casing.sentenceInitial.apply(to: "écrire"), "Écrire")
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: Casing.sentenceMedial, uniqueTestName: "Medial")
+    #endif
   }
 
   enum IconlessLocalizationExample: String, InputLocalization {
@@ -76,6 +80,30 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
     XCTAssert(IconlessLocalizationExample.none.description == "zxx")
+  }
+
+  func testEnglishCasing() {
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: EnglishCasing.sentenceMedial, uniqueTestName: "Medial")
+    #endif
+  }
+
+  func testGrammaticalGender() {
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: GrammaticalGender.masculine, uniqueTestName: "Masculine")
+    #endif
+  }
+
+  func testGrammaticalNumber() {
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: GrammaticalNumber.singular, uniqueTestName: "Singular")
+    #endif
+  }
+
+  func testΓραμματικήΠτώση() {
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: ΓραμματικήΠτώση.ονομαστική, uniqueTestName: "Ονομαστική")
+    #endif
   }
 
   enum LocalizationExample: String, Localization {
@@ -238,6 +266,12 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
       _ = LocalizationSetting(orderOfPrecedence: ["en"]).playgroundDescription
+    #endif
+  }
+
+  func testמין־דיקדקי() {
+    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+      testCodableConformance(of: מין־דקדוקי.זכר, uniqueTestName: "זכר")
     #endif
   }
 

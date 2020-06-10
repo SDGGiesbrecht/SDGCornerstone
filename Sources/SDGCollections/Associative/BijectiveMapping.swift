@@ -19,11 +19,6 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
   ExpressibleByDictionaryLiteral, TransparentWrapper
 {
 
-  // MARK: - Properties
-
-  @usableFromInline internal let xToY: [X: Y]
-  @usableFromInline internal let yToX: [Y: X]
-
   // MARK: - Initialization
 
   /// Creates a bijective mapping from the mapping in one direction.
@@ -50,6 +45,25 @@ public struct BijectiveMapping<X: Hashable, Y: Hashable>: Collection,
     }
     yToX = reverse
   }
+
+  /// Creates a bijective mapping by transforming a sequence of values.
+  ///
+  /// - Parameters:
+  ///   - sequence: A sequence of values for the `X` side.
+  ///   - map: A closure that produces the corresponding `Y` value for each `X` value in the sequence.
+  ///   - x: A value on the `X` side.
+  @inlinable public init<S>(_ sequence: S, map: (_ x: X) -> Y) where S: Sequence, S.Element == X {
+    var dictionary: [X: Y] = [:]
+    for entry in sequence {
+      dictionary[entry] = map(entry)
+    }
+    self = BijectiveMapping(dictionary)
+  }
+
+  // MARK: - Properties
+
+  @usableFromInline internal let xToY: [X: Y]
+  @usableFromInline internal let yToX: [Y: X]
 
   // MARK: - Look‐Up
 

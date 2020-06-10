@@ -25,7 +25,7 @@ import SDGText
 /// A casing position used by languages that have distinct letter cases (but which use the same casing for titles as for sentences).
 ///
 /// - SeeAlso: `EnglishCasing`
-public enum Casing {
+public enum Casing: CodableViaEnumeration {
 
   /// The middle of a sentence.
   ///
@@ -69,4 +69,18 @@ public enum Casing {
       return string.prepending(contentsOf: replacement.scalars)
     }
   }
+
+  // MARK: - CodableViaEnumeration
+
+  public static let codingRepresentations = BijectiveMapping<Casing, String>(
+    Casing.allCases,
+    map: { casing in
+      switch casing {
+      case .sentenceMedial:
+        return "α"
+      case .sentenceInitial:
+        return "Α"
+      }
+    }
+  )
 }

@@ -188,39 +188,99 @@
       return try body(directory)
     }
 
-    // Moving Files and Directories
+    // MARK: - Unicode Path Representations
+
+    /// Returns the URL with any path components adjusted to match their on‐disk Unicode representations.
+    ///
+    /// - Parameters:
+    ///   - url: The URL to adjust.
+    public func existingRepresentation(of url: URL) -> URL {
+      if (try? url.checkResourceIsReachable()) == true
+        ∨ url.pathComponents.isEmpty
+      {
+        return url
+      } else {
+        let component = url.lastPathComponent
+        let parent = existingRepresentation(of: url.deletingLastPathComponent())
+        for existing
+          in (try? FileManager.default.contentsOfDirectory(
+            at: parent,
+            includingPropertiesForKeys: nil
+          )) ?? []
+        {
+          let onDisk = existing.lastPathComponent
+          if onDisk == component {
+            // @exempt(from: tests) Not reachable from some file systems.
+            return parent.appendingPathComponent(onDisk)
+          }
+        }
+        return parent.appendingPathComponent(component)
+      }
+    }
+
+    // MARK: - Making Changes to the File System
+
+    /// Creates a directory at the specified location.
+    ///
+    /// This method creates any missing intermediate directories. All directories are created with the default attributes.
+    ///
+    /// This method will automatically use the on disk Unicode representation of any existing path components.
+    ///
+    /// - Parameters:
+    ///   - location: The location where the directory should be created.
+    public func createDirectory(at location: URL) throws {
+      return try createDirectory(
+        at: existingRepresentation(of: location),
+        withIntermediateDirectories: true,
+        attributes: nil
+      )
+    }
 
     /// Moves the item at the specified source to the specified destination, creating intermediate directories if necessary.
+    ///
+    /// This method will automatically use the on disk Unicode representation of any existing path components.
     ///
     /// - Parameters:
     ///     - source: The URL of the source item.
     ///     - destination: The destination URL.
     public func move(_ source: URL, to destination: URL) throws {
-      try createDirectory(
-        at: destination.deletingLastPathComponent(),
-        withIntermediateDirectories: true,
-        attributes: nil
+      try createDirectory(at: destination.deletingLastPathComponent())
+      try moveItem(
+        at: existingRepresentation(of: source),
+        to: existingRepresentation(of: destination)
       )
-      try moveItem(at: source, to: destination)
     }
 
     /// Copies the item at the specified source URL to the specified destination URL, creating intermediate directories if necessary.
+    ///
+    /// This method will automatically use the on disk Unicode representation of any existing path components.
     ///
     /// - Parameters:
     ///     - source: The URL of the source item.
     ///     - destination: The destination URL.
     public func copy(_ source: URL, to destination: URL) throws {
-
-      try createDirectory(
-        at: destination.deletingLastPathComponent(),
-        withIntermediateDirectories: true,
-        attributes: nil
+      try createDirectory(at: destination.deletingLastPathComponent())
+      try copyItem(
+        at: existingRepresentation(of: source),
+        to: existingRepresentation(of: destination)
       )
-
-      try copyItem(at: source, to: destination)
     }
 
     // MARK: - Enumerating Files
+
+    /// Returns a list files and directories located immediately inside in the specified directory.
+    ///
+    /// This method will automatically use the on disk Unicode representation of any existing path components.
+    ///
+    /// - Parameters:
+    ///     - directory: The root directory for the search.
+    public func contents(ofDirectory directory: URL) throws -> [URL] {
+      return try contentsOfDirectory(
+        at: existingRepresentation(of: directory),
+        includingPropertiesForKeys: nil,
+        options: []
+      )
+    }
 
     private static let unknownFileReadingError = NSError(
       domain: NSCocoaErrorDomain,
@@ -239,7 +299,7 @@
       var failureReason: Error?  // Thrown after enumeration stops. (See below.)
       guard
         let enumerator = FileManager.default.enumerator(
-          at: directory,
+          at: existingRepresentation(of: directory),
           includingPropertiesForKeys: [.isDirectoryKey],
           options: [],
           errorHandler: { (_, error: Error) -> Bool in  // @exempt(from: tests)
@@ -289,7 +349,7 @@
     ///     - closure: The closure.
     public func `do`(in directory: URL, closure: () throws -> Void) throws {
 
-      try createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+      try createDirectory(at: directory)
 
       let previous = currentDirectoryPath
       _ = changeCurrentDirectoryPath(directory.path)

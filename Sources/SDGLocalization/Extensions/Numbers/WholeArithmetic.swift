@@ -96,16 +96,17 @@ extension WholeArithmetic {
     return wholeDigits() + "."
   }
 
-  internal func générerOrdinalFrançaisAbrégé(genre: _GenreGrammatical, nombre: GrammaticalNumber)
-    -> SemanticMarkup
-  {
+  internal func générerOrdinalFrançaisAbrégé(
+    genre: GenreGrammatical,
+    nombre: GrammaticalNumber
+  ) -> SemanticMarkup {
     var singulier: StrictString
 
     if self == 1 {
       switch genre {
-      case .masculin:
+      case .זכר:  // masculin
         singulier = "er"
-      case .féminin:
+      case .נקבה:  // féminin
         singulier = "re"
       }
     } else {

@@ -58,18 +58,12 @@ public func testCodableConformance<T>(
         .replacingMatches(for: ">", with: "⟩")
     )
     try? FileManager.default.move(deprecatedDirectory, to: specificationsDirectory)
-    try? FileManager.default.createDirectory(
-      at: specificationsDirectory,
-      withIntermediateDirectories: true,
-      attributes: nil
-    )
+    try? FileManager.default.createDirectory(at: specificationsDirectory)
 
     var specifications: Set<String> = []
     do {
-      for specificationURL in try FileManager.default.contentsOfDirectory(
-        at: specificationsDirectory,
-        includingPropertiesForKeys: nil,
-        options: []
+      for specificationURL in try FileManager.default.contents(
+        ofDirectory: specificationsDirectory
       ) where specificationURL.pathExtension == "txt" {
         try purgingAutoreleased {
 

@@ -50,9 +50,10 @@ extension IntegerProtocol {
     return verkürzteDeutscheOrdnungszahlErzeugen()
   }
 
-  public func _ordinalFrançaisAbrégé(genre: _GenreGrammatical, nombre: GrammaticalNumber)
-    -> SemanticMarkup
-  {
+  public func _ordinalFrançaisAbrégé(
+    genre: GenreGrammatical,
+    nombre: GrammaticalNumber
+  ) -> SemanticMarkup {
     return générerOrdinalFrançaisAbrégé(genre: genre, nombre: nombre)
   }
 
