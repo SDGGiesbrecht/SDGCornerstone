@@ -49,17 +49,10 @@
     ///     - url: The URL to read from.
     public init(from url: URL) throws {
       let adjusted = FileManager.default.existingRepresentation(of: url)
-      #warning("Revert.")
-      do {
       try self.init(
         file: try Data(contentsOf: adjusted, options: [.mappedIfSafe]),
         origin: adjusted
       )
-      } catch {
-        print("Before: \( url.path) \(url.path.scalars.map({ $0.hexadecimalCode }))")
-        print("After: \( adjusted.path) \(adjusted.path.scalars.map({ $0.hexadecimalCode }))")
-        throw error
-      }
     }
   }
 #endif
