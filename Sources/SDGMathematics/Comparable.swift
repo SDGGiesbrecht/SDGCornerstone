@@ -227,7 +227,7 @@ where C: Comparable, D: Comparable, E: Comparable {
   by comparisonOne: (_ valueOne: T) -> C,
   _ comparisonTwo: (_ valueTwo: T) -> D,
   _ comparisonThree: (_ valueThree: T) -> E,
-  _ comparisonFour: (_ valueThree: T) -> F
+  _ comparisonFour: (_ valueFour: T) -> F
 ) -> Bool
 where C: Comparable, D: Comparable, E: Comparable, F: Comparable {
   return compareElements(precedingValue, followingValue, by: comparisonOne)
