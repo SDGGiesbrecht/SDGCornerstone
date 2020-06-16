@@ -23,6 +23,9 @@ where C: Collection, C.Element: Comparable {
   // MARK: - Initialization
 
   /// Wraps a collection.
+  ///
+  /// - Parameters:
+  ///   - collection: The collection.
   public init(_ collection: C) {
     self.collection = collection
   }
