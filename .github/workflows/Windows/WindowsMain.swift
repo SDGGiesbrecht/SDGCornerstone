@@ -137,6 +137,7 @@ extension SDGCollectionsTests.APITests {
       ("testFiniteSet", testFiniteSet),
       ("testIntensionalSet", testIntensionalSet),
       ("testIntersection", testIntersection),
+      ("testLexicographicalComparison", testLexicographicalComparison),
       ("testLiteralPattern", testLiteralPattern),
       ("testMutableSet", testMutableSet),
       ("testNegatedPattern", testNegatedPattern),
