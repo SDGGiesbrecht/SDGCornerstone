@@ -172,6 +172,9 @@ class APITests: TestCase {
     XCTAssertEqual(value, 5)
 
     XCTAssert(1 ≈ (0, 2))
+
+    XCTAssert(compare(0, 1, by: { _ in 0 }, { _ in 0 }, { _ in 0 }, { $0 }))
+    XCTAssertFalse(compare(0, 0, by: { $0 }, { $0 }, { $0 }, { $0 }))
   }
 
   func testFloat() {
