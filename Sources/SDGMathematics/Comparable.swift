@@ -205,3 +205,31 @@ where C: Comparable, D: Comparable, E: Comparable {
   return compareElements(precedingValue, followingValue, by: comparisonOne)
     ?? compare(precedingValue, followingValue, by: comparisonTwo, comparisonThree)
 }
+
+/// Compares two values according to some derived sort criteria.
+///
+/// This function uses short‐circuit evaluation.
+///
+/// - Parameters:
+///   - precedingValue: The value preceding the `<` sign.
+///   - followingValue: The value following the `<` sign.
+///   - comparisonOne: A closure which returns the first derived value to compare.
+///   - valueOne: The value for which to derive the first sort criterion.
+///   - comparisonTwo: A closure which returns the second derived value to compare.
+///   - valueTwo: The value for which to derive the second sort criterion.
+///   - comparisonThree: A closure which returns the third derived value to compare.
+///   - valueThree: The value for which to derive the third sort criterion.
+///   - comparisonFour: A closure which returns the fourth derived value to compare.
+///   - valueFour: The value for which to derive the fourth sort criterion.
+@inlinable public func compare<T, C, D, E, F>(
+  _ precedingValue: T,
+  _ followingValue: T,
+  by comparisonOne: (_ valueOne: T) -> C,
+  _ comparisonTwo: (_ valueTwo: T) -> D,
+  _ comparisonThree: (_ valueThree: T) -> E,
+  _ comparisonFour: (_ valueThree: T) -> F
+) -> Bool
+where C: Comparable, D: Comparable, E: Comparable, F: Comparable {
+  return compareElements(precedingValue, followingValue, by: comparisonOne)
+    ?? compare(precedingValue, followingValue, by: comparisonTwo, comparisonThree, comparisonFour)
+}
