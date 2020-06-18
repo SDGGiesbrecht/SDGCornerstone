@@ -786,6 +786,14 @@ class APITests: TestCase {
     )
   }
 
+  func testLexicographicalComparison() {
+    let array = [1, 2, 3]
+    let comparison = LexicographicalComparison(array)
+    _ = comparison.wrappedInstance
+    XCTAssertEqual(comparison, comparison)
+    XCTAssertFalse(comparison < comparison)
+  }
+
   func testLiteralPattern() {
     let pattern = [1, 2, 3]
     testPattern(pattern, match: [1, 2, 3])
