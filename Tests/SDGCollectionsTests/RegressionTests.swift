@@ -29,6 +29,18 @@ class RegressionTests: TestCase {
     )
   }
 
+  func testContextualMappingUsesFallbackOnPartialMatch() {
+    // Untracked
+
+    let mapping = ContextualMapping(
+      mapping: [
+        "II": [2]
+      ],
+      fallbackAlgorithm: { _ in [1] }
+    )
+    XCTAssertEqual(mapping.map("I"), [1])
+  }
+
   func testTrailingConditionSearch() {
     // Untracked
 
