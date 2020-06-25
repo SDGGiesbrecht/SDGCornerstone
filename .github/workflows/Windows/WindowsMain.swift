@@ -157,6 +157,10 @@ extension SDGCollectionsTests.RegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testBoundedRepetitionPatternSearch", testBoundedRepetitionPatternSearch),
+      (
+        "testContextualMappingUsesFallbackOnPartialMatch",
+        testContextualMappingUsesFallbackOnPartialMatch
+      ),
       ("testTrailingConditionSearch", testTrailingConditionSearch),
       ("testSubstringContainmentIsUnambiguous", testSubstringContainmentIsUnambiguous),
     ])
