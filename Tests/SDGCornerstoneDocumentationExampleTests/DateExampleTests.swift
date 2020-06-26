@@ -25,12 +25,12 @@ import SDGPersistenceTestUtilities
 extension CalendarDate {
 
   // This initializer creates a date using the number of days into the current millennium.
-  public init(daysIntoMillennium: FloatMax) {
+  init(daysIntoMillennium: FloatMax) {
     self.init(definition: DaysIntoMillennium(daysIntoMillennium))
   }
 
   // This property is available to dates with any kind of definition.
-  public var daysIntoMillennium: FloatMax {
+  var daysIntoMillennium: FloatMax {
     return converted(to: DaysIntoMillennium.self).daysIntoMillennium
   }
 }

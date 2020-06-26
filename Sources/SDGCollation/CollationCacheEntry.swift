@@ -16,7 +16,7 @@
 
   // MARK: - Initialization
 
-  @inlinable init(string: String, indices: [CollationIndex]) {
+  @inlinable internal init(string: String, indices: [CollationIndex]) {
     self.string = string
     self.indices = indices
   }

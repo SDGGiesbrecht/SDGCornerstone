@@ -76,7 +76,7 @@ where First: Pattern, Second: Pattern, First.Element == Second.Element {
 }
 
 // Shared with N‐ary variant.
-@usableFromInline enum ConcatenationPatterning {
+@usableFromInline internal enum ConcatenationPatterning {
   @inlinable internal static func advance<P, C>(
     ends endIndices: inout [C.Index],
     for pattern: P,

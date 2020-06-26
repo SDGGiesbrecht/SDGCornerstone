@@ -27,7 +27,7 @@
       /// A test case which simplifies testing for targets which link against the `SDGCornerstone` package.
       open class TestCase: XCTestCase {
 
-        static var initialized = false
+        static var private initialized = false
         open override func setUp() {
           if ¬TestCase.initialized {
             TestCase.initialized = true
