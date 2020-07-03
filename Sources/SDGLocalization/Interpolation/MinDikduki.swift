@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace version 0.33.1, Should be “מין־דקדוקי.swift” but for CMake normalization issue.)
+// #workaround(workspace version 0.33.2, Should be “מין־דקדוקי.swift” but for CMake normalization issue.)
 
 import SDGCollections
 
