@@ -24,16 +24,18 @@ public struct PatternMatch<Searched: SearchableCollection> {
   ///     - collection: The collection containing the match.
   @inlinable public init<R>(range: R, in collection: Searched)
   where R: RangeExpression, R.Bound == Searched.Index {
-    self.range = range.relative(to: collection)
-    self.contents = collection[range]
+    self.contents = collection[range.relative(to: collection)]
   }
 
   // MARK: - Properties
 
-  /// The range.
-  public let range: Range<Searched.Index>
   /// The contents of the match.
   public let contents: Searched.SubSequence
+
+  /// The range.
+  public var range: Range<Searched.Index> {
+    return contents.bounds
+  }
 
   // MARK: - Conversions
 
