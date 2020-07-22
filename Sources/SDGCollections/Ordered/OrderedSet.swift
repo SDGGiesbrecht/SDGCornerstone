@@ -35,7 +35,7 @@ where Element: Hashable {
   ///   - elements: The elements to include.
   @inlinable public init<S>(_ elements: S) where S: Sequence, S.Element == Element {
     self.init()
-    self.append(contentsOf: sequence)
+    self.append(contentsOf: elements)
   }
 
   // MARK: - Properties
