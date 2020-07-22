@@ -915,7 +915,14 @@ class APITests: TestCase {
 
   func testOrderedSet() {
     var set = OrderedSet(["a", "b", "c"])
-    testComparableSetConformance(of: set, member: "a", nonmember: "d", superset: ["a", "b", "c", "d"], overlapping: ["a", "d"], disjoint: ["d", "e"])
+    testComparableSetConformance(
+      of: set,
+      member: "a",
+      nonmember: "d",
+      superset: ["a", "b", "c", "d"],
+      overlapping: ["a", "d"],
+      disjoint: ["d", "e"]
+    )
     XCTAssert(set.contents.elementsEqual(["a", "b", "c"]))
     set.removeFirst()
     XCTAssertEqual(set, ["b", "c"])

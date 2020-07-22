@@ -670,6 +670,7 @@ target_link_libraries("SDGCollectionsTests" PRIVATE
   "SDGLogic"
   "SDGMathematics"
   "SDGCornerstoneLocalizations"
+  "SDGMathematicsTestUtilities"
   "SDGPersistenceTestUtilities"
   "SDGLocalizationTestUtilities"
 )
