@@ -32,9 +32,7 @@ where Element: Hashable {
   /// If an element occurs more than once, only the first will be included.
   @inlinable public init<S>(_ sequence: S) where S: Sequence, S.Element == Element {
     self.init()
-    for element in sequence {
-      append(element)
-    }
+    self.append(contentsOf: sequence)
   }
 
   // MARK: - Properties
@@ -49,15 +47,24 @@ where Element: Hashable {
     return array
   }
 
-  /// Appends a new element to the set, if it is not already present.
+  /// Appends a new element to the set if it is not already present.
   ///
   /// - Returns: Whether or not the element was appended.
-  @inlinable @discardableResult mutating func append(_ newElement: Element) -> Bool {
+  @inlinable @discardableResult public mutating func append(_ newElement: Element) -> Bool {
     let inserted = set.insert(newElement).inserted
     if inserted {
       array.append(newElement)
     }
     return inserted
+  }
+
+  /// Appends new elements to the set if they are not already present.
+  @inlinable public mutating func append<S>(
+    contentsOf newElements: S
+  ) where S: Sequence, S.Element == Element {
+    for element in newElements {
+      self.append(element)
+    }
   }
 
   /// Removes and returns the first element.
@@ -75,13 +82,13 @@ where Element: Hashable {
   }
 
   /// Removes all elements.
-  public mutating func removeAll(keepingCapacity keepCapacity: Bool = false) {
+  @inlinable public mutating func removeAll(keepingCapacity keepCapacity: Bool = false) {
     array.removeAll(keepingCapacity: keepCapacity)
     set.removeAll(keepingCapacity: keepCapacity)
   }
 
   /// Removes and returns a particular element.
-  @inlinable @discardableResult mutating func remove(_ element: Element) -> Element? {
+  @inlinable @discardableResult public mutating func remove(_ element: Element) -> Element? {
     guard let removed = set.remove(element) else {
       return nil
     }

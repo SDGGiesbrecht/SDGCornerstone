@@ -20,6 +20,7 @@ import SDGCornerstoneLocalizations
 
 import XCTest
 
+import SDGMathematicsTestUtilities
 import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
@@ -910,6 +911,34 @@ class APITests: TestCase {
       uniqueTestName: "¬1",
       overwriteSpecificationInsteadOfFailing: false
     )
+  }
+
+  func testOrderedSet() {
+    var set = OrderedSet(["a", "b", "c"])
+    testComparableSetConformance(of: set, member: "a", nonmember: "d", superset: ["a", "b", "c", "d"], overlapping: ["a", "d"], disjoint: ["d", "e"])
+    XCTAssert(set.contents.elementsEqual(["a", "b", "c"]))
+    set.removeFirst()
+    XCTAssertEqual(set, ["b", "c"])
+    set.removeLast()
+    XCTAssertEqual(set, ["b"])
+    set.append("d")
+    XCTAssertEqual(set, ["b", "d"])
+    set.append("b")
+    XCTAssertEqual(set, ["b", "d"])
+    set.append(contentsOf: ["e", "b", "f"])
+    XCTAssertEqual(set, ["b", "d", "e", "f"])
+    set.removeAll()
+    XCTAssertEqual(set, [])
+    set.append(contentsOf: ["g", "h", "i"])
+    XCTAssertEqual(set, ["g", "h", "i"])
+    set.remove("h")
+    XCTAssertEqual(set, ["g", "i"])
+    set.remove("h")
+    XCTAssertEqual(set, ["g", "i"])
+    testRandomAccessCollectionConformance(of: set)
+    testHashableConformance(differingInstances: (set, ["j", "k", "l"]))
+    testComparableConformance(less: set, greater: ["m", "n", "o"])
+    _ = set.wrappedInstance
   }
 
   struct CustomPattern: SDGCollections.Pattern {
