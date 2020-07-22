@@ -30,7 +30,10 @@ where Element: Hashable {
   /// Creates an ordered set from the contents of a sequence.
   ///
   /// If an element occurs more than once, only the first will be included.
-  @inlinable public init<S>(_ sequence: S) where S: Sequence, S.Element == Element {
+  ///
+  /// - Parameters:
+  ///   - elements: The elements to include.
+  @inlinable public init<S>(_ elements: S) where S: Sequence, S.Element == Element {
     self.init()
     self.append(contentsOf: sequence)
   }
@@ -49,6 +52,9 @@ where Element: Hashable {
 
   /// Appends a new element to the set if it is not already present.
   ///
+  /// - Parameters:
+  ///   - newElement: The element to append.
+  ///
   /// - Returns: Whether or not the element was appended.
   @inlinable @discardableResult public mutating func append(_ newElement: Element) -> Bool {
     let inserted = set.insert(newElement).inserted
@@ -59,6 +65,9 @@ where Element: Hashable {
   }
 
   /// Appends new elements to the set if they are not already present.
+  ///
+  /// - Parameters:
+  ///   - newElements: The elements to append.
   @inlinable public mutating func append<S>(
     contentsOf newElements: S
   ) where S: Sequence, S.Element == Element {
@@ -82,12 +91,18 @@ where Element: Hashable {
   }
 
   /// Removes all elements.
+  ///
+  /// - Parameters:
+  ///   - keepCapacity: Whether or not to keep the memory capacity.
   @inlinable public mutating func removeAll(keepingCapacity keepCapacity: Bool = false) {
     array.removeAll(keepingCapacity: keepCapacity)
     set.removeAll(keepingCapacity: keepCapacity)
   }
 
   /// Removes and returns a particular element.
+  ///
+  /// - Parameters:
+  ///   - element: The element to remove.
   @inlinable @discardableResult public mutating func remove(_ element: Element) -> Element? {
     guard let removed = set.remove(element) else {
       return nil
