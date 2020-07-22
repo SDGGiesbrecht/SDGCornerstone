@@ -594,6 +594,7 @@ let package = Package(
         "SDGLogic",
         "SDGMathematics",
         "SDGCornerstoneLocalizations",
+        "SDGMathematicsTestUtilities",
         "SDGPersistenceTestUtilities",
         "SDGLocalizationTestUtilities",
       ]

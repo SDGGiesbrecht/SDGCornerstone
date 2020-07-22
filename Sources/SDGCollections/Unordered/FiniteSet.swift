@@ -115,30 +115,34 @@ public protocol FiniteSet: Collection, ComparableSet {
 
 extension FiniteSet {
 
-  @inlinable public static func ⊆ <S: SetDefinition>(precedingValue: Self, followingValue: S)
-    -> Bool where S.Element == Self.Element
-  {
+  @inlinable public static func ⊆ <S: SetDefinition>(
+    precedingValue: Self,
+    followingValue: S
+  ) -> Bool where S.Element == Self.Element {
     for element in precedingValue where element ∉ followingValue {
       return false
     }
     return true
   }
 
-  @inlinable public static func ⊈ <S: SetDefinition>(precedingValue: Self, followingValue: S)
-    -> Bool where S.Element == Self.Element
-  {
+  @inlinable public static func ⊈ <S: SetDefinition>(
+    precedingValue: Self,
+    followingValue: S
+  ) -> Bool where S.Element == Self.Element {
     return ¬(precedingValue ⊆ followingValue)
   }
 
-  @inlinable public static func ⊇ <S: SetDefinition>(precedingValue: S, followingValue: Self)
-    -> Bool where S.Element == Self.Element
-  {
+  @inlinable public static func ⊇ <S: SetDefinition>(
+    precedingValue: S,
+    followingValue: Self
+  ) -> Bool where S.Element == Self.Element {
     return followingValue ⊆ precedingValue
   }
 
-  @inlinable public static func ⊉ <S: SetDefinition>(precedingValue: S, followingValue: Self)
-    -> Bool where S.Element == Self.Element
-  {
+  @inlinable public static func ⊉ <S: SetDefinition>(
+    precedingValue: S,
+    followingValue: Self
+  ) -> Bool where S.Element == Self.Element {
     return ¬(precedingValue ⊇ followingValue)
   }
 

@@ -141,6 +141,7 @@ extension SDGCollectionsTests.APITests {
       ("testLiteralPattern", testLiteralPattern),
       ("testMutableSet", testMutableSet),
       ("testNegatedPattern", testNegatedPattern),
+      ("testOrderedSet", testOrderedSet),
       ("testPatternClassCluster", testPatternClassCluster),
       ("testRange", testRange),
       ("testRangeReplaceableCollection", testRangeReplaceableCollection),
