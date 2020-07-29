@@ -697,6 +697,9 @@ target_link_libraries("SDGControlFlowTests" PRIVATE
   "SDGControlFlow"
   "SDGTesting"
   "SDGXCTestUtilities"
+  "SDGMathematicsTestUtilities"
+  "SDGCollectionsTestUtilities"
+  "SDGPersistenceTestUtilities"
 )
 
 add_library("SDGCornerstoneDocumentationExampleTests"

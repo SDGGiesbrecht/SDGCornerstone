@@ -561,6 +561,9 @@ let package = Package(
       name: "SDGControlFlowTests",
       dependencies: [
         "SDGControlFlow", "SDGTesting", "SDGXCTestUtilities",
+        "SDGMathematicsTestUtilities",
+        "SDGCollectionsTestUtilities",
+        "SDGPersistenceTestUtilities",
       ]
     ),
     .testTarget(
