@@ -29,6 +29,7 @@ add_library("SDGControlFlow"
   "../../../Sources/SDGControlFlow/SharedValueObserver.swift"
   "../../../Sources/SDGControlFlow/TextualPlaygroundDisplay.swift"
   "../../../Sources/SDGControlFlow/TransparentWrapper.swift"
+  "../../../Sources/SDGControlFlow/Tuple.swift"
   "../../../Sources/SDGControlFlow/Weak.swift"
 )
 set_target_properties("SDGControlFlow" PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
@@ -696,6 +697,9 @@ target_link_libraries("SDGControlFlowTests" PRIVATE
   "SDGControlFlow"
   "SDGTesting"
   "SDGXCTestUtilities"
+  "SDGMathematicsTestUtilities"
+  "SDGCollectionsTestUtilities"
+  "SDGPersistenceTestUtilities"
 )
 
 add_library("SDGCornerstoneDocumentationExampleTests"

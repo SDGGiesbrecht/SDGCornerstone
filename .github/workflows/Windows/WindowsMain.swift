@@ -185,6 +185,7 @@ extension SDGControlFlowTests.APITests {
       ("testPerformanceTest", testPerformanceTest),
       ("testShared", testShared),
       ("testSharedProperty", testSharedProperty),
+      ("testTuple", testTuple),
       ("testWeak", testWeak),
     ])
   ]
