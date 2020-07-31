@@ -296,3 +296,31 @@ where A: Hashable, B: Hashable, C: Hashable, D: Hashable, E: Hashable, F: Hashab
     hasher.combine(tuple.5)
   }
 }
+
+// MARK: - TransparentWrapper
+
+extension Tuple2: TransparentWrapper {
+  public var wrappedInstance: Any {
+    return tuple
+  }
+}
+extension Tuple3: TransparentWrapper {
+  public var wrappedInstance: Any {
+    return tuple
+  }
+}
+extension Tuple4: TransparentWrapper {
+  public var wrappedInstance: Any {
+    return tuple
+  }
+}
+extension Tuple5: TransparentWrapper {
+  public var wrappedInstance: Any {
+    return tuple
+  }
+}
+extension Tuple6: TransparentWrapper {
+  public var wrappedInstance: Any {
+    return tuple
+  }
+}

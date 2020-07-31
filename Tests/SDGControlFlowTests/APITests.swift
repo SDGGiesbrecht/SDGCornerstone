@@ -292,6 +292,12 @@ class APITests: TestCase {
       testHashableConformance(
         differingInstances: (Tuple6((0, 1, 2, 3, 4, 5)), Tuple6((1, 2, 3, 4, 5, 6)))
       )
+
+      _ = Tuple2((1, 2)).wrappedInstance
+      _ = Tuple3((1, 2, 3)).wrappedInstance
+      _ = Tuple4((1, 2, 3, 4)).wrappedInstance
+      _ = Tuple5((1, 2, 3, 4, 5)).wrappedInstance
+      _ = Tuple6((1, 2, 3, 4, 5, 6)).wrappedInstance
     #endif
   }
 
