@@ -43,14 +43,18 @@
 
     internal var propertyListObject: NSObject? {
       didSet {
+        #if !os(Windows)  // #workaround(Swift 5.2.4, Declaration may not be in a Comdat!)
         cache = Cache()
+        #endif
       }
     }
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Declaration may not be in a Comdat!)
     private class Cache {
       fileprivate init() {}
       fileprivate var types: [ObjectIdentifier: Any?] = [:]
     }
     private var cache: Cache = Cache()
+    #endif
 
     // MARK: - Usage
 
@@ -170,10 +174,9 @@
         return nil
       }
 
-      let converted = cached(in: &cache.types[ObjectIdentifier(type)]) { () -> Any? in
-
+      let convert: () -> Any? = { () -> Any? in
         do {
-          return try serializeAndDecode(NSArray(object: object), as: T.self)[0]
+          return try self.serializeAndDecode(NSArray(object: object), as: T.self)[0]
         } catch {
           #if DEBUG
             print(error)
@@ -181,6 +184,12 @@
           return nil
         }
       }
+      let converted: Any?
+      #if os(Windows)  // #workaround(Swift 5.2.4, Declaration may not be in a Comdat!)
+        converted = convert()
+      #else
+        converted = cached(in: &cache.types[ObjectIdentifier(type)]) { convert() }
+      #endif
       return converted as! T?
     }
 
