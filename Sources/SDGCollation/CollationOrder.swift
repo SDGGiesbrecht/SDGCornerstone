@@ -72,15 +72,21 @@ public struct CollationOrder: Decodable, Encodable {
 
   internal var rules: [StrictString: [CollationElement]] {
     didSet {
-      cache = Cache()
+      #if !os(Windows)
+        // #workaround(Swift 5.2.4, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
+        cache = Cache()
+      #endif
     }
   }
 
-  private class Cache {
-    fileprivate init() {}
-    fileprivate var contextualMapping: ContextualMapping<StrictString, [CollationElement]>?
-  }
-  private var cache = Cache()
+  #if !os(Windows)
+    // #workaround(Swift 5.2.4, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
+    private class Cache {
+      fileprivate init() {}
+      fileprivate var contextualMapping: ContextualMapping<StrictString, [CollationElement]>?
+    }
+    private var cache = Cache()
+  #endif
 
   internal let beforeIndex: CollationIndex
   private let endOfStringIndex: CollationIndex
@@ -93,19 +99,25 @@ public struct CollationOrder: Decodable, Encodable {
   internal let afterIndex: CollationIndex
 
   internal var contextualMapping: ContextualMapping<StrictString, [CollationElement]> {
-    return cached(in: &cache.contextualMapping) {
+    let create: () -> ContextualMapping<StrictString, [CollationElement]> = {
       return ContextualMapping(
-        mapping: rules,
-        fallbackAlgorithm: fallbackAlgorithm(
-          placeholderIndex: placeholderIndex,
-          defaultAccent: defaultAccent,
-          defaultCase: defaultCase,
-          unifiedIdeographs: unifiedIdeographs,
-          otherUnifiedIdeographs: otherUnifiedIdeographs,
-          unassignedCodePoints: unassignedCodePoints
+        mapping: self.rules,
+        fallbackAlgorithm: self.fallbackAlgorithm(
+          placeholderIndex: self.placeholderIndex,
+          defaultAccent: self.defaultAccent,
+          defaultCase: self.defaultCase,
+          unifiedIdeographs: self.unifiedIdeographs,
+          otherUnifiedIdeographs: self.otherUnifiedIdeographs,
+          unassignedCodePoints: self.unassignedCodePoints
         )
       )
     }
+    #if os(Windows)
+      // #workaround(Swift 5.2.4, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
+      return create()
+    #else
+      return cached(in: &cache.contextualMapping) { create() }
+    #endif
   }
 
   // MARK: - Fallback
