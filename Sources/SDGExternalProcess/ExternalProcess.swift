@@ -101,6 +101,23 @@
           }
         }
 
+        if let name = commandName,
+          let path = ProcessInfo.processInfo.environment["PATH"] {
+          for entry in path.components(separatedBy: ":") as [String] {
+            let directory = URL(fileURLWithPath: entry)
+            #if os(Windows)
+              let executableName = "\(name).exe"
+            #else
+              let executableName = name
+            #endif
+            let possibleExecutable = directory.appendingPathComponent(executableName)
+            if checkLocation(possibleExecutable, validate: validate) {
+              self.init(at: possibleExecutable)
+              return
+            }
+          }
+        }
+
         return nil
       }
 
