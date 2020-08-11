@@ -113,7 +113,7 @@
             #endif
             let possibleExecutable = directory.appendingPathComponent(executableName)
             if checkLocation(possibleExecutable, validate: validate) {
-              self.init(at: possibleExecutable)
+              self.init(at: possibleExecutable)  // @exempt(from: tests)
               return
             }
           }
