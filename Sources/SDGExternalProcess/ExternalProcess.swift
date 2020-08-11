@@ -103,7 +103,8 @@
 
         // Fall back to searching PATH manually, because some Linux flavours lack “which”.
         if let name = commandName,
-          let path = ProcessInfo.processInfo.environment["PATH"] {
+          let path = ProcessInfo.processInfo.environment["PATH"]
+        {
           for entry in path.components(separatedBy: ":") as [String] {
             let directory = URL(fileURLWithPath: entry)
             #if os(Windows)
