@@ -66,7 +66,8 @@
             callerURL = URL(fileURLWithPath: directory)
           }
         #endif
-        repositoryRoot = callerURL
+        repositoryRoot =
+          callerURL
           .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
       }
       return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
