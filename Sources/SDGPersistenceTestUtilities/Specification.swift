@@ -55,7 +55,18 @@
         // @exempt(from: tests)
         repositoryRoot = URL(fileURLWithPath: overridden)
       } else {
-        repositoryRoot = URL(fileURLWithPath: String(describing: callerLocation))
+        var callerURL = URL(fileURLWithPath: String(describing: callerLocation))
+        #if os(Windows)
+          // Convert WSL paths to native Windows paths if cross‐compiled.
+          var directory = callerURL.path
+          if directory.hasPrefix("\u{5C}mnt\u{5C}") {
+            directory.removeFirst(5)
+            let driveLetter = directory.removeFirst()
+            directory.prepend(contentsOf: "\(driveLetter.uppercased()):")
+            callerURL = URL(fileURLWithPath: directory)
+          }
+        #endif
+        repositoryRoot = callerURL
           .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
       }
       return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
