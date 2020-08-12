@@ -88,8 +88,13 @@ class APITests: TestCase {
   func testUInt() {
     var forDescription: UInt8 = 0
     forDescription.binary[0] = true
+    #warning("Debug message.")
+    print("Set description.")
+    let binary = forDescription.binary
+    #warning("Debug message.")
+    print("Created binary.")
     testCustomStringConvertibleConformance(
-      of: forDescription.binary,
+      of: binary,
       localizations: InterfaceLocalization.self,
       uniqueTestName: "1st",
       overwriteSpecificationInsteadOfFailing: false
