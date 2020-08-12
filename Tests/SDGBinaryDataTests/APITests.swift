@@ -86,10 +86,14 @@ class APITests: TestCase {
   }
 
   func testUInt() {
+    #warning("Debug message.")
+    print("Began test.")
     var forDescription: UInt8 = 0
+    #warning("Debug message.")
+    print("Set value.")
     forDescription.binary[0] = true
     #warning("Debug message.")
-    print("Set description.")
+    print("Set binary.")
     let binary = forDescription.binary
     #warning("Debug message.")
     print("Created binary.")
