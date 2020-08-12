@@ -28,11 +28,11 @@ import SDGPersistence
 extension CollationOrder {
 
   // Constants
-  internal static let beforeIndex: CollationIndex = 0
-  internal static let endOfStringIndex: CollationIndex = beforeIndex.successor()
-  internal static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
+  static let beforeIndex: CollationIndex = 0
+  static let endOfStringIndex: CollationIndex = beforeIndex.successor()
+  static let offsetFromDUCET: CollationIndex = endOfStringIndex − beforeIndex
 
-  internal static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
+  static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
   // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
   #if !os(WASI)
