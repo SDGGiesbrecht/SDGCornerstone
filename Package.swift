@@ -754,27 +754,6 @@ func disableDevelopmentTools() {
   disableDevelopmentTools()
 #endif
 
-func adjustForWindows() {
-  // #workaround(workspace version 0.33.3, CMake cannot handle Unicode.)
-  disableDevelopmentTools()
-
-  for target in package.targets {
-    target.dependencies.removeAll(where: { dependency in
-      // #workaround(workspace version 0.33.3, Windows does not support C.)
-      return "\(dependency)".contains("RealModule")
-    })
-  }
-}
-#if os(Windows)
-  adjustForWindows()
-#endif
-if ProcessInfo.processInfo.environment["TARGETING_WINDOWS"] == "true" {
-  adjustForWindows()
-}
-if ProcessInfo.processInfo.environment["GENERATING_CMAKE_FOR_WINDOWS"] == "true" {
-  adjustForWindows()
-}
-
 if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
   for target in package.targets {
     // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)

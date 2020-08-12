@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(workspace version 0.33.3, Should be “ΓραμματικήΠτώση.swift” but for CMake normalization issue.)
-
 import SDGCollections
 
 // @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
