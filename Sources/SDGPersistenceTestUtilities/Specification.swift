@@ -129,57 +129,48 @@
         .map({ String($0.line) + String($0.newline) })
       let differences = stringLines.changes(from: specificationLines)
 
-      #if os(Windows)
+      var removals: Set<Int> = []
+      var inserts: [Int: String] = [:]
+      for difference in differences {
+        switch difference {
+        case .remove(let offset, _, _):
+          removals.insert(offset)
+        case .insert(let offset, let element, _):
+          inserts[offset] = element
+        }
+      }
 
-        // #workaround(Swift 5.2.4, The standard report triggers a SegFault.)
-        let report = "\(differences)"
-
-      #else
-
-        var removals: Set<Int> = []
-        var inserts: [Int: String] = [:]
-        for difference in differences {
-          switch difference {
-          case .remove(let offset, _, _):
-            removals.insert(offset)
-          case .insert(let offset, let element, _):
-            inserts[offset] = element
-          }
+      var reportArray: [String] = []
+      var resultOffset = 0
+      var originalOffset = 0
+      var continuingKeptRange = false
+      while resultOffset ≠ stringLines.count ∨ originalOffset ≠ specificationLines.count {
+        defer {
+          resultOffset += 1
+          originalOffset += 1
         }
 
-        var reportArray: [String] = []
-        var resultOffset = 0
-        var originalOffset = 0
-        var continuingKeptRange = false
-        while resultOffset ≠ stringLines.count ∨ originalOffset ≠ specificationLines.count {
-          defer {
-            resultOffset += 1
-            originalOffset += 1
+        if originalOffset ∈ removals {
+          reportArray.append(
+            "− "
+              + specificationLines[
+                specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)
+              ]
+          )
+          resultOffset −= 1
+          continuingKeptRange = false
+        } else if let insert = inserts[resultOffset] {
+          reportArray.append("+ " + insert)
+          originalOffset −= 1
+          continuingKeptRange = false
+        } else {
+          if ¬continuingKeptRange {
+            reportArray.append("  [...]\n")
           }
-
-          if originalOffset ∈ removals {
-            reportArray.append(
-              "− "
-                + specificationLines[
-                  specificationLines.index(specificationLines.startIndex, offsetBy: originalOffset)
-                ]
-            )
-            resultOffset −= 1
-            continuingKeptRange = false
-          } else if let insert = inserts[resultOffset] {
-            reportArray.append("+ " + insert)
-            originalOffset −= 1
-            continuingKeptRange = false
-          } else {
-            if ¬continuingKeptRange {
-              reportArray.append("  [...]\n")
-            }
-            continuingKeptRange = true
-          }
+          continuingKeptRange = true
         }
-        let report = reportArray.joined()
-
-      #endif
+      }
+      let report = reportArray.joined()
 
       fail(
         String(

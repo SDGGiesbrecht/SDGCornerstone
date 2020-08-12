@@ -25,30 +25,28 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testVersion() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
-      testCustomStringConvertibleConformance(
-        of: Version(1, 2, 3),
-        localizations: InterfaceLocalization.self,
-        uniqueTestName: "1.2.3",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    testCustomStringConvertibleConformance(
+      of: Version(1, 2, 3),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "1.2.3",
+      overwriteSpecificationInsteadOfFailing: false
+    )
 
-      XCTAssertEqual(Version(firstIn: "1.0.0"), Version(1, 0, 0))
-      XCTAssertEqual(Version(firstIn: "1.0"), Version(1, 0, 0))
-      XCTAssertEqual(Version(firstIn: "1"), Version(1, 0, 0))
-      XCTAssertNil(Version(String("Blah blah blah...")))
-      XCTAssertNil(Version(firstIn: "Blah blah blah..."))
-      XCTAssertNil(Version(String("1.0.0.0")))
-      XCTAssertNil(Version(String("1.0.A")))
-      XCTAssertNil(Version(String("1.A")))
-      XCTAssertNil(Version(String("A")))
-      XCTAssertEqual(Version(1, 0, 0).compatibleVersions.upperBound, Version(2, 0, 0))
-      XCTAssertEqual(Version(0, 1, 0).compatibleVersions.upperBound, Version(0, 2, 0))
-      XCTAssertEqual(Version(1, 0, 0), "1.0.0")
-      XCTAssertEqual(Version(1, 0, 0).string(droppingEmptyPatch: true), "1.0")
-      XCTAssertEqual(Version(1, 2, 3).string(droppingEmptyPatch: true), "1.2.3")
-      XCTAssert(Version(1, 2, 3) < Version(2, 2, 3))
-      XCTAssert(Version(1, 2, 3) < Version(1, 2, 4))
-    #endif
+    XCTAssertEqual(Version(firstIn: "1.0.0"), Version(1, 0, 0))
+    XCTAssertEqual(Version(firstIn: "1.0"), Version(1, 0, 0))
+    XCTAssertEqual(Version(firstIn: "1"), Version(1, 0, 0))
+    XCTAssertNil(Version(String("Blah blah blah...")))
+    XCTAssertNil(Version(firstIn: "Blah blah blah..."))
+    XCTAssertNil(Version(String("1.0.0.0")))
+    XCTAssertNil(Version(String("1.0.A")))
+    XCTAssertNil(Version(String("1.A")))
+    XCTAssertNil(Version(String("A")))
+    XCTAssertEqual(Version(1, 0, 0).compatibleVersions.upperBound, Version(2, 0, 0))
+    XCTAssertEqual(Version(0, 1, 0).compatibleVersions.upperBound, Version(0, 2, 0))
+    XCTAssertEqual(Version(1, 0, 0), "1.0.0")
+    XCTAssertEqual(Version(1, 0, 0).string(droppingEmptyPatch: true), "1.0")
+    XCTAssertEqual(Version(1, 2, 3).string(droppingEmptyPatch: true), "1.2.3")
+    XCTAssert(Version(1, 2, 3) < Version(2, 2, 3))
+    XCTAssert(Version(1, 2, 3) < Version(1, 2, 4))
   }
 }
