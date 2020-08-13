@@ -53,13 +53,14 @@ public func testCustomStringConvertibleConformance<T, L>(
       report.append(contentsOf: localization.code)
     }
     report.append("\n")
-    #warning("Here?")
-    return;
+    #warning("Succeeded here.")
     LocalizationSetting(orderOfPrecedence: [localization.code]).do {
       report.append(contentsOf: String(describing: instance))
       report.append("\n")
     }
     report.append("\n")
+    #warning("Here?")
+    return;
   }
   #warning("Failed here.")
   return;
