@@ -47,6 +47,8 @@ public func testCustomStringConvertibleConformance<T, L>(
 
   var report = ""
   for localization in localizations.allCases {
+    #warning("Debug message.")
+    return
     if let icon = localization.icon {
       print(icon, to: &report)
     } else {
@@ -59,9 +61,6 @@ public func testCustomStringConvertibleConformance<T, L>(
     }
     print("", to: &report)
   }
-
-  #warning("Debug message.")
-  return
 
   // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
   #if !os(WASI)
