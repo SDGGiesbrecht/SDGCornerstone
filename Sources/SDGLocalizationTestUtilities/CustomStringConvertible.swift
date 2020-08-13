@@ -58,6 +58,9 @@ public func testCustomStringConvertibleConformance<T, L>(
     print("", to: &report)
   }
 
+  #warning("Debug message.")
+  return
+
   // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     func fileName(typeName: String) -> URL {
@@ -82,7 +85,7 @@ public func testCustomStringConvertibleConformance<T, L>(
     )
   #endif
 
-  if let playround = instance as? CustomPlaygroundDisplayConvertible {
-    _ = playround.playgroundDescription
+  if let playground = instance as? CustomPlaygroundDisplayConvertible {
+    _ = playground.playgroundDescription
   }
 }
