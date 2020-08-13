@@ -45,9 +45,6 @@ public func testCustomStringConvertibleConformance<T, L>(
   line: UInt = #line
 ) where T: CustomStringConvertible, L: InputLocalization {
 
-  #warning("Debug message.")
-  return
-
   var report = ""
   for localization in localizations.allCases {
     if let icon = localization.icon {
@@ -55,6 +52,8 @@ public func testCustomStringConvertibleConformance<T, L>(
     } else {
       print(localization.code, to: &report)
     }
+    #warning("Debug message.")
+    return
     LocalizationSetting(orderOfPrecedence: [localization.code]).do {
       print(String(describing: instance), to: &report)
     }
