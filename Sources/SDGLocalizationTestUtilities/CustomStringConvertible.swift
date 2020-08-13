@@ -51,14 +51,12 @@ public func testCustomStringConvertibleConformance<T, L>(
     print(localization.code)
     if let icon = localization.icon {
       report.append(contentsOf: String(icon))
-      #warning("Succeeded here.")
     } else {
       report.append(contentsOf: localization.code)
     }
-    #warning("Here?")
-    return;
+    #warning("Succeeded here.")
     report.append("\n")
-    #warning("Failed here.")
+    #warning("Here?")
     return;
     LocalizationSetting(orderOfPrecedence: [localization.code]).do {
       print(String(describing: instance), to: &report)
