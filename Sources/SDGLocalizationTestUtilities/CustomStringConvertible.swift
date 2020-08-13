@@ -47,11 +47,14 @@ public func testCustomStringConvertibleConformance<T, L>(
 
   var report = ""
   for localization in localizations.allCases {
-    #warning("Here?")
-    return
+    #warning("Succeeded here.")
     if let icon = localization.icon {
+      #warning("Here?")
+      return
       report.append(contentsOf: String(icon))
     } else {
+      #warning("Here?")
+      return
       report.append(contentsOf: localization.code)
     }
     report.append("\n")
