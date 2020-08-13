@@ -97,11 +97,11 @@ class APITests: TestCase {
     let binary = forDescription.binary
     #warning("Debug message.")
     print("Created binary.")
-    testCustomStringConvertibleConformance(
+    /*testCustomStringConvertibleConformance(
       of: binary,
       localizations: InterfaceLocalization.self,
       uniqueTestName: "1st",
       overwriteSpecificationInsteadOfFailing: false
-    )
+    )*/
   }
 }
