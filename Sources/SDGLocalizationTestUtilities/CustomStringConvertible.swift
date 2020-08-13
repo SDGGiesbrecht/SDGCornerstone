@@ -53,13 +53,15 @@ public func testCustomStringConvertibleConformance<T, L>(
       report.append(contentsOf: localization.code)
     }
     report.append("\n")
+    #warning("Here?")
+    return;
     LocalizationSetting(orderOfPrecedence: [localization.code]).do {
       report.append(contentsOf: String(describing: instance))
       report.append("\n")
     }
     report.append("\n")
   }
-  #warning("Here?")
+  #warning("Failed here.")
   return;
 
   // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
