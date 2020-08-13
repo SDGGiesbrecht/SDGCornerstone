@@ -47,25 +47,18 @@ public func testCustomStringConvertibleConformance<T, L>(
 
   var report = ""
   for localization in localizations.allCases {
-    #warning("Debug message.")
-    print(localization.code)
     if let icon = localization.icon {
       report.append(contentsOf: String(icon))
     } else {
       report.append(contentsOf: localization.code)
     }
     report.append("\n")
-    #warning("Succeded here.")
     LocalizationSetting(orderOfPrecedence: [localization.code]).do {
       report.append(contentsOf: String(describing: instance))
       report.append("\n")
     }
-    #warning("Here?")
-    continue
     report.append("\n")
   }
-  #warning("Failed here.")
-  return;
 
   // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
   #if !os(WASI)
