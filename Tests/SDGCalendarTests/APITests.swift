@@ -27,35 +27,33 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testCalendarComponent() {
-    XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
-    XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
+      XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
 
-    #warning("Here?")
-    return;
-    XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
-    XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
+      XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
+      XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
 
-    XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
+      XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
 
-    XCTAssertEqual(GregorianDay(ordinal: 8), 8)
+      XCTAssertEqual(GregorianDay(ordinal: 8), 8)
 
-    #warning("Failed here.")
-    return;
-    XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
-    XCTAssertEqual(GregorianMinute.duration, (1 as FloatMax).minutes)
-    XCTAssertEqual(GregorianSecond.duration, (1 as FloatMax).seconds)
-    XCTAssertEqual(GregorianWeekday.duration, (1 as FloatMax).days)
-    XCTAssertEqual(HebrewDay.duration, (1 as FloatMax).days)
-    XCTAssertEqual(HebrewHour.duration, (1 as FloatMax).hours)
-    XCTAssertEqual(HebrewPart.duration, (1 as FloatMax).hebrewParts)
-    XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
+      XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
+      XCTAssertEqual(GregorianMinute.duration, (1 as FloatMax).minutes)
+      XCTAssertEqual(GregorianSecond.duration, (1 as FloatMax).seconds)
+      XCTAssertEqual(GregorianWeekday.duration, (1 as FloatMax).days)
+      XCTAssertEqual(HebrewDay.duration, (1 as FloatMax).days)
+      XCTAssertEqual(HebrewHour.duration, (1 as FloatMax).hours)
+      XCTAssertEqual(HebrewPart.duration, (1 as FloatMax).hebrewParts)
+      XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
 
-    XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
-    XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
+      XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
+      XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
 
-    var day = GregorianWeekday.monday
-    day.decrement()
-    XCTAssertEqual(day, .sunday)
+      var day = GregorianWeekday.monday
+      day.decrement()
+      XCTAssertEqual(day, .sunday)
+    #endif
   }
 
   func testCalendarDate() throws {
