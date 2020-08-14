@@ -133,7 +133,9 @@ class APITests: TestCase {
   }
 
   func testPerformanceTest() {
-    limit("Performance", to: 1) {}
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      limit("Performance", to: 1) {}
+    #endif
   }
 
   class SharedValueObserverExample: SharedValueObserver {
@@ -265,36 +267,38 @@ class APITests: TestCase {
   }
 
   func testTuple() {
-    testComparableConformance(less: Tuple2((0, 1)), greater: Tuple2((1, 2)))
-    testComparableConformance(less: Tuple3((0, 1, 2)), greater: Tuple3((1, 2, 3)))
-    testComparableConformance(less: Tuple4((0, 1, 2, 3)), greater: Tuple4((1, 2, 3, 4)))
-    testComparableConformance(less: Tuple5((0, 1, 2, 3, 4)), greater: Tuple5((1, 2, 3, 4, 5)))
-    testComparableConformance(
-      less: Tuple6((0, 1, 2, 3, 4, 5)),
-      greater: Tuple6((1, 2, 3, 4, 5, 6))
-    )
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      testComparableConformance(less: Tuple2((0, 1)), greater: Tuple2((1, 2)))
+      testComparableConformance(less: Tuple3((0, 1, 2)), greater: Tuple3((1, 2, 3)))
+      testComparableConformance(less: Tuple4((0, 1, 2, 3)), greater: Tuple4((1, 2, 3, 4)))
+      testComparableConformance(less: Tuple5((0, 1, 2, 3, 4)), greater: Tuple5((1, 2, 3, 4, 5)))
+      testComparableConformance(
+        less: Tuple6((0, 1, 2, 3, 4, 5)),
+        greater: Tuple6((1, 2, 3, 4, 5, 6))
+      )
 
-    testCodableConformance(of: Tuple2((1, 2)), uniqueTestName: "(1, 2)")
-    testCodableConformance(of: Tuple3((1, 2, 3)), uniqueTestName: "(1, 2, 3)")
-    testCodableConformance(of: Tuple4((1, 2, 3, 4)), uniqueTestName: "(1, 2, 3, 4)")
-    testCodableConformance(of: Tuple5((1, 2, 3, 4, 5)), uniqueTestName: "(1, 2, 3, 4, 5)")
-    testCodableConformance(of: Tuple6((1, 2, 3, 4, 5, 6)), uniqueTestName: "(1, 2, 3, 4, 5, 6)")
+      testCodableConformance(of: Tuple2((1, 2)), uniqueTestName: "(1, 2)")
+      testCodableConformance(of: Tuple3((1, 2, 3)), uniqueTestName: "(1, 2, 3)")
+      testCodableConformance(of: Tuple4((1, 2, 3, 4)), uniqueTestName: "(1, 2, 3, 4)")
+      testCodableConformance(of: Tuple5((1, 2, 3, 4, 5)), uniqueTestName: "(1, 2, 3, 4, 5)")
+      testCodableConformance(of: Tuple6((1, 2, 3, 4, 5, 6)), uniqueTestName: "(1, 2, 3, 4, 5, 6)")
 
-    testHashableConformance(differingInstances: (Tuple2((0, 1)), Tuple2((1, 2))))
-    testHashableConformance(differingInstances: (Tuple3((0, 1, 2)), Tuple3((1, 2, 3))))
-    testHashableConformance(differingInstances: (Tuple4((0, 1, 2, 3)), Tuple4((1, 2, 3, 4))))
-    testHashableConformance(
-      differingInstances: (Tuple5((0, 1, 2, 3, 4)), Tuple5((1, 2, 3, 4, 5)))
-    )
-    testHashableConformance(
-      differingInstances: (Tuple6((0, 1, 2, 3, 4, 5)), Tuple6((1, 2, 3, 4, 5, 6)))
-    )
+      testHashableConformance(differingInstances: (Tuple2((0, 1)), Tuple2((1, 2))))
+      testHashableConformance(differingInstances: (Tuple3((0, 1, 2)), Tuple3((1, 2, 3))))
+      testHashableConformance(differingInstances: (Tuple4((0, 1, 2, 3)), Tuple4((1, 2, 3, 4))))
+      testHashableConformance(
+        differingInstances: (Tuple5((0, 1, 2, 3, 4)), Tuple5((1, 2, 3, 4, 5)))
+      )
+      testHashableConformance(
+        differingInstances: (Tuple6((0, 1, 2, 3, 4, 5)), Tuple6((1, 2, 3, 4, 5, 6)))
+      )
 
-    _ = Tuple2((1, 2)).wrappedInstance
-    _ = Tuple3((1, 2, 3)).wrappedInstance
-    _ = Tuple4((1, 2, 3, 4)).wrappedInstance
-    _ = Tuple5((1, 2, 3, 4, 5)).wrappedInstance
-    _ = Tuple6((1, 2, 3, 4, 5, 6)).wrappedInstance
+      _ = Tuple2((1, 2)).wrappedInstance
+      _ = Tuple3((1, 2, 3)).wrappedInstance
+      _ = Tuple4((1, 2, 3, 4)).wrappedInstance
+      _ = Tuple5((1, 2, 3, 4, 5)).wrappedInstance
+      _ = Tuple6((1, 2, 3, 4, 5, 6)).wrappedInstance
+    #endif
   }
 
   func testWeak() {

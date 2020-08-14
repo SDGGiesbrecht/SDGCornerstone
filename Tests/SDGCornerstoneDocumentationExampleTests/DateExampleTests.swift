@@ -68,7 +68,9 @@ private struct DaysIntoMillennium: DateDefinition {
 class DateExampleTests: TestCase {
 
   func testCustomDate() {
-    DateExampleTests.testCustomDate()
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      DateExampleTests.testCustomDate()
+    #endif
   }
   private static func testCustomDate() {
     XCTAssertEqual(CalendarDate(gregorian: .january, 12, 2001, at: 0, 0).daysIntoMillennium, 11)

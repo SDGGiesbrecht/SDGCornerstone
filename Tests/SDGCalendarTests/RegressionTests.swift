@@ -23,20 +23,24 @@ class RegressionTests: TestCase {
   func testCalendarEquatability() {
     // Untracked
 
-    let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
-    XCTAssertEqual(tishrei, HebrewMonthAndYear(month: .tishrei, year: 5759))
-    let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
-    XCTAssertEqual(tevet, HebrewMonthAndYear(month: .tevet, year: 5759))
-    XCTAssertNotEqual(tishrei, tevet)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      let tishrei = HebrewMonthAndYear(month: .tishrei, year: 5759)
+      XCTAssertEqual(tishrei, HebrewMonthAndYear(month: .tishrei, year: 5759))
+      let tevet = HebrewMonthAndYear(month: .tevet, year: 5759)
+      XCTAssertEqual(tevet, HebrewMonthAndYear(month: .tevet, year: 5759))
+      XCTAssertNotEqual(tishrei, tevet)
+    #endif
   }
 
   func testWeekday() {
     // Untracked
 
-    var date = CalendarDate(hebrew: .tishrei, 4, 5758)
-    for _ in 0..<1000 {
-      date += (1 as CalendarDate.Vector.Scalar).weeks
-      XCTAssertEqual(date.hebrewWeekday, .sunday)
-    }
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      var date = CalendarDate(hebrew: .tishrei, 4, 5758)
+      for _ in 0..<1000 {
+        date += (1 as CalendarDate.Vector.Scalar).weeks
+        XCTAssertEqual(date.hebrewWeekday, .sunday)
+      }
+    #endif
   }
 }

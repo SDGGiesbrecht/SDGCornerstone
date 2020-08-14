@@ -303,234 +303,238 @@ class APITests: TestCase {
   }
 
   func testSemanticMarkup() {
-    testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
-    testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
-    testCodableConformance(
-      of: SemanticMarkup("àbçđę...").superscripted(),
-      uniqueTestName: "Unicode"
-    )
-    testCustomStringConvertibleConformance(
-      of: SemanticMarkup("ABC").superscripted(),
-      localizations: APILocalization.self,
-      uniqueTestName: "ABC",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      testBidirectionalCollectionConformance(of: SemanticMarkup("ABC"))
+      testRangeReplaceableCollectionConformance(of: SemanticMarkup.self, element: "A")
+      testCodableConformance(
+        of: SemanticMarkup("àbçđę...").superscripted(),
+        uniqueTestName: "Unicode"
+      )
+      testCustomStringConvertibleConformance(
+        of: SemanticMarkup("ABC").superscripted(),
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    let markup: SemanticMarkup = "..."
-    XCTAssertEqual(markup.scalars, markup.source.scalars)
-    XCTAssertEqual(StrictString(markup.clusters), StrictString(markup.source.clusters))
-    XCTAssertEqual(StrictString(markup.lines), StrictString(markup.source.lines))
+      let markup: SemanticMarkup = "..."
+      XCTAssertEqual(markup.scalars, markup.source.scalars)
+      XCTAssertEqual(StrictString(markup.clusters), StrictString(markup.source.clusters))
+      XCTAssertEqual(StrictString(markup.lines), StrictString(markup.source.lines))
 
-    var mutable = markup
-    mutable.scalars = markup.scalars
-    mutable.clusters = markup.clusters
-    mutable.lines = markup.lines
-    XCTAssertEqual(mutable.scalars, markup.scalars)
-    XCTAssertEqual(StrictString(mutable.clusters), StrictString(markup.clusters))
-    XCTAssertEqual(StrictString(mutable.lines), StrictString(markup.lines))
+      var mutable = markup
+      mutable.scalars = markup.scalars
+      mutable.clusters = markup.clusters
+      mutable.lines = markup.lines
+      XCTAssertEqual(mutable.scalars, markup.scalars)
+      XCTAssertEqual(StrictString(mutable.clusters), StrictString(markup.clusters))
+      XCTAssertEqual(StrictString(mutable.lines), StrictString(markup.lines))
 
-    XCTAssertEqual(markup.subscripted().rawTextApproximation(), "...")
+      XCTAssertEqual(markup.subscripted().rawTextApproximation(), "...")
 
-    var hasher = Hasher()
-    markup.hash(into: &hasher)
-    XCTAssertEqual(SemanticMarkup("").source, "")
-    XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
-    XCTAssertEqual(SemanticMarkup().source, "")
+      var hasher = Hasher()
+      markup.hash(into: &hasher)
+      XCTAssertEqual(SemanticMarkup("").source, "")
+      XCTAssertEqual(SemanticMarkup(["A", "B", "C"]).source, "ABC")
+      XCTAssertEqual(SemanticMarkup().source, "")
 
-    let html = SemanticMarkup("&<>").subscripted().html()
+      let html = SemanticMarkup("&<>").subscripted().html()
 
-    compare(
-      String(html),
-      against: testSpecificationDirectory().appendingPathComponent(
-        "SemanticMarkup/HTML/Escapes.txt"
-      ),
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    _ = markup.playgroundDescription
+      compare(
+        String(html),
+        against: testSpecificationDirectory().appendingPathComponent(
+          "SemanticMarkup/HTML/Escapes.txt"
+        ),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      _ = markup.playgroundDescription
 
-    XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("...")))
+      XCTAssertEqual("..." as SemanticMarkup, SemanticMarkup(String("...")))
 
-    let exponent = SemanticMarkup("y").superscripted()
-    let power: SemanticMarkup = "x\(exponent)"
-    XCTAssertNotEqual(power.source, power.rawTextApproximation())
-    let otherPower: SemanticMarkup = "x\(exponent[exponent.bounds])"
-    XCTAssertNotEqual(otherPower.source, otherPower.rawTextApproximation())
+      let exponent = SemanticMarkup("y").superscripted()
+      let power: SemanticMarkup = "x\(exponent)"
+      XCTAssertNotEqual(power.source, power.rawTextApproximation())
+      let otherPower: SemanticMarkup = "x\(exponent[exponent.bounds])"
+      XCTAssertNotEqual(otherPower.source, otherPower.rawTextApproximation())
+    #endif
   }
 
   func testStrictString() {
-    testBidirectionalCollectionConformance(of: StrictString("ABC"))
-    testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
-    testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
-    testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
-    testCustomStringConvertibleConformance(
-      of: StrictString("ABC"),
-      localizations: APILocalization.self,
-      uniqueTestName: "ABC",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    testCustomStringConvertibleConformance(
-      of: StrictString("ABC").clusters,
-      localizations: APILocalization.self,
-      uniqueTestName: "ABC",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      testBidirectionalCollectionConformance(of: StrictString("ABC"))
+      testRangeReplaceableCollectionConformance(of: StrictString.self, element: "A")
+      testCodableConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+      testFileConvertibleConformance(of: StrictString("àbçđę..."), uniqueTestName: "Unicode")
+      testCustomStringConvertibleConformance(
+        of: StrictString("ABC"),
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      testCustomStringConvertibleConformance(
+        of: StrictString("ABC").clusters,
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    var string = StrictString("\u{BC}")
-    let appendix: UnicodeScalar = "\u{BD}"
-    string.append(appendix)
-    XCTAssertEqual(String(string), "1⁄41⁄2", "Normalization problem.")
+      var string = StrictString("\u{BC}")
+      let appendix: UnicodeScalar = "\u{BD}"
+      string.append(appendix)
+      XCTAssertEqual(String(string), "1⁄41⁄2", "Normalization problem.")
 
-    let decomposed = StrictString("éé")
-    let decomposed2 = StrictString("́ée")
-    XCTAssertEqual(
-      decomposed.firstMatch(for: "e".scalars)?.range,
-      decomposed.startIndex..<decomposed.index(after: decomposed.startIndex)
-    )
-    XCTAssertEqual(
-      decomposed2.firstMatch(for: "́".scalars)?.range,
-      decomposed2.startIndex..<decomposed2.index(after: decomposed2.startIndex)
-    )
+      let decomposed = StrictString("éé")
+      let decomposed2 = StrictString("́ée")
+      XCTAssertEqual(
+        decomposed.firstMatch(for: "e".scalars)?.range,
+        decomposed.startIndex..<decomposed.index(after: decomposed.startIndex)
+      )
+      XCTAssertEqual(
+        decomposed2.firstMatch(for: "́".scalars)?.range,
+        decomposed2.startIndex..<decomposed2.index(after: decomposed2.startIndex)
+      )
 
-    let components = decomposed.components(separatedBy: "́".scalars).map({
-      StrictString($0.contents)
-    })
-    XCTAssertEqual(components, [StrictString("e"), StrictString("e"), StrictString()])
-    let separatedComponents = decomposed.components(separatedBy: "e".scalars).map({
-      StrictString($0.contents)
-    })
-    XCTAssertEqual(separatedComponents, [StrictString(), StrictString("́"), StrictString("́")])
+      let components = decomposed.components(separatedBy: "́".scalars).map({
+        StrictString($0.contents)
+      })
+      XCTAssertEqual(components, [StrictString("e"), StrictString("e"), StrictString()])
+      let separatedComponents = decomposed.components(separatedBy: "e".scalars).map({
+        StrictString($0.contents)
+      })
+      XCTAssertEqual(separatedComponents, [StrictString(), StrictString("́"), StrictString("́")])
 
-    XCTAssert(decomposed.hasPrefix("e".scalars), "Problem with decomposition.")
-    XCTAssert(decomposed.hasSuffix("́".scalars), "Problem with decomposition.")
+      XCTAssert(decomposed.hasPrefix("e".scalars), "Problem with decomposition.")
+      XCTAssert(decomposed.hasSuffix("́".scalars), "Problem with decomposition.")
 
-    XCTAssert(decomposed2.hasPrefix("́".scalars), "Problem with decomposition.")
-    XCTAssert(decomposed2.hasSuffix("e".scalars), "Problem with decomposition.")
+      XCTAssert(decomposed2.hasPrefix("́".scalars), "Problem with decomposition.")
+      XCTAssert(decomposed2.hasSuffix("e".scalars), "Problem with decomposition.")
 
-    let commonPrefix = StrictString(decomposed.commonPrefix(with: "ee".scalars).contents)
-    XCTAssertEqual(commonPrefix, StrictString("e"))
-    XCTAssertEqual(
-      StrictString(decomposed2.commonPrefix(with: "́́".scalars).contents),
-      StrictString("́")
-    )
+      let commonPrefix = StrictString(decomposed.commonPrefix(with: "ee".scalars).contents)
+      XCTAssertEqual(commonPrefix, StrictString("e"))
+      XCTAssertEqual(
+        StrictString(decomposed2.commonPrefix(with: "́́".scalars).contents),
+        StrictString("́")
+      )
 
-    XCTAssertEqual(
-      StrictString(decomposed.commonSuffix(with: "́́".scalars).contents),
-      StrictString("́")
-    )
-    XCTAssertEqual(
-      StrictString(decomposed2.commonSuffix(with: "ee".scalars).contents),
-      StrictString("e")
-    )
+      XCTAssertEqual(
+        StrictString(decomposed.commonSuffix(with: "́́".scalars).contents),
+        StrictString("́")
+      )
+      XCTAssertEqual(
+        StrictString(decomposed2.commonSuffix(with: "ee".scalars).contents),
+        StrictString("e")
+      )
 
-    var decomposedCopy = decomposed
-    decomposedCopy.replaceMatches(for: "e".scalars, with: "a".scalars)
-    XCTAssertEqual(decomposedCopy, "áá")
+      var decomposedCopy = decomposed
+      decomposedCopy.replaceMatches(for: "e".scalars, with: "a".scalars)
+      XCTAssertEqual(decomposedCopy, "áá")
 
-    decomposedCopy = decomposed
-    decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
-    XCTAssertEqual(decomposedCopy, "èè")
+      decomposedCopy = decomposed
+      decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
+      XCTAssertEqual(decomposedCopy, "èè")
 
-    decomposedCopy = decomposed2
-    decomposedCopy.replaceMatches(for: "e".scalars, with: "a".scalars)
-    XCTAssertEqual(decomposedCopy, "́áa")
+      decomposedCopy = decomposed2
+      decomposedCopy.replaceMatches(for: "e".scalars, with: "a".scalars)
+      XCTAssertEqual(decomposedCopy, "́áa")
 
-    decomposedCopy = decomposed2
-    decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
-    XCTAssertEqual(decomposedCopy, "̀èe")
+      decomposedCopy = decomposed2
+      decomposedCopy.replaceMatches(for: "́".scalars, with: "̀".scalars)
+      XCTAssertEqual(decomposedCopy, "̀èe")
 
-    let clusters = StrictString("0").clusters
-    XCTAssertEqual(clusters.index(before: clusters.endIndex), clusters.startIndex)
+      let clusters = StrictString("0").clusters
+      XCTAssertEqual(clusters.index(before: clusters.endIndex), clusters.startIndex)
 
-    XCTAssert(StrictString.ClusterView("0".clusters).elementsEqual(clusters))
-    XCTAssert(StrictString.ClusterView(clusters[...]).elementsEqual(clusters))
+      XCTAssert(StrictString.ClusterView("0".clusters).elementsEqual(clusters))
+      XCTAssert(StrictString.ClusterView(clusters[...]).elementsEqual(clusters))
 
-    XCTAssertEqual(StrictString("A" as ExtendedGraphemeCluster), "A")
-    XCTAssertEqual("...\(StrictString("A"))...", "...A...")
+      XCTAssertEqual(StrictString("A" as ExtendedGraphemeCluster), "A")
+      XCTAssertEqual("...\(StrictString("A"))...", "...A...")
 
-    var mutable: StrictString = "0"
-    mutable.clusters.truncate(at: mutable.clusters.startIndex)
-    XCTAssertEqual(mutable, "")
+      var mutable: StrictString = "0"
+      mutable.clusters.truncate(at: mutable.clusters.startIndex)
+      XCTAssertEqual(mutable, "")
 
-    mutable = "ABC"
-    mutable.write("DEF")
-    XCTAssertEqual(mutable, "ABCDEF")
+      mutable = "ABC"
+      mutable.write("DEF")
+      XCTAssertEqual(mutable, "ABCDEF")
 
-    mutable.write(to: &mutable)
-    XCTAssertEqual(mutable, "ABCDEFABCDEF")
+      mutable.write(to: &mutable)
+      XCTAssertEqual(mutable, "ABCDEFABCDEF")
 
-    XCTAssertEqual(String(describing: StrictString("A")), "A")
+      XCTAssertEqual(String(describing: StrictString("A")), "A")
 
-    XCTAssert(StrictString("A") < StrictString("B"))
+      XCTAssert(StrictString("A") < StrictString("B"))
 
-    XCTAssertEqual(StrictString("..." as StaticString), "...")
+      XCTAssertEqual(StrictString("..." as StaticString), "...")
 
-    XCTAssert("\n".isMultiline)
-    XCTAssert(¬"...".isMultiline)
+      XCTAssert("\n".isMultiline)
+      XCTAssert(¬"...".isMultiline)
 
-    XCTAssertEqual(StrictString(StrictString.ClusterView()), "")
-    XCTAssert(
-      StrictString.ClusterView("..." as String).elementsEqual(("..." as StrictString).clusters)
-    )
+      XCTAssertEqual(StrictString(StrictString.ClusterView()), "")
+      XCTAssert(
+        StrictString.ClusterView("..." as String).elementsEqual(("..." as StrictString).clusters)
+      )
 
-    XCTAssert((["A", "B", "C"] as [StrictString]).joined().elementsEqual("ABC" as StrictString))
-    XCTAssert(([] as [StrictString]).joined().elementsEqual("" as StrictString))
+      XCTAssert((["A", "B", "C"] as [StrictString]).joined().elementsEqual("ABC" as StrictString))
+      XCTAssert(([] as [StrictString]).joined().elementsEqual("" as StrictString))
 
-    // Ensure literal type can be inferred:
-    let patternSampleSpace: StrictString = "ABCDEF"
-    var mutableSampleSpace: StrictString = patternSampleSpace
-    XCTAssertNotNil(patternSampleSpace.firstMatch(for: "AB"))
-    XCTAssertEqual(patternSampleSpace.matches(for: "AB").count, 1)
-    XCTAssertEqual(patternSampleSpace.prefix(upTo: "CD")?.contents.count, 2)
-    XCTAssertEqual(patternSampleSpace.prefix(through: "CD")?.contents.count, 4)
-    XCTAssertEqual(patternSampleSpace.suffix(from: "CD")?.contents.count, 4)
-    XCTAssertEqual(patternSampleSpace.suffix(after: "CD")?.contents.count, 2)
-    XCTAssertEqual(patternSampleSpace.components(separatedBy: "CD").count, 2)
-    XCTAssert(patternSampleSpace.contains("CD"))
-    XCTAssert(patternSampleSpace.hasPrefix("AB"))
-    XCTAssert(patternSampleSpace.hasSuffix("EF"))
-    XCTAssertEqual(patternSampleSpace.commonPrefix(with: "ABX").contents.count, 2)
-    XCTAssertEqual(
-      patternSampleSpace.firstNestingLevel(startingWith: "AB", endingWith: "DE")?.contents
-        .contents
-        .count,
-      1
-    )
-    var index = patternSampleSpace.startIndex
-    XCTAssert(patternSampleSpace.advance(&index, over: "AB"))
-    XCTAssertNotNil(patternSampleSpace.lastMatch(for: "AB"))
-    XCTAssertEqual(patternSampleSpace.commonSuffix(with: "XEF").contents.count, 2)
-    mutableSampleSpace.truncate(before: "EF")
-    XCTAssertEqual(patternSampleSpace.truncated(before: "CD"), "AB")
-    mutableSampleSpace.truncate(after: "BC")
-    XCTAssertEqual(patternSampleSpace.truncated(after: "CD"), "ABCD")
-    mutableSampleSpace.drop(upTo: "BC")
-    XCTAssertEqual(patternSampleSpace.dropping(upTo: "CD"), "CDEF")
-    mutableSampleSpace.drop(through: "BC")
-    XCTAssertEqual(patternSampleSpace.dropping(through: "CD"), "EF")
-    mutableSampleSpace.replaceMatches(for: "EF", with: "...")
-    XCTAssertEqual(patternSampleSpace.replacingMatches(for: "EF", with: "..."), "ABCD...")
-    mutableSampleSpace.mutateMatches(for: "EF") { $0.contents }
-    XCTAssertEqual(
-      patternSampleSpace.mutatingMatches(for: "EF", mutation: { $0.contents }),
-      "ABCDEF"
-    )
+      // Ensure literal type can be inferred:
+      let patternSampleSpace: StrictString = "ABCDEF"
+      var mutableSampleSpace: StrictString = patternSampleSpace
+      XCTAssertNotNil(patternSampleSpace.firstMatch(for: "AB"))
+      XCTAssertEqual(patternSampleSpace.matches(for: "AB").count, 1)
+      XCTAssertEqual(patternSampleSpace.prefix(upTo: "CD")?.contents.count, 2)
+      XCTAssertEqual(patternSampleSpace.prefix(through: "CD")?.contents.count, 4)
+      XCTAssertEqual(patternSampleSpace.suffix(from: "CD")?.contents.count, 4)
+      XCTAssertEqual(patternSampleSpace.suffix(after: "CD")?.contents.count, 2)
+      XCTAssertEqual(patternSampleSpace.components(separatedBy: "CD").count, 2)
+      XCTAssert(patternSampleSpace.contains("CD"))
+      XCTAssert(patternSampleSpace.hasPrefix("AB"))
+      XCTAssert(patternSampleSpace.hasSuffix("EF"))
+      XCTAssertEqual(patternSampleSpace.commonPrefix(with: "ABX").contents.count, 2)
+      XCTAssertEqual(
+        patternSampleSpace.firstNestingLevel(startingWith: "AB", endingWith: "DE")?.contents
+          .contents
+          .count,
+        1
+      )
+      var index = patternSampleSpace.startIndex
+      XCTAssert(patternSampleSpace.advance(&index, over: "AB"))
+      XCTAssertNotNil(patternSampleSpace.lastMatch(for: "AB"))
+      XCTAssertEqual(patternSampleSpace.commonSuffix(with: "XEF").contents.count, 2)
+      mutableSampleSpace.truncate(before: "EF")
+      XCTAssertEqual(patternSampleSpace.truncated(before: "CD"), "AB")
+      mutableSampleSpace.truncate(after: "BC")
+      XCTAssertEqual(patternSampleSpace.truncated(after: "CD"), "ABCD")
+      mutableSampleSpace.drop(upTo: "BC")
+      XCTAssertEqual(patternSampleSpace.dropping(upTo: "CD"), "CDEF")
+      mutableSampleSpace.drop(through: "BC")
+      XCTAssertEqual(patternSampleSpace.dropping(through: "CD"), "EF")
+      mutableSampleSpace.replaceMatches(for: "EF", with: "...")
+      XCTAssertEqual(patternSampleSpace.replacingMatches(for: "EF", with: "..."), "ABCD...")
+      mutableSampleSpace.mutateMatches(for: "EF") { $0.contents }
+      XCTAssertEqual(
+        patternSampleSpace.mutatingMatches(for: "EF", mutation: { $0.contents }),
+        "ABCDEF"
+      )
 
-    let interpolation: StrictString = "..."
-    XCTAssertEqual(interpolation, "\(interpolation)")
-    XCTAssertEqual(interpolation, "\(interpolation[interpolation.bounds])")
-    XCTAssertEqual(interpolation, "\(interpolation.clusters)")
-    XCTAssertEqual(interpolation, "\(interpolation.clusters[interpolation.clusters.bounds])")
+      let interpolation: StrictString = "..."
+      XCTAssertEqual(interpolation, "\(interpolation)")
+      XCTAssertEqual(interpolation, "\(interpolation[interpolation.bounds])")
+      XCTAssertEqual(interpolation, "\(interpolation.clusters)")
+      XCTAssertEqual(interpolation, "\(interpolation.clusters[interpolation.clusters.bounds])")
 
-    let stringInterpolation: String = "..."
-    XCTAssertEqual("\(stringInterpolation[stringInterpolation.bounds])", interpolation)
-    XCTAssertEqual("\(stringInterpolation.scalars)", interpolation)
-    XCTAssertEqual(
-      "\(stringInterpolation.scalars[stringInterpolation.scalars.bounds])",
-      interpolation
-    )
-    let `static`: StaticString = "..."
-    XCTAssertEqual("\(`static`)", interpolation)
-    XCTAssertEqual("\(stringInterpolation.first!)", "." as StrictString)
+      let stringInterpolation: String = "..."
+      XCTAssertEqual("\(stringInterpolation[stringInterpolation.bounds])", interpolation)
+      XCTAssertEqual("\(stringInterpolation.scalars)", interpolation)
+      XCTAssertEqual(
+        "\(stringInterpolation.scalars[stringInterpolation.scalars.bounds])",
+        interpolation
+      )
+      let `static`: StaticString = "..."
+      XCTAssertEqual("\(`static`)", interpolation)
+      XCTAssertEqual("\(stringInterpolation.first!)", "." as StrictString)
+    #endif
   }
 
   func testStrictStringClusterView() {

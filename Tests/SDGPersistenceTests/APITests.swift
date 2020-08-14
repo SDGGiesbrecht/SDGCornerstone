@@ -160,10 +160,12 @@ class APITests: TestCase {
     }
   }
   func testLosslessStringConvertible() {
-    testCodableConformance(
-      of: LosslessStirngConvertibleExample("Example"),
-      uniqueTestName: "Example"
-    )
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      testCodableConformance(
+        of: LosslessStirngConvertibleExample("Example"),
+        uniqueTestName: "Example"
+      )
+    #endif
   }
 
   func testPreferences() throws {
