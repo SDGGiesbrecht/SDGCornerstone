@@ -316,25 +316,27 @@ class APITests: TestCase {
   }
 
   func testGregorianDay() {
-    testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
-    testCustomStringConvertibleConformance(
-      of: GregorianDay(4),
-      localizations: FormatLocalization.self,
-      uniqueTestName: "4",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
+      testCustomStringConvertibleConformance(
+        of: GregorianDay(4),
+        localizations: FormatLocalization.self,
+        uniqueTestName: "4",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    var day: GregorianDay = 29
-    var month: GregorianMonth = .february
-    day.correct(forMonth: &month, year: 2017)
-    XCTAssertEqual(day, 1)
-    XCTAssertEqual(month, .march)
+      var day: GregorianDay = 29
+      var month: GregorianMonth = .february
+      day.correct(forMonth: &month, year: 2017)
+      XCTAssertEqual(day, 1)
+      XCTAssertEqual(month, .march)
 
-    day = 31
-    month = .november
-    day.correct(forMonth: &month, year: 2017)
-    XCTAssertEqual(day, 1)
-    XCTAssertEqual(month, .december)
+      day = 31
+      month = .november
+      day.correct(forMonth: &month, year: 2017)
+      XCTAssertEqual(day, 1)
+      XCTAssertEqual(month, .december)
+    #endif
   }
 
   func testGregorianHour() {
