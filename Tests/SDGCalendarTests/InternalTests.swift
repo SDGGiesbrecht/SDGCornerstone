@@ -54,19 +54,17 @@ class InternalTests: TestCase {
   }
 
   func testGregorianMonth() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
-      var list = ""
-      for month in GregorianMonth.january...GregorianMonth.december {
-        for πτώση in [.ονομαστική, .αιτιατική, .γενική, .κλητική] as [ΓραμματικήΠτώση] {
-          print(month._σεΕλληνικά(πτώση), to: &list)
-        }
+    var list = ""
+    for month in GregorianMonth.january...GregorianMonth.december {
+      for πτώση in [.ονομαστική, .αιτιατική, .γενική, .κλητική] as [ΓραμματικήΠτώση] {
+        print(month._σεΕλληνικά(πτώση), to: &list)
       }
-      compare(
-        list,
-        against: testSpecificationDirectory().appendingPathComponent("Ελληνικά.txt"),
-        overwriteSpecificationInsteadOfFailing: false
-      )
-    #endif
+    }
+    compare(
+      list,
+      against: testSpecificationDirectory().appendingPathComponent("Ελληνικά.txt"),
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testGregorianWeekdayDate() {
@@ -103,19 +101,17 @@ class InternalTests: TestCase {
   static func testHebrewYear() {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
-      for year in HebrewYear(5700)..<5800 {
+    for year in HebrewYear(5700)..<5800 {
 
-        /* assert because XCTAssert doesn’t print because the exception on the next line triggers first. */
-        assert(
-          HebrewDate.intervalFromReferenceDate(toStartOf: year)
-            < HebrewDate.intervalFromReferenceDate(toStartOf: year + 1),
-          "Years incorrectly share interval."
-        )
+      /* assert because XCTAssert doesn’t print because the exception on the next line triggers first. */
+      assert(
+        HebrewDate.intervalFromReferenceDate(toStartOf: year)
+          < HebrewDate.intervalFromReferenceDate(toStartOf: year + 1),
+        "Years incorrectly share interval."
+      )
 
-        _ = year.length  // Throws exception if the year has an invalid length.
-      }
-    #endif
+      _ = year.length  // Throws exception if the year has an invalid length.
+    }
   }
 
   func testRelativeDate() {

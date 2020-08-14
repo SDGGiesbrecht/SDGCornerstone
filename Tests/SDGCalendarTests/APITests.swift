@@ -626,14 +626,12 @@ class APITests: TestCase {
   }
 
   func testWeekday() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
-      for weekday in GregorianWeekday.sunday...GregorianWeekday.saturday {
-        XCTAssertNotEqual(weekday.inEnglish(), "")
+    for weekday in GregorianWeekday.sunday...GregorianWeekday.saturday {
+      XCTAssertNotEqual(weekday.inEnglish(), "")
 
-        if weekday == .sunday {
-          XCTAssertEqual(weekday.inEnglish(), "Sunday")
-        }
+      if weekday == .sunday {
+        XCTAssertEqual(weekday.inEnglish(), "Sunday")
       }
-    #endif
+    }
   }
 }
