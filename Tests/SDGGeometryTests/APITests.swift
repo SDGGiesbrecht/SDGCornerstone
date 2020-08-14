@@ -26,7 +26,7 @@ import SDGGeometryTestUtilities
 class APITests: TestCase {
 
   func testAngle() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       _ = 0°.playgroundDescription
       _ = (−90)°.playgroundDescription
     #endif
@@ -39,7 +39,7 @@ class APITests: TestCase {
   }
 
   func testPoint() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testTwoDimensionalPointProtocolConformance(TwoDimensionalPoint<Double>.self)
       #if canImport(CoreGraphics)
         testTwoDimensionalPointProtocolConformance(CGPoint.self)
@@ -60,7 +60,7 @@ class APITests: TestCase {
   }
 
   func testVector() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testTwoDimensionalVectorProtocolConformance(TwoDimensionalVector<Double>.self)
       #if canImport(CoreGraphics)
         testTwoDimensionalVectorProtocolConformance(CGVector.self)

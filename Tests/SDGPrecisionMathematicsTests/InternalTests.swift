@@ -23,13 +23,13 @@ import SDGXCTestUtilities
 class InternalTests: TestCase {
 
   func testUIntHalvesView() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault, entire executable)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       XCTAssertEqual((0 as UInt).halves.index(before: 1), 0)
     #endif
   }
 
   func testWholeNumberBinaryView() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault, entire executable)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       XCTAssertEqual(
         (WholeNumber.BinaryView.Index(digit: 1, bit: 0)
           − WholeNumber.BinaryView.Index(digit: 0, bit: 63)).digitDistance,

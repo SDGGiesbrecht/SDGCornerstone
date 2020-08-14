@@ -27,7 +27,7 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testCalendarComponent() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
 
@@ -57,7 +57,7 @@ class APITests: TestCase {
   }
 
   func testCalendarDate() throws {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       // Force these to take place first.
       InternalTests.testHebrewYear()
 
@@ -295,7 +295,7 @@ class APITests: TestCase {
   }
 
   func testCalendarInterval() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testMeasurementConformance(of: CalendarInterval<FloatMax>.self)
       testCustomStringConvertibleConformance(
         of: 1.days,
@@ -316,7 +316,7 @@ class APITests: TestCase {
   }
 
   func testGregorianDay() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: GregorianDay(12), uniqueTestName: "12")
       testCustomStringConvertibleConformance(
         of: GregorianDay(4),
@@ -340,7 +340,7 @@ class APITests: TestCase {
   }
 
   func testGregorianHour() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: GregorianHour(12), uniqueTestName: "12")
       testDecoding(GregorianHour.self, failsFor: 600)  // Invalid raw value.
       testCustomStringConvertibleConformance(
@@ -353,7 +353,7 @@ class APITests: TestCase {
   }
 
   func testGregorianMinute() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: GregorianMinute(12), uniqueTestName: "12")
       testCustomStringConvertibleConformance(
         of: GregorianMinute(14),
@@ -365,7 +365,7 @@ class APITests: TestCase {
   }
 
   func testGregorianMonth() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: GregorianMonth.january, uniqueTestName: "January")
       testDecoding(GregorianMonth.self, failsFor: 120)  // Invalid raw value.
       testCustomStringConvertibleConformance(
@@ -403,7 +403,7 @@ class APITests: TestCase {
   }
 
   func testGregorianSecond() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: GregorianSecond(12), uniqueTestName: "12")
       testCustomStringConvertibleConformance(
         of: GregorianSecond(12),
@@ -420,7 +420,7 @@ class APITests: TestCase {
   }
 
   func testGregorianWeekday() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: GregorianWeekday.sunday, uniqueTestName: "Sunday")
       for ordinal in 1...7 {
         testCustomStringConvertibleConformance(
@@ -434,7 +434,7 @@ class APITests: TestCase {
   }
 
   func testGregorianYear() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: GregorianYear(1234), uniqueTestName: "1234")
       testCustomStringConvertibleConformance(
         of: GregorianYear(1870),
@@ -466,7 +466,7 @@ class APITests: TestCase {
   }
 
   func testHebrewDay() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: HebrewDay(12), uniqueTestName: "12")
 
       var day: HebrewDay = 30
@@ -491,7 +491,7 @@ class APITests: TestCase {
   }
 
   func testHebrewHour() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: HebrewHour(12), uniqueTestName: "12")
       testCustomStringConvertibleConformance(
         of: HebrewHour(3),
@@ -505,7 +505,7 @@ class APITests: TestCase {
   }
 
   func testHebrewMonth() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: HebrewMonth.tishrei, uniqueTestName: "Tishrei")
       testCodableConformance(of: HebrewMonth.adar, uniqueTestName: "Adar")
       testCodableConformance(of: HebrewMonth.adarI, uniqueTestName: "Adar I")
@@ -581,7 +581,7 @@ class APITests: TestCase {
   }
 
   func testHebrewMonthAndYear() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(
         of: HebrewMonthAndYear(month: .tishrei, year: 2345),
         uniqueTestName: "Tishrei, 2345"
@@ -596,7 +596,7 @@ class APITests: TestCase {
   }
 
   func testHebrewPart() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: HebrewPart(124), uniqueTestName: "124")
       testCustomStringConvertibleConformance(
         of: HebrewPart(82),
@@ -610,13 +610,13 @@ class APITests: TestCase {
   }
 
   func testHebrewWeekday() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: HebrewWeekday.sunday, uniqueTestName: "Sunday")
     #endif
   }
 
   func testHebrewYear() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(of: HebrewYear(1234), uniqueTestName: "1234")
 
       let length = FloatMax(HebrewYear(5777).numberOfDays) × (1 as FloatMax).days

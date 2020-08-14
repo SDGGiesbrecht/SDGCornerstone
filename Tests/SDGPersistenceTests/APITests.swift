@@ -160,7 +160,7 @@ class APITests: TestCase {
     }
   }
   func testLosslessStringConvertible() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testCodableConformance(
         of: LosslessStirngConvertibleExample("Example"),
         uniqueTestName: "Example"

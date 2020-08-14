@@ -98,7 +98,7 @@ class APITests: TestCase {
   }
 
   func testAngle() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testMeasurementConformance(of: Angle<Double>.self)
 
       let _1: Double = 1
@@ -178,7 +178,7 @@ class APITests: TestCase {
   }
 
   func testFloat() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testRealArithmeticConformance(of: Double.self)
       testRealArithmeticConformance(of: FloatMax.self)
       testRealArithmeticConformance(of: CGFloat.self)
@@ -197,7 +197,7 @@ class APITests: TestCase {
   }
 
   func testFunctionAnalysis() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       let negativeQuatratic = { (input: Int) -> Int in
         return −(input ↑ 2)
       }
@@ -237,7 +237,7 @@ class APITests: TestCase {
   }
 
   func testInt() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testIntegralArithmeticConformance(of: Int.self)
       testIntegralArithmeticConformance(of: IntMax.self)
       testIntegralArithmeticConformance(of: Int64.self)
@@ -290,7 +290,7 @@ class APITests: TestCase {
     }
   }
   func testNegatable() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testNegatableConformance(
         minuend: NegatableSignedNumeric(5),
         subtrahend: NegatableSignedNumeric(3),
@@ -300,7 +300,7 @@ class APITests: TestCase {
   }
 
   func testOneDimensionalPoint() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       var x = 1
       x.decrement()
       XCTAssertEqual(0, x)
@@ -401,7 +401,7 @@ class APITests: TestCase {
     }
   }
   func testPointProtocol() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testPointProtocolConformance(
         departure: PointProtocolVectorSelfExample(8),
         vector: PointProtocolVectorSelfExample(1),
@@ -510,7 +510,7 @@ class APITests: TestCase {
     }
   }
   func testRealArithmetic() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       XCTAssertEqual(0.π, Double.π)
       XCTAssertEqual(0.τ, Double.τ)
       XCTAssertEqual(e(), Double.e)
@@ -525,7 +525,7 @@ class APITests: TestCase {
   }
 
   func testSequence() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       XCTAssertEqual(∑[1, 2, 3, 4], 10)
       XCTAssertEqual(∏[1, 2, 3, 4], 24)
 
@@ -656,7 +656,7 @@ class APITests: TestCase {
     }
   }
   func testSubtractable() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       XCTAssertEqual(
         SubtractableNumericExample(6) - SubtractableNumericExample(5),  // @exempt(from: unicode)
         SubtractableNumericExample(1)
@@ -719,7 +719,7 @@ class APITests: TestCase {
   }
 
   func testUInt() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testWholeArithmeticConformance(of: UInt.self, includingNegatives: false)
       testWholeArithmeticConformance(of: UIntMax.self, includingNegatives: false)
       testWholeArithmeticConformance(of: UInt64.self, includingNegatives: false)
@@ -767,7 +767,7 @@ class APITests: TestCase {
     }
   }
   func testVectorProtocol() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, SegFault)
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
       testRationalVectorConformance(
         augend: VectorProtocolExample(1),
         addend: VectorProtocolExample(2),
