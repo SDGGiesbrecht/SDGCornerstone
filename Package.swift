@@ -734,14 +734,6 @@ let package = Package(
   ]
 )
 
-// #workaround(workspace version 0.34.0, The generated Xcode project cannot handle tools when building for iOS.)
-func disableDevelopmentTools() {
-  package.targets.removeAll(where: { $0.name == "generate‐root‐collation" })
-}
-#if os(macOS)
-  disableDevelopmentTools()
-#endif
-
 if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
   for target in package.targets {
     // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
@@ -749,9 +741,21 @@ if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
   }
 }
 
+if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
+  // #workaround(xcodebuild -version 11.6, Tool targets don’t work on tvOS.) @exempt(from: unicode)
+  package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
+}
+
+if ProcessInfo.processInfo.environment["TARGETING_IOS"] == "true" {
+  // #workaround(xcodebuild -version 11.6, Tool targets don’t work on iOS.) @exempt(from: unicode)
+  package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
+}
+
 if ProcessInfo.processInfo.environment["TARGETING_WATCHOS"] == "true" {
   // #workaround(xcodebuild -version 11.6, Test targets don’t work on watchOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.isTest })
+  // #workaround(xcodebuild -version 11.6, Tool targets don’t work on watchOS.) @exempt(from: unicode)
+  package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
 }
 
 // Windows Tests (Generated automatically by Workspace.)
