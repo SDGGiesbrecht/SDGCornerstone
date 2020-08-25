@@ -756,6 +756,7 @@ if ProcessInfo.processInfo.environment["TARGETING_WATCHOS"] == "true" {
   package.targets.removeAll(where: { $0.isTest })
   // #workaround(xcodebuild -version 11.6, Tool targets don’t work on watchOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
+
 }
 
 // Windows Tests (Generated automatically by Workspace.)
