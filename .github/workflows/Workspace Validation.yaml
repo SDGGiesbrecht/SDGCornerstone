@@ -328,6 +328,7 @@ jobs:
       shell: bash
       run: |
         set -x
+        export TARGETING_TVOS=true
         xcodebuild test -destination 'name=Apple TV 4K' -scheme SDGCornerstone-Package
   iOS:
     name: iOS
@@ -351,6 +352,7 @@ jobs:
       shell: bash
       run: |
         set -x
+        export TARGETING_IOS=true
         xcodebuild test -destination 'name=iPhone 11' -scheme SDGCornerstone-Package
   Android:
     name: Android
@@ -521,6 +523,7 @@ jobs:
       shell: bash
       run: |
         set -x
+        export TARGETING_WATCHOS=true
         xcodebuild build -sdk watchos -scheme SDGCornerstone-Package
   Miscellaneous:
     name: Miscellaneous
