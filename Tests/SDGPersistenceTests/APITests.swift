@@ -33,9 +33,11 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testFileConvertible() {
-    setTestSpecificationDirectory(to: testSpecificationDirectory())
-    testFileConvertibleConformance(of: Data([0x10, 0x20, 0x30]), uniqueTestName: "Binary Data")
-    testFileConvertibleConformance(of: "Hello, world!", uniqueTestName: "Hello")
+    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+      setTestSpecificationDirectory(to: testSpecificationDirectory())
+      testFileConvertibleConformance(of: Data([0x10, 0x20, 0x30]), uniqueTestName: "Binary Data")
+      testFileConvertibleConformance(of: "Hello, world!", uniqueTestName: "Hello")
+    #endif
   }
 
   func testFileManager() throws {
