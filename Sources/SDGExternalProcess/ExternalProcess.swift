@@ -163,12 +163,12 @@
         #else
           process.executableURL = executable
           #warning("Debugging...")
-          process.executableURL = URL(fileURLWithPath: #"C:\Program Files\Git\bin\git.exe"#)
+          process.executableURL = URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#)
         #endif
 
         process.arguments = arguments
         #warning("Debugging...")
-        process.arguments = ["--help"]
+        process.arguments = ["/c", "where git"]
         if environment ≠ nil {
           process.environment = environment
         }
