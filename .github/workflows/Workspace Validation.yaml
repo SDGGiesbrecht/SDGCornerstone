@@ -54,6 +54,7 @@ jobs:
       run: |
         where git
         where cmd
+        cmd /c where git
     - name: Set Visual Studio up
       shell: bash
       run: |
