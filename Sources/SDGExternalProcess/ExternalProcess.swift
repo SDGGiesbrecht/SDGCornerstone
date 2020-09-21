@@ -144,6 +144,11 @@
         with environment: [String: String]? = nil,
         reportProgress: (_ line: String) -> Void = { _ in }
       ) -> Result<String, ExternalProcess.Error> {
+        #warning("Debugging...")
+        print("executable:")
+        print(executable.absoluteString)
+        print(executable.pathComponents)
+        print("arguments: \(arguments)")
 
         let process = Process()
 
