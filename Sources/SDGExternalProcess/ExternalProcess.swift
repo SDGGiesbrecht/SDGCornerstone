@@ -162,7 +162,7 @@
           }
         #else
           #warning("Debugging...")
-          process.executableURL = URL(fileURLWithPath: #"C:\Program Files\git.exe"#)
+          process.executableURL = URL(fileURLWithPath: #"C:\Program Files\Git\bin\git.exe"#)
           process.executableURL = executable
         #endif
 
