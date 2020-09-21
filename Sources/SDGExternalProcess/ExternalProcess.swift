@@ -168,7 +168,7 @@
 
         process.arguments = arguments
         #warning("Debugging...")
-        process.arguments = ["no-such"]
+        process.arguments = ["--help"]
         if environment ≠ nil {
           process.environment = environment
         }
