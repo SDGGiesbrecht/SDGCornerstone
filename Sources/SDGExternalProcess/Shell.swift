@@ -127,8 +127,9 @@
         }
         #warning("Debugging...")
         print("arguments: \([executionOption, commandString])")
+        #warning("Debugging...")
         let result = process.run(
-          [executionOption, commandString],
+          [executionOption, "date"],
           in: workingDirectory,
           with: environment
         ) {
