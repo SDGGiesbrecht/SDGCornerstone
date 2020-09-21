@@ -296,8 +296,14 @@ class APITests: TestCase {
       johnDoePath = "/Users/John Doe"
     #endif
     let root = URL(fileURLWithPath: rootPath)
+    #warning("Debugging...")
+    print(root.path)
     let users = URL(fileURLWithPath: usersPath)
+    #warning("Debugging...")
+    print(users.path)
     let johnDoe = URL(fileURLWithPath: johnDoePath)
+    #warning("Debugging...")
+    print(johnDoe.path)
 
     XCTAssert(root < users)
     XCTAssert(users.is(in: root))

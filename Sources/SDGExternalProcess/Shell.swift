@@ -125,13 +125,18 @@
         } else {
           executionOption = "\u{2D}c"
         }
-        return process.run(
+        #warning("Debugging...")
+        print("arguments: \([executionOption, commandString])")
+        let result = process.run(
           [executionOption, commandString],
           in: workingDirectory,
           with: environment
         ) {
           reportProgress($0)
         }
+        #warning("Debugging...")
+        print("result: \(result)")
+        return result
       }
 
       // MARK: - TransparentWrapper
