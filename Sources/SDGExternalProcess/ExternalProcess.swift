@@ -168,7 +168,7 @@
 
         process.arguments = arguments
         #warning("Debugging...")
-        process.arguments = ["/C", "where git"]
+        process.arguments = ["/c", "where git"]
         if environment ≠ nil {
           process.environment = environment
         }
