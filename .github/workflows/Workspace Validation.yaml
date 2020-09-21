@@ -42,7 +42,7 @@ jobs:
     name: Windows
     runs-on: windows-2019
     steps:
-    - name: Check out
+    - name: Check tools
       uses: actions/checkout@v1
     - name: Cache Workspace
       uses: actions/cache@v1
@@ -53,6 +53,7 @@ jobs:
       shell: cmd
       run: |
         where git
+        where cmd
     - name: Set Visual Studio up
       shell: bash
       run: |
