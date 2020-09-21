@@ -296,20 +296,8 @@ class APITests: TestCase {
       johnDoePath = "/Users/John Doe"
     #endif
     let root = URL(fileURLWithPath: rootPath)
-    #warning("Debugging...")
-    print(root.absoluteString)
-    print(root.path)
-    print(root.pathComponents)
     let users = URL(fileURLWithPath: usersPath)
-    #warning("Debugging...")
-    print(users.absoluteString)
-    print(users.path)
-    print(users.pathComponents)
     let johnDoe = URL(fileURLWithPath: johnDoePath)
-    #warning("Debugging...")
-    print(johnDoe.absoluteString)
-    print(johnDoe.path)
-    print(johnDoe.pathComponents)
 
     XCTAssert(root < users)
     XCTAssert(users.is(in: root))
@@ -318,7 +306,7 @@ class APITests: TestCase {
     XCTAssert(johnDoe.is(in: users))
 
     XCTAssertEqual(users.path(relativeTo: root), "Users")
-    XCTAssertEqual(users.path(relativeTo: johnDoe), usersPath)
+    XCTAssertEqual(users.path(relativeTo: johnDoe), users.path)
     XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
   }
 }
