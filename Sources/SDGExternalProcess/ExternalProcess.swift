@@ -161,10 +161,14 @@
             process.launchPath = executable.path
           }
         #else
+          #warning("Debugging...")
+          process.executableURL = URL(fileURLWithPath: #"C:\Program Files\git.exe"#)
           process.executableURL = executable
         #endif
 
         process.arguments = arguments
+        #warning("Debugging...")
+        process.arguments = ["--help"]
         if environment ≠ nil {
           process.environment = environment
         }

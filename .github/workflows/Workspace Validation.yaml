@@ -49,6 +49,10 @@ jobs:
       with:
         key: Windows‐${{ hashFiles('.github/workflows/**') }}
         path: .build/SDG/Workspace
+    - name: Query Git
+      shell: cmd
+      run: |
+        where git
     - name: Set Visual Studio up
       shell: bash
       run: |
@@ -176,7 +180,6 @@ jobs:
       run: |
         set -x
         export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print $0}')
-        which git
         .build/x86_64-unknown-windows-msvc/release/WindowsTests.exe
   Web:
     name: Web
