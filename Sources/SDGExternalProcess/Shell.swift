@@ -129,7 +129,7 @@
         print("arguments: \([executionOption, commandString])")
         #warning("Debugging...")
         let result = process.run(
-          [executionOption, "\u{22}date\u{22}"],
+          [[executionOption, "\u{22}date\u{22}"].joined(separator: " ")],
           in: workingDirectory,
           with: environment
         ) {
