@@ -164,11 +164,13 @@
           process.executableURL = executable
           #warning("Debugging...")
           process.executableURL = URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#)
+          print("Adjusted process: \(process)")
         #endif
 
         process.arguments = arguments
         #warning("Debugging...")
         process.arguments = ["/?"]
+        print("Adjusted arguments: \(process.arguments)")
         if environment ≠ nil {
           process.environment = environment
         }
