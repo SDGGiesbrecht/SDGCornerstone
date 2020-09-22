@@ -52,6 +52,7 @@
           .lazy.map { FileManager.default.existingRepresentation(of: $0) }
 
         func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
+          print("Checking: \(location.path)")
           var isDirectory: ObjCBool = false
           if ¬FileManager.default.fileExists(atPath: location.path, isDirectory: &isDirectory) {
             return false
@@ -66,6 +67,7 @@
           if ¬validate(possible) {
             return false
           }
+          print("Selected: \(location.path)")
           return true
         }
 
