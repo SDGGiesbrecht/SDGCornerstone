@@ -14,8 +14,8 @@
 
 import SDGMathematics
 
-#if os(WASI)
-  // #workaround(Swift 5.2.4, Compiler crashes on generic version.)
+#if compiler(>=5.3)
+  // #workaround(Swift 5.3, Compiler crashes on generic version.)
 
   extension Collection where Element == StrictString {
 

@@ -24,14 +24,6 @@
 
   extension URL: Comparable {
 
-    private var platformPathSeparator: Unicode.Scalar {
-      #if os(Windows)
-        return #"\"#
-      #else
-        return "/"
-      #endif
-    }
-
     /// Returns `true` if the URL is in the location described by the specified URL.
     ///
     /// The URL is considered to be inside if it:
@@ -48,10 +40,10 @@
         return true
       } else {
         let otherDirectory: String
-        if otherPath.scalars.last == platformPathSeparator {
+        if otherPath.scalars.last == "/" {
           otherDirectory = otherPath
         } else {
-          otherDirectory = otherPath + String(platformPathSeparator)
+          otherDirectory = otherPath + "/"
         }
         return path.hasPrefix(otherDirectory)
       }
@@ -69,7 +61,7 @@
       }
       let otherLength = other.path.clusters.count
       var relative = path.clusters.dropFirst(otherLength)
-      if relative.first == Character(platformPathSeparator) {
+      if relative.first == "/" {
         relative = relative.dropFirst()
       }
       return String(relative)

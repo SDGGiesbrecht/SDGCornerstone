@@ -21,6 +21,12 @@ import SDGXCTestUtilities
 
 class RegressionTests: TestCase {
 
+  func testWindowsGitVersionDetectable() {
+    // Untracked
+
+    XCTAssertEqual(Version(firstIn: "git version 2.28.0.windows.1"), Version(2, 28))
+  }
+
   func testVersionRangesCanBeCreated() {
     // Untracked
 

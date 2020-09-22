@@ -53,11 +53,7 @@ class RegressionTests: TestCase {
       var url = directory.appendingPathComponent("A Folder")
       url.appendPathComponent("A File")
       XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
-      #if os(Windows)
-        XCTAssert(url.path.hasSuffix(#"A Folder\A File"#))
-      #else
-        XCTAssert(url.path.hasSuffix("A Folder/A File"))
-      #endif
+      XCTAssert(url.path.hasSuffix("A Folder/A File"))
     }
   }
 }

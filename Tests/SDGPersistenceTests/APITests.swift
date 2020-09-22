@@ -304,7 +304,7 @@ class APITests: TestCase {
     XCTAssert(johnDoe.is(in: users))
 
     XCTAssertEqual(users.path(relativeTo: root), "Users")
-    XCTAssertEqual(users.path(relativeTo: johnDoe), usersPath)
+    XCTAssertEqual(users.path(relativeTo: johnDoe), users.path)
     XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
   }
 }
