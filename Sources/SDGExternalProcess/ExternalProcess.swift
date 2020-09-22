@@ -144,11 +144,6 @@
         with environment: [String: String]? = nil,
         reportProgress: (_ line: String) -> Void = { _ in }
       ) -> Result<String, ExternalProcess.Error> {
-        #warning("Debugging...")
-        print("executable:")
-        print(executable.absoluteString)
-        print(executable.pathComponents)
-        print("arguments: \(arguments)")
 
         let process = Process()
 
@@ -162,15 +157,9 @@
           }
         #else
           process.executableURL = executable
-          #warning("Debugging...")
-          process.executableURL = URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#)
-          print("Adjusted process: \(process.executableURL)")
         #endif
 
         process.arguments = arguments
-        #warning("Debugging...")
-        process.arguments = ["/?"]
-        print("Adjusted arguments: \(process.arguments)")
         if environment ≠ nil {
           process.environment = environment
         }

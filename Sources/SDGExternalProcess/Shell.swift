@@ -125,19 +125,13 @@
         } else {
           executionOption = "\u{2D}c"
         }
-        #warning("Debugging...")
-        print("arguments: \([executionOption, commandString])")
-        #warning("Debugging...")
-        let result = process.run(
-          [[executionOption, "\u{22}date\u{22}"].joined(separator: " ")],
+        return process.run(
+          [executionOption, commandString],
           in: workingDirectory,
           with: environment
         ) {
           reportProgress($0)
         }
-        #warning("Debugging...")
-        print("result: \(result)")
-        return result
       }
 
       // MARK: - TransparentWrapper

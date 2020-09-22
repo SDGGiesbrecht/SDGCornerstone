@@ -70,10 +70,7 @@
           callerURL
           .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
       }
-      let result = repositoryRoot.appendingPathComponent("Tests/Test Specifications")
-      #warning("Debugging...")
-      print("testSpecificationDirectory: \(result)")
-      return result
+      return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
     }
   }
 
