@@ -126,18 +126,27 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
   /// - Parameters:
   ///     - string: The string to look for the version in.
   public init?(firstIn string: String) {
+    let versionDigits: Set<Unicode.Scalar> = [
+      "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+    ]
+    let versionSeparators: Set<Unicode.Scalar> = ["."]
+    let versionScalars = versionDigits ∪ versionSeparators
     let versionPattern = RepetitionPattern(
       ConditionalPattern({ (scalar: UnicodeScalar) in
-        let versionScalars: Set<UnicodeScalar> = [
-          "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".",
-        ]
         return scalar ∈ versionScalars
       }),
       count: 1..<Int.max
     )
-    let components = StrictString(string).matches(for: versionPattern).lazy.map({
-      String(StrictString($0.contents))
-    })
+    let components = StrictString(string).matches(for: versionPattern)
+      .lazy.map({ (match: PatternMatch<StrictString>) -> String in
+        var component = StrictString(match.contents)
+        // Remove trailing dots.
+        while let last = component.last,
+          last ∈ versionSeparators {
+            component.removeLast()
+        }
+        return String(component)
+      })
 
     for possibleMatch in components {
       if let version = Version(possibleMatch) {
