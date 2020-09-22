@@ -21,6 +21,18 @@ import SDGXCTestUtilities
 
 class RegressionTests: TestCase {
 
+  func testCMDWorks() throws {
+    // Untracked.
+
+    #if os(Windows)
+      #if !os(Windows)  // #workaround(Swift 5.3, Process misbehaves.)
+        let process = ExternalProcess(at: URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#))
+        let help = try process.run(["/?"]).get()
+        XCTAssert(¬help.contains("MKDIR"), "Wrong command:\n\(help)")
+      #endif
+    #endif
+  }
+
   func testDelayedShellOutput() throws {
     // Untracked
 
