@@ -59,7 +59,6 @@
         #if os(Windows)
           // Convert WSL paths to native Windows paths if cross‐compiled.
           var directory = callerURL.path
-          print("This file: \(directory.path)")
           if directory.hasPrefix("/mnt/") {
             directory.removeFirst(5)
             let driveLetter = directory.removeFirst()
@@ -71,9 +70,7 @@
           callerURL
           .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
       }
-      let result = repositoryRoot.appendingPathComponent("Tests/Test Specifications")
-      print("Test Specification Directory: \(result)")
-      return result
+      return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
     }
   }
 
