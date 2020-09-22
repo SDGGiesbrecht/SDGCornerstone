@@ -107,7 +107,13 @@
         if let name = commandName,
           let path = ProcessInfo.processInfo.environment["PATH"]
         {
-          for entry in path.components(separatedBy: ":") as [String] {
+          let separator: String
+          #if os(Windows)
+            separator = ";"
+          #else
+            separator = ":"
+          #endif
+          for entry in path.components(separatedBy: separator) as [String] {
             let directory = URL(fileURLWithPath: entry)
             #if os(Windows)
               let executableName = "\(name).exe"
