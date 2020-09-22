@@ -25,7 +25,7 @@ class RegressionTests: TestCase {
     // Untracked.
 
     #if os(Windows)
-      #if !os(Windows)  // #workaround(Swift 5.3, Process misbehaves.)
+      #if !os(Windows)  // #workaround(Swift 5.3, Shell misbehaves.)
         let process = ExternalProcess(at: URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#))
         let help = try process.run(["/?"]).get()
         XCTAssert(¬help.contains("MKDIR"), "Wrong command:\n\(help)")
@@ -36,6 +36,7 @@ class RegressionTests: TestCase {
   func testDelayedShellOutput() throws {
     // Untracked
 
+    #if !os(Windows)  // #workaround(Swift 5.3, Shell misbehaves.)
     #if !(os(iOS) || os(watchOS) || os(tvOS))
       try forAllLegacyModes {
         let longCommand = [
@@ -47,6 +48,7 @@ class RegressionTests: TestCase {
           XCTAssert(output.contains("0.8.3"))
         #endif
       }
+    #endif
     #endif
   }
 
