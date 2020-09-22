@@ -164,7 +164,7 @@
           process.executableURL = executable
           #warning("Debugging...")
           process.executableURL = URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#)
-          print("Adjusted process: \(process)")
+          print("Adjusted process: \(process.executableURL)")
         #endif
 
         process.arguments = arguments
