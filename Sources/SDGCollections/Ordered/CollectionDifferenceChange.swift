@@ -123,7 +123,7 @@ extension CollectionDifference {
 
 // MARK: - Codable
 
-fileprivate enum CodingKeys: CodingKey {
+private enum CodingKeys: CodingKey {
   case isRemove
   case offset
   case element

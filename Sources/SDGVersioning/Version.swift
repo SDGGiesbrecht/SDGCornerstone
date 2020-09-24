@@ -142,8 +142,9 @@ public struct Version: Codable, Comparable, Equatable, ExpressibleByStringLitera
         var component = StrictString(match.contents)
         // Remove trailing dots.
         while let last = component.last,
-          last ∈ versionSeparators {
-            component.removeLast()
+          last ∈ versionSeparators
+        {
+          component.removeLast()
         }
         return String(component)
       })

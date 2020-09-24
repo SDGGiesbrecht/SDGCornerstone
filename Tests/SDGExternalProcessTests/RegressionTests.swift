@@ -37,18 +37,18 @@ class RegressionTests: TestCase {
     // Untracked
 
     #if !os(Windows)  // #workaround(Swift 5.3, Shell misbehaves.)
-    #if !(os(iOS) || os(watchOS) || os(tvOS))
-      try forAllLegacyModes {
-        let longCommand = [
-          "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy",
-        ]
-        // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-        #if !os(Android)
-          let output = try Shell.default.run(command: longCommand).get()
-          XCTAssert(output.contains("0.8.3"))
-        #endif
-      }
-    #endif
+      #if !(os(iOS) || os(watchOS) || os(tvOS))
+        try forAllLegacyModes {
+          let longCommand = [
+            "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy",
+          ]
+          // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
+          #if !os(Android)
+            let output = try Shell.default.run(command: longCommand).get()
+            XCTAssert(output.contains("0.8.3"))
+          #endif
+        }
+      #endif
     #endif
   }
 

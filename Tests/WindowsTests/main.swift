@@ -264,6 +264,7 @@ extension SDGExternalProcessTests.APITests {
 extension SDGExternalProcessTests.RegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
+      ("testCMDWorks", testCMDWorks),
       ("testDelayedShellOutput", testDelayedShellOutput),
       ("testSearchFindsGit", testSearchFindsGit),
     ])
@@ -480,7 +481,8 @@ extension SDGVersioningTests.APITests {
 extension SDGVersioningTests.RegressionTests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testVersionRangesCanBeCreated", testVersionRangesCanBeCreated)
+      ("testWindowsGitVersionDetectable", testWindowsGitVersionDetectable),
+      ("testVersionRangesCanBeCreated", testVersionRangesCanBeCreated),
     ])
   ]
 }
