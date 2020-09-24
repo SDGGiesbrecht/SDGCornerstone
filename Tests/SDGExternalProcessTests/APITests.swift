@@ -86,7 +86,8 @@ class APITests: TestCase {
   }
 
   func testShell() throws {
-    #if !os(Windows)  // #workaround(Swift 5.3, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    // #workaround(Swift 5.3, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    #if !os(Windows)
       #if !(os(iOS) || os(watchOS) || os(tvOS))
         try forAllLegacyModes {
           // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
