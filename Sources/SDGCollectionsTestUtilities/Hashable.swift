@@ -22,7 +22,7 @@ import SDGLogicTestUtilities
 ///     - line: Optional. A different line to associate with any failures.
 public func testHashableConformance<T>(
   differingInstances: (T, T),
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Hashable {
   var hasher = Hasher()

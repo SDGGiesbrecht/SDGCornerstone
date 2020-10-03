@@ -40,7 +40,7 @@ public func testComparableSetConformance<T>(
   superset: T,
   overlapping: T,
   disjoint: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: ComparableSet {
 

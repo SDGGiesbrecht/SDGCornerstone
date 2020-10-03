@@ -24,7 +24,7 @@ import SDGTesting
 public func testRangeReplaceableCollectionConformance<T>(
   of type: T.Type,
   element: T.Element,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: RangeReplaceableCollection, T.Element: Equatable {
 

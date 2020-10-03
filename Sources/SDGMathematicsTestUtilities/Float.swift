@@ -44,7 +44,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   method: (call: (_ methodInstance: T) -> () throws -> R, name: String),
   of instance: T,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: ExpressibleByFloatLiteral, R: FloatingPoint, R: Subtractable {
   do {
@@ -81,7 +81,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   of instance: T,
   with argument: A,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: ExpressibleByFloatLiteral, R: FloatingPoint, R: Subtractable {
   do {
@@ -116,7 +116,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   mutatingMethod method: (call: (_ methodInstance: inout T) throws -> Void, name: String),
   of instance: T,
   resultsIn expectedResult: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   do {
@@ -157,7 +157,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   of instance: T,
   with argument: A,
   resultsIn expectedResult: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   do {
@@ -195,7 +195,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   function: (call: (_ functionArgument: A) throws -> R, name: String),
   on argument: A,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: ExpressibleByFloatLiteral, R: FloatingPoint, R: Subtractable {
   do {
@@ -233,7 +233,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   ),
   on arguments: (A, B),
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: ExpressibleByFloatLiteral, R: FloatingPoint, R: Subtractable {
   do {
@@ -268,7 +268,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   function: (call: (_ functionArgument: A) throws -> Angle<A>, name: String),
   on argument: A,
   returns expectedResult: Angle<A>,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where A: FloatingPoint {
   do {
@@ -308,7 +308,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   operator: (function: (_ precedingOperand: P, _ followingOperand: F) throws -> R, name: String),
   on operands: (precedingValue: P, followingValue: F),
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: ExpressibleByFloatLiteral, R: FloatingPoint, R: Subtractable {
   do {
@@ -343,7 +343,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   prefixOperator operator: (function: (_ functionOperand: O) throws -> R, name: String),
   on operand: O,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: ExpressibleByFloatLiteral, R: FloatingPoint, R: Subtractable {
   do {
@@ -380,7 +380,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
   ),
   with operand: O,
   resultsIn expectedResult: O,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where O: ExpressibleByFloatLiteral, O: FloatingPoint, O: Subtractable {
   do {
@@ -415,7 +415,7 @@ where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
 public func test<V>(
   variable: (contents: V, name: String),
   is expectedValue: V,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where V: ExpressibleByFloatLiteral, V: FloatingPoint, V: Subtractable {
   test(

@@ -35,7 +35,7 @@
       _ ausdruck1: @autoclosure () throws -> T,
       _ ausdruck2: @autoclosure () throws -> T,
       _ mitteilung: @autoclosure () -> Zeichenkette = "",  // @exempt(from: tests)
-      datei: StatischeZeichenkette = #file,
+      datei: StatischeZeichenkette = #filePath,
       zeile: NZahl = #line
     ) where T: Vergleichbar {  // @exempt(from: tests)
       XCTAssertEqual(

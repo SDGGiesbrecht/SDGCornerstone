@@ -34,7 +34,7 @@ public func testRationalVectorConformance<T>(
   multiplicand: T,
   multiplier: T.Scalar,
   product: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: RationalVector {
 

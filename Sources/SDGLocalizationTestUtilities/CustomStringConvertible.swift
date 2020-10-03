@@ -41,7 +41,7 @@ public func testCustomStringConvertibleConformance<T, L>(
   localizations: L.Type,
   uniqueTestName: StrictString,
   overwriteSpecificationInsteadOfFailing: Bool,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: CustomStringConvertible, L: InputLocalization {
 

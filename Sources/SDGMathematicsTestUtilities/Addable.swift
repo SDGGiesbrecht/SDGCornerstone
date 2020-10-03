@@ -28,7 +28,7 @@ public func testAddableConformance<T>(
   augend: T,
   addend: T,
   sum: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Addable, T: Equatable {
   test(operator: (+, "+"), on: (augend, addend), returns: sum, file: file, line: line)

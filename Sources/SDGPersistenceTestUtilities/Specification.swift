@@ -31,7 +31,7 @@
 
   /// Sets the directory where test specifications should be stored.
   ///
-  /// The directory should be specified relative to a source file using some combination of `#file` and `deletingLastPathComponent()`.
+  /// The directory should be specified relative to a source file using some combination of `#filePath` and `deletingLastPathComponent()`.
   /// - Parameters:
   ///     - directory: The directory.
   public func setTestSpecificationDirectory(to directory: URL) {
@@ -46,7 +46,7 @@
   ///
   /// - Parameters:
   ///     - callerLocation: Optional. A different file to consider as the location of the call.
-  public func testSpecificationDirectory(_ callerLocation: StaticString = #file) -> URL {
+  public func testSpecificationDirectory(_ callerLocation: StaticString = #filePath) -> URL {
     return cached(in: &specificationDirectory) {
       let repositoryRoot: URL
       if let overridden = ProcessInfo.processInfo
@@ -92,7 +92,7 @@
     _ string: String,
     against specification: URL,
     overwriteSpecificationInsteadOfFailing: Bool,
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
   ) {
     purgingAutoreleased {

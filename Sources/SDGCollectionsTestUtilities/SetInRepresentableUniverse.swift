@@ -30,7 +30,7 @@ public func testSetInRepresentableUniverseConformance<T>(
   a: T.Element,
   b: T.Element,
   c: T.Element,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: SetInRepresentableUniverse, T.Element: Hashable {
 

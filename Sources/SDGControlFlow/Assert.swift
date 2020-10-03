@@ -38,7 +38,7 @@ public func _primitiveMethodMessage(for method: String) -> (_APILocalization) ->
 }
 public func _primitiveMethod(
   _ method: String = #function,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) -> Never {
   _preconditionFailure(_primitiveMethodMessage(for: method), file: file, line: line)
@@ -57,7 +57,7 @@ public func _unreachableMessage(function: String, file: StaticString, line: UInt
 }
 public func _unreachable(
   function: String = #function,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line,
   column: UInt = #column
 ) -> Never {
@@ -71,7 +71,7 @@ public func _unreachable(
 @inlinable public func _assert(
   _ condition: @autoclosure () -> Bool,
   _ message: (_APILocalization) -> String,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) {
   Swift.assert(condition(), list(message), file: file, line: line)
@@ -79,7 +79,7 @@ public func _unreachable(
 
 public func _preconditionFailure(
   _ message: (_APILocalization) -> String,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) -> Never {
   Swift.preconditionFailure(list(message), file: file, line: line)

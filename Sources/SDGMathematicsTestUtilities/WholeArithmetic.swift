@@ -26,7 +26,7 @@ import SDGTesting
 public func testWholeArithmeticConformance<T>(
   of type: T.Type,
   includingNegatives: Bool,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: WholeArithmetic {
 

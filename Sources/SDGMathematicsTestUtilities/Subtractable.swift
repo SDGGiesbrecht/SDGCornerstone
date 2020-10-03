@@ -28,7 +28,7 @@ public func testSubtractableConformance<T>(
   minuend: T,
   subtrahend: T,
   difference: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Subtractable, T: Equatable {
 

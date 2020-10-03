@@ -26,7 +26,7 @@ import SDGTesting
 public func testPattern<P, C>(
   _ pattern: P,
   match: C,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 )
 where P: Pattern, C: SearchableCollection, C.Element == P.Element {

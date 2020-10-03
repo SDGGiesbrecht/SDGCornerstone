@@ -28,7 +28,7 @@ public func testSetDefinitionConformance<T>(
   of set: T,
   member: T.Element,
   nonmember: T.Element,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: SetDefinition {
 

@@ -38,7 +38,7 @@
   public func limit(
     _ testName: String,
     to duration: TimeInterval,
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line,
     test: () -> Void
   ) {

@@ -32,7 +32,7 @@ public func testPointProtocolConformance<T>(
   departure: T,
   vector: T.Vector,
   destination: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: PointProtocol {
 

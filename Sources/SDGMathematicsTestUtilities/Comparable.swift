@@ -24,7 +24,7 @@ import SDGTesting
 public func testComparableConformance<T>(
   less: T,
   greater: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Comparable {
   test(operator: (<, "<"), on: (less, greater), returns: true, file: file, line: line)
