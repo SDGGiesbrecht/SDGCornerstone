@@ -24,7 +24,7 @@ import SDGTesting
 ///     - line: Optional. A different line to associate with any failures.
 public func testMeasurementConformance<T>(
   of type: T.Type,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Measurement {
 

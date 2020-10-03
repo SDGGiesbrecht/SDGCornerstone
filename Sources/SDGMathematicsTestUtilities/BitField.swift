@@ -34,7 +34,7 @@ public func testBitFieldConformance<F>(
   and: F,
   or: F,
   exclusiveOr: F,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where F: BitField {
   test(method: (F.bitwiseNot, "bitwiseNot"), of: start, returns: not, file: file, line: line)

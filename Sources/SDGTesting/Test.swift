@@ -50,7 +50,7 @@ public var testAssertionMethod:
 public func test(
   _ expression: @autoclosure () throws -> Bool,
   _ message: @autoclosure () throws -> String,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) {
 
@@ -83,7 +83,7 @@ public func test(
 ///     - line: Optional. A different line to associate with any failures.
 public func fail(
   _ message: @autoclosure () throws -> String,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) {
   test(false, try message(), file: file, line: line)
@@ -107,7 +107,7 @@ public func test<T, R>(
   method: (call: (_ methodInstance: T) -> () throws -> R, name: String),
   of instance: T,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {
   do {
@@ -144,7 +144,7 @@ public func test<T, A, R>(
   of instance: T,
   with argument: A,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {
   do {
@@ -183,7 +183,7 @@ public func test<T, A, B, R>(
   of instance: T,
   with arguments: (A, B),
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {
   do {
@@ -218,7 +218,7 @@ public func test<T>(
   mutatingMethod method: (call: (_ methodInstance: inout T) throws -> Void, name: String),
   of instance: T,
   resultsIn expectedResult: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Equatable {
   do {
@@ -259,7 +259,7 @@ public func test<T, A>(
   of instance: T,
   with argument: A,
   resultsIn expectedResult: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Equatable {
   do {
@@ -301,7 +301,7 @@ public func test<T, A, B>(
   of instance: T,
   with arguments: (A, B),
   resultsIn expectedResult: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Equatable {
   do {
@@ -339,7 +339,7 @@ public func test<A, R>(
   function: (call: (_ functionArgument: A) throws -> R, name: String),
   on argument: A,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {
   do {  // @exempt(from: tests)
@@ -377,7 +377,7 @@ public func test<A, B, R>(
   ),
   on arguments: (A, B),
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {
   do {
@@ -417,7 +417,7 @@ public func test<P, F, R>(
   operator: (function: (_ precedingOperand: P, _ followingOperand: F) throws -> R, name: String),
   on operands: (precedingValue: P, followingValue: F),
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {
   do {
@@ -456,7 +456,7 @@ public func test<P, F, R, S>(
   ),
   on operands: (precedingValue: P, followingValue: F),
   returns expectedResult: (R, S),
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable, S: Equatable {
   do {
@@ -496,7 +496,7 @@ public func test<P, F, R>(
   on precedingValue: P,
   _ followingValue: @autoclosure () throws -> F,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {
   do {
@@ -535,7 +535,7 @@ public func test<P, F>(
   ),
   with operands: (precedingValue: P, followingValue: F),
   resultsIn expectedResult: P,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where P: Equatable {
   do {
@@ -576,7 +576,7 @@ public func test<P, F>(
   with precedingValue: P,
   _ followingValue: @autoclosure () throws -> F,
   resultsIn expectedResult: P,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where P: Equatable {
   do {
@@ -612,7 +612,7 @@ public func test<O, R>(
   prefixOperator operator: (function: (_ functionOperand: O) throws -> R, name: String),
   on operand: O,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {
   do {
@@ -646,7 +646,7 @@ public func test<O, R>(
   postfixOperator operator: (function: (_ functionOperand: O) throws -> R, name: String),
   on operand: O,
   returns expectedResult: R,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where R: Equatable {  // @exempt(from: tests)
   do {  // @exempt(from: tests)
@@ -683,7 +683,7 @@ public func test<O>(
   ),
   with operand: O,
   resultsIn expectedResult: O,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where O: Equatable {
   do {
@@ -720,7 +720,7 @@ public func test<T, P>(
   property: (accessor: (_ accessorInstance: T) -> P, name: String),
   of instance: T,
   is expectedValue: P,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where P: Equatable {
   let contents = property.accessor(instance)
@@ -750,7 +750,7 @@ public func test<T, P>(
 public func test<V>(
   variable: (contents: V, name: String),
   is expectedValue: V,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where V: Equatable {
   test(

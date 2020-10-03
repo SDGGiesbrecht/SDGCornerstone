@@ -22,7 +22,7 @@ import SDGTesting
 ///     - line: Optional. A different line to associate with any failures.
 public func testRandomNumberGeneratorConformance<T>(
   of randomizer: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: RandomNumberGenerator {
 

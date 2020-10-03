@@ -34,7 +34,7 @@ public func testNumericAdditiveArithmeticConformance<T>(
   addend: T,
   sum: T,
   includingNegatives: Bool,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: NumericAdditiveArithmetic {
 

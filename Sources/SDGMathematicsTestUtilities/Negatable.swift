@@ -28,7 +28,7 @@ public func testNegatableConformance<T>(
   minuend: T,
   subtrahend: T,
   difference: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Negatable {
 

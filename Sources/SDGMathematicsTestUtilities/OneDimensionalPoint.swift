@@ -28,7 +28,7 @@ public func testOneDimensionalPointConformance<T>(
   departure: T,
   vector: T.Vector,
   destination: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: OneDimensionalPoint {
   testComparableConformance(less: departure, greater: destination, file: file, line: line)

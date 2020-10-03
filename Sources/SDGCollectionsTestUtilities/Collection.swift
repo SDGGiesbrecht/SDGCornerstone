@@ -20,7 +20,7 @@
 ///     - line: Optional. A different line to associate with any failures.
 public func testCollectionConformance<T>(
   of collection: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Collection {
   _ = collection.startIndex

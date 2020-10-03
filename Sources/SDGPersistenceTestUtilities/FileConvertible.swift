@@ -36,7 +36,7 @@
   public func testFileConvertibleConformance<T>(
     of instance: T,
     uniqueTestName: StrictString,
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
   ) where T: Equatable, T: FileConvertible {
 

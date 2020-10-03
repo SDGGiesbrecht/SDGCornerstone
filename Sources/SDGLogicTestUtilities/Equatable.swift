@@ -27,7 +27,7 @@ import SDGTesting
 ///     - line: Optional. A different line to associate with any failures.
 public func testEquatableConformance<T>(
   differingInstances: (T, T),
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Equatable {
   test(

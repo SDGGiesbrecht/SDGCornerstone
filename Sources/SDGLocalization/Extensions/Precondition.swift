@@ -23,7 +23,7 @@ import SDGText
 ///     - line: The line number. (Provided by default.)
 public func primitiveMethod(
   _ method: String = #function,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) -> Never {
   preconditionFailure(
@@ -46,7 +46,7 @@ public func primitiveMethod(
 ///     - column: The column number. (Provided by default.)
 public func unreachable(
   function: String = #function,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line,
   column: UInt = #column
 ) -> Never {
@@ -85,7 +85,7 @@ private func unimplementedMessage(function: StaticString, file: StaticString, li
 ///     - line: The line number. (Provided by default.)
 public func notImplementedYet(  // @exempt(from: missingImplementation)
   function: StaticString = #function,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) {  // @exempt(from: tests)
   print(unimplementedMessage(function: function, file: file, line: line))
@@ -101,7 +101,7 @@ public func notImplementedYet(  // @exempt(from: missingImplementation)
 ///     - line: The line number. (Provided by default.)
 public func notImplementedYetAndCannotReturn(  // @exempt(from: missingImplementation)
   function: StaticString = #function,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) -> Never {
   preconditionFailure(unimplementedMessage(function: function, file: file, line: line))
@@ -117,7 +117,7 @@ public func notImplementedYetAndCannotReturn(  // @exempt(from: missingImplement
 public func precondition<L>(
   _ condition: @autoclosure () -> Bool,
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) {
   Swift.precondition(condition(), String(message().resolved()), file: file, line: line)
@@ -131,7 +131,7 @@ public func precondition<L>(
 ///     - line: The line number. (Provided by default.)
 public func preconditionFailure<L>(
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) -> Never {
   Swift.preconditionFailure(String(message().resolved()), file: file, line: line)
@@ -147,7 +147,7 @@ public func preconditionFailure<L>(
 @inlinable public func assert<L>(
   _ condition: @autoclosure () -> Bool,
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) {
   Swift.assert(condition(), String(message().resolved()), file: file, line: line)
@@ -161,7 +161,7 @@ public func preconditionFailure<L>(
 ///     - line: The line number. (Provided by default.)
 @inlinable public func assertionFailure<L>(
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) {
   Swift.assertionFailure(String(message().resolved()), file: file, line: line)
@@ -175,7 +175,7 @@ public func preconditionFailure<L>(
 ///     - line: The line number. (Provided by default.)
 public func fatalError<L>(
   _ message: @autoclosure () -> UserFacing<StrictString, L>,
-  file: StaticString = #file,
+  file: StaticString = #fileID,
   line: UInt = #line
 ) -> Never {
   Swift.fatalError(String(message().resolved()), file: file, line: line)

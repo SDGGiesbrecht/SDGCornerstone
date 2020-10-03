@@ -34,7 +34,7 @@ public func testFiniteSetConformance<T>(
   superset: T,
   overlapping: T,
   disjoint: T,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: FiniteSet, T.Element: Hashable {
 

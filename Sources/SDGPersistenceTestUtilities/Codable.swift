@@ -39,7 +39,7 @@ import SDGTesting
 public func testCodableConformance<T>(
   of instance: T,
   uniqueTestName: StrictString,
-  file: StaticString = #file,
+  file: StaticString = #filePath,
   line: UInt = #line
 ) where T: Codable, T: Equatable {
 
@@ -142,7 +142,7 @@ public func testCodableConformance<T>(
   public func testDecoding<T, O>(
     _ type: T.Type,
     failsFor invalidMock: O,
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
   ) where T: Codable, O: Encodable {
 
