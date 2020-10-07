@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -37,7 +37,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   #endif
   private static let sdgPreferenceKey = "SDGLanguages"
 
-  // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     internal static let osSystemWidePreferences: Shared<Preference> = {
       let preferences: Shared<Preference>
@@ -138,7 +138,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   private static func resolveCurrentLocalization() -> LocalizationSetting {
     var result = overrides.value.last
-    // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
     #if !os(WASI)
       result =
         result
@@ -173,7 +173,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   // MARK: - Static Methods
 
-  // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     // For user available menus.
     public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
@@ -230,7 +230,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
   }
 
-  // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     private init?(osPreference preference: Preference) {
       guard let result = preference.as([String].self) else {
@@ -268,7 +268,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     return L.fallbackLocalization
   }
 
-  // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     private func stabilityCacheURL<L>(for: L.Type) -> URL {
       var path = "SDGCornerstone/Stable Localizations"
@@ -303,7 +303,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     case .none:
       return resolvedFresh()
     case .stabilized:
-      // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+      // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
       #if os(WASI)
         return resolvedFresh()
       #else

@@ -736,7 +736,7 @@ let package = Package(
 
 if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
   for target in package.targets {
-    // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
     target.exclude.append("Resources.swift")
   }
 }
