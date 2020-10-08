@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
 #if !os(WASI)
   import Foundation
 #endif
@@ -100,7 +100,7 @@ public protocol DateDefinition: Decodable, Encodable {
   init(_decoding json: StrictString, codingPath: [CodingKey]) throws
 }
 
-// #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
 #if os(WASI)
   private struct FoundationUnavailable: PresentableError {
     public func presentableDescription() -> StrictString {
@@ -130,7 +130,7 @@ extension DateDefinition {
   }
 
   public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
-    // #workaround(Swift 5.2.4, Web doesn’t have Foundation yet.)
+    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
     #if os(WASI)
       throw FoundationUnavailable()
     #else
