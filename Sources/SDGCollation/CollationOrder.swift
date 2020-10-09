@@ -73,20 +73,20 @@ public struct CollationOrder: Decodable, Encodable {
   internal var rules: [StrictString: [CollationElement]] {
     didSet {
       #if !os(Windows)
-        // #workaround(Swift 5.2.4, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
+        // #workaround(Swift 5.3, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
         cache = Cache()
       #endif
     }
   }
 
-  //#if !os(Windows)
-    // #workaround(Swift 5.2.4, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
+  #if !os(Windows)
+    // #workaround(Swift 5.3, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
     private class Cache {
       fileprivate init() {}
       fileprivate var contextualMapping: ContextualMapping<StrictString, [CollationElement]>?
     }
     private var cache = Cache()
-  //#endif
+  #endif
 
   internal let beforeIndex: CollationIndex
   private let endOfStringIndex: CollationIndex
@@ -113,7 +113,7 @@ public struct CollationOrder: Decodable, Encodable {
       )
     }
     #if os(Windows)
-      // #workaround(Swift 5.2.4, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
+      // #workaround(Swift 5.3, Assertion `isCriticalEdge(term, i) && "actually not a critical edge?"' failed.) @exempt(from: unicode)
       return create()
     #else
       return cached(in: &cache.contextualMapping) { create() }
