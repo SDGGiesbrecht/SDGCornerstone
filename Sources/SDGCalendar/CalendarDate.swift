@@ -195,13 +195,13 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     }
   }
 
-  #if !os(Windows)  // #workaround(Swift 5.2.4, Declaration may not be in a Comdat!)
+  //#if !os(Windows)  // #workaround(Swift 5.2.4, Declaration may not be in a Comdat!)
     private class Cache {
       fileprivate init() {}
       fileprivate var conversions: [ObjectIdentifier: DateDefinition] = [:]
     }
     private var cache = Cache()
-  #endif
+  //#endif
 
   private var intervalSinceEpoch: CalendarInterval<FloatMax> {
     if let hebrew = definition as? HebrewDate {
