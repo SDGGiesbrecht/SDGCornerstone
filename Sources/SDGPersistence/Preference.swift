@@ -43,12 +43,12 @@
 
     internal var propertyListObject: NSObject? {
       didSet {
-        #if !os(Windows)  // #workaround(Swift 5.2.4, Declaration may not be in a Comdat!)
+        #if !os(Windows)  // #workaround(Swift 5.3, Declaration may not be in a Comdat!)
           cache = Cache()
         #endif
       }
     }
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Declaration may not be in a Comdat!)
+    #if !os(Windows)  // #workaround(Swift 5.3, Declaration may not be in a Comdat!)
       private class Cache {
         fileprivate init() {}
         fileprivate var types: [ObjectIdentifier: Any?] = [:]
@@ -185,7 +185,7 @@
         }
       }
       let converted: Any?
-      #if os(Windows)  // #workaround(Swift 5.2.4, Declaration may not be in a Comdat!)
+      #if os(Windows)  // #workaround(Swift 5.3, Declaration may not be in a Comdat!)
         converted = convert()
       #else
         converted = cached(in: &cache.types[ObjectIdentifier(type)]) { convert() }
