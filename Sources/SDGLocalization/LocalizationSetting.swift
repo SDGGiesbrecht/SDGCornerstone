@@ -18,10 +18,6 @@
 #endif
 #if canImport(WinSDK)
   import WinSDK
-
-func test() {
-  let x = GetUserPreferredUILanguages()
-}
 #endif
 
 import SDGControlFlow
@@ -54,10 +50,21 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
       #elseif os(Windows) || os(Android)
 
-        // #workaround(Swift 5.2.4, Windows: GetUserPreferredUILanguages? GlobalizationPreferences::Languages? Neither is accessible.)
-        // #workaround(Swift 5.2.4, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
         preferences = Shared(Preference.mock())
-        preferences.value.set(to: nil)
+
+        var numberOfLanguages: ULONG
+        var arrayBuffer: WCHAR
+        var bufferSize: ULONG
+        if GetUserPreferredUILanguages(
+          MUI_LANGUAGE_NAME,
+          &numberOfLanguages,
+          &arrayBuffer,
+          &bufferSize
+        ) {
+          preferences.value.set(to: arrayBuffer)
+        } else {
+          preferences.value.set(to: nil)
+        }
 
       #elseif os(Linux)
 
@@ -83,6 +90,12 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
           // @exempt(from: tests) Depends on host.
           preferences.value.set(to: nil)
         }
+
+      #elseif os(Android)
+
+        // #workaround(Swift 5.2.4, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
+        preferences = Shared(Preference.mock())
+        preferences.value.set(to: nil)
 
       #endif
 
