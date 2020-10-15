@@ -16,6 +16,13 @@
 #if !os(WASI)
   import Foundation
 #endif
+#if canImport(WinSDK)
+  import WinSDK
+
+func test() {
+  let x = GetUserPreferredUILanguages()
+}
+#endif
 
 import SDGControlFlow
 import SDGLogic
