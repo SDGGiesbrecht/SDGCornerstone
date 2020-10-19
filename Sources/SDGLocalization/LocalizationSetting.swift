@@ -56,7 +56,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
         var arrayBuffer: WCHAR
         var bufferSize: ULONG
         if GetUserPreferredUILanguages(
-          MUI_LANGUAGE_NAME,
+          DWORD(MUI_LANGUAGE_NAME),
           &numberOfLanguages,
           &arrayBuffer,
           &bufferSize
