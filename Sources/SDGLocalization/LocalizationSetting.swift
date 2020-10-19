@@ -48,7 +48,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
         preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
 
-      #elseif os(Windows) || os(Android)
+      #elseif os(Windows)
 
         preferences = Shared(Preference.mock())
 
