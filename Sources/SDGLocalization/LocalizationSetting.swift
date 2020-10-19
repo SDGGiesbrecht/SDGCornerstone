@@ -52,9 +52,9 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
         preferences = Shared(Preference.mock())
 
-        var numberOfLanguages: ULONG
-        var arrayBuffer: WCHAR
-        var bufferSize: ULONG
+        var numberOfLanguages: ULONG = nil
+        var arrayBuffer: WCHAR = nil
+        var bufferSize: ULONG = nil
         if GetUserPreferredUILanguages(
           DWORD(MUI_LANGUAGE_NAME),
           &numberOfLanguages,
