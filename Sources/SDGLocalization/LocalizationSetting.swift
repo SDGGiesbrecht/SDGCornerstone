@@ -52,29 +52,43 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
         preferences = Shared(Preference.mock())
 
+        let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
         var numberOfLanguages: ULONG = 0
-        var arrayBuffer: WCHAR = 0
         var bufferSize: ULONG = 0
         if GetUserPreferredUILanguages(
-          DWORD(MUI_LANGUAGE_NAME),
+          isoCodesMode,
           &numberOfLanguages,
-          &arrayBuffer,
-          &bufferSize
+          nil,  // Nil causes size to be queried.
+          &bufferSize  // Ends up containing the necessary size.
         ) {
           #warning("Debugging.")
-          print("Succeeded.")
           print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
-          print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
           print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
-          preferences.value.set(to: arrayBuffer)
+          // Actually fill the buffer with the language list.
+          if GetUserPreferredUILanguages(
+            isoCodesMode,
+            &numberOfLanguages,
+            &arrayBuffer,
+            &bufferSize
+          ) {
+            #warning("Debugging.")
+            print("Succeeded.")
+            print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
+            print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
+            print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
+            preferences.value.set(to: arrayBuffer)
+          } else {
+            #warning("Debugging.")
+            print("Failed.")
+            print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
+            print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
+            print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
+            fatalError("Failed.")
+            preferences.value.set(to: nil)
+          }
         } else {
           #warning("Debugging.")
-          print("Failed.")
-          print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
-          print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
-          print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
-          fatalError("Failed.")
-          preferences.value.set(to: nil)
+          print("Failed to get size.")
         }
 
       #elseif os(Linux)
