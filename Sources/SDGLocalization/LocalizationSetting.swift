@@ -52,7 +52,12 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
         preferences = Shared(Preference.mock())
 
+        #warning("Debugging.")
+        print("Querying languages...")
+        print(MUI_LANGUAGE_NAME)
         let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
+        #warning("Debugging.")
+        print(isoCodesMode)
         var numberOfLanguages: ULONG = 0
         var bufferSize: ULONG = 0
         if GetUserPreferredUILanguages(
