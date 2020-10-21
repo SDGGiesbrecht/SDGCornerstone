@@ -69,10 +69,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
             &arrayBuffer,
             &bufferSize
           ) {
-            #warning("Debugging.")
-            print("Queried languages:")
-            print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
-
             let slices = arrayBuffer.components(separatedBy: [0]).lazy
               .map({ $0.contents })
               .filter({ ¬$0.isEmpty })
@@ -80,8 +76,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
               let array = Array(slice)
               return String(utf16CodeUnits: array, count: array.count)
             }
-            print("strings, \(type(of: strings)), \(strings)")
-
             preferences.value.set(to: strings)
           } else {
             preferences.value.set(to: nil)
