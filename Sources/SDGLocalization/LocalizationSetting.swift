@@ -77,7 +77,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
               .map({ $0.contents })
               .filter({ ¬$0.isEmpty })
             let strings: [String] = slices.map { slice in
-              return String(utf16CodeUnits: Array(slice), count: array.count)
+              let array = Array(slice)
+              return String(utf16CodeUnits: array, count: array.count)
             }
             print("strings, \(type(of: strings)), \(strings)")
 
