@@ -65,7 +65,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
           print("Querying languages...")
           print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
           print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
-          var arrayBuffer: WCHAR = 0
+          var arrayBuffer: [WCHAR] = Array(repeating: 0, count: bufferSize)
           print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
           #warning("Aborting...")
           return preferences
