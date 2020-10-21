@@ -67,8 +67,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
           print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
           var arrayBuffer: [WCHAR] = Array(repeating: 0, count: Int(bufferSize))
           print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
-          #warning("Aborting...")
-          return preferences
           // Actually fill the buffer with the language list.
           if GetUserPreferredUILanguages(
             isoCodesMode,
@@ -81,6 +79,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
             print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
             print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
             print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
+            #warning("Aborting...")
+            return preferences
             preferences.value.set(to: arrayBuffer)
           } else {
             #warning("Debugging.")
@@ -88,6 +88,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
             print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
             print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
             print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
+            #warning("Aborting...")
+            return preferences
             fatalError("Failed.")
             preferences.value.set(to: nil)
           }
