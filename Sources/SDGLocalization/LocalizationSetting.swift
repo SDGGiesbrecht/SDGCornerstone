@@ -60,8 +60,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
         print(isoCodesMode)
         var numberOfLanguages: ULONG = 0
         var bufferSize: ULONG = 0
-        #warning("Aborting...")
-        return preferences
         if GetUserPreferredUILanguages(
           isoCodesMode,
           &numberOfLanguages,
@@ -71,6 +69,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
           #warning("Debugging.")
           print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
           print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
+          #warning("Aborting...")
+          return preferences
           var arrayBuffer: WCHAR = 0
           // Actually fill the buffer with the language list.
           if GetUserPreferredUILanguages(
@@ -97,6 +97,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
         } else {
           #warning("Debugging.")
           print("Failed to get size.")
+          #warning("Aborting...")
+          return preferences
           fatalError("Failed.")
           preferences.value.set(to: nil)
         }
