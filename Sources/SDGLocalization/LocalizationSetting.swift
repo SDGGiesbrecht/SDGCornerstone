@@ -51,13 +51,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       #elseif os(Windows)
 
         preferences = Shared(Preference.mock())
-
-        #warning("Debugging.")
-        print("Querying languages...")
-        print(MUI_LANGUAGE_NAME)
         let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
-        #warning("Debugging.")
-        print(isoCodesMode)
         var numberOfLanguages: ULONG = 0
         var bufferSize: ULONG = 0
         if GetUserPreferredUILanguages(
@@ -67,11 +61,13 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
           &bufferSize  // Ends up containing the necessary size.
         ) {
           #warning("Debugging.")
+          print("Querying languages...")
           print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
           print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
+          var arrayBuffer: WCHAR = 0
+          print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
           #warning("Aborting...")
           return preferences
-          var arrayBuffer: WCHAR = 0
           // Actually fill the buffer with the language list.
           if GetUserPreferredUILanguages(
             isoCodesMode,
@@ -95,11 +91,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
             preferences.value.set(to: nil)
           }
         } else {
-          #warning("Debugging.")
-          print("Failed to get size.")
-          #warning("Aborting...")
-          return preferences
-          fatalError("Failed.")
           preferences.value.set(to: nil)
         }
 
