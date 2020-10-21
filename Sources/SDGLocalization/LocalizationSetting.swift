@@ -16,6 +16,9 @@
 #if !os(WASI)
   import Foundation
 #endif
+#if canImport(WinSDK)
+  import WinSDK
+#endif
 
 import SDGControlFlow
 import SDGLogic
@@ -45,12 +48,41 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
         preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
 
-      #elseif os(Windows) || os(Android)
+      #elseif os(Windows)
 
-        // #workaround(Swift 5.2.4, Windows: GetUserPreferredUILanguages? GlobalizationPreferences::Languages? Neither is accessible.)
-        // #workaround(Swift 5.2.4, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
         preferences = Shared(Preference.mock())
-        preferences.value.set(to: nil)
+
+        let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
+        var numberOfLanguages: ULONG = 0
+        var bufferSize: ULONG = 0
+        if GetUserPreferredUILanguages(
+          isoCodesMode,
+          &numberOfLanguages,
+          nil,  // Nil causes size to be queried.
+          &bufferSize  // Ends up containing the necessary size.
+        ) {
+          var arrayBuffer: [WCHAR] = Array(repeating: 0, count: Int(bufferSize))
+          // Actually fill the buffer with the language list.
+          if GetUserPreferredUILanguages(
+            isoCodesMode,
+            &numberOfLanguages,
+            &arrayBuffer,
+            &bufferSize
+          ) {
+            let slices = arrayBuffer.components(separatedBy: [0]).lazy
+              .map({ $0.contents })
+              .filter({ ¬$0.isEmpty })
+            let strings: [String] = slices.map { slice in
+              let array = Array(slice)
+              return String(utf16CodeUnits: array, count: array.count)
+            }
+            preferences.value.set(to: strings)
+          } else {
+            preferences.value.set(to: nil)
+          }
+        } else {
+          preferences.value.set(to: nil)
+        }
 
       #elseif os(Linux)
 
@@ -76,6 +108,12 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
           // @exempt(from: tests) Depends on host.
           preferences.value.set(to: nil)
         }
+
+      #elseif os(Android)
+
+        // #workaround(Swift 5.2.4, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
+        preferences = Shared(Preference.mock())
+        preferences.value.set(to: nil)
 
       #endif
 
