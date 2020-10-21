@@ -51,6 +51,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       #elseif os(Windows)
 
         preferences = Shared(Preference.mock())
+
         let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
         var numberOfLanguages: ULONG = 0
         var bufferSize: ULONG = 0
