@@ -58,12 +58,10 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
         let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
         #warning("Debugging.")
         print(isoCodesMode)
-        #warning("Aborting...")
-        return preferences
-        #warning("Debugging.")
-        print(isoCodesMode)
         var numberOfLanguages: ULONG = 0
         var bufferSize: ULONG = 0
+        #warning("Aborting...")
+        return preferences
         if GetUserPreferredUILanguages(
           isoCodesMode,
           &numberOfLanguages,
