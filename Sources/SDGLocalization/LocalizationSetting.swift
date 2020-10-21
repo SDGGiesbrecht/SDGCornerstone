@@ -61,12 +61,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
           nil,  // Nil causes size to be queried.
           &bufferSize  // Ends up containing the necessary size.
         ) {
-          #warning("Debugging.")
-          print("Querying languages...")
-          print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
-          print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
           var arrayBuffer: [WCHAR] = Array(repeating: 0, count: Int(bufferSize))
-          print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
           // Actually fill the buffer with the language list.
           if GetUserPreferredUILanguages(
             isoCodesMode,
@@ -75,22 +70,19 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
             &bufferSize
           ) {
             #warning("Debugging.")
-            print("Succeeded.")
-            print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
+            print("Queried languages:")
             print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
-            print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
-            #warning("Aborting...")
-            return preferences
-            preferences.value.set(to: arrayBuffer)
+
+            let slices = arrayBuffer.components(separatedBy: [0]).lazy
+              .map({ $0.contents })
+              .filter({ ¬$0.isEmpty })
+            let strings: [String] = slices.map { slice in
+              return String(utf16CodeUnits: Array(slice), count: array.count)
+            }
+            print("strings, \(type(of: strings)), \(strings)")
+
+            preferences.value.set(to: strings)
           } else {
-            #warning("Debugging.")
-            print("Failed.")
-            print("numberOfLanguages, \(type(of: numberOfLanguages)), \(numberOfLanguages)")
-            print("arrayBuffer, \(type(of: arrayBuffer)), \(arrayBuffer)")
-            print("bufferSize, \(type(of: bufferSize)), \(bufferSize)")
-            #warning("Aborting...")
-            return preferences
-            fatalError("Failed.")
             preferences.value.set(to: nil)
           }
         } else {
