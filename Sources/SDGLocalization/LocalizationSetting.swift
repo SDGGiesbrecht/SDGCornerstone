@@ -42,7 +42,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   #if canImport(WinSDK)
     private func queryWindowsLanguages(
-      using method: (DWORD, PULONG!, PZZWSTR?, PULONG!) -> Bool
+      using method: (DWORD, PULONG?, PZZWSTR?, PULONG?) -> Bool
     ) -> [String]? {
       let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
       var numberOfLanguages: ULONG = 0
