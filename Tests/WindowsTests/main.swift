@@ -386,6 +386,7 @@ extension SDGPersistenceTests.RegressionTests {
     testCase([
       ("testAndroidTemporaryDirectory", testAndroidTemporaryDirectory),
       ("testCachePermissions", testCachePermissions),
+      ("testDirectoryDetection", testDirectoryDetection),
       ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled),
     ])
   ]
