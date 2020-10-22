@@ -41,7 +41,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   private static let sdgPreferenceKey = "SDGLanguages"
 
   #if canImport(WinSDK)
-    private func queryWindowsLanguages(
+    private static func queryWindowsLanguages(
       using method: (DWORD, PULONG?, PZZWSTR?, PULONG?) -> Bool
     ) -> [String]? {
       let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
