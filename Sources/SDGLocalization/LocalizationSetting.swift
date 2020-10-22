@@ -146,7 +146,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
         preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
 
-      #elseif os(Windows) || os(Android)
+      #elseif os(Windows)
 
         preferences = Shared(Preference.mock())
         preferences.value.set(to: queryWindowsLanguages(using: GetProcessPreferredUILanguages))
