@@ -295,6 +295,24 @@
     /// - Parameters:
     ///     - directory: The root directory for the search.
     public func deepFileEnumeration(in directory: URL) throws -> [URL] {
+      do {
+        return try _deepFileEnumeration(in: directory)
+      } catch {
+        // @exempt(from: tests)
+        // Fallback for Windows, which errors if the URL wasn’t marked as a directory.
+        let originalError = error
+        let asDirectory = directory.deletingLastPathComponent().appendingPathComponent(
+          directory.lastPathComponent,
+          isDirectory: true
+        )
+        do {
+          return try _deepFileEnumeration(in: asDirectory)
+        } catch {
+          throw originalError
+        }
+      }
+    }
+    private func _deepFileEnumeration(in directory: URL) throws -> [URL] {
 
       var failureReason: Error?  // Thrown after enumeration stops. (See below.)
       guard

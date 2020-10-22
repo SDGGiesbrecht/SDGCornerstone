@@ -46,6 +46,22 @@ class RegressionTests: TestCase {
     }
   }
 
+  func testDirectoryDetection() throws {
+    // Untracked
+
+    try FileManager.default.withTemporaryDirectory(appropriateFor: nil) { temporary in
+      let directory = temporary.appendingPathComponent("Directory", isDirectory: false)
+      let fileName = "File.txt"
+      let contents = directory.appendingPathComponent(fileName)
+      try "File".save(to: contents)
+      XCTAssert(
+        try FileManager.default.deepFileEnumeration(in: directory).contains(where: {
+          $0.lastPathComponent == fileName
+        })
+      )
+    }
+  }
+
   func testPercentEncodingIsNotDoubled() {
     // Untracked
 
