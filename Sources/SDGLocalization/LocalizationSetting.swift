@@ -40,6 +40,44 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   #endif
   private static let sdgPreferenceKey = "SDGLanguages"
 
+  #if canImport(WinSDK)
+    private static func queryWindowsLanguages(
+      using method: (DWORD, PULONG?, PZZWSTR?, PULONG?) -> Bool
+    ) -> [String]? {
+      let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
+      var numberOfLanguages: ULONG = 0
+      var bufferSize: ULONG = 0
+      if method(
+        isoCodesMode,
+        &numberOfLanguages,
+        nil,  // Nil causes size to be queried.
+        &bufferSize  // Ends up containing the necessary size.
+      ) {
+        var arrayBuffer: [WCHAR] = Array(repeating: 0, count: Int(bufferSize))
+        // Actually fill the buffer with the language list.
+        if method(
+          isoCodesMode,
+          &numberOfLanguages,
+          &arrayBuffer,
+          &bufferSize
+        ) {
+          let slices = arrayBuffer.components(separatedBy: [0]).lazy
+            .map({ $0.contents })
+            .filter({ ¬$0.isEmpty })
+          let strings: [String] = slices.map { slice in
+            let array = Array(slice)
+            return String(utf16CodeUnits: array, count: array.count)
+          }
+          return strings
+        } else {
+          return nil
+        }
+      } else {
+        return nil
+      }
+    }
+  #endif
+
   // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     internal static let osSystemWidePreferences: Shared<Preference> = {
@@ -51,38 +89,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       #elseif os(Windows)
 
         preferences = Shared(Preference.mock())
-
-        let isoCodesMode: DWORD = DWORD(MUI_LANGUAGE_NAME)
-        var numberOfLanguages: ULONG = 0
-        var bufferSize: ULONG = 0
-        if GetUserPreferredUILanguages(
-          isoCodesMode,
-          &numberOfLanguages,
-          nil,  // Nil causes size to be queried.
-          &bufferSize  // Ends up containing the necessary size.
-        ) {
-          var arrayBuffer: [WCHAR] = Array(repeating: 0, count: Int(bufferSize))
-          // Actually fill the buffer with the language list.
-          if GetUserPreferredUILanguages(
-            isoCodesMode,
-            &numberOfLanguages,
-            &arrayBuffer,
-            &bufferSize
-          ) {
-            let slices = arrayBuffer.components(separatedBy: [0]).lazy
-              .map({ $0.contents })
-              .filter({ ¬$0.isEmpty })
-            let strings: [String] = slices.map { slice in
-              let array = Array(slice)
-              return String(utf16CodeUnits: array, count: array.count)
-            }
-            preferences.value.set(to: strings)
-          } else {
-            preferences.value.set(to: nil)
-          }
-        } else {
-          preferences.value.set(to: nil)
-        }
+        preferences.value.set(to: queryWindowsLanguages(using: GetUserPreferredUILanguages))
 
       #elseif os(Linux)
 
@@ -139,15 +146,19 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
         preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
 
-      #elseif os(Windows) || os(Android)
+      #elseif os(Windows)
 
-        // #workaround(Swift 5.2.4, Windows: GetProcessPreferredUILanguages? GlobalizationPreferences::Languages)
-        // #workaround(Swift 5.2.4, Android: Locale.getDefault().getLanguage()? Not available yet.)
         preferences = Shared(Preference.mock())
+        preferences.value.set(to: queryWindowsLanguages(using: GetProcessPreferredUILanguages))
 
       #elseif os(Linux)
 
         // This is does not exist on Linux anyway.
+        preferences = Shared(Preference.mock())
+
+      #elseif os(Android)
+
+        // #workaround(Swift 5.2.4, Android: Locale.getDefault().getLanguage()? Not available yet.)
         preferences = Shared(Preference.mock())
 
       #endif

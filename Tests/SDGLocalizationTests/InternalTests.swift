@@ -113,13 +113,11 @@ class InternalTests: TestCase {
       }
     #endif
     if expectOperatingSystemLanguage {
-      #if !os(Windows)  // #workaround(Swift 5.2.4, Not possible yet.)
-        #if !os(Android)  // #workaround(Swift 5.2.4, Not possible yet.)
-          XCTAssertNotNil(
-            LocalizationSetting.osSystemWidePreferences.value.as([String].self),
-            "Failed to detect operating system localization setting."
-          )
-        #endif
+      #if !os(Android)  // #workaround(Swift 5.2.4, Not possible yet.)
+        XCTAssertNotNil(
+          LocalizationSetting.osSystemWidePreferences.value.as([String].self),
+          "Failed to detect operating system localization setting."
+        )
       #endif
     }
 
