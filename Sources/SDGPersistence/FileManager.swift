@@ -146,10 +146,10 @@
     ) rethrows -> Result {
       var directory: URL
 
-      #if os(Android)
+      //#if os(Android)
         // #workaround(Swift 5.2.4, .itemReplacementDirectory leads to illegal instruction.)
         directory = temporaryDirectory
-      #else
+      //#else
         let volume = try? url(
           for: .documentDirectory,
           in: .userDomainMask,
@@ -181,7 +181,7 @@
             }
           }
         }
-      #endif
+      //#endif
 
       directory.appendPathComponent(UUID().uuidString)
       defer { try? removeItem(at: directory) }
