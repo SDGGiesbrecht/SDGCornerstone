@@ -118,7 +118,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
       #elseif os(Android)
 
-        // #workaround(Swift 5.2.4, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? Not available yet.)
+        // #workaround(Swift 5.3, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? No access to Java VM yet.)
         preferences = Shared(Preference.mock())
         preferences.value.set(to: nil)
 
@@ -158,7 +158,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
       #elseif os(Android)
 
-        // #workaround(Swift 5.2.4, Android: Locale.getDefault().getLanguage()? Not available yet.)
+        // #workaround(Swift 5.3, Android: Locale.getDefault().getLanguage()? No access to Java VM yet.)
         preferences = Shared(Preference.mock())
 
       #endif
