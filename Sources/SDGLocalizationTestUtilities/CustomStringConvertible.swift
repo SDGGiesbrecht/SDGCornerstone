@@ -60,6 +60,8 @@ public func testCustomStringConvertibleConformance<T, L>(
     report.append("\n")
   }
 
+  #warning("Debugging...")
+  print("Here. (1)")
   // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     func fileName(typeName: String) -> URL {
@@ -74,7 +76,11 @@ public func testCustomStringConvertibleConformance<T, L>(
         .replacingMatches(for: "<", with: "⟨")
         .replacingMatches(for: ">", with: "⟩")
     )
+  #warning("Debugging...")
+  print("Here. (2)")
     try? FileManager.default.move(deprecated, to: specification)
+  #warning("Debugging...")
+  print("Here. (3)")
     SDGPersistenceTestUtilities.compare(
       report,
       against: specification,
@@ -82,6 +88,8 @@ public func testCustomStringConvertibleConformance<T, L>(
       file: file,
       line: line
     )
+  #warning("Debugging...")
+  print("Here. (4)")
   #endif
 
   if let playground = instance as? CustomPlaygroundDisplayConvertible {
