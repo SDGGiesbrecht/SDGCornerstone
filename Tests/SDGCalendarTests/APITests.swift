@@ -27,31 +27,71 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testCalendarComponent() {
+    #warning("Debugging...")
+    print("0")
       XCTAssertEqual(GregorianDay.meanDuration, GregorianDay.maximumDuration)
+    #warning("Debugging...")
+    print("1")
       XCTAssertEqual(GregorianDay.minimumDuration, GregorianDay.maximumDuration)
+    #warning("Debugging...")
+    print("2")
 
       XCTAssertEqual(GregorianMinute(ordinal: 5), GregorianMinute(numberAlreadyElapsed: 4))
+    #warning("Debugging...")
+    print("3")
       XCTAssertEqual(GregorianMinute(ordinal: 4).ordinal, 4)
+    #warning("Debugging...")
+    print("4")
 
       XCTAssertEqual(GregorianMonth(ordinal: 2), .february)
+    #warning("Debugging...")
+    print("5")
 
       XCTAssertEqual(GregorianDay(ordinal: 8), 8)
+    #warning("Debugging...")
+    print("6")
 
       XCTAssertEqual(GregorianHour.duration, (1 as FloatMax).hours)
+    #warning("Debugging...")
+    print("7")
       XCTAssertEqual(GregorianMinute.duration, (1 as FloatMax).minutes)
+    #warning("Debugging...")
+    print("8")
       XCTAssertEqual(GregorianSecond.duration, (1 as FloatMax).seconds)
+    #warning("Debugging...")
+    print("9")
       XCTAssertEqual(GregorianWeekday.duration, (1 as FloatMax).days)
+    #warning("Debugging...")
+    print("10")
       XCTAssertEqual(HebrewDay.duration, (1 as FloatMax).days)
+    #warning("Debugging...")
+    print("11")
       XCTAssertEqual(HebrewHour.duration, (1 as FloatMax).hours)
+    #warning("Debugging...")
+    print("12")
       XCTAssertEqual(HebrewPart.duration, (1 as FloatMax).hebrewParts)
+    #warning("Debugging...")
+    print("13")
       XCTAssertEqual(HebrewWeekday.duration, (1 as FloatMax).days)
+    #warning("Debugging...")
+    print("14")
 
       XCTAssertEqual(GregorianDay(10) − GregorianDay(4), 6)
+    #warning("Debugging...")
+    print("15")
       XCTAssertEqual(GregorianMonth.february − GregorianMonth.january, 1)
+    #warning("Debugging...")
+    print("16")
 
       var day = GregorianWeekday.monday
+    #warning("Debugging...")
+    print("17")
       day.decrement()
+    #warning("Debugging...")
+    print("18")
       XCTAssertEqual(day, .sunday)
+    #warning("Debugging...")
+    print("19")
   }
 
   func testCalendarDate() throws {
