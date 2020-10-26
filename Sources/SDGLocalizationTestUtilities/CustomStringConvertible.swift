@@ -45,12 +45,8 @@ public func testCustomStringConvertibleConformance<T, L>(
   line: UInt = #line
 ) where T: CustomStringConvertible, L: InputLocalization {
 
-  #warning("Debugging...")
-  print("Here. (0)")
   var report = ""
   for localization in localizations.allCases {
-    #warning("Debugging...")
-    print("Here. (Start \(localization)")
     if let icon = localization.icon {
       report.append(contentsOf: String(icon))
     } else {
@@ -62,12 +58,8 @@ public func testCustomStringConvertibleConformance<T, L>(
       report.append("\n")
     }
     report.append("\n")
-    #warning("Debugging...")
-    print("Here. (End \(localization)")
   }
 
-  #warning("Debugging...")
-  print("Here. (1)")
   // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
   #if !os(WASI)
     func fileName(typeName: String) -> URL {
@@ -82,11 +74,7 @@ public func testCustomStringConvertibleConformance<T, L>(
         .replacingMatches(for: "<", with: "⟨")
         .replacingMatches(for: ">", with: "⟩")
     )
-  #warning("Debugging...")
-  print("Here. (2)")
     try? FileManager.default.move(deprecated, to: specification)
-  #warning("Debugging...")
-  print("Here. (3)")
     SDGPersistenceTestUtilities.compare(
       report,
       against: specification,
@@ -94,8 +82,6 @@ public func testCustomStringConvertibleConformance<T, L>(
       file: file,
       line: line
     )
-  #warning("Debugging...")
-  print("Here. (4)")
   #endif
 
   if let playground = instance as? CustomPlaygroundDisplayConvertible {
