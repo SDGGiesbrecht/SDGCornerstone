@@ -94,7 +94,7 @@ class InternalTests: TestCase {
   }
 
   func testHebrewYear() {
-    #if !os(Windows)  // #workaround(Swift 5.x, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       InternalTests.testHebrewYear()
     #endif
   }

@@ -27,7 +27,7 @@ import SDGXCTestUtilities
 class InternalTests: TestCase {
 
   func testContentLocalization() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       for localization in ContentLocalization.allCases {
 
         // Make sure its group is defined.
@@ -87,7 +87,7 @@ class InternalTests: TestCase {
   }
 
   func testInterfaceLocalization() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       for localization in InterfaceLocalization.allCases {
         XCTAssertNotNil(ContentLocalization(exactly: localization.code))
 
@@ -139,7 +139,7 @@ class InternalTests: TestCase {
   }
 
   func testWholeNumber() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       var list = ""
       for number in 1...2 {
         for genre in [.masculin, .féminin] as [GenreGrammatical] {

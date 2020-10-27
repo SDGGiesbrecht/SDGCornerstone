@@ -39,8 +39,8 @@ class APITests: TestCase {
           ),
           "Failed to reject non‐executables."
         )
-        // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-        #if !os(Android)
+        // #warning(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
+        //#if !os(Android)
           XCTAssertEqual(
             ExternalProcess(
               searching: [
@@ -54,7 +54,7 @@ class APITests: TestCase {
             "swift",
             "Failed to find with “which” (or “where” on Windows)."
           )
-        #endif
+        //#endif
         XCTAssertNil(
           ExternalProcess(
             searching: [
