@@ -29,8 +29,6 @@ class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
     #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
-      // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-      #if !os(Android)
         LocalizationSetting(orderOfPrecedence: ["en"]).do {
           // @example(readMe🇨🇦EN)
           // ••••••• Localization •••••••
@@ -140,7 +138,6 @@ class ReadMeExampleTests: TestCase {
           #endif
           // @endExample
         }
-      #endif
     #endif
   }
 }
