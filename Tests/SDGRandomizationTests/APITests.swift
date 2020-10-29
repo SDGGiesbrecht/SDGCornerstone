@@ -49,7 +49,7 @@ class APITests: TestCase {
   }
 
   func testCyclicalNumberGenerator() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       testRandomNumberGeneratorConformance(
         of: CyclicalNumberGenerator([0, 1, 6, 7, 11, 12, UInt64.max])
       )
@@ -57,14 +57,14 @@ class APITests: TestCase {
   }
 
   func testMeasurement() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       XCTAssertEqual(Angle<Double>.random(in: 0.rad...0.rad), 0.rad)
       XCTAssert((0° ..< 1°).contains(Angle<Double>.random(in: 0° ..< 1°)))
     #endif
   }
 
   func testPseudorandomNumberGenerator() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       var randomizer = PseudorandomNumberGenerator(seed: PseudorandomNumberGenerator.generateSeed())
       testRandomNumberGeneratorConformance(of: randomizer)
 

@@ -39,7 +39,7 @@ class APITests: TestCase {
           ),
           "Failed to reject non‐executables."
         )
-        // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
+        // #workaround(workspace 0.35.2, Emulator has no Swift.)
         #if !os(Android)
           XCTAssertEqual(
             ExternalProcess(
@@ -90,85 +90,67 @@ class APITests: TestCase {
     #if !os(Windows)
       #if !(os(iOS) || os(watchOS) || os(tvOS))
         try forAllLegacyModes {
-          // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-          #if !os(Android)
-            _ = try Shell.default.run(command: ["ls"]).get()
+          let directory: URL?
+          #if os(Android)
+            directory = URL(fileURLWithPath: "/data/local/tmp")
+          #else
+            directory = nil
           #endif
+          _ = try Shell.default.run(command: ["ls"], in: directory).get()
           let printWorkingDirectory: String
           #if os(Windows)
             printWorkingDirectory = "cd"
           #else
             printWorkingDirectory = "pwd"
           #endif
-          // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-          #if !os(Android)
-            _ = try Shell.default.run(
-              command: [printWorkingDirectory],
-              in: URL(fileURLWithPath: "/"),
-              with: [:]
-            ).get()
-          #endif
+          _ = try Shell.default.run(
+            command: [printWorkingDirectory],
+            in: URL(fileURLWithPath: "/"),
+            with: [:]
+          ).get()
 
           let message = "Hello, world!"
-          // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-          #if !os(Android)
-            XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
-          #endif
+          XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
 
           let nonexistentCommand = "no‐such‐command"
-          // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-          #if !os(Android)
-            let result = Shell.default.run(command: [nonexistentCommand])
-            switch result {
-            case .success(let output):
-              XCTFail("Should have failed: \(output)")
-            case .failure(let error):
-              switch error {
-              case .foundationError(let error):
-                XCTFail(error.localizedDescription)
-              case .processError(code: _, let output):
-                // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-                #if !os(Android)
-                  XCTAssert(
-                    output.contains("not found") ∨ output.contains("not recognized"),
-                    "\(error)"
-                  )
-                #endif
-              }
+          let result = Shell.default.run(command: [nonexistentCommand])
+          switch result {
+          case .success(let output):
+            XCTFail("Should have failed: \(output)")
+          case .failure(let error):
+            switch error {
+            case .foundationError(let error):
+              XCTFail(error.localizedDescription)
+            case .processError(code: _, let output):
+              XCTAssert(
+                output.contains("not found") ∨ output.contains("not recognized"),
+                "\(error)"
+              )
             }
-          #endif
+          }
 
           #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
             let metacharacters = "(...)"
-            // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-            #if !os(Android)
-              XCTAssertEqual(
-                try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
-                metacharacters
-              )
-              XCTAssert(
-                ¬(try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get()
-                  .contains(
-                    "\u{22}"
-                  ))
-              )
-            #endif
+            XCTAssertEqual(
+              try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
+              metacharacters
+            )
+            XCTAssert(
+              ¬(try Shell.default.run(command: ["echo", Shell.quote("Hello, world!")]).get()
+                .contains(
+                  "\u{22}"
+                ))
+            )
           #endif
 
           _ = "\(Shell.default)"
-          // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-          #if !os(Android)
-            switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
-            case .failure(let error):
-              // Expected.
-              _ = error.localizedDescription
-            case .success(let output):
-              // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-              #if !os(Android)
-                XCTFail("Shell should have thrown an error. Output received:\n\(output)")
-              #endif
-            }
-          #endif
+          switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
+          case .failure(let error):
+            // Expected.
+            _ = error.localizedDescription
+          case .success(let output):
+            XCTFail("Shell should have thrown an error. Output received:\n\(output)")
+          }
         }
       #endif
     #endif

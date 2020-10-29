@@ -22,7 +22,7 @@ import SDGXCTestUtilities
 class FunctionAnalysisExampleTests: TestCase {
 
   func testFindLocalMinimum() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       // @example(findLocalMinimum)
       let approximateSquareRootOf120 = findLocalMinimum(near: 10) { (guess: Int) -> Int in
 
@@ -65,7 +65,7 @@ class FunctionAnalysisExampleTests: TestCase {
   }
 
   func testUndefinedCaseOneForFindLocalMaximum() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       // @example(findLocalMaximumUndefined1)
       // This is undefined:
       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10...10 ? $0 ↑ 2 : −($0 ↑ 2) }
@@ -76,7 +76,7 @@ class FunctionAnalysisExampleTests: TestCase {
   }
 
   func testUndefinedCaseOneForFindLocalMinimum() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       // @example(findLocalMinimumUndefined1)
       // This is undefined:
       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10...10 ? −($0 ↑ 2) : $0 ↑ 2 }
@@ -87,7 +87,7 @@ class FunctionAnalysisExampleTests: TestCase {
   }
 
   func testUndefinedCaseTwoForFindLocalMaximum() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       // @example(findLocalMaximumUndefined2)
       // This is undefined:
       let maximum = findLocalMaximum(near: 0) { $0 ∈ −10...10 ? 1 : −(|$0|) }
@@ -98,7 +98,7 @@ class FunctionAnalysisExampleTests: TestCase {
   }
 
   func testUndefinedCaseTwoForFindLocalMinimum() {
-    #if !os(Windows)  // #workaround(Swift 5.2.4, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
       // @example(findLocalMinimumUndefined2)
       // This is undefined:
       let minimum = findLocalMinimum(near: 0) { $0 ∈ −10...10 ? −1 : |$0| }
