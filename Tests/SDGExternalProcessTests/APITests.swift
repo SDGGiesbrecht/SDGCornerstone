@@ -91,9 +91,13 @@ class APITests: TestCase {
       #if !(os(iOS) || os(watchOS) || os(tvOS))
         try forAllLegacyModes {
           // #warning(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-          //#if !os(Android)
-            _ = try Shell.default.run(command: ["ls"]).get()
-          //#endif
+          let directory: URL?
+          #if os(Android)
+            directory = URL(fileURLWithPath: "/data/local/tmp")
+          #else
+            directory = nil
+          #endif
+          _ = try Shell.default.run(command: ["ls"], in: directory).get()
           let printWorkingDirectory: String
           #if os(Windows)
             printWorkingDirectory = "cd"
