@@ -39,8 +39,8 @@ class APITests: TestCase {
           ),
           "Failed to reject non‐executables."
         )
-        // #warning(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-        //#if !os(Android)
+        // #workaround(workspace 0.35.2, Emulator has no Swift.)
+        #if !os(Android)
           XCTAssertEqual(
             ExternalProcess(
               searching: [
@@ -54,7 +54,7 @@ class APITests: TestCase {
             "swift",
             "Failed to find with “which” (or “where” on Windows)."
           )
-        //#endif
+        #endif
         XCTAssertNil(
           ExternalProcess(
             searching: [
@@ -90,10 +90,10 @@ class APITests: TestCase {
     #if !os(Windows)
       #if !(os(iOS) || os(watchOS) || os(tvOS))
         try forAllLegacyModes {
-          // #workaround(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
-          #if !os(Android)
+          // #warning(Swift 5.2.4, Process/Pipe/FileHandle have wires crossed with standard output.)
+          //#if !os(Android)
             _ = try Shell.default.run(command: ["ls"]).get()
-          #endif
+          //#endif
           let printWorkingDirectory: String
           #if os(Windows)
             printWorkingDirectory = "cd"
