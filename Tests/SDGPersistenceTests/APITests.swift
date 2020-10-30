@@ -126,7 +126,7 @@ class APITests: TestCase {
           "Failed to enumerate files."
         )
 
-        #if !os(Windows)  // #workaround(Swift 5.2.4, Windows fails to save this?)
+        //#if !os(Windows)  // #warning(Swift 5.2.4, Windows fails to save this?)
           let notNormalized = "x" + "\u{304}" + "\u{331}"
           let data = Data()
           try data.save(to: temporaryDirectory.appendingPathComponent(notNormalized))
@@ -146,7 +146,7 @@ class APITests: TestCase {
             ),
             data
           )
-        #endif
+        //#endif
       }
   }
 
