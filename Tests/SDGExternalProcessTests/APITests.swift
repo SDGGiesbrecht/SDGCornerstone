@@ -39,7 +39,7 @@ class APITests: TestCase {
           ),
           "Failed to reject non‐executables."
         )
-        // #workaround(workspace 0.35.2, Emulator has no Swift.)
+        // #workaround(workspace version 0.35.2, Emulator has no Swift.)
         #if !os(Android)
           XCTAssertEqual(
             ExternalProcess(
