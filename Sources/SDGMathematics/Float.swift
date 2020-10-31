@@ -32,7 +32,7 @@ import RealModule
   public typealias FloatMax = Float80
 #endif
 
-/// A member of the `Float` family; `Double`, `Float80` or `Float`.
+/// A member of the `Float` family; `Double`, `Float80`, `Float` or `Float16`.
 public protocol FloatFamily: BinaryFloatingPoint, CustomDebugStringConvertible,
   LosslessStringConvertible, RealNumberProtocol
 {}
@@ -348,3 +348,26 @@ extension Float: FloatFamily {
     return FloatMax(self)
   }
 }
+
+// #workaround(Swift 5.3, macOS has no Float16 yet.)
+#if !os(macOS)
+  @available(tvOS 14, iOS 14, watchOS 7, *)
+  extension Float16: FloatFamily {
+
+    // MARK: - PointProtocol
+
+    public typealias Vector = Stride
+
+    // MARK: - RealArithmetic
+
+    public static let e: Float16 = 0x1.5Cp1
+
+    @inlinable public static func log(_ antilogarithm: Self) -> Self {
+      return Self.log10(antilogarithm)
+    }
+
+    @inlinable public var floatingPointApproximation: FloatMax {
+      return FloatMax(self)
+    }
+  }
+#endif

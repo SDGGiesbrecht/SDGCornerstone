@@ -29,3 +29,8 @@ extension Double: TextConvertibleNumber {}
   extension Float80: TextConvertibleNumber {}
 #endif
 extension Float: TextConvertibleNumber {}
+// #workaround(Swift 5.3, macOS has no Float16 yet.)
+#if !os(macOS)
+  @available(tvOS 14, iOS 14, watchOS 7, *)
+  extension Float16: TextConvertibleNumber {}
+#endif
