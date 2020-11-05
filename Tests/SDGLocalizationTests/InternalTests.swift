@@ -102,23 +102,24 @@ class InternalTests: TestCase {
 
   func testLocalizationSetting() {
     var expectOperatingSystemLanguage = true
-    #if targetEnvironment(simulator) && (os(iOS) || os(tvOS))
-      // Default simulator state has no language set.
-      expectOperatingSystemLanguage = false
-    #endif
     #if os(macOS) || os(Linux)
       if ProcessInfo.processInfo.environment["GITHUB_ACTIONS"] == "true" {
         // GitHub’s host has no language set.
         expectOperatingSystemLanguage = false
       }
     #endif
+    #if targetEnvironment(simulator) && (os(tvOS) || os(iOS))
+      // Default simulator state has no language set.
+      expectOperatingSystemLanguage = false
+    #endif
+    #if os(Android)  // #workaround(Swift 5.3, Not possible yet.)
+      expectOperatingSystemLanguage = false
+    #endif
     if expectOperatingSystemLanguage {
-      #if !os(Android)  // #workaround(Swift 5.3, Not possible yet.)
-        XCTAssertNotNil(
-          LocalizationSetting.osSystemWidePreferences.value.as([String].self),
-          "Failed to detect operating system localization setting."
-        )
-      #endif
+      XCTAssertNotNil(
+        LocalizationSetting.osSystemWidePreferences.value.as([String].self),
+        "Failed to detect operating system localization setting."
+      )
     }
 
     LocalizationSetting.setSystemWidePreferences(to: nil)

@@ -158,9 +158,10 @@ public struct SemanticMarkup: Addable, BidirectionalCollection, Collection, Deco
   #if canImport(AppKit) || canImport(UIKit)
 
     // Exposed for use by SDGInterface.
-    public static func _attributedString(from html: String, in font: Font) throws
-      -> NSAttributedString
-    {
+    public static func _attributedString(
+      from html: String,
+      in font: Font
+    ) throws -> NSAttributedString {
       var adjustedFontName = font.fontName
 
       #if canImport(AppKit) || canImport(UIKit)

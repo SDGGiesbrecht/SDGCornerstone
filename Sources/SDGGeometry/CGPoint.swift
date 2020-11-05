@@ -25,11 +25,9 @@
 
     // MARK: - Conversions
 
-    #if canImport(AppKit) || canImport(UIKit)
-      internal init(_ point: TwoDimensionalPoint<Double>) {
-        self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
-      }
-    #endif
+    internal init(_ point: TwoDimensionalPoint<Double>) {
+      self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
+    }
   }
 
   #if canImport(CoreGraphics)
