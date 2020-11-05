@@ -165,6 +165,9 @@ extension OrderedEnumeration {
   @inlinable public func cyclicPredecessor() -> Self {
     return nonmutatingVariant(of: { $0.decrementCyclically($1) }, on: self, with: {})
   }
+}
+
+extension OrderedEnumeration where Self: RawRepresentable {
 
   // MARK: - Comparable
 
@@ -175,9 +178,8 @@ extension OrderedEnumeration {
     return precedingValue.isLessThan(followingValue)
   }
 }
-
 // Disambiguate Strideable vs OrderedEnumeration for calendar components.
-extension OrderedEnumeration where Self: Strideable {
+extension OrderedEnumeration where Self: RawRepresentable, Self: Strideable {
 
   // MARK: - Comparable
 
