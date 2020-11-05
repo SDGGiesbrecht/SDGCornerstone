@@ -83,6 +83,8 @@ class APITests: TestCase {
         }
       }
     #endif
+    _ = ExternalProcess.Error.foundationError(NSError(domain: "", code: 1, userInfo: nil)).presentableDescription()
+    _ = ExternalProcess.Error.processError(code: 1, output: "").presentableDescription()
   }
 
   func testShell() throws {
@@ -164,5 +166,7 @@ class APITests: TestCase {
         #endif
       }
     #endif
+    _ = Shell.quote("...")
+    _ = Shell.quote(" ")
   }
 }

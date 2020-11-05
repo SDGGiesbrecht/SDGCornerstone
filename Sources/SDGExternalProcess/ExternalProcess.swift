@@ -60,6 +60,7 @@
         if ¬FileManager.default.isExecutableFile(atPath: location.path) {
           return false
         }
+        // @exempt(from: tests) Unreachable on tvOS, etc.
         let possible = ExternalProcess(at: location)
         if ¬validate(possible) {
           return false
