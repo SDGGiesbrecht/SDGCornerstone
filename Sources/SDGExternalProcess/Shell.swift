@@ -79,9 +79,11 @@
 
     private let process: ExternalProcess
 
-    private var isCMD: Bool {
-      return process.executable.lastPathComponent == "cmd.exe"
-    }
+    #if !(os(tvOS) || os(iOS) || os(watchOS))
+      private var isCMD: Bool {
+        return process.executable.lastPathComponent == "cmd.exe"
+      }
+    #endif
 
     // MARK: - Usage
 
