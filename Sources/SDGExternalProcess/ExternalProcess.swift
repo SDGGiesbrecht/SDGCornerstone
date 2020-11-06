@@ -12,70 +12,70 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !(os(iOS) || os(watchOS) || os(tvOS))
+// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
+#if !os(WASI)
+  import Foundation
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
-    import Foundation
+  import SDGControlFlow
+  import SDGLogic
+  import SDGPersistence
+  import SDGLocalization
 
-    import SDGControlFlow
-    import SDGLogic
-    import SDGPersistence
-    import SDGLocalization
+  /// An external process.
+  public final class ExternalProcess: TextualPlaygroundDisplay {
 
-    /// An external process.
-    public final class ExternalProcess: TextualPlaygroundDisplay {
+    // MARK: - Initialization
 
-      // MARK: - Initialization
+    /// Creates an instance with the executable at the specified location.
+    ///
+    /// - Parameters:
+    ///     - executable: The location of the executable file.
+    public init(at executable: URL) {
+      self.executable = executable
+    }
 
-      /// Creates an instance with the executable at the specified location.
-      ///
-      /// - Parameters:
-      ///     - executable: The location of the executable file.
-      public init(at executable: URL) {
-        self.executable = executable
+    /// Creates an instance by searching the system for the exectutable.
+    ///
+    /// - Parameters:
+    ///     - locations: A list of locations to search. They will be tried in order.
+    ///     - commandName: A name to try with the default shell’s `which` command (`where` on Windows). This will be tried after the provided search list.
+    ///     - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
+    ///     - process: An executable to validate. Its existence and executability have already been verified.
+    public convenience init?<S>(
+      searching locations: S,
+      commandName: String?,
+      validate: (_ process: ExternalProcess) -> Bool
+    ) where S: Sequence, S.Element == URL {
+      let adjustedLocations = locations
+        .lazy.map { FileManager.default.existingRepresentation(of: $0) }
+
+      func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
+        var isDirectory: ObjCBool = false
+        if ¬FileManager.default.fileExists(atPath: location.path, isDirectory: &isDirectory) {
+          return false
+        }
+        if isDirectory.boolValue {
+          return false
+        }
+        if ¬FileManager.default.isExecutableFile(atPath: location.path) {
+          return false
+        }
+        // @exempt(from: tests) Unreachable on tvOS, etc.
+        let possible = ExternalProcess(at: location)
+        if ¬validate(possible) {
+          return false
+        }
+        return true
       }
 
-      /// Creates an instance by searching the system for the exectutable.
-      ///
-      /// - Parameters:
-      ///     - locations: A list of locations to search. They will be tried in order.
-      ///     - commandName: A name to try with the default shell’s `which` command (`where` on Windows). This will be tried after the provided search list.
-      ///     - validate: A closure to validate any located executables. Return `true` to accept it. Return `false` to reject it and continue searching. This could be done if, for example, the executable is an incompatible version.
-      ///     - process: An executable to validate. Its existence and executability have already been verified.
-      public convenience init?<S>(
-        searching locations: S,
-        commandName: String?,
-        validate: (_ process: ExternalProcess) -> Bool
-      ) where S: Sequence, S.Element == URL {
-        let adjustedLocations = locations
-          .lazy.map { FileManager.default.existingRepresentation(of: $0) }
-
-        func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
-          var isDirectory: ObjCBool = false
-          if ¬FileManager.default.fileExists(atPath: location.path, isDirectory: &isDirectory) {
-            return false
-          }
-          if isDirectory.boolValue {
-            return false
-          }
-          if ¬FileManager.default.isExecutableFile(atPath: location.path) {
-            return false
-          }
-          let possible = ExternalProcess(at: location)
-          if ¬validate(possible) {
-            return false
-          }
-          return true
+      for location in adjustedLocations {
+        if checkLocation(location, validate: validate) {
+          self.init(at: location)  // @exempt(from: tests) False coverage result in Xcode 10.1.
+          return
         }
+      }
 
-        for location in adjustedLocations {
-          if checkLocation(location, validate: validate) {
-            self.init(at: location)  // @exempt(from: tests) False coverage result in Xcode 10.1.
-            return
-          }
-        }
-
+      #if !(os(tvOS) || os(iOS) || os(watchOS))
         let searchCommand: String
         #if os(Windows)
           searchCommand = "where"
@@ -100,40 +100,42 @@
             }
           }
         }
+      #endif
 
-        // Fall back to searching PATH manually, because some Linux flavours lack “which”.
-        if let name = commandName,
-          let path = ProcessInfo.processInfo.environment["PATH"]
-        {
-          let separator: String
+      // Fall back to searching PATH manually, because some Linux flavours lack “which”.
+      if let name = commandName,
+        let path = ProcessInfo.processInfo.environment["PATH"]
+      {
+        let separator: String
+        #if os(Windows)
+          separator = ";"
+        #else
+          separator = ":"
+        #endif
+        for entry in path.components(separatedBy: separator) as [String] {
+          let directory = URL(fileURLWithPath: entry)
           #if os(Windows)
-            separator = ";"
+            let executableName = "\(name).exe"
           #else
-            separator = ":"
+            let executableName = name
           #endif
-          for entry in path.components(separatedBy: separator) as [String] {
-            let directory = URL(fileURLWithPath: entry)
-            #if os(Windows)
-              let executableName = "\(name).exe"
-            #else
-              let executableName = name
-            #endif
-            let possibleExecutable = directory.appendingPathComponent(executableName)
-            if checkLocation(possibleExecutable, validate: validate) {
-              self.init(at: possibleExecutable)  // @exempt(from: tests)
-              return
-            }
+          let possibleExecutable = directory.appendingPathComponent(executableName)
+          if checkLocation(possibleExecutable, validate: validate) {
+            self.init(at: possibleExecutable)  // @exempt(from: tests)
+            return
           }
         }
-
-        return nil
       }
 
-      // MARK: - Properties
+      return nil
+    }
 
-      /// The location of the executable file.
-      public let executable: URL
+    // MARK: - Properties
 
+    /// The location of the executable file.
+    public let executable: URL
+
+    #if !(os(tvOS) || os(iOS) || os(watchOS))
       /// Runs the executable with the specified arguments and returns the output.
       ///
       /// - Parameters:
@@ -257,13 +259,12 @@
           return .failure(.processError(code: Int(exitCode), output: output))
         }
       }
+    #endif
 
-      // MARK: - CustomStringConvertible
+    // MARK: - CustomStringConvertible
 
-      public var description: String {
-        return executable.path
-      }
+    public var description: String {
+      return executable.path
     }
-  #endif
-
+  }
 #endif

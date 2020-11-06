@@ -12,36 +12,32 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !(os(iOS) || os(watchOS) || os(tvOS))
+// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
+#if !os(WASI)
+  import SDGText
+  import SDGLocalization
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
-    import SDGText
-    import SDGLocalization
+  extension ExternalProcess {
 
-    extension ExternalProcess {
+    /// An error related to running an external process.
+    public enum Error: PresentableError {
 
-      /// An error related to running an external process.
-      public enum Error: PresentableError {
+      /// Foundation encountered an error.
+      case foundationError(Swift.Error)
 
-        /// Foundation encountered an error.
-        case foundationError(Swift.Error)
+      /// The external process exited with an error.
+      case processError(code: Int, output: String)
 
-        /// The external process exited with an error.
-        case processError(code: Int, output: String)
+      // MARK: - PresentableError
 
-        // MARK: - PresentableError
-
-        public func presentableDescription() -> StrictString {
-          switch self {
-          case .foundationError(let error):
-            return StrictString(error.localizedDescription)
-          case .processError(code: _, let output):
-            return StrictString(output)
-          }
+      public func presentableDescription() -> StrictString {
+        switch self {
+        case .foundationError(let error):
+          return StrictString(error.localizedDescription)
+        case .processError(code: _, let output):
+          return StrictString(output)
         }
       }
     }
-  #endif
-
+  }
 #endif

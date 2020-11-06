@@ -37,8 +37,8 @@ class RegressionTests: TestCase {
     // Untracked
 
     #if !os(Windows)  // #workaround(Swift 5.3, Shell misbehaves.)
-      #if !(os(iOS) || os(watchOS) || os(tvOS))
-        try forAllLegacyModes {
+      try forAllLegacyModes { () throws -> Void in
+        #if !(os(tvOS) || os(iOS) || os(watchOS))
           let longCommand = [
             "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy",
           ]
@@ -47,17 +47,17 @@ class RegressionTests: TestCase {
             let output = try Shell.default.run(command: longCommand).get()
             XCTAssert(output.contains("0.8.3"))
           #endif
-        }
-      #endif
+        #endif
+      }
     #endif
   }
 
   func testSearchFindsGit() {
     // Untracked
 
-    #if !(os(iOS) || os(watchOS) || os(tvOS))
-      // #workaround(Swift 5.3, Emulator lacks Git.)
-      #if !os(Android)
+    // #workaround(Swift 5.3, Emulator lacks Git.)
+    #if !os(Android)
+      #if !(os(tvOS) || os(iOS) || os(watchOS))
         XCTAssertNotNil(
           ExternalProcess(
             searching: [],

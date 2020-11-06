@@ -24,21 +24,21 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testExternalProcess() {
-    #if !(os(iOS) || os(watchOS) || os(tvOS))
 
-      forAllLegacyModes {
-        XCTAssertNil(
-          ExternalProcess(
-            searching: [
-              "/no/such/file",
-              "/tmp",  // Directory
-              "/.file", "/dev/null",  // Not executable
-            ].map({ URL(fileURLWithPath: $0) }),
-            commandName: nil,
-            validate: { (_: ExternalProcess) in true }
-          ),
-          "Failed to reject non‐executables."
-        )
+    forAllLegacyModes {
+      XCTAssertNil(
+        ExternalProcess(
+          searching: [
+            "/no/such/file",
+            "/tmp",  // Directory
+            "/.file", "/dev/null",  // Not executable
+          ].map({ URL(fileURLWithPath: $0) }),
+          commandName: nil,
+          validate: { (_: ExternalProcess) in true }
+        ),
+        "Failed to reject non‐executables."
+      )
+      #if !(os(tvOS) || os(iOS) || os(watchOS))
         // #workaround(workspace version 0.35.2, Emulator has no Swift.)
         #if !os(Android)
           XCTAssertEqual(
@@ -55,24 +55,24 @@ class APITests: TestCase {
             "Failed to find with “which” (or “where” on Windows)."
           )
         #endif
-        XCTAssertNil(
-          ExternalProcess(
-            searching: [
-              "/no/such/file",
-              "/tmp",  // Directory
-              "/.file",  // Not executable
-            ].map({ URL(fileURLWithPath: $0) }),
-            commandName: "swift",
-            validate: { _ in false }
-          ),
-          "Failed to reject the executable according to custom validation."
-        )
-      }
-    #endif
+      #endif
+      XCTAssertNil(
+        ExternalProcess(
+          searching: [
+            "/no/such/file",
+            "/tmp",  // Directory
+            "/.file",  // Not executable
+          ].map({ URL(fileURLWithPath: $0) }),
+          commandName: "swift",
+          validate: { _ in false }
+        ),
+        "Failed to reject the executable according to custom validation."
+      )
+    }
   }
 
   func testExternalProcessError() {
-    #if !(os(iOS) || os(watchOS) || os(tvOS))
+    #if !(os(tvOS) || os(iOS) || os(watchOS))
       forAllLegacyModes {
         switch ExternalProcess(at: URL(fileURLWithPath: "/no/such/process")).run([]) {
         case .failure(let error):
@@ -83,36 +83,45 @@ class APITests: TestCase {
         }
       }
     #endif
+    _ = ExternalProcess.Error.foundationError(NSError(domain: "", code: 1, userInfo: nil))
+      .presentableDescription()
+    _ = ExternalProcess.Error.processError(code: 1, output: "").presentableDescription()
   }
 
   func testShell() throws {
     // #workaround(Swift 5.3, Shell misbehaves. See RegressionTests.testCMDWorks.)
     #if !os(Windows)
-      #if !(os(iOS) || os(watchOS) || os(tvOS))
-        try forAllLegacyModes {
-          let directory: URL?
-          #if os(Android)
-            directory = URL(fileURLWithPath: "/data/local/tmp")
-          #else
-            directory = nil
-          #endif
+      try forAllLegacyModes { () throws -> Void in
+        let directory: URL?
+        #if os(Android)
+          directory = URL(fileURLWithPath: "/data/local/tmp")
+        #else
+          directory = nil
+        #endif
+        #if !(os(tvOS) || os(iOS) || os(watchOS))
           _ = try Shell.default.run(command: ["ls"], in: directory).get()
-          let printWorkingDirectory: String
-          #if os(Windows)
-            printWorkingDirectory = "cd"
-          #else
-            printWorkingDirectory = "pwd"
-          #endif
+        #endif
+        let printWorkingDirectory: String
+        #if os(Windows)
+          printWorkingDirectory = "cd"
+        #else
+          printWorkingDirectory = "pwd"
+        #endif
+        #if !(os(tvOS) || os(iOS) || os(watchOS))
           _ = try Shell.default.run(
             command: [printWorkingDirectory],
             in: URL(fileURLWithPath: "/"),
             with: [:]
           ).get()
+        #endif
 
-          let message = "Hello, world!"
+        let message = "Hello, world!"
+        #if !(os(tvOS) || os(iOS) || os(watchOS))
           XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
+        #endif
 
-          let nonexistentCommand = "no‐such‐command"
+        let nonexistentCommand = "no‐such‐command"
+        #if !(os(tvOS) || os(iOS) || os(watchOS))
           let result = Shell.default.run(command: [nonexistentCommand])
           switch result {
           case .success(let output):
@@ -128,8 +137,10 @@ class APITests: TestCase {
               )
             }
           }
+        #endif
 
-          #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
+        #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
+          #if !(os(tvOS) || os(iOS) || os(watchOS))
             let metacharacters = "(...)"
             XCTAssertEqual(
               try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
@@ -142,8 +153,10 @@ class APITests: TestCase {
                 ))
             )
           #endif
+        #endif
 
-          _ = "\(Shell.default)"
+        _ = "\(Shell.default)"
+        #if !(os(tvOS) || os(iOS) || os(watchOS))
           switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
           case .failure(let error):
             // Expected.
@@ -151,8 +164,10 @@ class APITests: TestCase {
           case .success(let output):
             XCTFail("Shell should have thrown an error. Output received:\n\(output)")
           }
-        }
-      #endif
+        #endif
+      }
     #endif
+    _ = Shell.quote("...")
+    _ = Shell.quote(" ")
   }
 }
