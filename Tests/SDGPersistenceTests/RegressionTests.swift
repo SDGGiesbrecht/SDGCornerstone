@@ -72,4 +72,14 @@ class RegressionTests: TestCase {
       XCTAssert(url.path.hasSuffix("A Folder/A File"))
     }
   }
+
+  func testRemoteURLs() throws {
+    // Untracked
+
+    do {
+      _ = try String(from: URL(string: "http://example.com/some/path")!)
+    } catch {
+      // Error is espected; hanging due to infinite recursion is not.
+    }
+  }
 }
