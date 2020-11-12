@@ -388,6 +388,7 @@ extension SDGPersistenceTests.RegressionTests {
       ("testCachePermissions", testCachePermissions),
       ("testDirectoryDetection", testDirectoryDetection),
       ("testPercentEncodingIsNotDoubled", testPercentEncodingIsNotDoubled),
+      ("testRemoteURLs", testRemoteURLs),
     ])
   ]
 }
