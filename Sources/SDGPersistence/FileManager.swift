@@ -195,6 +195,12 @@
     /// - Parameters:
     ///   - url: The URL to adjust.
     public func existingRepresentation(of url: URL) -> URL {
+
+      // Prevent checking outside the root.
+      if url.path == "/" {
+        return url
+      }
+
       if (try? url.checkResourceIsReachable()) == true
         ∨ url.pathComponents.isEmpty
       {

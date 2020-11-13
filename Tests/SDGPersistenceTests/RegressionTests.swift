@@ -13,6 +13,9 @@
  */
 
 import Foundation
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
 
 import SDGPersistence
 
@@ -70,6 +73,16 @@ class RegressionTests: TestCase {
       url.appendPathComponent("A File")
       XCTAssert(url.absoluteString.hasSuffix("A%20Folder/A%20File"))
       XCTAssert(url.path.hasSuffix("A Folder/A File"))
+    }
+  }
+
+  func testRemoteURLs() throws {
+    // Untracked
+
+    do {
+      _ = try String(from: URL(string: "http://example.com/some/path")!)
+    } catch {
+      // Error is espected; hanging due to infinite recursion is not.
     }
   }
 }
