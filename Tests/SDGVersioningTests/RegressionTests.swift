@@ -24,7 +24,9 @@ class RegressionTests: TestCase {
   func testWindowsGitVersionDetectable() {
     // Untracked
 
-    XCTAssertEqual(Version(firstIn: "git version 2.28.0.windows.1"), Version(2, 28))
+    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
+      XCTAssertEqual(Version(firstIn: "git version 2.28.0.windows.1"), Version(2, 28))
+    #endif
   }
 
   func testVersionRangesCanBeCreated() {
