@@ -90,7 +90,6 @@
       return zoneURL.appendingPathComponent(FileManager.possibleDebugDomain(domain))
     }
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
     /// Returns a URL for the specified location and relative path in the application’s domain.
     ///
     /// - Parameters:
@@ -99,7 +98,6 @@
     public func url(in location: RecommendedLocation, at relativePath: String) -> URL {
       return url(in: location, for: ProcessInfo.applicationDomain, at: relativePath)
     }
-    #endif
 
     /// Returns a URL for the specified location, domain and relative path.
     ///
@@ -113,7 +111,6 @@
       return url(in: location, for: domain).appendingPathComponent(relativePath)
     }
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
     /// Deletes everything in the specified location for the application domain.
     ///
     /// - Parameters:
@@ -121,7 +118,6 @@
     public func delete(_ location: RecommendedLocation) {
       delete(location, for: ProcessInfo.applicationDomain)
     }
-    #endif
 
     /// Deletes everything in the specified location and domain.
     ///

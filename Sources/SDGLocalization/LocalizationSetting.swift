@@ -124,9 +124,13 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     }()
 
     private static let sdgSystemWidePreferences: Shared<Preference> = {
+      #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+      let preferences = Shared(Preference.mock())
+      #else
       let preferences = PreferenceSet.preferences(
         for: PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
       )[sdgPreferenceKey]
+      #endif
       preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
       return preferences
     }()
@@ -186,11 +190,16 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   }()
 
   private static func resolveCurrentLocalization() -> LocalizationSetting {
-    return overrides.value.last
+    var result = overrides.value.last
+    #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+    #else
+    result = result
         ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
         ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
         ?? sdgSystemWidePreferences.value.as(LocalizationSetting.self)
         ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
+    #endif
+    return result
       ?? LocalizationSetting(orderOfPrecedence: [] as [[String]])  // @exempt(from: tests)
   }
 
@@ -272,12 +281,14 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
   }
 
+  #if !os(WASI)  // #workaround(Swift 5.3.1, PropertyListEncoder unavailable.)
     private init?(osPreference preference: Preference) {
       guard let result = preference.as([String].self) else {
         return nil
       }
       self.init(orderOfPrecedence: result)
     }
+  #endif
 
   // MARK: - Properties
 
@@ -320,15 +331,19 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
     private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
       get {
+        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
         if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
           Date() ≤ cache.date
         {
           return cache
         }
+        #endif
         return nil
       }
       nonmutating set {
+        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
         try? newValue?.save(to: stabilityCacheURL(for: L.self))
+        #endif
       }
     }
 
