@@ -64,7 +64,7 @@ public func testSpecificationDirectory(_ callerLocation: StaticString = #filePat
   return cached(in: &specificationDirectory) {
     let repositoryRoot: URL
     #if os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
-      return defaultRepositoryRoot(callerLocation)
+      repositoryRoot = defaultRepositoryRoot(callerLocation)
     #else
       if let overridden = ProcessInfo.processInfo
         .environment["SWIFTPM_PACKAGE_ROOT"]
