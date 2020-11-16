@@ -122,7 +122,6 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
         }
         return
       }
-      #endif
       #if os(Windows)
         // On Windows, Git may have butchered the newlines during checkout.
         specificationString.scalars.replaceMatches(for: "\r\n".scalars, with: "\n".scalars)
@@ -193,5 +192,6 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
         file: file,
         line: line
       )
+      #endif
     }
   }
