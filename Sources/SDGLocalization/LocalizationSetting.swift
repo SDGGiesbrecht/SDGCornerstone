@@ -299,6 +299,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     return L.fallbackLocalization
   }
 
+  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     private func stabilityCacheURL<L>(for: L.Type) -> URL {
       var path = "SDGCornerstone/Stable Localizations"
       path += "/"
@@ -307,6 +308,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
       return FileManager.default.url(in: .cache, at: path)
     }
+  #endif
 
     private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
       get {
@@ -380,9 +382,10 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   // MARK: - Equatable
 
-  public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting)
-    -> Bool
-  {
+  public static func == (
+    precedingValue: LocalizationSetting,
+    followingValue: LocalizationSetting
+  ) -> Bool {
     return precedingValue.orderOfPrecedence
       .elementsEqual(followingValue.orderOfPrecedence) { Set($0) == Set($1) }
   }

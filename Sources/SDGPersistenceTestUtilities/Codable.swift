@@ -52,11 +52,14 @@ public func testCodableConformance<T>(
         .replacingMatches(for: "<", with: "⟨")
         .replacingMatches(for: ">", with: "⟩")
     )
+  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     try? FileManager.default.move(deprecatedDirectory, to: specificationsDirectory)
     try? FileManager.default.createDirectory(at: specificationsDirectory)
+  #endif
 
     var specifications: Set<String> = []
     do {
+      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
       for specificationURL in try FileManager.default.contents(
         ofDirectory: specificationsDirectory
       ) where specificationURL.pathExtension == "txt" {
@@ -98,6 +101,7 @@ public func testCodableConformance<T>(
           }
         }
       }
+      #endif
 
       let encoder = JSONEncoder()
       encoder.outputFormatting = [.prettyPrinted]

@@ -41,10 +41,13 @@
     let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent(
       "FileConvertible"
     ).appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
+    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     try? FileManager.default.createDirectory(at: specificationsDirectory)
+    #endif
 
     var specifications: Set<Data> = []
     do {
+      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
       for specificationURL in try FileManager.default.contents(
         ofDirectory: specificationsDirectory
       ) {
@@ -64,6 +67,7 @@
           )
         }
       }
+      #endif
 
       let encoded = instance.file
 

@@ -35,9 +35,13 @@
     /// - Parameters:
     ///     - url: The URL to save to.
     public func save(to url: URL) throws {
+      #if os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      let adjusted = url
+      #else
       let adjusted = FileManager.default.existingRepresentation(of: url)
       let directory = adjusted.deletingLastPathComponent()
       try FileManager.default.createDirectory(at: directory)
+      #endif
       try file.write(to: adjusted, options: [.atomic])
     }
 
@@ -46,7 +50,11 @@
     /// - Parameters:
     ///     - url: The URL to read from.
     public init(from url: URL) throws {
+      #if os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      let adjusted = url
+      #else
       let adjusted = FileManager.default.existingRepresentation(of: url)
+      #endif
       try self.init(
         file: try Data(contentsOf: adjusted, options: [.mappedIfSafe]),
         origin: adjusted

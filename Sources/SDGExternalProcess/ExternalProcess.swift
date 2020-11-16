@@ -45,9 +45,16 @@
       validate: (_ process: ExternalProcess) -> Bool
     ) where S: Sequence, S.Element == URL {
       let adjustedLocations = locations
-        .lazy.map { FileManager.default.existingRepresentation(of: $0) }
+        .lazy.map { location -> URL in
+          #if os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+          return location
+          #else
+          return FileManager.default.existingRepresentation(of: location)
+          #endif
+        }
 
       func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
+        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
         var isDirectory: ObjCBool = false
         if ¬FileManager.default.fileExists(atPath: location.path, isDirectory: &isDirectory) {
           return false
@@ -58,6 +65,7 @@
         if ¬FileManager.default.isExecutableFile(atPath: location.path) {
           return false
         }
+        #endif
         // @exempt(from: tests) Unreachable on tvOS, etc.
         let possible = ExternalProcess(at: location)
         if ¬validate(possible) {

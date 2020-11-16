@@ -71,7 +71,11 @@
       if domain == UserDefaults.globalDomain {
         possibleDebugDomain = domain  // @exempt(from: tests) Absent from Linux?
       } else {
+        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+        possibleDebugDomain = domain
+        #else
         possibleDebugDomain = FileManager.possibleDebugDomain(domain)
+        #endif
       }
       self.possibleDebugDomain = possibleDebugDomain
 
