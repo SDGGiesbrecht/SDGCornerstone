@@ -35,8 +35,10 @@
 
         testAssertionMethod = XCTAssert
 
+        #if !os(WASI)  // #workaround(Swift 5.3.1, Thread unavailable.)
         // The default of .userInteractive is absurd.
         Thread.current.qualityOfService = .utility
+        #endif
 
         super.setUp()
       }
