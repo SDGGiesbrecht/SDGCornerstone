@@ -22,7 +22,7 @@
 
     public init(file: Data, origin: URL?) throws {
 
-      #if os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
       // Let Foundation try...
       if let url = origin {
         var encoding: String.Encoding = .utf8

@@ -29,12 +29,11 @@
 
     private static var domains: [String: PreferenceSet] = [:]
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     /// The application preferences.
     public static let applicationPreferences: PreferenceSet = {
       return preferences(for: ProcessInfo.applicationDomain)
     }()
-    #endif
 
     /// Returns the preferences for a particular domain.
     ///
@@ -57,7 +56,7 @@
     ///
     /// - Parameters:
     ///     - domain: The domain.
-    public required init(domain: String) {
+    public init(domain: String) {
       _assert(
         PreferenceSet.domains[domain] == nil,
         { (localization: _APILocalization) -> String in  // @exempt(from: tests)
@@ -86,6 +85,7 @@
       observer = Observer()
       observer.preferences = self
     }
+    #endif
 
     // MARK: - Properties
 
@@ -107,7 +107,7 @@
 
     // MARK: - Storage
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: Preference] {
       let values =
         UserDefaults.standard.persistentDomain(
@@ -158,6 +158,7 @@
 
     // MARK: - Observing
 
+    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     private func valueChanged(for identifier: String) {
 
       guard let shared = values[identifier] else {
@@ -174,6 +175,7 @@
         writeToDisk(contents)
       }
     }
+    #endif
 
     // MARK: - Usage
 
@@ -189,9 +191,11 @@
       }
     }
 
+    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     /// Resets all properties to nil.
     public func reset() {
       writeToDisk([:])
       update(fromExternalState: [:])
     }
+    #endif
   }
