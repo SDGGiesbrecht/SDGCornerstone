@@ -70,15 +70,15 @@
 
       self.domain = domain
       let possibleDebugDomain: String
+      #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+        possibleDebugDomain = domain
+      #else
       if domain == UserDefaults.globalDomain {
         possibleDebugDomain = domain  // @exempt(from: tests) Absent from Linux?
       } else {
-        #if os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
-        possibleDebugDomain = domain
-        #else
         possibleDebugDomain = FileManager.possibleDebugDomain(domain)
-        #endif
       }
+      #endif
       self.possibleDebugDomain = possibleDebugDomain
 
       contents = PreferenceSet.readFromDisk(for: possibleDebugDomain)
@@ -107,6 +107,7 @@
 
     // MARK: - Storage
 
+    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: Preference] {
       let values =
         UserDefaults.standard.persistentDomain(
@@ -136,6 +137,7 @@
       )
       UserDefaults.standard.setPersistentDomain(objects, forName: possibleDebugDomain)
     }
+    #endif
 
     // MARK: - Merging Changes
 
