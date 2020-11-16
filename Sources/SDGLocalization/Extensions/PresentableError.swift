@@ -12,19 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import Foundation
-#endif
 
 import SDGText
-
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if os(WASI)
-  // @notLocalized(🇨🇦EN)
-  /// ...
-  public typealias LocalizedError = Error
-#endif
 
 /// An error suitable to present to users.
 public protocol PresentableError: CustomStringConvertible, LocalizedError {

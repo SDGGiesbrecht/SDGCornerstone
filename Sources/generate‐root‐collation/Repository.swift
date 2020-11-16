@@ -12,8 +12,6 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import Foundation
 
   let repositoryRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
@@ -21,4 +19,3 @@
 
   let resourcesDirectory = repositoryRoot.appendingPathComponent("Resources")
   let collationResourcesDirectory = resourcesDirectory.appendingPathComponent("SDGCollation")
-#endif

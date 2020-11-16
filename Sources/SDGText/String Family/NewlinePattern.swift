@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import struct Foundation.CharacterSet
-#endif
 
 import SDGLogic
 import SDGCollections
@@ -27,20 +24,7 @@ public struct NewlinePattern: Pattern {
 
   private static let carriageReturn: Unicode.Scalar = "\u{D}"
   private static let lineFeed: Unicode.Scalar = "\u{A}"
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if os(WASI)
-    @usableFromInline internal static let newlineCharacters: Set<Unicode.Scalar> = [
-      "\u{A}",
-      "\u{B}",
-      "\u{C}",
-      "\u{D}",
-      "\u{85}",
-      "\u{2028}",
-      "\u{2029}",
-    ]
-  #else
     @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
-  #endif
   @usableFromInline internal static let newline = NewlinePattern(
     carriageReturnLineFeed: (carriageReturn, lineFeed)
   )

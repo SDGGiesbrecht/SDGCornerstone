@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import Foundation
-#endif
 
 import SDGText
 import SDGPersistence
@@ -60,8 +57,6 @@ public func testCustomStringConvertibleConformance<T, L>(
     report.append("\n")
   }
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     func fileName(typeName: String) -> URL {
       testSpecificationDirectory(file)
         .appendingPathComponent("CustomStringConvertible")
@@ -82,7 +77,6 @@ public func testCustomStringConvertibleConformance<T, L>(
       file: file,
       line: line
     )
-  #endif
 
   if let playground = instance as? CustomPlaygroundDisplayConvertible {
     _ = playground.playgroundDescription

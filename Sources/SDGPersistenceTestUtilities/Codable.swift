@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import Foundation
-#endif
 
 import SDGControlFlow
 import SDGCollections
@@ -43,8 +40,6 @@ public func testCodableConformance<T>(
   line: UInt = #line
 ) where T: Codable, T: Equatable {
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     func directory(typeName: String) -> URL {
       return testSpecificationDirectory(file)
         .appendingPathComponent("Codable")
@@ -125,11 +120,8 @@ public func testCodableConformance<T>(
     } catch {
       fail("\(error)", file: file, line: line)
     }
-  #endif
 }
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   /// Tests that decoding fails with a value encoded from an invalid mock type.
   ///
   /// For example, if a type encodes a property as an integer, but only supports a certain range of numbers, this function can be used to test that decoding an invalid number fails. The mock instance should be a dictionary, array or something else that can mimic the same encoding structure as the actual type, but is free from the restraints the type imposes.
@@ -166,4 +158,3 @@ public func testCodableConformance<T>(
       // Expected.
     }
   }
-#endif

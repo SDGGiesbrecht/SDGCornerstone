@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import Foundation
-#endif
 
 import SDGControlFlow
 import SDGLogic
@@ -45,8 +42,6 @@ public enum Casing: CodableViaEnumeration {
   ///     - compileTimeString: The string to transform.
   public func apply(to compileTimeString: StaticString) -> StrictString {
     var string = StrictString(compileTimeString)
-    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-    #if !os(WASI)
       assert(
         ¬string.contains(where: {
           $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters
@@ -58,7 +53,6 @@ public enum Casing: CodableViaEnumeration {
           }
         })
       )
-    #endif
 
     switch self {
     case .sentenceMedial:

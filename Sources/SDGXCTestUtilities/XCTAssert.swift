@@ -14,8 +14,6 @@
 
 #if !os(watchOS)
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     import XCTest
 
     import SDGLogic
@@ -46,5 +44,4 @@
         line: zeile
       )
     }
-  #endif
 #endif

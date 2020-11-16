@@ -12,17 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import Foundation
   #if canImport(CoreGraphics)
     import CoreGraphics  // Not included in Foundation on iOS.
   #endif
-#endif
 
 import RealModule
 
-#if os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
+#if os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
   // #documentation(FloatMax)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
@@ -206,8 +203,6 @@ extension Double: FloatFamily {
   }
 }
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   extension CGFloat: FloatFamily {
 
     // MARK: - CustomDebugStringConvertible
@@ -294,9 +289,8 @@ extension Double: FloatFamily {
       return CGFloat(NativeType(precedingValue) ↑ NativeType(followingValue))
     }
   }
-#endif
 
-#if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+#if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
   extension Float80: Decodable, Encodable, FloatFamily {
 
     // MARK: - Decodable

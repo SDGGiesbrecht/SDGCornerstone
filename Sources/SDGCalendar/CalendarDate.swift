@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import Foundation
-#endif
 
 import SDGControlFlow
 import SDGMathematics
@@ -39,8 +36,6 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Static Functions
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     /// Returns the current date on the Hebrew calendar.
     public static func hebrewNow() -> CalendarDate {
       return CalendarDate(definition: CalendarDate(Date()).converted(to: HebrewDate.self))
@@ -50,7 +45,6 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     public static func gregorianNow() -> CalendarDate {
       return CalendarDate(definition: CalendarDate(Date()).converted(to: GregorianDate.self))
     }
-  #endif
 
   // MARK: - Initialization
 
@@ -169,8 +163,6 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     )
   }
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     /// Creates a calendar date using an instance of `Date`.
     ///
     /// - Parameters:
@@ -178,7 +170,6 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     public init(_ dateInstance: Date) {
       self.init(definition: FoundationDate(dateInstance))
     }
-  #endif
 
   // MARK: - Properties
 
@@ -292,8 +283,6 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Time Zones
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     /// Returns date properties adjusted to the specified time zone.
     ///
     /// - Parameters:
@@ -302,7 +291,6 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
       let date = self + FloatMax(timeZone.secondsFromGMT(for: Date(self))).seconds
       return AnyDescribableDate(date)
     }
-  #endif
 
   /// Returns date properties adjusted to mean solar time at the specified longitude, with negative angles representing west.
   ///
@@ -323,18 +311,12 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Decodable
 
-  internal static var knownDateDefinitions: [StrictString: DateDefinition.Type] = {
-    var definitions: [StrictString: DateDefinition.Type] = [
+  internal static var knownDateDefinitions: [StrictString: DateDefinition.Type] = [
       HebrewDate.identifier: HebrewDate.self,
       GregorianDate.identifier: GregorianDate.self,
       RelativeDate.identifier: RelativeDate.self,
+      FoundationDate.identifier: FoundationDate.self
     ]
-    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-    #if !os(WASI)
-      definitions[FoundationDate.identifier] = FoundationDate.self
-    #endif
-    return definitions
-  }()
 
   /// Registers a definition type so that its instances can be decoded.
   ///

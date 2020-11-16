@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
   import Foundation
-#endif
 #if canImport(WinSDK)
   import WinSDK
 #endif
@@ -78,8 +75,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     }
   #endif
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     internal static let osSystemWidePreferences: Shared<Preference> = {
       let preferences: Shared<Preference>
       #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
@@ -177,7 +172,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
       return preferences
     }()
-  #endif
 
   private static let overrides: Shared<[LocalizationSetting]> = {
     let overrides: Shared<[LocalizationSetting]> = Shared([])
@@ -186,17 +180,11 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   }()
 
   private static func resolveCurrentLocalization() -> LocalizationSetting {
-    var result = overrides.value.last
-    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-    #if !os(WASI)
-      result =
-        result
+    return overrides.value.last
         ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
         ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
         ?? sdgSystemWidePreferences.value.as(LocalizationSetting.self)
         ?? LocalizationSetting(osPreference: osSystemWidePreferences.value)
-    #endif
-    return result
       ?? LocalizationSetting(orderOfPrecedence: [] as [[String]])  // @exempt(from: tests)
   }
 
@@ -222,8 +210,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   // MARK: - Static Methods
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     // For user available menus.
     public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
       sdgSystemWidePreferences.value.set(to: setting)
@@ -259,7 +245,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
         osApplicationPreferences.value.set(to: nil)
       }
     }
-  #endif
 
   // MARK: - Initialization
 
@@ -279,15 +264,12 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
   }
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     private init?(osPreference preference: Preference) {
       guard let result = preference.as([String].self) else {
         return nil
       }
       self.init(orderOfPrecedence: result)
     }
-  #endif
 
   // MARK: - Properties
 
@@ -317,8 +299,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     return L.fallbackLocalization
   }
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
     private func stabilityCacheURL<L>(for: L.Type) -> URL {
       var path = "SDGCornerstone/Stable Localizations"
       path += "/"
@@ -341,7 +321,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
         try? newValue?.save(to: stabilityCacheURL(for: L.self))
       }
     }
-  #endif
 
   /// Returns the preferred localization out of those supported by the type `L`.
   ///
@@ -352,10 +331,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     case .none:
       return resolvedFresh()
     case .stabilized:
-      // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-      #if os(WASI)
-        return resolvedFresh()
-      #else
         let container = cached(in: &self[stabilityCacheFor: L.self]) {
           return CachedLocalization<L>(
             localization: resolvedFresh(),
@@ -363,7 +338,6 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
           )
         }
         return container.localization
-      #endif
     }
   }
 
