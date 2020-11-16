@@ -117,9 +117,11 @@ public func testCodableConformance<T>(
       if newSpecification ∉ specifications {
         // @exempt(from: tests)
         let now = CalendarDate.gregorianNow()
+        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
         try newSpecification.save(
           to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
         )
+        #endif
       }
     } catch {
       fail("\(error)", file: file, line: line)

@@ -85,7 +85,8 @@
 
     // MARK: - Usage
 
-    #if !(os(tvOS) || os(iOS) || os(watchOS))
+    // #workaround(Swift 5.3.1, Process unavailable on WASI.)
+    #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
       /// Runs a command.
       ///
       /// - Parameters:

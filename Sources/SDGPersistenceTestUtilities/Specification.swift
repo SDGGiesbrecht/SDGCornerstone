@@ -104,13 +104,16 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
 
       if overwriteSpecificationInsteadOfFailing {
         do {
+          #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
+          #endif
         } catch {
           fail("\(error)", file: file, line: line)
         }
         return
       }
 
+      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
       guard var specificationString = try? String(from: specification) else {
         do {
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
@@ -119,6 +122,7 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
         }
         return
       }
+      #endif
       #if os(Windows)
         // On Windows, Git may have butchered the newlines during checkout.
         specificationString.scalars.replaceMatches(for: "\r\n".scalars, with: "\n".scalars)

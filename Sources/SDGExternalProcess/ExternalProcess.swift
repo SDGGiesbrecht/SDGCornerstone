@@ -81,7 +81,8 @@
         }
       }
 
-      #if !(os(tvOS) || os(iOS) || os(watchOS))
+      // #workaround(Swift 5.3.1, Process unavailable on WASI.)
+      #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
         let searchCommand: String
         #if os(Windows)
           searchCommand = "where"
@@ -142,8 +143,9 @@
 
     /// The location of the executable file.
     public let executable: URL
-
-    #if !(os(tvOS) || os(iOS) || os(watchOS))
+    
+    // #workaround(Swift 5.3.1, Process unavailable on WASI.)
+    #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
       /// Runs the executable with the specified arguments and returns the output.
       ///
       /// - Parameters:
