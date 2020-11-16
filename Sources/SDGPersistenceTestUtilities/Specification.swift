@@ -72,7 +72,7 @@ public func testSpecificationDirectory(_ callerLocation: StaticString = #filePat
         // @exempt(from: tests)
         repositoryRoot = URL(fileURLWithPath: overridden)
       } else {
-        return defaultRepositoryRoot(callerLocation)
+        repositoryRoot = defaultRepositoryRoot(callerLocation)
       }
     #endif
     return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
