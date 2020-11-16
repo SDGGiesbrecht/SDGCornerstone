@@ -77,15 +77,11 @@
 
       self.domain = domain
       let possibleDebugDomain: String
-      #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
-        possibleDebugDomain = domain
-      #else
       if domain == UserDefaults.globalDomain {
         possibleDebugDomain = domain  // @exempt(from: tests) Absent from Linux?
       } else {
         possibleDebugDomain = FileManager.possibleDebugDomain(domain)
       }
-      #endif
       self.possibleDebugDomain = possibleDebugDomain
 
       contents = PreferenceSet.readFromDisk(for: possibleDebugDomain)
