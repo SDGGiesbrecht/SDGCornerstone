@@ -16,6 +16,7 @@
 
   import SDGControlFlow
 
+#if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
   extension ProcessInfo {
 
     private static var _applicationIdentifier: String?
@@ -55,3 +56,4 @@
       return applicationIdentifier
     }
   }
+#endif

@@ -110,6 +110,7 @@
       }
     }
 
+    #if !os(WASI)  // #workaround(Swift 5.3.1, PropertyListEncoder unavailable.)
     private func encodeAndDeserialize<T>(_ value: [T]) throws -> Any where T: Encodable {
       return try PropertyListSerialization.propertyList(
         from: PropertyListEncoder().encode(value),
@@ -124,6 +125,7 @@
         from: PropertyListSerialization.data(fromPropertyList: array, format: .binary, options: 0)
       )
     }
+    #endif
 
     // @documentation(SDGCornerstone.Preference.set(to:))
     /// Sets the preference to a particular value.

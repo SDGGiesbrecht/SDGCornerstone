@@ -132,9 +132,11 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     }()
 
     private static let osApplicationPreferences: Shared<Preference> = {
+      #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
       guard ProcessInfo.possibleApplicationIdentifier ≠ nil else {
         return Shared(Preference.mock())  // @exempt(from: tests)
       }
+      #endif
 
       let preferences: Shared<Preference>
       #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
@@ -163,6 +165,9 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     }()
 
     private static let sdgApplicationPreferences: Shared<Preference> = {
+      #if os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+      return Shared(Preference.mock())
+      #else
       guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
         return Shared(Preference.mock())  // @exempt(from: tests)
       }
@@ -171,6 +176,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       ]
       preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
       return preferences
+      #endif
     }()
 
   private static let overrides: Shared<[LocalizationSetting]> = {
@@ -230,8 +236,10 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     ///     - setting: The new localization setting.
     public static func setApplicationPreferences(to setting: LocalizationSetting?) {
 
+      #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
       // Make sure this was set and it is not just a silent mock preference.
       _ = ProcessInfo.applicationIdentifier
+      #endif
 
       sdgApplicationPreferences.value.set(to: setting)
 

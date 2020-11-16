@@ -29,10 +29,12 @@
 
     private static var domains: [String: PreferenceSet] = [:]
 
+    #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
     /// The application preferences.
     public static let applicationPreferences: PreferenceSet = {
       return preferences(for: ProcessInfo.applicationDomain)
     }()
+    #endif
 
     /// Returns the preferences for a particular domain.
     ///
@@ -71,7 +73,7 @@
       if domain == UserDefaults.globalDomain {
         possibleDebugDomain = domain  // @exempt(from: tests) Absent from Linux?
       } else {
-        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+        #if os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
         possibleDebugDomain = domain
         #else
         possibleDebugDomain = FileManager.possibleDebugDomain(domain)

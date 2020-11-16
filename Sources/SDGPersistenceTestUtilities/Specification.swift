@@ -36,6 +36,22 @@
     specificationDirectory = directory
   }
 
+private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
+  var callerURL = URL(fileURLWithPath: String(describing: callerLocation))
+  #if os(Windows)
+    // Convert WSL paths to native Windows paths if cross‐compiled.
+    var directory = callerURL.path
+    if directory.hasPrefix("/mnt/") {
+      directory.removeFirst(5)
+      let driveLetter = directory.removeFirst()
+      directory.prepend(contentsOf: "\(driveLetter.uppercased()):")
+      callerURL = URL(fileURLWithPath: directory)
+    }
+  #endif
+  return
+    callerURL
+    .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+}
   /// Returns the directory where test specifications should be stored.
   ///
   /// The directory can be set by `setTestSpecificationDirectory(to:)`. Otherwise the default directory is determined relative to the first calling source file based on the assumption that that it is in a Swift Package Manager test target, and not in any further subdirectories.
@@ -47,27 +63,18 @@
   public func testSpecificationDirectory(_ callerLocation: StaticString = #filePath) -> URL {
     return cached(in: &specificationDirectory) {
       let repositoryRoot: URL
+      #if os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+        return defaultRepositoryRoot(callerLocation)
+      #else
       if let overridden = ProcessInfo.processInfo
         .environment["SWIFTPM_PACKAGE_ROOT"]
       {
         // @exempt(from: tests)
         repositoryRoot = URL(fileURLWithPath: overridden)
       } else {
-        var callerURL = URL(fileURLWithPath: String(describing: callerLocation))
-        #if os(Windows)
-          // Convert WSL paths to native Windows paths if cross‐compiled.
-          var directory = callerURL.path
-          if directory.hasPrefix("/mnt/") {
-            directory.removeFirst(5)
-            let driveLetter = directory.removeFirst()
-            directory.prepend(contentsOf: "\(driveLetter.uppercased()):")
-            callerURL = URL(fileURLWithPath: directory)
-          }
-        #endif
-        repositoryRoot =
-          callerURL
-          .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        return defaultRepositoryRoot(callerLocation)
       }
+      #endif
       return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
     }
   }

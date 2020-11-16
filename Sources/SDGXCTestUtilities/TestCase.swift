@@ -27,8 +27,10 @@
       open override func setUp() {
         if ¬TestCase.initialized {
           TestCase.initialized = true
+          #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
           ProcessInfo.applicationIdentifier =
             "ca.solideogloria.SDGCornerstone.SharedTestingDomain"
+          #endif
         }
 
         testAssertionMethod = XCTAssert

@@ -108,6 +108,7 @@
         }
       #endif
 
+      #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
       // Fall back to searching PATH manually, because some Linux flavours lack “which”.
       if let name = commandName,
         let path = ProcessInfo.processInfo.environment["PATH"]
@@ -132,6 +133,7 @@
           }
         }
       }
+      #endif
 
       return nil
     }
