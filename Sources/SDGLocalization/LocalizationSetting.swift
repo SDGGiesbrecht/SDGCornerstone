@@ -203,8 +203,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   private static func resolveCurrentLocalization() -> LocalizationSetting {
     var result = overrides.value.last
-    #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
-    #else
+    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     result = result
         ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
         ?? LocalizationSetting(osPreference: osApplicationPreferences.value)
