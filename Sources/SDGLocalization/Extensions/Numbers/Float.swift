@@ -19,7 +19,7 @@
 
 extension Double: TextConvertibleNumber {}
   extension CGFloat: TextConvertibleNumber {}
-#if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+#if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
   extension Float80: TextConvertibleNumber {}
 #endif
 extension Float: TextConvertibleNumber {}

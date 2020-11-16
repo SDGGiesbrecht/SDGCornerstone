@@ -19,7 +19,7 @@
 
 import RealModule
 
-#if os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
+#if os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS)
   // #documentation(FloatMax)
   /// The member of the `Float` family with the largest bit field.
   public typealias FloatMax = Double
@@ -290,7 +290,7 @@ extension Double: FloatFamily {
     }
   }
 
-#if !(os(Windows) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+#if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
   extension Float80: Decodable, Encodable, FloatFamily {
 
     // MARK: - Decodable
