@@ -86,6 +86,12 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
         preferences = Shared(Preference.mock())
         preferences.value.set(to: queryWindowsLanguages(using: GetUserPreferredUILanguages))
 
+      #elseif os(WASI)
+
+      // #workaround(Not sure where this should come from yet.)
+      preferences = Shared(Preference.mock())
+      preferences.value.set(to: nil)
+
       #elseif os(Linux)
 
         preferences = Shared(Preference.mock())
@@ -146,6 +152,12 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
         preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
+
+      #elseif os(WASI)
+
+      // #workaround(Not sure where this should come from yet.)
+      preferences = Shared(Preference.mock())
+      preferences.value.set(to: nil)
 
       #elseif os(Windows)
 
