@@ -22,6 +22,7 @@
 
     public init(file: Data, origin: URL?) throws {
 
+      #if os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
       // Let Foundation try...
       if let url = origin {
         var encoding: String.Encoding = .utf8
@@ -29,9 +30,11 @@
           if string.data(using: encoding, allowLossyConversion: false) == file {
             // Only initialize from the underlying file if it matches the data provided.
             self = string
+            return
           }
         }
       }
+      #endif
 
       // Guess blindly...
 
