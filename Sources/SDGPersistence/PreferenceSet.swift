@@ -29,7 +29,15 @@
 
     private static var domains: [String: PreferenceSet] = [:]
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+    #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+    internal init() {
+      // Dead initializer, but enables compilation, in order to permit static namespace use.
+      domain = ""
+      possibleDebugDomain = ""
+      contents = [:]
+      observer = Observer()
+    }
+    #else
     /// The application preferences.
     public static let applicationPreferences: PreferenceSet = {
       return preferences(for: ProcessInfo.applicationDomain)
@@ -101,7 +109,9 @@
       fileprivate init() {}
       fileprivate weak var preferences: PreferenceSet?
       fileprivate func valueChanged(for identifier: String) {
+        #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
         preferences?.valueChanged(for: identifier)
+        #endif
       }
     }
 
