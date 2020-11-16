@@ -394,7 +394,6 @@ extension Unicode.Scalar {
         } else {
           return control(acronym: hexadecimalCode)
         }
-      #endif  // @exempt(from: tests)
     }
   }
 }
