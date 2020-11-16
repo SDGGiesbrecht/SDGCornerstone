@@ -17,6 +17,7 @@
   import SDGControlFlow
   import SDGLogic
 
+#if !os(WASI)  // #workaround(Swift 5.3.1, RunLoop unavailable.)
   extension RunLoop {
 
     // MARK: - Running the Loop
@@ -76,3 +77,4 @@
       cleanUp()
     }
   }
+#endif
