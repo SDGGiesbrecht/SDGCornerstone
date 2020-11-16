@@ -31,6 +31,7 @@ extension CollationOrder {
 
   static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
+  if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     static func ducet() throws -> CollationOrder {
 
       // Constants to fetch.
@@ -224,4 +225,5 @@ extension CollationOrder {
         afterIndex: afterIndex
       )
     }
+  #endif
 }
