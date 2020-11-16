@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import struct Foundation.CharacterSet
+import struct Foundation.CharacterSet
 
 import SDGLogic
 import SDGCollections
@@ -24,7 +24,7 @@ public struct NewlinePattern: Pattern {
 
   private static let carriageReturn: Unicode.Scalar = "\u{D}"
   private static let lineFeed: Unicode.Scalar = "\u{A}"
-    @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
+  @usableFromInline internal static let newlineCharacters = CharacterSet.newlines
   @usableFromInline internal static let newline = NewlinePattern(
     carriageReturnLineFeed: (carriageReturn, lineFeed)
   )

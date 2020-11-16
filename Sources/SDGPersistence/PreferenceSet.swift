@@ -12,24 +12,24 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
-  import SDGControlFlow
-  import SDGLogic
-  import SDGCollections
+import SDGControlFlow
+import SDGLogic
+import SDGCollections
 
-  /// A set of preferences for a particular domain.
-  public final class PreferenceSet {
+/// A set of preferences for a particular domain.
+public final class PreferenceSet {
 
-    // MARK: - Static Properties
+  // MARK: - Static Properties
 
-    public static let _sdgCornerstoneDomain = "ca.solideogloria.SDGCornerstone"
+  public static let _sdgCornerstoneDomain = "ca.solideogloria.SDGCornerstone"
 
-    // MARK: - Initialization
+  // MARK: - Initialization
 
-    private static var domains: [String: PreferenceSet] = [:]
+  private static var domains: [String: PreferenceSet] = [:]
 
-    #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     internal init() {
       // Dead initializer, but enables compilation, in order to permit static namespace use.
       domain = ""
@@ -37,7 +37,7 @@
       contents = [:]
       observer = Observer()
     }
-    #else
+  #else
     /// The application preferences.
     public static let applicationPreferences: PreferenceSet = {
       return preferences(for: ProcessInfo.applicationDomain)
@@ -89,31 +89,31 @@
       observer = Observer()
       observer.preferences = self
     }
-    #endif
+  #endif
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    /// The domain.
-    public let domain: String
-    private let possibleDebugDomain: String
-    private var contents: [String: Preference]
+  /// The domain.
+  public let domain: String
+  private let possibleDebugDomain: String
+  private var contents: [String: Preference]
 
-    private var values: [String: Shared<Preference>] = [:]
+  private var values: [String: Shared<Preference>] = [:]
 
-    private var observer: Observer
-    private class Observer: SharedValueObserver {
-      fileprivate init() {}
-      fileprivate weak var preferences: PreferenceSet?
-      fileprivate func valueChanged(for identifier: String) {
-        #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  private var observer: Observer
+  private class Observer: SharedValueObserver {
+    fileprivate init() {}
+    fileprivate weak var preferences: PreferenceSet?
+    fileprivate func valueChanged(for identifier: String) {
+      #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
         preferences?.valueChanged(for: identifier)
-        #endif
-      }
+      #endif
     }
+  }
 
-    // MARK: - Storage
+  // MARK: - Storage
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: Preference] {
       let values =
         UserDefaults.standard.persistentDomain(
@@ -143,28 +143,28 @@
       )
       UserDefaults.standard.setPersistentDomain(objects, forName: possibleDebugDomain)
     }
-    #endif
+  #endif
 
-    // MARK: - Merging Changes
+  // MARK: - Merging Changes
 
-    private func update(
-      fromExternalState externalState: [String: Preference],
-      ignoring ignoredKey: String? = nil
-    ) {
+  private func update(
+    fromExternalState externalState: [String: Preference],
+    ignoring ignoredKey: String? = nil
+  ) {
 
-      for key in Set(externalState.keys) ∪ Set(contents.keys) where key ≠ ignoredKey {
-        let externalValue = externalState[key]
+    for key in Set(externalState.keys) ∪ Set(contents.keys) where key ≠ ignoredKey {
+      let externalValue = externalState[key]
 
-        if externalValue ≠ contents[key] {
-          contents[key] = externalValue
-          self[key].value.propertyListObject = externalValue?.propertyListObject
-        }
+      if externalValue ≠ contents[key] {
+        contents[key] = externalValue
+        self[key].value.propertyListObject = externalValue?.propertyListObject
       }
     }
+  }
 
-    // MARK: - Observing
+  // MARK: - Observing
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     private func valueChanged(for identifier: String) {
 
       guard let shared = values[identifier] else {
@@ -181,27 +181,27 @@
         writeToDisk(contents)
       }
     }
-    #endif
+  #endif
 
-    // MARK: - Usage
+  // MARK: - Usage
 
-    /// Accesses the preference for the specified key.
-    ///
-    /// - Parameters:
-    ///     - key: The key.
-    public subscript(key: String) -> Shared<Preference> {
-      return cached(in: &values[key]) {
-        let shared = Shared(contents[key] ?? Preference(propertyListObject: nil))
-        shared.register(observer: observer, identifier: key, reportInitialState: false)
-        return shared
-      }
+  /// Accesses the preference for the specified key.
+  ///
+  /// - Parameters:
+  ///     - key: The key.
+  public subscript(key: String) -> Shared<Preference> {
+    return cached(in: &values[key]) {
+      let shared = Shared(contents[key] ?? Preference(propertyListObject: nil))
+      shared.register(observer: observer, identifier: key, reportInitialState: false)
+      return shared
     }
+  }
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     /// Resets all properties to nil.
     public func reset() {
       writeToDisk([:])
       update(fromExternalState: [:])
     }
-    #endif
-  }
+  #endif
+}

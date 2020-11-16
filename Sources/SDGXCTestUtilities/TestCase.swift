@@ -14,34 +14,34 @@
 
 #if !os(watchOS)
 
-    import XCTest
+  import XCTest
 
-    import SDGLogic
-    import SDGPersistence
-    import SDGTesting
+  import SDGLogic
+  import SDGPersistence
+  import SDGTesting
 
-    /// A test case which simplifies testing for targets which link against the `SDGCornerstone` package.
-    open class TestCase: XCTestCase {
+  /// A test case which simplifies testing for targets which link against the `SDGCornerstone` package.
+  open class TestCase: XCTestCase {
 
-      private static var initialized = false
-      open override func setUp() {
-        if ¬TestCase.initialized {
-          TestCase.initialized = true
-          #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+    private static var initialized = false
+    open override func setUp() {
+      if ¬TestCase.initialized {
+        TestCase.initialized = true
+        #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
           ProcessInfo.applicationIdentifier =
             "ca.solideogloria.SDGCornerstone.SharedTestingDomain"
-          #endif
-        }
+        #endif
+      }
 
-        testAssertionMethod = XCTAssert
+      testAssertionMethod = XCTAssert
 
-        #if !os(WASI)  // #workaround(Swift 5.3.1, Thread unavailable.)
+      #if !os(WASI)  // #workaround(Swift 5.3.1, Thread unavailable.)
         // The default of .userInteractive is absurd.
         Thread.current.qualityOfService = .utility
-        #endif
+      #endif
 
-        super.setUp()
-      }
+      super.setUp()
     }
+  }
 
 #endif

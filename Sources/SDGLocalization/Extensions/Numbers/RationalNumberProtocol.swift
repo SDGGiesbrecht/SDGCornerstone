@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
 import SDGLogic
 import SDGMathematics
@@ -24,7 +24,7 @@ extension RationalNumberProtocol {
   // MARK: - Text Representations
 
   private func digitsOnly(_ number: StrictString) -> Bool {
-      return ¬number.contains(where: { $0 ∉ CharacterSet.decimalDigits ∪ ["−"] })
+    return ¬number.contains(where: { $0 ∉ CharacterSet.decimalDigits ∪ ["−"] })
   }
 
   private func parenthesizeIfNecessary(_ number: inout StrictString) {

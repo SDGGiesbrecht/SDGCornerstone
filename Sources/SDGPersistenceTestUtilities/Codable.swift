@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
 import SDGControlFlow
 import SDGCollections
@@ -40,26 +40,26 @@ public func testCodableConformance<T>(
   line: UInt = #line
 ) where T: Codable, T: Equatable {
 
-    func directory(typeName: String) -> URL {
-      return testSpecificationDirectory(file)
-        .appendingPathComponent("Codable")
-        .appendingPathComponent(typeName)
-        .appendingPathComponent(String(uniqueTestName))
-    }
-    let deprecatedDirectory = directory(typeName: "\(T.self)")
-    let specificationsDirectory = directory(
-      typeName: "\(T.self)"
-        .replacingMatches(for: "<", with: "⟨")
-        .replacingMatches(for: ">", with: "⟩")
-    )
+  func directory(typeName: String) -> URL {
+    return testSpecificationDirectory(file)
+      .appendingPathComponent("Codable")
+      .appendingPathComponent(typeName)
+      .appendingPathComponent(String(uniqueTestName))
+  }
+  let deprecatedDirectory = directory(typeName: "\(T.self)")
+  let specificationsDirectory = directory(
+    typeName: "\(T.self)"
+      .replacingMatches(for: "<", with: "⟨")
+      .replacingMatches(for: ">", with: "⟩")
+  )
   #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     try? FileManager.default.move(deprecatedDirectory, to: specificationsDirectory)
     try? FileManager.default.createDirectory(at: specificationsDirectory)
   #endif
 
-    var specifications: Set<String> = []
-    do {
-      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+  var specifications: Set<String> = []
+  do {
+    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
       for specificationURL in try FileManager.default.contents(
         ofDirectory: specificationsDirectory
       ) where specificationURL.pathExtension == "txt" {
@@ -101,66 +101,66 @@ public func testCodableConformance<T>(
           }
         }
       }
-      #endif
+    #endif
 
-      let encoder = JSONEncoder()
-      encoder.outputFormatting = [.prettyPrinted]
-      if #available(macOS 10.13, iOS 11, watchOS 4, tvOS 11, *) {  // @exempt(from: unicode)
-        encoder.outputFormatting.insert(.sortedKeys)
-      }
-      let encoded = try encoder.encode([instance])
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted]
+    if #available(macOS 10.13, iOS 11, watchOS 4, tvOS 11, *) {  // @exempt(from: unicode)
+      encoder.outputFormatting.insert(.sortedKeys)
+    }
+    let encoded = try encoder.encode([instance])
 
-      let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
-      test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
+    let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
+    test(decoded == instance, "\(decoded) ≠ \(instance)", file: file, line: line)
 
-      let newSpecification = try String(file: encoded, origin: nil)
-      if newSpecification ∉ specifications {
-        // @exempt(from: tests)
-        let now = CalendarDate.gregorianNow()
-        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+    let newSpecification = try String(file: encoded, origin: nil)
+    if newSpecification ∉ specifications {
+      // @exempt(from: tests)
+      let now = CalendarDate.gregorianNow()
+      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
         try newSpecification.save(
           to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
         )
-        #endif
-      }
-    } catch {
-      fail("\(error)", file: file, line: line)
+      #endif
     }
+  } catch {
+    fail("\(error)", file: file, line: line)
+  }
 }
 
-  /// Tests that decoding fails with a value encoded from an invalid mock type.
-  ///
-  /// For example, if a type encodes a property as an integer, but only supports a certain range of numbers, this function can be used to test that decoding an invalid number fails. The mock instance should be a dictionary, array or something else that can mimic the same encoding structure as the actual type, but is free from the restraints the type imposes.
-  ///
-  /// - Parameters:
-  ///     - type: The type to try to decode.
-  ///     - invalidMock: A mock instance. See above.
-  ///     - file: Optional. A different source file to associate with any failures.
-  ///     - line: Optional. A different line to associate with any failures.
-  public func testDecoding<T, O>(
-    _ type: T.Type,
-    failsFor invalidMock: O,
-    file: StaticString = #filePath,
-    line: UInt = #line
-  ) where T: Codable, O: Encodable {
+/// Tests that decoding fails with a value encoded from an invalid mock type.
+///
+/// For example, if a type encodes a property as an integer, but only supports a certain range of numbers, this function can be used to test that decoding an invalid number fails. The mock instance should be a dictionary, array or something else that can mimic the same encoding structure as the actual type, but is free from the restraints the type imposes.
+///
+/// - Parameters:
+///     - type: The type to try to decode.
+///     - invalidMock: A mock instance. See above.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
+public func testDecoding<T, O>(
+  _ type: T.Type,
+  failsFor invalidMock: O,
+  file: StaticString = #filePath,
+  line: UInt = #line
+) where T: Codable, O: Encodable {
 
-    do {
-      let encoded = try JSONEncoder().encode([invalidMock])
-      let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
-      fail(
-        String(  // @exempt(from: tests)
-          UserFacing<StrictString, APILocalization>(  // @exempt(from: tests)
-            { localization in
-              switch localization {
-              case .englishCanada:
-                return "No error thrown. Decoded: \(arbitraryDescriptionOf: decoded)"
-              }
-            }).resolved()
-        ),
-        file: file,
-        line: line
-      )
-    } catch {
-      // Expected.
-    }
+  do {
+    let encoded = try JSONEncoder().encode([invalidMock])
+    let decoded = try JSONDecoder().decode([T].self, from: encoded).first!
+    fail(
+      String(  // @exempt(from: tests)
+        UserFacing<StrictString, APILocalization>(  // @exempt(from: tests)
+          { localization in
+            switch localization {
+            case .englishCanada:
+              return "No error thrown. Decoded: \(arbitraryDescriptionOf: decoded)"
+            }
+          }).resolved()
+      ),
+      file: file,
+      line: line
+    )
+  } catch {
+    // Expected.
   }
+}

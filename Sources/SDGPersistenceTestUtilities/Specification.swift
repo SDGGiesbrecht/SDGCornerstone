@@ -12,29 +12,29 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
-  import SDGControlFlow
-  import SDGLogic
-  import SDGMathematics
-  import SDGCollections
-  import SDGText
-  import SDGLocalization
+import SDGControlFlow
+import SDGLogic
+import SDGMathematics
+import SDGCollections
+import SDGText
+import SDGLocalization
 
-  import SDGCornerstoneLocalizations
+import SDGCornerstoneLocalizations
 
-  import SDGTesting
+import SDGTesting
 
-  @usableFromInline internal var specificationDirectory: URL?
+@usableFromInline internal var specificationDirectory: URL?
 
-  /// Sets the directory where test specifications should be stored.
-  ///
-  /// The directory should be specified relative to a source file using some combination of `#filePath` and `deletingLastPathComponent()`.
-  /// - Parameters:
-  ///     - directory: The directory.
-  public func setTestSpecificationDirectory(to directory: URL) {
-    specificationDirectory = directory
-  }
+/// Sets the directory where test specifications should be stored.
+///
+/// The directory should be specified relative to a source file using some combination of `#filePath` and `deletingLastPathComponent()`.
+/// - Parameters:
+///     - directory: The directory.
+public func setTestSpecificationDirectory(to directory: URL) {
+  specificationDirectory = directory
+}
 
 private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
   var callerURL = URL(fileURLWithPath: String(describing: callerLocation))
@@ -52,20 +52,20 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
     callerURL
     .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
 }
-  /// Returns the directory where test specifications should be stored.
-  ///
-  /// The directory can be set by `setTestSpecificationDirectory(to:)`. Otherwise the default directory is determined relative to the first calling source file based on the assumption that that it is in a Swift Package Manager test target, and not in any further subdirectories.
-  ///
-  /// This method normally assumes the package source is still accessible in the same location as it was compiled from. If that is not the case, the `SWIFTPM_PACKAGE_ROOT` environment variable, can be used to direct this function to look for the package at a different location instead.
-  ///
-  /// - Parameters:
-  ///     - callerLocation: Optional. A different file to consider as the location of the call.
-  public func testSpecificationDirectory(_ callerLocation: StaticString = #filePath) -> URL {
-    return cached(in: &specificationDirectory) {
-      let repositoryRoot: URL
-      #if os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
-        return defaultRepositoryRoot(callerLocation)
-      #else
+/// Returns the directory where test specifications should be stored.
+///
+/// The directory can be set by `setTestSpecificationDirectory(to:)`. Otherwise the default directory is determined relative to the first calling source file based on the assumption that that it is in a Swift Package Manager test target, and not in any further subdirectories.
+///
+/// This method normally assumes the package source is still accessible in the same location as it was compiled from. If that is not the case, the `SWIFTPM_PACKAGE_ROOT` environment variable, can be used to direct this function to look for the package at a different location instead.
+///
+/// - Parameters:
+///     - callerLocation: Optional. A different file to consider as the location of the call.
+public func testSpecificationDirectory(_ callerLocation: StaticString = #filePath) -> URL {
+  return cached(in: &specificationDirectory) {
+    let repositoryRoot: URL
+    #if os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+      return defaultRepositoryRoot(callerLocation)
+    #else
       if let overridden = ProcessInfo.processInfo
         .environment["SWIFTPM_PACKAGE_ROOT"]
       {
@@ -74,58 +74,65 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
       } else {
         return defaultRepositoryRoot(callerLocation)
       }
-      #endif
-      return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
-    }
+    #endif
+    return repositoryRoot.appendingPathComponent("Tests/Test Specifications")
   }
+}
 
-  /// Compares a string against a test specification.
-  ///
-  /// If the string does not match the specification, the test will fail.
-  ///
-  /// If the specification does not exist yet, it will be created according to the string. It is recommeded to check specifications into source control to monitor changes.
-  ///
-  /// To update a specification instead of testing against it, change `overwriteSpecificationInsteadOfFailing` to `true` and re‐run the test suite. The specification will be rewritten to match the provided string. *Do not forget to change it back afterward, or the test will cease to validate anything.*
-  ///
-  /// - Parameters:
-  ///     - string: The string to test.
-  ///     - specification: The location of the specification to compare against (or write to).
-  ///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update a specification.
-  ///     - file: Optional. A different source file to associate with any failures.
-  ///     - line: Optional. A different line to associate with any failures.
-  public func compare(
-    _ string: String,
-    against specification: URL,
-    overwriteSpecificationInsteadOfFailing: Bool,
-    file: StaticString = #filePath,
-    line: UInt = #line
-  ) {
-    purgingAutoreleased {
+/// Compares a string against a test specification.
+///
+/// If the string does not match the specification, the test will fail.
+///
+/// If the specification does not exist yet, it will be created according to the string. It is recommeded to check specifications into source control to monitor changes.
+///
+/// To update a specification instead of testing against it, change `overwriteSpecificationInsteadOfFailing` to `true` and re‐run the test suite. The specification will be rewritten to match the provided string. *Do not forget to change it back afterward, or the test will cease to validate anything.*
+///
+/// - Parameters:
+///     - string: The string to test.
+///     - specification: The location of the specification to compare against (or write to).
+///     - overwriteSpecificationInsteadOfFailing: Set to `false` for normal behaviour. Set to `true` temporarily to update a specification.
+///     - file: Optional. A different source file to associate with any failures.
+///     - line: Optional. A different line to associate with any failures.
+public func compare(
+  _ string: String,
+  against specification: URL,
+  overwriteSpecificationInsteadOfFailing: Bool,
+  file: StaticString = #filePath,
+  line: UInt = #line
+) {
+  purgingAutoreleased {
 
-      if overwriteSpecificationInsteadOfFailing {
-        do {
-          #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+    if overwriteSpecificationInsteadOfFailing {
+      do {
+        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
-          #endif
+        #endif
+      } catch {
+        fail("\(error)", file: file, line: line)
+      }
+      return
+    }
+
+    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      guard let immutableSpecificationString = try? String(from: specification) else {
+        do {
+          try StrictString(string).save(to: specification)  // Enforce a normalized specification.
         } catch {
           fail("\(error)", file: file, line: line)
         }
         return
       }
+      #if os(Windows)  // Evade warning about never being mutated on some platforms.
+        var specificationString = immutableSpecificationString
+      #else
+        let specificationString = immutableSpecificationString
+      #endif
 
-      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
-      guard var specificationString = try? String(from: specification) else {
-        do {
-          try StrictString(string).save(to: specification)  // Enforce a normalized specification.
-        } catch {
-          fail("\(error)", file: file, line: line)
-        }
-        return
-      }
       #if os(Windows)
         // On Windows, Git may have butchered the newlines during checkout.
         specificationString.scalars.replaceMatches(for: "\r\n".scalars, with: "\n".scalars)
       #endif
+
       if string == specificationString {
         return  // Passing
       }
@@ -192,6 +199,6 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
         file: file,
         line: line
       )
-      #endif
-    }
+    #endif
   }
+}

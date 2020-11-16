@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
 import SDGText
 import SDGPersistence
@@ -57,28 +57,28 @@ public func testCustomStringConvertibleConformance<T, L>(
     report.append("\n")
   }
 
-    func fileName(typeName: String) -> URL {
-      testSpecificationDirectory(file)
-        .appendingPathComponent("CustomStringConvertible")
-        .appendingPathComponent(typeName)
-        .appendingPathComponent(String(uniqueTestName) + ".txt")
-    }
-    let deprecated = fileName(typeName: "\(T.self)")
-    let specification = fileName(
-      typeName: "\(T.self)"
-        .replacingMatches(for: "<", with: "⟨")
-        .replacingMatches(for: ">", with: "⟩")
-    )
+  func fileName(typeName: String) -> URL {
+    testSpecificationDirectory(file)
+      .appendingPathComponent("CustomStringConvertible")
+      .appendingPathComponent(typeName)
+      .appendingPathComponent(String(uniqueTestName) + ".txt")
+  }
+  let deprecated = fileName(typeName: "\(T.self)")
+  let specification = fileName(
+    typeName: "\(T.self)"
+      .replacingMatches(for: "<", with: "⟨")
+      .replacingMatches(for: ">", with: "⟩")
+  )
   #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     try? FileManager.default.move(deprecated, to: specification)
   #endif
-    SDGPersistenceTestUtilities.compare(
-      report,
-      against: specification,
-      overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
-      file: file,
-      line: line
-    )
+  SDGPersistenceTestUtilities.compare(
+    report,
+    against: specification,
+    overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
+    file: file,
+    line: line
+  )
 
   if let playground = instance as? CustomPlaygroundDisplayConvertible {
     _ = playground.playgroundDescription

@@ -12,10 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
-  let repositoryRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
-    .deletingLastPathComponent().deletingLastPathComponent()
+let repositoryRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+  .deletingLastPathComponent().deletingLastPathComponent()
 
-  let resourcesDirectory = repositoryRoot.appendingPathComponent("Resources")
-  let collationResourcesDirectory = resourcesDirectory.appendingPathComponent("SDGCollation")
+let resourcesDirectory = repositoryRoot.appendingPathComponent("Resources")
+let collationResourcesDirectory = resourcesDirectory.appendingPathComponent("SDGCollation")

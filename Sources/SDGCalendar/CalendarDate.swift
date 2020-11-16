@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
 import SDGControlFlow
 import SDGMathematics
@@ -36,15 +36,15 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Static Functions
 
-    /// Returns the current date on the Hebrew calendar.
-    public static func hebrewNow() -> CalendarDate {
-      return CalendarDate(definition: CalendarDate(Date()).converted(to: HebrewDate.self))
-    }
+  /// Returns the current date on the Hebrew calendar.
+  public static func hebrewNow() -> CalendarDate {
+    return CalendarDate(definition: CalendarDate(Date()).converted(to: HebrewDate.self))
+  }
 
-    /// Returns the current date on the Gregorian calendar.
-    public static func gregorianNow() -> CalendarDate {
-      return CalendarDate(definition: CalendarDate(Date()).converted(to: GregorianDate.self))
-    }
+  /// Returns the current date on the Gregorian calendar.
+  public static func gregorianNow() -> CalendarDate {
+    return CalendarDate(definition: CalendarDate(Date()).converted(to: GregorianDate.self))
+  }
 
   // MARK: - Initialization
 
@@ -163,13 +163,13 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
     )
   }
 
-    /// Creates a calendar date using an instance of `Date`.
-    ///
-    /// - Parameters:
-    ///     - dateInstance: The `Date` instance.
-    public init(_ dateInstance: Date) {
-      self.init(definition: FoundationDate(dateInstance))
-    }
+  /// Creates a calendar date using an instance of `Date`.
+  ///
+  /// - Parameters:
+  ///     - dateInstance: The `Date` instance.
+  public init(_ dateInstance: Date) {
+    self.init(definition: FoundationDate(dateInstance))
+  }
 
   // MARK: - Properties
 
@@ -283,14 +283,14 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
 
   // MARK: - Time Zones
 
-    /// Returns date properties adjusted to the specified time zone.
-    ///
-    /// - Parameters:
-    ///     - timeZone: The target time zone.
-    public func adjusted(to timeZone: TimeZone) -> AnyDescribableDate {
-      let date = self + FloatMax(timeZone.secondsFromGMT(for: Date(self))).seconds
-      return AnyDescribableDate(date)
-    }
+  /// Returns date properties adjusted to the specified time zone.
+  ///
+  /// - Parameters:
+  ///     - timeZone: The target time zone.
+  public func adjusted(to timeZone: TimeZone) -> AnyDescribableDate {
+    let date = self + FloatMax(timeZone.secondsFromGMT(for: Date(self))).seconds
+    return AnyDescribableDate(date)
+  }
 
   /// Returns date properties adjusted to mean solar time at the specified longitude, with negative angles representing west.
   ///
@@ -312,11 +312,11 @@ public struct CalendarDate: Comparable, DescribableDate, Equatable, OneDimension
   // MARK: - Decodable
 
   internal static var knownDateDefinitions: [StrictString: DateDefinition.Type] = [
-      HebrewDate.identifier: HebrewDate.self,
-      GregorianDate.identifier: GregorianDate.self,
-      RelativeDate.identifier: RelativeDate.self,
-      FoundationDate.identifier: FoundationDate.self
-    ]
+    HebrewDate.identifier: HebrewDate.self,
+    GregorianDate.identifier: GregorianDate.self,
+    RelativeDate.identifier: RelativeDate.self,
+    FoundationDate.identifier: FoundationDate.self,
+  ]
 
   /// Registers a definition type so that its instances can be decoded.
   ///

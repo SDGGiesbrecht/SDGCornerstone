@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
 import SDGLogic
 import SDGMathematics
@@ -380,20 +380,20 @@ extension Unicode.Scalar {
       return control(acronym: "END🏷")
 
     default:
-        // Marks (Mn, Mc, Me)
-        if self ∈ CharacterSet.nonBaseCharacters {
-          return "◌" + String(self)
+      // Marks (Mn, Mc, Me)
+      if self ∈ CharacterSet.nonBaseCharacters {
+        return "◌" + String(self)
 
-          // Letters (Lu, Ll, Lt, Lm, Lo), Numbers (Nd, Nl, No), Punctuation (Pc, Pd, Ps, Pe, Pi, Pf, Po) & Symbols (Sm, Sc, Sk, So)
-        } else if self ∈ (CharacterSet.alphanumerics ∪ CharacterSet.punctuationCharacters)
-          ∪ CharacterSet.symbols
-        {
-          return String(self)
+        // Letters (Lu, Ll, Lt, Lm, Lo), Numbers (Nd, Nl, No), Punctuation (Pc, Pd, Ps, Pe, Pi, Pf, Po) & Symbols (Sm, Sc, Sk, So)
+      } else if self ∈ (CharacterSet.alphanumerics ∪ CharacterSet.punctuationCharacters)
+        ∪ CharacterSet.symbols
+      {
+        return String(self)
 
-          // Private Use (Co), Surrogate (Cs) & Unassigned (Cn)
-        } else {
-          return control(acronym: hexadecimalCode)
-        }
+        // Private Use (Co), Surrogate (Cs) & Unassigned (Cn)
+      } else {
+        return control(acronym: hexadecimalCode)
+      }
     }
   }
 }

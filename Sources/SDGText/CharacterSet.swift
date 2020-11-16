@@ -12,10 +12,10 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
-  extension CharacterSet {
+extension CharacterSet {
 
-    /// A pattern representing any newline variant.
-    public static var newlinePattern: NewlinePattern { .newline }
-  }
+  /// A pattern representing any newline variant.
+  public static var newlinePattern: NewlinePattern { .newline }
+}

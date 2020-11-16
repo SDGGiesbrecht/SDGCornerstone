@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-  import Foundation
+import Foundation
 
 import SDGControlFlow
 import SDGLogic
@@ -26,10 +26,10 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
 
   // MARK: - Static Properties
 
-    /// The root collation order.
-    public static let root: CollationOrder = {
-      return try! CollationOrder(file: Resources.root, origin: nil)
-    }()
+  /// The root collation order.
+  public static let root: CollationOrder = {
+    return try! CollationOrder(file: Resources.root, origin: nil)
+  }()
 
   // MARK: - Initialization
 
@@ -322,15 +322,15 @@ public struct CollationOrder: Decodable, Encodable, FileConvertible {
     try container.encode(rules)
   }
 
-    // MARK: - FileConvertible
+  // MARK: - FileConvertible
 
-    public init(file: Data, origin: URL?) throws {
-      let decoder = JSONDecoder()
-      self = try decoder.decode(CollationOrder.self, from: file)
-    }
+  public init(file: Data, origin: URL?) throws {
+    let decoder = JSONDecoder()
+    self = try decoder.decode(CollationOrder.self, from: file)
+  }
 
-    public var file: Data {
-      let encoder = JSONEncoder()
-      return try! encoder.encode(self)
-    }
+  public var file: Data {
+    let encoder = JSONEncoder()
+    return try! encoder.encode(self)
+  }
 }
