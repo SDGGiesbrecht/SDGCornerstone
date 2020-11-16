@@ -125,7 +125,6 @@
         from: PropertyListSerialization.data(fromPropertyList: array, format: .binary, options: 0)
       )
     }
-    #endif
 
     // @documentation(SDGCornerstone.Preference.set(to:))
     /// Sets the preference to a particular value.
@@ -152,6 +151,7 @@
         propertyListObject = nil
       }
     }
+    #endif
 
     // #documentation(SDGCornerstone.Preference.set(to:))
     /// Sets the preference to a particular value.
@@ -162,6 +162,7 @@
       propertyListObject = nil
     }
 
+    #if !os(WASI)  // #workaround(Swift 5.3.1, PropertyListEncoder unavailable.)
     /// Returns the preference cast to a particular type.
     ///
     /// The result will be `nil` if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)
@@ -223,6 +224,7 @@
         self[as: type] = newValue
       }
     }
+    #endif
 
     // MARK: - Equatable
 

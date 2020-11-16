@@ -224,6 +224,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       _setSystemWidePreferences(to: setting)
     }
 
+  #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
     /// Sets the application‐specific language preferences to the specified settings.
     ///
     /// This should only be used when the changes both:
@@ -236,10 +237,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     ///     - setting: The new localization setting.
     public static func setApplicationPreferences(to setting: LocalizationSetting?) {
 
-      #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
       // Make sure this was set and it is not just a silent mock preference.
       _ = ProcessInfo.applicationIdentifier
-      #endif
 
       sdgApplicationPreferences.value.set(to: setting)
 
@@ -253,6 +252,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
         osApplicationPreferences.value.set(to: nil)
       }
     }
+  #endif
 
   // MARK: - Initialization
 
