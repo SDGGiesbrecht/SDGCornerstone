@@ -161,7 +161,7 @@ let package = Package(
     .package(
       name: "SDGCornerstone",
       url: "https://github.com/SDGGiesbrecht/SDGCornerstone",
-      from: Version(6, 1, 1)
+      from: Version(6, 2, 0)
     ),
   ],
   targets: [
