@@ -12,18 +12,17 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
+import Foundation
 
-  import SDGControlFlow
+import SDGControlFlow
 
-  extension String: FileConvertible {
+extension String: FileConvertible {
 
-    // MARK: - FileConvertible
+  // MARK: - FileConvertible
 
-    public init(file: Data, origin: URL?) throws {
+  public init(file: Data, origin: URL?) throws {
 
+    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
       // Let Foundation try...
       if let url = origin {
         var encoding: String.Encoding = .utf8
@@ -31,32 +30,33 @@
           if string.data(using: encoding, allowLossyConversion: false) == file {
             // Only initialize from the underlying file if it matches the data provided.
             self = string
+            return
           }
         }
       }
+    #endif
 
-      // Guess blindly...
+    // Guess blindly...
 
-      if let string = String(data: file, encoding: .utf8) {
-        self = string
-      } else if let string = String(data: file, encoding: .utf16) {
-        self = string
-      } else if let string = String(data: file, encoding: .utf32) {  // @exempt(from: tests)
-        // macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
-        self = string
-      } else if let string = String(data: file, encoding: .isoLatin1) {  // @exempt(from: tests)
-        // macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
-        self = string  // @exempt(from: tests)
-      } else {
-        _unreachable()
-      }
-    }
-
-    public var file: Data {
-      guard let result = data(using: .utf8) else {
-        _unreachable()
-      }
-      return result
+    if let string = String(data: file, encoding: .utf8) {
+      self = string
+    } else if let string = String(data: file, encoding: .utf16) {
+      self = string
+    } else if let string = String(data: file, encoding: .utf32) {  // @exempt(from: tests)
+      // macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+      self = string
+    } else if let string = String(data: file, encoding: .isoLatin1) {  // @exempt(from: tests)
+      // macOS does not fail UTF‐16 on invalid surrogate use, so this is unreachable.
+      self = string  // @exempt(from: tests)
+    } else {
+      _unreachable()
     }
   }
-#endif
+
+  public var file: Data {
+    guard let result = data(using: .utf8) else {
+      _unreachable()
+    }
+    return result
+  }
+}

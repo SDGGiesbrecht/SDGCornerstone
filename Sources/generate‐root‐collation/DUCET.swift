@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
-#endif
+import Foundation
 
 import SDGLogic
 import SDGMathematics
@@ -34,8 +31,7 @@ extension CollationOrder {
 
   static let placeholderIndex: CollationIndex = endOfStringIndex.successor()
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
+  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     static func ducet() throws -> CollationOrder {
 
       // Constants to fetch.

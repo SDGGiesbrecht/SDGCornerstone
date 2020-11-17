@@ -12,26 +12,25 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
+import Foundation
 
-  /// A type than can be saved to the disk or initialized from a file.
-  public protocol FileConvertible {
+/// A type than can be saved to the disk or initialized from a file.
+public protocol FileConvertible {
 
-    /// Creates an instance using raw data from a file on the disk.
-    ///
-    /// - Parameters:
-    ///     - file: The data.
-    ///     - origin: A URL indicating where the data came from. In some cases this may be helpful in determining how to interpret the data, such as by checking the file extension. This parameter may be `nil` if the data did not come from a file on the disk.
-    init(file: Data, origin: URL?) throws
+  /// Creates an instance using raw data from a file on the disk.
+  ///
+  /// - Parameters:
+  ///     - file: The data.
+  ///     - origin: A URL indicating where the data came from. In some cases this may be helpful in determining how to interpret the data, such as by checking the file extension. This parameter may be `nil` if the data did not come from a file on the disk.
+  init(file: Data, origin: URL?) throws
 
-    /// A binary representation that can be written as a file.
-    var file: Data { get }
-  }
+  /// A binary representation that can be written as a file.
+  var file: Data { get }
+}
 
-  extension FileConvertible {
+extension FileConvertible {
 
+  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     /// Saves the file to the specified URL.
     ///
     /// - Parameters:
@@ -54,5 +53,5 @@
         origin: adjusted
       )
     }
-  }
-#endif
+  #endif
+}

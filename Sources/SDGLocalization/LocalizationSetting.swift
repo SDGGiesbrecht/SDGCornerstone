@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
-#endif
+import Foundation
 #if canImport(WinSDK)
   import WinSDK
 #endif
@@ -78,96 +75,115 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     }
   #endif
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
-    internal static let osSystemWidePreferences: Shared<Preference> = {
-      let preferences: Shared<Preference>
-      #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+  internal static let osSystemWidePreferences: Shared<Preference> = {
+    let preferences: Shared<Preference>
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
-        preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
+      preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
 
-      #elseif os(Windows)
+    #elseif os(Windows)
 
-        preferences = Shared(Preference.mock())
-        preferences.value.set(to: queryWindowsLanguages(using: GetUserPreferredUILanguages))
+      preferences = Shared(Preference.mock())
+      preferences.value.set(to: queryWindowsLanguages(using: GetUserPreferredUILanguages))
 
-      #elseif os(Linux)
+    #elseif os(WASI)
 
-        preferences = Shared(Preference.mock())
+      // #workaround(Not sure where this should come from yet.)
+      preferences = Shared(Preference.mock())
+      preferences.value.set(to: nil)
 
-        func convert(locale: String) -> String {
-          // @exempt(from: tests) Depends on host.
-          return locale.replacingOccurrences(of: "_", with: "\u{2D}")
-        }
+    #elseif os(Linux)
 
-        if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
-          // @exempt(from: tests) Depends on host.
-          let entryMatches: [PatternMatch<String>] = languages.components(separatedBy: ":")
-          let converted = entryMatches.map { convert(locale: String($0.contents)) }
-          preferences.value.set(to: converted)
-        } else if let language = ProcessInfo.processInfo.environment["LANG"],
-          let locale: PatternMatch<String> = language.prefix(upTo: ".")
-        {
-          // @exempt(from: tests) Depends on host.
-          let converted = convert(locale: String(locale.contents))
-          preferences.value.set(to: [converted])
-        } else {
-          // @exempt(from: tests) Depends on host.
-          preferences.value.set(to: nil)
-        }
+      preferences = Shared(Preference.mock())
 
-      #elseif os(Android)
+      func convert(locale: String) -> String {
+        // @exempt(from: tests) Depends on host.
+        return locale.replacingOccurrences(of: "_", with: "\u{2D}")
+      }
 
-        // #workaround(Swift 5.3, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? No access to Java VM yet.)
-        preferences = Shared(Preference.mock())
+      if let languages = ProcessInfo.processInfo.environment["LANGUAGE"] {
+        // @exempt(from: tests) Depends on host.
+        let entryMatches: [PatternMatch<String>] = languages.components(separatedBy: ":")
+        let converted = entryMatches.map { convert(locale: String($0.contents)) }
+        preferences.value.set(to: converted)
+      } else if let language = ProcessInfo.processInfo.environment["LANG"],
+        let locale: PatternMatch<String> = language.prefix(upTo: ".")
+      {
+        // @exempt(from: tests) Depends on host.
+        let converted = convert(locale: String(locale.contents))
+        preferences.value.set(to: [converted])
+      } else {
+        // @exempt(from: tests) Depends on host.
         preferences.value.set(to: nil)
+      }
 
-      #endif
+    #elseif os(Android)
 
-      preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-      return preferences
-    }()
+      // #workaround(Swift 5.3, Android: Resources.getSystem().getConfiguration().locale.getLanguage()? No access to Java VM yet.)
+      preferences = Shared(Preference.mock())
+      preferences.value.set(to: nil)
 
-    private static let sdgSystemWidePreferences: Shared<Preference> = {
+    #endif
+
+    preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+    return preferences
+  }()
+
+  private static let sdgSystemWidePreferences: Shared<Preference> = {
+    #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+      let preferences = Shared(Preference.mock())
+    #else
       let preferences = PreferenceSet.preferences(
         for: PreferenceSet._sdgCornerstoneDomain + sdgDomainSuffix
       )[sdgPreferenceKey]
-      preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-      return preferences
-    }()
+    #endif
+    preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+    return preferences
+  }()
 
-    private static let osApplicationPreferences: Shared<Preference> = {
+  private static let osApplicationPreferences: Shared<Preference> = {
+    #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
       guard ProcessInfo.possibleApplicationIdentifier ≠ nil else {
         return Shared(Preference.mock())  // @exempt(from: tests)
       }
+    #endif
 
-      let preferences: Shared<Preference>
-      #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    let preferences: Shared<Preference>
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
-        preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
+      preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
 
-      #elseif os(Windows)
+    #elseif os(WASI)
 
-        preferences = Shared(Preference.mock())
-        preferences.value.set(to: queryWindowsLanguages(using: GetProcessPreferredUILanguages))
+      // #workaround(Not sure where this should come from yet.)
+      preferences = Shared(Preference.mock())
+      preferences.value.set(to: nil)
 
-      #elseif os(Linux)
+    #elseif os(Windows)
 
-        // This is does not exist on Linux anyway.
-        preferences = Shared(Preference.mock())
+      preferences = Shared(Preference.mock())
+      preferences.value.set(to: queryWindowsLanguages(using: GetProcessPreferredUILanguages))
 
-      #elseif os(Android)
+    #elseif os(Linux)
 
-        // #workaround(Swift 5.3, Android: Locale.getDefault().getLanguage()? No access to Java VM yet.)
-        preferences = Shared(Preference.mock())
+      // This is does not exist on Linux anyway.
+      preferences = Shared(Preference.mock())
 
-      #endif
+    #elseif os(Android)
 
-      preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
-      return preferences
-    }()
+      // #workaround(Swift 5.3, Android: Locale.getDefault().getLanguage()? No access to Java VM yet.)
+      preferences = Shared(Preference.mock())
 
-    private static let sdgApplicationPreferences: Shared<Preference> = {
+    #endif
+
+    preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
+    return preferences
+  }()
+
+  private static let sdgApplicationPreferences: Shared<Preference> = {
+    #if os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+      return Shared(Preference.mock())
+    #else
       guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
         return Shared(Preference.mock())  // @exempt(from: tests)
       }
@@ -176,8 +192,8 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       ]
       preferences.register(observer: ChangeObserver.defaultObserver, reportInitialState: false)
       return preferences
-    }()
-  #endif
+    #endif
+  }()
 
   private static let overrides: Shared<[LocalizationSetting]> = {
     let overrides: Shared<[LocalizationSetting]> = Shared([])
@@ -187,8 +203,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   private static func resolveCurrentLocalization() -> LocalizationSetting {
     var result = overrides.value.last
-    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-    #if !os(WASI)
+    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
       result =
         result
         ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
@@ -222,8 +237,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   // MARK: - Static Methods
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
+  #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
     // For user available menus.
     public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
       sdgSystemWidePreferences.value.set(to: setting)
@@ -279,8 +293,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
   }
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
+  #if !os(WASI)  // #workaround(Swift 5.3.1, PropertyListEncoder unavailable.)
     private init?(osPreference preference: Preference) {
       guard let result = preference.as([String].self) else {
         return nil
@@ -317,8 +330,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     return L.fallbackLocalization
   }
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
+  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     private func stabilityCacheURL<L>(for: L.Type) -> URL {
       var path = "SDGCornerstone/Stable Localizations"
       path += "/"
@@ -327,21 +339,25 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       path += orderOfPrecedence.map({ $0.joined(separator: ",") }).joined(separator: ";")
       return FileManager.default.url(in: .cache, at: path)
     }
+  #endif
 
-    private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
-      get {
+  private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
+    get {
+      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
         if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
           Date() ≤ cache.date
         {
           return cache
         }
-        return nil
-      }
-      nonmutating set {
-        try? newValue?.save(to: stabilityCacheURL(for: L.self))
-      }
+      #endif
+      return nil
     }
-  #endif
+    nonmutating set {
+      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+        try? newValue?.save(to: stabilityCacheURL(for: L.self))
+      #endif
+    }
+  }
 
   /// Returns the preferred localization out of those supported by the type `L`.
   ///
@@ -352,18 +368,13 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     case .none:
       return resolvedFresh()
     case .stabilized:
-      // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-      #if os(WASI)
-        return resolvedFresh()
-      #else
-        let container = cached(in: &self[stabilityCacheFor: L.self]) {
-          return CachedLocalization<L>(
-            localization: resolvedFresh(),
-            date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/
-          )
-        }
-        return container.localization
-      #endif
+      let container = cached(in: &self[stabilityCacheFor: L.self]) {
+        return CachedLocalization<L>(
+          localization: resolvedFresh(),
+          date: Date() + 24 /*h*/ × 60 /*m*/ × 60 /*s*/
+        )
+      }
+      return container.localization
     }
   }
 
@@ -406,9 +417,10 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   // MARK: - Equatable
 
-  public static func == (precedingValue: LocalizationSetting, followingValue: LocalizationSetting)
-    -> Bool
-  {
+  public static func == (
+    precedingValue: LocalizationSetting,
+    followingValue: LocalizationSetting
+  ) -> Bool {
     return precedingValue.orderOfPrecedence
       .elementsEqual(followingValue.orderOfPrecedence) { Set($0) == Set($1) }
   }

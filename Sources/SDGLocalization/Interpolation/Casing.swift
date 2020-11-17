@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
-#endif
+import Foundation
 
 import SDGControlFlow
 import SDGLogic
@@ -45,20 +42,17 @@ public enum Casing: CodableViaEnumeration {
   ///     - compileTimeString: The string to transform.
   public func apply(to compileTimeString: StaticString) -> StrictString {
     var string = StrictString(compileTimeString)
-    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-    #if !os(WASI)
-      assert(
-        ¬string.contains(where: {
-          $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters
-        }),
-        UserFacing<StrictString, _APILocalization>({ localization in  // @exempt(from: tests)
-          switch localization {  // @exempt(from: tests)
-          case .englishCanada:
-            return "“\(string)” is too complex for automatic casing."
-          }
-        })
-      )
-    #endif
+    assert(
+      ¬string.contains(where: {
+        $0 ∉ CharacterSet.lowercaseLetters ∪ CharacterSet.nonBaseCharacters
+      }),
+      UserFacing<StrictString, _APILocalization>({ localization in  // @exempt(from: tests)
+        switch localization {  // @exempt(from: tests)
+        case .englishCanada:
+          return "“\(string)” is too complex for automatic casing."
+        }
+      })
+    )
 
     switch self {
     case .sentenceMedial:

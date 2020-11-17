@@ -733,13 +733,6 @@ let package = Package(
   ]
 )
 
-if ProcessInfo.processInfo.environment["TARGETING_WEB"] == "true" {
-  for target in package.targets {
-    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-    target.exclude.append("Resources.swift")
-  }
-}
-
 if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
   // #workaround(xcodebuild -version 12.1, Tool targets don’t work on tvOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })

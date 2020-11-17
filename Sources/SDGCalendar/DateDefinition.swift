@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
-#endif
+import Foundation
 
 import SDGMathematics
 import SDGText
@@ -100,58 +97,33 @@ public protocol DateDefinition: Decodable, Encodable {
   init(_decoding json: StrictString, codingPath: [CodingKey]) throws
 }
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if os(WASI)
-  private struct FoundationUnavailable: PresentableError {
-    public func presentableDescription() -> StrictString {
-      return UserFacing<StrictString, InterfaceLocalization>({ localization in
-        switch localization {
-        case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
-          return "Foundation is unavailable."
-        case .deutschDeutschland:
-          return "Foundation ist nicht verfügbar."
-        }
-      }).resolved()
-    }
-  }
-#endif
-
 extension DateDefinition {
 
   public func _encode() throws -> StrictString {
-    #if os(WASI)
-      throw FoundationUnavailable()
-    #else
-      return try StrictString(file: try JSONEncoder().encode([self]), origin: nil)
-    #endif
+    return try StrictString(file: try JSONEncoder().encode([self]), origin: nil)
   }
   internal func encode() throws -> StrictString {
     return try _encode()
   }
 
   public init(_decoding json: StrictString, codingPath: [CodingKey]) throws {
-    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-    #if os(WASI)
-      throw FoundationUnavailable()
-    #else
-      guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {
+    guard let result = (try JSONDecoder().decode([Self].self, from: json.file)).first else {
 
-        throw DecodingError.dataCorrupted(
-          DecodingError.Context(
-            codingPath: codingPath,
-            debugDescription: String(
-              UserFacing<StrictString, APILocalization>({ localization in
-                switch localization {
-                case .englishCanada:
-                  return "Empty container array."
-                }
-              }).resolved()
-            )
+      throw DecodingError.dataCorrupted(
+        DecodingError.Context(
+          codingPath: codingPath,
+          debugDescription: String(
+            UserFacing<StrictString, APILocalization>({ localization in
+              switch localization {
+              case .englishCanada:
+                return "Empty container array."
+              }
+            }).resolved()
           )
         )
-      }
-      self = result
-    #endif
+      )
+    }
+    self = result
   }
   internal init(decoding json: StrictString, codingPath: [CodingKey]) throws {
     try self.init(_decoding: json, codingPath: codingPath)

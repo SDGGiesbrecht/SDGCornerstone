@@ -12,123 +12,119 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
+import Foundation
 
-  import SDGLogic
-  import SDGMathematics
+import SDGLogic
+import SDGMathematics
 
-  extension CharacterSet: ComparableSet, MutableSet, SetInRepresentableUniverse, SetDefinition {
+extension CharacterSet: ComparableSet, MutableSet, SetInRepresentableUniverse, SetDefinition {
 
-    // MARK: - ComparableSet
+  // MARK: - ComparableSet
 
-    @inlinable public static func ⊆ (precedingValue: CharacterSet, followingValue: CharacterSet)
-      -> Bool
-    {
-      return precedingValue.isSubset(of: followingValue)
-    }
-
-    @inlinable public static func ⊇ (precedingValue: CharacterSet, followingValue: CharacterSet)
-      -> Bool
-    {
-      return precedingValue.isSuperset(of: followingValue)
-    }
-
-    @inlinable public static func ⊊ (precedingValue: CharacterSet, followingValue: CharacterSet)
-      -> Bool
-    {
-      return precedingValue.isStrictSubset(of: followingValue)
-    }
-
-    @inlinable public static func ⊋ (precedingValue: CharacterSet, followingValue: CharacterSet)
-      -> Bool
-    {
-      return precedingValue.isStrictSuperset(of: followingValue)
-    }
-
-    @inlinable public func overlaps(_ other: CharacterSet) -> Bool {
-      return ¬isDisjointAsSetAlgebra(with: other)
-    }
-
-    // MARK: - MutableSet
-
-    @inlinable public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet)
-      -> CharacterSet
-    {
-      return precedingValue.intersection(followingValue)
-    }
-
-    @inlinable public static func ∩= (
-      precedingValue: inout CharacterSet,
-      followingValue: CharacterSet
-    ) {
-      precedingValue.formIntersection(followingValue)
-    }
-
-    @inlinable public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet)
-      -> CharacterSet
-    {
-      return precedingValue.union(followingValue)
-    }
-
-    @inlinable public static func ∪= (
-      precedingValue: inout CharacterSet,
-      followingValue: CharacterSet
-    ) {
-      return precedingValue.formUnion(followingValue)
-    }
-
-    @inlinable public static func ∖ (precedingValue: CharacterSet, followingValue: CharacterSet)
-      -> CharacterSet
-    {
-      return precedingValue.subtracting(followingValue)
-    }
-
-    @inlinable public static func ∖= (
-      precedingValue: inout CharacterSet,
-      followingValue: CharacterSet
-    ) {
-      precedingValue.subtract(followingValue)
-    }
-
-    @inlinable public static func ∆ (precedingValue: CharacterSet, followingValue: CharacterSet)
-      -> CharacterSet
-    {
-      return precedingValue.symmetricDifference(followingValue)
-    }
-
-    @inlinable public static func ∆= (
-      precedingValue: inout CharacterSet,
-      followingValue: CharacterSet
-    ) {
-      return precedingValue.formSymmetricDifference(followingValue)
-    }
-
-    // MARK: - SetDefinition
-
-    @inlinable public static func ∋ (precedingValue: CharacterSet, followingValue: Element) -> Bool
-    {
-      return precedingValue.contains(followingValue)
-    }
-
-    // MARK: - SetInRepresentableUniverse
-
-    public static let universe: CharacterSet = CharacterSet().inverted
-
-    @inlinable public static postfix func ′ (operand: CharacterSet) -> CharacterSet {
-      return operand.inverted
-    }
-
-    @inlinable public static postfix func ′= (operand: inout CharacterSet) {
-      operand.invert()
-    }
+  @inlinable public static func ⊆ (precedingValue: CharacterSet, followingValue: CharacterSet)
+    -> Bool
+  {
+    return precedingValue.isSubset(of: followingValue)
   }
 
-  extension SetAlgebra {
-
-    @inlinable internal func isDisjointAsSetAlgebra(with other: Self) -> Bool {
-      return isDisjoint(with: other)
-    }
+  @inlinable public static func ⊇ (precedingValue: CharacterSet, followingValue: CharacterSet)
+    -> Bool
+  {
+    return precedingValue.isSuperset(of: followingValue)
   }
-#endif
+
+  @inlinable public static func ⊊ (precedingValue: CharacterSet, followingValue: CharacterSet)
+    -> Bool
+  {
+    return precedingValue.isStrictSubset(of: followingValue)
+  }
+
+  @inlinable public static func ⊋ (precedingValue: CharacterSet, followingValue: CharacterSet)
+    -> Bool
+  {
+    return precedingValue.isStrictSuperset(of: followingValue)
+  }
+
+  @inlinable public func overlaps(_ other: CharacterSet) -> Bool {
+    return ¬isDisjointAsSetAlgebra(with: other)
+  }
+
+  // MARK: - MutableSet
+
+  @inlinable public static func ∩ (precedingValue: CharacterSet, followingValue: CharacterSet)
+    -> CharacterSet
+  {
+    return precedingValue.intersection(followingValue)
+  }
+
+  @inlinable public static func ∩= (
+    precedingValue: inout CharacterSet,
+    followingValue: CharacterSet
+  ) {
+    precedingValue.formIntersection(followingValue)
+  }
+
+  @inlinable public static func ∪ (precedingValue: CharacterSet, followingValue: CharacterSet)
+    -> CharacterSet
+  {
+    return precedingValue.union(followingValue)
+  }
+
+  @inlinable public static func ∪= (
+    precedingValue: inout CharacterSet,
+    followingValue: CharacterSet
+  ) {
+    return precedingValue.formUnion(followingValue)
+  }
+
+  @inlinable public static func ∖ (precedingValue: CharacterSet, followingValue: CharacterSet)
+    -> CharacterSet
+  {
+    return precedingValue.subtracting(followingValue)
+  }
+
+  @inlinable public static func ∖= (
+    precedingValue: inout CharacterSet,
+    followingValue: CharacterSet
+  ) {
+    precedingValue.subtract(followingValue)
+  }
+
+  @inlinable public static func ∆ (precedingValue: CharacterSet, followingValue: CharacterSet)
+    -> CharacterSet
+  {
+    return precedingValue.symmetricDifference(followingValue)
+  }
+
+  @inlinable public static func ∆= (
+    precedingValue: inout CharacterSet,
+    followingValue: CharacterSet
+  ) {
+    return precedingValue.formSymmetricDifference(followingValue)
+  }
+
+  // MARK: - SetDefinition
+
+  @inlinable public static func ∋ (precedingValue: CharacterSet, followingValue: Element) -> Bool {
+    return precedingValue.contains(followingValue)
+  }
+
+  // MARK: - SetInRepresentableUniverse
+
+  public static let universe: CharacterSet = CharacterSet().inverted
+
+  @inlinable public static postfix func ′ (operand: CharacterSet) -> CharacterSet {
+    return operand.inverted
+  }
+
+  @inlinable public static postfix func ′= (operand: inout CharacterSet) {
+    operand.invert()
+  }
+}
+
+extension SetAlgebra {
+
+  @inlinable internal func isDisjointAsSetAlgebra(with other: Self) -> Bool {
+    return isDisjoint(with: other)
+  }
+}

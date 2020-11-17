@@ -16,8 +16,7 @@ import SDGCollation
 
 extension CollationOrder {
 
-  // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-  #if !os(WASI)
+  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
     static func generateRoot() throws -> CollationOrder {
       print("Tailoring root collation...")
       let root = try ducet().tailored {

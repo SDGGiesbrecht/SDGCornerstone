@@ -12,38 +12,35 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
-  #if canImport(CoreGraphics)
-    import CoreGraphics  // Not included in Foundation on iOS.
-  #endif
+import Foundation
+#if canImport(CoreGraphics)
+  import CoreGraphics  // Not included in Foundation on iOS.
+#endif
 
-  import SDGMathematics
+import SDGMathematics
 
-  extension CGPoint {
+extension CGPoint {
 
-    // MARK: - Conversions
+  // MARK: - Conversions
 
-    #if canImport(AppKit) || canImport(UIKit)
-      internal init(_ point: TwoDimensionalPoint<Double>) {
-        self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
-      }
-    #endif
-  }
-
-  #if canImport(CoreGraphics)
-    extension CGPoint: TwoDimensionalPointProtocol {
-
-      // MARK: - PointProtocol
-
-      public typealias Vector = CGVector
-
-      // MARK: - TwoDimensionalPointProtocol
-
-      @inlinable public init(_ x: Vector.Scalar, _ y: Vector.Scalar) {
-        self.init(x: x, y: y)
-      }
+  #if canImport(AppKit) || canImport(UIKit)
+    internal init(_ point: TwoDimensionalPoint<Double>) {
+      self = CGPoint(x: CGFloat(point.x), y: CGFloat(point.y))
     }
   #endif
+}
+
+#if canImport(CoreGraphics)
+  extension CGPoint: TwoDimensionalPointProtocol {
+
+    // MARK: - PointProtocol
+
+    public typealias Vector = CGVector
+
+    // MARK: - TwoDimensionalPointProtocol
+
+    @inlinable public init(_ x: Vector.Scalar, _ y: Vector.Scalar) {
+      self.init(x: x, y: y)
+    }
+  }
 #endif

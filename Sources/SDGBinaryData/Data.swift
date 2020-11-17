@@ -12,22 +12,19 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
+import Foundation
 
-  extension Data {
+extension Data {
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    /// The data represented as a collection of bits.
-    public var binary: BinaryView {
-      get {
-        return BinaryView(self)
-      }
-      set {
-        self = newValue.data
-      }
+  /// The data represented as a collection of bits.
+  public var binary: BinaryView {
+    get {
+      return BinaryView(self)
+    }
+    set {
+      self = newValue.data
     }
   }
-#endif
+}

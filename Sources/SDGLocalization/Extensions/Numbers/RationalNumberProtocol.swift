@@ -12,10 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
-#endif
+import Foundation
 
 import SDGLogic
 import SDGMathematics
@@ -27,12 +24,7 @@ extension RationalNumberProtocol {
   // MARK: - Text Representations
 
   private func digitsOnly(_ number: StrictString) -> Bool {
-    // #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-    #if os(WASI)
-      return false
-    #else
-      return ¬number.contains(where: { $0 ∉ CharacterSet.decimalDigits ∪ ["−"] })
-    #endif
+    return ¬number.contains(where: { $0 ∉ CharacterSet.decimalDigits ∪ ["−"] })
   }
 
   private func parenthesizeIfNecessary(_ number: inout StrictString) {

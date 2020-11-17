@@ -12,19 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  import Foundation
-  #if canImport(CoreGraphics)
-    import CoreGraphics  // Not included in Foundation on iOS.
-  #endif
+import Foundation
+#if canImport(CoreGraphics)
+  import CoreGraphics  // Not included in Foundation on iOS.
 #endif
 
 extension Double: TextConvertibleNumber {}
-// #workaround(Swift 5.3, Web doesn’t have Foundation yet.)
-#if !os(WASI)
-  extension CGFloat: TextConvertibleNumber {}
-#endif
+extension CGFloat: TextConvertibleNumber {}
 #if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
   extension Float80: TextConvertibleNumber {}
 #endif
