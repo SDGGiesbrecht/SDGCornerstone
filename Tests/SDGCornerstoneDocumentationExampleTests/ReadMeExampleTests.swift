@@ -28,7 +28,7 @@ import SDGXCTestUtilities
 class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
-    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
       LocalizationSetting(orderOfPrecedence: ["en"]).do {
         // @example(readMe🇨🇦EN)
         // ••••••• Localization •••••••
