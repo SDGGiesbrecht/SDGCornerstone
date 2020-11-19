@@ -39,7 +39,7 @@ class APITests: TestCase {
         "Failed to reject non‐executables."
       )
       #if !(os(tvOS) || os(iOS) || os(watchOS))
-        // #workaround(workspace version 0.35.2, Emulator has no Swift.)
+        // #workaround(workspace version 0.35.3, Emulator has no Swift.)
         #if !os(Android)
           XCTAssertEqual(
             ExternalProcess(
@@ -89,7 +89,7 @@ class APITests: TestCase {
   }
 
   func testShell() throws {
-    // #workaround(Swift 5.3, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    // #workaround(Swift 5.3.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
     #if !os(Windows)
       try forAllLegacyModes { () throws -> Void in
         let directory: URL?

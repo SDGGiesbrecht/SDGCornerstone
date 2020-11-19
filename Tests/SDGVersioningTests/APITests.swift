@@ -25,7 +25,7 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testVersion() {
-    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
       testCustomStringConvertibleConformance(
         of: Version(1, 2, 3),
         localizations: InterfaceLocalization.self,

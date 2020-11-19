@@ -27,7 +27,7 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testInteger() {
-    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
       testIntegralArithmeticConformance(of: Integer.self)
 
       XCTAssertNotNil(Integer(exactly: SDGMathematics.UIntMax.max))
@@ -48,7 +48,7 @@ class APITests: TestCase {
   }
 
   func testRationalNumber() {
-    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
       testRationalArithmeticConformance(of: RationalNumber.self)
 
       XCTAssertEqual(RationalNumber(undecillion).numerator, Integer(undecillion))
@@ -89,11 +89,11 @@ class APITests: TestCase {
     #endif
   }
 
-  #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
+  #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
     let undecillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000 000"
   #endif
   func testWholeNumber() {
-    #if !os(Windows)  // #workaround(Swift 5.3, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
       testWholeArithmeticConformance(of: WholeNumber.self, includingNegatives: false)
       testDecoding(WholeNumber.self, failsFor: "12c45")  // Invalid string.
 

@@ -15,7 +15,7 @@
 import SDGMathematics
 
 #if compiler(>=5.3)
-  // #workaround(Swift 5.3, Compiler crashes on generic version.)
+  // #workaround(Swift 5.3.1, Compiler crashes on generic version.)
 
   extension Collection where Element == StrictString {
 

@@ -25,7 +25,7 @@ class RegressionTests: TestCase {
     // Untracked.
 
     #if os(Windows)
-      #if !os(Windows)  // #workaround(Swift 5.3, Shell misbehaves.)
+      #if !os(Windows)  // #workaround(Swift 5.3.1, Shell misbehaves.)
         let process = ExternalProcess(at: URL(fileURLWithPath: #"C:\Windows\System32\cmd.exe"#))
         let help = try process.run(["/?"]).get()
         XCTAssert(¬help.contains("MKDIR"), "Wrong command:\n\(help)")
@@ -36,13 +36,13 @@ class RegressionTests: TestCase {
   func testDelayedShellOutput() throws {
     // Untracked
 
-    #if !os(Windows)  // #workaround(Swift 5.3, Shell misbehaves.)
+    #if !os(Windows)  // #workaround(Swift 5.3.1, Shell misbehaves.)
       try forAllLegacyModes { () throws -> Void in
         #if !(os(tvOS) || os(iOS) || os(watchOS))
           let longCommand = [
             "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy",
           ]
-          // #workaround(Swift 5.3, Emulator lacks Git.)
+          // #workaround(Swift 5.3.1, Emulator lacks Git.)
           #if !os(Android)
             let output = try Shell.default.run(command: longCommand).get()
             XCTAssert(output.contains("0.8.3"))
@@ -55,7 +55,7 @@ class RegressionTests: TestCase {
   func testSearchFindsGit() {
     // Untracked
 
-    // #workaround(Swift 5.3, Emulator lacks Git.)
+    // #workaround(Swift 5.3.1, Emulator lacks Git.)
     #if !os(Android)
       #if !(os(tvOS) || os(iOS) || os(watchOS))
         XCTAssertNotNil(
