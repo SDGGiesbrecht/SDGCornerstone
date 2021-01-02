@@ -254,35 +254,37 @@ class APITests: TestCase {
       _ = "\(CalendarDate(Date()))"
 
       let utc = CalendarDate(gregorian: .september, 20, 2019, at: 21, 31)
-      let adjustedToZone = utc.adjusted(to: TimeZone(identifier: "Asia/Jerusalem")!)
-      let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
-      XCTAssertEqual(
-        adjustedToZone.gregorianDateInAmericanEnglish(),
-        timeZoneEquivalent.gregorianDateInAmericanEnglish()
-      )
-      XCTAssertEqual(
-        adjustedToZone.twentyFourHourTimeInEnglish(),
-        timeZoneEquivalent.twentyFourHourTimeInEnglish()
-      )
-      XCTAssertEqual(
-        adjustedToZone.hebrewDateInAmericanEnglish(),
-        timeZoneEquivalent.hebrewDateInAmericanEnglish()
-      )
-      XCTAssertEqual(
-        adjustedToZone.gregorianSecond,
-        timeZoneEquivalent.gregorianSecond
-      )
-      XCTAssertEqual(
-        adjustedToZone.hebrewHour,
-        timeZoneEquivalent.hebrewHour
-      )
-      XCTAssertEqual(
-        adjustedToZone.hebrewPart,
-        timeZoneEquivalent.hebrewPart
-      )
-      _ = adjustedToZone.description
-      _ = adjustedToZone.debugDescription
-      _ = adjustedToZone.playgroundDescription
+      #if !os(WASI)  // #workaround(Swift 5.3.2, Web lacks time zone definitions.)
+        let adjustedToZone = utc.adjusted(to: TimeZone(identifier: "Asia/Jerusalem")!)
+        let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
+        XCTAssertEqual(
+          adjustedToZone.gregorianDateInAmericanEnglish(),
+          timeZoneEquivalent.gregorianDateInAmericanEnglish()
+        )
+        XCTAssertEqual(
+          adjustedToZone.twentyFourHourTimeInEnglish(),
+          timeZoneEquivalent.twentyFourHourTimeInEnglish()
+        )
+        XCTAssertEqual(
+          adjustedToZone.hebrewDateInAmericanEnglish(),
+          timeZoneEquivalent.hebrewDateInAmericanEnglish()
+        )
+        XCTAssertEqual(
+          adjustedToZone.gregorianSecond,
+          timeZoneEquivalent.gregorianSecond
+        )
+        XCTAssertEqual(
+          adjustedToZone.hebrewHour,
+          timeZoneEquivalent.hebrewHour
+        )
+        XCTAssertEqual(
+          adjustedToZone.hebrewPart,
+          timeZoneEquivalent.hebrewPart
+        )
+        _ = adjustedToZone.description
+        _ = adjustedToZone.debugDescription
+        _ = adjustedToZone.playgroundDescription
+      #endif
       let longitude: Angle<Double> = 90°
       let adjustedToLongitude = utc.adjustedToMeanSolarTime(atLongitude: longitude)
       let longitudeEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 3, 31)
