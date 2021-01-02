@@ -78,14 +78,17 @@ class APITests: TestCase {
         "Date conversion failed."
       )
 
-      let formatter = DateFormatter()
-      formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
-      let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
-      XCTAssert(
-        Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
-          ≈ system.timeIntervalSinceReferenceDate,
-        "CalendarDate does not match Foundation."
-      )
+      // #workaround(Swift 5.3.2, Web lacks dateFormat.)
+      #if !os(WASI)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
+        let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
+        XCTAssert(
+          Date(CalendarDate(gregorian: .april, 18, 1991)).timeIntervalSinceReferenceDate
+            ≈ system.timeIntervalSinceReferenceDate,
+          "CalendarDate does not match Foundation."
+        )
+      #endif
 
       XCTAssertEqual(
         CalendarDate(gregorian: .december, 23, 2015).gregorianWeekday,
