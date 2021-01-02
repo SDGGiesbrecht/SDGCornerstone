@@ -13,7 +13,9 @@
  */
 
 import Foundation
-import Dispatch
+#if !os(WASI)  // #workaround(Swift 5.3.2, Web lacks Dispatch.)
+  import Dispatch
+#endif
 
 import SDGConcurrency
 
