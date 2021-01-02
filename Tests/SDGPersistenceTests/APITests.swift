@@ -39,113 +39,116 @@ class APITests: TestCase {
   }
 
   func testFileManager() throws {
-    let destination = FileManager.default.url(in: .applicationSupport, at: "Subdirectory")
-    try FileManager.default
-      .withTemporaryDirectory(appropriateFor: destination) { temporaryDirectory in
+    // #workaround(Swift 5.3.1, FileManager unavailable.)
+    #if !os(WASI)
+      let destination = FileManager.default.url(in: .applicationSupport, at: "Subdirectory")
+      try FileManager.default
+        .withTemporaryDirectory(appropriateFor: destination) { temporaryDirectory in
 
-        let path = "example/path"
+          let path = "example/path"
 
-        #if os(Linux) || os(Android)
-          _ = FileManager.default.url(in: .applicationSupport, at: path)
-        #else
-          let applicationSupport = FileManager.default
-            .url(in: .applicationSupport, at: path).absoluteString
-          XCTAssert(
-            applicationSupport.contains("Application%20Support")
-              ∨ applicationSupport.contains("AppData"),
-            "Unexpected support directory: \(applicationSupport)"
-          )
-        #endif
-        #if os(Windows)
-          _ = FileManager.default.url(in: .cache, at: path)
-        #else
+          #if os(Linux) || os(Android)
+            _ = FileManager.default.url(in: .applicationSupport, at: path)
+          #else
+            let applicationSupport = FileManager.default
+              .url(in: .applicationSupport, at: path).absoluteString
+            XCTAssert(
+              applicationSupport.contains("Application%20Support")
+                ∨ applicationSupport.contains("AppData"),
+              "Unexpected support directory: \(applicationSupport)"
+            )
+          #endif
+          #if os(Windows)
+            _ = FileManager.default.url(in: .cache, at: path)
+          #else
+            XCTAssertNotNil(
+              FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(
+                for: "Cache".scalars ∨ "cache".scalars
+              )
+            )
+          #endif
           XCTAssertNotNil(
-            FileManager.default.url(in: .cache, at: path).absoluteString.scalars.firstMatch(
-              for: "Cache".scalars ∨ "cache".scalars
+            temporaryDirectory.appendingPathComponent(path).absoluteString.scalars.firstMatch(
+              for: "Temp".scalars
+                ∨ "temp".scalars
+                ∨ "tmp".scalars
+                ∨ "Being%20Saved%20By".scalars
             )
           )
-        #endif
-        XCTAssertNotNil(
-          temporaryDirectory.appendingPathComponent(path).absoluteString.scalars.firstMatch(
-            for: "Temp".scalars
-              ∨ "temp".scalars
-              ∨ "tmp".scalars
-              ∨ "Being%20Saved%20By".scalars
+
+          let directoryName = "Directory"
+          let directory = temporaryDirectory.appendingPathComponent(directoryName)
+          let file = directory.appendingPathComponent("File.txt")
+
+          try FileManager.default.do(in: directory) {
+            // When the directory does not exist yet.
+            XCTAssertEqual(
+              URL(fileURLWithPath: FileManager.default.currentDirectoryPath).lastPathComponent,
+              directoryName
+            )
+          }
+          let fileContents = "File"
+          try fileContents.save(to: file)
+          try FileManager.default.do(in: directory) {
+            // When the directory already exists.
+            XCTAssertEqual(
+              URL(fileURLWithPath: FileManager.default.currentDirectoryPath).lastPathComponent,
+              directoryName
+            )
+          }
+          XCTAssertEqual(try? String(from: file), fileContents)  // Directory not overwritten.
+
+          let sourceDirectory = temporaryDirectory.appendingPathComponent("Source Directory")
+          let destinationDirectory = temporaryDirectory.appendingPathComponent(
+            "Intermediate Directory/Destination Directory"
           )
-        )
-
-        let directoryName = "Directory"
-        let directory = temporaryDirectory.appendingPathComponent(directoryName)
-        let file = directory.appendingPathComponent("File.txt")
-
-        try FileManager.default.do(in: directory) {
-          // When the directory does not exist yet.
+          let fileName = "File.txt"
+          try fileContents.save(to: sourceDirectory.appendingPathComponent(fileName))
+          try FileManager.default.move(sourceDirectory, to: destinationDirectory)
           XCTAssertEqual(
-            URL(fileURLWithPath: FileManager.default.currentDirectoryPath).lastPathComponent,
-            directoryName
+            try? String(from: destinationDirectory.appendingPathComponent(fileName)),
+            fileContents
+          )
+          XCTAssertNil(try? String(from: sourceDirectory.appendingPathComponent(fileName)))
+          try? FileManager.default.removeItem(at: temporaryDirectory)
+          try fileContents.save(to: sourceDirectory.appendingPathComponent(fileName))
+          try FileManager.default.copy(sourceDirectory, to: destinationDirectory)
+          XCTAssertEqual(
+            try? String(from: destinationDirectory.appendingPathComponent(fileName)),
+            fileContents
+          )
+          XCTAssertEqual(
+            try? String(from: sourceDirectory.appendingPathComponent(fileName)),
+            fileContents
+          )
+
+          XCTAssert(
+            try FileManager.default.deepFileEnumeration(in: testSpecificationDirectory())
+              .contains(where: { $0.lastPathComponent == "Overwrite.txt" }),
+            "Failed to enumerate files."
+          )
+
+          let notNormalized = "x" + "\u{304}" + "\u{331}"
+          let data = Data()
+          try data.save(to: temporaryDirectory.appendingPathComponent(notNormalized))
+          XCTAssertEqual(
+            try Data(
+              from: temporaryDirectory.appendingPathComponent(
+                notNormalized.decomposedStringWithCanonicalMapping
+              )
+            ),
+            data
+          )
+          XCTAssertEqual(
+            try Data(
+              from: temporaryDirectory.appendingPathComponent(
+                notNormalized.precomposedStringWithCanonicalMapping
+              )
+            ),
+            data
           )
         }
-        let fileContents = "File"
-        try fileContents.save(to: file)
-        try FileManager.default.do(in: directory) {
-          // When the directory already exists.
-          XCTAssertEqual(
-            URL(fileURLWithPath: FileManager.default.currentDirectoryPath).lastPathComponent,
-            directoryName
-          )
-        }
-        XCTAssertEqual(try? String(from: file), fileContents)  // Directory not overwritten.
-
-        let sourceDirectory = temporaryDirectory.appendingPathComponent("Source Directory")
-        let destinationDirectory = temporaryDirectory.appendingPathComponent(
-          "Intermediate Directory/Destination Directory"
-        )
-        let fileName = "File.txt"
-        try fileContents.save(to: sourceDirectory.appendingPathComponent(fileName))
-        try FileManager.default.move(sourceDirectory, to: destinationDirectory)
-        XCTAssertEqual(
-          try? String(from: destinationDirectory.appendingPathComponent(fileName)),
-          fileContents
-        )
-        XCTAssertNil(try? String(from: sourceDirectory.appendingPathComponent(fileName)))
-        try? FileManager.default.removeItem(at: temporaryDirectory)
-        try fileContents.save(to: sourceDirectory.appendingPathComponent(fileName))
-        try FileManager.default.copy(sourceDirectory, to: destinationDirectory)
-        XCTAssertEqual(
-          try? String(from: destinationDirectory.appendingPathComponent(fileName)),
-          fileContents
-        )
-        XCTAssertEqual(
-          try? String(from: sourceDirectory.appendingPathComponent(fileName)),
-          fileContents
-        )
-
-        XCTAssert(
-          try FileManager.default.deepFileEnumeration(in: testSpecificationDirectory())
-            .contains(where: { $0.lastPathComponent == "Overwrite.txt" }),
-          "Failed to enumerate files."
-        )
-
-        let notNormalized = "x" + "\u{304}" + "\u{331}"
-        let data = Data()
-        try data.save(to: temporaryDirectory.appendingPathComponent(notNormalized))
-        XCTAssertEqual(
-          try Data(
-            from: temporaryDirectory.appendingPathComponent(
-              notNormalized.decomposedStringWithCanonicalMapping
-            )
-          ),
-          data
-        )
-        XCTAssertEqual(
-          try Data(
-            from: temporaryDirectory.appendingPathComponent(
-              notNormalized.precomposedStringWithCanonicalMapping
-            )
-          ),
-          data
-        )
-      }
+    #endif
   }
 
   struct LosslessStirngConvertibleExample: CodableViaLosslessStringConvertible, Equatable {
@@ -170,76 +173,79 @@ class APITests: TestCase {
     let testKey = "SDGTestKey"
     let testDomain = "ca.solideogloria.SDGCornerstone.Tests.Preferences"
     let testDomainExternalName = testDomain + ".debug"
-    let preferences = PreferenceSet.preferences(for: testDomain)
+    // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+    #if !os(WASI)
+      let preferences = PreferenceSet.preferences(for: testDomain)
 
-    preferences[testKey].value.set(to: true)
-    preferences[testKey].value.set(to: nil)
-    XCTAssertNil(preferences[testKey].value.as(Bool.self))
+      preferences[testKey].value.set(to: true)
+      preferences[testKey].value.set(to: nil)
+      XCTAssertNil(preferences[testKey].value.as(Bool.self))
 
-    preferences[testKey].value.set(to: true)
-    XCTAssertEqual(preferences[testKey].value.as(Bool.self), true)
+      preferences[testKey].value.set(to: true)
+      XCTAssertEqual(preferences[testKey].value.as(Bool.self), true)
 
-    preferences[testKey].value.set(to: 10)
-    XCTAssertEqual(preferences[testKey].value.as(Int.self), 10)
+      preferences[testKey].value.set(to: 10)
+      XCTAssertEqual(preferences[testKey].value.as(Int.self), 10)
 
-    preferences[testKey].value.set(to: "A")
-    XCTAssertEqual(preferences[testKey].value.as(String.self), "A")
-    preferences[testKey].value.set(to: nil)
-    XCTAssertNil(preferences[testKey].value.as(String.self))
+      preferences[testKey].value.set(to: "A")
+      XCTAssertEqual(preferences[testKey].value.as(String.self), "A")
+      preferences[testKey].value.set(to: nil)
+      XCTAssertNil(preferences[testKey].value.as(String.self))
 
-    preferences[testKey].value.set(to: true)
-    #if os(macOS)
-      let output = try Shell.default.run(command: [
-        "defaults", "read", testDomainExternalName, testKey,
-      ]).get()
-      XCTAssertEqual(output, "1", "Failed to write preferences to disk.")
-    #endif
+      preferences[testKey].value.set(to: true)
+      #if os(macOS)
+        let output = try Shell.default.run(command: [
+          "defaults", "read", testDomainExternalName, testKey,
+        ]).get()
+        XCTAssertEqual(output, "1", "Failed to write preferences to disk.")
+      #endif
 
-    let externalTestKey = "SDGExternalTestKey"
-    preferences[externalTestKey].value.set(to: nil)
+      let externalTestKey = "SDGExternalTestKey"
+      preferences[externalTestKey].value.set(to: nil)
 
-    let stringValue = "value"
-    #if os(macOS)
-      _ = try Shell.default.run(command: [
-        "defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue,
-      ]).get()
-    #endif
+      let stringValue = "value"
+      #if os(macOS)
+        _ = try Shell.default.run(command: [
+          "defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue,
+        ]).get()
+      #endif
 
-    let causeSynchronization = "CauseSynchronization"
-    preferences[testKey].value.set(to: causeSynchronization)
-    XCTAssertEqual(preferences[testKey].value.as(String.self), causeSynchronization)
-    #if os(macOS)
-      // Only macOS can externally write this to the disk in the first place (see #if statement above).
-      XCTAssertEqual(
-        preferences[externalTestKey].value.as(String.self),
-        stringValue,
-        "Failed to read preferences from disk."
+      let causeSynchronization = "CauseSynchronization"
+      preferences[testKey].value.set(to: causeSynchronization)
+      XCTAssertEqual(preferences[testKey].value.as(String.self), causeSynchronization)
+      #if os(macOS)
+        // Only macOS can externally write this to the disk in the first place (see #if statement above).
+        XCTAssertEqual(
+          preferences[externalTestKey].value.as(String.self),
+          stringValue,
+          "Failed to read preferences from disk."
+        )
+      #endif
+
+      preferences.reset()
+      XCTAssertNil(preferences[testKey].value.as(String.self))
+      XCTAssertNil(preferences[externalTestKey].value.as(String.self))
+
+      PreferenceSet.applicationPreferences.reset()
+      XCTAssertNil(PreferenceSet.applicationPreferences[testKey].value.as(String.self))
+      PreferenceSet.applicationPreferences[testKey].value.set(to: true)
+      XCTAssertEqual(PreferenceSet.applicationPreferences[testKey].value.as(Bool.self), true)
+      PreferenceSet.applicationPreferences.reset()
+
+      var mock = Preference.mock()
+      mock.set(to: true)
+      XCTAssertEqual(mock.as(Bool.self), true)
+      XCTAssertNil(mock.as(String.self))
+      testCustomStringConvertibleConformance(
+        of: mock,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "true",
+        overwriteSpecificationInsteadOfFailing: false
       )
+
+      mock[as: [String: Bool].self, default: [:]]["key"] = true
+      XCTAssertEqual(mock[as: [String: Bool].self, default: [:]]["key"], true)
     #endif
-
-    preferences.reset()
-    XCTAssertNil(preferences[testKey].value.as(String.self))
-    XCTAssertNil(preferences[externalTestKey].value.as(String.self))
-
-    PreferenceSet.applicationPreferences.reset()
-    XCTAssertNil(PreferenceSet.applicationPreferences[testKey].value.as(String.self))
-    PreferenceSet.applicationPreferences[testKey].value.set(to: true)
-    XCTAssertEqual(PreferenceSet.applicationPreferences[testKey].value.as(Bool.self), true)
-    PreferenceSet.applicationPreferences.reset()
-
-    var mock = Preference.mock()
-    mock.set(to: true)
-    XCTAssertEqual(mock.as(Bool.self), true)
-    XCTAssertNil(mock.as(String.self))
-    testCustomStringConvertibleConformance(
-      of: mock,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "true",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-
-    mock[as: [String: Bool].self, default: [:]]["key"] = true
-    XCTAssertEqual(mock[as: [String: Bool].self, default: [:]]["key"], true)
   }
 
   func testSpecification() {
@@ -247,36 +253,39 @@ class APITests: TestCase {
       let specifications = testSpecificationDirectory().appendingPathComponent("Specification")
 
       let new = specifications.appendingPathComponent("New.txt")
-      try? FileManager.default.removeItem(at: new)
-      compare("New!", against: new, overwriteSpecificationInsteadOfFailing: false)
-      try? FileManager.default.removeItem(at: new)
+      // #workaround(Swift 5.3.1, FileManager unavailable.)
+      #if !os(WASI)
+        try? FileManager.default.removeItem(at: new)
+        compare("New!", against: new, overwriteSpecificationInsteadOfFailing: false)
+        try? FileManager.default.removeItem(at: new)
 
-      let overwrittenSpecification = specifications.appendingPathComponent("Overwrite.txt")
-      compare(
-        "Overwritten.",
-        against: overwrittenSpecification,
-        overwriteSpecificationInsteadOfFailing: true
-      )
+        let overwrittenSpecification = specifications.appendingPathComponent("Overwrite.txt")
+        compare(
+          "Overwritten.",
+          against: overwrittenSpecification,
+          overwriteSpecificationInsteadOfFailing: true
+        )
 
-      let failingSpecificationTests = {
-        let previous = testAssertionMethod
-        defer { testAssertionMethod = previous }
-        testAssertionMethod = { _, describe, _, _ in
-          _ = describe()
+        let failingSpecificationTests = {
+          let previous = testAssertionMethod
+          defer { testAssertionMethod = previous }
+          testAssertionMethod = { _, describe, _, _ in
+            _ = describe()
+          }
+
+          compare(
+            "Incorrect.",
+            against: overwrittenSpecification,
+            overwriteSpecificationInsteadOfFailing: false
+          )
+          compare(
+            "Prependend.\nOverwritten.",
+            against: overwrittenSpecification,
+            overwriteSpecificationInsteadOfFailing: false
+          )
         }
-
-        compare(
-          "Incorrect.",
-          against: overwrittenSpecification,
-          overwriteSpecificationInsteadOfFailing: false
-        )
-        compare(
-          "Prependend.\nOverwritten.",
-          against: overwrittenSpecification,
-          overwriteSpecificationInsteadOfFailing: false
-        )
-      }
-      failingSpecificationTests()
+        failingSpecificationTests()
+      #endif
     #endif
   }
 
