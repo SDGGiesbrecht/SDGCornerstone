@@ -72,7 +72,8 @@ class APITests: TestCase {
   }
 
   func testExternalProcessError() {
-    #if !(os(tvOS) || os(iOS) || os(watchOS))
+    // #workaround(Swift 5.3.2, Process unavailable on WASI.)
+    #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
       forAllLegacyModes {
         switch ExternalProcess(at: URL(fileURLWithPath: "/no/such/process")).run([]) {
         case .failure(let error):
@@ -98,7 +99,8 @@ class APITests: TestCase {
         #else
           directory = nil
         #endif
-        #if !(os(tvOS) || os(iOS) || os(watchOS))
+        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
+        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
           _ = try Shell.default.run(command: ["ls"], in: directory).get()
         #endif
         let printWorkingDirectory: String
@@ -107,7 +109,8 @@ class APITests: TestCase {
         #else
           printWorkingDirectory = "pwd"
         #endif
-        #if !(os(tvOS) || os(iOS) || os(watchOS))
+        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
+        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
           _ = try Shell.default.run(
             command: [printWorkingDirectory],
             in: URL(fileURLWithPath: "/"),
@@ -116,12 +119,14 @@ class APITests: TestCase {
         #endif
 
         let message = "Hello, world!"
-        #if !(os(tvOS) || os(iOS) || os(watchOS))
+        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
+        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
           XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
         #endif
 
         let nonexistentCommand = "no‐such‐command"
-        #if !(os(tvOS) || os(iOS) || os(watchOS))
+        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
+        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
           let result = Shell.default.run(command: [nonexistentCommand])
           switch result {
           case .success(let output):
@@ -140,7 +145,8 @@ class APITests: TestCase {
         #endif
 
         #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
-          #if !(os(tvOS) || os(iOS) || os(watchOS))
+          // #workaround(Swift 5.3.2, Process unavailable on WASI.)
+          #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
             let metacharacters = "(...)"
             XCTAssertEqual(
               try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
@@ -156,7 +162,8 @@ class APITests: TestCase {
         #endif
 
         _ = "\(Shell.default)"
-        #if !(os(tvOS) || os(iOS) || os(watchOS))
+        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
+        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
           switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
           case .failure(let error):
             // Expected.
