@@ -17,7 +17,7 @@ import Foundation
 import SDGControlFlow
 import SDGLogic
 
-#if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+#if !os(WASI)  // #workaround(Swift 5.3.2, FileManager unavailable.)
   extension FileManager {
 
     // MARK: - Domains

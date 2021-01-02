@@ -122,21 +122,27 @@ class InternalTests: TestCase {
       )
     }
 
-    LocalizationSetting.setSystemWidePreferences(to: nil)
-    LocalizationSetting.setApplicationPreferences(to: nil)
+    #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+      LocalizationSetting.setSystemWidePreferences(to: nil)
+      LocalizationSetting.setApplicationPreferences(to: nil)
 
-    LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
-    XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
-      .englishUnitedKingdom
-    )
-    LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
-    XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
-      .français
-    )
+      LocalizationSetting.setSystemWidePreferences(
+        to: LocalizationSetting(orderOfPrecedence: ["en"])
+      )
+      XCTAssertEqual(
+        LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
+        .englishUnitedKingdom
+      )
+      LocalizationSetting.setSystemWidePreferences(
+        to: LocalizationSetting(orderOfPrecedence: ["fr"])
+      )
+      XCTAssertEqual(
+        LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
+        .français
+      )
 
-    LocalizationSetting.setSystemWidePreferences(to: nil)
+      LocalizationSetting.setSystemWidePreferences(to: nil)
+    #endif
   }
 
   func testWholeNumber() {
