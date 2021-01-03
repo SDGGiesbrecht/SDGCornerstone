@@ -26,19 +26,21 @@ class APITests: TestCase {
   func testExternalProcess() {
 
     forAllLegacyModes {
-      XCTAssertNil(
-        ExternalProcess(
-          searching: [
-            "/no/such/file",
-            "/tmp",  // Directory
-            "/.file", "/dev/null",  // Not executable
-          ].map({ URL(fileURLWithPath: $0) }),
-          commandName: nil,
-          validate: { (_: ExternalProcess) in true }
-        ),
-        "Failed to reject non‐executables."
-      )
-      #if !(os(tvOS) || os(iOS) || os(watchOS))
+      #if !os(WASI)  // #workaround(Swift 5.3.2, FileManager unavailable.)
+        XCTAssertNil(
+          ExternalProcess(
+            searching: [
+              "/no/such/file",
+              "/tmp",  // Directory
+              "/.file", "/dev/null",  // Not executable
+            ].map({ URL(fileURLWithPath: $0) }),
+            commandName: nil,
+            validate: { (_: ExternalProcess) in true }
+          ),
+          "Failed to reject non‐executables."
+        )
+      #endif
+      #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
         // #workaround(workspace version 0.35.3, Emulator has no Swift.)
         #if !os(Android)
           XCTAssertEqual(

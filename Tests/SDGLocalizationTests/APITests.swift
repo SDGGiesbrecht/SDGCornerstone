@@ -255,7 +255,9 @@ class APITests: TestCase {
       #endif
       let first: FormatLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
       for _ in 1...10 {
-        XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
+        #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+          XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
+        #endif
       }
 
       LocalizationSetting(orderOfPrecedence: [] as [String]).do {
