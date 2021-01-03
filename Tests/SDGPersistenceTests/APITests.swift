@@ -302,18 +302,21 @@ class APITests: TestCase {
       usersPath = "/Users"
       johnDoePath = "/Users/John Doe"
     #endif
-    let root = URL(fileURLWithPath: rootPath)
-    let users = URL(fileURLWithPath: usersPath)
-    let johnDoe = URL(fileURLWithPath: johnDoePath)
+    // #workaround(Swift 5.3.2, “Unexpectedly found nil while unwrapping an Optional value” inside init(fileURLWithPath:).)
+    #if !os(WASI)
+      let root = URL(fileURLWithPath: rootPath)
+      let users = URL(fileURLWithPath: usersPath)
+      let johnDoe = URL(fileURLWithPath: johnDoePath)
 
-    XCTAssert(root < users)
-    XCTAssert(users.is(in: root))
-    XCTAssert(root.is(in: root))
-    XCTAssert(users.is(in: users))
-    XCTAssert(johnDoe.is(in: users))
+      XCTAssert(root < users)
+      XCTAssert(users.is(in: root))
+      XCTAssert(root.is(in: root))
+      XCTAssert(users.is(in: users))
+      XCTAssert(johnDoe.is(in: users))
 
-    XCTAssertEqual(users.path(relativeTo: root), "Users")
-    XCTAssertEqual(users.path(relativeTo: johnDoe), users.path)
-    XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
+      XCTAssertEqual(users.path(relativeTo: root), "Users")
+      XCTAssertEqual(users.path(relativeTo: johnDoe), users.path)
+      XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
+    #endif
   }
 }
