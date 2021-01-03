@@ -172,7 +172,9 @@ class APITests: TestCase {
   func testPreferences() throws {
     let testKey = "SDGTestKey"
     let testDomain = "ca.solideogloria.SDGCornerstone.Tests.Preferences"
-    let testDomainExternalName = testDomain + ".debug"
+    #if os(macOS)
+      let testDomainExternalName = testDomain + ".debug"
+    #endif
     // #workaround(Swift 5.3.2, UserDefaults unavailable.)
     #if !os(WASI)
       let preferences = PreferenceSet.preferences(for: testDomain)
@@ -203,8 +205,8 @@ class APITests: TestCase {
       let externalTestKey = "SDGExternalTestKey"
       preferences[externalTestKey].value.set(to: nil)
 
-      let stringValue = "value"
       #if os(macOS)
+        let stringValue = "value"
         _ = try Shell.default.run(command: [
           "defaults", "write", testDomainExternalName, externalTestKey, "\u{2D}string", stringValue,
         ]).get()
