@@ -102,6 +102,7 @@ class InternalTests: TestCase {
 
   func testLocalizationSetting() {
     var expectOperatingSystemLanguage = true
+    expectOperatingSystemLanguage = true  // Evade static analysis.
     #if os(macOS) || os(Linux)
       if ProcessInfo.processInfo.environment["GITHUB_ACTIONS"] == "true" {
         // GitHub’s host has no language set.
