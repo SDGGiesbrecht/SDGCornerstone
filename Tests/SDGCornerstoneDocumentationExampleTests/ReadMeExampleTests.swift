@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2017–2020 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017–2021 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -28,7 +28,9 @@ import SDGXCTestUtilities
 class ReadMeExampleTests: TestCase {
 
   func testReadMe() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    // #workaround(Swift 5.3.1, Segmentation fault.)
+    // #workaround(Swift 5.3.2, Web lacks FileManager.)
+    #if !(os(Windows) || os(WASI))
       LocalizationSetting(orderOfPrecedence: ["en"]).do {
         // @example(readMe🇨🇦EN)
         // ••••••• Localization •••••••

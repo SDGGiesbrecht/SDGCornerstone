@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018–2020 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2021 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -102,6 +102,7 @@ class InternalTests: TestCase {
 
   func testLocalizationSetting() {
     var expectOperatingSystemLanguage = true
+    expectOperatingSystemLanguage = true  // Evade static analysis.
     #if os(macOS) || os(Linux)
       if ProcessInfo.processInfo.environment["GITHUB_ACTIONS"] == "true" {
         // GitHub’s host has no language set.
@@ -115,28 +116,34 @@ class InternalTests: TestCase {
     #if os(Android)  // #workaround(Swift 5.3.1, Not possible yet.)
       expectOperatingSystemLanguage = false
     #endif
-    if expectOperatingSystemLanguage {
-      XCTAssertNotNil(
-        LocalizationSetting.osSystemWidePreferences.value.as([String].self),
-        "Failed to detect operating system localization setting."
+    #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+      if expectOperatingSystemLanguage {
+        XCTAssertNotNil(
+          LocalizationSetting.osSystemWidePreferences.value.as([String].self),
+          "Failed to detect operating system localization setting."
+        )
+      }
+
+      LocalizationSetting.setSystemWidePreferences(to: nil)
+      LocalizationSetting.setApplicationPreferences(to: nil)
+
+      LocalizationSetting.setSystemWidePreferences(
+        to: LocalizationSetting(orderOfPrecedence: ["en"])
       )
-    }
+      XCTAssertEqual(
+        LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
+        .englishUnitedKingdom
+      )
+      LocalizationSetting.setSystemWidePreferences(
+        to: LocalizationSetting(orderOfPrecedence: ["fr"])
+      )
+      XCTAssertEqual(
+        LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
+        .français
+      )
 
-    LocalizationSetting.setSystemWidePreferences(to: nil)
-    LocalizationSetting.setApplicationPreferences(to: nil)
-
-    LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["en"]))
-    XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
-      .englishUnitedKingdom
-    )
-    LocalizationSetting.setSystemWidePreferences(to: LocalizationSetting(orderOfPrecedence: ["fr"]))
-    XCTAssertEqual(
-      LocalizationSetting.current.value.resolved() as APITests.LocalizationExample,
-      .français
-    )
-
-    LocalizationSetting.setSystemWidePreferences(to: nil)
+      LocalizationSetting.setSystemWidePreferences(to: nil)
+    #endif
   }
 
   func testWholeNumber() {

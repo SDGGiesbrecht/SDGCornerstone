@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018–2020 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2021 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -227,28 +227,37 @@ class APITests: TestCase {
       XCTAssert(englishUsed)
       XCTAssert(françaisUtilisé)
 
-      LocalizationSetting.setApplicationPreferences(to: nil)
+      #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+        LocalizationSetting.setApplicationPreferences(to: nil)
 
-      LocalizationSetting.setApplicationPreferences(
-        to: LocalizationSetting(orderOfPrecedence: ["en"])
-      )
-      XCTAssertEqual(
-        LocalizationSetting.current.value.resolved() as LocalizationExample,
-        .englishUnitedKingdom
-      )
-      LocalizationSetting.setApplicationPreferences(
-        to: LocalizationSetting(orderOfPrecedence: ["fr"])
-      )
-      XCTAssertEqual(LocalizationSetting.current.value.resolved() as LocalizationExample, .français)
+        LocalizationSetting.setApplicationPreferences(
+          to: LocalizationSetting(orderOfPrecedence: ["en"])
+        )
+        XCTAssertEqual(
+          LocalizationSetting.current.value.resolved() as LocalizationExample,
+          .englishUnitedKingdom
+        )
+        LocalizationSetting.setApplicationPreferences(
+          to: LocalizationSetting(orderOfPrecedence: ["fr"])
+        )
+        XCTAssertEqual(
+          LocalizationSetting.current.value.resolved() as LocalizationExample,
+          .français
+        )
 
-      LocalizationSetting.setApplicationPreferences(to: nil)
+        LocalizationSetting.setApplicationPreferences(to: nil)
+      #endif
 
       let codes = FormatLocalization.allCases.map { $0.code }
       let stabilizedSetting = LocalizationSetting(orderOfPrecedence: [codes])
-      FileManager.default.delete(.cache)
+      #if !os(WASI)  // #workaround(Swift 5.3.2, FileManager unavailable.)
+        FileManager.default.delete(.cache)
+      #endif
       let first: FormatLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
       for _ in 1...10 {
-        XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
+        #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+          XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
+        #endif
       }
 
       LocalizationSetting(orderOfPrecedence: [] as [String]).do {

@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2018–2020 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2018–2021 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -13,7 +13,9 @@
  */
 
 import Foundation
-import Dispatch
+#if !os(WASI)  // #workaround(Swift 5.3.2, Web lacks Dispatch.)
+  import Dispatch
+#endif
 
 import SDGMathematics
 import SDGCollections
@@ -264,18 +266,21 @@ class MiscellaneousExampleTests: TestCase {
 
   func testRunLoopUsage() {
 
-    // @example(runLoopUsage)
-    var driver: RunLoop.Driver?
-    DispatchQueue.global(qos: .userInitiated).async {
-      RunLoop.current.runForDriver { driver = $0 }
-    }
-    // The background run loop is now running.
+    // #workaround(Swift 5.3.2, Web lacks RunLoop.)
+    #if !os(WASI)
+      // @example(runLoopUsage)
+      var driver: RunLoop.Driver?
+      DispatchQueue.global(qos: .userInitiated).async {
+        RunLoop.current.runForDriver { driver = $0 }
+      }
+      // The background run loop is now running.
 
-    driver = nil
-    // The background run loop has now stopped.
-    // @endExample
+      driver = nil
+      // The background run loop has now stopped.
+      // @endExample
 
-    _ = driver
+      _ = driver
+    #endif
   }
 
   func testSetSwitch() {

@@ -4,7 +4,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2017–2020 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017–2021 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -237,7 +237,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   // MARK: - Static Methods
 
-  #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
     // For user available menus.
     public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
       sdgSystemWidePreferences.value.set(to: setting)

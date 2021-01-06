@@ -6,7 +6,7 @@
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
 
- Copyright ©2017–2020 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
+ Copyright ©2017–2021 Jeremy David Giesbrecht and the SDGCornerstone project contributors.
 
  Soli Deo gloria.
 
@@ -737,7 +737,6 @@ if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
   // #workaround(xcodebuild -version 12.2, Tool targets don’t work on tvOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
 }
-
 if ProcessInfo.processInfo.environment["TARGETING_IOS"] == "true" {
   // #workaround(xcodebuild -version 12.2, Tool targets don’t work on iOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
