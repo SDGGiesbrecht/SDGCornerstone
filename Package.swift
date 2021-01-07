@@ -733,6 +733,15 @@ let package = Package(
   ]
 )
 
+for target in package.targets {
+  var swiftSettings = target.swiftSettings ?? []
+  defer { target.swiftSettings = swiftSettings }
+  swiftSettings.append(contentsOf: [
+    // #workaround(Swift 5.3.2, Web lacks Foundation.Process.)
+    .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS]))
+  ])
+}
+
 if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
   // #workaround(xcodebuild -version 12.2, Tool targets don’t work on tvOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
