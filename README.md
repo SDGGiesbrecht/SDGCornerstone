@@ -148,6 +148,12 @@ XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
 #endif
 ```
 
+Some platforms lack certain features. The compilation conditions which appear throughout the API documentation are defined as follows:
+
+```swift
+.define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS]))
+```
+
 ## Importing
 
 SDGCornerstone provides libraries for use with the [Swift Package Manager](https://swift.org/package-manager/).

@@ -16,7 +16,7 @@
 
 import PackageDescription
 
-// #example(1, readMe🇨🇦EN)
+// #example(1, readMe🇨🇦EN) #example(2, conditions)
 /// SDGCornerstone forms the foundation of the SDG module family; it establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation).
 ///
 /// > [הִנְנִי יִסַּד בְּצִיּוֹן אָבֶן אֶבֶן בֹּחַן פִּנַּת יִקְרַת מוּסָד מוּסָד׃](https://www.biblegateway.com/passage/?search=Isaiah+28&version=WLC;NIV)
@@ -145,6 +145,12 @@ import PackageDescription
 ///     "Hello, world!"
 ///   )
 /// #endif
+/// ```
+///
+/// Some platforms lack certain features. The compilation conditions which appear throughout the API documentation are defined as follows:
+///
+/// ```swift
+/// .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS]))
 /// ```
 let package = Package(
   name: "SDGCornerstone",
@@ -738,7 +744,9 @@ for target in package.targets {
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
     // #workaround(Swift 5.3.2, Web lacks Foundation.Process.)
+    // @example(conditions)
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS]))
+    // @endExample
   ])
 }
 
