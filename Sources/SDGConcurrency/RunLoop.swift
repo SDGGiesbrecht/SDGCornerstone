@@ -17,7 +17,7 @@ import Foundation
 import SDGControlFlow
 import SDGLogic
 
-#if !os(WASI)  // #workaround(Swift 5.3.1, RunLoop unavailable.)
+#if !PLATFORM_LACKS_FOUNDATION_RUN_LOOP
   extension RunLoop {
 
     // MARK: - Running the Loop
