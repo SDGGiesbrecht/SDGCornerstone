@@ -75,7 +75,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   internal static let osSystemWidePreferences: Shared<Preference> = {
     let preferences: Shared<Preference>
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if APPLE_PLATFORM
 
       preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[applePreferenceKey]
 
@@ -147,7 +147,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     #endif
 
     let preferences: Shared<Preference>
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if APPLE_PLATFORM
 
       preferences = PreferenceSet.applicationPreferences[applePreferenceKey]
 

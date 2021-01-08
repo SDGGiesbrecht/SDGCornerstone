@@ -78,7 +78,6 @@ class APITests: TestCase {
         "Date conversion failed."
       )
 
-      // #workaround(Swift 5.3.2, Web lacks dateFormat.)
       #if !PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
