@@ -151,6 +151,7 @@ XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
 Some platforms lack certain features. The compilation conditions which appear throughout the documentation are defined as follows:
 
 ```swift
+.define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
 .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
 .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
 .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
