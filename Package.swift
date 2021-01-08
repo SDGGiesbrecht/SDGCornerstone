@@ -757,6 +757,7 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
+    // #workaround(workspace 0.36.0, Bug prevents centralization of windows conditions.)
     // #workaround(Swift 5.3.2, Web lacks Dispatch.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.DateFormatter.dateFormat.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.FileManager.)
@@ -787,7 +788,6 @@ for target in package.targets {
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
     // @endExample
-    // #workaround(workspace 0.36.0, Bug prevents centralization of windows conditions.)
   ])
 }
 
