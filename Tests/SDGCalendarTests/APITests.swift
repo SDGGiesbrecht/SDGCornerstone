@@ -78,8 +78,7 @@ class APITests: TestCase {
         "Date conversion failed."
       )
 
-      // #workaround(Swift 5.3.2, Web lacks dateFormat.)
-      #if !os(WASI)
+      #if !PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy‐MM‐dd hh:mm:ss Z"
         let system = formatter.date(from: "1991‐04‐18 00:00:00 +0000")!
@@ -254,7 +253,7 @@ class APITests: TestCase {
       _ = "\(CalendarDate(Date()))"
 
       let utc = CalendarDate(gregorian: .september, 20, 2019, at: 21, 31)
-      #if !os(WASI)  // #workaround(Swift 5.3.2, Web lacks time zone definitions.)
+      #if !PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER
         let adjustedToZone = utc.adjusted(to: TimeZone(identifier: "Asia/Jerusalem")!)
         let timeZoneEquivalent = CalendarDate(gregorian: .september, 21, 2019, at: 0, 31)
         XCTAssertEqual(

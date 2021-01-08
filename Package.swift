@@ -16,7 +16,7 @@
 
 import PackageDescription
 
-// #example(1, readMe🇨🇦EN)
+// #example(1, readMe🇨🇦EN) #example(2, conditions)
 /// SDGCornerstone forms the foundation of the SDG module family; it establishes design patterns and provides general‐use extensions to the [Swift Standard Library](https://developer.apple.com/reference/swift) and [Foundation](https://developer.apple.com/reference/foundation).
 ///
 /// > [הִנְנִי יִסַּד בְּצִיּוֹן אָבֶן אֶבֶן בֹּחַן פִּנַּת יִקְרַת מוּסָד מוּסָד׃](https://www.biblegateway.com/passage/?search=Isaiah+28&version=WLC;NIV)
@@ -139,12 +139,25 @@ import PackageDescription
 ///
 /// // ••••••• Shell Commands •••••••
 ///
-/// #if !(os(tvOS) || os(iOS) || os(watchOS))
+/// #if !PLATFORM_LACKS_FOUNDATION_PROCESS
 ///   XCTAssertEqual(
 ///     try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
 ///     "Hello, world!"
 ///   )
 /// #endif
+/// ```
+///
+/// Some platforms lack certain features. The compilation conditions which appear throughout the documentation are defined as follows:
+///
+/// ```swift
+/// .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
+/// .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
+/// .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
 /// ```
 let package = Package(
   name: "SDGCornerstone",
@@ -732,6 +745,46 @@ let package = Package(
     ),
   ]
 )
+
+for target in package.targets {
+  var swiftSettings = target.swiftSettings ?? []
+  defer { target.swiftSettings = swiftSettings }
+  swiftSettings.append(contentsOf: [
+    // #workaround(workspace 0.36.0, Bug prevents centralization of windows conditions.)
+    // #workaround(Swift 5.3.2, Web lacks Foundation.FileManager.)
+    // #workaround(Swift 5.3.2, Web lacks Foundation.Process.)
+    // #workaround(Swift 5.3.2, Web lacks Foundation.ProcessInfo.)
+    // #workaround(Swift 5.3.2, Web lacks Foundation.RunLoop.)
+    // #workaround(Swift 5.3.2, Web lacks Foundation.UserDefaults.)
+    // #workaround(Swift 5.3.2, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.3.2, macOS lacks Swift.Float16.)
+    // #workaround(Swift 5.3.2, watchOS lacks XCTest.)
+    // @example(conditions)
+    .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
+    .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
+    .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
+    // @endExample
+
+    // Internal‐only:
+    .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
+    // #workaround(Swift 5.3.2, Web lacks Dispatch.)
+    .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks Foundation.DateFormatter.dateFormat.)
+    .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks Foundation.Thread.)
+    .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks Foundation.TimeZone.init(identifier:).)
+    .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
+    .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_SWIFT_COMPILER", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
+  ])
+}
 
 if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
   // #workaround(xcodebuild -version 12.2, Tool targets don’t work on tvOS.) @exempt(from: unicode)

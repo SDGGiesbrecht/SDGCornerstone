@@ -28,8 +28,7 @@ class RegressionTests: TestCase {
   func testAndroidTemporaryDirectory() throws {
     // Untracked
 
-    // #workaround(Swift 5.3.2, FileManager unavailable.)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       try FileManager.default.withTemporaryDirectory(appropriateFor: nil) { temporary in
         try "File".save(to: temporary.appendingPathComponent("File.txt"))
       }
@@ -39,8 +38,7 @@ class RegressionTests: TestCase {
   func testCachePermissions() {
     // Untracked
 
-    // #workaround(Swift 5.3.2, FileManager unavailable.)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       defer { FileManager.default.delete(.cache) }
 
       let file = "File"
@@ -58,8 +56,7 @@ class RegressionTests: TestCase {
   func testDirectoryDetection() throws {
     // Untracked
 
-    // #workaround(Swift 5.3.2, FileManager unavailable.)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       try FileManager.default.withTemporaryDirectory(appropriateFor: nil) { temporary in
         let directory = temporary.appendingPathComponent("Directory", isDirectory: false)
         let fileName = "File.txt"
@@ -77,8 +74,7 @@ class RegressionTests: TestCase {
   func testPercentEncodingIsNotDoubled() {
     // Untracked
 
-    // #workaround(Swift 5.3.2, FileManager unavailable.)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       FileManager.default.withTemporaryDirectory(appropriateFor: nil) { directory in
         var url = directory.appendingPathComponent("A Folder")
         url.appendPathComponent("A File")
@@ -91,8 +87,7 @@ class RegressionTests: TestCase {
   func testRemoteURLs() throws {
     // Untracked
 
-    // #workaround(Swift 5.3.2, FileManager unavailable.)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       do {
         _ = try String(from: URL(string: "http://example.com/some/path")!)
       } catch {

@@ -22,7 +22,7 @@ extension String: FileConvertible {
 
   public init(file: Data, origin: URL?) throws {
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       // Let Foundation try...
       if let url = origin {
         var encoding: String.Encoding = .utf8

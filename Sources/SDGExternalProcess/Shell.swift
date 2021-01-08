@@ -77,7 +77,7 @@ public final class Shell: TransparentWrapper {
 
   private let process: ExternalProcess
 
-  #if !(os(tvOS) || os(iOS) || os(watchOS))
+  #if !PLATFORM_LACKS_FOUNDATION_PROCESS
     private var isCMD: Bool {
       return process.executable.lastPathComponent == "cmd.exe"
     }
@@ -85,8 +85,7 @@ public final class Shell: TransparentWrapper {
 
   // MARK: - Usage
 
-  // #workaround(Swift 5.3.1, Process unavailable on WASI.)
-  #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+  #if !PLATFORM_LACKS_FOUNDATION_PROCESS
     /// Runs a command.
     ///
     /// - Parameters:

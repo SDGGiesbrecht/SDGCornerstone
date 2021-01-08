@@ -23,7 +23,7 @@ import SDGTesting
 ///     - followingValue: Another value to compare.
 @inlinable public func ≈ <T>(precedingValue: T, followingValue: T) -> Bool
 where T: ExpressibleByFloatLiteral, T: FloatingPoint, T: Subtractable {
-  #if !os(macOS)
+  #if !PLATFORM_LACKS_SWIFT_FLOAT_16
     if #available(tvOS 14, iOS 14, watchOS 7, *),
       precedingValue is Float16
     {

@@ -32,9 +32,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   // MARK: - Static Properties
 
   private static let sdgDomainSuffix = ".Language"
-  #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
-    private static let osPreferenceKey = "AppleLanguages"
-  #endif
+  private static let applePreferenceKey = "AppleLanguages"
   private static let sdgPreferenceKey = "SDGLanguages"
 
   #if canImport(WinSDK)
@@ -77,9 +75,9 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   internal static let osSystemWidePreferences: Shared<Preference> = {
     let preferences: Shared<Preference>
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if APPLE_PLATFORM
 
-      preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[osPreferenceKey]
+      preferences = PreferenceSet.preferences(for: UserDefaults.globalDomain)[applePreferenceKey]
 
     #elseif os(Windows)
 
@@ -130,7 +128,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   }()
 
   private static let sdgSystemWidePreferences: Shared<Preference> = {
-    #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+    #if PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
       let preferences = Shared(Preference.mock())
     #else
       let preferences = PreferenceSet.preferences(
@@ -142,16 +140,16 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   }()
 
   private static let osApplicationPreferences: Shared<Preference> = {
-    #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+    #if !PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
       guard ProcessInfo.possibleApplicationIdentifier ≠ nil else {
         return Shared(Preference.mock())  // @exempt(from: tests)
       }
     #endif
 
     let preferences: Shared<Preference>
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if APPLE_PLATFORM
 
-      preferences = PreferenceSet.applicationPreferences[osPreferenceKey]
+      preferences = PreferenceSet.applicationPreferences[applePreferenceKey]
 
     #elseif os(WASI)
 
@@ -181,7 +179,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
   }()
 
   private static let sdgApplicationPreferences: Shared<Preference> = {
-    #if os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+    #if PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
       return Shared(Preference.mock())
     #else
       guard let applicationDomain = ProcessInfo.possibleApplicationIdentifier else {
@@ -203,7 +201,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   private static func resolveCurrentLocalization() -> LocalizationSetting {
     var result = overrides.value.last
-    #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+    #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
       result =
         result
         ?? sdgApplicationPreferences.value.as(LocalizationSetting.self)
@@ -237,7 +235,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   // MARK: - Static Methods
 
-  #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
     // For user available menus.
     public static func _setSystemWidePreferences(to setting: LocalizationSetting?) {
       sdgSystemWidePreferences.value.set(to: setting)
@@ -293,7 +291,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     self.orderOfPrecedence = orderOfPrecedence.map { [$0] }
   }
 
-  #if !os(WASI)  // #workaround(Swift 5.3.1, PropertyListEncoder unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER
     private init?(osPreference preference: Preference) {
       guard let result = preference.as([String].self) else {
         return nil
@@ -330,7 +328,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
     return L.fallbackLocalization
   }
 
-  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
     private func stabilityCacheURL<L>(for: L.Type) -> URL {
       var path = "SDGCornerstone/Stable Localizations"
       path += "/"
@@ -343,7 +341,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
 
   private subscript<L>(stabilityCacheFor type: L.Type) -> CachedLocalization<L>? {
     get {
-      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         if let cache = try? CachedLocalization<L>(from: stabilityCacheURL(for: L.self)),
           Date() ≤ cache.date
         {
@@ -353,7 +351,7 @@ public struct LocalizationSetting: CustomPlaygroundDisplayConvertible, CustomStr
       return nil
     }
     nonmutating set {
-      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         try? newValue?.save(to: stabilityCacheURL(for: L.self))
       #endif
     }

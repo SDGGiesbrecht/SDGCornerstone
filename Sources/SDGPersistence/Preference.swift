@@ -110,7 +110,7 @@ public struct Preference: Equatable, TransparentWrapper {
     }
   }
 
-  #if !os(WASI)  // #workaround(Swift 5.3.1, PropertyListEncoder unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER
     private func encodeAndDeserialize<T>(_ value: [T]) throws -> Any where T: Encodable {
       return try PropertyListSerialization.propertyList(
         from: PropertyListEncoder().encode(value),
@@ -162,7 +162,7 @@ public struct Preference: Equatable, TransparentWrapper {
     propertyListObject = nil
   }
 
-  #if !os(WASI)  // #workaround(Swift 5.3.1, PropertyListEncoder unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER
     /// Returns the preference cast to a particular type.
     ///
     /// The result will be `nil` if the preference is unset or if its value has a differing type. (Types with compatible `Coding` representations will still be returned successfully.)

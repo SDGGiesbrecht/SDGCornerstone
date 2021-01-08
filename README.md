@@ -140,12 +140,25 @@ XCTAssert(tenDuotrigintillion.isDivisible(by: 10))
 
 // ••••••• Shell Commands •••••••
 
-#if !(os(tvOS) || os(iOS) || os(watchOS))
+#if !PLATFORM_LACKS_FOUNDATION_PROCESS
   XCTAssertEqual(
     try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
     "Hello, world!"
   )
 #endif
+```
+
+Some platforms lack certain features. The compilation conditions which appear throughout the documentation are defined as follows:
+
+```swift
+.define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
+.define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
+.define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
+.define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
+.define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
+.define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+.define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
+.define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
 ```
 
 ## Importing

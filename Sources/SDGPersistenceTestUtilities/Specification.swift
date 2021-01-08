@@ -63,7 +63,7 @@ private func defaultRepositoryRoot(_ callerLocation: StaticString) -> URL {
 public func testSpecificationDirectory(_ callerLocation: StaticString = #filePath) -> URL {
   return cached(in: &specificationDirectory) {
     let repositoryRoot: URL
-    #if os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+    #if PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
       repositoryRoot = defaultRepositoryRoot(callerLocation)
     #else
       if let overridden = ProcessInfo.processInfo
@@ -104,7 +104,7 @@ public func compare(
 
     if overwriteSpecificationInsteadOfFailing {
       do {
-        #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+        #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
         #endif
       } catch {
@@ -113,7 +113,7 @@ public func compare(
       return
     }
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       guard let immutableSpecificationString = try? String(from: specification) else {
         do {
           try StrictString(string).save(to: specification)  // Enforce a normalized specification.
