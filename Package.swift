@@ -750,6 +750,8 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     // @endExample
+    // #workaround(Swift 5.3.2, Declaration may not be in a Comdat!)
+    .define("PLATFORM_SUFFERS_COMDAT_BUG", .when(platforms: [.windows])),
   ])
 }
 
