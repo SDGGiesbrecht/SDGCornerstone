@@ -46,7 +46,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
   ) where S: Sequence, S.Element == URL {
     let adjustedLocations = locations
       .lazy.map { location -> URL in
-        #if os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+        #if PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
           return location
         #else
           return FileManager.default.existingRepresentation(of: location)
@@ -54,7 +54,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
       }
 
     func checkLocation(_ location: URL, validate: (ExternalProcess) -> Bool) -> Bool {
-      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         var isDirectory: ObjCBool = false
         if ¬FileManager.default.fileExists(atPath: location.path, isDirectory: &isDirectory) {
           return false
@@ -80,8 +80,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
       }
     }
 
-    // #workaround(Swift 5.3.1, Process unavailable on WASI.)
-    #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+    #if !PLATFORM_LACKS_FOUNDATION_PROCESS
       let searchCommand: String
       #if os(Windows)
         searchCommand = "where"
@@ -108,7 +107,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
       }
     #endif
 
-    #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+    #if !PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
       // Fall back to searching PATH manually, because some Linux flavours lack “which”.
       if let name = commandName,
         let path = ProcessInfo.processInfo.environment["PATH"]
@@ -143,8 +142,7 @@ public final class ExternalProcess: TextualPlaygroundDisplay {
   /// The location of the executable file.
   public let executable: URL
 
-  // #workaround(Swift 5.3.1, Process unavailable on WASI.)
-  #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+  #if !PLATFORM_LACKS_FOUNDATION_PROCESS
     /// Runs the executable with the specified arguments and returns the output.
     ///
     /// - Parameters:

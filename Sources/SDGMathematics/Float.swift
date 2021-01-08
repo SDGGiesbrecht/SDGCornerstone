@@ -343,8 +343,7 @@ extension Float: FloatFamily {
   }
 }
 
-// #workaround(Swift 5.3.1, macOS has no Float16 yet.)
-#if !os(macOS)
+#if !PLATFORM_LACKS_SWIFT_FLOAT_16
   @available(tvOS 14, iOS 14, watchOS 7, *)
   extension Float16: FloatFamily {
 

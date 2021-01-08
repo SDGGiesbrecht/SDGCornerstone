@@ -29,7 +29,7 @@ public final class PreferenceSet {
 
   private static var domains: [String: PreferenceSet] = [:]
 
-  #if os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
     internal init() {
       // Dead initializer, but enables compilation, in order to permit static namespace use.
       domain = ""
@@ -105,7 +105,7 @@ public final class PreferenceSet {
     fileprivate init() {}
     fileprivate weak var preferences: PreferenceSet?
     fileprivate func valueChanged(for identifier: String) {
-      #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
         preferences?.valueChanged(for: identifier)
       #endif
     }
@@ -113,7 +113,7 @@ public final class PreferenceSet {
 
   // MARK: - Storage
 
-  #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
     private static func readFromDisk(for possibleDebugDomain: String) -> [String: Preference] {
       let values =
         UserDefaults.standard.persistentDomain(
@@ -164,7 +164,7 @@ public final class PreferenceSet {
 
   // MARK: - Observing
 
-  #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
     private func valueChanged(for identifier: String) {
 
       guard let shared = values[identifier] else {
@@ -197,7 +197,7 @@ public final class PreferenceSet {
     }
   }
 
-  #if !os(WASI)  // #workaround(Swift 5.3.1, UserDefaults unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
     /// Resets all properties to nil.
     public func reset() {
       writeToDisk([:])

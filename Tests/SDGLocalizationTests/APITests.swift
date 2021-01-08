@@ -227,7 +227,7 @@ class APITests: TestCase {
       XCTAssert(englishUsed)
       XCTAssert(françaisUtilisé)
 
-      #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
         LocalizationSetting.setApplicationPreferences(to: nil)
 
         LocalizationSetting.setApplicationPreferences(
@@ -250,12 +250,12 @@ class APITests: TestCase {
 
       let codes = FormatLocalization.allCases.map { $0.code }
       let stabilizedSetting = LocalizationSetting(orderOfPrecedence: [codes])
-      #if !os(WASI)  // #workaround(Swift 5.3.2, FileManager unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         FileManager.default.delete(.cache)
       #endif
       let first: FormatLocalization = stabilizedSetting.resolved(stabilization: .stabilized)
       for _ in 1...10 {
-        #if !os(WASI)  // #workaround(Swift 5.3.2, UserDefaults unavailable.)
+        #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
           XCTAssertEqual(first, stabilizedSetting.resolved(stabilization: .stabilized))
         #endif
       }

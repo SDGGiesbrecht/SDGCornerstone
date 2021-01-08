@@ -13,7 +13,7 @@
  */
 
 import Foundation
-#if !os(WASI)  // #workaround(Swift 5.3.2, Web lacks Dispatch.)
+#if !PLATFORM_LACKS_DISPATCH
   import Dispatch
 #endif
 
@@ -266,8 +266,7 @@ class MiscellaneousExampleTests: TestCase {
 
   func testRunLoopUsage() {
 
-    // #workaround(Swift 5.3.2, Web lacks RunLoop.)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_RUN_LOOP
       // @example(runLoopUsage)
       var driver: RunLoop.Driver?
       DispatchQueue.global(qos: .userInitiated).async {

@@ -41,13 +41,13 @@ public func testFileConvertibleConformance<T>(
   let specificationsDirectory = testSpecificationDirectory(file).appendingPathComponent(
     "FileConvertible"
   ).appendingPathComponent("\(T.self)").appendingPathComponent(String(uniqueTestName))
-  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
     try? FileManager.default.createDirectory(at: specificationsDirectory)
   #endif
 
   var specifications: Set<Data> = []
   do {
-    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       for specificationURL in try FileManager.default.contents(
         ofDirectory: specificationsDirectory
       ) {
@@ -78,7 +78,7 @@ public func testFileConvertibleConformance<T>(
     if newSpecification ∉ specifications {
       // @exempt(from: tests)
       let now = CalendarDate.gregorianNow()
-      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         try newSpecification.save(
           to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).testspec")
         )

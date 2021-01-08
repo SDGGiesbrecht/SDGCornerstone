@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-#if !os(watchOS)
+#if !PLATFORM_LACKS_XC_TEST
 
   import XCTest
 
@@ -27,7 +27,7 @@
     open override func setUp() {
       if ¬TestCase.initialized {
         TestCase.initialized = true
-        #if !os(WASI)  // #workaround(Swift 5.3.1, ProcessInfo unavailable.)
+        #if !PLATFORM_LACKS_FOUNDATION_PROCESS_INFO
           ProcessInfo.applicationIdentifier =
             "ca.solideogloria.SDGCornerstone.SharedTestingDomain"
         #endif
@@ -35,7 +35,7 @@
 
       testAssertionMethod = XCTAssert
 
-      #if !os(WASI)  // #workaround(Swift 5.3.1, Thread unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_THREAD
         // The default of .userInteractive is absurd.
         Thread.current.qualityOfService = .utility
       #endif

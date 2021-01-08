@@ -69,7 +69,7 @@ public func testCustomStringConvertibleConformance<T, L>(
       .replacingMatches(for: "<", with: "⟨")
       .replacingMatches(for: ">", with: "⟩")
   )
-  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
     try? FileManager.default.move(deprecated, to: specification)
   #endif
   SDGPersistenceTestUtilities.compare(

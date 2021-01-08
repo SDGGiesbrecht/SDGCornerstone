@@ -186,7 +186,7 @@ class APITests: TestCase {
         testRealArithmeticConformance(of: Float80.self)
       #endif
       testRealArithmeticConformance(of: Float.self)
-      #if !os(macOS)  // #workaround(Swift 5.3.1, macOS has no Float16 yet.)
+      #if !PLATFORM_LACKS_SWIFT_FLOAT_16
         if #available(tvOS 14, iOS 14, *) {
           testRealArithmeticConformance(of: Float16.self)
         }

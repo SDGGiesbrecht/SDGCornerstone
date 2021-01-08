@@ -13,7 +13,7 @@
  */
 
 import Foundation
-#if !os(WASI)  // #workaround(Swift 5.3.2, Web lacks Dispatch.)
+#if !PLATFORM_LACKS_DISPATCH
   import Dispatch
 #endif
 
@@ -27,7 +27,7 @@ class APITests: TestCase {
 
   @available(macOS 10.12, iOS 10, tvOS 10, *)  // @exempt(from: unicode)
   func testRunLoop() {
-    #if !os(WASI)  // #workaround(Swift 5.3.1, RunLoop unavailable.)
+    #if !PLATFORM_LACKS_FOUNDATION_RUN_LOOP
       var driver: RunLoop.Driver?
 
       let didRun = expectation(description: "Run loop ran.")

@@ -38,8 +38,7 @@ class RegressionTests: TestCase {
 
     #if !os(Windows)  // #workaround(Swift 5.3.1, Shell misbehaves.)
       try forAllLegacyModes { () throws -> Void in
-        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+        #if !PLATFORM_LACKS_FOUNDATION_PROCESS
           let longCommand = [
             "git", "ls\u{2D}remote", "\u{2D}\u{2D}tags", "https://github.com/realm/jazzy",
           ]
@@ -58,8 +57,7 @@ class RegressionTests: TestCase {
 
     // #workaround(Swift 5.3.1, Emulator lacks Git.)
     #if !os(Android)
-      // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-      #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+      #if !PLATFORM_LACKS_FOUNDATION_PROCESS
         XCTAssertNotNil(
           ExternalProcess(
             searching: [],

@@ -26,7 +26,7 @@ class APITests: TestCase {
   func testExternalProcess() {
 
     forAllLegacyModes {
-      #if !os(WASI)  // #workaround(Swift 5.3.2, FileManager unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         XCTAssertNil(
           ExternalProcess(
             searching: [
@@ -40,7 +40,7 @@ class APITests: TestCase {
           "Failed to reject non‐executables."
         )
       #endif
-      #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+      #if !PLATFORM_LACKS_SWIFT_COMPILER
         // #workaround(workspace version 0.35.3, Emulator has no Swift.)
         #if !os(Android)
           XCTAssertEqual(
@@ -74,8 +74,7 @@ class APITests: TestCase {
   }
 
   func testExternalProcessError() {
-    // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-    #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+    #if !PLATFORM_LACKS_FOUNDATION_PROCESS
       forAllLegacyModes {
         switch ExternalProcess(at: URL(fileURLWithPath: "/no/such/process")).run([]) {
         case .failure(let error):
@@ -101,8 +100,7 @@ class APITests: TestCase {
         #else
           directory = nil
         #endif
-        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+        #if !PLATFORM_LACKS_FOUNDATION_PROCESS
           _ = try Shell.default.run(command: ["ls"], in: directory).get()
         #endif
         let printWorkingDirectory: String
@@ -111,8 +109,7 @@ class APITests: TestCase {
         #else
           printWorkingDirectory = "pwd"
         #endif
-        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+        #if !PLATFORM_LACKS_FOUNDATION_PROCESS
           _ = try Shell.default.run(
             command: [printWorkingDirectory],
             in: URL(fileURLWithPath: "/"),
@@ -121,14 +118,12 @@ class APITests: TestCase {
         #endif
 
         let message = "Hello, world!"
-        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+        #if !PLATFORM_LACKS_FOUNDATION_PROCESS
           XCTAssertEqual(try Shell.default.run(command: ["echo", message]).get(), message)
         #endif
 
         let nonexistentCommand = "no‐such‐command"
-        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+        #if !PLATFORM_LACKS_FOUNDATION_PROCESS
           let result = Shell.default.run(command: [nonexistentCommand])
           switch result {
           case .success(let output):
@@ -147,8 +142,7 @@ class APITests: TestCase {
         #endif
 
         #if !os(Windows)  // echo’s exemptional quoting behaviour undermines the test.
-          // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-          #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+          #if !PLATFORM_LACKS_FOUNDATION_PROCESS
             let metacharacters = "(...)"
             XCTAssertEqual(
               try Shell.default.run(command: ["echo", Shell.quote(metacharacters)]).get(),
@@ -164,8 +158,7 @@ class APITests: TestCase {
         #endif
 
         _ = "\(Shell.default)"
-        // #workaround(Swift 5.3.2, Process unavailable on WASI.)
-        #if !(os(WASI) || os(tvOS) || os(iOS) || os(watchOS))
+        #if !PLATFORM_LACKS_FOUNDATION_PROCESS
           switch (Shell.default.wrappedInstance as! ExternalProcess).run(["/c", "..."]) {
           case .failure(let error):
             // Expected.

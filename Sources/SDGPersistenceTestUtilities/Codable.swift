@@ -52,14 +52,14 @@ public func testCodableConformance<T>(
       .replacingMatches(for: "<", with: "⟨")
       .replacingMatches(for: ">", with: "⟩")
   )
-  #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+  #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
     try? FileManager.default.move(deprecatedDirectory, to: specificationsDirectory)
     try? FileManager.default.createDirectory(at: specificationsDirectory)
   #endif
 
   var specifications: Set<String> = []
   do {
-    #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       for specificationURL in try FileManager.default.contents(
         ofDirectory: specificationsDirectory
       ) where specificationURL.pathExtension == "txt" {
@@ -117,7 +117,7 @@ public func testCodableConformance<T>(
     if newSpecification ∉ specifications {
       // @exempt(from: tests)
       let now = CalendarDate.gregorianNow()
-      #if !os(WASI)  // #workaround(Swift 5.3.1, FileManager unavailable.)
+      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         try newSpecification.save(
           to: specificationsDirectory.appendingPathComponent("\(now.dateInISOFormat()).txt")
         )

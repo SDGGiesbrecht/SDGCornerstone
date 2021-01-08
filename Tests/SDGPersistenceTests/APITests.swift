@@ -39,8 +39,7 @@ class APITests: TestCase {
   }
 
   func testFileManager() throws {
-    // #workaround(Swift 5.3.1, FileManager unavailable.)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       let destination = FileManager.default.url(in: .applicationSupport, at: "Subdirectory")
       try FileManager.default
         .withTemporaryDirectory(appropriateFor: destination) { temporaryDirectory in
@@ -175,8 +174,7 @@ class APITests: TestCase {
     #if os(macOS)
       let testDomainExternalName = testDomain + ".debug"
     #endif
-    // #workaround(Swift 5.3.2, UserDefaults unavailable.)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS
       let preferences = PreferenceSet.preferences(for: testDomain)
 
       preferences[testKey].value.set(to: true)
@@ -255,8 +253,7 @@ class APITests: TestCase {
       let specifications = testSpecificationDirectory().appendingPathComponent("Specification")
 
       let new = specifications.appendingPathComponent("New.txt")
-      // #workaround(Swift 5.3.1, FileManager unavailable.)
-      #if !os(WASI)
+      #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
         try? FileManager.default.removeItem(at: new)
         compare("New!", against: new, overwriteSpecificationInsteadOfFailing: false)
         try? FileManager.default.removeItem(at: new)
@@ -304,8 +301,7 @@ class APITests: TestCase {
       usersPath = "/Users"
       johnDoePath = "/Users/John Doe"
     #endif
-    // #workaround(Swift 5.3.2, “Unexpectedly found nil while unwrapping an Optional value” inside init(fileURLWithPath:).)
-    #if !os(WASI)
+    #if !PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH
       let root = URL(fileURLWithPath: rootPath)
       let users = URL(fileURLWithPath: usersPath)
       let johnDoe = URL(fileURLWithPath: johnDoePath)
