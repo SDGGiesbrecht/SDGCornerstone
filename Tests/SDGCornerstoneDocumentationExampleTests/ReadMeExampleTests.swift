@@ -131,7 +131,7 @@ class ReadMeExampleTests: TestCase {
 
         // ••••••• Shell Commands •••••••
 
-        #if !(os(tvOS) || os(iOS) || os(watchOS))
+        #if !PLATFORM_LACKS_FOUNDATION_PROCESS
           XCTAssertEqual(
             try? Shell.default.run(command: ["echo", "Hello, world!"]).get(),
             "Hello, world!"
