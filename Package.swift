@@ -150,19 +150,12 @@ import PackageDescription
 /// Some platforms lack certain features. The compilation conditions which appear throughout the documentation are defined as follows:
 ///
 /// ```swift
-/// .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-/// .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
-/// .define("PLATFORM_LACKS_SWIFT_COMPILER", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
 /// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
 /// .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
 /// ```
@@ -758,36 +751,38 @@ for target in package.targets {
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
     // #workaround(workspace 0.36.0, Bug prevents centralization of windows conditions.)
-    // #workaround(Swift 5.3.2, Web lacks Dispatch.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.DateFormatter.dateFormat.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.FileManager.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.Process.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.ProcessInfo.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.RunLoop.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.UserDefaults.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.PropertyListEncoder.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.Thread.)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.TimeZone.init(identifier:).)
-    // #workaround(Swift 5.3.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
     // #workaround(Swift 5.3.2, macOS lacks Swift.Float16.)
     // #workaround(Swift 5.3.2, watchOS lacks XCTest.)
     // @example(conditions)
-    .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
-    .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_FILE_MANAGER", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_FOUNDATION_PROCESS_INFO", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
-    .define("PLATFORM_LACKS_SWIFT_COMPILER", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
     // @endExample
+
+    // Internal‐only:
+    .define("APPLE_PLATFORM", .when(platforms: [.macOS, .tvOS, .iOS, .watchOS])),
+    // #workaround(Swift 5.3.2, Web lacks Dispatch.)
+    .define("PLATFORM_LACKS_DISPATCH", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks Foundation.DateFormatter.dateFormat.)
+    .define("PLATFORM_LACKS_FOUNDATION_DATE_FORMATTER_DATE_FORMAT", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks Foundation.Thread.)
+    .define("PLATFORM_LACKS_FOUNDATION_THREAD", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks Foundation.TimeZone.init(identifier:).)
+    .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
+    .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_SWIFT_COMPILER", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
   ])
 }
 
