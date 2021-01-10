@@ -133,7 +133,7 @@ class APITests: TestCase {
   }
 
   func testPerformanceTest() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       limit("Performance", to: 1) {}
     #endif
   }
@@ -267,7 +267,7 @@ class APITests: TestCase {
   }
 
   func testTuple() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       testComparableConformance(less: Tuple2((0, 1)), greater: Tuple2((1, 2)))
       testComparableConformance(less: Tuple3((0, 1, 2)), greater: Tuple3((1, 2, 3)))
       testComparableConformance(less: Tuple4((0, 1, 2, 3)), greater: Tuple4((1, 2, 3, 4)))

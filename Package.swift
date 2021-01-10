@@ -750,7 +750,7 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(workspace 0.36.0, Bug prevents centralization of windows conditions.)
+    // #workaround(workspace version 0.36.0, Bug prevents centralization of windows conditions.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.FileManager.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.Process.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.ProcessInfo.)
@@ -782,23 +782,25 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
     // #workaround(Swift 5.3.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
     .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Android emulator lacks Git.)
+    .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define("PLATFORM_LACKS_SWIFT_COMPILER", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
   ])
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_TVOS"] == "true" {
-  // #workaround(xcodebuild -version 12.2, Tool targets don’t work on tvOS.) @exempt(from: unicode)
+  // #workaround(xcodebuild -version 12.3, Tool targets don’t work on tvOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
 }
 if ProcessInfo.processInfo.environment["TARGETING_IOS"] == "true" {
-  // #workaround(xcodebuild -version 12.2, Tool targets don’t work on iOS.) @exempt(from: unicode)
+  // #workaround(xcodebuild -version 12.3, Tool targets don’t work on iOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
 }
 
 if ProcessInfo.processInfo.environment["TARGETING_WATCHOS"] == "true" {
-  // #workaround(xcodebuild -version 12.2, Test targets don’t work on watchOS.) @exempt(from: unicode)
+  // #workaround(xcodebuild -version 12.3, Test targets don’t work on watchOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.isTest })
-  // #workaround(xcodebuild -version 12.2, Tool targets don’t work on watchOS.) @exempt(from: unicode)
+  // #workaround(xcodebuild -version 12.3, Tool targets don’t work on watchOS.) @exempt(from: unicode)
   package.targets.removeAll(where: { $0.name.hasPrefix("generate") })
 }
 

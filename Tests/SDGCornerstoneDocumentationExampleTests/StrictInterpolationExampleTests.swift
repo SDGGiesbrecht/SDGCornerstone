@@ -20,7 +20,7 @@ import SDGXCTestUtilities
 class StrictInterpolationExampleTests: TestCase {
 
   func testStrictInterpolation() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       func getError() -> Any {
         return ""
       }

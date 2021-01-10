@@ -31,7 +31,7 @@ import SDGXCTestUtilities
 class MiscellaneousExampleTests: TestCase {
 
   func testAbsoluteValue() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(absoluteValue)
       let x = −1
       let y = |x|
@@ -42,7 +42,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testAlternatingBooleans() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(alternatingBooleans)
       var alternating = CyclicalNumberGenerator([
         Bool.falseRandomizerValue,
@@ -62,7 +62,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testApproximation() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(≈)
       XCTAssert(1 ÷ 3 ≈ 0.33333 ± 0.00001)
       // @endExample
@@ -83,7 +83,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testBackwardsSearchDifferences2() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(lastMatchBackwardsDifferences2)
       let collection = [0, 0, 1]
       let pattern = RepetitionPattern([0], count: 1..<Int.max, consumption: .lazy) + [1]
@@ -99,7 +99,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testDecreasing() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(decrease)
       func rollDie() -> Int {
         return Int.random(in: 1...6)
@@ -122,7 +122,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testDictionaryMutation() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(mutateValue)
       func rollDie() -> Int {
         return Int.random(in: 1...6)
@@ -153,7 +153,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testGregorianYear() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(gregorianYear)
       let adOne = GregorianYear(1)
       let oneBC = GregorianYear(−1)
@@ -176,7 +176,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testIncreasing() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(increase)
       func rollDie() -> Int {
         return Int.random(in: 1...6)
@@ -199,7 +199,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testIntegerLiterals() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       typealias Integer = SDGPrecisionMathematics.Integer
 
       // @example(integerLiterals)
@@ -218,7 +218,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testNestingLevel() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(nestingLevel)
       let equation = "2(3x − (y + 4)) = z"
       let nestingLevel = equation.scalars.firstNestingLevel(
@@ -283,7 +283,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testSetSwitch() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(setSwitch)
       switch 5 {
       case IntensionalSet(where: { $0.isEven }):
@@ -299,7 +299,7 @@ class MiscellaneousExampleTests: TestCase {
   }
 
   func testWholeNumberLiterals() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       // @example(wholeNumberLiterals)
       let million: WholeNumber = 1_000_000
       let decillion: WholeNumber = "1 000 000 000 000 000 000 000 000 000 000 000"

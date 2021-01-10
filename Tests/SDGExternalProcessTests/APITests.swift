@@ -41,22 +41,19 @@ class APITests: TestCase {
         )
       #endif
       #if !PLATFORM_LACKS_SWIFT_COMPILER
-        // #workaround(workspace version 0.35.3, Emulator has no Swift.)
-        #if !os(Android)
-          XCTAssertEqual(
-            ExternalProcess(
-              searching: [
-                "/no/such/file",
-                "/tmp",  // Directory
-                "/.file",  // Not executable
-              ].map({ URL(fileURLWithPath: $0) }),
-              commandName: "swift",
-              validate: { _ in true }
-            )?.executable.deletingPathExtension().lastPathComponent,
-            "swift",
-            "Failed to find with “which” (or “where” on Windows)."
-          )
-        #endif
+        XCTAssertEqual(
+          ExternalProcess(
+            searching: [
+              "/no/such/file",
+              "/tmp",  // Directory
+              "/.file",  // Not executable
+            ].map({ URL(fileURLWithPath: $0) }),
+            commandName: "swift",
+            validate: { _ in true }
+          )?.executable.deletingPathExtension().lastPathComponent,
+          "swift",
+          "Failed to find with “which” (or “where” on Windows)."
+        )
       #endif
       XCTAssertNil(
         ExternalProcess(
@@ -91,7 +88,7 @@ class APITests: TestCase {
   }
 
   func testShell() throws {
-    // #workaround(Swift 5.3.1, Shell misbehaves. See RegressionTests.testCMDWorks.)
+    // #workaround(Swift 5.3.2, Shell misbehaves. See RegressionTests.testCMDWorks.)
     #if !os(Windows)
       try forAllLegacyModes { () throws -> Void in
         let directory: URL?

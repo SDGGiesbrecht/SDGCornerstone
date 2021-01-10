@@ -45,5 +45,5 @@ configuration.documentation.api.ignoredDependencies = [
   "XCTest",
 ]
 
-// #workaround(workspace version 0.35.3, False positives.)
+// #workaround(workspace version 0.36.0, False positives.)
 configuration.proofreading.swiftFormatConfiguration?.rules["UseLetInEveryBoundCaseVariable"] = false
