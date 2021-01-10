@@ -784,7 +784,10 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
     // #workaround(Swift 5.3.2, Android emulator lacks Git.)
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
-    .define("PLATFORM_LACKS_SWIFT_COMPILER", .when(platforms: [.wasi, .tvOS, .iOS, .watchOS])),
+    .define(
+      "PLATFORM_LACKS_SWIFT_COMPILER",
+      .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])
+    ),
   ])
 }
 
