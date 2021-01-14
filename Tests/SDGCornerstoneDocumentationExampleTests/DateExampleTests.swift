@@ -68,7 +68,7 @@ private struct DaysIntoMillennium: DateDefinition {
 class DateExampleTests: TestCase {
 
   func testCustomDate() {
-    #if !os(Windows)  // #workaround(Swift 5.3.1, Segmentation fault.)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       DateExampleTests.testCustomDate()
     #endif
   }
