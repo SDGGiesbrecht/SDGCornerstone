@@ -320,20 +320,23 @@ class APITests: TestCase {
 
   func testXMLEncoder() throws {
     let specifications = testSpecificationDirectory().appendingPathComponent("Codable XML")
-    try {
-      #warning("Temporary")
-      let encoder = JSONEncoder()
-      let json: Data = try encoder.encode("string")
-      let source = try StrictString(file: json, origin: nil)
-    }()
 
-    let encoder = XMLEncoder()
-    let xml: Data = try encoder.encode("string")
-    let source = try StrictString(file: xml, origin: nil)
-    compare(
-      String(source),
-      against: specifications.appendingPathComponent("String.txt"),
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    func testXML<Value: Encodable>(
+      of value: Value,
+      specification: StrictString,
+      file: StaticString = #filePath,
+      line: UInt = #line
+    ) throws {
+      let encoder = XMLEncoder()
+      let xml: Data = try encoder.encode(value)
+      let source = try StrictString(file: xml, origin: nil)
+      compare(
+        String(source),
+        against: specifications.appendingPathComponent("\(specification).txt"),
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    }
+
+    try testXML(of: "string", specification: "String")
   }
 }
