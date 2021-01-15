@@ -377,6 +377,7 @@ extension SDGPersistenceTests.APITests {
       ("testPreferences", testPreferences),
       ("testSpecification", testSpecification),
       ("testURL", testURL),
+      ("testXMLEncoder", testXMLEncoder),
     ])
   ]
 }
