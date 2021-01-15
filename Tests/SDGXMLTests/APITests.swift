@@ -59,5 +59,10 @@ class APITests: TestCase {
       specification: "Dictionary",
       overwriteSpecificationInsteadOfFailing: false
     )
+    try testXML(
+      of: ["A", "B", "C"],
+      specification: "Dictionary",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 }

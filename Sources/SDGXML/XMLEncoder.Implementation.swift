@@ -58,8 +58,8 @@ extension XMLEncoder {
     }
 
     internal func unkeyedContainer() -> UnkeyedEncodingContainer {
-      #warning("Not implemented yet.")
-      fatalError()
+      partialNodes.append(XMLNode())
+      return UnkeyedContainer(self)
     }
 
     internal func singleValueContainer() -> SingleValueEncodingContainer {
