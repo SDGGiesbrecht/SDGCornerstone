@@ -49,6 +49,7 @@ extension XMLEncoder {
 
     internal func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
     where Key: CodingKey {
+      partialNodes.append(XMLNode())
       return KeyedEncodingContainer(KeyedContainer(self))
     }
 
