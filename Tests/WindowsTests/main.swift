@@ -31,6 +31,7 @@ import XCTest
 @testable import SDGRandomizationTests
 @testable import SDGTextTests
 @testable import SDGVersioningTests
+@testable import SDGXMLTests
 
 extension SDGBinaryDataTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
@@ -377,7 +378,6 @@ extension SDGPersistenceTests.APITests {
       ("testPreferences", testPreferences),
       ("testSpecification", testSpecification),
       ("testURL", testURL),
-      ("testXMLEncoder", testXMLEncoder),
     ])
   ]
 }
@@ -490,6 +490,14 @@ extension SDGVersioningTests.RegressionTests {
   ]
 }
 
+extension SDGXMLTests.APITests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testXMLEncoder", testXMLEncoder)
+    ])
+  ]
+}
+
 var tests = [XCTestCaseEntry]()
 tests += SDGBinaryDataTests.APITests.windowsTests
 tests += SDGCalendarTests.APITests.windowsTests
@@ -524,5 +532,6 @@ tests += SDGTextTests.InternalTests.windowsTests
 tests += SDGTextTests.RegressionTests.windowsTests
 tests += SDGVersioningTests.APITests.windowsTests
 tests += SDGVersioningTests.RegressionTests.windowsTests
+tests += SDGXMLTests.APITests.windowsTests
 
 XCTMain(tests)

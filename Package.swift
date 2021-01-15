@@ -250,6 +250,10 @@ let package = Package(
     /// Utilities for working with semantic versions.
     .library(name: "SDGVersioning", targets: ["SDGVersioning"]),
 
+    // #documentation(SDGXML)
+    /// XML encoding.
+    .library(name: "SDGXML", targets: ["SDGXML"]),
+
     // #documentation(SDGTesting)
     /// Miscellaneous test utilities.
     .library(name: "SDGTesting", targets: ["SDGTesting"]),
@@ -516,6 +520,16 @@ let package = Package(
       ]
     ),
 
+    // @documentation(SDGXML)
+    /// XML encoding.
+    .target(
+      name: "SDGXML",
+      dependencies: [
+        "SDGText",
+        "SDGPersistence",
+      ]
+    ),
+
     // @documentation(SDGTesting)
     /// Miscellaneous test utilities.
     .target(
@@ -722,6 +736,14 @@ let package = Package(
         "SDGVersioning", "SDGTesting", "SDGXCTestUtilities",
         "SDGCornerstoneLocalizations",
         "SDGLocalizationTestUtilities",
+      ]
+    ),
+    .testTarget(
+      name: "SDGXMLTests",
+      dependencies: [
+        "SDGXML", "SDGTesting", "SDGXCTestUtilities",
+        "SDGText",
+        "SDGPersistenceTestUtilities",
       ]
     ),
     .testTarget(

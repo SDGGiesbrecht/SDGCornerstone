@@ -317,42 +317,4 @@ class APITests: TestCase {
       XCTAssertEqual(johnDoe.path(relativeTo: users), "John Doe")
     #endif
   }
-
-  func testXMLEncoder() throws {
-    let specifications = testSpecificationDirectory().appendingPathComponent("Codable XML")
-
-    func testXML<Value: Encodable>(
-      of value: Value,
-      specification: StrictString,
-      overwriteSpecificationInsteadOfFailing: Bool,
-      file: StaticString = #filePath,
-      line: UInt = #line
-    ) throws {
-      let encoder = XMLEncoder()
-      let xml: Data = try encoder.encode(value)
-      let source = try StrictString(file: xml, origin: nil)
-      compare(
-        String(source),
-        against: specifications.appendingPathComponent("\(specification).txt"),
-        overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
-        file: file,
-        line: line
-      )
-    }
-
-    try testXML(
-      of: "string",
-      specification: "String",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    try testXML(
-      of: [
-        "key": "value",
-        "Schlüssel": "Wert",
-        "clef": "valeur",
-      ],
-      specification: "Dictionary",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-  }
 }

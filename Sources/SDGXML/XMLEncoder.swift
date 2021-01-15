@@ -14,6 +14,9 @@
 
 import Foundation
 
+import SDGText
+import SDGPersistence
+
 /// An encoder which converts `Encodable` values into XML.
 public class XMLEncoder {
 
