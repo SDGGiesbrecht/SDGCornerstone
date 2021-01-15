@@ -14,17 +14,30 @@
 
 import SDGText
 
-internal enum XMLNode {
+internal struct XMLNode {
 
-  case characterData(StrictString)
+  // MARK: - Initialization
+
+  internal init(characterData: StrictString? = nil) {
+    self.characterData = characterData
+  }
+
+  private var characterData: StrictString?
+  internal var children: [(StrictString, XMLNode)] = []
 
   // MARK: - Source
 
   internal func source() -> StrictString {
-    switch self {
-    case .characterData(let text):
-      #warning("Probably need to escape.")
-      return text
+    var result: StrictString = ""
+    if let characterData = self.characterData {
+      #warning("Probably needs escaping.")
+      result.append(contentsOf: characterData)
     }
+    for child in children {
+      let name = child.0
+      let contents = child.1
+      result.append(contentsOf: "<\(name)>\(contents.source())</\(name)")
+    }
+    return result
   }
 }

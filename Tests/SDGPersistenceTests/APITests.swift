@@ -324,6 +324,7 @@ class APITests: TestCase {
     func testXML<Value: Encodable>(
       of value: Value,
       specification: StrictString,
+      overwriteSpecificationInsteadOfFailing: Bool,
       file: StaticString = #filePath,
       line: UInt = #line
     ) throws {
@@ -333,10 +334,25 @@ class APITests: TestCase {
       compare(
         String(source),
         against: specifications.appendingPathComponent("\(specification).txt"),
-        overwriteSpecificationInsteadOfFailing: false
+        overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
+        file: file,
+        line: line
       )
     }
 
-    try testXML(of: "string", specification: "String")
+    try testXML(
+      of: "string",
+      specification: "String",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+    try testXML(
+      of: [
+        "key": "value",
+        "Schlüssel": "Wert",
+        "clef": "valeur",
+      ],
+      specification: "Dictionary",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 }

@@ -28,7 +28,7 @@ extension XMLEncoder {
     // MARK: - Encoding
 
     internal func box(_ string: StrictString) -> XMLNode {
-      return .characterData(string)
+      return XMLNode(characterData: string)
     }
     internal func box(_ string: String) -> XMLNode {
       return box(StrictString(string))
@@ -36,7 +36,7 @@ extension XMLEncoder {
 
     internal func box<Value: Encodable>(_ value: Value) throws -> XMLNode {
       try value.encode(to: self)
-      return partialNodes.popLast() ?? .characterData("")
+      return partialNodes.popLast() ?? XMLNode()
     }
 
     // MARK: - Encoder
@@ -49,8 +49,7 @@ extension XMLEncoder {
 
     internal func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
     where Key: CodingKey {
-      #warning("Not implemented yet.")
-      fatalError()
+      return KeyedEncodingContainer(KeyedContainer(self))
     }
 
     internal func unkeyedContainer() -> UnkeyedEncodingContainer {
@@ -64,81 +63,81 @@ extension XMLEncoder {
 
     // MARK: - SingleValueEncodingContainer
 
-    func encodeNil() throws {
+    internal func encodeNil() throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: Bool) throws {
+    internal func encode(_ value: Bool) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: String) throws {
+    internal func encode(_ value: String) throws {
       partialNodes.append(box(value))
     }
 
-    func encode(_ value: Double) throws {
+    internal func encode(_ value: Double) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: Float) throws {
+    internal func encode(_ value: Float) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: Int) throws {
+    internal func encode(_ value: Int) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: Int8) throws {
+    internal func encode(_ value: Int8) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: Int16) throws {
+    internal func encode(_ value: Int16) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: Int32) throws {
+    internal func encode(_ value: Int32) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: Int64) throws {
+    internal func encode(_ value: Int64) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: UInt) throws {
+    internal func encode(_ value: UInt) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: UInt8) throws {
+    internal func encode(_ value: UInt8) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: UInt16) throws {
+    internal func encode(_ value: UInt16) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: UInt32) throws {
+    internal func encode(_ value: UInt32) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode(_ value: UInt64) throws {
+    internal func encode(_ value: UInt64) throws {
       #warning("Not implemented yet.")
       fatalError()
     }
 
-    func encode<T>(_ value: T) throws where T: Encodable {
+    internal func encode<T>(_ value: T) throws where T: Encodable {
       #warning("Not implemented yet.")
       fatalError()
     }
