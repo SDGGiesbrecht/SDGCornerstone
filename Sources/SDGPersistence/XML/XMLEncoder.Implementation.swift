@@ -36,7 +36,11 @@ extension XMLEncoder {
 
     internal func box<Value: Encodable>(_ value: Value) throws -> XMLNode {
       try value.encode(to: self)
-      return partialNodes.popLast() ?? XMLNode()
+      var node = partialNodes.popLast() ?? XMLNode()
+      if value is [String: Any] {  // To be deteriministic.
+        node.sortKeys = true
+      }
+      return node
     }
 
     // MARK: - Encoder

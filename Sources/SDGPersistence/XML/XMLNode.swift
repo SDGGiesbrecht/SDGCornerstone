@@ -24,6 +24,7 @@ internal struct XMLNode {
 
   private var characterData: StrictString?
   internal var children: [(StrictString, XMLNode)] = []
+  internal var sortKeys = false
 
   // MARK: - Source
 
@@ -33,10 +34,15 @@ internal struct XMLNode {
       #warning("Probably needs escaping.")
       result.append(contentsOf: characterData)
     }
+    var children = self.children
+    if sortKeys {
+      children.sort(by: { $0.0 < $1.0 })
+    }
     for child in children {
+      #warning("Probably needs escaping.")
       let name = child.0
       let contents = child.1
-      result.append(contentsOf: "<\(name)>\(contents.source())</\(name)")
+      result.append(contentsOf: "<\(name)>\(contents.source())</\(name)>\n")
     }
     return result
   }
