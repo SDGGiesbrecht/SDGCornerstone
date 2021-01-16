@@ -527,6 +527,8 @@ let package = Package(
       dependencies: [
         "SDGText",
         "SDGPersistence",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations",
       ]
     ),
 

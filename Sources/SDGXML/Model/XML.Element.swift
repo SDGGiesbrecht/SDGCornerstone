@@ -17,9 +17,52 @@ import SDGText
 extension XML {
 
   /// An XML element.
-  public struct Element {
+  public struct Element: Equatable {
 
-    // MARK: - Initailization
+    // MARK: - Static Methods
+
+    /// Parses a single XML element from its source.
+    ///
+    /// - Parameters:
+    ///   - source: The source of the XML element.
+    public static func parse<Source>(source: Source) -> Result<
+      XML.Element, XML.Element.ParsingError
+    >
+    where Source: Collection, Source.Element == Unicode.Scalar {
+
+      guard source.first == "<" else {
+        return .failure(.missingOpeningTag)
+      }
+      var processing = source.dropFirst()
+
+      guard let nameEnd = processing.firstIndex(of: ">") else {
+        return .failure(.missingClosingGreaterThanSign(unterminatedTag: StrictString(source)))
+      }
+      let name = StrictString(processing[..<nameEnd])
+      processing = processing[nameEnd...].dropFirst()
+
+      while let nextTag = processing.firstIndex(of: "<") {
+        var tag = processing[nextTag...]
+        if tag.dropFirst().first == "/" {  // closing tag
+          guard let end = tag.firstIndex(of: ">") else {
+            return .failure(.missingClosingGreaterThanSign(unterminatedTag: StrictString(tag)))
+          }
+          tag = tag[...end]
+          let endName = StrictString(tag.dropFirst(2).dropLast())
+          guard endName == name else {
+            return .failure(.mismatchedClosingTag(element: StrictString(tag)))
+          }
+          guard tag.endIndex == processing.endIndex else {
+            return .failure(.trailingText(text: StrictString(processing[tag.endIndex...])))
+          }
+          return .success(Element(escapedName: name))
+        }
+      }
+
+      return .failure(.missingClosingTag(unterminatedElement: StrictString(source)))
+    }
+
+    // MARK: - Initialization
 
     /// Creates an element with a particular name.
     ///
