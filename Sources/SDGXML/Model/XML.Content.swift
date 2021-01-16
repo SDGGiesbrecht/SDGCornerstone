@@ -34,6 +34,18 @@ extension XML {
     /// Character data.
     case characterData(XML.CharacterData)
 
+    // MARK: - Source
+
+    /// The source of the content.
+    public func source() -> StrictString {
+      switch self {
+      case .children(let children):
+        return children.lazy.map({ $0.source() }).joined()
+      case .characterData(let text):
+        return text.escapedText
+      }
+    }
+
     // MARK: - ExpressibleByStringLiteral
 
     public init(stringLiteral value: String) {

@@ -112,7 +112,7 @@ extension XML {
 
     /// The source of the element.
     public func source() -> StrictString {
-      return "<\(escapedName)></\(escapedName)>"
+      return "<\(escapedName)>\(content.source())</\(escapedName)>"
     }
   }
 }
