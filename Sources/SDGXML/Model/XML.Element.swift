@@ -72,13 +72,19 @@ extension XML {
           guard endName == name else {
             return .failure(.mismatchedClosingTag(element: StrictString(tag)))
           }
+          let content: XML.Content
+          if children.isEmpty {
+            content = .characterData(
+              XML.CharacterData(escapedText: StrictString(source[contentStart..<nextTag]))
+            )
+          } else {
+            content = .children(children)
+          }
           return .success(
             (
               element: Element(
                 escapedName: name,
-                content: .characterData(
-                  XML.CharacterData(escapedText: StrictString(source[contentStart..<nextTag]))
-                )
+                content: content
               ),
               remainder: source[tag.endIndex...]
             )
