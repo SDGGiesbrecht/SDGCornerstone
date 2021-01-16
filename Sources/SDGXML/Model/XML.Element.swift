@@ -39,6 +39,7 @@ extension XML {
         return .failure(.missingClosingGreaterThanSign(unterminatedTag: StrictString(source)))
       }
       let name = StrictString(processing[..<nameEnd])
+      let contentStart = processing.index(after: nameEnd)
       processing = processing[nameEnd...].dropFirst()
 
       while let nextTag = processing.firstIndex(of: "<") {
@@ -55,7 +56,14 @@ extension XML {
           guard tag.endIndex == processing.endIndex else {
             return .failure(.trailingText(text: StrictString(processing[tag.endIndex...])))
           }
-          return .success(Element(escapedName: name))
+          return .success(
+            Element(
+              escapedName: name,
+              content: .characterData(
+                XML.CharacterData(escapedText: StrictString(source[contentStart..<nextTag]))
+              )
+            )
+          )
         }
       }
 
