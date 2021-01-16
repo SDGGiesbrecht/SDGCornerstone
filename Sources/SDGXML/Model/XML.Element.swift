@@ -25,8 +25,26 @@ extension XML {
     ///
     /// - Parameters:
     ///   - source: The source of the XML element.
-    public static func parse<Source>(source: Source) -> Result<
-      XML.Element, XML.Element.ParsingError
+    public static func parse<Source>(
+      source: Source
+    ) -> Result<XML.Element, XML.Element.ParsingError>
+    where Source: Collection, Source.Element == Unicode.Scalar {
+      switch parseFirst(outOf: source) {
+      case .failure(let error):
+        return .failure(error)
+      case .success(let result):
+        guard result.remainder.isEmpty else {
+          return .failure(.trailingText(text: StrictString(result.remainder)))
+        }
+        return .success(result.element)
+      }
+    }
+
+    private static func parseFirst<Source>(
+      outOf source: Source
+    ) -> Result<
+      (element: XML.Element, remainder: Source.SubSequence),
+      XML.Element.ParsingError
     >
     where Source: Collection, Source.Element == Unicode.Scalar {
 
@@ -42,6 +60,7 @@ extension XML {
       let contentStart = processing.index(after: nameEnd)
       processing = processing[nameEnd...].dropFirst()
 
+      var children: [XML.Element] = []
       while let nextTag = processing.firstIndex(of: "<") {
         var tag = processing[nextTag...]
         if tag.dropFirst().first == "/" {  // closing tag
@@ -53,17 +72,25 @@ extension XML {
           guard endName == name else {
             return .failure(.mismatchedClosingTag(element: StrictString(tag)))
           }
-          guard tag.endIndex == processing.endIndex else {
-            return .failure(.trailingText(text: StrictString(processing[tag.endIndex...])))
-          }
           return .success(
-            Element(
-              escapedName: name,
-              content: .characterData(
-                XML.CharacterData(escapedText: StrictString(source[contentStart..<nextTag]))
-              )
+            (
+              element: Element(
+                escapedName: name,
+                content: .characterData(
+                  XML.CharacterData(escapedText: StrictString(source[contentStart..<nextTag]))
+                )
+              ),
+              remainder: source[tag.endIndex...]
             )
           )
+        } else {
+          switch Element.parseFirst(outOf: tag) {
+          case .failure(let error):
+            return .failure(error)
+          case .success(let result):
+            children.append(result.element)
+            processing = result.remainder
+          }
         }
       }
 
