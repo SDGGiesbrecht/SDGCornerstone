@@ -493,7 +493,8 @@ extension SDGVersioningTests.RegressionTests {
 extension SDGXMLTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
-      ("testXMLEncoder", testXMLEncoder)
+      ("testXMLEncoder", testXMLEncoder),
+      ("testXMLElement", testXMLElement),
     ])
   ]
 }

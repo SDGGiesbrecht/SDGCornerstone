@@ -68,4 +68,31 @@ class APITests: TestCase {
       )
     #endif
   }
+
+  func testXMLElement() throws {
+    let specifications = testSpecificationDirectory().appendingPathComponent("XML")
+
+    func testXML(
+      element: XML.Element,
+      specification: StrictString,
+      overwriteSpecificationInsteadOfFailing: Bool,
+      file: StaticString = #filePath,
+      line: UInt = #line
+    ) throws {
+      let source = element.source()
+      compare(
+        String(source),
+        against: specifications.appendingPathComponent("\(specification).txt"),
+        overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
+        file: file,
+        line: line
+      )
+    }
+
+    try testXML(
+      element: XML.Element(name: "empty"),
+      specification: "Empty",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
 }
