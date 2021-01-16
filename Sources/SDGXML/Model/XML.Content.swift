@@ -40,7 +40,7 @@ extension XML {
     public func source() -> StrictString {
       switch self {
       case .children(let children):
-        return children.lazy.map({ $0.source() }).joined()
+        return children.lazy.map({ $0.source() }).joined(separator: "\n")
       case .characterData(let text):
         return text.escapedText
       }

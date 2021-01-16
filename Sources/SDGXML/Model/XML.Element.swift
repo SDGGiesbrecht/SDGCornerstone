@@ -120,7 +120,18 @@ extension XML {
 
     /// The source of the element.
     public func source() -> StrictString {
-      return "<\(escapedName)>\(content.source())</\(escapedName)>"
+      let start: StrictString = "<\(escapedName)>"
+      let contentSource = content.source()
+      let end: StrictString = "</\(escapedName)>"
+      switch content {
+      case .children:
+        let indented = contentSource.lines
+          .lazy.map({ StrictString($0.line).prepending(contentsOf: "  ") })
+          .joined(separator: "\n")
+        return "\(start)\n\(indented)\n\(end)"
+      case .characterData:
+        return start + contentSource + end
+      }
     }
   }
 }
