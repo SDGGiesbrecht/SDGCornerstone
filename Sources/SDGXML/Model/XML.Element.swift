@@ -68,16 +68,18 @@ extension XML {
     ///
     /// - Parameters:
     ///   - name: The name.
-    public init(name: StrictString) {
+    public init(name: StrictString, content: XML.Content = .empty()) {
       self.name = name
+      self.content = content
     }
 
     /// Creates an element with a particular name that is already in escaped form.
     ///
     /// - Parameters:
     ///   - escapedName: The name in escaped form.
-    public init(escapedName: StrictString) {
+    public init(escapedName: StrictString, content: XML.Content = .empty()) {
       self.name = Element.unescape(escapedName)
+      self.content = content
     }
 
     // MARK: - Properties
@@ -102,6 +104,9 @@ extension XML {
       #warning("Not implemented yet.")
       return name
     }
+
+    /// The content of the element.
+    public var content: XML.Content
 
     // MARK: - Source
 

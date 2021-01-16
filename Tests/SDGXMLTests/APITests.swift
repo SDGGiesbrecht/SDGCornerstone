@@ -56,6 +56,11 @@ class APITests: TestCase {
       specification: "Empty",
       overwriteSpecificationInsteadOfFailing: false
     )
+    try testXML(
+      element: XML.Element(name: "text", content: "Hello, world!"),
+      specification: "Text",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLEncoder() throws {
