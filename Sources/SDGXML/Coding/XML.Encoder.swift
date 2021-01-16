@@ -21,22 +21,27 @@ extension XML {
 
   /// An encoder which converts `Encodable` values into XML.
   public class Encoder {
+    #warning("Is classhood necessary?")
 
-    // MARK: - Initialization
+    #warning("Temporarily disabled.")
+    #if false
 
-    /// Creates an XML encoder.
-    public init() {}
+      // MARK: - Initialization
 
-    // MARK: - Encoding
+      /// Creates an XML encoder.
+      public init() {}
 
-    /// Encodes a top‐level value as XML.
-    ///
-    /// - Parameters:
-    ///   - value: The value.
-    public func encode<Value: Encodable>(_ value: Value) throws -> Data {
-      let implementation = Implementation()
-      let root = try implementation.box(value)
-      return root.source().file
-    }
+      // MARK: - Encoding
+
+      /// Encodes a top‐level value as XML.
+      ///
+      /// - Parameters:
+      ///   - value: The value.
+      public func encode<Value: Encodable>(_ value: Value) throws -> Data {
+        let implementation = Implementation()
+        let root = try implementation.box(value)
+        return root.source().file
+      }
+    #endif
   }
 }

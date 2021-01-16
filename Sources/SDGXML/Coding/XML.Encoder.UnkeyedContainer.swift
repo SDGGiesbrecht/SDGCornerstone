@@ -14,124 +14,127 @@
 
 extension XML.Encoder {
 
-  internal struct UnkeyedContainer: UnkeyedEncodingContainer {
+  #warning("Temporarily disabled.")
+  #if false
+    internal struct UnkeyedContainer: UnkeyedEncodingContainer {
 
-    // MARK: - Initialization
+      // MARK: - Initialization
 
-    internal init(_ encoder: Implementation) {
-      self.encoder = encoder
+      internal init(_ encoder: Implementation) {
+        self.encoder = encoder
+      }
+
+      // MARK: - Properties
+
+      private let encoder: Implementation
+
+      // MARK: - UnkeyedEncodingContainer
+
+      internal var codingPath: [CodingKey] {
+        return encoder.codingPath
+      }
+
+      internal var count: Int {
+        return encoder.partialNodes.last?.children.count ?? 0
+      }
+
+      internal mutating func encodeNil() throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: Bool) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: String) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: Double) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: Float) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: Int) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: Int8) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: Int16) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: Int32) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: Int64) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: UInt) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: UInt8) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: UInt16) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: UInt32) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode(_ value: UInt64) throws {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func encode<T>(_ value: T) throws where T: Encodable {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func nestedContainer<NestedKey>(
+        keyedBy keyType: NestedKey.Type
+      ) -> KeyedEncodingContainer<NestedKey>
+      where NestedKey: CodingKey {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func nestedUnkeyedContainer() -> UnkeyedEncodingContainer {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
+
+      internal mutating func superEncoder() -> Encoder {
+        #warning("Not implemented yet.")
+        fatalError()
+      }
     }
-
-    // MARK: - Properties
-
-    private let encoder: Implementation
-
-    // MARK: - UnkeyedEncodingContainer
-
-    internal var codingPath: [CodingKey] {
-      return encoder.codingPath
-    }
-
-    internal var count: Int {
-      return encoder.partialNodes.last?.children.count ?? 0
-    }
-
-    internal mutating func encodeNil() throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: Bool) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: String) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: Double) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: Float) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: Int) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: Int8) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: Int16) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: Int32) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: Int64) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: UInt) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: UInt8) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: UInt16) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: UInt32) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode(_ value: UInt64) throws {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func encode<T>(_ value: T) throws where T: Encodable {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func nestedContainer<NestedKey>(
-      keyedBy keyType: NestedKey.Type
-    ) -> KeyedEncodingContainer<NestedKey>
-    where NestedKey: CodingKey {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func nestedUnkeyedContainer() -> UnkeyedEncodingContainer {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-
-    internal mutating func superEncoder() -> Encoder {
-      #warning("Not implemented yet.")
-      fatalError()
-    }
-  }
+  #endif
 }
