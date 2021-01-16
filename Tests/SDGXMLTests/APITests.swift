@@ -33,7 +33,7 @@ class APITests: TestCase {
       file: StaticString = #filePath,
       line: UInt = #line
     ) throws {
-      let encoder = XMLEncoder()
+      let encoder = XML.Encoder()
       let xml: Data = try encoder.encode(value)
       let source = try StrictString(file: xml, origin: nil)
       compare(

@@ -1,5 +1,5 @@
 /*
- XMLEncoder.UnkeyedContainer.swift
+ XML.Encoder.UnkeyedContainer.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,7 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension XMLEncoder {
+extension XML.Encoder {
 
   internal struct UnkeyedContainer: UnkeyedEncodingContainer {
 

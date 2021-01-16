@@ -1,5 +1,5 @@
 /*
- XMLEncoder.KeyedContainer.swift
+ XML.Encoder.KeyedContainer.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -14,7 +14,7 @@
 
 import SDGText
 
-extension XMLEncoder {
+extension XML.Encoder {
 
   internal struct KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
 

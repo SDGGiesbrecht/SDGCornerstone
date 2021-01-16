@@ -1,5 +1,5 @@
 /*
- XMLEncoder.Implementation.swift
+ XML.Encoder.Implementation.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -14,7 +14,7 @@
 
 import SDGText
 
-extension XMLEncoder {
+extension XML.Encoder {
 
   internal class Implementation: Encoder, SingleValueEncodingContainer {
 
@@ -27,16 +27,16 @@ extension XMLEncoder {
 
     // MARK: - Encoding
 
-    internal func box(_ string: StrictString) -> XMLNode {
-      return XMLNode(characterData: string)
+    internal func box(_ string: StrictString) -> XML.Node {
+      return XML.Node(characterData: string)
     }
-    internal func box(_ string: String) -> XMLNode {
+    internal func box(_ string: String) -> XML.Node {
       return box(StrictString(string))
     }
 
-    internal func box<Value: Encodable>(_ value: Value) throws -> XMLNode {
+    internal func box<Value: Encodable>(_ value: Value) throws -> XML.Node {
       try value.encode(to: self)
-      var node = partialNodes.popLast() ?? XMLNode()
+      var node = partialNodes.popLast() ?? XML.Node()
       if value is [String: Any] {  // To be deteriministic.
         node.sortKeys = true
       }
@@ -45,7 +45,7 @@ extension XMLEncoder {
 
     // MARK: - Encoder
 
-    internal var partialNodes: [XMLNode]
+    internal var partialNodes: [XML.Node]
     internal var codingPath: [CodingKey]
     internal var userInfo: [CodingUserInfoKey: Any] {
       return [:]
@@ -53,12 +53,12 @@ extension XMLEncoder {
 
     internal func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
     where Key: CodingKey {
-      partialNodes.append(XMLNode())
+      partialNodes.append(XML.Node())
       return KeyedEncodingContainer(KeyedContainer(self))
     }
 
     internal func unkeyedContainer() -> UnkeyedEncodingContainer {
-      partialNodes.append(XMLNode())
+      partialNodes.append(XML.Node())
       return UnkeyedContainer(self)
     }
 
