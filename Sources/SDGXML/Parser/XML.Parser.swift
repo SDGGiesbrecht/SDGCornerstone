@@ -92,9 +92,6 @@ extension XML {
     internal func parser(_ parser: XMLParser, foundCharacters string: String) {
       if let last = openElements.indices.last {
         openElements[last].content.append(.characterData(CharacterData(text: StrictString(string))))
-      } else {
-        #warning("Not implemented yet.")
-        print(#function, "(outside any element)")
       }
     }
 
