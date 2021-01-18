@@ -95,25 +95,6 @@ extension XML {
       }
     }
 
-    internal func parser(_ parser: XMLParser, foundIgnorableWhitespace whitespaceString: String) {
-      #warning("Not implemented yet.")
-      print(#function)
-    }
-
-    internal func parser(
-      _ parser: XMLParser,
-      foundProcessingInstructionWithTarget target: String,
-      data: String?
-    ) {
-      #warning("Not implemented yet.")
-      print(#function)
-    }
-
-    internal func parser(_ parser: XMLParser, foundComment comment: String) {
-      #warning("Not implemented yet.")
-      print(#function)
-    }
-
     internal func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
       #warning("Not implemented yet.")
       print(#function)
