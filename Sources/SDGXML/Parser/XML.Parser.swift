@@ -96,8 +96,12 @@ extension XML {
     }
 
     internal func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
-      #warning("Not implemented yet.")
-      print(#function)
+      do {
+        self.parser(parser, foundCharacters: try String(file: CDATABlock, origin: nil))
+      } catch {
+        self.error = error
+        self.parser.abortParsing()
+      }
     }
 
     internal func parser(

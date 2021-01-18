@@ -91,6 +91,10 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
     XCTAssertNil(try? XML.Element.parse(source: "<element>"))
+    XCTAssertEqual(
+      try XML.Element.parse(source: "<element><![CDATA[<xml>]]></element>"),
+      XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
+    )
   }
 
   func testXMLEncoder() throws {
