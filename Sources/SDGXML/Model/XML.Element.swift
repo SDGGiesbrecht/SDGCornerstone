@@ -20,18 +20,6 @@ extension XML {
   /// An XML element.
   public struct Element: Equatable {
 
-    // MARK: - Static Methods
-
-    /// Parses a single XML element from its source.
-    ///
-    /// - Parameters:
-    ///   - source: The source of the XML element.
-    public static func parse(source: StrictString) throws -> Element {
-      #warning("Switch to initializer if no specialized errors?")
-      let document = try XML.Document.parse(source: source)
-      return document.rootElement
-    }
-
     // MARK: - Initialization
 
     /// Creates an element with a particular name.
@@ -48,6 +36,15 @@ extension XML {
       self.name = name
       self.attributes = attributes
       self._content = Element.normalize(content: content)
+    }
+
+    /// Creates an element by parsing XML source.
+    ///
+    /// - Parameters:
+    ///   - source: The source of the XML element.
+    public init(source: StrictString) throws {
+      let document = try XML.Document(source: source)
+      self = document.rootElement
     }
 
     // MARK: - Properties

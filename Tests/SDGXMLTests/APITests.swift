@@ -41,7 +41,7 @@ class APITests: TestCase {
         file: file,
         line: line
       )
-      let parsed = try XML.Element.parse(source: source)
+      let parsed = try XML.Element(source: source)
       XCTAssertEqual(
         parsed,
         element,
@@ -90,9 +90,9 @@ class APITests: TestCase {
       specification: "Attributes",
       overwriteSpecificationInsteadOfFailing: false
     )
-    XCTAssertNil(try? XML.Element.parse(source: "<element>"))
+    XCTAssertNil(try? XML.Element(source: "<element>"))
     XCTAssertEqual(
-      try XML.Element.parse(source: "<element><![CDATA[<xml>]]></element>"),
+      try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
       XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
     )
   }
