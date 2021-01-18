@@ -89,11 +89,6 @@ extension XML {
       error = parseError
     }
 
-    internal func parser(_ parser: XMLParser, validationErrorOccurred validationError: Error) {
-      #warning("Not implemented yet.")
-      print(#function)
-    }
-
     internal func parser(_ parser: XMLParser, foundCharacters string: String) {
       if let last = openElements.indices.last {
         openElements[last].content.append(.characterData(CharacterData(text: StrictString(string))))
