@@ -99,7 +99,7 @@ class APITests: TestCase {
       element: XML.Element(
         name: "element",
         attributes: [
-          "attribute": "0 < 1",
+          "attribute": "0 < 1"
         ]
       ),
       specification: "Escaped Attribute",
