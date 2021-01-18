@@ -32,14 +32,6 @@ extension XML {
       self.text = text
     }
 
-    /// Creates character data from text that is already in escaped form.
-    ///
-    /// - Parameters:
-    ///   - escapedText: The text.
-    public init(escapedText: StrictString) {
-      self.text = CharacterData.unescape(escapedText)
-    }
-
     // MARK: - Properties
 
     /// The text of the character data.
@@ -50,9 +42,6 @@ extension XML {
       get {
         return CharacterData.escape(text)
       }
-      set {
-        text = CharacterData.unescape(newValue)
-      }
     }
     private static func escape(_ text: StrictString) -> StrictString {
       return text.mutatingMatches(
@@ -61,10 +50,6 @@ extension XML {
         let scalar: Unicode.Scalar = match.contents.first!
         return "&#x\(scalar.hexadecimalCode);"
       }
-    }
-    private static func unescape(_ text: StrictString) -> StrictString {
-      #warning("Not implemented yet.")
-      return text
     }
 
     // MARK: - ExpressibleByStringLiteral
