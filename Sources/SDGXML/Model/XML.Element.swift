@@ -25,82 +25,10 @@ extension XML {
     ///
     /// - Parameters:
     ///   - source: The source of the XML element.
-    public static func parse<Source>(
-      source: Source
-    ) -> Result<XML.Element, XML.Element.ParsingError>
-    where Source: Collection, Source.Element == Unicode.Scalar {
-      switch parseFirst(outOf: source) {
-      case .failure(let error):
-        return .failure(error)
-      case .success(let result):
-        guard result.remainder.isEmpty else {
-          return .failure(.trailingText(text: StrictString(result.remainder)))
-        }
-        return .success(result.element)
-      }
-    }
-
-    private static func parseFirst<Source>(
-      outOf source: Source
-    ) -> Result<
-      (element: XML.Element, remainder: Source.SubSequence),
-      XML.Element.ParsingError
-    >
-    where Source: Collection, Source.Element == Unicode.Scalar {
-
-      guard source.first == "<" else {
-        return .failure(.missingOpeningTag)
-      }
-      var processing = source.dropFirst()
-
-      guard let nameEnd = processing.firstIndex(of: ">") else {
-        return .failure(.missingClosingGreaterThanSign(unterminatedTag: StrictString(source)))
-      }
-      let name = StrictString(processing[..<nameEnd])
-      let contentStart = processing.index(after: nameEnd)
-      processing = processing[nameEnd...].dropFirst()
-
-      var children: [XML.Element] = []
-      while let nextTag = processing.firstIndex(of: "<") {
-        var tag = processing[nextTag...]
-        if tag.dropFirst().first == "/" {  // closing tag
-          guard let end = tag.firstIndex(of: ">") else {
-            return .failure(.missingClosingGreaterThanSign(unterminatedTag: StrictString(tag)))
-          }
-          tag = tag[...end]
-          let endName = StrictString(tag.dropFirst(2).dropLast())
-          guard endName == name else {
-            return .failure(.mismatchedClosingTag(element: StrictString(tag)))
-          }
-          let content: XML.Content
-          if children.isEmpty {
-            content = .characterData(
-              XML.CharacterData(escapedText: StrictString(source[contentStart..<nextTag]))
-            )
-          } else {
-            content = .children(children)
-          }
-          return .success(
-            (
-              element: Element(
-                escapedName: name,
-                content: content
-              ),
-              remainder: source[tag.endIndex...]
-            )
-          )
-        } else {
-          switch Element.parseFirst(outOf: tag) {
-          case .failure(let error):
-            return .failure(error)
-          case .success(let result):
-            children.append(result.element)
-            processing = result.remainder
-          }
-        }
-      }
-
-      return .failure(.missingClosingTag(unterminatedElement: StrictString(source)))
+    public static func parse(source: StrictString) throws -> Element {
+      _ = try XML.Document.parse(source: source)
+      #warning("Not implemented yet.")
+      fatalError()
     }
 
     // MARK: - Initialization
@@ -109,7 +37,8 @@ extension XML {
     ///
     /// - Parameters:
     ///   - name: The name.
-    public init(name: StrictString, content: XML.Content = .empty()) {
+    ///   - content: The content.
+    public init(name: StrictString, content: [XML.Content] = []) {
       self.name = name
       self.content = content
     }
@@ -118,7 +47,8 @@ extension XML {
     ///
     /// - Parameters:
     ///   - escapedName: The name in escaped form.
-    public init(escapedName: StrictString, content: XML.Content = .empty()) {
+    ///   - content: The content.
+    public init(escapedName: StrictString, content: [XML.Content] = []) {
       self.name = Element.unescape(escapedName)
       self.content = content
     }
@@ -147,24 +77,14 @@ extension XML {
     }
 
     /// The content of the element.
-    public var content: XML.Content
+    public var content: [XML.Content]
 
     // MARK: - Source
 
     /// The source of the element.
     public func source() -> StrictString {
-      let start: StrictString = "<\(escapedName)>"
-      let contentSource = content.source()
-      let end: StrictString = "</\(escapedName)>"
-      switch content {
-      case .children:
-        let indented = contentSource.lines
-          .lazy.map({ StrictString($0.line).prepending(contentsOf: "  ") })
-          .joined(separator: "\n")
-        return "\(start)\n\(indented)\n\(end)"
-      case .characterData:
-        return start + contentSource + end
-      }
+      let contentSource = StrictString(content.lazy.map({ $0.source() }).joined())
+      return "<\(escapedName)>\(contentSource)</\(escapedName)>"
     }
   }
 }

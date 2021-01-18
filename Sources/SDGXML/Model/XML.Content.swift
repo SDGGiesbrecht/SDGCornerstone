@@ -19,17 +19,10 @@ extension XML {
   /// The content of an XML element.
   public enum Content: Equatable, ExpressibleByStringLiteral {
 
-    // MARK: - Static Methods
-
-    /// Creates empty content.
-    public static func empty() -> Content {
-      return .characterData(XML.CharacterData(text: ""))
-    }
-
     // MARK: - Cases
 
-    /// Child elements.
-    case children([XML.Element])
+    /// An element.
+    case element(XML.Element)
 
     /// Character data.
     case characterData(XML.CharacterData)
@@ -39,8 +32,8 @@ extension XML {
     /// The source of the content.
     public func source() -> StrictString {
       switch self {
-      case .children(let children):
-        return children.lazy.map({ $0.source() }).joined(separator: "\n")
+      case .element(let element):
+        return element.source()
       case .characterData(let text):
         return text.escapedText
       }

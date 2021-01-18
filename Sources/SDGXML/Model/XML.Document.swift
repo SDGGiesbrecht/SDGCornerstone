@@ -12,14 +12,18 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import Foundation
-#if canImport(FoundationXML)
-  import FoundationXML
-#endif
+import SDGText
 
 extension XML {
 
   /// An XML document.
   public struct Document {
+
+    // MARK: - Static Methods
+
+    /// Parses a document from its XML source.
+    public static func parse(source: StrictString) throws -> XML.Document {
+      return try XML.Parser.parse(source)
+    }
   }
 }

@@ -41,7 +41,7 @@ class APITests: TestCase {
         file: file,
         line: line
       )
-      let parsed = try XML.Element.parse(source: source).get()
+      let parsed = try XML.Element.parse(source: source)
       XCTAssertEqual(
         parsed,
         element,
@@ -57,17 +57,17 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
     try testXML(
-      element: XML.Element(name: "text", content: "Hello, world!"),
+      element: XML.Element(name: "text", content: ["Hello, world!"]),
       specification: "Text",
       overwriteSpecificationInsteadOfFailing: false
     )
     try testXML(
       element: XML.Element(
         name: "parent",
-        content: .children([
-          XML.Element(name: "child"),
-          XML.Element(name: "child"),
-        ])
+        content: [
+          .element(XML.Element(name: "child")),
+          .element(XML.Element(name: "child")),
+        ]
       ),
       specification: "Nested",
       overwriteSpecificationInsteadOfFailing: false

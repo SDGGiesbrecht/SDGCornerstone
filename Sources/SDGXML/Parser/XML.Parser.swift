@@ -17,6 +17,7 @@ import Foundation
   import FoundationXML
 #endif
 
+import SDGText
 import SDGPersistence
 
 extension XML {
@@ -25,13 +26,13 @@ extension XML {
 
     // MARK: - Static Methods
 
-    internal static func parse(_ source: String) throws -> XML.Document {
+    internal static func parse(_ source: StrictString) throws -> XML.Document {
       return try Parser(source: source).parse()
     }
 
     // MARK: - Initialization
 
-    private init(source: String) {
+    private init(source: StrictString) {
       parser = Foundation.XMLParser(data: source.file)
       document = XML.Document()
       super.init()
@@ -41,7 +42,8 @@ extension XML {
     // MARK: - Properties
 
     private let parser: Foundation.XMLParser
-    private let document: XML.Document
+    private var document: XML.Document
+    private var openElements: [XML.Element] = []
     private var error: Error?
 
     // MARK: - Parsing
@@ -56,15 +58,9 @@ extension XML {
 
     // MARK: - XMLParserDelegate
 
-    internal func parserDidStartDocument(_ parser: XMLParser) {
-      #warning("Not implemented yet.")
-      print(#function)
-    }
-
-    internal func parserDidEndDocument(_ parser: XMLParser) {
-      #warning("Not implemented yet.")
-      print(#function)
-    }
+    // Not needed:
+    // parserDidStartDocument(_:)
+    // parserDidEndDocument(_:)
 
     internal func parser(
       _ parser: XMLParser,
@@ -73,8 +69,10 @@ extension XML {
       qualifiedName qName: String?,
       attributes attributeDict: [String: String] = [:]
     ) {
-      #warning("Not implemented yet.")
-      print(#function)
+      #warning("“namespaceURL” not implemented yet.")
+      #warning("“qualifiedName” not implemented yet.")
+      #warning("“attributes” not implemented yet.")
+      openElements.append(XML.Element(name: StrictString(elementName)))
     }
 
     internal func parser(
@@ -83,8 +81,10 @@ extension XML {
       namespaceURI: String?,
       qualifiedName qName: String?
     ) {
-      #warning("Not implemented yet.")
-      print(#function)
+      let complete = openElements.popLast()
+      if let parent = openElements.indices.last {
+        openElements[parent].content.append(.element(complete!))
+      }
     }
 
     internal func parser(
