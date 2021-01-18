@@ -16,58 +16,34 @@ import SDGText
 
 extension XML.Encoder {
 
-  #warning("Temporarily disabled.")
-  #if false
-    internal class Implementation: Encoder {
-      #warning("Is classhood necessary?")
+  internal class Implementation: Encoder {
 
-      // MARK: - Initailzation
+    // MARK: - Initailzation
 
-      internal init() {
-        codingPath = []
-        partialNodes = []
-      }
-
-      // MARK: - Encoding
-
-      internal func box(_ string: StrictString) -> XML.Element {
-        return XML.Node(characterData: string)
-      }
-      internal func box(_ string: String) -> XML.Element {
-        return box(StrictString(string))
-      }
-
-      internal func box<Value: Encodable>(_ value: Value) throws -> XML.Element {
-        try value.encode(to: self)
-        var node = partialNodes.popLast() ?? XML.Element()
-        if value is [String: Any] {  // To be deteriministic.
-          node.sortKeys = true
-        }
-        return node
-      }
-
-      // MARK: - Encoder
-
-      internal var partialNodes: [XML.Element]
-      internal var codingPath: [CodingKey]
-      internal var userInfo: [CodingUserInfoKey: Any] {
-        return [:]
-      }
-
-      internal func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
-      where Key: CodingKey {
-        partialNodes.append(XML.Element())
-        return KeyedEncodingContainer(KeyedContainer(self))
-      }
-
-      internal func unkeyedContainer() -> UnkeyedEncodingContainer {
-        partialNodes.append(XML.Element())
-        return UnkeyedContainer(self)
-      }
-
-      internal func singleValueContainer() -> SingleValueEncodingContainer {
-        return self
-      }
+    internal init(userInfo: [CodingUserInfoKey: Any]) {
+      codingPath = []
+      self.userInfo = userInfo
     }
-  #endif
+
+    // MARK: - Encoder
+
+    internal var codingPath: [CodingKey]
+    internal var userInfo: [CodingUserInfoKey: Any]
+
+    internal func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
+    where Key: CodingKey {
+      #warning("Not implemented yet.")
+      fatalError()
+    }
+
+    internal func unkeyedContainer() -> UnkeyedEncodingContainer {
+      #warning("Not implemented yet.")
+      fatalError()
+    }
+
+    internal func singleValueContainer() -> SingleValueEncodingContainer {
+      #warning("Not implemented yet.")
+      fatalError()
+    }
+  }
 }
