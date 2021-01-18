@@ -112,7 +112,7 @@ class APITests: TestCase {
     enum Keys: CodingKey {
       case a
     }
-    var x = XML.Encoder.SingleValueContainer(name: "placeholder", codingPath: [])
+    var x = XML.Encoder.UnkeyedContainer(name: "placeholder", codingPath: [])
     try x.encode(true)
     print(x.element.source())
     #warning("Temporarily disabled.")

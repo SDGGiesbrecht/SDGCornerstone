@@ -13,6 +13,7 @@
  */
 
 import SDGText
+import SDGLocalization
 
 extension XML.Encoder {
 
@@ -95,8 +96,14 @@ extension XML.Encoder {
     }
 
     internal mutating func encode(_ value: String) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      element.content.append(
+        .element(
+          XML.Element(
+            name: XML.sanitize(name: (count + 1).inDigits()),
+            content: [.characterData(XML.CharacterData(text: StrictString(value)))]
+          )
+        )
+      )
     }
     private mutating func encodeLosslessString<T>(_ value: T) throws
     where T: LosslessStringConvertible {
