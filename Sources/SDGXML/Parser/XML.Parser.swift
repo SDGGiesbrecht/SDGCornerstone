@@ -64,9 +64,9 @@ extension XML {
       qualifiedName qName: String?,
       attributes attributeDict: [String: String] = [:]
     ) {
-      var attributes: [StrictString: StrictString] = [:]
+      var attributes: [StrictString: AttributeValue] = [:]
       for (key, value) in attributeDict {
-        attributes[StrictString(key)] = StrictString(value)
+        attributes[StrictString(key)] = AttributeValue(text: StrictString(value))
       }
       openElements.append(XML.Element(name: StrictString(elementName), attributes: attributes))
     }

@@ -30,7 +30,7 @@ extension XML {
     ///   - content: The content.
     public init(
       name: StrictString,
-      attributes: [StrictString: StrictString] = [:],
+      attributes: [StrictString: AttributeValue] = [:],
       content: [XML.Content] = []
     ) {
       self.name = name
@@ -52,34 +52,8 @@ extension XML {
     /// The name of the element.
     public var name: StrictString
 
-    /// The name of the element with character escapes applied.
-    public var escapedName: StrictString {
-      get {
-        return Element.escape(name: name)
-      }
-    }
-    private static func escape(name: StrictString) -> StrictString {
-      #warning("Not implemented yet.")
-      return name
-    }
-
     /// The attributes of the element.
-    public var attributes: [StrictString: StrictString]
-
-    /// The attributes of the element with character escapes applied.
-    public var escapedAttributes: [StrictString: StrictString] {
-      get {
-        var result: [StrictString: StrictString] = [:]
-        for (key, value) in attributes {
-          result[Element.escape(name: key)] = Element.escape(attribute: value)
-        }
-        return result
-      }
-    }
-    private static func escape(attribute: StrictString) -> StrictString {
-      #warning("Not implemented yet.")
-      return attribute
-    }
+    public var attributes: [StrictString: AttributeValue]
 
     private var _content: [XML.Content]
     /// The content of the element.
@@ -111,16 +85,15 @@ extension XML {
 
     /// The source of the element.
     public func source() -> StrictString {
-      let escapedName = self.escapedName
       let attributeSource: StrictString =
-        escapedAttributes
+        attributes
         .sorted(by: { $0.0 < $1.0 })
-        .lazy.map({ " \($0.0)=\u{22}\($0.1)\u{22}" })
+        .lazy.map({ " \($0.0)=\u{22}\($0.1.escapedText)\u{22}" })
         .joined()
       let contentSource: StrictString = content
         .lazy.map({ $0.source() })
         .joined()
-      return "<\(escapedName)\(attributeSource)>\(contentSource)</\(escapedName)>"
+      return "<\(name)\(attributeSource)>\(contentSource)</\(name)>"
     }
   }
 }
