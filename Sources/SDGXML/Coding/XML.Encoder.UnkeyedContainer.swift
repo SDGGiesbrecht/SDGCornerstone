@@ -30,10 +30,10 @@ extension XML.Encoder {
     private let encoder: XML.Encoder.Implementation
     private var element: XML.Element {
       get {
-        encoder.element
+        encoder.currentElement
       }
       set {
-        encoder.element = newValue
+        encoder.currentElement = newValue
       }
     }
 

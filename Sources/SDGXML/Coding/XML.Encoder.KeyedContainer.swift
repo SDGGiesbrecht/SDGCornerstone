@@ -29,10 +29,10 @@ extension XML.Encoder {
     private let encoder: XML.Encoder.Implementation
     private var element: XML.Element {
       get {
-        encoder.element
+        encoder.currentElement
       }
       set {
-        encoder.element = newValue
+        encoder.currentElement = newValue
       }
     }
 
@@ -112,8 +112,14 @@ extension XML.Encoder {
     }
 
     internal mutating func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
-      #warning("Not implemented yet.")
-      fatalError()
+
+      encoder.codingPath.append(key)
+      defer { encoder.codingPath.removeLast() }
+
+      encoder.beginElement(named: key)
+      defer { encoder.endElement() }
+
+      try value.encode(to: encoder)
     }
 
     internal mutating func nestedContainer<NestedKey>(

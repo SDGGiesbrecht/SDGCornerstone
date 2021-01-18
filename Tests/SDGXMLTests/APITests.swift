@@ -142,12 +142,12 @@ class APITests: TestCase {
         "clef": "valeur",
       ],
       specification: "Dictionary",
-      overwriteSpecificationInsteadOfFailing: false
+      overwriteSpecificationInsteadOfFailing: true
     )
-    try testXML(
+    /*try testXML(
       of: ["A", "B", "C"],
       specification: "Dictionary",
       overwriteSpecificationInsteadOfFailing: false
-    )
+    )*/
   }
 }

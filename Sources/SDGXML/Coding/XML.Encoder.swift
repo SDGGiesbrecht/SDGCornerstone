@@ -44,11 +44,11 @@ extension XML {
     ///   - value: The value.
     public func encodeToSource<Value: Encodable>(_ value: Value) throws -> StrictString {
       let implementation = Implementation(
-        rootElementName: "\(arbitraryDescriptionOf: Value.self)",
+        rootElementName: XML.sanitize(name: "\(arbitraryDescriptionOf: Value.self)"),
         userInfo: userInformation
       )
       try value.encode(to: implementation)
-      return implementation.element.source()
+      return implementation.currentElement.source()
     }
 
     /// Encodes a top‐level value as XML data.

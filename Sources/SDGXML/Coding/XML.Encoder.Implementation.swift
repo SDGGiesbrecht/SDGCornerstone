@@ -21,14 +21,32 @@ extension XML.Encoder {
     // MARK: - Initailzation
 
     internal init(rootElementName: StrictString, userInfo: [CodingUserInfoKey: Any]) {
-      element = XML.Element(name: rootElementName)
+      partialElements = [XML.Element(name: rootElementName)]
       codingPath = []
       self.userInfo = userInfo
     }
 
-    // MARK: - Properties
+    // MARK: - State
 
-    var element: XML.Element
+    private var partialElements: [XML.Element]
+    internal var currentElement: XML.Element {
+      get {
+        return partialElements.last!
+      }
+      set {
+        let last = partialElements.indices.last!
+        partialElements[last] = newValue
+      }
+    }
+
+    internal func beginElement(named name: CodingKey) {
+      partialElements.append(XML.Element(name: XML.sanitize(name: StrictString(name.stringValue))))
+    }
+    internal func endElement() {
+      let finished = partialElements.removeLast()
+      let last = partialElements.indices.last!
+      partialElements[last].content.append(.element(finished))
+    }
 
     // MARK: - Encoder
 

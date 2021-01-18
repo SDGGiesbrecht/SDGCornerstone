@@ -1,3 +1,1 @@
-<Schlüssel>Wert</Schlüssel>
-<clef>valeur</clef>
-<key>value</key>
+<Dictionary_3CString_2C_20String_3E><key>value</key><Schlu_CC_88ssel>Wert</Schlu_CC_88ssel><clef>valeur</clef></Dictionary_3CString_2C_20String_3E>
