@@ -23,7 +23,23 @@ extension XML {
 
     /// Parses a document from its XML source.
     public static func parse(source: StrictString) throws -> XML.Document {
+      #warning("Switch to initializer if no specialized errors?")
       return try XML.Parser.parse(source)
     }
+
+    // MARK: - Initialization
+
+    /// Creates an XML document.
+    ///
+    /// - Parameters:
+    ///   - rootElement: The root element.
+    public init(rootElement: Element) {
+      self.rootElement = rootElement
+    }
+
+    // MARK: - Properties
+
+    /// The root element.
+    public var rootElement: Element
   }
 }

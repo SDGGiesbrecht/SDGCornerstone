@@ -34,7 +34,6 @@ extension XML {
 
     private init(source: StrictString) {
       parser = Foundation.XMLParser(data: source.file)
-      document = XML.Document()
       super.init()
       parser.delegate = self
     }
@@ -42,7 +41,7 @@ extension XML {
     // MARK: - Properties
 
     private let parser: Foundation.XMLParser
-    private var document: XML.Document
+    private var document: XML.Document?
     private var openElements: [XML.Element] = []
     private var error: Error?
 
@@ -50,7 +49,7 @@ extension XML {
 
     private func parse() throws -> XML.Document {
       if parser.parse() {
-        return document
+        return document!
       } else {
         throw error!
       }
@@ -81,9 +80,11 @@ extension XML {
       namespaceURI: String?,
       qualifiedName qName: String?
     ) {
-      let complete = openElements.popLast()
+      let complete = openElements.popLast()!
       if let parent = openElements.indices.last {
-        openElements[parent].content.append(.element(complete!))
+        openElements[parent].content.append(.element(complete))
+      } else {
+        document = XML.Document(rootElement: complete)
       }
     }
 
