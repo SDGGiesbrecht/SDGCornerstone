@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollections
 import SDGText
 
 extension XML {
@@ -40,7 +41,7 @@ extension XML {
     ///   - content: The content.
     public init(name: StrictString, content: [XML.Content] = []) {
       self.name = name
-      self.content = content
+      self._content = Element.normalize(content: content)
     }
 
     /// Creates an element with a particular name that is already in escaped form.
@@ -50,7 +51,7 @@ extension XML {
     ///   - content: The content.
     public init(escapedName: StrictString, content: [XML.Content] = []) {
       self.name = Element.unescape(escapedName)
-      self.content = content
+      self._content = Element.normalize(content: content)
     }
 
     // MARK: - Properties
@@ -76,8 +77,31 @@ extension XML {
       return name
     }
 
+    private var _content: [XML.Content]
     /// The content of the element.
-    public var content: [XML.Content]
+    public var content: [XML.Content] {
+      get {
+        return _content
+      }
+      set {
+        _content = Element.normalize(content: newValue)
+      }
+    }
+    private static func normalize(content: [XML.Content]) -> [XML.Content] {
+      var result: [XML.Content] = []
+      result.reserveCapacity(content.count)
+      for element in content {
+        if case .characterData(let characters) = element,
+          case .characterData(let previous) = result.last
+        {
+          result.removeLast()
+          result.append(.characterData(CharacterData(text: previous.text + characters.text)))
+        } else {
+          result.append(element)
+        }
+      }
+      return result
+    }
 
     // MARK: - Source
 

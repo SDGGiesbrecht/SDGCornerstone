@@ -72,6 +72,11 @@ class APITests: TestCase {
       specification: "Nested",
       overwriteSpecificationInsteadOfFailing: false
     )
+    try testXML(
+      element: XML.Element(name: "text", content: ["1 < 2"]),
+      specification: "Escaped Text",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLEncoder() throws {

@@ -525,6 +525,7 @@ let package = Package(
     .target(
       name: "SDGXML",
       dependencies: [
+        "SDGCollections",
         "SDGText",
         "SDGPersistence",
         "SDGLocalization",

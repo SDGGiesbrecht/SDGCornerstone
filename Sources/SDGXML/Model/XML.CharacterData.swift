@@ -12,12 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollections
 import SDGText
 
 extension XML {
 
   /// XML character data.
   public struct CharacterData: Equatable, ExpressibleByStringLiteral {
+
+    private static let illegalCharacters: Set<Unicode.Scalar> = ["&", "<", ">"]
 
     // MARK: - Initialization
 
@@ -52,8 +55,12 @@ extension XML {
       }
     }
     private static func escape(_ text: StrictString) -> StrictString {
-      #warning("Not implemented yet.")
-      return text
+      return text.mutatingMatches(
+        for: ConditionalPattern({ $0 ∈ CharacterData.illegalCharacters })
+      ) { match -> StrictString in
+        let scalar: Unicode.Scalar = match.contents.first!
+        return "&#x\(scalar.hexadecimalCode);"
+      }
     }
     private static func unescape(_ text: StrictString) -> StrictString {
       #warning("Not implemented yet.")
