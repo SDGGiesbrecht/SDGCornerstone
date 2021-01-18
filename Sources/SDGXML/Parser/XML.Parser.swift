@@ -85,16 +85,6 @@ extension XML {
       }
     }
 
-    internal func parser(
-      _ parser: XMLParser,
-      resolveExternalEntityName name: String,
-      systemID: String?
-    ) -> Data? {
-      #warning("Not implemented yet.")
-      print(#function)
-      fatalError()
-    }
-
     internal func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
       #warning("Not implemented yet.")
       print(#function)
