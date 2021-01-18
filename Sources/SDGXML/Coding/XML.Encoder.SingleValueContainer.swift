@@ -25,6 +25,8 @@ extension XML.Encoder {
       self.codingPath = codingPath
     }
 
+    // MARK: - Properties
+
     internal var element: XML.Element
 
     // MARK: - SingleValueEncodingContainer
