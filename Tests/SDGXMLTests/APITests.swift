@@ -90,6 +90,7 @@ class APITests: TestCase {
       specification: "Attributes",
       overwriteSpecificationInsteadOfFailing: false
     )
+    XCTAssertNil(try? XML.Element.parse(source: "<element>"))
   }
 
   func testXMLEncoder() throws {

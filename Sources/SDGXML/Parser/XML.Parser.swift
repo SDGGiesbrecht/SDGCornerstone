@@ -86,8 +86,7 @@ extension XML {
     }
 
     internal func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-      #warning("Not implemented yet.")
-      print(#function)
+      error = parseError
     }
 
     internal func parser(_ parser: XMLParser, validationErrorOccurred validationError: Error) {
