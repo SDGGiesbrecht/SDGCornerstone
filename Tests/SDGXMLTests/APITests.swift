@@ -95,6 +95,16 @@ class APITests: TestCase {
       try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
       XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
     )
+    try testXML(
+      element: XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "0 < 1",
+        ]
+      ),
+      specification: "Escaped Attribute",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLEncoder() throws {
