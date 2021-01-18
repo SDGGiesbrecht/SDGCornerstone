@@ -57,10 +57,6 @@ extension XML {
 
     // MARK: - XMLParserDelegate
 
-    // Not needed:
-    // parserDidStartDocument(_:)
-    // parserDidEndDocument(_:)
-
     internal func parser(
       _ parser: XMLParser,
       didStartElement elementName: String,
@@ -87,20 +83,6 @@ extension XML {
       } else {
         document = XML.Document(rootElement: complete)
       }
-    }
-
-    internal func parser(
-      _ parser: XMLParser,
-      didStartMappingPrefix prefix: String,
-      toURI namespaceURI: String
-    ) {
-      #warning("Not implemented yet.")
-      print(#function)
-    }
-
-    internal func parser(_ parser: XMLParser, didEndMappingPrefix prefix: String) {
-      #warning("Not implemented yet.")
-      print(#function)
     }
 
     internal func parser(
