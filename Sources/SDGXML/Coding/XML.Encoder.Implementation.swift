@@ -20,10 +20,15 @@ extension XML.Encoder {
 
     // MARK: - Initailzation
 
-    internal init(userInfo: [CodingUserInfoKey: Any]) {
+    internal init(rootElementName: StrictString, userInfo: [CodingUserInfoKey: Any]) {
+      element = XML.Element(name: rootElementName)
       codingPath = []
       self.userInfo = userInfo
     }
+
+    // MARK: - Properties
+
+    var element: XML.Element
 
     // MARK: - Encoder
 
@@ -42,8 +47,7 @@ extension XML.Encoder {
     }
 
     internal func singleValueContainer() -> SingleValueEncodingContainer {
-      #warning("Not implemented yet.")
-      fatalError()
+      return SingleValueContainer(encoder: self)
     }
   }
 }

@@ -109,12 +109,9 @@ class APITests: TestCase {
   }
 
   func testXMLEncoder() throws {
-    enum Keys: CodingKey {
-      case a
-    }
-    var x = XML.Encoder.UnkeyedContainer(name: "placeholder", codingPath: [])
-    try x.encode(true)
-    print(x.element.source())
+    let encoder = XML.Encoder.Implementation(rootElementName: "root", userInfo: [:])
+    try true.encode(to: encoder)
+    print(encoder.element.source())
     #warning("Temporarily disabled.")
     #if false
       let specifications = testSpecificationDirectory().appendingPathComponent("Codable XML")
