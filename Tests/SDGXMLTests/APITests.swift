@@ -77,6 +77,19 @@ class APITests: TestCase {
       specification: "Escaped Text",
       overwriteSpecificationInsteadOfFailing: false
     )
+    try testXML(
+      element: XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ]
+      ),
+      specification: "Attributes",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLEncoder() throws {

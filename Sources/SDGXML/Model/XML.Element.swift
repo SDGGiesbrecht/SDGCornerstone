@@ -38,19 +38,15 @@ extension XML {
     ///
     /// - Parameters:
     ///   - name: The name.
+    ///   - attributes: The attributes.
     ///   - content: The content.
-    public init(name: StrictString, content: [XML.Content] = []) {
+    public init(
+      name: StrictString,
+      attributes: [StrictString: StrictString] = [:],
+      content: [XML.Content] = []
+    ) {
       self.name = name
-      self._content = Element.normalize(content: content)
-    }
-
-    /// Creates an element with a particular name that is already in escaped form.
-    ///
-    /// - Parameters:
-    ///   - escapedName: The name in escaped form.
-    ///   - content: The content.
-    public init(escapedName: StrictString, content: [XML.Content] = []) {
-      self.name = Element.unescape(escapedName)
+      self.attributes = attributes
       self._content = Element.normalize(content: content)
     }
 
@@ -62,19 +58,30 @@ extension XML {
     /// The name of the element with character escapes applied.
     public var escapedName: StrictString {
       get {
-        return Element.escape(name)
-      }
-      set {
-        name = Element.unescape(newValue)
+        return Element.escape(name: name)
       }
     }
-    private static func escape(_ name: StrictString) -> StrictString {
+    private static func escape(name: StrictString) -> StrictString {
       #warning("Not implemented yet.")
       return name
     }
-    private static func unescape(_ name: StrictString) -> StrictString {
+
+    /// The attributes of the element.
+    public var attributes: [StrictString: StrictString]
+
+    /// The attributes of the element with character escapes applied.
+    public var escapedAttributes: [StrictString: StrictString] {
+      get {
+        var result: [StrictString: StrictString] = [:]
+        for (key, value) in attributes {
+          result[Element.escape(name: key)] = Element.escape(attribute: value)
+        }
+        return result
+      }
+    }
+    private static func escape(attribute: StrictString) -> StrictString {
       #warning("Not implemented yet.")
-      return name
+      return attribute
     }
 
     private var _content: [XML.Content]
@@ -107,8 +114,16 @@ extension XML {
 
     /// The source of the element.
     public func source() -> StrictString {
-      let contentSource = StrictString(content.lazy.map({ $0.source() }).joined())
-      return "<\(escapedName)>\(contentSource)</\(escapedName)>"
+      let escapedName = self.escapedName
+      let attributeSource: StrictString =
+        escapedAttributes
+        .sorted(by: { $0.0 < $1.0 })
+        .lazy.map({ " \($0.0)=\u{22}\($0.1)\u{22}" })
+        .joined()
+      let contentSource: StrictString = content
+        .lazy.map({ $0.source() })
+        .joined()
+      return "<\(escapedName)\(attributeSource)>\(contentSource)</\(escapedName)>"
     }
   }
 }

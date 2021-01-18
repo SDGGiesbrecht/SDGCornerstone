@@ -68,8 +68,11 @@ extension XML {
       qualifiedName qName: String?,
       attributes attributeDict: [String: String] = [:]
     ) {
-      #warning("“attributes” not implemented yet.")
-      openElements.append(XML.Element(name: StrictString(elementName)))
+      var attributes: [StrictString: StrictString] = [:]
+      for (key, value) in attributeDict {
+        attributes[StrictString(key)] = StrictString(value)
+      }
+      openElements.append(XML.Element(name: StrictString(elementName), attributes: attributes))
     }
 
     internal func parser(

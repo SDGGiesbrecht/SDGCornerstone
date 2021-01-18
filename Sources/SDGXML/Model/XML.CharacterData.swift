@@ -38,7 +38,7 @@ extension XML {
     public var text: StrictString
 
     /// The text of the character data with escapes applied.
-    public var escapedText: StrictString {
+    internal var escapedText: StrictString {
       get {
         return CharacterData.escape(text)
       }
