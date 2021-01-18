@@ -20,28 +20,43 @@ import SDGPersistence
 extension XML {
 
   /// An encoder which converts `Encodable` values into XML.
-  public class Encoder {
-    #warning("Is classhood necessary?")
+  public struct Encoder {
 
-    #warning("Temporarily disabled.")
-    #if false
+    // MARK: - Initialization
 
-      // MARK: - Initialization
+    /// Creates an XML encoder.
+    ///
+    /// - Parameters:
+    ///   - userInformation: User‐provided information for use during encoding.
+    public init(userInformation: [CodingUserInfoKey: Any] = [:]) {
+      self.userInformation = userInformation
+    }
 
-      /// Creates an XML encoder.
-      public init() {}
+    // MARK: - Properties
 
-      // MARK: - Encoding
+    var userInformation: [CodingUserInfoKey: Any]
 
-      /// Encodes a top‐level value as XML.
-      ///
-      /// - Parameters:
-      ///   - value: The value.
-      public func encode<Value: Encodable>(_ value: Value) throws -> Data {
-        let implementation = Implementation()
-        let root = try implementation.box(value)
-        return root.source().file
-      }
-    #endif
+    // MARK: - Encoding
+
+    /// Encodes a top‐level value as XML source.
+    ///
+    /// - Parameters:
+    ///   - value: The value.
+    public func encodeToSource<Value: Encodable>(_ value: Value) throws -> StrictString {
+      let implementation = Implementation(
+        rootElementName: "\(arbitraryDescriptionOf: Value.self)",
+        userInfo: userInformation
+      )
+      try value.encode(to: implementation)
+      return implementation.element.source()
+    }
+
+    /// Encodes a top‐level value as XML data.
+    ///
+    /// - Parameters:
+    ///   - value: The value.
+    public func encode<Value: Encodable>(_ value: Value) throws -> Data {
+      return try encodeToSource(value).file
+    }
   }
 }
