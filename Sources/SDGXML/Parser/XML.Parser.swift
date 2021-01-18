@@ -68,8 +68,6 @@ extension XML {
       qualifiedName qName: String?,
       attributes attributeDict: [String: String] = [:]
     ) {
-      #warning("“namespaceURL” not implemented yet.")
-      #warning("“qualifiedName” not implemented yet.")
       #warning("“attributes” not implemented yet.")
       openElements.append(XML.Element(name: StrictString(elementName)))
     }
