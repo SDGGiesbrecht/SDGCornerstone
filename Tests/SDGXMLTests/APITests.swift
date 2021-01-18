@@ -13,7 +13,8 @@
  */
 
 import SDGText
-import SDGXML
+#warning("Temporarily @testable")
+@testable import SDGXML
 
 import XCTest
 
@@ -108,6 +109,12 @@ class APITests: TestCase {
   }
 
   func testXMLEncoder() throws {
+    enum Keys: CodingKey {
+      case a
+    }
+    var x = XML.Encoder.KeyedContainer<Keys>(name: "placeholder", codingPath: [])
+    try x.encode("string", forKey: .a)
+    print(x.element.source())
     #warning("Temporarily disabled.")
     #if false
       let specifications = testSpecificationDirectory().appendingPathComponent("Codable XML")
