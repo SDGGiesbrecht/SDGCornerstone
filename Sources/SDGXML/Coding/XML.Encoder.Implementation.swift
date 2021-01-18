@@ -37,13 +37,11 @@ extension XML.Encoder {
 
     internal func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
     where Key: CodingKey {
-      #warning("Not implemented yet.")
-      fatalError()
+      return KeyedEncodingContainer(KeyedContainer(encoder: self))
     }
 
     internal func unkeyedContainer() -> UnkeyedEncodingContainer {
-      #warning("Not implemented yet.")
-      fatalError()
+      return UnkeyedContainer(encoder: self)
     }
 
     internal func singleValueContainer() -> SingleValueEncodingContainer {

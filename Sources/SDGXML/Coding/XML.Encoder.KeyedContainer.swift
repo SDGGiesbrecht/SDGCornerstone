@@ -20,18 +20,27 @@ extension XML.Encoder {
 
     // MARK: - Initialization
 
-    internal init(name: StrictString, codingPath: [CodingKey]) {
-      element = XML.Element(name: name)
-      self.codingPath = codingPath
+    internal init(encoder: XML.Encoder.Implementation) {
+      self.encoder = encoder
     }
 
     // MARK: - Properties
 
-    internal var element: XML.Element
+    private let encoder: XML.Encoder.Implementation
+    private var element: XML.Element {
+      get {
+        encoder.element
+      }
+      set {
+        encoder.element = newValue
+      }
+    }
 
     // MARK: - KeyedEncodingContainerProtocol
 
-    internal let codingPath: [CodingKey]
+    internal var codingPath: [CodingKey] {
+      return encoder.codingPath
+    }
 
     internal mutating func encodeNil(forKey key: Key) throws {}
 
