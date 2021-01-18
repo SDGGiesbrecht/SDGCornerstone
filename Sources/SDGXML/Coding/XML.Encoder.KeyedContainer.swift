@@ -36,74 +36,65 @@ extension XML.Encoder {
     internal mutating func encodeNil(forKey key: Key) throws {}
 
     internal mutating func encode(_ value: Bool, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: Int, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: Int8, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: Int16, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: Int32, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: Int64, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: UInt, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: UInt8, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: UInt16, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: UInt32, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: UInt64, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: Double, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: Float, forKey key: Key) throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encodeLosslessString(value, forKey: key)
     }
 
     internal mutating func encode(_ value: String, forKey key: Key) throws {
       let attribute = XML.sanitize(name: StrictString(key.stringValue))
       let value = XML.AttributeValue(text: StrictString(value))
       element.attributes[attribute] = value
+    }
+    private mutating func encodeLosslessString<T>(_ value: T, forKey key: Key) throws
+    where T: LosslessStringConvertible {
+      try encode(value.description, forKey: key)
     }
 
     internal mutating func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {

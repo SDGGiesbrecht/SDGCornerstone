@@ -113,7 +113,7 @@ class APITests: TestCase {
       case a
     }
     var x = XML.Encoder.KeyedContainer<Keys>(name: "placeholder", codingPath: [])
-    try x.encode("string", forKey: .a)
+    try x.encode(true, forKey: .a)
     print(x.element.source())
     #warning("Temporarily disabled.")
     #if false
