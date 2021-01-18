@@ -88,9 +88,14 @@ extension XML.Encoder {
     }
 
     internal mutating func encode(_ value: String, forKey key: Key) throws {
-      let attribute = XML.sanitize(name: StrictString(key.stringValue))
-      let value = XML.AttributeValue(text: StrictString(value))
-      element.attributes[attribute] = value
+      element.content.append(
+        .element(
+          XML.Element(
+            name: XML.sanitize(name: StrictString(key.stringValue)),
+            content: [.characterData(XML.CharacterData(text: StrictString(value)))]
+          )
+        )
+      )
     }
     private mutating func encodeLosslessString<T>(_ value: T, forKey key: Key) throws
     where T: LosslessStringConvertible {
