@@ -27,9 +27,8 @@ extension XML {
     ///   - source: The source of the XML element.
     public static func parse(source: StrictString) throws -> Element {
       #warning("Switch to initializer if no specialized errors?")
-      _ = try XML.Document.parse(source: source)
-      #warning("Not implemented yet.")
-      fatalError()
+      let document = try XML.Document.parse(source: source)
+      return document.rootElement
     }
 
     // MARK: - Initialization
