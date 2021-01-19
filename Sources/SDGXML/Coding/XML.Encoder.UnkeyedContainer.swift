@@ -17,7 +17,7 @@ import SDGLocalization
 
 extension XML.Encoder {
 
-  internal struct UnkeyedContainer: UnkeyedEncodingContainer, XMLKeylessEncoderContainer {
+  internal struct UnkeyedContainer: UnkeyedEncodingContainer, XMLEncoderKeylessContainer {
 
     // MARK: - Initialization
 

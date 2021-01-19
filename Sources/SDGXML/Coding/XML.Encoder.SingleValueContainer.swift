@@ -16,7 +16,7 @@ import SDGText
 
 extension XML.Encoder {
 
-  internal struct SingleValueContainer: SingleValueEncodingContainer, XMLKeylessEncoderContainer {
+  internal struct SingleValueContainer: SingleValueEncodingContainer, XMLEncoderKeylessContainer {
 
     // MARK: - Initialization
 

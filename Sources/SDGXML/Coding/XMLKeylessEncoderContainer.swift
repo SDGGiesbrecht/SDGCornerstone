@@ -12,12 +12,12 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-internal protocol XMLKeylessEncoderContainer: XMLEncoderContainer {
+internal protocol XMLEncoderKeylessContainer: XMLEncoderContainer {
 
   mutating func encode(_ value: String) throws
 }
 
-extension XMLKeylessEncoderContainer {
+extension XMLEncoderKeylessContainer {
 
   // MARK: - Encoding
 

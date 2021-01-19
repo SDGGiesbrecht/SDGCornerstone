@@ -32,7 +32,7 @@ extension XMLEncoderContainer {
 
   // MARK: - XEncodingContainer
 
-  var codingPath: [CodingKey] {
+  internal var codingPath: [CodingKey] {
     return encoder.codingPath
   }
 }
