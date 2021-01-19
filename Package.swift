@@ -527,6 +527,7 @@ let package = Package(
       dependencies: [
         "SDGControlFlow",
         "SDGLogic",
+        "SDGMathematics",
         "SDGCollections",
         "SDGText",
         "SDGPersistence",

@@ -52,7 +52,7 @@ extension XML.Encoder {
     internal func endElement(parentOrderIsSignificant: Bool) {
       var finished = partialElements.removeLast()
 
-      postprocess(&finished, ordered: ¬ordered.removeLast())
+      postprocess(&finished, ordered: ¬ordered.removeLast(), depth: codingPath.count)
 
       let last = partialElements.indices.last!
       partialElements[last].content.append(.element(finished))
@@ -67,14 +67,15 @@ extension XML.Encoder {
     internal func encode<Root>(_ root: Root) throws -> XML.Element where Root: Encodable {
       try root.encode(to: self)
       var rootElement = currentElement
-      postprocess(&rootElement, ordered: ordered.last == false)
+      postprocess(&rootElement, ordered: ordered.last == false, depth: 0)
       return rootElement
     }
 
     // MARK: - Postprocessing
 
-    private func postprocess(_ element: inout XML.Element, ordered: Bool) {
+    private func postprocess(_ element: inout XML.Element, ordered: Bool, depth: Int) {
       sortChildren(of: &element)
+      format(&element, depth: depth)
     }
 
     private func sortChildren(of element: inout XML.Element) {
@@ -86,6 +87,20 @@ extension XML.Encoder {
         }
         return firstElement.name < secondElement.name
       })
+    }
+
+    private func format(_ element: inout XML.Element, depth: Int) {
+      let indentString: StrictString = "\n" + StrictString(repeating: " ", count: depth)
+      let childIndentString: StrictString = indentString.appending(contentsOf: " ")
+      let indent: XML.Content = .characterData(XML.CharacterData(text: indentString))
+      let childIndent: XML.Content = .characterData(XML.CharacterData(text: childIndentString))
+      var formatted: [XML.Content] = []
+      for child in element.content {
+        formatted.append(childIndent)
+        formatted.append(child)
+      }
+      formatted.append(indent)
+      element.content = formatted
     }
 
     // MARK: - Encoder
