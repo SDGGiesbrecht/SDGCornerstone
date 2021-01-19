@@ -1,0 +1,4 @@
+<SingleValue>
+ <a>false</a>
+ <b>true</b>
+</SingleValue>

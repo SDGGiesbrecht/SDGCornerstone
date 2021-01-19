@@ -212,6 +212,32 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
   }
+  
+  func testXMLEncoderSingleValue() throws {
+    struct Nested: Codable {
+      var a: Bool = false
+      var b: Bool = true
+    }
+    struct SingleValue: Codable {
+      init(value: Nested) {
+        self.value = value
+      }
+      var value: Nested
+      init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        value = try container.decode(Nested.self)
+      }
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(value)
+      }
+    }
+    try testXML(
+      of: SingleValue(value: Nested()),
+      specification: "Single Value",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
 
   func testXMLEncoderString() throws {
     try testXML(
