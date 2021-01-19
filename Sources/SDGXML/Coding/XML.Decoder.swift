@@ -1,5 +1,5 @@
 /*
- XML.Encoder.swift
+ XML.Decoder.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -15,16 +15,15 @@
 import Foundation
 
 import SDGText
-import SDGPersistence
 
 extension XML {
 
-  /// An encoder which converts `Encodable` values into XML.
-  public struct Encoder {
+  /// An decoder which converts XML into `Decodable` values.
+  public struct Decoder {
 
     // MARK: - Initialization
 
-    /// Creates an XML encoder.
+    /// Creates an XML decoder.
     ///
     /// - Parameters:
     ///   - userInformation: User‐provided information for use during encoding.
@@ -38,24 +37,23 @@ extension XML {
 
     // MARK: - Encoding
 
-    /// Encodes a top‐level value as XML source.
+    /// Decodes a top‐level value from XML source.
     ///
     /// - Parameters:
-    ///   - value: The value.
-    public func encodeToSource<Value: Encodable>(_ value: Value) throws -> StrictString {
-      let implementation = Implementation(
-        rootElementName: "\(arbitraryDescriptionOf: Value.self)",
-        userInformation: userInformation
-      )
-      return try implementation.encode(value).source()
+    ///   - type: The type to decode.
+    ///   - source: The source from which to decode.
+    public func decode<T: Decodable>(_ type: T.Type, from source: StrictString) throws -> T {
+      let implementation = Implementation(userInformation: userInformation)
+      return try implementation.decode(type, from: XML.Element(source: source))
     }
 
-    /// Encodes a top‐level value as XML data.
+    /// Decodes a top‐level value from XML data.
     ///
     /// - Parameters:
-    ///   - value: The value.
-    public func encode<Value: Encodable>(_ value: Value) throws -> Data {
-      return try encodeToSource(value).file
+    ///   - type: The type to decode.
+    ///   - data: The data from which to decode.
+    public func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
+      return try decode(type, from: StrictString(file: data, origin: nil))
     }
   }
 }
