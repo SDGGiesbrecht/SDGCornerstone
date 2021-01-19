@@ -40,12 +40,14 @@ extension XML.Encoder {
     }
 
     internal func beginElement(named name: CodingKey) {
+      codingPath.append(name)
       partialElements.append(XML.Element(name: XML.sanitize(name: StrictString(name.stringValue))))
     }
     internal func endElement() {
       let finished = partialElements.removeLast()
       let last = partialElements.indices.last!
       partialElements[last].content.append(.element(finished))
+      codingPath.removeLast()
     }
 
     // MARK: - Encoder

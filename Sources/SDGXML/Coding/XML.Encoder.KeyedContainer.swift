@@ -113,9 +113,6 @@ extension XML.Encoder {
 
     internal mutating func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
 
-      encoder.codingPath.append(key)
-      defer { encoder.codingPath.removeLast() }
-
       encoder.beginElement(named: key)
       defer { encoder.endElement() }
 
