@@ -13,8 +13,7 @@
  */
 
 import SDGText
-#warning("Temporarily @testable")
-@testable import SDGXML
+import SDGXML
 
 import XCTest
 
