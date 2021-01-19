@@ -148,5 +148,13 @@ class APITests: TestCase {
       specification: "Array",
       overwriteSpecificationInsteadOfFailing: false
     )
+    struct Structure: Codable {
+      var boolean: Bool = false
+    }
+    try testXML(
+      of: Structure(),
+      specification: "Structure",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 }
