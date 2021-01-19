@@ -37,8 +37,7 @@ extension XML.Encoder {
     }
 
     mutating func encode<T>(_ value: T) throws where T: Encodable {
-      #warning("Not implemented yet.")
-      fatalError()
+      try value.encode(to: encoder)
     }
   }
 }

@@ -72,8 +72,7 @@ extension XML.Encoder {
     }
 
     internal mutating func superEncoder() -> Encoder {
-      #warning("Not implemented yet.")
-      fatalError()
+      return nestedEncoder(key: nextKey())
     }
   }
 }
