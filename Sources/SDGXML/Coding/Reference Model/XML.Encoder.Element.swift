@@ -39,6 +39,9 @@ extension XML.Encoder {
       let content: [XML.Content]
       if let text = data {
         content = [.characterData(XML.CharacterData(text: text))]
+      } else if children.isEmpty {
+        // Don’t add spaces so the empty element will use a collapsed tag.
+        content = []
       } else {
         var children = self.children
         if ¬ordered {
