@@ -117,10 +117,10 @@ extension XML.Encoder {
     }
 
     internal mutating func superEncoder() -> Encoder {
-      return nestedEncoder(key: XML.Encoder.MiscellaneousKey("super"))
+      superEncoder(forKey: XML.Encoder.MiscellaneousKey("super"))
     }
 
-    internal mutating func superEncoder(forKey key: Key) -> Encoder {
+    internal mutating func superEncoder<Key>(forKey key: Key) -> Encoder where Key: CodingKey {
       return nestedEncoder(key: key)
     }
   }
