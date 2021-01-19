@@ -49,18 +49,25 @@ extension XML.Encoder {
       var finished = partialElements.removeLast()
 
       if ¬orderIsSignificant {
-        finished.content.sort(by: { first, second in
-          guard case .element(let firstElement) = first,
-                case .element(let secondElement) = second else {
-            unreachable() // Keyed containers do not encode character data.
-          }
-          return firstElement.name < secondElement.name
-        })
+        sortChildren(of: &finished)
       }
 
       let last = partialElements.indices.last!
       partialElements[last].content.append(.element(finished))
       codingPath.removeLast()
+    }
+
+    // MARK: - Stabilization
+
+    private func sortChildren(of element: inout XML.Element) {
+      element.content.sort(by: { first, second in
+        guard case .element(let firstElement) = first,
+          case .element(let secondElement) = second
+        else {
+          unreachable()  // Keyed containers do not encode character data.
+        }
+        return firstElement.name < secondElement.name
+      })
     }
 
     // MARK: - Encoder
