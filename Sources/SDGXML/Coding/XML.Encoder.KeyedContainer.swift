@@ -36,7 +36,7 @@ extension XML.Encoder {
       }
     }
 
-    // MARK: - Encoding
+    // MARK: - State
 
     private func beginElement(named key: CodingKey) {
       encoder.beginElement(named: key)

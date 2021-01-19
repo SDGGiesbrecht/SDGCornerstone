@@ -37,6 +37,20 @@ extension XML.Encoder {
       }
     }
 
+    // MARK: - State
+
+    private func beginElement() {
+      encoder.beginElement(named: nextKey())
+    }
+
+    private func endElement() {
+      encoder.endElement(parentOrderIsSignificant: true, parentIsFormattable: true)
+    }
+
+    private func nextKey() -> IndexKey {
+      return IndexKey(count + 1)
+    }
+
     // MARK: - UnkeyedEncodingContainer
 
     internal var codingPath: [CodingKey] {
@@ -105,14 +119,11 @@ extension XML.Encoder {
     }
 
     internal mutating func encode(_ value: String) throws {
-      element.content.append(
-        .element(
-          XML.Element(
-            name: XML.sanitize(name: (count + 1).inDigits()),
-            content: [.characterData(XML.CharacterData(text: StrictString(value)))]
-          )
-        )
-      )
+
+      beginElement()
+      defer { endElement() }
+
+      element.content = [.characterData(XML.CharacterData(text: StrictString(value)))]
     }
     private mutating func encodeLosslessString<T>(_ value: T) throws
     where T: LosslessStringConvertible {
@@ -120,10 +131,9 @@ extension XML.Encoder {
     }
 
     internal mutating func encode<T>(_ value: T) throws where T: Encodable {
-      let key: CodingKey = IndexKey(count + 1)
 
-      encoder.beginElement(named: key)
-      defer { encoder.endElement(parentOrderIsSignificant: true, parentIsFormattable: true) }
+      beginElement()
+      defer { endElement() }
 
       try value.encode(to: encoder)
     }
