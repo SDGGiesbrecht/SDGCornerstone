@@ -16,41 +16,28 @@ import SDGText
 
 extension XML.Encoder {
 
-  internal struct KeyedContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
+  internal struct KeyedContainer<Key>: KeyedEncodingContainerProtocol, XMLEncoderContainer
+  where Key: CodingKey {
 
     // MARK: - Initialization
 
     internal init(encoder: XML.Encoder.Implementation) {
       self.encoder = encoder
+      encoder.currentElement.ordered = false
     }
 
     // MARK: - Properties
 
-    private let encoder: XML.Encoder.Implementation
-    private var element: XML.Element {
-      get {
-        encoder.currentElement
-      }
-      set {
-        encoder.currentElement = newValue
-      }
-    }
+    internal let encoder: XML.Encoder.Implementation
 
-    // MARK: - State
+    // MARK: - Encoding
 
-    private func beginElement(named key: CodingKey) {
-      encoder.beginElement(named: key)
-    }
-
-    private func endElement() {
-      encoder.endElement(parentOrderIsSignificant: false, parentIsFormattable: true)
+    private mutating func encodeLosslessString<T>(_ value: T, forKey key: Key) throws
+    where T: LosslessStringConvertible {
+      try encode(String(describing: value), forKey: key)
     }
 
     // MARK: - KeyedEncodingContainerProtocol
-
-    internal var codingPath: [CodingKey] {
-      return encoder.codingPath
-    }
 
     internal mutating func encodeNil(forKey key: Key) throws {}
 
@@ -107,44 +94,26 @@ extension XML.Encoder {
     }
 
     internal mutating func encode(_ value: String, forKey key: Key) throws {
-
-      beginElement(named: key)
-      defer { endElement() }
-
-      element.content = [.characterData(XML.CharacterData(text: StrictString(value)))]
-    }
-    private mutating func encodeLosslessString<T>(_ value: T, forKey key: Key) throws
-    where T: LosslessStringConvertible {
-      try encode(value.description, forKey: key)
+      try encoder.createNewElement(key: key) { element in
+        element.data = StrictString(value)
+      }
     }
 
     internal mutating func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
-
-      beginElement(named: key)
-      defer { endElement() }
-
-      try value.encode(to: encoder)
+      try encoder.createNewElement(key: key) { _ in
+        try value.encode(to: encoder)
+      }
     }
 
     internal mutating func nestedContainer<NestedKey>(
       keyedBy keyType: NestedKey.Type,
       forKey key: Key
     ) -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
-
-      beginElement(named: key)
-      #warning("This is happening before filling in the container!")
-      defer { endElement() }
-
-      return KeyedEncodingContainer(KeyedContainer<NestedKey>(encoder: encoder))
+      return KeyedEncodingContainer(KeyedContainer<NestedKey>(encoder: nestedEncoder(key: key)))
     }
 
     internal mutating func nestedUnkeyedContainer(forKey key: Key) -> UnkeyedEncodingContainer {
-
-      beginElement(named: key)
-      #warning("This is happening before filling in the container!")
-      defer { endElement() }
-
-      return UnkeyedContainer(encoder: encoder)
+      return UnkeyedContainer(encoder: nestedEncoder(key: key))
     }
 
     internal mutating func superEncoder() -> Encoder {

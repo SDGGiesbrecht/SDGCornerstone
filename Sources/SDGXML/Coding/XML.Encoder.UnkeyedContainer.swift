@@ -17,7 +17,7 @@ import SDGLocalization
 
 extension XML.Encoder {
 
-  internal struct UnkeyedContainer: UnkeyedEncodingContainer {
+  internal struct UnkeyedContainer: UnkeyedEncodingContainer, XMLKeylessEncoderContainer {
 
     // MARK: - Initialization
 
@@ -27,25 +27,9 @@ extension XML.Encoder {
 
     // MARK: - Properties
 
-    private let encoder: XML.Encoder.Implementation
-    private var element: XML.Element {
-      get {
-        encoder.currentElement
-      }
-      set {
-        encoder.currentElement = newValue
-      }
-    }
+    internal let encoder: XML.Encoder.Implementation
 
-    // MARK: - State
-
-    private func beginElement() {
-      encoder.beginElement(named: nextKey())
-    }
-
-    private func endElement() {
-      encoder.endElement(parentOrderIsSignificant: true, parentIsFormattable: true)
-    }
+    // MARK: - Encoding
 
     private func nextKey() -> IndexKey {
       return IndexKey(count + 1)
@@ -53,12 +37,8 @@ extension XML.Encoder {
 
     // MARK: - UnkeyedEncodingContainer
 
-    internal var codingPath: [CodingKey] {
-      return encoder.codingPath
-    }
-
     internal var count: Int {
-      return element.content.count
+      return encoder.currentElement.children.count
     }
 
     internal mutating func encodeNil() throws {
@@ -66,89 +46,29 @@ extension XML.Encoder {
       fatalError()
     }
 
-    internal mutating func encode(_ value: Bool) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int8) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int16) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int32) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int64) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt8) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt16) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt32) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt64) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Double) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Float) throws {
-      try encodeLosslessString(value)
-    }
-
     internal mutating func encode(_ value: String) throws {
-
-      beginElement()
-      defer { endElement() }
-
-      element.content = [.characterData(XML.CharacterData(text: StrictString(value)))]
-    }
-    private mutating func encodeLosslessString<T>(_ value: T) throws
-    where T: LosslessStringConvertible {
-      try encode(value.description)
+      try encoder.createNewElement(key: nextKey()) { element in
+        element.data = StrictString(value)
+      }
     }
 
     internal mutating func encode<T>(_ value: T) throws where T: Encodable {
-
-      beginElement()
-      defer { endElement() }
-
-      try value.encode(to: encoder)
+      try encoder.createNewElement(key: nextKey()) { _ in
+        try value.encode(to: encoder)
+      }
     }
 
     internal mutating func nestedContainer<NestedKey>(
       keyedBy keyType: NestedKey.Type
     ) -> KeyedEncodingContainer<NestedKey>
     where NestedKey: CodingKey {
-      #warning("Not implemented yet.")
-      fatalError()
+      return KeyedEncodingContainer(
+        KeyedContainer<NestedKey>(encoder: nestedEncoder(key: nextKey()))
+      )
     }
 
     internal mutating func nestedUnkeyedContainer() -> UnkeyedEncodingContainer {
-      #warning("Not implemented yet.")
-      fatalError()
+      return UnkeyedContainer(encoder: nestedEncoder(key: nextKey()))
     }
 
     internal mutating func superEncoder() -> Encoder {

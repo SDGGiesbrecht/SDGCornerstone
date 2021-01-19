@@ -16,7 +16,7 @@ import SDGText
 
 extension XML.Encoder {
 
-  internal struct SingleValueContainer: SingleValueEncodingContainer {
+  internal struct SingleValueContainer: SingleValueEncodingContainer, XMLKeylessEncoderContainer {
 
     // MARK: - Initialization
 
@@ -26,82 +26,14 @@ extension XML.Encoder {
 
     // MARK: - Properties
 
-    private let encoder: XML.Encoder.Implementation
-    private var element: XML.Element {
-      get {
-        encoder.currentElement
-      }
-      set {
-        encoder.currentElement = newValue
-      }
-    }
+    internal let encoder: XML.Encoder.Implementation
 
     // MARK: - SingleValueEncodingContainer
 
-    internal var codingPath: [CodingKey] {
-      return encoder.codingPath
-    }
-
     internal mutating func encodeNil() throws {}
 
-    internal mutating func encode(_ value: Bool) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int8) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int16) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int32) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Int64) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt8) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt16) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt32) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: UInt64) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Double) throws {
-      try encodeLosslessString(value)
-    }
-
-    internal mutating func encode(_ value: Float) throws {
-      try encodeLosslessString(value)
-    }
-
     internal mutating func encode(_ value: String) throws {
-      element.content = [.characterData(XML.CharacterData(text: StrictString(value)))]
-    }
-    private mutating func encodeLosslessString<T>(_ value: T) throws
-    where T: LosslessStringConvertible {
-      try encode(value.description)
+      encoder.currentElement.data = StrictString(value)
     }
 
     mutating func encode<T>(_ value: T) throws where T: Encodable {

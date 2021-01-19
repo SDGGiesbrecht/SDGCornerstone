@@ -44,8 +44,8 @@ extension XML {
     ///   - value: The value.
     public func encodeToSource<Value: Encodable>(_ value: Value) throws -> StrictString {
       let implementation = Implementation(
-        rootElementName: XML.sanitize(name: "\(arbitraryDescriptionOf: Value.self)"),
-        userInfo: userInformation
+        rootElementName: "\(arbitraryDescriptionOf: Value.self)",
+        userInformation: userInformation
       )
       return try implementation.encode(value).source()
     }

@@ -22,113 +22,83 @@ extension XML.Encoder {
 
     // MARK: - Initailzation
 
-    internal init(rootElementName: StrictString, userInfo: [CodingUserInfoKey: Any]) {
-      partialElements = [XML.Element(name: rootElementName)]
-      ordered = [true]
-      formattable = [false]
-      codingPath = []
-      self.userInfo = userInfo
-    }
-
-    // MARK: - State
-
-    private var partialElements: [XML.Element]
-    private var ordered: [Bool]
-    private var formattable: [Bool]
-
-    internal var currentElement: XML.Element {
-      get {
-        return partialElements.last!
-      }
-      set {
-        let last = partialElements.indices.last!
-        partialElements[last] = newValue
-      }
-    }
-
-    internal func beginElement(named name: CodingKey) {
-      codingPath.append(name)
-      partialElements.append(XML.Element(name: XML.sanitize(name: StrictString(name.stringValue))))
-      ordered.append(true)
-      formattable.append(false)
-    }
-    internal func endElement(parentOrderIsSignificant: Bool, parentIsFormattable: Bool) {
-      var finished = partialElements.removeLast()
-
-      postprocess(
-        &finished,
-        ordered: ¬ordered.removeLast(),
-        formattable: formattable.removeLast(),
-        depth: codingPath.count
+    internal convenience init(
+      rootElementName: StrictString,
+      userInformation: [CodingUserInfoKey: Any]
+    ) {
+      self.init(
+        root: XML.Encoder.Element(name: rootElementName),
+        codingPath: [],
+        userInformation: userInformation
       )
+    }
 
-      let last = partialElements.indices.last!
-      partialElements[last].content.append(.element(finished))
-      codingPath.removeLast()
+    internal init(
+      root: XML.Encoder.Element,
+      codingPath: [CodingKey],
+      userInformation: [CodingUserInfoKey: Any]
+    ) {
+      partialElements = [root]
+      self.codingPath = codingPath
+      self.userInfo = userInformation
+    }
 
-      let lastOrderedness = ordered.indices.last!
-      ordered[lastOrderedness] = parentOrderIsSignificant
-      let lastFormatability = formattable.indices.last!
-      formattable[lastFormatability] = parentIsFormattable
+    // MARK: - Properties
+
+    private var partialElements: [XML.Encoder.Element]
+
+    // MARK: - Encoding
+
+    internal var currentElement: XML.Encoder.Element {
+      return partialElements.last!
+    }
+
+    internal func createNewElement(
+      key: CodingKey,
+      _ closure: (XML.Encoder.Element) throws -> Void
+    ) throws {
+      let wrapped: (XML.Encoder.Element) throws -> XML.Encoder.Implementation? = { element in
+        try closure(element)
+        return nil
+      }
+      _ = try createNewElement(key: key, wrapped)
+    }
+
+    internal func createNewElement(
+      key: CodingKey,
+      _ closure: (XML.Encoder.Element) -> XML.Encoder.Implementation
+    ) -> XML.Encoder.Implementation {
+      let wrapped: (XML.Encoder.Element) -> XML.Encoder.Implementation? = { closure($0) }
+      return createNewElement(key: key, wrapped)!
+    }
+
+    private func createNewElement(
+      key: CodingKey,
+      _ closure: (XML.Encoder.Element) throws -> XML.Encoder.Implementation?
+    ) rethrows -> XML.Encoder.Implementation? {
+
+      codingPath.append(key)
+      defer { codingPath.removeLast() }
+
+      let new = XML.Encoder.Element(name: StrictString(key.stringValue))
+      partialElements.last!.children.append(new)
+      partialElements.append(new)
+      defer { partialElements.removeLast() }
+
+      return try closure(new)
     }
 
     // MARK: - Completion
 
     internal func encode<Root>(_ root: Root) throws -> XML.Element where Root: Encodable {
       try root.encode(to: self)
-      var rootElement = currentElement
-      postprocess(
-        &rootElement,
-        ordered: ordered.last == false,
-        formattable: formattable.last == true,
-        depth: 0
-      )
-      return rootElement
-    }
-
-    // MARK: - Postprocessing
-
-    private func postprocess(
-      _ element: inout XML.Element,
-      ordered: Bool,
-      formattable: Bool,
-      depth: Int
-    ) {
-      sortChildren(of: &element)
-      if formattable {
-        format(&element, depth: depth)
-      }
-    }
-
-    private func sortChildren(of element: inout XML.Element) {
-      element.content.sort(by: { first, second in
-        guard case .element(let firstElement) = first,
-          case .element(let secondElement) = second
-        else {
-          unreachable()  // Keyed containers do not encode character data.
-        }
-        return firstElement.name < secondElement.name
-      })
-    }
-
-    private func format(_ element: inout XML.Element, depth: Int) {
-      let indentString: StrictString = "\n" + StrictString(repeating: " ", count: depth)
-      let childIndentString: StrictString = indentString.appending(contentsOf: " ")
-      let indent: XML.Content = .characterData(XML.CharacterData(text: indentString))
-      let childIndent: XML.Content = .characterData(XML.CharacterData(text: childIndentString))
-      var formatted: [XML.Content] = []
-      for child in element.content {
-        formatted.append(childIndent)
-        formatted.append(child)
-      }
-      formatted.append(indent)
-      element.content = formatted
+      return partialElements.first!.modelElement()
     }
 
     // MARK: - Encoder
 
     internal var codingPath: [CodingKey]
-    internal var userInfo: [CodingUserInfoKey: Any]
+    internal let userInfo: [CodingUserInfoKey: Any]
 
     internal func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
     where Key: CodingKey {
