@@ -212,7 +212,7 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
   }
-  
+
   func testXMLEncoderSingleValue() throws {
     struct Nested: Codable {
       var a: Bool = false
@@ -272,6 +272,72 @@ class APITests: TestCase {
     try testXML(
       of: Structure(),
       specification: "Structure",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  func testXMLEncoderUnkeyed() throws {
+    struct Nested: Codable {
+      var a: String = "A"
+      var b: String = "B"
+    }
+    struct Unkeyed: Codable {
+      init() {}
+      var boolean: Bool = false
+      var optional: Bool?
+      var integer: Int = 0
+      var eightBitInteger: Int8 = 0
+      var sixteenBitInteger: Int16 = 0
+      var thirtyTwoBitInteger: Int32 = 0
+      var sixtyFourBitInteger: Int64 = 0
+      var unsignedInteger: UInt = 0
+      var eightBitUnsignedInteger: UInt8 = 0
+      var sixteenBitUnsignedInteger: UInt16 = 0
+      var thirtyTwoBitUnsignedInteger: UInt32 = 0
+      var sixtyFourBitUnsignedInteger: UInt64 = 0
+      var double: Double = 0
+      var float: Float = 0
+      var nested: Nested = Nested()
+      init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        boolean = try container.decode(Bool.self)
+        optional = try container.decode(Optional<Bool>.self)
+        integer = try container.decode(Int.self)
+        eightBitInteger = try container.decode(Int8.self)
+        sixteenBitInteger = try container.decode(Int16.self)
+        thirtyTwoBitInteger = try container.decode(Int32.self)
+        sixtyFourBitInteger = try container.decode(Int64.self)
+        unsignedInteger = try container.decode(UInt.self)
+        eightBitUnsignedInteger = try container.decode(UInt8.self)
+        sixteenBitUnsignedInteger = try container.decode(UInt16.self)
+        thirtyTwoBitUnsignedInteger = try container.decode(UInt32.self)
+        sixtyFourBitUnsignedInteger = try container.decode(UInt64.self)
+        double = try container.decode(Double.self)
+        float = try container.decode(Float.self)
+        nested = try container.decode(Nested.self)
+      }
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(boolean)
+        try container.encode(optional)
+        try container.encode(integer)
+        try container.encode(eightBitInteger)
+        try container.encode(sixteenBitInteger)
+        try container.encode(thirtyTwoBitInteger)
+        try container.encode(sixtyFourBitInteger)
+        try container.encode(unsignedInteger)
+        try container.encode(eightBitUnsignedInteger)
+        try container.encode(sixteenBitUnsignedInteger)
+        try container.encode(thirtyTwoBitUnsignedInteger)
+        try container.encode(sixteenBitUnsignedInteger)
+        try container.encode(double)
+        try container.encode(float)
+        try container.encode(nested)
+      }
+    }
+    try testXML(
+      of: Unkeyed(),
+      specification: "Unkeyed",
       overwriteSpecificationInsteadOfFailing: false
     )
   }
