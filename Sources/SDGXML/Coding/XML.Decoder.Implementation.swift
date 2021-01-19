@@ -1,5 +1,5 @@
 /*
- XML.Encoder.Implementation.swift
+ XML.Decoder.Implementation.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,22 +12,23 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-import SDGLogic
 import SDGText
 import SDGLocalization
 
-extension XML.Encoder {
+import SDGCornerstoneLocalizations
 
-  internal class Implementation: Encoder {
+extension XML.Decoder {
+
+  internal class Implementation: Decoder {
 
     // MARK: - Initailzation
 
     internal convenience init(
-      rootElementName: StrictString,
+      rootElement: XML.Element,
       userInformation: [CodingUserInfoKey: Any]
     ) {
       self.init(
-        root: XML.Encoder.Element(name: rootElementName),
+        root: XML.Encoder.Element(rootElement),
         codingPath: [],
         userInformation: userInformation
       )
@@ -53,7 +54,7 @@ extension XML.Encoder {
       return partialElements.last!
     }
 
-    internal func createNewElement(
+    internal func enterElement(
       key: CodingKey,
       _ closure: (XML.Encoder.Element) throws -> Void
     ) throws {
@@ -61,55 +62,70 @@ extension XML.Encoder {
         try closure(element)
         return nil
       }
-      _ = try createNewElement(key: key, wrapped)
+      _ = try enterElement(key: key, wrapped)
     }
 
-    internal func createNewElement(
+    internal func enterElement(
       key: CodingKey,
       _ closure: (XML.Encoder.Element) -> XML.Encoder.Implementation
-    ) -> XML.Encoder.Implementation {
+    ) throws -> XML.Encoder.Implementation {
       let wrapped: (XML.Encoder.Element) -> XML.Encoder.Implementation? = { closure($0) }
-      return createNewElement(key: key, wrapped)!
+      return try enterElement(key: key, wrapped)!
     }
 
-    private func createNewElement(
+    private func enterElement(
       key: CodingKey,
       _ closure: (XML.Encoder.Element) throws -> XML.Encoder.Implementation?
-    ) rethrows -> XML.Encoder.Implementation? {
+    ) throws -> XML.Encoder.Implementation? {
 
       codingPath.append(key)
       defer { codingPath.removeLast() }
 
-      let new = XML.Encoder.Element(name: StrictString(key.stringValue))
-      partialElements.last!.children.append(new)
-      partialElements.append(new)
+      let keyString = StrictString(key.stringValue)
+      guard let entered = currentElement.children.first(where: { $0.name == keyString }) else {
+        let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
+          switch localization {
+          case .englishUnitedKingdom:
+            return "There is no value associated with the key ‘\(key.stringValue)’."
+          case .englishUnitedStates, .englishCanada:
+            return "There is no value associated with the key “\(key.stringValue)”."
+          case .deutschDeutschland:
+            return "Kein Wert ist mit dem Schlüssel „\(key.stringValue)“ verbunden."
+          }
+        }).resolved()
+        throw DecodingError.keyNotFound(
+          key,
+          DecodingError.Context(codingPath: codingPath, debugDescription: String(description))
+        )
+      }
+
+      partialElements.append(entered)
       defer { partialElements.removeLast() }
 
-      return try closure(new)
+      return try closure(entered)
     }
 
-    // MARK: - Encoding
+    // MARK: - Decoding
 
-    internal func encode<Root>(_ root: Root) throws -> XML.Element where Root: Encodable {
-      try root.encode(to: self)
-      return partialElements.first!.modelElement()
+    internal func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
+      return try T(from: self)
     }
 
-    // MARK: - Encoder
+    // MARK: - Decoder
 
     internal var codingPath: [CodingKey]
     internal let userInfo: [CodingUserInfoKey: Any]
 
-    internal func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
+    internal func container<Key>(keyedBy type: Key.Type) -> KeyedDecodingContainer<Key>
     where Key: CodingKey {
-      return KeyedEncodingContainer(KeyedContainer(encoder: self))
+      return KeyedDecodingContainer(KeyedContainer(encoder: self))
     }
 
-    internal func unkeyedContainer() -> UnkeyedEncodingContainer {
+    internal func unkeyedContainer() -> UnkeyedDecodingContainer {
       return UnkeyedContainer(encoder: self)
     }
 
-    internal func singleValueContainer() -> SingleValueEncodingContainer {
+    internal func singleValueContainer() -> SingleValueDecodingContainer {
       return SingleValueContainer(encoder: self)
     }
   }

@@ -559,6 +559,8 @@ let package = Package(
         "SDGMathematics",
         "SDGText",
         "SDGPersistence",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations",
       ]
     ),
 

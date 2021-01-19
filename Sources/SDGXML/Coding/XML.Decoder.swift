@@ -43,8 +43,9 @@ extension XML {
     ///   - type: The type to decode.
     ///   - source: The source from which to decode.
     public func decode<T: Decodable>(_ type: T.Type, from source: StrictString) throws -> T {
-      let implementation = Implementation(userInformation: userInformation)
-      return try implementation.decode(type, from: XML.Element(source: source))
+      let element = try XML.Element(source: source)
+      let implementation = Implementation(rootElement: element, userInformation: userInformation)
+      return try implementation.decode(type)
     }
 
     /// Decodes a top‐level value from XML data.
