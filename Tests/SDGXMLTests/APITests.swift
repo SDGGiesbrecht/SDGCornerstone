@@ -129,6 +129,19 @@ class APITests: TestCase {
   func testXMLEncoderStructure() throws {
     struct Structure: Codable {
       var boolean: Bool = false
+      var optional: Bool?
+      var integer: Int = 0
+      var eightBitInteger: Int8 = 0
+      var sixteenBitInteger: Int16 = 0
+      var thirtyTwoBitInteger: Int32 = 0
+      var sixtyFourBitInteger: Int64 = 0
+      var unsignedInteger: UInt = 0
+      var eightBitUnsignedInteger: UInt8 = 0
+      var sixteenBitUnsignedInteger: UInt16 = 0
+      var thirtyTwoBitUnsignedInteger: UInt32 = 0
+      var sixtyFourBitUnsignedInteger: UInt64 = 0
+      var double: Double = 0
+      var float: Float = 0
     }
     try testXML(
       of: Structure(),

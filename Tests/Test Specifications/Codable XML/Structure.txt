@@ -1,3 +1,15 @@
 <Structure>
  <boolean>false</boolean>
+ <double>0.0</double>
+ <eightBitInteger>0</eightBitInteger>
+ <eightBitUnsignedInteger>0</eightBitUnsignedInteger>
+ <float>0.0</float>
+ <integer>0</integer>
+ <sixteenBitInteger>0</sixteenBitInteger>
+ <sixteenBitUnsignedInteger>0</sixteenBitUnsignedInteger>
+ <sixtyFourBitInteger>0</sixtyFourBitInteger>
+ <sixtyFourBitUnsignedInteger>0</sixtyFourBitUnsignedInteger>
+ <thirtyTwoBitInteger>0</thirtyTwoBitInteger>
+ <thirtyTwoBitUnsignedInteger>0</thirtyTwoBitUnsignedInteger>
+ <unsignedInteger>0</unsignedInteger>
 </Structure>
