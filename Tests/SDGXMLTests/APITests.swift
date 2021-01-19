@@ -127,6 +127,10 @@ class APITests: TestCase {
   }
 
   func testXMLEncoderStructure() throws {
+    struct Nested: Codable {
+      var a: String = "A"
+      var b: String = "B"
+    }
     struct Structure: Codable {
       var boolean: Bool = false
       var optional: Bool?
@@ -142,6 +146,7 @@ class APITests: TestCase {
       var sixtyFourBitUnsignedInteger: UInt64 = 0
       var double: Double = 0
       var float: Float = 0
+      var nested: Nested = Nested()
     }
     try testXML(
       of: Structure(),

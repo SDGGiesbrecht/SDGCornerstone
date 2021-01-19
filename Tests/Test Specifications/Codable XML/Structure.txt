@@ -5,6 +5,10 @@
  <eightBitUnsignedInteger>0</eightBitUnsignedInteger>
  <float>0.0</float>
  <integer>0</integer>
+ <nested>
+  <a>A</a>
+  <b>B</b>
+ </nested>
  <sixteenBitInteger>0</sixteenBitInteger>
  <sixteenBitUnsignedInteger>0</sixteenBitUnsignedInteger>
  <sixtyFourBitInteger>0</sixtyFourBitInteger>
