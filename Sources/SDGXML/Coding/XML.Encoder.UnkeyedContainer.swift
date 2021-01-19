@@ -123,7 +123,7 @@ extension XML.Encoder {
       let key: CodingKey = IndexKey(count + 1)
 
       encoder.beginElement(named: key)
-      defer { encoder.endElement(parentOrderIsSignificant: true) }
+      defer { encoder.endElement(parentOrderIsSignificant: true, parentIsFormattable: true) }
 
       try value.encode(to: encoder)
     }

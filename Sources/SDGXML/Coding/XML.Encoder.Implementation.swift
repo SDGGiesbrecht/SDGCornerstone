@@ -25,6 +25,7 @@ extension XML.Encoder {
     internal init(rootElementName: StrictString, userInfo: [CodingUserInfoKey: Any]) {
       partialElements = [XML.Element(name: rootElementName)]
       ordered = [true]
+      formattable = [false]
       codingPath = []
       self.userInfo = userInfo
     }
@@ -33,6 +34,7 @@ extension XML.Encoder {
 
     private var partialElements: [XML.Element]
     private var ordered: [Bool]
+    private var formattable: [Bool]
 
     internal var currentElement: XML.Element {
       get {
@@ -48,11 +50,17 @@ extension XML.Encoder {
       codingPath.append(name)
       partialElements.append(XML.Element(name: XML.sanitize(name: StrictString(name.stringValue))))
       ordered.append(true)
+      formattable.append(false)
     }
-    internal func endElement(parentOrderIsSignificant: Bool) {
+    internal func endElement(parentOrderIsSignificant: Bool, parentIsFormattable: Bool) {
       var finished = partialElements.removeLast()
 
-      postprocess(&finished, ordered: ¬ordered.removeLast(), depth: codingPath.count)
+      postprocess(
+        &finished,
+        ordered: ¬ordered.removeLast(),
+        formattable: formattable.removeLast(),
+        depth: codingPath.count
+      )
 
       let last = partialElements.indices.last!
       partialElements[last].content.append(.element(finished))
@@ -60,6 +68,8 @@ extension XML.Encoder {
 
       let lastOrderedness = ordered.indices.last!
       ordered[lastOrderedness] = parentOrderIsSignificant
+      let lastFormatability = formattable.indices.last!
+      formattable[lastFormatability] = parentIsFormattable
     }
 
     // MARK: - Completion
@@ -67,15 +77,27 @@ extension XML.Encoder {
     internal func encode<Root>(_ root: Root) throws -> XML.Element where Root: Encodable {
       try root.encode(to: self)
       var rootElement = currentElement
-      postprocess(&rootElement, ordered: ordered.last == false, depth: 0)
+      postprocess(
+        &rootElement,
+        ordered: ordered.last == false,
+        formattable: formattable.last == true,
+        depth: 0
+      )
       return rootElement
     }
 
     // MARK: - Postprocessing
 
-    private func postprocess(_ element: inout XML.Element, ordered: Bool, depth: Int) {
+    private func postprocess(
+      _ element: inout XML.Element,
+      ordered: Bool,
+      formattable: Bool,
+      depth: Int
+    ) {
       sortChildren(of: &element)
-      format(&element, depth: depth)
+      if formattable {
+        format(&element, depth: depth)
+      }
     }
 
     private func sortChildren(of element: inout XML.Element) {
