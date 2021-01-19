@@ -47,8 +47,7 @@ extension XML {
         rootElementName: XML.sanitize(name: "\(arbitraryDescriptionOf: Value.self)"),
         userInfo: userInformation
       )
-      try value.encode(to: implementation)
-      return implementation.currentElement.source()
+      return try implementation.encode(value).source()
     }
 
     /// Encodes a top‐level value as XML data.

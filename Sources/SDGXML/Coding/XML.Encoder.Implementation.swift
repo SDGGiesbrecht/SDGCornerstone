@@ -24,6 +24,7 @@ extension XML.Encoder {
 
     internal init(rootElementName: StrictString, userInfo: [CodingUserInfoKey: Any]) {
       partialElements = [XML.Element(name: rootElementName)]
+      ordered = [true]
       codingPath = []
       self.userInfo = userInfo
     }
@@ -31,6 +32,8 @@ extension XML.Encoder {
     // MARK: - State
 
     private var partialElements: [XML.Element]
+    private var ordered: [Bool]
+
     internal var currentElement: XML.Element {
       get {
         return partialElements.last!
@@ -44,20 +47,35 @@ extension XML.Encoder {
     internal func beginElement(named name: CodingKey) {
       codingPath.append(name)
       partialElements.append(XML.Element(name: XML.sanitize(name: StrictString(name.stringValue))))
+      ordered.append(true)
     }
-    internal func endElement(orderIsSignificant: Bool) {
+    internal func endElement(parentOrderIsSignificant: Bool) {
       var finished = partialElements.removeLast()
 
-      if ¬orderIsSignificant {
-        sortChildren(of: &finished)
-      }
+      postprocess(&finished, ordered: ¬ordered.removeLast())
 
       let last = partialElements.indices.last!
       partialElements[last].content.append(.element(finished))
       codingPath.removeLast()
+
+      let lastOrderedness = ordered.indices.last!
+      ordered[lastOrderedness] = parentOrderIsSignificant
     }
 
-    // MARK: - Stabilization
+    // MARK: - Completion
+
+    internal func encode<Root>(_ root: Root) throws -> XML.Element where Root: Encodable {
+      try root.encode(to: self)
+      var rootElement = currentElement
+      postprocess(&rootElement, ordered: ordered.last == false)
+      return rootElement
+    }
+
+    // MARK: - Postprocessing
+
+    private func postprocess(_ element: inout XML.Element, ordered: Bool) {
+      sortChildren(of: &element)
+    }
 
     private func sortChildren(of element: inout XML.Element) {
       element.content.sort(by: { first, second in
