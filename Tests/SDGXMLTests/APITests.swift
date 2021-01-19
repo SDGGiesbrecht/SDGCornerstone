@@ -106,6 +106,30 @@ class APITests: TestCase {
     )
   }
 
+  func testXMLEncoderCustomized() throws {
+    struct Customized: Codable {
+      var a: String = "A"
+      var b: String = "B"
+      var c: String = "C"
+      func encode(to encoder: Encoder) throws {
+        var all = encoder.container(keyedBy: CodingKeys.self)
+        var keyed = all.nestedContainer(keyedBy: CodingKeys.self, forKey: .a)
+        try keyed.encode(a, forKey: .a)
+        try keyed.encode(b, forKey: .b)
+        try keyed.encode(c, forKey: .c)
+        var unkeyed = all.nestedUnkeyedContainer(forKey: .b)
+        try unkeyed.encode(a)
+        try unkeyed.encode(b)
+        try unkeyed.encode(c)
+      }
+    }
+    try testXML(
+      of: Customized(),
+      specification: "Customized",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLEncoderDictionary() throws {
     try testXML(
       of: [
@@ -151,30 +175,6 @@ class APITests: TestCase {
     try testXML(
       of: Structure(),
       specification: "Structure",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-  }
-
-  func testXMLEncoderCustomized() throws {
-    struct Customized: Codable {
-      var a: String = "A"
-      var b: String = "B"
-      var c: String = "C"
-      func encode(to encoder: Encoder) throws {
-        var all = encoder.container(keyedBy: CodingKeys.self)
-        var keyed = all.nestedContainer(keyedBy: CodingKeys.self, forKey: .a)
-        try keyed.encode(a, forKey: .a)
-        try keyed.encode(b, forKey: .b)
-        try keyed.encode(c, forKey: .c)
-        var unkeyed = all.nestedUnkeyedContainer(forKey: .b)
-        try unkeyed.encode(a)
-        try unkeyed.encode(b)
-        try unkeyed.encode(c)
-      }
-    }
-    try testXML(
-      of: Customized(),
-      specification: "Customized",
       overwriteSpecificationInsteadOfFailing: false
     )
   }
