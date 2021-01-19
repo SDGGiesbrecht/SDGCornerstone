@@ -12,7 +12,9 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
 import SDGText
+import SDGLocalization
 
 extension XML.Encoder {
 
@@ -43,8 +45,19 @@ extension XML.Encoder {
       codingPath.append(name)
       partialElements.append(XML.Element(name: XML.sanitize(name: StrictString(name.stringValue))))
     }
-    internal func endElement() {
-      let finished = partialElements.removeLast()
+    internal func endElement(orderIsSignificant: Bool) {
+      var finished = partialElements.removeLast()
+
+      if ¬orderIsSignificant {
+        finished.content.sort(by: { first, second in
+          guard case .element(let firstElement) = first,
+                case .element(let secondElement) = second else {
+            unreachable() // Keyed containers do not encode character data.
+          }
+          return firstElement.name < secondElement.name
+        })
+      }
+
       let last = partialElements.indices.last!
       partialElements[last].content.append(.element(finished))
       codingPath.removeLast()

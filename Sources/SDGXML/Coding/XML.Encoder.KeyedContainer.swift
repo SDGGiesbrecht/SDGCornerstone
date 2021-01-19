@@ -114,7 +114,7 @@ extension XML.Encoder {
     internal mutating func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
 
       encoder.beginElement(named: key)
-      defer { encoder.endElement() }
+      defer { encoder.endElement(orderIsSignificant: false) }
 
       try value.encode(to: encoder)
     }
