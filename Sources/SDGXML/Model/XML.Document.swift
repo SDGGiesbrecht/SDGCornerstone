@@ -17,7 +17,7 @@ import SDGText
 extension XML {
 
   /// An XML document.
-  public struct Document {
+  public struct Document: CustomStringConvertible {
 
     // MARK: - Initialization
 
@@ -41,5 +41,18 @@ extension XML {
 
     /// The root element.
     public var rootElement: Element
+
+    // MARK: - Source
+
+    /// The source of the element.
+    public func source() -> StrictString {
+      return rootElement.source()
+    }
+
+    // MARK: - CustomStringConvertible
+
+    public var description: String {
+      return String(source())
+    }
   }
 }

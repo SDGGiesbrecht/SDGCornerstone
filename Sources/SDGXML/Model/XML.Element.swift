@@ -18,7 +18,7 @@ import SDGText
 extension XML {
 
   /// An XML element.
-  public struct Element: Equatable {
+  public struct Element: CustomStringConvertible, Equatable {
 
     // MARK: - Initialization
 
@@ -94,6 +94,12 @@ extension XML {
         .lazy.map({ $0.source() })
         .joined()
       return "<\(name)\(attributeSource)>\(contentSource)</\(name)>"
+    }
+
+    // MARK: - CustomStringConvertible
+
+    public var description: String {
+      return String(source())
     }
   }
 }

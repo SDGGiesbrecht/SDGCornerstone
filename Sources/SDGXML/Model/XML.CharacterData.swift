@@ -12,13 +12,14 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGCollections
 import SDGText
 
 extension XML {
 
   /// XML character data.
-  public struct CharacterData: Equatable, ExpressibleByStringLiteral {
+  public struct CharacterData: Equatable, ExpressibleByStringLiteral, TransparentWrapper {
 
     private static let illegalCharacters: Set<Unicode.Scalar> = ["&", "<", ">"]
 
@@ -56,6 +57,12 @@ extension XML {
 
     public init(stringLiteral value: String) {
       self.init(text: StrictString(value))
+    }
+
+    // MARK: - TransparentWrapper
+
+    public var wrappedInstance: Any {
+      return text
     }
   }
 }

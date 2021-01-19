@@ -12,12 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGControlFlow
 import SDGText
 
 extension XML {
 
   /// The content of an XML element.
-  public enum Content: Equatable, ExpressibleByStringLiteral {
+  public enum Content: Equatable, ExpressibleByStringLiteral, CustomStringConvertible {
 
     // MARK: - Cases
 
@@ -43,6 +44,12 @@ extension XML {
 
     public init(stringLiteral value: String) {
       self = .characterData(XML.CharacterData(text: StrictString(value)))
+    }
+
+    // MARK: - CustomStringConvertible
+
+    public var description: String {
+      return String(source())
     }
   }
 }
