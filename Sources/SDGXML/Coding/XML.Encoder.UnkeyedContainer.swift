@@ -31,8 +31,8 @@ extension XML.Encoder {
 
     // MARK: - Encoding
 
-    private func nextKey() -> IndexKey {
-      return IndexKey(count + 1)
+    private func nextKey() -> MiscellaneousKey {
+      return MiscellaneousKey(count + 1)
     }
 
     // MARK: - UnkeyedEncodingContainer

@@ -501,10 +501,11 @@ extension SDGXMLTests.APITests {
       ("testXMLElementNested", testXMLElementNested),
       ("testXMLElementText", testXMLElementText),
       ("testXMLEncoderArray", testXMLEncoderArray),
+      ("testXMLEncoderClass", testXMLEncoderClass),
+      ("testXMLEncoderCustomized", testXMLEncoderCustomized),
       ("testXMLEncoderDictionary", testXMLEncoderDictionary),
       ("testXMLEncoderString", testXMLEncoderString),
       ("testXMLEncoderStructure", testXMLEncoderStructure),
-      ("testXMLEncoderCustomized", testXMLEncoderCustomized),
     ])
   ]
 }

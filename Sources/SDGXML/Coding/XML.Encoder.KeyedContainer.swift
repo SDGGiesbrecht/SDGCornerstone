@@ -117,13 +117,11 @@ extension XML.Encoder {
     }
 
     internal mutating func superEncoder() -> Encoder {
-      #warning("Not implemented yet.")
-      fatalError()
+      return nestedEncoder(key: XML.Encoder.MiscellaneousKey("super"))
     }
 
     internal mutating func superEncoder(forKey key: Key) -> Encoder {
-      #warning("Not implemented yet.")
-      fatalError()
+      return nestedEncoder(key: key)
     }
   }
 }

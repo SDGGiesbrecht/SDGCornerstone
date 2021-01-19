@@ -106,6 +106,47 @@ class APITests: TestCase {
     )
   }
 
+  func testXMLEncoderClass() throws {
+    class Superclass: Codable {
+      init(a: String, b: String) {
+        self.a = a
+        self.b = b
+      }
+      var a: String
+      var b: String
+    }
+    class Subclass: Superclass {
+      init(a: String, b: String, c: String, d: String) {
+        self.c = c
+        self.d = d
+        super.init(a: a, b: b)
+      }
+      var c: String
+      var d: String
+      enum CodingKeys: CodingKey {
+        case c
+        case d
+      }
+      required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        c = try container.decode(String.self, forKey: .c)
+        d = try container.decode(String.self, forKey: .d)
+        try super.init(from: try container.superDecoder())
+      }
+      override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(c, forKey: .c)
+        try container.encode(d, forKey: .d)
+        try super.encode(to: container.superEncoder())
+      }
+    }
+    try testXML(
+      of: Subclass(a: "A", b: "B", c: "C", d: "D"),
+      specification: "Class",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLEncoderCustomized() throws {
     struct Customized: Codable {
       var a: String = "A"

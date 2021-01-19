@@ -1,0 +1,8 @@
+<Subclass>
+ <c>C</c>
+ <d>D</d>
+ <super>
+  <a>A</a>
+  <b>B</b>
+ </super>
+</Subclass>

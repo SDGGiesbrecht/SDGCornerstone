@@ -1,5 +1,5 @@
 /*
- XML.Encoder.UnkeyedContainer.IndexKey.swift
+ XML.Encoder.MiscellaneousKey.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,11 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension XML.Encoder.UnkeyedContainer {
+extension XML.Encoder {
 
-  internal struct IndexKey: CodingKey {
+  internal struct MiscellaneousKey: CodingKey {
 
     // MARK: - Initialization
+
+    internal init(_ string: String) {
+      self.stringValue = string
+    }
 
     internal init(_ index: Int) {
       self.intValue = index
