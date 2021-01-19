@@ -71,4 +71,8 @@ public enum XML {
     percentEncoded.scalars.replaceMatches(for: "%".scalars, with: "_".scalars)
     return StrictString(percentEncoded)
   }
+
+  public static func unsanitize(name: StrictString) -> StrictString {
+
+  }
 }

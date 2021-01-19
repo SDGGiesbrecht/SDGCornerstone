@@ -28,14 +28,14 @@ extension XML.Decoder {
       userInformation: [CodingUserInfoKey: Any]
     ) {
       self.init(
-        root: XML.Encoder.Element(rootElement),
+        root: XML.Coder.Element(rootElement),
         codingPath: [],
         userInformation: userInformation
       )
     }
 
     internal init(
-      root: XML.Encoder.Element,
+      root: XML.Coder.Element,
       codingPath: [CodingKey],
       userInformation: [CodingUserInfoKey: Any]
     ) {
@@ -46,19 +46,19 @@ extension XML.Decoder {
 
     // MARK: - Properties
 
-    private var partialElements: [XML.Encoder.Element]
+    private var partialElements: [XML.Coder.Element]
 
     // MARK: - Encoding
 
-    internal var currentElement: XML.Encoder.Element {
+    internal var currentElement: XML.Coder.Element {
       return partialElements.last!
     }
 
     internal func enterElement(
       key: CodingKey,
-      _ closure: (XML.Encoder.Element) throws -> Void
+      _ closure: (XML.Coder.Element) throws -> Void
     ) throws {
-      let wrapped: (XML.Encoder.Element) throws -> XML.Encoder.Implementation? = { element in
+      let wrapped: (XML.Coder.Element) throws -> XML.Encoder.Implementation? = { element in
         try closure(element)
         return nil
       }
@@ -67,15 +67,15 @@ extension XML.Decoder {
 
     internal func enterElement(
       key: CodingKey,
-      _ closure: (XML.Encoder.Element) -> XML.Encoder.Implementation
+      _ closure: (XML.Coder.Element) -> XML.Encoder.Implementation
     ) throws -> XML.Encoder.Implementation {
-      let wrapped: (XML.Encoder.Element) -> XML.Encoder.Implementation? = { closure($0) }
+      let wrapped: (XML.Coder.Element) -> XML.Encoder.Implementation? = { closure($0) }
       return try enterElement(key: key, wrapped)!
     }
 
     private func enterElement(
       key: CodingKey,
-      _ closure: (XML.Encoder.Element) throws -> XML.Encoder.Implementation?
+      _ closure: (XML.Coder.Element) throws -> XML.Encoder.Implementation?
     ) throws -> XML.Encoder.Implementation? {
 
       codingPath.append(key)

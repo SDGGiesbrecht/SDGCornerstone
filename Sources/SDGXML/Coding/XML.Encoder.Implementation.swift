@@ -27,14 +27,14 @@ extension XML.Encoder {
       userInformation: [CodingUserInfoKey: Any]
     ) {
       self.init(
-        root: XML.Encoder.Element(name: rootElementName),
+        root: XML.Coder.Element(name: rootElementName),
         codingPath: [],
         userInformation: userInformation
       )
     }
 
     internal init(
-      root: XML.Encoder.Element,
+      root: XML.Coder.Element,
       codingPath: [CodingKey],
       userInformation: [CodingUserInfoKey: Any]
     ) {
@@ -45,19 +45,19 @@ extension XML.Encoder {
 
     // MARK: - Properties
 
-    private var partialElements: [XML.Encoder.Element]
+    private var partialElements: [XML.Coder.Element]
 
     // MARK: - Encoding
 
-    internal var currentElement: XML.Encoder.Element {
+    internal var currentElement: XML.Coder.Element {
       return partialElements.last!
     }
 
     internal func createNewElement(
       key: CodingKey,
-      _ closure: (XML.Encoder.Element) throws -> Void
+      _ closure: (XML.Coder.Element) throws -> Void
     ) throws {
-      let wrapped: (XML.Encoder.Element) throws -> XML.Encoder.Implementation? = { element in
+      let wrapped: (XML.Coder.Element) throws -> XML.Encoder.Implementation? = { element in
         try closure(element)
         return nil
       }
@@ -66,21 +66,21 @@ extension XML.Encoder {
 
     internal func createNewElement(
       key: CodingKey,
-      _ closure: (XML.Encoder.Element) -> XML.Encoder.Implementation
+      _ closure: (XML.Coder.Element) -> XML.Encoder.Implementation
     ) -> XML.Encoder.Implementation {
-      let wrapped: (XML.Encoder.Element) -> XML.Encoder.Implementation? = { closure($0) }
+      let wrapped: (XML.Coder.Element) -> XML.Encoder.Implementation? = { closure($0) }
       return createNewElement(key: key, wrapped)!
     }
 
     private func createNewElement(
       key: CodingKey,
-      _ closure: (XML.Encoder.Element) throws -> XML.Encoder.Implementation?
+      _ closure: (XML.Coder.Element) throws -> XML.Encoder.Implementation?
     ) rethrows -> XML.Encoder.Implementation? {
 
       codingPath.append(key)
       defer { codingPath.removeLast() }
 
-      let new = XML.Encoder.Element(name: StrictString(key.stringValue))
+      let new = XML.Coder.Element(name: StrictString(key.stringValue))
       partialElements.last!.children.append(new)
       partialElements.append(new)
       defer { partialElements.removeLast() }

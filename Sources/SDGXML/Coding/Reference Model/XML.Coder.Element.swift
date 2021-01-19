@@ -1,5 +1,5 @@
 /*
- XML.Encoder.Element.swift
+ XML.Coder.Element.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -16,7 +16,7 @@ import SDGLogic
 import SDGMathematics
 import SDGText
 
-extension XML.Encoder {
+extension XML.Coder {
 
   internal class Element {
 
@@ -33,7 +33,7 @@ extension XML.Encoder {
     internal var children: [Element] = []
     internal var ordered: Bool = true
 
-    // MARK: - Convertions
+    // MARK: - Conversions
 
     internal func modelElement(indentationLevel: Int = 0) -> XML.Element {
       let content: [XML.Content]
@@ -66,6 +66,24 @@ extension XML.Encoder {
         content = formatted
       }
       return XML.Element(name: XML.sanitize(name: name), content: content)
+    }
+
+    init(_ modelElement: XML.Element) {
+
+      self.name = XML.unsanitize(name: modelElement.name)
+
+      self.data = nil
+      self.children = []
+      for content in modelElement.content {
+        switch content {
+        case .characterData(let text):
+          if data == nil {
+            data = text.text
+          }
+        case .element(let child):
+          children.append(XML.Coder.Element(child))
+        }
+      }
     }
   }
 }
