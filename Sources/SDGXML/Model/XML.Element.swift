@@ -90,10 +90,14 @@ extension XML {
         .sorted(by: { $0.0 < $1.0 })
         .lazy.map({ " \($0.0)=\u{22}\($0.1.escapedText)\u{22}" })
         .joined()
-      let contentSource: StrictString = content
-        .lazy.map({ $0.source() })
-        .joined()
-      return "<\(name)\(attributeSource)>\(contentSource)</\(name)>"
+      if content.isEmpty {
+        return "<\(name)\(attributeSource)/>"
+      } else {
+        let contentSource: StrictString = content
+          .lazy.map({ $0.source() })
+          .joined()
+        return "<\(name)\(attributeSource)>\(contentSource)</\(name)>"
+      }
     }
 
     // MARK: - CustomStringConvertible
