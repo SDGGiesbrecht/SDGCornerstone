@@ -130,13 +130,21 @@ extension XML.Encoder {
       keyedBy keyType: NestedKey.Type,
       forKey key: Key
     ) -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
-      #warning("Not implemented yet.")
-      fatalError()
+
+      beginElement(named: key)
+      #warning("This is happening before filling in the container!")
+      defer { endElement() }
+
+      return KeyedEncodingContainer(KeyedContainer<NestedKey>(encoder: encoder))
     }
 
     internal mutating func nestedUnkeyedContainer(forKey key: Key) -> UnkeyedEncodingContainer {
-      #warning("Not implemented yet.")
-      fatalError()
+
+      beginElement(named: key)
+      #warning("This is happening before filling in the container!")
+      defer { endElement() }
+
+      return UnkeyedContainer(encoder: encoder)
     }
 
     internal mutating func superEncoder() -> Encoder {
