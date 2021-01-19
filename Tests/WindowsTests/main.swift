@@ -494,7 +494,16 @@ extension SDGXMLTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
       ("testXMLElement", testXMLElement),
-      ("testXMLEncoder", testXMLEncoder),
+      ("testXMLElementAttributes", testXMLElementAttributes),
+      ("testXMLElementEmpty", testXMLElementEmpty),
+      ("testXMLElementEscapedAttributes", testXMLElementEscapedAttributes),
+      ("testXMLElementEscapedText", testXMLElementEscapedText),
+      ("testXMLElementNested", testXMLElementNested),
+      ("testXMLElementText", testXMLElementText),
+      ("testXMLEncoderArray", testXMLEncoderArray),
+      ("testXMLEncoderDictionary", testXMLEncoderDictionary),
+      ("testXMLEncoderString", testXMLEncoderString),
+      ("testXMLEncoderStructure", testXMLEncoderStructure),
     ])
   ]
 }

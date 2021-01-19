@@ -24,59 +24,14 @@ import SDGXCTestUtilities
 class APITests: TestCase {
 
   func testXMLElement() throws {
-    let specifications = testSpecificationDirectory().appendingPathComponent("XML")
+    XCTAssertNil(try? XML.Element(source: "<element>"))
+    XCTAssertEqual(
+      try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
+      XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
+    )
+  }
 
-    func testXML(
-      element: XML.Element,
-      specification: StrictString,
-      overwriteSpecificationInsteadOfFailing: Bool,
-      file: StaticString = #filePath,
-      line: UInt = #line
-    ) throws {
-      let source = element.source()
-      compare(
-        String(source),
-        against: specifications.appendingPathComponent("\(specification).txt"),
-        overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
-        file: file,
-        line: line
-      )
-      let parsed = try XML.Element(source: source)
-      XCTAssertEqual(
-        parsed,
-        element,
-        "Reparsing produced a different element.",
-        file: file,
-        line: line
-      )
-    }
-
-    try testXML(
-      element: XML.Element(name: "empty"),
-      specification: "Empty",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    try testXML(
-      element: XML.Element(name: "text", content: ["Hello, world!"]),
-      specification: "Text",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    try testXML(
-      element: XML.Element(
-        name: "parent",
-        content: [
-          .element(XML.Element(name: "child")),
-          .element(XML.Element(name: "child")),
-        ]
-      ),
-      specification: "Nested",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    try testXML(
-      element: XML.Element(name: "text", content: ["1 < 2"]),
-      specification: "Escaped Text",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+  func testXMLElementAttributes() throws {
     try testXML(
       element: XML.Element(
         name: "element",
@@ -90,11 +45,17 @@ class APITests: TestCase {
       specification: "Attributes",
       overwriteSpecificationInsteadOfFailing: false
     )
-    XCTAssertNil(try? XML.Element(source: "<element>"))
-    XCTAssertEqual(
-      try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
-      XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
+  }
+
+  func testXMLElementEmpty() throws {
+    try testXML(
+      element: XML.Element(name: "empty"),
+      specification: "Empty",
+      overwriteSpecificationInsteadOfFailing: false
     )
+  }
+
+  func testXMLElementEscapedAttributes() throws {
     try testXML(
       element: XML.Element(
         name: "element",
@@ -107,33 +68,45 @@ class APITests: TestCase {
     )
   }
 
-  func testXMLEncoder() throws {
-    let specifications = testSpecificationDirectory().appendingPathComponent("Codable XML")
-
-    func testXML<Value: Encodable>(
-      of value: Value,
-      specification: StrictString,
-      overwriteSpecificationInsteadOfFailing: Bool,
-      file: StaticString = #filePath,
-      line: UInt = #line
-    ) throws {
-      let encoder = XML.Encoder()
-      let xml: Data = try encoder.encode(value)
-      let source = try StrictString(file: xml, origin: nil)
-      compare(
-        String(source),
-        against: specifications.appendingPathComponent("\(specification).txt"),
-        overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
-        file: file,
-        line: line
-      )
-    }
-
+  func testXMLElementEscapedText() throws {
     try testXML(
-      of: "string",
-      specification: "String",
+      element: XML.Element(name: "text", content: ["1 < 2"]),
+      specification: "Escaped Text",
       overwriteSpecificationInsteadOfFailing: false
     )
+  }
+
+  func testXMLElementNested() throws {
+    try testXML(
+      element: XML.Element(
+        name: "parent",
+        content: [
+          .element(XML.Element(name: "child")),
+          .element(XML.Element(name: "child")),
+        ]
+      ),
+      specification: "Nested",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  func testXMLElementText() throws {
+    try testXML(
+      element: XML.Element(name: "text", content: ["Hello, world!"]),
+      specification: "Text",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  func testXMLEncoderArray() throws {
+    try testXML(
+      of: ["A", "B", "C"],
+      specification: "Array",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  func testXMLEncoderDictionary() throws {
     try testXML(
       of: [
         "key": "value",
@@ -143,11 +116,17 @@ class APITests: TestCase {
       specification: "Dictionary",
       overwriteSpecificationInsteadOfFailing: false
     )
+  }
+
+  func testXMLEncoderString() throws {
     try testXML(
-      of: ["A", "B", "C"],
-      specification: "Array",
+      of: "string",
+      specification: "String",
       overwriteSpecificationInsteadOfFailing: false
     )
+  }
+
+  func testXMLEncoderStructure() throws {
     struct Structure: Codable {
       var boolean: Bool = false
     }
