@@ -183,6 +183,36 @@ class APITests: TestCase {
     )
   }
 
+  func testXMLEncoderNil() throws {
+    struct WithNil: Codable {
+      init(a: String, b: String?, c: String) {
+        self.a = a
+        self.b = b
+        self.c = c
+      }
+      var a: String
+      var b: String?
+      var c: String
+      init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        a = try container.decode(String.self)
+        _ = try container.decodeNil()
+        c = try container.decode(String.self)
+      }
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(a)
+        try container.encodeNil()
+        try container.encode(c)
+      }
+    }
+    try testXML(
+      of: WithNil(a: "A", b: nil, c: "C"),
+      specification: "With Nil",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLEncoderString() throws {
     try testXML(
       of: "string",

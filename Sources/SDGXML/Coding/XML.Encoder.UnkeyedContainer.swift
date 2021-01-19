@@ -42,8 +42,7 @@ extension XML.Encoder {
     }
 
     internal mutating func encodeNil() throws {
-      #warning("Not implemented yet.")
-      fatalError()
+      try encoder.createNewElement(key: XML.Encoder.MiscellaneousKey("nil")) { _ in }
     }
 
     internal mutating func encode(_ value: String) throws {
