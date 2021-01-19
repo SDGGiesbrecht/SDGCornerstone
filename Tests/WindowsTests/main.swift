@@ -504,6 +504,7 @@ extension SDGXMLTests.APITests {
       ("testXMLEncoderDictionary", testXMLEncoderDictionary),
       ("testXMLEncoderString", testXMLEncoderString),
       ("testXMLEncoderStructure", testXMLEncoderStructure),
+      ("testXMLEncoderCustomized", testXMLEncoderCustomized),
     ])
   ]
 }
