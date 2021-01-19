@@ -34,7 +34,7 @@ extension XML.Encoder {
     }
 
     internal init?(stringValue: String) {
-      self.stringValue = stringValue
+      self.init(stringValue)
     }
 
     internal var intValue: Int?
