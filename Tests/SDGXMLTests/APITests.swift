@@ -55,8 +55,27 @@ class APITests: TestCase {
   }
 
   func testXMLDecoder() {
+    struct Nested: Decodable {
+      var property: String
+    }
     struct Placeholder: Decodable {
-
+      var nested: Nested
+    }
+    XCTAssertThrowsError(
+      try XML.Decoder().decode(
+        Placeholder.self,
+        from: "<placeholder><nested></nested></placeholder>"
+      )
+    ) { error in
+      if let decoding = error as? DecodingError,
+        case .keyNotFound(let key, let context) = decoding
+      {
+        XCTAssertEqual(key.stringValue, "property")
+        // JSONEncoder’s comparable error does not include the key itself in the context.
+        XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
+      } else {
+        XCTFail("Wrong kind of error: \(error)")
+      }
     }
   }
 

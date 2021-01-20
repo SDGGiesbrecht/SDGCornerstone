@@ -64,7 +64,7 @@ extension XML.Decoder {
         lookup: { parent in
           let keyString = StrictString(key.stringValue)
           guard let entered = currentElement.children.first(where: { $0.name == keyString }) else {
-            throw keyNotFoundError(key: key, codingPath: codingPath)
+            throw keyNotFoundError(key: key, codingPath: codingPath.dropLast())
           }
           return entered
         },
