@@ -31,7 +31,10 @@ extension XML.Coder {
     internal var name: StrictString
     internal var data: StrictString?
     internal var children: [Element] = []
+
     internal var ordered: Bool = true
+
+    internal var currentIndex: Int = 0
 
     // MARK: - Conversions
 

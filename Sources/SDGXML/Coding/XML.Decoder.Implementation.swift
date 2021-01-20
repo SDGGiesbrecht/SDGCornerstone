@@ -12,6 +12,7 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGCollections
 import SDGText
 import SDGLocalization
 
@@ -48,7 +49,7 @@ extension XML.Decoder {
 
     private var partialElements: [XML.Coder.Element]
 
-    // MARK: - Encoding
+    // MARK: - Decoding
 
     internal var currentElement: XML.Coder.Element {
       return partialElements.last!
@@ -58,20 +59,54 @@ extension XML.Decoder {
       key: CodingKey,
       _ closure: (XML.Coder.Element) throws -> T
     ) throws -> T {
+      return try enterElement(
+        key: key,
+        lookup: { parent in
+          let keyString = StrictString(key.stringValue)
+          guard let entered = currentElement.children.first(where: { $0.name == keyString }) else {
+            throw keyNotFoundError(key: key, codingPath: codingPath)
+          }
+          return entered
+        },
+        closure: closure
+      )
+    }
+
+    internal func enterElement<T, Expected>(
+      index: Int,
+      expectedType: Expected,
+      _ closure: (XML.Coder.Element) throws -> T
+    ) throws -> T {
+      return try enterElement(
+        key: XML.Coder.MiscellaneousKey(index + 1),
+        lookup: { parent in
+          guard index ∈ parent.children.indices else {
+            throw containerEndError(Expected.self, codingPath: codingPath)
+          }
+          return parent.children[index]
+        },
+        closure: closure
+      )
+    }
+
+    private func enterElement<T>(
+      key: CodingKey,
+      lookup: (XML.Coder.Element) throws -> XML.Coder.Element,
+      closure: (XML.Coder.Element) throws -> T
+    ) rethrows -> T {
 
       codingPath.append(key)
       defer { codingPath.removeLast() }
 
-      let keyString = StrictString(key.stringValue)
-      guard let entered = currentElement.children.first(where: { $0.name == keyString }) else {
-        throw keyNotFoundError(key: key, codingPath: codingPath)
-      }
+      let entered = try lookup(currentElement)
 
       partialElements.append(entered)
       defer { partialElements.removeLast() }
 
       return try closure(entered)
     }
+
+    // MARK: - Errors
 
     internal func description(of codingPath: [CodingKey]) -> StrictString {
       let string = String(codingPath.lazy.map({ $0.stringValue }).joined(separator: " → "))
@@ -96,6 +131,48 @@ extension XML.Decoder {
       )
     }
 
+    internal func containerEndError<T>(_ type: T, codingPath: [CodingKey]) -> DecodingError {
+      let path = description(of: codingPath)
+      let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom:
+          return "The container at ‘\(path)’ has no more elements."
+        case .englishUnitedStates, .englishCanada:
+          return "The container at “\(path)” has no more elements."
+        case .deutschDeutschland:
+          return "Der Behälter unter „\(path)“ hat keine weitere Elemente."
+        }
+      }).resolved()
+      return DecodingError.valueNotFound(
+        T.self,
+        DecodingError.Context(codingPath: codingPath, debugDescription: String(description))
+      )
+    }
+
+    internal func mismatchedTypeError<T>(_ type: T.Type, codingPath: [CodingKey]) -> DecodingError {
+      let path = description(of: codingPath)
+      let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom:
+          return
+            "The data at ‘\(path)’ does not describe an instance of the expected type: \(arbitraryDescriptionOf: T.self)"
+        case .englishUnitedStates, .englishCanada:
+          return
+            "The data at “\(path)” does not describe an instance of the expected type: \(arbitraryDescriptionOf: T.self)"
+        case .deutschDeutschland:
+          return
+            "Die Daten unter „\(path)“ beschreiben kein Exemplar des erwarteten Typs: \(arbitraryDescriptionOf: T.self)"
+        }
+      }).resolved()
+      return DecodingError.typeMismatch(
+        T.self,
+        DecodingError.Context(
+          codingPath: codingPath,
+          debugDescription: String(description)
+        )
+      )
+    }
+
     // MARK: - Decoding
 
     internal func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
@@ -113,11 +190,11 @@ extension XML.Decoder {
     }
 
     internal func unkeyedContainer() -> UnkeyedDecodingContainer {
-      return UnkeyedContainer(encoder: self)
+      return UnkeyedContainer(decoder: self)
     }
 
     internal func singleValueContainer() -> SingleValueDecodingContainer {
-      return SingleValueContainer(encoder: self)
+      return SingleValueContainer(decoder: self)
     }
   }
 }

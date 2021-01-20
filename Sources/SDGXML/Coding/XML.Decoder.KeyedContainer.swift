@@ -33,42 +33,18 @@ extension XML.Decoder {
 
     internal let decoder: XML.Decoder.Implementation
 
-    // MARK: - Encoding
-
-    private func mismatchedTypeError<T>(_ type: T.Type, codingPath: [CodingKey]) -> DecodingError {
-      let path = decoder.description(of: codingPath)
-      let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
-        switch localization {
-        case .englishUnitedKingdom:
-          return
-            "The data at ‘\(path)’ does not describe an instance of the expected type: \(arbitraryDescriptionOf: T.self)"
-        case .englishUnitedStates, .englishCanada:
-          return
-            "The data at “\(path)” does not describe an instance of the expected type: \(arbitraryDescriptionOf: T.self)"
-        case .deutschDeutschland:
-          return
-            "Die Daten unter „\(path)“ beschreiben kein Exemplar des erwarteten Typs: \(arbitraryDescriptionOf: T.self)"
-        }
-      }).resolved()
-      return DecodingError.typeMismatch(
-        T.self,
-        DecodingError.Context(
-          codingPath: codingPath,
-          debugDescription: String(description)
-        )
-      )
-    }
+    // MARK: - Decoding
 
     private func decodeFromLosslessString<T>(_ type: T.Type, forKey key: Key) throws -> T
     where T: LosslessStringConvertible {
       let string = try decode(String.self, forKey: key)
       guard let value = T(string) else {
-        throw mismatchedTypeError(T.self, codingPath: decoder.codingPath.appending(key))
+        throw decoder.mismatchedTypeError(T.self, codingPath: decoder.codingPath.appending(key))
       }
       return value
     }
 
-    // MARK: - KeyedEncodingContainerProtocol
+    // MARK: - KeyedDecodingContainerProtocol
 
     internal var allKeys: [Key] {
       return decoder.currentElement.children.compactMap { child in
@@ -141,7 +117,7 @@ extension XML.Decoder {
     internal func decode(_ type: String.Type, forKey key: Key) throws -> String {
       return try decoder.enterElement(key: key) { element in
         guard let string = element.data else {
-          throw mismatchedTypeError(String.self, codingPath: decoder.codingPath)
+          throw decoder.mismatchedTypeError(String.self, codingPath: decoder.codingPath)
         }
         return String(string)
       }

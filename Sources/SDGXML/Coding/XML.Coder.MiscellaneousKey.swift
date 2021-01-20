@@ -18,6 +18,10 @@ extension XML.Coder {
 
     // MARK: - Static Properties
 
+    internal static var `nil`: StrictString {
+      return "nil"
+    }
+
     internal static var `super`: MiscellaneousKey {
       return MiscellaneousKey("super")
     }
