@@ -54,7 +54,7 @@ class APITests: TestCase {
     wait(for: [tested], timeout: 0.1)
   }
 
-  func testXMLDecoder() {
+  func testXMLDecoderKeyNotFound() {
     struct Nested: Decodable {
       var property: String
     }
@@ -73,6 +73,38 @@ class APITests: TestCase {
         XCTAssertEqual(key.stringValue, "property")
         // JSONEncoder’s comparable error does not include the key itself in the context.
         XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
+      } else {
+        XCTFail("Wrong kind of error: \(error)")
+      }
+    }
+  }
+
+  func testXMLDecoderValueNotFound() {
+    struct Nested: Decodable {
+      var a: String
+      var b: String
+      init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        a = try container.decode(String.self)
+        b = try container.decode(String.self)
+      }
+    }
+    struct Placeholder: Decodable {
+      var nested: Nested
+    }
+    XCTAssertThrowsError(
+      try XML.Decoder().decode(
+        Placeholder.self,
+        // Element names should be irrelevant in an unkeyed container.
+        from: "<placeholder><nested><first>some string</first></nested></placeholder>"
+      )
+    ) { error in
+      if let decoding = error as? DecodingError,
+        case .valueNotFound(let type, let context) = decoding
+      {
+        XCTAssert(type == String.self, "Wrong type: \(type)")
+        // JSONEncoder’s comparable error does include the index in the context.
+        XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "2"])
       } else {
         XCTFail("Wrong kind of error: \(error)")
       }

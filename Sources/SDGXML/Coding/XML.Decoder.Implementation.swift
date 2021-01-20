@@ -74,7 +74,7 @@ extension XML.Decoder {
 
     internal func enterElement<T, Expected>(
       index: Int,
-      expectedType: Expected,
+      expectedType: Expected.Type,
       _ closure: (XML.Coder.Element) throws -> T
     ) throws -> T {
       return try enterElement(
@@ -131,7 +131,7 @@ extension XML.Decoder {
       )
     }
 
-    internal func containerEndError<T>(_ type: T, codingPath: [CodingKey]) -> DecodingError {
+    internal func containerEndError<T>(_ type: T.Type, codingPath: [CodingKey]) -> DecodingError {
       let path = description(of: codingPath)
       let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
         switch localization {
