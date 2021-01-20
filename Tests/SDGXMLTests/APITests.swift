@@ -23,6 +23,43 @@ import SDGXCTestUtilities
 
 class APITests: TestCase {
 
+  static var expectationStorage1: XCTestExpectation?
+  func resetExpectationStorage() {
+    APITests.expectationStorage1 = nil
+  }
+
+  override func setUp() {
+    super.setUp()
+    resetExpectationStorage()
+  }
+  override func tearDown() {
+    resetExpectationStorage()
+    super.tearDown()
+  }
+
+  func testXMLDecoderContainer() throws {
+    struct Placeholder: Decodable {
+      enum CodingKeys: CodingKey {
+        case key
+      }
+      init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        XCTAssertEqual(container.codingPath.map({ $0.stringValue }), [])
+        APITests.expectationStorage1?.fulfill()
+      }
+    }
+    let tested = expectation(description: "init(from:) called")
+    APITests.expectationStorage1 = tested
+    _ = try XML.Decoder().decode(Placeholder.self, from: "<placeholder></placeholder>")
+    wait(for: [tested], timeout: 0.1)
+  }
+
+  func testXMLDecoder() {
+    struct Placeholder: Decodable {
+
+    }
+  }
+
   func testXMLElement() throws {
     XCTAssertNil(try? XML.Element(source: "<element>"))
     XCTAssertEqual(

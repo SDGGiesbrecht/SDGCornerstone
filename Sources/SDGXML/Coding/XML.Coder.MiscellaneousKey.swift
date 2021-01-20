@@ -39,11 +39,11 @@ extension XML.Coder {
 
     // MARK: - Coding Key
 
-    internal init?(intValue: Int) {
+    internal init?(intValue: Int) {  // @exempt(from: tests) Unreachable?
       self.init(intValue)
     }
 
-    internal init?(stringValue: String) {
+    internal init?(stringValue: String) {  // @exempt(from: tests) Unreachable?
       self.init(stringValue)
     }
 
