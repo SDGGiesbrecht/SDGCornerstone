@@ -136,11 +136,11 @@ extension XML.Decoder {
       let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
         switch localization {
         case .englishUnitedKingdom:
-          return "The container at ‘\(path)’ has no more elements."
+          return "The container at ‘\(path)’ has too few elements."
         case .englishUnitedStates, .englishCanada:
-          return "The container at “\(path)” has no more elements."
+          return "The container at “\(path)” has too few elements."
         case .deutschDeutschland:
-          return "Der Behälter unter „\(path)“ hat keine weitere Elemente."
+          return "Der Behälter unter „\(path)“ hat zu wenig Elemente."
         }
       }).resolved()
       return DecodingError.valueNotFound(
