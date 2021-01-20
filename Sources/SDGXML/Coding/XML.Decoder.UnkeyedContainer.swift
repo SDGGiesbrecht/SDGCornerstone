@@ -72,7 +72,7 @@ extension XML.Decoder {
         index: currentIndex,
         expectedType: Any.self
       ) { element in
-        if element.name == XML.Coder.MiscellaneousKey.nil {
+        if element.name == StrictString(XML.Coder.MiscellaneousKey.nil) {
           return true
         } else {
           return false
