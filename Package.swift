@@ -752,6 +752,8 @@ let package = Package(
       dependencies: [
         "SDGXML", "SDGTesting", "SDGXCTestUtilities",
         "SDGText",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations",
         "SDGPersistenceTestUtilities",
       ]
     ),
