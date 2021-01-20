@@ -118,11 +118,11 @@ extension XML.Decoder {
       let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
         switch localization {
         case .englishUnitedKingdom:
-          return "There is no value at ‘\(path)’."
+          return "‘\(key.stringValue)’ is missing at ‘\(path)’."
         case .englishUnitedStates, .englishCanada:
-          return "There is no value at “\(path)”."
+          return "“\(key.stringValue)” is missing at “\(path)”."
         case .deutschDeutschland:
-          return "Kein Wert ist mit „\(path)“ verbunden."
+          return "„\(key.stringValue)“ fehlt unter „\(path)“."
         }
       }).resolved()
       return DecodingError.keyNotFound(
