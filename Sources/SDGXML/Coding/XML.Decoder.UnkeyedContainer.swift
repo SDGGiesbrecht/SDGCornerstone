@@ -62,7 +62,7 @@ extension XML.Decoder {
 
     // MARK: - UnkeyedDecodingContainer
 
-    internal var count: Int {
+    internal var count: Int? {
       return decoder.currentElement.children.count
     }
 
@@ -75,7 +75,6 @@ extension XML.Decoder {
       }
     }
 
-    #warning("Needed?")
     internal var isAtEnd: Bool {
       return currentIndex == count
     }
