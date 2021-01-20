@@ -42,8 +42,9 @@ extension XML.Encoder {
     }
 
     internal mutating func encodeNil() throws {
-      try encoder.createNewElement(key: XML.Coder.MiscellaneousKey(XML.Coder.MiscellaneousKey.nil))
-      { _ in }
+      try encoder.createNewElement(
+        key: XML.Coder.MiscellaneousKey(XML.Coder.MiscellaneousKey.nil)
+      ) { _ in }
     }
 
     internal mutating func encode(_ value: String) throws {
