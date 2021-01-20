@@ -18,7 +18,7 @@ extension XML.Coder {
 
     // MARK: - Static Properties
 
-    internal static var `nil`: StrictString {
+    internal static var `nil`: String {
       return "nil"
     }
 
