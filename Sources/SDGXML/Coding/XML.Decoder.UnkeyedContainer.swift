@@ -113,5 +113,11 @@ extension XML.Decoder {
     internal func superDecoder() throws -> Decoder {
       return nestedDecoder(index: currentIndex)
     }
+
+    // MARK: - XMLDecoderKeylessContainer
+
+    internal var indexKey: CodingKey? {
+      return XML.Coder.MiscellaneousKey(currentIndex + 1)
+    }
   }
 }
