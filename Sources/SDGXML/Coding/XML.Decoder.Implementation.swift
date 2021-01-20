@@ -54,55 +54,46 @@ extension XML.Decoder {
       return partialElements.last!
     }
 
-    internal func enterElement(
+    internal func enterElement<T>(
       key: CodingKey,
-      _ closure: (XML.Coder.Element) throws -> Void
-    ) throws {
-      let wrapped: (XML.Coder.Element) throws -> XML.Encoder.Implementation? = { element in
-        try closure(element)
-        return nil
-      }
-      _ = try enterElement(key: key, wrapped)
-    }
-
-    internal func enterElement(
-      key: CodingKey,
-      _ closure: (XML.Coder.Element) -> XML.Encoder.Implementation
-    ) throws -> XML.Encoder.Implementation {
-      let wrapped: (XML.Coder.Element) -> XML.Encoder.Implementation? = { closure($0) }
-      return try enterElement(key: key, wrapped)!
-    }
-
-    private func enterElement(
-      key: CodingKey,
-      _ closure: (XML.Coder.Element) throws -> XML.Encoder.Implementation?
-    ) throws -> XML.Encoder.Implementation? {
+      _ closure: (XML.Coder.Element) throws -> T
+    ) throws -> T {
 
       codingPath.append(key)
       defer { codingPath.removeLast() }
 
       let keyString = StrictString(key.stringValue)
       guard let entered = currentElement.children.first(where: { $0.name == keyString }) else {
-        let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
-          switch localization {
-          case .englishUnitedKingdom:
-            return "There is no value associated with the key ‘\(key.stringValue)’."
-          case .englishUnitedStates, .englishCanada:
-            return "There is no value associated with the key “\(key.stringValue)”."
-          case .deutschDeutschland:
-            return "Kein Wert ist mit dem Schlüssel „\(key.stringValue)“ verbunden."
-          }
-        }).resolved()
-        throw DecodingError.keyNotFound(
-          key,
-          DecodingError.Context(codingPath: codingPath, debugDescription: String(description))
-        )
+        throw keyNotFoundError(key: key, codingPath: codingPath)
       }
 
       partialElements.append(entered)
       defer { partialElements.removeLast() }
 
       return try closure(entered)
+    }
+
+    internal func description(of codingPath: [CodingKey]) -> StrictString {
+      let string = String(codingPath.lazy.map({ $0.stringValue }).joined(separator: " → "))
+      return StrictString(string)
+    }
+
+    internal func keyNotFoundError(key: CodingKey, codingPath: [CodingKey]) -> DecodingError {
+      let path = description(of: codingPath)
+      let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom:
+          return "There is no value at ‘\(path)’."
+        case .englishUnitedStates, .englishCanada:
+          return "There is no value at “\(path)”."
+        case .deutschDeutschland:
+          return "Kein Wert ist mit „\(path)“ verbunden."
+        }
+      }).resolved()
+      return DecodingError.keyNotFound(
+        key,
+        DecodingError.Context(codingPath: codingPath, debugDescription: String(description))
+      )
     }
 
     // MARK: - Decoding

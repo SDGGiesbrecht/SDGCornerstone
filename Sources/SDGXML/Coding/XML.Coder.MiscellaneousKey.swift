@@ -1,5 +1,5 @@
 /*
- XML.Encoder.MiscellaneousKey.swift
+ XML.Coder.MiscellaneousKey.swift
 
  This source file is part of the SDGCornerstone open source project.
  https://sdggiesbrecht.github.io/SDGCornerstone
@@ -12,9 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
-extension XML.Encoder {
+extension XML.Coder {
 
   internal struct MiscellaneousKey: CodingKey {
+
+    // MARK: - Static Properties
+
+    internal static var `super`: MiscellaneousKey {
+      return MiscellaneousKey("super")
+    }
 
     // MARK: - Initialization
 

@@ -31,8 +31,8 @@ extension XML.Encoder {
 
     // MARK: - Encoding
 
-    private func nextKey() -> MiscellaneousKey {
-      return MiscellaneousKey(count + 1)
+    private func nextKey() -> XML.Coder.MiscellaneousKey {
+      return XML.Coder.MiscellaneousKey(count + 1)
     }
 
     // MARK: - UnkeyedEncodingContainer
@@ -42,7 +42,7 @@ extension XML.Encoder {
     }
 
     internal mutating func encodeNil() throws {
-      try encoder.createNewElement(key: XML.Encoder.MiscellaneousKey("nil")) { _ in }
+      try encoder.createNewElement(key: XML.Coder.MiscellaneousKey("nil")) { _ in }
     }
 
     internal mutating func encode(_ value: String) throws {
