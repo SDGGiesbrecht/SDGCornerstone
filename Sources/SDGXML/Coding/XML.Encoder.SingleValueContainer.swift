@@ -30,7 +30,9 @@ extension XML.Encoder {
 
     // MARK: - SingleValueEncodingContainer
 
-    internal mutating func encodeNil() throws {}
+    internal mutating func encodeNil() throws {
+      encoder.currentElement.name = StrictString(XML.Coder.MiscellaneousKey.nil)
+    }
 
     internal mutating func encode(_ value: String) throws {
       encoder.currentElement.data = StrictString(value)
