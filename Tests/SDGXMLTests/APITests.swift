@@ -106,40 +106,43 @@ class APITests: TestCase {
     )
   }
 
+  class Superclass: Codable {
+    init(a: String, b: String) {
+      self.a = a
+      self.b = b
+    }
+    var a: String
+    var b: String
+  }
+  final class Subclass: Superclass, Equatable {
+    init(a: String, b: String, c: String, d: String) {
+      self.c = c
+      self.d = d
+      super.init(a: a, b: b)
+    }
+    var c: String
+    var d: String
+    enum CodingKeys: CodingKey {
+      case c
+      case d
+    }
+    required init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: CodingKeys.self)
+      c = try container.decode(String.self, forKey: .c)
+      d = try container.decode(String.self, forKey: .d)
+      try super.init(from: try container.superDecoder())
+    }
+    override func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(c, forKey: .c)
+      try container.encode(d, forKey: .d)
+      try super.encode(to: container.superEncoder())
+    }
+    static func == (left: Subclass, right: Subclass) -> Bool {
+      return (left.a, left.b, left.c, left.d) == (right.a, right.b, right.c, right.d)
+    }
+  }
   func testXMLEncoderClass() throws {
-    class Superclass: Codable {
-      init(a: String, b: String) {
-        self.a = a
-        self.b = b
-      }
-      var a: String
-      var b: String
-    }
-    class Subclass: Superclass {
-      init(a: String, b: String, c: String, d: String) {
-        self.c = c
-        self.d = d
-        super.init(a: a, b: b)
-      }
-      var c: String
-      var d: String
-      enum CodingKeys: CodingKey {
-        case c
-        case d
-      }
-      required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        c = try container.decode(String.self, forKey: .c)
-        d = try container.decode(String.self, forKey: .d)
-        try super.init(from: try container.superDecoder())
-      }
-      override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(c, forKey: .c)
-        try container.encode(d, forKey: .d)
-        try super.encode(to: container.superEncoder())
-      }
-    }
     try testXML(
       of: Subclass(a: "A", b: "B", c: "C", d: "D"),
       specification: "Class",
@@ -148,7 +151,7 @@ class APITests: TestCase {
   }
 
   func testXMLEncoderCustomized() throws {
-    struct Customized: Codable {
+    struct Customized: Codable, Equatable {
       var a: String = "A"
       var b: String = "B"
       var c: String = "C"
@@ -184,7 +187,7 @@ class APITests: TestCase {
   }
 
   func testXMLEncoderNil() throws {
-    struct WithNil: Codable {
+    struct WithNil: Codable, Equatable {
       init(a: String, b: String?, c: String) {
         self.a = a
         self.b = b
@@ -214,11 +217,11 @@ class APITests: TestCase {
   }
 
   func testXMLEncoderSingleValue() throws {
-    struct Nested: Codable {
+    struct Nested: Codable, Equatable {
       var a: Bool = false
       var b: Bool = true
     }
-    struct SingleValue: Codable {
+    struct SingleValue: Codable, Equatable {
       init(value: Nested) {
         self.value = value
       }
@@ -248,11 +251,11 @@ class APITests: TestCase {
   }
 
   func testXMLEncoderStructure() throws {
-    struct Nested: Codable {
+    struct Nested: Codable, Equatable {
       var a: String = "A"
       var b: String = "B"
     }
-    struct Structure: Codable {
+    struct Structure: Codable, Equatable {
       var boolean: Bool = false
       var optional: Bool?
       var integer: Int = 0
@@ -277,11 +280,11 @@ class APITests: TestCase {
   }
 
   func testXMLEncoderUnkeyed() throws {
-    struct Nested: Codable {
+    struct Nested: Codable, Equatable {
       var a: String = "A"
       var b: String = "B"
     }
-    struct Unkeyed: Codable {
+    struct Unkeyed: Codable, Equatable {
       init() {}
       var boolean: Bool = false
       var optional: Bool?

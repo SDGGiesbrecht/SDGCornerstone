@@ -17,15 +17,17 @@ import Foundation
 import SDGText
 import SDGXML
 
+import XCTest
+
 import SDGPersistenceTestUtilities
 
-func testXML<Value: Encodable>(
+func testXML<Value>(
   of value: Value,
   specification: StrictString,
   overwriteSpecificationInsteadOfFailing: Bool,
   file: StaticString = #filePath,
   line: UInt = #line
-) throws {
+) throws where Value: Codable, Value: Equatable {
   let specifications = testSpecificationDirectory().appendingPathComponent("Codable XML")
 
   let encoder = XML.Encoder()
@@ -35,6 +37,16 @@ func testXML<Value: Encodable>(
     String(source),
     against: specifications.appendingPathComponent("\(specification).txt"),
     overwriteSpecificationInsteadOfFailing: overwriteSpecificationInsteadOfFailing,
+    file: file,
+    line: line
+  )
+
+  let decoder = XML.Decoder()
+  let constructed = try decoder.decode(Value.self, from: xml)
+  XCTAssertEqual(
+    constructed,
+    value,
+    "Value changed after encoding and decoding.",
     file: file,
     line: line
   )

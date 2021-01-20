@@ -252,7 +252,8 @@ let package = Package(
 
     // #documentation(SDGXML)
     /// XML encoding.
-    .library(name: "SDGXML", targets: ["SDGXML"]),
+    // #warning(Not finalized yet.)
+    .library(name: "_SDGXML", targets: ["SDGXML"]),
 
     // #documentation(SDGTesting)
     /// Miscellaneous test utilities.
