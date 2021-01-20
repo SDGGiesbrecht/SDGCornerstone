@@ -47,6 +47,19 @@ extension XML.Decoder {
       return result
     }
 
+    internal func nestedDecoder(index: Int) throws -> XML.Decoder.Implementation {
+      return try decoder.enterElement(
+        index: index,
+        expectedType: Any.self
+      ) { element in
+        return XML.Decoder.Implementation(
+          root: element,
+          codingPath: decoder.codingPath,
+          userInformation: decoder.userInfo
+        )
+      }
+    }
+
     // MARK: - UnkeyedDecodingContainer
 
     internal var count: Int {
@@ -103,15 +116,17 @@ extension XML.Decoder {
       keyedBy type: NestedKey.Type
     ) throws -> KeyedDecodingContainer<NestedKey>
     where NestedKey: CodingKey {
-      return KeyedContainer<NestedKey>(decoder: nestedDecoder(index: currentIndex))
+      return KeyedDecodingContainer(
+        KeyedContainer<NestedKey>(decoder: try nestedDecoder(index: currentIndex))
+      )
     }
 
     internal func nestedUnkeyedContainer() throws -> UnkeyedDecodingContainer {
-      return UnkeyedContainer(decoder: nestedDecoder(index: currentIndex))
+      return UnkeyedContainer(decoder: try nestedDecoder(index: currentIndex))
     }
 
     internal func superDecoder() throws -> Decoder {
-      return nestedDecoder(index: currentIndex)
+      return try nestedDecoder(index: currentIndex)
     }
 
     // MARK: - XMLDecoderKeylessContainer

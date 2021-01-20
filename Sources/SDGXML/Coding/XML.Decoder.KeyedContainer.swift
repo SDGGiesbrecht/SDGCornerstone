@@ -44,6 +44,16 @@ extension XML.Decoder {
       return value
     }
 
+    internal func nestedDecoder(key: CodingKey) throws -> XML.Decoder.Implementation {
+      return try decoder.enterElement(key: key) { element in
+        return XML.Decoder.Implementation(
+          root: element,
+          codingPath: decoder.codingPath,
+          userInformation: decoder.userInfo
+        )
+      }
+    }
+
     // MARK: - KeyedDecodingContainerProtocol
 
     internal var allKeys: [Key] {

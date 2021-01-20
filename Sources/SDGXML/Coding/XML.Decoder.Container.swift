@@ -18,18 +18,6 @@ internal protocol XMLDecoderContainer {
 
 extension XMLDecoderContainer {
 
-  // MARK: - Decoding
-
-  internal func nestedDecoder(key: CodingKey) throws -> XML.Decoder.Implementation {
-    return try decoder.enterElement(key: key) { element in
-      return XML.Decoder.Implementation(
-        root: element,
-        codingPath: decoder.codingPath,
-        userInformation: decoder.userInfo
-      )
-    }
-  }
-
   // MARK: - XDecodingContainer
 
   internal var codingPath: [CodingKey] {
