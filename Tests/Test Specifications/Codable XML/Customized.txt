@@ -1,12 +1,12 @@
 <Customized>
- <a>
+ <keyed>
   <a>A</a>
   <b>B</b>
   <c>C</c>
- </a>
- <b>
+ </keyed>
+ <unkeyed>
   <_31>A</_31>
   <_32>B</_32>
   <_33>C</_33>
- </b>
+ </unkeyed>
 </Customized>

@@ -152,16 +152,35 @@ class APITests: TestCase {
 
   func testXMLEncoderCustomized() throws {
     struct Customized: Codable, Equatable {
+      init() {}
       var a: String = "A"
       var b: String = "B"
       var c: String = "C"
+      enum CodingKeys: CodingKey {
+        case a
+        case b
+        case c
+        case keyed
+        case unkeyed
+      }
+      init(from decoder: Decoder) throws {
+        let all = try decoder.container(keyedBy: CodingKeys.self)
+        let keyed = try all.nestedContainer(keyedBy: CodingKeys.self, forKey: .keyed)
+        a = try keyed.decode(String.self, forKey: .a)
+        b = try keyed.decode(String.self, forKey: .b)
+        c = try keyed.decode(String.self, forKey: .c)
+        var unkeyed = try all.nestedUnkeyedContainer(forKey: .unkeyed)
+        XCTAssertEqual(try unkeyed.decode(String.self), a)
+        XCTAssertEqual(try unkeyed.decode(String.self), b)
+        XCTAssertEqual(try unkeyed.decode(String.self), c)
+      }
       func encode(to encoder: Encoder) throws {
         var all = encoder.container(keyedBy: CodingKeys.self)
-        var keyed = all.nestedContainer(keyedBy: CodingKeys.self, forKey: .a)
+        var keyed = all.nestedContainer(keyedBy: CodingKeys.self, forKey: .keyed)
         try keyed.encode(a, forKey: .a)
         try keyed.encode(b, forKey: .b)
         try keyed.encode(c, forKey: .c)
-        var unkeyed = all.nestedUnkeyedContainer(forKey: .b)
+        var unkeyed = all.nestedUnkeyedContainer(forKey: .unkeyed)
         try unkeyed.encode(a)
         try unkeyed.encode(b)
         try unkeyed.encode(c)
