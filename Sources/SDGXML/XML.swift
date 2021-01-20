@@ -62,7 +62,7 @@ public enum XML {
       withAllowedCharacters: legalCharacters.subtracting(["_"])
     )!
     if let first = percentEncoded.scalars.first,
-      first ∉ legalStarters
+      first ∉ legalStarters.union(["%"])// “%” would mean it was already handled and shouldn’t be doubled.
     {
       percentEncoded.scalars.removeFirst()
       let sanitized = String(first).addingPercentEncoding(withAllowedCharacters: legalStarters)!
@@ -73,6 +73,12 @@ public enum XML {
   }
 
   public static func unsanitize(name: StrictString) -> StrictString {
-
+    var percentEncoded = String(name)
+    percentEncoded.scalars.replaceMatches(for: "_".scalars, with: "%".scalars)
+    guard let unsanitized = percentEncoded.removingPercentEncoding else {
+      // Was never properly sanitized to begin with.
+      return name
+    }
+    return StrictString(unsanitized)
   }
 }

@@ -165,6 +165,7 @@ extension XML.Decoder {
       }
     }
 
+    #warning("Are these provided?")
     internal func decodeIfPresent(_ type: Bool.Type, forKey key: Key) throws -> Bool? {
       return try decodeFromLosslessStringIfPresent(Bool.self, forKey: key)
     }
