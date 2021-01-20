@@ -109,7 +109,7 @@ extension XML.Decoder {
 
     internal func container<Key>(keyedBy type: Key.Type) -> KeyedDecodingContainer<Key>
     where Key: CodingKey {
-      return KeyedDecodingContainer(KeyedContainer(encoder: self))
+      return KeyedDecodingContainer(KeyedContainer(decoder: self))
     }
 
     internal func unkeyedContainer() -> UnkeyedDecodingContainer {

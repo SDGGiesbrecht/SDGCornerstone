@@ -25,8 +25,8 @@ extension XML.Decoder {
 
     // MARK: - Initialization
 
-    internal init(encoder: XML.Decoder.Implementation) {
-      self.decoder = encoder
+    internal init(decoder: XML.Decoder.Implementation) {
+      self.decoder = decoder
     }
 
     // MARK: - Properties
@@ -238,19 +238,19 @@ extension XML.Decoder {
       forKey key: Key
     ) throws -> KeyedDecodingContainer<NestedKey>
     where NestedKey: CodingKey {
-      return KeyedDecodingContainer(KeyedContainer<NestedKey>(decoder: nestedDecoder(key: key)))
+      return KeyedDecodingContainer(KeyedContainer<NestedKey>(decoder: try nestedDecoder(key: key)))
     }
 
     internal func nestedUnkeyedContainer(forKey key: Key) throws -> UnkeyedDecodingContainer {
-      return UnkeyedContainer(decoder: nestedDecoder(key: key))
+      return UnkeyedContainer(decoder: try nestedDecoder(key: key))
     }
 
     internal func superDecoder() throws -> Decoder {
-      return superDecoder(forKey: XML.Coder.MiscellaneousKey.super)
+      return try superDecoder(forKey: XML.Coder.MiscellaneousKey.super)
     }
 
-    internal func superDecoder(forKey key: Key) throws -> Decoder {
-      return nestedDecoder(key: key)
+    internal func superDecoder<Key>(forKey key: Key) throws -> Decoder where Key: CodingKey {
+      return try nestedDecoder(key: key)
     }
   }
 }
