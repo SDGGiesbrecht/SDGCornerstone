@@ -142,11 +142,13 @@ class APITests: TestCase {
     }
   }
   func testXMLCoderClassUnkeyed() throws {
-    try SDGXMLTests.testXML(
-      of: UnkeyedSubclass(a: "A", b: "B", c: "C", d: "D"),
-      specification: "Unkeyed Class",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      try SDGXMLTests.testXML(
+        of: UnkeyedSubclass(a: "A", b: "B", c: "C", d: "D"),
+        specification: "Unkeyed Class",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderCustomized() throws {
