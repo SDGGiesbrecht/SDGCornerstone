@@ -495,6 +495,7 @@ extension SDGXMLTests.APITests {
     testCase([
       ("testXMLCoderArray", testXMLCoderArray),
       ("testXMLCoderClass", testXMLCoderClass),
+      ("testXMLCoderClassUnkeyed", testXMLCoderClassUnkeyed),
       ("testXMLCoderCustomized", testXMLCoderCustomized),
       ("testXMLCoderDictionary", testXMLCoderDictionary),
       ("testXMLCoderKeyedNil", testXMLCoderKeyedNil),

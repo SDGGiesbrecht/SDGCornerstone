@@ -64,6 +64,7 @@ class APITests: TestCase {
     enum CodingKeys: CodingKey {
       case c
       case d
+      case e
     }
     required init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -85,6 +86,38 @@ class APITests: TestCase {
     try testXML(
       of: Subclass(a: "A", b: "B", c: "C", d: "D"),
       specification: "Class",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  final class UnkeyedSubclass: Superclass, Equatable {
+    init(a: String, b: String, c: String, d: String) {
+      self.c = c
+      self.d = d
+      super.init(a: a, b: b)
+    }
+    var c: String
+    var d: String
+    required init(from decoder: Decoder) throws {
+      var container = try decoder.unkeyedContainer()
+      c = try container.decode(String.self)
+      d = try container.decode(String.self)
+      try super.init(from: try container.superDecoder())
+    }
+    override func encode(to encoder: Encoder) throws {
+      var container = encoder.unkeyedContainer()
+      try container.encode(c)
+      try container.encode(d)
+      try super.encode(to: container.superEncoder())
+    }
+    static func == (left: UnkeyedSubclass, right: UnkeyedSubclass) -> Bool {
+      return (left.a, left.b, left.c, left.d) == (right.a, right.b, right.c, right.d)
+    }
+  }
+  func testXMLCoderClassUnkeyed() throws {
+    try testXML(
+      of: UnkeyedSubclass(a: "A", b: "B", c: "C", d: "D"),
+      specification: "Unkeyed Class",
       overwriteSpecificationInsteadOfFailing: false
     )
   }
