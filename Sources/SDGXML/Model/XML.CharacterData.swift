@@ -40,9 +40,7 @@ extension XML {
 
     /// The text of the character data with escapes applied.
     internal var escapedText: StrictString {
-      get {
-        return CharacterData.escape(text)
-      }
+      return CharacterData.escape(text)
     }
     private static func escape(_ text: StrictString) -> StrictString {
       return text.mutatingMatches(

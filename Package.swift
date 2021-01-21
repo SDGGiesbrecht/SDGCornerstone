@@ -252,7 +252,7 @@ let package = Package(
 
     // #documentation(SDGXML)
     /// XML encoding.
-    // #warning(Not finalized yet.)
+    // #workaround(Not finalized yet.)
     .library(name: "_SDGXML", targets: ["SDGXML"]),
 
     // #documentation(SDGTesting)
@@ -784,7 +784,7 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(workspace version 0.36.0, Bug prevents centralization of windows conditions.)
+    // #workaround(workspace version 0.36.1, Bug prevents centralization of windows conditions.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.FileManager.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.Process.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.ProcessInfo.)

@@ -38,7 +38,7 @@ extension XML.Encoder {
       encoder.currentElement.data = StrictString(value)
     }
 
-    mutating func encode<T>(_ value: T) throws where T: Encodable {
+    internal mutating func encode<T>(_ value: T) throws where T: Encodable {
       try value.encode(to: encoder)
     }
   }

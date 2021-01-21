@@ -95,7 +95,7 @@ extension XML.Coder {
       return XML.Element(name: XML.sanitize(name: name), attributes: attributes, content: content)
     }
 
-    init(_ modelElement: XML.Element) {
+    internal init(_ modelElement: XML.Element) {
 
       self.name = XML.unsanitize(name: modelElement.name)
 

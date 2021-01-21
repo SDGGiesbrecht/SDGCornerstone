@@ -62,7 +62,9 @@ public enum XML {
       withAllowedCharacters: legalCharacters.subtracting(["_"])
     )!
     if let first = percentEncoded.scalars.first,
-      first ∉ legalStarters.union(["%"])  // “%” would mean it was already handled and shouldn’t be doubled.
+      first
+        ∉ legalStarters
+        .union(["%"])  // “%” would mean it was already handled and shouldn’t be doubled.
     {
       percentEncoded.scalars.removeFirst()
       let sanitized = String(first).addingPercentEncoding(withAllowedCharacters: legalStarters)!
