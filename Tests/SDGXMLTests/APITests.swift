@@ -55,7 +55,7 @@ class APITests: TestCase {
 
   func testXMLCharacterData() {
     testCustomStringConvertibleConformance(
-      of: XML.CharacterData(text: "attribute text, 0 < 1"),
+      of: "attribute text, 0 < 1" as XML.CharacterData,
       localizations: InterfaceLocalization.self,
       uniqueTestName: "Character Data",
       overwriteSpecificationInsteadOfFailing: false
