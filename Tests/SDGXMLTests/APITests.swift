@@ -214,6 +214,7 @@ class APITests: TestCase {
         b = try container.decode(Optional<String>.self)
         c = try container.decode(String.self)
         XCTAssert(try container.decodeNil())
+        XCTAssertFalse(try container.decodeNil())
       }
       func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
@@ -221,6 +222,7 @@ class APITests: TestCase {
         try container.encode(b)
         try container.encode(c)
         try container.encodeNil()
+        try container.encode("non‐nil")
       }
     }
     try testXML(
