@@ -35,26 +35,28 @@ extension XML {
 
     public var userInformation: [CodingUserInfoKey: Any]
 
-    // MARK: - Encoding
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      // MARK: - Decoding
 
-    /// Decodes a top‐level value from XML source.
-    ///
-    /// - Parameters:
-    ///   - type: The type to decode.
-    ///   - source: The source from which to decode.
-    public func decode<T: Decodable>(_ type: T.Type, from source: StrictString) throws -> T {
-      let element = try XML.Element(source: source)
-      let implementation = Implementation(rootElement: element, userInformation: userInformation)
-      return try implementation.decode(type)
-    }
+      /// Decodes a top‐level value from XML source.
+      ///
+      /// - Parameters:
+      ///   - type: The type to decode.
+      ///   - source: The source from which to decode.
+      public func decode<T: Decodable>(_ type: T.Type, from source: StrictString) throws -> T {
+        let element = try XML.Element(source: source)
+        let implementation = Implementation(rootElement: element, userInformation: userInformation)
+        return try implementation.decode(type)
+      }
 
-    /// Decodes a top‐level value from XML data.
-    ///
-    /// - Parameters:
-    ///   - type: The type to decode.
-    ///   - data: The data from which to decode.
-    public func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
-      return try decode(type, from: StrictString(file: data, origin: nil))
-    }
+      /// Decodes a top‐level value from XML data.
+      ///
+      /// - Parameters:
+      ///   - type: The type to decode.
+      ///   - data: The data from which to decode.
+      public func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
+        return try decode(type, from: StrictString(file: data, origin: nil))
+      }
+    #endif
   }
 }

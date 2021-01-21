@@ -36,12 +36,14 @@ func testXML(
     file: file,
     line: line
   )
-  let parsed = try XML.Element(source: source)
-  XCTAssertEqual(
-    parsed,
-    element,
-    "Reparsing produced a different element.",
-    file: file,
-    line: line
-  )
+  #if !PLATFORM_LACKS_FOUNDATION_XML
+    let parsed = try XML.Element(source: source)
+    XCTAssertEqual(
+      parsed,
+      element,
+      "Reparsing produced a different element.",
+      file: file,
+      line: line
+    )
+  #endif
 }

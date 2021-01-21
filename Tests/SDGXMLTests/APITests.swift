@@ -449,8 +449,10 @@ class APITests: TestCase {
     }
     let tested = expectation(description: "init(from:) called")
     APITests.expectationStorage1 = tested
-    _ = try XML.Decoder().decode(Placeholder.self, from: "<placeholder></placeholder>")
-    wait(for: [tested], timeout: 0.1)
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      _ = try XML.Decoder().decode(Placeholder.self, from: "<placeholder></placeholder>")
+      wait(for: [tested], timeout: 0.1)
+    #endif
   }
 
   func testXMLDecoderKeyNotFound() throws {
@@ -460,31 +462,33 @@ class APITests: TestCase {
     struct Placeholder: Decodable {
       var nested: Nested
     }
-    try testErrorDecsription(
-      triggerError: { () -> String in
-        var caughtError: String = ""
-        XCTAssertThrowsError(
-          try XML.Decoder().decode(
-            Placeholder.self,
-            from: "<placeholder><nested></nested></placeholder>"
-          )
-        ) { error in
-          if let decoding = error as? DecodingError,
-            case .keyNotFound(let key, let context) = decoding
-          {
-            XCTAssertEqual(key.stringValue, "property")
-            // JSONEncoder’s comparable error does not include the key itself in the context.
-            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
-            caughtError = context.debugDescription
-          } else {
-            XCTFail("Wrong kind of error: \(error)")
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .keyNotFound(let key, let context) = decoding
+            {
+              XCTAssertEqual(key.stringValue, "property")
+              // JSONEncoder’s comparable error does not include the key itself in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
           }
-        }
-        return caughtError
-      },
-      specification: "Missing Key",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+          return caughtError
+        },
+        specification: "Missing Key",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLDecoderTypeMismatch() throws {
@@ -494,31 +498,33 @@ class APITests: TestCase {
     struct Placeholder: Decodable {
       var nested: Nested
     }
-    try testErrorDecsription(
-      triggerError: { () -> String in
-        var caughtError: String = ""
-        XCTAssertThrowsError(
-          try XML.Decoder().decode(
-            Placeholder.self,
-            from: "<placeholder><nested><property>A</property></nested></placeholder>"
-          )
-        ) { error in
-          if let decoding = error as? DecodingError,
-            case .typeMismatch(let type, let context) = decoding
-          {
-            XCTAssert(type == Int.self, "Wrong type: \(type)")
-            // JSONEncoder’s comparable error does include the key in the context.
-            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
-            caughtError = context.debugDescription
-          } else {
-            XCTFail("Wrong kind of error: \(error)")
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested><property>A</property></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == Int.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the key in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
           }
-        }
-        return caughtError
-      },
-      specification: "Type Mismatch",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+          return caughtError
+        },
+        specification: "Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLDecoderTypeMismatchCompletixy() throws {
@@ -528,31 +534,33 @@ class APITests: TestCase {
     struct Placeholder: Decodable {
       var nested: Nested
     }
-    try testErrorDecsription(
-      triggerError: { () -> String in
-        var caughtError: String = ""
-        XCTAssertThrowsError(
-          try XML.Decoder().decode(
-            Placeholder.self,
-            from: "<placeholder><nested><property><child/></property></nested></placeholder>"
-          )
-        ) { error in
-          if let decoding = error as? DecodingError,
-            case .typeMismatch(let type, let context) = decoding
-          {
-            XCTAssert(type == String.self, "Wrong type: \(type)")
-            // JSONEncoder’s comparable error does include the key in the context.
-            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
-            caughtError = context.debugDescription
-          } else {
-            XCTFail("Wrong kind of error: \(error)")
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested><property><child/></property></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == String.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the key in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
           }
-        }
-        return caughtError
-      },
-      specification: "Type Complexity Mismatch",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+          return caughtError
+        },
+        specification: "Type Complexity Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLDecoderTypeMismatchKeyless() throws {
@@ -566,31 +574,33 @@ class APITests: TestCase {
     struct Placeholder: Decodable {
       var nested: Nested
     }
-    try testErrorDecsription(
-      triggerError: { () -> String in
-        var caughtError: String = ""
-        XCTAssertThrowsError(
-          try XML.Decoder().decode(
-            Placeholder.self,
-            from: "<placeholder><nested><first>A</first></nested></placeholder>"
-          )
-        ) { error in
-          if let decoding = error as? DecodingError,
-            case .typeMismatch(let type, let context) = decoding
-          {
-            XCTAssert(type == Int.self, "Wrong type: \(type)")
-            // JSONEncoder’s comparable error does include the index in the context.
-            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
-            caughtError = context.debugDescription
-          } else {
-            XCTFail("Wrong kind of error: \(error)")
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested><first>A</first></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == Int.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the index in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
           }
-        }
-        return caughtError
-      },
-      specification: "Keyless Type Mismatch",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+          return caughtError
+        },
+        specification: "Keyless Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLDecoderTypeMismatchSingleValue() throws {
@@ -604,30 +614,32 @@ class APITests: TestCase {
     struct Placeholder: Decodable {
       var nested: Nested
     }
-    try testErrorDecsription(
-      triggerError: { () -> String in
-        var caughtError: String = ""
-        XCTAssertThrowsError(
-          try XML.Decoder().decode(
-            Placeholder.self,
-            from: "<placeholder><nested>A</nested></placeholder>"
-          )
-        ) { error in
-          if let decoding = error as? DecodingError,
-            case .typeMismatch(let type, let context) = decoding
-          {
-            XCTAssert(type == Int.self, "Wrong type: \(type)")
-            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
-            caughtError = context.debugDescription
-          } else {
-            XCTFail("Wrong kind of error: \(error)")
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested>A</nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == Int.self, "Wrong type: \(type)")
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
           }
-        }
-        return caughtError
-      },
-      specification: "Single Value Type Mismatch",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+          return caughtError
+        },
+        specification: "Single Value Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLDecoderTypeMismatchSingleValueComplexity() throws {
@@ -641,30 +653,32 @@ class APITests: TestCase {
     struct Placeholder: Decodable {
       var nested: Nested
     }
-    try testErrorDecsription(
-      triggerError: { () -> String in
-        var caughtError: String = ""
-        XCTAssertThrowsError(
-          try XML.Decoder().decode(
-            Placeholder.self,
-            from: "<placeholder><nested><child/></nested></placeholder>"
-          )
-        ) { error in
-          if let decoding = error as? DecodingError,
-            case .typeMismatch(let type, let context) = decoding
-          {
-            XCTAssert(type == String.self, "Wrong type: \(type)")
-            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
-            caughtError = context.debugDescription
-          } else {
-            XCTFail("Wrong kind of error: \(error)")
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested><child/></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == String.self, "Wrong type: \(type)")
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
           }
-        }
-        return caughtError
-      },
-      specification: "Single Value Complexity Type Mismatch",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+          return caughtError
+        },
+        specification: "Single Value Complexity Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLDecoderTypeMismatcUnkeyedComplexity() throws {
@@ -718,32 +732,34 @@ class APITests: TestCase {
     struct Placeholder: Decodable {
       var nested: Nested
     }
-    try testErrorDecsription(
-      triggerError: { () -> String in
-        var caughtError: String = ""
-        XCTAssertThrowsError(
-          try XML.Decoder().decode(
-            Placeholder.self,
-            // Element names should be irrelevant in an unkeyed container.
-            from: "<placeholder><nested><first>some string</first></nested></placeholder>"
-          )
-        ) { error in
-          if let decoding = error as? DecodingError,
-            case .valueNotFound(let type, let context) = decoding
-          {
-            XCTAssert(type == String.self, "Wrong type: \(type)")
-            // JSONEncoder’s comparable error does include the index in the context.
-            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "2"])
-            caughtError = context.debugDescription
-          } else {
-            XCTFail("Wrong kind of error: \(error)")
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              // Element names should be irrelevant in an unkeyed container.
+              from: "<placeholder><nested><first>some string</first></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .valueNotFound(let type, let context) = decoding
+            {
+              XCTAssert(type == String.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the index in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "2"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
           }
-        }
-        return caughtError
-      },
-      specification: "Container End",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+          return caughtError
+        },
+        specification: "Container End",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLDocument() {
@@ -756,11 +772,13 @@ class APITests: TestCase {
   }
 
   func testXMLElement() throws {
-    XCTAssertNil(try? XML.Element(source: "<element>"))
-    XCTAssertEqual(
-      try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
-      XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
-    )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      XCTAssertNil(try? XML.Element(source: "<element>"))
+      XCTAssertEqual(
+        try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
+        XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
+      )
+    #endif
     testCustomStringConvertibleConformance(
       of: XML.Element(name: "element"),
       localizations: InterfaceLocalization.self,

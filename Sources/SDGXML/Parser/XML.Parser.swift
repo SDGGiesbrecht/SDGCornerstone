@@ -22,94 +22,98 @@ import SDGPersistence
 
 extension XML {
 
-  internal class Parser: NSObject, XMLParserDelegate {
+  #if !PLATFORM_LACKS_FOUNDATION_XML
+    internal class Parser: NSObject, XMLParserDelegate {
 
-    // MARK: - Aliases
+      // MARK: - Aliases
 
-    #if canImport(FoundationXML)
-      private typealias FoundationXMLParser = FoundationXML.XMLParser
-    #else
-      private typealias FoundationXMLParser = Foundation.XMLParser
-    #endif
+      #if canImport(FoundationXML)
+        private typealias FoundationXMLParser = FoundationXML.XMLParser
+      #else
+        private typealias FoundationXMLParser = Foundation.XMLParser
+      #endif
 
-    // MARK: - Static Methods
+      // MARK: - Static Methods
 
-    internal static func parse(_ source: StrictString) throws -> XML.Document {
-      return try Parser(source: source).parse()
-    }
+      internal static func parse(_ source: StrictString) throws -> XML.Document {
+        return try Parser(source: source).parse()
+      }
 
-    // MARK: - Initialization
+      // MARK: - Initialization
 
-    private init(source: StrictString) {
-      parser = FoundationXMLParser(data: source.file)
-      super.init()
-      parser.delegate = self
-    }
+      private init(source: StrictString) {
+        parser = FoundationXMLParser(data: source.file)
+        super.init()
+        parser.delegate = self
+      }
 
-    // MARK: - Properties
+      // MARK: - Properties
 
-    private let parser: FoundationXMLParser
-    private var document: XML.Document?
-    private var openElements: [XML.Element] = []
-    private var error: Error?
+      private let parser: FoundationXMLParser
+      private var document: XML.Document?
+      private var openElements: [XML.Element] = []
+      private var error: Error?
 
-    // MARK: - Parsing
+      // MARK: - Parsing
 
-    private func parse() throws -> XML.Document {
-      if parser.parse() {
-        return document!
-      } else {
-        throw error!
+      private func parse() throws -> XML.Document {
+        if parser.parse() {
+          return document!
+        } else {
+          throw error!
+        }
+      }
+
+      // MARK: - XMLParserDelegate
+
+      internal func parser(
+        _ parser: XMLParser,
+        didStartElement elementName: String,
+        namespaceURI: String?,
+        qualifiedName qName: String?,
+        attributes attributeDict: [String: String] = [:]
+      ) {
+        var attributes: [StrictString: AttributeValue] = [:]
+        for (key, value) in attributeDict {
+          attributes[StrictString(key)] = AttributeValue(text: StrictString(value))
+        }
+        openElements.append(XML.Element(name: StrictString(elementName), attributes: attributes))
+      }
+
+      internal func parser(
+        _ parser: XMLParser,
+        didEndElement elementName: String,
+        namespaceURI: String?,
+        qualifiedName qName: String?
+      ) {
+        let complete = openElements.popLast()!
+        if let parent = openElements.indices.last {
+          openElements[parent].content.append(.element(complete))
+        } else {
+          document = XML.Document(rootElement: complete)
+        }
+      }
+
+      internal func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
+        error = parseError
+      }
+
+      internal func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if let last = openElements.indices.last {
+          openElements[last].content.append(
+            .characterData(CharacterData(text: StrictString(string)))
+          )
+        }
+      }
+
+      internal func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
+        do {
+          self.parser(parser, foundCharacters: try String(file: CDATABlock, origin: nil))
+        } catch {  // @exempt(from: tests) Reachable only with corrupt UTF‐8.
+          self.error = error
+          self.parser.abortParsing()
+        }
       }
     }
-
-    // MARK: - XMLParserDelegate
-
-    internal func parser(
-      _ parser: XMLParser,
-      didStartElement elementName: String,
-      namespaceURI: String?,
-      qualifiedName qName: String?,
-      attributes attributeDict: [String: String] = [:]
-    ) {
-      var attributes: [StrictString: AttributeValue] = [:]
-      for (key, value) in attributeDict {
-        attributes[StrictString(key)] = AttributeValue(text: StrictString(value))
-      }
-      openElements.append(XML.Element(name: StrictString(elementName), attributes: attributes))
-    }
-
-    internal func parser(
-      _ parser: XMLParser,
-      didEndElement elementName: String,
-      namespaceURI: String?,
-      qualifiedName qName: String?
-    ) {
-      let complete = openElements.popLast()!
-      if let parent = openElements.indices.last {
-        openElements[parent].content.append(.element(complete))
-      } else {
-        document = XML.Document(rootElement: complete)
-      }
-    }
-
-    internal func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-      error = parseError
-    }
-
-    internal func parser(_ parser: XMLParser, foundCharacters string: String) {
-      if let last = openElements.indices.last {
-        openElements[last].content.append(.characterData(CharacterData(text: StrictString(string))))
-      }
-    }
-
-    internal func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
-      do {
-        self.parser(parser, foundCharacters: try String(file: CDATABlock, origin: nil))
-      } catch {  // @exempt(from: tests) Reachable only with corrupt UTF‐8.
-        self.error = error
-        self.parser.abortParsing()
-      }
-    }
-  }
+  #endif
 }

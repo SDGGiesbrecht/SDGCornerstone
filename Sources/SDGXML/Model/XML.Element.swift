@@ -38,14 +38,16 @@ extension XML {
       self._content = Element.normalize(content: content)
     }
 
-    /// Creates an element by parsing XML source.
-    ///
-    /// - Parameters:
-    ///   - source: The source of the XML element.
-    public init(source: StrictString) throws {
-      let document = try XML.Document(source: source)
-      self = document.rootElement
-    }
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      /// Creates an element by parsing XML source.
+      ///
+      /// - Parameters:
+      ///   - source: The source of the XML element.
+      public init(source: StrictString) throws {
+        let document = try XML.Document(source: source)
+        self = document.rootElement
+      }
+    #endif
 
     // MARK: - Properties
 

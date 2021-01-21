@@ -791,6 +791,7 @@ for target in package.targets {
     // #workaround(Swift 5.3.2, Web lacks Foundation.RunLoop.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.UserDefaults.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.3.2, Web lacks FoundationXML.)
     // #workaround(Swift 5.3.2, macOS lacks Swift.Float16.)
     // #workaround(Swift 5.3.2, watchOS lacks XCTest.)
     // @example(conditions)
@@ -800,6 +801,7 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
     // @endExample

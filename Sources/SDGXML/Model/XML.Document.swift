@@ -29,13 +29,15 @@ extension XML {
       self.rootElement = rootElement
     }
 
-    /// Creates a document by parsing XML source.
-    ///
-    /// - Parameters:
-    ///   - source: The source.
-    public init(source: StrictString) throws {
-      self = try XML.Parser.parse(source)
-    }
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      /// Creates a document by parsing XML source.
+      ///
+      /// - Parameters:
+      ///   - source: The source.
+      public init(source: StrictString) throws {
+        self = try XML.Parser.parse(source)
+      }
+    #endif
 
     // MARK: - Properties
 

@@ -42,12 +42,14 @@ func testXML<Value>(
   )
 
   let decoder = XML.Decoder()
-  let constructed = try decoder.decode(Value.self, from: xml)
-  XCTAssertEqual(
-    constructed,
-    value,
-    "Value changed after encoding and decoding.",
-    file: file,
-    line: line
-  )
+  #if !PLATFORM_LACKS_FOUNDATION_XML
+    let constructed = try decoder.decode(Value.self, from: xml)
+    XCTAssertEqual(
+      constructed,
+      value,
+      "Value changed after encoding and decoding.",
+      file: file,
+      line: line
+    )
+  #endif
 }
