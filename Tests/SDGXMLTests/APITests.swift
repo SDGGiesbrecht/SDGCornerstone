@@ -354,7 +354,7 @@ class APITests: TestCase {
       }
       var a: String
       var b: String?
-      var c: String
+      var c: String?
       enum CodingKeys: CodingKey {
         case a
         case b
@@ -389,7 +389,7 @@ class APITests: TestCase {
       }
       var a: String
       var b: String?
-      var c: String
+      var c: String?
       init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         a = try container.decode(String.self)

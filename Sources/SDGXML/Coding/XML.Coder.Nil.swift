@@ -13,5 +13,6 @@
  */
 
 extension XML.Coder {
+  #warning("Should use “xsi:nil=\u{22}true\u{22}”.")
   internal struct Nil: Codable {}
 }

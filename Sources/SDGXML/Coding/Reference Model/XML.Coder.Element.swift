@@ -29,6 +29,7 @@ extension XML.Coder {
     // MARK: - Properties
 
     internal var name: StrictString
+    internal var attributes: [StrictString: StrictString] = [:]
     internal var data: StrictString?
     internal var children: [Element] = []
 
@@ -68,12 +69,25 @@ extension XML.Coder {
 
         content = formatted
       }
-      return XML.Element(name: XML.sanitize(name: name), content: content)
+
+      var attributes: [StrictString: XML.AttributeValue] = [:]
+      attributes.reserveCapacity(self.attributes.count)
+      for (attribute, value) in self.attributes {
+        attributes[XML.sanitize(name: attribute)] = XML.AttributeValue(text: value)
+      }
+      return XML.Element(name: XML.sanitize(name: name), attributes: attributes, content: content)
     }
 
     init(_ modelElement: XML.Element) {
 
       self.name = XML.unsanitize(name: modelElement.name)
+
+      var attributes: [StrictString: StrictString] = [:]
+      attributes.reserveCapacity(modelElement.attributes.count)
+      for (attribute, value) in modelElement.attributes {
+        attributes[XML.unsanitize(name: attribute)] = value.text
+      }
+      self.attributes = attributes
 
       self.data = nil
       self.children = []
