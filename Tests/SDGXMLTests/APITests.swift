@@ -63,11 +63,13 @@ class APITests: TestCase {
   }
 
   func testXMLCoderArray() throws {
-    try SDGXMLTests.testXML(
-      of: ["A", "B", "C"],
-      specification: "Array",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      try SDGXMLTests.testXML(
+        of: ["A", "B", "C"],
+        specification: "Array",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   class Superclass: Codable {
