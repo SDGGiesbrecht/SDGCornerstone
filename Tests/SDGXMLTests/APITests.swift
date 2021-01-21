@@ -381,7 +381,7 @@ class APITests: TestCase {
         try container.encode(eightBitUnsignedInteger)
         try container.encode(sixteenBitUnsignedInteger)
         try container.encode(thirtyTwoBitUnsignedInteger)
-        try container.encode(sixteenBitUnsignedInteger)
+        try container.encode(sixtyFourBitUnsignedInteger)
         try container.encode(double)
         try container.encode(float)
         try container.encode(nested)
