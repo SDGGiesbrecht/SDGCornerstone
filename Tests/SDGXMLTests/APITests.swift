@@ -393,13 +393,13 @@ class APITests: TestCase {
       init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         a = try container.decode(String.self)
-        _ = try container.decodeNil()
+        b = try container.decode(Optional<String>.self)
         c = try container.decode(String.self)
       }
       func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(a)
-        try container.encodeNil()
+        try container.encode(b)
         try container.encode(c)
       }
     }
