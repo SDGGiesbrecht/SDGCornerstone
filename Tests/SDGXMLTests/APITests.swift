@@ -592,6 +592,44 @@ class APITests: TestCase {
     )
   }
 
+  func testXMLDecoderTypeMismatcUnkeyedComplexity() throws {
+    struct Nested: Decodable {
+      var property: String
+      init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        property = try container.decode(String.self)
+      }
+    }
+    struct Placeholder: Decodable {
+      var nested: Nested
+    }
+    try testErrorDecsription(
+      triggerError: { () -> String in
+        var caughtError: String = ""
+        XCTAssertThrowsError(
+          try XML.Decoder().decode(
+            Placeholder.self,
+            from: "<placeholder><nested><first><child/></first></nested></placeholder>"
+          )
+        ) { error in
+          if let decoding = error as? DecodingError,
+            case .typeMismatch(let type, let context) = decoding
+          {
+            XCTAssert(type == String.self, "Wrong type: \(type)")
+            // JSONEncoder’s comparable error does include the index in the context.
+            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
+            caughtError = context.debugDescription
+          } else {
+            XCTFail("Wrong kind of error: \(error)")
+          }
+        }
+        return caughtError
+      },
+      specification: "Unkeyed Complexity Type Mismatch",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLDecoderValueNotFound() throws {
     struct Nested: Decodable {
       var a: String
