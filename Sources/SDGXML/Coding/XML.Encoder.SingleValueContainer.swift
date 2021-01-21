@@ -30,6 +30,10 @@ extension XML.Encoder {
 
     // MARK: - SingleValueEncodingContainer
 
+    internal func encodeNil() throws {
+      encoder.currentElement.isNil = true
+    }
+
     internal mutating func encode(_ value: String) throws {
       encoder.currentElement.data = StrictString(value)
     }

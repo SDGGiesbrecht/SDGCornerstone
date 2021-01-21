@@ -69,7 +69,9 @@ extension XML.Decoder {
     }
 
     internal func decodeNil(forKey key: Key) throws -> Bool {
-      return (try? decode(XML.Coder.Nil.self, forKey: key)) ≠ nil
+      return try decoder.enterElement(key: key) { element in
+        return element.isNil
+      }
     }
 
     internal func decode(_ type: Bool.Type, forKey key: Key) throws -> Bool {

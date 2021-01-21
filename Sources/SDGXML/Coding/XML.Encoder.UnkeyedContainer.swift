@@ -41,6 +41,12 @@ extension XML.Encoder {
       return encoder.currentElement.children.count
     }
 
+    internal func encodeNil() throws {
+      try encoder.createNewElement(key: nextKey()) { element in
+        element.isNil = true
+      }
+    }
+
     internal mutating func encode(_ value: String) throws {
       try encoder.createNewElement(key: nextKey()) { element in
         element.data = StrictString(value)

@@ -42,10 +42,6 @@ extension XMLDecoderKeylessContainer {
 
   // MARK: - XEncodingContainer
 
-  internal func decodeNil() -> Bool {
-    return (try? decode(XML.Coder.Nil.self)) ≠ nil
-  }
-
   internal func decode(_ type: Bool.Type) throws -> Bool {
     return try decodeFromLosslessString(type)
   }

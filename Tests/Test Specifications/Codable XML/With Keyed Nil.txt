@@ -1,5 +1,5 @@
 <WithNil>
  <a>A</a>
- <b/>
+ <b xsi:nil="true"/>
  <c>C</c>
 </WithNil>

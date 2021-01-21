@@ -1,5 +1,5 @@
 <WithNil>
  <_31>A</_31>
- <_32/>
+ <_32 xsi:nil="true"/>
  <_33>C</_33>
 </WithNil>

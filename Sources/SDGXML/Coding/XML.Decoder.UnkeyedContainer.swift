@@ -79,6 +79,17 @@ extension XML.Decoder {
       return currentIndex == count
     }
 
+    internal func decodeNil() throws -> Bool {
+      try decoder.enterElement(index: currentIndex, expectedType: Any.self) { element in
+        if element.isNil {
+          currentIndex += 1
+          return true
+        } else {
+          return false
+        }
+      }
+    }
+
     internal func decode(_ type: String.Type) throws -> String {
       return try decodeAndAdvance(String.self) { element in
         guard let text = element.data else {

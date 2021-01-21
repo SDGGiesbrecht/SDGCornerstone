@@ -37,6 +37,20 @@ extension XML.Coder {
 
     internal var currentIndex: Int = 0
 
+    // MARK: - Nil
+
+    private static var nilAttribute: StrictString { "xsi:nil" }
+    private static var nilValue: StrictString { "true" }
+    internal var isNil: Bool {
+      get {
+        return attributes[Element.nilAttribute] == Element.nilValue
+      }
+      set {
+        let attributeValue = newValue ? Element.nilValue : nil
+        attributes[Element.nilAttribute] = attributeValue
+      }
+    }
+
     // MARK: - Conversions
 
     internal func modelElement(indentationLevel: Int = 0) -> XML.Element {

@@ -30,6 +30,10 @@ extension XML.Decoder {
 
     // MARK: - SingleValueDecodingContainer
 
+    internal func decodeNil() -> Bool {
+      return decoder.currentElement.isNil
+    }
+
     internal func decode(_ type: String.Type) throws -> String {
       guard let text = decoder.currentElement.data else {
         throw decoder.mismatchedTypeError(String.self, codingPath: codingPath)

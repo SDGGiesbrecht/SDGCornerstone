@@ -29,10 +29,6 @@ extension XMLEncoderKeylessContainer {
 
   // MARK: - XEncodingContainer
 
-  internal mutating func encodeNil() throws {
-    try encode(XML.Coder.Nil())
-  }
-
   internal mutating func encode(_ value: Bool) throws {
     try encodeLosslessString(value)
   }
