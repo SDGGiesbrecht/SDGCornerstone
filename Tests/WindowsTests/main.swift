@@ -495,8 +495,9 @@ extension SDGXMLTests.APITests {
     testCase([
       ("testXMLDecoderContainer", testXMLDecoderContainer),
       ("testXMLDecoderKeyNotFound", testXMLDecoderKeyNotFound),
-      ("testXMLDecoderTypeCompletixyMismatch", testXMLDecoderTypeCompletixyMismatch),
       ("testXMLDecoderTypeMismatch", testXMLDecoderTypeMismatch),
+      ("testXMLDecoderTypeMismatchCompletixy", testXMLDecoderTypeMismatchCompletixy),
+      ("testXMLDecoderTypeMismatchKeyless", testXMLDecoderTypeMismatchKeyless),
       ("testXMLDecoderValueNotFound", testXMLDecoderValueNotFound),
       ("testXMLElement", testXMLElement),
       ("testXMLElementAttributes", testXMLElementAttributes),

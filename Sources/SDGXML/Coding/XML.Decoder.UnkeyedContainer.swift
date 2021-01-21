@@ -125,7 +125,7 @@ extension XML.Decoder {
     // MARK: - XMLDecoderKeylessContainer
 
     internal var indexKey: CodingKey? {
-      return XML.Coder.MiscellaneousKey(currentIndex + 1)
+      return XML.Coder.MiscellaneousKey(currentIndex)
     }
   }
 }
