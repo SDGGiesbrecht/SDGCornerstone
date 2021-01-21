@@ -24,6 +24,14 @@ extension XML {
 
   internal class Parser: NSObject, XMLParserDelegate {
 
+    // MARK: - Aliases
+
+    #if canImport(FoundationXML)
+      private typealias FoundationXMLParser = FoundationXML.XMLParser
+    #else
+      private typealias FoundationXMLParser = Foundation.XMLParser
+    #endif
+
     // MARK: - Static Methods
 
     internal static func parse(_ source: StrictString) throws -> XML.Document {
@@ -33,14 +41,14 @@ extension XML {
     // MARK: - Initialization
 
     private init(source: StrictString) {
-      parser = Foundation.XMLParser(data: source.file)
+      parser = FoundationXMLParser(data: source.file)
       super.init()
       parser.delegate = self
     }
 
     // MARK: - Properties
 
-    private let parser: Foundation.XMLParser
+    private let parser: FoundationXMLParser
     private var document: XML.Document?
     private var openElements: [XML.Element] = []
     private var error: Error?
