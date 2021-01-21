@@ -108,7 +108,7 @@ class APITests: TestCase {
             case .typeMismatch(let type, let context) = decoding
           {
             XCTAssert(type == Int.self, "Wrong type: \(type)")
-            // JSONEncoder’s comparable error does not include the key itself in the context.
+            // JSONEncoder’s comparable error does include the key in the context.
             XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
             caughtError = context.debugDescription
           } else {
