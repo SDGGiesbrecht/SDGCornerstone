@@ -112,6 +112,14 @@ class APITests: TestCase {
         XCTAssertEqual(try unkeyed.decode(String.self), a)
         XCTAssertEqual(try unkeyed.decode(String.self), b)
         XCTAssertEqual(try unkeyed.decode(String.self), c)
+        let nestedKeyed = try unkeyed.nestedContainer(keyedBy: CodingKeys.self)
+        XCTAssertEqual(try nestedKeyed.decode(String.self, forKey: .a), a)
+        XCTAssertEqual(try nestedKeyed.decode(String.self, forKey: .b), b)
+        XCTAssertEqual(try nestedKeyed.decode(String.self, forKey: .c), c)
+        var nestedUnkeyed = try unkeyed.nestedUnkeyedContainer()
+        XCTAssertEqual(try nestedUnkeyed.decode(String.self), a)
+        XCTAssertEqual(try nestedUnkeyed.decode(String.self), b)
+        XCTAssertEqual(try nestedUnkeyed.decode(String.self), c)
       }
       func encode(to encoder: Encoder) throws {
         var all = encoder.container(keyedBy: CodingKeys.self)
@@ -123,6 +131,14 @@ class APITests: TestCase {
         try unkeyed.encode(a)
         try unkeyed.encode(b)
         try unkeyed.encode(c)
+        var nestedKeyed = unkeyed.nestedContainer(keyedBy: CodingKeys.self)
+        try nestedKeyed.encode(a, forKey: .a)
+        try nestedKeyed.encode(b, forKey: .b)
+        try nestedKeyed.encode(c, forKey: .c)
+        var nestedUnkeyed = unkeyed.nestedUnkeyedContainer()
+        try nestedUnkeyed.encode(a)
+        try nestedUnkeyed.encode(b)
+        try nestedUnkeyed.encode(c)
       }
     }
     try testXML(
