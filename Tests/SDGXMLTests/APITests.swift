@@ -213,12 +213,14 @@ class APITests: TestCase {
         a = try container.decode(String.self)
         b = try container.decode(Optional<String>.self)
         c = try container.decode(String.self)
+        XCTAssert(try container.decodeNil())
       }
       func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(a)
         try container.encode(b)
         try container.encode(c)
+        try container.encodeNil()
       }
     }
     try testXML(
