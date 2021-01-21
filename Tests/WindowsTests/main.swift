@@ -498,6 +498,10 @@ extension SDGXMLTests.APITests {
       ("testXMLDecoderTypeMismatch", testXMLDecoderTypeMismatch),
       ("testXMLDecoderTypeMismatchCompletixy", testXMLDecoderTypeMismatchCompletixy),
       ("testXMLDecoderTypeMismatchKeyless", testXMLDecoderTypeMismatchKeyless),
+      (
+        "testXMLDecoderTypeMismatchSingleValueComplexity",
+        testXMLDecoderTypeMismatchSingleValueComplexity
+      ),
       ("testXMLDecoderValueNotFound", testXMLDecoderValueNotFound),
       ("testXMLElement", testXMLElement),
       ("testXMLElementAttributes", testXMLElementAttributes),
