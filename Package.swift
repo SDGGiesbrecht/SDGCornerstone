@@ -755,6 +755,7 @@ let package = Package(
         "SDGLocalization",
         "SDGCornerstoneLocalizations",
         "SDGPersistenceTestUtilities",
+        "SDGLocalizationTestUtilities",
       ]
     ),
     .testTarget(

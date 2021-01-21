@@ -98,7 +98,7 @@ extension XML {
     internal func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
       do {
         self.parser(parser, foundCharacters: try String(file: CDATABlock, origin: nil))
-      } catch {
+      } catch {  // @exempt(from: tests) Reachable only with corrupt UTF‐8.
         self.error = error
         self.parser.abortParsing()
       }

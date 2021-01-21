@@ -15,10 +15,13 @@
 import SDGText
 import SDGXML
 
+import SDGCornerstoneLocalizations
+
 import XCTest
 
 import SDGTesting
 import SDGPersistenceTestUtilities
+import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
 
 class APITests: TestCase {
@@ -37,8 +40,30 @@ class APITests: TestCase {
     super.tearDown()
   }
 
+  func testXML() {
+    _ = XML.unsanitize(name: "%")
+  }
+
+  func testXMLAttributeValue() {
+    testCustomStringConvertibleConformance(
+      of: XML.AttributeValue(text: "attribute text, 0 < 1"),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "Attribute",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  func testXMLCharacterData() {
+    testCustomStringConvertibleConformance(
+      of: XML.CharacterData(text: "attribute text, 0 < 1"),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "Character Data",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLCoderArray() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       of: ["A", "B", "C"],
       specification: "Array",
       overwriteSpecificationInsteadOfFailing: false
@@ -83,7 +108,7 @@ class APITests: TestCase {
     }
   }
   func testXMLCoderClass() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       of: Subclass(a: "A", b: "B", c: "C", d: "D"),
       specification: "Class",
       overwriteSpecificationInsteadOfFailing: false
@@ -115,7 +140,7 @@ class APITests: TestCase {
     }
   }
   func testXMLCoderClassUnkeyed() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       of: UnkeyedSubclass(a: "A", b: "B", c: "C", d: "D"),
       specification: "Unkeyed Class",
       overwriteSpecificationInsteadOfFailing: false
@@ -178,7 +203,7 @@ class APITests: TestCase {
         _ = unkeyed.codingPath
       }
     }
-    try testXML(
+    try SDGXMLTests.testXML(
       of: Customized(),
       specification: "Customized",
       overwriteSpecificationInsteadOfFailing: false
@@ -186,7 +211,7 @@ class APITests: TestCase {
   }
 
   func testXMLCoderDictionary() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       of: [
         "key": "value",
         "Schlüssel": "Wert",
@@ -228,7 +253,7 @@ class APITests: TestCase {
         try container.encodeNil(forKey: .d)
       }
     }
-    try testXML(
+    try SDGXMLTests.testXML(
       of: WithNil(a: "A", b: nil, c: "C"),
       specification: "With Keyed Nil",
       overwriteSpecificationInsteadOfFailing: false
@@ -262,7 +287,7 @@ class APITests: TestCase {
         try container.encode("non‐nil")
       }
     }
-    try testXML(
+    try SDGXMLTests.testXML(
       of: WithNil(a: "A", b: nil, c: "C"),
       specification: "With Nil",
       overwriteSpecificationInsteadOfFailing: false
@@ -290,7 +315,7 @@ class APITests: TestCase {
         _ = container.codingPath
       }
     }
-    try testXML(
+    try SDGXMLTests.testXML(
       of: SingleValue(value: Nested()),
       specification: "Single Value",
       overwriteSpecificationInsteadOfFailing: false
@@ -298,7 +323,7 @@ class APITests: TestCase {
   }
 
   func testXMLCoderString() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       of: "string",
       specification: "String",
       overwriteSpecificationInsteadOfFailing: false
@@ -327,7 +352,7 @@ class APITests: TestCase {
       var float: Float = 0
       var nested: Nested = Nested()
     }
-    try testXML(
+    try SDGXMLTests.testXML(
       of: Structure(),
       specification: "Structure",
       overwriteSpecificationInsteadOfFailing: false
@@ -393,9 +418,18 @@ class APITests: TestCase {
         try container.encode(nested)
       }
     }
-    try testXML(
+    try SDGXMLTests.testXML(
       of: Unkeyed(),
       specification: "Unkeyed",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  func testXMLContent() {
+    testCustomStringConvertibleConformance(
+      of: XML.Content.element(XML.Element(name: "element")),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "Content",
       overwriteSpecificationInsteadOfFailing: false
     )
   }
@@ -710,16 +744,31 @@ class APITests: TestCase {
     )
   }
 
+  func testXMLDocument() {
+    testCustomStringConvertibleConformance(
+      of: XML.Document(rootElement: XML.Element(name: "root")),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "Document",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLElement() throws {
     XCTAssertNil(try? XML.Element(source: "<element>"))
     XCTAssertEqual(
       try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
       XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
     )
+    testCustomStringConvertibleConformance(
+      of: XML.Element(name: "element"),
+      localizations: InterfaceLocalization.self,
+      uniqueTestName: "Document",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLElementAttributes() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       element: XML.Element(
         name: "element",
         attributes: [
@@ -735,7 +784,7 @@ class APITests: TestCase {
   }
 
   func testXMLElementEmpty() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       element: XML.Element(name: "empty"),
       specification: "Empty",
       overwriteSpecificationInsteadOfFailing: false
@@ -743,7 +792,7 @@ class APITests: TestCase {
   }
 
   func testXMLElementEscapedAttributes() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       element: XML.Element(
         name: "element",
         attributes: [
@@ -756,7 +805,7 @@ class APITests: TestCase {
   }
 
   func testXMLElementEscapedText() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       element: XML.Element(name: "text", content: ["1 < 2"]),
       specification: "Escaped Text",
       overwriteSpecificationInsteadOfFailing: false
@@ -764,7 +813,7 @@ class APITests: TestCase {
   }
 
   func testXMLElementNested() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       element: XML.Element(
         name: "parent",
         content: [
@@ -778,7 +827,7 @@ class APITests: TestCase {
   }
 
   func testXMLElementText() throws {
-    try testXML(
+    try SDGXMLTests.testXML(
       element: XML.Element(name: "text", content: ["Hello, world!"]),
       specification: "Text",
       overwriteSpecificationInsteadOfFailing: false
