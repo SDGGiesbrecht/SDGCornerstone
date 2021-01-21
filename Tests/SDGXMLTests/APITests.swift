@@ -153,6 +153,8 @@ class APITests: TestCase {
         XCTAssertEqual(try nestedUnkeyed.decode(String.self), a)
         XCTAssertEqual(try nestedUnkeyed.decode(String.self), b)
         XCTAssertEqual(try nestedUnkeyed.decode(String.self), c)
+        _ = keyed.codingPath
+        _ = unkeyed.codingPath
       }
       func encode(to encoder: Encoder) throws {
         var all = encoder.container(keyedBy: CodingKeys.self)
@@ -172,6 +174,8 @@ class APITests: TestCase {
         try nestedUnkeyed.encode(a)
         try nestedUnkeyed.encode(b)
         try nestedUnkeyed.encode(c)
+        _ = keyed.codingPath
+        _ = unkeyed.codingPath
       }
     }
     try testXML(
@@ -278,10 +282,12 @@ class APITests: TestCase {
       init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         value = try container.decode(Nested.self)
+        _ = container.codingPath
       }
       func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(value)
+        _ = container.codingPath
       }
     }
     try testXML(
