@@ -345,6 +345,41 @@ class APITests: TestCase {
     )
   }
 
+  func testXMLEncoderKeyedNil() throws {
+    struct WithNil: Codable, Equatable {
+      init(a: String, b: String?, c: String) {
+        self.a = a
+        self.b = b
+        self.c = c
+      }
+      var a: String
+      var b: String?
+      var c: String
+      enum CodingKeys: CodingKey {
+        case a
+        case b
+        case c
+      }
+      init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        a = try container.decode(String.self, forKey: .a)
+        b = try container.decode(Optional<String>.self, forKey: .b)
+        c = try container.decode(String.self, forKey: .c)
+      }
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(a, forKey: .a)
+        try container.encode(b, forKey: .b)
+        try container.encode(c, forKey: .c)
+      }
+    }
+    try testXML(
+      of: WithNil(a: "A", b: nil, c: "C"),
+      specification: "With Keyed Nil",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLEncoderNil() throws {
     struct WithNil: Codable, Equatable {
       init(a: String, b: String?, c: String) {
