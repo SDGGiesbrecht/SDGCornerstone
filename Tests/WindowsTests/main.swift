@@ -493,6 +493,16 @@ extension SDGVersioningTests.RegressionTests {
 extension SDGXMLTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
+      ("testXMLCoderArray", testXMLCoderArray),
+      ("testXMLCoderClass", testXMLCoderClass),
+      ("testXMLCoderCustomized", testXMLCoderCustomized),
+      ("testXMLCoderDictionary", testXMLCoderDictionary),
+      ("testXMLCoderKeyedNil", testXMLCoderKeyedNil),
+      ("testXMLCoderNil", testXMLCoderNil),
+      ("testXMLCoderSingleValue", testXMLCoderSingleValue),
+      ("testXMLCoderString", testXMLCoderString),
+      ("testXMLCoderStructure", testXMLCoderStructure),
+      ("testXMLCoderUnkeyed", testXMLCoderUnkeyed),
       ("testXMLDecoderContainer", testXMLDecoderContainer),
       ("testXMLDecoderKeyNotFound", testXMLDecoderKeyNotFound),
       ("testXMLDecoderTypeMismatch", testXMLDecoderTypeMismatch),
@@ -511,16 +521,6 @@ extension SDGXMLTests.APITests {
       ("testXMLElementEscapedText", testXMLElementEscapedText),
       ("testXMLElementNested", testXMLElementNested),
       ("testXMLElementText", testXMLElementText),
-      ("testXMLEncoderArray", testXMLEncoderArray),
-      ("testXMLEncoderClass", testXMLEncoderClass),
-      ("testXMLEncoderCustomized", testXMLEncoderCustomized),
-      ("testXMLEncoderDictionary", testXMLEncoderDictionary),
-      ("testXMLEncoderKeyedNil", testXMLEncoderKeyedNil),
-      ("testXMLEncoderNil", testXMLEncoderNil),
-      ("testXMLEncoderSingleValue", testXMLEncoderSingleValue),
-      ("testXMLEncoderString", testXMLEncoderString),
-      ("testXMLEncoderStructure", testXMLEncoderStructure),
-      ("testXMLEncoderUnkeyed", testXMLEncoderUnkeyed),
     ])
   ]
 }
