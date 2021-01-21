@@ -194,6 +194,43 @@ class APITests: TestCase {
     )
   }
 
+  func testXMLDecoderTypeMismatchSingleValue() throws {
+    struct Nested: Decodable {
+      var property: Int
+      init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        property = try container.decode(Int.self)
+      }
+    }
+    struct Placeholder: Decodable {
+      var nested: Nested
+    }
+    try testErrorDecsription(
+      triggerError: { () -> String in
+        var caughtError: String = ""
+        XCTAssertThrowsError(
+          try XML.Decoder().decode(
+            Placeholder.self,
+            from: "<placeholder><nested>A</nested></placeholder>"
+          )
+        ) { error in
+          if let decoding = error as? DecodingError,
+            case .typeMismatch(let type, let context) = decoding
+          {
+            XCTAssert(type == Int.self, "Wrong type: \(type)")
+            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
+            caughtError = context.debugDescription
+          } else {
+            XCTFail("Wrong kind of error: \(error)")
+          }
+        }
+        return caughtError
+      },
+      specification: "Single Value Type Mismatch",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLDecoderTypeMismatchSingleValueComplexity() throws {
     struct Nested: Decodable {
       var property: String
