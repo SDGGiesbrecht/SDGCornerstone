@@ -12,12 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGLogic
+
 internal protocol XMLDecoderKeylessContainer: XMLDecoderContainer {
 
   var decoder: XML.Decoder.Implementation { get }
   var indexKey: CodingKey? { get }
 
   func decode(_ type: String.Type) throws -> String
+  func decode<T>(_ type: T.Type) throws -> T where T: Decodable
 }
 
 extension XMLDecoderKeylessContainer {
@@ -38,6 +41,10 @@ extension XMLDecoderKeylessContainer {
   }
 
   // MARK: - XEncodingContainer
+
+  internal func decodeNil() -> Bool {
+    return (try? decode(XML.Coder.Nil.self)) ≠ nil
+  }
 
   internal func decode(_ type: Bool.Type) throws -> Bool {
     return try decodeFromLosslessString(type)

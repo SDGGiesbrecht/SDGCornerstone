@@ -39,7 +39,9 @@ extension XML.Encoder {
 
     // MARK: - KeyedEncodingContainerProtocol
 
-    internal mutating func encodeNil(forKey key: Key) throws {}
+    internal mutating func encodeNil(forKey key: Key) throws {
+      try encode(XML.Coder.Nil(), forKey: key)
+    }
 
     internal mutating func encode(_ value: Bool, forKey key: Key) throws {
       try encodeLosslessString(value, forKey: key)

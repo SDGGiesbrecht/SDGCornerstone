@@ -79,23 +79,6 @@ extension XML.Decoder {
       return currentIndex == count
     }
 
-    internal func decodeNil() throws -> Bool {
-      let result: Bool = try decoder.enterElement(
-        index: currentIndex,
-        expectedType: Any.self
-      ) { element in
-        if element.name == StrictString(XML.Coder.MiscellaneousKey.nil) {
-          return true
-        } else {
-          return false
-        }
-      }
-      if result {
-        currentIndex += 1
-      }
-      return result
-    }
-
     internal func decode(_ type: String.Type) throws -> String {
       return try decodeAndAdvance(String.self) { element in
         guard let text = element.data else {

@@ -15,6 +15,7 @@
 internal protocol XMLEncoderKeylessContainer: XMLEncoderContainer {
 
   mutating func encode(_ value: String) throws
+  mutating func encode<T>(_ value: T) throws where T: Encodable
 }
 
 extension XMLEncoderKeylessContainer {
@@ -27,6 +28,10 @@ extension XMLEncoderKeylessContainer {
   }
 
   // MARK: - XEncodingContainer
+
+  internal mutating func encodeNil() throws {
+    try encode(XML.Coder.Nil())
+  }
 
   internal mutating func encode(_ value: Bool) throws {
     try encodeLosslessString(value)

@@ -1,5 +1,5 @@
 <WithNil>
  <a>A</a>
+ <b/>
  <c>C</c>
- <nil/>
 </WithNil>
