@@ -46,8 +46,11 @@ extension XML.Coder {
         return attributes[Element.nilAttribute] == Element.nilValue
       }
       set {
-        let attributeValue = newValue ? Element.nilValue : nil
-        attributes[Element.nilAttribute] = attributeValue
+        if newValue {
+          attributes[Element.nilAttribute] = Element.nilValue
+        } else {  // @exempt(from: tests) Unreachable.
+          attributes[Element.nilAttribute] = nil
+        }
       }
     }
 
