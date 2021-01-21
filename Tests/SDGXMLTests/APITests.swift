@@ -359,18 +359,21 @@ class APITests: TestCase {
         case a
         case b
         case c
+        case d
       }
       init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         a = try container.decode(String.self, forKey: .a)
         b = try container.decode(Optional<String>.self, forKey: .b)
         c = try container.decode(String.self, forKey: .c)
+        XCTAssert(try container.decodeNil(forKey: .d))
       }
       func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(a, forKey: .a)
         try container.encode(b, forKey: .b)
         try container.encode(c, forKey: .c)
+        try container.encodeNil(forKey: .d)
       }
     }
     try testXML(

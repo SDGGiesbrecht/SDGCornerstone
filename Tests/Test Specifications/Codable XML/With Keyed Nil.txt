@@ -2,4 +2,5 @@
  <a>A</a>
  <b xsi:nil="true"/>
  <c>C</c>
+ <d xsi:nil="true"/>
 </WithNil>
