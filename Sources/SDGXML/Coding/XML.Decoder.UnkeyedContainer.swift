@@ -80,14 +80,16 @@ extension XML.Decoder {
     }
 
     internal func decodeNil() throws -> Bool {
-      try decoder.enterElement(index: currentIndex, expectedType: Any.self) { element in
-        if element.isNil {
-          currentIndex += 1
-          return true
-        } else {
-          return false
-        }
+      let result = try decoder.enterElement(
+        index: currentIndex,
+        expectedType: Any.self
+      ) { element in
+        return element.isNil
       }
+      if result {
+        currentIndex += 1
+      }
+      return result
     }
 
     internal func decode(_ type: String.Type) throws -> String {
