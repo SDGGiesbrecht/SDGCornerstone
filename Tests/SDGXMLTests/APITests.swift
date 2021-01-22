@@ -430,11 +430,13 @@ class APITests: TestCase {
         try container.encode(nested)
       }
     }
-    try SDGXMLTests.testXML(
-      of: Unkeyed(),
-      specification: "Unkeyed",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      try SDGXMLTests.testXML(
+        of: Unkeyed(),
+        specification: "Unkeyed",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLContent() {
