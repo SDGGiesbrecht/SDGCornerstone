@@ -593,31 +593,33 @@ class APITests: TestCase {
       var nested: Nested
     }
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      try testErrorDecsription(
-        triggerError: { () -> String in
-          var caughtError: String = ""
-          XCTAssertThrowsError(
-            try XML.Decoder().decode(
-              Placeholder.self,
-              from: "<placeholder><nested><first>A</first></nested></placeholder>"
-            )
-          ) { error in
-            if let decoding = error as? DecodingError,
-              case .typeMismatch(let type, let context) = decoding
-            {
-              XCTAssert(type == Int.self, "Wrong type: \(type)")
-              // JSONEncoder’s comparable error does include the index in the context.
-              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
-              caughtError = context.debugDescription
-            } else {
-              XCTFail("Wrong kind of error: \(error)")
+      #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+        try testErrorDecsription(
+          triggerError: { () -> String in
+            var caughtError: String = ""
+            XCTAssertThrowsError(
+              try XML.Decoder().decode(
+                Placeholder.self,
+                from: "<placeholder><nested><first>A</first></nested></placeholder>"
+              )
+            ) { error in
+              if let decoding = error as? DecodingError,
+                case .typeMismatch(let type, let context) = decoding
+              {
+                XCTAssert(type == Int.self, "Wrong type: \(type)")
+                // JSONEncoder’s comparable error does include the index in the context.
+                XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
+                caughtError = context.debugDescription
+              } else {
+                XCTFail("Wrong kind of error: \(error)")
+              }
             }
-          }
-          return caughtError
-        },
-        specification: "Keyless Type Mismatch",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+            return caughtError
+          },
+          specification: "Keyless Type Mismatch",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
