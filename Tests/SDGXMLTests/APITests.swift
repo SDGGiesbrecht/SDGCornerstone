@@ -26,9 +26,13 @@ import SDGXCTestUtilities
 
 class APITests: TestCase {
 
-  static var expectationStorage1: XCTestExpectation?
+  #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
+    static var expectationStorage1: XCTestExpectation?
+  #endif
   func resetExpectationStorage() {
-    APITests.expectationStorage1 = nil
+    #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
+      APITests.expectationStorage1 = nil
+    #endif
   }
 
   override func setUp() {
@@ -446,13 +450,19 @@ class APITests: TestCase {
       init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         XCTAssertEqual(container.codingPath.map({ $0.stringValue }), [])
-        APITests.expectationStorage1?.fulfill()
+        #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
+          APITests.expectationStorage1?.fulfill()
+        #endif
       }
     }
-    let tested = expectation(description: "init(from:) called")
-    APITests.expectationStorage1 = tested
+    #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
+      let tested = expectation(description: "init(from:) called")
+      APITests.expectationStorage1 = tested
+    #endif
     #if !PLATFORM_LACKS_FOUNDATION_XML
       _ = try XML.Decoder().decode(Placeholder.self, from: "<placeholder></placeholder>")
+    #endif
+    #if !PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION
       wait(for: [tested], timeout: 0.1)
     #endif
   }
@@ -694,31 +704,33 @@ class APITests: TestCase {
     struct Placeholder: Decodable {
       var nested: Nested
     }
-    try testErrorDecsription(
-      triggerError: { () -> String in
-        var caughtError: String = ""
-        XCTAssertThrowsError(
-          try XML.Decoder().decode(
-            Placeholder.self,
-            from: "<placeholder><nested><first><child/></first></nested></placeholder>"
-          )
-        ) { error in
-          if let decoding = error as? DecodingError,
-            case .typeMismatch(let type, let context) = decoding
-          {
-            XCTAssert(type == String.self, "Wrong type: \(type)")
-            // JSONEncoder’s comparable error does include the index in the context.
-            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
-            caughtError = context.debugDescription
-          } else {
-            XCTFail("Wrong kind of error: \(error)")
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested><first><child/></first></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == String.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the index in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "1"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
           }
-        }
-        return caughtError
-      },
-      specification: "Unkeyed Complexity Type Mismatch",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+          return caughtError
+        },
+        specification: "Unkeyed Complexity Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLDecoderValueNotFound() throws {
