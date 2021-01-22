@@ -58,7 +58,15 @@ extension XML {
 
       private func parse() throws -> XML.Document {
         if parser.parse() {
-          return document!
+          guard let document = document else {
+            // @exempt(from: tests) XMLParser should have thrown this itself.
+            throw NSError(
+              domain: XMLParser.errorDomain,
+              code: XMLParser.ErrorCode.prematureDocumentEndError.rawValue,
+              userInfo: nil
+            )
+          }
+          return document
         } else {
           throw error!
         }
