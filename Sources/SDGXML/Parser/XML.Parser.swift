@@ -68,6 +68,7 @@ extension XML {
           }
           return document
         } else {
+          // @exempt(from: tests) Some immature platforms fail to throw on their own.
           throw error!
         }
       }
