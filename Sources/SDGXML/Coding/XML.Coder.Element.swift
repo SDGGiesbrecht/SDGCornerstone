@@ -48,7 +48,8 @@ extension XML.Coder {
       set {
         if newValue {
           attributes[Element.nilAttribute] = Element.nilValue
-        } else {  // @exempt(from: tests) Unreachable.
+        } else {
+          // @exempt(from: tests) Unreachable.
           attributes[Element.nilAttribute] = nil
         }
       }
