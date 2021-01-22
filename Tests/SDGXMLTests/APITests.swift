@@ -297,11 +297,13 @@ class APITests: TestCase {
         try container.encode("non‐nil")
       }
     }
-    try SDGXMLTests.testXML(
-      of: WithNil(a: "A", b: nil, c: "C"),
-      specification: "With Nil",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      try SDGXMLTests.testXML(
+        of: WithNil(a: "A", b: nil, c: "C"),
+        specification: "With Nil",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderSingleValue() throws {
