@@ -211,11 +211,13 @@ class APITests: TestCase {
         _ = unkeyed.codingPath
       }
     }
-    try SDGXMLTests.testXML(
-      of: Customized(),
-      specification: "Customized",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      try SDGXMLTests.testXML(
+        of: Customized(),
+        specification: "Customized",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderDictionary() throws {
