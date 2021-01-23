@@ -757,32 +757,34 @@ class APITests: TestCase {
       var nested: Nested
     }
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      try testErrorDecsription(
-        triggerError: { () -> String in
-          var caughtError: String = ""
-          XCTAssertThrowsError(
-            try XML.Decoder().decode(
-              Placeholder.self,
-              // Element names should be irrelevant in an unkeyed container.
-              from: "<placeholder><nested><first>some string</first></nested></placeholder>"
-            )
-          ) { error in
-            if let decoding = error as? DecodingError,
-              case .valueNotFound(let type, let context) = decoding
-            {
-              XCTAssert(type == String.self, "Wrong type: \(type)")
-              // JSONEncoder’s comparable error does include the index in the context.
-              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "2"])
-              caughtError = context.debugDescription
-            } else {
-              XCTFail("Wrong kind of error: \(error)")
+      #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+        try testErrorDecsription(
+          triggerError: { () -> String in
+            var caughtError: String = ""
+            XCTAssertThrowsError(
+              try XML.Decoder().decode(
+                Placeholder.self,
+                // Element names should be irrelevant in an unkeyed container.
+                from: "<placeholder><nested><first>some string</first></nested></placeholder>"
+              )
+            ) { error in
+              if let decoding = error as? DecodingError,
+                case .valueNotFound(let type, let context) = decoding
+              {
+                XCTAssert(type == String.self, "Wrong type: \(type)")
+                // JSONEncoder’s comparable error does include the index in the context.
+                XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "2"])
+                caughtError = context.debugDescription
+              } else {
+                XCTFail("Wrong kind of error: \(error)")
+              }
             }
-          }
-          return caughtError
-        },
-        specification: "Container End",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+            return caughtError
+          },
+          specification: "Container End",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
