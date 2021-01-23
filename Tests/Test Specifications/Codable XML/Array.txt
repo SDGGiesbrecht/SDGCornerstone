@@ -1,0 +1,5 @@
+<Array_3CString_3E>
+ <_31>A</_31>
+ <_32>B</_32>
+ <_33>C</_33>
+</Array_3CString_3E>

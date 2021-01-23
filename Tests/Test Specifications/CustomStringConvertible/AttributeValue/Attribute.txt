@@ -1,0 +1,12 @@
+🇬🇧EN
+attribute text, 0 < 1
+
+🇺🇸EN
+attribute text, 0 < 1
+
+🇨🇦EN
+attribute text, 0 < 1
+
+🇩🇪DE
+attribute text, 0 < 1
+

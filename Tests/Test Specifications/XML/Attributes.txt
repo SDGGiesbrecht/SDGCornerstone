@@ -1,0 +1,1 @@
+<element Eigenschaft="Wert" attribut="valeur" attribute="value" ιδιότητα="τιμή"/>

@@ -156,6 +156,7 @@ import PackageDescription
 /// .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+/// .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi])),
 /// .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
 /// .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
 /// ```
@@ -249,6 +250,11 @@ let package = Package(
     // #documentation(SDGVersioning)
     /// Utilities for working with semantic versions.
     .library(name: "SDGVersioning", targets: ["SDGVersioning"]),
+
+    // #documentation(SDGXML)
+    /// XML encoding.
+    // #workaround(Not finalized yet.)
+    .library(name: "_SDGXML", targets: ["SDGXML"]),
 
     // #documentation(SDGTesting)
     /// Miscellaneous test utilities.
@@ -516,6 +522,22 @@ let package = Package(
       ]
     ),
 
+    // @documentation(SDGXML)
+    /// XML encoding.
+    .target(
+      name: "SDGXML",
+      dependencies: [
+        "SDGControlFlow",
+        "SDGLogic",
+        "SDGMathematics",
+        "SDGCollections",
+        "SDGText",
+        "SDGPersistence",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations",
+      ]
+    ),
+
     // @documentation(SDGTesting)
     /// Miscellaneous test utilities.
     .target(
@@ -539,6 +561,8 @@ let package = Package(
         "SDGMathematics",
         "SDGText",
         "SDGPersistence",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations",
       ]
     ),
 
@@ -725,6 +749,17 @@ let package = Package(
       ]
     ),
     .testTarget(
+      name: "SDGXMLTests",
+      dependencies: [
+        "SDGXML", "SDGTesting", "SDGXCTestUtilities",
+        "SDGText",
+        "SDGLocalization",
+        "SDGCornerstoneLocalizations",
+        "SDGPersistenceTestUtilities",
+        "SDGLocalizationTestUtilities",
+      ]
+    ),
+    .testTarget(
       name: "SDGCornerstoneDocumentationExampleTests",
       dependencies: [
         "SDGControlFlow",
@@ -750,13 +785,14 @@ for target in package.targets {
   var swiftSettings = target.swiftSettings ?? []
   defer { target.swiftSettings = swiftSettings }
   swiftSettings.append(contentsOf: [
-    // #workaround(workspace version 0.36.0, Bug prevents centralization of windows conditions.)
+    // #workaround(workspace version 0.36.1, Bug prevents centralization of windows conditions.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.FileManager.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.Process.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.ProcessInfo.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.RunLoop.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.UserDefaults.)
     // #workaround(Swift 5.3.2, Web lacks Foundation.PropertyListEncoder.)
+    // #workaround(Swift 5.3.2, Web lacks FoundationXML.)
     // #workaround(Swift 5.3.2, macOS lacks Swift.Float16.)
     // #workaround(Swift 5.3.2, watchOS lacks XCTest.)
     // @example(conditions)
@@ -766,6 +802,7 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_RUN_LOOP", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_USER_DEFAULTS", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_FOUNDATION_PROPERTY_LIST_ENCODER", .when(platforms: [.wasi])),
+    .define("PLATFORM_LACKS_FOUNDATION_XML", .when(platforms: [.wasi])),
     .define("PLATFORM_LACKS_SWIFT_FLOAT_16", .when(platforms: [.macOS])),
     .define("PLATFORM_LACKS_XC_TEST", .when(platforms: [.watchOS])),
     // @endExample
@@ -782,6 +819,8 @@ for target in package.targets {
     .define("PLATFORM_LACKS_FOUNDATION_TIME_ZONE_INIT_IDENTIFIER", .when(platforms: [.wasi])),
     // #workaround(Swift 5.3.2, Web lacks Foundation.URL.init(fileURLWithPath:).)
     .define("PLATFORM_LACKS_FOUNDATION_URL_INIT_FILE_URL_WITH_PATH", .when(platforms: [.wasi])),
+    // #workaround(Swift 5.3.2, Web lacks XCTest.XCTestExpectation.)
+    .define("PLATFORM_LACKS_XC_TEST_XC_TEST_EXPECTATION", .when(platforms: [.wasi])),
     // #workaround(Swift 5.3.2, Android emulator lacks Git.)
     .define("PLATFORM_LACKS_GIT", .when(platforms: [.wasi, .tvOS, .iOS, .android, .watchOS])),
     .define(

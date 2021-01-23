@@ -1,0 +1,1 @@
+Die Daten unter „nested → property“ beschreiben kein Exemplar des erwarteten Typs: String
