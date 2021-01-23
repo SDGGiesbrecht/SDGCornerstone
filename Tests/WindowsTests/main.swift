@@ -518,7 +518,7 @@ extension SDGXMLTests.APITests {
         "testXMLDecoderTypeMismatchSingleValueComplexity",
         testXMLDecoderTypeMismatchSingleValueComplexity
       ),
-      ("testXMLDecoderTypeMismatcUnkeyedComplexity", testXMLDecoderTypeMismatcUnkeyedComplexity),
+      ("testXMLDecoderTypeMismatchUnkeyedComplexity", testXMLDecoderTypeMismatchUnkeyedComplexity),
       ("testXMLDecoderValueNotFound", testXMLDecoderValueNotFound),
       ("testXMLDocument", testXMLDocument),
       ("testXMLElement", testXMLElement),
