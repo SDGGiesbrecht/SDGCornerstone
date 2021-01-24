@@ -439,6 +439,29 @@ class APITests: TestCase {
     #endif
   }
 
+  func testXMLCoderXML() throws {
+    let xml = XML.Element(
+      name: "element",
+      attributes: [
+        "attribute": "value",
+        "Eigenschaft": "Wert",
+        "attribut": "valeur",
+        "ιδιότητα": "τιμή",
+      ],
+      content: [
+        .characterData(XML.CharacterData(text: "A mix of text ")),
+        .element(XML.Element(name: "and")),
+        .element(XML.Element(name: "elements")),
+        .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
+      ]
+    )
+    try SDGXMLTests.testXML(
+      of: xml,
+      specification: "XML",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
   func testXMLContent() {
     testCustomStringConvertibleConformance(
       of: XML.Content.element(XML.Element(name: "element")),
