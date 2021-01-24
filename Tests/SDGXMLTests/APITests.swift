@@ -55,6 +55,12 @@ class APITests: TestCase {
       uniqueTestName: "Attribute",
       overwriteSpecificationInsteadOfFailing: false
     )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      testCodableConformance(
+        of: XML.AttributeValue(text: "value"),
+        uniqueTestName: "Value"
+      )
+    #endif
   }
 
   func testXMLCharacterData() {
@@ -64,6 +70,12 @@ class APITests: TestCase {
       uniqueTestName: "Character Data",
       overwriteSpecificationInsteadOfFailing: false
     )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      testCodableConformance(
+        of: XML.CharacterData(text: "character data"),
+        uniqueTestName: "Character Data"
+      )
+    #endif
   }
 
   func testXMLCoderArray() throws {
@@ -818,6 +830,12 @@ class APITests: TestCase {
       uniqueTestName: "Document",
       overwriteSpecificationInsteadOfFailing: false
     )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      testCodableConformance(
+        of: XML.Document(rootElement: XML.Element(name: "root")),
+        uniqueTestName: "Document"
+      )
+    #endif
   }
 
   func testXMLElement() throws {
@@ -834,6 +852,16 @@ class APITests: TestCase {
       uniqueTestName: "Document",
       overwriteSpecificationInsteadOfFailing: false
     )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      testCodableConformance(
+        of: XML.Element(
+          name: "name",
+          attributes: ["attribute": "value"],
+          content: [.element(XML.Element(name: "child"))]
+        ),
+        uniqueTestName: "Element"
+      )
+    #endif
   }
 
   func testXMLElementAttributes() throws {
