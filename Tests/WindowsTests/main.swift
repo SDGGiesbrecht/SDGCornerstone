@@ -508,6 +508,8 @@ extension SDGXMLTests.APITests {
       ("testXMLCoderStructure", testXMLCoderStructure),
       ("testXMLCoderUnkeyed", testXMLCoderUnkeyed),
       ("testXMLCoderXML", testXMLCoderXML),
+      ("testXMLCoderXMLUnkeyed", testXMLCoderXMLUnkeyed),
+      ("testXMLCoderXMLSingleValue", testXMLCoderXMLSingleValue),
       ("testXMLContent", testXMLContent),
       ("testXMLDecoderContainer", testXMLDecoderContainer),
       ("testXMLDecoderKeyNotFound", testXMLDecoderKeyNotFound),

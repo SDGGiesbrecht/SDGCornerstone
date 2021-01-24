@@ -1,2 +1,4 @@
-<Element>&#x003C;element Eigenschaft="Wert" attribut="valeur" attribute="value" ιδιότητα="τιμή"&#x003E;A mix of text &#x003C;and/&#x003E;&#x003C;elements/&#x003E;
-   with line breaks and trailing spaces:   &#x003C;/element&#x003E;</Element>
+<XMLProperty>
+ <element Eigenschaft="Wert" attribut="valeur" attribute="value" ιδιότητα="τιμή">A mix of text <and/><elements/>
+   with line breaks and trailing spaces:   </element>
+</XMLProperty>

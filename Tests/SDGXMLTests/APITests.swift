@@ -451,6 +451,9 @@ class APITests: TestCase {
     #endif
   }
 
+  struct XMLProperty: Codable, Equatable {
+    var element: XML.Element
+  }
   func testXMLCoderXML() throws {
     let xml = XML.Element(
       name: "element",
@@ -468,8 +471,71 @@ class APITests: TestCase {
       ]
     )
     try SDGXMLTests.testXML(
-      of: xml,
+      of: XMLProperty(element: xml),
       specification: "XML",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  struct XMLPropertyUnkeyed: Codable, Equatable {
+    var properties: [XML.Element]
+  }
+  func testXMLCoderXMLUnkeyed() throws {
+    let xml = XML.Element(
+      name: "element",
+      attributes: [
+        "attribute": "value",
+        "Eigenschaft": "Wert",
+        "attribut": "valeur",
+        "ιδιότητα": "τιμή",
+      ],
+      content: [
+        .characterData(XML.CharacterData(text: "A mix of text ")),
+        .element(XML.Element(name: "and")),
+        .element(XML.Element(name: "elements")),
+        .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
+      ]
+    )
+    try SDGXMLTests.testXML(
+      of: XMLPropertyUnkeyed(properties: [xml, xml]),
+      specification: "XML Unkeyed",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  struct XMLPropertySingleValue: Codable, Equatable {
+    init(property: XML.Element) {
+      self.property = property
+    }
+    var property: XML.Element
+    init(from decoder: Decoder) throws {
+      let container = try decoder.singleValueContainer()
+      self.property = try container.decode(XML.Element.self)
+    }
+    func encode(to encoder: Encoder) throws {
+      var container = encoder.singleValueContainer()
+      try container.encode(property)
+    }
+  }
+  func testXMLCoderXMLSingleValue() throws {
+    let xml = XML.Element(
+      name: "element",
+      attributes: [
+        "attribute": "value",
+        "Eigenschaft": "Wert",
+        "attribut": "valeur",
+        "ιδιότητα": "τιμή",
+      ],
+      content: [
+        .characterData(XML.CharacterData(text: "A mix of text ")),
+        .element(XML.Element(name: "and")),
+        .element(XML.Element(name: "elements")),
+        .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
+      ]
+    )
+    try SDGXMLTests.testXML(
+      of: XMLPropertySingleValue(property: xml),
+      specification: "XML Single Value",
       overwriteSpecificationInsteadOfFailing: false
     )
   }
