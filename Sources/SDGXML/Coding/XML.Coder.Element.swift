@@ -104,6 +104,8 @@ extension XML.Coder {
 
     internal init(_ modelElement: XML.Element) {
 
+      self.literal = modelElement
+
       self.name = XML.unsanitize(name: modelElement.name)
 
       var attributes: [StrictString: StrictString] = [:]
