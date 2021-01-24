@@ -16,6 +16,8 @@ import SDGLogic
 import SDGText
 import SDGLocalization
 
+import SDGCornerstoneLocalizations
+
 extension XML.Encoder {
 
   internal class Implementation: Encoder {
@@ -93,6 +95,29 @@ extension XML.Encoder {
     internal func encode<Root>(_ root: Root) throws -> XML.Element where Root: Encodable {
       try root.encode(to: self)
       return partialElements.first!.modelElement()
+    }
+
+    // MARK: - Errors
+
+    internal func mismatchedKeyError(value: XML.Element, codingPath: [CodingKey]) -> EncodingError {
+      let path = XML.Coder.description(of: codingPath)
+      let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
+        switch localization {
+        case .englishUnitedKingdom:
+          return
+            "The element named ‘\(value.name)’ cannot be encoded at ‘\(path)’; element names must match encoding keys."
+        case .englishUnitedStates, .englishCanada:
+          return
+            "The element named “\(value.name)” cannot be encoded at “\(path)”; element names must match encoding keys."
+        case .deutschDeutschland:
+          return
+            "Es ist unmöglich, das Element „\(value.name)“ unter „\(path)“ zu verschlüsseln; Elementnamen und Schlüsseln mussen übereinstimmen."
+        }
+      }).resolved()
+      return EncodingError.invalidValue(
+        value,
+        EncodingError.Context(codingPath: codingPath, debugDescription: String(description))
+      )
     }
 
     // MARK: - Encoder

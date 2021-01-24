@@ -39,7 +39,14 @@ extension XML.Encoder {
     }
 
     internal mutating func encode<T>(_ value: T) throws where T: Encodable {
-      try value.encode(to: encoder)
+      if let xml = value as? XML.Element {
+        guard xml.name == encoder.currentElement.name else {
+          throw encoder.mismatchedKeyError(value: xml, codingPath: encoder.codingPath)
+        }
+        encoder.currentElement.literal = xml
+      } else {
+        try value.encode(to: encoder)
+      }
     }
   }
 }

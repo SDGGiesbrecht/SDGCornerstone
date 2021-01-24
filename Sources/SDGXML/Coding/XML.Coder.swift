@@ -12,7 +12,15 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGText
+
 extension XML {
 
-  internal enum Coder {}
+  internal enum Coder {
+
+    internal static func description(of codingPath: [CodingKey]) -> StrictString {
+      let string = String(codingPath.lazy.map({ $0.stringValue }).joined(separator: " → "))
+      return StrictString(string)
+    }
+  }
 }

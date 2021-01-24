@@ -108,13 +108,8 @@ extension XML.Decoder {
 
     // MARK: - Errors
 
-    internal func description(of codingPath: [CodingKey]) -> StrictString {
-      let string = String(codingPath.lazy.map({ $0.stringValue }).joined(separator: " → "))
-      return StrictString(string)
-    }
-
     internal func keyNotFoundError(key: CodingKey, codingPath: [CodingKey]) -> DecodingError {
-      let path = description(of: codingPath)
+      let path = XML.Coder.description(of: codingPath)
       let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
         switch localization {
         case .englishUnitedKingdom:
@@ -132,7 +127,7 @@ extension XML.Decoder {
     }
 
     internal func containerEndError<T>(_ type: T.Type, codingPath: [CodingKey]) -> DecodingError {
-      let path = description(of: codingPath)
+      let path = XML.Coder.description(of: codingPath)
       let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
         switch localization {
         case .englishUnitedKingdom:
@@ -150,7 +145,7 @@ extension XML.Decoder {
     }
 
     internal func mismatchedTypeError<T>(_ type: T.Type, codingPath: [CodingKey]) -> DecodingError {
-      let path = description(of: codingPath)
+      let path = XML.Coder.description(of: codingPath)
       let description = UserFacing<StrictString, InterfaceLocalization>({ localization in
         switch localization {
         case .englishUnitedKingdom:
