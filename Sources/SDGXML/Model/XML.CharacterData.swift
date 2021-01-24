@@ -19,7 +19,9 @@ import SDGText
 extension XML {
 
   /// XML character data.
-  public struct CharacterData: Equatable, ExpressibleByStringLiteral, TransparentWrapper {
+  public struct CharacterData: Decodable, Encodable, Equatable, ExpressibleByStringLiteral,
+    TransparentWrapper
+  {
 
     private static let illegalCharacters: Set<Unicode.Scalar> = ["&", "<", ">"]
 
@@ -49,6 +51,20 @@ extension XML {
         let scalar: Unicode.Scalar = match.contents.first!
         return "&#x\(scalar.hexadecimalCode);"
       }
+    }
+
+    // MARK: - Decodable
+
+    public init(from decoder: Swift.Decoder) throws {
+      try self.init(from: decoder, via: StrictString.self) { string in
+        return CharacterData(text: string)
+      }
+    }
+
+    // MARK: - Encodable
+
+    public func encode(to encoder: Swift.Encoder) throws {
+      try encode(to: encoder, via: text)
     }
 
     // MARK: - ExpressibleByStringLiteral

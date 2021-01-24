@@ -15,11 +15,14 @@
 import SDGControlFlow
 import SDGCollections
 import SDGText
+import SDGPersistence
 
 extension XML {
 
   /// An XML attribute value.
-  public struct AttributeValue: Equatable, ExpressibleByStringLiteral, TransparentWrapper {
+  public struct AttributeValue: Decodable, Encodable, Equatable, ExpressibleByStringLiteral,
+    TransparentWrapper
+  {
 
     private static let illegalCharacters: Set<Unicode.Scalar> = ["&", "\u{27}", "<"]
 
@@ -49,6 +52,20 @@ extension XML {
         let scalar: Unicode.Scalar = match.contents.first!
         return "&#x\(scalar.hexadecimalCode);"
       }
+    }
+
+    // MARK: - Decodable
+
+    public init(from decoder: Swift.Decoder) throws {
+      try self.init(from: decoder, via: StrictString.self) { string in
+        return AttributeValue(text: string)
+      }
+    }
+
+    // MARK: - Encodable
+
+    public func encode(to encoder: Swift.Encoder) throws {
+      try encode(to: encoder, via: text)
     }
 
     // MARK: - ExpressibleByStringLiteral
