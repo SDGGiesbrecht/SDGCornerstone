@@ -452,95 +452,101 @@ class APITests: TestCase {
   }
 
   func testXMLCoderXML() throws {
-    struct XMLProperty: Codable, Equatable {
-      var element: XML.Element
-    }
-    let xml = XML.Element(
-      name: "element",
-      attributes: [
-        "attribute": "value",
-        "Eigenschaft": "Wert",
-        "attribut": "valeur",
-        "ιδιότητα": "τιμή",
-      ],
-      content: [
-        .characterData(XML.CharacterData(text: "A mix of text ")),
-        .element(XML.Element(name: "and")),
-        .element(XML.Element(name: "elements")),
-        .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
-      ]
-    )
-    try SDGXMLTests.testXML(
-      of: XMLProperty(element: xml),
-      specification: "XML",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      struct XMLProperty: Codable, Equatable {
+        var element: XML.Element
+      }
+      let xml = XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ],
+        content: [
+          .characterData(XML.CharacterData(text: "A mix of text ")),
+          .element(XML.Element(name: "and")),
+          .element(XML.Element(name: "elements")),
+          .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
+        ]
+      )
+      try SDGXMLTests.testXML(
+        of: XMLProperty(element: xml),
+        specification: "XML",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderXMLUnkeyed() throws {
-    struct XMLPropertyUnkeyed: Codable, Equatable {
-      var properties: [XML.Element]
-    }
-    let xml = XML.Element(
-      name: "element",
-      attributes: [
-        "attribute": "value",
-        "Eigenschaft": "Wert",
-        "attribut": "valeur",
-        "ιδιότητα": "τιμή",
-      ],
-      content: [
-        .characterData(XML.CharacterData(text: "A mix of text ")),
-        .element(XML.Element(name: "and")),
-        .element(XML.Element(name: "elements")),
-        .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
-      ]
-    )
-    try SDGXMLTests.testXML(
-      of: XMLPropertyUnkeyed(properties: [xml, xml]),
-      specification: "XML Unkeyed",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      struct XMLPropertyUnkeyed: Codable, Equatable {
+        var properties: [XML.Element]
+      }
+      let xml = XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ],
+        content: [
+          .characterData(XML.CharacterData(text: "A mix of text ")),
+          .element(XML.Element(name: "and")),
+          .element(XML.Element(name: "elements")),
+          .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
+        ]
+      )
+      try SDGXMLTests.testXML(
+        of: XMLPropertyUnkeyed(properties: [xml, xml]),
+        specification: "XML Unkeyed",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLCoderXMLSingleValue() throws {
-    struct XMLPropertySingleValue: Codable, Equatable {
-      init(property: XML.Element) {
-        self.property = property
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      struct XMLPropertySingleValue: Codable, Equatable {
+        init(property: XML.Element) {
+          self.property = property
+        }
+        var property: XML.Element
+        init(from decoder: Decoder) throws {
+          let container = try decoder.singleValueContainer()
+          self.property = try container.decode(XML.Element.self)
+        }
+        func encode(to encoder: Encoder) throws {
+          var container = encoder.singleValueContainer()
+          try container.encode(property)
+        }
       }
-      var property: XML.Element
-      init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.property = try container.decode(XML.Element.self)
+      struct Parent: Codable, Equatable {
+        var element: XMLPropertySingleValue
       }
-      func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(property)
-      }
-    }
-    struct Parent: Codable, Equatable {
-      var element: XMLPropertySingleValue
-    }
-    let xml = XML.Element(
-      name: "element",
-      attributes: [
-        "attribute": "value",
-        "Eigenschaft": "Wert",
-        "attribut": "valeur",
-        "ιδιότητα": "τιμή",
-      ],
-      content: [
-        .characterData(XML.CharacterData(text: "A mix of text ")),
-        .element(XML.Element(name: "and")),
-        .element(XML.Element(name: "elements")),
-        .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
-      ]
-    )
-    try SDGXMLTests.testXML(
-      of: Parent(element: XMLPropertySingleValue(property: xml)),
-      specification: "XML Single Value",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+      let xml = XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ],
+        content: [
+          .characterData(XML.CharacterData(text: "A mix of text ")),
+          .element(XML.Element(name: "and")),
+          .element(XML.Element(name: "elements")),
+          .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
+        ]
+      )
+      try SDGXMLTests.testXML(
+        of: Parent(element: XMLPropertySingleValue(property: xml)),
+        specification: "XML Single Value",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLContent() {
