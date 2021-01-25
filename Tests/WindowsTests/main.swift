@@ -531,7 +531,8 @@ extension SDGXMLTests.APITests {
       ("testXMLElementEscapedText", testXMLElementEscapedText),
       ("testXMLElementNested", testXMLElementNested),
       ("testXMLElementText", testXMLElementText),
-      ("testXMLEncoder", testXMLEncoder),
+      ("testXMLEncoderMismatchedKey", testXMLEncoderMismatchedKey),
+      ("testXMLEncoderMismatchedKeySingleValue", testXMLEncoderMismatchedKeySingleValue),
     ])
   ]
 }

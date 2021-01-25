@@ -1000,7 +1000,7 @@ class APITests: TestCase {
     )
   }
 
-  func testXMLEncoder() throws {
+  func testXMLEncoderMismatchedKey() throws {
     struct Child: Codable {
       init() {}
       enum CodingKeys: CodingKey {
@@ -1028,7 +1028,6 @@ class APITests: TestCase {
               value as? XML.Element == XML.Element(name: "element"),
               "Wrong value: \(value)"
             )
-            // JSONEncoder’s comparable error does include the index in the context.
             XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["child", "key"])
             caughtError = context.debugDescription
           } else {
@@ -1040,5 +1039,34 @@ class APITests: TestCase {
       specification: "Mismatched Key",
       overwriteSpecificationInsteadOfFailing: false
     )
+  }
+
+  func testXMLEncoderMismatchedKeySingleValue() {
+    struct Child: Codable {
+      init() {}
+      init(from decoder: Decoder) throws {}
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(XML.Element(name: "element"))
+      }
+    }
+    struct Parent: Codable {
+      var child: Child
+    }
+    XCTAssertThrowsError(
+      try XML.Encoder().encode(Parent(child: Child()))
+    ) { error in
+      if let encoding = error as? EncodingError,
+        case .invalidValue(let value, let context) = encoding
+      {
+        XCTAssert(
+          value as? XML.Element == XML.Element(name: "element"),
+          "Wrong value: \(value)"
+        )
+        XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["child"])
+      } else {
+        XCTFail("Wrong kind of error: \(error)")
+      }
+    }
   }
 }
