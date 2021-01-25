@@ -18,6 +18,17 @@ internal protocol XMLDecoderContainer {
 
 extension XMLDecoderContainer {
 
+  // MARK: - Decoding
+
+  internal func unpack<T>(_ element: XML.Coder.Element, as type: T.Type) throws -> T
+  where T: Decodable {
+    if T.self == XML.Element.self {
+      let xml = decoder.currentElement.literal ?? decoder.currentElement.modelElement()
+      return xml as! T
+    }
+    return try T(from: decoder)
+  }
+
   // MARK: - XDecodingContainer
 
   internal var codingPath: [CodingKey] {

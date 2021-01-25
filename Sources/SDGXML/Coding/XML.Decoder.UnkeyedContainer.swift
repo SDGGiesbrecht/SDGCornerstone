@@ -103,7 +103,7 @@ extension XML.Decoder {
 
     internal func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
       return try decodeAndAdvance(T.self) { element in
-        return try T(from: decoder)
+        return try unpack(element, as: type)
       }
     }
 

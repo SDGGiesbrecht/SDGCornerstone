@@ -137,11 +137,7 @@ extension XML.Decoder {
 
     internal func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T: Decodable {
       return try decoder.enterElement(key: key) { element in
-        if T.self == XML.Element.self {
-          let xml = decoder.currentElement.literal ?? decoder.currentElement.modelElement()
-          return xml as! T
-        }
-        return try T(from: decoder)
+        return try unpack(element, as: type)
       }
     }
 
