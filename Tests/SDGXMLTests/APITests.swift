@@ -451,10 +451,10 @@ class APITests: TestCase {
     #endif
   }
 
-  struct XMLProperty: Codable, Equatable {
-    var element: XML.Element
-  }
   func testXMLCoderXML() throws {
+    struct XMLProperty: Codable, Equatable {
+      var element: XML.Element
+    }
     let xml = XML.Element(
       name: "element",
       attributes: [
@@ -477,10 +477,10 @@ class APITests: TestCase {
     )
   }
 
-  struct XMLPropertyUnkeyed: Codable, Equatable {
-    var properties: [XML.Element]
-  }
   func testXMLCoderXMLUnkeyed() throws {
+    struct XMLPropertyUnkeyed: Codable, Equatable {
+      var properties: [XML.Element]
+    }
     let xml = XML.Element(
       name: "element",
       attributes: [
@@ -503,21 +503,24 @@ class APITests: TestCase {
     )
   }
 
-  struct XMLPropertySingleValue: Codable, Equatable {
-    init(property: XML.Element) {
-      self.property = property
-    }
-    var property: XML.Element
-    init(from decoder: Decoder) throws {
-      let container = try decoder.singleValueContainer()
-      self.property = try container.decode(XML.Element.self)
-    }
-    func encode(to encoder: Encoder) throws {
-      var container = encoder.singleValueContainer()
-      try container.encode(property)
-    }
-  }
   func testXMLCoderXMLSingleValue() throws {
+    struct XMLPropertySingleValue: Codable, Equatable {
+      init(property: XML.Element) {
+        self.property = property
+      }
+      var property: XML.Element
+      init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.property = try container.decode(XML.Element.self)
+      }
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(property)
+      }
+    }
+    struct Parent: Codable, Equatable {
+      var element: XMLPropertySingleValue
+    }
     let xml = XML.Element(
       name: "element",
       attributes: [
@@ -534,7 +537,7 @@ class APITests: TestCase {
       ]
     )
     try SDGXMLTests.testXML(
-      of: XMLPropertySingleValue(property: xml),
+      of: Parent(element: XMLPropertySingleValue(property: xml)),
       specification: "XML Single Value",
       overwriteSpecificationInsteadOfFailing: false
     )
