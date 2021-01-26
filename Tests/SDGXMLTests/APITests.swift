@@ -56,10 +56,12 @@ class APITests: TestCase {
       overwriteSpecificationInsteadOfFailing: false
     )
     #if !PLATFORM_LACKS_FOUNDATION_XML
-      testCodableConformance(
-        of: XML.AttributeValue(text: "value"),
-        uniqueTestName: "Value"
-      )
+      #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+        testCodableConformance(
+          of: XML.AttributeValue(text: "value"),
+          uniqueTestName: "Value"
+        )
+      #endif
     #endif
   }
 
