@@ -484,30 +484,34 @@ class APITests: TestCase {
   }
 
   func testXMLCoderXMLUnkeyed() throws {
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      struct XMLPropertyUnkeyed: Codable, Equatable {
-        var properties: [XML.Element]
-      }
-      let xml = XML.Element(
-        name: "element",
-        attributes: [
-          "attribute": "value",
-          "Eigenschaft": "Wert",
-          "attribut": "valeur",
-          "ιδιότητα": "τιμή",
-        ],
-        content: [
-          .characterData(XML.CharacterData(text: "A mix of text ")),
-          .element(XML.Element(name: "and")),
-          .element(XML.Element(name: "elements")),
-          .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
-        ]
-      )
-      try SDGXMLTests.testXML(
-        of: XMLPropertyUnkeyed(properties: [xml, xml]),
-        specification: "XML Unkeyed",
-        overwriteSpecificationInsteadOfFailing: false
-      )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        struct XMLPropertyUnkeyed: Codable, Equatable {
+          var properties: [XML.Element]
+        }
+        let xml = XML.Element(
+          name: "element",
+          attributes: [
+            "attribute": "value",
+            "Eigenschaft": "Wert",
+            "attribut": "valeur",
+            "ιδιότητα": "τιμή",
+          ],
+          content: [
+            .characterData(XML.CharacterData(text: "A mix of text ")),
+            .element(XML.Element(name: "and")),
+            .element(XML.Element(name: "elements")),
+            .characterData(
+              XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
+            ),
+          ]
+        )
+        try SDGXMLTests.testXML(
+          of: XMLPropertyUnkeyed(properties: [xml, xml]),
+          specification: "XML Unkeyed",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
     #endif
   }
 
