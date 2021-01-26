@@ -924,28 +924,30 @@ class APITests: TestCase {
   }
 
   func testXMLElement() throws {
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      XCTAssertNil(try? XML.Element(source: "<element>"))
-      XCTAssertEqual(
-        try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
-        XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        XCTAssertNil(try? XML.Element(source: "<element>"))
+        XCTAssertEqual(
+          try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
+          XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
+        )
+      #endif
+      testCustomStringConvertibleConformance(
+        of: XML.Element(name: "element"),
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "Document",
+        overwriteSpecificationInsteadOfFailing: false
       )
-    #endif
-    testCustomStringConvertibleConformance(
-      of: XML.Element(name: "element"),
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "Document",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      testCodableConformance(
-        of: XML.Element(
-          name: "name",
-          attributes: ["attribute": "value"],
-          content: [.element(XML.Element(name: "child"))]
-        ),
-        uniqueTestName: "Element"
-      )
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        testCodableConformance(
+          of: XML.Element(
+            name: "name",
+            attributes: ["attribute": "value"],
+            content: [.element(XML.Element(name: "child"))]
+          ),
+          uniqueTestName: "Element"
+        )
+      #endif
     #endif
   }
 
