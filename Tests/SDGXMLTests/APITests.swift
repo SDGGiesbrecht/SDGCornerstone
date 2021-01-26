@@ -907,17 +907,19 @@ class APITests: TestCase {
   }
 
   func testXMLDocument() {
-    testCustomStringConvertibleConformance(
-      of: XML.Document(rootElement: XML.Element(name: "root")),
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "Document",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      testCodableConformance(
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      testCustomStringConvertibleConformance(
         of: XML.Document(rootElement: XML.Element(name: "root")),
-        uniqueTestName: "Document"
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "Document",
+        overwriteSpecificationInsteadOfFailing: false
       )
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        testCodableConformance(
+          of: XML.Document(rootElement: XML.Element(name: "root")),
+          uniqueTestName: "Document"
+        )
+      #endif
     #endif
   }
 
