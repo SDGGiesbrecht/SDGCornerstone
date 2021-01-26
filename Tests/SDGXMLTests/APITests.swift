@@ -66,17 +66,19 @@ class APITests: TestCase {
   }
 
   func testXMLCharacterData() {
-    testCustomStringConvertibleConformance(
-      of: "attribute text, 0 < 1" as XML.CharacterData,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "Character Data",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      testCodableConformance(
-        of: XML.CharacterData(text: "character data"),
-        uniqueTestName: "Character Data"
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      testCustomStringConvertibleConformance(
+        of: "attribute text, 0 < 1" as XML.CharacterData,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "Character Data",
+        overwriteSpecificationInsteadOfFailing: false
       )
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        testCodableConformance(
+          of: XML.CharacterData(text: "character data"),
+          uniqueTestName: "Character Data"
+        )
+      #endif
     #endif
   }
 
