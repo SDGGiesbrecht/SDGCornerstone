@@ -83,55 +83,57 @@ class APITests: TestCase {
   }
 
   func testLineView() {
-    testBidirectionalCollectionConformance(of: "A\nB\nC".lines)
-    testCustomStringConvertibleConformance(
-      of: "A\nB\nC".lines,
-      localizations: APILocalization.self,
-      uniqueTestName: "ABC",
-      overwriteSpecificationInsteadOfFailing: false
-    )
-    testCustomStringConvertibleConformance(
-      of: "ABC\nDEF".lines.first!,
-      localizations: APILocalization.self,
-      uniqueTestName: "ABC",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+      testBidirectionalCollectionConformance(of: "A\nB\nC".lines)
+      testCustomStringConvertibleConformance(
+        of: "A\nB\nC".lines,
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      testCustomStringConvertibleConformance(
+        of: "ABC\nDEF".lines.first!,
+        localizations: APILocalization.self,
+        uniqueTestName: "ABC",
+        overwriteSpecificationInsteadOfFailing: false
+      )
 
-    let fileLines = [
-      "Line 1",
-      "Line 2",
-      "Line 3",
-    ]
-    var file = fileLines.joined(separator: "\n")
-    XCTAssertEqual(file.lines.map({ String($0.line) }), fileLines)
+      let fileLines = [
+        "Line 1",
+        "Line 2",
+        "Line 3",
+      ]
+      var file = fileLines.joined(separator: "\n")
+      XCTAssertEqual(file.lines.map({ String($0.line) }), fileLines)
 
-    file = fileLines.joined(separator: "\u{D}\u{A}")
-    XCTAssertEqual(file.lines.map({ String($0.line) }), fileLines)
+      file = fileLines.joined(separator: "\u{D}\u{A}")
+      XCTAssertEqual(file.lines.map({ String($0.line) }), fileLines)
 
-    file.lines.removeFirst()
-    XCTAssertEqual(file.lines.map({ String($0.line) }), Array(fileLines.dropFirst()))
+      file.lines.removeFirst()
+      XCTAssertEqual(file.lines.map({ String($0.line) }), Array(fileLines.dropFirst()))
 
-    var index = file.lines.startIndex
-    index = file.lines.index(after: index)
-    XCTAssertEqual(file.lines.distance(from: file.lines.startIndex, to: index), 1)
-    XCTAssertEqual(file.lines.index(before: index), file.lines.startIndex)
+      var index = file.lines.startIndex
+      index = file.lines.index(after: index)
+      XCTAssertEqual(file.lines.distance(from: file.lines.startIndex, to: index), 1)
+      XCTAssertEqual(file.lines.index(before: index), file.lines.startIndex)
 
-    file = fileLines.joined(separator: "\n")
-    index = file.lines.index(after: file.lines.startIndex)
-    file.lines[index] = Line(line: "Replaced", newline: "\u{2029}")
-    XCTAssertEqual(file, "Line 1\nReplaced\u{2029}Line 3")
+      file = fileLines.joined(separator: "\n")
+      index = file.lines.index(after: file.lines.startIndex)
+      file.lines[index] = Line(line: "Replaced", newline: "\u{2029}")
+      XCTAssertEqual(file, "Line 1\nReplaced\u{2029}Line 3")
 
-    XCTAssertEqual(String(LineView<String>()), "")
-    XCTAssertEqual(String(LineView<String>([Line(line: "", newline: "\n")])), "\n")
-    var lines = LineView<String>()
-    lines.append(contentsOf: [Line(line: "", newline: "\n")])
-    XCTAssertEqual(String(lines), "\n")
-    lines.insert(contentsOf: [Line(line: "", newline: "\n")], at: lines.startIndex)
-    XCTAssertEqual(String(lines), "\n\n")
+      XCTAssertEqual(String(LineView<String>()), "")
+      XCTAssertEqual(String(LineView<String>([Line(line: "", newline: "\n")])), "\n")
+      var lines = LineView<String>()
+      lines.append(contentsOf: [Line(line: "", newline: "\n")])
+      XCTAssertEqual(String(lines), "\n")
+      lines.insert(contentsOf: [Line(line: "", newline: "\n")], at: lines.startIndex)
+      XCTAssertEqual(String(lines), "\n\n")
 
-    var abcdef = "ABC\n"
-    abcdef.lines[abcdef.lines.endIndex] = abcdef.lines.first!
-    XCTAssertEqual(abcdef, "ABC\nABC\n")
+      var abcdef = "ABC\n"
+      abcdef.lines[abcdef.lines.endIndex] = abcdef.lines.first!
+      XCTAssertEqual(abcdef, "ABC\nABC\n")
+    #endif
   }
 
   func testLineViewIndex() {
