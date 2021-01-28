@@ -275,9 +275,11 @@ class APITests: TestCase {
   }
 
   func testNewlinePattern() {
-    testPattern(CharacterSet.newlinePattern, match: "\n".scalars)
-    testPattern(CharacterSet.newlinePattern, match: "\u{D}\u{A}".scalars)
-    XCTAssert(CharacterSet.newlinePattern.matches(in: ["a", "b", "c"], at: 0).isEmpty)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+      testPattern(CharacterSet.newlinePattern, match: "\n".scalars)
+      testPattern(CharacterSet.newlinePattern, match: "\u{D}\u{A}".scalars)
+      XCTAssert(CharacterSet.newlinePattern.matches(in: ["a", "b", "c"], at: 0).isEmpty)
+    #endif
   }
 
   func testScalarView() {
