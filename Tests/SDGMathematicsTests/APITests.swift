@@ -182,7 +182,7 @@ class APITests: TestCase {
       testRealArithmeticConformance(of: Double.self)
       testRealArithmeticConformance(of: FloatMax.self)
       testRealArithmeticConformance(of: CGFloat.self)
-      #if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+      #if !((os(macOS) && arch(arm64)) || os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
         testRealArithmeticConformance(of: Float80.self)
       #endif
       testRealArithmeticConformance(of: Float.self)
@@ -488,7 +488,7 @@ class APITests: TestCase {
     init(_ int: SDGMathematics.IntMax) {
       value = Double(int)
     }
-    #if !(os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
+    #if !((os(macOS) && arch(arm64)) || os(Windows) || os(WASI) || os(tvOS) || os(iOS) || os(Android) || os(watchOS))
       init(_ floatingPoint: FloatMax) {
         value = Double(floatingPoint)
       }
