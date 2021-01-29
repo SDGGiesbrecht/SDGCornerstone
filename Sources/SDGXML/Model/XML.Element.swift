@@ -15,10 +15,13 @@
 import SDGCollections
 import SDGText
 
+#if !PLATFORM_LACKS_FOUNDATION_XML
+  extension XML.Element: Decodable {}
+#endif
 extension XML {
 
   /// An XML element.
-  public struct Element: CustomStringConvertible, Equatable {
+  public struct Element: CustomStringConvertible, Encodable, Equatable {
 
     // MARK: - Initialization
 
@@ -106,6 +109,22 @@ extension XML {
 
     public var description: String {
       return String(source())
+    }
+
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      // MARK: - Decodable
+
+      public init(from decoder: Swift.Decoder) throws {
+        try self.init(from: decoder, via: StrictString.self) { string in
+          return try XML.Element(source: string)
+        }
+      }
+    #endif
+
+    // MARK: - Encodable
+
+    public func encode(to encoder: Swift.Encoder) throws {
+      try encode(to: encoder, via: source())
     }
   }
 }

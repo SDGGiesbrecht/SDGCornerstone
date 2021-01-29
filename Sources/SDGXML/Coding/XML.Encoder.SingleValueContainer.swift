@@ -39,7 +39,9 @@ extension XML.Encoder {
     }
 
     internal mutating func encode<T>(_ value: T) throws where T: Encodable {
-      try value.encode(to: encoder)
+      try pack(value) { xml, encode in
+        try encode(encoder.currentElement)
+      }
     }
   }
 }

@@ -30,6 +30,23 @@ extension XMLEncoderContainer {
     }
   }
 
+  internal func pack<T>(
+    _ value: T,
+    encode: (XML.Element?, (XML.Coder.Element) throws -> Void) throws -> Void
+  ) throws where T: Encodable {
+    let xml = value as? XML.Element
+    try encode(xml) { element in
+      if let xml = xml {
+        guard xml.name == encoder.currentElement.name else {
+          throw encoder.mismatchedKeyError(value: xml, codingPath: encoder.codingPath)
+        }
+        encoder.currentElement.literal = xml
+      } else {
+        try value.encode(to: encoder)
+      }
+    }
+  }
+
   // MARK: - XEncodingContainer
 
   internal var codingPath: [CodingKey] {

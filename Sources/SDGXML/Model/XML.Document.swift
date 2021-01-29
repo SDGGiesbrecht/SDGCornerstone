@@ -14,10 +14,13 @@
 
 import SDGText
 
+#if !PLATFORM_LACKS_FOUNDATION_XML
+  extension XML.Document: Decodable {}
+#endif
 extension XML {
 
   /// An XML document.
-  public struct Document: CustomStringConvertible {
+  public struct Document: CustomStringConvertible, Encodable, Equatable {
 
     // MARK: - Initialization
 
@@ -55,6 +58,22 @@ extension XML {
 
     public var description: String {
       return String(source())
+    }
+
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      // MARK: - Decodable
+
+      public init(from decoder: Swift.Decoder) throws {
+        try self.init(from: decoder, via: StrictString.self) { string in
+          return try XML.Document(source: string)
+        }
+      }
+    #endif
+
+    // MARK: - Encodable
+
+    public func encode(to encoder: Swift.Encoder) throws {
+      try encode(to: encoder, via: source())
     }
   }
 }

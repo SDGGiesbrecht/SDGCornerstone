@@ -42,7 +42,7 @@ extension XML.Decoder {
     }
 
     internal func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
-      return try T(from: decoder)
+      return try unpack(decoder.currentElement, as: type)
     }
 
     // MARK: - XMLDecoderKeylessContainer

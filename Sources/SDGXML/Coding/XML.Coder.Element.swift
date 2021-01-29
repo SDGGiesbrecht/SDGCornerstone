@@ -33,6 +33,8 @@ extension XML.Coder {
     internal var data: StrictString?
     internal var children: [Element] = []
 
+    internal var literal: XML.Element?
+
     internal var ordered: Bool = true
 
     internal var currentIndex: Int = 0
@@ -58,6 +60,10 @@ extension XML.Coder {
     // MARK: - Conversions
 
     internal func modelElement(indentationLevel: Int = 0) -> XML.Element {
+      if let literal = self.literal {
+        return literal
+      }
+
       let content: [XML.Content]
       if let text = data {
         content = [.characterData(XML.CharacterData(text: text))]
@@ -97,6 +103,8 @@ extension XML.Coder {
     }
 
     internal init(_ modelElement: XML.Element) {
+
+      self.literal = modelElement
 
       self.name = XML.unsanitize(name: modelElement.name)
 

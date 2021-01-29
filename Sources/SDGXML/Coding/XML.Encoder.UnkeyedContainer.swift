@@ -54,8 +54,14 @@ extension XML.Encoder {
     }
 
     internal mutating func encode<T>(_ value: T) throws where T: Encodable {
-      try encoder.createNewElement(key: nextKey()) { _ in
-        try value.encode(to: encoder)
+      try pack(value) { xml, encode in
+        let key: CodingKey
+        if let xml = xml {
+          key = XML.Coder.MiscellaneousKey(String(xml.name))
+        } else {
+          key = nextKey()
+        }
+        try encoder.createNewElement(key: key, encode)
       }
     }
 

@@ -55,15 +55,31 @@ class APITests: TestCase {
       uniqueTestName: "Attribute",
       overwriteSpecificationInsteadOfFailing: false
     )
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+        testCodableConformance(
+          of: XML.AttributeValue(text: "value"),
+          uniqueTestName: "Value"
+        )
+      #endif
+    #endif
   }
 
   func testXMLCharacterData() {
-    testCustomStringConvertibleConformance(
-      of: "attribute text, 0 < 1" as XML.CharacterData,
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "Character Data",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      testCustomStringConvertibleConformance(
+        of: "attribute text, 0 < 1" as XML.CharacterData,
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "Character Data",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        testCodableConformance(
+          of: XML.CharacterData(text: "character data"),
+          uniqueTestName: "Character Data"
+        )
+      #endif
+    #endif
   }
 
   func testXMLCoderArray() throws {
@@ -439,6 +455,108 @@ class APITests: TestCase {
     #endif
   }
 
+  func testXMLCoderXML() throws {
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      struct XMLProperty: Codable, Equatable {
+        var element: XML.Element
+      }
+      let xml = XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ],
+        content: [
+          .characterData(XML.CharacterData(text: "A mix of text ")),
+          .element(XML.Element(name: "and")),
+          .element(XML.Element(name: "elements")),
+          .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
+        ]
+      )
+      try SDGXMLTests.testXML(
+        of: XMLProperty(element: xml),
+        specification: "XML",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
+  }
+
+  func testXMLCoderXMLUnkeyed() throws {
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        struct XMLPropertyUnkeyed: Codable, Equatable {
+          var properties: [XML.Element]
+        }
+        let xml = XML.Element(
+          name: "element",
+          attributes: [
+            "attribute": "value",
+            "Eigenschaft": "Wert",
+            "attribut": "valeur",
+            "ιδιότητα": "τιμή",
+          ],
+          content: [
+            .characterData(XML.CharacterData(text: "A mix of text ")),
+            .element(XML.Element(name: "and")),
+            .element(XML.Element(name: "elements")),
+            .characterData(
+              XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")
+            ),
+          ]
+        )
+        try SDGXMLTests.testXML(
+          of: XMLPropertyUnkeyed(properties: [xml, xml]),
+          specification: "XML Unkeyed",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
+    #endif
+  }
+
+  func testXMLCoderXMLSingleValue() throws {
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      struct XMLPropertySingleValue: Codable, Equatable {
+        init(property: XML.Element) {
+          self.property = property
+        }
+        var property: XML.Element
+        init(from decoder: Decoder) throws {
+          let container = try decoder.singleValueContainer()
+          self.property = try container.decode(XML.Element.self)
+        }
+        func encode(to encoder: Encoder) throws {
+          var container = encoder.singleValueContainer()
+          try container.encode(property)
+        }
+      }
+      struct Parent: Codable, Equatable {
+        var element: XMLPropertySingleValue
+      }
+      let xml = XML.Element(
+        name: "element",
+        attributes: [
+          "attribute": "value",
+          "Eigenschaft": "Wert",
+          "attribut": "valeur",
+          "ιδιότητα": "τιμή",
+        ],
+        content: [
+          .characterData(XML.CharacterData(text: "A mix of text ")),
+          .element(XML.Element(name: "and")),
+          .element(XML.Element(name: "elements")),
+          .characterData(XML.CharacterData(text: "\n   with line breaks and trailing spaces:   ")),
+        ]
+      )
+      try SDGXMLTests.testXML(
+        of: Parent(element: XMLPropertySingleValue(property: xml)),
+        specification: "XML Single Value",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
+  }
+
   func testXMLContent() {
     testCustomStringConvertibleConformance(
       of: XML.Content.element(XML.Element(name: "element")),
@@ -789,28 +907,48 @@ class APITests: TestCase {
   }
 
   func testXMLDocument() {
-    testCustomStringConvertibleConformance(
-      of: XML.Document(rootElement: XML.Element(name: "root")),
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "Document",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      testCustomStringConvertibleConformance(
+        of: XML.Document(rootElement: XML.Element(name: "root")),
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "Document",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        testCodableConformance(
+          of: XML.Document(rootElement: XML.Element(name: "root")),
+          uniqueTestName: "Document"
+        )
+      #endif
+    #endif
   }
 
   func testXMLElement() throws {
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      XCTAssertNil(try? XML.Element(source: "<element>"))
-      XCTAssertEqual(
-        try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
-        XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        XCTAssertNil(try? XML.Element(source: "<element>"))
+        XCTAssertEqual(
+          try XML.Element(source: "<element><![CDATA[<xml>]]></element>"),
+          XML.Element(name: "element", content: [.characterData(XML.CharacterData(text: "<xml>"))])
+        )
+      #endif
+      testCustomStringConvertibleConformance(
+        of: XML.Element(name: "element"),
+        localizations: InterfaceLocalization.self,
+        uniqueTestName: "Document",
+        overwriteSpecificationInsteadOfFailing: false
       )
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        testCodableConformance(
+          of: XML.Element(
+            name: "name",
+            attributes: ["attribute": "value"],
+            content: [.element(XML.Element(name: "child"))]
+          ),
+          uniqueTestName: "Element"
+        )
+      #endif
     #endif
-    testCustomStringConvertibleConformance(
-      of: XML.Element(name: "element"),
-      localizations: InterfaceLocalization.self,
-      uniqueTestName: "Document",
-      overwriteSpecificationInsteadOfFailing: false
-    )
   }
 
   func testXMLElementAttributes() throws {
@@ -878,5 +1016,75 @@ class APITests: TestCase {
       specification: "Text",
       overwriteSpecificationInsteadOfFailing: false
     )
+  }
+
+  func testXMLEncoderMismatchedKey() throws {
+    struct Child: Codable {
+      init() {}
+      enum CodingKeys: CodingKey {
+        case key
+      }
+      init(from decoder: Decoder) throws {}
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(XML.Element(name: "element"), forKey: .key)
+      }
+    }
+    struct Parent: Codable {
+      var child: Child
+    }
+    try testErrorDecsription(
+      triggerError: { () -> String in
+        var caughtError: String = ""
+        XCTAssertThrowsError(
+          try XML.Encoder().encode(Parent(child: Child()))
+        ) { error in
+          if let encoding = error as? EncodingError,
+            case .invalidValue(let value, let context) = encoding
+          {
+            XCTAssert(
+              value as? XML.Element == XML.Element(name: "element"),
+              "Wrong value: \(value)"
+            )
+            XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["child", "key"])
+            caughtError = context.debugDescription
+          } else {
+            XCTFail("Wrong kind of error: \(error)")
+          }
+        }
+        return caughtError
+      },
+      specification: "Mismatched Key",
+      overwriteSpecificationInsteadOfFailing: false
+    )
+  }
+
+  func testXMLEncoderMismatchedKeySingleValue() {
+    struct Child: Codable {
+      init() {}
+      init(from decoder: Decoder) throws {}
+      func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(XML.Element(name: "element"))
+      }
+    }
+    struct Parent: Codable {
+      var child: Child
+    }
+    XCTAssertThrowsError(
+      try XML.Encoder().encode(Parent(child: Child()))
+    ) { error in
+      if let encoding = error as? EncodingError,
+        case .invalidValue(let value, let context) = encoding
+      {
+        XCTAssert(
+          value as? XML.Element == XML.Element(name: "element"),
+          "Wrong value: \(value)"
+        )
+        XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["child"])
+      } else {
+        XCTFail("Wrong kind of error: \(error)")
+      }
+    }
   }
 }

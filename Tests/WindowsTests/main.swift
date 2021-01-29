@@ -507,6 +507,9 @@ extension SDGXMLTests.APITests {
       ("testXMLCoderString", testXMLCoderString),
       ("testXMLCoderStructure", testXMLCoderStructure),
       ("testXMLCoderUnkeyed", testXMLCoderUnkeyed),
+      ("testXMLCoderXML", testXMLCoderXML),
+      ("testXMLCoderXMLUnkeyed", testXMLCoderXMLUnkeyed),
+      ("testXMLCoderXMLSingleValue", testXMLCoderXMLSingleValue),
       ("testXMLContent", testXMLContent),
       ("testXMLDecoderContainer", testXMLDecoderContainer),
       ("testXMLDecoderKeyNotFound", testXMLDecoderKeyNotFound),
@@ -528,6 +531,8 @@ extension SDGXMLTests.APITests {
       ("testXMLElementEscapedText", testXMLElementEscapedText),
       ("testXMLElementNested", testXMLElementNested),
       ("testXMLElementText", testXMLElementText),
+      ("testXMLEncoderMismatchedKey", testXMLEncoderMismatchedKey),
+      ("testXMLEncoderMismatchedKeySingleValue", testXMLEncoderMismatchedKeySingleValue),
     ])
   ]
 }
