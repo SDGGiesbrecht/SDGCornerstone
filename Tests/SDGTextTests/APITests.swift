@@ -594,30 +594,32 @@ class APITests: TestCase {
   }
 
   func testStringClusterIndex() {
-    let strict = StrictString("français")
-    let string = String(strict)
-    let index = string.clusters.index(string.clusters.startIndex, offsetBy: 7)
-    XCTAssertEqual(
-      index.samePosition(in: strict.scalars),
-      strict.scalars.index(strict.scalars.startIndex, offsetBy: 8)
-    )
-    XCTAssertEqual(
-      string.clusters.startIndex.samePosition(in: strict.lines),
-      strict.lines.startIndex
-    )
-    XCTAssertNil(index.samePosition(in: strict.lines))
-    XCTAssertEqual(index.line(in: strict.lines), strict.lines.startIndex)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+      let strict = StrictString("français")
+      let string = String(strict)
+      let index = string.clusters.index(string.clusters.startIndex, offsetBy: 7)
+      XCTAssertEqual(
+        index.samePosition(in: strict.scalars),
+        strict.scalars.index(strict.scalars.startIndex, offsetBy: 8)
+      )
+      XCTAssertEqual(
+        string.clusters.startIndex.samePosition(in: strict.lines),
+        strict.lines.startIndex
+      )
+      XCTAssertNil(index.samePosition(in: strict.lines))
+      XCTAssertEqual(index.line(in: strict.lines), strict.lines.startIndex)
 
-    XCTAssertEqual(
-      index.samePosition(in: string.scalars),
-      string.scalars.index(string.scalars.startIndex, offsetBy: 8)
-    )
-    XCTAssertEqual(
-      string.clusters.startIndex.samePosition(in: string.lines),
-      string.lines.startIndex
-    )
-    XCTAssertNil(index.samePosition(in: string.lines))
-    XCTAssertEqual(index.line(in: string.lines), string.lines.startIndex)
+      XCTAssertEqual(
+        index.samePosition(in: string.scalars),
+        string.scalars.index(string.scalars.startIndex, offsetBy: 8)
+      )
+      XCTAssertEqual(
+        string.clusters.startIndex.samePosition(in: string.lines),
+        string.lines.startIndex
+      )
+      XCTAssertNil(index.samePosition(in: string.lines))
+      XCTAssertEqual(index.line(in: string.lines), string.lines.startIndex)
+    #endif
   }
 
   func testStringFamily() {
