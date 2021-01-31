@@ -12,10 +12,13 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import Foundation
+
 import SDGText
+import SDGPersistence
 
 #if !PLATFORM_LACKS_FOUNDATION_XML
-  extension XML.Document: Decodable {}
+  extension XML.Document: Decodable, FileConvertible {}
 #endif
 extension XML {
 
@@ -51,7 +54,8 @@ extension XML {
 
     /// The source of the element.
     public func source() -> StrictString {
-      return rootElement.source()
+      return
+        "<?xml version=\u{22}1.1\u{22} encoding=\u{22}UTF\u{2D}8\u{22}?>\n\(rootElement.source())"
     }
 
     // MARK: - CustomStringConvertible
@@ -74,6 +78,17 @@ extension XML {
 
     public func encode(to encoder: Swift.Encoder) throws {
       try encode(to: encoder, via: source())
+    }
+
+    // MARK: - FileConvertible
+
+    public init(file: Data, origin: URL?) throws {
+      let source = try StrictString(file: file, origin: origin)
+      try self.init(source: source)
+    }
+
+    public var file: Data {
+      return source().file
     }
   }
 }
