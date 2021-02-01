@@ -550,50 +550,50 @@ class APITests: TestCase {
 
   func testString() {
     #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
-    testBidirectionalCollectionConformance(of: "ABC")
-    testRangeReplaceableCollectionConformance(of: String.self, element: "A")
+      testBidirectionalCollectionConformance(of: "ABC")
+      testRangeReplaceableCollectionConformance(of: String.self, element: "A")
 
-    func runTests<S: StringFamily>(helloWorld: S) {
+      func runTests<S: StringFamily>(helloWorld: S) {
 
-      XCTAssertEqual(S(helloWorld.scalars), helloWorld)
-      XCTAssertEqual(S(helloWorld.clusters), helloWorld)
+        XCTAssertEqual(S(helloWorld.scalars), helloWorld)
+        XCTAssertEqual(S(helloWorld.clusters), helloWorld)
 
-      XCTAssertNotNil(helloWorld.scalars.first)
+        XCTAssertNotNil(helloWorld.scalars.first)
 
-      let set: Set<S> = [helloWorld]
-      XCTAssert(helloWorld ∈ set)
+        let set: Set<S> = [helloWorld]
+        XCTAssert(helloWorld ∈ set)
 
-      XCTAssert(S(S.ClusterView()).scalars.isEmpty)
-      XCTAssert(S(S.ScalarView()).clusters.isEmpty)
-    }
+        XCTAssert(S(S.ClusterView()).scalars.isEmpty)
+        XCTAssert(S(S.ScalarView()).clusters.isEmpty)
+      }
 
-    runTests(helloWorld: "Hello, world!")
-    runTests(helloWorld: StrictString("Hello, world!"))
+      runTests(helloWorld: "Hello, world!")
+      runTests(helloWorld: StrictString("Hello, world!"))
 
-    XCTAssertEqual(StrictString("Hello, world!"), "Hello, world!")
+      XCTAssertEqual(StrictString("Hello, world!"), "Hello, world!")
 
-    let simple = "1"
-    let simpleUTF8 = try? String(file: simple.data(using: .utf8)!, origin: nil)
-    XCTAssertEqual(simpleUTF8, simple)
+      let simple = "1"
+      let simpleUTF8 = try? String(file: simple.data(using: .utf8)!, origin: nil)
+      XCTAssertEqual(simpleUTF8, simple)
 
-    let unicode = "שלום! 🇮🇱 Γεια σας! 🇬🇷"
-    let utf8 = try? String(file: unicode.data(using: .utf8)!, origin: nil)
-    XCTAssertEqual(utf8, unicode)
-    let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
-    XCTAssertEqual(utf16, unicode)
+      let unicode = "שלום! 🇮🇱 Γεια σας! 🇬🇷"
+      let utf8 = try? String(file: unicode.data(using: .utf8)!, origin: nil)
+      XCTAssertEqual(utf8, unicode)
+      let utf16 = try? String(file: unicode.data(using: .utf16)!, origin: nil)
+      XCTAssertEqual(utf16, unicode)
 
-    XCTAssertNil("ABC".scalars.firstMatch(for: ConditionalPattern({ $0 == "D" })))
+      XCTAssertNil("ABC".scalars.firstMatch(for: ConditionalPattern({ $0 == "D" })))
 
-    let blah = "Blah blah blah..."
-    XCTAssertNotNil(blah.scalars.firstMatch(for: "blah".scalars))
+      let blah = "Blah blah blah..."
+      XCTAssertNotNil(blah.scalars.firstMatch(for: "blah".scalars))
 
-    var moreBlah = ""
-    for _ in 1...10 {
-      moreBlah.append("Blah blah blah...\n")
-    }
-    XCTAssertEqual(moreBlah.lines.map({ String($0.line) }).count, 11)
-    XCTAssertEqual(String(moreBlah.lines.first!.line), "Blah blah blah...")
-    XCTAssertEqual(String(moreBlah.lines.last!.line), "")
+      var moreBlah = ""
+      for _ in 1...10 {
+        moreBlah.append("Blah blah blah...\n")
+      }
+      XCTAssertEqual(moreBlah.lines.map({ String($0.line) }).count, 11)
+      XCTAssertEqual(String(moreBlah.lines.first!.line), "Blah blah blah...")
+      XCTAssertEqual(String(moreBlah.lines.last!.line), "")
     #endif
   }
 
