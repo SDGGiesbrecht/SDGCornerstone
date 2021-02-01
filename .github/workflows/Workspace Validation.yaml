@@ -237,7 +237,7 @@ jobs:
       run: |
         set -x
         export TARGETING_WEB=true
-        carton test
+        /root/.carton/sdk/wasm-5.3.1-RELEASE/usr/bin/swift build -c debug --product SDGCornerstonePackageTests --enable-test-discovery --triple wasm32-unknown-wasi
   CentOS:
     name: CentOS
     runs-on: ubuntu-20.04
