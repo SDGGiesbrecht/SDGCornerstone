@@ -187,91 +187,93 @@ class APITests: TestCase {
   }
 
   func testRange() {
-    var string = "á\nb̂\nc̀"
-    XCTAssertEqual(string.lines.bounds.sameRange(in: string.scalars), string.scalars.bounds)
-    var strict = StrictString(string)
-    XCTAssertEqual(strict.lines.bounds.sameRange(in: strict.scalars), strict.scalars.bounds)
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Intermittent illegal instruction.)
+      var string = "á\nb̂\nc̀"
+      XCTAssertEqual(string.lines.bounds.sameRange(in: string.scalars), string.scalars.bounds)
+      var strict = StrictString(string)
+      XCTAssertEqual(strict.lines.bounds.sameRange(in: strict.scalars), strict.scalars.bounds)
 
-    XCTAssertEqual(string.lines.bounds.sameRange(in: string.clusters), string.clusters.bounds)
-    XCTAssertEqual(strict.lines.bounds.sameRange(in: strict.clusters), strict.clusters.bounds)
+      XCTAssertEqual(string.lines.bounds.sameRange(in: string.clusters), string.clusters.bounds)
+      XCTAssertEqual(strict.lines.bounds.sameRange(in: strict.clusters), strict.clusters.bounds)
 
-    XCTAssertEqual(string.clusters.bounds.sameRange(in: string.scalars), string.scalars.bounds)
-    XCTAssertEqual(strict.clusters.bounds.sameRange(in: strict.scalars), strict.scalars.bounds)
+      XCTAssertEqual(string.clusters.bounds.sameRange(in: string.scalars), string.scalars.bounds)
+      XCTAssertEqual(strict.clusters.bounds.sameRange(in: strict.scalars), strict.scalars.bounds)
 
-    let partialLine =
-      string.clusters.startIndex..<string.clusters.index(after: string.clusters.startIndex)
-    let strictPartialLine =
-      strict.clusters.startIndex..<strict.clusters.index(after: string.clusters.startIndex)
-    XCTAssertNil(partialLine.sameRange(in: string.lines))
-    XCTAssertNil(strictPartialLine.sameRange(in: strict.lines))
+      let partialLine =
+        string.clusters.startIndex..<string.clusters.index(after: string.clusters.startIndex)
+      let strictPartialLine =
+        strict.clusters.startIndex..<strict.clusters.index(after: string.clusters.startIndex)
+      XCTAssertNil(partialLine.sameRange(in: string.lines))
+      XCTAssertNil(strictPartialLine.sameRange(in: strict.lines))
 
-    XCTAssertEqual(string.scalars.bounds.sameRange(in: string.lines), string.lines.bounds)
-    XCTAssertEqual(strict.scalars.bounds.sameRange(in: strict.lines), strict.lines.bounds)
+      XCTAssertEqual(string.scalars.bounds.sameRange(in: string.lines), string.lines.bounds)
+      XCTAssertEqual(strict.scalars.bounds.sameRange(in: strict.lines), strict.lines.bounds)
 
-    XCTAssertEqual(string.scalars.bounds.sameRange(in: string.clusters), string.clusters.bounds)
-    XCTAssertEqual(strict.scalars.bounds.sameRange(in: strict.clusters), strict.clusters.bounds)
+      XCTAssertEqual(string.scalars.bounds.sameRange(in: string.clusters), string.clusters.bounds)
+      XCTAssertEqual(strict.scalars.bounds.sameRange(in: strict.clusters), strict.clusters.bounds)
 
-    let partialCluster =
-      string.scalars.startIndex..<string.scalars.index(after: string.scalars.startIndex)
-    XCTAssertNil(partialCluster.sameRange(in: string.lines))
-    XCTAssertNil(partialCluster.sameRange(in: strict.lines))
+      let partialCluster =
+        string.scalars.startIndex..<string.scalars.index(after: string.scalars.startIndex)
+      XCTAssertNil(partialCluster.sameRange(in: string.lines))
+      XCTAssertNil(partialCluster.sameRange(in: strict.lines))
 
-    XCTAssertNil(partialCluster.sameRange(in: string.clusters))
-    XCTAssertNil(partialCluster.sameRange(in: strict.clusters))
+      XCTAssertNil(partialCluster.sameRange(in: string.clusters))
+      XCTAssertNil(partialCluster.sameRange(in: strict.clusters))
 
-    XCTAssertEqual(
-      partialLine.lines(in: string.lines),
-      string.lines.startIndex..<string.lines.index(after: string.lines.startIndex)
-    )
-    XCTAssertEqual(
-      partialLine.lines(in: strict.lines),
-      strict.lines.startIndex..<strict.lines.index(after: strict.lines.startIndex)
-    )
-
-    XCTAssertEqual(
-      partialCluster.lines(in: string.lines),
-      string.lines.startIndex..<string.lines.index(after: string.lines.startIndex)
-    )
-    XCTAssertEqual(
-      partialCluster.lines(in: strict.lines),
-      strict.lines.startIndex..<strict.lines.index(after: strict.lines.startIndex)
-    )
-    XCTAssertEqual(
-      partialCluster.clusters(in: string.clusters),
-      string.clusters.startIndex..<string.clusters.index(after: string.clusters.startIndex)
-    )
-    XCTAssertEqual(
-      partialCluster.clusters(in: strict.clusters),
-      strict.clusters.startIndex..<strict.clusters.index(after: strict.clusters.startIndex)
-    )
-
-    XCTAssertEqual(string.clusters.bounds.sameRange(in: string.lines), string.lines.bounds)
-    XCTAssertEqual(strict.clusters.bounds.sameRange(in: strict.lines), strict.lines.bounds)
-
-    XCTAssertEqual(string.clusters.bounds.lines(in: string.lines), string.lines.bounds)
-    XCTAssertEqual(strict.clusters.bounds.lines(in: strict.lines), strict.lines.bounds)
-
-    XCTAssertEqual(string.scalars.bounds.clusters(in: string.clusters), string.clusters.bounds)
-    XCTAssertEqual(strict.scalars.bounds.clusters(in: strict.clusters), strict.clusters.bounds)
-
-    XCTAssertEqual(string.scalars.bounds.lines(in: string.lines), string.lines.bounds)
-    XCTAssertEqual(strict.scalars.bounds.lines(in: strict.lines), strict.lines.bounds)
-
-    string = "🇮🇱"
-    strict = StrictString(string)
-    for partialScalar in [
-      string.utf8.index(after: string.utf8.startIndex),
-      string.utf16.index(after: string.utf16.startIndex),
-    ] {
       XCTAssertEqual(
-        (string.startIndex..<partialScalar).scalars(in: string.scalars),
-        string.startIndex..<string.scalars.index(after: string.scalars.startIndex)
+        partialLine.lines(in: string.lines),
+        string.lines.startIndex..<string.lines.index(after: string.lines.startIndex)
       )
       XCTAssertEqual(
-        (strict.startIndex..<partialScalar).scalars(in: strict.scalars),
-        strict.startIndex..<strict.scalars.index(after: strict.scalars.startIndex)
+        partialLine.lines(in: strict.lines),
+        strict.lines.startIndex..<strict.lines.index(after: strict.lines.startIndex)
       )
-    }
+
+      XCTAssertEqual(
+        partialCluster.lines(in: string.lines),
+        string.lines.startIndex..<string.lines.index(after: string.lines.startIndex)
+      )
+      XCTAssertEqual(
+        partialCluster.lines(in: strict.lines),
+        strict.lines.startIndex..<strict.lines.index(after: strict.lines.startIndex)
+      )
+      XCTAssertEqual(
+        partialCluster.clusters(in: string.clusters),
+        string.clusters.startIndex..<string.clusters.index(after: string.clusters.startIndex)
+      )
+      XCTAssertEqual(
+        partialCluster.clusters(in: strict.clusters),
+        strict.clusters.startIndex..<strict.clusters.index(after: strict.clusters.startIndex)
+      )
+
+      XCTAssertEqual(string.clusters.bounds.sameRange(in: string.lines), string.lines.bounds)
+      XCTAssertEqual(strict.clusters.bounds.sameRange(in: strict.lines), strict.lines.bounds)
+
+      XCTAssertEqual(string.clusters.bounds.lines(in: string.lines), string.lines.bounds)
+      XCTAssertEqual(strict.clusters.bounds.lines(in: strict.lines), strict.lines.bounds)
+
+      XCTAssertEqual(string.scalars.bounds.clusters(in: string.clusters), string.clusters.bounds)
+      XCTAssertEqual(strict.scalars.bounds.clusters(in: strict.clusters), strict.clusters.bounds)
+
+      XCTAssertEqual(string.scalars.bounds.lines(in: string.lines), string.lines.bounds)
+      XCTAssertEqual(strict.scalars.bounds.lines(in: strict.lines), strict.lines.bounds)
+
+      string = "🇮🇱"
+      strict = StrictString(string)
+      for partialScalar in [
+        string.utf8.index(after: string.utf8.startIndex),
+        string.utf16.index(after: string.utf16.startIndex),
+      ] {
+        XCTAssertEqual(
+          (string.startIndex..<partialScalar).scalars(in: string.scalars),
+          string.startIndex..<string.scalars.index(after: string.scalars.startIndex)
+        )
+        XCTAssertEqual(
+          (strict.startIndex..<partialScalar).scalars(in: strict.scalars),
+          strict.startIndex..<strict.scalars.index(after: strict.scalars.startIndex)
+        )
+      }
+    #endif
   }
 
   func testNewlinePattern() {

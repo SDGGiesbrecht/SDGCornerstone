@@ -83,10 +83,10 @@ extension XML {
     // MARK: - FileConvertible
 
     #if !PLATFORM_LACKS_FOUNDATION_XML
-    public init(file: Data, origin: URL?) throws {
-      let source = try StrictString(file: file, origin: origin)
-      try self.init(source: source)
-    }
+      public init(file: Data, origin: URL?) throws {
+        let source = try StrictString(file: file, origin: origin)
+        try self.init(source: source)
+      }
     #endif
 
     public var file: Data {
