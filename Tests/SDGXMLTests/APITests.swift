@@ -919,6 +919,10 @@ class APITests: TestCase {
           of: XML.Document(rootElement: XML.Element(name: "root")),
           uniqueTestName: "Document"
         )
+        testFileConvertibleConformance(
+          of: XML.Document(rootElement: XML.Element(name: "document")),
+          uniqueTestName: "Document"
+        )
       #endif
     #endif
   }
