@@ -923,6 +923,13 @@ class APITests: TestCase {
           of: XML.Document(rootElement: XML.Element(name: "document")),
           uniqueTestName: "Document"
         )
+        testFileConvertibleConformance(
+          of: XML.Document(
+            dtd: .system("file://localhost/Some/File.dtd"),
+            rootElement: XML.Element(name: "document")
+          ),
+          uniqueTestName: "DTD"
+        )
       #endif
     #endif
   }
