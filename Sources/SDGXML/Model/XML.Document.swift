@@ -33,6 +33,7 @@ extension XML {
     ///   - dtd: Optional. A DTD.
     ///   - rootElement: The root element.
     public init(dtd: DTD? = nil, rootElement: Element) {
+      self.dtd = dtd
       self.rootElement = rootElement
     }
 
