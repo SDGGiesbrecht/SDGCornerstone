@@ -50,6 +50,7 @@ extension XML {
       // MARK: - Properties
 
       private let parser: FoundationXMLParser
+      private var dtd: XML.DTD?
       private var document: XML.Document?
       private var openElements: [XML.Element] = []
       private var error: Error?
@@ -58,7 +59,7 @@ extension XML {
 
       private func parse() throws -> XML.Document {
         if parser.parse() {
-          guard let document = document else {
+          guard var document = document else {
             // @exempt(from: tests) XMLParser should have thrown this itself.
             throw NSError(
               domain: XMLParser.errorDomain,
@@ -66,6 +67,7 @@ extension XML {
               userInfo: nil
             )
           }
+          document.dtd = dtd
           return document
         } else {
           // @exempt(from: tests) Some immature platforms fail to throw on their own.
@@ -122,6 +124,17 @@ extension XML {
           // @exempt(from: tests) Reachable only with corrupt UTF‐8.
           self.error = error
           self.parser.abortParsing()
+        }
+      }
+
+      func parser(
+        _ parser: XMLParser,
+        foundExternalEntityDeclarationWithName name: String,
+        publicID: String?,
+        systemID: String?
+      ) {
+        if let system = systemID {
+          dtd = .system(StrictString(system))
         }
       }
     }
