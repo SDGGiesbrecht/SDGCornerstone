@@ -15,6 +15,7 @@
 import Foundation
 
 import SDGControlFlow
+import SDGLogic
 import SDGCollections
 import SDGText
 import SDGPersistence
@@ -50,7 +51,8 @@ public func testFileConvertibleConformance<T>(
     #if !PLATFORM_LACKS_FOUNDATION_FILE_MANAGER
       for specificationURL in try FileManager.default.contents(
         ofDirectory: specificationsDirectory
-      ) {
+      )
+      where specificationURL.lastPathComponent ≠ ".DS_Store" {
         try purgingAutoreleased {
 
           let specification = try Data(from: specificationURL)
