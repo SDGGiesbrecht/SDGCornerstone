@@ -48,7 +48,7 @@ class APITests: TestCase {
     _ = XML.unsanitize(name: "%")
   }
 
-  func testXMLAttribute() {
+  func testXMLAttribute() throws {
     struct XMLAttributeDemonstration: Codable, Equatable {
       init() {
         child = 1
@@ -58,6 +58,12 @@ class APITests: TestCase {
       @XML.Attribute var attribute: Int
     }
     testCodableConformance(of: XMLAttributeDemonstration(), uniqueTestName: "Structure")
+
+    try SDGXMLTests.testXML(
+      of: XMLAttributeDemonstration(),
+      specification: "With Attribute",
+      overwriteSpecificationInsteadOfFailing: false
+    )
   }
 
   func testXMLAttributeValue() {
