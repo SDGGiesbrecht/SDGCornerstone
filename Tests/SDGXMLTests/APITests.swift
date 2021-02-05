@@ -48,6 +48,18 @@ class APITests: TestCase {
     _ = XML.unsanitize(name: "%")
   }
 
+  func testXMLAttribute() {
+    struct Structure: Codable, Equatable {
+      init() {
+        child = 1
+        attribute = 2
+      }
+      var child: Int
+      @XML.Attribute var attribute: Int
+    }
+    testCodableConformance(of: Structure(), uniqueTestName: "Structure")
+  }
+
   func testXMLAttributeValue() {
     testCustomStringConvertibleConformance(
       of: XML.AttributeValue(text: "attribute text, 0 < 1"),

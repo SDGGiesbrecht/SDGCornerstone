@@ -19,6 +19,7 @@ extension XML {
   /// A property wrapper that causes properties to be encoded as XML attributes when encoded to XML.
   ///
   /// The XML attribute value will the the lossless string representation of the property.
+  @propertyWrapper
   public struct Attribute<Value>: Decodable, DefaultAssignmentPropertyWrapper, Encodable,
     TransparentWrapper
   where Value: Codable, Value: LosslessStringConvertible {
@@ -50,5 +51,21 @@ extension XML {
     public var wrappedInstance: Any {
       return wrappedValue
     }
+  }
+}
+
+extension XML.Attribute: Equatable where Value: Equatable {
+
+  public static func == (precedingValue: XML.Attribute<Value>, followingValue: XML.Attribute<Value>)
+    -> Bool
+  {
+    return precedingValue.wrappedValue == followingValue.wrappedValue
+  }
+}
+
+extension XML.Attribute: Hashable where Value: Hashable {
+
+  public func hash(into hasher: inout Hasher) {
+    wrappedValue.hash(into: &hasher)
   }
 }
