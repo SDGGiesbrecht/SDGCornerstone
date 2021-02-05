@@ -22,7 +22,7 @@ extension XML {
   // #example(1, xmlEncoding)
   /// An encoder which converts `Encodable` values into XML.
   ///
-  /// Several related types can be used to customize the XML representation.
+  /// Several related types can be used to customize the XML representation. All of them are demonstrated in the example that follows.
   ///
   /// - The `@XML.Attribute` property wrapper can be applied to `LosslessStringConvertible` properties to make them encode as an attributes instead of as child elements.
   /// - `XML.Element` instances are encoded vertabim, so custom XML can be assembled and fed to the encoder.
