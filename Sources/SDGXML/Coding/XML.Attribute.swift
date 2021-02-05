@@ -21,8 +21,14 @@ extension XML {
   /// The XML attribute value will the the lossless string representation of the property.
   @propertyWrapper
   public struct Attribute<Value>: Decodable, DefaultAssignmentPropertyWrapper, Encodable,
-    TransparentWrapper
+    TransparentWrapper, XMLAttributeProtocol
   where Value: Codable, Value: LosslessStringConvertible {
+
+    // MARK: - CustomStringConvertible
+
+    public var description: String {
+      return wrappedValue.description
+    }
 
     // MARK: - Decodable
 
@@ -40,6 +46,16 @@ extension XML {
 
     public func encode(to encoder: Swift.Encoder) throws {
       try encode(to: encoder, via: wrappedValue)
+    }
+
+    // MARK: - LosslessStringConvertible
+
+    public init?(_ description: String) {
+      if let wrapped = Wrapped(description) {
+        self = Attribute(wrappedValue: wrapped)
+      } else {
+        return nil
+      }
     }
 
     // MARK: - PropertyWrapper
