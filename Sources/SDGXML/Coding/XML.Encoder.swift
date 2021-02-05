@@ -28,7 +28,7 @@ extension XML {
   /// - `XML.Element` instances are encoded vertabim, so custom XML can be assembled and fed to the encoder.
   ///
   /// ```swift
-  /// struct Document: Codable {
+  /// struct Document: Codable, CustomXMLRepresentable {
   ///
   ///   var basicChildElement: String = "basic child element"
   ///
@@ -38,11 +38,16 @@ extension XML {
   ///     init() {}
   ///     func encode(to encoder: Encoder) throws {
   ///       var container = encoder.singleValueContainer()
-  ///       try container.encode(XML.Element(name: "custom", content: [
-  ///         .characterData("A mix of text and "),
-  ///         .element(XML.Element(name: "elements")),
-  ///         .characterData(".")
-  ///       ]))
+  ///       try container.encode(
+  ///         XML.Element(
+  ///           name: "custom",
+  ///           content: [
+  ///             .characterData("A mix of text and "),
+  ///             .element(XML.Element(name: "elements")),
+  ///             .characterData("."),
+  ///           ]
+  ///         )
+  ///       )
   ///     }
   ///     init(from decoder: Decoder) throws {
   ///       let container = try decoder.singleValueContainer()
@@ -52,18 +57,29 @@ extension XML {
   ///     }
   ///   }
   ///   var custom: CustomChild = CustomChild()
+  ///
+  ///   // MARK: - CustomXMLRepresentable
+  ///
+  ///   var dtd: XML.DTD? {
+  ///     return .system("file://localhost/Some/File.dtd")
+  ///   }
   /// }
   ///
   /// let encoder = XML.Encoder()
   /// let xml = try encoder.encodeToSource(Document())
   /// #warning("Document stuff missing.")
   /// #warning("Root element name not customized.")
-  /// XCTAssertEqual(xml, [
-  ///   #"<Document attribute="attribute">"#,
-  ///   #" <basicChildElement>basic child element</basicChildElement>"#,
-  ///   #" <custom>A mix of text and <elements/>.</custom>"#,
-  ///   #"</Document>"#
-  /// ].joined(separator: "\n"))
+  /// XCTAssertEqual(
+  ///   xml,
+  ///   [
+  ///     #"<?xml version="1.1" encoding="UTF-8"?>"#,
+  ///     #"<!DOCTYPE Document SYSTEM "file://localhost/Some/File.dtd">"#,
+  ///     #"<Document attribute="attribute">"#,
+  ///     #" <basicChildElement>basic child element</basicChildElement>"#,
+  ///     #" <custom>A mix of text and <elements/>.</custom>"#,
+  ///     #"</Document>"#,
+  ///   ].joined(separator: "\n")
+  /// )
   /// ```
   public struct Encoder {
 
@@ -93,7 +109,8 @@ extension XML {
         userInformation: userInformation
       )
       let element = try implementation.encode(value)
-      let document = XML.Document(dtd: nil, rootElement: element)
+      let dtd = (value as? CustomXMLRepresentable)?.dtd
+      let document = XML.Document(dtd: dtd, rootElement: element)
       return document.source()
     }
 

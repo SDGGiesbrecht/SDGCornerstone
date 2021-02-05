@@ -23,7 +23,7 @@ class XMLExampleTests: TestCase {
   func testXMLEncoding() throws {
 
     // @example(xmlEncoding)
-    struct Document: Codable {
+    struct Document: Codable, CustomXMLRepresentable {
 
       var basicChildElement: String = "basic child element"
 
@@ -52,16 +52,22 @@ class XMLExampleTests: TestCase {
         }
       }
       var custom: CustomChild = CustomChild()
+
+      // MARK: - CustomXMLRepresentable
+
+      var dtd: XML.DTD? {
+        return .system("file://localhost/Some/File.dtd")
+      }
     }
 
     let encoder = XML.Encoder()
     let xml = try encoder.encodeToSource(Document())
-    #warning("Document stuff missing.")
     #warning("Root element name not customized.")
     XCTAssertEqual(
       xml,
       [
         #"<?xml version="1.1" encoding="UTF-8"?>"#,
+        #"<!DOCTYPE Document SYSTEM "file://localhost/Some/File.dtd">"#,
         #"<Document attribute="attribute">"#,
         #" <basicChildElement>basic child element</basicChildElement>"#,
         #" <custom>A mix of text and <elements/>.</custom>"#,
