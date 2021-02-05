@@ -92,7 +92,9 @@ extension XML {
         rootElementName: "\(arbitraryDescriptionOf: Value.self)",
         userInformation: userInformation
       )
-      return try implementation.encode(value).source()
+      let element = try implementation.encode(value)
+      let document = XML.Document(dtd: nil, rootElement: element)
+      return document.source()
     }
 
     /// Encodes a top‐level value as XML data.

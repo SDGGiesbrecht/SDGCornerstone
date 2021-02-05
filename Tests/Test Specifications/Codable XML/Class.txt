@@ -1,3 +1,4 @@
+<?xml version="1.1" encoding="UTF-8"?>
 <Subclass>
  <c>C</c>
  <d>D</d>

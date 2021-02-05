@@ -1,3 +1,4 @@
+<?xml version="1.1" encoding="UTF-8"?>
 <Array_3CString_3E>
  <_31>A</_31>
  <_32>B</_32>
