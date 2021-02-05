@@ -49,7 +49,7 @@ class APITests: TestCase {
   }
 
   func testXMLAttribute() {
-    struct Structure: Codable, Equatable {
+    struct XMLAttributeDemonstration: Codable, Equatable {
       init() {
         child = 1
         attribute = 2
@@ -57,7 +57,7 @@ class APITests: TestCase {
       var child: Int
       @XML.Attribute var attribute: Int
     }
-    testCodableConformance(of: Structure(), uniqueTestName: "Structure")
+    testCodableConformance(of: XMLAttributeDemonstration(), uniqueTestName: "Structure")
   }
 
   func testXMLAttributeValue() {
