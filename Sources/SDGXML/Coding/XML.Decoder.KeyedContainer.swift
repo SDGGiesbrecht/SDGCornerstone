@@ -136,8 +136,20 @@ extension XML.Decoder {
     }
 
     internal func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T: Decodable {
-      return try decoder.enterElement(key: key) { element in
-        return try unpack(element, as: type)
+      if let type = T.self as? XMLAttributeProtocol.Type {
+        guard let value = decoder.currentElement.attributes[StrictString(key.stringValue)] else {
+          throw decoder.keyNotFoundError(key: key, codingPath: codingPath)
+        }
+        guard let decoded = type.init(String(value)),
+          let cast = decoded as? T
+        else {
+          throw decoder.mismatchedTypeError(T.self, codingPath: codingPath.appending(key))
+        }
+        return cast
+      } else {
+        return try decoder.enterElement(key: key) { element in
+          return try unpack(element, as: type)
+        }
       }
     }
 
