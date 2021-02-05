@@ -774,6 +774,7 @@ let package = Package(
         "SDGConcurrency",
         "SDGPrecisionMathematics",
         "SDGExternalProcess",
+        "SDGXML",
         "SDGPersistenceTestUtilities",
         "SDGXCTestUtilities",
       ]

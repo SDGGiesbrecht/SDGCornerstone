@@ -19,7 +19,52 @@ import SDGPersistence
 
 extension XML {
 
+  // #example(1, xmlEncoding)
   /// An encoder which converts `Encodable` values into XML.
+  ///
+  /// Several related types can be used to customize the XML representation.
+  ///
+  /// - The `@XML.Attribute` property wrapper can be applied to `LosslessStringConvertible` properties to make them encode as an attributes instead of as child elements.
+  /// - `XML.Element` instances are encoded vertabim, so custom XML can be assembled and fed to the encoder.
+  ///
+  /// ```swift
+  /// struct Document: Codable {
+  ///
+  ///   var basicChildElement: String = "basic child element"
+  ///
+  ///   @XML.Attribute var attribute: String = "attribute"
+  ///
+  ///   struct CustomChild: Codable {
+  ///     init() {}
+  ///     func encode(to encoder: Encoder) throws {
+  ///       var container = encoder.singleValueContainer()
+  ///       try container.encode(XML.Element(name: "custom", content: [
+  ///         .characterData("A mix of text and "),
+  ///         .element(XML.Element(name: "elements")),
+  ///         .characterData(".")
+  ///       ]))
+  ///     }
+  ///     init(from decoder: Decoder) throws {
+  ///       let container = try decoder.singleValueContainer()
+  ///       let element = try container.decode(XML.Element.self)
+  ///       XCTAssertEqual(element.name, "custom")
+  ///       XCTAssertEqual(element.content.first?.description, "A mix of text and ")
+  ///     }
+  ///   }
+  ///   var custom: CustomChild = CustomChild()
+  /// }
+  ///
+  /// let encoder = XML.Encoder()
+  /// let xml = try encoder.encodeToSource(Document())
+  /// #warning("Document stuff missing.")
+  /// #warning("Root element name not customized.")
+  /// XCTAssertEqual(xml, [
+  ///   #"<Document attribute="attribute">"#,
+  ///   #" <basicChildElement>basic child element</basicChildElement>"#,
+  ///   #" <custom>A mix of text and <elements/>.</custom>"#,
+  ///   #"</Document>"#
+  /// ].joined(separator: "\n"))
+  /// ```
   public struct Encoder {
 
     // MARK: - Initialization

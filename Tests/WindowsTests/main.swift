@@ -252,6 +252,14 @@ extension SDGCornerstoneDocumentationExampleTests.StrictInterpolationExampleTest
   ]
 }
 
+extension SDGCornerstoneDocumentationExampleTests.XMLExampleTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testXMLEncoding", testXMLEncoding)
+    ])
+  ]
+}
+
 extension SDGExternalProcessTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
@@ -554,6 +562,7 @@ tests += SDGCornerstoneDocumentationExampleTests.FunctionAnalysisExampleTests.wi
 tests += SDGCornerstoneDocumentationExampleTests.MiscellaneousExampleTests.windowsTests
 tests += SDGCornerstoneDocumentationExampleTests.ReadMeExampleTests.windowsTests
 tests += SDGCornerstoneDocumentationExampleTests.StrictInterpolationExampleTests.windowsTests
+tests += SDGCornerstoneDocumentationExampleTests.XMLExampleTests.windowsTests
 tests += SDGExternalProcessTests.APITests.windowsTests
 tests += SDGExternalProcessTests.RegressionTests.windowsTests
 tests += SDGGeometryTests.APITests.windowsTests
