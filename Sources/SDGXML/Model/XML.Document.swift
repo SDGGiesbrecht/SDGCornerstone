@@ -30,8 +30,10 @@ extension XML {
     /// Creates an XML document.
     ///
     /// - Parameters:
+    ///   - dtd: Optional. A DTD.
     ///   - rootElement: The root element.
-    public init(rootElement: Element) {
+    public init(dtd: DTD? = nil, rootElement: Element) {
+      self.dtd = dtd
       self.rootElement = rootElement
     }
 
@@ -47,15 +49,24 @@ extension XML {
 
     // MARK: - Properties
 
+    /// The DTD.
+    public var dtd: DTD?
+
     /// The root element.
     public var rootElement: Element
 
     // MARK: - Source
 
-    /// The source of the element.
+    /// The source of the document.
     public func source() -> StrictString {
-      return
-        "<?xml version=\u{22}1.1\u{22} encoding=\u{22}UTF\u{2D}8\u{22}?>\n\(rootElement.source())"
+      var result: [StrictString] = [
+        "<?xml version=\u{22}1.1\u{22} encoding=\u{22}UTF\u{2D}8\u{22}?>"
+      ]
+      if let dtd = dtd {
+        result.append(dtd.source(element: rootElement.name))
+      }
+      result.append(rootElement.source())
+      return result.joined(separator: "\n")
     }
 
     // MARK: - CustomStringConvertible

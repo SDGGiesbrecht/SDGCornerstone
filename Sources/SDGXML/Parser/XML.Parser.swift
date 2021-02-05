@@ -17,6 +17,7 @@ import Foundation
   import FoundationXML
 #endif
 
+import SDGCollections
 import SDGText
 import SDGPersistence
 
@@ -42,6 +43,7 @@ extension XML {
       // MARK: - Initialization
 
       private init(source: StrictString) {
+        self.source = source
         parser = FoundationXMLParser(data: source.file)
         super.init()
         parser.delegate = self
@@ -49,7 +51,10 @@ extension XML {
 
       // MARK: - Properties
 
+      private let source: StrictString
       private let parser: FoundationXMLParser
+
+      private var dtd: XML.DTD?
       private var document: XML.Document?
       private var openElements: [XML.Element] = []
       private var error: Error?
@@ -57,8 +62,12 @@ extension XML {
       // MARK: - Parsing
 
       private func parse() throws -> XML.Document {
+
+        // Foundation.XMLParser does not report the DTD.
+        parseDTD()
+
         if parser.parse() {
-          guard let document = document else {
+          guard var document = document else {
             // @exempt(from: tests) XMLParser should have thrown this itself.
             throw NSError(
               domain: XMLParser.errorDomain,
@@ -66,10 +75,29 @@ extension XML {
               userInfo: nil
             )
           }
+          document.dtd = dtd
           return document
         } else {
           // @exempt(from: tests) Some immature platforms fail to throw on their own.
           throw error!
+        }
+      }
+
+      private func parseDTD() {
+        if let doctypeStart = source.firstMatch(for: "<!DOCTYPE ".scalars),
+          let doctypeEnd = source[doctypeStart.range.upperBound...].firstMatch(for: ">".scalars)
+        {
+          let doctypeContents = source[doctypeStart.range.upperBound..<doctypeEnd.range.lowerBound]
+          if let systemStart = doctypeContents.firstMatch(for: " SYSTEM \u{22}".scalars),
+            let systemEnd = doctypeContents[systemStart.range.upperBound...].firstMatch(
+              for: "\u{22}".scalars
+            )
+          {
+            let identifier = StrictString(
+              doctypeContents[systemStart.range.upperBound..<systemEnd.range.lowerBound]
+            )
+            dtd = .system(identifier)
+          }
         }
       }
 
