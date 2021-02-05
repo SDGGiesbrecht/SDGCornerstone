@@ -19,6 +19,8 @@ extension XML {
   /// A property wrapper that causes properties to be encoded as XML attributes when encoded to XML.
   ///
   /// The XML attribute value will the the lossless string representation of the property.
+  ///
+  /// This property wrapper has no effect when manually fed into an unkeyed or single value container.
   @propertyWrapper
   public struct Attribute<Value>: Decodable, DefaultAssignmentPropertyWrapper, Encodable,
     TransparentWrapper, XMLAttributeProtocol
