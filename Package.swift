@@ -755,6 +755,7 @@ let package = Package(
         "SDGText",
         "SDGLocalization",
         "SDGCornerstoneLocalizations",
+        "SDGCollectionsTestUtilities",
         "SDGPersistenceTestUtilities",
         "SDGLocalizationTestUtilities",
       ]

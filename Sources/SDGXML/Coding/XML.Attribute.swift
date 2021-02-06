@@ -74,9 +74,10 @@ extension XML {
 
 extension XML.Attribute: Equatable where Value: Equatable {
 
-  public static func == (precedingValue: XML.Attribute<Value>, followingValue: XML.Attribute<Value>)
-    -> Bool
-  {
+  public static func == (
+    precedingValue: XML.Attribute<Value>,
+    followingValue: XML.Attribute<Value>
+  ) -> Bool {
     return precedingValue.wrappedValue == followingValue.wrappedValue
   }
 }

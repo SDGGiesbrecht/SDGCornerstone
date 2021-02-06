@@ -20,6 +20,7 @@ import SDGCornerstoneLocalizations
 import XCTest
 
 import SDGTesting
+import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
@@ -44,6 +45,11 @@ class APITests: TestCase {
     super.tearDown()
   }
 
+  func testCustomXMLRepresentable() throws {
+    struct Custom: Codable, CustomXMLRepresentable {}
+    _ = try XML.Encoder().encode(Custom())
+  }
+
   func testXML() {
     _ = XML.unsanitize(name: "%")
   }
@@ -66,6 +72,11 @@ class APITests: TestCase {
         overwriteSpecificationInsteadOfFailing: false
       )
     #endif
+    XCTAssertNil(XML.Attribute<Int>("Not an Int.")?.wrappedValue)
+    _ = XML.Attribute(wrappedValue: "string").wrappedInstance
+    testHashableConformance(
+      differingInstances: (XML.Attribute(wrappedValue: "A"), XML.Attribute(wrappedValue: "B"))
+    )
   }
 
   func testXMLAttributeValue() {
@@ -647,6 +658,42 @@ class APITests: TestCase {
     #endif
   }
 
+  func testXMLDecoderKeyNotFoundAttribute() throws {
+    struct Nested: Decodable {
+      @XML.Attribute var property: String
+    }
+    struct Placeholder: Decodable {
+      var nested: Nested
+    }
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .keyNotFound(let key, let context) = decoding
+            {
+              XCTAssertEqual(key.stringValue, "property")
+              // JSONEncoder’s comparable error does not include the key itself in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
+          }
+          return caughtError
+        },
+        specification: "Missing Key (Attribute)",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
+  }
+
   func testXMLDecoderTypeMismatch() throws {
     struct Nested: Decodable {
       var property: Int
@@ -668,6 +715,42 @@ class APITests: TestCase {
               case .typeMismatch(let type, let context) = decoding
             {
               XCTAssert(type == Int.self, "Wrong type: \(type)")
+              // JSONEncoder’s comparable error does include the key in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
+          }
+          return caughtError
+        },
+        specification: "Type Mismatch",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
+  }
+
+  func testXMLDecoderTypeMismatchAttribute() throws {
+    struct Nested: Decodable {
+      @XML.Attribute var property: Int
+    }
+    struct Placeholder: Decodable {
+      var nested: Nested
+    }
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested property=\u{22}A\u{22}></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .typeMismatch(let type, let context) = decoding
+            {
+              XCTAssert(type == XML.Attribute<Int>.self, "Wrong type: \(type)")
               // JSONEncoder’s comparable error does include the key in the context.
               XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
               caughtError = context.debugDescription

@@ -1,1 +1,1 @@
-Die Daten unter „nested → property“ beschreiben kein Exemplar des erwarteten Typs: Int
+Die Daten unter „nested → property“ beschreiben kein Exemplar des erwarteten Typs: Attribute<Int>

@@ -501,6 +501,7 @@ extension SDGVersioningTests.RegressionTests {
 extension SDGXMLTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
+      ("testCustomXMLRepresentable", testCustomXMLRepresentable),
       ("testXML", testXML),
       ("testXMLAttribute", testXMLAttribute),
       ("testXMLAttributeValue", testXMLAttributeValue),
@@ -522,7 +523,9 @@ extension SDGXMLTests.APITests {
       ("testXMLContent", testXMLContent),
       ("testXMLDecoderContainer", testXMLDecoderContainer),
       ("testXMLDecoderKeyNotFound", testXMLDecoderKeyNotFound),
+      ("testXMLDecoderKeyNotFoundAttribute", testXMLDecoderKeyNotFoundAttribute),
       ("testXMLDecoderTypeMismatch", testXMLDecoderTypeMismatch),
+      ("testXMLDecoderTypeMismatchAttribute", testXMLDecoderTypeMismatchAttribute),
       ("testXMLDecoderTypeMismatchCompletixy", testXMLDecoderTypeMismatchCompletixy),
       ("testXMLDecoderTypeMismatchKeyless", testXMLDecoderTypeMismatchKeyless),
       ("testXMLDecoderTypeMismatchSingleValue", testXMLDecoderTypeMismatchSingleValue),
