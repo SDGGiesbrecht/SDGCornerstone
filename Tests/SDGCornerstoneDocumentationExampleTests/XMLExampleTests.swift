@@ -14,6 +14,7 @@
 
 import XCTest
 
+import SDGText
 import SDGXML
 
 import SDGXCTestUtilities
@@ -24,6 +25,14 @@ class XMLExampleTests: TestCase {
 
     // @example(xmlEncoding)
     struct Document: Codable, CustomXMLRepresentable {
+
+      var dtd: XML.DTD? {  // CustomXMLRepresentable
+        return .system("file://localhost/Some/File.dtd")
+      }
+
+      var defaultElementName: StrictString? {  // CustomXMLRepresentable
+        return "document"
+      }
 
       var basicChildElement: String = "basic child element"
 
@@ -53,25 +62,40 @@ class XMLExampleTests: TestCase {
       }
       var custom: CustomChild = CustomChild()
 
-      // MARK: - CustomXMLRepresentable
-
-      var dtd: XML.DTD? {
-        return .system("file://localhost/Some/File.dtd")
+      struct UnnamedChild: Codable {
+        init() {}
       }
+      var unnamedArray: [UnnamedChild] = [UnnamedChild(), UnnamedChild(), UnnamedChild()]
+
+      struct NamedChild: Codable, CustomXMLRepresentable {
+        var defaultElementName: StrictString? {
+          return "named"
+        }
+      }
+      var namedArray: [NamedChild] = [NamedChild(), NamedChild(), NamedChild()]
     }
 
     let encoder = XML.Encoder()
     let xml = try encoder.encodeToSource(Document())
-    #warning("Root element name not customized.")
     XCTAssertEqual(
       xml,
       [
         #"<?xml version="1.1" encoding="UTF-8"?>"#,
         #"<!DOCTYPE Document SYSTEM "file://localhost/Some/File.dtd">"#,
-        #"<Document attribute="attribute">"#,
+        #"<document attribute="attribute">"#,
         #" <basicChildElement>basic child element</basicChildElement>"#,
         #" <custom>A mix of text and <elements/>.</custom>"#,
-        #"</Document>"#,
+        #" <namedArray>"#,
+        #"  <named/>"#,
+        #"  <named/>"#,
+        #"  <named/>"#,
+        #" </namedArray>"#,
+        #" <unnamedArray>"#,
+        #"  <_31/>"#,
+        #"  <_32/>"#,
+        #"  <_33/>"#,
+        #" </unnamedArray>"#,
+        #"</document>"#,
       ].joined(separator: "\n")
     )
     // @endExample

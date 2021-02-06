@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGText
+
 /// A type with a customized XML representation.
 public protocol CustomXMLRepresentable {
 
@@ -19,4 +21,17 @@ public protocol CustomXMLRepresentable {
   ///
   /// The property is ignored when the type is not the top‐level value.
   var dtd: XML.DTD? { get }
+
+  var defaultElementName: StrictString? { get }
+}
+
+extension CustomXMLRepresentable {
+
+  public var dtd: XML.DTD? {
+    return nil
+  }
+
+  public var defaultElementName: StrictString? {
+    return nil
+  }
 }

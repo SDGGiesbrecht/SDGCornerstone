@@ -26,9 +26,20 @@ extension XML {
   ///
   /// - The `@XML.Attribute` property wrapper can be applied to `LosslessStringConvertible` properties to make them encode as an attributes instead of as child elements.
   /// - `XML.Element` instances are encoded vertabim, so custom XML can be assembled and fed to the encoder.
+  /// - The `CustomXMLRepresentable` protocol provide additional customization:
+  ///   - It can be used to provide a DTD.
+  ///   - It can request a default element name be used whenever its name is not already constrained by a coding key. This occurs for the root element of the document, and for elements which occur in an unkeyed container, such as array elements.
   ///
   /// ```swift
   /// struct Document: Codable, CustomXMLRepresentable {
+  ///
+  ///   var dtd: XML.DTD? {  // CustomXMLRepresentable
+  ///     return .system("file://localhost/Some/File.dtd")
+  ///   }
+  ///
+  ///   var defaultElementName: StrictString? {  // CustomXMLRepresentable
+  ///     return "document"
+  ///   }
   ///
   ///   var basicChildElement: String = "basic child element"
   ///
@@ -58,26 +69,40 @@ extension XML {
   ///   }
   ///   var custom: CustomChild = CustomChild()
   ///
-  ///   // MARK: - CustomXMLRepresentable
-  ///
-  ///   var dtd: XML.DTD? {
-  ///     return .system("file://localhost/Some/File.dtd")
+  ///   struct UnnamedChild: Codable {
+  ///     init() {}
   ///   }
+  ///   var unnamedArray: [UnnamedChild] = [UnnamedChild(), UnnamedChild(), UnnamedChild()]
+  ///
+  ///   struct NamedChild: Codable, CustomXMLRepresentable {
+  ///     var defaultElementName: StrictString? {
+  ///       return "named"
+  ///     }
+  ///   }
+  ///   var namedArray: [NamedChild] = [NamedChild(), NamedChild(), NamedChild()]
   /// }
   ///
   /// let encoder = XML.Encoder()
   /// let xml = try encoder.encodeToSource(Document())
-  /// #warning("Document stuff missing.")
-  /// #warning("Root element name not customized.")
   /// XCTAssertEqual(
   ///   xml,
   ///   [
   ///     #"<?xml version="1.1" encoding="UTF-8"?>"#,
   ///     #"<!DOCTYPE Document SYSTEM "file://localhost/Some/File.dtd">"#,
-  ///     #"<Document attribute="attribute">"#,
+  ///     #"<document attribute="attribute">"#,
   ///     #" <basicChildElement>basic child element</basicChildElement>"#,
   ///     #" <custom>A mix of text and <elements/>.</custom>"#,
-  ///     #"</Document>"#,
+  ///     #" <namedArray>"#,
+  ///     #"  <named/>"#,
+  ///     #"  <named/>"#,
+  ///     #"  <named/>"#,
+  ///     #" </namedArray>"#,
+  ///     #" <unnamedArray>"#,
+  ///     #"  <_31/>"#,
+  ///     #"  <_32/>"#,
+  ///     #"  <_33/>"#,
+  ///     #" </unnamedArray>"#,
+  ///     #"</document>"#,
   ///   ].joined(separator: "\n")
   /// )
   /// ```
