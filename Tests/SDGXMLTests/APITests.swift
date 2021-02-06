@@ -49,21 +49,23 @@ class APITests: TestCase {
   }
 
   func testXMLAttribute() throws {
-    struct XMLAttributeDemonstration: Codable, Equatable {
-      init() {
-        child = 1
-        attribute = 2
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      struct XMLAttributeDemonstration: Codable, Equatable {
+        init() {
+          child = 1
+          attribute = 2
+        }
+        var child: Int
+        @XML.Attribute var attribute: Int
       }
-      var child: Int
-      @XML.Attribute var attribute: Int
-    }
-    testCodableConformance(of: XMLAttributeDemonstration(), uniqueTestName: "Structure")
+      testCodableConformance(of: XMLAttributeDemonstration(), uniqueTestName: "Structure")
 
-    try SDGXMLTests.testXML(
-      of: XMLAttributeDemonstration(),
-      specification: "With Attribute",
-      overwriteSpecificationInsteadOfFailing: false
-    )
+      try SDGXMLTests.testXML(
+        of: XMLAttributeDemonstration(),
+        specification: "With Attribute",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
   }
 
   func testXMLAttributeValue() {
