@@ -99,6 +99,6 @@ class XMLExampleTests: TestCase {
         ].joined(separator: "\n")
       )
     // @endExample
-    endif
+    #endif
   }
 }
