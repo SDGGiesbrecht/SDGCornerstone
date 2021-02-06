@@ -81,7 +81,7 @@ class XMLExampleTests: TestCase {
       xml,
       [
         #"<?xml version="1.1" encoding="UTF-8"?>"#,
-        #"<!DOCTYPE Document SYSTEM "file://localhost/Some/File.dtd">"#,
+        #"<!DOCTYPE document SYSTEM "file://localhost/Some/File.dtd">"#,
         #"<document attribute="attribute">"#,
         #" <basicChildElement>basic child element</basicChildElement>"#,
         #" <custom>A mix of text and <elements/>.</custom>"#,

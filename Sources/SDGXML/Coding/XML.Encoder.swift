@@ -88,7 +88,7 @@ extension XML {
   ///   xml,
   ///   [
   ///     #"<?xml version="1.1" encoding="UTF-8"?>"#,
-  ///     #"<!DOCTYPE Document SYSTEM "file://localhost/Some/File.dtd">"#,
+  ///     #"<!DOCTYPE document SYSTEM "file://localhost/Some/File.dtd">"#,
   ///     #"<document attribute="attribute">"#,
   ///     #" <basicChildElement>basic child element</basicChildElement>"#,
   ///     #" <custom>A mix of text and <elements/>.</custom>"#,
@@ -98,9 +98,9 @@ extension XML {
   ///     #"  <named/>"#,
   ///     #" </namedArray>"#,
   ///     #" <unnamedArray>"#,
-  ///     #"  <_31/>"#,
-  ///     #"  <_32/>"#,
-  ///     #"  <_33/>"#,
+  ///     #"  <UnnamedChild/>"#,
+  ///     #"  <UnnamedChild/>"#,
+  ///     #"  <UnnamedChild/>"#,
   ///     #" </unnamedArray>"#,
   ///     #"</document>"#,
   ///   ].joined(separator: "\n")
