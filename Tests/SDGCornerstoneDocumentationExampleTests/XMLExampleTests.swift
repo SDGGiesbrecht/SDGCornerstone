@@ -91,9 +91,9 @@ class XMLExampleTests: TestCase {
         #"  <named/>"#,
         #" </namedArray>"#,
         #" <unnamedArray>"#,
-        #"  <_31/>"#,
-        #"  <_32/>"#,
-        #"  <_33/>"#,
+        #"  <UnnamedChild/>"#,
+        #"  <UnnamedChild/>"#,
+        #"  <UnnamedChild/>"#,
         #" </unnamedArray>"#,
         #"</document>"#,
       ].joined(separator: "\n")

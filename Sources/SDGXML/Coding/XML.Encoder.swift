@@ -130,7 +130,7 @@ extension XML {
     ///   - value: The value.
     public func encodeToSource<Value: Encodable>(_ value: Value) throws -> StrictString {
       let implementation = Implementation(
-        rootElementName: "\(arbitraryDescriptionOf: Value.self)",
+        rootElementName: StrictString(XML.Coder.MiscellaneousKey(defaultFor: value).stringValue),
         userInformation: userInformation
       )
       let element = try implementation.encode(value)

@@ -31,7 +31,7 @@ extension XML.Encoder {
 
     // MARK: - Encoding
 
-    private func nextKey() -> XML.Coder.MiscellaneousKey {
+    private func nextIndexKey() -> XML.Coder.MiscellaneousKey {
       return XML.Coder.MiscellaneousKey(count + 1)
     }
 
@@ -42,13 +42,13 @@ extension XML.Encoder {
     }
 
     internal func encodeNil() throws {
-      try encoder.createNewElement(key: nextKey()) { element in
+      try encoder.createNewElement(key: XML.Coder.MiscellaneousKey("nil")) { element in
         element.isNil = true
       }
     }
 
     internal mutating func encode(_ value: String) throws {
-      try encoder.createNewElement(key: nextKey()) { element in
+      try encoder.createNewElement(key: XML.Coder.MiscellaneousKey(defaultFor: value)) { element in
         element.data = StrictString(value)
       }
     }
@@ -59,7 +59,7 @@ extension XML.Encoder {
         if let xml = xml {
           key = XML.Coder.MiscellaneousKey(String(xml.name))
         } else {
-          key = nextKey()
+          key = XML.Coder.MiscellaneousKey(defaultFor: value)
         }
         try encoder.createNewElement(key: key, encode)
       }
@@ -70,16 +70,16 @@ extension XML.Encoder {
     ) -> KeyedEncodingContainer<NestedKey>
     where NestedKey: CodingKey {
       return KeyedEncodingContainer(
-        KeyedContainer<NestedKey>(encoder: nestedEncoder(key: nextKey()))
+        KeyedContainer<NestedKey>(encoder: nestedEncoder(key: nextIndexKey()))
       )
     }
 
     internal mutating func nestedUnkeyedContainer() -> UnkeyedEncodingContainer {
-      return UnkeyedContainer(encoder: nestedEncoder(key: nextKey()))
+      return UnkeyedContainer(encoder: nestedEncoder(key: nextIndexKey()))
     }
 
     internal mutating func superEncoder() -> Encoder {
-      return nestedEncoder(key: nextKey())
+      return nestedEncoder(key: nextIndexKey())
     }
   }
 }

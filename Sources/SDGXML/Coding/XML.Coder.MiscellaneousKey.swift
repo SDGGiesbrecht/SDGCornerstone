@@ -12,6 +12,8 @@
  See http://www.apache.org/licenses/LICENSE-2.0 for licence information.
  */
 
+import SDGText
+
 extension XML.Coder {
 
   internal struct MiscellaneousKey: CodingKey {
@@ -31,6 +33,14 @@ extension XML.Coder {
     internal init(_ index: Int) {
       self.intValue = index
       self.stringValue = String(index.inDigits())
+    }
+
+    internal init<T>(defaultFor value: T) {
+      if let specified = (value as? CustomXMLRepresentable)?.defaultElementName {
+        self.init(String(specified))
+      } else {
+        self.init(String(StrictString("\(arbitraryDescriptionOf: T.self)")))
+      }
     }
 
     // MARK: - Coding Key
