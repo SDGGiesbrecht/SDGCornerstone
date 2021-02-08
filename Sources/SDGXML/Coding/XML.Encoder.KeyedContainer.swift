@@ -104,8 +104,14 @@ extension XML.Encoder {
     }
 
     internal mutating func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
-      try pack(value) { xml, encode in
-        try encoder.createNewElement(key: key, encode)
+      if let attribute = value as? XMLAttributeProtocol {
+        encoder.currentElement.attributes[StrictString(key.stringValue)] = StrictString(
+          attribute.description
+        )
+      } else {
+        try pack(value) { xml, encode in
+          try encoder.createNewElement(key: key, encode)
+        }
       }
     }
 

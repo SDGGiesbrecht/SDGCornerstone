@@ -20,6 +20,7 @@ import SDGCornerstoneLocalizations
 import XCTest
 
 import SDGTesting
+import SDGCollectionsTestUtilities
 import SDGPersistenceTestUtilities
 import SDGLocalizationTestUtilities
 import SDGXCTestUtilities
@@ -44,8 +45,38 @@ class APITests: TestCase {
     super.tearDown()
   }
 
+  func testCustomXMLRepresentable() throws {
+    struct Custom: Codable, CustomXMLRepresentable {}
+    _ = try XML.Encoder().encode(Custom())
+  }
+
   func testXML() {
     _ = XML.unsanitize(name: "%")
+  }
+
+  func testXMLAttribute() throws {
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      struct XMLAttributeDemonstration: Codable, Equatable {
+        init() {
+          child = 1
+          attribute = 2
+        }
+        var child: Int
+        @XML.Attribute var attribute: Int
+      }
+      testCodableConformance(of: XMLAttributeDemonstration(), uniqueTestName: "Structure")
+
+      try SDGXMLTests.testXML(
+        of: XMLAttributeDemonstration(),
+        specification: "With Attribute",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
+    XCTAssertNil(XML.Attribute<Int>("Not an Int.")?.wrappedValue)
+    _ = XML.Attribute(wrappedValue: "string").wrappedInstance
+    testHashableConformance(
+      differingInstances: (XML.Attribute(wrappedValue: "A"), XML.Attribute(wrappedValue: "B"))
+    )
   }
 
   func testXMLAttributeValue() {
@@ -627,9 +658,9 @@ class APITests: TestCase {
     #endif
   }
 
-  func testXMLDecoderTypeMismatch() throws {
+  func testXMLDecoderKeyNotFoundAttribute() throws {
     struct Nested: Decodable {
-      var property: Int
+      @XML.Attribute var property: String
     }
     struct Placeholder: Decodable {
       var nested: Nested
@@ -641,13 +672,87 @@ class APITests: TestCase {
           XCTAssertThrowsError(
             try XML.Decoder().decode(
               Placeholder.self,
-              from: "<placeholder><nested><property>A</property></nested></placeholder>"
+              from: "<placeholder><nested></nested></placeholder>"
+            )
+          ) { error in
+            if let decoding = error as? DecodingError,
+              case .keyNotFound(let key, let context) = decoding
+            {
+              XCTAssertEqual(key.stringValue, "property")
+              // JSONEncoder’s comparable error does not include the key itself in the context.
+              XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested"])
+              caughtError = context.debugDescription
+            } else {
+              XCTFail("Wrong kind of error: \(error)")
+            }
+          }
+          return caughtError
+        },
+        specification: "Missing Key (Attribute)",
+        overwriteSpecificationInsteadOfFailing: false
+      )
+    #endif
+  }
+
+  func testXMLDecoderTypeMismatch() throws {
+    #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
+      struct Nested: Decodable {
+        var property: Int
+      }
+      struct Placeholder: Decodable {
+        var nested: Nested
+      }
+      #if !PLATFORM_LACKS_FOUNDATION_XML
+        try testErrorDecsription(
+          triggerError: { () -> String in
+            var caughtError: String = ""
+            XCTAssertThrowsError(
+              try XML.Decoder().decode(
+                Placeholder.self,
+                from: "<placeholder><nested><property>A</property></nested></placeholder>"
+              )
+            ) { error in
+              if let decoding = error as? DecodingError,
+                case .typeMismatch(let type, let context) = decoding
+              {
+                XCTAssert(type == Int.self, "Wrong type: \(type)")
+                // JSONEncoder’s comparable error does include the key in the context.
+                XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
+                caughtError = context.debugDescription
+              } else {
+                XCTFail("Wrong kind of error: \(error)")
+              }
+            }
+            return caughtError
+          },
+          specification: "Type Mismatch",
+          overwriteSpecificationInsteadOfFailing: false
+        )
+      #endif
+    #endif
+  }
+
+  func testXMLDecoderTypeMismatchAttribute() throws {
+    struct Nested: Decodable {
+      @XML.Attribute var property: Int
+    }
+    struct Placeholder: Decodable {
+      var nested: Nested
+    }
+    #if !PLATFORM_LACKS_FOUNDATION_XML
+      try testErrorDecsription(
+        triggerError: { () -> String in
+          var caughtError: String = ""
+          XCTAssertThrowsError(
+            try XML.Decoder().decode(
+              Placeholder.self,
+              from: "<placeholder><nested property=\u{22}A\u{22}></nested></placeholder>"
             )
           ) { error in
             if let decoding = error as? DecodingError,
               case .typeMismatch(let type, let context) = decoding
             {
-              XCTAssert(type == Int.self, "Wrong type: \(type)")
+              XCTAssert(type == XML.Attribute<Int>.self, "Wrong type: \(type)")
               // JSONEncoder’s comparable error does include the key in the context.
               XCTAssertEqual(context.codingPath.map({ $0.stringValue }), ["nested", "property"])
               caughtError = context.debugDescription
@@ -657,7 +762,7 @@ class APITests: TestCase {
           }
           return caughtError
         },
-        specification: "Type Mismatch",
+        specification: "Type Mismatch (Attribute)",
         overwriteSpecificationInsteadOfFailing: false
       )
     #endif

@@ -1,6 +1,7 @@
+<?xml version="1.1" encoding="UTF-8"?>
 <UnkeyedSubclass>
- <_31>C</_31>
- <_32>D</_32>
+ <String>C</String>
+ <String>D</String>
  <_33>
   <a>A</a>
   <b>B</b>

@@ -252,6 +252,14 @@ extension SDGCornerstoneDocumentationExampleTests.StrictInterpolationExampleTest
   ]
 }
 
+extension SDGCornerstoneDocumentationExampleTests.XMLExampleTests {
+  static let windowsTests: [XCTestCaseEntry] = [
+    testCase([
+      ("testXMLEncoding", testXMLEncoding)
+    ])
+  ]
+}
+
 extension SDGExternalProcessTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
@@ -493,7 +501,9 @@ extension SDGVersioningTests.RegressionTests {
 extension SDGXMLTests.APITests {
   static let windowsTests: [XCTestCaseEntry] = [
     testCase([
+      ("testCustomXMLRepresentable", testCustomXMLRepresentable),
       ("testXML", testXML),
+      ("testXMLAttribute", testXMLAttribute),
       ("testXMLAttributeValue", testXMLAttributeValue),
       ("testXMLCharacterData", testXMLCharacterData),
       ("testXMLCoderArray", testXMLCoderArray),
@@ -513,7 +523,9 @@ extension SDGXMLTests.APITests {
       ("testXMLContent", testXMLContent),
       ("testXMLDecoderContainer", testXMLDecoderContainer),
       ("testXMLDecoderKeyNotFound", testXMLDecoderKeyNotFound),
+      ("testXMLDecoderKeyNotFoundAttribute", testXMLDecoderKeyNotFoundAttribute),
       ("testXMLDecoderTypeMismatch", testXMLDecoderTypeMismatch),
+      ("testXMLDecoderTypeMismatchAttribute", testXMLDecoderTypeMismatchAttribute),
       ("testXMLDecoderTypeMismatchCompletixy", testXMLDecoderTypeMismatchCompletixy),
       ("testXMLDecoderTypeMismatchKeyless", testXMLDecoderTypeMismatchKeyless),
       ("testXMLDecoderTypeMismatchSingleValue", testXMLDecoderTypeMismatchSingleValue),
@@ -553,6 +565,7 @@ tests += SDGCornerstoneDocumentationExampleTests.FunctionAnalysisExampleTests.wi
 tests += SDGCornerstoneDocumentationExampleTests.MiscellaneousExampleTests.windowsTests
 tests += SDGCornerstoneDocumentationExampleTests.ReadMeExampleTests.windowsTests
 tests += SDGCornerstoneDocumentationExampleTests.StrictInterpolationExampleTests.windowsTests
+tests += SDGCornerstoneDocumentationExampleTests.XMLExampleTests.windowsTests
 tests += SDGExternalProcessTests.APITests.windowsTests
 tests += SDGExternalProcessTests.RegressionTests.windowsTests
 tests += SDGGeometryTests.APITests.windowsTests

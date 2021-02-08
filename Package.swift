@@ -755,6 +755,7 @@ let package = Package(
         "SDGText",
         "SDGLocalization",
         "SDGCornerstoneLocalizations",
+        "SDGCollectionsTestUtilities",
         "SDGPersistenceTestUtilities",
         "SDGLocalizationTestUtilities",
       ]
@@ -774,6 +775,7 @@ let package = Package(
         "SDGConcurrency",
         "SDGPrecisionMathematics",
         "SDGExternalProcess",
+        "SDGXML",
         "SDGPersistenceTestUtilities",
         "SDGXCTestUtilities",
       ]
