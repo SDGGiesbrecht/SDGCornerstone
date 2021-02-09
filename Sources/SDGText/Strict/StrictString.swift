@@ -73,7 +73,7 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   ///
   /// Change this property to modify the collation order of `StrictString` instances. It corresponds to the `<` operator.
   ///
-  /// The default order is merely the fastest—simply to delegating the order to the `String` type and its `<` function. This is sufficient for many programming internals, but is unsatisfactory for sorted lists displayed to users.
+  /// The default order is merely the fastest—lexicographically by Unicode scalar. This is sufficient for many programming internals, but is unsatisfactory for sorted lists displayed to users.
   ///
   /// A unified international order intended for displayed human text is provided in `SDGCollation`. To use it globally, set this property to `{ CollationOrder.root.stringsAreOrderedAscending($0, $1) }`.
   ///
@@ -83,8 +83,12 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
   ///     - precedingValue: The preceding string.
   /// 	- followingValue: The following string.
   public static var sortAlgorithm:
-    (_ precedingValue: StrictString, _ followingValue: StrictString) -> Bool = {
-      return $0.string < $1.string
+    (
+      _ precedingValue: StrictString,
+      _ followingValue: StrictString
+    ) -> Bool = { preceding, following in
+      // String’s < would use NFC, which is counterintuitive.
+      return preceding.scalars.lexicographicallyPrecedes(following.scalars)
     }
 
   // MARK: - Initialization
@@ -204,9 +208,10 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
 
   // MARK: - Comparable
 
-  @inlinable public static func < (precedingValue: StrictString, followingValue: StrictString)
-    -> Bool
-  {
+  @inlinable public static func < (
+    precedingValue: StrictString,
+    followingValue: StrictString
+  ) -> Bool {
     return StrictString.sortAlgorithm(precedingValue, followingValue)
   }
 
@@ -218,9 +223,10 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
 
   // MARK: - Equatable
 
-  @inlinable public static func == (precedingValue: StrictString, followingValue: StrictString)
-    -> Bool
-  {
+  @inlinable public static func == (
+    precedingValue: StrictString,
+    followingValue: StrictString
+  ) -> Bool {
     return precedingValue.string.scalars.elementsEqual(followingValue.string.scalars)
   }
 
