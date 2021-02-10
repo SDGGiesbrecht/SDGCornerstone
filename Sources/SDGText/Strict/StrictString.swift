@@ -88,6 +88,8 @@ public struct StrictString: Addable, BidirectionalCollection, Collection, Compar
       _ followingValue: StrictString
     ) -> Bool = { preceding, following in
       // String’s < would use NFC, which is counterintuitive.
+      #warning("Debugging!")
+      print("Algorithm.")
       return preceding.scalars.lexicographicallyPrecedes(following.scalars)
     }
 
