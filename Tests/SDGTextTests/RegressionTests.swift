@@ -105,6 +105,7 @@ class RegressionTests: TestCase {
   func testStrictStringFastSort() {
     // Untracked.
 
+    XCTAssertEqual(StrictString("é").count, 2)
     XCTAssert(StrictString("é") < "f")
   }
 }
