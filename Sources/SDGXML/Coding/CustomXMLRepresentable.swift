@@ -22,6 +22,14 @@ public protocol CustomXMLRepresentable {
   /// The property is ignored when the type is not the top‐level value.
   var dtd: XML.DTD? { get }
 
+  /// An name to be used when the encoding the type in situations where the element name is not already dictated by an encoding key.
+  ///
+  /// This property takes effect when the type is encoded...
+  ///
+  /// - as a root element, or
+  /// - in an unkeyed container.
+  ///
+  /// This property is ignored when the type is encoded under a particular coding key.
   var defaultElementName: StrictString? { get }
 }
 
