@@ -477,6 +477,7 @@ extension SDGTextTests.RegressionTests {
         "testSemanticMarkupToAttributedStringPreservesFont",
         testSemanticMarkupToAttributedStringPreservesFont
       ),
+      ("testStrictStringFastSort", testStrictStringFastSort),
     ])
   ]
 }
