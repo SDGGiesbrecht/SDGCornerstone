@@ -74,6 +74,10 @@ public enum XML {
     return StrictString(percentEncoded)
   }
 
+  /// Undoes the satinization performed by `sanitize(name:)` to retrieve the original string.
+  ///
+  /// - Parameters:
+  ///   - name: The sanitized name.
   public static func unsanitize(name: StrictString) -> StrictString {
     var percentEncoded = String(name)
     percentEncoded.scalars.replaceMatches(for: "_".scalars, with: "%".scalars)

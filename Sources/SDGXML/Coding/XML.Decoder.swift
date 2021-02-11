@@ -33,6 +33,7 @@ extension XML {
 
     // MARK: - Properties
 
+    /// User information.
     public var userInformation: [CodingUserInfoKey: Any]
 
     #if !PLATFORM_LACKS_FOUNDATION_XML
