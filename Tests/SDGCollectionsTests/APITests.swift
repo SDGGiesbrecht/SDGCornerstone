@@ -200,6 +200,15 @@ class APITests: TestCase {
     _ = mapping.wrappedInstance
   }
 
+  func testClosedRange() {
+    let range = 1...10
+    XCTAssertEqual(range.map({ Double($0) }), 1...10)
+    XCTAssertEqual(range.map({ Double($0) as Double? }), 1...10)
+
+    let closure: (Int) -> Double? = { −Double($0) }
+    XCTAssertNil(range.map(closure))
+  }
+
   func testCollection() {
     #if !os(Windows)  // #workaround(Swift 5.3.2, Segmentation fault.)
       forAllLegacyModes {

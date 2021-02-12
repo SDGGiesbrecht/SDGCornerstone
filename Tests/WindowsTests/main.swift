@@ -127,6 +127,7 @@ extension SDGCollectionsTests.APITests {
       ("testArray", testArray),
       ("testBidirectionalCollection", testBidirectionalCollection),
       ("testBijectiveMapping", testBijectiveMapping),
+      ("testClosedRange", testClosedRange),
       ("testCollection", testCollection),
       ("testCollectionDifference", testCollectionDifference),
       ("testCollectionDifferenceChange", testCollectionDifferenceChange),
