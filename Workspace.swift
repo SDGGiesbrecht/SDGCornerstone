@@ -43,6 +43,10 @@ configuration.documentation.api.ignoredDependencies = [
   "Dispatch",
   "Foundation",
   "XCTest",
+
+  // swift‐numerics
+  "_NumericsShims",
+  "RealModule",
 ]
 
 // #workaround(workspace version 0.36.1, False positives.)

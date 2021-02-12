@@ -15,9 +15,6 @@
 import SDGCollections
 import SDGText
 
-#if !PLATFORM_LACKS_FOUNDATION_XML
-  extension XML.Element: Decodable {}
-#endif
 extension XML {
 
   /// An XML element.
@@ -111,16 +108,6 @@ extension XML {
       return String(source())
     }
 
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      // MARK: - Decodable
-
-      public init(from decoder: Swift.Decoder) throws {
-        try self.init(from: decoder, via: StrictString.self) { string in
-          return try XML.Element(source: string)
-        }
-      }
-    #endif
-
     // MARK: - Encodable
 
     public func encode(to encoder: Swift.Encoder) throws {
@@ -128,3 +115,16 @@ extension XML {
     }
   }
 }
+
+#if !PLATFORM_LACKS_FOUNDATION_XML
+  extension XML.Element: Decodable {
+
+    // MARK: - Decodable
+
+    public init(from decoder: Swift.Decoder) throws {
+      try self.init(from: decoder, via: StrictString.self) { string in
+        return try XML.Element(source: string)
+      }
+    }
+  }
+#endif

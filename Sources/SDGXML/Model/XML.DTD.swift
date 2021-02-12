@@ -27,6 +27,9 @@ extension XML {
     // MARK: - Source
 
     /// The source of the DTD.
+    ///
+    /// - Parameters:
+    ///   - element: The name of the root element.
     public func source(element: StrictString) -> StrictString {
       switch self {
       case .system(let identifier):

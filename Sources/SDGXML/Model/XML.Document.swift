@@ -17,9 +17,6 @@ import Foundation
 import SDGText
 import SDGPersistence
 
-#if !PLATFORM_LACKS_FOUNDATION_XML
-  extension XML.Document: Decodable, FileConvertible {}
-#endif
 extension XML {
 
   /// An XML document.
@@ -75,33 +72,34 @@ extension XML {
       return String(source())
     }
 
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      // MARK: - Decodable
-
-      public init(from decoder: Swift.Decoder) throws {
-        try self.init(from: decoder, via: StrictString.self) { string in
-          return try XML.Document(source: string)
-        }
-      }
-    #endif
-
     // MARK: - Encodable
 
     public func encode(to encoder: Swift.Encoder) throws {
       try encode(to: encoder, via: source())
     }
+  }
+}
+
+#if !PLATFORM_LACKS_FOUNDATION_XML
+  extension XML.Document: Decodable, FileConvertible {
+
+    // MARK: - Decodable
+
+    public init(from decoder: Swift.Decoder) throws {
+      try self.init(from: decoder, via: StrictString.self) { string in
+        return try XML.Document(source: string)
+      }
+    }
 
     // MARK: - FileConvertible
 
-    #if !PLATFORM_LACKS_FOUNDATION_XML
-      public init(file: Data, origin: URL?) throws {
-        let source = try StrictString(file: file, origin: origin)
-        try self.init(source: source)
-      }
-    #endif
+    public init(file: Data, origin: URL?) throws {
+      let source = try StrictString(file: file, origin: origin)
+      try self.init(source: source)
+    }
 
     public var file: Data {
       return source().file
     }
   }
-}
+#endif

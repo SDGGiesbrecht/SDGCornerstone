@@ -120,6 +120,7 @@ extension XML {
 
     // MARK: - Properties
 
+    /// User information.
     public var userInformation: [CodingUserInfoKey: Any]
 
     // MARK: - Encoding
