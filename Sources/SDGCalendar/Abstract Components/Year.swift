@@ -24,10 +24,21 @@ public protocol Year: TextualPlaygroundDisplay {
   /// Returns the year in English digits.
   func inEnglishDigits() -> StrictString
 
-  func _inDeutschenZiffern() -> StrictString
-  func _enChiffresFrançais() -> StrictString
-  func _σεΕλληνικάΨηφία() -> StrictString
-  func _בעברית־בספרות() -> StrictString
+  // @localization(🇩🇪DE) @notLocalized(🇨🇦EN)
+  /// Gibt das Jahr in Deutschen Ziffern zurück.
+  func inDeutschenZiffern() -> StrictString
+
+  // @localization(🇫🇷FR) @notLocalized(🇨🇦EN)
+  /// Renvoie l’an en chiffres français.
+  func enChiffresFrançais() -> StrictString
+
+  // @localization(🇬🇷ΕΛ) @notLocalized(🇨🇦EN)
+  /// Επιστρέφει το έτος σε ελληνικά ψηφία.
+  func σεΕλληνικάΨηφία() -> StrictString
+
+  // @localization(🇮🇱עב) @notLocalized(🇨🇦EN)
+  /// משיבה את השנה בעברית בספרות.
+  func בעברית־בספרות() -> StrictString
 }
 
 extension Year {
@@ -41,13 +52,13 @@ extension Year {
         case .englishUnitedKingdom, .englishUnitedStates, .englishCanada:
           return self.inEnglishDigits()
         case .deutschDeutschland:
-          return self._inDeutschenZiffern()
+          return self.inDeutschenZiffern()
         case .françaisFrance:
-          return self._enChiffresFrançais()
+          return self.enChiffresFrançais()
         case .ελληνικάΕλλάδα:
-          return self._σεΕλληνικάΨηφία()
+          return self.σεΕλληνικάΨηφία()
         case .עברית־ישראל:
-          return self._בעברית־בספרות()
+          return self.בעברית־בספרות()
         }
       }).resolved()
     )

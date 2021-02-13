@@ -152,7 +152,7 @@ class InternalTests: TestCase {
       for number in 1...2 {
         for genre in [.masculin, .féminin] as [GenreGrammatical] {
           for nombre in [.singular, .plural] as [GrammaticalNumber] {
-            print(number._ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
+            print(number.ordinalFrançaisAbrégé(genre: genre, nombre: nombre).html(), to: &list)
           }
         }
       }
@@ -164,9 +164,9 @@ class InternalTests: TestCase {
       var numerals = ""
       for number in [1000, 1111, 2222, 3333, 4444, 5555, 6666, 7777, 8888, 9999, 10_000] {
         print(number.inDigits(), to: &numerals)
-        print(number._σεΕλληνικούςΑριθμούς(), to: &numerals)
-        print(number._σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false), to: &numerals)
-        print(number._בספרות־עבריות(), to: &numerals)
+        print(number.σεΕλληνικούςΑριθμούς(), to: &numerals)
+        print(number.σεΕλληνικούςΑριθμούς(μικράΓράμματα: true, κεραία: false), to: &numerals)
+        print(number.בספרות־עבריות(), to: &numerals)
         print(number.ספרות־עבריות(גרשיים: false), to: &numerals)
         print("", to: &numerals)
       }

@@ -180,7 +180,7 @@ public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarC
     }
   }
 
-  public func _aufDeutsch() -> StrictString {
+  public func aufDeutsch() -> StrictString {
     switch self {
     case .january:
       return "Januar"
@@ -209,7 +209,7 @@ public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarC
     }
   }
 
-  public func _enFrançais(_ majuscules: Casing) -> StrictString {
+  public func enFrançais(_ majuscules: Casing) -> StrictString {
     switch self {
     case .january:
       return majuscules.apply(to: "janvier")
@@ -238,7 +238,7 @@ public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarC
     }
   }
 
-  public func _σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
+  public func σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
     func απλό(όνομα: StrictString) -> StrictString {
       switch πτώση {
       case .ονομαστική:
@@ -288,7 +288,7 @@ public enum GregorianMonth: Int, CalendarComponent, ConsistentlyOrderedCalendarC
     }
   }
 
-  public func _בעברית() -> StrictString {
+  public func בעברית() -> StrictString {
     switch self {
     case .january:
       return "ינואר"

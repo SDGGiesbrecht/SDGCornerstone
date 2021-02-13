@@ -57,7 +57,7 @@ class InternalTests: TestCase {
     var list = ""
     for month in GregorianMonth.january...GregorianMonth.december {
       for πτώση in [.ονομαστική, .αιτιατική, .γενική, .κλητική] as [ΓραμματικήΠτώση] {
-        print(month._σεΕλληνικά(πτώση), to: &list)
+        print(month.σεΕλληνικά(πτώση), to: &list)
       }
     }
     compare(

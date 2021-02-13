@@ -250,19 +250,19 @@ public struct GregorianYear: CalendarComponent, CodableViaRawRepresentableCalend
     return inDigits(bcAbbreviation: "BC")
   }
 
-  public func _inDeutschenZiffern() -> StrictString {
+  public func inDeutschenZiffern() -> StrictString {
     return inDigits(bcAbbreviation: "v. Chr.")
   }
 
-  public func _enChiffresFrançais() -> StrictString {
+  public func enChiffresFrançais() -> StrictString {
     return inDigits(bcAbbreviation: "av. J.‐C.")
   }
 
-  public func _σεΕλληνικάΨηφία() -> StrictString {
+  public func σεΕλληνικάΨηφία() -> StrictString {
     return inDigits(bcAbbreviation: "π.Χ.")
   }
 
-  public func _בעברית־בספרות() -> StrictString {
+  public func בעברית־בספרות() -> StrictString {
     return inDigits(bcAbbreviation: "לפנה״ס")
   }
 }

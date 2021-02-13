@@ -511,7 +511,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     }
   }
 
-  public func _aufDeutsch() -> StrictString {
+  public func aufDeutsch() -> StrictString {
     switch self {
     case .tishrei:
       return "Tischri"
@@ -544,7 +544,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     }
   }
 
-  public func _enFrançais(_ majuscules: Casing) -> StrictString {
+  public func enFrançais(_ majuscules: Casing) -> StrictString {
     switch self {
     case .tishrei:
       return majuscules.apply(to: "tichri")
@@ -577,7 +577,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     }
   }
 
-  public func _σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
+  public func σεΕλληνικά(_ πτώση: ΓραμματικήΠτώση) -> StrictString {
     switch self {
     case .tishrei:
       return "Τισρί"
@@ -590,11 +590,11 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     case .shevat:
       return "Σεβάτ"
     case .adarI:
-      return "Αδάρ " + 1._σεΕλληνικούςΑριθμούς()
+      return "Αδάρ " + 1.σεΕλληνικούςΑριθμούς()
     case .adar:
       return "Αδάρ"
     case .adarII:
-      return "Αδάρ " + 2._σεΕλληνικούςΑριθμούς()
+      return "Αδάρ " + 2.σεΕλληνικούςΑριθμούς()
     case .nisan:
       return "Νισάν"
     case .iyar:
@@ -610,7 +610,7 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     }
   }
 
-  public func _בעברית() -> StrictString {
+  public func בעברית() -> StrictString {
     switch self {
     case .tishrei:
       return "תשרי"
@@ -623,11 +623,11 @@ public enum HebrewMonth: Int, EnumerationCalendarComponent, Month {
     case .shevat:
       return "שבט"
     case .adarI:
-      return "אדר " + 1._בספרות־עבריות()
+      return "אדר " + 1.בספרות־עבריות()
     case .adar:
       return "אדר"
     case .adarII:
-      return "אדר " + 2._בספרות־עבריות()
+      return "אדר " + 2.בספרות־עבריות()
     case .nisan:
       return "ניסן"
     case .iyar:
