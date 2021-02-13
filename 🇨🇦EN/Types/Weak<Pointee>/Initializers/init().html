@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+
+<!--
+
+ -->
+
+<html dir="ltr" lang="en-CA">
+ <head>
+  <meta charset="utf&#x002D;8">
+  <title>init()</title>
+  <link rel="stylesheet" href="../../../../CSS/Root.css">
+  <link rel="stylesheet" href="../../../../CSS/Swift.css">
+  <link rel="stylesheet" href="../../../../CSS/Site.css">
+  <script src="../../../../JavaScript/Site.js"></script>
+ </head>
+ <body>
+  <header class="navigation‐bar">
+   <nav class="navigation‐bar">
+    <div class="navigation‐path" dir="ltr">
+
+<a href="../../../../🇨🇦EN/SDGCornerstone.html">SDGCornerstone</a>
+<a href="../../../../🇨🇦EN/Types/Weak%3cPointee%3e.html">Weak&#x003C;Pointee&#x003E;</a>
+<span>init()</span>
+
+    </div>
+    <div>
+     <span class="swift blockquote"><span class="punctuation">.</span><span class="external identifier">package</span><span class="punctuation">(</span><span class="external identifier">url</span><span class="punctuation">:</span> <span class="string"><span class="punctuation">"</span><a href="https://github.com/SDGGiesbrecht/SDGCornerstone"><span class="text">https://github.com/SDGGiesbrecht/SDGCornerstone</span></a><span class="punctuation">"</span></span><span class="punctuation">,</span> <span class="external identifier">from</span><span class="punctuation">:</span> <span class="string"><span class="punctuation">"</span><span class="text">6.2.0</span><span class="punctuation">"</span></span><span class="punctuation">)</span></span>
+    </div>
+   </nav>
+  </header>
+  <div class="content‐container">
+   <header class="index">
+    <nav class="index">
+
+<div id="Package‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Package</a>
+<a href="../../../../🇨🇦EN/SDGCornerstone.html">
+SDGCornerstone
+</a>
+</div>
+<div>
+<a class="heading" href="../../../../🇨🇦EN/Importing.html">Importing</a>
+</div>
+<div id="library‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Library Products</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGBinaryData.html">
+SDGBinaryData
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGCalendar.html">
+SDGCalendar
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGCollation.html">
+SDGCollation
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGCollections.html">
+SDGCollections
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGCollectionsTestUtilities.html">
+SDGCollectionsTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGConcurrency.html">
+SDGConcurrency
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGControlFlow.html">
+SDGControlFlow
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGExternalProcess.html">
+SDGExternalProcess
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGGeometry.html">
+SDGGeometry
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGGeometryTestUtilities.html">
+SDGGeometryTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGLocalization.html">
+SDGLocalization
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGLocalizationTestUtilities.html">
+SDGLocalizationTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGLogic.html">
+SDGLogic
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGLogicTestUtilities.html">
+SDGLogicTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGMathematics.html">
+SDGMathematics
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGMathematicsTestUtilities.html">
+SDGMathematicsTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGPersistence.html">
+SDGPersistence
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGPersistenceTestUtilities.html">
+SDGPersistenceTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGPrecisionMathematics.html">
+SDGPrecisionMathematics
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGRandomization.html">
+SDGRandomization
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGRandomizationTestUtilities.html">
+SDGRandomizationTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGTesting.html">
+SDGTesting
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGText.html">
+SDGText
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGVersioning.html">
+SDGVersioning
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGXCTestUtilities.html">
+SDGXCTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Libraries/SDGXML.html">
+SDGXML
+</a>
+</div>
+<div id="target‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Modules</a>
+<a href="../../../../🇨🇦EN/Modules/SDGBinaryData.html">
+SDGBinaryData
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGCalendar.html">
+SDGCalendar
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGCollation.html">
+SDGCollation
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGCollections.html">
+SDGCollections
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGCollectionsTestUtilities.html">
+SDGCollectionsTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGConcurrency.html">
+SDGConcurrency
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGControlFlow.html">
+SDGControlFlow
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGExternalProcess.html">
+SDGExternalProcess
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGGeometry.html">
+SDGGeometry
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGGeometryTestUtilities.html">
+SDGGeometryTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGLocalization.html">
+SDGLocalization
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGLocalizationTestUtilities.html">
+SDGLocalizationTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGLogic.html">
+SDGLogic
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGLogicTestUtilities.html">
+SDGLogicTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGMathematics.html">
+SDGMathematics
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGMathematicsTestUtilities.html">
+SDGMathematicsTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGPersistence.html">
+SDGPersistence
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGPersistenceTestUtilities.html">
+SDGPersistenceTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGPrecisionMathematics.html">
+SDGPrecisionMathematics
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGRandomization.html">
+SDGRandomization
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGRandomizationTestUtilities.html">
+SDGRandomizationTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGTesting.html">
+SDGTesting
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGText.html">
+SDGText
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGVersioning.html">
+SDGVersioning
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGXCTestUtilities.html">
+SDGXCTestUtilities
+</a>
+<a href="../../../../🇨🇦EN/Modules/SDGXML.html">
+SDGXML
+</a>
+</div>
+<div id="struct‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Types</a>
+<a href="../../../../🇨🇦EN/Types/AbsoluteComplement%3cBase%3e.html">
+AbsoluteComplement&#x003C;Base&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/AlternativePatterns%3cFirst,%20Second%3e.html">
+AlternativePatterns&#x003C;First, Second&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Angle%3cScalar%3e.html">
+Angle&#x003C;Scalar&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/AnyDescribableDate.html">
+AnyDescribableDate
+</a>
+<a href="../../../../🇨🇦EN/Types/AnyLocalization.html">
+AnyLocalization
+</a>
+<a href="../../../../🇨🇦EN/Types/AnyPattern%3cElement%3e.html">
+AnyPattern&#x003C;Element&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/BijectiveMapping%3cX,%20Y%3e.html">
+BijectiveMapping&#x003C;X, Y&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/BinaryView%3cUIntValue%3e.html">
+BinaryView&#x003C;UIntValue&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/BézierPath.html">
+BézierPath
+</a>
+<a href="../../../../🇨🇦EN/Types/CalendarDate.html">
+CalendarDate
+</a>
+<a href="../../../../🇨🇦EN/Types/CalendarInterval%3cScalar%3e.html">
+CalendarInterval&#x003C;Scalar&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Casing.html">
+Casing
+</a>
+<a href="../../../../🇨🇦EN/Types/CollationIndex.html">
+CollationIndex
+</a>
+<a href="../../../../🇨🇦EN/Types/CollationOrder.html">
+CollationOrder
+</a>
+<a href="../../../../🇨🇦EN/Types/CollationTailoringAnchor.html">
+CollationTailoringAnchor
+</a>
+<a href="../../../../🇨🇦EN/Types/CollectionDifference%3cChangeElement%3e.html">
+CollectionDifference&#x003C;ChangeElement&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/ConcatenatedPatterns%3cFirst,%20Second%3e.html">
+ConcatenatedPatterns&#x003C;First, Second&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/ConditionalPattern%3cElement%3e.html">
+ConditionalPattern&#x003C;Element&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Consumption.html">
+Consumption
+</a>
+<a href="../../../../🇨🇦EN/Types/ContextualMapping%3cInput,%20Output%3e.html">
+ContextualMapping&#x003C;Input, Output&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/CyclicalNumberGenerator.html">
+CyclicalNumberGenerator
+</a>
+<a href="../../../../🇨🇦EN/Types/DataStream.html">
+DataStream
+</a>
+<a href="../../../../🇨🇦EN/Types/EnglishCasing.html">
+EnglishCasing
+</a>
+<a href="../../../../🇨🇦EN/Types/ExtendedGraphemeCluster.html">
+ExtendedGraphemeCluster
+</a>
+<a href="../../../../🇨🇦EN/Types/ExternalProcess.html">
+ExternalProcess
+</a>
+<a href="../../../../🇨🇦EN/Types/FillDirection.html">
+FillDirection
+</a>
+<a href="../../../../🇨🇦EN/Types/FloatMax.html">
+FloatMax
+</a>
+<a href="../../../../🇨🇦EN/Types/Font.html">
+Font
+</a>
+<a href="../../../../🇨🇦EN/Types/GrammaticalGender.html">
+GrammaticalGender
+</a>
+<a href="../../../../🇨🇦EN/Types/GrammaticalNumber.html">
+GrammaticalNumber
+</a>
+<a href="../../../../🇨🇦EN/Types/GregorianDay.html">
+GregorianDay
+</a>
+<a href="../../../../🇨🇦EN/Types/GregorianHour.html">
+GregorianHour
+</a>
+<a href="../../../../🇨🇦EN/Types/GregorianMinute.html">
+GregorianMinute
+</a>
+<a href="../../../../🇨🇦EN/Types/GregorianMonth.html">
+GregorianMonth
+</a>
+<a href="../../../../🇨🇦EN/Types/GregorianSecond.html">
+GregorianSecond
+</a>
+<a href="../../../../🇨🇦EN/Types/GregorianWeekday.html">
+GregorianWeekday
+</a>
+<a href="../../../../🇨🇦EN/Types/GregorianYear.html">
+GregorianYear
+</a>
+<a href="../../../../🇨🇦EN/Types/HebrewDay.html">
+HebrewDay
+</a>
+<a href="../../../../🇨🇦EN/Types/HebrewHour.html">
+HebrewHour
+</a>
+<a href="../../../../🇨🇦EN/Types/HebrewMonth.html">
+HebrewMonth
+</a>
+<a href="../../../../🇨🇦EN/Types/HebrewMonthAndYear.html">
+HebrewMonthAndYear
+</a>
+<a href="../../../../🇨🇦EN/Types/HebrewPart.html">
+HebrewPart
+</a>
+<a href="../../../../🇨🇦EN/Types/HebrewWeekday.html">
+HebrewWeekday
+</a>
+<a href="../../../../🇨🇦EN/Types/HebrewYear.html">
+HebrewYear
+</a>
+<a href="../../../../🇨🇦EN/Types/IntMax.html">
+IntMax
+</a>
+<a href="../../../../🇨🇦EN/Types/Integer.html">
+Integer
+</a>
+<a href="../../../../🇨🇦EN/Types/IntensionalSet%3cMember%3e.html">
+IntensionalSet&#x003C;Member&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Intersection%3cBase1,%20Base2%3e.html">
+Intersection&#x003C;Base1, Base2&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/LexicographicalComparison%3cC%3e.html">
+LexicographicalComparison&#x003C;C&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Line%3cBase%3e.html">
+Line&#x003C;Base&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/LineView%3cBase%3e.html">
+LineView&#x003C;Base&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/LineViewIndex.html">
+LineViewIndex
+</a>
+<a href="../../../../🇨🇦EN/Types/LocalizationData.html">
+LocalizationData
+</a>
+<a href="../../../../🇨🇦EN/Types/LocalizationSetting.html">
+LocalizationSetting
+</a>
+<a href="../../../../🇨🇦EN/Types/NaryAlternativePatterns%3cComponentPattern%3e.html">
+NaryAlternativePatterns&#x003C;ComponentPattern&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/NaryConcatenatedPatterns%3cComponentPattern%3e.html">
+NaryConcatenatedPatterns&#x003C;ComponentPattern&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/NegatedPattern%3cBase%3e.html">
+NegatedPattern&#x003C;Base&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/NestingLevel%3cSearched%3e.html">
+NestingLevel&#x003C;Searched&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/NewlinePattern.html">
+NewlinePattern
+</a>
+<a href="../../../../🇨🇦EN/Types/NilLiteral.html">
+NilLiteral
+</a>
+<a href="../../../../🇨🇦EN/Types/OrderedSet%3cElement%3e.html">
+OrderedSet&#x003C;Element&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/PatternMatch%3cSearched%3e.html">
+PatternMatch&#x003C;Searched&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Preference.html">
+Preference
+</a>
+<a href="../../../../🇨🇦EN/Types/PreferenceSet.html">
+PreferenceSet
+</a>
+<a href="../../../../🇨🇦EN/Types/PseudorandomNumberGenerator.html">
+PseudorandomNumberGenerator
+</a>
+<a href="../../../../🇨🇦EN/Types/RationalNumber.html">
+RationalNumber
+</a>
+<a href="../../../../🇨🇦EN/Types/RepetitionPattern%3cBase%3e.html">
+RepetitionPattern&#x003C;Base&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/SemanticMarkup.html">
+SemanticMarkup
+</a>
+<a href="../../../../🇨🇦EN/Types/Shared%3cValue%3e.html">
+Shared&#x003C;Value&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/SharedProperty%3cValue%3e.html">
+SharedProperty&#x003C;Value&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Shell.html">
+Shell
+</a>
+<a href="../../../../🇨🇦EN/Types/StateData.html">
+StateData
+</a>
+<a href="../../../../🇨🇦EN/Types/StrictString.html">
+StrictString
+</a>
+<a href="../../../../🇨🇦EN/Types/TestCase.html">
+TestCase
+</a>
+<a href="../../../../🇨🇦EN/Types/TextConvertibleNumberParseError.html">
+TextConvertibleNumberParseError
+</a>
+<a href="../../../../🇨🇦EN/Types/TextDirection.html">
+TextDirection
+</a>
+<a href="../../../../🇨🇦EN/Types/Tuple2%3cA,%20B%3e.html">
+Tuple2&#x003C;A, B&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Tuple3%3cA,%20B,%20C%3e.html">
+Tuple3&#x003C;A, B, C&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Tuple4%3cA,%20B,%20C,%20D%3e.html">
+Tuple4&#x003C;A, B, C, D&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Tuple5%3cA,%20B,%20C,%20D,%20E%3e.html">
+Tuple5&#x003C;A, B, C, D, E&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Tuple6%3cA,%20B,%20C,%20D,%20E,%20F%3e.html">
+Tuple6&#x003C;A, B, C, D, E, F&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/TwoDimensionalPoint%3cCoordinate%3e.html">
+TwoDimensionalPoint&#x003C;Coordinate&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/TwoDimensionalVector%3cScalar%3e.html">
+TwoDimensionalVector&#x003C;Scalar&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/UIntMax.html">
+UIntMax
+</a>
+<a href="../../../../🇨🇦EN/Types/Union%3cBase1,%20Base2%3e.html">
+Union&#x003C;Base1, Base2&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/UserFacing%3cElement,%20Localization%3e.html">
+UserFacing&#x003C;Element, Localization&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/UserFacingDynamic%3cElement,%20Localization,%20Arguments%3e.html">
+UserFacingDynamic&#x003C;Element, Localization, Arguments&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/Version.html">
+Version
+</a>
+<a href="../../../../🇨🇦EN/Types/Weak%3cPointee%3e.html">
+Weak&#x003C;Pointee&#x003E;
+</a>
+<a href="../../../../🇨🇦EN/Types/WholeNumber.html">
+WholeNumber
+</a>
+<a href="../../../../🇨🇦EN/Types/XML.html">
+XML
+</a>
+</div>
+<div id="extension‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Extensions</a>
+<a href="../../../../🇨🇦EN/Extensions/Angle.html">
+Angle
+</a>
+<a href="../../../../🇨🇦EN/Extensions/AnyBidirectionalCollection.html">
+AnyBidirectionalCollection
+</a>
+<a href="../../../../🇨🇦EN/Extensions/AnyCollection.html">
+AnyCollection
+</a>
+<a href="../../../../🇨🇦EN/Extensions/AnyRandomAccessCollection.html">
+AnyRandomAccessCollection
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Array.html">
+Array
+</a>
+<a href="../../../../🇨🇦EN/Extensions/ArraySlice.html">
+ArraySlice
+</a>
+<a href="../../../../🇨🇦EN/Extensions/BidirectionalCollection.html">
+BidirectionalCollection
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Bool.html">
+Bool
+</a>
+<a href="../../../../🇨🇦EN/Extensions/CGFloat.html">
+CGFloat
+</a>
+<a href="../../../../🇨🇦EN/Extensions/CGPoint.html">
+CGPoint
+</a>
+<a href="../../../../🇨🇦EN/Extensions/CGVector.html">
+CGVector
+</a>
+<a href="../../../../🇨🇦EN/Extensions/CharacterSet.html">
+CharacterSet
+</a>
+<a href="../../../../🇨🇦EN/Extensions/ClosedRange.html">
+ClosedRange
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Collection.html">
+Collection
+</a>
+<a href="../../../../🇨🇦EN/Extensions/CollectionDifference.html">
+CollectionDifference
+</a>
+<a href="../../../../🇨🇦EN/Extensions/CollectionDifference.Change.html">
+CollectionDifference.Change
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Comparable.html">
+Comparable
+</a>
+<a href="../../../../🇨🇦EN/Extensions/ContiguousArray.html">
+ContiguousArray
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Data.html">
+Data
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Date.html">
+Date
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Decodable.html">
+Decodable
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Dictionary.html">
+Dictionary
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Double.html">
+Double
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Encodable.html">
+Encodable
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Equatable.html">
+Equatable
+</a>
+<a href="../../../../🇨🇦EN/Extensions/FileManager.html">
+FileManager
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Float.html">
+Float
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Float16.html">
+Float16
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Float80.html">
+Float80
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Int.html">
+Int
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Int16.html">
+Int16
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Int32.html">
+Int32
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Int64.html">
+Int64
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Int8.html">
+Int8
+</a>
+<a href="../../../../🇨🇦EN/Extensions/NSFont.html">
+NSFont
+</a>
+<a href="../../../../🇨🇦EN/Extensions/OrderedSet.html">
+OrderedSet
+</a>
+<a href="../../../../🇨🇦EN/Extensions/ProcessInfo.html">
+ProcessInfo
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Range.html">
+Range
+</a>
+<a href="../../../../🇨🇦EN/Extensions/RangeExpression.html">
+RangeExpression
+</a>
+<a href="../../../../🇨🇦EN/Extensions/RangeReplaceableCollection.html">
+RangeReplaceableCollection
+</a>
+<a href="../../../../🇨🇦EN/Extensions/ReversedCollection.html">
+ReversedCollection
+</a>
+<a href="../../../../🇨🇦EN/Extensions/RunLoop.html">
+RunLoop
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Sequence.html">
+Sequence
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Set.html">
+Set
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Shared.html">
+Shared
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Slice.html">
+Slice
+</a>
+<a href="../../../../🇨🇦EN/Extensions/String.html">
+String
+</a>
+<a href="../../../../🇨🇦EN/Extensions/String.Index.html">
+String.Index
+</a>
+<a href="../../../../🇨🇦EN/Extensions/String.UTF16View.html">
+String.UTF16View
+</a>
+<a href="../../../../🇨🇦EN/Extensions/String.UTF8View.html">
+String.UTF8View
+</a>
+<a href="../../../../🇨🇦EN/Extensions/String.UnicodeScalarView.html">
+String.UnicodeScalarView
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Substring.html">
+Substring
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Substring.UTF16View.html">
+Substring.UTF16View
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Substring.UTF8View.html">
+Substring.UTF8View
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Substring.UnicodeScalarView.html">
+Substring.UnicodeScalarView
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Swift.CollectionDifference.html">
+Swift.CollectionDifference
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Swift.CollectionDifference.Change.html">
+Swift.CollectionDifference.Change
+</a>
+<a href="../../../../🇨🇦EN/Extensions/SwiftUI.Font.html">
+SwiftUI.Font
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Tuple2.html">
+Tuple2
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Tuple3.html">
+Tuple3
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Tuple4.html">
+Tuple4
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Tuple5.html">
+Tuple5
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Tuple6.html">
+Tuple6
+</a>
+<a href="../../../../🇨🇦EN/Extensions/TwoDimensionalVector.html">
+TwoDimensionalVector
+</a>
+<a href="../../../../🇨🇦EN/Extensions/UIFont.html">
+UIFont
+</a>
+<a href="../../../../🇨🇦EN/Extensions/UInt.html">
+UInt
+</a>
+<a href="../../../../🇨🇦EN/Extensions/UInt16.html">
+UInt16
+</a>
+<a href="../../../../🇨🇦EN/Extensions/UInt32.html">
+UInt32
+</a>
+<a href="../../../../🇨🇦EN/Extensions/UInt64.html">
+UInt64
+</a>
+<a href="../../../../🇨🇦EN/Extensions/UInt8.html">
+UInt8
+</a>
+<a href="../../../../🇨🇦EN/Extensions/URL.html">
+URL
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Unicode.html">
+Unicode
+</a>
+<a href="../../../../🇨🇦EN/Extensions/Unicode.Scalar.html">
+Unicode.Scalar
+</a>
+<a href="../../../../🇨🇦EN/Extensions/XML.Attribute.html">
+XML.Attribute
+</a>
+</div>
+<div id="protocol‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Protocols</a>
+<a href="../../../../🇨🇦EN/Protocols/Addable.html">
+Addable
+</a>
+<a href="../../../../🇨🇦EN/Protocols/ArrayFamily.html">
+ArrayFamily
+</a>
+<a href="../../../../🇨🇦EN/Protocols/BitField.html">
+BitField
+</a>
+<a href="../../../../🇨🇦EN/Protocols/CalendarComponent.html">
+CalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/CardinalCalendarComponent.html">
+CardinalCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/CodableViaEnumeration.html">
+CodableViaEnumeration
+</a>
+<a href="../../../../🇨🇦EN/Protocols/CodableViaLosslessStringConvertible.html">
+CodableViaLosslessStringConvertible
+</a>
+<a href="../../../../🇨🇦EN/Protocols/CodableViaMeasurement.html">
+CodableViaMeasurement
+</a>
+<a href="../../../../🇨🇦EN/Protocols/CodableViaRawRepresentableCalendarComponent.html">
+CodableViaRawRepresentableCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/CodableViaTextConvertibleNumber.html">
+CodableViaTextConvertibleNumber
+</a>
+<a href="../../../../🇨🇦EN/Protocols/ComparableSet.html">
+ComparableSet
+</a>
+<a href="../../../../🇨🇦EN/Protocols/ConsistentDurationCalendarComponent.html">
+ConsistentDurationCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/ConsistentlyOrderedCalendarComponent.html">
+ConsistentlyOrderedCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/CustomXMLRepresentable.html">
+CustomXMLRepresentable
+</a>
+<a href="../../../../🇨🇦EN/Protocols/DateDefinition.html">
+DateDefinition
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Day.html">
+Day
+</a>
+<a href="../../../../🇨🇦EN/Protocols/DefaultAssignmentPropertyWrapper.html">
+DefaultAssignmentPropertyWrapper
+</a>
+<a href="../../../../🇨🇦EN/Protocols/DescribableDate.html">
+DescribableDate
+</a>
+<a href="../../../../🇨🇦EN/Protocols/EnumerationCalendarComponent.html">
+EnumerationCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/ExtendedGraphemeClusterView.html">
+ExtendedGraphemeClusterView
+</a>
+<a href="../../../../🇨🇦EN/Protocols/FileConvertible.html">
+FileConvertible
+</a>
+<a href="../../../../🇨🇦EN/Protocols/FiniteSet.html">
+FiniteSet
+</a>
+<a href="../../../../🇨🇦EN/Protocols/FixedScaleOneDimensionalPoint.html">
+FixedScaleOneDimensionalPoint
+</a>
+<a href="../../../../🇨🇦EN/Protocols/FloatFamily.html">
+FloatFamily
+</a>
+<a href="../../../../🇨🇦EN/Protocols/GenericAdditiveArithmetic.html">
+GenericAdditiveArithmetic
+</a>
+<a href="../../../../🇨🇦EN/Protocols/ICalendarComponent.html">
+ICalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/ISOCalendarComponent.html">
+ISOCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/InputLocalization.html">
+InputLocalization
+</a>
+<a href="../../../../🇨🇦EN/Protocols/IntFamily.html">
+IntFamily
+</a>
+<a href="../../../../🇨🇦EN/Protocols/IntXFamily.html">
+IntXFamily
+</a>
+<a href="../../../../🇨🇦EN/Protocols/IntegerProtocol.html">
+IntegerProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/IntegralArithmetic.html">
+IntegralArithmetic
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Localization.html">
+Localization
+</a>
+<a href="../../../../🇨🇦EN/Protocols/MarkupPlaygroundDisplay.html">
+MarkupPlaygroundDisplay
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Measurement.html">
+Measurement
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Month.html">
+Month
+</a>
+<a href="../../../../🇨🇦EN/Protocols/MutableSet.html">
+MutableSet
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Negatable.html">
+Negatable
+</a>
+<a href="../../../../🇨🇦EN/Protocols/NumericAdditiveArithmetic.html">
+NumericAdditiveArithmetic
+</a>
+<a href="../../../../🇨🇦EN/Protocols/NumericCalendarComponent.html">
+NumericCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/OneDimensionalPoint.html">
+OneDimensionalPoint
+</a>
+<a href="../../../../🇨🇦EN/Protocols/OneDimensionalVector.html">
+OneDimensionalVector
+</a>
+<a href="../../../../🇨🇦EN/Protocols/OrderedEnumeration.html">
+OrderedEnumeration
+</a>
+<a href="../../../../🇨🇦EN/Protocols/OrdinalCalendarComponent.html">
+OrdinalCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Pattern.html">
+Pattern
+</a>
+<a href="../../../../🇨🇦EN/Protocols/PointProtocol.html">
+PointProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/PresentableError.html">
+PresentableError
+</a>
+<a href="../../../../🇨🇦EN/Protocols/ProjectingPropertyWrapper.html">
+ProjectingPropertyWrapper
+</a>
+<a href="../../../../🇨🇦EN/Protocols/PropertyWrapper.html">
+PropertyWrapper
+</a>
+<a href="../../../../🇨🇦EN/Protocols/RangeFamily.html">
+RangeFamily
+</a>
+<a href="../../../../🇨🇦EN/Protocols/RationalArithmetic.html">
+RationalArithmetic
+</a>
+<a href="../../../../🇨🇦EN/Protocols/RationalNumberProtocol.html">
+RationalNumberProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/RationalVector.html">
+RationalVector
+</a>
+<a href="../../../../🇨🇦EN/Protocols/RawRepresentableCalendarComponent.html">
+RawRepresentableCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/RealArithmetic.html">
+RealArithmetic
+</a>
+<a href="../../../../🇨🇦EN/Protocols/RealNumberProtocol.html">
+RealNumberProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/SearchableBidirectionalCollection.html">
+SearchableBidirectionalCollection
+</a>
+<a href="../../../../🇨🇦EN/Protocols/SearchableCollection.html">
+SearchableCollection
+</a>
+<a href="../../../../🇨🇦EN/Protocols/SetDefinition.html">
+SetDefinition
+</a>
+<a href="../../../../🇨🇦EN/Protocols/SetInRepresentableUniverse.html">
+SetInRepresentableUniverse
+</a>
+<a href="../../../../🇨🇦EN/Protocols/SharedValueObserver.html">
+SharedValueObserver
+</a>
+<a href="../../../../🇨🇦EN/Protocols/SmallestCalendarComponent.html">
+SmallestCalendarComponent
+</a>
+<a href="../../../../🇨🇦EN/Protocols/StrictStringInterpolationProtocol.html">
+StrictStringInterpolationProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/StringFamily.html">
+StringFamily
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Subtractable.html">
+Subtractable
+</a>
+<a href="../../../../🇨🇦EN/Protocols/TextConvertibleNumber.html">
+TextConvertibleNumber
+</a>
+<a href="../../../../🇨🇦EN/Protocols/TextualPlaygroundDisplay.html">
+TextualPlaygroundDisplay
+</a>
+<a href="../../../../🇨🇦EN/Protocols/TransparentWrapper.html">
+TransparentWrapper
+</a>
+<a href="../../../../🇨🇦EN/Protocols/TwoDimensionalPointProtocol.html">
+TwoDimensionalPointProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/TwoDimensionalVectorProtocol.html">
+TwoDimensionalVectorProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/UIntFamily.html">
+UIntFamily
+</a>
+<a href="../../../../🇨🇦EN/Protocols/UnicodeScalarView.html">
+UnicodeScalarView
+</a>
+<a href="../../../../🇨🇦EN/Protocols/VectorProtocol.html">
+VectorProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Weekday.html">
+Weekday
+</a>
+<a href="../../../../🇨🇦EN/Protocols/WholeArithmetic.html">
+WholeArithmetic
+</a>
+<a href="../../../../🇨🇦EN/Protocols/WholeNumberProtocol.html">
+WholeNumberProtocol
+</a>
+<a href="../../../../🇨🇦EN/Protocols/Year.html">
+Year
+</a>
+</div>
+<div id="func‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Functions</a>
+<a href="../../../../🇨🇦EN/Functions/%3c%3c%3c%3c%3c%3c→(_:_:).html">
+&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;→(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/%3c%3c%3c%3c%3c→(_:_:).html">
+&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;→(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/%3c%3c%3c%3c→(_:_:).html">
+&#x003C;&#x003C;&#x003C;&#x003C;→(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/%3c%3c%3c→(_:_:).html">
+&#x003C;&#x003C;&#x003C;→(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/%3c%3c→(_:_:).html">
+&#x003C;&#x003C;→(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/%3c→(_:_:).html">
+&#x003C;→(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/=→(_:_:).html">
+=→(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/arccos(_:).html">
+arccos(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/arccot(_:).html">
+arccot(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/arccsc(_:).html">
+arccsc(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/arcsec(_:).html">
+arcsec(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/arcsin(_:).html">
+arcsin(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/arctan(_:).html">
+arctan(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/assert(_:_:file:line:).html">
+assert(_:_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/assertionFailure(_:file:line:).html">
+assertionFailure(_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/cached(in:_:).html">
+cached(in:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/compare(_:_:by:).html">
+compare(_:_:by:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/compare(_:_:by:_:).html">
+compare(_:_:by:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/compare(_:_:by:_:_:).html">
+compare(_:_:by:_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/compare(_:_:by:_:_:_:).html">
+compare(_:_:by:_:_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/compare(_:against:overwriteSpecificationInsteadOfFailing:file:line:).html">
+compare(_:against:overwriteSpecificationInsteadOfFailing:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/cos(_:).html">
+cos(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/cot(_:).html">
+cot(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/csc(_:).html">
+csc(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/e().html">
+e()
+</a>
+<a href="../../../../🇨🇦EN/Functions/fail(_:file:line:).html">
+fail(_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/fatalError(_:file:line:).html">
+fatalError(_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/findLocalMaximum(near:within:inFunction:).html">
+findLocalMaximum(near:within:inFunction:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/findLocalMinimum(near:within:inFunction:).html">
+findLocalMinimum(near:within:inFunction:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/gcd(_:_:).html">
+gcd(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/lcm(_:_:).html">
+lcm(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/limit(_:to:file:line:test:).html">
+limit(_:to:file:line:test:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/ln(_:).html">
+ln(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/log(_:).html">
+log(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/log(toBase:of:).html">
+log(toBase:of:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/nonmutatingVariant(of:on:).html">
+nonmutatingVariant(of:on:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/nonmutatingVariant(of:on:with:).html">
+nonmutatingVariant(of:on:with:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/nonmutatingVariant(of:on:with:).html">
+nonmutatingVariant(of:on:with:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/nonmutatingVariant(of:on:with:).html">
+nonmutatingVariant(of:on:with:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/notImplementedYet(function:file:line:).html">
+notImplementedYet(function:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/notImplementedYetAndCannotReturn(function:file:line:).html">
+notImplementedYetAndCannotReturn(function:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/precondition(_:_:file:line:).html">
+precondition(_:_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/preconditionFailure(_:file:line:).html">
+preconditionFailure(_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/primitiveMethod(_:file:line:).html">
+primitiveMethod(_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/purgingAutoreleased(from:).html">
+purgingAutoreleased(from:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/sec(_:).html">
+sec(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/setTestSpecificationDirectory(to:).html">
+setTestSpecificationDirectory(to:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/sin(_:).html">
+sin(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/tan(_:).html">
+tan(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(_:_:file:line:).html">
+test(_:_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(assignmentOperator:with:_:resultsIn:file:line:).html">
+test(assignmentOperator:with:_:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(assignmentOperator:with:resultsIn:file:line:).html">
+test(assignmentOperator:with:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(function:on:returns:file:line:).html">
+test(function:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(function:on:returns:file:line:).html">
+test(function:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(function:on:returns:file:line:).html">
+test(function:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(function:on:returns:file:line:).html">
+test(function:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(method:of:returns:file:line:).html">
+test(method:of:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(method:of:returns:file:line:).html">
+test(method:of:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(method:of:with:returns:file:line:).html">
+test(method:of:with:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(method:of:with:returns:file:line:).html">
+test(method:of:with:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(method:of:with:returns:file:line:).html">
+test(method:of:with:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(mutatingMethod:of:resultsIn:file:line:).html">
+test(mutatingMethod:of:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(mutatingMethod:of:resultsIn:file:line:).html">
+test(mutatingMethod:of:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(mutatingMethod:of:with:resultsIn:file:line:).html">
+test(mutatingMethod:of:with:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(mutatingMethod:of:with:resultsIn:file:line:).html">
+test(mutatingMethod:of:with:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(mutatingMethod:of:with:resultsIn:file:line:).html">
+test(mutatingMethod:of:with:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(operator:on:_:returns:file:line:).html">
+test(operator:on:_:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(operator:on:returns:file:line:).html">
+test(operator:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(operator:on:returns:file:line:).html">
+test(operator:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(postfixAssignmentOperator:with:resultsIn:file:line:).html">
+test(postfixAssignmentOperator:with:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(postfixAssignmentOperator:with:resultsIn:file:line:).html">
+test(postfixAssignmentOperator:with:resultsIn:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(postfixOperator:on:returns:file:line:).html">
+test(postfixOperator:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(prefixOperator:on:returns:file:line:).html">
+test(prefixOperator:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(prefixOperator:on:returns:file:line:).html">
+test(prefixOperator:on:returns:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(property:of:is:file:line:).html">
+test(property:of:is:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(variable:is:file:line:).html">
+test(variable:is:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/test(variable:is:file:line:).html">
+test(variable:is:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testAddableConformance(augend:addend:sum:file:line:).html">
+testAddableConformance(augend:addend:sum:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testBidirectionalCollectionConformance(of:file:line:).html">
+testBidirectionalCollectionConformance(of:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testBitFieldConformance(start:not:other:and:or:exclusiveOr:file:line:).html">
+testBitFieldConformance(start:not:other:and:or:exclusiveOr:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testCodableConformance(of:uniqueTestName:file:line:).html">
+testCodableConformance(of:uniqueTestName:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testCollectionConformance(of:file:line:).html">
+testCollectionConformance(of:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testComparableConformance(less:greater:file:line:).html">
+testComparableConformance(less:greater:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testComparableSetConformance(of:member:nonmember:superset:overlapping:disjoint:file:line:).html">
+testComparableSetConformance(of:member:nonmember:superset:overlapping:disjoint:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testCustomStringConvertibleConformance(of:localizations:uniqueTestName:overwriteSpecificationInsteadOfFailing:file:line:).html">
+testCustomStringConvertibleConformance(of:localizations:uniqueTestName:overwriteSpecificationInsteadOfFailing:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testDecoding(_:failsFor:file:line:).html">
+testDecoding(_:failsFor:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testEquatableConformance(differingInstances:file:line:).html">
+testEquatableConformance(differingInstances:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testFileConvertibleConformance(of:uniqueTestName:file:line:).html">
+testFileConvertibleConformance(of:uniqueTestName:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testFiniteSetConformance(of:member:nonmember:superset:overlapping:disjoint:file:line:).html">
+testFiniteSetConformance(of:member:nonmember:superset:overlapping:disjoint:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testFixedScaleOneDimensionalPointConformance(departure:vector:destination:file:line:).html">
+testFixedScaleOneDimensionalPointConformance(departure:vector:destination:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testGenericAdditiveArithmeticConformance(augend:addend:sum:file:line:).html">
+testGenericAdditiveArithmeticConformance(augend:addend:sum:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testHashableConformance(differingInstances:file:line:).html">
+testHashableConformance(differingInstances:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testIntegralArithmeticConformance(of:file:line:).html">
+testIntegralArithmeticConformance(of:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testMeasurementConformance(of:file:line:).html">
+testMeasurementConformance(of:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testMutableSetConformance(of:a:b:c:file:line:).html">
+testMutableSetConformance(of:a:b:c:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testNegatableConformance(minuend:subtrahend:difference:file:line:).html">
+testNegatableConformance(minuend:subtrahend:difference:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testNumericAdditiveArithmeticConformance(augend:addend:sum:includingNegatives:file:line:).html">
+testNumericAdditiveArithmeticConformance(augend:addend:sum:includingNegatives:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testOneDimensionalPointConformance(departure:vector:destination:file:line:).html">
+testOneDimensionalPointConformance(departure:vector:destination:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testPattern(_:match:file:line:).html">
+testPattern(_:match:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testPointProtocolConformance(departure:vector:destination:file:line:).html">
+testPointProtocolConformance(departure:vector:destination:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testRandomAccessCollectionConformance(of:file:line:).html">
+testRandomAccessCollectionConformance(of:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testRandomNumberGeneratorConformance(of:file:line:).html">
+testRandomNumberGeneratorConformance(of:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testRangeReplaceableCollectionConformance(of:element:file:line:).html">
+testRangeReplaceableCollectionConformance(of:element:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testRationalArithmeticConformance(of:file:line:).html">
+testRationalArithmeticConformance(of:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testRationalVectorConformance(augend:addend:sum:multiplicand:multiplier:product:file:line:).html">
+testRationalVectorConformance(augend:addend:sum:multiplicand:multiplier:product:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testRealArithmeticConformance(of:file:line:).html">
+testRealArithmeticConformance(of:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testSetDefinitionConformance(of:member:nonmember:file:line:).html">
+testSetDefinitionConformance(of:member:nonmember:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testSetInRepresentableUniverseConformance(of:a:b:c:file:line:).html">
+testSetInRepresentableUniverseConformance(of:a:b:c:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testSpecificationDirectory(_:).html">
+testSpecificationDirectory(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testSubtractableConformance(minuend:subtrahend:difference:file:line:).html">
+testSubtractableConformance(minuend:subtrahend:difference:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testTwoDimensionalPointProtocolConformance(_:file:line:).html">
+testTwoDimensionalPointProtocolConformance(_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testTwoDimensionalVectorProtocolConformance(_:file:line:).html">
+testTwoDimensionalVectorProtocolConformance(_:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testVectorProtocolConformance(augend:addend:sum:multiplicand:multiplier:product:file:line:).html">
+testVectorProtocolConformance(augend:addend:sum:multiplicand:multiplier:product:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/testWholeArithmeticConformance(of:includingNegatives:file:line:).html">
+testWholeArithmeticConformance(of:includingNegatives:file:line:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/unreachable(function:file:line:column:).html">
+unreachable(function:file:line:column:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/%7c(_:).html">
+|(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/%7c(_:).html">
+|(_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/π().html">
+π()
+</a>
+<a href="../../../../🇨🇦EN/Functions/τ().html">
+τ()
+</a>
+<a href="../../../../🇨🇦EN/Functions/←%3c(_:_:).html">
+←&#x003C;(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/←%3c%3c(_:_:).html">
+←&#x003C;&#x003C;(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/←%3c%3c%3c(_:_:).html">
+←&#x003C;&#x003C;&#x003C;(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/←%3c%3c%3c%3c(_:_:).html">
+←&#x003C;&#x003C;&#x003C;&#x003C;(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/←%3c%3c%3c%3c%3c(_:_:).html">
+←&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/←%3c%3c%3c%3c%3c%3c(_:_:).html">
+←&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/←=(_:_:).html">
+←=(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/≈(_:_:).html">
+≈(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/≠(_:_:).html">
+≠(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/≤(_:_:).html">
+≤(_:_:)
+</a>
+<a href="../../../../🇨🇦EN/Functions/≥(_:_:).html">
+≥(_:_:)
+</a>
+</div>
+<div id="var‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Global Variables</a>
+<a href="../../../../🇨🇦EN/Global%20Variables/testAssertionMethod.html">
+testAssertionMethod
+</a>
+</div>
+<div id="operator‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Operators</a>
+<a href="../../../../🇨🇦EN/Operators/%3c%3c%3c%3c%3c%3c→.html">
+&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;→
+</a>
+<a href="../../../../🇨🇦EN/Operators/%3c%3c%3c%3c%3c→.html">
+&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;→
+</a>
+<a href="../../../../🇨🇦EN/Operators/%3c%3c%3c%3c→.html">
+&#x003C;&#x003C;&#x003C;&#x003C;→
+</a>
+<a href="../../../../🇨🇦EN/Operators/%3c%3c%3c→.html">
+&#x003C;&#x003C;&#x003C;→
+</a>
+<a href="../../../../🇨🇦EN/Operators/%3c%3c→.html">
+&#x003C;&#x003C;→
+</a>
+<a href="../../../../🇨🇦EN/Operators/%3c→.html">
+&#x003C;→
+</a>
+<a href="../../../../🇨🇦EN/Operators/=→.html">
+=→
+</a>
+<a href="../../../../🇨🇦EN/Operators/%7c.html">
+|
+</a>
+<a href="../../../../🇨🇦EN/Operators/%7c.html">
+|
+</a>
+<a href="../../../../🇨🇦EN/Operators/¬.html">
+¬
+</a>
+<a href="../../../../🇨🇦EN/Operators/°.html">
+°
+</a>
+<a href="../../../../🇨🇦EN/Operators/±.html">
+±
+</a>
+<a href="../../../../🇨🇦EN/Operators/×.html">
+×
+</a>
+<a href="../../../../🇨🇦EN/Operators/×=.html">
+×=
+</a>
+<a href="../../../../🇨🇦EN/Operators/÷.html">
+÷
+</a>
+<a href="../../../../🇨🇦EN/Operators/÷=.html">
+÷=
+</a>
+<a href="../../../../🇨🇦EN/Operators/′.html">
+′
+</a>
+<a href="../../../../🇨🇦EN/Operators/′=.html">
+′=
+</a>
+<a href="../../../../🇨🇦EN/Operators/′′.html">
+′′
+</a>
+<a href="../../../../🇨🇦EN/Operators/←%3c.html">
+←&#x003C;
+</a>
+<a href="../../../../🇨🇦EN/Operators/←%3c%3c.html">
+←&#x003C;&#x003C;
+</a>
+<a href="../../../../🇨🇦EN/Operators/←%3c%3c%3c.html">
+←&#x003C;&#x003C;&#x003C;
+</a>
+<a href="../../../../🇨🇦EN/Operators/←%3c%3c%3c%3c.html">
+←&#x003C;&#x003C;&#x003C;&#x003C;
+</a>
+<a href="../../../../🇨🇦EN/Operators/←%3c%3c%3c%3c%3c.html">
+←&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;
+</a>
+<a href="../../../../🇨🇦EN/Operators/←%3c%3c%3c%3c%3c%3c.html">
+←&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;&#x003C;
+</a>
+<a href="../../../../🇨🇦EN/Operators/←=.html">
+←=
+</a>
+<a href="../../../../🇨🇦EN/Operators/↑.html">
+↑
+</a>
+<a href="../../../../🇨🇦EN/Operators/↑=.html">
+↑=
+</a>
+<a href="../../../../🇨🇦EN/Operators/∆.html">
+∆
+</a>
+<a href="../../../../🇨🇦EN/Operators/∆=.html">
+∆=
+</a>
+<a href="../../../../🇨🇦EN/Operators/∈.html">
+∈
+</a>
+<a href="../../../../🇨🇦EN/Operators/∉.html">
+∉
+</a>
+<a href="../../../../🇨🇦EN/Operators/∋.html">
+∋
+</a>
+<a href="../../../../🇨🇦EN/Operators/∌.html">
+∌
+</a>
+<a href="../../../../🇨🇦EN/Operators/∏.html">
+∏
+</a>
+<a href="../../../../🇨🇦EN/Operators/∑.html">
+∑
+</a>
+<a href="../../../../🇨🇦EN/Operators/−.html">
+−
+</a>
+<a href="../../../../🇨🇦EN/Operators/−.html">
+−
+</a>
+<a href="../../../../🇨🇦EN/Operators/−=.html">
+−=
+</a>
+<a href="../../../../🇨🇦EN/Operators/∖.html">
+∖
+</a>
+<a href="../../../../🇨🇦EN/Operators/∖=.html">
+∖=
+</a>
+<a href="../../../../🇨🇦EN/Operators/√.html">
+√
+</a>
+<a href="../../../../🇨🇦EN/Operators/√=.html">
+√=
+</a>
+<a href="../../../../🇨🇦EN/Operators/∧.html">
+∧
+</a>
+<a href="../../../../🇨🇦EN/Operators/∧=.html">
+∧=
+</a>
+<a href="../../../../🇨🇦EN/Operators/∨.html">
+∨
+</a>
+<a href="../../../../🇨🇦EN/Operators/∨=.html">
+∨=
+</a>
+<a href="../../../../🇨🇦EN/Operators/∩.html">
+∩
+</a>
+<a href="../../../../🇨🇦EN/Operators/∩=.html">
+∩=
+</a>
+<a href="../../../../🇨🇦EN/Operators/∪.html">
+∪
+</a>
+<a href="../../../../🇨🇦EN/Operators/∪=.html">
+∪=
+</a>
+<a href="../../../../🇨🇦EN/Operators/≈.html">
+≈
+</a>
+<a href="../../../../🇨🇦EN/Operators/≠.html">
+≠
+</a>
+<a href="../../../../🇨🇦EN/Operators/≤.html">
+≤
+</a>
+<a href="../../../../🇨🇦EN/Operators/≥.html">
+≥
+</a>
+<a href="../../../../🇨🇦EN/Operators/⊆.html">
+⊆
+</a>
+<a href="../../../../🇨🇦EN/Operators/⊇.html">
+⊇
+</a>
+<a href="../../../../🇨🇦EN/Operators/⊈.html">
+⊈
+</a>
+<a href="../../../../🇨🇦EN/Operators/⊉.html">
+⊉
+</a>
+<a href="../../../../🇨🇦EN/Operators/⊊.html">
+⊊
+</a>
+<a href="../../../../🇨🇦EN/Operators/⊋.html">
+⊋
+</a>
+</div>
+<div id="precedencegroup‐index">
+<a class="heading" onclick="toggleIndexSectionVisibility(this)">Precedence Groups</a>
+<a href="../../../../🇨🇦EN/Precedence%20Groups/BinarySetOperationPrecedence.html">
+BinarySetOperationPrecedence
+</a>
+<a href="../../../../🇨🇦EN/Precedence%20Groups/ExponentPrecedence.html">
+ExponentPrecedence
+</a>
+<a href="../../../../🇨🇦EN/Precedence%20Groups/TailoringRuleAnchoredToFollowing.html">
+TailoringRuleAnchoredToFollowing
+</a>
+<a href="../../../../🇨🇦EN/Precedence%20Groups/TailoringRuleAnchoredToPreceding.html">
+TailoringRuleAnchoredToPreceding
+</a>
+</div>
+<div>
+<a class="heading" href="../../../../🇨🇦EN/Related%20Projects.html">Related Projects</a>
+</div>
+<div>
+<a class="heading" href="../../../../🇨🇦EN/About.html">About</a>
+</div>
+
+    </nav>
+   </header>
+   <main>
+
+<div class="import‐header">
+<code class="swift blockquote"><span class="ImportDeclSyntax"><span class="keyword TokenSyntax importKeyword">import</span> <span class="AccessPathSyntax"><span class="AccessPathComponentSyntax"><a href="../../../../🇨🇦EN/Modules/SDGControlFlow.html"><span class="internal identifier TokenSyntax identifier">SDGControlFlow</span></a></span></span></span></code>
+<code class="swift blockquote"><span class="FunctionCallExprSyntax"><span class="MemberAccessExprSyntax"><span class="UnknownExprSyntax"></span><span class="punctuation TokenSyntax period">.</span><span class="external identifier TokenSyntax identifier">product</span></span><span class="punctuation TokenSyntax leftParen">(</span><span class="TupleExprElementListSyntax"><span class="TupleExprElementSyntax"><span class="external identifier TokenSyntax identifier">name</span><span class="punctuation TokenSyntax colon">:</span> <span class="string StringLiteralExprSyntax"><span class="string‐punctuation TokenSyntax stringQuote">"</span><span class="StringLiteralSegmentsSyntax"><span class="StringSegmentSyntax"><span class="text TokenSyntax stringSegment">SDGControlFlow</span></span></span><span class="string‐punctuation TokenSyntax stringQuote">"</span></span><span class="punctuation TokenSyntax comma">,</span> </span><span class="TupleExprElementSyntax"><span class="external identifier TokenSyntax identifier">package</span><span class="punctuation TokenSyntax colon">:</span> <span class="string StringLiteralExprSyntax"><span class="string‐punctuation TokenSyntax stringQuote">"</span><span class="StringLiteralSegmentsSyntax"><span class="StringSegmentSyntax"><span class="text TokenSyntax stringSegment">SDGCornerstone</span></span></span><span class="string‐punctuation TokenSyntax stringQuote">"</span></span></span></span><span class="punctuation TokenSyntax rightParen">)</span></span></code>
+</div>
+
+    <div class="main‐text‐column">
+     <div class="title">
+      <div class="symbol‐type">Initializer</div>
+      
+      <h1>init()</h1>
+      
+     </div>
+
+<div class="description">
+<p>Creates an empty reference.</p>
+</div>
+<section class="declaration">
+<h2>Declaration</h2>
+<code class="swift blockquote"><span class="InitializerDeclSyntax"><span class="ModifierListSyntax"></span><span class="keyword TokenSyntax initKeyword">init</span><span class="ParameterClauseSyntax"><span class="punctuation TokenSyntax leftParen">(</span><span class="FunctionParameterListSyntax"></span><span class="punctuation TokenSyntax rightParen">)</span></span></span></code>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+   </main>
+   <header class="platforms">
+<span>
+macOS
+</span>
+<span>
+Windows
+</span>
+<span>
+Web
+</span>
+<span>
+CentOS
+</span>
+<span>
+Ubuntu
+</span>
+<span>
+tvOS
+</span>
+<span>
+iOS
+</span>
+<span>
+Android
+</span>
+<span>
+Amazon Linux
+</span>
+<span>
+watchOS
+</span>
+   </header>
+  </div>
+  <footer dir="ltr">
+   <span>
+Copyright ©2017–2021 Jeremy David Giesbrecht and the SDGCornerstone project contributors. All rights reserved.
+</span>
+   <span dir="ltr" lang="en-CA">Generated with <a href="https://sdggiesbrecht.github.io/Workspace/🇨🇦EN/Workspace.html">Workspace</a>. <span lang="la-IT">Soli Deo gloria.</span></span>
+  </footer>
+  <script>contractIndex("struct‐index");</script>
+ </body>
+</html>
